@@ -258,6 +258,13 @@
         var dec = isDecisionSection(k);
         if ((which === "decision") === dec) { host.appendChild(k); moved++; }
       });
+      // BUG-03: the "Save this case?" box (#saveCasePrompt) is a SIBLING of #outputArea, so the
+      // child-move above leaves it behind in the hidden classic layer under the wizard (z 12000) —
+      // the confirm box renders but is invisible. Pull it into the Plan step so Save is reachable.
+      if (which === "plan") {
+        var scp = document.getElementById("saveCasePrompt");
+        if (scp) { host.appendChild(scp); moved++; }
+      }
       return moved > 0;
     } catch (e) { return false; }
   }
@@ -352,13 +359,17 @@
       // view (it renders below a tall system grid, so without this it looked like nothing happened).
       if (W.open) { setTimeout(function () { try { var pnl = root.querySelector(".abxw-panel"); if (pnl && pnl.scrollIntoView) pnl.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {} }, 40); }
       return; }
-    if (t.hasAttribute("data-fkey")) { var k = t.getAttribute("data-fkey"); if (W.findings[k]) delete W.findings[k]; else W.findings[k] = true; render(); return; }
-    if (t.hasAttribute("data-radio")) { W.findings[t.getAttribute("data-radio")] = t.getAttribute("data-val"); render(); return; }
+    if (t.hasAttribute("data-fkey")) { var k = t.getAttribute("data-fkey"); var kon; if (W.findings[k]) { delete W.findings[k]; kon = false; } else { W.findings[k] = true; kon = true; }
+      // BUG-01: in-place update — toggle the tapped chip + refresh dependent fragments (no .abxw-body wipe → no flicker)
+      toggleChipVisual(t, kon); syncFindingsFragments(); return; }
+    if (t.hasAttribute("data-radio")) { var rk = t.getAttribute("data-radio"); W.findings[rk] = t.getAttribute("data-val");
+      // BUG-01: in-place update — pick this option, deselect siblings, refresh dependent fragments
+      updateRadioGroup(rk); syncFindingsFragments(); return; }
     if (t.hasAttribute("data-lock")) { W.locked = t.getAttribute("data-lock"); W.step = 4; render(); return; }
     if (act === "groupnext") { openNextGroup(); return; }
     if (act === "clearall") { W.findings = {}; W.locked = null; render(); return; }
     if (act === "openref") { try { if (window.DX && DX.openRef) DX.openRef(t.getAttribute("data-ref")); } catch (x) {} return; }
-    if (act === "openreasoning") { try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (x) {} return; }  // BUG-08: Clinical Reasoning from MARINAM
+    if (act === "openreasoning") { close(); setTimeout(function () { try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (x) {} }, 60); return; }  // close the wizard first so reasoning (z-index 850) isn't hidden behind the overlay (z 12000)
   }
   function onInput(e) {
     var t = e.target;
@@ -478,6 +489,95 @@
     });
   }
 
+  // ---- in-place fragment builders + no-flicker update path (BUG-01) --------
+  // Tapping a finding chip used to call render(), which wipes .abxw-body and
+  // rebuilds the whole step (search box + system grid + panel + hints) on every
+  // tap → a full-screen "refresh" flicker. Instead we toggle the tapped control
+  // in place and refresh ONLY the fragments that depend on the selected set,
+  // mirroring the existing no-full-render pattern used by the search box and the
+  // numeric inputs. render() stays unchanged for step/mode changes.
+  function buildSelCard() {
+    var sel = selectedChips();
+    if (!sel.length) return null;
+    var sc = el("div", "abxw-selcard");
+    sc.innerHTML = '<div class="abxw-selhead"><span class="abxw-lbl">Selected findings (' + sel.length + ')</span><button class="abxw-clear" data-act="clearall">Clear all</button></div>';
+    var row = el("div", "abxw-selrow");
+    sel.forEach(function (s) { var c = el("button", "abxw-selchip", s.label + ms("close")); c.setAttribute("data-fkey", s.key); row.appendChild(c); });
+    sc.appendChild(row);
+    return sc;
+  }
+  function buildLiveHint(a) {
+    var top = a && (a.infectious[0] || a.nonInfectious[0]);
+    if (!top) return null;
+    return el("div", "abxw-livehint", ms("stacked_line_chart") + '<span>Live differential: <b>' + esc(top.name) + '</b> · ' + top.confidence + '%. Continue to review.</span>');
+  }
+  // Flip one toggle-chip's visual state (leading check/add icon + on class +
+  // aria) with no re-render. Guarded to real chips — the summary "remove"
+  // selchips (trailing "close" icon) are excluded and get rebuilt via buildSelCard.
+  function toggleChipVisual(btn, on) {
+    if (!btn || !btn.classList || !btn.classList.contains("abxw-chip")) return;
+    btn.classList.toggle("on", on);
+    var ic = btn.querySelector(".abx-ms"); if (ic) ic.textContent = on ? "check" : "add";
+    if (btn.getAttribute("role") === "checkbox") btn.setAttribute("aria-checked", on ? "true" : "false");
+  }
+  // Radio/select option chosen: mark the picked option on, its siblings off.
+  function updateRadioGroup(key) {
+    var wrap = root.querySelector(".abxw-step-body"); if (!wrap) return;
+    var chosen = W.findings[key];
+    wrap.querySelectorAll("[data-radio]").forEach(function (o) {
+      if (o.getAttribute("data-radio") !== key) return;
+      var on = o.getAttribute("data-val") === chosen;
+      o.classList.toggle("on", on);
+      var ic = o.querySelector(".abx-ms"); if (ic) ic.textContent = on ? "check" : "add";
+      o.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Update only the stepper's reachable ("off") state — no innerHTML rebuild.
+  function syncStepperReach() {
+    var mx = maxStep();
+    root.querySelectorAll(".abxw-step").forEach(function (b) {
+      var n = +b.getAttribute("data-step");
+      b.classList.toggle("off", !(n <= Math.max(W.step, mx)));
+    });
+  }
+  // Refresh every findings-view fragment that depends on the selected set,
+  // WITHOUT tearing down .abxw-body. If the step body is somehow absent, fall
+  // back to a full render rather than leaving stale UI.
+  function syncFindingsFragments() {
+    var wrap = root.querySelector(".abxw-step-body");
+    if (!wrap) { render(); return; }
+    // a stale resume offer is dismissed the moment the user edits findings
+    var rb = root.querySelector(".abxw-resume"); if (rb && !_pendingResume && rb.parentNode) rb.parentNode.removeChild(rb);
+    // selected-findings summary card (insert / replace / remove before pick title)
+    var oldSel = wrap.querySelector(".abxw-selcard");
+    var newSel = buildSelCard();
+    if (oldSel) { if (newSel) oldSel.parentNode.replaceChild(newSel, oldSel); else oldSel.parentNode.removeChild(oldSel); }
+    else if (newSel) { var pickttl = wrap.querySelector(".abxw-pickttl"); if (pickttl) pickttl.parentNode.insertBefore(newSel, pickttl); else wrap.appendChild(newSel); }
+    // system-grid "N selected" captions + active state (all boxes, so cross-group
+    // toggles from search/suggestion chips stay in sync too)
+    wrap.querySelectorAll(".abxw-sysbox").forEach(function (box) {
+      var gn = box.getAttribute("data-group"), g = groupByName(gn), c = g ? selectedCount(g) : 0;
+      var cap = box.querySelector(".abxw-syscap"); if (cap) cap.textContent = c > 0 ? c + " selected" : "Tap to open";
+      var active = W.open === gn; box.classList.toggle("active", active); box.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    // open panel header count
+    if (W.open) {
+      var g2 = groupByName(W.open), panelh = wrap.querySelector(".abxw-panel .abxw-panelh");
+      if (g2 && panelh) { var c2 = selectedCount(g2); panelh.innerHTML = ms(iconFor(g2.group)) + '<h3>' + g2.group + '</h3>' + (c2 > 0 ? '<span class="abxw-count">' + c2 + '</span>' : ""); }
+    }
+    // findings-search results on/off (only when a query is active)
+    var res = document.getElementById("abxwFindResults");
+    if (res && (W.query || "").trim().length >= 2) res.innerHTML = findResultsHTML();
+    // footer: live differential hint + suggested-next-findings (rebuild in order)
+    var oldLh = wrap.querySelector(".abxw-livehint"); if (oldLh && oldLh.parentNode) oldLh.parentNode.removeChild(oldLh);
+    var oldSug = wrap.querySelector(".abxw-suggest"); if (oldSug && oldSug.parentNode) oldSug.parentNode.removeChild(oldSug);
+    if (anyFindings()) { var a = assess(); var lh = buildLiveHint(a); if (lh) wrap.appendChild(lh); renderSuggestChips(a, wrap); }
+    // nav "next" enabled state + stepper reachability + persist (as render() does)
+    var nx = root.querySelector(".abxw-next"); if (nx) { nx.disabled = !nextAllowed(); nx.style.opacity = nextAllowed() ? "1" : ".4"; }
+    syncStepperReach();
+    if (!_pendingResume) persistW();
+  }
+
   function renderFindings() {
     var wrap = el("div", "abxw-step-body");
     var isSimple = W.mode === "simple";
@@ -502,14 +602,8 @@
     wrap.appendChild(renderFindSearch());
 
     // selected summary
-    var sel = selectedChips();
-    if (sel.length) {
-      var sc = el("div", "abxw-selcard");
-      sc.innerHTML = '<div class="abxw-selhead"><span class="abxw-lbl">Selected findings (' + sel.length + ')</span><button class="abxw-clear" data-act="clearall">Clear all</button></div>';
-      var row = el("div", "abxw-selrow");
-      sel.forEach(function (s) { var c = el("button", "abxw-selchip", s.label + ms("close")); c.setAttribute("data-fkey", s.key); row.appendChild(c); });
-      sc.appendChild(row); wrap.appendChild(sc);
-    }
+    var scEl = buildSelCard();
+    if (scEl) wrap.appendChild(scEl);
 
     // system-box grid
     wrap.appendChild(el("div", "abxw-pickttl", W.step === 1 ? "Which details do you have?" : "Which systems are involved?"));
@@ -535,8 +629,8 @@
 
     // live differential hint + suggested-next-findings
     if (anyFindings()) {
-      var a = assess(); var top = a && (a.infectious[0] || a.nonInfectious[0]);
-      if (top) wrap.appendChild(el("div", "abxw-livehint", ms("stacked_line_chart") + '<span>Live differential: <b>' + esc(top.name) + '</b> · ' + top.confidence + '%. Continue to review.</span>'));
+      var a = assess();
+      var lh = buildLiveHint(a); if (lh) wrap.appendChild(lh);
       renderSuggestChips(a, wrap);
     }
     return wrap;

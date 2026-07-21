@@ -35,6 +35,9 @@ struct RootListView: View {
             Section {
                 HomeHeader()
                     .listRowBackground(Color.clear)
+                    // Align the header's leading edge with the module rows below.
+                    .listRowInsets(EdgeInsets(top: SMDSpacing.s, leading: SMDSpacing.m,
+                                              bottom: SMDSpacing.s, trailing: SMDSpacing.m))
             }
             if let msg = features.announcement {
                 Text(msg)
@@ -57,7 +60,8 @@ struct RootListView: View {
                 .listRowBackground(SMDPalette.surface.color)
             }
         }
-        .navigationTitle("StewardMD")
+        // Empty nav title: HomeHeader is the sole wordmark (avoids the duplicate title).
+        .navigationTitle("")
         .navigationDestination(for: RootDestination.self) { dest in
             switch dest {
             case .criticalLabs: CriticalLabsView()
@@ -171,14 +175,22 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
 }
 
 private struct HomeHeader: View {
+    @EnvironmentObject private var session: WatchSessionStore
+
     var body: some View {
+        // Doctor's name on top (falls back to the app wordmark when not bridged);
+        // hospital below (row hidden when absent). Replaces the old "On call · Ward 7".
+        let name = session.session.doctorName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hospital = session.session.hospital?.trimmingCharacters(in: .whitespacesAndNewlines)
         VStack(alignment: .leading, spacing: 2) {
-            Text("StewardMD")
+            Text(name?.isEmpty == false ? name! : "StewardMD")
                 .font(.system(.headline, design: .rounded)).bold()
                 .foregroundStyle(SMDPalette.accent.color)
-            Text("On call · Ward 7")
-                .font(.caption2)
-                .foregroundStyle(SMDPalette.text2.color)
+            if let hospital, !hospital.isEmpty {
+                Text(hospital)
+                    .font(.caption2)
+                    .foregroundStyle(SMDPalette.text2.color)
+            }
         }
     }
 }

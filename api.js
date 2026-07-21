@@ -100,6 +100,11 @@
   var TIER_LABEL = { all: "", branded: "top-branded", generic: "top-generic" };
   var monoCache = {};
 
+  // Shared monochrome SVG icon accessor (window.ICONS catalog from home.js); guarded for
+  // load order with an empty-string fallback. Keeps the Drugs Database (#dbOverlay) chrome
+  // consistent with the rest of the app's icon set instead of stray emoji / ASCII glyphs.
+  function dbIco(n, c) { return (window.ICONS && ICONS.get) ? ICONS.get(n, c || "db-ico") : ""; }
+
   function ensureRoot() {
     if (root) return root;
     injectCSS();
@@ -109,13 +114,13 @@
       '<div class="db-top">' +
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
-        '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">💊 Brands</button>' +
-        '<button class="db-close" id="dbClose" aria-label="Close">✕</button>' +
+        '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
+        '<button class="db-close" id="dbClose" aria-label="Close">' + dbIco("close") + '</button>' +
       '</div>' +
       '<div class="db-body" id="dbBody"></div>' +
       '<div class="db-scrim" id="dbScrim"></div>' +
       '<aside class="db-drawer" id="dbDrawer" aria-label="Available brands">' +
-        '<div class="db-dwh"><span class="db-dwt">💊 Available brands</span><button class="db-dwx" id="dbDwx" aria-label="Close brands">✕</button></div>' +
+        '<div class="db-dwh"><span class="db-dwt">' + dbIco("pills") + ' Available brands</span><button class="db-dwx" id="dbDwx" aria-label="Close brands">' + dbIco("close") + '</button></div>' +
         '<div class="db-dwbody" id="dbDwBody"></div>' +
       '</aside>';
     document.body.appendChild(root);
@@ -150,7 +155,7 @@
     var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
     var b = root.querySelector("#dbBody");
     b.innerHTML =
-      '<input id="dbSearch" class="db-search" type="text" placeholder="🔍 Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '">' +
+      '<div class="db-searchbar">' + dbIco("search", "db-search-ic") + '<input id="dbSearch" class="db-search" type="text" placeholder="Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '"></div>' +
       '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, then open it for all brands &amp; prices.</div>' +
       '<div id="dbResults" class="db-results"></div>';
     updateCount();
@@ -171,17 +176,17 @@
   }
   function compCardHTML(x) {
     var sub = [x["class"], (x.brands != null ? x.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
-    return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">💊</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">›</span></button>';
+    return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">' + dbIco("pills") + '</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">' + dbIco("chev") + '</span></button>';
   }
   // Brand hit: brand name (carries the dose, e.g. "Pantocid 40 Tablet") on top,
   // composition + manufacturer/form/price underneath. Tapping opens its molecule.
   function brandHitHTML(bd) {
     var meta = [bd.manufacturer, bd.form, (bd.mrp != null ? inr(bd.mrp) : "")].filter(Boolean).join(" · ");
     return '<button class="db-comp db-brandhit' + (bd.discontinued ? " disc" : "") + '" data-comp="' + esc(bd.composition || "") + '">' +
-      '<span class="db-comp-ic">🔖</span><span class="db-comp-main">' +
+      '<span class="db-comp-ic">' + dbIco("pills") + '</span><span class="db-comp-main">' +
         '<span class="db-comp-name">' + esc(bd.brand) + (bd.discontinued ? ' <span class="db-disc">discontinued</span>' : '') + '</span>' +
         '<span class="db-comp-sub"><b class="db-bh-comp">' + esc(bd.composition || "—") + '</b>' + (meta ? ' · ' + esc(meta) : '') + '</span>' +
-      '</span><span class="db-chev">›</span></button>';
+      '</span><span class="db-chev">' + dbIco("chev") + '</span></button>';
   }
   function runList(q) {
     // brand-name hits + molecule/composition hits in parallel; brands shown first
@@ -192,8 +197,8 @@
       var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
       if (!brands.length && !comps.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
       var html = "";
-      if (brands.length) html += '<div class="db-sec-l">🔖 Brands matching “' + esc(q) + '”</div>' + brands.map(brandHitHTML).join("");
-      if (comps.length) html += '<div class="db-sec-l">🧪 Molecules &amp; compositions</div>' + comps.map(compCardHTML).join("");
+      if (brands.length) html += '<div class="db-sec-l">' + dbIco("pills") + ' Brands matching “' + esc(q) + '”</div>' + brands.map(brandHitHTML).join("");
+      if (comps.length) html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + comps.map(compCardHTML).join("");
       r.innerHTML = html;
       r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
     });
@@ -247,7 +252,7 @@
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =
-      '<div class="db-dwsearch"><input id="dbBrandQ" class="db-dwsearch-i" type="text" placeholder="🔍 Search brands by name…" autocomplete="off" value="' + esc(st.bq) + '"></div>' +
+      '<div class="db-dwsearch">' + dbIco("search", "db-dwsearch-ic") + '<input id="dbBrandQ" class="db-dwsearch-i" type="text" placeholder="Search brands by name…" autocomplete="off" value="' + esc(st.bq) + '"></div>' +
       '<div class="db-filters"><span class="db-filt-l">Show</span>' + tierBtn("all", "All") + tierBtn("branded", "Top branded") + tierBtn("generic", "Top generic") + '</div>' +
       '<div class="db-brands-h"><span>' + cnt + ' brands</span>' +
         '<span class="db-sorts">' + sortBtn("relevance", "Relevance") + sortBtn("price_asc", "Price: Low→High") + sortBtn("price_desc", "Price: High→Low") + '</span></div>' +
@@ -270,7 +275,7 @@
     });
     // glowing "Available brands (N)" button in the header
     var bb = root.querySelector("#dbBrandBtn");
-    if (bb) { bb.style.display = ""; bb.innerHTML = '💊 Available brands <span class="db-bb-ct">' + cnt + '</span>'; }
+    if (bb) { bb.style.display = ""; bb.innerHTML = dbIco("pills") + ' Available brands <span class="db-bb-ct">' + cnt + '</span>'; }
     if (dwOpen) openDrawer();
     loadStructured(d.composition);
     renderMore();
@@ -292,7 +297,7 @@
     var html = '<div class="db-msrc">℞ <b>' + esc(mono.source || "openFDA") + '</b><span>Verify against local guidance. Decision support only.</span></div>';
     MONO_SECS.forEach(function (s) {
       var v = mono[s[1]]; if (!v) return; var op = openKeys[s[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button>' +
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button>' +
         '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
@@ -302,7 +307,7 @@
       h.addEventListener("click", function () {
         var b = h.nextElementSibling, hidden = b.style.display === "none";
         b.style.display = hidden ? "" : "none"; h.classList.toggle("open", hidden);
-        h.querySelector(".db-msec-x").textContent = hidden ? "−" : "+";
+        // Chevron orientation is driven by the `.open` class via CSS rotation (no glyph swap).
       });
     });
   }
@@ -311,7 +316,7 @@
     if (resp.combo) {
       var html = '<div class="db-msrc">Combination product — prescribing details shown per component. Verify against local guidance.</div>';
       (resp.components || []).forEach(function (comp) {
-        html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(comp.name) + '</div>' +
+        html += '<div class="db-cmono"><div class="db-cmono-h">' + dbIco("pills") + ' ' + esc(comp.name) + '</div>' +
           (comp.monograph ? sectionsHTML(comp.monograph, { indication: 1 }) : '<div class="db-mono-none">No monograph available for this component yet.</div>') +
           '</div>';
       });
@@ -381,7 +386,7 @@
     var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
     ST_SECS.forEach(function (sec) {
       var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
   }
@@ -390,7 +395,7 @@
     if (resp.combo) {
       var html = '<div class="db-msrc">Combination product — clinical details per component. Verify locally.</div>';
       (resp.components || []).forEach(function (cp) {
-        html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(cp.name) + '</div>' +
+        html += '<div class="db-cmono"><div class="db-cmono-h">' + dbIco("pills") + ' ' + esc(cp.name) + '</div>' +
           (cp.data ? ((cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }))) : '<div class="db-mono-none">No structured record for this component yet.</div>') + '</div>';
       });
       c.innerHTML = html; wireToggles(c); return;
@@ -511,6 +516,20 @@
       ".db-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
       ".db-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 14px;font:500 14px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#1a1a1a)}",
       ".db-search:focus{outline:none;border-color:var(--teal,#0a9396)}",
+      // Shared monochrome SVG icons (BUG 6) — replace stray emoji / ASCII glyphs on #dbOverlay.
+      ".db-ico{width:16px;height:16px;flex:0 0 auto;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+      ".db-brandbtn .db-ico,.db-close .db-ico,.db-dwx .db-ico{width:17px;height:17px;vertical-align:-3px}",
+      ".db-close,.db-dwx{display:inline-flex;align-items:center;justify-content:center}",
+      ".db-dwt{display:inline-flex;align-items:center;gap:6px}",
+      ".db-searchbar{position:relative}.db-searchbar .db-search{padding-left:38px}",
+      ".db-search-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--slate-soft,#888);pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+      ".db-dwsearch{position:relative}.db-dwsearch .db-dwsearch-i{padding-left:34px}",
+      ".db-dwsearch-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--slate-soft,#888);pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+      ".db-comp-ic{color:var(--teal,#0a9396);display:inline-flex;align-items:center}.db-comp-ic .db-ico{width:19px;height:19px;vertical-align:middle}",
+      ".db-chev .db-ico{width:18px;height:18px;vertical-align:middle}",
+      ".db-sec-l .db-ico{width:13px;height:13px;vertical-align:-2px;margin-right:5px}",
+      ".db-cmono-h .db-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px;color:var(--teal,#0a9396)}",
+      ".db-msec-x .db-ico{width:15px;height:15px;vertical-align:middle;transition:transform .18s}.db-msec-h.open .db-msec-x .db-ico{transform:rotate(90deg)}",
       ".db-note{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin:8px 2px 12px;line-height:1.5}",
       ".db-empty,.db-allshown{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:18px;text-align:center}",
       ".db-comp{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer}",

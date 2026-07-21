@@ -4076,7 +4076,7 @@
   }
   function maikHeaderHTML() {
     return '<div class="maik-ai">' +
-      '<div class="maik-sec-h maik-ai-h">✨ MaiK <span class="maik-tag maik-tag-ai">Medical AI Knowledge</span></div>' +
+      '<div class="maik-sec-h maik-ai-h">✨ Ask Maik <span class="maik-tag maik-tag-ai">Medical AI Knowledge</span></div>' +
       '<div class="maik-sub">Independent clinical commentary · AI-assisted</div>';
   }
   function maikDivider() { return '<div class="maik-divider"></div>'; }
@@ -4276,7 +4276,7 @@
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
       '<div class="sl-cols">' + smdLiveCols(a) + "</div>" +
       '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
-      (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask MaiK (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
+      (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask Maik (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
       "</div>";
     bindLiveToggle(panel);
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
@@ -4624,7 +4624,7 @@
   function maikSettingsInfoHTML() {
     var kv = [["Role", "Clinician-assistive AI"], ["Primary authority", "StewardMD reasoning engine"], ["Output", "Advisory · verify independently"], ["Privacy", "Inputs not used to train models"]];
     return '<div style="margin-top:14px;padding:12px 13px;border:1px solid rgba(124,58,237,0.3);border-radius:12px;background:rgba(124,58,237,0.05)">' +
-      '<div style="font:800 13px var(--sans,system-ui);color:#7c3aed">✨ MaiK</div>' +
+      '<div style="font:800 13px var(--sans,system-ui);color:#7c3aed">✨ Ask Maik</div>' +
       '<div style="font:700 11.5px var(--sans,system-ui);color:var(--ink,#14202b);margin-top:1px">Medical AI Knowledge</div>' +
       '<div style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-bottom:8px">AI-assisted clinical commentary</div>' +
       kv.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 11.5px/1.6 var(--sans,system-ui);border-top:1px solid rgba(100,116,139,0.14);padding:3px 0"><span style="color:var(--slate-soft,#5a7184)">' + r[0] + '</span><b style="color:var(--ink,#14202b)">' + r[1] + '</b></div>'; }).join("") +
