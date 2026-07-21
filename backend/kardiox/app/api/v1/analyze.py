@@ -9,7 +9,7 @@ from __future__ import annotations
 import asyncio
 import json
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from app.api.deps import get_providers, get_r2
@@ -34,6 +34,34 @@ log = get_logger("analyze")
 
 def _json(analysis: ECGAnalysis) -> JSONResponse:
     return JSONResponse(content=analysis.model_dump(exclude_none=True), media_type=MEDIA_TYPE)
+
+
+class _MemR2:
+    """In-memory R2 shim: the image is sent directly in the request (zero storage). Lets run_pipeline
+    (which reads r2.get_image) run on the uploaded bytes unchanged."""
+    def __init__(self, data: bytes): self._d = data
+    async def get_image(self, session_id: str) -> bytes: return self._d
+    async def delete_image(self, session_id: str) -> None: return None
+
+
+@router.post("/analyze-upload", summary="Analyze an ECG image sent directly (multipart; zero storage)",
+             dependencies=[Depends(require_pipeline_auth), Depends(rate_limit)])
+async def analyze_upload(image: UploadFile = File(...), layoutHint: str | None = Form(default=None),
+                         settings: Settings = Depends(get_settings),
+                         providers: Providers = Depends(get_providers)):
+    """Direct image → analysis (no R2). The bytes live only for the duration of the request."""
+    data = await image.read()
+    from app.core.upload import validate_image_bytes
+    validate_image_bytes(data, settings)
+    bind_request(session_id="upload", mode=settings.mode)
+    audit("analyze.requested", session_id="upload", mode=settings.mode, transport="direct")
+    METRICS.inc("kardiox_analyze_total", {"mode": settings.mode})
+    if settings.mode == "mock":
+        return _json(af_sample("upload"))
+    analysis = await asyncio.wait_for(
+        run_pipeline(AnalyzeRequest(sessionId="upload"), providers, _MemR2(data)),
+        timeout=settings.request_timeout_s)
+    return _json(analysis)
 
 
 @router.post("/analyze", summary="Analyze an ECG image (by sessionId)",
