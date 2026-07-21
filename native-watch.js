@@ -476,6 +476,9 @@
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
       var cen = census(wl.length); if (cen) payload.glance = cen;
+      // W2: doctor name + hospital for the watch home header (optional; backward-compatible).
+      try { var dn = (u.displayName || "").trim(); if (dn) payload.doctorName = dn; } catch (e) {}
+      try { if (window.HOSPITAL && HOSPITAL.current) { var hc = HOSPITAL.current() || {}; if (hc.name) payload.hospital = hc.name; } } catch (e) {}
       await p.publish(payload);
       markSynced();
       return true;
