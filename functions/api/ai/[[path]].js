@@ -582,6 +582,11 @@ export async function onRequest(context) {
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
   const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
+  // Native (capacitor://) CANNOT stream — CapacitorHttp buffers SSE — so it waits for the ENTIRE
+  // answer before anything renders; a long answer there = a long blank wait. The non-stream concise
+  // answer therefore uses a TIGHTER cap so generation finishes fast. Streaming web keeps OUT_BASE (it
+  // flows, so length is ~free), and "detailed" honours the explicit depth request on either path.
+  const NONSTREAM_BASE = Math.max(256, Math.min(1100, Number(env.MAIK_NONSTREAM_OUTPUT_TOKENS) || 600));
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
@@ -608,9 +613,14 @@ export async function onRequest(context) {
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         let text;
-        try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); }
-        catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
-        await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
+        // Non-stream path (native, or a stream that failed to open): keep a concise answer SHORT and
+        // SELF-CONTAINED so the whole-answer fetch returns fast and never clips mid-sentence. "detailed"
+        // still gets the full budget (the clinician explicitly asked for depth and accepts the wait).
+        const nsCap = (body && body.depth === "detailed") ? MAX_OUT : NONSTREAM_BASE;
+        const nsSys = (body && body.depth === "detailed") ? sys : (sys + "\n\nLENGTH: be concise and COMPLETE — lead with the direct answer, then only the essential specifics (key drugs/doses/steps/differentials). Aim for ~180-250 words and finish every sentence; do not trail off mid-thought.");
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });
