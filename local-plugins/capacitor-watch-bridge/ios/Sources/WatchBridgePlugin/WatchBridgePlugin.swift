@@ -130,11 +130,15 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func publish(_ call: CAPPluginCall) {
-        // Session — encode {uid, idToken, expiresAt} exactly as StewardMDWatchCore.Session.
+        // Session — encode {uid, idToken, expiresAt, doctorName, hospital} exactly as
+        // StewardMDWatchCore.Session. doctorName/hospital are optional (only added when
+        // present) so an older web payload without them stays backward-compatible.
         var session: [String: Any] = [:]
         if let uid = call.getString("uid") { session["uid"] = uid }
         if let token = call.getString("idToken") { session["idToken"] = token }
         if let exp = call.getDouble("expiresAt") { session["expiresAt"] = exp }
+        if let name = call.getString("doctorName") { session["doctorName"] = name }
+        if let hospital = call.getString("hospital") { session["hospital"] = hospital }
 
         // JSArray elements are already JSON-compatible (String/NSNumber/NSNull/…).
         let favorites: [Any] = call.getArray("favorites") ?? []

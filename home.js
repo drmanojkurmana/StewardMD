@@ -802,6 +802,8 @@
       ".hv-ack .ack-names{display:block!important}",
       ".hv-ack .ack-role{font:700 11px var(--hfont,var(--sans))!important;text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#5a7184)!important;margin:18px 0 2px!important}",
       ".hv-ack .ack-contrib-name,.hv-ack .creator-name{display:block!important;position:relative!important;font:800 15px var(--hfont,var(--sans))!important;color:var(--hink,#14202b)!important;margin:14px 0 0!important;padding:0!important;cursor:default!important;border:none!important}",
+      "body.dark .hv-ack .ack-contrib-name,body.dark .hv-ack .creator-name{color:#E7EDF5!important}",
+      "body.dark .hv-ack .ack-role{color:var(--teal,#12a594)!important}",
       ".hv-ack .ack-tip,.hv-ack .creator-tip{display:block!important;position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;z-index:auto!important;transform:none!important;margin:6px 0 2px!important;border:1px solid var(--hbd,#dde4e8)!important;border-radius:12px!important;background:var(--hbg,#f6f8f8)!important;color:var(--hink,#14202b)!important;padding:11px 13px!important;font:500 12.5px/1.55 var(--hfont,var(--sans))!important;white-space:normal!important}",
       ".hv-ack .creator-tip{display:flex!important;flex-direction:column!important;padding:0 0 12px!important;background:var(--hpanel,#fff)!important}",
       ".hv-ack .ack-tip strong{display:block;color:var(--hp,var(--teal))!important;font-weight:800;margin-bottom:3px}",
@@ -1059,7 +1061,7 @@
         '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
         '<button class="v3-tab" data-act="cases" aria-label="Cases">' + svg("folder") + '<span>Cases</span></button>' +
         '<button class="v3-tab" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
-        '<button class="v3-tab" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
+        '<button class="v3-tab" data-act="askai" aria-label="Ask Maik">' + svg("ai") + '<span>Ask Maik</span></button>' +
         '<button class="v3-tab" data-act="more" aria-label="More">' + svg("more") + '<span>More</span></button>' +
       '</nav>';
   }
@@ -1187,7 +1189,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom">' +
         '<button class="rnav-tab active" data-act="home" aria-label="Home">' + ric("home") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK">' + ric("forum") + '<span>MaiK</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("forum") + '<span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
       '</nav>';
@@ -1418,6 +1420,22 @@
       var scrim = document.getElementById("hvScrim");
       if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
       s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet"; document.body.appendChild(s);
+      // BUG-19: drag the sheet down (from the "—" grab handle / top) to dismiss it — iOS + Android.
+      // Only engages when the content is scrolled to the top, so it never fights inner scrolling.
+      (function (sh) {
+        var sy = 0, dy = 0, drag = false;
+        sh.addEventListener("touchstart", function (e) {
+          if (sh.scrollTop > 0 || !e.touches || !e.touches.length) { drag = false; return; }
+          sy = e.touches[0].clientY; dy = 0; drag = true; sh.style.transition = "none";
+        }, { passive: true });
+        sh.addEventListener("touchmove", function (e) {
+          if (!drag || !e.touches || !e.touches.length) return;
+          dy = e.touches[0].clientY - sy;
+          sh.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
+        }, { passive: true });
+        function end() { if (!drag) return; drag = false; sh.style.transition = ""; var far = dy > 90; sh.style.transform = ""; if (far) closeSheet(); }
+        sh.addEventListener("touchend", end); sh.addEventListener("touchcancel", end);
+      })(s);
       try { injectCSS(); } catch (e) {}
     }
     return s;
@@ -1538,6 +1556,8 @@
     var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
     var dot = '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
     var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
+    // BUG-18: one details row for the account sheet (label ↔ value).
+    function acctRow(k, v) { return '<div style="display:flex;justify-content:space-between;gap:12px;padding:9px 2px;border-top:1px solid var(--hbd,#e2e8f0);font:600 13px var(--hfont,system-ui)"><span style="color:var(--hmut,#64748b)">' + k + '</span><span style="color:var(--hink,#0f172a);text-align:right;max-width:62%;overflow-wrap:anywhere">' + smdEsc(v == null || v === "" ? "—" : String(v)) + '</span></div>'; }
     if (signedIn) {
       var nm = (P && P.name) || (a && a.name) || "Signed in";
       var em = (P && P.email) || (a && a.email) || "";
@@ -1546,10 +1566,18 @@
       var pic = pc
         ? '<img class="hv-acct-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
         : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
+      var tier = (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) ? "Pro" : "Free";
+      var hosp = ""; try { if (window.HOSPITAL && HOSPITAL.current) { var hc = HOSPITAL.current() || {}; hosp = hc.name || hc.label || ""; } } catch (e) {}
       body = '<div class="hv-acct">' + pic +
         '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
         (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
         '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
+        '<div id="acctDetails" style="width:100%;margin:12px 0 2px;text-align:left">' +
+          acctRow("Account", tier) +
+          acctRow("Name", nm) +
+          (em ? acctRow("Email", em) : "") +
+          (hosp ? acctRow("Hospital", hosp) : "") +
+        '</div>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
         '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
     } else {
@@ -1574,6 +1602,34 @@
       openAccount._smdSub = true;
       window.SMD_ACCOUNT.onChange(function () { try { var sh = sheetEl(); if (sh && sh.querySelector(".hv-acct")) openAccount(); } catch (e) {} });
     }
+    // BUG-18: pull the rest of the collected profile (Reg No, City, Hospital, Phone) from Firestore
+    // and append it to the details list. Fully guarded so it can never break the account sheet.
+    if (signedIn) { try {
+      var uid = (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null;
+      var fdb = window.SMD_DB;
+      if (uid && fdb) {
+        fdb.collection("users").doc(uid).collection("profile").doc("self").get().then(function (snap) {
+          var d = (snap && snap.exists && snap.data()) || {};
+          var det = document.getElementById("acctDetails"); if (!det) return;
+          var ex = "";
+          if (d.regNo) ex += acctRow("Reg No", d.regNo);
+          if (d.city) ex += acctRow("City", d.city);
+          if (d.hospital && det.textContent.indexOf("Hospital") < 0) ex += acctRow("Hospital", d.hospital);
+          ex += acctRow("Phone", d.phone || "Not added");
+          det.insertAdjacentHTML("beforeend", ex);
+          if (!d.phone) {
+            var pbtn = document.createElement("button");
+            pbtn.textContent = "Add phone number";
+            pbtn.style.cssText = "width:100%;margin-top:8px;background:transparent;color:var(--hp,var(--teal,#12a594));border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px;font:700 13px var(--hfont,system-ui);cursor:pointer";
+            pbtn.addEventListener("click", function () {
+              var ph = window.prompt("Add your phone number"); if (ph == null) return; ph = String(ph).trim(); if (!ph) return;
+              fdb.collection("users").doc(uid).collection("profile").doc("self").set({ phone: ph }, { merge: true }).then(function () { try { openAccount(); } catch (e) {} }).catch(function () {});
+            });
+            det.appendChild(pbtn);
+          }
+        }).catch(function () {});
+      }
+    } catch (e) {} }
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
   // Wipes the user's cloud cases (Firestore users/{key}/cases), every local app key,
@@ -1728,21 +1784,21 @@
   function aboutFactsHTML() {
     return '<span class="smd-ab-badge">By the numbers</span>' +
       '<ul class="smd-facts">' +
-      '<li><span class="fn">4,804</span> searchable conditions — 140 with full diagnostic reasoning + 4,664 reference conditions, each with a page-cited reference panel and condition-specific management.</li>' +
+      '<li><span class="fn">4,804</span> searchable conditions: 140 with full diagnostic reasoning plus 4,664 reference conditions, each with a page-cited reference panel and condition-specific management.</li>' +
       '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
-      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks — RAG-ready, no AI required.</li>' +
+      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks, RAG-ready with no AI required.</li>' +
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
-      '<li><span class="fn">405</span> bedside clinical calculators — MDCalc-scale, every formula executed &amp; checked.</li>' +
+      '<li><span class="fn">405</span> bedside clinical calculators at MDCalc scale, every formula executed &amp; checked.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
-      '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
-      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
-      '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
+      '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources: ICMR AMRSN 2024 national and GIMSR hospital resistance rates.</li>' +
+      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
+      '<li><span class="fn">100%</span> offline-capable PWA that works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
-      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app — every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
-      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD — Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
+      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app. Every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
+      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD, Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
   }
   function enhanceAbout() {
     var modal = document.getElementById("aboutModal"); if (!modal) return;
@@ -2118,7 +2174,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       }).join("");
       body.innerHTML = '<div class="maik-empty">' +
         '<div class="maik-hero"><div class="maik-hero-logo"><div class="maik-hero-glow"></div><img src="' + MK_LOGO() + '" alt="MaiK"></div><div class="maik-kicker">Medical AI Knowledge</div></div>' +
-        '<div class="maik-h1">Ask MaiK anything clinical.</div>' +
+        '<div class="maik-h1">Ask Maik anything clinical.</div>' +
         '<div class="maik-sub">Grounded answers from StewardMD&rsquo;s knowledge base &mdash; with sources you can verify.</div>' +
         '<div class="maik-cards">' + cardHTML + '</div></div>';
       var cardEls = body.querySelectorAll(".maik-card");
@@ -2128,7 +2184,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       } else {
         if (cardEls[0]) cardEls[0].addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} });
         if (cardEls[1]) cardEls[1].addEventListener("click", function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} });
-        if (cardEls[2]) cardEls[2].addEventListener("click", function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else if (typeof toast === "function") toast("Open Drugs from the home screen."); });
+        if (cardEls[2]) cardEls[2].addEventListener("click", function () { close(); setTimeout(function () { try { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else if (typeof toast === "function") toast("Loading…"); } catch (e) {} }, 60); });
       }
       scroll();
     }
@@ -2529,7 +2585,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
       if (route.kind === "help") {
-        var h = bubble("ai", '<div class="maik-welcome"><b>MaiK</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
+        var h = bubble("ai", '<div class="maik-welcome"><b>Ask Maik</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
       }
       if (route.kind === "patient") {
@@ -2630,7 +2686,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   window.SMD_askMaik = function (q) { try { openAskAi(q); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: false, theme: "classic", font: "plex", headingStyle: "default" };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default" };
   var THEMES = [
     { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
     { id: "blue", name: "Clinical Blue", accent: "#1560b0", paper: "#f5f7fa" },
