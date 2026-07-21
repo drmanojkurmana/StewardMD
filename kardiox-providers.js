@@ -147,6 +147,32 @@
   function ortActive() { return !!ortAnalyzer(); }
 
   function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
+  function demoFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_demo")); } catch (e) { return false; } }
+
+  // Honest "no real engine configured" analyzer. The mock used to be a SILENT fallback that fabricated a
+  // fixed "Atrial fibrillation" on every ECG; instead, when neither the backend nor the on-device ONNX
+  // runtime is available, surface a typed error the report screen renders as "AI inference unavailable".
+  function unavailableAnalyzer() {
+    return {
+      kind: "unavailable",
+      analyze: function (image, onStage) {
+        try { if (typeof onStage === "function") onStage("upload", 100); } catch (e) {}
+        var err = new Error("Real ECG inference is not available on this build: no on-device ONNX runtime/weights are bundled and the analysis backend is unreachable. Deploy the backend (smd_kardiox_backend) or bundle the on-device runtime, or enable demo mode (smd_kardiox_demo) to preview the UI with a sample.");
+        err.code = "inference_unavailable"; err.stage = "analysis";
+        return Promise.reject(err);
+      }
+    };
+  }
+
+  // Analyzer selection for the Analyze button. DEMO flag -> deterministic mock (explicit demo ONLY).
+  // Otherwise the REAL pipeline: RemoteAnalyzer when the backend is healthy, else the on-device ONNX
+  // ensemble (ortAnalyzer) when the runtime+weights are present. If no real engine is available, the
+  // honest "unavailable" analyzer — the mock is NEVER a silent fallback (it faked a fixed AFib).
+  function chooseAnalyzer(opts) {
+    if (demoFlag()) return mockAnalyzer();
+    var real = ((opts.remote || useRemote()) && remoteAnalyzer()) || ortAnalyzer();
+    return real || unavailableAnalyzer();
+  }
   // Ping /api/kardiox/v1/health; on success flip to the remote analyzer (rebuild the active assembly).
   function checkBackend() {
     if (!backendFlag() || typeof fetch !== "function") { _backendHealthy = false; return Promise.resolve(false); }
@@ -164,8 +190,7 @@
     var cards = opts.cards || (C && C.flashcards ? C.flashcards() : []);
     var store = (typeof window !== "undefined" && window.SMD_KARDIOX_STORE && window.SMD_KARDIOX_STORE.create)
       ? window.SMD_KARDIOX_STORE.create() : mockEcgStore(opts.seedAnalyses);
-    var analyzer = (opts.remote || useRemote()) ? (remoteAnalyzer() || mockAnalyzer())
-                 : (ortAnalyzer() || mockAnalyzer());   // REAL on-device ensemble first; mock only w/o ORT runtime
+    var analyzer = chooseAnalyzer(opts);   // REAL pipeline (remote/on-device); mock ONLY in explicit demo mode
     return {
       kind: "live",
       analyzer: analyzer,

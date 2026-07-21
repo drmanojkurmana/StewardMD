@@ -55,7 +55,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-wizard.css?v=bug808">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx5">
-<link rel="stylesheet" href="/kardiox-screens.css?v=kx4">
+<link rel="stylesheet" href="/kardiox-screens.css?v=kx5">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
@@ -821,7 +821,6 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   <!-- ============ SAVE CASE PROMPT ============ -->
   <div id="saveCasePrompt">
     <div class="scp-header">
-      <span class="scp-icon">💾</span>
       <div>
         <div class="scp-title">Save this case?</div>
         <div class="scp-subtitle">Enter a name or Case ID to save · all other fields optional</div>
@@ -881,6 +880,14 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   <div class="ack-card" id="ackCard">
     <div class="ack-header-row">
       <h2 class="ack-title"><span class="num">★</span> Acknowledgements</h2>
+    </div>
+
+    <div class="ack-group">
+      <div class="ack-role">Founders</div>
+      <div class="ack-names">
+        <span class="ack-contrib-name" tabindex="0">Dr. Manoj Kumar Kurmana<span class="ack-tip"><strong>Founder</strong>. Created StewardMD and authored its clinical engine.</span></span>
+        <span class="ack-contrib-name" tabindex="0">Mr. Diwakar Kumar K<span class="ack-tip"><strong>Co-founder</strong>. Product and technology.</span></span>
+      </div>
     </div>
 
     <div class="ack-group">
@@ -1527,14 +1534,14 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- KardioX AI · ECG interpretation + learning module (additive, flag-gated smd_kardiox, DEFAULT OFF;
      enable with ?kardiox=1 or Settings). Sibling of FundX: scoped #kardioxRoot + .kx-* + SMD_KARDIOX_*
      globals + SMD_KARDIOX_PROVIDERS seam. When the flag is off, kardiox.js is a complete no-op. -->
-<script src="/kardiox-flags.js?v=kx6" defer></script>
+<script src="/kardiox-flags.js?v=kx7" defer></script>
 <script src="/kardiox-signal.js?v=kx1" defer></script>
 <script src="/kardiox-models.js?v=kx1" defer></script>
 <script src="/kardiox-content.js?v=kx4" defer></script>
 <script src="/kardiox-store.js?v=kx3" defer></script>
 <script src="/kardiox-rules.js?v=kx3" defer></script>
 <script src="/kardiox-fusion.js?v=kx1" defer></script>
-<script src="/kardiox-providers.js?v=kx7" defer></script>
+<script src="/kardiox-providers.js?v=kx8" defer></script>
 <script src="/kardiox-net.js?v=kx3" defer></script>
 <script src="/kardiox-reconstruct.js?v=kx1" defer></script>
 <script src="/kardiox-stemi.js?v=kx1" defer></script>

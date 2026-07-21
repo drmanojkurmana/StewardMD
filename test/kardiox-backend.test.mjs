@@ -19,7 +19,9 @@ load("kardiox-providers.js");
 const P = globalThis.SMD_KARDIOX_PROVIDERS;
 
 ok("flag registered", !!globalThis.SMD_KARDIOX_FLAGS.DEFS.smd_kardiox_backend);
-ok("default OFF → mock analyzer", P.current().analyzer.kind === "mock" && P.backendActive() === false);
+// No backend + no on-device ONNX runtime + no demo flag → the REAL pipeline is unavailable. The analyzer
+// must be "unavailable" (honest error), NOT a mock that fabricates a fixed AFib.
+ok("default OFF → unavailable (not mock)", P.current().analyzer.kind === "unavailable" && P.backendActive() === false);
 
 ls.smd_kardiox_backend = "1";
 fetchOk = true;
@@ -28,11 +30,16 @@ ok("flag on + health OK → remote analyzer", healthy === true && fetchCalls >= 
 
 fetchOk = false;
 const bad = await P.checkBackend();
-ok("flag on + health FAIL → mock fallback", bad === false && P.current().analyzer.kind === "mock" && P.backendActive() === false);
+ok("flag on + health FAIL → unavailable (no silent mock fallback)", bad === false && P.current().analyzer.kind === "unavailable" && P.backendActive() === false);
 
 ls.smd_kardiox_backend = "0";
 await P.checkBackend();
-ok("flag off again → mock", P.current().analyzer.kind === "mock");
+ok("flag off again → unavailable", P.current().analyzer.kind === "unavailable");
+
+// EXPLICIT demo mode → the deterministic mock analyzer (the only place it is used now).
+ls.smd_kardiox_demo = "1"; P.use(null);
+ok("demo flag → mock analyzer", P.current().analyzer.kind === "mock");
+ls.smd_kardiox_demo = "0";
 
 console.log(`\nkardiox-backend: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

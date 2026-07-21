@@ -14,7 +14,9 @@
 /* Header (per-screen; supersedes the M0 shell stub .kx-topbar - see notes) */
 #kardioxRoot .kx-land-head {
   display: flex; align-items: center; gap: 11px;
+  /* keep the "KardioX AI" title clear of the status bar / iOS Dynamic Island (needs viewport-fit=cover) */
   padding: 8px 16px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
   border-bottom: 1px solid var(--kx-hairline);
   background: var(--kx-bg);
   position: sticky; top: 0; z-index: 2;
