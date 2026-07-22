@@ -220,6 +220,8 @@
           stage("report", 100);
           var models = M(), raw = {
             id: (image && image.id) ? String(image.id) : "",
+            reportMode: "segmentation",
+            segmentation: { detected: sum.leadsDetected, total: 12, leads: sum.leads, hasRhythmStrip: sum.hasRhythmStrip },
             verdict: "On-device digitiser: " + sum.leadsDetected + "/12 leads segmented",
             severity: "info", confidence: 0, engine: "ecg-digitiser-coreml",
             measurements: { ventRateBpm: null, rhythm: "-", prMs: null, qrsMs: null, qtcMs: null, axisDeg: null },

@@ -474,7 +474,7 @@
 
 /* ===== report ===== */
 /* Screen 06 - AI Report (full dashboard) */
-#kardioxRoot .kx-rpt-head { display: flex; align-items: center; gap: 11px; padding: 10px 16px 12px; border-bottom: 1px solid var(--kx-hairline); background: var(--kx-card); }
+#kardioxRoot .kx-rpt-head { display: flex; align-items: center; gap: 11px; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 12px; border-bottom: 1px solid var(--kx-hairline); background: var(--kx-card); position: sticky; top: 0; z-index: 3; }
 #kardioxRoot .kx-rpt-back, #kardioxRoot .kx-rpt-share { width: 40px; height: 40px; flex: 0 0 auto; border: 0; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
 #kardioxRoot .kx-rpt-back { background: transparent; color: var(--kx-text); }
 #kardioxRoot .kx-rpt-share { background: var(--kx-surf-2); color: var(--kx-text-2); }
@@ -484,6 +484,22 @@
 #kardioxRoot .kx-rpt-title { font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--kx-text); }
 #kardioxRoot .kx-rpt-sub { font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); }
 #kardioxRoot .kx-rpt-body { padding: 16px; }
+
+/* ---- segmentation-validation card (on-device digitiser ran; no diagnosis) ---- */
+#kardioxRoot .kx-seg { border: 1px solid var(--kx-hairline); border-radius: 20px; background: linear-gradient(180deg, color-mix(in srgb, var(--kx-sev-stable) 12%, var(--kx-card)), var(--kx-card)); padding: 22px 20px 24px; text-align: center; animation: kxRise .4s var(--kx-ease) both; }
+#kardioxRoot .kx-seg-badge { display: inline-flex; align-items: center; gap: 6px; font: 700 11px var(--kx-sans); letter-spacing: .04em; text-transform: uppercase; color: var(--kx-sev-stable); background: color-mix(in srgb, var(--kx-sev-stable) 14%, var(--kx-card)); border: 1px solid color-mix(in srgb, var(--kx-sev-stable) 34%, transparent); padding: 5px 11px; border-radius: 999px; }
+#kardioxRoot .kx-seg-badge .material-symbols-rounded { font-size: 15px; }
+#kardioxRoot .kx-seg-count { font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -.03em; color: var(--kx-text); margin: 16px 0 4px; }
+#kardioxRoot .kx-seg-count-tot { font-size: 26px; font-weight: 700; color: var(--kx-text-2); letter-spacing: -.02em; }
+#kardioxRoot .kx-seg-cap { font-size: 13px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-seg-track { height: 6px; border-radius: 999px; background: var(--kx-surf-2); overflow: hidden; margin: 16px auto 4px; max-width: 240px; }
+#kardioxRoot .kx-seg-track-fill { height: 100%; border-radius: 999px; background: var(--kx-sev-stable); transition: width .5s var(--kx-ease); }
+#kardioxRoot .kx-seg-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-top: 18px; }
+#kardioxRoot .kx-seg-chip { display: inline-flex; align-items: center; gap: 3px; font: 600 12px var(--kx-sans); color: var(--kx-muted); background: var(--kx-surf-2); border: 1px solid var(--kx-hairline); padding: 5px 10px 5px 7px; border-radius: 999px; }
+#kardioxRoot .kx-seg-chip .material-symbols-rounded { font-size: 15px; }
+#kardioxRoot .kx-seg-chip--on { color: var(--kx-sev-stable); background: color-mix(in srgb, var(--kx-sev-stable) 13%, var(--kx-card)); border-color: color-mix(in srgb, var(--kx-sev-stable) 34%, transparent); }
+#kardioxRoot .kx-seg-note { display: flex; gap: 9px; align-items: flex-start; font-size: 13px; line-height: 1.5; color: var(--kx-text-2); background: var(--kx-surf-2); border-radius: 14px; padding: 13px 15px; margin-top: 12px; }
+#kardioxRoot .kx-seg-note .material-symbols-rounded { font-size: 18px; color: var(--kx-text-2); flex: 0 0 auto; margin-top: 1px; }
 
 #kardioxRoot .kx-rpt-empty { padding: 56px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
 #kardioxRoot .kx-rpt-empty .material-symbols-rounded { font-size: 40px; color: var(--kx-muted); }

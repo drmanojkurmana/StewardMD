@@ -544,7 +544,39 @@
       wire(host, ctx);
       return;
     }
-  
+
+    // Segmentation-validation result — the on-device digitiser RAN and found leads, but produced NO
+    // diagnosis. Render an honest technical card (which leads it read), NOT a diagnostic dashboard with
+    // zeroed measurements / a confidence bar / "Why this diagnosis?" (all of which would imply a reading).
+    if (a.reportMode === "segmentation") {
+      var seg = a.segmentation || { detected: 0, total: 12, leads: [], hasRhythmStrip: false };
+      var ORDER = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
+      var found = {}; (seg.leads || []).forEach(function (l) { found[String(l).toUpperCase()] = true; });
+      var chips = ORDER.map(function (l) {
+        var on = !!found[l.toUpperCase()];
+        return '<span class="kx-seg-chip' + (on ? " kx-seg-chip--on" : "") + '">' +
+          ic(on ? "check" : "remove") + esc(l) + '</span>';
+      }).join("");
+      var segPct = seg.total ? Math.max(0, Math.min(100, Math.round((seg.detected / seg.total) * 100))) : 0;
+      var segBody =
+        '<div class="kx-rpt-body">' +
+          '<div class="kx-seg">' +
+            '<div class="kx-seg-badge">' + ic("neurology") + 'On-device · Neural Engine</div>' +
+            '<div class="kx-seg-count kx-data">' + esc(seg.detected) + '<span class="kx-seg-count-tot">/' + esc(seg.total) + '</span></div>' +
+            '<div class="kx-seg-cap">leads read from your photo' + (seg.hasRhythmStrip ? ' &middot; rhythm strip found' : '') + '</div>' +
+            '<div class="kx-seg-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + segPct + '"><div class="kx-seg-track-fill" style="width:' + segPct + '%"></div></div>' +
+            '<div class="kx-seg-chips">' + chips + '</div>' +
+          '</div>' +
+          section("verified", "What this means") +
+          '<div class="kx-interp">' + esc(a.clinicalInterpretation) + '</div>' +
+          (a.whatToVerify ? '<div class="kx-seg-note">' + ic("info") + '<span>' + esc(a.whatToVerify) + '</span></div>' : '') +
+          '<div class="kx-disc">' + ic("info") + 'Technical check &mdash; the model ran on this device. Not a diagnosis; interval measurement and diagnosis are the next step.</div>' +
+        '</div>';
+      host.innerHTML = head + segBody;
+      wire(host, ctx);
+      return;
+    }
+
     var SEV = {
       critical: { label: "Critical", icon: "crisis_alert" },
       urgent:   { label: "Urgent",   icon: "priority_high" },

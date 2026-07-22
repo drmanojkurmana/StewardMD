@@ -11,7 +11,9 @@
   var SEVERITIES = ["critical", "urgent", "warn", "stable", "info"];
   function sev(v) { return SEVERITIES.indexOf(v) >= 0 ? v : "info"; }
   function str(v, d) { return typeof v === "string" ? v : (d || ""); }
-  function numOr(v, d) { v = +v; return isFinite(v) ? v : (d == null ? null : d); }
+  // null/undefined/"" are ABSENT, not zero — coercing them via +v would turn a missing
+  // measurement into a fabricated "0 bpm / 0 ms". Only a real finite number passes through.
+  function numOr(v, d) { if (v == null || v === "") return d == null ? null : d; v = +v; return isFinite(v) ? v : (d == null ? null : d); }
   function arr(v) { return Array.isArray(v) ? v : []; }
   function clamp01(n) { n = +n; return n < 0 ? 0 : n > 1 ? 1 : (isFinite(n) ? n : 0); }
 
@@ -49,6 +51,13 @@
       context: raw.context == null ? undefined : str(raw.context),
       verdict: str(raw.verdict),
       verdictQualifier: raw.verdictQualifier == null ? undefined : str(raw.verdictQualifier),
+      // "segmentation" = a technical on-device check (the digitiser ran + found leads) with NO diagnosis;
+      // the report screen renders it as an honest validation card, not a diagnostic dashboard.
+      reportMode: raw.reportMode === "segmentation" ? "segmentation" : "diagnosis",
+      segmentation: raw.segmentation && typeof raw.segmentation === "object" ? {
+        detected: numOr(raw.segmentation.detected, 0), total: numOr(raw.segmentation.total, 12),
+        leads: arr(raw.segmentation.leads).map(str), hasRhythmStrip: !!raw.segmentation.hasRhythmStrip
+      } : undefined,
       severity: sev(raw.severity),
       confidence: conf,
       confidenceBand: raw.confidenceBand && ["low", "medium", "high"].indexOf(raw.confidenceBand) >= 0 ? raw.confidenceBand : band(conf),
