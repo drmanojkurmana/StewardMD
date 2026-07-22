@@ -250,24 +250,68 @@
     // Photo/PDF → digitiser → per-lead traces → RECONSTRUCTION LAYER → (full coverage → the SAME
     // analyze()/ensemble path unchanged) OR (partial layout → safe low-confidence WARN, ensemble NOT
     // run on fabricated data). `digitized` = { leads:{name:{mv,fs}}, rhythmLead?, layoutHint?, calibration }.
+    // Median (baseline) of a numeric array.
+    function mvMedian(a) { if (!a || !a.length) return 0; var s = Array.prototype.slice.call(a).sort(function (x, y) { return x - y; }); var m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+    // Net QRS deflection (dominant positive + negative excursion vs baseline). A RATIO of two such nets
+    // (I vs aVF) gives axis quadrant and is GAIN-INDEPENDENT — so it survives the classical digitiser's
+    // amplitude error, unlike absolute ST millivolts.
+    function netQrs(mv) {
+      if (!mv || mv.length < 5) return null;
+      var base = mvMedian(mv), up = 0, dn = 0;
+      for (var i = 0; i < mv.length; i++) { var d = mv[i] - base; if (d > up) up = d; if (d < dn) dn = d; }
+      return up + dn;
+    }
+    // Rhythm read-out from the continuous lead-II strip (TIMING only — reliable regardless of amplitude).
+    function rhythmReadout(rp) {
+      if (rp.bpm == null) return null;
+      var bpm = rp.bpm, reg = rp.regularity, v, sev = "info", detail;
+      if (reg === "irregular") { v = "Irregular rhythm, ~" + bpm + " bpm — consider atrial fibrillation"; sev = "warn"; detail = "Irregularly irregular R-R on the lead-II rhythm strip; confirm P-wave status on the full trace."; }
+      else if (bpm < 50) { v = "Marked bradycardia, ~" + bpm + " bpm"; sev = "warn"; }
+      else if (bpm < 60) { v = "Bradycardia, ~" + bpm + " bpm"; sev = "info"; }
+      else if (bpm > 120) { v = "Tachycardia, ~" + bpm + " bpm"; sev = "warn"; }
+      else if (bpm > 100) { v = "Mild tachycardia, ~" + bpm + " bpm"; sev = "info"; }
+      else { v = "Regular rhythm, ~" + bpm + " bpm"; sev = "info"; }
+      return { verdict: v, severity: sev, detail: detail || ((reg === "regular" ? "Regular" : "Measured") + " R-R on the lead-II strip, " + bpm + " bpm."), bpm: bpm, regularity: reg };
+    }
+
     function safePartial(recon, digitized, onStage) {
-      var models = MODELS(), R = RECON();
+      var models = MODELS(), R = RECON(), SIGe = SIG();
       var rp = { bpm: null, rrMs: [], regularity: "unknown" };
       var strip = R && R.rhythmLeadSignal ? R.rhythmLeadSignal(recon) : null;
       if (strip) rp = rpeaks(strip, recon.fs);      // rate/rhythm from the continuous 10s strip only
+      var rhy = rhythmReadout(rp);
+
+      // Axis from the limb-lead cells (gain-independent). Advisory — the ONLY morphology we trust from a
+      // classical digitiser; ST-segment / QRS-width / conduction are NOT computed (amplitude + delineation
+      // are unreliable → a false STEMI is the worst failure, so those stay deferred, not guessed).
+      var dl = (digitized && digitized.leads) || {};
+      var axisDeg = null, axisCat = null;
+      var netI = dl.I && dl.I.mv ? netQrs(dl.I.mv) : null, netAvf = dl.aVF && dl.aVF.mv ? netQrs(dl.aVF.mv) : null;
+      if (netI != null && netAvf != null && SIGe && SIGe.axisDegrees) {
+        axisDeg = SIGe.axisDegrees(netI, netAvf);
+        axisCat = SIGe.axisCategory ? SIGe.axisCategory(axisDeg) : null;
+        if (!isFinite(axisDeg)) { axisDeg = null; axisCat = null; }
+      }
+
+      var findings = [];
+      if (rhy) findings.push({ id: "rhy0", title: rhy.verdict, detail: rhy.detail, matched: true, weight: rhy.severity === "warn" ? 0.5 : 0.3, severity: rhy.severity, evidence: [] });
+      if (axisCat) findings.push({ id: "axis0", title: "QRS axis: " + axisCat + (axisDeg != null ? " (~" + Math.round(axisDeg) + "°)" : ""), detail: "From limb-lead net QRS direction (I vs aVF). Advisory — direction is gain-independent; confirm on the trace.", matched: true, weight: 0.2, severity: "info", evidence: [] });
+
       stage(onStage, "report", 100);
+      var deferNote = "ST-segment, QRS-width and conduction (BBB) analysis were NOT computed: a " + recon.layout +
+        " printout gives only ~2.5 s per lead and the classical digitiser does not recover calibration-grade amplitudes, so those would be unreliable (a clearer 12x1 trace or the learned digitiser is required).";
       var raw = {
         id: (digitized && digitized.id) ? String(digitized.id) : "",
-        verdict: "Insufficient lead coverage for AI analysis",
-        severity: "info", confidence: recon.confidence.overall, engine: "ecglib-ensemble-1.1.0+reconstruct",
+        verdict: rhy ? rhy.verdict : "Insufficient lead coverage for AI analysis",
+        severity: rhy ? rhy.severity : "info", confidence: recon.confidence.overall, engine: "ecglib-ensemble-1.1.0+reconstruct",
         measurements: { ventRateBpm: rp.bpm, rhythm: rp.regularity === "irregular" ? "Irregular" : (rp.regularity === "regular" ? "Regular" : "-"),
-                        prMs: null, qrsMs: null, qtcMs: null, axisDeg: null },
-        findings: [], differentials: [],
-        clinicalInterpretation: "Layout " + recon.layout + " reconstructed at " + Math.round(recon.confidence.coverage * 100) +
-          "% lead coverage. A dense 10s x 12 signal is not available without fabricating data, so the diagnostic ensemble was NOT run. " +
-          (strip ? ("Rhythm strip present: rate " + (rp.bpm != null ? rp.bpm + " bpm, " + rp.regularity : "n/a") + ". ") : "No continuous rhythm strip. ") +
-          "Decision support only — clinician review required.",
-        whatToVerify: (recon.warnings || []).join(" "),
+                        prMs: null, qrsMs: null, qtcMs: null, axisDeg: axisDeg != null ? Math.round(axisDeg) : null },
+        findings: findings, differentials: [],
+        clinicalInterpretation: "Layout " + recon.layout + " (partial): the 12-lead neural ensemble was NOT run (no continuous 10 s x 12). " +
+          (rhy ? ("Rhythm from the lead-II strip: " + rhy.verdict.toLowerCase() + ". ") : (strip ? "" : "No continuous rhythm strip. ")) +
+          (axisCat ? ("Limb-lead QRS axis: " + axisCat + (axisDeg != null ? " (~" + Math.round(axisDeg) + "°)" : "") + ". ") : "") +
+          deferNote + " Decision support only — clinician review required.",
+        whatToVerify: [(recon.warnings || []).join(" "), "Rhythm read from lead II only; confirm P-waves + the full 12-lead. Morphology/ST NOT assessed — read the trace directly."].filter(Boolean).join(" "),
         schemaVersion: "1.0"
       };
       var a = models.makeAnalysis(raw);

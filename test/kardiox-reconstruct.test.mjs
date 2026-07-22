@@ -43,7 +43,12 @@ ok("analyzePaper 12x1 runs the ensemble → AF verdict", a12.verdict === "Atrial
 ok("analyzePaper 12x1: real (not demo) + full-coverage reconstruction attached", a12.demo !== true && a12.reconstruction.confidence.full === true);
 
 const a34 = await prov.analyzePaper(Object.assign({ id: "p34" }, s34), () => {});
-ok("analyzePaper 3x4 → safe 'Insufficient lead coverage' (ensemble NOT run on fabricated data)", /insufficient lead coverage/i.test(a34.verdict));
+// 3x4 now gives a rhythm/axis read-out from the strip + limb leads, but the 12-lead ENSEMBLE must still
+// NOT run on fabricated dense data, and NO ST/BBB/morphology may be fabricated from unreliable amplitudes.
+ok("analyzePaper 3x4 → ensemble NOT run on fabricated data (no head probabilities, partial coverage)",
+   a34.reconstruction.confidence.full === false && (!a34.headProbabilities || a34.headProbabilities.length === 0));
+ok("analyzePaper 3x4 → no fabricated ST/STEMI/BBB morphology finding",
+   !(a34.findings || []).some(f => /ST|STEMI|elevation|bundle|BBB|LVH/i.test(f.title)));
 ok("analyzePaper 3x4 low confidence + reconstruction warnings surfaced", a34.confidence < 0.5 && a34.reconstruction.warnings.length > 0);
 
 console.log(`\nkardiox-reconstruct: ${pass} passed, ${fail} failed`);
