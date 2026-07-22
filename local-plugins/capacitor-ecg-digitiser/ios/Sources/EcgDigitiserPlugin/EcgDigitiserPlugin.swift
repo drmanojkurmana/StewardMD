@@ -24,18 +24,32 @@ public class EcgDigitiserPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "segment", returnType: CAPPluginReturnPromise)
     ]
 
-    // model dimensions (nnU-Net 2d patch [H, W]); 13 classes (bg + 12 leads)
-    private let W = 1280, H = 1024
+    // model input dimensions [H, W] — reduced from the trained 1024x1280 (both must be multiples of 256,
+    // the nnU-Net downsample) to fit the phone's app memory limit; full res OOM-killed the app (jetsam).
+    // 13 output classes (bg + 12 leads).
+    private let W = 768, H = 512
 
     private static var model: MLModel?
     private static var loadedPath: String?
     private static let lock = NSLock()
 
+    /// Resolve a model path: absolute (downloaded) as-is; relative → the Capacitor web-assets dir bundled
+    /// in the app (App.app/public/<path>) so a bundled .mlpackage works without a download.
+    private func resolvePath(_ path: String) -> String {
+        let p = path.replacingOccurrences(of: "file://", with: "")
+        if p.hasPrefix("/") { return p }
+        if let pub = Bundle.main.url(forResource: "public", withExtension: nil) {
+            return pub.appendingPathComponent(p).path
+        }
+        return p
+    }
+
     /// Compile (.mlpackage -> .mlmodelc) + load once; cached across calls.
-    private func loadModel(_ path: String) throws -> MLModel {
+    private func loadModel(_ rawPath: String) throws -> MLModel {
+        let path = resolvePath(rawPath)
         EcgDigitiserPlugin.lock.lock(); defer { EcgDigitiserPlugin.lock.unlock() }
         if let m = EcgDigitiserPlugin.model, EcgDigitiserPlugin.loadedPath == path { return m }
-        let src = URL(fileURLWithPath: path.replacingOccurrences(of: "file://", with: ""))
+        let src = URL(fileURLWithPath: path)
         let compiled = try MLModel.compileModel(at: src)
         let cfg = MLModelConfiguration(); cfg.computeUnits = .all   // Neural Engine + GPU + CPU
         let m = try MLModel(contentsOf: compiled, configuration: cfg)
