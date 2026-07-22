@@ -1243,6 +1243,15 @@
         + '<span class="kx-soon-pill">SOON</span>'
         + '</div>';
     };
+
+    // On-device AI model pack (native only; downloads/caches/deletes like Whisper). The row self-updates
+    // after render via refreshOndevice(); the action downloads or deletes the ~146 MB analysis pack.
+    var isNat = false; try { isNat = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() && window.SMD_KARDIOX_MODELMGR); } catch (e) {}
+    var odRow = isNat ? ('<button type="button" class="kx-settings-row" data-act="kx-ondevice-ai">'
+        + '<span class="kx-sr-ic">' + ic('memory') + '</span>'
+        + '<span class="kx-sr-body"><b class="kx-sr-title">On-device AI</b><span class="kx-sr-sub" data-kx-od-sub>Checking…</span></span>'
+        + '<span class="kx-sr-val kx-data" data-kx-od-val></span>'
+      + '</button>') : '';
   
     host.innerHTML =
       '<header class="kx-set-head">'
@@ -1281,6 +1290,7 @@
             + '<span class="kx-sr-body"><b class="kx-sr-title">Confidence display</b><span class="kx-sr-sub">Always show %</span></span>'
             + '<span class="kx-sr-toggle kx-on" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
           + '</button>'
+          + odRow
         + '</div>'
   
         + '<div class="kx-set-label">Coming soon</div>'
@@ -1302,6 +1312,38 @@
         if (valEl && r.val) valEl.textContent = r.val;
       }).catch(function(){});
     }
+    try { if (isNat && window.SMD_KARDIOX_MODELMGR) refreshOndevice(host); } catch (e) {}
+  }
+
+  // Reflect the on-device pack's installed state into the settings row (native only).
+  function refreshOndevice(host) {
+    var mgr = window.SMD_KARDIOX_MODELMGR; if (!mgr || !host) return;
+    var subEl = host.querySelector('[data-kx-od-sub]'), valEl = host.querySelector('[data-kx-od-val]');
+    if (!subEl) return;
+    var mb = Math.round((mgr.totalBytes('diagnosis') || 0) / 1048576);
+    Promise.resolve(mgr.installed('diagnosis')).then(function (yes) {
+      subEl.textContent = yes ? ('Runs analysis offline · ' + mb + ' MB') : ('Download to analyse on-device · ' + mb + ' MB');
+      if (valEl) valEl.textContent = yes ? 'Delete' : 'Download';
+    }).catch(function () { subEl.textContent = 'Unavailable on this device'; });
+  }
+
+  // Download (with progress) or delete the on-device analysis pack; refresh providers + the screen after.
+  function ondeviceAction() {
+    var mgr = window.SMD_KARDIOX_MODELMGR; if (!mgr) return;
+    var syncProviders = function () { try { var PR = window.SMD_KARDIOX_PROVIDERS; if (PR && PR.checkModels) PR.checkModels(); } catch (e) {} };
+    Promise.resolve(mgr.installed('diagnosis')).then(function (yes) {
+      if (yes) {
+        var okc = true; try { okc = window.confirm ? window.confirm('Remove the downloaded on-device AI models? Analysis will use the server until you download them again.') : true; } catch (e) {}
+        if (!okc) return;
+        return mgr.remove('diagnosis').then(function () { syncProviders(); toast('On-device AI models removed.'); show('settings'); });
+      }
+      var subEl = document.querySelector('#kardioxRoot [data-kx-od-sub]');
+      if (subEl) subEl.textContent = 'Downloading… 0%';
+      toast('Downloading on-device AI (one time)…');
+      return mgr.ensure('diagnosis', function (p) { if (subEl) subEl.textContent = 'Downloading… ' + Math.round((p || 0) * 100) + '%'; })
+        .then(function () { syncProviders(); haptic('success'); toast('On-device AI ready.'); show('settings'); })
+        .catch(function (e) { toast('Download failed: ' + ((e && e.message) || 'network error')); show('settings'); });
+    }).catch(function () {});
   }
 
   /* empty */
@@ -2533,6 +2575,7 @@
       case "kxnav:lesson": state.lessonId = t.getAttribute("data-id"); haptic("light"); go("lesson"); return;
       case "kx-clear-ecgs": clearEcgs(); return;
       case "kx-toggle-confidence": toggleConfidence(); return;
+      case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
       case "kx-bookmark": toggleBookmark(); return;
     }
     if (act.indexOf("kxnav:") === 0) { deferred(act.slice(6)); return; }

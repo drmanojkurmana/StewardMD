@@ -72,5 +72,13 @@ host._html = "";
 R.nav("why");
 ok("why screen renders", rendered(150));
 
+// on-device AI settings row (native only): appears when Capacitor + the model manager are present
+globalThis.Capacitor = { isNativePlatform: () => true, Plugins: {} };
+loadInto("kardiox-model-manager.js");   // sets window.SMD_KARDIOX_MODELMGR
+host._html = "";
+R.nav("settings");
+ok("settings shows the on-device AI row on native", /kx-ondevice-ai/.test(host._html) && /On-device AI/.test(host._html));
+delete globalThis.Capacitor;
+
 console.log(`\nkardiox-screens: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
