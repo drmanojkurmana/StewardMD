@@ -299,6 +299,9 @@
         axisDeg = SIGe.axisDegrees(netI, netAvf);
         axisCat = SIGe.axisCategory ? SIGe.axisCategory(axisDeg) : null;
         if (!isFinite(axisDeg)) { axisDeg = null; axisCat = null; }
+        // An "extreme"/indeterminate axis from a partial (2.5 s-cell) digitisation is far more likely a
+        // digitisation artifact than a true northwest axis (clinically rare) → DEFER, don't assert it.
+        else if (axisCat === "extreme" || axisCat === "unknown") { axisDeg = null; axisCat = null; }
       }
 
       var rhyOk = rhy && !rhy.unreliable, rhyUnclear = rhy && rhy.unreliable;
@@ -308,7 +311,7 @@
 
       stage(onStage, "report", 100);
       var deferNote = "ST-segment, QRS-width and conduction (BBB) analysis were NOT computed: a " + recon.layout +
-        " printout gives only ~2.5 s per lead and the classical digitiser does not recover calibration-grade amplitudes, so those would be unreliable (a clearer 12x1 trace or the learned digitiser is required).";
+        " printout gives only ~2.5 s per lead and the digitiser recovers timing and shape but not calibration-grade amplitudes, so those would be unreliable (a full-disclosure 12x1 trace is required to run the 12-lead ensemble).";
       var verdict = rhyOk ? rhy.verdict : (rhyUnclear ? "Rhythm not reliably measurable from this image" : "Insufficient lead coverage for AI analysis");
       var raw = {
         id: (digitized && digitized.id) ? String(digitized.id) : "",

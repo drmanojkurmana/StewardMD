@@ -606,8 +606,14 @@
     (function(){ var v = mm.qtcMs; if (v == null) metrics.push({ k:"QTc", v:"-", s:"ms", t:"muted" });
       else { var t, tag; if (v >= 500) { t = "urgent"; tag = "prolonged"; } else if (v >= 450) { t = "warn"; tag = "borderline"; } else { t = "stable"; tag = "normal"; }
         metrics.push({ k:"QTc", v:String(v), s:"ms · " + tag, t:t }); } })();
-    (function(){ var v = mm.axisDeg; if (v == null) metrics.push({ k:"Axis", v:"-", s:"-", t:"muted" });
-      else { var norm = (v >= -30 && v <= 90); metrics.push({ k:"Axis", v:fmtAxis(v), s:norm ? "normal" : (v > 90 ? "right deviation" : "left deviation"), t:norm ? "neutral" : "warn" }); } })();
+    (function(){ var v = mm.axisDeg; if (v == null) { metrics.push({ k:"Axis", v:"-", s:"-", t:"muted" }); return; }
+      var d = v; while (d > 180) d -= 360; while (d <= -180) d += 360;   // 4-quadrant clinical category
+      var cat, tone;
+      if (d >= -30 && d <= 90) { cat = "normal"; tone = "neutral"; }
+      else if (d > 90 && d <= 180) { cat = "right deviation"; tone = "warn"; }
+      else if (d > -90 && d < -30) { cat = "left deviation"; tone = "warn"; }
+      else { cat = "extreme / NW"; tone = "warn"; }                     // -180..-90 (northwest / indeterminate)
+      metrics.push({ k:"Axis", v:fmtAxis(v), s:cat, t:tone }); })();
   
     var TONE = { urgent:"kx-metric--urgent", stable:"kx-metric--stable", warn:"kx-metric--warn", muted:"kx-metric--muted", neutral:"" };
     var metricsHtml = metrics.map(function(c){
