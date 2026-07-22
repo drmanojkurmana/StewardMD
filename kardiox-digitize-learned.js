@@ -89,7 +89,32 @@
   }
   function gi_src(img) { return { width: img.width, height: img.height }; }
 
+  // ── native bridge (iOS Core ML plugin) ──────────────────────────────────────────────────────────
+  function plugin() { try { return (typeof window !== "undefined" && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.EcgDigitiser) || null; } catch (e) { return null; } }
+  function available() { return !!plugin(); }
+  function b64ToU8(b64) { var bin = (typeof atob !== "undefined") ? atob(b64) : Buffer.from(b64, "base64").toString("binary"); var u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; }
+  function blobToB64(blob) { return new Promise(function (res, rej) { var r = new FileReader(); r.onloadend = function () { res(String(r.result)); }; r.onerror = rej; r.readAsDataURL(blob); }); }
+
+  // Run the on-device Core ML segmenter on an image blob → { labelMap:Uint8, W, H }.
+  function segmentBlob(blob, modelPath) {
+    var P = plugin(); if (!P) return Promise.reject(new Error("EcgDigitiser plugin not available"));
+    return blobToB64(blob).then(function (b64) {
+      return P.segment({ base64Image: b64, modelPath: modelPath || "ECGDigitiser.mlpackage" });
+    }).then(function (r) {
+      if (!r || !r.labelMap) throw new Error("segment returned no labelMap");
+      return { labelMap: b64ToU8(r.labelMap), W: r.width || PATCH_W, H: r.height || PATCH_H };
+    });
+  }
+
+  // Honest segmentation summary — proves the model ran + segmented (before the full signal postproc).
+  function summarize(leadTraces) {
+    var names = [], strip = false;
+    for (var c = 1; c <= 12; c++) { var L = leadTraces[LABELS[c]]; if (L && L.present) { names.push(LABELS[c]); if (L.widthFrac > 0.8) strip = true; } }
+    return { leadsDetected: names.length, leads: names, hasRhythmStrip: strip };
+  }
+
   var API = { preprocess: preprocess, labelMapToLeadTraces: labelMapToLeadTraces, digitize: digitize,
+              available: available, segmentBlob: segmentBlob, summarize: summarize,
               LABELS: LABELS, PATCH_H: PATCH_H, PATCH_W: PATCH_W, HOST: HOST, MODEL_FILE: MODEL_FILE,
               _diag: { toGray: toGray, resizeGray: resizeGray } };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

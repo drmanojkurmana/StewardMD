@@ -193,6 +193,44 @@
   // Prefer on-device (offline, no PHI upload) ONLY when the user opted in (flag) AND the full offline path
   // exists: pack installed + the on-device digitiser loaded. Else the backend stays the photo path.
   function ondevicePreferred() { return ondeviceFlag() && _ondeviceReady && !!digitizer() && !!ortAnalyzer(); }
+
+  // LEARNED on-device digitiser (nnU-Net via Core ML native plugin) — segmentation-VALIDATION stage.
+  // Runs the model on the Neural Engine + reports the per-lead segmentation (does the model work on this
+  // device + ECG?). Signal reconstruction + diagnosis is the next increment. Flag smd_kardiox_learned.
+  function learnedFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_learned")); } catch (e) { return false; } }
+  function learnedAnalyzer() {
+    if (typeof window === "undefined") return null;
+    var LEARNED = window.SMD_KARDIOX_DIGITIZE_LEARNED;
+    if (!isNative() || !LEARNED || !LEARNED.available()) return null;
+    return {
+      kind: "learned",
+      analyze: function (image, onStage) {
+        var stage = function (n, p) { try { if (onStage) onStage(n, p); } catch (e) {} };
+        var blob = image && (image.data || ((typeof Blob !== "undefined" && image instanceof Blob) ? image : null));
+        if (!blob) { var e = new Error("no image for on-device digitiser"); e.code = "needs_signal"; return Promise.reject(e); }
+        stage("digitization", 30);
+        return LEARNED.segmentBlob(blob).then(function (seg) {
+          stage("signalExtraction", 70);
+          var traces = LEARNED.labelMapToLeadTraces(seg.labelMap, seg.W, seg.H);
+          var sum = LEARNED.summarize(traces);
+          stage("report", 100);
+          var models = M(), raw = {
+            id: (image && image.id) ? String(image.id) : "",
+            verdict: "On-device digitiser: " + sum.leadsDetected + "/12 leads segmented",
+            severity: "info", confidence: 0, engine: "ecg-digitiser-coreml",
+            measurements: { ventRateBpm: null, rhythm: "-", prMs: null, qrsMs: null, qtcMs: null, axisDeg: null },
+            findings: [], differentials: [],
+            clinicalInterpretation: "The LEARNED on-device digitiser (nnU-Net ECG-Digitiser via Core ML, Neural Engine) ran on this image and segmented " +
+              sum.leadsDetected + " of 12 leads" + (sum.hasRhythmStrip ? " including a full-width rhythm strip" : "") +
+              (sum.leads.length ? " (" + sum.leads.join(", ") + ")" : "") + ". This is the segmentation-VALIDATION build: it confirms the model runs on this device; per-lead signal reconstruction + diagnosis is the next increment.",
+            whatToVerify: "Confirm the model found the leads present in this ECG's layout. Not yet a diagnosis.",
+            schemaVersion: "1.0"
+          };
+          return models ? models.makeAnalysis(raw) : raw;
+        });
+      }
+    };
+  }
   // Async: is the analysis pack cached on-device? Sets _ondeviceReady + forces the assembly to rebuild.
   function checkModels() {
     var mgr = modelMgr();
@@ -226,6 +264,7 @@
   // honest "unavailable" analyzer — the mock is NEVER a silent fallback (it faked a fixed AFib).
   function chooseAnalyzer(opts) {
     if (demoFlag()) return mockAnalyzer();
+    if (learnedFlag()) { var la = learnedAnalyzer(); if (la) return la; }   // learned-digitiser validation stage
     if (ondevicePreferred()) return ortAnalyzer();     // full offline photo→dx (opt-in + pack installed)
     var real = ((opts.remote || useRemote()) && remoteAnalyzer()) || ortAnalyzer();
     return real || unavailableAnalyzer();

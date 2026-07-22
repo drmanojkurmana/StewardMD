@@ -20,7 +20,8 @@
     smd_kardiox_dev:        { type: "bool", def: false,     query: "kardioxdev",  desc: "Developer overlay (pipeline stages, provider, timings)." },
     smd_kardiox_backend:    { type: "bool", def: true,      query: "kardioxbackend", desc: "Use the live KardioX pipeline backend (RemoteAnalyzer via /api/kardiox) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT OFF." },
     smd_kardiox_demo:       { type: "bool", def: false,     query: "kardioxdemo",  desc: "EXPLICIT demo mode — use the deterministic mock analyzer (canned sample, no real inference). Off by default: Analyze runs the REAL pipeline (backend/on-device ONNX) or reports 'inference unavailable', never a fabricated result." },
-    smd_kardiox_ondevice:   { type: "bool", def: false,     query: "kardioxondevice", desc: "Prefer FULLY ON-DEVICE analysis (offline, no PHI upload): image → on-device digitiser → ensemble, when the model pack is downloaded. DEFAULT OFF (backend is the photo path until validated on a flagship)." }
+    smd_kardiox_ondevice:   { type: "bool", def: false,     query: "kardioxondevice", desc: "Prefer FULLY ON-DEVICE analysis (offline, no PHI upload): image → on-device digitiser → ensemble, when the model pack is downloaded. DEFAULT OFF (backend is the photo path until validated on a flagship)." },
+    smd_kardiox_learned:    { type: "bool", def: false,     query: "kardioxlearned",  desc: "Use the LEARNED on-device digitiser (nnU-Net ECG-Digitiser via Core ML). DEFAULT OFF — segmentation-validation stage: runs the model on the Neural Engine + reports the per-lead segmentation; full signal reconstruction is the next increment." }
   };
 
   function store() { try { return localStorage; } catch (e) { return null; } }
