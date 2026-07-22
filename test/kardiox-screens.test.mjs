@@ -78,6 +78,7 @@ loadInto("kardiox-model-manager.js");   // sets window.SMD_KARDIOX_MODELMGR
 host._html = "";
 R.nav("settings");
 ok("settings shows the on-device AI row on native", /kx-ondevice-ai/.test(host._html) && /On-device AI/.test(host._html));
+ok("settings shows the on-device toggle on native", /kx-toggle-ondevice/.test(host._html) && /Analyse on-device/.test(host._html) && /role="switch"/.test(host._html));
 delete globalThis.Capacitor;
 
 console.log(`\nkardiox-screens: ${pass} passed, ${fail} failed`);

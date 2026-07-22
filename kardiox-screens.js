@@ -1247,10 +1247,16 @@
     // On-device AI model pack (native only; downloads/caches/deletes like Whisper). The row self-updates
     // after render via refreshOndevice(); the action downloads or deletes the ~146 MB analysis pack.
     var isNat = false; try { isNat = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() && window.SMD_KARDIOX_MODELMGR); } catch (e) {}
+    var onDev = false; try { onDev = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_ondevice')); } catch (e) {}
     var odRow = isNat ? ('<button type="button" class="kx-settings-row" data-act="kx-ondevice-ai">'
         + '<span class="kx-sr-ic">' + ic('memory') + '</span>'
         + '<span class="kx-sr-body"><b class="kx-sr-title">On-device AI</b><span class="kx-sr-sub" data-kx-od-sub>Checking…</span></span>'
         + '<span class="kx-sr-val kx-data" data-kx-od-val></span>'
+      + '</button>'
+      + '<button type="button" class="kx-settings-row" data-act="kx-toggle-ondevice" role="switch" aria-checked="' + (onDev ? 'true' : 'false') + '">'
+        + '<span class="kx-sr-ic">' + ic('cloud_off') + '</span>'
+        + '<span class="kx-sr-body"><b class="kx-sr-title">Analyse on-device</b><span class="kx-sr-sub">Fully offline, no upload (needs the model above)</span></span>'
+        + '<span class="kx-sr-toggle' + (onDev ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
       + '</button>') : '';
   
     host.innerHTML =
@@ -2494,6 +2500,16 @@
     Promise.resolve(P.ecgStore.deleteAll()).then(function () { toast("Local ECGs cleared."); state.analysis = null; show("settings"); }).catch(function () { toast("Couldn't clear ECGs."); });
   }
   function toggleConfidence() { try { var F = window.SMD_KARDIOX_FLAGS; if (F) { F.set("smd_kardiox_confidence", !F.bool("smd_kardiox_confidence")); toast("Confidence display " + (F.bool("smd_kardiox_confidence") ? "on" : "off") + "."); show("settings"); } } catch (e) {} }
+  function toggleOndevice() {
+    try {
+      var F = window.SMD_KARDIOX_FLAGS; if (!F) return;
+      var on = !F.bool("smd_kardiox_ondevice"); F.set("smd_kardiox_ondevice", on);
+      var PR = window.SMD_KARDIOX_PROVIDERS, installed = PR && PR.ondeviceInstalled && PR.ondeviceInstalled();
+      if (PR && PR.checkModels) PR.checkModels();                      // rebuild the active assembly for the new flag
+      toast(on ? (installed ? "On-device analysis on (offline)." : "On-device on — download the model above to use it.") : "On-device analysis off (using server).");
+      show("settings");
+    } catch (e) {}
+  }
   function toggleBookmark() { var P = providers(); if (P && P.library && state.lessonId) { Promise.resolve(P.library.toggleBookmark(state.lessonId)).then(function () { haptic("light"); }); } }
 
   // Capture a real ECG image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo) or
@@ -2575,6 +2591,7 @@
       case "kxnav:lesson": state.lessonId = t.getAttribute("data-id"); haptic("light"); go("lesson"); return;
       case "kx-clear-ecgs": clearEcgs(); return;
       case "kx-toggle-confidence": toggleConfidence(); return;
+      case "kx-toggle-ondevice": haptic("light"); toggleOndevice(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
       case "kx-bookmark": toggleBookmark(); return;
     }
