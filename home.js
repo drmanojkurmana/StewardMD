@@ -472,8 +472,8 @@
         '<span class="rb-sub">Work through the full differential — including non-infective causes</span>' +
       '</button>' +
       '<div class="decision-legend">' +
-        '<div class="dl-row"><span class="dl-dot dl-red"></span><span><b>Clinical Decision</b> — quick antibiotic answer: yes / no &amp; which agent</span></div>' +
-        '<div class="dl-row"><span class="dl-dot dl-blue"></span><span><b>Clinical Reasoning</b> — explore all likely diagnoses, not just infection</span></div>' +
+        '<div class="dl-row"><span class="dl-dot dl-red"></span><span><b>Clinical Decision</b> · quick antibiotic answer: yes / no &amp; which agent</span></div>' +
+        '<div class="dl-row"><span class="dl-dot dl-blue"></span><span><b>Clinical Reasoning</b> · explore all likely diagnoses, not just infection</span></div>' +
       '</div>';
     runBtn.parentNode.insertBefore(wrap, runBtn.nextSibling);
     document.getElementById("smdReasonBtn").addEventListener("click", function () {
@@ -1189,7 +1189,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom">' +
         '<button class="rnav-tab active" data-act="home" aria-label="Home">' + ric("home") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("forum") + '<span>Ask Maik</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("auto_awesome") + '<span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
       '</nav>';
@@ -1567,7 +1567,6 @@
         ? '<img class="hv-acct-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
         : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
       var tier = (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) ? "Pro" : "Free";
-      var hosp = ""; try { if (window.HOSPITAL && HOSPITAL.current) { var hc = HOSPITAL.current() || {}; hosp = hc.name || hc.label || ""; } } catch (e) {}
       body = '<div class="hv-acct">' + pic +
         '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
         (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
@@ -1576,7 +1575,7 @@
           acctRow("Account", tier) +
           acctRow("Name", nm) +
           (em ? acctRow("Email", em) : "") +
-          (hosp ? acctRow("Hospital", hosp) : "") +
+          '<div id="acctDetailsMore"></div>' +
         '</div>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
         '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
@@ -1604,32 +1603,73 @@
     }
     // BUG-18: pull the rest of the collected profile (Reg No, City, Hospital, Phone) from Firestore
     // and append it to the details list. Fully guarded so it can never break the account sheet.
+    // Load the full profile (Reg No, City, Hospital, Phone) as EDITABLE rows. Name + Email stay
+    // read-only (they're the Google sign-in identity). Guarded throughout so it can't break the sheet.
     if (signedIn) { try {
       var uid = (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null;
       var fdb = window.SMD_DB;
       if (uid && fdb) {
-        fdb.collection("users").doc(uid).collection("profile").doc("self").get().then(function (snap) {
+        var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
+        pref.get().then(function (snap) {
           var d = (snap && snap.exists && snap.data()) || {};
-          var det = document.getElementById("acctDetails"); if (!det) return;
-          var ex = "";
-          if (d.regNo) ex += acctRow("Reg No", d.regNo);
-          if (d.city) ex += acctRow("City", d.city);
-          if (d.hospital && det.textContent.indexOf("Hospital") < 0) ex += acctRow("Hospital", d.hospital);
-          ex += acctRow("Phone", d.phone || "Not added");
-          det.insertAdjacentHTML("beforeend", ex);
-          if (!d.phone) {
-            var pbtn = document.createElement("button");
-            pbtn.textContent = "Add phone number";
-            pbtn.style.cssText = "width:100%;margin-top:8px;background:transparent;color:var(--hp,var(--teal,#12a594));border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px;font:700 13px var(--hfont,system-ui);cursor:pointer";
-            pbtn.addEventListener("click", function () {
-              var ph = window.prompt("Add your phone number"); if (ph == null) return; ph = String(ph).trim(); if (!ph) return;
-              fdb.collection("users").doc(uid).collection("profile").doc("self").set({ phone: ph }, { merge: true }).then(function () { try { openAccount(); } catch (e) {} }).catch(function () {});
-            });
-            det.appendChild(pbtn);
+          var more = document.getElementById("acctDetailsMore"); if (!more) return;
+          function rowEdit(k, v, key) {
+            return '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid var(--hbd,#e2e8f0);font:600 13px var(--hfont,system-ui)">' +
+              '<span style="color:var(--hmut,#64748b);flex:0 0 auto">' + k + '</span>' +
+              '<span style="display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:0">' +
+                '<span style="color:var(--hink,#0f172a);text-align:right;overflow-wrap:anywhere">' + smdEsc(v == null || v === "" ? "Not set" : String(v)) + '</span>' +
+                '<button data-edit="' + key + '" style="border:0;background:none;color:var(--hp,var(--teal,#12a594));font:700 12px var(--hfont,system-ui);cursor:pointer;padding:2px 3px;flex:0 0 auto">Edit</button>' +
+              '</span></div>';
           }
+          more.innerHTML = rowEdit("Reg No", d.regNo, "regno") + rowEdit("City", d.city, "city") + rowEdit("Hospital", d.hospital, "hospital") + rowEdit("Phone", d.phone, "phone");
+          function save(obj) { return pref.set(obj, { merge: true }); }
+          more.querySelectorAll("[data-edit]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var f = btn.getAttribute("data-edit");
+              if (f === "hospital") { openHospitalPicker(function (h) { save({ hospital: h }).then(function () { openAccount(); }).catch(function () {}); }); return; }
+              if (f === "regno") {
+                var nr = window.prompt("Update your medical registration number", d.regNo || ""); if (nr == null) return; nr = String(nr).trim(); if (!nr) return;
+                // Editing the reg number invalidates prior verification — the certificate must be re-uploaded.
+                save({ regNo: nr, verified: false, regNoPendingCert: true }).then(function () {
+                  try { if (typeof toast === "function") toast("Re-upload your registration certificate to verify the new number."); } catch (e) {}
+                  try { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) { closeSheet(); setTimeout(function () { SMD_VERIFY.openPanel(); }, 80); } else openAccount(); } catch (e) { try { openAccount(); } catch (e2) {} }
+                }).catch(function () {});
+                return;
+              }
+              var label = (f === "city" ? "City" : "Phone");
+              var cur = (f === "city" ? (d.city || "") : (d.phone || ""));
+              var val = window.prompt("Update " + label, cur); if (val == null) return; val = String(val).trim();
+              var obj = {}; obj[f] = val; save(obj).then(function () { openAccount(); }).catch(function () {});
+            });
+          });
         }).catch(function () {});
       }
     } catch (e) {} }
+  }
+  // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
+  function openHospitalPicker(onPick) {
+    function opt(h) {
+      return '<button class="hosp-opt" data-h="' + smdEsc(h.name) + '" style="display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:11px 4px;cursor:pointer">' +
+        '<span style="display:block;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)">' + smdEsc(h.name) + '</span>' +
+        '<span style="display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#64748b)">' + smdEsc((h.city || "") + (h.state ? ", " + h.state : "")) + (h.type === "medical_college" ? " · Medical college" : "") + '</span></button>';
+    }
+    function render(q) {
+      var api = window.SMD_HOSPITALS;
+      var hits = (api && api.search) ? api.search(q) : (api && api.all ? api.all().slice(0, 50) : []);
+      if (!hits.length) return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match. <button data-h-custom="1" style="border:0;background:none;color:var(--hp,var(--teal,#12a594));font-weight:700;cursor:pointer">Use &ldquo;' + smdEsc((q || "").trim()) + '&rdquo;</button></div>';
+      return hits.map(opt).join("");
+    }
+    openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
+      '<input id="hospSearch" type="search" placeholder="Search hospital or medical college" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
+      '<div id="hospList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + '</div>');
+    var sh = sheetEl();
+    var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
+    if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
+    if (lst) lst.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
+      var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
+      if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);
+    });
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
   // Wipes the user's cloud cases (Firestore users/{key}/cases), every local app key,
@@ -1711,75 +1751,79 @@
   function aboutVersionHTML() {
     return '<div class="smd-vh">' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v0 · Genesis</div><ul>' +
-        '<li><b>v0.1</b> — First static prototype mapping a clinical syndrome to an empiric antibiotic.</li>' +
-        '<li><b>v0.5</b> — The 8-question antimicrobial-stewardship framework defined as the core engine.</li>' +
+        '<li><b>v0.1</b> · First static prototype mapping a clinical syndrome to an empiric antibiotic.</li>' +
+        '<li><b>v0.5</b> · The 8-question antimicrobial-stewardship framework defined as the core engine.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v1 · Clinical engine</div><ul>' +
-        '<li><b>v1.0</b> — Structured clinical-findings wizard (vitals, system, risk factors).</li>' +
-        '<li><b>v1.1</b> — Added syndrome confidence scoring and a ranked differential.</li>' +
-        '<li><b>v1.2</b> — Tested on real cases; scoring edge-case bugs detected and fixed.</li>' +
-        '<li><b>v1.5</b> — Grew to dozens of internal-medicine syndromes.</li>' +
+        '<li><b>v1.0</b> · Structured clinical-findings wizard (vitals, system, risk factors).</li>' +
+        '<li><b>v1.1</b> · Added syndrome confidence scoring and a ranked differential.</li>' +
+        '<li><b>v1.2</b> · Tested on real cases; scoring edge-case bugs detected and fixed.</li>' +
+        '<li><b>v1.5</b> · Grew to dozens of internal-medicine syndromes.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v2 · Knowledge base</div><ul>' +
-        '<li><b>v2.0</b> — Drug monograph database: dosing, route, spectrum, cautions.</li>' +
-        '<li><b>v2.1</b> — &quot;Gold format&quot; rewrite of every drug entry for consistency.</li>' +
-        '<li><b>v2.3</b> — IDSA / WHO / ICMR / Surviving Sepsis references wired throughout.</li>' +
-        '<li><b>v2.6</b> — Bug sweep: dosing display &amp; renal-adjustment corrections.</li>' +
+        '<li><b>v2.0</b> · Drug monograph database: dosing, route, spectrum, cautions.</li>' +
+        '<li><b>v2.1</b> · &quot;Gold format&quot; rewrite of every drug entry for consistency.</li>' +
+        '<li><b>v2.3</b> · IDSA / WHO / ICMR / Surviving Sepsis references wired throughout.</li>' +
+        '<li><b>v2.6</b> · Bug sweep: dosing display &amp; renal-adjustment corrections.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v3 · Ground-up interface</div><ul>' +
-        '<li><b>v3.0</b> — Complete frontend rebuild — the &quot;Advanced UI by MaiK&quot;.</li>' +
-        '<li><b>v3.2</b> — Responsive layout for mobile / tablet / desktop, plus dark mode.</li>' +
-        '<li><b>v3.4</b> — Accessibility: font scaling, density control, auto-fit.</li>' +
-        '<li><b>v3.7</b> — Testing round: iOS viewport/zoom bugs detected and fixed.</li>' +
+        '<li><b>v3.0</b> · Complete frontend rebuild, the &quot;Advanced UI by MaiK&quot;.</li>' +
+        '<li><b>v3.2</b> · Responsive layout for mobile / tablet / desktop, plus dark mode.</li>' +
+        '<li><b>v3.4</b> · Accessibility: font scaling, density control, auto-fit.</li>' +
+        '<li><b>v3.7</b> · Testing round: iOS viewport/zoom bugs detected and fixed.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v4 · Intelligence</div><ul>' +
-        '<li><b>v4.0</b> — Clinical reasoning engine producing an explainable differential.</li>' +
-        '<li><b>v4.2</b> — Electrolyte engine: 13 analysis engines (Na, K, Mg, Ca, Cl, anion gap…).</li>' +
-        '<li><b>v4.4</b> — Medical calculators expanded to 74 bedside tools.</li>' +
-        '<li><b>v4.6</b> — Bug detected: reasoning &quot;select diagnosis&quot; mis-routed → fixed.</li>' +
+        '<li><b>v4.0</b> · Clinical reasoning engine producing an explainable differential.</li>' +
+        '<li><b>v4.2</b> · Electrolyte engine: 13 analysis engines (Na, K, Mg, Ca, Cl, anion gap…).</li>' +
+        '<li><b>v4.4</b> · Medical calculators expanded to 74 bedside tools.</li>' +
+        '<li><b>v4.6</b> · Bug detected: reasoning &quot;select diagnosis&quot; mis-routed → fixed.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v5 · Connected &amp; polished</div><ul>' +
-        '<li><b>v5.0</b> — Google sign-in and cloud sync of saved cases.</li>' +
-        '<li><b>v5.1</b> — Share a case by unique code; the My Cases library.</li>' +
-        '<li><b>v5.2</b> — Account panel and guest mode.</li>' +
-        '<li><b>v5.3</b> — Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
-        '<li><b>v5.4</b> — Automated headless-browser regression testing introduced.</li>' +
+        '<li><b>v5.0</b> · Google sign-in and cloud sync of saved cases.</li>' +
+        '<li><b>v5.1</b> · Share a case by unique code; the My Cases library.</li>' +
+        '<li><b>v5.2</b> · Account panel and guest mode.</li>' +
+        '<li><b>v5.3</b> · Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
+        '<li><b>v5.4</b> · Automated headless-browser regression testing introduced.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v6 · Medical Knowledge Base</div><ul>' +
-        '<li><b>v6.0</b> — Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB — regression-locked and byte-identical to the trusted engine.</li>' +
-        '<li><b>v6.1</b> — Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls — paraphrased and page-cited.</li>' +
-        '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
-        '<li><b>v6.3</b> — Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
-        '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
+        '<li><b>v6.0</b> · Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB, regression-locked and byte-identical to the trusted engine.</li>' +
+        '<li><b>v6.1</b> · Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls, paraphrased and page-cited.</li>' +
+        '<li><b>v6.2</b> · Knowledge base expanded to the full Harrison disease universe, <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
+        '<li><b>v6.3</b> · Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
+        '<li><b>v6.4</b> · AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface), fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v7 · Redesigned workspace</div><ul>' +
-        '<li><b>v7.0</b> — Ground-up redesign of the mobile home — editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
-        '<li><b>v7.1</b> — New <b>Antibiogram</b> explorer: an interactive antibiotic-coverage grid (green/red spectrum of activity) plus resistance rates from the ICMR AMRSN 2024 national antibiogram and the GIMSR hospital antibiogram.</li>' +
-        '<li><b>v7.2</b> — Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
-        '<li><b>v7.3</b> — Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
-        '<li><b>v7.4</b> — Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
-        '<li><b>v7.5</b> — Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
-        '<li><b>v7.6</b> — MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers — decision first, explanation second.</li>' +
-        '<li><b>v7.7</b> — Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
-        '<li><b>v7.8</b> — Lab Watch: monitor a patient&#39;s labs for new results — in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
-        '<li><b>v7.9</b> — App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
+        '<li><b>v7.0</b> · Ground-up redesign of the mobile home, editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
+        '<li><b>v7.1</b> · New <b>Antibiogram</b> explorer: an interactive antibiotic-coverage grid (green/red spectrum of activity) plus resistance rates from the ICMR AMRSN 2024 national antibiogram and the GIMSR hospital antibiogram.</li>' +
+        '<li><b>v7.2</b> · Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
+        '<li><b>v7.3</b> · Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
+        '<li><b>v7.4</b> · Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
+        '<li><b>v7.5</b> · Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
+        '<li><b>v7.6</b> · MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers, decision first, explanation second.</li>' +
+        '<li><b>v7.7</b> · Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
+        '<li><b>v7.8</b> · Lab Watch: monitor a patient&#39;s labs for new results, in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
+        '<li><b>v7.9</b> · App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v8 · Reference-grade breadth</div><ul>' +
-        '<li><b>v8.0</b> — Calculators expanded to an MDCalc-scale library — <b>400+</b> validated bedside tools across every specialty, each formula executed and checked before shipping.</li>' +
-        '<li><b>v8.1</b> — Knowledge base grown to <b>4,800+</b> searchable conditions (Harrison plus Nelson paediatrics, ophthalmology and further specialties), each with a page-cited reference panel.</li>' +
-        '<li><b>v8.2</b> — Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals — tap any score to open the calculator pre-filled.</li>' +
-        '<li><b>v8.3</b> — Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support — verify before acting).</li>' +
+        '<li><b>v8.0</b> · Calculators expanded to an MDCalc-scale library, <b>400+</b> validated bedside tools across every specialty, each formula executed and checked before shipping.</li>' +
+        '<li><b>v8.1</b> · Knowledge base grown to <b>4,800+</b> searchable conditions (Harrison plus Nelson paediatrics, ophthalmology and further specialties), each with a page-cited reference panel.</li>' +
+        '<li><b>v8.2</b> · Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals, tap any score to open the calculator pre-filled.</li>' +
+        '<li><b>v8.3</b> · Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support, verify before acting).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v9 · Clinical command centre (current)</span></div><ul>' +
-        '<li><b>v9.0</b> — ICU &amp; Ward dashboard: real-time collaborative unit boards (ICU / MICU / wards), a live care team with clinical designations &amp; permissions, shift handover, and task instructions with native push.</li>' +
-        '<li><b>v9.1</b> — Ward Sync 2.0: tick a GHIS patient to add them straight to your unit board; per-patient, device-secure auto-fetch keeps their labs &amp; imaging fresh; full patient info (MR, treating doctor, department) imported.</li>' +
-        '<li><b>v9.2</b> — Doctor verification: an NMC registration check unlocks verified access, with an owner admin console.</li>' +
-        '<li><b>v9.3</b> — Engagement: reading streaks, levels, quests, badges and a shareable stats card.</li>' +
-        '<li><b>v9.4</b> — Prescription generator (℞) and a drug&ndash;drug interaction checker.</li>' +
-        '<li><b>v9.5</b> — Calculator results now flow back to the ICU Scores panel — compute any score in the full calculator and it&#39;s saved on the patient.</li>' +
+        '<li><b>v9.0</b> · ICU &amp; Ward dashboard: real-time collaborative unit boards (ICU / MICU / wards), a live care team with clinical designations &amp; permissions, shift handover, and task instructions with native push.</li>' +
+        '<li><b>v9.1</b> · Ward Sync 2.0: tick a GHIS patient to add them straight to your unit board; per-patient, device-secure auto-fetch keeps their labs &amp; imaging fresh; full patient info (MR, treating doctor, department) imported.</li>' +
+        '<li><b>v9.2</b> · Doctor verification: an NMC registration check unlocks verified access, with an owner admin console.</li>' +
+        '<li><b>v9.3</b> · Engagement: reading streaks, levels, quests, badges and a shareable stats card.</li>' +
+        '<li><b>v9.4</b> · Prescription generator (℞) and a drug-drug interaction checker.</li>' +
+        '<li><b>v9.5</b> · Calculator results now flow back to the ICU Scores panel, compute any score in the full calculator and it&#39;s saved on the patient.</li>' +
+        '<li><b>v9.6</b> · KardioX AI: 12-lead ECG interpretation with a Learn-ECG atlas and hybrid STEMI detection (gated clinical preview).</li>' +
+        '<li><b>v9.7</b> · Apple Watch app: patient watchlist, tasks and criticals on the wrist, plus a Code Blue CPR assistant with an iPhone Command Center.</li>' +
+        '<li><b>v9.8</b> · FundX AI: guided retinal image capture and analysis (experimental).</li>' +
+        '<li><b>v10.0</b> · Reliability and polish: faster, flicker-free assessment; an editable profile with a searchable hospital directory; and a broad bug-fix sweep across the app and watch.</li>' +
       '</ul></div>' +
     '</div>' +
-    '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
+    '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD, built and refined case by case at the bedside.</p>';
   }
   function aboutFactsHTML() {
     return '<span class="smd-ab-badge">By the numbers</span>' +
@@ -1791,13 +1835,16 @@
       '<li><span class="fn">405</span> bedside clinical calculators at MDCalc scale, every formula executed &amp; checked.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
       '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources: ICMR AMRSN 2024 national and GIMSR hospital resistance rates.</li>' +
+      '<li><span class="fn">3</span> native apps — iPhone, Android and Apple Watch — from a single clinical engine, plus an installable web app.</li>' +
+      '<li><span class="fn">100%</span> on-device: the full engine runs locally and works with no signal at the bedside.</li>' +
+      '<li><span class="fn">1</span> Apple Watch Code Blue assistant with live CPR rate coaching, a resus timeline and an iPhone Command Center.</li>' +
+      '<li><span class="fn">2</span> imaging AIs at the point of care — KardioX 12-lead ECG interpretation and FundX retinal analysis (clinical preview).</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic, with no frameworks and no build step.</li>' +
-      '<li><span class="fn">100%</span> offline-capable PWA that works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
-      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app. Every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
+      '<p>StewardMD is one of the most content-dense clinical decision tools ever built — now shipping as native iPhone, Android and Apple Watch apps as well as an installable web app, all driven by one hand-authored engine. Every syndrome, drug, calculator and reasoning rule runs on-device, so it works fully offline at the bedside. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
       '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD, Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
   }
   function enhanceAbout() {
@@ -2136,7 +2183,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
-    var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
+    var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
@@ -2419,7 +2466,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
       var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span></div>';
-      var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
+      var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
       if (md.length > 700) {

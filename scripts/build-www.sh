@@ -73,6 +73,17 @@ done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
 
+# ── 6. Stamp a UNIQUE build number into the version display ───────────────────
+# Every build:www stamps the current git commit-count as the build number into the
+# About "· build N" line, so each build is uniquely identifiable (like the gold-NNN
+# cache tags). The source keeps a placeholder; the shipped www/ always gets the real
+# number, so the About page reflects exactly which build is running.
+BN="$(git -C "$ROOT" rev-list --count HEAD 2>/dev/null || echo 0)"
+if [ "$BN" != "0" ] && [ -f "$WWW/index.html" ]; then
+  sed -i.bak "s/· build [0-9][0-9]*/· build $BN/g" "$WWW/index.html" && rm -f "$WWW/index.html.bak"
+  echo "  build: #$BN"
+fi
+
 # ── summary ───────────────────────────────────────────────────────────────────
 echo "www/ assembled at: $WWW"
 echo "  size:  $(du -sh "$WWW" | cut -f1)"
