@@ -55,15 +55,28 @@
 
   // Real R-peak detection (Pan-Tompkins-style: derivative → square → moving-window integrate →
   // adaptive threshold). Returns heart rate + RR series + regularity. NON-diagnostic measurement.
+  // Pan-Tompkins-style R-peak detector, hardened for DIGITISED strips (which carry baseline wander +
+  // occasional edge/step artifacts from the trace centre-line). Two robustness fixes vs a textbook impl:
+  //  (1) BASELINE REMOVAL — subtract a ~0.6s moving average before differentiating, so slow wander/steps
+  //      don't create a dominant derivative spike that starves the QRS threshold (the "0 beats" bug).
+  //  (2) PERCENTILE THRESHOLD — gate on 0.35×(95th-percentile of the integrated signal), not 0.3×max, so
+  //      a single outlier spike can't raise the bar above the real QRS complexes.
   function rpeaks(lead, fs) {
     fs = fs || 500; lead = lead || []; var n = lead.length; if (n < fs) return { bpm: null, rrMs: [], regularity: "unknown" };
-    var d = new Float64Array(n), i;
-    for (i = 2; i < n - 2; i++) { var g = (2 * lead[i + 1] + lead[i + 2] - lead[i - 2] - 2 * lead[i - 1]); d[i] = g * g; }
-    var w = Math.round(0.15 * fs), integ = new Float64Array(n), acc = 0;
+    var i, acc = 0;
+    // (1) baseline removal via a causal ~0.6s moving average
+    var bw = Math.max(1, Math.round(0.6 * fs)), y = new Float64Array(n);
+    for (i = 0; i < n; i++) { acc += lead[i]; if (i >= bw) acc -= lead[i - bw]; y[i] = lead[i] - acc / Math.min(i + 1, bw); }
+    // derivative² + 0.15s moving-window integration
+    var d = new Float64Array(n);
+    for (i = 2; i < n - 2; i++) { var g = (2 * y[i + 1] + y[i + 2] - y[i - 2] - 2 * y[i - 1]); d[i] = g * g; }
+    var w = Math.round(0.15 * fs), integ = new Float64Array(n); acc = 0;
     for (i = 0; i < n; i++) { acc += d[i]; if (i >= w) acc -= d[i - w]; integ[i] = acc / w; }
-    var max = 0; for (i = 0; i < n; i++) if (integ[i] > max) max = integ[i];
-    if (max <= 0) return { bpm: null, rrMs: [], regularity: "unknown" };
-    var thr = 0.3 * max, minRR = Math.round(0.25 * fs), peaks = [], last = -minRR;
+    // (2) robust threshold from the 95th percentile of the integrated signal
+    var srt = Array.prototype.slice.call(integ).sort(function (a, b) { return a - b; });
+    var p95 = srt[Math.floor((n - 1) * 0.95)] || 0;
+    if (p95 <= 0) return { bpm: null, rrMs: [], regularity: "unknown" };
+    var thr = 0.35 * p95, minRR = Math.round(0.25 * fs), peaks = [], last = -minRR;
     for (i = 1; i < n - 1; i++) { if (integ[i] > thr && integ[i] >= integ[i - 1] && integ[i] > integ[i + 1] && (i - last) >= minRR) { peaks.push(i); last = i; } }
     if (peaks.length < 2) return { bpm: null, rrMs: [], regularity: "unknown" };
     var rr = []; for (i = 1; i < peaks.length; i++) rr.push((peaks[i] - peaks[i - 1]) * 1000 / fs);
