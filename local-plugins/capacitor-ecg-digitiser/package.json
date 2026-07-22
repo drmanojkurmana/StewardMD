@@ -1,0 +1,10 @@
+{
+  "name": "@stewardmd/capacitor-ecg-digitiser",
+  "version": "1.0.0",
+  "description": "On-device ECG image digitiser. iOS runs the nnU-Net ECG-Digitiser via Core ML (built into iOS, Neural Engine); Android via ONNX Runtime. The photo never leaves the device — only the per-pixel lead segmentation label map is returned. Model downloaded on first use.",
+  "capacitor": { "ios": { "src": "ios" } },
+  "files": ["ios/Sources", "Package.swift", "package.json"],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_note": "iOS-only for now (Core ML, zero third-party runtime). Android (ONNX Runtime AAR) added after iOS is device-validated; then add capacitor.android.src + android/* to files."
+}
