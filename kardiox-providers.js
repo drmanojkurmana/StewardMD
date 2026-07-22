@@ -194,9 +194,34 @@
   // exists: pack installed + the on-device digitiser loaded. Else the backend stays the photo path.
   function ondevicePreferred() { return ondeviceFlag() && _ondeviceReady && !!digitizer() && !!ortAnalyzer(); }
 
-  // LEARNED on-device digitiser (nnU-Net via Core ML native plugin) — segmentation-VALIDATION stage.
-  // Runs the model on the Neural Engine + reports the per-lead segmentation (does the model work on this
-  // device + ECG?). Signal reconstruction + diagnosis is the next increment. Flag smd_kardiox_learned.
+  // Build the on-device ORT analyzer purely to reach analyzePaper() (reconstruction → ensemble/deferral).
+  // Constructed whenever the model manager exists (native) or a global `ort` is present; the ONNX ensemble
+  // loads lazily only on the full-12x1 path, so the 3x4 rhythm+axis path works WITHOUT the analysis pack.
+  function ortPaperBase() {
+    try {
+      var O = (typeof window !== "undefined") && window.SMD_KARDIOX_ORT;
+      if (!O || !O.makeOrtAnalyzer) return null;
+      var mgr = modelMgr();
+      if (mgr) return O.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
+      if (window.ort) return O.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+    } catch (e) {}
+    return null;
+  }
+  function paperTimeout(p, ms) {
+    return new Promise(function (resolve, reject) {
+      var done = false, t = setTimeout(function () { if (!done) { var e = new Error("On-device analysis timed out."); e.code = "ondevice_timeout"; e.stage = "analysis"; reject(e); } }, ms);
+      Promise.resolve(p).then(function (v) { done = true; clearTimeout(t); resolve(v); }, function (er) { done = true; clearTimeout(t); reject(er); });
+    });
+  }
+
+  // LEARNED on-device digitiser (nnU-Net via Core ML native plugin) → full offline photo → diagnosis.
+  // Downloads the .mlpackage on first use, segments on the Neural Engine, RECONSTRUCTS per-lead signals
+  // (kardiox-digitize-learned.segmentToDigitized) and feeds the SAME reconstruction→analyzePaper path:
+  //   • 12x1 full-disclosure → the real 12-lead ensemble (rate/rhythm/conduction/…);
+  //   • 3x4 (+rhythm strip)  → clean rate/rhythm from the continuous lead-II strip + gain-independent axis
+  //                            (ensemble deferred — 2.5s cells can't feed a 10s-trained model; honest).
+  // If a diagnosable signal can't be reconstructed (too few leads / no strip / ensemble pack absent for a
+  // 12x1) it falls back to the honest segmentation card. Flag smd_kardiox_learned.
   function learnedFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_learned")); } catch (e) { return false; } }
   function learnedAnalyzer() {
     if (typeof window === "undefined") return null;
@@ -214,25 +239,38 @@
           stage("digitization", 45);
           return LEARNED.segmentBlob(blob, prep && prep.path);
         }).then(function (seg) {
-          stage("signalExtraction", 70);
-          var traces = LEARNED.labelMapToLeadTraces(seg.labelMap, seg.W, seg.H);
-          var sum = LEARNED.summarize(traces);
-          stage("report", 100);
-          var models = M(), raw = {
-            id: (image && image.id) ? String(image.id) : "",
-            reportMode: "segmentation",
-            segmentation: { detected: sum.leadsDetected, total: 12, leads: sum.leads, hasRhythmStrip: sum.hasRhythmStrip },
-            verdict: "On-device digitiser: " + sum.leadsDetected + "/12 leads segmented",
-            severity: "info", confidence: 0, engine: "ecg-digitiser-coreml",
-            measurements: { ventRateBpm: null, rhythm: "-", prMs: null, qrsMs: null, qtcMs: null, axisDeg: null },
-            findings: [], differentials: [],
-            clinicalInterpretation: "The LEARNED on-device digitiser (nnU-Net ECG-Digitiser via Core ML, Neural Engine) ran on this image and segmented " +
-              sum.leadsDetected + " of 12 leads" + (sum.hasRhythmStrip ? " including a full-width rhythm strip" : "") +
-              (sum.leads.length ? " (" + sum.leads.join(", ") + ")" : "") + ". This is the segmentation-VALIDATION build: it confirms the model runs on this device; per-lead signal reconstruction + diagnosis is the next increment.",
-            whatToVerify: "Confirm the model found the leads present in this ECG's layout. Not yet a diagnosis.",
-            schemaVersion: "1.0"
-          };
-          return models ? models.makeAnalysis(raw) : raw;
+          stage("signalExtraction", 65);
+          var sum = LEARNED.summarize(LEARNED.labelMapToLeadTraces(seg.labelMap, seg.W, seg.H));
+          // honest fallback: the model segmented leads but a diagnosable signal couldn't be rebuilt.
+          function segCard() {
+            stage("report", 100);
+            var models = M(), raw = {
+              id: (image && image.id) ? String(image.id) : "",
+              reportMode: "segmentation",
+              segmentation: { detected: sum.leadsDetected, total: 12, leads: sum.leads, hasRhythmStrip: sum.hasRhythmStrip },
+              verdict: "On-device digitiser: " + sum.leadsDetected + "/12 leads segmented",
+              severity: "info", confidence: 0, engine: "ecg-digitiser-coreml",
+              measurements: { ventRateBpm: null, rhythm: "-", prMs: null, qrsMs: null, qtcMs: null, axisDeg: null },
+              findings: [], differentials: [],
+              clinicalInterpretation: "The LEARNED on-device digitiser (nnU-Net ECG-Digitiser via Core ML, Neural Engine) segmented " +
+                sum.leadsDetected + " of 12 leads" + (sum.hasRhythmStrip ? " including a full-width rhythm strip" : "") +
+                (sum.leads.length ? " (" + sum.leads.join(", ") + ")" : "") + ", but a diagnosable signal could not be reconstructed from this image (too few clean leads / no continuous rhythm strip). Retake with all leads flat and fully in frame.",
+              whatToVerify: "Confirm the model found the leads present in this ECG's layout. Not a diagnosis.",
+              schemaVersion: "1.0"
+            };
+            return models ? models.makeAnalysis(raw) : raw;
+          }
+          var digitized = null;
+          try { digitized = LEARNED.segmentToDigitized(seg.labelMap, seg.W, seg.H); } catch (e2) {}
+          var base = ortPaperBase();
+          if (digitized && base && base.analyzePaper) {
+            digitized.id = (image && image.id) ? String(image.id) : "";
+            return paperTimeout(base.analyzePaper(digitized, onStage), 60000).then(function (a) {
+              try { a.segmentation = { detected: sum.leadsDetected, total: 12, leads: sum.leads, hasRhythmStrip: sum.hasRhythmStrip }; } catch (e3) {}
+              return a;
+            }).catch(function () { return segCard(); });
+          }
+          return segCard();
         });
       }
     };

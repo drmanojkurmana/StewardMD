@@ -77,6 +77,100 @@
     return leads;
   }
 
+  // ── signal RECONSTRUCTION: segmentation label map → the digitised-leads contract that
+  //    SMD_KARDIOX_RECONSTRUCT consumes ({leads:{name:{mv,fs}}, rhythmLead, layoutHint, calibration}). ──
+  var MM_PER_S = 25.0, MM_PER_MV = 10.0, FS = 500;
+  function med(a) { var s = Array.prototype.slice.call(a).sort(function (x, y) { return x - y; }); return s.length ? s[s.length >> 1] : 0; }
+  function interpNaN(t) {
+    var w = t.length, j, lastI = -1, lastV = NaN, k;
+    for (j = 0; j < w; j++) { if (!isNaN(t[j])) { if (lastI >= 0 && j - lastI > 1) { var span = j - lastI; for (k = lastI + 1; k < j; k++) t[k] = lastV + (t[j] - lastV) * (k - lastI) / span; } lastI = j; lastV = t[j]; } }
+    for (j = 0; j < w && isNaN(t[j]); j++) t[j] = lastV;
+    if (lastI >= 0) for (j = lastI + 1; j < w; j++) if (isNaN(t[j])) t[j] = lastV;
+    return t;
+  }
+  // Split one lead-class's pixels into vertically-separated regions (row-gap clustering). A lead printed
+  // TWICE — e.g. lead II as a 3x4 CELL and again as the full-width RHYTHM STRIP — yields two regions;
+  // every other lead yields one. Each region → its per-column ink centre-line trace (NaN-interpolated).
+  function classRegions(labelMap, W, H, c) {
+    var rowHas = new Uint8Array(H), x, y, row;
+    for (y = 0; y < H; y++) { row = y * W; for (x = 0; x < W; x++) { if (labelMap[row + x] === c) { rowHas[y] = 1; break; } } }
+    var GAP = Math.max(3, Math.round(H * 0.03)), bands = [], inb = false, start = 0, lastOn = -1;
+    for (y = 0; y < H; y++) {
+      if (rowHas[y]) { if (!inb) { inb = true; start = y; } lastOn = y; }
+      else if (inb && y - lastOn > GAP) { inb = false; bands.push([start, lastOn + 1]); }
+    }
+    if (inb) bands.push([start, lastOn + 1]);
+    var out = [];
+    for (var bi = 0; bi < bands.length; bi++) {
+      var y0 = bands[bi][0], y1 = bands[bi][1], sum = new Float64Array(W), cnt = new Int32Array(W), xmin = -1, xmax = -1, tot = 0;
+      for (y = y0; y < y1; y++) { row = y * W; for (x = 0; x < W; x++) { if (labelMap[row + x] === c) { sum[x] += y; cnt[x]++; tot++; if (xmin < 0 || x < xmin) xmin = x; if (x > xmax) xmax = x; } } }
+      if (tot < 8 || xmax < 0) continue;
+      var wdt = xmax - xmin + 1, trace = new Float64Array(wdt), j;
+      for (j = 0; j < wdt; j++) { var cx = xmin + j; trace[j] = cnt[cx] ? sum[cx] / cnt[cx] : NaN; }
+      interpNaN(trace);
+      out.push({ y0: y0, y1: y1, xmin: xmin, xmax: xmax, width: wdt, widthFrac: wdt / W, pixels: tot, trace: trace });
+    }
+    return out;
+  }
+  function widest(regs) { var b = regs[0], i; for (i = 1; i < regs.length; i++) if (regs[i].width > b.width) b = regs[i]; return b; }
+  // pixel trace (row centre-line) → mV resampled to nSamples. base = per-lead isoelectric (median); gain =
+  // pxPerMm * 10 mm/mV; image y grows down so mV = (base - y)/gain. Amplitude is GEOMETRIC (not grid-
+  // calibrated) — fine for the ensemble (z-norms per lead) + shape/timing; absolute mV is NOT claimed
+  // (amplitudeReliable:false downstream), so ST-type findings stay deferred.
+  function traceToMv(trace, pxPerMm, nSamples) {
+    var m = trace.length, base = med(trace), gain = (pxPerMm * MM_PER_MV) || 1, mv = new Float64Array(m), j;
+    for (j = 0; j < m; j++) mv[j] = (base - trace[j]) / gain;
+    var out = new Array(nSamples);
+    for (var s = 0; s < nSamples; s++) { var pos = (m - 1) * s / (nSamples - 1 || 1), lo = Math.floor(pos), hi = Math.min(lo + 1, m - 1), f = pos - lo; out[s] = Math.round((mv[lo] + (mv[hi] - mv[lo]) * f) * 1e4) / 1e4; }
+    return out;
+  }
+  // Segmentation label map → digitised-leads contract. Handles 12x1 (each lead a full 10s row → the real
+  // 12-lead ensemble) and 3x4+rhythm (2.5s cells + a full-width lead-II strip → rhythm+axis, ensemble
+  // deferred by the reconstruction layer). Returns null if <3 leads segmented (caller shows the seg card).
+  function segmentToDigitized(labelMap, W, H, opts) {
+    opts = opts || {};
+    if (!labelMap || labelMap.length !== W * H) return null;
+    var regionsByLead = {}, gxmin = W, gxmax = -1, c, n, i, k, regs;
+    var nWide = 0, wideLead = null, wideW = 0;
+    for (c = 1; c <= 12; c++) {
+      regs = classRegions(labelMap, W, H, c);
+      if (!regs.length) continue;
+      regionsByLead[LABELS[c]] = regs;
+      var hasWide = false;
+      for (i = 0; i < regs.length; i++) {
+        if (regs[i].xmin < gxmin) gxmin = regs[i].xmin;
+        if (regs[i].xmax > gxmax) gxmax = regs[i].xmax;
+        if (regs[i].widthFrac > 0.7) { hasWide = true; if (regs[i].width > wideW) { wideW = regs[i].width; wideLead = LABELS[c]; } }
+      }
+      if (hasWide) nWide++;
+    }
+    var names = Object.keys(regionsByLead);
+    if (names.length < 3 || gxmax < 0) return null;
+    var inkW = gxmax - gxmin + 1, pxPerMm = (inkW / (10.0 * MM_PER_S)) || 1;   // full printout width ~ 10s
+    var leads = {}, rhythmLead = null, layout;
+    if (nWide >= 8) {
+      layout = "12x1";                                                        // full-disclosure → real ensemble
+      for (i = 0; i < names.length; i++) { n = names[i]; leads[n] = { mv: traceToMv(widest(regionsByLead[n]).trace, pxPerMm, Math.round(10 * FS)), fs: FS }; }
+      rhythmLead = leads["II"] ? "II" : null;
+    } else {
+      layout = "3x4"; rhythmLead = wideLead || "II";                          // 2.5s cells + lead-II strip
+      for (i = 0; i < names.length; i++) {
+        n = names[i]; regs = regionsByLead[n];
+        var strip = null, cell = null;
+        for (k = 0; k < regs.length; k++) { if (regs[k].widthFrac > 0.7) strip = regs[k]; else cell = regs[k]; }
+        if (n === rhythmLead && strip) leads[n] = { mv: traceToMv(strip.trace, pxPerMm, Math.round(10 * FS)), fs: FS };
+        else if (cell) leads[n] = { mv: traceToMv(cell.trace, pxPerMm, Math.round(2.5 * FS)), fs: FS };
+        else if (strip) leads[n] = { mv: traceToMv(strip.trace, pxPerMm, Math.round(10 * FS)), fs: FS };
+      }
+    }
+    if (Object.keys(leads).length < 3) return null;
+    return {
+      leads: leads, rhythmLead: rhythmLead, layoutHint: layout, layout: layout,
+      calibration: { mmPerS: MM_PER_S, mmPerMv: MM_PER_MV, pxPerMm: Math.round(pxPerMm * 1e3) / 1e3, method: "ecg-digitiser" },
+      method: "learned-nnunet-coreml", amplitudeReliable: false
+    };
+  }
+
   // image + injected native segmenter → per-lead traces. `segment(float32, dims) -> Promise<Uint8[H*W]>`.
   function digitize(img, opts) {
     opts = opts || {}; var seg = opts.segment;
@@ -127,9 +221,10 @@
   }
 
   var API = { preprocess: preprocess, labelMapToLeadTraces: labelMapToLeadTraces, digitize: digitize,
+              segmentToDigitized: segmentToDigitized,
               available: available, modelReady: modelReady, prepare: prepare, segmentBlob: segmentBlob, summarize: summarize,
               LABELS: LABELS, PATCH_H: PATCH_H, PATCH_W: PATCH_W, HOST: HOST, MODEL_FILE: MODEL_FILE,
-              _diag: { toGray: toGray, resizeGray: resizeGray } };
+              _diag: { toGray: toGray, resizeGray: resizeGray, classRegions: classRegions, traceToMv: traceToMv } };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_DIGITIZE_LEARNED = API;
 })();
