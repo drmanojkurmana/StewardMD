@@ -46,7 +46,21 @@ const SUMMARY_SYS =
   "(when provided) as authoritative context. PHARMA: fill \"pharma\" ONLY for a drug (a drug approval, " +
   "or a safety alert about a specific drug) — drug class, key licensed indication(s), usual adult " +
   "dose/route, typical duration, and main contraindications/black-box cautions, each concise and taken " +
-  "ONLY from the inputs (NEVER invent a dose or number); empty fields for non-drugs. No text outside the JSON.";
+  "ONLY from the inputs (NEVER invent a dose or number); empty fields for non-drugs.\n" +
+  "CLINICAL FOCUS — write for the prescriber, not the webmaster: describe the DRUGS and clinical content only. NEVER " +
+  "describe the website, portal, notice board, page or table layout, PDF/file format, document/serial numbering, how " +
+  "often the list is published, or how many items it contains — clinicians do not care how it was published, only " +
+  "what the drug is and what it means at the bedside. If the excerpt is only a notice heading, use the WEB SEARCH " +
+  "RESULTS to identify the ACTUAL drug(s) and their clinical facts before writing.\n" +
+  "DRUG LISTS: when the item is a LIST of multiple newly approved or updated drugs (e.g. a CDSCO 'list of new drugs " +
+  "approved' notice, or an approvals roundup), NAME each drug and give per-drug clinical detail — do NOT write one " +
+  "generic paragraph about 'several new drugs'. In \"new_recommendations\" put ONE entry per drug: " +
+  "'<generic/INN> (<class>) — approved for <indication>', and flag whether each is a brand-new APPROVAL or an " +
+  "UPDATE (new indication / new fixed-dose combination) to an existing drug. In \"summary\", open with a one-line " +
+  "lead (how many drugs, what kinds), then a bold '**<Drug name>:**' mini-heading per notable drug with 1-3 bullets " +
+  "(class, indication, and the single most important dose/route or safety caution). Leave \"pharma\" null for a " +
+  "multi-drug list (the per-drug detail lives in the summary); fill \"pharma\" only when the item is about ONE " +
+  "specific drug. No text outside the JSON.";
 
 function parseJsonLoose(t) {
   if (!t) return null;
@@ -199,7 +213,14 @@ const CLASSIFY_SYS =
   "lines that EACH start with \"• \" — one crisp, actionable clinical point per bullet, with the key term(s) in **bold**. " +
   "Use ONLY **bold**, \"• \" bullets, and these bold colon-headings — NO #, tables, links, or numbered lists. Favour " +
   "thresholds, drugs, doses, and clear do / don't. The lead sentence must read well on its own as a push line. " +
-  "~120-220 words. \"importance\": 'critical' for " +
+  "~120-220 words.\n" +
+  "CLINICAL FOCUS — write for the prescriber: describe the DRUGS and clinical content only, NEVER the website, portal, " +
+  "notice board, page/table layout, PDF/file format, document numbering, or how/when the list was published. For a " +
+  "LIST of newly approved or updated drugs (e.g. a CDSCO 'new drugs approved' notice), NAME each drug — a bold " +
+  "'**<Drug>:**' section per notable drug with its class, indication, and key dose or caution — and mark whether each " +
+  "is newly APPROVED or an UPDATE (new indication / fixed-dose combination). Use the WEB SEARCH RESULTS to identify " +
+  "the actual drugs when the note/title is only a heading.\n" +
+  "\"importance\": 'critical' for " +
   "withdrawals/boxed warnings/bans, 'high' for practice-changing guidelines or major approvals, else 'normal'. " +
   "\"title\" <= 140 characters.\n" +
   "PHARMA: fill \"pharma\" ONLY for a drug (type drug_approval, or a safety_alert about a specific drug) — give the " +
@@ -281,15 +302,24 @@ function normImpact(v) {
   return "Moderate";
 }
 const DIFF_SYS =
-  "You are a medical editor. You are given a PREVIOUS plain-language summary of a clinical guideline/document " +
+  "You are a medical editor. You are given a PREVIOUS plain-language summary of a clinical guideline or drug list " +
   "(already in our own words) and the CURRENT source excerpt for the NEW version of that same document. Identify " +
   "what MATERIALLY CHANGED for a practising clinician — new, revised, or removed recommendations, thresholds, drug " +
-  "choices, dosing, eligibility/indications. Focus on differences, not a re-summary.\n" +
+  "choices, dosing, eligibility/indications, or (for a drug list) which drugs were newly added or updated. Focus on " +
+  "differences, not a re-summary.\n" +
+  "CLINICAL FOCUS: every row MUST be about the drugs or clinical content. NEVER produce a row about the website, " +
+  "portal, page/table layout, PDF or file format, document/serial numbering, list length, or publication date/cadence " +
+  "— those are meaningless to a clinician and must be omitted entirely.\n" +
+  "DRUG LISTS: if this is a list of approved/updated drugs, make EACH row ONE drug that was newly added or changed — " +
+  "`topic` = the drug (generic/INN, brand in brackets if given); `previous` = its prior status ('Not previously " +
+  "approved' or the old indication); `current` = 'Approved for <indication> — <class>' (or the new indication/dose); " +
+  "`impact` = the clinical impact. Otherwise `topic` is the clinical area (e.g. 'Blood pressure target') and " +
+  "`previous`/`current` are short phrases.\n" +
   "COPYRIGHT: paraphrase in your own words; never copy source wording, tables, or figures.\n" +
   "Return ONLY JSON (no prose, no fence): {\"changes\":[{\"topic\":string,\"previous\":string,\"current\":string," +
-  "\"impact\":\"Practice changing\"|\"High\"|\"Moderate\"|\"Low\"}]}. `topic` is the clinical area (e.g. 'Blood pressure " +
-  "target'); `previous` and `current` are short phrases. Include ONLY concrete, evidence-based changes you can support " +
-  "from the inputs — never invent a change. If you cannot identify concrete changes, return {\"changes\":[]}. Max 8 rows.";
+  "\"impact\":\"Practice changing\"|\"High\"|\"Moderate\"|\"Low\"}]}. Include ONLY concrete, evidence-based changes you " +
+  "can support from the inputs — never invent a change. If you cannot identify concrete clinical changes, return " +
+  "{\"changes\":[]}. Max 8 rows.";
 
 function prevSummaryText(prev) {
   if (!prev) return "";
