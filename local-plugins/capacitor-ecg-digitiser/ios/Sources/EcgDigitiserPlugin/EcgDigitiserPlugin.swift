@@ -105,20 +105,33 @@ public class EcgDigitiserPlugin: CAPPlugin, CAPBridgedPlugin {
                     throw NSError(domain: "ecg", code: 2, userInfo: [NSLocalizedDescriptionKey: "no seg output"])
                 }
 
-                // 4) argmax over the class dim -> UInt8 label map [H*W]. Use strides (do not assume packed).
+                // 4) argmax over the class dim -> UInt8 label map [H*W]. Read by the OUTPUT'S ACTUAL dtype
+                //    (a Core ML fp16 model returns Float16 — reading it as Float32 runs off the buffer =
+                //    EXC_BAD_ACCESS). Use strides (do not assume tightly packed).
                 let C = seg.shape[1].intValue
                 let sC = seg.strides[1].intValue, sH = seg.strides[2].intValue, sW = seg.strides[3].intValue
-                let sp = seg.dataPointer.bindMemory(to: Float32.self, capacity: seg.count)
+                let n = seg.count
                 var label = [UInt8](repeating: 0, count: N)
-                for y in 0..<H {
-                    let rowBase = y * sH   // class-0 offset at (0, 0, y, 0)
-                    for x in 0..<W {
-                        let base = rowBase + x * sW   // class-0 offset at (0, 0, y, x)
-                        var best = 0; var bestV = sp[base]
-                        var c = 1
-                        while c < C { let val = sp[base + c * sC]; if val > bestV { bestV = val; best = c }; c += 1 }
-                        label[y * W + x] = UInt8(best)
+                func argmax<T: Comparable>(_ sp: UnsafeMutablePointer<T>) {
+                    for y in 0..<H {
+                        let rowBase = y * sH
+                        for x in 0..<W {
+                            let base = rowBase + x * sW
+                            var best = 0; var bestV = sp[base]
+                            var c = 1
+                            while c < C { let v = sp[base + c * sC]; if v > bestV { bestV = v; best = c }; c += 1 }
+                            label[y * W + x] = UInt8(best)
+                        }
                     }
+                }
+                if #available(iOS 16.0, *), seg.dataType == .float16 {
+                    argmax(seg.dataPointer.bindMemory(to: Float16.self, capacity: n))
+                } else if seg.dataType == .float32 {
+                    argmax(seg.dataPointer.bindMemory(to: Float32.self, capacity: n))
+                } else if seg.dataType == .double {
+                    argmax(seg.dataPointer.bindMemory(to: Double.self, capacity: n))
+                } else {
+                    throw NSError(domain: "ecg", code: 3, userInfo: [NSLocalizedDescriptionKey: "unsupported output dtype \(seg.dataType.rawValue)"])
                 }
                 let b64 = Data(label).base64EncodedString()
                 DispatchQueue.main.async { call.resolve(["labelMap": b64, "width": W, "height": H]) }
