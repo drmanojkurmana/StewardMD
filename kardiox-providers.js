@@ -143,18 +143,33 @@
     return null;
   }
   // On-device REAL inference: the EcgLib 7-head ONNX ensemble via ONNX Runtime Web (kardiox-ort.js),
-  // feeding the Evidence Fusion Engine (kardiox-fusion.js). Selected whenever the ORT runtime
-  // (window.ort) + the provider are present (i.e. the model bundle is loaded); the deterministic demo
-  // mock is only the last resort when no ONNX runtime is available (and it self-labels as a demo).
+  // feeding the Evidence Fusion Engine (kardiox-fusion.js). Two entry points:
+  //   • native + the model pack downloaded (checkModels() → _ondeviceReady): sessions load from the
+  //     model-manager's cached bytes, ort-web is lazy-loaded — no server, no PHI upload.
+  //   • dev/verification: a global `window.ort` already present → load from the local kardiox-models dir.
+  // NOTE: the ensemble needs a 12-lead SIGNAL. The image→signal digitiser is still server-side, so a
+  // PHOTO still routes to the backend until the on-device digitiser ships (then this handles photos too).
+  var _ondeviceReady = false;
+  function modelMgr() { return (typeof window !== "undefined" && window.SMD_KARDIOX_MODELMGR) || null; }
   function ortAnalyzer() {
     try {
-      if (typeof window !== "undefined" && window.SMD_KARDIOX_ORT && window.ort) {
-        return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
-      }
+      if (typeof window === "undefined" || !window.SMD_KARDIOX_ORT) return null;
+      var mgr = modelMgr();
+      if (mgr && _ondeviceReady) return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
+      if (window.ort) return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
     } catch (e) {}
     return null;
   }
   function ortActive() { return !!ortAnalyzer(); }
+  function ondeviceInstalled() { return _ondeviceReady; }
+  // Async: is the analysis pack cached on-device? Sets _ondeviceReady + forces the assembly to rebuild.
+  function checkModels() {
+    var mgr = modelMgr();
+    if (!mgr) { _ondeviceReady = false; return Promise.resolve(false); }
+    return Promise.resolve(mgr.installed("diagnosis")).then(function (yes) {
+      _ondeviceReady = !!yes; _active = null; return _ondeviceReady;
+    }).catch(function () { _ondeviceReady = false; return false; });
+  }
 
   function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
   function demoFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_demo")); } catch (e) { return false; } }
@@ -216,7 +231,8 @@
   function use(assembly) { _active = assembly; return _active; }
 
   var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2,
-              checkBackend: checkBackend, backendActive: useRemote, ortActive: ortActive };
+              checkBackend: checkBackend, backendActive: useRemote, ortActive: ortActive,
+              checkModels: checkModels, ondeviceInstalled: ondeviceInstalled };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_PROVIDERS = API;
 })();

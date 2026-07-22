@@ -27,7 +27,11 @@ globalThis.fetch = async (url) => ({ ok: true, status: 200, arrayBuffer: async (
 new Function(readFileSync(new URL("../kardiox-model-manager.js", import.meta.url), "utf8"))();
 const M = globalThis.SMD_KARDIOX_MODELMGR;
 
+// shrink expected sizes to 4 bytes so the integrity check exercises against the 4-byte fake fetch
+M.PACKS.diagnosis.files.forEach((f) => { f.bytes = 4; });
+
 ok("module exposed", !!M && typeof M.ensure === "function" && typeof M.installed === "function");
+ok("totalBytes reflects the pack", M.totalBytes("diagnosis") === 4 * M.PACKS.diagnosis.files.length);
 
 // base64 round-trip
 const rt = M._b64.b64ToU8(M._b64.abToB64(new Uint8Array([0, 255, 16, 200, 7]).buffer));
@@ -55,6 +59,12 @@ ok("source() returns bytes on native", src.bytes && src.bytes.length === 4 && sr
 // remove clears the pack
 await M.remove("diagnosis");
 ok("remove() clears the cache", (await M.installed("diagnosis")) === false);
+
+// integrity: a truncated/corrupt download (wrong byte count) must reject, never cache
+globalThis.fetch = async () => ({ ok: true, status: 200, arrayBuffer: async () => new Uint8Array([1, 2, 3, 4, 5]).buffer }); // 5 ≠ expected 4
+let rejected = false;
+try { await M.ensure("diagnosis"); } catch (e) { rejected = /size mismatch/.test(e.message); }
+ok("integrity: wrong-size download rejects", rejected && (await M.installed("diagnosis")) === false);
 
 // web fallback: no native filesystem → source() gives a URL
 globalThis.Capacitor.isNativePlatform = () => false;

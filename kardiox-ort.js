@@ -72,28 +72,77 @@
     var s = SIG(); return { bpm: bpm, rrMs: rr, regularity: s ? s.regularity(rr) : "unknown" };
   }
 
+  // Inline head manifest (the 7 EcgLib densenet1d121 binary classifiers). Used on-device so no
+  // manifest.json round-trip is needed; mirrors the exported models/manifest.json verbatim.
+  var DEFAULT_MANIFEST = {
+    model: "ecglib", source: "ispras/EcgLib v1.1.0 (Apache-2.0)",
+    input: { leads: 12, samples: 5000, fs_hz: 500, norm: "perlead_zscore", lead_order: LEAD_ORDER },
+    source_weight: 0.6,
+    heads: [
+      { pathology: "AFIB", label: "Atrial fibrillation", severity: "urgent", file: "ecglib_AFIB.onnx", threshold: 0.5 },
+      { pathology: "1AVB", label: "First-degree AV block", severity: "info", file: "ecglib_1AVB.onnx", threshold: 0.5 },
+      { pathology: "SBRAD", label: "Sinus bradycardia", severity: "warn", file: "ecglib_SBRAD.onnx", threshold: 0.5 },
+      { pathology: "STACH", label: "Sinus tachycardia", severity: "warn", file: "ecglib_STACH.onnx", threshold: 0.5 },
+      { pathology: "PVC", label: "Premature ventricular complex", severity: "warn", file: "ecglib_PVC.onnx", threshold: 0.5 },
+      { pathology: "CRBBB", label: "Complete RBBB", severity: "warn", file: "ecglib_CRBBB.onnx", threshold: 0.5 },
+      { pathology: "IRBBB", label: "Incomplete RBBB", severity: "info", file: "ecglib_IRBBB.onnx", threshold: 0.5 }
+    ]
+  };
+
+  // Lazily load onnxruntime-web (vendored, CPU/WASM) INSIDE the WebView, only when on-device inference
+  // is actually invoked — so users who never run KardioX on-device pay no startup cost. Single-threaded
+  // (capacitor scheme is not cross-origin-isolated → no SharedArrayBuffer); SIMD on. Sets window.ort.
+  function loadOrtWeb(base) {
+    base = (base || "/vendor/onnxruntime-web").replace(/\/$/, "");
+    if (typeof window !== "undefined" && window.ort) return Promise.resolve(window.ort);
+    if (typeof document === "undefined") return Promise.reject(err("runtime_unavailable", "onnxruntime-web needs a DOM", "rhythm"));
+    function cfg() { try { var o = window.ort; o.env.wasm.wasmPaths = base + "/"; o.env.wasm.numThreads = 1; o.env.wasm.simd = true; } catch (e) {} return window.ort; }
+    return new Promise(function (res, rej) {
+      var ex = document.getElementById("smd-ort-web");
+      if (ex) { if (window.ort) return res(cfg()); ex.addEventListener("load", function () { res(cfg()); }); ex.addEventListener("error", function () { rej(err("runtime_unavailable", "onnxruntime-web load failed", "rhythm")); }); return; }
+      var s = document.createElement("script"); s.id = "smd-ort-web"; s.async = true; s.src = base + "/ort.wasm.min.js";
+      s.onload = function () { res(cfg()); };
+      s.onerror = function () { rej(err("runtime_unavailable", "failed to load onnxruntime-web from " + s.src, "rhythm")); };
+      document.head.appendChild(s);
+    });
+  }
+
   function makeOrtAnalyzer(opts) {
     opts = opts || {};
     var ort = opts.ort || (typeof window !== "undefined" && window.ort) || null;
     var baseUrl = opts.baseUrl || "kardiox-models";
+    var ortBase = opts.ortBase || "/vendor/onnxruntime-web";
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
     var digitize = opts.digitize || null;          // optional image→signal hook (ECG-Digitiser export)
-    var _manifest = opts.manifest || null, _sessions = null;
+    var modelManager = opts.modelManager || null;  // SMD_KARDIOX_MODELMGR → sessions from cached bytes
+    var _manifest = opts.manifest || (modelManager ? DEFAULT_MANIFEST : null), _sessions = null;
 
     function resolve(file) { return baseUrl + "/" + String(file).split("/").pop(); }
 
+    // A session per head: on-device → from the model-manager's cached bytes; else from a URL (web/node).
+    function sessionFor(file) {
+      if (modelManager) return Promise.resolve(modelManager.source(file)).then(function (src) {
+        return src && src.bytes ? ort.InferenceSession.create(src.bytes) : ort.InferenceSession.create((src && src.url) || resolve(file));
+      });
+      return Promise.resolve(ort.InferenceSession.create(resolve(file)));
+    }
+
+    function loadRuntime() { return ort ? Promise.resolve() : loadOrtWeb(ortBase).then(function (o) { ort = o; }); }
+
     function ensure() {
       if (_sessions) return Promise.resolve();
-      if (!ort) return Promise.reject(err("runtime_unavailable", "ONNX Runtime not loaded", "rhythm"));
-      var manP = _manifest ? Promise.resolve(_manifest)
-        : (fetchImpl ? Promise.resolve(fetchImpl(resolve("manifest.json"))).then(function (r) { return r.json(); })
-          : Promise.reject(err("runtime_unavailable", "no manifest and no fetch", "rhythm")));
-      return manP.then(function (man) {
-        _manifest = man; _sessions = {};
-        var heads = (man.heads || []).filter(function (h) { return h.file; });
-        return Promise.all(heads.map(function (h) {
-          return Promise.resolve(ort.InferenceSession.create(resolve(h.file))).then(function (s) { _sessions[h.pathology] = s; });
-        }));
+      return loadRuntime().then(function () {
+        if (!ort) throw err("runtime_unavailable", "ONNX Runtime not loaded", "rhythm");
+        var manP = _manifest ? Promise.resolve(_manifest)
+          : (fetchImpl ? Promise.resolve(fetchImpl(resolve("manifest.json"))).then(function (r) { return r.json(); })
+            : Promise.reject(err("runtime_unavailable", "no manifest and no fetch", "rhythm")));
+        return manP.then(function (man) {
+          _manifest = man; _sessions = {};
+          var heads = (man.heads || []).filter(function (h) { return h.file; });
+          return Promise.all(heads.map(function (h) {
+            return sessionFor(h.file).then(function (s) { _sessions[h.pathology] = s; });
+          }));
+        });
       });
     }
 
@@ -246,7 +295,8 @@
              _diag: { preprocess: preprocess, rpeaks: rpeaks, toLeads: toLeads } };
   }
 
-  var API = { makeOrtAnalyzer: makeOrtAnalyzer, preprocess: preprocess, rpeaks: rpeaks, LEAD_ORDER: LEAD_ORDER };
+  var API = { makeOrtAnalyzer: makeOrtAnalyzer, loadOrtWeb: loadOrtWeb, DEFAULT_MANIFEST: DEFAULT_MANIFEST,
+              preprocess: preprocess, rpeaks: rpeaks, LEAD_ORDER: LEAD_ORDER };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_ORT = API;
 })();
