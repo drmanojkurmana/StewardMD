@@ -151,17 +151,37 @@
   // PHOTO still routes to the backend until the on-device digitiser ships (then this handles photos too).
   var _ondeviceReady = false;
   function modelMgr() { return (typeof window !== "undefined" && window.SMD_KARDIOX_MODELMGR) || null; }
+  function digitizer() { return (typeof window !== "undefined" && window.SMD_KARDIOX_DIGITIZE) || null; }
   function ortAnalyzer() {
     try {
       if (typeof window === "undefined" || !window.SMD_KARDIOX_ORT) return null;
-      var mgr = modelMgr();
-      if (mgr && _ondeviceReady) return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
-      if (window.ort) return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+      var mgr = modelMgr(), base = null;
+      if (mgr && _ondeviceReady) base = window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
+      else if (window.ort) base = window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+      if (!base) return null;
+      var DIG = digitizer();
+      // Photos are digitised ON-DEVICE (kardiox-digitize.js) → reconstruction layer → analyzePaper
+      // (full 12x1 → ensemble; partial → honest deferral). A pre-digitised signal skips straight to the
+      // ensemble. Without a digitiser or blob, base.analyze() raises needs_signal (never fabricates).
+      return {
+        kind: "ondevice",
+        analyze: function (image, onStage) {
+          if (image && image.signal) return base.analyze(image, onStage);
+          var blob = image && (image.data || ((typeof Blob !== "undefined" && image instanceof Blob) ? image : null));
+          if (DIG && blob) return Promise.resolve(DIG.digitize(blob))
+            .then(function (dig) { return base.analyzePaper(Object.assign({ id: image && image.id }, dig), onStage); });
+          return base.analyze(image, onStage);
+        }
+      };
     } catch (e) {}
     return null;
   }
   function ortActive() { return !!ortAnalyzer(); }
   function ondeviceInstalled() { return _ondeviceReady; }
+  function ondeviceFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_ondevice")); } catch (e) { return false; } }
+  // Prefer on-device (offline, no PHI upload) ONLY when the user opted in (flag) AND the full offline path
+  // exists: pack installed + the on-device digitiser loaded. Else the backend stays the photo path.
+  function ondevicePreferred() { return ondeviceFlag() && _ondeviceReady && !!digitizer() && !!ortAnalyzer(); }
   // Async: is the analysis pack cached on-device? Sets _ondeviceReady + forces the assembly to rebuild.
   function checkModels() {
     var mgr = modelMgr();
@@ -195,6 +215,7 @@
   // honest "unavailable" analyzer — the mock is NEVER a silent fallback (it faked a fixed AFib).
   function chooseAnalyzer(opts) {
     if (demoFlag()) return mockAnalyzer();
+    if (ondevicePreferred()) return ortAnalyzer();     // full offline photo→dx (opt-in + pack installed)
     var real = ((opts.remote || useRemote()) && remoteAnalyzer()) || ortAnalyzer();
     return real || unavailableAnalyzer();
   }
