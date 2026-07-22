@@ -288,6 +288,7 @@
       var strip = R && R.rhythmLeadSignal ? R.rhythmLeadSignal(recon) : null;
       if (strip) rp = rpeaks(strip, recon.fs);      // rate/rhythm from the continuous 10s strip only
       var rhy = rhythmReadout(rp);
+      try { console.log("KXDBG rpeaks: rhythmLead", recon.rhythmLead, "| strip samples", strip ? strip.length : 0, "| bpm", rp.bpm, "| beats~", rp.rrMs ? rp.rrMs.length + 1 : 0, "| reg", rp.regularity, "| unreliable", !!(rhy && rhy.unreliable)); } catch (_) {}
 
       // Axis from the limb-lead cells (gain-independent). Advisory — the ONLY morphology we trust from a
       // classical digitiser; ST-segment / QRS-width / conduction are NOT computed (amplitude + delineation
@@ -321,7 +322,7 @@
         findings: findings, differentials: [],
         clinicalInterpretation: "Layout " + recon.layout + " (partial): the 12-lead neural ensemble was NOT run (no continuous 10 s x 12). " +
           (rhyOk ? ("Rhythm from the lead-II strip: " + rhy.verdict.toLowerCase() + ". ")
-            : rhyUnclear ? "A rhythm strip is present but R-peak detection was unreliable (image quality / grid noise), so rate + rhythm are NOT reported — read the strip directly. "
+            : rhyUnclear ? ("A rhythm strip is present but R-peak detection was unreliable (detected ~" + (rp.rrMs ? rp.rrMs.length + 1 : 0) + " beats" + (rp.bpm != null ? ", ~" + rp.bpm + " bpm" : "") + " — image quality / grid noise), so rate + rhythm are NOT reported — read the strip directly. ")
             : (strip ? "" : "No continuous rhythm strip. ")) +
           (axisCat ? ("Limb-lead QRS axis: " + axisCat + (axisDeg != null ? " (~" + Math.round(axisDeg) + "°)" : "") + ". ") : "") +
           deferNote + " Decision support only — clinician review required.",

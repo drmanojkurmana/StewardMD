@@ -131,7 +131,7 @@
     opts = opts || {};
     if (!labelMap || labelMap.length !== W * H) return null;
     var regionsByLead = {}, gxmin = W, gxmax = -1, c, n, i, k, regs;
-    var nWide = 0, wideLead = null, wideW = 0;
+    var nWide = 0, wideRegions = [];
     for (c = 1; c <= 12; c++) {
       regs = classRegions(labelMap, W, H, c);
       if (!regs.length) continue;
@@ -140,7 +140,7 @@
       for (i = 0; i < regs.length; i++) {
         if (regs[i].xmin < gxmin) gxmin = regs[i].xmin;
         if (regs[i].xmax > gxmax) gxmax = regs[i].xmax;
-        if (regs[i].widthFrac > 0.7) { hasWide = true; if (regs[i].width > wideW) { wideW = regs[i].width; wideLead = LABELS[c]; } }
+        if (regs[i].widthFrac > 0.7) { hasWide = true; wideRegions.push({ lead: LABELS[c], yc: (regs[i].y0 + regs[i].y1) / 2 }); }
       }
       if (hasWide) nWide++;
     }
@@ -153,14 +153,19 @@
       for (i = 0; i < names.length; i++) { n = names[i]; leads[n] = { mv: traceToMv(widest(regionsByLead[n]).trace, pxPerMm, Math.round(10 * FS)), fs: FS }; }
       rhythmLead = leads["II"] ? "II" : null;
     } else {
-      layout = "3x4"; rhythmLead = wideLead || "II";                          // 2.5s cells + lead-II strip
+      // 3x4: the rhythm strip is the BOTTOM-MOST full-width region (a real strip sits BELOW the grid rows).
+      // Picking the globally-widest region mislabelled a wide grid cell as the strip (e.g. rhythm=V1). If no
+      // wide region is low enough, this printout has NO continuous rhythm strip (pure 3x4, ~2.5s per lead).
+      layout = "3x4";
+      var bottom = null; for (i = 0; i < wideRegions.length; i++) { if (!bottom || wideRegions[i].yc > bottom.yc) bottom = wideRegions[i]; }
+      rhythmLead = (bottom && bottom.yc > H * 0.55) ? bottom.lead : null;
       for (i = 0; i < names.length; i++) {
         n = names[i]; regs = regionsByLead[n];
-        var strip = null, cell = null;
-        for (k = 0; k < regs.length; k++) { if (regs[k].widthFrac > 0.7) strip = regs[k]; else cell = regs[k]; }
-        if (n === rhythmLead && strip) leads[n] = { mv: traceToMv(strip.trace, pxPerMm, Math.round(10 * FS)), fs: FS };
+        var stripReg = null, cell = null;
+        for (k = 0; k < regs.length; k++) { if (regs[k].widthFrac > 0.7) stripReg = regs[k]; else cell = regs[k]; }
+        if (n === rhythmLead && stripReg) leads[n] = { mv: traceToMv(stripReg.trace, pxPerMm, Math.round(10 * FS)), fs: FS };
         else if (cell) leads[n] = { mv: traceToMv(cell.trace, pxPerMm, Math.round(2.5 * FS)), fs: FS };
-        else if (strip) leads[n] = { mv: traceToMv(strip.trace, pxPerMm, Math.round(10 * FS)), fs: FS };
+        else if (stripReg) leads[n] = { mv: traceToMv(stripReg.trace, pxPerMm, Math.round(2.5 * FS)), fs: FS };  // wide but not the bottom strip → treat as a 2.5s cell
       }
     }
     if (Object.keys(leads).length < 3) return null;
