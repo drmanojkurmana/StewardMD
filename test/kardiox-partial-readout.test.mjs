@@ -39,8 +39,8 @@ ok("severity stays info for a normal regular rhythm", a1.severity === "info");
 // 2) irregular strip → AF suspicion, warn
 const irr = [Math.round(0.55 * FS), Math.round(0.95 * FS), Math.round(0.7 * FS), Math.round(1.1 * FS)];
 const a2 = await analyzer.analyzePaper(build3x4(irr, 0.8));
-ok("irregular 3x4 → considers atrial fibrillation", /atrial fibrillation|irregular/i.test(a2.verdict));
-ok("irregular → severity warn", a2.severity === "warn");
+ok("irregular 3x4 → reports irregular R-R but DEFERS AF (no confident AF from a photo)", /irregular/i.test(a2.verdict) && !/consider atrial fibrillation/i.test(a2.verdict) && !/^atrial fibrillation/i.test(a2.verdict));
+ok("irregular → NOT urgent/warn (photo rhythm is unreliable)", a2.severity === "info");
 ok("irregular still no fabricated ST finding", !a2.findings.some(f => /ST|elevation/i.test(f.title)));
 
 console.log(`kardiox-partial-readout: ${pass} passed, ${fail} failed`);

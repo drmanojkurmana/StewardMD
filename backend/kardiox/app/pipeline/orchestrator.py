@@ -229,10 +229,18 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                     _rl = (traces or {}).get("rhythmLead") or "II"
                     _strip = ((_leads.get(_rl) or _leads.get("II") or {}).get("mv"))
                     _fs = int((_leads.get(_rl) or _leads.get("II") or {}).get("fs") or 500)
-                    ensemble_dx = _ensemble.classify_rhythm_strip(_strip, fs=_fs) or []
-                    if ensemble_dx:
-                        availability = "Rhythm-strip AF screen (single-lead HeartGPT) applied. " + availability
-                        trace.append({"stage": "stripAf", "status": "done", "n": len(ensemble_dx)})
+                    _strip_af = _ensemble.classify_rhythm_strip(_strip, fs=_fs) or []
+                    # SAFETY: a DIGITISED photo strip is too unreliable for a CONFIDENT AF diagnosis — the
+                    # noisy trace yields false-irregular R-R (and a single-lead HeartGPT probe then fires
+                    # false AF on a regular ECG). So the strip AF screen is ADVISORY ONLY: it never becomes
+                    # the confident 'urgent AFib' verdict; it only adds a "possible AF — confirm" note. The
+                    # primary verdict stays the descriptive rhythm. Confident AF needs a real/learned trace.
+                    ensemble_dx = []
+                    if _strip_af:
+                        availability = ("A single-lead AF screen flagged POSSIBLE atrial fibrillation, but AF "
+                                        "cannot be reliably confirmed from a digitised photo — confirm on the "
+                                        "original ECG. ") + availability
+                        trace.append({"stage": "stripAf", "status": "advisory-only", "n": len(_strip_af)})
                 except Exception as e:  # noqa: BLE001 — never break the deferral path
                     log.info("stripAf.isolated", reason=type(e).__name__)
             else:

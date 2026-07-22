@@ -270,7 +270,10 @@
       var rr = rp.rrMs || [];
       if (rp.bpm < 30 || rp.bpm > 180 || rr.length < 4) return { unreliable: true };
       var bpm = rp.bpm, reg = rp.regularity, v, sev = "info", detail;
-      if (reg === "irregular") { v = "Irregular rhythm, ~" + bpm + " bpm — consider atrial fibrillation"; sev = "warn"; detail = "Irregularly irregular R-R on the lead-II rhythm strip; confirm P-wave status on the full trace."; }
+      // A DIGITISED photo strip is too unreliable to CONFIRM AF: digitisation noise mimics irregular R-R,
+      // so a regular ECG can read as "irregular". Report the observation + explicitly defer AF to the
+      // clinician's read of the original trace — NEVER a confident/urgent AF from a photo.
+      if (reg === "irregular") { v = "Irregular R-R, ~" + bpm + " bpm — rhythm not confirmable from a photo (read the trace)"; sev = "info"; detail = "R-R appeared irregular on the digitised strip, but digitisation noise can mimic irregularity — atrial fibrillation cannot be confirmed from an image; confirm the rhythm on the original ECG."; }
       else if (bpm < 50) { v = "Marked bradycardia, ~" + bpm + " bpm"; sev = "warn"; }
       else if (bpm < 60) { v = "Bradycardia, ~" + bpm + " bpm"; sev = "info"; }
       else if (bpm > 120) { v = "Tachycardia, ~" + bpm + " bpm"; sev = "warn"; }
