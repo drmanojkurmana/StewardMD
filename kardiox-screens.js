@@ -2532,7 +2532,15 @@
       try { if (P.ecgStore && P.ecgStore.save) P.ecgStore.save(a); } catch (e) {}
       go("report"); haptic("success");
       if (a && (a.severity === "urgent" || a.severity === "critical")) haptic("warning");
-    }).catch(function () { state.running = false; toast("Couldn't read this ECG. Retake with all 12 leads flat in frame."); show("source"); });
+    }).catch(function (e) {
+      state.running = false;
+      try { console.log("KXDBG runPipeline failed:", e && e.code, "|", e && e.stage, "|", e && e.message); } catch (_) {}
+      // Surface the REAL failure (code/stage/message) instead of a generic message — needed to diagnose the
+      // on-device path; also more honest than "retake" when the cause is e.g. the analysis pack or the runtime.
+      var detail = e && (e.message || e.code) ? ((e.code ? "[" + e.code + "] " : "") + (e.message || "")) : "";
+      toast(detail ? ("ECG analysis failed: " + detail).slice(0, 180) : "Couldn't read this ECG. Retake with all 12 leads flat in frame.");
+      show("source");
+    });
   }
   function openStored(id) {
     var P = providers();

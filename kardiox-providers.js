@@ -235,12 +235,16 @@
         if (!blob) { var e = new Error("no image for on-device digitiser"); e.code = "needs_signal"; return Promise.reject(e); }
         stage("digitization", 15);
         // download the model to Documents on first use (118 MB, one time), then segment
+        try { console.log("KXDBG learned.analyze start; blob?", !!blob); } catch (_) {}
         return LEARNED.prepare().then(function (prep) {
+          try { console.log("KXDBG prepared:", prep && prep.ready, prep && prep.path); } catch (_) {}
           stage("digitization", 45);
           return LEARNED.segmentBlob(blob, prep && prep.path);
         }).then(function (seg) {
+          try { console.log("KXDBG segmented: W", seg && seg.W, "H", seg && seg.H, "len", seg && seg.labelMap && seg.labelMap.length); } catch (_) {}
           stage("signalExtraction", 65);
           var sum = LEARNED.summarize(LEARNED.labelMapToLeadTraces(seg.labelMap, seg.W, seg.H));
+          try { console.log("KXDBG summarize:", sum.leadsDetected, "leads; strip?", sum.hasRhythmStrip); } catch (_) {}
           // honest fallback: the model segmented leads but a diagnosable signal couldn't be rebuilt.
           function segCard() {
             stage("report", 100);
@@ -261,15 +265,18 @@
             return models ? models.makeAnalysis(raw) : raw;
           }
           var digitized = null;
-          try { digitized = LEARNED.segmentToDigitized(seg.labelMap, seg.W, seg.H); } catch (e2) {}
+          try { digitized = LEARNED.segmentToDigitized(seg.labelMap, seg.W, seg.H); } catch (e2) { try { console.log("KXDBG segmentToDigitized threw:", e2 && e2.message); } catch (_) {} }
           var base = ortPaperBase();
+          try { console.log("KXDBG digitized:", digitized ? (digitized.layout + " / " + Object.keys(digitized.leads).length + " leads / rhythm=" + digitized.rhythmLead) : "null", "| base?", !!base); } catch (_) {}
           if (digitized && base && base.analyzePaper) {
             digitized.id = (image && image.id) ? String(image.id) : "";
             return paperTimeout(base.analyzePaper(digitized, onStage), 60000).then(function (a) {
+              try { console.log("KXDBG analyzePaper OK:", a && a.verdict); } catch (_) {}
               try { a.segmentation = { detected: sum.leadsDetected, total: 12, leads: sum.leads, hasRhythmStrip: sum.hasRhythmStrip }; } catch (e3) {}
               return a;
-            }).catch(function () { return segCard(); });
+            }).catch(function (ap) { try { console.log("KXDBG analyzePaper FAILED → segCard:", ap && ap.code, "|", ap && ap.stage, "|", ap && ap.message); } catch (_) {} return segCard(); });
           }
+          try { console.log("KXDBG → segCard (no digitized or no base)"); } catch (_) {}
           return segCard();
         });
       }
