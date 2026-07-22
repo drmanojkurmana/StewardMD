@@ -76,26 +76,33 @@
     return null;
   }
 
-  // Count contiguous horizontal trace bands → layout; detect a full-width bottom rhythm strip.
+  // Detect the print layout from contiguous horizontal trace bands + a full-width bottom rhythm strip.
+  // The raw row-ink profile is SMOOTHED first: a lead row's tall QRS spikes + thin baseline otherwise
+  // fragment into 8-9 false bands, so a real 3x4 was mis-read as "12x1" (which then wrongly routed into
+  // the 12-lead ensemble). H/60 smoothing keeps genuinely-separate rows distinct while merging intra-row
+  // fragmentation — validated on real 3x4 photos (→4 bands: 3 rows + strip) and synthetic 12x1 (→12).
   function detectLayout(ink, W, H) {
-    var rowink = new Float64Array(H), y, x, mean = 0;
-    for (y = 0; y < H; y++) { var s = 0; for (x = 0; x < W; x++) s += ink[y * W + x]; rowink[y] = s / W; mean += rowink[y]; }
-    mean /= H; var thr = Math.max(mean * 0.5, 0.002);
+    var raw = new Float64Array(H), y, x;
+    for (y = 0; y < H; y++) { var s = 0; for (x = 0; x < W; x++) s += ink[y * W + x]; raw[y] = s / W; }
+    var win = Math.max(2, Math.round(H / 60)), rowink = new Float64Array(H), mx = 0;
+    for (y = 0; y < H; y++) { var a = 0, n = 0; for (var k = -win; k <= win; k++) { var j = y + k; if (j >= 0 && j < H) { a += raw[j]; n++; } } rowink[y] = a / n; if (rowink[y] > mx) mx = rowink[y]; }
+    if (mx <= 0) return { layout: "12x1", rows: 0, hasRhythmStrip: false };
+    var thr = mx * 0.3, minH = H * 0.025;
     var bands = [], inb = false, start = 0;
     for (y = 0; y < H; y++) {
       if (rowink[y] > thr && !inb) { inb = true; start = y; }
-      else if (rowink[y] <= thr && inb) { inb = false; if (y - start > H * 0.02) bands.push([start, y]); }
+      else if (rowink[y] <= thr && inb) { inb = false; if (y - start >= minH) bands.push([start, y]); }
     }
-    if (inb) bands.push([start, H]);
+    if (inb && H - start >= minH) bands.push([start, H]);
     var nb = bands.length, hasStrip = false;
-    if (nb) {
+    if (nb >= 4) {
       var b = bands[nb - 1], cov = 0;
       for (x = 0; x < W; x++) { var c = 0; for (y = b[0]; y < b[1]; y++) c += ink[y * W + x]; if (c / (b[1] - b[0]) > 0.01) cov++; }
-      hasStrip = (cov / W) > 0.85 && (nb === 4 || nb === 7 || nb === 13);
+      hasStrip = (cov / W) > 0.6 && (nb === 4 || nb === 7 || nb === 13);
     }
     var rows = nb - (hasStrip ? 1 : 0), layout;
     if (rows >= 10) layout = "12x1"; else if (rows === 6) layout = "6x2"; else if (rows === 3) layout = "3x4";
-    else layout = rows > 6 ? "12x1" : (rows >= 5 ? "6x2" : "3x4");
+    else layout = rows > 6 ? "12x1" : (rows >= 4 ? "6x2" : "3x4");
     return { layout: layout, rows: rows, hasRhythmStrip: hasStrip };
   }
 

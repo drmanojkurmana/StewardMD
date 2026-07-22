@@ -58,18 +58,22 @@ for (const L of ["I", "II", "III", "aVR", "V1", "V3", "V6"]) {
 }
 ok("recovered waveforms track the drawn signal (|corr|>0.8 for 7/7 leads)", good === 7);
 
-// 3x4 + rhythm strip: 3 trace rows + a full-width bottom strip → layout 3x4. Traces are continuous
-// (vertical spread → contiguous row-bands) at 2px thickness (mimics anti-aliased rendered ECG lines).
-function ink3(gray, W, H, px, y) { for (let t = -2; t <= 2; t++) { const yy = y + t; if (yy >= 0 && yy < H) gray[yy * W + px] = 0; } }
+// 3x4 + rhythm strip: 3 trace rows + a full-width bottom strip → layout 3x4. Rows are drawn like a REAL
+// ECG (dense flat baseline + periodic QRS spikes) so the smoothed row-ink profile shows a clear band per
+// row — matching how the layout detector reads real photos (an unrealistic dense sine does not).
+function drawRow(gray, W, H, x0, w, cy, amp, beats) {
+  for (let x = 0; x < w; x++) {
+    const ph = (x / w * beats) % 1; let dy = 0;
+    if (ph > 0.45 && ph < 0.5) dy = -amp; else if (ph >= 0.5 && ph < 0.54) dy = amp * 0.4;
+    const y = Math.round(cy + dy);
+    for (let t = -1; t <= 1; t++) { const yy = y + t; if (x0 + x < W && yy >= 0 && yy < H) gray[yy * W + (x0 + x)] = 0; }
+  }
+}
 function render3x4(W, H) {
   const gray = new Uint8Array(W * H).fill(255);
   const rowH = Math.floor(H * 0.78 / 3), cellW = Math.floor(W / 4);
-  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) {
-    const cy = r * rowH + rowH / 2, amp = rowH * 0.28;
-    for (let x = 0; x < cellW; x++) ink3(gray, W, H, c * cellW + x, Math.round(cy + amp * Math.sin(2 * Math.PI * 3 * x / cellW)));
-  }
-  const sy = Math.floor(H * 0.89);   // full-width rhythm strip in the bottom band
-  for (let x = 0; x < W; x++) ink3(gray, W, H, x, Math.round(sy + 20 * Math.sin(2 * Math.PI * 8 * x / W)));
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) drawRow(gray, W, H, c * cellW, cellW, r * rowH + rowH / 2, rowH * 0.30, 4);
+  drawRow(gray, W, H, 0, W, Math.floor(H * 0.89), 40, 10);   // full-width rhythm strip
   return { data: gray, width: W, height: H };
 }
 const r34 = D.digitizeImageData(render3x4(W, H));

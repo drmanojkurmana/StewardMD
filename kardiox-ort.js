@@ -262,8 +262,13 @@
       return up + dn;
     }
     // Rhythm read-out from the continuous lead-II strip (TIMING only — reliable regardless of amplitude).
+    // Plausibility-gated: a digitised paper strip whose R-peak detection yields an implausible rate
+    // (< 30 or > 180 bpm) or too few clean beats is a digitisation ARTIFACT (grid/noise → false peaks) —
+    // we DEFER rather than report a false tachycardia / AF. { unreliable:true } → honest "unclear".
     function rhythmReadout(rp) {
       if (rp.bpm == null) return null;
+      var rr = rp.rrMs || [];
+      if (rp.bpm < 30 || rp.bpm > 180 || rr.length < 4) return { unreliable: true };
       var bpm = rp.bpm, reg = rp.regularity, v, sev = "info", detail;
       if (reg === "irregular") { v = "Irregular rhythm, ~" + bpm + " bpm — consider atrial fibrillation"; sev = "warn"; detail = "Irregularly irregular R-R on the lead-II rhythm strip; confirm P-wave status on the full trace."; }
       else if (bpm < 50) { v = "Marked bradycardia, ~" + bpm + " bpm"; sev = "warn"; }
@@ -293,22 +298,25 @@
         if (!isFinite(axisDeg)) { axisDeg = null; axisCat = null; }
       }
 
+      var rhyOk = rhy && !rhy.unreliable, rhyUnclear = rhy && rhy.unreliable;
       var findings = [];
-      if (rhy) findings.push({ id: "rhy0", title: rhy.verdict, detail: rhy.detail, matched: true, weight: rhy.severity === "warn" ? 0.5 : 0.3, severity: rhy.severity, evidence: [] });
+      if (rhyOk) findings.push({ id: "rhy0", title: rhy.verdict, detail: rhy.detail, matched: true, weight: rhy.severity === "warn" ? 0.5 : 0.3, severity: rhy.severity, evidence: [] });
       if (axisCat) findings.push({ id: "axis0", title: "QRS axis: " + axisCat + (axisDeg != null ? " (~" + Math.round(axisDeg) + "°)" : ""), detail: "From limb-lead net QRS direction (I vs aVF). Advisory — direction is gain-independent; confirm on the trace.", matched: true, weight: 0.2, severity: "info", evidence: [] });
 
       stage(onStage, "report", 100);
       var deferNote = "ST-segment, QRS-width and conduction (BBB) analysis were NOT computed: a " + recon.layout +
         " printout gives only ~2.5 s per lead and the classical digitiser does not recover calibration-grade amplitudes, so those would be unreliable (a clearer 12x1 trace or the learned digitiser is required).";
+      var verdict = rhyOk ? rhy.verdict : (rhyUnclear ? "Rhythm not reliably measurable from this image" : "Insufficient lead coverage for AI analysis");
       var raw = {
         id: (digitized && digitized.id) ? String(digitized.id) : "",
-        verdict: rhy ? rhy.verdict : "Insufficient lead coverage for AI analysis",
-        severity: rhy ? rhy.severity : "info", confidence: recon.confidence.overall, engine: "ecglib-ensemble-1.1.0+reconstruct",
-        measurements: { ventRateBpm: rp.bpm, rhythm: rp.regularity === "irregular" ? "Irregular" : (rp.regularity === "regular" ? "Regular" : "-"),
+        verdict: verdict, severity: rhyOk ? rhy.severity : "info", confidence: recon.confidence.overall, engine: "ecglib-ensemble-1.1.0+reconstruct",
+        measurements: { ventRateBpm: rhyOk ? rp.bpm : null, rhythm: rhyOk ? (rp.regularity === "irregular" ? "Irregular" : "Regular") : "-",
                         prMs: null, qrsMs: null, qtcMs: null, axisDeg: axisDeg != null ? Math.round(axisDeg) : null },
         findings: findings, differentials: [],
         clinicalInterpretation: "Layout " + recon.layout + " (partial): the 12-lead neural ensemble was NOT run (no continuous 10 s x 12). " +
-          (rhy ? ("Rhythm from the lead-II strip: " + rhy.verdict.toLowerCase() + ". ") : (strip ? "" : "No continuous rhythm strip. ")) +
+          (rhyOk ? ("Rhythm from the lead-II strip: " + rhy.verdict.toLowerCase() + ". ")
+            : rhyUnclear ? "A rhythm strip is present but R-peak detection was unreliable (image quality / grid noise), so rate + rhythm are NOT reported — read the strip directly. "
+            : (strip ? "" : "No continuous rhythm strip. ")) +
           (axisCat ? ("Limb-lead QRS axis: " + axisCat + (axisDeg != null ? " (~" + Math.round(axisDeg) + "°)" : "") + ". ") : "") +
           deferNote + " Decision support only — clinician review required.",
         whatToVerify: [(recon.warnings || []).join(" "), "Rhythm read from lead II only; confirm P-waves + the full 12-lead. Morphology/ST NOT assessed — read the trace directly."].filter(Boolean).join(" "),

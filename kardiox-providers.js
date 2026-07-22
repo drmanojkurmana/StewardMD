@@ -163,14 +163,25 @@
       // Photos are digitised ON-DEVICE (kardiox-digitize.js) → reconstruction layer → analyzePaper
       // (full 12x1 → ensemble; partial → honest deferral). A pre-digitised signal skips straight to the
       // ensemble. Without a digitiser or blob, base.analyze() raises needs_signal (never fabricates).
+      // Never let on-device inference hang the UI: race every run against a timeout (ort-web WASM on a
+      // true 12x1 can be slow; a stall must surface as a typed error, not a frozen "100%" screen).
+      function withTimeout(p, ms) {
+        return new Promise(function (resolve, reject) {
+          var done = false, t = setTimeout(function () { if (!done) { var e = new Error("On-device analysis timed out — the model may be too slow on this device."); e.code = "ondevice_timeout"; e.stage = "analysis"; reject(e); } }, ms);
+          Promise.resolve(p).then(function (v) { done = true; clearTimeout(t); resolve(v); }, function (er) { done = true; clearTimeout(t); reject(er); });
+        });
+      }
       return {
         kind: "ondevice",
         analyze: function (image, onStage) {
-          if (image && image.signal) return base.analyze(image, onStage);
-          var blob = image && (image.data || ((typeof Blob !== "undefined" && image instanceof Blob) ? image : null));
-          if (DIG && blob) return Promise.resolve(DIG.digitize(blob))
-            .then(function (dig) { return base.analyzePaper(Object.assign({ id: image && image.id }, dig), onStage); });
-          return base.analyze(image, onStage);
+          var run;
+          if (image && image.signal) run = base.analyze(image, onStage);
+          else {
+            var blob = image && (image.data || ((typeof Blob !== "undefined" && image instanceof Blob) ? image : null));
+            run = (DIG && blob) ? Promise.resolve(DIG.digitize(blob)).then(function (dig) { return base.analyzePaper(Object.assign({ id: image && image.id }, dig), onStage); })
+              : base.analyze(image, onStage);
+          }
+          return withTimeout(run, 60000);
         }
       };
     } catch (e) {}

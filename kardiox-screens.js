@@ -267,8 +267,10 @@
       return '<span class="material-symbols-rounded ' + (cls || '') + '" aria-hidden="true">' + name + '</span>';
     }
     function row(i, stateCls, glyph){
+      // NOTE: the icon span MUST carry `material-symbols-rounded` or the glyph ligature ("check_circle")
+      // renders as literal text (the .kx-proc-step-ico rule only sets size/colour, not the icon font).
       return '<li class="kx-proc-step ' + stateCls + '">' +
-               '<span class="kx-proc-step-ico" data-ico>' + glyph + '</span>' +
+               '<span class="kx-proc-step-ico material-symbols-rounded" data-ico aria-hidden="true">' + glyph + '</span>' +
                '<span class="kx-proc-step-label">' + STEPS[i].label + '</span>' +
              '</li>';
     }
