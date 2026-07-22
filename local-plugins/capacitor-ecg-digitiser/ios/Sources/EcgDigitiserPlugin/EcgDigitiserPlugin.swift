@@ -21,8 +21,16 @@ public class EcgDigitiserPlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "EcgDigitiser"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "available", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "prepare", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "segment", returnType: CAPPluginReturnPromise)
     ]
+
+    // The model is DOWNLOADED to the app's Documents (not bundled — Xcode's Core ML build rule drops
+    // .mlpackage from the app bundle). This is the .mlpackage dir the plugin compiles + loads from.
+    private func docsModelDir() -> URL {
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return docs.appendingPathComponent("ECGDigitiser.mlpackage")
+    }
 
     // model input dimensions [H, W] — reduced from the trained 1024x1280 (both must be multiples of 256,
     // the nnU-Net downsample) to fit the phone's app memory limit; full res OOM-killed the app (jetsam).
@@ -58,7 +66,47 @@ public class EcgDigitiserPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func available(_ call: CAPPluginCall) {
-        call.resolve(["ready": EcgDigitiserPlugin.model != nil])
+        // ready = the model has been downloaded to Documents (weight.bin present)
+        let w = docsModelDir().appendingPathComponent("Data/com.apple.CoreML/weights/weight.bin")
+        let ready = FileManager.default.fileExists(atPath: w.path)
+        call.resolve(["ready": ready, "path": docsModelDir().path])
+    }
+
+    // Download the .mlpackage (3 files, preserving structure) to Documents. Skips files already present.
+    // Native URLSession (the 118 MB weight is too big to shuttle through the JS bridge as base64).
+    @objc func prepare(_ call: CAPPluginCall) {
+        guard let baseUrl = call.getString("baseUrl"), !baseUrl.isEmpty else { call.reject("missing baseUrl"); return }
+        let files = ["Manifest.json", "Data/com.apple.CoreML/model.mlmodel", "Data/com.apple.CoreML/weights/weight.bin"]
+        let dest = docsModelDir(), fm = FileManager.default
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                for rel in files {
+                    let out = dest.appendingPathComponent(rel)
+                    if let attrs = try? fm.attributesOfItem(atPath: out.path), (attrs[.size] as? Int ?? 0) > 0 { continue }
+                    try fm.createDirectory(at: out.deletingLastPathComponent(), withIntermediateDirectories: true)
+                    guard let url = URL(string: baseUrl + "/" + rel) else {
+                        throw NSError(domain: "ecg", code: 10, userInfo: [NSLocalizedDescriptionKey: "bad url for \(rel)"])
+                    }
+                    let sem = DispatchSemaphore(value: 0)
+                    var dlErr: Error?
+                    let task = URLSession.shared.downloadTask(with: url) { (loc, resp, err) in
+                        defer { sem.signal() }
+                        if let err = err { dlErr = err; return }
+                        let code = (resp as? HTTPURLResponse)?.statusCode ?? 0
+                        guard code == 200, let loc = loc else {
+                            dlErr = NSError(domain: "ecg", code: code, userInfo: [NSLocalizedDescriptionKey: "HTTP \(code) for \(rel)"]); return
+                        }
+                        do { if fm.fileExists(atPath: out.path) { try fm.removeItem(at: out) }; try fm.moveItem(at: loc, to: out) }
+                        catch { dlErr = error }
+                    }
+                    task.resume(); sem.wait()
+                    if let e = dlErr { throw e }
+                }
+                DispatchQueue.main.async { call.resolve(["path": dest.path, "ready": true]) }
+            } catch {
+                DispatchQueue.main.async { call.reject("prepare failed: \(error.localizedDescription)") }
+            }
+        }
     }
 
     @objc func segment(_ call: CAPPluginCall) {

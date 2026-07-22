@@ -208,8 +208,12 @@
         var stage = function (n, p) { try { if (onStage) onStage(n, p); } catch (e) {} };
         var blob = image && (image.data || ((typeof Blob !== "undefined" && image instanceof Blob) ? image : null));
         if (!blob) { var e = new Error("no image for on-device digitiser"); e.code = "needs_signal"; return Promise.reject(e); }
-        stage("digitization", 30);
-        return LEARNED.segmentBlob(blob).then(function (seg) {
+        stage("digitization", 15);
+        // download the model to Documents on first use (118 MB, one time), then segment
+        return LEARNED.prepare().then(function (prep) {
+          stage("digitization", 45);
+          return LEARNED.segmentBlob(blob, prep && prep.path);
+        }).then(function (seg) {
           stage("signalExtraction", 70);
           var traces = LEARNED.labelMapToLeadTraces(seg.labelMap, seg.W, seg.H);
           var sum = LEARNED.summarize(traces);

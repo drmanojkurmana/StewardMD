@@ -95,11 +95,24 @@
   function b64ToU8(b64) { var bin = (typeof atob !== "undefined") ? atob(b64) : Buffer.from(b64, "base64").toString("binary"); var u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; }
   function blobToB64(blob) { return new Promise(function (res, rej) { var r = new FileReader(); r.onloadend = function () { res(String(r.result)); }; r.onerror = rej; r.readAsDataURL(blob); }); }
 
-  // Run the on-device Core ML segmenter on an image blob → { labelMap:Uint8, W, H }.
+  // Is the model downloaded on-device yet?
+  function modelReady() {
+    var P = plugin(); if (!P || !P.available) return Promise.resolve(false);
+    return Promise.resolve(P.available()).then(function (r) { return !!(r && r.ready); }).catch(function () { return false; });
+  }
+  // Download the .mlpackage (3 files) to the app's Documents on first use → returns { path, ready }.
+  function prepare() {
+    var P = plugin(); if (!P || !P.prepare) return Promise.reject(new Error("EcgDigitiser plugin not available"));
+    return Promise.resolve(P.prepare({ baseUrl: HOST + "/mlpkg" }));
+  }
+
+  // Run the on-device Core ML segmenter on an image blob → { labelMap:Uint8, W, H }. `modelPath` = the
+  // downloaded .mlpackage path (from prepare()); required (the model is NOT bundled).
   function segmentBlob(blob, modelPath) {
     var P = plugin(); if (!P) return Promise.reject(new Error("EcgDigitiser plugin not available"));
+    if (!modelPath) return Promise.reject(new Error("model not prepared (call prepare() first)"));
     return blobToB64(blob).then(function (b64) {
-      return P.segment({ base64Image: b64, modelPath: modelPath || "ECGDigitiser.mlpackage" });
+      return P.segment({ base64Image: b64, modelPath: modelPath });
     }).then(function (r) {
       if (!r || !r.labelMap) throw new Error("segment returned no labelMap");
       return { labelMap: b64ToU8(r.labelMap), W: r.width || PATCH_W, H: r.height || PATCH_H };
@@ -114,7 +127,7 @@
   }
 
   var API = { preprocess: preprocess, labelMapToLeadTraces: labelMapToLeadTraces, digitize: digitize,
-              available: available, segmentBlob: segmentBlob, summarize: summarize,
+              available: available, modelReady: modelReady, prepare: prepare, segmentBlob: segmentBlob, summarize: summarize,
               LABELS: LABELS, PATCH_H: PATCH_H, PATCH_W: PATCH_W, HOST: HOST, MODEL_FILE: MODEL_FILE,
               _diag: { toGray: toGray, resizeGray: resizeGray } };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
