@@ -178,16 +178,16 @@ private struct HomeHeader: View {
     @EnvironmentObject private var session: WatchSessionStore
 
     var body: some View {
-        // Doctor's name on top (falls back to the app wordmark when not bridged);
-        // hospital below (row hidden when absent). Replaces the old "On call · Ward 7".
-        let name = session.session.doctorName?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let hospital = session.session.hospital?.trimmingCharacters(in: .whitespacesAndNewlines)
+        // StewardMD wordmark on top; the signed-in doctor's name below it. The module
+        // menu (RootRow list) scrolls below this header.
+        let raw = session.session.doctorName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let doctor = raw.isEmpty ? "" : (raw.lowercased().hasPrefix("dr") ? raw : "Dr. " + raw)
         VStack(alignment: .leading, spacing: 2) {
-            Text(name?.isEmpty == false ? name! : "StewardMD")
+            Text("StewardMD")
                 .font(.system(.headline, design: .rounded)).bold()
                 .foregroundStyle(SMDPalette.accent.color)
-            if let hospital, !hospital.isEmpty {
-                Text(hospital)
+            if !doctor.isEmpty {
+                Text(doctor)
                     .font(.caption2)
                     .foregroundStyle(SMDPalette.text2.color)
             }

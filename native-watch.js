@@ -476,9 +476,10 @@
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
       var cen = census(wl.length); if (cen) payload.glance = cen;
-      // W2: doctor name + hospital for the watch home header (optional; backward-compatible).
+      // W2: doctor's name for the watch home header (below the StewardMD wordmark).
+      // NOTE: don't send HOSPITAL.current() — that's the antibiogram data source (e.g. "ICMR"),
+      // not the doctor's hospital, so it would mislabel the watch. Name only.
       try { var dn = (u.displayName || "").trim(); if (dn) payload.doctorName = dn; } catch (e) {}
-      try { if (window.HOSPITAL && HOSPITAL.current) { var hc = HOSPITAL.current() || {}; if (hc.name) payload.hospital = hc.name; } } catch (e) {}
       await p.publish(payload);
       markSynced();
       return true;
