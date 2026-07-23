@@ -494,6 +494,15 @@
   // Manual sync from the Settings → Apple Watch page always runs (ignores the
   // auto-sync toggle). Returns a promise resolving to whether it succeeded.
   window.SMD_APPLE_WATCH_SYNC = function () { return publish(); };
+
+  // The signed-in doctor's most-senior clinical role across their units, for role-aware UI
+  // (e.g. Notification preferences locks task / critical-value alerts ON for JR/interns).
+  // Reuses roleForRelay() over the live ICU-group subscription; null when the user is in no
+  // unit yet (unrestricted). isRestricted() = a junior resident or intern anywhere.
+  window.SMD_ROLE = {
+    seniorMost: function () { return roleForRelay(); },
+    isRestricted: function () { var r = roleForRelay(); return r === "junior_resident" || r === "intern"; }
+  };
   // Auto-triggered sync respects the toggle and battery-optimization throttle
   // (min 2h between background syncs when low-power is on).
   function autoPublish() {
