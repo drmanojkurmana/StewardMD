@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        smdConsumePendingControlRoute()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -133,4 +134,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, continue: userActivity, restorationHandler: { _ in })
     }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        smdConsumePendingControlRoute()
+    }
+}
+
+// Control Center / Action-button Controls (iOS 18) launch the app after their AppIntent stashes a
+// deep-link route in the shared App Group. On activation we replay it as a stewardmd:// open through
+// Capacitor's proxy — the exact path a widgetURL tap uses — so the web layer routes it normally.
+private func smdConsumePendingControlRoute() {
+    let suite = "group.in.stewardmd.app"
+    guard let d = UserDefaults(suiteName: suite),
+          let route = d.string(forKey: "smd.pendingControlRoute"), !route.isEmpty else { return }
+    d.removeObject(forKey: "smd.pendingControlRoute")
+    guard let url = URL(string: "stewardmd://" + route) else { return }
+    _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
 }

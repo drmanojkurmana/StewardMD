@@ -4,6 +4,9 @@ import StewardMDWatchCore
 #if canImport(WatchConnectivity)
 import WatchConnectivity
 #endif
+#if canImport(ActivityKit)
+import ActivityKit
+#endif
 
 /// Phone-side live mirror of the watch Code Blue (design §4.2). A singleton so it
 /// keeps ingesting + persisting even when the Command Center screen is closed; the
@@ -46,7 +49,35 @@ final class CodeBlueLiveModel: ObservableObject {
         state = merged
         lastUpdate = Date()
         store.save(merged)
+        syncLiveActivity()
     }
+
+    // MARK: Live Activity (design §09) — start on running, update per frame, end on ROSC/stop.
+    // Stored as Any? because Activity<…> is @available-gated and can't be a plain stored property.
+    #if canImport(ActivityKit)
+    private var liveActivity: Any?
+
+    private func syncLiveActivity() {
+        guard #available(iOS 16.2, *) else { return }
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+        let content = ActivityContent(state: .from(state), staleDate: nil)
+        let running = state.running && !state.rosc
+        if running {
+            if let act = liveActivity as? Activity<CodeBlueActivityAttributes> {
+                Task { await act.update(content) }
+            } else {
+                liveActivity = try? Activity.request(
+                    attributes: CodeBlueActivityAttributes(unit: "Code Blue"),
+                    content: content)
+            }
+        } else if let act = liveActivity as? Activity<CodeBlueActivityAttributes> {
+            Task { await act.end(content, dismissalPolicy: .default) }
+            liveActivity = nil
+        }
+    }
+    #else
+    private func syncLiveActivity() {}
+    #endif
 
     private func refreshReachability() {
         #if canImport(WatchConnectivity)
@@ -89,5 +120,5 @@ final class CodeBlueLiveModel: ObservableObject {
     }
 
     /// Clear local logs (privacy — offered on sign-out).
-    func clearLocal() { store.clear(); state = .empty; lastUpdate = nil }
+    func clearLocal() { store.clear(); state = .empty; lastUpdate = nil; syncLiveActivity() }
 }
