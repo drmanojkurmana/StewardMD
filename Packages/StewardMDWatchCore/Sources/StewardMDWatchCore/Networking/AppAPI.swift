@@ -56,6 +56,17 @@ public struct AppAPI: Sendable {
                      body: body, requiresAuth: true), as: OKResponse.self)
     }
 
+    /// `POST /api/watch/instruction` — post a round instruction dictated on the watch (e.g. after a
+    /// critical-value ack the senior gives an order). The backend writes a pending task + audit event
+    /// and fans the new-instruction push out to the whole unit.
+    public func postInstruction(gid: String, pid: String, text: String, priority: String = "high") async throws {
+        struct Body: Encodable { let gid, pid, text, priority: String }
+        let body = try JSONEncoder().encode(Body(gid: gid, pid: pid, text: text, priority: priority))
+        _ = try await client.send(
+            Endpoint(method: "POST", url: Self.base.appendingPathComponent("api/watch/instruction"),
+                     body: body, requiresAuth: true), as: OKResponse.self)
+    }
+
     /// `POST /api/watch/codeblue` — a code started on the watch; the backend pushes a
     /// guaranteed alert to the clinician's own iPhone (fires even when the app is
     /// force-quit, which a local notification can't).

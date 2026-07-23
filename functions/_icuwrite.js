@@ -90,6 +90,28 @@ export async function watchSetTaskStatus(env, uid, gid, pid, taskId, status) {
   return { ok: true };
 }
 
+/// Post a round instruction from the watch (e.g. after a critical-value ack the senior dictates an
+/// order). Creates a PENDING task + an audit timeline event, and returns {ok, text, priority} so the
+/// route can fan the new-instruction push out to the unit. `uid` is the verified caller.
+export async function watchPostInstruction(env, uid, gid, pid, text, priority) {
+  const txt = String(text || "").trim().slice(0, 400);
+  if (!gid || !pid || !txt) return { error: "bad-args" };
+  if (!(await isGroupMember(env, gid, uid))) return { error: "forbidden" };
+  const tok = await saTok(env);
+  const raw = rawUid(uid);
+  const m = await fsGetRaw(env, tok, `/icuGroups/${gid}/members/${raw}`);
+  const name = (m && m.name && m.name.stringValue) || "Clinician";
+  const role = (m && m.role && m.role.stringValue) || null;
+  const prio = ["immediate", "high", "moderate", "low"].includes(priority) ? priority : "high";
+  const ok = await fsCreate(env, tok, `/icuGroups/${gid}/patients/${pid}/tasks`, {
+    text: txt, priority: prio, status: "pending", ts: new Date(),
+    by: raw, byName: name, byRole: role, source: "watch",
+  });
+  if (!ok) return { error: "write-failed" };
+  await appendTimeline(env, tok, gid, pid, { type: "instruction", title: "Round instruction — " + name, detail: txt, by: raw, byName: name, byRole: role });
+  return { ok: true, text: txt, priority: prio };
+}
+
 /// Append a timeline event server-side (critical-ack). Returns {ok} or {error}.
 export async function watchAppendTimeline(env, uid, gid, pid, ev) {
   if (!gid || !pid) return { error: "bad-args" };

@@ -254,6 +254,9 @@ export async function notifyCriticalValue(env, gid, pid, byUid, info) {
     tag: "icu-crit-" + pid + "-" + label.toLowerCase().replace(/[^a-z0-9]+/g, ""),
     url: "https://stewardmd.in/",
     route: "critical",   // watch deep-link → CriticalLabs (ignored by phone/web)
+    // Carry the shared-unit ids + analyte so the watch's LabAlert can attribute an acknowledge back to
+    // this patient's timeline (without these the ack was dropped — the "ack didn't reach timeline" bug).
+    gid: gid, pid: pid, analyte: label, value: (info.value != null ? String(info.value) : ""), units: info.unit || "",
   };
   const byRaw = rawUid(byUid);
   const others = [...new Set((members || []).map((m) => rawUid(m.uid)).filter(Boolean))].filter((u) => u !== byRaw);

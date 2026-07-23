@@ -34,7 +34,10 @@ public enum NotificationParser {
             refRange: userInfo["refRange"] as? String,
             patientLabel: patient,
             severity: (userInfo["severity"] as? String) ?? "warning",
-            ts: (userInfo["ts"] as? Double) ?? (userInfo["ts"] as? NSNumber)?.doubleValue
+            ts: (userInfo["ts"] as? Double) ?? (userInfo["ts"] as? NSNumber)?.doubleValue,
+            // Shared-unit ids from the push → let an acknowledge write back to this patient's timeline.
+            groupId: userInfo["gid"] as? String,
+            patientId: userInfo["pid"] as? String
         )
     }
 

@@ -19,7 +19,8 @@ import {
   getSeen, setSeen, listWatchUids,
 } from "../../_watch.js";
 import { sendNativeToAll } from "../../_nativepush.js";
-import { watchSetTaskStatus, watchAppendTimeline } from "../../_icuwrite.js";
+import { watchSetTaskStatus, watchAppendTimeline, watchPostInstruction } from "../../_icuwrite.js";
+import { notifyNewInstruction } from "../../_taskpush.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
@@ -158,6 +159,17 @@ export async function onRequest(context) {
     return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
   }
 
+  // Instruction dictated on the watch (e.g. after a critical-value ack) → write it as a pending
+  // instruction + audit event, then fan the new-instruction push out to the whole unit.
+  if (method === "POST" && seg === "instruction") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const gid = String(b.gid || ""), pid = String(b.pid || "");
+    const r = await watchPostInstruction(env, wuid, gid, pid, String(b.text || ""), String(b.priority || "high"));
+    if (r && r.ok) { try { await notifyNewInstruction(env, gid, pid, wuid, { text: r.text, priority: r.priority, count: 1 }); } catch (e) {} }
+    return json(r, r && r.ok ? 200 : (r && r.error === "forbidden" ? 403 : 400));
+  }
   // Code Blue started on the watch → push a guaranteed alert to the clinician's own
   // iPhone (shows even when the app is force-quit; local notifications can't). Tapping
   // it (url "codeblue") opens the app → Command Center. iOS phone only, not the watch.

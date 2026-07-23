@@ -9,6 +9,11 @@ struct LabDetailView: View {
     let alert: LabAlert
     @EnvironmentObject private var labs: CriticalLabsModel
     @State private var loggedAt: String?
+    @State private var showInstruction = false
+    @State private var sentNote: String?
+
+    /// A shared-unit critical (gid+pid present) can carry a follow-up instruction to the team.
+    private var isShared: Bool { (alert.groupId?.isEmpty == false) && (alert.patientId?.isEmpty == false) }
 
     private var tier: SMDHapticTier { NotificationParser.hapticTier(alert) }
     private var acknowledged: Bool { labs.isAcknowledged(alert.id) }
@@ -58,10 +63,27 @@ struct LabDetailView: View {
                     Text("Logged \(logged)")
                         .font(.caption2).foregroundStyle(SMDPalette.success.color)
                 }
+                // After acknowledging a shared-unit critical, let the senior give an order to the team.
+                if acknowledged && isShared {
+                    Button {
+                        showInstruction = true
+                    } label: {
+                        Label("Give instruction", systemImage: "text.bubble")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(SMDPalette.accent.color)
+                }
+                if let note = sentNote {
+                    Text(note).font(.caption2).foregroundStyle(SMDPalette.success.color)
+                }
             }
             .padding(SMDSpacing.screenMargin)
         }
         .navigationTitle(alert.analyte)
+        .sheet(isPresented: $showInstruction) {
+            InstructionEntryView(alert: alert) { note in sentNote = note }
+        }
     }
 
     @ViewBuilder private var acknowledgeButton: some View {
@@ -70,6 +92,7 @@ struct LabDetailView: View {
                 await labs.acknowledge(alert)
                 HapticManager.play(.success)
                 loggedAt = timeNow()
+                if isShared { showInstruction = true }   // prompt the senior to give an order to the team
             }
         } label: {
             Text(acknowledged ? "Acknowledged" : "Acknowledge")
@@ -95,6 +118,78 @@ struct LabDetailView: View {
     private func timeNow() -> String {
         let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
         return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
+    }
+}
+
+/// Dictate or type a round instruction to the team after acknowledging a critical value. watchOS's
+/// TextField brings up Scribble / dictation / emoji natively, so voice-to-text needs no extra code.
+/// Sends via AppAPI → the backend writes a pending instruction + audit event and pushes the unit.
+private struct InstructionEntryView: View {
+    let alert: LabAlert
+    var onSent: (String) -> Void
+    @Environment(\.dismiss) private var dismiss
+    @State private var text = ""
+    @State private var sending = false
+    @State private var error: String?
+
+    /// Analyte-specific quick orders (tap to prefill, then edit/dictate). Hyperkalaemia example first.
+    private var suggestions: [String] {
+        let a = alert.analyte.lowercased()
+        if a.contains("potassium") || a == "k" || a.contains("k+") {
+            return ["Inj Calcium gluconate 10 mL IV STAT",
+                    "Insulin 10 U + 25% Dextrose 50 mL IV",
+                    "Salbutamol nebulisation"]
+        }
+        return []
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: SMDSpacing.s) {
+                Text("Instruction to team").font(.headline)
+                Text("\(alert.analyte) \(alert.value)\(alert.units.map { " " + $0 } ?? "")")
+                    .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+
+                TextField("Type or dictate…", text: $text)
+                    .textFieldStyle(.plain)
+
+                ForEach(suggestions, id: \.self) { s in
+                    Button { text = s } label: {
+                        Text(s).font(.caption2).frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.bordered)
+                }
+
+                if let e = error {
+                    Text(e).font(.caption2).foregroundStyle(SMDPalette.critical.color)
+                }
+
+                Button { send() } label: {
+                    Text(sending ? "Sending…" : "Send to team").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(SMDPalette.accent.color)
+                .disabled(sending || text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+            .padding(SMDSpacing.screenMargin)
+        }
+    }
+
+    private func send() {
+        let t = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !t.isEmpty, let gid = alert.groupId, let pid = alert.patientId else { return }
+        sending = true; error = nil
+        Task {
+            do {
+                try await WatchServices.appAPI.postInstruction(gid: gid, pid: pid, text: t, priority: "high")
+                HapticManager.play(.success)
+                onSent("Instruction sent to team")
+                dismiss()
+            } catch {
+                self.error = "Couldn't send — try again."
+                self.sending = false
+            }
+        }
     }
 }
 
