@@ -118,6 +118,21 @@
     var skip = $("verifySkipBtn"); if (skip) skip.style.display = (mode === "forced" && !verified) ? "" : "none";
     var done = $("verifyDoneBtn"); if (done) done.style.display = (closable && (verified || pending)) ? "" : "none";
 
+    // Offline: certificate upload + the trial/register checks all need the network, so the normal
+    // "Not verified → verify now" flow is a dead-end. Show an offline-aware state whose primary action
+    // is a LOCAL "Continue in offline mode" dismiss (see startTrial's offline guard), never a hang.
+    var offline = (typeof navigator !== "undefined" && navigator.onLine === false);
+    var skipBtn = $("verifySkipBtn");
+    if (offline && !verified) {
+      $("verifyTitle").textContent = "You're offline";
+      if (sub) sub.textContent = "Doctor verification needs an internet connection — certificate upload and register checks can't run offline. Keep using StewardMD's offline tools now; reconnect and reopen this screen to verify and unlock the prescription generator.";
+      if (up) up.style.display = "none";
+      setStatusMsg("info", "Offline mode — verification resumes automatically when you're back online.");
+      if (skipBtn) { skipBtn.textContent = "Continue in offline mode"; skipBtn.style.display = ""; }
+    } else if (skipBtn) {
+      skipBtn.textContent = "Skip for now — start your 7-day trial";   // restore default when online
+    }
+
     g.classList.remove("hidden"); g.style.display = "flex";
   }
 
@@ -203,6 +218,13 @@
   var trialing = false;
   function startTrial() {
     if (trialing) return;
+    // Offline: the trial is server-granted, so there's nothing to call — dismiss locally so the
+    // screen is never stuck (this path also backs the ✕ on the forced gate and "Continue offline").
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      hideGate();
+      try { (window.toast || window.SMD_toast || function () {})("Offline — you can verify when you're back online."); } catch (e) {}
+      return;
+    }
     var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
     trialing = true;
     var skip = $("verifySkipBtn"); if (skip) skip.disabled = true;
