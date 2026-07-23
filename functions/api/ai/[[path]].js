@@ -347,6 +347,39 @@ const RESEARCH_SYS_SNIPPETS =
   "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
+
+// Phase 2 (deep) — cross-encoder re-rank of the retrieved chunks with the Workers AI reranker
+// (@cf/baai/bge-reranker-base). This is a genuine relevance model (not keyword overlap): it scores
+// each chunk against the clinician's question so the most decision-relevant evidence leads the prompt
+// and survives token clipping — the retrieval-quality core of DrOracle-grade answers. FAIL-SAFE: any
+// error, missing binding, or unexpected response shape falls back to the deterministic lexical rank,
+// so a model hiccup can never break or reorder-away a live answer.
+function lexicalRank(question, arr) {
+  const qSet = new Set(String(question || "").toLowerCase().match(/[a-z0-9]{4,}/g) || []);
+  return (arr || []).map((c, i) => {
+    const t = ((c.text || "") + " " + (c.diseaseId || "") + " " + (c.section || "")).toLowerCase();
+    let s = 0; qSet.forEach((w) => { if (t.indexOf(w) >= 0) s++; });
+    return { c, s, i };
+  }).sort((a, b) => (b.s - a.s) || (a.i - b.i)).map((x) => x.c);
+}
+async function rerankRetrieved(env, question, chunks) {
+  const arr = chunks || [];
+  if (!env || !env.AI || arr.length < 2 || !question) return lexicalRank(question, arr);
+  try {
+    const contexts = arr.map((c) => ({ text: clip((c.text || "") + " " + (c.diseaseId || ""), 500) }));
+    const r = await env.AI.run("@cf/baai/bge-reranker-base", { query: String(question).slice(0, 500), contexts });
+    const resp = r && (Array.isArray(r) ? r : (r.response || r.result || r.data));
+    if (Array.isArray(resp) && resp.length) {
+      const ordered = resp
+        .filter((x) => x && typeof x.id === "number" && x.id >= 0 && x.id < arr.length)
+        .sort((a, b) => (Number(b.score) || 0) - (Number(a.score) || 0))
+        .map((x) => arr[x.id]);
+      if (ordered.length) { arr.forEach((c) => { if (ordered.indexOf(c) < 0) ordered.push(c); }); return ordered; }  // append any top_k-dropped chunks
+    }
+  } catch (e) { /* fall through to lexical */ }
+  return lexicalRank(question, arr);
+}
+
 function renderGroundedPrompt(pkg) {
   const L = [];
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
@@ -381,18 +414,10 @@ function renderGroundedPrompt(pkg) {
     (g.knowledge || []).forEach((c) => L.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")));
   });
   if ((pkg.retrieved || []).length) {
-    L.push("\nAdditional retrieved chunks (query-matched):");
-    // Phase 2 — lightweight lexical re-rank: order chunks by term overlap with the clinician's
-    // question so the most decision-relevant evidence leads (and survives any downstream token clip).
-    const qTerms = String(pkg.question || "").toLowerCase().match(/[a-z0-9]{4,}/g) || [];
-    const qSet = new Set(qTerms);
-    const scored = pkg.retrieved.map((c, i) => {
-      const txt = ((c.text || "") + " " + (c.diseaseId || "") + " " + (c.section || "")).toLowerCase();
-      let s = 0; qSet.forEach((t) => { if (txt.indexOf(t) >= 0) s++; });
-      return { c, s, i };
-    });
-    scored.sort((a, b) => (b.s - a.s) || (a.i - b.i));   // stable: overlap desc, original order on ties
-    scored.forEach(({ c }) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
+    // Chunks arrive already re-ranked by rerankRetrieved() (cross-encoder, lexical fallback) in the
+    // explain handler, so emit in the given order — most decision-relevant evidence first.
+    L.push("\nAdditional retrieved chunks (relevance-ranked):");
+    pkg.retrieved.forEach((c) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
   }
   if (pkg.treatment) {
     const t = pkg.treatment;
@@ -619,6 +644,8 @@ export async function onRequest(context) {
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+        // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
+        try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
         const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
