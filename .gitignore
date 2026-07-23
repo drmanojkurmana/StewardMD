@@ -63,3 +63,6 @@ local-plugins/**/build/
 # management-generation intermediates (sidecars + batch inputs); the content is
 # merged into kb/reference/*.json by kb/tools/mgmt/apply.mjs, which IS tracked.
 kb/_mgmt/
+
+# large model artifact — baked into the Cloud Run container, not for Pages deploy
+backend/kardiox-image/image_model.pt
