@@ -1179,7 +1179,18 @@
             try {
               var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
               var on = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1");
-              return on ? rtile("retinalscan", "visibility", "Retinal Scan", "FundX AI · fundus") : "";
+              return on ? (
+                '<button class="rnav-tile fx-tile" data-act="retinalscan" aria-label="Open FundX AI — retinal scan">' +
+                  '<div class="fx-tile-head"><span class="fx-eye">' + ric("visibility") + '</span><span class="fx-pill">' + ric("bolt") + 'AI</span></div>' +
+                  '<svg class="fx-tile-fundus" viewBox="0 0 120 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
+                    '<defs><radialGradient id="fxFund" cx="40%" cy="45%" r="65%"><stop offset="0%" stop-color="#f6c169"/><stop offset="55%" stop-color="#d9803c"/><stop offset="100%" stop-color="#5e2416"/></radialGradient></defs>' +
+                    '<circle cx="16" cy="15" r="13" fill="url(#fxFund)"/><circle cx="12" cy="13" r="3.4" fill="#ffe7b8"/>' +
+                    '<g fill="none" stroke="#7a3320" stroke-width="1.3" stroke-linecap="round" opacity=".85"><path d="M12 13 q9 -5 18 -3"/><path d="M12 13 q7 7 16 10"/><path d="M12 13 q-4 9 0 15"/></g>' +
+                    '<path d="M30 15 q22 -7 46 -1 t44 1" fill="none" stroke="rgba(246,193,105,.45)" stroke-width="1.4" stroke-linecap="round"/>' +
+                  '</svg>' +
+                  '<span class="rnav-tile-tt">FundX AI</span><span class="rnav-tile-sub">Retinal scan · Fundus</span>' +
+                '</button>'
+              ) : "";
             } catch (e) { return ""; }
           })() +
           (function () {   // KardiQ X AI — moved from the big top hero into a Clinical-Tools tile beside FundX.
