@@ -14,7 +14,7 @@ import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from
 import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
-import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, remindTask } from "../../_taskpush.js";
+import { escalateOverdueTask, sweepOverdue, isGroupMember, notifyNewInstruction, notifyCriticalValue, remindTask } from "../../_taskpush.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -109,6 +109,18 @@ export async function onRequest(context) {
     if (!gid || !pid) return json({ error: "bad-args" }, 400);
     if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
     const res = await notifyNewInstruction(env, gid, pid, uid, { text: body.text, priority: body.priority, count: body.count, kind: body.kind });
+    return json(res || { error: "failed" });
+  }
+  // Critical value recorded → alert the WHOLE unit immediately (Tier-1, bypasses prefs). Member-triggered.
+  if (method === "POST" && seg === "critical") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const { gid, pid } = body;
+    if (!gid || !pid) return json({ error: "bad-args" }, 400);
+    if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
+    const res = await notifyCriticalValue(env, gid, pid, uid, { label: body.label, value: body.value, unit: body.unit, bed: body.bed, reason: body.reason });
     return json(res || { error: "failed" });
   }
   // On-demand "nudge": re-push a task's reminder to the unit's executor roles. Member-triggered;

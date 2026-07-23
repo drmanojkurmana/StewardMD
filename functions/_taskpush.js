@@ -230,6 +230,38 @@ export async function notifyNewInstruction(env, gid, pid, byUid, info) {
   return { notified: out.attempted, sent: out.sent, eligible: others.length, priority: prio, category };
 }
 
+// Immediate CRITICAL-VALUE alert to the WHOLE unit when a member records a life-threatening result
+// (e.g. K⁺ 7.0). Category "critical" is Tier-1 → sent to every member regardless of their prefs and
+// even when the app is closed. Excludes the author; solo unit → notify the author so it's verifiable.
+// info: { label, value, unit, bed?, reason? } — the value that tripped the critical threshold.
+export async function notifyCriticalValue(env, gid, pid, byUid, info) {
+  info = info || {};
+  if (!nativePushEnabled(env)) return { error: "push-disabled" };
+  if (!gid || !pid) return { error: "bad-args" };
+  const tok = await saTok(env);
+  const [g, p, members] = await Promise.all([
+    fsGet(env, tok, `/icuGroups/${gid}`, ["name"]),
+    fsGet(env, tok, `/icuGroups/${gid}/patients/${pid}`, ["name", "bed"]),
+    fsList(env, tok, `/icuGroups/${gid}/members`),
+  ]);
+  const unitName = (g && g.name) || "ICU unit";
+  const bed = (p && p.bed) || info.bed || "";
+  const label = String(info.label || "Critical value").slice(0, 40);
+  const val = (info.value != null ? String(info.value) : "") + (info.unit ? " " + info.unit : "");
+  const msg = {
+    title: "🔴 CRITICAL · " + unitName,
+    body: label + (val ? " " + val : "") + (bed ? " · Bed " + bed : "") + " — review now" + (info.reason ? " (" + String(info.reason).slice(0, 40) + ")" : "") + ".",
+    tag: "icu-crit-" + pid + "-" + label.toLowerCase().replace(/[^a-z0-9]+/g, ""),
+    url: "https://stewardmd.in/",
+    route: "critical",   // watch deep-link → CriticalLabs (ignored by phone/web)
+  };
+  const byRaw = rawUid(byUid);
+  const others = [...new Set((members || []).map((m) => rawUid(m.uid)).filter(Boolean))].filter((u) => u !== byRaw);
+  let out = await fanOut(env, members, msg, "critical", { excludeRaw: byRaw });
+  if (!others.length && byRaw) out = await fanOut(env, [{ uid: byRaw, role: "head" }], msg, "critical", { force: true });
+  return { notified: out.attempted, sent: out.sent, eligible: others.length, category: "critical" };
+}
+
 // On-demand "nudge": an instructing member re-pushes a task's reminder to the unit's executor roles
 // (SR / JR / intern), excluding the nudger. Unlike escalateOverdueTask this has NO overdue /
 // escalatedAt / done guards — it's an explicit human action, works before a task is due and again

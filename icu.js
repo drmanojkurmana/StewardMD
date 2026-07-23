@@ -4780,6 +4780,15 @@
     if (changed.length) {
       var src = next.src || {}, ward = 0; changed.forEach(function (k) { if (src[k] && /ward/i.test(src[k].source || "")) ward++; });
       ev.push({ type: "note", title: ward > 0 ? "Ward Sync — labs updated" : "Labs updated", detail: changed.length + " value" + (changed.length === 1 ? "" : "s") });
+      // Critical lab among the changes → a distinct, prominent event carrying the value. The caller
+      // uses it to (a) alert the WHOLE unit via push and (b) show it at the top of the timeline.
+      // TREND_INTERP holds the per-analyte critical thresholds the trend/board already use.
+      changed.forEach(function (k) {
+        var m = TREND_INTERP[k], raw = nl[k], num = (typeof raw === "number") ? raw : parseFloat(raw);
+        if (m && m.crit && isFinite(num) && m.crit(num)) {
+          ev.push({ type: "critical", title: "🔴 Critical — " + m.label + " " + num + (m.unit ? " " + m.unit : ""), detail: "Recorded critical value — team alerted", crit: { key: k, label: m.label, value: num, unit: m.unit || "" } });
+        }
+      });
     }
     return ev;
   }
@@ -7385,6 +7394,17 @@
         if (api && api.addTimelineEvent) {
           for (var i = 0; i < events.length; i++) {
             (function (ev) { try { var pr = api.addTimelineEvent(_grp.id, _grpPtId, ev); if (pr && pr.then) pr.then(null, function () {}); } catch (e) {} })(events[i]);
+          }
+        }
+        // Critical value → alert the WHOLE unit immediately (Tier-1 push, bypasses prefs). One push per
+        // critical analyte in this burst; server excludes the author + falls back to solo verifiability.
+        for (var ci = 0; ci < events.length; ci++) {
+          if (events[ci] && events[ci].type === "critical" && events[ci].crit) {
+            (function (c) {
+              try {
+                fetch(grpPushUrl("/api/push/critical"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gid: _grp.id, pid: _grpPtId, label: c.label, value: c.value, unit: c.unit }) }).catch(function () {});
+              } catch (e) {}
+            })(events[ci].crit);
           }
         }
       } catch (e) {}
