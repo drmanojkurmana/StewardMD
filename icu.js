@@ -3951,6 +3951,14 @@
   function grpEnsureGroupsSub() {
     if (!groupMode()) return;
     var api = groupsApi(); if (!api) return;
+    // Auth gate: the groups query is uid-scoped. If Firebase auth hasn't resolved yet, subscribeGroups
+    // returns an EMPTY result + a no-op unsubscribe — which the _grpSubGroups guard then treats as a
+    // live sub, wedging the board empty until a reload. Bail out until a user exists; the auth watcher
+    // calls this again on sign-in, so units/team/ID appear WITHOUT the solo↔group toggle workaround.
+    try {
+      var _au = (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null;
+      if (!_au) return;
+    } catch (e) { return; }
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
     try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
@@ -7220,22 +7228,8 @@
       }
       rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
       if (groupMode()) { try { grpEnsureGroupsSub(); } catch (e) {} }   // Phase 2: start the live unit subscription
-      // First-open race fix: SMD_ICU_GROUPS (icu-collab.js) + Firebase auth can resolve AFTER this first
-      // paint, so groupMode() was false above → the solo board showed and never re-subscribed. The user
-      // had to toggle solo↔group (which reloads) to see their units/team. Poll briefly until the API +
-      // auth are ready, then start the live subscription and repaint into the shared unit automatically.
-      else if (icuV2On() && icuGroupsOn() && !_grpSubGroups) {
-        var _grpWaitN = 0;
-        var _grpWait = setInterval(function () {
-          _grpWaitN++;
-          if (!ICU.isOpen() || _grpWaitN > 40) { clearInterval(_grpWait); return; }   // ~10s cap
-          if (groupMode()) {
-            clearInterval(_grpWait);
-            try { grpEnsureGroupsSub(); } catch (e) {}   // subscription's own resolver repaints on data
-            try { if (ICU.isOpen()) paint(); } catch (e) {}
-          }
-        }, 250);
-      }
+      // (First-open race is handled at the source: grpEnsureGroupsSub no-ops until auth is ready, and the
+      // auth watcher below re-subscribes once signed in — so units/team/ID appear without a solo↔group toggle.)
       // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
       // the syringe FAB opens Infusions (its actual purpose), distinct from the Home
       // "ICU" tile which opens Overview. No argument = unchanged (open at current tab).
@@ -7419,7 +7413,23 @@
     function attach() {
       try {
         var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
-        if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { reconcileOwner(); try { grpBootJoin(); } catch (e) {} }); return true; }
+        if (a && a.onAuthStateChanged) {
+          a.onAuthStateChanged(function () {
+            reconcileOwner();
+            try { grpBootJoin(); } catch (e) {}
+            // Re-point the uid-scoped groups subscription at the now-authenticated user. A sub that
+            // started pre-auth was empty + non-retrying (the "must toggle solo↔group to see my unit"
+            // bug). Tear down any stale sub, re-subscribe with auth, and repaint if the board is open.
+            try {
+              if (icuV2On() && icuGroupsOn()) {
+                if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
+                grpEnsureGroupsSub();
+                if (ICU.isOpen()) { try { paint(); } catch (e) {} }
+              }
+            } catch (e) {}
+          });
+          return true;
+        }
       } catch (e) {}
       return false;
     }
