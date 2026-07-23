@@ -35,7 +35,7 @@ export async function onRequest(context) {
         name, state, status: "pending", requestedBy: uid || "guest", ts: new Date().toISOString(),
       })]);
       return json({ ok: true, id });
-    } catch (e) { return json({ error: "store-unavailable" }, 501); }
+    } catch (e) { return json({ error: "store-unavailable", detail: String((e && (e.message + " | " + (e.detail || e.code || e.status))) || e).slice(0, 200) }, 501); }
   }
 
   // ---- everything below is OWNER-only (admin console) ----
