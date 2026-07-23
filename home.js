@@ -135,7 +135,7 @@
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
           '<div class="smd-nav-note">' + svg("flask", "smd-ico") + ' Experimental — for clinician review.</div>';
-        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
+        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", true)) +
           swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
@@ -2118,17 +2118,26 @@ body.dark .maik-card-ic{background:var(--mk-tsoft)}
 body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .maik-attr{display:flex;align-items:center;gap:6px;margin-bottom:7px}
 .maik-attr span{font:800 10.5px 'Inter';color:var(--mk-teal);text-transform:uppercase;letter-spacing:.06em}
-.maik-h{font:800 12.5px 'Inter';color:var(--mk-ink);margin-bottom:4px}
-.maik-p{font:500 12px/1.5 'Inter';color:var(--mk-ink)}
-.maik-ul{margin:6px 0 2px;display:flex;flex-direction:column;gap:4px}
-.maik-li{display:flex;gap:7px;font:500 12px/1.45 'Inter';color:var(--mk-ink)}
+.maik-h{font:800 13.5px 'Inter';letter-spacing:-.01em;color:var(--mk-ink);margin:12px 0 5px}
+.maik-p{font:450 13px/1.62 'Inter';color:var(--mk-ink)}
+.maik-ul{margin:7px 0 3px;display:flex;flex-direction:column;gap:6px}
+.maik-li{display:flex;gap:8px;font:450 13px/1.55 'Inter';color:var(--mk-ink)}
 .maik-li .dot{color:var(--mk-teal);font-weight:800}
 .maik-cite{color:var(--mk-acc);font-weight:700;font-size:.7em;vertical-align:super}
 .maik-note{font:500 11.5px/1.45 'Inter';color:var(--mk-mut);margin-top:6px}
 .maik-src{margin-top:9px;padding-top:8px;border-top:1px solid var(--mk-bd);display:flex;align-items:center;gap:6px;font:600 10.5px 'Inter';color:var(--mk-teal)}
-.maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:7px;margin-top:1px}
-.maik-fu{font:600 11.5px 'Inter';color:var(--mk-teal);background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;cursor:pointer;transition:.15s}
-.maik-fu:hover{border-color:var(--mk-teal)}
+.maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.maik-fu{font:600 12px/1 'Inter';color:var(--mk-ink);background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:11px;padding:8px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .14s ease,border-color .14s,box-shadow .14s,background .14s,color .14s}
+.maik-fu:hover{border-color:var(--mk-teal);color:var(--mk-teal);box-shadow:0 5px 16px var(--mk-glow);transform:translateY(-1px)}
+.maik-fu:active{transform:translateY(0);box-shadow:none}
+body.dark .maik-fu{background:var(--mk-field)}
+/* Refinement group — UpToDate-style "adjust the answer for this factor" affordance */
+.maik-refine{margin-top:13px;padding-top:12px;border-top:1px solid var(--mk-bd)}
+.maik-refine-lbl{display:block;font:700 10.5px/1.2 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--mk-mut);margin:0 0 10px}
+.maik-refine .maik-fu{color:var(--mk-teal);background:var(--mk-tsoft);border-color:transparent}
+.maik-refine .maik-fu::before{content:"+";font:800 13px/1 'Inter';opacity:.65;margin-right:-1px}
+.maik-refine .maik-fu:hover{background:var(--mk-bg);border-color:var(--mk-teal);color:var(--mk-teal)}
+.maik-refine .maik-fu:hover::before{opacity:1}
 
 /* composer (shared) */
 .maik-cmp{padding:6px 14px 15px;flex:0 0 auto}
@@ -2227,7 +2236,20 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
-    function close() { try { if (body && body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
+    function close() {
+      try {
+        if (body) {
+          // Drop any in-flight "Searching…"/thinking bubble before persisting, so closing mid-request
+          // doesn't freeze a stale spinner into the restored thread (user: reopened stuck on "Searching…").
+          [].slice.call(body.querySelectorAll(".maik-b.ai")).forEach(function (n) { if (n.querySelector(".maik-thinking")) n.remove(); });
+          if (body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); }
+        }
+      } catch (e) {}
+      // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
+      // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
+      _maikBusy = false;
+      sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
+    }
     function scroll() { body.scrollTop = body.scrollHeight; }
     // Prepend the faint centered wordmark watermark (§1 .maik-wm) behind the thread the first time a
     // bubble is added. emptyState() renders its own hero logo instead, so it deliberately omits this.
@@ -2488,9 +2510,17 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     }
     function maikRefineHTML(question, chips) {
       if (!chips || !chips.length) return "";
-      var h = '<div class="maik-refine-lbl" style="font:700 11.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:12px 0 5px">Anything to add or change?</div><div class="maik-followups maik-refine">';
-      chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
-      return h + '</div>';
+      var h = '<div class="maik-refine"><div class="maik-refine-lbl">Refine for this patient</div><div class="maik-followups">';
+      chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-refine="' + maikEscH(c) + '" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
+      return h + '</div></div>';
+    }
+    // Some refinement factors map to a real in-app tool rather than a re-prompt: e.g. "local resistance
+    // patterns" belongs in the Antibiogram explorer (actual local/ICMR susceptibility data), not another
+    // generic LLM pass. Returns an action key the chip handler routes to, or null to re-ask normally.
+    function maikRefineRoute(label) {
+      var s = String(label || "").toLowerCase();
+      if (/(resistance|antibiogram|susceptib|sensitiv|antibiogram|local .*(pattern|data|flora)|resistogram)/.test(s)) return "antibiogram";
+      return null;
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
@@ -2500,7 +2530,17 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
-      if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      if (r && r.error === "ai-off") {
+        think.innerHTML = '<div class="maik-welcome">MaiK is switched off. Turn it on to get grounded clinical answers.</div>';
+        var onBtn = document.createElement("button"); onBtn.className = "maik-chip"; onBtn.style.marginTop = "8px"; onBtn.textContent = "Turn on MaiK";
+        onBtn.addEventListener("click", function () {
+          try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); else localStorage.setItem("smd_ai", "1"); } catch (e) {}
+          try { qEl.value = question || ""; } catch (e) {}
+          send();
+        });
+        think.appendChild(onBtn); scroll(); return;
+      }
+      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
@@ -2728,6 +2768,16 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
       if (!el) return;
       ev.preventDefault();
+      // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.
+      var refine = el.getAttribute("data-maik-refine");
+      if (refine) {
+        var route = maikRefineRoute(refine);
+        if (route === "antibiogram") {
+          close();
+          setTimeout(function () { try { if (window.ABG && ABG.open) ABG.open(); else if (window.toast) toast("Antibiogram loading…"); } catch (e) {} }, 180);
+          return;
+        }
+      }
       var fq = el.getAttribute("data-maik-q");
       if (fq) {
         if (_maikBusy) return;

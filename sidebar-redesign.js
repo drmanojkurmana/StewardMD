@@ -86,12 +86,13 @@
   var TOGGLES = [
     { id: "reason", title: "Reasoning v2", sub: "Live differential in the workflow", def: true, key: "smd_reason_v2" },
     { id: "safety", title: "Organ-safety overlay", sub: "Renal / hepatic / QT flags on advice", def: true, key: "smd_safety_overlay" },
-    { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: false, key: "smd_ai" },
+    { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: true, key: "smd_ai" },
     { id: "expanded", title: "Expanded Harrison KB", sub: "+268 reference diseases as candidates", def: false, key: "smd_kb_expanded" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
-    { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }
+    { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
+    { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: true, key: "smd_kardiox" }
   ];
   function setToggle(id, key, on) {
     try {
@@ -119,7 +120,10 @@
       "#sbMenu[data-sbr] .sbr-chev{flex:0 0 auto;font-size:11px;color:var(--slate-soft,#5a7184)}",
       "#sbMenu[data-sbr] .sbr-adv{display:none;padding:2px 14px 6px 44px}",
       "#sbMenu[data-sbr] .sbr-adv.open{display:block}",
-      "#sbMenu[data-sbr] .sbr-tg{display:flex;align-items:center;gap:10px;padding:8px 0}",
+      "#sbMenu[data-sbr] .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin:2px 0 6px}",
+      "#sbMenu[data-sbr] .sbr-tg{display:flex;align-items:center;gap:10px;padding:11px 14px}",
+      "#sbMenu[data-sbr] .sbr-card .sbr-tg{border-top:1px solid var(--line,#d7dee3)}",
+      "#sbMenu[data-sbr] .sbr-card .sbr-tg:first-child{border-top:0}",
       "#sbMenu[data-sbr] .sbr-tg-l{flex:1;min-width:0}",
       "#sbMenu[data-sbr] .sbr-tg-t{display:block;font:600 13px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)}",
       "#sbMenu[data-sbr] .sbr-tg-s{display:block;font:500 11px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px}",
@@ -145,7 +149,7 @@
   }
 
   function advBody() {
-    var html = TOGGLES.map(toggle).join("");
+    var html = '<div class="sbr-card">' + TOGGLES.map(toggle).join("") + '</div>';
     // Image Engine keeps its own settings sub-UI (native inference model picker etc.).
     try {
       if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML) {

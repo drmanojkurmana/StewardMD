@@ -81,7 +81,17 @@
       "body.dark .ie-sheet,:root[data-theme=dark] .ie-sheet{--ie-bg:#0f1a2b;--ie-ink:#e7edf5;--ie-mut:#93a4bd;--ie-line:#24314a;--ie-card:#152238;--ie-tealsoft:#0f2e2a}",
       "@media(prefers-color-scheme:dark){.ie-sheet{--ie-bg:#0f1a2b;--ie-ink:#e7edf5;--ie-mut:#93a4bd;--ie-line:#24314a;--ie-card:#152238;--ie-tealsoft:#0f2e2a}}",
       // settings segmented control (matches .smd-nav-* system)
-      ".ie-seg{display:flex;flex-direction:column;gap:8px;padding:4px 0}"
+      ".ie-seg{display:flex;flex-direction:column;gap:8px;padding:4px 0}",
+      // iOS-Settings grouped list (inset card, hairline separators, trailing checkmark)
+      ".ie-list{border-radius:14px;overflow:hidden;border:1px solid var(--ie-line,#e2e8f0);background:var(--ie-card,#fff);margin-bottom:12px}",
+      ".ie-lrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--ie-line,#e2e8f0);padding:13px 14px;cursor:pointer;color:var(--ie-ink,#0f172a);-webkit-tap-highlight-color:transparent}",
+      ".ie-lrow:first-child{border-top:0}",
+      ".ie-lrow.sel{background:var(--ie-tealsoft,#e6f4f1)}",
+      ".ie-lmain{flex:1;min-width:0}",
+      ".ie-lt{font:600 15px var(--ie-sans,system-ui);display:flex;align-items:center;gap:8px;flex-wrap:wrap}",
+      ".ie-ls{font:500 12.5px var(--ie-sans,system-ui);color:var(--ie-mut,#64748b);margin-top:3px;line-height:1.45}",
+      ".ie-check{flex:0 0 auto;width:20px;text-align:center;color:var(--ie-teal,#0e6e63);font-size:16px;font-weight:800;opacity:0;transition:opacity .12s}",
+      ".ie-lrow.sel .ie-check{opacity:1}"
     ].join("");
     document.head.appendChild(s);
   }
@@ -112,9 +122,9 @@
     var desc = isAi
       ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
       : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
-    return '<button type="button" class="ie-card' + (selected ? " sel" : "") + '" data-engine="' + engine + '">' +
-      '<span class="ie-radio"></span><span class="ie-cmain"><span class="ie-ct">' + esc(title) + " " + pill + recPill + "</span>" +
-      '<span class="ie-cs">' + esc(desc) + "</span></span></button>";
+    return '<button type="button" class="ie-lrow' + (selected ? " sel" : "") + '" data-engine="' + engine + '" role="radio" aria-checked="' + selected + '">' +
+      '<span class="ie-lmain"><span class="ie-lt">' + esc(title) + " " + pill + recPill + "</span>" +
+      '<span class="ie-ls">' + esc(desc) + '</span></span><span class="ie-check" aria-hidden="true">✓</span></button>';
   }
 
   /* ---------------- A/B: Choose Image Engine sheet ---------------- */
@@ -133,8 +143,10 @@
           ? '<div class="ie-warn">⚠️ On-device OCR can be less accurate. AI Vision is recommended for the best accuracy.</div>' : "";
         return '<div class="ie-h">Choose Image Engine</div>' +
           '<div class="ie-sub">' + esc(helper) + "</div>" +
+          '<div class="ie-list" role="radiogroup" aria-label="Image engine">' +
           engineCard("device", sel === "device", kind) +
           engineCard("ai", sel === "ai", kind) +
+          '</div>' +
           warn +
           '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice</span></label>' +
           '<div class="ie-row"><button class="ie-btn sec" id="ieCancel">Cancel</button><button class="ie-btn" id="ieGo">Continue</button></div>';
@@ -142,7 +154,7 @@
       var o = overlay(body());
       function rerender() { o.sheet.innerHTML = body(); wire(); }
       function wire() {
-        o.sheet.querySelectorAll(".ie-card").forEach(function (c) { c.addEventListener("click", function () { sel = c.getAttribute("data-engine"); var rem = o.sheet.querySelector("#ieRemember"); var remembered = rem && rem.checked; rerender(); var r2 = o.sheet.querySelector("#ieRemember"); if (r2) r2.checked = remembered; }); });
+        o.sheet.querySelectorAll(".ie-lrow").forEach(function (c) { c.addEventListener("click", function () { sel = c.getAttribute("data-engine"); var rem = o.sheet.querySelector("#ieRemember"); var remembered = rem && rem.checked; rerender(); var r2 = o.sheet.querySelector("#ieRemember"); if (r2) r2.checked = remembered; }); });
         o.sheet.querySelector("#ieCancel").addEventListener("click", function () { o.close(); resolve(null); });
         o.sheet.querySelector("#ieGo").addEventListener("click", function () { var rem = o.sheet.querySelector("#ieRemember"); o.close(); resolve({ engine: sel, remember: !!(rem && rem.checked) }); });
       }
@@ -261,15 +273,19 @@
   /* ---------------- A: Settings section (matches .smd-nav-* system) ---------------- */
   function settingsHTML() {
     var pref = getPref();
-    function opt(engine, label, pill, desc) {
+    // iOS-Settings grouped list: one inset card, hairline separators, trailing teal ✓ on the active row.
+    // Uses the app's theme-aware CSS vars (so it recolours in dark mode inside the sidebar).
+    function opt(engine, label, pill, desc, first) {
       var on = pref === engine;
-      return '<button type="button" class="smd-nav-row" data-ie-opt="' + engine + '" style="align-items:flex-start;cursor:pointer;width:100%;text-align:left;background:' + (on ? "var(--teal-soft,#e6f4f1)" : "transparent") + ';border:1.5px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#e2e8f0)") + ';border-radius:12px;padding:11px 12px;margin-bottom:8px;gap:10px">' +
-        '<span style="flex:0 0 auto;width:18px;height:18px;border-radius:50%;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#cbd5e1)") + ';margin-top:2px;position:relative">' + (on ? '<span style="position:absolute;inset:2px;border-radius:50%;background:var(--teal,#0e6e63)"></span>' : "") + "</span>" +
-        '<span class="smd-nav-rl"><span class="smd-nav-lbl">' + label + " " + pill + '</span><span class="smd-nav-sub">' + desc + "</span></span></button>";
+      return '<button type="button" data-ie-opt="' + engine + '" role="radio" aria-checked="' + on + '" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;background:' + (on ? "var(--teal-soft,#e6f4f1)" : "transparent") + ';border:0;' + (first ? "" : "border-top:1px solid var(--line,#e2e8f0);") + 'padding:13px 14px;color:var(--ink,#14202b);-webkit-tap-highlight-color:transparent">' +
+        '<span style="flex:1;min-width:0"><span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:600 14px/1.3 var(--sans,system-ui)">' + label + " " + pill + '</span><span style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">' + desc + '</span></span>' +
+        '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span></button>';
     }
     return '<div class="ie-seg">' +
-      opt("device", "Private Device OCR", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device.") +
-      opt("ai", "AI Vision", '<span style="font:700 9px/1 var(--sans,system-ui);background:#fef3c7;color:#92400e;border-radius:5px;padding:2px 5px;vertical-align:middle">Pro</span>', "Uses secure cloud AI for better monitor and ventilator screen interpretation.") +
+      '<div role="radiogroup" aria-label="Image engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
+      opt("device", "Private Device OCR", '<span style="font:700 9px/1 var(--sans,system-ui);background:#dcfce7;color:#166534;border-radius:5px;padding:2px 5px;vertical-align:middle">Free</span>', "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device.", true) +
+      opt("ai", "AI Vision", '<span style="font:700 9px/1 var(--sans,system-ui);background:#fef3c7;color:#92400e;border-radius:5px;padding:2px 5px;vertical-align:middle">Pro</span>', "Uses secure cloud AI for better monitor and ventilator screen interpretation.", false) +
+      '</div>' +
       '<button class="smd-nav-btn" data-ie-privacy="1" style="text-align:left">🔒 Privacy &amp; processing</button>' +
       '</div>';
   }

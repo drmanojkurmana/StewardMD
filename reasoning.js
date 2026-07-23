@@ -3592,7 +3592,7 @@
     } catch (e) {}
     return Promise.resolve(base);
   }
-  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
+  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === null ? true : v === "1"; } catch (e) { return true; } }   // default ON for Pro (promo = all users); server gates non-Pro. Off only if user explicitly disabled.
   // Bound any network await so a request that NEVER settles can't hang MaiK forever. On the native
   // app, CapacitorHttp proxies fetch and does NOT honour AbortController, so the AbortController-based
   // timeouts elsewhere are no-ops there — a stalled /api/ai request (or a hung Firebase getIdToken)
@@ -4618,7 +4618,7 @@
    * ---------------------------------------------------------------------- */
   function smdLabsState() {
     function g(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
-    return { reason: g("smd_reason_v2", true), expanded: g("smd_kb_expanded", false), ai: g("smd_ai", false), ghis: g("smd_ghis_ward", true) };
+    return { reason: g("smd_reason_v2", true), expanded: g("smd_kb_expanded", false), ai: g("smd_ai", true), ghis: g("smd_ghis_ward", true) };
   }
   // MaiK branding + About section for AI Settings (presentation only). No provider/model names.
   function maikSettingsInfoHTML() {
