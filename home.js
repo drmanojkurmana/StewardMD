@@ -2144,6 +2144,9 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-tool{color:var(--mk-teal);border-color:var(--mk-bd)}
 .maik-tool::after{content:"›";font:800 14px/1 'Inter';margin-left:1px;opacity:.6}
 .maik-tool:hover::after{opacity:1}
+/* Phase 3 — grounding advisory (flag-gated; appears only on flagged claims) */
+.maik-verify{margin-top:10px;font:600 11.5px/1.45 'Inter';color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:9px;padding:8px 11px}
+body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color:rgba(252,211,77,.25)}
 
 /* composer (shared) */
 .maik-cmp{padding:6px 14px 15px;flex:0 0 auto}
@@ -2617,6 +2620,18 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // opt-in per tap) on every grounded answer, so the clinician can reach current literature the
       // static KB may not carry. Live-only (after cache write), mirrors the Rx chip.
       try { if (!active) think.appendChild(maikWebChipEl(question)); } catch (e) {}
+      // Phase 3 (deep) — optional grounding advisory. Fire-and-forget; double-gated (client flag +
+      // server MAIK_VERIFY), so this is a no-op unless deliberately enabled. Never blocks the answer.
+      try {
+        if (window.SMD_AI && SMD_AI.verifyGrounding) {
+          SMD_AI.verifyGrounding(md, pkg).then(function (v) {
+            if (!v || !v.checked || !v.flagged || !v.flagged.length || !think || !think.isConnected) return;
+            var w = document.createElement("div"); w.className = "maik-verify";
+            w.textContent = "⚠ " + v.flagged.length + " statement" + (v.flagged.length > 1 ? "s" : "") + " not directly supported by the cited sources — verify before acting.";
+            think.appendChild(w); scroll();
+          }).catch(function () {});
+        }
+      } catch (e) {}
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       try { if (window.SMD_KU && question) { var _kh = 0, _ks = String(question); for (var _ki = 0; _ki < _ks.length; _ki++) { _kh = ((_kh << 5) - _kh + _ks.charCodeAt(_ki)) | 0; } SMD_KU.emit("maik", "q" + (_kh >>> 0).toString(36)); } } catch (e) {}   // KU: read a MaiK answer
       if (maikV2()) {

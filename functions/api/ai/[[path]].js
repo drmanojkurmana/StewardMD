@@ -380,6 +380,50 @@ async function rerankRetrieved(env, question, chunks) {
   return lexicalRank(question, arr);
 }
 
+// Phase 3 (deep) — embeddings-based grounding verification. Splits the drafted answer into
+// checkable claim sentences (those carrying a dose/number/threshold/guideline word), embeds them and
+// the retrieved source chunks with Workers AI (bge), and flags any claim whose best cosine similarity
+// to ANY source falls below a threshold — i.e. an assertion the provided evidence doesn't support.
+// Double-gated (env.MAIK_VERIFY + client opt-in) and FAIL-SAFE ({checked:false} on any error), so it
+// is inert in production until deliberately enabled and measured. Never alters the answer text.
+const EMBED_MODEL_V = "@cf/baai/bge-base-en-v1.5";
+function cosine(a, b) { let d = 0, na = 0, nb = 0; const n = Math.min(a.length, b.length); for (let i = 0; i < n; i++) { d += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; } return (na && nb) ? d / (Math.sqrt(na) * Math.sqrt(nb)) : 0; }
+function stripForVerify(md) {
+  return String(md || "")
+    .replace(/@@REFINE:[\s\S]*$/i, "")            // drop the refine directive
+    .replace(/```[\s\S]*?```/g, "")               // code fences
+    .replace(/^\s*\|.*\|\s*$/gm, "")              // markdown table rows
+    .replace(/^\s*#{1,6}\s+.*$/gm, "")            // headings
+    .replace(/\[[0-9,\s]+\]/g, "")                // [n] citation markers
+    .replace(/[*_>`]/g, "");
+}
+function claimSentences(md) {
+  const clean = stripForVerify(md);
+  const sents = clean.split(/(?<=[.!?])\s+|\n+/).map((s) => s.trim()).filter((s) => s.length >= 30);
+  // only verify sentences that carry a specific, checkable claim (reduces false flags on generic prose)
+  return sents.filter((s) => /\d|\bmg\b|\bmcg\b|\bml\b|%|first[- ]?line|contraindicat|\bdose|\bunits?\b|mmol|mg\/kg|\bmap\b|lactate/i.test(s)).slice(0, 12);
+}
+async function verifyGrounding(env, text, pkg) {
+  if (!env || !env.AI || !text) return { checked: false };
+  try {
+    const sources = [];
+    ((pkg && pkg.grounding) || []).forEach((g) => (g.knowledge || []).forEach((k) => { if (k && k.text) sources.push(clip(k.text, 400)); }));
+    ((pkg && pkg.retrieved) || []).forEach((c) => { if (c && c.text) sources.push(clip(c.text, 400)); });
+    if (pkg && pkg.treatment && pkg.treatment.default) { const d = pkg.treatment.default; if (d.line) sources.push(clip(d.line, 300)); (d.dosing || []).forEach((x) => sources.push(clip((x.drug || "") + " " + (x.dose || "") + " " + (x.route || "") + " " + (x.freq || ""), 140))); }
+    const sents = claimSentences(text);
+    const uniqSrc = Array.from(new Set(sources)).slice(0, 20);
+    if (!sents.length || !uniqSrc.length) return { checked: true, flagged: [], total: sents.length };
+    const emb = await env.AI.run(EMBED_MODEL_V, { text: sents.concat(uniqSrc) });
+    const vecs = emb && emb.data;
+    if (!Array.isArray(vecs) || vecs.length !== sents.length + uniqSrc.length) return { checked: false };
+    const sVecs = vecs.slice(0, sents.length), srcVecs = vecs.slice(sents.length);
+    const TH = Number(env.MAIK_VERIFY_THRESHOLD) || 0.42;
+    const flagged = [];
+    sents.forEach((s, i) => { let best = 0; for (const sv of srcVecs) { const c = cosine(sVecs[i], sv); if (c > best) best = c; } if (best < TH) flagged.push({ text: s.slice(0, 160), score: Math.round(best * 100) / 100 }); });
+    return { checked: true, flagged, total: sents.length, threshold: TH };
+  } catch (e) { return { checked: false }; }
+}
+
 function renderGroundedPrompt(pkg) {
   const L = [];
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
@@ -681,6 +725,16 @@ export async function onRequest(context) {
       const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
+    }
+    if (seg === "verify") {
+      // Phase 3 (deep) — embeddings grounding check. Double-gated: server env.MAIK_VERIFY must be on
+      // (client also opt-in). Inert + zero-cost when disabled. Never blocks or alters an answer; the
+      // client calls it after rendering and may surface a subtle advisory on flagged claims.
+      const on = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_VERIFY || "").toLowerCase()) >= 0;
+      if (!on) return json({ checked: false, disabled: true });
+      const vpkg = body.package || body || {};
+      const v = await verifyGrounding(env, String(body.text || "").slice(0, 8000), vpkg);
+      return json(v);
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text

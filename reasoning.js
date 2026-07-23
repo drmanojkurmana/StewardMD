@@ -3747,6 +3747,14 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ summary: summary, question: question || "" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Phase 3 (deep) — grounding verification. Double-gated: client flag smd_maik_verify + server
+    // MAIK_VERIFY (both default OFF). Returns {checked, flagged:[{text,score}], total} or {checked:false}.
+    // Fire-and-forget from the UI; never blocks or alters an answer. Inert until deliberately enabled.
+    verifyGrounding: function (text, pkg) {
+      try { if (localStorage.getItem("smd_maik_verify") !== "1") return Promise.resolve({ checked: false }); } catch (e) { return Promise.resolve({ checked: false }); }
+      var b = aiBase(); if (!b || !aiOn() || !text) return Promise.resolve({ checked: false });
+      return aiHeaders().then(function (h) { return fetch(b + "/verify", { method: "POST", headers: h, body: JSON.stringify({ text: text, package: pkg || {} }) }); }).then(function (r) { return r.json(); }).catch(function () { return { checked: false }; });
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
