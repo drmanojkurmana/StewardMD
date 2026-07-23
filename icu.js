@@ -3668,13 +3668,18 @@
   // the bottom bar → Settings; works with or without a patient open.
   function renderV2Settings() {
     var grpOn = icuGroupsOn();
+    // iOS-style toggle (replaces the old solo/group button). Same data-icu-act="grptoggle" handler
+    // (flip smd_icu_groups + reload). Conditional inline styles render the on/off state directly.
+    var swBg = grpOn ? "#0e6e63" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
     var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
-      '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
-        ? "Group mode is ON — shared units with your team: shared patients, round tasks and alerts. Tap to switch to solo ICU on this device."
-        : "Solo ICU (this device only). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
-      '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
-        ? ico("refresh", "↩") + " Switch to solo ICU"
-        : ico("user", "👥") + " Turn on Group mode") + '</button></div>';
+      '<button class="icu-grp-toggle" data-icu-act="grptoggle" role="switch" aria-checked="' + grpOn + '" aria-label="Group mode" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:4px 0 2px">' +
+        '<span style="flex:1;min-width:0"><span style="display:block;font:700 15px system-ui;color:var(--ink,#14202b)">Group mode</span>' +
+        '<span style="display:block;font:500 12.5px/1.4 system-ui;color:var(--slate-soft,#5a7184);margin-top:3px">' + (grpOn ? "Shared units with your team · patients, tasks &amp; alerts" : "Solo ICU · this device only") + '</span></span>' +
+        '<span aria-hidden="true" style="position:relative;flex:0 0 auto;width:47px;height:29px;border-radius:999px;background:' + swBg + ';transition:background .18s"><span style="position:absolute;top:3px;left:' + knob + ';width:23px;height:23px;border-radius:50%;background:#fff;transition:left .18s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></span></span>' +
+      '</button>' +
+      '<p class="icu-doc-sub" style="margin:10px 0 0">' + (grpOn
+        ? "Switching off affects this device only — your shared units stay for the rest of the team."
+        : "Turn on to invite your team and share patients &amp; round tasks. Reopens the app to sync.") + '</p></div>';
     var notifCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Notifications</div>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Choose which unit alerts reach you, and check that push is working on this device.</p>' +
       (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
@@ -3713,7 +3718,11 @@
     var member = '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(v2Initials(name)) + '</span>' +
       '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(name) + '</span><span class="icu-v2-member-role">' + (email ? esc(email) : "Signed in on this device") + '</span></span>' +
       '<span class="icu-v2-member-state">You</span></div>';
-    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Multi-doctor units — roles (who can give instructions vs. update status) and a shared audit trail — are available in Group mode. Turn it on in More.</div>';
+    // Group mode ON but no unit resolved yet → don't tell the user to "turn it on" (Settings already
+    // shows it ON); guide them to pick/create a shared unit. Only say "turn it on" when truly solo.
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (groupMode()
+      ? ' Group mode is <b>ON</b>. Open the <b>Unit</b> board to pick or create a shared unit — your team roster and roles appear here once you join one.'
+      : ' Multi-doctor units — roles (who can give instructions vs. update status) and a shared audit trail — are available in Group mode. Turn it on in Settings.') + '</div>';
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + note + '</div></div>';
   }
   /* ============================================================ ICU v2 GROUP MODE
@@ -7202,6 +7211,22 @@
       }
       rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
       if (groupMode()) { try { grpEnsureGroupsSub(); } catch (e) {} }   // Phase 2: start the live unit subscription
+      // First-open race fix: SMD_ICU_GROUPS (icu-collab.js) + Firebase auth can resolve AFTER this first
+      // paint, so groupMode() was false above → the solo board showed and never re-subscribed. The user
+      // had to toggle solo↔group (which reloads) to see their units/team. Poll briefly until the API +
+      // auth are ready, then start the live subscription and repaint into the shared unit automatically.
+      else if (icuV2On() && icuGroupsOn() && !_grpSubGroups) {
+        var _grpWaitN = 0;
+        var _grpWait = setInterval(function () {
+          _grpWaitN++;
+          if (!ICU.isOpen() || _grpWaitN > 40) { clearInterval(_grpWait); return; }   // ~10s cap
+          if (groupMode()) {
+            clearInterval(_grpWait);
+            try { grpEnsureGroupsSub(); } catch (e) {}   // subscription's own resolver repaints on data
+            try { if (ICU.isOpen()) paint(); } catch (e) {}
+          }
+        }, 250);
+      }
       // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
       // the syringe FAB opens Infusions (its actual purpose), distinct from the Home
       // "ICU" tile which opens Overview. No argument = unchanged (open at current tab).
