@@ -246,7 +246,8 @@
     var cnt = st.total ? st.total.toLocaleString() : st.brands.length;
     // monograph + footer disclaimer in the main body (no top banner)
     b.innerHTML =
-      '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div></div>' +
+      '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div>' +
+        ((window.SMD_RENAL_DOSE && SMD_RENAL_DOSE.buttonHTML) ? SMD_RENAL_DOSE.buttonHTML(d.composition) : '') + '</div>' +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
     // brands (all filters + sorts preserved) -> right-side slide-in drawer

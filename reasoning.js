@@ -5214,7 +5214,11 @@
     hepaticCheck: hepaticCheck,
     cardioCheck: cardioCheck,
     render: smdSafetyOverlay,
-    recalc: smdSafetyRecalc
+    recalc: smdSafetyRecalc,
+    // Reused by renal-dose.js (per-drug "Renal dose" tool in the drug database):
+    renalDoseFor: smdRenalDoseFor,   // (slug, label, crcl) -> {dose,note,draft}|{noChange,draft}|null
+    renalBand: smdRenalBand,         // (crcl) -> band name aligned to the dose tables
+    crclValue: smdCrclValue          // ({age,weight,creatinine,sex}) -> CrCl (Cockcroft-Gault) or null
   };
 
   /* ---------------------------------------------------------------------- *
