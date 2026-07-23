@@ -655,7 +655,8 @@
       function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
       openKardiox();
-    }
+    },
+    hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }
   };
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
   //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html
@@ -1680,6 +1681,67 @@
       }
     } catch (e) {} }
   }
+  // Submit a "please add this hospital" request → admin review (functions/api/hospital-request).
+  // Attaches the Firebase ID token when signed in so the admin sees who asked. Resolves true/false.
+  function submitHospitalRequest(name) {
+    var base = (window.SMD_API_BASE || "");
+    function go(headers) {
+      return fetch(base + "/api/hospital-request", { method: "POST", credentials: "same-origin", headers: headers, body: JSON.stringify({ name: name }) })
+        .then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+    var h = { "Content-Type": "application/json" };
+    try {
+      var u = (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser);
+      if (u && u.getIdToken) return u.getIdToken().then(function (t) { h["Authorization"] = "Bearer " + t; return go(h); }, function () { return go(h); });
+    } catch (e) {}
+    return go(h);
+  }
+  // Owner-only admin console for hospital-add requests: review, then Approve (→ added to the
+  // directory) or Decline. Gated client-side by nIsOwner(); the server re-checks ownerOK on every call.
+  function hospAdminAuthedFetch(path, opts) {
+    var base = (window.SMD_API_BASE || ""); opts = opts || {};
+    function go(tok) {
+      var h = { "Content-Type": "application/json" }; if (tok) h["Authorization"] = "Bearer " + tok;
+      return fetch(base + path, { method: opts.method || "GET", credentials: "same-origin", headers: h, body: opts.body || undefined });
+    }
+    try {
+      var u = (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser);
+      if (u && u.getIdToken) return u.getIdToken().then(go, function () { return go(null); });
+    } catch (e) {}
+    return go(null);
+  }
+  function openHospitalAdmin() {
+    openSheet('<div class="hv-sh-t">Hospital requests</div><div id="hospAdminList" style="max-height:60vh;overflow:auto">Loading…</div>');
+    var sh = sheetEl(), lst = sh.querySelector("#hospAdminList");
+    function row(r) {
+      return '<div class="hadm-row" style="border-top:1px solid var(--hbd,#e2e8f0);padding:11px 2px">' +
+        '<div style="font:600 13.5px system-ui;color:var(--hink,#0f172a)">' + smdEsc(r.name) + '</div>' +
+        '<div style="font:500 11px system-ui;color:var(--hmut,#64748b);margin:1px 0 8px">' + smdEsc(r.state || "—") + '</div>' +
+        '<div style="display:flex;gap:8px"><button data-hadm-approve="' + smdEsc(r.id) + '" style="flex:1;border:0;background:var(--teal,#12a594);color:#fff;font:700 12px system-ui;border-radius:9px;padding:8px;cursor:pointer">Approve</button>' +
+        '<button data-hadm-decline="' + smdEsc(r.id) + '" style="flex:1;border:1px solid var(--hbd,#e2e8f0);background:none;color:var(--hink,#0f172a);font:600 12px system-ui;border-radius:9px;padding:8px;cursor:pointer">Decline</button></div></div>';
+    }
+    function load() {
+      hospAdminAuthedFetch("/api/hospital-request").then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || j.error) { lst.innerHTML = '<div style="padding:14px 2px;color:var(--hmut,#64748b);font:500 12.5px system-ui">' + (j && j.error === "forbidden" ? "Owner sign-in required." : "Couldn't load requests.") + '</div>'; return; }
+        var rq = j.requests || [];
+        lst.innerHTML = rq.length ? rq.map(row).join("") : '<div style="padding:14px 2px;color:var(--hmut,#64748b);font:500 12.5px system-ui">No pending requests.</div>';
+      }).catch(function () { lst.innerHTML = '<div style="padding:14px 2px;color:var(--hmut,#64748b)">Network error.</div>'; });
+    }
+    lst.addEventListener("click", function (e) {
+      var ap = e.target.closest && e.target.closest("[data-hadm-approve]");
+      var dc = e.target.closest && e.target.closest("[data-hadm-decline]");
+      var id = ap ? ap.getAttribute("data-hadm-approve") : (dc ? dc.getAttribute("data-hadm-decline") : null);
+      if (!id) return;
+      var btn = ap || dc; btn.disabled = true; btn.textContent = "…";
+      hospAdminAuthedFetch("/api/hospital-request/" + (ap ? "approve" : "decline"), { method: "POST", body: JSON.stringify({ id: id }) })
+        .then(function (r) { return r.json(); }).then(function (j) {
+          if (j && j.ok) { try { if (window.toast) toast(ap ? "Approved — added to directory" : "Declined"); } catch (e) {} load(); }
+          else { btn.disabled = false; btn.textContent = ap ? "Approve" : "Decline"; }
+        }).catch(function () { btn.disabled = false; btn.textContent = ap ? "Approve" : "Decline"; });
+    });
+    load();
+  }
+  try { window.SMD_openHospitalAdmin = function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }; } catch (e) {}
   // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
   function openHospitalPicker(onPick) {
     function opt(h) {
@@ -1690,7 +1752,14 @@
     function render(q) {
       var api = window.SMD_HOSPITALS;
       var hits = (api && api.search) ? api.search(q) : (api && api.all ? api.all().slice(0, 50) : []);
-      if (!hits.length) return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match. <button data-h-custom="1" style="border:0;background:none;color:var(--hp,var(--teal,#12a594));font-weight:700;cursor:pointer">Use &ldquo;' + smdEsc((q || "").trim()) + '&rdquo;</button></div>';
+      if (!hits.length) {
+        var qq = smdEsc((q || "").trim());
+        return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match for &ldquo;' + qq + '&rdquo;.' +
+          '<div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">' +
+          '<button data-h-custom="1" style="border:1px solid var(--hbd,#e2e8f0);background:none;color:var(--hink,#0f172a);font:600 13px var(--hfont,system-ui);border-radius:10px;padding:10px;cursor:pointer;text-align:left">Use &ldquo;' + qq + '&rdquo; for now</button>' +
+          '<button data-h-request="1" style="border:0;background:var(--hp,var(--teal,#12a594));color:#fff;font:700 13px var(--hfont,system-ui);border-radius:10px;padding:10px;cursor:pointer;text-align:left">＋ Request to add &ldquo;' + qq + '&rdquo; to StewardMD</button>' +
+          '<span style="font:500 10.5px var(--hfont,system-ui);color:var(--hmut,#64748b)">We review requests and add verified institutions to the directory.</span></div></div>';
+      }
       return hits.map(opt).join("");
     }
     openSheet('<div class="hv-sh-t">Choose your hospital</div>' +
@@ -1700,6 +1769,18 @@
     var inp = sh.querySelector("#hospSearch"), lst = sh.querySelector("#hospList");
     if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
     if (lst) lst.addEventListener("click", function (e) {
+      // Request to add a hospital to the directory → submit for admin review (does NOT set the field).
+      var rq = e.target.closest && e.target.closest("[data-h-request]");
+      if (rq) {
+        var name = (inp ? inp.value.trim() : ""); if (!name) return;
+        rq.disabled = true; rq.textContent = "Sending…";
+        submitHospitalRequest(name).then(function (ok) {
+          rq.textContent = ok ? "✓ Requested — we'll review it" : "Couldn't send — try again";
+          if (ok) { try { if (window.toast) toast("Hospital requested — you can use it now; we'll verify and add it."); } catch (e) {} setTimeout(function () { closeSheet(); try { onPick(name); } catch (e) {} }, 900); }
+          else rq.disabled = false;
+        });
+        return;
+      }
       var b = e.target.closest && e.target.closest(".hosp-opt, [data-h-custom]"); if (!b) return;
       var val = b.getAttribute("data-h-custom") ? (inp ? inp.value.trim() : "") : b.getAttribute("data-h");
       if (!val) return; closeSheet(); setTimeout(function () { try { onPick(val); } catch (e) {} }, 60);

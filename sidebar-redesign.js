@@ -164,6 +164,14 @@
           '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
       }
     } catch (e) {}
+    // Owner-only: review + approve/decline hospital-add requests.
+    try {
+      var _oe = ((window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "").toLowerCase();
+      if (_oe === "stewardmd.in@gmail.com" || _oe === "drmanojkurmana@gmail.com") {
+        html += '<button class="sbr-row" data-sbr-act="hospadmin">' + svg("shield") +
+          '<span style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
+      }
+    } catch (e) {}
     html += '<div class="sbr-note">Experimental. Clinician review required.</div>';
     return html;
   }
