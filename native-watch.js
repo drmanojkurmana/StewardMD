@@ -408,20 +408,34 @@
   // Ward Sync census. patientCount is the deduped watchlist size (so the open
   // patient counts even with an empty roster/GHIS cache). No true bed denominator
   // or task count exists client-side, so we don't invent them.
-  function census(patientCount) {
+  function census(patientCount, crit, tk) {
     try {
       var occupied = 0;
       if (window.GHIS && GHIS.getPatients) {
         occupied = (GHIS.getPatients() || []).filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
       }
-      if (!patientCount) return null;                 // nothing meaningful to relay
+      var critList = (crit || []).filter(function (c) { return c && c.severity === "critical"; });
+      var critCount = critList.length, taskCount = (tk && tk.length) || 0;
+      if (!patientCount && !critCount && !taskCount) return null;   // nothing meaningful to relay
       var ward = "";
       try { if (window.ICU && ICU.currentUnitLabel) ward = ICU.currentUnitLabel() || ""; } catch (e) {}
+      var top = null;
+      if (critList.length) {
+        var c0 = critList[0];
+        top = [c0.analyte, [c0.value, c0.units].filter(Boolean).join(" "), c0.patientLabel].filter(Boolean).join(" · ") || null;
+      }
+      // Emit the COMPLETE GlanceState shape — the widget/watch decode it strictly (Swift Codable), so
+      // every non-optional key (criticalCount, tasksDue, rounds*, census*, onCall, updatedAt) MUST be
+      // present or the decode fails and the tile shows an empty snapshot.
       return {
-        patientCount: patientCount,
-        censusOccupied: occupied || patientCount,
-        censusTotal: patientCount,
-        tasksDue: 0,
+        criticalCount: critCount,
+        topCritical: top,
+        patientCount: patientCount || 0,
+        tasksDue: taskCount,
+        roundsDone: 0,
+        roundsTotal: 0,
+        censusOccupied: occupied || patientCount || 0,
+        censusTotal: patientCount || 0,
         onCall: false,
         ward: ward,
         updatedAt: Math.floor(Date.now() / 1000)
@@ -475,7 +489,7 @@
       var tk = tasks(); if (tk.length) payload.tasks = tk;
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
-      var cen = census(wl.length); if (cen) payload.glance = cen;
+      var cen = census(wl.length, crit, tk); if (cen) payload.glance = cen;
       // W2: doctor's name for the watch home header (below the StewardMD wordmark).
       // NOTE: don't send HOSPITAL.current() — that's the antibiogram data source (e.g. "ICMR"),
       // not the doctor's hospital, so it would mislabel the watch. Name only.

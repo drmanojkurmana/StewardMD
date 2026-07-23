@@ -3,6 +3,9 @@ import Capacitor
 import SwiftUI
 import UserNotifications
 import StewardMDWatchCore
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 #if canImport(WatchConnectivity)
 import WatchConnectivity
 #endif
@@ -189,6 +192,12 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let c = calcDefsData { context["calcDefs"] = c }
 
         relay.updateContext(context)
+
+        // Refresh the iOS home-screen widgets promptly when a fresh glance is published (otherwise they
+        // wait for the 30-min timeline floor). No-op when no widgets are installed.
+        #if canImport(WidgetKit)
+        if glanceData != nil { WidgetCenter.shared.reloadAllTimelines() }
+        #endif
 
         call.resolve()
     }
