@@ -446,7 +446,7 @@ function renderGroundedPrompt(pkg) {
   if (pkg.sources && pkg.sources.length) {
     L.push("\n=== SOURCES (cite the specific supporting claim inline with [n]; use ONLY these numbers, never invent one) ===");
     pkg.sources.slice(0, 12).forEach((s) => L.push((s.n || "") + ". " + clip(s.title, 120)));
-    L.push("\nFORMATTING: append the matching [n] right after a statement that rests on a source above (e.g. 'first-line is X [2]'). When you compare 3+ options across the same attributes (differentials, empiric regimens, drug choices), present them as a compact GitHub-flavoured markdown table (header row + |---| separator). Do not cite what you cannot attribute to a listed source.");
+    L.push("\nFORMATTING: append the matching [n] right after a statement that rests on a source above (e.g. 'first-line is X [2]'). When a recommendation rests on a NAMED guideline or trial in the list (e.g. 'Surviving Sepsis Campaign 2021', 'ESC 2024', 'ICMR AMRSN 2024', an 'AAO' PPP), name it in prose with its year the first time you rely on it ('per the 2021 Surviving Sepsis Campaign [n]'), the way UpToDate attributes a source — do NOT name generic bucket titles ('StewardMD Knowledge Base', 'Standard internal-medicine reference') in prose, only mark them with [n]. When you compare 3+ options across the same attributes (differentials, empiric regimens, drug choices), present them as a compact GitHub-flavoured markdown table (header row + |---| separator). Do not cite what you cannot attribute to a listed source.");
   }
   return L.join("\n");
 }
