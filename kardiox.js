@@ -97,6 +97,10 @@
      keep it present across home re-renders via a MutationObserver. If the home markup isn't found the
      card simply doesn't appear — never a breakage. Reversible: flag off → this is a complete no-op. */
   function mountHomeCard() {
+    // MOVED TO CLINICAL-TOOLS TILE: the big home hero was replaced by a compact "KardiQ X AI" tile in
+    // home.js's Clinical Tools grid (beside FundX), per product decision. Hero mount disabled here to
+    // avoid duplication; the module + window.KARDIOX.open are unchanged. Delete this return to restore.
+    return;
     if (!on()) return;
     if (typeof document === "undefined") return;
     var stack = document.querySelector(".v3-stack") || document.querySelector(".rnav-main .rnav-stack") || document.querySelector("main .v3-stack");

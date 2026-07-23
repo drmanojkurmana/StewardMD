@@ -648,6 +648,13 @@
       function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("fundx", openFundx); return; } } catch (e) {}
       openFundx();
+    },
+    kardiox: function () {
+      // KardiQ X AI — opened from its Clinical-Tools tile (the big home hero was replaced by this tile).
+      // Gated by Experimental Access like FundX; opens directly if the framework isn't loaded.
+      function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
+      try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
+      openKardiox();
     }
   };
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
@@ -1173,6 +1180,16 @@
               var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
               var on = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1");
               return on ? rtile("retinalscan", "visibility", "Retinal Scan", "FundX AI · fundus") : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // KardiQ X AI — moved from the big top hero into a Clinical-Tools tile beside FundX.
+            // Prefer KARDIOX.isOn() (exact), but fall back to the flag synchronously — kardiox.js is a
+            // deferred script and may not have defined window.KARDIOX yet when this grid is built.
+            try {
+              var kon;
+              if (window.KARDIOX && KARDIOX.isOn) kon = KARDIOX.isOn();
+              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") !== "0"); }
+              return kon ? rtile("kardiox", "cardiology", "KardiQ X AI", "ECG interpretation") : "";
             } catch (e) { return ""; }
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
