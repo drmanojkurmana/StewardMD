@@ -619,11 +619,14 @@ export async function onRequest(context) {
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         let text;
-        // Non-stream path (native, or a stream that failed to open): keep a concise answer SHORT and
-        // SELF-CONTAINED so the whole-answer fetch returns fast and never clips mid-sentence. "detailed"
-        // still gets the full budget (the clinician explicitly asked for depth and accepts the wait).
-        const nsCap = (body && body.depth === "detailed") ? MAX_OUT : NONSTREAM_BASE;
-        const nsSys = (body && body.depth === "detailed") ? sys : (sys + "\n\nLENGTH: be concise and COMPLETE — lead with the direct answer, then only the essential specifics (key drugs/doses/steps/differentials). Aim for ~180-250 words and finish every sentence; do not trail off mid-thought.");
+        // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
+        // output budget as the streaming path, so the UpToDate-style structure (assumption lead,
+        // comparison tables, In-India note, refine chips) appears EVERYWHERE — including native, where
+        // CapacitorHttp can't stream. Simple/factual questions still self-adapt short (KNOWLEDGE_SYS says
+        // so), so a dose lookup stays brief + fast; only a genuinely long clinical answer uses the fuller
+        // budget — native then waits for the whole answer, the accepted trade for full structure.
+        const nsCap = MAX_OUT;
+        const nsSys = sys;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
