@@ -16,18 +16,28 @@ public struct GlanceState: Codable, Equatable, Sendable {
     public var onCall: Bool
     public var ward: String?
     public var bleep: String?
+    // New tiles (design §15 — additive fields on the same struct):
+    public var watchlistTop: String?     // top-acuity patient line, ICU Watchlist tile (e.g. "Bed 12 · NEWS2 9")
+    public var watchlistNews: Int?       // that patient's NEWS2, for tint/urgency
+    public var antibioticRec: String?    // last on-device MARINAM recommendation (Antibiotic Rec tile)
+    public var briefText: String?        // AI morning-brief one-liner (Morning Brief tile)
     public var updatedAt: Double
 
     public init(criticalCount: Int = 0, topCritical: String? = nil, patientCount: Int = 0,
                 tasksDue: Int = 0, roundsDone: Int = 0, roundsTotal: Int = 0,
                 censusOccupied: Int = 0, censusTotal: Int = 0, shiftEndsAt: Double? = nil,
-                onCall: Bool = false, ward: String? = nil, bleep: String? = nil, updatedAt: Double = 0) {
+                onCall: Bool = false, ward: String? = nil, bleep: String? = nil,
+                watchlistTop: String? = nil, watchlistNews: Int? = nil,
+                antibioticRec: String? = nil, briefText: String? = nil, updatedAt: Double = 0) {
         self.criticalCount = criticalCount; self.topCritical = topCritical
         self.patientCount = patientCount; self.tasksDue = tasksDue
         self.roundsDone = roundsDone; self.roundsTotal = roundsTotal
         self.censusOccupied = censusOccupied; self.censusTotal = censusTotal
         self.shiftEndsAt = shiftEndsAt; self.onCall = onCall
-        self.ward = ward; self.bleep = bleep; self.updatedAt = updatedAt
+        self.ward = ward; self.bleep = bleep
+        self.watchlistTop = watchlistTop; self.watchlistNews = watchlistNews
+        self.antibioticRec = antibioticRec; self.briefText = briefText
+        self.updatedAt = updatedAt
     }
 
     public static let empty = GlanceState()
@@ -57,6 +67,10 @@ public struct GlanceState: Codable, Equatable, Sendable {
         if let v = dict["ward"] as? String { g.ward = v }
         if let v = dict["bleep"] as? String { g.bleep = v }
         if let v = dbl("shiftEndsAt") { g.shiftEndsAt = v }
+        if let v = dict["watchlistTop"] as? String { g.watchlistTop = v }
+        if let v = int("watchlistNews") { g.watchlistNews = v }
+        if let v = dict["antibioticRec"] as? String { g.antibioticRec = v }
+        if let v = dict["briefText"] as? String { g.briefText = v }
         if let v = dbl("updatedAt") { g.updatedAt = v }
         return g
     }

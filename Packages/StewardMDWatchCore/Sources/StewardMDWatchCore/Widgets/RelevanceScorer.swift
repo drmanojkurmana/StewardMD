@@ -3,6 +3,8 @@ import Foundation
 /// The widget/complication kinds that participate in the Smart Stack.
 public enum WidgetKind: String, CaseIterable, Sendable {
     case criticalLabs, patients, rounds, shift, onCall, drugLookup
+    // New tiles (design §15):
+    case morningBrief, antibioticRec, watchlist
 }
 
 /// Computes Smart Stack relevance so the most useful widget rises on its own
@@ -24,8 +26,16 @@ public enum RelevanceScorer {
         // Shift timer rises within 90 minutes of the shift end.
         s[.shift] = shiftScore(endsAt: state.shiftEndsAt, now: now)
 
+        // Morning Brief peaks at the start of the day (06–09) when a brief exists.
+        s[.morningBrief] = state.briefText?.isEmpty == false ? briefScore(hour: hour) : 0.1
+
+        // ICU Watchlist rises with the top patient's acuity; steady when a roster exists.
+        if let n = state.watchlistNews { s[.watchlist] = n >= 7 ? 0.75 : (n >= 5 ? 0.6 : 0.45) }
+        else { s[.watchlist] = state.patientCount > 0 ? 0.45 : 0.1 }
+
         // Steady baselines.
         s[.patients] = 0.5
+        s[.antibioticRec] = state.antibioticRec?.isEmpty == false ? 0.35 : 0.1
         s[.drugLookup] = 0.3
 
         return s
@@ -36,6 +46,14 @@ public enum RelevanceScorer {
         case 8...11: return 0.8
         case 12...17: return 0.4
         default: return 0.2
+        }
+    }
+
+    private static func briefScore(hour: Int) -> Double {
+        switch hour {
+        case 6...9: return 0.9
+        case 10...12: return 0.5
+        default: return 0.25
         }
     }
 

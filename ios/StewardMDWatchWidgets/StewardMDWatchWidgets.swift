@@ -19,5 +19,9 @@ struct StewardMDWatchWidgets: WidgetBundle {
         PatientsWidget()
         TasksWidget()
         OnCallWidget()
+        // New Smart Stack tiles (design §11/§15)
+        MorningBriefWidget()
+        AntibioticRecWidget()
+        ICUWatchlistWidget()
     }
 }

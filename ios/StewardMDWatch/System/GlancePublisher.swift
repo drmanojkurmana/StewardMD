@@ -25,4 +25,18 @@ enum GlancePublisher {
     static func setOpenTasks(_ count: Int) {
         publish { $0.tasksDue = count }
     }
+
+    // New tiles (design §11/§15) — populated as their data sources land: the top-acuity patient
+    // (relayed ICU/NEWS2 state), the last on-device antibiotic recommendation, and the AI morning
+    // brief. Until then the widgets render sensible placeholders. Phone bridge may also set these
+    // via the relay dict (GlanceState.merged handles watchlistTop/watchlistNews/antibioticRec/briefText).
+    static func setWatchlist(top: String?, news: Int?) {
+        publish { $0.watchlistTop = top; $0.watchlistNews = news }
+    }
+    static func setAntibioticRec(_ text: String?) {
+        publish { $0.antibioticRec = text }
+    }
+    static func setMorningBrief(_ text: String?) {
+        publish { $0.briefText = text }
+    }
 }
