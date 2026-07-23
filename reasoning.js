@@ -4180,15 +4180,24 @@
   }
   // Map retrieved chunks → compact HUMAN-READABLE source titles (never chunk IDs /
   // section keys / raw refs). De-duplicated, in reading order.
+  // Named authoritative sources we surface VERBATIM (with any inline year) — the DrOracle-style
+  // "cite the real guideline" behaviour. Everything else is bucketed generically; disposition notes
+  // (e.g. "Urgent OBGYN; admit.") are care-escalation text, NOT citations, so they must never leak.
+  var MAIK_NAMED_SRC = /\b(idsa|ats|kdigo|ada|aha|acc|esc|surviving sepsis|gold|gina|who|baveno|aasld|ncs|acr|eular|icmr|amrsn|sanford|aao|heds|nice|uspstf|kdoqi|pocket book|ppp|cdc|ecil|niv|nccn|kdigo)\b/i;
+  function maikIsDisposition(s) {
+    // Imperative care-escalation phrasing, not a bibliographic reference.
+    return /^(urgent|emergency|admit|refer|review|same-day|immediate|escalat|transfer|call|repeat|observe|discharge)\b/i.test(s) ||
+      /;\s*(admit|refer|admission)/i.test(s) || /\b(admit|referral now|NOW)\.?$/i.test(s);
+  }
   function maikSourceTitles(chunks) {
     var out = [], seen = {};
     (chunks || []).forEach(function (c) {
-      var ref = String((c && c.source && c.source.ref) || ""), sec = String((c && c.section) || ""), title;
-      if (/harrison/i.test(ref)) title = "Standard internal-medicine reference";
-      else if (/icmr/i.test(ref)) title = "ICMR guidelines";
+      var ref = String((c && c.source && c.source.ref) || "").trim(), sec = String((c && c.section) || ""), title;
+      var named = MAIK_NAMED_SRC.test(ref) && !maikIsDisposition(ref);
+      if (named) { title = ref.replace(/\s*·.*$/, "").replace(/\.\s*$/, "").trim(); }   // real citation, verbatim (keeps year)
+      else if (/harrison/i.test(ref)) title = "Standard internal-medicine reference";
       else if (/drug index/i.test(ref)) title = "StewardMD Drug Index";
-      else if (/idsa|ats|kdigo|\bada\b|aha|acc|esc|surviving sepsis|gold|gina|who|baveno|aasld|\bncs\b|acr|eular/i.test(ref)) title = ref.replace(/\s*·.*$/, "").trim();
-      else if (/stewardmd|management|stewardship|protocol/i.test(ref) || /^management/.test(sec)) title = "StewardMD management protocol";
+      else if (/stewardmd|management|stewardship|protocol/i.test(ref) || /^management/.test(sec) || maikIsDisposition(ref)) title = "StewardMD management protocol";
       else title = "StewardMD Knowledge Base";
       if (title && !seen[title]) { seen[title] = 1; out.push(title); }
     });
