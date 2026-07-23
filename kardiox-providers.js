@@ -129,7 +129,18 @@
   function isNative() { try { return !!(typeof window !== "undefined" && window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; } }
   var KX_BACKEND_URL = "https://kardiox-pipeline-yislqrddsq-uc.a.run.app";
   var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
+  var KX_IMAGE_URL = "https://kardiox-image-yislqrddsq-uc.a.run.app";  // end-to-end IMAGE model (Yale-style, reads the photo directly)
   function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
+  // END-TO-END IMAGE analyzer: POST the photo straight to the kardiox-image Cloud Run service (ResNet-18
+  // reads the ECG image, no digitiser). Native-only (direct HTTPS + no CORS). Flag smd_kardiox_image.
+  function imageFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_image")); } catch (e) { return false; } }
+  function imageAnalyzer() {
+    try {
+      if (!isNative() || typeof window === "undefined" || !window.SMD_KARDIOX_NET || !window.SMD_KARDIOX_NET.remoteAnalyzer) return null;
+      var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: KX_IMAGE_URL, path: "/v1/ecg/analyze-image" });
+      return { kind: "image", analyze: r.analyze };
+    } catch (e) { return null; }
+  }
   function remoteAnalyzer() {
     try {
       if (typeof window !== "undefined" && window.SMD_KARDIOX_NET && window.SMD_KARDIOX_NET.remoteAnalyzer) {
@@ -315,6 +326,7 @@
   // honest "unavailable" analyzer — the mock is NEVER a silent fallback (it faked a fixed AFib).
   function chooseAnalyzer(opts) {
     if (demoFlag()) return mockAnalyzer();
+    if (imageFlag()) { var ima = imageAnalyzer(); if (ima) return ima; }    // end-to-end image model (PoC photo→dx)
     if (learnedFlag()) { var la = learnedAnalyzer(); if (la) return la; }   // learned-digitiser validation stage
     if (ondevicePreferred()) return ortAnalyzer();     // full offline photo→dx (opt-in + pack installed)
     var real = ((opts.remote || useRemote()) && remoteAnalyzer()) || ortAnalyzer();
