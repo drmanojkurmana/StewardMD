@@ -193,7 +193,7 @@
     wid.innerHTML =
       '<div class="smdaw-row"><div class="smdaw-rl"><div class="smdaw-t">Complications</div><div class="smdaw-s">Add StewardMD to your watch face: long-press the face ▸ Edit ▸ tap a complication ▸ StewardMD.</div></div></div>' +
       '<div class="smdaw-row"><div class="smdaw-rl"><div class="smdaw-t">Smart Stack</div><div class="smdaw-s">Turn the Crown up from the face; StewardMD widgets rise by relevance (criticals, rounds, shift).</div></div></div>' +
-      '<div class="smdaw-row"><div class="smdaw-rl"><div class="smdaw-t">Complication enabled</div></div></div>';
+      '<div class="smdaw-row"><div class="smdaw-rl"><div class="smdaw-t">Complication enabled</div>' + (st.complicationEnabled ? '' : '<div class="smdaw-s">Add it on the watch (steps above) — this flips to Yes automatically. Apple doesn’t allow apps to add complications for you.</div>') + '</div></div>';
     wid.querySelector(".smdaw-row:last-child").appendChild(valueText(st.complicationEnabled ? "Yes" : "No", st.complicationEnabled ? "smdaw-ok" : "smdaw-off"));
     bd.appendChild(wid);
 
