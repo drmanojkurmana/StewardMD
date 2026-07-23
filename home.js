@@ -1512,7 +1512,7 @@
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
-      mi("bell", "Notification preferences", "Choose which specialties alert you", "notifprefs") +
+      mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
       mi("calc", "Calculators", "50+ clinical tools", "calculators") +
       mi("play", "App tour", "Replay the guided tour", "apptour") +
@@ -2442,6 +2442,22 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic — search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
+    // UpToDate-style refinement chips: the LLM ends a clinical answer with a machine-readable
+    // "@@REFINE: a | b | c@@" line listing patient-context factors that would change the answer.
+    // We parse it OUT of the displayed text and render tappable chips that re-ask the question with
+    // that context appended (reusing the .maik-fu / data-maik-q delegated handler + answer cache).
+    function maikStripRefine(s) { return String(s == null ? "" : s).replace(/@@REFINE:[\s\S]*?@@/gi, "").replace(/@@\s*REFINE:[\s\S]*$/i, "").replace(/\s+$/, ""); }
+    function maikParseRefine(md) {
+      var chips = [], m = String(md == null ? "" : md).match(/@@REFINE:\s*([\s\S]*?)@@/i);
+      if (m && m[1]) chips = m[1].split("|").map(function (s) { return s.trim().replace(/^[-•]\s*/, ""); }).filter(Boolean).slice(0, 6);
+      return { text: maikStripRefine(md), chips: chips };
+    }
+    function maikRefineHTML(question, chips) {
+      if (!chips || !chips.length) return "";
+      var h = '<div class="maik-refine-lbl" style="font:700 11.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:12px 0 5px">Anything to add or change?</div><div class="maik-followups maik-refine">';
+      chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
+      return h + '</div>';
+    }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
@@ -2452,6 +2468,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
       if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
+      var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
         think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
         var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); think.appendChild(maikWebChipEl(question)); scroll(); return;
@@ -2479,6 +2496,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       } else { think.innerHTML = full; }
       // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
       // delegated listener on the chat body handles taps even after cache restore.
+      // UpToDate-style LLM refinement chips first (primary), then the KB-derived follow-ups.
+      var refineHTML = maikRefineHTML(question, _refine.chips);
+      if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
@@ -2590,7 +2610,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
             if (!_perfTTFT) _perfTTFT = maikNow();
-            var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(acc) : maikEscH(acc);
+            var _accS = maikStripRefine(acc);   // hide the trailing @@REFINE@@ line while streaming
+            var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
             think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
             try { scroll(); } catch (e) {}
           };
@@ -3208,10 +3229,53 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
 
   /* ---- auth + notification preferences (Phase 2) ---- */
   var NOTIF_PREFS = "smd_notif_prefs";
+  // Notification categories the user controls (More → Notification preferences). Each maps to a
+  // class of alert the push server / app gates on (delivered in the prefs + subscribe payloads).
+  // `safety:true` categories (tasks, critical & immediate values) CANNOT be disabled by a junior
+  // resident or intern — a patient-safety rule enforced in the UI and re-asserted on save.
+  var NOTIF_CATS = [
+    { k: "tasks",      ico: "🗒️", label: "Tasks & assignments",          desc: "Ward/unit tasks assigned to you, and reminders",     safety: true },
+    { k: "critical",   ico: "🚨", label: "Critical & immediate values",   desc: "Critical lab values and urgent patient alerts",      safety: true },
+    { k: "labs",       ico: "🧪", label: "Lab reports",                   desc: "Routine (non-critical) lab results",                 safety: false },
+    { k: "guidelines", ico: "📘", label: "Clinical guidelines & updates", desc: "New guidelines, drug approvals and safety alerts",   safety: false },
+    { k: "general",    ico: "📣", label: "General app notifications",      desc: "Announcements, tips and product updates",            safety: false }
+  ];
+  function defaultCategories() { return { tasks: true, critical: true, labs: true, guidelines: true, general: true }; }
+  // Junior resident / intern → safety categories are locked ON. Role comes from ICU-group
+  // membership. On native, native-watch.js already computes it (window.SMD_ROLE); on web (or
+  // before the watch bridge loads) we track it ourselves via a single SMD_ICU_GROUPS listener.
+  var _ROLE_RANK = ["head", "professor", "assistant", "senior_resident", "junior_resident", "intern"];
+  var _seniorRole = null, _roleSubStarted = false;
+  function startRoleTracker() {
+    if (_roleSubStarted) return;
+    try { if (window.SMD_ROLE) return; } catch (e) {}   // native bridge already tracks role — no duplicate listener
+    var api = null; try { api = window.SMD_ICU_GROUPS; } catch (e) {}
+    if (!api || !api.subscribeGroups) return;            // ICU-collab not ready yet — caller retries on next open
+    try { if (!(window.SMD_AUTH && window.SMD_AUTH.currentUser)) return; } catch (e) { return; }  // needs a signed-in uid
+    _roleSubStarted = true;
+    try {
+      api.subscribeGroups(function (groups) {
+        var best = null, bestRank = 99;
+        (groups || []).forEach(function (g) { var idx = _ROLE_RANK.indexOf(g && g.myRole); if (idx >= 0 && idx < bestRank) { bestRank = idx; best = g.myRole; } });
+        _seniorRole = best;
+      });
+    } catch (e) { _roleSubStarted = false; }
+  }
+  function roleRestricted() {
+    try { if (window.SMD_ROLE && SMD_ROLE.isRestricted) return !!SMD_ROLE.isRestricted(); } catch (e) {}
+    return _seniorRole === "junior_resident" || _seniorRole === "intern";
+  }
+  // Current category prefs merged over defaults, with safety categories forced ON for JR/interns.
+  function categoriesGet() {
+    var d = defaultCategories(), stored = prefsGetLocal().categories || {}, out = {};
+    for (var k in d) out[k] = (k in stored) ? stored[k] !== false : d[k];
+    if (roleRestricted()) { out.tasks = true; out.critical = true; }
+    return out;
+  }
   function idToken() { try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return u ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function authHeaders() { return idToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t; return h; }); }
   function defaultWorkspace() { try { if (window.SMD_WS && window.SMD_WS.active) return window.SMD_WS.active() || "internal_medicine"; } catch (e) {} return "internal_medicine"; }
-  function prefsGetLocal() { try { var a = JSON.parse(localStorage.getItem(NOTIF_PREFS) || "null"); if (a && Array.isArray(a.workspaces) && a.workspaces.length) return a; } catch (e) {} return { workspaces: [defaultWorkspace()], branches: [], push_enabled: true }; }
+  function prefsGetLocal() { try { var a = JSON.parse(localStorage.getItem(NOTIF_PREFS) || "null"); if (a && Array.isArray(a.workspaces) && a.workspaces.length) { if (!a.categories || typeof a.categories !== "object") a.categories = defaultCategories(); return a; } } catch (e) {} return { workspaces: [defaultWorkspace()], branches: [], push_enabled: true, categories: defaultCategories() }; }
   function prefsSetLocal(p) { try { localStorage.setItem(NOTIF_PREFS, JSON.stringify(p)); } catch (e) {} }
   function selectedWorkspaces() { return prefsGetLocal().workspaces || ["internal_medicine"]; }
   function selectedBranches() { var b = prefsGetLocal().branches; return Array.isArray(b) ? b : []; }
@@ -3224,14 +3288,26 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (pushSupported() && navigator.serviceWorker) {
         navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); }).then(function (sub) {
           if (!sub) return;
-          authHeaders().then(function (h) { fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: ws }) }).catch(function () {}); });
+          authHeaders().then(function (h) { fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: ws, categories: categoriesGet() }) }).catch(function () {}); });
         }).catch(function () {});
       }
     } catch (e) {}
     try { var P = nativePush(); if (P && P.register) P.register(); } catch (e) {}   // re-fires registration → re-posts workspaces
   }
   function openNotifPrefs() {
+    startRoleTracker();   // ensure the JR/intern role lock is populated (web path)
     var sel = selectedWorkspaces(), selB = selectedBranches();
+    var cats = categoriesGet(), restricted = roleRestricted();
+    // Category toggles — the primary controls. Safety categories (tasks + critical/immediate
+    // values) render checked & disabled for junior residents / interns and cannot be turned off.
+    var catRows = NOTIF_CATS.map(function (c) {
+      var on = cats[c.k] !== false, lock = restricted && c.safety;
+      return '<label class="np-crow' + (lock ? " np-locked" : "") + '">' +
+        '<span class="np-cico" aria-hidden="true">' + c.ico + '</span>' +
+        '<span class="np-ctext"><span class="np-clabel">' + nEsc(c.label) + (lock ? '<span class="np-lockpill">Required</span>' : "") + '</span>' +
+        '<span class="np-cdesc">' + nEsc(c.desc) + '</span></span>' +
+        '<input type="checkbox" class="np-catck" value="' + c.k + '"' + ((on || lock) ? " checked" : "") + (lock ? " disabled" : "") + '></label>';
+    }).join("");
     var order = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
     var rows = order.map(function (w) {
       var on = sel.indexOf(w) >= 0;
@@ -3246,7 +3322,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       return row;
     }).join("");
     openSheet('<div class="hv-sh-t">🔔 Notification preferences</div>' +
-      '<div class="np-hint">Choose which specialties send you push alerts. Under Internal Medicine, pick sub-specialties (branches) to filter your Medical Updates feed. All updates still appear in the feed regardless.</div>' +
+      '<div class="np-hint">Choose what alerts you. ' + (restricted ? 'As a junior resident / intern, task and critical-value alerts stay on for patient safety.' : 'Turn off any category you don’t want to be notified about.') + '</div>' +
+      '<div class="np-cats">' + catRows + '</div>' +
+      '<div class="np-seclabel">Specialties for guidelines &amp; updates</div>' +
+      '<div class="np-hint" style="margin-top:0">Under Internal Medicine, pick sub-specialties to filter your Medical Updates feed. All updates still appear in the feed regardless.</div>' +
       '<div class="np-list">' + rows + '</div>' +
       '<button class="np-save" id="npSave">Save preferences</button>' +
       '<div class="np-msg" id="npMsg"></div>');
@@ -3261,7 +3340,12 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (!ws.length) ws = ["internal_medicine"];
       var br = [].map.call(s.querySelectorAll(".np-bck:checked"), function (c) { return c.value; });
       if (ws.indexOf("internal_medicine") < 0) br = [];   // branches only apply within Internal Medicine
-      var p = { workspaces: ws, branches: br, push_enabled: true };
+      // Categories: start all-on, apply the checkbox states, then re-assert the safety lock so a
+      // JR/intern can never persist tasks/critical OFF (even via a tampered DOM).
+      var cat = {}; NOTIF_CATS.forEach(function (c) { cat[c.k] = true; });
+      [].forEach.call(s.querySelectorAll(".np-catck"), function (ck) { cat[ck.value] = ck.checked; });
+      if (restricted) { cat.tasks = true; cat.critical = true; }
+      var p = { workspaces: ws, branches: br, push_enabled: true, categories: cat };
       prefsSetLocal(p);
       _feedBranch = br.length === 1 ? br[0] : "all";       // one branch → default the feed filter to it
       var msg = s.querySelector("#npMsg"); if (msg) msg.textContent = "Saving…";
@@ -3505,6 +3589,18 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       ".dt-btn.primary{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
       // notification preferences sheet
       ".np-hint{font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5;margin:2px 0 12px}",
+      // category toggles (Tasks / Critical / Labs / Guidelines / General)
+      ".np-cats{display:flex;flex-direction:column;gap:2px;margin:2px 0 16px}",
+      ".np-crow{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);cursor:pointer}",
+      ".np-crow.np-locked{cursor:default}",
+      ".np-cico{flex:0 0 auto;font-size:18px;line-height:1.5}",
+      ".np-ctext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}",
+      ".np-clabel{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);display:flex;align-items:center;gap:7px;flex-wrap:wrap}",
+      ".np-cdesc{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.4}",
+      ".np-lockpill{font:700 9px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:#b45309;background:#fef3c7;border-radius:5px;padding:2px 6px;white-space:nowrap}",
+      ".np-crow input{flex:0 0 auto;width:20px;height:20px;margin-top:2px;accent-color:var(--teal,#0a9396)}",
+      ".np-crow input:disabled{accent-color:#94a3b8;cursor:not-allowed;opacity:.85}",
+      ".np-seclabel{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin:4px 0 4px}",
       ".np-list{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}",
       ".np-row{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);font:600 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
       ".np-row input{width:20px;height:20px;accent-color:var(--teal,#0a9396)}",
