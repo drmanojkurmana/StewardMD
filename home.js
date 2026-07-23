@@ -2138,6 +2138,12 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-refine .maik-fu::before{content:"+";font:800 13px/1 'Inter';opacity:.65;margin-right:-1px}
 .maik-refine .maik-fu:hover{background:var(--mk-bg);border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-refine .maik-fu:hover::before{opacity:1}
+/* Phase 4 — "open in app" tool chips: bordered action chips with a trailing chevron */
+.maik-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px}
+.maik-tools-lbl{width:100%;font:700 10px/1.2 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--mk-mut);margin-bottom:1px}
+.maik-tool{color:var(--mk-teal);border-color:var(--mk-bd)}
+.maik-tool::after{content:"›";font:800 14px/1 'Inter';margin-left:1px;opacity:.6}
+.maik-tool:hover::after{opacity:1}
 
 /* composer (shared) */
 .maik-cmp{padding:6px 14px 15px;flex:0 0 auto}
@@ -2522,6 +2528,19 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (/(resistance|antibiogram|susceptib|sensitiv|antibiogram|local .*(pattern|data|flora)|resistogram)/.test(s)) return "antibiogram";
       return null;
     }
+    // Phase 4 — tool-calling: detect when a question is best answered by a structured in-app tool and
+    // offer a one-tap "open in app" chip (drug interactions, calculators/scores, Drug Index dosing).
+    // The chip routes through the delegated handler (data-maik-tool) → the ACT map, exactly like the
+    // antibiogram refine route. Additive: chips only appear when the intent clearly matches.
+    function maikToolChipsHTML(question) {
+      var n = maikNorm(question || ""), chips = [], seen = {};
+      function add(tool, label) { if (seen[tool]) return; seen[tool] = 1; chips.push('<button class="maik-fu maik-tool" data-maik-tool="' + tool + '">' + maikEscH(label) + '</button>'); }
+      if (/\binteract(ion|ions)?\b|drug[- ]drug|concomitant|compatib|\b(give|use|combine|coadminister)\b.*\b(with|and)\b/.test(n)) add("interactions", "Check interactions");
+      if (/\b(score|scores|criteria|calculate|calculator|chads|cha2ds2|wells|curb|\bsofa\b|qsofa|meld|child[- ]?pugh|apache|glasgow coma|\bgcs\b|nihss|centor|padua|caprini|ranson|bisap|framingham|ascvd|grace|\btimi\b|has[- ]?bled)\b/.test(n)) add("calculators", "Open calculators");
+      if (/\bdose|dosing|dosage|how much|mg\/kg|titrat/.test(n)) add("drugs", "Open Drug Index");
+      if (!chips.length) return "";
+      return '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' + chips.slice(0, 2).join("") + '</div>';
+    }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
@@ -2575,6 +2594,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (refineHTML) think.insertAdjacentHTML("beforeend", refineHTML);
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
+      // Phase 4 — contextual "open in app" tool chips (interactions / calculators / Drug Index).
+      var toolsHTML = maikToolChipsHTML(question);
+      if (toolsHTML) think.insertAdjacentHTML("beforeend", toolsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
       // ℞ Create Prescription — shown on EVERY MaiK answer (prominent), with pkg in closure so
       // treatment answers pre-fill the grounded regimen (doses DB-first via the Drug Index) and
@@ -2591,6 +2613,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           think.appendChild(_rxc);
         }
       } catch (e) {}
+      // Phase 5 — live evidence: a subtle "Search latest evidence" chip (guideline/PubMed retrieval,
+      // opt-in per tap) on every grounded answer, so the clinician can reach current literature the
+      // static KB may not carry. Live-only (after cache write), mirrors the Rx chip.
+      try { if (!active) think.appendChild(maikWebChipEl(question)); } catch (e) {}
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       try { if (window.SMD_KU && question) { var _kh = 0, _ks = String(question); for (var _ki = 0; _ki < _ks.length; _ki++) { _kh = ((_kh << 5) - _kh + _ks.charCodeAt(_ki)) | 0; } SMD_KU.emit("maik", "q" + (_kh >>> 0).toString(36)); } } catch (e) {}   // KU: read a MaiK answer
       if (maikV2()) {
@@ -2778,6 +2804,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           return;
         }
       }
+      // Phase 4 — "open in app" tool chips route straight into the matching module via the ACT map.
+      var tool = el.getAttribute("data-maik-tool");
+      if (tool && ACT[tool]) { close(); setTimeout(function () { try { ACT[tool](); } catch (e) {} }, 180); return; }
       var fq = el.getAttribute("data-maik-q");
       if (fq) {
         if (_maikBusy) return;

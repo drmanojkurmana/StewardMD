@@ -324,6 +324,7 @@ const KNOWLEDGE_SYS =
   "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
   "6. STAY ON TOPIC: the retrieved knowledge is keyword-matched and can be OFF-TOPIC, especially for short follow-ups. Judge every retrieved chunk against the RECENT CONVERSATION; if it is about a different condition than the one under discussion, IGNORE it completely and continue the conversation's topic from mainstream knowledge. Never switch to an unrelated disease because a chunk shares a word with the question (e.g. a follow-up about 'first-line treatment' of the current topic must never become an answer about 'First Bite Syndrome').\n" +
   "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
+  "8. GROUND-CHECK before finalizing: for every specific claim — a dose, threshold, cut-off, criterion, or guideline statement — silently confirm it rests EITHER on the retrieved knowledge OR on solidly-established mainstream medicine. If it rests on neither, omit it or explicitly flag the uncertainty ('exact figure varies — verify locally') rather than asserting it. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
@@ -381,7 +382,17 @@ function renderGroundedPrompt(pkg) {
   });
   if ((pkg.retrieved || []).length) {
     L.push("\nAdditional retrieved chunks (query-matched):");
-    pkg.retrieved.forEach((c) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
+    // Phase 2 — lightweight lexical re-rank: order chunks by term overlap with the clinician's
+    // question so the most decision-relevant evidence leads (and survives any downstream token clip).
+    const qTerms = String(pkg.question || "").toLowerCase().match(/[a-z0-9]{4,}/g) || [];
+    const qSet = new Set(qTerms);
+    const scored = pkg.retrieved.map((c, i) => {
+      const txt = ((c.text || "") + " " + (c.diseaseId || "") + " " + (c.section || "")).toLowerCase();
+      let s = 0; qSet.forEach((t) => { if (txt.indexOf(t) >= 0) s++; });
+      return { c, s, i };
+    });
+    scored.sort((a, b) => (b.s - a.s) || (a.i - b.i));   // stable: overlap desc, original order on ties
+    scored.forEach(({ c }) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
   }
   if (pkg.treatment) {
     const t = pkg.treatment;
