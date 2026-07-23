@@ -58,6 +58,41 @@ Until that's wired, the widgets render the built-in sample/placeholder.
 
 Deep links (`stewardmd://criticalLabs | patients | tasks | home`) are handled by the app's URL router.
 
-## Next (design §09/§10 — separate files, after this target builds)
-- **Live Activities** (`LiveActivities.swift`) — Code Blue / Sepsis / Procedure timers (ActivityKit).
-- **Controls** (`Controls.swift`) — Control Center + Action-button (iOS 18 `ControlWidget`).
+## Live Activities + Controls (§09/§10 — written; extra setup below)
+
+`LiveActivities.swift` (Code Blue, ActivityKit) and `Controls.swift` (iOS 18 `ControlWidget`s) are in
+this target and registered in the bundle (availability-guarded). Add them to the target membership too.
+
+**Live Activity setup**
+- App target ▸ Info.plist ▸ add **`NSSupportsLiveActivities` = YES**.
+- The app **starts/updates** the Code Blue activity from the live `CodeBlueState` (shared `CodeBlueActivityAttributes` in StewardMDWatchCore):
+  ```swift
+  import ActivityKit; import StewardMDWatchCore
+  let attr = CodeBlueActivityAttributes(unit: "MICU · Bed 12")
+  let activity = try Activity.request(attributes: attr,
+      content: .init(state: .from(codeBlueState), staleDate: nil))
+  // on each streamed frame:
+  await activity.update(.init(state: .from(codeBlueState), staleDate: nil))
+  // on ROSC / stop:
+  await activity.end(.init(state: .from(codeBlueState), staleDate: nil), dismissalPolicy: .default)
+  ```
+  Natural home: the existing iPhone Code Blue sync service (CodeBlueLiveModel / CodeBlueSyncService)
+  that already receives watch→phone frames — call `activity.update` there.
+
+**Controls setup (iOS 18+)**
+- Controls are guarded with `@available(iOS 18, *)`, so a lower deployment target is fine — they just
+  don't appear pre-18.
+- Each control's `LaunchRouteIntent` stashes a route in the App Group and opens the app. The app must
+  **consume it on activation**:
+  ```swift
+  if let r = UserDefaults(suiteName: AppGroupStore.defaultSuite)?.string(forKey: "smd.pendingControlRoute") {
+      UserDefaults(suiteName: AppGroupStore.defaultSuite)?.removeObject(forKey: "smd.pendingControlRoute")
+      // route to stewardmd://<r>  (codeblue | askai | drugs) via the existing URL router
+  }
+  ```
+  In this Capacitor app, do that in the AppDelegate/SceneDelegate `applicationDidBecomeActive` (or the
+  Capacitor bridge) and forward to the same deep-link handler the widgetURLs use.
+
+## Sepsis / Procedure Live Activities (follow-on)
+Same pattern as Code Blue — add `SepsisActivityAttributes` / `ProcedureActivityAttributes` in Core and
+a widget per type. Left as a fast follow once Code Blue's activity is confirmed on device.

@@ -20,6 +20,14 @@ struct StewardMDWidgetsBundle: WidgetBundle {
         ICUWatchlistHomeWidget()
         TasksHomeWidget()
         RoundsCensusHomeWidget()
+        // Code Blue Live Activity (Lock Screen + Dynamic Island)
+        if #available(iOS 16.2, *) { CodeBlueLiveActivity() }
+        // Control Center / Action-button Controls (iOS 18+)
+        if #available(iOS 18.0, *) {
+            StartCodeBlueControl()
+            AskMaikControl()
+            DrugLookupControl()
+        }
     }
 }
 
