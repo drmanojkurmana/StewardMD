@@ -1189,7 +1189,13 @@
               var kon;
               if (window.KARDIOX && KARDIOX.isOn) kon = KARDIOX.isOn();
               else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") !== "0"); }
-              return kon ? rtile("kardiox", "cardiology", "KardiQ X AI", "ECG interpretation") : "";
+              return kon ? (
+                '<button class="rnav-tile kx-tile" data-act="kardiox" aria-label="Open KardiQ X AI — ECG interpretation">' +
+                  '<div class="kx-home-head kx-tile-head"><span class="kx-home-heart">' + ric("cardiology") + '</span><span class="kx-home-pill">' + ric("bolt") + 'AI ECG</span></div>' +
+                  '<svg class="kx-home-trace kx-tile-trace" viewBox="0 0 320 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 H36 l6 -2 6 4 4 -18 5 30 6 -14 H88 l6 -2 6 4 4 -18 5 30 6 -14 H160 l6 -2 6 4 4 -18 5 30 6 -14 H236 l6 -2 6 4 4 -18 5 30 6 -14 H320"/></svg>' +
+                  '<span class="rnav-tile-tt">KardiQ X AI</span><span class="rnav-tile-sub">ECG interpretation</span>' +
+                '</button>'
+              ) : "";
             } catch (e) { return ""; }
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +

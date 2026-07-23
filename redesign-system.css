@@ -333,6 +333,17 @@ body.dark {
 #homeV2.rnav .rnav-tile .rds-icon { color: var(--rds-primary); font-size: 24px; margin-bottom: 2px; }
 #homeV2.rnav .rnav-tile-tt { font: 700 14px var(--rds-font); color: var(--rds-ink); }
 #homeV2.rnav .rnav-tile-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+/* KardiQ X AI — compact widget tile (the big home hero shrunk into the Clinical Tools cell beside
+   FundX): keeps the widget look (dark gradient + red radial glow + ECG trace + AI-ECG pill + heart),
+   reusing kx-home-* graphic classes from kardiox.css, sized to the standard .rnav-tile cell. */
+#homeV2.rnav .kx-tile { position: relative; overflow: hidden; isolation: isolate; border-color: transparent; color: #fff; background: linear-gradient(155deg, #0d423c, #0f2a30, #131e28); gap: 2px; }
+#homeV2.rnav .kx-tile::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(120% 80% at 88% 0%, rgba(229,72,77,.30), transparent 60%); }
+#homeV2.rnav .kx-tile > * { position: relative; z-index: 1; }
+#homeV2.rnav .kx-tile .rnav-tile-tt { color: #fff; }
+#homeV2.rnav .kx-tile .rnav-tile-sub { color: rgba(234,255,248,.72); }
+#homeV2.rnav .kx-tile .kx-home-head { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+#homeV2.rnav .kx-tile .kx-home-pill { font-size: 9px; padding: 3px 7px; letter-spacing: .05em; }
+#homeV2.rnav .kx-tile .kx-tile-trace { width: 100%; height: 22px; margin: 4px 0 2px; }
 #homeV2.rnav .rnav-alert { width: 100%; text-align: left; cursor: pointer; }
 #homeV2.rnav .rnav-resume { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; }
 #homeV2.rnav .rnav-resume-ic { color: var(--rds-primary); font-size: 28px; }
