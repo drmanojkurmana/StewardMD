@@ -24,11 +24,19 @@ struct ProcedureTimerView: View {
                 .foregroundStyle(SMDPalette.text1.color)
             HStack {
                 Button(model.running ? "Stop" : "Start") {
-                    if model.running { model.stop() }
-                    else { model.start(); startDate = Date().addingTimeInterval(-model.elapsed) }
+                    if model.running {
+                        model.stop()
+                        WatchConnectivityManager.shared.sendTimerActivity(type: "procedure", startedAt: startDate ?? Date(), targetSeconds: 0, running: false)
+                    } else {
+                        model.start(); startDate = Date().addingTimeInterval(-model.elapsed)
+                        WatchConnectivityManager.shared.sendTimerActivity(type: "procedure", startedAt: startDate ?? Date(), targetSeconds: 0, running: true)
+                    }
                 }
                 .tint(model.running ? SMDPalette.critical.color : SMDPalette.success.color)
-                Button("Reset") { model.reset(); startDate = nil }
+                Button("Reset") {
+                    model.reset(); startDate = nil
+                    WatchConnectivityManager.shared.sendTimerActivity(type: "procedure", startedAt: Date(), targetSeconds: 0, running: false)
+                }
                     .tint(SMDPalette.text2.color)
             }
         }

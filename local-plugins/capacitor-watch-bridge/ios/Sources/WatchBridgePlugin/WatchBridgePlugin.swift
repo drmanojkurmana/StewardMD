@@ -59,6 +59,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         // Start the phone-side Code Blue live mirror so it ingests + persists even
         // before the Command Center screen is opened.
         DispatchQueue.main.async { CodeBlueLiveModel.shared.begin() }
+        // Start the Sepsis/Procedure Live Activity driver (listens for the watch's timerActivity relay).
+        DispatchQueue.main.async { TimerActivityManager.shared.begin() }
         // Tell the web layer when a code goes active/inactive (drives the on-screen
         // "CODE BLUE" alert banner). Fires only on a running-state change.
         NotificationCenter.default.addObserver(

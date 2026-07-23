@@ -81,6 +81,20 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
+    /// Timer Live Activity → phone (Sepsis bundle / Procedure stopwatch). One message on start and one
+    /// on stop; the phone renders the running clock natively from `startedAt`, so no per-second stream.
+    /// type = "sepsis" | "procedure". targetSeconds = countdown length (sepsis) or 0 (procedure count-up).
+    func sendTimerActivity(type: String, startedAt: Date, targetSeconds: Double, running: Bool, bundleDone: Int = 0) {
+        relaySend([
+            "kind": "timerActivity",
+            "timerType": type,
+            "startedAt": startedAt.timeIntervalSince1970,
+            "targetSeconds": targetSeconds,
+            "running": running,
+            "bundleDone": bundleDone
+        ])
+    }
+
     /// Live Code Blue state → phone. `sendMessage` when reachable (immediate, for the
     /// live-feeling Command Center); silently dropped when unreachable — the periodic
     /// snapshot (below) guarantees eventual delivery + recovery.

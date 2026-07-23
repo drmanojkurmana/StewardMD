@@ -58,6 +58,8 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived, object: nil, userInfo: message)
         case "codeBlueReset":
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReset, object: nil)
+        case "timerActivity":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.timerActivityReceived, object: nil, userInfo: message)
         default:
             NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)   // token-request (legacy)
         }
@@ -133,6 +135,8 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
                                             object: nil, userInfo: userInfo)
         case "codeBlueReset":
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReset, object: nil)
+        case "timerActivity":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.timerActivityReceived, object: nil, userInfo: userInfo)
         default:
             break
         }
@@ -155,6 +159,7 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     static let labAckRequested = Notification.Name("SMDWatchLabAckRequested")
     static let codeBlueReceived = Notification.Name("SMDCodeBlueReceived")
     static let codeBlueReset = Notification.Name("SMDCodeBlueReset")
+    static let timerActivityReceived = Notification.Name("SMDTimerActivityReceived")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.

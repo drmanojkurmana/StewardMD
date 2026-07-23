@@ -57,8 +57,10 @@ struct SepsisTimerView: View {
                                              title: "Sepsis bundle", body: "10 minutes left in the 1-hour bundle.")
                         ResusAlerts.schedule(id: "sepsis-deadline", after: max(0, 3600 - model.elapsed),
                                              title: "Sepsis 1-hour bundle", body: "The hour has elapsed — complete/review the bundle.")
+                        WatchConnectivityManager.shared.sendTimerActivity(type: "sepsis", startedAt: startDate ?? Date(), targetSeconds: 3600, running: true, bundleDone: model.done.count)
                     } else {
                         ResusAlerts.cancel(["sepsis-nudge", "sepsis-deadline"])
+                        WatchConnectivityManager.shared.sendTimerActivity(type: "sepsis", startedAt: startDate ?? Date(), targetSeconds: 3600, running: false, bundleDone: model.done.count)
                     }
                 }
                 .buttonStyle(.borderedProminent)
