@@ -1,4 +1,4 @@
-/* kardiox.css — KardioX AI · module styles (sibling of fundx.css).
+/* kardiox.css — KardiQ X AI · module styles (sibling of fundx.css).
  *
  * ALL selectors are scoped to #kardioxRoot / .kx-* — additive, zero global leakage (Developer Notes +
  * Deployment gate in the README). Reuses StewardMD design tokens (--rds-*) and severity tokens
@@ -8,7 +8,7 @@
  *
  * M0 scope: design tokens, the flagship Home card (screen 01), the module overlay shell + landing
  * stub, and the named keyframes. Per-screen .kx-* component styles are added in M2, mined pixel-exact
- * from the design handoff (KardioX AI.dc.html).
+ * from the design handoff (KardiQ X AI.dc.html).
  */
 
 /* ─────────────────────────── Design tokens (module-local, on the root only) ─────────────────────── */
@@ -152,3 +152,12 @@
   .kx-home-heart { animation: none; }
   #kardioxRoot *, #kardioxRoot *::before, #kardioxRoot *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* While the KardiQ X overlay is open (html.kx-lock), hide the app's floating
+   action buttons — the home FAB (z-index 9999) otherwise bleeds over the module. */
+html.kx-lock .hv-fab,
+html.kx-lock #hvFab,
+html.kx-lock #infFab,
+html.kx-lock .inf-fab,
+html.kx-lock #dxLaunch,
+html.kx-lock .ghis-ward-fab { display: none !important; }

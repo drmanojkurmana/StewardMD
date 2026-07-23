@@ -1,10 +1,10 @@
-/* kardiox-screens.css — KardioX AI · per-screen .kx-* styles (M2/M3/M4), assembled. De-dashed. */
+/* kardiox-screens.css — KardiQ X AI · per-screen .kx-* styles (M2/M3/M4), assembled. De-dashed. */
 /* .msr = Material Symbols Rounded (some M4 screens emit <span class="msr">name</span>). */
 #kardioxRoot .msr { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; }
 #kardioxRoot .msr.fill { font-variation-settings: "FILL" 1; }
 
 /* ===== landing ===== */
-/* ─────────────────────────── Landing (screen 02) - mined pixel-exact from KardioX AI.dc.html ──────
+/* ─────────────────────────── Landing (screen 02) - mined pixel-exact from KardiQ X AI.dc.html ──────
    All selectors scoped to #kardioxRoot / .kx-*. Tokens + keyframes come from kardiox.css (not redefined).
    Trace stroke colours are the design's bright ECG-on-dark hexes (not the AA text severity tokens),
    so they read on the #131e28 thumbnail; kept as classes (no inline styles). */
@@ -14,7 +14,7 @@
 /* Header (per-screen; supersedes the M0 shell stub .kx-topbar - see notes) */
 #kardioxRoot .kx-land-head {
   display: flex; align-items: center; gap: 11px;
-  /* keep the "KardioX AI" title clear of the status bar / iOS Dynamic Island (needs viewport-fit=cover) */
+  /* keep the "KardiQ X AI" title clear of the status bar / iOS Dynamic Island (needs viewport-fit=cover) */
   padding: 8px 16px 12px;
   padding-top: calc(8px + env(safe-area-inset-top, 0px));
   border-bottom: 1px solid var(--kx-hairline);
@@ -1402,7 +1402,7 @@
 }
 
 /* ===== quiz ===== */
-/* ─────────────── KardioX screen 10 · Quiz / exam mode ───────────────
+/* ─────────────── KardiQ X screen 10 · Quiz / exam mode ───────────────
    Scoped to #kardioxRoot, .kx-* only. Tokens reused, none redefined. */
 
 /* Header: close + progress + timer */
@@ -1683,3 +1683,45 @@
 #kardioxRoot .kx-focus-head .material-symbols-rounded { font-size: 18px; color: var(--kx-sev-info); }
 #kardioxRoot .kx-focus-title { font-size: 12.5px; color: var(--kx-sev-info); }
 #kardioxRoot .kx-focus-body { display: block; font-size: 12px; line-height: 1.45; color: var(--kx-ink); font-weight: 500; margin-top: 5px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Dynamic Island / notch safe-area — every screen-top header clears the status
+   bar and pins opaquely while scrolling. Consolidated so no screen is obscured.
+   (Report/landing/settings/privacy/processing already bake the inset; these are
+   the headers that were missing it.)
+   ═══════════════════════════════════════════════════════════════════════════ */
+#kardioxRoot .kx-src-head,
+#kardioxRoot .kx-why-head,
+#kardioxRoot .kx-cmp-head,
+#kardioxRoot .kx-hist-head,
+#kardioxRoot .kx-lib-head,
+#kardioxRoot .kx-lesson-head,
+#kardioxRoot .kx-quiz-top,
+#kardioxRoot .kx-fc-head {
+  position: sticky; top: 0; z-index: 6;
+  background: var(--kx-card);
+  padding-top: max(10px, env(safe-area-inset-top, 0px));
+}
+
+/* Inline physician-note editor (report screen) */
+#kardioxRoot .kx-note-edit { margin: 10px 0 0; display: flex; flex-direction: column; gap: 10px; }
+#kardioxRoot .kx-note-ta {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 84px;
+  padding: 12px 14px; border-radius: 12px; border: 1px solid var(--kx-hairline);
+  background: var(--kx-card); color: var(--kx-text);
+  font: 500 14px/1.45 var(--kx-sans); -webkit-appearance: none;
+}
+#kardioxRoot .kx-note-ta:focus { outline: none; border-color: var(--kx-primary); box-shadow: 0 0 0 3px var(--kx-soft); }
+#kardioxRoot .kx-note-actions { display: flex; gap: 10px; }
+#kardioxRoot .kx-note-actions .kx-btn { flex: 1; }
+
+/* Real teaching-ECG image (lessons) — used when a lesson supplies vm.ecgImage */
+#kardioxRoot .kx-lesson-strip--img {
+  margin: 0; border-radius: 12px; overflow: hidden; background: #fff;
+  border: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-lesson-ecg-img { display: block; width: 100%; height: auto; }
+#kardioxRoot .kx-lesson-ecg-cap {
+  padding: 6px 10px; font-size: 11px; font-weight: 600; color: var(--kx-text-2);
+  background: var(--kx-surf-2); border-top: 1px solid var(--kx-hairline);
+}

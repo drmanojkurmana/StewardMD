@@ -1,4 +1,4 @@
-/* kardiox-screens.js — KardioX AI · all 18 screens (02-19) + router.
+/* kardiox-screens.js — KardiQ X AI · all 18 screens (02-19) + router.
  * ASSEMBLED from the M2/M3/M4 screen workflows (each screen adversarially verified for #kardioxRoot/
  * .kx-* scoping + copy fidelity + ctx data-binding) + a hand-written router that owns navigation
  * (with a back stack), the mock analysis pipeline, RuleValidator fusion on the report, Clear-local-ECGs,
@@ -34,7 +34,7 @@
       info:     { label: "Info",     icon: "info" }
     };
   
-    // Mini-trace polylines lifted verbatim from KardioX AI.dc.html (AF = jagged/irregular, NSR = regular).
+    // Mini-trace polylines lifted verbatim from KardiQ X AI.dc.html (AF = jagged/irregular, NSR = regular).
     var DEMO = [
       { id: "kx-mock-af-rvr", title: "Atrial fibrillation", meta: "Today · 08:12 · Bed 14", severity: "urgent",
         trace: "0,20 10,20 14,16 18,20 22,25 25,5 28,30 31,20 40,20 46,14 52,20 60,20" },
@@ -87,12 +87,12 @@
   
     var header = "" +
       '<header class="kx-land-head">' +
-        '<button class="kx-land-close" type="button" data-act="kardiox-close" aria-label="Close KardioX">' + ic("close") + "</button>" +
+        '<button class="kx-land-close" type="button" data-act="kardiox-close" aria-label="Close KardiQ X">' + ic("close") + "</button>" +
         '<div class="kx-land-titles">' +
-          '<div class="kx-land-title">KardioX<span> AI</span></div>' +
+          '<div class="kx-land-title">KardiQ X<span> AI</span></div>' +
           '<div class="kx-land-sub">ECG interpretation &amp; learning</div>' +
         "</div>" +
-        '<button class="kx-land-gear" type="button" data-act="kardiox-settings" aria-label="KardioX settings">' + ic("settings") + "</button>" +
+        '<button class="kx-land-gear" type="button" data-act="kardiox-settings" aria-label="KardiQ X settings">' + ic("settings") + "</button>" +
       "</header>";
   
     var cta = "" +
@@ -215,7 +215,7 @@
           // Blue capture tip (color + icon + label).
           '<div class="kx-tip" role="note">' +
             '<span class="kx-tip-ic">' + ic('tips_and_updates') + '</span>' +
-            '<span class="kx-tip-txt">Capture all 12 leads. Keep the paper flat, fill the frame, avoid glare - KardioX auto-deskews and enhances.</span>' +
+            '<span class="kx-tip-txt">Capture all 12 leads. Keep the paper flat, fill the frame, avoid glare - KardiQ X auto-deskews and enhances.</span>' +
           '</div>' +
   
           // Privacy footer.
@@ -237,7 +237,7 @@
         '<div class="kx-perm-sheet" role="document">' +
           '<span class="kx-perm-icon">' + ic('photo_camera') + '</span>' +
           '<h2 class="kx-perm-title" id="kxPermTitle">Allow camera access?</h2>' +
-          '<p class="kx-perm-body" id="kxPermBody">KardioX uses the camera to capture ECG tracings for analysis. Images are processed then deleted - nothing is saved to your camera roll.</p>' +
+          '<p class="kx-perm-body" id="kxPermBody">KardiQ X uses the camera to capture ECG tracings for analysis. Images are processed then deleted - nothing is saved to your camera roll.</p>' +
           '<div class="kx-perm-assure">' + ic('lock') + '<span>Encrypted &amp; deleted after use</span></div>' +
           '<button class="kx-perm-allow" type="button" data-act="kardiox-cam-allow">Allow camera</button>' +
           '<button class="kx-perm-deny" type="button" data-act="kardiox-cam-deny">Not now</button>' +
@@ -477,7 +477,7 @@
             '</div>' +
           '</div>' +
           '<h2 class="kx-analysis-title">Analysing ' + leads + ' leads…</h2>' +
-          '<p class="kx-analysis-sub">KardioX is reading rhythm, rate &amp; morphology</p>' +
+          '<p class="kx-analysis-sub">KardiQ X is reading rhythm, rate &amp; morphology</p>' +
           '<div class="kx-stages">' + stages.map(stageRow).join('') + '</div>' +
           '<div class="kx-analysis-foot">' + ic('lock') + '<span>Encrypted · deleted immediately after analysis</span></div>' +
         '</div>' +
@@ -656,7 +656,7 @@
         '<div class="kx-verdict-top">' +
           '<div class="kx-verdict-row">' +
             '<span class="kx-sev-pill">' + ic(sev.icon) + esc(sev.label) + '</span>' +
-            '<span class="kx-ai-mark">' + ic("auto_awesome") + 'KardioX AI</span>' +
+            '<span class="kx-ai-mark">' + ic("auto_awesome") + 'KardiQ X AI</span>' +
           '</div>' +
           '<div class="kx-verdict-dx">' + esc(a.verdict) + '</div>' +
           (a.verdictQualifier ? '<div class="kx-verdict-qual">' + esc(a.verdictQualifier) + '</div>' : '') +
@@ -679,8 +679,9 @@
         '<span class="kx-redflag-b">' + esc(a.redFlag.body) + '</span></div>' +
       '</div>' : '';
   
-    var learn = a.educationalRef ?
-      '<button class="kx-learn" type="button" data-act="kxnav:' + esc(a.educationalRef) + '">' +
+    // Learn → ask MaiK (StewardMD's AI + knowledge base) to explain this diagnosis. Always available.
+    var learn = (a.verdict && !/^-$/.test(a.verdict)) ?
+      '<button class="kx-learn" type="button" data-act="kx-learn-ai" data-dx="' + esc(a.verdict) + '">' +
         ic("school") + '<span class="kx-learn-t">Learn: ' + esc(a.verdict) + '</span>' + ic("chevron_right") +
       '</button>' : '';
   
@@ -904,7 +905,7 @@
       info:     { label: "Info",     icon: "info" }
     };
   
-    // Handoff demo (KardioX AI.dc.html screen 13) - survives when no provider / mock / empty live store.
+    // Handoff demo (KardiQ X AI.dc.html screen 13) - survives when no provider / mock / empty live store.
     var TRACE_AF  = "0,17 6,17 9,21 12,5 15,27 18,17 34,17 37,21 40,5 43,27 46,17 56,17";
     var TRACE_NSR = "0,17 8,17 11,21 14,6 17,25 20,17 32,17 40,21 43,6 46,25 49,17 56,17";
     var DEMO_TREND = {
@@ -1230,7 +1231,7 @@
       '<div class="kx-priv-body">' +
         '<span class="kx-priv-hero">' + ic("verified_user") + '</span>' +
         '<div class="kx-priv-title">Your ECGs stay yours</div>' +
-        '<div class="kx-priv-sub">KardioX is built privacy-first. Here\'s exactly what happens to every ECG.</div>' +
+        '<div class="kx-priv-sub">KardiQ X is built privacy-first. Here\'s exactly what happens to every ECG.</div>' +
         '<div class="kx-priv-rows">' + rowsHtml + '</div>' +
         '<button class="kx-btn kx-btn-secondary kx-priv-manage" type="button" data-act="kxnav:settings">Manage my data</button>' +
       '</div>';
@@ -1402,7 +1403,7 @@
   /* screen 18 · History - empty state
    * host = #kxScroll; ctx = { providers, analysis, nav(id), close(), toast(msg) }.
    * Renders the handoff-exact History header + zero-ECG empty state. Copy is VERBATIM
-   * from KardioX AI.dc.html (screen 18). Navigation is delegation-only via data-act
+   * from KardiQ X AI.dc.html (screen 18). Navigation is delegation-only via data-act
    * (the router's #kardioxRoot listener owns it) - this screen adds NO document listeners.
    * ic() (Material Symbols span) is provided by the module scope.
    * The empty state has no dynamic fields to bind; we read ecgStore.all() only to keep the
@@ -1756,6 +1757,15 @@
     /* The lesson ECG strip (rhythm-strip art from the handoff; colour via CSS). */
     var DEFAULT_STRIP = "0,48 10,46 18,50 26,47 30,48 33,52 36,26 39,60 42,48 60,47 72,50 84,48 88,48 91,52 94,26 97,60 100,48 118,47 130,48 134,48 137,52 140,28 143,60 146,48 172,47 190,48 194,52 197,26 200,60 203,48 230,47 250,48 254,52 257,27 260,60 263,48 290,47 306,48 310,52 313,27 316,60 320,48";
     function ecgStrip(vm) {
+      // Prefer a real teaching ECG when the lesson provides one (vm.ecgImage = URL/data-URI);
+      // otherwise fall back to the schematic rhythm-strip trace.
+      var img = vm && (vm.ecgImage || vm.ecgImageUrl);
+      if (img) {
+        return '<figure class="kx-ecg kx-lesson-strip kx-lesson-strip--img">' +
+          '<img class="kx-lesson-ecg-img" src="' + esc(img) + '" alt="' + esc((vm.title || 'ECG') + ' — example tracing') + '" loading="lazy">' +
+          '<figcaption class="kx-lesson-ecg-cap">Example ECG — illustrative</figcaption>' +
+        '</figure>';
+      }
       var pts = (vm && vm.ecgStrip) ? vm.ecgStrip : DEFAULT_STRIP;   // per-diagnosis strip; default only pre-hydration
       return '<div class="kx-ecg kx-lesson-strip">' +
         '<svg class="kx-ecg-svg kx-lesson-ecg-svg" viewBox="0 0 320 80" width="100%" height="72" preserveAspectRatio="none" aria-hidden="true">' +
@@ -1939,7 +1949,7 @@
     ctx = ctx || {};
     var providers = ctx.providers || {};
   
-    // ── verbatim design fallback (KardioX AI.dc.html · screen 10) ──────────────
+    // ── verbatim design fallback (KardiQ X AI.dc.html · screen 10) ──────────────
     var DESIGN_Q = {
       stem: 'What is the most likely rhythm?',
       options: ['Sinus tachycardia', 'Sinus rhythm, normal', 'Atrial fibrillation', '1st-degree AV block'],
@@ -2143,7 +2153,7 @@
   }
 
   /* flashcards */
-  /* ===== KardioX · Screen 11 - Flashcards (spaced repetition, SM-2) =====
+  /* ===== KardiQ X · Screen 11 - Flashcards (spaced repetition, SM-2) =====
    * Scoped under #kardioxRoot, classes .kx-fc-*. host = #kxScroll. Navigation via
    * data-act (router owns it); the flip + grade interactions are LOCAL listeners on host.
    * Register in the SCREENS map as:  flashcards: renderFlashcards
@@ -2508,12 +2518,65 @@
   function reduceMotion() { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   function sample() { try { var M = window.SMD_KARDIOX_MODELS; return M ? M.makeAnalysis(M.samples.afWithRvr) : null; } catch (e) { return null; } }
   function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id }; }
-  function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardioX] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
+  function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardiQ X] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
   function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
-  function back() { state.stack.pop(); var prev = state.stack[state.stack.length - 1] || "landing"; show(prev); }
-  function mountLanding(h) { init(); state.stack = ["landing"]; try { SCREENS.landing(h || host(), ctx()); } catch (e) { try { console.warn("[KardioX] landing", e); } catch (_) {} } }
+  function back() {
+    // At the root of the flow (landing) there is nowhere further back — close the whole module
+    // instead of getting stuck re-showing the landing. Otherwise pop one screen and show the previous.
+    if (state.stack.length <= 1) { haptic("light"); closeMod(); return; }
+    state.stack.pop();
+    var prev = state.stack[state.stack.length - 1] || "landing";
+    show(prev);
+  }
+  function mountLanding(h) { init(); state.stack = ["landing"]; try { SCREENS.landing(h || host(), ctx()); } catch (e) { try { console.warn("[KardiQ X] landing", e); } catch (_) {} } }
   function closeMod() { try { if (window.KARDIOX && KARDIOX.close) KARDIOX.close(); } catch (e) {} }
-  function deferred(key) { var m = { export: "Export", tutor: "AI Tutor", storage: "Storage detail" }; toast((m[key] || "That") + " arrives in a later KardioX update."); }
+  function deferred(key) { var m = { tutor: "AI Tutor", storage: "Storage detail" }; toast((m[key] || "That") + " arrives in a later KardiQ X update."); }
+
+  // Export the current report as a shareable document (native → iOS share sheet → Save to Files / Print→PDF).
+  function exportReport() {
+    var a = state.analysis; if (!a) { toast("No report to export."); return; }
+    function e(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+    var m = a.measurements || {};
+    var rows = [["Verdict", a.verdict], ["Confidence", Math.round((a.confidence||0)*100)+"%"],
+      ["Vent. rate", m.ventRateBpm!=null?m.ventRateBpm+" bpm":"—"], ["Rhythm", m.rhythm&&m.rhythm!=="-"?m.rhythm:"—"],
+      ["PR", m.prMs!=null?m.prMs+" ms":"—"], ["QRS", m.qrsMs!=null?m.qrsMs+" ms":"—"],
+      ["QTc", m.qtcMs!=null?m.qtcMs+" ms":"—"], ["Axis", m.axisDeg!=null?m.axisDeg+"°":"—"]];
+    var find = (a.findings||[]).map(function(f){return "<li>"+e(f.title)+(f.detail?" — "+e(f.detail):"")+"</li>";}).join("");
+    var diff = (a.differentials||[]).map(function(d){return "<li>"+e(d.label)+" — "+Math.round((d.probability||0)*100)+"%</li>";}).join("");
+    var frag = document.createElement("div");
+    frag.innerHTML = "<h2>KardiQ X AI — ECG Report</h2><table style='border-collapse:collapse'>"+
+      rows.map(function(r){return "<tr><td style='padding:2px 10px 2px 0'><b>"+e(r[0])+"</b></td><td>"+e(r[1])+"</td></tr>";}).join("")+"</table>"+
+      (find?"<h3>Findings</h3><ul>"+find+"</ul>":"")+(diff?"<h3>Differentials</h3><ul>"+diff+"</ul>":"")+
+      "<h3>Clinical interpretation</h3><p>"+e(a.clinicalInterpretation||"")+"</p>"+
+      (a.physicianNote?"<h3>Physician note</h3><p>"+e(a.physicianNote)+"</p>":"")+
+      "<p style='color:#888;font-size:12px'>AI decision support — not a diagnosis. Confirm clinically.</p>";
+    var title = "KardiQ X — ECG " + (a.verdict||"report");
+    try {
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.saveHtmlFile) { window.SMD_NATIVE.saveHtmlFile(frag, title, "KardiQ-X-ECG-report").catch(function(){ toast("Export unavailable."); }); return; }
+      if (window.SMD_NATIVE && window.SMD_NATIVE.exportPdf) { window.SMD_NATIVE.exportPdf(frag.innerText || "", title); return; }
+      var w = window.open("", "_blank"); if (w) { w.document.write("<html><head><title>"+e(title)+"</title></head><body>"+frag.innerHTML+"</body></html>"); w.document.close(); w.focus(); w.print(); return; }
+    } catch (er) {}
+    toast("Export not available on this device.");
+  }
+
+  // Inline physician-note editor (replaces the note button with a textarea; saves to the analysis + store).
+  function editNote() {
+    var a = state.analysis; if (!a) return;
+    var h = host(); var btn = h && h.querySelector(".kx-note"); if (!btn) return;
+    var wrap = document.createElement("div"); wrap.className = "kx-note-edit";
+    var ta = document.createElement("textarea"); ta.className = "kx-note-ta"; ta.rows = 3; ta.placeholder = "Physician note…"; ta.value = a.physicianNote || "";
+    var actions = document.createElement("div"); actions.className = "kx-note-actions";
+    var cancel = document.createElement("button"); cancel.type = "button"; cancel.className = "kx-btn kx-btn-secondary"; cancel.textContent = "Cancel";
+    var save = document.createElement("button"); save.type = "button"; save.className = "kx-btn kx-btn-primary"; save.textContent = "Save note";
+    actions.appendChild(cancel); actions.appendChild(save); wrap.appendChild(ta); wrap.appendChild(actions);
+    btn.replaceWith(wrap); try { ta.focus(); } catch (e) {}
+    cancel.addEventListener("click", function(){ show("report"); });
+    save.addEventListener("click", function(){
+      a.physicianNote = ta.value.trim();
+      try { var P = providers(); if (P && P.ecgStore && P.ecgStore.save) P.ecgStore.save(a); } catch (e) {}
+      toast(a.physicianNote ? "Note saved." : "Note cleared."); show("report");
+    });
+  }
 
   // Enrich an analysis with the deterministic RuleValidator (matched criteria + confidence cap).
   function enrich(a) {
@@ -2530,7 +2593,9 @@
     }).then(function (a) {
       state.analysis = enrich(a); state.running = false;
       try { if (P.ecgStore && P.ecgStore.save) P.ecgStore.save(a); } catch (e) {}
-      go("report"); haptic("success");
+      // Collapse the transient capture/processing screens: back from the fresh report returns Home,
+      // not the now-empty capture screen. (History→report keeps its own stack via openStored.)
+      state.stack = ["landing"]; go("report"); haptic("success");
       if (a && (a.severity === "urgent" || a.severity === "critical")) haptic("warning");
     }).catch(function (e) {
       state.running = false;
@@ -2638,6 +2703,16 @@
       case "kxnav:privacy": go("privacy"); return;
       case "kxnav:settings": case "kxnav:storage": go("settings"); return;
       case "kxnav:why": haptic("light"); go("why"); return;
+      case "kx-learn-ai": {
+        haptic("light");
+        var dx = t.getAttribute("data-dx") || (state.analysis && state.analysis.verdict) || "this ECG finding";
+        var q = "Explain " + dx + " on an ECG: key diagnostic criteria, common causes, and initial management. Be concise and clinical.";
+        try { if (typeof window.SMD_askMaik === "function") { window.SMD_askMaik(q); return; } } catch (e) {}
+        try { closeMod(); if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q); else toast("MaiK assistant unavailable."); } catch (e2) { toast("MaiK assistant unavailable."); }
+        return;
+      }
+      case "kxnav:export": haptic("light"); exportReport(); return;
+      case "kxnav:note": haptic("light"); editNote(); return;
       case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": {
         haptic("light");
         var src = t.getAttribute("data-src") || "photoLibrary";

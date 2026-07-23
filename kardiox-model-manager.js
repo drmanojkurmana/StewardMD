@@ -1,4 +1,4 @@
-/* kardiox-model-manager.js — KardioX AI · on-device model pack manager (SMD_KARDIOX_MODELMGR).
+/* kardiox-model-manager.js — KardiQ X AI · on-device model pack manager (SMD_KARDIOX_MODELMGR).
  *
  * Mirrors the Whisper pattern (native-bridge.js): the app bundle stays small; the ONNX model pack is
  * DOWNLOADED on first use from the re-host (models.stewardmd.in/kardiox), cached on-device via
@@ -23,7 +23,7 @@
   // use downloads only what runs). int8 shrink is a later optimisation.
   var PACKS = {
     diagnosis: {
-      label: "KardioX AI (analysis)",
+      label: "KardiQ X AI (analysis)",
       files: [
         { name: "ecglib_AFIB.onnx", bytes: 22506708, sha256: "9d8f446df4e5abdb198d3325dce7fd09adf6ebc58224b97b1f753ed01249d260" },
         { name: "ecglib_1AVB.onnx", bytes: 22506708, sha256: "060307a9bc2a86ffe570be3c7bf7b0b548060333da2ee0770c61681102fac370" },

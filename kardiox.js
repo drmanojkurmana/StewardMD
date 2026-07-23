@@ -1,8 +1,8 @@
-/* kardiox.js — KardioX AI · module UI entry (sibling of fundx.js / window.FUNDX).
+/* kardiox.js — KardiQ X AI · module UI entry (sibling of fundx.js / window.FUNDX).
  *
  * Flag-gated by smd_kardiox (DEFAULT OFF via SMD_KARDIOX_FLAGS). When off, open() is a no-op and the
  * module never touches the DOM — a complete no-op, exactly like FundX. Mounts a single scoped overlay
- * root #kardioxRoot; every KardioX node lives under it with .kx-* classes (zero global leakage).
+ * root #kardioxRoot; every KardiQ X node lives under it with .kx-* classes (zero global leakage).
  *
  * Providers (AI analysis, storage, library, learning) are injected via window.SMD_KARDIOX_PROVIDERS
  * (built in M1). This file owns only view mounting + navigation between screens.
@@ -34,14 +34,14 @@
       '<path d="M0 28 H36 l6 -2 6 4 4 -18 5 30 6 -14 H88 l6 -2 6 4 4 -18 5 30 6 -14 H160 l6 -2 6 4 4 -18 5 30 6 -14 H236 l6 -2 6 4 4 -18 5 30 6 -14 H320"/>' +
       '</svg>';
     return '' +
-      '<div class="kx-home-card" role="button" tabindex="0" data-act="kardiox" aria-label="Open KardioX AI — ECG interpretation, learning and decision support">' +
+      '<div class="kx-home-card" role="button" tabindex="0" data-act="kardiox" aria-label="Open KardiQ X AI — ECG interpretation, learning and decision support">' +
         '<div class="kx-home-head">' +
           '<span class="kx-home-heart">' + ic("cardiology") + '</span>' +
           '<span class="kx-home-pill">' + ic("bolt") + 'AI ECG</span>' +
           '<span class="kx-home-pill">' + ic("lock") + 'On-device</span>' +
         '</div>' +
         trace +
-        '<div class="kx-home-title">KardioX AI</div>' +
+        '<div class="kx-home-title">KardiQ X AI</div>' +
         '<div class="kx-home-sub">ECG interpretation · learning · decision support</div>' +
         '<button class="kx-home-cta" type="button" tabindex="-1">Analyze an ECG ' + ic("arrow_forward") + '</button>' +
         '<div class="kx-home-conf">' + ic("science") + 'Demo preview</div>' +
@@ -57,7 +57,7 @@
     el.id = ROOT_ID;
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
-    el.setAttribute("aria-label", "KardioX AI");
+    el.setAttribute("aria-label", "KardiQ X AI");
     // Each screen renders its own header (landing/report/etc.); the shell is just the scroll host.
     // All click delegation + navigation is owned by SMD_KARDIOX_ROUTER (kardiox-screens.js).
     el.innerHTML = '<div class="kx-scroll" id="kxScroll"></div>';
