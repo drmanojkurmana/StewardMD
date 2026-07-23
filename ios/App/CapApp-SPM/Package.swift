@@ -32,7 +32,8 @@ let package = Package(
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
         .package(name: "StewardmdCapacitorWatchBridge", path: "../../../local-plugins/capacitor-watch-bridge"),
         .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper"),
-        .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin")
+        .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin"),
+        .package(name: "StewardmdCapacitorEcgDigitiser", path: "../../../local-plugins/capacitor-ecg-digitiser")
     ],
     targets: [
         .target(
@@ -60,7 +61,8 @@ let package = Package(
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
                 .product(name: "StewardmdCapacitorWatchBridge", package: "StewardmdCapacitorWatchBridge"),
                 .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper"),
-                .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin")
+                .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin"),
+                .product(name: "StewardmdCapacitorEcgDigitiser", package: "StewardmdCapacitorEcgDigitiser")
             ]
         )
     ]
