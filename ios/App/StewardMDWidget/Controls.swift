@@ -29,7 +29,6 @@ struct CBControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Start Code Blue"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL fired codeblue")
         smdStashRoute("codeblue")
         return .result()
     }
@@ -40,7 +39,6 @@ struct MaikControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Ask Maik"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL fired askai")
         smdStashRoute("askai")
         return .result()
     }
@@ -51,7 +49,6 @@ struct DrugControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Drug lookup"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL fired drugs")
         smdStashRoute("drugs")
         return .result()
     }
