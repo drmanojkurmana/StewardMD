@@ -7316,6 +7316,15 @@
     openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
     unitList: unitList, ensureUnits: ensureUnits, selectUnitByKey: selectUnitByKey, currentUnitLabel: currentUnitLabel,
+    // Daily ICU Rounds checklist progress for the OPEN patient (done items / total) — used by the
+    // widget/watch glance so the Rounds ring shows real progress. {0,0} when nothing is checked.
+    roundsProgress: function () {
+      try {
+        var r = (_raw && _raw.rounds) || {}, done = 0;
+        ROUNDS_ITEMS.forEach(function (it) { if (r[it.k] && r[it.k].done) done++; });
+        return { done: done, total: ROUNDS_ITEMS.length };
+      } catch (e) { return { done: 0, total: 0 }; }
+    },
     // Resume-where-you-left-off (home.js snapshots this on background; replays it on the next launch).
     // curView captures the exact screen + sub-tab (+ open shared-patient id); resume reopens ICU in the
     // SAME unit category (no switch) and resumeView navigates to that exact view.

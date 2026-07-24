@@ -424,6 +424,11 @@
         var n = (typeof e.news2 === "number") ? e.news2 : -1;
         if (!topWl || n > topWl._n) topWl = { _n: n, name: e.name, bed: e.bed };
       });
+      // Rounds checklist progress for the currently-open patient (real; {0,0} when none open).
+      var rp = { done: 0, total: 0 };
+      try {
+        if (window.ICU && ICU.roundsProgress && ICU.state && ICU.state() && ICU.state().patient) rp = ICU.roundsProgress();
+      } catch (e) {}
       var occupied = 0;
       if (window.GHIS && GHIS.getPatients) {
         occupied = (GHIS.getPatients() || []).filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
@@ -446,8 +451,8 @@
         topCritical: top,
         patientCount: patientCount || 0,
         tasksDue: taskCount,
-        roundsDone: 0,
-        roundsTotal: 0,
+        roundsDone: rp.done,
+        roundsTotal: rp.total,
         censusOccupied: occupied || patientCount || 0,
         censusTotal: patientCount || 0,
         onCall: false,
