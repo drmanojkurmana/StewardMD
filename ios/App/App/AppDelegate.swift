@@ -156,7 +156,6 @@ private func smdConsumePendingControlRoute(attempt: Int = 0) {
     let fileURL = fm.containerURL(forSecurityApplicationGroupIdentifier: suite)?.appendingPathComponent(smdControlRouteFile)
     var route = fileURL.flatMap { try? String(contentsOf: $0, encoding: .utf8) }?.trimmingCharacters(in: .whitespacesAndNewlines)
     if route?.isEmpty != false { route = UserDefaults(suiteName: suite)?.string(forKey: "smd.pendingControlRoute") }
-    NSLog("SMD-CONSUME activate attempt=\(attempt) file=\(fileURL?.path ?? "?") route=\(route ?? "nil")")
 
     guard let r = route, !r.isEmpty else {
         if attempt < 8 {
@@ -167,7 +166,6 @@ private func smdConsumePendingControlRoute(attempt: Int = 0) {
     if let f = fileURL { try? fm.removeItem(at: f) }
     UserDefaults(suiteName: suite)?.removeObject(forKey: "smd.pendingControlRoute")
     guard let url = URL(string: "stewardmd://" + r) else { return }
-    NSLog("SMD-CONSUME replaying \(url.absoluteString)")
     _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
 }
 
@@ -191,7 +189,6 @@ struct CBControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Start Code Blue"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL(app) fired codeblue")
         smdStashControlRoute("codeblue")
         return .result()
     }
@@ -202,7 +199,6 @@ struct MaikControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Ask Maik"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL(app) fired askai")
         smdStashControlRoute("askai")
         return .result()
     }
@@ -213,7 +209,6 @@ struct DrugControlIntent: AppIntent {
     static let title: LocalizedStringResource = "Drug lookup"
     static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
     func perform() async throws -> some IntentResult {
-        NSLog("SMD-CTRL(app) fired drugs")
         smdStashControlRoute("drugs")
         return .result()
     }
