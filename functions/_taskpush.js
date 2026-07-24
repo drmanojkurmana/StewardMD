@@ -134,8 +134,19 @@ async function fsPatchField(env, tok, path, field, valueObj) {
 export async function isGroupMember(env, gid, uid) {
   if (!gid || !uid) return false;
   const tok = await saTok(env);
-  const m = await fsGet(env, tok, `/icuGroups/${gid}/members/${rawUid(uid)}`, ["uid"]);
-  return !!m;
+  const raw = rawUid(uid);
+  // Primary: direct doc-id lookup (member docs are keyed by the raw Firebase uid).
+  const m = await fsGet(env, tok, `/icuGroups/${gid}/members/${raw}`, ["uid"]);
+  if (m) return true;
+  // Fallback: a direct-GET miss is reported to the caller as "not-a-member" (403) even when the user
+  // IS a member — e.g. a member doc keyed by an auto-id carrying a `uid` FIELD, which the client's
+  // collectionGroup query matches (so the app shows the user's role) while this doc-id GET misses.
+  // Match on the field, exactly as the client does, so the server agrees with what the user sees.
+  try {
+    const list = await fsList(env, tok, `/icuGroups/${gid}/members`);
+    if (Array.isArray(list) && list.some((d) => d && rawUid(d.uid) === raw)) return true;
+  } catch (e) {}
+  return false;
 }
 
 // Escalate ONE overdue task: verify it's still overdue + un-escalated, push every member, stamp it.

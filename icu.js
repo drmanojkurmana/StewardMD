@@ -5117,6 +5117,33 @@
       }, function () { note("error", "Not signed in — teammates won't be alerted. [" + VER + " · idToken rejected]"); });
     } catch (e) { fail("throw " + ((e && e.message) || e)); }
   }
+  // Critical value recorded → alert the WHOLE unit IMMEDIATELY (Tier-1, bypasses prefs). Mirrors
+  // grpNotifyInstruction: it MUST send the Firebase ID token, because /api/push/* authenticates via
+  // identify() (Authorization: Bearer). The previous inline call sent Content-Type ONLY (no token) and
+  // was fire-and-forget (.catch swallowed everything), so the server 401'd and the critical value
+  // silently never alerted anyone — the root cause of "K+ critical didn't notify the team".
+  function grpNotifyCritical(gid, pid, c) {
+    if (!gid || !pid || !c) return;
+    function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
+    var VER = "g421";
+    var base = window.SMD_API_BASE || "(relative)";
+    function fail(reason) { note("error", "Critical alert failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
+    try {
+      idToken().then(function (tok) {
+        if (!tok) { note("error", "Not signed in — critical alert not sent. [" + VER + " · token missing]"); return; }
+        var status = 0;
+        fetch(grpPushUrl("/api/push/critical"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, label: c.label, value: c.value, unit: c.unit, bed: c.bed }) })
+          .then(function (r) { status = r.status; return r.json().catch(function () { return null; }); })
+          .then(function (j) {
+            if (j && j.sent > 0) { _grpLastPush = null; if (window.toast) toast("Critical alert sent to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
+            if (j && j.notified > 0) { note("none", "No teammate is registered for push yet — ask them to enable notifications in Settings › Ward Integration."); return; }
+            if (j && j.eligible > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); return; }
+            fail("HTTP " + status + (j && j.error ? " " + j.error : ""));
+          })
+          .catch(function (e) { fail("fetch " + ((e && e.message) || e || "failed")); });
+      }, function () { note("error", "Not signed in — critical alert not sent. [" + VER + " · idToken rejected]"); });
+    } catch (e) { fail("throw " + ((e && e.message) || e)); }
+  }
   // "Hand over to next shift" → push the unit (incoming shift) that a handover is ready.
   function grpNotifyHandover(gid, pid, sbar) {
     try {
@@ -7434,11 +7461,7 @@
         // critical analyte in this burst; server excludes the author + falls back to solo verifiability.
         for (var ci = 0; ci < events.length; ci++) {
           if (events[ci] && events[ci].type === "critical" && events[ci].crit) {
-            (function (c) {
-              try {
-                fetch(grpPushUrl("/api/push/critical"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gid: _grp.id, pid: _grpPtId, label: c.label, value: c.value, unit: c.unit }) }).catch(function () {});
-              } catch (e) {}
-            })(events[ci].crit);
+            try { grpNotifyCritical(_grp.id, _grpPtId, events[ci].crit); } catch (e) {}
           }
         }
       } catch (e) {}
