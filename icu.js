@@ -3948,17 +3948,34 @@
   /* --------------------------- subscription lifecycle (no listener leaks) --------------------- */
   var _grpCreating = false;      // guard: a createGroup is in flight — block duplicate unit creation
   var _grpJustCreated = null;    // {id, ts}: a just-created unit not yet propagated to the collectionGroup listener
+  var _grpSubRetry = null;       // bounded self-heal poll for the first-run auth/API race (see grpEnsureGroupsSub)
+  function grpCurrentUser() {
+    try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; }
+  }
+  function grpStopSubRetry() { if (_grpSubRetry) { try { clearInterval(_grpSubRetry); } catch (e) {} _grpSubRetry = null; } }
   function grpEnsureGroupsSub() {
-    if (!groupMode()) return;
-    var api = groupsApi(); if (!api) return;
-    // Auth gate: the groups query is uid-scoped. If Firebase auth hasn't resolved yet, subscribeGroups
-    // returns an EMPTY result + a no-op unsubscribe — which the _grpSubGroups guard then treats as a
-    // live sub, wedging the board empty until a reload. Bail out until a user exists; the auth watcher
-    // calls this again on sign-in, so units/team/ID appear WITHOUT the solo↔group toggle workaround.
-    try {
-      var _au = (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null;
-      if (!_au) return;
-    } catch (e) { return; }
+    // The live groups subscription needs TWO independent async signals ready: (1) the collab API
+    // (window.SMD_ICU_GROUPS, loaded by icu-collab.js) and (2) Firebase AUTH resolved (the query is
+    // uid-scoped; a pre-auth subscribeGroups returns an EMPTY result + no-op unsubscribe that the
+    // _grpSubGroups guard then mistakes for a live sub, wedging the board empty). This function is only
+    // triggered at one-shot moments (ICU.open, auth-state-change), so on a FIRST run — before a reload —
+    // if either signal isn't ready at that instant it used to bail silently with NO retry, and the board
+    // stayed empty until the user did the solo↔group toggle (which just reloads the page). Root-cause fix:
+    // when the user INTENDS group mode but a precondition isn't ready, poll until BOTH are, then subscribe.
+    if (!(icuV2On() && icuGroupsOn())) { grpStopSubRetry(); return; }   // solo by choice → nothing to sync
+    var api = groupsApi();
+    var _au = grpCurrentUser();
+    if (!api || !_au) {                                                 // preconditions not ready → self-heal poll
+      if (!_grpSubRetry) {
+        var tries = 0;
+        _grpSubRetry = setInterval(function () {
+          if (++tries > 40 || _grpSubGroups || !(icuV2On() && icuGroupsOn())) { grpStopSubRetry(); return; }
+          if (groupsApi() && grpCurrentUser()) { grpStopSubRetry(); grpEnsureGroupsSub(); }
+        }, 400);
+      }
+      return;
+    }
+    grpStopSubRetry();
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
     try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
@@ -7227,7 +7244,11 @@
         } catch (e) {}
       }
       rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
-      if (groupMode()) { try { grpEnsureGroupsSub(); } catch (e) {} }   // Phase 2: start the live unit subscription
+      // Phase 2: start the live unit subscription. Gate on INTENT (v2 + groups flag) rather than
+      // groupMode() — groupMode() also requires the collab API to be loaded, so on a first open before
+      // icu-collab.js finishes, gating on it would skip this call and the self-heal poll would never
+      // start. grpEnsureGroupsSub itself handles the auth/API readiness race (polls until both ready).
+      if (icuV2On() && icuGroupsOn()) { try { grpEnsureGroupsSub(); } catch (e) {} }
       // (First-open race is handled at the source: grpEnsureGroupsSub no-ops until auth is ready, and the
       // auth watcher below re-subscribes once signed in — so units/team/ID appear without a solo↔group toggle.)
       // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
