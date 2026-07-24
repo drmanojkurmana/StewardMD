@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 73;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,10 +58,19 @@
 		EC0EBD0C0E810E5924753203 /* ReferenceGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C388BCD1A278CBFA7016CCB /* ReferenceGauge.swift */; };
 		EC82DE89E633CE88838D4CBA /* StewardMDWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A11CA3EED1EE79D8C0698 /* StewardMDWatchApp.swift */; };
 		F0FE3E640595B25C3BCEA8A7 /* GlanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CC99F79B9CFDDDB5B768D /* GlanceProvider.swift */; };
+		F3D561893012A84A00536EA8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D561713012A83F00536EA8 /* SwiftUI.framework */; };
+		F3D5618A3012A84A00536EA8 /* SwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F3D561713012A83F00536EA8 /* SwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F3D5618C3012A84C00536EA8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D5616F3012A83F00536EA8 /* WidgetKit.framework */; };
+		F3D5618D3012A84C00536EA8 /* WidgetKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F3D5616F3012A83F00536EA8 /* WidgetKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F3D561AF3012AD5400536EA8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D5616F3012A83F00536EA8 /* WidgetKit.framework */; };
+		F3D561B03012AD5400536EA8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D561713012A83F00536EA8 /* SwiftUI.framework */; };
+		F3D561BD3012AD5600536EA8 /* StewardMDWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F3D561AE3012AD5400536EA8 /* StewardMDWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F3F0D0FB2FFBD2D600669E55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3F0D0FA2FFBD2D600669E55 /* GoogleService-Info.plist */; };
 		F427052757D6449ED13E3872 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB96E6B44082D5A156F1A4 /* AppRouter.swift */; };
 		F522340F9324B0F6BE1B95DF /* StewardMDWatchCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1C90F802EAA5AC287545C6F0 /* StewardMDWatchCore */; };
 		FE0000000000000000000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FE0000000000000000000001 /* PrivacyInfo.xcprivacy */; };
+		FE0000000000000000000011 /* StewardMDWatchCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE0000000000000000000010 /* StewardMDWatchCore */; };
+		FE0000000000000000000021 /* BriefRecWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0000000000000000000020 /* BriefRecWidgets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +80,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = CE40D4F41B6077727F605178;
 			remoteInfo = StewardMDWatch;
+		};
+		F3D561813012A84100536EA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D5616D3012A83F00536EA8;
+			remoteInfo = StewardMDExtension;
+		};
+		F3D561BB3012AD5600536EA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D561AD3012AD5400536EA8;
+			remoteInfo = StewardMDWidgetExtension;
 		};
 		F668DDDF5CB93D5F94441D89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -102,6 +125,29 @@
 				BFED5C9DD942983182D201EC /* StewardMDWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D561843012A84100536EA8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F3D561BD3012AD5600536EA8 /* StewardMDWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D5618B3012A84A00536EA8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F3D5618A3012A84A00536EA8 /* SwiftUI.framework in Embed Frameworks */,
+				F3D5618D3012A84C00536EA8 /* WidgetKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -161,11 +207,49 @@
 		DB9014FB256AF3B9A99AA9A2 /* CaptureLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CaptureLog.swift; sourceTree = "<group>"; };
 		DC540592C55863D8F5369554 /* ProcedureTimerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProcedureTimerView.swift; sourceTree = "<group>"; };
 		E3C540FAEE1A804CEC2CF562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F334351C301344FE00E16F27 /* StewardMDExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StewardMDExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D5616F3012A83F00536EA8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F3D561713012A83F00536EA8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F3D561AE3012AD5400536EA8 /* StewardMDWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StewardMDWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F0D0FA2FFBD2D600669E55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F74D181CE253D17BFC6361AC /* AppIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
 		F968246DA3B85ACF4DD711B5 /* WardSyncView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WardSyncView.swift; sourceTree = "<group>"; };
 		FE0000000000000000000001 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		FE0000000000000000000020 /* BriefRecWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BriefRecWidgets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F3D561873012A84100536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F3D5616D3012A83F00536EA8 /* StewardMDExtension */;
+		};
+		F3D561BE3012AD5600536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				.swift,
+				Info.plist,
+			);
+			target = F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		F3D561C23012AD7C00536EA8 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = F3D561AA3012AD5400536EA8 /* Sources */;
+			membershipExceptions = (
+				.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F3D561733012A83F00536EA8 /* StewardMD */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F3D561873012A84100536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StewardMD; sourceTree = "<group>"; };
+		F3D561B13012AD5400536EA8 /* StewardMDWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F3D561BE3012AD5600536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F3D561C23012AD7C00536EA8 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StewardMDWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1FFB4D8CB257E6F4994454A9 /* Frameworks */ = {
@@ -194,6 +278,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F3D5616B3012A83F00536EA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D561893012A84A00536EA8 /* SwiftUI.framework in Frameworks */,
+				F3D5618C3012A84C00536EA8 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D561AB3012AD5400536EA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D561B03012AD5400536EA8 /* SwiftUI.framework in Frameworks */,
+				F3D561AF3012AD5400536EA8 /* WidgetKit.framework in Frameworks */,
+				FE0000000000000000000011 /* StewardMDWatchCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -210,6 +313,8 @@
 			children = (
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
+				F3D561733012A83F00536EA8 /* StewardMD */,
+				F3D561B13012AD5400536EA8 /* StewardMDWidget */,
 				504EC3051FED79650016851F /* Products */,
 				EE561586C8EAAA5DE1C420C9 /* Frameworks */,
 				693D6486FF14A1E7719C064C /* StewardMDWatch */,
@@ -223,6 +328,8 @@
 				504EC3041FED79650016851F /* App.app */,
 				02DAB70050CD079FDE101F07 /* StewardMDWatch.app */,
 				67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */,
+				F3D561AE3012AD5400536EA8 /* StewardMDWidgetExtension.appex */,
+				F334351C301344FE00E16F27 /* StewardMDExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +401,7 @@
 				5F71D747D325FDCC0EF2E0B4 /* SmartStackWidgets.swift */,
 				27FE5F0CFEB5D57BFAAF2F0E /* StewardMDWatchWidgets.entitlements */,
 				AB59296FF1B65DA08543CEF0 /* StewardMDWatchWidgets.swift */,
+				FE0000000000000000000020 /* BriefRecWidgets.swift */,
 				C1E3549499CEB6DBC70AEE29 /* WidgetViews.swift */,
 			);
 			name = StewardMDWatchWidgets;
@@ -339,6 +447,8 @@
 			isa = PBXGroup;
 			children = (
 				70A51C8088E80849B83F1CD6 /* watchOS */,
+				F3D5616F3012A83F00536EA8 /* WidgetKit.framework */,
+				F3D561713012A83F00536EA8 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -354,11 +464,14 @@
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
 				EB97A289F606458ADC44A470 /* Embed Watch Content */,
+				F3D561843012A84100536EA8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				9BA663798674D08903D8B07B /* PBXTargetDependency */,
+				F3D561823012A84100536EA8 /* PBXTargetDependency */,
+				F3D561BC3012AD5600536EA8 /* PBXTargetDependency */,
 			);
 			name = App;
 			packageProductDependencies = (
@@ -390,6 +503,52 @@
 			productReference = 02DAB70050CD079FDE101F07 /* StewardMDWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F3D5616D3012A83F00536EA8 /* StewardMDExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D561883012A84100536EA8 /* Build configuration list for PBXNativeTarget "StewardMDExtension" */;
+			buildPhases = (
+				F3D5616A3012A83F00536EA8 /* Sources */,
+				F3D5616B3012A83F00536EA8 /* Frameworks */,
+				F3D5616C3012A83F00536EA8 /* Resources */,
+				F3D5618B3012A84A00536EA8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F3D561733012A83F00536EA8 /* StewardMD */,
+			);
+			name = StewardMDExtension;
+			packageProductDependencies = (
+			);
+			productName = StewardMDExtension;
+			productReference = F334351C301344FE00E16F27 /* StewardMDExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D561BF3012AD5600536EA8 /* Build configuration list for PBXNativeTarget "StewardMDWidgetExtension" */;
+			buildPhases = (
+				F3D561AA3012AD5400536EA8 /* Sources */,
+				F3D561AB3012AD5400536EA8 /* Frameworks */,
+				F3D561AC3012AD5400536EA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F3D561B13012AD5400536EA8 /* StewardMDWidget */,
+			);
+			name = StewardMDWidgetExtension;
+			packageProductDependencies = (
+				FE0000000000000000000010 /* StewardMDWatchCore */,
+			);
+			productName = StewardMDWidgetExtension;
+			productReference = F3D561AE3012AD5400536EA8 /* StewardMDWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B85583918CEE1F6D00BAF5DA /* Build configuration list for PBXNativeTarget "StewardMDWatchWidgets" */;
@@ -416,7 +575,7 @@
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 920;
+				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 920;
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
@@ -424,10 +583,15 @@
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
+					F3D5616D3012A83F00536EA8 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					F3D561AD3012AD5400536EA8 = {
+						CreatedOnToolsVersion = 27.0;
+					};
 				};
 			};
 			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -437,8 +601,9 @@
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
 				D4C12C0A2AAA248700AAC8A2 /* XCLocalSwiftPackageReference "CapApp-SPM" */,
-				0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */,
+				0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "../../Packages/StewardMDWatchCore" */,
 			);
+			preferredProjectObjectVersion = 48;
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -446,6 +611,8 @@
 				504EC3031FED79650016851F /* App */,
 				CE40D4F41B6077727F605178 /* StewardMDWatch */,
 				F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */,
+				F3D5616D3012A83F00536EA8 /* StewardMDExtension */,
+				F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -481,6 +648,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F3D5616C3012A83F00536EA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D561AC3012AD5400536EA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -492,6 +673,7 @@
 				F0FE3E640595B25C3BCEA8A7 /* GlanceProvider.swift in Sources */,
 				2E057E67660222A8AA7D20DC /* SmartStackWidgets.swift in Sources */,
 				10E793FAC38049EF46827A4E /* StewardMDWatchWidgets.swift in Sources */,
+				FE0000000000000000000021 /* BriefRecWidgets.swift in Sources */,
 				609723A7F0D6CFEE962FA782 /* WidgetViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +726,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F3D5616A3012A83F00536EA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D561AA3012AD5400536EA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -558,6 +754,16 @@
 			name = StewardMDWatch;
 			target = CE40D4F41B6077727F605178 /* StewardMDWatch */;
 			targetProxy = 96A3C78162AE65775EAAA8AF /* PBXContainerItemProxy */;
+		};
+		F3D561823012A84100536EA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D5616D3012A83F00536EA8 /* StewardMDExtension */;
+			targetProxy = F3D561813012A84100536EA8 /* PBXContainerItemProxy */;
+		};
+		F3D561BC3012AD5600536EA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */;
+			targetProxy = F3D561BB3012AD5600536EA8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -765,7 +971,6 @@
 		9B1447695530074931E74106 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatch/StewardMDWatch.entitlements;
@@ -790,7 +995,6 @@
 		D5CD5908CFB9E53852443343 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatch/StewardMDWatch.entitlements;
@@ -829,6 +1033,178 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		F3D561853012A84100536EA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StewardMD/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StewardMD;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.StewardMD;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3D561863012A84100536EA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StewardMD/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StewardMD;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.StewardMD;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3D561C03012AD5600536EA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = StewardMDWidget/StewardMDWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StewardMDWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StewardMDWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.StewardMDWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3D561C13012AD5600536EA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = StewardMDWidget/StewardMDWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StewardMDWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StewardMDWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.StewardMDWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -871,10 +1247,28 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F3D561883012A84100536EA8 /* Build configuration list for PBXNativeTarget "StewardMDExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D561853012A84100536EA8 /* Debug */,
+				F3D561863012A84100536EA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D561BF3012AD5600536EA8 /* Build configuration list for PBXNativeTarget "StewardMDWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D561C03012AD5600536EA8 /* Debug */,
+				F3D561C13012AD5600536EA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */ = {
+		0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "../../Packages/StewardMDWatchCore" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Packages/StewardMDWatchCore;
 		};
@@ -887,18 +1281,23 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1C90F802EAA5AC287545C6F0 /* StewardMDWatchCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */;
+			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "../../Packages/StewardMDWatchCore" */;
 			productName = StewardMDWatchCore;
 		};
 		2C39ECE45AC5F875C41154F8 /* StewardMDWatchCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */;
+			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "../../Packages/StewardMDWatchCore" */;
 			productName = StewardMDWatchCore;
 		};
 		4D22ABE82AF431CB00220026 /* CapApp-SPM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D4C12C0A2AAA248700AAC8A2 /* XCLocalSwiftPackageReference "CapApp-SPM" */;
 			productName = "CapApp-SPM";
+		};
+		FE0000000000000000000010 /* StewardMDWatchCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "../../Packages/StewardMDWatchCore" */;
+			productName = StewardMDWatchCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,5 +1,6 @@
 import UIKit
 import Capacitor
+import AppIntents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -143,11 +144,77 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // Control Center / Action-button Controls (iOS 18) launch the app after their AppIntent stashes a
 // deep-link route in the shared App Group. On activation we replay it as a stewardmd:// open through
 // Capacitor's proxy — the exact path a widgetURL tap uses — so the web layer routes it normally.
-private func smdConsumePendingControlRoute() {
+private let smdControlRouteFile = "pendingControlRoute"
+
+private func smdConsumePendingControlRoute(attempt: Int = 0) {
     let suite = "group.in.stewardmd.app"
-    guard let d = UserDefaults(suiteName: suite),
-          let route = d.string(forKey: "smd.pendingControlRoute"), !route.isEmpty else { return }
-    d.removeObject(forKey: "smd.pendingControlRoute")
-    guard let url = URL(string: "stewardmd://" + route) else { return }
+    // A control fires perform() in the widget-extension process, which stashes the route in the App Group
+    // (as both an atomic FILE — immediately visible cross-process — and a UserDefaults key) and then defers
+    // the app to the foreground. Cross-process UserDefaults writes lag a few hundred ms, so we read the file
+    // first and still retry briefly to cover the deferred-activation race.
+    let fm = FileManager.default
+    let fileURL = fm.containerURL(forSecurityApplicationGroupIdentifier: suite)?.appendingPathComponent(smdControlRouteFile)
+    var route = fileURL.flatMap { try? String(contentsOf: $0, encoding: .utf8) }?.trimmingCharacters(in: .whitespacesAndNewlines)
+    if route?.isEmpty != false { route = UserDefaults(suiteName: suite)?.string(forKey: "smd.pendingControlRoute") }
+    NSLog("SMD-CONSUME activate attempt=\(attempt) file=\(fileURL?.path ?? "?") route=\(route ?? "nil")")
+
+    guard let r = route, !r.isEmpty else {
+        if attempt < 8 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { smdConsumePendingControlRoute(attempt: attempt + 1) }
+        }
+        return
+    }
+    if let f = fileURL { try? fm.removeItem(at: f) }
+    UserDefaults(suiteName: suite)?.removeObject(forKey: "smd.pendingControlRoute")
+    guard let url = URL(string: "stewardmd://" + r) else { return }
+    NSLog("SMD-CONSUME replaying \(url.absoluteString)")
     _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, open: url, options: [:])
+}
+
+// Stash the deep-link route the same way the widget extension does (atomic App Group file + UserDefaults),
+// so smdConsumePendingControlRoute() replays it on activation.
+private func smdStashControlRoute(_ route: String) {
+    let suite = "group.in.stewardmd.app"
+    let fm = FileManager.default
+    if let dir = fm.containerURL(forSecurityApplicationGroupIdentifier: suite) {
+        try? route.write(to: dir.appendingPathComponent(smdControlRouteFile), atomically: true, encoding: .utf8)
+    }
+    UserDefaults(suiteName: suite)?.set(route, forKey: "smd.pendingControlRoute")
+}
+
+// App-target copies of the Control Center intents. iOS 18 controls run a .foreground intent in the OWNING
+// APP process, so the intent type must exist here (the widget extension also declares matching types for the
+// ControlWidgetButton; AppIntents matches by identifier). perform() stashes the route; the deferred/foreground
+// activation then fires smdConsumePendingControlRoute() (which retries to cover the write→activate race).
+@available(iOS 26.0, *)
+struct CBControlIntent: AppIntent {
+    static let title: LocalizedStringResource = "Start Code Blue"
+    static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
+    func perform() async throws -> some IntentResult {
+        NSLog("SMD-CTRL(app) fired codeblue")
+        smdStashControlRoute("codeblue")
+        return .result()
+    }
+}
+
+@available(iOS 26.0, *)
+struct MaikControlIntent: AppIntent {
+    static let title: LocalizedStringResource = "Ask Maik"
+    static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
+    func perform() async throws -> some IntentResult {
+        NSLog("SMD-CTRL(app) fired askai")
+        smdStashControlRoute("askai")
+        return .result()
+    }
+}
+
+@available(iOS 26.0, *)
+struct DrugControlIntent: AppIntent {
+    static let title: LocalizedStringResource = "Drug lookup"
+    static let supportedModes: IntentModes = [.background, .foreground(.deferred)]
+    func perform() async throws -> some IntentResult {
+        NSLog("SMD-CTRL(app) fired drugs")
+        smdStashControlRoute("drugs")
+        return .result()
+    }
 }

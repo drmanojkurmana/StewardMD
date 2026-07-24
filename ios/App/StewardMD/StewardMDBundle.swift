@@ -13,6 +13,5 @@ struct StewardMDBundle: WidgetBundle {
     var body: some Widget {
         StewardMD()
         StewardMDControl()
-        StewardMDLiveActivity()
     }
 }
