@@ -28,6 +28,14 @@
 				<string>com.googleusercontent.apps.911280405587-3bdako2v5bi864qqlv3nhpubsjel62q7</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>in.stewardmd.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>stewardmd</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -47,6 +55,8 @@
 	<string>StewardMD lets you pick an existing photo (e.g. a monitor or lab image) for AI-assisted reading of values. The image is processed for the analysis you request and is not stored on our servers.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>StewardMD uses on-device speech recognition to turn your dictation into text for MaiK Scribe. Audio stays on your device so only the transcribed text is used, and you review it before anything is applied.</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
