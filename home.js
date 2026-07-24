@@ -658,6 +658,19 @@
     },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }
   };
+  // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
+  // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
+  try {
+    window.SMD_openRoute = function (route) {
+      var r = String(route || "").toLowerCase().replace(/^\/+/, "").replace(/[/?#].*$/, "");
+      var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
+                  askai: "askai", drugs: "drugmenu", drugmenu: "drugmenu", calculators: "calculators",
+                  antibiogram: "antibiogram", home: "home" };
+      var key = map[r] || (ACT[r] ? r : null);
+      if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
+      if (key && ACT[key]) { try { ACT[key](); } catch (e) {} }
+    };
+  } catch (e) {}
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
   //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html
   //     and lands on Home, losing the screen the user was on (e.g. an ICU patient). There is no true

@@ -552,7 +552,23 @@
         if (tries++ < 40) setTimeout(go, 250);   // wait for icu.js to load on a cold launch
       })();
     }
-    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) feed(r.url); }).catch(function () {}); } catch (e) {}
-    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) feed(d.url); }); } catch (e) {}
+    // Widget taps + Control Center controls deep-link via stewardmd://<route>. Route to the matching
+    // in-app screen (retries while home.js/icu.js finish loading on a cold launch). codeblue opens the
+    // native Command Center directly (same as the Code Blue push tap).
+    function routeDeepLink(u) {
+      var s = String(u || ""); if (s.indexOf("stewardmd://") !== 0) return;
+      var route = s.replace("stewardmd://", "").replace(/[/?#].*$/, "").toLowerCase();
+      var tries = 0;
+      (function go() {
+        if (route === "codeblue") {
+          var P2 = plugins(); var cbp = P2 && P2.WatchBridge;
+          if (cbp && cbp.openCodeBlue) { try { cbp.openCodeBlue().catch(function () {}); } catch (e) {} return; }
+        }
+        if (window.SMD_openRoute) { try { window.SMD_openRoute(route); } catch (e) {} return; }
+        if (tries++ < 40) setTimeout(go, 250);
+      })();
+    }
+    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); } }).catch(function () {}); } catch (e) {}
+    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); } }); } catch (e) {}
   })();
 })();
