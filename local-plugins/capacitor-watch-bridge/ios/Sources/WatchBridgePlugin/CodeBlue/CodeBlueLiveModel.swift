@@ -60,7 +60,7 @@ final class CodeBlueLiveModel: ObservableObject {
     private func syncLiveActivity() {
         guard #available(iOS 16.2, *) else { return }
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-        let content = ActivityContent(state: .from(state), staleDate: nil)
+        let content = ActivityContent(state: CodeBlueActivityAttributes.ContentState.from(state), staleDate: nil)
         let running = state.running && !state.rosc
         if running {
             if let act = liveActivity as? Activity<CodeBlueActivityAttributes> {
