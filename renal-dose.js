@@ -135,8 +135,15 @@
   function injectCSS() {
     if (document.getElementById("smd-rd-css")) return;
     var css = [
-      ".db-renal-btn{display:inline-flex;align-items:center;gap:6px;margin-top:8px;border:1px solid var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);font:700 12.5px var(--sans,system-ui);border-radius:999px;padding:7px 13px;cursor:pointer}",
-      "body.dark .db-renal-btn{background:var(--teal-soft,#0d2e2a);color:var(--teal,#3fc7b3);border-color:var(--teal,#3fc7b3)}",
+      ".db-renal-btn{display:inline-flex;align-items:center;gap:7px;margin:12px 0 2px;border:none;background:var(--teal,#0e6e63);color:#fff;font:800 13px/1 var(--sans,system-ui);letter-spacing:.01em;border-radius:11px;padding:10px 15px;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 2px rgba(14,110,99,.28);animation:rdAttn 2.4s ease-in-out infinite}",
+      ".db-renal-btn:hover{background:var(--teal-dk,#0b5b52)}",
+      ".db-renal-btn:active{transform:translateY(1px)}",
+      ".db-renal-btn:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
+      ".db-renal-ic{flex:0 0 auto;display:block}",
+      "@keyframes rdAttn{0%,100%{box-shadow:0 1px 2px rgba(14,110,99,.28),0 0 0 0 rgba(14,110,99,.42)}50%{box-shadow:0 1px 2px rgba(14,110,99,.28),0 0 0 7px rgba(14,110,99,0)}}",
+      "@media(prefers-reduced-motion:reduce){.db-renal-btn{animation:none}}",
+      "body.dark .db-renal-btn{background:var(--teal,#0e857a);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)}",
+      "body.dark .db-renal-btn:hover{background:var(--teal-dk,#0aa090)}",
       ".rd-scrim{position:fixed;inset:0;z-index:2147482000;background:rgba(8,12,18,.55);display:flex;align-items:flex-end;justify-content:center;animation:rdFade .18s ease}",
       "@media(min-width:560px){.rd-scrim{align-items:center}}",
       "@keyframes rdFade{from{opacity:0}to{opacity:1}}",
@@ -357,7 +364,13 @@
   // ── button HTML for the drug-DB detail (antibiotics only) ─────────────────────────────────────
   function buttonHTML(composition) {
     if (!isAntibiotic(composition)) return "";
-    return '<button type="button" class="db-renal-btn" data-renal-comp="' + escH(composition) + '">🫘 Renal dose</button>';
+    try { injectCSS(); } catch (e) {}   // ensure the button is styled the instant it renders (not only after a popup opens)
+    return '<button type="button" class="db-renal-btn" data-renal-comp="' + escH(composition) + '">'
+      + '<svg class="db-renal-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+      + '<path d="M12 3C8 3 5.5 6 5.5 9.7c0 2 .9 3.2.9 4.8 0 1.9-1.3 3-2.9 3"/>'
+      + '<path d="M12 3c4 0 6.5 3 6.5 6.7 0 2-.9 3.2-.9 4.8 0 1.9 1.3 3 2.9 3"/>'
+      + '<path d="M12 3v8"/>'
+      + '</svg><span>Renal dose</span></button>';
   }
 
   // delegated click → open the tool (works wherever the button is rendered)
