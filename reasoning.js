@@ -3242,7 +3242,7 @@
     var hits = kbSearch(q, 30);
     if (!hits.length) return;
     var emp = box.querySelector(".sp-empty"); if (emp) box.innerHTML = "";       // native found nothing
-    var html = '<div id="smdKbSec"><div class="sp-section-label">📚 Harrison Knowledge Base</div>' +
+    var html = '<div id="smdKbSec"><div class="sp-section-label">📚 StewardMD Knowledge Base</div>' +
       hits.map(function (d) {
         return '<div class="sp-card" data-kb="' + d.id + '"><div class="sp-card-top">' +
           '<span class="sp-card-icon">' + (d.cls === "inf" ? "🦠" : "🩺") + '</span><div>' +
