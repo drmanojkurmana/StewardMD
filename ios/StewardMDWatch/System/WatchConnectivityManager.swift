@@ -56,14 +56,18 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     /// Critical-ack write-back — direct API first, relay fallback. Group patients
     /// only (gid/pid); open/local criticals have no shared timeline.
     func writeLabAck(_ alert: LabAlert) async {
-        guard let gid = alert.groupId, let pid = alert.patientId, !gid.isEmpty, !pid.isEmpty else { return }
-        let label = [alert.analyte, alert.value].filter { !$0.isEmpty }.joined(separator: " ")
-        do {
-            try await WatchServices.appAPI.appendTimeline(gid: gid, pid: pid,
-                title: "Acknowledged — " + (label.isEmpty ? "critical value" : label))
-        } catch {
-            sendLabAck(alert)   // direct write failed → fall back to the phone relay
+        // Group patient with ids → write the ICU timeline server-side directly from the watch.
+        if let gid = alert.groupId, let pid = alert.patientId, !gid.isEmpty, !pid.isEmpty {
+            let label = [alert.analyte, alert.value].filter { !$0.isEmpty }.joined(separator: " ")
+            do {
+                try await WatchServices.appAPI.appendTimeline(gid: gid, pid: pid,
+                    title: "Acknowledged — " + (label.isEmpty ? "critical value" : label))
+                return
+            } catch { /* fall through to the phone relay */ }
         }
+        // No ids (open/local critical) or the direct write failed: ALWAYS relay to the phone, which
+        // resolves the currently-open patient if the ack didn't carry ids and appends the event there.
+        sendLabAck(alert)
     }
 
     /// Send a relay payload to the phone: `sendMessage` when reachable (immediate),
@@ -154,14 +158,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
-    /// Relay a critical-lab acknowledge to the phone so it appends an ICU-timeline
-    /// event. Only for group-patient criticals (which carry gid/pid); the open/
-    /// local patient has no shared doc, so its ack stays the HTTP audit only.
+    /// Relay a critical-lab acknowledge to the phone so it appends an ICU-timeline event. Sent for
+    /// every ack: ids ride along when known; otherwise the phone maps it to the currently-open patient.
     func sendLabAck(_ alert: LabAlert) {
         #if canImport(WatchConnectivity)
-        guard WCSession.isSupported(), let gid = alert.groupId, let pid = alert.patientId,
-              !gid.isEmpty, !pid.isEmpty else { return }
-        relaySend(["kind": "labAck", "gid": gid, "pid": pid, "analyte": alert.analyte, "value": alert.value])
+        guard WCSession.isSupported() else { return }
+        var info: [String: Any] = ["kind": "labAck", "analyte": alert.analyte, "value": alert.value]
+        // Include ids when known (group patient); omit for open/local — the phone resolves the open patient.
+        if let gid = alert.groupId, let pid = alert.patientId, !gid.isEmpty, !pid.isEmpty {
+            info["gid"] = gid; info["pid"] = pid
+        }
+        relaySend(info)
         #endif
     }
 

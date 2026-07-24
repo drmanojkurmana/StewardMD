@@ -602,9 +602,13 @@
     try {
       if (p && p.addListener) p.addListener("labAck", function (a) {
         try {
-          var api = groupsApi(); if (!api || !api.addTimelineEvent || !a || !a.gid || !a.pid) return;
+          var api = groupsApi(); if (!api || !api.addTimelineEvent || !a) return;
+          var gid = a.gid, pid = a.pid;
+          // Watch didn't carry ids (open/local critical) → map to the patient the phone has open.
+          if ((!gid || !pid) && api.currentOpenPatient) { var o = api.currentOpenPatient(); if (o) { gid = o.gid; pid = o.pid; } }
+          if (!gid || !pid) return;
           var label = [a.analyte, a.value].filter(Boolean).join(" ");
-          api.addTimelineEvent(a.gid, a.pid, { type: "note", title: "Acknowledged — " + (label || "critical value") });
+          api.addTimelineEvent(gid, pid, { type: "note", title: "Acknowledged — " + (label || "critical value") });
         } catch (e) {}
       });
     } catch (e) {}
