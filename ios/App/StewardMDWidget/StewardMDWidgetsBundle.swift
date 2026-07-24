@@ -20,6 +20,13 @@ struct StewardMDWidgetsBundle: WidgetBundle {
         ICUWatchlistHomeWidget()
         TasksHomeWidget()
         RoundsCensusHomeWidget()
+        // Lock Screen / StandBy accessory widgets (design §08)
+        CriticalLabsLockWidget()
+        RoundsLockWidget()
+        StewardMDBrandLockWidget()
+        DrugIndexLockWidget()
+        ICUDashboardLockWidget()
+        MaikLockWidget()
         // Code Blue Live Activity (Lock Screen + Dynamic Island)
         if #available(iOS 16.2, *) {
             CodeBlueLiveActivity()
@@ -71,8 +78,9 @@ struct CriticalLabsHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeCriticalLabs", provider: HomeGlanceProvider()) { entry in
             CriticalLabsHomeView(state: entry.state)
+                .smdWatermark()
                 .widgetURL(URL(string: "stewardmd://criticalLabs"))
-                .containerBackground(SMDPalette.surface.color, for: .widget)
+                .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }
         .configurationDisplayName("Critical labs")
         .description("Unacknowledged critical results across your unit.")
@@ -84,8 +92,9 @@ struct ICUWatchlistHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeWatchlist", provider: HomeGlanceProvider()) { entry in
             ICUWatchlistHomeView(state: entry.state)
+                .smdWatermark(.bottomTrailing, size: 52, opacity: 0.05)
                 .widgetURL(URL(string: "stewardmd://patients"))
-                .containerBackground(SMDPalette.surface.color, for: .widget)
+                .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }
         .configurationDisplayName("ICU watchlist")
         .description("Highest-acuity patients right now.")
@@ -97,8 +106,9 @@ struct TasksHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeTasks", provider: HomeGlanceProvider()) { entry in
             TasksHomeView(state: entry.state)
+                .smdWatermark()
                 .widgetURL(URL(string: "stewardmd://tasks"))
-                .containerBackground(SMDPalette.surface.color, for: .widget)
+                .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }
         .configurationDisplayName("Tasks & rounds")
         .description("Open jobs and round progress.")
@@ -110,11 +120,94 @@ struct RoundsCensusHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeCensus", provider: HomeGlanceProvider()) { entry in
             RoundsCensusHomeView(state: entry.state)
+                .smdWatermark(.topTrailing, size: 28, opacity: 0.06)
                 .widgetURL(URL(string: "stewardmd://home"))
-                .containerBackground(SMDPalette.surface.color, for: .widget)
+                .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }
         .configurationDisplayName("Ward census")
         .description("Occupancy and rounds at a glance.")
         .supportedFamilies([.systemSmall])
+    }
+}
+
+// MARK: - Lock Screen / StandBy accessory widgets
+
+struct CriticalLabsLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockCritical", provider: HomeGlanceProvider()) { entry in
+            CriticalLabsLockView(state: entry.state)
+                .widgetURL(URL(string: "stewardmd://criticalLabs"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("Critical labs")
+        .description("Unacknowledged criticals on the Lock Screen.")
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct RoundsLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockRounds", provider: HomeGlanceProvider()) { entry in
+            RoundsLockView(state: entry.state)
+                .widgetURL(URL(string: "stewardmd://home"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("Rounds progress")
+        .description("Rounds completed, at a glance.")
+        .supportedFamilies([.accessoryCircular])
+    }
+}
+
+struct StewardMDBrandLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockShortcut", provider: HomeGlanceProvider()) { _ in
+            BrandLockView()
+                .widgetURL(URL(string: "stewardmd://home"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("StewardMD")
+        .description("Open StewardMD from the Lock Screen.")
+        .supportedFamilies([.accessoryCircular])
+    }
+}
+
+// Quick-action circular launchers (Lock Screen). Each opens a stewardmd:// route.
+
+struct DrugIndexLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockDrugs", provider: HomeGlanceProvider()) { _ in
+            ShortcutLockView(systemImage: "pills.fill")
+                .widgetURL(URL(string: "stewardmd://drugs"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("Drug index")
+        .description("Open the drug lookup from the Lock Screen.")
+        .supportedFamilies([.accessoryCircular])
+    }
+}
+
+struct ICUDashboardLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockICU", provider: HomeGlanceProvider()) { _ in
+            ShortcutLockView(systemImage: "waveform.path.ecg")
+                .widgetURL(URL(string: "stewardmd://icu"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("ICU dashboard")
+        .description("Open the ICU dashboard from the Lock Screen.")
+        .supportedFamilies([.accessoryCircular])
+    }
+}
+
+struct MaikLockWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDLockMaik", provider: HomeGlanceProvider()) { _ in
+            ShortcutLockView(systemImage: "sparkles")
+                .widgetURL(URL(string: "stewardmd://askai"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("Ask MaiK")
+        .description("Open the MaiK assistant from the Lock Screen.")
+        .supportedFamilies([.accessoryCircular])
     }
 }

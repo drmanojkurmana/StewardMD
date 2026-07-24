@@ -138,6 +138,108 @@ private func bigNumber(_ text: String, size: CGFloat, _ color: Color) -> some Vi
     Text(text).font(.system(size: size, weight: .semibold, design: .monospaced)).foregroundStyle(color).lineLimit(1).minimumScaleFactor(0.6)
 }
 
+// MARK: - Brand mark (watermark + icon)
+
+/// Faint StewardMD mark tucked in a corner behind the content — the design's tile watermark (§07).
+private struct Watermark: ViewModifier {
+    var alignment: Alignment = .topTrailing
+    var size: CGFloat = 34
+    var opacity: Double = 0.06
+    func body(content: Content) -> some View {
+        content.background(alignment: alignment) {
+            Image("StewardMDMark")
+                .resizable().renderingMode(.template).scaledToFit()
+                .frame(width: size, height: size)
+                .foregroundStyle(W.brand)
+                .opacity(opacity)
+                .allowsHitTesting(false)
+        }
+    }
+}
+
+extension View {
+    /// Applies the faint corner StewardMD watermark used across the home tiles.
+    func smdWatermark(_ alignment: Alignment = .topTrailing, size: CGFloat = 34, opacity: Double = 0.06) -> some View {
+        modifier(Watermark(alignment: alignment, size: size, opacity: opacity))
+    }
+}
+
+// MARK: - Lock Screen accessory views (design §08)
+
+/// Circular Critical-labs accessory: translucent disc + triangle glyph + count. Monochrome-safe.
+struct CriticalLabsLockView: View {
+    @Environment(\.widgetFamily) private var family
+    let state: GlanceState
+
+    var body: some View {
+        switch family {
+        case .accessoryRectangular:
+            HStack(spacing: 8) {
+                Image(systemName: "exclamationmark.triangle.fill").font(.title3)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("\(state.criticalCount) critical").font(.headline)
+                    Text(state.topCritical ?? "unacknowledged").font(.caption2).lineLimit(1)
+                }
+                Spacer(minLength: 0)
+            }
+            .widgetAccentable()
+        case .accessoryInline:
+            Label("\(state.criticalCount) critical", systemImage: "exclamationmark.triangle.fill")
+        default: // accessoryCircular
+            ZStack {
+                AccessoryWidgetBackground()
+                VStack(spacing: 0) {
+                    Image(systemName: "exclamationmark.triangle.fill").font(.system(size: 13, weight: .bold))
+                    Text("\(state.criticalCount)").font(.system(size: 22, weight: .bold, design: .rounded))
+                }
+            }
+            .widgetAccentable()
+            .widgetLabel("Critical labs")
+        }
+    }
+}
+
+/// Circular rounds-progress accessory gauge.
+struct RoundsLockView: View {
+    let state: GlanceState
+    var body: some View {
+        Gauge(value: state.roundsFraction) {
+            Image(systemName: "checklist")
+        } currentValueLabel: {
+            Text("\(state.roundsDone)").font(.system(.body, design: .rounded)).bold()
+        }
+        .gaugeStyle(.accessoryCircularCapacity)
+        .widgetAccentable()
+        .widgetLabel("Rounds \(state.roundsDone)/\(state.roundsTotal)")
+    }
+}
+
+/// Branded circular launcher — the StewardMD mark on a translucent disc (opens the app).
+struct BrandLockView: View {
+    var body: some View {
+        ZStack {
+            AccessoryWidgetBackground()
+            Image("StewardMDMark")
+                .resizable().renderingMode(.template).scaledToFit()
+                .padding(11)
+        }
+        .widgetAccentable()
+    }
+}
+
+/// Generic circular quick-action launcher (Drug index · ICU dashboard · MaiK). An SF Symbol on a
+/// translucent disc; the widget's URL opens the matching stewardmd:// route.
+struct ShortcutLockView: View {
+    let systemImage: String
+    var body: some View {
+        ZStack {
+            AccessoryWidgetBackground()
+            Image(systemName: systemImage).font(.system(size: 22, weight: .semibold))
+        }
+        .widgetAccentable()
+    }
+}
+
 // MARK: - Critical labs
 
 struct CriticalLabsHomeView: View {
