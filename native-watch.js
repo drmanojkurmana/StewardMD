@@ -283,10 +283,14 @@
       var st = openState(), pt = st && st.patient, alerts = st && st.alerts;
       if (pt && alerts && alerts.length) {
         var label = [pt.bed ? ("Bed " + pt.bed) : null, pt.name].filter(Boolean).join(" · ");
+        // The open patient's shared-unit ids (when synced) so a wrist "Acknowledge" can be written back
+        // to THIS patient's ICU timeline. Previously omitted here, so the watch dropped the ack.
+        var openIds = null;
+        try { var _oa = groupsApi(); if (_oa && _oa.currentOpenPatient) openIds = _oa.currentOpenPatient(); } catch (e) {}
         alerts.forEach(function (a) {
           if (!a || (a.severity !== "crit" && a.severity !== "warn")) return;
           var m = String(a.msg || "").match(/([\d.]+)\s*([A-Za-z%\/]+)?/);
-          out.push({
+          var alert = {
             id: "icu-" + String(pt.mrn || pt.name || "cur") + "-" + String(a.title || ""),
             analyte: String(a.title || "Alert"),
             value: m ? m[1] : "",
@@ -296,7 +300,9 @@
             severity: a.severity === "crit" ? "critical" : "warning",
             ts: Math.floor(Date.now() / 1000),
             trend: trendFor(st, analyteKeyFor((a.title || "") + " " + (a.msg || "")))
-          });
+          };
+          if (openIds && openIds.gid && openIds.pid) { alert.groupId = String(openIds.gid); alert.patientId = String(openIds.pid); }
+          out.push(alert);
         });
       }
     } catch (e) {}
@@ -408,8 +414,16 @@
   // Ward Sync census. patientCount is the deduped watchlist size (so the open
   // patient counts even with an empty roster/GHIS cache). No true bed denominator
   // or task count exists client-side, so we don't invent them.
-  function census(patientCount, crit, tk) {
+  function census(wl, crit, tk) {
     try {
+      var patientCount = (wl && wl.length) || 0;
+      // Highest-acuity watchlist entry → the ICU tile's NEWS2 hero (icon + number + colour).
+      var topWl = null;
+      (wl || []).forEach(function (e) {
+        if (!e) return;
+        var n = (typeof e.news2 === "number") ? e.news2 : -1;
+        if (!topWl || n > topWl._n) topWl = { _n: n, name: e.name, bed: e.bed };
+      });
       var occupied = 0;
       if (window.GHIS && GHIS.getPatients) {
         occupied = (GHIS.getPatients() || []).filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
@@ -438,6 +452,8 @@
         censusTotal: patientCount || 0,
         onCall: false,
         ward: ward,
+        watchlistTop: topWl ? [topWl.bed ? "Bed " + topWl.bed : null, topWl.name].filter(Boolean).join(" · ") : null,
+        watchlistNews: (topWl && topWl._n >= 0) ? topWl._n : null,
         updatedAt: Math.floor(Date.now() / 1000)
       };
     } catch (e) { return null; }
@@ -489,7 +505,7 @@
       var tk = tasks(); if (tk.length) payload.tasks = tk;
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
-      var cen = census(wl.length, crit, tk); if (cen) payload.glance = cen;
+      var cen = census(wl, crit, tk); if (cen) payload.glance = cen;
       // W2: doctor's name for the watch home header (below the StewardMD wordmark).
       // NOTE: don't send HOSPITAL.current() — that's the antibiogram data source (e.g. "ICMR"),
       // not the doctor's hospital, so it would mislabel the watch. Name only.
