@@ -148,9 +148,9 @@ private struct Watermark: ViewModifier {
     func body(content: Content) -> some View {
         content.background(alignment: alignment) {
             Image("StewardMDMark")
-                .resizable().renderingMode(.template).scaledToFit()
+                .resizable().scaledToFit()                 // original green-teal brand colours
+                .rotationEffect(.degrees(180))             // asset renders inverted in-widget; flip upright
                 .frame(width: size, height: size)
-                .foregroundStyle(W.brand)
                 .opacity(opacity)
                 .allowsHitTesting(false)
         }
@@ -221,6 +221,7 @@ struct BrandLockView: View {
             AccessoryWidgetBackground()
             Image("StewardMDMark")
                 .resizable().renderingMode(.template).scaledToFit()
+                .rotationEffect(.degrees(180))
                 .padding(11)
         }
         .widgetAccentable()
