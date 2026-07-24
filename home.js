@@ -664,7 +664,7 @@
     window.SMD_openRoute = function (route) {
       var r = String(route || "").toLowerCase().replace(/^\/+/, "").replace(/[/?#].*$/, "");
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
-                  askai: "askai", drugs: "drugmenu", drugmenu: "drugmenu", calculators: "calculators",
+                  askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
                   antibiogram: "antibiogram", home: "home" };
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
@@ -960,7 +960,7 @@
       "body.ui-v2 .db-title{font:800 17px/1.2 var(--sans)!important;color:var(--ink)!important;letter-spacing:-.01em}",
       "body.ui-v2 .db-close,body.ui-v2 .db-dwx{border-radius:10px!important;color:var(--slate-soft)!important;font-weight:700}",
       "body.ui-v2 .db-brandbtn{border-radius:999px!important;background:var(--teal-soft)!important;color:var(--teal)!important;border:1px solid var(--teal-soft)!important;font:700 13px var(--sans)!important;padding:8px 14px!important}",
-      "body.ui-v2 .db-search{border-radius:12px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--ink)!important;font:500 14px var(--sans)!important;padding:12px 14px!important}",
+      "body.ui-v2 .db-search{border-radius:12px!important;border:1px solid var(--line)!important;background:var(--panel)!important;color:var(--ink)!important;font:500 14px var(--sans)!important;padding:12px 14px 12px 44px!important}",
       "body.ui-v2 .db-comp{width:100%;text-align:left;border-radius:14px!important;border:1px solid var(--line)!important;background:var(--panel)!important;padding:14px 16px!important;margin-bottom:10px!important;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:transform .12s,box-shadow .16s,border-color .16s}",
       "body.ui-v2 .db-comp:hover{border-color:var(--teal)!important;box-shadow:0 4px 16px rgba(15,23,42,.08)}body.ui-v2 .db-comp:active{transform:scale(.99)}",
       "body.ui-v2 .db-comp-name{font:700 15px/1.3 var(--sans)!important;color:var(--ink)!important}body.ui-v2 .db-comp-sub{font:500 12.5px var(--sans)!important;color:var(--slate-soft)!important;margin-top:3px}",
