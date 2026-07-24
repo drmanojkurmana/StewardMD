@@ -92,7 +92,7 @@ struct ICUWatchlistHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeWatchlist", provider: HomeGlanceProvider()) { entry in
             ICUWatchlistHomeView(state: entry.state)
-                .smdWatermark(.bottomTrailing, size: 52, opacity: 0.05)
+                .smdWatermark(.bottomTrailing, size: 68, opacity: 0.06)
                 .widgetURL(URL(string: "stewardmd://patients"))
                 .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }
@@ -120,7 +120,7 @@ struct RoundsCensusHomeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StewardMDHomeCensus", provider: HomeGlanceProvider()) { entry in
             RoundsCensusHomeView(state: entry.state)
-                .smdWatermark(.topTrailing, size: 28, opacity: 0.06)
+                .smdWatermark(.topTrailing, size: 36, opacity: 0.072)
                 .widgetURL(URL(string: "stewardmd://home"))
                 .containerBackground(Color(.sRGB, red: 1, green: 1, blue: 1), for: .widget)
         }

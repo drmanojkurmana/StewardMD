@@ -182,14 +182,20 @@ private struct HomeHeader: View {
         // menu (RootRow list) scrolls below this header.
         let raw = session.session.doctorName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let doctor = raw.isEmpty ? "" : (raw.lowercased().hasPrefix("dr") ? raw : "Dr. " + raw)
-        VStack(alignment: .leading, spacing: 2) {
-            Text("StewardMD")
-                .font(.system(.headline, design: .rounded)).bold()
-                .foregroundStyle(SMDPalette.accent.color)
-            if !doctor.isEmpty {
-                Text(doctor)
-                    .font(.caption2)
-                    .foregroundStyle(SMDPalette.text2.color)
+        HStack(spacing: 7) {
+            Image("StewardMDMark")
+                .resizable().scaledToFit()
+                .frame(width: 24, height: 24)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("StewardMD")
+                    .font(.system(.headline, design: .rounded)).bold()
+                    .foregroundStyle(SMDPalette.accent.color)
+                if !doctor.isEmpty {
+                    Text(doctor)
+                        .font(.caption2)
+                        .foregroundStyle(SMDPalette.text2.color)
+                }
             }
         }
     }

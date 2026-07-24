@@ -159,7 +159,7 @@ private struct Watermark: ViewModifier {
 
 extension View {
     /// Applies the faint corner StewardMD watermark used across the home tiles.
-    func smdWatermark(_ alignment: Alignment = .topTrailing, size: CGFloat = 34, opacity: Double = 0.06) -> some View {
+    func smdWatermark(_ alignment: Alignment = .topTrailing, size: CGFloat = 44, opacity: Double = 0.072) -> some View {
         modifier(Watermark(alignment: alignment, size: size, opacity: opacity))
     }
 }
