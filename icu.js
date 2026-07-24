@@ -3949,6 +3949,8 @@
   var _grpCreating = false;      // guard: a createGroup is in flight — block duplicate unit creation
   var _grpJustCreated = null;    // {id, ts}: a just-created unit not yet propagated to the collectionGroup listener
   var _grpSubRetry = null;       // bounded self-heal poll for the first-run auth/API race (see grpEnsureGroupsSub)
+  var _grpSubErrTimer = null;    // backoff timer for re-subscribing after an early-auth Firestore error
+  var _grpSubErrTries = 0;       // bounded error-retry counter (reset on the first successful snapshot)
   function grpCurrentUser() {
     try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; }
   }
@@ -3981,6 +3983,8 @@
     try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
     if (_grpSubGroups) return;
     _grpSubGroups = api.subscribeGroups(function (groups) {
+      _grpSubErrTries = 0;   // a successful snapshot means Firestore auth is live — stop error-retrying
+      if (_grpSubErrTimer) { try { clearTimeout(_grpSubErrTimer); } catch (e) {} _grpSubErrTimer = null; }
       _grpList = groups || [];
       try { notifyUnitsChanged(); } catch (e) {}   // let Ward Sync's "Adding to" bar re-render as units load
       if (_grp) {
@@ -4001,7 +4005,22 @@
         grpSelect(sel || _grpList[0], true);
       }
       if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paintLive();
-    }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paintLive(); });   // Phase 4: surface a groups-load failure as the error card
+    }, function (e) {
+      _grpErr = grpErrText(e);
+      // A groups-sub error right after a fresh sign-in is almost always the Firestore listen channel
+      // not yet carrying the auth token (currentUser is set, but the query ran before the token
+      // propagated) → permission-denied → the collectionGroup listener DETACHES for good. The old code
+      // just recorded the error, leaving _grpSubGroups pointing at a dead sub that the `if (_grpSubGroups)
+      // return` guard then refused to replace — so the board (and the Doctor ID) stayed empty until a
+      // reload. Self-heal: drop the dead handle and re-run the whole setup (which also re-mints the ID)
+      // with a short backoff, a bounded number of times. The first successful snapshot resets the counter.
+      if (_grpSubGroups) { try { _grpSubGroups(); } catch (e2) {} _grpSubGroups = null; }
+      if (_grpSubErrTries < 6 && !_grpSubErrTimer) {
+        _grpSubErrTries++;
+        _grpSubErrTimer = setTimeout(function () { _grpSubErrTimer = null; try { grpEnsureGroupsSub(); } catch (e2) {} }, 1200);
+      }
+      if (ICU.isOpen() && _screen === "board") paintLive();
+    });   // Phase 4: surface a groups-load failure as the error card (+ self-heal the early-auth race)
   }
   function grpSelect(group, silent) {
     if (!group) return;
