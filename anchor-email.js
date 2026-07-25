@@ -3,7 +3,7 @@
  * so those accounts must add a real, verified email. Pure + testable. */
 (function () {
   "use strict";
-  var PROXY_RE = /@[^@]*\.?appleid\.com$/i;   // *.appleid.com incl. privaterelay
+  var PROXY_RE = /@(?:[^@]*\.)?appleid\.com$/i;   // exactly appleid.com or *.appleid.com (incl. privaterelay); NOT other domains that merely end in "appleid.com"
   function sourceOf(providerId) {
     var p = String(providerId || "").toLowerCase();
     if (p.indexOf("google") >= 0) return "google";
