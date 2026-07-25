@@ -25,11 +25,25 @@ doi:10.1016/S2589-7500(23)00218-2
 P1 scope note: the real XNet38MS is a 3-way multi-scale ensemble (is299 +
 is512 + is1024, probabilities averaged). This provider loads only the is512
 member (single resolution) — the full ensemble is a FUTURE optimization.
+
+Preprocessing: this provider uses its OWN native pipeline, independent of the
+shared torchxrayvision-normalized 224x224 array used by the local
+TorchXRayVision provider. It decodes ``PreparedImage.outbound_png`` (the
+de-identified, full-resolution grayscale PNG produced by
+``app/pipeline/preprocess.py``), aspect-preserving pads it to a square,
+resizes to 512x512 (X-Raydar's native ``is512`` input size), scales to
+[0, 1], and applies X-Raydar's own ``Normalize(mean=0.491, std=0.271)``. This
+matches X-Raydar's published preprocessing far more closely than upsampling
+the shared 224px xrv-normalized array ever could. See ``_to_model_input``
+below.
 """
+import io
+
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from PIL import Image, ImageOps
 
 from app.core.config import get_settings
 from app.providers.base import InferenceProvider
@@ -349,22 +363,38 @@ def key_match_info() -> "dict | None":
     return _KEY_MATCH_INFO
 
 
-def _to_model_input(img: np.ndarray) -> torch.Tensor:
-    # `img` is the shared PreparedImage.array: 224x224, torchxrayvision-
-    # normalized to roughly [-1024, 1024] (see app/pipeline/preprocess.py).
-    # X-Raydar's native pipeline instead pads the ORIGINAL image to a square,
-    # resizes to 512x512, and applies transforms.Normalize(mean=0.491,
-    # std=0.271) on a [0,1]-scaled tensor. Because ThoreX's shared prepare()
-    # step has already center-cropped/resized to 224x224 in xrv-space, the
-    # original resolution/aspect ratio is unrecoverable here — this is a
-    # documented approximation (min-max rescale back toward [0,1], re-apply
-    # X-Raydar's own Normalize, then upsample to 512x512), not X-Raydar's
-    # native preprocessing path. A future task should thread the original
-    # full-resolution grayscale image through to this provider for fidelity.
-    t = torch.from_numpy(img[None, None, ...].astype("float32"))
-    t = (t - t.min()) / (t.max() - t.min() + 1e-6)  # -> [0, 1]
+def _pad_to_square(pil_img: Image.Image) -> Image.Image:
+    """Aspect-preserving pad to a square canvas (centered, black padding).
+
+    X-Raydar's own preprocessing (x-raydar-cv) pads the source image to
+    square before its resize-to-target-size step, rather than a plain
+    aspect-distorting resize, so long/narrow chest films aren't squashed.
+    The exact pad color/anchor of the upstream repo's implementation isn't
+    pinned here; center-anchored zero-padding is the documented convention
+    used when that detail is uncertain.
+    """
+    w, h = pil_img.size
+    side = max(w, h)
+    return ImageOps.pad(pil_img, (side, side), color=0, centering=(0.5, 0.5))
+
+
+def _to_model_input(outbound_png: bytes) -> torch.Tensor:
+    """X-Raydar's native is512 preprocessing, from the full-resolution,
+    de-identified grayscale PNG (``PreparedImage.outbound_png``) — NOT the
+    shared 224x224 torchxrayvision-normalized array used by the local
+    TorchXRayVision provider.
+
+    Pipeline: decode -> grayscale (single channel, matches the vendored
+    ``Inception3(in_channels=1)``) -> aspect-preserving pad to square ->
+    resize to 512x512 -> scale to [0, 1] -> X-Raydar's own
+    ``Normalize(mean=0.491, std=0.271)``.
+    """
+    pil = Image.open(io.BytesIO(outbound_png)).convert("L")
+    pil = _pad_to_square(pil)
+    pil = pil.resize((_INPUT_SIZE, _INPUT_SIZE), resample=Image.BILINEAR)
+    arr = np.asarray(pil).astype("float32") / 255.0  # -> [0, 1]
+    t = torch.from_numpy(arr[None, None, ...])
     t = (t - 0.491) / 0.271  # X-Raydar's own Normalize(mean, std)
-    t = F.interpolate(t, size=(_INPUT_SIZE, _INPUT_SIZE), mode="bilinear", align_corners=False)
     return t
 
 
@@ -374,7 +404,7 @@ class XRaydarProvider(InferenceProvider):
 
     def detect(self, prepared) -> list[tuple[str, float]]:
         m = _model()
-        t = _to_model_input(prepared.array)
+        t = _to_model_input(prepared.outbound_png)
         try:
             with torch.no_grad():
                 logits = m(t)
