@@ -3,7 +3,7 @@
 **Date:** 2026-07-25
 **Status:** Design — awaiting user review
 **Owner:** Diwakar Kurmana
-**Access gate:** `smd_thorex` (Experimental Access code, DEFAULT OFF) — sibling of `smd_kardiox` / `smd_fundx`
+**Access gate:** `smd_thorex` via `SMD_XACCESS` (server-authoritative Experimental Access, DEFAULT OFF) — sibling of `smd_kardiox` / `smd_fundx`. Access is **per-user, tiered** (V1 / V2 Beta), granted and revoked from the **admin console** (see §3.5).
 
 ---
 
@@ -45,9 +45,11 @@ No stubs are dressed up as REAL. No raw probabilities are shown to users.
 | Secondary / zero-shot validation | **CheXzero** (CLIP) | research repo — license unverified | EXPERIMENTAL | Only enabled after license verification; otherwise the secondary is a second TorchXRayVision dataset head. |
 
 **Licensing decision (user-directed):** both TorchXRayVision **and** X-Raydar are included for
-**educational use**. TorchXRayVision is the permissive default; X-Raydar is a selectable
-educational/research provider (flag `smd_thorex_xraydar`, DEFAULT OFF) with an in-UI
-"Educational / research model — not for clinical use" banner whenever it is the active engine.
+**educational use**. TorchXRayVision is the clinical-advice engine; X-Raydar is the learning
+engine, shown with an in-UI "Educational / research model — not for clinical use" banner
+whenever its answer is displayed. Which engine(s) a user sees is decided by their **access tier**
+(§3.5), not a client flag — the tier is assigned per user from the admin console after the
+operator verifies student-vs-physician out of band.
 
 ### Findings coverage
 
@@ -112,11 +114,40 @@ ImageInput
   by the user** — they are not performed or verified from the build session (no GPU, multi-GB
   weights). On-device Core ML is FUTURE.
 
-### 3.4 Frontend module layout (mirrors `kardiox-*.js`)
+### 3.4 Access tiers & admin-console entitlement
+
+Access is **per-user and tiered**, carried by the server-authoritative `SMD_XACCESS` grant (a
+`thorex` FEATURES entry on `/api/experimental/*`). The operator verifies whether an approved user
+is a student/resident or a physician **out of band**, then assigns the tier from the admin console.
+No in-app role detection.
+
+| Tier | Engines run | What the clinician sees | Intended user |
+|---|---|---|---|
+| **V1** | TorchXRayVision only | Single **Clinical** answer | Physicians |
+| **V2 Beta** | TorchXRayVision **+** X-Raydar | **Two** panels: **Clinical** (TorchXRayVision) **and** **Learning** (X-Raydar, educational banner) | Students / residents |
+
+Rules:
+- Tier is delivered in the `SMD_XACCESS.ensure("thorex")` / activation response as
+  `tier: "v1" | "v2beta"`. The client renders strictly by tier; it never self-elevates. Remote
+  revocation / down-tiering takes effect on next open (existing `SMD_XACCESS` behaviour).
+- **V2 Beta** always shows **both** answers side by side; the X-Raydar (Learning) panel carries the
+  "educational — not for clinical use" banner and never drives clinical actions
+  (stewardship auto-launch, FHIR export) — those key off the **Clinical/TorchXRayVision** result only.
+- **V1** runs and displays **only** TorchXRayVision. X-Raydar is not invoked for V1 users.
+- Default state = no access (gate closed). A user does nothing to self-unlock; the grant is
+  push-assigned by the operator.
+
+**Admin console controls (new, `admin/`):** a ThoreX entitlements panel to (a) look up a user,
+(b) grant access at tier V1 or V2 Beta, (c) change tier, (d) revoke. Backed by admin-authenticated
+`/api/experimental/*` (or an admin sub-route) that writes the per-user grant + tier the client
+already reads. This is server-authoritative and audit-logged; the admin UI is a thin client over it,
+consistent with the existing `admin/verifications.html` pattern.
+
+### 3.5 Frontend module layout (mirrors `kardiox-*.js`)
 
 | File | Responsibility |
 |---|---|
-| `thorex-flags.js` | `SMD_THOREX_FLAGS` registry (`smd_thorex`, `smd_thorex_cloud`, `smd_thorex_xraydar`, `smd_thorex_dev`, …). |
+| `thorex-flags.js` | `SMD_THOREX_FLAGS` registry (`smd_thorex`, `smd_thorex_cloud`, `smd_thorex_dev`, …). Engine visibility is driven by the server **tier** (§3.4), not a client flag. |
 | `thorex-providers.js` | `SMD_THOREX_PROVIDERS` seam — mock + live assemblies. |
 | `thorex-store.js` | Case/finding/report persistence (offline-db backed). |
 | `thorex-models.js` | Label maps, severity bands, confidence-band mapping, sample fixtures. |
@@ -146,11 +177,17 @@ Spec covers all four phases; **build is sequential**, each phase ends at its own
   lung-region crop. Background removal best-effort.
 - **Image-quality gate:** classify AP/PA·portable·lateral, exposure, rotation, motion,
   inspiration, cropping. If inadequate → warn + require explicit acknowledgement before proceeding.
-- **Detection + localization:** TorchXRayVision (default) or X-Raydar (educational) → findings;
-  Grad-CAM heatmap per positive finding.
+- **Detection + localization:** per access tier (§3.4) — **V1** runs TorchXRayVision only;
+  **V2 Beta** runs TorchXRayVision **and** X-Raydar. Grad-CAM heatmap per positive finding.
 - **AI output rules:** never show raw probabilities. Show Finding · Confidence **band**
   (High/Med/Low) · Severity · Location · Clinical relevance · Heatmap. (Bounding box = FUTURE;
   heatmap is the localization primitive in P1.)
+- **Result layout by tier:** V1 → single **Clinical** panel (TorchXRayVision). V2 Beta → two
+  panels, **Clinical** (TorchXRayVision) + **Learning** (X-Raydar, educational banner). Only the
+  Clinical/TorchXRayVision result drives downstream clinical actions (P2 stewardship, FHIR).
+- **Admin entitlement (P1):** ThoreX panel in `admin/` to grant/change/revoke a user's tier
+  (V1 / V2 Beta), backed by admin-authenticated `/api/experimental/*`. This ships in P1 because it
+  gates all access.
 - **Structured report:** Clinical Information · Technique · Image Quality · Findings · Impression ·
   Recommendations · Urgency · Follow-up. Export PDF / Share Sheet / Copy / Save Case.
 - **Safety:** mandatory disclaimer on every result (exact text in §6). Educational-model banner
