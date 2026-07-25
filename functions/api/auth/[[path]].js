@@ -78,6 +78,19 @@ async function handle(context) {
 
   var who = await authed(request, env);
   if (!who) return json({ ok: false, error: "signin-required" }, 401);
+
+  // Anchor-email routes verify a USER-SUPPLIED real email, so they must be reachable by an Apple
+  // "Hide My Email" account whose token email is a proxy OR literally empty — i.e. BEFORE the
+  // `no-email-on-account` gate below (which is what those users are trying to route around).
+  if (action === "anchor-start") {
+    var r = await anchorStart(who, await request.json().catch(() => ({})), store, (o) => emailOtp(env, o));
+    return json(r, r.status || 200);
+  }
+  if (action === "anchor-verify") {
+    var r2 = await anchorVerify(who, await request.json().catch(() => ({})), store, () => mergeUserClaims(env, who.uid, { anchorVerified: true }));
+    return json(r2, r2.status || 200);
+  }
+
   if (!who.email) return json({ ok: false, error: "no-email-on-account" }, 400);
 
   if (action === "send-otp") {
@@ -118,15 +131,6 @@ async function handle(context) {
     try { await store.delete(otpKey(who.uid)); } catch (e) {}
     try { await mergeUserClaims(env, who.uid, { emailVerified: true }); } catch (e) {}   // best-effort; client also flags it in profile
     return json({ ok: true, verified: true });
-  }
-
-  if (action === "anchor-start") {
-    var r = await anchorStart(who, await request.json().catch(() => ({})), store, (o) => emailOtp(env, o));
-    return json(r, r.status || 200);
-  }
-  if (action === "anchor-verify") {
-    var r2 = await anchorVerify(who, await request.json().catch(() => ({})), store, () => mergeUserClaims(env, who.uid, { anchorVerified: true }));
-    return json(r2, r2.status || 200);
   }
 
   return json({ ok: false, error: "not-found" }, 404);
