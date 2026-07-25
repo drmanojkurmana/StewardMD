@@ -337,12 +337,27 @@
   // (RGBA, outSize x outSize). Generic over the CAM grid size so both the clinical engine's 7x7 CAM
   // and the educational (X-Raydar) engine's 14x14 CAM share this one implementation (DRY) — defaults
   // preserve the original clinical 7x7 -> 224x224 behavior when called with just one argument.
+  // Browser/WebView: encode via the native canvas (no zlib dependency — the vendored fflate build does
+  // not expose a browser global, so window.fflate is undefined in-app; the canvas is always available in
+  // the WebView). Node/verification harness (no document): fall back to the pure-JS PNG encoder (fflate).
+  function rgbaToBase64Png(rgba, w, h) {
+    try {
+      if (typeof document !== "undefined" && document.createElement) {
+        var cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+        var cx = cv.getContext("2d");
+        cx.putImageData(new ImageData(new Uint8ClampedArray(rgba), w, h), 0, 0);
+        var url = cv.toDataURL("image/png");
+        var comma = url.indexOf(","); if (comma >= 0) return url.slice(comma + 1);
+      }
+    } catch (e) { /* fall through to the pure-JS encoder */ }
+    return base64FromBytes(encodePngRGBA(rgba, w, h));
+  }
   function camToBase64Png(camPlane, camH, camW, outSize) {
     camH = camH || 7; camW = camW || 7; outSize = outSize || 224;
     var norm = reluNormalizeCam(camPlane);
     var up = bilinearResize(norm, camW, camH, outSize, outSize);
     var rgba = colorizeCam(up);
-    return base64FromBytes(encodePngRGBA(rgba, outSize, outSize));
+    return rgbaToBase64Png(rgba, outSize, outSize);
   }
 
   // ── ONNX Runtime Web loading (mirrors kardiox-ort.js exactly) ────────────────────────────────────
