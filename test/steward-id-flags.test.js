@@ -1,0 +1,10 @@
+const assert = require("assert");
+global.localStorage = (() => { const m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; })();
+const F = require("../steward-id-flags.js");
+assert.equal(F.bool("smd_steward_id"), false, "master OFF by default");
+F.set("smd_steward_id", true);
+assert.equal(F.bool("smd_steward_id"), true, "set flips it on");
+F.set("smd_steward_id", false);
+assert.equal(F.bool("smd_steward_id"), false, "set flips it off");
+assert.equal(F.get("nope"), null, "unknown key -> null");
+console.log("ok");
