@@ -516,6 +516,27 @@
 #thorexRoot .tx-report-edu .tx-report-h { color: var(--tx-learning); }
 #thorexRoot .tx-report-disc { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--tx-hairline); font-size: 10.5px; font-weight: 500; line-height: 1.4; color: var(--tx-muted); text-align: center; }
 
+/* ────────────────────── Clinical correlation (thorex-correlate.js) ──────────────────────────────
+   Manual-entry form (best-effort pre-filled by SMD_THOREX_CORRELATE.gather(), always editable) +
+   ranked differential + AI narrative, inside the same .tx-report-wrap toggle shell as the radiology
+   report above. */
+#thorexRoot .tx-corr-form { margin-top: 10px; padding: 16px; border: 1px solid var(--tx-hairline); border-radius: var(--tx-r); background: var(--tx-card); animation: txRise .28s var(--tx-ease) both; }
+#thorexRoot .tx-corr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+#thorexRoot .tx-corr-field { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; font-weight: 600; color: var(--tx-text-2); }
+#thorexRoot .tx-corr-field input, #thorexRoot .tx-corr-field textarea {
+  font: 600 14px var(--tx-mono); color: var(--tx-text); background: var(--tx-surf-2);
+  border: 1px solid var(--tx-hairline); border-radius: 10px; padding: 9px 10px; width: 100%; box-sizing: border-box;
+}
+#thorexRoot .tx-corr-field textarea { font: 500 13px var(--tx-sans); resize: vertical; }
+#thorexRoot .tx-corr-field--wide { grid-column: 1 / -1; margin-top: 10px; }
+#thorexRoot .tx-corr-go { width: 100%; margin-top: 14px; }
+#thorexRoot .tx-corr-result { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--tx-hairline); }
+#thorexRoot .tx-corr-diff { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#thorexRoot .tx-corr-diff-item { border: 1px solid var(--tx-hairline); border-radius: 12px; padding: 11px 13px; background: var(--tx-surf-2); }
+#thorexRoot .tx-corr-diff-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#thorexRoot .tx-corr-diff-head b { font-size: 13.5px; color: var(--tx-text); }
+#thorexRoot .tx-corr-diff-just { margin-top: 5px; font-size: 12px; line-height: 1.5; color: var(--tx-text-2); }
+
 /* Mandatory safety disclaimer — every result screen, verbatim text supplied by the caller.
    Cloned from kx-disc. */
 #thorexRoot .tx-disc { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 16px; font-size: 10.5px; font-weight: 500; line-height: 1.4; text-align: center; color: var(--tx-muted); }

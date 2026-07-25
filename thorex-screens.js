@@ -404,6 +404,115 @@
     };
   }
 
+  /* ─────────────────────── Clinical correlation (thorex-correlate.js) ─────────────────────────────
+   * Additive "Correlate (ECG/ABG/labs)" section on the result screen: a manual-entry form (best-effort
+   * pre-filled from SMD_THOREX_CORRELATE.gather(), always editable) + a "Correlate" button that renders
+   * the deterministic rule differential + AI narrative. VALIDATION-RELIABLE by construction — the form
+   * always accepts manual values regardless of whether gather() found anything. Correlation is derived
+   * from the CLINICAL engine only (enforced inside thorex-correlate.js, not here). */
+  function correlateModule() {
+    try { return (typeof window !== "undefined" && window.SMD_THOREX_CORRELATE) || null; } catch (e) { return null; }
+  }
+  var CORR_FIELDS = [
+    { key: "ef", label: "EF (%)" },
+    { key: "bnp", label: "BNP (pg/mL)" },
+    { key: "ntProBnp", label: "NT-proBNP (pg/mL)" },
+    { key: "pct", label: "Procalcitonin (ng/mL)" },
+    { key: "crp", label: "CRP (mg/L)" },
+    { key: "wbc", label: "WBC (×10⁹/L)" },
+    { key: "troponin", label: "Troponin (ng/mL)" },
+    { key: "na", label: "Na (mmol/L)" },
+    { key: "k", label: "K (mmol/L)" },
+    { key: "temp", label: "Temp (°C)" },
+    { key: "spo2", label: "SpO₂ (%)" }
+  ];
+  var CORR_ABG_FIELDS = [
+    { key: "ph", label: "ABG pH" },
+    { key: "po2", label: "ABG pO₂ (mmHg)" },
+    { key: "pco2", label: "ABG pCO₂ (mmHg)" },
+    { key: "hco3", label: "ABG HCO₃⁻ (mmol/L)" },
+    { key: "lactate", label: "Lactate (mmol/L)" }
+  ];
+  function correlateFieldHtml(dataKey, label, val) {
+    var v = (val == null) ? "" : val;
+    return '<label class="tx-corr-field"><span>' + esc(label) + '</span>' +
+      '<input type="number" inputmode="decimal" step="any" data-corr="' + dataKey + '" value="' + esc(v) + '" /></label>';
+  }
+  function correlateFormHtml(cd) {
+    cd = cd || {};
+    var abg = cd.abg || {};
+    var grid = CORR_FIELDS.map(function (f) { return correlateFieldHtml(f.key, f.label, cd[f.key]); }).join("") +
+      CORR_ABG_FIELDS.map(function (f) { return correlateFieldHtml("abg." + f.key, f.label, abg[f.key]); }).join("");
+    return '<div class="tx-corr-form">' +
+      '<div class="tx-corr-grid">' + grid + '</div>' +
+      '<label class="tx-corr-field tx-corr-field--wide"><span>History (brief)</span>' +
+        '<textarea data-corr="history" rows="2" placeholder="e.g. acute dyspnoea, 2 days">' + esc(cd.history || "") + '</textarea></label>' +
+      '<button class="tx-btn tx-btn-primary tx-corr-go" type="button" data-hook="corrGo">' + ic("join_full") + '<span>Correlate</span></button>' +
+      '<div class="tx-corr-result" data-hook="corrResult" hidden></div>' +
+    "</div>";
+  }
+  function readCorrelateForm(host) {
+    var cd = {}, abg = {};
+    var inputs = host.querySelectorAll("[data-corr]");
+    Array.prototype.forEach.call(inputs, function (el) {
+      var key = el.getAttribute("data-corr"), raw = el.value;
+      if (raw == null || raw === "") return;
+      if (key === "history") { cd.history = String(raw).slice(0, 500); return; }
+      if (key.indexOf("abg.") === 0) { var av = +raw; if (isFinite(av)) abg[key.slice(4)] = av; return; }
+      var n = +raw; if (isFinite(n)) cd[key] = n;
+    });
+    if (Object.keys(abg).length) cd.abg = abg;
+    return cd;
+  }
+  function correlateResultHtml(res) {
+    res = res || {};
+    var diff = Array.isArray(res.differential) ? res.differential : [];
+    var body = diff.length ?
+      ('<ul class="tx-corr-diff">' + diff.map(function (d) {
+        return '<li class="tx-corr-diff-item"><div class="tx-corr-diff-head"><b>' + esc(d.condition) + '</b>' +
+          '<span class="tx-pill tx-pill--info">' + esc(d.confidence || "") + "</span></div>" +
+          '<div class="tx-corr-diff-just">' + esc(d.justification || "") + "</div></li>";
+      }).join("") + "</ul>") :
+      ('<p class="tx-report-p">' + esc((res.reasoning && res.reasoning[0]) || "Insufficient correlating data — enter labs/ABG to refine.") + "</p>");
+    var narrative = res.narrative ?
+      '<div class="tx-why-ai" data-hook="corrNarrative">' +
+        '<div class="tx-why-ai-label">' + ic("auto_awesome") + "<span>Educational &middot; AI-generated &middot; not a diagnosis</span></div>" +
+        '<div class="tx-why-ai-body"><span>' + esc(res.narrative) + "</span></div>" +
+      "</div>" : "";
+    return body + narrative + '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>";
+  }
+  // Local (non-navigational) interaction, same pattern as the report toggle: expand/collapse + wire the
+  // "Correlate" button. "tx-correlate-toggle" is intentionally NOT in the global onClick switch (screen-
+  // internal act, per the comment at the bottom of that switch).
+  function wireCorrelate(host, a) {
+    var toggleBtn = host.querySelector('[data-act="tx-correlate-toggle"]');
+    var wrap = host.querySelector('[data-hook="correlateBody"]');
+    if (toggleBtn && wrap) {
+      toggleBtn.addEventListener("click", function () {
+        var open = wrap.hidden;
+        wrap.hidden = !open;
+        toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+    var goBtn = host.querySelector('[data-hook="corrGo"]');
+    var resultBox = host.querySelector('[data-hook="corrResult"]');
+    if (!goBtn || !resultBox) return;
+    goBtn.addEventListener("click", function () {
+      haptic("light");
+      var cd = readCorrelateForm(host);
+      var CORR = correlateModule();
+      goBtn.disabled = true;
+      resultBox.hidden = false;
+      resultBox.innerHTML = '<p class="tx-report-p">' + ic("progress_activity") + " Correlating…</p>";
+      var p = (CORR && CORR.correlate) ? CORR.correlate(a, cd) : Promise.resolve({ reasoning: ["Correlation engine unavailable on this device."], differential: [], narrative: null });
+      Promise.resolve(p).then(function (res) {
+        resultBox.innerHTML = correlateResultHtml(res);
+      }).catch(function () {
+        resultBox.innerHTML = '<p class="tx-report-p">Correlation unavailable right now.</p>';
+      }).then(function () { goBtn.disabled = false; });
+    });
+  }
+
   /* result — entitlement-aware, dual-panel for v2beta (Clinical + Learning), single for v1/free.
      buildPanelModels() (pure, above) does the entitlement-shape → panel-model work; this function is
      purely presentational (markup only). The Learning panel's markup NEVER includes the actions row —
@@ -489,10 +598,23 @@
       '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody" hidden>' + report.html + "</div>"
       : "";
 
+    // Clinical correlation (thorex-correlate.js) — additive toggle, same pattern as the report toggle.
+    // gather() is sync + best-effort + NEVER throws; a guard here keeps a broken/missing module from
+    // ever taking down the result screen.
+    var CORR = correlateModule();
+    var gathered = {};
+    if (CORR && CORR.gather) { try { gathered = CORR.gather() || {}; } catch (e) {} }
+    var correlateSection =
+      '<button class="tx-report-toggle" type="button" data-act="tx-correlate-toggle" aria-expanded="false" aria-controls="txCorrBody">' +
+        ic("biotech") + '<span class="tx-report-toggle-txt">Correlate (ECG/ABG/labs)</span>' + ic("expand_more") +
+      "</button>" +
+      '<div class="tx-report-wrap" id="txCorrBody" data-hook="correlateBody" hidden>' + correlateFormHtml(gathered) + "</div>";
+
     var body =
       '<div class="tx-result-body">' +
         '<div class="tx-result-panels' + (dual ? " tx-dual" : "") + '">' + panels.map(panelHtml).join("") + "</div>" +
         reportSection +
+        correlateSection +
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
       "</div>";
 
@@ -515,6 +637,7 @@
         toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
       });
     }
+    wireCorrelate(host, a);
   }
 
   /* why — lightweight explainability (clinical engine only; P2 deepens the clinical-correlation seam).
