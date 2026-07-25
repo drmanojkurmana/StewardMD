@@ -129,6 +129,15 @@ if (kxClick) kxClick({ target: { closest: () => ({ getAttribute: (k) => k === "d
 ok("Why-screen back returns to the report (analysis intact, not emptied)",
    /Atrial fibrillation/i.test(host._html) && !/No analysis to show/i.test(host._html));
 
+// ── REGRESSION — "Learn: <dx>" opened MaiK BEHIND the KardiQ X modal (only visible after backing out).
+// It must close the module FIRST, then open MaiK in front.
+const learnOrder = [];
+globalThis.KARDIOX = { close() { learnOrder.push("close"); } };
+globalThis.SMD_askMaik = function () { learnOrder.push("maik"); };
+if (kxClick) kxClick({ target: { closest: () => ({ getAttribute: (k) => k === "data-act" ? "kx-learn-ai" : k === "data-dx" ? "RBBB" : null }) } });
+ok("Learn closes KardiQ X before opening MaiK (MaiK in front)", learnOrder[0] === "close" && learnOrder[1] === "maik");
+delete globalThis.SMD_askMaik;
+
 // ── REGRESSION — the processing screen fired ctx.nav('05'), a stale numeric mockup id (not a router
 // SCREENS key), so it fell through to deferred() → "That arrives in a later KardiQ X update." No screen
 // may navigate to a bare numeric id; every nav target must be a semantic SCREENS key.

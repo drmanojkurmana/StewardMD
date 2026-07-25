@@ -2764,8 +2764,13 @@
         haptic("light");
         var dx = t.getAttribute("data-dx") || (state.analysis && state.analysis.verdict) || "this ECG finding";
         var q = "Explain " + dx + " on an ECG: key diagnostic criteria, common causes, and initial management. Be concise and clinical.";
-        try { if (typeof window.SMD_askMaik === "function") { window.SMD_askMaik(q); return; } } catch (e) {}
-        try { closeMod(); if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q); else toast("MaiK assistant unavailable."); } catch (e2) { toast("MaiK assistant unavailable."); }
+        // Close the KardiQ X module FIRST, THEN open MaiK — otherwise MaiK opens BEHIND this modal and is
+        // only visible after backing out to Home.
+        try { closeMod(); } catch (e) {}
+        try {
+          if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q);
+          else toast("MaiK assistant unavailable.");
+        } catch (e2) { toast("MaiK assistant unavailable."); }
         return;
       }
       case "kxnav:share": case "kxnav:export": haptic("light"); exportReport(); return;
