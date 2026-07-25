@@ -1,0 +1,517 @@
+/* thorex-screens.css — ThoreX AI · per-screen .tx-* styles. Cloned/adapted from kardiox-screens.css. */
+/* .msr = Material Symbols Rounded (some screens emit <span class="msr">name</span>). */
+#thorexRoot .msr { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; }
+#thorexRoot .msr.fill { font-variation-settings: "FILL" 1; }
+
+/* ===== landing ===== */
+/* ─────────────────────────── Landing screen ──────────────────────────────────────────────────────
+   All selectors scoped to #thorexRoot / .tx-*. Tokens + keyframes come from thorex.css (not
+   redefined). Mirrors kx-landing. */
+#thorexRoot .tx-landing { padding: 16px; animation: txRise .32s var(--tx-ease) both; }
+
+#thorexRoot .tx-land-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid var(--tx-hairline);
+  background: var(--tx-bg);
+  position: sticky; top: 0; z-index: 2;
+}
+#thorexRoot .tx-land-close,
+#thorexRoot .tx-land-gear {
+  flex: 0 0 auto; width: 40px; height: 40px; padding: 0;
+  border: 0; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#thorexRoot .tx-land-close { background: transparent; color: var(--tx-ink); }
+#thorexRoot .tx-land-gear { background: var(--tx-surf-2); color: var(--tx-text-2); }
+#thorexRoot .tx-land-close .material-symbols-rounded { font-size: 24px; }
+#thorexRoot .tx-land-gear .material-symbols-rounded { font-size: 22px; }
+#thorexRoot .tx-land-titles { flex: 1; min-width: 0; }
+#thorexRoot .tx-land-title { font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--tx-text); }
+#thorexRoot .tx-land-title span { color: var(--tx-primary); }
+#thorexRoot .tx-land-sub { margin-top: 1px; font-size: 12px; font-weight: 500; color: var(--tx-text-2); }
+
+/* Primary CTA */
+#thorexRoot .tx-cta {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 18px; border: 0; border-radius: var(--tx-r); cursor: pointer;
+  background: linear-gradient(135deg, var(--tx-primary), var(--tx-primary-2));
+  color: #fff; box-shadow: 0 8px 22px rgba(15, 118, 110, .28);
+}
+#thorexRoot .tx-cta-ic { flex: 0 0 auto; display: inline-flex; }
+#thorexRoot .tx-cta-ic .material-symbols-rounded { font-size: 30px; }
+#thorexRoot .tx-cta-txt { flex: 1; min-width: 0; }
+#thorexRoot .tx-cta-title { display: block; font-weight: 700; font-size: 16px; }
+#thorexRoot .tx-cta-sub { display: block; margin-top: 2px; font-size: 12px; font-weight: 500; opacity: .92; }
+#thorexRoot .tx-cta-go { flex: 0 0 auto; display: inline-flex; opacity: .9; }
+#thorexRoot .tx-cta-go .material-symbols-rounded { font-size: 22px; }
+
+/* Section header + recent-cases list (history preview on the landing screen) */
+#thorexRoot .tx-sec-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 2px 10px; }
+#thorexRoot .tx-sec-title { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--tx-text-2); }
+#thorexRoot .tx-seeall { padding: 6px 2px; border: 0; background: transparent; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--tx-primary); }
+
+#thorexRoot .tx-recent { display: flex; flex-direction: column; gap: 8px; }
+#thorexRoot .tx-rec {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  padding: 10px; cursor: pointer;
+  border: 1px solid var(--tx-hairline); border-radius: var(--tx-r-ctl); background: var(--tx-card);
+}
+#thorexRoot .tx-rec-thumb {
+  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 10px; overflow: hidden;
+  background: #0a0f14; display: flex; align-items: center; justify-content: center;
+}
+#thorexRoot .tx-rec-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#thorexRoot .tx-rec-body { flex: 1; min-width: 0; }
+#thorexRoot .tx-rec-title { display: block; font-weight: 700; font-size: 13.5px; color: var(--tx-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#thorexRoot .tx-rec-meta { display: block; font-size: 11px; font-weight: 500; color: var(--tx-text-2); }
+
+/* Footer privacy line (reused on landing / source / result) */
+#thorexRoot .tx-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 18px; font-size: 11px; font-weight: 500; color: var(--tx-muted);
+}
+#thorexRoot .tx-foot .material-symbols-rounded { font-size: 14px; color: var(--tx-sev-stable); }
+
+#thorexRoot .tx-cta:focus-visible,
+#thorexRoot .tx-rec:focus-visible,
+#thorexRoot .tx-seeall:focus-visible,
+#thorexRoot .tx-land-close:focus-visible,
+#thorexRoot .tx-land-gear:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }
+
+/* ===== source (upload) ===== */
+/* ─────────────────────────── Upload a CXR · source picker ────────────────────────────────────────
+   Camera / photo library / files / (PDF→raster). Mirrors kx-src. */
+#thorexRoot .tx-src { animation: txRise .4s var(--tx-ease) both; }
+
+#thorexRoot .tx-src-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--tx-hairline);
+}
+#thorexRoot .tx-src-back {
+  width: 44px; height: 44px; margin-left: -6px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: var(--tx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#thorexRoot .tx-src-back .material-symbols-rounded { font-size: 24px; }
+#thorexRoot .tx-src-title { flex: 1; margin: 0; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--tx-text); }
+
+#thorexRoot .tx-src-body { padding: 16px; }
+
+/* Dashed drop-zone */
+#thorexRoot .tx-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; text-align: center; padding: 30px 18px;
+  border: 2px dashed #C7D3D9; border-radius: 18px; background: var(--tx-surf-2);
+}
+#thorexRoot .tx-drop-ic { color: var(--tx-primary); display: inline-flex; }
+#thorexRoot .tx-drop-ic .material-symbols-rounded { font-size: 40px; }
+#thorexRoot .tx-drop-title { font-weight: 700; font-size: 15px; color: var(--tx-text); }
+#thorexRoot .tx-drop-sub { font-size: 12px; font-weight: 500; color: var(--tx-text-2); max-width: 26ch; }
+
+/* 2x2 source cards: camera / library / files / PDF */
+#thorexRoot .tx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#thorexRoot .tx-src-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+  min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
+  border: 1px solid var(--tx-hairline); border-radius: 14px; background: var(--tx-card);
+  font-family: var(--tx-sans); color: var(--tx-text);
+  transition: transform .15s var(--tx-ease), box-shadow .15s var(--tx-ease), border-color .15s var(--tx-ease);
+}
+#thorexRoot .tx-src-card:hover { border-color: var(--tx-primary); box-shadow: 0 4px 14px rgba(13, 27, 36, .06); }
+#thorexRoot .tx-src-card:active { transform: scale(.98); }
+#thorexRoot .tx-src-ic { color: var(--tx-primary); display: inline-flex; }
+#thorexRoot .tx-src-ic .material-symbols-rounded { font-size: 26px; }
+#thorexRoot .tx-src-card--pdf .tx-src-ic { color: var(--tx-pulmonary); }
+#thorexRoot .tx-src-name { margin-top: 8px; font-weight: 700; font-size: 14px; color: var(--tx-text); }
+#thorexRoot .tx-src-hint { font-size: 11px; font-weight: 500; color: var(--tx-text-2); }
+
+/* Blue capture-tip banner (framing / exposure guidance) */
+#thorexRoot .tx-tip {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding: 12px 14px; border-radius: var(--tx-r-ctl);
+  background: #E8F2F9; border: 1px solid #B5D4E8;
+}
+#thorexRoot .tx-tip-ic { flex: 0 0 auto; color: var(--tx-sev-info); display: inline-flex; }
+#thorexRoot .tx-tip-ic .material-symbols-rounded { font-size: 19px; }
+#thorexRoot .tx-tip-txt { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--tx-text); }
+
+/* Third-party (Free/HF) consent notice — appended to the source screen for the Free entitlement
+   path (smd_thorex_cloud tri-state ask-once). Distinguishable from the info tip. */
+#thorexRoot .tx-consent {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding: 13px 14px; border-radius: var(--tx-r-ctl);
+  background: var(--tx-surf-2); border: 1px solid var(--tx-hairline);
+}
+#thorexRoot .tx-consent-ic { flex: 0 0 auto; color: var(--tx-text-2); display: inline-flex; }
+#thorexRoot .tx-consent-ic .material-symbols-rounded { font-size: 19px; }
+#thorexRoot .tx-consent-txt { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--tx-text); }
+#thorexRoot .tx-consent-acts { display: flex; gap: 8px; margin-top: 10px; }
+#thorexRoot .tx-consent-acts .tx-btn { flex: 1; min-height: 40px; font-size: 13px; }
+
+#thorexRoot .tx-src-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 16px; font-size: 11px; font-weight: 500; color: var(--tx-muted);
+}
+#thorexRoot .tx-src-foot .material-symbols-rounded { font-size: 14px; color: var(--tx-sev-stable); }
+
+#thorexRoot .tx-src-card:focus-visible,
+#thorexRoot .tx-src-back:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }
+
+/* ===== permission ===== */
+/* ─────────────────────────── Camera permission ───────────────────────────────────────────────────
+   Dark scrim + bottom sheet. Full-viewport modal layer inside the module overlay. Mirrors kx-perm. */
+#thorexRoot .tx-perm {
+  position: fixed; inset: 0; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+}
+#thorexRoot .tx-perm-scrim {
+  position: absolute; inset: 0; margin: 0; padding: 0; border: 0;
+  background: rgba(13, 25, 34, .6);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#thorexRoot .tx-perm-sheet {
+  position: relative; z-index: 1;
+  width: calc(100% - 28px); max-width: 460px;
+  margin: 0 0 calc(14px + env(safe-area-inset-bottom, 0));
+  padding: 24px 20px 18px;
+  text-align: center;
+  background: var(--tx-bg);
+  border-radius: 24px;
+  box-shadow: 0 -8px 40px rgba(13, 27, 36, .3);
+  animation: txRise .28s var(--tx-ease) both;
+}
+#thorexRoot .tx-perm-icon {
+  width: 64px; height: 64px; border-radius: 20px; background: var(--tx-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#thorexRoot .tx-perm-icon .material-symbols-rounded { font-size: 34px; color: var(--tx-primary); }
+#thorexRoot .tx-perm-title { margin: 14px 0 0; font-size: 19px; font-weight: 700; letter-spacing: -.01em; color: var(--tx-text); }
+#thorexRoot .tx-perm-body { margin: 8px 0 0; font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--tx-text-2); }
+#thorexRoot .tx-perm-assure {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-top: 12px; font-size: 11.5px; font-weight: 600; color: var(--tx-sev-stable);
+}
+#thorexRoot .tx-perm-assure .material-symbols-rounded { font-size: 15px; }
+#thorexRoot .tx-perm-allow {
+  width: 100%; min-height: 44px; margin-top: 18px; padding: 15px; border: 0; border-radius: 14px;
+  background: var(--tx-primary); color: #fff; font-family: var(--tx-sans); font-weight: 700; font-size: 15px;
+  box-shadow: 0 8px 22px rgba(15, 118, 110, .28); cursor: pointer;
+}
+#thorexRoot .tx-perm-deny {
+  width: 100%; min-height: 44px; margin-top: 8px; padding: 13px; border: 0; border-radius: 14px;
+  background: transparent; color: var(--tx-text-2); font-family: var(--tx-sans); font-weight: 700; font-size: 14px;
+  cursor: pointer;
+}
+#thorexRoot .tx-perm-allow:focus-visible,
+#thorexRoot .tx-perm-deny:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }
+
+/* ===== quality ===== */
+/* ─────────────────────────── Image-quality gate ──────────────────────────────────────────────────
+   Client-side pre-check (AP/PA·portable, exposure, rotation, motion, inspiration, cropping) before
+   the image is sent for detection. Adequate → auto-continue; marginal/inadequate → blocking warning
+   requiring explicit acknowledgement (§4 P1). Dark preview surface, adapted from kx-proc. */
+#thorexRoot .tx-qual {
+  --tx-qual-bg: #0d1922;
+  --tx-qual-preview: #0a0f14;
+  --tx-qual-line: #16283a;
+  --tx-qual-muted: #8AA2B2;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--tx-qual-bg);
+  color: #fff;
+}
+#thorexRoot .tx-qual-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px;
+  padding-top: max(8px, env(safe-area-inset-top, 0));
+}
+#thorexRoot .tx-qual-close {
+  width: 44px; height: 44px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+}
+#thorexRoot .tx-qual-close:active { background: rgba(255, 255, 255, .08); }
+#thorexRoot .tx-qual-close .material-symbols-rounded { font-size: 24px; }
+#thorexRoot .tx-qual-close:focus-visible { outline: 2px solid var(--tx-green); outline-offset: 2px; }
+#thorexRoot .tx-qual-title { flex: 1; margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+
+#thorexRoot .tx-qual-body { padding: 8px 20px 26px; }
+
+/* CXR preview thumbnail */
+#thorexRoot .tx-qual-preview {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--tx-qual-preview);
+  border: 1px solid var(--tx-qual-line);
+}
+#thorexRoot .tx-qual-preview img { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+#thorexRoot .tx-qual-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--tx-mono);
+  font-weight: 700; font-size: 10px; letter-spacing: .04em;
+  color: var(--tx-green);
+  background: rgba(6, 36, 15, .7);
+  padding: 4px 8px; border-radius: 999px;
+}
+#thorexRoot .tx-qual-badge.is-warn { color: var(--tx-sev-warn); background: rgba(60, 40, 6, .75); }
+#thorexRoot .tx-qual-badge.is-fail { color: #ff9b9b; background: rgba(60, 6, 6, .75); }
+
+/* Quality checklist (AP/PA·portable, exposure, rotation, motion, inspiration, cropping) —
+   pass/warn/fail chips, icon + label + colour (never colour alone). */
+#thorexRoot .tx-qual-checks {
+  list-style: none; margin: 20px 0 0; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+#thorexRoot .tx-qual-check { display: flex; align-items: center; gap: 11px; }
+#thorexRoot .tx-qual-check-ico { font-size: 20px; line-height: 1; display: inline-flex; flex: 0 0 auto; }
+#thorexRoot .tx-qual-check-label { flex: 1; font-size: 13.5px; font-weight: 600; }
+#thorexRoot .tx-qual-check-val { font-size: 12px; font-weight: 600; color: var(--tx-qual-muted); }
+#thorexRoot .tx-qual-check.is-pass .tx-qual-check-ico { color: var(--tx-green); font-variation-settings: 'FILL' 1; }
+#thorexRoot .tx-qual-check.is-warn .tx-qual-check-ico { color: var(--tx-sev-warn); font-variation-settings: 'FILL' 1; }
+#thorexRoot .tx-qual-check.is-fail .tx-qual-check-ico { color: var(--tx-sev-critical); font-variation-settings: 'FILL' 1; }
+#thorexRoot .tx-qual-check.is-warn .tx-qual-check-val { color: var(--tx-sev-warn); }
+#thorexRoot .tx-qual-check.is-fail .tx-qual-check-val { color: var(--tx-sev-critical); }
+
+/* Blocking acknowledgement — required before continuing when quality is marginal/inadequate */
+#thorexRoot .tx-qual-warn {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 20px;
+  padding: 13px 14px; border-radius: var(--tx-r-ctl);
+  background: rgba(153, 96, 7, .16); border: 1px solid rgba(153, 96, 7, .4);
+}
+#thorexRoot .tx-qual-warn .material-symbols-rounded { font-size: 20px; color: var(--tx-sev-warn); flex: 0 0 auto; }
+#thorexRoot .tx-qual-warn-txt { font-size: 12.5px; line-height: 1.45; font-weight: 500; color: #f4e3c9; }
+#thorexRoot .tx-qual-ack {
+  display: flex; align-items: center; gap: 9px; margin-top: 14px;
+  font-size: 13px; font-weight: 600; color: #fff; cursor: pointer;
+}
+#thorexRoot .tx-qual-ack input { width: 20px; height: 20px; accent-color: var(--tx-sev-warn); }
+
+#thorexRoot .tx-qual-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+#thorexRoot .tx-qual-actions .tx-btn { width: 100%; }
+
+/* Screen-reader progress announcements */
+#thorexRoot .tx-qual-live {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ===== processing (analyzing) ===== */
+/* ─────────────────────────── Live AI analysis (DARK) ─────────────────────────────────────────────
+   Full-bleed dark analysis view mounted into #txScroll while the backend pipeline runs (quality →
+   detection → localization → explainability → correlation → report). Confidence ring + staged
+   progress + the encrypted/ephemeral privacy line. Adapted from kx-analysis. */
+#thorexRoot .tx-proc {
+  --txa-bg: #0d1922;      /* dark surface */
+  --txa-line: #16283a;    /* ring track + bar track + hairline */
+  --txa-muted: #8AA2B2;   /* secondary text */
+  --txa-link: #6FB4E0;    /* encrypted footer line */
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 22px calc(32px + env(safe-area-inset-bottom, 0));
+  background: var(--txa-bg);
+  color: #fff;
+}
+#thorexRoot .tx-proc-inner { width: 100%; max-width: 340px; text-align: center; }
+
+/* Confidence ring (overall pipeline progress, not a per-finding confidence) */
+#thorexRoot .tx-conf-ring { position: relative; width: 118px; height: 118px; margin: 8px auto 0; }
+#thorexRoot .tx-conf-svg { position: absolute; inset: 0; width: 118px; height: 118px; transform: rotate(-90deg); }
+#thorexRoot .tx-conf-track { fill: none; stroke: var(--txa-line); stroke-width: 8; }
+#thorexRoot .tx-conf-arc {
+  fill: none; stroke: var(--tx-green); stroke-width: 8; stroke-linecap: round;
+  transition: stroke-dashoffset .9s var(--tx-ease);
+}
+#thorexRoot .tx-conf-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+#thorexRoot .tx-conf-pct { font-size: 34px; font-weight: 700; line-height: 1; color: #fff; }
+#thorexRoot .tx-conf-cap { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--txa-muted); margin-top: 3px; }
+
+#thorexRoot .tx-proc-title { font-size: 17px; font-weight: 700; margin: 18px 0 0; }
+#thorexRoot .tx-proc-sub { font-size: 12.5px; font-weight: 500; color: var(--txa-muted); margin: 3px 0 0; }
+
+/* Staged progress bars — one row per pipeline stage (quality, detection, localization,
+   explainability, correlation, report) */
+#thorexRoot .tx-stages { display: flex; flex-direction: column; gap: 11px; margin-top: 22px; text-align: left; }
+#thorexRoot .tx-stage.is-pending { opacity: .55; }
+#thorexRoot .tx-stage-head { display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
+#thorexRoot .tx-stage-name { display: inline-flex; align-items: center; gap: 7px; }
+#thorexRoot .tx-stage-name .material-symbols-rounded { font-size: 16px; color: var(--tx-green); }
+#thorexRoot .tx-stage.is-pending .tx-stage-name .material-symbols-rounded { color: var(--txa-muted); }
+#thorexRoot .tx-stage.is-done .tx-stage-name .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+#thorexRoot .tx-stage.is-active .tx-stage-name .material-symbols-rounded { animation: txSpin 1s linear infinite; }
+#thorexRoot .tx-stage-val { color: var(--txa-muted); }
+#thorexRoot .tx-stage-track { height: 5px; border-radius: 999px; background: var(--txa-line); overflow: hidden; }
+#thorexRoot .tx-stage-fill { width: 0; height: 100%; border-radius: 999px; background: var(--tx-green); transition: width .6s var(--tx-ease); }
+
+/* Encrypted / ephemeral footer (image never persisted server-side beyond the analysis window) */
+#thorexRoot .tx-proc-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 22px; font-size: 11px; font-weight: 500; color: var(--txa-link);
+}
+#thorexRoot .tx-proc-foot .material-symbols-rounded { font-size: 14px; }
+
+/* While this screen is mounted, carry the dark theme onto the shared overlay shell (scoped to
+   #thorexRoot via :has, fully reversible when the router swaps screens — no global leakage). */
+#thorexRoot:has(.tx-proc) { background: #0d1922; }
+#thorexRoot:has(.tx-proc) .tx-topbar { background: #0d1922; border-bottom-color: #16283a; }
+#thorexRoot:has(.tx-proc) .tx-topbar h1 { color: #fff; }
+#thorexRoot:has(.tx-proc) .tx-iconbtn { background: transparent; border-color: #16283a; color: #8AA2B2; }
+
+/* Respect reduced motion (the spinner is already clamped by the module-wide rule in thorex.css) */
+@media (prefers-reduced-motion: reduce) {
+  #thorexRoot .tx-conf-arc { transition: none; }
+  #thorexRoot .tx-stage-fill { transition: none; }
+  #thorexRoot .tx-qual-badge { transition: none; }
+}
+
+/* ===== result ===== */
+/* ─────────────────────────── Result — structured report ──────────────────────────────────────────
+   Header + a stack of .tx-panel result blocks (thorex.css): ONE for V1 (Clinical/TorchXRayVision),
+   TWO for V2 Beta (Clinical + Learning/X-Raydar, side-by-side on wider viewports, stacked on
+   mobile). Always ends with the mandatory .tx-disc disclaimer. */
+#thorexRoot .tx-result-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 12px;
+  border-bottom: 1px solid var(--tx-hairline); background: var(--tx-card);
+  position: sticky; top: 0; z-index: 3;
+}
+#thorexRoot .tx-result-back, #thorexRoot .tx-result-share {
+  width: 40px; height: 40px; flex: 0 0 auto; border: 0; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#thorexRoot .tx-result-back { background: transparent; color: var(--tx-text); }
+#thorexRoot .tx-result-share { background: var(--tx-surf-2); color: var(--tx-text-2); }
+#thorexRoot .tx-result-back .material-symbols-rounded { font-size: 24px; }
+#thorexRoot .tx-result-share .material-symbols-rounded { font-size: 21px; }
+#thorexRoot .tx-result-titles { flex: 1; min-width: 0; }
+#thorexRoot .tx-result-title { font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--tx-text); }
+#thorexRoot .tx-result-sub { font-size: 11.5px; font-weight: 500; color: var(--tx-text-2); }
+#thorexRoot .tx-result-body { padding: 16px; }
+
+/* Panel stack: single panel = plain block; dual (v2beta) = two panels — grid on tablet+, stacked
+   column on mobile (single is always full-width regardless of viewport). */
+#thorexRoot .tx-result-panels { display: flex; flex-direction: column; }
+@media (min-width: 700px) {
+  #thorexRoot .tx-result-panels.tx-dual { flex-direction: row; align-items: flex-start; gap: 12px; }
+  #thorexRoot .tx-result-panels.tx-dual .tx-panel { flex: 1 1 0; margin-top: 0; }
+}
+
+/* Panel body: AI-source badge + one card per finding */
+#thorexRoot .tx-panel-badge {
+  display: inline-flex; align-items: center; gap: 5px; font: 700 10.5px var(--tx-sans);
+  letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
+  color: var(--tx-primary); background: color-mix(in srgb, var(--tx-primary) 12%, var(--tx-card));
+  border: 1px solid color-mix(in srgb, var(--tx-primary) 38%, transparent);
+}
+#thorexRoot .tx-panel--learning .tx-panel-badge {
+  color: var(--tx-learning); background: color-mix(in srgb, var(--tx-learning) 14%, var(--tx-card));
+  border-color: color-mix(in srgb, var(--tx-learning) 40%, transparent);
+}
+#thorexRoot .tx-panel-badge .material-symbols-rounded { font-size: 13px; }
+
+#thorexRoot .tx-findings { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+#thorexRoot .tx-finding { border: 1px solid var(--tx-hairline); border-radius: 14px; background: var(--tx-card); padding: 13px 14px; }
+#thorexRoot .tx-panel--learning .tx-finding { background: color-mix(in srgb, var(--tx-learning) 4%, var(--tx-card)); border-color: color-mix(in srgb, var(--tx-learning) 20%, var(--tx-hairline)); }
+#thorexRoot .tx-finding-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#thorexRoot .tx-finding-name { font-size: 14.5px; font-weight: 700; color: var(--tx-text); }
+#thorexRoot .tx-finding-loc { margin-top: 2px; font-size: 11.5px; font-weight: 500; color: var(--tx-text-2); }
+#thorexRoot .tx-finding-rel { margin-top: 8px; font-size: 12.5px; line-height: 1.5; color: var(--tx-text); }
+
+/* Severity pill — COLOUR + ICON + LABEL, never colour alone (mono/tabular via .tx-data when a
+   number is shown). Cloned from kx-pill. */
+#thorexRoot .tx-pill {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px;
+  padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 11px;
+}
+#thorexRoot .tx-pill .material-symbols-rounded { font-size: 13px; }
+#thorexRoot .tx-pill--critical { color: var(--tx-sev-critical); background: #F7E3E5; }
+#thorexRoot .tx-pill--urgent { color: var(--tx-sev-urgent); background: #FDEEE4; }
+#thorexRoot .tx-pill--warn { color: var(--tx-sev-warn); background: #FBF1DD; }
+#thorexRoot .tx-pill--stable { color: var(--tx-sev-stable); background: #E7F5EC; }
+#thorexRoot .tx-pill--info { color: var(--tx-sev-info); background: #E8F2F9; }
+
+/* Confidence — BAND only, never a raw probability (§6 Safety). Cloned from kx-conf/kx-conf-bar. */
+#thorexRoot .tx-conf { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+#thorexRoot .tx-conf-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--tx-surf-2); overflow: hidden; }
+#thorexRoot .tx-conf-fill { width: var(--tx-conf, 0%); height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--tx-primary), var(--tx-green)); transition: width .6s var(--tx-ease); }
+#thorexRoot .tx-panel--learning .tx-conf-fill { background: linear-gradient(90deg, var(--tx-learning), #A78BFA); }
+#thorexRoot .tx-conf-val { font: 700 13px var(--tx-mono); color: var(--tx-primary); }
+#thorexRoot .tx-panel--learning .tx-conf-val { color: var(--tx-learning); }
+#thorexRoot .tx-conf-band { font-size: 11px; font-weight: 500; color: var(--tx-muted); margin-top: 5px; }
+
+/* Grad-CAM heatmap overlay (localization) */
+#thorexRoot .tx-heatmap { position: relative; border-radius: 12px; overflow: hidden; margin-top: 10px; background: #0a0f14; }
+#thorexRoot .tx-heatmap img { display: block; width: 100%; height: auto; }
+#thorexRoot .tx-heatmap img.tx-heatmap-overlay { position: absolute; inset: 0; opacity: .62; mix-blend-mode: screen; }
+#thorexRoot .tx-heatmap-cap { position: absolute; left: 8px; bottom: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; color: #fff; background: rgba(0, 0, 0, .55); padding: 3px 7px; border-radius: 999px; }
+
+/* Emergency / red-flag callout (e.g. tension pneumothorax, massive effusion) */
+#thorexRoot .tx-redflag { display: flex; align-items: flex-start; gap: 11px; margin-top: 10px; padding: 13px 14px; border: 1px solid color-mix(in srgb, var(--tx-sev-critical) 40%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--tx-sev-critical) 10%, var(--tx-card)); }
+#thorexRoot .tx-redflag > .material-symbols-rounded { font-size: 20px; color: var(--tx-sev-critical); flex: 0 0 auto; }
+#thorexRoot .tx-redflag-t { display: block; font-size: 13px; font-weight: 700; color: var(--tx-sev-critical); }
+#thorexRoot .tx-redflag-b { font-size: 12px; line-height: 1.45; font-weight: 500; color: color-mix(in srgb, var(--tx-sev-critical) 70%, var(--tx-text)); }
+
+/* "Why this finding?" explainability link (Clinical panel only) */
+#thorexRoot .tx-why-link { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 14px; border: 1px solid color-mix(in srgb, var(--tx-sev-info) 32%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--tx-sev-info) 8%, var(--tx-card)); color: var(--tx-sev-info); }
+#thorexRoot .tx-why-link > .material-symbols-rounded:first-child { font-size: 24px; }
+#thorexRoot .tx-why-link > .material-symbols-rounded:last-child { font-size: 22px; }
+#thorexRoot .tx-why-link-txt { flex: 1; }
+#thorexRoot .tx-why-link-txt b { display: block; font-size: 14px; }
+#thorexRoot .tx-why-link-sub { display: block; font-size: 11.5px; font-weight: 500; opacity: .9; }
+
+/* Action row (Save case / Export / Share). MUST be omitted in markup for a .tx-panel--learning —
+   the Learning engine drives no clinical action (§3.4); this rule exists only as a defensive
+   fallback, never rely on it to hide actions that shouldn't have been rendered at all. */
+#thorexRoot .tx-actions { display: flex; gap: 10px; margin-top: 16px; }
+#thorexRoot .tx-actions .tx-btn { flex: 1; }
+#thorexRoot .tx-actions .tx-btn .material-symbols-rounded { font-size: 19px; }
+#thorexRoot .tx-actions .tx-btn-secondary .material-symbols-rounded { color: var(--tx-primary); }
+#thorexRoot .tx-panel--learning .tx-actions { display: none; }
+
+/* Mandatory safety disclaimer — every result screen, verbatim text supplied by the caller.
+   Cloned from kx-disc. */
+#thorexRoot .tx-disc { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 16px; font-size: 10.5px; font-weight: 500; line-height: 1.4; text-align: center; color: var(--tx-muted); }
+#thorexRoot .tx-disc .material-symbols-rounded { font-size: 14px; }
+
+/* ===== history / settings / empty (generic, minimal) ===== */
+/* Simple list/empty-state scaffolding shared by the history, settings, and empty screens — reuses
+   the same atoms as landing/source rather than inventing new ones. */
+#thorexRoot .tx-list-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 12px;
+  border-bottom: 1px solid var(--tx-hairline); background: var(--tx-card);
+  position: sticky; top: 0; z-index: 3;
+}
+#thorexRoot .tx-list-title { flex: 1; margin: 0; font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--tx-text); }
+#thorexRoot .tx-list-body { padding: 16px; }
+
+#thorexRoot .tx-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px;
+  padding: 40px 16px;
+}
+#thorexRoot .tx-empty .material-symbols-rounded { font-size: 34px; color: var(--tx-muted); }
+#thorexRoot .tx-empty-title { font-weight: 700; font-size: 14px; color: var(--tx-text); margin-top: 4px; }
+#thorexRoot .tx-empty-sub { font-size: 12px; font-weight: 500; color: var(--tx-text-2); }
+
+#thorexRoot .tx-set-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 13px 2px; border-bottom: 1px solid var(--tx-hairline);
+}
+#thorexRoot .tx-set-row:last-child { border-bottom: 0; }
+#thorexRoot .tx-set-label { font-size: 14px; font-weight: 600; color: var(--tx-text); }
+#thorexRoot .tx-set-sub { font-size: 11.5px; font-weight: 500; color: var(--tx-text-2); margin-top: 1px; }
+
+/* Focus visibility for the generic screens' interactive elements */
+#thorexRoot .tx-set-row:focus-within,
+#thorexRoot .tx-rec:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }

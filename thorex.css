@@ -1,0 +1,216 @@
+/* thorex.css — ThoreX AI · module styles (sibling of kardiox.css / fundx.css).
+ *
+ * ALL selectors are scoped to #thorexRoot / .tx-* — additive, zero global leakage (mirrors the
+ * KardioX gate in its README). Reuses StewardMD design tokens (--rds-*) and severity tokens
+ * (--sev-*) so light/dark themes and future re-theming flow through with no extra work. Module-local
+ * --tx-* tokens are defined ON #thorexRoot only. Flag-gated by smd_thorex (default OFF); when off,
+ * thorex.js never mounts #thorexRoot so none of this applies.
+ *
+ * Scope: design tokens, the flagship Home card (rendered outside the root, on the app home
+ * surface), the module overlay shell, the reusable .tx-panel building block (incl. the
+ * visually-distinct .tx-panel--learning variant for the X-Raydar educational engine) + its
+ * .tx-edu-banner, buttons, and the named keyframes. Per-screen .tx-* component styles live in
+ * thorex-screens.css.
+ */
+
+/* ─────────────────────────── Design tokens (module-local, on the root only) ─────────────────────── */
+#thorexRoot {
+  /* From the design handoff panel: reuse --rds-*; --tx-pulmonary is fixed (chest/lung accent,
+     ThoreX's equivalent of KardioX's --kx-cardiac). */
+  --tx-primary: var(--rds-primary, #0F766E);
+  --tx-primary-2: var(--rds-primary-2, #115E59);
+  --tx-soft: var(--rds-soft, #E4F2EF);
+  --tx-pulmonary: #2B6CB0;
+  --tx-bg: var(--rds-bg, #F5F8F9);
+  --tx-surf-2: var(--rds-surf-2, #EEF3F5);
+  --tx-ink: var(--rds-ink, #0D1B24);
+  --tx-text: var(--rds-text, #0D1B24);
+  --tx-text-2: var(--rds-text-2, #5B7083);
+  --tx-muted: var(--rds-muted, #8CA2B1);
+  --tx-hairline: var(--rds-hairline, #E3EAEE);
+  --tx-card: var(--rds-card, #ffffff);
+  /* Severity — theme-invariant; prefer --sev-* if StewardMD defines them, else the design hexes. */
+  --tx-sev-critical: var(--sev-critical, #B42332);
+  --tx-sev-urgent: var(--sev-urgent, #C2410C);
+  --tx-sev-warn: var(--sev-warn, #996007);
+  --tx-sev-stable: var(--sev-stable, #1C7A4A);
+  --tx-sev-info: var(--sev-info, #1D6FA3);
+  --tx-green: #34d399;
+  /* Learning (X-Raydar, educational/research) accent — never used for the Clinical panel. */
+  --tx-learning: #7C3AED;
+  --tx-learning-soft: #F1EAFD;
+  /* Shape + motion. */
+  --tx-r: 16px;
+  --tx-r-ctl: 12px;
+  --tx-ease: cubic-bezier(.2, .7, .2, 1);
+  --tx-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tx-sans: "IBM Plex Sans", var(--rds-font, system-ui), -apple-system, sans-serif;
+}
+
+/* ─────────────────────────── Module overlay shell ───────────────────────────────────────────────── */
+#thorexRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;                       /* above the app shell, sibling of #kardioxRoot's overlay layer */
+  display: none;                        /* thorex.js flips this to flex when opened */
+  flex-direction: column;
+  background: var(--tx-bg);
+  color: var(--tx-text);
+  font-family: var(--tx-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+#thorexRoot.tx-open { display: flex; }
+#thorexRoot .tx-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
+/* Tablet / desktop: keep the mobile-first content readable by centering it with gutters rather
+   than stretching phone-width UI edge-to-edge (mirrors the KardioX platform-adaptation rule). */
+@media (min-width: 820px) {
+  #thorexRoot .tx-scroll { padding-left: max(16px, calc((100% - 760px) / 2)); padding-right: max(16px, calc((100% - 760px) / 2)); }
+}
+
+/* Clinical numbers are always monospaced, tabular (design principle #5, same as KardioX). */
+#thorexRoot .tx-data { font-family: var(--tx-mono); font-variant-numeric: tabular-nums; }
+
+/* ─────────────────────────── Flagship Home card ──────────────────────────────────────────────────── */
+/* Lives INSIDE the StewardMD home surface (injected by home.js), so it is scoped by .tx-home-card,
+   not #thorexRoot (the card must render before the module overlay exists). */
+.tx-home-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 18px;
+  color: #fff;
+  background: linear-gradient(155deg, #0d2b42, #0f1f30, #131a28);
+  box-shadow: 0 10px 30px rgba(13, 27, 36, .18);
+  cursor: pointer;
+  isolation: isolate;
+}
+.tx-home-card::after {                  /* blue radial glow (chest/lung accent, not the red ECG one) */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 80% 10%, rgba(43, 108, 176, .30), transparent 60%);
+}
+.tx-home-card > * { position: relative; z-index: 1; }
+.tx-home-scan { display: block; width: 100%; height: 46px; margin: 8px 0 12px; overflow: visible; }
+.tx-home-scan path {
+  fill: none; stroke: #6FB4E0; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(111, 180, 224, .5));
+  stroke-dasharray: 1200; stroke-dashoffset: 1200;
+  animation: txDraw 3.4s var(--tx-ease, ease) infinite;
+}
+.tx-home-head { display: flex; align-items: center; gap: 10px; }
+.tx-home-icon { color: #6FB4E0; display: inline-flex; animation: txPulse 1.8s ease-in-out infinite; }
+.tx-home-pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
+  background: rgba(255, 255, 255, .12); color: #eaf4ff;
+}
+.tx-home-title { font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin: 4px 0 2px; }
+.tx-home-sub { font-size: 13px; color: rgba(234, 244, 255, .78); }
+.tx-home-cta {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 9px 15px;
+  border-radius: 999px; background: #fff; color: #0d2b42; font-weight: 700; font-size: 14px; border: 0;
+}
+.tx-home-conf { margin-top: 10px; font-size: 12px; color: rgba(234, 244, 255, .7); }
+.tx-home-conf b { font-family: var(--tx-mono); }
+.tx-home-foot { margin-top: 12px; font-size: 11px; color: rgba(234, 244, 255, .55); display: flex; align-items: center; gap: 5px; }
+/* sibling tiles row (KardioX / FundX / Antibiogram) rendered by home.js beneath the card use
+   existing tile styles */
+
+/* ─────────────────────────── Topbar (shared shell header) ───────────────────────────────────────── */
+#thorexRoot .tx-topbar {
+  display: flex; align-items: center; gap: 10px; padding: 14px 16px calc(14px + env(safe-area-inset-top, 0));
+  padding-top: max(14px, env(safe-area-inset-top, 0));
+  border-bottom: 1px solid var(--tx-hairline); background: var(--tx-card);
+}
+#thorexRoot .tx-topbar h1 { font-size: 17px; font-weight: 800; letter-spacing: -.01em; flex: 1; margin: 0; }
+#thorexRoot .tx-topbar h1 span { color: var(--tx-primary); }
+#thorexRoot .tx-iconbtn {
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--tx-hairline);
+  background: var(--tx-card); color: var(--tx-text-2); display: inline-flex; align-items: center;
+  justify-content: center; cursor: pointer;
+}
+
+/* ─────────────────────────── Buttons (base) ─────────────────────────────────────────────────────── */
+#thorexRoot .tx-btn { min-height: 44px; border-radius: var(--tx-r-ctl); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 1px solid transparent; }
+#thorexRoot .tx-btn-primary { background: var(--tx-primary); color: #fff; box-shadow: 0 6px 16px rgba(15, 118, 110, .28); }
+#thorexRoot .tx-btn-secondary { background: var(--tx-card); color: var(--tx-text); border-color: var(--tx-hairline); }
+#thorexRoot .tx-btn-ghost { background: transparent; color: var(--tx-primary); }
+#thorexRoot .tx-btn-danger { background: var(--tx-sev-critical); color: #fff; }
+#thorexRoot .tx-btn:focus-visible, .tx-home-card:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }
+/* Blanket visible-focus for every interactive control in the module (buttons, [role=button], chips,
+   tiles, links, inputs) — a11y requires a visible focus ring on all controls. */
+#thorexRoot button:focus-visible, #thorexRoot [role="button"]:focus-visible, #thorexRoot a:focus-visible,
+#thorexRoot [tabindex]:focus-visible, #thorexRoot input:focus-visible, #thorexRoot select:focus-visible {
+  outline: 2px solid var(--tx-primary); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ─────────────────────────── Result-engine panel (reusable building block) ──────────────────────── */
+/* One .tx-panel per engine result (§3.4 entitlement matrix): V1 renders a single Clinical panel
+   (TorchXRayVision); V2 Beta renders Clinical + Learning (X-Raydar) side by side/stacked — see
+   .tx-result-panels in thorex-screens.css for the layout container. The Clinical panel uses the
+   plain card styling below; the educational engine MUST use the --learning variant, which is
+   visually distinct (purple tint + left accent bar) so the two are never confused at a glance —
+   colour is reinforced by the .tx-edu-banner text, never colour alone. */
+#thorexRoot .tx-panel {
+  position: relative;
+  border: 1px solid var(--tx-hairline);
+  border-radius: var(--tx-r);
+  background: var(--tx-card);
+  padding: 16px;
+  margin-top: 12px;
+  animation: txRise .32s var(--tx-ease) both;
+}
+#thorexRoot .tx-panel:first-child { margin-top: 0; }
+#thorexRoot .tx-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#thorexRoot .tx-panel-eyebrow { font: 700 10.5px var(--tx-sans); letter-spacing: .07em; text-transform: uppercase; color: var(--tx-text-2); }
+#thorexRoot .tx-panel-title { font-size: 17px; font-weight: 700; letter-spacing: -.01em; color: var(--tx-text); margin: 2px 0 0; }
+#thorexRoot .tx-panel-engine { font-size: 11.5px; font-weight: 600; color: var(--tx-text-2); margin-top: 2px; }
+
+/* Learning panel — X-Raydar (research/educational only, never drives clinical action). Distinct
+   tint + left accent bar; never rely on colour alone (paired with .tx-edu-banner icon + text). */
+#thorexRoot .tx-panel--learning {
+  border-color: color-mix(in srgb, var(--tx-learning) 38%, transparent);
+  border-left-width: 4px;
+  border-left-color: var(--tx-learning);
+  background: linear-gradient(180deg, var(--tx-learning-soft), var(--tx-card) 55%);
+}
+#thorexRoot .tx-panel--learning .tx-panel-eyebrow,
+#thorexRoot .tx-panel--learning .tx-panel-engine { color: var(--tx-learning); }
+
+/* "Educational — not for clinical use" banner. Mandatory on every Learning-engine panel; icon +
+   label + colour together (never colour alone, per the severity/pill a11y rule elsewhere). */
+#thorexRoot .tx-edu-banner {
+  display: flex; align-items: center; gap: 8px;
+  margin: 10px 0 2px; padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--tx-learning) 40%, transparent);
+  border-radius: var(--tx-r-ctl);
+  background: color-mix(in srgb, var(--tx-learning) 12%, var(--tx-card));
+  color: var(--tx-learning);
+  font: 700 12px var(--tx-sans);
+  line-height: 1.35;
+}
+#thorexRoot .tx-edu-banner .material-symbols-rounded { font-size: 17px; flex: 0 0 auto; }
+
+/* ─────────────────────────── Named keyframes (Animations & Motion table) ────────────────────────── */
+@keyframes txDraw { to { stroke-dashoffset: 0; } }
+@keyframes txPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.12); } 70% { transform: scale(1.02); } }
+@keyframes txSweep { from { transform: translateX(-120%); } to { transform: translateX(220%); } }
+@keyframes txSpin { to { transform: rotate(360deg); } }
+@keyframes txShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes txRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ─────────────────────────── Reduced motion — freeze all traces/loaders/sweeps ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tx-home-scan path { animation: none; stroke-dashoffset: 0; }
+  .tx-home-icon { animation: none; }
+  #thorexRoot *, #thorexRoot *::before, #thorexRoot *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* While the ThoreX overlay is open (html.tx-lock), hide the app's floating action buttons — the
+   home FAB (z-index 9999) otherwise bleeds over the module. Mirrors html.kx-lock in kardiox.css. */
+html.tx-lock .hv-fab,
+html.tx-lock #hvFab,
+html.tx-lock #infFab,
+html.tx-lock .inf-fab,
+html.tx-lock #dxLaunch,
+html.tx-lock .ghis-ward-fab { display: none !important; }
