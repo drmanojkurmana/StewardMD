@@ -1291,6 +1291,7 @@
     var onDev = false; try { onDev = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_ondevice')); } catch (e) {}
     var onLearned = false; try { onLearned = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_learned')); } catch (e) {}
     var onAcs = false; try { onAcs = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_acs')); } catch (e) {}
+    var onFb = false; try { onFb = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_feedback')); } catch (e) {}
     var odRow = isNat ? ('<button type="button" class="kx-settings-row" data-act="kx-ondevice-ai">'
         + '<span class="kx-sr-ic">' + ic('memory') + '</span>'
         + '<span class="kx-sr-body"><b class="kx-sr-title">On-device AI</b><span class="kx-sr-sub" data-kx-od-sub>Checking…</span></span>'
@@ -1348,6 +1349,11 @@
             + '<span class="kx-sr-ic">' + ic('monitor_heart') + '</span>'
             + '<span class="kx-sr-body"><b class="kx-sr-title">Clinical context (HEART / TIMI)</b><span class="kx-sr-sub">Optional ACS risk panel on the result. Decision support, not a diagnosis.</span></span>'
             + '<span class="kx-sr-toggle' + (onAcs ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
+          + '</button>'
+          + '<button type="button" class="kx-settings-row" data-act="kx-toggle-feedback" role="switch" aria-checked="' + (onFb ? 'true' : 'false') + '">'
+            + '<span class="kx-sr-ic">' + ic('school') + '</span>'
+            + '<span class="kx-sr-body"><b class="kx-sr-title">Help improve KardiQ X</b><span class="kx-sr-sub">Confirm/correct readings (consent-gated) to train the model on real ECGs.</span></span>'
+            + '<span class="kx-sr-toggle' + (onFb ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
           + '</button>'
           + odRow
         + '</div>'
@@ -2626,6 +2632,7 @@
   }
   function toggleConfidence() { try { var F = window.SMD_KARDIOX_FLAGS; if (F) { F.set("smd_kardiox_confidence", !F.bool("smd_kardiox_confidence")); toast("Confidence display " + (F.bool("smd_kardiox_confidence") ? "on" : "off") + "."); show("settings"); } } catch (e) {} }
   function toggleAcs() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_acs"); F.set("smd_kardiox_acs", on); toast(on ? "Clinical context on — open an ECG result and tap Add clinical context." : "Clinical context off."); show("settings"); } catch (e) {} }
+  function toggleFeedback() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_feedback"); F.set("smd_kardiox_feedback", on); toast(on ? "Thanks — a Confirm/Correct card will appear on results (consent-gated)." : "Model-improvement feedback off."); show("settings"); } catch (e) {} }
   function toggleOndevice() {
     try {
       var F = window.SMD_KARDIOX_FLAGS; if (!F) return;
@@ -2737,6 +2744,7 @@
       case "kx-clear-ecgs": clearEcgs(); return;
       case "kx-toggle-confidence": toggleConfidence(); return;
       case "kx-toggle-acs": haptic("light"); toggleAcs(); return;
+      case "kx-toggle-feedback": haptic("light"); toggleFeedback(); return;
       case "kx-toggle-ondevice": haptic("light"); toggleOndevice(); return;
       case "kx-toggle-learned": haptic("light"); toggleLearned(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;

@@ -9,10 +9,10 @@ failures measured on the Mendeley MI/Normal sets:
     the base's MI classes when it says "not MI" (fused specificity ~0.99).
 Everything else (calibration, Normal/defer, SBRAD barred, findings, disclaimers) is unchanged.
 Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusion definitively."""
-import io, os, numpy as np, torch, timm
+import io, os, json, time, numpy as np, torch, timm
 from PIL import Image
 import torchvision.transforms as T
-from fastapi import FastAPI, UploadFile, File, Header, HTTPException
+from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form
 from fastapi.responses import JSONResponse
 
 MODEL_PATH = os.environ.get("MODEL_PATH", "image_model.pt")
@@ -69,6 +69,14 @@ try:
     _MI_AUROC = round(float(_mick.get("val_auroc", 0.945)), 3)
 except Exception:
     _mi_model = None; _MI_AUROC = None
+
+# Data flywheel: consent-gated storage of clinician-labelled ECGs to GCS -> the retraining corpus.
+FEEDBACK_BUCKET = os.environ.get("FEEDBACK_BUCKET", "stewardmd-ecg-feedback")
+try:
+    from google.cloud import storage as _gcs
+    _fb_bucket = _gcs.Client().bucket(FEEDBACK_BUCKET)
+except Exception:
+    _fb_bucket = None
 
 @app.get("/v1/health")
 def health(): return {"status":"ok","model":_ENGINE,"backbone":_BB,"classes":len(_classes),
@@ -155,3 +163,24 @@ async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = H
         "modelScope":"19-class ECG screen + dedicated MI-any specialist. MI-any is validated (specialist val AUROC ~0.94, real-photo sens/spec ~0.98/0.99 on the Mendeley set - likely optimistic from train overlap); other classes are synthetic-validated and experimental on real photos. NOT an acute-emergency detector.",
         "whatToVerify":"Experimental screen. Confirm every finding on the original 12-lead ECG. Does NOT rule out STEMI, VT/VF, complete heart block, hyperkalaemia, etc.",
     })
+
+@app.post("/v1/ecg/feedback")
+async def feedback(aiVerdict: str = Form(""), label: str = Form(""), correct: str = Form("0"),
+                   consent: str = Form("0"), ts: str = Form(""), image: UploadFile = File(default=None)):
+    """Data flywheel: store one clinician-labelled example. The label record is always kept; the ECG
+    IMAGE is stored ONLY with explicit consent (PHI). Retraining reads gs://<bucket>/{labels,images}/."""
+    rec = {"ts": ts or str(int(time.time()*1000)), "aiVerdict": aiVerdict, "label": label,
+           "correct": correct == "1", "consent": consent == "1", "engine": _ENGINE + "-3.2"}
+    if _fb_bucket is None:
+        return {"stored": False, "reason": "storage unavailable"}
+    key = rec["ts"] + "-" + str(abs(hash(aiVerdict + "|" + label)) % 1000000)
+    try:
+        _fb_bucket.blob("labels/" + key + ".json").upload_from_string(json.dumps(rec), content_type="application/json")
+        if image is not None and consent == "1":
+            data = await image.read()
+            if data:
+                _fb_bucket.blob("images/" + key + ".img").upload_from_string(data)
+                rec["image"] = "images/" + key + ".img"
+        return {"stored": True, "key": key, "image": rec.get("image")}
+    except Exception as e:
+        return {"stored": False, "reason": str(e)[:150]}
