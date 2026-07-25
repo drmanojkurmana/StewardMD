@@ -14,6 +14,7 @@
  *     POST /api/experimental/admin/generate       { feature, expiry, notes }   -> { ok, code (ONCE), id }
  *     GET  /api/experimental/admin/codes?feature=
  *     GET  /api/experimental/admin/activations?feature=
+ *     POST /api/experimental/admin/set-tier        { activationId, tier }   (change an activation's tier)
  *     POST /api/experimental/admin/revoke         { activationId }   (deactivate a device; code stays consumed)
  *     POST /api/experimental/admin/revoke-code    { id }             (kill a code by its hash id)
  *     POST /api/experimental/admin/delete-expired { feature? }
@@ -96,6 +97,11 @@ export async function onRequest(context) {
         if (!X.isFeature(b.feature)) return json({ error: "bad_feature" }, 400, request);
         const r = await X.generateCode(env, { feature: b.feature, expiry: b.expiry, notes: b.notes, tier: b.tier });
         return json(r, 200, request);
+      }
+      if (request.method === "POST" && seg === "set-tier") {
+        const b = await readBody(request);
+        if (!b.activationId) return json({ error: "missing_activationId" }, 400, request);
+        return json(await X.setActivationTier(env, { activationId: b.activationId, tier: b.tier }), 200, request);
       }
       if (request.method === "POST" && seg === "revoke") {
         const b = await readBody(request);

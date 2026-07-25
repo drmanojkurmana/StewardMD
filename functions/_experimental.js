@@ -294,6 +294,22 @@ export async function revokeActivation(env, opts, deps) {
   return { ok: true, activationId: opts.activationId, feature: act.fields.feature };
 }
 
+// Pure: the guarded write for an admin tier change — path + normalized-tier fields, no I/O.
+export function buildSetTierWrite(activationId, tier) {
+  return { path: ACTS + "/" + activationId, fields: { tier: normalizeTier(tier) } };
+}
+
+// ADMIN: change an existing activation's tier (e.g. v1 <-> v2beta). The client picks this up on
+// its next verify/status call — the already-issued token keeps its old tier claim until then,
+// consistent with revokeActivation's "takes effect on next open" behavior.
+export async function setActivationTier(env, opts, deps) {
+  const fs = deps || FS;
+  if (!opts || !opts.activationId) return { ok: false, error: "bad_request" };
+  const w = buildSetTierWrite(opts.activationId, opts.tier);
+  await fs.fsCommit(env, [FS.wUpdate(env, w.path, w.fields, { exists: true })]);   // guard: must exist
+  return { ok: true, activationId: opts.activationId, tier: w.fields.tier };
+}
+
 // ADMIN: revoke a code by its hashed id (kills an unused code, or an activated one + its device).
 export async function revokeCode(env, opts, deps) {
   const fs = deps || FS;
