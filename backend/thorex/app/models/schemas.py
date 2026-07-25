@@ -10,6 +10,7 @@ class Finding(BaseModel):
     band: str            # "High" | "Medium" | "Low"
     severity: str        # "mild" | "moderate" | "severe" | "n/a"
     relevance: str
+    heatmap_png_b64: str | None = None
 
 class EngineResult(BaseModel):
     engine: str          # "torchxrayvision" | "xraydar"

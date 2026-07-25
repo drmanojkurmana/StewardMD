@@ -1,4 +1,4 @@
-import io, numpy as np, pytest
+import base64, io, numpy as np, pytest
 from PIL import Image
 from app.pipeline import preprocess
 
@@ -32,3 +32,36 @@ def test_xraydar_real_inference():
     info = key_match_info()
     assert info is not None
     assert info["matched_fraction"] >= 0.9
+
+
+@pytest.mark.models
+def test_torchxrayvision_heatmap_end_to_end():
+    """A High-band finding from the real TorchXRayVision engine must carry a
+    non-null Grad-CAM heatmap, exercising the real model + real target layer
+    + real pytorch_grad_cam through the exact helper orchestrator.run wires
+    in (app.pipeline.orchestrator._attach_heatmaps).
+
+    A synthetic random-noise test image won't reliably cross the 0.60 "High"
+    probability threshold on its own, so the band is forced to "High" here;
+    everything else (model load, Grad-CAM computation, PNG encoding) is real.
+    """
+    from app.pipeline import orchestrator, preprocess
+    from app.models.schemas import EngineResult, Finding
+    from app.providers.torchxrayvision_provider import TorchXRayVisionProvider
+
+    arr = (np.random.rand(256, 256) * 255).astype("uint8")
+    buf = io.BytesIO(); Image.fromarray(arr, mode="L").save(buf, format="PNG")
+    prepared = preprocess.prepare(buf.getvalue(), "x.png")
+
+    pairs = TorchXRayVisionProvider().detect(prepared)
+    top_label, _ = max(pairs, key=lambda x: x[1])
+
+    finding = Finding(label=top_label, band="High", severity="moderate", relevance="test")
+    engine_result = EngineResult(engine="torchxrayvision", educational=False, findings=[finding])
+
+    orchestrator._attach_heatmaps(prepared, engine_result)
+
+    heatmap = engine_result.findings[0].heatmap_png_b64
+    assert heatmap is not None
+    raw = base64.b64decode(heatmap)
+    assert raw[:8] == b"\x89PNG\r\n\x1a\n"
