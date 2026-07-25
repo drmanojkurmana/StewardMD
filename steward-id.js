@@ -65,8 +65,8 @@
       });
     }).then(function () {
       _cache.smdId = smdId;
-      try { profRef(db, uid).set({ smdId: smdId, name: name, at: ts }, { merge: true }); } catch (e) {}
-      try { if (email) dirRef(db, "e_" + emailHash(email)).set({ uid: uid, name: name, smdId: smdId, at: ts }, { merge: true }); } catch (e) {}
+      try { profRef(db, uid).set({ smdId: smdId, name: name, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
+      try { if (email) dirRef(db, "e_" + emailHash(email)).set({ uid: uid, name: name, smdId: smdId, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
       cb && cb(smdId);
     }, function () {
       if (attempt < 6) { mint(db, uid, name, email, serverTs, attempt + 1, cb); return; }
