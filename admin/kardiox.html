@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KardiQ X · Training Admin</title>
+<style>
+  :root{--p:#0F766E;--ink:#0D1B24;--mut:#5B7083;--line:#E3EAEE;--bg:#F5F8F9}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif;padding:20px;max-width:760px;margin:0 auto}
+  h1{font-size:20px;margin:0 0 4px} .sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+  label{font-size:12px;font-weight:600;color:var(--mut);display:block;margin:8px 0 4px}
+  input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+  button{background:var(--p);color:#fff;border:none;border-radius:10px;padding:10px 16px;font:600 14px/1 inherit;cursor:pointer;margin-top:10px}
+  button.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  button.g{background:#fff;color:var(--ink);border:1px solid var(--line);display:inline-flex;align-items:center;gap:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px} th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  .cost{font-size:26px;font-weight:800} .cost.ok{color:#1C7A4A} .cost.over{color:#B42332}
+  .row{display:flex;gap:16px;flex-wrap:wrap} .row>div{flex:1;min-width:120px}
+  .k{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px}
+  .badge{display:inline-block;background:#E4F2EF;color:var(--p);border-radius:999px;padding:2px 8px;font-size:11px;font-weight:600}
+  .err{color:#B42332;font-size:13px} .who{color:var(--mut);font-size:13px}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+<h1>KardiQ X · Training Admin</h1>
+<div class="sub">Per-user training-contribution quota + exemptions. Budget target: <b>$2/month</b>. Owner login only.</div>
+
+<div class="card" id="authCard">
+  <button class="g" id="signin" onclick="signIn()">Sign in with Google</button>
+  <span class="who" id="who"></span>
+  <div class="err" id="autherr"></div>
+</div>
+
+<div id="panel" hidden>
+  <div class="card">
+    <div class="row">
+      <div><label>Estimated this month</label><div id="cost" class="cost"></div></div>
+      <div><label>Budget</label><div class="cost" style="color:var(--mut)">$2.00</div></div>
+      <div><label>Total training images</label><div class="cost" style="color:var(--mut)" id="total"></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 4px">Limits</h3>
+    <label>Monthly training limit per user</label><input id="limit" type="number" min="0">
+    <label>Exempt users (unlimited) — comma-separated device/user IDs</label><input id="exempt" placeholder="d-abc123, d-def456">
+    <button onclick="save()">Save limits</button> <button class="sec" onclick="load()">Refresh</button>
+    <span class="err" id="msg2"></span>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 4px">Usage this month <span id="month" class="badge"></span></h3>
+    <table><thead><tr><th>User ID</th><th>Trained</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+</div>
+
+<script>
+firebase.initializeApp({apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",
+  projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",
+  appId:"1:911280405587:web:d09038e15e98d69dc79aa6"});
+var CFG={};
+function signIn(){
+  document.getElementById('autherr').textContent='';
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+   .catch(function(e){document.getElementById('autherr').textContent=e.message;});
+}
+firebase.auth().onAuthStateChanged(function(u){
+  if(u){ document.getElementById('who').textContent=' — '+u.email;
+    document.getElementById('signin').textContent='Signed in'; load(); }
+  else { document.getElementById('who').textContent=''; document.getElementById('panel').hidden=true; }
+});
+function tok(){ var u=firebase.auth().currentUser; return u? u.getIdToken() : Promise.resolve(null); }
+function api(path,opts){ return tok().then(function(t){ opts=opts||{}; opts.headers=Object.assign({'Authorization':'Bearer '+t},opts.headers||{}); return fetch(path,opts); }); }
+function load(){
+  api('/api/kardiox/limits').then(function(r){
+    if(r.status===401){document.getElementById('autherr').textContent='This Google account is not an authorised owner.';document.getElementById('panel').hidden=true;return null;}
+    return r.json();
+  }).then(function(d){
+    if(!d)return; CFG=d.config||{};
+    var est=d.estMonthlyCostUsd||0, over=est>(d.budgetUsd||2);
+    var c=document.getElementById('cost'); c.textContent='$'+est.toFixed(2); c.className='cost '+(over?'over':'ok');
+    document.getElementById('total').textContent=d.totalTrainingImages||0;
+    document.getElementById('limit').value=CFG.monthlyLimit;
+    document.getElementById('exempt').value=(CFG.exempt||[]).join(', ');
+    document.getElementById('month').textContent=d.month;
+    var rows=document.getElementById('rows'); rows.innerHTML=''; var ex=CFG.exempt||[], lim=CFG.monthlyLimit;
+    Object.keys(d.usage||{}).sort(function(a,b){return d.usage[b]-d.usage[a]}).forEach(function(u){
+      var n=d.usage[u], exempt=ex.indexOf(u)>=0, capped=!exempt&&n>=lim, tr=document.createElement('tr');
+      tr.innerHTML='<td class="k">'+u+'</td><td>'+n+(exempt?'':' / '+lim)+'</td><td>'+(exempt?'<span class="badge">exempt</span>':(capped?'<span style="color:#B42332">capped</span>':'ok'))+'</td>'+
+        '<td><button class="sec" style="margin:0;padding:5px 10px;font-size:12px" onclick="toggleExempt(\''+u+'\')">'+(exempt?'Un-exempt':'Exempt')+'</button></td>';
+      rows.appendChild(tr);
+    });
+    document.getElementById('panel').hidden=false;
+  }).catch(function(e){document.getElementById('autherr').textContent=e.message;});
+}
+function save(){
+  document.getElementById('msg2').textContent='';
+  api('/api/kardiox/limits',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({monthlyLimit:document.getElementById('limit').value,exempt:document.getElementById('exempt').value})})
+   .then(function(r){return r.json();})
+   .then(function(){document.getElementById('msg2').style.color='#1C7A4A';document.getElementById('msg2').textContent='Saved.';load();})
+   .catch(function(e){document.getElementById('msg2').style.color='#B42332';document.getElementById('msg2').textContent=e.message;});
+}
+function toggleExempt(u){ var ex=(CFG.exempt||[]).slice(),i=ex.indexOf(u); if(i>=0)ex.splice(i,1);else ex.push(u);
+  document.getElementById('exempt').value=ex.join(', '); save(); }
+</script>
+</body></html>
