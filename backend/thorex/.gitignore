@@ -2,3 +2,9 @@
 __pycache__/
 .pytest_cache/
 .env
+
+# On-device conversion PoC artifacts (multi-MB model binaries — regenerate
+# with scripts/convert_densenet_ondevice.py, do not commit).
+models/*.onnx
+models/*.mlpackage/
+models/last_run_summary.json
