@@ -165,7 +165,10 @@
   // slow connection, so it gets its own stage/progress rather than looking like a stalled "preprocess".
   // Every later run is served from the on-device cache (thorex-model-cache.js), so this stage completes
   // near-instantly (loadModelBytes reports progress 1.0 immediately on a cache hit — see thorex-ort.js).
-  var ONDEVICE_STAGES = ["download-model", "preprocess", "infer"];
+  // Stage keys map to rows in thorex-screens.js's STAGES list so on-device progress shows coherent
+  // rows (download -> "Downloading model", preprocess -> "Preparing for analysis", infer -> "Running
+  // AI detection") instead of falling back to the last row.
+  var ONDEVICE_STAGES = ["download-model", "digitization", "analysis"];
   function ondeviceAnalyzer() {
     return {
       kind: "ondevice",

@@ -336,6 +336,7 @@
   function renderProcessing(host, ctx) {
     ctx = ctx || {};
     var STAGES = [
+      { key: "download-model", label: "Downloading model" },
       { key: "upload", label: "Uploading image" },
       { key: "quality", label: "Checking image quality" },
       { key: "digitization", label: "Preparing for analysis" },
