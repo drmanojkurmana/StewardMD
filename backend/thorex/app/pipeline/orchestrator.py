@@ -32,7 +32,21 @@ def run(data: bytes, filename: str, entitlement: str, provider_factory) -> Analy
     engines = []
     mode = get_settings().mode
     for p in providers:
-        pairs = p.detect(prepared)  # (label, prob); may raise RuntimeError -> 503
+        try:
+            pairs = p.detect(prepared)  # (label, prob); may raise RuntimeError
+        except RuntimeError as e:
+            if p.educational:
+                # The educational engine (e.g. X-Raydar in v2beta) is an
+                # adjunct learning panel, not the clinical payload. If it
+                # fails, log and omit it rather than aborting the whole
+                # request and losing the clinical (non-educational) result.
+                # No image bytes are logged.
+                log.warning("engine_skipped_educational_failure", engine=p.name, error=str(e))
+                continue
+            # The clinical/primary engine (torchxrayvision, hf_vit, ...)
+            # failing must remain an honest failure -> propagate to a 503,
+            # never silently degrade to an empty/partial clinical result.
+            raise
         result = assemble.engine_result(p.name, p.educational, pairs)
         if mode != "mock" and p.name == _HEATMAP_ENGINE:
             _attach_heatmaps(prepared, result)
