@@ -28,3 +28,14 @@ def test_hf_unavailable_raises_runtimeerror():
         return R()
     with pytest.raises(RuntimeError):
         HFInferenceProvider(post_fn=fake_post).detect(_PREP)
+
+
+def test_hf_non_numeric_score_raises_runtimeerror():
+    def fake_post(url, data, headers, timeout):
+        class R:
+            status_code = 200
+            def json(self):
+                return [{"label": "Pneumonia", "score": "high"}]
+        return R()
+    with pytest.raises(RuntimeError):
+        HFInferenceProvider(post_fn=fake_post).detect(_PREP)

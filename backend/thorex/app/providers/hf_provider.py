@@ -73,5 +73,9 @@ class HFInferenceProvider(InferenceProvider):
             label = item["label"]
             if label in _DROP:
                 continue
-            out.append((_LABEL_MAP.get(label, label), float(item["score"])))
+            try:
+                score = float(item["score"])
+            except (TypeError, ValueError):
+                raise RuntimeError("hf unexpected payload: non-numeric score")
+            out.append((_LABEL_MAP.get(label, label), score))
         return out
