@@ -7,10 +7,20 @@
  * best-effort, defensive auto-read that a clinician can freely edit or ignore.
  *
  * De-identification: the `clinicalData` object handled throughout this file is ALWAYS a small set of
- * numeric/enum VALUES (EF %, BNP/NT-proBNP, PCT, CRP, WBC, troponin, ABG, Na/K, temp, SpO2, a short
- * free-text history) — never a name/MRN/DOB/age-as-identifier. That is enforced structurally (the
- * clinicalData model below simply has no identifier-shaped field to fill in), and thorex-llm.js's
- * safeClinicalData() clamps it again defensively before anything is ever POSTed.
+ * numeric/enum/boolean VALUES (EF %, BNP/NT-proBNP, PCT, CRP, WBC, troponin, ABG, Na/K, temp, SpO2, a
+ * short free-text history, plus the ECG-finding flags pPulmonale/rvh/rightAxisDeviation) — never a
+ * name/MRN/DOB/age-as-identifier. That is enforced structurally (the clinicalData model below simply
+ * has no identifier-shaped field to fill in), and thorex-llm.js's safeClinicalData() clamps it again
+ * defensively before anything is ever POSTed.
+ *
+ * KardioX bridge (IMPORTANT — read before touching gather() or the rule engine): KardioX is ECG
+ * INTERPRETATION, not echocardiography. Ejection fraction (EF) is an ECHO-derived measurement — KardioX
+ * will NEVER produce it, so EF is manual-entry ONLY (there is deliberately no KardioX-EF auto-read
+ * below; do not re-add one). The real, clinically-correct KardioX<->ThoreX bridge is ECG FINDINGS: P
+ * pulmonale (right atrial enlargement), RVH, and right-axis deviation are the ECG correlates of chronic
+ * right-heart strain, which — combined with hyperinflation/emphysema on the CXR — support a COPD with
+ * cor pulmonale / pulmonary hypertension read (see the rule engine below). Those three flags are
+ * manual-entry checkboxes by default and are also best-effort auto-read from KardioX in gather() below.
  *
  * Educational-engine guarantee: the rule-reasoning engine (reason(), below) reads ONLY the clinical
  * (educational:false) engine's findings — mirrors thorex-report.js's clinicalEngineOf()/
@@ -45,9 +55,16 @@
     var findings = (eng && Array.isArray(eng.findings)) ? eng.findings : [];
     return findings.map(function (f) { return str(f && f.label); }).filter(Boolean);
   }
+  // Full clinical-engine finding OBJECTS (label/band/severity), for rules that need to cite the exact
+  // finding (e.g. "Emphysema (High)") rather than just its label text. Same clinical-only source as
+  // clinicalFindingLabels above — the educational engine is never consulted here either.
+  function clinicalFindings(a) {
+    var eng = clinicalEngineOf(a);
+    return (eng && Array.isArray(eng.findings)) ? eng.findings : [];
+  }
 
   /* ══════════════════════════════ Finding-pattern matchers (pure) ═══════════════════════════════════
-   * Small, well-established radiology text patterns — same style/spirit as thorex-report.js's
+   * Small, well-established radiology/ECG text patterns — same style/spirit as thorex-report.js's
    * RECOMMENDATION_RULES regex table. */
   var RE_CONSOLIDATION = /pneumonia|consolidation|infiltrate|airspace opacity|lung opacity|air bronchogram/i;
   var RE_EDEMA_WORD = /\bo?edema\b/i;
@@ -55,6 +72,16 @@
   var RE_DIFFUSE_OPACITY = /(opacit|infiltrat|interstitial|ground.?glass|haz(e|iness)|airspace)/i;
   var RE_EFFUSION = /\beffusion\b/i;
   var RE_ARDS_WORD = /\bards\b|diffuse alveolar damage/i;
+  // CXR hyperinflation/emphysema — clinical-engine finding label only (e.g. "Emphysema"). NEVER matched
+  // against the educational X-Raydar engine's "hyperexpanded_lungs" — clinicalFindings()/
+  // clinicalFindingLabels() already restrict the source to the clinical engine, which is what makes
+  // this clinical-only by construction.
+  var RE_EMPHYSEMA = /emphysema|hyperinflat/i;
+  // ECG right-heart-strain patterns (KardioX findings[].title/detail + morphology[] text) — P pulmonale
+  // / right atrial enlargement, and RVH. Right-axis deviation is a numeric threshold on
+  // measurements.axisDeg, not a text pattern (see gather() below).
+  var RE_P_PULMONALE = /\bp[\s.-]?pulmonale\b|\bright atrial (enlargement|abnormality)\b|\brae\b/i;
+  var RE_RVH = /\brvh\b|\bright ventricular hypertroph(y|ic)\b/i;
 
   function isConsolidation(l) { return RE_CONSOLIDATION.test(l); }
   function isEdemaWord(l) { return RE_EDEMA_WORD.test(l); }
@@ -76,15 +103,61 @@
    *     state synchronously.
    *
    * Sources probed defensively but currently NO-OP (kept for forward-compatibility, not fabricated):
-   *   - window.SMD_KARDIOX_STORE (kardiox-store.js) — an async/IndexedDB-backed encrypted store with NO
-   *     synchronous accessor and NO ejection-fraction field in kardiox-models.js today; the probe below
-   *     only fires if a future version adds a synchronous `peekLastSync()` returning a plain (non-
-   *     Promise) object with an `ef`/`ejectionFraction` number.
+   *   - KardioX ECG findings (P pulmonale / RVH / right-axis deviation) — the correct KardioX<->ThoreX
+   *     bridge (see the file-header comment). window.SMD_KARDIOX_STORE (kardiox-store.js) is a fully
+   *     async/IndexedDB + WebCrypto-backed encrypted store with NO synchronous accessor at all today
+   *     (every method returns a Promise — see kardiox-store.js), and kardiox.js exposes no last-analysis
+   *     cache global either, so this is a genuine no-op on the current codebase. The probe below (see
+   *     readKardioxAnalysisSync) only fires if a future version starts exposing a synchronous ECGAnalysis
+   *     via EITHER (a) a plain cached global (e.g. window.__SMD_KARDIOX_LAST_ANALYSIS), OR (b) a future
+   *     synchronous `SMD_KARDIOX_STORE.peekLastSync()`. It never awaits a Promise and never blocks.
    *   - window.ELYTE (electrolytes.js) — exposes only pure analyze*() functions (Na/K/Ca/Mg/etc.
    *     correction math given explicit inputs), not a store of the last-entered values, so there is
    *     nothing safe to auto-read from it; ICU_STATE.labs.recent already carries Na/K for the same
    *     patient in this app, so it is not duplicated here.
+   *
+   * NOTE — no EF-from-KardioX probe here (and there never should be one): EF is echo-derived and
+   * KardioX (ECG interpretation) will never produce it. EF stays manual-entry only.
    */
+  // Best-effort, defensive read of a synchronously-available ECGAnalysis (see doc-comment above for why
+  // this is currently a no-op on the real app — kept ready for when a sync source exists). NEVER throws;
+  // returns null if nothing sync-accessible is found.
+  function readKardioxAnalysisSync() {
+    try {
+      if (typeof window === "undefined") return null;
+    } catch (e) { return null; }
+    try {
+      var direct = window.__SMD_KARDIOX_LAST_ANALYSIS;
+      if (direct && typeof direct === "object" && typeof direct.then !== "function") return direct;
+    } catch (e) {}
+    try {
+      var KX = window.SMD_KARDIOX_STORE;
+      if (KX && typeof KX.peekLastSync === "function") {
+        var last = KX.peekLastSync();
+        if (last && typeof last === "object" && typeof last.then !== "function") return last;
+      }
+    } catch (e) {}
+    return null;
+  }
+  // Scan an ECGAnalysis (kardiox-models.js shape: findings[].{title,detail}, morphology[].{label,value})
+  // for right-heart-strain text patterns. Pure text join + regex test — never throws, never fabricates
+  // (returns false when nothing matches or the shape is missing/malformed).
+  function ecgTextMatches(ecg, re) {
+    try {
+      var texts = [];
+      var findings = Array.isArray(ecg && ecg.findings) ? ecg.findings : [];
+      findings.forEach(function (f) {
+        if (f && typeof f.title === "string") texts.push(f.title);
+        if (f && typeof f.detail === "string") texts.push(f.detail);
+      });
+      var morph = Array.isArray(ecg && ecg.morphology) ? ecg.morphology : [];
+      morph.forEach(function (m) {
+        if (m && typeof m.label === "string") texts.push(m.label);
+        if (m && typeof m.value === "string") texts.push(m.value);
+      });
+      return re.test(texts.join(" | "));
+    } catch (e) { return false; }
+  }
   function gather() {
     var out = {};
     try {
@@ -119,15 +192,22 @@
       }
     } catch (e) {}
 
-    // Forward-compatible, best-effort hook — currently a no-op (see doc-comment above).
+    // Forward-compatible, best-effort hook — currently a no-op on the real app (see doc-comment above).
+    // The correct KardioX<->ThoreX bridge: ECG FINDINGS (P pulmonale / RVH / right-axis deviation), never
+    // EF. Every access below is independently try/catch-guarded; missing/malformed data just omits that
+    // one flag — the clinician's manual checkbox entry always fills the gap.
     try {
-      var KX = (typeof window !== "undefined") ? window.SMD_KARDIOX_STORE : null;
-      if (KX && typeof KX.peekLastSync === "function") {
-        var last = KX.peekLastSync();
-        if (last && typeof last === "object" && typeof last.then !== "function") {
-          var ef = isNum(last.ef) ? last.ef : (isNum(last.ejectionFraction) ? last.ejectionFraction : null);
-          if (isNum(ef)) out.ef = ef;
-        }
+      var ecg = readKardioxAnalysisSync();
+      if (ecg) {
+        try { if (ecgTextMatches(ecg, RE_P_PULMONALE)) out.pPulmonale = true; } catch (e) {}
+        try { if (ecgTextMatches(ecg, RE_RVH)) out.rvh = true; } catch (e) {}
+        try {
+          var axisDeg = ecg.measurements && isNum(ecg.measurements.axisDeg) ? ecg.measurements.axisDeg : null;
+          if (isNum(axisDeg)) {
+            out.axisDeg = axisDeg;
+            if (axisDeg > 90) out.rightAxisDeviation = true;
+          }
+        } catch (e) {}
       }
     } catch (e) {}
 
@@ -148,12 +228,17 @@
    *        -> consider cardiac (heart failure) contribution.
    *   4. Bilateral diffuse opacities + preserved EF + normal natriuretic peptide
    *        -> consider ARDS.
+   *   5. Emphysema/hyperinflation (CLINICAL engine only) + P pulmonale / RVH / right-axis deviation
+   *        -> consider COPD with cor pulmonale / pulmonary hypertension; recommend PFTs, echo (RV
+   *           function / PH), ABG. The ECG flags are the KardioX bridge — see the file-header comment;
+   *           EF is never part of this rule (EF is echo-derived, not an ECG finding).
    * If none of the above find enough supporting values, returns the mandated
    * "Insufficient correlating data — enter labs/ABG to refine." message with an empty differential.
    */
   function reason(analysis, clinicalData) {
     var cd = (clinicalData && typeof clinicalData === "object") ? clinicalData : {};
     var labels = clinicalFindingLabels(analysis);
+    var findingsFull = clinicalFindings(analysis);
 
     var candidates = {};
     function add(cond, score, text) {
@@ -167,9 +252,19 @@
     var hasBilateralDiffuse = labels.some(isBilateralDiffuse) || labels.some(isARDSWord);
     var hasEdemaPattern = hasEdemaWord || hasBilateralDiffuse;
     var hasEffusion = labels.some(isEffusion);
+    // Clinical-engine-only, per RE_EMPHYSEMA's doc-comment — the educational X-Raydar "hyperexpanded
+    // lungs" finding is structurally invisible here (clinicalFindings() only reads the clinical engine).
+    var emphysemaFinding = findingsFull.filter(function (f) { return RE_EMPHYSEMA.test(str(f && f.label)); })[0] || null;
+    var hasEmphysema = !!emphysemaFinding;
 
     var ef = num(cd.ef), bnp = num(cd.bnp), ntProBnp = num(cd.ntProBnp), pct = num(cd.pct),
         crp = num(cd.crp), wbc = num(cd.wbc), temp = num(cd.temp);
+    // ECG-finding flags — the KardioX bridge (booleans; manual-entry checkboxes, best-effort auto-read
+    // in gather()). axisDeg is an optional citation-only numeric (e.g. "axis +105°"); the boolean
+    // rightAxisDeviation flag is what actually drives the rule, so a manually-checked box with no
+    // axisDeg value still fires it.
+    var pPulmonale = !!cd.pPulmonale, rvh = !!cd.rvh, rightAxisDeviation = !!cd.rightAxisDeviation;
+    var axisDeg = num(cd.axisDeg);
 
     // Rule 1 — cardiogenic pulmonary edema vs pneumonia
     if (hasEdemaPattern) {
@@ -216,6 +311,21 @@
         add("ARDS", 2,
           "Bilateral diffuse opacities with " + cites4.join(", ") + " — preserved EF/normal natriuretic peptide argues against cardiogenic edema; consider ARDS.");
       }
+    }
+
+    // Rule 5 — COPD with cor pulmonale / pulmonary hypertension: CXR hyperinflation/emphysema (clinical
+    // engine only) + right-heart ECG changes from KardioX (P pulmonale / RVH / right-axis deviation).
+    if (hasEmphysema && (pPulmonale || rvh || rightAxisDeviation)) {
+      var cites5 = [emphysemaFinding.label + " (" + (emphysemaFinding.band || emphysemaFinding.severity) + ")"];
+      var score5 = 2;
+      if (pPulmonale) { score5 += 1; cites5.push("P pulmonale"); }
+      if (rvh) { score5 += 1; cites5.push("RVH"); }
+      if (rightAxisDeviation) {
+        score5 += 1;
+        cites5.push(isNum(axisDeg) ? ("axis " + (axisDeg > 0 ? "+" : "") + axisDeg + "°") : "right-axis deviation");
+      }
+      add("COPD with cor pulmonale / pulmonary hypertension", score5,
+        "Hyperinflation/emphysema on CXR with right-heart ECG changes (" + cites5.join(", ") + ") suggest COPD with cor pulmonale / pulmonary hypertension. Recommend pulmonary function tests (PFTs), echocardiography (assess RV function / pulmonary hypertension), and arterial blood gas (ABG).");
     }
 
     var conditions = Object.keys(candidates);
@@ -301,7 +411,10 @@
     _isEdemaWord: isEdemaWord,
     _isBilateralDiffuse: isBilateralDiffuse,
     _isEffusion: isEffusion,
-    _clinicalFindingLabels: clinicalFindingLabels
+    _clinicalFindingLabels: clinicalFindingLabels,
+    _clinicalFindings: clinicalFindings,
+    _ecgTextMatches: ecgTextMatches,
+    _readKardioxAnalysisSync: readKardioxAnalysisSync
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

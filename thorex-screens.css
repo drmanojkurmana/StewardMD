@@ -529,6 +529,11 @@
 }
 #thorexRoot .tx-corr-field textarea { font: 500 13px var(--tx-sans); resize: vertical; }
 #thorexRoot .tx-corr-field--wide { grid-column: 1 / -1; margin-top: 10px; }
+#thorexRoot .tx-corr-ecg-group { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--tx-hairline); }
+#thorexRoot .tx-corr-ecg-label { font-size: 10.5px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--tx-muted); margin-bottom: 8px; }
+#thorexRoot .tx-corr-ecg-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+#thorexRoot .tx-corr-field--bool { flex-direction: row; align-items: center; gap: 7px; font-size: 12.5px; }
+#thorexRoot .tx-corr-field--bool input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--tx-accent, currentColor); }
 #thorexRoot .tx-corr-go { width: 100%; margin-top: 14px; }
 #thorexRoot .tx-corr-result { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--tx-hairline); }
 #thorexRoot .tx-corr-diff { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }

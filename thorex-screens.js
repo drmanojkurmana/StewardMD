@@ -434,18 +434,36 @@
     { key: "hco3", label: "ABG HCO₃⁻ (mmol/L)" },
     { key: "lactate", label: "Lactate (mmol/L)" }
   ];
+  // ECG-finding flags — the KardioX bridge (see thorex-correlate.js's file-header comment): KardioX is
+  // ECG interpretation, never echo, so these (not EF) are the real KardioX<->ThoreX correlation inputs.
+  // Manual-entry checkboxes, best-effort pre-filled from CORR.gather()'s KardioX auto-read.
+  var CORR_ECG_FIELDS = [
+    { key: "pPulmonale", label: "P pulmonale" },
+    { key: "rvh", label: "RVH" },
+    { key: "rightAxisDeviation", label: "Right-axis deviation" }
+  ];
   function correlateFieldHtml(dataKey, label, val) {
     var v = (val == null) ? "" : val;
     return '<label class="tx-corr-field"><span>' + esc(label) + '</span>' +
       '<input type="number" inputmode="decimal" step="any" data-corr="' + dataKey + '" value="' + esc(v) + '" /></label>';
+  }
+  function correlateBoolFieldHtml(dataKey, label, checked) {
+    return '<label class="tx-corr-field tx-corr-field--bool">' +
+      '<input type="checkbox" data-corr-bool="' + dataKey + '"' + (checked ? " checked" : "") + ' />' +
+      '<span>' + esc(label) + '</span></label>';
   }
   function correlateFormHtml(cd) {
     cd = cd || {};
     var abg = cd.abg || {};
     var grid = CORR_FIELDS.map(function (f) { return correlateFieldHtml(f.key, f.label, cd[f.key]); }).join("") +
       CORR_ABG_FIELDS.map(function (f) { return correlateFieldHtml("abg." + f.key, f.label, abg[f.key]); }).join("");
+    var ecgGrid = CORR_ECG_FIELDS.map(function (f) { return correlateBoolFieldHtml(f.key, f.label, !!cd[f.key]); }).join("");
     return '<div class="tx-corr-form">' +
       '<div class="tx-corr-grid">' + grid + '</div>' +
+      '<div class="tx-corr-ecg-group">' +
+        '<div class="tx-corr-ecg-label">ECG findings (KardioX)</div>' +
+        '<div class="tx-corr-ecg-grid">' + ecgGrid + '</div>' +
+      '</div>' +
       '<label class="tx-corr-field tx-corr-field--wide"><span>History (brief)</span>' +
         '<textarea data-corr="history" rows="2" placeholder="e.g. acute dyspnoea, 2 days">' + esc(cd.history || "") + '</textarea></label>' +
       '<button class="tx-btn tx-btn-primary tx-corr-go" type="button" data-hook="corrGo">' + ic("join_full") + '<span>Correlate</span></button>' +
@@ -463,6 +481,11 @@
       var n = +raw; if (isFinite(n)) cd[key] = n;
     });
     if (Object.keys(abg).length) cd.abg = abg;
+    var boolInputs = host.querySelectorAll("[data-corr-bool]");
+    Array.prototype.forEach.call(boolInputs, function (el) {
+      var key = el.getAttribute("data-corr-bool");
+      if (el.checked) cd[key] = true;
+    });
     return cd;
   }
   function correlateResultHtml(res) {
