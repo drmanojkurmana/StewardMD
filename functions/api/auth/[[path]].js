@@ -120,7 +120,59 @@ async function handle(context) {
     return json({ ok: true, verified: true });
   }
 
+  if (action === "anchor-start") {
+    var r = await anchorStart(who, await request.json().catch(() => ({})), store, (o) => emailOtp(env, o));
+    return json(r, r.status || 200);
+  }
+  if (action === "anchor-verify") {
+    var r2 = await anchorVerify(who, await request.json().catch(() => ({})), store, () => mergeUserClaims(env, who.uid, { anchorVerified: true }));
+    return json(r2, r2.status || 200);
+  }
+
   return json({ ok: false, error: "not-found" }, 404);
+}
+
+// ---- anchor email (Apple "Hide My Email" proxy fix) --------------------------------------
+// Lets the caller anchor a SECOND, user-supplied real email (distinct from the Firebase auth email,
+// which may be an opaque privaterelay.appleid.com proxy). Same OTP mechanics as send-otp/verify-otp
+// above, but keyed separately (anchor:email:<uid>) and never touches the `emailVerified` claim.
+export function anchorKey(uid) { return "anchor:email:" + uid; }
+
+// deps: (who, body, store, sendCode) — sendCode(env-bound) = (o)=>emailOtp(env,o)
+export async function anchorStart(who, body, store, sendCode) {
+  var email = String((body && body.email) || "").trim().toLowerCase();
+  if (!validEmail(email)) return { ok: false, error: "bad-email", status: 400 };
+  var existing = null;
+  try { existing = await store.get(anchorKey(who.uid), "json"); } catch (e) {}
+  if (existing && existing.sentAt && (now() - existing.sentAt) < RESEND_THROTTLE) {
+    return { ok: false, error: "too-soon", retryAfter: RESEND_THROTTLE - (now() - existing.sentAt), status: 429 };
+  }
+  var code = gen6();
+  var rec = { code: code, email: email, exp: now() + TTL, tries: 0, sentAt: now() };
+  try { await store.put(anchorKey(who.uid), JSON.stringify(rec), { expirationTtl: TTL }); } catch (e) { return { ok: false, error: "store-failed", status: 500 }; }
+  var s = await sendCode({ email: email, name: who.name || "", code: code, minutes: 10 });
+  if (!s || s.ok === false) return { ok: false, error: "email-failed" };
+  return { ok: true, sent: true, ttl: TTL, to: email.replace(/^(.).*(@.*)$/, "$1***$2") };
+}
+
+export async function anchorVerify(who, body, store, setClaim) {
+  var email = String((body && body.email) || "").trim().toLowerCase();
+  var code = String((body && body.code) || "").replace(/\D/g, "");
+  if (!validEmail(email)) return { ok: false, error: "bad-email", status: 400 };
+  if (code.length !== 6) return { ok: false, error: "bad-code", status: 400 };
+  var key = anchorKey(who.uid);
+  var rec = null; try { rec = await store.get(key, "json"); } catch (e) {}
+  if (!rec) return { ok: false, error: "expired", status: 400 };
+  if (rec.exp && now() > rec.exp) { try { await store.delete(key); } catch (e) {} return { ok: false, error: "expired", status: 400 }; }
+  if ((rec.tries || 0) >= MAX_TRIES) { try { await store.delete(key); } catch (e) {} return { ok: false, error: "locked", status: 429 }; }
+  if (String(rec.email) !== email || String(rec.code) !== code) {
+    rec.tries = (rec.tries || 0) + 1;
+    try { await store.put(key, JSON.stringify(rec), { expirationTtl: Math.max(1, (rec.exp || now()) - now()) }); } catch (e) {}
+    return { ok: false, error: "mismatch", triesLeft: Math.max(0, MAX_TRIES - rec.tries), status: 400 };
+  }
+  try { await store.delete(key); } catch (e) {}
+  if (setClaim) { try { await setClaim(); } catch (e) {} }
+  return { ok: true, verified: true, email: email };
 }
 
 // ---- forgot password (unauthenticated) ---------------------------------------------------
