@@ -21,3 +21,16 @@ def test_unsupported_format_raises():
 def test_perceptual_hash_stable():
     b = _png_bytes()
     assert preprocess.perceptual_hash(b) == preprocess.perceptual_hash(b)
+
+def test_prepare_returns_prepared_image_with_redact_hook_applied():
+    from app.providers.base import PreparedImage
+
+    prepared = preprocess.prepare(
+        _png_bytes(), "x.png", redact_hook=lambda png: png + b"MARKER"
+    )
+
+    assert isinstance(prepared, PreparedImage)
+    assert prepared.array.shape == (224, 224)
+    assert prepared.array.dtype == np.float32
+    assert prepared.outbound_png.endswith(b"MARKER")
+    assert prepared.outbound_png.startswith(b"\x89PNG\r\n\x1a\n")
