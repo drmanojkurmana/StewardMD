@@ -150,6 +150,7 @@
         // enforces the one-code/one-device access server-side; this is just discovery.
         var xaActive = false; try { xaActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("fundx")); } catch (e) {}
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
+        var txActive = false; try { txActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("thorex")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
         var otaBlk = "";
         try {
@@ -163,7 +164,8 @@
         } catch (e) {}
         var xaBody = '<div class="smd-nav-note">Private beta — unlock with an access code from the StewardMD team. One code activates one device.</div>' +
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' + otaBlk;
+          '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
+          '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' + otaBlk;
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
@@ -218,6 +220,11 @@
                 if (feat === "kardiox") {
                   try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {}
                   if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardioX AI loading…");
+                  return;
+                }
+                if (feat === "thorex") {
+                  try { localStorage.setItem("smd_thorex", "1"); } catch (e) {}
+                  if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…");
                   return;
                 }
                 try { localStorage.setItem("smd_fundx", "1"); } catch (e) {}
@@ -655,6 +662,13 @@
       function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
       openKardiox();
+    },
+    thorex: function () {
+      // ThoreX AI — opened from its Clinical-Tools tile, sibling of KardiQ X above.
+      // Gated by Experimental Access like FundX/KardiQ X; opens directly if the framework isn't loaded.
+      function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
+      try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
+      openThorex();
     },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }
   };
@@ -1219,6 +1233,21 @@
                   '<div class="kx-home-head kx-tile-head"><span class="kx-home-heart">' + ric("cardiology") + '</span><span class="kx-home-pill">' + ric("bolt") + 'AI ECG</span></div>' +
                   '<svg class="kx-home-trace kx-tile-trace" viewBox="0 0 320 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 H36 l6 -2 6 4 4 -18 5 30 6 -14 H88 l6 -2 6 4 4 -18 5 30 6 -14 H160 l6 -2 6 4 4 -18 5 30 6 -14 H236 l6 -2 6 4 4 -18 5 30 6 -14 H320"/></svg>' +
                   '<span class="rnav-tile-tt">KardiQ X AI</span><span class="rnav-tile-sub">ECG interpretation</span>' +
+                '</button>'
+              ) : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // ThoreX AI — sibling of the KardiQ X Clinical-Tools tile above (chest X-ray AI).
+            // Prefer THOREX.isOn() (exact), but fall back to the flag synchronously — thorex.js is a
+            // deferred script and may not have defined window.THOREX yet when this grid is built.
+            try {
+              var ton;
+              if (window.THOREX && THOREX.isOn) ton = THOREX.isOn();
+              else { var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; ton = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); }
+              return ton ? (
+                '<button class="rnav-tile tx-tile" data-act="thorex" aria-label="Open ThoreX AI — chest X-ray interpretation">' +
+                  '<div class="tx-tile-head"><span class="tx-tile-lungs">' + ric("pulmonology") + '</span><span class="tx-tile-pill">' + ric("bolt") + 'AI CXR</span></div>' +
+                  '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
                 '</button>'
               ) : "";
             } catch (e) { return ""; }
