@@ -348,7 +348,7 @@
       return '<div class="tx-stage is-pending" data-stage-row="' + i + '">' +
         '<div class="tx-stage-head">' +
           '<span class="tx-stage-name">' + ic("radio_button_unchecked") + esc(STAGES[i].label) + "</span>" +
-          '<span class="tx-stage-val kx-data" data-stage-val>&ndash;</span>' +
+          '<span class="tx-stage-val tx-data" data-stage-val>&ndash;</span>' +
         "</div>" +
         '<div class="tx-stage-track"><div class="tx-stage-fill" data-stage-fill></div></div>' +
       "</div>";
@@ -363,7 +363,7 @@
               '<circle class="tx-conf-arc" cx="60" cy="60" r="52" data-arc></circle>' +
             "</svg>" +
             '<div class="tx-conf-center">' +
-              '<span class="tx-conf-pct kx-data" data-pct>0%</span>' +
+              '<span class="tx-conf-pct tx-data" data-pct>0%</span>' +
               '<span class="tx-conf-cap">ANALYZING</span>' +
             "</div>" +
           "</div>" +
@@ -425,10 +425,10 @@
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
       var conf = f.confPct == null ? "" :
         '<div class="tx-conf">' +
-          '<div class="tx-conf-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + f.confPct + '" aria-label="AI confidence band: ' + esc(f.confLabel) + '">' +
+          '<div class="tx-conf-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + f.confPct + '" aria-valuetext="' + esc(f.confLabel) + '" aria-label="AI confidence band: ' + esc(f.confLabel) + '">' +
             '<div class="tx-conf-fill" style="--tx-conf:' + f.confPct + '%"></div>' +
           "</div>" +
-          '<span class="tx-conf-val kx-data">' + esc(f.confLabel) + "</span>" +
+          '<span class="tx-conf-val tx-data">' + esc(f.confLabel) + "</span>" +
         "</div>" +
         '<div class="tx-conf-band">Confidence band</div>';
       var heat = f.heatmap ?
@@ -515,6 +515,9 @@
         (clinical.findings.length
           ? '<div class="tx-findings">' + clinical.findings.map(row).join("") + "</div>"
           : '<div class="tx-empty">' + ic("psychology") + '<b class="tx-empty-title">No findings to explain</b></div>') +
+        // Defense-in-depth: every clinical-content screen carries the mandatory disclaimer, not just
+        // the primary result screen — this drill-down still shows AI-derived findings.
+        '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
       "</div>";
   }
 
