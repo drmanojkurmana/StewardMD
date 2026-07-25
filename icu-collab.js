@@ -573,18 +573,31 @@
   // ambiguous chars removed (no 0/O/1/I/L). Uniqueness is guaranteed by the directory doc being
   // the source of truth: we create doctorDirectory/{smdId} inside a transaction that aborts on
   // collision, then regenerate. smdId is cached on users/{uid}/profile/self so we never re-mint.
-  var SMD_ID_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // 31 chars, no 0/O/1/I/L
+  //
+  // SINGLE SOURCE OF TRUTH: generation/hashing/minting now DELEGATE to the shared
+  // window.SMD_STEWARD_ID module (steward-id.js), which is byte-identical to icu-collab's
+  // original implementation (so existing doctorDirectory/e_<hash> entries keep resolving). Each
+  // function below keeps its ORIGINAL inline body as a fallback for the (should-never-happen)
+  // case where steward-id.js hasn't loaded yet — this rewire is strictly non-breaking for ICU.
+  var SMD_ID_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // 31 chars, no 0/O/1/I/L (fallback only)
   var _identity = { smdId: null };
+  function _sid() { return (typeof window !== "undefined" && window.SMD_STEWARD_ID) || null; }
   function randChar(alphabet) { return alphabet.charAt(Math.floor(Math.random() * alphabet.length)); }
-  function genSmdId() { var s = ""; for (var i = 0; i < 6; i++) s += randChar(SMD_ID_ALPHABET); return "SMD-" + s; }
+  function genSmdId() {
+    var s = _sid();
+    if (s) return s.genId();
+    var out = ""; for (var i = 0; i < 6; i++) out += randChar(SMD_ID_ALPHABET); return "SMD-" + out;
+  }
   // Deterministic, dependency-free hash of the lowercased email → a directory key (NEVER the raw
   // email). Two independent 32-bit accumulators (FNV-1a + djb2) concatenated in base36 to keep
   // collisions low across a clinic-sized user base without a crypto dependency.
   function emailHash(email) {
-    var s = String(email || "").trim().toLowerCase();
+    var s = _sid();
+    if (s) return s.emailHash(email);
+    var str = String(email || "").trim().toLowerCase();
     var h1 = 0x811c9dc5, h2 = 5381;
-    for (var i = 0; i < s.length; i++) {
-      var c = s.charCodeAt(i);
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charCodeAt(i);
       h1 ^= c; h1 = (h1 + ((h1 << 1) + (h1 << 4) + (h1 << 7) + (h1 << 8) + (h1 << 24))) >>> 0;   // ×16777619
       h2 = (((h2 << 5) + h2) + c) >>> 0;   // ×33 + c
     }
@@ -593,16 +606,38 @@
   function looksLikeEmail(s) { return /@/.test(String(s || "")); }
   // Normalise a typed Doctor ID: uppercase, strip spaces, allow a bare 6-char code (add SMD-).
   function normalizeId(s) {
+    var sid = _sid();
+    if (sid) return sid.normalizeId(s);
     s = String(s || "").trim().toUpperCase().replace(/\s+/g, "");
     if (s && s.indexOf("SMD-") !== 0 && /^[A-Z0-9]{6}$/.test(s)) s = "SMD-" + s;
     return s;
   }
   function myDoctorId() { return _identity.smdId || null; }
   // Ensure this account has a Doctor ID (idempotent). cb (optional) is invoked with the id (or
-  // null) regardless of outcome — never throws to the caller.
+  // null) regardless of outcome — never throws to the caller. The icuGroupsOn() guard STAYS here
+  // (at the ICU entry point) — universal minting for non-ICU users is a later phase, not this one.
+  //
+  // When the shared module is present, we still resolve the db via icu-collab's own fs() callback
+  // FIRST: SMD_STEWARD_ID.ensure() requires a SYNCHRONOUS getDb, but icu-collab's _db can be null
+  // until fs() resolves persistence — so we hand the shared ensure() a getDb closure over the
+  // already-resolved db, not a live read of _db.
   function ensureIdentity(cb) {
     if (!icuGroupsOn()) { cb && cb(null); return; }
     if (_identity.smdId) { cb && cb(_identity.smdId); return; }
+    var sid = _sid();
+    if (sid) {
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) { cb && cb(null); return; }
+        sid.ensure({
+          getDb: function () { return db; },
+          getUid: currentUid, getName: currentName, getEmail: currentEmail,
+          serverTimestamp: function () { return fieldValue().serverTimestamp(); }
+        }, function (id) { _identity.smdId = id; cb && cb(id); });
+      });
+      return;
+    }
+    // Fallback: shared module absent — original inline mint path, unchanged.
     fs(function (db) {
       var uid = currentUid();
       if (!db || !uid) { cb && cb(null); return; }
@@ -613,6 +648,8 @@
       }, function () { mintIdentity(db, uid, 0, cb); });
     });
   }
+  // Inline fallback mint path — used ONLY when window.SMD_STEWARD_ID hasn't loaded. Unchanged from
+  // the original implementation.
   function mintIdentity(db, uid, attempt, cb) {
     attempt = attempt || 0;
     if (attempt > 6) { cb && cb(null); return; }
