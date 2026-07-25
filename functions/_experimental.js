@@ -95,6 +95,14 @@ export async function verifyToken(token, secret) {
   if (!timingSafeEqualStr(parts[1], expected)) return null;
   try { return JSON.parse(b64urlToStr(parts[0])); } catch (e) { return null; }
 }
+// Pure readback: pulls just the tier claim out of a signed token, reusing verifyToken (no second
+// HMAC implementation). Any failure (bad signature, missing claim, malformed token) reads as "v1".
+export async function readTokenTier(token, secret) {
+  try {
+    const payload = await verifyToken(token, secret);
+    return normalizeTier(payload && payload.t);
+  } catch (e) { return "v1"; }
+}
 
 // ---- pure: status + activation decision (the security state machine) -------------------
 // Effective status of a code doc — an unused code past its expiry reads as "expired".
@@ -145,19 +153,20 @@ export async function generateCode(env, opts, deps) {
   if (!pepper) throw Object.assign(new Error("no_pepper"), { code: "server_misconfig", status: 500 });
   const now = Date.now();
   const expiry = opts.expiry != null && opts.expiry !== "" ? +opts.expiry : null;
+  const tierNorm = normalizeTier(opts.tier);
   for (let attempt = 0; attempt < 5; attempt++) {
     const code = makeCode(FEATURES[feature].prefix);
     const hash = await hashCode(code, pepper);
     const doc = {
       feature, hashedCode: hash, status: "unused", createdAt: now,
       expiry: (expiry && expiry > now) ? expiry : (expiry ? expiry : null),
-      notes: clip(opts.notes, 300),
+      notes: clip(opts.notes, 300), tier: tierNorm,
       activatedAt: null, activatedByUID: null, activatedDeviceId: null,
       activatedDeviceModel: null, activatedPlatform: null, activationId: null, revokedAt: null,
     };
     try {
       await fs.fsCommit(env, [FS.wCreate(env, CODES + "/" + hash, doc)]);
-      return { ok: true, code, id: hash.slice(0, 12), feature, expiry: doc.expiry, createdAt: now };
+      return { ok: true, code, id: hash.slice(0, 12), feature, expiry: doc.expiry, createdAt: now, tier: tierNorm };
     } catch (e) {
       if (e && e.code === "precondition") continue;   // ~impossible hash collision — retry
       throw e;
@@ -182,10 +191,11 @@ export async function activate(env, req, deps) {
   const decision = decideActivation(doc && doc.fields, { feature, uid: req.uid, deviceId: req.deviceId }, now);
 
   if (decision.action === "reject") return { ok: false, error: decision.error };
-  if (decision.action === "reissue") return tokenResult(secret, feature, req, doc.fields.activationId, doc.fields, now, true);
+  if (decision.action === "reissue") return tokenResult(secret, feature, req, doc.fields.activationId, doc.fields, now, true, normalizeTier(doc.fields.tier));
 
   // action === "activate": bind atomically (code update guarded on updateTime + activation create).
   const activationId = randomId();
+  const tierNorm = normalizeTier(doc.fields.tier);
   const codePatch = {
     status: "activated", activatedAt: now, activatedByUID: req.uid,
     activatedDeviceId: req.deviceId, activatedDeviceModel: clip(req.deviceModel, 120),
@@ -194,7 +204,7 @@ export async function activate(env, req, deps) {
   const actDoc = {
     feature, uid: req.uid, deviceId: req.deviceId, platform: clip(req.platform, 20),
     deviceModel: clip(req.deviceModel, 120), hashedCode: hash, status: "active",
-    activatedAt: now, revokedAt: null,
+    activatedAt: now, revokedAt: null, tier: tierNorm,
   };
   try {
     await fs.fsCommit(env, [
@@ -206,20 +216,21 @@ export async function activate(env, req, deps) {
       // lost the race — re-read + re-decide (turns into idempotent success or "already used")
       const fresh = await fs.fsGet(env, path);
       const d2 = decideActivation(fresh && fresh.fields, { feature, uid: req.uid, deviceId: req.deviceId }, now);
-      if (d2.action === "reissue") return tokenResult(secret, feature, req, fresh.fields.activationId, fresh.fields, now, true);
+      if (d2.action === "reissue") return tokenResult(secret, feature, req, fresh.fields.activationId, fresh.fields, now, true, normalizeTier(fresh.fields.tier));
       return { ok: false, error: d2.error || "already_used" };
     }
     throw e;
   }
-  return tokenResult(secret, feature, req, activationId, actDoc, now, false);
+  return tokenResult(secret, feature, req, activationId, actDoc, now, false, tierNorm);
 }
 
-async function tokenResult(secret, feature, req, activationId, srcFields, now, reused) {
-  const token = await signToken({ f: feature, u: req.uid, d: req.deviceId, p: clip(req.platform, 20), a: activationId, t: now }, secret);
+async function tokenResult(secret, feature, req, activationId, srcFields, now, reused, tier) {
+  const tierNorm = normalizeTier(tier != null ? tier : srcFields.tier);
+  const token = await signToken({ f: feature, u: req.uid, d: req.deviceId, p: clip(req.platform, 20), a: activationId, t: tierNorm }, secret);
   return {
     ok: true, token, feature, activationId, reused: !!reused,
     deviceModel: srcFields.deviceModel || srcFields.activatedDeviceModel || "",
-    activatedAt: srcFields.activatedAt || now,
+    activatedAt: srcFields.activatedAt || now, tier: tierNorm,
   };
 }
 
@@ -238,7 +249,7 @@ export async function verify(env, req, deps) {
   const fa = act.fields;
   if (fa.status !== "active") return { active: false, reason: "revoked" };
   if (fa.feature !== payload.f || fa.deviceId !== payload.d || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
-  return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt };
+  return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt, tier: normalizeTier(fa.tier) };
 }
 
 // SERVER-SIDE gate for a feature's protected compute (e.g. /api/fundx). A valid HMAC token that
@@ -252,7 +263,7 @@ export async function checkActive(env, feature, token, deps) {
   if (!payload || payload.f !== feature) return { active: false, reason: "bad_token" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
   if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.deviceId !== payload.d) return { active: false, reason: "inactive" };
-  return { active: true, uid: payload.u, deviceId: payload.d };
+  return { active: true, uid: payload.u, deviceId: payload.d, tier: normalizeTier(act.fields.tier) };
 }
 
 // APP: authoritative status for a signed-in user on THIS device — restores the token after a
@@ -264,9 +275,10 @@ export async function statusFor(env, req, deps) {
   const match = rows.find((r) => r.fields.feature === req.feature && r.fields.deviceId === req.deviceId && r.fields.status === "active");
   if (!match) return { active: false };
   const secret = env.EXPERIMENTAL_TOKEN_SECRET;
+  const tierNorm = normalizeTier(match.fields.tier);
   let token = null;
-  if (secret && req.deviceId) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId, p: clip(match.fields.platform, 20), a: match.id, t: Date.now() }, secret);
-  return { active: true, token, feature: req.feature, deviceModel: match.fields.deviceModel, activatedAt: match.fields.activatedAt };
+  if (secret && req.deviceId) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId, p: clip(match.fields.platform, 20), a: match.id, t: tierNorm }, secret);
+  return { active: true, token, feature: req.feature, deviceModel: match.fields.deviceModel, activatedAt: match.fields.activatedAt, tier: tierNorm };
 }
 
 // ADMIN: deactivate an activated device. Revokes the activation AND marks the code revoked — the
@@ -300,7 +312,7 @@ export async function revokeCode(env, opts, deps) {
 function publicCode(id, f, now) {
   return {
     id: String(id), short: String(id).slice(0, 12), feature: f.feature, status: effectiveStatus(f, now), notes: f.notes || "",
-    createdAt: f.createdAt || null, expiry: f.expiry || null,
+    createdAt: f.createdAt || null, expiry: f.expiry || null, tier: normalizeTier(f.tier),
     activatedByUID: f.activatedByUID || null, activatedDeviceModel: f.activatedDeviceModel || null,
     activatedPlatform: f.activatedPlatform || null, activatedAt: f.activatedAt || null,
     activationId: f.activationId || null,
@@ -320,7 +332,7 @@ export async function listActivations(env, opts, deps) {
   return rows.map((r) => ({
     activationId: r.id, feature: r.fields.feature, uid: r.fields.uid,
     deviceId: String(r.fields.deviceId || "").slice(0, 12) + "…", deviceModel: r.fields.deviceModel || "",
-    platform: r.fields.platform || "", status: r.fields.status || "active",
+    platform: r.fields.platform || "", status: r.fields.status || "active", tier: normalizeTier(r.fields.tier),
     activatedAt: r.fields.activatedAt || null, revokedAt: r.fields.revokedAt || null,
   })).sort((a, b) => (b.activatedAt || 0) - (a.activatedAt || 0));
 }

@@ -94,7 +94,7 @@ export async function onRequest(context) {
       if (request.method === "POST" && seg === "generate") {
         const b = await readBody(request);
         if (!X.isFeature(b.feature)) return json({ error: "bad_feature" }, 400, request);
-        const r = await X.generateCode(env, { feature: b.feature, expiry: b.expiry, notes: b.notes });
+        const r = await X.generateCode(env, { feature: b.feature, expiry: b.expiry, notes: b.notes, tier: b.tier });
         return json(r, 200, request);
       }
       if (request.method === "POST" && seg === "revoke") {
