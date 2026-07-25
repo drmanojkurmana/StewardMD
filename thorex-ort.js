@@ -55,19 +55,44 @@
     if (typeof require !== "undefined") { try { return require("fflate"); } catch (e) { return null; } }
     return null;
   }
+  function MODEL_CACHE() { return (typeof window !== "undefined" && window.SMD_THOREX_MODEL_CACHE) || (typeof require !== "undefined" ? require("./thorex-model-cache.js") : null); }
 
   function err(code, message, stage) { var e = new Error(message); e.code = code; e.stage = stage || "analysis"; return e; }
 
-  var MODEL_URL_DEFAULT = "/models/thorex_clinical.onnx";
-  var LABELS_URL_DEFAULT = "/models/thorex_clinical_labels.json";
+  // Operator-configurable model base path: for a hosted/CDN deployment the operator sets
+  // localStorage "smd_thorex_model_base" (e.g. "https://models.stewardmd.in/thorex" or a bundled
+  // native asset path); default "/models" matches the static files already vendored in this repo.
+  // Deliberately NOT wired through thorex-flags.js — that registry only supports bool/int/tri/enum
+  // values, not a free-form string/URL, so this reads localStorage directly (documented here and in
+  // thorex-flags.js) rather than forcing an ill-fitting flag type.
+  var MODEL_BASE_FALLBACK = "/models";
+  function modelBase() {
+    try {
+      if (typeof localStorage !== "undefined") {
+        var v = localStorage.getItem("smd_thorex_model_base");
+        if (v) return String(v).replace(/\/$/, "");
+      }
+    } catch (e) {}
+    return MODEL_BASE_FALLBACK;
+  }
+  function defaultModelUrl() { return modelBase() + "/thorex_clinical.onnx"; }
+  function defaultLabelsUrl() { return modelBase() + "/thorex_clinical_labels.json"; }
+  function defaultEduModelUrl() { return modelBase() + "/thorex_xraydar.onnx"; }
+  function defaultEduLabelsUrl() { return modelBase() + "/thorex_xraydar_labels.json"; }
+
+  // Static informational defaults (the value used when smd_thorex_model_base is unset). Actual URL
+  // resolution inside analyzeImage() goes through defaultModelUrl()/defaultEduModelUrl() above so an
+  // operator override takes effect without a code change.
+  var MODEL_URL_DEFAULT = MODEL_BASE_FALLBACK + "/thorex_clinical.onnx";
+  var LABELS_URL_DEFAULT = MODEL_BASE_FALLBACK + "/thorex_clinical_labels.json";
   var ORT_BASE_DEFAULT = "/vendor/onnxruntime-web";
 
   // OD-D: educational (X-Raydar) engine defaults — separate model, separate label set, separate
   // native input size (512, not 224). Configurable so a Node harness / different static host can
   // point elsewhere; sessions are cached per-URL (see getSession below) so switching URLs in tests
   // never reuses a stale session.
-  var EDU_MODEL_URL_DEFAULT = "/models/thorex_xraydar.onnx";
-  var EDU_LABELS_URL_DEFAULT = "/models/thorex_xraydar_labels.json";
+  var EDU_MODEL_URL_DEFAULT = MODEL_BASE_FALLBACK + "/thorex_xraydar.onnx";
+  var EDU_LABELS_URL_DEFAULT = MODEL_BASE_FALLBACK + "/thorex_xraydar_labels.json";
   var EDU_INPUT_SIZE = 512;
   var EDU_NORM_MEAN = 0.491, EDU_NORM_STD = 0.271; // X-Raydar's own Normalize(mean, std)
 
@@ -376,14 +401,43 @@
     });
   }
 
+  // Is there any persistent-cache infrastructure to actually use (real or test-injected)? Gated on
+  // caches/indexedDB specifically (NOT on `fetch` alone) — modern Node has a global `fetch` but no
+  // `caches`/`indexedDB`, and the existing Node test harness passes local file-system paths as
+  // `modelUrl` straight to onnxruntime-node (opts.fetch is irrelevant there). Without this gate, Node's
+  // global fetch would wrongly divert those file-path URLs into the download-cache path and break them.
+  function cacheInfraAvailable(cacheOpts) {
+    if (!cacheOpts) return false;
+    if (cacheOpts.caches) return true;
+    if (cacheOpts.indexedDB) return true;
+    try { if (typeof caches !== "undefined") return true; } catch (e) {}
+    try { if (typeof indexedDB !== "undefined") return true; } catch (e) {}
+    return false;
+  }
+
   // Per-(modelUrl, ort-instance) session cache — avoids reloading the model on every analyzeImage()
   // call, while still letting tests swap in a fresh injected `ort` without reusing a stale session.
   var _sessionCache = Object.create(null);
-  function getSession(ort, modelUrl, modelBytes) {
+  // cacheOpts: { fetch, caches, indexedDB, cacheName, onProgress } — forwarded to thorex-model-cache.js
+  // when the download-once-then-cache path is engaged (see cacheInfraAvailable above). When modelBytes
+  // is supplied directly (existing contract — a Node harness / caller already has the bytes), or when
+  // no cache infra is available, this is unchanged from before: a direct ort.InferenceSession.create(...)
+  // on the bytes or the URL.
+  function getSession(ort, modelUrl, modelBytes, cacheOpts) {
     var key = modelBytes ? ("bytes:" + modelUrl) : modelUrl;
     var entry = _sessionCache[key];
     if (entry && entry.ort === ort) return entry.promise;
-    var p = Promise.resolve(modelBytes ? ort.InferenceSession.create(modelBytes) : ort.InferenceSession.create(modelUrl));
+    var p;
+    if (modelBytes) {
+      p = Promise.resolve(ort.InferenceSession.create(modelBytes));
+    } else if (cacheInfraAvailable(cacheOpts)) {
+      var mc = MODEL_CACHE();
+      p = !mc
+        ? Promise.resolve(ort.InferenceSession.create(modelUrl))
+        : mc.loadModelBytes(modelUrl, cacheOpts).then(function (bytes) { return ort.InferenceSession.create(new Uint8Array(bytes)); });
+    } else {
+      p = Promise.resolve(ort.InferenceSession.create(modelUrl));
+    }
     _sessionCache[key] = { ort: ort, promise: p };
     return p;
   }
@@ -446,11 +500,11 @@
   // Runs the EDUCATIONAL (X-Raydar) engine off an already-decoded grayscale image. CAM is optional for
   // this engine (per spec) — only `probs` is required; a missing `cam` output simply omits the top
   // finding's heatmap rather than failing the engine.
-  function runEducationalEngine(ort, gray, eduModelUrl, opts) {
-    var eduLabelsUrl = opts.eduLabelsUrl || EDU_LABELS_URL_DEFAULT;
+  function runEducationalEngine(ort, gray, eduModelUrl, opts, cacheOpts) {
+    var eduLabelsUrl = opts.eduLabelsUrl || defaultEduLabelsUrl();
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
     return Promise.all([
-      getSession(ort, eduModelUrl, opts.eduModelBytes),
+      getSession(ort, eduModelUrl, opts.eduModelBytes, cacheOpts),
       loadLabels(fetchImpl, eduLabelsUrl, opts.eduLabels)
     ]).then(function (r) {
       var session = r[0], labelList = r[1] || [];
@@ -471,7 +525,8 @@
 
   // imageInput: ImageData-like {width,height,data}, Blob, or data-URL string.
   // opts: { ort, fetch, modelUrl, labelsUrl, labels, modelBytes, ortBase, id,
-  //         includeEducational, eduModelUrl, eduLabelsUrl, eduLabels, eduModelBytes }
+  //         includeEducational, eduModelUrl, eduLabelsUrl, eduLabels, eduModelBytes,
+  //         onProgress, caches, indexedDB, modelCacheName }
   // When opts.includeEducational is true, BOTH the clinical (torchxrayvision) and educational
   // (xraydar) engines run on-device off one grayscale decode; the returned analysis has clinical
   // first, educational second. An educational-engine failure is logged and the analysis still
@@ -479,20 +534,35 @@
   // backend/thorex/app/pipeline/orchestrator.py logs+continues on an educational-provider RuntimeError
   // but re-raises a clinical-provider failure). A CLINICAL failure (decode/session/inference) still
   // rejects the whole promise, unchanged from before.
+  //
+  // Model download/cache: when a model isn't supplied as `opts.modelBytes` and persistent-cache
+  // infrastructure is available (the Cache API and/or IndexedDB, real or injected via opts.caches/
+  // opts.indexedDB — see cacheInfraAvailable/getSession above), the model is loaded via
+  // thorex-model-cache.js's download-once-then-cache path instead of being handed straight to
+  // onnxruntime-web/-node as a URL: cached bytes are served with NO network call (fully offline after
+  // first run); a cache miss streams the download and reports 0..1 progress through opts.onProgress. A
+  // download failure rejects with a typed `model_unavailable` error — never a fabricated result.
   function analyzeImage(imageInput, opts) {
     opts = opts || {};
     var ort = opts.ort || (typeof window !== "undefined" && window.ort) || null;
-    var modelUrl = opts.modelUrl || MODEL_URL_DEFAULT;
-    var labelsUrl = opts.labelsUrl || LABELS_URL_DEFAULT;
-    var eduModelUrl = opts.eduModelUrl || EDU_MODEL_URL_DEFAULT;
+    var modelUrl = opts.modelUrl || defaultModelUrl();
+    var labelsUrl = opts.labelsUrl || defaultLabelsUrl();
+    var eduModelUrl = opts.eduModelUrl || defaultEduModelUrl();
     var ortBase = opts.ortBase || ORT_BASE_DEFAULT;
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
     var includeEducational = !!opts.includeEducational;
+    var cacheOpts = {
+      fetch: fetchImpl,
+      caches: opts.caches,
+      indexedDB: opts.indexedDB,
+      cacheName: opts.modelCacheName,
+      onProgress: opts.onProgress
+    };
 
     function loadRuntime() { return ort ? Promise.resolve(ort) : loadOrtWeb(ortBase).then(function (o) { ort = o; return o; }); }
 
     return Promise.all([
-      loadRuntime().then(function (o) { if (!o) throw err("runtime_unavailable", "ONNX Runtime not loaded", "analysis"); return getSession(o, modelUrl, opts.modelBytes); }),
+      loadRuntime().then(function (o) { if (!o) throw err("runtime_unavailable", "ONNX Runtime not loaded", "analysis"); return getSession(o, modelUrl, opts.modelBytes, cacheOpts); }),
       loadLabels(fetchImpl, labelsUrl, opts.labels),
       toGrayscale(imageInput)
     ]).then(function (r) {
@@ -522,7 +592,7 @@
 
         if (!includeEducational) return finish([clinicalEngineResult]);
 
-        return runEducationalEngine(ort, gray, eduModelUrl, opts).then(
+        return runEducationalEngine(ort, gray, eduModelUrl, opts, cacheOpts).then(
           function (edu) { return finish([clinicalEngineResult, edu.engineResult], edu.ranked); },
           function (eduErr) {
             // Educational (adjunct) engine failure must NEVER drop the clinical result — log and
@@ -561,7 +631,14 @@
       padToSquareGray: padToSquareGray,
       normalizeXraydar: normalizeXraydar,
       preprocessToTensorDataEdu: preprocessToTensorDataEdu,
-      EDU_INPUT_SIZE: EDU_INPUT_SIZE
+      EDU_INPUT_SIZE: EDU_INPUT_SIZE,
+      modelBase: modelBase,
+      defaultModelUrl: defaultModelUrl,
+      defaultLabelsUrl: defaultLabelsUrl,
+      defaultEduModelUrl: defaultEduModelUrl,
+      defaultEduLabelsUrl: defaultEduLabelsUrl,
+      cacheInfraAvailable: cacheInfraAvailable,
+      getSession: getSession
     }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

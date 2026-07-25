@@ -160,7 +160,12 @@
   function ondeviceFlag() { return flagBool("smd_thorex_ondevice"); }
   function ortEngine() { return (typeof window !== "undefined" && window.SMD_THOREX_ORT) || null; }
   function ortAvailable() { try { var o = ortEngine(); return !!(o && o.available()); } catch (e) { return false; } }
-  var ONDEVICE_STAGES = ["preprocess", "infer"];
+  // "download-model" first: on the very first run (or after a cache clear) the on-device engine has to
+  // fetch the ONNX model bytes before it can preprocess/infer — that download can take a while over a
+  // slow connection, so it gets its own stage/progress rather than looking like a stalled "preprocess".
+  // Every later run is served from the on-device cache (thorex-model-cache.js), so this stage completes
+  // near-instantly (loadModelBytes reports progress 1.0 immediately on a cache hit — see thorex-ort.js).
+  var ONDEVICE_STAGES = ["download-model", "preprocess", "infer"];
   function ondeviceAnalyzer() {
     return {
       kind: "ondevice",
@@ -177,12 +182,28 @@
           e1.code = "inference_unavailable"; e1.stage = "analysis";
           return Promise.reject(e1);
         }
-        try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[0], 40); } catch (e) {}
+        try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[0], 0); } catch (e) {}
         // v2beta -> both engines on-device (clinical + educational); v1/free -> clinical only. Never
         // self-elevate beyond what the entitlement allows (same rule the remote/mock paths follow).
-        var runOpts = { id: image && image.id, includeEducational: entitlement === "v2beta" };
+        var runOpts = {
+          id: image && image.id,
+          includeEducational: entitlement === "v2beta",
+          // Model download progress (0..1, threaded from thorex-ort.js's loadModelBytes via
+          // thorex-model-cache.js) surfaces as this same "download-model" stage — on a cache hit (every
+          // run after the first) this fires ~immediately at 1.0; on a cold cache it ticks up as bytes
+          // stream in. When no persistent-cache infrastructure is available at all, thorex-ort.js never
+          // calls this and the stage simply stays at the 0% set above until analysis completes below.
+          onProgress: function (frac) {
+            try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[0], Math.round(Math.max(0, Math.min(1, frac || 0)) * 100)); } catch (e) {}
+          }
+        };
+        // Always mark "preprocess" under way once the analyze call is in flight (unconditional, same
+        // guarantee the pre-existing code made) — the model may still be mid-download at this point on a
+        // cold cache, in which case later onProgress ticks continue to update the "download-model" stage
+        // above even though "preprocess" already shows active; both are honest signals of real work.
+        try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[1], 40); } catch (e) {}
         return Promise.resolve(o.analyzeImage(input, runOpts)).then(function (analysis) {
-          try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[1], 100); } catch (e) {}
+          try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[2], 100); } catch (e) {}
           return analysis;
         }, function (cause) {
           // Never fabricate on failure — surface a typed, honest error (same code/shape as

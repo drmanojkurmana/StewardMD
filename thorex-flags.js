@@ -7,6 +7,16 @@
  * ADDITIVE + non-breaking: defining this namespace changes nothing on its own. ThoreX is gated by
  * `smd_thorex` (DEFAULT OFF) exactly like KardioX's `smd_kardiox`; when off, thorex.js returns early and
  * the whole module is a no-op. Exposed as window.SMD_THOREX_FLAGS.
+ *
+ * NOTE — `smd_thorex_model_base` is NOT a flag in DEFS below, and deliberately so: this registry only
+ * supports bool/int/tri/enum values, and the on-device model base is a free-form string (a path, or a
+ * hosted/CDN URL like "https://models.stewardmd.in/thorex") that would not fit any of those types
+ * cleanly. Instead thorex-ort.js reads localStorage.getItem("smd_thorex_model_base") directly (default
+ * "/models" — the static files vendored in this repo) via its own modelBase()/defaultModelUrl() helpers.
+ * Set it once (e.g. `localStorage.setItem("smd_thorex_model_base", "https://models.stewardmd.in/thorex")`)
+ * to point a native app / different static host at hosted or bundled model files without a code change;
+ * thorex-ort.js then downloads each model once from that base and caches it on-device (Cache API, else
+ * IndexedDB — see thorex-model-cache.js) so every later run is fully offline.
  */
 (function () {
   "use strict";
