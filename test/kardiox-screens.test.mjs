@@ -115,5 +115,14 @@ picked.fileTypes = null;    tap("files");   await delay(5); ok("Files tile opens
 picked.fileTypes = null;    tap("pdf");     await delay(5); ok("Scan PDF tile opens a PDF picker (not gallery)", /pdf/.test(picked.fileTypes || ""));
 delete globalThis.Capacitor;
 
+// ── REGRESSION — "Why this diagnosis" back button force-closed the flow: it was wired to data-act
+// "report" → openStored(null) → nulled the analysis → empty report. It must return to the SAME report
+// with the analysis intact. (state.analysis is still the AF mock from the pipeline smoke above.)
+R.nav("report"); R.nav("why");
+host._html = "";
+if (kxClick) kxClick({ target: { closest: () => ({ getAttribute: (k) => k === "data-act" ? "kardiox-back" : null }) } });
+ok("Why-screen back returns to the report (analysis intact, not emptied)",
+   /Atrial fibrillation/i.test(host._html) && !/No analysis to show/i.test(host._html));
+
 console.log(`\nkardiox-screens: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

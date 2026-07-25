@@ -792,25 +792,29 @@
         }).join('')
       : '<div class="kx-empty">' + ic('insights') + '<span>No differentials recorded.</span></div>';
   
-    // ── ECG region (art reproduced from the design; colors via CSS classes) ──
+    // ── ECG region (stylised strip; a lead highlight is shown ONLY when a MATCHED finding maps to it,
+    // so the annotations reflect THIS diagnosis instead of a hard-coded AF example — e.g. PVCs show none). ──
+    var hlSet = {};
+    findings.forEach(function(f){ var h = hlFor(f); if (h) hlSet[h] = true; });
+    var showRR = !!hlSet.rr, showFw = !!hlSet.fwave;
     var ecg =
       '<div class="kx-ecg">' +
         '<svg class="kx-ecg-svg" viewBox="0 0 320 120" width="100%" height="118" preserveAspectRatio="none" aria-hidden="true">' +
           '<defs><pattern id="kxEcgPaper07" width="8" height="8" patternUnits="userSpaceOnUse">' +
             '<path class="kx-ecg-grid" d="M8 0H0V8"></path></pattern></defs>' +
           '<rect width="320" height="120" fill="url(#kxEcgPaper07)"></rect>' +
-          '<rect class="kx-hl kx-hl--rr" x="10" y="66" width="150" height="34" rx="6"></rect>' +
-          '<rect class="kx-hl kx-hl--fwave" x="176" y="20" width="60" height="34" rx="6"></rect>' +
+          (showRR ? '<rect class="kx-hl kx-hl--rr" x="10" y="66" width="150" height="34" rx="6"></rect>' : '') +
+          (showFw ? '<rect class="kx-hl kx-hl--fwave" x="176" y="20" width="60" height="34" rx="6"></rect>' : '') +
           '<polyline class="kx-ecg-trace" points="0,74 8,72 16,75 24,73 30,74 33,77 36,48 39,86 42,74 54,73 62,75 70,72 78,74 86,75 90,74 92,74 95,77 98,48 101,86 104,74 118,73 128,75 134,74 150,74 156,73 176,40 182,34 190,44 200,40 206,74 209,77 212,48 215,86 218,74 236,73 250,74 256,77 260,48 263,86 266,74 288,73 300,74 306,48 309,86 312,74 320,74"></polyline>' +
         '</svg>' +
-        '<span class="kx-ecg-tag kx-ecg-tag--rr kx-data" data-hl="rr">Irregular R-R</span>' +
-        '<span class="kx-ecg-tag kx-ecg-tag--fwave kx-data" data-hl="fwave">f-waves (V1)</span>' +
+        (showRR ? '<span class="kx-ecg-tag kx-ecg-tag--rr kx-data" data-hl="rr">Irregular R-R</span>' : '') +
+        (showFw ? '<span class="kx-ecg-tag kx-ecg-tag--fwave kx-data" data-hl="fwave">f-waves (V1)</span>' : '') +
       '</div>';
   
     host.innerHTML =
       '<section class="kx-why">' +
         '<header class="kx-why-head">' +
-          '<button type="button" class="kx-why-back" data-act="report" aria-label="Back to report">' + ic('arrow_back') + '</button>' +
+          '<button type="button" class="kx-why-back" data-act="kardiox-back" aria-label="Back to report">' + ic('arrow_back') + '</button>' +
           '<div class="kx-why-titles">' +
             '<h2>' + esc(title) + '</h2>' +
             '<p>Explainable AI · tap a finding</p>' +
@@ -2759,7 +2763,7 @@
         return;
       }
       case "kardiox-cam-deny": case "kardiox-retry": show("source"); return;
-      case "kardiox-open": case "report": openStored(t.getAttribute("data-id")); return;
+      case "kardiox-open": openStored(t.getAttribute("data-id")); return;
       case "kxnav:lesson": state.lessonId = t.getAttribute("data-id"); haptic("light"); go("lesson"); return;
       case "kx-clear-ecgs": clearEcgs(); return;
       case "kx-toggle-confidence": toggleConfidence(); return;
