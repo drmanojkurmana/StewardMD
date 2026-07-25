@@ -3,7 +3,8 @@
 **Date:** 2026-07-25
 **Status:** Design — awaiting user review
 **Owner:** Diwakar Kurmana
-**Access gate:** `smd_thorex` via `SMD_XACCESS` (server-authoritative Experimental Access, DEFAULT OFF) — sibling of `smd_kardiox` / `smd_fundx`. Access is **per-user, tiered** (V1 / V2 Beta), granted and revoked from the **admin console** (see §3.5).
+**Access gate:** `smd_thorex` via `SMD_XACCESS` (server-authoritative Experimental Access, DEFAULT OFF) — sibling of `smd_kardiox` / `smd_fundx`. Access is an **entitlement matrix** — Free (HF-hosted "Lite") vs Pro, and within Pro the role V1 /
+V2 Beta granted and revoked from the **admin console** (see §3.4).
 
 ---
 
@@ -38,9 +39,10 @@ No stubs are dressed up as REAL. No raw probabilities are shown to users.
 
 | Role | Model | License | Status | Notes |
 |---|---|---|---|---|
-| Primary detection (commercial default) | **TorchXRayVision** DenseNet (NIH/CheXpert/MIMIC/PadChest) | Apache-2.0 | REAL | ~18 findings; auto-downloads weights; commercially shippable. |
-| Primary detection (educational, higher coverage) | **X-Raydar** XNet38MS ensemble (299/512/1024) | **Research / non-commercial only** | REAL (educational) | 37 findings; weights on HuggingFace `dnamodel/xraydar-cv` (PyTorch `.pth.tar`). Gated behind an educational flag, DEFAULT OFF. **Must not ship in the commercial/clinical path** without a Warwick Ventures commercial license. |
-| Explainability / localization | **pytorch-grad-cam** | MIT | REAL | Grad-CAM heatmap per finding; works on both DenseNet and Inception-v3. |
+| **Free-tier** detection ("ThoreX Lite") | **Hugging Face-hosted CXR ViT** (pinned `codewithdark/vit-chest-xray`, CheXpert multi-disease) | model-card dependent (community) | REAL (free), with caveats | Called **server-side** via HF Inference API with our token. HF free serverless availability is **not guaranteed** — provider is health-gated with graceful fallback and is **swappable to self-hosted** (same small ViT on our backend) so Lite always works. Optional YOLO CXR detector = EXPERIMENTAL (free-tier boxes not dependable). |
+| Primary detection (**Pro**, commercial default) | **TorchXRayVision** DenseNet (NIH/CheXpert/MIMIC/PadChest) | Apache-2.0 | REAL | ~18 findings; auto-downloads weights; commercially shippable; runs on **our** GPU backend. |
+| Primary detection (**Pro · V2 Beta**, educational, higher coverage) | **X-Raydar** XNet38MS ensemble (299/512/1024) | **Research / non-commercial only** | REAL (educational) | 37 findings; weights on HuggingFace `dnamodel/xraydar-cv` (PyTorch `.pth.tar`). Educational use only. **Must not ship in the commercial/clinical path** without a Warwick Ventures commercial license. |
+| Explainability / localization | **pytorch-grad-cam** | MIT | REAL | Grad-CAM heatmap per finding; works on DenseNet, Inception-v3 and ViT. |
 | Preprocessing | **MONAI** transforms | Apache-2.0 | REAL | normalize / resize / histogram / orientation. |
 | Secondary / zero-shot validation | **CheXzero** (CLIP) | research repo — license unverified | EXPERIMENTAL | Only enabled after license verification; otherwise the secondary is a second TorchXRayVision dataset head. |
 
@@ -116,26 +118,33 @@ ImageInput
 
 ### 3.4 Access tiers & admin-console entitlement
 
-Access is **per-user and tiered**, carried by the server-authoritative `SMD_XACCESS` grant (a
-`thorex` FEATURES entry on `/api/experimental/*`). The operator verifies whether an approved user
-is a student/resident or a physician **out of band**, then assigns the tier from the admin console.
-No in-app role detection.
+Access is a **matrix of subscription (Free / Pro) × role (V1 / V2 Beta)**. Subscription comes from
+the existing StewardMD Pro entitlement (`pro-paywall`/`pro-badge`). Role (V1/V2 Beta) is carried by
+the server-authoritative `SMD_XACCESS` grant (a `thorex` FEATURES entry on `/api/experimental/*`)
+and only applies **within Pro** — the operator verifies student-vs-physician **out of band** and
+assigns the role from the admin console. No in-app role detection.
 
-| Tier | Engines run | What the clinician sees | Intended user |
-|---|---|---|---|
-| **V1** | TorchXRayVision only | Single **Clinical** answer | Physicians |
-| **V2 Beta** | TorchXRayVision **+** X-Raydar | **Two** panels: **Clinical** (TorchXRayVision) **and** **Learning** (X-Raydar, educational banner) | Students / residents |
+| Entitlement | Engine(s) run | Runs on | What the clinician sees | Intended user |
+|---|---|---|---|---|
+| **Free** ("ThoreX Lite") | HF-hosted CXR ViT | HF API (server-side proxy) | Single **Lite** answer + "basic screening" note | Free users |
+| **Pro · V1** | TorchXRayVision | Our GPU backend | Single **Clinical** answer | Physicians |
+| **Pro · V2 Beta** | TorchXRayVision **+** X-Raydar | Our GPU backend | **Two** panels: **Clinical** (TorchXRayVision) **+** **Learning** (X-Raydar, educational banner) | Students / residents |
+
+The request to the backend carries an **entitlement** value `"free" | "v1" | "v2beta"`, resolved
+client-side from Pro status + the `SMD_XACCESS` role, and the provider factory maps it to engines.
 
 Rules:
-- Tier is delivered in the `SMD_XACCESS.ensure("thorex")` / activation response as
-  `tier: "v1" | "v2beta"`. The client renders strictly by tier; it never self-elevates. Remote
-  revocation / down-tiering takes effect on next open (existing `SMD_XACCESS` behaviour).
+- The client renders strictly by entitlement; it never self-elevates. Pro is enforced by the
+  existing paywall; role is enforced by `SMD_XACCESS` (remote revoke / down-tier applies on next open).
+- **Free** uses only the HF-hosted engine, **consent-gated** (tri-state `smd_thorex_cloud`), image
+  EXIF-stripped, called **server-side** so users never contact HF directly. HF unavailable →
+  "ThoreX Lite temporarily unavailable", never a fabricated result.
 - **V2 Beta** always shows **both** answers side by side; the X-Raydar (Learning) panel carries the
   "educational — not for clinical use" banner and never drives clinical actions
   (stewardship auto-launch, FHIR export) — those key off the **Clinical/TorchXRayVision** result only.
 - **V1** runs and displays **only** TorchXRayVision. X-Raydar is not invoked for V1 users.
-- Default state = no access (gate closed). A user does nothing to self-unlock; the grant is
-  push-assigned by the operator.
+- Default state for the module = gate closed. A user does nothing to self-unlock; Free is granted
+  by Pro-absence + module access, Pro roles are push-assigned by the operator.
 
 **Admin console controls (new, `admin/`):** a ThoreX entitlements panel to (a) look up a user,
 (b) grant access at tier V1 or V2 Beta, (c) change tier, (d) revoke. Backed by admin-authenticated
@@ -177,8 +186,9 @@ Spec covers all four phases; **build is sequential**, each phase ends at its own
   lung-region crop. Background removal best-effort.
 - **Image-quality gate:** classify AP/PA·portable·lateral, exposure, rotation, motion,
   inspiration, cropping. If inadequate → warn + require explicit acknowledgement before proceeding.
-- **Detection + localization:** per access tier (§3.4) — **V1** runs TorchXRayVision only;
-  **V2 Beta** runs TorchXRayVision **and** X-Raydar. Grad-CAM heatmap per positive finding.
+- **Detection + localization:** per entitlement (§3.4) — **Free** runs the HF-hosted ViT (server-side,
+  consent-gated); **Pro · V1** runs TorchXRayVision only; **Pro · V2 Beta** runs TorchXRayVision **and**
+  X-Raydar. Grad-CAM heatmap per positive finding on the backend engines.
 - **AI output rules:** never show raw probabilities. Show Finding · Confidence **band**
   (High/Med/Low) · Severity · Location · Clinical relevance · Heatmap. (Bounding box = FUTURE;
   heatmap is the localization primitive in P1.)
@@ -233,6 +243,13 @@ Spec covers all four phases; **build is sequential**, each phase ends at its own
   ids/metrics); temporary inference images deleted after analysis; HIPAA-architecture / DPDP /
   GDPR-ready posture per `SECURITY_FRAMEWORK.md`. Cloud inference requires explicit consent
   (`smd_thorex_cloud`, tri-state ask-once, like `smd_kardiox_cloud`).
+- **Third-party inference (Free/HF path):** free-tier images are sent to Hugging Face's hosted API.
+  This is PHI leaving the platform, so it is: (1) **consent-gated** (`smd_thorex_cloud`, tri-state
+  ask-once); (2) **EXIF/metadata-stripped** before transmission; (3) called **server-side** from our
+  backend/Worker with our HF token so end users never contact HF and our token is never exposed;
+  (4) disclosed in-UI ("processed by a third-party AI service"). Pro engines (TorchXRayVision,
+  X-Raydar) run **only** on our backend and never transit HF. This path is **blocking-reviewed** by
+  `stewardmd-ai-reviewer` (PHI-to-providers) + `stewardmd-security-reviewer`.
 - Must pass `stewardmd-security-reviewer` (upload + data + network change).
 
 ---
