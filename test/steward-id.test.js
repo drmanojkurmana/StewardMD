@@ -98,5 +98,18 @@ function depsFor(db, uid, name, email) {
   assert.equal(profStore2.self.smdId, id2, "cached on profile");
   assert.ok(dir2[id2] && dir2[id2].uid === "uid2", "directory entry by id");
   assert.ok(dir2["e_" + S.emailHash("b@b.com")], "email index written");
+
+  // GUARD: mint must NOT clobber an e_{hash} pointer already owned by a DIFFERENT uid
+  // (one-email-one-account). Pre-seed the email index to another account, then mint.
+  S._reset();
+  const shared = "shared@hospital.org";
+  const eKey = "e_" + S.emailHash(shared);
+  const profStore3 = { self: {} };
+  const dir3 = {}; dir3[eKey] = { uid: "owner-uid", name: "Dr Owner", smdId: "SMD-OWNER1", at: "T0" };
+  const fakeDb3 = makeFakeDb(profStore3, dir3);
+  const id3 = await new Promise(r => S.ensure(depsFor(fakeDb3, "intruder-uid", "Dr Intruder", shared), r));
+  assert.ok(/^SMD-[A-Z2-9]{6}$/.test(id3), "intruder still gets its own id");
+  assert.equal(dir3[eKey].uid, "owner-uid", "email index NOT clobbered — still points to the original owner");
+  assert.ok(dir3[id3] && dir3[id3].uid === "intruder-uid", "intruder's by-id directory entry is written");
   console.log("ok");
 })();

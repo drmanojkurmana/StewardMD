@@ -666,7 +666,17 @@
       try { profRef(db, uid).set({ smdId: smdId, name: name, at: fv.serverTimestamp() }, { merge: true }).catch(function () {}); } catch (e) {}
       try {
         var email = currentEmail();
-        if (email) dirRef(db, "e_" + emailHash(email)).set({ uid: uid, name: name, smdId: smdId, at: fv.serverTimestamp() }, { merge: true }).catch(function () {});
+        if (email) {
+          // GUARDED: never overwrite an e_{hash} pointer owned by a DIFFERENT uid (one-email-one-account).
+          var eRef = dirRef(db, "e_" + emailHash(email));
+          db.runTransaction(function (tx) {
+            return tx.get(eRef).then(function (d) {
+              var cur = d && d.exists && d.data ? (d.data() || {}) : {};
+              if (cur.uid && cur.uid !== uid) return;
+              tx.set(eRef, { uid: uid, name: name, smdId: smdId, at: fv.serverTimestamp() }, { merge: true });
+            });
+          }).catch(function () {});
+        }
       } catch (e) {}
       cb && cb(smdId);
     }, function () {

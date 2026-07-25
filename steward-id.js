@@ -66,8 +66,22 @@
     }).then(function () {
       _cache.smdId = smdId;
       try { profRef(db, uid).set({ smdId: smdId, name: name, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
-      try { if (email) dirRef(db, "e_" + emailHash(email)).set({ uid: uid, name: name, smdId: smdId, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
-      cb && cb(smdId);
+      // Email-index write is GUARDED: never overwrite an e_{hash} pointer that already belongs to a
+      // DIFFERENT uid (one-email-one-account). Chained before cb so the write order is deterministic.
+      var p = Promise.resolve();
+      if (email) {
+        var eRef = dirRef(db, "e_" + emailHash(email));
+        try {
+          p = db.runTransaction(function (tx) {
+            return tx.get(eRef).then(function (d) {
+              var cur = d && d.exists && d.data ? (d.data() || {}) : {};
+              if (cur.uid && cur.uid !== uid) return;   // owned by another account — leave it alone
+              tx.set(eRef, { uid: uid, name: name, smdId: smdId, at: ts }, { merge: true });
+            });
+          }).catch(function () {});
+        } catch (e) { p = Promise.resolve(); }
+      }
+      p.then(function () { cb && cb(smdId); });
     }, function () {
       if (attempt < 6) { mint(db, uid, name, email, serverTs, attempt + 1, cb); return; }
       cb && cb(null);
