@@ -22,6 +22,20 @@ def test_perceptual_hash_stable():
     b = _png_bytes()
     assert preprocess.perceptual_hash(b) == preprocess.perceptual_hash(b)
 
+def test_perceptual_hash_returns_16_hex_for_valid_png():
+    b = _png_bytes()
+    h = preprocess.perceptual_hash(b)
+    assert len(h) == 16
+    int(h, 16)  # must be valid hex
+
+def test_perceptual_hash_unavailable_for_non_image_bytes():
+    assert preprocess.perceptual_hash(b"%PDF-1.4 not-an-image") == "unavailable"
+
+def test_pil_from_pdf_with_bad_pdf_raises_unsupported_format():
+    import pytest
+    with pytest.raises(preprocess.UnsupportedFormat):
+        preprocess._pil_from(b"not-a-real-pdf-blob", "x.pdf")
+
 def test_prepare_returns_prepared_image_with_redact_hook_applied():
     from app.providers.base import PreparedImage
 

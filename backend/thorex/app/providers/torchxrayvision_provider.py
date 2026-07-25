@@ -1,4 +1,3 @@
-import numpy as np
 import torch
 from app.providers.base import InferenceProvider
 

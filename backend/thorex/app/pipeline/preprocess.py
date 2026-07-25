@@ -1,4 +1,4 @@
-import io, hashlib
+import io
 import numpy as np
 from PIL import Image
 import torchxrayvision as xrv
@@ -21,7 +21,10 @@ def _pil_from(data: bytes, filename: str) -> Image.Image:
     ext = filename.lower().rsplit(".", 1)[-1] if "." in filename else ""
     if ext == "pdf":
         from pdf2image import convert_from_bytes
-        pages = convert_from_bytes(data, dpi=200, first_page=1, last_page=1)
+        try:
+            pages = convert_from_bytes(data, dpi=200, first_page=1, last_page=1)
+        except Exception as e:
+            raise UnsupportedFormat(str(e))
         if not pages:
             raise UnsupportedFormat("empty pdf")
         return pages[0].convert("L")
@@ -41,12 +44,15 @@ def load_image(data: bytes, filename: str) -> np.ndarray:
     return arr[0].astype("float32")
 
 def perceptual_hash(data: bytes) -> str:
-    pil = Image.open(io.BytesIO(data)).convert("L").resize((16, 16))
-    a = np.asarray(pil); bits = (a > a.mean()).flatten()
-    v = 0
-    for b in bits[:64]:
-        v = (v << 1) | int(b)
-    return f"{v:016x}"
+    try:
+        pil = Image.open(io.BytesIO(data)).convert("L").resize((16, 16))
+        a = np.asarray(pil); bits = (a > a.mean()).flatten()
+        v = 0
+        for b in bits[:64]:
+            v = (v << 1) | int(b)
+        return f"{v:016x}"
+    except Exception:
+        return "unavailable"
 
 # De-identification hook; replaced by redact.redact_burned_in_text in Task 8b's wiring.
 def _identity_redact(png: bytes) -> bytes:
