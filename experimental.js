@@ -22,7 +22,7 @@
 (function () {
   "use strict";
   var BASE = "/api/experimental";
-  var TITLES = { fundx: "FundX AI", kardiox: "KardioX AI" };
+  var TITLES = { fundx: "FundX AI", kardiox: "KardioX AI", thorex: "ThoreX AI" };
   var listeners = [];
 
   function C() { try { return window.Capacitor; } catch (e) { return null; } }
@@ -62,6 +62,12 @@
   // hand-set localStorage spoof) is NOT treated as active, and the real gate is the server anyway.
   function cachedActive(f) { var s = loadState(f); return !!(loadToken(f) && s && s.active); }
   function isActiveCached(f) { return devBypass() || cachedActive(f); }
+  // Sync best-effort tier reader from the cached state — no network round-trip. Defaults to
+  // "v1" whenever the feature isn't active or the cached state predates tiering.
+  function tierFor(f) {
+    var st = loadState(f);
+    return (st && st.active && st.tier) ? st.tier : "v1";
+  }
   function token(f) { return loadToken(f); }
   function onChange(cb) { if (typeof cb === "function") listeners.push(cb); }
   function notify(f) { listeners.forEach(function (cb) { try { cb(f, cachedActive(f)); } catch (e) {} }); }
@@ -80,7 +86,7 @@
       return post("/activate", tok, { feature: feature, code: String(code || "").trim(), deviceId: dev[0], deviceModel: dev[1], platform: dev[2] })
         .then(function (x) {
           var d = x.d || {};
-          if (x.s === 200 && d.ok) { store(feature, d.token, { active: true, deviceModel: d.deviceModel || dev[1], activatedAt: d.activatedAt || Date.now() }); return { ok: true, deviceModel: d.deviceModel || dev[1] }; }
+          if (x.s === 200 && d.ok) { store(feature, d.token, { active: true, deviceModel: d.deviceModel || dev[1], activatedAt: d.activatedAt || Date.now(), tier: (d && d.tier) || "v1" }); return { ok: true, deviceModel: d.deviceModel || dev[1] }; }
           return { ok: false, error: d.error || "invalid", message: d.message || "Invalid or expired code." };
         });
     }).catch(function () { return { ok: false, error: "network", message: "Network error — please try again." }; });
@@ -95,7 +101,7 @@
       return post("/verify", a[1], { feature: feature, deviceId: a[0][0], token: tok }).then(function (x) {
         var d = x.d || {};
         if (x.s === 200) {
-          if (d.active) { saveState(feature, { active: true, deviceModel: d.deviceModel, activatedAt: d.activatedAt }); notify(feature); return { active: true }; }
+          if (d.active) { saveState(feature, { active: true, deviceModel: d.deviceModel, activatedAt: d.activatedAt, tier: (d && d.tier) || "v1" }); notify(feature); return { active: true }; }
           clear(feature); return { active: false, reason: d.reason || "inactive" };
         }
         return { active: cachedActive(feature), reason: "unreachable", cached: true };
@@ -110,7 +116,7 @@
       if (!a[1]) return { active: false };
       return post("/status", a[1], { feature: feature, deviceId: a[0][0] }).then(function (x) {
         var d = x.d || {};
-        if (x.s === 200 && d.active && d.token) { store(feature, d.token, { active: true, deviceModel: d.deviceModel, activatedAt: d.activatedAt }); return { active: true }; }
+        if (x.s === 200 && d.active && d.token) { store(feature, d.token, { active: true, deviceModel: d.deviceModel, activatedAt: d.activatedAt, tier: (d && d.tier) || "v1" }); return { active: true }; }
         return { active: false };
       });
     }).catch(function () { return { active: false }; });
@@ -233,7 +239,7 @@
     ensure(feature).then(function (r) { if (r.active) { if (onUnlock) onUnlock(); } else openGate(feature, onUnlock); });
   }
 
-  window.SMD_XACCESS = { gate: gate, openGate: openGate, ensure: ensure, activate: activate, verify: verify, status: status, isActiveCached: isActiveCached, token: token, clear: clear, devBypass: devBypass, onChange: onChange };
+  window.SMD_XACCESS = { gate: gate, openGate: openGate, ensure: ensure, activate: activate, verify: verify, status: status, isActiveCached: isActiveCached, tierFor: tierFor, token: token, clear: clear, devBypass: devBypass, onChange: onChange };
 
   // Startup: if we hold a token, re-verify it (a remote revocation locks on launch); if we don't but
   // the user is signed in, try to restore it from the server (same account + same device after a
