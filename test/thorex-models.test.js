@@ -43,7 +43,7 @@ assert.equal(
   "disclaimer_key should map to disclaimerKey"
 );
 
-// Test 5: hasClinica lEngine
+// Test 5: hasClinicalEngine
 assert.equal(M.hasClinicalEngine(a), true, "Should have clinical engine");
 const b = M.makeAnalysis({ engines: [{ engine: "only-learning", educational: true }] });
 assert.equal(M.hasClinicalEngine(b), false, "Should not have clinical engine");
