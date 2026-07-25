@@ -517,12 +517,17 @@
     }
   }
 
-  /* why — lightweight explainability (clinical engine only; P2 deepens the clinical-correlation seam). */
+  /* why — lightweight explainability (clinical engine only; P2 deepens the clinical-correlation seam).
+     On open, asks SMD_THOREX_LLM.learnMore() for a short AI-generated explanation of the TOP clinical
+     finding (Groq -> Gemini -> deterministic offline text server-side; the client-side helper itself
+     also has its own deterministic fallback, so this box always renders something). The mandatory
+     disclaimer stays on this screen regardless of which path produced the text. */
   function renderWhy(host, ctx) {
     ctx = ctx || {};
     var a = ctx.analysis || {};
     var panels = buildPanelModels(a);
     var clinical = panels.filter(function (p) { return !p.educational; })[0] || panels[0] || { findings: [] };
+    var topFinding = clinical.findings[0] || null;
 
     function row(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
@@ -531,6 +536,12 @@
         (f.relevance ? '<div class="tx-finding-loc">' + esc(f.relevance) + "</div>" : "") +
       "</div>";
     }
+
+    var explainBox = topFinding ?
+      '<div class="tx-why-ai" data-hook="whyAi">' +
+        '<div class="tx-why-ai-label">' + ic("auto_awesome") + "<span>Educational &middot; AI-generated &middot; not a diagnosis</span></div>" +
+        '<div class="tx-why-ai-body" data-hook="whyAiBody">' + ic("progress_activity") + "<span>Loading explanation&hellip;</span></div>" +
+      "</div>" : "";
 
     host.innerHTML =
       '<div class="tx-list-head">' +
@@ -541,10 +552,27 @@
         (clinical.findings.length
           ? '<div class="tx-findings">' + clinical.findings.map(row).join("") + "</div>"
           : '<div class="tx-empty">' + ic("psychology") + '<b class="tx-empty-title">No findings to explain</b></div>') +
+        explainBox +
         // Defense-in-depth: every clinical-content screen carries the mandatory disclaimer, not just
         // the primary result screen — this drill-down still shows AI-derived findings.
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
       "</div>";
+
+    if (!topFinding) return;
+    var LLM = (typeof window !== "undefined" && window.SMD_THOREX_LLM) || null;
+    if (!LLM || !LLM.learnMore) {
+      var bodyEl = host.querySelector('[data-hook="whyAiBody"]');
+      if (bodyEl) bodyEl.innerHTML = "<span>Explanation unavailable on this device.</span>";
+      return;
+    }
+    LLM.learnMore(topFinding, a).then(function (res) {
+      var bodyEl = host.querySelector('[data-hook="whyAiBody"]');
+      if (!bodyEl) return;   // screen navigated away before the response arrived
+      bodyEl.innerHTML = "<span>" + esc((res && res.text) || "") + "</span>";
+    }).catch(function () {
+      var bodyEl = host.querySelector('[data-hook="whyAiBody"]');
+      if (bodyEl) bodyEl.innerHTML = "<span>Explanation unavailable right now.</span>";
+    });
   }
 
   /* history */
