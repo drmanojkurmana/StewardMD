@@ -1,7 +1,10 @@
 import uuid
 from app.core.config import get_settings
+from app.core.logging import get_logger
 from app.pipeline import preprocess, quality, assemble, localize
 from app.models.schemas import AnalysisResult
+
+log = get_logger("orchestrator")
 
 # Grad-CAM heatmaps are only produced for the local TorchXRayVision engine
 # (Grad-CAM needs the real model + a documented target layer). The HF/free
@@ -46,14 +49,37 @@ def _attach_heatmaps(prepared, engine_result) -> None:
     from app.providers.torchxrayvision_provider import _model
 
     model = _model()  # cached singleton; already loaded by this engine's detect()
-    target_layer = localize.default_target_layer(model)
-    pathologies = list(model.pathologies)
+    _attach_heatmaps_for_model(prepared, engine_result, model)
+
+
+def _attach_heatmaps_for_model(prepared, engine_result, model) -> None:
+    """Unit-testable core of heatmap attachment: given an already-resolved
+    model, compute a Grad-CAM heatmap for each High/Medium finding.
+
+    The heatmap is an adjunct — the findings are the clinical payload. Any
+    failure computing a heatmap (model/target-layer shape mismatch, GradCAM
+    error, encoding error, etc.) is caught, logged (no image bytes), and
+    leaves that finding's heatmap_png_b64 as None rather than propagating —
+    a Grad-CAM hiccup must never turn a valid analyze response into a 500.
+    Errors from detection/inference itself (p.detect in run()) are NOT
+    touched by this guard and still raise/503 as before.
+    """
+    try:
+        target_layer = localize.default_target_layer(model)
+        pathologies = list(model.pathologies)
+    except Exception as e:
+        log.warning("heatmap_setup_failed", error=str(e))
+        return
+
     for finding in engine_result.findings:
         if finding.band not in _HEATMAP_BANDS:
             continue
         if finding.label not in pathologies:
             continue
         class_index = pathologies.index(finding.label)
-        finding.heatmap_png_b64 = localize.heatmap_for(
-            model, prepared.array, class_index, target_layer
-        )
+        try:
+            finding.heatmap_png_b64 = localize.heatmap_for(
+                model, prepared.array, class_index, target_layer
+            )
+        except Exception as e:
+            log.warning("heatmap_attach_failed", label=finding.label, error=str(e))
