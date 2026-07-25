@@ -240,7 +240,11 @@
     if (typeof document === "undefined" || !flagOn()) return;
     try {
       var strip = (root || document).querySelector(".kx-verdict-strip, .kx-verdict");
-      if (!strip || strip.querySelector(".kx-acs-btn--add")) return;
+      // Guard on the strip element itself (the button is a SIBLING, not a child, so a
+      // querySelector INTO strip never matches — that caused an infinite re-insert loop under
+      // the MutationObserver). Marking an attribute is a childList no-op, so it won't refire us.
+      if (!strip || strip.getAttribute("data-acs-mounted")) return;
+      strip.setAttribute("data-acs-mounted", "1");
       var btn = document.createElement("button");
       btn.className = "kx-acs-btn kx-acs-btn--add";
       btn.textContent = "＋ Add clinical context (HEART / TIMI)";
