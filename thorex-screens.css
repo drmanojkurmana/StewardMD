@@ -474,14 +474,47 @@
 #thorexRoot .tx-why-link-txt b { display: block; font-size: 14px; }
 #thorexRoot .tx-why-link-sub { display: block; font-size: 11.5px; font-weight: 500; opacity: .9; }
 
-/* Action row (Save case / Export / Share). MUST be omitted in markup for a .tx-panel--learning —
+/* Action row (Save case / Copy / Export). MUST be omitted in markup for a .tx-panel--learning —
    the Learning engine drives no clinical action (§3.4); this rule exists only as a defensive
-   fallback, never rely on it to hide actions that shouldn't have been rendered at all. */
-#thorexRoot .tx-actions { display: flex; gap: 10px; margin-top: 16px; }
-#thorexRoot .tx-actions .tx-btn { flex: 1; }
+   fallback, never rely on it to hide actions that shouldn't have been rendered at all. Wraps onto a
+   second row rather than squeezing three buttons illegibly narrow on small phones. */
+#thorexRoot .tx-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+#thorexRoot .tx-actions .tx-btn { flex: 1 1 100px; min-width: 100px; padding: 0 10px; }
 #thorexRoot .tx-actions .tx-btn .material-symbols-rounded { font-size: 19px; }
 #thorexRoot .tx-actions .tx-btn-secondary .material-symbols-rounded { color: var(--tx-primary); }
 #thorexRoot .tx-panel--learning .tx-actions { display: none; }
+
+/* ─────────────────────────── Radiology report (thorex-report.js) ────────────────────────────────
+   Additive collapsible affordance on the result screen: a toggle button + the deterministic
+   structured-report HTML (buildReport().html) rendered inert (no inline handlers) inside
+   .tx-report-wrap. Hidden by default (progressive disclosure) — the dual-panel result above already
+   carries the mandatory disclaimer, so this is opt-in detail, not a replacement. */
+#thorexRoot .tx-report-toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; margin-top: 14px;
+  padding: 12px 14px; border: 1px solid var(--tx-hairline); border-radius: var(--tx-r-ctl);
+  background: var(--tx-card); color: var(--tx-text); cursor: pointer; text-align: left;
+}
+#thorexRoot .tx-report-toggle > .material-symbols-rounded:first-child { color: var(--tx-primary); font-size: 21px; }
+#thorexRoot .tx-report-toggle-txt { flex: 1; font-weight: 700; font-size: 14px; }
+#thorexRoot .tx-report-toggle[aria-expanded="true"] > .material-symbols-rounded:last-child { transform: rotate(180deg); }
+#thorexRoot .tx-report-toggle > .material-symbols-rounded:last-child { color: var(--tx-text-2); transition: transform .2s var(--tx-ease); }
+#thorexRoot .tx-report-wrap[hidden] { display: none; }
+#thorexRoot .tx-report {
+  margin-top: 10px; padding: 16px; border: 1px solid var(--tx-hairline); border-radius: var(--tx-r);
+  background: var(--tx-card); animation: txRise .28s var(--tx-ease) both;
+}
+#thorexRoot .tx-report-title { font-size: 15px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 10px; }
+#thorexRoot .tx-report-sec { margin-top: 14px; }
+#thorexRoot .tx-report-sec:first-of-type { margin-top: 0; }
+#thorexRoot .tx-report-h { font: 700 10.5px var(--tx-sans); letter-spacing: .07em; text-transform: uppercase; color: var(--tx-text-2); margin: 0 0 4px; }
+#thorexRoot .tx-report-p { font-size: 13px; line-height: 1.5; color: var(--tx-text); margin: 0; }
+#thorexRoot .tx-report-list { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: var(--tx-text); }
+#thorexRoot .tx-report-band { font: 700 11px var(--tx-sans); color: var(--tx-primary); margin-top: 8px; }
+#thorexRoot .tx-report-band:first-child { margin-top: 0; }
+#thorexRoot .tx-report-sevtag { font: 600 11px var(--tx-mono); color: var(--tx-text-2); }
+#thorexRoot .tx-report-edu { padding-top: 12px; border-top: 1px dashed var(--tx-hairline); }
+#thorexRoot .tx-report-edu .tx-report-h { color: var(--tx-learning); }
+#thorexRoot .tx-report-disc { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--tx-hairline); font-size: 10.5px; font-weight: 500; line-height: 1.4; color: var(--tx-muted); text-align: center; }
 
 /* Mandatory safety disclaimer — every result screen, verbatim text supplied by the caller.
    Cloned from kx-disc. */

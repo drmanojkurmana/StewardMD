@@ -455,6 +455,7 @@
       var actions = p.noActions ? "" :
         '<div class="tx-actions">' +
           '<button class="tx-btn tx-btn-primary" type="button" data-act="tx-save">' + ic("bookmark") + "Save case</button>" +
+          '<button class="tx-btn tx-btn-secondary" type="button" data-act="tx-copy">' + ic("content_copy") + "Copy</button>" +
           '<button class="tx-btn tx-btn-secondary" type="button" data-act="tx-export">' + ic("picture_as_pdf") + "Export</button>" +
         "</div>";
       return '<div class="' + cls + '">' +
@@ -477,9 +478,21 @@
         '<button class="tx-result-share" type="button" data-act="tx-share" aria-label="Share result">' + ic("ios_share") + "</button>" +
       "</div>";
 
+    // Radiology report — a deterministic structured report/impression built ONLY from the clinical
+    // engine (see thorex-report.js). Additive: a collapsed-by-default affordance on the result screen
+    // that never replaces the existing dual-panel rendering above.
+    var report = buildReportSafe(a);
+    var reportSection = report ?
+      '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="false" aria-controls="txReportBody">' +
+        ic("description") + '<span class="tx-report-toggle-txt">Radiology report</span>' + ic("expand_more") +
+      "</button>" +
+      '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody" hidden>' + report.html + "</div>"
+      : "";
+
     var body =
       '<div class="tx-result-body">' +
         '<div class="tx-result-panels' + (dual ? " tx-dual" : "") + '">' + panels.map(panelHtml).join("") + "</div>" +
+        reportSection +
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
       "</div>";
 
@@ -489,6 +502,19 @@
       var v = el.style.getPropertyValue ? el.style.getPropertyValue("--tx-conf") : "";
       if (v) el.style.setProperty("--tx-conf", v);
     });
+
+    // Local (non-navigational) interaction, same pattern as renderQuality's ack checkbox: expand/
+    // collapse the report body in place. "tx-report-toggle" is intentionally NOT in the global
+    // onClick switch (screen-internal act, per the comment at the bottom of that switch).
+    var toggleBtn = host.querySelector('[data-act="tx-report-toggle"]');
+    var reportBody = host.querySelector('[data-hook="reportBody"]');
+    if (toggleBtn && reportBody) {
+      toggleBtn.addEventListener("click", function () {
+        var open = reportBody.hidden;
+        reportBody.hidden = !open;
+        toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
   }
 
   /* why — lightweight explainability (clinical engine only; P2 deepens the clinical-correlation seam). */
@@ -754,15 +780,30 @@
     Promise.resolve(P.cxrStore.deleteAll()).then(function () { toast("Local CXRs cleared."); state.analysis = null; show("settings"); }).catch(function () { toast("Couldn't clear CXRs."); });
   }
 
-  function exportReport() {
-    var a = state.analysis; if (!a) { toast("No result to export."); return; }
+  // The structured-report generator (thorex-report.js) is an optional dependency: if it hasn't
+  // loaded for some reason, every call site below degrades gracefully rather than throwing.
+  function buildReportSafe(a, opts) {
+    try { return (window.SMD_THOREX_REPORT && window.SMD_THOREX_REPORT.buildReport) ? window.SMD_THOREX_REPORT.buildReport(a, opts) : null; } catch (e) { return null; }
+  }
+
+  // Legacy per-panel HTML fallback, used only if thorex-report.js failed to load — kept so Export/
+  // Share never regress to "nothing happens" on an old cached bundle.
+  function legacyExportHtml(a) {
     var panels = buildPanelModels(a);
-    var frag = (typeof document !== "undefined") ? document.createElement("div") : null;
-    var html = "<h2>ThoreX AI &mdash; Chest X-ray Result</h2>" + panels.map(function (p) {
+    return "<h2>ThoreX AI &mdash; Chest X-ray Result</h2>" + panels.map(function (p) {
       return "<h3>" + esc(p.engine) + (p.educational ? " (educational)" : "") + "</h3><ul>" +
         p.findings.map(function (f) { return "<li>" + esc(f.label) + (f.confLabel ? " &mdash; " + esc(f.confLabel) : "") + "</li>"; }).join("") +
       "</ul>";
     }).join("") + "<p style='color:#888;font-size:12px'>" + esc(MANDATORY_DISCLAIMER) + "</p>";
+  }
+
+  // Export / Share both render the deterministic structured report (thorex-report.js) — the same
+  // content the "Radiology report" section on the result screen shows expanded.
+  function exportReport() {
+    var a = state.analysis; if (!a) { toast("No result to export."); return; }
+    var rep = buildReportSafe(a);
+    var html = rep ? rep.html : legacyExportHtml(a);
+    var frag = (typeof document !== "undefined") ? document.createElement("div") : null;
     try {
       if (frag) frag.innerHTML = html;
       var title = "ThoreX — CXR result";
@@ -771,6 +812,21 @@
       if (w) { w.document.write("<html><head><title>" + esc(title) + "</title></head><body>" + html + "</body></html>"); w.document.close(); w.focus(); w.print(); return; }
     } catch (er) {}
     toast("Export not available on this device.");
+  }
+
+  // Copy — puts the plain-text structured report (thorex-report.js `text`) on the clipboard.
+  function copyReport() {
+    var a = state.analysis; if (!a) { toast("No result to copy."); return; }
+    var rep = buildReportSafe(a);
+    var text = rep ? rep.text : "";
+    if (!text) { toast("Nothing to copy."); return; }
+    try {
+      if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { toast("Report copied."); }).catch(function () { toast("Couldn't copy report."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Copy not available on this device.");
   }
 
   // Capture a real CXR image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo)
@@ -866,6 +922,7 @@
       case "tx-qual-retake": state.analysis = null; show("source"); return;
       case "tx-retry": show("source"); return;
       case "tx-save": toast("Case saved."); return;
+      case "tx-copy": haptic("light"); copyReport(); return;
       case "tx-export": haptic("light"); exportReport(); return;
       case "tx-share": haptic("light"); exportReport(); return;
       case "tx-toggle-confidence": toggleConfidence(); return;
