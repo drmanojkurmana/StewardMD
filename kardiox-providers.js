@@ -138,7 +138,11 @@
     try {
       if (!isNative() || typeof window === "undefined" || !window.SMD_KARDIOX_NET || !window.SMD_KARDIOX_NET.remoteAnalyzer) return null;
       var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: KX_IMAGE_URL, path: "/v1/ecg/analyze-image" });
-      return { kind: "image", analyze: r.analyze };
+      // Stash the analysed image so the data-flywheel (kardiox-feedback.js) can attach it to a label.
+      return { kind: "image", analyze: function (image, onStage) {
+        try { if (image && image.data instanceof Blob) window.SMD_KARDIOX_LASTIMAGE = image.data; } catch (e) {}
+        return r.analyze(image, onStage);
+      } };
     } catch (e) { return null; }
   }
   function remoteAnalyzer() {

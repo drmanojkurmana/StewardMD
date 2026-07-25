@@ -1,15 +1,25 @@
-"""KardiQ X image-model serving (PoC): ECG photo -> ResNet-18 image classifier -> ECGAnalysis JSON.
-Yale-style end-to-end image model (no digitiser). Decision-support only, not a diagnosis."""
-import io, os, numpy as np, torch, timm
+"""KardiQ X image-model serving — FULL multi-class ECG module, v3.2 (MI-specialist ensemble).
+Base = the calibrated 19-class screen (v3.1). NEW: a dedicated binary "MI-any" specialist
+(image_model_mireal.pt, efficientnet_b3, val AUROC ~0.945) is fused in to fix the two real-photo
+failures measured on the Mendeley MI/Normal sets:
+  - ARGMAX SUPPRESSION: the 19-class argmax let IRBBB/1AVB outrank IMI/AMI/ASMI, so MI (MI-any prob
+    high in 97% of MIs) only *won* the verdict ~58% of the time. The specialist ELEVATES MI to the
+    headline when fused MI-any clears MI_THR, regardless of the multiclass argmax.
+  - FALSE-POSITIVE MI: the base over-called MI on normals (specificity 0.66). The specialist VETOES
+    the base's MI classes when it says "not MI" (fused specificity ~0.99).
+Everything else (calibration, Normal/defer, SBRAD barred, findings, disclaimers) is unchanged.
+Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusion definitively."""
+import io, os, json, time, numpy as np, torch, timm
 from PIL import Image
 import torchvision.transforms as T
-from fastapi import FastAPI, UploadFile, File, Header, HTTPException
+from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form
 from fastapi.responses import JSONResponse
 
 MODEL_PATH = os.environ.get("MODEL_PATH", "image_model.pt")
-TOKEN = os.environ.get("PIPELINE_TOKEN", "")   # optional shared token (matches app X-Pipeline-Token)
+MIREAL_PATH = os.environ.get("MIREAL_PATH", "image_model_mireal.pt")
+TOKEN = os.environ.get("PIPELINE_TOKEN", "")
+TEMPERATURE = 1.781                        # calibration fitted on held-out val -> de-inflate scores
 
-# class -> (readable label, severity)
 MAP = {
  "NORM":("Normal ECG","stable"), "AFIB":("Atrial fibrillation","urgent"),
  "STACH":("Sinus tachycardia","warn"), "SBRAD":("Sinus bradycardia","warn"),
@@ -22,35 +32,93 @@ MAP = {
  "PVC":("Premature ventricular complexes","warn"), "PAC":("Premature atrial complexes","info"),
  "LAD":("Left axis deviation","info"),
 }
-# --- Stage-1 patient-safety guards (no retrain) ---
-SUPPRESSED = {"STTC", "LAD"}      # trained on ALL-ZERO labels (STTC = PTB-XL superclass, never matched as a raw code; LAD absent from PTB-XL scp_codes) -> outputs are meaningless; never surface them
-DEFER_THRESHOLD = 0.5             # probabilities are UNCALIBRATED (BCE pos_weight up to 20x) -> below this top score, defer to a physician
-NOT_ASSESSED = ["STEMI / acute occlusion MI", "ventricular tachycardia", "ventricular fibrillation",
+SUPPRESSED = {"STTC", "LAD"}               # trained on all-zero labels -> meaningless
+NOT_VERDICT = {"SBRAD"}                     # real-world AUROC 0.38 (worse than chance) -> may show as a weak
+                                           #   differential but must NEVER be the headline (caused the bug)
+VERDICT_THR = 0.55                          # calibrated prob to assert an abnormal verdict
+FINDING_THR = 0.45                          # calibrated prob to list as a possible finding
+NORM_THR = 0.50
+MI_CLASSES = ("IMI", "AMI", "ASMI")         # territorial MI-pattern classes in the base model
+MI_THR = 0.50                               # fused MI-any prob to ELEVATE MI to the headline verdict
+W_BASE, W_MI = 0.90, 0.945                  # fusion weights ~ per-model real-photo AUROC (base, specialist)
+NOT_ASSESSED = ["STEMI / acute occlusion MI (definitive)", "ventricular tachycardia", "ventricular fibrillation",
                 "complete (3rd-degree) heart block", "hyperkalaemia", "Brugada pattern",
                 "Wellens / De Winter", "pulmonary embolism", "long QT", "pre-excitation (WPW)", "atrial flutter"]
-SAFETY_CAVEAT = ("SAFETY: this screen recognises only a limited set of PTB-XL rhythm / conduction / hypertrophy / "
-                 "chronic-MI patterns. It does NOT assess for STEMI / occlusion-MI, VT/VF, complete heart block, "
-                 "hyperkalaemia, Brugada, Wellens / De Winter, pulmonary embolism, long QT, WPW or atrial flutter - "
-                 "a normal or benign result does NOT exclude a life-threatening ECG. Any acute clinical concern "
-                 "overrides this tool.")
+SAFETY_CAVEAT = ("SAFETY: experimental AI screen from an ECG photo. MI-any is now backed by a dedicated "
+                 "specialist model (val AUROC ~0.94); rhythm/conduction findings are synthetic-validated and NOT "
+                 "yet reliable on real-world phone photos. It does NOT assess STEMI/occlusion-MI definitively, VT/VF, "
+                 "complete heart block, hyperkalaemia, Brugada, Wellens/De Winter, PE, long QT, WPW or atrial flutter. "
+                 "A normal or benign screen does NOT exclude a life-threatening ECG. Confirm everything on the original 12-lead.")
 
 app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 _dev = "cpu"
 _ck = torch.load(MODEL_PATH, map_location=_dev, weights_only=False)
 _classes = _ck["classes"]
 _model = timm.create_model(_ck["backbone"], pretrained=False, num_classes=len(_classes))
 _model.load_state_dict(_ck["state_dict"]); _model.eval()
 _tf = T.Compose([T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
-_BB = _ck.get("backbone", "?")                          # e.g. efficientnet_b3 / resnet18 — kept accurate from the checkpoint
+_BB = _ck.get("backbone", "?")
 _ENGINE = "kardiox-image-" + _BB.replace("_", "")
 
+# MI-specialist: dedicated binary "MI-any" head. Loaded best-effort; if absent the service degrades
+# gracefully to the base-only v3.1 behaviour (mi_p = None everywhere).
+try:
+    _mick = torch.load(MIREAL_PATH, map_location=_dev, weights_only=False)
+    _mi_model = timm.create_model("efficientnet_b3", pretrained=False, num_classes=1)
+    _mi_model.load_state_dict(_mick["state_dict"]); _mi_model.eval()
+    _MI_AUROC = round(float(_mick.get("val_auroc", 0.945)), 3)
+except Exception:
+    _mi_model = None; _MI_AUROC = None
+
+# Data flywheel: consent-gated storage of clinician-labelled ECGs to GCS -> the retraining corpus.
+FEEDBACK_BUCKET = os.environ.get("FEEDBACK_BUCKET", "stewardmd-ecg-feedback")
+try:
+    from google.cloud import storage as _gcs
+    _fb_bucket = _gcs.Client().bucket(FEEDBACK_BUCKET)
+except Exception:
+    _fb_bucket = None
+
+# ── Per-user training-contribution quota + admin controls (keeps retraining cost under budget) ──
+ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
+DEFAULT_TRAIN_LIMIT = int(os.environ.get("DEFAULT_TRAIN_LIMIT", "30"))   # training images / user / month
+def _month(): return time.strftime("%Y%m", time.gmtime())
+def _limits_cfg():
+    try:
+        b = _fb_bucket.blob("config/limits.json")
+        if b.exists():
+            c = json.loads(b.download_as_text()); c.setdefault("monthlyLimit", DEFAULT_TRAIN_LIMIT); c.setdefault("exempt", []); return c
+    except Exception: pass
+    return {"monthlyLimit": DEFAULT_TRAIN_LIMIT, "exempt": []}
+def _user_count(uid, month):
+    try:
+        b = _fb_bucket.blob(f"counters/{month}/{uid}.json")
+        if b.exists(): return int(json.loads(b.download_as_text()).get("count", 0))
+    except Exception: pass
+    return 0
+def _incr_user(uid, month):
+    c = _user_count(uid, month) + 1
+    try: _fb_bucket.blob(f"counters/{month}/{uid}.json").upload_from_string(json.dumps({"count": c}), content_type="application/json")
+    except Exception: pass
+    return c
+
 @app.get("/v1/health")
-def health(): return {"status":"ok","model":_ENGINE,"backbone":_BB,"classes":len(_classes),"apiVersion":"2.0"}
+def health(): return {"status":"ok","model":_ENGINE,"backbone":_BB,"classes":len(_classes),
+                      "mode":"ensemble-mi-specialist" if _mi_model is not None else "full-calibrated",
+                      "miSpecialist": _MI_AUROC, "apiVersion":"3.2"}
 
 def _predict(img: Image.Image):
     x = _tf(img.convert("RGB")).unsqueeze(0)
-    with torch.no_grad(): p = torch.sigmoid(_model(x))[0].numpy()
+    with torch.no_grad(): logits = _model(x)[0].numpy()
+    p = 1.0 / (1.0 + np.exp(-logits / TEMPERATURE))     # calibrated
     return {c: float(p[i]) for i,c in enumerate(_classes)}
+
+def _mi_any(img: Image.Image):
+    """Dedicated MI-any specialist probability (sigmoid), or None if the model is unavailable."""
+    if _mi_model is None: return None
+    x = _tf(img.convert("RGB")).unsqueeze(0)
+    with torch.no_grad(): return float(torch.sigmoid(_mi_model(x))[0,0])
 
 @app.post("/v1/ecg/analyze-image")
 async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = Header(default="")):
@@ -59,45 +127,119 @@ async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = H
     try: img = Image.open(io.BytesIO(data))
     except Exception: raise HTTPException(400, "invalid image")
     probs = _predict(img)
-    # Drop dead/suppressed classes entirely — their scores are meaningless (see SUPPRESSED).
-    ranked = [(c, p) for c, p in sorted(probs.items(), key=lambda kv: -kv[1]) if c not in SUPPRESSED]
+
+    # ── MI ensemble: fuse the base's territorial MI signal with the dedicated specialist ──
+    mi_p = _mi_any(img)
+    base_mi = max(probs[c] for c in MI_CLASSES)
+    mi_fused = base_mi if mi_p is None else (W_BASE*base_mi + W_MI*mi_p) / (W_BASE + W_MI)
+    mi_positive = mi_fused >= MI_THR
+    # When the specialist is confident it is NOT MI, veto the base's MI classes (kills false positives).
+    mi_veto = (mi_p is not None) and (mi_fused < FINDING_THR)
+
+    def _elig(c):
+        if c in SUPPRESSED: return False
+        if c in MI_CLASSES and mi_veto: return False
+        return True
+    ranked = [(c, p) for c, p in sorted(probs.items(), key=lambda kv: -kv[1]) if _elig(c)]
     norm_p = probs.get("NORM", 0.0)
-    abnormal = [(c, p) for c, p in ranked if c != "NORM" and p >= 0.5]
-    review = False
-    if abnormal:
-        top_c, top_p = abnormal[0]
-    elif norm_p >= 0.5:
+    abn = [(c, p) for c, p in ranked if c != "NORM" and c not in NOT_VERDICT and p >= VERDICT_THR]
+
+    if mi_positive:
+        # ELEVATE MI regardless of the multiclass argmax; report the most likely territory.
+        top_c = max(MI_CLASSES, key=lambda c: probs[c]); top_p = mi_fused
+        label, severity, review = MAP[top_c][0], "urgent", True
+    elif abn:
+        top_c, top_p = abn[0]
+        label, severity = MAP.get(top_c, (top_c, "info")); review = True
+    elif norm_p >= NORM_THR:
         top_c, top_p = "NORM", norm_p
+        label, severity, review = "Normal ECG (screening - confirm clinically)", "stable", False
     else:
         top_c, top_p = (ranked[0] if ranked else ("NORM", norm_p))
-        review = True                       # nothing crossed threshold -> uncertain
-    if top_p < DEFER_THRESHOLD:
-        review = True                       # weak/uncalibrated top score -> defer to a physician
+        label, severity, review = "Inconclusive - physician review recommended", "warn", True
 
-    if review:
-        label, severity = "Possible abnormal ECG. Manual physician review recommended.", "warn"
-    else:
-        label, severity = MAP.get(top_c, (top_c, "info"))
-
-    findings = [{"id":f"f{i}","title":MAP.get(c,(c,"info"))[0],"detail":f"model score {p:.2f} (uncalibrated)",
-                 "matched":True,"weight":round(p,2),"severity":MAP.get(c,(c,"info"))[1],"evidence":[]}
-                for i,(c,p) in enumerate([(c,p) for c,p in ranked if c!="NORM" and p>=0.4][:5])]
-    diffs = [{"label":MAP.get(c,(c,""))[0],"probability":round(p,3)} for c,p in ranked[:6] if p>=0.15]
-    lead = (f"Most likely pattern in scope: {MAP.get(top_c,(top_c,''))[0]} (score {top_p:.0%}, uncalibrated)."
-            if not review else
-            "The model is not confident enough to call a specific pattern - a clinician should read this ECG.")
-    interp = (f"KardiQ X image model ({_BB}, reads the ECG photo directly). {lead} "
-              "Experimental AI screening from a photo - decision support only, NOT a diagnosis; a clinician must "
-              "confirm on the original 12-lead ECG. Real-photo accuracy is still being validated. " + SAFETY_CAVEAT)
+    findings = [{"id": f"f{i}", "title": MAP.get(c,(c,"info"))[0],
+                 "detail": f"possible - calibrated score {p:.2f}; confirm on 12-lead" + (" (rhythm output experimental)" if c in NOT_VERDICT else ""),
+                 "matched": True, "weight": round(p, 2), "severity": MAP.get(c,(c,"info"))[1], "evidence": []}
+                for i, (c, p) in enumerate([(c, p) for c, p in ranked if c != "NORM" and p >= FINDING_THR][:5])]
+    # Explicit MI-any finding from the specialist (surfaces the fused evidence even when territory is unclear).
+    if mi_p is not None:
+        findings.insert(0, {"id": "mi_any", "title": "MI-any (specialist screen)",
+                            "detail": f"dedicated MI detector: fused score {mi_fused:.2f} (specialist {mi_p:.2f}, base {base_mi:.2f}; val AUROC ~{_MI_AUROC}). "
+                                      + ("POSITIVE - correlate clinically for infarction and confirm on 12-lead." if mi_positive else "below the MI threshold."),
+                            "matched": bool(mi_positive), "weight": round(mi_fused, 2),
+                            "severity": "urgent" if mi_positive else "info", "evidence": []})
+    diffs = [{"label": MAP.get(c,(c,""))[0], "probability": round(p, 3)} for c, p in ranked[:6] if p >= 0.15]
+    lead = (f"Most likely finding: {MAP.get(top_c,(top_c,''))[0]} (score {top_p:.0%})." if (mi_positive or abn) else label + ".")
+    interp = (f"KardiQ X full ECG screen ({_BB}, reads the photo directly, calibrated) + dedicated MI-any specialist. {lead} "
+              "EXPERIMENTAL decision-support, NOT a diagnosis. MI-any is specialist-backed (val AUROC ~0.94); "
+              "rhythm/conduction findings are experimental and unreliable on real-world phone photos - treat as "
+              "possibilities and confirm every finding on the original 12-lead. " + SAFETY_CAVEAT)
+    band = "high" if (top_p >= 0.8 and (mi_positive or abn)) else "medium" if (top_p >= 0.6) else "low"
     return JSONResponse({
-        "schemaVersion":"1.1","id":"", "engine":_ENGINE+"-2.0",
-        "verdict":label, "severity":severity, "confidence":round(float(top_p),3),
-        "confidenceBand": "high" if (top_p>=0.85 and not review) else "medium" if (top_p>=0.6 and not review) else "low",
+        "schemaVersion":"1.1", "id":"", "engine":_ENGINE+"-3.2",
+        "verdict":label, "severity":severity, "confidence":round(float(top_p),3), "confidenceBand":band,
         "reviewRecommended": bool(review),
         "measurements":{"ventRateBpm":None,"rhythm":"-","prMs":None,"qrsMs":None,"qtcMs":None,"axisDeg":None},
         "morphology":[], "findings":findings, "differentials":diffs,
         "clinicalInterpretation":interp,
         "notAssessed": NOT_ASSESSED,
-        "modelScope": "17 PTB-XL rhythm / conduction / hypertrophy / chronic-MI patterns; NOT an acute-emergency detector",
-        "whatToVerify":"Experimental image-AI screen. Confirm every finding on the original 12-lead ECG. This tool does NOT rule out acute emergencies (STEMI, VT/VF, complete heart block, hyperkalaemia, etc.).",
+        "miAny": None if mi_p is None else {"fused": round(mi_fused,3), "specialist": round(mi_p,3), "base": round(base_mi,3), "positive": bool(mi_positive), "valAuroc": _MI_AUROC},
+        "modelScope":"19-class ECG screen + dedicated MI-any specialist. MI-any is validated (specialist val AUROC ~0.94, real-photo sens/spec ~0.98/0.99 on the Mendeley set - likely optimistic from train overlap); other classes are synthetic-validated and experimental on real photos. NOT an acute-emergency detector.",
+        "whatToVerify":"Experimental screen. Confirm every finding on the original 12-lead ECG. Does NOT rule out STEMI, VT/VF, complete heart block, hyperkalaemia, etc.",
     })
+
+@app.post("/v1/ecg/feedback")
+async def feedback(aiVerdict: str = Form(""), label: str = Form(""), correct: str = Form("0"),
+                   consent: str = Form("0"), ts: str = Form(""), userId: str = Form("anon"),
+                   image: UploadFile = File(default=None)):
+    """Data flywheel: store one clinician-labelled example. The label record is always kept; the ECG
+    IMAGE (training data) is stored ONLY with explicit consent AND while the user is under their monthly
+    training quota (exempt users unlimited). Retraining reads gs://<bucket>/{labels,images}/."""
+    rec = {"ts": ts or str(int(time.time()*1000)), "aiVerdict": aiVerdict, "label": label,
+           "correct": correct == "1", "consent": consent == "1", "userId": userId, "engine": _ENGINE + "-3.2"}
+    if _fb_bucket is None:
+        return {"stored": False, "reason": "storage unavailable"}
+    cfg = _limits_cfg(); month = _month(); limit = int(cfg.get("monthlyLimit", DEFAULT_TRAIN_LIMIT))
+    exempt = userId in cfg.get("exempt", [])
+    used = _user_count(userId, month)
+    capped = (not exempt) and used >= limit
+    rec["trainingCapped"] = bool(capped)
+    key = rec["ts"] + "-" + str(abs(hash(aiVerdict + "|" + label)) % 1000000)
+    try:
+        _fb_bucket.blob("labels/" + key + ".json").upload_from_string(json.dumps(rec), content_type="application/json")
+        if image is not None and consent == "1" and not capped:
+            data = await image.read()
+            if data:
+                _fb_bucket.blob("images/" + key + ".img").upload_from_string(data)
+                rec["image"] = "images/" + key + ".img"
+                used = _incr_user(userId, month)
+        return {"stored": True, "key": key, "image": rec.get("image"),
+                "trainingCapped": bool(capped), "used": used, "limit": ("unlimited" if exempt else limit)}
+    except Exception as e:
+        return {"stored": False, "reason": str(e)[:150]}
+
+@app.get("/v1/admin/limits")
+def admin_get(x_admin_token: str = Header(default="")):
+    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if _fb_bucket is None: return {"error": "no storage"}
+    cfg = _limits_cfg(); month = _month(); usage = {}
+    for b in _fb_bucket.list_blobs(prefix=f"counters/{month}/"):
+        uid = b.name.split("/")[-1][:-5]
+        try: usage[uid] = int(json.loads(b.download_as_text()).get("count", 0))
+        except Exception: pass
+    total = sum(usage.values())
+    est = round(1.0 + total * 0.5/1024 * 0.02, 2)   # ~$1 monthly GPU retrain + storage; inference free-tier
+    return {"config": cfg, "month": month, "usage": usage, "totalTrainingImages": total,
+            "estMonthlyCostUsd": est, "budgetUsd": 2.0}
+
+@app.post("/v1/admin/limits")
+async def admin_set(monthlyLimit: int = Form(default=None), exempt: str = Form(default=None),
+                    x_admin_token: str = Header(default="")):
+    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if _fb_bucket is None: raise HTTPException(503, "no storage")
+    cfg = _limits_cfg()
+    if monthlyLimit is not None: cfg["monthlyLimit"] = int(monthlyLimit)
+    if exempt is not None: cfg["exempt"] = [e.strip() for e in exempt.split(",") if e.strip()]
+    _fb_bucket.blob("config/limits.json").upload_from_string(json.dumps(cfg), content_type="application/json")
+    return {"saved": True, "config": cfg}

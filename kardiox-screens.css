@@ -665,10 +665,16 @@
 /* Matched-criteria cards (green) */
 #kardioxRoot .kx-crit-list { display: flex; flex-direction: column; gap: 8px; }
 #kardioxRoot .kx-crit {
-  display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px;
-  padding: 12px; text-align: left; cursor: pointer;
+  display: flex; align-items: flex-start; gap: 11px; width: 100%; min-height: 44px;
+  padding: 12px 13px; text-align: left; cursor: pointer;
   border: 1px solid #B5DFC6; border-radius: var(--kx-r-ctl); background: #E7F5EC;
 }
+/* Multi-line criteria cards read cleaner top-aligned (icon + score line up with the title, not centred). */
+#kardioxRoot .kx-crit > .kx-crit-ic { margin-top: 1px; }
+#kardioxRoot .kx-crit > .kx-crit-w { margin-top: 2px; }
+/* Tabbed Criteria/Differentials views — [hidden] must beat any inherited display. */
+#kardioxRoot .kx-why-view[hidden] { display: none; }
+#kardioxRoot .kx-why-view { animation: kxRise .24s var(--kx-ease) both; }
 #kardioxRoot .kx-crit[data-hl=""] { cursor: default; }
 #kardioxRoot .kx-crit:focus-visible { outline: 2px solid var(--kx-sev-stable); outline-offset: 2px; }
 #kardioxRoot .kx-crit-ic { flex: 0 0 auto; display: inline-flex; }

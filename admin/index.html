@@ -96,6 +96,7 @@
         <a data-p="watch">🧪 Lab-watch</a>
         <a data-p="ai">💸 AI usage</a>
         <a data-p="ota">🚀 Live updates</a>
+        <a data-p="kardiox">🫀 KardiQ X</a>
         <div class="grp">Beta</div>
         <a data-p="xa">⚗️ Experimental</a>
       </nav>
@@ -339,6 +340,31 @@
           <div class="msg" id="xaDevMsg"></div>
         </div>
       </div>
+
+      <!-- KARDIQ X TRAINING -->
+      <div class="pane" id="pane-kardiox" data-need-auth>
+        <div class="stats">
+          <div class="sc"><div class="n" id="kxCost">—</div><div class="l">Est. this month</div></div>
+          <div class="sc"><div class="n">$2.00</div><div class="l">Monthly budget</div></div>
+          <div class="sc"><div class="n" id="kxTotal">—</div><div class="l">Training images</div></div>
+          <div class="sc"><div class="n" id="kxUsers">—</div><div class="l">Contributors</div></div>
+        </div>
+        <div class="card">
+          <b>Training limits</b>
+          <div class="hint" style="margin:4px 0 12px">Per-user monthly cap on ECGs used to retrain the model — keeps cost under budget. Exempt users are unlimited.</div>
+          <label style="font:600 12px var(--f);color:var(--mut);display:block;margin-bottom:4px">Monthly limit per user</label>
+          <input id="kxLimit" type="number" min="0" style="width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:10px">
+          <label style="font:600 12px var(--f);color:var(--mut);display:block;margin-bottom:4px">Exempt users (unlimited) — comma-separated device/user IDs</label>
+          <input id="kxExempt" placeholder="d-abc123, d-def456" style="width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:10px">
+          <button id="kxSave" style="background:var(--tl);color:#fff;border:none;border-radius:9px;padding:9px 15px;font:700 13px var(--f);cursor:pointer">Save limits</button>
+          <button class="ghost" id="kxReload" style="margin-left:6px">Refresh</button>
+          <div class="msg" id="kxMsg"></div>
+        </div>
+        <div class="card">
+          <b>Usage this month <span id="kxMonth" style="color:var(--mut);font-weight:600"></span></b>
+          <div id="kxRows" style="margin-top:12px"></div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -350,8 +376,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai","ota","xa"];
-  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",ota:"Live updates (OTA)",xa:"Experimental Features"};
+  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai","ota","kardiox","xa"];
+  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",ota:"Live updates (OTA)",kardiox:"KardiQ X training",xa:"Experimental Features"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -587,7 +613,7 @@
     $("xaCodeFilters").addEventListener("click",function(e){var b=e.target.closest("[data-cf]");if(!b)return;xaCF=b.getAttribute("data-cf");Array.prototype.forEach.call($("xaCodeFilters").children,function(p){p.classList.toggle("on",p===b);});xaLoadCodes();});
   } catch(e){}
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="ota")otaLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="ota")otaLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
@@ -602,6 +628,42 @@
       '<div style="font:700 12px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 6px">By type</div>'+types+
       '<div class="hint" style="margin-top:10px">Accounts today: '+(d.accountCount||0)+'</div>';
   }).catch(function(){ say("aiMsg","err","Failed to load."); }); }
+
+  // ---- KardiQ X training (per-user quota + exemptions; proxied via /api/kardiox/limits, owner-gated) ----
+  var kxCfg={};
+  function kxLoad(){
+    say("kxMsg","","Loading…");
+    api("/api/kardiox/limits").then(function(r){
+      if(r.s===401){ say("kxMsg","err","Owner login required."); return; }
+      if(r.s!==200||!r.d){ say("kxMsg","err",(r.d&&r.d.error)||"Unavailable."); return; }
+      say("kxMsg","","");
+      var d=r.d; kxCfg=d.config||{};
+      var est=d.estMonthlyCostUsd||0, over=est>(d.budgetUsd||2), c=$("kxCost");
+      if(c){ c.textContent="$"+est.toFixed(2); c.style.color=over?"#B42332":"#1C7A4A"; }
+      $("kxTotal").textContent=d.totalTrainingImages||0;
+      var usage=d.usage||{}; $("kxUsers").textContent=Object.keys(usage).length;
+      $("kxLimit").value=kxCfg.monthlyLimit; $("kxExempt").value=(kxCfg.exempt||[]).join(", ");
+      $("kxMonth").textContent=d.month?("· "+d.month):"";
+      var ex=kxCfg.exempt||[], lim=kxCfg.monthlyLimit;
+      $("kxRows").innerHTML=Object.keys(usage).sort(function(a,b){return usage[b]-usage[a];}).map(function(u){
+        var n=usage[u], exempt=ex.indexOf(u)>=0, capped=!exempt&&n>=lim;
+        return '<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)">'+
+          '<span style="flex:1;font:12px ui-monospace,monospace">'+esc(u)+'</span>'+
+          '<span style="color:var(--mut)">'+n+(exempt?'':' / '+lim)+'</span>'+
+          '<span>'+(exempt?'<span style="color:var(--tl);font-weight:700;font-size:11px">exempt</span>':(capped?'<span style="color:#B42332;font-size:11px">capped</span>':'ok'))+'</span>'+
+          '<button class="ghost" style="padding:4px 9px;font-size:11px" data-kxex="'+esc(u)+'">'+(exempt?'Un-exempt':'Exempt')+'</button></div>';
+      }).join("")||'<div class="hint">No contributions yet this month.</div>';
+      Array.prototype.forEach.call($("kxRows").querySelectorAll("[data-kxex]"),function(b){ b.onclick=function(){ kxToggleExempt(b.getAttribute("data-kxex")); }; });
+    }).catch(function(){ say("kxMsg","err","Failed to load."); });
+  }
+  function kxSave(){
+    say("kxMsg","","Saving…");
+    api("/api/kardiox/limits",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({monthlyLimit:$("kxLimit").value,exempt:$("kxExempt").value})})
+      .then(function(r){ if(r.s!==200){ say("kxMsg","err",r.s===401?"Not an owner.":"Save failed."); return; } say("kxMsg","ok","Saved."); kxLoad(); })
+      .catch(function(){ say("kxMsg","err","Save failed."); });
+  }
+  function kxToggleExempt(u){ var ex=(kxCfg.exempt||[]).slice(), i=ex.indexOf(u); if(i>=0)ex.splice(i,1); else ex.push(u); $("kxExempt").value=ex.join(", "); kxSave(); }
+  (function(){ var s=$("kxSave"); if(s)s.onclick=kxSave; var r=$("kxReload"); if(r)r.onclick=kxLoad; })();
 
   if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
   else { $("who").textContent="Firebase failed to load."; }

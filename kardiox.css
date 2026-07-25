@@ -221,3 +221,51 @@ html.kx-lock .ghis-ward-fab { display: none !important; }
 .kx-acs-scores { font-family: var(--kx-mono, ui-monospace, Menlo, monospace); font-size: 12px; color: var(--kx-text-2, #5B7083); margin-bottom: 8px; }
 .kx-acs-path { font-size: 13.5px; line-height: 1.5; color: var(--kx-text, #0D1B24); margin-bottom: 8px; }
 .kx-acs-disc { font-size: 11px; line-height: 1.4; color: var(--kx-muted, #8CA2B1); font-style: italic; }
+
+/* ── Data flywheel: Confirm/Correct card (smd_kardiox_feedback, default OFF) ── */
+.kx-fb { margin: 12px 0 4px; padding: 14px 16px; border-radius: var(--kx-r, 16px);
+  border: 1px solid var(--kx-hairline, #E3EAEE); background: var(--kx-surf-2, #EEF3F5);
+  font-family: var(--kx-sans, "IBM Plex Sans", system-ui, sans-serif); }
+.kx-fb-q { font-size: 13px; font-weight: 700; color: var(--kx-text, #0D1B24); }
+.kx-fb-v { font-size: 12px; color: var(--kx-text-2, #5B7083); margin: 2px 0 10px; }
+.kx-fb-row { display: flex; gap: 10px; }
+.kx-fb-btn { flex: 1; font: 600 13px var(--kx-sans, system-ui); padding: 10px; border-radius: var(--kx-r-ctl, 12px);
+  border: 1px solid var(--kx-hairline, #E3EAEE); background: var(--kx-card, #fff); color: var(--kx-text, #0D1B24); cursor: pointer; }
+.kx-fb-yes { border-color: var(--kx-sev-stable, #1C7A4A); color: var(--kx-sev-stable, #1C7A4A); }
+.kx-fb-correct { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.kx-fb-sel { flex: 1; min-width: 160px; font: 14px var(--kx-sans, system-ui); padding: 9px 10px;
+  border: 1px solid var(--kx-hairline, #E3EAEE); border-radius: var(--kx-r-ctl, 12px); background: var(--kx-card, #fff); }
+.kx-fb-submit { background: var(--kx-primary, #0F766E); border-color: var(--kx-primary, #0F766E); color: #fff; }
+.kx-fb-consent { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-size: 11.5px; line-height: 1.4; color: var(--kx-text-2, #5B7083); }
+.kx-fb-consent input { margin-top: 2px; accent-color: var(--kx-primary, #0F766E); }
+.kx-fb-done { margin-top: 8px; font-size: 12.5px; font-weight: 600; color: var(--kx-sev-stable, #1C7A4A); }
+/* Hidden-state guards: .kx-fb-row / -correct / -consent carry an explicit display:flex, which overrides
+   the [hidden] attribute's default display:none. Without these the correction <select>, the Yes/No row,
+   and the consent line all render at once — and "Not quite" appears to do nothing (the block is already
+   open). The class+attribute selector (0,2,0) beats the plain class (0,1,0), so no !important needed. */
+.kx-fb-row[hidden], .kx-fb-correct[hidden], .kx-fb-consent[hidden] { display: none; }
+/* The correction <select> was invisible in the app's dark context (no explicit colour → light inherited
+   text on a white field) and had lost its dropdown affordance. Force legible text + a native chevron +
+   44px tap targets. */
+.kx-fb-btn { min-height: 44px; }
+.kx-fb-sel { min-height: 44px; color: var(--kx-text, #0D1B24); -webkit-appearance: menulist; appearance: menulist; cursor: pointer; }
+
+/* ── Digital ECG-PDF import (smd_kardiox_pdf, default OFF) ── */
+.kx-pdf-fab { position: fixed; right: 16px; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 1400;
+  font: 600 13px var(--kx-sans, system-ui); padding: 12px 16px; border-radius: 999px; border: none;
+  background: var(--kx-primary, #0F766E); color: #fff; box-shadow: 0 6px 20px rgba(13,27,36,.28); cursor: pointer; }
+.kx-pdf-sheet { position: fixed; inset: 0; z-index: 2147483000; background: rgba(13,27,36,.45);
+  display: flex; align-items: flex-end; justify-content: center; }
+.kx-pdf-card { width: 100%; max-width: 520px; max-height: 88vh; overflow-y: auto; background: var(--kx-card, #fff);
+  color: var(--kx-text, #0D1B24); border-radius: 20px 20px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+  font-family: var(--kx-sans, system-ui); position: relative; }
+.kx-pdf-strip { height: 4px; border-radius: 4px; width: 44px; margin-bottom: 12px; }
+.kx-pdf-verdict { font-size: 19px; font-weight: 700; }
+.kx-pdf-eng { font-size: 11.5px; color: var(--kx-text-2, #5B7083); margin: 2px 0 12px; }
+.kx-pdf-meas { display: flex; flex-wrap: wrap; gap: 8px 14px; font-family: var(--kx-mono, ui-monospace, Menlo, monospace);
+  font-size: 13px; margin-bottom: 12px; }
+.kx-pdf-meas b { color: var(--kx-text-2, #5B7083); font-weight: 600; }
+.kx-pdf-find { margin: 0 0 12px; padding-left: 18px; font-size: 13.5px; line-height: 1.6; }
+.kx-pdf-interp { font-size: 12.5px; line-height: 1.5; color: var(--kx-text-2, #5B7083); margin-bottom: 14px; }
+.kx-pdf-close { width: 100%; padding: 13px; border-radius: var(--kx-r-ctl, 12px); border: 1px solid var(--kx-hairline, #E3EAEE);
+  background: var(--kx-surf-2, #EEF3F5); font: 600 15px var(--kx-sans, system-ui); cursor: pointer; }

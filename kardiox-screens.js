@@ -390,7 +390,7 @@
       timer = setInterval(function(){
         if (!alive()){ stop(); return; }
         applyStep(current + 1);
-        if (current >= STEPS.length){ stop(); if (typeof ctx.nav === 'function') ctx.nav('05'); }
+        if (current >= STEPS.length){ stop(); if (typeof ctx.nav === 'function') ctx.nav('analysis'); }
       }, 900);
     }
   
@@ -409,7 +409,7 @@
             if (!alive()) return;
             applyStep(STEPS.length);
             if (analysis && typeof ctx.setAnalysis === 'function') ctx.setAnalysis(analysis);
-            if (typeof ctx.nav === 'function') ctx.nav('05');
+            if (typeof ctx.nav === 'function') ctx.nav('analysis');
           }).catch(function(err){
             if (!alive()) return;
             var idx = (err && typeof err.stepIndex === 'number') ? err.stepIndex : current;
@@ -504,9 +504,10 @@
   function render06(host, ctx){
     ctx = ctx || {};
     var a = ctx.analysis;
-    if ((!a || !a.verdict) && typeof window !== "undefined" && window.SMD_KARDIOX_MODELS) {
-      try { a = window.SMD_KARDIOX_MODELS.makeAnalysis(window.SMD_KARDIOX_MODELS.samples.afWithRvr); } catch (e) {}
-    }
+    // NEVER fabricate a diagnosis here: with no real analysis (or one that carries no verdict), fall
+    // through to the honest "No analysis to show" empty state below. A demo reading is only ever produced
+    // by the explicit demo analyzer (smd_kardiox_demo) — never as a silent render fallback. Previously
+    // this fabricated an AF-with-RVR sample, so any verdict-less report read as "Atrial fibrillation".
   
     function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
@@ -686,7 +687,31 @@
       '</button>' : '';
   
     var noteLabel = a.physicianNote ? a.physicianNote : "Add physician note";
-  
+
+    // Clinical interpretation should read as a clinical note, NOT model plumbing. Strip the engine/model
+    // preamble ("KardiQ X full ECG screen (efficientnet_b3 …) + … specialist.") and the verbose
+    // experimental / AUROC caveats the image backend appends — the short advisory gate below carries the
+    // safety wording. Clean interpretations (mock / other analyzers) have none of these, so pass through.
+    var interpClean = String(a.clinicalInterpretation || "")
+      .replace(/^KardiQ X full ECG screen[^.]*\.\s*/i, "")
+      .replace(/\s*EXPERIMENTAL decision-support[\s\S]*$/i, "")
+      .replace(/\s*\([^)]*AUROC[^)]*\)/gi, "")
+      .replace(/\s{2,}/g, " ").trim();
+
+    // Differentials the model weighed (the same list shown in depth on the "Why" screen) — surfaced here
+    // on the report so the ranked alternatives are visible without leaving the results page.
+    var rptDiffs = (a.differentials || []).slice();
+    var rptDiffsHtml = rptDiffs.length ? rptDiffs.map(function(d, i){
+      var dp = Math.max(0, Math.min(100, Math.round((typeof d.probability === "number" ? d.probability : 0) * 100)));
+      return '<div class="kx-diff' + (i === 0 ? ' is-primary' : '') + '">' +
+               '<div class="kx-diff-top">' +
+                 '<span class="kx-diff-label">' + esc(d.label) + '</span>' +
+                 '<span class="kx-diff-pct kx-data">' + dp + '%</span>' +
+               '</div>' +
+               '<div class="kx-diff-track"><div class="kx-diff-fill" style="width:' + dp + '%"></div></div>' +
+             '</div>';
+    }).join('') : '';
+
     var body =
       '<div class="kx-rpt-body">' +
         hero +
@@ -694,8 +719,9 @@
         '<div class="kx-metrics">' + metricsHtml + '</div>' +
         section("show_chart", "Morphology &amp; ST") +
         '<div class="kx-morph">' + morphHtml + '</div>' +
+        (rptDiffsHtml ? section("insights", "Differentials considered") + '<div class="kx-diffs">' + rptDiffsHtml + '</div>' : '') +
         section("clinical_notes", "Clinical interpretation") +
-        '<div class="kx-interp">' + esc(a.clinicalInterpretation) + '</div>' +
+        '<div class="kx-interp">' + esc(interpClean) + '</div>' +
         '<button class="kx-why" type="button" data-act="kxnav:why">' +
           ic("psychology") +
           '<span class="kx-why-txt"><b>Why this diagnosis?</b>' +
@@ -711,7 +737,7 @@
           '<button class="kx-btn kx-btn-primary" type="button" data-act="kxnav:export">' + ic("picture_as_pdf") + 'Export</button>' +
           '<button class="kx-btn kx-btn-secondary" type="button" data-act="kxnav:compare">' + ic("compare_arrows") + 'Compare</button>' +
         '</div>' +
-        '<div class="kx-disc">' + ic("info") + 'AI decision support · not a diagnosis. Confirm clinically.</div>' +
+        '<div class="kx-disc">' + ic("info") + 'AI-generated · advisory only (beta). Not a diagnosis; confirm clinically. Not liable for any clinical decision or outcome.</div>' +
       '</div>';
   
     host.innerHTML = head + body;
@@ -791,25 +817,29 @@
         }).join('')
       : '<div class="kx-empty">' + ic('insights') + '<span>No differentials recorded.</span></div>';
   
-    // ── ECG region (art reproduced from the design; colors via CSS classes) ──
+    // ── ECG region (stylised strip; a lead highlight is shown ONLY when a MATCHED finding maps to it,
+    // so the annotations reflect THIS diagnosis instead of a hard-coded AF example — e.g. PVCs show none). ──
+    var hlSet = {};
+    findings.forEach(function(f){ var h = hlFor(f); if (h) hlSet[h] = true; });
+    var showRR = !!hlSet.rr, showFw = !!hlSet.fwave;
     var ecg =
       '<div class="kx-ecg">' +
         '<svg class="kx-ecg-svg" viewBox="0 0 320 120" width="100%" height="118" preserveAspectRatio="none" aria-hidden="true">' +
           '<defs><pattern id="kxEcgPaper07" width="8" height="8" patternUnits="userSpaceOnUse">' +
             '<path class="kx-ecg-grid" d="M8 0H0V8"></path></pattern></defs>' +
           '<rect width="320" height="120" fill="url(#kxEcgPaper07)"></rect>' +
-          '<rect class="kx-hl kx-hl--rr" x="10" y="66" width="150" height="34" rx="6"></rect>' +
-          '<rect class="kx-hl kx-hl--fwave" x="176" y="20" width="60" height="34" rx="6"></rect>' +
+          (showRR ? '<rect class="kx-hl kx-hl--rr" x="10" y="66" width="150" height="34" rx="6"></rect>' : '') +
+          (showFw ? '<rect class="kx-hl kx-hl--fwave" x="176" y="20" width="60" height="34" rx="6"></rect>' : '') +
           '<polyline class="kx-ecg-trace" points="0,74 8,72 16,75 24,73 30,74 33,77 36,48 39,86 42,74 54,73 62,75 70,72 78,74 86,75 90,74 92,74 95,77 98,48 101,86 104,74 118,73 128,75 134,74 150,74 156,73 176,40 182,34 190,44 200,40 206,74 209,77 212,48 215,86 218,74 236,73 250,74 256,77 260,48 263,86 266,74 288,73 300,74 306,48 309,86 312,74 320,74"></polyline>' +
         '</svg>' +
-        '<span class="kx-ecg-tag kx-ecg-tag--rr kx-data" data-hl="rr">Irregular R-R</span>' +
-        '<span class="kx-ecg-tag kx-ecg-tag--fwave kx-data" data-hl="fwave">f-waves (V1)</span>' +
+        (showRR ? '<span class="kx-ecg-tag kx-ecg-tag--rr kx-data" data-hl="rr">Irregular R-R</span>' : '') +
+        (showFw ? '<span class="kx-ecg-tag kx-ecg-tag--fwave kx-data" data-hl="fwave">f-waves (V1)</span>' : '') +
       '</div>';
   
     host.innerHTML =
       '<section class="kx-why">' +
         '<header class="kx-why-head">' +
-          '<button type="button" class="kx-why-back" data-act="report" aria-label="Back to report">' + ic('arrow_back') + '</button>' +
+          '<button type="button" class="kx-why-back" data-act="kardiox-back" aria-label="Back to report">' + ic('arrow_back') + '</button>' +
           '<div class="kx-why-titles">' +
             '<h2>' + esc(title) + '</h2>' +
             '<p>Explainable AI · tap a finding</p>' +
@@ -820,16 +850,18 @@
           ecg +
   
           '<div class="kx-why-chips" role="tablist" aria-label="Explanation views">' +
-            '<button type="button" class="kx-chip is-selected" role="tab" aria-selected="true" data-chip="leads">Which leads?</button>' +
-            '<button type="button" class="kx-chip" role="tab" aria-selected="false" data-chip="criteria">Criteria</button>' +
+            '<button type="button" class="kx-chip is-selected" role="tab" aria-selected="true" data-chip="criteria">Criteria</button>' +
             '<button type="button" class="kx-chip" role="tab" aria-selected="false" data-chip="diff">Differentials</button>' +
           '</div>' +
-  
-          '<div class="kx-why-label" id="kxWhyCriteria">Criteria the AI matched</div>' +
-          '<div class="kx-crit-list">' + critHtml + '</div>' +
-  
-          '<div class="kx-why-label" id="kxWhyDiff">Differentials considered</div>' +
-          '<div class="kx-diffs">' + diffsHtml + '</div>' +
+
+          '<div class="kx-why-view" data-view="criteria">' +
+            '<div class="kx-why-label" id="kxWhyCriteria">Criteria the AI matched</div>' +
+            '<div class="kx-crit-list">' + critHtml + '</div>' +
+          '</div>' +
+          '<div class="kx-why-view" data-view="diff" hidden>' +
+            '<div class="kx-why-label" id="kxWhyDiff">Differentials considered</div>' +
+            '<div class="kx-diffs">' + diffsHtml + '</div>' +
+          '</div>' +
   
           (verify
             ? '<div class="kx-verify">' +
@@ -860,10 +892,11 @@
         chips[i].classList.toggle('is-selected', on);
         chips[i].setAttribute('aria-selected', on ? 'true' : 'false');
       }
+      // Tabs now SWITCH which section is shown (was: one long everything-at-once page you scrolled).
       var view = chip.getAttribute('data-chip');
-      if (view === 'criteria') { var c = host.querySelector('#kxWhyCriteria'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      else if (view === 'diff') { var d = host.querySelector('#kxWhyDiff'); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      else { var e = host.querySelector('.kx-ecg'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'start' }); pulseTag('rr'); pulseTag('fwave'); }
+      var views = host.querySelectorAll('.kx-why-view');
+      for (var j = 0; j < views.length; j++){ views[j].hidden = (views[j].getAttribute('data-view') !== view); }
+      if (view === 'criteria') { pulseTag('rr'); pulseTag('fwave'); }
     }
   
     host.onclick = function(e){
@@ -1291,6 +1324,8 @@
     var onDev = false; try { onDev = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_ondevice')); } catch (e) {}
     var onLearned = false; try { onLearned = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_learned')); } catch (e) {}
     var onAcs = false; try { onAcs = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_acs')); } catch (e) {}
+    var onFb = false; try { onFb = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_feedback')); } catch (e) {}
+    var onPdf = false; try { onPdf = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_pdf')); } catch (e) {}
     var odRow = isNat ? ('<button type="button" class="kx-settings-row" data-act="kx-ondevice-ai">'
         + '<span class="kx-sr-ic">' + ic('memory') + '</span>'
         + '<span class="kx-sr-body"><b class="kx-sr-title">On-device AI</b><span class="kx-sr-sub" data-kx-od-sub>Checking…</span></span>'
@@ -1348,6 +1383,16 @@
             + '<span class="kx-sr-ic">' + ic('monitor_heart') + '</span>'
             + '<span class="kx-sr-body"><b class="kx-sr-title">Clinical context (HEART / TIMI)</b><span class="kx-sr-sub">Optional ACS risk panel on the result. Decision support, not a diagnosis.</span></span>'
             + '<span class="kx-sr-toggle' + (onAcs ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
+          + '</button>'
+          + '<button type="button" class="kx-settings-row" data-act="kx-toggle-feedback" role="switch" aria-checked="' + (onFb ? 'true' : 'false') + '">'
+            + '<span class="kx-sr-ic">' + ic('school') + '</span>'
+            + '<span class="kx-sr-body"><b class="kx-sr-title">Help improve KardiQ X</b><span class="kx-sr-sub">Confirm/correct readings (consent-gated) to train the model on real ECGs.</span></span>'
+            + '<span class="kx-sr-toggle' + (onFb ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
+          + '</button>'
+          + '<button type="button" class="kx-settings-row" data-act="kx-toggle-pdf" role="switch" aria-checked="' + (onPdf ? 'true' : 'false') + '">'
+            + '<span class="kx-sr-ic">' + ic('picture_as_pdf') + '</span>'
+            + '<span class="kx-sr-body"><b class="kx-sr-title">Import ECG PDF</b><span class="kx-sr-sub">Read a digital ECG PDF (Apple Watch / 12-lead export) — exact signal, highest trust.</span></span>'
+            + '<span class="kx-sr-toggle' + (onPdf ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
           + '</button>'
           + odRow
         + '</div>'
@@ -2522,7 +2567,6 @@
   function providers() { try { return window.SMD_KARDIOX_PROVIDERS && window.SMD_KARDIOX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("kxScroll"); }
   function reduceMotion() { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
-  function sample() { try { var M = window.SMD_KARDIOX_MODELS; return M ? M.makeAnalysis(M.samples.afWithRvr) : null; } catch (e) { return null; } }
   function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id }; }
   function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardiQ X] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
   function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
@@ -2616,7 +2660,11 @@
   function openStored(id) {
     var P = providers();
     var p = (P && P.ecgStore && P.ecgStore.get) ? Promise.resolve(P.ecgStore.get(id)) : Promise.resolve(null);
-    p.then(function (a) { state.analysis = enrich(a || sample()); go("report"); }).catch(function () { state.analysis = enrich(sample()); go("report"); });
+    // Open the REAL stored analysis only. If it can't be loaded (missing / undecryptable), show the honest
+    // empty report instead of fabricating a reading — a demo AF-with-RVR fallback here made every
+    // unloadable history item read as "Atrial fibrillation".
+    p.then(function (a) { state.analysis = a ? enrich(a) : null; if (!state.analysis) toast("Couldn't open this ECG."); go("report"); })
+     .catch(function () { state.analysis = null; toast("Couldn't open this ECG."); go("report"); });
   }
   function clearEcgs() {
     var P = providers(); if (!P || !P.ecgStore) return;
@@ -2626,6 +2674,8 @@
   }
   function toggleConfidence() { try { var F = window.SMD_KARDIOX_FLAGS; if (F) { F.set("smd_kardiox_confidence", !F.bool("smd_kardiox_confidence")); toast("Confidence display " + (F.bool("smd_kardiox_confidence") ? "on" : "off") + "."); show("settings"); } } catch (e) {} }
   function toggleAcs() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_acs"); F.set("smd_kardiox_acs", on); toast(on ? "Clinical context on — open an ECG result and tap Add clinical context." : "Clinical context off."); show("settings"); } catch (e) {} }
+  function toggleFeedback() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_feedback"); F.set("smd_kardiox_feedback", on); toast(on ? "Thanks — a Confirm/Correct card will appear on results (consent-gated)." : "Model-improvement feedback off."); show("settings"); } catch (e) {} }
+  function togglePdf() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_pdf"); F.set("smd_kardiox_pdf", on); toast(on ? "ECG PDF import on — use the Import ECG PDF button." : "ECG PDF import off."); show("settings"); } catch (e) {} }
   function toggleOndevice() {
     try {
       var F = window.SMD_KARDIOX_FLAGS; if (!F) return;
@@ -2660,7 +2710,7 @@
       };
       // ── Native (Capacitor) ──
       if (Cap && Cap.isNativePlatform && Cap.isNativePlatform() && Plugins) {
-        if ((source === "camera" || source === "photoLibrary") && Plugins.Camera) {
+        if ((source === "camera" || source === "library" || source === "photoLibrary") && Plugins.Camera) {
           Plugins.Camera.getPhoto({ quality: 92, resultType: "dataUrl", allowEditing: false,
             source: source === "camera" ? "CAMERA" : "PHOTOS" })
             .then(function (p) {
@@ -2714,15 +2764,29 @@
         haptic("light");
         var dx = t.getAttribute("data-dx") || (state.analysis && state.analysis.verdict) || "this ECG finding";
         var q = "Explain " + dx + " on an ECG: key diagnostic criteria, common causes, and initial management. Be concise and clinical.";
-        try { if (typeof window.SMD_askMaik === "function") { window.SMD_askMaik(q); return; } } catch (e) {}
-        try { closeMod(); if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q); else toast("MaiK assistant unavailable."); } catch (e2) { toast("MaiK assistant unavailable."); }
+        // Close the KardiQ X module FIRST, THEN open MaiK — otherwise MaiK opens BEHIND this modal and is
+        // only visible after backing out to Home.
+        try { closeMod(); } catch (e) {}
+        try {
+          if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q);
+          else toast("MaiK assistant unavailable.");
+        } catch (e2) { toast("MaiK assistant unavailable."); }
         return;
       }
-      case "kxnav:export": haptic("light"); exportReport(); return;
+      case "kxnav:share": case "kxnav:export": haptic("light"); exportReport(); return;
       case "kxnav:note": haptic("light"); editNote(); return;
       case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": {
         haptic("light");
-        var src = t.getAttribute("data-src") || "photoLibrary";
+        // The tiles declare their source via data-SOURCE. Reading data-src (which never exists) made every
+        // tile fall back to "photoLibrary", so Camera / Files / Scan-PDF all opened the gallery. Default by
+        // intent: "Allow camera" opens the camera; "Choose another photo" opens the library.
+        var src = t.getAttribute("data-source") || (act === "kardiox-cam-allow" ? "camera" : "photoLibrary");
+        // A digital ECG PDF carries an EXACT embedded signal — route it to the digital-ingestion service
+        // (kardiox-pdf) rather than the photo model. This is now the SINGLE PDF entry point (the old
+        // floating "Import ECG PDF" FAB was a duplicate). Falls back to the image path if unavailable.
+        if (src === "pdf" && window.SMD_KARDIOX_PDF && SMD_KARDIOX_PDF.flagOn && SMD_KARDIOX_PDF.flagOn() && SMD_KARDIOX_PDF.open) {
+          try { SMD_KARDIOX_PDF.open(); return; } catch (e) {}
+        }
         captureImage(src).then(function (blob) {
           runPipeline({ id: "kx-" + Date.now(), source: src, data: blob, leadLayout: null });
         }).catch(function (err) {
@@ -2732,11 +2796,13 @@
         return;
       }
       case "kardiox-cam-deny": case "kardiox-retry": show("source"); return;
-      case "kardiox-open": case "report": openStored(t.getAttribute("data-id")); return;
+      case "kardiox-open": openStored(t.getAttribute("data-id")); return;
       case "kxnav:lesson": state.lessonId = t.getAttribute("data-id"); haptic("light"); go("lesson"); return;
       case "kx-clear-ecgs": clearEcgs(); return;
       case "kx-toggle-confidence": toggleConfidence(); return;
       case "kx-toggle-acs": haptic("light"); toggleAcs(); return;
+      case "kx-toggle-feedback": haptic("light"); toggleFeedback(); return;
+      case "kx-toggle-pdf": haptic("light"); togglePdf(); return;
       case "kx-toggle-ondevice": haptic("light"); toggleOndevice(); return;
       case "kx-toggle-learned": haptic("light"); toggleLearned(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
