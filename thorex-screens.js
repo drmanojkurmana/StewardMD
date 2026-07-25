@@ -103,6 +103,14 @@
     };
   }
 
+  // Never-fabricate guard (patient-safety): the ONLY question renderResult()/openStored() are allowed
+  // to ask before showing a result. true only when `a` is a real analysis with at least one engine —
+  // never true for null/undefined/a malformed payload, and NEVER used to justify substituting a
+  // canned sample. Pure (no DOM) so it is node-testable and reused identically by both call sites.
+  function hasRenderableAnalysis(a) {
+    return !!(a && Array.isArray(a.engines) && a.engines.length > 0);
+  }
+
   /* ══════════════════════════════════════ Screens ══════════════════════════════════════════════ */
 
   /* landing */
@@ -295,7 +303,7 @@
           '<div class="tx-qual-preview"><span class="tx-qual-badge' + badgeMod + '">' + esc(q.view || "CXR") + "</span></div>" +
           '<ul class="tx-qual-checks">' + issues.map(checkRow).join("") + "</ul>" +
           '<div class="tx-qual-warn">' + ic("warning") +
-            '<span class="tx-qual-warn-txt">This image may not meet quality standards for reliable analysis. Findings could be less accurate or incomplete.</span>' +
+            '<span class="tx-qual-warn-txt" id="txQualWarnTxt">This image may not meet quality standards for reliable analysis. Findings could be less accurate or incomplete.</span>' +
           "</div>" +
           '<label class="tx-qual-ack">' +
             '<input type="checkbox" data-hook="ack" aria-describedby="txQualWarnTxt" />' +
@@ -403,10 +411,13 @@
   function renderResult(host, ctx) {
     ctx = ctx || {};
     var a = ctx.analysis;
-    if ((!a || !Array.isArray(a.engines) || !a.engines.length) && typeof window !== "undefined" && window.SMD_THOREX_MODELS) {
-      try { a = window.SMD_THOREX_MODELS.makeAnalysis(window.SMD_THOREX_MODELS.samples.pneumonia); } catch (e) {}
+    // Never-fabricate rule: if there is no real analysis to show (missing/null/no engines), render
+    // the "result unavailable" empty state — NEVER a canned sample. A sample result here would be
+    // indistinguishable from a real read and is a patient-safety violation.
+    if (!hasRenderableAnalysis(a)) {
+      renderEmpty(host, { providers: ctx.providers, analysis: null, emptyReason: ctx.emptyReason || "not-found" });
+      return;
     }
-    a = a || {};
     var panels = buildPanelModels(a);
     var dual = panels.length > 1;
 
@@ -574,17 +585,27 @@
       "</div>";
   }
 
-  /* empty */
+  /* empty — also doubles as the "result unavailable" state (never-fabricate guard): reached when
+     openStored() couldn't load a real record (deleted id / store failure) or renderResult() is asked
+     to show a missing/malformed analysis. ctx.emptyReason === "not-found" swaps the copy; the screen
+     never shows a sample in either case. */
   function renderEmpty(host, ctx) {
+    ctx = ctx || {};
+    var notFound = ctx.emptyReason === "not-found";
+    var icon = notFound ? "error" : "search_off";
+    var title = notFound ? "Result unavailable" : "No analyses yet";
+    var sub = notFound
+      ? "This chest X-ray result couldn't be loaded. It may have been deleted, or the local store is unavailable."
+      : "Analyze a chest X-ray to see it here.";
     host.innerHTML =
       '<div class="tx-list-head">' +
         '<button class="tx-result-back" type="button" data-act="tx-back" aria-label="Back">' + ic("arrow_back") + "</button>" +
         '<h2 class="tx-list-title">ThoreX</h2>' +
       "</div>" +
       '<div class="tx-list-body">' +
-        '<div class="tx-empty">' + ic("search_off") +
-          '<b class="tx-empty-title">No analyses yet</b>' +
-          '<span class="tx-empty-sub">Analyze a chest X-ray to see it here.</span>' +
+        '<div class="tx-empty">' + ic(icon) +
+          '<b class="tx-empty-title">' + esc(title) + "</b>" +
+          '<span class="tx-empty-sub">' + esc(sub) + "</span>" +
         "</div>" +
       "</div>";
   }
@@ -603,7 +624,7 @@
     empty: renderEmpty
   };
 
-  var state = { analysis: null, running: false, consentPending: null, stack: [] };
+  var state = { analysis: null, running: false, consentPending: null, emptyReason: null, stack: [] };
 
   function providers() { try { return window.SMD_THOREX_PROVIDERS && window.SMD_THOREX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("txScroll"); }
@@ -619,7 +640,8 @@
       close: closeMod,
       toast: toast,
       entitlement: resolveEntitlement(),
-      consentPending: state.consentPending
+      consentPending: state.consentPending,
+      emptyReason: state.emptyReason
     };
   }
   function show(key) {
@@ -655,7 +677,7 @@
   }
 
   function finishPipeline(a) {
-    state.analysis = a; state.running = false;
+    state.analysis = a; state.running = false; state.emptyReason = null;
     try { var P = providers(); if (P && P.cxrStore && P.cxrStore.save) P.cxrStore.save(a); } catch (e) {}
     state.stack = ["landing"]; go("result"); haptic("success");
     try {
@@ -691,10 +713,18 @@
     });
   }
 
+  // Never-fabricate rule applies here too: a deleted id / bad id / store failure must land on the
+  // "result unavailable" empty state, NEVER on go("result") with a null/undefined analysis (which
+  // would previously have triggered renderResult()'s now-removed sample fallback).
   function openStored(id) {
     var P = providers();
     var p = (P && P.cxrStore && P.cxrStore.get) ? Promise.resolve(P.cxrStore.get(id)) : Promise.resolve(null);
-    p.then(function (a) { state.analysis = a; go("result"); }).catch(function () { go("result"); });
+    p.then(function (a) {
+      if (hasRenderableAnalysis(a)) { state.analysis = a; state.emptyReason = null; go("result"); }
+      else { state.analysis = null; state.emptyReason = "not-found"; go("empty"); }
+    }).catch(function () {
+      state.analysis = null; state.emptyReason = "not-found"; go("empty");
+    });
   }
 
   function toggleConfidence() {
@@ -876,6 +906,7 @@
     bandToPct: bandToPct,
     worstSeverity: worstSeverity,
     summarizeAnalysis: summarizeAnalysis,
+    hasRenderableAnalysis: hasRenderableAnalysis,
     MANDATORY_DISCLAIMER: MANDATORY_DISCLAIMER,
     SCREENS: SCREENS
   };

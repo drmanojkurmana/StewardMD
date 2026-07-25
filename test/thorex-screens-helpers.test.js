@@ -65,4 +65,13 @@ const learningFinding = learning.findings[0];
 assert.equal(learningFinding.confLabel, "Medium", "confLabel should be the band word");
 assert.equal(learningFinding.confPct, 55, "confPct is the internal bar-width mapping, not a raw probability");
 
+// ── hasRenderableAnalysis: the never-fabricate guard (patient safety). renderResult()/openStored()
+//    must NEVER substitute a canned sample when there is no real analysis — this pure predicate is
+//    the single source of truth for "is there something real to show". ──
+assert.equal(H.hasRenderableAnalysis(null), false, "null analysis should not be renderable");
+assert.equal(H.hasRenderableAnalysis(undefined), false, "undefined analysis should not be renderable");
+assert.equal(H.hasRenderableAnalysis({ engines: [] }), false, "an analysis with an empty engines array should not be renderable");
+assert.equal(H.hasRenderableAnalysis(v1), true, "a real 1-engine analysis should be renderable");
+assert.equal(H.hasRenderableAnalysis(v2beta), true, "a real 2-engine (v2beta) analysis should be renderable");
+
 console.log("ok");
