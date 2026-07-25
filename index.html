@@ -56,6 +56,8 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx6">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
+<link rel="stylesheet" href="/thorex.css?v=tx1">
+<link rel="stylesheet" href="/thorex-screens.css?v=tx1">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
@@ -1559,6 +1561,22 @@ window.openExternal = function (u) {
 <script src="/kardiox-pdf.js?v=kx1" defer></script>
 <script src="/kardiox-screens.js?v=kx13" defer></script>
 <script src="/kardiox.js?v=kx7" defer></script>
+<!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
+     enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
+     SMD_THOREX_* globals + SMD_THOREX_PROVIDERS seam. No-op when the flag is off. -->
+<script src="/thorex-flags.js?v=tx1" defer></script>
+<script src="/thorex-models.js?v=tx1" defer></script>
+<script src="/thorex-entitlement.js?v=tx1" defer></script>
+<script src="/thorex-store.js?v=tx1" defer></script>
+<script src="/thorex-net.js?v=tx1" defer></script>
+<script src="/thorex-model-cache.js?v=tx1" defer></script>
+<script src="/thorex-ort.js?v=tx1" defer></script>
+<script src="/thorex-providers.js?v=tx1" defer></script>
+<script src="/thorex-report.js?v=tx1" defer></script>
+<script src="/thorex-llm.js?v=tx1" defer></script>
+<script src="/thorex-correlate.js?v=tx1" defer></script>
+<script src="/thorex-screens.js?v=tx1" defer></script>
+<script src="/thorex.js?v=tx1" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as

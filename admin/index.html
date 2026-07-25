@@ -303,6 +303,12 @@
             <div><label>Feature</label><select id="xaFeat"></select></div>
             <div><label>Expiry</label><select id="xaExp"><option value="never">Never</option><option value="7">7 days</option><option value="30">30 days</option><option value="custom">Custom date…</option></select></div>
             <div id="xaExpDateWrap" style="display:none"><label>Expiry date</label><input type="date" id="xaExpDate"></div>
+            <div><label>Tier</label>
+              <select id="xaTier">
+                <option value="v1">V1 — Clinical (physician)</option>
+                <option value="v2beta">V2 Beta — Clinical + Learning (student/resident)</option>
+              </select>
+            </div>
           </div>
           <label>Notes (optional)</label>
           <textarea id="xaNotes" placeholder="e.g. Dr Rao — iPhone 17 Pro pilot"></textarea>
@@ -581,7 +587,7 @@
   function xaFillFeatures(){ api(XA_BASE+"/features").then(function(x){ var sel=$("xaFeat"); if(!sel)return; var fs=(x.d&&x.d.features)||[]; sel.innerHTML=(fs.length?fs:[{id:"fundx",label:"FundX AI"}]).map(function(f){return '<option value="'+esc(f.id)+'">'+esc(f.label)+'</option>';}).join(""); }).catch(function(){}); }
   function xaExpiryMs(){ var m=$("xaExp").value, now=Date.now(); if(m==="7")return now+7*864e5; if(m==="30")return now+30*864e5; if(m==="custom"){ var d=$("xaExpDate").value, t=d?Date.parse(d+"T23:59:59"):0; return t||""; } return ""; }
   function xaGen(){ var feature=$("xaFeat").value; if(!feature){say("xaGenMsg","err","Pick a feature.");return;} $("xaGenBtn").disabled=true; say("xaGenMsg","","Generating…");
-    api(XA_BASE+"/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({feature:feature,expiry:xaExpiryMs(),notes:$("xaNotes").value})})
+    api(XA_BASE+"/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({feature:feature,expiry:xaExpiryMs(),notes:$("xaNotes").value,tier:document.getElementById("xaTier").value})})
       .then(function(x){ $("xaGenBtn").disabled=false; if(x.s===200&&x.d&&x.d.ok){ $("xaCodeVal").textContent=x.d.code; $("xaCodeBox").style.display=""; say("xaGenMsg","ok","✅ Code generated — copy it now."); $("xaNotes").value=""; xaLoadCodes(); xaAnalytics(); } else say("xaGenMsg","err",x.s===403?"Not an owner.":("Failed: "+((x.d&&x.d.error)||x.s))); })
       .catch(function(){ $("xaGenBtn").disabled=false; say("xaGenMsg","err","Sign in first."); }); }
   function xaAnalytics(){ api(XA_BASE+"/analytics").then(function(x){ if(x.s!==200||!x.d||!x.d.analytics)return; var a=x.d.analytics,b=a.byStatus||{}; setN("xaTotal",a.total||0); setN("xaUnused",b.unused||0); setN("xaActivated",b.activated||0); setN("xaRevoked",b.revoked||0); setN("xaDevicesN",a.activeDevices||0); }).catch(function(){}); }
@@ -593,8 +599,9 @@
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
   function xaLoadDevices(){ var el=$("xaDevices"); if(!el)return; el.innerHTML='<div class="hint">Loading…</div>';
     api(XA_BASE+"/activations").then(function(x){ if(x.s!==200){el.innerHTML='<div class="hint">Could not load.</div>';return;} var acts=(x.d&&x.d.activations)||[]; if(!acts.length){el.innerHTML='<div class="hint">No activated devices.</div>';return;}
-      el.innerHTML=acts.map(function(a){ var active=a.status==="active"; return '<div class="item"><div class="h"><span class="cat">'+esc(a.feature)+'</span><span class="st '+(active?"verified":"rejected")+'">'+esc(active?"active":"revoked")+'</span>'+(a.platform?'<span class="hint">'+esc(a.platform)+'</span>':'')+'<span class="t">'+esc(when(a.activatedAt))+'</span></div><div class="title">'+esc(a.deviceModel||"Unknown device")+'</div><div class="meta"><b>User:</b> <code>'+esc(String(a.uid||"").slice(0,14))+'</code> · <b>Device:</b> <code>'+esc(a.deviceId)+'</code></div>'+(active?'<div class="foot"><button class="del" data-xda="'+esc(a.activationId)+'" style="margin-left:auto">Deactivate device</button></div>':'')+'</div>'; }).join("");
+      el.innerHTML=acts.map(function(a){ var active=a.status==="active"; var tier=a.tier||"v1"; return '<div class="item"><div class="h"><span class="cat">'+esc(a.feature)+'</span><span class="st '+(active?"verified":"rejected")+'">'+esc(active?"active":"revoked")+'</span><span class="cat">'+esc(tier)+'</span>'+(a.platform?'<span class="hint">'+esc(a.platform)+'</span>':'')+'<span class="t">'+esc(when(a.activatedAt))+'</span></div><div class="title">'+esc(a.deviceModel||"Unknown device")+'</div><div class="meta"><b>User:</b> <code>'+esc(String(a.uid||"").slice(0,14))+'</code> · <b>Device:</b> <code>'+esc(a.deviceId)+'</code></div>'+(active?('<div class="foot"><select data-xtier="'+esc(a.activationId)+'"><option value="v1"'+(tier==="v1"?' selected':'')+'>V1</option><option value="v2beta"'+(tier==="v2beta"?' selected':'')+'>V2 Beta</option></select><button data-xsettier="'+esc(a.activationId)+'">Set tier</button><button class="del" data-xda="'+esc(a.activationId)+'" style="margin-left:auto">Deactivate device</button></div>'):'')+'</div>'; }).join("");
       el.querySelectorAll("[data-xda]").forEach(function(b){b.onclick=function(){ if(!confirm("Deactivate this device? The feature is disabled on it immediately. The original code stays consumed — issue a new code for another device."))return; api(XA_BASE+"/revoke",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({activationId:b.getAttribute("data-xda")})}).then(function(r){ if(r.s===200&&r.d&&r.d.ok){say("xaDevMsg","ok","✅ Device deactivated.");xaLoadDevices();xaLoadCodes();xaAnalytics();} else say("xaDevMsg","err","Failed."); }); };});
+      el.querySelectorAll("[data-xsettier]").forEach(function(b){b.onclick=function(){ var id=b.getAttribute("data-xsettier"); var sel=el.querySelector('[data-xtier="'+id+'"]'); var val=sel?sel.value:"v1"; api(XA_BASE+"/set-tier",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({activationId:id,tier:val})}).then(function(r){ if(r.s===200&&r.d&&r.d.ok){say("xaDevMsg","ok","✅ Tier updated.");xaLoadDevices();} else say("xaDevMsg","err","Failed."); }); };});
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
   function xaLoad(){ xaFillFeatures(); xaAnalytics(); xaLoadCodes(); xaLoadDevices(); }
   try {

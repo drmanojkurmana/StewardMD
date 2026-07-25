@@ -1,0 +1,296 @@
+# ThoreX AI — Chest X-ray Interpretation Module (Design)
+
+**Date:** 2026-07-25
+**Status:** Design — awaiting user review
+**Owner:** Diwakar Kurmana
+**Access gate:** `smd_thorex` via `SMD_XACCESS` (server-authoritative Experimental Access, DEFAULT OFF) — sibling of `smd_kardiox` / `smd_fundx`. Access is an **entitlement matrix** — Free (HF-hosted "Lite") vs Pro, and within Pro the role V1 /
+V2 Beta granted and revoked from the **admin console** (see §3.4).
+
+---
+
+## 1. Summary
+
+ThoreX AI is a Chest X-ray (CXR) interpretation module inside StewardMD. A clinician
+uploads a CXR; the module runs a modular inference pipeline (quality → detection →
+localization → explainability → clinical correlation → report) and produces an explainable,
+structured read that integrates with existing StewardMD modules (Antibiogram, ICU, labs,
+KardioX). It mirrors the **KardioX** architecture bone-for-bone so it behaves like a native
+flagship feature, not a bolted-on plugin.
+
+**Intended use:** educational / clinical-decision-support assist for qualified clinicians.
+**Not** an autonomous diagnostic device. Every result carries the mandatory safety disclaimer
+and ships only through the `stewardmd-clinical-reviewer` + `stewardmd-ai-reviewer` gates.
+
+### Reality markers (honesty contract)
+
+This spec labels every capability by what is genuinely buildable **today** with permissively
+or educationally licensed pretrained weights:
+
+- **REAL** — works end-to-end at ship time with downloadable weights.
+- **RULE** — derived/heuristic (not a trained model output); labelled as such in the UI.
+- **EXPERIMENTAL** — research track, explicitly marked not-for-clinical-use in the UI.
+- **FUTURE** — architecture supports it; no functional implementation in this spec.
+
+No stubs are dressed up as REAL. No raw probabilities are shown to users.
+
+---
+
+## 2. Models & licensing
+
+| Role | Model | License | Status | Notes |
+|---|---|---|---|---|
+| **Free-tier** detection ("ThoreX Lite") | **Hugging Face-hosted CXR ViT** (pinned `codewithdark/vit-chest-xray`, CheXpert multi-disease) | model-card dependent (community) | REAL (free), with caveats | Called **server-side** via HF Inference API with our token. HF free serverless availability is **not guaranteed** — provider is health-gated with graceful fallback and is **swappable to self-hosted** (same small ViT on our backend) so Lite always works. Optional YOLO CXR detector = EXPERIMENTAL (free-tier boxes not dependable). |
+| Primary detection (**Pro**, commercial default) | **TorchXRayVision** DenseNet (NIH/CheXpert/MIMIC/PadChest) | Apache-2.0 | REAL | ~18 findings; auto-downloads weights; commercially shippable; runs on **our** GPU backend. |
+| Primary detection (**Pro · V2 Beta**, educational, higher coverage) | **X-Raydar** XNet38MS ensemble (299/512/1024) | **Research / non-commercial only** | REAL (educational) | 37 findings; weights on HuggingFace `dnamodel/xraydar-cv` (PyTorch `.pth.tar`). Educational use only. **Must not ship in the commercial/clinical path** without a Warwick Ventures commercial license. |
+| Explainability / localization | **pytorch-grad-cam** | MIT | REAL | Grad-CAM heatmap per finding; works on DenseNet, Inception-v3 and ViT. |
+| Preprocessing | **MONAI** transforms | Apache-2.0 | REAL | normalize / resize / histogram / orientation. |
+| Secondary / zero-shot validation | **CheXzero** (CLIP) | research repo — license unverified | EXPERIMENTAL | Only enabled after license verification; otherwise the secondary is a second TorchXRayVision dataset head. |
+
+**Licensing decision (user-directed):** both TorchXRayVision **and** X-Raydar are included for
+**educational use**. TorchXRayVision is the clinical-advice engine; X-Raydar is the learning
+engine, shown with an in-UI "Educational / research model — not for clinical use" banner
+whenever its answer is displayed. Which engine(s) a user sees is decided by their **access tier**
+(§3.5), not a client flag — the tier is assigned per user from the admin console after the
+operator verifies student-vs-physician out of band.
+
+### Findings coverage
+
+- **Model-detected (REAL):** Pneumonia/consolidation, Pleural effusion, Pneumothorax,
+  Pulmonary edema, Atelectasis, Cardiomegaly, Emphysema, Fibrosis, Pulmonary nodule, Mass,
+  Pleural thickening, plus (X-Raydar only) cavity, hiatal hernia, mediastinal widening,
+  calcification, rib fracture, hyperinflation, and line/tube **presence**.
+- **RULE (derived, labelled):** ARDS pattern (bilateral diffuse opacities + clinical context),
+  ILD pattern flag. These are heuristics, never presented as a model class.
+- **EXPERIMENTAL / FUTURE:** device-tip **placement evaluation** (ET/NG/PICC/central-line
+  malposition), true pathology **bounding boxes** (vs Grad-CAM heatmaps). No permissive
+  off-the-shelf weights exist; research track only, clearly marked.
+
+---
+
+## 3. Architecture
+
+### 3.1 Provider seam = dependency injection
+
+Screens/controllers talk **only** to `window.SMD_THOREX_PROVIDERS`. Providers are the only
+layer touching network / disk / image processing. Two assemblies (mirrors KardioX):
+
+- `mockProviders()` — deterministic, offline; drives previews + the entire test suite.
+- `liveProviders()` — wraps StewardMD networking + secure storage + the real backend.
+
+Model swapping happens **inside** a provider; the UI never changes. This is the mechanism that
+makes TorchXRayVision ↔ X-Raydar ↔ future Core ML interchangeable.
+
+### 3.2 Backend inference interfaces (Python)
+
+```
+InferenceProvider (ABC)
+├── LocalInferenceProvider        # in-process PyTorch/ONNX (single-node GPU/CPU)
+├── CloudInferenceProvider        # HTTP client to the ThoreX serving container
+└── FutureCoreMLProvider          # FUTURE — on-device conversion, same interface
+```
+
+Pipeline is a chain of independent, injectable stages — each a class with one responsibility
+and a typed interface, never tightly coupled:
+
+```
+ImageInput
+  → ImageQualityAssessment   (AP/PA, portable, exposure, rotation, inspiration, cropping)
+  → PrimaryDetection         (TorchXRayVision | X-Raydar)
+  → SecondaryValidation      (EXPERIMENTAL — CheXzero or 2nd head)
+  → Localization             (Grad-CAM heatmaps)
+  → ExplainabilityEngine     (heatmap overlay + per-finding rationale)
+  → ClinicalCorrelationEngine(P2 — pulls StewardMD patient data)
+  → ReportGenerator          (structured report)
+  → StewardMDIntegration     (stewardship, FHIR, timeline)
+```
+
+### 3.3 Serving
+
+- **FastAPI + Docker**, ONNX Runtime (GPU-ready), mirroring `backend/kardiox/`.
+- Weights **auto-download on first boot**; mode-gated deps (`requirements-ml.txt`) so the base
+  image stays small until ML mode is on — exactly the KardioX pattern.
+- Secure endpoint `POST /api/thorex/v1/analyze` (health-gated; client falls back to
+  "inference unavailable", never a fabricated result).
+- **Deployment boundary (stated plainly):** this design produces runnable backend code + exact
+  deploy commands. Actual GPU-cloud deployment and real GPU inference are **operator steps run
+  by the user** — they are not performed or verified from the build session (no GPU, multi-GB
+  weights). On-device Core ML is FUTURE.
+
+### 3.4 Access tiers & admin-console entitlement
+
+Access is a **matrix of subscription (Free / Pro) × role (V1 / V2 Beta)**. Subscription comes from
+the existing StewardMD Pro entitlement (`pro-paywall`/`pro-badge`). Role (V1/V2 Beta) is carried by
+the server-authoritative `SMD_XACCESS` grant (a `thorex` FEATURES entry on `/api/experimental/*`)
+and only applies **within Pro** — the operator verifies student-vs-physician **out of band** and
+assigns the role from the admin console. No in-app role detection.
+
+| Entitlement | Engine(s) run | Runs on | What the clinician sees | Intended user |
+|---|---|---|---|---|
+| **Free** ("ThoreX Lite") | HF-hosted CXR ViT | HF API (server-side proxy) | Single **Lite** answer + "basic screening" note | Free users |
+| **Pro · V1** | TorchXRayVision | Our GPU backend | Single **Clinical** answer | Physicians |
+| **Pro · V2 Beta** | TorchXRayVision **+** X-Raydar | Our GPU backend | **Two** panels: **Clinical** (TorchXRayVision) **+** **Learning** (X-Raydar, educational banner) | Students / residents |
+
+The request to the backend carries an **entitlement** value `"free" | "v1" | "v2beta"`, resolved
+client-side from Pro status + the `SMD_XACCESS` role, and the provider factory maps it to engines.
+
+Rules:
+- The client renders strictly by entitlement; it never self-elevates. Pro is enforced by the
+  existing paywall; role is enforced by `SMD_XACCESS` (remote revoke / down-tier applies on next open).
+- **Free** uses only the HF-hosted engine, **consent-gated** (tri-state `smd_thorex_cloud`), image
+  EXIF-stripped, called **server-side** so users never contact HF directly. HF unavailable →
+  "ThoreX Lite temporarily unavailable", never a fabricated result.
+- **V2 Beta** always shows **both** answers side by side; the X-Raydar (Learning) panel carries the
+  "educational — not for clinical use" banner and never drives clinical actions
+  (stewardship auto-launch, FHIR export) — those key off the **Clinical/TorchXRayVision** result only.
+- **V1** runs and displays **only** TorchXRayVision. X-Raydar is not invoked for V1 users.
+- Default state for the module = gate closed. A user does nothing to self-unlock; Free is granted
+  by Pro-absence + module access, Pro roles are push-assigned by the operator.
+
+**Admin console controls (new, `admin/`):** a ThoreX entitlements panel to (a) look up a user,
+(b) grant access at tier V1 or V2 Beta, (c) change tier, (d) revoke. Backed by admin-authenticated
+`/api/experimental/*` (or an admin sub-route) that writes the per-user grant + tier the client
+already reads. This is server-authoritative and audit-logged; the admin UI is a thin client over it,
+consistent with the existing `admin/verifications.html` pattern.
+
+### 3.5 Frontend module layout (mirrors `kardiox-*.js`)
+
+| File | Responsibility |
+|---|---|
+| `thorex-flags.js` | `SMD_THOREX_FLAGS` registry (`smd_thorex`, `smd_thorex_cloud`, `smd_thorex_dev`, …). Engine visibility is driven by the server **tier** (§3.4), not a client flag. |
+| `thorex-providers.js` | `SMD_THOREX_PROVIDERS` seam — mock + live assemblies. |
+| `thorex-store.js` | Case/finding/report persistence (offline-db backed). |
+| `thorex-models.js` | Label maps, severity bands, confidence-band mapping, sample fixtures. |
+| `thorex-quality.js` | Client-side quality pre-check + acknowledgement gate. |
+| `thorex-report.js` | Structured report builder + PDF/share/copy/save-case. |
+| `thorex-correlate.js` | P2 — clinical correlation + stewardship launch. |
+| `thorex-timeline.js` | P3 — longitudinal storage + follow-up comparison. |
+| `thorex-fhir.js` | P2 — FHIR `DiagnosticReport` / `ImagingStudy` export. |
+| `thorex-screens.js` + `thorex-screens.css` | All screens (upload, analyzing, result, report). |
+| `thorex.css` | Base module styling (StewardMD design language). |
+| `thorex.js` | Entry controller; complete **no-op when `smd_thorex` is off**. |
+
+Loaded in `index.html` as versioned `defer` scripts, after the KardioX block. Access gated via
+`SMD_XACCESS.gate("thorex", openThoreX)`.
+
+---
+
+## 4. Feature specification by phase
+
+Spec covers all four phases; **build is sequential**, each phase ends at its own clinical review.
+
+### Phase 1 — Functional CXR core (flagship MVP) — REAL
+
+- **Image input:** camera, photo library, files; PNG / JPEG / HEIC / PDF→raster. Duplicate-upload
+  rejection (perceptual hash). DICOM / FHIR ImagingStudy / PACS = FUTURE.
+- **Preprocessing (MONAI):** normalize, resize, contrast/histogram, orientation correction,
+  lung-region crop. Background removal best-effort.
+- **Image-quality gate:** classify AP/PA·portable·lateral, exposure, rotation, motion,
+  inspiration, cropping. If inadequate → warn + require explicit acknowledgement before proceeding.
+- **Detection + localization:** per entitlement (§3.4) — **Free** runs the HF-hosted ViT (server-side,
+  consent-gated); **Pro · V1** runs TorchXRayVision only; **Pro · V2 Beta** runs TorchXRayVision **and**
+  X-Raydar. Grad-CAM heatmap per positive finding on the backend engines.
+- **AI output rules:** never show raw probabilities. Show Finding · Confidence **band**
+  (High/Med/Low) · Severity · Location · Clinical relevance · Heatmap. (Bounding box = FUTURE;
+  heatmap is the localization primitive in P1.)
+- **Result layout by tier:** V1 → single **Clinical** panel (TorchXRayVision). V2 Beta → two
+  panels, **Clinical** (TorchXRayVision) + **Learning** (X-Raydar, educational banner). Only the
+  Clinical/TorchXRayVision result drives downstream clinical actions (P2 stewardship, FHIR).
+- **Admin entitlement (P1):** ThoreX panel in `admin/` to grant/change/revoke a user's tier
+  (V1 / V2 Beta), backed by admin-authenticated `/api/experimental/*`. This ships in P1 because it
+  gates all access.
+- **Structured report:** Clinical Information · Technique · Image Quality · Findings · Impression ·
+  Recommendations · Urgency · Follow-up. Export PDF / Share Sheet / Copy / Save Case.
+- **Safety:** mandatory disclaimer on every result (exact text in §6). Educational-model banner
+  when X-Raydar is active.
+
+### Phase 2 — Clinical correlation + antibiotic stewardship — REAL (rules) + REAL (integration)
+
+- **Correlation engine** pulls, where available: ABG, CBC, CRP, procalcitonin, BNP, EF (KardioX),
+  microbiology, antibiogram, vitals, symptoms, medication list, renal/liver function, timeline.
+- Produces reasoning, e.g. *"Pulmonary edema favoured over pneumonia: diffuse bilateral opacities +
+  elevated BNP + reduced EF + normal procalcitonin."* Correlation weighting is **RULE**-based and
+  labelled; it augments, never overrides, the imaging read.
+- **Differential diagnosis:** ranked list with confidence bands (CAP, HAP, aspiration, edema, ARDS,
+  TB, malignancy…), derived from findings + correlation.
+- **Stewardship auto-launch:** on pneumonia → Antibiogram, empirical antibiotics, renal dosing,
+  IV→PO conversion, de-escalation/duration/culture reminders (reuse existing modules).
+- **FHIR:** `DiagnosticReport` (+ `ImagingStudy` reference) export.
+
+### Phase 3 — Timeline + follow-up comparison — REAL (storage) + RULE (interval)
+
+- Store original image, AI findings, report, severity, heatmap per study.
+- Longitudinal compare; interval-change flag Improved / Stable / Worsened via per-finding
+  severity delta (RULE). True image registration/overlay = FUTURE (labelled).
+
+### Phase 4 — Native depth + R&D — mixed
+
+- **REAL:** iOS/Android polish (HIG / Material You, dark mode, VoiceOver, Dynamic Type, haptics,
+  iPad layout), background inference, lazy loading, model caching, cloud fallback.
+- **EXPERIMENTAL:** device/tube **placement** evaluation + true detection **bounding boxes**
+  (research track, marked not-for-clinical-use).
+- **FUTURE:** on-device Core ML / TensorRT; CT / MRI / lung-US / POCUS / mammography / bone —
+  the pipeline + provider interfaces are shaped to accept them without UI/business-logic change.
+
+---
+
+## 5. Data flow, storage & security
+
+- **Analyze:** image → client quality pre-check → provider → (live) upload to ThoreX serving →
+  pipeline → structured result → render + optional Save Case.
+- **Storage:** encrypted at rest (StewardMD offline-db / secure storage); cases scoped to the
+  signed-in account + device, consistent with KardioX/FundX.
+- **Security requirements:** no patient images in logs (image bytes never logged; only opaque
+  ids/metrics); temporary inference images deleted after analysis; HIPAA-architecture / DPDP /
+  GDPR-ready posture per `SECURITY_FRAMEWORK.md`. Cloud inference requires explicit consent
+  (`smd_thorex_cloud`, tri-state ask-once, like `smd_kardiox_cloud`).
+- **Third-party inference (Free/HF path):** free-tier images are sent to Hugging Face's hosted API.
+  This is PHI leaving the platform, so it is: (1) **consent-gated** (`smd_thorex_cloud`, tri-state
+  ask-once); (2) **EXIF/metadata-stripped** before transmission; (3) called **server-side** from our
+  backend/Worker with our HF token so end users never contact HF and our token is never exposed;
+  (4) disclosed in-UI ("processed by a third-party AI service"). Pro engines (TorchXRayVision,
+  X-Raydar) run **only** on our backend and never transit HF. This path is **blocking-reviewed** by
+  `stewardmd-ai-reviewer` (PHI-to-providers) + `stewardmd-security-reviewer`.
+- Must pass `stewardmd-security-reviewer` (upload + data + network change).
+
+---
+
+## 6. Safety & compliance
+
+Every result **must** display verbatim:
+
+> "AI-generated findings are intended to assist qualified healthcare professionals and must always
+> be interpreted in conjunction with clinical assessment, radiologist review where appropriate,
+> laboratory findings and other investigations."
+
+Plus: never overstate certainty; never hide uncertainty (confidence bands always shown);
+educational-model banner when X-Raydar is active; low image-quality warning is blocking until
+acknowledged. Mandatory review gates: **R1 clinical** + **R2 AI** (blocking), R3 security,
+R5 UX/accessibility, R6 performance, R7 release before any flag flip.
+
+---
+
+## 7. Testing
+
+- **Unit (Node, provider layer):** confidence-band mapping, severity, dedup hashing, report
+  builder, correlation rules, differential ranking, quality-gate logic — all against `mockProviders`.
+- **Backend (pytest):** each pipeline stage in isolation; contract tests for `InferenceProvider`
+  implementations; a smoke test that loads TorchXRayVision weights and runs one real inference on a
+  bundled sample CXR (proves REAL, not stubbed).
+- **Golden regression:** fixed sample CXRs → expected finding sets/bands, wired into the existing
+  clinical golden-regression harness.
+- **No network in unit tests;** live paths covered by backend integration tests behind a marker.
+
+---
+
+## 8. Out of scope (this spec)
+
+Autonomous diagnosis; DICOM/PACS ingest; true bounding-box detection; device placement scoring;
+on-device Core ML; non-CXR modalities. All are FUTURE and must not be represented as functional.
+
+---
+
+## 9. Build order
+
+P1 backend (models + API, real inference smoke test) → P1 frontend module (mock providers, full
+UI + tests) → wire live provider to backend → **R1/R2 review** → P2 → review → P3 → review → P4.
+Each phase gets its own implementation plan via the writing-plans skill.

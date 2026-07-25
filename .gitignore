@@ -70,4 +70,13 @@ backend/kardiox-image/image_model.pt
 # python build artifacts
 __pycache__/
 *.pyc
+
+# ThoreX on-device model binaries served to the local browser harness — a
+# copy of backend/thorex/models/thorex_clinical.onnx, regenerate with
+# backend/thorex/scripts/export_clinical_onnx.py. The labels JSON IS committed.
+models/*.onnx
+
+# ThoreX local dev harness + dormant module — never ship (localhost auth-bypass stubs).
+thorex-demo.html
+thorex-deid.js
 backend/kardiox-pdf/1_lead_ECGFounder.pth
