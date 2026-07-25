@@ -90,8 +90,17 @@
     }
 
     function ids() { return kv.keys().then(function (ks) { return ks.filter(function (k) { return k.indexOf(PREFIX) === 0; }); }); }
+    // Per-record resilient decrypt: a single corrupt/tampered/undecryptable record must never take
+    // down the whole timeline. Any failure (bad AES-GCM auth tag, JSON parse, etc.) resolves to null
+    // (no PHI in the log — just a generic notice) instead of rejecting the batch.
+    function decryptRecordSafe(rec) {
+      return decryptRecord(rec).catch(function () {
+        try { console.warn("[thorex-store] skipped an unreadable record"); } catch (e) {}
+        return null;
+      });
+    }
     function all() {
-      return ids().then(function (ks) { return Promise.all(ks.map(function (k) { return kv.get(k).then(decryptRecord); })); })
+      return ids().then(function (ks) { return Promise.all(ks.map(function (k) { return kv.get(k).then(decryptRecordSafe); })); })
         .then(function (list) { return list.filter(Boolean); });
     }
 
