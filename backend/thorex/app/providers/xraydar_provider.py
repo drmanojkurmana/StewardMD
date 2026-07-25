@@ -272,6 +272,12 @@ _SHARED_LABEL_MAP = {
 _INPUT_SIZE = 512  # single-resolution P1 slice of the is{299,512,1024} ensemble
 _HF_REPO = "dnamodel/xraydar-cv"
 _HF_FILENAME = f"cv/is{_INPUT_SIZE}/model_best.pth.tar"
+# Pinned commit SHA of dnamodel/xraydar-cv, reviewed 2026-07-25. This pin IS
+# the trust boundary: weights_only=False below executes arbitrary pickle
+# opcodes from whatever this revision resolves to, so we never resolve
+# "main" (which could change under us) — only this exact, reviewed commit.
+# Re-review and bump deliberately if the upstream weights are ever updated.
+_HF_REVISION = "34aec5a6a8d639b4ebe717f2e5a5499b8f00c493"
 _MIN_MATCH_FRACTION = 0.9  # below this, treat the architecture as mismatched (never fabricate)
 
 _MODEL = None
@@ -293,13 +299,14 @@ def _model():
             ckpt = hf_hub_download(
                 repo_id=_HF_REPO,
                 filename=_HF_FILENAME,
+                revision=_HF_REVISION,
                 cache_dir=get_settings().model_cache_dir,
             )
             # weights_only=False: this is a legacy pickle checkpoint (numpy
-            # scalars in the state dict) from the official, pinned
-            # dnamodel/xraydar-cv HF repo referenced by the upstream
-            # x-raydar/x-raydar-cv GitHub README as the canonical download
-            # location — trusted source, not arbitrary user input.
+            # scalars in the state dict). This is only acceptable because
+            # _HF_REVISION above pins the exact reviewed commit SHA — the
+            # trust boundary is that pinned commit, not "whatever main is
+            # today". Do not remove the pin without re-reviewing.
             raw = torch.load(ckpt, map_location="cpu", weights_only=False)
             state = raw["state_dict"] if isinstance(raw, dict) and "state_dict" in raw else raw
             state = _strip_module_prefix(state)
@@ -317,17 +324,21 @@ def _model():
                 "unexpected_keys": n_unexpected,
                 "matched_fraction": matched_fraction,
             }
-            if matched_fraction < _MIN_MATCH_FRACTION:
-                # Honest failure: do NOT serve sigmoid noise as a real prediction.
-                raise RuntimeError(
-                    f"xraydar checkpoint/model architecture mismatch: only "
-                    f"{matched_fraction:.1%} of checkpoint keys matched "
-                    f"({n_unexpected} unexpected, {n_missing} missing model keys)"
-                )
-            net.eval()
-            _MODEL = net
-        except Exception as e:  # weights download / import / architecture failure
+        except Exception as e:  # weights download / import failure
             raise RuntimeError(f"xraydar unavailable: {e}")
+
+        if matched_fraction < _MIN_MATCH_FRACTION:
+            # Honest failure: do NOT serve sigmoid noise as a real prediction.
+            # Raised outside the try/except above so this clear message
+            # propagates as-is, without being re-wrapped as "xraydar
+            # unavailable: xraydar checkpoint/model architecture mismatch...".
+            raise RuntimeError(
+                f"xraydar checkpoint/model architecture mismatch: only "
+                f"{matched_fraction:.1%} of checkpoint keys matched "
+                f"({n_unexpected} unexpected, {n_missing} missing model keys)"
+            )
+        net.eval()
+        _MODEL = net
     return _MODEL
 
 
@@ -364,9 +375,12 @@ class XRaydarProvider(InferenceProvider):
     def detect(self, prepared) -> list[tuple[str, float]]:
         m = _model()
         t = _to_model_input(prepared.array)
-        with torch.no_grad():
-            logits = m(t)
-            probs = torch.sigmoid(logits)[0].cpu().numpy()
+        try:
+            with torch.no_grad():
+                logits = m(t)
+                probs = torch.sigmoid(logits)[0].cpu().numpy()
+        except Exception as e:
+            raise RuntimeError(f"xraydar inference failed: {e}")
         n = min(len(_XRAYDAR_LABELS_38), probs.shape[0])
         out = []
         for i in range(n):
