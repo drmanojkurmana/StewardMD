@@ -75,3 +75,7 @@ __pycache__/
 # copy of backend/thorex/models/thorex_clinical.onnx, regenerate with
 # backend/thorex/scripts/export_clinical_onnx.py. The labels JSON IS committed.
 models/*.onnx
+
+# ThoreX local dev harness + dormant module — never ship (localhost auth-bypass stubs).
+thorex-demo.html
+thorex-deid.js
