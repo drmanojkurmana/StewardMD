@@ -390,7 +390,7 @@
       timer = setInterval(function(){
         if (!alive()){ stop(); return; }
         applyStep(current + 1);
-        if (current >= STEPS.length){ stop(); if (typeof ctx.nav === 'function') ctx.nav('05'); }
+        if (current >= STEPS.length){ stop(); if (typeof ctx.nav === 'function') ctx.nav('analysis'); }
       }, 900);
     }
   
@@ -409,7 +409,7 @@
             if (!alive()) return;
             applyStep(STEPS.length);
             if (analysis && typeof ctx.setAnalysis === 'function') ctx.setAnalysis(analysis);
-            if (typeof ctx.nav === 'function') ctx.nav('05');
+            if (typeof ctx.nav === 'function') ctx.nav('analysis');
           }).catch(function(err){
             if (!alive()) return;
             var idx = (err && typeof err.stepIndex === 'number') ? err.stepIndex : current;

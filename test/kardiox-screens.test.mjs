@@ -127,5 +127,11 @@ if (kxClick) kxClick({ target: { closest: () => ({ getAttribute: (k) => k === "d
 ok("Why-screen back returns to the report (analysis intact, not emptied)",
    /Atrial fibrillation/i.test(host._html) && !/No analysis to show/i.test(host._html));
 
+// ── REGRESSION — the processing screen fired ctx.nav('05'), a stale numeric mockup id (not a router
+// SCREENS key), so it fell through to deferred() → "That arrives in a later KardiQ X update." No screen
+// may navigate to a bare numeric id; every nav target must be a semantic SCREENS key.
+ok("no navigation to a stale numeric screen id (must use semantic SCREENS keys)",
+   !/\.nav\(\s*['"][0-9]/.test(read("kardiox-screens.js")));
+
 console.log(`\nkardiox-screens: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
