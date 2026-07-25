@@ -19,16 +19,16 @@
      ThoreX's equivalent of KardioX's --kx-cardiac). */
   --tx-primary: var(--rds-primary, #0F766E);
   --tx-primary-2: var(--rds-primary-2, #115E59);
-  --tx-soft: var(--rds-soft, #E4F2EF);
+  --tx-soft: var(--rds-primary-soft, #E4F2EF);
   --tx-pulmonary: #2B6CB0;
   --tx-bg: var(--rds-bg, #F5F8F9);
-  --tx-surf-2: var(--rds-surf-2, #EEF3F5);
+  --tx-surf-2: var(--rds-surface-2, #EEF3F5);
   --tx-ink: var(--rds-ink, #0D1B24);
-  --tx-text: var(--rds-text, #0D1B24);
-  --tx-text-2: var(--rds-text-2, #5B7083);
+  --tx-text: var(--rds-ink, #0D1B24);
+  --tx-text-2: var(--rds-muted, #5B7083);
   --tx-muted: var(--rds-muted, #8CA2B1);
-  --tx-hairline: var(--rds-hairline, #E3EAEE);
-  --tx-card: var(--rds-card, #ffffff);
+  --tx-hairline: var(--rds-line, #E3EAEE);
+  --tx-card: var(--rds-surface, #ffffff);
   /* Severity — theme-invariant; prefer --sev-* if StewardMD defines them, else the design hexes. */
   --tx-sev-critical: var(--sev-critical, #B42332);
   --tx-sev-urgent: var(--sev-urgent, #C2410C);
