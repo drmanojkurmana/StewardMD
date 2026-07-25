@@ -55,14 +55,25 @@
     } catch (e) { return "/api/kardiox/feedback"; }
   }
 
+  // Stable per-user id so the backend can enforce a per-user monthly training quota.
+  function userId() {
+    try {
+      var id = localStorage.getItem("smd_device_id");
+      if (!id) { id = "d-" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); localStorage.setItem("smd_device_id", id); }
+      return id;
+    } catch (e) { return "anon"; }
+  }
+
   function submit(payload, imageBlob) {
     try {
       var fd = new FormData();
       Object.keys(payload).forEach(function (k) { fd.append(k, payload[k]); });
+      fd.append("userId", userId());
       if (imageBlob && payload.consent === "1") fd.append("image", imageBlob, "ecg");
       return fetch(endpoint(), { method: "POST", body: fd })
-        .then(function (r) { return r.ok; }).catch(function () { return false; });
-    } catch (e) { return Promise.resolve(false); }
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+        .catch(function () { return null; });
+    } catch (e) { return Promise.resolve(null); }
   }
 
   // ---- UI ----
@@ -93,7 +104,9 @@
       return false;
     }
     function finish(payload) {
-      submit(payload, currentImage());
+      submit(payload, currentImage()).then(function (res) {
+        if (res && res.trainingCapped) toast("Monthly training limit reached — logged, but not used for training this month.");
+      });
       el.querySelector(".kx-fb-row").hidden = true;
       var cc = el.querySelector(".kx-fb-correct"); if (cc) cc.hidden = true;
       var cs = el.querySelector(".kx-fb-consent"); if (cs) cs.hidden = true;

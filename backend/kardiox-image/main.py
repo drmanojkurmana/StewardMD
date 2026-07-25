@@ -51,6 +51,8 @@ SAFETY_CAVEAT = ("SAFETY: experimental AI screen from an ECG photo. MI-any is no
                  "A normal or benign screen does NOT exclude a life-threatening ECG. Confirm everything on the original 12-lead.")
 
 app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 _dev = "cpu"
 _ck = torch.load(MODEL_PATH, map_location=_dev, weights_only=False)
 _classes = _ck["classes"]
@@ -77,6 +79,29 @@ try:
     _fb_bucket = _gcs.Client().bucket(FEEDBACK_BUCKET)
 except Exception:
     _fb_bucket = None
+
+# ── Per-user training-contribution quota + admin controls (keeps retraining cost under budget) ──
+ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
+DEFAULT_TRAIN_LIMIT = int(os.environ.get("DEFAULT_TRAIN_LIMIT", "30"))   # training images / user / month
+def _month(): return time.strftime("%Y%m", time.gmtime())
+def _limits_cfg():
+    try:
+        b = _fb_bucket.blob("config/limits.json")
+        if b.exists():
+            c = json.loads(b.download_as_text()); c.setdefault("monthlyLimit", DEFAULT_TRAIN_LIMIT); c.setdefault("exempt", []); return c
+    except Exception: pass
+    return {"monthlyLimit": DEFAULT_TRAIN_LIMIT, "exempt": []}
+def _user_count(uid, month):
+    try:
+        b = _fb_bucket.blob(f"counters/{month}/{uid}.json")
+        if b.exists(): return int(json.loads(b.download_as_text()).get("count", 0))
+    except Exception: pass
+    return 0
+def _incr_user(uid, month):
+    c = _user_count(uid, month) + 1
+    try: _fb_bucket.blob(f"counters/{month}/{uid}.json").upload_from_string(json.dumps({"count": c}), content_type="application/json")
+    except Exception: pass
+    return c
 
 @app.get("/v1/health")
 def health(): return {"status":"ok","model":_ENGINE,"backbone":_BB,"classes":len(_classes),
@@ -166,21 +191,55 @@ async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = H
 
 @app.post("/v1/ecg/feedback")
 async def feedback(aiVerdict: str = Form(""), label: str = Form(""), correct: str = Form("0"),
-                   consent: str = Form("0"), ts: str = Form(""), image: UploadFile = File(default=None)):
+                   consent: str = Form("0"), ts: str = Form(""), userId: str = Form("anon"),
+                   image: UploadFile = File(default=None)):
     """Data flywheel: store one clinician-labelled example. The label record is always kept; the ECG
-    IMAGE is stored ONLY with explicit consent (PHI). Retraining reads gs://<bucket>/{labels,images}/."""
+    IMAGE (training data) is stored ONLY with explicit consent AND while the user is under their monthly
+    training quota (exempt users unlimited). Retraining reads gs://<bucket>/{labels,images}/."""
     rec = {"ts": ts or str(int(time.time()*1000)), "aiVerdict": aiVerdict, "label": label,
-           "correct": correct == "1", "consent": consent == "1", "engine": _ENGINE + "-3.2"}
+           "correct": correct == "1", "consent": consent == "1", "userId": userId, "engine": _ENGINE + "-3.2"}
     if _fb_bucket is None:
         return {"stored": False, "reason": "storage unavailable"}
+    cfg = _limits_cfg(); month = _month(); limit = int(cfg.get("monthlyLimit", DEFAULT_TRAIN_LIMIT))
+    exempt = userId in cfg.get("exempt", [])
+    used = _user_count(userId, month)
+    capped = (not exempt) and used >= limit
+    rec["trainingCapped"] = bool(capped)
     key = rec["ts"] + "-" + str(abs(hash(aiVerdict + "|" + label)) % 1000000)
     try:
         _fb_bucket.blob("labels/" + key + ".json").upload_from_string(json.dumps(rec), content_type="application/json")
-        if image is not None and consent == "1":
+        if image is not None and consent == "1" and not capped:
             data = await image.read()
             if data:
                 _fb_bucket.blob("images/" + key + ".img").upload_from_string(data)
                 rec["image"] = "images/" + key + ".img"
-        return {"stored": True, "key": key, "image": rec.get("image")}
+                used = _incr_user(userId, month)
+        return {"stored": True, "key": key, "image": rec.get("image"),
+                "trainingCapped": bool(capped), "used": used, "limit": ("unlimited" if exempt else limit)}
     except Exception as e:
         return {"stored": False, "reason": str(e)[:150]}
+
+@app.get("/v1/admin/limits")
+def admin_get(x_admin_token: str = Header(default="")):
+    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if _fb_bucket is None: return {"error": "no storage"}
+    cfg = _limits_cfg(); month = _month(); usage = {}
+    for b in _fb_bucket.list_blobs(prefix=f"counters/{month}/"):
+        uid = b.name.split("/")[-1][:-5]
+        try: usage[uid] = int(json.loads(b.download_as_text()).get("count", 0))
+        except Exception: pass
+    total = sum(usage.values())
+    est = round(1.0 + total * 0.5/1024 * 0.02, 2)   # ~$1 monthly GPU retrain + storage; inference free-tier
+    return {"config": cfg, "month": month, "usage": usage, "totalTrainingImages": total,
+            "estMonthlyCostUsd": est, "budgetUsd": 2.0}
+
+@app.post("/v1/admin/limits")
+async def admin_set(monthlyLimit: int = Form(default=None), exempt: str = Form(default=None),
+                    x_admin_token: str = Header(default="")):
+    if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
+    if _fb_bucket is None: raise HTTPException(503, "no storage")
+    cfg = _limits_cfg()
+    if monthlyLimit is not None: cfg["monthlyLimit"] = int(monthlyLimit)
+    if exempt is not None: cfg["exempt"] = [e.strip() for e in exempt.split(",") if e.strip()]
+    _fb_bucket.blob("config/limits.json").upload_from_string(json.dumps(cfg), content_type="application/json")
+    return {"saved": True, "config": cfg}
