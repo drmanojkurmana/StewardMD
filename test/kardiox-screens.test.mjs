@@ -75,11 +75,14 @@ R.runPipeline({ id: "smoke", source: "photoLibrary" });
 await delay(400);   // mock analyzer streams 13 stages @ ~8ms then resolves + mounts report
 ok("pipeline → report shows AF verdict", /Atrial fibrillation/i.test(host._html) && host._html.indexOf("kx-") >= 0);
 ok("report shows confidence 91%", /91/.test(host._html));
+ok("report now lists differentials", /Differentials considered/i.test(host._html) && /Atrial flutter/i.test(host._html));
 
 // why screen (needs analysis in state — set by the pipeline above)
 host._html = "";
 R.nav("why");
 ok("why screen renders", rendered(150));
+ok("why page: Criteria/Differentials tabs, diff hidden by default, no 'Which leads?'",
+   /data-view="criteria"/.test(host._html) && /data-view="diff" hidden/.test(host._html) && !/Which leads/.test(host._html));
 
 // on-device AI settings row (native only): appears when Capacitor + the model manager are present
 globalThis.Capacitor = { isNativePlatform: () => true, Plugins: {} };

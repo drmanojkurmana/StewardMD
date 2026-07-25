@@ -687,7 +687,21 @@
       '</button>' : '';
   
     var noteLabel = a.physicianNote ? a.physicianNote : "Add physician note";
-  
+
+    // Differentials the model weighed (the same list shown in depth on the "Why" screen) — surfaced here
+    // on the report so the ranked alternatives are visible without leaving the results page.
+    var rptDiffs = (a.differentials || []).slice();
+    var rptDiffsHtml = rptDiffs.length ? rptDiffs.map(function(d, i){
+      var dp = Math.max(0, Math.min(100, Math.round((typeof d.probability === "number" ? d.probability : 0) * 100)));
+      return '<div class="kx-diff' + (i === 0 ? ' is-primary' : '') + '">' +
+               '<div class="kx-diff-top">' +
+                 '<span class="kx-diff-label">' + esc(d.label) + '</span>' +
+                 '<span class="kx-diff-pct kx-data">' + dp + '%</span>' +
+               '</div>' +
+               '<div class="kx-diff-track"><div class="kx-diff-fill" style="width:' + dp + '%"></div></div>' +
+             '</div>';
+    }).join('') : '';
+
     var body =
       '<div class="kx-rpt-body">' +
         hero +
@@ -695,6 +709,7 @@
         '<div class="kx-metrics">' + metricsHtml + '</div>' +
         section("show_chart", "Morphology &amp; ST") +
         '<div class="kx-morph">' + morphHtml + '</div>' +
+        (rptDiffsHtml ? section("insights", "Differentials considered") + '<div class="kx-diffs">' + rptDiffsHtml + '</div>' : '') +
         section("clinical_notes", "Clinical interpretation") +
         '<div class="kx-interp">' + esc(a.clinicalInterpretation) + '</div>' +
         '<button class="kx-why" type="button" data-act="kxnav:why">' +
@@ -825,16 +840,18 @@
           ecg +
   
           '<div class="kx-why-chips" role="tablist" aria-label="Explanation views">' +
-            '<button type="button" class="kx-chip is-selected" role="tab" aria-selected="true" data-chip="leads">Which leads?</button>' +
-            '<button type="button" class="kx-chip" role="tab" aria-selected="false" data-chip="criteria">Criteria</button>' +
+            '<button type="button" class="kx-chip is-selected" role="tab" aria-selected="true" data-chip="criteria">Criteria</button>' +
             '<button type="button" class="kx-chip" role="tab" aria-selected="false" data-chip="diff">Differentials</button>' +
           '</div>' +
-  
-          '<div class="kx-why-label" id="kxWhyCriteria">Criteria the AI matched</div>' +
-          '<div class="kx-crit-list">' + critHtml + '</div>' +
-  
-          '<div class="kx-why-label" id="kxWhyDiff">Differentials considered</div>' +
-          '<div class="kx-diffs">' + diffsHtml + '</div>' +
+
+          '<div class="kx-why-view" data-view="criteria">' +
+            '<div class="kx-why-label" id="kxWhyCriteria">Criteria the AI matched</div>' +
+            '<div class="kx-crit-list">' + critHtml + '</div>' +
+          '</div>' +
+          '<div class="kx-why-view" data-view="diff" hidden>' +
+            '<div class="kx-why-label" id="kxWhyDiff">Differentials considered</div>' +
+            '<div class="kx-diffs">' + diffsHtml + '</div>' +
+          '</div>' +
   
           (verify
             ? '<div class="kx-verify">' +
@@ -865,10 +882,11 @@
         chips[i].classList.toggle('is-selected', on);
         chips[i].setAttribute('aria-selected', on ? 'true' : 'false');
       }
+      // Tabs now SWITCH which section is shown (was: one long everything-at-once page you scrolled).
       var view = chip.getAttribute('data-chip');
-      if (view === 'criteria') { var c = host.querySelector('#kxWhyCriteria'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      else if (view === 'diff') { var d = host.querySelector('#kxWhyDiff'); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      else { var e = host.querySelector('.kx-ecg'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'start' }); pulseTag('rr'); pulseTag('fwave'); }
+      var views = host.querySelectorAll('.kx-why-view');
+      for (var j = 0; j < views.length; j++){ views[j].hidden = (views[j].getAttribute('data-view') !== view); }
+      if (view === 'criteria') { pulseTag('rr'); pulseTag('fwave'); }
     }
   
     host.onclick = function(e){
@@ -2740,7 +2758,7 @@
         try { closeMod(); if (typeof window.SMD_askMaik === "function") window.SMD_askMaik(q); else toast("MaiK assistant unavailable."); } catch (e2) { toast("MaiK assistant unavailable."); }
         return;
       }
-      case "kxnav:export": haptic("light"); exportReport(); return;
+      case "kxnav:share": case "kxnav:export": haptic("light"); exportReport(); return;
       case "kxnav:note": haptic("light"); editNote(); return;
       case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": {
         haptic("light");
