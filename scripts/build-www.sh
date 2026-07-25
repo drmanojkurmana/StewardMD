@@ -52,6 +52,8 @@ done
 # in the bundle, else the native WebView can't reach the CDN and every ligature icon
 # renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
 if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
+# Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)
+if [ -d assets/kardiox-learn ]; then mkdir -p "$WWW/assets/kardiox-learn"; cp assets/kardiox-learn/* "$WWW/assets/kardiox-learn/" 2>/dev/null || true; fi
 
 # ── 4a-bis. Vendored third-party assets (e.g. FundX AI's local MediaPipe wasm/model
 # under assets/vendor/mediapipe/). Copied recursively so a vendored copy actually ships
