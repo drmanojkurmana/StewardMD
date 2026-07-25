@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     mode: str = "mock"            # mock | local | cloud
     environment: str = "dev"
     model_cache_dir: str = "/tmp/thorex-models"
+    hf_token: str = ""
+    hf_model: str = "codewithdark/vit-chest-xray"
+    hf_timeout_s: int = 20
 
 @lru_cache
 def get_settings() -> Settings:
