@@ -2,8 +2,9 @@
 
 This directory holds generated model binaries. **Binaries (`*.onnx`,
 `*.mlpackage/`) are gitignored** (see `.gitignore`) — regenerate them
-locally, they are not checked in. The labels JSON (`thorex_clinical_labels.json`)
-and this README ARE checked in.
+locally, they are not checked in. The labels JSON files
+(`thorex_clinical_labels.json`, `thorex_xraydar_labels.json`) and this
+README ARE checked in.
 
 ## Clean, CAM-enabled clinical export (current, for onnxruntime-web)
 
@@ -73,6 +74,81 @@ Regenerate:
 ```bash
 cd backend/thorex
 .venv/bin/python scripts/export_clinical_onnx.py
+```
+
+## Clean, CAM-enabled X-Raydar (educational) export (current, for onnxruntime-web)
+
+`scripts/export_xraydar_onnx.py` — sibling to the clinical export above,
+for the EDUCATIONAL `xraydar` engine (`app/providers/xraydar_provider.py`,
+the vendored X-Raydar `Inception3`, is512, `num_classes=38`). Loads the
+real pinned-revision checkpoint via the provider's own `_model()`, builds a
+real is512 input via the provider's own `_to_model_input()` (decode →
+grayscale → aspect-pad-to-square → resize 512 → `Normalize(0.491, 0.271)`),
+and exports a wrapper with two outputs:
+
+```bash
+cd backend/thorex
+.venv/bin/python scripts/export_xraydar_onnx.py
+```
+
+**Input:** `input`, float32 `[1,1,512,512]`, X-Raydar's own is512
+preprocessing (independent of the shared xrv-normalized 224x224 array the
+clinical engine uses).
+
+**Outputs:**
+- `probs` — float32 `[1,38]`, sigmoid probability per class, order =
+  `thorex_xraydar_labels.json` (all 38 X-Raydar classes, each passed
+  through the same `_SHARED_LABEL_MAP` `XRaydarProvider.detect()` applies —
+  shared-vocabulary name where one exists, else the raw X-Raydar name
+  unchanged; `detect()` does not drop or reorder any class). Inception3's
+  vendored `forward()` never references `AuxLogits` (train or eval), so no
+  aux-branch handling was needed — this is a plain
+  `sigmoid(fc(GAP(Mixed_7c(x))))`.
+- `cam` — float32 `[1,38,14,14]` (14x14 for a 512x512 input, measured not
+  hardcoded), per-class Class Activation Map: a 1x1 conv over the RAW
+  `Mixed_7c` output (already ReLU'd internally by each branch's
+  `BasicConv2d` — unlike the clinical DenseNet trunk, no extra ReLU needed
+  before the CAM conv) using the `fc` weight matrix reshaped to a conv
+  kernel (`[38,2048]` → `[38,2048,1,1]`), bias=0. Forward-only. CAM was
+  optional per spec (nice-to-have for X-Raydar; the clinical engine's CAM
+  is the primary explainability surface) but came out clean since exposing
+  `Mixed_7c` only required calling the vendored submodules directly in the
+  same order as `Inception3.forward` — no approximation.
+
+### Last verified run (2026-07-25, macOS, Python 3.14.6, torch 2.13.0, onnxruntime 1.28.0)
+
+Model load: `key_match_info` = 580/580 checkpoint keys matched (100% —
+real pinned weights, not architecture-mismatch noise).
+
+| Artifact | Size | Parity |
+|---|---|---|
+| `thorex_xraydar.onnx` (fp32, opset 17) | 87.74 MB | torch-vs-onnx max_abs_diff = 8.94e-08; onnx-vs-original-`detect()` max_abs_diff = 8.94e-08 (both `< 1e-3`) |
+| `thorex_xraydar_fp16.onnx` (via `onnxconverter_common.float16`, `keep_io_types=True`) | 43.91 MB | vs fp32: max_abs_diff = 2.21e-04, mean_abs_diff = 8.01e-05 |
+| `thorex_xraydar_int8.onnx` (`onnxruntime.quantization.quantize_dynamic`, `QInt8`) | 22.18 MB | vs fp32: max_abs_diff = 3.45e-02, mean_abs_diff = 1.88e-02 |
+
+(Expected ~90MB/45MB/23MB per spec — measured sizes land within ~2-3% of
+that estimate.)
+
+CAM sanity: shape `[1,38,14,14]` confirmed; argmax-class (`Effusion`, prob
+0.55 on the synthetic test image) CAM is non-degenerate (std ≈ 0.21 over
+the 14x14 map, min -0.03 / max 1.13).
+
+Labels: `thorex_xraydar_labels.json` — the ordered 38-class label list,
+index-aligned to `probs` and identical (order + names) to what
+`XRaydarProvider.detect()` returns, so the JS side maps output index N to
+the correct label with no lookup ambiguity.
+
+Served copy for local browser-harness verification: a copy of the fp32
+model + labels is also written to the repo root at
+`models/thorex_xraydar.onnx` and `models/thorex_xraydar_labels.json`
+(same convention as the clinical export — gitignored for the `.onnx`, the
+labels JSON there is a convenience copy).
+
+Regenerate:
+
+```bash
+cd backend/thorex
+.venv/bin/python scripts/export_xraydar_onnx.py
 ```
 
 ## Prior PoC (raw-forward export, superseded)

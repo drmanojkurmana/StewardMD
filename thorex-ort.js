@@ -24,6 +24,26 @@
  * PNG encoding is pure JS (fflate's zlibSync for the IDAT stream + a small PNG/CRC writer) so it needs
  * no canvas — works in Node for verification and in the WebView alike.
  *
+ * OD-D: EDUCATIONAL engine (X-Raydar, is512, 38 classes) now also runs fully on-device, via
+ * `models/thorex_xraydar.onnx` (backend/thorex/scripts/export_xraydar_onnx.py). Its preprocessing is
+ * X-Raydar's OWN native pipeline (backend/thorex/app/providers/xraydar_provider.py::_to_model_input),
+ * independent of the clinical xrv pipeline above:
+ *   1) grayscale pixels 0..255
+ *   2) aspect-preserving pad to a square canvas (centered, black-fill — matches PIL's
+ *      `ImageOps.pad(img, (side,side), color=0, centering=(0.5,0.5))`)
+ *   3) resize to 512x512 (bilinear)
+ *   4) scale to [0,1], then X-Raydar's own `Normalize(mean=0.491, std=0.271)`
+ *   -> Float32 tensor [1,1,512,512]
+ * (X-Raydar's internal second-stage `_transform_input` re-normalization is baked into the exported
+ * ONNX graph itself — nothing extra needed on the JS side.) `analyzeImage(input, {includeEducational:
+ * true})` runs BOTH engines off one grayscale decode and returns an analysis with clinical first,
+ * educational second (`engine:"xraydar"`, `educational:true`, `disclaimer_key:"educational_not_clinical"`).
+ * A CAM heatmap is attached to the top educational finding too (the export wrapper produces one), but
+ * the code tolerates a `cam`-less educational model (heatmap simply omitted) since CAM was optional
+ * for this engine per spec. Educational-engine failure NEVER drops the clinical result — mirrors the
+ * backend orchestrator's asymmetric isolation (log + continue for the educational/adjunct engine;
+ * only a clinical-engine failure propagates as a rejection).
+ *
  * node + browser.
  */
 (function () {
@@ -41,6 +61,15 @@
   var MODEL_URL_DEFAULT = "/models/thorex_clinical.onnx";
   var LABELS_URL_DEFAULT = "/models/thorex_clinical_labels.json";
   var ORT_BASE_DEFAULT = "/vendor/onnxruntime-web";
+
+  // OD-D: educational (X-Raydar) engine defaults — separate model, separate label set, separate
+  // native input size (512, not 224). Configurable so a Node harness / different static host can
+  // point elsewhere; sessions are cached per-URL (see getSession below) so switching URLs in tests
+  // never reuses a stale session.
+  var EDU_MODEL_URL_DEFAULT = "/models/thorex_xraydar.onnx";
+  var EDU_LABELS_URL_DEFAULT = "/models/thorex_xraydar_labels.json";
+  var EDU_INPUT_SIZE = 512;
+  var EDU_NORM_MEAN = 0.491, EDU_NORM_STD = 0.271; // X-Raydar's own Normalize(mean, std)
 
   // One-line clinical relevance per finding label (ported verbatim from the reviewed backend copy,
   // backend/thorex/app/pipeline/labels.py — R1 content, not re-authored here). Labels not present in
@@ -63,6 +92,11 @@
     "Fracture": "Rib/clavicle if visible."
   };
   function relevanceFor(label) { return RELEVANCE[label] || "Correlate clinically."; }
+
+  // Educational (X-Raydar) findings all carry the same "educational" relevance tag, matching the
+  // convention already used by thorex-providers.js's mock xraydarEngine() and the canonical PNEUMONIA
+  // sample in thorex-models.js (not a per-label clinical relevance line — this engine is learning-only).
+  function eduRelevanceFor(label) { return "educational"; }
 
   // band -> severity (must be one of SMD_THOREX_MODELS.SEVERITIES; mirrors thorex-providers.js mock's
   // High->urgent / Medium->warn convention so on-device findings render with the same weight as the
@@ -116,6 +150,42 @@
     xrvNormalize(norm);
     var crop = centerCropSquare(norm, gray.width, gray.height);
     return bilinearResize(crop.data, crop.size, crop.size, 224, 224);
+  }
+
+  // ── X-Raydar (educational, OD-D) native is512 preprocessing ─────────────────────────────────────
+  // Aspect-preserving pad to a square canvas, centered, black-fill — matches PIL's
+  // ImageOps.pad(img, (side,side), color=0, centering=(0.5,0.5)) as used by
+  // backend/thorex/app/providers/xraydar_provider.py::_pad_to_square. Since the target side is
+  // exactly max(w,h), ImageOps.pad's internal "contain" resize is always a no-op scale=1 here — it
+  // only pastes centered — so a plain centered zero-fill copy reproduces it exactly. PIL's centering
+  // offset is `int((side - dim) * 0.5)`, which truncates toward zero; for non-negative operands that
+  // is identical to `Math.floor`, so this is exact (not an approximation).
+  function padToSquareGray(gray) {
+    var w = gray.width, h = gray.height, side = Math.max(w, h);
+    if (w === h) return { data: Float32Array.from(gray.data), size: w };
+    var out = new Float32Array(side * side); // zero-fill == black, matches color=0
+    var offX = Math.floor((side - w) / 2), offY = Math.floor((side - h) / 2);
+    for (var y = 0; y < h; y++) {
+      var srcRow = y * w, dstRow = (offY + y) * side + offX;
+      for (var x = 0; x < w; x++) out[dstRow + x] = gray.data[srcRow + x];
+    }
+    return { data: out, size: side };
+  }
+
+  // scale to [0,1] then X-Raydar's own Normalize(mean=0.491, std=0.271). (The model's internal
+  // second-stage `_transform_input` re-normalization is baked into the exported ONNX graph itself —
+  // nothing further to replicate here.)
+  function normalizeXraydar(vals /* Float32Array 0..255, in place */) {
+    for (var i = 0; i < vals.length; i++) vals[i] = (vals[i] / 255 - EDU_NORM_MEAN) / EDU_NORM_STD;
+    return vals;
+  }
+
+  // gray -> pad-to-square -> resize(512) -> normalize -> Float32Array[512*512], ready to wrap as
+  // [1,1,512,512]. Mirrors preprocessToTensorData above but for X-Raydar's own native pipeline.
+  function preprocessToTensorDataEdu(gray /* {data,width,height} raw 0..255 intensities */) {
+    var padded = padToSquareGray(gray);
+    var resized = bilinearResize(padded.data, padded.size, padded.size, EDU_INPUT_SIZE, EDU_INPUT_SIZE);
+    return normalizeXraydar(resized);
   }
 
   // ── image decode: ImageData-like {width,height,data} (sync, test/Node-friendly) or Blob/dataURL
@@ -218,12 +288,16 @@
     return btoa(s);
   }
 
-  // cam7x7 (Float32Array length 49, PRE-ReLU raw CAM logits for one class) -> base64 PNG (RGBA, 224x224).
-  function camToBase64Png(cam7x7) {
-    var norm7 = reluNormalizeCam(cam7x7);
-    var up = bilinearResize(norm7, 7, 7, 224, 224);
+  // camPlane (Float32Array length camH*camW, PRE-ReLU raw CAM logits for one class) -> base64 PNG
+  // (RGBA, outSize x outSize). Generic over the CAM grid size so both the clinical engine's 7x7 CAM
+  // and the educational (X-Raydar) engine's 14x14 CAM share this one implementation (DRY) — defaults
+  // preserve the original clinical 7x7 -> 224x224 behavior when called with just one argument.
+  function camToBase64Png(camPlane, camH, camW, outSize) {
+    camH = camH || 7; camW = camW || 7; outSize = outSize || 224;
+    var norm = reluNormalizeCam(camPlane);
+    var up = bilinearResize(norm, camW, camH, outSize, outSize);
     var rgba = colorizeCam(up);
-    return base64FromBytes(encodePngRGBA(rgba, 224, 224));
+    return base64FromBytes(encodePngRGBA(rgba, outSize, outSize));
   }
 
   // ── ONNX Runtime Web loading (mirrors kardiox-ort.js exactly) ────────────────────────────────────
@@ -272,15 +346,88 @@
     return false;
   }
 
+  // Shared result-shaping: ranked probs -> banded findings (>= "Low" only) -> optional top-finding CAM
+  // heatmap -> one engine-result object (raw payload shape, `disclaimer_key` snake_case as makeAnalysis
+  // expects). Used by BOTH the clinical and educational paths below (DRY) — they differ only in the
+  // engine name/relevance function/disclaimer/heatmap output size, all passed in via `meta`.
+  function rankAndBuildFindings(probs, labelList, relevanceFn) {
+    var ranked = [];
+    for (var i = 0; i < probs.length; i++) ranked.push({ label: labelList[i] || ("class" + i), idx: i, prob: Number(probs[i]) });
+    ranked.sort(function (a, b) { return b.prob - a.prob; });
+    var models = MODELS();
+    var findings = [];
+    for (var f = 0; f < ranked.length; f++) {
+      var band = models ? models.band(ranked[f].prob) : null;
+      if (!band) continue;
+      findings.push({ label: ranked[f].label, idx: ranked[f].idx, prob: ranked[f].prob, band: band, severity: severityForBand(band), relevance: relevanceFn(ranked[f].label) });
+    }
+    return { ranked: ranked, findings: findings };
+  }
+
+  function attachTopHeatmap(findings, probsLength, camT, heatmapOutSize) {
+    if (!findings.length || !camT || !camT.data) return;
+    var camDims = camT.dims || [1, probsLength, 7, 7];
+    var nClasses = camDims[1], camH = camDims[2], camW = camDims[3], camPlane = camH * camW;
+    if (nClasses !== probsLength) return;
+    var top = findings[0], offset = top.idx * camPlane;
+    try { top.heatmap = camToBase64Png(camT.data.slice(offset, offset + camPlane), camH, camW, heatmapOutSize); }
+    catch (e) { /* heatmap is an adjunct; a failure here must not sink the findings */ }
+  }
+
+  function makeEngineResultRaw(meta, ranked, findings) {
+    return {
+      engine: meta.engineName,
+      educational: !!meta.educational,
+      findings: findings.map(function (fnd) { return { label: fnd.label, band: fnd.band, severity: fnd.severity, relevance: fnd.relevance, heatmap: fnd.heatmap }; }),
+      disclaimer_key: meta.disclaimerKey || null
+    };
+  }
+
+  // Runs the EDUCATIONAL (X-Raydar) engine off an already-decoded grayscale image. CAM is optional for
+  // this engine (per spec) — only `probs` is required; a missing `cam` output simply omits the top
+  // finding's heatmap rather than failing the engine.
+  function runEducationalEngine(ort, gray, eduModelUrl, opts) {
+    var eduLabelsUrl = opts.eduLabelsUrl || EDU_LABELS_URL_DEFAULT;
+    var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
+    return Promise.all([
+      getSession(ort, eduModelUrl, opts.eduModelBytes),
+      loadLabels(fetchImpl, eduLabelsUrl, opts.eduLabels)
+    ]).then(function (r) {
+      var session = r[0], labelList = r[1] || [];
+      var tensorData = preprocessToTensorDataEdu(gray);
+      var tensor = new ort.Tensor("float32", tensorData, [1, 1, EDU_INPUT_SIZE, EDU_INPUT_SIZE]);
+      return Promise.resolve(session.run({ input: tensor })).then(function (out) {
+        var probsT = out.probs;
+        if (!probsT) throw err("bad_model", "educational model did not return a `probs` output", "analysis");
+        var rb = rankAndBuildFindings(probsT.data, labelList, eduRelevanceFor);
+        attachTopHeatmap(rb.findings, probsT.data.length, out.cam, EDU_INPUT_SIZE);
+        return {
+          ranked: rb.ranked,
+          engineResult: makeEngineResultRaw({ engineName: "xraydar", educational: true, disclaimerKey: "educational_not_clinical" }, rb.ranked, rb.findings)
+        };
+      });
+    });
+  }
+
   // imageInput: ImageData-like {width,height,data}, Blob, or data-URL string.
-  // opts: { ort, fetch, modelUrl, labelsUrl, labels, modelBytes, ortBase, id }
+  // opts: { ort, fetch, modelUrl, labelsUrl, labels, modelBytes, ortBase, id,
+  //         includeEducational, eduModelUrl, eduLabelsUrl, eduLabels, eduModelBytes }
+  // When opts.includeEducational is true, BOTH the clinical (torchxrayvision) and educational
+  // (xraydar) engines run on-device off one grayscale decode; the returned analysis has clinical
+  // first, educational second. An educational-engine failure is logged and the analysis still
+  // resolves with the clinical engine only (asymmetric isolation, mirrors the backend orchestrator:
+  // backend/thorex/app/pipeline/orchestrator.py logs+continues on an educational-provider RuntimeError
+  // but re-raises a clinical-provider failure). A CLINICAL failure (decode/session/inference) still
+  // rejects the whole promise, unchanged from before.
   function analyzeImage(imageInput, opts) {
     opts = opts || {};
     var ort = opts.ort || (typeof window !== "undefined" && window.ort) || null;
     var modelUrl = opts.modelUrl || MODEL_URL_DEFAULT;
     var labelsUrl = opts.labelsUrl || LABELS_URL_DEFAULT;
+    var eduModelUrl = opts.eduModelUrl || EDU_MODEL_URL_DEFAULT;
     var ortBase = opts.ortBase || ORT_BASE_DEFAULT;
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
+    var includeEducational = !!opts.includeEducational;
 
     function loadRuntime() { return ort ? Promise.resolve(ort) : loadOrtWeb(ortBase).then(function (o) { ort = o; return o; }); }
 
@@ -295,40 +442,35 @@
       return Promise.resolve(session.run({ input: tensor })).then(function (out) {
         var probsT = out.probs, camT = out.cam;
         if (!probsT || !camT) throw err("bad_model", "model did not return both `probs` and `cam` outputs", "analysis");
-        var probs = probsT.data, camDims = camT.dims || [1, labelList.length, 7, 7];
-        var nClasses = camDims[1], camH = camDims[2], camW = camDims[3], camPlane = camH * camW;
+        var rb = rankAndBuildFindings(probsT.data, labelList, relevanceFor);
+        attachTopHeatmap(rb.findings, probsT.data.length, camT, 224);
+        var clinicalEngineResult = makeEngineResultRaw({ engineName: "torchxrayvision", educational: false, disclaimerKey: null }, rb.ranked, rb.findings);
 
-        var ranked = [];
-        for (var i = 0; i < probs.length; i++) ranked.push({ label: labelList[i] || ("class" + i), idx: i, prob: Number(probs[i]) });
-        ranked.sort(function (a, b) { return b.prob - a.prob; });
-
-        var models = MODELS();
-        var findings = [];
-        for (var f = 0; f < ranked.length; f++) {
-          var band = models ? models.band(ranked[f].prob) : null;
-          if (!band) continue;
-          findings.push({ label: ranked[f].label, idx: ranked[f].idx, prob: ranked[f].prob, band: band, severity: severityForBand(band), relevance: relevanceFor(ranked[f].label) });
-        }
-        if (findings.length && camT.data && nClasses === probs.length) {
-          var top = findings[0], offset = top.idx * camPlane;
-          try { top.heatmap = camToBase64Png(camT.data.slice(offset, offset + camPlane)); }
-          catch (e) { /* heatmap is an adjunct; a failure here must not sink the clinical findings */ }
+        function finish(engines, eduRanked) {
+          var models = MODELS();
+          var raw = {
+            id: opts.id != null ? String(opts.id) : undefined,
+            engines: engines,
+            disclaimer_key: "clinical_assist_disclaimer"
+          };
+          var analysis = models ? models.makeAnalysis(raw) : raw;
+          analysis.engine = "torchxrayvision";
+          analysis.probs = rb.ranked;   // diagnostic: full clinical ranked probability list (mirrors kardiox's headProbabilities)
+          if (eduRanked) analysis.eduProbs = eduRanked; // diagnostic: full educational ranked probability list
+          return analysis;
         }
 
-        var raw = {
-          id: opts.id != null ? String(opts.id) : undefined,
-          engines: [{
-            engine: "torchxrayvision",
-            educational: false,
-            findings: findings.map(function (fnd) { return { label: fnd.label, band: fnd.band, severity: fnd.severity, relevance: fnd.relevance, heatmap: fnd.heatmap }; }),
-            disclaimer_key: null
-          }],
-          disclaimer_key: "clinical_assist_disclaimer"
-        };
-        var analysis = models ? models.makeAnalysis(raw) : raw;
-        analysis.engine = "torchxrayvision";
-        analysis.probs = ranked;   // diagnostic: full ranked probability list (mirrors kardiox's headProbabilities)
-        return analysis;
+        if (!includeEducational) return finish([clinicalEngineResult]);
+
+        return runEducationalEngine(ort, gray, eduModelUrl, opts).then(
+          function (edu) { return finish([clinicalEngineResult, edu.engineResult], edu.ranked); },
+          function (eduErr) {
+            // Educational (adjunct) engine failure must NEVER drop the clinical result — log and
+            // continue clinical-only, mirroring the backend orchestrator's asymmetric isolation.
+            try { if (typeof console !== "undefined" && console.warn) console.warn("[ThoreX] on-device educational (xraydar) engine failed; returning clinical-only.", eduErr && eduErr.message); } catch (e) {}
+            return finish([clinicalEngineResult]);
+          }
+        );
       });
     });
   }
@@ -339,6 +481,8 @@
     loadOrtWeb: loadOrtWeb,
     MODEL_URL_DEFAULT: MODEL_URL_DEFAULT,
     LABELS_URL_DEFAULT: LABELS_URL_DEFAULT,
+    EDU_MODEL_URL_DEFAULT: EDU_MODEL_URL_DEFAULT,
+    EDU_LABELS_URL_DEFAULT: EDU_LABELS_URL_DEFAULT,
     _diag: {
       xrvNormalize: xrvNormalize,
       centerCropSquare: centerCropSquare,
@@ -350,7 +494,12 @@
       camToBase64Png: camToBase64Png,
       encodePngRGBA: encodePngRGBA,
       severityForBand: severityForBand,
-      relevanceFor: relevanceFor
+      relevanceFor: relevanceFor,
+      eduRelevanceFor: eduRelevanceFor,
+      padToSquareGray: padToSquareGray,
+      normalizeXraydar: normalizeXraydar,
+      preprocessToTensorDataEdu: preprocessToTensorDataEdu,
+      EDU_INPUT_SIZE: EDU_INPUT_SIZE
     }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

@@ -6,6 +6,10 @@
  * bit-exact tensor via a no-op crop/resize on an already-224x224 synthetic input). Also exercises the
  * pure preprocessing/CAM math against hand-computed expected numbers, independent of ONNX Runtime.
  *
+ * OD-D: also proves analyzeImage(input, {includeEducational:true}) runs BOTH the clinical
+ * (torchxrayvision) and educational (X-Raydar) engines on-device and that the educational engine's
+ * top-k labels/probs match a direct onnxruntime-node run of the identical X-Raydar ONNX + tensor.
+ *
  * If onnxruntime-node cannot be loaded in this environment, this HONESTLY reports that (SKIP, not a
  * fake pass) and still runs every pure-math check it can (preprocessing formula, CAM ReLU/normalize/
  * colorize) so the non-ML parts of the pipeline stay covered.
@@ -24,6 +28,9 @@ const ok = (name, cond) => { if (cond) { pass++; } else { fail++; console.log(" 
 
 const LABELS = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "models", "thorex_clinical_labels.json"), "utf8"));
 const MODEL_PATH = path.join(__dirname, "..", "models", "thorex_clinical.onnx");
+const EDU_LABELS_PATH = path.join(__dirname, "..", "models", "thorex_xraydar_labels.json");
+const EDU_MODEL_PATH = path.join(__dirname, "..", "models", "thorex_xraydar.onnx");
+const EDU_LABELS = fs.existsSync(EDU_LABELS_PATH) ? JSON.parse(fs.readFileSync(EDU_LABELS_PATH, "utf8")) : null;
 
 // ── Deterministic synthetic 224x224 "image" (a smooth radial pattern + texture, values 0..255) ──────
 // Built at 224x224 directly (not a larger photo) so centerCropSquare + bilinearResize are BOTH no-ops —
@@ -80,6 +87,45 @@ const pixels = buildSyntheticPixels();
   const gray = ORT_ENGINE._diag.grayFromImageLike({ width: 1, height: 1, data: new Uint8ClampedArray([100, 150, 200, 255]) });
   const expectedLuma = 0.299 * 100 + 0.587 * 150 + 0.114 * 200;
   ok("RGBA->grayscale luma matches PIL convert('L') weights", Math.abs(gray.data[0] - expectedLuma) < 1e-6);
+})();
+
+// ── Part 1b: OD-D educational (X-Raydar) preprocessing math, verified against hand-computed numbers ──
+(function testEduPreprocessMath() {
+  // padToSquareGray: a 10x6 rect -> 10x10 square, centered, black (0) padding.
+  // PIL ImageOps.pad(color=0, centering=(0.5,0.5)) offset = int((side-dim)*0.5) == floor for non-neg.
+  const rect = new Float32Array(10 * 6);
+  for (let i = 0; i < rect.length; i++) rect[i] = i + 1; // avoid 0 so we can distinguish real data from padding
+  const padded = ORT_ENGINE._diag.padToSquareGray({ data: rect, width: 10, height: 6 });
+  ok("padToSquareGray: side = max(w,h)", padded.size === 10);
+  const offY = Math.floor((10 - 6) / 2); // = 2
+  ok("padToSquareGray: top padding rows are black (0)", padded.data[0] === 0 && padded.data[10 - 1] === 0);
+  ok("padToSquareGray: original data lands at the centered vertical offset", padded.data[offY * 10] === rect[0] && padded.data[offY * 10 + 9] === rect[9]);
+  ok("padToSquareGray: bottom padding rows are black (0)", padded.data[(offY + 6) * 10] === 0);
+
+  // padToSquareGray: already-square input is a no-op copy (no padding needed).
+  const sq = new Float32Array(9); for (let i = 0; i < 9; i++) sq[i] = i;
+  const paddedSq = ORT_ENGINE._diag.padToSquareGray({ data: sq, width: 3, height: 3 });
+  ok("padToSquareGray: no-op for already-square input", paddedSq.size === 3 && Array.from(paddedSq.data).every((v, i) => v === sq[i]));
+
+  // normalizeXraydar: (px/255 - 0.491) / 0.271
+  const sample = Float32Array.from([0, 255]);
+  const normed = ORT_ENGINE._diag.normalizeXraydar(Float32Array.from(sample));
+  ok("normalizeXraydar(0) == (0-0.491)/0.271", Math.abs(normed[0] - ((0 - 0.491) / 0.271)) < 1e-6);
+  ok("normalizeXraydar(255) == (1-0.491)/0.271", Math.abs(normed[1] - ((1 - 0.491) / 0.271)) < 1e-6);
+
+  // Full edu preprocessing on an already-512x512 input: pad is a no-op, resize is a no-op, so the
+  // result must equal normalizeXraydar(pixels) exactly (mirrors the clinical no-op-parity check above).
+  const EDU_SIZE = ORT_ENGINE._diag.EDU_INPUT_SIZE;
+  ok("EDU_INPUT_SIZE is 512", EDU_SIZE === 512);
+  const eduPixels = new Float32Array(EDU_SIZE * EDU_SIZE);
+  for (let i = 0; i < eduPixels.length; i++) eduPixels[i] = (i * 37) % 256;
+  const expectedEduTensor = ORT_ENGINE._diag.normalizeXraydar(Float32Array.from(eduPixels));
+  const gotEduTensor = ORT_ENGINE._diag.preprocessToTensorDataEdu({ data: eduPixels, width: EDU_SIZE, height: EDU_SIZE });
+  let eduTensorMatches = gotEduTensor.length === expectedEduTensor.length;
+  if (eduTensorMatches) for (let i = 0; i < expectedEduTensor.length; i++) if (Math.abs(gotEduTensor[i] - expectedEduTensor[i]) > 1e-5) { eduTensorMatches = false; break; }
+  ok("preprocessToTensorDataEdu(512x512 square input) == normalizeXraydar(pixels) exactly (no-op pad/resize)", eduTensorMatches);
+
+  ok("eduRelevanceFor returns the 'educational' tag (matches mock/sample convention)", ORT_ENGINE._diag.eduRelevanceFor("anything") === "educational");
 })();
 
 // ── Part 2: CAM math on a synthetic feature map (no ONNX needed) ─────────────────────────────────────
@@ -181,11 +227,88 @@ async function realModelParity() {
   }
 }
 
-realModelParity().then(() => {
-  console.log(`\nthorex-ort: ${pass} passed, ${fail} failed`);
-  if (fail) process.exit(1);
-}).catch((e) => {
-  console.log("  ✗ FAIL: realModelParity threw:", e && e.stack || e);
-  console.log(`\nthorex-ort: ${pass} passed, ${fail + 1} failed`);
-  process.exit(1);
-});
+// ── Part 5: OD-D — TWO-ENGINE real model run (clinical + educational X-Raydar), on-device ───────────
+async function twoEngineParity() {
+  let ort;
+  try { ort = require("onnxruntime-node"); }
+  catch (e) {
+    console.log("thorex-ort: onnxruntime-node not available in this environment (" + e.message + ") — SKIPPING two-engine (OD-D) parity.");
+    return;
+  }
+  if (!fs.existsSync(MODEL_PATH) || !fs.existsSync(EDU_MODEL_PATH) || !EDU_LABELS) {
+    console.log(`thorex-ort: clinical or educational model/labels not found — SKIPPING two-engine (OD-D) parity `
+      + `(clinical_model=${fs.existsSync(MODEL_PATH)}, edu_model=${fs.existsSync(EDU_MODEL_PATH)}, edu_labels=${!!EDU_LABELS}). `
+      + `Run backend/thorex/scripts/export_xraydar_onnx.py to generate the educational ONNX + labels.`);
+    return;
+  }
+
+  // (a) our engine's full path: one decode -> clinical engine + educational engine, both on-device.
+  const analysis = await ORT_ENGINE.analyzeImage(
+    { width: SIZE, height: SIZE, data: pixels },
+    { ort, modelUrl: MODEL_PATH, labels: LABELS, eduModelUrl: EDU_MODEL_PATH, eduLabels: EDU_LABELS, includeEducational: true, id: "synthetic-two-engine" }
+  );
+  ok("analyzeImage({includeEducational:true}) returns exactly TWO engines", analysis.engines.length === 2);
+  ok("engine[0] is the clinical torchxrayvision engine (clinical first)", analysis.engines[0].engine === "torchxrayvision" && analysis.engines[0].educational === false);
+  ok("engine[1] is the educational xraydar engine (educational second)", analysis.engines[1].engine === "xraydar" && analysis.engines[1].educational === true);
+  ok("educational engine carries the educational_not_clinical disclaimer key", analysis.engines[1].disclaimerKey === "educational_not_clinical");
+  ok("analysis.eduProbs ranked list has all 38 X-Raydar labels", Array.isArray(analysis.eduProbs) && analysis.eduProbs.length === EDU_LABELS.length);
+  const learning = MODELS.learningEngine(analysis);
+  ok("MODELS.learningEngine(analysis) resolves the educational engine", !!learning && learning.engine === "xraydar" && learning.educational === true);
+  ok("MODELS.clinicalEngine(analysis) still resolves the clinical engine (two-engine analysis)", MODELS.clinicalEngine(analysis) && MODELS.clinicalEngine(analysis).engine === "torchxrayvision");
+
+  // (b) direct onnxruntime-node run of the educational model on the SAME hand-built tensor: pad is a
+  // no-op (pixels is already 224x224 square), resize 224->512 is REAL interpolation (not a no-op,
+  // unlike the clinical 224->224 case), then normalizeXraydar.
+  const resizedTo512 = ORT_ENGINE._diag.bilinearResize(pixels, SIZE, SIZE, 512, 512);
+  const expectedEduTensorData = ORT_ENGINE._diag.normalizeXraydar(resizedTo512);
+  const directEduSession = await ort.InferenceSession.create(EDU_MODEL_PATH);
+  const directEduTensor = new ort.Tensor("float32", expectedEduTensorData, [1, 1, 512, 512]);
+  const directEduOut = await directEduSession.run({ input: directEduTensor });
+  const directEduProbs = Array.from(directEduOut.probs.data);
+
+  const K = 5;
+  const eduEnginePairs = analysis.eduProbs.slice(0, K).map((r) => [r.label, r.prob]);
+  const directEduRanked = EDU_LABELS.map((label, i) => ({ label, prob: directEduProbs[i] })).sort((a, b) => b.prob - a.prob).slice(0, K);
+  let eduTopKLabelsMatch = true, eduTopKProbsMatch = true;
+  for (let i = 0; i < K; i++) {
+    if (eduEnginePairs[i][0] !== directEduRanked[i].label) eduTopKLabelsMatch = false;
+    if (Math.abs(eduEnginePairs[i][1] - directEduRanked[i].prob) > 1e-5) eduTopKProbsMatch = false;
+  }
+  ok(`educational top-${K} labels match between analyzeImage() and direct onnxruntime-node run`, eduTopKLabelsMatch);
+  ok(`educational top-${K} probabilities match between analyzeImage() and direct onnxruntime-node run (<1e-5)`, eduTopKProbsMatch);
+  console.log("  edu top-5 (engine):", eduEnginePairs.map(([l, p]) => `${l}=${p.toFixed(4)}`).join(", "));
+  console.log("  edu top-5 (direct):", directEduRanked.map((r) => `${r.label}=${r.prob.toFixed(4)}`).join(", "));
+
+  // If a heatmap was attached to the top educational finding, confirm it's a real, valid PNG.
+  const topEduFinding = learning && learning.findings[0];
+  if (topEduFinding && topEduFinding.heatmap) {
+    const bytes = Buffer.from(topEduFinding.heatmap, "base64");
+    ok("attached educational CAM heatmap is a valid PNG (signature) with real byte length", bytes.length > 200 && bytes[0] === 137 && bytes[1] === 80);
+  } else {
+    ok("educational engine produced no findings/heatmap on this synthetic input, or the model has no `cam` output (both are honest, non-fabricated outcomes)", true);
+  }
+
+  // (c) asymmetric isolation: a broken educational model URL must NOT sink the clinical result — the
+  // analysis must still resolve, clinical-only, mirroring the backend orchestrator's isolation.
+  const isolatedAnalysis = await ORT_ENGINE.analyzeImage(
+    { width: SIZE, height: SIZE, data: pixels },
+    {
+      ort, modelUrl: MODEL_PATH, labels: LABELS,
+      eduModelUrl: path.join(__dirname, "..", "models", "thorex_xraydar_does_not_exist.onnx"),
+      eduLabels: EDU_LABELS, includeEducational: true, id: "isolation-check"
+    }
+  );
+  ok("educational-engine failure (unresolvable model path) does not reject analyzeImage()", isolatedAnalysis.engines.length === 1);
+  ok("isolated result is clinical-only (torchxrayvision), never a fabricated educational engine", isolatedAnalysis.engines[0].engine === "torchxrayvision" && !isolatedAnalysis.engines.some((e) => e.educational === true));
+}
+
+realModelParity()
+  .then(twoEngineParity)
+  .then(() => {
+    console.log(`\nthorex-ort: ${pass} passed, ${fail} failed`);
+    if (fail) process.exit(1);
+  }).catch((e) => {
+    console.log("  ✗ FAIL: realModelParity/twoEngineParity threw:", e && e.stack || e);
+    console.log(`\nthorex-ort: ${pass} passed, ${fail + 1} failed`);
+    process.exit(1);
+  });

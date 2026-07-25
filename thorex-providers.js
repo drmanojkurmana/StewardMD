@@ -14,9 +14,10 @@
  *   v2beta -> torchxrayvision (clinical) + xraydar (educational:true, disclaimer educational_not_clinical)
  * The mock/remote never elevate/fabricate beyond what the entitlement is allowed — same rule as the
  * real backend and thorex-net.js's RemoteAnalyzer (client sends entitlement verbatim; never self-
- * elevates). The on-device analyzer (OD-C) is an INTERIM exception on the v2beta side: thorex-ort.js
- * does not yet have an on-device X-Raydar engine, so on-device v2beta returns clinical-only rather
- * than fabricating an educational engine (OD-D adds on-device X-Raydar).
+ * elevates). OD-D: the on-device analyzer now follows the same rule symmetrically — v2beta runs BOTH
+ * engines on-device (thorex-ort.js's analyzeImage(image, {includeEducational:true})), v1/free run the
+ * clinical engine only. thorex-ort.js isolates an educational-engine failure (log + clinical-only
+ * result); only a clinical-engine failure surfaces as an `inference_unavailable` rejection here.
  * node + browser.
  */
 (function () {
@@ -143,17 +144,19 @@
   }
   function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
 
-  // ── On-device analyzer (OD-C): REAL ONNX Runtime Web inference (thorex-ort.js), fully offline — no
-  //    upload, no network. Mirrors kardiox-providers.js's ondevicePreferred()/ORT branch pattern.
+  // ── On-device analyzer (OD-C/OD-D): REAL ONNX Runtime Web inference (thorex-ort.js), fully
+  //    offline — no upload, no network. Mirrors kardiox-providers.js's ondevicePreferred()/ORT
+  //    branch pattern.
   //
-  //    Entitlement shaping (INTERIM — see OD-D follow-up): thorex-ort.js only exports the CLINICAL
-  //    (torchxrayvision) engine on-device today; the educational X-Raydar engine has not been ported
-  //    to on-device inference yet. So for v1/free AND v2beta alike, the on-device analyzer returns the
-  //    clinical engine only — it does NOT fabricate an educational engine to fill the v2beta slot. The
-  //    dual-engine panel (thorex-screens.js) already renders gracefully with just the clinical side
-  //    when an analysis has a single engine, so this is a safe, honest interim: no UI change needed,
-  //    just fewer engines than v2beta normally gets from the remote/mock path. OD-D will add an
-  //    on-device X-Raydar engine and this comment/gap goes away.
+  //    Entitlement shaping (OD-D: BOTH engines now run on-device): v2beta asks thorex-ort.js's
+  //    analyzeImage() to also run the educational (X-Raydar) engine (`includeEducational: true`),
+  //    so v2beta gets the same two-engine (clinical + educational) shape on-device as it does from
+  //    the remote/mock path. v1/free ask for the clinical engine only, unchanged. thorex-ort.js
+  //    itself owns the asymmetric isolation (mirrors backend/thorex/app/pipeline/orchestrator.py):
+  //    an educational-engine failure is logged there and the analysis still resolves clinical-only;
+  //    a clinical-engine failure rejects the whole analyzeImage() call, which the catch handler
+  //    below turns into the same typed `inference_unavailable` error regardless of cause — never a
+  //    fabricated result.
   function ondeviceFlag() { return flagBool("smd_thorex_ondevice"); }
   function ortEngine() { return (typeof window !== "undefined" && window.SMD_THOREX_ORT) || null; }
   function ortAvailable() { try { var o = ortEngine(); return !!(o && o.available()); } catch (e) { return false; } }
@@ -175,17 +178,17 @@
           return Promise.reject(e1);
         }
         try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[0], 40); } catch (e) {}
-        return Promise.resolve(o.analyzeImage(input, { id: image && image.id })).then(function (analysis) {
+        // v2beta -> both engines on-device (clinical + educational); v1/free -> clinical only. Never
+        // self-elevate beyond what the entitlement allows (same rule the remote/mock paths follow).
+        var runOpts = { id: image && image.id, includeEducational: entitlement === "v2beta" };
+        return Promise.resolve(o.analyzeImage(input, runOpts)).then(function (analysis) {
           try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[1], 100); } catch (e) {}
-          // v2beta interim note (OD-D pending): NEVER fabricate the educational X-Raydar engine here —
-          // just log so it is visible in dev/QA that the dual panel is intentionally clinical-only.
-          if (entitlement === "v2beta") {
-            try { if (typeof console !== "undefined" && console.info) console.info("[ThoreX] on-device v2beta: X-Raydar (educational) engine is not yet on-device (OD-D pending); returning the clinical engine only."); } catch (e) {}
-          }
           return analysis;
         }, function (cause) {
           // Never fabricate on failure — surface a typed, honest error (same code/shape as
-          // unavailableAnalyzer below) regardless of which internal error thorex-ort.js threw.
+          // unavailableAnalyzer below) regardless of which internal error thorex-ort.js threw. Note:
+          // this only fires for a CLINICAL-engine failure — an educational-engine failure is already
+          // isolated inside analyzeImage() and resolves (clinical-only), never rejects here.
           var e2 = new Error((cause && cause.message) || "ThoreX on-device inference failed.");
           e2.code = "inference_unavailable"; e2.stage = (cause && cause.stage) || "analysis"; e2.cause = cause;
           throw e2;
