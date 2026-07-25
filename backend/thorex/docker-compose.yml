@@ -1,0 +1,22 @@
+services:
+  api:
+    build: { context: ., args: { WITH_ML: "1" } }
+    image: thorex-inference:latest
+    environment:
+      THOREX_MODE: ${THOREX_MODE:-local}
+      THOREX_ENVIRONMENT: ${THOREX_ENVIRONMENT:-dev}
+      THOREX_MODEL_CACHE_DIR: /models
+      THOREX_HF_TOKEN: ${THOREX_HF_TOKEN:-}
+      THOREX_HF_MODEL: ${THOREX_HF_MODEL:-codewithdark/vit-chest-xray}
+    volumes:
+      - thorex-models:/models
+    ports: ["8000:8000"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD","python","-c","import urllib.request,sys;sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/v1/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 3
+volumes:
+  thorex-models:
