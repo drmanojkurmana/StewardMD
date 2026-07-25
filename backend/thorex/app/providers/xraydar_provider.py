@@ -369,9 +369,9 @@ def _pad_to_square(pil_img: Image.Image) -> Image.Image:
     X-Raydar's own preprocessing (x-raydar-cv) pads the source image to
     square before its resize-to-target-size step, rather than a plain
     aspect-distorting resize, so long/narrow chest films aren't squashed.
-    The exact pad color/anchor of the upstream repo's implementation isn't
-    pinned here; center-anchored zero-padding is the documented convention
-    used when that detail is uncertain.
+    Black-fill (``color=0``), centered padding matches the convention used
+    by ``x-raydar-cv/src/utils/image_utils.py`` upstream — corroborated
+    against that source during code review.
     """
     w, h = pil_img.size
     side = max(w, h)
@@ -404,8 +404,8 @@ class XRaydarProvider(InferenceProvider):
 
     def detect(self, prepared) -> list[tuple[str, float]]:
         m = _model()
-        t = _to_model_input(prepared.outbound_png)
         try:
+            t = _to_model_input(prepared.outbound_png)
             with torch.no_grad():
                 logits = m(t)
                 probs = torch.sigmoid(logits)[0].cpu().numpy()
