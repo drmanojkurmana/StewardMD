@@ -688,6 +688,16 @@
   
     var noteLabel = a.physicianNote ? a.physicianNote : "Add physician note";
 
+    // Clinical interpretation should read as a clinical note, NOT model plumbing. Strip the engine/model
+    // preamble ("KardiQ X full ECG screen (efficientnet_b3 …) + … specialist.") and the verbose
+    // experimental / AUROC caveats the image backend appends — the short advisory gate below carries the
+    // safety wording. Clean interpretations (mock / other analyzers) have none of these, so pass through.
+    var interpClean = String(a.clinicalInterpretation || "")
+      .replace(/^KardiQ X full ECG screen[^.]*\.\s*/i, "")
+      .replace(/\s*EXPERIMENTAL decision-support[\s\S]*$/i, "")
+      .replace(/\s*\([^)]*AUROC[^)]*\)/gi, "")
+      .replace(/\s{2,}/g, " ").trim();
+
     // Differentials the model weighed (the same list shown in depth on the "Why" screen) — surfaced here
     // on the report so the ranked alternatives are visible without leaving the results page.
     var rptDiffs = (a.differentials || []).slice();
@@ -711,7 +721,7 @@
         '<div class="kx-morph">' + morphHtml + '</div>' +
         (rptDiffsHtml ? section("insights", "Differentials considered") + '<div class="kx-diffs">' + rptDiffsHtml + '</div>' : '') +
         section("clinical_notes", "Clinical interpretation") +
-        '<div class="kx-interp">' + esc(a.clinicalInterpretation) + '</div>' +
+        '<div class="kx-interp">' + esc(interpClean) + '</div>' +
         '<button class="kx-why" type="button" data-act="kxnav:why">' +
           ic("psychology") +
           '<span class="kx-why-txt"><b>Why this diagnosis?</b>' +
@@ -727,7 +737,7 @@
           '<button class="kx-btn kx-btn-primary" type="button" data-act="kxnav:export">' + ic("picture_as_pdf") + 'Export</button>' +
           '<button class="kx-btn kx-btn-secondary" type="button" data-act="kxnav:compare">' + ic("compare_arrows") + 'Compare</button>' +
         '</div>' +
-        '<div class="kx-disc">' + ic("info") + 'AI decision support · not a diagnosis. Confirm clinically.</div>' +
+        '<div class="kx-disc">' + ic("info") + 'AI-generated · advisory only (beta). Not a diagnosis; confirm clinically. Not liable for any clinical decision or outcome.</div>' +
       '</div>';
   
     host.innerHTML = head + body;
