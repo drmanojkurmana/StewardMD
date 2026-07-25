@@ -267,11 +267,14 @@
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") {
     window.SMD_KARDIOX_ACS = API;
-    // Auto-mount opportunistically when a verdict appears (flag-gated; observer is cheap + defensive).
+    // Auto-mount opportunistically when a verdict appears. Observe UNCONDITIONALLY (not gated on the
+    // flag at load): mount() is itself flag-gated, so toggling smd_kardiox_acs on at runtime via the
+    // settings switch makes the button appear on the next result render without a page reload.
     try {
-      if (flagOn() && typeof MutationObserver !== "undefined") {
+      if (typeof MutationObserver !== "undefined") {
         var obs = new MutationObserver(function () { mount(document); });
-        document.addEventListener("DOMContentLoaded", function () { mount(document); obs.observe(document.body, { childList: true, subtree: true }); });
+        var startObs = function () { mount(document); try { obs.observe(document.body, { childList: true, subtree: true }); } catch (e) { } };
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", startObs); else startObs();
       }
     } catch (e) { }
   }
