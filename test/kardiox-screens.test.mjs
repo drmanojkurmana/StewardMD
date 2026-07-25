@@ -90,5 +90,30 @@ ok("settings shows the on-device AI row on native", /kx-ondevice-ai/.test(host._
 ok("settings shows the on-device toggle on native", /kx-toggle-ondevice/.test(host._html) && /Analyse on-device/.test(host._html) && /role="switch"/.test(host._html));
 delete globalThis.Capacitor;
 
+// ── REGRESSION — "all source buttons open the gallery": each tile must route to its OWN picker. The
+// handler read the wrong attribute (data-src vs data-source), so every tile fell back to the photo
+// library. Stub the native pickers, capture the delegated click handler, and tap each source tile.
+let kxClick = null;
+rootEl._kxWired = false;                                    // force init() to re-register the click listener
+rootEl.addEventListener = (ev, fn) => { if (ev === "click") kxClick = fn; };
+const picked = { cameraSource: null, fileTypes: null };
+globalThis.Capacitor = {
+  isNativePlatform: () => true, convertFileSrc: (p) => p,
+  Plugins: {
+    Camera: { getPhoto: (o) => { picked.cameraSource = o.source; return Promise.reject({ cancelled: true }); } },
+    FilePicker: { pickFiles: (o) => { picked.fileTypes = (o.types || []).join(","); return Promise.reject({ cancelled: true }); } }
+  }
+};
+R.mountLanding(host);
+function tap(source) {
+  const tile = { getAttribute: (k) => k === "data-act" ? "kx-source" : k === "data-source" ? source : null };
+  if (kxClick) kxClick({ target: { closest: () => tile } });
+}
+picked.cameraSource = null; tap("camera");  await delay(5); ok("Camera tile opens the CAMERA (not gallery)", picked.cameraSource === "CAMERA");
+picked.cameraSource = null; tap("library"); await delay(5); ok("Photo Library tile opens the PHOTOS gallery", picked.cameraSource === "PHOTOS");
+picked.fileTypes = null;    tap("files");   await delay(5); ok("Files tile opens the file picker (not gallery)", /image/.test(picked.fileTypes || ""));
+picked.fileTypes = null;    tap("pdf");     await delay(5); ok("Scan PDF tile opens a PDF picker (not gallery)", /pdf/.test(picked.fileTypes || ""));
+delete globalThis.Capacitor;
+
 console.log(`\nkardiox-screens: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

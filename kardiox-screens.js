@@ -2678,7 +2678,7 @@
       };
       // ── Native (Capacitor) ──
       if (Cap && Cap.isNativePlatform && Cap.isNativePlatform() && Plugins) {
-        if ((source === "camera" || source === "photoLibrary") && Plugins.Camera) {
+        if ((source === "camera" || source === "library" || source === "photoLibrary") && Plugins.Camera) {
           Plugins.Camera.getPhoto({ quality: 92, resultType: "dataUrl", allowEditing: false,
             source: source === "camera" ? "CAMERA" : "PHOTOS" })
             .then(function (p) {
@@ -2740,7 +2740,16 @@
       case "kxnav:note": haptic("light"); editNote(); return;
       case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": {
         haptic("light");
-        var src = t.getAttribute("data-src") || "photoLibrary";
+        // The tiles declare their source via data-SOURCE. Reading data-src (which never exists) made every
+        // tile fall back to "photoLibrary", so Camera / Files / Scan-PDF all opened the gallery. Default by
+        // intent: "Allow camera" opens the camera; "Choose another photo" opens the library.
+        var src = t.getAttribute("data-source") || (act === "kardiox-cam-allow" ? "camera" : "photoLibrary");
+        // A digital ECG PDF carries an EXACT embedded signal — route it to the digital-ingestion service
+        // (kardiox-pdf) rather than the photo model. This is now the SINGLE PDF entry point (the old
+        // floating "Import ECG PDF" FAB was a duplicate). Falls back to the image path if unavailable.
+        if (src === "pdf" && window.SMD_KARDIOX_PDF && SMD_KARDIOX_PDF.flagOn && SMD_KARDIOX_PDF.flagOn() && SMD_KARDIOX_PDF.open) {
+          try { SMD_KARDIOX_PDF.open(); return; } catch (e) {}
+        }
         captureImage(src).then(function (blob) {
           runPipeline({ id: "kx-" + Date.now(), source: src, data: blob, leadLayout: null });
         }).catch(function (err) {

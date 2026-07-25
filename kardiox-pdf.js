@@ -70,17 +70,12 @@
     document.body.appendChild(inp); inp.click();
   }
 
+  // The PDF entry point now lives in the "Add an ECG" source grid ("Scan PDF" tile), which calls open()
+  // directly (see kardiox-screens.js). The old floating "Import ECG PDF" FAB was a second, duplicate PDF
+  // button stacked on top of that tile — removed. This also clears any FAB left over from a prior build.
   function mount(root) {
-    if (typeof document === "undefined" || !flagOn()) return;
-    try {
-      var host = document.getElementById("kardioxRoot");
-      if (!host || !host.classList.contains("kx-open") || document.getElementById("kxPdfFab")) return;
-      var fab = document.createElement("button");
-      fab.id = "kxPdfFab"; fab.className = "kx-pdf-fab"; fab.type = "button";
-      fab.innerHTML = "📄 Import ECG PDF";
-      fab.addEventListener("click", open);
-      host.appendChild(fab);
-    } catch (e) {}
+    if (typeof document === "undefined") return;
+    try { var old = document.getElementById("kxPdfFab"); if (old && old.remove) old.remove(); } catch (e) {}
   }
 
   var API = { open: open, analyze: analyze, flagOn: flagOn, mount: mount };
