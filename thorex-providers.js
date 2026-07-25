@@ -1,18 +1,22 @@
 /* thorex-providers.js — ThoreX CXR AI · provider seam + deterministic mock (SMD_THOREX_PROVIDERS).
  *
  * Cloned from kardiox-providers.js. Screens talk ONLY to providers; providers are the only layer
- * touching network/disk. Two assemblies:
+ * touching network/disk. Assemblies:
  *   mockProviders() — deterministic, offline; drives previews + the test suite.
- *   liveProviders() — health-gated: RemoteAnalyzer (thorex-net.js → /api/thorex) when the backend is
- *                      reachable, else the honest "unavailable" analyzer. Mock is NEVER a silent
- *                      fallback — it only runs in explicit demo mode (smd_thorex_demo).
+ *   liveProviders() — chooseAnalyzer() picks, in order: explicit demo (smd_thorex_demo) -> the
+ *                      on-device ONNX engine (smd_thorex_ondevice + thorex-ort.js ready, OD-C; fully
+ *                      offline, no upload) -> health-gated RemoteAnalyzer (thorex-net.js -> /api/thorex)
+ *                      -> the honest "unavailable" analyzer. Mock is NEVER a silent fallback.
  *
  * Entitlement shaping (mirrors backend/thorex/README.md "Entitlement → engines returned"):
  *   free   -> hosted HF engine only (hf_vit), educational:false
  *   v1     -> primary detector only (torchxrayvision), educational:false
  *   v2beta -> torchxrayvision (clinical) + xraydar (educational:true, disclaimer educational_not_clinical)
- * The mock never elevates/fabricates beyond what the entitlement is allowed — same rule as the real
- * backend and thorex-net.js's RemoteAnalyzer (client sends entitlement verbatim; never self-elevates).
+ * The mock/remote never elevate/fabricate beyond what the entitlement is allowed — same rule as the
+ * real backend and thorex-net.js's RemoteAnalyzer (client sends entitlement verbatim; never self-
+ * elevates). The on-device analyzer (OD-C) is an INTERIM exception on the v2beta side: thorex-ort.js
+ * does not yet have an on-device X-Raydar engine, so on-device v2beta returns clinical-only rather
+ * than fabricating an educational engine (OD-D adds on-device X-Raydar).
  * node + browser.
  */
 (function () {
@@ -139,6 +143,58 @@
   }
   function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
 
+  // ── On-device analyzer (OD-C): REAL ONNX Runtime Web inference (thorex-ort.js), fully offline — no
+  //    upload, no network. Mirrors kardiox-providers.js's ondevicePreferred()/ORT branch pattern.
+  //
+  //    Entitlement shaping (INTERIM — see OD-D follow-up): thorex-ort.js only exports the CLINICAL
+  //    (torchxrayvision) engine on-device today; the educational X-Raydar engine has not been ported
+  //    to on-device inference yet. So for v1/free AND v2beta alike, the on-device analyzer returns the
+  //    clinical engine only — it does NOT fabricate an educational engine to fill the v2beta slot. The
+  //    dual-engine panel (thorex-screens.js) already renders gracefully with just the clinical side
+  //    when an analysis has a single engine, so this is a safe, honest interim: no UI change needed,
+  //    just fewer engines than v2beta normally gets from the remote/mock path. OD-D will add an
+  //    on-device X-Raydar engine and this comment/gap goes away.
+  function ondeviceFlag() { return flagBool("smd_thorex_ondevice"); }
+  function ortEngine() { return (typeof window !== "undefined" && window.SMD_THOREX_ORT) || null; }
+  function ortAvailable() { try { var o = ortEngine(); return !!(o && o.available()); } catch (e) { return false; } }
+  var ONDEVICE_STAGES = ["preprocess", "infer"];
+  function ondeviceAnalyzer() {
+    return {
+      kind: "ondevice",
+      analyze: function (image, entitlement, onStage) {
+        var o = ortEngine();
+        if (!o) {
+          var e0 = new Error("ThoreX on-device inference is not available: onnxruntime-web engine (thorex-ort.js) is not loaded.");
+          e0.code = "inference_unavailable"; e0.stage = "analysis";
+          return Promise.reject(e0);
+        }
+        var input = image && (image.blob || image.data);
+        if (!input) {
+          var e1 = new Error("ThoreX on-device inference needs an image blob/data.");
+          e1.code = "inference_unavailable"; e1.stage = "analysis";
+          return Promise.reject(e1);
+        }
+        try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[0], 40); } catch (e) {}
+        return Promise.resolve(o.analyzeImage(input, { id: image && image.id })).then(function (analysis) {
+          try { if (typeof onStage === "function") onStage(ONDEVICE_STAGES[1], 100); } catch (e) {}
+          // v2beta interim note (OD-D pending): NEVER fabricate the educational X-Raydar engine here —
+          // just log so it is visible in dev/QA that the dual panel is intentionally clinical-only.
+          if (entitlement === "v2beta") {
+            try { if (typeof console !== "undefined" && console.info) console.info("[ThoreX] on-device v2beta: X-Raydar (educational) engine is not yet on-device (OD-D pending); returning the clinical engine only."); } catch (e) {}
+          }
+          return analysis;
+        }, function (cause) {
+          // Never fabricate on failure — surface a typed, honest error (same code/shape as
+          // unavailableAnalyzer below) regardless of which internal error thorex-ort.js threw.
+          var e2 = new Error((cause && cause.message) || "ThoreX on-device inference failed.");
+          e2.code = "inference_unavailable"; e2.stage = (cause && cause.stage) || "analysis"; e2.cause = cause;
+          throw e2;
+        });
+      }
+    };
+  }
+  function ondevicePreferred() { return ondeviceFlag() && ortAvailable(); }
+
   // Honest "no real engine configured" analyzer — never silently fabricates a result.
   function unavailableAnalyzer() {
     return {
@@ -157,6 +213,7 @@
   function chooseAnalyzer(opts) {
     opts = opts || {};
     if (demoFlag()) return mockAnalyzer();
+    if (ondevicePreferred()) return ondeviceAnalyzer();   // fully offline, opt-in (smd_thorex_ondevice) + ORT ready
     var real = (opts.remote || useRemote()) && remoteAnalyzer();
     return real || unavailableAnalyzer();
   }
@@ -188,7 +245,7 @@
 
   var API = {
     mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use,
-    checkBackend: checkBackend, backendActive: useRemote
+    checkBackend: checkBackend, backendActive: useRemote, ondeviceActive: ondevicePreferred
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_THOREX_PROVIDERS = API;
