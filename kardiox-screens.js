@@ -504,9 +504,10 @@
   function render06(host, ctx){
     ctx = ctx || {};
     var a = ctx.analysis;
-    if ((!a || !a.verdict) && typeof window !== "undefined" && window.SMD_KARDIOX_MODELS) {
-      try { a = window.SMD_KARDIOX_MODELS.makeAnalysis(window.SMD_KARDIOX_MODELS.samples.afWithRvr); } catch (e) {}
-    }
+    // NEVER fabricate a diagnosis here: with no real analysis (or one that carries no verdict), fall
+    // through to the honest "No analysis to show" empty state below. A demo reading is only ever produced
+    // by the explicit demo analyzer (smd_kardiox_demo) — never as a silent render fallback. Previously
+    // this fabricated an AF-with-RVR sample, so any verdict-less report read as "Atrial fibrillation".
   
     function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
@@ -2534,7 +2535,6 @@
   function providers() { try { return window.SMD_KARDIOX_PROVIDERS && window.SMD_KARDIOX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("kxScroll"); }
   function reduceMotion() { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
-  function sample() { try { var M = window.SMD_KARDIOX_MODELS; return M ? M.makeAnalysis(M.samples.afWithRvr) : null; } catch (e) { return null; } }
   function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id }; }
   function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardiQ X] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
   function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
@@ -2628,7 +2628,11 @@
   function openStored(id) {
     var P = providers();
     var p = (P && P.ecgStore && P.ecgStore.get) ? Promise.resolve(P.ecgStore.get(id)) : Promise.resolve(null);
-    p.then(function (a) { state.analysis = enrich(a || sample()); go("report"); }).catch(function () { state.analysis = enrich(sample()); go("report"); });
+    // Open the REAL stored analysis only. If it can't be loaded (missing / undecryptable), show the honest
+    // empty report instead of fabricating a reading — a demo AF-with-RVR fallback here made every
+    // unloadable history item read as "Atrial fibrillation".
+    p.then(function (a) { state.analysis = a ? enrich(a) : null; if (!state.analysis) toast("Couldn't open this ECG."); go("report"); })
+     .catch(function () { state.analysis = null; toast("Couldn't open this ECG."); go("report"); });
   }
   function clearEcgs() {
     var P = providers(); if (!P || !P.ecgStore) return;

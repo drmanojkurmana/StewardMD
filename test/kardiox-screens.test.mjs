@@ -56,6 +56,15 @@ for (const key of ["source", "permission", "processing", "analysis", "history", 
   ok("screen renders: " + key, rendered(120));
 }
 
+// REGRESSION — "AFib for all": the report must NEVER fabricate a diagnosis when there is no real
+// analysis. With state.analysis still null (no pipeline has run yet), the report must show the honest
+// empty state — not a demo AF-with-RVR sample. render06 + openStored previously fell back to
+// samples.afWithRvr, so every verdict-less / unloadable report read as "Atrial fibrillation".
+host._html = "";
+R.nav("report");
+ok("report with no analysis shows empty state (not fabricated AFib)",
+   /No analysis to show/i.test(host._html) && !/Atrial fibrillation/i.test(host._html));
+
 // full pipeline UI smoke: source card tap → processing → analysis → report. Uses the EXPLICIT mock
 // analyzer (a demo sample) to exercise the report rendering — real inference (backend / bundled on-device
 // ONNX) is unavailable headless, and Analyze is now wired to the real pipeline by default (proven in
