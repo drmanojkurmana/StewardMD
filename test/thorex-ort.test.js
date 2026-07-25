@@ -128,6 +128,85 @@ const pixels = buildSyntheticPixels();
   ok("eduRelevanceFor returns the 'educational' tag (matches mock/sample convention)", ORT_ENGINE._diag.eduRelevanceFor("anything") === "educational");
 })();
 
+// ── Part 1c: anti-aliased downscale (downscaleTo/halveBoxFilter) — OD-E ────────────────────────────
+// Verifies the fix for aliasing on large camera photos: a naive single-pass bilinearResize only samples
+// 4 neighboring input pixels regardless of downscale ratio, so a huge center-crop squeezed straight down
+// to 224/512 can alias. downscaleTo() instead box-filter-halves (mip-chain, never more than 2x per step)
+// until within 2x of the target, then does one final bilinearResize. Pure numeric — no DOM/canvas needed,
+// so this is fully Node-testable (the same code path also runs unchanged in the WebView).
+(function testAntiAliasedDownscale() {
+  // halveBoxFilter: a 4x4 image of four distinct 2x2 quadrant values -> 2x2 output, each cell the exact
+  // average of its quadrant (exact box-filter, not an approximation, when quadrants are uniform blocks).
+  const q = new Float32Array(16);
+  // top-left=10, top-right=20, bottom-left=30, bottom-right=40 (each a 2x2 block)
+  const rows = [
+    [10, 10, 20, 20],
+    [10, 10, 20, 20],
+    [30, 30, 40, 40],
+    [30, 30, 40, 40]
+  ];
+  for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) q[y * 4 + x] = rows[y][x];
+  const halved = ORT_ENGINE._diag.halveBoxFilter(q, 4);
+  ok("halveBoxFilter: output size = floor(size/2)", halved.size === 2);
+  ok("halveBoxFilter: exact block averages (10,20,30,40 quadrants)",
+    halved.data[0] === 10 && halved.data[1] === 20 && halved.data[2] === 30 && halved.data[3] === 40);
+
+  // halveBoxFilter: odd input size clamps the trailing row/col (no out-of-bounds read/crash).
+  const odd = new Float32Array(9); for (let i = 0; i < 9; i++) odd[i] = i + 1; // 3x3, values 1..9
+  const oddHalved = ORT_ENGINE._diag.halveBoxFilter(odd, 3);
+  ok("halveBoxFilter: odd size -> floor(3/2)=1 output, no throw", oddHalved.size === 1 && isFinite(oddHalved.data[0]));
+
+  // downscaleTo: large downscale ratio (1000x1000 -> 224) must not throw, must multi-step (1000 -> 500 ->
+  // 250 -> [within 2x of 224] -> final bilinear to exactly 224x224), and every output value must be
+  // finite and bounded within the source data's range (an anti-aliased resize is a weighted average, so
+  // it can never overshoot the min/max of the input — a naive/buggy resize that read garbage would).
+  const BIG = 1000;
+  const bigPixels = new Float32Array(BIG * BIG);
+  let srcMin = Infinity, srcMax = -Infinity;
+  for (let y = 0; y < BIG; y++) {
+    for (let x = 0; x < BIG; x++) {
+      // high-frequency checkerboard-ish pattern — exactly the kind of content a naive resize aliases on.
+      const v = ((x % 7 < 3) !== (y % 5 < 2)) ? 250 : 5;
+      bigPixels[y * BIG + x] = v;
+      if (v < srcMin) srcMin = v; if (v > srcMax) srcMax = v;
+    }
+  }
+  let threw = false, downscaled;
+  try { downscaled = ORT_ENGINE._diag.downscaleTo({ data: bigPixels, size: BIG }, 224); }
+  catch (e) { threw = true; }
+  ok("downscaleTo(1000x1000 -> 224) does not throw", !threw);
+  ok("downscaleTo(1000x1000 -> 224) output length is 224*224", downscaled && downscaled.length === 224 * 224);
+  let dsFinite = true, dsBounded = true;
+  if (downscaled) for (let i = 0; i < downscaled.length; i++) {
+    if (!isFinite(downscaled[i])) dsFinite = false;
+    if (downscaled[i] < srcMin - 1e-6 || downscaled[i] > srcMax + 1e-6) dsBounded = false;
+  }
+  ok("downscaleTo output values are all finite", dsFinite);
+  ok("downscaleTo output values stay within the source min/max (weighted-average anti-alias, no overshoot)", dsBounded);
+
+  // Full clinical preprocessing pipeline end-to-end on a large (1000x1000) synthetic photo: proves the
+  // multi-step path actually ran INSIDE preprocessToTensorData (not just the standalone helper above),
+  // and that the resulting tensor is the correct [1,1,224,224]-flattenable shape with finite values.
+  const bigGray = { data: bigPixels, width: BIG, height: BIG };
+  const bigTensor = ORT_ENGINE._diag.preprocessToTensorData(bigGray);
+  ok("preprocessToTensorData(1000x1000) output length is 224*224 (ready for [1,1,224,224])", bigTensor.length === 224 * 224);
+  let tensorFinite = true;
+  for (let i = 0; i < bigTensor.length; i++) if (!isFinite(bigTensor[i])) { tensorFinite = false; break; }
+  ok("preprocessToTensorData(1000x1000) tensor values are all finite (bounded, no NaN/Infinity from the resize)", tensorFinite);
+
+  // Same end-to-end check for the X-Raydar (educational) 512 path, on a large NON-square photo (so
+  // padToSquareGray's pad also runs before the anti-aliased downscale).
+  const BIGW = 1200, BIGH = 800;
+  const eduBigPixels = new Float32Array(BIGW * BIGH);
+  for (let i = 0; i < eduBigPixels.length; i++) eduBigPixels[i] = (i * 13) % 256;
+  const eduBigTensor = ORT_ENGINE._diag.preprocessToTensorDataEdu({ data: eduBigPixels, width: BIGW, height: BIGH });
+  const EDU_SIZE = ORT_ENGINE._diag.EDU_INPUT_SIZE;
+  ok("preprocessToTensorDataEdu(1200x800) output length is 512*512 (ready for [1,1,512,512])", eduBigTensor.length === EDU_SIZE * EDU_SIZE);
+  let eduTensorFinite = true;
+  for (let i = 0; i < eduBigTensor.length; i++) if (!isFinite(eduBigTensor[i])) { eduTensorFinite = false; break; }
+  ok("preprocessToTensorDataEdu(1200x800) tensor values are all finite", eduTensorFinite);
+})();
+
 // ── Part 2: CAM math on a synthetic feature map (no ONNX needed) ─────────────────────────────────────
 (function testCamMath() {
   // 7x7 map with one clear hot spot and some negative values (pre-ReLU, as the real CAM head produces).
@@ -217,13 +296,18 @@ async function realModelParity() {
   const camMin = Math.min(...camSlice), camMax = Math.max(...camSlice);
   ok("chosen-class CAM is non-degenerate (real spread across the 7x7 grid)", (camMax - camMin) > 0.01);
 
-  // If a heatmap was attached to the top finding, confirm it's a real (non-trivial, valid) PNG.
+  // The clinical top finding MUST carry a non-empty CAM heatmap under the exact field thorex-screens.js
+  // reads (`f.heatmap`, raw base64 — the screen builds `data:image/png;base64,` + f.heatmap itself; see
+  // thorex-screens.js renderResult()/findingHtml() and thorex-models.js makeFinding()). This synthetic
+  // input reliably crosses the >=0.10 band (17 of 18 labels do, per the real DenseNet weights), so the
+  // top finding + heatmap are asserted unconditionally, not "if present" — a silently-omitted heatmap
+  // here would mean the model->screen contract broke.
+  ok("clinical engine produced at least one finding on this synthetic input", clinical.findings.length > 0);
   const topFinding = clinical.findings[0];
+  ok("clinical top finding carries a non-empty `heatmap` field (the exact field thorex-screens.js reads)", !!topFinding && typeof topFinding.heatmap === "string" && topFinding.heatmap.length > 0);
   if (topFinding && topFinding.heatmap) {
     const bytes = Buffer.from(topFinding.heatmap, "base64");
     ok("attached CAM heatmap is a valid PNG (signature) with real byte length", bytes.length > 200 && bytes[0] === 137 && bytes[1] === 80);
-  } else {
-    ok("no findings crossed the >=0.10 band on this synthetic input (heatmap correctly omitted)", clinical.findings.length === 0);
   }
 }
 

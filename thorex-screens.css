@@ -450,8 +450,12 @@
 #thorexRoot .tx-panel--learning .tx-conf-val { color: var(--tx-learning); }
 #thorexRoot .tx-conf-band { font-size: 11px; font-weight: 500; color: var(--tx-muted); margin-top: 5px; }
 
-/* Grad-CAM heatmap overlay (localization) */
-#thorexRoot .tx-heatmap { position: relative; border-radius: 12px; overflow: hidden; margin-top: 10px; background: #0a0f14; }
+/* Grad-CAM heatmap overlay (localization). aspect-ratio:1/1 matters — the overlay <img> is
+   position:absolute (so it can sit over a base image), which takes it out of normal flow; without an
+   explicit intrinsic size the container would collapse to 0px height and the heatmap would be emitted
+   in the DOM but never actually visible. The CAM PNG thorex-ort.js attaches is always square (224x224
+   clinical / 512x512 educational — see camToBase64Png's outSize x outSize), so 1/1 is exact, not a guess. */
+#thorexRoot .tx-heatmap { position: relative; border-radius: 12px; overflow: hidden; margin-top: 10px; background: #0a0f14; aspect-ratio: 1 / 1; }
 #thorexRoot .tx-heatmap img { display: block; width: 100%; height: auto; }
 #thorexRoot .tx-heatmap img.tx-heatmap-overlay { position: absolute; inset: 0; opacity: .62; mix-blend-mode: screen; }
 #thorexRoot .tx-heatmap-cap { position: absolute; left: 8px; bottom: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; color: #fff; background: rgba(0, 0, 0, .55); padding: 3px 7px; border-radius: 999px; }

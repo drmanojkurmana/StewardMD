@@ -144,12 +144,50 @@
     return dst;
   }
 
-  // gray -> normalize -> center-crop -> resize(224) -> Float32Array[224*224], ready to wrap as [1,1,224,224].
+  // ── anti-aliased downscale ───────────────────────────────────────────────────────────────────────
+  // A naive single-pass bilinearResize only samples 4 neighboring input pixels per output pixel,
+  // regardless of the downscale ratio — fine for mild resizes, but on a large camera photo (e.g. a
+  // 3000px-wide center-crop squeezed down to the model's 224 or 512 input) it aliases/moire's, since it
+  // skips over most of the source pixels rather than averaging them. This approximates skimage's
+  // anti-aliased resize (used by the Python reference pipeline) with a box-filter mip-chain: repeatedly
+  // halve (2x2 pixel average) until within 2x of the target size, THEN a single final bilinearResize for
+  // the exact target dimensions — the same "downsample in half-steps, never more than 2x per step"
+  // strategy real image libraries use to keep every step properly anti-aliased. Pure numeric (Float32Array
+  // in, Float32Array out) — no DOM/canvas dependency, so it is identical and testable in Node and the
+  // WebView alike, and it commutes with the linear normalize step (a weighted average of weight-sum 1 —
+  // true of both box-filter and bilinear — passed through an affine normalize gives the same result
+  // whichever side of normalize it runs on), so callers can keep applying it wherever they already do.
+  function halveBoxFilter(data, size) {
+    var half = Math.max(1, Math.floor(size / 2));
+    if (half >= size) return { data: Float32Array.from(data), size: size };
+    var out = new Float32Array(half * half);
+    for (var y = 0; y < half; y++) {
+      var y0 = y * 2, y1 = Math.min(y0 + 1, size - 1);
+      for (var x = 0; x < half; x++) {
+        var x0 = x * 2, x1 = Math.min(x0 + 1, size - 1);
+        out[y * half + x] = (data[y0 * size + x0] + data[y0 * size + x1] + data[y1 * size + x0] + data[y1 * size + x1]) / 4;
+      }
+    }
+    return { data: out, size: half };
+  }
+
+  // square: {data: Float32Array, size} (the shape centerCropSquare/padToSquareGray already return) ->
+  // Float32Array[targetSize*targetSize]. Multi-step halving only kicks in when actually downscaling by
+  // more than 2x; mild resizes/upscales/no-ops fall straight through to the existing bilinearResize (which
+  // already has its own same-size no-op fast path).
+  function downscaleTo(square, targetSize) {
+    var cur = square;
+    while (cur.size > targetSize * 2) cur = halveBoxFilter(cur.data, cur.size);
+    return bilinearResize(cur.data, cur.size, cur.size, targetSize, targetSize);
+  }
+
+  // gray -> normalize -> center-crop -> anti-aliased downscale(224) -> Float32Array[224*224], ready to
+  // wrap as [1,1,224,224].
   function preprocessToTensorData(gray /* {data,width,height} raw 0..255 intensities */) {
     var norm = Float32Array.from(gray.data);
     xrvNormalize(norm);
     var crop = centerCropSquare(norm, gray.width, gray.height);
-    return bilinearResize(crop.data, crop.size, crop.size, 224, 224);
+    return downscaleTo(crop, 224);
   }
 
   // ── X-Raydar (educational, OD-D) native is512 preprocessing ─────────────────────────────────────
@@ -180,11 +218,12 @@
     return vals;
   }
 
-  // gray -> pad-to-square -> resize(512) -> normalize -> Float32Array[512*512], ready to wrap as
-  // [1,1,512,512]. Mirrors preprocessToTensorData above but for X-Raydar's own native pipeline.
+  // gray -> pad-to-square -> anti-aliased downscale(512) -> normalize -> Float32Array[512*512], ready to
+  // wrap as [1,1,512,512]. Mirrors preprocessToTensorData above but for X-Raydar's own native pipeline
+  // (same pad-then-resize order preserved — only the resample quality changes).
   function preprocessToTensorDataEdu(gray /* {data,width,height} raw 0..255 intensities */) {
     var padded = padToSquareGray(gray);
-    var resized = bilinearResize(padded.data, padded.size, padded.size, EDU_INPUT_SIZE, EDU_INPUT_SIZE);
+    var resized = downscaleTo(padded, EDU_INPUT_SIZE);
     return normalizeXraydar(resized);
   }
 
@@ -209,7 +248,13 @@
           if (revoke) try { URL.revokeObjectURL(revoke); } catch (e) {}
           var w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
           var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h;
-          var ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0, w, h);
+          var ctx = canvas.getContext("2d");
+          // Belt-and-suspenders: the actual anti-aliasing for the model-input resize happens in the pure
+          // downscaleTo()/halveBoxFilter() pipeline below (works identically on any decode size), but ask
+          // the canvas for its best resampling quality too in case this draw itself ever scales (e.g. a
+          // devicePixelRatio-driven source size mismatch).
+          try { ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; } catch (e) {}
+          ctx.drawImage(img, 0, 0, w, h);
           var id = ctx.getImageData(0, 0, w, h);
           resolve({ data: id.data, width: w, height: h });
         } catch (e) { reject(err("bad_image", "canvas decode failed: " + e.message, "quality")); }
@@ -487,6 +532,8 @@
       xrvNormalize: xrvNormalize,
       centerCropSquare: centerCropSquare,
       bilinearResize: bilinearResize,
+      halveBoxFilter: halveBoxFilter,
+      downscaleTo: downscaleTo,
       preprocessToTensorData: preprocessToTensorData,
       grayFromImageLike: grayFromImageLike,
       reluNormalizeCam: reluNormalizeCam,
