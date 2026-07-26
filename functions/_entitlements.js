@@ -158,7 +158,13 @@ export async function adminClearOverride(env, body, deps) {
 }
 
 // ---- Owner-gated AI-budget admin actions (Phase 3) ----
-function nonNegInt(v) { const n = Number(v); return Number.isInteger(n) && n >= 0 ? n : null; }
+// Strict: a real non-negative integer, or a plain digit string. Rejects "", booleans, arrays,
+// floats, hex ("0x5"), and negatives — so an admin can't accidentally zero/garble a budget.
+function nonNegInt(v) {
+  if (typeof v === "number") return Number.isInteger(v) && v >= 0 ? v : null;
+  if (typeof v === "string" && /^\d+$/.test(v.trim())) return parseInt(v.trim(), 10);
+  return null;
+}
 async function afterWrite(env, uid, deps) {
   const inv = (deps && deps.invalidateBudgetCache) || invalidateBudgetCache;
   try { await inv(env, uid, deps); } catch (e) {}
@@ -174,6 +180,8 @@ export async function adminSetBudget(env, body, deps) {
   await afterWrite(env, r.uid, deps);
   return { ok: true, uid: r.uid, aiCapTokens: tokens };
 }
+// Sets (overwrites) the current-month grant to `tokens` for `month` — not additive; calling it
+// again replaces the prior grant. The grant is ignored in any month other than `aiGrantMonth`.
 export async function adminAddGrant(env, body, deps) {
   deps = deps || {};
   const tokens = nonNegInt(body && body.tokens);
