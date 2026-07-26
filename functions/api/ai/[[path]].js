@@ -86,6 +86,21 @@ import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
+// Bound EVERY upstream AI fetch. An unbounded fetch to Vertex / AI-Studio that ACCEPTS the connection
+// but then stalls (seen when the streaming endpoint goes quiet) would hang the Worker until Cloudflare
+// force-kills it — "the Worker's code had hung and would never generate a response" — the reported
+// "logged-in MaiK hangs ~50-90s then times out" bug. On timeout we abort, so the caller (callGemini
+// fails over to the next provider; geminiStreamUpstream throws → the handler uses the non-stream path).
+async function fetchWithTimeout(url, opts, ms) {
+  const ctrl = new AbortController();
+  const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, Math.max(2000, ms || 30000));
+  try { return await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })); }
+  finally { clearTimeout(t); }
+}
+// Non-stream call must return a WHOLE answer, so it gets a generous budget; streaming only needs the
+// response to OPEN (first bytes), so it gets a shorter one. Both env-overridable.
+function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Number.isFinite(v) && v > 0 ? v : 30000; }
+function streamOpenMs(env) { const v = Number(env.MAIK_STREAM_OPEN_MS); return Number.isFinite(v) && v > 0 ? v : 15000; }
 // thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
@@ -104,16 +119,16 @@ const developerProvider = {
   generate: async function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
-    const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    const r = await fetchWithTimeout(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
     return parseCandidates(await r.json(), r.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
-    return fetch(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return fetchWithTimeout(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, streamOpenMs(env));
   }
 };
 
@@ -175,7 +190,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
-    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    const r = await fetchWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
     return parseCandidates(await r.json(), r.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
@@ -185,7 +200,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return fetchWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, streamOpenMs(env));
   }
 };
 
@@ -208,19 +223,38 @@ async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   }
   throw lastErr || new Error("no streaming provider");
 }
-function streamGeminiToSSE(upstream, onText) {
+function streamGeminiToSSE(upstream, onText, opts) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
-  let buf = "", full = "", closed = false;
+  let buf = "", full = "", closed = false, sawFirst = false;
+  // Server-side stall guard. Even after the response OPENS, the upstream body can go quiet forever
+  // (Vertex streamGenerateContent holding the connection with no bytes). Without this, reader.read()
+  // never settles, the ReadableStream never closes, and the Worker hangs until Cloudflare kills it.
+  // Race each read against a timeout; on stall, cancel upstream and close the SSE cleanly so the
+  // Worker ALWAYS completes. The client then falls back to the non-stream answer (it already does
+  // this on an empty/short stream), so the clinician still gets a full answer.
+  const FIRST_MS = (opts && opts.firstMs) || 20000, IDLE_MS = (opts && opts.idleMs) || 20000;
+  function readOrTimeout(ms) {
+    return new Promise(function (resolve) {
+      let settled = false;
+      const t = setTimeout(function () { if (!settled) { settled = true; resolve({ __timeout: true }); } }, ms);
+      reader.read().then(
+        function (r) { if (!settled) { settled = true; clearTimeout(t); resolve(r); } },
+        function () { if (!settled) { settled = true; clearTimeout(t); resolve({ done: true }); } }
+      );
+    });
+  }
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        const { value, done } = await reader.read();
-        if (done) {
-          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
+        const res = await readOrTimeout(sawFirst ? IDLE_MS : FIRST_MS);
+        const value = res.value, done = res.done, timedOut = res.__timeout;
+        if (done || timedOut) {
+          if (!closed) { closed = true; try { reader.cancel(); } catch (e) {} controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
           try { if (onText) onText(full); } catch (e) {}
           return;
         }
+        sawFirst = true;
         buf += dec.decode(value, { stream: true });
         const blocks = buf.split("\n\n"); buf = blocks.pop();
         for (const block of blocks) {
