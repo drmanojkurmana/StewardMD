@@ -739,7 +739,10 @@ export async function onRequest(context) {
         // CapacitorHttp can't stream. Simple/factual questions still self-adapt short (KNOWLEDGE_SYS says
         // so), so a dose lookup stays brief + fast; only a genuinely long clinical answer uses the fuller
         // budget — native then waits for the whole answer, the accepted trade for full structure.
-        const nsCap = MAX_OUT;
+        // Non-stream is now the default delivery (native, and stream requests routed here), so a
+        // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
+        // "Searching…" wait). "detailed" still gets the full budget on explicit request.
+        const nsCap = (body && body.depth === "detailed") ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sys;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
