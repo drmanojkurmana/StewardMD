@@ -1460,9 +1460,12 @@ window.openExternal = function (u) {
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
 <script src="/image-engine.js?v=gold363" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1011" defer></script>
+<!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
+     knowledge questions locally with citations, no Gemini. Loads before home.js. -->
+<script src="/kb/ai/maik-kb.js?v=gold1026" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1023" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1026" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->

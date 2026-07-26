@@ -2241,6 +2241,7 @@ body.dark .maik-card-ic{background:var(--mk-tsoft)}
 body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .maik-attr{display:flex;align-items:center;gap:6px;margin-bottom:7px}
 .maik-attr span{font:800 10.5px 'Inter';color:var(--mk-teal);text-transform:uppercase;letter-spacing:.06em}
+.maik-attr .maik-kbbadge{font:800 9.5px 'Inter';color:#0e6e63;background:rgba(14,110,99,.10);border:1px solid rgba(14,110,99,.22);border-radius:999px;padding:2px 7px;text-transform:none;letter-spacing:.02em;margin-left:2px}
 .maik-h{font:800 13.5px 'Inter';letter-spacing:-.01em;color:var(--mk-ink);margin:12px 0 5px}
 .maik-p{font:450 13px/1.62 'Inter';color:var(--mk-ink)}
 .maik-ul{margin:7px 0 3px;display:flex;flex-direction:column;gap:6px}
@@ -2557,6 +2558,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     // first-token + full-answer time under each answer so real-device / native TTFT is readable.
     function maikPerfOn() { try { return localStorage.getItem("smd_maik_perf") === "1"; } catch (e) { return false; } }
     function maikNow() { try { return (window.performance && performance.now) ? performance.now() : Date.now(); } catch (e) { return Date.now(); } }
+    // MaiK V2 — retrieval-first KB brain. Default ON; ?kb=0 (or smd_maik_kb=0) forces the legacy
+    // Gemini-first path. Independent of account/sign-in — the KB answer is composed locally.
+    function maikKB() { try { var q = new URLSearchParams(location.search || "").get("kb"); if (q === "1") return true; if (q === "0") return false; return localStorage.getItem("smd_maik_kb") !== "0"; } catch (e) { return true; } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
@@ -2701,7 +2705,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var bookSvg = MK.book;
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
-      var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span></div>';
+      var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span>' + ((r && r.kb) ? '<span class="maik-kbbadge" title="Answered instantly from the StewardMD Knowledge Base — no external AI call">&#9889; Instant &middot; StewardMD KB</span>' : '') + '</div>';
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
@@ -2871,6 +2875,26 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // flipped to non-stream (which is why some accounts worked and others didn't). Native can't
           // render progressive SSE anyway (the WebView buffers it), so use the bounded whole-answer
           // path (explainGrounded, 35s cap) — the same path that already works on native and web.
+          // ── MaiK V2 — deterministic KB answer (retrieval-first, NO Gemini) ──
+          // If the StewardMD KB confidently covers this knowledge question, compose the
+          // answer LOCALLY in ~1ms and render it through the SAME path (maikRenderAnswer)
+          // — instant, zero tokens, zero network, works identically signed-in or guest.
+          // Any miss (low confidence / a reasoning question) silently falls through to the
+          // Gemini path below, so nothing can regress. Case-active turns keep the full
+          // reasoning path (KB-instant is for standalone knowledge questions).
+          try {
+            if (window.MaiKKB && maikKB() && !active) {
+              var _kb = MaiKKB.compose(question, pkg, { depth: depth });
+              if (_kb && _kb.text && _kb.confidence >= 0.7) {
+                _streamStarted = true; _clearStages();
+                maikRenderAnswer(think, { text: _kb.text, mode: "kb", kb: true, confidence: _kb.confidence, intent: _kb.intent }, pkg, active, cacheKey, topicLabel, question, depth, assume);
+                if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ instant · KB · " + _kt + "ms · " + _kb.intent; think.appendChild(_pe); } catch (e) {} }
+                _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+                try { scroll(); } catch (e) {}
+                return;   // answered from the KB — Gemini not called
+              }
+            }
+          } catch (e) {}
           var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
             ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
             : window.SMD_AI.explainGrounded(pkg, { depth: depth });
