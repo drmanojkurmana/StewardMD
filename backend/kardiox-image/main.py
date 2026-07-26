@@ -12,7 +12,7 @@ Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusi
 import io, os, json, time, numpy as np, torch, timm
 from PIL import Image
 import torchvision.transforms as T
-from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form
+from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form, Query
 from fastapi.responses import JSONResponse
 
 MODEL_PATH = os.environ.get("MODEL_PATH", "image_model.pt")
@@ -72,6 +72,18 @@ try:
 except Exception:
     _mi_model = None; _MI_AUROC = None
 
+# ── Candidate 19-class model (textbook-fine-tuned) — A/B TEST ONLY, never the default. ──
+# Enabled per request via ?variant=candidate|compare. Same serving contract as the base model.
+# This lets us evaluate the candidate on real inputs BEFORE any promotion (no real-photo benchmark yet).
+V2_PATH = os.environ.get("V2_PATH", "image_model_v2.pt")
+try:
+    _v2ck = torch.load(V2_PATH, map_location=_dev, weights_only=False)
+    _model_v2 = timm.create_model(_v2ck["backbone"], pretrained=False, num_classes=len(_v2ck["classes"]))
+    _model_v2.load_state_dict(_v2ck["state_dict"]); _model_v2.eval()
+    _v2_classes = _v2ck["classes"]
+except Exception:
+    _model_v2 = None; _v2_classes = None
+
 # Data flywheel: consent-gated storage of clinician-labelled ECGs to GCS -> the retraining corpus.
 FEEDBACK_BUCKET = os.environ.get("FEEDBACK_BUCKET", "stewardmd-ecg-feedback")
 try:
@@ -106,13 +118,15 @@ def _incr_user(uid, month):
 @app.get("/v1/health")
 def health(): return {"status":"ok","model":_ENGINE,"backbone":_BB,"classes":len(_classes),
                       "mode":"ensemble-mi-specialist" if _mi_model is not None else "full-calibrated",
-                      "miSpecialist": _MI_AUROC, "apiVersion":"3.2"}
+                      "miSpecialist": _MI_AUROC, "candidate19": _v2_classes is not None, "apiVersion":"3.2"}
 
-def _predict(img: Image.Image):
+def _predict(img: Image.Image, model=None, classes=None):
+    m = model if model is not None else _model
+    cs = classes if classes is not None else _classes
     x = _tf(img.convert("RGB")).unsqueeze(0)
-    with torch.no_grad(): logits = _model(x)[0].numpy()
+    with torch.no_grad(): logits = m(x)[0].numpy()
     p = 1.0 / (1.0 + np.exp(-logits / TEMPERATURE))     # calibrated
-    return {c: float(p[i]) for i,c in enumerate(_classes)}
+    return {c: float(p[i]) for i,c in enumerate(cs)}
 
 def _mi_any(img: Image.Image):
     """Dedicated MI-any specialist probability (sigmoid), or None if the model is unavailable."""
@@ -121,12 +135,24 @@ def _mi_any(img: Image.Image):
     with torch.no_grad(): return float(torch.sigmoid(_mi_model(x))[0,0])
 
 @app.post("/v1/ecg/analyze-image")
-async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = Header(default="")):
+async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = Header(default=""),
+                        variant: str = Query("prod")):
     if TOKEN and x_pipeline_token != TOKEN: raise HTTPException(401, "bad token")
     data = await image.read()
     try: img = Image.open(io.BytesIO(data))
     except Exception: raise HTTPException(400, "invalid image")
-    probs = _predict(img)
+    # variant: "prod" (default, unchanged) | "candidate" (use the textbook-fine-tuned 19-class) |
+    #          "compare" (prod result + a side-by-side compare19 block for A/B testing).
+    _cand_ok = _model_v2 is not None
+    probs = _predict(img, _model_v2, _v2_classes) if (variant == "candidate" and _cand_ok) else _predict(img)
+    compare19 = None
+    if variant == "compare" and _cand_ok:
+        pc = _predict(img, _model_v2, _v2_classes)
+        tp = max(probs, key=probs.get); tc = max(pc, key=pc.get)
+        compare19 = {"prod": {"top": MAP.get(tp,(tp,))[0], "cls": tp, "conf": round(probs[tp],3)},
+                     "candidate": {"top": MAP.get(tc,(tc,))[0], "cls": tc, "conf": round(pc[tc],3)},
+                     "agree": tp == tc}
+    _used_variant = "candidate" if (variant == "candidate" and _cand_ok) else "prod"
 
     # ── MI ensemble: fuse the base's territorial MI signal with the dedicated specialist ──
     mi_p = _mi_any(img)
@@ -187,6 +213,7 @@ async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = H
         "miAny": None if mi_p is None else {"fused": round(mi_fused,3), "specialist": round(mi_p,3), "base": round(base_mi,3), "positive": bool(mi_positive), "valAuroc": _MI_AUROC},
         "modelScope":"19-class ECG screen + dedicated MI-any specialist. MI-any is validated (specialist val AUROC ~0.94, real-photo sens/spec ~0.98/0.99 on the Mendeley set - likely optimistic from train overlap); other classes are synthetic-validated and experimental on real photos. NOT an acute-emergency detector.",
         "whatToVerify":"Experimental screen. Confirm every finding on the original 12-lead ECG. Does NOT rule out STEMI, VT/VF, complete heart block, hyperkalaemia, etc.",
+        "modelVariant": _used_variant, "compare19": compare19,
     })
 
 @app.post("/v1/ecg/feedback")
