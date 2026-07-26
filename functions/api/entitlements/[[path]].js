@@ -1,9 +1,10 @@
 /* StewardMD ID Phase 2 — owner-gated entitlements admin API.
  *
- *   POST /api/entitlements/lookup         {uid|smdId|email|regNo}                    -> joined record
- *   POST /api/entitlements/set-role       {uid|smdId|email|regNo, role}              -> write role
- *   POST /api/entitlements/set-tier       {uid|smdId|email|regNo, feature, tier}     -> write override
- *   POST /api/entitlements/clear-override {uid|smdId|email|regNo, feature}           -> null override
+ *   POST /api/entitlements/admin/lookup         {uid|smdId|email|regNo}                -> joined record
+ *   POST /api/entitlements/admin/set-role       {uid|smdId|email|regNo, role}          -> write role
+ *   POST /api/entitlements/admin/set-tier       {uid|smdId|email|regNo, feature, tier} -> write override
+ *   POST /api/entitlements/admin/clear-override {uid|smdId|email|regNo, feature}       -> null override
+ * (dispatch is by the LAST path segment, so the `admin/` prefix the console uses is honored.)
  *
  * Owner-gated (same OWNER_EMAILS / legacy admin-token gate as every other admin surface).
  * The handlers themselves are pure + deps-injectable (see _entitlements.js); this router
