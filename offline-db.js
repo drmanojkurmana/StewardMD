@@ -34,17 +34,9 @@
   /* -------- auth / entitlement -------- */
   function currentUser() { try { return fb() && fb().auth().currentUser; } catch (e) { return null; } }
   function idToken() { var u = currentUser(); return u ? u.getIdToken() : Promise.resolve(null); }
-  // TESTING grant, self-contained so Pro works even if account.js/SMD_PRO hasn't loaded.
-  // ⚠️ set BETA_PRO_ALL = false before launch (and rely on SMD_PRO / the real claim).
-  var BETA_PRO_ALL = true;
-  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
-  function isPro() {
-    if (BETA_PRO_ALL) return Promise.resolve(true);                       // testing: everyone Pro
-    if (window.SMD_PRO && window.SMD_PRO.isPro) return window.SMD_PRO.isPro();
-    var u = currentUser(); if (!u) return Promise.resolve(false);
-    if (TEST_PRO_EMAILS.indexOf(String(u.email || "").toLowerCase()) > -1) return Promise.resolve(true);
-    return u.getIdTokenResult().then(function (r) { return !!(r && r.claims && r.claims.pro === true); }).catch(function () { return false; });
-  }
+  // Offline DB is free for every signed-in user (launch decision 2026-07-26). The old
+  // BETA_PRO_ALL flag + 3-email TEST_PRO_EMAILS allowlist are removed — no email is gated.
+  function isPro() { return Promise.resolve(true); }
 
   /* -------- Preferences state -------- */
   function pget(k) { return PREF().get({ key: k }).then(function (r) { return r && r.value; }).catch(function () { return null; }); }
