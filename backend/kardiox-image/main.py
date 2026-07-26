@@ -100,9 +100,9 @@ def _limits_cfg():
     try:
         b = _fb_bucket.blob("config/limits.json")
         if b.exists():
-            c = json.loads(b.download_as_text()); c.setdefault("monthlyLimit", DEFAULT_TRAIN_LIMIT); c.setdefault("exempt", []); return c
+            c = json.loads(b.download_as_text()); c.setdefault("monthlyLimit", DEFAULT_TRAIN_LIMIT); c.setdefault("exempt", []); c.setdefault("modelLab", []); return c
     except Exception: pass
-    return {"monthlyLimit": DEFAULT_TRAIN_LIMIT, "exempt": []}
+    return {"monthlyLimit": DEFAULT_TRAIN_LIMIT, "exempt": [], "modelLab": []}
 def _user_count(uid, month):
     try:
         b = _fb_bucket.blob(f"counters/{month}/{uid}.json")
@@ -262,11 +262,20 @@ def admin_get(x_admin_token: str = Header(default="")):
 
 @app.post("/v1/admin/limits")
 async def admin_set(monthlyLimit: int = Form(default=None), exempt: str = Form(default=None),
-                    x_admin_token: str = Header(default="")):
+                    modelLab: str = Form(default=None), x_admin_token: str = Header(default="")):
     if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN: raise HTTPException(401, "bad admin token")
     if _fb_bucket is None: raise HTTPException(503, "no storage")
     cfg = _limits_cfg()
     if monthlyLimit is not None: cfg["monthlyLimit"] = int(monthlyLimit)
     if exempt is not None: cfg["exempt"] = [e.strip() for e in exempt.split(",") if e.strip()]
+    if modelLab is not None: cfg["modelLab"] = [e.strip().lower() for e in modelLab.split(",") if e.strip()]
     _fb_bucket.blob("config/limits.json").upload_from_string(json.dumps(cfg), content_type="application/json")
     return {"saved": True, "config": cfg}
+
+# Public: does this user get the "Model Lab" beta (candidate-19 shown alongside prod)? Admin-gated list.
+@app.get("/v1/model-lab/status")
+def model_lab_status(uid: str = Query(default=""), email: str = Query(default="")):
+    allow = set(_limits_cfg().get("modelLab", []))
+    ident = {x for x in (uid.strip().lower(), email.strip().lower()) if x}
+    allowed = (_model_v2 is not None) and bool(ident & allow)
+    return {"allowed": bool(allowed), "candidate19": _model_v2 is not None}

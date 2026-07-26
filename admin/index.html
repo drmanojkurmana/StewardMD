@@ -361,6 +361,14 @@
           <div class="msg" id="kxMsg"></div>
         </div>
         <div class="card">
+          <b>🧪 Model Lab beta testers</b>
+          <div class="hint" style="margin:4px 0 12px">These users (residents / researchers) see the EXPERIMENTAL candidate 19-class model in KardiQ X — shown ALONGSIDE the production reading as a labelled second opinion, never replacing it. Everyone else gets production only. Comma-separated emails or device IDs.</div>
+          <input id="kxModelLab" placeholder="resident@hospital.in, d-abc123" style="width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font:inherit;margin-bottom:10px">
+          <button id="kxMlabSave" style="background:var(--tl);color:#fff;border:none;border-radius:9px;padding:9px 15px;font:700 13px var(--f);cursor:pointer">Save testers</button>
+          <button class="ghost" id="kxMlabReload" style="margin-left:6px">Refresh</button>
+          <div class="msg" id="kxMlabMsg"></div>
+        </div>
+        <div class="card">
           <b>Usage this month <span id="kxMonth" style="color:var(--mut);font-weight:600"></span></b>
           <div id="kxRows" style="margin-top:12px"></div>
         </div>
@@ -643,6 +651,7 @@
       $("kxTotal").textContent=d.totalTrainingImages||0;
       var usage=d.usage||{}; $("kxUsers").textContent=Object.keys(usage).length;
       $("kxLimit").value=kxCfg.monthlyLimit; $("kxExempt").value=(kxCfg.exempt||[]).join(", ");
+      { var _ml=$("kxModelLab"); if(_ml)_ml.value=(kxCfg.modelLab||[]).join(", "); }
       $("kxMonth").textContent=d.month?("· "+d.month):"";
       var ex=kxCfg.exempt||[], lim=kxCfg.monthlyLimit;
       $("kxRows").innerHTML=Object.keys(usage).sort(function(a,b){return usage[b]-usage[a];}).map(function(u){
@@ -663,7 +672,14 @@
       .catch(function(){ say("kxMsg","err","Save failed."); });
   }
   function kxToggleExempt(u){ var ex=(kxCfg.exempt||[]).slice(), i=ex.indexOf(u); if(i>=0)ex.splice(i,1); else ex.push(u); $("kxExempt").value=ex.join(", "); kxSave(); }
-  (function(){ var s=$("kxSave"); if(s)s.onclick=kxSave; var r=$("kxReload"); if(r)r.onclick=kxLoad; })();
+  function kxMlabSave(){
+    say("kxMlabMsg","","Saving…");
+    api("/api/kardiox/limits",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({modelLab:$("kxModelLab").value})})
+      .then(function(r){ if(r.s!==200){ say("kxMlabMsg","err",r.s===401?"Not an owner.":"Save failed."); return; } say("kxMlabMsg","ok","Testers saved."); kxLoad(); })
+      .catch(function(){ say("kxMlabMsg","err","Save failed."); });
+  }
+  (function(){ var s=$("kxSave"); if(s)s.onclick=kxSave; var r=$("kxReload"); if(r)r.onclick=kxLoad;
+    var m=$("kxMlabSave"); if(m)m.onclick=kxMlabSave; var mr=$("kxMlabReload"); if(mr)mr.onclick=kxLoad; })();
 
   if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
   else { $("who").textContent="Firebase failed to load."; }

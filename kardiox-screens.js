@@ -712,6 +712,16 @@
              '</div>';
     }).join('') : '';
 
+    // Model Lab (beta): experimental candidate-19 shown ALONGSIDE production for allowed users only.
+    var cmp = a.compare19;
+    var compareHtml = (cmp && cmp.prod && cmp.candidate) ?
+      section("science", "Model Lab · experimental (beta)") +
+      '<div class="kx-mlab">' +
+        '<div class="kx-mlab-row"><span class="kx-mlab-k">Production</span><b>' + esc(cmp.prod.top) + '</b><span class="kx-mlab-c kx-data">' + Math.round((cmp.prod.conf || 0) * 100) + '%</span></div>' +
+        '<div class="kx-mlab-row"><span class="kx-mlab-k">Candidate</span><b>' + esc(cmp.candidate.top) + '</b><span class="kx-mlab-c kx-data">' + Math.round((cmp.candidate.conf || 0) * 100) + '%</span></div>' +
+        '<div class="kx-mlab-note">' + (cmp.agree ? 'Both models agree.' : 'Models disagree — the production reading above is authoritative.') + ' Candidate is an unvalidated experimental model; not for diagnosis.</div>' +
+      '</div>' : '';
+
     var body =
       '<div class="kx-rpt-body">' +
         hero +
@@ -720,6 +730,7 @@
         section("show_chart", "Morphology &amp; ST") +
         '<div class="kx-morph">' + morphHtml + '</div>' +
         (rptDiffsHtml ? section("insights", "Differentials considered") + '<div class="kx-diffs">' + rptDiffsHtml + '</div>' : '') +
+        compareHtml +
         section("clinical_notes", "Clinical interpretation") +
         '<div class="kx-interp">' + esc(interpClean) + '</div>' +
         '<button class="kx-why" type="button" data-act="kxnav:why">' +

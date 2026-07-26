@@ -675,6 +675,13 @@
 /* Tabbed Criteria/Differentials views — [hidden] must beat any inherited display. */
 #kardioxRoot .kx-why-view[hidden] { display: none; }
 #kardioxRoot .kx-why-view { animation: kxRise .24s var(--kx-ease) both; }
+/* Model Lab (beta) — experimental candidate-19 comparison card (allowed users only) */
+#kardioxRoot .kx-mlab { border: 1px solid #C9B8E6; border-radius: 14px; background: #F4EFFB; padding: 12px 14px; }
+#kardioxRoot .kx-mlab-row { display: flex; align-items: baseline; gap: 8px; font-size: 13px; padding: 3px 0; }
+#kardioxRoot .kx-mlab-k { flex: 0 0 82px; color: var(--kx-text-2); font-weight: 600; }
+#kardioxRoot .kx-mlab-row b { flex: 1; color: var(--kx-text); font-weight: 700; }
+#kardioxRoot .kx-mlab-c { color: #6D28D9; font-weight: 700; }
+#kardioxRoot .kx-mlab-note { margin-top: 6px; font-size: 11px; line-height: 1.4; color: var(--kx-text-2); }
 #kardioxRoot .kx-crit[data-hl=""] { cursor: default; }
 #kardioxRoot .kx-crit:focus-visible { outline: 2px solid var(--kx-sev-stable); outline-offset: 2px; }
 #kardioxRoot .kx-crit-ic { flex: 0 0 auto; display: inline-flex; }

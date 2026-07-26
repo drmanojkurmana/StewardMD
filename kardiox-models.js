@@ -70,6 +70,9 @@
       differentials: arr(raw.differentials).map(makeDiff),
       redFlag: raw.redFlag && raw.redFlag.title ? { title: str(raw.redFlag.title), body: str(raw.redFlag.body) } : undefined,
       whatToVerify: raw.whatToVerify == null ? undefined : str(raw.whatToVerify),
+      // Model Lab (beta): the experimental candidate-19 comparison, when the backend returns variant=compare.
+      compare19: (raw.compare19 && typeof raw.compare19 === "object") ? raw.compare19 : undefined,
+      modelVariant: raw.modelVariant == null ? undefined : str(raw.modelVariant),
       educationalRef: raw.educationalRef == null ? undefined : str(raw.educationalRef),
       physicianNote: raw.physicianNote == null ? undefined : str(raw.physicianNote),
       schemaVersion: str(raw.schemaVersion) || "1.0"

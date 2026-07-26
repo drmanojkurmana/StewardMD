@@ -21,6 +21,7 @@ export async function onRequestPost({ request, env }) {
   const fd = new FormData();
   if (b.monthlyLimit != null && b.monthlyLimit !== "") fd.append("monthlyLimit", String(b.monthlyLimit));
   if (b.exempt != null) fd.append("exempt", String(b.exempt));
+  if (b.modelLab != null) fd.append("modelLab", String(b.modelLab));
   try {
     const r = await fetch(SVC, { method: "POST", headers: { "X-Admin-Token": env.KARDIOX_ADMIN_TOKEN || "" }, body: fd });
     return J(await r.json().catch(() => ({})), r.status);

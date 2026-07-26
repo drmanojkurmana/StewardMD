@@ -131,13 +131,29 @@
   var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
   var KX_IMAGE_URL = "https://kardiox-image-yislqrddsq-uc.a.run.app";  // end-to-end IMAGE model (Yale-style, reads the photo directly)
   function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
+  // ── Model Lab (beta): allowed users (server-side admin allow-list) get the candidate 19-class model
+  // shown ALONGSIDE production (variant=compare) as a labelled experimental second opinion — production
+  // stays the authoritative reading. Access is checked once on open; never a full swap. ──
+  var _modelLabAllowed = false;
+  function modelLabFlag() { try { return !!(window.SMD_KARDIOX_FLAGS && SMD_KARDIOX_FLAGS.bool("smd_kardiox_modellab")); } catch (e) { return false; } }
+  function modelLabOn() { return isNative() && _modelLabAllowed && modelLabFlag(); }
+  function checkModelLab() {
+    if (!isNative() || typeof fetch !== "function") { _modelLabAllowed = false; return Promise.resolve(false); }
+    var uid = "", email = "";
+    try { uid = localStorage.getItem("smd_device_id") || ""; } catch (e) {}
+    try { email = (window.SMD_ME && window.SMD_ME.email) || (window.firebase && firebase.auth && firebase.auth().currentUser && firebase.auth().currentUser.email) || ""; } catch (e) {}
+    var q = "?uid=" + encodeURIComponent(uid) + "&email=" + encodeURIComponent(email);
+    return fetch(KX_IMAGE_URL + "/v1/model-lab/status" + q).then(function (r) { return r.json(); })
+      .then(function (j) { _modelLabAllowed = !!(j && j.allowed); _active = null; return _modelLabAllowed; })
+      .catch(function () { _modelLabAllowed = false; return false; });
+  }
   // END-TO-END IMAGE analyzer: POST the photo straight to the kardiox-image Cloud Run service (ResNet-18
   // reads the ECG image, no digitiser). Native-only (direct HTTPS + no CORS). Flag smd_kardiox_image.
   function imageFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_image")); } catch (e) { return false; } }
   function imageAnalyzer() {
     try {
       if (!isNative() || typeof window === "undefined" || !window.SMD_KARDIOX_NET || !window.SMD_KARDIOX_NET.remoteAnalyzer) return null;
-      var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: KX_IMAGE_URL, path: "/v1/ecg/analyze-image" });
+      var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: KX_IMAGE_URL, path: "/v1/ecg/analyze-image" + (modelLabOn() ? "?variant=compare" : "") });
       // Stash the analysed image so the data-flywheel (kardiox-feedback.js) can attach it to a label.
       return { kind: "image", analyze: function (image, onStage) {
         try { if (image && image.data instanceof Blob) window.SMD_KARDIOX_LASTIMAGE = image.data; } catch (e) {}
@@ -370,7 +386,8 @@
 
   var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2,
               checkBackend: checkBackend, backendActive: useRemote, ortActive: ortActive,
-              checkModels: checkModels, ondeviceInstalled: ondeviceInstalled };
+              checkModels: checkModels, ondeviceInstalled: ondeviceInstalled,
+              checkModelLab: checkModelLab, modelLabOn: modelLabOn };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_PROVIDERS = API;
 })();
