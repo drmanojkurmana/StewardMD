@@ -1347,6 +1347,8 @@
     var onAcs = false; try { onAcs = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_acs')); } catch (e) {}
     var onFb = false; try { onFb = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_feedback')); } catch (e) {}
     var onPdf = false; try { onPdf = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_pdf')); } catch (e) {}
+    var onOdImg = false; try { onOdImg = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_ondevice_image')); } catch (e) {}
+    var onParity = false; try { onParity = !!(window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool('smd_kardiox_parity')); } catch (e) {}
     var odRow = isNat ? ('<button type="button" class="kx-settings-row" data-act="kx-ondevice-ai">'
         + '<span class="kx-sr-ic">' + ic('memory') + '</span>'
         + '<span class="kx-sr-body"><b class="kx-sr-title">On-device AI</b><span class="kx-sr-sub" data-kx-od-sub>Checking…</span></span>'
@@ -1361,6 +1363,16 @@
         + '<span class="kx-sr-ic">' + ic('biotech') + '</span>'
         + '<span class="kx-sr-body"><b class="kx-sr-title">Learned digitiser (beta)</b><span class="kx-sr-sub">On-device nnU-Net (Core ML). Validation stage: reports lead segmentation.</span></span>'
         + '<span class="kx-sr-toggle' + (onLearned ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
+      + '</button>'
+      + '<button type="button" class="kx-settings-row" data-act="kx-toggle-odimage" role="switch" aria-checked="' + (onOdImg ? 'true' : 'false') + '">'
+        + '<span class="kx-sr-ic">' + ic('phonelink_lock') + '</span>'
+        + '<span class="kx-sr-body"><b class="kx-sr-title">On-device image model (no upload)</b><span class="kx-sr-sub">Run the 19-class + MI models on THIS phone — the ECG photo never leaves the device. Downloads ~86MB once.</span></span>'
+        + '<span class="kx-sr-toggle' + (onOdImg ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
+      + '</button>'
+      + '<button type="button" class="kx-settings-row" data-act="kx-toggle-parity" role="switch" aria-checked="' + (onParity ? 'true' : 'false') + '">'
+        + '<span class="kx-sr-ic">' + ic('balance') + '</span>'
+        + '<span class="kx-sr-body"><b class="kx-sr-title">On-device parity check (dev)</b><span class="kx-sr-sub">After each cloud read, also run on-device on this phone and show the agreement + a running tally.</span></span>'
+        + '<span class="kx-sr-toggle' + (onParity ? ' kx-on' : '') + '" aria-hidden="true"><span class="kx-sr-knob"></span></span>'
       + '</button>') : '';
   
     host.innerHTML =
@@ -2707,6 +2719,10 @@
   function toggleAcs() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_acs"); F.set("smd_kardiox_acs", on); toast(on ? "Clinical context on — open an ECG result and tap Add clinical context." : "Clinical context off."); show("settings"); } catch (e) {} }
   function toggleFeedback() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_feedback"); F.set("smd_kardiox_feedback", on); toast(on ? "Thanks — a Confirm/Correct card will appear on results (consent-gated)." : "Model-improvement feedback off."); show("settings"); } catch (e) {} }
   function togglePdf() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_pdf"); F.set("smd_kardiox_pdf", on); toast(on ? "ECG PDF import on — use the Import ECG PDF button." : "ECG PDF import off."); show("settings"); } catch (e) {} }
+  function toggleOdImage() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_ondevice_image"); F.set("smd_kardiox_ondevice_image", on);
+    try { var P = window.SMD_KARDIOX_PROVIDERS; if (P && P.use && P.liveProviders) P.use(P.liveProviders()); } catch (e) {}   // rebuild so chooseAnalyzer picks the on-device path
+    toast(on ? "On-device image model ON — ECGs analysed on this phone, no upload (first run downloads ~86MB)." : "On-device image model off — using the India cloud."); show("settings"); } catch (e) {} }
+  function toggleParity() { try { var F = window.SMD_KARDIOX_FLAGS; if (!F) return; var on = !F.bool("smd_kardiox_parity"); F.set("smd_kardiox_parity", on); toast(on ? "On-device parity check ON — analyse an ECG to see on-device vs cloud agreement." : "Parity check off."); show("settings"); } catch (e) {} }
   function toggleOndevice() {
     try {
       var F = window.SMD_KARDIOX_FLAGS; if (!F) return;
@@ -2836,6 +2852,8 @@
       case "kx-toggle-pdf": haptic("light"); togglePdf(); return;
       case "kx-toggle-ondevice": haptic("light"); toggleOndevice(); return;
       case "kx-toggle-learned": haptic("light"); toggleLearned(); return;
+      case "kx-toggle-odimage": haptic("light"); toggleOdImage(); return;
+      case "kx-toggle-parity": haptic("light"); toggleParity(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
       case "kx-bookmark": toggleBookmark(); return;
     }
