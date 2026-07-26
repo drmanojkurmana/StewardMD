@@ -86,34 +86,6 @@ import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
-// Bound EVERY upstream AI fetch. An unbounded fetch to Vertex / AI-Studio that ACCEPTS the connection
-// but then stalls (seen when the streaming endpoint goes quiet) would hang the Worker until Cloudflare
-// force-kills it — "the Worker's code had hung and would never generate a response" — the reported
-// "logged-in MaiK hangs ~50-90s then times out" bug. On timeout we abort, so the caller (callGemini
-// fails over to the next provider; geminiStreamUpstream throws → the handler uses the non-stream path).
-async function fetchWithTimeout(url, opts, ms) {
-  const ctrl = new AbortController();
-  const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, Math.max(2000, ms || 30000));
-  try { return await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })); }
-  finally { clearTimeout(t); }
-}
-// Non-stream callers need the WHOLE body, not just the headers. fetch() resolves on status+headers
-// BEFORE the body streams, so bounding only the fetch would leave `await r.json()` unbounded — a
-// headers-then-stall would hang the Worker again on the non-stream path (the very fallback the stream
-// fix depends on). Keep the abort armed across the body read so the full round-trip is time-boxed.
-async function fetchJsonWithTimeout(url, opts, ms) {
-  const ctrl = new AbortController();
-  const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, Math.max(2000, ms || 30000));
-  try {
-    const r = await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal }));
-    const data = await r.json();
-    return { data: data, status: r.status };
-  } finally { clearTimeout(t); }
-}
-// Non-stream call must return a WHOLE answer, so it gets a generous budget; streaming only needs the
-// response to OPEN (first bytes), so it gets a shorter one. Both env-overridable.
-function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Number.isFinite(v) && v > 0 ? v : 30000; }
-function streamOpenMs(env) { const v = Number(env.MAIK_STREAM_OPEN_MS); return Number.isFinite(v) && v > 0 ? v : 15000; }
 // thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
@@ -132,16 +104,16 @@ const developerProvider = {
   generate: async function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
-    const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return parseCandidates(await r.json(), r.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
-    return fetchWithTimeout(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, streamOpenMs(env));
+    return fetch(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
   }
 };
 
@@ -203,8 +175,8 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
-    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return parseCandidates(await r.json(), r.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
@@ -213,7 +185,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetchWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, streamOpenMs(env));
+    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
   }
 };
 
@@ -236,60 +208,19 @@ async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   }
   throw lastErr || new Error("no streaming provider");
 }
-// Deliver an already-computed answer over the SSE channel as a single {delta}+{done} event. Used
-// when true upstream streaming is disabled/unhealthy: the reliable non-stream answer still reaches
-// the client's stream consumer (which renders it), so there is no empty stream and no second request.
-function streamTextAsSSE(text) {
-  const enc = new TextEncoder();
-  const rs = new ReadableStream({
-    start(controller) {
-      try { if (text) controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: String(text) }) + "\n\n")); } catch (e) {}
-      try { controller.enqueue(enc.encode('data: {"done":true}\n\n')); } catch (e) {}
-      controller.close();
-    }
-  });
-  return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
-}
-function streamGeminiToSSE(upstream, onText, opts) {
+function streamGeminiToSSE(upstream, onText) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
-  let buf = "", full = "", closed = false, sawFirst = false;
-  // Server-side stall guard. Even after the response OPENS, the upstream body can go quiet forever
-  // (Vertex streamGenerateContent holding the connection with no bytes). Without this, reader.read()
-  // never settles, the ReadableStream never closes, and the Worker hangs until Cloudflare kills it.
-  // Race each read against a timeout; on stall, cancel upstream and close the SSE cleanly so the
-  // Worker ALWAYS completes. The client then falls back to the non-stream answer (it already does
-  // this on an empty/short stream), so the clinician still gets a full answer.
-  const FIRST_MS = (opts && opts.firstMs) || 20000, IDLE_MS = (opts && opts.idleMs) || 20000;
-  function readOrTimeout(ms) {
-    return new Promise(function (resolve) {
-      let settled = false;
-      const t = setTimeout(function () { if (!settled) { settled = true; resolve({ __timeout: true }); } }, ms);
-      reader.read().then(
-        function (r) { if (!settled) { settled = true; clearTimeout(t); resolve(r); } },
-        function () { if (!settled) { settled = true; clearTimeout(t); resolve({ done: true }); } }
-      );
-    });
-  }
+  let buf = "", full = "", closed = false;
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        const res = await readOrTimeout(sawFirst ? IDLE_MS : FIRST_MS);
-        const value = res.value, done = res.done, timedOut = res.__timeout;
-        if (done || timedOut) {
-          if (!closed) {
-            closed = true; try { reader.cancel(); } catch (e) {}
-            // Mark a STALL distinctly from a clean end. A stalled stream may be truncated; a future
-            // client can honor `truncated` and fall back to the full non-stream answer rather than
-            // accept a cut-off answer as complete. (Today the client's shorter stall watchdog fires
-            // first, so it already falls back — this removes the reliance on that timing margin.)
-            controller.enqueue(enc.encode(timedOut ? 'data: {"done":true,"truncated":true}\n\n' : 'data: {"done":true}\n\n'));
-            controller.close();
-          }
+        const { value, done } = await reader.read();
+        if (done) {
+          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
           try { if (onText) onText(full); } catch (e) {}
           return;
         }
-        sawFirst = true;
         buf += dec.decode(value, { stream: true });
         const blocks = buf.split("\n\n"); buf = blocks.pop();
         for (const block of blocks) {
@@ -746,7 +677,6 @@ export async function onRequest(context) {
 
   try {
     if (seg === "explain") {
-      try { console.log("[MAIK-DBG] explain ENTER stream=" + ((new URL(request.url).searchParams.get("stream")) === "1") + " authz=" + (request.headers.get("Authorization") ? "yes" : "no")); } catch (e) {}
       // Preferred: grounded RAG package (KB primary). The client assembles it from
       // the deterministic engine output + retrieved StewardMD knowledge; we forward
       // it to Gemini with the KB-primary system prompt. The whole KB never transits.
@@ -757,7 +687,6 @@ export async function onRequest(context) {
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
-        try { console.log("[MAIK-DBG] explain GATE ok=" + gate.ok + " id=" + String(gate.id).slice(0, 14) + " guest=" + gate.guest + " reason=" + (gate.reason || "-") + " failOpen=" + (gate.failOpen || "-")); } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
@@ -766,15 +695,7 @@ export async function onRequest(context) {
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
         // answer never fails to arrive.
         const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
-        // True live token streaming from the provider is UNRELIABLE in production right now: the SSE
-        // upstream opens (200) then delivers ZERO bytes, so the client stalls on an empty stream and
-        // only recovers via a late fallback — the "MaiK hangs ~50-90s then times out" report. Until it
-        // is re-verified healthy, serve stream requests from the RELIABLE non-stream call below and hand
-        // the whole answer back over the SSE channel the client is already listening on (one event) —
-        // no empty stream, no hang, no second request. Flip MAIK_LIVE_STREAM=1 to try true upstream
-        // token streaming again once confirmed working.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
-        if (wantStream && liveStream) {
+        if (wantStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
@@ -789,12 +710,8 @@ export async function onRequest(context) {
         const nsCap = MAX_OUT;
         const nsSys = sys;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
-        catch (e) { try { console.log("[MAIK-DBG] explain FAIL " + String((e && e.message) || e).slice(0, 100)); } catch (_) {} await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
-        // Client asked for a stream: hand the reliable non-stream answer back over the SSE channel it's
-        // already listening on (one delta + done). It renders immediately — no empty stream, no hang.
-        try { console.log("[MAIK-DBG] explain DONE len=" + (text || "").length + " stream=" + wantStream); } catch (e) {}
-        if (wantStream) return withCors(request, streamTextAsSSE(text));
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });

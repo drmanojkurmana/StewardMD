@@ -37,7 +37,7 @@
   // TESTING grant, self-contained so Pro works even if account.js/SMD_PRO hasn't loaded.
   // ⚠️ set BETA_PRO_ALL = false before launch (and rely on SMD_PRO / the real claim).
   var BETA_PRO_ALL = true;
-  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
   function isPro() {
     if (BETA_PRO_ALL) return Promise.resolve(true);                       // testing: everyone Pro
     if (window.SMD_PRO && window.SMD_PRO.isPro) return window.SMD_PRO.isPro();
