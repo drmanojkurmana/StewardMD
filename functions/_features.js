@@ -2,6 +2,10 @@
  * A generic per-user/role feature registry + pure resolver + a server-side requireFeature gate.
  * Absorbs Phase-3 premiumModels (the resolver honors the legacy map). Server-enforce only,
  * flag-gated by FEATURES_ON (inert/allow when off). */
+import { getEntitlement } from "./_entitlements.js";
+import { checkActive } from "./_experimental.js";
+import { verifyFirebaseToken } from "./_fbauth.js";
+
 export const FEATURE_REGISTRY = [
   { key: "thorex_llm",       label: "ThoreX Learn-more / correlate LLM", defaultOn: true },
   { key: "kardiox_ecg19",    label: "KardioX 19-class ECG model",        defaultRoles: [] },
@@ -30,4 +34,23 @@ export function featureAllowed(env, record, key, role) {
   if (envDefaultOn(env, key) || entry.defaultOn) return true;
   const roles = envRoles(env, key) || entry.defaultRoles || [];
   return roles.indexOf(role) >= 0;
+}
+
+function bearer(request) { try { return (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""); } catch (e) { return ""; } }
+
+export async function requireFeature(env, request, key, deps) {
+  if (!featuresOn(env)) return { allowed: true, reason: "flag_off" };
+  deps = deps || {};
+  let uid = deps.uid || null;
+  if (!uid) { try { uid = await (deps.verifyFirebaseToken || verifyFirebaseToken)(bearer(request), env); } catch (e) { uid = null; } }
+  if (!uid) return { allowed: false, reason: "signin_required" };
+  let record = null;
+  try { record = await (deps.getEntitlement || getEntitlement)(env, uid, deps); } catch (e) { record = null; }   // fail-open
+  const role = record && record.role;
+  if (featureAllowed(env, record, key, role)) return { allowed: true, uid, role, reason: "granted" };
+  const entry = registryEntry(key);
+  if (entry && entry.experimental && deps.xaToken) {
+    try { const a = await (deps.checkActive || checkActive)(env, key, deps.xaToken); if (a && a.active) return { allowed: true, uid, role, reason: "code" }; } catch (e) {}
+  }
+  return { allowed: false, uid, role, reason: "feature_off" };
 }
