@@ -209,8 +209,9 @@ export async function onRequest(context) {
     }
 
     const { provider, text } = await routeLLM(env, kind, body);
-    if (budgetMeterId) {
-      try { await meterTokens(env, budgetMeterId, estTokens(JSON.stringify(body || {}).length), estTokens((text || "").length)); } catch (e) {}
+    // Meter only a REAL answer — never charge the user for the offline/failed fallback (text === null).
+    if (budgetMeterId && text && provider !== "offline") {
+      try { await meterTokens(env, budgetMeterId, estTokens(JSON.stringify(body || {}).length), estTokens(String(text).length)); } catch (e) {}
     }
     return json({ ok: true, provider, text }, 200, request);
   } catch (e) {
