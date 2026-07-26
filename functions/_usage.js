@@ -99,18 +99,6 @@ async function writeJson(store, key, obj, ttl) { try { await store.put(key, JSON
    Enforces: rate limit, per-user daily requests (by class), daily/monthly tokens, OCR/PDF
    quotas, and the global daily-cost circuit breaker. Fail-open when no KV. */
 export async function checkQuota(env, request, type, opts) {
-  // FAIL-OPEN ON LATENCY: metering must NEVER hang a clinical answer. The identity/entitlement/budget
-  // reads below hit the network (Firebase JWKs, IdentityToolkit, KV); if any of them stalls for a
-  // logged-in caller (guests skip most of this), an unbounded await would leave /explain hanging until
-  // the client's 90s watchdog — the "logged-in hangs, guest works" bug. Bound the whole gate: if it
-  // doesn't settle in time, allow the call WITHOUT metering this turn (same posture as "no KV bound").
-  const ms = Math.max(1500, Number(env.MAIK_QUOTA_TIMEOUT_MS) || 4000);
-  let timer;
-  const timeout = new Promise((resolve) => { timer = setTimeout(() => resolve({ ok: true, id: null, meter: false, failOpen: "timeout" }), ms); });
-  try { return await Promise.race([_checkQuotaImpl(env, request, type, opts), timeout]); }
-  finally { clearTimeout(timer); }
-}
-async function _checkQuotaImpl(env, request, type, opts) {
   const store = usageKv(env); if (!store) return { ok: true, id: null, meter: false };
   const cfg = usageConfig(env);
   const who = await identify(request, env); const id = who.id;

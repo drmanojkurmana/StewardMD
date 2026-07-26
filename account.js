@@ -57,7 +57,7 @@
    *   • TEST_PRO_EMAILS — a named allowlist that stays Pro even after BETA_PRO_ALL is off.
    * ⚠️ TESTING ONLY: set BETA_PRO_ALL = false before launch and rely on the claim/allowlist. */
   var BETA_PRO_ALL = true;
-  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
   function proEmail() { var u = fbUser(), a = legacy(); return String((u && u.email) || (a && a.email) || "").toLowerCase(); }
   function isProSync() { if (BETA_PRO_ALL) return true; return TEST_PRO_EMAILS.indexOf(proEmail()) > -1; }
   function isPro() {
