@@ -24,6 +24,7 @@
  * accept an optional `deps` (fsGet/fsCommit/fsQuery) so the whole state machine is testable offline.
  */
 import * as FS from "./_fbfirestore.js";
+import { getEntitlement, effectiveTier, entitlementsOn } from "./_entitlements.js";
 
 // ---- feature registry (add a line to unlock a new beta feature) ------------------------
 export const FEATURES = {
@@ -139,6 +140,19 @@ export function messageFor(error) {
 function randomId(prefix) { return (prefix || "act_") + hex(randBytes(16)); }
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n); }
 
+// Prefer the person's entitlement tier over the device-activation tier — flag-gated, fail-open.
+// When ENTITLEMENTS_ON is off (default), or there's no uid, or the lookup throws/misses, this is
+// byte-for-byte the old behavior: normalizeTier(activationTier). Never locks a user out.
+export async function resolveTier(env, feature, uid, activationTier, fs) {
+  let tier = normalizeTier(activationTier);
+  if (!entitlementsOn(env) || !uid) return tier;
+  try {
+    const rec = await getEntitlement(env, uid, fs);   // fs has .fsGet
+    if (rec) tier = effectiveTier(feature, rec);
+  } catch (e) { /* fail-open to the activation tier — never lock a user out */ }
+  return tier;
+}
+
 // ========================================================================================
 // I/O operations — compose the pure helpers over Firestore. `deps` (fsGet/fsCommit/fsQuery)
 // defaults to the real client; tests pass an in-memory store.
@@ -249,7 +263,8 @@ export async function verify(env, req, deps) {
   const fa = act.fields;
   if (fa.status !== "active") return { active: false, reason: "revoked" };
   if (fa.feature !== payload.f || fa.deviceId !== payload.d || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
-  return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt, tier: normalizeTier(fa.tier) };
+  const tier = await resolveTier(env, fa.feature, payload.u, fa.tier, fs);
+  return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt, tier };
 }
 
 // SERVER-SIDE gate for a feature's protected compute (e.g. /api/fundx). A valid HMAC token that
@@ -263,7 +278,8 @@ export async function checkActive(env, feature, token, deps) {
   if (!payload || payload.f !== feature) return { active: false, reason: "bad_token" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
   if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.deviceId !== payload.d) return { active: false, reason: "inactive" };
-  return { active: true, uid: payload.u, deviceId: payload.d, tier: normalizeTier(act.fields.tier) };
+  const tier = await resolveTier(env, feature, payload.u, act.fields.tier, fs);
+  return { active: true, uid: payload.u, deviceId: payload.d, tier };
 }
 
 // APP: authoritative status for a signed-in user on THIS device — restores the token after a
@@ -275,7 +291,7 @@ export async function statusFor(env, req, deps) {
   const match = rows.find((r) => r.fields.feature === req.feature && r.fields.deviceId === req.deviceId && r.fields.status === "active");
   if (!match) return { active: false };
   const secret = env.EXPERIMENTAL_TOKEN_SECRET;
-  const tierNorm = normalizeTier(match.fields.tier);
+  const tierNorm = await resolveTier(env, req.feature, req.uid, match.fields.tier, fs);
   let token = null;
   if (secret && req.deviceId) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId, p: clip(match.fields.platform, 20), a: match.id, t: tierNorm }, secret);
   return { active: true, token, feature: req.feature, deviceModel: match.fields.deviceModel, activatedAt: match.fields.activatedAt, tier: tierNorm };

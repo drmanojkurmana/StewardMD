@@ -239,6 +239,15 @@
           </div>
           <div class="msg" id="etMsg"></div>
         </div>
+        <div class="card">
+          <b>User Entitlements</b>
+          <div class="hint" style="margin:2px 0 8px">Look up a user by StewardMD ID, email, or reg number. Role drives KardiQ X / ThoreX tier (physician → V1, resident/student → V2 Beta); Pro stays a separate claim.</div>
+          <label for="entlId">StewardMD ID / email / reg no</label>
+          <input id="entlId" placeholder="SMD-XXXXXX / email / reg no" autocapitalize="off" spellcheck="false">
+          <div class="qa" style="margin-top:12px"><button class="primary" id="entlLookup">Lookup</button></div>
+          <div class="msg" id="entlMsg"></div>
+          <div id="entlResult" class="hint" style="margin-top:8px">—</div>
+        </div>
       </div>
 
       <!-- PUSH -->
@@ -680,6 +689,95 @@
   }
   (function(){ var s=$("kxSave"); if(s)s.onclick=kxSave; var r=$("kxReload"); if(r)r.onclick=kxLoad;
     var m=$("kxMlabSave"); if(m)m.onclick=kxMlabSave; var mr=$("kxMlabReload"); if(mr)mr.onclick=kxLoad; })();
+
+  // ---- User Entitlements (lookup by StewardMD ID / email / reg no; role + per-feature tier override) ----
+  var ENTL_BASE="/api/entitlements/admin", entlLast=null;
+  function entlIdPayload(v){
+    v=(v||"").trim(); if(!v) return null;
+    if(v.indexOf("@")>=0) return {email:v};
+    if(/^SMD-/i.test(v)||/^[A-Za-z0-9]{6}$/.test(v)) return {smdId:v};
+    return {regNo:v};
+  }
+  function entlErr(x){ return x.s===403?"Not an owner.":("Failed: "+((x.d&&x.d.error)||x.s)); }
+  function entlRender(r){
+    var el=$("entlResult"); if(!el)return;
+    if(!r||r.ok===false){ el.innerHTML='<span class="hint">Not found'+(r&&r.error?" ("+esc(r.error)+")":"")+'</span>'; return; }
+    var roles=["","physician","resident","student"];
+    var roleOpts=roles.map(function(x){return '<option value="'+x+'"'+((r.role||"")===x?" selected":"")+'>'+(x||"— none —")+'</option>';}).join("");
+    var tiers=[["","Auto"],["v1","V1"],["v2beta","V2 Beta"]];
+    var curOv=(r.overrides&&r.overrides.thorex)||"";
+    var tierOpts=tiers.map(function(p){return '<option value="'+p[0]+'"'+(curOv===p[0]?" selected":"")+'>'+esc(p[1])+'</option>';}).join("");
+    el.innerHTML=
+      '<div><b>'+esc(r.smdId||"—")+'</b> · '+esc(r.email||"—")+(r.name?' · '+esc(r.name):'')+'</div>'+
+      '<div style="margin-top:4px">Pro: '+(r.pro?"✅":"—")+' · Verified: '+(r.verified?("✅ "+esc(r.regNo||"")):"—")+'</div>'+
+      '<div style="margin-top:8px">Role: <select id="entlRole">'+roleOpts+'</select> <button class="ghost" id="entlSaveRole">Save role</button></div>'+
+      '<div style="margin-top:8px">ThoreX tier (effective): <b>'+esc((r.effectiveTiers&&r.effectiveTiers.thorex)||"—")+'</b> — override: <select id="entlTx">'+tierOpts+'</select> <button class="ghost" id="entlSaveTx">Save tier</button></div>'+
+      '<div style="margin-top:8px">AI budget: <b>'+(r.usage?(r.usage.used+" / "+r.usage.cap+" this month · "+r.usage.remaining+" left · resets "+r.usage.resetMonth):"—")+'</b></div>'+
+      '<div style="margin-top:8px">Monthly allowance override: <input id="entlBudget" type="number" min="0" placeholder="role default" value="'+(r.aiCapTokens!=null?r.aiCapTokens:"")+'" style="width:120px"> <button class="ghost" id="entlSaveBudget">Save</button></div>'+
+      '<div style="margin-top:8px">Grant this month: <input id="entlGrant" type="number" min="0" placeholder="extra tokens this month" style="width:120px"> <button class="ghost" id="entlAddGrant">Add grant</button></div>'+
+      '<div style="margin-top:8px">Premium: <label><input type="checkbox" id="entlM_kardiox_ecg19"'+((r.premiumModels&&r.premiumModels.kardiox_ecg19)?" checked":"")+'> 19-class ECG</label> <button class="ghost" id="entlSaveModels">Save</button></div>'+
+      '<div style="margin-top:8px"><b>Features</b> (auto = role/registry default)</div>'+
+      (r.features||[]).map(function(f){
+        var sel=f.explicit===null?"auto":(f.explicit?"on":"off");
+        return '<div>'+esc(f.label)+' — <b>'+(f.allowed?"on":"off")+'</b> '+
+          '<select data-featkey="'+esc(f.key)+'" class="featSel">'+
+          ["auto","on","off"].map(function(o){return '<option value="'+o+'"'+(o===sel?" selected":"")+'>'+o+'</option>';}).join("")+
+          '</select></div>';
+      }).join("");
+    var uid=r.uid;
+    $("entlSaveRole").onclick=function(){
+      say("entlMsg","","Saving role…");
+      api(ENTL_BASE+"/set-role",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,role:$("entlRole").value})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Role updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSaveTx").onclick=function(){
+      var v=$("entlTx").value, path=v?"/set-tier":"/clear-override";
+      var payload=v?{uid:uid,feature:"thorex",tier:v}:{uid:uid,feature:"thorex"};
+      say("entlMsg","","Saving tier…");
+      api(ENTL_BASE+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Tier updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSaveBudget").onclick=function(){
+      say("entlMsg","","Saving budget…");
+      api(ENTL_BASE+"/set-budget",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,tokens:Number($("entlBudget").value||0)})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlAddGrant").onclick=function(){
+      say("entlMsg","","Adding grant…");
+      var mo=new Date().toISOString().slice(0,7);
+      api(ENTL_BASE+"/add-grant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,tokens:Number($("entlGrant").value||0),month:mo})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSaveModels").onclick=function(){
+      say("entlMsg","","Saving models…");
+      api(ENTL_BASE+"/set-model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,model:"kardiox_ecg19",allowed:$("entlM_kardiox_ecg19").checked})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    Array.prototype.forEach.call(document.querySelectorAll(".featSel"),function(sel){
+      sel.onchange=function(){
+        var key=sel.getAttribute("data-featkey"), v=sel.value;
+        var path=v==="auto"?"/clear-flag":"/set-flag";
+        var payload=v==="auto"?{uid:uid,feature:key}:{uid:uid,feature:key,enabled:v==="on"};
+        api(ENTL_BASE+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
+          if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Feature updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+        }).catch(function(){ say("entlMsg","err","Sign in first."); });
+      };
+    });
+  }
+  function entlLookup(p){
+    entlLast=p; say("entlMsg","","Looking up…");
+    api(ENTL_BASE+"/lookup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).then(function(res){
+      if(res.s!==200||!res.d||res.d.ok===false){ say("entlMsg","err",entlErr(res)); entlRender(res.d); return; }
+      say("entlMsg","",""); entlRender(res.d);
+    }).catch(function(){ say("entlMsg","err","Sign in first."); });
+  }
+  function entlReload(){ if(entlLast) entlLookup(entlLast); }
+  (function(){ var b=$("entlLookup"); if(!b)return; b.onclick=function(){ var p=entlIdPayload($("entlId").value); if(!p){ say("entlMsg","err","Enter an ID, email, or reg number."); return; } entlLookup(p); }; })();
 
   if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
   else { $("who").textContent="Firebase failed to load."; }

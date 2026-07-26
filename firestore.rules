@@ -232,6 +232,11 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // ── StewardMD ID entitlements (functions/_entitlements.js) — server-only ──
+    match /entitlements/{uid} {
+      allow read, write: if false;
+    }
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;

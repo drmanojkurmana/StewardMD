@@ -14,6 +14,7 @@
  */
 
 import { proFromRequest } from "./_entitlement.js";
+import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -101,7 +102,8 @@ export async function checkQuota(env, request, type, opts) {
   const store = usageKv(env); if (!store) return { ok: true, id: null, meter: false };
   const cfg = usageConfig(env);
   const who = await identify(request, env); const id = who.id;
-  let isProCaller = true; try { isProCaller = (await proFromRequest(env, request)).pro; } catch (e) {}
+  let isProCaller = true, callerUid = null, callerVerified = false;
+  try { const pr = await proFromRequest(env, request); isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } catch (e) {}
   const now = new Date(), day = dayKey(now), month = monthKey(now);
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
   const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
@@ -122,10 +124,17 @@ export async function checkQuota(env, request, type, opts) {
   const m = (await readJson(store, mKey)) || { tokens: 0 };
 
   if (u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
-  const monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
+  let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
+  let budgetApplied = false;
+  if (aiBudgetOn(env) && callerUid) {
+    try {
+      const cap = await monthlyCapFor(env, callerUid, isProCaller, callerVerified, month, { kv: store });
+      if (cap != null) { monthlyCap = cap; budgetApplied = true; }
+    } catch (e) { /* fail-open: keep legacy cap */ }
+  }
   if (m.tokens >= monthlyCap) {
     if (!isProCaller) return { ok: false, reason: "needs-pro", needsPro: true, message: PRO_MSG, id };
-    return { ok: false, reason: "monthly-tokens", message: QUOTA_MSG, id };
+    return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: QUOTA_MSG, id };
   }
   if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
   else if (type === "case") { if (u.case >= cfg.caseDaily) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
@@ -164,6 +173,23 @@ export async function recordUsage(gate, info) {
   await writeJson(store, "maik:m:" + gate.id + ":" + gate._month, m, monTtl);
   await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
   return { cost, alert: g.cost >= cfg.costAlertInr && g.cost < cfg.costHardStopInr };
+}
+
+// Shared token accounting for non-MaiK AI surfaces (e.g. ThoreX LLM) so they draw from the same
+// monthly allowance. Increments the same maik:m / maik:u / maik:global counters recordUsage uses.
+export async function meterTokens(env, id, inTok, outTok) {
+  const store = usageKv(env); if (!store || !id) return;
+  const cfg = usageConfig(env);
+  const now = new Date(), day = dayKey(now), month = monthKey(now);
+  const uKey = "maik:u:" + id + ":" + day, mKey = "maik:m:" + id + ":" + month;
+  const u = (await readJson(store, uKey)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
+  const m = (await readJson(store, mKey)) || { tokens: 0 };
+  const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
+  const tot = (inTok || 0) + (outTok || 0);
+  const cost = ((inTok || 0) / 1000) * cfg.priceInInrPer1k + ((outTok || 0) / 1000) * cfg.priceOutInrPer1k;
+  u.tokens += tot; m.tokens += tot; g.cost += cost; g.req += 1;
+  const dayTtl = 60 * 60 * 26, monTtl = 60 * 60 * 24 * 32;
+  await writeJson(store, uKey, u, dayTtl); await writeJson(store, mKey, m, monTtl); await writeJson(store, "maik:global:" + day, g, dayTtl);
 }
 
 /* Admin aggregate (token-gated by the caller). Anonymised — account ids are already
