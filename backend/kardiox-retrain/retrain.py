@@ -15,8 +15,8 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from google.cloud import storage
 
-TRAIN_BUCKET = os.environ.get("TRAIN_BUCKET", "stewardmd-ecg-train")
-FB_BUCKET = os.environ.get("FEEDBACK_BUCKET", "stewardmd-ecg-feedback")
+TRAIN_BUCKET = os.environ.get("TRAIN_BUCKET", "stewardmd-ecg-train-in")
+FB_BUCKET = os.environ.get("FEEDBACK_BUCKET", "stewardmd-ecg-feedback-in")
 MIN_NEW = int(os.environ.get("MIN_NEW", "20"))
 EPOCHS = int(os.environ.get("EPOCHS", "6"))
 DEV = "cuda" if torch.cuda.is_available() else "cpu"
