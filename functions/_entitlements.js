@@ -6,6 +6,9 @@ import * as FS from "./_fbfirestore.js";
 import { lookupUidByEmail, getUserClaims, lookupUserByUid } from "./_fbadmin.js";
 import { invalidateBudgetCache, PREMIUM_MODELS, effectiveAllowance } from "./_aibudget.js";
 import { usageKv } from "./_usage.js";
+// Call-time-only cycle: _features.js imports getEntitlement from here; safe because these
+// bindings are only dereferenced inside function bodies below, never at module-eval time.
+import { featureKeys, featureAllowed, FEATURE_REGISTRY } from "./_features.js";
 
 export const ROLES = ["physician", "resident", "student"];
 const COLL = "entitlements";
@@ -118,12 +121,20 @@ export async function adminLookup(env, body, deps) {
   try { if (kv) used = (((await kv.get("maik:m:fb:" + r.uid + ":" + month, "json")) || {}).tokens) || 0; } catch (e) {}
   let cap = 0;
   try { cap = effectiveAllowance(env, claims.pro === true, rec.role, claims.verified === true, rec, month); } catch (e) {}
+  const reg = deps.FEATURE_REGISTRY || FEATURE_REGISTRY;
+  const featAllow = deps.featureAllowed || featureAllowed;
+  const features = reg.map((e) => ({
+    key: e.key, label: e.label,
+    allowed: featAllow(env, rec, e.key, rec.role),
+    explicit: (rec.featureFlags && Object.prototype.hasOwnProperty.call(rec.featureFlags, e.key)) ? rec.featureFlags[e.key] : null
+  }));
   return { ok: true, uid: r.uid, smdId, email: user.email || null, name: user.displayName || rec.name || null,
     role: rec.role || null, effectiveTiers, overrides: pickOverrides(rec),
     pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, regNo: claims.regNo || null,
     aiCapTokens: rec.aiCapTokens != null ? rec.aiCapTokens : null,
     aiGrant: rec.aiGrantMonth ? { month: rec.aiGrantMonth, tokens: rec.aiGrantTokens } : null,
     premiumModels: rec.premiumModels || {},
+    featureFlags: rec.featureFlags || {}, features,
     usage: { used, cap, remaining: Math.max(0, cap - used), resetMonth: month } };
 }
 
@@ -207,4 +218,31 @@ export async function adminSetModel(env, body, deps) {
   await write(env, r.uid, { premiumModels: pm, updatedBy: (body && body.updatedBy) || null }, deps);
   await afterWrite(env, r.uid, deps);
   return { ok: true, uid: r.uid, model, allowed: !!(body && body.allowed) };
+}
+
+// ---- Owner-gated feature-flag admin actions (Phase 4) ----
+export async function adminSetFlag(env, body, deps) {
+  deps = deps || {};
+  const feature = String((body && body.feature) || "");
+  if (((deps.featureKeys || featureKeys)()).indexOf(feature) < 0) return { ok: false, error: "bad_feature" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const get = deps.getEntitlement || getEntitlement;
+  const rec = (await get(env, r.uid, deps)) || {};
+  const ff = Object.assign({}, rec.featureFlags);
+  ff[feature] = !!(body && body.enabled);
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { featureFlags: ff, updatedBy: (body && body.updatedBy) || null }, deps);
+  return { ok: true, uid: r.uid, feature, enabled: !!(body && body.enabled) };
+}
+export async function adminClearFlag(env, body, deps) {
+  deps = deps || {};
+  const feature = String((body && body.feature) || "");
+  if (((deps.featureKeys || featureKeys)()).indexOf(feature) < 0) return { ok: false, error: "bad_feature" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const get = deps.getEntitlement || getEntitlement;
+  const rec = (await get(env, r.uid, deps)) || {};
+  const ff = Object.assign({}, rec.featureFlags); delete ff[feature];
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { featureFlags: ff, updatedBy: (body && body.updatedBy) || null }, deps);
+  return { ok: true, uid: r.uid, feature, cleared: true };
 }

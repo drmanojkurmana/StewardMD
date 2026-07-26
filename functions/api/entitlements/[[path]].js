@@ -7,6 +7,8 @@
  *   POST /api/entitlements/admin/set-budget     {uid|smdId|email|regNo, tokens}        -> write aiCapTokens
  *   POST /api/entitlements/admin/add-grant      {uid|smdId|email|regNo, tokens, month} -> write monthly grant
  *   POST /api/entitlements/admin/set-model      {uid|smdId|email|regNo, model, allowed}-> toggle premium model
+ *   POST /api/entitlements/admin/set-flag       {uid|smdId|email|regNo, feature, enabled}-> write explicit feature flag
+ *   POST /api/entitlements/admin/clear-flag     {uid|smdId|email|regNo, feature}       -> delete explicit feature flag
  * (dispatch is by the LAST path segment, so the `admin/` prefix the console uses is honored.)
  *
  * Owner-gated (same OWNER_EMAILS / legacy admin-token gate as every other admin surface).
@@ -14,7 +16,7 @@
  * just authenticates, stamps the auditable `updatedBy`, and dispatches by last path segment.
  */
 import { ownerOK, emailFromToken } from "../../_adminauth.js";
-import { adminLookup, adminSetRole, adminSetTier, adminClearOverride, adminSetBudget, adminAddGrant, adminSetModel } from "../../_entitlements.js";
+import { adminLookup, adminSetRole, adminSetTier, adminClearOverride, adminSetBudget, adminAddGrant, adminSetModel, adminSetFlag, adminClearFlag } from "../../_entitlements.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
@@ -33,5 +35,7 @@ export async function onRequestPost(context) {
   if (seg === "set-budget") return json(await adminSetBudget(env, body));
   if (seg === "add-grant") return json(await adminAddGrant(env, body));
   if (seg === "set-model") return json(await adminSetModel(env, body));
+  if (seg === "set-flag") return json(await adminSetFlag(env, body));
+  if (seg === "clear-flag") return json(await adminClearFlag(env, body));
   return json({ ok: false, error: "not_found" }, 404);
 }
