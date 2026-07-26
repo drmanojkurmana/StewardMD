@@ -2783,6 +2783,11 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
       // On timeout we surface a clear message + a one-tap retry, and free the composer.
       var _maikDone = false, MAIK_TO_MS = 90000, _maikTO = null, _streamStarted = false, _stageT = [];
+      // SPEED: a signed-in session's Firestore sync hogs the single JS thread and delays the AI
+      // answer's callback — guest is fast precisely BECAUSE it has no Firestore. Pause Firestore for
+      // the duration of one answer so the AI call runs on a clear thread like guest, then resume.
+      var _fsResumed = false;
+      function _fsResume() { if (_fsResumed) return; _fsResumed = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} }
       function _clearStages() { _stageT.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); _stageT = []; }
       // Watchdog, NOT a fixed total ceiling. On web (real SSE) onDelta resets it on every streamed token so
       // a long but ACTIVELY-STREAMING answer is never killed. On native there is no SSE (CapacitorHttp
@@ -2790,7 +2795,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // ceiling must comfortably cover a cold Vertex/KB start + a full grounded answer. The old fixed 40s
       // nuked in-flight answers ("took too long" WHILE it was still generating). Fires only if truly stuck.
       function _maikTimedOut() {
-        if (_maikDone) return; _maikDone = true; _clearStages();
+        if (_maikDone) return; _maikDone = true; _clearStages(); _fsResume();
         try {
           think.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
           var _rl = think.querySelector(".maik-retry");
@@ -2810,6 +2815,11 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         }, s[0]));
       });
       _armTO();
+      // Native only (web is already fast). Resumed in the cleanup below + a 25s safety timer, so
+      // Firestore is never left offline even if the chain dies. buildPackage uses the on-device KB
+      // (not Firestore) and the AI call goes over CapacitorHttp (not Firestore), so pausing Firestore
+      // does not affect the answer — it only removes the sync that was starving the thread.
+      try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResume, 25000); } } catch (e) {}
       Promise.resolve()
         .then(function () {
           try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
@@ -2892,7 +2902,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           });
         })
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
-        .then(function () { if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+        .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
     function send() {
       if (_maikBusy) return;
