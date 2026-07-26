@@ -236,6 +236,20 @@ async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   }
   throw lastErr || new Error("no streaming provider");
 }
+// Deliver an already-computed answer over the SSE channel as a single {delta}+{done} event. Used
+// when true upstream streaming is disabled/unhealthy: the reliable non-stream answer still reaches
+// the client's stream consumer (which renders it), so there is no empty stream and no second request.
+function streamTextAsSSE(text) {
+  const enc = new TextEncoder();
+  const rs = new ReadableStream({
+    start(controller) {
+      try { if (text) controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: String(text) }) + "\n\n")); } catch (e) {}
+      try { controller.enqueue(enc.encode('data: {"done":true}\n\n')); } catch (e) {}
+      controller.close();
+    }
+  });
+  return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
+}
 function streamGeminiToSSE(upstream, onText, opts) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
@@ -750,7 +764,15 @@ export async function onRequest(context) {
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
         // answer never fails to arrive.
         const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
-        if (wantStream) {
+        // True live token streaming from the provider is UNRELIABLE in production right now: the SSE
+        // upstream opens (200) then delivers ZERO bytes, so the client stalls on an empty stream and
+        // only recovers via a late fallback — the "MaiK hangs ~50-90s then times out" report. Until it
+        // is re-verified healthy, serve stream requests from the RELIABLE non-stream call below and hand
+        // the whole answer back over the SSE channel the client is already listening on (one event) —
+        // no empty stream, no hang, no second request. Flip MAIK_LIVE_STREAM=1 to try true upstream
+        // token streaming again once confirmed working.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
@@ -767,6 +789,9 @@ export async function onRequest(context) {
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
+        // Client asked for a stream: hand the reliable non-stream answer back over the SSE channel it's
+        // already listening on (one delta + done). It renders immediately — no empty stream, no hang.
+        if (wantStream) return withCors(request, streamTextAsSSE(text));
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });
