@@ -695,7 +695,11 @@
       '<div><b>'+esc(r.smdId||"—")+'</b> · '+esc(r.email||"—")+(r.name?' · '+esc(r.name):'')+'</div>'+
       '<div style="margin-top:4px">Pro: '+(r.pro?"✅":"—")+' · Verified: '+(r.verified?("✅ "+esc(r.regNo||"")):"—")+'</div>'+
       '<div style="margin-top:8px">Role: <select id="entlRole">'+roleOpts+'</select> <button class="ghost" id="entlSaveRole">Save role</button></div>'+
-      '<div style="margin-top:8px">ThoreX tier (effective): <b>'+esc((r.effectiveTiers&&r.effectiveTiers.thorex)||"—")+'</b> — override: <select id="entlTx">'+tierOpts+'</select> <button class="ghost" id="entlSaveTx">Save tier</button></div>';
+      '<div style="margin-top:8px">ThoreX tier (effective): <b>'+esc((r.effectiveTiers&&r.effectiveTiers.thorex)||"—")+'</b> — override: <select id="entlTx">'+tierOpts+'</select> <button class="ghost" id="entlSaveTx">Save tier</button></div>'+
+      '<div style="margin-top:8px">AI budget: <b>'+(r.usage?(r.usage.used+" / "+r.usage.cap+" this month · "+r.usage.remaining+" left · resets "+r.usage.resetMonth):"—")+'</b></div>'+
+      '<div style="margin-top:8px">Monthly allowance override: <input id="entlBudget" type="number" min="0" placeholder="role default" value="'+(r.aiCapTokens!=null?r.aiCapTokens:"")+'" style="width:120px"> <button class="ghost" id="entlSaveBudget">Save</button></div>'+
+      '<div style="margin-top:8px">Grant this month: <input id="entlGrant" type="number" min="0" placeholder="extra tokens this month" style="width:120px"> <button class="ghost" id="entlAddGrant">Add grant</button></div>'+
+      '<div style="margin-top:8px">Premium: <label><input type="checkbox" id="entlM_kardiox_ecg19"'+((r.premiumModels&&r.premiumModels.kardiox_ecg19)?" checked":"")+'> 19-class ECG</label> <button class="ghost" id="entlSaveModels">Save</button></div>';
     var uid=r.uid;
     $("entlSaveRole").onclick=function(){
       say("entlMsg","","Saving role…");
@@ -709,6 +713,25 @@
       say("entlMsg","","Saving tier…");
       api(ENTL_BASE+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
         if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Tier updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSaveBudget").onclick=function(){
+      say("entlMsg","","Saving budget…");
+      api(ENTL_BASE+"/set-budget",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,tokens:Number($("entlBudget").value||0)})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlAddGrant").onclick=function(){
+      say("entlMsg","","Adding grant…");
+      var mo=new Date().toISOString().slice(0,7);
+      api(ENTL_BASE+"/add-grant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,tokens:Number($("entlGrant").value||0),month:mo})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSaveModels").onclick=function(){
+      say("entlMsg","","Saving models…");
+      api(ENTL_BASE+"/set-model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,model:"kardiox_ecg19",allowed:$("entlM_kardiox_ecg19").checked})}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
       }).catch(function(){ say("entlMsg","err","Sign in first."); });
     };
   }
