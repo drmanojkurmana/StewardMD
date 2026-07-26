@@ -51,7 +51,7 @@
     // Same host family as the image analyzer; native app posts direct, web via the edge proxy.
     try {
       var isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
-      return isNative ? "https://kardiox-image-yislqrddsq-uc.a.run.app/v1/ecg/feedback" : "/api/kardiox/feedback";
+      return isNative ? "https://kardiox-image-911280405587.asia-south1.run.app/v1/ecg/feedback" : "/api/kardiox/feedback";
     } catch (e) { return "/api/kardiox/feedback"; }
   }
 

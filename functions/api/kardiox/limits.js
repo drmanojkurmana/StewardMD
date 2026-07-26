@@ -5,7 +5,7 @@
  * which never reaches the browser. GET = usage/config/cost; POST = set monthlyLimit / exempt list. */
 import { ownerOK } from "../../_adminauth.js";
 
-const SVC = "https://kardiox-image-911280405587.us-central1.run.app/v1/admin/limits";
+const SVC = "https://kardiox-image-911280405587.asia-south1.run.app/v1/admin/limits";
 const J = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
 export async function onRequestGet({ request, env }) {

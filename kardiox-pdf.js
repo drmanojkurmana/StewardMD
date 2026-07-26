@@ -10,7 +10,7 @@
 (function () {
   "use strict";
 
-  var PDF_URL = "https://kardiox-pdf-911280405587.us-central1.run.app/v1/ecg/analyze-pdf";
+  var PDF_URL = "https://kardiox-pdf-911280405587.asia-south1.run.app/v1/ecg/analyze-pdf";
 
   function flagOn() {
     try {

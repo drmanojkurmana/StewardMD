@@ -129,7 +129,7 @@
   function isNative() { try { return !!(typeof window !== "undefined" && window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; } }
   var KX_BACKEND_URL = "https://kardiox-pipeline-yislqrddsq-uc.a.run.app";
   var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
-  var KX_IMAGE_URL = "https://kardiox-image-yislqrddsq-uc.a.run.app";  // end-to-end IMAGE model (Yale-style, reads the photo directly)
+  var KX_IMAGE_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // end-to-end IMAGE model — INDIA (Mumbai/asia-south1) for DPDP data residency
   function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
   // ── Model Lab (beta): allowed users (server-side admin allow-list) get the candidate 19-class model
   // shown ALONGSIDE production (variant=compare) as a labelled experimental second opinion — production
@@ -158,6 +158,20 @@
       return { kind: "image", analyze: function (image, onStage) {
         try { if (image && image.data instanceof Blob) window.SMD_KARDIOX_LASTIMAGE = image.data; } catch (e) {}
         return r.analyze(image, onStage);
+      } };
+    } catch (e) { return null; }
+  }
+  // ── ON-DEVICE image model (ONNX Runtime Web): runs the 19-class + MI-any ENTIRELY on the phone —
+  // the ECG photo NEVER leaves the device (DPDP: no PHI upload). Same fusion/verdict as the cloud
+  // (kardiox-ort-image.js, validated). Flag smd_kardiox_ondevice_image (default OFF until device-tested);
+  // the cloud image analyzer stays the fallback. ──
+  function ondeviceImageFlag() { try { return !!(window.SMD_KARDIOX_FLAGS && SMD_KARDIOX_FLAGS.bool("smd_kardiox_ondevice_image")); } catch (e) { return false; } }
+  function ondeviceImageAnalyzer() {
+    try {
+      if (!isNative() || typeof window === "undefined" || !window.SMD_KARDIOX_ORT_IMAGE) return null;
+      return { kind: "ondevice-image", analyze: function (image, onStage) {
+        try { if (image && image.data instanceof Blob) window.SMD_KARDIOX_LASTIMAGE = image.data; } catch (e) {}
+        return window.SMD_KARDIOX_ORT_IMAGE.analyzeImage(image, onStage);
       } };
     } catch (e) { return null; }
   }
@@ -346,6 +360,7 @@
   // honest "unavailable" analyzer — the mock is NEVER a silent fallback (it faked a fixed AFib).
   function chooseAnalyzer(opts) {
     if (demoFlag()) return mockAnalyzer();
+    if (ondeviceImageFlag()) { var od = ondeviceImageAnalyzer(); if (od) return od; }   // ON-DEVICE image model — no PHI leaves the phone (DPDP)
     if (imageFlag()) { var ima = imageAnalyzer(); if (ima) return ima; }    // end-to-end image model (PoC photo→dx)
     if (learnedFlag()) { var la = learnedAnalyzer(); if (la) return la; }   // learned-digitiser validation stage
     if (ondevicePreferred()) return ortAnalyzer();     // full offline photo→dx (opt-in + pack installed)
