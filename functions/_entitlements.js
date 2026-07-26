@@ -3,7 +3,7 @@
  * experimental-access gates prefer the person-tier over the device-activation tier when
  * ENTITLEMENTS_ON. Pure derivation + deps-injectable IO so the whole thing is testable offline. */
 import * as FS from "./_fbfirestore.js";
-import { lookupUidByEmail } from "./_fbadmin.js";
+import { lookupUidByEmail, getUserClaims, lookupUserByUid } from "./_fbadmin.js";
 
 export const ROLES = ["physician", "resident", "student"];
 const COLL = "entitlements";
@@ -70,4 +70,76 @@ export async function resolveUid(env, identity, deps) {
     return uid || null;
   }
   return null;
+}
+
+// ---- Owner-gated admin actions (lookup/set-role/set-tier/clear-override) ----
+// All deps-injectable for offline testing; router supplies the real (env-backed) implementations.
+const FEATURES = ["thorex", "kardiox"];
+
+function pickIdentity(b) {
+  if (b.uid) return { uid: b.uid };
+  if (b.smdId) return { smdId: b.smdId };
+  if (b.email) return { email: b.email };
+  if (b.regNo) return { regNo: b.regNo };
+  return null;
+}
+async function resolveOr404(env, body, deps) {
+  const id = pickIdentity(body || {});
+  if (!id) return { error: "missing_identity" };
+  const resolve = (deps && deps.resolveUid) || resolveUid;
+  const uid = await resolve(env, id, deps);
+  return uid ? { uid } : { error: "not_found" };
+}
+function pickOverrides(rec) {
+  const o = {};
+  FEATURES.forEach((f) => { const v = rec["override_" + f]; if (v === "v1" || v === "v2beta") o[f] = v; });
+  return o;
+}
+
+export async function adminLookup(env, body, deps) {
+  deps = deps || {};
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const get = deps.getEntitlement || getEntitlement;
+  const claimsOf = deps.getUserClaims || getUserClaims;
+  const userOf = deps.lookupUserByUid || lookupUserByUid;
+  const fsGet = deps.fsGet || FS.fsGet;
+  const rec = (await get(env, r.uid, deps)) || {};
+  const claims = (await claimsOf(env, r.uid)) || {};
+  const user = (await userOf(env, r.uid)) || {};
+  let smdId = rec.smdId || null;
+  if (!smdId) { const p = await fsGet(env, "users/" + r.uid + "/profile/self"); smdId = (p && p.fields && p.fields.smdId) || null; }
+  const effectiveTiers = {}; FEATURES.forEach((f) => { effectiveTiers[f] = effectiveTier(f, rec); });
+  return { ok: true, uid: r.uid, smdId, email: user.email || null, name: user.displayName || rec.name || null,
+    role: rec.role || null, effectiveTiers, overrides: pickOverrides(rec),
+    pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, regNo: claims.regNo || null };
+}
+
+export async function adminSetRole(env, body, deps) {
+  deps = deps || {};
+  const role = normalizeRole(body && body.role);
+  if (!role) return { ok: false, error: "bad_role" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { role, updatedBy: (body && body.updatedBy) || null }, deps);
+  return { ok: true, uid: r.uid, role };
+}
+export async function adminSetTier(env, body, deps) {
+  deps = deps || {};
+  const feature = String((body && body.feature) || "");
+  if (FEATURES.indexOf(feature) < 0) return { ok: false, error: "bad_feature" };
+  const tier = (body && body.tier);
+  if (tier !== "v1" && tier !== "v2beta") return { ok: false, error: "bad_tier" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { ["override_" + feature]: tier, updatedBy: (body && body.updatedBy) || null }, deps);
+  return { ok: true, uid: r.uid, feature, tier };
+}
+export async function adminClearOverride(env, body, deps) {
+  deps = deps || {};
+  const feature = String((body && body.feature) || "");
+  if (FEATURES.indexOf(feature) < 0) return { ok: false, error: "bad_feature" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { ["override_" + feature]: null, updatedBy: (body && body.updatedBy) || null }, deps);
+  return { ok: true, uid: r.uid, feature, cleared: true };
 }

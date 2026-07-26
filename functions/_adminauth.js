@@ -13,7 +13,7 @@ export function ownerEmails(env) {
   return (env.OWNER_EMAILS ? String(env.OWNER_EMAILS).split(",") : OWNER_EMAILS_DEFAULT)
     .map((s) => s.trim().toLowerCase()).filter(Boolean);
 }
-function emailFromToken(idToken) {
+export function emailFromToken(idToken) {
   try {
     const p = String(idToken).split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
     return String(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(p), (c) => c.charCodeAt(0)))).email || "").toLowerCase();
