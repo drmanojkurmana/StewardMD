@@ -3586,6 +3586,12 @@
   // No signed-in user → plain headers (server applies a small guest quota by IP).
   function aiHeaders() {
     var base = { "Content-Type": "application/json" };
+    // NATIVE: send AI requests as a GUEST — no login token. Guest works reliably on every device and
+    // every login state; a logged-in native session's getIdToken (and the Firestore sync it kicks off)
+    // can stall the request so it never even leaves the app (MaiK/scan "took too long" for signed-in
+    // accounts). The server still answers (promo = everyone Pro); only per-user metering is skipped
+    // — acceptable in beta. Web keeps the token (it works there).
+    try { if (window.SMD_IS_NATIVE) return Promise.resolve(base); } catch (e) {}
     try {
       var u = window.firebase && firebase.auth && firebase.auth().currentUser;
       if (u && u.getIdToken) return raceTimeout(u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; }), 5000, base);
@@ -3816,7 +3822,18 @@
       var isNative = !!window.SMD_IS_NATIVE;
       var sfetch = isNative ? ((typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null) : (typeof fetch === "function" ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
-      function nsBad(set) { try { if (set === undefined) return sessionStorage.getItem("smd_maik_nstream_bad") === "1"; if (set) sessionStorage.setItem("smd_maik_nstream_bad", "1"); else sessionStorage.removeItem("smd_maik_nstream_bad"); } catch (e) {} return false; }
+      // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
+      // a momentary CORS/WebKit hiccup) must not force EVERY later query onto the slower whole-answer
+      // fetch for the whole session. We record WHEN it failed and re-probe streaming after a cooldown.
+      function nsBad(set) {
+        var COOL = 180000;   // 3 min — after this, try the pristine SSE stream again
+        try {
+          if (set === undefined) { var t = +sessionStorage.getItem("smd_maik_nstream_bad") || 0; return t > 0 && (Date.now() - t) < COOL; }
+          if (set) sessionStorage.setItem("smd_maik_nstream_bad", String(Date.now()));
+          else sessionStorage.removeItem("smd_maik_nstream_bad");
+        } catch (e) {}
+        return false;
+      }
       if (!sfetch || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
       if (isNative && nsBad()) return fallback();
       // Watchdog: a stream that OPENS but delivers nothing (seen on iOS WebKit / standalone PWAs and
