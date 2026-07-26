@@ -4,6 +4,9 @@
  * (anti-abuse: fresh accounts can't re-verify a used reg number). Flag-gated by AI_BUDGET_ON.
  * (Task 2 adds getEntitlement/usageKv imports for the KV-cached monthlyCapFor reader.) */
 
+import { getEntitlement } from "./_entitlements.js";
+import { usageKv } from "./_usage.js";
+
 export const PREMIUM_MODELS = ["kardiox_ecg19"];
 const num = (v, d) => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : d; };
 
@@ -34,4 +37,31 @@ export function premiumModelAllowed(env, record, key, role) {
   if (record && record.premiumModels && record.premiumModels[key] === true) return true;
   const roles = String((env && env["PREMIUM_" + key.toUpperCase() + "_ROLES"]) || "").split(",").map((s) => s.trim()).filter(Boolean);
   return roles.indexOf(role) >= 0;
+}
+
+const CACHE_TTL = 60 * 60 * 26;   // ~26h; also self-heals on month change via the stored month
+function cacheKey(uid) { return "maik:budget:" + uid; }
+
+export async function monthlyCapFor(env, uid, isPro, verified, month, deps) {
+  if (!aiBudgetOn(env) || !uid) return null;
+  deps = deps || {};
+  const kv = deps.kv || usageKv(env);
+  if (!kv) return null;                                   // no KV -> fail-open to legacy
+  try {
+    const cached = await kv.get(cacheKey(uid), "json");
+    if (cached && cached.month === month && typeof cached.cap === "number") return cached.cap;
+  } catch (e) { /* fall through to recompute */ }
+  const getEnt = deps.getEntitlement || getEntitlement;
+  let record = null;
+  try { record = await getEnt(env, uid, deps); } catch (e) { record = null; }   // fail-open below
+  const role = record && record.role;
+  const cap = effectiveAllowance(env, isPro, role, verified, record, month);
+  try { await kv.put(cacheKey(uid), JSON.stringify({ cap, month }), { expirationTtl: CACHE_TTL }); } catch (e) {}
+  return cap;
+}
+export async function invalidateBudgetCache(env, uid, deps) {
+  deps = deps || {};
+  const kv = deps.kv || usageKv(env);
+  if (!kv || !uid) return;
+  try { await kv.delete(cacheKey(uid)); } catch (e) {}
 }
