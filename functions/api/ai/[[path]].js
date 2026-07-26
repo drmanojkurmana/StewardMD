@@ -478,16 +478,22 @@ function renderGroundedPrompt(pkg) {
   if (pc.labTrends) L.push("Lab trends: " + clip(JSON.stringify(pc.labTrends), 400));
   if (pc.cultures) L.push("Cultures: " + clip(JSON.stringify(pc.cultures), 900));
   if (pc.radiologyImpressions) L.push("Radiology impressions: " + clip(JSON.stringify(pc.radiologyImpressions), 500));
+  // V2 token compression — DEDUPLICATE chunk text across grounding + retrieved so the SAME
+  // evidence is never sent to Gemini twice (a chunk often appears in both). Pure token savings,
+  // no content loss: the first occurrence (grounding, page-cited) is kept; later duplicates dropped.
+  var _seenChunk = {};
+  function _fresh(t) { var k = String(t == null ? "" : t).slice(0, 90).toLowerCase().replace(/\s+/g, " ").trim(); if (!k || _seenChunk[k]) return false; _seenChunk[k] = 1; return true; }
   L.push("\n=== RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE — reason from THIS) ===");
   (pkg.grounding || []).forEach((g) => {
-    L.push("• " + g.name + " (" + g.diseaseId + "):");
-    (g.knowledge || []).forEach((c) => L.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")));
+    var emitted = [];
+    (g.knowledge || []).forEach((c) => { if (_fresh(c.text)) emitted.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")); });
+    if (emitted.length) { L.push("• " + g.name + " (" + g.diseaseId + "):"); emitted.forEach((e) => L.push(e)); }
   });
   if ((pkg.retrieved || []).length) {
     // Chunks arrive already re-ranked by rerankRetrieved() (cross-encoder, lexical fallback) in the
     // explain handler, so emit in the given order — most decision-relevant evidence first.
-    L.push("\nAdditional retrieved chunks (relevance-ranked):");
-    pkg.retrieved.forEach((c) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
+    var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
+    if (_rlines.length) { L.push("\nAdditional retrieved chunks (relevance-ranked):"); _rlines.forEach((e) => L.push(e)); }
   }
   if (pkg.treatment) {
     const t = pkg.treatment;

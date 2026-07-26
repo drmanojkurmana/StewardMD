@@ -95,6 +95,30 @@ test("FIDELITY: dose is quoted from the KB, not invented", () => {
   assert.ok(/2\s*g/i.test(r.text), "KB ceftriaxone dose (2 g) present");
 });
 
+test("SAFETY: a named-drug dose query never shows a DIFFERENT drug's dose", () => {
+  // amiodarone is not in the KB atrial-fibrillation rate-control regimen → must defer (null),
+  // never present metoprolol/diltiazem under an "amiodarone" query.
+  for (const q of ["dose of amiodarone in atrial fibrillation", "dose of furosemide in acute kidney injury", "dose of sumatriptan in acute migraine"]) {
+    const r = compose(q);
+    if (r) {
+      const drug = q.match(/dose of (\w+)/)[1];
+      assert.ok(new RegExp(drug, "i").test(r.text), "if answered, must contain the named drug (" + drug + "), got: " + r.text.slice(0, 140));
+    }
+  }
+});
+
+test("SAFETY: latest/trial/guideline-update questions defer to reasoning/web", () => {
+  ["latest 2025 trial on finerenone in heart failure", "2025 ESC guidelines update on cardiogenic shock",
+   "recent RCT on SGLT2 inhibitors", "newly approved drug for migraine", "new evidence on steroids in sepsis"]
+    .forEach(q => assert.strictEqual(compose(q), null, "should defer: " + q));
+});
+
+test("SAFETY: patient vignettes defer to reasoning", () => {
+  ["patient with syncope, systolic murmur and slow-rising pulse", "62 year old man presents with acute chest pain and dyspnea",
+   "a patient who presents with fever, rash and joint pain"]
+    .forEach(q => assert.strictEqual(compose(q), null, "should defer: " + q));
+});
+
 test("LATENCY: compose is sub-5ms", () => {
   const q = "treatment of community acquired pneumonia", p = pkgFor(q);
   MaiKKB.compose(q, p); // warm (build name index if needed)

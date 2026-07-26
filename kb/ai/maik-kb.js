@@ -81,8 +81,8 @@
     { intent: "treatment", re: /\b(treat|manage|managing|therap|regimen|first[- ]?line|second[- ]?line|drug of choice|antibiotic|empiric|prophylax|de[- ]?escalat)/ },
     { intent: "differential", re: /\b(differential|ddx|d\/dx|causes? of|cause of|etiolog|aetiolog|what causes|reasons? for)/ },
     { intent: "investigation", re: /\b(investigat|work[- ]?up|which tests|what tests|blood test|\blab\b|initial tests|how (to|do i) diagnos|confirm.{0,12}diagnos|diagnostic (test|work))/ },
-    { intent: "features", re: /\b(symptom|clinical features|features of|presentation|presents|manifestation|signs? of|how does .* present)/ },
     { intent: "redflags", re: /\b(red[- ]?flags?|warning signs?|danger signs?|when to (worry|refer|escalate|admit)|alarm (signs|features))/ },
+    { intent: "features", re: /\b(symptom|clinical features|features of|presentation|presents|manifestation|signs? of|how does .* present)/ },
     { intent: "pathophysiology", re: /\b(pathophysiolog|pathogenesis|mechanism of|why does .* (happen|develop|occur))/ },
     { intent: "prognosis", re: /\b(prognos|mortality|survival|life expectancy|natural history|outcome of)/ },
     { intent: "pitfalls", re: /\b(pitfall|common mistakes|caveats?|things to avoid)/ },
@@ -95,14 +95,25 @@
     return "definition";
   }
 
-  // Complexity signals → NOT a single-disease KB lookup → hand to Gemini (reasoning mode).
-  var COMPLEX_RE = /\b(vs|versus|compare|comparison|difference between|differentiate|why would|why might|reason(ing)? (behind|for)|in a patient (with|who)|approach to|synthesi|correlat|interpret|explain (the|why)|walk me through|step[- ]?by[- ]?step|pros and cons|when should i choose|which is better|risk[- ]?benefit)\b/;
-  var MULTI_ENTITY_RE = /\band\b.*\band\b|\bwith\b.*\bwith\b/;
+  // Complexity signals → NOT a single-disease KB lookup → hand to Gemini/web (reasoning mode).
+  var COMPLEX_RE = /\b(vs|versus|compare|comparison|difference between|differentiate|why would|why might|reason(ing)? (behind|for)|approach to|synthesi|correlat|interpret|explain (the|why)|walk me through|step[- ]?by[- ]?step|pros and cons|when should i choose|which is better|risk[- ]?benefit)\b/;
+  var RECENCY_RE = /\b(latest|recent|newest|new|updated?|current|2023|2024|2025|2026|this year|nowadays)\b/;
+  var SOURCEY_RE = /\b(trial|guideline|guidance|recommendation|evidence|study|studies|research|approval|meta.?analysis|rct|consensus|update|publication|landmark)\b/;
   function isComplex(q) {
     var n = norm(q);
     if (COMPLEX_RE.test(n)) return true;
-    // patient scenario (age + presents / multiple findings) → reasoning
-    if (/\b\d{1,3}\s*(y\/?o|yo|year|yr|m\b|f\b|male|female)\b/.test(n) && /\b(present|with|develop|complain|history of)\b/.test(n)) return true;
+    // "latest / 2025 / recent trial|guideline|approval" → needs current sources → reasoning/web, not canned KB
+    if (RECENCY_RE.test(n) && SOURCEY_RE.test(n)) return true;
+    if (/\b(clinical trial|\brct\b|meta.?analysis|guideline update|guidelines update|systematic review|newly approved|fda approval)\b/.test(n)) return true;
+    // patient vignette / scenario → reasoning
+    if (/\bpresent(s|ing)? with\b|\bp\/w\b|\bcase of a\b|\bworkup of a\b/.test(n)) return true;
+    if (/\b\d{1,3}[\s-]*(y\/?o|yo|year|yr|m\b|f\b|male|female|man|woman|boy|girl)\b/.test(n) && /\b(present|with|develop|complain|history|admitted|came|brought)\b/.test(n)) return true;
+    // "patient with X, Y and Z" (2+ findings) → vignette
+    var pm = n.match(/\bpatient (?:with|who)\b(.*)$/);
+    if (pm && ((pm[1].match(/,| and | plus /g) || []).length >= 2)) return true;
+    // "should I start X or Y first?" / "is this X or Y?" — a choice/comparison → reasoning
+    if (/\bor\b/.test(n) && /\b(should i|which|whether|better|prefer|first|instead|rather|choose)\b/.test(n)) return true;
+    if (/\bis (this|it) \w+ or \w+/.test(n)) return true;
     return false;
   }
 
@@ -256,22 +267,38 @@
     var head = "**Treatment of " + t.name + "**" + (precedence && precedence.length ? " _(precedence: " + arr(precedence).join(" ▸ ") + ")_" : "");
     return { ok: true, text: head + "\n\n" + parts.join("\n\n") + "\n\n_" + citeSrc(t) + " · doses are standard references — verify locally._" };
   }
-  // Dose: extract the drug from the question, match a KB regimen drugRef. Never invent.
+  // Extract the specific agent the clinician named in a dose query ("dose of amiodarone in AF"
+  // → "amiodarone"), stripping the disease/filler words. Returns "" for a generic "dosing in X".
+  function askedDrug(qn, diseaseName) {
+    var m = qn.match(/dos(?:e|ing|age)\s+(?:of|for)\s+([a-z][a-z0-9\-]{2,}(?:\s+[a-z0-9\-]{2,})?)/) ||
+            qn.match(/\b([a-z][a-z0-9\-]{3,})\s+dos(?:e|ing|age)\b/) ||
+            qn.match(/how much\s+([a-z][a-z0-9\-]{3,})/);
+    if (!m) return "";
+    var dn = norm(diseaseName || "");
+    var toks = m[1].trim().split(/\s+/).filter(function (x) { return x.length >= 3 && dn.indexOf(x) < 0 && ["the", "for", "in", "of", "adult", "child", "paediatric", "pediatric", "acute", "severe", "chronic"].indexOf(x) < 0; });
+    return toks.join(" ");
+  }
+  // Dose: only quote a dose that is in the KB regimen for the named agent. SAFETY: if the clinician
+  // names a specific drug the KB regimen does NOT contain, DEFER (never present a different drug's
+  // dose under that query, e.g. "dose of amiodarone" must not show metoprolol). Never invents a number.
   function composeDose(t, question) {
     var qn = norm(question);
     var refs = [];
     if (t.T && t.T.default && t.T.default.dosing) refs = t.T.default.dosing.map(function (x) { return { name: x.drug || x.label, dose: x.dose, route: x.route, freq: x.freq, duration: x.duration, why: x.why }; });
     if (t.Traw && t.Traw.recommendations) t.Traw.recommendations.forEach(function (r) { arr(r.drugRefs).forEach(function (d) { refs.push({ name: d.regimenLabel || d.composition, dose: d.dose, route: d.route, freq: d.freq, duration: d.duration, why: d.why }); }); });
     if (!refs.length) return { ok: false };
-    // find the drug named in the question
-    var hit = refs.filter(function (r) { var n = norm(r.name); return n && qn.indexOf(n.split(" ")[0]) >= 0; });
-    var show = hit.length ? hit : refs;   // if no specific drug named, show the regimen doses
+    function drugMatch(r) { return norm(r.name).split(/[ \-()]+/).some(function (w) { return w.length >= 4 && qn.indexOf(w) >= 0; }); }
+    var hit = refs.filter(drugMatch);
+    var wanted = askedDrug(qn, t.name);
+    if (wanted && !hit.length) return { ok: false };            // named drug not in the KB regimen → DEFER (never show a different drug)
+    var show = hit.length ? hit : refs;                         // generic "dosing in X" → show the regimen
     var lines = show.slice(0, 5).map(function (r) {
       var dose = [r.dose, r.route, r.freq, r.duration && ("for " + r.duration)].filter(Boolean).join(" · ");
       return "- **" + r.name + "**" + (dose ? " — " + dose : "") + (r.why ? "\n  " + clip(r.why, 140) : "");
     });
     if (!lines.filter(function (l) { return /—/.test(l); }).length) return { ok: false };   // no actual dose figure
-    return { ok: true, text: "**Dosing — " + t.name + "**\n" + lines.join("\n") + "\n\n_" + citeSrc(t) + " · standard references, verify locally._" };
+    var lead = (wanted && hit.length) ? ("**" + cap(wanted) + " — dosing in " + t.name + "**") : ("**Dosing — " + t.name + "**");
+    return { ok: true, text: lead + "\n" + lines.join("\n") + "\n\n_" + citeSrc(t) + " · standard references, verify locally._" };
   }
 
   var COMPOSERS = {
