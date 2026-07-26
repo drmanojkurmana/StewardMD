@@ -29,6 +29,7 @@ import { verifyFirebaseToken } from "../../_fbauth.js";
 import { usageKv, estTokens, meterTokens } from "../../_usage.js";
 import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
 import { proFromRequest } from "../../_entitlement.js";
+import { requireFeature } from "../../_features.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -182,6 +183,10 @@ export async function onRequest(context) {
 
     const uid = await callerUid(request, env);
     if (!uid) return json({ ok: false, error: "signin_required" }, 401, request);
+
+    // Feature switchboard gate (flag-gated via FEATURES_ON; inert/allow when off).
+    const feat = await requireFeature(env, request, "thorex_llm", { uid });
+    if (!feat.allowed) return json({ ok: false, error: "feature_off", feature: "thorex_llm" }, 403, request);
 
     const rl = await rateLimit(env, uid);
     if (!rl.ok) return json({ ok: false, error: "rate_limited" }, rl.status || 429, request);
