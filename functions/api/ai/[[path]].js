@@ -97,6 +97,19 @@ async function fetchWithTimeout(url, opts, ms) {
   try { return await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })); }
   finally { clearTimeout(t); }
 }
+// Non-stream callers need the WHOLE body, not just the headers. fetch() resolves on status+headers
+// BEFORE the body streams, so bounding only the fetch would leave `await r.json()` unbounded — a
+// headers-then-stall would hang the Worker again on the non-stream path (the very fallback the stream
+// fix depends on). Keep the abort armed across the body read so the full round-trip is time-boxed.
+async function fetchJsonWithTimeout(url, opts, ms) {
+  const ctrl = new AbortController();
+  const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, Math.max(2000, ms || 30000));
+  try {
+    const r = await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal }));
+    const data = await r.json();
+    return { data: data, status: r.status };
+  } finally { clearTimeout(t); }
+}
 // Non-stream call must return a WHOLE answer, so it gets a generous budget; streaming only needs the
 // response to OPEN (first bytes), so it gets a shorter one. Both env-overridable.
 function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Number.isFinite(v) && v > 0 ? v : 30000; }
@@ -119,9 +132,9 @@ const developerProvider = {
   generate: async function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
-    const r = await fetchWithTimeout(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
+    const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(await r.json(), r.status);
+    return parseCandidates(jr.data, jr.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
@@ -190,8 +203,8 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
-    const r = await fetchWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(await r.json(), r.status);
+    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+    return parseCandidates(jr.data, jr.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
@@ -250,7 +263,15 @@ function streamGeminiToSSE(upstream, onText, opts) {
         const res = await readOrTimeout(sawFirst ? IDLE_MS : FIRST_MS);
         const value = res.value, done = res.done, timedOut = res.__timeout;
         if (done || timedOut) {
-          if (!closed) { closed = true; try { reader.cancel(); } catch (e) {} controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
+          if (!closed) {
+            closed = true; try { reader.cancel(); } catch (e) {}
+            // Mark a STALL distinctly from a clean end. A stalled stream may be truncated; a future
+            // client can honor `truncated` and fall back to the full non-stream answer rather than
+            // accept a cut-off answer as complete. (Today the client's shorter stall watchdog fires
+            // first, so it already falls back — this removes the reliance on that timing margin.)
+            controller.enqueue(enc.encode(timedOut ? 'data: {"done":true,"truncated":true}\n\n' : 'data: {"done":true}\n\n'));
+            controller.close();
+          }
           try { if (onText) onText(full); } catch (e) {}
           return;
         }
