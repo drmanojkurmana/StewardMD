@@ -26,7 +26,9 @@
  */
 import { callGemini } from "../ai/[[path]].js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
-import { usageKv } from "../../_usage.js";
+import { usageKv, estTokens, meterTokens } from "../../_usage.js";
+import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
+import { proFromRequest } from "../../_entitlement.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -187,7 +189,29 @@ export async function onRequest(context) {
     const body = await readBody(request);
     const kind = VALID_KINDS.indexOf(body.kind) >= 0 ? body.kind : "learn";
 
+    // Shared monthly AI-budget gate (flag-gated via AI_BUDGET_ON). Draws from the SAME
+    // maik:m:* counter as MaiK, so ThoreX usage counts against the one allowance. Fail-open:
+    // any error here falls through and the call proceeds under the existing rate-limit only.
+    let budgetMeterId = null;
+    if (aiBudgetOn(env)) {
+      try {
+        const pr = await proFromRequest(env, request);
+        const isPro = pr.pro, verified = !!(pr.claims && pr.claims.verified);
+        const store = usageKv(env);
+        const month = new Date().toISOString().slice(0, 7); // YYYY-MM (matches monthKey)
+        const cap = await monthlyCapFor(env, uid, isPro, verified, month, { kv: store });
+        if (cap != null && store) {
+          const used = (((await store.get("maik:m:fb:" + uid + ":" + month, "json")) || {}).tokens) || 0;
+          if (used >= cap) return json({ ok: false, error: "quota", reason: isPro ? "over-budget" : "needs-pro", needsPro: !isPro }, isPro ? 429 : 402, request);
+          budgetMeterId = "fb:" + uid;
+        }
+      } catch (e) { /* fail-open: keep call-rate limit only */ }
+    }
+
     const { provider, text } = await routeLLM(env, kind, body);
+    if (budgetMeterId) {
+      try { await meterTokens(env, budgetMeterId, estTokens(JSON.stringify(body || {}).length), estTokens((text || "").length)); } catch (e) {}
+    }
     return json({ ok: true, provider, text }, 200, request);
   } catch (e) {
     // Never log the request body (may contain de-identified-but-still-clinical text) or the error
