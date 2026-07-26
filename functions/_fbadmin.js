@@ -110,12 +110,18 @@ export async function lookupUserByUid(env, uid) {
   return u ? { uid: u.localId, email: (u.email || "").toLowerCase(), name: u.displayName || "" } : null;
 }
 
+// Pure merge core: patch over current claims, pruning keys set to null/undefined (delete
+// semantics). Exported so the clobber-safe behaviour is unit-testable without the network.
+export function mergeClaims(cur, patch) {
+  const next = Object.assign({}, cur || {}, patch || {});
+  Object.keys(next).forEach((k) => { if (next[k] == null) delete next[k]; });
+  return next;
+}
+
 // CLOBBER-SAFE: merge a patch into the user's existing claims (so granting `pro` never wipes
 // `verified`, and vice-versa). Set a patch key to null to delete it.
 export async function mergeUserClaims(env, uid, patch) {
-  const cur = await getUserClaims(env, uid);
-  const next = Object.assign({}, cur, patch);
-  Object.keys(next).forEach((k) => { if (next[k] == null) delete next[k]; });
+  const next = mergeClaims(await getUserClaims(env, uid), patch);
   await setUserClaims(env, uid, next);
   return next;
 }

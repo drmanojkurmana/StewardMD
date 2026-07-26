@@ -20,7 +20,7 @@
  */
 
 import { verifyFirebaseToken } from "../_fbauth.js";
-import { setUserClaims } from "../_fbadmin.js";
+import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
 import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
 
@@ -70,9 +70,10 @@ function decodePayload(token) {
   } catch (e) { return {}; }
 }
 
-// Set the verified custom claim (via the shared Firebase-admin helper).
+// Set the verified custom claim (via the shared Firebase-admin helper). Uses the clobber-safe
+// merge so verifying an already-Pro doctor keeps their pro/proExp claim instead of wiping it.
 async function setVerifiedClaim(env, uid, regNo) {
-  await setUserClaims(env, uid, { verified: true, regNo });
+  await mergeUserClaims(env, uid, { verified: true, regNo });
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
