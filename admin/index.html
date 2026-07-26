@@ -699,7 +699,15 @@
       '<div style="margin-top:8px">AI budget: <b>'+(r.usage?(r.usage.used+" / "+r.usage.cap+" this month · "+r.usage.remaining+" left · resets "+r.usage.resetMonth):"—")+'</b></div>'+
       '<div style="margin-top:8px">Monthly allowance override: <input id="entlBudget" type="number" min="0" placeholder="role default" value="'+(r.aiCapTokens!=null?r.aiCapTokens:"")+'" style="width:120px"> <button class="ghost" id="entlSaveBudget">Save</button></div>'+
       '<div style="margin-top:8px">Grant this month: <input id="entlGrant" type="number" min="0" placeholder="extra tokens this month" style="width:120px"> <button class="ghost" id="entlAddGrant">Add grant</button></div>'+
-      '<div style="margin-top:8px">Premium: <label><input type="checkbox" id="entlM_kardiox_ecg19"'+((r.premiumModels&&r.premiumModels.kardiox_ecg19)?" checked":"")+'> 19-class ECG</label> <button class="ghost" id="entlSaveModels">Save</button></div>';
+      '<div style="margin-top:8px">Premium: <label><input type="checkbox" id="entlM_kardiox_ecg19"'+((r.premiumModels&&r.premiumModels.kardiox_ecg19)?" checked":"")+'> 19-class ECG</label> <button class="ghost" id="entlSaveModels">Save</button></div>'+
+      '<div style="margin-top:8px"><b>Features</b> (auto = role/registry default)</div>'+
+      (r.features||[]).map(function(f){
+        var sel=f.explicit===null?"auto":(f.explicit?"on":"off");
+        return '<div>'+esc(f.label)+' — <b>'+(f.allowed?"on":"off")+'</b> '+
+          '<select data-featkey="'+esc(f.key)+'" class="featSel">'+
+          ["auto","on","off"].map(function(o){return '<option value="'+o+'"'+(o===sel?" selected":"")+'>'+o+'</option>';}).join("")+
+          '</select></div>';
+      }).join("");
     var uid=r.uid;
     $("entlSaveRole").onclick=function(){
       say("entlMsg","","Saving role…");
@@ -734,6 +742,16 @@
         if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Saved."); entlReload(); } else say("entlMsg","err",entlErr(x));
       }).catch(function(){ say("entlMsg","err","Sign in first."); });
     };
+    Array.prototype.forEach.call(document.querySelectorAll(".featSel"),function(sel){
+      sel.onchange=function(){
+        var key=sel.getAttribute("data-featkey"), v=sel.value;
+        var path=v==="auto"?"/clear-flag":"/set-flag";
+        var payload=v==="auto"?{uid:uid,feature:key}:{uid:uid,feature:key,enabled:v==="on"};
+        api(ENTL_BASE+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
+          if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Feature updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+        }).catch(function(){ say("entlMsg","err","Sign in first."); });
+      };
+    });
   }
   function entlLookup(p){
     entlLast=p; say("entlMsg","","Looking up…");
