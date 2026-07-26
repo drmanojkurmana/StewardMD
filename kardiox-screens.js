@@ -722,6 +722,15 @@
         '<div class="kx-mlab-note">' + (cmp.agree ? 'Both models agree.' : 'Models disagree — the production reading above is authoritative.') + ' Candidate is an unvalidated experimental model; not for diagnosis.</div>' +
       '</div>' : '';
 
+    // DEV: on-device (canvas + ONNX) vs cloud parity, with a running agreement tally (flag smd_kardiox_parity).
+    var par = a.onDeviceParity;
+    var parityHtml = par ? (section("smartphone", "On-device parity (dev)") +
+      '<div class="kx-mlab">' +
+        '<div class="kx-mlab-row"><span class="kx-mlab-k">Cloud</span><b>' + esc(par.cloud) + '</b></div>' +
+        '<div class="kx-mlab-row"><span class="kx-mlab-k">On-device</span><b>' + esc(par.onDevice) + '</b><span class="kx-mlab-c kx-data">' + (par.agree ? 'match' : 'differ') + '</span></div>' +
+        '<div class="kx-mlab-note">Running agreement ' + (par.tally ? par.tally.agree + '/' + par.tally.total : '') + (par.agreementPct != null ? ' (' + par.agreementPct + '%)' : '') + '. On-device runs fully offline — no upload.</div>' +
+      '</div>') : '';
+
     var body =
       '<div class="kx-rpt-body">' +
         hero +
@@ -731,6 +740,7 @@
         '<div class="kx-morph">' + morphHtml + '</div>' +
         (rptDiffsHtml ? section("insights", "Differentials considered") + '<div class="kx-diffs">' + rptDiffsHtml + '</div>' : '') +
         compareHtml +
+        parityHtml +
         section("clinical_notes", "Clinical interpretation") +
         '<div class="kx-interp">' + esc(interpClean) + '</div>' +
         '<button class="kx-why" type="button" data-act="kxnav:why">' +
@@ -2658,6 +2668,16 @@
       // not the now-empty capture screen. (History→report keeps its own stack via openStored.)
       state.stack = ["landing"]; go("report"); haptic("success");
       if (a && (a.severity === "urgent" || a.severity === "critical")) haptic("warning");
+      // DEV parity (flag smd_kardiox_parity): also run the REAL on-device path on the same image + compare
+      // to this cloud verdict, then re-render the report with the parity card + running agreement tally.
+      try {
+        var pf = window.SMD_KARDIOX_FLAGS && SMD_KARDIOX_FLAGS.bool && SMD_KARDIOX_FLAGS.bool("smd_kardiox_parity");
+        if (pf && window.SMD_KARDIOX_ORT_IMAGE && window.SMD_KARDIOX_LASTIMAGE) {
+          window.SMD_KARDIOX_ORT_IMAGE.captureParity({ data: window.SMD_KARDIOX_LASTIMAGE }, a.verdict).then(function (r) {
+            if (r && state.analysis === a) { a.onDeviceParity = r; if (state.stack[state.stack.length - 1] === "report") show("report"); }
+          });
+        }
+      } catch (e2) {}
     }).catch(function (e) {
       state.running = false;
       try { console.log("KXDBG runPipeline failed:", e && e.code, "|", e && e.stage, "|", e && e.message); } catch (_) {}

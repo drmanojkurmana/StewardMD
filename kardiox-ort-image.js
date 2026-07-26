@@ -67,7 +67,12 @@
         img.onload = function () {
           try {
             var c = document.createElement("canvas"); c.width = 320; c.height = 320;
-            var ctx = c.getContext("2d"); ctx.drawImage(img, 0, 0, 320, 320);
+            var ctx = c.getContext("2d");
+            // High-quality (antialiased/area) downscale to best match the cloud's torchvision Resize
+            // (bilinear + antialias=True). Default canvas smoothing can alias on large ECG photos -> flips
+            // borderline verdicts vs the server.
+            ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+            ctx.drawImage(img, 0, 0, 320, 320);
             var d = ctx.getImageData(0, 0, 320, 320);
             URL.revokeObjectURL(url); res(toTensor320(d.data, 320, 320, 4));
           } catch (e) { rej(e); }
@@ -161,7 +166,26 @@
     });
   }
 
-  var API = { analyzeImage: analyzeImage, decide: decide, toTensor320: toTensor320, loadSessions: loadSessions, CLASSES: CLASSES };
+  // ── Parity capture: run the REAL on-device path (canvas + ONNX + fusion) on the same image and
+  // compare its verdict to the cloud verdict, accumulating a running agreement tally in localStorage.
+  // This measures the ACTUAL canvas-vs-cloud parity on the device (the VM A/Bs cannot). ──
+  function _norm(s) { return String(s == null ? "" : s).split("(")[0].trim().toLowerCase(); }
+  function tally() { try { var t = JSON.parse(localStorage.getItem("smd_kardiox_parity_tally") || "{}"); return { agree: t.agree || 0, total: t.total || 0 }; } catch (e) { return { agree: 0, total: 0 }; } }
+  function resetTally() { try { localStorage.removeItem("smd_kardiox_parity_tally"); } catch (e) {} }
+  function captureParity(image, cloudVerdict) {
+    return analyzeImage(image).then(function (od) {
+      var odv = (od && od.verdict) || "";
+      var agree = _norm(odv) === _norm(cloudVerdict);
+      var t = tally(); t.total += 1; if (agree) t.agree += 1;
+      try { localStorage.setItem("smd_kardiox_parity_tally", JSON.stringify(t)); } catch (e) {}
+      var r = { onDevice: odv, cloud: cloudVerdict, agree: agree, tally: t, agreementPct: Math.round(100 * t.agree / Math.max(1, t.total)) };
+      try { console.log("[KardiQ X parity] onDevice=%s | cloud=%s | agree=%s | running %d/%d (%d%%)", odv, cloudVerdict, agree, t.agree, t.total, r.agreementPct); } catch (e) {}
+      return r;
+    }).catch(function (e) { try { console.warn("[KardiQ X parity] on-device run failed:", e && e.message); } catch (_) {} return null; });
+  }
+
+  var API = { analyzeImage: analyzeImage, decide: decide, toTensor320: toTensor320, loadSessions: loadSessions, CLASSES: CLASSES,
+              captureParity: captureParity, parityTally: tally, resetParityTally: resetTally };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_ORT_IMAGE = API;
 })();
