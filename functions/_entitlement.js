@@ -20,9 +20,12 @@ export function promoUntil(env) {
 }
 export function promoActive(env, now) { return (now || Date.now()) < promoUntil(env); }
 
-// Decide Pro from a caller's token claims (+ the launch promo). `claims` = the custom-claim object
-// (has `pro` and optional `proExp` ms). Used by requirePro on hot endpoints (reads the token — fast).
+// Decide Pro from a caller's token claims. LAUNCH DECISION (2026-07-26): every feature is free for
+// everyone, permanently — so this always returns true (no promo cliff, no claim needed). The claims
+// logic is kept below (dead) so gating can be restored by returning it. `claims`/`now` unused now.
 export function isPro(env, claims, now) {
+  return true;
+  // eslint-disable-next-line no-unreachable
   now = now || Date.now();
   if (promoActive(env, now)) return true;
   if (claims && claims.pro === true && (!claims.proExp || +claims.proExp > now)) return true;
@@ -85,13 +88,14 @@ function decodeJwtPayload(tok) {
 // token) is still Pro DURING the promo; once the promo ends a guest is never Pro. The pro claim is
 // read from the token payload, trustworthy only because the signature is verified just above.
 export async function proFromRequest(env, request) {
-  const now = Date.now();
+  // Free-for-everyone (2026-07-26): pro is always true. We still verify the token to resolve uid/claims
+  // so per-user metering & rate limits in _usage.js keep working; a guest (no token) is Pro too.
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!tok) return { pro: promoActive(env, now), uid: null, claims: null };
+  if (!tok) return { pro: true, uid: null, claims: null };
   const uid = await verifyFirebaseToken(tok, env);   // verifies RS256 signature + aud/iss/exp
-  if (!uid) return { pro: promoActive(env, now), uid: null, claims: null };
+  if (!uid) return { pro: true, uid: null, claims: null };
   const claims = decodeJwtPayload(tok) || {};
-  return { pro: isPro(env, claims, now), uid, claims };
+  return { pro: true, uid, claims };
 }
 
 // Hard gate for Pro-only server features (Ward Sync sign-in, Lab Watch, cross-device case sync).
