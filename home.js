@@ -2811,15 +2811,27 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       });
       _armTO();
       Promise.resolve()
-        .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
+          try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
           // Ground on the active case ONLY when the question is about that patient ("this/my
           // patient", "the case/diagnosis"). A standalone knowledge question (e.g. "treatment of
           // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case —
           // otherwise a stale case's differential (e.g. cholangitis) hijacks the answer.
           var caseRef = /\b(this|that|the|my|our|current)\s+(patient|case|pt|dx|diagnosis|condition|scenario)\b|\bthis (patient|case|dx)\b|\b(above|current) (case|patient)\b/.test(maikNorm(question));
           var findings = (active && caseRef) ? DX._state.f : {};
-          return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question });
+          // BOUND the KB grounding chain. On native (and any heavy signed-in session), startup work
+          // (Firestore sync + /api/ghis, /api/watch, /api/push on load) can STARVE the lazy on-device
+          // KB warm-up, so StewardRAG.ready() never resolves and the question is NEVER sent — the
+          // "MaiK took too long" hang that hit every signed-in account except the already-warm ones.
+          // If grounding doesn't finish in time, send the question WITHOUT KB grounding (the server's
+          // general-knowledge mode still answers) so the clinician always gets a reply instead of a hang.
+          var groundP = window.StewardRAG
+            ? Promise.resolve(StewardRAG.ready()).then(function () { return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
+            : Promise.reject(new Error("no-kb"));
+          return Promise.race([
+            groundP.then(function (pkg) { return pkg; }, function () { return { question: question, grounding: [] }; }),
+            new Promise(function (res) { setTimeout(function () { res({ question: question, grounding: [] }); }, 20000); })
+          ]);
         })
         .then(function (pkg) {
           if (pkg && question) pkg.question = question;
