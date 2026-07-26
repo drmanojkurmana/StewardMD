@@ -746,6 +746,7 @@ export async function onRequest(context) {
 
   try {
     if (seg === "explain") {
+      try { console.log("[MAIK-DBG] explain ENTER stream=" + ((new URL(request.url).searchParams.get("stream")) === "1") + " authz=" + (request.headers.get("Authorization") ? "yes" : "no")); } catch (e) {}
       // Preferred: grounded RAG package (KB primary). The client assembles it from
       // the deterministic engine output + retrieved StewardMD knowledge; we forward
       // it to Gemini with the KB-primary system prompt. The whole KB never transits.
@@ -756,6 +757,7 @@ export async function onRequest(context) {
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
+        try { console.log("[MAIK-DBG] explain GATE ok=" + gate.ok + " id=" + String(gate.id).slice(0, 14) + " guest=" + gate.guest + " reason=" + (gate.reason || "-") + " failOpen=" + (gate.failOpen || "-")); } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
@@ -787,10 +789,11 @@ export async function onRequest(context) {
         const nsCap = MAX_OUT;
         const nsSys = sys;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
-        catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
+        catch (e) { try { console.log("[MAIK-DBG] explain FAIL " + String((e && e.message) || e).slice(0, 100)); } catch (_) {} await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         // Client asked for a stream: hand the reliable non-stream answer back over the SSE channel it's
         // already listening on (one delta + done). It renders immediately — no empty stream, no hang.
+        try { console.log("[MAIK-DBG] explain DONE len=" + (text || "").length + " stream=" + wantStream); } catch (e) {}
         if (wantStream) return withCors(request, streamTextAsSSE(text));
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
