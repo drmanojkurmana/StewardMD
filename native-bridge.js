@@ -520,8 +520,14 @@
             if (r) return r;                              // native request in flight
             return patchedFetch(abs, init);               // fallback: at least absolutized
           }
-          // Firestore transport ONLY (Android): bypass the broken patch via pristine native fetch.
-          if (_plat === "android" && url.lastIndexOf("https://firestore.googleapis.com", 0) === 0) return _nativeFetch(input, init);
+          // Firestore transport (Android AND iOS): bypass the broken CapacitorHttp patch via the
+          // pristine native fetch. On iOS too — verified live via Safari Web Inspector on a fresh
+          // sign-in: the patched fetch routes Firestore's Listen channel through
+          // capacitor://localhost/_capacitor_http_interceptor_ and it FAILS "due to access control
+          // checks", so Firestore retry-storms (endless 15-30s channel requests), saturating the
+          // native HTTP bridge and STARVING the /api/ai calls (MaiK/scan) and ICU — the "took too
+          // long" hang for freshly-signed-in accounts (warm accounts are cached so they escape it).
+          if ((_plat === "android" || _plat === "ios") && url.lastIndexOf("https://firestore.googleapis.com", 0) === 0) return _nativeFetch(input, init);
         }
       } catch (e) { /* fall through */ }
       return patchedFetch(input, init);
