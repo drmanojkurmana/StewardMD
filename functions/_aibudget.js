@@ -1,9 +1,8 @@
 /* functions/_aibudget.js — StewardMD ID Phase 3: per-person monthly AI-token allowance.
  * Pure derivation + a KV-cached cap reader. Monthly allowance (no carry-over) reusing the existing
  * maik:m:<id>:<month> counter as the SPEND, this as the CAP source. Verified-gated free trial
- * (anti-abuse: fresh accounts can't re-verify a used reg number). Flag-gated by AI_BUDGET_ON. */
-import * as FS from "./_fbfirestore.js";
-import { getEntitlement } from "./_entitlements.js";
+ * (anti-abuse: fresh accounts can't re-verify a used reg number). Flag-gated by AI_BUDGET_ON.
+ * (Task 2 adds getEntitlement/usageKv imports for the KV-cached monthlyCapFor reader.) */
 
 export const PREMIUM_MODELS = ["kardiox_ecg19"];
 const num = (v, d) => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : d; };
