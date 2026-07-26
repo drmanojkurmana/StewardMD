@@ -26,7 +26,7 @@
   var SUPPRESSED = { STTC:1, LAD:1 }, NOT_VERDICT = { SBRAD:1 };
   var TEMPERATURE = 1.781, VERDICT_THR = 0.55, FINDING_THR = 0.45, NORM_THR = 0.50, MI_THR = 0.50;
   var W_BASE = 0.90, W_MI = 0.945, _MI_AUROC = 0.986;
-  var MODEL_BASE = "https://storage.googleapis.com/stewardmd-ecg-train-in/onnx";   // India-hosted weights (not PHI)
+  var MODEL_BASE = "https://storage.googleapis.com/stewardmd-kardiox-models";   // India-hosted PUBLIC weights bucket (CORS-enabled; NOT PHI; separate from the private data bucket)
 
   function MODELS() { return (typeof window !== "undefined" && window.SMD_KARDIOX_MODELS) || (typeof require !== "undefined" ? require("./kardiox-models.js") : null); }
   function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
