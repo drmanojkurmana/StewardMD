@@ -2120,6 +2120,8 @@
   // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
   var _maikBodyHTML = (function () { try { return localStorage.getItem(MAIK_LS) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
+  var _maikSeq = 0;               // generation token: a newer query supersedes an older in-flight one
+  var _maikThink = null;          // the in-flight "Searching…" bubble, so a superseding query can retire it
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
@@ -2777,8 +2779,17 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     function runClinical(question, retrieval, depth, active, topicLabel) {
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
-      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      // A newer query SUPERSEDES any in-flight one. The composer is never disabled (a slow native
+      // whole-answer fetch has no streamed progress and could otherwise lock input for the full
+      // ceiling — user: "not able to send a second message"). We bump a generation token: the
+      // previous run's callbacks/watchdog see they are no longer current (myRun !== _maikSeq) and
+      // silently stand down, and its stale "Searching…" bubble is retired here.
+      var myRun = ++_maikSeq;
+      var current = function () { return myRun === _maikSeq; };
+      try { if (_maikThink && _maikThink.parentNode && _maikThink.querySelector(".maik-thinking")) _maikThink.parentNode.removeChild(_maikThink); } catch (e) {}
+      _maikBusy = true;
       var think = bubble("ai", '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      _maikThink = think;
       // Hard client-side ceiling: the grounding chain (KB index load → buildPackage → grounded call)
       // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
       // On timeout we surface a clear message + a one-tap retry, and free the composer.
@@ -2791,12 +2802,14 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // nuked in-flight answers ("took too long" WHILE it was still generating). Fires only if truly stuck.
       function _maikTimedOut() {
         if (_maikDone) return; _maikDone = true; _clearStages();
+        // Superseded by a newer query — stand down silently; the newer run owns the UI + busy state.
+        if (!current()) { clearTimeout(_maikTO); return; }
         try {
           think.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
           var _rl = think.querySelector(".maik-retry");
           if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { think.parentNode && think.parentNode.removeChild(think); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
         } catch (e) {}
-        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _maikBusy = false;
         try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms with no progress:", question); } catch (e) {}
         try { scroll(); } catch (e) {}
       }
@@ -2805,14 +2818,29 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // for the whole wait and reads as frozen/broken. Neutered the instant tokens/answer land.
       [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
         _stageT.push(setTimeout(function () {
-          if (_maikDone || _streamStarted) return;
+          if (_maikDone || _streamStarted || !current()) return;
           try { think.innerHTML = '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' ' + s[1] + '<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>'; scroll(); } catch (e) {}
         }, s[0]));
       });
       _armTO();
       Promise.resolve()
-        .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
+          try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
+          if (!window.StewardRAG) return false;
+          // BOUND KB INIT: StewardRAG.ready() has NO internal timeout. A signed-in session's heavy
+          // startup (Firestore sync/persistence + /api/ghis, /api/watch, /api/push on load) can starve
+          // the lazy KB script/module load, leaving ready() unresolved — which froze MaiK to the 90s
+          // client watchdog for LOGGED-IN users while guests (light startup) were unaffected, and the
+          // request never even reached the server. Cap it; on stall, degrade to web research so MaiK
+          // still answers instead of hanging.
+          return Promise.race([
+            StewardRAG.ready().then(function () { return true; }, function () { return false; }),
+            new Promise(function (res) { setTimeout(function () { res(false); }, 9000); })
+          ]);
+        })
+        .then(function (kbReady) {
+          if (_maikDone || !current()) return null;
+          if (!kbReady) return null;   // KB stalled/unavailable → null pkg → web-research fallback below
           // Ground on the active case ONLY when the question is about that patient ("this/my
           // patient", "the case/diagnosis"). A standalone knowledge question (e.g. "treatment of
           // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case —
@@ -2822,6 +2850,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question });
         })
         .then(function (pkg) {
+          if (_maikDone || !current()) return;   // timed out or superseded before retrieval returned
+          if (!pkg) {   // KB init stalled/unavailable (bounded above) → answer via web research, never hang
+            try { think.innerHTML = '<div class="maik-welcome">' + svg("spark", "smd-ico") + ' Researching…</div>'; } catch (e) {}
+            try { maikRunWeb(think, question); } catch (e) { try { think.appendChild(maikWebChipEl(question)); } catch (e2) {} }
+            try { scroll(); } catch (e) {}
+            return;
+          }
           if (pkg && question) pkg.question = question;
           var tm = (pkg && pkg.topicMatch) || null;
           // NONE tier: topic genuinely absent from the KB. MaiK answers every question, so
@@ -2846,6 +2881,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           var _perfT0 = maikNow(), _perfTTFT = 0;
           var onDelta = function (acc) {
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
+            if (!current()) return;                             // superseded by a newer query — the newer run owns the UI
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
             if (!_perfTTFT) _perfTTFT = maikNow();
             var _accS = maikStripRefine(acc);   // hide the trailing @@REFINE@@ line while streaming
@@ -2857,6 +2893,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
             : window.SMD_AI.explainGrounded(pkg, { depth: depth });
           return call.then(function (r) {
+            if (_maikDone || !current()) return;   // superseded (or timed out) while the provider call was in flight
             maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
             // TTFT diagnostics (flag-gated) — readable on the real app incl. native.
             try {
@@ -2873,11 +2910,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             } catch (e) {}
           });
         })
-        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
-        .then(function () { if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+        .catch(function (e) { if (!_maikDone && current()) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .then(function () { _maikDone = true; _clearStages(); clearTimeout(_maikTO); if (current()) _maikBusy = false; });
     }
     function send() {
-      if (_maikBusy) return;
+      // NOT gated on _maikBusy: a new question supersedes any in-flight one (runClinical bumps the
+      // generation token and retires the old bubble). The composer must never be locked behind a slow
+      // request — on native the whole answer is fetched at once with no streamed progress to unlock it.
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
@@ -2947,7 +2986,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (tool && ACT[tool]) { close(); setTimeout(function () { try { ACT[tool](); } catch (e) {} }, 180); return; }
       var fq = el.getAttribute("data-maik-q");
       if (fq) {
-        if (_maikBusy) return;
+        // supersede any in-flight query (see send()); never silently drop a follow-up tap
         var tpc = maikV2() ? maikCanonTopic(fq) : fq;
         var dp = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(fq)) ? "detailed" : "concise";
         runClinical(fq, fq, dp, maikActiveCase(), tpc); return;
