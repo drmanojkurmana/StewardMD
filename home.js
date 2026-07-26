@@ -2865,7 +2865,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
             try { scroll(); } catch (e) {}
           };
-          var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
+          // On NATIVE, never use live streaming: the WebView's CapacitorWebFetch can IGNORE the
+          // AbortController, so a stalled SSE never rejects and never falls back — the request then
+          // hangs to the 90s watchdog ("MaiK took too long") for any session that hadn't already
+          // flipped to non-stream (which is why some accounts worked and others didn't). Native can't
+          // render progressive SSE anyway (the WebView buffers it), so use the bounded whole-answer
+          // path (explainGrounded, 35s cap) — the same path that already works on native and web.
+          var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
             ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
             : window.SMD_AI.explainGrounded(pkg, { depth: depth });
           return call.then(function (r) {
