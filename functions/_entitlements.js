@@ -4,6 +4,8 @@
  * ENTITLEMENTS_ON. Pure derivation + deps-injectable IO so the whole thing is testable offline. */
 import * as FS from "./_fbfirestore.js";
 import { lookupUidByEmail, getUserClaims, lookupUserByUid } from "./_fbadmin.js";
+import { invalidateBudgetCache, PREMIUM_MODELS, effectiveAllowance } from "./_aibudget.js";
+import { usageKv } from "./_usage.js";
 
 export const ROLES = ["physician", "resident", "student"];
 const COLL = "entitlements";
@@ -109,9 +111,20 @@ export async function adminLookup(env, body, deps) {
   let smdId = rec.smdId || null;
   if (!smdId) { const p = await fsGet(env, "users/" + r.uid + "/profile/self"); smdId = (p && p.fields && p.fields.smdId) || null; }
   const effectiveTiers = {}; FEATURES.forEach((f) => { effectiveTiers[f] = effectiveTier(f, rec); });
+  // AI budget + live usage (best-effort; never throw the lookup on metering failures)
+  const kv = deps.kv || usageKv(env);
+  const now = new Date(); const month = now.toISOString().slice(0, 7);
+  let used = 0;
+  try { if (kv) used = (((await kv.get("maik:m:fb:" + r.uid + ":" + month, "json")) || {}).tokens) || 0; } catch (e) {}
+  let cap = 0;
+  try { cap = effectiveAllowance(env, claims.pro === true, rec.role, claims.verified === true, rec, month); } catch (e) {}
   return { ok: true, uid: r.uid, smdId, email: user.email || null, name: user.displayName || rec.name || null,
     role: rec.role || null, effectiveTiers, overrides: pickOverrides(rec),
-    pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, regNo: claims.regNo || null };
+    pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, regNo: claims.regNo || null,
+    aiCapTokens: rec.aiCapTokens != null ? rec.aiCapTokens : null,
+    aiGrant: rec.aiGrantMonth ? { month: rec.aiGrantMonth, tokens: rec.aiGrantTokens } : null,
+    premiumModels: rec.premiumModels || {},
+    usage: { used, cap, remaining: Math.max(0, cap - used), resetMonth: month } };
 }
 
 export async function adminSetRole(env, body, deps) {
@@ -142,4 +155,48 @@ export async function adminClearOverride(env, body, deps) {
   const write = deps.writeEntitlement || writeEntitlement;
   await write(env, r.uid, { ["override_" + feature]: null, updatedBy: (body && body.updatedBy) || null }, deps);
   return { ok: true, uid: r.uid, feature, cleared: true };
+}
+
+// ---- Owner-gated AI-budget admin actions (Phase 3) ----
+function nonNegInt(v) { const n = Number(v); return Number.isInteger(n) && n >= 0 ? n : null; }
+async function afterWrite(env, uid, deps) {
+  const inv = (deps && deps.invalidateBudgetCache) || invalidateBudgetCache;
+  try { await inv(env, uid, deps); } catch (e) {}
+}
+
+export async function adminSetBudget(env, body, deps) {
+  deps = deps || {};
+  const tokens = nonNegInt(body && body.tokens);
+  if (tokens == null) return { ok: false, error: "bad_amount" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { aiCapTokens: tokens, updatedBy: (body && body.updatedBy) || null }, deps);
+  await afterWrite(env, r.uid, deps);
+  return { ok: true, uid: r.uid, aiCapTokens: tokens };
+}
+export async function adminAddGrant(env, body, deps) {
+  deps = deps || {};
+  const tokens = nonNegInt(body && body.tokens);
+  if (tokens == null) return { ok: false, error: "bad_amount" };
+  const month = String((body && body.month) || "");
+  if (!/^\d{4}-\d{2}$/.test(month)) return { ok: false, error: "bad_month" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { aiGrantMonth: month, aiGrantTokens: tokens, updatedBy: (body && body.updatedBy) || null }, deps);
+  await afterWrite(env, r.uid, deps);
+  return { ok: true, uid: r.uid, aiGrantMonth: month, aiGrantTokens: tokens };
+}
+export async function adminSetModel(env, body, deps) {
+  deps = deps || {};
+  const model = String((body && body.model) || "");
+  if (PREMIUM_MODELS.indexOf(model) < 0) return { ok: false, error: "bad_model" };
+  const r = await resolveOr404(env, body, deps); if (r.error) return { ok: false, error: r.error };
+  const get = deps.getEntitlement || getEntitlement;
+  const rec = (await get(env, r.uid, deps)) || {};
+  const pm = Object.assign({}, rec.premiumModels);
+  if (body && body.allowed) pm[model] = true; else delete pm[model];
+  const write = deps.writeEntitlement || writeEntitlement;
+  await write(env, r.uid, { premiumModels: pm, updatedBy: (body && body.updatedBy) || null }, deps);
+  await afterWrite(env, r.uid, deps);
+  return { ok: true, uid: r.uid, model, allowed: !!(body && body.allowed) };
 }
