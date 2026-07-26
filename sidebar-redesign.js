@@ -92,7 +92,8 @@
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
-    { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: true, key: "smd_kardiox" }
+    { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: true, key: "smd_kardiox" },
+    { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" }
   ];
   function setToggle(id, key, on) {
     try {
@@ -120,7 +121,7 @@
       "#sbMenu[data-sbr] .sbr-chev{flex:0 0 auto;font-size:11px;color:var(--slate-soft,#5a7184)}",
       "#sbMenu[data-sbr] .sbr-adv{display:none;padding:2px 14px 6px 44px}",
       "#sbMenu[data-sbr] .sbr-adv.open{display:block}",
-      "#sbMenu[data-sbr] .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin:2px 0 6px}",
+      "#sbMenu[data-sbr] .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin:2px 0 6px}",
       "#sbMenu[data-sbr] .sbr-tg{display:flex;align-items:center;gap:10px;padding:11px 14px}",
       "#sbMenu[data-sbr] .sbr-card .sbr-tg{border-top:1px solid var(--line,#d7dee3)}",
       "#sbMenu[data-sbr] .sbr-card .sbr-tg:first-child{border-top:0}",
