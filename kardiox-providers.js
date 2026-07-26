@@ -127,7 +127,7 @@
   // same-origin /api proxy — via the zero-storage direct-upload endpoint. The web build keeps the
   // same-origin Cloudflare edge proxy (which holds any server-side auth).
   function isNative() { try { return !!(typeof window !== "undefined" && window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; } }
-  var KX_BACKEND_URL = "https://kardiox-pipeline-yislqrddsq-uc.a.run.app";
+  var KX_BACKEND_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // pipeline decommissioned (DPDP: no US); rarely-hit fallback now degrades gracefully to India/unavailable
   var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
   var KX_IMAGE_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // end-to-end IMAGE model — INDIA (Mumbai/asia-south1) for DPDP data residency
   function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
