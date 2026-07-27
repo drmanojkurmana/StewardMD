@@ -596,3 +596,8 @@
 /* honest indeterminate state for the model-download stage (native can't stream byte-progress) */
 .tx-stage.is-indeterminate [data-stage-fill],.tx-stage.is-indeterminate .tx-stage-fill{animation:tx-indet 1.1s ease-in-out infinite}
 @keyframes tx-indet{0%{opacity:.3}50%{opacity:.85}100%{opacity:.3}}
+/* clean read — normal film, nothing above the model's operating point */
+.tx-clean{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:22px 16px;border-radius:12px;background:rgba(18,179,160,.08);border:1px solid rgba(18,179,160,.25)}
+.tx-clean .material-symbols-rounded{font-size:34px;color:#12b3a0}
+.tx-clean-title{font:700 15px/1.3 var(--sans,system-ui);color:var(--tx-ink,#e6edf3)}
+.tx-clean-sub{font:500 12.5px/1.5 var(--sans,system-ui);color:var(--tx-muted,#8aa0b2);max-width:340px}

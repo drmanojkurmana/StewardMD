@@ -17,12 +17,17 @@
   function uuid() { return "thor-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9); }
   function isoNow() { return new Date().toISOString(); }
 
-  // Band mapping: ≥0.60 "High", ≥0.30 "Medium", ≥0.10 "Low", else null (mirrors backend)
+  // Band mapping — anchored to the model's OPERATING POINT, not raw probability. The clinical
+  // (TorchXRayVision) export is op-normalized so 0.5 == the pathology's operating threshold: below it
+  // the model considers the finding NEGATIVE. Showing anything ≥0.10 (the old thresholds) surfaced
+  // findings the model itself calls negative → a normal film flagged Emphysema/Infiltration/Fibrosis
+  // as "Medium/Caution" (over-calling). Only surface findings AT/ABOVE the operating point, banded by
+  // how far above: ≥0.80 High, ≥0.65 Medium, ≥0.50 Low, else null (not shown → a clean film reads clean).
   function band(prob) {
     prob = clamp01(prob);
-    if (prob >= 0.60) return "High";
-    if (prob >= 0.30) return "Medium";
-    if (prob >= 0.10) return "Low";
+    if (prob >= 0.80) return "High";
+    if (prob >= 0.65) return "Medium";
+    if (prob >= 0.50) return "Low";
     return null;
   }
 
