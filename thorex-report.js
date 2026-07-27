@@ -107,8 +107,8 @@
   }
 
   /* ═══════════════════════════════════════ Findings ═════════════════════════════════════════════ */
-  function buildFindingsItems(findings) {
-    return sortedByBand(findings).map(function (f) {
+  function buildFindingsItems(findings, keepOrder) {
+    return (keepOrder ? arr(findings) : sortedByBand(findings)).map(function (f) {
       return {
         label: displayLabel(f.label),
         band: f.band == null ? null : str(f.band),
@@ -276,21 +276,6 @@
     followUp: "Follow-up"
   };
 
-  // Merge two finding lists, de-duplicating on (lowercased) label — keeps the higher-confidence copy so
-  // when both engines flag the same thing it appears once at its strongest.
-  function mergeFindings(a, b) {
-    var out = [], seen = {};
-    arr(a).concat(arr(b)).forEach(function (f) {
-      if (!f) return;
-      var k = str(f.label).toLowerCase();
-      if (!(k in seen)) { seen[k] = out.length; out.push(f); return; }
-      var prev = out[seen[k]];
-      var pf = (f.prob == null ? -1 : +f.prob), pp = (prev.prob == null ? -1 : +prev.prob);
-      if (pf > pp) out[seen[k]] = f;
-    });
-    return out;
-  }
-
   /* ══════════════════════════════════════ buildReport ═══════════════════════════════════════════ */
   // opts.engineScope: "clinical" (default, Engine 1 only) | "educational" (Engine 2 only) | "both".
   function buildReport(analysis, opts) {
@@ -299,10 +284,21 @@
     var scope = (opts.engineScope === "educational" || opts.engineScope === "both") ? opts.engineScope : "clinical";
     var clinical = clinicalEngineOf(analysis);
     var learning = learningEngineOf(analysis);
-    var rawFindings = scope === "educational" ? arr(learning && learning.findings)
-      : scope === "both" ? mergeFindings(clinical && clinical.findings, learning && learning.findings)
-      : arr(clinical && clinical.findings);
-    var findingItems = buildFindingsItems(rawFindings);
+    // Engine 2 (educational) is the PRIMARY read whenever it's in scope. For "both", ALL Engine 2
+    // findings lead (band-sorted), then Engine 1's extra findings — so Engine 2 is always the main Dx
+    // (its top finding drives the Impression); Engine 1 only supplements what Engine 2 didn't flag.
+    var rawFindings, keepOrder = false;
+    if (scope === "educational") {
+      rawFindings = sortedByBand(arr(learning && learning.findings)); keepOrder = true;
+    } else if (scope === "both") {
+      var eduF = sortedByBand(arr(learning && learning.findings));
+      var seen = {}; eduF.forEach(function (f) { seen[str(f.label).toLowerCase()] = 1; });
+      var clinUnique = sortedByBand(arr(clinical && clinical.findings)).filter(function (f) { return !seen[str(f.label).toLowerCase()]; });
+      rawFindings = eduF.concat(clinUnique); keepOrder = true;
+    } else {
+      rawFindings = arr(clinical && clinical.findings);
+    }
+    var findingItems = buildFindingsItems(rawFindings, keepOrder);
     var bucket = urgencyBucket(worstSeverityOf(findingItems));
     var recs = buildRecommendations(findingItems);
     var differential = buildDifferential(findingItems);
@@ -311,7 +307,7 @@
     var educational = scope === "clinical" ? buildEducational(learning) : null;
 
     var engineLabel = scope === "educational" ? "ThoreX Clinical Engine 2 (educational)"
-      : scope === "both" ? "ThoreX Clinical Engine 1 + 2 (Engine 2 is educational)"
+      : scope === "both" ? "ThoreX Clinical Engine 2 (primary, educational) + Engine 1"
       : "ThoreX Clinical Engine 1";
     var sections = {
       clinicalInformation: { title: SECTION_TITLES.clinicalInformation, text: buildClinicalInformation(opts) },

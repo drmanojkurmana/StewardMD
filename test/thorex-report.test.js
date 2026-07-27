@@ -155,7 +155,9 @@ assert.ok(/Clinical Engine 2/.test(eduOnly.sections.technique.text), "educationa
 const bothScope = R.buildReport(analysis, { engineScope: "both" });
 const bothLabels = bothScope.sections.findings.items.map((f) => f.label);
 assert.ok(bothLabels.includes("Right lower lobe consolidation") && bothLabels.includes("Bilateral lower lobe interstitial opacities"), "both scope merges Engine 1 + Engine 2 findings");
-assert.ok(/Engine 1 \+ 2/.test(bothScope.sections.technique.text), "both scope names Engine 1 + 2 in Technique");
+// Engine 2 is PRIMARY in "both": its finding leads the list (before Engine 1's), so it drives the report
+assert.equal(bothLabels[0], "Bilateral lower lobe interstitial opacities", "both scope must lead with the Engine 2 (educational) finding");
+assert.ok(/Engine 2 \(primary/.test(bothScope.sections.technique.text), "both scope names Engine 2 as primary in Technique");
 
 // ── professional print/PDF document: self-contained branded HTML, warning + branding + embedded X-ray ──
 const proDoc = R.buildProDocument(analysis, { context: "62M smoker, breathless", logoDataUrl: "data:image/png;base64,AAAA", xrayDataUrl: "data:image/png;base64,BBBB", createdAt: "2026-07-27" });
