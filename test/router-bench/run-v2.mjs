@@ -17,7 +17,9 @@ const MAXQ = Number(process.env.MAXQ || 260);
 const ONLY = (process.env.FILES || "").split(",").map(s => s.trim()).filter(Boolean);
 const ROUTER = "https://stewardmd.in/api/ai/route";
 const RETRIEVE = "https://stewardmd.in/api/retrieve";
-const CONC = 6;
+const EXPLAIN = "https://stewardmd.in/api/ai/explain";   // Gemini answer path (for Gemini-path latency)
+const CONC = Number(process.env.CONC || 6);
+const GEMN = Number(process.env.GEMN || 5);              // Gemini-path latency probe size (request-counted quota)
 
 // ---- load KB globals (same pattern as test/maik-v2-kb.test.mjs) ----
 const shim = (k, v) => { try { if (!globalThis[k]) globalThis[k] = v; } catch (e) {} };
@@ -198,6 +200,25 @@ for (const it of probeItems) {
 }
 console.log("serial latency probe: " + probe.length + " queries measured single-user (CONC=1)");
 
+// GEMINI-PATH latency probe — the ~5% of queries that route to Gemini pay full generation time on top.
+// Times real /api/ai/explain calls (general-knowledge mode) on a few defer/reasoning queries. Uses the
+// request-counted "case" quota, so kept small; skipped in --dry (no Vertex).
+const gem = [];
+if (!DRY && GEMN > 0) {
+  const deferQs = capped.filter(x => x.defer || x.intent === "reasoning").slice(0, GEMN);
+  const pool = deferQs.length ? deferQs : capped.slice(0, GEMN);
+  for (const it of pool) {
+    const t0 = Date.now();
+    try {
+      const r = await fetch(EXPLAIN, { method: "POST", headers: { "Content-Type": "application/json", "Origin": "https://stewardmd.in" }, body: JSON.stringify({ package: { question: it.q, grounding: [] }, depth: "concise" }) });
+      const j = await r.json().catch(() => ({}));
+      if (j && (j.error === "quota")) { console.log("  gemini probe hit quota after " + gem.length + " calls"); break; }
+      gem.push({ ms: Date.now() - t0, ok: !j.error });
+    } catch (e) { /* skip */ }
+  }
+  console.log("gemini-path latency probe: " + gem.length + " /explain calls timed");
+}
+
 const out = new Array(capped.length); let idx2 = 0;
 await Promise.all(Array.from({ length: CONC }, async () => { while (idx2 < capped.length) { const k = idx2++; out[k] = await scoreOne(capped[k]); } }));
 const scored = out.filter(r => r && !r.quota);
@@ -241,6 +262,10 @@ M.sFastP50 = P(pl.map(p => p.fast), 0.5); M.sFastP90 = P(pl.map(p => p.fast), 0.
 M.sVecP50 = P(pl.map(p => p.vec), 0.5); M.sVecP90 = P(pl.map(p => p.vec), 0.9); M.sVecP95 = P(pl.map(p => p.vec), 0.95);
 M.sParP50 = P(pl.map(p => p.par), 0.5); M.sParP90 = P(pl.map(p => p.par), 0.9);
 M.probeN = pl.length;
+// Gemini-path response time = router + retrieve + full generation (the /explain call dominates)
+const gemOk = gem.filter(g => g.ok);
+M.gemN = gemOk.length; M.gemP50 = P(gemOk.map(g => g.ms), 0.5); M.gemP90 = P(gemOk.map(g => g.ms), 0.9);
+M.gemTotalP50 = M.gemP50 ? M.gemP50 + M.sRouterP50 + M.sRetrP50 : 0;   // + router + retrieve on top
 
 // per-category
 const cats = [...new Set(scored.map(r => r.cat))].sort();
@@ -262,6 +287,7 @@ console.log("router latency ms    : p50", M.p50, "p90", M.p90, "p95", M.p95, DRY
 console.log("--- SINGLE-USER (serial probe, n=" + M.probeN + ", authoritative) ---");
 console.log("  router", M.sRouterP50 + "/" + M.sRouterP90, " retrieve", M.sRetrP50 + "/" + M.sRetrP90, " (p50/p90 ms)");
 console.log("  RESPONSE TIME ms: fast/name-sure p50", M.sFastP50, "p90", M.sFastP90, "| vector-path p50", M.sVecP50, "p90", M.sVecP90, "| if-parallelised p50", M.sParP50, "p90", M.sParP90);
+console.log("  GEMINI-path (n=" + M.gemN + "): /explain gen p50", M.gemP50, "p90", M.gemP90, " → total response p50", M.gemTotalP50, "ms");
 console.log("--- under concurrent load (accuracy run, pessimistic) ---");
 console.log("  retrieve p50", M.retP50, "p90", M.retP90, " response(vec) p50", M.vecP50, "p90", M.vecP90);
 console.log("\nper-category:"); catRows.forEach(r => console.log("  " + r.cat.padEnd(22), "n=" + String(r.n).padStart(3), "intent", r.intent.padStart(6), "elNode", r.elNode.padStart(6), "retr", r.retr.padStart(6), "clarify", r.clarify.padStart(6), "bypass", r.bypass));
@@ -304,6 +330,8 @@ const md = [
   "| **Response — fast path (name-sure, vector skipped)** | **" + M.sFastP50 + "** | **" + M.sFastP90 + "** |",
   "| Response — vector-arm path (current, sequential) | " + M.sVecP50 + " | " + M.sVecP90 + " |",
   "| Response — if router+retrieval parallelised (proposed) | " + M.sParP50 + " | " + M.sParP90 + " |",
+  "| Gemini-path — /explain generation (n=" + M.gemN + ") | " + M.gemP50 + " | " + M.gemP90 + " |",
+  "| Gemini-path — total response (router+retrieve+gen) | " + M.gemTotalP50 + " | — |",
   "",
   "### Latency (concurrent accuracy run — pessimistic, /api/retrieve queues under load)",
   "| metric | p50 | p90 | p95 |",
