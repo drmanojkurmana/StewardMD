@@ -265,9 +265,22 @@
             '<span class="tx-tip-ic" aria-hidden="true">' + ic("tips_and_updates") + "</span>" +
             '<span class="tx-tip-txt">Frontal view, patient upright when possible, whole chest in frame, avoid glare — ThoreX auto-enhances the image before analysis.</span>' +
           "</div>" +
+          // Optional clinical context → feeds the ThoreX AI report's "Clinical information" (a better,
+          // context-aware read). Type it, or dictate with MaiK Scribe (SMD_VOICE, target:"text").
+          '<div class="tx-clin">' +
+            '<div class="tx-clin-head">' +
+              '<span class="tx-clin-label">Clinical details <span class="tx-clin-opt">optional · improves the AI report</span></span>' +
+              '<button type="button" class="tx-clin-mic" data-act="tx-scribe" aria-label="Dictate clinical details with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
+            "</div>" +
+            '<textarea class="tx-clin-ta" data-hook="clinCtx" rows="2" placeholder="e.g. 62M, smoker, breathless 3 days, febrile — symptoms, history, key numbers">' + esc(state.clinicalContext || "") + "</textarea>" +
+          "</div>" +
           '<div class="tx-src-foot">' + ic("lock") + "Encrypted upload &middot; deleted after analysis</div>" +
         "</div>" +
       "</section>";
+
+    // Keep the typed clinical context in state so it survives capture + reaches the report (finishPipeline).
+    var clinTa = host.querySelector('[data-hook="clinCtx"]');
+    if (clinTa) clinTa.addEventListener("input", function () { state.clinicalContext = clinTa.value; });
   }
 
   /* permission */
@@ -690,7 +703,7 @@
     // Radiology report — a deterministic structured report/impression built ONLY from the clinical
     // engine (see thorex-report.js). Additive: a collapsed-by-default affordance on the result screen
     // that never replaces the existing dual-panel rendering above.
-    var report = buildReportSafe(a);
+    var report = buildReportSafe(a, { context: (a && a.__context) || "" });
     var reportSection = report ?
       '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="true" aria-controls="txReportBody">' +
         ic("description") + '<span class="tx-report-toggle-txt">ThoreX AI — Radiology report</span>' + ic("expand_more") +
@@ -897,6 +910,7 @@
     var F = (typeof window !== "undefined" && window.SMD_THOREX_FLAGS) || null;
     var conf = F ? F.bool("smd_thorex_confidence") : true;
     var haptics = F ? F.bool("smd_thorex_haptics") : true;
+    var v2beta = F ? F.bool("smd_thorex_v2beta") : false;
     var cloud = F ? F.get("smd_thorex_cloud") : null;
     var cloudLabel = cloud === true ? "Allowed" : cloud === false ? "Declined" : "Not set (asked before the next Free upload)";
 
@@ -914,6 +928,7 @@
       "</div>" +
       '<div class="tx-list-body">' +
         toggleRow("Show AI confidence", "Confidence band on every result", "tx-toggle-confidence", conf) +
+        toggleRow("V2 Beta engine (educational)", "Adds the X-Raydar educational panel · Pro · educational-only", "tx-toggle-v2beta", v2beta) +
         toggleRow("Haptics", "Vibrate on tap and result-ready", "tx-toggle-haptics", haptics) +
         '<div class="tx-set-row"><div><div class="tx-set-label">Free cloud analysis</div><div class="tx-set-sub">' + esc(cloudLabel) + "</div></div></div>" +
         '<button type="button" class="tx-set-row" data-act="tx-clear-cxrs">' +
@@ -962,7 +977,7 @@
     empty: renderEmpty
   };
 
-  var state = { analysis: null, running: false, consentPending: null, emptyReason: null, stack: [] };
+  var state = { analysis: null, running: false, consentPending: null, emptyReason: null, stack: [], clinicalContext: "" };
 
   function providers() { try { return window.SMD_THOREX_PROVIDERS && window.SMD_THOREX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("txScroll"); }
@@ -1017,6 +1032,7 @@
   function finishPipeline(a) {
     state.analysis = a; state.running = false; state.emptyReason = null;
     try { if (a && state._xrayUrl) a.__xrayUrl = state._xrayUrl; } catch (e) {}   // transient display-only URL (never persisted)
+    try { if (a && state.clinicalContext) a.__context = state.clinicalContext; } catch (e) {}   // clinical details → report "Clinical information"
     try { var P = providers(); if (P && P.cxrStore && P.cxrStore.save) P.cxrStore.save(a); } catch (e) {}
     state.stack = ["landing"]; go("result"); haptic("success");
     try {
@@ -1094,6 +1110,15 @@
       show("settings");
     } catch (e) {}
   }
+  function toggleV2beta() {
+    try {
+      var F = window.SMD_THOREX_FLAGS; if (!F) return;
+      var next = !F.bool("smd_thorex_v2beta");
+      F.set("smd_thorex_v2beta", next);
+      toast(next ? "V2 Beta on — educational engine runs on your next scan." : "V2 Beta off.");
+      show("settings");
+    } catch (e) {}
+  }
   function clearCxrs() {
     var P = providers(); if (!P || !P.cxrStore) return;
     var okc = true;
@@ -1123,7 +1148,7 @@
   // content the "Radiology report" section on the result screen shows expanded.
   function exportReport() {
     var a = state.analysis; if (!a) { toast("No result to export."); return; }
-    var rep = buildReportSafe(a);
+    var rep = buildReportSafe(a, { context: (a && a.__context) || "" });
     var html = rep ? rep.html : legacyExportHtml(a);
     var frag = (typeof document !== "undefined") ? document.createElement("div") : null;
     try {
@@ -1139,7 +1164,7 @@
   // Copy — puts the plain-text structured report (thorex-report.js `text`) on the clipboard.
   function copyReport() {
     var a = state.analysis; if (!a) { toast("No result to copy."); return; }
-    var rep = buildReportSafe(a);
+    var rep = buildReportSafe(a, { context: (a && a.__context) || "" });
     var text = rep ? rep.text : "";
     if (!text) { toast("Nothing to copy."); return; }
     try {
@@ -1213,9 +1238,21 @@
     switch (act) {
       case "tx-close": haptic("light"); closeMod(); return;
       case "tx-back": haptic("light"); back(); return;
-      case "tx-add": haptic("light"); state.consentPending = null; go("source"); return;
+      case "tx-add": haptic("light"); state.consentPending = null; state.clinicalContext = ""; go("source"); return;
       case "tx-history": go("history"); return;
       case "tx-settings": go("settings"); return;
+      case "tx-scribe": {
+        haptic("light");
+        var V = (typeof window !== "undefined" && window.SMD_VOICE) || null;
+        if (!V || !V.openDialog) { toast("Voice input isn’t available on this device."); return; }
+        // MaiK Scribe (SMD_VOICE) text-intake sheet — speak → transcript → drops into the field.
+        V.openDialog({ target: "text", onText: function (txt) {
+          txt = String(txt || "").trim(); if (!txt) return;
+          state.clinicalContext = (state.clinicalContext ? state.clinicalContext + " " : "") + txt;
+          try { var h = host(); var ta = h && h.querySelector('[data-hook="clinCtx"]'); if (ta) ta.value = state.clinicalContext; } catch (e) {}
+        } });
+        return;
+      }
       case "tx-why": haptic("light"); go("why"); return;
       case "tx-open": openStored(t.getAttribute("data-id")); return;
       case "tx-source": {
@@ -1248,6 +1285,7 @@
       case "tx-export": haptic("light"); exportReport(); return;
       case "tx-share": haptic("light"); exportReport(); return;
       case "tx-toggle-confidence": toggleConfidence(); return;
+      case "tx-toggle-v2beta": toggleV2beta(); return;
       case "tx-toggle-haptics": toggleHaptics(); return;
       case "tx-clear-cxrs": clearCxrs(); return;
     }
