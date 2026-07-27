@@ -143,15 +143,44 @@
     var Traw = s.KR[id] || s.KR[String(id).toUpperCase()] || s.KR[String(id).toLowerCase()] || null;
     return { E: E, DX: DX, Traw: Traw };
   }
-  // Resolve the disease the question is about. Prefer the engine's package
-  // (pkg.grounding — the authoritative topic match); fall back to a name index.
+  // Extract the disease phrase from a question by stripping the intent lead-in ("what is X",
+  // "treatment of X", "dose of DRUG in X" → the disease after "in/for").
+  var LEADIN_RE = /^(what is|what's|whats|define|definition of|overview of|tell me about|explain|about|treatment of|treating|management of|managing|how (to|do i) treat|how to manage|causes? of|differentials? of|ddx of|clinical features of|features of|symptoms of|presentation of|signs? of|investigations? (for|of)|workup of|work up of|red[- ]?flags? (in|of)|warning signs? (of|in)|prognosis of|pathophysiology of|severity of|dose of|dosing of|dosage of|complications? of)\s+/;
+  function diseasePhrase(q) {
+    var n = medNorm(expandAbbrev(q));
+    if (/\bdos(e|ing|age)\b/.test(n)) { var m = n.match(/\b(?:in|for)\s+([a-z][a-z0-9 \-]{2,})$/); if (m) return m[1].trim(); }   // "dose of DRUG in DISEASE" → DISEASE
+    var core = n.replace(LEADIN_RE, "");
+    core = core.replace(/\s+\b(in|for|during|with|among)\b\s+.*$/, "").trim();   // drop trailing context ("diabetes in pregnancy" → "diabetes")
+    return core;
+  }
+  // Canonical disease match: prefer an EXACT KB name match, else a "<phrase> <qualifier>" entry
+  // (e.g. phrase "diabetes" → "diabetes mellitus"), choosing the SHORTEST such name. This corrects
+  // buildPackage's occasional over-specific lexical pick (diabetes → LADA). Returns null if no clean match.
+  function bestNameMatch(question) {
+    var phrase = diseasePhrase(question);
+    if (!phrase || phrase.length < 4) return null;
+    var idx = buildNameIndex(), exact = null, pfx = null;
+    for (var i = 0; i < idx.length; i++) {
+      var it = idx[i]; if (!it.key) continue;
+      if (it.key === phrase) { if (!exact || it.key.length < exact.key.length) exact = it; }
+      else if (it.key.indexOf(phrase + " ") === 0) { if (!pfx || it.key.length < pfx.key.length) pfx = it; }   // "<phrase> <qualifier>"
+    }
+    if (exact) return { it: exact, kind: "exact" };
+    if (pfx) return { it: pfx, kind: "canonical" };
+    return null;
+  }
+  // Resolve the disease the question is about. Prefer a CANONICAL name match on the question's own
+  // disease term; then the engine's package (pkg.grounding); then a name-index fallback.
   function resolveTarget(question, pkg) {
-    var id = null, name = null, confident = false, tm = pkg && pkg.topicMatch;
-    if (pkg && pkg.grounding && pkg.grounding.length) {
+    var id = null, name = null, confident = false, match = null, tm = pkg && pkg.topicMatch;
+    var bnm = bestNameMatch(question);
+    if (bnm) {
+      id = bnm.it.id; name = bnm.it.name; confident = true; match = bnm.kind;   // exact/canonical name match — most reliable
+    } else if (pkg && pkg.grounding && pkg.grounding.length) {
       id = pkg.grounding[0].diseaseId; name = pkg.grounding[0].name;
-      confident = tm ? (tm.matched === true && tm.mode !== "assume") : true;
+      confident = tm ? (tm.matched === true && tm.mode !== "assume") : true; match = "grounding";
     } else if (tm && tm.assume && tm.assume.id) {
-      id = tm.assume.id; name = tm.assume.name; confident = false;   // ASSUME tier → not confident
+      id = tm.assume.id; name = tm.assume.name; confident = false; match = "assume";   // ASSUME tier → not confident
     }
     var s = id ? lookupStores(id) : { E: null, DX: null, Traw: null };
     // Fallback: resolve by unified name index if the package gave us nothing usable.
@@ -162,14 +191,14 @@
         var it = idx[i];
         if (qn.indexOf(it.key) >= 0) { if (!best || it.key.length > best.key.length) best = it; }
       }
-      if (best) { id = best.id; name = best.name; s = lookupStores(id); confident = false; }   // name-index hit is weaker than engine grounding
+      if (best) { id = best.id; name = best.name; s = lookupStores(id); confident = false; match = "fallback"; }   // name-index hit is weaker than engine grounding
     }
     if (!s.E && !s.DX && !s.Traw) return null;
     var T = (pkg && pkg.treatment && (pkg.treatment.default || pkg.treatment.recommendations)) ? pkg.treatment : null;
     return {
       id: id, name: name || displayName(id, s.E),
       source: (s.E && s.E.source) || "StewardMD Knowledge Base", pages: (s.E && s.E.pages) || "",
-      confident: confident, E: s.E, T: T, Traw: s.Traw, DX: s.DX
+      confident: confident, match: match, E: s.E, T: T, Traw: s.Traw, DX: s.DX
     };
   }
 
@@ -337,12 +366,10 @@
       var composer = COMPOSERS[intent] || composeDefinition;
       var res = composer(t, question);
       if (!res || !res.ok || !res.text) return null;                // KB lacks the field → Gemini
-      // confidence: confident target + populated field. Slightly higher when the
-      // engine (not the name-index) resolved it and the treatment/dose is structured.
-      var conf = 0.82;
-      if (pkg && pkg.grounding && pkg.grounding.length) conf += 0.06;
-      if ((intent === "treatment" || intent === "dose") && t.T && t.T.default) conf += 0.05;
-      conf = Math.min(0.97, conf);
+      // confidence calibrated to HOW the disease resolved (the >85% KB gate keys off this):
+      //   exact name match 0.95 · canonical (term+qualifier) 0.90 · engine-grounded 0.85 · fuzzy/assume <0.85 (defer)
+      var conf = ({ exact: 0.95, canonical: 0.90, grounding: 0.85, assume: 0.60, fallback: 0.55 })[t.match] || 0.80;
+      if ((intent === "treatment" || intent === "dose") && t.T && t.T.default) conf = Math.min(0.97, conf + 0.02);
       var text = res.text + refineLine(t, intent);
       return { text: text, confidence: conf, intent: intent, mode: "kb-instant", disease: t.name, evidence: citeSrc(t) };
     } catch (e) { return null; }

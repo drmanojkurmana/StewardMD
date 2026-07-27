@@ -84,7 +84,7 @@ test("COVERAGE: knowledge questions answer deterministically with correct intent
     const r = compose(q);
     assert.ok(r && r.text, "should answer: " + q);
     assert.strictEqual(r.intent, intent, "intent for: " + q);
-    assert.ok(r.confidence >= 0.7, "confidence for: " + q);
+    assert.ok(r.confidence >= 0.85, "confidence for: " + q);
     assert.ok(r.text.length > 40, "non-trivial answer: " + q);
   }
 });

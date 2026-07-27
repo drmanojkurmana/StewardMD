@@ -2483,6 +2483,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // Very short, non-clinical, unmatched → ask a clarifying question (no call).
       // Only clarify a 1-2 word query when it does NOT look like a clinical topic. Disease/topic
       // names (e.g. "paraquat poisoning", "kawasaki disease", "-itis/-osis") must route to clinical.
+      // A bare disease NAME ("Diabetes Mellitus", "Nephrotic syndrome", "Sarcoidosis") is a
+      // define-it request, not something to clarify. If the V2 KB engine resolves it confidently,
+      // route it as a clinical question so it gets an instant KB definition.
+      try { if (isShort && toks.length <= 4 && window.MaiKKB && MaiKKB.resolveTarget) { var _kbt = MaiKKB.resolveTarget(n, { question: n, grounding: [], topicMatch: { matched: false } }); if (_kbt && _kbt.confident) return { kind: "clinical" }; } } catch (e) {}
       if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug|poison|toxic|overdose|antidote|envenom|snakebite|syndrome|disease|disorder|infection|itis|osis|aemia|emia|pathy|opathy|crisis|failure|bleed|haemorrhage|hemorrhage|stroke|embolism|infarct|arrest|malaria|meningitis|pneumonia|tetanus|rabies|dengue|typhoid|cholera)/.test(n)) return { kind: "clarify" };
       return { kind: "clinical" };
     }
@@ -2885,7 +2889,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           try {
             if (window.MaiKKB && maikKB() && !active) {
               var _kb = MaiKKB.compose(question, pkg, { depth: depth });
-              if (_kb && _kb.text && _kb.confidence >= 0.7) {
+              if (_kb && _kb.text && _kb.confidence >= 0.85) {   // >=85% KB confidence → answer from KB; else Gemini
                 _streamStarted = true; _clearStages();
                 maikRenderAnswer(think, { text: _kb.text, mode: "kb", kb: true, confidence: _kb.confidence, intent: _kb.intent }, pkg, active, cacheKey, topicLabel, question, depth, assume);
                 if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ instant · KB · " + _kt + "ms · " + _kb.intent; think.appendChild(_pe); } catch (e) {} }
