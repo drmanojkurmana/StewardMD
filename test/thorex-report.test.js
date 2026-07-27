@@ -145,6 +145,18 @@ const highReport = R.buildReport(M.makeAnalysis({
 }));
 assert.ok(/Findings support Pneumothorax \(>75% AI confidence\) — may be read as a working diagnosis/.test(highReport.sections.impression.text), ">75% should read as a working diagnosis");
 
+// ── engineScope: report can be built from Engine 1 (clinical), Engine 2 (educational), or both ──
+const clinOnly = R.buildReport(analysis, { engineScope: "clinical" });
+assert.ok(clinOnly.sections.findings.items.some((f) => f.label === "Right lower lobe consolidation"), "clinical scope uses Engine 1 findings");
+assert.ok(!clinOnly.sections.findings.items.some((f) => f.label === "Bilateral lower lobe interstitial opacities"), "clinical scope must not pull Engine 2 findings into Findings");
+const eduOnly = R.buildReport(analysis, { engineScope: "educational" });
+assert.ok(eduOnly.sections.findings.items.some((f) => f.label === "Bilateral lower lobe interstitial opacities"), "educational scope uses Engine 2 findings");
+assert.ok(/Clinical Engine 2/.test(eduOnly.sections.technique.text), "educational scope names Engine 2 in Technique");
+const bothScope = R.buildReport(analysis, { engineScope: "both" });
+const bothLabels = bothScope.sections.findings.items.map((f) => f.label);
+assert.ok(bothLabels.includes("Right lower lobe consolidation") && bothLabels.includes("Bilateral lower lobe interstitial opacities"), "both scope merges Engine 1 + Engine 2 findings");
+assert.ok(/Engine 1 \+ 2/.test(bothScope.sections.technique.text), "both scope names Engine 1 + 2 in Technique");
+
 // ── professional print/PDF document: self-contained branded HTML, warning + branding + embedded X-ray ──
 const proDoc = R.buildProDocument(analysis, { context: "62M smoker, breathless", logoDataUrl: "data:image/png;base64,AAAA", xrayDataUrl: "data:image/png;base64,BBBB", createdAt: "2026-07-27" });
 assert.ok(/^<!doctype html>/i.test(proDoc), "buildProDocument returns a full HTML document");

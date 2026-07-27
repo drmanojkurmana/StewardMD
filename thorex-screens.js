@@ -1341,23 +1341,107 @@
     toast("Export not available on this device.");
   }
 
+  // Top finding's CAM heatmap (base64) for the chosen engine scope — findings are ranked, so the first
+  // one carrying a heatmap is the strongest. "both" prefers the clinical engine, else educational.
+  function topHeatmapFor(a, scope) {
+    var engines = (a && a.engines) || [];
+    function pick(pred) {
+      for (var i = 0; i < engines.length; i++) {
+        var e = engines[i]; if (!e || !pred(e)) continue;
+        var fs = e.findings || [];
+        for (var j = 0; j < fs.length; j++) if (fs[j] && fs[j].heatmap) return fs[j].heatmap;
+      }
+      return null;
+    }
+    if (scope === "educational") return pick(function (e) { return e.educational === true; });
+    if (scope === "clinical") return pick(function (e) { return e.educational === false; });
+    return pick(function (e) { return e.educational === false; }) || pick(function (e) { return e.educational === true; });
+  }
+  // Composite a CAM heatmap over the (redacted) X-ray on a canvas → a single dataURL for the PDF, so the
+  // exported report carries the heatmap-on-X-ray, not just the plain film.
+  function compositeHeatmap(xrayDataUrl, heatB64) {
+    return new Promise(function (resolve) {
+      try {
+        var base = new Image();
+        base.onload = function () {
+          try {
+            var W = base.naturalWidth || base.width, H = base.naturalHeight || base.height;
+            if (!W || !H) return resolve(xrayDataUrl);
+            var c = document.createElement("canvas"); c.width = W; c.height = H;
+            var cx = c.getContext("2d"); cx.drawImage(base, 0, 0, W, H);
+            var heat = new Image();
+            heat.onload = function () {
+              try {
+                cx.globalAlpha = 0.55;
+                try { cx.filter = "blur(" + Math.max(2, Math.round(Math.max(W, H) * 0.008)) + "px)"; } catch (e) {}
+                cx.drawImage(heat, 0, 0, W, H);
+                cx.filter = "none"; cx.globalAlpha = 1;
+                resolve(c.toDataURL("image/jpeg", 0.9));
+              } catch (e) { resolve(xrayDataUrl); }
+            };
+            heat.onerror = function () { resolve(xrayDataUrl); };
+            heat.src = "data:image/png;base64," + heatB64;
+          } catch (e) { resolve(xrayDataUrl); }
+        };
+        base.onerror = function () { resolve(xrayDataUrl); };
+        base.src = xrayDataUrl;
+      } catch (e) { resolve(xrayDataUrl); }
+    });
+  }
+  // Ask which engine's report to export (Engine 1 / Engine 2 / Both). Skips the prompt when only one
+  // engine is present. "Both" is the recommended default (leans on Engine 2's richer findings).
+  function chooseExportScope(a, cb) {
+    var engines = (a && a.engines) || [];
+    var hasClin = engines.some(function (e) { return e && e.educational === false; });
+    var hasEdu = engines.some(function (e) { return e && e.educational === true; });
+    if (!(hasClin && hasEdu)) { cb(hasEdu && !hasClin ? "educational" : "clinical"); return; }
+    var root = document.getElementById("thorexRoot") || document.body;
+    var ov = document.createElement("div");
+    ov.className = "tx-perm tx-export-sheet";
+    ov.innerHTML =
+      '<button class="tx-perm-scrim" type="button" data-x="cancel" aria-label="Cancel"></button>' +
+      '<div class="tx-perm-sheet" role="dialog" aria-modal="true" aria-label="Export report">' +
+        '<span class="tx-perm-icon">' + ic("picture_as_pdf") + "</span>" +
+        '<h2 class="tx-perm-title">Export report</h2>' +
+        '<p class="tx-perm-body">Which engine’s report do you want in the PDF?</p>' +
+        '<button class="tx-perm-allow" type="button" data-x="both">' + ic("done_all") + "Both engines (recommended)</button>" +
+        '<button class="tx-btn tx-btn-secondary tx-export-opt" type="button" data-x="clinical">Clinical Engine 1 only</button>' +
+        '<button class="tx-btn tx-btn-secondary tx-export-opt" type="button" data-x="educational">Clinical Engine 2 only (educational)</button>' +
+        '<button class="tx-perm-deny" type="button" data-x="cancel">Cancel</button>' +
+      "</div>";
+    root.appendChild(ov);
+    ov.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-x]"); if (!b) return;
+      var x = b.getAttribute("data-x");
+      try { ov.remove(); } catch (e2) {}
+      if (x === "cancel") return;
+      haptic("light"); cb(x);
+    });
+  }
+
   // Export / Share → the professional branded StewardMD report (logo + teal borders + warning +
-  // embedded X-ray). Async: inline the logo + X-ray as data-URIs so the shared/printed file is
-  // self-contained, then hand it to exportHtmlDoc().
+  // heatmap-on-X-ray). Asks which engine(s) to include, then inlines logo + composited image as
+  // data-URIs so the shared/printed file is self-contained, and hands it to exportHtmlDoc().
   function exportReport() {
     var a = state.analysis; if (!a) { toast("No result to export."); return; }
     var R = window.SMD_THOREX_REPORT;
     if (!R || !R.buildProDocument) {
-      // Fallback: the old plain report, so Export never silently does nothing on a stale bundle.
       var rep = buildReportSafe(a, { context: (a && a.__context) || "" });
       exportHtmlDoc("<!doctype html><html><head><meta charset=utf-8><title>ThoreX — CXR result</title></head><body>" + (rep ? rep.html : legacyExportHtml(a)) + "</body></html>", "StewardMD-CXR-report");
       return;
     }
-    toast("Preparing report…");
-    Promise.all([logoDataUrl(), toDataUrl(a && a.__xrayUrl)]).then(function (res) {
-      var doc = R.buildProDocument(a, { context: (a && a.__context) || "", logoDataUrl: res[0], xrayDataUrl: res[1], createdAt: a && a.createdAt });
-      exportHtmlDoc(doc, "StewardMD-CXR-report");
-    }).catch(function () { toast("Couldn’t prepare the report."); });
+    chooseExportScope(a, function (scope) {
+      toast("Preparing report…");
+      Promise.all([logoDataUrl(), toDataUrl(a && a.__xrayUrl)]).then(function (res) {
+        var logo = res[0], xrayUrl = res[1];
+        var heat = topHeatmapFor(a, scope);
+        var imgP = (xrayUrl && heat) ? compositeHeatmap(xrayUrl, heat) : Promise.resolve(xrayUrl);
+        return imgP.then(function (finalImg) {
+          var doc = R.buildProDocument(a, { context: (a && a.__context) || "", logoDataUrl: logo, xrayDataUrl: finalImg, createdAt: a && a.createdAt, engineScope: scope, heatmap: !!(heat && xrayUrl) });
+          exportHtmlDoc(doc, "StewardMD-CXR-report");
+        });
+      }).catch(function () { toast("Couldn’t prepare the report."); });
+    });
   }
 
   // Copy — puts the plain-text structured report (thorex-report.js `text`) on the clipboard.
