@@ -265,20 +265,29 @@
             '<span class="tx-tip-ic" aria-hidden="true">' + ic("tips_and_updates") + "</span>" +
             '<span class="tx-tip-txt">Frontal view, patient upright when possible, whole chest in frame, avoid glare — ThoreX auto-enhances the image before analysis.</span>' +
           "</div>" +
-          // Optional clinical context → feeds the ThoreX AI report's "Clinical information" (a better,
-          // context-aware read). Type it, or dictate with MaiK Scribe (SMD_VOICE, target:"text").
-          '<div class="tx-clin">' +
-            '<div class="tx-clin-head">' +
-              '<span class="tx-clin-label">Clinical details <span class="tx-clin-opt">optional · improves the AI report</span></span>' +
-              '<button type="button" class="tx-clin-mic" data-act="tx-scribe" aria-label="Dictate clinical details with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
-            "</div>" +
-            '<textarea class="tx-clin-ta" data-hook="clinCtx" rows="2" placeholder="e.g. 62M, smoker, breathless 3 days, febrile — symptoms, history, key numbers">' + esc(state.clinicalContext || "") + "</textarea>" +
-          "</div>" +
           '<div class="tx-src-foot">' + ic("lock") + "Encrypted upload &middot; deleted after analysis</div>" +
         "</div>" +
       "</section>";
+  }
 
-    // Keep the typed clinical context in state so it survives capture + reaches the report (finishPipeline).
+  /* clinical-context dialog — shown AFTER an image is picked (state._pendingImage), BEFORE analysis.
+     Optional clinical details (typed or dictated via MaiK Scribe) → report "Clinical information". */
+  function renderClinical(host, ctx) {
+    host.innerHTML =
+      '<div class="tx-perm tx-clin-dlg" role="dialog" aria-modal="true" aria-labelledby="txClinTitle" aria-describedby="txClinBody">' +
+        '<button class="tx-perm-scrim" type="button" data-act="tx-clin-skip" aria-label="Skip"></button>' +
+        '<div class="tx-perm-sheet" role="document">' +
+          '<span class="tx-perm-icon">' + ic("clinical_notes") + "</span>" +
+          '<h2 class="tx-perm-title" id="txClinTitle">Add clinical details?</h2>' +
+          '<p class="tx-perm-body" id="txClinBody">Optional — a short history makes the ThoreX AI report more accurate. Type it, or dictate with MaiK Scribe.</p>' +
+          '<div class="tx-clin-dlg-field">' +
+            '<button type="button" class="tx-clin-mic" data-act="tx-scribe" aria-label="Dictate clinical details with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
+            '<textarea class="tx-clin-ta" data-hook="clinCtx" rows="3" placeholder="e.g. 62M, smoker, breathless 3 days, febrile — symptoms, history, key numbers">' + esc(state.clinicalContext || "") + "</textarea>" +
+          "</div>" +
+          '<button class="tx-perm-allow" type="button" data-act="tx-clin-continue">' + ic("check") + "Analyze X-ray</button>" +
+          '<button class="tx-perm-deny" type="button" data-act="tx-clin-skip">Skip &amp; analyze</button>' +
+        "</div>" +
+      "</div>";
     var clinTa = host.querySelector('[data-hook="clinCtx"]');
     if (clinTa) clinTa.addEventListener("input", function () { state.clinicalContext = clinTa.value; });
   }
@@ -967,6 +976,7 @@
   var SCREENS = {
     landing: renderLanding,
     source: renderSource,
+    clinical: renderClinical,
     permission: renderPermission,
     quality: renderQuality,
     processing: renderProcessing,
@@ -977,7 +987,7 @@
     empty: renderEmpty
   };
 
-  var state = { analysis: null, running: false, consentPending: null, emptyReason: null, stack: [], clinicalContext: "" };
+  var state = { analysis: null, running: false, consentPending: null, emptyReason: null, stack: [], clinicalContext: "", pendingImage: null };
 
   function providers() { try { return window.SMD_THOREX_PROVIDERS && window.SMD_THOREX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("txScroll"); }
@@ -1225,11 +1235,20 @@
 
   function startCapture(src) {
     captureImage(src).then(function (blob) {
-      runPipeline({ id: "tx-" + Date.now(), source: src, data: blob });
+      // Hold the picked image and ask for clinical details in a dialog BEFORE analysis (better AI report).
+      state.pendingImage = { id: "tx-" + Date.now(), source: src, data: blob };
+      go("clinical");
     }).catch(function (err) {
       if (err && err.cancelled) return;
       toast("Couldn't open the " + (src === "camera" ? "camera" : "picker") + ". " + ((err && err.message) || ""));
     });
+  }
+
+  // Continue from the clinical-details dialog into the real pipeline (with or without context).
+  function runPending() {
+    var img = state.pendingImage; state.pendingImage = null;
+    if (!img) { show("source"); return; }
+    runPipeline(img);
   }
 
   function onClick(e) {
@@ -1253,6 +1272,13 @@
         } });
         return;
       }
+      case "tx-clin-continue": {
+        haptic("light");
+        try { var hc = host(); var tac = hc && hc.querySelector('[data-hook="clinCtx"]'); if (tac) state.clinicalContext = tac.value.trim(); } catch (e) {}
+        runPending();
+        return;
+      }
+      case "tx-clin-skip": state.clinicalContext = ""; runPending(); return;
       case "tx-why": haptic("light"); go("why"); return;
       case "tx-open": openStored(t.getAttribute("data-id")); return;
       case "tx-source": {
