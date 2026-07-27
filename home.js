@@ -2886,37 +2886,54 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // Any miss (low confidence / a reasoning question) silently falls through to the
           // Gemini path below, so nothing can regress. Case-active turns keep the full
           // reasoning path (KB-instant is for standalone knowledge questions).
-          try {
-            if (window.MaiKKB && maikKB() && !active) {
-              var _kb = MaiKKB.compose(question, pkg, { depth: depth });
-              if (_kb && _kb.text && _kb.confidence >= 0.85) {   // >=85% KB confidence → answer from KB; else Gemini
-                _streamStarted = true; _clearStages();
-                maikRenderAnswer(think, { text: _kb.text, mode: "kb", kb: true, confidence: _kb.confidence, intent: _kb.intent }, pkg, active, cacheKey, topicLabel, question, depth, assume);
-                if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ instant · KB · " + _kt + "ms · " + _kb.intent; think.appendChild(_pe); } catch (e) {} }
-                _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-                try { scroll(); } catch (e) {}
-                return;   // answered from the KB — Gemini not called
-              }
-            }
-          } catch (e) {}
-          var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
-            ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
-            : window.SMD_AI.explainGrounded(pkg, { depth: depth });
-          return call.then(function (r) {
-            maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
-            // TTFT diagnostics (flag-gated) — readable on the real app incl. native.
-            try {
-              if (maikPerfOn()) {
-                var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
-                var ttft = _perfTTFT ? ((_perfTTFT - _perfT0) / 1000).toFixed(1) : null;
-                var el = document.createElement("div");
-                el.className = "maik-perf";
-                el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
-                el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
-                think.appendChild(el);
-                try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
-              }
-            } catch (e) {}
+          // ── TIER 0 — instant local KB answer (retrieval-first, NO Gemini) ──
+          // Renders through the SAME path (maikRenderAnswer) so the UI is unchanged; a miss falls
+          // through to the refiner/Gemini below, so nothing can regress.
+          function finishKB(kb, pkgForKb, label) {
+            _streamStarted = true; _clearStages();
+            maikRenderAnswer(think, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
+            if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; think.appendChild(_pe); } catch (e) {} }
+            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+            try { scroll(); } catch (e) {}
+          }
+          var _kbOn = window.MaiKKB && maikKB() && !active;
+          try { if (_kbOn) { var _kb = MaiKKB.compose(question, pkg, { depth: depth }); if (_kb && _kb.text && _kb.confidence >= 0.85) { finishKB(_kb, pkg, "instant"); return; } } } catch (e) {}
+
+          // ── TIER 1 — cheap Vertex refiner, ONLY on a local KB miss for a knowledge-shaped question
+          // (not reasoning). Normalises the messy query ("dibetis" -> "diabetes mellitus"), retries the
+          // KB; if it now resolves >=85%, answer from the KB. Else fall through to Gemini. The instant
+          // path above is untouched — this network hop is paid only when the local rules couldn't resolve.
+          var _refineP = (_kbOn && window.SMD_AI && SMD_AI.refine && MaiKKB.isComplex && !MaiKKB.isComplex(question))
+            ? SMD_AI.refine(question).then(function (ref) {
+                if (!ref || !ref.topic || !window.StewardRAG) return null;
+                return Promise.resolve(StewardRAG.buildPackage(window.SMD_REASON.assess({}), { question: ref.topic })).then(function (pkg2) {
+                  if (!pkg2) return null; pkg2.question = ref.topic;
+                  try { var _kb2 = MaiKKB.compose(ref.topic, pkg2, { depth: depth }); if (_kb2 && _kb2.text && _kb2.confidence >= 0.85) return { kb: _kb2, pkg: pkg2 }; } catch (e) {}
+                  return null;
+                }).catch(function () { return null; });
+              }).catch(function () { return null; })
+            : Promise.resolve(null);
+
+          return _refineP.then(function (refined) {
+            if (refined && refined.kb) { finishKB(refined.kb, refined.pkg, "refined"); return; }
+            // ── TIER 2 — Gemini grounded answer (existing path) ──
+            var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
+              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
+              : window.SMD_AI.explainGrounded(pkg, { depth: depth });
+            return call.then(function (r) {
+              maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
+              try {
+                if (maikPerfOn()) {
+                  var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
+                  var ttft = _perfTTFT ? ((_perfTTFT - _perfT0) / 1000).toFixed(1) : null;
+                  var el = document.createElement("div"); el.className = "maik-perf";
+                  el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
+                  el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                  think.appendChild(el);
+                  try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
+                }
+              } catch (e) {}
+            });
           });
         })
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })

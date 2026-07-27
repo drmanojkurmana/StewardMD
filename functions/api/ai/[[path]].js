@@ -780,6 +780,23 @@ export async function onRequest(context) {
       const v = await verifyGrounding(env, String(body.text || "").slice(0, 8000), vpkg);
       return json(v);
     }
+    if (seg === "refine") {
+      // MaiK V2 query normaliser (cheap). Maps a short/messy clinical query to a CANONICAL topic +
+      // intent so the on-device KB can resolve it, WITHOUT generating a full answer. Called by the
+      // client ONLY when the local KB fails to resolve (misspelling / unusual abbreviation / phrasing),
+      // so the instant local path is unaffected. Tiny output → ~40 tokens, near-free.
+      const q = String(body.q || body.question || "").slice(0, 300).trim();
+      if (!q) return json({ error: "no-query" }, 400);
+      const gate = await checkQuota(env, request, "general");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const sys = "You are a medical query normaliser for a knowledge-base lookup. Given a doctor's short or messy query, return ONLY compact JSON: {\"topic\":\"<the single canonical disease/condition/drug the query is about, full standard name, e.g. 'diabetes mellitus', 'community-acquired pneumonia', 'ceftriaxone'>\",\"intent\":\"definition|treatment|dose|differential|investigation|features|redflags|pathophysiology|prognosis|other\"}. Expand abbreviations (dm->diabetes mellitus, htn->hypertension, cap->community-acquired pneumonia), correct spelling (dibetis->diabetes mellitus), and choose the MOST LIKELY single canonical topic. If the query is a reasoning/comparison/'latest evidence'/multi-condition question, set topic to \"\" and intent to \"other\". No prose, JSON only.\n\nQuery: " + q;
+      let text;
+      try { text = await callGemini(env, [{ text: sys }], 80, { temperature: 0 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "refine-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      const p = parseJsonLoose(text) || {};
+      return json({ topic: String(p.topic || "").slice(0, 120), intent: String(p.intent || "other").slice(0, 24), mode: "refine" });
+    }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text
       // PHI-redacted; NO name/MRN/bed/other-patient data). Structured, advisory, review-required.
