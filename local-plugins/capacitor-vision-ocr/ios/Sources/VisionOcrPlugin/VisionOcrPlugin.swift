@@ -44,17 +44,30 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin {
         let request = VNRecognizeTextRequest { (req, err) in
             if let err = err { settle { call.reject(err.localizedDescription) }; return }
             var lines: [String] = []
+            // Per-line bounding boxes, NORMALIZED [0,1] with a TOP-LEFT origin (Vision's boundingBox is
+            // bottom-left origin, so y is flipped). Used by the JS side to blackout burnt-in PHI on the
+            // image (name / MRN / dates) without the image ever leaving the device.
+            var boxes: [[String: Any]] = []
             if let results = req.results as? [VNRecognizedTextObservation] {
                 for observation in results {
                     if let top = observation.topCandidates(1).first {
                         lines.append(top.string)
+                        let bb = observation.boundingBox
+                        boxes.append([
+                            "text": top.string,
+                            "x": Double(bb.origin.x),
+                            "y": Double(1.0 - (bb.origin.y + bb.size.height)),
+                            "w": Double(bb.size.width),
+                            "h": Double(bb.size.height)
+                        ])
                     }
                 }
             }
             settle {
                 call.resolve([
                     "text": lines.joined(separator: "\n"),
-                    "lines": lines
+                    "lines": lines,
+                    "boxes": boxes
                 ])
             }
         }

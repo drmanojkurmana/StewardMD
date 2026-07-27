@@ -639,3 +639,19 @@
 /* dialog field: MaiK Scribe pill (right) above a full-width textarea, inside the centered sheet */
 #thorexRoot .tx-clin-dlg-field{width:100%;display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:2px 0 14px}
 #thorexRoot .tx-clin-dlg-field .tx-clin-mic{align-self:flex-end}
+
+/* ── Compact findings + "possibly normal" read + show-all expander ── */
+#thorexRoot .tx-findings{gap:8px}
+#thorexRoot .tx-finding{padding:11px 12px}
+#thorexRoot .tx-clean-low{margin-top:10px;font:600 11.5px/1.5 var(--tx-sans);color:var(--tx-text-2)}
+#thorexRoot .tx-more-wrap[hidden]{display:none}
+#thorexRoot .tx-more-wrap{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+#thorexRoot .tx-more-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:10px;border:1px dashed var(--tx-hairline);border-radius:12px;background:transparent;color:var(--tx-primary);font:800 13px var(--tx-sans);cursor:pointer}
+#thorexRoot .tx-more-btn:active{transform:scale(.99)}
+#thorexRoot .tx-more-btn[hidden]{display:none}
+
+/* PHI-masking status note under the X-ray */
+#thorexRoot .tx-phi{display:flex;align-items:center;gap:6px;margin:7px 2px 2px;font:600 11px/1.4 var(--tx-sans)}
+#thorexRoot .tx-phi .material-symbols-rounded{font-size:15px}
+#thorexRoot .tx-phi--on{color:#0f766e}
+#thorexRoot .tx-phi--off{color:#b45309}

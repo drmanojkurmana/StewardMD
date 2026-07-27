@@ -129,4 +129,18 @@ const highReport = R.buildReport(M.makeAnalysis({
 }));
 assert.ok(/Findings support Pneumothorax \(>75% AI confidence\) — may be read as a working diagnosis/.test(highReport.sections.impression.text), ">75% should read as a working diagnosis");
 
+// ── professional print/PDF document: self-contained branded HTML, warning + branding + embedded X-ray ──
+const proDoc = R.buildProDocument(analysis, { context: "62M smoker, breathless", logoDataUrl: "data:image/png;base64,AAAA", xrayDataUrl: "data:image/png;base64,BBBB", createdAt: "2026-07-27" });
+assert.ok(/^<!doctype html>/i.test(proDoc), "buildProDocument returns a full HTML document");
+assert.ok(/StewardMD/.test(proDoc) && /AI CHEST X-RAY SCREENING REPORT/.test(proDoc), "pro doc has StewardMD branding + report title");
+assert.ok(/#0f766e/.test(proDoc), "pro doc uses the teal brand colour for borders");
+assert.ok(proDoc.indexOf("data:image/png;base64,AAAA") >= 0, "pro doc embeds the logo data-URI");
+assert.ok(proDoc.indexOf("data:image/png;base64,BBBB") >= 0, "pro doc embeds the X-ray data-URI");
+assert.ok(/IMPORTANT — AI-generated screening, not a diagnosis/.test(proDoc) && proDoc.indexOf(DISCLAIMER) >= 0, "pro doc carries the warning + mandatory disclaimer");
+assert.ok(/62M smoker, breathless/.test(proDoc), "pro doc shows the clinical context");
+assert.ok(/Findings support Right lower lobe consolidation/.test(proDoc), "pro doc carries the tiered impression");
+// degrades cleanly with no logo/xray
+const proDoc2 = R.buildProDocument(analysis, {});
+assert.ok(/^<!doctype html>/i.test(proDoc2) && /StewardMD/.test(proDoc2), "pro doc still valid with no logo/xray/context");
+
 console.log("ok");

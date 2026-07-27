@@ -159,7 +159,31 @@
     });
   }
 
-  var API = { loadModelBytes: loadModelBytes, DEFAULT_CACHE_NAME: DEFAULT_CACHE_NAME };
+  // Purge every downloaded model (Cache API entry + IndexedDB store) so the storage is freed; models
+  // re-download from their URL on next use. Deps injectable for tests. Best-effort, never rejects.
+  function clearModels(opts) {
+    opts = opts || {};
+    var cacheName = opts.cacheName || DEFAULT_CACHE_NAME;
+    var cachesImpl = opts.caches !== undefined ? opts.caches : realCaches();
+    var idbImpl = opts.indexedDB !== undefined ? opts.indexedDB : realIndexedDB();
+    var jobs = [];
+    if (cachesImpl && cachesImpl.delete) {
+      jobs.push(Promise.resolve(cachesImpl.delete(cacheName)).then(function (r) { return !!r; }, function () { return false; }));
+    }
+    if (idbImpl && idbImpl.deleteDatabase) {
+      jobs.push(new Promise(function (resolve) {
+        try {
+          var req = idbImpl.deleteDatabase(IDB_DB_NAME);
+          req.onsuccess = function () { resolve(true); };
+          req.onerror = function () { resolve(false); };
+          req.onblocked = function () { resolve(true); }; // deletes once open handles close
+        } catch (e) { resolve(false); }
+      }));
+    }
+    return Promise.all(jobs).then(function (r) { return r.some(Boolean); }, function () { return true; });
+  }
+
+  var API = { loadModelBytes: loadModelBytes, clearModels: clearModels, DEFAULT_CACHE_NAME: DEFAULT_CACHE_NAME };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_THOREX_MODEL_CACHE = API;
 })();

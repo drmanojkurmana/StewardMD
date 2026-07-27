@@ -40,6 +40,7 @@ function makeFakeCacheApi() {
         put: (url, response) => Promise.resolve(response.arrayBuffer()).then((ab) => { store.set(url, ab); })
       });
     },
+    delete: (name) => Promise.resolve(cachesByName.delete(name)),
     _raw: cachesByName
   };
 }
@@ -242,12 +243,28 @@ async function testExistingModelRunPathStillWorks() {
   ok("(e2) the model bytes ended up stored in the fake Cache API (offline-capable on the next run)", cacheApi2._raw.get(MC.DEFAULT_CACHE_NAME).has(modelUrl));
 }
 
+async function testClearModelsPurgesCache() {
+  const modelUrl = "https://cdn.example/thorex_clinical.onnx";
+  const cacheApi = makeFakeCacheApi();
+  const fetchImpl = makeFakeFetch({ [modelUrl]: Buffer.from([1, 2, 3, 4]) });
+  await MC.loadModelBytes(modelUrl, { fetch: fetchImpl, caches: cacheApi, indexedDB: undefined });
+  ok("(f) model cached before clear", cacheApi._raw.get(MC.DEFAULT_CACHE_NAME).has(modelUrl));
+  const removed = await MC.clearModels({ caches: cacheApi, indexedDB: undefined });
+  ok("(f) clearModels reports it removed something", removed === true);
+  ok("(f) the model cache is gone after clearModels", !cacheApi._raw.has(MC.DEFAULT_CACHE_NAME));
+  // next load must re-fetch (cache was purged)
+  const fetch2 = makeFakeFetch({ [modelUrl]: Buffer.from([1, 2, 3, 4]) });
+  await MC.loadModelBytes(modelUrl, { fetch: fetch2, caches: cacheApi, indexedDB: undefined });
+  ok("(f) load after clear re-fetches from the network", fetch2.callCount() === 1);
+}
+
 (async () => {
   const cacheApi = await testCacheMissFetchesAndStores();
   await testCacheHitSkipsFetch(cacheApi);
   await testFetchFailureIsTypedModelUnavailable();
   await testIndexedDbFallback();
   await testExistingModelRunPathStillWorks();
+  await testClearModelsPurgesCache();
 
   console.log(`\nthorex-model-cache: ${pass} passed, ${fail} failed`);
   if (fail) process.exit(1);
