@@ -31,10 +31,19 @@
     return null;
   }
 
+  // Radiographic SIGN vs. DIAGNOSIS reframing. The clinical model's "Emphysema" head fires on
+  // hyperinflation/lucency — a radiographic SIGN, not a diagnosis. Asserting "Emphysema" off a single
+  // frontal film over-calls (a hyperinflated normal / asthma / COPD film is not emphysema). We present
+  // the SIGN in the UI; the DIAGNOSIS lives in the report's differential (thorex-report.js), correlate
+  // clinically. Centralized here (single source of truth), exported so screens + report agree.
+  var LABEL_DISPLAY = { "Emphysema": "Hyperinflation (possible emphysema)" };
+  function displayLabel(label) { label = str(label); return LABEL_DISPLAY.hasOwnProperty(label) ? LABEL_DISPLAY[label] : label; }
+
   function makeFinding(f) {
     f = f || {};
     return {
       label: str(f.label),
+      prob: f.prob == null || f.prob === "" ? null : clamp01(f.prob),
       band: f.band ? str(f.band) : null,
       severity: sev(f.severity),
       relevance: f.relevance == null ? undefined : str(f.relevance),
@@ -96,8 +105,8 @@
         engine: "torchxrayvision",
         educational: false,
         findings: [
-          { label: "Right lower lobe consolidation", band: "High", severity: "urgent", relevance: "diagnostic" },
-          { label: "Air bronchogram", band: "Medium", severity: "warn", relevance: "supportive" }
+          { label: "Right lower lobe consolidation", prob: 0.89, band: "High", severity: "urgent", relevance: "diagnostic" },
+          { label: "Air bronchogram", prob: 0.71, band: "Medium", severity: "warn", relevance: "supportive" }
         ],
         disclaimer_key: "clinical_validated"
       },
@@ -105,7 +114,7 @@
         engine: "xraydar",
         educational: true,
         findings: [
-          { label: "Bilateral lower lobe interstitial opacities", band: "Medium", severity: "warn", relevance: "educational" }
+          { label: "Bilateral lower lobe interstitial opacities", prob: 0.68, band: "Medium", severity: "warn", relevance: "educational" }
         ],
         disclaimer_key: "educational_not_clinical"
       }
@@ -117,6 +126,7 @@
   var API = {
     makeAnalysis: makeAnalysis,
     band: band,
+    displayLabel: displayLabel,
     hasClinicalEngine: hasClinicalEngine,
     clinicalEngine: clinicalEngine,
     learningEngine: learningEngine,

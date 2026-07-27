@@ -492,7 +492,7 @@
     return {
       engine: meta.engineName,
       educational: !!meta.educational,
-      findings: findings.map(function (fnd) { return { label: fnd.label, band: fnd.band, severity: fnd.severity, relevance: fnd.relevance, heatmap: fnd.heatmap }; }),
+      findings: findings.map(function (fnd) { return { label: fnd.label, prob: fnd.prob, band: fnd.band, severity: fnd.severity, relevance: fnd.relevance, heatmap: fnd.heatmap }; }),
       disclaimer_key: meta.disclaimerKey || null
     };
   }

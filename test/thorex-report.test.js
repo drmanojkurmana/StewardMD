@@ -11,9 +11,9 @@ const R = require("../thorex-report.js");
 const analysis = M.makeAnalysis(M.samples.pneumonia);
 const report = R.buildReport(analysis, { context: "Cough and fever x3 days." });
 
-// ── all sections present (the spec enumerates 8: Clinical information, Technique, Image quality,
-//    Findings, Impression, Recommendations, Urgency, Follow-up) ──
-assert.equal(report.order.length, 8, "buildReport should expose all 8 spec sections in `order`");
+// ── all sections present (Clinical information, Technique, Image quality, Findings, Impression,
+//    Differential diagnosis, Recommendations, Urgency, Follow-up) ──
+assert.equal(report.order.length, 9, "buildReport should expose all 9 report sections in `order`");
 report.order.forEach((key) => {
   assert.ok(report.sections[key], `section "${key}" should be present`);
   assert.ok(report.sections[key].title, `section "${key}" should have a title`);
@@ -21,8 +21,19 @@ report.order.forEach((key) => {
 
 assert.equal(report.sections.clinicalInformation.text, "Cough and fever x3 days.", "Clinical information should reflect opts.context");
 
-// ── Technique reflects what actually ran (torchxrayvision on-device model) ──
-assert.ok(/TorchXRayVision DenseNet-121/.test(report.sections.technique.text), "Technique should name the on-device model that actually ran");
+// ── The unified radiology report is brand-neutral: "ThoreX AI" only, no raw engine/model names ──
+assert.ok(/ThoreX AI/.test(report.sections.technique.text), "Technique should present the report as ThoreX AI");
+assert.ok(!/TorchXRayVision|DenseNet|xraydar|X-Raydar|Hugging/i.test(report.html), "the unified report must not leak raw engine/model names — ThoreX AI branding only");
+
+// ── Differential diagnosis: ranked considerations, each with the AI confidence %, + correlation advised ──
+assert.ok(report.sections.differential.items.length >= 1, "Differential should list the clinical considerations");
+assert.equal(report.sections.differential.items[0].confPct, 89, "top differential should carry its AI confidence % (0.89 -> 89)");
+assert.ok(/Differential diagnosis/i.test(report.html), "html should render the Differential diagnosis section");
+assert.ok(/89%/.test(report.html), "html should show the AI confidence percentage");
+assert.ok(/Clinical correlation advised/i.test(report.html), "Differential must append 'Clinical correlation advised.'");
+
+// ── Findings carry the exact AI confidence % threaded from the model ──
+assert.equal(report.sections.findings.items[0].confPct, 89, "Findings should carry the exact AI confidence % (0.89 -> 89)");
 
 // ── Image quality reflects analysis.quality (PA upright, adequate) ──
 assert.ok(/PA upright/.test(report.sections.imageQuality.text), "Image quality should mention the reported view");
@@ -54,7 +65,6 @@ assert.ok(report.sections.followUp.text && report.sections.followUp.text.length 
 // ── Educational engine is surfaced ONLY in a clearly-labelled appendix, never driving the clinical sections ──
 assert.ok(report.sections.educational, "an educational appendix should be present when a learning engine has findings");
 assert.equal(report.sections.educational.title, "Educational (not for clinical use)");
-assert.equal(report.sections.educational.engine, "xraydar");
 assert.ok(report.sections.educational.items.some((it) => it.label === "Bilateral lower lobe interstitial opacities"));
 
 // ── the mandatory disclaimer is present VERBATIM in `text` ──
@@ -85,5 +95,18 @@ assert.ok(emptyReport.sections.impression.text.startsWith("No high-confidence ac
 assert.equal(emptyReport.sections.recommendations.items.length, 1, "no findings should yield exactly the generic fallback recommendation");
 assert.ok(emptyReport.text.indexOf(DISCLAIMER) >= 0);
 assert.equal(emptyReport.sections.clinicalInformation.text, "Not provided", "Clinical information should default to 'Not provided' with no opts.context");
+
+// ── sign-vs-diagnosis relabel: the model's "Emphysema" head fires on hyperinflation; the report must
+//    present the SIGN, never assert the diagnosis "Emphysema" bare (hyperinflated ≠ emphysema) ──
+const emphysemaReport = R.buildReport(M.makeAnalysis({
+  engines: [
+    { engine: "torchxrayvision", educational: false, findings: [{ label: "Emphysema", prob: 0.72, band: "Medium", severity: "warn", relevance: "Hyperinflation/lucency." }] }
+  ],
+  quality: { view: "PA upright", adequate: true, issues: [] }
+}));
+assert.equal(emphysemaReport.sections.findings.items[0].label, "Hyperinflation (possible emphysema)", "'Emphysema' must be reframed as the radiographic sign (hyperinflation)");
+assert.ok(/Hyperinflation/.test(emphysemaReport.html) && !/>Emphysema</.test(emphysemaReport.html), "report must show Hyperinflation, never assert bare Emphysema");
+assert.equal(M.displayLabel("Emphysema"), "Hyperinflation (possible emphysema)", "models.displayLabel should reframe Emphysema");
+assert.equal(M.displayLabel("Pneumothorax"), "Pneumothorax", "displayLabel should pass through labels with no reframe");
 
 console.log("ok");
