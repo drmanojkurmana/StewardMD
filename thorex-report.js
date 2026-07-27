@@ -23,6 +23,13 @@
 
   function str(v) { return typeof v === "string" ? v : ""; }
   function arr(v) { return Array.isArray(v) ? v : []; }
+  function clamp01(n) { n = +n; return n < 0 ? 0 : n > 1 ? 1 : (isFinite(n) ? n : 0); }
+  function pctOf(prob) { return (prob == null || !isFinite(+prob)) ? null : Math.round(clamp01(prob) * 100); }
+
+  // Sign-vs-diagnosis relabel — kept in sync with thorex-models.js LABEL_DISPLAY (duplicated here on
+  // purpose so this generator stays dependency-free/pure; test pins both so they can't drift).
+  var LABEL_DISPLAY = { "Emphysema": "Hyperinflation (possible emphysema)" };
+  function displayLabel(l) { l = str(l); return LABEL_DISPLAY.hasOwnProperty(l) ? LABEL_DISPLAY[l] : l; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   // Mandatory safety disclaimer — verbatim copy of the string in thorex-screens.js's
@@ -76,17 +83,9 @@
 
   /* ══════════════════════════════════════ Technique ═════════════════════════════════════════════ */
   function buildTechnique(clinical) {
-    var engine = (clinical && str(clinical.engine)) || "";
-    if (engine === "torchxrayvision") {
-      return "AI-assisted interpretation of a single frontal chest radiograph. On-device model: TorchXRayVision DenseNet-121.";
-    }
-    if (engine === "hf_vit") {
-      return "AI-assisted interpretation of a single frontal chest radiograph. Cloud-hosted model: Hugging Face ViT chest X-ray classifier (free tier).";
-    }
-    if (engine) {
-      return "AI-assisted interpretation of a single frontal chest radiograph. Model: " + engine + ".";
-    }
-    return "AI-assisted interpretation of a single frontal chest radiograph. No inference engine reported for this analysis.";
+    // Brand-neutral: the unified report is presented as "ThoreX AI" (per-version engine names live in
+    // the collapsible version panels on the result screen, not in the radiology report itself).
+    return "AI-assisted interpretation of a single frontal chest radiograph by ThoreX AI. Findings are screening-level and require radiologist confirmation.";
   }
 
   /* ═══════════════════════════════════ Image quality ════════════════════════════════════════════ */
@@ -111,12 +110,24 @@
   function buildFindingsItems(findings) {
     return sortedByBand(findings).map(function (f) {
       return {
-        label: str(f.label),
+        label: displayLabel(f.label),
         band: f.band == null ? null : str(f.band),
         severity: str(f.severity) || "info",
         severityLabel: severityLabel(f.severity),
-        relevance: str(f.relevance)
+        relevance: str(f.relevance),
+        prob: (f.prob == null || !isFinite(+f.prob)) ? null : +f.prob,
+        confPct: pctOf(f.prob)
       };
+    });
+  }
+
+  /* ═══════════════════════════════════ Differential diagnosis ════════════════════════════════════
+   * The ranked findings re-presented as diagnostic considerations, each with the AI confidence % (raw
+   * model confidence, NOT a calibrated posterior). "Clinical correlation advised" is appended verbatim
+   * — a single frontal film is screening-level; every consideration needs correlation. */
+  function buildDifferential(findingItems) {
+    return findingItems.map(function (it) {
+      return { label: it.label, confPct: it.confPct, band: it.band, severityLabel: it.severityLabel };
     });
   }
 
@@ -206,18 +217,18 @@
     if (!learning || !findings.length) return null;
     return {
       title: "Educational (not for clinical use)",
-      engine: str(learning.engine),
-      items: sortedByBand(findings).map(function (f) { return { label: str(f.label), band: f.band == null ? null : str(f.band) }; })
+      items: sortedByBand(findings).map(function (f) { return { label: displayLabel(f.label), band: f.band == null ? null : str(f.band) }; })
     };
   }
 
-  var SECTION_ORDER = ["clinicalInformation", "technique", "imageQuality", "findings", "impression", "recommendations", "urgency", "followUp"];
+  var SECTION_ORDER = ["clinicalInformation", "technique", "imageQuality", "findings", "impression", "differential", "recommendations", "urgency", "followUp"];
   var SECTION_TITLES = {
     clinicalInformation: "Clinical information",
     technique: "Technique",
     imageQuality: "Image quality",
     findings: "Findings",
     impression: "Impression",
+    differential: "Differential diagnosis",
     recommendations: "Recommendations",
     urgency: "Urgency",
     followUp: "Follow-up"
@@ -233,6 +244,7 @@
     var findingItems = buildFindingsItems(rawFindings);
     var bucket = urgencyBucket(worstSeverityOf(findingItems));
     var recs = buildRecommendations(findingItems);
+    var differential = buildDifferential(findingItems);
     var educational = buildEducational(learning);
 
     var sections = {
@@ -241,6 +253,7 @@
       imageQuality: { title: SECTION_TITLES.imageQuality, text: buildImageQuality(analysis) },
       findings: { title: SECTION_TITLES.findings, items: findingItems },
       impression: { title: SECTION_TITLES.impression, text: buildImpression(findingItems) },
+      differential: { title: SECTION_TITLES.differential, items: differential },
       recommendations: { title: SECTION_TITLES.recommendations, items: recs },
       urgency: { title: SECTION_TITLES.urgency, text: URGENCY_TEXT[bucket], bucket: bucket },
       followUp: { title: SECTION_TITLES.followUp, text: buildFollowUp(findingItems, bucket) }
@@ -272,6 +285,15 @@
             lines.push("- " + it.label + " (" + it.severityLabel + ")" + (it.relevance ? " — " + it.relevance : ""));
           });
         }
+      } else if (key === "differential") {
+        if (!s.items.length) {
+          lines.push("No differential considerations crossed the AI operating threshold.");
+        } else {
+          s.items.forEach(function (d) {
+            lines.push("- " + d.label + (d.confPct != null ? " — " + d.confPct + "% AI confidence" : "") + (d.band ? " (" + d.band + ")" : ""));
+          });
+        }
+        lines.push("Clinical correlation advised.");
       } else if (key === "recommendations") {
         s.items.forEach(function (r) { lines.push("- " + r); });
       } else {
@@ -281,7 +303,6 @@
     });
     if (educational) {
       lines.push(educational.title.toUpperCase());
-      lines.push("Engine: " + educational.engine);
       educational.items.forEach(function (it) { lines.push("- " + it.label + (it.band ? " (" + it.band + ")" : "")); });
       lines.push("");
     }
@@ -325,19 +346,34 @@
       return '<section class="tx-report-sec"><h4 class="tx-report-h">' + esc(s.title) + '</h4>' +
         '<ul class="tx-report-list">' + s.items.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") + '</ul></section>';
     }
+    function differentialSection() {
+      var s = sections.differential;
+      var body;
+      if (!s.items.length) {
+        body = '<p class="tx-report-p">No differential considerations crossed the AI operating threshold.</p>';
+      } else {
+        body = '<ul class="tx-report-list tx-report-ddx">' + s.items.map(function (d) {
+          var conf = (d.confPct != null) ? '<span class="tx-report-conf">' + d.confPct + '%</span>' : '';
+          var band = d.band ? ' <span class="tx-report-sevtag">' + esc(d.band) + '</span>' : '';
+          return '<li><span class="tx-report-ddx-name"><b>' + esc(d.label) + '</b>' + band + '</span>' + conf + '</li>';
+        }).join("") + '</ul>';
+      }
+      return '<section class="tx-report-sec"><h4 class="tx-report-h">' + esc(s.title) + '</h4>' + body +
+        '<p class="tx-report-p tx-report-corr">Clinical correlation advised.</p></section>';
+    }
     var body = SECTION_ORDER.map(function (key) {
       if (key === "findings") return findingsSection();
+      if (key === "differential") return differentialSection();
       if (key === "recommendations") return recsSection();
       return textSection(key);
     }).join("");
     var eduHtml = educational ?
       '<section class="tx-report-sec tx-report-edu"><h4 class="tx-report-h">' + esc(educational.title) + '</h4>' +
-        '<p class="tx-report-p">Engine: ' + esc(educational.engine) + '</p>' +
         '<ul class="tx-report-list">' + educational.items.map(function (it) {
           return '<li>' + esc(it.label) + (it.band ? ' <span class="tx-report-sevtag">' + esc(it.band) + '</span>' : '') + '</li>';
         }).join("") + '</ul></section>' : "";
     return '<div class="tx-report">' +
-      '<h3 class="tx-report-title">ThoreX AI — Structured report</h3>' +
+      '<h3 class="tx-report-title">ThoreX AI — Radiology report</h3>' +
       body + eduHtml +
       '<div class="tx-report-disc">' + esc(MANDATORY_DISCLAIMER) + '</div>' +
     '</div>';

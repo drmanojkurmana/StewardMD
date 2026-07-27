@@ -33,6 +33,16 @@
 
   var BAND_PCT = { High: 86, Medium: 55, Low: 24 };
   function bandToPct(band) { return (band && BAND_PCT.hasOwnProperty(band)) ? BAND_PCT[band] : null; }
+  function clamp01(n) { n = +n; return n < 0 ? 0 : n > 1 ? 1 : (isFinite(n) ? n : 0); }
+
+  // Engine → user-facing version name. The raw ids (torchxrayvision / xraydar / hf_vit) stay internal
+  // (model-file matching, entitlement shape, report logic) — only the DISPLAYED name changes.
+  var ENGINE_DISPLAY = { torchxrayvision: "ThoreX v1", xraydar: "V2 Beta", hf_vit: "ThoreX Free" };
+  function engineDisplayName(id) { id = String(id || ""); return ENGINE_DISPLAY.hasOwnProperty(id) ? ENGINE_DISPLAY[id] : id; }
+  function displayLabelOf(label) {
+    try { var M = (typeof window !== "undefined" && window.SMD_THOREX_MODELS) || null; if (M && M.displayLabel) return M.displayLabel(label); } catch (e) {}
+    return label || "";
+  }
 
   // Mandatory safety disclaimer (Global Constraints) — verbatim, appended once per result screen.
   var MANDATORY_DISCLAIMER = "AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
@@ -41,16 +51,23 @@
   function buildFindingModel(f) {
     f = f || {};
     var sev = sevInfo(f.severity);
+    // Exact AI confidence % from the model's operating-point-normalized score (when present). This is
+    // the model's raw confidence, not a calibrated posterior probability of disease — labelled "AI
+    // confidence" and always shown alongside "correlate clinically". Falls back to the band bar-width
+    // when no per-finding score is available (e.g. a reopened legacy record or the mock sample).
+    var pct = (f.prob == null || !isFinite(+f.prob)) ? null : Math.round(clamp01(f.prob) * 100);
     return {
-      label: f.label || "",
+      label: displayLabelOf(f.label),
+      rawLabel: f.label || "",
       band: f.band == null ? null : f.band,
       severity: f.severity || "info",
       severityLabel: sev.label,
       severityIcon: sev.icon,
       relevance: f.relevance || "",
       heatmap: f.heatmap || null,
-      confPct: bandToPct(f.band),         // internal bar-width mapping only
-      confLabel: f.band == null ? null : f.band   // the word shown to the user, e.g. "High"
+      confPct: bandToPct(f.band),         // internal band→bar-width mapping (fallback bar only)
+      confPctExact: pct,                  // real AI-confidence % (null when unavailable)
+      confLabel: f.band == null ? null : f.band   // the band word, e.g. "High"
     };
   }
 
@@ -562,7 +579,6 @@
       return;
     }
     var panels = buildPanelModels(a);
-    var dual = panels.length > 1;
 
     // OXIPIT-style: gather every finding that has a CAM heatmap into one ordered list, so the result
     // shows the X-RAY with a selectable heatmap overlaid on it (anatomical reference) instead of a
@@ -578,14 +594,19 @@
 
     function findingHtml(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
-      var conf = f.confPct == null ? "" :
+      var barPct = (f.confPctExact != null) ? f.confPctExact : f.confPct;
+      var confValTxt = (f.confPctExact != null)
+        ? (f.confPctExact + "%" + (f.confLabel ? " · " + f.confLabel : ""))
+        : (f.confLabel || "");
+      var confCaption = (f.confPctExact != null) ? "AI confidence" : "Confidence band";
+      var conf = barPct == null ? "" :
         '<div class="tx-conf">' +
-          '<div class="tx-conf-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + f.confPct + '" aria-valuetext="' + esc(f.confLabel) + '" aria-label="AI confidence band: ' + esc(f.confLabel) + '">' +
-            '<div class="tx-conf-fill" style="--tx-conf:' + f.confPct + '%"></div>' +
+          '<div class="tx-conf-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + barPct + '" aria-valuetext="' + esc(confValTxt) + '" aria-label="AI confidence: ' + esc(confValTxt) + '">' +
+            '<div class="tx-conf-fill" style="--tx-conf:' + barPct + '%"></div>' +
           "</div>" +
-          '<span class="tx-conf-val tx-data">' + esc(f.confLabel) + "</span>" +
+          '<span class="tx-conf-val tx-data">' + esc(confValTxt) + "</span>" +
         "</div>" +
-        '<div class="tx-conf-band">Confidence band</div>';
+        '<div class="tx-conf-band">' + confCaption + "</div>";
       // With the X-ray viewer present, the heatmap is shown OVERLAID on the image via a tap-to-localize
       // control; without an image (e.g. reopened from history), fall back to the standalone heatmap.
       var heat = (hasHeat && f.__heatIdx != null) ?
@@ -598,9 +619,19 @@
       "</div>";
     }
 
+    // Worst severity within a single panel — drives the pill shown on that version's collapsed header.
+    function panelSeverityKey(p) {
+      var worst = null, rank = 99;
+      (p.findings || []).forEach(function (f) {
+        var r = SEV_RANK.hasOwnProperty(f.severity) ? SEV_RANK[f.severity] : 98;
+        if (r < rank) { rank = r; worst = f.severity; }
+      });
+      return worst || (p.findings.length ? "info" : "stable");
+    }
+
+    // Inner body of one engine's panel (identity now lives on the collapsible header, so no tx-panel-head).
     function panelHtml(p) {
       var cls = "tx-panel" + (p.educational ? " tx-panel--learning" : "");
-      var badge = '<span class="tx-panel-badge">' + ic(p.educational ? "school" : "verified") + esc(p.engine) + "</span>";
       var eduBanner = p.educational ?
         '<div class="tx-edu-banner">' + ic("info") + "<span>Educational &mdash; not for clinical use</span></div>" : "";
       // Clean read: when nothing crosses the model's operating point, say so explicitly (never a blank
@@ -624,13 +655,25 @@
           '<button class="tx-btn tx-btn-secondary" type="button" data-act="tx-copy">' + ic("content_copy") + "Copy</button>" +
           '<button class="tx-btn tx-btn-secondary" type="button" data-act="tx-export">' + ic("picture_as_pdf") + "Export</button>" +
         "</div>";
-      return '<div class="' + cls + '">' +
-        '<div class="tx-panel-head"><div>' +
-          '<div class="tx-panel-eyebrow">' + (p.educational ? "Learning" : "Clinical") + "</div>" +
-          '<div class="tx-panel-title">' + (p.educational ? "Educational analysis" : "Clinical analysis") + "</div>" +
-          '<div class="tx-panel-engine">' + esc(p.engine) + "</div>" +
-        "</div>" + badge + "</div>" +
-        eduBanner + findingsHtml + whyLink + actions +
+      return '<div class="' + cls + '">' + eduBanner + findingsHtml + whyLink + actions + "</div>";
+    }
+
+    // Each engine renders as a COLLAPSIBLE version section (ThoreX v1 open by default, V2 Beta collapsed).
+    function collapsiblePanel(p, i, open) {
+      var name = engineDisplayName(p.engine);
+      var sevKey = panelSeverityKey(p);
+      var sev = sevInfo(sevKey);
+      var n = p.findings.length;
+      var sub = (p.educational ? "Educational" : "Clinical") + " · " + n + (n === 1 ? " finding" : " findings");
+      var bodyId = "txPanel" + i;
+      return '<div class="tx-vpanel' + (p.educational ? " tx-vpanel--learning" : "") + (open ? " is-open" : "") + '">' +
+        '<button type="button" class="tx-vpanel-head" data-act="tx-vpanel-toggle" aria-expanded="' + (open ? "true" : "false") + '" aria-controls="' + bodyId + '">' +
+          '<span class="tx-vpanel-ic">' + ic(p.educational ? "school" : "verified") + "</span>" +
+          '<span class="tx-vpanel-tt"><b class="tx-vpanel-name">' + esc(name) + "</b><span class=\"tx-vpanel-sub\">" + esc(sub) + "</span></span>" +
+          '<span class="tx-pill tx-pill--' + esc(sevKey) + '">' + ic(sev.icon) + "<span>" + sev.label + "</span></span>" +
+          '<span class="tx-vpanel-chev">' + ic("expand_more") + "</span>" +
+        "</button>" +
+        '<div class="tx-vpanel-body" id="' + bodyId + '"' + (open ? "" : " hidden") + ">" + panelHtml(p) + "</div>" +
       "</div>";
     }
 
@@ -649,10 +692,10 @@
     // that never replaces the existing dual-panel rendering above.
     var report = buildReportSafe(a);
     var reportSection = report ?
-      '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="false" aria-controls="txReportBody">' +
-        ic("description") + '<span class="tx-report-toggle-txt">Radiology report</span>' + ic("expand_more") +
+      '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="true" aria-controls="txReportBody">' +
+        ic("description") + '<span class="tx-report-toggle-txt">ThoreX AI — Radiology report</span>' + ic("expand_more") +
       "</button>" +
-      '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody" hidden>' + report.html + "</div>"
+      '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody">' + report.html + "</div>"
       : "";
 
     // Clinical correlation (thorex-correlate.js) — additive toggle, same pattern as the report toggle.
@@ -687,7 +730,7 @@
     var body =
       '<div class="tx-result-body">' +
         xrayViewer +
-        '<div class="tx-result-panels' + (dual ? " tx-dual" : "") + '">' + panels.map(panelHtml).join("") + "</div>" +
+        '<div class="tx-result-panels">' + panels.map(function (p, i) { return collapsiblePanel(p, i, i === 0); }).join("") + "</div>" +
         reportSection +
         correlateSection +
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
@@ -724,6 +767,21 @@
       });
       selectHeat(0, false);   // pre-select the top finding's heatmap
     }
+
+    // Collapsible version panels (ThoreX v1 / V2 Beta): expand/collapse each in place. Screen-internal,
+    // so not routed through the global click switch. A tap anywhere on the header toggles that panel.
+    Array.prototype.forEach.call(host.querySelectorAll('[data-act="tx-vpanel-toggle"]'), function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("aria-controls");
+        var pbody = id ? host.querySelector("#" + id) : null;
+        if (!pbody) return;
+        var open = pbody.hidden;
+        pbody.hidden = !open;
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        var wrap = btn.parentNode; if (wrap && wrap.classList) wrap.classList.toggle("is-open", open);
+        haptic("light");
+      });
+    });
 
     // Local (non-navigational) interaction, same pattern as renderQuality's ack checkbox: expand/
     // collapse the report body in place. "tx-report-toggle" is intentionally NOT in the global
