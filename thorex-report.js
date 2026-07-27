@@ -394,10 +394,12 @@
         '<ul class="tx-report-list">' + educational.items.map(function (it) {
           return '<li>' + esc(it.label) + (it.band ? ' <span class="tx-report-sevtag">' + esc(it.band) + '</span>' : '') + '</li>';
         }).join("") + '</ul></section>' : "";
+    // NB: no in-report disclaimer here — the result screen shows the mandatory disclaimer ONCE at its
+    // footer (avoids the disclaimer repeating in every sub-section). The plain-text report + the
+    // professional export document each still carry it (standalone artifacts).
     return '<div class="tx-report">' +
       '<h3 class="tx-report-title">ThoreX AI — Radiology report</h3>' +
       body + eduHtml +
-      '<div class="tx-report-disc">' + esc(MANDATORY_DISCLAIMER) + '</div>' +
     '</div>';
   }
 

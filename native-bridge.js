@@ -108,6 +108,20 @@
         .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
         .then(function (r) { return P.Share.share({ title: title || "StewardMD", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); });
     },
+    // Render a FULL HTML document to a real PDF natively (VisionOcr.htmlToPdf → WKWebView →
+    // UIPrintPageRenderer) and Share the .pdf. Rejects if the plugin/Share is missing so callers can
+    // fall back to sharing the HTML. `html` must be a complete <!doctype html> document.
+    sharePdfFromHtml: function (html, filename, title) {
+      var P = plugins();
+      var V = P && P.VisionOcr;
+      if (!(V && V.htmlToPdf && P.Share && P.Share.share)) return Promise.reject(new Error("pdf-unavailable"));
+      var name = (filename || "StewardMD-report").replace(/[^\w.-]+/g, "-");
+      return V.htmlToPdf({ html: String(html == null ? "" : html), filename: name }).then(function (res) {
+        var uri = res && (res.uri || res.path);
+        if (!uri) throw new Error("no-pdf");
+        return P.Share.share({ title: title || "StewardMD report", files: [uri], dialogTitle: "Save PDF / Print / Share" });
+      });
+    },
     // Native camera / photo picker → resolves to a data: URL string (rejects on cancel/error).
     // opts.camera → CAMERA; opts.prompt → PROMPT action sheet; else PHOTOS.
     pickImage: function (opts) {

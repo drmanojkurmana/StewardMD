@@ -1246,7 +1246,13 @@
               else { var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; ton = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); }
               return ton ? (
                 '<button class="rnav-tile tx-tile" data-act="thorex" aria-label="Open ThoreX AI — chest X-ray interpretation">' +
-                  '<div class="tx-tile-head"><span class="tx-tile-lungs">' + ric("pulmonology") + '</span><span class="tx-tile-pill">' + ric("bolt") + 'AI CXR</span></div>' +
+                  '<div class="tx-tile-head kx-tile-head"><span class="tx-tile-lungs">' + ric("pulmonology") + '</span><span class="tx-tile-pill">' + ric("bolt") + 'AI CXR</span></div>' +
+                  '<svg class="tx-tile-scan" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true">' +
+                    '<defs><linearGradient id="txScanGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(94,234,212,0)"/><stop offset=".5" stop-color="rgba(94,234,212,.6)"/><stop offset="1" stop-color="rgba(94,234,212,0)"/></linearGradient></defs>' +
+                    '<g fill="none" stroke="rgba(94,234,212,.5)" stroke-width="1.2" stroke-linecap="round"><path d="M6 5 q54 7 108 0"/><path d="M9 11 q51 7 102 0"/><path d="M12 17 q48 7 96 0"/><path d="M15 23 q45 7 90 0"/></g>' +
+                    '<line x1="60" y1="3" x2="60" y2="27" stroke="rgba(94,234,212,.32)" stroke-width="1.3"/>' +
+                    '<rect class="tx-scanline" x="-14" y="0" width="14" height="30" fill="url(#txScanGrad)"><animate attributeName="x" from="-14" to="120" dur="2.6s" repeatCount="indefinite"/></rect>' +
+                  '</svg>' +
                   '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
                 '</button>'
               ) : "";
