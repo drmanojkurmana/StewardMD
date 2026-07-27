@@ -113,10 +113,14 @@ export async function checkQuota(env, request, type, opts) {
   if (g.cost >= cfg.costHardStopInr && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
     return { ok: false, reason: "circuit-breaker", message: QUOTA_MSG, id };
   }
-  // per-user rate limit
+  // per-user rate limit. The "router" type (the always-on semantic parser) is EXEMPT: it is a tiny
+  // internal parse that precedes the real answer call, so it must neither consume the 3s cooldown nor
+  // block the answer that follows it ~0.5s later. Cost is still bounded by the token caps + breaker.
   const rlKey = "maik:rl:" + id;
-  const last = await readJson(store, rlKey);
-  if (last && (Date.now() - last.t) < cfg.rateSeconds * 1000) return { ok: false, reason: "rate", message: QUOTA_MSG, id };
+  if (type !== "router") {
+    const last = await readJson(store, rlKey);
+    if (last && (Date.now() - last.t) < cfg.rateSeconds * 1000) return { ok: false, reason: "rate", message: QUOTA_MSG, id };
+  }
 
   // per-user daily/monthly counters
   const uKey = "maik:u:" + id + ":" + day, mKey = "maik:m:" + id + ":" + month;
@@ -144,8 +148,8 @@ export async function checkQuota(env, request, type, opts) {
     if (pages > cfg.pdfPagesPerReport) return { ok: false, reason: "pdf-per-report", message: QUOTA_MSG, id };
     if (u.pdfPages + pages > cfg.pdfPagesDaily) return { ok: false, reason: "pdf-daily", message: QUOTA_MSG, id };
   }
-  // reserve the rate-limit slot immediately (best-effort; KV is not atomic)
-  await writeJson(store, rlKey, { t: Date.now() }, 60);
+  // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router is exempt (above).
+  if (type !== "router") await writeJson(store, rlKey, { t: Date.now() }, 60);
   return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type };
 }
 

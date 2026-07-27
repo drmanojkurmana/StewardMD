@@ -789,7 +789,7 @@ export async function onRequest(context) {
       // only explains when the KB can't. Tiny output (~120 tokens), temp 0.
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
-      const gate = await checkQuota(env, request, "general");
+      const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys =
         "You are a MEDICAL QUERY PARSER for a knowledge-base retrieval system. Read a clinician's query in ANY form — full terms, abbreviations, acronyms, eponyms, brand names, drug compositions, lab/serology/imaging codes, clinical shorthand, mnemonics, typos, British or American spelling — and output ONLY its medical MEANING as compact JSON. NEVER answer the medical question; only parse it.\n" +
