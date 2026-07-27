@@ -3075,6 +3075,29 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             return null;
           }
           var _kbOn = window.MaiKKB && maikKB() && !active;
+          // ── LOCAL-FIRST (latency): before the Vertex router (~3s), try a DETERMINISTIC, high-confidence,
+          // UNAMBIGUOUS KB answer → return INSTANTLY with ZERO Vertex/Gemini (~100ms). Safety gate (proven
+          // offline, 0 ambiguous-acronym leaks): not-complex + exact/canonical KB resolution (conf>=0.90)
+          // + a distinctive token of the resolved disease NAME present in the RAW (non-abbrev-expanded)
+          // query — so ambiguous acronyms (MS/DM/PE/RA) can NEVER bypass — + retrieval-grounding agreement
+          // + the mandatory reviewer. Anything that fails FALLS THROUGH to the router below (unchanged). ──
+          if (_kbOn) {
+            var _lf = (function () {
+              try {
+                if (window.MaiKKB.isComplex(question)) return null;                       // reasoning/comparison/latest/vignette → router
+                var kb = window.MaiKKB.compose(question, pkg, {});
+                if (!kb || !kb.text || kb.confidence < 0.90) return null;                 // exact/canonical ontology match ONLY
+                var _t = function (s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(function (w) { return w.length >= 4 && " acute chronic severe mild moderate syndrome disease disorder primary secondary type stage grade ".indexOf(" " + w + " ") < 0; }); };
+                var raw = _t(question), dz = _t(kb.disease);
+                if (!dz.length || !dz.some(function (t) { return raw.indexOf(t) >= 0; })) return null;   // no literal disease-name token in raw query → ambiguous/abbrev → router
+                var g = pkg && pkg.grounding && pkg.grounding[0];                          // retrieval validation: local match must agree with the retrieval grounding
+                if (g && g.name) { var gt = _t(g.name); if (gt.length && !gt.some(function (t) { return dz.indexOf(t) >= 0; }) && !dz.some(function (t) { return gt.indexOf(t) >= 0; })) return null; }
+                if (!reviewKB(kb, question, { primaryConcept: kb.disease })) return null;
+                return kb;
+              } catch (e) { return null; }
+            })();
+            if (_lf) { finishKB(_lf, pkg, "instant"); return; }                            // deterministic, unambiguous → instant, no Vertex
+          }
           // ── V4 — the UNIVERSAL SEMANTIC ROUTER runs on EVERY query (cached): parse the medical meaning
           // → canonical concept + intent → deterministic KB retrieval keyed on that concept; genuine
           // ambiguity → ask; reasoning → Gemini. Local resolution is the fallback when the router is
