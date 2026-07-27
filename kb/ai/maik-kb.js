@@ -37,6 +37,19 @@
     [/diarrhoea/g, "diarrhea"], [/tumour/g, "tumor"], [/gynaec/g, "gynec"], [/orthopaed/g, "orthoped"], [/foetal/g, "fetal"],
     [/caesar/g, "cesar"], [/oestrogen/g, "estrogen"], [/colour/g, "color"], [/dyspnoea/g, "dyspnea"], [/pyrexia/g, "fever"]];
   function medNorm(s) { var x = norm(s); for (var i = 0; i < SPELL.length; i++) x = x.replace(SPELL[i][0], SPELL[i][1]); return x; }
+  // Bounded Levenshtein for typo tolerance ("inspidus" -> "insipidus").
+  function lev(a, b) {
+    a = String(a); b = String(b); var m = a.length, n = b.length;
+    if (Math.abs(m - n) > 4) return 9; if (!m) return n; if (!n) return m;
+    var prev = [], cur = [], i, j;
+    for (j = 0; j <= n; j++) prev[j] = j;
+    for (i = 1; i <= m; i++) {
+      cur[0] = i;
+      for (j = 1; j <= n; j++) { var cost = a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1; cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost); }
+      for (j = 0; j <= n; j++) prev[j] = cur[j];
+    }
+    return prev[n];
+  }
   function cap(s) { s = String(s || ""); return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
   function arr(x) { return Array.isArray(x) ? x.filter(function (v) { return v != null && String(v).trim(); }) : (x ? [x] : []); }
   function clip(s, n) { s = String(s == null ? "" : s); return s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, "") + "…" : s; }
@@ -167,6 +180,19 @@
     }
     if (exact) return { it: exact, kind: "exact" };
     if (pfx) return { it: pfx, kind: "canonical" };
+    // typo tolerance — nearest disease name within a small edit distance ("diabetes inspidus"
+    // → "diabetes insipidus"). Pruned by first-letter + length so it stays fast over the index.
+    var thresh = Math.min(3, Math.floor(phrase.length * 0.22));
+    if (thresh >= 1) {
+      var fz = null, fzd = 99, c0 = phrase.charCodeAt(0);
+      for (var k = 0; k < idx.length; k++) {
+        var e = idx[k];
+        if (!e.key || e.key.charCodeAt(0) !== c0 || Math.abs(e.key.length - phrase.length) > thresh) continue;
+        var d = lev(e.key, phrase);
+        if (d < fzd) { fzd = d; fz = e; }
+      }
+      if (fz && fzd <= thresh) return { it: fz, kind: "fuzzy" };
+    }
     return null;
   }
   // Resolve the disease the question is about. Prefer a CANONICAL name match on the question's own
@@ -368,7 +394,7 @@
       if (!res || !res.ok || !res.text) return null;                // KB lacks the field → Gemini
       // confidence calibrated to HOW the disease resolved (the >85% KB gate keys off this):
       //   exact name match 0.95 · canonical (term+qualifier) 0.90 · engine-grounded 0.85 · fuzzy/assume <0.85 (defer)
-      var conf = ({ exact: 0.95, canonical: 0.90, grounding: 0.85, assume: 0.60, fallback: 0.55 })[t.match] || 0.80;
+      var conf = ({ exact: 0.95, canonical: 0.90, fuzzy: 0.87, grounding: 0.85, assume: 0.60, fallback: 0.55 })[t.match] || 0.80;
       if ((intent === "treatment" || intent === "dose") && t.T && t.T.default) conf = Math.min(0.97, conf + 0.02);
       var text = res.text + refineLine(t, intent);
       return { text: text, confidence: conf, intent: intent, mode: "kb-instant", disease: t.name, evidence: citeSrc(t) };

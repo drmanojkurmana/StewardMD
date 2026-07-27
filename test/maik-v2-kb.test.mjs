@@ -89,6 +89,15 @@ test("COVERAGE: knowledge questions answer deterministically with correct intent
   }
 });
 
+test("TYPO TOLERANCE: misspelled disease names resolve to the correct disease (not a lexical near-miss)", () => {
+  const r1 = compose("what is diabetes inspidus");   // misspelled 'insipidus'
+  assert.ok(r1 && /insipidus/i.test(r1.text), "diabetes inspidus -> Diabetes insipidus");
+  assert.ok(!/latent autoimmune/i.test(r1.text), "must NOT resolve to LADA");
+  const r2 = compose("what is nephrotic syndrom");
+  assert.ok(r2 && /nephrotic/i.test(r2.text), "nephrotic syndrom -> Nephrotic syndrome");
+  assert.strictEqual(compose("what is xyzqwerty"), null, "gibberish must not fuzzy-match to a disease");
+});
+
 test("FIDELITY: dose is quoted from the KB, not invented", () => {
   const r = compose("dose of ceftriaxone in severe CAP");
   assert.ok(r && /ceftriaxone/i.test(r.text));
