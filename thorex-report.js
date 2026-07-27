@@ -125,9 +125,35 @@
    * The ranked findings re-presented as diagnostic considerations, each with the AI confidence % (raw
    * model confidence, NOT a calibrated posterior). "Clinical correlation advised" is appended verbatim
    * — a single frontal film is screening-level; every consideration needs correlation. */
+  // Radiographic finding → candidate DISEASES (a real differential, not a re-listing of the sign).
+  // Infectious causes are called out because a sign like a cavity is most urgently an infection until
+  // proven otherwise. Deterministic, screening-level; every item still needs clinical correlation.
+  var DDX_RULES = [
+    { re: /cavity|cavit/i, dx: "Lung abscess, pulmonary tuberculosis, cavitating bronchogenic carcinoma, fungal infection (aspergilloma/mucormycosis), septic pulmonary emboli, necrotizing pneumonia (Klebsiella/Staph/anaerobes), granulomatosis with polyangiitis" },
+    { re: /\bmass\b/i, dx: "Bronchogenic carcinoma, metastasis, lung abscess, granuloma (TB/fungal), hamartoma, hydatid cyst, round pneumonia" },
+    { re: /nodule/i, dx: "Granuloma (TB/histoplasmosis), primary or metastatic malignancy, hamartoma, rheumatoid nodule, arteriovenous malformation, early abscess" },
+    { re: /consolidation|airspace|air ?bronchogram/i, dx: "Bacterial pneumonia, tuberculosis, aspiration pneumonia, organizing pneumonia, pulmonary infarction, alveolar haemorrhage, lymphoma" },
+    { re: /pneumonia/i, dx: "Bacterial (S. pneumoniae, Klebsiella, Staph), atypical (Mycoplasma, Legionella, Chlamydia), viral (influenza/COVID), tuberculosis, fungal, PJP if immunocompromised" },
+    { re: /infiltrat|lung opacity|opacit/i, dx: "Pneumonia (bacterial/viral/atypical), pulmonary oedema, tuberculosis, aspiration, interstitial lung disease, pulmonary haemorrhage" },
+    { re: /effusion/i, dx: "Parapneumonic effusion / empyema, tuberculous pleuritis, malignant effusion, heart failure, pulmonary embolism, hepatic hydrothorax" },
+    { re: /pneumothorax/i, dx: "Spontaneous (tall/thin, ruptured bleb), secondary (COPD, TB, PCP, cavitating infection), traumatic, iatrogenic" },
+    { re: /edema|oedema/i, dx: "Cardiogenic pulmonary oedema (heart failure), ARDS, fluid overload / renal failure, neurogenic oedema" },
+    { re: /cardiomegaly/i, dx: "Heart failure, dilated cardiomyopathy, pericardial effusion, valvular heart disease" },
+    { re: /atelectasis/i, dx: "Mucus plugging, obstructing tumour or foreign body, compressive (effusion/mass), post-operative hypoventilation" },
+    { re: /fibrosis|interstitial|reticular/i, dx: "Idiopathic pulmonary fibrosis, connective-tissue-disease ILD, chronic hypersensitivity pneumonitis, post-TB fibrosis, pneumoconiosis, drug-induced" },
+    { re: /emphysema|hyperinflat/i, dx: "COPD / emphysema, asthma, bronchiolitis, α1-antitrypsin deficiency" },
+    { re: /hilar|adenopathy|lymph/i, dx: "Sarcoidosis, tuberculosis, lymphoma, metastatic nodal disease, fungal infection" },
+    { re: /fracture/i, dx: "Traumatic fracture; if atraumatic consider pathological fracture (metastasis, myeloma)" },
+    { re: /pleural thickening/i, dx: "Sequela of prior infection / empyema, tuberculosis, asbestos exposure, mesothelioma" }
+  ];
+  function ddxFor(label) {
+    label = str(label);
+    for (var i = 0; i < DDX_RULES.length; i++) if (DDX_RULES[i].re.test(label)) return DDX_RULES[i].dx;
+    return null;
+  }
   function buildDifferential(findingItems) {
     return findingItems.map(function (it) {
-      return { label: it.label, confPct: it.confPct, band: it.band, severityLabel: it.severityLabel };
+      return { label: it.label, confPct: it.confPct, band: it.band, severityLabel: it.severityLabel, dx: ddxFor(it.label) };
     });
   }
 
@@ -307,6 +333,7 @@
         } else {
           s.items.forEach(function (d) {
             lines.push("- " + d.label + (d.confPct != null ? " — " + d.confPct + "% AI confidence" : "") + (d.band ? " (" + d.band + ")" : ""));
+            if (d.dx) lines.push("    Consider: " + d.dx + ".");
           });
         }
         lines.push("Clinical correlation advised.");
@@ -371,7 +398,8 @@
         body = '<ul class="tx-report-list tx-report-ddx">' + s.items.map(function (d) {
           var conf = (d.confPct != null) ? '<span class="tx-report-conf">' + d.confPct + '%</span>' : '';
           var band = d.band ? ' <span class="tx-report-sevtag">' + esc(d.band) + '</span>' : '';
-          return '<li><span class="tx-report-ddx-name"><b>' + esc(d.label) + '</b>' + band + '</span>' + conf + '</li>';
+          var dxLine = d.dx ? '<div class="tx-report-ddx-dx">Consider: ' + esc(d.dx) + '.</div>' : '';
+          return '<li><div class="tx-report-ddx-top"><span class="tx-report-ddx-name"><b>' + esc(d.label) + '</b>' + band + '</span>' + conf + '</div>' + dxLine + '</li>';
         }).join("") + '</ul>';
       }
       return '<section class="tx-report-sec"><h4 class="tx-report-h">' + esc(s.title) + '</h4>' + body +
@@ -426,7 +454,7 @@
     "h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;border-bottom:1.5px solid #0f766e;padding-bottom:3px;margin:16px 22px 8px}" +
     "ul{margin:0 22px 8px;padding-left:20px}li{margin-bottom:4px}" +
     ".impression{margin:0 22px 8px;font-weight:800}" +
-    ".ddx .conf{font-weight:800;color:#0f766e}.ddx .band{font-size:11px;color:#64748b}" +
+    ".ddx li{margin-bottom:6px}.ddx .conf{font-weight:800;color:#0f766e}.ddx .band{font-size:11px;color:#64748b}.ddx .ddxdx{font-size:11.5px;line-height:1.5;color:#475569;margin-top:2px}" +
     ".warn{margin:14px 22px;padding:12px 14px;border:1.5px solid #b45309;background:#fffbeb;border-radius:8px;font-size:11.5px;line-height:1.5;color:#7c2d12;display:flex;flex-direction:column;gap:4px}.warn b{color:#b45309}" +
     ".sign{display:flex;gap:30px;margin:24px 22px 6px}.sig{flex:1;font-size:11px;color:#64748b}.sig-line{border-top:1.5px solid #94a3b8;margin-bottom:5px;height:24px}" +
     ".foot{display:flex;justify-content:space-between;gap:8px;padding:12px 22px;margin-top:10px;border-top:3px solid #0f766e;font-size:10.5px;color:#64748b;background:#f8fafc}" +
@@ -451,7 +479,8 @@
     var ddxList = ddxItems.length
       ? ddxItems.map(function (d) {
           return '<li><b>' + esc(d.label) + '</b>' + (d.confPct != null ? ' — <span class="conf">' + d.confPct + '%</span>' : '') +
-            (d.band ? ' <span class="band">' + esc(d.band) + '</span>' : '') + '</li>';
+            (d.band ? ' <span class="band">' + esc(d.band) + '</span>' : '') +
+            (d.dx ? '<div class="ddxdx">Consider: ' + esc(d.dx) + '.</div>' : '') + '</li>';
         }).join("")
       : '<li>No differential considerations crossed the AI operating threshold.</li>';
     var advice = arr(S.recommendations.items).map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") +

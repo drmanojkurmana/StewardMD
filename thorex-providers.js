@@ -190,7 +190,11 @@
         // self-elevate beyond what the entitlement allows (same rule the remote/mock paths follow).
         var runOpts = {
           id: image && image.id,
-          includeEducational: entitlement === "v2beta",
+          // Everyone with ThoreX access runs BOTH on-device engines (Clinical Engine 1 + the educational
+          // Engine 2). No entitlement/Pro gate here — the educational engine is still clearly labelled
+          // "educational, not for clinical use" and an educational-engine failure is isolated inside
+          // analyzeImage() (clinical-only result), so this never blocks or fabricates.
+          includeEducational: true,
           // Model download progress (0..1, threaded from thorex-ort.js's loadModelBytes via
           // thorex-model-cache.js) surfaces as this same "download-model" stage — on a cache hit (every
           // run after the first) this fires ~immediately at 1.0; on a cold cache it ticks up as bytes

@@ -113,6 +113,20 @@ assert.ok(/Hyperinflation/.test(emphysemaReport.html) && !/>Emphysema</.test(emp
 assert.equal(M.displayLabel("Emphysema"), "Hyperinflation (possible emphysema)", "models.displayLabel should reframe Emphysema");
 assert.equal(M.displayLabel("Pneumothorax"), "Pneumothorax", "displayLabel should pass through labels with no reframe");
 
+// ── differential diagnosis maps a radiographic finding to candidate DISEASES incl. infections ──
+const cavityReport = R.buildReport(M.makeAnalysis({
+  engines: [
+    { engine: "torchxrayvision", educational: false, findings: [{ label: "Cavity", prob: 0.82, band: "High", severity: "urgent", relevance: "Cavitating lesion." }] }
+  ]
+}));
+const cavityDdx = cavityReport.sections.differential.items[0];
+assert.ok(cavityDdx.dx && /lung abscess/i.test(cavityDdx.dx) && /tuberculosis/i.test(cavityDdx.dx), "a cavity's differential must include lung abscess + TB");
+assert.ok(/Consider:.*lung abscess/i.test(cavityReport.html), "the report html must render the disease differential for the cavity");
+const cavityPro = R.buildProDocument(M.makeAnalysis({
+  engines: [{ engine: "torchxrayvision", educational: false, findings: [{ label: "Cavity", prob: 0.82, band: "High", severity: "urgent" }] }]
+}), {});
+assert.ok(/lung abscess/i.test(cavityPro), "the exported PDF document must include the disease differential");
+
 // ── confidence tiers: a lone 50% (operating-point) finding must read "may be normal", NOT a diagnosis ──
 const fiftyReport = R.buildReport(M.makeAnalysis({
   engines: [
