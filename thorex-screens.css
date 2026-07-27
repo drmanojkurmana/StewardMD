@@ -578,3 +578,21 @@
 /* Focus visibility for the generic screens' interactive elements */
 #thorexRoot .tx-set-row:focus-within,
 #thorexRoot .tx-rec:focus-visible { outline: 2px solid var(--tx-primary); outline-offset: 2px; }
+
+/* ── OXIPIT-style result: X-ray with a selectable heatmap overlaid on the anatomy ─────────────── */
+.tx-xray{position:relative;width:100%;border-radius:14px;overflow:hidden;background:#0b0f14;margin:0 0 12px;line-height:0;box-shadow:0 1px 0 rgba(255,255,255,.04) inset}
+.tx-xray-base{display:block;width:100%;height:auto}
+.tx-xray-heat{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;opacity:.88;filter:blur(7px) saturate(1.2);transition:opacity .2s ease}
+.tx-xray-heat[hidden]{display:none}
+.tx-xray-badge{position:absolute;left:10px;top:10px;display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font:600 11px/1 var(--sans,system-ui);backdrop-filter:blur(4px)}
+.tx-xray-badge .material-symbols-rounded{font-size:14px}
+.tx-heat-strip{display:flex;gap:8px;overflow-x:auto;padding:0 0 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tx-heat-strip::-webkit-scrollbar{display:none}
+.tx-heat-chip{flex:0 0 auto;padding:7px 13px;border-radius:999px;border:1px solid var(--tx-border,#2a3746);background:var(--tx-card,#141b24);color:var(--tx-ink,#e6edf3);font:600 12.5px/1 var(--sans,system-ui);cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.tx-heat-chip.is-active{background:#d7263d;border-color:#d7263d;color:#fff}
+.tx-heat-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 11px;border-radius:9px;border:1px solid var(--tx-border,#2a3746);background:transparent;color:var(--tx-teal,#12b3a0);font:600 12px/1 var(--sans,system-ui);cursor:pointer}
+.tx-heat-btn .material-symbols-rounded{font-size:15px}
+.tx-heat-btn:active{transform:scale(.97)}
+/* honest indeterminate state for the model-download stage (native can't stream byte-progress) */
+.tx-stage.is-indeterminate [data-stage-fill],.tx-stage.is-indeterminate .tx-stage-fill{animation:tx-indet 1.1s ease-in-out infinite}
+@keyframes tx-indet{0%{opacity:.3}50%{opacity:.85}100%{opacity:.3}}

@@ -398,7 +398,17 @@
         var f = row.querySelector("[data-stage-fill]");
         row.classList.remove("is-done", "is-active", "is-pending");
         if (i < idx) { row.classList.add("is-done"); if (g) g.textContent = "check_circle"; if (v) v.textContent = "done"; if (f) f.style.width = "100%"; }
-        else if (i === idx) { row.classList.add("is-active"); if (g) g.textContent = "progress_activity"; if (v) v.textContent = (pct || 0) + "%"; if (f) f.style.width = (pct || 0) + "%"; }
+        else if (i === idx) {
+          row.classList.add("is-active"); if (g) g.textContent = "progress_activity";
+          // Native CapacitorHttp can't stream byte-progress, so the model download reports no real
+          // 0..100 — show an HONEST indeterminate state ("…" + a pulsing bar) instead of a fake 100%.
+          var realPct = (typeof pct === "number" && pct > 0 && pct < 100);
+          if (STAGES[i].key === "download-model" && !realPct) {
+            row.classList.add("is-indeterminate"); if (v) v.textContent = "…"; if (f) f.style.width = "45%";
+          } else {
+            row.classList.remove("is-indeterminate"); if (v) v.textContent = (pct || 0) + "%"; if (f) f.style.width = (pct || 0) + "%";
+          }
+        }
         else { row.classList.add("is-pending"); if (g) g.textContent = "radio_button_unchecked"; if (v) v.textContent = "–"; if (f) f.style.width = "0%"; }
       });
       setPct(typeof pct === "number" ? pct : Math.round(((idx + 1) / STAGES.length) * 100));
@@ -554,6 +564,17 @@
     var panels = buildPanelModels(a);
     var dual = panels.length > 1;
 
+    // OXIPIT-style: gather every finding that has a CAM heatmap into one ordered list, so the result
+    // shows the X-RAY with a selectable heatmap overlaid on it (anatomical reference) instead of a
+    // floating red blob. Each finding-with-heatmap becomes tap-to-localize.
+    var heatList = [];
+    panels.forEach(function (p) {
+      (p.findings || []).forEach(function (f) {
+        if (f.heatmap) { f.__heatIdx = heatList.length; heatList.push({ label: f.label, heatmap: f.heatmap }); }
+      });
+    });
+    var hasXray = !!(a && a.__xrayUrl) && heatList.length > 0;
+
     function findingHtml(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
       var conf = f.confPct == null ? "" :
@@ -564,8 +585,11 @@
           '<span class="tx-conf-val tx-data">' + esc(f.confLabel) + "</span>" +
         "</div>" +
         '<div class="tx-conf-band">Confidence band</div>';
-      var heat = f.heatmap ?
-        '<div class="tx-heatmap"><img class="tx-heatmap-overlay" src="data:image/png;base64,' + f.heatmap + '" alt="' + esc(f.label) + ' Grad-CAM heatmap overlay" /><span class="tx-heatmap-cap">HEATMAP</span></div>' : "";
+      // With the X-ray viewer present, the heatmap is shown OVERLAID on the image via a tap-to-localize
+      // control; without an image (e.g. reopened from history), fall back to the standalone heatmap.
+      var heat = (hasXray && f.__heatIdx != null) ?
+        '<button type="button" class="tx-heat-btn" data-heat-idx="' + f.__heatIdx + '">' + ic("my_location") + '<span>Localize on X-ray</span></button>' :
+        (f.heatmap ? '<div class="tx-heatmap"><img class="tx-heatmap-overlay" src="data:image/png;base64,' + f.heatmap + '" alt="' + esc(f.label) + ' Grad-CAM heatmap overlay" /><span class="tx-heatmap-cap">HEATMAP</span></div>' : "");
       return '<div class="tx-finding">' +
         '<div class="tx-finding-row"><span class="tx-finding-name">' + esc(f.label) + "</span>" + pill + "</div>" +
         (f.relevance ? '<div class="tx-finding-loc">' + esc(f.relevance) + "</div>" : "") +
@@ -634,8 +658,24 @@
       "</button>" +
       '<div class="tx-report-wrap" id="txCorrBody" data-hook="correlateBody" hidden>' + correlateFormHtml(gathered) + "</div>";
 
+    // X-ray viewer: the source image with a selectable heatmap overlaid (like OXIPIT). Chips = each
+    // finding-with-heatmap; tapping one localizes it on the anatomy. Only when we have both an image
+    // and at least one heatmap (else the finding cards keep their inline/standalone heatmap).
+    var xrayViewer = hasXray ?
+      '<div class="tx-xray" data-hook="txXray">' +
+        '<img class="tx-xray-base" src="' + esc(a.__xrayUrl) + '" alt="Chest X-ray under analysis" />' +
+        '<img class="tx-xray-heat" data-hook="txXrayHeat" alt="" hidden />' +
+        '<div class="tx-xray-badge" data-hook="txHeatLabel">' + ic("my_location") + '<span>Heatmap</span></div>' +
+      "</div>" +
+      '<div class="tx-heat-strip" role="tablist" aria-label="Finding heatmaps">' +
+        heatList.map(function (h, i) {
+          return '<button type="button" class="tx-heat-chip' + (i === 0 ? " is-active" : "") + '" data-heat-idx="' + i + '" role="tab" aria-selected="' + (i === 0 ? "true" : "false") + '">' + esc(h.label) + "</button>";
+        }).join("") +
+      "</div>" : "";
+
     var body =
       '<div class="tx-result-body">' +
+        xrayViewer +
         '<div class="tx-result-panels' + (dual ? " tx-dual" : "") + '">' + panels.map(panelHtml).join("") + "</div>" +
         reportSection +
         correlateSection +
@@ -648,6 +688,31 @@
       var v = el.style.getPropertyValue ? el.style.getPropertyValue("--tx-conf") : "";
       if (v) el.style.setProperty("--tx-conf", v);
     });
+
+    // X-ray heatmap selector: tap a chip (or a finding's "Localize" button) → overlay that finding's
+    // CAM heatmap on the X-ray. Screen-internal, so not routed through the global click switch.
+    if (hasXray) {
+      var heatImg = host.querySelector('[data-hook="txXrayHeat"]');
+      var heatLabelEl = host.querySelector('[data-hook="txHeatLabel"] span');
+      var selectHeat = function (i, fromUser) {
+        var h = heatList[i]; if (!h || !heatImg) return;
+        heatImg.src = "data:image/png;base64," + h.heatmap; heatImg.hidden = false;
+        if (heatLabelEl) heatLabelEl.textContent = h.label;
+        Array.prototype.forEach.call(host.querySelectorAll(".tx-heat-chip"), function (el) {
+          var on = String(el.getAttribute("data-heat-idx")) === String(i);
+          el.classList.toggle("is-active", on); el.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        if (fromUser) haptic("light");
+      };
+      Array.prototype.forEach.call(host.querySelectorAll("[data-heat-idx]"), function (btn) {
+        btn.addEventListener("click", function () {
+          var i = parseInt(btn.getAttribute("data-heat-idx"), 10) || 0;
+          selectHeat(i, true);
+          try { var v = host.querySelector('[data-hook="txXray"]'); if (v && v.scrollIntoView) v.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch (e) {}
+        });
+      });
+      selectHeat(0, false);   // pre-select the top finding's heatmap
+    }
 
     // Local (non-navigational) interaction, same pattern as renderQuality's ack checkbox: expand/
     // collapse the report body in place. "tx-report-toggle" is intentionally NOT in the global
@@ -882,6 +947,7 @@
 
   function finishPipeline(a) {
     state.analysis = a; state.running = false; state.emptyReason = null;
+    try { if (a && state._xrayUrl) a.__xrayUrl = state._xrayUrl; } catch (e) {}   // transient display-only URL (never persisted)
     try { var P = providers(); if (P && P.cxrStore && P.cxrStore.save) P.cxrStore.save(a); } catch (e) {}
     state.stack = ["landing"]; go("result"); haptic("success");
     try {
@@ -897,6 +963,15 @@
   function runPipeline(image) {
     if (state.running) return;
     state.running = true;
+    // Keep a display URL of the source X-ray so the result screen can render the heatmap OVERLAID on
+    // the actual image (anatomical reference), OXIPIT-style, instead of a floating heatmap.
+    try {
+      if (state._xrayUrl && state._xrayUrl.indexOf("blob:") === 0) { try { URL.revokeObjectURL(state._xrayUrl); } catch (e) {} }
+      state._xrayUrl = null;
+      var _b = image && (image.blob instanceof Blob ? image.blob : (image instanceof Blob ? image : null));
+      if (_b) state._xrayUrl = URL.createObjectURL(_b);
+      else if (image && typeof image.dataUrl === "string") state._xrayUrl = image.dataUrl;
+    } catch (e) { state._xrayUrl = null; }
     var entitlement = resolveEntitlement();
     var P = providers();
     show("processing");
