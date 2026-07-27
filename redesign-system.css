@@ -329,7 +329,9 @@ body.dark {
 #homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
 #homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
 #homeV2.rnav .rnav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-#homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; box-sizing: border-box; min-height: 120px; justify-content: flex-start; }
+/* graphic tiles (kx / fx / tx) put the label at the BOTTOM so all cells read consistently */
+#homeV2.rnav .kx-tile, #homeV2.rnav .fx-tile, #homeV2.rnav .tx-tile { justify-content: space-between; }
 #homeV2.rnav .rnav-tile .rds-icon { color: var(--rds-primary); font-size: 24px; margin-bottom: 2px; }
 #homeV2.rnav .rnav-tile-tt { font: 700 14px var(--rds-font); color: var(--rds-ink); }
 #homeV2.rnav .rnav-tile-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); }
@@ -356,6 +358,20 @@ body.dark {
 #homeV2.rnav .fx-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 3px 7px; border-radius: 999px; background: rgba(255,255,255,.12); color: #fdf0dd; }
 #homeV2.rnav .fx-pill .rds-icon { font-size: 12px; }
 #homeV2.rnav .fx-tile-fundus { width: 100%; height: 24px; margin: 4px 0 2px; display: block; }
+/* ThoreX AI — matching compact widget (dark-teal card + teal glow + live chest-scan graphic). */
+#homeV2.rnav .tx-tile { position: relative; overflow: hidden; isolation: isolate; border-color: transparent; color: #fff; background: linear-gradient(155deg, #0e3a3f, #0c2730, #0a1a22); gap: 2px; }
+#homeV2.rnav .tx-tile::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(120% 85% at 85% 0%, rgba(45,212,191,.30), transparent 60%); }
+#homeV2.rnav .tx-tile > * { position: relative; z-index: 1; }
+#homeV2.rnav .tx-tile .rnav-tile-tt { color: #fff; }
+#homeV2.rnav .tx-tile .rnav-tile-sub { color: rgba(224,251,247,.72); }
+#homeV2.rnav .tx-tile-head { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+#homeV2.rnav .tx-tile-lungs { color: #5eead4; display: inline-flex; animation: txTileBreathe 3.4s ease-in-out infinite; }
+#homeV2.rnav .tx-tile-lungs .rds-icon { font-size: 20px; }
+#homeV2.rnav .tx-tile-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 3px 7px; border-radius: 999px; background: rgba(255,255,255,.12); color: #dffaf3; }
+#homeV2.rnav .tx-tile-pill .rds-icon { font-size: 12px; }
+#homeV2.rnav .tx-tile-scan { width: 100%; height: 24px; margin: 4px 0 2px; display: block; }
+@keyframes txTileBreathe { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.12); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #homeV2.rnav .tx-tile-lungs { animation: none; } #homeV2.rnav .tx-tile .tx-scanline { display: none; } }
 #homeV2.rnav .rnav-alert { width: 100%; text-align: left; cursor: pointer; }
 #homeV2.rnav .rnav-resume { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; }
 #homeV2.rnav .rnav-resume-ic { color: var(--rds-primary); font-size: 28px; }

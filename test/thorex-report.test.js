@@ -74,7 +74,9 @@ const DISCLAIMER =
   "AI-generated findings are intended to assist qualified healthcare professionals and must always be interpreted in conjunction with clinical assessment, radiologist review where appropriate, laboratory findings and other investigations.";
 assert.equal(R.MANDATORY_DISCLAIMER, DISCLAIMER, "MANDATORY_DISCLAIMER must match the spec text verbatim");
 assert.ok(report.text.indexOf(DISCLAIMER) >= 0, "the rendered text report must contain the mandatory disclaimer verbatim");
-assert.ok(report.html.indexOf(DISCLAIMER) >= 0, "the rendered html report must contain the mandatory disclaimer verbatim");
+// The in-app report FRAGMENT no longer repeats the disclaimer (the result screen shows it ONCE at its
+// footer); the standalone text report + the professional export document still carry it.
+assert.ok(report.html.indexOf(DISCLAIMER) < 0, "the in-app report html must NOT repeat the disclaimer (deduped to the screen footer)");
 
 // ── html is a `.tx-report` block ──
 assert.ok(/class="tx-report"/.test(report.html), "html should render a .tx-report container");

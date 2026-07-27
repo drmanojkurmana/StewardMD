@@ -2,19 +2,89 @@ import Foundation
 import Capacitor
 import Vision
 import UIKit
+import WebKit
 
 /**
  * On-device OCR via Apple's Vision framework. The image is decoded and recognized
  * entirely on the device — nothing is uploaded. Only recognized text is returned to JS.
  * Exposed to JS as `Capacitor.Plugins.VisionOcr.detectText({ base64Image })`.
+ *
+ * Also exposes `htmlToPdf({ html, filename })` — renders a full HTML document in an offscreen
+ * WKWebView (faithful CSS/images), paginates it into an A4 PDF via UIPrintPageRenderer, writes the
+ * .pdf to the temp dir, and returns its file URI so JS can Share it (a real PDF, not an HTML file).
  */
 @objc(VisionOcrPlugin)
-public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin {
+public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
     public let identifier = "VisionOcrPlugin"
     public let jsName = "VisionOcr"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "detectText", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "detectText", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "htmlToPdf", returnType: CAPPluginReturnPromise)
     ]
+
+    // Retained while a PDF render is in flight (WKWebView + the pending JS promise).
+    private var pdfWebView: WKWebView?
+    private var pdfCall: CAPPluginCall?
+    private var pdfFilename: String = "StewardMD-report"
+
+    @objc func htmlToPdf(_ call: CAPPluginCall) {
+        guard let html = call.getString("html"), !html.isEmpty else { call.reject("Missing html"); return }
+        self.pdfFilename = (call.getString("filename") ?? "StewardMD-report")
+        DispatchQueue.main.async {
+            self.pdfCall = call
+            // A4 @72dpi so the print renderer paginates against a real page size.
+            let wv = WKWebView(frame: CGRect(x: 0, y: 0, width: 595, height: 842))
+            wv.navigationDelegate = self
+            self.pdfWebView = wv
+            wv.loadHTMLString(html, baseURL: nil)
+        }
+    }
+
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard self.pdfCall != nil else { return }
+        // Let images / layout settle a beat before paginating.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
+            guard let self = self, let call = self.pdfCall else { return }
+            let pageWidth: CGFloat = 595.2, pageHeight: CGFloat = 841.8   // A4 points
+            let margin: CGFloat = 24
+            let paper = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
+            let printable = paper.insetBy(dx: margin, dy: margin)
+            let renderer = UIPrintPageRenderer()
+            renderer.addPrintFormatter(webView.viewPrintFormatter(), startingAtPageAt: 0)
+            renderer.setValue(NSValue(cgRect: paper), forKey: "paperRect")
+            renderer.setValue(NSValue(cgRect: printable), forKey: "printableRect")
+            let data = NSMutableData()
+            UIGraphicsBeginPDFContextToData(data, paper, nil)
+            let pages = max(1, renderer.numberOfPages)
+            for i in 0..<pages {
+                UIGraphicsBeginPDFPage()
+                renderer.drawPage(at: i, in: UIGraphicsGetPDFContextBounds())
+            }
+            UIGraphicsEndPDFContext()
+
+            self.pdfWebView = nil
+            self.pdfCall = nil
+            let safe = self.pdfFilename.components(separatedBy: CharacterSet(charactersIn: "/\\?%*|\"<>")).joined()
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent(safe + ".pdf")
+            do {
+                try data.write(to: url, options: .atomic)
+                call.resolve(["uri": url.absoluteString, "path": url.path])
+            } catch {
+                call.reject("Could not write PDF: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.pdfWebView = nil
+        self.pdfCall?.reject(error.localizedDescription)
+        self.pdfCall = nil
+    }
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.pdfWebView = nil
+        self.pdfCall?.reject(error.localizedDescription)
+        self.pdfCall = nil
+    }
 
     @objc func detectText(_ call: CAPPluginCall) {
         guard var b64 = call.getString("base64Image"), !b64.isEmpty else {

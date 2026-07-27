@@ -552,7 +552,8 @@
         '<div class="tx-why-ai-label">' + ic("auto_awesome") + "<span>Educational &middot; AI-generated &middot; not a diagnosis</span></div>" +
         '<div class="tx-why-ai-body"><span>' + esc(res.narrative) + "</span></div>" +
       "</div>" : "";
-    return body + narrative + '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>";
+    // No disclaimer here — the result screen shows the mandatory disclaimer ONCE at its footer.
+    return body + narrative;
   }
   // Local (non-navigational) interaction, same pattern as the report toggle: expand/collapse + wire the
   // "Correlate" button. "tx-correlate-toggle" is intentionally NOT in the global onClick switch (screen-
@@ -602,28 +603,24 @@
     }
     var panels = buildPanelModels(a);
 
-    // OXIPIT-style: gather every finding that has a CAM heatmap into one ordered list, so the result
-    // shows the X-RAY with a selectable heatmap overlaid on it (anatomical reference) instead of a
-    // floating red blob. Each finding-with-heatmap becomes tap-to-localize.
-    var heatList = [];
-    panels.forEach(function (p) {
-      (p.findings || []).forEach(function (f) {
-        if (f.heatmap) { f.__heatIdx = heatList.length; heatList.push({ label: f.label, heatmap: f.heatmap }); }
-      });
-    });
     // A finding is a real POSITIVE only above the 50% operating point. At/below 50% it's a
     // below-threshold signal → the read is "possibly normal", not an abnormality.
     function isPositive(f) {
       if (f.confPctExact != null) return f.confPctExact > 50;
       return f.band === "High" || f.band === "Medium"; // legacy records without a per-finding %
     }
-    var anyPositive = false;
-    panels.forEach(function (p) { if (!p.educational) (p.findings || []).forEach(function (f) { if (isPositive(f)) anyPositive = true; }); });
+    // OXIPIT-style: gather CAM heatmaps to overlay on the X-RAY. ONLY for POSITIVE (>50%) findings, from
+    // any engine — a possibly-normal film has none (no alarming blob), and we NEVER render a heatmap as a
+    // standalone black box; it only ever overlays the actual film (anatomical reference).
+    var heatList = [];
+    panels.forEach(function (p) {
+      (p.findings || []).forEach(function (f) {
+        if (f.heatmap && isPositive(f)) { f.__heatIdx = heatList.length; heatList.push({ label: f.label, heatmap: f.heatmap }); }
+      });
+    });
 
     var hasImage = !!(a && a.__xrayUrl);          // show the X-ray whenever we have it (incl. clean reads)
-    // Overlay the red heatmap ONLY when there's a real (>50%) positive finding — never paint an alarming
-    // blob on a possibly-normal film.
-    var hasHeat = hasImage && heatList.length > 0 && anyPositive;
+    var hasHeat = hasImage && heatList.length > 0;
 
     function findingHtml(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
@@ -640,11 +637,10 @@
           '<span class="tx-conf-val tx-data">' + esc(confValTxt) + "</span>" +
         "</div>" +
         '<div class="tx-conf-band">' + confCaption + "</div>";
-      // With the X-ray viewer present, the heatmap is shown OVERLAID on the image via a tap-to-localize
-      // control; without an image (e.g. reopened from history), fall back to the standalone heatmap.
+      // The heatmap is only ever shown OVERLAID on the X-ray via a tap-to-localize control (never as a
+      // standalone black box). If we have no image to overlay on, the finding simply shows no heatmap.
       var heat = (hasHeat && f.__heatIdx != null) ?
-        '<button type="button" class="tx-heat-btn" data-heat-idx="' + f.__heatIdx + '">' + ic("my_location") + '<span>Localize on X-ray</span></button>' :
-        (f.heatmap ? '<div class="tx-heatmap"><img class="tx-heatmap-overlay" src="data:image/png;base64,' + f.heatmap + '" alt="' + esc(f.label) + ' Grad-CAM heatmap overlay" /><span class="tx-heatmap-cap">HEATMAP</span></div>' : "");
+        '<button type="button" class="tx-heat-btn" data-heat-idx="' + f.__heatIdx + '">' + ic("my_location") + '<span>Localize on X-ray</span></button>' : "";
       return '<div class="tx-finding">' +
         '<div class="tx-finding-row"><span class="tx-finding-name">' + esc(f.label) + "</span>" + pill + "</div>" +
         (f.relevance ? '<div class="tx-finding-loc">' + esc(f.relevance) + "</div>" : "") +
@@ -776,8 +772,8 @@
     // and at least one heatmap (else the finding cards keep their inline/standalone heatmap).
     var phiNote = hasImage
       ? (a.__phiMasked
-          ? '<div class="tx-phi tx-phi--on">' + ic("shield") + "<span>Identifiers masked on-device</span></div>"
-          : '<div class="tx-phi tx-phi--off">' + ic("privacy_tip") + "<span>No identifiers auto-detected — check the image before sharing</span></div>")
+          ? '<div class="tx-phi tx-phi--on">' + ic("shield") + "<span>Identifiers masked on-device before analysis (on-device &amp; cloud fallback)</span></div>"
+          : '<div class="tx-phi tx-phi--off">' + ic("privacy_tip") + "<span>No identifiers auto-detected — verify the image before analysis / sharing</span></div>")
       : "";
     var xrayViewer = hasImage ?
       '<div class="tx-xray" data-hook="txXray">' +
@@ -1113,10 +1109,19 @@
   // Burnt-in identifiers (name / MRN / dates) live as TEXT on the film. OCR the image on-device
   // (SMD_NATIVE.ocr — the image never leaves the device), then blackout every detected text box on a
   // canvas. Any text on a CXR is non-diagnostic (PHI, viewer chrome, laterality marker), so redacting
-  // all detected text is the safe default. Returns { url, masked }; falls back to the raw image
-  // (masked:false) when OCR is unavailable / finds nothing / errors — never blocks the result.
+  // all detected text is the safe default. The MASKED image is what gets ANALYZED (so a cloud-fallback
+  // upload never carries PHI) AND displayed/exported. Returns { url, blob, masked }; falls back to the
+  // raw image (masked:false) when OCR is unavailable / finds nothing / errors — never blocks the result.
   function blobToDataUrl(blob) {
     return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(String(fr.result || "")); }; fr.onerror = rej; fr.readAsDataURL(blob); });
+  }
+  function dataUrlToBlob(dataUrl) {
+    try {
+      var parts = String(dataUrl || "").split(","), mime = (parts[0].match(/:(.*?);/) || [])[1] || "image/jpeg";
+      var bin = atob(parts[1] || ""), n = bin.length, arr = new Uint8Array(n);
+      for (var i = 0; i < n; i++) arr[i] = bin.charCodeAt(i);
+      return new Blob([arr], { type: mime });
+    } catch (e) { return null; }
   }
   function drawRedacted(dataUrl, boxes) {
     return new Promise(function (resolve) {
@@ -1144,21 +1149,23 @@
       } catch (e) { resolve({ url: dataUrl, masked: false }); }
     });
   }
-  function phiRedactToUrl(blob) {
+  function phiRedactToImage(blob) {
     var rawUrl = null;
     try { rawUrl = URL.createObjectURL(blob); } catch (e) {}
+    var raw = { url: rawUrl, blob: blob, masked: false };
     var N = (typeof window !== "undefined" && window.SMD_NATIVE) || null;
-    if (!(N && N.ocr)) return Promise.resolve({ url: rawUrl, masked: false });
+    if (!(N && N.ocr)) return Promise.resolve(raw);
     return blobToDataUrl(blob).then(function (dataUrl) {
       return N.ocr(dataUrl).then(function (res) {
         var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
-        if (!boxes.length) return { url: rawUrl, masked: false };
+        if (!boxes.length) return raw;
         return drawRedacted(dataUrl, boxes).then(function (r) {
-          if (r.masked && rawUrl) { try { URL.revokeObjectURL(rawUrl); } catch (e) {} }
-          return r;
+          if (!r.masked) return raw;
+          if (rawUrl) { try { URL.revokeObjectURL(rawUrl); } catch (e) {} }
+          return { url: r.url, blob: dataUrlToBlob(r.url) || blob, masked: true };
         });
-      }).catch(function () { return { url: rawUrl, masked: false }; });
-    }).catch(function () { return { url: rawUrl, masked: false }; });
+      }).catch(function () { return raw; });
+    }).catch(function () { return raw; });
   }
 
   // runPipeline(image): resolve entitlement -> run the real analyzer (mock in demo mode, remote
@@ -1169,8 +1176,6 @@
     if (state.running) return;
     state.running = true;
     var _b = null;
-    // Keep a display URL of the source X-ray so the result screen can render the heatmap OVERLAID on the
-    // image — PHI-masked on-device first (below), the analyzer still sees the ORIGINAL for accuracy.
     try {
       if (state._xrayUrl && state._xrayUrl.indexOf("blob:") === 0) { try { URL.revokeObjectURL(state._xrayUrl); } catch (e) {} }
       state._xrayUrl = null; state._phiMasked = false;
@@ -1179,19 +1184,23 @@
         : (image.blob instanceof Blob ? image.blob
         : (image instanceof Blob ? image : null)));
     } catch (e) { _b = null; }
-    var redact = _b ? phiRedactToUrl(_b)
-      : (image && typeof image.dataUrl === "string" ? Promise.resolve({ url: image.dataUrl, masked: false }) : Promise.resolve({ url: null, masked: false }));
-    var entitlement = resolveEntitlement();
-    var P = providers();
     show("processing");
+    var P = providers();
     if (!P || !P.analyzer) { state.running = false; toast("ThoreX analyzer unavailable."); show("source"); return; }
-    P.analyzer.analyze(image || { id: "tx-" + Date.now(), source: "photoLibrary" }, entitlement, function (stage, pct) {
-      try { var h = host(); if (h && h._txApplyStage) h._txApplyStage(stage, pct); } catch (e) {}
-    }).then(function (a) {
-      // Fold in the (parallel) PHI-masked display image before rendering, so neither the screen nor the
-      // exported report ever shows the un-redacted film.
-      return Promise.resolve(redact).then(function (red) {
-        state._xrayUrl = red && red.url; state._phiMasked = !!(red && red.masked);
+    var entitlement = resolveEntitlement();
+    // STEP 1 — mask burnt-in identifiers on-device BEFORE anything is analyzed, so a cloud-fallback
+    // upload never carries PHI. The MASKED image is what feeds the analyzer AND the display/export.
+    var maskP = _b ? phiRedactToImage(_b)
+      : (image && typeof image.dataUrl === "string" ? Promise.resolve({ url: image.dataUrl, blob: null, masked: false }) : Promise.resolve({ url: null, blob: null, masked: false }));
+    maskP.then(function (m) {
+      state._xrayUrl = m && m.url; state._phiMasked = !!(m && m.masked);
+      // Hand the analyzer the MASKED image (mutate the handoff in place; tolerate a bare Blob).
+      var masked = (image && typeof image === "object" && !(image instanceof Blob)) ? image : { id: "tx-" + Date.now(), source: "photoLibrary" };
+      try { if (m && m.blob) masked.data = m.blob; if (m && m.url) masked.dataUrl = m.url; } catch (e) {}
+      // STEP 2 — analyze the masked image.
+      return P.analyzer.analyze(masked, entitlement, function (stage, pct) {
+        try { var h = host(); if (h && h._txApplyStage) h._txApplyStage(stage, pct); } catch (e) {}
+      }).then(function (a) {
         if (a && a.quality && a.quality.adequate === false) {
           state.analysis = a; state.running = false; show("quality"); return;
         }
@@ -1298,13 +1307,12 @@
     if (_logoCache != null) return Promise.resolve(_logoCache);
     return toDataUrl("/logo.png").then(function (d) { _logoCache = d || ""; return _logoCache; });
   }
-  // Write the finished HTML document out: native → temp file + Share sheet (iOS: Print → Save as PDF);
-  // web → hidden iframe + print (Save as PDF from the print dialog).
-  function exportHtmlDoc(html, filename) {
-    var name = (filename || "StewardMD-CXR-report").replace(/[^\w.-]+/g, "-") + ".html";
+  // Fallback: share the HTML document as a file (older builds without the native PDF renderer).
+  function nativeShareHtml(html, filename) {
     try {
-      var Cap = window.Capacitor, P = Cap && Cap.Plugins;
-      if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+      var P = window.Capacitor && window.Capacitor.Plugins;
+      if (P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+        var name = filename + ".html";
         P.Filesystem.writeFile({ path: name, data: html, directory: "CACHE", encoding: "utf8" })
           .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
           .then(function (r) { return P.Share.share({ title: "StewardMD — CXR report", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
@@ -1312,7 +1320,23 @@
         return;
       }
     } catch (e) {}
-    // Web: print via a hidden iframe (the print dialog offers "Save as PDF").
+    toast("Export not available on this device.");
+  }
+  // Write the finished HTML document out. Native → render a REAL PDF (VisionOcr.htmlToPdf) and Share it;
+  // fall back to sharing the HTML file if the native renderer isn't present. Web → hidden-iframe print
+  // (the browser print dialog offers "Save as PDF").
+  function exportHtmlDoc(html, filename) {
+    var name = (filename || "StewardMD-CXR-report").replace(/[^\w.-]+/g, "-");
+    if (window.SMD_IS_NATIVE) {
+      var N = window.SMD_NATIVE;
+      if (N && N.sharePdfFromHtml) {
+        toast("Building PDF…");
+        N.sharePdfFromHtml(html, name, "StewardMD — CXR report").catch(function () { nativeShareHtml(html, name); });
+        return;
+      }
+      nativeShareHtml(html, name);
+      return;
+    }
     try {
       var ifr = document.createElement("iframe");
       ifr.setAttribute("aria-hidden", "true");
