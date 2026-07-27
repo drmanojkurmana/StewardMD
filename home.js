@@ -2153,6 +2153,36 @@
   function maikSaveThread(h) { try { localStorage.setItem(MAIK_LS, h || ""); } catch (e) {} maikUpsertConv(h); }
   function maikAcctLabel() { try { var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null; return (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || ""; } catch (e) { return ""; } }
   function maikAgo(ts) { var s = Math.max(0, (Date.now() - (ts || 0)) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago"; try { return new Date(ts).toLocaleDateString(); } catch (e) { return ""; } }
+  // ── V4: Universal Semantic Router — cached, runs on EVERY query so retrieval always keys off ONE
+  //    canonical medical representation. Router output cached device-local (per query) for speed +
+  //    consistency; the router is parse-only (never answers). ──
+  function _rnorm(s) { return String(s == null ? "" : s).toLowerCase().replace(/\s+/g, " ").trim(); }
+  var _maikRouteCache = (function () { try { return JSON.parse(localStorage.getItem("smd_maik_routes") || "{}") || {}; } catch (e) { return {}; } })();
+  function getRoute(question) {
+    var key = _rnorm(question);
+    if (!key) return Promise.resolve(null);
+    if (_maikRouteCache[key]) return Promise.resolve(_maikRouteCache[key]);
+    if (!(window.SMD_AI && (SMD_AI.route || SMD_AI.refine))) return Promise.resolve(null);
+    return (SMD_AI.route || SMD_AI.refine)(question).then(function (r) {
+      if (r && (r.primaryConcept || r.topic || r.ambiguous)) {
+        try { _maikRouteCache[key] = r; var ks = Object.keys(_maikRouteCache); if (ks.length > 500) delete _maikRouteCache[ks[0]]; localStorage.setItem("smd_maik_routes", JSON.stringify(_maikRouteCache)); } catch (e) {}
+      }
+      return r || null;
+    }).catch(function () { return null; });
+  }
+  // Retrieval reviewer (local, free, mandatory): verify the answered disease actually aligns with the
+  // parsed concept / question before showing it — blocks retrieval drift (e.g. answering a different
+  // disease). Returns true = evidence matches the intent. (A Flash reviewer can escalate medium cases.)
+  function reviewKB(kb, question, route) {
+    try {
+      var disease = _rnorm(kb && kb.disease); var expect = _rnorm((route && (route.primaryConcept || route.topic)) || question);
+      if (!disease || !expect) return true;
+      var dt = disease.split(" ").filter(function (w) { return w.length >= 4; });
+      var et = expect.split(" ").filter(function (w) { return w.length >= 4; });
+      if (!dt.length || !et.length) return true;
+      return dt.some(function (w) { return et.indexOf(w) >= 0 || expect.indexOf(w) >= 0; }) || et.some(function (w) { return disease.indexOf(w) >= 0; });
+    } catch (e) { return true; }
+  }
   // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
   var _maikBodyHTML = (function () { try { return localStorage.getItem(MAIK_LS) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
@@ -3001,41 +3031,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             try { scroll(); } catch (e) {}
           }
-          var _kbOn = window.MaiKKB && maikKB() && !active;
-          try { if (_kbOn) { var _kb = MaiKKB.compose(question, pkg, { depth: depth }); if (_kb && _kb.text && _kb.confidence >= 0.85) { finishKB(_kb, pkg, "instant"); return; } } } catch (e) {}
-
-          // ── TIER 1 — cheap Vertex refiner, ONLY on a local KB miss for a knowledge-shaped question
-          // (not reasoning). Normalises the messy query ("dibetis" -> "diabetes mellitus"), retries the
-          // KB; if it now resolves >=85%, answer from the KB. Else fall through to Gemini. The instant
-          // path above is untouched — this network hop is paid only when the local rules couldn't resolve.
-          // Universal semantic router (Vertex Flash): parses the query's MEANING → {primaryConcept,
-          // intent, ambiguous, options}. Drives deterministic KB retrieval from the canonical concept;
-          // asks on genuine ambiguity; sends true reasoning questions to Gemini. Fires only on a local
-          // miss (clean canonical queries already answered above), so the instant path is untouched.
-          var _refineP = (_kbOn && window.SMD_AI && (SMD_AI.route || SMD_AI.refine) && MaiKKB.isComplex && !MaiKKB.isComplex(question))
-            ? (SMD_AI.route || SMD_AI.refine)(question).then(function (ref) {
-                if (!ref) return null;
-                if (ref.ambiguous && ref.options && ref.options.length >= 2) return { ambiguous: ref.options.slice(0, 4) };
-                var concept = ref.primaryConcept || ref.topic;
-                if (!concept || ref.intent === "reasoning" || !window.StewardRAG) return null;   // reasoning → Gemini
-                return Promise.resolve(StewardRAG.buildPackage(window.SMD_REASON.assess({}), { question: concept })).then(function (pkg2) {
-                  if (!pkg2) return null; pkg2.question = concept;
-                  try { var _kb2 = MaiKKB.compose(question, pkg2, { concept: concept, intent: ref.intent, depth: depth }); if (_kb2 && _kb2.text && _kb2.confidence >= 0.85) return { kb: _kb2, pkg: pkg2 }; } catch (e) {}
-                  return null;
-                }).catch(function () { return null; });
-              }).catch(function () { return null; })
-            : Promise.resolve(null);
-
-          return _refineP.then(function (refined) {
-            if (refined && refined.kb) { finishKB(refined.kb, refined.pkg, "refined"); return; }
-            if (refined && refined.ambiguous) {   // genuine ambiguity → ask, never guess
-              _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-              think.innerHTML = '<div class="maik-welcome">Did you mean:</div>';
-              var _amWrap = document.createElement("div"); _amWrap.className = "maik-fus";
-              refined.ambiguous.forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); _amWrap.appendChild(b); });
-              think.appendChild(_amWrap); try { scroll(); } catch (e) {} return;
-            }
-            // ── TIER 2 — Gemini grounded answer (existing path) ──
+          function _gemini() {
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth });
@@ -3053,6 +3049,45 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
                 }
               } catch (e) {}
             });
+          }
+          function _askAmbiguous(options) {   // genuine ambiguity → ask, never guess
+            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+            think.innerHTML = '<div class="maik-welcome">Did you mean:</div>';
+            var w = document.createElement("div"); w.className = "maik-fus";
+            (options || []).slice(0, 4).forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); w.appendChild(b); });
+            think.appendChild(w); try { scroll(); } catch (e) {}
+          }
+          // KB answer on a package, using the router's canonical concept + intent when present; the
+          // MANDATORY local reviewer (reviewKB) blocks retrieval drift before anything is shown.
+          function _kbTry(pkgUse, route) {
+            try {
+              var o = { depth: depth };
+              if (route && (route.primaryConcept || route.topic)) { o.concept = route.primaryConcept || route.topic; o.intent = route.intent; }
+              var kb = MaiKKB.compose(question, pkgUse, o);
+              if (kb && kb.text && kb.confidence >= 0.85 && reviewKB(kb, question, route)) return kb;
+            } catch (e) {}
+            return null;
+          }
+          var _kbOn = window.MaiKKB && maikKB() && !active;
+          // ── V4 — the UNIVERSAL SEMANTIC ROUTER runs on EVERY query (cached): parse the medical meaning
+          // → canonical concept + intent → deterministic KB retrieval keyed on that concept; genuine
+          // ambiguity → ask; reasoning → Gemini. Local resolution is the fallback when the router is
+          // unavailable (offline / no Vertex). The mandatory reviewer runs inside _kbTry. ──
+          var _routeP = _kbOn ? getRoute(question).catch(function () { return null; }) : Promise.resolve(null);
+          return _routeP.then(function (route) {
+            if (route && route.ambiguous && route.options && route.options.length >= 2) { _askAmbiguous(route.options); return; }
+            if (_kbOn && !(route && route.intent === "reasoning")) {
+              var concept = route && (route.primaryConcept || route.topic);
+              var kb0 = _kbTry(pkg, route);                       // fast: resolve on the existing grounding
+              if (kb0) { finishKB(kb0, pkg, route ? "routed" : "instant"); return; }
+              if (concept && window.StewardRAG) {                 // rebuild grounding on the canonical concept + retry
+                return Promise.resolve(StewardRAG.buildPackage(window.SMD_REASON.assess({}), { question: concept })).then(function (pkg2) {
+                  if (pkg2) { pkg2.question = concept; var kb1 = _kbTry(pkg2, route); if (kb1) { finishKB(kb1, pkg2, "routed"); return; } }
+                  return _gemini();
+                }).catch(function () { return _gemini(); });
+              }
+            }
+            return _gemini();
           });
         })
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
