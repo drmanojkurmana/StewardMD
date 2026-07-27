@@ -75,7 +75,12 @@
     hlh: "hemophagocytic lymphohistiocytosis", dic: "disseminated intravascular coagulation", ttp: "thrombotic thrombocytopenic purpura",
     itp: "immune thrombocytopenia", aml: "acute myeloid leukemia", all: "acute lymphoblastic leukemia", cml: "chronic myeloid leukemia",
     cll: "chronic lymphocytic leukemia", ns: "nephrotic syndrome", rpgn: "rapidly progressive glomerulonephritis",
-    atn: "acute tubular necrosis", sirs: "systemic inflammatory response syndrome", op: "organophosphate poisoning"
+    atn: "acute tubular necrosis", sirs: "systemic inflammatory response syndrome", op: "organophosphate poisoning",
+    dm1: "type 1 diabetes mellitus", dm2: "type 2 diabetes mellitus", t1dm: "type 1 diabetes mellitus", t2dm: "type 2 diabetes mellitus",
+    gdm: "gestational diabetes mellitus", di: "diabetes insipidus", afib: "atrial fibrillation", cad: "coronary artery disease",
+    ihd: "ischemic heart disease", esrd: "end stage renal disease", crf: "chronic renal failure", arf: "acute renal failure",
+    lada: "latent autoimmune diabetes in adults", mody: "maturity onset diabetes of the young", osa: "obstructive sleep apnea",
+    pcos: "polycystic ovary syndrome", cap: "community acquired pneumonia"
   };
   function expandAbbrev(q) {
     return String(q || "").replace(/[A-Za-z][A-Za-z0-9]{1,6}/g, function (w) {
@@ -91,7 +96,7 @@
   // silently failed on inflected words.)
   var INTENTS = [
     { intent: "dose", re: /\b(dose|dosing|dosage|how much|mg\s*\/\s*kg|loading dose|maintenance dose|max(imum)? dose|what dose|which dose)/ },
-    { intent: "treatment", re: /\b(treat|manage|managing|therap|regimen|first[- ]?line|second[- ]?line|drug of choice|antibiotic|empiric|prophylax|de[- ]?escalat)/ },
+    { intent: "treatment", re: /\b(treat|manage|managing|therap|regimen|first[- ]?line|second[- ]?line|drug of choice|antibiotic|empiric|prophylax|de[- ]?escalat|\brx\b|\btx\b)/ },
     { intent: "differential", re: /\b(differential|ddx|d\/dx|causes? of|cause of|etiolog|aetiolog|what causes|reasons? for)/ },
     { intent: "investigation", re: /\b(investigat|work[- ]?up|which tests|what tests|blood test|\blab\b|initial tests|how (to|do i) diagnos|confirm.{0,12}diagnos|diagnostic (test|work))/ },
     { intent: "redflags", re: /\b(red[- ]?flags?|warning signs?|danger signs?|when to (worry|refer|escalate|admit)|alarm (signs|features))/ },
@@ -164,6 +169,7 @@
     if (/\bdos(e|ing|age)\b/.test(n)) { var m = n.match(/\b(?:in|for)\s+([a-z][a-z0-9 \-]{2,})$/); if (m) return m[1].trim(); }   // "dose of DRUG in DISEASE" → DISEASE
     var core = n.replace(LEADIN_RE, "");
     core = core.replace(/\s+\b(in|for|during|with|among)\b\s+.*$/, "").trim();   // drop trailing context ("diabetes in pregnancy" → "diabetes")
+    core = core.replace(/\s*\b(rx|tx|mgmt|management|treatment|ddx|dose|dosing|dosage|workup|work up|ix|investigation|investigations|prognosis|features|symptoms|overview)\s*$/i, "").trim();   // trailing intent word ("diabetes rx" → "diabetes")
     return core;
   }
   // Canonical disease match: prefer an EXACT KB name match, else a "<phrase> <qualifier>" entry
@@ -180,6 +186,15 @@
     }
     if (exact) return { it: exact, kind: "exact" };
     if (pfx) return { it: pfx, kind: "canonical" };
+    // drop leading qualifier words: "type 2 diabetes mellitus" → "diabetes mellitus" (the general entry)
+    var words = phrase.split(" ");
+    if (words.length > 2) {
+      for (var s = 1; s <= 3 && s < words.length - 1; s++) {
+        var tail = words.slice(s).join(" ");
+        if (tail.length < 5) break;
+        for (var j = 0; j < idx.length; j++) { if (idx[j].key === tail) return { it: idx[j], kind: "canonical" }; }
+      }
+    }
     // typo tolerance — nearest disease name within a small edit distance ("diabetes inspidus"
     // → "diabetes insipidus"). Pruned by first-letter + length so it stays fast over the index.
     var thresh = Math.min(3, Math.floor(phrase.length * 0.22));

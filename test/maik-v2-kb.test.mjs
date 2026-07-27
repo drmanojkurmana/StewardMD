@@ -98,6 +98,14 @@ test("TYPO TOLERANCE: misspelled disease names resolve to the correct disease (n
   assert.strictEqual(compose("what is xyzqwerty"), null, "gibberish must not fuzzy-match to a disease");
 });
 
+test("ABBREVIATION + qualifier resolution routes to the right disease/intent", () => {
+  const r = compose("DM2 rx");
+  assert.ok(r && /diabetes mellitus/i.test(r.text), "DM2 rx -> Diabetes Mellitus, got: " + (r ? r.text.slice(0, 80) : "null"));
+  assert.strictEqual(r.intent, "treatment", "DM2 rx intent = treatment");
+  const r2 = compose("what is di");
+  assert.ok(r2 && /insipidus/i.test(r2.text), "di -> Diabetes insipidus");
+});
+
 test("FIDELITY: dose is quoted from the KB, not invented", () => {
   const r = compose("dose of ceftriaxone in severe CAP");
   assert.ok(r && /ceftriaxone/i.test(r.text));
