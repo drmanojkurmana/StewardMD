@@ -573,7 +573,8 @@
         if (f.heatmap) { f.__heatIdx = heatList.length; heatList.push({ label: f.label, heatmap: f.heatmap }); }
       });
     });
-    var hasXray = !!(a && a.__xrayUrl) && heatList.length > 0;
+    var hasImage = !!(a && a.__xrayUrl);          // show the X-ray whenever we have it (incl. clean reads)
+    var hasHeat = hasImage && heatList.length > 0; // overlay + selector strip only when there are heatmaps
 
     function findingHtml(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
@@ -587,7 +588,7 @@
         '<div class="tx-conf-band">Confidence band</div>';
       // With the X-ray viewer present, the heatmap is shown OVERLAID on the image via a tap-to-localize
       // control; without an image (e.g. reopened from history), fall back to the standalone heatmap.
-      var heat = (hasXray && f.__heatIdx != null) ?
+      var heat = (hasHeat && f.__heatIdx != null) ?
         '<button type="button" class="tx-heat-btn" data-heat-idx="' + f.__heatIdx + '">' + ic("my_location") + '<span>Localize on X-ray</span></button>' :
         (f.heatmap ? '<div class="tx-heatmap"><img class="tx-heatmap-overlay" src="data:image/png;base64,' + f.heatmap + '" alt="' + esc(f.label) + ' Grad-CAM heatmap overlay" /><span class="tx-heatmap-cap">HEATMAP</span></div>' : "");
       return '<div class="tx-finding">' +
@@ -602,7 +603,15 @@
       var badge = '<span class="tx-panel-badge">' + ic(p.educational ? "school" : "verified") + esc(p.engine) + "</span>";
       var eduBanner = p.educational ?
         '<div class="tx-edu-banner">' + ic("info") + "<span>Educational &mdash; not for clinical use</span></div>" : "";
-      var findingsHtml = '<div class="tx-findings">' + p.findings.map(findingHtml).join("") + "</div>";
+      // Clean read: when nothing crosses the model's operating point, say so explicitly (never a blank
+      // panel) — a normal film should read reassuringly, with the "does not exclude disease" caveat.
+      var findingsHtml = p.findings.length
+        ? '<div class="tx-findings">' + p.findings.map(findingHtml).join("") + "</div>"
+        : (p.educational ? ""
+          : '<div class="tx-clean">' + ic("check_circle") +
+            '<b class="tx-clean-title">No significant abnormality detected</b>' +
+            '<span class="tx-clean-sub">AI screening found nothing above the model’s operating threshold. This does not exclude disease — correlate clinically.</span>' +
+          "</div>");
       var whyLink = !p.educational ?
         '<button type="button" class="tx-why-link" data-act="tx-why">' + ic("psychology") +
           '<span class="tx-why-link-txt"><b>Why this finding?</b><span class="tx-why-link-sub">See the model reasoning</span></span>' +
@@ -661,17 +670,19 @@
     // X-ray viewer: the source image with a selectable heatmap overlaid (like OXIPIT). Chips = each
     // finding-with-heatmap; tapping one localizes it on the anatomy. Only when we have both an image
     // and at least one heatmap (else the finding cards keep their inline/standalone heatmap).
-    var xrayViewer = hasXray ?
+    var xrayViewer = hasImage ?
       '<div class="tx-xray" data-hook="txXray">' +
         '<img class="tx-xray-base" src="' + esc(a.__xrayUrl) + '" alt="Chest X-ray under analysis" />' +
-        '<img class="tx-xray-heat" data-hook="txXrayHeat" alt="" hidden />' +
-        '<div class="tx-xray-badge" data-hook="txHeatLabel">' + ic("my_location") + '<span>Heatmap</span></div>' +
+        (hasHeat ?
+          '<img class="tx-xray-heat" data-hook="txXrayHeat" alt="" hidden />' +
+          '<div class="tx-xray-badge" data-hook="txHeatLabel">' + ic("my_location") + '<span>Heatmap</span></div>' : "") +
       "</div>" +
-      '<div class="tx-heat-strip" role="tablist" aria-label="Finding heatmaps">' +
-        heatList.map(function (h, i) {
-          return '<button type="button" class="tx-heat-chip' + (i === 0 ? " is-active" : "") + '" data-heat-idx="' + i + '" role="tab" aria-selected="' + (i === 0 ? "true" : "false") + '">' + esc(h.label) + "</button>";
-        }).join("") +
-      "</div>" : "";
+      (hasHeat ?
+        '<div class="tx-heat-strip" role="tablist" aria-label="Finding heatmaps">' +
+          heatList.map(function (h, i) {
+            return '<button type="button" class="tx-heat-chip' + (i === 0 ? " is-active" : "") + '" data-heat-idx="' + i + '" role="tab" aria-selected="' + (i === 0 ? "true" : "false") + '">' + esc(h.label) + "</button>";
+          }).join("") +
+        "</div>" : "") : "";
 
     var body =
       '<div class="tx-result-body">' +
@@ -691,7 +702,7 @@
 
     // X-ray heatmap selector: tap a chip (or a finding's "Localize" button) → overlay that finding's
     // CAM heatmap on the X-ray. Screen-internal, so not routed through the global click switch.
-    if (hasXray) {
+    if (hasHeat) {
       var heatImg = host.querySelector('[data-hook="txXrayHeat"]');
       var heatLabelEl = host.querySelector('[data-hook="txHeatLabel"] span');
       var selectHeat = function (i, fromUser) {
