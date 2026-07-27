@@ -37,7 +37,7 @@
 
   // Engine → user-facing version name. The raw ids (torchxrayvision / xraydar / hf_vit) stay internal
   // (model-file matching, entitlement shape, report logic) — only the DISPLAYED name changes.
-  var ENGINE_DISPLAY = { torchxrayvision: "ThoreX v1", xraydar: "V2 Beta", hf_vit: "ThoreX Free" };
+  var ENGINE_DISPLAY = { torchxrayvision: "ThoreX Clinical Engine 1", xraydar: "ThoreX Clinical Engine 2", hf_vit: "ThoreX Free" };
   function engineDisplayName(id) { id = String(id || ""); return ENGINE_DISPLAY.hasOwnProperty(id) ? ENGINE_DISPLAY[id] : id; }
   function displayLabelOf(label) {
     try { var M = (typeof window !== "undefined" && window.SMD_THOREX_MODELS) || null; if (M && M.displayLabel) return M.displayLabel(label); } catch (e) {}
@@ -611,8 +611,19 @@
         if (f.heatmap) { f.__heatIdx = heatList.length; heatList.push({ label: f.label, heatmap: f.heatmap }); }
       });
     });
+    // A finding is a real POSITIVE only above the 50% operating point. At/below 50% it's a
+    // below-threshold signal → the read is "possibly normal", not an abnormality.
+    function isPositive(f) {
+      if (f.confPctExact != null) return f.confPctExact > 50;
+      return f.band === "High" || f.band === "Medium"; // legacy records without a per-finding %
+    }
+    var anyPositive = false;
+    panels.forEach(function (p) { if (!p.educational) (p.findings || []).forEach(function (f) { if (isPositive(f)) anyPositive = true; }); });
+
     var hasImage = !!(a && a.__xrayUrl);          // show the X-ray whenever we have it (incl. clean reads)
-    var hasHeat = hasImage && heatList.length > 0; // overlay + selector strip only when there are heatmaps
+    // Overlay the red heatmap ONLY when there's a real (>50%) positive finding — never paint an alarming
+    // blob on a possibly-normal film.
+    var hasHeat = hasImage && heatList.length > 0 && anyPositive;
 
     function findingHtml(f) {
       var pill = '<span class="tx-pill tx-pill--' + esc(f.severity) + '">' + ic(f.severityIcon) + "<span>" + esc(f.severityLabel) + "</span></span>";
@@ -652,20 +663,48 @@
     }
 
     // Inner body of one engine's panel (identity now lives on the collapsible header, so no tx-panel-head).
+    var FIND_CAP = 5;   // show the top N findings; the rest live behind a "Show all" expander
     function panelHtml(p) {
       var cls = "tx-panel" + (p.educational ? " tx-panel--learning" : "");
       var eduBanner = p.educational ?
         '<div class="tx-edu-banner">' + ic("info") + "<span>Educational &mdash; not for clinical use</span></div>" : "";
-      // Clean read: when nothing crosses the model's operating point, say so explicitly (never a blank
-      // panel) — a normal film should read reassuringly, with the "does not exclude disease" caveat.
-      var findingsHtml = p.findings.length
-        ? '<div class="tx-findings">' + p.findings.map(findingHtml).join("") + "</div>"
-        : (p.educational ? ""
+
+      var findings = p.findings || [];
+      var positives = findings.filter(isPositive);
+      var lows = findings.filter(function (f) { return !isPositive(f); });
+      var findingsHtml;
+
+      if (!p.educational && positives.length === 0) {
+        // Possibly-normal read: nothing above 50% (either a clean film or only below-threshold signals).
+        // Say it plainly and tell the user to confirm with a clinician — never list a ≤50% signal as a Dx.
+        var lowNote = lows.length
+          ? '<div class="tx-clean-low">Below-threshold signals (≤50%, likely not significant): ' +
+              lows.map(function (f) { return esc(f.label) + (f.confPctExact != null ? " " + f.confPctExact + "%" : ""); }).join(", ") + ".</div>"
+          : "";
+        findingsHtml = '<div class="tx-clean">' + ic("check_circle") +
+            '<b class="tx-clean-title">Possibly normal</b>' +
+            '<span class="tx-clean-sub">No finding reached above 50% confidence. Please confirm with a radiologist / physician — this does not exclude disease.</span>' +
+            lowNote +
+          "</div>";
+      } else if (!findings.length) {
+        findingsHtml = p.educational ? ""
           : '<div class="tx-clean">' + ic("check_circle") +
-            '<b class="tx-clean-title">No significant abnormality detected</b>' +
-            '<span class="tx-clean-sub">AI screening found nothing above the model’s operating threshold. This does not exclude disease — correlate clinically.</span>' +
-          "</div>");
-      var whyLink = !p.educational ?
+              '<b class="tx-clean-title">Possibly normal</b>' +
+              '<span class="tx-clean-sub">AI screening found nothing above the operating threshold. Please confirm with a radiologist / physician — this does not exclude disease.</span>' +
+            "</div>";
+      } else {
+        // Findings present — compact, capped list with a "Show all" expander to kill the long scroll.
+        var list = positives.length ? positives : findings;
+        var shown = list.slice(0, FIND_CAP);
+        var hidden = list.slice(FIND_CAP);
+        findingsHtml = '<div class="tx-findings">' + shown.map(findingHtml).join("") +
+          (hidden.length
+            ? '<div class="tx-more-wrap" hidden>' + hidden.map(findingHtml).join("") + "</div>" +
+              '<button type="button" class="tx-more-btn" data-act="tx-more">' + ic("expand_more") + "<span>Show all " + list.length + " findings</span></button>"
+            : "") +
+        "</div>";
+      }
+      var whyLink = !p.educational && positives.length ?
         '<button type="button" class="tx-why-link" data-act="tx-why">' + ic("psychology") +
           '<span class="tx-why-link-txt"><b>Why this finding?</b><span class="tx-why-link-sub">See the model reasoning</span></span>' +
           ic("chevron_right") + "</button>" : "";
@@ -735,13 +774,18 @@
     // X-ray viewer: the source image with a selectable heatmap overlaid (like OXIPIT). Chips = each
     // finding-with-heatmap; tapping one localizes it on the anatomy. Only when we have both an image
     // and at least one heatmap (else the finding cards keep their inline/standalone heatmap).
+    var phiNote = hasImage
+      ? (a.__phiMasked
+          ? '<div class="tx-phi tx-phi--on">' + ic("shield") + "<span>Identifiers masked on-device</span></div>"
+          : '<div class="tx-phi tx-phi--off">' + ic("privacy_tip") + "<span>No identifiers auto-detected — check the image before sharing</span></div>")
+      : "";
     var xrayViewer = hasImage ?
       '<div class="tx-xray" data-hook="txXray">' +
         '<img class="tx-xray-base" src="' + esc(a.__xrayUrl) + '" alt="Chest X-ray under analysis" />' +
         (hasHeat ?
           '<img class="tx-xray-heat" data-hook="txXrayHeat" alt="" hidden />' +
           '<div class="tx-xray-badge" data-hook="txHeatLabel">' + ic("my_location") + '<span>Heatmap</span></div>' : "") +
-      "</div>" +
+      "</div>" + phiNote +
       (hasHeat ?
         '<div class="tx-heat-strip" role="tablist" aria-label="Finding heatmaps">' +
           heatList.map(function (h, i) {
@@ -802,6 +846,15 @@
         btn.setAttribute("aria-expanded", open ? "true" : "false");
         var wrap = btn.parentNode; if (wrap && wrap.classList) wrap.classList.toggle("is-open", open);
         haptic("light");
+      });
+    });
+
+    // "Show all N findings" — reveal the capped remainder in place (screen-internal).
+    Array.prototype.forEach.call(host.querySelectorAll('[data-act="tx-more"]'), function (btn) {
+      btn.addEventListener("click", function () {
+        var wrap = btn.previousElementSibling;
+        if (wrap && wrap.classList && wrap.classList.contains("tx-more-wrap")) wrap.hidden = false;
+        btn.hidden = true; haptic("light");
       });
     });
 
@@ -937,9 +990,13 @@
       "</div>" +
       '<div class="tx-list-body">' +
         toggleRow("Show AI confidence", "Confidence band on every result", "tx-toggle-confidence", conf) +
-        toggleRow("V2 Beta engine (educational)", "Adds the X-Raydar educational panel · Pro · educational-only", "tx-toggle-v2beta", v2beta) +
+        toggleRow("Clinical Engine 2 (educational)", "Adds the second educational engine · Pro · educational-only", "tx-toggle-v2beta", v2beta) +
         toggleRow("Haptics", "Vibrate on tap and result-ready", "tx-toggle-haptics", haptics) +
         '<div class="tx-set-row"><div><div class="tx-set-label">Free cloud analysis</div><div class="tx-set-sub">' + esc(cloudLabel) + "</div></div></div>" +
+        '<button type="button" class="tx-set-row" data-act="tx-remove-models">' +
+          '<div><div class="tx-set-label">Remove downloaded models</div><div class="tx-set-sub">Frees on-device model storage · re-downloads on next scan</div></div>' +
+          ic("cloud_off") +
+        "</button>" +
         '<button type="button" class="tx-set-row" data-act="tx-clear-cxrs">' +
           '<div><div class="tx-set-label">Clear local CXRs</div><div class="tx-set-sub">Permanently deletes every stored case</div></div>' +
           ic("delete") +
@@ -1042,6 +1099,7 @@
   function finishPipeline(a) {
     state.analysis = a; state.running = false; state.emptyReason = null;
     try { if (a && state._xrayUrl) a.__xrayUrl = state._xrayUrl; } catch (e) {}   // transient display-only URL (never persisted)
+    try { if (a) a.__phiMasked = !!state._phiMasked; } catch (e) {}   // on-device PHI redaction status (display-only)
     try { if (a && state.clinicalContext) a.__context = state.clinicalContext; } catch (e) {}   // clinical details → report "Clinical information"
     try { var P = providers(); if (P && P.cxrStore && P.cxrStore.save) P.cxrStore.save(a); } catch (e) {}
     state.stack = ["landing"]; go("result"); haptic("success");
@@ -1051,6 +1109,58 @@
     } catch (e) {}
   }
 
+  // ── On-device PHI redaction ──────────────────────────────────────────────────────────────────
+  // Burnt-in identifiers (name / MRN / dates) live as TEXT on the film. OCR the image on-device
+  // (SMD_NATIVE.ocr — the image never leaves the device), then blackout every detected text box on a
+  // canvas. Any text on a CXR is non-diagnostic (PHI, viewer chrome, laterality marker), so redacting
+  // all detected text is the safe default. Returns { url, masked }; falls back to the raw image
+  // (masked:false) when OCR is unavailable / finds nothing / errors — never blocks the result.
+  function blobToDataUrl(blob) {
+    return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(String(fr.result || "")); }; fr.onerror = rej; fr.readAsDataURL(blob); });
+  }
+  function drawRedacted(dataUrl, boxes) {
+    return new Promise(function (resolve) {
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var W = img.naturalWidth || img.width, H = img.naturalHeight || img.height;
+            if (!W || !H) return resolve({ url: dataUrl, masked: false });
+            var c = document.createElement("canvas"); c.width = W; c.height = H;
+            var cx = c.getContext("2d"); cx.drawImage(img, 0, 0, W, H);
+            cx.fillStyle = "#000";
+            var n = 0, padX = W * 0.012, padY = H * 0.012;
+            boxes.forEach(function (b) {
+              if (!b || b.w == null || b.h == null) return;
+              var x = Math.max(0, b.x * W - padX), y = Math.max(0, b.y * H - padY);
+              var w = Math.min(W - x, b.w * W + padX * 2), h = Math.min(H - y, b.h * H + padY * 2);
+              if (w > 0 && h > 0) { cx.fillRect(x, y, w, h); n++; }
+            });
+            resolve({ url: c.toDataURL("image/jpeg", 0.9), masked: n > 0 });
+          } catch (e) { resolve({ url: dataUrl, masked: false }); }
+        };
+        img.onerror = function () { resolve({ url: dataUrl, masked: false }); };
+        img.src = dataUrl;
+      } catch (e) { resolve({ url: dataUrl, masked: false }); }
+    });
+  }
+  function phiRedactToUrl(blob) {
+    var rawUrl = null;
+    try { rawUrl = URL.createObjectURL(blob); } catch (e) {}
+    var N = (typeof window !== "undefined" && window.SMD_NATIVE) || null;
+    if (!(N && N.ocr)) return Promise.resolve({ url: rawUrl, masked: false });
+    return blobToDataUrl(blob).then(function (dataUrl) {
+      return N.ocr(dataUrl).then(function (res) {
+        var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
+        if (!boxes.length) return { url: rawUrl, masked: false };
+        return drawRedacted(dataUrl, boxes).then(function (r) {
+          if (r.masked && rawUrl) { try { URL.revokeObjectURL(rawUrl); } catch (e) {} }
+          return r;
+        });
+      }).catch(function () { return { url: rawUrl, masked: false }; });
+    }).catch(function () { return { url: rawUrl, masked: false }; });
+  }
+
   // runPipeline(image): resolve entitlement -> run the real analyzer (mock in demo mode, remote
   // otherwise, honest "unavailable" if unreachable — see thorex-providers.js) -> if the analysis
   // reports inadequate image quality, block on the quality-gate screen until acknowledged; otherwise
@@ -1058,18 +1168,19 @@
   function runPipeline(image) {
     if (state.running) return;
     state.running = true;
-    // Keep a display URL of the source X-ray so the result screen can render the heatmap OVERLAID on
-    // the actual image (anatomical reference), OXIPIT-style, instead of a floating heatmap.
+    var _b = null;
+    // Keep a display URL of the source X-ray so the result screen can render the heatmap OVERLAID on the
+    // image — PHI-masked on-device first (below), the analyzer still sees the ORIGINAL for accuracy.
     try {
       if (state._xrayUrl && state._xrayUrl.indexOf("blob:") === 0) { try { URL.revokeObjectURL(state._xrayUrl); } catch (e) {} }
-      state._xrayUrl = null;
+      state._xrayUrl = null; state._phiMasked = false;
       // The capture handoff is { id, source, data: <Blob> } (startCapture), but tolerate blob/raw-Blob too.
-      var _b = image && (image.data instanceof Blob ? image.data
+      _b = image && (image.data instanceof Blob ? image.data
         : (image.blob instanceof Blob ? image.blob
         : (image instanceof Blob ? image : null)));
-      if (_b) state._xrayUrl = URL.createObjectURL(_b);
-      else if (image && typeof image.dataUrl === "string") state._xrayUrl = image.dataUrl;
-    } catch (e) { state._xrayUrl = null; }
+    } catch (e) { _b = null; }
+    var redact = _b ? phiRedactToUrl(_b)
+      : (image && typeof image.dataUrl === "string" ? Promise.resolve({ url: image.dataUrl, masked: false }) : Promise.resolve({ url: null, masked: false }));
     var entitlement = resolveEntitlement();
     var P = providers();
     show("processing");
@@ -1077,10 +1188,15 @@
     P.analyzer.analyze(image || { id: "tx-" + Date.now(), source: "photoLibrary" }, entitlement, function (stage, pct) {
       try { var h = host(); if (h && h._txApplyStage) h._txApplyStage(stage, pct); } catch (e) {}
     }).then(function (a) {
-      if (a && a.quality && a.quality.adequate === false) {
-        state.analysis = a; state.running = false; show("quality"); return;
-      }
-      finishPipeline(a);
+      // Fold in the (parallel) PHI-masked display image before rendering, so neither the screen nor the
+      // exported report ever shows the un-redacted film.
+      return Promise.resolve(redact).then(function (red) {
+        state._xrayUrl = red && red.url; state._phiMasked = !!(red && red.masked);
+        if (a && a.quality && a.quality.adequate === false) {
+          state.analysis = a; state.running = false; show("quality"); return;
+        }
+        finishPipeline(a);
+      });
     }).catch(function (e) {
       state.running = false;
       try { console.log("TXDBG runPipeline failed:", e && e.code, "|", e && e.stage, "|", e && e.message); } catch (_) {}
@@ -1136,6 +1252,19 @@
     if (!okc) return;
     Promise.resolve(P.cxrStore.deleteAll()).then(function () { toast("Local CXRs cleared."); state.analysis = null; show("settings"); }).catch(function () { toast("Couldn't clear CXRs."); });
   }
+  // Remove every downloaded on-device model (ONNX engines + Clinical Dictation Whisper). They
+  // re-download from the server on next use — frees storage without breaking anything.
+  function removeModels() {
+    var okc = true;
+    try { okc = window.confirm ? window.confirm("Remove all downloaded ThoreX models? They will re-download from the server the next time you analyze an X-ray.") : true; } catch (e) {}
+    if (!okc) return;
+    var jobs = [];
+    try { if (window.SMD_THOREX_MODEL_CACHE && window.SMD_THOREX_MODEL_CACHE.clearModels) jobs.push(Promise.resolve(window.SMD_THOREX_MODEL_CACHE.clearModels())); } catch (e) {}
+    try { if (window.SMD_NATIVE && window.SMD_NATIVE.deleteWhisperModel) jobs.push(Promise.resolve(window.SMD_NATIVE.deleteWhisperModel()).catch(function () {})); } catch (e) {}
+    toast("Removing downloaded models…");
+    Promise.all(jobs).then(function () { toast("Downloaded models removed — they re-download on your next scan."); })
+      .catch(function () { toast("Couldn’t remove all models."); });
+  }
 
   // The structured-report generator (thorex-report.js) is an optional dependency: if it hasn't
   // loaded for some reason, every call site below degrades gracefully rather than throwing.
@@ -1154,21 +1283,68 @@
     }).join("") + "<p style='color:#888;font-size:12px'>" + esc(MANDATORY_DISCLAIMER) + "</p>";
   }
 
-  // Export / Share both render the deterministic structured report (thorex-report.js) — the same
-  // content the "Radiology report" section on the result screen shows expanded.
+  // ── Export helpers ───────────────────────────────────────────────────────────────────────────
+  // Convert a blob:/data:/http URL to a data-URL (needed so the shared/printed doc is self-contained —
+  // a blob: URL does not survive being written to a file). Resolves "" on failure (doc just omits it).
+  function toDataUrl(url) {
+    if (!url) return Promise.resolve("");
+    if (/^data:/i.test(url)) return Promise.resolve(url);
+    return fetch(url).then(function (r) { return r.blob(); }).then(function (b) {
+      return new Promise(function (res) { var fr = new FileReader(); fr.onload = function () { res(String(fr.result || "")); }; fr.onerror = function () { res(""); }; fr.readAsDataURL(b); });
+    }).catch(function () { return ""; });
+  }
+  var _logoCache = null;
+  function logoDataUrl() {
+    if (_logoCache != null) return Promise.resolve(_logoCache);
+    return toDataUrl("/logo.png").then(function (d) { _logoCache = d || ""; return _logoCache; });
+  }
+  // Write the finished HTML document out: native → temp file + Share sheet (iOS: Print → Save as PDF);
+  // web → hidden iframe + print (Save as PDF from the print dialog).
+  function exportHtmlDoc(html, filename) {
+    var name = (filename || "StewardMD-CXR-report").replace(/[^\w.-]+/g, "-") + ".html";
+    try {
+      var Cap = window.Capacitor, P = Cap && Cap.Plugins;
+      if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+        P.Filesystem.writeFile({ path: name, data: html, directory: "CACHE", encoding: "utf8" })
+          .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
+          .then(function (r) { return P.Share.share({ title: "StewardMD — CXR report", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
+          .catch(function () { toast("Export unavailable on this device."); });
+        return;
+      }
+    } catch (e) {}
+    // Web: print via a hidden iframe (the print dialog offers "Save as PDF").
+    try {
+      var ifr = document.createElement("iframe");
+      ifr.setAttribute("aria-hidden", "true");
+      ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+      document.body.appendChild(ifr);
+      var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+      setTimeout(function () {
+        try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+        setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+      }, 350);
+      return;
+    } catch (e) {}
+    toast("Export not available on this device.");
+  }
+
+  // Export / Share → the professional branded StewardMD report (logo + teal borders + warning +
+  // embedded X-ray). Async: inline the logo + X-ray as data-URIs so the shared/printed file is
+  // self-contained, then hand it to exportHtmlDoc().
   function exportReport() {
     var a = state.analysis; if (!a) { toast("No result to export."); return; }
-    var rep = buildReportSafe(a, { context: (a && a.__context) || "" });
-    var html = rep ? rep.html : legacyExportHtml(a);
-    var frag = (typeof document !== "undefined") ? document.createElement("div") : null;
-    try {
-      if (frag) frag.innerHTML = html;
-      var title = "ThoreX — CXR result";
-      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.saveHtmlFile && frag) { window.SMD_NATIVE.saveHtmlFile(frag, title, "ThoreX-CXR-report").catch(function () { toast("Export unavailable."); }); return; }
-      var w = window.open("", "_blank");
-      if (w) { w.document.write("<html><head><title>" + esc(title) + "</title></head><body>" + html + "</body></html>"); w.document.close(); w.focus(); w.print(); return; }
-    } catch (er) {}
-    toast("Export not available on this device.");
+    var R = window.SMD_THOREX_REPORT;
+    if (!R || !R.buildProDocument) {
+      // Fallback: the old plain report, so Export never silently does nothing on a stale bundle.
+      var rep = buildReportSafe(a, { context: (a && a.__context) || "" });
+      exportHtmlDoc("<!doctype html><html><head><meta charset=utf-8><title>ThoreX — CXR result</title></head><body>" + (rep ? rep.html : legacyExportHtml(a)) + "</body></html>", "StewardMD-CXR-report");
+      return;
+    }
+    toast("Preparing report…");
+    Promise.all([logoDataUrl(), toDataUrl(a && a.__xrayUrl)]).then(function (res) {
+      var doc = R.buildProDocument(a, { context: (a && a.__context) || "", logoDataUrl: res[0], xrayDataUrl: res[1], createdAt: a && a.createdAt });
+      exportHtmlDoc(doc, "StewardMD-CXR-report");
+    }).catch(function () { toast("Couldn’t prepare the report."); });
   }
 
   // Copy — puts the plain-text structured report (thorex-report.js `text`) on the clipboard.
@@ -1313,6 +1489,7 @@
       case "tx-toggle-confidence": toggleConfidence(); return;
       case "tx-toggle-v2beta": toggleV2beta(); return;
       case "tx-toggle-haptics": toggleHaptics(); return;
+      case "tx-remove-models": haptic("light"); removeModels(); return;
       case "tx-clear-cxrs": clearCxrs(); return;
     }
     /* other data-act values are screen-internal — screens handle them locally. */

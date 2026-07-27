@@ -151,8 +151,11 @@
       return TR.detectText({ base64Image: b64 }).then(function (res) {
         var lines = [];
         try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
+        if (!lines.length && res && res.lines && res.lines.length) lines = res.lines.map(String);
         if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
-        return { text: (res && res.text) || lines.join("\n"), lines: lines };
+        // boxes: normalized [0,1] top-left {text,x,y,w,h} per text line (for on-device PHI redaction).
+        var boxes = (res && Array.isArray(res.boxes)) ? res.boxes : [];
+        return { text: (res && res.text) || lines.join("\n"), lines: lines, boxes: boxes };
       });
     },
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:

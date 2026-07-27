@@ -401,8 +401,93 @@
     '</div>';
   }
 
+  /* ═══════════════════════════ Professional print/PDF document ═══════════════════════════════════
+   * A self-contained, print-ready branded report (StewardMD letterhead, teal borders, embedded X-ray,
+   * mandatory warning, signature block) — the document the Export/Share action produces. Pure: given the
+   * analysis + opts (context, logoDataUrl, xrayDataUrl, createdAt) it returns a full HTML string that
+   * renders identically on device, in an iframe (web print), or as a shared file (iOS Print → Save PDF). */
+  var PRO_CSS =
+    "*{box-sizing:border-box}" +
+    "body{margin:0;background:#eef2f4;color:#0f172a;font:400 13px/1.55 -apple-system,'Segoe UI',Roboto,system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
+    ".page{max-width:820px;margin:14px auto;background:#fff;border:2px solid #0f766e;border-radius:6px;overflow:hidden}" +
+    ".hdr{display:flex;align-items:center;gap:14px;padding:16px 22px;background:linear-gradient(90deg,#0f766e,#0d9488)}" +
+    ".hdr .logo{width:46px;height:46px;border-radius:10px;background:#fff;padding:4px;object-fit:contain}" +
+    ".hdr-txt{flex:1;color:#fff}.brand{font-weight:800;font-size:22px;letter-spacing:-.01em}.tag{font-size:12px;font-weight:600;opacity:.92}" +
+    ".hdr-right{text-align:right;color:#fff}.hr-l{font-weight:800;font-size:12px;letter-spacing:.06em}.hr-s{font-size:11px;opacity:.9}" +
+    ".rule{height:5px;background:repeating-linear-gradient(90deg,#0f766e 0 18px,#5eead4 18px 26px)}" +
+    ".meta{padding:12px 22px;border-bottom:1px solid #e2e8f0}.meta>div{margin-bottom:5px}" +
+    ".meta .ml{display:inline-block;min-width:118px;font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:#0f766e;vertical-align:top}" +
+    ".meta .mv{font-size:12.5px;color:#334155}" +
+    "h1{font-size:17px;text-align:center;margin:16px 22px 2px;letter-spacing:.02em}.h1sub{text-align:center;font-size:11.5px;color:#64748b;margin:0 22px 6px}" +
+    ".xray{margin:12px 22px;text-align:center}.xray img{max-width:100%;max-height:360px;border:1px solid #0f766e;border-radius:6px;background:#000}" +
+    ".xcap{font-size:10.5px;color:#64748b;margin-top:4px}" +
+    "h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;border-bottom:1.5px solid #0f766e;padding-bottom:3px;margin:16px 22px 8px}" +
+    "ul{margin:0 22px 8px;padding-left:20px}li{margin-bottom:4px}" +
+    ".impression{margin:0 22px 8px;font-weight:800}" +
+    ".ddx .conf{font-weight:800;color:#0f766e}.ddx .band{font-size:11px;color:#64748b}" +
+    ".warn{margin:14px 22px;padding:12px 14px;border:1.5px solid #b45309;background:#fffbeb;border-radius:8px;font-size:11.5px;line-height:1.5;color:#7c2d12;display:flex;flex-direction:column;gap:4px}.warn b{color:#b45309}" +
+    ".sign{display:flex;gap:30px;margin:24px 22px 6px}.sig{flex:1;font-size:11px;color:#64748b}.sig-line{border-top:1.5px solid #94a3b8;margin-bottom:5px;height:24px}" +
+    ".foot{display:flex;justify-content:space-between;gap:8px;padding:12px 22px;margin-top:10px;border-top:3px solid #0f766e;font-size:10.5px;color:#64748b;background:#f8fafc}" +
+    "@page{margin:10mm}@media print{body{background:#fff}.page{margin:0;border:2px solid #0f766e}}";
+
+  function buildProDocument(analysis, opts) {
+    opts = opts || {};
+    var rep = buildReport(analysis, opts);
+    var S = rep.sections;
+    var logo = str(opts.logoDataUrl);
+    var xray = str(opts.xrayDataUrl);
+    var created = str(opts.createdAt);
+
+    var findItems = arr(S.findings.items);
+    var findingsList = findItems.length
+      ? findItems.map(function (f) {
+          return '<li><b>' + esc(f.label) + '</b>' + (f.confPct != null ? ' — ' + f.confPct + '% AI confidence' : '') +
+            (f.band ? ' (' + esc(f.band) + ')' : '') + (f.relevance ? '. ' + esc(f.relevance) : '') + '</li>';
+        }).join("")
+      : '<li>No significant abnormality detected above the AI operating threshold. This does not exclude disease.</li>';
+    var ddxItems = arr(S.differential.items);
+    var ddxList = ddxItems.length
+      ? ddxItems.map(function (d) {
+          return '<li><b>' + esc(d.label) + '</b>' + (d.confPct != null ? ' — <span class="conf">' + d.confPct + '%</span>' : '') +
+            (d.band ? ' <span class="band">' + esc(d.band) + '</span>' : '') + '</li>';
+        }).join("")
+      : '<li>No differential considerations crossed the AI operating threshold.</li>';
+    var advice = arr(S.recommendations.items).map(function (r) { return '<li>' + esc(r) + '</li>'; }).join("") +
+      '<li><b>Clinical correlation advised.</b> ' + esc(S.followUp.text) + '</li>';
+
+    return '<!doctype html><html><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<title>StewardMD — AI Chest X-ray Report</title><style>' + PRO_CSS + '</style></head><body>' +
+      '<div class="page">' +
+        '<div class="hdr">' +
+          (logo ? '<img class="logo" src="' + esc(logo) + '" alt="StewardMD logo" />' : '') +
+          '<div class="hdr-txt"><div class="brand">StewardMD</div><div class="tag">AI Radiology &middot; Chest X-ray Screening</div></div>' +
+          '<div class="hdr-right"><div class="hr-l">AI SCREENING REPORT</div>' + (created ? '<div class="hr-s">Generated ' + esc(created) + '</div>' : '') + '</div>' +
+        '</div>' +
+        '<div class="rule"></div>' +
+        '<div class="meta">' +
+          '<div><span class="ml">Clinical details</span><span class="mv">' + esc(S.clinicalInformation.text) + '</span></div>' +
+          '<div><span class="ml">Technique</span><span class="mv">' + esc(S.technique.text) + '</span></div>' +
+          '<div><span class="ml">Image quality</span><span class="mv">' + esc(S.imageQuality.text) + '</span></div>' +
+        '</div>' +
+        '<h1>AI CHEST X-RAY SCREENING REPORT</h1>' +
+        '<div class="h1sub">Single frontal chest radiograph &middot; AI-assisted screening (ThoreX AI)</div>' +
+        (xray ? '<div class="xray"><img src="' + esc(xray) + '" alt="Analyzed chest radiograph" /><div class="xcap">Analyzed image &middot; burnt-in identifiers masked where detected</div></div>' : '') +
+        '<h2>Findings</h2><ul class="findings">' + findingsList + '</ul>' +
+        '<h2>Impression</h2><p class="impression">' + esc(S.impression.text) + '</p>' +
+        '<h2>Differential diagnosis</h2><ul class="ddx">' + ddxList + '</ul>' +
+        '<h2>Advice</h2><ul class="advice">' + advice + '</ul>' +
+        '<div class="warn"><b>&#9888; IMPORTANT — AI-generated screening, not a diagnosis.</b>' +
+          '<span>' + esc(MANDATORY_DISCLAIMER) + ' Confidence percentages are the model&rsquo;s raw scores, not calibrated probabilities of disease. This automated report is for clinical decision support and research/education and must be confirmed by a qualified radiologist / physician before any clinical decision.</span></div>' +
+        '<div class="sign"><div class="sig"><div class="sig-line"></div>AI-generated &middot; no physician signature</div>' +
+          '<div class="sig"><div class="sig-line"></div>Reviewing radiologist / physician</div></div>' +
+        '<div class="foot"><span>StewardMD &middot; AI Clinical Decision Support</span><span>ThoreX AI</span>' + (created ? '<span>' + esc(created) + '</span>' : '') + '</div>' +
+      '</div></body></html>';
+  }
+
   var API = {
     buildReport: buildReport,
+    buildProDocument: buildProDocument,
     MANDATORY_DISCLAIMER: MANDATORY_DISCLAIMER,
     SECTION_ORDER: SECTION_ORDER,
     SECTION_TITLES: SECTION_TITLES
