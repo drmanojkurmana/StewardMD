@@ -65,7 +65,7 @@
   // Deliberately NOT wired through thorex-flags.js — that registry only supports bool/int/tri/enum
   // values, not a free-form string/URL, so this reads localStorage directly (documented here and in
   // thorex-flags.js) rather than forcing an ill-fitting flag type.
-  var MODEL_BASE_FALLBACK = "/models";
+  var MODEL_BASE_FALLBACK = "https://pub-7fbacea451504dd3844d16a0f8f48276.r2.dev/thorex";   // R2-hosted models (download-once, cached on-device). Override via localStorage smd_thorex_model_base.
   function modelBase() {
     try {
       if (typeof localStorage !== "undefined") {
