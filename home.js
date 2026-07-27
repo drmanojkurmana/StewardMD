@@ -2116,7 +2116,43 @@
   // disclaimers; answers render as safe Markdown with human-readable Sources ▸.
   var _maikHist = [];
   var MAIK_LS = "smd_maik_thread";
-  function maikSaveThread(h) { try { localStorage.setItem(MAIK_LS, h || ""); } catch (e) {} }
+  // ── On-device conversation history (account-scoped) — a privacy feature: your MaiK history is
+  //    saved ONLY on this device (localStorage), never uploaded. Keyed per account (or per device
+  //    when signed out), so each doctor sees only their own conversations on their own phone. ──
+  function maikAcctKey() {
+    try {
+      var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null;
+      var em = (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "";
+      if (em) return "u_" + String(em).toLowerCase();
+      var dev = (function () { try { return localStorage.getItem("smd_device_id"); } catch (e) { return null; } })();
+      return "d_" + (dev || "guest");
+    } catch (e) { return "guest"; }
+  }
+  function maikConvKey() { return "smd_maik_convos_" + maikAcctKey(); }
+  function maikLoadConvos() { try { return JSON.parse(localStorage.getItem(maikConvKey()) || "[]") || []; } catch (e) { return []; } }
+  function maikStoreConvos(list) { try { localStorage.setItem(maikConvKey(), JSON.stringify((list || []).slice(0, 200))); } catch (e) {} }
+  var _maikConvId = (function () { try { return localStorage.getItem("smd_maik_active") || null; } catch (e) { return null; } })();
+  function maikSetActive(id) { _maikConvId = id || null; try { if (id) localStorage.setItem("smd_maik_active", id); else localStorage.removeItem("smd_maik_active"); } catch (e) {} }
+  function maikNewConvId() { return "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
+  function maikConvTitle(html) {
+    try { var m = String(html || "").match(/class="maik-b you"[^>]*>([\s\S]*?)<\/div>/); if (m) { var t = m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(); if (t) return t.slice(0, 70); } } catch (e) {}
+    return "New conversation";
+  }
+  function maikUpsertConv(html) {
+    try {
+      if (!html || !/maik-b you/.test(html)) return;   // only persist a conversation once it has a question
+      if (!_maikConvId) maikSetActive(maikNewConvId());
+      var list = maikLoadConvos(), i = -1;
+      for (var k = 0; k < list.length; k++) if (list[k].id === _maikConvId) { i = k; break; }
+      var rec = { id: _maikConvId, title: maikConvTitle(html), html: html, ts: Date.now() };
+      if (i >= 0) list[i] = rec; else list.unshift(rec);
+      list.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+      maikStoreConvos(list);
+    } catch (e) {}
+  }
+  function maikSaveThread(h) { try { localStorage.setItem(MAIK_LS, h || ""); } catch (e) {} maikUpsertConv(h); }
+  function maikAcctLabel() { try { var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null; return (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || ""; } catch (e) { return ""; } }
+  function maikAgo(ts) { var s = Math.max(0, (Date.now() - (ts || 0)) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago"; try { return new Date(ts).toLocaleDateString(); } catch (e) { return ""; } }
   // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
   var _maikBodyHTML = (function () { try { return localStorage.getItem(MAIK_LS) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
@@ -2133,6 +2169,11 @@
   var MK = {
     new: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
     close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
+    menu: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>',
+    plus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    search: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    lock: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+    trash: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg>',
     shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mk-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg>',
     spark: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--mk-teal)" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/></svg>',
     book: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
@@ -2149,6 +2190,7 @@
     return '' +
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
       '<div class="maik-hd"><div class="maik-hd-row">' +
+        '<button class="maik-hd-btn" id="maikMenu" type="button" title="Conversations" aria-label="Conversations">' + MK.menu + '</button>' +
         '<div class="maik-logo-wrap"><div class="maik-logo-glow"></div><img class="maik-logo" src="' + MK_LOGO() + '" alt="MaiK"></div>' +
         '<span style="flex:1"></span>' +
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
@@ -2156,6 +2198,21 @@
       '</div></div>' +
       '<div class="maik-disc">' + MK.shield + '<span>Grounded &middot; AI-generated, verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
+      // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
+      '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
+        '<div class="maik-side-ov" id="maikSideOv"></div>' +
+        '<aside class="maik-side" id="maikSide" role="dialog" aria-label="Your conversations">' +
+          '<div class="maik-side-hd"><img class="maik-side-logo" src="' + MK_LOGO() + '" alt="">' +
+            '<span class="maik-side-ttl">MaiK</span>' +
+            '<button class="maik-hd-btn" id="maikSideClose" type="button" aria-label="Close conversations">' + MK.close + '</button></div>' +
+          '<button class="maik-side-row maik-side-new" id="maikSideNew" type="button">' + MK.plus + '<span>New conversation</span></button>' +
+          '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
+          '<div class="maik-side-lbl">Your conversations</div>' +
+          '<div class="maik-side-list" id="maikSideList"></div>' +
+          '<div class="maik-side-priv">' + MK.lock + '<span>Saved only on this device — your history never leaves your phone.</span></div>' +
+          '<div class="maik-side-acct" id="maikSideAcct"></div>' +
+        '</aside>' +
+      '</div>' +
       '<div class="maik-cmp">' +
         '<button class="maik-extract" id="maikExtract" type="button">' + svg("brain", "smd-ico") + ' Extract findings for Clinical Reasoning →</button>' +
         '<div class="maik-cmp-in">' +
@@ -2169,6 +2226,44 @@
   //    --mk-*) that keeps the app's markdown answers, streaming caret, tables, <details> sources,
   //    chips, welcome/edu/assume notes and FAB-hiding working. #maikSheet lives outside #homeV2, so
   //    the tokens sit on the sheet itself and flip via `body.dark #maikSheet` (+ v3-dark mirror). ──
+  function maikSideCSS() {
+    if (document.getElementById("maik-side-css")) return;
+    var st = document.createElement("style"); st.id = "maik-side-css";
+    st.textContent = ".maik-side-wrap{position:absolute;inset:0;z-index:60}" +
+      ".maik-side-wrap[hidden]{display:none}" +
+      ".maik-side-ov{position:absolute;inset:0;background:rgba(15,23,42,.36);opacity:0;transition:opacity .2s}" +
+      ".maik-side-wrap.open .maik-side-ov{opacity:1}" +
+      ".maik-side{position:absolute;top:0;left:0;bottom:0;width:min(86%,340px);background:var(--mk-sheet,#fff);box-shadow:2px 0 26px rgba(0,0,0,.2);transform:translateX(-103%);transition:transform .22s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-radius:0 18px 18px 0;overflow:hidden}" +
+      ".maik-side-wrap.open .maik-side{transform:translateX(0)}" +
+      ".maik-side-hd{display:flex;align-items:center;gap:9px;padding:15px 12px 8px}" +
+      ".maik-side-logo{width:26px;height:26px;border-radius:7px}" +
+      ".maik-side-ttl{font:800 16px 'Inter',system-ui;color:var(--mk-ink,#0f172a);flex:1}" +
+      ".maik-side-row{display:flex;align-items:center;gap:10px;width:calc(100% - 16px);margin:1px 8px;padding:11px 12px;border:0;background:transparent;border-radius:12px;font:600 14.5px 'Inter',system-ui;color:var(--mk-ink,#0f172a);cursor:pointer;text-align:left}" +
+      ".maik-side-row:hover{background:var(--mk-chip,#f1f5f9)}" +
+      ".maik-side-new{color:var(--mk-teal,#0e6e63);font-weight:700}" +
+      ".maik-side-srch{display:flex;align-items:center;gap:8px;margin:4px 10px 8px;padding:9px 11px;background:var(--mk-chip,#f1f5f9);border-radius:11px;color:var(--mk-soft,#64748b)}" +
+      ".maik-side-srch input{flex:1;border:0;background:transparent;font:500 14px 'Inter',system-ui;color:var(--mk-ink,#0f172a);outline:none;min-width:0}" +
+      ".maik-side-lbl{font:700 11px 'Inter',system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--mk-soft,#94a3b8);padding:6px 16px 4px}" +
+      ".maik-side-list{flex:1;overflow-y:auto;padding:0 6px;-webkit-overflow-scrolling:touch}" +
+      ".maik-side-item{display:flex;align-items:center;border-radius:11px;margin:1px 2px}" +
+      ".maik-side-item:hover{background:var(--mk-chip,#f1f5f9)}" +
+      ".maik-side-item.active{background:var(--mk-chip,#eef2f7)}" +
+      ".maik-side-open{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;border:0;background:transparent;padding:10px;text-align:left;cursor:pointer}" +
+      ".maik-side-t{font:600 14px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px}" +
+      ".maik-side-d{font:500 11.5px 'Inter',system-ui;color:var(--mk-soft,#94a3b8)}" +
+      ".maik-side-del{border:0;background:transparent;color:var(--mk-soft,#cbd5e1);padding:8px;cursor:pointer;border-radius:8px;flex:none}" +
+      ".maik-side-del:hover{color:#e11d48;background:rgba(225,29,72,.09)}" +
+      ".maik-side-empty{padding:18px 16px;font:500 13.5px 'Inter',system-ui;color:var(--mk-soft,#94a3b8);line-height:1.5}" +
+      ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
+      ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
+      ".maik-side-av{width:32px;height:32px;border-radius:50%;background:var(--mk-teal,#0e6e63);color:#fff;display:flex;align-items:center;justify-content:center;font:800 12px 'Inter',system-ui;flex:none}" +
+      ".maik-side-em{display:flex;flex-direction:column;min-width:0}" +
+      ".maik-side-em b{font:700 13px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" +
+      ".maik-side-em span{font:500 11px 'Inter',system-ui;color:var(--mk-soft,#94a3b8)}" +
+      "body.dark .maik-side,body.v3-dark .maik-side{background:var(--mk-sheet,#111a24)}" +
+      "body.dark .maik-side-t,body.dark .maik-side-ttl,body.dark .maik-side-row,body.dark .maik-side-em b{color:var(--mk-ink,#e6edf3)}";
+    document.head.appendChild(st);
+  }
   function maikCSS() {
     if (document.getElementById("maik-sheet-css")) return;
     var st = document.createElement("style"); st.id = "maik-sheet-css";
@@ -2354,7 +2449,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   }
   function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
   function openAskAi(prefill) {
-    maikCSS();
+    maikCSS(); maikSideCSS();
     var old = document.getElementById("maikSheet");
     if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
@@ -2971,9 +3066,41 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; maikSaveThread(""); if (body) body.innerHTML = ""; emptyState(); if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(MAIK_LS, ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
+    // ── Conversation sidebar (on-device history — a privacy feature) ──
+    function maikSideEls() { return { wrap: sheet.querySelector("#maikSideWrap"), list: sheet.querySelector("#maikSideList"), acct: sheet.querySelector("#maikSideAcct"), search: sheet.querySelector("#maikSideSearch") }; }
+    function maikRenderSide(filter) {
+      var e = maikSideEls(); if (!e.list) return;
+      var q = String(filter || "").toLowerCase().trim();
+      var convos = maikLoadConvos().filter(function (c) { return c && c.title && (!q || c.title.toLowerCase().indexOf(q) >= 0); });
+      e.list.innerHTML = convos.length ? convos.map(function (c) {
+        return '<div class="maik-side-item' + (c.id === _maikConvId ? " active" : "") + '"><button class="maik-side-open" type="button" data-conv="' + c.id + '"><span class="maik-side-t">' + maikEscH(c.title) + '</span><span class="maik-side-d">' + maikAgo(c.ts) + '</span></button><button class="maik-side-del" type="button" data-del="' + c.id + '" aria-label="Delete conversation">' + MK.trash + '</button></div>';
+      }).join("") : ('<div class="maik-side-empty">' + (q ? "No matching conversations." : "No saved conversations yet — ask MaiK anything to start.") + '</div>');
+      if (e.acct) { var em = maikAcctLabel(); e.acct.innerHTML = em ? ('<div class="maik-side-av">' + maikEscH(em.slice(0, 2).toUpperCase()) + '</div><div class="maik-side-em"><b>' + maikEscH(em) + '</b><span>Signed in &middot; history on this device</span></div>') : '<div class="maik-side-av">?</div><div class="maik-side-em"><b>Guest</b><span>History saved on this device</span></div>'; }
+    }
+    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
+    function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
+    function maikOpenConv(id) {
+      var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
+      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikTopic = null; _maikCache = {};
+      if (body) { body.innerHTML = _maikBodyHTML; scroll(); }
+      try { localStorage.setItem(MAIK_LS, _maikBodyHTML); } catch (e) {}
+      maikCloseSide();
+    }
+    var _menuBtn = sheet.querySelector("#maikMenu"); if (_menuBtn) _menuBtn.addEventListener("click", maikOpenSide);
+    var _sideClose = sheet.querySelector("#maikSideClose"); if (_sideClose) _sideClose.addEventListener("click", maikCloseSide);
+    var _sideOv = sheet.querySelector("#maikSideOv"); if (_sideOv) _sideOv.addEventListener("click", maikCloseSide);
+    var _sideNew = sheet.querySelector("#maikSideNew"); if (_sideNew) _sideNew.addEventListener("click", function () { maikNewThread(); });
+    var _sideSearch = sheet.querySelector("#maikSideSearch"); if (_sideSearch) _sideSearch.addEventListener("input", function () { maikRenderSide(_sideSearch.value); });
+    var _sideList = sheet.querySelector("#maikSideList");
+    if (_sideList) _sideList.addEventListener("click", function (ev) {
+      var del = ev.target.closest && ev.target.closest("[data-del]");
+      if (del) { ev.stopPropagation(); var did = del.getAttribute("data-del"); maikStoreConvos(maikLoadConvos().filter(function (c) { return c.id !== did; })); if (did === _maikConvId) maikNewThread(); else maikRenderSide(_sideSearch ? _sideSearch.value : ""); return; }
+      var op = ev.target.closest && ev.target.closest("[data-conv]");
+      if (op) maikOpenConv(op.getAttribute("data-conv"));
+    });
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
