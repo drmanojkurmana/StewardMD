@@ -48,7 +48,9 @@ const eduLabels = report.sections.findings.items.map((f) => f.label);
 assert.ok(!eduLabels.includes("Bilateral lower lobe interstitial opacities"), "educational findings must never appear in the clinical Findings section");
 
 // ── Impression leads with the High-band finding ──
-assert.ok(report.sections.impression.text.startsWith("High-confidence: Right lower lobe consolidation."), "Impression should lead with the High-band finding");
+// consolidation 0.89 (>75% -> working diagnosis) leads; air bronchogram 0.71 (50-75% -> consideration)
+assert.ok(report.sections.impression.text.startsWith("Findings support Right lower lobe consolidation (>75% AI confidence)"), "Impression should lead with the >75% finding as a working diagnosis");
+assert.ok(/Differential consideration: Air bronchogram \(50–75% AI confidence\)/.test(report.sections.impression.text), "Impression should tier the 50-75% finding as a differential consideration");
 assert.ok(!/Bilateral lower lobe interstitial opacities/.test(report.sections.impression.text), "Impression must never be driven by the educational engine's findings");
 
 // ── Recommendations reflect the consolidation/pneumonia finding, and never the educational engine ──
@@ -85,13 +87,13 @@ const lowAnalysis = M.makeAnalysis({
   quality: { view: "PA upright", adequate: true, issues: [] }
 });
 const lowReport = R.buildReport(lowAnalysis);
-assert.ok(lowReport.sections.impression.text.startsWith("No high-confidence acute abnormality flagged by the AI."), "a low-band-only analysis should yield the no-high-confidence impression");
+assert.ok(lowReport.sections.impression.text.startsWith("No finding reached a confidence level suggesting an acute abnormality — the study may be normal."), "a low-band-only analysis should read as possibly-normal");
 assert.equal(lowReport.sections.urgency.text, "Routine.", "a low/info-only analysis should be Routine urgency");
 
 // ── a fully empty analysis (no engines at all) must not crash and still produces a safe report ──
 const emptyReport = R.buildReport(M.makeAnalysis({}));
 assert.equal(emptyReport.sections.findings.items.length, 0);
-assert.ok(emptyReport.sections.impression.text.startsWith("No high-confidence acute abnormality flagged by the AI."));
+assert.ok(emptyReport.sections.impression.text.startsWith("No finding reached a confidence level suggesting an acute abnormality — the study may be normal."));
 assert.equal(emptyReport.sections.recommendations.items.length, 1, "no findings should yield exactly the generic fallback recommendation");
 assert.ok(emptyReport.text.indexOf(DISCLAIMER) >= 0);
 assert.equal(emptyReport.sections.clinicalInformation.text, "Not provided", "Clinical information should default to 'Not provided' with no opts.context");
@@ -108,5 +110,23 @@ assert.equal(emphysemaReport.sections.findings.items[0].label, "Hyperinflation (
 assert.ok(/Hyperinflation/.test(emphysemaReport.html) && !/>Emphysema</.test(emphysemaReport.html), "report must show Hyperinflation, never assert bare Emphysema");
 assert.equal(M.displayLabel("Emphysema"), "Hyperinflation (possible emphysema)", "models.displayLabel should reframe Emphysema");
 assert.equal(M.displayLabel("Pneumothorax"), "Pneumothorax", "displayLabel should pass through labels with no reframe");
+
+// ── confidence tiers: a lone 50% (operating-point) finding must read "may be normal", NOT a diagnosis ──
+const fiftyReport = R.buildReport(M.makeAnalysis({
+  engines: [
+    { engine: "torchxrayvision", educational: false, findings: [{ label: "Infiltration", prob: 0.50, band: "Low", severity: "info", relevance: "Correlate clinically." }] }
+  ],
+  quality: { view: "PA upright", adequate: true, issues: [] }
+}));
+assert.ok(/the study may be normal/.test(fiftyReport.sections.impression.text), "a 50% finding should read as possibly normal");
+assert.ok(!/working diagnosis/.test(fiftyReport.sections.impression.text), "a 50% finding must never be called a working diagnosis");
+
+// ── a >75% finding is tiered as a working diagnosis ──
+const highReport = R.buildReport(M.makeAnalysis({
+  engines: [
+    { engine: "torchxrayvision", educational: false, findings: [{ label: "Pneumothorax", prob: 0.83, band: "High", severity: "urgent", relevance: "Urgent." }] }
+  ]
+}));
+assert.ok(/Findings support Pneumothorax \(>75% AI confidence\) — may be read as a working diagnosis/.test(highReport.sections.impression.text), ">75% should read as a working diagnosis");
 
 console.log("ok");

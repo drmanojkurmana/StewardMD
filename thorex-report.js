@@ -132,16 +132,32 @@
   }
 
   /* ══════════════════════════════════════ Impression ════════════════════════════════════════════ */
+  // Confidence tiers for the IMPRESSION (main line), by AI confidence %:
+  //   >75%  -> may be read as a working diagnosis (pending radiologist confirmation)
+  //   50-75% -> differential consideration, correlate clinically
+  //   <=50% -> below the level suggesting acute abnormality; the study MAY BE NORMAL
+  // Findings with no per-finding % (legacy records) fall back to the band word.
+  function tierOfItem(f) {
+    var p = f.confPct;
+    if (p == null) return f.band === "High" ? "diagnosis" : (f.band === "Medium" ? "consider" : "low");
+    if (p > 75) return "diagnosis";
+    if (p > 50) return "consider";
+    return "low";
+  }
   function buildImpression(findings) {
-    var high = findings.filter(function (f) { return f.band === "High"; });
-    var med = findings.filter(function (f) { return f.band === "Medium"; });
-    var low = findings.filter(function (f) { return f.band === "Low"; });
+    var diag = findings.filter(function (f) { return tierOfItem(f) === "diagnosis"; });
+    var consider = findings.filter(function (f) { return tierOfItem(f) === "consider"; });
+    var low = findings.filter(function (f) { return tierOfItem(f) === "low"; });
     var parts = [];
-    if (high.length) parts.push("High-confidence: " + labelsOf(high) + ".");
-    if (med.length) parts.push("Medium-confidence: " + labelsOf(med) + ".");
-    if (!parts.length) {
-      parts.push("No high-confidence acute abnormality flagged by the AI.");
-      if (low.length) parts.push("Low-confidence: " + labelsOf(low) + ".");
+    if (diag.length) parts.push("Findings support " + labelsOf(diag) + " (>75% AI confidence) — may be read as a working diagnosis pending radiologist confirmation.");
+    if (consider.length) parts.push("Differential consideration" + (consider.length > 1 ? "s" : "") + ": " + labelsOf(consider) + " (50–75% AI confidence) — correlate clinically.");
+    if (!diag.length && !consider.length) {
+      // Nothing above 50% → say plainly the study may be normal (a hyperinflated-but-borderline film reads clean).
+      var normal = "No finding reached a confidence level suggesting an acute abnormality — the study may be normal.";
+      if (low.length) normal += " Low-confidence (≤50%): " + labelsOf(low) + " — likely incidental/borderline; correlate only if clinically relevant.";
+      parts.push(normal);
+    } else if (low.length) {
+      parts.push("Low-confidence (≤50%): " + labelsOf(low) + ".");
     }
     return parts.join(" ");
   }
@@ -361,8 +377,14 @@
       return '<section class="tx-report-sec"><h4 class="tx-report-h">' + esc(s.title) + '</h4>' + body +
         '<p class="tx-report-p tx-report-corr">Clinical correlation advised.</p></section>';
     }
+    function impressionSection() {
+      var s = sections.impression;
+      return '<section class="tx-report-sec"><h4 class="tx-report-h">' + esc(s.title) + '</h4>' +
+        '<p class="tx-report-p tx-report-impression">' + esc(s.text) + '</p></section>';
+    }
     var body = SECTION_ORDER.map(function (key) {
       if (key === "findings") return findingsSection();
+      if (key === "impression") return impressionSection();
       if (key === "differential") return differentialSection();
       if (key === "recommendations") return recsSection();
       return textSection(key);

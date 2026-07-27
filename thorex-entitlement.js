@@ -34,11 +34,20 @@
     }
   }
 
+  // Local opt-in for the V2 Beta educational engine (X-Raydar). Pro-gated + DEFAULT OFF (educational /
+  // non-commercial license). When a Pro user turns it on in ThoreX settings, entitlement resolves to
+  // "v2beta" so the on-device analyzer runs both engines — without needing a v2beta access-code grant.
+  function defV2betaFlag() {
+    try { return !!(window.SMD_THOREX_FLAGS && window.SMD_THOREX_FLAGS.bool && window.SMD_THOREX_FLAGS.bool("smd_thorex_v2beta")); } catch (e) { return false; }
+  }
+
   function resolve(opts) {
     opts = opts || {};
     var isPro = opts.isPro || defIsPro;
     var tierFor = opts.tierFor || defTier;
+    var v2betaFlag = opts.v2betaFlag || defV2betaFlag;
     if (!isPro()) return "free";
+    if (v2betaFlag()) return "v2beta";
     return tierFor("thorex") === "v2beta" ? "v2beta" : "v1";
   }
 

@@ -626,3 +626,17 @@
 #thorexRoot .tx-report-ddx-name{min-width:0;overflow:hidden;text-overflow:ellipsis}
 #thorexRoot .tx-report-conf{flex:0 0 auto;font:800 12.5px var(--tx-mono);color:var(--tx-primary)}
 #thorexRoot .tx-report-corr{margin-top:8px;font-weight:700;color:var(--tx-text-2);display:flex;align-items:center;gap:6px}
+
+/* the Impression (main line) is always bold */
+#thorexRoot .tx-report-impression{font-weight:800;color:var(--tx-text)}
+
+/* ── Clinical details + MaiK Scribe on the upload screen (feeds the AI report) ── */
+#thorexRoot .tx-clin{margin-top:12px}
+#thorexRoot .tx-clin-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+#thorexRoot .tx-clin-label{font:700 12.5px var(--tx-sans);color:var(--tx-text)}
+#thorexRoot .tx-clin-opt{display:block;font:600 10.5px var(--tx-sans);color:var(--tx-text-2)}
+#thorexRoot .tx-clin-mic{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;border:1px solid var(--tx-primary);background:color-mix(in srgb, var(--tx-primary) 10%, transparent);color:var(--tx-primary);font:800 12px var(--tx-sans);padding:7px 11px;border-radius:999px;cursor:pointer}
+#thorexRoot .tx-clin-mic .material-symbols-rounded{font-size:16px}
+#thorexRoot .tx-clin-mic:active{transform:scale(.97)}
+#thorexRoot .tx-clin-ta{width:100%;box-sizing:border-box;border:1px solid var(--tx-hairline);border-radius:12px;padding:10px 12px;font:500 13px/1.5 var(--tx-sans);background:var(--tx-card);color:var(--tx-text);resize:vertical}
+#thorexRoot .tx-clin-ta:focus-visible{outline:2px solid var(--tx-primary);outline-offset:-1px}
