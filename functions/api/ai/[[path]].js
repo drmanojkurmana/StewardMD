@@ -86,6 +86,9 @@ import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
+// Per-call model override (opts.model) so a lightweight parse-only call (the semantic router) can pin a
+// FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
+function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
 // Bound every upstream AI fetch so a stalled provider can never hang the Worker. fetch() resolves on
 // headers; fetchJsonWithTimeout keeps the abort armed across the body read too (the whole round-trip).
 async function fetchJsonWithTimeout(url, opts, ms) {
@@ -130,7 +133,7 @@ const developerProvider = {
   generate: async function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
-    const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
+    const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
     return parseCandidates(jr.data, jr.status);
   },
@@ -138,7 +141,7 @@ const developerProvider = {
   streamFetch: function (env, parts, maxTokens, opts) {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
-    return fetch(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
+    return fetch(`${DEV_HOST}/${modelFor(env, o)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
   }
 };
@@ -197,7 +200,7 @@ const vertexProvider = {
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens, opts) {
     const loc = env.GCP_LOCATION || "us-central1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
+    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
@@ -207,7 +210,7 @@ const vertexProvider = {
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
     const loc = env.GCP_LOCATION || "us-central1";
-    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:streamGenerateContent?alt=sse`;
+    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
@@ -794,7 +797,7 @@ export async function onRequest(context) {
       const sys =
         "You are a MEDICAL QUERY PARSER for a knowledge-base retrieval system. Read a clinician's query in ANY form — full terms, abbreviations, acronyms, eponyms, brand names, drug compositions, lab/serology/imaging codes, clinical shorthand, mnemonics, typos, British or American spelling — and output ONLY its medical MEANING as compact JSON. NEVER answer the medical question; only parse it.\n" +
         "Interpret it the way a physician would, then return EXACTLY this JSON shape:\n" +
-        '{"primaryConcept":"<single canonical FULL standard name of the main medical entity: expand every abbreviation/acronym, correct spelling, resolve brand->generic and code->full test/finding name, normalise to one standard term>",' +
+        '{"primaryConcept":"<single canonical FULL standard name of the main medical entity ONLY: expand every abbreviation/acronym, correct spelling, resolve brand->generic and code->full test/finding name, normalise to one standard term. Do NOT append the action, question-type, or qualifier words (treatment, prophylaxis, step-down, workup, interpretation, severity, crisis, exacerbation, prevention, dose, etc.) — those belong in intent/modifiers. e.g. \'gerd ppi step down\'->\'Gastroesophageal reflux disease\', \'dvt prophylaxis\'->\'Deep vein thrombosis\', \'pheochromocytoma crisis\'->\'Pheochromocytoma\'>",' +
         '"type":"disease|drug|drug_class|investigation|lab_test|imaging|procedure|organism|guideline|symptom|sign|concept",' +
         '"entities":[{"text":"<verbatim span from the query>","canonical":"<full standard name>","type":"<same enum>"}],' +
         '"intent":"<ONE of: definition, treatment, dose, differential, investigation, features, redflags, pathophysiology, prognosis, complications, prevention, etiology, risk_factors, epidemiology, classification, severity, guideline, followup, monitoring, interaction, contraindication, emergency, icu, screening, reasoning, other>",' +
@@ -803,10 +806,14 @@ export async function onRequest(context) {
         '"confidence":<0..1 that the parse is correct>,' +
         '"ambiguous":<true ONLY if the term has more than one common medical meaning AND the query gives no disambiguating context>,' +
         '"options":["<canonical meaning A>","<canonical meaning B>"]}\n' +
-        "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level' => investigation; a named clinical SCORE or diagnostic CRITERIA => classification; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
+        "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level' => investigation; a named clinical SCORE or diagnostic CRITERIA => classification; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
         "Query: " + q;
       let text;
-      try { text = await callGemini(env, [{ text: sys }], 200, { temperature: 0 }); }
+      // The router is a parse-only call — pin the FASTEST model (flash-lite) so the parse doesn't inherit
+      // the heavy answer model's latency. This is the dominant response-time lever: the router sits on the
+      // critical path of every clinical query. Overridable via env; falls back through callGemini's failover.
+      const routerModel = env.MAIK_ROUTER_MODEL || "gemini-2.5-flash-lite";
+      try { text = await callGemini(env, [{ text: sys }], 200, { temperature: 0, model: routerModel }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
       await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
       const p = parseJsonLoose(text) || {};
