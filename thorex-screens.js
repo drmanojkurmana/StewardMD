@@ -968,7 +968,10 @@
     try {
       if (state._xrayUrl && state._xrayUrl.indexOf("blob:") === 0) { try { URL.revokeObjectURL(state._xrayUrl); } catch (e) {} }
       state._xrayUrl = null;
-      var _b = image && (image.blob instanceof Blob ? image.blob : (image instanceof Blob ? image : null));
+      // The capture handoff is { id, source, data: <Blob> } (startCapture), but tolerate blob/raw-Blob too.
+      var _b = image && (image.data instanceof Blob ? image.data
+        : (image.blob instanceof Blob ? image.blob
+        : (image instanceof Blob ? image : null)));
       if (_b) state._xrayUrl = URL.createObjectURL(_b);
       else if (image && typeof image.dataUrl === "string") state._xrayUrl = image.dataUrl;
     } catch (e) { state._xrayUrl = null; }
