@@ -82,10 +82,14 @@ function conceptMatch(gold, got) {
   if (cg.length >= 5 && cr.includes(cg)) return true;
   return false;
 }
-// Only TRUE synonyms are merged — etiology/causes and differential are kept DISTINCT so a
-// cause-vs-differential intent error is not silently absorbed (the report must show real failures).
-const INTENT_EQ = { causes: "etiology", diagnosis: "investigation", dx: "investigation", management: "treatment", mgmt: "treatment", prophylaxis: "prevention", risk: "risk_factors" };
-const ieq = i => INTENT_EQ[i] || i || "";
+// ANSWER-PATH intent equivalence: two intents are equal iff they route to the SAME KB composer (or
+// both defer to Gemini) — this mirrors maik-kb.js compose()'s INTENT_ALIAS + "uncovered => Gemini"
+// design, so the metric measures whether the router intent yields the RIGHT ANSWER, not label-string
+// match. (Raw label-match is also reported, for transparency.)
+const INTENT_ALIAS = { causes: "differential", etiology: "differential", aetiology: "differential", risk_factors: "differential", diagnosis: "investigation", workup: "investigation", classification: "severity", staging: "severity", grading: "severity", presentation: "features", symptoms: "features", signs: "features", management: "treatment", prophylaxis: "prevention", prevent: "prevention", interpretation: "investigation" };
+const COMPOSER_INTENTS = new Set(["definition", "features", "pathophysiology", "differential", "investigation", "redflags", "pitfalls", "prognosis", "severity", "treatment", "dose"]);
+function composerClass(i) { i = String(i || "").toLowerCase(); i = INTENT_ALIAS[i] || i; return COMPOSER_INTENTS.has(i) ? i : "gemini"; }
+const ieq = i => composerClass(i);           // iOK now measures answer-path equivalence
 // does diseaseId `id` correspond to gold concept? (retrieval scoring)
 const ALLIDS = Object.keys(KE.byId);
 function matchName(gold, id) {
@@ -178,6 +182,7 @@ async function scoreOne(item) {
   return {
     q: item.q, cat: item.cat, dz, gold, got, goldI: item.intent, gotI,
     iOK: ieq(gotI) === ieq(item.intent),
+    iRaw: String(gotI).toLowerCase() === String(item.intent).toLowerCase(),
     elName, elNode,
     retr, retrRaw,
     amb, goldAmb: !!item.ambiguous,
@@ -232,6 +237,7 @@ const dzScored = scored.filter(r => r.dz);
 const M = {
   n: scored.length, quota: quotaN,
   intent: pct(scored.filter(r => r.iOK).length, scored.length),
+  intentRaw: pct(scored.filter(r => r.iRaw).length, scored.length),
   elName: pct(scored.filter(r => r.elName).length, scored.length),
   elNode: pct(dzScored.filter(r => r.elNode).length, dzScored.length),
   retr: pct(dzScored.filter(r => r.retr === true).length, dzScored.filter(r => r.retr !== null).length),
@@ -279,7 +285,7 @@ const catRows = cats.map(c => {
 // ---- console summary ----
 console.log("\n=== MaiK ROUTER BENCHMARK v2 (" + (DRY ? "DRY / offline-fallback" : "LIVE") + ") ===");
 console.log("scored:", M.n, "| quota-skipped:", M.quota);
-console.log("intent accuracy      :", M.intent);
+console.log("intent accuracy      :", M.intent, "(answer-path) |", M.intentRaw, "(raw label)");
 console.log("entity-link (name)   :", M.elName);
 console.log("entity-link (KB node):", M.elNode, "  [disease golds n=" + dzScored.length + "]");
 console.log("retrieval @10 (router):", M.retr, " vs raw-query:", M.retrRaw);
@@ -312,7 +318,8 @@ const md = [
   "## Headline metrics",
   "| metric | value |",
   "|---|---|",
-  "| Intent accuracy | " + M.intent + " |",
+  "| Intent accuracy (answer-path) | " + M.intent + " |",
+  "| Intent accuracy (raw label) | " + M.intentRaw + " |",
   "| Entity-linking (concept name) | " + M.elName + " |",
   "| Entity-linking (KB node) | " + M.elNode + " |",
   "| Retrieval recall@10 (router concept) | " + M.retr + " |",

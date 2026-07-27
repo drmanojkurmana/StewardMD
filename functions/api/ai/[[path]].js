@@ -89,6 +89,12 @@ function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 // Per-call model override (opts.model) so a lightweight parse-only call (the semantic router) can pin a
 // FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
+// Router-intent normalisation: the parser occasionally emits a value outside its own enum ("interpretation",
+// "prevent") or a synonym; clamp to the canonical taxonomy so the client's intent->composer mapping is
+// deterministic. Generic — no disease specifics.
+const ROUTER_INTENTS = new Set("definition treatment dose differential investigation features redflags pathophysiology prognosis complications prevention etiology risk_factors epidemiology classification severity guideline followup monitoring interaction contraindication emergency icu screening reasoning other".split(" "));
+const INTENT_FIX = { prevent: "prevention", prophylaxis: "prevention", interpretation: "investigation", diagnosis: "investigation", workup: "investigation", causes: "etiology", management: "treatment", mgmt: "treatment", staging: "classification", grading: "classification" };
+function normIntent(x) { let i = String(x || "other").toLowerCase().trim(); i = INTENT_FIX[i] || i; return ROUTER_INTENTS.has(i) ? i : "other"; }
 // Bound every upstream AI fetch so a stalled provider can never hang the Worker. fetch() resolves on
 // headers; fetchJsonWithTimeout keeps the abort armed across the body read too (the whole round-trip).
 async function fetchJsonWithTimeout(url, opts, ms) {
@@ -806,7 +812,7 @@ export async function onRequest(context) {
         '"confidence":<0..1 that the parse is correct>,' +
         '"ambiguous":<true ONLY if the term has more than one common medical meaning AND the query gives no disambiguating context>,' +
         '"options":["<canonical meaning A>","<canonical meaning B>"]}\n' +
-        "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level' => investigation; a named clinical SCORE or diagnostic CRITERIA => classification; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
+        "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level'/'interpretation' => investigation; a named set of DIAGNOSTIC CRITERIA used to ESTABLISH a diagnosis (e.g. Duke, Brugada, Sgarbossa, Light's) => investigation; a SEVERITY / PROGNOSTIC / RISK score or a staging/grading system (e.g. Ranson, APACHE, CURB-65, Child-Pugh, NIHSS) => severity; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
         "Query: " + q;
       let text;
       // Pin the router to a capable-but-fast model. flash-lite was measured to degrade parse quality
@@ -822,7 +828,7 @@ export async function onRequest(context) {
       return json({
         primaryConcept: concept, topic: concept,   // topic = back-compat alias
         type: String(p.type || "").slice(0, 24),
-        intent: String(p.intent || "other").slice(0, 24),
+        intent: normIntent(p.intent),
         specialty: p.specialty ? String(p.specialty).slice(0, 40) : null,
         modifiers: Array.isArray(p.modifiers) ? p.modifiers.map(function (x) { return String(x).slice(0, 40); }).slice(0, 6) : [],
         entities: Array.isArray(p.entities) ? p.entities.slice(0, 8).map(function (e) { return { text: String(e.text || "").slice(0, 60), canonical: String(e.canonical || "").slice(0, 100), type: String(e.type || "").slice(0, 24) }; }) : [],
