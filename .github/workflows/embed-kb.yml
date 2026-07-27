@@ -16,6 +16,16 @@ name: Embed KB into Vectorize
 
 on:
   workflow_dispatch: {}
+  # Auto-refresh: re-embed when the KB content changes so new diseases become semantically
+  # searchable without a manual trigger. Scoped to KB sources + the built doc snapshot; still
+  # gated by the `production` Environment (one-tap approval) so a stray push can't burn embeds.
+  push:
+    branches: [main]
+    paths:
+      - "kb/diseases/**"
+      - "kb/reference/**"
+      - "kb/treatments/**"
+      - "kb/dist/kb.disease-docs.json"
 
 permissions:
   contents: read
