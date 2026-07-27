@@ -478,16 +478,22 @@ function renderGroundedPrompt(pkg) {
   if (pc.labTrends) L.push("Lab trends: " + clip(JSON.stringify(pc.labTrends), 400));
   if (pc.cultures) L.push("Cultures: " + clip(JSON.stringify(pc.cultures), 900));
   if (pc.radiologyImpressions) L.push("Radiology impressions: " + clip(JSON.stringify(pc.radiologyImpressions), 500));
+  // V2 token compression — DEDUPLICATE chunk text across grounding + retrieved so the SAME
+  // evidence is never sent to Gemini twice (a chunk often appears in both). Pure token savings,
+  // no content loss: the first occurrence (grounding, page-cited) is kept; later duplicates dropped.
+  var _seenChunk = {};
+  function _fresh(t) { var k = String(t == null ? "" : t).slice(0, 90).toLowerCase().replace(/\s+/g, " ").trim(); if (!k || _seenChunk[k]) return false; _seenChunk[k] = 1; return true; }
   L.push("\n=== RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE — reason from THIS) ===");
   (pkg.grounding || []).forEach((g) => {
-    L.push("• " + g.name + " (" + g.diseaseId + "):");
-    (g.knowledge || []).forEach((c) => L.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")));
+    var emitted = [];
+    (g.knowledge || []).forEach((c) => { if (_fresh(c.text)) emitted.push("   [" + c.section + "] " + clip(c.text, 300) + (c.source && c.source.ref ? " (" + c.source.ref + (c.source.page ? ", " + clip(c.source.page, 60) : "") + ")" : "")); });
+    if (emitted.length) { L.push("• " + g.name + " (" + g.diseaseId + "):"); emitted.forEach((e) => L.push(e)); }
   });
   if ((pkg.retrieved || []).length) {
     // Chunks arrive already re-ranked by rerankRetrieved() (cross-encoder, lexical fallback) in the
     // explain handler, so emit in the given order — most decision-relevant evidence first.
-    L.push("\nAdditional retrieved chunks (relevance-ranked):");
-    pkg.retrieved.forEach((c) => L.push("   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : "")));
+    var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
+    if (_rlines.length) { L.push("\nAdditional retrieved chunks (relevance-ranked):"); _rlines.forEach((e) => L.push(e)); }
   }
   if (pkg.treatment) {
     const t = pkg.treatment;
@@ -773,6 +779,23 @@ export async function onRequest(context) {
       const vpkg = body.package || body || {};
       const v = await verifyGrounding(env, String(body.text || "").slice(0, 8000), vpkg);
       return json(v);
+    }
+    if (seg === "refine") {
+      // MaiK V2 query normaliser (cheap). Maps a short/messy clinical query to a CANONICAL topic +
+      // intent so the on-device KB can resolve it, WITHOUT generating a full answer. Called by the
+      // client ONLY when the local KB fails to resolve (misspelling / unusual abbreviation / phrasing),
+      // so the instant local path is unaffected. Tiny output → ~40 tokens, near-free.
+      const q = String(body.q || body.question || "").slice(0, 300).trim();
+      if (!q) return json({ error: "no-query" }, 400);
+      const gate = await checkQuota(env, request, "general");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const sys = "You are a medical query normaliser for a knowledge-base lookup. Given a doctor's short or messy query, return ONLY compact JSON: {\"topic\":\"<the single canonical disease/condition/drug the query is about, full standard name, e.g. 'diabetes mellitus', 'community-acquired pneumonia', 'ceftriaxone'>\",\"intent\":\"definition|treatment|dose|differential|investigation|features|redflags|pathophysiology|prognosis|other\"}. Expand abbreviations (dm->diabetes mellitus, htn->hypertension, cap->community-acquired pneumonia), correct spelling (dibetis->diabetes mellitus), and choose the MOST LIKELY single canonical topic. If the query is a reasoning/comparison/'latest evidence'/multi-condition question, set topic to \"\" and intent to \"other\". No prose, JSON only.\n\nQuery: " + q;
+      let text;
+      try { text = await callGemini(env, [{ text: sys }], 80, { temperature: 0 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "refine-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      const p = parseJsonLoose(text) || {};
+      return json({ topic: String(p.topic || "").slice(0, 120), intent: String(p.intent || "other").slice(0, 24), mode: "refine" });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text

@@ -1449,7 +1449,7 @@ window.openExternal = function (u) {
 <script>(function(){var KB=["/kb/dist/kb.core.js?v=gold363","/kb/dist/kb.clinical.js?v=gold363","/kb/dist/kb.enrichment.js?v=gold410","/kb/dist/kb.enrichment.2.js?v=gold410","/kb/dist/kb.expanded.js?v=gold363"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
-<script src="/reasoning.js?v=gold1025" defer></script>
+<script src="/reasoning.js?v=gold1026" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -1460,9 +1460,12 @@ window.openExternal = function (u) {
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
 <script src="/image-engine.js?v=gold363" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1011" defer></script>
+<!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
+     knowledge questions locally with citations, no Gemini. Loads before home.js. -->
+<script src="/kb/ai/maik-kb.js?v=gold1029" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1027" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1031" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->

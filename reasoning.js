@@ -3761,6 +3761,14 @@
       var b = aiBase(); if (!b || !aiOn() || !text) return Promise.resolve({ checked: false });
       return aiHeaders().then(function (h) { return fetch(b + "/verify", { method: "POST", headers: h, body: JSON.stringify({ text: text, package: pkg || {} }) }); }).then(function (r) { return r.json(); }).catch(function () { return { checked: false }; });
     },
+    // MaiK V2 query refiner — normalise a messy/short query to a canonical {topic,intent} via a
+    // cheap Gemini-Flash call. Called ONLY when the local KB can't resolve, so the instant path is
+    // unaffected. Returns null on any error (caller falls through to the Gemini answer path).
+    refine: function (q) {
+      var b = aiBase(); if (!b || !aiOn() || !q) return Promise.resolve(null);
+      return aiHeaders().then(function (h) { return fetch(b + "/refine", { method: "POST", headers: h, body: JSON.stringify({ q: String(q).slice(0, 300) }) }); })
+        .then(function (r) { return r.json(); }).then(function (j) { return (j && j.topic) ? j : null; }).catch(function () { return null; });
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
