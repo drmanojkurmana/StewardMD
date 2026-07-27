@@ -100,6 +100,19 @@ function assertNoForbiddenKeys(body, label) {
   assert.equal(res7.provider, "offline");
   assert.ok(typeof res7.text === "string" && res7.text.length > 5, "correlate offline fallback is non-empty");
 
+  // bestDdx posts kind:"ddx" with the de-identified findings + a { history } context, no identifiers
+  const cap4 = {};
+  const res8 = await LLM.bestDdx(sampleAnalysis, "fever, foul sputum, IV drug use", { fetchImpl: fakeFetchOk(cap4) });
+  assert.equal(cap4.body.kind, "ddx", "posts kind:ddx");
+  assert.deepEqual(cap4.body.context, { history: "fever, foul sputum, IV drug use" }, "history goes in a de-identified context.history");
+  assert.ok(Array.isArray(cap4.body.findings) && cap4.body.findings.length === 2, "ddx carries the de-identified findings list");
+  assertNoForbiddenKeys(cap4.body, "ddx");
+  assert.equal(res8.provider, "groq");
+  // bestDdx offline fallback is non-empty
+  const res9 = await LLM.bestDdx(sampleAnalysis, "cough", { fetchImpl: fakeFetchNetworkDown() });
+  assert.equal(res9.provider, "offline");
+  assert.ok(typeof res9.text === "string" && res9.text.length > 5, "bestDdx offline fallback is non-empty");
+
   console.log("ok");
 })().catch(function (e) {
   console.error(e);

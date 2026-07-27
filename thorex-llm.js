@@ -189,10 +189,31 @@
       });
   }
 
+  // bestDdx(analysis, history, opts) -> Promise({text, provider})
+  //   history — free-text symptoms/clinical history (string). Sent as a de-identified { history }
+  //   context value; the model returns the 2 best-fit differential diagnoses correlating imaging + history.
+  function offlineDdxText(analysis, history) {
+    var impression = offlineImpressionText(analysis);
+    var hx = (typeof history === "string" && history.trim()) ? (" History provided: " + history.trim() + ".") : "";
+    return "AI correlation is unavailable offline." + hx + " " + impression +
+      " Correlate the imaging with the history and examination before acting; radiologist review is required.";
+  }
+  function bestDdx(analysis, history, opts) {
+    opts = opts || {};
+    var findings = safeFindingsFromAnalysis(analysis);
+    var hx = (typeof history === "string") ? history : (history && history.history);
+    var payload = { findings: findings };
+    if (hx && String(hx).trim()) payload.context = { history: String(hx).trim().slice(0, 600) };
+    return post("ddx", payload, opts)
+      .then(function (res) { return { text: res.text || offlineDdxText(analysis, hx), provider: res.provider }; })
+      .catch(function () { return { text: offlineDdxText(analysis, hx), provider: "offline" }; });
+  }
+
   var API = {
     learnMore: learnMore,
     impressionNarrative: impressionNarrative,
     correlate: correlate,
+    bestDdx: bestDdx,
     // exposed for tests / debugging only — not part of the documented public surface
     _safeFinding: safeFinding,
     _safeFindingsFromAnalysis: safeFindingsFromAnalysis,
