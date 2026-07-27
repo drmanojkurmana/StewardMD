@@ -43,8 +43,23 @@
     var _q = p.then(function () {
       return fetch(hybridBase(), { method: "POST", headers: headers, body: JSON.stringify({ query: String(query || "").slice(0, 500), k: k || 12 }), signal: ac ? ac.signal : undefined });
     }).then(function (r) { if (to) clearTimeout(to); return r && r.ok ? r.json() : null; }).then(function (j) {
-      var ids = [], seen = {};
-      ((j && j.matches) || []).forEach(function (m) { var d = m && m.diseaseId; if (!d) return; if (!seen[d]) { seen[d] = 1; ids.push(d); } if (m.section && !_vecSections[d]) _vecSections[d] = m.section; });   // capture the top vector-matched section per disease (chunk-level)
+      // Noise-reduction: AGGREGATE chunk matches per disease + apply a score floor, then rank by the
+      // strongest signal with a small bonus for multiple matching chunks. A disease with several
+      // relevant chunks beats a single stray fragment from an unrelated disease (chunk-level noise).
+      var agg = {};
+      ((j && j.matches) || []).forEach(function (m) {
+        if (!m || !m.diseaseId) return;
+        var s = (typeof m.score === "number") ? m.score : 0;
+        if (s < 0.45) return;                                  // drop weak/noisy matches
+        var d = m.diseaseId;
+        if (!agg[d]) agg[d] = { n: 0, max: 0, sec: null };
+        agg[d].n++; if (s > agg[d].max) { agg[d].max = s; if (m.section) agg[d].sec = m.section; }
+        else if (m.section && !agg[d].sec) agg[d].sec = m.section;
+      });
+      var ids = Object.keys(agg).sort(function (a, b) {
+        return (agg[b].max + 0.04 * (agg[b].n - 1)) - (agg[a].max + 0.04 * (agg[a].n - 1));   // score + small multi-chunk bonus
+      });
+      ids.forEach(function (d) { if (agg[d].sec) _vecSections[d] = agg[d].sec; });   // vector-matched section per disease (for grounding bias)
       return ids;
     }).catch(function () { if (to) clearTimeout(to); return []; });   // any failure/timeout → lexical-only
     // Real wall-clock bound: on the native app CapacitorHttp ignores AbortController, so the abort
