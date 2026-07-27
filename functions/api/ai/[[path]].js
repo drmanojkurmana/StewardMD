@@ -809,10 +809,10 @@ export async function onRequest(context) {
         "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level' => investigation; a named clinical SCORE or diagnostic CRITERIA => classification; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
         "Query: " + q;
       let text;
-      // The router is a parse-only call — pin the FASTEST model (flash-lite) so the parse doesn't inherit
-      // the heavy answer model's latency. This is the dominant response-time lever: the router sits on the
-      // critical path of every clinical query. Overridable via env; falls back through callGemini's failover.
-      const routerModel = env.MAIK_ROUTER_MODEL || "gemini-2.5-flash-lite";
+      // Pin the router to a capable-but-fast model. flash-lite was measured to degrade parse quality
+      // (intent -9pts, entity -10pts) WITHOUT cutting latency (the ~5-6s is Vertex serving/network/failover
+      // overhead, not model compute), so the router uses full flash. Overridable via env.
+      const routerModel = env.MAIK_ROUTER_MODEL || "gemini-2.5-flash";
       try { text = await callGemini(env, [{ text: sys }], 200, { temperature: 0, model: routerModel }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
       await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
