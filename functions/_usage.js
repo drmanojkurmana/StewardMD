@@ -15,6 +15,7 @@
 
 import { proFromRequest } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
+import { ownerOK } from "./_adminauth.js";
 
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -102,6 +103,11 @@ export async function checkQuota(env, request, type, opts) {
   const store = usageKv(env); if (!store) return { ok: true, id: null, meter: false };
   const cfg = usageConfig(env);
   const who = await identify(request, env); const id = who.id;
+  // Admin/owner exemption (owner Google login OR X-Admin-Token = UPDATES_ADMIN_TOKEN|VERIFY_ADMIN_TOKEN):
+  // skip the per-USER throttles (rate limit, daily/monthly token caps, per-category request counts) so
+  // internal benchmarking/eval isn't blocked by the tiny per-user beta caps. Cost is STILL metered and
+  // the project-wide daily-cost circuit breaker below still applies — real users are unaffected.
+  const admin = await ownerOK(request, env);
   let isProCaller = true, callerUid = null, callerVerified = false;
   try { const pr = await proFromRequest(env, request); isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } catch (e) {}
   const now = new Date(), day = dayKey(now), month = monthKey(now);
@@ -117,7 +123,7 @@ export async function checkQuota(env, request, type, opts) {
   // internal parse that precedes the real answer call, so it must neither consume the 3s cooldown nor
   // block the answer that follows it ~0.5s later. Cost is still bounded by the token caps + breaker.
   const rlKey = "maik:rl:" + id;
-  if (type !== "router") {
+  if (type !== "router" && !admin) {
     const last = await readJson(store, rlKey);
     if (last && (Date.now() - last.t) < cfg.rateSeconds * 1000) return { ok: false, reason: "rate", message: QUOTA_MSG, id };
   }
@@ -127,7 +133,7 @@ export async function checkQuota(env, request, type, opts) {
   const u = (await readJson(store, uKey)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
   const m = (await readJson(store, mKey)) || { tokens: 0 };
 
-  if (u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  if (!admin && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
   let budgetApplied = false;
   if (aiBudgetOn(env) && callerUid) {
@@ -136,20 +142,22 @@ export async function checkQuota(env, request, type, opts) {
       if (cap != null) { monthlyCap = cap; budgetApplied = true; }
     } catch (e) { /* fail-open: keep legacy cap */ }
   }
-  if (m.tokens >= monthlyCap) {
+  if (!admin && m.tokens >= monthlyCap) {
     if (!isProCaller) return { ok: false, reason: "needs-pro", needsPro: true, message: PRO_MSG, id };
     return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: QUOTA_MSG, id };
   }
-  if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
-  else if (type === "case") { if (u.case >= cfg.caseDaily) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
-  else if (type === "ocr") { if (u.ocr >= cfg.ocrDaily) return { ok: false, reason: "ocr-daily", message: QUOTA_MSG, id }; }
-  else if (type === "pdf") {
-    const pages = (opts && opts.pages) || 1;
-    if (pages > cfg.pdfPagesPerReport) return { ok: false, reason: "pdf-per-report", message: QUOTA_MSG, id };
-    if (u.pdfPages + pages > cfg.pdfPagesDaily) return { ok: false, reason: "pdf-daily", message: QUOTA_MSG, id };
+  if (!admin) {
+    if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
+    else if (type === "case") { if (u.case >= cfg.caseDaily) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
+    else if (type === "ocr") { if (u.ocr >= cfg.ocrDaily) return { ok: false, reason: "ocr-daily", message: QUOTA_MSG, id }; }
+    else if (type === "pdf") {
+      const pages = (opts && opts.pages) || 1;
+      if (pages > cfg.pdfPagesPerReport) return { ok: false, reason: "pdf-per-report", message: QUOTA_MSG, id };
+      if (u.pdfPages + pages > cfg.pdfPagesDaily) return { ok: false, reason: "pdf-daily", message: QUOTA_MSG, id };
+    }
   }
-  // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router is exempt (above).
-  if (type !== "router") await writeJson(store, rlKey, { t: Date.now() }, 60);
+  // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router + admin are exempt.
+  if (type !== "router" && !admin) await writeJson(store, rlKey, { t: Date.now() }, 60);
   return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type };
 }
 

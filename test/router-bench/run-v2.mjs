@@ -20,6 +20,8 @@ const RETRIEVE = "https://stewardmd.in/api/retrieve";
 const EXPLAIN = "https://stewardmd.in/api/ai/explain";   // Gemini answer path (for Gemini-path latency)
 const CONC = Number(process.env.CONC || 6);
 const GEMN = Number(process.env.GEMN || 5);              // Gemini-path latency probe size (request-counted quota)
+const ADMIN = process.env.ADMIN_TOKEN || "";             // owner admin token → exempts these calls from per-user caps
+const H = () => { const h = { "Content-Type": "application/json", "Origin": "https://stewardmd.in" }; if (ADMIN) h["X-Admin-Token"] = ADMIN; return h; };
 
 // ---- load KB globals (same pattern as test/maik-v2-kb.test.mjs) ----
 const shim = (k, v) => { try { if (!globalThis[k]) globalThis[k] = v; } catch (e) {} };
@@ -115,7 +117,7 @@ console.log(`bank ${bank.length} | running ${capped.length}${dropped ? ` (capped
 async function routeLive(q) {
   const t0 = Date.now();
   try {
-    const r = await fetch(ROUTER, { method: "POST", headers: { "Content-Type": "application/json", "Origin": "https://stewardmd.in" }, body: JSON.stringify({ q }) });
+    const r = await fetch(ROUTER, { method: "POST", headers: H(), body: JSON.stringify({ q }) });
     const j = await r.json();
     return { j, ms: Date.now() - t0, quota: (j.error === "quota" || j.error === "route-failed") };
   } catch (e) { return { j: { _err: String(e) }, ms: Date.now() - t0, quota: false }; }
@@ -128,7 +130,7 @@ function routeOffline(q) {   // stand-in for --dry: the no-Vertex fallback resol
 async function retrieve(q) {
   const t0 = Date.now();
   try {
-    const r = await fetch(RETRIEVE, { method: "POST", headers: { "Content-Type": "application/json", "Origin": "https://stewardmd.in" }, body: JSON.stringify({ query: q, k: 12 }) });
+    const r = await fetch(RETRIEVE, { method: "POST", headers: H(), body: JSON.stringify({ query: q, k: 12 }) });
     const j = await r.json();
     const ids = []; const s = {};
     ((j && j.matches) || []).forEach(m => { const d = m && m.diseaseId; if (d && !s[d]) { s[d] = 1; ids.push(d); } });
@@ -210,7 +212,7 @@ if (!DRY && GEMN > 0) {
   for (const it of pool) {
     const t0 = Date.now();
     try {
-      const r = await fetch(EXPLAIN, { method: "POST", headers: { "Content-Type": "application/json", "Origin": "https://stewardmd.in" }, body: JSON.stringify({ package: { question: it.q, grounding: [] }, depth: "concise" }) });
+      const r = await fetch(EXPLAIN, { method: "POST", headers: H(), body: JSON.stringify({ package: { question: it.q, grounding: [] }, depth: "concise" }) });
       const j = await r.json().catch(() => ({}));
       if (j && (j.error === "quota")) { console.log("  gemini probe hit quota after " + gem.length + " calls"); break; }
       gem.push({ ms: Date.now() - t0, ok: !j.error });
