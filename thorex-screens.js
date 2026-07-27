@@ -968,7 +968,6 @@
     var F = (typeof window !== "undefined" && window.SMD_THOREX_FLAGS) || null;
     var conf = F ? F.bool("smd_thorex_confidence") : true;
     var haptics = F ? F.bool("smd_thorex_haptics") : true;
-    var v2beta = F ? F.bool("smd_thorex_v2beta") : false;
     var cloud = F ? F.get("smd_thorex_cloud") : null;
     var cloudLabel = cloud === true ? "Allowed" : cloud === false ? "Declined" : "Not set (asked before the next Free upload)";
 
@@ -986,7 +985,6 @@
       "</div>" +
       '<div class="tx-list-body">' +
         toggleRow("Show AI confidence", "Confidence band on every result", "tx-toggle-confidence", conf) +
-        toggleRow("Clinical Engine 2 (educational)", "Adds the second educational engine · Pro · educational-only", "tx-toggle-v2beta", v2beta) +
         toggleRow("Haptics", "Vibrate on tap and result-ready", "tx-toggle-haptics", haptics) +
         '<div class="tx-set-row"><div><div class="tx-set-label">Free cloud analysis</div><div class="tx-set-sub">' + esc(cloudLabel) + "</div></div></div>" +
         '<button type="button" class="tx-set-row" data-act="tx-remove-models">' +
@@ -1242,15 +1240,6 @@
       var F = window.SMD_THOREX_FLAGS; if (!F) return;
       F.set("smd_thorex_haptics", !F.bool("smd_thorex_haptics"));
       toast("Haptics " + (F.bool("smd_thorex_haptics") ? "on" : "off") + ".");
-      show("settings");
-    } catch (e) {}
-  }
-  function toggleV2beta() {
-    try {
-      var F = window.SMD_THOREX_FLAGS; if (!F) return;
-      var next = !F.bool("smd_thorex_v2beta");
-      F.set("smd_thorex_v2beta", next);
-      toast(next ? "V2 Beta on — educational engine runs on your next scan." : "V2 Beta off.");
       show("settings");
     } catch (e) {}
   }
@@ -1511,7 +1500,6 @@
       case "tx-export": haptic("light"); exportReport(); return;
       case "tx-share": haptic("light"); exportReport(); return;
       case "tx-toggle-confidence": toggleConfidence(); return;
-      case "tx-toggle-v2beta": toggleV2beta(); return;
       case "tx-toggle-haptics": toggleHaptics(); return;
       case "tx-remove-models": haptic("light"); removeModels(); return;
       case "tx-clear-cxrs": clearCxrs(); return;

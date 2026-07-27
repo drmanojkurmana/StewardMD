@@ -30,8 +30,7 @@
     smd_thorex_dev:        { type: "bool", def: false,     query: "thorexdev",     desc: "Developer overlay (pipeline stages, provider, timings)." },
     smd_thorex_backend:    { type: "bool", def: false,      query: "thorexbackend", desc: "Use the live ThoreX pipeline backend (RemoteAnalyzer via /api/thorex) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT ON." },
     smd_thorex_demo:       { type: "bool", def: false,     query: "thorexdemo",    desc: "EXPLICIT demo mode — use the deterministic mock analyzer (canned sample, no real inference). Off by default: Analyze runs the REAL pipeline (backend/on-device ONNX) or reports 'inference unavailable', never a fabricated result." },
-    smd_thorex_ondevice:   { type: "bool", def: true,     query: "thorexondevice", desc: "Prefer FULLY ON-DEVICE inference (onnxruntime-web via thorex-ort.js) — no upload, runs in the WebView. Clinical (torchxrayvision) always; the educational V2 Beta (X-Raydar) engine also runs on-device when v2beta is enabled. DEFAULT ON." },
-    smd_thorex_v2beta:     { type: "bool", def: false,    query: "thorexv2beta",   desc: "Enable the V2 Beta educational engine (X-Raydar) alongside ThoreX v1. Adds the collapsible V2 Beta panel + educational appendix. EDUCATIONAL / non-commercial license, Pro required — resolves entitlement to v2beta. DEFAULT OFF." }
+    smd_thorex_ondevice:   { type: "bool", def: true,     query: "thorexondevice", desc: "Prefer FULLY ON-DEVICE inference (onnxruntime-web via thorex-ort.js) — no upload, runs in the WebView. Runs BOTH engines: Clinical Engine 1 (torchxrayvision) + the educational Clinical Engine 2 (X-Raydar), for everyone with ThoreX access. DEFAULT ON." }
   };
 
   function store() { try { return localStorage; } catch (e) { return null; } }

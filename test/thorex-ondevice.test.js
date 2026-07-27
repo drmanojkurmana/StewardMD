@@ -89,25 +89,27 @@ function makeOrtStub() {
   var onAssembly = P.liveProviders();
   assert.equal(onAssembly.analyzer.kind, "ondevice", "chooseAnalyzer must prefer on-device when the flag is ON and SMD_THOREX_ORT.available()");
 
+  // Everyone with ThoreX access runs BOTH on-device engines — includeEducational is ALWAYS true now
+  // (no entitlement/Pro gate); the result is the two-engine analysis regardless of v1/v2beta/free.
   var stages = [];
   var v1 = await onAssembly.analyzer.analyze({ id: "img-v1", data: { width: 2, height: 2, data: new Uint8Array(4) } }, "v1", (stage, pct) => stages.push([stage, pct]));
-  assert.deepEqual(v1.engines.map((e) => e.engine), ["torchxrayvision"], "on-device v1 must return the clinical torchxrayvision engine only");
+  assert.deepEqual(v1.engines.map((e) => e.engine), ["torchxrayvision", "xraydar"], "on-device always returns BOTH engines, clinical first");
   assert.equal(v1.engines[0].educational, false);
   assert.ok(stages.length >= 2, "on-device analyzer must stream at least two stage callbacks (preprocess/infer)");
-  assert.equal(stub.calls[stub.calls.length - 1].includeEducational, false, "v1 must call analyzeImage with includeEducational: false");
+  assert.equal(stub.calls[stub.calls.length - 1].includeEducational, true, "on-device must call analyzeImage with includeEducational: true (both engines) regardless of entitlement");
 
-  // ── 3) OD-D: v2beta asks analyzeImage() for BOTH engines on-device (includeEducational: true). ────
+  // ── 3) v2beta also runs both (unchanged shape). ────
   var v2 = await onAssembly.analyzer.analyze({ id: "img-v2", data: { width: 2, height: 2, data: new Uint8Array(4) } }, "v2beta", () => {});
   assert.equal(stub.calls[stub.calls.length - 1].includeEducational, true, "v2beta must call analyzeImage with includeEducational: true (OD-D)");
-  assert.deepEqual(v2.engines.map((e) => e.engine), ["torchxrayvision", "xraydar"], "on-device v2beta must return BOTH the clinical and educational engines, clinical first");
+  assert.deepEqual(v2.engines.map((e) => e.engine), ["torchxrayvision", "xraydar"], "on-device must return BOTH the clinical and educational engines, clinical first");
   assert.equal(v2.engines[0].educational, false, "clinical engine must have educational: false");
   assert.equal(v2.engines[1].educational, true, "educational engine must have educational: true");
   assert.equal(v2.engines[1].disclaimerKey, "educational_not_clinical", "educational engine must carry the educational_not_clinical disclaimer");
 
-  // ── 4) free -> clinical only too (same as v1; only v2beta gets includeEducational: true). ─────────
+  // ── 4) free -> both engines too (everyone with access runs both on-device). ─────────
   var free = await onAssembly.analyzer.analyze({ id: "img-free", data: { width: 2, height: 2, data: new Uint8Array(4) } }, "free", () => {});
-  assert.equal(stub.calls[stub.calls.length - 1].includeEducational, false, "free must call analyzeImage with includeEducational: false");
-  assert.deepEqual(free.engines.map((e) => e.engine), ["torchxrayvision"], "on-device free must return the clinical engine only");
+  assert.equal(stub.calls[stub.calls.length - 1].includeEducational, true, "free must also call analyzeImage with includeEducational: true (both engines)");
+  assert.deepEqual(free.engines.map((e) => e.engine), ["torchxrayvision", "xraydar"], "on-device free must also return both engines");
 
   // ── 5) Educational-engine failure isolation is thorex-ort.js's job: the on-device analyzer here ───
   //    must simply pass through whatever analyzeImage() resolves — including a clinical-only result
