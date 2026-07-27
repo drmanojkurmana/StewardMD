@@ -115,6 +115,11 @@ function buildPrompt(kind, body) {
     lines.push("TASK: write a brief overall impression narrative synthesizing ALL the findings below (most clinically significant first).");
   } else if (kind === "correlate") {
     lines.push("TASK: correlate the imaging findings below with the provided de-identified clinical context (labs/vitals/ABG bands) and suggest what supports or argues against the leading consideration, hedged appropriately.");
+  } else if (kind === "ddx") {
+    lines.push("TASK: Correlate the AI chest X-ray findings below with the clinical history/symptoms provided, and give the TWO single most likely differential diagnoses that best fit the imaging + history TOGETHER. Format EXACTLY as:");
+    lines.push("1. <diagnosis> — <one short line: which finding + which history feature makes it fit>");
+    lines.push("2. <diagnosis> — <one short line: which finding + which history feature makes it fit>");
+    lines.push("Then one line 'Next: <the single most useful confirmatory test>'. Prioritise infective and urgent causes when the history supports them. If the history is empty or too sparse to narrow, say so and give the two most likely causes on imaging alone. Decision support only — end by noting clinical correlation and radiologist review are required.");
   } else {
     lines.push("TASK: provide brief clinical-education commentary on the findings below.");
   }
@@ -169,7 +174,7 @@ export async function routeLLM(env, kind, body) {
   return { provider: "offline", text: null };
 }
 
-const VALID_KINDS = ["learn", "impression", "correlate"];
+const VALID_KINDS = ["learn", "impression", "correlate", "ddx"];
 
 export async function onRequest(context) {
   const { request, env } = context;

@@ -750,10 +750,24 @@
         '<button class="tx-result-share" type="button" data-act="tx-share" aria-label="Share result">' + ic("ios_share") + "</button>" +
       "</div>";
 
-    // Radiology report — a deterministic structured report/impression built ONLY from the clinical
-    // engine (see thorex-report.js). Additive: a collapsed-by-default affordance on the result screen
-    // that never replaces the existing dual-panel rendering above.
-    var report = buildReportSafe(a, { context: (a && a.__context) || "" });
+    // AI best-fit diagnosis — correlate the AI findings with the clinical history (SMD_THOREX_LLM.bestDdx)
+    // to surface the 2 diagnoses that best fit imaging + history together. Auto-runs when a history was
+    // captured at upload; otherwise the field lets the clinician add one (type or MaiK Scribe).
+    var aiDxSection =
+      '<div class="tx-aidx" data-hook="aidx">' +
+        '<div class="tx-aidx-head">' + ic("neurology") + "<span>AI best-fit diagnosis</span><span class=\"tx-aidx-pill\">AI</span></div>" +
+        '<div class="tx-aidx-sub">Correlates the AI findings with the clinical history to give the 2 best-fit differentials.</div>' +
+        '<div class="tx-aidx-field">' +
+          '<button type="button" class="tx-clin-mic" data-act="tx-aidx-scribe" aria-label="Dictate history with MaiK Scribe">' + ic("mic") + "<span>MaiK Scribe</span></button>" +
+          '<textarea class="tx-clin-ta" data-hook="aidxHx" rows="2" placeholder="Symptoms &amp; history — e.g. fever, foul sputum, IV drug use">' + esc((a && a.__context) || "") + "</textarea>" +
+        "</div>" +
+        '<button type="button" class="tx-btn tx-btn-primary tx-aidx-go" data-act="tx-aidx-go">' + ic("auto_awesome") + "<span>Get best-fit diagnoses</span></button>" +
+        '<div class="tx-aidx-out" data-hook="aidxOut" hidden></div>' +
+      "</div>";
+
+    // Radiology report — deterministic structured report (thorex-report.js). Built from BOTH engines
+    // (Engine 1 + Engine 2 merged) so Engine 2's richer findings drive it; collapsible, open by default.
+    var report = buildReportSafe(a, { context: (a && a.__context) || "", engineScope: "both" });
     var reportSection = report ?
       '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="true" aria-controls="txReportBody">' +
         ic("description") + '<span class="tx-report-toggle-txt">ThoreX AI — Radiology report</span>' + ic("expand_more") +
@@ -799,6 +813,7 @@
       '<div class="tx-result-body">' +
         xrayViewer +
         '<div class="tx-result-panels">' + panels.map(function (p, i) { return collapsiblePanel(p, i, i === 0); }).join("") + "</div>" +
+        aiDxSection +
         reportSection +
         correlateSection +
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
@@ -873,6 +888,43 @@
       });
     }
     wireCorrelate(host, a);
+
+    // AI best-fit diagnosis card: correlate findings + history via SMD_THOREX_LLM.bestDdx. Screen-internal.
+    (function () {
+      var hxEl = host.querySelector('[data-hook="aidxHx"]');
+      var goBtn = host.querySelector('[data-act="tx-aidx-go"]');
+      var micBtn = host.querySelector('[data-act="tx-aidx-scribe"]');
+      var outEl = host.querySelector('[data-hook="aidxOut"]');
+      if (!goBtn || !outEl) return;
+      function runAiDx() {
+        var hx = hxEl ? hxEl.value.trim() : "";
+        try { a.__context = hx; } catch (e) {}
+        var LLM = (typeof window !== "undefined" && window.SMD_THOREX_LLM) || null;
+        outEl.hidden = false;
+        outEl.innerHTML = '<div class="tx-aidx-loading">' + ic("progress_activity") + "<span>Correlating findings with the history…</span></div>";
+        goBtn.disabled = true;
+        var p = (LLM && LLM.bestDdx) ? LLM.bestDdx(a, hx) : Promise.resolve({ text: "AI correlation is unavailable on this device.", provider: "offline" });
+        Promise.resolve(p).then(function (res) {
+          var txt = (res && res.text) || "No correlation available.";
+          outEl.innerHTML = '<div class="tx-aidx-body">' + esc(txt).replace(/\n/g, "<br>") + "</div>" +
+            '<div class="tx-aidx-foot">' + ic("info") + "<span>AI decision support · correlate clinically · radiologist review required" + (res && res.provider ? " · " + esc(res.provider) : "") + "</span></div>";
+        }).catch(function () {
+          outEl.innerHTML = '<div class="tx-aidx-body">Couldn’t get an AI correlation right now.</div>';
+        }).then(function () { goBtn.disabled = false; });
+      }
+      goBtn.addEventListener("click", function () { haptic("light"); runAiDx(); });
+      if (micBtn) micBtn.addEventListener("click", function () {
+        haptic("light");
+        var V = (typeof window !== "undefined" && window.SMD_VOICE) || null;
+        if (!V || !V.openDialog) { toast("Voice input isn’t available on this device."); return; }
+        V.openDialog({ target: "text", onText: function (txt) {
+          txt = String(txt || "").trim(); if (!txt || !hxEl) return;
+          hxEl.value = (hxEl.value ? hxEl.value.trim() + " " : "") + txt;
+        } });
+      });
+      // Auto-run when a clinical history was already captured at upload.
+      if (hxEl && hxEl.value.trim()) runAiDx();
+    })();
   }
 
   /* why — lightweight explainability (clinical engine only; P2 deepens the clinical-correlation seam).
