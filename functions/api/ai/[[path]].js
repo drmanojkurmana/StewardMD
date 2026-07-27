@@ -780,22 +780,50 @@ export async function onRequest(context) {
       const v = await verifyGrounding(env, String(body.text || "").slice(0, 8000), vpkg);
       return json(v);
     }
-    if (seg === "refine") {
-      // MaiK V2 query normaliser (cheap). Maps a short/messy clinical query to a CANONICAL topic +
-      // intent so the on-device KB can resolve it, WITHOUT generating a full answer. Called by the
-      // client ONLY when the local KB fails to resolve (misspelling / unusual abbreviation / phrasing),
-      // so the instant local path is unaffected. Tiny output → ~40 tokens, near-free.
-      const q = String(body.q || body.question || "").slice(0, 300).trim();
+    if (seg === "refine" || seg === "route") {
+      // MaiK V3 — UNIVERSAL MEDICAL SEMANTIC ROUTER. A cheap Vertex-Flash call that parses the medical
+      // MEANING of ANY query (abbreviation, acronym, eponym, brand, code, shorthand, typo, BrE/AmE)
+      // into structured JSON, WITHOUT answering it. This is the generalisation layer: no disease-specific
+      // rules — the model's medical knowledge resolves the infinite long tail to canonical concepts +
+      // intent. The client then drives deterministic KB retrieval from the canonical concept; Gemini
+      // only explains when the KB can't. Tiny output (~120 tokens), temp 0.
+      const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
-      const sys = "You are a medical query normaliser for a knowledge-base lookup. Given a doctor's short or messy query, return ONLY compact JSON: {\"topic\":\"<the single canonical disease/condition/drug the query is about, full standard name, e.g. 'diabetes mellitus', 'community-acquired pneumonia', 'ceftriaxone'>\",\"intent\":\"definition|treatment|dose|differential|investigation|features|redflags|pathophysiology|prognosis|other\"}. Expand abbreviations (dm->diabetes mellitus, htn->hypertension, cap->community-acquired pneumonia), correct spelling (dibetis->diabetes mellitus), and choose the MOST LIKELY single canonical topic. If the query is a reasoning/comparison/'latest evidence'/multi-condition question, set topic to \"\" and intent to \"other\". No prose, JSON only.\n\nQuery: " + q;
+      const sys =
+        "You are a MEDICAL QUERY PARSER for a knowledge-base retrieval system. Read a clinician's query in ANY form — full terms, abbreviations, acronyms, eponyms, brand names, drug compositions, lab/serology/imaging codes, clinical shorthand, mnemonics, typos, British or American spelling — and output ONLY its medical MEANING as compact JSON. NEVER answer the medical question; only parse it.\n" +
+        "Interpret it the way a physician would, then return EXACTLY this JSON shape:\n" +
+        '{"primaryConcept":"<single canonical FULL standard name of the main medical entity: expand every abbreviation/acronym, correct spelling, resolve brand->generic and code->full test/finding name, normalise to one standard term>",' +
+        '"type":"disease|drug|drug_class|investigation|lab_test|imaging|procedure|organism|guideline|symptom|sign|concept",' +
+        '"entities":[{"text":"<verbatim span from the query>","canonical":"<full standard name>","type":"<same enum>"}],' +
+        '"intent":"<ONE of: definition, treatment, dose, differential, investigation, features, redflags, pathophysiology, prognosis, complications, prevention, etiology, risk_factors, epidemiology, classification, severity, guideline, followup, monitoring, interaction, contraindication, emergency, icu, screening, reasoning, other>",' +
+        '"specialty":"<the medical specialty, or null>",' +
+        '"modifiers":["<contextual qualifiers actually present, e.g. pregnancy, pediatric, geriatric, renal, hepatic, acute, severe, refractory>"],' +
+        '"confidence":<0..1 that the parse is correct>,' +
+        '"ambiguous":<true ONLY if the term has more than one common medical meaning AND the query gives no disambiguating context>,' +
+        '"options":["<canonical meaning A>","<canonical meaning B>"]}\n' +
+        "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically — a named guideline/score => guideline; a procedure token after a disease => procedure; rx/tx => treatment; dx => diagnosis/investigation; a lab/marker token => investigation; a comparison / patient-scenario / 'latest evidence' question => reasoning. (3) Set ambiguous=true + list options ONLY when genuinely >1 common meaning with no context (do NOT force-disambiguate a clearly dominant meaning). (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list.\n\n" +
+        "Query: " + q;
       let text;
-      try { text = await callGemini(env, [{ text: sys }], 80, { temperature: 0 }); }
-      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "refine-failed" }, 502); }
+      try { text = await callGemini(env, [{ text: sys }], 200, { temperature: 0 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
       await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
       const p = parseJsonLoose(text) || {};
-      return json({ topic: String(p.topic || "").slice(0, 120), intent: String(p.intent || "other").slice(0, 24), mode: "refine" });
+      const concept = String(p.primaryConcept || p.topic || "").slice(0, 140);
+      const opts = Array.isArray(p.options) ? p.options.map(function (x) { return String(x).slice(0, 80); }).filter(Boolean).slice(0, 4) : [];
+      return json({
+        primaryConcept: concept, topic: concept,   // topic = back-compat alias
+        type: String(p.type || "").slice(0, 24),
+        intent: String(p.intent || "other").slice(0, 24),
+        specialty: p.specialty ? String(p.specialty).slice(0, 40) : null,
+        modifiers: Array.isArray(p.modifiers) ? p.modifiers.map(function (x) { return String(x).slice(0, 40); }).slice(0, 6) : [],
+        entities: Array.isArray(p.entities) ? p.entities.slice(0, 8).map(function (e) { return { text: String(e.text || "").slice(0, 60), canonical: String(e.canonical || "").slice(0, 100), type: String(e.type || "").slice(0, 24) }; }) : [],
+        confidence: (typeof p.confidence === "number") ? Math.max(0, Math.min(1, p.confidence)) : 0.8,
+        ambiguous: !!p.ambiguous && opts.length >= 2,
+        options: opts,
+        mode: "route"
+      });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text

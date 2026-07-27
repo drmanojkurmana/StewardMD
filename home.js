@@ -3008,12 +3008,19 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // (not reasoning). Normalises the messy query ("dibetis" -> "diabetes mellitus"), retries the
           // KB; if it now resolves >=85%, answer from the KB. Else fall through to Gemini. The instant
           // path above is untouched — this network hop is paid only when the local rules couldn't resolve.
-          var _refineP = (_kbOn && window.SMD_AI && SMD_AI.refine && MaiKKB.isComplex && !MaiKKB.isComplex(question))
-            ? SMD_AI.refine(question).then(function (ref) {
-                if (!ref || !ref.topic || !window.StewardRAG) return null;
-                return Promise.resolve(StewardRAG.buildPackage(window.SMD_REASON.assess({}), { question: ref.topic })).then(function (pkg2) {
-                  if (!pkg2) return null; pkg2.question = ref.topic;
-                  try { var _kb2 = MaiKKB.compose(ref.topic, pkg2, { depth: depth }); if (_kb2 && _kb2.text && _kb2.confidence >= 0.85) return { kb: _kb2, pkg: pkg2 }; } catch (e) {}
+          // Universal semantic router (Vertex Flash): parses the query's MEANING → {primaryConcept,
+          // intent, ambiguous, options}. Drives deterministic KB retrieval from the canonical concept;
+          // asks on genuine ambiguity; sends true reasoning questions to Gemini. Fires only on a local
+          // miss (clean canonical queries already answered above), so the instant path is untouched.
+          var _refineP = (_kbOn && window.SMD_AI && (SMD_AI.route || SMD_AI.refine) && MaiKKB.isComplex && !MaiKKB.isComplex(question))
+            ? (SMD_AI.route || SMD_AI.refine)(question).then(function (ref) {
+                if (!ref) return null;
+                if (ref.ambiguous && ref.options && ref.options.length >= 2) return { ambiguous: ref.options.slice(0, 4) };
+                var concept = ref.primaryConcept || ref.topic;
+                if (!concept || ref.intent === "reasoning" || !window.StewardRAG) return null;   // reasoning → Gemini
+                return Promise.resolve(StewardRAG.buildPackage(window.SMD_REASON.assess({}), { question: concept })).then(function (pkg2) {
+                  if (!pkg2) return null; pkg2.question = concept;
+                  try { var _kb2 = MaiKKB.compose(question, pkg2, { concept: concept, intent: ref.intent, depth: depth }); if (_kb2 && _kb2.text && _kb2.confidence >= 0.85) return { kb: _kb2, pkg: pkg2 }; } catch (e) {}
                   return null;
                 }).catch(function () { return null; });
               }).catch(function () { return null; })
@@ -3021,6 +3028,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
 
           return _refineP.then(function (refined) {
             if (refined && refined.kb) { finishKB(refined.kb, refined.pkg, "refined"); return; }
+            if (refined && refined.ambiguous) {   // genuine ambiguity → ask, never guess
+              _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+              think.innerHTML = '<div class="maik-welcome">Did you mean:</div>';
+              var _amWrap = document.createElement("div"); _amWrap.className = "maik-fus";
+              refined.ambiguous.forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); _amWrap.appendChild(b); });
+              think.appendChild(_amWrap); try { scroll(); } catch (e) {} return;
+            }
             // ── TIER 2 — Gemini grounded answer (existing path) ──
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)

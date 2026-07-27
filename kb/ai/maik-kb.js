@@ -395,17 +395,24 @@
 
   // ------------------------------------------------------------ compose ------
   // Returns { text, confidence(0..1), intent, mode, evidence } or null.
+  // Router intents that the deterministic KB composer maps onto its own section composers; any router
+  // intent NOT covered here (interaction, monitoring, guideline, prevention, emergency…) returns null →
+  // Gemini explains. This is generic mapping, not disease-specific.
+  var INTENT_ALIAS = { causes: "differential", etiology: "differential", aetiology: "differential", risk_factors: "differential", diagnosis: "investigation", workup: "investigation", classification: "severity", presentation: "features", symptoms: "features", signs: "features", management: "treatment" };
   function compose(question, pkg, opts) {
     try {
-      if (!question) return null;
-      if (isComplex(question)) return null;                         // reasoning → Gemini
-      var t = resolveTarget(question, pkg);
+      opts = opts || {};
+      var resolveQ = opts.concept || question;                      // prefer the semantic router's CANONICAL concept for resolution
+      if (!resolveQ) return null;
+      if (!opts.intent && isComplex(question)) return null;         // reasoning → Gemini (router-supplied intent bypasses this)
+      var t = resolveTarget(resolveQ, pkg);
       if (!t) return null;
       if (!t.E) t.E = {};                                           // enrichment-absent (e.g. DX_MGMT-only toxicology) → composers stay null-safe
       if (!t.confident) return null;                                // ASSUME / weak → Gemini (it can caveat)
-      var intent = classifyIntent(question);
+      var intent = opts.intent ? (INTENT_ALIAS[opts.intent] || opts.intent) : classifyIntent(question || resolveQ);
+      if (!COMPOSERS[intent]) { if (opts.intent) return null; intent = "definition"; }   // router intent the KB doesn't cover → Gemini
       var composer = COMPOSERS[intent] || composeDefinition;
-      var res = composer(t, question);
+      var res = composer(t, question || resolveQ);
       if (!res || !res.ok || !res.text) return null;                // KB lacks the field → Gemini
       // confidence calibrated to HOW the disease resolved (the >85% KB gate keys off this):
       //   exact name match 0.95 · canonical (term+qualifier) 0.90 · engine-grounded 0.85 · fuzzy/assume <0.85 (defer)

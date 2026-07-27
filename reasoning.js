@@ -3767,8 +3767,9 @@
     refine: function (q) {
       var b = aiBase(); if (!b || !aiOn() || !q) return Promise.resolve(null);
       return aiHeaders().then(function (h) { return fetch(b + "/refine", { method: "POST", headers: h, body: JSON.stringify({ q: String(q).slice(0, 300) }) }); })
-        .then(function (r) { return r.json(); }).then(function (j) { return (j && j.topic) ? j : null; }).catch(function () { return null; });
+        .then(function (r) { return r.json(); }).then(function (j) { return (j && (j.topic || j.primaryConcept || j.ambiguous)) ? j : null; }).catch(function () { return null; });
     },
+    route: function (q) { return window.SMD_AI.refine(q); },   // V3 alias — the universal semantic router (same endpoint, richer JSON)
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
