@@ -68,3 +68,25 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || '5476a757e49205bd1cce40b144eb59a9' }}
           command: vectorize upsert stewardmd-kb --file kb/dist/kb.disease-vectors.ndjson
+
+      # 4. CHUNK-LEVEL for the DIAGNOSTIC tier (~6.8k section-tagged chunks) — section-precise
+      # retrieval for the diseases MaiK answers from. Coexists with the disease-level vectors above.
+      - name: Build diagnostic chunk index
+        run: node kb/tools/build-kb-index.mjs --diagnostic
+
+      - name: Embed diagnostic chunks (bge-base-en-v1.5, 768-d)
+        run: node kb/tools/embed-upsert.mjs
+
+      - name: Verify chunk vectors
+        run: |
+          test -s kb/dist/kb.vectors.ndjson || { echo "no chunk vectors produced"; exit 1; }
+          n=$(wc -l < kb/dist/kb.vectors.ndjson); echo "chunk vectors to upsert: $n"
+          dims=$(head -1 kb/dist/kb.vectors.ndjson | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).values.length))")
+          test "$dims" = "768" || { echo "unexpected chunk embedding dimension $dims"; exit 1; }
+
+      - name: Upsert diagnostic chunks into stewardmd-kb
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || '5476a757e49205bd1cce40b144eb59a9' }}
+          command: vectorize upsert stewardmd-kb --file kb/dist/kb.vectors.ndjson

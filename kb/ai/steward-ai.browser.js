@@ -28,7 +28,9 @@
   // vector arm → identical to lexical-only.
   function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") !== "0"; } catch (e) { return true; } }   // default ON (Vectorize index live); set "0" to disable
   function hybridBase() { return window.AI_PROXY ? String(window.AI_PROXY).replace(/\/ai\b/, "/retrieve") : "/api/retrieve"; }
+  var _vecSections = {};   // diseaseId -> the section the vector arm matched (chunk-level), used to bias grounding
   function vectorDiseaseIds(query, k) {
+    _vecSections = {};
     var headers = { "Content-Type": "application/json" };
     var p;
     try {
@@ -42,7 +44,7 @@
       return fetch(hybridBase(), { method: "POST", headers: headers, body: JSON.stringify({ query: String(query || "").slice(0, 500), k: k || 12 }), signal: ac ? ac.signal : undefined });
     }).then(function (r) { if (to) clearTimeout(to); return r && r.ok ? r.json() : null; }).then(function (j) {
       var ids = [], seen = {};
-      ((j && j.matches) || []).forEach(function (m) { var d = m && m.diseaseId; if (d && !seen[d]) { seen[d] = 1; ids.push(d); } });
+      ((j && j.matches) || []).forEach(function (m) { var d = m && m.diseaseId; if (!d) return; if (!seen[d]) { seen[d] = 1; ids.push(d); } if (m.section && !_vecSections[d]) _vecSections[d] = m.section; });   // capture the top vector-matched section per disease (chunk-level)
       return ids;
     }).catch(function () { if (to) clearTimeout(to); return []; });   // any failure/timeout → lexical-only
     // Real wall-clock bound: on the native app CapacitorHttp ignores AbortController, so the abort
@@ -277,10 +279,11 @@
 
   function trimGrounding(g) {
     if (!g) return null;
-    var byPri = g.knowledge.slice().sort(function (a, b) {
-      var ia = PRIORITY.indexOf(a.section), ib = PRIORITY.indexOf(b.section);
-      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
-    }).slice(0, PER_DISEASE);
+    // Chunk-level bias: if the vector arm matched a specific SECTION for this disease, surface that
+    // section's chunk FIRST (ahead of the fixed priority order) — section-precise grounding.
+    var boost = g.diseaseId && _vecSections[g.diseaseId];
+    var pri = function (s) { if (boost && s === boost) return -1; var i = PRIORITY.indexOf(s); return i < 0 ? 99 : i; };
+    var byPri = g.knowledge.slice().sort(function (a, b) { return pri(a.section) - pri(b.section); }).slice(0, PER_DISEASE);
     return { diseaseId: g.diseaseId, name: g.name, class: g.class,
       knowledge: byPri.map(function (c) { return { section: c.section, text: c.text, source: c.source }; }),
       provenance: g.provenance, drugRefs: (g.drugRefs || []).slice(0, 12) };

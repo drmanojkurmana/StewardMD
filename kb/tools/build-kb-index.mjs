@@ -27,6 +27,10 @@ const DZDIR = join(ROOT, "kb", "diseases");
 const TXDIR = join(ROOT, "kb", "treatments");
 const REFDIR = join(ROOT, "kb", "reference");
 const OUT = join(ROOT, "kb", "dist", "kb.index.json");
+// --diagnostic: emit ONLY the diagnostic tier (kb/diseases + treatments), skip the 4,664 reference
+// diseases. Keeps the chunk set bounded (~thousands, not 157k) so it fits Vectorize + is the tier
+// MaiK actually answers from. Disease-level vectors still cover the reference tier for recall.
+const DIAG_ONLY = process.argv.includes("--diagnostic");
 
 const ids = readdirSync(DZDIR).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", ""));
 const refIds = existsSync(REFDIR) ? readdirSync(REFDIR).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", "")) : [];
@@ -109,7 +113,7 @@ for (const id of ids) {
 // ---- REFERENCE diseases (kb/reference): the broader Harrison disease universe,
 // KNOWLEDGE-only (no treatment/scoring). Same citable-chunk shape, tagged
 // referenceOnly so retrieval can distinguish them from diagnostic diseases. ----
-for (const id of refIds) {
+for (const id of (DIAG_ONLY ? [] : refIds)) {
   const d = JSON.parse(readFileSync(join(REFDIR, id + ".json"), "utf8"));
   nRef++;
   const h = d.harrison || d.reference || {};   // `reference` = source-neutral key (Nelson/Parsons/etc.)
