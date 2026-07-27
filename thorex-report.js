@@ -276,22 +276,46 @@
     followUp: "Follow-up"
   };
 
+  // Merge two finding lists, de-duplicating on (lowercased) label — keeps the higher-confidence copy so
+  // when both engines flag the same thing it appears once at its strongest.
+  function mergeFindings(a, b) {
+    var out = [], seen = {};
+    arr(a).concat(arr(b)).forEach(function (f) {
+      if (!f) return;
+      var k = str(f.label).toLowerCase();
+      if (!(k in seen)) { seen[k] = out.length; out.push(f); return; }
+      var prev = out[seen[k]];
+      var pf = (f.prob == null ? -1 : +f.prob), pp = (prev.prob == null ? -1 : +prev.prob);
+      if (pf > pp) out[seen[k]] = f;
+    });
+    return out;
+  }
+
   /* ══════════════════════════════════════ buildReport ═══════════════════════════════════════════ */
+  // opts.engineScope: "clinical" (default, Engine 1 only) | "educational" (Engine 2 only) | "both".
   function buildReport(analysis, opts) {
     analysis = analysis || {};
     opts = opts || {};
+    var scope = (opts.engineScope === "educational" || opts.engineScope === "both") ? opts.engineScope : "clinical";
     var clinical = clinicalEngineOf(analysis);
     var learning = learningEngineOf(analysis);
-    var rawFindings = arr(clinical && clinical.findings);
+    var rawFindings = scope === "educational" ? arr(learning && learning.findings)
+      : scope === "both" ? mergeFindings(clinical && clinical.findings, learning && learning.findings)
+      : arr(clinical && clinical.findings);
     var findingItems = buildFindingsItems(rawFindings);
     var bucket = urgencyBucket(worstSeverityOf(findingItems));
     var recs = buildRecommendations(findingItems);
     var differential = buildDifferential(findingItems);
-    var educational = buildEducational(learning);
+    // The educational appendix only makes sense when the body is clinical-only; for educational/both the
+    // Engine 2 findings already drive the main report.
+    var educational = scope === "clinical" ? buildEducational(learning) : null;
 
+    var engineLabel = scope === "educational" ? "ThoreX Clinical Engine 2 (educational)"
+      : scope === "both" ? "ThoreX Clinical Engine 1 + 2 (Engine 2 is educational)"
+      : "ThoreX Clinical Engine 1";
     var sections = {
       clinicalInformation: { title: SECTION_TITLES.clinicalInformation, text: buildClinicalInformation(opts) },
-      technique: { title: SECTION_TITLES.technique, text: buildTechnique(clinical) },
+      technique: { title: SECTION_TITLES.technique, text: buildTechnique(clinical) + " Source: " + engineLabel + "." },
       imageQuality: { title: SECTION_TITLES.imageQuality, text: buildImageQuality(analysis) },
       findings: { title: SECTION_TITLES.findings, items: findingItems },
       impression: { title: SECTION_TITLES.impression, text: buildImpression(findingItems) },
@@ -503,7 +527,7 @@
         '</div>' +
         '<h1>AI CHEST X-RAY SCREENING REPORT</h1>' +
         '<div class="h1sub">Single frontal chest radiograph &middot; AI-assisted screening (ThoreX AI)</div>' +
-        (xray ? '<div class="xray"><img src="' + esc(xray) + '" alt="Analyzed chest radiograph" /><div class="xcap">Analyzed image &middot; burnt-in identifiers masked where detected</div></div>' : '') +
+        (xray ? '<div class="xray"><img src="' + esc(xray) + '" alt="Analyzed chest radiograph" /><div class="xcap">' + (opts.heatmap ? 'Analyzed image with AI heatmap overlay' : 'Analyzed image') + ' &middot; burnt-in identifiers masked where detected</div></div>' : '') +
         '<h2>Findings</h2><ul class="findings">' + findingsList + '</ul>' +
         '<h2>Impression</h2><p class="impression">' + esc(S.impression.text) + '</p>' +
         '<h2>Differential diagnosis</h2><ul class="ddx">' + ddxList + '</ul>' +
