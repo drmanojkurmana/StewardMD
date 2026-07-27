@@ -167,6 +167,14 @@ assert.ok(proDoc.indexOf("data:image/png;base64,BBBB") >= 0, "pro doc embeds the
 assert.ok(/IMPORTANT — AI-generated screening, not a diagnosis/.test(proDoc) && proDoc.indexOf(DISCLAIMER) >= 0, "pro doc carries the warning + mandatory disclaimer");
 assert.ok(/62M smoker, breathless/.test(proDoc), "pro doc shows the clinical context");
 assert.ok(/Findings support Right lower lobe consolidation/.test(proDoc), "pro doc carries the tiered impression");
+// AI best-fit diagnosis (from the LLM) is embedded in the exported document when provided
+const proDocAi = R.buildProDocument(analysis, { aiDdx: "1. Lung abscess — cavity + fever + foul sputum.\n2. Necrotizing pneumonia." });
+assert.ok(/AI best-fit diagnosis \(correlated with history\)/.test(proDocAi), "pro doc includes the AI best-fit section when aiDdx provided");
+assert.ok(/Lung abscess/.test(proDocAi) && /MaiK AI/.test(proDocAi), "pro doc renders the AI text + MaiK AI branding");
+assert.ok(!/gemini|groq/i.test(proDocAi), "pro doc must not leak the raw LLM provider name");
+// no AI section when none provided
+assert.ok(!/AI best-fit diagnosis/.test(R.buildProDocument(analysis, {})), "no AI section when aiDdx absent");
+
 // degrades cleanly with no logo/xray
 const proDoc2 = R.buildProDocument(analysis, {});
 assert.ok(/^<!doctype html>/i.test(proDoc2) && /StewardMD/.test(proDoc2), "pro doc still valid with no logo/xray/context");

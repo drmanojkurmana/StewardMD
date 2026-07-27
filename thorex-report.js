@@ -478,6 +478,7 @@
     "h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;border-bottom:1.5px solid #0f766e;padding-bottom:3px;margin:16px 22px 8px}" +
     "ul{margin:0 22px 8px;padding-left:20px}li{margin-bottom:4px}" +
     ".impression{margin:0 22px 8px;font-weight:800}" +
+    ".aibox{margin:0 22px 6px;padding:11px 13px;border:1.5px solid #0f766e;border-radius:8px;background:#f0fbf9;font-size:12.5px;line-height:1.6;color:#0f172a;font-weight:600}.aibrand{font-size:10px;color:#0f766e;font-weight:800;letter-spacing:.05em;margin:4px 22px 8px;text-transform:uppercase}" +
     ".ddx li{margin-bottom:6px}.ddx .conf{font-weight:800;color:#0f766e}.ddx .band{font-size:11px;color:#64748b}.ddx .ddxdx{font-size:11.5px;line-height:1.5;color:#475569;margin-top:2px}" +
     ".warn{margin:14px 22px;padding:12px 14px;border:1.5px solid #b45309;background:#fffbeb;border-radius:8px;font-size:11.5px;line-height:1.5;color:#7c2d12;display:flex;flex-direction:column;gap:4px}.warn b{color:#b45309}" +
     ".sign{display:flex;gap:30px;margin:24px 22px 6px}.sig{flex:1;font-size:11px;color:#64748b}.sig-line{border-top:1.5px solid #94a3b8;margin-bottom:5px;height:24px}" +
@@ -491,6 +492,7 @@
     var logo = str(opts.logoDataUrl);
     var xray = str(opts.xrayDataUrl);
     var created = str(opts.createdAt);
+    var aiDdx = str(opts.aiDdx);
 
     var findItems = arr(S.findings.items);
     var findingsList = findItems.length
@@ -530,6 +532,7 @@
         (xray ? '<div class="xray"><img src="' + esc(xray) + '" alt="Analyzed chest radiograph" /><div class="xcap">' + (opts.heatmap ? 'Analyzed image with AI heatmap overlay' : 'Analyzed image') + ' &middot; burnt-in identifiers masked where detected</div></div>' : '') +
         '<h2>Findings</h2><ul class="findings">' + findingsList + '</ul>' +
         '<h2>Impression</h2><p class="impression">' + esc(S.impression.text) + '</p>' +
+        (aiDdx ? '<h2>AI best-fit diagnosis (correlated with history)</h2><div class="aibox">' + esc(aiDdx).replace(/\n/g, '<br>') + '</div><div class="aibrand">MaiK AI &middot; decision support &middot; correlate clinically</div>' : '') +
         '<h2>Differential diagnosis</h2><ul class="ddx">' + ddxList + '</ul>' +
         '<h2>Advice</h2><ul class="advice">' + advice + '</ul>' +
         '<div class="warn"><b>&#9888; IMPORTANT — AI-generated screening, not a diagnosis.</b>' +

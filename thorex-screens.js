@@ -772,7 +772,7 @@
       '<button class="tx-report-toggle" type="button" data-act="tx-report-toggle" aria-expanded="true" aria-controls="txReportBody">' +
         ic("description") + '<span class="tx-report-toggle-txt">ThoreX AI — Radiology report</span>' + ic("expand_more") +
       "</button>" +
-      '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody">' + report.html + "</div>"
+      '<div class="tx-report-wrap" id="txReportBody" data-hook="reportBody">' + aiDxSection + report.html + "</div>"
       : "";
 
     // Clinical correlation (thorex-correlate.js) — additive toggle, same pattern as the report toggle.
@@ -813,7 +813,6 @@
       '<div class="tx-result-body">' +
         xrayViewer +
         '<div class="tx-result-panels">' + panels.map(function (p, i) { return collapsiblePanel(p, i, i === 0); }).join("") + "</div>" +
-        aiDxSection +
         reportSection +
         correlateSection +
         '<div class="tx-disc">' + ic("info") + "<span>" + esc(MANDATORY_DISCLAIMER) + "</span></div>" +
@@ -906,8 +905,9 @@
         var p = (LLM && LLM.bestDdx) ? LLM.bestDdx(a, hx) : Promise.resolve({ text: "AI correlation is unavailable on this device.", provider: "offline" });
         Promise.resolve(p).then(function (res) {
           var txt = (res && res.text) || "No correlation available.";
+          try { a.__aiDdx = txt; } catch (e) {}   // carried into the exported report
           outEl.innerHTML = '<div class="tx-aidx-body">' + esc(txt).replace(/\n/g, "<br>") + "</div>" +
-            '<div class="tx-aidx-foot">' + ic("info") + "<span>AI decision support · correlate clinically · radiologist review required" + (res && res.provider ? " · " + esc(res.provider) : "") + "</span></div>";
+            '<div class="tx-aidx-foot">' + ic("info") + "<span>MaiK AI · decision support · correlate clinically · radiologist review required</span></div>";
         }).catch(function () {
           outEl.innerHTML = '<div class="tx-aidx-body">Couldn’t get an AI correlation right now.</div>';
         }).then(function () { goBtn.disabled = false; });
@@ -1511,7 +1511,7 @@
         var heat = topHeatmapFor(a, scope);
         var imgP = (xrayUrl && heat) ? compositeHeatmap(xrayUrl, heat) : Promise.resolve(xrayUrl);
         return imgP.then(function (finalImg) {
-          var doc = R.buildProDocument(a, { context: (a && a.__context) || "", logoDataUrl: logo, xrayDataUrl: finalImg, createdAt: a && a.createdAt, engineScope: scope, heatmap: !!(heat && xrayUrl) });
+          var doc = R.buildProDocument(a, { context: (a && a.__context) || "", logoDataUrl: logo, xrayDataUrl: finalImg, createdAt: a && a.createdAt, engineScope: scope, heatmap: !!(heat && xrayUrl), aiDdx: (a && a.__aiDdx) || "" });
           exportHtmlDoc(doc, "StewardMD-CXR-report");
         });
       }).catch(function () { toast("Couldn’t prepare the report."); });
