@@ -409,6 +409,9 @@
           "</div>" +
           '<h2 class="tx-proc-title">Analyzing your chest X-ray&hellip;</h2>' +
           '<p class="tx-proc-sub">ThoreX is checking quality and running detection</p>' +
+          '<div class="tx-firstrun" role="status">' + ic("hourglass_top") +
+            "<span>First scan takes longer — the AI models download in the background. Later scans run instantly.</span>" +
+          "</div>" +
           '<div class="tx-stages">' + STAGES.map(function (s, i) { return stageRow(i); }).join("") + "</div>" +
           '<div class="tx-proc-foot">' + ic("lock") + "<span>Encrypted &middot; deleted immediately after analysis</span></div>" +
         "</div>" +
@@ -602,6 +605,9 @@
       return;
     }
     var panels = buildPanelModels(a);
+    // Show ThoreX Clinical Engine 2 (educational) FIRST, Engine 1 below it (stable sort keeps each
+    // group's original order).
+    panels.sort(function (x, y) { return (y.educational ? 1 : 0) - (x.educational ? 1 : 0); });
 
     // A finding is a real POSITIVE only above the 50% operating point. At/below 50% it's a
     // below-threshold signal → the read is "possibly normal", not an abnormality.
@@ -971,30 +977,46 @@
     var cloud = F ? F.get("smd_thorex_cloud") : null;
     var cloudLabel = cloud === true ? "Allowed" : cloud === false ? "Declined" : "Not set (asked before the next Free upload)";
 
-    function toggleRow(label, sub, act, on) {
-      return '<button type="button" class="tx-set-row" data-act="' + act + '" role="switch" aria-checked="' + (on ? "true" : "false") + '">' +
-        '<div><div class="tx-set-label">' + esc(label) + "</div><div class=\"tx-set-sub\">" + esc(sub) + "</div></div>" +
-        '<span class="material-symbols-rounded" aria-hidden="true">' + (on ? "toggle_on" : "toggle_off") + "</span>" +
+    // Card row builders (mirror the KardioX settings look): leading icon + title/sub + a control
+    // (pill toggle, chevron, or nothing for a read-only info row).
+    function srBody(title, sub) {
+      return '<span class="tx-sr-body"><span class="tx-sr-title">' + esc(title) + "</span><span class=\"tx-sr-sub\">" + esc(sub) + "</span></span>";
+    }
+    function toggleRow(icon, title, sub, act, on) {
+      return '<button type="button" class="tx-sr" data-act="' + act + '" role="switch" aria-checked="' + (on ? "true" : "false") + '">' +
+        '<span class="tx-sr-ic">' + ic(icon) + "</span>" + srBody(title, sub) +
+        '<span class="tx-sr-toggle' + (on ? " tx-on" : "") + '" aria-hidden="true"><span class="tx-sr-knob"></span></span>' +
       "</button>";
     }
+    function actionRow(icon, title, sub, act, danger) {
+      return '<button type="button" class="tx-sr' + (danger ? " tx-danger" : "") + '" data-act="' + act + '">' +
+        '<span class="tx-sr-ic">' + ic(icon) + "</span>" + srBody(title, sub) +
+        '<span class="tx-sr-chev">' + ic("chevron_right") + "</span>" +
+      "</button>";
+    }
+    function infoRow(icon, title, sub) {
+      return '<div class="tx-sr tx-sr--info">' + '<span class="tx-sr-ic">' + ic(icon) + "</span>" + srBody(title, sub) + "</div>";
+    }
+    function secLabel(t) { return '<div class="tx-set-label">' + esc(t) + "</div>"; }
 
     host.innerHTML =
       '<div class="tx-list-head">' +
         '<button class="tx-result-back" type="button" data-act="tx-back" aria-label="Back">' + ic("arrow_back") + "</button>" +
         '<h2 class="tx-list-title">ThoreX settings</h2>' +
       "</div>" +
-      '<div class="tx-list-body">' +
-        toggleRow("Show AI confidence", "Confidence band on every result", "tx-toggle-confidence", conf) +
-        toggleRow("Haptics", "Vibrate on tap and result-ready", "tx-toggle-haptics", haptics) +
-        '<div class="tx-set-row"><div><div class="tx-set-label">Free cloud analysis</div><div class="tx-set-sub">' + esc(cloudLabel) + "</div></div></div>" +
-        '<button type="button" class="tx-set-row" data-act="tx-remove-models">' +
-          '<div><div class="tx-set-label">Remove downloaded models</div><div class="tx-set-sub">Frees on-device model storage · re-downloads on next scan</div></div>' +
-          ic("cloud_off") +
-        "</button>" +
-        '<button type="button" class="tx-set-row" data-act="tx-clear-cxrs">' +
-          '<div><div class="tx-set-label">Clear local CXRs</div><div class="tx-set-sub">Permanently deletes every stored case</div></div>' +
-          ic("delete") +
-        "</button>" +
+      '<div class="tx-set-wrap">' +
+        secLabel("Display") +
+        '<div class="tx-set-group">' +
+          toggleRow("percent", "Show AI confidence", "Confidence % on every result", "tx-toggle-confidence", conf) +
+          toggleRow("vibration", "Haptics", "Vibrate on tap and result-ready", "tx-toggle-haptics", haptics) +
+        "</div>" +
+        secLabel("Privacy &amp; data") +
+        '<div class="tx-set-group">' +
+          infoRow("cloud", "Free cloud analysis", cloudLabel) +
+          actionRow("cloud_off", "Remove downloaded models", "Frees on-device model storage · re-downloads on next scan", "tx-remove-models", false) +
+          actionRow("delete", "Clear local CXRs", "Permanently deletes every stored case", "tx-clear-cxrs", true) +
+        "</div>" +
+        '<div class="tx-set-foot">' + ic("verified_user") + "<span>Chest X-rays stay on your device · identifiers masked on-device before analysis</span></div>" +
       "</div>";
   }
 
