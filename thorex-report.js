@@ -107,8 +107,8 @@
   }
 
   /* ═══════════════════════════════════════ Findings ═════════════════════════════════════════════ */
-  function buildFindingsItems(findings) {
-    return sortedByBand(findings).map(function (f) {
+  function buildFindingsItems(findings, keepOrder) {
+    return (keepOrder ? arr(findings) : sortedByBand(findings)).map(function (f) {
       return {
         label: displayLabel(f.label),
         band: f.band == null ? null : str(f.band),
@@ -276,21 +276,6 @@
     followUp: "Follow-up"
   };
 
-  // Merge two finding lists, de-duplicating on (lowercased) label — keeps the higher-confidence copy so
-  // when both engines flag the same thing it appears once at its strongest.
-  function mergeFindings(a, b) {
-    var out = [], seen = {};
-    arr(a).concat(arr(b)).forEach(function (f) {
-      if (!f) return;
-      var k = str(f.label).toLowerCase();
-      if (!(k in seen)) { seen[k] = out.length; out.push(f); return; }
-      var prev = out[seen[k]];
-      var pf = (f.prob == null ? -1 : +f.prob), pp = (prev.prob == null ? -1 : +prev.prob);
-      if (pf > pp) out[seen[k]] = f;
-    });
-    return out;
-  }
-
   /* ══════════════════════════════════════ buildReport ═══════════════════════════════════════════ */
   // opts.engineScope: "clinical" (default, Engine 1 only) | "educational" (Engine 2 only) | "both".
   function buildReport(analysis, opts) {
@@ -299,10 +284,21 @@
     var scope = (opts.engineScope === "educational" || opts.engineScope === "both") ? opts.engineScope : "clinical";
     var clinical = clinicalEngineOf(analysis);
     var learning = learningEngineOf(analysis);
-    var rawFindings = scope === "educational" ? arr(learning && learning.findings)
-      : scope === "both" ? mergeFindings(clinical && clinical.findings, learning && learning.findings)
-      : arr(clinical && clinical.findings);
-    var findingItems = buildFindingsItems(rawFindings);
+    // Engine 2 (educational) is the PRIMARY read whenever it's in scope. For "both", ALL Engine 2
+    // findings lead (band-sorted), then Engine 1's extra findings — so Engine 2 is always the main Dx
+    // (its top finding drives the Impression); Engine 1 only supplements what Engine 2 didn't flag.
+    var rawFindings, keepOrder = false;
+    if (scope === "educational") {
+      rawFindings = sortedByBand(arr(learning && learning.findings)); keepOrder = true;
+    } else if (scope === "both") {
+      var eduF = sortedByBand(arr(learning && learning.findings));
+      var seen = {}; eduF.forEach(function (f) { seen[str(f.label).toLowerCase()] = 1; });
+      var clinUnique = sortedByBand(arr(clinical && clinical.findings)).filter(function (f) { return !seen[str(f.label).toLowerCase()]; });
+      rawFindings = eduF.concat(clinUnique); keepOrder = true;
+    } else {
+      rawFindings = arr(clinical && clinical.findings);
+    }
+    var findingItems = buildFindingsItems(rawFindings, keepOrder);
     var bucket = urgencyBucket(worstSeverityOf(findingItems));
     var recs = buildRecommendations(findingItems);
     var differential = buildDifferential(findingItems);
@@ -311,7 +307,7 @@
     var educational = scope === "clinical" ? buildEducational(learning) : null;
 
     var engineLabel = scope === "educational" ? "ThoreX Clinical Engine 2 (educational)"
-      : scope === "both" ? "ThoreX Clinical Engine 1 + 2 (Engine 2 is educational)"
+      : scope === "both" ? "ThoreX Clinical Engine 2 (primary, educational) + Engine 1"
       : "ThoreX Clinical Engine 1";
     var sections = {
       clinicalInformation: { title: SECTION_TITLES.clinicalInformation, text: buildClinicalInformation(opts) },
@@ -478,6 +474,7 @@
     "h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#0f766e;border-bottom:1.5px solid #0f766e;padding-bottom:3px;margin:16px 22px 8px}" +
     "ul{margin:0 22px 8px;padding-left:20px}li{margin-bottom:4px}" +
     ".impression{margin:0 22px 8px;font-weight:800}" +
+    ".aibox{margin:0 22px 6px;padding:11px 13px;border:1.5px solid #0f766e;border-radius:8px;background:#f0fbf9;font-size:12.5px;line-height:1.6;color:#0f172a;font-weight:600}.aibrand{font-size:10px;color:#0f766e;font-weight:800;letter-spacing:.05em;margin:4px 22px 8px;text-transform:uppercase}" +
     ".ddx li{margin-bottom:6px}.ddx .conf{font-weight:800;color:#0f766e}.ddx .band{font-size:11px;color:#64748b}.ddx .ddxdx{font-size:11.5px;line-height:1.5;color:#475569;margin-top:2px}" +
     ".warn{margin:14px 22px;padding:12px 14px;border:1.5px solid #b45309;background:#fffbeb;border-radius:8px;font-size:11.5px;line-height:1.5;color:#7c2d12;display:flex;flex-direction:column;gap:4px}.warn b{color:#b45309}" +
     ".sign{display:flex;gap:30px;margin:24px 22px 6px}.sig{flex:1;font-size:11px;color:#64748b}.sig-line{border-top:1.5px solid #94a3b8;margin-bottom:5px;height:24px}" +
@@ -491,6 +488,7 @@
     var logo = str(opts.logoDataUrl);
     var xray = str(opts.xrayDataUrl);
     var created = str(opts.createdAt);
+    var aiDdx = str(opts.aiDdx);
 
     var findItems = arr(S.findings.items);
     var findingsList = findItems.length
@@ -530,6 +528,7 @@
         (xray ? '<div class="xray"><img src="' + esc(xray) + '" alt="Analyzed chest radiograph" /><div class="xcap">' + (opts.heatmap ? 'Analyzed image with AI heatmap overlay' : 'Analyzed image') + ' &middot; burnt-in identifiers masked where detected</div></div>' : '') +
         '<h2>Findings</h2><ul class="findings">' + findingsList + '</ul>' +
         '<h2>Impression</h2><p class="impression">' + esc(S.impression.text) + '</p>' +
+        (aiDdx ? '<h2>AI best-fit diagnosis (correlated with history)</h2><div class="aibox">' + esc(aiDdx).replace(/\n/g, '<br>') + '</div><div class="aibrand">MaiK AI &middot; decision support &middot; correlate clinically</div>' : '') +
         '<h2>Differential diagnosis</h2><ul class="ddx">' + ddxList + '</ul>' +
         '<h2>Advice</h2><ul class="advice">' + advice + '</ul>' +
         '<div class="warn"><b>&#9888; IMPORTANT — AI-generated screening, not a diagnosis.</b>' +
