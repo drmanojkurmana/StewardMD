@@ -51,7 +51,9 @@
   }
   .wrap{ max-width:640px; margin:0 auto; padding:20px 16px 48px; }
   header.top{ display:flex; align-items:center; gap:10px; padding:8px 2px 18px; }
-  .logo{ width:38px; height:38px; border-radius:10px; background:var(--teal); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; letter-spacing:-.02em; flex:0 0 auto; }
+  .logo{ width:38px; height:38px; border-radius:10px; background:var(--teal); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; letter-spacing:-.02em; flex:0 0 auto; overflow:hidden; }
+  .logo img{ width:100%; height:100%; object-fit:contain; padding:6px; }
+  html.fcui2 .logo img{ padding:7px; }
   .brand{ font-weight:800; font-size:16px; letter-spacing:-.01em; }
   .brand span{ color:var(--teal); }
   .sub{ margin-left:auto; font-size:12px; color:var(--slate); }
@@ -175,7 +177,7 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="logo" aria-hidden="true">SM</div>
+    <div class="logo" aria-hidden="true"><img src="/mark-white.png" alt="" onerror="this.parentNode.textContent='SM'"></div>
     <div class="brand">Steward<span>MD</span></div>
     <div class="sub" id="sub"></div>
     <button class="theme-btn" id="fcTheme" type="button" aria-label="Toggle light or dark mode"></button>
@@ -190,7 +192,7 @@
 
 <!-- motion (motion.dev, UMD → window.Motion) — vendored for offline/native; animations are enhancement-only. -->
 <script src="/vendor/motion/motion.js?v=fc1"></script>
-<script src="/followcare-i18n.js?v=fc10"></script>
+<script src="/followcare-i18n.js?v=fc12"></script>
 <script>
 (function () {
   "use strict";
@@ -253,6 +255,7 @@
       title: "Your recovery check-in", lead: "This is your recovery check-in{d}. It takes about a minute. Please answer honestly for the last day.",
       day: "Day", send: "Send my check-in", sending: "Sending…", required: "Please answer the highlighted questions before sending.",
       yes: "Yes", no: "No", better: "Better", same: "About the same", worse: "Worse", none: "None", worst: "Worst",
+      taken: "Taken", skipped: "Skipped", unavailable: "Unavailable", normal: "Normal", reduced: "Reduced", healing: "Healing", clear: "Clear", redness: "Redness", opening: "Opening", discharge: "Discharge", yellow: "Yellow", green: "Green",
       linkBad_t: "Link not valid", linkBad_b: "This recovery link is missing information. Please use the exact link we sent you.",
       expired_t: "Link expired", expired_b: "This check-in link has expired. Your care team can send you a new one.",
       done_t: "All done", done_b: "Your recovery follow-up is complete. Thank you.",
@@ -271,6 +274,7 @@
       title: "आपका रिकवरी चेक-इन", lead: "यह आपका रिकवरी चेक-इन है{d}। इसमें एक मिनट लगता है। कृपया पिछले एक दिन के बारे में सच्चाई से उत्तर दें।",
       day: "दिन", send: "मेरा चेक-इन भेजें", sending: "भेजा जा रहा है…", required: "भेजने से पहले कृपया सभी प्रश्नों के उत्तर दें।",
       yes: "हाँ", no: "नहीं", better: "बेहतर", same: "लगभग वैसा ही", worse: "खराब", none: "कोई नहीं", worst: "सबसे खराब",
+      taken: "ली", skipped: "छूट गई", unavailable: "उपलब्ध नहीं", normal: "सामान्य", reduced: "कम", healing: "भर रहा है", clear: "साफ़", redness: "लाली", opening: "खुल रहा है", discharge: "स्राव/मवाद", yellow: "पीला", green: "हरा",
       linkBad_t: "लिंक मान्य नहीं", linkBad_b: "इस लिंक में जानकारी गायब है। कृपया हमारे द्वारा भेजा गया लिंक ही खोलें।",
       expired_t: "लिंक समाप्त", expired_b: "यह लिंक समाप्त हो गया है। आपकी टीम आपको नया लिंक भेज सकती है।",
       done_t: "पूरा हुआ", done_b: "आपका फॉलो-अप पूरा हो गया है। धन्यवाद।",
@@ -289,6 +293,7 @@
       title: "మీ రికవరీ చెక్-ఇన్", lead: "ఇది మీ రికవరీ చెక్-ఇన్{d}. దీనికి సుమారు ఒక నిమిషం పడుతుంది. దయచేసి గత ఒక రోజు గురించి నిజాయితీగా సమాధానం ఇవ్వండి.",
       day: "రోజు", send: "నా చెక్-ఇన్ పంపండి", sending: "పంపుతోంది…", required: "పంపే ముందు దయచేసి గుర్తించిన ప్రశ్నలకు సమాధానం ఇవ్వండి.",
       yes: "అవును", no: "కాదు", better: "మెరుగు", same: "దాదాపు అలాగే", worse: "అధ్వాన్నం", none: "ఏమీ లేదు", worst: "అత్యంత చెడు",
+      taken: "తీసుకున్నాను", skipped: "తప్పింది", unavailable: "అందుబాటులో లేదు", normal: "సాధారణం", reduced: "తగ్గింది", healing: "మానుతోంది", clear: "స్పష్టం", redness: "ఎరుపు", opening: "తెరుచుకుంటోంది", discharge: "చీము/స్రావం", yellow: "పసుపు", green: "ఆకుపచ్చ",
       linkBad_t: "లింక్ చెల్లదు", linkBad_b: "ఈ లింక్‌లో సమాచారం లేదు. దయచేసి మేము పంపిన సరైన లింక్‌నే తెరవండి.",
       expired_t: "లింక్ గడువు ముగిసింది", expired_b: "ఈ చెక్-ఇన్ లింక్ గడువు ముగిసింది. మీ సంరక్షణ బృందం కొత్తది పంపగలదు.",
       done_t: "పూర్తయింది", done_b: "మీ రికవరీ ఫాలో-అప్ పూర్తయింది. ధన్యవాదాలు.",
@@ -491,7 +496,7 @@
     main.appendChild(card);
     var wrap = card.querySelector("#langbtns");
     var bCont = el('<button type="button" class="cta">'+esc(ti18n("fc.lang.continue", detected, { lang: native }))+'</button>');
-    var bEng  = el('<button type="button" class="opt" style="width:100%;margin-top:10px">'+esc(ti18n("fc.lang.english", detected))+'</button>');
+    var bEng  = el('<button type="button" class="opt" style="width:100%;margin-top:10px">'+esc(ti18n("fc.lang.english", "en"))+'</button>');
     var bOth  = el('<button type="button" class="opt" style="width:100%;margin-top:10px">'+esc(ti18n("fc.lang.choose", detected))+'</button>');
     bCont.addEventListener("click", function(){ tap(bCont); persistLang(detected, done); });
     bEng.addEventListener("click", function(){ tap(bEng); persistLang("en", done); });
