@@ -215,7 +215,8 @@ export async function onRequest(context) {
     // ---------------- CLINICIAN (app-gated + Firebase uid) ----------------
     if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "ready") {
-      return json({ ready: FC.isConfigured(env), enabled: enabled(env) }, 200, request);
+      // `media` = is the R2 photo bucket bound? (lets the app tell if Request-Photo is fully provisioned)
+      return json({ ready: FC.isConfigured(env), enabled: enabled(env), media: !!(env && env.FOLLOWCARE_R2), photoViewOnce: String((env && env.FOLLOWCARE_PHOTO_VIEW_ONCE) || "") === "1" }, 200, request);
     }
     if (request.method === "GET" && seg === "pathways") {
       return json({ pathways: Pathways.list().map(function (p) { return { id: p.id, name: p.name, schedule: p.schedule, version: p.version }; }) }, 200, request);

@@ -29,6 +29,12 @@ binding = "UPDATES_DB"
 database_name = "stewardmd-updates"
 database_id = "f1fe0b36-d780-415d-ae8d-e9024747b552"
 
+# R2 — FollowCare patient photos (wound/rash/etc). PHI-minimising: private bucket, 7-day lifecycle expiry on
+# the followcare/ prefix + view-once (FOLLOWCARE_PHOTO_VIEW_ONCE=1) + purge-on-erase. Code binding = FOLLOWCARE_R2.
+[[r2_buckets]]
+binding = "FOLLOWCARE_R2"
+bucket_name = "stewardmd-followcare-media"
+
 [env.production]
 compatibility_date = "2026-06-28"
 
@@ -58,6 +64,10 @@ database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
 binding = "UPDATES_DB"
 database_name = "stewardmd-updates"
 database_id = "f1fe0b36-d780-415d-ae8d-e9024747b552"
+
+[[env.production.r2_buckets]]
+binding = "FOLLOWCARE_R2"
+bucket_name = "stewardmd-followcare-media"
 
 [env.production.ai]
 binding = "AI"
