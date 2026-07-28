@@ -122,19 +122,20 @@ async function getPatients(env, token) {
 async function getDemographics(env, token, patientId, recordNo) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   if (!patientId) return { phone: '' };
-  // Step 1 — select this patient into the GHIS session (POST Searchnew with recordNo=<MR>-<IPMR episode> +
-  // the antiforgery token). WITHOUT this, GetInitialAssessmentnew 302s (session has no selected patient).
-  let sr = { skipped: true };
+  // Rebuild a cookie JAR from the stored session so any cookie GHIS sets during patient-selection propagates
+  // to the form fetch (a stateless per-call cookie would drop it → the form 302s).
+  const jar = { 'ghis.gitam.edu': {} };
+  String(s.cookie || '').split('; ').forEach(function (p) { const i = p.indexOf('='); if (i > 0) jar['ghis.gitam.edu'][p.slice(0, i).trim()] = p.slice(i + 1).trim(); });
+  const extra = { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' };
+  // Step 1 — select this patient (Searchnew) + Step 2 CheckSession (mirrors the browser sequence). SAME jar.
   if (recordNo) {
-    sr = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew',
-      '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo),
-      { 'X-Requested-With': 'XMLHttpRequest' });
+    await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
+    await raw(jar, 'GET', GHIS + '/Doctor/Home/CheckSession', null, extra);
   }
-  // Step 2 — fetch that patient's assessment form (now authorised) and pull ONLY the primary contact number.
-  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  const dbg = { _search: sr.unauth ? '302' : (sr.skipped ? 'skip' : (sr.status || '?')), _form: r.unauth ? '302' : (r.status || '?'), _len: r.body ? r.body.length : 0, _csrf: (s.csrf || '').length };
-  if (r.unauth) return Object.assign({ phone: '' }, dbg);
-  return Object.assign({ phone: extractPrimaryContact(r.body || '') }, dbg);
+  // Step 3 — the assessment form (now authorised); pull ONLY the primary contact number.
+  const r = await raw(jar, 'GET', GHIS + '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, extra);
+  const is302 = r.status >= 300 && r.status < 400;
+  return { phone: is302 ? '' : extractPrimaryContact(r.body || ''), _form: r.status, _len: (r.body || '').length };
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
