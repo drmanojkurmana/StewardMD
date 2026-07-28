@@ -53,6 +53,27 @@ switcher, and renders SMS/WhatsApp/portal/questions from a **reviewed** translat
 guaranteed fallback (NO runtime machine translation). English + Hindi + **Telugu** are reviewed; the other
 nine languages fall back to English until a reviewer fills them in (adding a language = adding one column).
 
+## Phase-2 enhancement — Doctor Action Center (NEW)
+Doctors communicate with patients from StewardMD after reviewing a FollowCare assessment, flag
+`smd_followcare_actions` (default ON), additive + fails-closed. A **🩺 Doctor Actions** button on the patient
+detail opens a premium bottom sheet with: **Send Instruction** (free text + AI-suggested draft the doctor must
+approve + favourite/reusable templates), **Ask Question**, **Request Photo**, **Request Vitals** (8 selectable
+measurements, structured + range-validated), **Request Earlier Review**, **Video Consultation (Coming Soon,
+disabled)**, **Send Educational Material**, **Emergency Advice** (high-priority, confirm-before-send), **Close
+Episode** (recovered/transferred/lost/expired/other), and **Communication History** (full chronological log,
+delivery/read status). The **One-Click AI Response** suggests a disease-aware reply from the latest assessment;
+**the doctor always reviews/edits/discards — nothing is ever sent automatically** (deterministic template now,
+Vertex/Gemini seam ready). Patients read/acknowledge/reply/upload/submit-vitals in the **portal inbox** (no app,
+multilingual). Architecture: one encrypted communication log (`fc_comms`, bodies AES-GCM at rest) + an immutable
+`fc_events` audit row per action; notifications reuse the SMS/WhatsApp dispatcher + i18n registry; photos go to
+Cloudflare R2. Modules: `followcare-comms.js` (pure model, 12 tests), `functions/_followcare_comms.js` (server),
+routes `/action /comms /draft /media` (doctor) + `/inbox /respond /upload` (patient-token). Recovery tag
+`pre-followcare-actions`.
+
+**Owner step for photos:** bind an R2 bucket named for FollowCare as **`FOLLOWCARE_R2`** on the Pages project
+`stewardmd` (Settings → Functions → R2 bindings). Until then Request-Photo degrades gracefully (the upload
+route returns `media_not_configured`/503; every other action works). No PHI in object keys.
+
 ## Before real-patient rollout (owner — non-blocking for "ready", important for scale/compliance)
 1. **Clinician sign-off** on all **26 pathways'** red-flag thresholds (the safety core; the original 9 were
    reviewed, the 17 new ones — asthma/TB/ACS/CLD/sepsis/… + Generic — carry provisional thresholds).

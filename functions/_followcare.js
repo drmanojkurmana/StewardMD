@@ -326,6 +326,20 @@ export async function setPortalLanguage(env, token, lang) {
   return { ok: true, lang: code };
 }
 
+// Reusable patient-token gate: parse → load → cryptographically verify. Returns { ok, error, ep } so
+// token-gated routes (portal, submit, language, Doctor Action Center responses) share ONE verify path
+// without exposing the signing secret. Never throws.
+export async function verifyEpisodeToken(env, token) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
+  const episodeId = episodeIdFromToken(token);
+  if (!episodeId) return { ok: false, error: "invalid_link" };
+  const ep = await getEpisode(env, episodeId);
+  if (!ep) return { ok: false, error: "invalid_link" };
+  const v = await verifyToken(token, tokenSecret(env), ep.tokenVer || 1, Date.now());
+  if (!v.ok) return { ok: false, error: v.reason === "expired" ? "link_expired" : "invalid_link" };
+  return { ok: true, ep: ep };
+}
+
 // The dayOffset the patient may answer NOW: the earliest scheduled day that is BOTH due (dueAtMs <= now)
 // AND not yet answered (dayOffset > lastDayDone). Returns null when nothing is currently due — the portal
 // must never advance the schedule to a day whose dueAtMs is still in the future.

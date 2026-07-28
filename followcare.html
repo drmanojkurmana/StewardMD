@@ -83,6 +83,20 @@
   .hidden{ display:none !important; }
   .err-icon{ font-size:34px; }
   .disclaimer{ font-size:.72rem; color:var(--slate); margin-top:18px; text-align:center; line-height:1.6; }
+  /* Doctor Action Center — patient inbox */
+  .fc-msg{ border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:12px; background:var(--panel); }
+  .fc-msg-em{ border-color:#d9534f; background:color-mix(in srgb, #d9534f 8%, var(--panel)); }
+  .fc-msg-h{ font-weight:750; font-size:.85rem; color:var(--slate); margin-bottom:6px; }
+  .fc-msg-em .fc-msg-h{ color:#c9302c; }
+  .fc-msg-b{ font-size:1rem; line-height:1.5; white-space:pre-wrap; margin-bottom:10px; }
+  .fc-msg-act{ display:flex; flex-direction:column; gap:8px; }
+  .fc-reply{ width:100%; min-height:80px; border:1.5px solid var(--line); border-radius:12px; padding:11px 13px; font:inherit; font-size:1rem; background:var(--panel); color:var(--ink); resize:vertical; }
+  .fc-mini{ min-height:46px; padding:12px; font-size:.98rem; }
+  .cta.sec, .fc-mini.sec{ background:transparent; color:var(--teal); border:1.5px solid var(--teal); }
+  .fc-vrow{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+  .fc-vrow label{ flex:1 1 140px; font-size:.9rem; }
+  .fc-vrow input{ flex:1 1 90px; min-width:80px; padding:10px 11px; border:1.5px solid var(--line); border-radius:11px; font-size:1rem; background:var(--panel); color:var(--ink); }
+  .fc-done{ font-weight:700; color:var(--teal); font-size:.95rem; padding:6px 0; }
 </style>
 </head>
 <body>
@@ -102,7 +116,7 @@
 
 <!-- motion (motion.dev, UMD → window.Motion) — vendored for offline/native; animations are enhancement-only. -->
 <script src="/vendor/motion/motion.js?v=fc1"></script>
-<script src="/followcare-i18n.js?v=fc1"></script>
+<script src="/followcare-i18n.js?v=fc8"></script>
 <script>
 (function () {
   "use strict";
@@ -116,7 +130,11 @@
   function anim(elx, keyframes, opts) { if (!M || !M.animate || REDUCE || !elx) return null; try { return M.animate(elx, keyframes, opts || {}); } catch (e) { return null; } }
   function enter(elx, delay) { anim(elx, { opacity: [0, 1], transform: ["translateY(10px)", "translateY(0)"] }, { duration: 0.42, delay: delay || 0, easing: [0.22, 1, 0.36, 1] }); }
   function staggerIn(nodes) { if (!nodes) return; Array.prototype.forEach.call(nodes, function (n, i) { enter(n, 0.05 + i * 0.045); }); }
-  function pop(elx) { anim(elx, { transform: ["scale(0.6)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, easing: M && M.spring ? M.spring({ stiffness: 320, damping: 18 }) : [0.22, 1, 0.36, 1] }); }
+  // NOTE: the easing MUST be computed inside a try/catch — this Motion build's spring() throws, and if that
+  // escapes here (outside anim()'s guard) it bubbles out of the caller (e.g. the first-run language prompt)
+  // and is misread as a load failure. Fall back to a bezier curve; the pop is enhancement-only regardless.
+  function popEasing() { try { return (M && M.spring) ? M.spring({ stiffness: 320, damping: 18 }) : [0.22, 1, 0.36, 1]; } catch (e) { return [0.22, 1, 0.36, 1]; } }
+  function pop(elx) { anim(elx, { transform: ["scale(0.6)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, easing: popEasing() }); }
   function tap(elx) { anim(elx, { transform: ["scale(1)", "scale(0.95)", "scale(1)"] }, { duration: 0.22 }); }
   var token = new URLSearchParams(location.search).get("t") || "";
   var ctx = null;                 // portal context from the server
@@ -240,12 +258,117 @@
   }
   function proceed(b){
     if(b.nothingDue){
-      if(b.recovered){ return screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); }
-      var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
-      var whenTxt = when ? (" " + when.toLocaleDateString(LANG==="hi"?"hi-IN":(LANG==="te"?"te-IN":undefined),{weekday:"long", month:"short", day:"numeric"})) : "";
-      return screenMessage("✅",t("notdue_t"),t("notdue_b").replace("{w}", whenTxt),"r-green");
+      if(b.recovered){ screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); }
+      else {
+        var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
+        var whenTxt = when ? (" " + when.toLocaleDateString(LANG==="hi"?"hi-IN":(LANG==="te"?"te-IN":undefined),{weekday:"long", month:"short", day:"numeric"})) : "";
+        screenMessage("✅",t("notdue_t"),t("notdue_b").replace("{w}", whenTxt),"r-green");
+      }
+    } else {
+      renderForm();
     }
-    renderForm();
+    loadInbox();   // Doctor Action Center: show messages from the care team below whatever screen we rendered
+  }
+
+  // ---- Doctor Action Center: patient inbox ----
+  function ti(k){ return FCI ? FCI.t(k, LANG) : k; }   // inbox labels via the shared registry
+  function loadInbox(){
+    if(!token) return;
+    fetchJSON(API+"/inbox?t="+encodeURIComponent(token))
+      .then(function(res){ var b = res.body || {}; if(b.ok && b.items && b.items.length) renderInbox(b.items); })
+      .catch(function(){});
+  }
+  function renderInbox(items){
+    var sec = el('<div class="card" id="fc-inbox" style="margin-top:16px"></div>');
+    sec.appendChild(el('<h2 style="font-size:16px;margin:0 0 10px">'+esc(ti("fc.inbox.title"))+'</h2>'));
+    items.forEach(function(c){ sec.appendChild(inboxCard(c)); });
+    main.appendChild(sec);
+    enter(sec); staggerIn(sec.querySelectorAll(".fc-msg"));
+  }
+  function inboxCard(c){
+    var emergency = c.priority === "high" || c.type === "emergency";
+    var wrap = el('<div class="fc-msg'+(emergency?' fc-msg-em':'')+'"></div>');
+    var who = (c.doctorName || (ti("fc.inbox.from"))) + (c.hospitalName ? " · " + c.hospitalName : "");
+    wrap.appendChild(el('<div class="fc-msg-h">'+(emergency?('🚨 '+esc(ti("fc.inbox.emergency"))):esc(who))+'</div>'));
+    if(c.body) wrap.appendChild(el('<div class="fc-msg-b">'+esc(c.body)+'</div>'));
+    wrap.appendChild(inboxControls(c));
+    return wrap;
+  }
+  function inboxControls(c){
+    var box = el('<div class="fc-msg-act"></div>');
+    var done = c.status === "read" || c.status === "replied";
+    if(c.requiresResponse === "reply"){
+      var ta = el('<textarea class="fc-reply" placeholder="'+esc(ti("fc.inbox.reply_ph"))+'"></textarea>');
+      var send = el('<button type="button" class="cta fc-mini">'+esc(ti("fc.inbox.send"))+'</button>');
+      send.addEventListener("click", function(){ tap(send); if(!ta.value.trim()) return; send.disabled=true; respond(c.id, "reply", { text: ta.value }, box, ti("fc.inbox.sent")); });
+      box.appendChild(ta); box.appendChild(send);
+    } else if(c.requiresResponse === "photo"){
+      var fin = el('<input type="file" accept="image/*" style="display:none">');
+      var up = el('<button type="button" class="cta fc-mini">📷 '+esc(ti("fc.inbox.upload_photo"))+'</button>');
+      up.addEventListener("click", function(){ tap(up); fin.click(); });
+      fin.addEventListener("change", function(){ if(fin.files && fin.files[0]) uploadPhoto(c.id, fin.files[0], box); });
+      box.appendChild(up); box.appendChild(fin);
+    } else if(c.requiresResponse === "vitals"){
+      var fields = (c.payload && c.payload.fields) || [];
+      var inputs = {};
+      fields.forEach(function(k){
+        var row = el('<div class="fc-vrow"></div>');
+        var label = VITAL_LABELS[k] ? VITAL_LABELS[k].label : k;
+        var unit = VITAL_LABELS[k] ? VITAL_LABELS[k].unit : "";
+        if(k === "bp"){
+          row.innerHTML = '<label>'+esc(label)+' ('+esc(unit)+')</label>';
+          var s = el('<input type="number" inputmode="numeric" placeholder="Systolic">');
+          var d = el('<input type="number" inputmode="numeric" placeholder="Diastolic">');
+          inputs[k+"_sys"]=s; inputs[k+"_dia"]=d; row.appendChild(s); row.appendChild(d);
+        } else {
+          row.innerHTML = '<label>'+esc(label)+' ('+esc(unit)+')</label>';
+          var inp = el('<input type="number" inputmode="decimal" step="any">'); inputs[k]=inp; row.appendChild(inp);
+        }
+        box.appendChild(row);
+      });
+      var sub = el('<button type="button" class="cta fc-mini">'+esc(ti("fc.inbox.submit_vitals"))+'</button>');
+      sub.addEventListener("click", function(){
+        tap(sub); var payload = { requested: fields }; Object.keys(inputs).forEach(function(k){ payload[k] = inputs[k].value; });
+        sub.disabled=true; respond(c.id, "vitals", payload, box, ti("fc.inbox.sent"));
+      });
+      box.appendChild(sub);
+    } else if(c.requiresResponse === "review"){
+      var acc = el('<button type="button" class="cta fc-mini">'+esc(ti("fc.inbox.accept_review"))+'</button>');
+      acc.addEventListener("click", function(){ tap(acc); acc.disabled=true; respond(c.id, "review", {}, box, ti("fc.inbox.sent")); });
+      box.appendChild(acc);
+    } else if(c.requiresResponse === "acknowledge" || c.requiresResponse === "read"){
+      if(done){ box.appendChild(el('<div class="fc-done">✓ '+esc(ti("fc.inbox.acknowledged"))+'</div>')); }
+      else {
+        var ack = el('<button type="button" class="cta fc-mini sec">'+esc(ti("fc.inbox.acknowledge"))+'</button>');
+        ack.addEventListener("click", function(){ tap(ack); ack.disabled=true; respond(c.id, c.requiresResponse==="read"?"read":"acknowledge", {}, box, ti("fc.inbox.acknowledged")); });
+        box.appendChild(ack);
+      }
+    }
+    return box;
+  }
+  var VITAL_LABELS = {
+    bp:{label:"Blood pressure",unit:"mmHg"}, pulse:{label:"Pulse",unit:"bpm"}, temp:{label:"Temperature",unit:"°C"},
+    weight:{label:"Weight",unit:"kg"}, glucose:{label:"Blood sugar",unit:"mg/dL"}, spo2:{label:"SpO₂",unit:"%"},
+    rr:{label:"Respiratory rate",unit:"/min"}, urine:{label:"Urine output",unit:"mL/24h"}
+  };
+  function respond(commId, kind, extra, box, okLabel){
+    var payload = Object.assign({ t: token, commId: commId, kind: kind }, extra || {});
+    fetchJSON(API+"/respond", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(payload) })
+      .then(function(res){
+        if(res.body && res.body.ok){ box.innerHTML = '<div class="fc-done">✓ '+esc(okLabel||ti("fc.inbox.sent"))+'</div>'; }
+        else { box.appendChild(el('<p class="foot" role="alert">'+esc(t("sendErr"))+'</p>')); }
+      })
+      .catch(function(){ box.appendChild(el('<p class="foot" role="alert">'+esc(t("connSend"))+'</p>')); });
+  }
+  function uploadPhoto(commId, file, box){
+    box.appendChild(el('<div class="fc-done" id="fc-uping">…</div>'));
+    fetch(API+"/upload?t="+encodeURIComponent(token)+"&commId="+encodeURIComponent(commId), { method:"POST", headers:{ "Content-Type": file.type || "application/octet-stream" }, body:file })
+      .then(function(r){ return r.json().then(function(j){ return { status:r.status, body:j }; }); })
+      .then(function(res){
+        if(res.body && res.body.ok && res.body.key){ respond(commId, "photo", { mediaKeys:[res.body.key] }, box, ti("fc.inbox.uploaded")); }
+        else { var e = box.querySelector("#fc-uping"); if(e) e.remove(); box.appendChild(el('<p class="foot" role="alert">'+esc(ti("fc.inbox.upload_err"))+'</p>')); }
+      })
+      .catch(function(){ var e = box.querySelector("#fc-uping"); if(e) e.remove(); box.appendChild(el('<p class="foot" role="alert">'+esc(t("connSend"))+'</p>')); });
   }
 
   // ---- first-run language prompt ("Would you like to continue in <lang>?") ----

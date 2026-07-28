@@ -109,8 +109,14 @@
     revoke: function (episodeId) { return req("POST", "/revoke", { episodeId: episodeId }); },
     ack: function (episodeId) { return req("POST", "/ack", { episodeId: episodeId }); },
     erase: function (episodeId) { return req("POST", "/erase", { episodeId: episodeId }); },
-    ready: function () { return req("GET", "/ready"); }
+    ready: function () { return req("GET", "/ready"); },
+    // Doctor Action Center
+    action: function (payload) { return req("POST", "/action", payload); },
+    comms: function (episodeId) { return req("GET", "/comms?id=" + encodeURIComponent(episodeId)); },
+    draft: function (episodeId, kind) { return req("POST", "/draft", { episodeId: episodeId, kind: kind }); }
   };
+  var CM = (function () { try { return G.FollowCareComms || null; } catch (e) { return null; } })();
+  function actionsEnabled() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_actions")); } catch (e) { return true; } }
 
   // ---- render layer (self-contained scoped overlay) ---------------------------------------
   var mounted = false;
@@ -135,6 +141,21 @@
       ".fc-empty{text-align:center;color:var(--slate,#5a7184);padding:40px 10px}",
       ".fc-tl{border-left:2px solid var(--line,#dbe4e2);padding-left:14px;margin:8px 0 0}",
       ".fc-tl .fc-ev{margin-bottom:12px}.fc-tl .fc-ev .fc-d{font-weight:700;font-size:13.5px}.fc-tl .fc-ev .fc-r{color:var(--slate,#5a7184);font-size:12.5px}",
+      // Doctor Action Center
+      ".fc-actgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
+      ".fc-act{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:14px;background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer;min-height:84px}",
+      ".fc-act .fc-ai{font-size:22px}.fc-act .fc-al{font-weight:750;font-size:13.5px;line-height:1.25}",
+      ".fc-act.high{border-color:#e6a23c;background:color-mix(in srgb,#e6a23c 8%,transparent)}",
+      ".fc-act.soon{opacity:.55;cursor:default}.fc-act .fc-soon{font-size:10.5px;font-weight:800;color:#b06a00;background:#ffe9c7;border-radius:999px;padding:2px 7px}",
+      ".fc-ta{width:100%;min-height:110px;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font:inherit;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);resize:vertical}",
+      ".fc-chk{display:flex;align-items:center;gap:9px;padding:9px 4px;font-size:14px}.fc-chk input{width:20px;height:20px}",
+      ".fc-tmpl{display:inline-block;border:1px solid var(--line,#dbe4e2);border-radius:999px;padding:6px 11px;margin:0 6px 6px 0;font-size:12.5px;cursor:pointer;background:var(--panel,#fff);color:var(--ink,#14202b)}",
+      ".fc-ai-draft{border:1px dashed #0e6e63;border-radius:11px;padding:9px 11px;margin:8px 0;font-size:12.5px;color:#0e6e63;background:color-mix(in srgb,#0e6e63 6%,transparent)}",
+      ".fc-cm{border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:11px 13px;margin-bottom:10px}",
+      ".fc-cm.in{background:color-mix(in srgb,#0e6e63 6%,transparent)}.fc-cm.high{border-color:#d33;background:color-mix(in srgb,#d33 7%,transparent)}",
+      ".fc-cm .fc-cm-h{font-weight:750;font-size:12.5px;color:var(--slate,#5a7184);display:flex;gap:8px;align-items:center}",
+      ".fc-cm .fc-cm-b{font-size:14px;margin-top:4px;white-space:pre-wrap}",
+      ".fc-cm .fc-cm-st{margin-left:auto;font-size:11px;font-weight:700}",
       "@media(prefers-color-scheme:dark){.fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}.fc-link{background:#0f2b22;border-color:#245}}"
     ].join("");
   }
@@ -375,6 +396,15 @@
         ]));
       });
       body.appendChild(tl);
+      // Doctor Action Center — the prominent way to communicate with this patient (flag smd_followcare_actions).
+      if (actionsEnabled() && CM) {
+        var dac = h("button", { "class": "fc-btn", style: "margin-top:16px;width:100%", text: "🩺 Doctor Actions" });
+        dac.addEventListener("click", function () { openActions(episodeId, ep); });
+        body.appendChild(dac);
+        var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "🗂 Communication history" });
+        hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
+        body.appendChild(hist);
+      }
       // Acknowledge clears the "needs review" flag (an escalated episode leaves the list only by clinician action).
       if (ep.escalation === "red" || ep.escalation === "orange") {
         var ack = h("button", { "class": "fc-btn", style: "margin-top:14px", text: "Mark reviewed" });
@@ -394,8 +424,201 @@
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the episode." })); });
   }
 
+  // ---- Doctor Action Center (flag smd_followcare_actions) ---------------------------------
+  var TMPL_KEY = "smd_fc_instr_templates";
+  var BUILTIN_TMPL = [
+    "Continue your medicines exactly as prescribed.", "Reduce your salt intake.", "Restrict fluids to 1.5 L per day.",
+    "Continue your breathing exercises.", "Walk for 20 minutes daily.", "Please avoid alcohol.", "Continue insulin as advised."
+  ];
+  function savedTemplates() { try { return JSON.parse(G.localStorage.getItem(TMPL_KEY) || "[]") || []; } catch (e) { return []; } }
+  function saveTemplate(t) { try { var a = savedTemplates(); if (t && a.indexOf(t) === -1) { a.unshift(t); G.localStorage.setItem(TMPL_KEY, JSON.stringify(a.slice(0, 20))); } } catch (e) {} }
+
+  function actionSheet(episodeId, ep, backFn) {
+    var body = shell(); body.innerHTML = "";
+    body.appendChild(h("button", { "class": "fc-btn sec", onclick: backFn, text: "‹ Back" }));
+    return body;
+  }
+  function openActions(episodeId, ep) {
+    if (!CM) { toast("Doctor Actions loading…"); return; }
+    var body = actionSheet(episodeId, ep, function () { renderDetail(episodeId); });
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 3px", text: "Doctor Actions" }));
+    body.appendChild(h("div", { style: "color:var(--slate,#5a7184);font-size:12.5px;margin-bottom:14px", text: (ep && ep.disease ? ep.disease + " · " : "") + "Communicate with your patient. Everything is logged and auditable." }));
+    var grid = h("div", { "class": "fc-actgrid" });
+    CM.types().forEach(function (t) {
+      var tile = h("button", { "class": "fc-act" + (t.priority === "high" ? " high" : "") + (t.comingSoon ? " soon" : ""), "aria-label": t.label }, [
+        h("span", { "class": "fc-ai", "aria-hidden": "true", text: t.icon }),
+        h("span", { "class": "fc-al", text: t.label }),
+        t.comingSoon ? h("span", { "class": "fc-soon", text: "Coming soon" }) : null
+      ]);
+      if (!t.comingSoon) tile.addEventListener("click", function () { renderActionForm(episodeId, ep, t.id); });
+      grid.appendChild(tile);
+    });
+    body.appendChild(grid);
+    var hist = h("button", { "class": "fc-act", style: "grid-column:1/-1;flex-direction:row;align-items:center", onclick: function () { renderCommHistory(episodeId, ep); } }, [
+      h("span", { "class": "fc-ai", "aria-hidden": "true", text: "🗂" }), h("span", { "class": "fc-al", text: "Communication History" })
+    ]);
+    body.appendChild(hist);
+  }
+
+  function renderActionForm(episodeId, ep, type) {
+    var def = CM.typeDef(type); if (!def || def.comingSoon) return;
+    var body = actionSheet(episodeId, ep, function () { openActions(episodeId, ep); });
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 12px", text: def.icon + "  " + def.label }));
+    var errBox = h("div"), form = { type: type, fields: [] };
+    var wrap = h("div");
+
+    function textareaField(placeholder, aiKind) {
+      var ta = h("textarea", { "class": "fc-ta", placeholder: placeholder || "" });
+      ta.addEventListener("input", function () { form.body = ta.value; });
+      if (aiKind) {
+        var ai = h("button", { "class": "fc-btn sec", style: "margin:8px 0;font-size:13px;padding:9px 12px;min-height:auto", text: "✨ Suggest a draft (you approve)" });
+        ai.addEventListener("click", function () {
+          ai.disabled = true; ai.textContent = "Drafting…";
+          API.draft(episodeId, aiKind).then(function (r) {
+            ai.disabled = false; ai.textContent = "✨ Suggest a draft (you approve)";
+            var d = r.body && r.body.draft; if (d) { ta.value = d; form.body = d; }
+          }, function () { ai.disabled = false; ai.textContent = "✨ Suggest a draft (you approve)"; });
+        });
+        wrap.appendChild(h("div", { "class": "fc-ai-draft", text: "AI can suggest a draft. You must review and approve before it is sent — nothing is sent automatically." }));
+        wrap.appendChild(ai);
+      }
+      wrap.appendChild(ta);
+      return ta;
+    }
+
+    if (type === "instruction") {
+      var ta = textareaField("Type an instruction for the patient…", "instruction");
+      var chips = h("div", { style: "margin:10px 0" });
+      BUILTIN_TMPL.concat(savedTemplates()).forEach(function (t) {
+        chips.appendChild(h("span", { "class": "fc-tmpl", onclick: function () { ta.value = t; form.body = t; }, text: t }));
+      });
+      wrap.appendChild(chips);
+      var save = h("button", { "class": "fc-btn sec", style: "font-size:12.5px;padding:8px 11px;min-height:auto", text: "☆ Save current as template" });
+      save.addEventListener("click", function () { if (form.body) { saveTemplate(form.body); toast("Template saved"); renderActionForm(episodeId, ep, type); } });
+      wrap.appendChild(save);
+    } else if (type === "question") {
+      textareaField("Ask the patient a question…", "question");
+    } else if (type === "emergency") {
+      wrap.appendChild(h("div", { style: "background:color-mix(in srgb,#d33 9%,transparent);border:1px solid #d33;border-radius:11px;padding:10px 12px;font-size:12.5px;margin-bottom:8px", text: "This sends a high-priority emergency advisory. It does not replace calling emergency services." }));
+      textareaField("Emergency advice…", "emergency");
+    } else if (type === "photo_request") {
+      wrap.appendChild(h("div", { "class": "fc-field" }, [h("label", { text: "What should the patient photograph? (optional)" }), (function () { var i = h("input", { type: "text", placeholder: "e.g. surgical wound, rash, diabetic foot" }); i.addEventListener("input", function () { form.examples = i.value; }); return i; })()]));
+      wrap.appendChild(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "The patient uploads securely from their phone; you'll see it in the timeline." }));
+    } else if (type === "vitals_request") {
+      wrap.appendChild(h("div", { style: "font-weight:650;font-size:13.5px;margin-bottom:6px", text: "Which measurements should the patient send?" }));
+      CM.vitalsCatalogue().forEach(function (v) {
+        var cb = h("input", { type: "checkbox" });
+        cb.addEventListener("change", function () { if (cb.checked) form.fields.push(v.key); else form.fields = form.fields.filter(function (x) { return x !== v.key; }); });
+        wrap.appendChild(h("label", { "class": "fc-chk" }, [cb, document.createTextNode(v.label + " (" + v.unit + ")")]));
+      });
+    } else if (type === "earlier_review") {
+      var sel = h("select", {}, [
+        h("option", { value: "", text: "Choose when…" }),
+        h("option", { value: "today", text: "Today" }), h("option", { value: "tomorrow", text: "Tomorrow" }),
+        h("option", { value: "within_3_days", text: "Within 3 days" }), h("option", { value: "next_available", text: "Next available" })
+      ]);
+      sel.addEventListener("change", function () { form.when = sel.value; });
+      wrap.appendChild(h("div", { "class": "fc-field" }, [h("label", { text: "Requested review" }), sel]));
+      var ta2 = h("textarea", { "class": "fc-ta", placeholder: "Optional message (e.g. why to come earlier)…" }); ta2.addEventListener("input", function () { form.body = ta2.value; });
+      wrap.appendChild(ta2);
+    } else if (type === "education") {
+      var esel = h("select", {}, [h("option", { value: "", text: "Choose material…" })].concat(CM.educationCatalogue().map(function (e) { return h("option", { value: e.ref, text: e.title }); })));
+      esel.addEventListener("change", function () { form.ref = esel.value; });
+      wrap.appendChild(h("div", { "class": "fc-field" }, [h("label", { text: "Educational material" }), esel]));
+    } else if (type === "close_episode") {
+      var rsel = h("select", {}, [
+        h("option", { value: "", text: "Reason…" }),
+        h("option", { value: "recovered", text: "Recovered" }), h("option", { value: "transferred", text: "Transferred" }),
+        h("option", { value: "lost_to_followup", text: "Lost to follow-up" }), h("option", { value: "expired", text: "Expired" }), h("option", { value: "other", text: "Other" })
+      ]);
+      rsel.addEventListener("change", function () { form.reason = rsel.value; });
+      wrap.appendChild(h("div", { "class": "fc-field" }, [h("label", { text: "Close reason" }), rsel]));
+      var nta = h("textarea", { "class": "fc-ta", placeholder: "Optional notes…" }); nta.addEventListener("input", function () { form.notes = nta.value; });
+      wrap.appendChild(nta);
+    }
+    body.appendChild(wrap);
+    body.appendChild(errBox);
+
+    var submitLabel = type === "emergency" ? "Review & send emergency advice" : (type === "close_episode" ? "Close episode" : "Send");
+    var submit = h("button", { "class": "fc-btn", style: "margin-top:14px;width:100%", text: submitLabel });
+    submit.addEventListener("click", function () {
+      errBox.innerHTML = "";
+      var v = CM.validateAction(type, form);
+      if (!v.ok) { Object.keys(v.errors).forEach(function (k) { errBox.appendChild(h("div", { "class": "fc-err", text: v.errors[k] })); }); return; }
+      if (def.confirm) {
+        var q = type === "emergency" ? "Send this emergency advisory to the patient now?" : "Close this FollowCare episode? The patient will be told their follow-up is complete.";
+        if (!(G.confirm && confirm(q))) return;
+      }
+      submit.disabled = true; submit.textContent = "Sending…";
+      var payload = Object.assign({ episodeId: episodeId, doctorName: (G.SMD_DOCTOR_NAME || "") }, form);
+      API.action(payload).then(function (res) {
+        if (res.body && res.body.ok) { toast(type === "close_episode" ? "Episode closed" : "Sent to patient"); renderDetail(episodeId); }
+        else {
+          submit.disabled = false; submit.textContent = submitLabel;
+          var f = res.body && res.body.fields;
+          errBox.appendChild(h("div", { "class": "fc-err", text: f ? Object.keys(f).map(function (k) { return f[k]; }).join(" ") : "Could not send. Please try again." }));
+        }
+      }, function () { submit.disabled = false; submit.textContent = submitLabel; errBox.appendChild(h("div", { "class": "fc-err", text: "Connection problem. Please try again." })); });
+    });
+    body.appendChild(submit);
+  }
+
+  // Photos are behind the app-gate + Firebase auth, so fetch WITH the Bearer header → blob → open (a plain
+  // <a> would 401). Object URL is opened in a new tab; no PHI in the key.
+  function viewMedia(key) {
+    idToken().then(function (tok) {
+      G.fetch(BASE + "/media?key=" + encodeURIComponent(key), { headers: hdr(tok) }).then(function (r) {
+        if (!r.ok) { toast("Could not load photo"); return; }
+        r.blob().then(function (b) { try { G.open(URL.createObjectURL(b), "_blank"); } catch (e) { toast("Could not open photo"); } });
+      }, function () { toast("Could not load photo"); });
+    });
+  }
+  function fmtCommTime(ms) { try { return new Date(ms).toLocaleString(); } catch (e) { return ""; } }
+  function renderCommHistory(episodeId, ep) {
+    var body = actionSheet(episodeId, ep, function () { renderDetail(episodeId); });
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 12px", text: "Communication History" }));
+    var list = h("div"); body.appendChild(list);
+    list.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+    API.comms(episodeId).then(function (res) {
+      list.innerHTML = "";
+      var items = (res.body && res.body.items) || [];
+      if (!items.length) { list.appendChild(h("div", { "class": "fc-empty", text: "No communication yet." })); return; }
+      items.forEach(function (c) {
+        var inbound = c.dir === "in";
+        var label = CM.entryLabel(c);
+        var card = h("div", { "class": "fc-cm" + (inbound ? " in" : "") + (c.priority === "high" ? " high" : "") }, [
+          h("div", { "class": "fc-cm-h" }, [
+            document.createTextNode((inbound ? "⬅ " : "➡ ") + label),
+            h("span", { "class": "fc-cm-st", text: inbound ? "" : (c.status || "sent") })
+          ]),
+          c.body ? h("div", { "class": "fc-cm-b", text: c.body }) : null,
+          commPayloadEl(c),
+          h("div", { style: "font-size:11px;color:var(--slate,#5a7184);margin-top:5px", text: fmtCommTime(c.createdMs) })
+        ]);
+        list.appendChild(card);
+      });
+    }).catch(function () { list.innerHTML = ""; list.appendChild(h("div", { "class": "fc-empty", text: "Could not load history." })); });
+  }
+  // Render the structured payload of a comm entry (vitals values, requested fields, photos, review date, etc.).
+  function commPayloadEl(c) {
+    var p = c.payload || {};
+    if (c.type === "vitals" && p.vitals) {
+      var parts = Object.keys(p.vitals).map(function (k) { var vd = CM.VITALS[k]; var val = p.vitals[k]; if (val && typeof val === "object") val = val.sys + "/" + val.dia; return (vd ? vd.label : k) + ": " + val + (vd ? " " + vd.unit : ""); });
+      return h("div", { "class": "fc-cm-b", text: parts.join("  ·  ") });
+    }
+    if (c.type === "vitals_request" && p.fields) return h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Requested: " + p.fields.map(function (k) { return (CM.VITALS[k] || {}).label || k; }).join(", ") });
+    if ((c.type === "photo" || p.mediaKeys) && p.mediaKeys && p.mediaKeys.length) {
+      return h("div", {}, p.mediaKeys.map(function (k) { return h("button", { "class": "fc-btn sec", style: "margin:4px 6px 0 0;font-size:12.5px;padding:7px 11px;min-height:auto", onclick: function () { viewMedia(k); }, text: "📷 View photo" }); }));
+    }
+    if (c.type === "earlier_review" && p.when) return h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Review: " + String(p.when).replace(/_/g, " ") });
+    if (c.type === "education" && p.ref) return h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Material: " + p.ref });
+    if (c.type === "close_episode" && p.reason) return h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Closed: " + String(p.reason).replace(/_/g, " ") + (p.notes ? " — " + p.notes : "") });
+    return null;
+  }
+
   var PUB = {
     open: open, openEnroll: openEnroll, close: close, enabled: enabled,
+    openActions: openActions, actionsEnabled: actionsEnabled,
     // pure, testable:
     validateEnroll: validateEnroll, escalationMeta: escalationMeta, statusMeta: statusMeta,
     sortEpisodes: sortEpisodes, fmtWhen: fmtWhen, counts: counts, enrollError: enrollError,

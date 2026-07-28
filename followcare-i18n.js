@@ -164,7 +164,35 @@
     "fc.q.spo2": { en: "Oxygen level if measured", hi: "ऑक्सीजन स्तर (यदि मापा हो)", te: "ఆక్సిజన్ స్థాయి (కొలిచినట్లయితే)" },
     "fc.q.newsym": { en: "Any new symptoms since discharge?", hi: "छुट्टी के बाद कोई नए लक्षण?", te: "డిశ్చార్జ్ తర్వాత ఏవైనా కొత్త లక్షణాలు?" },
     "fc.q.urgent": { en: "Fever, breathing difficulty, severe pain, or any urgent concern?", hi: "बुखार, साँस लेने में कठिनाई, तेज़ दर्द, या कोई अत्यावश्यक चिंता?", te: "జ్వరం, శ్వాస ఇబ్బంది, తీవ్రమైన నొప్పి, లేదా ఏదైనా అత్యవసర సమస్య?" },
-    "fc.q.msgdoc": { en: "Anything you would like to tell your doctor?", hi: "क्या आप अपने डॉक्टर को कुछ बताना चाहते हैं?", te: "మీ వైద్యుడికి ఏదైనా చెప్పాలనుకుంటున్నారా?" }
+    "fc.q.msgdoc": { en: "Anything you would like to tell your doctor?", hi: "क्या आप अपने डॉक्टर को कुछ बताना चाहते हैं?", te: "మీ వైద్యుడికి ఏదైనా చెప్పాలనుకుంటున్నారా?" },
+
+    // Doctor Action Center — outbound notification nudges (SMS/WhatsApp/email). PHI-light: no clinical body,
+    // just that a message is waiting + the opaque portal link. Emergency is worded urgently.
+    "fc.msg.doctor_message": { en: "Your doctor has sent you a message on StewardMD. Please open it here: {link}", hi: "आपके डॉक्टर ने StewardMD पर आपको एक संदेश भेजा है। कृपया यहाँ खोलें: {link}", te: "మీ వైద్యుడు StewardMDలో మీకు ఒక సందేశం పంపారు. దయచేసి ఇక్కడ తెరవండి: {link}" },
+    "fc.msg.doctor_question": { en: "Your doctor has a question for you on StewardMD. Please answer here: {link}", hi: "आपके डॉक्टर ने StewardMD पर आपसे एक सवाल पूछा है। कृपया यहाँ उत्तर दें: {link}", te: "మీ వైద్యుడు StewardMDలో మీకు ఒక ప్రశ్న అడిగారు. దయచేసి ఇక్కడ సమాధానం ఇవ్వండి: {link}" },
+    "fc.msg.doctor_vitals": { en: "Your doctor has requested some measurements on StewardMD. Please submit them here: {link}", hi: "आपके डॉक्टर ने StewardMD पर कुछ माप मांगे हैं। कृपया यहाँ भेजें: {link}", te: "మీ వైద్యుడు StewardMDలో కొన్ని కొలతలను అడిగారు. దయచేసి ఇక్కడ సమర్పించండి: {link}" },
+    "fc.msg.doctor_photo": { en: "Your doctor has requested a photo on StewardMD. Please upload it here: {link}", hi: "आपके डॉक्टर ने StewardMD पर एक फोटो मांगी है। कृपया यहाँ अपलोड करें: {link}", te: "మీ వైద్యుడు StewardMDలో ఒక ఫోటోను అడిగారు. దయచేసి ఇక్కడ అప్‌లోడ్ చేయండి: {link}" },
+    "fc.msg.doctor_review": { en: "Your doctor would like to review you earlier. Please see the details here: {link}", hi: "आपके डॉक्टर आपको जल्दी दिखाना चाहते हैं। कृपया विवरण यहाँ देखें: {link}", te: "మీ వైద్యుడు మిమ్మల్ని త్వరగా చూడాలనుకుంటున్నారు. దయచేసి వివరాలు ఇక్కడ చూడండి: {link}" },
+    "fc.msg.doctor_education": { en: "Your doctor has shared some helpful information on StewardMD: {link}", hi: "आपके डॉक्टर ने StewardMD पर कुछ उपयोगी जानकारी साझा की है: {link}", te: "మీ వైద్యుడు StewardMDలో కొంత ఉపయోగకరమైన సమాచారాన్ని పంచుకున్నారు: {link}" },
+    "fc.msg.doctor_emergency": { en: "URGENT from your care team: please open this now and follow the advice: {link}", hi: "आपकी देखभाल टीम से अत्यावश्यक: कृपया इसे अभी खोलें और सलाह का पालन करें: {link}", te: "మీ సంరక్షణ బృందం నుండి అత్యవసరం: దయచేసి దీన్ని ఇప్పుడే తెరిచి సలహాను పాటించండి: {link}" },
+    "fc.msg.doctor_closed": { en: "Your StewardMD recovery follow-up is complete. Thank you: {link}", hi: "आपका StewardMD रिकवरी फॉलो-अप पूरा हो गया है। धन्यवाद: {link}", te: "మీ StewardMD రికవరీ ఫాలో-అప్ పూర్తయింది. ధన్యవాదాలు: {link}" },
+
+    // Doctor Action Center — patient portal inbox.
+    "fc.inbox.title": { en: "Messages from your care team", hi: "आपकी देखभाल टीम के संदेश", te: "మీ సంరక్షణ బృందం సందేశాలు" },
+    "fc.inbox.empty": { en: "No messages right now.", hi: "अभी कोई संदेश नहीं।", te: "ప్రస్తుతం సందేశాలు లేవు." },
+    "fc.inbox.from": { en: "From", hi: "प्रेषक", te: "నుండి" },
+    "fc.inbox.acknowledge": { en: "I have read this", hi: "मैंने इसे पढ़ लिया", te: "నేను దీన్ని చదివాను" },
+    "fc.inbox.acknowledged": { en: "Acknowledged", hi: "स्वीकृत", te: "గుర్తించబడింది" },
+    "fc.inbox.reply": { en: "Reply", hi: "उत्तर दें", te: "సమాధానం" },
+    "fc.inbox.reply_ph": { en: "Type your reply...", hi: "अपना उत्तर लिखें...", te: "మీ సమాధానాన్ని టైప్ చేయండి..." },
+    "fc.inbox.send": { en: "Send", hi: "भेजें", te: "పంపండి" },
+    "fc.inbox.sent": { en: "Sent", hi: "भेजा गया", te: "పంపబడింది" },
+    "fc.inbox.upload_photo": { en: "Upload photo", hi: "फोटो अपलोड करें", te: "ఫోటో అప్‌లోడ్ చేయండి" },
+    "fc.inbox.uploaded": { en: "Photo sent", hi: "फोटो भेजी गई", te: "ఫోటో పంపబడింది" },
+    "fc.inbox.submit_vitals": { en: "Submit measurements", hi: "माप भेजें", te: "కొలతలను సమర్పించండి" },
+    "fc.inbox.accept_review": { en: "I will attend", hi: "मैं आऊंगा/आऊंगी", te: "నేను హాజరవుతాను" },
+    "fc.inbox.emergency": { en: "Urgent advice from your doctor", hi: "आपके डॉक्टर की अत्यावश्यक सलाह", te: "మీ వైద్యుని అత్యవసర సలహా" },
+    "fc.inbox.upload_err": { en: "Could not upload. Please try a JPG/PNG under 15 MB.", hi: "अपलोड नहीं हुआ। कृपया 15 MB से कम JPG/PNG आज़माएँ।", te: "అప్‌లోడ్ కాలేదు. దయచేసి 15 MB లోపు JPG/PNGని ప్రయత్నించండి." }
   };
 
   // Fill {placeholders} and tidy artifacts left by empty values (e.g. "Hi , this" → "Hi, this").

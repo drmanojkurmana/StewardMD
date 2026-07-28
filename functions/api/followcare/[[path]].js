@@ -36,6 +36,9 @@ import Integration from "../../../followcare-integration.js";
 // Side-effect import: registers globalThis.FollowCareDiagnosis so Integration.diagnosisToPathway (used by
 // the CSV bulk-enroll) resolves via the full ICD-10 + text DiagnosisMapper, not the legacy fallback table.
 import "../../../followcare-diagnosis.js";
+// Doctor Action Center (flag smd_followcare_actions): doctor↔patient communication. Pure model + server layer.
+import * as FCC from "../../_followcare_comms.js";
+import Comms from "../../../followcare-comms.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -184,6 +187,31 @@ export async function onRequest(context) {
       return json({ ok: true, escalation: res.escalation, patientMessage: res.patientMessage, recovered: res.recovered }, 200, request);
     }
 
+    // ---------------- PATIENT (token-gated, no login) · Doctor Action Center ----------------
+    if (seg === "inbox" && request.method === "GET") {
+      const rl = await rateLimit(env, request, "inbox");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const res = await FCC.patientInbox(env, url.searchParams.get("t") || "");
+      return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : 400), request);
+    }
+    if (seg === "respond" && request.method === "POST") {
+      const b = await readBody(request);
+      const rl = await rateLimit(env, request, "respond");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const res = await FCC.respondToComm(env, b.t, b.commId || "", b.kind || "", b);
+      if (res.ok && res.notify !== false) { /* doctor push is best-effort + handled elsewhere */ }
+      return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : (res.error === "not_found" ? 404 : 400)), request);
+    }
+    if (seg === "upload" && request.method === "POST") {
+      // Binary photo upload (patient token). Streams to R2 via the binding — never buffered as JSON.
+      const rl = await rateLimit(env, request, "upload");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const ct = request.headers.get("content-type") || "";
+      const len = parseInt(request.headers.get("content-length") || "0", 10) || null;
+      const res = await FCC.uploadPhoto(env, url.searchParams.get("t") || "", url.searchParams.get("commId") || "", ct, len, request.body);
+      return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : (res.error === "media_not_configured" ? 503 : 400)), request);
+    }
+
     // ---------------- CLINICIAN (app-gated + Firebase uid) ----------------
     if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "ready") {
@@ -246,6 +274,48 @@ export async function onRequest(context) {
         prevention: Intel.preventionPlan(latest, ep.pathwayId),
       };
       return json({ episode: summary, timeline: timeline, intel: intel }, 200, request);
+    }
+
+    // ---------------- Doctor Action Center (clinician, tenant-scoped) ----------------
+    // Resolve the caller's episode + ownership once for every comms route.
+    async function ownEpisode(id) {
+      const ep = await FC.getEpisode(env, id);
+      if (!ep) return { err: json({ error: "not_found" }, 404, request) };
+      if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return { err: json({ error: "forbidden" }, 403, request) };
+      return { ep: ep };
+    }
+    if (request.method === "POST" && seg === "action") {
+      const b = await readBody(request);
+      const r = await ownEpisode(b.episodeId || ""); if (r.err) return r.err;
+      const bind = await FC.resolveDoctorHospital(env, uid);
+      const doctor = { uid: uid, name: String(b.doctorName || "").slice(0, 120), hospitalName: (bind && bind.hospitalName) || "" };
+      const res = await FCC.postDoctorAction(env, r.ep, doctor, b.type || "", b);
+      return json(res, res.ok ? 200 : 400, request);
+    }
+    if (request.method === "GET" && seg === "comms") {
+      const r = await ownEpisode(url.searchParams.get("id") || ""); if (r.err) return r.err;
+      return json(await FCC.listComms(env, r.ep.episodeId), 200, request);
+    }
+    if (request.method === "POST" && seg === "draft") {
+      // AI draft suggestion (doctor reviews/edits/discards; never auto-sent).
+      const b = await readBody(request);
+      const r = await ownEpisode(b.episodeId || ""); if (r.err) return r.err;
+      const s = FC.episodeSummary(r.ep);
+      const ctx = { pathwayId: r.ep.pathwayId, disease: r.ep.disease, escalation: s.currentEscalation, score: s.score, trend: s.trend };
+      return json({ ok: true, draft: FCC.draftFor(b.kind || "reply", ctx) }, 200, request);
+    }
+    if (request.method === "GET" && seg === "media") {
+      // Stream an uploaded photo. Key format: followcare/<episodeId>/... — enforce the doctor owns that episode.
+      const key = url.searchParams.get("key") || "";
+      const m = key.match(/^followcare\/([^/]+)\//);
+      if (!m) return json({ error: "bad_key" }, 400, request);
+      const r = await ownEpisode(m[1]); if (r.err) return r.err;
+      const obj = await FCC.getMedia(env, key);
+      if (!obj) return json({ error: "not_found" }, 404, request);
+      const h = new Headers(corsHeaders(request));
+      h.set("Content-Type", (obj.httpMetadata && obj.httpMetadata.contentType) || "application/octet-stream");
+      h.set("Cache-Control", "private, no-store");
+      return new Response(obj.body, { status: 200, headers: h });
     }
     if (request.method === "GET" && seg === "export") {
       // Phase 4 — EMR write-back payload (FHIR R4-ish Bundle). No PHI beyond the EMR patient ref the caller supplies.

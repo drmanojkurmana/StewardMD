@@ -68,7 +68,17 @@ export async function sendCheckinLink(env, ep, kind) {
   if (!phone) return { ok: false, reason: "no_phone" };
   const link = await linkFor(env, ep);
   const body = messageBody(firstName, link, ep.lang || "en", kind || "send");
-  const payload = { toE164: phone, body: body, vars: { var1: firstName, var2: link, name: firstName, link: link } };
+  return sendPatientMessage(env, ep, body, { firstName: firstName, link: link, phone: phone });
+}
+// Reusable: send ONE PHI-light message to the episode's patient over the configured channel + log delivery.
+// Used by check-in dispatch AND by the Doctor Action Center (comms notifications). `opts` may pre-supply the
+// decrypted phone/firstName/link (avoids re-decrypting); otherwise phone is decrypted here. Fails SAFE.
+export async function sendPatientMessage(env, ep, body, opts) {
+  opts = opts || {};
+  let phone = opts.phone || "";
+  if (!phone) { const recEnc = ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc; try { phone = await decPHI(env, recEnc); } catch (e) {} }
+  if (!phone) return { ok: false, reason: "no_phone" };
+  const payload = { toE164: phone, body: body, vars: { var1: opts.firstName || "", var2: opts.link || "", name: opts.firstName || "", link: opts.link || "", text: body } };
   // Channel: WhatsApp when selected + configured, else SMS. Both fail SAFE (skipped) when unconfigured.
   const channel = String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase();
   let res, ch;
