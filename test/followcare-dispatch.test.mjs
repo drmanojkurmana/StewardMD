@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert";
 import { plan, messageBody, maskPhone, redactDigits } from "../functions/_followcare_dispatch.js";
 import { smsConfigured, smsProvider, toDialable } from "../functions/_followcare_sms.js";
+import { waConfigured, waProvider, toWaNumber, fillTemplate } from "../functions/_followcare_whatsapp.js";
 
 const DAY = 86400000;
 const SCHED = [{ dayOffset: 1, dueAtMs: 1000 }, { dayOffset: 2, dueAtMs: 1000 + DAY }, { dayOffset: 3, dueAtMs: 1000 + 2 * DAY }];
@@ -80,4 +81,26 @@ test("SMS: toDialable normalises India numbers (adds 91 to a bare 10-digit)", ()
   assert.equal(toDialable("98765 43210"), "919876543210");
   assert.equal(toDialable("+91 98765 43210"), "919876543210");
   assert.equal(toDialable("919876543210"), "919876543210");
+});
+
+test("WhatsApp: provider honestly OFF until configured (callmebot=test, custom=BSP)", () => {
+  assert.equal(waProvider({}), "");
+  assert.equal(waConfigured({}), false);
+  assert.equal(waConfigured({ FOLLOWCARE_WA_PROVIDER: "callmebot" }), false);              // needs apikey
+  assert.equal(waConfigured({ FOLLOWCARE_WA_PROVIDER: "callmebot", CALLMEBOT_APIKEY: "123456" }), true);
+  assert.equal(waConfigured({ FOLLOWCARE_WA_PROVIDER: "custom", FOLLOWCARE_WA_URL: "https://x" }), false);   // needs body too
+  assert.equal(waConfigured({ FOLLOWCARE_WA_PROVIDER: "custom", FOLLOWCARE_WA_URL: "https://x", FOLLOWCARE_WA_BODY: "{}" }), true);
+});
+
+test("WhatsApp: toWaNumber gives digits-only international (no +), India-first", () => {
+  assert.equal(toWaNumber("98765 43210"), "919876543210");
+  assert.equal(toWaNumber("+91 98765 43210"), "919876543210");
+});
+
+test("WhatsApp: custom-BSP body template fills {{to}} {{name}} {{link}} {{text}}", () => {
+  const out = fillTemplate('{"to":"{{to}}","p":{"name":"{{name}}","url":"{{link}}"}}', { to: "919876543210", name: "Ramesh", link: "https://s/x?t=abc", text: "hi" });
+  const j = JSON.parse(out);
+  assert.equal(j.to, "919876543210");
+  assert.equal(j.p.name, "Ramesh");
+  assert.equal(j.p.url, "https://s/x?t=abc");
 });

@@ -14,6 +14,7 @@
 import { fsQuery, wUpdate, fsCommit } from "./_fbfirestore.js";
 import { getEpisode, decPHI, linkFor, recordDelivery, audit, eraseEpisode } from "./_followcare.js";
 import { sendSms } from "./_followcare_sms.js";
+import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import Engine from "../followcare-engine.js";
 import Pathways from "../followcare-pathways.js";
 
@@ -72,9 +73,14 @@ export async function sendCheckinLink(env, ep, kind) {
   if (!phone) return { ok: false, reason: "no_phone" };
   const link = await linkFor(env, ep);
   const body = messageBody(firstName, link, ep.lang || "en", kind || "send");
-  const res = await sendSms(env, { toE164: phone, body, vars: { var1: firstName, var2: link, name: firstName, link } });
+  const payload = { toE164: phone, body: body, vars: { var1: firstName, var2: link, name: firstName, link: link } };
+  // Channel: WhatsApp when selected + configured, else SMS. Both fail SAFE (skipped) when unconfigured.
+  const channel = String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase();
+  let res, ch;
+  if (channel === "whatsapp" && waConfigured(env)) { res = await sendWhatsApp(env, payload); ch = "whatsapp"; }
+  else { res = await sendSms(env, payload); ch = "sms"; }
   await recordDelivery(env, {
-    episodeId: ep.episodeId, hospitalId: ep.hospitalId, channel: "sms",
+    episodeId: ep.episodeId, hospitalId: ep.hospitalId, channel: ch,
     toMasked: maskPhone(phone), status: res.ok ? "sent" : (res.skipped ? "skipped" : "failed"),
     // Redact any phone number the provider may echo in its error body before it reaches the delivery log.
     providerId: res.providerId || "", error: res.ok ? "" : redactDigits(res.reason || res.detail || ""),
