@@ -57,8 +57,8 @@ test("messageBody: PHI-light template, includes link, en + hi", () => {
   const te = messageBody("Ravi", "https://x/y", "te", "send");
   assert.match(te, /https:\/\/x\/y/);
   assert.notEqual(te, messageBody("Ravi", "https://x/y", "en", "send"));
-  // unreviewed language (Tamil) falls back to English cleanly
-  assert.equal(messageBody("Ravi", "L", "ta", "send"), messageBody("Ravi", "L", "en", "send"));
+  // an unknown language code falls back to English cleanly (Tamil et al. are now translated)
+  assert.equal(messageBody("Ravi", "L", "zz", "send"), messageBody("Ravi", "L", "en", "send"));
   // med + appointment reminder kinds are supported
   assert.match(messageBody("", "L", "en", "reminder_med"), /medicines/i);
   assert.match(messageBody("", "L", "en", "reminder_appt"), /appointment/i);

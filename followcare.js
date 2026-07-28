@@ -392,7 +392,7 @@
       var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
       var langOpts = null; try { langOpts = (G.FollowCareI18n && FollowCareI18n.languages()) || null; } catch (e) {}
       var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } },
-        (langOpts ? langOpts.map(function (l) { return h("option", { value: l.code, text: l.code === "en" ? "English" : (l.native + " (" + l.name + ")") + (l.reviewed ? "" : " · English until reviewed") }); })
+        (langOpts ? langOpts.map(function (l) { return h("option", { value: l.code, text: l.code === "en" ? "English" : (l.native + " (" + l.name + ")") + (l.reviewed ? "" : " · in review") }); })
                   : [h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })]));
       lang.value = form.lang;
       // DPDP §9: enrolling a minor routes ALL messaging to a guardian's phone.

@@ -76,10 +76,13 @@ test("t(): reviewed strings + interpolation", () => {
   assert.equal(I18N.t("fc.lang.prompt", "en", { lang: "Telugu" }), "Would you like to continue in Telugu?");
 });
 
-test("t(): falls back to English for unreviewed languages, then to the key", () => {
-  // Tamil has no reviewed string for this key → English fallback
-  assert.equal(I18N.t("fc.portal.submit", "ta"), "Submit");
-  assert.equal(I18N.t("fc.msg.send", "ml", { name: "A", link: "L" }), I18N.t("fc.msg.send", "en", { name: "A", link: "L" }));
+test("t(): unknown language falls back to English; unknown key returns the key", () => {
+  // An unsupported language code → English fallback (the fallback path still works).
+  assert.equal(I18N.t("fc.portal.submit", "zz"), "Submit");
+  assert.equal(I18N.t("fc.msg.send", "zz", { name: "A", link: "L" }), I18N.t("fc.msg.send", "en", { name: "A", link: "L" }));
+  // The 9 workflow-translated languages now have real strings (no longer English fallback).
+  assert.notEqual(I18N.t("fc.portal.submit", "ta"), "Submit");
+  assert.ok(I18N.t("fc.q.edema", "kn") && I18N.t("fc.q.edema", "kn") !== I18N.STR["fc.q.edema"].en);
   // unknown key → the key itself (never empty/throw)
   assert.equal(I18N.t("fc.no.such.key", "en"), "fc.no.such.key");
 });
