@@ -70,9 +70,24 @@ Cloudflare R2. Modules: `followcare-comms.js` (pure model, 12 tests), `functions
 routes `/action /comms /draft /media` (doctor) + `/inbox /respond /upload` (patient-token). Recovery tag
 `pre-followcare-actions`.
 
-**Owner step for photos:** bind an R2 bucket named for FollowCare as **`FOLLOWCARE_R2`** on the Pages project
-`stewardmd` (Settings → Functions → R2 bindings). Until then Request-Photo degrades gracefully (the upload
-route returns `media_not_configured`/503; every other action works). No PHI in object keys.
+**Photos — privacy-by-design (PHI minimisation):** medical photos are PHI; DPDP 2023 / HIPAA-aligned law
+permits storing them for treatment with consent + safeguards, and *requires* storage-limitation. So photos are
+**encrypted, auto-expiring, and purged** — never kept longer than the treating team needs:
+- **Auto-expire:** every upload is stamped with an expiry (`FOLLOWCARE_PHOTO_TTL_DAYS`, default **7**). Expiry
+  is enforced two ways — an **R2 object-lifecycle rule** (owner-set, the durable server-side enforcer) *and*
+  app-side on read (a photo past its TTL is deleted and 404s, so it can never be served stale).
+- **View-once (optional):** set `FOLLOWCARE_PHOTO_VIEW_ONCE=1` to delete a photo the instant the doctor views it.
+- **Erasure:** right-to-erasure / opt-out / episode closure now purges the R2 objects **and** the comm log.
+- No PHI in object keys; access is doctor-authenticated + audited; upload validates JPEG/PNG/HEIC ≤ 15 MB.
+
+**Owner steps for photos** (Request-Photo degrades gracefully — `media_not_configured`/503 — until done; every
+other action works without it):
+1. Bind an R2 bucket as **`FOLLOWCARE_R2`** on Pages `stewardmd` (Settings → Functions → R2 bindings).
+2. Add an **R2 lifecycle rule** on that bucket: expire objects under prefix `followcare/` after N days
+   (match `FOLLOWCARE_PHOTO_TTL_DAYS`). This is the durable auto-delete; the app-side check is the backstop.
+3. R2 encrypts at rest by default (SSE); keep the bucket **private** (no public access) — photos are only ever
+   served through the authenticated `/api/followcare/media` route.
+4. Optional env: `FOLLOWCARE_PHOTO_TTL_DAYS` (default 7), `FOLLOWCARE_PHOTO_VIEW_ONCE=1`.
 
 ## Before real-patient rollout (owner — non-blocking for "ready", important for scale/compliance)
 1. **Clinician sign-off** on all **26 pathways'** red-flag thresholds (the safety core; the original 9 were

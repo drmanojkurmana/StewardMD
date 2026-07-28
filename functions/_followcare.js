@@ -262,10 +262,25 @@ export async function eraseEpisode(env, episodeId, actor) {
   assessments.forEach(function (d) { writes.push(wDelete(env, "fc_assessments/" + d.id)); });
   const deliveries = await fsQuery(env, "fc_delivery", { where: { field: "episodeId", value: episodeId }, limit: 200 });
   deliveries.forEach(function (d) { writes.push(wDelete(env, "fc_delivery/" + d.id)); });
+  // Doctor Action Center communication log (instructions/questions/replies/vitals/photo refs) — erase too.
+  const comms = await fsQuery(env, "fc_comms", { where: { field: "episodeId", value: episodeId }, limit: 500 });
+  comms.forEach(function (d) { writes.push(wDelete(env, "fc_comms/" + d.id)); });
   if (ep) writes.push(wDelete(env, "fc_episodes/" + episodeId));
   if (writes.length) await fsCommit(env, writes);
+  // Purge the patient's uploaded photos from R2 (best-effort; the lifecycle rule + view-once already expire them).
+  let photos = 0;
+  if (env && env.FOLLOWCARE_R2) {
+    let cursor;
+    try {
+      do {
+        const list = await env.FOLLOWCARE_R2.list({ prefix: "followcare/" + episodeId + "/", cursor: cursor });
+        for (const o of (list.objects || [])) { try { await env.FOLLOWCARE_R2.delete(o.key); photos++; } catch (e) {} }
+        cursor = list.truncated ? list.cursor : null;
+      } while (cursor);
+    } catch (e) {}
+  }
   // Tombstone carries NO PHI — just that this episode's data was erased, when, and by whom.
-  await audit(env, { hospitalId, episodeId, actor: actor || "system", action: "erased", meta: { assessments: assessments.length, deliveries: deliveries.length } });
+  await audit(env, { hospitalId, episodeId, actor: actor || "system", action: "erased", meta: { assessments: assessments.length, deliveries: deliveries.length, comms: comms.length, photos: photos } });
   return { ok: true, erased: !!ep, assessments: assessments.length };
 }
 // Patient-initiated erasure from the portal (DPDP §13): verifies the link token, then erases. Lets a

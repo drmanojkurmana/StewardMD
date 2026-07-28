@@ -503,7 +503,7 @@
       textareaField("Emergency advice…", "emergency");
     } else if (type === "photo_request") {
       wrap.appendChild(h("div", { "class": "fc-field" }, [h("label", { text: "What should the patient photograph? (optional)" }), (function () { var i = h("input", { type: "text", placeholder: "e.g. surgical wound, rash, diabetic foot" }); i.addEventListener("input", function () { form.examples = i.value; }); return i; })()]));
-      wrap.appendChild(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "The patient uploads securely from their phone; you'll see it in the timeline." }));
+      wrap.appendChild(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "The patient uploads securely from their phone; you'll see it in the timeline. Photos are encrypted and auto-deleted after a short period (data-minimisation)." }));
     } else if (type === "vitals_request") {
       wrap.appendChild(h("div", { style: "font-weight:650;font-size:13.5px;margin-bottom:6px", text: "Which measurements should the patient send?" }));
       CM.vitalsCatalogue().forEach(function (v) {

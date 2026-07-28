@@ -151,7 +151,10 @@ export async function patientInbox(env, token) {
 }
 
 // ---- photo upload (patient token) → Cloudflare R2 (binding FOLLOWCARE_R2) ---------------
-// Direct binding put (no S3 presign needed). Returns the opaque media key to attach via respondToComm.
+// Data-minimisation by design: photos are PHI, so we keep them only as briefly as the treating team needs.
+// Each object carries an expiry stamp; it's auto-deleted by an R2 lifecycle rule (owner-set), app-enforced
+// on read, purged on episode erasure/closure, and can be made view-once. Direct binding put (no S3 presign).
+export function photoTtlDays(env) { var d = parseInt((env && env.FOLLOWCARE_PHOTO_TTL_DAYS) || "7", 10); return (isFinite(d) && d > 0) ? d : 7; }
 export async function uploadPhoto(env, token, commId, contentType, byteLength, bodyStream) {
   const g = await verifyEpisodeToken(env, token);
   if (!g.ok) return { ok: false, error: g.error };
@@ -159,17 +162,46 @@ export async function uploadPhoto(env, token, commId, contentType, byteLength, b
   const chk = Comms.photoOk(contentType, byteLength);
   if (!chk.ok) return { ok: false, error: chk.reason };
   const key = "followcare/" + g.ep.episodeId + "/" + (commId || "adhoc") + "/" + uuid() + "." + chk.ext;
+  const expiresMs = nowMs() + photoTtlDays(env) * 86400000;
   try {
-    await env.FOLLOWCARE_R2.put(key, bodyStream, { httpMetadata: { contentType: contentType }, customMetadata: { episodeId: g.ep.episodeId, commId: commId || "" } });
+    await env.FOLLOWCARE_R2.put(key, bodyStream, { httpMetadata: { contentType: contentType }, customMetadata: { episodeId: g.ep.episodeId, commId: commId || "", expiresMs: String(expiresMs) } });
   } catch (e) { return { ok: false, error: "upload_failed" }; }
-  await audit(env, { hospitalId: g.ep.hospitalId, episodeId: g.ep.episodeId, actor: "patient", action: "photo_upload", meta: { commId: commId || "" } });
-  return { ok: true, key: key };
+  await audit(env, { hospitalId: g.ep.hospitalId, episodeId: g.ep.episodeId, actor: "patient", action: "photo_upload", meta: { commId: commId || "", expiresMs: expiresMs } });
+  return { ok: true, key: key, expiresMs: expiresMs };
 }
 
 // ---- doctor fetches an uploaded photo (route enforces tenant auth) ----------------------
+// Returns { contentType, body } | null. App-enforces expiry (never serves a photo past its TTL, deleting it)
+// as a belt-and-suspenders complement to the R2 lifecycle rule; supports optional view-once deletion.
 export async function getMedia(env, key) {
   if (!env || !env.FOLLOWCARE_R2) return null;
-  try { return await env.FOLLOWCARE_R2.get(String(key)); } catch (e) { return null; }
+  let obj;
+  try { obj = await env.FOLLOWCARE_R2.get(String(key)); } catch (e) { return null; }
+  if (!obj) return null;
+  const meta = obj.customMetadata || {};
+  const contentType = (obj.httpMetadata && obj.httpMetadata.contentType) || "application/octet-stream";
+  const exp = parseInt(meta.expiresMs || "0", 10);
+  if (exp && nowMs() > exp) { try { await env.FOLLOWCARE_R2.delete(String(key)); } catch (e) {} return null; }   // expired → purge + gone
+  if (String((env && env.FOLLOWCARE_PHOTO_VIEW_ONCE) || "") === "1") {                                          // view-once: serve then delete
+    const buf = await obj.arrayBuffer();
+    try { await env.FOLLOWCARE_R2.delete(String(key)); } catch (e) {}
+    return { contentType: contentType, body: buf };
+  }
+  return { contentType: contentType, body: obj.body };
+}
+
+// Purge every uploaded photo for an episode (right-to-erasure / closure). Returns count. Never throws.
+export async function purgeEpisodeMedia(env, episodeId) {
+  if (!env || !env.FOLLOWCARE_R2) return 0;
+  let n = 0, cursor;
+  try {
+    do {
+      const list = await env.FOLLOWCARE_R2.list({ prefix: "followcare/" + episodeId + "/", cursor: cursor });
+      for (const o of (list.objects || [])) { try { await env.FOLLOWCARE_R2.delete(o.key); n++; } catch (e) {} }
+      cursor = list.truncated ? list.cursor : null;
+    } while (cursor);
+  } catch (e) {}
+  return n;
 }
 
 // ---- AI draft (doctor-side; deterministic template now, Vertex/Gemini seam later) -------

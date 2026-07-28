@@ -311,9 +311,9 @@ export async function onRequest(context) {
       if (!m) return json({ error: "bad_key" }, 400, request);
       const r = await ownEpisode(m[1]); if (r.err) return r.err;
       const obj = await FCC.getMedia(env, key);
-      if (!obj) return json({ error: "not_found" }, 404, request);
+      if (!obj) return json({ error: "not_found_or_expired" }, 404, request);   // expired photos are purged + 404
       const h = new Headers(corsHeaders(request));
-      h.set("Content-Type", (obj.httpMetadata && obj.httpMetadata.contentType) || "application/octet-stream");
+      h.set("Content-Type", obj.contentType || "application/octet-stream");
       h.set("Cache-Control", "private, no-store");
       return new Response(obj.body, { status: 200, headers: h });
     }
