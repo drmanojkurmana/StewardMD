@@ -423,8 +423,65 @@
     } catch (e) { return null; }
   }
 
+  // ---- Clinical Dialogue Manager -------------------------------------------
+  // Detect an UNDERSPECIFIED broad concept (a term that is the shared head-noun of >=2 answerable KB
+  // subtypes, e.g. "meningitis" -> bacterial/viral/tuberculous) and, instead of arbitrarily answering one
+  // subtype, prefer a general/umbrella overview (+ subtype chips) or ask ONE clarification. Ontology-
+  // driven — learns broadness from the KB name index, no hardcoded disease list. Deterministic, offline.
+  function _cdmNorm(s) { return String(s == null ? "" : s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[()]/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); }
+  var _CDM_NONSUB = { and: 1, or: 1, due: 1, with: 1, the: 1, of: 1, for: 1, a: 1, an: 1, complications: 1, management: 1, paediatric: 1, pediatric: 1, neonatal: 1, acquired: 1, familial: 1, hereditary: 1, primary: 1, secondary: 1, related: 1, associated: 1, induced: 1, disorder: 1, disorders: 1, "in": 1, post: 1, pre: 1 };
+  var _CDM_GENERIC = { mellitus: 1, disease: 1, infection: 1, syndrome: 1, disorder: 1 };
+  function _cdmBareTerm(q) {
+    var n = _cdmNorm(q);
+    n = n.replace(/^(what is|whats|define|definition of|overview of|tell me about|explain|about|treatment of|management of|causes of|features of|symptoms of|investigations? for|workup of|prognosis of)\s+/, "");
+    n = n.replace(/\s+\b(treatment|management|mgmt|rx|tx|dose|dosing|workup|investigations?|ix|features|symptoms|prognosis|overview|causes|ddx|differential)\b\s*$/g, "");
+    return n.trim();
+  }
+  function _cdmAnswerable(id, e) { var DX = G.DX_MGMT || {}; if (DX[id]) return true; var m = e && e.management; return !!(m && (Array.isArray(m) ? m.length : Object.keys(m).length)); }
+  function clinicalDialogue(question) {
+    try {
+      var term = _cdmBareTerm(question);
+      if (!term || term.length < 4 || term.split(" ").length > 2) return null;                 // not a bare single/two-word concept
+      var KE = (G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId) || {};
+      var re = new RegExp("(^|\\s)" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(\\s|$)");
+      var quals = {}, subs = [], umbrellaId = null, umbrellaName = null;
+      Object.keys(KE).forEach(function (id) {
+        var e = KE[id]; var nm = _cdmNorm(e.name || id.replace(/_/g, " "));
+        if (nm === term) { if (!umbrellaId) { umbrellaId = id; umbrellaName = e.name || term; } return; }   // exact bare-term entry = umbrella
+        if (!re.test(nm) || !_cdmAnswerable(id, e)) return;
+        var extra = nm.replace(re, " ").trim().split(" ").filter(Boolean);
+        if (!extra.length) return;
+        var q0 = extra[0];
+        if (_CDM_NONSUB[q0]) return;                                                            // connective/meta qualifier — not a subtype
+        if (extra.length === 1 && _CDM_GENERIC[q0]) { if (!umbrellaId) { umbrellaId = id; umbrellaName = e.name; } return; }   // "diabetes mellitus" = umbrella
+        if (!quals[q0]) { quals[q0] = 1; subs.push({ id: id, name: e.name || id.replace(/_/g, " ") }); }
+      });
+      if (subs.length < 2) return null;                                                         // <2 distinct subtypes → not broad
+      if (!umbrellaId) {                                                                        // umbrella fallback: bare/"acute" term entry w/ aliases spanning >=2 subtypes
+        Object.keys(KE).some(function (id) {
+          var e = KE[id]; var nm = _cdmNorm(e.name || id);
+          if (nm !== term && nm !== "acute " + term) return false;
+          if ((e.aliases || []).map(_cdmNorm).filter(function (a) { return re.test(a); }).length >= 2) { umbrellaId = id; umbrellaName = e.name; return true; }
+          return false;
+        });
+      }
+      var subtypes = subs.slice(0, 5);
+      // OVERVIEW only when a genuine UMBRELLA entry exists (bare term / term+generic completion / an
+      // "acute <term>" entry whose aliases span the subtypes). A loose lexical resolve would pick a
+      // SUBTYPE as the "overview" (anaemia -> "Anaemia of chronic disease"), so we do NOT fall back to it:
+      // no safe general answer → ASK (the single interrupting path).
+      if (umbrellaId) {
+        var upkg = { question: umbrellaName || term, grounding: [{ diseaseId: umbrellaId, name: umbrellaName || umbrellaId }], topicMatch: { matched: true, mode: "confident" } };
+        var kb = compose(umbrellaName || term, upkg, {});
+        if (kb && kb.text) { kb.text = "_" + term.charAt(0).toUpperCase() + term.slice(1) + " spans several types — general overview below; tap a type to narrow._\n\n" + kb.text; return { mode: "overview", term: term, kb: kb, pkg: upkg, subtypes: subtypes, broad: true }; }
+      }
+      return { mode: "ask", term: term, subtypes: subtypes, broad: true };
+    } catch (e) { return null; }
+  }
+
   var API = {
     compose: compose,
+    clinicalDialogue: clinicalDialogue,
     classifyIntent: classifyIntent,
     isComplex: isComplex,
     expandAbbrev: expandAbbrev,

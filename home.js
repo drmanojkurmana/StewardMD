@@ -3056,12 +3056,23 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
               } catch (e) {}
             });
           }
-          function _askAmbiguous(options) {   // genuine ambiguity → ask, never guess
+          function _askAmbiguous(options, header) {   // genuine ambiguity / underspecified concept → ask, never guess
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-            think.innerHTML = '<div class="maik-welcome">Did you mean:</div>';
+            think.innerHTML = '<div class="maik-welcome">' + maikEscH(header || "Did you mean:") + '</div>';
             var w = document.createElement("div"); w.className = "maik-fus";
-            (options || []).slice(0, 4).forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); w.appendChild(b); });
+            (options || []).slice(0, 5).forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); w.appendChild(b); });
             think.appendChild(w); try { scroll(); } catch (e) {}
+          }
+          // Subtype drill-down chips appended below a broad-concept OVERVIEW answer (tap → re-run on that type).
+          function _maikSubtypeChips(term, subtypes) {
+            try {
+              if (!subtypes || !subtypes.length) return;
+              var w = document.createElement("div"); w.className = "maik-refine";
+              var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Narrow to a type of " + term + ":"; w.appendChild(lbl);
+              var row = document.createElement("div"); row.className = "maik-followups";
+              subtypes.slice(0, 5).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s.name; b.addEventListener("click", function () { try { qEl.value = s.name; } catch (e) {} send(); }); row.appendChild(b); });
+              w.appendChild(row); think.appendChild(w); try { scroll(); } catch (e) {}
+            } catch (e) {}
           }
           // KB answer on a package, using the router's canonical concept + intent when present; the
           // MANDATORY local reviewer (reviewKB) blocks retrieval drift before anything is shown.
@@ -3075,6 +3086,20 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             return null;
           }
           var _kbOn = window.MaiKKB && maikKB() && !active;
+          // ── CLINICAL DIALOGUE MANAGER (above the router): an underspecified BROAD concept (meningitis,
+          // diabetes, shock…) must NOT silently answer an arbitrary subtype. Prefer a general overview +
+          // subtype drill-down chips; ask ONE clarification only when the KB has no safe general answer.
+          // Deterministic + instant (no Vertex). Runs BEFORE the bypass (a broad term could otherwise
+          // bypass to a subtype). Learns broadness from the ontology (no hardcoded disease list). ──
+          if (_kbOn && window.MaiKKB.clinicalDialogue) {
+            var _dlg = null; try { _dlg = window.MaiKKB.clinicalDialogue(question); } catch (e) {}
+            if (_dlg && _dlg.mode === "overview" && _dlg.kb && _dlg.kb.text) {
+              finishKB(_dlg.kb, _dlg.pkg || pkg, "overview"); _maikSubtypeChips(_dlg.term, _dlg.subtypes); return;
+            }
+            if (_dlg && _dlg.mode === "ask" && _dlg.subtypes && _dlg.subtypes.length >= 2) {
+              _askAmbiguous(_dlg.subtypes.map(function (s) { return s.name; }), "Which type of " + _dlg.term + "?"); return;
+            }
+          }
           // ── LOCAL-FIRST (latency): before the Vertex router (~3s), try a DETERMINISTIC, high-confidence,
           // UNAMBIGUOUS KB answer → return INSTANTLY with ZERO Vertex/Gemini (~100ms). Safety gate (proven
           // offline, 0 ambiguous-acronym leaks): not-complex + exact/canonical KB resolution (conf>=0.90)
