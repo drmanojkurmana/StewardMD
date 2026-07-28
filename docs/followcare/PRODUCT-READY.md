@@ -19,11 +19,13 @@ tests green. This is the state you asked to have ready.
 5. **Daily automation**: the cron sends due links + reminders, escalates missed check-ins, and (when a retention
    period is set) prunes old data.
 
-## The phone field (one manual step — by design)
-GHIS's doctor worklist does **not** carry the patient's phone, and the patient-details form that does is locked
-behind an interactive-browser session GHIS won't grant our server (3 approaches tried; it 302s). So the doctor
-**types the mobile once at enrollment** — the number is on the discharge screen in front of them. Everything
-else pre-fills. (A best-effort `/api/ghis/demographics` endpoint exists but is intentionally unwired.)
+## The phone field — NOW auto-fills from GHIS ✅
+Solved. The mobile isn't on the GHIS worklist, but it **is** in the `POST /Doctor/Home/Searchnew` response
+(the patient-details page). `/api/ghis/demographics?recordNo=<MR>-<IPMR episode>` posts Searchnew and extracts
+the primary contact number — **verified live** returning real patients' mobiles. At discharge, if the patient
+came from GHIS Ward Sync, `openFollowCareEnroll` calls `GHIS.fetchPhone(mr)` (3.5s timeout so it never blocks)
+and the enrol form pre-fills the **phone** too — alongside name + pathway + date. Still fully editable, and it
+falls back to manual entry if GHIS is offline or the number isn't found.
 
 ## Live configuration (already set)
 - Pages `stewardmd`: `FOLLOWCARE_TOKEN_SECRET`, `FOLLOWCARE_PHI_KEY` (both active — `/ready` is true).
