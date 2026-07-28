@@ -3060,7 +3060,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             think.innerHTML = '<div class="maik-welcome">' + maikEscH(header || "Did you mean:") + '</div>';
             var w = document.createElement("div"); w.className = "maik-fus";
-            (options || []).slice(0, 5).forEach(function (o) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = o; b.addEventListener("click", function () { try { qEl.value = o; } catch (e) {} send(); }); w.appendChild(b); });
+            (options || []).slice(0, 5).forEach(function (o) { var lbl = (typeof o === "string") ? o : (o.label || o.name); var val = (typeof o === "string") ? o : (o.name || o.value || o.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.addEventListener("click", function () { try { qEl.value = val; } catch (e) {} send(); }); w.appendChild(b); });
             think.appendChild(w); try { scroll(); } catch (e) {}
           }
           // Subtype drill-down chips appended below a broad-concept OVERVIEW answer (tap → re-run on that type).
@@ -3070,7 +3070,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
               var w = document.createElement("div"); w.className = "maik-refine";
               var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Narrow to a type of " + term + ":"; w.appendChild(lbl);
               var row = document.createElement("div"); row.className = "maik-followups";
-              subtypes.slice(0, 5).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s.name; b.addEventListener("click", function () { try { qEl.value = s.name; } catch (e) {} send(); }); row.appendChild(b); });
+              subtypes.slice(0, 6).forEach(function (s) { var lbl = (typeof s === "string") ? s : (s.label || s.name); var val = (typeof s === "string") ? s : (s.name || s.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.addEventListener("click", function () { try { qEl.value = val; } catch (e) {} send(); }); row.appendChild(b); });
               w.appendChild(row); think.appendChild(w); try { scroll(); } catch (e) {}
             } catch (e) {}
           }
@@ -3097,7 +3097,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
               finishKB(_dlg.kb, _dlg.pkg || pkg, "overview"); _maikSubtypeChips(_dlg.term, _dlg.subtypes); return;
             }
             if (_dlg && _dlg.mode === "ask" && _dlg.subtypes && _dlg.subtypes.length >= 2) {
-              _askAmbiguous(_dlg.subtypes.map(function (s) { return s.name; }), "Which type of " + _dlg.term + "?"); return;
+              _askAmbiguous(_dlg.subtypes, "Which type of " + _dlg.term + "?"); return;
             }
           }
           // ── LOCAL-FIRST (latency): before the Vertex router (~3s), try a DETERMINISTIC, high-confidence,

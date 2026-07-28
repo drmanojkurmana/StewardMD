@@ -438,6 +438,33 @@
     return n.trim();
   }
   function _cdmAnswerable(id, e) { var DX = G.DX_MGMT || {}; if (DX[id]) return true; var m = e && e.management; return !!(m && (Array.isArray(m) ? m.length : Object.keys(m).length)); }
+  // Chip source is BROADER than "answerable": any subtype the KB has real content for (so "Viral
+  // Meningitis" appears even without a management brief). Detection stays on _cdmAnswerable (no new FP).
+  function _cdmHasContent(id, e) { if (_cdmAnswerable(id, e)) return true; var KR = (G.KB_RAG && G.KB_RAG.treatments) || {}; if (KR[id]) return true; return !!(e && (e.pathophysiology || (e.clinicalPearls && e.clinicalPearls.length) || (e.additionalDifferentials && e.additionalDifferentials.length) || e.severityClassification)); }
+  // Clean chip label = the distinguishing qualifier (full name minus the shared term), casing preserved.
+  function _cdmLabel(name, term) {
+    var re = new RegExp("\\b" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "ig");
+    var q = String(name || "").replace(/[()]/g, " ").replace(re, " ").replace(/\s+/g, " ").trim();
+    q = q.replace(/^[,\-:;\s]+|[,\-:;\s]+$/g, "").trim();
+    return q || String(name || "");
+  }
+  // Build the drill-down / clarification chip list from content-bearing subtype entries (cleaned, deduped).
+  function _cdmChips(term, re, umbrellaId) {
+    var KE = (G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId) || {}, out = [], seen = {};
+    Object.keys(KE).forEach(function (id) {
+      if (id === umbrellaId) return;
+      var e = KE[id]; if (/:/.test(e.name || "")) return;                                       // skip KB sub-pages ("Diabetes Mellitus: Complications")
+      var nm = _cdmNorm(e.name || id.replace(/_/g, " "));
+      if (nm === term || !re.test(nm) || !_cdmHasContent(id, e)) return;
+      var extra = nm.replace(re, " ").trim().split(" ").filter(Boolean);
+      if (!extra.length || _CDM_NONSUB[extra[0]] || (extra.length === 1 && _CDM_GENERIC[extra[0]])) return;
+      var label = _cdmLabel(e.name || id.replace(/_/g, " "), term); var key = _cdmNorm(label);
+      if (!key || seen[key]) return; seen[key] = 1;
+      out.push({ id: id, name: e.name || id.replace(/_/g, " "), label: label, ans: _cdmAnswerable(id, e) });
+    });
+    out.sort(function (a, b) { return (b.ans - a.ans) || (a.label.length - b.label.length); });   // answerable first, then shortest
+    return out.slice(0, 6);
+  }
   function clinicalDialogue(question) {
     try {
       var term = _cdmBareTerm(question);
@@ -465,7 +492,8 @@
           return false;
         });
       }
-      var subtypes = subs.slice(0, 5);
+      var subtypes = _cdmChips(term, re, umbrellaId);
+      if (subtypes.length < 2) return null;                                                     // need >=2 distinct labelled subtypes to offer
       // OVERVIEW only when a genuine UMBRELLA entry exists (bare term / term+generic completion / an
       // "acute <term>" entry whose aliases span the subtypes). A loose lexical resolve would pick a
       // SUBTYPE as the "overview" (anaemia -> "Anaemia of chronic disease"), so we do NOT fall back to it:
