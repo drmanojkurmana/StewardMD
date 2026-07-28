@@ -231,7 +231,7 @@
     body.appendChild(err); body.appendChild(save);
   }
   function renderEnrollForm(body, hosp) {
-    var form = { pathwayId: "", phone: "", name: "", dischargeMs: "" };
+    var form = { pathwayId: "", phone: "", name: "", dischargeMs: "", lang: "en" };
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:8px 0 4px;color:var(--slate,#5a7184);font-size:12.5px", text: "Hospital: " + (hosp.hospitalName || hosp.hospitalId) }));
@@ -242,6 +242,9 @@
       var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", oninput: function (e) { form.phone = e.target.value; } });
       var name = h("input", { type: "text", placeholder: "Patient name (optional)", oninput: function (e) { form.name = e.target.value; } });
       var disc = h("input", { type: "date", oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
+      var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } }, [
+        h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })
+      ]);
       var out = h("div");
       var submit = h("button", { "class": "fc-btn", text: "Create recovery link" });
       submit.addEventListener("click", function () {
@@ -260,7 +263,7 @@
           }
         }).catch(function () { submit.disabled = false; submit.textContent = "Create recovery link"; errBox.appendChild(h("div", { "class": "fc-err", text: "Could not create the link. Check your connection." })); });
       });
-      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc)].forEach(function (f) { body.appendChild(f); });
+      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field("Patient's language", lang)].forEach(function (f) { body.appendChild(f); });
       body.appendChild(errBox); body.appendChild(submit); body.appendChild(out);
     });
   }

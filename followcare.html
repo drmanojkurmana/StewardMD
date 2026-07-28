@@ -109,6 +109,47 @@
   var token = new URLSearchParams(location.search).get("t") || "";
   var ctx = null;                 // portal context from the server
   var answers = {};               // id -> value
+  var LANG = "en";                // resolved from the episode (server) in load()
+
+  // ---- i18n ------------------------------------------------------------------------------
+  // UI chrome + answer labels are translated here. Question TEXT stays clinician-authored (served by the
+  // engine) and is not machine-translated in P1 — a mistranslated clinical question could change meaning,
+  // so a reviewed clinical-translation table is a deliberate later step (the i18nKey hook is already carried).
+  var I18N = {
+    en: {
+      title: "Your recovery check-in", lead: "This is your recovery check-in{d}. It takes about a minute. Please answer honestly for the last day.",
+      day: "Day", send: "Send my check-in", sending: "Sending…", required: "Please answer the highlighted questions before sending.",
+      yes: "Yes", no: "No", better: "Better", same: "About the same", worse: "Worse", none: "None", worst: "Worst",
+      linkBad_t: "Link not valid", linkBad_b: "This recovery link is missing information. Please use the exact link we sent you.",
+      expired_t: "Link expired", expired_b: "This check-in link has expired. Your care team can send you a new one.",
+      done_t: "All done", done_b: "Your recovery follow-up is complete. Thank you.",
+      already_t: "Thanks — already received", already_b: "We've already received your check-in for today. If anything changes or you feel worse, please contact your care team.",
+      notdue_t: "No check-in due right now", notdue_b: "Thanks — you're up to date. Your next recovery check-in opens{w}. If you feel worse before then, please contact your care team.",
+      recovered_t: "You're all set", recovered_b: "Your recovery follow-up is complete. Well done — if anything changes or you feel worse, please contact your care team.",
+      conn_t: "Connection problem", conn_b: "We couldn't load your check-in. Please check your internet connection and try again.",
+      thanks_t: "Thank you", thanks_b: "Thanks for your check-in. Please keep following your instructions and taking your medicines.", green_b: "You appear to be recovering well. Please continue your medicines and instructions.",
+      contact_t: "Please contact your care team", contact_b: "Some of your answers need a closer look. Please contact your treating team today. If you feel much worse, seek medical care sooner.",
+      seek_t: "Please seek care now", seek_emerg: "Based on your answers, you should be seen urgently. Please go to the nearest emergency department or call your local emergency number now. Your care team is being notified.", call: "Call 112",
+      sendErr: "Something went wrong sending your check-in. Please try again.", connSend: "Connection problem. Please check your internet and try again."
+    },
+    hi: {
+      title: "आपका रिकवरी चेक-इन", lead: "यह आपका रिकवरी चेक-इन है{d}। इसमें एक मिनट लगता है। कृपया पिछले एक दिन के बारे में सच्चाई से उत्तर दें।",
+      day: "दिन", send: "मेरा चेक-इन भेजें", sending: "भेजा जा रहा है…", required: "भेजने से पहले कृपया सभी प्रश्नों के उत्तर दें।",
+      yes: "हाँ", no: "नहीं", better: "बेहतर", same: "लगभग वैसा ही", worse: "खराब", none: "कोई नहीं", worst: "सबसे खराब",
+      linkBad_t: "लिंक मान्य नहीं", linkBad_b: "इस लिंक में जानकारी गायब है। कृपया हमारे द्वारा भेजा गया लिंक ही खोलें।",
+      expired_t: "लिंक समाप्त", expired_b: "यह लिंक समाप्त हो गया है। आपकी टीम आपको नया लिंक भेज सकती है।",
+      done_t: "पूरा हुआ", done_b: "आपका फॉलो-अप पूरा हो गया है। धन्यवाद।",
+      already_t: "धन्यवाद — प्राप्त हो गया", already_b: "आज का आपका चेक-इन हमें मिल गया है। यदि तबियत बिगड़े तो अपनी टीम से संपर्क करें।",
+      notdue_t: "अभी कोई चेक-इन नहीं", notdue_b: "धन्यवाद — आप अप-टू-डेट हैं। आपका अगला चेक-इन{w} खुलेगा। उससे पहले तबियत बिगड़े तो टीम से संपर्क करें।",
+      recovered_t: "सब ठीक है", recovered_b: "आपका फॉलो-अप पूरा हो गया है। शाबाश — यदि तबियत बिगड़े तो टीम से संपर्क करें।",
+      conn_t: "कनेक्शन समस्या", conn_b: "चेक-इन लोड नहीं हुआ। कृपया इंटरनेट जांचकर फिर से प्रयास करें।",
+      thanks_t: "धन्यवाद", thanks_b: "आपके चेक-इन के लिए धन्यवाद। कृपया अपने निर्देशों का पालन करते रहें और दवाइयाँ लेते रहें।", green_b: "ऐसा लगता है कि आप अच्छे से ठीक हो रहे हैं। कृपया अपनी दवाइयाँ और निर्देश जारी रखें।",
+      contact_t: "कृपया अपनी टीम से संपर्क करें", contact_b: "आपके कुछ उत्तरों पर ध्यान देने की ज़रूरत है। कृपया आज ही अपनी टीम से संपर्क करें। यदि तबियत ज़्यादा बिगड़े तो जल्दी इलाज लें।",
+      seek_t: "कृपया अभी इलाज लें", seek_emerg: "आपके उत्तरों के आधार पर आपको तुरंत दिखाना चाहिए। कृपया नज़दीकी आपातकालीन विभाग जाएं या आपातकालीन नंबर पर कॉल करें। आपकी टीम को सूचित किया जा रहा है।", call: "112 पर कॉल करें",
+      sendErr: "चेक-इन भेजने में समस्या हुई। कृपया फिर से प्रयास करें।", connSend: "कनेक्शन समस्या। कृपया इंटरनेट जांचें।"
+    }
+  };
+  function t(k){ var d = I18N[LANG] || I18N.en; return (d[k] != null ? d[k] : I18N.en[k]) || ""; }
 
   function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
   function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
@@ -130,37 +171,40 @@
   }
 
   // ---- load today's check-in ----
+  function setLang(l){ if(l && I18N[l]){ LANG = l; try{ document.documentElement.lang = l; }catch(e){} } }
   function load(){
-    if(!token){ return screenMessage("🔗","Link not valid","This recovery link is missing information. Please use the exact link we sent you.",""); }
+    if(!token){ return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),""); }
     fetchJSON(API+"/portal?t="+encodeURIComponent(token))
       .then(function(res){
         var b = res.body || {};
-        if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛","Link expired","This check-in link has expired. Your care team can send you a new one.",""); }
+        setLang(b.lang);
+        if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛",t("expired_t"),t("expired_b"),""); }
         if(!b.ok){
-          if(b.error==="closed"){ return screenMessage("✅","All done","Your recovery follow-up is complete. Thank you.","r-green"); }
-          return screenMessage("🔗","Link not valid","We couldn't open this check-in. Please use the exact link we sent you, or contact your care team.","");
+          if(b.error==="closed"){ return screenMessage("✅",t("done_t"),t("done_b"),"r-green"); }
+          return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),"");
         }
         ctx = b;
         if(b.nothingDue){
-          if(b.recovered){ return screenMessage("🎉","You're all set","Your recovery follow-up is complete. Well done — if anything changes or you feel worse, please contact your care team.","r-green"); }
+          if(b.recovered){ return screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); }
           var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
-          var whenTxt = when ? (" on " + when.toLocaleDateString(undefined,{weekday:"long", month:"short", day:"numeric"})) : " soon";
-          return screenMessage("✅","No check-in due right now","Thanks — you're up to date. Your next recovery check-in opens" + whenTxt + ". If you feel worse before then, please contact your care team.","r-green");
+          var whenTxt = when ? (" " + when.toLocaleDateString(LANG==="hi"?"hi-IN":undefined,{weekday:"long", month:"short", day:"numeric"})) : "";
+          return screenMessage("✅",t("notdue_t"),t("notdue_b").replace("{w}", whenTxt),"r-green");
         }
         renderForm();
       })
-      .catch(function(){ screenMessage("📶","Connection problem","We couldn't load your check-in. Please check your internet connection and try again.",""); });
+      .catch(function(){ screenMessage("📶",t("conn_t"),t("conn_b"),""); });
   }
 
   // ---- render the questionnaire ----
   function renderForm(){
     clear();
-    subEl.textContent = "Day " + ctx.dayOffset;
+    subEl.textContent = t("day") + " " + ctx.dayOffset;
     // Generic greeting only — a shared/forwarded link must never reveal the patient's name.
+    var lead = t("lead").replace("{d}", ctx.disease ? (" ("+esc(ctx.disease)+")") : "");
     var head = el(
       '<div class="card">'+
-        '<h1>Your recovery check-in</h1>'+
-        '<p class="lead">This is your recovery check-in'+(ctx.disease?(' after '+esc(ctx.disease)):'')+'. It takes about a minute. Please answer honestly for the last day.</p>'+
+        '<h1>'+esc(t("title"))+'</h1>'+
+        '<p class="lead">'+lead+'</p>'+
         '<form id="frm"></form>'+
       '</div>'
     );
@@ -168,7 +212,7 @@
     var frm = head.querySelector("#frm");
     (ctx.questionnaire.questions||[]).forEach(function(q){ frm.appendChild(renderQ(q)); });
 
-    var submit = el('<button type="button" class="cta" id="send">Send my check-in</button>');
+    var submit = el('<button type="button" class="cta" id="send">'+esc(t("send"))+'</button>');
     frm.appendChild(submit);
     frm.appendChild(el('<p class="foot" id="ferr" role="alert"></p>'));
     submit.addEventListener("click", onSubmit);
@@ -180,24 +224,26 @@
     wrap.appendChild(el('<label class="q-label" id="lab_'+esc(q.id)+'">'+esc(q.text)+unit+'</label>'));
 
     if(q.type==="yesno"){
-      wrap.appendChild(choiceRow(q.id, [{v:"no",t:"No"},{v:"yes",t:"Yes"}]));
+      wrap.appendChild(choiceRow(q.id, [{v:"no",t:t("no")},{v:"yes",t:t("yes")}]));
     } else if(q.type==="overall"){
-      wrap.appendChild(choiceRow(q.id, [{v:"better",t:"Better"},{v:"same",t:"About the same"},{v:"worse",t:"Worse"}]));
+      wrap.appendChild(choiceRow(q.id, [{v:"better",t:t("better")},{v:"same",t:t("same")},{v:"worse",t:t("worse")}]));
     } else if(q.type==="choice" && q.options){
-      wrap.appendChild(choiceRow(q.id, q.options.map(function(o){ return { v:o, t:cap(o) }; })));
+      wrap.appendChild(choiceRow(q.id, q.options.map(function(o){ return { v:o, t:optLabel(o) }; })));
     } else if(q.type==="scale"){
       wrap.appendChild(scaleRow(q.id, 0, 10));
-      wrap.appendChild(el('<div class="scale-ends"><span>None</span><span>Worst</span></div>'));
+      wrap.appendChild(el('<div class="scale-ends"><span>'+esc(t("none"))+'</span><span>'+esc(t("worst"))+'</span></div>'));
     } else if(q.type==="number"){
       var inp = el('<input type="number" inputmode="decimal" step="any" aria-labelledby="lab_'+esc(q.id)+'">');
       inp.addEventListener("input", function(){ answers[q.id] = inp.value===""? undefined : inp.value; });
       wrap.appendChild(inp);
     } else {
       // default → free choice yes/no
-      wrap.appendChild(choiceRow(q.id, [{v:"no",t:"No"},{v:"yes",t:"Yes"}]));
+      wrap.appendChild(choiceRow(q.id, [{v:"no",t:t("no")},{v:"yes",t:t("yes")}]));
     }
     return wrap;
   }
+  // Known choice values get a translated label; anything else falls back to a capitalised English word.
+  function optLabel(o){ var d=I18N[LANG]||I18N.en; return (d[o]!=null?d[o]:(I18N.en[o]!=null?I18N.en[o]:cap(o))); }
 
   function cap(s){ s=String(s); return s.charAt(0).toUpperCase()+s.slice(1); }
 
@@ -236,51 +282,45 @@
     // score a check-in that skipped the emergency questions).
     var required = (ctx.questionnaire.questions||[]).filter(function(q){ return q.id==="overall" || q.id.indexOf("g_")===0; });
     var missing = required.filter(function(q){ return answers[q.id]===undefined || answers[q.id]===null || answers[q.id]===""; });
-    if(missing.length){ ferr.textContent = "Please answer the highlighted questions before sending."; return; }
+    if(missing.length){ ferr.textContent = t("required"); return; }
 
-    send.disabled = true; send.textContent = "Sending…";
+    send.disabled = true; send.textContent = t("sending");
     fetchJSON(API+"/submit", {
       method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ t:token, answers:answers })
     }).then(function(res){
       var b = res.body || {};
-      if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛","Link expired","This check-in link has expired. Your care team can send you a new one.",""); }
+      if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛",t("expired_t"),t("expired_b"),""); }
       if(!b.ok){
-        if(b.error==="already_submitted"){ return screenMessage("✅","Already received","We've already received today's check-in. Thank you.","r-green"); }
-        send.disabled=false; send.textContent="Send my check-in";
-        ferr.textContent = "Something went wrong sending your check-in. Please try again.";
+        if(b.error==="already_submitted"){ return screenMessage("✅",t("already_t"),t("already_b"),"r-green"); }
+        send.disabled=false; send.textContent=t("send");
+        ferr.textContent = t("sendErr");
         return;
       }
       showResult(b);
     }).catch(function(){
-      send.disabled=false; send.textContent="Send my check-in";
-      ferr.textContent = "Connection problem. Please check your internet and try again.";
+      send.disabled=false; send.textContent=t("send");
+      ferr.textContent = t("connSend");
     });
   }
 
-  // ---- engine-decided, safe result ----
+  // ---- engine-decided, safe result (rendered in the patient's language) ----
   function showResult(b){
     var lvl = b.escalation || "green";
-    var msg = b.patientMessage || "Thank you for your check-in.";
     if(lvl==="red"){
       clear();
       main.appendChild(el(
         '<div class="card result r-red">'+
           '<div class="ic" aria-hidden="true">⚠️</div>'+
-          '<h1>Please seek care now</h1>'+
-          '<p>'+esc(msg)+'</p>'+
-          '<div class="emergency">Based on your answers, you should be seen urgently. Please go to the nearest emergency department or call your local emergency number now. Your care team is being notified.</div>'+
-          '<a class="call" href="tel:112">📞 Call 112</a>'+
+          '<h1>'+esc(t("seek_t"))+'</h1>'+
+          '<div class="emergency">'+esc(t("seek_emerg"))+'</div>'+
+          '<a class="call" href="tel:112">📞 '+esc(t("call"))+'</a>'+
         '</div>'
       ));
       return;
     }
-    if(lvl==="orange"){
-      screenMessage("🟠","Please contact your care team", msg, "r-amber"); return;
-    }
-    if(b.recovered){
-      screenMessage("🎉","You're all set", msg + " Your follow-up is complete — well done on your recovery.", "r-green"); return;
-    }
-    screenMessage("✅","Thank you", msg, "r-green");
+    if(lvl==="orange"){ screenMessage("🟠",t("contact_t"),t("contact_b"),"r-amber"); return; }
+    if(b.recovered){ screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); return; }
+    screenMessage("✅",t("thanks_t"),t("green_b"),"r-green");
   }
 
   load();

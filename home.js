@@ -670,7 +670,8 @@
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
     },
-    hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }
+    hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); },
+    followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
   };
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
   // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
@@ -1256,6 +1257,16 @@
                   '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
                 '</button>'
               ) : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT OFF).
+            // Tile appears only when the flag is on (?fc=1 or Settings); off => "" => the home grid is unchanged.
+            try {
+              var fon;
+              if (window.FollowCare && FollowCare.enabled) fon = FollowCare.enabled();
+              else if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) fon = SMD_FOLLOWCARE_FLAGS.on();
+              else { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; fon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_followcare") === "1"); }
+              return fon ? rtile("followcare", "health_and_safety", "FollowCare", "Recovery follow-up") : "";
             } catch (e) { return ""; }
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
