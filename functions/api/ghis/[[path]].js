@@ -127,7 +127,10 @@ async function getDemographics(env, token, patientId, recordNo) {
   const jar = { 'ghis.gitam.edu': {} };
   String(s.cookie || '').split('; ').forEach(function (p) { const i = p.indexOf('='); if (i > 0) jar['ghis.gitam.edu'][p.slice(0, i).trim()] = p.slice(i + 1).trim(); });
   const extra = { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' };
-  // Step 1 — select this patient (Searchnew) + Step 2 CheckSession (mirrors the browser sequence). SAME jar.
+  // Warm the session by loading the Doctor home page first (the browser is ON /Doctor/home before it selects
+  // a patient — GetInitialAssessmentnew appears to require that server-side page state). SAME jar throughout.
+  await follow(jar, await raw(jar, 'GET', GHIS + '/Doctor/home', null, extra));
+  // Step 1 — select this patient (Searchnew) + Step 2 CheckSession (mirrors the browser sequence).
   if (recordNo) {
     await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
     await raw(jar, 'GET', GHIS + '/Doctor/Home/CheckSession', null, extra);
