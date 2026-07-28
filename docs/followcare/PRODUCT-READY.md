@@ -80,14 +80,18 @@ permits storing them for treatment with consent + safeguards, and *requires* sto
 - **Erasure:** right-to-erasure / opt-out / episode closure now purges the R2 objects **and** the comm log.
 - No PHI in object keys; access is doctor-authenticated + audited; upload validates JPEG/PNG/HEIC ≤ 15 MB.
 
-**Owner steps for photos** (Request-Photo degrades gracefully — `media_not_configured`/503 — until done; every
-other action works without it):
-1. Bind an R2 bucket as **`FOLLOWCARE_R2`** on Pages `stewardmd` (Settings → Functions → R2 bindings).
-2. Add an **R2 lifecycle rule** on that bucket: expire objects under prefix `followcare/` after N days
-   (match `FOLLOWCARE_PHOTO_TTL_DAYS`). This is the durable auto-delete; the app-side check is the backstop.
-3. R2 encrypts at rest by default (SSE); keep the bucket **private** (no public access) — photos are only ever
-   served through the authenticated `/api/followcare/media` route.
-4. Optional env: `FOLLOWCARE_PHOTO_TTL_DAYS` (default 7), `FOLLOWCARE_PHOTO_VIEW_ONCE=1`.
+**Photo provisioning — DONE + verified (2026-07-29).** `/api/followcare/ready → {"media":true,"photoViewOnce":true}`.
+This Pages project's bindings are **managed through `wrangler.toml`** (not the dashboard — the dashboard shows
+"Bindings for this project are being managed through wrangler.toml"), so the binding is committed, not clicked:
+- Bucket **`stewardmd-followcare-media`** created; binding **`FOLLOWCARE_R2`** declared in `wrangler.toml`
+  (top-level + `[env.production]`) → applied on deploy `e698ef8`.
+- **R2 lifecycle rule** `followcare-expire-7d`: expire objects under prefix `followcare/` after 7 days (verified).
+- Secret **`FOLLOWCARE_PHOTO_VIEW_ONCE=1`** set (production) → delete-on-first-view. Bucket is private (SSE at rest);
+  photos only served via the authenticated `/api/followcare/media` route.
+- Tunables: `FOLLOWCARE_PHOTO_TTL_DAYS` (default 7), `FOLLOWCARE_PHOTO_VIEW_ONCE` (=1 on).
+- NOTE: because bindings are toml-managed, `wrangler.toml` must stay a **superset** of every live binding
+  (KV/D1/AI/Vectorize/R2) — never remove one, or that deploy drops it. Secrets are managed separately
+  (`wrangler pages secret put`) and are unaffected by toml binding changes.
 
 ## Before real-patient rollout (owner — non-blocking for "ready", important for scale/compliance)
 1. **Clinician sign-off** on all **26 pathways'** red-flag thresholds (the safety core; the original 9 were
