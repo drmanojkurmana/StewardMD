@@ -148,6 +148,7 @@
     return e;
   }
   function toast(m) { try { (G.toast || G.SMD_toast || function () {})(m); } catch (e) {} }
+  function isoDate(ms) { try { return new Date(ms).toISOString().slice(0, 10); } catch (e) { return ""; } }
 
   function close() { if (root && root.parentNode) root.parentNode.removeChild(root); root = null; }
   function shell(title, bodyEl) {
@@ -166,25 +167,25 @@
     return body;
   }
 
-  function open() {
-    if (!enabled()) { toast("FollowCare is not enabled."); return; }
-    var body = shell();
-    body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
-    // Readiness check: if the server secrets aren't provisioned yet, show a clean "being set up" screen
-    // instead of letting the doctor hit a failed enroll.
-    API.ready().then(function (res) {
-      if (res && res.body && res.body.ready === false) {
-        body.innerHTML = "";
-        body.appendChild(h("div", { "class": "fc-empty" }, [
-          h("div", { style: "font-size:34px;margin-bottom:8px", text: "🛠" }),
-          h("div", { style: "font-weight:700;margin-bottom:6px", text: "FollowCare is being set up" }),
-          h("div", { style: "font-size:13.5px", text: "This recovery-follow-up module will be available once your administrator finishes configuration." })
-        ]));
-        return;
-      }
-      renderDashboard(body);
-    }).catch(function () { renderDashboard(body); });
+  function notReadyView() {
+    return h("div", { "class": "fc-empty" }, [
+      h("div", { style: "font-size:34px;margin-bottom:8px", text: "🛠" }),
+      h("div", { style: "font-weight:700;margin-bottom:6px", text: "FollowCare is being set up" }),
+      h("div", { style: "font-size:13.5px", text: "This recovery-follow-up module will be available once your administrator finishes configuration." })
+    ]);
   }
+  // Readiness-gate a view: shows a clean "being set up" screen if the server secrets aren't provisioned yet
+  // (instead of letting the doctor hit a failed enroll), else runs cb(body).
+  function withReady(body, cb) {
+    body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+    API.ready().then(function (res) {
+      if (res && res.body && res.body.ready === false) { body.innerHTML = ""; body.appendChild(notReadyView()); return; }
+      cb(body);
+    }).catch(function () { cb(body); });
+  }
+  function open() { if (!enabled()) { toast("FollowCare is not enabled."); return; } withReady(shell(), renderDashboard); }
+  // Open STRAIGHT into the enroll form, pre-filled — used by the ICU/Ward Discharge Creator's FollowCare button.
+  function openEnroll(prefill) { if (!enabled()) { toast("FollowCare is not enabled."); return; } var b = shell(); withReady(b, function (x) { renderEnroll(x, prefill || {}); }); }
 
   function renderDashboard(body) {
     body.innerHTML = "";
@@ -225,16 +226,16 @@
   }
 
   // Enroll requires the doctor's hospital to be set first (server binds enrollment to it — tenant authority).
-  function renderEnroll(body) {
+  function renderEnroll(body, prefill) {
     body.innerHTML = "";
     body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
     API.hospitalGet().then(function (res) {
       var hosp = res.body && res.body.hospital;
-      if (hosp && hosp.hospitalId) { renderEnrollForm(body, hosp); }
-      else { renderHospitalSetup(body); }
-    }).catch(function () { renderHospitalSetup(body); });
+      if (hosp && hosp.hospitalId) { renderEnrollForm(body, hosp, prefill); }
+      else { renderHospitalSetup(body, prefill); }
+    }).catch(function () { renderHospitalSetup(body, prefill); });
   }
-  function renderHospitalSetup(body) {
+  function renderHospitalSetup(body, prefill) {
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:12px 0;color:var(--slate,#5a7184);font-size:14px", text: "Set your hospital once — every patient you enroll is recorded under it." }));
@@ -249,25 +250,31 @@
       save.disabled = true; save.textContent = "Saving…";
       API.hospitalSet({ hospitalId: id, hospitalName: hnm.value }).then(function (r) {
         save.disabled = false; save.textContent = "Save hospital";
-        if (r.body && r.body.ok) renderEnrollForm(body, { hospitalId: id, hospitalName: hnm.value });
+        if (r.body && r.body.ok) renderEnrollForm(body, { hospitalId: id, hospitalName: hnm.value }, prefill);
         else err.appendChild(h("div", { "class": "fc-err", text: "Could not save hospital." }));
       }).catch(function () { save.disabled = false; save.textContent = "Save hospital"; err.appendChild(h("div", { "class": "fc-err", text: "Connection problem." })); });
     });
     [field("Hospital ID", hid), field("Hospital name", hnm)].forEach(function (f) { body.appendChild(f); });
     body.appendChild(err); body.appendChild(save);
   }
-  function renderEnrollForm(body, hosp) {
-    var form = { pathwayId: "", phone: "", name: "", dischargeMs: "", lang: "en", consentAttested: false, isMinor: false, guardianPhone: "" };
+  function renderEnrollForm(body, hosp, prefill) {
+    prefill = prefill || {};
+    // Map a discharge diagnosis to a pathway (reuses the integration mapper) unless one is given directly.
+    var pfPathway = prefill.pathwayId || "";
+    if (!pfPathway && prefill.diagnosisText) { try { pfPathway = (G.FollowCareIntegration && FollowCareIntegration.diagnosisToPathway(prefill.diagnosisText)) || ""; } catch (e) {} }
+    var form = { pathwayId: pfPathway, phone: prefill.phone || "", name: prefill.name || "", dischargeMs: (typeof prefill.dischargeMs === "number" ? prefill.dischargeMs : ""), lang: prefill.lang || "en", consentAttested: false, isMinor: false, guardianPhone: "" };
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:8px 0 4px;color:var(--slate,#5a7184);font-size:12.5px", text: "Hospital: " + (hosp.hospitalName || hosp.hospitalId) }));
+    if (prefill.name || pfPathway) body.appendChild(h("div", { style: "margin:0 0 8px;color:#0e6e63;font-size:12.5px;font-weight:600", text: "Pre-filled from discharge" + (form.phone ? "" : " — add the patient's mobile number") }));
     var errBox = h("div");
     function loadPathwaysThen(render) { if (PATHWAYS) return render(PATHWAYS); API.pathways().then(function (r) { PATHWAYS = (r.body && r.body.pathways) || []; render(PATHWAYS); }); }
     loadPathwaysThen(function (pw) {
       var sel = h("select", { onchange: function (e) { form.pathwayId = e.target.value; } }, [h("option", { value: "", text: "Select a recovery pathway…" })].concat(pw.map(function (p) { return h("option", { value: p.id, text: p.name }); })));
-      var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", oninput: function (e) { form.phone = e.target.value; } });
-      var name = h("input", { type: "text", placeholder: "Patient name (optional)", oninput: function (e) { form.name = e.target.value; } });
-      var disc = h("input", { type: "date", oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
+      if (form.pathwayId) sel.value = form.pathwayId;                                  // preselect mapped pathway
+      var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", value: form.phone, oninput: function (e) { form.phone = e.target.value; } });
+      var name = h("input", { type: "text", placeholder: "Patient name (optional)", value: form.name, oninput: function (e) { form.name = e.target.value; } });
+      var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
       var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } }, [
         h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })
       ]);
@@ -380,7 +387,7 @@
   }
 
   var PUB = {
-    open: open, close: close, enabled: enabled,
+    open: open, openEnroll: openEnroll, close: close, enabled: enabled,
     // pure, testable:
     validateEnroll: validateEnroll, escalationMeta: escalationMeta, statusMeta: statusMeta,
     sortEpisodes: sortEpisodes, fmtWhen: fmtWhen, counts: counts, enrollError: enrollError,

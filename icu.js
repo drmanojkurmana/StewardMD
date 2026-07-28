@@ -5617,6 +5617,23 @@
     return (p.name || (ctxLabel() + " patient")) + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") +
       (p.bed ? " · Bed " + p.bed : "") + (_unit.type ? " · " + _unit.type : "") + (p.hospital || _unit.hospital ? " · " + (p.hospital || _unit.hospital) : "");
   }
+  // FollowCare (post-discharge recovery follow-up) — flag-gated. The button in the Discharge Creator hands
+  // the patient's context to the FollowCare enroll form so the doctor doesn't re-type it.
+  function fcEnabled() {
+    try { if (window.FollowCare && FollowCare.enabled) return !!FollowCare.enabled(); } catch (e) {}
+    try { return !!(window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on()); } catch (e) { return false; }
+  }
+  function openFollowCareEnroll() {
+    if (!(window.FollowCare && FollowCare.openEnroll)) { if (window.toast) toast("FollowCare loading…"); return; }
+    var p = _raw.patient || {}, f = (modalEl ? dischargeFieldVals() : {});
+    FollowCare.openEnroll({
+      name: p.name || "",
+      // Phone auto-fills if the ward/GHIS record carries it (GIMSR GHIS has it); else the doctor adds it once.
+      phone: p.phone || p.mobile || p.contact || p.mob || p.phoneNumber || "",
+      diagnosisText: (f && f.finalDx) || p.diagnosis || "",   // mapped to a recovery pathway by FollowCare
+      dischargeMs: Date.now(), lang: "en"
+    });
+  }
   function openDischarge() {
     injectCSS(); ensureModal();
     lwOnDischarge();   // an "until discharge" Lab Watch ends when the discharge summary is created
@@ -5640,6 +5657,7 @@
       '<button class="icu-btn" data-icu-act="dischargecopy">' + ico("copy", "📋") + ' Copy summary</button>' +
       '<button class="icu-btn ghost" data-icu-act="dischargeprint">' + ico("copy", "🖨") + ' Print / PDF</button>' +
       '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share</button>' +
+      (fcEnabled() ? '<button class="icu-btn ghost" data-icu-act="followcare" title="Enroll this patient for post-discharge recovery follow-up">🩺 FollowCare</button>' : '') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
   }
@@ -6938,6 +6956,7 @@
       }
       case "dischargecopy": copyDischarge(); break;
       case "dischargeprint": printDischarge(); break;
+      case "followcare": openFollowCareEnroll(); break;   // enroll this patient into FollowCare (pre-filled)
       // Lab Watch
       case "labwatch": _lwDraft = null; openLabWatch(); break;
       case "lwtog": { var _lk = arg; _lwDraft.analytes = _lwDraft.analytes || []; var _li = _lwDraft.analytes.indexOf(_lk); if (_li >= 0) _lwDraft.analytes.splice(_li, 1); else _lwDraft.analytes.push(_lk); openLabWatch(); break; }
