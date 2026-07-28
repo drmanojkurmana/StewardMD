@@ -101,7 +101,10 @@ async function ghisReq(env, token, method, path, body, extra = {}) {
     return fetch(GHIS + path, { method, body: body || undefined, headers, redirect: 'manual' });
   };
   let res = await doFetch(s);
-  if (res.status === 302) { const r = await refreshFromCreds(env, token); if (!r) return { unauth: true }; s = r; res = await doFetch(s); }
+  // A 302 = GHIS session expired. Stored-credential auto-refresh was intentionally removed (no stored
+  // passwords), so surface unauth and let the client re-login — never call the removed refreshFromCreds()
+  // (that dangling reference threw a ReferenceError on every session expiry).
+  if (res.status === 302) return { unauth: true };
   return { status: res.status, body: await res.text(), csrf: s.csrf };
 }
 
