@@ -117,6 +117,18 @@
   };
   var CM = (function () { try { return G.FollowCareComms || null; } catch (e) { return null; } })();
   function actionsEnabled() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_actions")); } catch (e) { return true; } }
+  function ui2() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_ui2")); } catch (e) { return false; } }
+  // motion.dev helpers — enhancement-only (no-op if Motion missing / prefers-reduced-motion). spring() is
+  // computed inside try/catch so it can never escape (the portal-crash lesson).
+  var _M = (function () { try { return G.Motion || null; } catch (e) { return null; } })();
+  var _RM = (function () { try { return G.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
+  function mAnim(elx, kf, opts) { if (!_M || !_M.animate || _RM || !elx) return null; try { return _M.animate(elx, kf, opts || {}); } catch (e) { return null; } }
+  function mSpring(st, dm) { try { return (_M && _M.spring) ? _M.spring({ stiffness: st || 300, damping: dm || 22 }) : [0.22, 1, 0.36, 1]; } catch (e) { return [0.22, 1, 0.36, 1]; } }
+  function mEnter(elx, d) { mAnim(elx, { opacity: [0, 1], transform: ["translateY(10px)", "translateY(0)"] }, { duration: 0.4, delay: d || 0, easing: [0.22, 1, 0.36, 1] }); }
+  function mStagger(nodes) { if (!nodes) return; Array.prototype.forEach.call(nodes, function (n, i) { mEnter(n, 0.03 + i * 0.05); }); }
+  function mPop(elx, d) { mAnim(elx, { transform: ["scale(0.82)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, delay: d || 0, easing: mSpring(320, 20) }); }
+  function mTap(elx) { mAnim(elx, { transform: ["scale(1)", "scale(0.96)", "scale(1)"] }, { duration: 0.2 }); }
+  function mSheetIn(elx) { mAnim(elx, { transform: ["translateY(24px)", "translateY(0)"], opacity: [0, 1] }, { duration: 0.5, easing: mSpring(280, 26) }); }
 
   // ---- render layer (self-contained scoped overlay) ---------------------------------------
   var mounted = false;
@@ -156,7 +168,39 @@
       ".fc-cm .fc-cm-h{font-weight:750;font-size:12.5px;color:var(--slate,#5a7184);display:flex;gap:8px;align-items:center}",
       ".fc-cm .fc-cm-b{font-size:14px;margin-top:4px;white-space:pre-wrap}",
       ".fc-cm .fc-cm-st{margin-left:auto;font-size:11px;font-weight:700}",
-      "@media(prefers-color-scheme:dark){.fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}.fc-link{background:#0f2b22;border-color:#245}}"
+      "@media(prefers-color-scheme:dark){.fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}.fc-link{background:#0f2b22;border-color:#245}}",
+      // ═══════════ premium UI v2 (flag smd_followcare_ui2 → .fcui2 on the overlay + sheet) ═══════════
+      ".fc-ov.fcui2{background:radial-gradient(1200px 700px at 50% -12%,rgba(14,110,99,.30),transparent 60%),rgba(6,16,20,.60);backdrop-filter:blur(9px) saturate(1.1)}",
+      ".fc-sheet.fcui2{max-width:640px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 94%,#0e6e63 6%),var(--panel,#fff));box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}",
+      ".fc-sheet.fcui2 .fc-hd{background:linear-gradient(135deg,#0e6e63,#12b39c);box-shadow:0 10px 26px -14px rgba(14,110,99,.7)}",
+      ".fc-hd .fc-hd-logo{display:none}.fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:inline-flex;font-size:18px;margin-right:2px}",
+      ".fc-sheet.fcui2 .fc-hd b{letter-spacing:-.01em}",
+      ".fc-sheet.fcui2 .fc-bd{padding:18px 16px 30px}",
+      ".fc-sheet.fcui2 .fc-btn{border-radius:14px;background:linear-gradient(145deg,#0e6e63,#12a892);box-shadow:0 14px 30px -15px rgba(14,110,99,.85);transition:transform .12s,filter .2s;font-weight:800}",
+      ".fc-sheet.fcui2 .fc-btn:active{transform:translateY(1px) scale(.99)}.fc-sheet.fcui2 .fc-btn:hover{filter:brightness(1.05)}",
+      ".fc-sheet.fcui2 .fc-btn.sec{background:transparent;box-shadow:none;border:1.6px solid #0e6e63}",
+      ".fc-sheet.fcui2 .fc-row{border-radius:18px;border:1px solid color-mix(in srgb,var(--line,#dbe4e2) 65%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 96%,#0e6e63 4%),var(--panel,#fff));box-shadow:0 16px 36px -26px rgba(8,40,36,.55);transition:transform .14s,box-shadow .2s;padding:14px 15px}",
+      ".fc-sheet.fcui2 .fc-row:hover{transform:translateY(-2px);box-shadow:0 22px 44px -24px rgba(8,40,36,.6)}",
+      ".fc-sheet.fcui2 .fc-row:active{transform:scale(.99)}",
+      ".fc-sheet.fcui2 .fc-row .fc-badge{border-radius:12px;font-weight:800;box-shadow:0 6px 14px -8px rgba(0,0,0,.35)}",
+      ".fc-sheet.fcui2 .fc-pill{border-radius:999px;font-weight:800}",
+      ".fc-sheet.fcui2 .fc-field input,.fc-sheet.fcui2 .fc-field select,.fc-sheet.fcui2 .fc-ta,.fc-sheet.fcui2 input,.fc-sheet.fcui2 select,.fc-sheet.fcui2 textarea{border-radius:13px}",
+      ".fc-sheet.fcui2 .fc-tl{border-left:none;padding-left:4px}",
+      ".fc-sheet.fcui2 .fc-tl .fc-ev{position:relative;padding:11px 13px 11px 26px;margin-bottom:9px;border-radius:13px;background:color-mix(in srgb,var(--panel,#fff) 96%,#0e6e63 4%);border:1px solid color-mix(in srgb,var(--line,#dbe4e2) 55%,transparent)}",
+      ".fc-sheet.fcui2 .fc-tl .fc-ev::before{content:'';position:absolute;left:10px;top:15px;width:8px;height:8px;border-radius:50%;background:#0e6e63;box-shadow:0 0 0 3px color-mix(in srgb,#0e6e63 22%,transparent)}",
+      ".fc-sheet.fcui2 .fc-actgrid{gap:11px}",
+      ".fc-sheet.fcui2 .fc-act{border-radius:16px;transition:transform .12s,box-shadow .2s;box-shadow:0 12px 28px -22px rgba(8,40,36,.5);background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 96%,#0e6e63 4%),var(--panel,#fff))}",
+      ".fc-sheet.fcui2 .fc-act:hover{transform:translateY(-2px);box-shadow:0 18px 36px -22px rgba(8,40,36,.55)}.fc-sheet.fcui2 .fc-act:active{transform:scale(.98)}",
+      ".fc-sheet.fcui2 .fc-cm{border-radius:14px;box-shadow:0 12px 32px -24px rgba(8,40,36,.45)}",
+      // hero + animated score ring (detail view, v2)
+      ".fc-hero2{display:flex;gap:16px;align-items:center;margin:8px 0 16px;padding:16px;border-radius:18px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 94%,#0e6e63 6%),var(--panel,#fff));border:1px solid color-mix(in srgb,var(--line,#dbe4e2) 55%,transparent);box-shadow:0 16px 40px -26px rgba(8,40,36,.5)}",
+      ".fc-hero2 .fc-hero-main{flex:1;min-width:0}",
+      ".fc-ring{position:relative;width:92px;height:92px;flex:0 0 auto}",
+      ".fc-ring svg{transform:rotate(-90deg);display:block}",
+      ".fc-ring .fc-ring-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}",
+      ".fc-ring .fc-ring-n{font-size:25px;font-weight:800;line-height:1}",
+      ".fc-ring .fc-ring-l{font-size:9.5px;color:var(--slate,#5a7184);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}",
+      ".fc-ring .fc-ring-track{stroke:color-mix(in srgb,var(--line,#dbe4e2) 85%,transparent)}"
     ].join("");
   }
   function ensureStyle() { if (mounted) return; var s = document.createElement("style"); s.id = "fc-style"; s.textContent = css(); document.head.appendChild(s); mounted = true; }
@@ -176,15 +220,17 @@
     ensureStyle();
     close();
     var body = h("div", { "class": "fc-bd" }, [bodyEl]);
-    var sheet = h("div", { "class": "fc-sheet" }, [
+    var sheet = h("div", { "class": "fc-sheet" + (ui2() ? " fcui2" : "") }, [
       h("div", { "class": "fc-hd" }, [
+        h("span", { "class": "fc-hd-logo", "aria-hidden": "true", text: "🩺" }),
         h("b", { text: "FollowCare" }),
         h("button", { "class": "fc-x", "aria-label": "Close", onclick: close, text: "×" })
       ]),
       body
     ]);
-    root = h("div", { "class": "fc-ov", onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
+    root = h("div", { "class": "fc-ov" + (ui2() ? " fcui2" : ""), onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
     document.body.appendChild(root);
+    if (ui2()) mSheetIn(sheet);
     return body;
   }
 
@@ -230,7 +276,8 @@
       ]));
       body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
-      list.forEach(function (ep) { body.appendChild(episodeRow(ep)); });
+      var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
+      if (ui2()) mStagger(rows);
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
   }
   function pill(text, meta) { return h("span", { "class": "fc-pill", style: "background:" + meta.bg + ";color:" + meta.color, text: text }); }
@@ -244,6 +291,26 @@
         h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% readmit risk" : "") + (ep.needsReview ? "  ·  ⚑ needs review" : "") })
       ])
     ]);
+  }
+
+  // Animated recovery-score ring (v2 detail hero). Draws a conic progress stroke to `score`/100 in the
+  // escalation colour; animates the stroke on mount (falls back to a static ring if Motion is unavailable).
+  function scoreRing(score, color) {
+    var pct = (score == null || score < 0) ? -1 : Math.max(0, Math.min(100, Math.round(score)));
+    var r = 40, circ = 2 * Math.PI * r, off = circ * (1 - (pct < 0 ? 0 : pct) / 100);
+    var wrap = h("div", { "class": "fc-ring" });
+    wrap.innerHTML =
+      '<svg width="92" height="92" viewBox="0 0 92 92" aria-hidden="true">' +
+        '<circle class="fc-ring-track" cx="46" cy="46" r="' + r + '" fill="none" stroke-width="8"/>' +
+        '<circle class="fc-ring-p" cx="46" cy="46" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="8" stroke-linecap="round" stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '"/>' +
+      '</svg>' +
+      '<div class="fc-ring-t"><div class="fc-ring-n" style="color:' + color + '">' + (pct < 0 ? "–" : pct) + '</div><div class="fc-ring-l">/ 100</div></div>';
+    var p = wrap.querySelector(".fc-ring-p");
+    if (p) {
+      if (_M && _M.animate && !_RM) { try { _M.animate(p, { strokeDashoffset: [circ, off] }, { duration: 1.05, delay: 0.15, easing: [0.22, 1, 0.36, 1] }); } catch (e) { p.setAttribute("stroke-dashoffset", off); } }
+      else p.setAttribute("stroke-dashoffset", off);
+    }
+    return wrap;
   }
 
   // Enroll requires the doctor's hospital to be set first (server binds enrollment to it — tenant authority).
@@ -367,12 +434,18 @@
       var m = escalationMeta(ep.escalation);
       var rec = "";
       try { if (G.FollowCareAI) rec = FollowCareAI.recommendation({ escalation: ep.currentEscalation || ep.escalation, trend: ep.trend, needsReview: ep.needsReview, recoveryScore: ep.score }); } catch (e) {}
-      body.appendChild(h("div", { style: "margin:12px 0" }, [
+      var heroKids = [
         h("div", { style: "font-size:18px;font-weight:800", text: ep.disease || "Recovery" }),
-        h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
+        h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ui2() ? "" : (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "")) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
         h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
         rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
-      ]));
+      ];
+      if (ui2()) {
+        var hero = h("div", { "class": "fc-hero2" }, [scoreRing(ep.score, m.color), h("div", { "class": "fc-hero-main" }, heroKids)]);
+        body.appendChild(hero); mEnter(hero);
+      } else {
+        body.appendChild(h("div", { style: "margin:12px 0" }, heroKids));
+      }
       // Phase 5 — recovery intelligence: twin (expected vs actual), deterioration prediction, prevention plan.
       var intel = res.body && res.body.intel;
       if (intel) {
@@ -396,11 +469,13 @@
         ]));
       });
       body.appendChild(tl);
+      if (ui2()) { if (typeof box !== "undefined" && box) mEnter(box, 0.05); mStagger(tl.querySelectorAll(".fc-ev")); }
       // Doctor Action Center — the prominent way to communicate with this patient (flag smd_followcare_actions).
       if (actionsEnabled() && CM) {
         var dac = h("button", { "class": "fc-btn", style: "margin-top:16px;width:100%", text: "🩺 Doctor Actions" });
         dac.addEventListener("click", function () { openActions(episodeId, ep); });
         body.appendChild(dac);
+        if (ui2()) mEnter(dac, 0.12);
         var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "🗂 Communication history" });
         hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
         body.appendChild(hist);
@@ -458,6 +533,7 @@
       h("span", { "class": "fc-ai", "aria-hidden": "true", text: "🗂" }), h("span", { "class": "fc-al", text: "Communication History" })
     ]);
     body.appendChild(hist);
+    if (ui2()) { var tiles = grid.querySelectorAll(".fc-act"); mStagger(tiles); mEnter(hist, 0.04 + tiles.length * 0.05); }
   }
 
   function renderActionForm(episodeId, ep, type) {
@@ -538,6 +614,7 @@
     }
     body.appendChild(wrap);
     body.appendChild(errBox);
+    if (ui2()) mEnter(wrap);
 
     var submitLabel = type === "emergency" ? "Review & send emergency advice" : (type === "close_episode" ? "Close episode" : "Send");
     var submit = h("button", { "class": "fc-btn", style: "margin-top:14px;width:100%", text: submitLabel });

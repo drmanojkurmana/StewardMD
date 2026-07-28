@@ -97,6 +97,64 @@
   .fc-vrow label{ flex:1 1 140px; font-size:.9rem; }
   .fc-vrow input{ flex:1 1 90px; min-width:80px; padding:10px 11px; border:1.5px solid var(--line); border-radius:11px; font-size:1rem; background:var(--panel); color:var(--ink); }
   .fc-done{ font-weight:700; color:var(--teal); font-size:.95rem; padding:6px 0; }
+
+  /* ═══════════ FollowCare premium UI v2 (flag smd_followcare_ui2 → html.fcui2) ═══════════
+     Additive: only applies when the flag is on, so the classic portal is byte-for-byte unchanged when off. */
+  html.fcui2 body{
+    background:
+      radial-gradient(1150px 640px at 6% -14%, color-mix(in srgb, var(--teal) 17%, transparent), transparent 56%),
+      radial-gradient(920px 520px at 104% -4%, color-mix(in srgb, #2f9fd9 12%, transparent), transparent 55%),
+      var(--paper);
+  }
+  html.fcui2 .wrap{ max-width:600px; padding:14px 16px 60px; }
+  html.fcui2 header.top{ padding:14px 4px 22px; }
+  html.fcui2 .logo{ width:42px; height:42px; border-radius:14px;
+    background:linear-gradient(145deg, var(--teal), color-mix(in srgb, var(--teal) 60%, #21bda6));
+    box-shadow:0 12px 24px -12px color-mix(in srgb, var(--teal) 85%, transparent); font-size:16px; }
+  html.fcui2 .brand{ font-size:16.5px; letter-spacing:-.02em; }
+  html.fcui2 .sub{ font-weight:600; }
+  html.fcui2 .card{ border-radius:24px; padding:26px 22px; margin-bottom:14px;
+    background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 95%, var(--teal) 5%), var(--panel));
+    border:1px solid color-mix(in srgb, var(--line) 65%, transparent);
+    box-shadow:0 1px 0 color-mix(in srgb,#fff 55%,transparent) inset, 0 26px 64px -36px rgba(8,42,38,.6), 0 6px 18px -12px rgba(8,42,38,.22); }
+  html.fcui2 h1{ font-size:1.55rem; letter-spacing:-.025em; font-weight:800; }
+  html.fcui2 .lead{ font-size:1.02rem; line-height:1.55; }
+  html.fcui2 .q{ padding:18px 0; }
+  html.fcui2 .q-label{ font-size:1.08rem; font-weight:700; margin-bottom:14px; }
+  html.fcui2 .opts{ gap:10px; }
+  html.fcui2 .opt{ border-radius:16px; padding:15px 16px; font-size:1.02rem; font-weight:600; min-height:54px;
+    border:1.6px solid color-mix(in srgb, var(--line) 82%, transparent);
+    background:color-mix(in srgb, var(--panel) 90%, var(--teal) 3%);
+    transition:transform .13s cubic-bezier(.22,1,.36,1), border-color .15s, background .18s, box-shadow .2s; }
+  html.fcui2 .opt:active{ transform:scale(.96); }
+  html.fcui2 .opt[aria-pressed="true"]{ border-color:transparent; color:#fff;
+    background:linear-gradient(145deg, var(--teal), color-mix(in srgb, var(--teal) 66%, #18b7a1));
+    box-shadow:0 12px 24px -13px color-mix(in srgb, var(--teal) 90%, transparent); }
+  html.fcui2 .scale{ gap:8px; }
+  html.fcui2 .scale .opt{ padding:15px 0; font-weight:700; }
+  html.fcui2 input[type="number"]{ border-radius:14px; min-height:52px; font-size:1.08rem;
+    background:color-mix(in srgb, var(--panel) 92%, var(--teal) 2%); }
+  html.fcui2 .cta{ border-radius:17px; padding:17px; font-size:1.1rem; min-height:58px; letter-spacing:.01em;
+    background:linear-gradient(145deg, var(--teal), color-mix(in srgb, var(--teal) 64%, #14b39c));
+    box-shadow:0 16px 32px -15px color-mix(in srgb, var(--teal) 85%, transparent);
+    transition:transform .12s, box-shadow .2s, filter .2s; }
+  html.fcui2 .cta:active{ transform:translateY(1px) scale(.99); }
+  html.fcui2 .cta:hover{ filter:brightness(1.05); }
+  html.fcui2 .cta.sec{ background:transparent; box-shadow:none; }
+  html.fcui2 .result .ic{ width:92px; height:92px; font-size:42px; position:relative; }
+  html.fcui2 .result .ic::after{ content:""; position:absolute; inset:-12px; border-radius:50%; border:2px solid currentColor; opacity:.16; }
+  html.fcui2 .r-green .ic{ background:radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--green) 24%, var(--panel)), var(--green-bg)); }
+  html.fcui2 .r-red .ic{ background:radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--red) 26%, var(--panel)), var(--red-bg)); }
+  html.fcui2 .r-amber .ic{ background:radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--amber) 26%, var(--panel)), var(--amber-bg)); }
+  html.fcui2 .result h1{ font-size:1.6rem; }
+  html.fcui2 .result p{ font-size:1.06rem; color:var(--slate); }
+  html.fcui2 .emergency{ border-radius:18px; padding:18px; box-shadow:0 14px 34px -18px color-mix(in srgb,var(--red) 55%,transparent); }
+  html.fcui2 .call{ border-radius:15px; box-shadow:0 14px 28px -13px color-mix(in srgb, var(--red) 75%, transparent); }
+  html.fcui2 .fc-msg{ border-radius:18px; padding:16px; box-shadow:0 12px 32px -22px rgba(8,42,38,.45);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--panel) 96%, var(--teal) 4%), var(--panel)); }
+  html.fcui2 .fc-msg-em{ box-shadow:0 14px 32px -16px color-mix(in srgb,#d9534f 55%,transparent); }
+  html.fcui2 .fc-mini{ border-radius:14px; }
+  html.fcui2 .fc-reply, html.fcui2 .fc-vrow input{ border-radius:14px; }
 </style>
 </head>
 <body>
@@ -122,6 +180,13 @@
   "use strict";
   var API = "/api/followcare";
   var FCI = (function () { try { return window.FollowCareI18n || null; } catch (e) { return null; } })();
+  // FollowCare premium UI v2 (flag smd_followcare_ui2). ?fcui=1 previews it; default OFF until approved.
+  (function () { try {
+    var q = new URLSearchParams(location.search).get("fcui");
+    var on = (q === "1" || q === "on" || q === "true") ? true : (q === "0" || q === "off" || q === "false") ? false : (localStorage.getItem("smd_followcare_ui2") === "1");
+    if (q === "1" || q === "on" || q === "true") { try { localStorage.setItem("smd_followcare_ui2", "1"); } catch (e) {} }
+    if (on) document.documentElement.classList.add("fcui2");
+  } catch (e) {} })();
   var main = document.getElementById("main");
   var subEl = document.getElementById("sub");
   // ---- motion helpers (graceful: no-op if Motion missing or the patient prefers reduced motion) ----

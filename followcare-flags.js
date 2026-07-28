@@ -15,6 +15,7 @@
     smd_followcare: { type: "bool", def: true, query: "fc", desc: "FollowCare AI master flag" },
     smd_followcare_portal: { type: "bool", def: true, query: "fcportal", desc: "Patient web portal" },
     smd_followcare_actions: { type: "bool", def: true, query: "fcactions", desc: "Doctor Action Center (doctor↔patient messaging)" },
+    smd_followcare_ui2: { type: "bool", def: false, query: "fcui", desc: "FollowCare premium UI redesign (v2)" },
     smd_followcare_sms: { type: "bool", def: false, query: "fcsms", desc: "SMS channel (needs provider config)" },
     smd_followcare_ai_summary: { type: "bool", def: false, query: "fcai", desc: "AI doctor summary (Phase 2)" },
     smd_followcare_adaptive: { type: "bool", def: false, query: "fcadapt", desc: "Adaptive AI conversation (Phase 2)" }
