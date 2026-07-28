@@ -121,32 +121,18 @@ async function getPatients(env, token) {
 // nothing else is returned (minimise PHI). Used lazily when a doctor enrolls a discharged patient.
 async function getDemographics(env, token, patientId, recordNo) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  if (!patientId) return { phone: '' };
-  // Rebuild a cookie JAR from the stored session so any cookie GHIS sets during patient-selection propagates
-  // to the form fetch (a stateless per-call cookie would drop it → the form 302s).
+  if (!recordNo) return { phone: '' };   // recordNo = "<MR>-<IPMR episode>"; needed to load the patient page
+  // Rebuild a cookie JAR from the stored session so cookies set during the flow propagate across calls.
   const jar = { 'ghis.gitam.edu': {} };
   String(s.cookie || '').split('; ').forEach(function (p) { const i = p.indexOf('='); if (i > 0) jar['ghis.gitam.edu'][p.slice(0, i).trim()] = p.slice(i + 1).trim(); });
   const extra = { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' };
-  // Warm the session by loading the Doctor home page first (the browser is ON /Doctor/home before it selects
-  // a patient — GetInitialAssessmentnew appears to require that server-side page state). SAME jar throughout.
-  await follow(jar, await raw(jar, 'GET', GHIS + '/Doctor/home', null, extra));
-  // Step 1 — select this patient (Searchnew) + Step 2 CheckSession (mirrors the browser sequence).
-  let sr = {};
-  if (recordNo) {
-    sr = await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
-    await raw(jar, 'GET', GHIS + '/Doctor/Home/CheckSession', null, extra);
-  }
-  // Step 3 — the assessment form; pull ONLY the primary contact number.
-  // BEST-EFFORT: GetInitialAssessmentnew currently 302s from a server-side session even after warm-up +
-  // Searchnew + CheckSession through a shared jar (GHIS binds the assessment view to the full interactive
-  // browser session / Cloudflare clearance the proxy can't fully reproduce). It therefore returns an EMPTY
-  // phone rather than erroring, and is intentionally NOT wired into the FollowCare enrol flow — the doctor
-  // enters the mobile once at enrolment. Left in place for if/when GHIS server-side access is solved.
-  const r = await raw(jar, 'GET', GHIS + '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, extra);
-  const is302 = r.status >= 300 && r.status < 400;
-  return { phone: is302 ? '' : extractPrimaryContact(r.body || ''),
-    _s: sr.status || '-', _sLoc: (sr.location || '').slice(0, 90), _sLen: (sr.body || '').length, _sHas: /error|invalid|not\s*found|success|true/i.test(sr.body || '') ? (sr.body || '').match(/error|invalid|not\s*found|success|true/i)[0] : '',
-    _f: r.status, _fLoc: (r.location || '').slice(0, 120) };
+  // POST Searchnew returns the patient's full details page (the "More.." demographics) — it CONTAINS the
+  // primary contact number directly, so we extract from THIS response (GetInitialAssessmentnew 302s to SSO
+  // for a server session and is not needed).
+  const sr = await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew',
+    '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
+  if (sr.status >= 300 && sr.status < 400) return { unauth: true };
+  return { phone: extractPrimaryContact(sr.body || '') };
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
