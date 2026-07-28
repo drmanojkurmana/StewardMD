@@ -112,6 +112,28 @@ async function getPatients(env, token) {
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetIPWL?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
   return r.unauth ? r : parseGhis(r.body);
 }
+// ── patient demographics → primary contact number (for FollowCare enrollment) ───────────
+// GHIS exposes the patient's phone on the Initial-Assessment form (GetInitialAssessmentnew?id=<MR>), NOT on
+// the doctor worklist. We fetch that ONE form for a given MR and extract ONLY the primary contact number —
+// nothing else is returned (minimise PHI). Used lazily when a doctor enrolls a discharged patient.
+async function getDemographics(env, token, patientId) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  if (!patientId) return { phone: '' };
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  return { phone: extractPrimaryContact(r.body || '') };
+}
+// Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
+// within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
+function extractPrimaryContact(body) {
+  const labels = ['Primary contact number', 'primaryContactNumber', 'PrimaryContactNumber', 'Primary Contact', 'Secondary contact number', 'Mobile No', 'MobileNo', 'mobileNo', 'Mobile', 'Contact number', 'contactNumber'];
+  for (let i = 0; i < labels.length; i++) {
+    const idx = body.indexOf(labels[i]); if (idx < 0) continue;
+    const m = body.slice(idx, idx + 1500).match(/[^0-9]([6-9]\d{9})(?!\d)/);
+    if (m) return m[1];
+  }
+  return '';
+}
 async function getLabOrders(env, token, patientId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetSearchPatientId', `__RequestVerificationToken=${encodeURIComponent(s.csrf)}&patient_id=${encodeURIComponent(patientId)}&DeptID=&FDate=&EDate=`, { 'X-Requested-With': 'XMLHttpRequest' });
@@ -241,6 +263,7 @@ export async function onRequest(context) {
     const unauth = (r) => r && r.unauth;
     if (seg === 'status')          { const s = await getSession(env, token); return json({ connected: !!s, userId: s ? s.userId : null }); }
     if (seg === 'patients')        { const r = await getPatients(env, token);        return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'demographics')    { const r = await getDemographics(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab')             { const r = await getLabOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
