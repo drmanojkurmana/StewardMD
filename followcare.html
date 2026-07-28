@@ -100,12 +100,22 @@
   <p class="disclaimer">This recovery check-in supports your care team. It does not replace medical advice and never changes your medicines. If you feel unwell, contact your doctor or local emergency services.</p>
 </div>
 
+<!-- motion (motion.dev, UMD → window.Motion) — vendored for offline/native; animations are enhancement-only. -->
+<script src="/vendor/motion/motion.js?v=fc1"></script>
 <script>
 (function () {
   "use strict";
   var API = "/api/followcare";
   var main = document.getElementById("main");
   var subEl = document.getElementById("sub");
+  // ---- motion helpers (graceful: no-op if Motion missing or the patient prefers reduced motion) ----
+  var M = (function () { try { return window.Motion || null; } catch (e) { return null; } })();
+  var REDUCE = (function () { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
+  function anim(elx, keyframes, opts) { if (!M || !M.animate || REDUCE || !elx) return null; try { return M.animate(elx, keyframes, opts || {}); } catch (e) { return null; } }
+  function enter(elx, delay) { anim(elx, { opacity: [0, 1], transform: ["translateY(10px)", "translateY(0)"] }, { duration: 0.42, delay: delay || 0, easing: [0.22, 1, 0.36, 1] }); }
+  function staggerIn(nodes) { if (!nodes) return; Array.prototype.forEach.call(nodes, function (n, i) { enter(n, 0.05 + i * 0.045); }); }
+  function pop(elx) { anim(elx, { transform: ["scale(0.6)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, easing: M && M.spring ? M.spring({ stiffness: 320, damping: 18 }) : [0.22, 1, 0.36, 1] }); }
+  function tap(elx) { anim(elx, { transform: ["scale(1)", "scale(0.95)", "scale(1)"] }, { duration: 0.22 }); }
   var token = new URLSearchParams(location.search).get("t") || "";
   var ctx = null;                 // portal context from the server
   var answers = {};               // id -> value
@@ -161,13 +171,15 @@
 
   function screenMessage(icon, title, body, cls){
     clear();
-    main.appendChild(el(
+    var card = el(
       '<div class="card result '+(cls||"")+'">'+
         '<div class="ic" aria-hidden="true">'+icon+'</div>'+
         '<h1>'+esc(title)+'</h1>'+
         '<p>'+esc(body)+'</p>'+
       '</div>'
-    ));
+    );
+    main.appendChild(card);
+    enter(card); pop(card.querySelector(".ic"));
   }
 
   function fetchJSON(url, opts){
@@ -220,11 +232,13 @@
     var submit = el('<button type="button" class="cta" id="send">'+esc(t("send"))+'</button>');
     frm.appendChild(submit);
     frm.appendChild(el('<p class="foot" id="ferr" role="alert"></p>'));
-    submit.addEventListener("click", onSubmit);
+    submit.addEventListener("click", function(){ tap(submit); onSubmit(); });
     // Patient opt-out + right-to-erasure (no login needed).
     var forget = el('<p style="text-align:center;margin-top:16px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">'+esc(t("forget"))+'</a></p>');
     forget.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); forgetMe(); });
     main.appendChild(forget);
+    // Animate: card in, questions stagger in, submit + opt-out follow.
+    enter(head); staggerIn(frm.querySelectorAll(".q")); enter(submit, 0.05 + (frm.querySelectorAll(".q").length) * 0.045); enter(forget, 0.2);
   }
 
   function forgetMe(){
@@ -268,7 +282,7 @@
     opts.forEach(function(o){
       var b = el('<button type="button" class="opt" aria-pressed="false" data-v="'+esc(o.v)+'">'+esc(o.t)+'</button>');
       b.addEventListener("click", function(){
-        answers[id] = o.v;
+        answers[id] = o.v; tap(b);
         Array.prototype.forEach.call(row.children, function(c){ c.setAttribute("aria-pressed", c===b?"true":"false"); });
       });
       row.appendChild(b);
@@ -281,7 +295,7 @@
     for(var n=min;n<=max;n++){ (function(n){
       var b = el('<button type="button" class="opt" aria-pressed="false">'+n+'</button>');
       b.addEventListener("click", function(){
-        answers[id] = n;
+        answers[id] = n; tap(b);
         Array.prototype.forEach.call(row.children, function(c){ c.setAttribute("aria-pressed", c===b?"true":"false"); });
       });
       row.appendChild(b);
@@ -325,14 +339,19 @@
     var lvl = b.escalation || "green";
     if(lvl==="red"){
       clear();
-      main.appendChild(el(
+      var rc = el(
         '<div class="card result r-red">'+
           '<div class="ic" aria-hidden="true">⚠️</div>'+
           '<h1>'+esc(t("seek_t"))+'</h1>'+
           '<div class="emergency">'+esc(t("seek_emerg"))+'</div>'+
           '<a class="call" href="tel:112">📞 '+esc(t("call"))+'</a>'+
         '</div>'
-      ));
+      );
+      main.appendChild(rc);
+      // Urgent result: card in, icon pops, then a gentle 2× attention pulse on the icon (never frantic).
+      enter(rc); var ic = rc.querySelector(".ic"); pop(ic);
+      anim(ic, { transform: ["scale(1)", "scale(1.14)", "scale(1)"] }, { duration: 1.1, delay: 0.55, repeat: 2, easing: "ease-in-out" });
+      var call = rc.querySelector(".call"); enter(call, 0.35);
       return;
     }
     if(lvl==="orange"){ screenMessage("🟠",t("contact_t"),t("contact_b"),"r-amber"); return; }
