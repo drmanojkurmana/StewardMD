@@ -30,6 +30,7 @@ import Pathways from "../followcare-pathways.js";
 import Engine from "../followcare-engine.js";
 import Assessment from "../followcare-assessment.js";
 import Schedule from "../followcare-schedule.js";
+import AI from "../followcare-ai.js";
 
 export function fcKv(env) { return (env && env.FOLLOWCARE_KV) || usageKv(env); }
 export function linkBase(env) { return (env && env.FOLLOWCARE_LINK_BASE) || "https://stewardmd.in/followcare"; }
@@ -139,7 +140,7 @@ function toEpisode(doc) {
     status: f.status, dischargeMs: f.dischargeMs, createdMs: f.createdMs, lang: f.lang || "en", sendHour: f.sendHour, tz: f.tz || "Asia/Kolkata",
     tokenVer: f.tokenVer || 1, schedule: jparse(f.scheduleJson, []), lastDayDone: (f.lastDayDone == null ? -1 : f.lastDayDone),
     nextDueMs: f.nextDueMs || 0, lastEscalation: f.lastEscalation || "", peakEscalation: f.peakEscalation || "", lastScore: (f.lastScore == null ? null : f.lastScore),
-    lastConfidence: f.lastConfidence || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
+    lastConfidence: f.lastConfidence || "", lastRisk: f.lastRisk || "", lastTrend: f.lastTrend || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
     lastSentDay: (f.lastSentDay == null ? -1 : f.lastSentDay), lastSentMs: f.lastSentMs || 0, lastMissedEscalated: (f.lastMissedEscalated == null ? -1 : f.lastMissedEscalated),
     isMinor: !!f.isMinor, consentVersion: f.consentVersion || "",
     _phi: { phoneEnc: f.phoneEnc || "", nameEnc: f.nameEnc || "", guardianEnc: f.guardianEnc || "" },
@@ -158,7 +159,9 @@ export function episodeSummary(ep) {
   return {
     episodeId: ep.episodeId, disease: ep.disease, pathwayId: ep.pathwayId, status: ep.status,
     dischargeMs: ep.dischargeMs, lastDayDone: ep.lastDayDone, nextDueMs: ep.nextDueMs,
-    escalation: board, currentEscalation: ep.lastEscalation, score: ep.lastScore, confidence: ep.lastConfidence, needsReview: !!ep.needsReview, recoveredMs: ep.recoveredMs,
+    escalation: board, currentEscalation: ep.lastEscalation, score: ep.lastScore, confidence: ep.lastConfidence,
+    risk: ep.lastRisk, trend: ep.lastTrend, riskPercent: AI.riskPercent({ readmissionRisk: ep.lastRisk, recoveryScore: ep.lastScore, trend: ep.lastTrend, confidence: ep.lastConfidence, escalation: ep.lastEscalation }),
+    needsReview: !!ep.needsReview, recoveredMs: ep.recoveredMs,
   };
 }
 
@@ -345,6 +348,13 @@ export async function submitPortalAssessment(env, token, answers) {
     : (r.escalation === "red" || r.escalation === "orange" || peakSevere) ? "escalated"
     : "active";
 
+  // Phase 2 — the AI decides WHEN to check in next (sooner when deteriorating, spaced out when improving).
+  const ai = AI.nextInterval(r, pw, day);
+  const adaptiveNextMs = (r.escalation === "red") ? 0
+    : (ai.deltaHours ? nowMs + ai.deltaHours * 3600000
+      : (ai.dayOffset != null ? nextDueMsFor(ep, ai.dayOffset)
+        : (scored.nextDay != null ? nextDueMsFor(ep, scored.nextDay) : 0)));
+
   // Persist the assessment (clinical answers are not identifiers). Two preconditions make a retry safe:
   //  • fc_assessments create with exists:false → the SAME day can't be written twice (exactly-once).
   //  • the episode update is guarded on the doc being UNCHANGED since we read it (updateTime) → a racing
@@ -359,8 +369,8 @@ export async function submitPortalAssessment(env, token, answers) {
     }),
     wUpdate(env, "fc_episodes/" + episodeId, {
       lastDayDone: day, lastEscalation: r.escalation, peakEscalation: peak, lastScore: r.recoveryScore, lastConfidence: r.confidence,
-      needsReview: !!r.needsReview, lastAnswersJson: JSON.stringify(answers).slice(0, 4000),
-      nextDueMs: scored.nextDay != null ? nextDueMsFor(ep, scored.nextDay) : 0,
+      lastRisk: r.readmissionRisk, lastTrend: r.trend, needsReview: !!r.needsReview, lastAnswersJson: JSON.stringify(answers).slice(0, 4000),
+      nextDueMs: adaptiveNextMs,
       status: nextStatus, recoveredMs: (scored.recovered && !peakSevere) ? nowMs : (ep.recoveredMs || 0),
     }, ep.updateTime ? { updateTime: ep.updateTime } : { exists: true }),
   ];

@@ -194,7 +194,7 @@
       h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
       h("div", { "class": "fc-meta" }, [
         h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
-        h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.confidence ? "  ·  " + ep.confidence + " confidence" : "") + (ep.needsReview ? "  ·  ⚑ needs review" : "") })
+        h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% readmit risk" : "") + (ep.needsReview ? "  ·  ⚑ needs review" : "") })
       ])
     ]);
   }
@@ -304,10 +304,13 @@
       body.appendChild(h("button", { "class": "fc-btn sec", onclick: open, text: "‹ Board" }));
       var ep = res.body && res.body.episode; if (!ep) { body.appendChild(h("div", { "class": "fc-empty", text: "Episode not found." })); return; }
       var m = escalationMeta(ep.escalation);
+      var rec = "";
+      try { if (G.FollowCareAI) rec = FollowCareAI.recommendation({ escalation: ep.currentEscalation || ep.escalation, trend: ep.trend, needsReview: ep.needsReview, recoveryScore: ep.score }); } catch (e) {}
       body.appendChild(h("div", { style: "margin:12px 0" }, [
         h("div", { style: "font-size:18px;font-weight:800", text: ep.disease || "Recovery" }),
-        h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
-        h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) })
+        h("div", { "class": "fc-pill", style: "display:inline-block;margin-top:6px;background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% risk" : "") }),
+        h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
+        rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
       ]));
       var tl = h("div", { "class": "fc-tl" });
       ((res.body && res.body.timeline) || []).forEach(function (ev) {
