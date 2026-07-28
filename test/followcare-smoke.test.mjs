@@ -22,11 +22,11 @@ const A = o => Object.assign({}, G0, o);
 const DISCHARGE = Date.UTC(2026, 6, 1, 0, 0, 0), DAY = 86400000;
 const log = (...a) => console.log("   " + a.join(" "));
 
-test("SMOKE 0 — flag toggles (default OFF, ?fc / set enable)", () => {
-  assert.equal(FLAGS.on(), false);
-  FLAGS.set("smd_followcare", true);
+test("SMOKE 0 — flag default ON (owner-enabled); can be disabled via ?fc=0/set", () => {
   assert.equal(FLAGS.on(), true);
-  log("flag smd_followcare default OFF, enables via set()/?fc=1  ✓");
+  FLAGS.set("smd_followcare", false); assert.equal(FLAGS.on(), false);
+  FLAGS.set("smd_followcare", true); assert.equal(FLAGS.on(), true);
+  log("flag smd_followcare default ON; ?fc=0 disables  ✓");
 });
 
 test("SMOKE 1 — enroll + schedule a pneumonia episode", () => {

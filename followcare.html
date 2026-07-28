@@ -131,7 +131,8 @@
       contact_t: "Please contact your care team", contact_b: "Some of your answers need a closer look. Please contact your treating team today. If you feel much worse, seek medical care sooner.",
       seek_t: "Please seek care now", seek_emerg: "Based on your answers, you should be seen urgently. Please go to the nearest emergency department or call your local emergency number now. Your care team is being notified.", call: "Call 112",
       sendErr: "Something went wrong sending your check-in. Please try again.", connSend: "Connection problem. Please check your internet and try again.",
-      forget: "Stop check-ins & delete my data", forget_confirm: "Stop these recovery check-ins and permanently delete your information? This cannot be undone.", forget_done_t: "Your data has been deleted", forget_done_b: "You will not receive any more check-ins. Take care — contact your care team if you feel unwell."
+      forget: "Stop check-ins & delete my data", forget_confirm: "Stop these recovery check-ins and permanently delete your information? This cannot be undone.", forget_done_t: "Your data has been deleted", forget_done_b: "You will not receive any more check-ins. Take care — contact your care team if you feel unwell.",
+      unavail_t: "Temporarily unavailable", unavail_b: "This recovery check-in isn't available right now. Please try again later, or contact your care team."
     },
     hi: {
       title: "आपका रिकवरी चेक-इन", lead: "यह आपका रिकवरी चेक-इन है{d}। इसमें एक मिनट लगता है। कृपया पिछले एक दिन के बारे में सच्चाई से उत्तर दें।",
@@ -148,7 +149,8 @@
       contact_t: "कृपया अपनी टीम से संपर्क करें", contact_b: "आपके कुछ उत्तरों पर ध्यान देने की ज़रूरत है। कृपया आज ही अपनी टीम से संपर्क करें। यदि तबियत ज़्यादा बिगड़े तो जल्दी इलाज लें।",
       seek_t: "कृपया अभी इलाज लें", seek_emerg: "आपके उत्तरों के आधार पर आपको तुरंत दिखाना चाहिए। कृपया नज़दीकी आपातकालीन विभाग जाएं या आपातकालीन नंबर पर कॉल करें। आपकी टीम को सूचित किया जा रहा है।", call: "112 पर कॉल करें",
       sendErr: "चेक-इन भेजने में समस्या हुई। कृपया फिर से प्रयास करें।", connSend: "कनेक्शन समस्या। कृपया इंटरनेट जांचें।",
-      forget: "चेक-इन बंद करें और मेरा डेटा हटाएं", forget_confirm: "क्या आप ये रिकवरी चेक-इन बंद करके अपनी जानकारी हमेशा के लिए हटाना चाहते हैं? यह वापस नहीं होगा।", forget_done_t: "आपका डेटा हटा दिया गया", forget_done_b: "अब आपको और चेक-इन नहीं मिलेंगे। अपना ध्यान रखें — तबियत ठीक न लगे तो अपनी टीम से संपर्क करें।"
+      forget: "चेक-इन बंद करें और मेरा डेटा हटाएं", forget_confirm: "क्या आप ये रिकवरी चेक-इन बंद करके अपनी जानकारी हमेशा के लिए हटाना चाहते हैं? यह वापस नहीं होगा।", forget_done_t: "आपका डेटा हटा दिया गया", forget_done_b: "अब आपको और चेक-इन नहीं मिलेंगे। अपना ध्यान रखें — तबियत ठीक न लगे तो अपनी टीम से संपर्क करें।",
+      unavail_t: "अभी उपलब्ध नहीं", unavail_b: "यह रिकवरी चेक-इन अभी उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें, या अपनी टीम से संपर्क करें।"
     }
   };
   function t(k){ var d = I18N[LANG] || I18N.en; return (d[k] != null ? d[k] : I18N.en[k]) || ""; }
@@ -183,6 +185,7 @@
         if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛",t("expired_t"),t("expired_b"),""); }
         if(!b.ok){
           if(b.error==="closed"){ return screenMessage("✅",t("done_t"),t("done_b"),"r-green"); }
+          if(b.error==="not_configured"){ return screenMessage("🛠",t("unavail_t"),t("unavail_b"),""); }
           return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),"");
         }
         ctx = b;

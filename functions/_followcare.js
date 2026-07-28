@@ -44,6 +44,11 @@ function hex(u8) { let s = ""; for (let i = 0; i < u8.length; i++) s += u8[i].to
 // ---- link token (HMAC, no PHI): base64url(episodeId.exp) . base64url(sig) ---------------
 async function hmacKey(secret) { return crypto.subtle.importKey("raw", enc.encode(String(secret)), { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]); }
 function tokenSecret(env) { const s = env && env.FOLLOWCARE_TOKEN_SECRET; if (!s || String(s).length < 32) throw Object.assign(new Error("token_secret_missing"), { code: "config", status: 500 }); return s; }
+// Whether the two required secrets are present. When false, FollowCare degrades gracefully to a clean
+// "being set up" state (no 500s) — the flag can be ON before provisioning without a broken doctor experience.
+export function isConfigured(env) {
+  return !!(env && env.FOLLOWCARE_TOKEN_SECRET && String(env.FOLLOWCARE_TOKEN_SECRET).length >= 32 && env.FOLLOWCARE_PHI_KEY);
+}
 export const CONSENT_VERSION = "fc-consent-v1";
 
 // Sign a link token. payload = { episodeId, exp(ms), ver }. ver is the episode's tokenVer (revocation).
@@ -189,6 +194,7 @@ export async function getEpisode(env, episodeId) { return toEpisode(await fsGet(
 // ---- enroll -----------------------------------------------------------------------------
 // Creates an episode + returns its patient link (token). Requires a valid pathway + future/near discharge.
 export async function enrollEpisode(env, p) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
   const nowMs = Date.now();
   const pw = Pathways.get(p.pathwayId);
   if (!pw) return { ok: false, error: "bad_pathway" };
@@ -264,6 +270,7 @@ export async function eraseEpisode(env, episodeId, actor) {
 // Patient-initiated erasure from the portal (DPDP §13): verifies the link token, then erases. Lets a
 // patient with no account exercise their right to be forgotten (and doubles as the messaging opt-out).
 export async function forgetViaToken(env, token) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
   const episodeId = episodeIdFromToken(token);
   if (!episodeId) return { ok: false, error: "invalid_link" };
   const ep = await getEpisode(env, episodeId);
@@ -276,6 +283,7 @@ export async function forgetViaToken(env, token) {
 // ---- patient portal (token-gated, no login) --------------------------------------------
 // The episode + the questionnaire for the day that is due now. No PHI beyond first name (for greeting).
 export async function portalContext(env, token) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
   const secret = tokenSecret(env);
   // Structurally parse the episode id (unauthenticated) only to LOAD the episode + its current tokenVer;
   // the real cryptographic verify below is what actually authorises access.
@@ -319,6 +327,7 @@ export function nextScheduled(ep) {
 // Submit answers for the due day. Runs the deterministic engine AUTHORITATIVELY (client score is ignored),
 // persists the assessment, advances the episode, and returns the safe patient message + clinician-notify plan.
 export async function submitPortalAssessment(env, token, answers) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
   const secret = tokenSecret(env);
   const episodeId = episodeIdFromToken(token);
   if (!episodeId) return { ok: false, error: "invalid_link" };

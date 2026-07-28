@@ -3,7 +3,7 @@
 // These are the security-critical primitives that keep patient links unguessable/revocable and PHI encrypted.
 import { test } from "node:test";
 import assert from "node:assert";
-import { signToken, verifyToken, episodeIdFromToken, encPHI, decPHI, patientKeyHash, currentDueDay, nextScheduled, worstEsc } from "../functions/_followcare.js";
+import { signToken, verifyToken, episodeIdFromToken, encPHI, decPHI, patientKeyHash, currentDueDay, nextScheduled, worstEsc, isConfigured, enrollEpisode } from "../functions/_followcare.js";
 
 const SECRET = "test-secret-at-least-16-chars-long-xxxxx";
 const KEY_B64URL = Buffer.from(new Uint8Array(32).fill(7)).toString("base64url"); // 32-byte AES key
@@ -68,6 +68,16 @@ test("PHI: two encryptions of the same value differ (random IV) but both decrypt
 
 test("PHI: missing key fails closed (throws) — never stores plaintext", async () => {
   await assert.rejects(() => encPHI({}, "secret-phone"), /phi_key_missing/);
+});
+
+test("graceful degradation: flag can be ON before secrets — unconfigured fails CLOSED to not_configured", async () => {
+  assert.equal(isConfigured({}), false);
+  assert.equal(isConfigured({ FOLLOWCARE_TOKEN_SECRET: "x".repeat(40), FOLLOWCARE_PHI_KEY: "k" }), true);
+  assert.equal(isConfigured({ FOLLOWCARE_TOKEN_SECRET: "short", FOLLOWCARE_PHI_KEY: "k" }), false);  // <32 = not ready
+  // enroll returns a clean not_configured BEFORE any Firestore/crypto — no throw, no PHI processed
+  const r = await enrollEpisode({}, { hospitalId: "h", doctorUid: "d", pathwayId: "pneumonia", phone: "9876543210", consentAttested: true });
+  assert.equal(r.ok, false);
+  assert.equal(r.error, "not_configured");
 });
 
 // ---- security-review regression tests --------------------------------------------------

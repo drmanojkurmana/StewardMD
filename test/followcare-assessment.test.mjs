@@ -12,9 +12,11 @@ const FLAGS = globalThis.SMD_FOLLOWCARE_FLAGS, AS = globalThis.FollowCareAssessm
 const G0 = { g_chestpain: "no", g_breathless_rest: "no", g_syncope: "no", g_confusion: "no", g_bleeding: "no", g_seizure: "no", g_stroke_fast: "no", g_anaphylaxis: "no", g_selfharm: "no" };
 const clean = o => Object.assign({}, G0, o);
 
-test("flags: master default OFF; sub-flags resolve; set() persists", () => {
-  assert.equal(FLAGS.on(), false);
+test("flags: master default ON (owner-enabled); ?fc/set can disable; sub-flags resolve", () => {
+  assert.equal(FLAGS.on(), true);                 // default ON
   assert.equal(FLAGS.bool("smd_followcare_portal"), true);
+  FLAGS.set("smd_followcare", false);
+  assert.equal(FLAGS.on(), false);                // can still be turned off
   FLAGS.set("smd_followcare", true);
   assert.equal(FLAGS.on(), true);
   assert.ok(Object.keys(FLAGS.defs()).length >= 5);

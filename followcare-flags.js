@@ -1,5 +1,8 @@
 /* FollowCare AI — feature flags (mirrors thorex-flags.js). Resolution: ?query → localStorage → default.
- * Master flag smd_followcare DEFAULT OFF (safe, incremental rollout per the StewardMD reversible-change norm).
+ * Master flag smd_followcare DEFAULT ON (owner enabled it after all phases were built + reviewed). It fails
+ * SAFE if the server secrets (FOLLOWCARE_TOKEN_SECRET/FOLLOWCARE_PHI_KEY) aren't provisioned: the module +
+ * portal show a clean "being set up / temporarily unavailable" state (isConfigured() guard) and NO PHI is
+ * processed and NO message is sent until the secrets exist. Set ?fc=0 (or localStorage) to hide it again.
  * Exposes window.SMD_FOLLOWCARE_FLAGS. No PHI, no network. */
 (function () {
   "use strict";
@@ -9,7 +12,7 @@
 
   // key → { type, def, query, desc }
   var DEFS = {
-    smd_followcare: { type: "bool", def: false, query: "fc", desc: "FollowCare AI master flag" },
+    smd_followcare: { type: "bool", def: true, query: "fc", desc: "FollowCare AI master flag" },
     smd_followcare_portal: { type: "bool", def: true, query: "fcportal", desc: "Patient web portal" },
     smd_followcare_sms: { type: "bool", def: false, query: "fcsms", desc: "SMS channel (needs provider config)" },
     smd_followcare_ai_summary: { type: "bool", def: false, query: "fcai", desc: "AI doctor summary (Phase 2)" },

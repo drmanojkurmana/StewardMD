@@ -108,7 +108,8 @@
     episode: function (id) { return req("GET", "/episode?id=" + encodeURIComponent(id)); },
     revoke: function (episodeId) { return req("POST", "/revoke", { episodeId: episodeId }); },
     ack: function (episodeId) { return req("POST", "/ack", { episodeId: episodeId }); },
-    erase: function (episodeId) { return req("POST", "/erase", { episodeId: episodeId }); }
+    erase: function (episodeId) { return req("POST", "/erase", { episodeId: episodeId }); },
+    ready: function () { return req("GET", "/ready"); }
   };
 
   // ---- render layer (self-contained scoped overlay) ---------------------------------------
@@ -168,7 +169,21 @@
   function open() {
     if (!enabled()) { toast("FollowCare is not enabled."); return; }
     var body = shell();
-    renderDashboard(body);
+    body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+    // Readiness check: if the server secrets aren't provisioned yet, show a clean "being set up" screen
+    // instead of letting the doctor hit a failed enroll.
+    API.ready().then(function (res) {
+      if (res && res.body && res.body.ready === false) {
+        body.innerHTML = "";
+        body.appendChild(h("div", { "class": "fc-empty" }, [
+          h("div", { style: "font-size:34px;margin-bottom:8px", text: "🛠" }),
+          h("div", { style: "font-weight:700;margin-bottom:6px", text: "FollowCare is being set up" }),
+          h("div", { style: "font-size:13.5px", text: "This recovery-follow-up module will be available once your administrator finishes configuration." })
+        ]));
+        return;
+      }
+      renderDashboard(body);
+    }).catch(function () { renderDashboard(body); });
   }
 
   function renderDashboard(body) {
@@ -295,7 +310,7 @@
   }
   function field(label, input) { return h("div", { "class": "fc-field" }, [h("label", { text: label }), input]); }
   function enrollError(code) {
-    var M = { bad_pathway: "Please choose a valid recovery pathway.", bad_phone: "Please enter a valid mobile number.", missing_tenant: "Missing hospital. Please set your hospital first.", missing_hospitalId: "Missing hospital. Please set your hospital first.", hospital_not_set: "Please set your hospital before enrolling patients.", hospital_mismatch: "That hospital does not match your account.", consent_required: "Please confirm the patient was informed and consented.", guardian_required: "Enter the guardian's mobile number for a minor.", signin_required: "Please sign in to enroll a patient." };
+    var M = { bad_pathway: "Please choose a valid recovery pathway.", bad_phone: "Please enter a valid mobile number.", missing_tenant: "Missing hospital. Please set your hospital first.", missing_hospitalId: "Missing hospital. Please set your hospital first.", hospital_not_set: "Please set your hospital before enrolling patients.", hospital_mismatch: "That hospital does not match your account.", consent_required: "Please confirm the patient was informed and consented.", guardian_required: "Enter the guardian's mobile number for a minor.", not_configured: "FollowCare isn't fully set up yet — please try again later.", signin_required: "Please sign in to enroll a patient." };
     return M[code] || "Could not create the recovery link.";
   }
   function shareLink(link) {
