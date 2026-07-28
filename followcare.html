@@ -199,8 +199,9 @@
   // FollowCare premium UI v2 (flag smd_followcare_ui2). ?fcui=1 previews it; default OFF until approved.
   (function () { try {
     var q = new URLSearchParams(location.search).get("fcui");
-    var on = (q === "1" || q === "on" || q === "true") ? true : (q === "0" || q === "off" || q === "false") ? false : (localStorage.getItem("smd_followcare_ui2") === "1");
-    if (q === "1" || q === "on" || q === "true") { try { localStorage.setItem("smd_followcare_ui2", "1"); } catch (e) {} }
+    // v2 is now the default (flag flipped ON). ?fcui=0 or localStorage "0" opts back to classic.
+    var on = (q === "0" || q === "off" || q === "false") ? false : (q === "1" || q === "on" || q === "true") ? true : (localStorage.getItem("smd_followcare_ui2") !== "0");
+    if (q != null) { try { localStorage.setItem("smd_followcare_ui2", on ? "1" : "0"); } catch (e) {} }
     if (on) document.documentElement.classList.add("fcui2");
   } catch (e) {} })();
   // Light/dark theme, like the app: the patient's stored choice wins; otherwise the device preference.
