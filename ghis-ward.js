@@ -623,7 +623,7 @@
             }).catch(function(){});
           }).then(function() {
             var age = pObj ? parseInt(pObj.dob, 10) : NaN;
-            DX.importPatient({ patientName: name || (pObj && pObj.patientFirstName) || '', age: (!isNaN(age) && age > 0 && age < 130) ? age : null, sex: pObj && pObj.gender, labs: labs, radiology: radiology, culture: culture });
+            DX.importPatient({ patientName: name || (pObj && pObj.patientFirstName) || '', age: (!isNaN(age) && age > 0 && age < 130) ? age : null, sex: pObj && pObj.gender, labs: labs, radiology: radiology, culture: culture, mrn: (pObj && pObj.patientId) || '' });
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
           });
         },
@@ -745,6 +745,19 @@
         // the extractor + the clinician's verification stay the source of truth.
         isConnected: function() { return !!_connected; },
         getPatients: function() { return (_patients || []).slice(); },
+        // Best-effort: the patient's registered mobile from GHIS demographics (Searchnew page), by MR number.
+        // Resolves to '' (never rejects) if not connected / not found / GHIS denies — callers pre-fill only if set.
+        fetchPhone: function(patientId) {
+          try {
+            if (!_connected || !patientId) return Promise.resolve('');
+            var list = _patients || [], p = null;
+            for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
+            if (!p || !p.episodeId) return Promise.resolve('');
+            var recordNo = p.patientId + '-' + p.episodeId;
+            return authFetch('/demographics?recordNo=' + encodeURIComponent(recordNo))
+              .then(function(d) { return (d && d.phone) || ''; }, function() { return ''; });
+          } catch (e) { return Promise.resolve(''); }
+        },
         fetchLabTests: function(patientId) {
           return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function(j) {
             var orders = ((j && j.orders) || []).slice(0, 25);

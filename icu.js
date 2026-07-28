@@ -5626,13 +5626,23 @@
   function openFollowCareEnroll() {
     if (!(window.FollowCare && FollowCare.openEnroll)) { if (window.toast) toast("FollowCare loading…"); return; }
     var p = _raw.patient || {}, f = (modalEl ? dischargeFieldVals() : {});
-    FollowCare.openEnroll({
+    var prefill = {
       name: p.name || "",
-      // Phone auto-fills if the ward/GHIS record carries it (GIMSR GHIS has it); else the doctor adds it once.
-      phone: p.phone || p.mobile || p.contact || p.mob || p.phoneNumber || "",
+      phone: p.phone || p.mobile || p.contact || "",
       diagnosisText: (f && f.finalDx) || p.diagnosis || "",   // mapped to a recovery pathway by FollowCare
       dischargeMs: Date.now(), lang: "en"
-    });
+    };
+    // If this patient came from GHIS Ward Sync and we don't already have a mobile, pull it from GHIS
+    // demographics (best-effort, non-blocking) so the doctor doesn't re-type it. Falls through to the
+    // enrol form regardless — the phone is the one field the doctor can fill manually.
+    var mr = (_raw.wardSync && _raw.wardSync.patientId) || p.mrn || "";
+    if (!prefill.phone && mr && window.GHIS && GHIS.fetchPhone && GHIS.isConnected && GHIS.isConnected()) {
+      var opened = false, go = function () { if (!opened) { opened = true; FollowCare.openEnroll(prefill); } };
+      var t = setTimeout(go, 3500);   // never let a slow GHIS lookup block enrolment
+      GHIS.fetchPhone(mr).then(function (ph) { if (ph) prefill.phone = ph; clearTimeout(t); go(); }, function () { clearTimeout(t); go(); });
+    } else {
+      FollowCare.openEnroll(prefill);
+    }
   }
   function openDischarge() {
     injectCSS(); ensureModal();
