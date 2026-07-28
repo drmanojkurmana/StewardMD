@@ -76,9 +76,11 @@ async function rateLimit(env, request, key) {
 async function notifyClinician(env, ep, escalation) {
   try {
     if (!ep || !ep.doctorUid || !nativePushEnabled(env)) return;
+    // Minimum-necessary (HIPAA §164.502(b)): the push carries NO diagnosis and no patient identifier — just an
+    // urgency-tiered prompt + the opaque episodeId for an in-app deep link. Details load in-app after auth.
     const title = escalation === "red" ? "FollowCare · urgent review" : "FollowCare · review needed";
-    const body = (ep.disease || "A patient") + " recovery check-in flagged " + escalation + ". Tap to review.";
-    await sendNativeToAll(env, { title, body, data: { type: "followcare", episodeId: ep.episodeId, escalation } }, { uid: "fb:" + ep.doctorUid });
+    const body = "A recovery check-in needs your review. Tap to open.";
+    await sendNativeToAll(env, { title, body, data: { type: "followcare", episodeId: ep.episodeId } }, { uid: "fb:" + ep.doctorUid });
   } catch (e) { /* push is best-effort — an escalation is still visible on the dashboard */ }
 }
 
@@ -115,6 +117,14 @@ export async function onRequest(context) {
       if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
       const ctx = await FC.portalContext(env, t);
       return json(ctx, ctx.ok ? 200 : (ctx.error === "link_expired" ? 410 : 400), request);
+    }
+    if (seg === "forget" && request.method === "POST") {
+      // Patient right-to-erasure / messaging opt-out (token-gated, no login). DPDP §13.
+      const b = await readBody(request);
+      const rl = await rateLimit(env, request, "forget");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const res = await FC.forgetViaToken(env, b.t);
+      return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : 400), request);
     }
     if (seg === "submit" && request.method === "POST") {
       const b = await readBody(request);
@@ -159,8 +169,9 @@ export async function onRequest(context) {
       if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
       if (b.hospitalId && !isOwner && b.hospitalId !== hospitalId) return json({ error: "hospital_mismatch" }, 403, request);
       const r = await FC.enrollEpisode(env, {
-        hospitalId: hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name, mrn: b.mrn,
+        hospitalId: hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name,
         dischargeMs: b.dischargeMs, lang: b.lang, sendHour: b.sendHour, tz: b.tz,
+        consentAttested: b.consentAttested, isMinor: b.isMinor, guardianPhone: b.guardianPhone,
       });
       return json(r, r.ok ? 200 : 400, request);
     }
@@ -173,6 +184,9 @@ export async function onRequest(context) {
       const ep = await FC.getEpisode(env, id);
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      // Audit the PHI/clinical-read (who viewed which episode, when) — HIPAA §164.312(b) / DPDP accountability.
+      const auditRead = FC.audit(env, { hospitalId: ep.hospitalId, episodeId: id, actor: "doctor:" + uid, action: "view" });
+      context.waitUntil ? context.waitUntil(auditRead) : await auditRead;
       return json({ episode: FC.episodeSummary(ep), timeline: await FC.episodeTimeline(env, id) }, 200, request);
     }
     if (request.method === "POST" && seg === "revoke") {
@@ -188,6 +202,14 @@ export async function onRequest(context) {
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
       return json(await FC.acknowledgeEpisode(env, b.episodeId, "doctor:" + uid), 200, request);
+    }
+    if (request.method === "POST" && seg === "erase") {
+      // Clinician/owner erasure of a patient's episode + all its data (DPDP §13 right to be forgotten).
+      const b = await readBody(request);
+      const ep = await FC.getEpisode(env, b.episodeId);
+      if (!ep) return json({ ok: true, erased: false }, 200, request);   // already gone → idempotent
+      if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      return json(await FC.eraseEpisode(env, b.episodeId, "doctor:" + uid), 200, request);
     }
 
     return json({ error: "not_found" }, 404, request);

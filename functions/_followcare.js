@@ -24,7 +24,7 @@
  * Firestore collections (all service-account only):
  *   fc_episodes/{episodeId}    fc_assessments/{episodeId}_{dayOffset}    fc_events/{uuid}    fc_delivery/{uuid}
  */
-import { fsGet, fsCommit, fsQuery, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsCommit, fsQuery, wCreate, wUpdate, wDelete } from "./_fbfirestore.js";
 import { usageKv } from "./_usage.js";
 import Pathways from "../followcare-pathways.js";
 import Engine from "../followcare-engine.js";
@@ -42,7 +42,8 @@ function hex(u8) { let s = ""; for (let i = 0; i < u8.length; i++) s += u8[i].to
 
 // ---- link token (HMAC, no PHI): base64url(episodeId.exp) . base64url(sig) ---------------
 async function hmacKey(secret) { return crypto.subtle.importKey("raw", enc.encode(String(secret)), { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]); }
-function tokenSecret(env) { const s = env && env.FOLLOWCARE_TOKEN_SECRET; if (!s || String(s).length < 16) throw Object.assign(new Error("token_secret_missing"), { code: "config", status: 500 }); return s; }
+function tokenSecret(env) { const s = env && env.FOLLOWCARE_TOKEN_SECRET; if (!s || String(s).length < 32) throw Object.assign(new Error("token_secret_missing"), { code: "config", status: 500 }); return s; }
+export const CONSENT_VERSION = "fc-consent-v1";
 
 // Sign a link token. payload = { episodeId, exp(ms), ver }. ver is the episode's tokenVer (revocation).
 export async function signToken(payload, secret) {
@@ -140,7 +141,8 @@ function toEpisode(doc) {
     nextDueMs: f.nextDueMs || 0, lastEscalation: f.lastEscalation || "", peakEscalation: f.peakEscalation || "", lastScore: (f.lastScore == null ? null : f.lastScore),
     lastConfidence: f.lastConfidence || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
     lastSentDay: (f.lastSentDay == null ? -1 : f.lastSentDay), lastSentMs: f.lastSentMs || 0, lastMissedEscalated: (f.lastMissedEscalated == null ? -1 : f.lastMissedEscalated),
-    _phi: { phoneEnc: f.phoneEnc || "", nameEnc: f.nameEnc || "", mrnEnc: f.mrnEnc || "" },
+    isMinor: !!f.isMinor, consentVersion: f.consentVersion || "",
+    _phi: { phoneEnc: f.phoneEnc || "", nameEnc: f.nameEnc || "", guardianEnc: f.guardianEnc || "" },
   };
 }
 // Escalation ordering. worstEsc keeps the highest-severity level of two (used to keep a prior red visible
@@ -183,6 +185,12 @@ export async function enrollEpisode(env, p) {
   if (!p.hospitalId || !p.doctorUid) return { ok: false, error: "missing_tenant" };
   const phoneDigits = String(p.phone || "").replace(/[^\d]/g, "");
   if (phoneDigits.length < 8) return { ok: false, error: "bad_phone" };
+  // DPDP: the doctor must attest the patient was given notice + consented before we process/message them.
+  if (!p.consentAttested) return { ok: false, error: "consent_required" };
+  // DPDP §9: a minor requires a guardian's phone (all messaging goes to the guardian, never the child).
+  const isMinor = !!p.isMinor;
+  const guardianDigits = String(p.guardianPhone || "").replace(/[^\d]/g, "");
+  if (isMinor && guardianDigits.length < 8) return { ok: false, error: "guardian_required" };
   const dischargeMs = Number(p.dischargeMs) || nowMs;
   const sendHour = (typeof p.sendHour === "number") ? p.sendHour : 9;
   const schedule = Schedule.scheduleFor(p.pathwayId, dischargeMs, { pathways: Pathways, sendHour });
@@ -190,20 +198,23 @@ export async function enrollEpisode(env, p) {
 
   const episodeId = uuid();
   const secret = tokenSecret(env);
-  const [phoneEnc, nameEnc, mrnEnc, pkh] = await Promise.all([
-    encPHI(env, phoneDigits), encPHI(env, p.name || ""), encPHI(env, p.mrn || ""), patientKeyHash(p.hospitalId, phoneDigits),
+  // Data minimisation: store only what follow-up needs — encrypted phone + first-name-for-greeting +
+  // (if minor) guardian phone. MRN is NOT collected/stored in Phase 1 (no processing purpose for it).
+  const [phoneEnc, nameEnc, guardianEnc, pkh] = await Promise.all([
+    encPHI(env, phoneDigits), encPHI(env, p.name || ""), encPHI(env, isMinor ? guardianDigits : ""), patientKeyHash(p.hospitalId, phoneDigits),
   ]);
   const fields = {
     hospitalId: p.hospitalId, doctorUid: p.doctorUid, pathwayId: p.pathwayId, disease: pw.name,
     status: "active", dischargeMs, createdMs: nowMs, lang: p.lang || "en", sendHour, tz: p.tz || "Asia/Kolkata",
     tokenVer: 1, scheduleJson: JSON.stringify(schedule), lastDayDone: -1, nextDueMs: firstDue ? firstDue.dueAtMs : 0,
     lastEscalation: "", lastScore: -1, lastConfidence: "", recoveredMs: 0,
-    patientKeyHash: pkh, phoneEnc, nameEnc, mrnEnc,
+    isMinor, consentVersion: CONSENT_VERSION, consentAttestedMs: nowMs, consentBy: "doctor:" + p.doctorUid,
+    patientKeyHash: pkh, phoneEnc, nameEnc, guardianEnc,
   };
   await fsCommit(env, [wCreate(env, "fc_episodes/" + episodeId, fields)]);
   const expDays = Number(env.FOLLOWCARE_LINK_TTL_DAYS) || 45;
   const token = await signToken({ episodeId, exp: nowMs + expDays * 86400000, ver: 1 }, secret);
-  await audit(env, { hospitalId: p.hospitalId, episodeId, actor: "doctor:" + p.doctorUid, action: "enroll", meta: { pathwayId: p.pathwayId } });
+  await audit(env, { hospitalId: p.hospitalId, episodeId, actor: "doctor:" + p.doctorUid, action: "enroll", meta: { pathwayId: p.pathwayId, consentVersion: CONSENT_VERSION, isMinor } });
   return { ok: true, episodeId, link: linkBase(env) + "?t=" + token, token, nextDueMs: fields.nextDueMs, disease: pw.name };
 }
 
@@ -220,6 +231,36 @@ export async function revokeLinks(env, episodeId, actor) {
   await fsCommit(env, [wUpdate(env, "fc_episodes/" + episodeId, { tokenVer: (ep.tokenVer || 1) + 1 }, { exists: true })]);
   await audit(env, { hospitalId: ep.hospitalId, episodeId, actor: actor || "system", action: "revoke_links" });
   return { ok: true };
+}
+
+// ---- erasure (DPDP §13 right to be forgotten) ------------------------------------------
+// Permanently deletes an episode + all its assessments + delivery-log rows, then writes a minimal NON-PHI
+// tombstone to fc_events for accountability. Used by the enrolling clinician, the owner, and (via the portal)
+// the patient themselves. Idempotent — a second call on an already-erased episode still succeeds.
+export async function eraseEpisode(env, episodeId, actor) {
+  const ep = await getEpisode(env, episodeId);
+  const hospitalId = ep ? ep.hospitalId : "";
+  const writes = [];
+  const assessments = await fsQuery(env, "fc_assessments", { where: { field: "episodeId", value: episodeId }, limit: 200 });
+  assessments.forEach(function (d) { writes.push(wDelete(env, "fc_assessments/" + d.id)); });
+  const deliveries = await fsQuery(env, "fc_delivery", { where: { field: "episodeId", value: episodeId }, limit: 200 });
+  deliveries.forEach(function (d) { writes.push(wDelete(env, "fc_delivery/" + d.id)); });
+  if (ep) writes.push(wDelete(env, "fc_episodes/" + episodeId));
+  if (writes.length) await fsCommit(env, writes);
+  // Tombstone carries NO PHI — just that this episode's data was erased, when, and by whom.
+  await audit(env, { hospitalId, episodeId, actor: actor || "system", action: "erased", meta: { assessments: assessments.length, deliveries: deliveries.length } });
+  return { ok: true, erased: !!ep, assessments: assessments.length };
+}
+// Patient-initiated erasure from the portal (DPDP §13): verifies the link token, then erases. Lets a
+// patient with no account exercise their right to be forgotten (and doubles as the messaging opt-out).
+export async function forgetViaToken(env, token) {
+  const episodeId = episodeIdFromToken(token);
+  if (!episodeId) return { ok: false, error: "invalid_link" };
+  const ep = await getEpisode(env, episodeId);
+  if (!ep) return { ok: true, erased: false };
+  const v = await verifyToken(token, tokenSecret(env), ep.tokenVer || 1, Date.now());
+  if (!v.ok) return { ok: false, error: v.reason === "expired" ? "link_expired" : "invalid_link" };
+  return eraseEpisode(env, episodeId, "patient");
 }
 
 // ---- patient portal (token-gated, no login) --------------------------------------------

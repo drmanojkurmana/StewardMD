@@ -107,7 +107,8 @@
     episodes: function () { return req("GET", "/episodes"); },
     episode: function (id) { return req("GET", "/episode?id=" + encodeURIComponent(id)); },
     revoke: function (episodeId) { return req("POST", "/revoke", { episodeId: episodeId }); },
-    ack: function (episodeId) { return req("POST", "/ack", { episodeId: episodeId }); }
+    ack: function (episodeId) { return req("POST", "/ack", { episodeId: episodeId }); },
+    erase: function (episodeId) { return req("POST", "/erase", { episodeId: episodeId }); }
   };
 
   // ---- render layer (self-contained scoped overlay) ---------------------------------------
@@ -231,7 +232,7 @@
     body.appendChild(err); body.appendChild(save);
   }
   function renderEnrollForm(body, hosp) {
-    var form = { pathwayId: "", phone: "", name: "", dischargeMs: "", lang: "en" };
+    var form = { pathwayId: "", phone: "", name: "", dischargeMs: "", lang: "en", consentAttested: false, isMinor: false, guardianPhone: "" };
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:8px 0 4px;color:var(--slate,#5a7184);font-size:12.5px", text: "Hospital: " + (hosp.hospitalName || hosp.hospitalId) }));
@@ -245,14 +246,28 @@
       var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } }, [
         h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })
       ]);
+      // DPDP §9: enrolling a minor routes ALL messaging to a guardian's phone.
+      var guardianField = h("div", { "class": "fc-field", style: "display:none" }, [h("label", { text: "Guardian's mobile number" }), h("input", { type: "tel", inputmode: "numeric", placeholder: "Guardian mobile (required for a minor)", oninput: function (e) { form.guardianPhone = e.target.value; } })]);
+      var minor = h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:12px" }, [
+        h("input", { type: "checkbox", onchange: function (e) { form.isMinor = e.target.checked; guardianField.style.display = e.target.checked ? "block" : "none"; } }),
+        document.createTextNode("Patient is a minor (guardian consent)")
+      ]);
+      // DPDP §5/§6: the doctor attests notice was given + the patient consented before we message them.
+      var consent = h("label", { style: "display:flex;align-items:flex-start;gap:8px;font-size:13px;margin:6px 0 14px;color:var(--slate,#5a7184)" }, [
+        h("input", { type: "checkbox", onchange: function (e) { form.consentAttested = e.target.checked; } }),
+        document.createTextNode("I confirm the patient (or guardian) was informed about these recovery check-in messages and consented.")
+      ]);
       var out = h("div");
       var submit = h("button", { "class": "fc-btn", text: "Create recovery link" });
       submit.addEventListener("click", function () {
         errBox.innerHTML = "";
         var v = validateEnroll(form, PATHWAYS ? { get: function (id) { return PATHWAYS.filter(function (p) { return p.id === id; })[0]; } } : null);
         if (!v.ok) { Object.keys(v.errors).forEach(function (k) { errBox.appendChild(h("div", { "class": "fc-err", text: v.errors[k] })); }); return; }
+        if (!form.consentAttested) { errBox.appendChild(h("div", { "class": "fc-err", text: enrollError("consent_required") })); return; }
+        if (form.isMinor && String(form.guardianPhone).replace(/[^\d]/g, "").length < 10) { errBox.appendChild(h("div", { "class": "fc-err", text: enrollError("guardian_required") })); return; }
+        var payload = Object.assign({}, v.value, { consentAttested: true, isMinor: form.isMinor, guardianPhone: form.guardianPhone });
         submit.disabled = true; submit.textContent = "Creating…";
-        API.enroll(v.value).then(function (res) {
+        API.enroll(payload).then(function (res) {
           submit.disabled = false; submit.textContent = "Create recovery link";
           if (res.body && res.body.ok && res.body.link) {
             out.innerHTML = "";
@@ -264,12 +279,13 @@
         }).catch(function () { submit.disabled = false; submit.textContent = "Create recovery link"; errBox.appendChild(h("div", { "class": "fc-err", text: "Could not create the link. Check your connection." })); });
       });
       [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field("Patient's language", lang)].forEach(function (f) { body.appendChild(f); });
+      body.appendChild(minor); body.appendChild(guardianField); body.appendChild(consent);
       body.appendChild(errBox); body.appendChild(submit); body.appendChild(out);
     });
   }
   function field(label, input) { return h("div", { "class": "fc-field" }, [h("label", { text: label }), input]); }
   function enrollError(code) {
-    var M = { bad_pathway: "Please choose a valid recovery pathway.", bad_phone: "Please enter a valid mobile number.", missing_tenant: "Missing hospital. Please set your hospital first.", missing_hospitalId: "Missing hospital. Please set your hospital first.", hospital_not_set: "Please set your hospital before enrolling patients.", hospital_mismatch: "That hospital does not match your account.", signin_required: "Please sign in to enroll a patient." };
+    var M = { bad_pathway: "Please choose a valid recovery pathway.", bad_phone: "Please enter a valid mobile number.", missing_tenant: "Missing hospital. Please set your hospital first.", missing_hospitalId: "Missing hospital. Please set your hospital first.", hospital_not_set: "Please set your hospital before enrolling patients.", hospital_mismatch: "That hospital does not match your account.", consent_required: "Please confirm the patient was informed and consented.", guardian_required: "Enter the guardian's mobile number for a minor.", signin_required: "Please sign in to enroll a patient." };
     return M[code] || "Could not create the recovery link.";
   }
   function shareLink(link) {
@@ -311,6 +327,13 @@
       var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px", text: "Revoke patient link" });
       rev.addEventListener("click", function () { API.revoke(episodeId).then(function () { toast("Link revoked"); }); });
       body.appendChild(rev);
+      // Right-to-erasure: permanently delete this patient's episode + all check-in data.
+      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
+      er.addEventListener("click", function () {
+        if (!(G.confirm && confirm("Permanently delete this patient's recovery episode and all check-ins? This cannot be undone."))) return;
+        er.disabled = true; API.erase(episodeId).then(function () { toast("Patient data deleted"); open(); });
+      });
+      body.appendChild(er);
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the episode." })); });
   }
 

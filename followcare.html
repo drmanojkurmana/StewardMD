@@ -130,7 +130,8 @@
       thanks_t: "Thank you", thanks_b: "Thanks for your check-in. Please keep following your instructions and taking your medicines.", green_b: "You appear to be recovering well. Please continue your medicines and instructions.",
       contact_t: "Please contact your care team", contact_b: "Some of your answers need a closer look. Please contact your treating team today. If you feel much worse, seek medical care sooner.",
       seek_t: "Please seek care now", seek_emerg: "Based on your answers, you should be seen urgently. Please go to the nearest emergency department or call your local emergency number now. Your care team is being notified.", call: "Call 112",
-      sendErr: "Something went wrong sending your check-in. Please try again.", connSend: "Connection problem. Please check your internet and try again."
+      sendErr: "Something went wrong sending your check-in. Please try again.", connSend: "Connection problem. Please check your internet and try again.",
+      forget: "Stop check-ins & delete my data", forget_confirm: "Stop these recovery check-ins and permanently delete your information? This cannot be undone.", forget_done_t: "Your data has been deleted", forget_done_b: "You will not receive any more check-ins. Take care — contact your care team if you feel unwell."
     },
     hi: {
       title: "आपका रिकवरी चेक-इन", lead: "यह आपका रिकवरी चेक-इन है{d}। इसमें एक मिनट लगता है। कृपया पिछले एक दिन के बारे में सच्चाई से उत्तर दें।",
@@ -146,7 +147,8 @@
       thanks_t: "धन्यवाद", thanks_b: "आपके चेक-इन के लिए धन्यवाद। कृपया अपने निर्देशों का पालन करते रहें और दवाइयाँ लेते रहें।", green_b: "ऐसा लगता है कि आप अच्छे से ठीक हो रहे हैं। कृपया अपनी दवाइयाँ और निर्देश जारी रखें।",
       contact_t: "कृपया अपनी टीम से संपर्क करें", contact_b: "आपके कुछ उत्तरों पर ध्यान देने की ज़रूरत है। कृपया आज ही अपनी टीम से संपर्क करें। यदि तबियत ज़्यादा बिगड़े तो जल्दी इलाज लें।",
       seek_t: "कृपया अभी इलाज लें", seek_emerg: "आपके उत्तरों के आधार पर आपको तुरंत दिखाना चाहिए। कृपया नज़दीकी आपातकालीन विभाग जाएं या आपातकालीन नंबर पर कॉल करें। आपकी टीम को सूचित किया जा रहा है।", call: "112 पर कॉल करें",
-      sendErr: "चेक-इन भेजने में समस्या हुई। कृपया फिर से प्रयास करें।", connSend: "कनेक्शन समस्या। कृपया इंटरनेट जांचें।"
+      sendErr: "चेक-इन भेजने में समस्या हुई। कृपया फिर से प्रयास करें।", connSend: "कनेक्शन समस्या। कृपया इंटरनेट जांचें।",
+      forget: "चेक-इन बंद करें और मेरा डेटा हटाएं", forget_confirm: "क्या आप ये रिकवरी चेक-इन बंद करके अपनी जानकारी हमेशा के लिए हटाना चाहते हैं? यह वापस नहीं होगा।", forget_done_t: "आपका डेटा हटा दिया गया", forget_done_b: "अब आपको और चेक-इन नहीं मिलेंगे। अपना ध्यान रखें — तबियत ठीक न लगे तो अपनी टीम से संपर्क करें।"
     }
   };
   function t(k){ var d = I18N[LANG] || I18N.en; return (d[k] != null ? d[k] : I18N.en[k]) || ""; }
@@ -216,6 +218,17 @@
     frm.appendChild(submit);
     frm.appendChild(el('<p class="foot" id="ferr" role="alert"></p>'));
     submit.addEventListener("click", onSubmit);
+    // Patient opt-out + right-to-erasure (no login needed).
+    var forget = el('<p style="text-align:center;margin-top:16px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">'+esc(t("forget"))+'</a></p>');
+    forget.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); forgetMe(); });
+    main.appendChild(forget);
+  }
+
+  function forgetMe(){
+    if(!(window.confirm && confirm(t("forget_confirm")))) return;
+    fetchJSON(API+"/forget", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ t:token }) })
+      .then(function(){ screenMessage("🗑️", t("forget_done_t"), t("forget_done_b"), "r-green"); })
+      .catch(function(){ screenMessage("📶", t("conn_t"), t("conn_b"), ""); });
   }
 
   function renderQ(q){

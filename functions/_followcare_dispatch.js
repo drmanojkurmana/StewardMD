@@ -12,7 +12,7 @@
  * fan-out (documented scale path — not stubbed here). The AI never changes therapy; this only sends reminders.
  */
 import { fsQuery, wUpdate, fsCommit } from "./_fbfirestore.js";
-import { getEpisode, decPHI, linkFor, recordDelivery, audit } from "./_followcare.js";
+import { getEpisode, decPHI, linkFor, recordDelivery, audit, eraseEpisode } from "./_followcare.js";
 import { sendSms } from "./_followcare_sms.js";
 import Engine from "../followcare-engine.js";
 import Pathways from "../followcare-pathways.js";
@@ -63,10 +63,12 @@ export function messageBody(firstName, link, lang, kind) {
 
 // ---- send one check-in link -------------------------------------------------------------
 export async function sendCheckinLink(env, ep, kind) {
+  // A minor's messages go to the GUARDIAN (DPDP §9), with a generic greeting (never the child's name).
+  const recipientEnc = ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc;
   let firstName = "";
-  try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {}
+  if (!ep.isMinor) { try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {} }
   let phone = "";
-  try { phone = await decPHI(env, ep._phi.phoneEnc); } catch (e) {}
+  try { phone = await decPHI(env, recipientEnc); } catch (e) {}
   if (!phone) return { ok: false, reason: "no_phone" };
   const link = await linkFor(env, ep);
   const body = messageBody(firstName, link, ep.lang || "en", kind || "send");
@@ -74,11 +76,13 @@ export async function sendCheckinLink(env, ep, kind) {
   await recordDelivery(env, {
     episodeId: ep.episodeId, hospitalId: ep.hospitalId, channel: "sms",
     toMasked: maskPhone(phone), status: res.ok ? "sent" : (res.skipped ? "skipped" : "failed"),
-    providerId: res.providerId || "", error: res.ok ? "" : (res.reason || res.detail || ""),
+    // Redact any phone number the provider may echo in its error body before it reaches the delivery log.
+    providerId: res.providerId || "", error: res.ok ? "" : redactDigits(res.reason || res.detail || ""),
   });
   return res;
 }
-function maskPhone(p) { const d = String(p).replace(/[^\d]/g, ""); return d.length >= 4 ? ("•••••" + d.slice(-4)) : "••••"; }
+export function maskPhone(p) { const d = String(p).replace(/[^\d]/g, ""); return d.length >= 4 ? ("•••••" + d.slice(-4)) : "••••"; }
+export function redactDigits(s) { return String(s == null ? "" : s).replace(/\d{7,}/g, "•••").slice(0, 200); }
 
 // ---- daily scheduler --------------------------------------------------------------------
 // Scans ACTIVE episodes and dispatches. notify(ep, level) is an optional de-identified clinician ping
@@ -121,6 +125,21 @@ export async function runScheduler(env, nowMs, opts) {
           if (notify) { try { await notify(ep, level); } catch (e) {} }
         }
       }
+    }
+  }
+
+  // Retention (DPDP §8(7)): once follow-up is done, delete the patient's data after a bounded period.
+  // OFF by default (0) so nothing is ever surprise-deleted; the owner sets FOLLOWCARE_RETENTION_DAYS to opt in.
+  const retDays = Number(env.FOLLOWCARE_RETENTION_DAYS) || 0;
+  if (retDays > 0) {
+    summary.retentionErased = 0;
+    const cutoff = nowMs - retDays * DAY;
+    const doneRows = (await fsQuery(env, "fc_episodes", { where: { field: "status", value: "recovered" }, limit: cap }))
+      .concat(await fsQuery(env, "fc_episodes", { where: { field: "status", value: "closed" }, limit: cap }));
+    for (const d of doneRows) {
+      const f = d.fields || {};
+      const doneMs = f.recoveredMs || f.createdMs || 0;
+      if (doneMs && doneMs < cutoff) { await eraseEpisode(env, d.id, "system:retention"); summary.retentionErased++; }
     }
   }
   return summary;
