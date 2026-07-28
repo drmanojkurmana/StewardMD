@@ -237,6 +237,19 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // ── FollowCare AI (functions/_followcare.js) — server-only, PHI ───────────
+    // Episodes, per-day assessments, the append-only audit + delivery logs, and the doctor→hospital
+    // binding are managed ENTIRELY server-side via the Firebase service account (which BYPASSES these
+    // rules). No client ever touches them directly — the app talks to /api/followcare/* and patients
+    // reach their data only through an opaque signed link token. These hold PHI (encrypted at rest) and
+    // clinical answers, so we DENY them explicitly (not just via the catch-all) — a future rule edit must
+    // never be able to expose a patient's recovery data or let a client forge an episode/assessment.
+    match /fc_episodes/{episodeId}   { allow read, write: if false; }
+    match /fc_assessments/{docId}    { allow read, write: if false; }
+    match /fc_events/{eventId}       { allow read, write: if false; }
+    match /fc_delivery/{deliveryId}  { allow read, write: if false; }
+    match /fc_doctors/{uid}          { allow read, write: if false; }
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;
