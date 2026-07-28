@@ -135,10 +135,15 @@ async function getDemographics(env, token, patientId, recordNo) {
     await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
     await raw(jar, 'GET', GHIS + '/Doctor/Home/CheckSession', null, extra);
   }
-  // Step 3 — the assessment form (now authorised); pull ONLY the primary contact number.
+  // Step 3 — the assessment form; pull ONLY the primary contact number.
+  // BEST-EFFORT: GetInitialAssessmentnew currently 302s from a server-side session even after warm-up +
+  // Searchnew + CheckSession through a shared jar (GHIS binds the assessment view to the full interactive
+  // browser session / Cloudflare clearance the proxy can't fully reproduce). It therefore returns an EMPTY
+  // phone rather than erroring, and is intentionally NOT wired into the FollowCare enrol flow — the doctor
+  // enters the mobile once at enrolment. Left in place for if/when GHIS server-side access is solved.
   const r = await raw(jar, 'GET', GHIS + '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, extra);
   const is302 = r.status >= 300 && r.status < 400;
-  return { phone: is302 ? '' : extractPrimaryContact(r.body || ''), _form: r.status, _len: (r.body || '').length };
+  return { phone: is302 ? '' : extractPrimaryContact(r.body || '') };
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
