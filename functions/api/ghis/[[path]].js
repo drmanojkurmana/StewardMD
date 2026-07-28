@@ -131,8 +131,9 @@ async function getDemographics(env, token, patientId, recordNo) {
   // a patient — GetInitialAssessmentnew appears to require that server-side page state). SAME jar throughout.
   await follow(jar, await raw(jar, 'GET', GHIS + '/Doctor/home', null, extra));
   // Step 1 — select this patient (Searchnew) + Step 2 CheckSession (mirrors the browser sequence).
+  let sr = {};
   if (recordNo) {
-    await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
+    sr = await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
     await raw(jar, 'GET', GHIS + '/Doctor/Home/CheckSession', null, extra);
   }
   // Step 3 — the assessment form; pull ONLY the primary contact number.
@@ -143,7 +144,9 @@ async function getDemographics(env, token, patientId, recordNo) {
   // enters the mobile once at enrolment. Left in place for if/when GHIS server-side access is solved.
   const r = await raw(jar, 'GET', GHIS + '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, extra);
   const is302 = r.status >= 300 && r.status < 400;
-  return { phone: is302 ? '' : extractPrimaryContact(r.body || '') };
+  return { phone: is302 ? '' : extractPrimaryContact(r.body || ''),
+    _s: sr.status || '-', _sLoc: (sr.location || '').slice(0, 90), _sLen: (sr.body || '').length, _sHas: /error|invalid|not\s*found|success|true/i.test(sr.body || '') ? (sr.body || '').match(/error|invalid|not\s*found|success|true/i)[0] : '',
+    _f: r.status, _fLoc: (r.location || '').slice(0, 120) };
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
