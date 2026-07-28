@@ -124,15 +124,17 @@ async function getDemographics(env, token, patientId, recordNo) {
   if (!patientId) return { phone: '' };
   // Step 1 — select this patient into the GHIS session (POST Searchnew with recordNo=<MR>-<IPMR episode> +
   // the antiforgery token). WITHOUT this, GetInitialAssessmentnew 302s (session has no selected patient).
+  let sr = { skipped: true };
   if (recordNo) {
-    await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew',
+    sr = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew',
       '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo),
       { 'X-Requested-With': 'XMLHttpRequest' });
   }
   // Step 2 — fetch that patient's assessment form (now authorised) and pull ONLY the primary contact number.
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (r.unauth) return r;
-  return { phone: extractPrimaryContact(r.body || '') };
+  const dbg = { _search: sr.unauth ? '302' : (sr.skipped ? 'skip' : (sr.status || '?')), _form: r.unauth ? '302' : (r.status || '?'), _len: r.body ? r.body.length : 0, _csrf: (s.csrf || '').length };
+  if (r.unauth) return Object.assign({ phone: '' }, dbg);
+  return Object.assign({ phone: extractPrimaryContact(r.body || '') }, dbg);
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
