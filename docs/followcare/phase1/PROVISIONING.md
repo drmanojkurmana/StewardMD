@@ -56,8 +56,13 @@ Set these on the **Pages** project (Settings → Environment variables → Produ
 
 ### SMS provider — pick ONE (leave unset to run link-generation without auto-send)
 
-`FOLLOWCARE_SMS_PROVIDER` = `msg91` | `twilio` | `gupshup`
+`FOLLOWCARE_SMS_PROVIDER` = `twofactor` | `msg91` | `twilio` | `gupshup`
 
+- **twofactor** (2Factor.in, India, DLT Transactional SMS): `TWOFACTOR_API_KEY` (secret), `TWOFACTOR_SENDER`
+  (your DLT header, e.g. 6 chars), `TWOFACTOR_TEMPLATE_CHECKIN` (the DLT-approved **template name** in your
+  2Factor account). The check-in text is defined by that template and filled from VAR1 = patient first name,
+  VAR2 = the opaque link. Register a transactional template whose body contains those two variables + your
+  link domain (DLT requires the URL/header be pre-approved). Uses your **Transactional SMS** balance.
 - **msg91** (India, DLT): `MSG91_AUTHKEY`, `MSG91_SENDER` (6-char header), `MSG91_TEMPLATE_CHECKIN`
   (DLT-approved flow/template id). The message text is defined by the approved template; it is filled
   from variables — map your template variables to `var1` = patient first name, `var2` = link (the code

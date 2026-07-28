@@ -60,6 +60,9 @@ test("SMS: provider is honestly OFF until configured (never fakes a send)", () =
   assert.equal(smsConfigured({ FOLLOWCARE_SMS_PROVIDER: "msg91" }), false);            // creds missing
   assert.equal(smsConfigured({ FOLLOWCARE_SMS_PROVIDER: "msg91", MSG91_AUTHKEY: "k", MSG91_TEMPLATE_CHECKIN: "t" }), true);
   assert.equal(smsConfigured({ FOLLOWCARE_SMS_PROVIDER: "twilio", TWILIO_SID: "s", TWILIO_AUTH_TOKEN: "a", TWILIO_FROM: "+1" }), true);
+  // 2Factor.in (India DLT transactional SMS) — needs key + sender + template
+  assert.equal(smsConfigured({ FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_API_KEY: "k", TWOFACTOR_SENDER: "STWMED", TWOFACTOR_TEMPLATE_CHECKIN: "tpl" }), true);
+  assert.equal(smsConfigured({ FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_API_KEY: "k" }), false);
 });
 
 test("HIPAA I-2: a phone number echoed in a provider error is redacted before it hits the delivery log", () => {

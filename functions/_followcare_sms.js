@@ -10,7 +10,8 @@
  * the composed `body` directly. No PHI beyond the patient's first name + the opaque link ever leaves here.
  *
  * Env (owner provisions ONE provider):
- *   FOLLOWCARE_SMS_PROVIDER = "msg91" | "twilio" | "gupshup" | "" (off)
+ *   FOLLOWCARE_SMS_PROVIDER = "twofactor" | "msg91" | "twilio" | "gupshup" | "" (off)
+ *   twofactor: TWOFACTOR_API_KEY, TWOFACTOR_SENDER (DLT header), TWOFACTOR_TEMPLATE_CHECKIN (DLT template name)
  *   msg91:   MSG91_AUTHKEY, MSG91_SENDER (6-char header), MSG91_TEMPLATE_CHECKIN (DLT flow/template id)
  *   twilio:  TWILIO_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM (E.164)
  *   gupshup: GUPSHUP_API_KEY, GUPSHUP_SOURCE
@@ -19,6 +20,7 @@
 export function smsProvider(env) { return String((env && env.FOLLOWCARE_SMS_PROVIDER) || "").toLowerCase().trim(); }
 export function smsConfigured(env) {
   var p = smsProvider(env);
+  if (p === "twofactor") return !!(env.TWOFACTOR_API_KEY && env.TWOFACTOR_SENDER && env.TWOFACTOR_TEMPLATE_CHECKIN);
   if (p === "msg91") return !!(env.MSG91_AUTHKEY && env.MSG91_TEMPLATE_CHECKIN);
   if (p === "twilio") return !!(env.TWILIO_SID && env.TWILIO_AUTH_TOKEN && env.TWILIO_FROM);
   if (p === "gupshup") return !!(env.GUPSHUP_API_KEY && env.GUPSHUP_SOURCE);
@@ -42,6 +44,7 @@ export async function sendSms(env, msg) {
   var to = toDialable(msg.toE164, env.FOLLOWCARE_DEFAULT_CC);
   if (!to || to.length < 10) return { ok: false, reason: "bad_number" };
   try {
+    if (p === "twofactor") return await sendTwoFactor(env, to, msg);
     if (p === "msg91") return await sendMsg91(env, to, msg);
     if (p === "twilio") return await sendTwilio(env, to, msg);
     if (p === "gupshup") return await sendGupshup(env, to, msg);
@@ -50,6 +53,26 @@ export async function sendSms(env, msg) {
     return { ok: false, reason: "exception" };
   }
   return { ok: false, reason: "unknown_provider" };
+}
+
+// ---- 2Factor.in (India DLT Transactional-SMS API) --------------------------------------
+// Sends via 2Factor's ADDON_SERVICES Transactional SMS: the message text comes from the DLT-approved
+// TemplateName, filled from VAR1/VAR2 (VAR1=patient first name, VAR2=the opaque link). To = 10-digit
+// Indian mobile. Response { Status:"Success"|... }. The API key lives only in the TWOFACTOR_API_KEY secret.
+async function sendTwoFactor(env, to, msg) {
+  var vars = msg.vars || {};
+  var to10 = String(to).length > 10 ? String(to).slice(-10) : String(to);   // 2Factor TSMS uses the 10-digit number
+  var form = new URLSearchParams();
+  form.set("From", env.TWOFACTOR_SENDER);
+  form.set("To", to10);
+  form.set("TemplateName", env.TWOFACTOR_TEMPLATE_CHECKIN);
+  form.set("VAR1", String(vars.var1 != null ? vars.var1 : (vars.name || "")));
+  form.set("VAR2", String(vars.var2 != null ? vars.var2 : (vars.link || "")));
+  var url = "https://2factor.in/API/V1/" + encodeURIComponent(env.TWOFACTOR_API_KEY) + "/ADDON_SERVICES/SEND/TSMS";
+  var r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: form.toString() });
+  var text = await r.text(); var j = {}; try { j = JSON.parse(text); } catch (e) {}
+  var ok = r.ok && (j.Status ? String(j.Status).toLowerCase() === "success" : false);
+  return { ok: !!ok, providerId: (j.Details || null), status: r.status, detail: ok ? null : text.slice(0, 200) };
 }
 
 // ---- MSG91 (India DLT flow API) ---------------------------------------------------------
