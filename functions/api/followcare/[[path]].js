@@ -30,6 +30,7 @@ import { fcKv } from "../../_followcare.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
 import { runScheduler } from "../../_followcare_dispatch.js";
+import Analytics from "../../../followcare-analytics.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -106,6 +107,22 @@ export async function onRequest(context) {
       if (request.method === "POST" && seg === "run-scheduler") {
         const summary = await runScheduler(env, Date.now(), { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
         return json({ ok: true, summary }, 200, request);
+      }
+      // Phase 3 — hospital command-center analytics (owner-gated; NON-PHI aggregates only).
+      if (request.method === "GET" && seg === "analytics") {
+        const eps = await FC.listAllSummaries(env, url.searchParams.get("hospitalId") || "");
+        const now = Date.now();
+        return json({ analytics: {
+          commandCenter: Analytics.commandCenter(eps, now), rollup: Analytics.rollup(eps),
+          byDepartment: Analytics.byDepartment(eps), byDisease: Analytics.byDisease(eps),
+          quality: Analytics.quality(eps), executive: Analytics.executive(eps),
+          insights: Analytics.insights(eps), digest: Analytics.digest(eps, now),
+        } }, 200, request);
+      }
+      // CSV export (MODULE 16) — NON-PHI operational columns.
+      if (request.method === "GET" && seg === "report") {
+        const eps = await FC.listAllSummaries(env, url.searchParams.get("hospitalId") || "");
+        return new Response(Analytics.csv(eps), { status: 200, headers: Object.assign({ "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": "attachment; filename=followcare-report.csv", "Cache-Control": "no-store" }, corsHeaders(request)) });
       }
       return json({ error: "not_found" }, 404, request);
     }

@@ -179,6 +179,15 @@
       if (res.status === 401) { body.appendChild(h("div", { "class": "fc-empty", text: "Please sign in to use FollowCare." })); return; }
       var list = sortEpisodes((res.body && res.body.episodes) || []);
       var c = counts(list);
+      // Phase 3 — command-center strip (MODULE 1): the doctor's at-a-glance counts.
+      try {
+        if (G.FollowCareAnalytics) {
+          var cc = FollowCareAnalytics.commandCenter(list, (G.Date && Date.now) ? Date.now() : 0);
+          body.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+            ccBox(cc.active, "Active"), ccBox(cc.needReview, "Need review"), ccBox(cc.highRisk, "High risk"), ccBox(cc.recoveredToday, "Recovered today")
+          ]));
+        }
+      } catch (e) {}
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
@@ -188,6 +197,7 @@
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
   }
   function pill(text, meta) { return h("span", { "class": "fc-pill", style: "background:" + meta.bg + ";color:" + meta.color, text: text }); }
+  function ccBox(n, label) { return h("div", { style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:20px;font-weight:800;color:#0e6e63", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
   function episodeRow(ep) {
     var m = escalationMeta(ep.escalation);
     return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [

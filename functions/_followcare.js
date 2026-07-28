@@ -157,12 +157,19 @@ export function episodeSummary(ep) {
   if (!ep) return null;
   const board = worstEsc(ep.peakEscalation || "", ep.lastEscalation || "");
   return {
-    episodeId: ep.episodeId, disease: ep.disease, pathwayId: ep.pathwayId, status: ep.status,
-    dischargeMs: ep.dischargeMs, lastDayDone: ep.lastDayDone, nextDueMs: ep.nextDueMs,
+    episodeId: ep.episodeId, disease: ep.disease, pathwayId: ep.pathwayId, specialty: (Pathways.get(ep.pathwayId) || {}).specialty || "",
+    status: ep.status, dischargeMs: ep.dischargeMs, createdMs: ep.createdMs, lastDayDone: ep.lastDayDone, nextDueMs: ep.nextDueMs,
     escalation: board, currentEscalation: ep.lastEscalation, score: ep.lastScore, confidence: ep.lastConfidence,
     risk: ep.lastRisk, trend: ep.lastTrend, riskPercent: AI.riskPercent({ readmissionRisk: ep.lastRisk, recoveryScore: ep.lastScore, trend: ep.lastTrend, confidence: ep.lastConfidence, escalation: ep.lastEscalation }),
     needsReview: !!ep.needsReview, recoveredMs: ep.recoveredMs,
   };
+}
+// All episode summaries for a hospital (or the whole tenant set) — feeds the Phase-3 analytics/dashboards.
+export async function listAllSummaries(env, hospitalId) {
+  const rows = hospitalId
+    ? await fsQuery(env, "fc_episodes", { where: { field: "hospitalId", value: hospitalId }, limit: 2000 })
+    : await fsQuery(env, "fc_episodes", { limit: 2000 });
+  return rows.map(function (d) { return episodeSummary(toEpisode(d)); });
 }
 
 // Questions a patient MUST answer for a submit to score (server-enforced, not just in the browser): the
