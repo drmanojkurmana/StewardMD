@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Recovery check-in · StewardMD</title>
+<meta name="description" content="Your hospital recovery check-in.">
+<meta name="theme-color" content="#0e6e63">
+<meta name="robots" content="noindex, nofollow">
+<!--
+  FollowCare AI — patient recovery portal (Phase 1).
+  A self-contained, login-free, install-free page a discharged patient opens from an SMS/email link
+  (…/followcare?t=<opaque token>). It renders the day's check-in from /api/followcare/portal, submits to
+  /api/followcare/submit, and shows a SAFE, engine-decided message. It NEVER diagnoses, NEVER changes any
+  medicine, and on a red flag always tells the patient to seek urgent in-person care. No PHI is in the URL
+  (only the opaque token); no analytics; no third-party requests. Accessible: labels, roles, large targets,
+  reduced-motion aware, high-contrast, works dark + light.
+-->
+<style>
+  :root{
+    --teal:#0e6e63; --teal-2:#0b574e; --teal-ink:#08463e;
+    --ink:#14202b; --slate:#5a7184; --paper:#f4f7f6; --panel:#ffffff; --line:#dbe4e2;
+    --green:#127a52; --green-bg:#e7f6ee; --amber:#8a5a00; --amber-bg:#fdf1dc;
+    --red:#b3261e; --red-bg:#fdeceb; --focus:#0a7f72;
+    --shadow:0 20px 50px -30px rgba(0,0,0,.4);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --teal:#3fc7b3; --teal-2:#2fae9b; --teal-ink:#bff1e8;
+      --ink:#e8edf2; --slate:#9bb0c2; --paper:#0c1922; --panel:#132030; --line:#294050;
+      --green:#5fd39b; --green-bg:#0f2b22; --amber:#f0c274; --amber-bg:#2e2410;
+      --red:#ff8a80; --red-bg:#3a1614; --focus:#7fe0d2;
+      --shadow:0 20px 50px -30px rgba(0,0,0,.7);
+    }
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; min-height:100%; }
+  body{
+    font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    background:radial-gradient(1000px 500px at 50% -10%, color-mix(in srgb, var(--teal) 12%, transparent), transparent 60%), var(--paper);
+    color:var(--ink); -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  .wrap{ max-width:640px; margin:0 auto; padding:20px 16px 48px; }
+  header.top{ display:flex; align-items:center; gap:10px; padding:8px 2px 18px; }
+  .logo{ width:38px; height:38px; border-radius:10px; background:var(--teal); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:15px; letter-spacing:-.02em; flex:0 0 auto; }
+  .brand{ font-weight:800; font-size:16px; letter-spacing:-.01em; }
+  .brand span{ color:var(--teal); }
+  .sub{ margin-left:auto; font-size:12px; color:var(--slate); }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:22px 20px; margin-bottom:16px; }
+  h1{ font-size:1.35rem; margin:0 0 4px; letter-spacing:-.01em; }
+  .lead{ color:var(--slate); font-size:.98rem; margin:0 0 4px; }
+  .q{ padding:16px 0; border-top:1px solid var(--line); }
+  .q:first-of-type{ border-top:none; }
+  .q-label{ font-weight:650; font-size:1.02rem; margin:0 0 12px; display:block; }
+  .q-unit{ color:var(--slate); font-weight:500; font-size:.85rem; }
+  .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+  .opt{ appearance:none; border:1.5px solid var(--line); background:var(--panel); color:var(--ink); border-radius:12px; padding:11px 15px; font-size:.98rem; cursor:pointer; min-height:46px; flex:1 1 auto; text-align:center; transition:border-color .12s, background .12s; }
+  .opt:hover{ border-color:var(--teal); }
+  .opt[aria-pressed="true"]{ border-color:var(--teal); background:color-mix(in srgb, var(--teal) 14%, var(--panel)); color:var(--teal-ink); font-weight:650; }
+  .scale{ display:grid; grid-template-columns:repeat(auto-fit, minmax(40px,1fr)); gap:6px; }
+  .scale .opt{ padding:11px 0; min-width:0; }
+  .scale-ends{ display:flex; justify-content:space-between; font-size:.78rem; color:var(--slate); margin-top:6px; }
+  input[type="number"]{ width:100%; font-size:1.05rem; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--panel); color:var(--ink); min-height:48px; }
+  input[type="number"]:focus, .opt:focus-visible, button:focus-visible{ outline:3px solid var(--focus); outline-offset:2px; }
+  .cta{ width:100%; border:none; border-radius:14px; background:var(--teal); color:#fff; font-weight:750; font-size:1.05rem; padding:15px; min-height:52px; cursor:pointer; }
+  .cta:hover{ background:var(--teal-2); }
+  .cta:disabled{ opacity:.55; cursor:progress; }
+  .foot{ text-align:center; color:var(--slate); font-size:.76rem; line-height:1.6; margin-top:6px; }
+  .note{ background:var(--amber-bg); color:var(--amber); border-radius:12px; padding:12px 14px; font-size:.9rem; margin-top:14px; }
+  /* result states */
+  .result{ text-align:center; padding:8px 4px 4px; }
+  .result .ic{ width:64px; height:64px; border-radius:50%; margin:6px auto 14px; display:flex; align-items:center; justify-content:center; font-size:30px; }
+  .r-green .ic{ background:var(--green-bg); color:var(--green); }
+  .r-amber .ic{ background:var(--amber-bg); color:var(--amber); }
+  .r-red .ic{ background:var(--red-bg); color:var(--red); }
+  .result h1{ margin-bottom:8px; }
+  .result p{ color:var(--ink); font-size:1.02rem; }
+  .emergency{ background:var(--red-bg); color:var(--red); border:1.5px solid color-mix(in srgb, var(--red) 40%, transparent); border-radius:14px; padding:16px; margin-top:16px; font-weight:600; }
+  .call{ display:inline-flex; align-items:center; gap:8px; margin-top:12px; background:var(--red); color:#fff; text-decoration:none; font-weight:750; padding:13px 20px; border-radius:12px; min-height:48px; }
+  .spinner{ width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite;margin:24px auto; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .spinner{ animation:none; } *{ transition:none !important; } }
+  .hidden{ display:none !important; }
+  .err-icon{ font-size:34px; }
+  .disclaimer{ font-size:.72rem; color:var(--slate); margin-top:18px; text-align:center; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo" aria-hidden="true">SM</div>
+    <div class="brand">Steward<span>MD</span></div>
+    <div class="sub" id="sub"></div>
+  </header>
+
+  <main id="main" aria-live="polite">
+    <div class="card"><div class="spinner" role="status" aria-label="Loading your check-in"></div></div>
+  </main>
+
+  <p class="disclaimer">This recovery check-in supports your care team. It does not replace medical advice and never changes your medicines. If you feel unwell, contact your doctor or local emergency services.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var API = "/api/followcare";
+  var main = document.getElementById("main");
+  var subEl = document.getElementById("sub");
+  var token = new URLSearchParams(location.search).get("t") || "";
+  var ctx = null;                 // portal context from the server
+  var answers = {};               // id -> value
+
+  function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+  function clear(){ while(main.firstChild) main.removeChild(main.firstChild); }
+
+  function screenMessage(icon, title, body, cls){
+    clear();
+    main.appendChild(el(
+      '<div class="card result '+(cls||"")+'">'+
+        '<div class="ic" aria-hidden="true">'+icon+'</div>'+
+        '<h1>'+esc(title)+'</h1>'+
+        '<p>'+esc(body)+'</p>'+
+      '</div>'
+    ));
+  }
+
+  function fetchJSON(url, opts){
+    return fetch(url, opts).then(function(r){ return r.json().then(function(j){ return { status:r.status, body:j }; }); });
+  }
+
+  // ---- load today's check-in ----
+  function load(){
+    if(!token){ return screenMessage("🔗","Link not valid","This recovery link is missing information. Please use the exact link we sent you.",""); }
+    fetchJSON(API+"/portal?t="+encodeURIComponent(token))
+      .then(function(res){
+        var b = res.body || {};
+        if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛","Link expired","This check-in link has expired. Your care team can send you a new one.",""); }
+        if(!b.ok){
+          if(b.error==="closed"){ return screenMessage("✅","All done","Your recovery follow-up is complete. Thank you.","r-green"); }
+          return screenMessage("🔗","Link not valid","We couldn't open this check-in. Please use the exact link we sent you, or contact your care team.","");
+        }
+        ctx = b;
+        if(b.nothingDue){
+          if(b.recovered){ return screenMessage("🎉","You're all set","Your recovery follow-up is complete. Well done — if anything changes or you feel worse, please contact your care team.","r-green"); }
+          var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
+          var whenTxt = when ? (" on " + when.toLocaleDateString(undefined,{weekday:"long", month:"short", day:"numeric"})) : " soon";
+          return screenMessage("✅","No check-in due right now","Thanks — you're up to date. Your next recovery check-in opens" + whenTxt + ". If you feel worse before then, please contact your care team.","r-green");
+        }
+        renderForm();
+      })
+      .catch(function(){ screenMessage("📶","Connection problem","We couldn't load your check-in. Please check your internet connection and try again.",""); });
+  }
+
+  // ---- render the questionnaire ----
+  function renderForm(){
+    clear();
+    subEl.textContent = "Day " + ctx.dayOffset;
+    // Generic greeting only — a shared/forwarded link must never reveal the patient's name.
+    var head = el(
+      '<div class="card">'+
+        '<h1>Your recovery check-in</h1>'+
+        '<p class="lead">This is your recovery check-in'+(ctx.disease?(' after '+esc(ctx.disease)):'')+'. It takes about a minute. Please answer honestly for the last day.</p>'+
+        '<form id="frm"></form>'+
+      '</div>'
+    );
+    main.appendChild(head);
+    var frm = head.querySelector("#frm");
+    (ctx.questionnaire.questions||[]).forEach(function(q){ frm.appendChild(renderQ(q)); });
+
+    var submit = el('<button type="button" class="cta" id="send">Send my check-in</button>');
+    frm.appendChild(submit);
+    frm.appendChild(el('<p class="foot" id="ferr" role="alert"></p>'));
+    submit.addEventListener("click", onSubmit);
+  }
+
+  function renderQ(q){
+    var wrap = el('<div class="q"></div>');
+    var unit = q.unit ? (' <span class="q-unit">('+esc(q.unit)+')</span>') : "";
+    wrap.appendChild(el('<label class="q-label" id="lab_'+esc(q.id)+'">'+esc(q.text)+unit+'</label>'));
+
+    if(q.type==="yesno"){
+      wrap.appendChild(choiceRow(q.id, [{v:"no",t:"No"},{v:"yes",t:"Yes"}]));
+    } else if(q.type==="overall"){
+      wrap.appendChild(choiceRow(q.id, [{v:"better",t:"Better"},{v:"same",t:"About the same"},{v:"worse",t:"Worse"}]));
+    } else if(q.type==="choice" && q.options){
+      wrap.appendChild(choiceRow(q.id, q.options.map(function(o){ return { v:o, t:cap(o) }; })));
+    } else if(q.type==="scale"){
+      wrap.appendChild(scaleRow(q.id, 0, 10));
+      wrap.appendChild(el('<div class="scale-ends"><span>None</span><span>Worst</span></div>'));
+    } else if(q.type==="number"){
+      var inp = el('<input type="number" inputmode="decimal" step="any" aria-labelledby="lab_'+esc(q.id)+'">');
+      inp.addEventListener("input", function(){ answers[q.id] = inp.value===""? undefined : inp.value; });
+      wrap.appendChild(inp);
+    } else {
+      // default → free choice yes/no
+      wrap.appendChild(choiceRow(q.id, [{v:"no",t:"No"},{v:"yes",t:"Yes"}]));
+    }
+    return wrap;
+  }
+
+  function cap(s){ s=String(s); return s.charAt(0).toUpperCase()+s.slice(1); }
+
+  function choiceRow(id, opts){
+    var row = el('<div class="opts" role="group" aria-labelledby="lab_'+esc(id)+'"></div>');
+    opts.forEach(function(o){
+      var b = el('<button type="button" class="opt" aria-pressed="false" data-v="'+esc(o.v)+'">'+esc(o.t)+'</button>');
+      b.addEventListener("click", function(){
+        answers[id] = o.v;
+        Array.prototype.forEach.call(row.children, function(c){ c.setAttribute("aria-pressed", c===b?"true":"false"); });
+      });
+      row.appendChild(b);
+    });
+    return row;
+  }
+
+  function scaleRow(id, min, max){
+    var row = el('<div class="scale" role="group" aria-labelledby="lab_'+esc(id)+'"></div>');
+    for(var n=min;n<=max;n++){ (function(n){
+      var b = el('<button type="button" class="opt" aria-pressed="false">'+n+'</button>');
+      b.addEventListener("click", function(){
+        answers[id] = n;
+        Array.prototype.forEach.call(row.children, function(c){ c.setAttribute("aria-pressed", c===b?"true":"false"); });
+      });
+      row.appendChild(b);
+    })(n); }
+    return row;
+  }
+
+  // ---- submit ----
+  function onSubmit(){
+    var send = document.getElementById("send");
+    var ferr = document.getElementById("ferr");
+    ferr.textContent = "";
+    // Require the "overall" question + all global red-flag probes to be answered (safety: we must not
+    // score a check-in that skipped the emergency questions).
+    var required = (ctx.questionnaire.questions||[]).filter(function(q){ return q.id==="overall" || q.id.indexOf("g_")===0; });
+    var missing = required.filter(function(q){ return answers[q.id]===undefined || answers[q.id]===null || answers[q.id]===""; });
+    if(missing.length){ ferr.textContent = "Please answer the highlighted questions before sending."; return; }
+
+    send.disabled = true; send.textContent = "Sending…";
+    fetchJSON(API+"/submit", {
+      method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ t:token, answers:answers })
+    }).then(function(res){
+      var b = res.body || {};
+      if(res.status===410 || b.error==="link_expired"){ return screenMessage("⌛","Link expired","This check-in link has expired. Your care team can send you a new one.",""); }
+      if(!b.ok){
+        if(b.error==="already_submitted"){ return screenMessage("✅","Already received","We've already received today's check-in. Thank you.","r-green"); }
+        send.disabled=false; send.textContent="Send my check-in";
+        ferr.textContent = "Something went wrong sending your check-in. Please try again.";
+        return;
+      }
+      showResult(b);
+    }).catch(function(){
+      send.disabled=false; send.textContent="Send my check-in";
+      ferr.textContent = "Connection problem. Please check your internet and try again.";
+    });
+  }
+
+  // ---- engine-decided, safe result ----
+  function showResult(b){
+    var lvl = b.escalation || "green";
+    var msg = b.patientMessage || "Thank you for your check-in.";
+    if(lvl==="red"){
+      clear();
+      main.appendChild(el(
+        '<div class="card result r-red">'+
+          '<div class="ic" aria-hidden="true">⚠️</div>'+
+          '<h1>Please seek care now</h1>'+
+          '<p>'+esc(msg)+'</p>'+
+          '<div class="emergency">Based on your answers, you should be seen urgently. Please go to the nearest emergency department or call your local emergency number now. Your care team is being notified.</div>'+
+          '<a class="call" href="tel:112">📞 Call 112</a>'+
+        '</div>'
+      ));
+      return;
+    }
+    if(lvl==="orange"){
+      screenMessage("🟠","Please contact your care team", msg, "r-amber"); return;
+    }
+    if(b.recovered){
+      screenMessage("🎉","You're all set", msg + " Your follow-up is complete — well done on your recovery.", "r-green"); return;
+    }
+    screenMessage("✅","Thank you", msg, "r-green");
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

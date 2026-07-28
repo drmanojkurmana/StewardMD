@@ -29,6 +29,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { fcKv } from "../../_followcare.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
+import { runScheduler } from "../../_followcare_dispatch.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -99,6 +100,11 @@ export async function onRequest(context) {
         const hospitalId = url.searchParams.get("hospitalId") || "";
         return json({ stats: await adminStats(env, hospitalId) }, 200, request);
       }
+      // Cron/owner-triggered daily dispatch: send due check-in links + reminders, escalate missed check-ins.
+      if (request.method === "POST" && seg === "run-scheduler") {
+        const summary = await runScheduler(env, Date.now(), { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
+        return json({ ok: true, summary }, 200, request);
+      }
       return json({ error: "not_found" }, 404, request);
     }
 
@@ -133,11 +139,27 @@ export async function onRequest(context) {
     const uid = await callerUid(request, env);
     if (!uid) return json({ error: "signin_required" }, 401, request);
 
+    // The doctor's hospital binding (tenant authority). Set once, then used to scope every enroll.
+    if (seg === "hospital" && request.method === "GET") {
+      return json({ hospital: await FC.resolveDoctorHospital(env, uid) }, 200, request);
+    }
+    if (seg === "hospital" && request.method === "POST") {
+      const b = await readBody(request);
+      return json(await FC.setDoctorHospital(env, uid, { hospitalId: b.hospitalId, hospitalName: b.hospitalName }), 200, request);
+    }
+
     if (request.method === "POST" && seg === "enroll") {
       const b = await readBody(request);
-      if (!b.hospitalId) return json({ error: "missing_hospitalId" }, 400, request);
+      // Tenant authority: the hospital is resolved SERVER-SIDE from the doctor's uid-keyed binding, never
+      // taken from the request body (which would let a doctor enroll under any hospital). Owner may override.
+      const isOwner = await ownerOK(request, env);
+      const bind = await FC.resolveDoctorHospital(env, uid);
+      let hospitalId = bind && bind.hospitalId;
+      if (isOwner && b.hospitalId) hospitalId = b.hospitalId;
+      if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
+      if (b.hospitalId && !isOwner && b.hospitalId !== hospitalId) return json({ error: "hospital_mismatch" }, 403, request);
       const r = await FC.enrollEpisode(env, {
-        hospitalId: b.hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name, mrn: b.mrn,
+        hospitalId: hospitalId, doctorUid: uid, pathwayId: b.pathwayId, phone: b.phone, name: b.name, mrn: b.mrn,
         dischargeMs: b.dischargeMs, lang: b.lang, sendHour: b.sendHour, tz: b.tz,
       });
       return json(r, r.ok ? 200 : 400, request);
@@ -159,6 +181,13 @@ export async function onRequest(context) {
       if (!ep) return json({ error: "not_found" }, 404, request);
       if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
       return json(await FC.revokeLinks(env, b.episodeId, "doctor:" + uid), 200, request);
+    }
+    if (request.method === "POST" && seg === "ack") {
+      const b = await readBody(request);
+      const ep = await FC.getEpisode(env, b.episodeId);
+      if (!ep) return json({ error: "not_found" }, 404, request);
+      if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      return json(await FC.acknowledgeEpisode(env, b.episodeId, "doctor:" + uid), 200, request);
     }
 
     return json({ error: "not_found" }, 404, request);

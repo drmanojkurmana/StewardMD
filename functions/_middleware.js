@@ -148,8 +148,12 @@ export async function onRequest(context) {
   // require reachable Privacy, Terms and Support URLs, and public policy links must always resolve.
   // "delete-account" is the login-free account/data-deletion page required by Google Play & Apple —
   // it MUST resolve for the reviewer's crawler, so it can never be hidden behind the coming-soon gate.
+  // "followcare" is the login-free, install-free patient recovery-check-in portal (FollowCare AI): a
+  // discharged patient opens it from an SMS/email link (…/followcare?t=<opaque token>) and has no app,
+  // no account and no /realapp cookie, so it must resolve for anonymous visitors. It is safe to expose —
+  // it carries no PHI in the URL and its own /api/followcare/* endpoints self-authorise via the signed token.
   // Match both the clean URL (/privacy) and the .html form (/privacy.html), with or without slashes.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

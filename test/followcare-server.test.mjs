@@ -3,7 +3,7 @@
 // These are the security-critical primitives that keep patient links unguessable/revocable and PHI encrypted.
 import { test } from "node:test";
 import assert from "node:assert";
-import { signToken, verifyToken, episodeIdFromToken, encPHI, decPHI, patientKeyHash } from "../functions/_followcare.js";
+import { signToken, verifyToken, episodeIdFromToken, encPHI, decPHI, patientKeyHash, currentDueDay, nextScheduled, worstEsc } from "../functions/_followcare.js";
 
 const SECRET = "test-secret-at-least-16-chars-long-xxxxx";
 const KEY_B64URL = Buffer.from(new Uint8Array(32).fill(7)).toString("base64url"); // 32-byte AES key
@@ -68,6 +68,34 @@ test("PHI: two encryptions of the same value differ (random IV) but both decrypt
 
 test("PHI: missing key fails closed (throws) — never stores plaintext", async () => {
   await assert.rejects(() => encPHI({}, "secret-phone"), /phi_key_missing/);
+});
+
+// ---- security-review regression tests --------------------------------------------------
+const SCHED = [{ dayOffset: 1, dueAtMs: 100 }, { dayOffset: 2, dueAtMs: 200 }, { dayOffset: 3, dueAtMs: 300 }];
+
+test("REVIEW #1: currentDueDay never returns a FUTURE (not-yet-due) day — blocks schedule fast-forward", () => {
+  // fresh episode, now=150 → only day 1 is due (day 2/3 dueAt in the future)
+  assert.equal(currentDueDay({ schedule: SCHED, lastDayDone: -1 }, 150), 1);
+  // day 1 answered, now still 150 → day 2 NOT due yet → nothing due (patient cannot fast-forward)
+  assert.equal(currentDueDay({ schedule: SCHED, lastDayDone: 1 }, 150), null);
+  // day 1 answered, now=250 → day 2 now legitimately due
+  assert.equal(currentDueDay({ schedule: SCHED, lastDayDone: 1 }, 250), 2);
+  // all answered → nothing due
+  assert.equal(currentDueDay({ schedule: SCHED, lastDayDone: 3 }, 999), null);
+  // genuine overdue catch-up: away a long time, days 1+2 both overdue → earliest first
+  assert.equal(currentDueDay({ schedule: SCHED, lastDayDone: -1 }, 999), 1);
+});
+
+test("REVIEW #1: nextScheduled reports the next unanswered day for the 'opens on…' message", () => {
+  assert.equal(nextScheduled({ schedule: SCHED, lastDayDone: 1 }).dayOffset, 2);
+  assert.equal(nextScheduled({ schedule: SCHED, lastDayDone: 3 }), null);
+});
+
+test("REVIEW #1: worstEsc keeps a prior red visible on the board even after a later green", () => {
+  assert.equal(worstEsc("red", "green"), "red");     // a later green must NOT hide an earlier red
+  assert.equal(worstEsc("green", "orange"), "orange");
+  assert.equal(worstEsc("", "yellow"), "yellow");
+  assert.equal(worstEsc("green", "green"), "green");
 });
 
 test("patientKeyHash: stable, tenant-scoped, country-code-insensitive, non-reversible", async () => {
