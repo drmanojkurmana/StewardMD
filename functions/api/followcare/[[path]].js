@@ -29,7 +29,8 @@ import { ownerOK } from "../../_adminauth.js";
 import { fcKv } from "../../_followcare.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
-import { runScheduler } from "../../_followcare_dispatch.js";
+import { runScheduler, sendPatientMessage } from "../../_followcare_dispatch.js";
+import I18n from "../../../followcare-i18n.js";
 import Analytics from "../../../followcare-analytics.js";
 import Intel from "../../../followcare-intel.js";
 import Integration from "../../../followcare-integration.js";
@@ -249,6 +250,19 @@ export async function onRequest(context) {
         dischargeMs: b.dischargeMs, lang: b.lang, sendHour: b.sendHour, tz: b.tz,
         consentAttested: b.consentAttested, isMinor: b.isMinor, guardianPhone: b.guardianPhone,
       });
+      // AUTOMATE delivery: on a successful enrol, send the patient their secure link immediately over the
+      // configured channel (WhatsApp/SMS) — no more manual copy/paste. Consent was attested at enrol. The link
+      // is still returned so the doctor can also copy/share it. Fails SAFE: if the channel isn't configured the
+      // send is "skipped" and the doctor shares manually. `delivered` tells the UI what happened.
+      if (r.ok) {
+        try {
+          const ep = await FC.getEpisode(env, r.episodeId);
+          const body = I18n.t("fc.msg.welcome", (ep && ep.lang) || b.lang || "en", { link: r.link });
+          const send = await sendPatientMessage(env, ep, body, { link: r.link });
+          r.delivered = (send && send.ok) ? "sent" : (send && send.skipped ? "not_configured" : "failed");
+          r.channel = String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase();
+        } catch (e) { r.delivered = "failed"; }
+      }
       return json(r, r.ok ? 200 : 400, request);
     }
     if (request.method === "GET" && seg === "episodes") {

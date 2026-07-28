@@ -131,6 +131,11 @@
       hi: "StewardMD की ओर से याद दिलाना: कृपया अपने डॉक्टर की सलाह अनुसार दवाइयाँ लें। {link}",
       te: "StewardMD నుండి గుర్తు: దయచేసి మీ వైద్యుడు సూచించిన విధంగా మందులు తీసుకోండి. {link}"
     },
+    "fc.msg.welcome": {
+      en: "You've been enrolled in StewardMD recovery follow-up by your care team. We'll gently check in on how you're recovering. Open your secure check-in here: {link}",
+      hi: "आपकी देखभाल टीम ने आपको StewardMD रिकवरी फ़ॉलो-अप में जोड़ा है। हम आपकी रिकवरी के बारे में जानने के लिए संपर्क करते रहेंगे। अपना सुरक्षित चेक-इन यहाँ खोलें: {link}",
+      te: "మీ సంరక్షణ బృందం మిమ్మల్ని StewardMD రికవరీ ఫాలో-అప్‌లో చేర్చారు. మీ కోలుకోవడం గురించి మేము సున్నితంగా తెలుసుకుంటాము. మీ సురక్షిత చెక్-ఇన్‌ను ఇక్కడ తెరవండి: {link}"
+    },
     "fc.msg.reminder_appt": {
       en: "Reminder from StewardMD: you have a follow-up appointment coming up. {link}",
       hi: "StewardMD की ओर से याद दिलाना: आपकी आगामी फ़ॉलो-अप अपॉइंटमेंट है। {link}",

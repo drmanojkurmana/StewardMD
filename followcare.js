@@ -156,7 +156,10 @@
       // Doctor Action Center
       ".fc-actgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
       ".fc-act{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:14px;background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer;min-height:84px}",
-      ".fc-act .fc-ai{font-size:22px}.fc-act .fc-al{font-weight:750;font-size:13.5px;line-height:1.25}",
+      ".fc-act .fc-ai{font-size:22px;display:inline-flex;color:#0e6e63}.fc-act .fc-ai svg{width:26px;height:26px}.fc-act.high .fc-ai{color:#c9302c}",
+      "body.dark .fc-act .fc-ai,body.v3-dark .fc-act .fc-ai{color:#3fc7b3}",
+      ".fc-btn .fc-bi{display:inline-flex;vertical-align:-4px;margin-right:8px}.fc-btn .fc-bi svg{width:18px;height:18px}",
+      ".fc-act .fc-al{font-weight:750;font-size:13.5px;line-height:1.25}",
       ".fc-act.high{border-color:#e6a23c;background:color-mix(in srgb,#e6a23c 8%,transparent)}",
       ".fc-act.soon{opacity:.55;cursor:default}.fc-act .fc-soon{font-size:10.5px;font-weight:800;color:#b06a00;background:#ffe9c7;border-radius:999px;padding:2px 7px}",
       ".fc-ta{width:100%;min-height:110px;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font:inherit;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);resize:vertical}",
@@ -168,7 +171,10 @@
       ".fc-cm .fc-cm-h{font-weight:750;font-size:12.5px;color:var(--slate,#5a7184);display:flex;gap:8px;align-items:center}",
       ".fc-cm .fc-cm-b{font-size:14px;margin-top:4px;white-space:pre-wrap}",
       ".fc-cm .fc-cm-st{margin-left:auto;font-size:11px;font-weight:700}",
-      "@media(prefers-color-scheme:dark){.fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}.fc-link{background:#0f2b22;border-color:#245}}",
+      // Theme follows the APP's toggle (body.dark / body.v3-dark), not the OS — so the overlay always matches
+      // whatever light/dark mode the doctor has the app in.
+      "body.dark .fc-sheet,body.v3-dark .fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}",
+      "body.dark .fc-link,body.v3-dark .fc-link{background:#0f2b22;border-color:#245}",
       // ═══════════ premium UI v2 (flag smd_followcare_ui2 → .fcui2 on the overlay + sheet) ═══════════
       ".fc-ov.fcui2{background:radial-gradient(1200px 700px at 50% -12%,rgba(14,110,99,.30),transparent 60%),rgba(6,16,20,.60);backdrop-filter:blur(9px) saturate(1.1)}",
       ".fc-sheet.fcui2{max-width:640px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 94%,#0e6e63 6%),var(--panel,#fff));box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}",
@@ -293,6 +299,23 @@
     ]);
   }
 
+  // Custom line-icons for the Doctor Action Center (replace the emojis). currentColor stroke → adapts to
+  // light/dark + high-priority (red). Keyed by action-type id, plus stethoscope/history for the launch buttons.
+  var ACT_ICONS = {
+    instruction: '<path d="M22 3 11 14"/><path d="M22 3 15 21l-4-8-8-4 19-6z"/>',
+    question: '<path d="M4.5 5h15v10H9l-4 3z"/><path d="M9.7 9.1a2.4 2.4 0 1 1 3.2 2.3c-.7.3-1 .8-1 1.5"/><circle cx="11.9" cy="14" r=".6" fill="currentColor" stroke="none"/>',
+    photo_request: '<path d="M3 8h3l1.5-2h9L18 8h3v11H3z"/><circle cx="12" cy="13" r="3.2"/>',
+    vitals_request: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M6 13h3l1.5-4 2.5 7 1.5-3H18"/>',
+    earlier_review: '<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><circle cx="12" cy="14.6" r="2.3"/><path d="M12 13.3v1.3l.9.6"/>',
+    video_consult: '<rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l6-3v10l-6-3z"/>',
+    education: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 15.5h6"/>',
+    emergency: '<path d="M12 3.2 21 19H3z"/><path d="M12 9.4v4.2"/><circle cx="12" cy="16.6" r=".7" fill="currentColor" stroke="none"/>',
+    close_episode: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16.2 9.4"/>',
+    history: '<path d="M4 5v5h5"/><path d="M4.5 11a8 8 0 1 1 .8 5"/><path d="M12 8.5v4l3 1.8"/>',
+    stethoscope: '<path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M10 15.5v1a5 5 0 0 0 5 5 4 4 0 0 0 4-4v-2.1"/><circle cx="19" cy="13.2" r="2.2"/>'
+  };
+  function actIcon(type) { var p = ACT_ICONS[type]; return p ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>' : ""; }
+
   // Animated recovery-score ring (v2 detail hero). Draws a conic progress stroke to `score`/100 in the
   // escalation colour; animates the stroke on mount (falls back to a static ring if Motion is unavailable).
   function scoreRing(score, color) {
@@ -397,8 +420,15 @@
           submit.disabled = false; submit.textContent = "Create recovery link";
           if (res.body && res.body.ok && res.body.link) {
             out.innerHTML = "";
+            // The link is now sent to the patient automatically on enrol; show the delivery status + still
+            // offer copy/share as a backup (or the manual path when the channel isn't configured).
+            var dv = res.body.delivered, ch = res.body.channel === "whatsapp" ? "WhatsApp" : "SMS";
+            var banner = dv === "sent" ? { t: "✓ Link sent to the patient on " + ch, bg: "#e7f6ee", fg: "#127a52", bd: "#bfe3cf" }
+              : dv === "not_configured" ? { t: "Messaging channel not set up — share the link manually below.", bg: "#fdf1dc", fg: "#8a5a00", bd: "#f0d59b" }
+              : { t: "Couldn't auto-send — please share the link manually below.", bg: "#fdf1dc", fg: "#8a5a00", bd: "#f0d59b" };
+            out.appendChild(h("div", { style: "border-radius:12px;padding:11px 13px;font-size:13px;font-weight:650;background:" + banner.bg + ";color:" + banner.fg + ";border:1px solid " + banner.bd, text: banner.t }));
             out.appendChild(h("div", { "class": "fc-link", text: res.body.link }));
-            out.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { shareLink(res.body.link); }, text: "Copy / share link" }));
+            out.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { shareLink(res.body.link); }, text: dv === "sent" ? "Copy / share again" : "Copy / share link" }));
           } else {
             errBox.appendChild(h("div", { "class": "fc-err", text: enrollError(res.body && res.body.error) }));
           }
@@ -472,11 +502,11 @@
       if (ui2()) { if (typeof box !== "undefined" && box) mEnter(box, 0.05); mStagger(tl.querySelectorAll(".fc-ev")); }
       // Doctor Action Center — the prominent way to communicate with this patient (flag smd_followcare_actions).
       if (actionsEnabled() && CM) {
-        var dac = h("button", { "class": "fc-btn", style: "margin-top:16px;width:100%", text: "🩺 Doctor Actions" });
+        var dac = h("button", { "class": "fc-btn", style: "margin-top:16px;width:100%", html: '<span class="fc-bi">' + actIcon("stethoscope") + '</span>Doctor Actions' });
         dac.addEventListener("click", function () { openActions(episodeId, ep); });
         body.appendChild(dac);
         if (ui2()) mEnter(dac, 0.12);
-        var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "🗂 Communication history" });
+        var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", html: '<span class="fc-bi">' + actIcon("history") + '</span>Communication history' });
         hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
         body.appendChild(hist);
       }
@@ -520,8 +550,9 @@
     body.appendChild(h("div", { style: "color:var(--slate,#5a7184);font-size:12.5px;margin-bottom:14px", text: (ep && ep.disease ? ep.disease + " · " : "") + "Communicate with your patient. Everything is logged and auditable." }));
     var grid = h("div", { "class": "fc-actgrid" });
     CM.types().forEach(function (t) {
+      var svg = actIcon(t.id), icon = svg ? h("span", { "class": "fc-ai", "aria-hidden": "true", html: svg }) : h("span", { "class": "fc-ai", "aria-hidden": "true", text: t.icon });
       var tile = h("button", { "class": "fc-act" + (t.priority === "high" ? " high" : "") + (t.comingSoon ? " soon" : ""), "aria-label": t.label }, [
-        h("span", { "class": "fc-ai", "aria-hidden": "true", text: t.icon }),
+        icon,
         h("span", { "class": "fc-al", text: t.label }),
         t.comingSoon ? h("span", { "class": "fc-soon", text: "Coming soon" }) : null
       ]);
@@ -530,7 +561,7 @@
     });
     body.appendChild(grid);
     var hist = h("button", { "class": "fc-act", style: "grid-column:1/-1;flex-direction:row;align-items:center", onclick: function () { renderCommHistory(episodeId, ep); } }, [
-      h("span", { "class": "fc-ai", "aria-hidden": "true", text: "🗂" }), h("span", { "class": "fc-al", text: "Communication History" })
+      h("span", { "class": "fc-ai", "aria-hidden": "true", html: actIcon("history") }), h("span", { "class": "fc-al", text: "Communication History" })
     ]);
     body.appendChild(hist);
     if (ui2()) { var tiles = grid.querySelectorAll(".fc-act"); mStagger(tiles); mEnter(hist, 0.04 + tiles.length * 0.05); }
@@ -539,7 +570,11 @@
   function renderActionForm(episodeId, ep, type) {
     var def = CM.typeDef(type); if (!def || def.comingSoon) return;
     var body = actionSheet(episodeId, ep, function () { openActions(episodeId, ep); });
-    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 12px", text: def.icon + "  " + def.label }));
+    var hdrIc = actIcon(type);
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 12px;display:flex;align-items:center;gap:9px" }, [
+      hdrIc ? h("span", { "class": "fc-ai", "aria-hidden": "true", html: hdrIc, style: "color:" + (def.priority === "high" ? "#c9302c" : "#0e6e63") }) : null,
+      h("span", { text: def.label })
+    ]));
     var errBox = h("div"), form = { type: type, fields: [] };
     var wrap = h("div");
 
