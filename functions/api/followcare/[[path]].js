@@ -33,6 +33,9 @@ import { runScheduler } from "../../_followcare_dispatch.js";
 import Analytics from "../../../followcare-analytics.js";
 import Intel from "../../../followcare-intel.js";
 import Integration from "../../../followcare-integration.js";
+// Side-effect import: registers globalThis.FollowCareDiagnosis so Integration.diagnosisToPathway (used by
+// the CSV bulk-enroll) resolves via the full ICD-10 + text DiagnosisMapper, not the legacy fallback table.
+import "../../../followcare-diagnosis.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -150,6 +153,14 @@ export async function onRequest(context) {
       if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
       const ctx = await FC.portalContext(env, t);
       return json(ctx, ctx.ok ? 200 : (ctx.error === "link_expired" ? 410 : 400), request);
+    }
+    if (seg === "lang" && request.method === "POST") {
+      // Patient sets their preferred portal language (token-gated, no login). Stored so it's never re-asked.
+      const b = await readBody(request);
+      const rl = await rateLimit(env, request, "lang");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const res = await FC.setPortalLanguage(env, b.t, b.lang);
+      return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : 400), request);
     }
     if (seg === "forget" && request.method === "POST") {
       // Patient right-to-erasure / messaging opt-out (token-gated, no login). DPDP §13.

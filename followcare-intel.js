@@ -77,7 +77,34 @@
     if (esc === "orange" || risk === "high" || risk === "very_high") { actions.push("Earlier OP review or teleconsult"); }
     if ((latest.redFlags || []).some(function (f) { return /adherence|not taken|medication/i.test(f.reason || ""); })) actions.push("Reinforce medication adherence; check for barriers");
     // disease-specific reviewable investigations (suggestions only)
-    var byDz = { pneumonia: ["Consider repeat CBC/CRP and chest imaging if not improving"], heart_failure: ["Review weight/fluid status; consider diuretic review by the treating team"], copd: ["Assess inhaler technique; consider review if SpO₂ falling"], aki: ["Review renal function and hydration"], diabetes: ["Review glucose logs; check for hypo/hyper pattern"], dengue: ["Ensure hydration; watch for warning signs"] };
+    var byDz = {
+      pneumonia: ["Consider repeat CBC/CRP and chest imaging if not improving"],
+      heart_failure: ["Review weight/fluid status; consider diuretic review by the treating team"],
+      copd: ["Assess inhaler technique; consider review if SpO₂ falling"],
+      aki: ["Review renal function and hydration"],
+      diabetes: ["Review glucose logs; check for hypo/hyper pattern"],
+      dengue: ["Ensure hydration; watch for warning signs"],
+      asthma: ["Assess inhaler technique and adherence; review if reliever over-used"],
+      tuberculosis: ["Reinforce daily ATT adherence (consider DOT); watch for drug toxicity"],
+      pleural_effusion: ["Follow up imaging; review if breathlessness or fever recurs"],
+      acs: ["Reinforce antiplatelet/statin adherence; low threshold to review recurrent chest pain"],
+      arrhythmia: ["Review rate/rhythm control and anticoagulation adherence"],
+      stroke: ["Reinforce secondary-prevention meds; ensure rehab follow-up"],
+      seizure: ["Confirm anti-seizure medication adherence; review levels if indicated"],
+      ckd: ["Review renal function, fluid status and nephrotoxin avoidance"],
+      nephrotic: ["Monitor oedema/proteinuria; review diuretic and immunosuppression per team"],
+      cld: ["Watch for encephalopathy/bleeding; reinforce lactulose/diuretic adherence"],
+      hepatitis: ["Monitor for worsening jaundice/encephalopathy; ensure hydration and nutrition"],
+      pancreatitis: ["Advance diet as tolerated; risk-factor (alcohol/gallstone) counselling"],
+      ugib: ["Reinforce PPI/beta-blocker adherence; watch for re-bleeding"],
+      malaria: ["Complete full antimalarial course; watch for haemolysis/severe features"],
+      cellulitis: ["Complete antibiotic course; mark and monitor the margin for spread"],
+      sepsis: ["Complete antibiotic course; monitor for recurrent fever/organ dysfunction"],
+      poisoning: ["Arrange mental-health / toxicology follow-up as appropriate"],
+      hypertension: ["Review home BP log; consider medication review if persistently high"],
+      post_op: ["Monitor wound for infection; review analgesia and mobilisation"],
+      generic: ["Confirm the scheduled follow-up appointment and safety-netting advice"]
+    };
     if (byDz[pathwayId] && (esc === "orange" || esc === "yellow" || risk !== "low")) actions = actions.concat(byDz[pathwayId]);
     if (!actions.length) actions.push("Continue current recovery plan");
     return { risk: risk || "low", reasons: reasons, actions: uniq(actions) };

@@ -13,8 +13,9 @@ const G0 = { g_chestpain: "no", g_breathless_rest: "no", g_syncope: "no", g_conf
 const clean = o => Object.assign({}, G0, o);
 const assess = (id, ans, opts) => ENG.assess(id, ans, opts);
 
-test("modules load + 9 pathways + 9 global red flags", () => {
-  assert.equal(PW.list().length, 9);
+test("modules load + curated pathway catalog + generic fallback + 9 global red flags", () => {
+  assert.equal(PW.list().length, 26);   // Phase 2: 9 original + 17 curated (incl. the generic fallback)
+  assert.ok(PW.get("generic"), "generic fallback pathway must exist");
   assert.equal(PW.GLOBAL_RED.length, 9);   // review #5: was 5, now includes seizure/stroke/anaphylaxis/self-harm
 });
 

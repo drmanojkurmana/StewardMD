@@ -132,7 +132,10 @@ async function getDemographics(env, token, patientId, recordNo) {
   const sr = await raw(jar, 'POST', GHIS + '/Doctor/Home/Searchnew',
     '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo), extra);
   if (sr.status >= 300 && sr.status < 400) return { unauth: true };
-  return { phone: extractPrimaryContact(sr.body || '') };
+  // `region` = a short PATIENT-address snippet (state/district/city). We anchor on the patient's address
+  // labels so we don't accidentally pick up the HOSPITAL's city elsewhere on the page — the client runs the
+  // deterministic language detector over it. Best-effort: "" if the labels aren't found (falls back to en).
+  return { phone: extractPrimaryContact(sr.body || ''), region: extractRegion(sr.body || '') };
 }
 // Find the primary-contact mobile: locate a contact label, then the nearest 10-digit Indian mobile (6-9 start)
 // within a window. Prefers "Primary contact number"; falls back to secondary/mobile/contact labels. Returns "".
@@ -144,6 +147,24 @@ function extractPrimaryContact(body) {
     if (m) return m[1];
   }
   return '';
+}
+// Best-effort patient-address snippet for language detection. Anchors on address/state/district/city labels
+// (case-insensitive), captures a short window after each, strips HTML tags/entities, and concatenates. Never
+// throws; returns "" when nothing address-like is found. NO phone/name/PHI beyond locality text is returned.
+function extractRegion(body) {
+  const labels = ['Permanent Address', 'Present Address', 'PermanentAddress', 'PresentAddress', 'Address', 'State', 'District', 'City', 'Town', 'Mandal', 'Taluk', 'Village', 'Locality', 'Area'];
+  const out = [];
+  for (let i = 0; i < labels.length; i++) {
+    let from = 0, idx;
+    const needle = labels[i].toLowerCase(), low = body.toLowerCase();
+    while ((idx = low.indexOf(needle, from)) !== -1 && out.length < 12) {
+      const win = body.slice(idx + labels[i].length, idx + labels[i].length + 140)
+        .replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/[^A-Za-z ]+/g, ' ').replace(/\s+/g, ' ').trim();
+      if (win) out.push(win);
+      from = idx + labels[i].length;
+    }
+  }
+  return out.join(' ').slice(0, 400);
 }
 async function getLabOrders(env, token, patientId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };

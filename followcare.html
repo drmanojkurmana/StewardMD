@@ -102,10 +102,12 @@
 
 <!-- motion (motion.dev, UMD → window.Motion) — vendored for offline/native; animations are enhancement-only. -->
 <script src="/vendor/motion/motion.js?v=fc1"></script>
+<script src="/followcare-i18n.js?v=fc1"></script>
 <script>
 (function () {
   "use strict";
   var API = "/api/followcare";
+  var FCI = (function () { try { return window.FollowCareI18n || null; } catch (e) { return null; } })();
   var main = document.getElementById("main");
   var subEl = document.getElementById("sub");
   // ---- motion helpers (graceful: no-op if Motion missing or the patient prefers reduced motion) ----
@@ -161,9 +163,33 @@
       sendErr: "चेक-इन भेजने में समस्या हुई। कृपया फिर से प्रयास करें।", connSend: "कनेक्शन समस्या। कृपया इंटरनेट जांचें।",
       forget: "चेक-इन बंद करें और मेरा डेटा हटाएं", forget_confirm: "क्या आप ये रिकवरी चेक-इन बंद करके अपनी जानकारी हमेशा के लिए हटाना चाहते हैं? यह वापस नहीं होगा।", forget_done_t: "आपका डेटा हटा दिया गया", forget_done_b: "अब आपको और चेक-इन नहीं मिलेंगे। अपना ध्यान रखें — तबियत ठीक न लगे तो अपनी टीम से संपर्क करें।",
       unavail_t: "अभी उपलब्ध नहीं", unavail_b: "यह रिकवरी चेक-इन अभी उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें, या अपनी टीम से संपर्क करें।"
+    },
+    te: {
+      title: "మీ రికవరీ చెక్-ఇన్", lead: "ఇది మీ రికవరీ చెక్-ఇన్{d}. దీనికి సుమారు ఒక నిమిషం పడుతుంది. దయచేసి గత ఒక రోజు గురించి నిజాయితీగా సమాధానం ఇవ్వండి.",
+      day: "రోజు", send: "నా చెక్-ఇన్ పంపండి", sending: "పంపుతోంది…", required: "పంపే ముందు దయచేసి గుర్తించిన ప్రశ్నలకు సమాధానం ఇవ్వండి.",
+      yes: "అవును", no: "కాదు", better: "మెరుగు", same: "దాదాపు అలాగే", worse: "అధ్వాన్నం", none: "ఏమీ లేదు", worst: "అత్యంత చెడు",
+      linkBad_t: "లింక్ చెల్లదు", linkBad_b: "ఈ లింక్‌లో సమాచారం లేదు. దయచేసి మేము పంపిన సరైన లింక్‌నే తెరవండి.",
+      expired_t: "లింక్ గడువు ముగిసింది", expired_b: "ఈ చెక్-ఇన్ లింక్ గడువు ముగిసింది. మీ సంరక్షణ బృందం కొత్తది పంపగలదు.",
+      done_t: "పూర్తయింది", done_b: "మీ రికవరీ ఫాలో-అప్ పూర్తయింది. ధన్యవాదాలు.",
+      already_t: "ధన్యవాదాలు — అందింది", already_b: "ఈ రోజుకి మీ చెక్-ఇన్ మాకు అందింది. ఏదైనా మారితే లేదా బాగోకపోతే మీ బృందాన్ని సంప్రదించండి.",
+      notdue_t: "ప్రస్తుతం చెక్-ఇన్ లేదు", notdue_b: "ధన్యవాదాలు — మీరు తాజాగా ఉన్నారు. మీ తదుపరి చెక్-ఇన్{w} తెరవబడుతుంది. అంతకు ముందు బాగోకపోతే మీ బృందాన్ని సంప్రదించండి.",
+      recovered_t: "అంతా సిద్ధం", recovered_b: "మీ రికవరీ ఫాలో-అప్ పూర్తయింది. బాగుంది — ఏదైనా మారితే మీ బృందాన్ని సంప్రదించండి.",
+      conn_t: "కనెక్షన్ సమస్య", conn_b: "మీ చెక్-ఇన్ లోడ్ కాలేదు. దయచేసి ఇంటర్నెట్ చూసి మళ్లీ ప్రయత్నించండి.",
+      thanks_t: "ధన్యవాదాలు", thanks_b: "మీ చెక్-ఇన్‌కు ధన్యవాదాలు. దయచేసి మీ సూచనలు పాటిస్తూ మందులు తీసుకుంటూ ఉండండి.", green_b: "మీరు బాగా కోలుకుంటున్నట్టు కనిపిస్తోంది. దయచేసి మీ మందులు, సూచనలు కొనసాగించండి.",
+      contact_t: "దయచేసి మీ బృందాన్ని సంప్రదించండి", contact_b: "మీ కొన్ని సమాధానాలను నిశితంగా చూడాలి. దయచేసి ఈ రోజే మీ చికిత్స బృందాన్ని సంప్రదించండి. చాలా బాగోకపోతే త్వరగా వైద్య సహాయం పొందండి.",
+      seek_t: "దయచేసి ఇప్పుడే వైద్య సహాయం పొందండి", seek_emerg: "మీ సమాధానాల ఆధారంగా మిమ్మల్ని అత్యవసరంగా చూడాలి. దయచేసి సమీప అత్యవసర విభాగానికి వెళ్లండి లేదా అత్యవసర నంబర్‌కు కాల్ చేయండి. మీ బృందానికి తెలియజేయబడుతోంది.", call: "112కు కాల్ చేయండి",
+      sendErr: "మీ చెక్-ఇన్ పంపడంలో ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి.", connSend: "కనెక్షన్ సమస్య. దయచేసి మీ ఇంటర్నెట్ చూసి మళ్లీ ప్రయత్నించండి.",
+      forget: "చెక్-ఇన్‌లు ఆపి నా డేటాను తొలగించండి", forget_confirm: "ఈ రికవరీ చెక్-ఇన్‌లను ఆపి మీ సమాచారాన్ని శాశ్వతంగా తొలగించాలా? ఇది తిరిగి పొందలేరు.", forget_done_t: "మీ డేటా తొలగించబడింది", forget_done_b: "మీకు ఇక చెక్-ఇన్‌లు రావు. జాగ్రత్తగా ఉండండి — బాగోకపోతే మీ బృందాన్ని సంప్రదించండి.",
+      unavail_t: "తాత్కాలికంగా అందుబాటులో లేదు", unavail_b: "ఈ రికవరీ చెక్-ఇన్ ప్రస్తుతం అందుబాటులో లేదు. దయచేసి తర్వాత ప్రయత్నించండి, లేదా మీ బృందాన్ని సంప్రదించండి."
     }
   };
+  // Bridge to the shared reviewed registry for the first-run language prompt (keeps one source of truth for
+  // language names + prompt strings). Chrome/answer labels stay in the rich inline table above.
+  function ti18n(key, lang, vars){ return FCI ? FCI.t(key, lang || LANG, vars) : (vars && vars.lang ? vars.lang : key); }
   function t(k){ var d = I18N[LANG] || I18N.en; return (d[k] != null ? d[k] : I18N.en[k]) || ""; }
+  // A check-in question shown in the patient's language when a REVIEWED translation exists (by i18nKey);
+  // otherwise the clinician-authored English text. Never a machine translation.
+  function qText(q){ if(q && q.i18nKey && FCI){ var s = FCI.t(q.i18nKey, LANG); if(s && s !== q.i18nKey) return s; } return (q && q.text) || ""; }
 
   function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
   function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
@@ -187,7 +213,9 @@
   }
 
   // ---- load today's check-in ----
-  function setLang(l){ if(l && I18N[l]){ LANG = l; try{ document.documentElement.lang = l; }catch(e){} } }
+  // Accept any language the shared registry supports (chrome falls back to English for unreviewed ones;
+  // reviewed question/label strings still render in that language).
+  function setLang(l){ if(!l) return; if(I18N[l] || (FCI && FCI.isSupported(l))){ LANG = l; try{ document.documentElement.lang = l; }catch(e){} } }
   function load(){
     if(!token){ return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),""); }
     fetchJSON(API+"/portal?t="+encodeURIComponent(token))
@@ -201,15 +229,63 @@
           return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),"");
         }
         ctx = b;
-        if(b.nothingDue){
-          if(b.recovered){ return screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); }
-          var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
-          var whenTxt = when ? (" " + when.toLocaleDateString(LANG==="hi"?"hi-IN":undefined,{weekday:"long", month:"short", day:"numeric"})) : "";
-          return screenMessage("✅",t("notdue_t"),t("notdue_b").replace("{w}", whenTxt),"r-green");
+        // First-run language confirmation: only when we auto-detected a non-English language that the patient
+        // hasn't confirmed yet. Shown once; the choice is stored server-side so it's never asked again.
+        if(b.lang && b.lang !== "en" && !b.langConfirmed && FCI && FCI.isSupported(b.lang)){
+          return promptLanguage(b.lang, function(){ proceed(b); });
         }
-        renderForm();
+        proceed(b);
       })
       .catch(function(){ screenMessage("📶",t("conn_t"),t("conn_b"),""); });
+  }
+  function proceed(b){
+    if(b.nothingDue){
+      if(b.recovered){ return screenMessage("🎉",t("recovered_t"),t("recovered_b"),"r-green"); }
+      var when = b.nextDueMs ? new Date(b.nextDueMs) : null;
+      var whenTxt = when ? (" " + when.toLocaleDateString(LANG==="hi"?"hi-IN":(LANG==="te"?"te-IN":undefined),{weekday:"long", month:"short", day:"numeric"})) : "";
+      return screenMessage("✅",t("notdue_t"),t("notdue_b").replace("{w}", whenTxt),"r-green");
+    }
+    renderForm();
+  }
+
+  // ---- first-run language prompt ("Would you like to continue in <lang>?") ----
+  function persistLang(code, done){
+    setLang(code);
+    fetchJSON(API+"/lang", { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ t:token, lang:code }) })
+      .then(function(){ if(done) done(); }, function(){ if(done) done(); });   // never block on the write
+  }
+  function promptLanguage(detected, done){
+    clear();
+    var native = FCI ? FCI.langNative(detected) : detected;
+    var card = el('<div class="card"><div class="ic" aria-hidden="true">🌐</div>'+
+      '<h1>'+esc(ti18n("fc.lang.prompt", detected, { lang: native }))+'</h1>'+
+      '<p class="lead">'+esc(ti18n("fc.lang.prompt", "en", { lang: (FCI?FCI.langName(detected):detected) }))+'</p>'+
+      '<div id="langbtns"></div>'+
+      '<p class="foot">'+esc(ti18n("fc.lang.change_hint", detected))+'</p></div>');
+    main.appendChild(card);
+    var wrap = card.querySelector("#langbtns");
+    var bCont = el('<button type="button" class="cta">'+esc(ti18n("fc.lang.continue", detected, { lang: native }))+'</button>');
+    var bEng  = el('<button type="button" class="opt" style="width:100%;margin-top:10px">'+esc(ti18n("fc.lang.english", detected))+'</button>');
+    var bOth  = el('<button type="button" class="opt" style="width:100%;margin-top:10px">'+esc(ti18n("fc.lang.choose", detected))+'</button>');
+    bCont.addEventListener("click", function(){ tap(bCont); persistLang(detected, done); });
+    bEng.addEventListener("click", function(){ tap(bEng); persistLang("en", done); });
+    bOth.addEventListener("click", function(){ tap(bOth); chooseLanguage(done); });
+    wrap.appendChild(bCont); wrap.appendChild(bEng); wrap.appendChild(bOth);
+    enter(card); pop(card.querySelector(".ic"));
+  }
+  function chooseLanguage(done){
+    clear();
+    var card = el('<div class="card"><div class="ic" aria-hidden="true">🌐</div>'+
+      '<h1>'+esc(ti18n("fc.lang.choose_title", LANG))+'</h1><div id="langlist"></div></div>');
+    main.appendChild(card);
+    var list = card.querySelector("#langlist");
+    (FCI ? FCI.languages() : [{code:"en",name:"English",native:"English"}]).forEach(function(l){
+      var lbl = l.code === "en" ? "English" : (l.native + " · " + l.name) + (l.reviewed ? "" : "");
+      var b = el('<button type="button" class="opt" style="width:100%;margin-top:8px;text-align:left">'+esc(lbl)+'</button>');
+      b.addEventListener("click", function(){ tap(b); persistLang(l.code, done); });
+      list.appendChild(b);
+    });
+    enter(card); pop(card.querySelector(".ic"));
   }
 
   // ---- render the questionnaire ----
@@ -233,8 +309,14 @@
     frm.appendChild(submit);
     frm.appendChild(el('<p class="foot" id="ferr" role="alert"></p>'));
     submit.addEventListener("click", function(){ tap(submit); onSubmit(); });
+    // Change language anytime (the "Settings" affordance — reopens the chooser and re-renders the form).
+    if(FCI){
+      var langBar = el('<p style="text-align:center;margin-top:14px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">🌐 '+esc(ti18n("fc.lang.settings", LANG))+'</a></p>');
+      langBar.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); chooseLanguage(function(){ renderForm(); }); });
+      main.appendChild(langBar);
+    }
     // Patient opt-out + right-to-erasure (no login needed).
-    var forget = el('<p style="text-align:center;margin-top:16px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">'+esc(t("forget"))+'</a></p>');
+    var forget = el('<p style="text-align:center;margin-top:8px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">'+esc(t("forget"))+'</a></p>');
     forget.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); forgetMe(); });
     main.appendChild(forget);
     // Animate: card in, questions stagger in, submit + opt-out follow.
@@ -251,7 +333,7 @@
   function renderQ(q){
     var wrap = el('<div class="q"></div>');
     var unit = q.unit ? (' <span class="q-unit">('+esc(q.unit)+')</span>') : "";
-    wrap.appendChild(el('<label class="q-label" id="lab_'+esc(q.id)+'">'+esc(q.text)+unit+'</label>'));
+    wrap.appendChild(el('<label class="q-label" id="lab_'+esc(q.id)+'">'+esc(qText(q))+unit+'</label>'));
 
     if(q.type==="yesno"){
       wrap.appendChild(choiceRow(q.id, [{v:"no",t:t("no")},{v:"yes",t:t("yes")}]));

@@ -31,6 +31,7 @@ import Engine from "../followcare-engine.js";
 import Assessment from "../followcare-assessment.js";
 import Schedule from "../followcare-schedule.js";
 import AI from "../followcare-ai.js";
+import I18n from "../followcare-i18n.js";
 
 export function fcKv(env) { return (env && env.FOLLOWCARE_KV) || usageKv(env); }
 export function linkBase(env) { return (env && env.FOLLOWCARE_LINK_BASE) || "https://stewardmd.in/followcare"; }
@@ -142,7 +143,7 @@ function toEpisode(doc) {
   if (!doc) return null; const f = doc.fields || {};
   return {
     episodeId: doc.id, updateTime: doc.updateTime, hospitalId: f.hospitalId, doctorUid: f.doctorUid, pathwayId: f.pathwayId, disease: f.disease,
-    status: f.status, dischargeMs: f.dischargeMs, createdMs: f.createdMs, lang: f.lang || "en", sendHour: f.sendHour, tz: f.tz || "Asia/Kolkata",
+    status: f.status, dischargeMs: f.dischargeMs, createdMs: f.createdMs, lang: f.lang || "en", langConfirmed: !!f.langConfirmed, sendHour: f.sendHour, tz: f.tz || "Asia/Kolkata",
     tokenVer: f.tokenVer || 1, schedule: jparse(f.scheduleJson, []), lastDayDone: (f.lastDayDone == null ? -1 : f.lastDayDone),
     nextDueMs: f.nextDueMs || 0, lastEscalation: f.lastEscalation || "", peakEscalation: f.peakEscalation || "", lastScore: (f.lastScore == null ? null : f.lastScore),
     lastConfidence: f.lastConfidence || "", lastRisk: f.lastRisk || "", lastTrend: f.lastTrend || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
@@ -300,14 +301,29 @@ export async function portalContext(env, token) {
     // Nothing is due right now: DO NOT serve a future day's questionnaire (that let a patient fast-forward
     // the whole schedule and prematurely close the episode). Tell the portal when the next check-in opens.
     const nxt = nextScheduled(ep);
-    return { ok: true, nothingDue: true, episodeId: ep.episodeId, disease: ep.disease, lang: ep.lang, status: ep.status, nextDueMs: nxt ? nxt.dueAtMs : 0, recovered: ep.status === "recovered" };
+    return { ok: true, nothingDue: true, episodeId: ep.episodeId, disease: ep.disease, lang: ep.lang, langConfirmed: ep.langConfirmed, status: ep.status, nextDueMs: nxt ? nxt.dueAtMs : 0, recovered: ep.status === "recovered" };
   }
   const questionnaire = Assessment.buildAssessment(ep.pathwayId, day, { pathways: Pathways });
   return {
     // No PHI in a token-gated reply: the greeting is generic (a stolen link must not reveal the patient's name).
-    ok: true, episodeId: ep.episodeId, disease: ep.disease, dayOffset: day, lang: ep.lang,
+    ok: true, episodeId: ep.episodeId, disease: ep.disease, dayOffset: day, lang: ep.lang, langConfirmed: ep.langConfirmed,
     status: ep.status, questionnaire,
   };
+}
+
+// Patient sets their preferred portal language (token-gated, no login). Persists lang + marks it confirmed so
+// the first-run prompt is never shown again. `lang` is validated against the i18n catalogue; unknown → English.
+export async function setPortalLanguage(env, token, lang) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
+  const episodeId = episodeIdFromToken(token);
+  if (!episodeId) return { ok: false, error: "invalid_link" };
+  const ep = await getEpisode(env, episodeId);
+  if (!ep) return { ok: false, error: "invalid_link" };
+  const v = await verifyToken(token, tokenSecret(env), ep.tokenVer || 1, Date.now());
+  if (!v.ok) return { ok: false, error: v.reason === "expired" ? "link_expired" : "invalid_link" };
+  const code = (I18n && I18n.isSupported && I18n.isSupported(lang)) ? lang : "en";
+  await fsCommit(env, [wUpdate(env, "fc_episodes/" + episodeId, { lang: code, langConfirmed: true }, ep.updateTime ? { updateTime: ep.updateTime } : { exists: true })]);
+  return { ok: true, lang: code };
 }
 
 // The dayOffset the patient may answer NOW: the earliest scheduled day that is BOTH due (dueAtMs <= now)

@@ -261,8 +261,12 @@
     prefill = prefill || {};
     // Map a discharge diagnosis to a pathway (reuses the integration mapper) unless one is given directly.
     var pfPathway = prefill.pathwayId || "";
-    if (!pfPathway && prefill.diagnosisText) { try { pfPathway = (G.FollowCareIntegration && FollowCareIntegration.diagnosisToPathway(prefill.diagnosisText)) || ""; } catch (e) {} }
-    var form = { pathwayId: pfPathway, phone: prefill.phone || "", name: prefill.name || "", dischargeMs: (typeof prefill.dischargeMs === "number" ? prefill.dischargeMs : ""), lang: prefill.lang || "en", consentAttested: false, isMinor: false, guardianPhone: "" };
+    if (!pfPathway && prefill.diagnosisText) { try { pfPathway = (G.FollowCareIntegration && FollowCareIntegration.diagnosisToPathway(prefill.diagnosisText, prefill.icd)) || ""; } catch (e) {} }
+    // Auto-detect the patient's regional language from the GHIS state/address (deterministic) unless one was
+    // passed explicitly. Falls back to English. The doctor can still change it before creating the link.
+    var detectedLang = "";
+    try { var addr = prefill.addressText || prefill.state || prefill.city || ""; if (addr && G.FollowCareI18n) detectedLang = FollowCareI18n.detectLanguage(addr).lang; } catch (e) {}
+    var form = { pathwayId: pfPathway, phone: prefill.phone || "", name: prefill.name || "", dischargeMs: (typeof prefill.dischargeMs === "number" ? prefill.dischargeMs : ""), lang: prefill.lang || detectedLang || "en", consentAttested: false, isMinor: false, guardianPhone: "" };
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:8px 0 4px;color:var(--slate,#5a7184);font-size:12.5px", text: "Hospital: " + (hosp.hospitalName || hosp.hospitalId) }));
@@ -275,9 +279,11 @@
       var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", value: form.phone, oninput: function (e) { form.phone = e.target.value; } });
       var name = h("input", { type: "text", placeholder: "Patient name (optional)", value: form.name, oninput: function (e) { form.name = e.target.value; } });
       var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
-      var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } }, [
-        h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })
-      ]);
+      var langOpts = null; try { langOpts = (G.FollowCareI18n && FollowCareI18n.languages()) || null; } catch (e) {}
+      var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } },
+        (langOpts ? langOpts.map(function (l) { return h("option", { value: l.code, text: l.code === "en" ? "English" : (l.native + " (" + l.name + ")") + (l.reviewed ? "" : " · English until reviewed") }); })
+                  : [h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })]));
+      lang.value = form.lang;
       // DPDP §9: enrolling a minor routes ALL messaging to a guardian's phone.
       var guardianField = h("div", { "class": "fc-field", style: "display:none" }, [h("label", { text: "Guardian's mobile number" }), h("input", { type: "tel", inputmode: "numeric", placeholder: "Guardian mobile (required for a minor)", oninput: function (e) { form.guardianPhone = e.target.value; } })]);
       var minor = h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:12px" }, [
@@ -310,7 +316,9 @@
           }
         }).catch(function () { submit.disabled = false; submit.textContent = "Create recovery link"; errBox.appendChild(h("div", { "class": "fc-err", text: "Could not create the link. Check your connection." })); });
       });
-      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field("Patient's language", lang)].forEach(function (f) { body.appendChild(f); });
+      var langLabel = "Patient's language";
+      try { if (detectedLang && detectedLang !== "en" && G.FollowCareI18n) langLabel += " (auto-detected: " + FollowCareI18n.langNative(detectedLang) + ")"; } catch (e) {}
+      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field(langLabel, lang)].forEach(function (f) { body.appendChild(f); });
       body.appendChild(minor); body.appendChild(guardianField); body.appendChild(consent);
       body.appendChild(errBox); body.appendChild(submit); body.appendChild(out);
     });

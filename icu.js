@@ -5630,16 +5630,23 @@
       name: p.name || "",
       phone: p.phone || p.mobile || p.contact || "",
       diagnosisText: (f && f.finalDx) || p.diagnosis || "",   // mapped to a recovery pathway by FollowCare
-      dischargeMs: Date.now(), lang: "en"
+      icd: (f && f.icd) || p.icd || p.icd10 || "",            // ICD-10 wins over free text in the mapper
+      addressText: p.address || p.addressText || "",          // seed for deterministic language detection
+      state: p.state || "", city: p.city || "",
+      dischargeMs: Date.now()                                 // no hardcoded lang — FollowCare auto-detects
     };
-    // If this patient came from GHIS Ward Sync and we don't already have a mobile, pull it from GHIS
-    // demographics (best-effort, non-blocking) so the doctor doesn't re-type it. Falls through to the
-    // enrol form regardless — the phone is the one field the doctor can fill manually.
+    // If this patient came from GHIS Ward Sync, pull the mobile + a short address snippet from GHIS
+    // demographics (best-effort, non-blocking): the phone saves re-typing, the address lets FollowCare
+    // auto-detect the patient's language. Falls through to the enrol form regardless.
     var mr = (_raw.wardSync && _raw.wardSync.patientId) || p.mrn || "";
-    if (!prefill.phone && mr && window.GHIS && GHIS.fetchPhone && GHIS.isConnected && GHIS.isConnected()) {
+    var needsLookup = (!prefill.phone || !(prefill.addressText || prefill.state || prefill.city));
+    if (needsLookup && mr && window.GHIS && GHIS.fetchDemographics && GHIS.isConnected && GHIS.isConnected()) {
       var opened = false, go = function () { if (!opened) { opened = true; FollowCare.openEnroll(prefill); } };
       var t = setTimeout(go, 3500);   // never let a slow GHIS lookup block enrolment
-      GHIS.fetchPhone(mr).then(function (ph) { if (ph) prefill.phone = ph; clearTimeout(t); go(); }, function () { clearTimeout(t); go(); });
+      GHIS.fetchDemographics(mr).then(function (d) {
+        if (d) { if (d.phone && !prefill.phone) prefill.phone = d.phone; if (d.region && !prefill.addressText) prefill.addressText = d.region; }
+        clearTimeout(t); go();
+      }, function () { clearTimeout(t); go(); });
     } else {
       FollowCare.openEnroll(prefill);
     }

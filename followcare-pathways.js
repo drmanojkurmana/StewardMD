@@ -146,6 +146,204 @@
         adherence
       ],
       completion: { needImproving: true, minScore: 80, byDay: 30 }, recoveryInputs: ["crisis", "sbp", "meds_taken"]
+    },
+    // ── Phase-2 curated master pathways (thresholds provisional — clinician sign-off required) ──────────
+    asthma: {
+      id: "asthma", name: "Asthma", specialty: "Respiratory", version: 1, followUpDays: 14, schedule: [1, 3, 7, 14],
+      questions: [
+        overall,
+        { id: "breathless", text: "Breathlessness (0 none – 3 severe)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "night_symptoms", text: "Waking at night with breathing trouble?", i18nKey: "fc.q.night", type: "yesno", weight: 10, soft: "yes" },
+        { id: "reliever_overuse", text: "Using the reliever inhaler more than usual?", i18nKey: "fc.q.reliever", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Reliever over-use" } },
+        { id: "spo2", text: "Oxygen level if measured", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 18, plausible: [40, 100], redFlags: [{ when: "<=90", level: "red", reason: "Low SpO₂" }, { when: "<=93", level: "orange", reason: "Falling SpO₂" }] },
+        { id: "inhaler", text: "Inhalers used as prescribed?", i18nKey: "fc.q.inhaler", type: "yesno", weight: 12, redFlag: { when: "no", level: "orange", reason: "Inhaler non-adherence" } }
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["breathless", "reliever_overuse", "inhaler"]
+    },
+    tuberculosis: {
+      id: "tuberculosis", name: "Tuberculosis", specialty: "Respiratory / ID", version: 1, followUpDays: 60, schedule: [7, 14, 30, 45, 60], missedEscalateAt: 3,
+      questions: [
+        overall,
+        { id: "meds_taken", text: "Taking anti-TB medicines every day?", i18nKey: "fc.q.meds", type: "choice", options: ["taken", "skipped", "unavailable"], weight: 22, redFlag: { when: "in:[skipped,unavailable]", level: "orange", reason: "Anti-TB medication interrupted" } },
+        { id: "hemoptysis", text: "Coughing blood?", i18nKey: "fc.q.hemoptysis", type: "yesno", weight: 20, redFlag: { when: "yes", level: "red", reason: "Haemoptysis" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 15, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 8, soft: "yes" },
+        { id: "weight_loss", text: "Still losing weight / poor appetite?", i18nKey: "fc.q.weightloss", type: "yesno", weight: 10, soft: "yes" }
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 60 }, recoveryInputs: ["meds_taken", "breathless", "weight_loss"], blockGreenIfMissing: ["meds_taken"]
+    },
+    pleural_effusion: {
+      id: "pleural_effusion", name: "Pleural Effusion", specialty: "Respiratory", version: 1, followUpDays: 21, schedule: [3, 7, 14, 21],
+      questions: [
+        overall,
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 20, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "spo2", text: "Oxygen level if measured", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 18, plausible: [40, 100], redFlag: { when: "<=91", level: "red", reason: "Low SpO₂" } },
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 10, soft: "yes" },
+        { id: "chest_pain_breathing", text: "Chest pain worse on breathing?", i18nKey: "fc.q.pleuritic", type: "yesno", weight: 10, soft: "yes" },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 21 }, recoveryInputs: ["breathless", "spo2", "fever"]
+    },
+    acs: {
+      id: "acs", name: "Acute Coronary Syndrome", specialty: "Cardiology", version: 1, followUpDays: 30, schedule: [1, 3, 7, 14, 30], missedEscalateAt: 2,
+      questions: [
+        overall,
+        { id: "angina", text: "Chest pain or tightness returning?", i18nKey: "fc.q.angina", type: "yesno", weight: 25, redFlag: { when: "yes", level: "red", reason: "Recurrent angina" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Worsening breathlessness" } },
+        { id: "palpitations", text: "Palpitations?", i18nKey: "fc.q.palp", type: "yesno", weight: 8, soft: "yes" },
+        { id: "meds_taken", text: "Taking heart medicines (incl. blood thinners) daily?", i18nKey: "fc.q.meds", type: "choice", options: ["taken", "skipped", "unavailable"], weight: 20, redFlag: { when: "in:[skipped,unavailable]", level: "orange", reason: "Antiplatelet/cardiac medication not taken" } }
+      ],
+      completion: { needImproving: true, minScore: 85, byDay: 30 }, recoveryInputs: ["angina", "breathless", "meds_taken"], blockGreenIfMissing: ["angina"]
+    },
+    arrhythmia: {
+      id: "arrhythmia", name: "Arrhythmia", specialty: "Cardiology", version: 1, followUpDays: 30, schedule: [2, 7, 14, 30],
+      questions: [
+        overall,
+        { id: "palpitations", text: "Palpitations (0 none – 3 constant)", i18nKey: "fc.q.palp", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Frequent palpitations" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Worsening breathlessness" } },
+        { id: "presyncope", text: "Light-headed or nearly fainting?", i18nKey: "fc.q.presyncope", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Pre-syncope" } },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 30 }, recoveryInputs: ["palpitations", "presyncope", "meds_taken"]
+    },
+    seizure: {
+      id: "seizure", name: "Seizure / Epilepsy", specialty: "Neurology", version: 1, followUpDays: 90, schedule: [3, 7, 14, 30, 60, 90],
+      questions: [
+        overall,
+        { id: "recurrent_seizure", text: "Any further seizure/fit since discharge?", i18nKey: "fc.q.recseizure", type: "yesno", weight: 25, redFlag: { when: "yes", level: "red", reason: "Recurrent seizure" } },
+        { id: "meds_taken", text: "Taking anti-seizure medicines every day?", i18nKey: "fc.q.meds", type: "choice", options: ["taken", "skipped", "unavailable"], weight: 22, redFlag: { when: "in:[skipped,unavailable]", level: "orange", reason: "Anti-epileptic medication not taken" } },
+        { id: "drowsy", text: "Unusually drowsy or confused?", i18nKey: "fc.q.drowsy", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "New drowsiness/confusion" } }
+      ],
+      completion: { needImproving: true, minScore: 85, byDay: 90 }, recoveryInputs: ["recurrent_seizure", "meds_taken"], blockGreenIfMissing: ["recurrent_seizure"]
+    },
+    ckd: {
+      id: "ckd", name: "Chronic Kidney Disease", specialty: "Nephrology", version: 1, followUpDays: 45, schedule: [7, 14, 30, 45],
+      questions: [
+        overall,
+        { id: "urine", text: "Urine output vs normal?", i18nKey: "fc.q.urine", type: "choice", options: ["normal", "reduced", "none"], weight: 22, redFlags: [{ when: "==none", level: "red", reason: "Anuria" }, { when: "==reduced", level: "orange", reason: "Reduced urine output" }] },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness (fluid overload)" } },
+        { id: "swelling", text: "New swelling (legs/face)?", i18nKey: "fc.q.swelling", type: "yesno", weight: 12, soft: "yes" },
+        { id: "nausea", text: "Nausea/vomiting?", i18nKey: "fc.q.nausea", type: "yesno", weight: 8, soft: "yes" },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 45 }, recoveryInputs: ["urine", "breathless", "meds_taken"], blockGreenIfMissing: ["urine"]
+    },
+    nephrotic: {
+      id: "nephrotic", name: "Nephrotic Syndrome", specialty: "Nephrology", version: 1, followUpDays: 30, schedule: [3, 7, 14, 21, 30],
+      questions: [
+        overall,
+        { id: "swelling", text: "Body swelling (0 none – 3 severe)", i18nKey: "fc.q.swelling2", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Worsening oedema" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "urine_output", text: "Passing much less urine?", i18nKey: "fc.q.urineless", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Reduced urine output" } },
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 10, soft: "yes" },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 30 }, recoveryInputs: ["swelling", "breathless", "urine_output"]
+    },
+    cld: {
+      id: "cld", name: "Chronic Liver Disease", specialty: "Gastroenterology", version: 1, followUpDays: 30, schedule: [3, 7, 14, 21, 30], missedEscalateAt: 2,
+      questions: [
+        overall,
+        { id: "melena", text: "Black tarry stools?", i18nKey: "fc.q.melena", type: "yesno", weight: 22, redFlag: { when: "yes", level: "red", reason: "GI bleeding (melena)" } },
+        { id: "hematemesis", text: "Vomiting blood?", i18nKey: "fc.q.hemat", type: "yesno", weight: 22, redFlag: { when: "yes", level: "red", reason: "Haematemesis" } },
+        { id: "drowsy", text: "Unusually drowsy, confused or sleeping too much?", i18nKey: "fc.q.enceph", type: "yesno", weight: 18, redFlag: { when: "yes", level: "orange", reason: "Possible hepatic encephalopathy" } },
+        { id: "abdo_distension", text: "Increasing tummy swelling (0-3)", i18nKey: "fc.q.ascites", type: "scale", weight: 12, redFlag: { when: ">=3", level: "orange", reason: "Worsening ascites" } },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 30 }, recoveryInputs: ["melena", "hematemesis", "drowsy", "abdo_distension"]
+    },
+    hepatitis: {
+      id: "hepatitis", name: "Hepatitis", specialty: "Gastroenterology", version: 1, followUpDays: 21, schedule: [3, 7, 14, 21],
+      questions: [
+        overall,
+        { id: "drowsy", text: "Unusually drowsy or confused?", i18nKey: "fc.q.enceph", type: "yesno", weight: 20, redFlag: { when: "yes", level: "red", reason: "Possible acute liver failure (encephalopathy)" } },
+        { id: "vomiting", text: "Persistent vomiting?", i18nKey: "fc.q.dvomit", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Persistent vomiting" } },
+        { id: "jaundice", text: "Yellow eyes/skin worsening?", i18nKey: "fc.q.jaundice", type: "yesno", weight: 10, soft: "yes" },
+        { id: "oral_intake", text: "Able to eat and drink?", i18nKey: "fc.q.intake", type: "yesno", weight: 10, redFlag: { when: "no", level: "orange", reason: "Poor oral intake" } }
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 21 }, recoveryInputs: ["drowsy", "vomiting", "oral_intake"]
+    },
+    pancreatitis: {
+      id: "pancreatitis", name: "Pancreatitis", specialty: "Gastroenterology", version: 1, followUpDays: 14, schedule: [2, 5, 10, 14],
+      questions: [
+        overall,
+        { id: "abdo_pain", text: "Abdominal pain (0 none – 3 severe)", i18nKey: "fc.q.abdopain", type: "scale", weight: 20, redFlag: { when: ">=3", level: "red", reason: "Severe abdominal pain" } },
+        { id: "vomiting", text: "Persistent vomiting?", i18nKey: "fc.q.dvomit", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Persistent vomiting" } },
+        { id: "oral_intake", text: "Able to eat and drink?", i18nKey: "fc.q.intake", type: "yesno", weight: 12, redFlag: { when: "no", level: "orange", reason: "Not tolerating oral intake" } },
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 10, soft: "yes" }
+      ],
+      completion: { needAfebrile: true, needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["abdo_pain", "vomiting", "oral_intake"]
+    },
+    ugib: {
+      id: "ugib", name: "Upper GI Bleed", specialty: "Gastroenterology", version: 1, followUpDays: 14, schedule: [1, 3, 7, 14], missedEscalateAt: 1,
+      questions: [
+        overall,
+        { id: "melena", text: "Black tarry stools?", i18nKey: "fc.q.melena", type: "yesno", weight: 24, redFlag: { when: "yes", level: "red", reason: "Ongoing melena" } },
+        { id: "hematemesis", text: "Vomiting blood?", i18nKey: "fc.q.hemat", type: "yesno", weight: 24, redFlag: { when: "yes", level: "red", reason: "Haematemesis" } },
+        { id: "dizzy", text: "Dizzy or light-headed when standing?", i18nKey: "fc.q.dizzy", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Postural symptoms (possible ongoing blood loss)" } },
+        adherence
+      ],
+      completion: { needImproving: true, minScore: 85, byDay: 14 }, recoveryInputs: ["melena", "hematemesis", "dizzy"], blockGreenIfMissing: ["melena"]
+    },
+    malaria: {
+      id: "malaria", name: "Malaria", specialty: "Infectious disease", version: 1, followUpDays: 14, schedule: [2, 5, 10, 14],
+      questions: [
+        overall,
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 10, soft: "yes" },
+        { id: "urine_dark", text: "Cola-coloured / very dark urine?", i18nKey: "fc.q.darkurine", type: "yesno", weight: 18, redFlag: { when: "yes", level: "orange", reason: "Dark urine (possible haemolysis)" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "drowsy", text: "Unusually drowsy or confused?", i18nKey: "fc.q.drowsy", type: "yesno", weight: 15, redFlag: { when: "yes", level: "red", reason: "Altered sensorium (severe malaria)" } },
+        adherence
+      ],
+      completion: { needAfebrile: true, minScore: 85, byDay: 14 }, recoveryInputs: ["fever", "urine_dark", "breathless", "drowsy"]
+    },
+    cellulitis: {
+      id: "cellulitis", name: "Cellulitis", specialty: "Infectious disease", version: 1, followUpDays: 14, schedule: [2, 5, 10, 14],
+      questions: [
+        overall,
+        { id: "spreading", text: "Is the redness spreading / larger than before?", i18nKey: "fc.q.spreading", type: "yesno", weight: 18, redFlag: { when: "yes", level: "orange", reason: "Spreading erythema" } },
+        { id: "blistering", text: "New blisters, black skin, or severe pain out of proportion?", i18nKey: "fc.q.necrot", type: "yesno", weight: 22, redFlag: { when: "yes", level: "red", reason: "Red flags for necrotising infection" } },
+        { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Fever with skin infection" } },
+        { id: "pain", text: "Pain (0-3)", i18nKey: "fc.q.painscale", type: "scale", weight: 10, soft: ">=2" },
+        adherence
+      ],
+      completion: { needAfebrile: true, needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["spreading", "blistering", "fever"]
+    },
+    sepsis: {
+      id: "sepsis", name: "Sepsis (recovery)", specialty: "Infectious disease", version: 1, followUpDays: 21, schedule: [1, 3, 7, 14, 21], missedEscalateAt: 1,
+      questions: [
+        overall,
+        { id: "fever", text: "Fever or shivering today?", i18nKey: "fc.q.fever", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Recurrent fever" } },
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "urine_output", text: "Passing much less urine?", i18nKey: "fc.q.urineless", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Reduced urine output" } },
+        { id: "dizzy", text: "Dizzy or light-headed?", i18nKey: "fc.q.dizzy", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "Possible low blood pressure" } },
+        adherence
+      ],
+      completion: { needAfebrile: true, needImproving: true, minScore: 85, byDay: 21 }, recoveryInputs: ["fever", "breathless", "urine_output", "dizzy"]
+    },
+    poisoning: {
+      id: "poisoning", name: "Poisoning / Overdose (recovery)", specialty: "Toxicology", version: 1, followUpDays: 14, schedule: [1, 3, 7, 14],
+      questions: [
+        overall,
+        { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 15, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
+        { id: "drowsy", text: "Unusually drowsy or confused?", i18nKey: "fc.q.drowsy", type: "yesno", weight: 18, redFlag: { when: "yes", level: "red", reason: "Reduced consciousness" } },
+        { id: "low_mood", text: "Feeling low, hopeless, or not safe?", i18nKey: "fc.q.mood", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Mental-health follow-up needed" } },
+        { id: "vomiting", text: "Persistent vomiting?", i18nKey: "fc.q.dvomit", type: "yesno", weight: 8, soft: "yes" }
+      ],
+      completion: { needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["breathless", "drowsy", "low_mood"]
+    },
+    // Generic Medical Follow-up — the fallback when no diagnosis matches. Simple recovery questions only.
+    // Must NEVER block enrolment; reminds the patient of their scheduled follow-up.
+    generic: {
+      id: "generic", name: "General Medical Follow-up", specialty: "General Medicine", version: 1, followUpDays: 21, schedule: [3, 7, 14, 21],
+      questions: [
+        overall,
+        { id: "new_symptoms", text: "Any new symptoms since discharge?", i18nKey: "fc.q.newsym", type: "yesno", weight: 12, redFlag: { when: "yes", level: "orange", reason: "New symptoms reported" } },
+        { id: "urgent_concern", text: "Fever, breathing difficulty, severe pain, or any urgent concern?", i18nKey: "fc.q.urgent", type: "yesno", weight: 22, redFlag: { when: "yes", level: "red", reason: "Patient reports an urgent concern" } },
+        adherence,
+        { id: "message_doctor", text: "Anything you would like to tell your doctor?", i18nKey: "fc.q.msgdoc", type: "yesno", weight: 4, soft: "yes" }
+      ],
+      completion: { needImproving: true, minScore: 75, byDay: 21 }, recoveryInputs: ["new_symptoms", "urgent_concern", "meds_taken"]
     }
   };
 

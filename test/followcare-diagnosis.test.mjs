@@ -4,8 +4,10 @@ import assert from "node:assert";
 import fs from "node:fs"; import vm from "node:vm"; import path from "node:path";
 import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-vm.runInThisContext(fs.readFileSync(path.join(ROOT, "followcare-diagnosis.js"), "utf8"), { filename: "followcare-diagnosis.js" });
+const load = r => vm.runInThisContext(fs.readFileSync(path.join(ROOT, r), "utf8"), { filename: r });
+load("followcare-diagnosis.js"); load("followcare-pathways.js");
 const DX = globalThis.FollowCareDiagnosis;
+const PW = globalThis.FollowCarePathways;
 
 test("spec examples: many diagnosis names → one curated pathway (free text)", () => {
   assert.equal(DX.map("Alcoholic Liver Disease"), "cld");
@@ -73,4 +75,14 @@ test("normalize + normIcd", () => {
   assert.equal(DX.normalize("  Acute  LV-Failure!! "), "acute lv failure");
   assert.equal(DX.normIcd("j18.9 "), "J18.9");
   assert.equal(DX.normIcd("i-21.4"), "I21.4");
+});
+
+test("INTEGRITY: every pathway the mapper can return actually exists in the pathway catalog", () => {
+  const targets = new Set();
+  DX.ICD10_MAP.forEach(row => targets.add(row[1]));
+  DX.TEXT_MAP.forEach(row => targets.add(row[1]));
+  targets.add("generic"); // the guaranteed fallback
+  const missing = [];
+  targets.forEach(id => { if (!PW.get(id)) missing.push(id); });
+  assert.deepEqual(missing, [], "mapper targets with no matching pathway: " + missing.join(", "));
 });

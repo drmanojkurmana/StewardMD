@@ -33,17 +33,43 @@ falls back to manual entry if GHIS is offline or the number isn't found.
 - SMS (fallback, currently bypassed): `FOLLOWCARE_SMS_PROVIDER=twofactor` + `TWOFACTOR_API_KEY`.
 - Firestore deny-all rules deployed; Worker cron `30 3 * * *` live.
 
+## Phase-2 enhancements (NEW — 2026-07-28)
+**1. Diagnosis Mapping Engine (deterministic, NO LLM).** A centralized `DiagnosisMapper` (`followcare-diagnosis.js`)
+maps any discharge diagnosis to ONE of **26 curated recovery pathways** — ICD-10 code first (when present),
+then normalized free-text synonyms, then a safe **Generic Follow-up** fallback. Many names collapse to one
+pathway (Alcoholic Liver Disease / HCV Cirrhosis / Decompensated CLD → CLD; CAP / Aspiration Pneumonia →
+Pneumonia; NSTEMI → ACS; DKA → Diabetes; ...). An unmapped diagnosis now enrols into Generic instead of being
+blocked. Both the app and the server (CSV bulk-enrol) delegate to the same mapper. Fully unit-tested; the
+mapper's every target pathway is asserted to exist.
+
+**2. Automatic language detection + multilingual patient interfaces.** `followcare-i18n.js` detects the
+patient's regional language deterministically from the GHIS state/city/address (full state→language matrix:
+AP/Telangana→Telugu, TN→Tamil, Karnataka→Kannada, Kerala→Malayalam, Odisha→Odia, Maharashtra→Marathi,
+Gujarat→Gujarati, WB→Bengali, Punjab→Punjabi, Assam→Assamese, the Hindi belt→Hindi, unknown→English). The
+enrol form auto-selects it (12-language picker, still editable). The patient portal shows a one-time
+**"Would you like to continue in <language>?"** prompt (Continue / English / Choose another), stores the
+choice server-side (`langConfirmed`) so it's **never asked again** unless changed via the in-portal language
+switcher, and renders SMS/WhatsApp/portal/questions from a **reviewed** translation registry — English is the
+guaranteed fallback (NO runtime machine translation). English + Hindi + **Telugu** are reviewed; the other
+nine languages fall back to English until a reviewer fills them in (adding a language = adding one column).
+
 ## Before real-patient rollout (owner — non-blocking for "ready", important for scale/compliance)
-1. **Clinician sign-off** on the 9 pathways' red-flag thresholds (the safety core; reviewed but needs your OK).
+1. **Clinician sign-off** on all **26 pathways'** red-flag thresholds (the safety core; the original 9 were
+   reviewed, the 17 new ones — asthma/TB/ACS/CLD/sepsis/… + Generic — carry provisional thresholds).
+   Also review the reviewed **Telugu** clinical strings before wide Telugu rollout.
 2. **WhatsApp: move Green-API → a BSP** (AiSensy/Interakt/Gupshup) for scale — Green-API is unofficial/pilot
    (ban risk). Same `custom` adapter, just new URL/creds.
 3. **Rotate the credentials that appeared in chat**: Green-API instance token, 2Factor API key, GHIS login.
 4. Optional: register a **2Factor DLT template** if you want SMS as a fallback channel.
 
 ## Not done (deliberately)
-- GHIS phone auto-fill (fragile server-side scrape — dropped; manual entry instead).
+- **GHIS address → language** is best-effort: the demographics scrape now also returns a short address
+  snippet for language detection, but the exact GHIS field labels aren't verified live for every hospital, so
+  detection can fall back to English + the manual picker (the portal first-run prompt is the guaranteed path).
+- Reviewed clinical translations for **9 of 12 languages** (Tamil/Kannada/Malayalam/Marathi/Gujarati/Bengali/
+  Punjabi/Odia/Assamese) — scaffolded, fall back to English until a human reviewer fills the registry.
 - Full P2–P5 depth items already documented in `docs/followcare/PHASES-COMPLETE-REPORT.md` (LLM narrative,
-  8-language clinical translation, EHR/HL7 live connectors, ML models) — scaffolded, external-dependency.
+  EHR/HL7 live connectors, ML models) — scaffolded, external-dependency.
 
 The deployed product runs on Cloudflare independent of your Mac. I left the Mac on so the work + deploys
 completed; nothing further needs it.

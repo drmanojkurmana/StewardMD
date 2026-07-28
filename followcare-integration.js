@@ -11,14 +11,23 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
 
   // ---- discharge CSV → enroll payloads (MODULE 3, CSV import) -----------------------------
-  // Keyword → pathway id, so a free-text discharge diagnosis maps to a recovery pathway.
+  // Legacy keyword → pathway table. Kept ONLY as a safety net for environments where the centralized
+  // DiagnosisMapper (followcare-diagnosis.js) isn't loaded; the mapper is the real, extensible engine.
   var DX_MAP = [
     [/pneumonia|lrti|chest infection/i, "pneumonia"], [/heart failure|chf|cardiac failure|hfref|hfpef/i, "heart_failure"],
     [/copd|emphysema|chronic bronchitis/i, "copd"], [/dengue/i, "dengue"], [/post.?op|surgery|surgical|laparotomy|arthroplasty/i, "post_op"],
     [/aki|acute kidney|renal failure/i, "aki"], [/stroke|cva|infarct.*brain|tia/i, "stroke"],
     [/diabet|dka|hyperglyc/i, "diabetes"], [/hypertens|htn|bp crisis/i, "hypertension"]
   ];
-  function diagnosisToPathway(text) { var s = String(text || ""); for (var i = 0; i < DX_MAP.length; i++) if (DX_MAP[i][0].test(s)) return DX_MAP[i][1]; return null; }
+  // Free-text (+ optional ICD-10) → pathway id. Delegates to the centralized deterministic DiagnosisMapper
+  // (ICD-10 first, then normalized text) when present, which falls back to the "generic" pathway so a
+  // discharge is NEVER left unmapped — Generic Follow-up must never block enrolment. Returns a concrete
+  // pathway id (never null); the legacy table is used only if the mapper module isn't loaded.
+  function diagnosisToPathway(text, icd) {
+    if (G.FollowCareDiagnosis && G.FollowCareDiagnosis.map) return G.FollowCareDiagnosis.map(text, icd);
+    var s = String(text || ""); for (var i = 0; i < DX_MAP.length; i++) if (DX_MAP[i][0].test(s)) return DX_MAP[i][1];
+    return "generic";
+  }
 
   // Minimal RFC-4180-ish CSV parser (handles quoted fields + commas/newlines in quotes).
   function parseCSV(text) {
@@ -43,13 +52,15 @@
     function col(names) { for (var i = 0; i < names.length; i++) { var idx = head.indexOf(names[i]); if (idx >= 0) return idx; } return -1; }
     var cName = col(["name", "patient_name", "patient"]), cPhone = col(["phone", "mobile", "phone_number", "contact"]),
         cDx = col(["diagnosis", "dx", "condition", "disease"]), cDisch = col(["discharge_date", "discharge", "dod", "discharged_on"]),
-        cMrn = col(["mrn", "uhid", "hospital_no", "ip_no"]), cLang = col(["language", "lang", "preferred_language"]);
+        cMrn = col(["mrn", "uhid", "hospital_no", "ip_no"]), cLang = col(["language", "lang", "preferred_language"]),
+        cIcd = col(["icd", "icd10", "icd_10", "icd_code", "icd10_code"]);
     var out = [], errors = [];
     for (var r = 1; r < grid.length; r++) {
-      var g = grid[r], phone = String(cPhone >= 0 ? g[cPhone] : "").replace(/[^\d]/g, ""), dxText = cDx >= 0 ? g[cDx] : "";
-      var pathwayId = diagnosisToPathway(dxText);
+      var g = grid[r], phone = String(cPhone >= 0 ? g[cPhone] : "").replace(/[^\d]/g, ""), dxText = cDx >= 0 ? g[cDx] : "", icd = cIcd >= 0 ? g[cIcd] : "";
+      // Every diagnosis resolves to a pathway (specific match or the safe Generic fallback), so an
+      // unmapped diagnosis never blocks enrolment — only a missing/invalid phone does.
+      var pathwayId = diagnosisToPathway(dxText, icd);
       if (phone.length < 10) { errors.push({ line: r + 1, reason: "missing/invalid phone" }); continue; }
-      if (!pathwayId) { errors.push({ line: r + 1, reason: "diagnosis '" + String(dxText).slice(0, 40) + "' not mapped to a pathway" }); continue; }
       var dMs = null; if (cDisch >= 0 && g[cDisch]) { var t = Date.parse(g[cDisch]); if (!isNaN(t)) dMs = t; }
       out.push({ pathwayId: pathwayId, name: cName >= 0 ? String(g[cName]).trim() : "", phone: phone, mrn: cMrn >= 0 ? String(g[cMrn]).trim() : "", dischargeMs: dMs, lang: cLang >= 0 ? String(g[cLang]).trim().toLowerCase() : "en" });
     }

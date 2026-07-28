@@ -17,6 +17,7 @@ import { sendSms } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import Engine from "../followcare-engine.js";
 import Pathways from "../followcare-pathways.js";
+import I18n from "../followcare-i18n.js";
 
 const DAY = 86400000;
 
@@ -47,19 +48,13 @@ export function plan(ep, nowMs, opts) {
 }
 
 // ---- templated, PHI-light message -------------------------------------------------------
-const TPL = {
-  en: {
-    send: (n, l) => `Hi ${n || "there"}, this is your StewardMD recovery check-in. It takes a minute: ${l}`,
-    remind: (n, l) => `Reminder: please complete your StewardMD recovery check-in when you can: ${l}`,
-  },
-  hi: {
-    send: (n, l) => `नमस्ते ${n || ""}, यह आपका StewardMD रिकवरी चेक-इन है। कृपया एक मिनट में पूरा करें: ${l}`,
-    remind: (n, l) => `याद दिलाना: कृपया अपना StewardMD रिकवरी चेक-इन पूरा करें: ${l}`,
-  },
-};
+// Bodies come from the reviewed i18n registry (followcare-i18n.js) so a patient gets their check-in in
+// their own language when one has been reviewed, and English otherwise — NEVER a machine translation at
+// send time. PHI-light: first name + opaque link only. `kind` maps to a registry key.
+const MSG_KEY = { send: "fc.msg.send", remind: "fc.msg.remind", reminder_med: "fc.msg.reminder_med", reminder_appt: "fc.msg.reminder_appt" };
 export function messageBody(firstName, link, lang, kind) {
-  const t = TPL[lang] || TPL.en;
-  return (t[kind] || t.send)(firstName, link);
+  const key = MSG_KEY[kind] || MSG_KEY.send;
+  return I18n.t(key, lang || "en", { name: firstName || "", link: link || "" });
 }
 
 // ---- send one check-in link -------------------------------------------------------------

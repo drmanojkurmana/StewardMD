@@ -747,16 +747,21 @@
         getPatients: function() { return (_patients || []).slice(); },
         // Best-effort: the patient's registered mobile from GHIS demographics (Searchnew page), by MR number.
         // Resolves to '' (never rejects) if not connected / not found / GHIS denies — callers pre-fill only if set.
-        fetchPhone: function(patientId) {
+        // Best-effort demographics for enrolment prefill: the patient's mobile + a short address/locality
+        // snippet (`region`) used ONLY for deterministic language detection. Never rejects.
+        fetchDemographics: function(patientId) {
           try {
-            if (!_connected || !patientId) return Promise.resolve('');
+            if (!_connected || !patientId) return Promise.resolve({ phone: '', region: '' });
             var list = _patients || [], p = null;
             for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
-            if (!p || !p.episodeId) return Promise.resolve('');
+            if (!p || !p.episodeId) return Promise.resolve({ phone: '', region: '' });
             var recordNo = p.patientId + '-' + p.episodeId;
             return authFetch('/demographics?recordNo=' + encodeURIComponent(recordNo))
-              .then(function(d) { return (d && d.phone) || ''; }, function() { return ''; });
-          } catch (e) { return Promise.resolve(''); }
+              .then(function(d) { return { phone: (d && d.phone) || '', region: (d && d.region) || '' }; }, function() { return { phone: '', region: '' }; });
+          } catch (e) { return Promise.resolve({ phone: '', region: '' }); }
+        },
+        fetchPhone: function(patientId) {
+          return this.fetchDemographics(patientId).then(function(d) { return (d && d.phone) || ''; });
         },
         fetchLabTests: function(patientId) {
           return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function(j) {
