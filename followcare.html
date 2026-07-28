@@ -329,6 +329,26 @@
   function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
   function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
   function clear(){ while(main.firstChild) main.removeChild(main.firstChild); }
+  // Mandatory-English: safety/legal text is shown in the patient's language AND English (English always
+  // present as an authoritative fallback, especially for the AI-drafted languages). enStr = the English string.
+  function enStr(k){ return (I18N.en && I18N.en[k]) || ""; }
+  function biHtml(k){ var s = esc(t(k)); if(LANG !== "en"){ var e = enStr(k); if(e && e !== t(k)) s += '<br><br><span style="opacity:.78;font-size:.94em">'+esc(e)+'</span>'; } return s; }
+  // Legal/safety disclaimer — translated + always with the English underneath (never English-only-hidden).
+  var DISCLAIMER = {
+    en: "This recovery check-in supports your care team. It does not replace medical advice and never changes your medicines. If you feel unwell, contact your doctor or local emergency services.",
+    hi: "यह रिकवरी चेक-इन आपकी देखभाल टीम की मदद के लिए है। यह चिकित्सा सलाह का विकल्प नहीं है और आपकी दवाइयाँ कभी नहीं बदलता। यदि आपकी तबियत ठीक न लगे, तो अपने डॉक्टर या स्थानीय आपातकालीन सेवाओं से संपर्क करें।",
+    te: "ఈ రికవరీ చెక్-ఇన్ మీ సంరక్షణ బృందానికి సహాయం చేస్తుంది. ఇది వైద్య సలహాకు ప్రత్యామ్నాయం కాదు, మీ మందులను ఎప్పుడూ మార్చదు. మీకు అనారోగ్యంగా అనిపిస్తే, మీ వైద్యుడిని లేదా స్థానిక అత్యవసర సేవలను సంప్రదించండి.",
+    ta: "இந்த குணமடைதல் நல விசாரிப்பு உங்கள் மருத்துவக் குழுவிற்கு உதவுகிறது. இது மருத்துவ ஆலோசனைக்கு மாற்றல்ல, உங்கள் மருந்துகளை ஒருபோதும் மாற்றாது. உடல்நிலை சரியில்லை எனில், உங்கள் மருத்துவரையோ உள்ளூர் அவசர சேவைகளையோ தொடர்பு கொள்ளுங்கள்.",
+    kn: "ಈ ಚೇತರಿಕೆ ಚೆಕ್-ಇನ್ ನಿಮ್ಮ ಆರೈಕೆ ತಂಡಕ್ಕೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಇದು ವೈದ್ಯಕೀಯ ಸಲಹೆಗೆ ಬದಲಿಯಲ್ಲ, ನಿಮ್ಮ ಔಷಧಿಗಳನ್ನು ಎಂದಿಗೂ ಬದಲಾಯಿಸುವುದಿಲ್ಲ. ನಿಮಗೆ ಅಸ್ವಸ್ಥವಾದರೆ, ನಿಮ್ಮ ವೈದ್ಯರನ್ನು ಅಥವಾ ಸ್ಥಳೀಯ ತುರ್ತು ಸೇವೆಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+    ml: "ഈ വീണ്ടെടുപ്പ് ചെക്ക്-ഇൻ നിങ്ങളുടെ പരിചരണ സംഘത്തെ പിന്തുണയ്ക്കുന്നു. ഇത് വൈദ്യോപദേശത്തിന് പകരമല്ല, നിങ്ങളുടെ മരുന്നുകൾ ഒരിക്കലും മാറ്റുന്നില്ല. അസ്വസ്ഥത തോന്നിയാൽ, നിങ്ങളുടെ ഡോക്ടറെയോ പ്രാദേശിക അടിയന്തര സേവനങ്ങളെയോ ബന്ധപ്പെടുക.",
+    mr: "ही रिकव्हरी चेक-इन तुमच्या काळजी पथकाला मदत करते. ती वैद्यकीय सल्ल्याला पर्याय नाही आणि तुमची औषधे कधीही बदलत नाही. तुम्हाला बरे वाटत नसेल, तर तुमच्या डॉक्टरांशी किंवा स्थानिक आपत्कालीन सेवांशी संपर्क साधा.",
+    gu: "આ રિકવરી ચેક-ઇન તમારી સંભાળ ટીમને મદદ કરે છે. તે તબીબી સલાહનો વિકલ્પ નથી અને તમારી દવાઓ ક્યારેય બદલતું નથી. જો તમને અસ્વસ્થ લાગે, તો તમારા ડૉક્ટર અથવા સ્થાનિક કટોકટી સેવાઓનો સંપર્ક કરો.",
+    bn: "এই রিকভারি চেক-ইন আপনার যত্ন দলকে সহায়তা করে। এটি চিকিৎসা পরামর্শের বিকল্প নয় এবং আপনার ওষুধ কখনও পরিবর্তন করে না। অসুস্থ বোধ করলে, আপনার ডাক্তার বা স্থানীয় জরুরি পরিষেবার সাথে যোগাযোগ করুন।",
+    pa: "ਇਹ ਰਿਕਵਰੀ ਚੈੱਕ-ਇਨ ਤੁਹਾਡੀ ਦੇਖਭਾਲ ਟੀਮ ਦੀ ਮਦਦ ਕਰਦਾ ਹੈ। ਇਹ ਡਾਕਟਰੀ ਸਲਾਹ ਦਾ ਬਦਲ ਨਹੀਂ ਹੈ ਅਤੇ ਤੁਹਾਡੀਆਂ ਦਵਾਈਆਂ ਕਦੇ ਨਹੀਂ ਬਦਲਦਾ। ਜੇ ਤੁਹਾਨੂੰ ਠੀਕ ਨਾ ਲੱਗੇ, ਤਾਂ ਆਪਣੇ ਡਾਕਟਰ ਜਾਂ ਸਥਾਨਕ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+    or: "ଏହି ରିକଭରୀ ଚେକ୍-ଇନ୍ ଆପଣଙ୍କ ଯତ୍ନ ଦଳକୁ ସହାୟତା କରେ। ଏହା ଚିକିତ୍ସା ପରାମର୍ଶର ବିକଳ୍ପ ନୁହେଁ ଏବଂ ଆପଣଙ୍କ ଔଷଧ କେବେ ବଦଳାଏ ନାହିଁ। ଅସୁସ୍ଥ ଲାଗିଲେ, ଆପଣଙ୍କ ଡାକ୍ତର କିମ୍ବା ସ୍ଥାନୀୟ ଜରୁରୀକାଳୀନ ସେବା ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ।",
+    as: "এই ৰিকভাৰী চেক-ইনে আপোনাৰ যত্ন দলক সহায় কৰে। ই চিকিৎসা পৰামৰ্শৰ বিকল্প নহয় আৰু আপোনাৰ ঔষধ কেতিয়াও সলনি নকৰে। অসুস্থ অনুভৱ কৰিলে, আপোনাৰ ডাক্তৰ বা স্থানীয় জৰুৰীকালীন সেৱাৰ সৈতে যোগাযোগ কৰক।"
+  };
+  function updateDisclaimer(){ try{ var d=document.querySelector(".disclaimer"); if(!d) return; var loc=DISCLAIMER[LANG]||DISCLAIMER.en; d.innerHTML = esc(loc) + (LANG!=="en" ? '<br><span style="opacity:.7">'+esc(DISCLAIMER.en)+'</span>' : ""); }catch(e){} }
 
   function screenMessage(icon, title, body, cls){
     clear();
@@ -350,7 +370,7 @@
   // ---- load today's check-in ----
   // Accept any language the shared registry supports (chrome falls back to English for unreviewed ones;
   // reviewed question/label strings still render in that language).
-  function setLang(l){ if(!l) return; if(I18N[l] || (FCI && FCI.isSupported(l))){ LANG = l; try{ document.documentElement.lang = l; }catch(e){} } }
+  function setLang(l){ if(!l) return; if(I18N[l] || (FCI && FCI.isSupported(l))){ LANG = l; try{ document.documentElement.lang = l; }catch(e){} updateDisclaimer(); } }
   function load(){
     if(!token){ return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),""); }
     fetchJSON(API+"/portal?t="+encodeURIComponent(token))
@@ -665,7 +685,7 @@
         '<div class="card result r-red">'+
           '<div class="ic" aria-hidden="true">⚠️</div>'+
           '<h1>'+esc(t("seek_t"))+'</h1>'+
-          '<div class="emergency">'+esc(t("seek_emerg"))+'</div>'+
+          '<div class="emergency">'+biHtml("seek_emerg")+'</div>'+
           '<a class="call" href="tel:112">📞 '+esc(t("call"))+'</a>'+
         '</div>'
       );
