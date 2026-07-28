@@ -119,9 +119,17 @@ async function getPatients(env, token) {
 // GHIS exposes the patient's phone on the Initial-Assessment form (GetInitialAssessmentnew?id=<MR>), NOT on
 // the doctor worklist. We fetch that ONE form for a given MR and extract ONLY the primary contact number —
 // nothing else is returned (minimise PHI). Used lazily when a doctor enrolls a discharged patient.
-async function getDemographics(env, token, patientId) {
+async function getDemographics(env, token, patientId, recordNo) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   if (!patientId) return { phone: '' };
+  // Step 1 — select this patient into the GHIS session (POST Searchnew with recordNo=<MR>-<IPMR episode> +
+  // the antiforgery token). WITHOUT this, GetInitialAssessmentnew 302s (session has no selected patient).
+  if (recordNo) {
+    await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew',
+      '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(recordNo),
+      { 'X-Requested-With': 'XMLHttpRequest' });
+  }
+  // Step 2 — fetch that patient's assessment form (now authorised) and pull ONLY the primary contact number.
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
   return { phone: extractPrimaryContact(r.body || '') };
@@ -266,7 +274,7 @@ export async function onRequest(context) {
     const unauth = (r) => r && r.unauth;
     if (seg === 'status')          { const s = await getSession(env, token); return json({ connected: !!s, userId: s ? s.userId : null }); }
     if (seg === 'patients')        { const r = await getPatients(env, token);        return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
-    if (seg === 'demographics')    { const r = await getDemographics(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'demographics')    { const r = await getDemographics(env, token, q.get('patientId') || '', q.get('recordNo') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab')             { const r = await getLabOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
