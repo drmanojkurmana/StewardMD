@@ -201,16 +201,23 @@ async function vertexAccessToken(env) {
   _vTok = env.GCP_WIF_PRIVATE_KEY ? await wifAccessToken(env) : await saJwtAccessToken(env);
   return _vTok.value;
 }
+// Latency instrumentation (no PHI/secrets): last Vertex call's auth vs generateContent split + region.
+// Read by /route under a dbg flag to profile where the ~3s goes (auth-exchange vs inference vs region).
+let _vtiming = null;
 const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens, opts) {
     const loc = env.GCP_LOCATION || "us-central1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
+    const ta = Date.now();
     const token = await vertexAccessToken(env);
+    const authMs = Date.now() - ta;
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
+    const tg = Date.now();
     const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
+    _vtiming = { authMs: authMs, genMs: Date.now() - tg, region: loc, model: modelFor(env, opts), authCached: authMs < 50 };
     return parseCandidates(jr.data, jr.status);
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
@@ -796,6 +803,7 @@ export async function onRequest(context) {
       // rules — the model's medical knowledge resolves the infinite long tail to canonical concepts +
       // intent. The client then drives deterministic KB retrieval from the canonical concept; Gemini
       // only explains when the KB can't. Tiny output (~120 tokens), temp 0.
+      const _routeT0 = Date.now();
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
       const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
@@ -835,7 +843,8 @@ export async function onRequest(context) {
         confidence: (typeof p.confidence === "number") ? Math.max(0, Math.min(1, p.confidence)) : 0.8,
         ambiguous: !!p.ambiguous && opts.length >= 2,
         options: opts,
-        mode: "route"
+        mode: "route",
+        _timing: (body && body.dbg) ? Object.assign({ routeTotalMs: Date.now() - _routeT0 }, _vtiming || {}) : undefined
       });
     }
     if (seg === "imaging") {
