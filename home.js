@@ -1259,13 +1259,16 @@
               ) : "";
             } catch (e) { return ""; }
           })() +
-          (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT OFF).
-            // Tile appears only when the flag is on (?fc=1 or Settings); off => "" => the home grid is unchanged.
+          (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT ON).
+            // home.js runs BEFORE followcare-flags.js/followcare.js (deferred), so this grid is often built
+            // before those globals exist — resolve DEFAULT ON synchronously (like KardiQ X) so the tile still
+            // shows on a fresh install. ?fc=0 or localStorage "0" (or the flag turned off) hides it.
             try {
-              var fon;
-              if (window.FollowCare && FollowCare.enabled) fon = FollowCare.enabled();
+              var fon, q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1];
+              if (q != null) fon = (q === "1" || q === "on" || q === "true");
+              else if (window.FollowCare && FollowCare.enabled) fon = FollowCare.enabled();
               else if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) fon = SMD_FOLLOWCARE_FLAGS.on();
-              else { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; fon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_followcare") === "1"); }
+              else fon = (localStorage.getItem("smd_followcare") !== "0");
               return fon ? rtile("followcare", "health_and_safety", "FollowCare", "Recovery follow-up") : "";
             } catch (e) { return ""; }
           })() +
