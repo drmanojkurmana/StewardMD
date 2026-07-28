@@ -315,6 +315,8 @@ export default {
   //   "0 6 * * 1"     → build the weekly "This Week in Medicine" digest (Mon 06:00 UTC).
   //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients AND sweep overdue ICU round tasks
   //                     (push the whole unit) — covers units where no member's app is open.
+  //   "30 3 * * *"    → FollowCare daily recovery dispatcher (09:00 IST): send due check-in links +
+  //                     reminders, escalate missed check-ins, run the retention sweep.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
@@ -327,6 +329,10 @@ export default {
     if (event.cron === "30 5 * * *") {
       ctx.waitUntil(post("/api/updates/sync"));            // daily Medical Updates crawl
       ctx.waitUntil(post("/api/lifecycle/run"));           // daily: Pro-upsell email for day-3 non-converters
+      return;
+    }
+    if (event.cron === "30 3 * * *") {                     // FollowCare: daily recovery dispatcher
+      ctx.waitUntil(post("/api/followcare/admin/run-scheduler")); // due check-ins + reminders + missed escalation + retention sweep
       return;
     }
     const path = event.cron === "0 6 * * 1" ? "/api/updates/digest" : "/api/updates/sync";
