@@ -31,6 +31,8 @@ import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { fsQuery } from "../../_fbfirestore.js";
 import { runScheduler } from "../../_followcare_dispatch.js";
 import Analytics from "../../../followcare-analytics.js";
+import Intel from "../../../followcare-intel.js";
+import Integration from "../../../followcare-integration.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -119,6 +121,20 @@ export async function onRequest(context) {
           insights: Analytics.insights(eps), digest: Analytics.digest(eps, now),
         } }, 200, request);
       }
+      // Phase 4 — discharge CSV bulk import (for hospitals without an API). The importer attests batch consent.
+      if (request.method === "POST" && seg === "import") {
+        const b = await readBody(request);
+        if (!b.hospitalId) return json({ error: "missing_hospitalId" }, 400, request);
+        if (!b.consentAttested) return json({ error: "consent_required" }, 400, request);
+        const parsed = Integration.fromDischargeCSV(b.csv || "");
+        const doctorUid = b.assignDoctorUid || ("hospital:" + b.hospitalId);
+        const res = { enrolled: 0, failed: 0, errors: parsed.errors.slice(0, 100) };
+        for (const row of parsed.rows.slice(0, 500)) {
+          const r = await FC.enrollEpisode(env, { hospitalId: b.hospitalId, doctorUid: doctorUid, pathwayId: row.pathwayId, phone: row.phone, name: row.name, dischargeMs: row.dischargeMs, lang: row.lang, consentAttested: true });
+          if (r.ok) res.enrolled++; else { res.failed++; res.errors.push({ reason: r.error }); }
+        }
+        return json(res, 200, request);
+      }
       // CSV export (MODULE 16) — NON-PHI operational columns.
       if (request.method === "GET" && seg === "report") {
         const eps = await FC.listAllSummaries(env, url.searchParams.get("hospitalId") || "");
@@ -204,7 +220,27 @@ export async function onRequest(context) {
       // Audit the PHI/clinical-read (who viewed which episode, when) — HIPAA §164.312(b) / DPDP accountability.
       const auditRead = FC.audit(env, { hospitalId: ep.hospitalId, episodeId: id, actor: "doctor:" + uid, action: "view" });
       context.waitUntil ? context.waitUntil(auditRead) : await auditRead;
-      return json({ episode: FC.episodeSummary(ep), timeline: await FC.episodeTimeline(env, id) }, 200, request);
+      const summary = FC.episodeSummary(ep);
+      const timeline = await FC.episodeTimeline(env, id);
+      // Phase 5 — recovery intelligence for this episode (twin / deterioration prediction / prevention plan).
+      const pw = Pathways.get(ep.pathwayId);
+      const lastTl = timeline.length ? timeline[timeline.length - 1] : null;
+      const latest = { recoveryScore: summary.score, escalation: summary.currentEscalation, readmissionRisk: summary.risk, trend: summary.trend, redFlags: (lastTl && lastTl.redFlags) || [], reasons: (lastTl && lastTl.reasons) || [] };
+      const intel = {
+        twin: Intel.recoveryTwin(pw, ep.lastDayDone, latest),
+        prediction: Intel.predictDeterioration(timeline.map(function (t) { return { dayOffset: t.dayOffset, score: t.score, escalation: t.escalation }; }), latest, pw),
+        prevention: Intel.preventionPlan(latest, ep.pathwayId),
+      };
+      return json({ episode: summary, timeline: timeline, intel: intel }, 200, request);
+    }
+    if (request.method === "GET" && seg === "export") {
+      // Phase 4 — EMR write-back payload (FHIR R4-ish Bundle). No PHI beyond the EMR patient ref the caller supplies.
+      const id = url.searchParams.get("id") || "";
+      const ep = await FC.getEpisode(env, id);
+      if (!ep) return json({ error: "not_found" }, 404, request);
+      if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const tl = await FC.episodeTimeline(env, id);
+      return json({ fhir: Integration.toFHIR(FC.episodeSummary(ep), tl, { emrPatientId: url.searchParams.get("emrId") || "" }) }, 200, request);
     }
     if (request.method === "POST" && seg === "revoke") {
       const b = await readBody(request);

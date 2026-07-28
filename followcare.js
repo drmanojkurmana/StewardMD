@@ -322,6 +322,20 @@
         h("div", { style: "color:var(--slate,#5a7184);font-size:13px;margin-top:6px", text: statusMeta(ep.status) + "  ·  next check-in " + fmtWhen(ep.nextDueMs) + (ep.trend ? "  ·  trend " + ep.trend : "") }),
         rec ? h("div", { style: "margin-top:8px;padding:10px 12px;background:color-mix(in srgb,var(--teal,#0e6e63) 10%,transparent);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink,#14202b)", text: "AI recommendation: " + rec }) : null
       ]));
+      // Phase 5 — recovery intelligence: twin (expected vs actual), deterioration prediction, prevention plan.
+      var intel = res.body && res.body.intel;
+      if (intel) {
+        var tw = intel.twin || {}, pr = intel.prediction || {}, pv = intel.prevention || {};
+        var twTxt = (tw.expected != null && tw.actual != null) ? ("Recovery twin: actual " + tw.actual + " vs expected " + tw.expected + " (" + (tw.gap >= 0 ? "+" : "") + tw.gap + ", " + String(tw.status).replace(/_/g, " ") + ")") : "";
+        var prTxt = pr.likelihood ? ("Deterioration risk: " + pr.likelihood + (pr.windowHours ? " (~" + pr.windowHours + "h window)" : "")) : "";
+        var box = h("div", { style: "margin:12px 0;padding:12px 14px;border:1px solid var(--line,#dbe4e2);border-radius:12px;background:var(--panel,#fff)" }, [
+          h("div", { style: "font-weight:800;font-size:13px;color:#0e6e63;margin-bottom:6px", text: "Recovery Intelligence" }),
+          twTxt ? h("div", { style: "font-size:13px;margin-bottom:3px", text: twTxt }) : null,
+          prTxt ? h("div", { style: "font-size:13px;margin-bottom:3px", text: prTxt + (pr.reasons && pr.reasons.length ? " — " + pr.reasons.slice(0, 2).join("; ") : "") }) : null,
+          (pv.actions && pv.actions.length) ? h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);margin-top:4px", text: "Suggested (doctor decides): " + pv.actions.join(" · ") }) : null
+        ]);
+        body.appendChild(box);
+      }
       var tl = h("div", { "class": "fc-tl" });
       ((res.body && res.body.timeline) || []).forEach(function (ev) {
         var em = escalationMeta(ev.escalation);
