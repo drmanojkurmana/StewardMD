@@ -441,12 +441,19 @@
   // Chip source is BROADER than "answerable": any subtype the KB has real content for (so "Viral
   // Meningitis" appears even without a management brief). Detection stays on _cdmAnswerable (no new FP).
   function _cdmHasContent(id, e) { if (_cdmAnswerable(id, e)) return true; var KR = (G.KB_RAG && G.KB_RAG.treatments) || {}; if (KR[id]) return true; return !!(e && (e.pathophysiology || (e.clinicalPearls && e.clinicalPearls.length) || (e.additionalDifferentials && e.additionalDifferentials.length) || e.severityClassification)); }
-  // Clean chip label = the distinguishing qualifier (full name minus the shared term), casing preserved.
+  // Clean chip label = the distinguishing qualifier only. Drop redundant parenthetical abbreviations
+  // ("Acute Myeloid Leukaemia (AML)" -> "Acute Myeloid"), the shared term, leftover generic completions
+  // and connectives, cap length, capitalise. Generic — works for every disease name.
   function _cdmLabel(name, term) {
     var re = new RegExp("\\b" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "ig");
-    var q = String(name || "").replace(/[()]/g, " ").replace(re, " ").replace(/\s+/g, " ").trim();
-    q = q.replace(/^[,\-:;\s]+|[,\-:;\s]+$/g, "").trim();
-    return q || String(name || "");
+    var q = String(name || "")
+      .replace(/\([^)]*\)/g, " ")                                                                // drop parenthetical (usually a redundant abbrev)
+      .replace(re, " ")                                                                          // drop the shared term
+      .replace(/\b(mellitus|syndromes?|disease[s]?|infections?|disorders?|and|with|including|due|for|the|of)\b/ig, " ")
+      .replace(/\s+/g, " ").replace(/^[\s,\-:;]+|[\s,\-:;]+$/g, "").trim();
+    var w = q.split(" ").filter(Boolean); if (w.length > 4) q = w.slice(0, 4).join(" ");         // keep chips short
+    if (!q) q = String(name || "").replace(/\([^)]*\)/g, " ").trim();                            // fallback if fully stripped
+    return q.charAt(0).toUpperCase() + q.slice(1);
   }
   // Build the drill-down / clarification chip list from content-bearing subtype entries (cleaned, deduped).
   function _cdmChips(term, re, umbrellaId) {
