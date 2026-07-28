@@ -127,6 +127,42 @@ test("REGRESSION #19: missed check-in escalates (never stays at prior risk)", ()
   assert.equal(ENG.assessMissed("pneumonia", 3).escalation, "orange");
 });
 
+// ---- clinical-review remediations (C1/C2/I3 + advisories) ------------------------------
+test("CLINICAL C1: a MISSING disease red-flag answer blocks Green (dengue bleeding left blank)", () => {
+  // review's headline false-negative: bleeding dengue patient leaves warning_bleed blank, everything else fine
+  const r = assess("dengue", clean({ overall: "same", warning_abdo: "no", warning_vomit: "no", warning_lethargy: "no", fever: "no", hydration: "yes" /* warning_bleed MISSING */ }), { previousScore: 90 });
+  assert.notEqual(r.escalation, "green", "missing red-flag answer must not score green");
+  assert.ok(r.needsReview, "should flag needs-review");
+  assert.ok(r.reasons.some(x => /warning_bleed|key measurement/i.test(x)));
+});
+
+test("CLINICAL C1: fully-answered clean dengue still scores green (no false positive from the fix)", () => {
+  const r = assess("dengue", clean({ overall: "better", warning_bleed: "no", warning_abdo: "no", warning_vomit: "no", warning_lethargy: "no", fever: "no", hydration: "yes" }), { previousScore: 90 });
+  assert.equal(r.escalation, "green");
+});
+
+test("CLINICAL C2: glucose 62 mg/dL (Level-1 hypoglycaemia) now escalates (was a false green)", () => {
+  const r = assess("diabetes", clean({ overall: "same", hypo_severe: "no", hypo: "no", hyper: "no", glucose: 62, meds_taken: "taken" }));
+  assert.ok(r.escalation === "orange" || r.escalation === "red", "62 mg/dL must escalate, got " + r.escalation);
+  assert.equal(assess("diabetes", clean({ overall: "same", hypo_severe: "no", hypo: "no", hyper: "no", glucose: 45, meds_taken: "taken" })).escalation, "red");  // <54 stays red
+});
+
+test("CLINICAL advisory: real-but-critical SpO2 45 fires RED (floor lowered from 50 to 40)", () => {
+  assert.equal(assess("pneumonia", clean({ overall: "same", fever: "no", breathless: 1, spo2: 45, meds_taken: "taken" })).escalation, "red");
+});
+
+test("CLINICAL advisory: absolute weight typed into weight_delta (72) does NOT fire a false red", () => {
+  const r = assess("heart_failure", clean({ overall: "same", weight_delta: 72, orthopnea: 1, edema: 1, breathless: 1, meds_taken: "taken" }));
+  assert.notEqual(r.escalation, "red");                 // 72 kg delta is implausible -> invalid/review, not a red
+  assert.ok(r.invalidInputs.includes("weight_delta"));
+});
+
+test("CLINICAL I3: missed-check-in escalation is pathway-specific (dengue sooner than pneumonia)", () => {
+  assert.equal(ENG.assessMissed("dengue", 1, { pathways: PW }).escalation, "orange");   // high-acuity: 1 miss -> orange
+  assert.equal(ENG.assessMissed("pneumonia", 1, { pathways: PW }).escalation, "yellow"); // default: 1 miss -> yellow
+  assert.equal(ENG.assessMissed("heart_failure", 2, { pathways: PW }).escalation, "orange");
+});
+
 test("DETERMINISM + unknown pathway", () => {
   const input = clean({ overall: "same", fever: "yes", breathless: 2, spo2: 93, meds_taken: "skipped" });
   assert.deepEqual(assess("pneumonia", input), assess("pneumonia", input));

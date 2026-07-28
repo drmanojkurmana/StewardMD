@@ -16,7 +16,7 @@
     var PW = PWapi(opts); if (!PW) return null;
     var pw = PW.get(pathwayId); if (!pw) return null;
     var qs = PW.questionsFor(pathwayId).map(function (q) {
-      return { id: q.id, text: q.text, i18nKey: q.i18nKey, type: q.type, options: q.options || null, unit: q.unit || null };
+      return { id: q.id, text: q.text, i18nKey: q.i18nKey, type: q.type, options: q.options || null, unit: q.unit || null, max: (q.type === "scale" ? (q.max || 3) : null), redFlag: !!(q.redFlag || q.redFlags) };
     });
     return {
       pathwayId: pathwayId, disease: pw.name, dayOffset: dayOffset, version: pw.version,
@@ -43,7 +43,7 @@
   function scoreAssessment(pathwayId, answers, opts) {
     opts = opts || {};
     var ENG = ENGapi(opts); if (!ENG) return null;
-    var result = ENG.assess(pathwayId, answers, { pathways: PWapi(opts), previousScore: opts.previousScore, history: opts.history });
+    var result = ENG.assess(pathwayId, answers, { pathways: PWapi(opts), previousScore: opts.previousScore, previousAnswers: opts.previousAnswers, history: opts.history });
     if (!result) return null;
     var next = nextDay(pathwayId, opts.dayOffset || 0, opts);
     var level = result.escalation;

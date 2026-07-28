@@ -15,6 +15,7 @@ import { fsQuery, wUpdate, fsCommit } from "./_fbfirestore.js";
 import { getEpisode, decPHI, linkFor, recordDelivery, audit } from "./_followcare.js";
 import { sendSms } from "./_followcare_sms.js";
 import Engine from "../followcare-engine.js";
+import Pathways from "../followcare-pathways.js";
 
 const DAY = 86400000;
 
@@ -86,7 +87,11 @@ export async function runScheduler(env, nowMs, opts) {
   opts = opts || {};
   const cap = Number(env.FOLLOWCARE_SCHEDULER_CAP) || 500;
   const notify = typeof opts.notify === "function" ? opts.notify : null;
-  const rows = await fsQuery(env, "fc_episodes", { where: { field: "status", value: "active" }, limit: cap });
+  // Scan ACTIVE and ESCALATED episodes: an escalated patient must keep receiving check-ins so their recovery
+  // is still monitored while the clinician follows up (I4) — the episode leaves monitoring only when recovered/closed.
+  const active = await fsQuery(env, "fc_episodes", { where: { field: "status", value: "active" }, limit: cap });
+  const escalated = await fsQuery(env, "fc_episodes", { where: { field: "status", value: "escalated" }, limit: cap });
+  const rows = active.concat(escalated);
   const summary = { scanned: rows.length, sent: 0, reminded: 0, missedEscalated: 0, skipped: 0, failed: 0 };
 
   for (const d of rows) {
@@ -105,7 +110,7 @@ export async function runScheduler(env, nowMs, opts) {
 
     // Escalate a MISSED check-in (never let a non-responder silently sit at prior risk).
     if (p.missedCount > 0 && ep.lastEscalation !== "red") {
-      const missed = Engine.assessMissed(ep.pathwayId, p.missedCount, { pathways: undefined });
+      const missed = Engine.assessMissed(ep.pathwayId, p.missedCount, { pathways: Pathways });
       const level = (missed && missed.escalation) || "yellow";
       if (level === "orange" || level === "red") {
         // Only escalate once per missed threshold crossing (guard on a stored marker).

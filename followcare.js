@@ -193,7 +193,7 @@
       h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
       h("div", { "class": "fc-meta" }, [
         h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
-        h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.confidence ? "  ·  " + ep.confidence + " confidence" : "") })
+        h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.confidence ? "  ·  " + ep.confidence + " confidence" : "") + (ep.needsReview ? "  ·  ⚑ needs review" : "") })
       ])
     ]);
   }

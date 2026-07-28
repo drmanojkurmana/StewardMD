@@ -138,7 +138,7 @@ function toEpisode(doc) {
     status: f.status, dischargeMs: f.dischargeMs, createdMs: f.createdMs, lang: f.lang || "en", sendHour: f.sendHour, tz: f.tz || "Asia/Kolkata",
     tokenVer: f.tokenVer || 1, schedule: jparse(f.scheduleJson, []), lastDayDone: (f.lastDayDone == null ? -1 : f.lastDayDone),
     nextDueMs: f.nextDueMs || 0, lastEscalation: f.lastEscalation || "", peakEscalation: f.peakEscalation || "", lastScore: (f.lastScore == null ? null : f.lastScore),
-    lastConfidence: f.lastConfidence || "", recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
+    lastConfidence: f.lastConfidence || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
     lastSentDay: (f.lastSentDay == null ? -1 : f.lastSentDay), lastSentMs: f.lastSentMs || 0, lastMissedEscalated: (f.lastMissedEscalated == null ? -1 : f.lastMissedEscalated),
     _phi: { phoneEnc: f.phoneEnc || "", nameEnc: f.nameEnc || "", mrnEnc: f.mrnEnc || "" },
   };
@@ -156,8 +156,21 @@ export function episodeSummary(ep) {
   return {
     episodeId: ep.episodeId, disease: ep.disease, pathwayId: ep.pathwayId, status: ep.status,
     dischargeMs: ep.dischargeMs, lastDayDone: ep.lastDayDone, nextDueMs: ep.nextDueMs,
-    escalation: board, currentEscalation: ep.lastEscalation, score: ep.lastScore, confidence: ep.lastConfidence, recoveredMs: ep.recoveredMs,
+    escalation: board, currentEscalation: ep.lastEscalation, score: ep.lastScore, confidence: ep.lastConfidence, needsReview: !!ep.needsReview, recoveredMs: ep.recoveredMs,
   };
+}
+
+// Questions a patient MUST answer for a submit to score (server-enforced, not just in the browser): the
+// overall question, every global emergency probe, and every ANSWERABLE (non-numeric) red/orange question.
+// Numeric vitals (SpO2/glucose/BP/weight) stay optional but the engine blocks Green when they are missing.
+function present(v) { return !(v == null || String(v).trim() === ""); }
+function requiredForSubmit(pw) {
+  const req = ["overall"];
+  (pw.questions || []).forEach(function (q) {
+    if ((q.redFlag || q.redFlags) && q.type !== "number") req.push(q.id);
+  });
+  (Pathways.GLOBAL_RED || []).forEach(function (g) { req.push(g.id); });
+  return req;
 }
 export async function getEpisode(env, episodeId) { return toEpisode(await fsGet(env, "fc_episodes/" + String(episodeId))); }
 
@@ -268,9 +281,18 @@ export async function submitPortalAssessment(env, token, answers) {
   // what stops a patient (or anyone with the link) from answering ahead and fast-forwarding the schedule.
   const day = currentDueDay(ep, Date.now());
   if (day == null) return { ok: false, error: "nothing_due" };
+  answers = answers || {};
+
+  // Server-side completeness gate (never trust the browser): the emergency probes + answerable red-flag
+  // questions MUST be answered before we score, so a scripted/partial submit can't skip the red flags.
+  const pw = Pathways.get(ep.pathwayId);
+  if (!pw) return { ok: false, error: "bad_pathway" };
+  const missingReq = requiredForSubmit(pw).filter(function (id) { return !present(answers[id]); });
+  if (missingReq.length) return { ok: false, error: "incomplete", missing: missingReq };
+
   const prev = (ep.lastScore != null && ep.lastScore >= 0) ? ep.lastScore : undefined;
-  const scored = Assessment.scoreAssessment(ep.pathwayId, answers || {}, {
-    engine: Engine, pathways: Pathways, dayOffset: day, previousScore: prev, answers: answers || {},
+  const scored = Assessment.scoreAssessment(ep.pathwayId, answers, {
+    engine: Engine, pathways: Pathways, dayOffset: day, previousScore: prev, previousAnswers: ep.lastAnswers || undefined, answers: answers,
   });
   if (!scored) return { ok: false, error: "score_failed" };
   const r = scored.result, nowMs = Date.now();
@@ -296,6 +318,7 @@ export async function submitPortalAssessment(env, token, answers) {
     }),
     wUpdate(env, "fc_episodes/" + episodeId, {
       lastDayDone: day, lastEscalation: r.escalation, peakEscalation: peak, lastScore: r.recoveryScore, lastConfidence: r.confidence,
+      needsReview: !!r.needsReview, lastAnswersJson: JSON.stringify(answers).slice(0, 4000),
       nextDueMs: scored.nextDay != null ? nextDueMsFor(ep, scored.nextDay) : 0,
       status: nextStatus, recoveredMs: (scored.recovered && !peakSevere) ? nowMs : (ep.recoveredMs || 0),
     }, ep.updateTime ? { updateTime: ep.updateTime } : { exists: true }),

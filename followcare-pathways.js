@@ -7,9 +7,12 @@
  *
  * question: { id, text, i18nKey, type(overall|scale|yesno|number|choice), options?, unit?, weight?,
  *             redFlag?:{when,level,reason} | redFlags?:[...], soft?(when-expr for graded deterioration),
- *             worseDir?('down'|'up'), worseDelta? }
- * pathway.blockGreenIfMissing:[qId]  — critical vitals whose absence must block a Green.
- * when ops: 'worse' | '>=N' | '<=N' | '==V' | 'yes' | 'no' | 'in:[a,b]'
+ *             worseDir?('down'|'up'), worseDelta?, max?(scale upper bound, default 3), plausible?:[min,max] }
+ * pathway.blockGreenIfMissing:[qId]  — critical vitals whose absence must block a Green. NOTE: the engine
+ *   ALSO auto-blocks Green whenever ANY red-tier question is unanswered (C1 fix), so this list is now only
+ *   for extra must-have vitals beyond the red-flag set.
+ * pathway.missedEscalateAt:N  — # of missed check-ins that escalates to a clinician Orange (default 3;
+ *   high-acuity pathways set 1–2). when ops: 'worse' | '>=N' | '<=N' | '==V' | 'yes' | 'no' | 'in:[a,b]'
  */
 (function () {
   "use strict";
@@ -40,16 +43,16 @@
         { id: "fever_days", text: "How many days of fever?", i18nKey: "fc.q.feverdays", type: "number", unit: "days", weight: 10, redFlag: { when: ">=4", level: "orange", reason: "Persistent fever ≥4 days" } },
         { id: "cough", text: "Cough compared to yesterday (0 better – 3 worse)?", i18nKey: "fc.q.cough", type: "scale", weight: 8 },
         { id: "breathless", text: "Breathlessness (0 none – 3 severe)?", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
-        { id: "spo2", text: "Oxygen level if you have a meter", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 20, plausible: [50, 100], redFlag: { when: "<=91", level: "red", reason: "Low SpO₂" }, worseDir: "down", worseDelta: 3 },
+        { id: "spo2", text: "Oxygen level if you have a meter", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 20, plausible: [40, 100], redFlag: { when: "<=91", level: "red", reason: "Low SpO₂" }, worseDir: "down", worseDelta: 3 },
         adherence
       ],
       completion: { needAfebrile: true, needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["fever", "breathless", "spo2", "meds_taken"], blockGreenIfMissing: ["spo2"]
     },
     heart_failure: {
-      id: "heart_failure", name: "Heart Failure", specialty: "Cardiology", version: 1, followUpDays: 30, schedule: [1, 2, 3, 4, 5, 6, 7, 10, 14, 21, 30],
+      id: "heart_failure", name: "Heart Failure", specialty: "Cardiology", version: 1, followUpDays: 30, schedule: [1, 2, 3, 4, 5, 6, 7, 10, 14, 21, 30], missedEscalateAt: 2,
       questions: [
         overall,
-        { id: "weight_delta", text: "Weight change vs 3 days ago (kg)", i18nKey: "fc.q.weight", type: "number", unit: "kg", weight: 22, redFlags: [{ when: ">=3", level: "red", reason: "Rapid weight gain ≥3 kg" }, { when: ">=2", level: "orange", reason: "Weight gain ≥2 kg / 3 days" }] },
+        { id: "weight_delta", text: "Weight CHANGE vs 3 days ago (kg, e.g. 2 for +2 kg)", i18nKey: "fc.q.weight", type: "number", unit: "kg change", weight: 22, plausible: [-15, 15], redFlags: [{ when: ">=3", level: "red", reason: "Rapid weight gain ≥3 kg" }, { when: ">=2", level: "orange", reason: "Weight gain ≥2 kg / 3 days" }] },
         { id: "orthopnea", text: "Pillows needed to breathe at night (0-3)", i18nKey: "fc.q.orthopnea", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Worsening orthopnea" } },
         { id: "edema", text: "Leg swelling (0 none – 3 severe)", i18nKey: "fc.q.edema", type: "scale", weight: 15, redFlag: { when: ">=3", level: "orange", reason: "Worsening peripheral edema (fluid overload)" } },
         { id: "breathless", text: "Breathlessness (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
@@ -64,13 +67,13 @@
         { id: "breathless", text: "Breathlessness vs baseline (0-3)", i18nKey: "fc.q.breathless", type: "scale", weight: 18, redFlag: { when: ">=3", level: "red", reason: "Severe breathlessness" } },
         { id: "sputum", text: "Sputum colour", i18nKey: "fc.q.sputum", type: "choice", options: ["clear", "yellow", "green"], weight: 12, redFlag: { when: "==green", level: "orange", reason: "Purulent sputum" } },
         { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 8, soft: "yes" },
-        { id: "spo2", text: "Oxygen level if measured", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 20, plausible: [50, 100], redFlags: [{ when: "<=88", level: "red", reason: "Low SpO₂ (COPD)" }, { when: "<=91", level: "orange", reason: "Falling SpO₂" }], worseDir: "down", worseDelta: 3 },
+        { id: "spo2", text: "Oxygen level if measured", i18nKey: "fc.q.spo2", type: "number", unit: "%", weight: 20, plausible: [40, 100], redFlags: [{ when: "<=88", level: "red", reason: "Low SpO₂ (COPD)" }, { when: "<=91", level: "orange", reason: "Falling SpO₂" }], worseDir: "down", worseDelta: 3 },
         { id: "inhaler", text: "Inhalers used as prescribed?", i18nKey: "fc.q.inhaler", type: "yesno", weight: 12, redFlag: { when: "no", level: "orange", reason: "Inhaler non-adherence" } }
       ],
       completion: { needImproving: true, minScore: 80, byDay: 14 }, recoveryInputs: ["breathless", "sputum", "spo2", "inhaler"], blockGreenIfMissing: ["spo2"]
     },
     dengue: {
-      id: "dengue", name: "Dengue (convalescence)", specialty: "Infectious disease", version: 1, followUpDays: 10, schedule: [1, 2, 3, 4, 5, 7],
+      id: "dengue", name: "Dengue (convalescence)", specialty: "Infectious disease", version: 1, followUpDays: 7, schedule: [1, 2, 3, 4, 5, 7], missedEscalateAt: 1,
       questions: [
         overall,
         { id: "warning_bleed", text: "Any bleeding (gums, nose, skin, stool)?", i18nKey: "fc.q.dbleed", type: "yesno", weight: 20, redFlag: { when: "yes", level: "red", reason: "Dengue warning sign: bleeding" } },
@@ -80,7 +83,7 @@
         { id: "fever", text: "Fever today?", i18nKey: "fc.q.fever", type: "yesno", weight: 8, soft: "yes" },
         { id: "hydration", text: "Able to drink fluids?", i18nKey: "fc.q.hydration", type: "yesno", weight: 12, redFlag: { when: "no", level: "orange", reason: "Poor oral intake" } }
       ],
-      completion: { needAfebrile: true, minScore: 85, byDay: 10 }, recoveryInputs: ["warning_bleed", "warning_abdo", "warning_vomit", "warning_lethargy", "hydration"]
+      completion: { needAfebrile: true, minScore: 85, byDay: 7 }, recoveryInputs: ["warning_bleed", "warning_abdo", "warning_vomit", "warning_lethargy", "hydration"]
     },
     post_op: {
       id: "post_op", name: "Post-operative", specialty: "Surgery", version: 1, followUpDays: 21, schedule: [1, 3, 5, 7, 14, 21],
@@ -95,7 +98,7 @@
       completion: { needAfebrile: true, needImproving: true, minScore: 80, byDay: 21 }, recoveryInputs: ["wound", "fever", "pain", "mobility"]
     },
     aki: {
-      id: "aki", name: "Acute Kidney Injury", specialty: "Nephrology", version: 1, followUpDays: 30, schedule: [2, 5, 9, 14, 21, 30],
+      id: "aki", name: "Acute Kidney Injury", specialty: "Nephrology", version: 1, followUpDays: 30, schedule: [2, 5, 9, 14, 21, 30], missedEscalateAt: 2,
       questions: [
         overall,
         { id: "urine", text: "Urine output vs normal?", i18nKey: "fc.q.urine", type: "choice", options: ["normal", "reduced", "none"], weight: 22, redFlags: [{ when: "==none", level: "red", reason: "Anuria (no urine)" }, { when: "==reduced", level: "orange", reason: "Reduced urine output" }] },
@@ -127,7 +130,7 @@
         { id: "hypo_severe", text: "Any low-sugar episode with confusion or collapse?", i18nKey: "fc.q.hyposev", type: "yesno", weight: 24, redFlag: { when: "yes", level: "red", reason: "Severe hypoglycaemia (confusion/collapse)" } },
         { id: "hypo", text: "Any low-sugar symptoms (sweating, shakiness)?", i18nKey: "fc.q.hypo", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Possible hypoglycaemia" } },
         { id: "hyper", text: "Very high sugar symptoms (thirst, urination, drowsy)?", i18nKey: "fc.q.hyper", type: "yesno", weight: 15, redFlag: { when: "yes", level: "orange", reason: "Possible severe hyperglycaemia" } },
-        { id: "glucose", text: "Latest glucose reading if available", i18nKey: "fc.q.glucose", type: "number", unit: "mg/dL", weight: 15, plausible: [20, 900], redFlags: [{ when: "<=54", level: "red", reason: "Severe hypoglycaemia" }, { when: ">=400", level: "red", reason: "Severe hyperglycaemia" }, { when: ">=300", level: "orange", reason: "High glucose" }] },
+        { id: "glucose", text: "Latest glucose reading if available", i18nKey: "fc.q.glucose", type: "number", unit: "mg/dL", weight: 15, plausible: [20, 900], redFlags: [{ when: "<=54", level: "red", reason: "Severe hypoglycaemia (<54 mg/dL)" }, { when: "<=70", level: "orange", reason: "Hypoglycaemia (<70 mg/dL)" }, { when: ">=400", level: "red", reason: "Severe hyperglycaemia" }, { when: ">=300", level: "orange", reason: "High glucose" }] },
         adherence
       ],
       completion: { needImproving: true, minScore: 80, byDay: 30 }, recoveryInputs: ["hypo_severe", "hypo", "hyper", "glucose", "meds_taken"]

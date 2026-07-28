@@ -50,7 +50,9 @@
     return false;
   }
   function rulesOf(q) { return q.redFlags ? q.redFlags : (q.redFlag ? [q.redFlag] : []); }
+  function hasRedRule(q) { return rulesOf(q).some(function (r) { return r.level === "red"; }); }
   function maxLevel(a, b) { if (!a) return b; if (!b) return a; return RANK[a] >= RANK[b] ? a : b; }
+  function uniq(a) { var o = {}, r = []; a.forEach(function (x) { if (!o[x]) { o[x] = 1; r.push(x); } }); return r; }
 
   // Per-question evaluation → { level, invalid, reason, pen, soft }
   function evalQ(q, val, prevVal) {
@@ -67,7 +69,7 @@
     if (level) pen = w;                                     // a triggered red flag → full penalty
     else if (present(val)) {
       if (q.type === "overall") { var s = norm(val); pen = s === "worse" ? w : (s === "same" ? 0.4 * w : 0); soft = (s === "same"); }
-      else if (q.type === "scale") { var n = parseNum(val); if (isFinite(n)) { pen = w * Math.max(0, Math.min(1, n / 3)); soft = n >= 2; } }
+      else if (q.type === "scale") { var mx = q.max || 3, n = parseNum(val); if (isFinite(n)) { pen = w * Math.max(0, Math.min(1, n / mx)); soft = n >= (mx - 1); } }
       else {
         var num = parseNum(val);
         if (isFinite(num)) for (var j = 0; j < rules.length; j++) {          // soft band near a numeric threshold
@@ -90,11 +92,14 @@
     answers = answers || {}; var prev = opts.previousAnswers || {};
     var questions = PW.questionsFor(pathwayId);
 
-    var redFlags = [], penaltySum = 0, worse = false, softCount = 0, invalidInputs = [], invalidCritical = false;
+    var redFlags = [], penaltySum = 0, worse = false, softCount = 0, invalidInputs = [], invalidCritical = false, redTierMissing = [];
     for (var i = 0; i < questions.length; i++) {
       var q = questions[i], val = answers[q.id], e = evalQ(q, val, prev[q.id]);
       if (e.level) redFlags.push({ questionId: q.id, level: e.level, reason: e.reason });
-      if (e.invalid) { invalidInputs.push(q.id); if (rulesOf(q).some(function (r) { return r.level === "red"; })) invalidCritical = true; }
+      if (e.invalid) { invalidInputs.push(q.id); if (hasRedRule(q)) invalidCritical = true; }
+      // C1 FIX: a red-flag question left UNANSWERED must never be scored as "no flag" → it blocks Green +
+      // routes to review (you cannot declare recovery while a hard-red question is unanswered).
+      if (!present(val) && hasRedRule(q)) redTierMissing.push(q.id);
       penaltySum += e.pen; if (e.soft) softCount++;
       if (q.type === "overall" && norm(val) === "worse") worse = true;
     }
@@ -108,7 +113,8 @@
     var missingRatio = inputs.length ? missing.length / inputs.length : 0;
     // unanswered global hard-red probes + missing critical vital both undermine confidence
     var globalUnanswered = (PW.GLOBAL_RED || []).filter(function (g) { return !present(answers[g.id]); }).length;
-    var criticalMissing = (pw.blockGreenIfMissing || []).filter(function (id) { return !present(answers[id]); });
+    // Any red-tier question that is unanswered (plus the pathway's declared must-have vitals) blocks Green.
+    var criticalMissing = uniq((pw.blockGreenIfMissing || []).filter(function (id) { return !present(answers[id]); }).concat(redTierMissing));
     var overallVal = norm(answers.overall);
     var inconsistent = (overallVal === "better" && (hasRed || hasOrange)) ||
       (overallVal === "worse" && recoveryScore >= 75 && !hasRed && !hasOrange);
@@ -132,7 +138,7 @@
     if (invalidCritical) level = maxByRank(level, "orange");
     if (level === "green" && (confidence === "low" || criticalMissing.length)) level = "yellow";
 
-    var needsReview = invalidCritical || (confidence === "low");
+    var needsReview = invalidCritical || (confidence === "low") || criticalMissing.length > 0;
 
     // ---- readmission risk ----
     var risk = "low";
@@ -160,10 +166,15 @@
   function bump(l) { var order = ["green", "yellow", "orange", "red"]; return order[Math.min(3, RANK[l] + 1)]; }
   function maxByRank(a, b) { return RANK[a] >= RANK[b] ? a : b; }
 
-  // Missed / overdue check-in (non-response must never leave risk at its prior level).
-  function assessMissed(pathwayId, missedCount) {
+  // Missed / overdue check-in (non-response must never leave risk at its prior level). The count at which a
+  // miss becomes a clinician-notifying Orange is PATHWAY-SPECIFIC (high-acuity dengue/AKI/HF escalate sooner)
+  // via pathway.missedEscalateAt (default 3). 1..N-1 misses are reminder-only Yellow.
+  function assessMissed(pathwayId, missedCount, opts) {
     missedCount = missedCount || 0;
-    if (missedCount >= 3) return { escalation: "orange", reason: "3+ missed assessments — clinician review" };
+    var PW = (opts && opts.pathways) || G.FollowCarePathways;
+    var pw = PW && PW.get && PW.get(pathwayId);
+    var orangeAt = (pw && typeof pw.missedEscalateAt === "number") ? pw.missedEscalateAt : 3;
+    if (missedCount >= orangeAt) return { escalation: "orange", reason: missedCount + " missed assessment(s) — clinician review" };
     if (missedCount >= 1) return { escalation: "yellow", reason: "Missed scheduled assessment — reminder" };
     return { escalation: "green", reason: "" };
   }

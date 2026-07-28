@@ -230,7 +230,7 @@
     } else if(q.type==="choice" && q.options){
       wrap.appendChild(choiceRow(q.id, q.options.map(function(o){ return { v:o, t:optLabel(o) }; })));
     } else if(q.type==="scale"){
-      wrap.appendChild(scaleRow(q.id, 0, 10));
+      wrap.appendChild(scaleRow(q.id, 0, q.max || 3));   // render the pathway's real 0..max range (default 0-3)
       wrap.appendChild(el('<div class="scale-ends"><span>'+esc(t("none"))+'</span><span>'+esc(t("worst"))+'</span></div>'));
     } else if(q.type==="number"){
       var inp = el('<input type="number" inputmode="decimal" step="any" aria-labelledby="lab_'+esc(q.id)+'">');
@@ -278,9 +278,10 @@
     var send = document.getElementById("send");
     var ferr = document.getElementById("ferr");
     ferr.textContent = "";
-    // Require the "overall" question + all global red-flag probes to be answered (safety: we must not
-    // score a check-in that skipped the emergency questions).
-    var required = (ctx.questionnaire.questions||[]).filter(function(q){ return q.id==="overall" || q.id.indexOf("g_")===0; });
+    // Require the "overall" question, every global emergency probe, AND every answerable (non-numeric)
+    // red-flag question — a check-in must never be scored with a red-flag question left blank. Numeric vitals
+    // (SpO2/glucose/BP) stay optional (the server engine blocks Green when they're missing).
+    var required = (ctx.questionnaire.questions||[]).filter(function(q){ return q.id==="overall" || q.id.indexOf("g_")===0 || (q.redFlag && q.type!=="number"); });
     var missing = required.filter(function(q){ return answers[q.id]===undefined || answers[q.id]===null || answers[q.id]===""; });
     if(missing.length){ ferr.textContent = t("required"); return; }
 
