@@ -75,16 +75,17 @@ const AASA = {
     ]
   }
 };
-// Android App Links. sha256_cert_fingerprints must list EVERY signing cert that ships the installed
-// app. First entry = the local DEBUG keystore (Pixel 9 adb builds). ADD the Google Play "App signing
-// key" SHA-256 (Play Console → Test and release → Setup → App signing) before the Play Store release —
-// Play re-signs the app, so its cert must be here too or App Links won't verify for Play installs.
+// Android App Links + credential association. sha256_cert_fingerprints lists EVERY signing cert that
+// ships the installed app: [0] = local DEBUG keystore (Pixel 9 adb builds), [1] = the Google Play
+// "App signing key" SHA-256 (Play Console → Test and release → Setup → App signing) — Play re-signs
+// the app, so its cert MUST be here or App Links won't verify for Play installs. The get_login_creds
+// relation associates the domain for Android Credential Manager / Smart Lock login autofill.
 const ASSETLINKS = [
-  { relation: ["delegate_permission/common.handle_all_urls"],
+  { relation: ["delegate_permission/common.handle_all_urls", "delegate_permission/common.get_login_creds"],
     target: { namespace: "android_app", package_name: "in.stewardmd.app",
       sha256_cert_fingerprints: [
-        "9A:36:BF:09:5B:CF:6E:23:5C:BD:DE:9E:DD:E0:31:2A:66:C4:76:23:E4:D7:6C:F3:BD:8A:F7:1E:D7:4B:EE:AC"
-        /* , "<PLAY_APP_SIGNING_SHA256>" — add for the Play Store release */
+        "9A:36:BF:09:5B:CF:6E:23:5C:BD:DE:9E:DD:E0:31:2A:66:C4:76:23:E4:D7:6C:F3:BD:8A:F7:1E:D7:4B:EE:AC",
+        "95:31:10:B1:E0:B6:59:68:35:4A:40:4B:07:B0:21:DE:89:C5:45:74:71:5C:47:99:FC:5B:6A:D0:5D:5A:C0:40"
       ] } }
 ];
 
