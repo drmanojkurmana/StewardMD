@@ -3951,6 +3951,7 @@
   var _grpSubRetry = null;       // bounded self-heal poll for the first-run auth/API race (see grpEnsureGroupsSub)
   var _grpSubErrTimer = null;    // backoff timer for re-subscribing after an early-auth Firestore error
   var _grpSubErrTries = 0;       // bounded error-retry counter (reset on the first successful snapshot)
+  var _grpConnTO = null;         // watchdog: fires if the groups sub NEVER connects (silent hang) → error card, not an endless spinner
   function grpCurrentUser() {
     try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; }
   }
@@ -3982,7 +3983,22 @@
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
     try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
     if (_grpSubGroups) return;
+    // Watchdog: a silent Firestore/network hang (the SDK never finishes loading, or the Listen
+    // channel never delivers a first event) fires NEITHER callback below, so _grpList would stay
+    // null and the board would spin "Connecting to your shared units…" forever. If still unconnected
+    // after the deadline, drop the hung handle and surface the existing error card (with Retry) —
+    // never an endless spinner. Retry → grpRetry → grpEnsureGroupsSub, which re-arms a fresh watchdog.
+    if (_grpList === null && !_grpConnTO) {
+      _grpConnTO = setTimeout(function () {
+        _grpConnTO = null;
+        if (_grpList !== null) return;                                   // connected in time → nothing to do
+        if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
+        _grpErr = _grpErr || "Couldn’t connect to your shared units. Check your connection and retry.";
+        if (ICU.isOpen()) paint();
+      }, (typeof window !== "undefined" && +window.SMD_ICU_GRP_TIMEOUT_MS) || 20000);
+    }
     _grpSubGroups = api.subscribeGroups(function (groups) {
+      if (_grpConnTO) { try { clearTimeout(_grpConnTO); } catch (e) {} _grpConnTO = null; }   // connected → cancel watchdog
       _grpSubErrTries = 0;   // a successful snapshot means Firestore auth is live — stop error-retrying
       if (_grpSubErrTimer) { try { clearTimeout(_grpSubErrTimer); } catch (e) {} _grpSubErrTimer = null; }
       _grpList = groups || [];
@@ -4006,6 +4022,7 @@
       }
       if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paintLive();
     }, function (e) {
+      if (_grpConnTO) { try { clearTimeout(_grpConnTO); } catch (e2) {} _grpConnTO = null; }   // a real error → the backoff path below handles it, not the watchdog
       _grpErr = grpErrText(e);
       // A groups-sub error right after a fresh sign-in is almost always the Firestore listen channel
       // not yet carrying the auth token (currentUser is set, but the query ran before the token
