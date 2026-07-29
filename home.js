@@ -311,6 +311,8 @@
     lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     flask: '<path d="M9 3h6M10 3v6l-5.5 9.5A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2.5L14 9V3"/><path d="M7.5 15h9"/>',
+    steth: '<path d="M4 2a2 2 0 0 0-2 2v5a6 6 0 0 0 12 0V4a2 2 0 0 0-2-2"/><path d="M8 15v1a6 6 0 0 0 12 0v-4"/><circle cx="20" cy="10" r="2"/>',
+    dna: '<path d="M4 3c0 4 4 6 8 8s8 4 8 8M20 3c0 4-4 6-8 8s-8 4-8 8"/><path d="M7 6h6M9 10h6M9 14h6M11 18h6"/>',
     home: '<path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/>',
     more: '<circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/>',
     arrow: '<path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>',
@@ -3728,7 +3730,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
   // Owner allowlist — mirrors functions/_adminauth.js OWNER_EMAILS. Client gate only shows the
   // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
-  var NOTIF_OWNERS = ["stewardmd.in@gmail.com", "drmanojkurmana@gmail.com"];
+  var NOTIF_OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
   function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;

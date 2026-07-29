@@ -1045,7 +1045,7 @@
         '<div class="dx-discl">For clinical decision support only — not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
-        '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
+        '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">' + rIco("flask") + ' Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
           '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">' + rIco("mic") + ' Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
@@ -1108,10 +1108,10 @@
     if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
     // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
     var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
-    var banner = rf.length ? '<div class="dx-redflag">⚠ Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
+    var banner = rf.length ? '<div class="dx-redflag">' + rIco("warn") + ' Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
     // Acute-neuro safety cue: altered sensorium with a focal/seizure/pupil sign → image before committing.
     if (S.f.alteredSensorium && (S.f.focalNeuroDeficit || S.f.seizure || S.f.anisocoria || S.f.papilledema)) {
-      banner += '<div class="dx-redflag">🧠 Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
+      banner += '<div class="dx-redflag">' + rIco("warn") + ' Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
     }
     el.innerHTML = banner + keys.map(function (k) {
       return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
@@ -1475,7 +1475,7 @@
   function renderAdv() {
     var el = root.querySelector("#dxAdv"); if (!el) return;
     el.style.display = S.advOpen ? "" : "none";
-    var tog = root.querySelector("#dxAdvToggle"); if (tog) tog.innerHTML = "🔬 Advanced workspace " + (S.advOpen ? "▲" : "▾");
+    var tog = root.querySelector("#dxAdvToggle"); if (tog) tog.innerHTML = rIco("flask") + " Advanced workspace " + (S.advOpen ? "▲" : "▾");
     if (!S.advOpen) return;
     var sessions = loadSessions();
     el.innerHTML =
@@ -1651,21 +1651,21 @@
     var e = H && H[id]; if (!e) return null;
     var pearls = (e.clinicalPearls || []).filter(Boolean);
     var sections = [];
-    if (e.pathophysiology) sections.push({ ic: "🧬", title: "Pathophysiology", html: medLead(e.pathophysiology) });
+    if (e.pathophysiology) sections.push({ ic: rIco("dna"), title: "Pathophysiology", html: medLead(e.pathophysiology) });
     var dxh = "";
     dxh += evSub("Investigations", evList(e.additionalInvestigations));
     dxh += evSub("Other differentials", evList(e.additionalDifferentials));
     var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
     dxh += evSub("Mimics", evList(mim));
-    if (dxh) sections.push({ ic: "🩺", title: "Diagnosis & workup", html: dxh });
+    if (dxh) sections.push({ ic: rIco("steth"), title: "Diagnosis & workup", html: dxh });
     var rf = "";
     rf += evSub("🚨 Red flags", evCallouts(e.redFlags, "danger", "🚨"));
     rf += evSub("⚠️ Pitfalls", evCallouts(e.pitfalls, "warn", "⚠️"));
-    if (rf) sections.push({ ic: "⚠️", title: "Red flags & pitfalls", danger: true, html: rf });
+    if (rf) sections.push({ ic: rIco("warn"), title: "Red flags & pitfalls", danger: true, html: rf });
     var cp = "";
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
-    if (cp) sections.push({ ic: "📈", title: "Course & prognosis", html: cp });
+    if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
     // Original Reference — VERBATIM detail with inline page citations preserved
     // (distinct from the de-cited summary sections above; citations also in footer).
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
@@ -1931,10 +1931,10 @@
   var EV_BRIEF_META = {
     dontmiss: { ic: "🚨", label: "Don't miss", a: "warn" },
     exam: { ic: "🎯", label: "Exam pearl", a: "pearl" },
-    pitfall: { ic: "⚠️", label: "Pitfall", a: "pitfall" },
+    pitfall: { ic: rIco("warn"), label: "Pitfall", a: "pitfall" },
     tip: { ic: "📌", label: "Practice tip", a: "tip" },
     action: { ic: "🔑", label: "Key action", a: "tx" },
-    dx: { ic: "🩺", label: "Diagnostic pearl", a: "ix" }
+    dx: { ic: rIco("steth"), label: "Diagnostic pearl", a: "ix" }
   };
   function evBriefing(id) {
     var b = EXAM_PEARLS[id]; if (!b || !b.length) return "";
@@ -2189,7 +2189,7 @@
   function evIdsaSrc(id) {
     var g = IDSA_GUIDELINES[id]; if (!g) return null;
     var sections = [];
-    if (g.url) sections.push({ ic: "🔗", title: "Official guideline", html: '<p><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</a></p>' });
+    if (g.url) sections.push({ ic: rIco("link"), title: "Official guideline", html: '<p><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</a></p>' });
     return {
       _id: id, srcKey: "idsa", icon: "📐", sourceName: g.society || "IDSA Clinical Practice Guideline",
       edition: g.year ? String(g.year) : "", tag: "Guideline", pages: "", pearlsLabel: "Key recommendations",
@@ -3034,7 +3034,7 @@
     var b = document.createElement("button");
     b.id = "dxLaunch"; b.className = "dx-launch"; b.type = "button";
     b.setAttribute("aria-label", "Open clinical reasoning");
-    b.innerHTML = '🧠<span class="dxl-txt"> Reasoning</span>';
+    b.innerHTML = rIco("brain") + '<span class="dxl-txt"> Reasoning</span>';
     b.addEventListener("click", open);
     actions.insertBefore(b, actions.firstChild);
   }
