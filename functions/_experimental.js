@@ -1,7 +1,7 @@
 /* StewardMD — Experimental Access framework (server-authoritative).
  *
- * A reusable one-code / one-device unlock system for beta features. FundX AI is the first
- * consumer; adding ECG AI / Ultrasound AI / Clinical Copilot is a single FEATURES entry — the
+ * A reusable one-code / one-ACCOUNT unlock system for beta features. FundX AI and KardiQ X AI are
+ * the first consumers; adding Ultrasound AI / Clinical Copilot is a single FEATURES entry — the
  * admin dropdown and the client list are registry-driven, nothing else changes.
  *
  * Security model (mirrors _entitlement.js: the server is the source of truth, a client flag is
@@ -12,12 +12,15 @@
  *   • Activation is EXACTLY-ONCE: an atomic commit updates the code (guarded on its updateTime)
  *     and creates the activation record in one all-or-nothing write. Concurrent attempts → one
  *     wins, the rest get "already used".
- *   • Activation binds { uid, deviceId, platform }. The code dies instantly (status→activated);
- *     any other device/account is rejected. Same device re-entering the same code is idempotent.
+ *   • Activation binds to the signed-in ACCOUNT (server-derived Firebase uid). The code dies
+ *     instantly (status→activated); a DIFFERENT account is rejected. The SAME account keeps the
+ *     unlock on ANY device — after a reinstall or on a new phone `statusFor` restores the token
+ *     with NO code re-entry, and re-entering the same code from that account is idempotent. The
+ *     device (deviceId/model/platform) is recorded for the audit trail only, never as a gate.
  *   • The client keeps ONLY a signed HMAC activation token, never the code. Startup re-verifies
  *     against the live record → revoked/expired disables the feature immediately.
- *   • Admin "deactivate device" revokes the activation AND marks the code revoked (it stays
- *     consumed — never reusable); the tester is simply issued a fresh code for the new device.
+ *   • Admin "deactivate" revokes the activation AND marks the code revoked (it stays consumed —
+ *     never reusable); the tester is simply issued a fresh code.
  *
  * Pure helpers (makeCode / normalizeCode / hashCode / signToken / verifyToken / decideActivation /
  * effectiveStatus) are exported and unit-tested; the I/O functions compose them over Firestore and
@@ -28,7 +31,7 @@ import * as FS from "./_fbfirestore.js";
 // ---- feature registry (add a line to unlock a new beta feature) ------------------------
 export const FEATURES = {
   fundx: { id: "fundx", label: "FundX AI", prefix: "FUNDX", blurb: "AI-guided retinal imaging" },
-  // ecg:      { id: "ecg",      label: "ECG AI",          prefix: "ECG",   blurb: "12-lead ECG interpretation" },
+  kardiox: { id: "kardiox", label: "KardiQ X AI", prefix: "KARDIQ", blurb: "12-lead ECG interpretation" },
   // ultrasound:{ id: "ultrasound", label: "Ultrasound AI", prefix: "USG",   blurb: "POCUS assistance" },
   // copilot:  { id: "copilot",  label: "Clinical Copilot", prefix: "COPILOT", blurb: "Bedside reasoning copilot" },
 };
@@ -109,8 +112,9 @@ export function decideActivation(codeFields, req, now) {
   if (st === "expired") return { action: "reject", error: "expired" };
   if (st === "revoked") return { action: "reject", error: "invalid" };
   if (st === "activated") {
-    // Same account + same device re-entering the same code → idempotent success (re-issue token).
-    if (codeFields.activatedByUID === req.uid && codeFields.activatedDeviceId === req.deviceId) return { action: "reissue" };
+    // Account-bound: the SAME account re-entering the same code on ANY device → idempotent success
+    // (re-issue token). A DIFFERENT account is rejected. Device is not part of the binding.
+    if (codeFields.activatedByUID === req.uid) return { action: "reissue" };
     return { action: "reject", error: "already_used" };
   }
   return { action: "activate" };   // st === "unused"
@@ -227,13 +231,13 @@ export async function verify(env, req, deps) {
   const payload = await verifyToken(req.token, secret);
   if (!payload) return { active: false, reason: "bad_token" };
   if (req.feature && payload.f !== req.feature) return { active: false, reason: "feature_mismatch" };
-  if (req.deviceId && payload.d !== req.deviceId) return { active: false, reason: "device_mismatch" };
+  // Account-bound: the token is valid for this account on ANY device — no deviceId gate.
   if (req.uid && payload.u !== req.uid) return { active: false, reason: "uid_mismatch" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
   if (!act) return { active: false, reason: "no_activation" };
   const fa = act.fields;
   if (fa.status !== "active") return { active: false, reason: "revoked" };
-  if (fa.feature !== payload.f || fa.deviceId !== payload.d || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
+  if (fa.feature !== payload.f || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
   return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt };
 }
 
@@ -247,21 +251,23 @@ export async function checkActive(env, feature, token, deps) {
   const payload = await verifyToken(token, secret);
   if (!payload || payload.f !== feature) return { active: false, reason: "bad_token" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
-  if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.deviceId !== payload.d) return { active: false, reason: "inactive" };
+  // Account-bound: an ACTIVE activation record for this feature + account is the gate; no device check.
+  if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.uid !== payload.u) return { active: false, reason: "inactive" };
   return { active: true, uid: payload.u, deviceId: payload.d };
 }
 
-// APP: authoritative status for a signed-in user on THIS device — restores the token after a
-// reinstall (same account + same device) so the consumed code never has to be re-entered.
+// APP: authoritative status for a signed-in ACCOUNT — restores the token for that account on ANY
+// device (reinstall, new phone, or a fresh login) so the consumed code never has to be re-entered.
 export async function statusFor(env, req, deps) {
   const fs = deps || FS;
   if (!req.uid || !isFeature(req.feature)) return { active: false };
   const rows = await fs.fsQuery(env, ACTS, { where: { field: "uid", value: req.uid } });
-  const match = rows.find((r) => r.fields.feature === req.feature && r.fields.deviceId === req.deviceId && r.fields.status === "active");
+  const match = rows.find((r) => r.fields.feature === req.feature && r.fields.status === "active");
   if (!match) return { active: false };
   const secret = env.EXPERIMENTAL_TOKEN_SECRET;
   let token = null;
-  if (secret && req.deviceId) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId, p: clip(match.fields.platform, 20), a: match.id, t: Date.now() }, secret);
+  // Stamp the token with the CURRENT device for the audit trail; the device is not a gate.
+  if (secret) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId || match.fields.deviceId || "", p: clip(match.fields.platform, 20), a: match.id, t: Date.now() }, secret);
   return { active: true, token, feature: req.feature, deviceModel: match.fields.deviceModel, activatedAt: match.fields.activatedAt };
 }
 
