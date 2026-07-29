@@ -15,6 +15,8 @@
  *
  * No PII in logs — correlate by sessionId only.
  */
+import { identify, usageKv } from "../../_usage.js";
+import { gateAndCount } from "../../_ai_usage.js"; // AI Control Center per-module daily cap (module "ecg")
 
 const MEDIA = "application/vnd.kardiox.v1+json";
 const MAX_BYTES = 12 * 1024 * 1024;                          // 12 MiB hard cap on an ECG image
@@ -72,6 +74,18 @@ async function pipeline(env, sessionId, body, method, extraPath) {
 async function handleAnalyze(request, env) {
   if (request.method !== "POST") return err(405, "method_not_allowed", "Use POST", "upload");
   if (!authOk(request, env)) return err(401, "unauthorized", "Missing or invalid app token", "upload");
+
+  // AI Control Center — per-doctor DAILY cap on ECG uploads (module "ecg", default 10/day, env
+  // AI_LIMIT_ECG). One call = one analysed ECG, so this is the correct unit. Fail-open on any metering
+  // error so a clinical read is never blocked by the meter. Counts the attempt before the pipeline runs.
+  try {
+    const store = usageKv(env);
+    if (store) {
+      const who = await identify(request, env);
+      const mq = await gateAndCount(env, store, "ecg", who.id, who.guest ? "guest" : "unknown", Date.now());
+      if (!mq.ok) return err(429, "daily_limit", "Daily limit reached: " + mq.limit + " ECG uploads per day. This resets at midnight.", "upload");
+    }
+  } catch (e) { /* fail-open */ }
 
   const sessionId = request.headers.get("X-Session-ID") || uuid();
   const prefix = (env && env.KARDIOX_R2_PREFIX) || "uploads/";

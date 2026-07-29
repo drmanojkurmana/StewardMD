@@ -168,3 +168,36 @@ export async function setModelOverride(store, model) {
   if (model && ALLOWED_MODELS.indexOf(model) === -1) return false; // only real, priced models
   try { if (model) await store.put("ai:model:override", model); else await store.delete("ai:model:override"); return true; } catch (e) { return false; }
 }
+
+// ---- endpoint convenience: enforce the per-module daily cap AND count the call in one step. ----
+// Returns { ok:true, used, limit, remaining } when allowed (and increments the counters), or
+// { ok:false, reason:"module-daily", module, used, limit } when the doctor is at the cap. FAIL-OPEN:
+// no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
+// (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
+// detail is layered on separately by the endpoint's own precise metering.
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now) {
+  const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
+  if (!q.ok) return q;                                     // at the daily cap → block
+  try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0 }), now); } catch (e) {}
+  return q;                                                // allowed; carries used/limit/remaining
+}
+
+// ---- admin: today's GLOBAL AI rollup (no PHI). Doctor ids are already opaque hashes. ----
+export async function globalUsageReport(env, store, now) {
+  const day = _day(now);
+  const out = { day: day, req: 0, estCostInr: 0, fail: 0, byModule: {}, byModel: {}, activeDoctors: 0, topDoctors: [], limits: {}, modelOverride: null };
+  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = moduleDailyLimit(env, m); });
+  if (!store) return out;
+  try {
+    const g = await store.get("aiu:global:" + day, "json");
+    if (g) {
+      out.req = g.req || 0; out.estCostInr = Math.round((g.cost || 0) * 100) / 100; out.fail = g.fail || 0;
+      out.byModule = g.byModule || {}; out.byModel = g.byModel || {};
+      const docs = g.docs || {};
+      out.activeDoctors = Object.keys(docs).length;
+      out.topDoctors = Object.keys(docs).map((d) => ({ doctor: d, req: docs[d] })).sort((a, b) => b.req - a.req).slice(0, 20);
+    }
+    out.modelOverride = await getModelOverride(store);
+  } catch (e) {}
+  return out;
+}

@@ -5,6 +5,7 @@ import {
   AI_MODULES, isAiModule, aiModuleList, moduleDailyLimit,
   MODEL_RATES, modelRate, estCostInr, resolveModel, MODEL_HARD_DEFAULT, buildUsageRecord,
   checkModuleQuota, recordAiUsage, doctorUsageSummary, getModelOverride, setModelOverride,
+  gateAndCount, globalUsageReport,
 } from "../functions/_ai_usage.js";
 
 // tiny in-memory KV mock (get / get(_,"json") / put / delete)
@@ -121,6 +122,38 @@ test("doctorUsageSummary: reflects recorded usage + exposes limits", async () =>
   assert.equal(s.estCostInr, 0.38);
   assert.equal(s.avgLatencyMs, 2000);
   assert.equal(s.limits.ecg, 10); // default cap surfaced for the UI
+});
+
+test("gateAndCount: enforces the module cap AND counts each allowed call", async () => {
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "2" }, doc = "fb:g1";
+  const a = await gateAndCount(env, kv, "ecg", doc, "pro", NOW);
+  assert.equal(a.ok, true); assert.equal(a.limit, 2);
+  const b = await gateAndCount(env, kv, "ecg", doc, "pro", NOW);
+  assert.equal(b.ok, true);
+  const c = await gateAndCount(env, kv, "ecg", doc, "pro", NOW);   // 3rd call → blocked
+  assert.equal(c.ok, false); assert.equal(c.reason, "module-daily"); assert.equal(c.used, 2); assert.equal(c.limit, 2);
+  // reflected in the doctor summary
+  const s = await doctorUsageSummary(env, kv, doc, NOW);
+  assert.equal(s.byModule.ecg, 2);
+  // unlimited module + no store → always allowed, uncounted
+  assert.equal((await gateAndCount({}, kv, "kb", doc, "pro", NOW)).ok, true);
+  assert.equal((await gateAndCount({}, null, "ecg", doc, "pro", NOW)).ok, true);
+});
+
+test("globalUsageReport: aggregates today's rollup + exposes limits + override", async () => {
+  const kv = mockKv(), env = {};
+  await gateAndCount(env, kv, "maik", "fb:d1", "pro", NOW);
+  await gateAndCount(env, kv, "maik", "fb:d2", "free", NOW);
+  await gateAndCount(env, kv, "ecg", "fb:d1", "pro", NOW);
+  await setModelOverride(kv, "gemini-3.5-flash");
+  const r = await globalUsageReport(env, kv, NOW);
+  assert.equal(r.req, 3);
+  assert.equal(r.byModule.maik, 2); assert.equal(r.byModule.ecg, 1);
+  assert.equal(r.activeDoctors, 2);
+  assert.equal(r.topDoctors[0].doctor, "fb:d1"); assert.equal(r.topDoctors[0].req, 2);
+  assert.equal(r.limits.ecg, 10);
+  assert.equal(r.modelOverride, "gemini-3.5-flash");
+  assert.equal((await globalUsageReport(env, null, NOW)).req, 0); // no store → empty, safe
 });
 
 test("model override: set valid persists; invalid rejected; clear works", async () => {

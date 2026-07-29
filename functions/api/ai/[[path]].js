@@ -93,10 +93,31 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv } from "../../_usage.js";
+import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES } from "../../_ai_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
-function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
+// The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
+// model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
+// env.__modelOverride is stamped once per request in onRequest from the KV override.
+function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL || MODEL_DEFAULT; }
+
+// AI Control Center — which usage MODULE a route consumes (for the per-module daily cap + analytics).
+// explain is refined to maik_case when a computed differential is present.
+const MODULE_FOR = {
+  explain: "maik", refine: "maik", route: "maik", research: "maik", verify: "maik",
+  imaging: "maik_case", correlate: "maik_case", evidence: "maik_case",
+  vision: "ocr", extract: "ocr", transcribe: "stt",
+};
+function moduleLimitMsg(mod, limit) {
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
+  return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
+}
+async function aiAdminAuthed(request, env, url) {
+  const want = env.UPDATES_ADMIN_TOKEN || "";
+  const got = (request.headers.get("X-Admin-Token") || (url && url.searchParams.get("token")) || "");
+  return (!!want && got === want) || (await ownerOK(request, env));   // owner Google login OR admin token
+}
 // Per-call model override (opts.model) so a lightweight parse-only call (the semantic router) can pin a
 // FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
@@ -670,6 +691,10 @@ export async function onRequest(context) {
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const enabled = aiEnabled(env);
 
+  // AI Control Center "switch models" control: apply the admin-selected model (KV) for THIS request so
+  // every route below (status/health/dispatch) reports + uses it. Validated to a priced model on set.
+  try { const _s0 = usageKv(env); if (_s0) { const _ov0 = await getModelOverride(_s0); if (_ov0) env.__modelOverride = _ov0; } } catch (e) {}
+
   if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
 
   // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
@@ -685,6 +710,28 @@ export async function onRequest(context) {
       return new Response(rows.map((r) => r.join(",")).join("\n"), { headers: { "Content-Type": "text/csv", "Cache-Control": "no-store" } });
     }
     return json(rep);
+  }
+
+  // AI Control Center admin: the "switch models" control + today's global per-module rollup. Owner-gated.
+  if (seg === "admin/model" || seg === "admin/ai-usage") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    const store = usageKv(env);
+    if (seg === "admin/ai-usage") return json(await globalUsageReport(env, store, Date.now()));
+    if (request.method === "POST") {
+      let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+      const ok = await setModelOverride(store, b.model || null);   // null/"" clears the override
+      const nv = await getModelOverride(store); env.__modelOverride = nv;   // reflect the just-set value
+      return json({ ok: ok, model: nv, effective: modelId(env), allowed: ALLOWED_MODELS });
+    }
+    return json({ model: await getModelOverride(store), effective: modelId(env), allowed: ALLOWED_MODELS, rates: MODEL_RATES });
+  }
+
+  // A doctor's OWN AI usage for today (never another doctor's). Powers the in-app AI Usage page.
+  if (seg === "usage") {
+    const store = usageKv(env);
+    const who = await identify(request, env);
+    return json(await doctorUsageSummary(env, store, who.id, Date.now()));
   }
 
   if (seg === "health") {
@@ -708,6 +755,27 @@ export async function onRequest(context) {
 
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
+
+  // ── AI Control Center (Phase 2b) ─────────────────────────────────────────────────────────────
+  // (a) apply the admin "switch models" override for THIS request; (b) enforce the per-module DAILY
+  // cap + count the call (layered on top of the global _usage.js budget/rate gate). Fail-open on any
+  // store/identity error so metering never breaks a clinical AI call.
+  const _acStore = usageKv(env);
+  if (_acStore) {
+    let _mod = MODULE_FOR[seg];
+    if (_mod === "maik" && seg === "explain") {
+      const _pkg = body.package || body;
+      if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
+    }
+    if (_mod) {
+      try {
+        const _who = await identify(request, env);
+        const _mq = await gateAndCount(env, _acStore, _mod, _who.id, _who.guest ? "guest" : "unknown", Date.now());
+        // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
+        if (!_mq.ok) return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
+      } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
+    }
+  }
 
   // Cost controls (server-side, env-configurable). Output is hard-capped; oversized
   // inputs are rejected before any provider call. Per-user quota metering + circuit
