@@ -2,10 +2,16 @@ rules_version = '2';
 
 // StewardMD does NOT use Firebase Cloud Storage — clinical files (FollowCare wound photos, etc.)
 // live in Cloudflare R2 behind signed, view-once, auto-expiring, server-authorised access
-// (functions/_followcare_comms.js). The Firebase project still has a default storage bucket
-// (declared as storageBucket in the client config), so this file locks that bucket to DENY-ALL as
-// defence-in-depth: no client can read or write it. If a future feature ever needs Firebase Storage,
-// replace this with scoped, auth+ownership rules — never widen it to a blanket allow.
+// (functions/_followcare_comms.js).
+//
+// DORMANT / NOT WIRED: Firebase Storage is NOT even provisioned on project stewardmd-498ec
+// (Console → Storage was never "Get Started"), so there is no bucket to attack — the most secure
+// state. This file is therefore intentionally NOT referenced from firebase.json (wiring it would
+// make `firebase deploy` fail against the non-existent service). Do NOT enable Storage just to
+// deploy this. IF a future feature ever needs Firebase Storage: (1) enable Storage in the console,
+// (2) add `"storage": { "rules": "storage.rules" }` to firebase.json, (3) `firebase deploy --only
+// storage`. Keep the rule DENY-ALL unless that feature adds scoped auth+ownership rules — never a
+// blanket allow.
 service firebase.storage {
   match /b/{bucket}/o {
     match /{allPaths=**} {
