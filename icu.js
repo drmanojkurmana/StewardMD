@@ -5015,8 +5015,13 @@
           .then(function (j) {
             if (j && j.sent > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); if (window.toast) toast("Reminder sent to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
             if (j && j.error === "forbidden") { if (window.toast) toast("Only instructing roles can nudge."); return; }
-            if (j && j.reminded > 0) { note("none", "Reminder queued, but no resident has notifications on yet — ask them to enable them in Settings."); return; }
-            note("error", "Couldn't send the reminder — no resident is on this unit yet, or the push service is unreachable.");
+            if (j && j.reminded > 0) { note("none", "Reminder queued — but no resident has notifications on yet. Ask them to enable notifications in Settings."); return; }
+            // reminded === 0 with no server error = there are simply no executor-role residents on this
+            // unit to notify yet (a normal state for a solo unit head) — NOT a failure. Show a calm,
+            // accurate info note, never the alarming "push service unreachable" error. Only a genuine
+            // server error (push-disabled, etc.) or a network failure (the .catch below) is an error.
+            if (j && !j.error && (j.reminded === 0 || j.reminded == null)) { note("none", "No residents on this unit to remind yet — nudges reach SR / JR / intern members once they join."); return; }
+            note("error", "Couldn't send the reminder — the push service is unavailable right now. Please try again.");
           }, function () { note("error", "Couldn't send the reminder — check your connection."); })
           .catch(function () { note("error", "Couldn't send the reminder — check your connection."); });
       }, function () { note("error", "Couldn't send the reminder — you weren't signed in."); });
@@ -5098,8 +5103,12 @@
   function grpPushNoteHTML() {
     if (!_grpLastPush) return "";
     if ((nowTs() - _grpLastPush.ts) > 30 * 60000) return "";   // stale (>30 min) — stop showing it
-    return '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn);display:flex;align-items:flex-start;gap:8px">' +
-      '<span style="flex:1">' + ico("warn", "⚠️") + ' ' + esc(_grpLastPush.text) + '</span>' +
+    // Style by severity: only kind "error" is alarming (warn colour + ⚠️); everything else is a calm,
+    // neutral info note (slate + ℹ️) so normal states ("no residents to nudge yet") don't look like faults.
+    var _isErr = _grpLastPush.kind === "error";
+    var _nc = _isErr ? "var(--warn)" : "var(--slate)";
+    return '<div class="icu-v2-note" style="border-color:' + _nc + ';color:' + _nc + ';display:flex;align-items:flex-start;gap:8px">' +
+      '<span style="flex:1">' + ico(_isErr ? "warn" : "info", _isErr ? "⚠️" : "ℹ️") + ' ' + esc(_grpLastPush.text) + '</span>' +
       '<button class="icu-v2-note-x" data-icu-act="pushnotedismiss" aria-label="Dismiss">✕</button></div>';
   }
   function grpPushNoteDismiss() { _grpLastPush = null; if (ICU.isOpen()) paintLive(); }
