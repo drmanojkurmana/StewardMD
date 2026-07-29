@@ -4910,7 +4910,11 @@
       if (!e.target || !e.target.closest) return;
       var all = e.target.closest("[data-smd-acc-all]");
       if (all) {
-        var mode = all.getAttribute("data-smd-acc-all"), oa = document.getElementById("outputArea");
+        var mode = all.getAttribute("data-smd-acc-all");
+        // Scope to the accordion's ACTUAL container. The abx wizard (#abxWizard) MOVES the
+        // .card.smd-acc nodes + this toolbar out of #outputArea into its own steps, so hardcoding
+        // #outputArea would find nothing there. Classic engine → closest() is null → #outputArea.
+        var oa = (all.closest && all.closest("#abxWizard")) || document.getElementById("outputArea");
         if (oa) Array.prototype.forEach.call(oa.querySelectorAll(".card.smd-acc"), function (c) { setOpen(c, mode === "expand"); });
         return;
       }
