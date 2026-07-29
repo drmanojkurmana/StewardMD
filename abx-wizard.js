@@ -250,10 +250,7 @@
   // renderNow=true → freshly render #outputArea before splitting.
   function distributeOutput(host, which, renderNow) {
     try {
-      // 4th arg = show the "Save this case?" prompt (app.js suppresses it by default on restore).
-      // app.js computes the drug list itself, so the saved-case data stays correct; the prompt box
-      // (#saveCasePrompt) is then relocated into the Plan step below so Save is reachable in the wizard.
-      if (renderNow && window.SMD_restoreCase) { var pay = classicPayload(); window.SMD_restoreCase(pay.f, W.locked, pay.v, true); syncQuickCardConfidence(); }
+      if (renderNow && window.SMD_restoreCase) { var pay = classicPayload(); window.SMD_restoreCase(pay.f, W.locked, pay.v); syncQuickCardConfidence(); }
       var out = document.getElementById("outputArea");
       if (!out) return false;
       var kids = [].slice.call(out.children), moved = 0;

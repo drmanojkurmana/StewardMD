@@ -65,7 +65,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <script defer src="/abx-redesign.js?v=gold476"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
-<script defer src="/abx-wizard.js?v=gold1033"></script>
+<script defer src="/abx-wizard.js?v=gold1034"></script>
 <script>
 /* Service worker (offline + instant repeat loads) — WEB ONLY.
    On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
@@ -1404,7 +1404,7 @@ window.openExternal = function (u) {
 </div>
 
 <script src="/native-bridge.js?v=gold452-pdf" defer></script>
-<script src="/app.js?v=gold1033" defer></script>
+<script src="/app.js?v=gold1034" defer></script>
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
