@@ -7,6 +7,7 @@ import {
   checkModuleQuota, recordAiUsage, doctorUsageSummary, getModelOverride, setModelOverride,
   gateAndCount, globalUsageReport, resolveLimit, limitOverrides, setLimitOverride,
   EMERGENCY_MODES, CHEAP_MODEL, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit,
+  getAbuseThreshold, setAbuseThreshold, ABUSE_DEFAULT,
 } from "../functions/_ai_usage.js";
 
 // tiny in-memory KV mock (get / get(_,"json") / put / delete)
@@ -224,6 +225,25 @@ test("audit log: newest-first, capped, no crash without store", async () => {
   assert.equal(a[0].action, "limit");   // newest first
   assert.equal(a[1].action, "model");
   await auditRecord(null, "x", "y", "z", NOW);   // no store → no throw
+});
+
+test("abuse threshold: KV override > env > default; set/clear; report honours it", async () => {
+  const kv = mockKv();
+  assert.equal(await getAbuseThreshold(kv, {}), ABUSE_DEFAULT);                 // default
+  assert.equal(await getAbuseThreshold(kv, { AI_ABUSE_REQ_THRESHOLD: "150" }), 150); // env
+  assert.equal(await setAbuseThreshold(kv, 40), true);
+  assert.equal(await getAbuseThreshold(kv, { AI_ABUSE_REQ_THRESHOLD: "150" }), 40);  // KV override wins
+  assert.equal(await setAbuseThreshold(kv, -5), false);                         // invalid rejected
+  assert.equal(await setAbuseThreshold(kv, null), true);                        // clear → env
+  assert.equal(await getAbuseThreshold(kv, { AI_ABUSE_REQ_THRESHOLD: "150" }), 150);
+  // report reflects the KV threshold (2 → the heavy doctor is flagged)
+  const env = { AI_ABUSE_REQ_THRESHOLD: "150" };
+  await gateAndCount(env, kv, "maik", "fb:h", "pro", NOW);
+  await gateAndCount(env, kv, "maik", "fb:h", "pro", NOW);
+  await setAbuseThreshold(kv, 2);
+  const r = await globalUsageReport(env, kv, NOW);
+  assert.equal(r.abuseThreshold, 2);
+  assert.equal(r.watchlist.length, 1);
 });
 
 test("globalUsageReport: surfaces real cost, forecast, budget, emergency, watchlist", async () => {

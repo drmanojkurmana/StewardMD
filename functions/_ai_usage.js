@@ -221,6 +221,21 @@ export async function setBudget(store, inr) {
     await store.put("ai:budget:daily", String(Math.floor(n))); return true;
   } catch (e) { return false; }
 }
+// Abuse-watchlist threshold — requests/doctor/day to flag. KV override > env AI_ABUSE_REQ_THRESHOLD > 100.
+export const ABUSE_DEFAULT = 100;
+export async function getAbuseThreshold(store, env) {
+  try { if (store) { const v = Number(await store.get("ai:abuse:threshold")); if (Number.isFinite(v) && v > 0) return Math.floor(v); } } catch (e) {}
+  const e = Number(env && env.AI_ABUSE_REQ_THRESHOLD);
+  return Number.isFinite(e) && e > 0 ? Math.floor(e) : ABUSE_DEFAULT;
+}
+export async function setAbuseThreshold(store, n) {
+  if (!store) return false;
+  try {
+    if (n == null || n === "") { await store.delete("ai:abuse:threshold"); return true; }  // clear → env/default
+    const v = Number(n); if (!Number.isFinite(v) || v <= 0) return false;
+    await store.put("ai:abuse:threshold", String(Math.floor(v))); return true;
+  } catch (e) { return false; }
+}
 // Admin audit log — who changed what, when (newest first, capped). No PHI.
 const AUDIT_CAP = 60;
 export async function auditRecord(store, action, detail, by, now) {
@@ -273,8 +288,9 @@ export async function globalUsageReport(env, store, now) {
     out.forecastMonthlyInr = Math.round(realCost * 30);            // rough: today's spend projected over 30 days
     out.budget = await getBudget(store);
     out.emergency = await getEmergency(store);
-    // Abuse watch: doctors with an abnormally high request count today (heuristic, env-tunable).
-    const abuseThreshold = Number(env && env.AI_ABUSE_REQ_THRESHOLD) || 100;
+    // Abuse watch: doctors with an abnormally high request count today. Threshold is KV-editable
+    // (ai:abuse:threshold) from the console, falling back to env AI_ABUSE_REQ_THRESHOLD then default.
+    const abuseThreshold = await getAbuseThreshold(store, env);
     out.watchlist = out.topDoctors.filter((d) => d.req >= abuseThreshold).slice(0, 10);
     out.abuseThreshold = abuseThreshold;
   } catch (e) {}

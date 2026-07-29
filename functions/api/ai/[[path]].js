@@ -94,7 +94,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv } from "../../_usage.js";
-import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES } from "../../_ai_usage.js";
+import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -722,7 +722,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -730,6 +730,15 @@ export async function onRequest(context) {
 
     if (seg === "admin/ai-usage") return json(await globalUsageReport(env, store, Date.now()));
     if (seg === "admin/audit") return json({ audit: await getAudit(store) });
+
+    if (seg === "admin/abuse") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        if (!(await setAbuseThreshold(store, b.threshold))) return json({ ok: false, error: "bad-threshold" }, 400);
+        await auditRecord(store, "abuse", "threshold=" + (b.threshold == null || b.threshold === "" ? "default" : b.threshold), actorId, Date.now());
+      }
+      return json({ ok: true, threshold: await getAbuseThreshold(store, env) });
+    }
 
     if (seg === "admin/emergency") {
       if (request.method === "POST") {

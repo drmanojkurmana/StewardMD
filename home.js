@@ -1818,13 +1818,14 @@
       '<div class="aic-qrow"><span class="lbl">Project hard-stop (₹/day)</span><span class="def">env default</span>' +
       '<input type="number" min="0" inputmode="numeric" value="' + (usage.budget != null ? usage.budget : "") + '" placeholder="default"' + (usage.budget != null ? ' class="ov"' : '') + ' data-aic-budget="1"></div>' +
       '<div class="aic-note">Today so far: ₹' + (typeof usage.realCostInr === "number" ? usage.realCostInr.toFixed(2) : "0") + ' &middot; projected month: ₹' + (usage.forecastMonthlyInr | 0) + '. Blank + Enter = env default. When reached, AI pauses until midnight.</div></div>';
-    // 5) Abuse watch
-    var wl = usage.watchlist || [];
-    if (wl.length) {
-      h += '<div class="aic-sec"><div class="aic-h">Abuse watch (≥ ' + (usage.abuseThreshold | 0) + ' req today)</div>';
-      wl.forEach(function (d) { h += '<div class="aic-mdl"><span>' + aiCtlEsc(String(d.doctor).slice(0, 14)) + '…</span><span>' + (d.req | 0) + ' req</span></div>'; });
-      h += '</div>';
-    }
+    // 5) Abuse watch + editable threshold
+    var wl = usage.watchlist || [], athr = usage.abuseThreshold | 0;
+    h += '<div class="aic-sec"><div class="aic-h">Abuse watch</div>' +
+      '<div class="aic-qrow"><span class="lbl">Flag doctors at</span><span class="def">req / day</span>' +
+      '<input type="number" min="1" inputmode="numeric" value="' + athr + '" data-aic-abuse="1"></div>';
+    if (wl.length) { wl.forEach(function (d) { h += '<div class="aic-mdl"><span>' + aiCtlEsc(String(d.doctor).slice(0, 14)) + '…</span><span>' + (d.req | 0) + ' req</span></div>'; }); }
+    else { h += '<div class="aic-note">No doctor is above ' + athr + ' requests today.</div>'; }
+    h += '<div class="aic-note">Per-module caps already block runaway use (~185/day), so this only surfaces the heaviest users. Blank + Enter = env default.</div></div>';
     // 6) Provider health
     if (health && (health.provider || health.enabled != null)) {
       h += '<div class="aic-sec"><div class="aic-h">Provider health</div>' +
@@ -1859,6 +1860,17 @@
       };
       bud.addEventListener("change", saveBud);
       bud.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); bud.blur(); } });
+    }
+    var abz = host.querySelector("[data-aic-abuse]");
+    if (abz) {
+      var saveAbz = function () {
+        var raw = abz.value.trim();
+        aiAdminFetch("/admin/abuse", { method: "POST", body: { threshold: raw === "" ? null : Number(raw) } }).then(function (r) {
+          if (r && r.ok) { if (window.toast) toast("Watch threshold updated"); loadAiControl(); } else if (window.toast) toast("Invalid value");
+        });
+      };
+      abz.addEventListener("change", saveAbz);
+      abz.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); abz.blur(); } });
     }
     host.querySelectorAll("[data-aic-model]").forEach(function (b) {
       b.addEventListener("click", function () {
