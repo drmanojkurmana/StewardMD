@@ -349,7 +349,7 @@ export async function onRequest(context) {
     (regCore(r.registrationNo) === core || String(r.registrationNo).includes(effReg)) &&
     nameAgrees(ex.name, r.firstName)
   );
-  console.log("[verify] uid", uid, "source:", source, "records:", records.length, "core:", core, "match:", match ? match.registrationNo + " / " + match.firstName : "NONE");
+  console.log("[verify] uid", uid, "source:", source, "records:", records.length, "match:", match ? "yes" : "NONE");
   if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
@@ -362,7 +362,7 @@ export async function onRequest(context) {
 
   // 5. set the verified claim + persist
   try { await setVerifiedClaim(env, uid, match.registrationNo); }
-  catch (e) { return json({ error: "claim_write_failed", detail: String(e.message || e) }, 500); }
+  catch (e) { try { console.warn("[verify] claim_write_failed"); } catch (x) {} return json({ error: "claim_write_failed" }, 500); }
 
   if (store) {
     try { await store.put(regKey(match.registrationNo), uid); } catch (e) {}
@@ -373,7 +373,7 @@ export async function onRequest(context) {
       source, via: idMode ? "id" : "cert", verifiedAt: new Date().toISOString(),
     })); } catch (e) {}
   }
-  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + "/" + (idMode ? "id" : "cert") + ")");
+  console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ")");
 
   // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
