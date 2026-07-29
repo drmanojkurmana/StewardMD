@@ -190,6 +190,7 @@
   </main>
 
   <p class="disclaimer">This recovery check-in supports your care team. It does not replace medical advice and never changes your medicines. If you feel unwell, contact your doctor or local emergency services.</p>
+  <p class="disclaimer" id="fc-forget" style="display:none;margin-top:8px"></p>
   <p class="disclaimer" id="fc-privacy"></p>
 </div>
 
@@ -361,6 +362,18 @@
       var h=esc(note)+links;
       if(LANG!=="en" && note!==noteEn) h+='<br><span style="opacity:.7">'+esc(noteEn)+'</span>';
       pv.innerHTML=h;
+    }
+    // Right-to-erasure link — persistent on EVERY patient view, placed directly ABOVE the privacy
+    // note so its "delete your data … using the link above" reference is always valid. (Previously the
+    // link only rendered on the check-in FORM, so the Thank-you / Done pages promised a link that
+    // wasn't there.) forgetMe() posts /forget with the URL token; hidden when there is no token.
+    var fg=document.getElementById("fc-forget");
+    if(fg){
+      if(token){
+        fg.innerHTML='<a href="#" style="color:var(--slate);text-decoration:underline">'+esc(t("forget"))+'</a>';
+        fg.style.display="block";
+        var fga=fg.querySelector("a"); if(fga) fga.onclick=function(e){ e.preventDefault(); forgetMe(); };
+      } else { fg.style.display="none"; }
     }
   }catch(e){} }
 
@@ -589,12 +602,10 @@
       langBar.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); chooseLanguage(function(){ renderForm(); }); });
       main.appendChild(langBar);
     }
-    // Patient opt-out + right-to-erasure (no login needed).
-    var forget = el('<p style="text-align:center;margin-top:8px"><a href="#" style="color:var(--slate);font-size:12.5px;text-decoration:underline">'+esc(t("forget"))+'</a></p>');
-    forget.querySelector("a").addEventListener("click", function(e){ e.preventDefault(); forgetMe(); });
-    main.appendChild(forget);
-    // Animate: card in, questions stagger in, submit + opt-out follow.
-    enter(head); staggerIn(frm.querySelectorAll(".q")); enter(submit, 0.05 + (frm.querySelectorAll(".q").length) * 0.045); enter(forget, 0.2);
+    // Patient opt-out + right-to-erasure now lives in the PERSISTENT footer (updateDisclaimer → #fc-forget),
+    // so it shows on EVERY view (form, Thank-you, Done) — matching the privacy note's "link above".
+    // Animate: card in, questions stagger in, submit follows.
+    enter(head); staggerIn(frm.querySelectorAll(".q")); enter(submit, 0.05 + (frm.querySelectorAll(".q").length) * 0.045);
   }
 
   function forgetMe(){
