@@ -1728,6 +1728,10 @@
         ".aic-btns{display:flex;flex-wrap:wrap;gap:8px}" +
         ".aic-chip{font:700 12px var(--hfont,system-ui);color:var(--ink,#e6edf3);background:var(--card,#0f172a);border:1px solid var(--line,#1e293b);border-radius:999px;padding:7px 13px;cursor:pointer}" +
         ".aic-chip.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}" +
+        ".aic-chip.aic-warn.on{background:#d97706;border-color:#d97706;color:#fff}" +
+        ".aic-chip.aic-danger.on{background:#dc2626;border-color:#dc2626;color:#fff}" +
+        ".aic-alert{font:700 12px var(--hfont,system-ui);color:#dc2626;margin-top:8px}" +
+        ".aic-audit{font:600 11px var(--hfont,system-ui);color:var(--hmut,#889);padding:4px 0;border-top:1px solid var(--line,#1e293b)}" +
         ".aic-stats{display:flex;gap:8px;margin:0 0 14px}" +
         ".aic-stats .c{flex:1;background:var(--card,#0f172a);border:1px solid var(--line,#1e293b);border-radius:12px;padding:9px 6px;text-align:center}" +
         ".aic-stats .n{font:800 17px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
@@ -1753,10 +1757,10 @@
   }
   function loadAiControl() {
     var host = document.getElementById("aicBody"); if (!host) return;
-    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits")]).then(function (res) {
+    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health")]).then(function (res) {
       if (!host) return;
       if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
-      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {});
+      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {});
       wireAiControl(host);
     });
   }
@@ -2326,10 +2330,12 @@
     } catch (e) { return "guest"; }
   }
   function maikConvKey() { return "smd_maik_convos_" + maikAcctKey(); }
+  function maikThreadKey() { return MAIK_LS + "_" + maikAcctKey(); }   /* per-account active thread (was global smd_maik_thread -> leaked across accounts) */
+  function maikActiveKey() { return "smd_maik_active_" + maikAcctKey(); }
   function maikLoadConvos() { try { return JSON.parse(localStorage.getItem(maikConvKey()) || "[]") || []; } catch (e) { return []; } }
   function maikStoreConvos(list) { try { localStorage.setItem(maikConvKey(), JSON.stringify((list || []).slice(0, 200))); } catch (e) {} }
-  var _maikConvId = (function () { try { return localStorage.getItem("smd_maik_active") || null; } catch (e) { return null; } })();
-  function maikSetActive(id) { _maikConvId = id || null; try { if (id) localStorage.setItem("smd_maik_active", id); else localStorage.removeItem("smd_maik_active"); } catch (e) {} }
+  var _maikConvId = (function () { try { return localStorage.getItem(maikActiveKey()) || null; } catch (e) { return null; } })();
+  function maikSetActive(id) { _maikConvId = id || null; try { if (id) localStorage.setItem(maikActiveKey(), id); else localStorage.removeItem(maikActiveKey()); } catch (e) {} }
   function maikNewConvId() { return "c" + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
   function maikConvTitle(html) {
     try { var m = String(html || "").match(/class="maik-b you"[^>]*>([\s\S]*?)<\/div>/); if (m) { var t = m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(); if (t) return t.slice(0, 70); } } catch (e) {}
@@ -2347,7 +2353,7 @@
       maikStoreConvos(list);
     } catch (e) {}
   }
-  function maikSaveThread(h) { try { localStorage.setItem(MAIK_LS, h || ""); } catch (e) {} maikUpsertConv(h); }
+  function maikSaveThread(h) { try { localStorage.setItem(maikThreadKey(), h || ""); } catch (e) {} maikUpsertConv(h); }
   function maikAcctLabel() { try { var a = (window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile()) || null; return (a && a.email) || (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || ""; } catch (e) { return ""; } }
   function maikAgo(ts) { var s = Math.max(0, (Date.now() - (ts || 0)) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago"; try { return new Date(ts).toLocaleDateString(); } catch (e) { return ""; } }
   // ── V4: Universal Semantic Router — cached, runs on EVERY query so retrieval always keys off ONE
@@ -2381,7 +2387,7 @@
     } catch (e) { return true; }
   }
   // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
-  var _maikBodyHTML = (function () { try { return localStorage.getItem(MAIK_LS) || ""; } catch (e) { return ""; } })();
+  var _maikBodyHTML = (function () { try { return localStorage.getItem(maikThreadKey()) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
@@ -3402,7 +3408,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(MAIK_LS, ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     // ── Conversation sidebar (on-device history — a privacy feature) ──
@@ -3422,7 +3428,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
       maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikTopic = null; _maikCache = {};
       if (body) { body.innerHTML = _maikBodyHTML; scroll(); }
-      try { localStorage.setItem(MAIK_LS, _maikBodyHTML); } catch (e) {}
+      try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
       maikCloseSide();
     }
     var _menuBtn = sheet.querySelector("#maikMenu"); if (_menuBtn) _menuBtn.addEventListener("click", maikOpenSide);
