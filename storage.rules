@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// StewardMD does NOT use Firebase Cloud Storage — clinical files (FollowCare wound photos, etc.)
+// live in Cloudflare R2 behind signed, view-once, auto-expiring, server-authorised access
+// (functions/_followcare_comms.js). The Firebase project still has a default storage bucket
+// (declared as storageBucket in the client config), so this file locks that bucket to DENY-ALL as
+// defence-in-depth: no client can read or write it. If a future feature ever needs Firebase Storage,
+// replace this with scoped, auth+ownership rules — never widen it to a blanket allow.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

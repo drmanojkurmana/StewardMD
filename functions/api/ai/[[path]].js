@@ -988,7 +988,7 @@ export async function onRequest(context) {
       if (!text) {
         inTok = estTokens(RESEARCH_SYS.length + q.length);
         try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); mode = "web-grounded"; }
-        catch (e) { await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); return json({ error: "research-failed", detail: String(e && e.message || e) }, 502); }
+        catch (e) { try { console.warn("[ai] research-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {} await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); return json({ error: "research-failed" }, 502); }
       }
       await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: mode, sources: sources });
@@ -1048,6 +1048,7 @@ export async function onRequest(context) {
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);
   } catch (e) {
-    return json({ error: String((e && e.message) || e) }, 500);
+    try { console.warn("[ai] server error", String((e && e.message) || e).slice(0, 200)); } catch (_e) {}
+    return json({ error: "server_error" }, 500);
   }
 }
