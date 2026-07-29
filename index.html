@@ -153,7 +153,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
    so the next call can retry (a swallowed load failure used to report a false success). */
 (function(){
   var LOCAL="/vendor/firebase/",CDN="https://www.gstatic.com/firebasejs/10.12.0/";
-  var FILES=["firebase-app-compat.js","firebase-firestore-compat.js","firebase-auth-compat.js"];
+  var FILES=["firebase-app-compat.js","firebase-app-check-compat.js","firebase-firestore-compat.js","firebase-auth-compat.js"];
   var loaded=false,loading=false,cbs=[];
   function loadScript(src){return new Promise(function(res,rej){var s=document.createElement("script");s.src=src;s.onload=res;s.onerror=function(){rej(new Error(src));};document.head.appendChild(s);});}
   // Local first; if a local file is somehow absent, fall back to the CDN for that file.
@@ -1405,6 +1405,10 @@ window.openExternal = function (u) {
 
 <script src="/native-bridge.js?v=gold452-pdf" defer></script>
 <script src="/app.js?v=gold1026" defer></script>
+<!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
+     native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
+     calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
+<script src="/app-check-init.js?v=appcheck1" defer></script>
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>

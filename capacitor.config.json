@@ -14,6 +14,17 @@
   "android": {
     "backgroundColor": "#FFFFFF"
   },
+  "experimental": {
+    "ios": {
+      "spm": {
+        "packageOptions": {
+          "@capacitor-firebase/app-check": {
+            "symlink": true
+          }
+        }
+      }
+    }
+  },
   "plugins": {
     "CapacitorHttp": {
       "enabled": true

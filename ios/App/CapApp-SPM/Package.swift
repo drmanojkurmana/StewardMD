@@ -14,6 +14,7 @@ let package = Package(
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", exact: "8.4.1"),
         .package(name: "CapacitorCommunitySpeechRecognition", path: "../../../local-plugins/capacitor-community-speech-recognition"),
         .package(name: "CapacitorCommunitySqlite", path: "../../../node_modules/@capacitor-community/sqlite"),
+        .package(name: "CapacitorFirebaseAppCheck", path: "symlinks/CapacitorFirebaseAppCheck"),
         .package(name: "CapacitorFirebaseAuthentication", path: "../../../node_modules/@capacitor-firebase/authentication"),
         .package(name: "CapacitorApp", path: "../../../node_modules/@capacitor/app"),
         .package(name: "CapacitorCamera", path: "../../../node_modules/@capacitor/camera"),
@@ -28,12 +29,12 @@ let package = Package(
         .package(name: "CapawesomeCapacitorFilePicker", path: "../../../node_modules/@capawesome/capacitor-file-picker"),
         .package(name: "CapgoCapacitorUpdater", path: "../../../node_modules/@capgo/capacitor-updater"),
         .package(name: "StewardmdCapacitorAppOrientation", path: "../../../local-plugins/capacitor-app-orientation"),
+        .package(name: "StewardmdCapacitorEcgDigitiser", path: "../../../local-plugins/capacitor-ecg-digitiser"),
         .package(name: "StewardmdCapacitorFundxDepth", path: "../../../local-plugins/capacitor-fundx-depth"),
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
         .package(name: "StewardmdCapacitorWatchBridge", path: "../../../local-plugins/capacitor-watch-bridge"),
         .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper"),
-        .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin"),
-        .package(name: "StewardmdCapacitorEcgDigitiser", path: "../../../local-plugins/capacitor-ecg-digitiser")
+        .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin")
     ],
     targets: [
         .target(
@@ -43,6 +44,7 @@ let package = Package(
                 .product(name: "Cordova", package: "capacitor-swift-pm"),
                 .product(name: "CapacitorCommunitySpeechRecognition", package: "CapacitorCommunitySpeechRecognition"),
                 .product(name: "CapacitorCommunitySqlite", package: "CapacitorCommunitySqlite"),
+                .product(name: "CapacitorFirebaseAppCheck", package: "CapacitorFirebaseAppCheck"),
                 .product(name: "CapacitorFirebaseAuthentication", package: "CapacitorFirebaseAuthentication"),
                 .product(name: "CapacitorApp", package: "CapacitorApp"),
                 .product(name: "CapacitorCamera", package: "CapacitorCamera"),
@@ -57,12 +59,12 @@ let package = Package(
                 .product(name: "CapawesomeCapacitorFilePicker", package: "CapawesomeCapacitorFilePicker"),
                 .product(name: "CapgoCapacitorUpdater", package: "CapgoCapacitorUpdater"),
                 .product(name: "StewardmdCapacitorAppOrientation", package: "StewardmdCapacitorAppOrientation"),
+                .product(name: "StewardmdCapacitorEcgDigitiser", package: "StewardmdCapacitorEcgDigitiser"),
                 .product(name: "StewardmdCapacitorFundxDepth", package: "StewardmdCapacitorFundxDepth"),
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
                 .product(name: "StewardmdCapacitorWatchBridge", package: "StewardmdCapacitorWatchBridge"),
                 .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper"),
-                .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin"),
-                .product(name: "StewardmdCapacitorEcgDigitiser", package: "StewardmdCapacitorEcgDigitiser")
+                .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin")
             ]
         )
     ]
