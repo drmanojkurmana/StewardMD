@@ -1442,7 +1442,7 @@
     // Home FAB = house outline with the StewardMD logo mark inside it.
     fab.innerHTML = '<svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M4 23 L24 6 L44 23 M9 22 V43 H39 V22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><image href="/logo.png" xlink:href="/logo.png" x="15" y="26.5" width="18" height="13.5" preserveAspectRatio="xMidYMid meet"/></svg>';
     fab.style.display = "none"; // hidden until past the splash/disclaimer/login gates
-    document.body.appendChild(fab);
+    /* Home FAB removed 2026-07-29 per request: navigate via each screen back/close controls + the StewardMD logo (also goHome). Element kept detached (never appended) so every guarded `fab` reference stays valid. */
     fab.addEventListener("click", goHome);
     // Only show the home button once the user is on the landing page / inside the app —
     // never on the intro splash, disclaimer, or login gates.
