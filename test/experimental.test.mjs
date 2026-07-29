@@ -47,6 +47,7 @@ async function main() {
   ok("code excludes ambiguous chars I O L 0 1", !/[IOL01]/.test(c.replace("FUNDX", "")));
   const many = new Set(); for (let i = 0; i < 2000; i++) many.add(X.makeCode("FUNDX"));
   ok("codes are unique across 2000 draws", many.size >= 1999);
+  ok("feature registry includes fundx + kardiox (KardiQ X AI)", X.isFeature("fundx") && X.isFeature("kardiox") && X.featureList().some((f) => f.id === "kardiox" && f.label === "KardiQ X AI"));
 
   // ---------- pure: normalize + hash ----------
   ok("normalize strips case/hyphens/spaces", X.normalizeCode(" fundx-8qk4-xm92 ") === "FUNDX8QK4XM92");
@@ -77,9 +78,9 @@ async function main() {
   ok("revoked → reject invalid", X.decideActivation({ feature: "fundx", status: "revoked" }, { feature: "fundx", uid: "u", deviceId: "d" }, now).error === "invalid");
   ok("unused → activate", X.decideActivation(base, { feature: "fundx", uid: "u", deviceId: "d" }, now).action === "activate");
   const act = { feature: "fundx", status: "activated", activatedByUID: "u1", activatedDeviceId: "d1" };
-  ok("activated same uid+device → reissue", X.decideActivation(act, { feature: "fundx", uid: "u1", deviceId: "d1" }, now).action === "reissue");
-  ok("activated other device → already_used", X.decideActivation(act, { feature: "fundx", uid: "u1", deviceId: "d2" }, now).error === "already_used");
-  ok("activated other uid → already_used", X.decideActivation(act, { feature: "fundx", uid: "u2", deviceId: "d1" }, now).error === "already_used");
+  ok("activated same account (same device) → reissue", X.decideActivation(act, { feature: "fundx", uid: "u1", deviceId: "d1" }, now).action === "reissue");
+  ok("activated same account, OTHER device → reissue (account-bound)", X.decideActivation(act, { feature: "fundx", uid: "u1", deviceId: "d2" }, now).action === "reissue");
+  ok("activated DIFFERENT account → already_used", X.decideActivation(act, { feature: "fundx", uid: "u2", deviceId: "d1" }, now).error === "already_used");
 
   // ---------- pure: user messages (exact spec strings) ----------
   ok("message already_used", X.messageFor("already_used") === "This code has already been used.");
@@ -101,15 +102,22 @@ async function main() {
   const again = await X.activate(ENV, { feature: "fundx", code: gen.code, uid: "u1", deviceId: "dev1", platform: "ios" }, fs);
   ok("SAME code on the SAME device → idempotent success (reused)", again.ok === true && again.reused === true && !!again.token);
 
-  // ---------- verify + statusFor ----------
+  const newDev = await X.activate(ENV, { feature: "fundx", code: gen.code, uid: "u1", deviceId: "dev1b", platform: "ios" }, fs);
+  ok("SAME account re-enters the code on a NEW device → reissue success", newDev.ok === true && newDev.reused === true && !!newDev.token);
+
+  // ---------- verify + statusFor (account-bound: unlock follows the account across devices) ----------
   const v1 = await X.verify(ENV, { feature: "fundx", deviceId: "dev1", token: a1.token, uid: "u1" }, fs);
   ok("verify a valid token → active", v1.active === true);
   const vDev = await X.verify(ENV, { feature: "fundx", deviceId: "devX", token: a1.token, uid: "u1" }, fs);
-  ok("verify with a different deviceId → inactive", vDev.active === false && vDev.reason === "device_mismatch");
+  ok("verify from a DIFFERENT device (same account) → still active (account-bound)", vDev.active === true);
+  const vUid = await X.verify(ENV, { feature: "fundx", deviceId: "dev1", token: a1.token, uid: "uZZ" }, fs);
+  ok("verify claiming a DIFFERENT account → inactive", vUid.active === false && vUid.reason === "uid_mismatch");
   const st = await X.statusFor(ENV, { feature: "fundx", uid: "u1", deviceId: "dev1" }, fs);
   ok("status restores an active binding + fresh token (reinstall recovery)", st.active === true && !!st.token);
   const stOther = await X.statusFor(ENV, { feature: "fundx", uid: "u1", deviceId: "devZ" }, fs);
-  ok("status for a different device → inactive", stOther.active === false);
+  ok("status on a NEW device (same account) → active + fresh token, NO code needed", stOther.active === true && !!stOther.token);
+  const stU2 = await X.statusFor(ENV, { feature: "fundx", uid: "uZZ", deviceId: "devZ" }, fs);
+  ok("status for a DIFFERENT account → inactive", stU2.active === false);
 
   // ---------- revoke (deactivate device) — code stays consumed ----------
   const rev = await X.revokeActivation(ENV, { activationId: a1.activationId }, fs);

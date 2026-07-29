@@ -29,7 +29,7 @@ import { getEntitlement, effectiveTier, entitlementsOn } from "./_entitlements.j
 // ---- feature registry (add a line to unlock a new beta feature) ------------------------
 export const FEATURES = {
   fundx: { id: "fundx", label: "FundX AI", prefix: "FUNDX", blurb: "AI-guided retinal imaging" },
-  kardiox: { id: "kardiox", label: "KardioX AI", prefix: "KARDX", blurb: "AI ECG interpretation" },
+  kardiox: { id: "kardiox", label: "KardiQ X AI", prefix: "KARDX", blurb: "AI ECG interpretation" },
   thorex: { id: "thorex", label: "ThoreX AI", prefix: "THORX", blurb: "AI chest X-ray interpretation" },
   // ecg:      { id: "ecg",      label: "ECG AI",          prefix: "ECG",   blurb: "12-lead ECG interpretation" },
   // ultrasound:{ id: "ultrasound", label: "Ultrasound AI", prefix: "USG",   blurb: "POCUS assistance" },
@@ -122,8 +122,9 @@ export function decideActivation(codeFields, req, now) {
   if (st === "expired") return { action: "reject", error: "expired" };
   if (st === "revoked") return { action: "reject", error: "invalid" };
   if (st === "activated") {
-    // Same account + same device re-entering the same code → idempotent success (re-issue token).
-    if (codeFields.activatedByUID === req.uid && codeFields.activatedDeviceId === req.deviceId) return { action: "reissue" };
+    // Account-bound: the SAME account re-entering the same code on ANY device → idempotent success
+    // (re-issue token). A DIFFERENT account is rejected. Device is not part of the binding.
+    if (codeFields.activatedByUID === req.uid) return { action: "reissue" };
     return { action: "reject", error: "already_used" };
   }
   return { action: "activate" };   // st === "unused"
@@ -256,13 +257,13 @@ export async function verify(env, req, deps) {
   const payload = await verifyToken(req.token, secret);
   if (!payload) return { active: false, reason: "bad_token" };
   if (req.feature && payload.f !== req.feature) return { active: false, reason: "feature_mismatch" };
-  if (req.deviceId && payload.d !== req.deviceId) return { active: false, reason: "device_mismatch" };
+  // Account-bound: the token is valid for this account on ANY device — no deviceId gate.
   if (req.uid && payload.u !== req.uid) return { active: false, reason: "uid_mismatch" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
   if (!act) return { active: false, reason: "no_activation" };
   const fa = act.fields;
   if (fa.status !== "active") return { active: false, reason: "revoked" };
-  if (fa.feature !== payload.f || fa.deviceId !== payload.d || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
+  if (fa.feature !== payload.f || fa.uid !== payload.u) return { active: false, reason: "mismatch" };
   const tier = await resolveTier(env, fa.feature, payload.u, fa.tier, fs);
   return { active: true, feature: fa.feature, deviceModel: fa.deviceModel, activatedAt: fa.activatedAt, tier };
 }
@@ -277,23 +278,25 @@ export async function checkActive(env, feature, token, deps) {
   const payload = await verifyToken(token, secret);
   if (!payload || payload.f !== feature) return { active: false, reason: "bad_token" };
   const act = await fs.fsGet(env, ACTS + "/" + payload.a);
-  if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.deviceId !== payload.d) return { active: false, reason: "inactive" };
+  // Account-bound: an ACTIVE activation record for this feature + account is the gate; no device check.
+  if (!act || act.fields.status !== "active" || act.fields.feature !== feature || act.fields.uid !== payload.u) return { active: false, reason: "inactive" };
   const tier = await resolveTier(env, feature, payload.u, act.fields.tier, fs);
   return { active: true, uid: payload.u, deviceId: payload.d, tier };
 }
 
-// APP: authoritative status for a signed-in user on THIS device — restores the token after a
-// reinstall (same account + same device) so the consumed code never has to be re-entered.
+// APP: authoritative status for a signed-in ACCOUNT — restores the token for that account on ANY
+// device (reinstall, new phone, or a fresh login) so the consumed code never has to be re-entered.
 export async function statusFor(env, req, deps) {
   const fs = deps || FS;
   if (!req.uid || !isFeature(req.feature)) return { active: false };
   const rows = await fs.fsQuery(env, ACTS, { where: { field: "uid", value: req.uid } });
-  const match = rows.find((r) => r.fields.feature === req.feature && r.fields.deviceId === req.deviceId && r.fields.status === "active");
+  const match = rows.find((r) => r.fields.feature === req.feature && r.fields.status === "active");
   if (!match) return { active: false };
   const secret = env.EXPERIMENTAL_TOKEN_SECRET;
   const tierNorm = await resolveTier(env, req.feature, req.uid, match.fields.tier, fs);
   let token = null;
-  if (secret && req.deviceId) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId, p: clip(match.fields.platform, 20), a: match.id, t: tierNorm }, secret);
+  // Stamp the token with the CURRENT device for the audit trail; the device is not a gate.
+  if (secret) token = await signToken({ f: req.feature, u: req.uid, d: req.deviceId || match.fields.deviceId || "", p: clip(match.fields.platform, 20), a: match.id, t: tierNorm }, secret);
   return { active: true, token, feature: req.feature, deviceModel: match.fields.deviceModel, activatedAt: match.fields.activatedAt, tier: tierNorm };
 }
 
