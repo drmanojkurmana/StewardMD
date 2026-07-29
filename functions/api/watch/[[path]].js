@@ -54,6 +54,22 @@ async function runForUid(env, origin, uid) {
 
   let pushed = 0, delivered = 0, tokenTotal = 0;
   const ORD_RID = (o) => String((o && (o.renderId || o.orderId)) || "");
+
+  // Fetch the doctor's IP worklist ONCE this cycle → map patientId → bed/ward. Bed + ward are
+  // LOCATION (reassigned constantly), not a direct patient identifier, so — unlike the name — they
+  // are safe to show on the lock screen and are what the clinician actually needs to act.
+  const locMap = {};
+  try {
+    const pr = await fetch(origin + "/api/ghis/patients", { headers: { "Authorization": "Bearer " + token } });
+    if (pr.ok) {
+      const pj = await pr.json().catch(() => (null));
+      const rows = Array.isArray(pj) ? pj : ((pj && pj.patients) || []);
+      for (const w of rows) {
+        const wid = String((w && w.patientId) || "");
+        if (wid) locMap[wid] = { bed: String((w && w.bedName) || "").trim().slice(0, 24), ward: String((w && w.deptDescription) || "").trim().slice(0, 40) };
+      }
+    }
+  } catch (e) { /* worklist unavailable → push without bed/ward */ }
   // Does this order have RESULT VALUES yet? GHIS shows "No values recorded" for an order that has
   // only been PLACED / is processing — the value lives in the per-order DETAIL, not the order list.
   // So we alert on actual results, never on a freshly-ordered (empty) test. (This is what the client
@@ -82,20 +98,33 @@ async function runForUid(env, origin, uid) {
       if (!valued) { baseline = true; valued = new Set(); }
       // Only orders NOT already known-reported need a value check (steady state = just the new/pending ones).
       const pend = orders.filter((o) => ORD_RID(o) && !valued.has(ORD_RID(o)));
-      let newly = 0;
+      let newly = 0; const newNames = [];
       for (let i = 0; i < pend.length; i++) {
         if (i >= CAP) { valued.add(ORD_RID(pend[i])); continue; }        // beyond cap → mark handled (no alert); rare
-        if (await orderHasValues(pend[i])) { valued.add(ORD_RID(pend[i])); if (!baseline) newly++; }
+        if (await orderHasValues(pend[i])) {
+          valued.add(ORD_RID(pend[i]));
+          if (!baseline) {
+            newly++;
+            const nm = String((pend[i] && pend[i].serviceName) || "").trim().slice(0, 48);   // report/test name (NOT the result value)
+            if (nm && newNames.indexOf(nm) === -1) newNames.push(nm);
+          }
+        }
         // no values yet → leave UNvalued so a later cycle alerts once results are actually reported
       }
       await setSeen(env, uid, p.patientId, JSON.stringify({ v: 2, valued: Array.from(valued).slice(-500) }));
       if (!baseline && newly > 0) {
         // Only fires when a watched order actually GAINED values — not on a freshly-placed order.
+        // Show bed + ward + which report is ready — location + test name only, NEVER the patient
+        // name/MRN or any result value (those transit APNs/FCM relays + the lock screen). The name is
+        // still resolved in-app after auth via the deep link.
+        const loc = locMap[String(p.patientId)] || {};
+        const locLabel = [loc.bed ? ("Bed " + loc.bed) : "", loc.ward || ""].filter(Boolean).join(" · ");
+        const reports = newNames.slice(0, 3).join(", ") + (newNames.length > 3 ? (" +" + (newNames.length - 3) + " more") : "");
+        const title = (locLabel ? ("New lab · " + locLabel) : "StewardMD · new lab result").slice(0, 90);
+        const body = ((reports || "A new lab report") + " available — open StewardMD to review.").slice(0, 160);
         const d = (await sendNativeToAll(env, {
-          // Content-free like FollowCare: NO patient name/identifier in the visible push (it transits
-          // APNs/FCM relays + the lock screen). The name is resolved in-app after auth via the deep link.
-          title: "StewardMD · new lab result",
-          body: "A new result was reported. Open StewardMD to review.",
+          title: title,
+          body: body,
           url: "/?ghisPatient=" + encodeURIComponent(p.patientId),
           tag: "lab-" + p.patientId,
         }, { uid })) || {};
