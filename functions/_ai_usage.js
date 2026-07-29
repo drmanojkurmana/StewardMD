@@ -101,3 +101,70 @@ export function buildUsageRecord(f) {
     // NEVER: prompt text, output text, patient name/MRN, image/audio bytes, report content.
   };
 }
+
+// ============================================================================================
+// KV-backed layer (I/O). All best-effort + FAIL-OPEN: metering must NEVER block or slow a
+// clinical AI call. `store` is a KV namespace; `now` is injectable for tests.
+// Keys: aiu:mod:<doc>:<module>:<day> (int)  aiu:doc:<doc>:<day> (json)  aiu:global:<day> (json)
+//       ai:model:override (string) — the admin-selected model.
+// ============================================================================================
+function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
+const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
+
+// Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
+export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
+  const limit = moduleDailyLimit(env, moduleId);
+  if (!store || !isAiModule(moduleId) || limit === 0) return { ok: true, unlimited: limit === 0, limit: limit };
+  const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
+  let used = 0;
+  try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
+  if (used >= limit) return { ok: false, reason: "module-daily", module: moduleId, limit: limit, used: used };
+  return { ok: true, remaining: limit - used, limit: limit, used: used };
+}
+
+// Post-call: record one usage into the per-doctor/module + per-doctor + global daily rollups.
+export async function recordAiUsage(env, store, rec, now) {
+  if (!store || !rec || !isAiModule(rec.module)) return;
+  const day = _day(now);
+  try {
+    const modKey = "aiu:mod:" + rec.doctorId + ":" + rec.module + ":" + day;
+    await store.put(modKey, String((Number(await store.get(modKey)) || 0) + 1), { expirationTtl: AIU_TTL });
+    const docKey = "aiu:doc:" + rec.doctorId + ":" + day;
+    const d = (await store.get(docKey, "json")) || { req: 0, tok: 0, cost: 0, latSum: 0, fail: 0, byModule: {} };
+    d.req += 1; d.tok += rec.totalTokens; d.cost += rec.estCostInr; d.latSum += rec.latencyMs;
+    d.byModule[rec.module] = (d.byModule[rec.module] || 0) + 1;
+    if (rec.status !== "success") d.fail += 1;
+    await store.put(docKey, JSON.stringify(d), { expirationTtl: AIU_TTL });
+    const gKey = "aiu:global:" + day;
+    const g = (await store.get(gKey, "json")) || { req: 0, cost: 0, fail: 0, byModule: {}, byModel: {}, docs: {} };
+    g.req += 1; g.cost += rec.estCostInr;
+    if (rec.status !== "success") g.fail += 1;
+    g.byModule[rec.module] = (g.byModule[rec.module] || 0) + 1;
+    if (rec.model) g.byModel[rec.model] = (g.byModel[rec.model] || 0) + 1;
+    g.docs[rec.doctorId] = (g.docs[rec.doctorId] || 0) + 1; // active-doctor count + top-users
+    await store.put(gKey, JSON.stringify(g), { expirationTtl: AIU_TTL });
+  } catch (e) { /* fail-open — never break the AI response on metering */ }
+}
+
+// Doctor's own daily summary (for the in-app AI Usage page). Never another doctor's data.
+export async function doctorUsageSummary(env, store, doctorId, now) {
+  const day = _day(now);
+  const out = { day: day, req: 0, tokens: 0, estCostInr: 0, avgLatencyMs: 0, byModule: {}, limits: {} };
+  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = moduleDailyLimit(env, m); });
+  if (!store) return out;
+  try {
+    const d = await store.get("aiu:doc:" + doctorId + ":" + day, "json");
+    if (d) { out.req = d.req || 0; out.tokens = d.tok || 0; out.estCostInr = Math.round((d.cost || 0) * 100) / 100; out.byModule = d.byModule || {}; out.avgLatencyMs = d.req ? Math.round((d.latSum || 0) / d.req) : 0; out.fail = d.fail || 0; }
+  } catch (e) {}
+  return out;
+}
+
+// ---- admin-selected model (the "switch models" control) ----
+export async function getModelOverride(store) {
+  try { return store ? (await store.get("ai:model:override")) || null : null; } catch (e) { return null; }
+}
+export async function setModelOverride(store, model) {
+  if (!store) return false;
+  if (model && ALLOWED_MODELS.indexOf(model) === -1) return false; // only real, priced models
+  try { if (model) await store.put("ai:model:override", model); else await store.delete("ai:model:override"); return true; } catch (e) { return false; }
+}

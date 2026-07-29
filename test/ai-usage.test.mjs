@@ -4,7 +4,20 @@ import assert from "node:assert/strict";
 import {
   AI_MODULES, isAiModule, aiModuleList, moduleDailyLimit,
   MODEL_RATES, modelRate, estCostInr, resolveModel, MODEL_HARD_DEFAULT, buildUsageRecord,
+  checkModuleQuota, recordAiUsage, doctorUsageSummary, getModelOverride, setModelOverride,
 } from "../functions/_ai_usage.js";
+
+// tiny in-memory KV mock (get / get(_,"json") / put / delete)
+function mockKv() {
+  const m = new Map();
+  return {
+    _m: m,
+    async get(k, type) { const v = m.get(k); if (v == null) return null; return type === "json" ? JSON.parse(v) : v; },
+    async put(k, v) { m.set(k, String(v)); },
+    async delete(k) { m.delete(k); },
+  };
+}
+const NOW = 1800000000000; // fixed timestamp so all records land on the same UTC day
 
 test("module registry: known modules + the approved daily caps", () => {
   assert.ok(isAiModule("maik") && isAiModule("ecg") && isAiModule("thorex") && isAiModule("ocr"));
@@ -75,4 +88,49 @@ test("buildUsageRecord: normalized metadata, NO prompt/PHI fields, clamps + stat
   assert.equal(r2.module, "unknown");
   assert.equal(r2.status, "success"); // only failed/blocked/timeout are kept; else success
   assert.equal(buildUsageRecord({ status: "failed" }).status, "failed");
+});
+
+test("checkModuleQuota + recordAiUsage: per-module daily cap enforced across records", async () => {
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "3" }, doc = "fb:u1";
+  const rec = () => buildUsageRecord({ doctorId: doc, module: "ecg", model: "gemini-2.5-flash", promptTokens: 10, completionTokens: 5, estCostInr: 0.01, latencyMs: 1000 });
+  for (let i = 0; i < 3; i++) {
+    const q = await checkModuleQuota(env, kv, "ecg", doc, NOW);
+    assert.equal(q.ok, true, "call " + i + " allowed");
+    await recordAiUsage(env, kv, rec(), NOW);
+  }
+  const blocked = await checkModuleQuota(env, kv, "ecg", doc, NOW);
+  assert.equal(blocked.ok, false); assert.equal(blocked.reason, "module-daily"); assert.equal(blocked.used, 3); assert.equal(blocked.limit, 3);
+  // a DIFFERENT doctor is unaffected (per-doctor isolation)
+  assert.equal((await checkModuleQuota(env, kv, "ecg", "fb:u2", NOW)).ok, true);
+  // a DIFFERENT module for the same doctor is unaffected
+  assert.equal((await checkModuleQuota(env, kv, "thorex", doc, NOW)).ok, true);
+});
+
+test("checkModuleQuota: unlimited module + no-store both fail-open (never block)", async () => {
+  assert.equal((await checkModuleQuota({}, mockKv(), "kb", "fb:u1", NOW)).ok, true);   // kb daily=0 → unlimited
+  assert.equal((await checkModuleQuota({}, null, "ecg", "fb:u1", NOW)).ok, true);      // no store → allow
+});
+
+test("doctorUsageSummary: reflects recorded usage + exposes limits", async () => {
+  const kv = mockKv(), env = {}, doc = "fb:u3";
+  await recordAiUsage(env, kv, buildUsageRecord({ doctorId: doc, module: "maik", model: "gemini-2.5-flash", promptTokens: 100, completionTokens: 100, estCostInr: 0.03, latencyMs: 1800 }), NOW);
+  await recordAiUsage(env, kv, buildUsageRecord({ doctorId: doc, module: "ecg", model: "gemini-2.5-flash", promptTokens: 0, completionTokens: 0, estCostInr: 0.35, latencyMs: 2200 }), NOW);
+  const s = await doctorUsageSummary(env, kv, doc, NOW);
+  assert.equal(s.req, 2);
+  assert.equal(s.byModule.maik, 1); assert.equal(s.byModule.ecg, 1);
+  assert.equal(s.estCostInr, 0.38);
+  assert.equal(s.avgLatencyMs, 2000);
+  assert.equal(s.limits.ecg, 10); // default cap surfaced for the UI
+});
+
+test("model override: set valid persists; invalid rejected; clear works", async () => {
+  const kv = mockKv();
+  assert.equal(await getModelOverride(kv), null);
+  assert.equal(await setModelOverride(kv, "gemini-3.5-flash"), true);
+  assert.equal(await getModelOverride(kv), "gemini-3.5-flash");
+  assert.equal(resolveModel(await getModelOverride(kv), {}), "gemini-3.5-flash"); // resolver honours it
+  assert.equal(await setModelOverride(kv, "totally-fake-model"), false);          // rejected
+  assert.equal(await getModelOverride(kv), "gemini-3.5-flash");                    // unchanged
+  assert.equal(await setModelOverride(kv, null), true);                            // clear
+  assert.equal(await getModelOverride(kv), null);
 });
