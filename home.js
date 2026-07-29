@@ -2946,6 +2946,18 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var _fsResumed = false;
       function _fsResume() { if (_fsResumed) return; _fsResumed = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} }
       function _clearStages() { _stageT.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); _stageT = []; }
+      // ── SCOPE GATE (clinician-only): an obviously NON-clinical request (code, creative writing,
+      // "integrate X into my project", lay self-help) is refused INSTANTLY here — BEFORE the KB engine,
+      // the semantic router, and any Vertex call — so it can never fuzzy-match a disease name in the
+      // local KB (the "write a code" → "Writer's cramp" bug). Deterministic + unit-tested
+      // (test/maik-scope.test.mjs). Fails OPEN — a genuine clinical question is never blocked. Skipped
+      // in case mode (active), which is inherently clinical. Nothing armed/disabled yet, so we just return.
+      if (!active && window.MaiKScope && MaiKScope.isNonMedical(question)) {
+        _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant. I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
+        try { scroll(); } catch (e) {}
+        return;
+      }
       // Watchdog, NOT a fixed total ceiling. On web (real SSE) onDelta resets it on every streamed token so
       // a long but ACTIVELY-STREAMING answer is never killed. On native there is no SSE (CapacitorHttp
       // buffers it) — the answer is fetched whole then typed out — so nothing lands until the end and the
@@ -3149,7 +3161,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           return _routeP.then(function (route) {
             if (route && route.outOfScope) {   // non-medical query → INSTANT refusal; no KB / answer / web-research
               _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-              think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant — I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
+              think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant. I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
               try { scroll(); } catch (e) {}
               return;
             }
