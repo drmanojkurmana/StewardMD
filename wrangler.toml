@@ -35,8 +35,17 @@ database_id = "f1fe0b36-d780-415d-ae8d-e9024747b552"
 binding = "FOLLOWCARE_R2"
 bucket_name = "stewardmd-followcare-media"
 
+# Plaintext config vars (NOT secrets — secrets stay in `wrangler pages secret put`).
+# DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
+# recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
+[vars]
+FOLLOWCARE_RETENTION_DAYS = "7"
+
 [env.production]
 compatibility_date = "2026-06-28"
+
+[env.production.vars]
+FOLLOWCARE_RETENTION_DAYS = "7"
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
