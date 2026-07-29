@@ -58,7 +58,11 @@ export async function deleteCred(env, uid) { const kv = watchKv(env); if (kv) aw
 // ── watch list (refresh TTL on every write so an active watcher never expires) ─
 export async function getList(env, uid) {
   const kv = watchKv(env); if (!kv) return [];
-  try { return (await kv.get(LIST(uid), "json")) || []; } catch (e) { return []; }
+  let list; try { list = (await kv.get(LIST(uid), "json")) || []; } catch (e) { return []; }
+  // Decrypt the at-rest patient name so callers still get plaintext (behaviour unchanged); older
+  // entries stored `name` in plaintext — keep those as-is for backward compatibility.
+  for (const p of list) { if (p && p.name == null && p.nameEnc) { try { p.name = await dec(env, p.nameEnc); } catch (e) { p.name = ""; } } }
+  return list;
 }
 export async function setList(env, uid, list) {
   const kv = watchKv(env); if (!kv) return;
@@ -68,7 +72,9 @@ export async function addWatch(env, uid, patient) {
   const list = await getList(env, uid);
   const pid = String(patient.patientId);
   if (!list.some((p) => String(p.patientId) === pid)) {
-    list.push({ patientId: pid, episodeId: patient.episodeId || "", name: patient.name || "", since: Date.now() });
+    // Encrypt the patient name at rest (PHI) — GHIS creds in this module are already AES-GCM encrypted.
+    let nameEnc = ""; try { nameEnc = await enc(env, patient.name || ""); } catch (e) {}
+    list.push({ patientId: pid, episodeId: patient.episodeId || "", nameEnc: nameEnc, since: Date.now() });
     await setList(env, uid, list);
   }
   return list;

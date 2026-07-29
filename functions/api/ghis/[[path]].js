@@ -238,7 +238,10 @@ async function getRadiologyReport(env, token, resultid, type) {
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
-const bearer = (req, url) => (req.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '') || req.headers.get('X-Ghis-Token') || url.searchParams.get('token') || '';
+// The GHIS session token grants live patient PHI — accept it ONLY from headers, never the ?token= query
+// string (which would leak it into edge/proxy access logs, browser history, and Referer). The client always
+// sends it as `Authorization: Bearer`, so dropping the query fallback changes no legitimate behaviour.
+const bearer = (req /*, url */) => (req.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '') || req.headers.get('X-Ghis-Token') || '';
 
 // ── entry ────────────────────────────────────────────────────────────────────
 export async function onRequest(context) {

@@ -150,6 +150,6 @@ export async function onRequest(context) {
     return json({ error: "not_found" }, 404, request);
   } catch (e) {
     const status = (e && e.status) || 500;
-    return json({ error: (e && e.code) || "internal_error", detail: (e && e.detail) || null }, status, request);
+    { try { console.warn("[experimental] error", String((e && (e.detail || e.message)) || e).slice(0, 200)); } catch (_e) {} return json({ error: (e && e.code) || "internal_error" }, status, request); }
   }
 }

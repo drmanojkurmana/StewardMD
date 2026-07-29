@@ -7,6 +7,8 @@
 <meta name="description" content="Your hospital recovery check-in.">
 <meta name="theme-color" content="#0e6e63">
 <meta name="robots" content="noindex, nofollow">
+<!-- The check-in link carries an opaque access token in ?t= — never leak it via the Referer header to any origin. -->
+<meta name="referrer" content="no-referrer">
 <!--
   FollowCare AI — patient recovery portal (Phase 1).
   A self-contained, login-free, install-free page a discharged patient opens from an SMS/email link
@@ -188,6 +190,7 @@
   </main>
 
   <p class="disclaimer">This recovery check-in supports your care team. It does not replace medical advice and never changes your medicines. If you feel unwell, contact your doctor or local emergency services.</p>
+  <p class="disclaimer" id="fc-privacy"></p>
 </div>
 
 <!-- motion (motion.dev, UMD → window.Motion) — vendored for offline/native; animations are enhancement-only. -->
@@ -348,7 +351,18 @@
     or: "ଏହି ରିକଭରୀ ଚେକ୍-ଇନ୍ ଆପଣଙ୍କ ଯତ୍ନ ଦଳକୁ ସହାୟତା କରେ। ଏହା ଚିକିତ୍ସା ପରାମର୍ଶର ବିକଳ୍ପ ନୁହେଁ ଏବଂ ଆପଣଙ୍କ ଔଷଧ କେବେ ବଦଳାଏ ନାହିଁ। ଅସୁସ୍ଥ ଲାଗିଲେ, ଆପଣଙ୍କ ଡାକ୍ତର କିମ୍ବା ସ୍ଥାନୀୟ ଜରୁରୀକାଳୀନ ସେବା ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ।",
     as: "এই ৰিকভাৰী চেক-ইনে আপোনাৰ যত্ন দলক সহায় কৰে। ই চিকিৎসা পৰামৰ্শৰ বিকল্প নহয় আৰু আপোনাৰ ঔষধ কেতিয়াও সলনি নকৰে। অসুস্থ অনুভৱ কৰিলে, আপোনাৰ ডাক্তৰ বা স্থানীয় জৰুৰীকালীন সেৱাৰ সৈতে যোগাযোগ কৰক।"
   };
-  function updateDisclaimer(){ try{ var d=document.querySelector(".disclaimer"); if(!d) return; var loc=DISCLAIMER[LANG]||DISCLAIMER.en; d.innerHTML = esc(loc) + (LANG!=="en" ? '<br><span style="opacity:.7">'+esc(DISCLAIMER.en)+'</span>' : ""); }catch(e){} }
+  function updateDisclaimer(){ try{
+    var d=document.querySelector(".disclaimer"); if(d){ var loc=DISCLAIMER[LANG]||DISCLAIMER.en; d.innerHTML = esc(loc) + (LANG!=="en" ? '<br><span style="opacity:.7">'+esc(DISCLAIMER.en)+'</span>' : ""); }
+    // DPDP §5/§13 privacy notice: what's processed, by whom, why, retention, erase right, policy + grievance contact.
+    var pv=document.getElementById("fc-privacy");
+    if(pv && FCI){
+      var note=FCI.t("fc.portal.privacy",LANG), noteEn=FCI.t("fc.portal.privacy","en");
+      var links=' <a href="/privacy" style="color:var(--teal)">'+esc(FCI.t("fc.portal.privacy_link",LANG))+'</a> &middot; <a href="mailto:support@stewardmd.in" style="color:var(--teal)">'+esc(FCI.t("fc.portal.contact",LANG))+'</a>';
+      var h=esc(note)+links;
+      if(LANG!=="en" && note!==noteEn) h+='<br><span style="opacity:.7">'+esc(noteEn)+'</span>';
+      pv.innerHTML=h;
+    }
+  }catch(e){} }
 
   function screenMessage(icon, title, body, cls){
     clear();

@@ -309,7 +309,7 @@ export async function onRequest(context) {
   let ex; try { ex = await geminiExtract(env, imageB64, mime, idMode ? "id" : "cert"); }
   catch (e) { ex = { regNo: "", name: "", council: "", year: "", looksValid: false, confidence: 0, httpOk: false }; }
   const effReg = idMode ? typedReg : ex.regNo;   // reg used for the NMC lookup
-  console.log("[verify] uid", uid, "mode:", idMode ? "id" : "cert", "extracted:", JSON.stringify({ regNo: ex.regNo, typedReg, name: ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
+  console.log("[verify] uid", uid, "mode:", idMode ? "id" : "cert", "extracted:", JSON.stringify({ hasReg: !!ex.regNo, hasName: !!ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
 
   // Provisional access: on manual review the doctor still gets in for 7 days, but the
   // prescription generator stays locked (no verified claim) until approved.

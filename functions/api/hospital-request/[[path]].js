@@ -17,6 +17,18 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
 });
 
+// Per-IP throttle on the login-free submit so an anonymous script can't flood Firestore with docs.
+async function rateLimited(env, request) {
+  const kv = env.UPDATES_KV || env.MAIK_KV || env.GHIS_KV || env.PUSH_KV; if (!kv) return false;
+  const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for") || "unknown";
+  try {
+    const k = "hrq2:ip:" + ip, n = parseInt((await kv.get(k)) || "0", 10);
+    if (n >= 5) return true;
+    await kv.put(k, String(n + 1), { expirationTtl: 600 });
+  } catch (e) {}
+  return false;
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
@@ -24,6 +36,7 @@ export async function onRequest(context) {
 
   // ---- submit (open to any user; light validation) ----
   if (method === "POST" && !seg) {
+    if (await rateLimited(env, request)) return json({ error: "rate_limited" }, 429);
     let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
     const name = String(b.name || "").trim().slice(0, 160);
     if (name.length < 3) return json({ error: "bad-name" }, 400);

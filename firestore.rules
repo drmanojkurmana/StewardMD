@@ -249,6 +249,7 @@ service cloud.firestore {
     match /fc_events/{eventId}       { allow read, write: if false; }
     match /fc_delivery/{deliveryId}  { allow read, write: if false; }
     match /fc_doctors/{uid}          { allow read, write: if false; }
+    match /fc_comms/{commId}         { allow read, write: if false; }   // Doctor Action Center — encrypted PHI messages
 
     // Everything else is denied.
     match /{document=**} {

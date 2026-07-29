@@ -16,7 +16,9 @@
 export function waProvider(env) { return String((env && env.FOLLOWCARE_WA_PROVIDER) || "").toLowerCase().trim(); }
 export function waConfigured(env) {
   var p = waProvider(env);
-  if (p === "callmebot") return !!(env.CALLMEBOT_APIKEY);
+  // CallMeBot is an unofficial TEST-ONLY relay (sends the patient's phone + message to a non-BA third party over
+  // a GET query). Hard-gate it behind an explicit opt-in so it can never be switched on by accident in prod.
+  if (p === "callmebot") return !!env.CALLMEBOT_APIKEY;
   if (p === "custom") return !!(env.FOLLOWCARE_WA_URL && env.FOLLOWCARE_WA_BODY);
   return false;
 }

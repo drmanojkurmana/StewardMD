@@ -147,6 +147,13 @@
     "fc.portal.loading": { en: "Loading your check-in...", hi: "आपका चेक-इन लोड हो रहा है...", te: "మీ చెక్-ఇన్ లోడ్ అవుతోంది..." },
     "fc.portal.submit": { en: "Submit", hi: "जमा करें", te: "సమర్పించండి" },
     "fc.portal.thanks": { en: "Thank you. Your care team has your update.", hi: "धन्यवाद। आपकी देखभाल टीम को आपका अपडेट मिल गया है।", te: "ధన్యవాదాలు. మీ సంరక్షణ బృందానికి మీ నవీకరణ అందింది." },
+    "fc.portal.privacy": {
+      en: "Your phone number and recovery answers are processed by your hospital, with StewardMD, only to support your recovery follow-up and are kept no longer than needed. You can delete your data anytime using the link above.",
+      hi: "आपका फ़ोन नंबर और रिकवरी उत्तर आपके अस्पताल द्वारा, StewardMD के साथ, केवल आपकी रिकवरी फ़ॉलो-अप के लिए संसाधित किए जाते हैं और आवश्यकता से अधिक समय तक नहीं रखे जाते। आप ऊपर दिए लिंक से कभी भी अपना डेटा हटा सकते हैं।",
+      te: "మీ ఫోన్ నంబర్ మరియు రికవరీ సమాధానాలను మీ ఆసుపత్రి, StewardMDతో కలిసి, కేవలం మీ రికవరీ ఫాలో-అప్ కోసమే ప్రాసెస్ చేస్తుంది; అవసరమైన దానికంటే ఎక్కువ కాలం ఉంచదు. పైన ఉన్న లింక్‌ని ఉపయోగించి మీరు ఎప్పుడైనా మీ డేటాను తొలగించవచ్చు."
+    },
+    "fc.portal.privacy_link": { en: "Privacy policy", hi: "गोपनीयता नीति", te: "గోప్యతా విధానం" },
+    "fc.portal.contact": { en: "Contact us", hi: "संपर्क करें", te: "మమ్మల్ని సంప్రదించండి" },
     "fc.portal.unavailable": { en: "This check-in link is temporarily unavailable. Please try again later.", hi: "यह चेक-इन लिंक अस्थायी रूप से अनुपलब्ध है। कृपया बाद में पुनः प्रयास करें।", te: "ఈ చెక్-ఇన్ లింక్ తాత్కాలికంగా అందుబాటులో లేదు. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి." },
     "fc.portal.red_seek_care": { en: "Based on your answers, please seek urgent medical care now.", hi: "आपके उत्तरों के आधार पर, कृपया अभी तुरंत चिकित्सा सहायता लें।", te: "మీ సమాధానాల ఆధారంగా, దయచేసి ఇప్పుడే అత్యవసర వైద్య సహాయం పొందండి." },
     "fc.portal.call_hospital": { en: "Call the hospital", hi: "अस्पताल को कॉल करें", te: "ఆసుపత్రికి కాల్ చేయండి" },

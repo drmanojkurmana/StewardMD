@@ -147,7 +147,7 @@ export async function onRequest(context) {
       if (doWhat === "approve") { const d = await doApprove(store, env, uid, reg); return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`); }
       if (doWhat === "reject")  { await doReject(store, env, uid); return htmlPage("Access blocked", "This account is blocked until the doctor uploads a valid certificate again."); }
       return htmlPage("Unknown action", "Nothing to do.");
-    } catch (e) { return htmlPage("Something went wrong", String((e && e.message) || e)); }
+    } catch (e) { return htmlPage("Something went wrong", "Please try again in a moment."); }
   }
 
   const auth = await authOK(request, env);
@@ -177,6 +177,6 @@ export async function onRequest(context) {
 
     return json({ error: "bad-request", method, seg }, 400);
   } catch (e) {
-    return json({ error: String((e && e.message) || e) }, 500);
+    { try { console.warn("[api] server error", String((e && e.message) || e).slice(0, 200)); } catch (_e) {} return json({ error: "server_error" }, 500); }
   }
 }

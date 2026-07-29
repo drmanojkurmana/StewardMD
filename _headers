@@ -1,0 +1,10 @@
+# Cloudflare Pages security headers — applied to all served routes.
+# Deliberately NO strict Content-Security-Policy here: StewardMD ships inline <script>/<style> in
+# index.html + the portal, so a script-src CSP would break the app. (A nonce-based CSP is a separate,
+# careful task.) These four are behaviour-neutral for a same-origin HTTPS PWA.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=()

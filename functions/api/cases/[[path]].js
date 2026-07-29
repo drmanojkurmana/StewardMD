@@ -161,6 +161,6 @@ export async function onRequest(context) {
     }
     return json({ error: "bad-request", method, id }, 400);
   } catch (e) {
-    return json({ error: String((e && e.message) || e) }, 500);
+    { try { console.warn("[api] server error", String((e && e.message) || e).slice(0, 200)); } catch (_e) {} return json({ error: "server_error" }, 500); }
   }
 }

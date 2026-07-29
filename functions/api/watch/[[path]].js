@@ -92,7 +92,9 @@ async function runForUid(env, origin, uid) {
       if (!baseline && newly > 0) {
         // Only fires when a watched order actually GAINED values — not on a freshly-placed order.
         const d = (await sendNativeToAll(env, {
-          title: "New lab — " + (p.name || "patient"),
+          // Content-free like FollowCare: NO patient name/identifier in the visible push (it transits
+          // APNs/FCM relays + the lock screen). The name is resolved in-app after auth via the deep link.
+          title: "StewardMD · new lab result",
           body: "A new result was reported. Open StewardMD to review.",
           url: "/?ghisPatient=" + encodeURIComponent(p.patientId),
           tag: "lab-" + p.patientId,
