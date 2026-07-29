@@ -139,6 +139,33 @@ Prepared in-repo (so the archive won't fail on these):
 - **Verify:** confirm `aps-environment` = `production` in the release build; test a real push +
   sign-in + a FollowCare portal open on a device.
 
+### C.2 — Android AAB readiness (repo prep done 2026-07-29)
+Prepared in-repo:
+- **versionCode bumped 10 → 11** (Play rejects a duplicate/lower code). `versionName` left at `"7"`
+  — NOTE the mismatch with iOS `2.1`; decide whether to unify the display version (cosmetic).
+- `www/` rebuilt to **gold1046** + `npx cap sync android` (web assets in `app/src/main/assets/public`).
+- **Release AAB build VERIFIED** on this Mac (Android Studio JBR + SDK at `~/Library/Android/sdk`):
+  `./gradlew :app:bundleRelease` → **BUILD SUCCESSFUL**, produced `app-release.aab` (~123 MB unsigned).
+- **One-command signing wired:** `android/app/build.gradle` now reads `android/app/keystore.properties`
+  (gitignored) if present and signs the release build with it; **absent → unsigned, unchanged.**
+- `assetlinks` already carries the **Play App Signing** SHA-256 + `get_login_creds`
+  (`functions/_middleware.js`) — App Links verify for Play installs.
+- `targetSdk = 36`, `google-services.json` present (FCM push), permissions:
+  INTERNET/CAMERA/RECORD_AUDIO/POST_NOTIFICATIONS.
+
+**To ship a SIGNED upload AAB (your steps — needs your upload keystore):**
+1. Generate an upload key (once):
+   `keytool -genkey -v -keystore stewardmd-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias stewardmd-upload`
+2. `cp android/app/keystore.properties.example android/app/keystore.properties` and fill in the path +
+   passwords (this file is gitignored — never commit it).
+3. Build: `cd android && JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" ./gradlew :app:bundleRelease`
+   → signed `android/app/build/outputs/bundle/release/app-release.aab`. (Or Android Studio ▸ Build ▸
+   Generate Signed Bundle.)
+4. Upload to **Play Console → internal testing** (the TestFlight equivalent). Keep Play App Signing ON.
+- **Size note:** the AAB is ~123 MB (ARCore + ML Kit face model + native libs + web bundle). Under
+  Play's limits (per-device split downloads are smaller), but enabling R8 (`minifyEnabled true`) would
+  shrink it if desired.
+
 ---
 
 ## PART D — Cloudflare edge protection (dashboard)
