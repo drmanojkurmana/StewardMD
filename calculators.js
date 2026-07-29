@@ -7081,7 +7081,7 @@
   // any not listed above are appended). Without this, calcs in an unlisted category are silently
   // absent from the list AND search. Future-proof: a brand-new category auto-appears at the end.
   (function(){ var seen={}; CAT_ORDER.forEach(function(c){ seen[c]=1; }); CALCS.forEach(function(c){ if(c.cat && !seen[c.cat]){ seen[c.cat]=1; CAT_ORDER.push(c.cat); } }); })();
-  var root = null, q = "", activeCat = "", openId = null;
+  var root = null, q = "", activeCat = "", openId = null, favOnly = false;
   var _resultCb = null, _resultCbId = null, _suppressCb = false;   // opener write-back: fired on an explicit Calculate (see open()/run())
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
@@ -7116,19 +7116,26 @@
 
   function renderCats(){
     var el=root.querySelector("#mcCats");
-    var chips=['<button class="mc-cat'+(activeCat===""?" on":"")+'" data-cat="">All</button>'];
+    // Starred chip: quick-access to the calculators the user has starred (same list the Apple Watch
+    // uses — smd_watch_calc_favs), so no need to search every time. Toggles a favourites-only view.
+    var nFav=watchFavs().length;
+    var chips=['<button class="mc-cat mc-cat-fav'+(favOnly?" on":"")+'" data-favchip="1" aria-pressed="'+(favOnly?"true":"false")+'">'+mcIco("star")+' Starred'+(nFav?' <span>'+nFav+'</span>':'')+'</button>'];
+    chips.push('<button class="mc-cat'+((!favOnly&&activeCat==="")?" on":"")+'" data-cat="">All</button>');
     CAT_ORDER.forEach(function(c){
       var n=CALCS.filter(function(x){return x.cat===c;}).length;
-      chips.push('<button class="mc-cat'+(activeCat===c?" on":"")+'" data-cat="'+esc(c)+'">'+mcCatIco(c)+" "+esc(c)+' <span>'+n+'</span></button>');
+      chips.push('<button class="mc-cat'+((!favOnly&&activeCat===c)?" on":"")+'" data-cat="'+esc(c)+'">'+mcCatIco(c)+" "+esc(c)+' <span>'+n+'</span></button>');
     });
     el.innerHTML=chips.join("");
-    el.querySelectorAll(".mc-cat").forEach(function(b){
-      b.addEventListener("click", function(){ activeCat=b.getAttribute("data-cat"); openId=null; renderCats(); renderList(); });
+    var favBtn=el.querySelector("[data-favchip]");
+    if(favBtn) favBtn.addEventListener("click", function(){ favOnly=!favOnly; openId=null; renderCats(); renderList(); });
+    el.querySelectorAll(".mc-cat[data-cat]").forEach(function(b){
+      b.addEventListener("click", function(){ favOnly=false; activeCat=b.getAttribute("data-cat"); openId=null; renderCats(); renderList(); });
     });
   }
 
   function matches(c){
-    if(activeCat && c.cat!==activeCat) return false;
+    if(favOnly && !isWatchFav(c.id)) return false;      // Starred chip → favourites-only (spans all categories)
+    if(!favOnly && activeCat && c.cat!==activeCat) return false;
     if(!q) return true;
     return (c.title+" "+c.desc+" "+c.cat+" "+c.id+" "+(c.kw||[]).join(" ")).toLowerCase().indexOf(q)>=0;
   }
@@ -7147,7 +7154,7 @@
   function renderList(){
     var el=root.querySelector("#mcList");
     var list=CALCS.filter(matches);
-    if(!list.length){ el.innerHTML='<div class="mc-empty">No calculators match “'+esc(q)+'”.</div>'; return; }
+    if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here (and to your Apple Watch).':'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
     // group by category preserving order
     var html="";
     CAT_ORDER.forEach(function(cat){
