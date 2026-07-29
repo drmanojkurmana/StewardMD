@@ -20,6 +20,11 @@ on:
         description: "Minimum native build number that accepts this bundle (the first build shipped WITH the updater plugin)"
         required: true
         default: "3"
+      disarm:
+        description: "DISARM: remove the channel pointer (retire OTA — installs fall back to the store build). Ignores min_native/build."
+        type: choice
+        options: ["false", "true"]
+        default: "false"
 
 permissions:
   contents: read
@@ -40,13 +45,15 @@ jobs:
         with:
           node-version: "20"
       # build:www is a buildless bash assembly (no deps); ota-release.mjs uses node built-ins + npx wrangler + zip.
+      # build:www only needed for a real publish; a disarm just deletes the channel pointer.
       - name: Assemble web bundle
+        if: github.event.inputs.disarm != 'true'
         run: npm run build:www
-      - name: Publish OTA bundle
+      - name: Publish or disarm OTA channel
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: node scripts/ota-release.mjs --min-native "${{ github.event.inputs.min_native }}" --channel "${{ github.event.inputs.channel }}"
+        run: node scripts/ota-release.mjs --channel "${{ github.event.inputs.channel }}" --min-native "${{ github.event.inputs.min_native }}" ${{ github.event.inputs.disarm == 'true' && '--disarm' || '' }}
       - name: Summary
         if: always()
         run: echo "OTA channel=${{ github.event.inputs.channel }} min-native=${{ github.event.inputs.min_native }} — see the step logs for the published version." >> "$GITHUB_STEP_SUMMARY"

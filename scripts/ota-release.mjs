@@ -37,6 +37,7 @@ function arg(name, def) {
 const CHANNEL = String(arg("channel", "production"));
 const DRY = !!arg("dry-run", false);
 const ROLLBACK = arg("rollback", null);
+const DISARM = !!arg("disarm", false);
 const MIN_NATIVE = String(arg("min-native", "") || "");
 
 function sh(cmd, args) { return execFileSync(cmd, args, { cwd: ROOT, stdio: ["ignore", "pipe", "pipe"] }); }
@@ -89,6 +90,18 @@ if (ROLLBACK && typeof ROLLBACK === "string") {
     manifestKey: `ota/manifests/${CHANNEL}/${man.version}.json`, updatedAt: new Date().toISOString(),
   });
   console.log(`✓ rolled ${CHANNEL} back to ${ROLLBACK}`);
+  process.exit(0);
+}
+
+/* ---------------- disarm: remove the channel pointer so NOTHING is served (OTA retired) ---- */
+if (DISARM) {
+  // OTA is retired in favour of Xcode / App Store builds. Deleting the channel pointer makes
+  // /ota/check return no_channel for this channel → any installed app (even a legacy
+  // autoUpdate:true build) stops applying OTA bundles and runs its BUILT-IN (store) bundle.
+  // This is the exact opposite of arming a bundle — reversible (a future release re-creates it).
+  try { wrangler(["r2", "object", "delete", `${BUCKET}/ota/channels/${CHANNEL}.json`, "--remote"]); }
+  catch (e) { console.warn(`  (channel ${CHANNEL} pointer may already be absent)`); }
+  console.log(`✓ disarmed channel ${CHANNEL} — no OTA bundle will be served; installs use the store build`);
   process.exit(0);
 }
 

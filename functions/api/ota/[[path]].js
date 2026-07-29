@@ -33,26 +33,11 @@ export async function onRequest(context) {
 
   // Trigger the OTA release GitHub Action against the latest main.
   if (request.method === "POST" && seg === "release") {
-    const tok = env.GITHUB_OTA_TOKEN;
-    if (!tok) return json({ error: "github-token-not-configured", hint: "wrangler pages secret put GITHUB_OTA_TOKEN --project-name stewardmd" }, 501);
-    let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
-    const channel = (String(b.channel || "production").match(/^(production|beta)$/) || ["production"])[0];
-    const minNative = String(Math.max(1, parseInt(b.minNative, 10) || 3));
-    const repo = env.GITHUB_REPO || "drmanojkurmana/StewardMD";
-    let r;
-    try {
-      r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/ota-release.yml/dispatches`, {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + tok, "Accept": "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "StewardMD-admin", "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ref: "main", inputs: { channel, min_native: minNative } }),
-      });
-    } catch (e) { return json({ ok: false, error: String((e && e.message) || e) }, 502); }
-    if (r.status === 204) return json({ ok: true, dispatched: true, channel, minNative, actions: `https://github.com/${repo}/actions/workflows/ota-release.yml` });
-    const detail = await r.text().catch(() => "");
-    return json({ ok: false, status: r.status, error: (detail || "dispatch-failed").slice(0, 300) }, 502);
+    // OTA RETIRED (2026-07-29): updates ship via Xcode / the App Store only. The app runs with
+    // CapacitorUpdater autoUpdate:false so no device applies OTA bundles, and the server channels are
+    // disarmed. This endpoint is a deliberate, safe no-op so the admin control can NEVER re-arm OTA
+    // (a stale/mispinned bundle silently downgrading installs is exactly what broke ICU once).
+    return json({ error: "ota-retired", message: "OTA is disabled — ship updates via Xcode / the App Store." }, 410);
   }
 
   return json({ error: "not-found", seg }, 404);
