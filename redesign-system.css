@@ -195,10 +195,10 @@ body.dark {
 .rds-badge--completed{ color: var(--sev-done-fg);     background: var(--sev-done-bg);     border-color: var(--sev-done-bd); }
 
 /* ---- Alert / decision banner (severity-tinted, bordered, with action slot) ---- */
-.rds-banner { display: flex; align-items: flex-start; gap: var(--rds-sp-3); padding: var(--rds-sp-3) var(--rds-sp-4); border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface-2); }
-.rds-banner .rds-banner-body { flex: 1; min-width: 0; }
-.rds-banner .rds-banner-title { font: var(--rds-fw-bold) var(--rds-fs-body) var(--rds-font); }
-.rds-banner .rds-banner-meta { font: var(--rds-fw-reg) var(--rds-fs-sec) var(--rds-font); color: var(--rds-muted); margin-top: 2px; }
+.rds-banner { display: flex; align-items: center; gap: var(--rds-sp-3); padding: var(--rds-sp-3) var(--rds-sp-4); border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface-2); }
+.rds-banner .rds-banner-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.rds-banner .rds-banner-title { display: block; font: var(--rds-fw-bold) var(--rds-fs-body) var(--rds-font); }
+.rds-banner .rds-banner-meta { display: block; font: var(--rds-fw-reg) var(--rds-fs-sec) var(--rds-font); color: var(--rds-muted); margin-top: 2px; }
 .rds-banner--critical { color: var(--sev-critical-fg); background: var(--sev-critical-bg); border-color: var(--sev-critical-bd); }
 .rds-banner--urgent   { color: var(--sev-urgent-fg);   background: var(--sev-urgent-bg);   border-color: var(--sev-urgent-bd); }
 .rds-banner--warning  { color: var(--sev-warning-fg);  background: var(--sev-warning-bg);  border-color: var(--sev-warning-bd); }

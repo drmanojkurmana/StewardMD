@@ -1296,17 +1296,22 @@
   // (recent) clicks are wired here to SMD_RECENT.open.
   function hydrateRnav() {
     if (!root || !root.classList.contains("rnav")) return;
-    // Watch-Lab / ICU critical alert banner (only if a real critical alert exists)
+    // Watch-Lab / ICU critical alert banner (only if a real critical alert exists). When shown it
+    // already represents the active ICU patient (name + bed), so the Resume-ICU card below is
+    // suppressed to avoid two cards for the SAME patient.
+    var critShown = false;
     try {
       var w = root.querySelector("#rnavWatch");
       if (w) {
         var alerts = (window.ICU_STATE && Array.isArray(window.ICU_STATE.alerts)) ? window.ICU_STATE.alerts : [];
         var crit = alerts.filter(function (a) { return a && (a.severity === "crit" || a.severity === "critical"); });
         if (crit.length) {
-          var pn = (window.ICU_STATE && window.ICU_STATE.patient && window.ICU_STATE.patient.name) ? " · " + escV4(window.ICU_STATE.patient.name) : "";
+          critShown = true;
+          var _cp = (window.ICU_STATE && window.ICU_STATE.patient) || {};
+          var pmeta = [_cp.bed ? "Bed " + escV4(_cp.bed) : "", _cp.name ? escV4(_cp.name) : ""].filter(Boolean).join(" · ");
           w.innerHTML = '<button class="rds-banner rds-banner--critical rnav-alert" data-act="icu" aria-label="Open ICU critical alerts">' + ric("warning") +
             '<span class="rds-banner-body"><span class="rds-banner-title">' + crit.length + ' critical alert' + (crit.length > 1 ? "s" : "") + '</span>' +
-            '<span class="rds-banner-meta">Open ICU workspace' + pn + '</span></span>' + svg("chev") + '</button>';
+            '<span class="rds-banner-meta">Open ICU workspace' + (pmeta ? ' · ' + pmeta : "") + '</span></span>' + svg("chev") + '</button>';
         } else { w.innerHTML = ""; }
       }
     } catch (e) {}
@@ -1316,7 +1321,7 @@
       if (res) {
         var pt = (window.ICU_STATE && window.ICU_STATE.patient) ? window.ICU_STATE.patient : null;
         var recent = (window.SMD_RECENT && SMD_RECENT.get) ? (SMD_RECENT.get() || []) : [];
-        if (pt && pt.name) {
+        if (pt && pt.name && !critShown) {   // suppressed when the critical banner already shows this patient
           var meta = [pt.bed ? "Bed " + escV4(pt.bed) : "", pt.dx ? escV4(pt.dx) : ""].filter(Boolean).join(" · ");
           res.innerHTML = '<button class="rnav-resume rds-card" data-act="icu" aria-label="Resume patient">' +
             '<span class="rnav-resume-ic rds-icon">monitor_heart</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume ICU patient</span>' +
@@ -2252,8 +2257,7 @@
       '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
         '<div class="maik-side-ov" id="maikSideOv"></div>' +
         '<aside class="maik-side" id="maikSide" role="dialog" aria-label="Your conversations">' +
-          '<div class="maik-side-hd"><img class="maik-side-logo" src="' + MK_LOGO() + '" alt="">' +
-            '<span class="maik-side-ttl">MaiK</span>' +
+          '<div class="maik-side-hd"><img class="maik-side-logo" src="' + MK_LOGO() + '" alt="MaiK">' +
             '<button class="maik-hd-btn" id="maikSideClose" type="button" aria-label="Close conversations">' + MK.close + '</button></div>' +
           '<button class="maik-side-row maik-side-new" id="maikSideNew" type="button">' + MK.plus + '<span>New conversation</span></button>' +
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
@@ -2285,8 +2289,8 @@
       ".maik-side-wrap.open .maik-side-ov{opacity:1}" +
       ".maik-side{position:absolute;top:0;left:0;bottom:0;width:min(86%,340px);background:var(--mk-sheet,#fff);box-shadow:2px 0 26px rgba(0,0,0,.2);transform:translateX(-103%);transition:transform .22s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-radius:0 18px 18px 0;overflow:hidden}" +
       ".maik-side-wrap.open .maik-side{transform:translateX(0)}" +
-      ".maik-side-hd{display:flex;align-items:center;gap:9px;padding:15px 12px 8px}" +
-      ".maik-side-logo{width:26px;height:26px;border-radius:7px}" +
+      ".maik-side-hd{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:15px 12px 8px}" +
+      ".maik-side-logo{height:26px;width:auto;max-width:130px;object-fit:contain}" +
       ".maik-side-ttl{font:800 16px 'Inter',system-ui;color:var(--mk-ink,#0f172a);flex:1}" +
       ".maik-side-row{display:flex;align-items:center;gap:10px;width:calc(100% - 16px);margin:1px 8px;padding:11px 12px;border:0;background:transparent;border-radius:12px;font:600 14.5px 'Inter',system-ui;color:var(--mk-ink,#0f172a);cursor:pointer;text-align:left}" +
       ".maik-side-row:hover{background:var(--mk-chip,#f1f5f9)}" +
@@ -3143,6 +3147,12 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // unavailable (offline / no Vertex). The mandatory reviewer runs inside _kbTry. ──
           var _routeP = _kbOn ? getRoute(question).catch(function () { return null; }) : Promise.resolve(null);
           return _routeP.then(function (route) {
+            if (route && route.outOfScope) {   // non-medical query → INSTANT refusal; no KB / answer / web-research
+              _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+              think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant — I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
+              try { scroll(); } catch (e) {}
+              return;
+            }
             if (route && route.ambiguous && route.options && route.options.length >= 2) { _askAmbiguous(route.options); return; }
             if (_kbOn && !(route && route.intent === "reasoning")) {
               var concept = route && (route.primaryConcept || route.topic);
