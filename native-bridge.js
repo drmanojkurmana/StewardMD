@@ -486,10 +486,11 @@
     if (!Http || !Http.request) return null;          // signal caller to fall back
     init = init || {};
     var headers = headersToObj(init.headers);
-    // Authorize the native app past the site "coming soon" access gate (functions/_middleware.js
-    // checks this against env.APP_GATE_KEY). The public web never serves this bundle — the gate
-    // returns the coming-soon page for any non-/api path — so the key stays inside the app.
-    headers["X-SMD-App"] = "smdapp_ec051e785edc74766ee4a6d37282d79ea9b0feeb";
+    // Native-app marker for the site access gate. NOTE: no server code currently reads
+    // env.APP_GATE_KEY, so this token is presently INERT (it enforces nothing) — it is rotated and
+    // kept in sync with the Cloudflare secret so it is ready if /api/* gate enforcement (or App
+    // Check) is turned on later. It ships INSIDE the app bundle only (the public web never serves it).
+    headers["X-SMD-App"] = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
     var ct = ""; for (var k in headers) if (k.toLowerCase() === "content-type") ct = String(headers[k]);
     var data = init.body;
     // CapacitorHttp wants string or JSON object on iOS; hand JSON bodies as objects so it encodes them.
