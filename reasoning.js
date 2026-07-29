@@ -1660,7 +1660,7 @@
     if (dxh) sections.push({ ic: rIco("steth"), title: "Diagnosis & workup", html: dxh });
     var rf = "";
     rf += evSub("🚨 Red flags", evCallouts(e.redFlags, "danger", "🚨"));
-    rf += evSub("⚠️ Pitfalls", evCallouts(e.pitfalls, "warn", "⚠️"));
+    rf += evSub("Pitfalls", evCallouts(e.pitfalls, "warn", rIco("warn")));
     if (rf) sections.push({ ic: rIco("warn"), title: "Red flags & pitfalls", danger: true, html: rf });
     var cp = "";
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
@@ -2210,10 +2210,10 @@
     var body = evSub("First-line", rxList(rx.firstLine)) + evSub("Alternative", rxList(rx.alt));
     if (rx.notes) body += '<div class="ev-subh">Notes</div><p>' + medFormat(rx.notes) + '</p>';
     return {
-      _id: id, srcKey: "sanford", icon: "💊", sourceName: "Empiric antimicrobial therapy",
+      _id: id, srcKey: "sanford", icon: rIco("pills"), sourceName: "Empiric antimicrobial therapy",
       edition: "", tag: "Regimens · Sanford-aligned", pages: "", pearls: [],
-      sections: body ? [{ ic: "💊", title: "Empiric regimens", html: body }] : [], fullHTML: "",
-      cite: '<strong>💊 Empiric regimens</strong> — standard adult dosing for decision support; <b>verify dose, route &amp; duration and adjust for renal function, allergy and local resistance.</b> ' +
+      sections: body ? [{ ic: rIco("pills"), title: "Empiric regimens", html: body }] : [], fullHTML: "",
+      cite: '<strong>' + rIco("pills") + ' Empiric regimens</strong> — standard adult dosing for decision support; <b>verify dose, route &amp; duration and adjust for renal function, allergy and local resistance.</b> ' +
         'Cross-check the Sanford Guide' + (rx.url ? ' (<a href="' + esc(rx.url) + '" target="_blank" rel="noopener noreferrer">sanfordguide.com</a>)' : '') + '.'
     };
   }
@@ -2275,7 +2275,7 @@
     var whyNot = (rank > 1 && whyNotBits.length)
       ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' + whyNotBits.join("; ") + '.</div></div>' : "";
     var det = '<div class="dx-detail">' + confLine +
-      '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
+      '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", rIco("check")+" ") +'</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
       '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
       (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' +
@@ -2445,7 +2445,7 @@
     if (!info.ab || !g.lead || !window.HOSPITAL) { el.innerHTML = ""; return; }
     var lead = g.lead, pol = window.HOSPITAL.getPolicy(lead.id), h = pol.hospital, e = pol.entry;
     var src = h.logo
-      ? '<img class="dx-src-logo" src="' + h.logo + '" alt="GIMSR logo"> <b>✓ ' + esc(h.policyName) + '</b> <span>' + esc(h.version || "") + '</span>'
+      ? '<img class="dx-src-logo" src="' + h.logo + '" alt="GIMSR logo"> <b>' + rIco("check") + ' ' + esc(h.policyName) + '</b> <span>' + esc(h.version || "") + '</span>'
       : '<b>' + esc(h.policyName || h.name) + '</b>' + (h.version ? ' <span>' + esc(h.version) + '</span>' : "");
     var html;
     if (e) {
@@ -2497,7 +2497,7 @@
       html += '<div class="dx-cmp-col">' +
         '<div class="dx-cmp-name ' + (r.inf ? "inf" : "ni") + '">' + esc(r.name) + '</div>' +
         '<div class="dx-cmp-score">' + r.score + '<small>/100</small></div>' +
-        '<div class="dx-cmp-lbl">Supporting</div><div>' + cell(r, "supporting", "✓ ", "sup") + '</div>' +
+        '<div class="dx-cmp-lbl">Supporting</div><div>' + cell(r, "supporting", rIco("check")+" ", "sup") +'</div>' +
         '<div class="dx-cmp-lbl">Contradictory</div><div>' + cell(r, "contra", "✕ ", "con") + '</div>' +
         '<div class="dx-cmp-lbl">Missing</div><div>' + cell(r, "missing", "? ", "mis") + '</div>' +
       '</div>';
@@ -2667,14 +2667,14 @@
         (r.system ? '<div class="dx-mgmt-sys">' + esc(r.system) + '</div>' : '') +
         (m && m.dx ? '<div class="dx-mgmt-sec">How to confirm</div><p>' + esc(m.dx) + '</p>'
                    : (r.reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(r.reason) + '</p>' : '')) +
-        (tx ? '<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+        (tx ? '<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
             : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management — see the investigations and red flags below and consult full guidelines.</p>') +
         scoreChipsBlock(r) +
         (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
-        '<div class="dx-mgmt-disc">⚠️ Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
+        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
@@ -2717,7 +2717,7 @@
     var hasBrief = !!(dm && dm.tx && dm.tx.length);
     var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
     var mgmtHtml = (refInf && briefTx)
-      ? ('<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+      ? ('<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
          + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
          + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
          + (dm && dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
@@ -2733,7 +2733,7 @@
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
+        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
@@ -3245,7 +3245,7 @@
     var html = '<div id="smdKbSec"><div class="sp-section-label">📚 StewardMD Knowledge Base</div>' +
       hits.map(function (d) {
         return '<div class="sp-card" data-kb="' + d.id + '"><div class="sp-card-top">' +
-          '<span class="sp-card-icon">' + (d.cls === "inf" ? "🦠" : "🩺") + '</span><div>' +
+          '<span class="sp-card-icon">' + (d.cls === "inf" ? rIco("microbe") : rIco("steth")) + '</span><div>' +
           '<div class="sp-card-type">' + (d.cls === "inf" ? "Infective" : "Non-infective") + (d.ref ? " · reference" : " · diagnostic") + '</div>' +
           '<div class="sp-card-title">' + esc(d.name) + '</div></div></div>' +
           (d.sys ? '<div class="sp-card-desc">' + esc(d.sys) + '</div>' : '') + '</div>';
@@ -4100,7 +4100,7 @@
     if (t && t.default) tx = "[" + maikEsc(t.default.tier || "?") + "] " + maikEsc(t.default.line || "") + (t.default.drugRefs && t.default.drugRefs.length ? " · " + t.default.drugRefs.map(maikEsc).join(", ") : "");
     var ov = (t && t.overlayApplied && t.overlay) ? '<div class="maik-kv"><span>Hospital overlay</span><b>' + maikEsc(t.overlay.hospitalId) + " (shown separately — does not replace default)</b></div>" : "";
     return '<div class="maik-det">' +
-      '<div class="maik-sec-h maik-det-h">🧠 StewardMD Clinical Assessment <span class="maik-tag">Deterministic</span></div>' +
+      '<div class="maik-sec-h maik-det-h">' + rIco("brain") + ' StewardMD Clinical Assessment <span class="maik-tag">Deterministic</span></div>' +
       '<div class="maik-kv"><span>Primary diagnosis</span><b>' + (lead ? maikEsc(lead.name) : "—") + "</b></div>" +
       '<div class="maik-kv"><span>Confidence</span><b>' + (lead && lead.confidence != null ? lead.confidence + "/100" : "—") + "</b></div>" +
       '<div class="maik-kv-col"><span>Differential</span>' + (rows || "<b>—</b>") + "</div>" +
@@ -4114,7 +4114,7 @@
       '<div class="maik-sub">Independent clinical commentary · AI-assisted</div>';
   }
   function maikDivider() { return '<div class="maik-divider"></div>'; }
-  function maikDisclaimerHTML() { return '<div class="maik-warn">⚠ AI-generated commentary. Clinician confirmation required.</div></div>'; }
+  function maikDisclaimerHTML() { return '<div class="maik-warn">' + rIco("warn") + ' AI-generated commentary. Clinician confirmation required.</div></div>'; }
   function maikCommentaryHTML(text, citations) {
     var lines = String(text || "").split(/\n/), html = [], inList = false;
     function closeList() { if (inList) { html.push("</ul>"); inList = false; } }
@@ -4276,7 +4276,7 @@
       confLine = '<div class="sl-conf">Confidence ' + prev + ' → ' + c.confidence + eff + "</div>";
     }
     var det = '<div class="sl-det">' + confLine +
-      '<div class="sl-r"><b>Supporting</b><div>' + fl(c.supporting, "✓ ") + "</div></div>" +
+      '<div class="sl-r"><b>Supporting</b><div>' + fl(c.supporting, rIco("check")+" ") + "</div></div>" +
       (c.contradictory && c.contradictory.length ? '<div class="sl-r"><b>Contradictory</b><div>' + fl(c.contradictory, "✕ ") + "</div></div>" : "") +
       '<div class="sl-r"><b>Missing / would help</b><div>' + fl(c.missing, "? ") + "</div></div>" +
       (c.reason ? '<div class="sl-r"><b>Why this</b><div class="sl-rz">' + esc(c.reason) + "</div></div>" : "") +
@@ -4300,7 +4300,7 @@
     if (!keys.length) { panel.innerHTML = ""; return; }
     // Off switch: show only the header + toggle, no computed differential.
     if (!liveDiffOn()) {
-      panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">turned off</span>' + liveToggleHTML() + '</div><div class="sl-th">Live differential is off.<span>Tap the switch to see ranked diagnoses update as you add findings.</span></div></div>';
+      panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">' + rIco("brain") + ' Live differential <span class="sl-hint" style="flex:1">turned off</span>' + liveToggleHTML() + '</div><div class="sl-th">Live differential is off.<span>Tap the switch to see ranked diagnoses update as you add findings.</span></div></div>';
       bindLiveToggle(panel); return;
     }
     // track what was just added (for confidence deltas / "after adding X")
@@ -4313,12 +4313,12 @@
     var a = window.SMD_REASON.assess(findings), gi = a.gate || {};
     var dom = (a.dominantSystem || []).map(function (t) { return (typeof TAG_LABEL !== "undefined" && TAG_LABEL[t]) || t; }).filter(Boolean);
     var sug = (a.suggestions || []).filter(function (k) { return LABEL[k]; }).slice(0, 6);
-    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">updates as you add findings</span>' + liveToggleHTML() + '</div>' +
+    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">' + rIco("brain") + ' Live differential <span class="sl-hint" style="flex:1">updates as you add findings</span>' + liveToggleHTML() + '</div>' +
       (gi.label ? '<div class="sl-gate ' + (gi.ab ? "ab" : "") + '">' + esc(gi.label) + "</div>" : "") +
       (dom.length ? '<div class="sl-dom">🧭 Dominant system: <b>' + dom.map(esc).join(" · ") + "</b></div>" : "") +
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
       '<div class="sl-cols">' + smdLiveCols(a) + "</div>" +
-      '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
+      '<button class="sl-openws" data-openws="1">' + rIco("brain") + ' Open full Clinical Reasoning workspace →</button>' +
       (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask Maik (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
       "</div>";
     bindLiveToggle(panel);
@@ -4598,13 +4598,13 @@
         '</div>' +
       '</div>' +
       (syn.reason ? '<div class="card"><div class="simple-section-label">Why this</div><p>' + esc(syn.reason) + '</p></div>' : '') +
-      (tx ? '<div class="card"><div class="simple-section-label">💊 Management / Treatment</div><ol>' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol></div>'
+      (tx ? '<div class="card"><div class="simple-section-label">' + rIco("pills") + ' Management / Treatment</div><ol>' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol></div>'
           : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management — see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
       (function () { var b = scoreChipsBlock(syn); return b ? '<div class="card">' + b + '</div>' : ''; })() +
       (ix && ix.length ? '<div class="card"><div class="simple-section-label">Key investigations</div>' + li(ix, 8) + '</div>' : '') +
       (syn.red && syn.red.length ? '<div class="card"><div class="simple-section-label">Red flags</div>' + li(syn.red, 8) + '</div>' : '') +
       (harrisonRef(syn.id, { expanded: true }) ? '<div class="card">' + harrisonRef(syn.id, { expanded: true }) + '</div>' : '') +
-      '<div class="qa-pregnancy-note" style="margin-top:10px">⚠️ Decision-support only — non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
+      '<div class="qa-pregnancy-note" style="margin-top:10px">' + rIco("warn") + ' Decision-support only — non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
   }
   function installMainEngineExpansion() {
     if (window.__smdEngineExpanded) return;
@@ -4681,7 +4681,7 @@
     if (menu.querySelector("[data-smd-labs]")) return;
     var st = smdLabsState();
     var rows = [
-      ["reason", "🧠 Reasoning v2", "Live differential + progressive findings in the workflow"],
+      ["reason", "Reasoning v2", "Live differential + progressive findings in the workflow"],
       ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived — review)"],
       ["ai", "✨ MaiK — Medical AI Knowledge", "Advisory commentary + ICU Vision"],
       ["ghis", "🏥 GHIS Ward Sync", "Live inpatient labs + radiology"]
@@ -5236,7 +5236,7 @@
     if (!drugs.length && !fires) return false;
     smdInjectSafetyCSS();
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
-      '<div class="smd-safety-h">⚠️ Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
+      '<div class="smd-safety-h">' + rIco("warn") + ' Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when
@@ -5455,7 +5455,7 @@
         var gates = SMD_TB.safetyGates(er.id, inp.p).filter(function (g) { return !g.satisfied; });
         html += '<div class="smd-tb-reg elig"><h4>' + esc(r.name) + '</h4>' +
           '<div class="smd-tb-why"><b>Why this regimen?</b> ' + esc(r.eligibility || "") + '</div>' +
-          (gates.length ? '<div class="smd-tb-gate miss">⚠ Required before selecting: ' + gates.map(function (g) { return esc(g.label); }).join(", ") + '</div>' : '<div class="smd-tb-gate ok">✓ Mandatory safety inputs entered</div>') +
+          (gates.length ? '<div class="smd-tb-gate miss">' + rIco("warn") + ' Required before selecting: ' + gates.map(function (g) { return esc(g.label); }).join(", ") + '</div>' : '<div class="smd-tb-gate ok">✓ Mandatory safety inputs entered</div>') +
           smdTbRegDetails(r) + '</div>';
       });
       // excluded regimens
