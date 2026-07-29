@@ -443,6 +443,11 @@
     var ae = document.activeElement;
     var searchWasActive = !!(ae && ae.classList && ae.classList.contains("abxw-find-input"));
     var body = root.querySelector(".abxw-body");
+    // RESCUE the persistent #saveCasePrompt node before wiping the body. Once the Plan step has
+    // moved it INTO the body, `body.innerHTML=""` on any re-render (navigate away+back, chip toggle)
+    // would destroy it permanently and the Save box would never return. Park it back on #outputArea
+    // (its natural home, hidden behind the wizard) so it survives; renderPlan re-homes + re-shows it.
+    try { var _scp = document.getElementById("saveCasePrompt"); if (_scp && body.contains(_scp)) { var _oa = document.getElementById("outputArea"); if (_oa) _oa.appendChild(_scp); } } catch (e) {}
     body.innerHTML = "";
     if (_pendingResume && !_resumeOffered) body.appendChild(resumeBar());
     if (W.step === 1 || W.step === 2) body.appendChild(renderFindings());
