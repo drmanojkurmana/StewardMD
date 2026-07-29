@@ -5,7 +5,7 @@ import {
   AI_MODULES, isAiModule, aiModuleList, moduleDailyLimit,
   MODEL_RATES, modelRate, estCostInr, resolveModel, MODEL_HARD_DEFAULT, buildUsageRecord,
   checkModuleQuota, recordAiUsage, doctorUsageSummary, getModelOverride, setModelOverride,
-  gateAndCount, globalUsageReport,
+  gateAndCount, globalUsageReport, resolveLimit, limitOverrides, setLimitOverride,
 } from "../functions/_ai_usage.js";
 
 // tiny in-memory KV mock (get / get(_,"json") / put / delete)
@@ -154,6 +154,38 @@ test("globalUsageReport: aggregates today's rollup + exposes limits + override",
   assert.equal(r.limits.ecg, 10);
   assert.equal(r.modelOverride, "gemini-3.5-flash");
   assert.equal((await globalUsageReport(env, null, NOW)).req, 0); // no store → empty, safe
+});
+
+test("resolveLimit: KV override > env > registry default", () => {
+  assert.equal(resolveLimit({}, "ecg", null), 10);                       // default
+  assert.equal(resolveLimit({ AI_LIMIT_ECG: "15" }, "ecg", null), 15);   // env
+  assert.equal(resolveLimit({ AI_LIMIT_ECG: "15" }, "ecg", { ecg: 3 }), 3); // KV override wins
+  assert.equal(resolveLimit({}, "ecg", { ecg: 0 }), 0);                  // override to unlimited
+  assert.equal(resolveLimit({}, "ecg", { ecg: -1 }), 10);               // bad override ignored → default
+});
+
+test("setLimitOverride + limitOverrides: admin quota editor persists per module", async () => {
+  const kv = mockKv();
+  assert.deepEqual(await limitOverrides(kv), {});
+  assert.equal(await setLimitOverride(kv, "ecg", 25), true);
+  assert.equal(await setLimitOverride(kv, "maik", "40"), true);
+  assert.equal(await setLimitOverride(kv, "not-a-module", 5), false);   // unknown module rejected
+  assert.equal(await setLimitOverride(kv, "ecg", -3), false);           // negative rejected
+  assert.deepEqual(await limitOverrides(kv), { ecg: 25, maik: 40 });
+  assert.equal(await setLimitOverride(kv, "ecg", null), true);          // clear one
+  assert.deepEqual(await limitOverrides(kv), { maik: 40 });
+});
+
+test("checkModuleQuota + summaries honour the KV limit override end-to-end", async () => {
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "10" }, doc = "fb:o1";
+  await setLimitOverride(kv, "ecg", 1);                                 // admin tightens ECG to 1/day
+  assert.equal((await gateAndCount(env, kv, "ecg", doc, "pro", NOW)).ok, true);
+  const blocked = await checkModuleQuota(env, kv, "ecg", doc, NOW);
+  assert.equal(blocked.ok, false); assert.equal(blocked.limit, 1);     // override (1), not env (10)
+  const s = await doctorUsageSummary(env, kv, doc, NOW);
+  assert.equal(s.limits.ecg, 1);                                       // summary reflects the override
+  const g = await globalUsageReport(env, kv, NOW);
+  assert.equal(g.limits.ecg, 1);
 });
 
 test("model override: set valid persists; invalid rejected; clear works", async () => {

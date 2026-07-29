@@ -38,6 +38,16 @@ export function moduleDailyLimit(env, moduleId) {
   return Number.isFinite(v) && v >= 0 ? v : mod.daily;
 }
 
+// Effective daily limit precedence: admin KV override (the in-app quota editor) > env AI_LIMIT_<M> >
+// registry default. `overrides` is the object from limitOverrides(store); pure so callers read KV once.
+export function resolveLimit(env, moduleId, overrides) {
+  if (overrides && Object.prototype.hasOwnProperty.call(overrides, moduleId)) {
+    const v = Number(overrides[moduleId]);
+    if (Number.isFinite(v) && v >= 0) return Math.floor(v);
+  }
+  return moduleDailyLimit(env, moduleId);
+}
+
 // ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Estimates; env-overridable.
 export const MODEL_RATES = {
   "gemini-2.5-flash":       { in: 0.007, out: 0.025 },
@@ -113,8 +123,9 @@ const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
 
 // Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
 export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
-  const limit = moduleDailyLimit(env, moduleId);
-  if (!store || !isAiModule(moduleId) || limit === 0) return { ok: true, unlimited: limit === 0, limit: limit };
+  if (!store || !isAiModule(moduleId)) { const l = moduleDailyLimit(env, moduleId); return { ok: true, unlimited: l === 0, limit: l }; }
+  const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
+  if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
   let used = 0;
   try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
@@ -150,7 +161,8 @@ export async function recordAiUsage(env, store, rec, now) {
 export async function doctorUsageSummary(env, store, doctorId, now) {
   const day = _day(now);
   const out = { day: day, req: 0, tokens: 0, estCostInr: 0, avgLatencyMs: 0, byModule: {}, limits: {} };
-  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = moduleDailyLimit(env, m); });
+  const ov = await limitOverrides(store);
+  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = resolveLimit(env, m, ov); });
   if (!store) return out;
   try {
     const d = await store.get("aiu:doc:" + doctorId + ":" + day, "json");
@@ -167,6 +179,21 @@ export async function setModelOverride(store, model) {
   if (!store) return false;
   if (model && ALLOWED_MODELS.indexOf(model) === -1) return false; // only real, priced models
   try { if (model) await store.put("ai:model:override", model); else await store.delete("ai:model:override"); return true; } catch (e) { return false; }
+}
+
+// ---- admin-editable per-module daily caps (the in-app "quota editor"). KV: ai:limits = {mod:limit}. ----
+export async function limitOverrides(store) {
+  try { return store ? ((await store.get("ai:limits", "json")) || {}) : {}; } catch (e) { return {}; }
+}
+export async function setLimitOverride(store, moduleId, limit) {
+  if (!store || !isAiModule(moduleId)) return false;
+  try {
+    const o = (await store.get("ai:limits", "json")) || {};
+    if (limit == null || limit === "") { delete o[moduleId]; }          // clear → back to env/default
+    else { const n = Number(limit); if (!Number.isFinite(n) || n < 0) return false; o[moduleId] = Math.floor(n); }
+    await store.put("ai:limits", JSON.stringify(o));
+    return true;
+  } catch (e) { return false; }
 }
 
 // ---- endpoint convenience: enforce the per-module daily cap AND count the call in one step. ----
@@ -186,7 +213,8 @@ export async function gateAndCount(env, store, moduleId, doctorId, subscription,
 export async function globalUsageReport(env, store, now) {
   const day = _day(now);
   const out = { day: day, req: 0, estCostInr: 0, fail: 0, byModule: {}, byModel: {}, activeDoctors: 0, topDoctors: [], limits: {}, modelOverride: null };
-  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = moduleDailyLimit(env, m); });
+  const ov = await limitOverrides(store);
+  Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = resolveLimit(env, m, ov); });
   if (!store) return out;
   try {
     const g = await store.get("aiu:global:" + day, "json");

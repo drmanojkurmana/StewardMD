@@ -94,7 +94,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv } from "../../_usage.js";
-import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES } from "../../_ai_usage.js";
+import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList } from "../../_ai_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -712,12 +712,22 @@ export async function onRequest(context) {
     return json(rep);
   }
 
-  // AI Control Center admin: the "switch models" control + today's global per-module rollup. Owner-gated.
-  if (seg === "admin/model" || seg === "admin/ai-usage") {
+  // AI Control Center admin console APIs: model switch, per-module quota editor, global rollup. Owner-gated.
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
     if (seg === "admin/ai-usage") return json(await globalUsageReport(env, store, Date.now()));
+    if (seg === "admin/limits") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        const ok = await setLimitOverride(store, b.module, b.limit);   // limit null/"" clears → env/default
+        if (!ok) return json({ ok: false, error: "bad-limit" }, 400);
+      }
+      const ov = await limitOverrides(store);
+      const modules = aiModuleList().map((m) => ({ id: m.id, label: m.label, group: m.group, defaultLimit: moduleDailyLimit(env, m.id), effective: resolveLimit(env, m.id, ov), overridden: Object.prototype.hasOwnProperty.call(ov, m.id) }));
+      return json({ ok: true, modules: modules, overrides: ov });
+    }
     if (request.method === "POST") {
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const ok = await setModelOverride(store, b.model || null);   // null/"" clears the override

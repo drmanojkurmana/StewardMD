@@ -1614,6 +1614,7 @@
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
+      (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
@@ -1636,6 +1637,7 @@
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }
+        if (a === "aictl") { closeSheet(); return openAiControl(); }
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
         if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
@@ -1700,6 +1702,124 @@
     return '<div class="aiu-head">Today &middot; ' + req + ' AI request' + (req === 1 ? '' : 's') + '</div>' +
       (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
       '<div class="ai-usage-note">Daily limits reset at midnight. These per-doctor caps keep AI fast and available for everyone; your hospital can adjust them.</div>';
+  }
+  // AI Control Center — OWNER admin console (Phase 4): switch the active model, see today's global
+  // usage, and edit per-module daily caps live (no redeploy). All three APIs are owner-gated server-side
+  // (ownerOK: Firebase id token whose email is in OWNER_EMAILS); the client sends that token.
+  function aiCtlEsc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function aiAdminFetch(path, opts) {
+    var base = window.AI_PROXY || "/api/ai", tokP;
+    try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    return tokP.then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t;
+      return fetch(base + path, { method: (opts && opts.method) || "GET", headers: h, credentials: "same-origin", body: (opts && opts.body) ? JSON.stringify(opts.body) : undefined });
+    }).then(function (r) { return (r && r.ok) ? r.json() : null; }).catch(function () { return null; });
+  }
+  function openAiControl() {
+    if (!document.getElementById("aic-css")) {
+      var st = document.createElement("style"); st.id = "aic-css";
+      st.textContent =
+        ".aic{padding:2px 2px 10px}" +
+        ".aic-sec{margin:0 0 20px}" +
+        ".aic-h{font:800 12px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:0 2px 9px}" +
+        ".aic-model{font:800 16px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:9px}" +
+        ".aic-badge{font:700 10px var(--hfont,system-ui);color:#fff;background:var(--teal,#0e6e63);border-radius:6px;padding:2px 6px;vertical-align:middle}" +
+        ".aic-mut{font:600 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aic-btns{display:flex;flex-wrap:wrap;gap:8px}" +
+        ".aic-chip{font:700 12px var(--hfont,system-ui);color:var(--ink,#e6edf3);background:var(--card,#0f172a);border:1px solid var(--line,#1e293b);border-radius:999px;padding:7px 13px;cursor:pointer}" +
+        ".aic-chip.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}" +
+        ".aic-stats{display:flex;gap:8px;margin:0 0 14px}" +
+        ".aic-stats .c{flex:1;background:var(--card,#0f172a);border:1px solid var(--line,#1e293b);border-radius:12px;padding:9px 6px;text-align:center}" +
+        ".aic-stats .n{font:800 17px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aic-stats .l{font:600 9px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--hmut,#889);margin-top:2px}" +
+        ".aic-row{margin:0 0 11px}" +
+        ".aic-row .h{display:flex;justify-content:space-between;align-items:baseline;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:4px}" +
+        ".aic-row .u{font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aic-bar{height:7px;border-radius:6px;background:var(--line,#1e293b);overflow:hidden}" +
+        ".aic-bar>span{display:block;height:100%;border-radius:6px;background:var(--teal,#0e6e63)}" +
+        ".aic-bar.amber>span{background:#d97706}.aic-bar.red>span{background:#dc2626}" +
+        ".aic-qrow{display:flex;align-items:center;gap:10px;margin:0 0 9px}" +
+        ".aic-qrow .lbl{flex:1;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aic-qrow .def{font:600 10px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aic-qrow input{width:64px;padding:6px 8px;border-radius:8px;border:1px solid var(--line,#1e293b);background:var(--bg,#0b1220);color:var(--ink,#e6edf3);font:700 13px var(--hfont,system-ui);text-align:center}" +
+        ".aic-qrow input.ov{border-color:var(--teal,#0e6e63)}" +
+        ".aic-mdl{display:flex;justify-content:space-between;font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin:2px 0}" +
+        ".aic-note{font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:8px;line-height:1.5}" +
+        ".aic-load,.aic-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+      document.head.appendChild(st);
+    }
+    openSheet('<div class="hv-sh-t">AI Control Center</div><div id="aicBody" class="aic"><div class="aic-load">Loading…</div></div>');
+    loadAiControl();
+  }
+  function loadAiControl() {
+    var host = document.getElementById("aicBody"); if (!host) return;
+    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits")]).then(function (res) {
+      if (!host) return;
+      if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
+      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {});
+      wireAiControl(host);
+    });
+  }
+  var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
+  function renderAiControl(model, usage, limits) {
+    var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
+    // 1) Model selector
+    var h = '<div class="aic-sec"><div class="aic-h">Active AI model</div>' +
+      '<div class="aic-model">' + aiCtlEsc(eff) + (model.model ? ' <span class="aic-badge">override</span>' : ' <span class="aic-mut">default</span>') + '</div>' +
+      '<div class="aic-btns">';
+    allowed.forEach(function (m) { h += '<button class="aic-chip' + (m === eff ? " on" : "") + '" data-aic-model="' + aiCtlEsc(m) + '">' + aiCtlEsc(m) + '</button>'; });
+    h += '<button class="aic-chip" data-aic-model="__default__">Env default</button></div>';
+    var rk = Object.keys(rates); if (rk.length) { h += '<div class="aic-note">Rates (INR / 1k tokens): ' + rk.map(function (m) { return aiCtlEsc(m) + " in " + rates[m].in + "/out " + rates[m].out; }).join(" &middot; ") + '</div>'; }
+    h += '</div>';
+    // 2) Today's global usage
+    var byM = usage.byModule || {}, lim = usage.limits || {}, byMod = usage.byModel || {};
+    h += '<div class="aic-sec"><div class="aic-h">Today &middot; global usage</div>' +
+      '<div class="aic-stats">' +
+      '<div class="c"><div class="n">' + (usage.req | 0) + '</div><div class="l">Requests</div></div>' +
+      '<div class="c"><div class="n">₹' + (typeof usage.estCostInr === "number" ? usage.estCostInr.toFixed(2) : "0") + '</div><div class="l">Est cost</div></div>' +
+      '<div class="c"><div class="n">' + (usage.activeDoctors | 0) + '</div><div class="l">Doctors</div></div>' +
+      '<div class="c"><div class="n">' + (usage.fail | 0) + '</div><div class="l">Failures</div></div></div>';
+    var order = ["maik", "maik_case", "ecg", "thorex", "ocr", "stt"], rows = "";
+    order.forEach(function (id) {
+      if (!(id in lim)) return; var L = lim[id] | 0, n = byM[id] | 0;
+      if (L === 0) { rows += '<div class="aic-row"><div class="h"><span>' + (AIC_LBL[id] || id) + '</span><span class="u">' + n + ' &middot; ∞</span></div></div>'; return; }
+      var pct = Math.min(100, Math.round(n / L * 100)), cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
+      rows += '<div class="aic-row"><div class="h"><span>' + (AIC_LBL[id] || id) + '</span><span class="u">' + n + ' / ' + L + '</span></div><div class="aic-bar' + cls + '"><span style="width:' + pct + '%"></span></div></div>';
+    });
+    h += (rows || '<div class="aic-note">No AI activity yet today.</div>');
+    var mk = Object.keys(byMod); if (mk.length) { h += '<div class="aic-note">By model: ' + mk.map(function (m) { return aiCtlEsc(m) + " " + byMod[m]; }).join(" &middot; ") + '</div>'; }
+    var td = usage.topDoctors || []; if (td.length) { h += '<div class="aic-note">Top doctors: ' + td.slice(0, 5).map(function (d) { return aiCtlEsc(String(d.doctor).slice(0, 10)) + "… (" + d.req + ")"; }).join(" &middot; ") + '</div>'; }
+    h += '</div>';
+    // 3) Quota editor
+    var mods = limits.modules || [];
+    h += '<div class="aic-sec"><div class="aic-h">Daily caps (per doctor)</div>';
+    mods.forEach(function (m) {
+      if (["fundx", "followcare", "tts", "kb"].indexOf(m.id) >= 0) return; // focus on the doctor-facing caps
+      h += '<div class="aic-qrow"><span class="lbl">' + aiCtlEsc(AIC_LBL[m.id] || m.label) + '</span>' +
+        '<span class="def">def ' + (m.defaultLimit | 0) + (m.overridden ? " · set" : "") + '</span>' +
+        '<input type="number" min="0" inputmode="numeric" value="' + (m.effective | 0) + '"' + (m.overridden ? ' class="ov"' : '') + ' data-aic-lim="' + aiCtlEsc(m.id) + '"></div>';
+    });
+    h += '<div class="aic-note">0 = unlimited. Blank + Enter resets a module to its default. Changes apply immediately for everyone.</div></div>';
+    return h;
+  }
+  function wireAiControl(host) {
+    host.querySelectorAll("[data-aic-model]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-aic-model");
+        host.innerHTML = '<div class="aic-load">Switching model…</div>';
+        aiAdminFetch("/admin/model", { method: "POST", body: { model: v === "__default__" ? null : v } }).then(function () { if (window.toast) toast("Model updated"); loadAiControl(); });
+      });
+    });
+    host.querySelectorAll("[data-aic-lim]").forEach(function (inp) {
+      var save = function () {
+        var id = inp.getAttribute("data-aic-lim"), raw = inp.value.trim();
+        aiAdminFetch("/admin/limits", { method: "POST", body: { module: id, limit: raw === "" ? null : Number(raw) } }).then(function (r) {
+          if (r && r.ok) { if (window.toast) toast("Cap updated"); loadAiControl(); } else if (window.toast) toast("Invalid value");
+        });
+      };
+      inp.addEventListener("change", save);
+      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); inp.blur(); } });
+    });
   }
   function openAccount() {
     var a = readAccount();
