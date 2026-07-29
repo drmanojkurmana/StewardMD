@@ -111,7 +111,7 @@
         '<label class="smdonb-lbl">Email</label><input class="smdonb-in" id="onbEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@hospital.org">' +
         '<div class="smdonb-err"></div>' +
         '<button class="smdonb-btn" data-onb="sendCode" style="background:var(--panel,#fff);color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)">Send code</button>' +
-        '<button class="smdonb-ghost" data-onb="later">I’ll do this later</button>' +
+        '<button class="smdonb-ghost smdonb-close" data-onb="later">I’ll do this later</button>' +
       "</div>";
     _el.onclick = function (e) {
       var b = e.target.closest && e.target.closest("[data-onb]"); if (!b) return;
@@ -150,7 +150,7 @@
         '<div class="smdonb-err"></div>' +
         '<button class="smdonb-btn" data-onb="verify">Verify</button>' +
         '<div style="text-align:center;margin-top:14px;font:500 13px var(--sans,system-ui);color:var(--mut,#5a7184)">Didn’t get it? <button class="smdonb-ghost" style="display:inline;width:auto;padding:0;margin:0;color:var(--teal,#0e6e63);font-weight:700" data-onb="resend">Resend code</button></div>' +
-        '<button class="smdonb-ghost" data-onb="later">I’ll do this later</button>' +
+        '<button class="smdonb-ghost smdonb-close" data-onb="later">I’ll do this later</button>' +
       "</div>";
     _el.onclick = function (e) {
       var b = e.target.closest && e.target.closest("[data-onb]"); if (!b) return;

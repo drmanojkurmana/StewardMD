@@ -179,7 +179,7 @@
         '<p class="xa-sub">This feature is available only to approved beta testers. Enter your access code to unlock it on this device.</p>' +
         '<input id="xaCodeInput" inputmode="latin" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="' + esc((feature === "fundx" ? "FUNDX" : t.toUpperCase().slice(0, 5)) + "-XXXX-XXXX") + '">' +
         '<div class="xa-err" id="xaErr"></div>' +
-        '<div class="xa-btns"><button class="xa-primary" data-xa="activate" id="xaGo">Activate</button><button class="xa-ghost" data-xa="close">Not now</button></div>' +
+        '<div class="xa-btns"><button class="xa-primary" data-xa="activate" id="xaGo">Activate</button><button class="xa-ghost xa-close" data-xa="close">Not now</button></div>' +
       '</div>';
     el.classList.add("on");
     try { setTimeout(function () { var i = document.getElementById("xaCodeInput"); if (i) i.focus(); }, 60); } catch (e) {}
@@ -191,7 +191,7 @@
         '<div class="xa-ic">🔐</div>' +
         '<h3>Sign in required</h3>' +
         '<p class="xa-sub">Beta access for ' + esc(t) + ' is tied to your StewardMD account and this device. Sign in, then enter your access code.</p>' +
-        '<div class="xa-btns"><button class="xa-primary" data-xa="signin">Sign in</button><button class="xa-ghost" data-xa="close">Not now</button></div>' +
+        '<div class="xa-btns"><button class="xa-primary" data-xa="signin">Sign in</button><button class="xa-ghost xa-close" data-xa="close">Not now</button></div>' +
       '</div>';
     el.classList.add("on");
   }
@@ -203,7 +203,7 @@
         '<div class="xa-ic">✅</div>' +
         '<h3>You\'re in</h3>' +
         '<p class="xa-sub">' + esc(t) + ' is unlocked on this device' + (deviceModel ? ' (' + esc(deviceModel) + ')' : '') + '.</p>' +
-        '<div class="xa-btns"><button class="xa-primary" data-xa="open">Open ' + esc(t) + '</button><button class="xa-ghost" data-xa="close">Close</button></div>' +
+        '<div class="xa-btns"><button class="xa-primary" data-xa="open">Open ' + esc(t) + '</button><button class="xa-ghost xa-close" data-xa="close">Close</button></div>' +
       '</div>';
     el.classList.add("on");
   }

@@ -1721,7 +1721,7 @@
       '</div>'
     ) : "";
     var manual = (source === "Manual");
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">' + ico("close","✕") + '</button></div>' +
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX" aria-label="Close">' + ico("close","✕") + '</button></div>' +
       '<div class="icu-imp-note">' + (manual
         ? ico("edit","✎") + ' <b>Manual entry</b> — confirm your values (checked against the current reading) before they enter the patient record.'
         : (aiMode
@@ -1802,7 +1802,7 @@
       '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:150px;overflow:auto">' +
       lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") + '</div>'
     ) : "";
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX">' + ico("close","✕") + '</button></div>' +
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX" aria-label="Close">' + ico("close","✕") + '</button></div>' +
       '<div class="icu-imp-note">' + (aiMode ? ico("camera","📷") + ' Read from your report(s) — <b>verify every value</b> before applying.' : ico("camera","📷") + ' Tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +

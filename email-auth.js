@@ -245,7 +245,7 @@
         '<div class="smdea-err"></div>' +
         '<button class="smdea-btn" data-ea="verify">Verify</button>' +
         '<div style="text-align:center;margin-top:14px;font:500 13px var(--sans,system-ui);color:var(--mut,#5a7184)">Didn’t get it? <button class="smdea-link" data-ea="resend">Resend code</button></div>' +
-        '<button class="smdea-ghost" data-ea="later">I’ll verify later</button>' +
+        '<button class="smdea-ghost smdea-close" data-ea="later">I’ll verify later</button>' +
       "</div>";
     _el.onclick = function (e) {
       var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;

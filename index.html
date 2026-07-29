@@ -16,6 +16,7 @@
      full script-src/frame-ancestors/HSTS should be set as Cloudflare response headers.) -->
 <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<script src="/no-copy.js?v=1"></script>
 <!-- Google Identity Services — required for the in-menu Google sign-in button to render. -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
@@ -634,6 +635,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <div class="mode-card-desc">Full clinical form — all findings, vitals, labs, and risk factors visible at once. Best for complex cases and experienced users.</div>
     </div>
 
+    <button type="button" aria-label="Close and go home" onclick="var m=document.getElementById('modeSelect');if(m)m.classList.add('hidden');if(window.SMD_goHome)SMD_goHome()" style="display:block;margin:0 auto 12px;background:none;border:none;color:#5a7184;font:600 12px system-ui,sans-serif;cursor:pointer;text-decoration:underline;padding:6px">Back to home</button>
     <button type="button" id="modeSkip" aria-label="Skip and continue"
             style="margin-top:16px;background:none;border:none;color:var(--teal,#0a9396);font:600 13px system-ui,sans-serif;cursor:pointer;text-decoration:underline;padding:6px"
             onclick="var c=document.getElementById('modeAdvancedCard'); if(c) c.click();">Skip for now → (you can switch anytime from the header)</button>
