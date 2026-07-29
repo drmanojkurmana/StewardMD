@@ -551,14 +551,39 @@
     };
   }
 
-  // Some code paths use XMLHttpRequest (and CapacitorHttp patches XHR too).
-  if (window.XMLHttpRequest && window.XMLHttpRequest.prototype && window.XMLHttpRequest.prototype.open) {
-    var origOpen = window.XMLHttpRequest.prototype.open;
-    window.XMLHttpRequest.prototype.open = function (method, url) {
-      try { if (typeof url === "string") arguments[1] = absolutize(url); } catch (e) {}
-      return origOpen.apply(this, arguments);
-    };
-  }
+  // XMLHttpRequest — the XHR TWIN of the Firestore fetch bug fixed above (#547). Firestore's realtime
+  // "Listen" channel uses XHR (WebChannel long-poll, TYPE=xmlhttp — the app sets
+  // experimentalForceLongPolling on native, the most firewall-tolerant transport). CapacitorHttp patches
+  // XHR too, and its patched XHR MANGLES that long-poll → HTTP 400 → "WebChannelConnection RPC 'Listen'
+  // stream transport errored" → endless retry storm → the ICU group board is stuck "Connecting to your
+  // shared units…" and never loads (verified live via Safari Web Inspector on iOS: repeated 400s on
+  // firestore.googleapis.com/…/Listen/channel?…&TYPE=xmlhttp). The app itself makes NO direct XHR calls
+  // (all /api traffic goes through the fetch path above), so Firestore is the ONLY XHR consumer — route
+  // XHR through a PRISTINE, un-CapacitorHttp-patched XMLHttpRequest taken from a detached iframe
+  // (CapacitorHttp only patches the TOP window's XHR), so Firestore reaches firestore.googleapis.com
+  // natively over CORS exactly like the web PWA (which works). Native only; web/PWA keep the platform XHR.
+  (function () {
+    var _platX = ""; try { _platX = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || ""; } catch (e) {}
+    var Base = window.XMLHttpRequest;
+    if (_platX === "android" || _platX === "ios") {
+      try {
+        var _xf = document.createElement("iframe");
+        _xf.setAttribute("aria-hidden", "true");
+        _xf.style.cssText = "display:none!important;width:0;height:0;border:0;position:absolute;left:-9999px";
+        (document.body || document.documentElement).appendChild(_xf);   // MUST stay attached — contentWindow (and its XHR) dies if removed
+        var P = _xf.contentWindow && _xf.contentWindow.XMLHttpRequest;
+        if (P && P.prototype && P.prototype.open) Base = P;             // pristine class, unpatched by CapacitorHttp
+      } catch (e) { /* fall back to the platform XHR */ }
+    }
+    if (Base && Base.prototype && Base.prototype.open) {
+      var baseOpen = Base.prototype.open;
+      Base.prototype.open = function (method, url) {
+        try { if (typeof url === "string") arguments[1] = absolutize(url); } catch (e) {}
+        return baseOpen.apply(this, arguments);
+      };
+      if (Base !== window.XMLHttpRequest) window.XMLHttpRequest = Base;  // Firestore reads window.XMLHttpRequest when it opens each channel
+    }
+  })();
 
   // ── Universal Links (iOS) / App Links (Android) → invite join ──────────────────────────────
   // A universal link that opens the app delivers the URL NATIVELY via the @capacitor/app plugin —
