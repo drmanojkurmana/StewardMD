@@ -1613,6 +1613,7 @@
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
+      mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
@@ -1634,6 +1635,7 @@
         if (a === "notifprefs") return openNotifPrefs();
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
+        if (a === "aiusage") { closeSheet(); return openAiUsage(); }
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
         if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
@@ -1648,6 +1650,56 @@
         if (ACT[a]) ACT[a]();
       });
     });
+  }
+  // AI Usage (doctor dashboard, AI Control Center Phase 3): a doctor's OWN daily AI limits + activity.
+  // Reads GET /api/ai/usage with the Firebase id token so the server scopes it to THIS doctor (the
+  // same identity the AI calls use). native-bridge auto-adds the app gate header + routes to prod.
+  function openAiUsage() {
+    if (!document.getElementById("ai-usage-css")) {
+      var st = document.createElement("style"); st.id = "ai-usage-css";
+      st.textContent =
+        ".ai-usage{padding:2px 2px 8px}" +
+        ".aiu-head{font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin:2px 0 14px}" +
+        ".aiu-row{margin:0 0 13px}" +
+        ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
+        ".aiu-row .u{font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aiu-bar{height:8px;border-radius:6px;background:var(--line,#1e293b);overflow:hidden}" +
+        ".aiu-bar>span{display:block;height:100%;border-radius:6px;background:var(--teal,#0e6e63);transition:width .3s}" +
+        ".aiu-bar.amber>span{background:#d97706}.aiu-bar.red>span{background:#dc2626}" +
+        ".aiu-unl{font:700 12px var(--hfont,system-ui);color:var(--teal,#14b8a6)}" +
+        ".ai-usage-note{font:500 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.5}" +
+        ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+      document.head.appendChild(st);
+    }
+    openSheet('<div class="hv-sh-t">AI Usage</div><div id="aiUsageBody" class="ai-usage"><div class="ai-usage-load">Loading your usage…</div></div>');
+    var host = document.getElementById("aiUsageBody");
+    var base = window.AI_PROXY || "/api/ai";
+    var tokP;
+    try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    tokP.then(function (t) {
+      var h = {}; if (t) h["Authorization"] = "Bearer " + t;
+      return fetch(base + "/usage", { headers: h, credentials: "same-origin" });
+    }).then(function (r) { return (r && r.ok) ? r.json() : null; }).then(function (data) {
+      if (!host) return;
+      host.innerHTML = data ? renderAiUsage(data) : '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>';
+    }).catch(function () { if (host) host.innerHTML = '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>'; });
+  }
+  function renderAiUsage(u) {
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", fundx: "FundX", followcare: "FollowCare", tts: "Text-to-speech" };
+    var ORDER = ["maik", "maik_case", "ecg", "thorex", "ocr", "stt"];
+    var limits = u.limits || {}, used = u.byModule || {}, rows = "";
+    ORDER.forEach(function (id) {
+      if (!(id in limits)) return;
+      var lim = limits[id] | 0, n = used[id] | 0, lbl = LBL[id] || id;
+      if (lim === 0) { rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="aiu-unl">Unlimited</span></div></div>'; return; }
+      var pct = Math.min(100, Math.round(n / lim * 100)), cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
+      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' +
+        '<div class="aiu-bar' + cls + '"><span style="width:' + pct + '%"></span></div></div>';
+    });
+    var req = u.req | 0;
+    return '<div class="aiu-head">Today &middot; ' + req + ' AI request' + (req === 1 ? '' : 's') + '</div>' +
+      (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
+      '<div class="ai-usage-note">Daily limits reset at midnight. These per-doctor caps keep AI fast and available for everyone; your hospital can adjust them.</div>';
   }
   function openAccount() {
     var a = readAccount();
@@ -2831,7 +2883,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
       if (r && r.error === "ai-off") {
         think.innerHTML = '<div class="maik-welcome">MaiK is switched off. Turn it on to get grounded clinical answers.</div>';
         var onBtn = document.createElement("button"); onBtn.className = "maik-chip"; onBtn.style.marginTop = "8px"; onBtn.textContent = "Turn on MaiK";
