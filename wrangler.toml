@@ -40,12 +40,18 @@ bucket_name = "stewardmd-followcare-media"
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
 FOLLOWCARE_RETENTION_DAYS = "7"
+# AI Control Center abuse watchlist: flag a doctor once their AI requests today reach this count.
+# The per-module daily caps (MaiK 50 + cases 25 + Vision 50 + STT 50 + ECG 10) already hard-block
+# runaway use at ~185/day, so 150 (~80% of the max) surfaces only the heaviest users for owner
+# awareness. Runtime-tunable via the KV limit editor is NOT this value; change here + redeploy.
+AI_ABUSE_REQ_THRESHOLD = "150"
 
 [env.production]
 compatibility_date = "2026-06-28"
 
 [env.production.vars]
 FOLLOWCARE_RETENTION_DAYS = "7"
+AI_ABUSE_REQ_THRESHOLD = "150"
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
