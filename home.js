@@ -2931,6 +2931,21 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       scroll();
       try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
+    // Intent-Firewall refusal UI: the required clinician-only message + example chips that prefill
+    // the composer. Shared by the client scope gate AND the server outOfScope layer. Uses qEl/scroll
+    // from the sheet closure. No AI/KB/web work is done — this is instant and zero-cost.
+    function _maikRefuse(think) {
+      var chips = [["Diagnosis", "differential diagnosis of "], ["Drug Dose", "dose of "], ["ECG", "interpret this ECG: "], ["Antibiotics", "empirical antibiotics for "], ["Lab Interpretation", "interpret these labs: "]];
+      think.innerHTML = '<div class="maik-welcome"><b>MaiK is for healthcare professionals.</b> It answers only medical and clinical questions. Please ask about diagnosis, drug dosing, ECGs, investigations, treatment, antibiotics or patient management.</div>' +
+        '<div class="maik-refuse-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>';
+      var row = think.querySelector(".maik-refuse-chips");
+      chips.forEach(function (c) {
+        var b = document.createElement("button"); b.className = "maik-chip"; b.type = "button"; b.textContent = c[0];
+        b.addEventListener("click", function () { try { qEl.value = c[1]; qEl.focus(); if (qEl.setSelectionRange) { var L = qEl.value.length; qEl.setSelectionRange(L, L); } } catch (e) {} });
+        row.appendChild(b);
+      });
+      try { scroll(); } catch (e) {}
+    }
     function runClinical(question, retrieval, depth, active, topicLabel) {
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
@@ -2952,10 +2967,11 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // local KB (the "write a code" → "Writer's cramp" bug). Deterministic + unit-tested
       // (test/maik-scope.test.mjs). Fails OPEN — a genuine clinical question is never blocked. Skipped
       // in case mode (active), which is inherently clinical. Nothing armed/disabled yet, so we just return.
-      if (!active && window.MaiKScope && MaiKScope.isNonMedical(question)) {
+      var _scope = (!active && window.MaiKScope) ? MaiKScope.classify(question) : null;
+      if (_scope && _scope.medical === false) {
+        try { console.debug("[MaiK firewall] blocked non-clinical query (" + _scope.category + ") before AI pipeline; ~1 LLM/RAG call saved"); } catch (e) {}
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-        think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant. I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
-        try { scroll(); } catch (e) {}
+        _maikRefuse(think);
         return;
       }
       // Watchdog, NOT a fixed total ceiling. On web (real SSE) onDelta resets it on every streamed token so
@@ -3161,8 +3177,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           return _routeP.then(function (route) {
             if (route && route.outOfScope) {   // non-medical query → INSTANT refusal; no KB / answer / web-research
               _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-              think.innerHTML = '<div class="maik-welcome">I\'m StewardMD\'s clinical assistant. I can only help with medical &amp; clinical questions (diagnosis, drugs, dosing, investigations, guidelines, patient management). Please ask a clinical question.</div>';
-              try { scroll(); } catch (e) {}
+              _maikRefuse(think);
               return;
             }
             if (route && route.ambiguous && route.options && route.options.length >= 2) { _askAmbiguous(route.options); return; }

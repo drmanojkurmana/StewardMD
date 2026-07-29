@@ -30,8 +30,19 @@
 
 // AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
 // | "developer"). Model via env.GEMINI_MODEL (default gemini-2.5-flash; NOT 2.0).
+import MaiKScope from "../../../kb/ai/maik-scope.js"; // shared clinician-only Intent Firewall (CJS UMD, default import)
+
 const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
 const MODEL_DEFAULT = "gemini-2.5-flash";
+
+// Server-side Intent Firewall (defense-in-depth): reject CONFIDENTLY non-clinical requests BEFORE any
+// LLM/web call, regardless of what the client did — "system prompts are not a security boundary".
+// CONSERVATIVE on purpose: only the unambiguous categories (code/creative/general/lay), never the
+// "no medical signal" case — so an obscure real clinical term the client already allowed can never be
+// false-refused on the server. The client allow-list is the primary firewall; this backs it up.
+function firewallBlock(q) {
+  try { const c = MaiKScope && MaiKScope.classify && MaiKScope.classify(String(q || "")); return !!(c && c.medical === false && c.category !== "non_medical"); } catch (e) { return false; }
+}
 
 function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
@@ -798,6 +809,7 @@ export async function onRequest(context) {
       // only explains when the KB can't. Tiny output (~120 tokens), temp 0.
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
+      if (firewallBlock(q)) return json({ outOfScope: true, primaryConcept: "", intent: "other", confidence: 1, source: "firewall" }); // deterministic: no router LLM
       const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys =
@@ -967,6 +979,7 @@ export async function onRequest(context) {
       // grounded search so nothing regresses. Worst case === the previous behaviour.
       const q = String(body.question || body.q || "").slice(0, 500);
       if (!q) return json({ error: "no question" }, 400);
+      if (firewallBlock(q)) return json({ text: null, blocked: true, outOfScope: true, sources: [], message: "MaiK answers only medical and clinical questions." }); // no web search, no Gemini
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));

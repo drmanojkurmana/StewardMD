@@ -1,23 +1,29 @@
-/* MaiK Scope Gate — window.MaiKScope  (UMD: browser + node-testable)
+/* MaiK Intent Firewall — window.MaiKScope  (UMD: browser + node-testable)
  *
- * MaiK is a CLINICIAN-ONLY clinical assistant. This is a DETERMINISTIC, instant, client-side
- * gate that runs at the very top of the ask flow — BEFORE the KB engine, the semantic router, and
- * any Vertex call — so an obviously non-clinical request ("write me some code", "write a poem",
- * "integrate Gemini into my project", lay self-help) is refused INSTANTLY and never fuzzy-matches a
- * disease name in the local KB.
+ * MaiK is a CLINICIAN-ONLY clinical assistant, NOT a general chatbot. This is a DETERMINISTIC,
+ * zero-cost, client-side gate that runs at the very top of the ask flow — BEFORE the KB engine,
+ * the semantic router, web research, and any Gemini/Vertex call — so a non-clinical request is
+ * refused INSTANTLY, saving tokens + latency and preventing "Researching apple…"-style leaks.
  *
- * Design: HIGH PRECISION over recall. A false-refusal of a real clinical question is worse than
- * occasionally letting a borderline query through to the (grounded, disclaimered) engine, so the
- * default is ALLOW. We only block on strong, essentially-never-clinical signals:
- *   • hard non-medical nouns (programming languages, web/IT stack, AI-vendor/API terms) that never
- *     appear in a genuine clinical question;
- *   • a coding/creative VERB + its OBJECT (write code / build a website / compose a poem);
- *   • "integrate/add X into my project/app/website" (the exact case that slipped through);
- *   • narrow first-person LAY self-help ("I have a headache, what should I do?").
- * A clinical anchor anywhere in the query (patient, dose, drug, diagnosis, guideline, an ICD-ish
- * term…) VETOES the block — belt-and-suspenders against false-refusals.
+ * ARCHITECTURE (allow-list, not block-list):
+ *   A block-list ("reject code / weather / …") always has gaps — "how to eat apple", "who is X",
+ *   "movie" slip through. So the firewall REQUIRES A POSITIVE MEDICAL SIGNAL and rejects everything
+ *   else. Order:
+ *     1. Lay self-help ("I have a headache, what should I do?")            → block (lay)
+ *     2. Positive MEDICAL signal (morphology + lexicon + clinical anchor)  → ALLOW
+ *     3. Hard non-medical category (code / creative / general)             → block (labelled)
+ *     4. No medical signal at all                                          → block (non_medical)
  *
- * Pure + fully unit-tested (test/maik-scope.test.mjs). No I/O, no globals beyond the export.
+ * FALSE-REFUSALS are the worst outcome for a doctor, so MEDICAL is built BROAD (disease/drug
+ * morphology, symptoms, drugs, investigations, scores, abbreviations, systems, clinical verbs) and
+ * is unit-tested against a large clinical corpus (test/maik-scope.test.mjs) for ZERO false-refusals.
+ * In the browser it is further widened by the app's own lexicons (MEDDRUGS / MaiKKB) at runtime.
+ *
+ * CONFIGURABLE without a code change: window.MAIK_SCOPE_CONFIG = { allow:[...], block:[...] } (or
+ * MaiKScope.configure({...})) adds extra allow / block terms — no rebuild, no JSON loader needed.
+ *
+ * SECURITY: this is an APPLICATION-LAYER boundary, not a system-prompt. It runs regardless of what
+ * any model would do. (The server refiner ALSO returns outOfScope as a second, independent layer.)
  */
 (function (root, factory) {
   var api = factory();
@@ -27,91 +33,187 @@
   "use strict";
 
   function norm(q) {
-    return String(q == null ? "" : q)
-      .toLowerCase()
-      .replace(/[‘’]/g, "'")      // smart quotes → '
-      .replace(/\s+/g, " ")
-      .trim();
+    return String(q == null ? "" : q).toLowerCase()
+      .replace(/[‘’]/g, "'").replace(/\s+/g, " ").trim();
   }
+  function rx(list, flags) { return new RegExp("(" + list.join("|") + ")", flags || ""); }
 
-  // ── Clinical VETO: if any of these appear, we NEVER block (a real clinical query). ──────────────
-  // Broad on purpose — recall here protects against false-refusals; precision here is not important.
-  var CLINICAL = new RegExp("\\b(" + [
-    "patient", "pt\\b", "dose", "dosing", "dosage", "mg\\b", "mcg", "iu\\b", "ml\\b", "tablet",
-    "drug", "medication", "medicine", "antibiotic", "antibiotics", "abx", "prescri",
-    "diagnos", "differential", "\\bddx\\b", "\\bdx\\b", "workup", "work-up", "investigat",
-    "treat", "therap", "manage", "management", "regimen", "guideline", "protocol",
-    "symptom", "sign\\b", "syndrome", "disease", "disorder", "infection", "sepsis",
-    "clinical", "medical", "surg", "icu", "ward", "admit", "discharge", "referral",
-    "fever", "cough", "dyspn", "chest pain", "abdominal", "renal", "hepatic", "cardiac",
-    "pneumonia", "diabet", "hypertens", "sepsis", "shock", "stroke", "mi\\b", "acs\\b",
-    "ecg", "\\bx-?ray\\b", "\\bct\\b", "\\bmri\\b", "\\blab\\b", "troponin", "creatinine",
-    "culture", "sensitivity", "resistance", "organism", "pathogen", "bacteria", "virus",
-    "contraindicat", "interaction", "adverse", "side effect", "titrat", "taper",
-    "dvt\\b", "\\bpe\\b", "\\bcap\\b", "\\bckd\\b", "\\bcopd\\b", "\\bhf\\b"
-  ].join("|") + ")");
+  // ─────────────────────────────────────────────────────────────────────────────────────────────
+  // POSITIVE MEDICAL SIGNAL — a query is clinical if ANY of these fire. Broad on purpose (recall
+  // protects doctors from false-refusals). Grouped for readability; word-boundaried where a token
+  // is short/ambiguous. Ambiguous 2-letter abbreviations (ms/ra/pe/mi/dm/hf) are intentionally
+  // EXCLUDED — "MS Dhoni", "PE teacher" must NOT read as medical; a doctor types the full term.
+  // ─────────────────────────────────────────────────────────────────────────────────────────────
 
-  // ── Hard non-medical NOUNS: their mere presence blocks (never in a genuine clinical question). ──
-  var HARD_NON_MEDICAL = new RegExp("\\b(" + [
-    "javascript", "typescript", "html", "css", "reactjs", "react\\.js", "angular", "vue\\.js",
-    "vuejs", "node\\.?js", "jquery", "python", "golang", "rust lang", "kotlin",
-    "regex", "regular expression", "docker", "kubernetes", "github", "gitlab",
-    "compiler", "frontend", "front-end", "backend", "back-end", "fullstack", "full-stack",
-    "chatgpt", "openai", "\\bgpt-?\\d", "\\bllm\\b", "\\bnpm\\b", "pip install", "yarn add",
-    "xcode", "swiftui", "\\bapk\\b", "webpage", "web page", "web ?site", "web ?app",
-    "landing page", "css grid", "flexbox", "boilerplate", "leetcode", "stack ?overflow",
-    "react component", "react native", "react app", "react hook", "web dev"
-  ].join("|") + ")");
+  // Disease / drug MORPHOLOGY — generative coverage of the long tail (…itis, …emia, …cillin, …pril).
+  var MORPH = [
+    "itis\\b", "os[ie]s\\b", "aemia\\b", "emia\\b", "a?emic\\b", "pathy\\b", "opathy\\b",
+    "ectomy\\b", "[o]?tomy\\b", "ostomy\\b", "plasty\\b", "oma\\b", "omas\\b", "megaly\\b",
+    "penia\\b", "cytosis\\b", "\\buria\\b", "algia\\b", "dynia\\b", "plegia\\b", "paresis\\b",
+    "pnea\\b", "pnoea\\b", "ptysis\\b", "phagia\\b", "rrh?ea\\b", "rrh?oea\\b", "sclerosis\\b",
+    "stenosis\\b", "thrombo", "embol", "isch[ae]mi", "infarct", "necros", "sepsis", "septic",
+    "edema\\b", "oedema\\b", "trophy\\b", "genic\\b", "cidal\\b", "static\\b", "lytic\\b",
+    // drug stems
+    "cillin", "mycin", "cycline", "oxacin", "penem", "cef[a-z]*", "ceph[a-z]*", "conazole",
+    "[a-z]azole\\b", "pril\\b", "prils\\b", "sartan", "[a-z]olol\\b", "dipine", "statin",
+    "parin\\b", "xaban\\b", "gliptin", "gliflozin", "tinib\\b", "\\w+mab\\b", "prazole",
+    "\\wvir\\b", "navir", "caine\\b", "curonium", "cort[a-z]*", "sone\\b", "olone\\b", "pam\\b"
+  ];
 
-  // ── Coding VERB + OBJECT (softer object nouns that need an action verb to be non-medical). ──────
-  var CODE_VERB = "write|create|generate|build|make|give me|show me|develop|design|fix|debug|refactor|optimi[sz]e|implement|integrate|add|program|deploy|host";
-  var CODE_OBJ = "code|program|programme|script|website|web app|app\\b|application|software|algorithm|api\\b|sdk\\b|endpoint|component|react native|database schema|sql query|function that|class that|for a website|for the website|for my (site|app|website)";
-  var CODE_VERB_OBJ = new RegExp("\\b(" + CODE_VERB + ")\\b[\\s\\S]{0,32}\\b(" + CODE_OBJ + ")");
+  // Symptoms / presentations.
+  var SYMPTOM = [
+    "fever", "pyrexia", "\\bpain\\b", "\\bache", "headache", "chest pain", "abdominal",
+    "cough", "dyspn", "breathless", "wheeze", "orthopn", "palpitation", "syncope", "seizure",
+    "convuls", "dizz", "vertigo", "nausea", "vomit", "diarrh", "constipat", "bleed", "haemorrhage",
+    "hemorrhage", "bruis", "\\brash\\b", "pruritus", "\\bitch", "swelling", "jaundice", "pallor",
+    "cyanos", "weakness", "fatigue", "malaise", "anorexia", "dysuria", "h[ae]maturia", "oliguria",
+    "polyuria", "dysphagia", "h[ae]moptysis", "melena", "h[ae]matemesis", "numbness", "tingling",
+    "paralysis", "\\btremor", "confusion", "delirium", "\\bcoma\\b", "unconscious", "lethargic",
+    "night sweats", "weight loss", "shortness of breath", "loss of consciousness", "\\bcramp"
+  ];
 
-  // "integrate / add / connect / use X into|to|in my project|app|website|codebase"
-  var INTEGRATE = /\b(integrate|add|connect|hook up|wire up|use|call|embed)\b[\s\S]{0,48}\b(into|in|to|with)\b[\s\S]{0,24}\b(my|the|our|this|your)\b[\s\S]{0,16}\b(project|app|application|web ?site|web ?app|code ?base|repo|repository|backend|frontend|program|software|website)\b/;
+  // Conditions / entities + strong (3+ letter) abbreviations.
+  var CONDITION = [
+    "\\bmedic", "clinical", "\\bhealth", "disease", "disorder", "syndrome", "\\bcondition",
+    "infection", "inflamm", "injur", "trauma", "fracture", "\\bwound", "ulcer", "lesion",
+    "tumou?r", "cancer", "malignan", "carcinoma", "metasta", "diabet", "hypertens", "pneumon",
+    "asthma", "\\bcopd\\b", "\\bckd\\b", "\\baki\\b", "\\bcap\\b", "\\bhap\\b", "\\buti\\b",
+    "\\bdvt\\b", "\\bdka\\b", "\\bhhs\\b", "\\bards\\b", "\\bcva\\b", "\\btia\\b", "\\bsah\\b",
+    "stemi", "\\bacs\\b", "\\bchf\\b", "\\bcld\\b", "\\bild\\b", "\\btb\\b", "\\bhiv\\b", "aids\\b",
+    "\\bsle\\b", "\\bibd\\b", "gerd", "cirrhos", "hepatitis", "encephalo", "meningitis", "stroke",
+    "arrhythmia", "fibrillation", "flutter\\b.*(atrial|cardiac)", "atrial (fib|flutter)",
+    "tachycard", "bradycard", "hypoglyc", "hyperglyc", "hypona", "hyperna", "hypokal", "hyperkal",
+    "hypercal", "hypocal", "acidosis", "alkalosis", "poison", "overdose", "\\btoxic", "envenom",
+    "snake bite", "anaphyla", "shock", "\\bhf\\b.*(heart|cardiac)", "heart failure", "renal failure",
+    "liver failure", "respiratory failure", "pneumothorax", "\\bpneumo", "epilep", "status epilepticus",
+    "code status", "\\bdnr\\b", "sliding scale", "ketoacidosis", "\\bpe\\b.*(pulmonary|emboli)"
+  ];
 
-  // ── Creative-writing / general-assistant requests. ─────────────────────────────────────────────
-  var CREATIVE = new RegExp("\\b(write|compose|create|generate|make me)\\b[\\s\\S]{0,24}\\b(" + [
-    "poem", "poems", "essay", "essays", "story", "stories", "joke", "jokes", "song", "songs",
-    "rap\\b", "lyrics", "screenplay", "novel", "tweet", "blog post", "blog", "haiku", "limerick",
-    "cover letter", "resume", "\\bcv\\b", "speech", "birthday", "wedding"
-  ].join("|") + ")");
+  // Investigations, labs, scores, imaging.
+  var INVESTIGATION = [
+    "\\becg\\b", "\\bekg\\b", "\\becho\\b", "echocardiogra", "\\bct\\b", "\\bmri\\b", "x-?ray",
+    "ultrasound", "\\busg\\b", "doppler", "angiogr", "endoscop", "colonoscop", "bronchoscop",
+    "biopsy", "\\bcbc\\b", "\\bfbc\\b", "\\babg\\b", "\\bvbg\\b", "\\blft\\b", "\\brft\\b",
+    "\\bkft\\b", "\\btft\\b", "\\bcrp\\b", "\\besr\\b", "procalcitonin", "troponin", "creatinine",
+    "\\burea\\b", "\\bbun\\b", "electrolyte", "sodium", "potassium", "calcium", "magnesium",
+    "phosphate", "bicarbonate", "lactate", "\\bglucose\\b", "hba1c", "\\binr\\b", "\\baptt\\b",
+    "d-?dimer", "ferritin", "bilirubin", "albumin", "ammonia", "culture", "sensitivity",
+    "gram stain", "blood gas", "urinalysis", "\\bhb\\b", "platelet", "\\bwbc\\b", "\\btlc\\b",
+    // scores
+    "\\bgcs\\b", "\\btimi\\b", "heart score", "grace score", "cha2ds2", "\\bchads", "wells score",
+    "\\bqsofa\\b", "\\bsofa\\b", "apache", "\\bmeld\\b", "child-?pugh", "curb-?65", "\\bnihss\\b",
+    "glasgow coma", "ranson", "centor", "padua", "caprini"
+  ];
 
-  var GENERAL = new RegExp("\\b(" + [
-    "weather", "forecast today", "who won", "score of", "cricket match", "football match",
-    "stock price", "share price", "recipe for", "how to cook", "capital of", "population of",
-    "\\btranslate\\b", "movie", "netflix", "song lyrics", "tell me a joke", "flirt", "roast me",
-    "meaning of life", "your (name|creator|model|version)", "who made you", "who created you",
-    "are you (chatgpt|gpt|gemini|claude|an ai|a robot)", "ignore (all )?previous", "system prompt"
-  ].join("|") + ")");
+  // Body systems / anatomy / specialties.
+  var SYSTEM = [
+    "cardiac", "cardio", "coronary", "cerebral", "\\brenal\\b", "hepatic", "pulmonary",
+    "respiratory", "neuro", "gastro", "gastrointestinal", "endocrine", "h[ae]matolog", "oncolog",
+    "rheumat", "dermat", "\\bent\\b", "urolog", "gyn[ae]c", "obstetric", "p[ae]diatric",
+    "geriatric", "psychiatr", "orthop", "vascular", "gastric", "intestinal", "pancrea", "thyroid",
+    "adrenal", "pituitary", "\\bbone\\b", "\\bjoint\\b", "\\bmuscle\\b", "\\bnerve\\b", "\\bartery\\b",
+    "\\bvein\\b", "\\bkidney", "\\bliver\\b", "\\blung", "\\bcardiac\\b", "myocard", "pericard"
+  ];
 
-  // ── Narrow first-person LAY self-help ("I have a headache, what should I do?"). ─────────────────
-  // Requires first-person symptom framing + advice-seeking, and MUST NOT mention a patient/clinical
-  // term (a clinician writes "approach to headache", not "I have a headache what do I do").
-  var LAY_FIRST_PERSON = /^(i|i've|ive|i have|i had|i am|i'm|im|my)\b/;
+  // Clinical actions / verbs / vocabulary (these + a noun make almost any real clinical query).
+  var CLINICAL_ACTION = [
+    "\\bpatient", "\\bpt\\b", "\\bdose\\b", "dosing", "dosage", "\\bmg\\b", "\\bmcg\\b", "\\bµg\\b",
+    "\\bml\\b", "\\biu\\b", "tablet", "\\bdrug\\b", "medication", "medicine", "antibiotic",
+    "\\babx\\b", "prescri", "diagnos", "differential", "\\bddx\\b", "\\bdx\\b", "workup", "work-up",
+    "investigat", "\\btreat", "therap", "\\bmanage", "management", "regimen", "guideline",
+    "protocol", "\\bstewardship", "contraindicat", "indicat", "interaction", "adverse",
+    "side effect", "titrat", "taper", "monitor", "resuscitat", "intubat", "ventilat", "\\bsedat",
+    "\\badmit", "discharge", "referral", "prognos", "etiolog", "aetiolog", "pathophysiolog",
+    "epidemiolog", "screening", "prophylax", "vaccin", "immuni[sz]", "\\bicu\\b", "critical care",
+    "intensive care", "\\bward\\b", "\\bsurg", "operat", "an[ae]sthe", "\\bnursing\\b",
+    "clinical calculator", "\\bmap target", "\\bbp\\b.*(target|control|manage)"
+  ];
+
+  // High-frequency drugs whose names carry no giveaway stem (the suffix rules cover the long tail).
+  var DRUG_COMMON = [
+    "insulin", "digoxin", "warfarin", "heparin", "amiodarone", "adrenaline", "epinephrine",
+    "noradrenaline", "norepinephrine", "atropine", "aspirin", "paracetamol", "acetaminophen",
+    "ibuprofen", "metformin", "furosemide", "frusemide", "salbutamol", "albuterol", "morphine",
+    "fentanyl", "propofol", "dopamine", "dobutamine", "vancomycin", "meropenem", "piperacillin",
+    "tazobactam", "metronidazole", "gentamicin", "clindamycin", "hydrocortisone", "dexamethasone",
+    "prednisolone", "amoxicillin", "azithromycin", "ceftriaxone", "ciprofloxacin", "\\bivig\\b",
+    "\\bkcl\\b", "\\bnac\\b", "naloxone", "flumazenil", "labetalol", "nitroglycerin", "nitrate"
+  ];
+
+  var MEDICAL_GROUPS = [MORPH, SYMPTOM, CONDITION, INVESTIGATION, SYSTEM, CLINICAL_ACTION, DRUG_COMMON];
+  var MEDICAL = rx([].concat.apply([], MEDICAL_GROUPS));
+
+  // ── Explicit NON-medical categories (only used to LABEL the block; the allow-list already rejects
+  // anything with no medical signal, but these give a precise reason + belt-and-suspenders). ──────
+  var HARD_NON_MEDICAL = rx([
+    "javascript", "typescript", "\\bhtml\\b", "\\bcss\\b", "reactjs", "react\\.js", "react component",
+    "react native", "react app", "react hook", "\\bangular\\b", "vue\\.?js", "node\\.?js", "jquery",
+    "\\bpython\\b", "golang", "\\bkotlin\\b", "\\bregex\\b", "regular expression", "\\bdocker\\b",
+    "kubernetes", "github", "gitlab", "compiler", "frontend", "front-end", "backend", "back-end",
+    "fullstack", "full-stack", "chatgpt", "openai", "\\bgpt-?\\d", "\\bllm\\b", "\\bnpm\\b",
+    "pip install", "yarn add", "xcode", "swiftui", "\\bflutter\\b", "\\bapk\\b", "webpage",
+    "web page", "web ?site", "web ?app", "landing page", "css grid", "flexbox", "boilerplate",
+    "leetcode", "stack ?overflow", "web dev", "\\bsql\\b", "\\bcoding\\b"
+  ]);
+  var CODE_VERB = "write|create|generate|build|make|give me|show me|develop|design|fix|debug|refactor|optimi[sz]e|implement|integrate|program|deploy|host";
+  var CODE_OBJ = "\\bcode\\b|program|programme|script|application|software|algorithm|\\bapi\\b|\\bsdk\\b|endpoint|component|for a website|for my (site|app|website)";
+  var CODE_VERB_OBJ = new RegExp("\\b(" + CODE_VERB + ")\\b[\\s\\S]{0,32}(" + CODE_OBJ + ")");
+  var INTEGRATE = /\b(integrate|add|connect|hook up|wire up|embed)\b[\s\S]{0,48}\b(into|in|to|with)\b[\s\S]{0,24}\b(my|the|our|this|your)\b[\s\S]{0,16}\b(project|app|application|web ?site|web ?app|code ?base|repo|repository|backend|frontend|program|software)\b/;
+  var CREATIVE = new RegExp("\\b(write|compose|create|generate|make me)\\b[\\s\\S]{0,24}\\b(poem|essay|story|stories|joke|song|rap\\b|lyrics|screenplay|novel|tweet|blog|haiku|limerick|cover letter|resume|\\bcv\\b|speech)\\b");
+  var GENERAL = rx([
+    "\\bweather\\b", "forecast", "who won", "score of", "\\bipl\\b", "cricket", "football",
+    "\\bmatch\\b", "stock (price|market)", "share price", "bitcoin", "crypto", "\\brecipe\\b",
+    "how to cook", "capital of", "population of", "\\btranslate\\b", "\\bmovie\\b", "netflix",
+    "song lyrics", "tell me a joke", "\\bflirt\\b", "roast me", "meaning of life", "\\btravel\\b",
+    "\\bvacation\\b", "\\bholiday\\b", "who is [a-z]", "your (name|creator|model|version)",
+    "who (made|created) you", "are you (chatgpt|gpt|gemini|claude|an ai|a robot)",
+    "ignore (all )?previous", "system prompt", "\\bapple (fruit|iphone|watch|mac)"
+  ]);
+
+  var LAY_FIRST = /^(i|i've|ive|i have|i had|i am|i'm|im|my)\b/;
   var LAY_ADVICE = /\b(what should i (do|take|use)|what (do|can) i (do|take)|is (it|this) serious|should i (worry|be worried|see|go|take)|how do i (get rid of|cure|treat) my|home remed|help me feel|what medicine should i)\b/;
-  // A clinician frames a case professionally; this VETOES the lay-self-help block.
   var PROFESSIONAL = /\b(patient|\bpt\b|case|workup|work-up|differential|\bddx\b|\bdx\b|manage(ment)?|guideline|protocol|regimen|dose|dosing|prescrib|admit|discharge|indicated|contraindicat)\b/;
 
-  function reason(q) {
-    var s = norm(q);
-    if (!s || s.length < 3) return null;                 // too short → let the normal flow decide
-
-    // Lay self-help runs FIRST — a symptom word ("fever") must not veto "I have a fever, is it serious?".
-    if (LAY_FIRST_PERSON.test(s) && LAY_ADVICE.test(s) && !PROFESSIONAL.test(s)) return "lay";
-
-    if (CLINICAL.test(s)) return null;                   // clinical anchor present → NEVER block
-
-    if (HARD_NON_MEDICAL.test(s)) return "code";
-    if (CODE_VERB_OBJ.test(s)) return "code";
-    if (INTEGRATE.test(s)) return "code";
-    if (CREATIVE.test(s)) return "creative";
-    if (GENERAL.test(s)) return "general";
-    return null;
+  // ── Runtime augmentation (browser only): the app's own lexicons widen MEDICAL for free. Exact-ish
+  // resolution only (never fuzzy) so it cannot re-introduce the "write"→"Writer's cramp" leak. ─────
+  function lexiconMedical(s) {
+    try {
+      if (typeof window === "undefined") return false;
+      var w = window;
+      if (w.MEDDRUGS && typeof w.MEDDRUGS.isKnownGeneric === "function" && w.MEDDRUGS.isKnownGeneric(s)) return true;
+      if (w.MaiKKB && typeof w.MaiKKB.isKnownConcept === "function" && w.MaiKKB.isKnownConcept(s)) return true;
+    } catch (e) {}
+    return false;
   }
 
-  function isNonMedical(q) { return reason(q) !== null; }
+  // ── User-configurable extra terms (no code change / no rebuild). ────────────────────────────────
+  var extraAllow = null, extraBlock = null;
+  function configure(cfg) {
+    if (!cfg) return;
+    if (cfg.allow && cfg.allow.length) extraAllow = rx(cfg.allow.map(String), "i");
+    if (cfg.block && cfg.block.length) extraBlock = rx(cfg.block.map(String), "i");
+  }
+  try { if (typeof window !== "undefined" && window.MAIK_SCOPE_CONFIG) configure(window.MAIK_SCOPE_CONFIG); } catch (e) {}
 
-  return { isNonMedical: isNonMedical, reason: reason, norm: norm };
+  // ── The firewall. Returns { medical, category }. category ∈ {medical, lay, code, creative,
+  //    general, non_medical}. `medical:true` ⇒ proceed to the AI pipeline; else refuse. ────────────
+  function classify(q) {
+    var s = norm(q);
+    if (!s || s.length < 3) return { medical: true, category: "medical" }; // trivial → normal flow
+
+    if (extraBlock && extraBlock.test(s)) return { medical: false, category: "non_medical" };
+    if (LAY_FIRST.test(s) && LAY_ADVICE.test(s) && !PROFESSIONAL.test(s)) return { medical: false, category: "lay" };
+
+    if ((extraAllow && extraAllow.test(s)) || MEDICAL.test(s) || lexiconMedical(s)) return { medical: true, category: "medical" };
+
+    if (HARD_NON_MEDICAL.test(s) || CODE_VERB_OBJ.test(s) || INTEGRATE.test(s)) return { medical: false, category: "code" };
+    if (CREATIVE.test(s)) return { medical: false, category: "creative" };
+    if (GENERAL.test(s)) return { medical: false, category: "general" };
+    return { medical: false, category: "non_medical" }; // no medical signal at all → reject
+  }
+
+  function isNonMedical(q) { return classify(q).medical === false; }
+  function reason(q) { var c = classify(q); return c.medical ? null : c.category; }
+
+  return { classify: classify, isNonMedical: isNonMedical, reason: reason, norm: norm, configure: configure };
 });
