@@ -103,6 +103,32 @@ only reach devices after a rebuild + reinstall. **Incremental builds do NOT re-b
    current gold build. If it shows an older gold, the build is stale — clean again.
 6. Archive (Product ▸ Archive) → Organizer → Distribute to App Store Connect.
 
+### C.1 — TestFlight archive readiness (repo prep done 2026-07-29)
+Prepared in-repo (so the archive won't fail on these):
+- **Build bumped to v2.1 (5)**, and **every embedded target** (iOS app, `StewardMDWatch`,
+  `StewardMDWidgetExtension`, `StewardMDWatchWidgets`, legacy `watchkitapp`) aligned to
+  `MARKETING_VERSION 2.1` / `CURRENT_PROJECT_VERSION 5`. (An embedded watch app / app-extension whose
+  version does not match the containing app fails App Store *validation* — that mismatch is now gone.)
+- `www/` rebuilt to **gold1046** + `npx cap sync ios` — the archive will contain the latest code.
+- **Release configuration compiles cleanly** (verified: `xcodebuild -configuration Release build` →
+  BUILD SUCCEEDED).
+- `ios/ExportOptions.plist` added (method `app-store`, team `5QY4LUKX23`, automatic signing) for an
+  optional CLI export.
+- Info.plist is submission-ready: all six usage strings present (camera/mic/motion/photo×2/speech),
+  `ITSAppUsesNonExemptEncryption=false`, Google + `stewardmd` URL schemes.
+
+**Two BLOCKERS that must be resolved on this Mac before archiving (cannot be done from the repo):**
+1. **Beta Xcode.** The active toolchain is `Xcode-beta 2.app` (Xcode 27 beta, iOS 27.0 SDK). App Store
+   Connect **rejects binaries built with a beta Xcode/SDK.** Install a **release** Xcode from the Mac
+   App Store, then `sudo xcode-select -s /Applications/Xcode.app` (verify with `xcodebuild -version`)
+   before Product ▸ Archive.
+2. **No distribution certificate.** The keychain has only *Apple Development*. App Store archives need
+   an *Apple Distribution* cert + an App Store provisioning profile. In Xcode this is automatic:
+   sign into your Apple ID (Settings ▸ Accounts, team `5QY4LUKX23`), keep signing **Automatic**, and
+   Product ▸ Archive will create the distribution cert/profile and let you Distribute → App Store
+   Connect (or Validate first). A headless `xcodebuild archive` cannot create these without the GUI /
+   an App Store Connect API key.
+
 ### Android
 1. `npx cap sync android`
 2. Android Studio → **Build ▸ Clean Project**, then generate a **signed release AAB**.
@@ -132,7 +158,7 @@ only reach devices after a rebuild + reinstall. **Incremental builds do NOT re-b
 - **Privacy nutrition labels:** declare health data, identifiers, contact accurately.
 - **Assets:** screenshots (6.9"/6.7" iPhone; iPad + Watch if listed), 1024 icon, description, keywords,
   category = Medical, age rating.
-- **Bump the build number** each upload (currently v2.1 build 3).
+- **Bump the build number** each upload (now v2.1 build 5 — every embedded target aligned to 2.1/5).
 - **Export compliance:** `ITSAppUsesNonExemptEncryption=false` — confirm accurate (standard crypto is
   exempt).
 - Keep FundX / KardiQ X / ThoreX **flag-OFF** and do not advertise them until clinically validated.
