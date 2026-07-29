@@ -114,9 +114,13 @@ export async function checkQuota(env, request, type, opts) {
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
   const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
 
-  // global circuit breaker (project-wide daily cost)
+  // global circuit breaker (project-wide daily cost). Hard-stop defaults from env but is ADMIN-EDITABLE
+  // at runtime via KV ai:budget:daily (the AI Control Center budget editor). Fail-open: a bad/absent
+  // value keeps the env default, so the breaker can never be accidentally disabled by a KV read error.
   const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
-  if (g.cost >= cfg.costHardStopInr && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
+  let hardStop = cfg.costHardStopInr;
+  try { const bo = Number(await store.get("ai:budget:daily")); if (Number.isFinite(bo) && bo > 0) hardStop = bo; } catch (e) {}
+  if (g.cost >= hardStop && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
     return { ok: false, reason: "circuit-breaker", message: QUOTA_MSG, id };
   }
   // per-user rate limit. The "router" type (the always-on semantic parser) is EXEMPT: it is a tiny

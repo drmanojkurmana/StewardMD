@@ -94,7 +94,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv } from "../../_usage.js";
-import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList } from "../../_ai_usage.js";
+import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES } from "../../_ai_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -691,9 +691,17 @@ export async function onRequest(context) {
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const enabled = aiEnabled(env);
 
-  // AI Control Center "switch models" control: apply the admin-selected model (KV) for THIS request so
-  // every route below (status/health/dispatch) reports + uses it. Validated to a priced model on set.
-  try { const _s0 = usageKv(env); if (_s0) { const _ov0 = await getModelOverride(_s0); if (_ov0) env.__modelOverride = _ov0; } } catch (e) {}
+  // AI Control Center: apply the admin model + emergency mode for THIS request. Emergency "cheap"
+  // forces the cheapest model (overriding the admin choice); "pause" is enforced at dispatch below.
+  let _emergency = { mode: "off" };
+  try {
+    const _s0 = usageKv(env);
+    if (_s0) {
+      _emergency = await getEmergency(_s0);
+      const _ov0 = await getModelOverride(_s0);
+      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_ov0 || undefined);
+    }
+  } catch (e) {}
 
   if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
 
@@ -712,26 +720,52 @@ export async function onRequest(context) {
     return json(rep);
   }
 
-  // AI Control Center admin console APIs: model switch, per-module quota editor, global rollup. Owner-gated.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits") {
+  // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
+  // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
+    let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
+
     if (seg === "admin/ai-usage") return json(await globalUsageReport(env, store, Date.now()));
+    if (seg === "admin/audit") return json({ audit: await getAudit(store) });
+
+    if (seg === "admin/emergency") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        if (!(await setEmergency(store, b.mode, actorId, Date.now()))) return json({ ok: false, error: "bad-mode", modes: EMERGENCY_MODES }, 400);
+        await auditRecord(store, "emergency", "mode=" + b.mode, actorId, Date.now());
+      }
+      return json({ ok: true, emergency: await getEmergency(store), modes: EMERGENCY_MODES });
+    }
+
+    if (seg === "admin/budget") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        if (!(await setBudget(store, b.inr))) return json({ ok: false, error: "bad-budget" }, 400);
+        await auditRecord(store, "budget", "dailyInr=" + (b.inr == null || b.inr === "" ? "default" : b.inr), actorId, Date.now());
+      }
+      return json({ ok: true, budget: await getBudget(store) });
+    }
+
     if (seg === "admin/limits") {
       if (request.method === "POST") {
         let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
-        const ok = await setLimitOverride(store, b.module, b.limit);   // limit null/"" clears → env/default
-        if (!ok) return json({ ok: false, error: "bad-limit" }, 400);
+        if (!(await setLimitOverride(store, b.module, b.limit))) return json({ ok: false, error: "bad-limit" }, 400);
+        await auditRecord(store, "limit", b.module + "=" + (b.limit == null || b.limit === "" ? "default" : b.limit), actorId, Date.now());
       }
       const ov = await limitOverrides(store);
       const modules = aiModuleList().map((m) => ({ id: m.id, label: m.label, group: m.group, defaultLimit: moduleDailyLimit(env, m.id), effective: resolveLimit(env, m.id, ov), overridden: Object.prototype.hasOwnProperty.call(ov, m.id) }));
       return json({ ok: true, modules: modules, overrides: ov });
     }
+
+    // admin/model
     if (request.method === "POST") {
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const ok = await setModelOverride(store, b.model || null);   // null/"" clears the override
       const nv = await getModelOverride(store); env.__modelOverride = nv;   // reflect the just-set value
+      await auditRecord(store, "model", "-> " + (nv || "default"), actorId, Date.now());
       return json({ ok: ok, model: nv, effective: modelId(env), allowed: ALLOWED_MODELS });
     }
     return json({ model: await getModelOverride(store), effective: modelId(env), allowed: ALLOWED_MODELS, rates: MODEL_RATES });
@@ -776,6 +810,10 @@ export async function onRequest(context) {
     if (_mod === "maik" && seg === "explain") {
       const _pkg = body.package || body;
       if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
+    }
+    // Emergency "pause" kill switch — block every AI-consuming call before any LLM/web work.
+    if (_mod && _emergency && _emergency.mode === "pause") {
+      return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
     if (_mod) {
       try {

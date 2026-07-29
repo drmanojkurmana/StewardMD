@@ -196,6 +196,45 @@ export async function setLimitOverride(store, moduleId, limit) {
   } catch (e) { return false; }
 }
 
+// ---- Phase 5: emergency override (kill switch), runtime budget, and admin audit log. ----
+export const EMERGENCY_MODES = ["off", "pause", "cheap"]; // off=normal, pause=block all AI, cheap=force cheapest
+export const CHEAP_MODEL = "gemini-2.5-flash-lite";
+export async function getEmergency(store) {
+  try { const e = store ? await store.get("ai:emergency", "json") : null; return (e && EMERGENCY_MODES.indexOf(e.mode) > -1) ? e : { mode: "off" }; } catch (e) { return { mode: "off" }; }
+}
+export async function setEmergency(store, mode, by, now) {
+  if (!store || EMERGENCY_MODES.indexOf(mode) === -1) return false;
+  try {
+    if (mode === "off") await store.delete("ai:emergency");
+    else await store.put("ai:emergency", JSON.stringify({ mode: mode, ts: now || 0, by: clip(by, 80) }));
+    return true;
+  } catch (e) { return false; }
+}
+export async function getBudget(store) {
+  try { const v = store ? Number(await store.get("ai:budget:daily")) : NaN; return Number.isFinite(v) && v > 0 ? v : null; } catch (e) { return null; }
+}
+export async function setBudget(store, inr) {
+  if (!store) return false;
+  try {
+    if (inr == null || inr === "") { await store.delete("ai:budget:daily"); return true; }  // clear → env default
+    const n = Number(inr); if (!Number.isFinite(n) || n <= 0) return false;
+    await store.put("ai:budget:daily", String(Math.floor(n))); return true;
+  } catch (e) { return false; }
+}
+// Admin audit log — who changed what, when (newest first, capped). No PHI.
+const AUDIT_CAP = 60;
+export async function auditRecord(store, action, detail, by, now) {
+  if (!store) return;
+  try {
+    const list = (await store.get("ai:audit", "json")) || [];
+    list.unshift({ ts: now || 0, action: clip(action, 40), detail: clip(detail, 120), by: clip(by, 80) });
+    await store.put("ai:audit", JSON.stringify(list.slice(0, AUDIT_CAP)));
+  } catch (e) { /* best-effort */ }
+}
+export async function getAudit(store) {
+  try { return store ? ((await store.get("ai:audit", "json")) || []) : []; } catch (e) { return []; }
+}
+
 // ---- endpoint convenience: enforce the per-module daily cap AND count the call in one step. ----
 // Returns { ok:true, used, limit, remaining } when allowed (and increments the counters), or
 // { ok:false, reason:"module-daily", module, used, limit } when the doctor is at the cap. FAIL-OPEN:
@@ -226,6 +265,18 @@ export async function globalUsageReport(env, store, now) {
       out.topDoctors = Object.keys(docs).map((d) => ({ doctor: d, req: docs[d] })).sort((a, b) => b.req - a.req).slice(0, 20);
     }
     out.modelOverride = await getModelOverride(store);
+    // Real project cost + budget come from the _usage.js token rollup (this per-module rollup carries
+    // request counts, not token cost). Same day-key format, so a direct read is safe (fail → 0).
+    let realCost = 0;
+    try { const mg = await store.get("maik:global:" + day, "json"); if (mg && typeof mg.cost === "number") realCost = mg.cost; } catch (e) {}
+    out.realCostInr = Math.round(realCost * 100) / 100;
+    out.forecastMonthlyInr = Math.round(realCost * 30);            // rough: today's spend projected over 30 days
+    out.budget = await getBudget(store);
+    out.emergency = await getEmergency(store);
+    // Abuse watch: doctors with an abnormally high request count today (heuristic, env-tunable).
+    const abuseThreshold = Number(env && env.AI_ABUSE_REQ_THRESHOLD) || 100;
+    out.watchlist = out.topDoctors.filter((d) => d.req >= abuseThreshold).slice(0, 10);
+    out.abuseThreshold = abuseThreshold;
   } catch (e) {}
   return out;
 }

@@ -6,6 +6,7 @@ import {
   MODEL_RATES, modelRate, estCostInr, resolveModel, MODEL_HARD_DEFAULT, buildUsageRecord,
   checkModuleQuota, recordAiUsage, doctorUsageSummary, getModelOverride, setModelOverride,
   gateAndCount, globalUsageReport, resolveLimit, limitOverrides, setLimitOverride,
+  EMERGENCY_MODES, CHEAP_MODEL, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit,
 } from "../functions/_ai_usage.js";
 
 // tiny in-memory KV mock (get / get(_,"json") / put / delete)
@@ -186,6 +187,61 @@ test("checkModuleQuota + summaries honour the KV limit override end-to-end", asy
   assert.equal(s.limits.ecg, 1);                                       // summary reflects the override
   const g = await globalUsageReport(env, kv, NOW);
   assert.equal(g.limits.ecg, 1);
+});
+
+test("emergency override: off/pause/cheap persist; invalid rejected; off clears", async () => {
+  const kv = mockKv();
+  assert.deepEqual(await getEmergency(kv), { mode: "off" });
+  assert.equal(await setEmergency(kv, "pause", "owner@x", NOW), true);
+  assert.equal((await getEmergency(kv)).mode, "pause");
+  assert.equal((await getEmergency(kv)).by, "owner@x");
+  assert.equal(await setEmergency(kv, "nuke", "owner@x", NOW), false);   // invalid mode rejected
+  assert.equal((await getEmergency(kv)).mode, "pause");                  // unchanged
+  assert.equal(await setEmergency(kv, "off", "owner@x", NOW), true);     // off clears
+  assert.deepEqual(await getEmergency(kv), { mode: "off" });
+  assert.ok(EMERGENCY_MODES.indexOf("cheap") > -1 && CHEAP_MODEL);
+});
+
+test("runtime budget: set positive persists; invalid rejected; clear works", async () => {
+  const kv = mockKv();
+  assert.equal(await getBudget(kv), null);
+  assert.equal(await setBudget(kv, 500), true);
+  assert.equal(await getBudget(kv), 500);
+  assert.equal(await setBudget(kv, -5), false);        // negative rejected
+  assert.equal(await setBudget(kv, "abc"), false);     // non-number rejected
+  assert.equal(await getBudget(kv), 500);              // unchanged
+  assert.equal(await setBudget(kv, null), true);       // clear → env default
+  assert.equal(await getBudget(kv), null);
+});
+
+test("audit log: newest-first, capped, no crash without store", async () => {
+  const kv = mockKv();
+  assert.deepEqual(await getAudit(kv), []);
+  await auditRecord(kv, "model", "→ gemini-3.5-flash", "owner@x", NOW);
+  await auditRecord(kv, "limit", "ecg=5", "owner@x", NOW);
+  const a = await getAudit(kv);
+  assert.equal(a.length, 2);
+  assert.equal(a[0].action, "limit");   // newest first
+  assert.equal(a[1].action, "model");
+  await auditRecord(null, "x", "y", "z", NOW);   // no store → no throw
+});
+
+test("globalUsageReport: surfaces real cost, forecast, budget, emergency, watchlist", async () => {
+  const kv = mockKv(), env = { AI_ABUSE_REQ_THRESHOLD: "2" };
+  // seed 3 maik calls for one doctor (→ watchlisted at threshold 2) + the real cost rollup
+  await gateAndCount(env, kv, "maik", "fb:heavy", "pro", NOW);
+  await gateAndCount(env, kv, "maik", "fb:heavy", "pro", NOW);
+  await gateAndCount(env, kv, "maik", "fb:heavy", "pro", NOW);
+  await kv.put("maik:global:" + new Date(NOW).toISOString().slice(0, 10), JSON.stringify({ cost: 12.5 }));
+  await setBudget(kv, 1000);
+  await setEmergency(kv, "cheap", "owner@x", NOW);
+  const r = await globalUsageReport(env, kv, NOW);
+  assert.equal(r.realCostInr, 12.5);
+  assert.equal(r.forecastMonthlyInr, 375);           // 12.5 * 30
+  assert.equal(r.budget, 1000);
+  assert.equal(r.emergency.mode, "cheap");
+  assert.equal(r.watchlist.length, 1);
+  assert.equal(r.watchlist[0].doctor, "fb:heavy");
 });
 
 test("model override: set valid persists; invalid rejected; clear works", async () => {

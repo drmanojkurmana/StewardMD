@@ -1765,10 +1765,19 @@
     });
   }
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
-  function renderAiControl(model, usage, limits) {
+  function renderAiControl(model, usage, limits, audit, health) {
     var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
+    // 0) EMERGENCY kill switch (top, most prominent)
+    var emg = (usage.emergency && usage.emergency.mode) || "off";
+    var h = '<div class="aic-sec"><div class="aic-h">Emergency control</div><div class="aic-btns">' +
+      '<button class="aic-chip' + (emg === "off" ? " on" : "") + '" data-aic-emg="off">Normal</button>' +
+      '<button class="aic-chip aic-warn' + (emg === "cheap" ? " on" : "") + '" data-aic-emg="cheap">Cheap model</button>' +
+      '<button class="aic-chip aic-danger' + (emg === "pause" ? " on" : "") + '" data-aic-emg="pause">Pause all AI</button></div>';
+    if (emg === "pause") h += '<div class="aic-alert">All AI is PAUSED for every doctor.</div>';
+    else if (emg === "cheap") h += '<div class="aic-alert" style="color:#d97706">All AI is forced to the cheapest model.</div>';
+    h += '</div>';
     // 1) Model selector
-    var h = '<div class="aic-sec"><div class="aic-h">Active AI model</div>' +
+    h += '<div class="aic-sec"><div class="aic-h">Active AI model</div>' +
       '<div class="aic-model">' + aiCtlEsc(eff) + (model.model ? ' <span class="aic-badge">override</span>' : ' <span class="aic-mut">default</span>') + '</div>' +
       '<div class="aic-btns">';
     allowed.forEach(function (m) { h += '<button class="aic-chip' + (m === eff ? " on" : "") + '" data-aic-model="' + aiCtlEsc(m) + '">' + aiCtlEsc(m) + '</button>'; });
@@ -1780,7 +1789,7 @@
     h += '<div class="aic-sec"><div class="aic-h">Today &middot; global usage</div>' +
       '<div class="aic-stats">' +
       '<div class="c"><div class="n">' + (usage.req | 0) + '</div><div class="l">Requests</div></div>' +
-      '<div class="c"><div class="n">₹' + (typeof usage.estCostInr === "number" ? usage.estCostInr.toFixed(2) : "0") + '</div><div class="l">Est cost</div></div>' +
+      '<div class="c"><div class="n">₹' + (typeof usage.realCostInr === "number" ? usage.realCostInr.toFixed(2) : "0") + '</div><div class="l">Cost today</div></div>' +
       '<div class="c"><div class="n">' + (usage.activeDoctors | 0) + '</div><div class="l">Doctors</div></div>' +
       '<div class="c"><div class="n">' + (usage.fail | 0) + '</div><div class="l">Failures</div></div></div>';
     var order = ["maik", "maik_case", "ecg", "thorex", "ocr", "stt"], rows = "";
@@ -1804,9 +1813,53 @@
         '<input type="number" min="0" inputmode="numeric" value="' + (m.effective | 0) + '"' + (m.overridden ? ' class="ov"' : '') + ' data-aic-lim="' + aiCtlEsc(m.id) + '"></div>';
     });
     h += '<div class="aic-note">0 = unlimited. Blank + Enter resets a module to its default. Changes apply immediately for everyone.</div></div>';
+    // 4) Budget editor + forecast
+    h += '<div class="aic-sec"><div class="aic-h">Daily cost budget</div>' +
+      '<div class="aic-qrow"><span class="lbl">Project hard-stop (₹/day)</span><span class="def">env default</span>' +
+      '<input type="number" min="0" inputmode="numeric" value="' + (usage.budget != null ? usage.budget : "") + '" placeholder="default"' + (usage.budget != null ? ' class="ov"' : '') + ' data-aic-budget="1"></div>' +
+      '<div class="aic-note">Today so far: ₹' + (typeof usage.realCostInr === "number" ? usage.realCostInr.toFixed(2) : "0") + ' &middot; projected month: ₹' + (usage.forecastMonthlyInr | 0) + '. Blank + Enter = env default. When reached, AI pauses until midnight.</div></div>';
+    // 5) Abuse watch
+    var wl = usage.watchlist || [];
+    if (wl.length) {
+      h += '<div class="aic-sec"><div class="aic-h">Abuse watch (≥ ' + (usage.abuseThreshold | 0) + ' req today)</div>';
+      wl.forEach(function (d) { h += '<div class="aic-mdl"><span>' + aiCtlEsc(String(d.doctor).slice(0, 14)) + '…</span><span>' + (d.req | 0) + ' req</span></div>'; });
+      h += '</div>';
+    }
+    // 6) Provider health
+    if (health && (health.provider || health.enabled != null)) {
+      h += '<div class="aic-sec"><div class="aic-h">Provider health</div>' +
+        '<div class="aic-mdl"><span>Primary: ' + aiCtlEsc(health.provider || "?") + '</span><span>' + aiCtlEsc(health.vertex_status || (health.enabled ? "enabled" : "off")) + '</span></div>' +
+        (health.fallback_provider ? '<div class="aic-mdl"><span>Fallback: ' + aiCtlEsc(health.fallback_provider) + '</span><span>' + (health.fallback_available ? "ready" : "unavailable") + '</span></div>' : '') +
+        (health.last_failover ? '<div class="aic-note">Last failover: ' + aiCtlEsc(String(health.last_failover.reason || "")) + ' (' + aiCtlEsc(String(health.last_failover.timestamp || "").slice(0, 16)) + ')</div>' : '') + '</div>';
+    }
+    // 7) Audit log
+    if (audit && audit.length) {
+      h += '<div class="aic-sec"><div class="aic-h">Recent admin actions</div>';
+      audit.slice(0, 8).forEach(function (a) { h += '<div class="aic-audit">' + aiCtlEsc(a.action) + ' &middot; ' + aiCtlEsc(a.detail) + '</div>'; });
+      h += '</div>';
+    }
     return h;
   }
   function wireAiControl(host) {
+    host.querySelectorAll("[data-aic-emg]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var mode = b.getAttribute("data-aic-emg");
+        if (mode === "pause" && !window.confirm("Pause ALL AI for every doctor? Clinical reasoning, calculators and reference tools stay available.")) return;
+        host.innerHTML = '<div class="aic-load">Updating…</div>';
+        aiAdminFetch("/admin/emergency", { method: "POST", body: { mode: mode } }).then(function () { if (window.toast) toast("Emergency mode: " + mode); loadAiControl(); });
+      });
+    });
+    var bud = host.querySelector("[data-aic-budget]");
+    if (bud) {
+      var saveBud = function () {
+        var raw = bud.value.trim();
+        aiAdminFetch("/admin/budget", { method: "POST", body: { inr: raw === "" ? null : Number(raw) } }).then(function (r) {
+          if (r && r.ok) { if (window.toast) toast("Budget updated"); loadAiControl(); } else if (window.toast) toast("Invalid budget");
+        });
+      };
+      bud.addEventListener("change", saveBud);
+      bud.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); bud.blur(); } });
+    }
     host.querySelectorAll("[data-aic-model]").forEach(function (b) {
       b.addEventListener("click", function () {
         var v = b.getAttribute("data-aic-model");
