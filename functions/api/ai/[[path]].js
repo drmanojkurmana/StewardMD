@@ -102,6 +102,11 @@ import { tinyfishSearch } from "../../_search.js";
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
 function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL || MODEL_DEFAULT; }
 
+// Vision/OCR uses a strong, FIXED multimodal model — deliberately NOT the admin text-model override
+// or the emergency "cheap" model. Misreading a drug name off a prescription is a safety risk, so
+// image/OCR reading must never be degraded by a text-cost setting. Env-tunable via VISION_MODEL.
+function visionModel(env) { const m = env && env.VISION_MODEL; return (typeof m === "string" && m) ? m : "gemini-2.5-flash"; }
+
 // AI Control Center — which usage MODULE a route consumes (for the per-module daily cap + analytics).
 // explain is refined to maik_case when a computed differential is present.
 const MODULE_FOR = {
@@ -1075,7 +1080,7 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         const prompt = visionTextPrompt(kind, ocr);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { model: visionModel(env) }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "text" });
@@ -1088,7 +1093,7 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       let text;
-      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT, { model: visionModel(env) }); }
       catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
       // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
       await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });

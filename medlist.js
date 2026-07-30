@@ -76,6 +76,19 @@
     try { if (window.ASP_DRUGS && Object.prototype.hasOwnProperty.call(window.ASP_DRUGS, n)) return true; } catch (_) {}
     return false;
   }
+  // The known-GENERIC vocabulary (brands excluded so a fuzzy hit is always a real generic), built
+  // once from every source isKnownGeneric() consults. Feeds the OCR/handwriting fuzzy fallback.
+  var _genericVocab = null;
+  function knownGenericVocab() {
+    if (_genericVocab) return _genericVocab;
+    var set = {};
+    try { ((window.MEDDRUGS && window.MEDDRUGS._list) || []).forEach(function (d) { if (d.generic) set[String(d.generic).toLowerCase()] = 1; }); } catch (_) {}
+    try { var gl = window.INTERACTION_RULES && window.INTERACTION_RULES.generics; if (gl && gl.forEach) gl.forEach(function (g) { if (g) set[String(g).toLowerCase()] = 1; }); } catch (_) {}
+    try { var dc = window.INTERACTION_RULES && window.INTERACTION_RULES.drugClasses; if (dc) Object.keys(dc).forEach(function (k) { set[k.toLowerCase()] = 1; }); } catch (_) {}
+    try { if (window.ASP_DRUGS) Object.keys(window.ASP_DRUGS).forEach(function (k) { set[k.toLowerCase()] = 1; }); } catch (_) {}
+    _genericVocab = Object.keys(set);
+    return _genericVocab;
+  }
   function resolveGeneric(out) {
     var n = out.name;
     if (!n) { out.confidence = "low"; return out; }
@@ -89,6 +102,20 @@
       out.generic = cands[0].generic; out.confidence = "high"; out.candidates = cands; return out;
     }
     if (cands.length > 1) { out.generic = null; out.confidence = "medium"; out.candidates = cands; return out; }
+    // Exact + brand both failed → conservative FUZZY match against known generics for OCR/handwriting
+    // near-misses ("atorvastain" -> atorvastatin, "clarithomycin" -> clarithromycin). MEDIUM confidence
+    // + flagged fuzzy so the review screen shows it for clinician confirmation — never auto-committed.
+    try {
+      if (window.DrugFuzzy && window.DrugFuzzy.bestGenericMatch) {
+        var fz = window.DrugFuzzy.bestGenericMatch(n, knownGenericVocab());
+        if (fz && fz.generic) {
+          out.generic = String(fz.generic).toLowerCase();
+          out.confidence = "medium"; out.fuzzy = true;
+          out.candidates = [{ generic: out.generic, fuzzy: true }];
+          return out;
+        }
+      }
+    } catch (_) {}
     // unknown: keep raw, low confidence, no silent mapping
     out.generic = null; out.confidence = "low"; out.candidates = [];
     return out;
@@ -280,19 +307,33 @@
   // flow onward; the raw image never persists. Called via window.MEDLIST at call
   // time so tests can stub it. The live vision call is PROD-ONLY.
   function scanExtract(imageDataUrl) {
-    // On-device-first: OCR on device (image never leaves); AI structures the scrubbed text
-    // when on+online, else each recognized line becomes an editable candidate row.
-    if (!(window.SMD_AI && window.SMD_AI.readImage)) return Promise.reject(new Error("ai-unavailable"));
+    function fromFields(src) {
+      src = (src && typeof src === "object") ? src : {};
+      var meds = Array.isArray(src.medications) ? src.medications : (Array.isArray(src) ? src : []);
+      return meds.map(normalizeScanRow).filter(Boolean);
+    }
+    // Cloud OCR on the IMAGE itself — the fallback whenever on-device OCR isn't available (Android has
+    // no Apple Vision bridge) or the on-device read fails/returns nothing. Server /vision reads the
+    // image with a strong multimodal model. (Image is processed for this analysis, not stored — per
+    // the camera usage description.) This is what makes Scan-Meds work on Android at all.
+    function cloudFromImage() {
+      if (!(window.SMD_AI && window.SMD_AI.vision)) return Promise.reject(new Error("ai-unavailable"));
+      try { window.__SMD_SCAN_DIAG = { stage: "cloud-image", source: "cloud" }; } catch (e) {}
+      return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
+        if (!r || r.error) throw new Error((r && r.error) || "vision-failed");
+        return fromFields((r.fields && typeof r.fields === "object") ? r.fields : r);
+      });
+    }
+    // On-device-first (privacy: image stays on device) ONLY when a real native OCR bridge exists —
+    // that is iOS Apple Vision. Android / anything without it goes straight to cloud image OCR.
+    var hasOnDevice = !!(window.SMD_AI && window.SMD_AI.readImage && window.SMD_NATIVE && window.SMD_NATIVE.ocr);
+    if (!hasOnDevice) return cloudFromImage();
     return window.SMD_AI.readImage(imageDataUrl, "medication_list").then(function (r) {
-      if (!r) throw new Error("ocr-failed");
-      if (r.mode === "fields") {
-        var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
-        var meds = (src && Array.isArray(src.medications)) ? src.medications : (Array.isArray(src) ? src : []);
-        return meds.map(normalizeScanRow).filter(Boolean);
-      }
-      // fallback (quota/offline/AI-off): recognized lines → editable candidate rows.
-      return (r.lines || []).map(function (ln) { return normalizeScanRow({ detected_text: ln }); }).filter(Boolean);
-    });
+      if (!r || r.error) throw new Error((r && r.error) || "ocr-failed");
+      if (r.mode === "fields") { var rows = fromFields((r.fields && typeof r.fields === "object") ? r.fields : r); if (rows.length) return rows; return cloudFromImage(); }
+      var lines = (r.lines || []).map(function (ln) { return normalizeScanRow({ detected_text: ln }); }).filter(Boolean);
+      return lines.length ? lines : cloudFromImage();   // on-device read nothing → cloud image OCR
+    }).catch(function () { return cloudFromImage(); });   // on-device failed → cloud image OCR
   }
   // Normalise a raw OCR med row into a candidate the review screen understands.
   // Runs the detected text through parseEntry/resolveGeneric to map + get
