@@ -94,15 +94,87 @@
     return { id: card.id, front: card.front, back: card.back, easeFactor: Math.round(ef * 100) / 100, intervalDays: ivl, repetitions: reps, dueDate: new Date(nowMs + ivl * DAY).toISOString() };
   }
 
-  // ── Mock learning engine: SM-2 + daily challenge + progress + achievements. ──
+  // ── On-device progress store (localStorage): REAL quiz/daily-challenge tracking. Privacy-first,
+  //    never leaves the device — the source of truth for streak, mastery, weekly activity, achievements. ──
+  function kxProgress() {
+    var KEY = "smd_kardiox_progress_v1";
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function dateKey(d) { d = d || new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+    function load() { try { return (typeof localStorage !== "undefined" && JSON.parse(localStorage.getItem(KEY) || "{}")) || {}; } catch (e) { return {}; } }
+    function save(s) { try { if (typeof localStorage !== "undefined") localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
+    function streakFrom(done) {
+      done = done || {}; var n = 0, d = new Date();
+      if (!done[dateKey(d)]) d.setDate(d.getDate() - 1);        // today not done yet → streak still holds through yesterday
+      while (done[dateKey(d)]) { n++; d.setDate(d.getDate() - 1); }
+      return n;
+    }
+    function monday() { var d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); d.setHours(0, 0, 0, 0); return d; }
+    return {
+      dateKey: dateKey, load: load,
+      record: function (res) {
+        res = res || {}; var s = load();
+        s.seen = s.seen || 0; s.correct = s.correct || 0; s.quizzes = s.quizzes || 0;
+        s.topics = s.topics || {}; s.mastered = s.mastered || {}; s.dailyDone = s.dailyDone || {}; s.maxStreak = s.maxStreak || 0;
+        (res.items || []).forEach(function (it) {
+          s.seen++; if (it.correct) s.correct++;
+          if (it.category) { var t = s.topics[it.category] || { seen: 0, correct: 0 }; t.seen++; if (it.correct) t.correct++; s.topics[it.category] = t; }
+          if (it.correct && it.lessonId) s.mastered[it.lessonId] = 1;
+        });
+        s.quizzes++;
+        if (res.isDaily) { s.dailyDone[dateKey(new Date())] = 1; var st = streakFrom(s.dailyDone); if (st > s.maxStreak) s.maxStreak = st; }
+        save(s);
+        var c = (res.items || []).filter(function (i) { return i.correct; }).length;
+        return { correct: c, total: (res.items || []).length, streakDays: streakFrom(s.dailyDone) };
+      },
+      progress: function () {
+        var s = load(), topics = s.topics || {}, weakest = null;
+        Object.keys(topics).forEach(function (k) {
+          var t = topics[k]; if (t.seen >= 3) { var acc = t.correct / t.seen; if (!weakest || acc < weakest.acc) weakest = { name: k, acc: acc }; }
+        });
+        var wk = [], mon = monday();
+        for (var i = 0; i < 7; i++) { var d = new Date(mon); d.setDate(mon.getDate() + i); wk.push(!!(s.dailyDone && s.dailyDone[dateKey(d)])); }
+        return {
+          mastered: Object.keys(s.mastered || {}).length, total: 100,
+          streakDays: streakFrom(s.dailyDone || {}), weeklyDone: wk,
+          weakestTopic: weakest ? { name: weakest.name, accuracyPct: Math.round(weakest.acc * 100), recommendedCards: Math.max(3, Math.round((1 - weakest.acc) * 10)) } : null
+        };
+      },
+      achievements: function () {
+        var s = load();
+        return [
+          { id: "first10", title: "First 10", icon: "workspace_premium", unlocked: (s.seen || 0) >= 10 },
+          { id: "streak10", title: "10-day", icon: "local_fire_department", unlocked: (s.maxStreak || 0) >= 10 },
+          { id: "sharp50", title: "50 correct", icon: "military_tech", unlocked: (s.correct || 0) >= 50 }
+        ];
+      }
+    };
+  }
+
+  // ── On-device learning engine: SM-2 flashcards + daily challenge + REAL progress/achievements (kxProgress). ──
   function mockLearning(deps) {
     deps = deps || {}; var cards = deps.cards || [], lib = deps.library || [];
+    var store = kxProgress();
+    function withQuiz() { return lib.filter(function (e) { var q = (e.quiz && e.quiz.questions) || e.questions; return q && q.length; }); }
     return {
       dueFlashcards: function (nowMs) { nowMs = nowMs || Date.now(); return Promise.resolve(cards.filter(function (c) { return !c.dueDate || Date.parse(c.dueDate) <= nowMs; })); },
       grade: function (cardId, grade, nowMs) { var c = cards.filter(function (x) { return x.id === cardId; })[0]; if (c) { var u = sm2(c, grade, nowMs); Object.keys(u).forEach(function (k) { c[k] = u[k]; }); } return Promise.resolve(); },
-      dailyChallenge: function (date) { if (!lib.length) return Promise.resolve(null); var d = date ? new Date(date) : new Date(); var key = d.getUTCFullYear() * 372 + (d.getUTCMonth() + 1) * 31 + d.getUTCDate(); return Promise.resolve(lib[key % lib.length]); },
-      progress: function () { var mastered = lib.filter(function (e) { return e.status === "mastered"; }).length; return Promise.resolve({ mastered: mastered, total: 100, streakDays: 12, weeklyDone: [true, true, true, false, false, false, false], weakestTopic: { name: "AV blocks", accuracyPct: 40, recommendedCards: 6 } }); },
-      achievements: function () { return Promise.resolve([{ id: "first10", title: "First 10", icon: "trophy", unlocked: true }, { id: "streak10", title: "10-day streak", icon: "local_fire_department", unlocked: true }, { id: "stemi20", title: "STEMI x20", icon: "bolt", unlocked: false }]); }
+      dailyChallenge: function (date) { var pool = withQuiz(); if (!pool.length) pool = lib; if (!pool.length) return Promise.resolve(null); var d = date ? new Date(date) : new Date(); var key = d.getUTCFullYear() * 372 + (d.getUTCMonth() + 1) * 31 + d.getUTCDate(); return Promise.resolve(pool[key % pool.length]); },
+      progress: function () { return Promise.resolve(store.progress()); },
+      achievements: function () { return Promise.resolve(store.achievements()); },
+      // Record a completed quiz/daily-challenge session. res = { items:[{category,lessonId,correct}], isDaily:bool }.
+      recordQuiz: function (res) { return Promise.resolve(store.record(res)); },
+      // Build a real multi-topic practice quiz: n questions sampled across distinct lessons, each with its own real ECG image.
+      quizSet: function (n) {
+        n = n || 10; var pool = withQuiz().slice();
+        for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp; }
+        var out = [];
+        for (var k = 0; k < pool.length && out.length < n; k++) {
+          var e = pool[k], qs = (e.quiz && e.quiz.questions) || e.questions, q = qs[Math.floor(Math.random() * qs.length)];
+          if (!q || !q.options || q.correctIndex == null) continue;
+          out.push({ stem: q.stem, options: q.options, correctIndex: q.correctIndex, explanation: q.explanation || "", stemImg: e.ecgImage || e.ecgImageUrl || "", category: e.category, lessonId: e.id });
+        }
+        return Promise.resolve({ questions: out, isDesign: false });
+      }
     };
   }
 

@@ -2060,7 +2060,7 @@
     };
     var DESIGN_STEM = '<svg viewBox="0 0 320 90" width="100%" preserveAspectRatio="none" focusable="false"><defs><pattern id="kxqz1" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M8 0H0V8" fill="none" stroke="#f6d3d3" stroke-width="1"></path></pattern></defs><rect width="320" height="90" fill="url(#kxqz1)"></rect><polyline points="0,52 20,52 26,20 32,72 38,52 60,52 80,52 86,20 92,72 98,52 120,52 140,52 146,20 152,72 158,52 180,52 200,52 206,20 212,72 218,52 240,52 260,52 266,20 272,72 278,52 300,52 320,52" fill="none" stroke="#161616" stroke-width="1.6"></polyline></svg>';
   
-    var state = { questions: [DESIGN_Q], isDesign: true, stem: null, i: 0, selected: null, submitted: false };
+    var state = { questions: [DESIGN_Q], isDesign: true, stem: null, i: 0, selected: null, submitted: false, correct: 0, items: [], isDaily: false };
   
     // ── helpers ────────────────────────────────────────────────────────────────
     var icon = (typeof ic === 'function') ? ic : function(n){ return '<span class="msr">' + n + '</span>'; };
@@ -2090,7 +2090,9 @@
       return { idx: state.i + 1, total: t, pct: Math.round(((state.i + 1) / t) * 100) };
     }
     function stemMarkup(){
-      if (state.stem) return '<img class="kx-quiz-stem-img" src="' + esc(state.stem) + '" alt="ECG rhythm strip">';
+      var q = state.questions[state.i];
+      var img = (q && q.stemImg) ? kxImg(q.stemImg) : state.stem;   // per-question real ECG (practice set) or the lesson stem
+      if (img) return '<img class="kx-quiz-stem-img" src="' + esc(img) + '" alt="ECG rhythm strip">';
       return DESIGN_STEM;
     }
   
@@ -2154,6 +2156,7 @@
         state.submitted = true;
         var correct = q.correctIndex;
         var right = state.selected === correct;
+        if (!state.isDesign) { state.items.push({ category: q.category, lessonId: q.lessonId, correct: right }); if (right) state.correct++; }
   
         opts.forEach(function(o, idx){
           o.classList.remove('is-selected');
@@ -2180,6 +2183,7 @@
           submitBtn.textContent = 'Quiz complete';
           submitBtn.disabled = true;
           submitBtn.classList.add('kx-quiz-done');
+          finish();
         } else {
           submitBtn.textContent = 'Next question';
           submitBtn.disabled = false;
@@ -2188,6 +2192,30 @@
     }
   
     function advance(){ state.i += 1; paint(); }
+
+    // ── quiz complete: record the session to on-device progress + show a score summary ──
+    function finish(){
+      if (state.isDesign) return;                        // never record the demo fallback
+      var learn = providers.learning || {};
+      var total = state.items.length, right = state.correct, pct = total ? Math.round(right / total * 100) : 0;
+      function renderSummary(streakTxt){
+        var w = document.createElement('div');
+        w.className = 'kx-quiz-summary';
+        w.setAttribute('style', 'margin-top:14px;padding:16px;border-radius:14px;background:var(--kx-surf-2,#eef3f5);text-align:center');
+        w.innerHTML =
+          '<div style="font:800 30px var(--kx-mono,monospace);color:var(--kx-primary,#0f766e)">' + right + ' / ' + total + '</div>' +
+          '<div style="font:600 13px var(--kx-sans,system-ui);color:var(--kx-text-2,#5b7083);margin:4px 0 12px">' +
+            (state.isDaily ? ('Daily challenge complete' + streakTxt) : (pct + '% correct')) + '</div>' +
+          '<button type="button" class="kx-btn kx-btn-primary" data-act="back" style="width:100%">Done</button>';
+        bodyEl.appendChild(w);
+        try { w.scrollIntoView({ behavior: 'smooth', block: 'end' }); } catch (e) {}
+      }
+      if (typeof learn.recordQuiz === 'function')
+        Promise.resolve(learn.recordQuiz({ items: state.items.slice(), isDaily: state.isDaily }))
+          .then(function(r){ renderSummary(r && r.streakDays != null ? (' · ' + r.streakDays + '-day streak') : ''); })
+          .catch(function(){ renderSummary(''); });
+      else renderSummary('');
+    }
   
     // ── initial paint (instant, design-exact) then bind live data if available ──
     paint();
@@ -2196,7 +2224,8 @@
         state.questions = res.questions;
         state.isDesign = !!res.isDesign;
         state.stem = res.stem || null;
-        state.i = 0;
+        state.isDaily = !!res.isDaily;
+        state.i = 0; state.correct = 0; state.items = [];
         paint();
       }
     }).catch(function(){});
@@ -2219,11 +2248,23 @@
     }
     async function resolveQuiz(){
       try {
-        var a = ctx.analysis;
+        var a = ctx.analysis, learn = providers.learning, lib = providers.library;
         if (a && a.quiz && Array.isArray(a.quiz.questions) && a.quiz.questions.length)
-          return { questions: a.quiz.questions, isDesign: false, stem: stemOf(a) };
+          return { questions: a.quiz.questions, isDesign: false, stem: stemOf(a), isDaily: false };
         if (a && Array.isArray(a.questions) && a.questions.length)
-          return { questions: a.questions, isDesign: false, stem: stemOf(a) };
+          return { questions: a.questions, isDesign: false, stem: stemOf(a), isDaily: false };
+
+        // DAILY CHALLENGE — today's lesson quiz; completing it advances the streak.
+        if (ctx.quizIntent === 'daily' && lib && typeof lib.ecg === 'function'){
+          var did = ctx.quizLessonId;
+          if (!did && learn && typeof learn.dailyChallenge === 'function'){ var dc0 = await learn.dailyChallenge(new Date()); did = dc0 && dc0.id; }
+          if (did){ var de = await lib.ecg(did); var rd = de && fromQuiz(de.quiz, de); if (rd){ rd.isDaily = true; return rd; } }
+        }
+        // QUIZ MODE (practice) — a real multi-topic set across the whole library, each Q its own ECG.
+        if (ctx.quizIntent !== 'daily' && learn && typeof learn.quizSet === 'function'){
+          var qs = await learn.quizSet(10);
+          if (qs && qs.questions && qs.questions.length){ qs.isDaily = false; return qs; }
+        }
   
         var lib = providers.library;
         if (lib && typeof lib.ecg === 'function'){
@@ -2544,7 +2585,7 @@
             '</svg>' +
             '<div class="kx-dc-q">Can you diagnose this in 60s?</div>' +
             '<div class="kx-dc-meta"><span data-hook="diff">Intermediate</span> · <span class="kx-data">3,204</span> residents played today</div>' +
-            '<button class="kx-dc-start" type="button" data-act="kxnav:quiz" data-hook="start">Start challenge' + ic("arrow_forward") + '</button>' +
+            '<button class="kx-dc-start" type="button" data-act="kardiox-dailyquiz" data-hook="start">Start challenge' + ic("arrow_forward") + '</button>' +
           '</div>' +
         '</div>' +
   
@@ -2617,11 +2658,11 @@
     flashcards: renderFlashcards,
     daily: render12
   };
-  var state = { analysis: null, running: false, lessonId: null, stack: [] };
+  var state = { analysis: null, running: false, lessonId: null, stack: [], quizIntent: null, quizLessonId: null };
   function providers() { try { return window.SMD_KARDIOX_PROVIDERS && window.SMD_KARDIOX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("kxScroll"); }
   function reduceMotion() { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
-  function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id }; }
+  function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id, quizIntent: state.quizIntent, quizLessonId: state.quizLessonId }; }
   function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardiQ X] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
   function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
   function back() {
@@ -2821,7 +2862,8 @@
       case "kardiox-add": haptic("light"); go("source"); return;
       case "kardiox-learn": haptic("light"); go("library"); return;
       case "kardiox-daily": go("daily"); return;
-      case "kardiox-quiz": case "kxnav:quiz": go("quiz"); return;
+      case "kardiox-quiz": case "kxnav:quiz": state.quizIntent = "practice"; state.quizLessonId = null; go("quiz"); return;
+      case "kardiox-dailyquiz": state.quizIntent = "daily"; state.quizLessonId = t.getAttribute("data-id") || null; go("quiz"); return;
       case "kardiox-history": go("history"); return;
       case "kardiox-settings": go("settings"); return;
       case "kxnav:compare": go("comparison"); return;

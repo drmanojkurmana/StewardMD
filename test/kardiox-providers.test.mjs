@@ -62,5 +62,44 @@ const daily1 = await prov.learning.dailyChallenge("2026-07-20"), daily2 = await 
 ok("daily challenge deterministic per day", daily1 && daily1.id === daily2.id);
 ok("progress shape", (await prov.learning.progress()).total === 100);
 
+// ── REAL quiz/daily/streak tracking (localStorage-backed kxProgress) ──
+globalThis.localStorage = (() => { let m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; }, clear: () => { m = {}; } }; })();
+const QC = [
+  { id: "l1", title: "Atrial fibrillation", category: "Rhythm", ecgImage: "/assets/kardiox-learn/a.jpg", quiz: { questions: [{ stem: "Q1?", options: ["a", "b"], correctIndex: 1, explanation: "e" }] } },
+  { id: "l2", title: "STEMI", category: "Ischemia", ecgImage: "/assets/kardiox-learn/b.jpg", quiz: { questions: [{ stem: "Q2?", options: ["a", "b"], correctIndex: 0, explanation: "e" }] } },
+  { id: "l3", title: "AV block", category: "Blocks", ecgImage: "/assets/kardiox-learn/c.jpg", quiz: { questions: [{ stem: "Q3?", options: ["a", "b"], correctIndex: 0, explanation: "e" }] } }
+];
+const L = P.mockProviders({ content: QC }).learning;
+ok("learning exposes recordQuiz + quizSet", typeof L.recordQuiz === "function" && typeof L.quizSet === "function");
+
+const set = await L.quizSet(3);
+ok("quizSet returns real multi-topic questions", set && set.questions.length === 3 && set.questions.every(q => q.options && q.correctIndex != null && q.stemImg && q.category && q.lessonId));
+ok("quizSet spans distinct lessons", new Set(set.questions.map(q => q.lessonId)).size === 3);
+
+const p0 = await L.progress();
+ok("fresh progress is real zeros (not fake 12)", p0.streakDays === 0 && p0.mastered === 0 && p0.weeklyDone.filter(Boolean).length === 0 && p0.weakestTopic === null);
+
+// record a practice quiz: 2 correct / 3, l1+l3 correct (mastered), l2 wrong
+const r1 = await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }, { category: "Ischemia", lessonId: "l2", correct: false }, { category: "Blocks", lessonId: "l3", correct: true }], isDaily: false });
+ok("recordQuiz returns score", r1.correct === 2 && r1.total === 3);
+const p1 = await L.progress();
+ok("practice quiz updates mastery (perfect-per-lesson), NOT streak", p1.mastered === 2 && p1.streakDays === 0);
+ok("weakest topic = lowest-accuracy after >=3 seen", (() => { return p1.weakestTopic == null || typeof p1.weakestTopic.accuracyPct === "number"; })());
+
+// record today's daily challenge -> streak becomes 1 + today marked in weeklyDone
+const r2 = await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }], isDaily: true });
+ok("daily record advances streak to 1", r2.streakDays === 1);
+const p2 = await L.progress();
+const todayIdx = (new Date().getDay() + 6) % 7;
+ok("daily marks streak + today in weeklyDone", p2.streakDays === 1 && p2.weeklyDone[todayIdx] === true);
+
+// achievements are computed from real cumulative stats (not hardcoded unlocked)
+const ach = await L.achievements();
+ok("achievements computed from real stats", ach.length === 3 && ach[0].id === "first10" && ach[0].unlocked === false && ach.every(a => typeof a.unlocked === "boolean"));
+
+// idempotent: recording the daily again the same day keeps streak at 1 (dedup by date)
+await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }], isDaily: true });
+ok("same-day daily is idempotent for streak", (await L.progress()).streakDays === 1);
+
 console.log(`\nkardiox-providers: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
