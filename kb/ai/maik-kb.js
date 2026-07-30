@@ -245,8 +245,9 @@
 
   // ---------------------------------------------------------- citations ------
   function citeSrc(t) {
-    var s = (t.E && t.E.source) || (t.DX ? "StewardMD Knowledge Base (Harrison-aligned)" : "StewardMD Knowledge Base");
-    return t.pages ? (s + ", " + t.pages) : s;
+    // Concise source only (e.g. "Harrison's Principles of Internal Medicine, 22e") — the deep
+    // page/chapter detail (t.pages) is intentionally omitted from the footer; it read as noise.
+    return (t.E && t.E.source) || (t.DX ? "StewardMD Knowledge Base (Harrison-aligned)" : "StewardMD Knowledge Base");
   }
 
   // ------------------------------------------------- per-intent composers ----
@@ -335,7 +336,7 @@
     if (dx && nonEmpty(dx.tx)) parts.push("**Management**\n" + bullets(dx.tx, 6));
     if (!parts.length) return { ok: false };
     var head = "**Treatment of " + t.name + "**" + (precedence && precedence.length ? " _(precedence: " + arr(precedence).join(" ▸ ") + ")_" : "");
-    return { ok: true, text: head + "\n\n" + parts.join("\n\n") + "\n\n_" + citeSrc(t) + " · doses are standard references — verify locally._" };
+    return { ok: true, text: head + "\n\n" + parts.join("\n\n") + "\n\n" + citeSrc(t) + " · doses are standard references, verify locally" };
   }
   // Extract the specific agent the clinician named in a dose query ("dose of amiodarone in AF"
   // → "amiodarone"), stripping the disease/filler words. Returns "" for a generic "dosing in X".
@@ -368,7 +369,7 @@
     });
     if (!lines.filter(function (l) { return /—/.test(l); }).length) return { ok: false };   // no actual dose figure
     var lead = (wanted && hit.length) ? ("**" + cap(wanted) + " — dosing in " + t.name + "**") : ("**Dosing — " + t.name + "**");
-    return { ok: true, text: lead + "\n" + lines.join("\n") + "\n\n_" + citeSrc(t) + " · standard references, verify locally._" };
+    return { ok: true, text: lead + "\n" + lines.join("\n") + "\n\n" + citeSrc(t) + " · standard references, verify locally" };
   }
 
   var COMPOSERS = {
@@ -508,7 +509,7 @@
       if (umbrellaId) {
         var upkg = { question: umbrellaName || term, grounding: [{ diseaseId: umbrellaId, name: umbrellaName || umbrellaId }], topicMatch: { matched: true, mode: "confident" } };
         var kb = compose(umbrellaName || term, upkg, {});
-        if (kb && kb.text) { kb.text = "_" + term.charAt(0).toUpperCase() + term.slice(1) + " spans several types — general overview below; tap a type to narrow._\n\n" + kb.text; return { mode: "overview", term: term, kb: kb, pkg: upkg, subtypes: subtypes, broad: true }; }
+        if (kb && kb.text) { kb.text = term.charAt(0).toUpperCase() + term.slice(1) + " spans several types; a general overview is below, tap a type to narrow.\n\n" + kb.text; return { mode: "overview", term: term, kb: kb, pkg: upkg, subtypes: subtypes, broad: true }; }
       }
       return { mode: "ask", term: term, subtypes: subtypes, broad: true };
     } catch (e) { return null; }
