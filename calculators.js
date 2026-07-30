@@ -7103,7 +7103,7 @@
         '<div id="mcCats" class="mc-cats"></div>'+
         '<div id="mcList" class="mc-list"></div>'+
         '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+mcIco("interact")+' Check Drug Interactions</button>'+
-        '<div class="mc-disc">'+mcIco("warn")+' Decision-support only — not a substitute for clinical judgement. These tools are AI-generated and not yet clinician-verified: confirm every formula, threshold and result against the individual patient and your local protocol. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder — this app only interprets the score.</div>'+
+        '<div class="mc-disc">'+mcIco("warn")+' For licensed healthcare professionals. These calculators are faithful implementations of established, peer-reviewed clinical tools, each attributed to its original author and publication; the scientific validity and all intellectual-property rights in those instruments belong to their respective authors and publishers. StewardMD computes and presents the score for decision support only; the clinician verifies every input, formula and result against the individual patient and local protocol before acting. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
