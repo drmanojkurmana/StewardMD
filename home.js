@@ -31,6 +31,35 @@
     } catch (e) {}
   })();
 
+  // ── MaiK UI 2 · instrument-grade skin (flag-gated, additive) ─────────────
+  // Presentation-only re-skin of the MaiK sheet (answer readout, tabular data,
+  // restrained palette). Pure CSS layered on body.mk2 — the DOM and every render
+  // path are untouched, so flag-off is byte-for-byte today's MaiK. Enable with
+  // ?mkui=1 (persists), disable with ?mkui=0. Recovery point: tag pre-maik-ui2.
+  (function () {
+    try {
+      var k = "smd_mkui", q = location.search || "";
+      if (/[?&]mkui=1\b/.test(q)) { try { localStorage.setItem(k, "1"); } catch (e) {} }
+      else if (/[?&]mkui=0\b/.test(q)) { try { localStorage.removeItem(k); } catch (e) {} }
+      var on = false; try { on = localStorage.getItem(k) === "1"; } catch (e) {}
+      if (!on) return;
+      var apply = function () { if (document.body) document.body.classList.add("mk2"); };
+      if (document.body) apply();
+      else document.addEventListener("DOMContentLoaded", apply);
+    } catch (e) {}
+  })();
+
+  // MaiK Scribe inline-mic kill-switch: default ON; ?scribeinline=0 restores the
+  // old modal voice dialog (persists), ?scribeinline=1 re-enables inline.
+  function scribeInlineOn() {
+    try {
+      var q = location.search || "";
+      if (/[?&]scribeinline=0\b/.test(q)) localStorage.setItem("smd_maik_inline_mic", "0");
+      else if (/[?&]scribeinline=1\b/.test(q)) localStorage.removeItem("smd_maik_inline_mic");
+      return localStorage.getItem("smd_maik_inline_mic") !== "0";
+    } catch (e) { return true; }
+  }
+
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
@@ -649,7 +678,7 @@
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
-    dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); },
+    dictate: function () { try { window.SMD_dictateMaik(); } catch (e) { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); } },
     retinalscan: function () {
       // FundX is gated by the Experimental Access framework (one code = one device, server-verified).
       // Debug builds + a valid activation open it directly; otherwise the access gate is shown. If the
@@ -2679,6 +2708,20 @@ body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0
 .maik-mic{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
 .maik-mic:hover{color:var(--mk-teal);background:var(--mk-tsoft)}
 .maik-mic.live{background:#fee2e2;color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}
+.maik-mic.prep{background:var(--mk-tsoft);color:var(--mk-teal);animation:maikPulse 1.2s ease-in-out infinite}
+body.dark .maik-mic.live{background:rgba(220,38,38,.2)}
+/* Fast/Clinical dictation chooser (first use + long-press of the mic) */
+.maik-cmp{position:relative}
+.maik-eng{position:absolute;left:12px;bottom:calc(100% - 2px);z-index:6;width:216px;background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:14px;box-shadow:0 10px 34px rgba(15,23,42,.2);padding:7px}
+body.dark .maik-eng{box-shadow:0 10px 34px rgba(0,0,0,.55)}
+.maik-eng-h{font:700 9.5px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:var(--mk-mut);padding:5px 7px 8px}
+.maik-eng-opt{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;padding:8px;cursor:pointer;transition:.12s}
+.maik-eng-opt:hover{background:var(--mk-soft)}
+.maik-eng-opt.on{border-color:var(--mk-teal);background:var(--mk-tsoft)}
+.maik-eng-opt[disabled]{opacity:.55;cursor:default}
+.maik-eng-ic{color:var(--mk-teal);flex:0 0 auto;margin-top:1px;display:flex}
+.maik-eng-tt{display:block;font:700 12.5px 'Inter';color:var(--mk-ink)}
+.maik-eng-sb{display:block;font:500 10.5px/1.4 'Inter';color:var(--mk-mut);margin-top:1px}
 .maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
 .maik-ta::placeholder{color:var(--mk-faint)}
 .maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}
@@ -2746,11 +2789,55 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-body>*:not(.maik-wm){position:relative;z-index:1}
 /* keep launch FABs (they sit at a high z-index) from floating over the sheet */
 body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab,body.maik-open .hv-fab{display:none!important}
+
+/* ══ MaiK UI 2 · instrument-grade skin (flag: body.mk2 · ?mkui=1) ══════════════
+   Presentation-only. Re-points the --mk-* tokens to one restrained clinical
+   palette and reshapes the answer from a chat bubble into an evidence READOUT
+   (teal grounding spine, hairline structure, tabular numerals, aligned data
+   tables). No DOM/logic change — flag-off is unchanged MaiK. */
+/* font: system-first (San Francisco / Segoe / Roboto) — the look approved in the
+   demo; renders identically whether or not the Inter webfont is present. */
+body.mk2 #maikSheet,body.mk2 #maikSheet *{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,system-ui,sans-serif}
+body.mk2 #maikSheet{
+  --mk-bg:#fff;--mk-ink:#0b1220;--mk-mut:#5b6b7c;--mk-faint:#8a98a8;--mk-bd:#e6ebf0;--mk-soft:#f6f8fa;--mk-field:#f3f6f8;
+  --mk-teal:#0e6e63;--mk-tsoft:#e7f3f0;--mk-acc:#0e6e63;--mk-glow:rgba(14,110,99,.18);
+  --mk-userbub:#0e6e63;--mk-userink:#fff;--mk-usersh:0 1px 2px rgba(14,110,99,.22);--mk-send:#0e6e63}
+body.mk2.dark #maikSheet,body.mk2.v3-dark #maikSheet{
+  --mk-bg:#0c1116;--mk-ink:#e6edf3;--mk-mut:#93a1b0;--mk-faint:#6b7a89;--mk-bd:rgba(255,255,255,.09);--mk-soft:#131a22;--mk-field:#131a22;
+  --mk-teal:#2dd4bf;--mk-tsoft:rgba(45,212,191,.12);--mk-acc:#2dd4bf;--mk-glow:rgba(45,212,191,.22);
+  --mk-userbub:#0f766e;--mk-userink:#fff;--mk-usersh:0 1px 2px rgba(0,0,0,.4);--mk-send:#0f766e}
+/* answer → clinical readout: teal grounding spine + hairline top, no card */
+body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px solid var(--mk-bd);border-left:2px solid var(--mk-teal);border-radius:0;box-shadow:none;padding:13px 2px 5px 14px;margin-top:4px;max-width:100%;font-variant-numeric:tabular-nums;animation:mk2rise .26s cubic-bezier(.4,0,.2,1) both}
+@keyframes mk2rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){body.mk2 #maikSheet .maik-b.ai{animation:none}}
+body.mk2 #maikSheet .maik-attr{margin-bottom:9px}
+body.mk2 #maikSheet .maik-attr .maik-kbbadge{background:var(--mk-tsoft);color:var(--mk-teal);border-color:transparent}
+/* user question → flat, restrained */
+body.mk2 #maikSheet .maik-b.you{box-shadow:var(--mk-usersh);border-radius:14px 14px 4px 14px}
+/* one accent: citations follow teal, not blue */
+body.mk2 #maikSheet .maik-cite{color:var(--mk-teal)}
+/* data tables → aligned readout: hairline rows, right-aligned mono values */
+body.mk2 #maikSheet .maik-tbl{font-variant-numeric:tabular-nums;font-size:12.5px}
+body.mk2 #maikSheet .maik-tbl th,body.mk2 #maikSheet .maik-tbl td{border:none;border-bottom:1px solid var(--mk-bd);padding:7px 10px 7px 0}
+body.mk2 #maikSheet .maik-tbl th{background:transparent;font:700 10px 'Inter';letter-spacing:.05em;text-transform:uppercase;color:var(--mk-faint)}
+body.mk2 #maikSheet .maik-tbl td:last-child,body.mk2 #maikSheet .maik-tbl th:last-child{text-align:right;font-family:ui-monospace,'SF Mono',Menlo,monospace;white-space:nowrap}
+body.mk2 #maikSheet .maik-tbl tr:last-child td{border-bottom:none}
+/* refine chips → outline (restraint); the one filled accent stays the send button */
+body.mk2 #maikSheet .maik-refine .maik-fu{background:transparent;border:1px solid var(--mk-bd);color:var(--mk-mut)}
+body.mk2 #maikSheet .maik-refine .maik-fu:hover{background:transparent;border-color:var(--mk-teal);color:var(--mk-teal)}
+/* composer → hairline field, restrained send */
+body.mk2 #maikSheet .maik-cmp-in{box-shadow:none;border-color:var(--mk-bd)}
+body.mk2 #maikSheet .maik-send{box-shadow:0 2px 8px rgba(14,110,99,.28)}
+body.mk2.dark #maikSheet .maik-cmp-in,body.mk2.v3-dark #maikSheet .maik-cmp-in{box-shadow:none}
+/* welcome cards + header wash → calm, hairline */
+body.mk2 #maikSheet .maik-card{box-shadow:none}
+body.mk2 #maikSheet .maik-card-ic{background:var(--mk-tsoft)}
+body.mk2 #maikSheet .maik-hd{background:transparent;border-bottom:1px solid var(--mk-bd)}
 `;
     (document.head || document.documentElement).appendChild(st);
   }
   function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
-  function openAskAi(prefill) {
+  function openAskAi(prefill, opts) {
     maikCSS(); maikSideCSS();
     var old = document.getElementById("maikSheet");
     if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
@@ -3566,17 +3653,84 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
     // "Extract findings →". (Inline capture in the composer was unreliable while the
     // keyboard held focus, and the dialog sits above the sheet at z-index 17000.)
-    if (micBtn) micBtn.addEventListener("click", function () {
+    // ── MaiK Scribe mic — INLINE dictation ────────────────────────────────
+    // Tap = record straight into THIS composer box (mic turns red); tap again =
+    // stop. Long-press or first use = pick Fast vs Clinical. No modal window.
+    // ?scribeinline=0 (flag smd_maik_inline_mic) restores the old dialog.
+    var INLINE_MIC = scribeInlineOn();
+    var EKEY = "smd_maik_scribe_engine";
+    var recActive = null, recStopping = false, recBase = "", lpTimer = null, longPressed = false;
+    function scGetEngine() { try { var v = localStorage.getItem(EKEY); return (v === "fast" || v === "clinical") ? v : null; } catch (e) { return null; } }
+    function scSetEngine(v) { try { localStorage.setItem(EKEY, v); } catch (e) {} }
+    function scClinicalAvail() { try { return !!(window.SMD_VOICE && SMD_VOICE.available && SMD_VOICE.available().whisper); } catch (e) { return false; } }
+    function scMicState(s) { if (!micBtn) return; micBtn.classList.toggle("live", s === "live"); micBtn.classList.toggle("prep", s === "prep"); micBtn.setAttribute("aria-label", s === "live" ? "Stop dictation" : "Dictate to MaiK"); }
+    function scWrite(t) { if (t == null) return; var s = String(t).trim(); qEl.value = recBase ? (recBase + " " + s) : s; autosizeQ(); refreshExtract(); }
+    function scEnd(focusBox) { recActive = null; recStopping = false; scMicState("idle"); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
+    function scErr(err) {
+      if (err === "clinical-unavailable") { toast("Clinical dictation isn’t ready yet — using Fast."); scSetEngine("fast"); setTimeout(function () { scStart("fast"); }, 0); return; }
+      scEnd(false);
+      if (err === "mic-denied") toast("Microphone access is off. Enable it in Settings to dictate.");
+      else if (err === "no-voice-engine") toast("Voice input isn’t available on this device.");
+      else toast("Voice input hit a snag — please try again.");
+    }
+    function scStart(engine) {
+      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { openScribeDialog(); return; }
+      recBase = (qEl.value || "").trim(); recStopping = false;
+      try { qEl.blur(); } catch (e) {}   // drop the keyboard so it can't steal the mic (the prior inline-capture bug)
+      scMicState("prep");
+      recActive = SMD_VOICE.listen({
+        engine: engine === "clinical" ? "clinical" : undefined,
+        onState: function (st) { if (st === "listening" || st === "recording") scMicState("live"); else if (st === "transcribing" || st === "preparing" || st === "downloading") scMicState("prep"); },
+        onDownloadProgress: function (p) { scMicState("prep"); try { micBtn.title = "Downloading clinical model " + Math.round((p || 0) * 100) + "%"; } catch (e) {} },
+        onPartial: function (t) { scWrite(t); },
+        onFinal: function (t) { scWrite(t); scEnd(true); },
+        onError: function (err) { scErr(err); }
+      });
+      if (!recActive && !recStopping) scMicState("idle");
+    }
+    function scTap() {
+      if (!INLINE_MIC) { openScribeDialog(); return; }
+      if (recActive || recStopping) { recStopping = true; scMicState("prep"); try { SMD_VOICE.stop(); } catch (e) {} setTimeout(function () { if (recStopping) scEnd(true); }, 8000); return; }
+      var eng = scGetEngine();
+      if (eng === null && scClinicalAvail()) { scChooser(true); return; }   // first use + a real choice exists
+      scStart(eng === "clinical" ? "clinical" : "fast");
+    }
+    var SC_SPARK = '<svg class="maik-eng-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>';
+    var SC_PULSE = '<svg class="maik-eng-ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>';
+    function scChooserClose() { var p = document.getElementById("maikEng"); if (p) p.remove(); document.removeEventListener("pointerdown", scChooserOutside, true); }
+    function scChooserOutside(ev) { var p = document.getElementById("maikEng"); if (p && !p.contains(ev.target) && ev.target !== micBtn && !(micBtn.contains && micBtn.contains(ev.target))) scChooserClose(); }
+    function scChooser(thenRecord) {
+      scChooserClose();
+      var cur = scGetEngine() || "fast", hasClin = scClinicalAvail();
+      var pop = document.createElement("div"); pop.className = "maik-eng"; pop.id = "maikEng";
+      pop.innerHTML = '<div class="maik-eng-h">Dictation mode</div>' +
+        '<button type="button" class="maik-eng-opt' + (cur === "fast" ? " on" : "") + '" data-eng="fast">' + SC_SPARK + '<span><span class="maik-eng-tt">Fast</span><span class="maik-eng-sb">Instant, on-device. Best for quick notes.</span></span></button>' +
+        '<button type="button" class="maik-eng-opt' + (cur === "clinical" ? " on" : "") + '" data-eng="clinical"' + (hasClin ? "" : " disabled") + '>' + SC_PULSE + '<span><span class="maik-eng-tt">Clinical</span><span class="maik-eng-sb">' + (hasClin ? "On-device medical model. Accents &amp; drug names. First use downloads ~181 MB." : "Available in the installed app only.") + '</span></span></button>';
+      (sheet.querySelector(".maik-cmp") || sheet).appendChild(pop);
+      pop.addEventListener("click", function (ev) {
+        var b = ev.target && ev.target.closest ? ev.target.closest(".maik-eng-opt") : null;
+        if (!b || b.hasAttribute("disabled")) return;
+        var e = b.getAttribute("data-eng"); scSetEngine(e); scChooserClose();
+        if (thenRecord) scStart(e); else toast("Dictation set to " + (e === "clinical" ? "Clinical" : "Fast") + ".");
+      });
+      setTimeout(function () { document.addEventListener("pointerdown", scChooserOutside, true); }, 0);
+    }
+    // legacy modal dialog — kill-switch fallback / when listen() is unavailable
+    function openScribeDialog() {
       if (!(window.SMD_VOICE && SMD_VOICE.openDialog)) { toast("Voice intake is still loading…"); return; }
       try { qEl.blur(); } catch (e) {}
-      SMD_VOICE.openDialog({ target: "text", onText: function (t) {
-        if (!t) return;
-        var base = (qEl.value || "").trim();
-        qEl.value = (base ? base + " " : "") + t;
-        autosizeQ(); refreshExtract();
-        try { qEl.focus(); } catch (e) {}
-      } });
-    });
+      SMD_VOICE.openDialog({ target: "text", onText: function (t) { if (!t) return; var base = (qEl.value || "").trim(); qEl.value = (base ? base + " " : "") + t; autosizeQ(); refreshExtract(); try { qEl.focus(); } catch (e) {} } });
+    }
+    if (micBtn) {
+      micBtn.addEventListener("click", function () { if (longPressed) { longPressed = false; return; } scTap(); });
+      if (INLINE_MIC) {
+        micBtn.addEventListener("pointerdown", function () { longPressed = false; lpTimer = setTimeout(function () { if (recActive || recStopping) return; longPressed = true; scChooser(false); }, 500); });
+        var scClrLP = function () { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } };
+        micBtn.addEventListener("pointerup", scClrLP); micBtn.addEventListener("pointerleave", scClrLP); micBtn.addEventListener("pointercancel", scClrLP);
+      }
+      // Auto-start dictation when MaiK is opened from the "Dictate" home tile.
+      if (opts && opts.dictate) setTimeout(function () { try { scTap(); } catch (e) {} }, 440);
+    }
     if (extractBtn) extractBtn.addEventListener("click", function () {
       var q = (qEl.value || "").trim();
       if (!q) { extractBtn.classList.remove("show"); return; }
@@ -3605,6 +3759,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
   // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
   window.SMD_askMaik = function (q) { try { openAskAi(q); } catch (e) {} };
+  // Open MaiK and immediately begin dictation (used by the "Dictate" home tile).
+  window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
   var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default" };
