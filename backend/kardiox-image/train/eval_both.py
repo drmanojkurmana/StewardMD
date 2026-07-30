@@ -8,6 +8,11 @@ import os, sys, csv, io, numpy as np, torch, timm
 from PIL import Image
 import torchvision.transforms as T
 from sklearn.metrics import roc_auc_score
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from layout_crop import crop_ecg
+except Exception:
+    def crop_ecg(x): return x
 
 HOME = os.path.expanduser("~")
 sys.path.insert(0, HOME); sys.path.insert(0, os.path.join(HOME, "train")); sys.path.insert(0, "train")
@@ -32,8 +37,8 @@ for r in allrows:
     if len(have) >= LIMIT: break
 print("scored held-out test images: %d" % len(have))
 
-clean = T.Compose([T.Resize((320, 320)), T.ToTensor(), T.Normalize([0.5]*3, [0.5]*3)])
-dist = T.Compose([T.Resize((360, 360)),
+clean = T.Compose([T.Lambda(crop_ecg), T.Resize((320, 320)), T.ToTensor(), T.Normalize([0.5]*3, [0.5]*3)])
+dist = T.Compose([T.Lambda(crop_ecg), T.Resize((360, 360)),
     T.RandomPerspective(0.3, 1.0), T.RandomAffine(degrees=10, translate=(0.04, 0.04), scale=(0.9, 1.05), shear=5),
     T.ColorJitter(0.4, 0.4, 0.3), T.GaussianBlur(3, (0.5, 2.0)), T.Resize((320, 320)),
     T.ToTensor(), T.Normalize([0.5]*3, [0.5]*3)])

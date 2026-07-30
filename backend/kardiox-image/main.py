@@ -10,6 +10,10 @@ failures measured on the Mendeley MI/Normal sets:
 Everything else (calibration, Normal/defer, SBRAD barred, findings, disclaimers) is unchanged.
 Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusion definitively."""
 import io, os, json, time, numpy as np, torch, timm
+try:
+    from layout_crop import crop_ecg   # isolate + deskew the ECG waveform region before resize
+except Exception:
+    def crop_ecg(x): return x          # fail-safe: no-op if OpenCV/module missing
 from PIL import Image
 import torchvision.transforms as T
 from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form, Query
@@ -58,7 +62,7 @@ _ck = torch.load(MODEL_PATH, map_location=_dev, weights_only=False)
 _classes = _ck["classes"]
 _model = timm.create_model(_ck["backbone"], pretrained=False, num_classes=len(_classes))
 _model.load_state_dict(_ck["state_dict"]); _model.eval()
-_tf = T.Compose([T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
+_tf = T.Compose([T.Lambda(crop_ecg), T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
 _BB = _ck.get("backbone", "?")
 _ENGINE = "kardiox-image-" + _BB.replace("_", "")
 

@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """Run the trained image model on ECG photo(s) -> top diagnoses. Used for the real-photo test + serving."""
-import sys, argparse, numpy as np, torch, timm
+import sys, os, argparse, numpy as np, torch, timm
 from PIL import Image
 import torchvision.transforms as T
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # package root
+try:
+    from layout_crop import crop_ecg
+except Exception:
+    def crop_ecg(x): return x
 
 def load(model_path, dev):
     ck=torch.load(model_path, map_location=dev)
@@ -10,7 +15,7 @@ def load(model_path, dev):
     m.load_state_dict(ck["state_dict"]); m.eval().to(dev); return m, ck["classes"]
 
 def predict(m, classes, path, dev):
-    tf=T.Compose([T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
+    tf=T.Compose([T.Lambda(crop_ecg), T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
     x=tf(Image.open(path).convert("RGB")).unsqueeze(0).to(dev)
     with torch.no_grad(): p=torch.sigmoid(m(x))[0].cpu().numpy()
     order=np.argsort(-p)
