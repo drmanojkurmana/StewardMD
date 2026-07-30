@@ -16,16 +16,19 @@
   /* From the design handoff panel: reuse --rds-*; --kx-cardiac is fixed (ECG/heart accent). */
   --kx-primary: var(--rds-primary, #0F766E);
   --kx-primary-2: var(--rds-primary-2, #115E59);
-  --kx-soft: var(--rds-soft, #E4F2EF);
+  --kx-soft: var(--rds-primary-soft, #E4F2EF);
   --kx-cardiac: #E5484D;
   --kx-bg: var(--rds-bg, #F5F8F9);
-  --kx-surf-2: var(--rds-surf-2, #EEF3F5);
+  /* NOTE: these alias the REAL --rds-* token names (ink/muted/surface/line) so they
+     flip under body.dark. The earlier names (--rds-text/-card/-surf-2/-hairline) did
+     not exist, so text/cards stayed light-mode colors in dark → invisible header. */
+  --kx-surf-2: var(--rds-surface-2, #EEF3F5);
   --kx-ink: var(--rds-ink, #0D1B24);
-  --kx-text: var(--rds-text, #0D1B24);
-  --kx-text-2: var(--rds-text-2, #5B7083);
-  --kx-muted: var(--rds-muted, #8CA2B1);
-  --kx-hairline: var(--rds-hairline, #E3EAEE);
-  --kx-card: var(--rds-card, #ffffff);
+  --kx-text: var(--rds-ink, #0D1B24);
+  --kx-text-2: var(--rds-muted, #5B7083);
+  --kx-muted: var(--rds-faint, #8CA2B1);
+  --kx-hairline: var(--rds-line, #E3EAEE);
+  --kx-card: var(--rds-surface, #ffffff);
   /* Severity — theme-invariant; prefer --sev-* if StewardMD defines them, else the design hexes. */
   --kx-sev-critical: var(--sev-critical, #B42332);
   --kx-sev-urgent: var(--sev-urgent, #C2410C);

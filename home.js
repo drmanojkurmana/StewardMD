@@ -2610,7 +2610,13 @@
       "body.dark .maik-side-t,body.dark .maik-side-ttl,body.dark .maik-side-row,body.dark .maik-side-em b{color:var(--mk-ink,#e6edf3)}" +
       "body.dark .maik-side-srch,body.v3-dark .maik-side-srch{background:rgba(148,163,184,.14);color:var(--mk-mut,#94a3b8)}" +
       "body.dark .maik-side-srch input,body.v3-dark .maik-side-srch input{color:var(--mk-ink,#e6edf3)}" +
-      "body.dark .maik-side-srch input::placeholder,body.v3-dark .maik-side-srch input::placeholder{color:var(--mk-mut,#94a3b8);opacity:1}";
+      "body.dark .maik-side-srch input::placeholder,body.v3-dark .maik-side-srch input::placeholder{color:var(--mk-mut,#94a3b8);opacity:1}" +
+      // Dark-mode: the sidebar (#maikSide) is a separate drawer and does NOT inherit #maikSheet's --mk-* tokens,
+      // so var(--mk-chip,#eef2f7) fell back to a light box (invisible text) on hover/active. Set dark-safe values.
+      "body.dark .maik-side-row:hover,body.v3-dark .maik-side-row:hover,body.dark .maik-side-item:hover,body.v3-dark .maik-side-item:hover{background:rgba(148,163,184,.12)}" +
+      "body.dark .maik-side-item.active,body.v3-dark .maik-side-item.active{background:rgba(45,212,191,.16)}" +
+      "body.dark .maik-side-item.active .maik-side-t,body.v3-dark .maik-side-item.active .maik-side-t{color:var(--mk-ink,#e6edf3)}" +
+      "body.dark .maik-side-item.active .maik-side-d,body.v3-dark .maik-side-item.active .maik-side-d{color:#a9f0e4}";
     document.head.appendChild(st);
   }
   function maikCSS() {
