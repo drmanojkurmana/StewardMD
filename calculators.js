@@ -7565,5 +7565,21 @@
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
   }
 
-  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS };
+  // ── Headless facade (for MaiKBrain / programmatic use — no UI) ──────────────
+  // get(id) → the calc definition; list() → lightweight schema; run(id, inputs) → the
+  // computed result {id,title,value,unit,interpretation,raw}. Additive; UI is unchanged.
+  function calcById(id) { for (var i = 0; i < CALCS.length; i++) if (CALCS[i].id === id) return CALCS[i]; return null; }
+  function calcRun(id, inputs) {
+    var c = calcById(id); if (!c || typeof c.compute !== "function") return null;
+    var r; try { r = c.compute(inputs || {}); } catch (e) { return null; }
+    if (!r || r === undefined) return null;
+    return { id: id, title: c.title, cat: c.cat, value: r.v, unit: r.u || "", interpretation: r.i || "", raw: r };
+  }
+  function calcList() {
+    return CALCS.map(function (c) {
+      return { id: c.id, title: c.title, cat: c.cat, desc: c.desc, inputs: (c.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type, unit: x.unit }; }) };
+    });
+  }
+
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList };
 })();

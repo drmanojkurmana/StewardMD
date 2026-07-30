@@ -25,7 +25,7 @@
  */
 (function (root) {
   "use strict";
-  var VERSION = "1.0.0-phase1";
+  var VERSION = "2.0.0-phase2";
   function G(n) { try { return root[n]; } catch (e) { return null; } }
   function norm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^\w\s?]/g, " ").replace(/\s+/g, " ").trim(); }
 
@@ -220,9 +220,126 @@
     return toks.every(function (t) { return qset.has(t); });
   }
 
-  function run(raw, context) { return { resolved: resolve(raw, context), plan: null, answer: null, defer: true }; }
+  // ════════════════════════════════════════════════════════════════════════
+  // Stages 9-10 — PLANNER + EXECUTION + VALIDATION (deterministic; no Gemini here)
+  // ════════════════════════════════════════════════════════════════════════
 
-  var api = { version: VERSION, run: run, resolve: resolve, detectLang: detectLang, _norm: norm, _AMBIG: AMBIG };
+  // Proactive calculator relevance (spec Part-2 Stage 6). A clinical-knowledge asset mapping
+  // conditions → the scores a clinician reaches for. Only IDs that exist in MEDCALC are used
+  // (MEDCALC.run returns null otherwise, so a stale mapping degrades gracefully).
+  var CALC_FOR = [
+    { kw: /\b(cap|pneumonia)\b/, calcs: [{ id: "curb65", why: "CAP severity / disposition" }, { id: "crb65", why: "CAP severity (no labs)" }] },
+    { kw: /atrial fibrillation|\baf\b|\bafib\b/, calcs: [{ id: "chadsvasc", why: "stroke risk" }, { id: "hasbled", why: "bleeding risk" }] },
+    { kw: /pulmonary embolism|\bpe\b/, calcs: [{ id: "wells_pe", why: "PE pretest probability" }, { id: "pesi", why: "PE severity" }] },
+    { kw: /\bdvt\b|deep vein/, calcs: [{ id: "wells_dvt", why: "DVT pretest probability" }] },
+    { kw: /\bstroke\b|\bcva\b/, calcs: [{ id: "nihss", why: "stroke severity" }] },
+    { kw: /\bsepsis\b|septic/, calcs: [{ id: "qsofa", why: "bedside sepsis risk" }, { id: "sofa", why: "organ dysfunction" }] },
+    { kw: /cirrhosis|hepatic failure|chronic liver/, calcs: [{ id: "childpugh", why: "cirrhosis severity" }, { id: "meld3", why: "transplant / mortality" }] },
+    { kw: /\bckd\b|chronic kidney|renal function|\baki\b/, calcs: [{ id: "ckdepi", why: "eGFR" }, { id: "crcl", why: "creatinine clearance" }] },
+    { kw: /pancreatitis/, calcs: [{ id: "ranson", why: "severity" }, { id: "bisap", why: "mortality" }] },
+    { kw: /\bacs\b|myocardial infarction|nstemi|chest pain/, calcs: [{ id: "timi_nstemi", why: "NSTE-ACS risk" }, { id: "timistemi", why: "STEMI mortality" }] },
+    { kw: /gi bleed|upper gi|variceal|melena|haematemesis/, calcs: [{ id: "gbs", why: "Glasgow-Blatchford" }, { id: "rockall", why: "rebleed / mortality" }] },
+    { kw: /\bcopd\b/, calcs: [{ id: "cat_copd", why: "symptom burden" }, { id: "decaf", why: "exacerbation mortality" }] }
+  ];
+  function suggestCalcs(q, primary) {
+    var hay = (q + " " + (primary && primary.canonicalName ? norm(primary.canonicalName) : "")).trim();
+    var out = [], seen = {};
+    for (var i = 0; i < CALC_FOR.length; i++) {
+      if (CALC_FOR[i].kw.test(hay)) {
+        CALC_FOR[i].calcs.forEach(function (c) { if (!seen[c.id]) { seen[c.id] = 1; out.push(c); } });
+      }
+    }
+    return out;
+  }
+
+  function step(source, op, args, why) { return { source: source, op: op, args: args || {}, why: why || "" }; }
+  function drugLikely(q) { return /(cillin|pril|sartan|olol|statin|azole|mycin|parin|dipine|prazole|floxacin|tinib|mab|vir|penem|cef|dose of|dosing of)/.test(q); }
+
+  /**
+   * Stage 9 — build the cheapest safe execution plan. Deterministic. Gemini is flagged ONLY
+   * when synthesis / reasoning / conflict-resolution genuinely adds value (spec Stage 13).
+   * @returns {Plan}
+   */
+  function plan(resolved) {
+    if (!resolved || resolved.decision !== "answer") return { steps: [], needsGemini: false, estCost: 0 };
+    var q = resolved.query.norm, raw = resolved.query.raw, p = resolved.primary, intent = resolved.intent;
+    var steps = [];
+    var isInteraction = /\binteract/.test(q);
+    var isDose = intent === "dose" || /\b(dose|dosing|dosage)\b/.test(q);
+    var wantsCalc = /\b(score|curb\W?65|chads|wells|nihss|has\W?bled|calculat|risk score|qsofa)\b/.test(q);
+    var isMgmt = /\b(treat|treatment|manage|management|regimen|first[- ]line|guideline|protocol|empiric)\b/.test(q);
+    var comparison = /\b(vs|versus|compare|difference between)\b/.test(q) || (/\b(nice|esc|aha|acc|idsa|kdigo|ada|gold|gina|who|cdc|icmr)\b/.test(q) && isMgmt);
+    var complex = false; try { complex = !!(root.MaiKKB && root.MaiKKB.isComplex && root.MaiKKB.isComplex(raw)); } catch (e) {}
+    var calcs = suggestCalcs(q, p);
+
+    if (isInteraction) steps.push(step("interactions", "check", {}, "interaction significance from the interactions engine"));
+    if (isDose && (p && p.type === "drug" || drugLikely(q))) steps.push(step("drugdb", "lookup", { name: p && p.type === "drug" ? p.canonicalName : null }, "dose / renal / hepatic / pregnancy / interactions from the drug DB"));
+    if (p && p.type === "disease") steps.push(step("kb", "compose", { id: p.canonicalId, intent: intent }, "StewardMD KB: " + (intent || "overview")));
+    if (calcs.length) steps.push(step("calculator", wantsCalc ? "run" : "suggest", { calcs: calcs }, "relevant clinical score(s)"));
+    if (isMgmt && p) steps.push(step("guideline", "lookup", { id: p.canonicalId }, "guideline recommendation + year + society"));
+
+    // Token optimization (Stage 13): Gemini ONLY when it adds value.
+    var substantive = steps.filter(function (s) { return ["kb", "guideline", "drugdb", "interactions"].indexOf(s.source) >= 0; });
+    var needsGemini = complex || comparison || substantive.length === 0 || substantive.length >= 2;
+    if (steps.length === 1 && steps[0].source === "calculator") needsGemini = false;   // pure score → compute, no Gemini
+    if (isDose && p && p.type === "drug" && !isInteraction && substantive.length <= 1) needsGemini = false; // pure dose lookup
+    return { steps: steps, needsGemini: needsGemini, estCost: needsGemini ? 1 : 0 };
+  }
+
+  /**
+   * Stage 10 — execute the LOCAL (deterministic, zero-token) steps and gather evidence.
+   * Steps that need the network/Gemini are returned in `deferred` for the caller (home.js).
+   * @returns {{evidence:Array, deferred:Array, needsGemini:boolean}}
+   */
+  function execute(planObj, resolved) {
+    planObj = planObj || { steps: [], needsGemini: false };
+    var evidence = [], deferred = [];
+    var MK = root.MaiKKB, CALC = root.MEDCALC, DRUGS = root.MEDDRUGS, INTX = root.INTERACTIONS;
+    (planObj.steps || []).forEach(function (s) {
+      try {
+        if (s.source === "kb" && MK && MK.compose) {
+          var pkg = (resolved && resolved.context && resolved.context.pkg) || null;
+          var out = pkg ? MK.compose(resolved.query.raw, pkg, { intent: (s.args && s.args.intent) || null }) : null;
+          if (out && out.text) evidence.push({ source: "kb", data: out, weight: 100 }); else deferred.push(s);
+        } else if (s.source === "calculator" && CALC) {
+          var got = (s.args.calcs || []).map(function (c) { var def = CALC.get ? CALC.get(c.id) : null; return def ? { id: c.id, title: def.title, why: c.why, inputs: (def.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type }; }), computed: (s.op === "run" && s.args.inputs ? CALC.run(c.id, s.args.inputs) : null) } : null; }).filter(Boolean);
+          if (got.length) evidence.push({ source: "calculator", data: got, weight: 90 });
+        } else if (s.source === "drugdb" && DRUGS) {
+          var hit = null; if (s.args.name && DRUGS.findByName) hit = DRUGS.findByName(s.args.name);
+          if (hit) evidence.push({ source: "drugdb", data: hit, weight: 95 }); else deferred.push(s); // full DB is server-side
+        } else if (s.source === "interactions" && INTX && INTX.checkInteractions) {
+          deferred.push(s); // needs the active drug list from context
+        } else {
+          deferred.push(s); // guideline / router / research / gemini → caller resolves
+        }
+      } catch (e) { deferred.push(s); }
+    });
+    return { evidence: evidence, deferred: deferred, needsGemini: !!planObj.needsGemini || deferred.some(function (s) { return ["kb", "guideline"].indexOf(s.source) >= 0; }) };
+  }
+
+  /**
+   * Stage 10/11 — validate gathered evidence. Deterministic safety checks; returns flags,
+   * never silently drops. (Full dose/interaction validation deepens in Part 2.)
+   * @returns {{ok:boolean, flags:Array}}
+   */
+  function validate(exec, resolved) {
+    var flags = [];
+    var ev = (exec && exec.evidence) || [];
+    var hasSubstantive = ev.some(function (e) { return ["kb", "drugdb", "guideline"].indexOf(e.source) >= 0; });
+    if (!hasSubstantive && !(exec && exec.needsGemini)) flags.push({ level: "warn", msg: "no substantive evidence and no synthesis planned" });
+    // dose safety: a dose must come from a source, never be invented (KB already enforces; re-assert)
+    ev.forEach(function (e) { if (e.source === "kb" && e.data && /\bdose\b/i.test(resolved && resolved.query.raw || "") && !e.data.text) flags.push({ level: "warn", msg: "dose intent but KB returned no dose text" }); });
+    return { ok: flags.every(function (f) { return f.level !== "error"; }), flags: flags };
+  }
+
+  function run(raw, context) {
+    var resolved = resolve(raw, context);
+    if (resolved.decision !== "answer") return { resolved: resolved, plan: null, answer: null, defer: true };
+    var p = plan(resolved), ex = execute(p, resolved), v = validate(ex, resolved);
+    return { resolved: resolved, plan: p, execution: ex, validation: v, answer: null, defer: ex.needsGemini || ex.deferred.length > 0 };
+  }
+
+  var api = { version: VERSION, run: run, resolve: resolve, plan: plan, execute: execute, validate: validate, suggestCalcs: suggestCalcs, detectLang: detectLang, _norm: norm, _AMBIG: AMBIG };
   try { root.MaiKBrain = api; } catch (e) {}
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : this));
