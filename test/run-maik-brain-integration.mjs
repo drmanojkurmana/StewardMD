@@ -79,11 +79,15 @@ try {
   const lp = await ev(`return window.__lastPkg ? { bundle: !!(window.__lastPkg.evidenceBundle && window.__lastPkg.evidenceBundle.claims && window.__lastPkg.evidenceBundle.claims.length), audience: window.__lastPkg.audience || null } : null`);
   ok(lp && lp.bundle === true, "flag ON: a RANKED evidence bundle is attached to the synthesis payload");
   ok(lp && !!lp.audience, "flag ON: inferred audience is attached");
+  const body4 = (await bodyText()) || "";
+  ok(/clinical workflow/i.test(body4), "flag ON (Part 3): copilot surfaces the clinical-workflow next-steps");
 
-  // 5) flag OFF + same query → NO bundle on the payload (server sees today's package = parity)
+  // 5) flag OFF + same query → NO bundle, NO copilot render (server sees today's package = parity)
   await openAndAsk("community acquired pneumonia treatment", false);
   const lp2 = await ev(`return window.__lastPkg ? !!window.__lastPkg.evidenceBundle : "no-call"`);
   ok(lp2 === false, "flag OFF: no evidence bundle attached (server payload unchanged = parity)");
+  const body5 = (await bodyText()) || "";
+  ok(!/clinical workflow/i.test(body5), "flag OFF: no copilot workflow render (parity)");
 
   console.log(fails ? `\n${fails} FAILED` : "\nALL BRAIN INTEGRATION CHECKS PASSED");
 } catch (e) { console.error("ERROR:", e && e.message || e); fails++; }

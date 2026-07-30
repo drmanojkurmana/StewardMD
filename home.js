@@ -2586,30 +2586,30 @@
       ".maik-side-row{display:flex;align-items:center;gap:10px;width:calc(100% - 16px);margin:1px 8px;padding:11px 12px;border:0;background:transparent;border-radius:12px;font:600 14.5px 'Inter',system-ui;color:var(--mk-ink,#0f172a);cursor:pointer;text-align:left}" +
       ".maik-side-row:hover{background:var(--mk-chip,#f1f5f9)}" +
       ".maik-side-new{color:var(--mk-teal,#0e6e63);font-weight:700}" +
-      ".maik-side-srch{display:flex;align-items:center;gap:8px;margin:4px 10px 8px;padding:9px 11px;background:var(--mk-chip,#f1f5f9);border-radius:11px;color:var(--mk-soft,#64748b)}" +
+      ".maik-side-srch{display:flex;align-items:center;gap:8px;margin:4px 10px 8px;padding:9px 11px;background:var(--mk-chip,#f1f5f9);border-radius:11px;color:var(--mk-mut,#64748b)}" +
       ".maik-side-srch input{flex:1;border:0;background:transparent;font:500 14px 'Inter',system-ui;color:var(--mk-ink,#0f172a);outline:none;min-width:0}" +
-      ".maik-side-lbl{font:700 11px 'Inter',system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--mk-soft,#94a3b8);padding:6px 16px 4px}" +
+      ".maik-side-lbl{font:700 11px 'Inter',system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--mk-mut,#94a3b8);padding:6px 16px 4px}" +
       ".maik-side-list{flex:1;overflow-y:auto;padding:0 6px;-webkit-overflow-scrolling:touch}" +
       ".maik-side-item{display:flex;align-items:center;border-radius:11px;margin:1px 2px}" +
       ".maik-side-item:hover{background:var(--mk-chip,#f1f5f9)}" +
       ".maik-side-item.active{background:var(--mk-chip,#eef2f7)}" +
       ".maik-side-open{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;border:0;background:transparent;padding:10px;text-align:left;cursor:pointer}" +
       ".maik-side-t{font:600 14px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px}" +
-      ".maik-side-d{font:500 11.5px 'Inter',system-ui;color:var(--mk-soft,#94a3b8)}" +
-      ".maik-side-del{border:0;background:transparent;color:var(--mk-soft,#cbd5e1);padding:8px;cursor:pointer;border-radius:8px;flex:none}" +
+      ".maik-side-d{font:500 11.5px 'Inter',system-ui;color:var(--mk-mut,#94a3b8)}" +
+      ".maik-side-del{border:0;background:transparent;color:var(--mk-mut,#cbd5e1);padding:8px;cursor:pointer;border-radius:8px;flex:none}" +
       ".maik-side-del:hover{color:#e11d48;background:rgba(225,29,72,.09)}" +
-      ".maik-side-empty{padding:18px 16px;font:500 13.5px 'Inter',system-ui;color:var(--mk-soft,#94a3b8);line-height:1.5}" +
+      ".maik-side-empty{padding:18px 16px;font:500 13.5px 'Inter',system-ui;color:var(--mk-mut,#94a3b8);line-height:1.5}" +
       ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
       ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
       ".maik-side-av{width:32px;height:32px;border-radius:50%;background:var(--mk-teal,#0e6e63);color:#fff;display:flex;align-items:center;justify-content:center;font:800 12px 'Inter',system-ui;flex:none}" +
       ".maik-side-em{display:flex;flex-direction:column;min-width:0}" +
       ".maik-side-em b{font:700 13px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" +
-      ".maik-side-em span{font:500 11px 'Inter',system-ui;color:var(--mk-soft,#94a3b8)}" +
+      ".maik-side-em span{font:500 11px 'Inter',system-ui;color:var(--mk-mut,#94a3b8)}" +
       "body.dark .maik-side,body.v3-dark .maik-side{background:var(--mk-sheet,#111a24)}" +
       "body.dark .maik-side-t,body.dark .maik-side-ttl,body.dark .maik-side-row,body.dark .maik-side-em b{color:var(--mk-ink,#e6edf3)}" +
-      "body.dark .maik-side-srch,body.v3-dark .maik-side-srch{background:rgba(148,163,184,.14);color:var(--mk-soft,#94a3b8)}" +
+      "body.dark .maik-side-srch,body.v3-dark .maik-side-srch{background:rgba(148,163,184,.14);color:var(--mk-mut,#94a3b8)}" +
       "body.dark .maik-side-srch input,body.v3-dark .maik-side-srch input{color:var(--mk-ink,#e6edf3)}" +
-      "body.dark .maik-side-srch input::placeholder,body.v3-dark .maik-side-srch input::placeholder{color:var(--mk-soft,#94a3b8);opacity:1}";
+      "body.dark .maik-side-srch input::placeholder,body.v3-dark .maik-side-srch input::placeholder{color:var(--mk-mut,#94a3b8);opacity:1}";
     document.head.appendChild(st);
   }
   function maikCSS() {
@@ -2661,7 +2661,8 @@ body.dark .maik-wm{opacity:.06}
 .maik-empty{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:6px 4px}
 .maik-hero{display:flex;flex-direction:column;align-items:center;margin-bottom:16px}
 .maik-hero-logo{position:relative;display:flex;align-items:center;justify-content:center;padding:5px 0}
-.maik-hero-glow{position:absolute;width:160px;height:64px;border-radius:50%;background:radial-gradient(ellipse,var(--mk-glow),transparent 70%);animation:maikGlow 3.2s ease-in-out infinite}
+.maik-hero-glow{position:absolute;width:128px;height:46px;border-radius:50%;background:radial-gradient(ellipse,var(--mk-glow),transparent 72%);opacity:.5;z-index:0}
+.maik-hero-logo img{z-index:1}
 .maik-hero-logo img{position:relative;height:32px;width:auto;display:block}
 .maik-kicker{font:700 10px 'Inter';color:var(--mk-teal);text-transform:uppercase;letter-spacing:.09em;margin-top:8px}
 .maik-h1{font:800 22px/1.24 'Inter';letter-spacing:-.02em;color:var(--mk-ink)}
@@ -3389,6 +3390,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { _br = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, intent: (_maikTopic && _maikTopic.intent) || null }); } catch (e) {}
         if (_br && _br.decision === "ask" && _br.ambiguity && _br.ambiguity.options && _br.ambiguity.options.length) {
           try { console.debug("[MaiK brain] never-guess: disambiguating (" + _br.ambiguity.kind + ")"); } catch (e) {}
+          try { if (window.MaiKCopilot) MaiKCopilot.gapLog("clarify", question); } catch (e) {}   // Stage-9 gap signal (anonymous)
           _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
           think.innerHTML = '<div class="maik-welcome">' + maikEscH(_br.ambiguity.kind === "lexical" ? "That abbreviation has more than one meaning — which did you mean?" : "Which did you mean?") + '</div>';
           var _w = document.createElement("div"); _w.className = "maik-fus";
@@ -3507,6 +3509,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           function finishKB(kb, pkgForKb, label) {
             _streamStarted = true; _clearStages();
             maikRenderAnswer(think, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
+            try { _brainAugment(think, pkgForKb); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; think.appendChild(_pe); } catch (e) {} }
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             try { scroll(); } catch (e) {}
@@ -3528,13 +3531,36 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (evid.length) { p.evidenceBundle = MaiKEvidence.bundle(evid); p._brainContradictions = MaiKEvidence.contradictions(evid); }
             } catch (e) {}
           }
-          // Surface transparently-handled evidence conflicts below the answer (never hidden).
-          function _brainAppendEvidence(host, p) {
-            if (!(brainOn() && p && p._brainContradictions && p._brainContradictions.length)) return;
+          // MaiK Copilot (Part 3) adaptive dashboard (flag on): proactive SAFETY alerts, source
+          // CONTRADICTION note, the ordered CLINICAL WORKFLOW (next steps), and launchable TOOL
+          // chips — surfaced below the answer so MaiK guides the next decision, no extra prompt.
+          function _brainAugment(host, p) {
+            if (!(brainOn() && window.MaiKCopilot && window.MaiKBrain)) return;
             try {
-              var c = p._brainContradictions[0], w = document.createElement("div"); w.className = "maik-verify";
-              w.textContent = "Sources differ — " + c.reason + ". Higher-authority guidance favours " + ((c.consensus && c.consensus.drug) || "the StewardMD/national recommendation") + "; confirm against your local protocol.";
-              host.appendChild(w); try { scroll(); } catch (e) {}
+              var res = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null });
+              // proactive safety
+              (MaiKCopilot.safetyScan(res, {}) || []).forEach(function (a) { var w = document.createElement("div"); w.className = "maik-verify"; w.textContent = (a.level === "warn" ? "⚠ " : "") + a.msg; host.appendChild(w); });
+              // evidence contradiction (from the enriched package)
+              if (p && p._brainContradictions && p._brainContradictions.length) { var c = p._brainContradictions[0]; var wc = document.createElement("div"); wc.className = "maik-verify"; wc.textContent = "Sources differ — " + c.reason + "; confirm against your local protocol."; host.appendChild(wc); }
+              // clinical workflow (ordered next steps)
+              var wf = MaiKCopilot.workflow(res);
+              if (wf && wf.steps.length) {
+                var box = document.createElement("div"); box.className = "maik-refine";
+                var lbl = document.createElement("div"); lbl.className = "maik-refine-lbl"; lbl.textContent = "Clinical workflow — next steps"; box.appendChild(lbl);
+                var row = document.createElement("div"); row.className = "maik-followups";
+                var base = (res.primary && res.primary.canonicalName) ? res.primary.canonicalName + " " : "";
+                wf.steps.slice(0, 6).forEach(function (s) { var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = s; b.addEventListener("click", function () { try { qEl.value = base + s; } catch (e) {} send(); }); row.appendChild(b); });
+                box.appendChild(row); host.appendChild(box);
+              }
+              // launchable StewardMD tools
+              var tools = MaiKCopilot.orchestrate(res);
+              if (tools.length) {
+                var tb = document.createElement("div"); tb.className = "maik-tools";
+                var tl = document.createElement("div"); tl.className = "maik-tools-lbl"; tl.textContent = "Open in StewardMD"; tb.appendChild(tl);
+                tools.slice(0, 4).forEach(function (t) { var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label; b.addEventListener("click", function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }); tb.appendChild(b); });
+                host.appendChild(tb);
+              }
+              try { scroll(); } catch (e) {}
             } catch (e) {}
           }
           function _gemini() {
@@ -3544,7 +3570,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               : window.SMD_AI.explainGrounded(pkg, { depth: depth });
             return call.then(function (r) {
               maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
-              try { _brainAppendEvidence(think, pkg); } catch (e) {}
+              try { _brainAugment(think, pkg); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
