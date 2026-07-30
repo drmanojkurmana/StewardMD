@@ -106,6 +106,34 @@ test("execute() gathers deterministic evidence (calculators) with no network", (
   }
 });
 
+// ── Phase 3: structured composer + adaptive follow-ups ──────────────────────
+test("compose() returns a structured, intent-adaptive Answer", () => {
+  const full = MaiKBrain.run("treatment of diabetic ketoacidosis");
+  const a = full.answer;
+  assert.ok(a, "an Answer is produced for a specific query");
+  for (const k of ["intent", "sections", "doses", "citations", "safetyFlags", "followups", "mode", "confidence"]) assert.ok(k in a, "Answer missing " + k);
+  assert.ok(Array.isArray(a.sections) && a.sections.length >= 1);
+  // intent focuses the template
+  assert.ok(a.template && a.template.sections.indexOf("treatment") >= 0, "treatment intent surfaces the treatment section");
+  // a dose query focuses on dose/renal, not the whole monograph
+  const dose = MaiKBrain.run("ceftriaxone dose").answer;
+  assert.ok(dose.template.sections.slice(0, 2).indexOf("dose") >= 0, "dose intent leads with the dose section");
+});
+
+test("adaptive follow-ups are deterministic (no Gemini) and clinically relevant", () => {
+  const fu = MaiKBrain.composeFollowups(MaiKBrain.resolve("treatment of community acquired pneumonia"), { evidence: [] });
+  const labels = fu.map(f => f.label.toLowerCase());
+  assert.ok(fu.length >= 3 && fu.length <= 8, "a handful of predicted next actions");
+  assert.ok(labels.some(l => l.includes("curb")), "CAP treatment → CURB-65 offered proactively");
+  assert.ok(labels.some(l => l.includes("dose") || l.includes("renal")), "treatment → dose/renal next steps");
+});
+
+test("run() ends-to-end for an ambiguous acronym → ask, no plan/answer", () => {
+  const r = MaiKBrain.run("MS");
+  assert.equal(r.resolved.decision, "ask");
+  assert.equal(r.answer, null, "no answer is composed for an ambiguity");
+});
+
 test("resolve() latency is well under a frame (one-shot per query)", () => {
   // The front half runs scope + intent + entity + dialogue over the KB name index once per
   // send (not per keystroke), so a low-tens-of-ms budget is imperceptible.

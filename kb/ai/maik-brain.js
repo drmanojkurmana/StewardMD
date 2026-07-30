@@ -25,7 +25,7 @@
  */
 (function (root) {
   "use strict";
-  var VERSION = "2.0.0-phase2";
+  var VERSION = "3.0.0-phase3";
   function G(n) { try { return root[n]; } catch (e) { return null; } }
   function norm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^\w\s?]/g, " ").replace(/\s+/g, " ").trim(); }
 
@@ -332,14 +332,124 @@
     return { ok: flags.every(function (f) { return f.level !== "error"; }), flags: flags };
   }
 
+  // ════════════════════════════════════════════════════════════════════════
+  // Stages 11-12 — COMPOSER (structured, intent-adaptive) + ADAPTIVE FOLLOW-UP
+  // ════════════════════════════════════════════════════════════════════════
+
+  // Full section templates per entity kind (spec Stage 4). A specific intent focuses the
+  // template to the sections that matter (so "dose" doesn't dump the whole drug monograph).
+  var TEMPLATES = {
+    disease: ["overview", "etiology", "pathophysiology", "features", "diagnosis", "differential", "investigation", "treatment", "complications", "prognosis", "followup"],
+    drug: ["mechanism", "indications", "dose", "renal", "hepatic", "pregnancy", "contraindications", "interactions", "monitoring", "adverse"],
+    investigation: ["purpose", "indications", "normal", "interpretation", "limitations", "significance", "next"],
+    guideline: ["recommendation", "evidence", "differences", "updates", "application"],
+    emergency: ["stabilization", "abc", "redflags", "doses", "monitoring", "disposition"],
+    procedure: ["indications", "contraindications", "equipment", "steps", "complications", "aftercare"]
+  };
+  // intent → the focused section subset (empty = full template)
+  var INTENT_FOCUS = {
+    dose: ["dose", "renal", "hepatic", "interactions", "monitoring"],
+    treatment: ["treatment", "complications", "monitoring", "followup"],
+    emergency: null,   // uses the emergency template wholesale
+    investigation: ["investigation", "interpretation", "next"],
+    differential: ["differential", "investigation"],
+    features: ["overview", "features"],
+    definition: ["overview"],
+    pathophysiology: ["pathophysiology"],
+    prognosis: ["prognosis", "followup"],
+    redflags: ["redflags", "features"],
+    contraindication: ["contraindications", "interactions"],
+    monitoring: ["monitoring"]
+  };
+  function templateFor(resolved) {
+    var t = (resolved.primary && resolved.primary.type === "drug") ? "drug" : "disease";
+    if (resolved.intent === "emergency") t = "emergency";
+    var base = TEMPLATES[t] || TEMPLATES.disease;
+    var focus = INTENT_FOCUS[resolved.intent];
+    if (focus) base = focus.filter(function (k) { return base.indexOf(k) >= 0; }).concat(focus.filter(function (k) { return base.indexOf(k) < 0; }));
+    return { kind: t, sections: base };
+  }
+
+  // Deterministic adaptive follow-ups (Stage 12) — predicted next actions, NO Gemini call:
+  // relevant clinical scores (CALC_FOR) + intent-adaptive next steps + KB refine chips.
+  var NEXT_BY_INTENT = {
+    treatment: ["Dose", "Renal adjustment", "Monitoring", "Contraindications", "Differentials"],
+    diagnosis: ["Investigations", "Differentials", "Red flags"],
+    differential: ["Investigations", "Treatment"],
+    investigation: ["Interpretation", "Next steps", "Treatment"],
+    dose: ["Renal adjustment", "Interactions", "Monitoring"],
+    emergency: ["Drug doses", "Red flags", "Disposition", "Monitoring"],
+    features: ["Investigations", "Treatment"],
+    definition: ["Clinical features", "Treatment"]
+  };
+  function composeFollowups(resolved, execution) {
+    var out = [], seen = {};
+    var add = function (label, kind) { var k = norm(label); if (label && !seen[k]) { seen[k] = 1; out.push({ label: label, kind: kind || "followup" }); } };
+    // 1) relevant scores
+    suggestCalcs(resolved.query.norm, resolved.primary).forEach(function (c) { add((root.MEDCALC && root.MEDCALC.get && root.MEDCALC.get(c.id) ? root.MEDCALC.get(c.id).title : c.id), "calculator"); });
+    // 2) intent-adaptive next steps
+    (NEXT_BY_INTENT[resolved.intent] || ["Treatment", "Investigations", "Differentials"]).forEach(function (l) { add(l, "intent"); });
+    // 3) KB's own refine chips (parsed from @@REFINE:…@@ if the KB composed)
+    (execution && execution.evidence || []).forEach(function (e) {
+      if (e.source === "kb" && e.data && e.data.text) { var m = String(e.data.text).match(/@@REFINE:([^@]+)@@/); if (m) m[1].split("|").forEach(function (c) { add(c.trim(), "refine"); }); }
+    });
+    return out.slice(0, 8);
+  }
+
+  /**
+   * Stage 11 — compose the single structured Answer. Deterministic sections are filled from
+   * gathered evidence; sections needing prose synthesis are marked {needsSynthesis:true} for
+   * the caller to fill via Gemini (this keeps compose zero-token). Doses/citations flow as
+   * structured slots so validation and the renderer can use them.
+   * @returns {Answer}
+   */
+  function compose(resolved, execution) {
+    execution = execution || { evidence: [], deferred: [], needsGemini: false };
+    var tpl = templateFor(resolved);
+    var ev = execution.evidence || [];
+    var kb = ev.filter(function (e) { return e.source === "kb"; })[0];
+    var calc = ev.filter(function (e) { return e.source === "calculator"; })[0];
+    var drug = ev.filter(function (e) { return e.source === "drugdb"; })[0];
+
+    var sections = [];
+    if (kb && kb.data && kb.data.text) sections.push({ kind: "kb", title: null, md: String(kb.data.text).replace(/@@REFINE:[^@]+@@/g, "").trim() });
+    else sections.push({ kind: tpl.kind, title: null, md: null, needsSynthesis: true, template: tpl.sections });
+    if (calc && calc.data && calc.data.length) sections.push({ kind: "calculator", title: "Relevant scores", calcs: calc.data });
+    if (drug && drug.data) sections.push({ kind: "drug", title: "Drug", data: drug.data });
+
+    // structured slots
+    var doses = [], citations = [];
+    if (kb && kb.data) {
+      if (kb.data.evidence) (Array.isArray(kb.data.evidence) ? kb.data.evidence : [kb.data.evidence]).forEach(function (c) { citations.push(c); });
+      if (kb.data.disease) citations.push({ source: "StewardMD KB", ref: kb.data.disease });
+    }
+    var conf = kb && kb.data ? (kb.data.confidence || 0.85) : (execution.needsGemini ? 0.7 : 0.6);
+
+    return {
+      intent: resolved.intent || "overview",
+      entities: resolved.entities || [],
+      template: tpl,
+      sections: sections,
+      doses: doses,
+      citations: citations,
+      safetyFlags: [],
+      refinements: [],
+      followups: composeFollowups(resolved, execution),
+      mode: kb ? "kb" : (execution.needsGemini ? "synthesis" : "deferred"),
+      needsSynthesis: sections.some(function (s) { return s.needsSynthesis; }),
+      confidence: conf
+    };
+  }
+
   function run(raw, context) {
     var resolved = resolve(raw, context);
     if (resolved.decision !== "answer") return { resolved: resolved, plan: null, answer: null, defer: true };
-    var p = plan(resolved), ex = execute(p, resolved), v = validate(ex, resolved);
-    return { resolved: resolved, plan: p, execution: ex, validation: v, answer: null, defer: ex.needsGemini || ex.deferred.length > 0 };
+    var p = plan(resolved), ex = execute(p, resolved), v = validate(ex, resolved), ans = compose(resolved, ex);
+    ans.safetyFlags = (v.flags || []).slice();
+    return { resolved: resolved, plan: p, execution: ex, validation: v, answer: ans, defer: ans.needsSynthesis };
   }
 
-  var api = { version: VERSION, run: run, resolve: resolve, plan: plan, execute: execute, validate: validate, suggestCalcs: suggestCalcs, detectLang: detectLang, _norm: norm, _AMBIG: AMBIG };
+  var api = { version: VERSION, run: run, resolve: resolve, plan: plan, execute: execute, validate: validate, compose: compose, composeFollowups: composeFollowups, suggestCalcs: suggestCalcs, detectLang: detectLang, _norm: norm, _AMBIG: AMBIG };
   try { root.MaiKBrain = api; } catch (e) {}
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : this));
