@@ -2560,7 +2560,10 @@
       ".maik-side-em b{font:700 13px 'Inter',system-ui;color:var(--mk-ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}" +
       ".maik-side-em span{font:500 11px 'Inter',system-ui;color:var(--mk-soft,#94a3b8)}" +
       "body.dark .maik-side,body.v3-dark .maik-side{background:var(--mk-sheet,#111a24)}" +
-      "body.dark .maik-side-t,body.dark .maik-side-ttl,body.dark .maik-side-row,body.dark .maik-side-em b{color:var(--mk-ink,#e6edf3)}";
+      "body.dark .maik-side-t,body.dark .maik-side-ttl,body.dark .maik-side-row,body.dark .maik-side-em b{color:var(--mk-ink,#e6edf3)}" +
+      "body.dark .maik-side-srch,body.v3-dark .maik-side-srch{background:rgba(148,163,184,.14);color:var(--mk-soft,#94a3b8)}" +
+      "body.dark .maik-side-srch input,body.v3-dark .maik-side-srch input{color:var(--mk-ink,#e6edf3)}" +
+      "body.dark .maik-side-srch input::placeholder,body.v3-dark .maik-side-srch input::placeholder{color:var(--mk-soft,#94a3b8);opacity:1}";
     document.head.appendChild(st);
   }
   function maikCSS() {

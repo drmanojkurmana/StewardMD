@@ -318,23 +318,21 @@
 
   function chooseWorkspace(id, o) {
     o = o || {};
-    if (o.asDefault) { setDefault(id); caseWorkspace = (id === IM ? null : id); }
-    else { caseWorkspace = id; }              // "this case / my next case" override (IM ok too)
-    persistCaseWs();
+    // The radio choice controls PERSISTENCE only: "Make my default" saves it as the default workspace;
+    // "Use for my next case" is a one-shot. EITHER way, selecting a workspace OPENS its engine right
+    // now — the user picked it to work in it, so "start a case / Dx" lands directly in that engine.
+    if (o.asDefault) setDefault(id);
     closeSheet();
-    refreshSidebarLabel();
-    if (o.selector) {
-      // Branch selector (home / sidebar): SET the workspace and RETURN HOME — do NOT open the engine.
-      // "Start a new case" (Dx My Patient) then routes into this workspace's engine.
-      if (_shell) _shell.classList.remove("on");
-      try { if (window.SMD_goHome) SMD_goHome(); } catch (e) {}
-      toast(meta(id).name + (id === IM ? " selected — tap Start a new case." : (o.asDefault ? " is now your default — tap Start a new case." : " ready — tap Start a new case.")));
-      return;
+    if (_shell) _shell.classList.remove("on");
+    if (id === IM) {
+      caseWorkspace = null; persistCaseWs(); refreshSidebarLabel();
+      try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {}
+    } else {
+      caseWorkspace = id; persistCaseWs(); refreshSidebarLabel();
+      openSpecialtyShell(id);
+      // one-shot override is consumed now that the case is open; the default (if set) still persists.
+      caseWorkspace = null; persistCaseWs();
     }
-    // In-case switch (mid-case, from the workspace pill): open immediately, then consume the
-    // one-shot override so the NEXT case reverts to the default workspace shown in the sidebar.
-    if (id === IM) { caseWorkspace = null; if (_shell) _shell.classList.remove("on"); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
-    else { openSpecialtyShell(id); caseWorkspace = null; refreshSidebarLabel(); }
   }
   // Called by Home's "Start a new case" (Dx My Patient / Start a Case): if a specialty workspace is
   // active, open its engine and return true; if Internal Medicine, return false so Home runs its own
