@@ -772,6 +772,18 @@
     return isInf ? sevOf(a.gate.cls).k : "green";
   }
 
+  // AI / clinician-responsibility notice — shown on Decision + Plan so the treating clinician stays
+  // accountable for the final call. Rule-assisted engine; app-facing copy (no em-dash).
+  function aiDisclaimer() {
+    var d = el("div", "abxw-aidisc",
+      '<span class="rds-icon abx-ms" aria-hidden="true" style="flex:0 0 auto;color:var(--amber,#92620a);margin-top:1px">smart_toy</span>' +
+      '<div><b>AI-assisted decision support, not a diagnosis.</b> The treating clinician is responsible for the final ' +
+      'diagnosis, drug choice, dose, and monitoring. Verify against the local antibiogram, allergies, renal and hepatic ' +
+      'function, weight, and interactions before prescribing.</div>');
+    d.style.cssText = "display:flex;gap:9px;align-items:flex-start;margin:0 0 14px;padding:11px 13px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);border-radius:12px;font:500 12.5px var(--font,system-ui);color:var(--slate,#2d4356);line-height:1.45";
+    return d;
+  }
+
   // Step 4 — Decision: Quick Decision + Why + Toxicity + Severity + Syndrome + Pathogens
   // (the REAL engine sections, split out of #outputArea; renders it fresh here).
   function renderDecision() {
@@ -779,6 +791,7 @@
     var a = assess(); var c = lockedCand(a);
     if (!a || !c) { wrap.appendChild(el("div", "abxw-empty dash", ms("rule") + '<p>Lock a diagnosis from the differential to see the decision.</p>')); return wrap; }
     wrap.appendChild(el("h2", "abxw-secttl", ms("gavel") + "Clinical decision"));
+    wrap.appendChild(aiDisclaimer());
     var host = el("div", "abxw-fullout"); wrap.appendChild(host);
     var ok = distributeOutput(host, "decision", true);
     if (!ok) { // fallback: concise card from assess()
@@ -806,6 +819,7 @@
     var a = assess(); var c = lockedCand(a);
     if (!a || !c) { wrap.appendChild(el("div", "abxw-empty dash", ms("rule") + '<p>Lock a diagnosis first to see the plan.</p>')); return wrap; }
     wrap.appendChild(el("h2", "abxw-secttl", ms("verified") + "Regimen & stewardship"));
+    wrap.appendChild(aiDisclaimer());
     var host = el("div", "abxw-fullout"); wrap.appendChild(host);
     // render fresh (in case Decision wasn't visited this session), then take Plan sections
     var ok = distributeOutput(host, "plan", true);
