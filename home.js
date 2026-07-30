@@ -2812,6 +2812,9 @@ body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px
 @media (prefers-reduced-motion:reduce){body.mk2 #maikSheet .maik-b.ai{animation:none}}
 body.mk2 #maikSheet .maik-attr{margin-bottom:9px}
 body.mk2 #maikSheet .maik-attr .maik-kbbadge{background:var(--mk-tsoft);color:var(--mk-teal);border-color:transparent}
+/* brand the answer with the MaiK logo mark in place of the "MaiK" wordtext */
+body.mk2 #maikSheet .maik-attr>span:first-child{font-size:0;line-height:0;display:inline-block;width:46px;height:14px;background:url(/maik-wordmark-color.png) left center/contain no-repeat}
+body.mk2.dark #maikSheet .maik-attr>span:first-child,body.mk2.v3-dark #maikSheet .maik-attr>span:first-child{background-image:url(/maik-wordmark-white.png)}
 /* user question → flat, restrained */
 body.mk2 #maikSheet .maik-b.you{box-shadow:var(--mk-usersh);border-radius:14px 14px 4px 14px}
 /* one accent: citations follow teal, not blue */
@@ -2833,6 +2836,37 @@ body.mk2.dark #maikSheet .maik-cmp-in,body.mk2.v3-dark #maikSheet .maik-cmp-in{b
 body.mk2 #maikSheet .maik-card{box-shadow:none}
 body.mk2 #maikSheet .maik-card-ic{background:var(--mk-tsoft)}
 body.mk2 #maikSheet .maik-hd{background:transparent;border-bottom:1px solid var(--mk-bd)}
+/* ── MaiK UI 2 · remaining surfaces: welcome · composer · sidebar + motion ── */
+/* premium easing (expo-out) on the sheet + sidebar reveal */
+body.mk2 #maikSheet{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+body.mk2 #maikSheet .maik-side{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+/* welcome / empty state — calmer glow, hairline cards, staggered reveal */
+body.mk2 #maikSheet .maik-h1{letter-spacing:-.025em}
+body.mk2 #maikSheet .maik-hero-glow{animation-duration:4.6s}
+body.mk2 #maikSheet .maik-card{border-color:var(--mk-bd);background:var(--mk-bg);box-shadow:none;border-radius:12px;animation:mk2rise .34s cubic-bezier(.22,1,.36,1) both}
+body.mk2 #maikSheet .maik-cards .maik-card:nth-child(2){animation-delay:.05s}
+body.mk2 #maikSheet .maik-cards .maik-card:nth-child(3){animation-delay:.1s}
+body.mk2 #maikSheet .maik-cards .maik-card:nth-child(4){animation-delay:.15s}
+body.mk2 #maikSheet .maik-card:hover{border-color:var(--mk-teal);background:var(--mk-soft);box-shadow:none}
+@media (prefers-reduced-motion:reduce){body.mk2 #maikSheet .maik-card{animation:none}}
+/* composer — slightly less pill, instrument-grade */
+body.mk2 #maikSheet .maik-cmp-in{border-radius:16px}
+/* conversations sidebar — re-skin + FIX the pre-existing --mk-soft-as-text contrast */
+body.mk2 #maikSheet .maik-side{background:var(--mk-bg);border-right:1px solid var(--mk-bd);box-shadow:2px 0 30px rgba(15,23,42,.14)}
+body.mk2.dark #maikSheet .maik-side,body.mk2.v3-dark #maikSheet .maik-side{box-shadow:2px 0 30px rgba(0,0,0,.5)}
+body.mk2 #maikSheet .maik-side-hd{border-bottom:1px solid var(--mk-bd);padding-bottom:11px}
+body.mk2 #maikSheet .maik-side-ttl,body.mk2 #maikSheet .maik-side-t,body.mk2 #maikSheet .maik-side-row,body.mk2 #maikSheet .maik-side-em b{color:var(--mk-ink)}
+body.mk2 #maikSheet .maik-side-lbl,body.mk2 #maikSheet .maik-side-d,body.mk2 #maikSheet .maik-side-em span,body.mk2 #maikSheet .maik-side-empty{color:var(--mk-mut)}
+body.mk2 #maikSheet .maik-side-del{color:var(--mk-faint)}
+body.mk2 #maikSheet .maik-side-del:hover{color:var(--mk-teal)}
+body.mk2 #maikSheet .maik-side-new{color:var(--mk-teal)}
+body.mk2 #maikSheet .maik-side-srch{background:var(--mk-field);color:var(--mk-mut);border:1px solid var(--mk-bd)}
+body.mk2 #maikSheet .maik-side-srch input{color:var(--mk-ink)}
+body.mk2 #maikSheet .maik-side-item:hover{background:var(--mk-soft)}
+body.mk2 #maikSheet .maik-side-item.active,body.mk2 #maikSheet .maik-side-item[aria-current="true"]{background:var(--mk-tsoft)}
+body.mk2 #maikSheet .maik-side-av{background:var(--mk-teal)}
+body.mk2 #maikSheet .maik-side-priv{color:var(--mk-teal);border-top:1px solid var(--mk-bd)}
+body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
 `;
     (document.head || document.documentElement).appendChild(st);
   }
