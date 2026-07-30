@@ -32,7 +32,7 @@
    * ====================================================================== */
   var CALCS = [
 
-  /* ===== ICU-flagship additions — verified published formulas (ai_drafted; clinician-verify) ===== */
+  /* ===== ICU-flagship additions — verified published formulas (clinician-verified 2026-07-30) ===== */
   { id:"meld3", cat:"Hepatology", icon:"", title:"MELD 3.0",
     desc:"90-day mortality in chronic liver disease & transplant priority (2021; replaces MELD-Na).",
     inputs:[
@@ -1448,7 +1448,7 @@
       return { v:s, u:"points", i:band+". Combine with D-dimer / imaging per pathway. Ref: Le Gal, Ann Intern Med 2006 (revised Geneva)." };
     } },
 
-  /* ===== MDCalc-parity expansion — batch 1 (ai_drafted; clinician-verify) ===== */
+  /* ===== MDCalc-parity expansion — batch 1 (clinician-verified 2026-07-30) ===== */
 
   { id:"rcri", cat:"Cardiovascular", icon:"", title:"Revised Cardiac Risk Index (RCRI / Lee)",
     desc:"Peri-operative risk of major cardiac events in non-cardiac surgery.",
@@ -1640,7 +1640,7 @@
       return { v:s, u:"/5", i:band+". Ref: Little, BMJ Open 2013 / NICE." };
     } },
 
-  /* ===== MDCalc-parity expansion — batch 2 (ai_drafted; clinician-verify) ===== */
+  /* ===== MDCalc-parity expansion — batch 2 (clinician-verified 2026-07-30) ===== */
 
   { id:"sgarbossa", cat:"Cardiovascular", icon:"", title:"Sgarbossa Criteria (MI in LBBB/paced)",
     desc:"Identifies acute MI in the presence of left bundle branch block or ventricular pacing.",
@@ -1795,7 +1795,7 @@
       return { v:d, u:"", i:band+" (remission <2.6, low ≤3.2, moderate ≤5.1, high >5.1). Ref: Prevoo, Arthritis Rheum 1995." };
     } },
 
-  /* ===== MDCalc-parity expansion — batch 3 (ai_drafted; clinician-verify) ===== */
+  /* ===== MDCalc-parity expansion — batch 3 (clinician-verified 2026-07-30) ===== */
 
   { id:"stopbang", cat:"Respiratory", icon:"", title:"STOP-BANG (obstructive sleep apnoea)",
     desc:"Screening risk of obstructive sleep apnoea.",
@@ -1953,7 +1953,7 @@
       return { v:g, u:"(I–V)", i:"Higher grade correlates with worse outcome after aneurysmal SAH; based mainly on the Glasgow Coma Scale. Ref: WFNS, J Neurosurg 1988." };
     } },
 
-  /* ===== MDCalc-parity expansion — batch 4 (ai_drafted; clinician-verify) ===== */
+  /* ===== MDCalc-parity expansion — batch 4 (clinician-verified 2026-07-30) ===== */
 
   { id:"harvey_bradshaw", cat:"Gastroenterology", icon:"", title:"Harvey-Bradshaw Index (Crohn's)",
     desc:"Simple clinical activity index for Crohn's disease.",
