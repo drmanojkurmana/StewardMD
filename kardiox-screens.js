@@ -1820,11 +1820,17 @@
         category: e.category || AF_DEFAULT.category,
         tier: e.tier || AF_DEFAULT.tier,
         bookmarked: e.bookmarked != null ? !!e.bookmarked : AF_DEFAULT.bookmarked,
-        ecgFindingTags: (e.ecgFindingTags && e.ecgFindingTags.length) ? e.ecgFindingTags : AF_DEFAULT.ecgFindingTags,
-        diagnosticCriteria: (e.diagnosticCriteria && e.diagnosticCriteria.length) ? e.diagnosticCriteria : AF_DEFAULT.diagnosticCriteria,
-        pearl: e.pearl || AF_DEFAULT.pearl,
-        pitfall: e.pitfall || AF_DEFAULT.pitfall,
+        // Use the lesson's OWN findings/criteria; empty → show nothing. NEVER fall back to the AF
+        // default (that stamped "Irregular R-R / No P waves / f-waves" onto every tag-less lesson,
+        // e.g. a NORM sinus case wrongly showing atrial-fibrillation findings).
+        ecgFindingTags: (e.ecgFindingTags && e.ecgFindingTags.length) ? e.ecgFindingTags : [],
+        diagnosticCriteria: (e.diagnosticCriteria && e.diagnosticCriteria.length) ? e.diagnosticCriteria : [],
+        pearl: e.pearl || '',
+        pitfall: e.pitfall || '',
         quizCount: qs || AF_DEFAULT.quizCount,
+        // The REAL teaching ECG image (303 atlas cases have one) — must flow into the view-model so
+        // ecgStrip() renders it instead of the shared synthetic strip ("same ECG for all" bug).
+        ecgImage: e.ecgImage || e.ecgImageUrl || '',
         // Per-diagnosis content (content-only enrichment; UI components reused). Empty → block skipped.
         ecgStrip: e.ecgStrip || '',
         overview: e.overview || '',
@@ -1872,6 +1878,7 @@
     }
   
     function tagsHtml(vm) {
+      if (!vm.ecgFindingTags || !vm.ecgFindingTags.length) return '';   // no tags → no chip row (not fake AF chips)
       return '<div class="kx-lesson-tags">' +
         vm.ecgFindingTags.map(function (t) {
           return '<span class="kx-lesson-tag kx-data">' + esc(t) + '</span>';
@@ -1880,6 +1887,7 @@
     }
   
     function criteriaHtml(vm) {
+      if (!vm.diagnosticCriteria || !vm.diagnosticCriteria.length) return '';   // no criteria → skip the block
       return '<div class="kx-lesson-label">Diagnostic criteria</div>' +
         '<div class="kx-lesson-crit-list">' +
           vm.diagnosticCriteria.map(function (c) {
