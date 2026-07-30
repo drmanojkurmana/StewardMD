@@ -73,7 +73,7 @@ async function verifyFirebaseToken(token, env) {
     return ok ? payload.sub : null;
   } catch (e) { return null; }
 }
-async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
+export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
 
 // Returns { id, guest } — id is an opaque, non-PHI key. Never the raw email/IP in the clear.
 export async function identify(request, env) {

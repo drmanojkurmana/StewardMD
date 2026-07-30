@@ -18,6 +18,7 @@
 export const AI_MODULES = {
   maik:        { id: "maik",        label: "MaiK AI",            group: "MaiK",          daily: 50,  provider: "vertex" },
   maik_case:   { id: "maik_case",   label: "MaiK Clinical Case", group: "MaiK",          daily: 25,  provider: "vertex" },
+  research:    { id: "research",    label: "Evidence Review",    group: "MaiK",          daily: 2,   provider: "vertex" }, // Research Mode: trusted-literature evidence review. env AI_LIMIT_RESEARCH / admin KV override.
   ecg:         { id: "ecg",         label: "KardiQ X (ECG)",     group: "KardiQ X",      daily: 10,  provider: "vertex" },
   thorex:      { id: "thorex",      label: "ThoreX (Chest X-ray)", group: "ThoreX",      daily: 10,  provider: "vertex" },
   ocr:         { id: "ocr",         label: "Vision / OCR",       group: "OCR",           daily: 50,  provider: "vertex" }, // ICU + Scan Meds combined

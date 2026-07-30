@@ -75,6 +75,19 @@
     } catch (e) { return true; }
   }
 
+  // MaiK Research Mode — a clinician EVIDENCE REVIEW over trusted medical literature (PubMed / WHO /
+  // CDC / NICE / ICMR / Cochrane / specialty-society guidelines), NOT a general web search. Additive,
+  // flag-gated (smd_maik_research), DEFAULT OFF. Enable: ?research=1 (persists) or set localStorage
+  // smd_maik_research="1"; ?research=0 (or clearing the key) turns it off. When off, no toggle renders.
+  function researchModeAvail() {
+    try {
+      var q = location.search || "";
+      if (/[?&]research=1\b/.test(q)) localStorage.setItem("smd_maik_research", "1");
+      else if (/[?&]research=0\b/.test(q)) localStorage.removeItem("smd_maik_research");
+      return localStorage.getItem("smd_maik_research") === "1";
+    } catch (e) { return false; }
+  }
+
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
@@ -2523,6 +2536,8 @@
     book: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
     chevron: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
     mic: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+    // menu_book — Research Mode (evidence review over trusted journals/guidelines)
+    research: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
     send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
     export: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></svg>',
     copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
@@ -2563,6 +2578,7 @@
         '<button class="maik-extract" id="maikExtract" type="button">' + svg("brain", "smd-ico") + ' Extract findings for Clinical Reasoning →</button>' +
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
+          (researchModeAvail() ? '<button class="maik-research" id="maikResearch" type="button" title="Research mode: review journals" aria-label="Research mode: review journals" aria-pressed="false">' + MK.research + '</button>' : '') +
           '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
@@ -2735,6 +2751,9 @@ body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0
 .maik-mic.live{background:#fee2e2;color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}
 .maik-mic.prep{background:var(--mk-tsoft);color:var(--mk-teal);animation:maikPulse 1.2s ease-in-out infinite}
 body.dark .maik-mic.live{background:rgba(220,38,38,.2)}
+.maik-research{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-research:hover{color:var(--mk-teal);background:var(--mk-tsoft)}
+.maik-research.on{background:var(--mk-teal);color:#fff}
 /* Fast/Clinical dictation chooser (first use + long-press of the mic) */
 .maik-cmp{position:relative}
 .maik-eng{position:absolute;left:12px;bottom:calc(100% - 2px);z-index:6;width:216px;background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:14px;box-shadow:0 10px 34px rgba(15,23,42,.2);padding:7px}
@@ -3171,6 +3190,47 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research on the web";
       rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
       return rb;
+    }
+    // ── Research Mode (Evidence Review) — trusted medical-literature synthesis (PubMed / guidelines).
+    //    Reuses the web-sourced renderer's look (answer + numbered Sources list) with an evidence
+    //    attribution + a "used of 2 today" counter. Server enforces the 2/day cap + 7-day cache.
+    function maikRunResearch(q) {
+      if (_maikBusy) return;
+      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)">' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
+      window.SMD_AI.research(q, "evidence-review").then(function (r) {
+        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        // Over the 2/day cap -> a clear message, NOT an error.
+        if (r && r.over) {
+          think.innerHTML = '<div class="maik-welcome">' + maikEscH(r.message || "You've used your 2 evidence reviews today. Resets at midnight.") + '</div>';
+          try { scroll(); _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+          return;
+        }
+        if (r && r.text) {
+          var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
+          var srcHTML = "";
+          if (r.sources && r.sources.length) {
+            var items = r.sources.map(function (s) {
+              var lbl = maikEscH((s && (s.title || s.site || s.url)) || "source");
+              var safeU = (s && s.url && /^https?:\/\//i.test(s.url)) ? maikEscH(s.url) : "";
+              var siteTag = (s && s.site) ? ' <span style="color:var(--slate-soft,#94a3b8)">· ' + maikEscH(s.site) + '</span>' : '';
+              return '<li>' + (safeU ? '<a href="' + safeU + '" target="_blank" rel="noopener noreferrer" style="color:#0e6e63">' + lbl + '</a>' : lbl) + siteTag + '</li>';
+            }).join("");
+            srcHTML = '<details class="maik-src" style="margin-top:6px" open><summary>' + MK.book + r.sources.length + ' source' + (r.sources.length > 1 ? 's' : '') + '</summary><ol>' + items + '</ol></details>';
+          }
+          var meta = '';
+          if (r.usage && r.usage.limit) { meta = ' <span style="opacity:.7">· ' + (r.usage.used || 0) + ' of ' + r.usage.limit + ' today' + (r.cached ? ', cached' : '') + '</span>'; }
+          else if (r.cached) { meta = ' <span style="opacity:.7">· cached</span>'; }
+          think.innerHTML = '<div class="maik-attr" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK Evidence Review</span><span style="opacity:.7">· trusted literature, verify independently</span>' + meta + '</div>' + bd + srcHTML;
+        } else {
+          think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
+        }
+        try { scroll(); } catch (e) {}
+        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+      }).catch(function () {
+        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        try { think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now. Please verify against a reference source.</div>'; scroll(); _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+      });
     }
     // ── Deterministic follow-up chips (ZERO extra AI tokens): derived purely from the grounded
     //    package's own sections + resolved treatment. Each chip re-runs a grounded query only IF
@@ -3695,6 +3755,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
+      // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
+      if (_researchMode) { maikRunResearch(q); return; }
       var active = maikActiveCase();
       if (maikV2()) {
         var fu = maikResolveFollowup(q);
@@ -3855,6 +3917,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var wq = el.getAttribute("data-maik-web");
       if (wq) { el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || body, wq, el); }
+    });
+    // ---- MaiK Research Mode toggle (flag smd_maik_research; button only present when enabled) ----
+    var researchBtn = sheet.querySelector("#maikResearch");
+    var _researchMode = false;
+    function setResearchMode(on) {
+      _researchMode = !!on;
+      if (researchBtn) { researchBtn.classList.toggle("on", _researchMode); researchBtn.setAttribute("aria-pressed", _researchMode ? "true" : "false"); }
+      try { if (qEl) qEl.placeholder = _researchMode ? "Review the evidence on…" : ((body && body.querySelector(".maik-b")) ? "Ask a follow-up…" : "Ask a clinical question…"); } catch (e) {}
+    }
+    if (researchBtn) researchBtn.addEventListener("click", function () {
+      setResearchMode(!_researchMode);
+      if (_researchMode) { try { toast("Research mode on. MaiK will review trusted medical literature (2 per day)."); } catch (e) {} }
     });
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");

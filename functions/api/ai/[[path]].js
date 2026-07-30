@@ -93,8 +93,9 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv } from "../../_usage.js";
-import { gateAndCount, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex } from "../../_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
+import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -109,13 +110,17 @@ function visionModel(env) { const m = env && env.VISION_MODEL; return (typeof m 
 
 // AI Control Center — which usage MODULE a route consumes (for the per-module daily cap + analytics).
 // explain is refined to maik_case when a computed differential is present.
+// research -> its own "research" (Evidence Review) bucket. NOTE: only the Research-Mode
+// (mode:"evidence-review") request counts against it, and it self-gates INSIDE the handler AFTER the
+// KV cache check (a cache hit must not burn a slot); normal web-research is remapped back to "maik"
+// in the gate block below so its prior behaviour is unchanged.
 const MODULE_FOR = {
-  explain: "maik", refine: "maik", route: "maik", research: "maik", verify: "maik",
+  explain: "maik", refine: "maik", route: "maik", research: "research", verify: "maik",
   imaging: "maik_case", correlate: "maik_case", evidence: "maik_case",
   vision: "ocr", extract: "ocr", transcribe: "stt",
 };
 function moduleLimitMsg(mod, limit) {
-  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
 async function aiAdminAuthed(request, env, url) {
@@ -418,6 +423,25 @@ const RESEARCH_SYS_SNIPPETS =
   "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
   "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
 
+// Research Mode (Evidence Review) — a clinician EVIDENCE REVIEW over trusted medical literature
+// (PubMed/PMC, WHO, CDC, NICE, ICMR, Cochrane and major specialty-society guidelines), NOT a general
+// web search. The SOURCES list below is retrieved from PubMed (guideline / systematic review /
+// meta-analysis publication types only); the model synthesizes established medical knowledge grounded
+// in those sources and cites them [n]. This is a model PROMPT — its output is AI text (exempt from the
+// no-em-dash app-text rule); the answer's own closing line is what the user reads.
+const EVIDENCE_REVIEW_SYS =
+  "You are MaiK in EVIDENCE REVIEW mode, a clinical evidence-synthesis assistant for qualified doctors. The clinician wants a structured review of what the published literature and guidelines say about their question. " +
+  "You are given a numbered SOURCES list retrieved from trusted medical literature (PubMed/PMC, Cochrane, WHO, CDC, NICE, ICMR, and major specialty-society guidelines). Answer from established medical knowledge, using these sources to ground and cite specifics. Follow ALL of these requirements:\n" +
+  "1. SYNTHESIZE the evidence into a clear, clinician-facing answer: lead with the bottom line, then the supporting detail. Be concise and structured (short headings or bullets where they genuinely help).\n" +
+  "2. COMPARE studies or guidelines when they differ; say where the weight of evidence lies and where there is genuine disagreement.\n" +
+  "3. Whenever you rely on a guideline or major trial, STATE ITS YEAR (e.g. 'the 2021 Surviving Sepsis Campaign', 'NICE 2019', 'ICMR 2022').\n" +
+  "4. State the EVIDENCE QUALITY behind key recommendations: the study type (randomised trial, meta-analysis, systematic review, observational, expert consensus) and, where a source gives it, the GRADE or strength of recommendation.\n" +
+  "5. Clearly DISTINGUISH well-established evidence from emerging or preliminary findings; never present a single small or preliminary study as settled practice.\n" +
+  "6. CITE sources inline as numbered [n] matching the SOURCES list, and name the source with its year in prose the first time you rely on it. Use ONLY the numbers provided; never invent a citation, a figure, or a guideline that is not supported by the sources or solidly-established medicine.\n" +
+  "7. If the evidence is limited, weak, or the sources do not cover the question, say so plainly in one line rather than overstating certainty.\n" +
+  "8. END with exactly this one line and nothing after it: 'This is an evidence summary, not a substitute for clinical judgment.'\n" +
+  "Do not describe your retrieval process or mention PubMed. Do not add any other disclaimer (the interface already shows one).";
+
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 
 // Phase 2 (deep) — cross-encoder re-rank of the retrieved chunks with the Workers AI reranker
@@ -688,6 +712,44 @@ function reasoningExtractPrompt(transcript, catalog) {
     "=== FINDING CATALOG (key = label) ===\n" + cat + "\n\n=== TRANSCRIPT ===\n" + transcript;
 }
 
+// Reusable NCBI PubMed E-utilities lookup, filtered to guideline / systematic-review / meta-analysis
+// publication types. Returns an array of { title, journal, year, pubtype, url, pmid } (most-relevant
+// first), [] when no matching PMIDs exist, or THROWS on a lookup failure (fetch/parse/empty-summary)
+// so the caller can distinguish "none found" from "the reference source is down". `ptypeFilter` lets
+// a caller tighten/loosen the publication-type filter; default matches the prior /evidence behaviour.
+async function pubmedGuidelines(env, topic, ptypeFilter) {
+  const contact = env.NCBI_EMAIL || "contact@stewardmd.in";
+  const base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
+  const cred = "&tool=stewardmd&email=" + encodeURIComponent(contact);
+  const filt = ptypeFilter || "(Practice Guideline[ptyp] OR Guideline[ptyp] OR systematic review[ptyp] OR Review[ptyp])";
+  const term = encodeURIComponent(topic + " AND " + filt + ' AND English[lang] AND ("2013"[dp] : "3000"[dp])');
+  const es = await fetch(base + "esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=relevance" + cred + "&term=" + term, { cf: { cacheTtl: 86400 } });
+  if (!es.ok) throw new Error("esearch " + es.status);
+  const ej = await es.json();
+  if (ej && ej.esearchresult && ej.esearchresult.ERROR) throw new Error("esearch-error");
+  const ids = ((ej && ej.esearchresult && ej.esearchresult.idlist) || []).slice(0, 6);
+  if (!ids.length) return [];
+  const su = await fetch(base + "esummary.fcgi?db=pubmed&retmode=json" + cred + "&id=" + ids.join(","), { cf: { cacheTtl: 86400 } });
+  if (!su.ok) throw new Error("esummary " + su.status);
+  const sj = await su.json();
+  const r = (sj && sj.result) || {};
+  const results = ids.map(function (id) {
+    const x = r[id]; if (!x || !x.title) return null;
+    const pts = x.pubtype || [];
+    return {
+      title: String(x.title).replace(/\s+/g, " ").replace(/\.$/, "").trim(),
+      journal: x.fulljournalname || x.source || "",
+      year: String(x.pubdate || "").slice(0, 4),
+      pubtype: pts.filter(function (p) { return /guideline|systematic review|meta-analysis/i.test(p); })[0] || pts[0] || "",
+      url: "https://pubmed.ncbi.nlm.nih.gov/" + id + "/",
+      pmid: id,
+    };
+  }).filter(Boolean);
+  // esearch found matching PMIDs but esummary yielded none -> a lookup FAILURE, not "none found".
+  if (!results.length) throw new Error("esummary-empty");
+  return results;
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
@@ -825,11 +887,18 @@ export async function onRequest(context) {
       const _pkg = body.package || body;
       if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
     }
+    // Research Mode (Evidence Review) counts against its OWN 2/day "research" bucket, but that cap is
+    // enforced INSIDE the /research handler AFTER the KV cache check — a cached answer must never burn
+    // a daily slot — so it opts OUT of this generic pre-count. Normal web-research is remapped back to
+    // "maik" so it counts as a MaiK question exactly as before (zero regression). Both still honour
+    // the emergency kill switch below.
+    const _isEvidReview = (seg === "research" && body && body.mode === "evidence-review");
+    if (seg === "research" && !_isEvidReview) _mod = "maik";
     // Emergency "pause" kill switch — block every AI-consuming call before any LLM/web work.
-    if (_mod && _emergency && _emergency.mode === "pause") {
+    if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
-    if (_mod) {
+    if (_mod && !_isEvidReview) {
       try {
         const _who = await identify(request, env);
         const _mq = await gateAndCount(env, _acStore, _mod, _who.id, _who.guest ? "guest" : "unknown", Date.now());
@@ -1054,31 +1123,9 @@ export async function onRequest(context) {
       if (!topic) return json({ error: "no-topic" }, 400);
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
-      const contact = env.NCBI_EMAIL || "contact@stewardmd.in";
-      const base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
-      const cred = "&tool=stewardmd&email=" + encodeURIComponent(contact);
-      const term = encodeURIComponent(topic + ' AND (Practice Guideline[ptyp] OR Guideline[ptyp] OR systematic review[ptyp] OR Review[ptyp]) AND English[lang] AND ("2013"[dp] : "3000"[dp])');
       let results = [];
-      try {
-        const es = await fetch(base + "esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=relevance" + cred + "&term=" + term, { cf: { cacheTtl: 86400 } });
-        if (!es.ok) throw new Error("esearch " + es.status);
-        const ej = await es.json();
-        if (ej && ej.esearchresult && ej.esearchresult.ERROR) throw new Error("esearch-error");
-        const ids = ((ej && ej.esearchresult && ej.esearchresult.idlist) || []).slice(0, 6);
-        if (ids.length) {
-          const su = await fetch(base + "esummary.fcgi?db=pubmed&retmode=json" + cred + "&id=" + ids.join(","), { cf: { cacheTtl: 86400 } });
-          if (!su.ok) throw new Error("esummary " + su.status);
-          const sj = await su.json();
-          const r = (sj && sj.result) || {};
-          results = ids.map(function (id) {
-            const x = r[id]; if (!x || !x.title) return null;
-            const pts = x.pubtype || [];
-            return { title: String(x.title).replace(/\s+/g, " ").replace(/\.$/, "").trim(), journal: x.fulljournalname || x.source || "", year: String(x.pubdate || "").slice(0, 4), pubtype: pts.filter(function (p) { return /guideline|systematic review/i.test(p); })[0] || pts[0] || "", url: "https://pubmed.ncbi.nlm.nih.gov/" + id + "/", pmid: id };
-          }).filter(Boolean);
-          // esearch found matching PMIDs but esummary yielded none → a lookup FAILURE, not "none found".
-          if (!results.length) throw new Error("esummary-empty");
-        }
-      } catch (e) { try { await recordUsage(gate, { inTok: estTokens(topic.length), outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "lookup-failed", source: "pubmed" }, 502); }
+      try { results = await pubmedGuidelines(env, topic); }   // default guideline/review filter (unchanged behaviour)
+      catch (e) { try { await recordUsage(gate, { inTok: estTokens(topic.length), outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "lookup-failed", source: "pubmed" }, 502); }
       await recordUsage(gate, { inTok: estTokens(topic.length), outTok: estTokens(JSON.stringify(results).length), status: "success" });
       return json({ results: results, source: "PubMed (NCBI)", query: topic, mode: "evidence" });
     }
@@ -1121,6 +1168,56 @@ export async function onRequest(context) {
       const q = String(body.question || body.q || "").slice(0, 500);
       if (!q) return json({ error: "no question" }, 400);
       if (firewallBlock(q)) return json({ text: null, blocked: true, outOfScope: true, sources: [], message: "MaiK answers only medical and clinical questions." }); // no web search, no Gemini
+
+      // ── Research Mode: EVIDENCE REVIEW over trusted medical literature (NOT a general web search).
+      // The source allow-list filters RETRIEVAL only (PubMed guideline/SR/meta-analysis) — it never
+      // refuses the query (firewallBlock above is the ONLY scope gate, unchanged). Exactly 2/day per
+      // user via the existing usage/KV machinery; a KV cache hit does NOT burn a daily slot.
+      if (body.mode === "evidence-review") {
+        const store = usageKv(env);
+        const ERE_MAX = Math.max(256, Math.min(1800, Number(env.MAIK_EVIDENCE_MAX_OUTPUT) || 1300));
+        // (1) Response cache: normalize -> sha256hex -> maik:research:v1:<hash>. HIT = free, slot-free.
+        const cacheKey = researchCacheKey(await sha256hex(normalizeResearchQuery(q)));
+        if (store) {
+          let hit = null; try { hit = await store.get(cacheKey, "json"); } catch (e) {}
+          if (hit && hit.text) {
+            let used = 0, limit = 2;
+            try { const mq = await checkModuleQuota(env, store, "research", (await identify(request, env)).id, Date.now()); used = mq.used || 0; limit = mq.limit != null ? mq.limit : 2; } catch (e) {}
+            return json({ text: hit.text, mode: "evidence-review", sources: hit.sources || [], cached: true, usage: { module: "research", used: used, limit: limit } });
+          }
+        }
+        // (2) Global cost breaker / rate / token headroom (existing machinery wraps the call).
+        const gate = await checkQuota(env, request, "general");
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+        // (3) Per-user 2/day Evidence-Review cap (counted per ATTEMPT, AFTER the cache check).
+        let usedNow = 0, capNow = 2;
+        if (store) {
+          const who = await identify(request, env);
+          const mq = await gateAndCount(env, store, "research", who.id, who.guest ? "guest" : "unknown", Date.now());
+          if (!mq.ok) {
+            try { await recordUsage(gate, { inTok: 0, outTok: 0, status: "blocked" }); } catch (e) {}
+            return json({ text: null, mode: "evidence-review", over: true, sources: [], message: "You've used your 2 evidence reviews today. Resets at midnight.", usage: { module: "research", used: mq.used != null ? mq.used : 2, limit: mq.limit != null ? mq.limit : 2 } });
+          }
+          usedNow = (mq.used || 0) + 1; capNow = mq.limit != null ? mq.limit : 2;
+        }
+        // (4) Retrieve trusted citations (PubMed guideline / systematic review / meta-analysis), then
+        // synthesize with numbered [n] grounding. Zero sources -> synthesize from established medicine.
+        let cites = [];
+        try { cites = await pubmedGuidelines(env, q.replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 200), RESEARCH_PUBTYPE_FILTER); } catch (e) { cites = []; }
+        const sources = cites.map(function (c, i) { return { n: i + 1, title: c.title + (c.year ? " (" + c.year + ")" : ""), url: c.url, site: c.journal || "PubMed", year: c.year, pmid: c.pmid, pubtype: c.pubtype }; });
+        let srcBlock = "";
+        if (sources.length) srcBlock = "\n\n=== SOURCES (cite inline as [n]; use ONLY these numbers) ===\n" + sources.map(function (s) { return s.n + ". " + s.title + (s.pubtype ? " [" + s.pubtype + "]" : "") + (s.site ? " - " + s.site : ""); }).join("\n");
+        const prompt = EVIDENCE_REVIEW_SYS + "\n\n=== CLINICIAN QUESTION ===\n" + q + srcBlock;
+        const inTok = estTokens(prompt.length);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], ERE_MAX, { temperature: 0.2 }); }
+        catch (e) { try { console.warn("[ai] evidence-review-failed", String(e && e.message || e).slice(0, 200)); } catch (_e) {} try { await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "research-failed", mode: "evidence-review" }, 502); }
+        try { await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" }); } catch (e) {}
+        // (5) Cache the synthesized answer (~7-day TTL) so a repeat is free AND slot-free.
+        if (store && text) { try { await store.put(cacheKey, JSON.stringify({ text: text, sources: sources, ts: Date.now() }), { expirationTtl: 7 * 24 * 60 * 60 }); } catch (e) {} }
+        return json({ text: text, mode: "evidence-review", sources: sources, cached: false, usage: { module: "research", used: usedNow, limit: capNow } });
+      }
+
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));
