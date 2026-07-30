@@ -546,16 +546,26 @@
     publish();
   }
 
+  // Defer heavy Firestore work past the initial hot path so attaching the shared-unit
+  // collectionGroup Listen channel doesn't contend with a first MaiK/scan/AI call on the single JS
+  // thread (the account-agnostic slowness — a signed-in session's Firestore sync starves the AI
+  // request; guest has none). startGroupSync is idempotent + re-armed on auth-change and a 50-min
+  // interval, so a few seconds' delay is harmless to ward/watch sync.
+  function deferIdle(fn) {
+    try { if (window.requestIdleCallback) { window.requestIdleCallback(fn, { timeout: 6000 }); return; } } catch (e) {}
+    setTimeout(fn, 4000);
+  }
   function start() {
     var a = auth();
     // Attach the shared-unit sync on auth-state change too: subscribeGroups needs a
     // resolved currentUser, which isn't ready at boot. startGroupSync() is idempotent,
     // so firing it here (login) + below (in case auth already resolved) is safe.
-    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { startGroupSync(); autoPublish(); }); }
+    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { deferIdle(function () { startGroupSync(); autoPublish(); }); }); }
     else { setTimeout(start, 1500); return; }        // Firebase not booted yet — retry
 
-    // Live shared-unit sync (ICU + ward) — publishes on any snapshot change.
-    startGroupSync();
+    // Live shared-unit sync (ICU + ward) — publishes on any snapshot change. Deferred to idle so the
+    // collectionGroup listener attaches after the app is interactive, not during the first AI/scan.
+    deferIdle(startGroupSync);
 
     // Refresh well before the ~1h ID-token expiry.
     setInterval(autoPublish, 50 * 60 * 1000);
