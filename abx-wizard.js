@@ -776,7 +776,7 @@
   // accountable for the final call. Rule-assisted engine; app-facing copy (no em-dash).
   function aiDisclaimer() {
     var d = el("div", "abxw-aidisc",
-      '<span class="rds-icon abx-ms" aria-hidden="true" style="flex:0 0 auto;color:var(--amber,#92620a);margin-top:1px">smart_toy</span>' +
+      '<span class="rds-icon abx-ms" aria-hidden="true" style="flex:0 0 auto;font-size:19px;color:var(--amber,#92620a);margin-top:1px">smart_toy</span>' +
       '<div><b>AI-assisted decision support, not a diagnosis.</b> The treating clinician is responsible for the final ' +
       'diagnosis, drug choice, dose, and monitoring. Verify against the local antibiogram, allergies, renal and hepatic ' +
       'function, weight, and interactions before prescribing.</div>');
