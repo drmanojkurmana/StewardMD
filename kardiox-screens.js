@@ -1864,14 +1864,17 @@
         '</figure>';
       }
       var pts = (vm && vm.ecgStrip) ? vm.ecgStrip : DEFAULT_STRIP;   // per-diagnosis strip; default only pre-hydration
-      return '<div class="kx-ecg kx-lesson-strip">' +
+      // No real teaching image for this lesson (a few cases have none in the libraries) — show a
+      // clearly-labelled schematic so it is never mistaken for a real ECG.
+      return '<figure class="kx-ecg kx-lesson-strip">' +
         '<svg class="kx-ecg-svg kx-lesson-ecg-svg" viewBox="0 0 320 80" width="100%" height="72" preserveAspectRatio="none" aria-hidden="true">' +
           '<defs><pattern id="kxEcgPaper09" width="8" height="8" patternUnits="userSpaceOnUse">' +
             '<path class="kx-ecg-grid" d="M8 0H0V8"></path></pattern></defs>' +
           '<rect width="320" height="80" fill="url(#kxEcgPaper09)"></rect>' +
           '<polyline class="kx-ecg-trace" points="' + esc(pts) + '"></polyline>' +
         '</svg>' +
-      '</div>';
+        '<figcaption class="kx-lesson-ecg-cap">Schematic illustration (not a real ECG)</figcaption>' +
+      '</figure>';
     }
     // Content-enrichment helpers — reuse existing lesson CSS classes; each renders nothing when empty.
     function pill(label, text) { return text ? ('<div class="kx-lesson-label">' + esc(label) + '</div><p class="kx-lesson-overview">' + esc(text) + '</p>') : ''; }
