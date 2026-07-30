@@ -26,24 +26,21 @@
     })();
   }
 
-  // Spring-like easeOut cubic-bezier — reliable across Motion builds (Motion.spring()'s signature
-  // varies by vendored version and throws here, which would abort the whole animation).
-  var EAS = [0.22, 1, 0.36, 1];
-
+  // Real Motion One spring lives in the options as type:"spring" — passing spring() as `easing`
+  // throws in this vendored build (which would abort the whole animation).
   function play(body) {
     if (!body || reduced()) return;
     withMotion(function (M) {
       if (!M || !M.animate) return;
       var secs = body.querySelectorAll(".sbref-sec");
-      var eas = EAS;
       Array.prototype.forEach.call(secs, function (n, i) {
-        try { M.animate(n, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { duration: 0.5, delay: Math.min(i, 8) * 0.06, easing: eas }); } catch (e) {}
+        try { M.animate(n, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { type: "spring", stiffness: 240, damping: 26, delay: Math.min(i, 8) * 0.06 }); } catch (e) {}
       });
-      // Syndrome chips settle in just after their section — light, quick, not distracting.
+      // Syndrome chips settle in just after their section — snappier spring, light and not distracting.
       var chips = body.querySelectorAll(".sbref-syn > *");
       Array.prototype.forEach.call(chips, function (n, i) {
         if (i > 26) return;
-        try { M.animate(n, { opacity: [0, 1], transform: ["scale(0.96)", "scale(1)"] }, { duration: 0.34, delay: 0.14 + Math.min(i, 22) * 0.014, easing: eas }); } catch (e) {}
+        try { M.animate(n, { opacity: [0, 1], transform: ["scale(0.96)", "scale(1)"] }, { type: "spring", stiffness: 320, damping: 24, delay: 0.14 + Math.min(i, 22) * 0.014 }); } catch (e) {}
       });
     });
   }

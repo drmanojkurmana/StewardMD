@@ -2920,9 +2920,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var _M = (document.body.classList.contains("mk2") && window.Motion && window.Motion.animate) ? window.Motion : null;
         var _RM = false; try { _RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
         if (_M && !_RM) {
-          var spr = _M.spring ? _M.spring({ stiffness: 260, damping: 26 }) : [0.22, 1, 0.36, 1];
           Array.prototype.forEach.call(sheet.querySelectorAll(".maik-hd, .maik-disc, .maik-body, .maik-cmp"), function (n, i) {
-            try { _M.animate(n, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { duration: 0.5, delay: i * 0.06, easing: spr }); } catch (e) {}
+            // Real Motion One spring: it belongs in the options as type:"spring". Passing spring() as
+            // `easing` throws in this vendored build, which was silently swallowing the whole open animation.
+            try { _M.animate(n, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { type: "spring", stiffness: 260, damping: 26, delay: i * 0.06 }); } catch (e) {}
           });
         }
       } catch (e) {}
