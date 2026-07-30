@@ -2195,7 +2195,10 @@
     function stemOf(ecg){
       try {
         var img = ecg && ecg.image && ecg.image.data;
-        if (typeof img === 'string' && img.indexOf('data:') === 0) return img;
+        if (typeof img === 'string' && img.indexOf('data:') === 0) return img;   // an analyzed upload
+        // The REAL teaching ECG for this lesson — so the quiz stem is a real ECG matching the
+        // question's diagnosis, not the shared synthetic strip.
+        if (ecg && (ecg.ecgImage || ecg.ecgImageUrl)) return ecg.ecgImage || ecg.ecgImageUrl;
       } catch (e) {}
       return null;
     }
