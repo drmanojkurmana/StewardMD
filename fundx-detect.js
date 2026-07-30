@@ -144,13 +144,17 @@
   function makeMediaPipe() {
     var landmarker = null, ready = false, failed = false, loading = null, prev = null;
     var CDN = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
-    var LOCAL = "/assets/vendor/mediapipe";   // vendored assets (offline); shipped by build-www.sh
+    var LOCAL = "/assets/vendor/mediapipe";   // vendored assets; present on WEB (Pages) + iOS bundle
+    var SELF = "https://stewardmd.in/assets/vendor/mediapipe";   // self-hosted (same files) — on-demand
     // Candidate asset roots, tried in order until one loads. An explicit override
-    // (SMD_FUNDX_DETECT.mediapipeAssetBase) wins outright with no fallback; otherwise prefer
-    // the vendored LOCAL copy (works offline / no CDN dependency) and fall back to the CDN.
+    // (SMD_FUNDX_DETECT.mediapipeAssetBase) wins outright with no fallback; otherwise prefer the
+    // vendored LOCAL copy (offline, when bundled), then the SELF-hosted copy on stewardmd.in (this is
+    // what makes on-demand work: the native app strips the bundled copy to save ~22 MB and loads it
+    // from here on first FundX use — cached by the WebView thereafter), then the public CDN as a last
+    // resort. FundX is flag-gated OFF by default, so most installs never fetch these at all.
     function assetBases() {
       try { if (window.SMD_FUNDX_DETECT && window.SMD_FUNDX_DETECT.mediapipeAssetBase) return [window.SMD_FUNDX_DETECT.mediapipeAssetBase]; } catch (e) {}
-      return [LOCAL, CDN];
+      return [LOCAL, SELF, CDN];
     }
     async function loadFrom(base) {
       var mod = await import(base + "/vision_bundle.mjs");

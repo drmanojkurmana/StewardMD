@@ -166,6 +166,16 @@ Prepared in-repo:
   Play's limits (per-device split downloads are smaller), but enabling R8 (`minifyEnabled true`) would
   shrink it if desired.
 
+**On-demand module assets (slim the install).** Some heavy, flag-gated module assets are stripped from
+the native bundle and fetched from `stewardmd.in` on first use (cached by the WebView; the loaders keep
+a fallback so nothing breaks). Build sequence becomes:
+```
+npm run build:www   →   npx cap sync android   →   bash scripts/strip-native-ondemand.sh   →   gradlew :app:bundleRelease
+```
+(and the same `strip-native-ondemand.sh` after `npx cap sync ios`, before the Xcode Archive). Currently
+stripped: **MediaPipe** (FundX face landmarker, ~22 MB) — FundX is flag-gated OFF, loads from
+`stewardmd.in` (then jsdelivr) on first use. Add more paths to the `ONDEMAND` list in that script.
+
 **One-command upload (automation).** After a signed build, upload to a Play track without the web UI:
 ```
 node scripts/play-upload.mjs --key /path/to/play-service-account.json --track internal \
