@@ -10,6 +10,13 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function haptic(k) { try { if (window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_haptics") && window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function toast(m) { try { if (window.toast) window.toast(m); else if (window.SMD_toast) SMD_toast(m); } catch (e) {} }
+  // Learn-ECG atlas images are served from Pages (stewardmd.in), not bundled in the native app
+  // (keeps the download lean). On native, rewrite the root-relative /assets/kardiox-learn/* path
+  // to the live origin so the <img> loads over the network (SW then caches it). Web: unchanged.
+  function kxImg(u) {
+    try { if (u && u.charAt(0) === "/" && u.indexOf("/assets/kardiox-learn/") === 0 && window.SMD_IS_NATIVE) return "https://stewardmd.in" + u; } catch (e) {}
+    return u;
+  }
 
   /* landing */
   /* Screen 02 · Module landing.
@@ -1849,7 +1856,7 @@
     function ecgStrip(vm) {
       // Prefer a real teaching ECG when the lesson provides one (vm.ecgImage = URL/data-URI);
       // otherwise fall back to the schematic rhythm-strip trace.
-      var img = vm && (vm.ecgImage || vm.ecgImageUrl);
+      var img = kxImg(vm && (vm.ecgImage || vm.ecgImageUrl));
       if (img) {
         return '<figure class="kx-ecg kx-lesson-strip kx-lesson-strip--img">' +
           '<img class="kx-lesson-ecg-img" src="' + esc(img) + '" alt="' + esc((vm.title || 'ECG') + ' — example tracing') + '" loading="lazy">' +
@@ -2198,7 +2205,7 @@
         if (typeof img === 'string' && img.indexOf('data:') === 0) return img;   // an analyzed upload
         // The REAL teaching ECG for this lesson — so the quiz stem is a real ECG matching the
         // question's diagnosis, not the shared synthetic strip.
-        if (ecg && (ecg.ecgImage || ecg.ecgImageUrl)) return ecg.ecgImage || ecg.ecgImageUrl;
+        if (ecg && (ecg.ecgImage || ecg.ecgImageUrl)) return kxImg(ecg.ecgImage || ecg.ecgImageUrl);
       } catch (e) {}
       return null;
     }

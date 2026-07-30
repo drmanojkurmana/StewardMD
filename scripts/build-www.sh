@@ -53,7 +53,10 @@ done
 # renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
 if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
 # Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)
-if [ -d assets/kardiox-learn ]; then mkdir -p "$WWW/assets/kardiox-learn"; cp assets/kardiox-learn/* "$WWW/assets/kardiox-learn/" 2>/dev/null || true; fi
+# Learn-ECG atlas images (~182 MB, 1,007 lessons) are intentionally NOT bundled — that would
+# bloat the native download. They are served on-demand from Pages (stewardmd.in/assets/kardiox-learn);
+# kardiox-screens.js rewrites /assets/kardiox-learn/* to the live origin when running natively.
+# (To bundle them for full offline use instead, restore the cp here.)
 
 # ── 4a-bis. Vendored third-party assets (e.g. FundX AI's local MediaPipe wasm/model
 # under assets/vendor/mediapipe/). Copied recursively so a vendored copy actually ships
