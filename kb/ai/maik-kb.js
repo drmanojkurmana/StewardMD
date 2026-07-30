@@ -80,7 +80,9 @@
     gdm: "gestational diabetes mellitus", di: "diabetes insipidus", afib: "atrial fibrillation", cad: "coronary artery disease",
     ihd: "ischemic heart disease", esrd: "end stage renal disease", crf: "chronic renal failure", arf: "acute renal failure",
     lada: "latent autoimmune diabetes in adults", mody: "maturity onset diabetes of the young", osa: "obstructive sleep apnea",
-    pcos: "polycystic ovary syndrome", cap: "community acquired pneumonia"
+    pcos: "polycystic ovary syndrome", cap: "community acquired pneumonia",
+    hfref: "heart failure with reduced ejection fraction", hfpef: "heart failure with preserved ejection fraction", hfmref: "heart failure",
+    adhf: "acute decompensated heart failure", ckd5: "chronic kidney disease", asthma: "asthma"
   };
   function expandAbbrev(q) {
     return String(q || "").replace(/[A-Za-z][A-Za-z0-9]{1,6}/g, function (w) {
@@ -169,7 +171,8 @@
     if (/\bdos(e|ing|age)\b/.test(n)) { var m = n.match(/\b(?:in|for)\s+([a-z][a-z0-9 \-]{2,})$/); if (m) return m[1].trim(); }   // "dose of DRUG in DISEASE" → DISEASE
     var core = n.replace(LEADIN_RE, "");
     core = core.replace(/\s+\b(in|for|during|with|among)\b\s+.*$/, "").trim();   // drop trailing context ("diabetes in pregnancy" → "diabetes")
-    core = core.replace(/\s*\b(rx|tx|mgmt|management|treatment|ddx|dose|dosing|dosage|workup|work up|ix|investigation|investigations|prognosis|features|symptoms|overview)\s*$/i, "").trim();   // trailing intent word ("diabetes rx" → "diabetes")
+    core = core.replace(/\s*\b(rx|tx|mx|mgmt|management|treatment|ddx|dx|dose|dosing|dosage|workup|work[- ]?up|w[-\/ ]?u|ix|investigation|investigations|prognosis|features|symptoms|overview|pep|ppx|prophylaxis|protocol|meds?|medications?|exac|exacerbation|staging|monitoring|complications?|abx|antibiotics?|empiric)\s*$/i, "").trim();   // trailing intent word ("diabetes rx" / "copd exac" → the disease)
+    core = core.replace(/^(rx|tx|mx|dx|ddx|mgmt|meds?|prophylaxis|ppx|pep|protocol|workup|w[-\/ ]?u|dose|dosing|dosage|ix)\s+/i, "").trim();   // LEADING intent word ("rx malaria" → "malaria")
     return core;
   }
   // Canonical disease match: prefer an EXACT KB name match, else a "<phrase> <qualifier>" entry
@@ -515,6 +518,19 @@
     } catch (e) { return null; }
   }
 
+  // Scope-firewall widening helper (browser): is `term` a KNOWN disease/concept by EXACT or CANONICAL
+  // name match? Abbreviations expanded + leading/trailing clinical modifiers stripped by diseasePhrase.
+  // Deliberately NO fuzzy/substring tier — the intent firewall must not re-open the "write"->"Writer's
+  // cramp" leak. Bare 2-letter abbreviations (ms/pe/ra) are excluded (handled by never-guess, not scope).
+  function isKnownConcept(term) {
+    try {
+      var t = String(term == null ? "" : term).toLowerCase().replace(/[?.!,]+$/g, "").trim();
+      if (!t || t.length < 3) return false;
+      var b = bestNameMatch(t);
+      return !!(b && (b.kind === "exact" || b.kind === "canonical"));
+    } catch (e) { return false; }
+  }
+
   var API = {
     compose: compose,
     clinicalDialogue: clinicalDialogue,
@@ -522,6 +538,7 @@
     isComplex: isComplex,
     expandAbbrev: expandAbbrev,
     resolveTarget: resolveTarget,
+    isKnownConcept: isKnownConcept,
     _version: "v2.0"
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;   // node tests

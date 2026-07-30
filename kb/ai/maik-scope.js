@@ -186,6 +186,12 @@
     return false;
   }
 
+  // Clinical shorthand MODIFIERS — a doctor's "rx X / X tx / X meds / X ppx / X exac" IS a clinical
+  // query. Used TWO-FACTOR only (modifier + a medical/known token), never standalone: "rx apple" stays
+  // blocked while "rx malaria" / "mi rx" / "htn meds" pass.
+  var MODIFIER = /\b(rx|tx|mx|ddx|mgmt|meds?|medications?|exac|exacerbation|pep|ppx|prophylax\w*|protocol|workup|work-up|w[-\/]u|dose|dosing|dosage|abx|antibiotics?|empiric|screening|monitoring|complications?|staging)\b/;
+  function expandAbbrevSafe(s) { try { return (typeof window !== "undefined" && window.MaiKKB && window.MaiKKB.expandAbbrev) ? window.MaiKKB.expandAbbrev(s) : s; } catch (e) { return s; } }
+
   // ── User-configurable extra terms (no code change / no rebuild). ────────────────────────────────
   var extraAllow = null, extraBlock = null;
   function configure(cfg) {
@@ -205,6 +211,15 @@
     if (LAY_FIRST.test(s) && LAY_ADVICE.test(s) && !PROFESSIONAL.test(s)) return { medical: false, category: "lay" };
 
     if ((extraAllow && extraAllow.test(s)) || MEDICAL.test(s) || lexiconMedical(s)) return { medical: true, category: "medical" };
+
+    // Runtime widening (browser): a clinical MODIFIER paired with a medical/KB-known token — TWO-FACTOR
+    // so "MS Dhoni"/"PE teacher" (no modifier) stay blocked while "mi rx"/"htn meds"/"rx malaria" pass.
+    // (The abbrev-expanded morphology is checked ONLY behind the modifier gate, never standalone, so
+    // ms->"multiple sclerosis" / pe->"...embolism" can't leak on their own.)
+    if (MODIFIER.test(s)) {
+      var xp = expandAbbrevSafe(s);
+      if (lexiconMedical(s) || (xp !== s && (lexiconMedical(xp) || MEDICAL.test(xp)))) return { medical: true, category: "medical" };
+    }
 
     if (HARD_NON_MEDICAL.test(s) || CODE_VERB_OBJ.test(s) || INTEGRATE.test(s)) return { medical: false, category: "code" };
     if (CREATIVE.test(s)) return { medical: false, category: "creative" };
