@@ -152,7 +152,7 @@
       urgentFindings: ((assessment && assessment.safetyFlags) || []).filter(function (s) { return /emergency|urgent/.test(s); }),
       safetyFlags: assessment ? assessment.safetyFlags : [],
       evidence: assessment ? assessment.evidence : [],
-      disclaimer: (assessment && assessment.disclaimer) || "Advisory only. Not a diagnosis. A qualified clinician must review all findings.",
+      disclaimer: (assessment && assessment.disclaimer) || "For educational purposes only. Advisory only, not a diagnosis. A qualified clinician must review all findings.",
       clinicianReview: record.clinicianReview || null
     };
   }

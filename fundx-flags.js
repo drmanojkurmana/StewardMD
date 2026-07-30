@@ -13,7 +13,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_fundx:                   { type: "bool", def: false,      query: "fundx",      desc: "FundX master flag (home tile + module)" },
+    smd_fundx:                   { type: "bool", def: true,      query: "fundx",      desc: "FundX master flag (home tile + module)" },
     smd_fundx_depth:             { type: "bool", def: false,      query: "fundxdepth", desc: "Native depth fusion (ARCore / ARKit + LiDAR)" },
     smd_fundx_gpu_preview:       { type: "bool", def: false,      query: "fundxgpu",   desc: "Full-res GPU camera preview" },
     smd_fundx_dev:               { type: "bool", def: false,      query: "fundxdev",   desc: "Developer mode overlay + telemetry HUD" },

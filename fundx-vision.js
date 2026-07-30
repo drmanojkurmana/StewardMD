@@ -498,7 +498,7 @@
         provider: MockRetinaModel.provider,
         model_version: MockRetinaModel.modelVersion,
         is_mock: true,
-        disclaimer: "Simulated detection preview from a mock model. Not a diagnosis. For workflow/demo only."
+        disclaimer: "For educational purposes only. Simulated detection preview from a mock model — not a diagnosis."
       };
       return findings;
     }
