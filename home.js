@@ -43,6 +43,9 @@
       else if (/[?&]mkui=0\b/.test(q)) { try { localStorage.removeItem(k); } catch (e) {} }
       var on = false; try { on = localStorage.getItem(k) === "1"; } catch (e) {}
       if (!on) return;
+      // Motion One springs are part of the mk2 look — lazy-load the vendored lib so
+      // window.Motion is ready before the MaiK sheet opens (index.html does not load it).
+      try { if (!window.Motion && !document.getElementById("mk-motion-js")) { var ms = document.createElement("script"); ms.id = "mk-motion-js"; ms.src = "/vendor/motion/motion.js"; ms.defer = true; (document.head || document.documentElement).appendChild(ms); } } catch (e) {}
       var apply = function () { if (document.body) document.body.classList.add("mk2"); };
       if (document.body) apply();
       else document.addEventListener("DOMContentLoaded", apply);
@@ -2509,6 +2512,8 @@
     chevron: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
     mic: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
     send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
+    export: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></svg>',
+    copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
     cAssess: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>',
     cKnow: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
     cDrug: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5 3 21"/><path d="M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/></svg>'
@@ -2522,6 +2527,7 @@
         '<button class="maik-hd-btn" id="maikMenu" type="button" title="Conversations" aria-label="Conversations">' + MK.menu + '</button>' +
         '<div class="maik-logo-wrap"><div class="maik-logo-glow"></div><img class="maik-logo" src="' + MK_LOGO() + '" alt="MaiK"></div>' +
         '<span style="flex:1"></span>' +
+        '<button class="maik-hd-btn" id="maikExport" type="button" title="Export conversation" aria-label="Export conversation">' + MK.export + '</button>' +
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div>' +
@@ -2722,6 +2728,13 @@ body.dark .maik-eng{box-shadow:0 10px 34px rgba(0,0,0,.55)}
 .maik-eng-ic{color:var(--mk-teal);flex:0 0 auto;margin-top:1px;display:flex}
 .maik-eng-tt{display:block;font:700 12.5px 'Inter';color:var(--mk-ink)}
 .maik-eng-sb{display:block;font:500 10.5px/1.4 'Inter';color:var(--mk-mut);margin-top:1px}
+/* Export-conversation menu (header) */
+.maik-hd{position:relative}
+.maik-exp{position:absolute;top:48px;right:12px;z-index:8;width:212px;background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:14px;box-shadow:0 12px 34px rgba(15,23,42,.2);padding:6px}
+body.dark .maik-exp{box-shadow:0 12px 34px rgba(0,0,0,.55)}
+.maik-exp button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:10px;padding:10px;font:600 13px 'Inter';color:var(--mk-ink);cursor:pointer}
+.maik-exp button:hover{background:var(--mk-soft)}
+.maik-exp .ic{color:var(--mk-teal);display:flex;flex:0 0 auto}
 .maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
 .maik-ta::placeholder{color:var(--mk-faint)}
 .maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}
@@ -2881,7 +2894,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
-    requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
+    requestAnimationFrame(function () {
+      scrim.classList.add("on"); sheet.classList.add("on");
+      // Motion One spring: stagger the sheet content in on open (mk2 + Motion present, reduced-motion respected)
+      try {
+        var _M = (document.body.classList.contains("mk2") && window.Motion && window.Motion.animate) ? window.Motion : null;
+        var _RM = false; try { _RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        if (_M && !_RM) {
+          var spr = _M.spring ? _M.spring({ stiffness: 260, damping: 26 }) : [0.22, 1, 0.36, 1];
+          Array.prototype.forEach.call(sheet.querySelectorAll(".maik-hd, .maik-disc, .maik-body, .maik-cmp"), function (n, i) {
+            try { _M.animate(n, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { duration: 0.5, delay: i * 0.06, easing: spr }); } catch (e) {}
+          });
+        }
+      } catch (e) {}
+    });
     // Warm-up (fire-and-forget, zero tokens): kick off the KB load + wake the backend Worker NOW, while
     // the clinician is still reading/typing, so the FIRST question isn't stuck behind a cold start.
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
@@ -3570,6 +3596,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      try { scAbort(); } catch (e) {}   // sending stops any active dictation (red off) + keeps the box clear
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
@@ -3602,6 +3629,62 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
+    // ── Export conversation (Copy / Text / PDF) ───────────────────────────
+    function maikTranscript() {
+      var out = [], parts = [];
+      var nodes = body ? body.querySelectorAll(".maik-b") : [];
+      Array.prototype.forEach.call(nodes, function (n) {
+        if (n.querySelector && n.querySelector(".maik-thinking")) return;         // skip an in-flight bubble
+        var you = n.classList.contains("you"), who = you ? "You" : "MaiK", el = n;
+        if (!you) { try { el = n.cloneNode(true); Array.prototype.forEach.call(el.querySelectorAll(".maik-attr,.maik-refine,.maik-followups,.maik-tools"), function (x) { x.remove(); }); } catch (e) { el = n; } }
+        var t = (el.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+        if (!t) return;
+        out.push(who + ": " + t);
+        parts.push('<div class="q">' + who + '</div><div class="a">' + maikEscH(t) + '</div>');
+      });
+      var dt = ""; try { dt = new Date().toLocaleString(); } catch (e) {}
+      var text = "StewardMD — MaiK conversation\n" + dt + "\n\n" + out.join("\n\n") + "\n\nGenerated by StewardMD MaiK. AI-generated — verify independently.";
+      var html = '<h1>StewardMD — MaiK conversation</h1><div class="dt">' + maikEscH(dt) + '</div>' + parts.join("") + '<div class="ft">Generated by StewardMD MaiK. AI-generated — verify independently.</div>';
+      return { text: text, html: html, empty: !out.length };
+    }
+    function maikExpClose() { var p = sheet.querySelector("#maikExpMenu"); if (p) p.remove(); document.removeEventListener("pointerdown", maikExpOutside, true); }
+    function maikExpOutside(ev) { var p = sheet.querySelector("#maikExpMenu"), b = sheet.querySelector("#maikExport"); if (p && !p.contains(ev.target) && ev.target !== b && !(b && b.contains(ev.target))) maikExpClose(); }
+    function maikCopyText(text) {
+      try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function () { toast("Copied conversation."); }, function () { maikCopyFallback(text); }); return; } } catch (e) {}
+      maikCopyFallback(text);
+    }
+    function maikCopyFallback(text) { try { var ta = document.createElement("textarea"); ta.value = text; ta.style.cssText = "position:fixed;opacity:0;left:-9999px"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); toast("Copied conversation."); } catch (e) { toast("Couldn’t export — please try again."); } }
+    function maikExportText(tr) {
+      try { if (navigator.share) { navigator.share({ title: "MaiK conversation", text: tr.text }).catch(function () {}); return; } } catch (e) {}
+      try { var blob = new Blob([tr.text], { type: "text/plain" }); var url = URL.createObjectURL(blob); var a = document.createElement("a"); a.href = url; a.download = "maik-conversation.txt"; document.body.appendChild(a); a.click(); setTimeout(function () { try { URL.revokeObjectURL(url); a.remove(); } catch (e) {} }, 800); toast("Saved conversation."); } catch (e) { maikCopyText(tr.text); }
+    }
+    function maikExportPDF(tr) {
+      try {
+        var w = window.open("", "_blank");
+        if (!w) { toast("Allow pop-ups to save PDF, or use Share."); maikExportText(tr); return; }
+        w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>MaiK conversation</title><style>body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;color:#0b1220;padding:32px;max-width:720px;margin:0 auto}h1{font-size:18px;margin:0 0 2px}.dt{color:#64748b;font-size:12px;margin-bottom:18px}.q{font-weight:700;margin:16px 0 2px;color:#0e6e63}.a{white-space:pre-wrap;margin:0}.ft{margin-top:26px;border-top:1px solid #e6ebf0;padding-top:8px;color:#64748b;font-size:11px}</style></head><body>' + tr.html + '</body></html>');
+        w.document.close();
+        setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350);
+      } catch (e) { maikExportText(tr); }
+    }
+    function maikToggleExport() {
+      if (sheet.querySelector("#maikExpMenu")) { maikExpClose(); return; }
+      var tr = maikTranscript();
+      if (tr.empty) { toast("Nothing to export yet."); return; }
+      var pop = document.createElement("div"); pop.className = "maik-exp"; pop.id = "maikExpMenu";
+      pop.innerHTML =
+        '<button type="button" data-x="copy"><span class="ic">' + MK.copy + '</span>Copy text</button>' +
+        '<button type="button" data-x="text"><span class="ic">' + MK.export + '</span>Share / save (.txt)</button>' +
+        '<button type="button" data-x="pdf"><span class="ic">' + MK.book + '</span>Save as PDF</button>';
+      (sheet.querySelector(".maik-hd") || sheet).appendChild(pop);
+      pop.addEventListener("click", function (ev) {
+        var b = ev.target && ev.target.closest ? ev.target.closest("button[data-x]") : null; if (!b) return;
+        var x = b.getAttribute("data-x"); maikExpClose();
+        if (x === "copy") maikCopyText(tr.text); else if (x === "pdf") maikExportPDF(tr); else maikExportText(tr);
+      });
+      setTimeout(function () { document.addEventListener("pointerdown", maikExpOutside, true); }, 0);
+    }
+    var _expBtn = sheet.querySelector("#maikExport"); if (_expBtn) _expBtn.addEventListener("click", function (ev) { ev.stopPropagation(); maikToggleExport(); });
     // ── Conversation sidebar (on-device history — a privacy feature) ──
     function maikSideEls() { return { wrap: sheet.querySelector("#maikSideWrap"), list: sheet.querySelector("#maikSideList"), acct: sheet.querySelector("#maikSideAcct"), search: sheet.querySelector("#maikSideSearch") }; }
     function maikRenderSide(filter) {
@@ -3693,13 +3776,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // ?scribeinline=0 (flag smd_maik_inline_mic) restores the old dialog.
     var INLINE_MIC = scribeInlineOn();
     var EKEY = "smd_maik_scribe_engine";
-    var recActive = null, recStopping = false, recBase = "", lpTimer = null, longPressed = false;
+    var recActive = null, recStopping = false, recSuppress = false, recBase = "", lpTimer = null, longPressed = false;
     function scGetEngine() { try { var v = localStorage.getItem(EKEY); return (v === "fast" || v === "clinical") ? v : null; } catch (e) { return null; } }
     function scSetEngine(v) { try { localStorage.setItem(EKEY, v); } catch (e) {} }
     function scClinicalAvail() { try { return !!(window.SMD_VOICE && SMD_VOICE.available && SMD_VOICE.available().whisper); } catch (e) { return false; } }
     function scMicState(s) { if (!micBtn) return; micBtn.classList.toggle("live", s === "live"); micBtn.classList.toggle("prep", s === "prep"); micBtn.setAttribute("aria-label", s === "live" ? "Stop dictation" : "Dictate to MaiK"); }
-    function scWrite(t) { if (t == null) return; var s = String(t).trim(); qEl.value = recBase ? (recBase + " " + s) : s; autosizeQ(); refreshExtract(); }
+    function scWrite(t) { if (recSuppress || t == null) return; var s = String(t).trim(); qEl.value = recBase ? (recBase + " " + s) : s; autosizeQ(); refreshExtract(); }
     function scEnd(focusBox) { recActive = null; recStopping = false; scMicState("idle"); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
+    // Hard stop used by send(): stop recording immediately (red off) and SUPPRESS any trailing
+    // partial/final so the just-cleared composer box stays clear. Reset on the next scStart.
+    function scAbort() { recSuppress = true; recActive = null; recStopping = false; try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} scMicState("idle"); try { if (micBtn) micBtn.title = "Dictate"; } catch (e) {} }
     function scErr(err) {
       if (err === "clinical-unavailable") { toast("Clinical dictation isn’t ready yet — using Fast."); scSetEngine("fast"); setTimeout(function () { scStart("fast"); }, 0); return; }
       scEnd(false);
@@ -3709,7 +3795,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function scStart(engine) {
       if (!(window.SMD_VOICE && SMD_VOICE.listen)) { openScribeDialog(); return; }
-      recBase = (qEl.value || "").trim(); recStopping = false;
+      recBase = (qEl.value || "").trim(); recStopping = false; recSuppress = false;
       try { qEl.blur(); } catch (e) {}   // drop the keyboard so it can't steal the mic (the prior inline-capture bug)
       scMicState("prep");
       recActive = SMD_VOICE.listen({

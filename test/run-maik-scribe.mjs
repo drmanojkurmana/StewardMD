@@ -89,7 +89,30 @@ try {
   ok((await boxVal() || "").indexOf("fever and cough") >= 0, "auto-dictation transcript lands in the box");
   await tapMic(); await sleep(150); // stop cleanly
 
-  // ── 5: kill-switch ?scribeinline=0 → legacy dialog, never inline ──────────
+  // ── 6: sending during dictation stops recording + keeps the box cleared ───
+  await ev(`try{localStorage.setItem("smd_maik_scribe_engine","fast");}catch(e){}; return 1;`);
+  await openMaik();
+  await tapMic(); await sleep(220);
+  ok(await micLive() === true, "recording active before send");
+  await ev(`var s=document.getElementById("maikSend"); if(s) s.click(); return 1;`); await sleep(350);
+  ok((await boxVal() || "") === "", "send clears the composer box");
+  ok(await micLive() === false, "send stops recording (red off)");
+  ok(await ev(`return !!document.querySelector('#maikBody .maik-b.you')`) === true, "the dictated text was sent as a question");
+
+  // ── 7: export-conversation menu (Copy / Text / PDF) ───────────────────────
+  await ev(`var e=document.getElementById("maikExport"); if(e) e.click(); return 1;`); await sleep(150);
+  ok(await ev(`return !!document.getElementById("maikExpMenu")`) === true, "export menu opens when a conversation exists");
+  ok(await ev(`return document.querySelectorAll('#maikExpMenu button[data-x]').length`) === 3, "export offers Copy / Text / PDF");
+  await ev(`var p=document.getElementById("maikExpMenu"); if(p) p.remove(); return 1;`);
+
+  // ── 8: mk2 + Motion One springs — sheet still opens cleanly ───────────────
+  await ev(`document.body.classList.add('mk2'); if(!window.Motion && !document.getElementById('mk-motion-js')){var s=document.createElement('script');s.id='mk-motion-js';s.src='/vendor/motion/motion.js';document.head.appendChild(s);} return 1;`);
+  let motionOk = false; for (let i = 0; i < 25; i++) { await sleep(200); if (await ev(`return !!(window.Motion && window.Motion.animate)`) === true) { motionOk = true; break; } }
+  ok(motionOk, "Motion One lib loads (vendor/motion/motion.js)");
+  await openMaik();
+  ok(await micPresent() === true, "MaiK sheet opens cleanly with mk2 Motion springs (no break)");
+
+  // ── 9: kill-switch ?scribeinline=0 → legacy dialog, never inline ──────────
   await ev(`try{localStorage.setItem("smd_maik_inline_mic","0");}catch(e){}; window.__v.dialogs=0; return 1;`);
   await openMaik();
   await tapMic(); await sleep(200);
