@@ -54,6 +54,12 @@
     ca: ["Cancer / Carcinoma", "Cardiac Arrest"],
     tb: null   // sentinel: NOT ambiguous (tuberculosis) — expandAbbrev handles it
   };
+  // Data-driven extension: kb/ai/ambig-abbrev.js (window.MAIK_AMBIG) adds more ambiguous acronyms
+  // (LE, PD, CF...) without touching this logic. Curated entries above always win.
+  try {
+    var _EA = (typeof window !== "undefined" && window.MAIK_AMBIG) || (typeof globalThis !== "undefined" && globalThis.MAIK_AMBIG) || (typeof MAIK_AMBIG !== "undefined" ? MAIK_AMBIG : null);
+    if (_EA) for (var _k in _EA) if (!(_k in AMBIG)) AMBIG[_k] = _EA[_k];
+  } catch (e) {}
   // words that carry intent/qualifiers but do NOT disambiguate a bare acronym
   var STOP = new Set("the a an of for in to is are what whats how do i you me tell explain about treatment treat manage management dose dosing dosage cause causes differential differentials symptom symptoms feature features sign signs investigation investigations workup ix rx mx prognosis pathophysiology overview definition define approach red flags flag severity monitoring prevention follow up followup guideline protocol please kindly ok okay".split(" "));
 
