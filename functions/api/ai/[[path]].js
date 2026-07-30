@@ -723,15 +723,15 @@ async function pubmedGuidelines(env, topic, ptypeFilter) {
   const cred = "&tool=stewardmd&email=" + encodeURIComponent(contact);
   const filt = ptypeFilter || "(Practice Guideline[ptyp] OR Guideline[ptyp] OR systematic review[ptyp] OR Review[ptyp])";
   const term = encodeURIComponent(topic + " AND " + filt + ' AND English[lang] AND ("2013"[dp] : "3000"[dp])');
-  const es = await fetch(base + "esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=relevance" + cred + "&term=" + term, { cf: { cacheTtl: 86400 } });
-  if (!es.ok) throw new Error("esearch " + es.status);
-  const ej = await es.json();
+  const es = await fetchJsonWithTimeout(base + "esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=relevance" + cred + "&term=" + term, { cf: { cacheTtl: 86400 } }, 12000);
+  if (es.status >= 400) throw new Error("esearch " + es.status);
+  const ej = es.data;
   if (ej && ej.esearchresult && ej.esearchresult.ERROR) throw new Error("esearch-error");
   const ids = ((ej && ej.esearchresult && ej.esearchresult.idlist) || []).slice(0, 6);
   if (!ids.length) return [];
-  const su = await fetch(base + "esummary.fcgi?db=pubmed&retmode=json" + cred + "&id=" + ids.join(","), { cf: { cacheTtl: 86400 } });
-  if (!su.ok) throw new Error("esummary " + su.status);
-  const sj = await su.json();
+  const su = await fetchJsonWithTimeout(base + "esummary.fcgi?db=pubmed&retmode=json" + cred + "&id=" + ids.join(","), { cf: { cacheTtl: 86400 } }, 12000);
+  if (su.status >= 400) throw new Error("esummary " + su.status);
+  const sj = su.data;
   const r = (sj && sj.result) || {};
   const results = ids.map(function (id) {
     const x = r[id]; if (!x || !x.title) return null;
@@ -1195,7 +1195,9 @@ export async function onRequest(context) {
           const who = await identify(request, env);
           const mq = await gateAndCount(env, store, "research", who.id, who.guest ? "guest" : "unknown", Date.now());
           if (!mq.ok) {
-            try { await recordUsage(gate, { inTok: 0, outTok: 0, status: "blocked" }); } catch (e) {}
+            // Over-cap denial must NOT burn a general MaiK slot (no AI work done, and recordUsage's
+            // general counter would decrement the shared 60/day allowance). gateAndCount already
+            // recorded the research-bucket attempt.
             return json({ text: null, mode: "evidence-review", over: true, sources: [], message: "You've used your 2 evidence reviews today. Resets at midnight.", usage: { module: "research", used: mq.used != null ? mq.used : 2, limit: mq.limit != null ? mq.limit : 2 } });
           }
           usedNow = (mq.used || 0) + 1; capNow = mq.limit != null ? mq.limit : 2;
