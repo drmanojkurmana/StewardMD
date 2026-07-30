@@ -4,11 +4,16 @@ Multi-layout renders + HEAVY photo-realistic augmentation, EfficientNet-B3, temp
 and a REAL operating point: per-class sensitivity/specificity/PPV/NPV/F1 (threshold chosen on VAL,
 measured on TEST) on CLEAN and photo-DISTORTED held-out. Saves ckpt {backbone,classes,state_dict,
 temperature,thresholds} + metrics_v4.json, and compares head-to-head vs the current live v2."""
-import os, csv, io, json, argparse, numpy as np, torch, torch.nn as nn, timm
+import os, sys, csv, io, json, argparse, numpy as np, torch, torch.nn as nn, timm
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as T
 from sklearn.metrics import roc_auc_score, roc_curve
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # package root
+try:
+    from layout_crop import crop_ecg   # isolate/deskew the waveform region before resize
+except Exception:
+    def crop_ecg(x): return x
 
 # ---------- photo-realistic lighting sim (applied on PIL before tensor) ----------
 def light_sim(img, rng):
@@ -26,7 +31,7 @@ def light_sim(img, rng):
 class ECGImg(Dataset):
     def __init__(self, rows, img_dir, classes, train, strong=True):
         self.rows=rows; self.dir=img_dir; self.classes=classes; self.train=train; self.strong=strong
-        aug=[T.Resize((320,320))]
+        aug=[T.Lambda(crop_ecg), T.Resize((320,320))]
         if train and strong:
             aug += [T.RandomApply([T.RandomAffine(degrees=12, translate=(0.03,0.03), scale=(0.9,1.1), shear=7)],0.85),
                     T.RandomPerspective(0.28, 0.6),
@@ -51,11 +56,11 @@ class ECGImg(Dataset):
 
 # a fixed heavy-distortion transform for the sim-to-real EVAL (deterministic per seed)
 def distort_eval_tf():
-    return T.Compose([T.Resize((360,360)),
+    return T.Compose([T.Lambda(crop_ecg), T.Resize((360,360)),
         T.RandomPerspective(0.3,1.0), T.RandomAffine(degrees=10, translate=(0.04,0.04), scale=(0.9,1.05), shear=5),
         T.ColorJitter(0.4,0.4,0.3), T.GaussianBlur(3,(0.5,2.0)), T.Resize((320,320)),
         T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
-CLEAN_TF=T.Compose([T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
+CLEAN_TF=T.Compose([T.Lambda(crop_ecg), T.Resize((320,320)), T.ToTensor(), T.Normalize([0.5]*3,[0.5]*3)])
 
 def load(labels_csv, img_dir):
     classes=csv.DictReader(open(labels_csv)).fieldnames[4:]
