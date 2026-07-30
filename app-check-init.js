@@ -26,6 +26,17 @@
   // under Monitor). If web enforcement is ever wanted, register the web app + a reCAPTCHA provider.
   if (!isNative()) return;
 
+  // DISABLED (2026-07-30): this iOS build's app is NOT registered in the Firebase App Check console,
+  // so the DeviceCheck token exchange fails ("App not registered", HTTP 400 FAILED_PRECONDITION) and
+  // the SDK retry-storms ("Too many attempts"), dragging Firebase/Firestore traffic into a loop that
+  // saturates the WebView bridge and STARVES the /api/ai (MaiK/scan) calls — the exact account-agnostic
+  // slowness confirmed on-device (pausing Firestore made a stuck scan finish in 8.4s). App Check is
+  // UNENFORCED (Monitor; nothing server-side checks it — verified), so it gives ZERO benefit today
+  // while causing the storm. Re-enable (APPCHECK_ON=true) only AFTER registering this app in the
+  // App Check console and confirming verified tokens on the dashboard.
+  var APPCHECK_ON = false;
+  if (!APPCHECK_ON) { try { console.log("[app-check] disabled — unregistered app was retry-storming; unenforced, so skipped"); } catch (e) {} return; }
+
   function plugin() {
     try { return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FirebaseAppCheck) || null; }
     catch (e) { return null; }

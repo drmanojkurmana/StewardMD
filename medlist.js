@@ -1078,6 +1078,15 @@
     // AbortController, so a plain setTimeout race is the reliable guard — see reasoning.js.)
     var settled = false;
     var _t0 = Date.now();
+    // SPEED: a signed-in session's Firestore/Firebase traffic saturates the native bridge and STARVES
+    // this cloud OCR call (confirmed on-device: with Firestore paused a stuck 45s scan finished in
+    // 8.4s; guest is fast because it has no Firestore). Pause Firestore until this scan settles, then
+    // resume (+50s safety timer so it is never left offline). The OCR + /api/ai/vision call don't use
+    // Firestore, so the result is unaffected — only the thread-starving sync is removed.
+    var _fsResumed = false;
+    function _fsResume() { if (_fsResumed) return; _fsResumed = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} }
+    var _fsPause = Promise.resolve();
+    try { if (window.SMD_DB && SMD_DB.disableNetwork) { _fsPause = Promise.resolve(SMD_DB.disableNetwork()).catch(function () {}); setTimeout(_fsResume, 50000); } } catch (e) {}
     // Diagnostics: append a compact trace (elapsed + last scan stage) to any error/timeout so a
     // device that struggles can be pinpointed even without a tethered Mac. window.__SMD_SCAN_DIAG
     // is set by SMD_AI.readImage; also mirrored to the console with the [SMD-SCAN] prefix.
@@ -1089,16 +1098,16 @@
     }
     function done(msg, err) { scanProgressDone(); scanProgress(msg + diagLine(), err); try { console.info("[SMD-SCAN] result", msg, window.__SMD_SCAN_DIAG || {}); } catch (e) {} }
     var timer = setTimeout(function () {
-      if (settled) return; settled = true;
+      if (settled) return; settled = true; _fsResume();
       done("Reading the image timed out. Try a clearer, well-lit photo, or enter medicines manually.", true);
     }, 45000);
-    Promise.resolve().then(function () { return fn(dataUrl); }).then(function (rows) {
-      if (settled) return; settled = true; clearTimeout(timer);
+    _fsPause.then(function () { return fn(dataUrl); }).then(function (rows) {
+      if (settled) return; settled = true; clearTimeout(timer); _fsResume();
       scanProgressDone();
       if (!rows || !rows.length) { done("No medicines could be read confidently. Please enter them manually.", true); return; }
       _openScanReview(rows, dataUrl);
     }).catch(function () {
-      if (settled) return; settled = true; clearTimeout(timer);
+      if (settled) return; settled = true; clearTimeout(timer); _fsResume();
       done("Could not read the image. Enter medicines manually.", true);
     });
   }
