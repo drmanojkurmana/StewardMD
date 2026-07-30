@@ -63,6 +63,17 @@
     } catch (e) { return true; }
   }
 
+  // MaiK Clinical Decision Engine (window.MaiKBrain, Part 1/2). DEFAULT OFF — flag-off is
+  // byte-for-byte today's MaiK. Enable with ?brain=1 (persists), disable with ?brain=0.
+  function brainOn() {
+    try {
+      var q = location.search || "";
+      if (/[?&]brain=1\b/.test(q)) localStorage.setItem("smd_maik_brain", "1");
+      else if (/[?&]brain=0\b/.test(q)) localStorage.removeItem("smd_maik_brain");
+      return localStorage.getItem("smd_maik_brain") === "1";
+    } catch (e) { return false; }
+  }
+
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
@@ -3368,6 +3379,28 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         _maikRefuse(think);
         return;
+      }
+      // ── MaiK Brain (Part 1) — deterministic NEVER-GUESS gate (flag smd_maik_brain, default
+      // OFF). When a query is genuinely ambiguous (an ambiguous 2-letter acronym like "MS"/"DM",
+      // or an under-specified broad concept), ASK instead of fuzzy-matching one condition — BEFORE
+      // grounding/router/Gemini, so it costs nothing. Answer/overview fall through unchanged.
+      if (!active && brainOn() && window.MaiKBrain && MaiKBrain.resolve) {
+        var _br = null;
+        try { _br = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, intent: (_maikTopic && _maikTopic.intent) || null }); } catch (e) {}
+        if (_br && _br.decision === "ask" && _br.ambiguity && _br.ambiguity.options && _br.ambiguity.options.length) {
+          try { console.debug("[MaiK brain] never-guess: disambiguating (" + _br.ambiguity.kind + ")"); } catch (e) {}
+          _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+          think.innerHTML = '<div class="maik-welcome">' + maikEscH(_br.ambiguity.kind === "lexical" ? "That abbreviation has more than one meaning — which did you mean?" : "Which did you mean?") + '</div>';
+          var _w = document.createElement("div"); _w.className = "maik-fus";
+          _br.ambiguity.options.slice(0, 5).forEach(function (o) {
+            var lbl = (typeof o === "string") ? o : (o.label || o.name || o.value);
+            var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl;
+            b.addEventListener("click", function () { try { qEl.value = lbl; } catch (e) {} send(); });
+            _w.appendChild(b);
+          });
+          think.appendChild(_w); try { scroll(); } catch (e) {}
+          return;
+        }
       }
       // Watchdog, NOT a fixed total ceiling. On web (real SSE) onDelta resets it on every streamed token so
       // a long but ACTIVELY-STREAMING answer is never killed. On native there is no SSE (CapacitorHttp
