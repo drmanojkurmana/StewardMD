@@ -101,6 +101,19 @@ export async function onRequest(context) {
     return new Response(JSON.stringify(ASSETLINKS), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
   }
 
+  // Internal source / docs / native-project files must NEVER be publicly served — Pages serves the
+  // repo root, so without this the runbook, CLAUDE.md, the vault, and the ios/android source would be
+  // reachable at stewardmd.in/…  . Block on EVERY host (prod, preview, pages.dev) with a 404. The app
+  // only ever loads web assets (js/css/html/json/kb/assets/vendor/sw.js), never any of these.
+  {
+    const p = url.pathname;
+    const INTERNAL_DIR = /^\/(docs|vault|tests?|scripts|ios|android|worker|local-plugins|Packages|backend|node_modules|\.git|\.github|\.claude)\//i;
+    const INTERNAL_FILE = /^\/(CLAUDE\.md|AGENTS\.md|README(\.md)?|wrangler\.toml|package(-lock)?\.json|capacitor\.config\.json|tsconfig[^/]*\.json|\.gitignore|\.assetsignore)$/i;
+    if (INTERNAL_DIR.test(p) || INTERNAL_FILE.test(p) || /\.md$/i.test(p)) {
+      return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });
+    }
+  }
+
   // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
   // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual
   // QA) without the /realapp cookie. ONLY the production custom domain (stewardmd.in) stays gated;
