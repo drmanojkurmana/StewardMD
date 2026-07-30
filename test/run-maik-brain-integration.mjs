@@ -23,12 +23,13 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 const STUB = `
-  window.__calls = { rag: 0, ai: 0 };
+  window.__calls = { rag: 0, ai: 0 }; window.__lastPkg = null;
   try { if (window.StewardRAG) { StewardRAG.ready = function(){ return Promise.resolve(); };
-    StewardRAG.buildPackage = function(){ window.__calls.rag++; return Promise.resolve({ question:"", grounding:[], topicMatch:{matched:false} }); }; } } catch(e){}
+    StewardRAG.buildPackage = function(){ window.__calls.rag++; return Promise.resolve({ question:"q", grounding:[{ diseaseId:"cap_demo", name:"Community Acquired Pneumonia", knowledge:["Amoxicillin-clavulanate 625 mg PO TDS 5-7 days; add a macrolide for atypical cover"] }], topicMatch:{ matched:true, mode:"confident" } }); }; } } catch(e){}
+  try { if (window.MaiKKB) MaiKKB.compose = function(){ return null; }; } catch(e){}   // force the Gemini synthesis path
   try { if (window.SMD_AI) { SMD_AI.route = function(){ window.__calls.ai++; return Promise.resolve({}); };
-    SMD_AI.explainGrounded = function(){ window.__calls.ai++; return Promise.resolve("stub"); };
-    SMD_AI.explainGroundedStream = function(){ window.__calls.ai++; return Promise.resolve("stub"); }; } } catch(e){}
+    SMD_AI.explainGrounded = function(p){ window.__calls.ai++; window.__lastPkg = p; return Promise.resolve("stub answer"); };
+    SMD_AI.explainGroundedStream = function(p){ window.__calls.ai++; window.__lastPkg = p; return Promise.resolve("stub answer"); }; } } catch(e){}
   return 1;`;
 
 async function attach(url) {
@@ -72,6 +73,17 @@ try {
   await openAndAsk("MS", false);
   let txt3 = (await bodyText()) || "";
   ok(!/more than one meaning/i.test(txt3), "flag OFF (default): brain gate is inert — no brain clarification (parity)");
+
+  // 4) flag ON + synthesis query → ranked evidence bundle + audience reach the /explain payload
+  await openAndAsk("community acquired pneumonia treatment", true);
+  const lp = await ev(`return window.__lastPkg ? { bundle: !!(window.__lastPkg.evidenceBundle && window.__lastPkg.evidenceBundle.claims && window.__lastPkg.evidenceBundle.claims.length), audience: window.__lastPkg.audience || null } : null`);
+  ok(lp && lp.bundle === true, "flag ON: a RANKED evidence bundle is attached to the synthesis payload");
+  ok(lp && !!lp.audience, "flag ON: inferred audience is attached");
+
+  // 5) flag OFF + same query → NO bundle on the payload (server sees today's package = parity)
+  await openAndAsk("community acquired pneumonia treatment", false);
+  const lp2 = await ev(`return window.__lastPkg ? !!window.__lastPkg.evidenceBundle : "no-call"`);
+  ok(lp2 === false, "flag OFF: no evidence bundle attached (server payload unchanged = parity)");
 
   console.log(fails ? `\n${fails} FAILED` : "\nALL BRAIN INTEGRATION CHECKS PASSED");
 } catch (e) { console.error("ERROR:", e && e.message || e); fails++; }

@@ -872,7 +872,18 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
-        const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
+        // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:
+        // absent → sysA/grounded are unchanged.
+        let sysA = sys;
+        try {
+          if (pkg.audience) sysA = sys + "\n\nAUDIENCE: write for a " + String(pkg.audience).slice(0, 20) + " — adapt depth and tone accordingly; never ask which.";
+          if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
+            const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
+            grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n" + grounded).slice(0, MAX_IN_CHARS);
+          }
+        } catch (e) {}
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
         // answer never fails to arrive.
@@ -885,7 +896,7 @@ export async function onRequest(context) {
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         let text;
@@ -899,7 +910,7 @@ export async function onRequest(context) {
         // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && body.depth === "detailed") ? MAX_OUT : NONSTREAM_BASE;
-        const nsSys = sys;
+        const nsSys = sysA;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });

@@ -3511,12 +3511,40 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             try { scroll(); } catch (e) {}
           }
+          // MaiK Brain answer-generation enrichment (flag smd_maik_brain). Builds a RANKED,
+          // deduped evidence bundle (MaiKEvidence) from the grounding + treatment KB and attaches
+          // it (+ inferred audience) to the package, so the server synthesizes from ranked evidence
+          // rather than raw chunks. Backward-compatible: absent fields → the server is unchanged.
+          function _brainEnrichPkg(p) {
+            if (!(brainOn() && window.MaiKBrain && window.MaiKEvidence && p)) return;
+            try {
+              p.audience = MaiKEvidence.personalize({ query: { raw: question } }).audience;
+              var evid = [];
+              (p.grounding || []).forEach(function (g) {
+                var txt = (g.knowledge && g.knowledge.join ? g.knowledge.join(" ") : (g.knowledge || g.summary || "")) || "";
+                if (txt) evid.push({ source: "kb", ref: "StewardMD KB · " + (g.name || g.diseaseId), data: { text: String(txt), disease: g.name || g.diseaseId } });
+                try { var gl = MaiKEvidence.guideline(g.diseaseId); if (gl && gl.recommendation) evid.push({ source: "guideline", society: gl.society, year: gl.year, ref: (gl.society || "guideline") + (gl.year ? " (" + gl.year + ")" : ""), data: { recommendation: gl.recommendation, recommendations: gl.recommendations } }); } catch (e) {}
+              });
+              if (evid.length) { p.evidenceBundle = MaiKEvidence.bundle(evid); p._brainContradictions = MaiKEvidence.contradictions(evid); }
+            } catch (e) {}
+          }
+          // Surface transparently-handled evidence conflicts below the answer (never hidden).
+          function _brainAppendEvidence(host, p) {
+            if (!(brainOn() && p && p._brainContradictions && p._brainContradictions.length)) return;
+            try {
+              var c = p._brainContradictions[0], w = document.createElement("div"); w.className = "maik-verify";
+              w.textContent = "Sources differ — " + c.reason + ". Higher-authority guidance favours " + ((c.consensus && c.consensus.drug) || "the StewardMD/national recommendation") + "; confirm against your local protocol.";
+              host.appendChild(w); try { scroll(); } catch (e) {}
+            } catch (e) {}
+          }
           function _gemini() {
+            try { _brainEnrichPkg(pkg); } catch (e) {}
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth });
             return call.then(function (r) {
               maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
+              try { _brainAppendEvidence(think, pkg); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
