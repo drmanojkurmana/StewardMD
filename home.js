@@ -63,15 +63,16 @@
     } catch (e) { return true; }
   }
 
-  // MaiK Clinical Decision Engine (window.MaiKBrain, Part 1/2). DEFAULT OFF — flag-off is
-  // byte-for-byte today's MaiK. Enable with ?brain=1 (persists), disable with ?brain=0.
+  // MaiK Clinical Decision Engine (window.MaiKBrain + Evidence + Copilot, Parts 1/2/3).
+  // DEFAULT ON for everyone (gold1052). Instant kill-switch: ?brain=0 (persists) restores the
+  // legacy pipeline exactly; ?brain=1 re-enables. Recovery point: git tag pre-maik-brain.
   function brainOn() {
     try {
       var q = location.search || "";
-      if (/[?&]brain=1\b/.test(q)) localStorage.setItem("smd_maik_brain", "1");
-      else if (/[?&]brain=0\b/.test(q)) localStorage.removeItem("smd_maik_brain");
-      return localStorage.getItem("smd_maik_brain") === "1";
-    } catch (e) { return false; }
+      if (/[?&]brain=0\b/.test(q)) localStorage.setItem("smd_maik_brain", "0");
+      else if (/[?&]brain=1\b/.test(q)) localStorage.removeItem("smd_maik_brain");
+      return localStorage.getItem("smd_maik_brain") !== "0";
+    } catch (e) { return true; }
   }
 
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.

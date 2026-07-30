@@ -1,4 +1,4 @@
-/* MaiK Brain integration + PARITY test (flag smd_maik_brain, default off).
+/* MaiK Brain integration + PARITY test (flag smd_maik_brain, DEFAULT ON; ?brain=0 = kill-switch).
  * Boots the real app, stubs the provider (StewardRAG + SMD_AI) with call counters, and checks:
  *   1. flag ON  + "MS"  → deterministic never-guess clarification, ZERO provider calls
  *   2. flag ON  + "DKA treatment" → NOT short-circuited (falls through to the engine)
@@ -48,7 +48,7 @@ try {
   if (!booted) throw new Error("boot failed");
 
   const openAndAsk = async (q, brain) => {
-    await ev(`try{${brain ? "localStorage.setItem('smd_maik_brain','1')" : "localStorage.removeItem('smd_maik_brain')"}}catch(e){}; window.SMD_askMaik(""); return 1;`); await sleep(400);
+    await ev(`try{${brain ? "localStorage.removeItem('smd_maik_brain')" : "localStorage.setItem('smd_maik_brain','0')"}}catch(e){}; window.SMD_askMaik(""); return 1;`); await sleep(400);   // default ON; off = explicit ?brain=0
     await ev(`var n=document.getElementById("maikNew"); if(n) n.click(); return 1;`); await sleep(250); // FRESH thread (clear prior bubbles)
     await ev(STUB);
     await ev(`var t=document.querySelector("#maikSheet .maik-ta"); if(t){t.value=${JSON.stringify(q)};} var s=document.getElementById("maikSend"); if(s) s.click(); return 1;`);
@@ -69,10 +69,10 @@ try {
   let txt2 = (await bodyText()) || "";
   ok(!/more than one meaning/i.test(txt2), "flag ON: a specific query is NOT wrongly clarified");
 
-  // 3) flag OFF (default) → brain gate inert = parity
+  // 3) explicit ?brain=0 → brain gate inert = parity (kill-switch)
   await openAndAsk("MS", false);
   let txt3 = (await bodyText()) || "";
-  ok(!/more than one meaning/i.test(txt3), "flag OFF (default): brain gate is inert — no brain clarification (parity)");
+  ok(!/more than one meaning/i.test(txt3), "?brain=0: brain gate inert — no clarification (parity)");
 
   // 4) flag ON + synthesis query → ranked evidence bundle + audience reach the /explain payload
   await openAndAsk("community acquired pneumonia treatment", true);
