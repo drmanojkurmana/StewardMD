@@ -166,6 +166,16 @@ Prepared in-repo:
   Play's limits (per-device split downloads are smaller), but enabling R8 (`minifyEnabled true`) would
   shrink it if desired.
 
+**One-command upload (automation).** After a signed build, upload to a Play track without the web UI:
+```
+node scripts/play-upload.mjs --key /path/to/play-service-account.json --track internal \
+  --notes "…" [--dry-run]
+```
+Pure Node (no fastlane). Needs a **Play Developer API service-account key** with "Release apps to
+testing tracks": Play Console → Setup → **API access** → link/create a Google Cloud service account →
+grant the release permission → download its JSON. Keep that JSON **outside the repo** (gitignored).
+`--dry-run` creates the edit + uploads then discards (safe test); without it, the release commits.
+
 ---
 
 ## PART D — Cloudflare edge protection (dashboard)
