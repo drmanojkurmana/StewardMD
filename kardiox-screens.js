@@ -2242,8 +2242,13 @@
       return null;
     }
     function fromQuiz(quiz, ecg){
-      if (quiz && Array.isArray(quiz.questions) && quiz.questions.length)
-        return { questions: quiz.questions, isDesign: false, stem: stemOf(ecg) };
+      if (quiz && Array.isArray(quiz.questions) && quiz.questions.length){
+        // Tag each question with its lesson so recordQuiz() can credit mastery + topic accuracy
+        // (raw content questions carry only stem/options/correctIndex/explanation).
+        var cat = ecg && ecg.category, lid = ecg && ecg.id;
+        var qs = quiz.questions.map(function(q){ return { stem: q.stem, options: q.options, correctIndex: q.correctIndex, explanation: q.explanation, category: cat, lessonId: lid }; });
+        return { questions: qs, isDesign: false, stem: stemOf(ecg) };
+      }
       return null;
     }
     async function resolveQuiz(){
@@ -2259,6 +2264,11 @@
           var did = ctx.quizLessonId;
           if (!did && learn && typeof learn.dailyChallenge === 'function'){ var dc0 = await learn.dailyChallenge(new Date()); did = dc0 && dc0.id; }
           if (did){ var de = await lib.ecg(did); var rd = de && fromQuiz(de.quiz, de); if (rd){ rd.isDaily = true; return rd; } }
+        }
+        // LESSON quiz — the current lesson's own questions (from the lesson "Take the quiz" CTA).
+        if (ctx.quizIntent === 'lesson' && ctx.quizLessonId && lib && typeof lib.ecg === 'function'){
+          var le = await lib.ecg(ctx.quizLessonId);
+          var rl = le && fromQuiz(le.quiz, le); if (rl){ rl.isDaily = false; return rl; }
         }
         // QUIZ MODE (practice) — a real multi-topic set across the whole library, each Q its own ECG.
         if (ctx.quizIntent !== 'daily' && learn && typeof learn.quizSet === 'function'){
@@ -2862,7 +2872,8 @@
       case "kardiox-add": haptic("light"); go("source"); return;
       case "kardiox-learn": haptic("light"); go("library"); return;
       case "kardiox-daily": go("daily"); return;
-      case "kardiox-quiz": case "kxnav:quiz": state.quizIntent = "practice"; state.quizLessonId = null; go("quiz"); return;
+      case "kardiox-quiz": state.quizIntent = "practice"; state.quizLessonId = null; go("quiz"); return;
+      case "kxnav:quiz": state.quizIntent = "lesson"; state.quizLessonId = state.lessonId || null; go("quiz"); return;   // the lesson's own "Take the quiz" CTA
       case "kardiox-dailyquiz": state.quizIntent = "daily"; state.quizLessonId = t.getAttribute("data-id") || null; go("quiz"); return;
       case "kardiox-history": go("history"); return;
       case "kardiox-settings": go("settings"); return;
