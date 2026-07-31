@@ -2959,11 +2959,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
     function close() {
       try {
-        if (body) {
-          // Drop any in-flight "Searching…"/thinking bubble before persisting, so closing mid-request
-          // doesn't freeze a stale spinner into the restored thread (user: reopened stuck on "Searching…").
-          [].slice.call(body.querySelectorAll(".maik-b.ai")).forEach(function (n) { if (n.querySelector(".maik-thinking")) n.remove(); });
-          if (body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); }
+        if (body && body.innerHTML.trim()) {
+          // KEEP any in-flight "Searching…" bubble (it carries data-mg): the still-running generation
+          // re-finds it via _live() and swaps in the answer + re-persists, so closing MaiK mid-request
+          // no longer loses the answer (user: "close MaiK → never get the answer, it hangs"). If it's
+          // truly stuck, the 90s watchdog replaces the same bubble with a Tap-to-retry link.
+          _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML);
         }
       } catch (e) {}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
@@ -3410,7 +3411,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: _ld, offer: _offer, askedMore: /\?\s*$/.test(String(md || "").trim()), ts: Date.now() };
       }
       scroll();
-      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+      try { if (think && think.removeAttribute) think.removeAttribute("data-mg"); var _lb = document.getElementById("maikBody") || body; _maikBodyHTML = _lb.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
     // Intent-Firewall refusal UI: the required clinician-only message + example chips that prefill
     // the composer. Shared by the client scope gate AND the server outOfScope layer. Uses qEl/scroll
@@ -3432,6 +3433,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
       var think = bubble("ai", '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      // Tie the answer to the CONVERSATION, not this sheet instance. If the user closes MaiK and reopens
+      // (the thread is restored from localStorage), the still-running generation must render its answer
+      // into the LIVE bubble and persist it — not into a detached node the reopened sheet never shows.
+      // (User: "close MaiK → never get the answer, stuck on Searching.") _live() re-finds the tagged
+      // bubble in the current #maikBody (open, even after reopen) or falls back to the captured node.
+      var _gid = "mg" + Date.now() + Math.floor(Math.random() * 1e6);
+      try { think.setAttribute("data-mg", _gid); } catch (e) {}
+      function _live() { try { var lb = document.getElementById("maikBody"); return (lb && lb.querySelector('[data-mg="' + _gid + '"]')) || think; } catch (e) { return think; } }
+      function _persist() { try { var lb = document.getElementById("maikBody") || body; if (lb) { _maikBodyHTML = lb.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} }
       // Hard client-side ceiling: the grounding chain (KB index load → buildPackage → grounded call)
       // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
       // On timeout we surface a clear message + a one-tap retry, and free the composer.
@@ -3486,9 +3496,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       function _maikTimedOut() {
         if (_maikDone) return; _maikDone = true; _clearStages(); _fsResume();
         try {
-          think.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
-          var _rl = think.querySelector(".maik-retry");
-          if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { think.parentNode && think.parentNode.removeChild(think); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
+          var _tw = _live();
+          _tw.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
+          try { _tw.removeAttribute("data-mg"); } catch (e) {}
+          _persist();
+          var _rl = _tw.querySelector(".maik-retry");
+          if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { _tw.parentNode && _tw.parentNode.removeChild(_tw); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
         } catch (e) {}
         _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms with no progress:", question); } catch (e) {}
@@ -3561,7 +3574,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             if (!_perfTTFT) _perfTTFT = maikNow();
             var _accS = maikStripRefine(acc);   // hide the trailing @@REFINE@@ line while streaming
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
-            think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
+            _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
             try { scroll(); } catch (e) {}
           };
           // On NATIVE, never use live streaming: the WebView's CapacitorWebFetch can IGNORE the
@@ -3582,9 +3595,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // through to the refiner/Gemini below, so nothing can regress.
           function finishKB(kb, pkgForKb, label) {
             _streamStarted = true; _clearStages();
-            maikRenderAnswer(think, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
-            try { _brainAugment(think, pkgForKb); } catch (e) {}
-            if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; think.appendChild(_pe); } catch (e) {} }
+            var _h = _live();
+            maikRenderAnswer(_h, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
+            try { _brainAugment(_h, pkgForKb); } catch (e) {}
+            if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             try { scroll(); } catch (e) {}
           }
@@ -3643,8 +3657,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth });
             return call.then(function (r) {
-              maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
-              try { _brainAugment(think, pkg); } catch (e) {}
+              var _h = _live();
+              maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
+              try { _brainAugment(_h, pkg); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
@@ -3652,7 +3667,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var el = document.createElement("div"); el.className = "maik-perf";
                   el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
                   el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
-                  think.appendChild(el);
+                  _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
               } catch (e) {}
