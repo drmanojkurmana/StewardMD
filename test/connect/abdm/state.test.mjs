@@ -261,3 +261,60 @@ test("stale `from`: legal edge but wrong current status → CAS miss {ok:false, 
   assert.equal(back.status, "CONSENT_GRANTED"); // unchanged
   assert.equal(back.updated_at, NOW);           // CAS matched 0 rows → no write
 });
+
+// ---- Fix round 1 ----------------------------------------------------------------------------------
+
+// Fix 1: a hostile/inherited `from` (prototype-chain key) must NOT throw a raw TypeError — it must fall
+// through to the normal illegal branch with no D1 write. TXN_NEXT is prototype-less so these keys are absent.
+test("prototype-pollution `from` keys are illegal, never throw, never write D1", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-proto", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "INITIATED", expiresAt: "z", now: NOW,
+  });
+  for (const evil of ["constructor", "__proto__", "toString", "valueOf", "hasOwnProperty"]) {
+    assert.deepEqual(
+      await advanceStatus(db, "req-proto", evil, "REQUESTED", "2026-07-31T11:00:00Z"),
+      { ok: false, reason: "illegal" }, `from='${evil}' must be illegal, not a throw`);
+  }
+  const row = await getTxnByRequestId(db, "req-proto");
+  assert.equal(row.status, "INITIATED"); // unchanged
+  assert.equal(row.updated_at, NOW);     // no D1 write for any illegal edge
+});
+
+// Fix 2b: a transaction_id must map to exactly one request row. Attaching an already-used txn to a
+// DIFFERENT request is refused (dup-txn), and that request's row keeps transaction_id === null.
+test("attachTransactionId refuses a duplicate transaction_id across requests (dup-txn)", async () => {
+  const db = makeAbdmDb({});
+  for (const rid of ["req-A", "req-B"]) {
+    await putTxn(db, sealStub, {
+      requestId: rid, tenantId: "t1", consentId: "c1",
+      ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+      status: "REQUESTED", expiresAt: "z", now: NOW,
+    });
+  }
+  assert.deepEqual(await attachTransactionId(db, "req-A", "txn-X", NOW), { ok: true });
+  const dup = await attachTransactionId(db, "req-B", "txn-X", "2026-07-31T12:00:00Z");
+  assert.equal(dup.ok, false);
+  assert.equal(dup.reason, "dup-txn");
+  assert.equal((await getTxnByRequestId(db, "req-B")).transaction_id, null); // B never got the txn
+  // idempotent re-attach of the SAME (request, txn) is still allowed.
+  assert.deepEqual(await attachTransactionId(db, "req-A", "txn-X", NOW), { ok: true });
+});
+
+// Fix 4: fill the FSM edge-coverage gaps the four core scenarios missed.
+test("FSM: RECEIVING→PARTIAL is legal and PARTIAL is terminal", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-part", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "z", now: NOW,
+  });
+  assert.deepEqual(await advanceStatus(db, "req-part", "RECEIVING", "PARTIAL", NOW),
+    { ok: true, status: "PARTIAL" });
+  // PARTIAL is terminal (empty successor set) — no exit is legal.
+  assert.deepEqual(await advanceStatus(db, "req-part", "PARTIAL", "FAILED", "2026-07-31T13:00:00Z"),
+    { ok: false, reason: "illegal" });
+  assert.equal((await getTxnByRequestId(db, "req-part")).status, "PARTIAL"); // unchanged
+});

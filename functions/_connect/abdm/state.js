@@ -66,6 +66,9 @@ export async function putTxn(db, secrets, { requestId, tenantId, consentId, ephP
     eph_privkey_sealed: sealed,
     eph_pub_raw: ephPubRaw ?? null,
     our_nonce: ourNonce ?? null,
+    ack_claimed: 0,               // exactly-once ack flag; write 0 EXPLICITLY so mock rows and real-D1 rows
+                                  // behave identically under `ack_claimed<>?` (0<>1 matches in both; NULL<>1
+                                  // is NULL/no-match in real D1 — never rely on the DEFAULT to paper over it).
     status: status ?? null,
     expires_at: expiresAt ?? null,
     created_at: now,
@@ -82,6 +85,12 @@ export async function getTxnByTransactionId(db, transactionId) {
 }
 
 export async function attachTransactionId(db, requestId, transactionId, now) {
+  // Uniqueness guard: a transaction_id must map to exactly one request row. The authoritative backstop is
+  // the PARTIAL UNIQUE index in the schema (real D1); this app-layer read-then-write gives a CLEAN reject.
+  // Safe to read-then-write here because this is the once-per-on-request SETUP path, NOT the exactly-once
+  // ack path — a lost race here just surfaces as the same {ok:false} the UNIQUE index would force anyway.
+  const existing = await getTxnByTransactionId(db, transactionId);
+  if (existing && existing.request_id !== requestId) return { ok: false, reason: "dup-txn" };
   const res = await db.prepare("UPDATE connect_abdm_txn SET transaction_id=?,updated_at=? WHERE request_id=?")
     .bind(transactionId, now, requestId).run();
   if (!res || res.success === false) throw new ConnectStateError("attach transaction_id failed");
@@ -162,7 +171,11 @@ export async function deleteBuffered(r2, txnId) {
 // let two concurrent callbacks both "win", defeating exactly-once. The CAS is the SOLE arbiter. No cache.
 
 // Legal directed FSM edges; terminal states carry an EMPTY successor set, so no exit from them is legal.
-const TXN_NEXT = {
+// PROTOTYPE-LESS map: a raw `TXN_NEXT[from]` for from ∈ {"constructor","__proto__","toString","valueOf",
+// "hasOwnProperty",…} must NOT resolve to an inherited Object.prototype member (truthy → `.indexOf` throws
+// a raw TypeError instead of returning "illegal"). With a null prototype those keys are simply absent, so a
+// hostile/unknown `from` cleanly falls through to the illegal branch (Array.isArray below is a second belt).
+const TXN_NEXT = Object.assign(Object.create(null), {
   INITIATED: ["CONSENT_GRANTED", "FAILED"],
   CONSENT_GRANTED: ["REQUESTED", "FAILED"],
   REQUESTED: ["RECEIVING", "FAILED"],
@@ -170,7 +183,7 @@ const TXN_NEXT = {
   TRANSFERRED: [],
   PARTIAL: [],
   FAILED: [],
-};
+});
 
 // Optimistic-concurrency FSM step. An illegal edge (unknown `from`, or `to` not in TXN_NEXT[from], which
 // includes any exit from a terminal) is refused in JS BEFORE any D1 access → {ok:false,reason:"illegal"}.
@@ -178,7 +191,7 @@ const TXN_NEXT = {
 // `from` — advanced by someone else, or never was `from`) is a normal {ok:false,reason:"stale"} return.
 export async function advanceStatus(db, requestId, from, to, now) {
   const allowed = TXN_NEXT[from];
-  if (!allowed || allowed.indexOf(to) === -1) return { ok: false, reason: "illegal" };
+  if (!Array.isArray(allowed) || allowed.indexOf(to) === -1) return { ok: false, reason: "illegal" };
   const res = await db
     .prepare("UPDATE connect_abdm_txn SET status=?,updated_at=? WHERE request_id=? AND status=?")
     .bind(to, now, requestId, from)
