@@ -81,7 +81,12 @@ export async function handleFeedIngest(env, deps, request, kind) {
     warnings = structuralWarnings(bundle.meta.warnings);
     outcome = "ok";
     await writeAudit(env, deps, feed, kind, counts, scope, bundle, t0, outcome);
-    // record the nonce only after a clean run
+    // record the nonce only after a clean run.
+    // KNOWN/ACCEPTED RESIDUAL (documented, not fixed here): the nonce is written AFTER processing and KV is
+    // eventually-consistent, so two concurrent replays of the SAME signed request inside the 5-min freshness
+    // window can both miss the nonce and re-ingest. Also, if deps.kv (MAIK_KV) is unbound the nonce replay
+    // control is OFF entirely — freshness still bounds any re-ingest to the 5-min window. We deliberately do
+    // NOT move the nonce BEFORE processing: that would block legitimate retries of a transiently-failed message.
     try { if (deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: 600 }); } catch { /* best-effort */ }
     return jsonResponse({ ok: true, accepted: counts, warnings }, { status: 202 });
   } catch (e) {

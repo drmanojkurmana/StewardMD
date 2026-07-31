@@ -49,3 +49,13 @@ test("OBX correction (status C) adds a warning (no silent merge)", () => {
   const b = norm(["MSH|^~\\&|LAB|H|E|H|20260801||ORU^R01|M5|P|2.5", "PID|1||M1||A^B", "OBR|1||O1|G^Glucose^L", "OBX|1|NM|G^Glucose^L||110|mg/dL|70-99|H|||C"].join("\r"));
   assert.ok(b.meta.warnings.some((w) => w.includes("correction")));
 });
+
+// B-F4 (PHI-adjacent hygiene): the correction warning must NOT echo the OBR-3 filler-order/accession id (it
+// was baked into `oid`), which structuralWarnings' quoted-substring redaction would NOT scrub.
+test("correction warning does NOT leak the OBR-3 accession id", () => {
+  const b = norm(["MSH|^~\\&|LAB|H|E|H|20260801||ORU^R01|M6|P|2.5", "PID|1||M1||A^B",
+    "OBR|1||ACC-SECRET-999|G^Glucose^L", "OBX|1|NM|G^Glucose^L||110|mg/dL|70-99|H|||C"].join("\r"));
+  const corr = b.meta.warnings.find((w) => w.includes("correction"));
+  assert.ok(corr, "correction still warned");
+  assert.equal(b.meta.warnings.some((w) => w.includes("ACC-SECRET-999")), false, "accession id must not appear in any warning");
+});

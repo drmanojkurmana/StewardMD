@@ -10,12 +10,15 @@ const date = (v) => { const s = String(v || "").trim(); const m = s.match(/(\d{4
 
 export function normalizeCsvLab(ctx, parsed) {
   const warnings = (parsed.warnings || []).slice();
+  // Bound warnings[] (parity with the CSV/HL7 parsers): a wide/blank/duplicate header must not balloon per-column warnings.
+  const maxWarnings = (ctx.budget && ctx.budget.maxWarnings) || 500;
+  const warn = (m) => { if (warnings.length < maxWarnings) warnings.push(m); else if (warnings.length === maxWarnings) warnings.push("warnings truncated at maxWarnings"); };
   const map = (ctx.config && ctx.config.config && (typeof ctx.config.config === "string" ? safeParse(ctx.config.config) : ctx.config.config).columnMap) || {};
   const get = (row, key) => (map[key] && row[map[key]] != null ? String(row[map[key]]) : null);
   // Warn for mapped-but-absent columns (structural only, never a value).
   const header = parsed.header || [];
-  for (const k of Object.keys(map)) if (map[k] && !header.includes(map[k])) warnings.push("mapped column '" + k + "'->'" + map[k] + "' absent from feed");
-  for (const col of header) if (!Object.values(map).includes(col)) warnings.push("unmapped column '" + col + "' ignored");
+  for (const k of Object.keys(map)) if (map[k] && !header.includes(map[k])) warn("mapped column '" + k + "'->'" + map[k] + "' absent from feed");
+  for (const col of header) if (!Object.values(map).includes(col)) warn("unmapped column '" + col + "' ignored");
 
   const out = bundle({ tenantId: ctx.tenant.id, sourceConnector: "file", generatedAt: ctx.now().toISOString(), warnings, provenance: [{ resource: "file", sourceConnector: "file", sourceId: "file/" + hashId(header.join(",")) }] });
   const reports = {};
@@ -42,7 +45,7 @@ export function normalizeCsvLab(ctx, parsed) {
         if (!reports[orderId]) { reports[orderId] = { id: hashId(orderId), results: [] }; out.diagnosticReports.push(diagnosticReport({ id: reports[orderId].id, code: codeable({ text: "lab panel" }), status: "final", results: reports[orderId].results })); }
         reports[orderId].results.push({ type: "Observation", id: obsId });
       }
-    } catch (e) { warnings.push("row " + i + " skipped (malformed)"); }
+    } catch (e) { warn("row " + i + " skipped (malformed)"); }
   }
   if (!patientSet) out.patient = patient({ id: "unknown" });
   return out;

@@ -44,3 +44,31 @@ test("maxRows budget truncates without hanging", () => {
   assert.ok(p.rows.length <= 100);
   assert.ok(p.warnings.some((w) => w.includes("rows truncated")));
 });
+
+// B-F1 (authenticated DoS): a pathological WIDE header made the row-object build O(headerCols x rows). The
+// maxColumns cap (parity with HL7's maxFieldsPerSegment) must bound the header AND every row so this stays cheap.
+test("pathological wide header is column-capped -> bounded row-object build (does not blow the budget)", () => {
+  const HEADER_COLS = 20000, ROWS = 2000;                        // ~ the review's 20k cols x 2k rows attack
+  const csv = Array.from({ length: HEADER_COLS }, (_, i) => "c" + i).join(",") + "\n" +
+    Array.from({ length: ROWS }, () => "v").join("\n");          // short/ragged data rows
+  const p = parseDelimited(csv);
+  assert.equal(p.header.length, 512, "header capped to default maxColumns");
+  assert.ok(p.warnings.some((w) => w.includes("maxColumns")), "column-cap warned");
+  assert.ok(Object.keys(p.rows[0]).length <= 512, "row object bounded to maxColumns keys (not 20000)");
+  assert.equal(p.rows.length, ROWS);
+});
+
+test("per-row field flood is capped too (not just the header)", () => {
+  const csv = "a,b,c\n" + Array.from({ length: 3000 }, (_, i) => "x" + i).join(",");   // one very wide data row
+  const p = parseDelimited(csv, { budget: { maxColumns: 10 } });
+  assert.ok(p.warnings.some((w) => w.includes("row fields truncated at maxColumns")));
+  assert.ok(Object.keys(p.rows[0]).length <= 10);
+});
+
+// B-F2: a wide blank/duplicate header must not balloon warnings[] — maxWarnings ceiling (parity with HL7).
+test("wide blank header cannot balloon warnings (maxWarnings ceiling)", () => {
+  const blanks = Array.from({ length: 2000 }, () => "").join(",");   // 2000 blank cols -> would be 1999 dup warnings
+  const p = parseDelimited(blanks + "\nx", { budget: { maxColumns: 2000, maxWarnings: 10 } });
+  assert.ok(p.warnings.length <= 11, "warnings capped at maxWarnings (+1 truncation notice)");
+  assert.ok(p.warnings.some((w) => w.includes("warnings truncated at maxWarnings")));
+});

@@ -50,7 +50,7 @@ export function normalizeHl7(ctx, msg) {
         out.observations.push(observation({ id: oid, category: "laboratory", code: ccFromCE(s, 3, enc, "observation"), value: obxValue(s, enc),
           referenceRange: field(s, 7) ? { text: field(s, 7) } : null, interpretation: field(s, 8) ? codeable({ text: field(s, 8) }) : null, status: field(s, 11) || "unknown", effectiveDateTime: hl7Date(field(s, 14)) }));
         if (currentReport) currentReport.results.push({ type: "Observation", id: oid });
-        if (String(field(s, 11)).toUpperCase() === "C") warnings.push("OBX " + oid + " is a correction (C); superseding not merged");
+        if (String(field(s, 11)).toUpperCase() === "C") warnings.push("OBX set " + (field(s, 1) || "?") + " is a correction (C); superseding not merged");   // OBX-1 set-id (an in-message ordinal) only; never echo the OBR-3 filler-order/accession id (was in `oid`)
       }
     }
   } else if (type === "ADT") {
