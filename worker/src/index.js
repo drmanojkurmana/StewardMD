@@ -317,10 +317,17 @@ export default {
   //                     (push the whole unit) — covers units where no member's app is open.
   //   "30 3 * * *"    → FollowCare daily recovery dispatcher (09:00 IST): send due check-in links +
   //                     reminders, escalate missed check-ins, run the retention sweep.
+  //   "0 * * * *"     → Connect ABDM reconciliation GC sweep (hourly): erase expired/terminal ephemeral
+  //                     keys + push-buffers. Flag-gated + no-op-safe + fail-safe on the Pages side, so it
+  //                     is a cheap 404 while Connect is unprovisioned/flag-OFF.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
     const post = (p) => fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } }).catch(() => {});
+    if (event.cron === "0 * * * *") {
+      ctx.waitUntil(post("/api/connect/admin/sweep"));     // Connect ABDM reconciliation GC (flag-gated, no-op-safe, fail-safe)
+      return;
+    }
     if (event.cron === "*/15 * * * *") {
       ctx.waitUntil(post("/api/watch/run"));               // watch-lab: poll GHIS + push new labs
       ctx.waitUntil(post("/api/push/task-overdue-run"));   // ICU: escalate overdue round tasks → push the unit

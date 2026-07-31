@@ -10,6 +10,8 @@ import { hipFlagOn } from "../../_connect/abdm/hip-flags.js";
 import { handleDiscovery, serveTransfer, putHipConsent, linkCareContext } from "../../_connect/abdm/hip.js";
 import { followcareSource } from "../../_connect/abdm/hip-sources/followcare.js";
 import { identify } from "../../_usage.js";
+import { ownerOK } from "../../_adminauth.js";
+import { sweep } from "../../_connect/abdm/state.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -49,6 +51,27 @@ export async function onRequest(context) {
       return jsonResponse({ ok: true, id: out.id });
     } catch (e) {
       return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });   // sanitized; no raw value/stack
+    }
+  }
+
+  // ABDM reconciliation GC sweep (Stage-6 Task-8). CRON-ONLY: the stewardmd-api Worker's hourly cron POSTs
+  // here with the shared X-Admin-Token. Already flag-gated by the onRequest top guard (flag OFF -> 404, so
+  // existence is not leaked). Additionally admin-token protected and NO-OP-SAFE: if the D1/R2 bindings are
+  // absent (Connect flag-OFF / unprovisioned) it returns cleanly WITHOUT touching state.sweep. FAIL-SAFE: any
+  // sweep error is audited metadata-only (no message/stack, no PHI) and never rethrown, so a GC failure can
+  // never crash the Worker's scheduled handler.
+  if (path === "/admin/sweep" && request.method === "POST") {
+    if (!(await ownerOK(request, env))) return jsonResponse({ error: "forbidden" }, { status: 403 });
+    if (!env.CONNECT_DB || !env.CONNECT_R2) return jsonResponse({ ok: true, skipped: "bindings_absent" });
+    const now = new Date().toISOString();
+    try {
+      const counts = await sweep(env.CONNECT_DB, env.CONNECT_R2, env, now);
+      try { await makeAuditSink(env, env.CONNECT_DB)({ action: "data.swept", outcome: "ok", resourceCounts: counts, ts: now }); } catch {}
+      return jsonResponse(Object.assign({ ok: true }, counts));
+    } catch (e) {
+      // Fail-safe: record the failure metadata-only (no error message / stack) and return a clean response.
+      try { await makeAuditSink(env, env.CONNECT_DB)({ action: "data.swept", outcome: "error", ts: now }); } catch {}
+      return jsonResponse({ ok: false, error: "sweep_failed" });
     }
   }
 

@@ -32,10 +32,14 @@
   "observability": { "enabled": true },
 
   // Medical Updates pipeline once daily (05:30 UTC); watch-lab lab poll every 15 min;
-  // FollowCare recovery dispatcher once daily (03:30 UTC = 09:00 IST).
+  // FollowCare recovery dispatcher once daily (03:30 UTC = 09:00 IST);
+  // Connect ABDM reconciliation GC sweep hourly ("0 * * * *") — bounds ephemeral-key + push-buffer
+  //   lifetime (POSTs /api/connect/admin/sweep, flag-gated + no-op-safe on the Pages side).
+  //   // VERIFY interval: hourly is the fail-safe default (tightly bounds sealed eph-key lifetime past TTL);
+  //   the owner may relax to daily if the extra hourly no-op hits (404 while Connect is flag-OFF) are unwanted.
   // scheduled() branches on event.cron. Requires the secret UPDATES_ADMIN_TOKEN
   // (wrangler secret put UPDATES_ADMIN_TOKEN), matching the Pages project.
-  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *"] },
+  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *", "0 * * * *"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
   "r2_buckets": [
