@@ -5,7 +5,7 @@
   "description": "StewardMD — native iOS + Android app wrapper (Capacitor) around the StewardMD PWA. The web app itself is buildless static files at the repo root; scripts/build-www.sh assembles the runtime bundle into www/.",
   "scripts": {
     "postinstall": "patch-package",
-    "test": "for f in test/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node \"$f\" || exit 1; done",
+    "test": "for f in test/*.test.mjs test/connect/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node \"$f\" || exit 1; done",
     "build:www": "bash scripts/build-www.sh",
     "ota:release": "node scripts/ota-release.mjs",
     "sync": "npm run build:www && npx cap sync",
