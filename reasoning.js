@@ -3925,27 +3925,27 @@
     imagingSummary: function (packet) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       if (!packet || !packet.reportText) return Promise.resolve({ error: "no-report" });
-      return aiHeaders().then(function (h) { return fetch(b + "/imaging", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/imaging", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // Trusted external reference lookup (Phase 4) — de-identified TOPIC string only → PubMed
     // guideline/review citations. Retrieval, not AI generation; opt-in per clinician tap.
     evidence: function (topic) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "off" });
       var t = String(topic == null ? "" : topic).slice(0, 200); if (!t) return Promise.resolve({ error: "no-topic" });
-      return aiHeaders().then(function (h) { return fetch(b + "/evidence", { method: "POST", headers: h, body: JSON.stringify({ topic: t }) }); })
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/evidence", { method: "POST", headers: h, body: JSON.stringify({ topic: t }) }); })
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // Clinical Correlation (Phase 3) — de-identified imaging+lab evidence packet → advisory
     // correlation. Same cloud-text posture as visionText/imagingSummary. Advisory only.
     correlate: function (packet) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       if (!packet) return Promise.resolve({ error: "no-evidence" });
-      return aiHeaders().then(function (h) { return fetch(b + "/correlate", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/correlate", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // Opt-in web research (Google-grounded) for topics not in StewardMD's KB. Token-frugal:
     // one grounded call, short answer; only invoked on an explicit user tap.
@@ -3972,9 +3972,9 @@
     visionText: function (text, kind) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
     // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
@@ -3982,9 +3982,9 @@
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
-      return aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
     transcribe: function (audioDataUrl) {
@@ -4001,13 +4001,16 @@
     vision: function (dataUrl, kind) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var img = String(dataUrl == null ? "" : dataUrl); if (!img) return Promise.resolve({ error: "no-image" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
+      // BOUND it (raceTimeout): on native CapacitorHttp ignores AbortController, so an un-raced fetch
+      // NEVER settles on a stall → image-engine.js's "Reading with AI Vision…" overlay (only torn down in
+      // .then/.catch) hangs FOREVER. This is THE Vision hang. 45s → {error:"timeout"} → caller falls back.
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
         .then(function (r) {
           if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" };
           if (r.status === 401 || r.status === 403) return { error: "entitlement" };
           if (!r.ok) return { error: "server" };
           return r.json();
-        }).catch(function (e) { return { error: String(e && e.message || e) }; });
+        }).catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines

@@ -7,11 +7,17 @@
  */
 import { verifyFirebaseToken } from "./_fbauth.js";
 
-const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+const OWNER_EMAILS_DEFAULT = ["mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];   // drmanojkurmana@gmail.com removed (owner request 2026-08-01)
 
+// drmanojkurmana@gmail.com is EXCLUDED from owners even if the OWNER_EMAILS env var still lists it
+// (owner request 2026-08-01, to test whether owner status changes AI behavior). Reversible: delete the
+// second .filter. NOTE: on native the AI call goes out as guest (no token) regardless, so owner status
+// does not reach the AI server path anyway — this makes the removal effective without a dashboard edit.
+const OWNER_EXCLUDE = ["drmanojkurmana@gmail.com"];
 export function ownerEmails(env) {
   return (env.OWNER_EMAILS ? String(env.OWNER_EMAILS).split(",") : OWNER_EMAILS_DEFAULT)
-    .map((s) => s.trim().toLowerCase()).filter(Boolean);
+    .map((s) => s.trim().toLowerCase()).filter(Boolean)
+    .filter((e) => OWNER_EXCLUDE.indexOf(e) < 0);
 }
 export function emailFromToken(idToken) {
   try {

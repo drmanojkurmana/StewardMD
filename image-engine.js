@@ -242,15 +242,22 @@
       if (!getConsent()) setConsent(true);
       log("kind:", kind, "engine: ai", "shape: image  (POST { image, kind })");
       var done = busy("Reading with AI Vision…");
+      // ROOT CAUSE of the account-specific Vision hang: a signed-in session's Firestore sync hogs the
+      // single WebView JS thread. MaiK PAUSES Firestore for its call (#568) so it runs clean — Vision
+      // did NOT, so it stalled while Firestore synced. Guest (no Firestore) and the fully-cached owner
+      // account never stall; a fresh/less-synced account does. Give Vision the SAME pause so every
+      // account runs it on a clear thread. Native-only (matches MaiK); auto-resume after 60s safety.
+      var _fsR = false, _fsResume = function () { if (_fsR) return; _fsR = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
+      try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResume, 60000); } } catch (e) {}
       return window.SMD_AI.vision(image, kind).then(function (r) {
-        done();
+        _fsResume(); done();
         if (r && !r.error) {
           var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
           if (f && (Object.keys(f).length || f.medications)) { log("ai success: fields"); return { mode: "fields", fields: f, lines: [], engine: "ai" }; }
         }
         log("ai failure:", (r && r.error) || "no-fields");
         return aiFallback((r && r.error) || "no-fields", image, kind);
-      }).catch(function () { done(); log("ai failure: error"); return aiFallback("error", image, kind); });
+      }).catch(function () { _fsResume(); done(); log("ai failure: error"); return aiFallback("error", image, kind); });
     });
   }
 
