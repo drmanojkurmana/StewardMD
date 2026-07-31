@@ -24,7 +24,9 @@ export function bundle(o = {}) {
   };
 }
 
-export class SccmVersionError extends Error {}
+export class SccmVersionError extends Error {
+  constructor(message) { super(message); this.name = "SccmVersionError"; }
+}
 export function assertConsumable(b, consumerMajor) {
   const major = parseInt(String(b.sccmVersion).split(".")[0], 10);
   if (major !== consumerMajor) throw new SccmVersionError("SCCM major version " + major + " not consumable by " + consumerMajor);

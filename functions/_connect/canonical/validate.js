@@ -1,5 +1,5 @@
 // functions/_connect/canonical/validate.js — SCCM validator + reference resolution (spec §4.3, C5)
-import { RESOURCE_KEYS } from "./model.js";
+import { RESOURCE_KEYS, SCCM_VERSION } from "./model.js";
 
 const REF_TARGET_KEY = { Encounter: "encounters", Condition: "conditions", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
 
@@ -7,7 +7,7 @@ export function validateBundle(b) {
   const errors = [], warnings = [];
   if (!b || typeof b !== "object") return { ok: false, errors: ["bundle missing"], warnings };
   if (!b.patient || !b.patient.id) errors.push("bundle.patient is required");
-  if (b.sccmVersion !== "1.0") errors.push("unexpected sccmVersion " + b.sccmVersion);
+  if (b.sccmVersion !== SCCM_VERSION) errors.push("unexpected sccmVersion " + b.sccmVersion);
 
   // Build the id index per resource type for reference resolution.
   const index = {};
