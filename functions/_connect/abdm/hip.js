@@ -16,6 +16,8 @@ import { sealEntries } from "./hip-crypto.js";                                  
 import { serializeNdhm, validateNdhmDoc } from "../connectors/abdm/serialize.js"; // Task 2: SCCM -> NDHM-FHIR + structural gate
 import { revalidateForRequest } from "./consent.js";                            // Stage-4: the request-time R4 checklist (fresh status/date/scope)
 import { hmacPseudonym } from "../audit.js";                                    // per-tenant HMAC pseudonym (raw ABHA never stored/logged)
+import { resolveActor, resolveTenant } from "../identity.js";                   // Tasks 6+8: server-derived actor+membership (PermissionError before any write)
+import { putConsentReq, getConsentReq, updateConsentStatus } from "./state.js"; // Task 8: reuse the MONOTONIC (R6) consent lifecycle store
 
 // A cross-patient / out-of-scope over-share was refused (R5). Carries a stable, PHI-free `reason`.
 export class OverShareError extends Error {
@@ -237,4 +239,161 @@ export async function serveTransfer(env, deps, req) {
   });
 
   return { pushed: pushed > 0, pages: pushed, outcome, warnings };
+}
+
+// A discovery source exceeded its fixed-window probe budget (R11 anti-enumeration). PHI-free (carries only the
+// non-PHI sourceId). Thrown BEFORE any care-context lookup so an over-limit source learns nothing.
+export class RateLimited extends Error {
+  constructor(sourceId) { super("discovery rate-limited: " + sourceId); this.name = "RateLimited"; this.sourceId = sourceId; }
+}
+
+// Injected clock -> epoch ms (never Date.now / the wall clock). Mirrors isoOf; used only for the fixed-window bucket.
+function epochMs(clock) {
+  const d = typeof clock === "function" ? clock() : clock;
+  if (d && typeof d.getTime === "function") return d.getTime();
+  if (typeof d === "number") return d;
+  if (typeof d === "string" && d) { const n = Date.parse(d); return Number.isNaN(n) ? 0 : n; }
+  return 0;
+}
+
+// The exact ABHA identifier on a discovery probe. EXACT identifier ONLY — the demographic fields (name/gender/
+// yob/mobile) are DELIBERATELY not read here: a demographic-only probe carries no exact identifier, so it can
+// never match (no fuzzy/substring/demographic matching, ever).
+function probeAbha(probe) {
+  if (!probe || typeof probe !== "object") return null;
+  const v = probe.abhaAddress ?? probe.abha ?? probe.healthId ?? probe.id;
+  return typeof v === "string" && v ? v : null;
+}
+
+// Rate-limit budget (per source, fixed window). Env-tunable; fail-safe defaults. Reads are off injected `env` only.
+const discoLimit = (env) => { const n = Number(env && env.CONNECT_HIP_DISCO_LIMIT); return Number.isFinite(n) && n > 0 ? n : 30; };
+const discoWindowSec = (env) => { const n = Number(env && env.CONNECT_HIP_DISCO_WINDOW_SEC); return Number.isFinite(n) && n > 0 ? n : 60; };
+
+// Fixed-window per-source counter under ONE non-PHI key `connect:abdm:disco:<sourceId>`. The window bucket index
+// lives in the VALUE (so a new window resets the count even before the TTL fires), and expirationTtl bounds the
+// key's lifetime. Returns { limited } — over-budget => { limited:true } and NO increment (the caller refuses).
+async function bumpDiscoveryRate(kv, sourceId, nowMs, limit, windowSec) {
+  const key = `connect:abdm:disco:${sourceId}`;                     // non-PHI: only the requesting source id, never the ABHA
+  const win = Math.floor(nowMs / (windowSec * 1000));               // fixed-window bucket
+  let rec = null;
+  try { rec = JSON.parse((await kv.get(key)) || "null"); } catch { rec = null; }
+  const count = rec && rec.win === win ? (Number(rec.count) || 0) : 0;  // a new window resets the count
+  if (count >= limit) return { limited: true };
+  await kv.put(key, JSON.stringify({ win, count: count + 1 }), { expirationTtl: windowSec * 2 });
+  return { limited: false };
+}
+
+// ── getServableCareContexts — the EXACT-match care-context lookup (shared by discovery + serve) ──────────────
+// Per-tenant AND per-patient scoped, EXACT equality only (WHERE tenant_id=? AND patient_abha_hash=?, both col=?).
+// Fail-closed on a missing tenant/hash (returns [] — never an unscoped table scan). The patient_abha_hash is a
+// per-tenant HMAC, so it is impossible to hit another tenant's row even if a raw ABHA collided across tenants.
+export async function getServableCareContexts(db, tenantId, patientAbhaHash) {
+  if (!db || tenantId == null || !patientAbhaHash) return [];        // fail-closed: never scan the whole table
+  const { results = [] } = await db
+    .prepare("SELECT * FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?")
+    .bind(tenantId, patientAbhaHash).all();
+  return results;
+}
+
+// ── handleDiscovery — exact-match, rate-limited, PHI-free-audited care-context discovery (Task 6) ────────────
+// deps = { db, kv, audit }; args = { probe, sourceId, now }. Returns a CONSTANT-shape { matched, careContexts:[] }.
+// Fail-closed, in order: flag-gate -> per-source RATE LIMIT (over-limit => RateLimited, audited, NO lookup) ->
+// EXACT-IDENTIFIER match ONLY (HMAC the probe ABHA, look up connect_abdm_carecontext by patient_abha_hash EXACT
+// equality; a demographic-only probe with no exact ABHA => matched:false, NEVER fuzzy) -> audit EVERY probe
+// (metadata only: sourceId, matched bool, count — NEVER a raw ABHA/demographics) -> return matches on an exact hit
+// else the CONSTANT { matched:false, careContexts:[] } (a registered-miss and an unregistered patient are
+// byte-identical, blunting the existence oracle).
+// // VERIFY (owner): discovery is a SYNCHRONOUS request/response (ABDM care-contexts/discover SLA — no async
+// fan-out here) and the response contract is { matched, careContexts:[{ referenceNumber, display }] }; confirm
+// the exact wire field names + whether matchedBy must be echoed when Task-7 wires the ingress.
+export async function handleDiscovery(env, deps, { probe, sourceId, now } = {}) {
+  if (!hipFlagOn(env)) return { matched: false, careContexts: [] };  // flag OFF => constant no-op, no existence leak
+  const { db, kv, audit } = deps || {};
+  const nowIso = isoOf(now);
+  const sid = String(sourceId == null ? "" : sourceId);
+  const tenantId = probe && probe.tenantId;
+
+  // (1) RATE LIMIT FIRST — an over-budget source is refused BEFORE any care-context lookup (learns nothing).
+  const rl = await bumpDiscoveryRate(kv, sid, epochMs(now), discoLimit(env), discoWindowSec(env));
+  if (rl.limited) {
+    if (audit) await audit({ action: "hip.discovery", outcome: "denied", ts: nowIso, tenantId: tenantId ?? null, scope: { sourceId: sid, reason: "rate-limited" } });
+    throw new RateLimited(sid);
+  }
+
+  // (2) EXACT-IDENTIFIER match ONLY. No exact ABHA (a demographic-only probe) => never look up, never match.
+  let matched = false;
+  let careContexts = [];
+  const abha = probeAbha(probe);
+  if (abha != null && tenantId != null) {
+    const patientAbhaHash = await hmacPseudonym(env, tenantId, abha);        // raw ABHA hashed before any lookup
+    const rows = await getServableCareContexts(db, tenantId, patientAbhaHash);
+    if (rows.length > 0) { matched = true; careContexts = rows.map((r) => ({ referenceNumber: r.ref, display: r.display })); }
+  }
+
+  // (3) Audit EVERY probe (metadata ONLY — buildAuditEvent structurally drops anything outside ALLOW; sourceId +
+  //     matched live in `scope`, the count in `resourceCounts`; the raw ABHA/demographics NEVER appear).
+  if (audit) await audit({
+    action: "hip.discovery", outcome: "ok", ts: nowIso, tenantId: tenantId ?? null,
+    scope: { sourceId: sid, matched }, resourceCounts: { careContexts: careContexts.length },
+  });
+
+  // (4) CONSTANT shape on a miss (unregistered patient, demographic-only probe, and registered-miss are identical).
+  if (!matched) return { matched: false, careContexts: [] };
+  return { matched: true, careContexts };
+}
+
+// ── linkCareContext — care-context REGISTRATION (Task 8) ─────────────────────────────────────────────────────
+// deps = { db, audit, identify }; req = { request, tenantId, abhaAddress, ref, hiType, display, source, now }.
+// Server-DERIVES the actor + tenant (resolveActor/resolveTenant): a non-authenticated actor throws AuthError and a
+// non-member throws PermissionError BEFORE any write (no row on a refused caller). The raw ABHA is POST-body-only:
+// it is HMAC'd to patient_abha_hash before D1 and is absent from every persisted + audited field. IDEMPOTENT: the
+// row id is a stable HMAC over (tenant, patient_abha_hash, ref), so a repeat link of the same triple check-then-
+// inserts nothing (no duplicate). Audited (hip.linked, metadata only). Returns { id }.
+export async function linkCareContext(env, deps, req = {}) {
+  const { db, audit, identify } = deps || {};
+  const nowIso = isoOf(req.now);
+  // Server-derive identity + membership BEFORE any write. Both throw (AuthError / PermissionError) on failure.
+  const actor = await resolveActor(identify, req.request, env);
+  const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
+
+  const abhaAddress = req.abhaAddress ?? req.abha;                   // POST-body ONLY — hashed immediately below
+  const patientAbhaHash = await hmacPseudonym(env, tenant.id, abhaAddress);  // fail-closed if the ABHA is missing/salt absent
+  const ref = req.ref;
+  const source = req.source || "followcare";
+  // Stable, deterministic id over (tenant, patient_abha_hash, ref) => idempotent linkage. Reuses hmacPseudonym
+  // (non-PHI hex); a repeat of the same triple yields the same id, so the check-then-insert dedupes.
+  const id = await hmacPseudonym(env, tenant.id, `carecontext:${patientAbhaHash}:${ref}`);
+
+  const existing = await db.prepare("SELECT * FROM connect_abdm_carecontext WHERE id=?").bind(id).first();
+  if (!existing) {
+    const res = await db.prepare(
+      "INSERT INTO connect_abdm_carecontext (id,tenant_id,patient_abha_hash,source,ref,hi_type,display,linked_at) VALUES (?,?,?,?,?,?,?,?)"
+    ).bind(id, tenant.id, patientAbhaHash, source, ref, req.hiType ?? null, req.display ?? null, nowIso).run();
+    if (!res || res.success === false) throw new Error("linkCareContext insert failed");
+  }
+
+  if (audit) await audit({
+    action: "hip.linked", outcome: "ok", ts: nowIso, tenantId: tenant.id, actor: actor.id,
+    careContextHash: await hmacPseudonym(env, tenant.id, String(ref)),   // HMAC of the ref — never the raw careContextReference
+    scope: { source },
+  });
+  return { id };
+}
+
+// ── putHipConsent / getHipConsent — HIP-side consent store (Task 8) ──────────────────────────────────────────
+// Reuses the connect_abdm_consent_req lifecycle row (keyed by requestId) and its MONOTONIC updateConsentStatus
+// (R6 anti-replay): a status is only applied if it is equal-or-higher rank and the current status is non-terminal,
+// so a REPLAYED OLDER status (e.g. a GRANTED replayed after a REVOKE) is refused ({ ok:false }) and never regresses
+// the row. The raw ABHA never reaches here — the caller passes the already-HMAC'd patientAbhaHash. Returns the
+// updateConsentStatus result { ok, status }.
+export async function putHipConsent(db, { requestId, tenantId, patientAbhaHash, hiTypes, expiresAt, status = "GRANTED", now } = {}) {
+  const existing = await getConsentReq(db, requestId);
+  if (!existing) {
+    await putConsentReq(db, { requestId, tenantId, actor: null, patientAbhaHash, hiTypes, expiresAt, now });
+  }
+  return updateConsentStatus(db, requestId, status, now);            // monotonic: an older replayed status => { ok:false }
+}
+
+export async function getHipConsent(db, requestId) {
+  return getConsentReq(db, requestId);
 }
