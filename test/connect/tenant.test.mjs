@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { assertSandboxAllowed, SANDBOX_ALLOWLIST } from "../../functions/_connect/tenant.js";
+import { assertSandboxAllowed, SANDBOX_ALLOWLIST, loadConnectorConfig } from "../../functions/_connect/tenant.js";
 import { SandboxViolation } from "../../functions/_connect/permission.js";
+import { makeMockDb } from "../../functions/_connect/testkit.js";
 
 test("sandbox mode allows an allow-listed base_url", () => {
   assert.doesNotThrow(() => assertSandboxAllowed({ mode: "sandbox" }, { base_url: "https://r4.smarthealthit.org/fhir" }, SANDBOX_ALLOWLIST));
@@ -17,4 +18,14 @@ test("non-https base_url is refused even on an allow-listed host", () => {
 });
 test("scheme spoofing (httpsevil://) is refused, not accepted as https", () => {
   assert.throws(() => assertSandboxAllowed({ mode: "sandbox" }, { base_url: "httpsevil://r4.smarthealthit.org/fhir" }, SANDBOX_ALLOWLIST), SandboxViolation);
+});
+test("loadConnectorConfig picks the right row when a tenant has more than one connector", async () => {
+  const db = makeMockDb({
+    connect_connector_config: [
+      { tenant_id: "t1", connector_id: "fhir-r4", kind: "fhir-r4", profile: "pull", base_url: "https://r4.smarthealthit.org/fhir", scope: "[]" },
+      { tenant_id: "t1", connector_id: "hl7", kind: "hl7v2", profile: "pull", base_url: "https://synthea.local/hl7", scope: "[]" },
+    ],
+  });
+  const config = await loadConnectorConfig(db, "t1", "hl7");
+  assert.equal(config.connector_id, "hl7");
 });

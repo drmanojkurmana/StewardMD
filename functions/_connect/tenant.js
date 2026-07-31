@@ -6,7 +6,8 @@ export async function loadTenant(db, tenantId) {
   return db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(tenantId).first();
 }
 export async function loadConnectorConfig(db, tenantId, connectorId) {
-  return db.prepare("SELECT * FROM connect_connector_config WHERE tenant_id=?").bind(tenantId).first();
+  const r = await db.prepare("SELECT * FROM connect_connector_config WHERE tenant_id=?").bind(tenantId).all();
+  return (r.results || []).find((c) => String(c.connector_id) === String(connectorId)) || null;
 }
 export function assertSandboxAllowed(tenant, config, allowlist = SANDBOX_ALLOWLIST) {
   if (!tenant) throw new SandboxViolation("tenant required");

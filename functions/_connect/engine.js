@@ -1,7 +1,7 @@
 // functions/_connect/engine.js — ConnectEngine pipeline (spec §6). Stateless; ephemeral; fail-closed.
 import { resolveActor, resolveTenant } from "./identity.js";
 import { loadConnectorConfig, assertSandboxAllowed } from "./tenant.js";
-import { enforceScope, PermissionError } from "./permission.js";
+import { enforceScope, PermissionError, UpstreamError } from "./permission.js";
 import { makeSecrets } from "./secrets.js";
 import { makeAuditSink, hmacPseudonym } from "./audit.js";
 import { validateBundle } from "./canonical/validate.js";
@@ -26,7 +26,7 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     assertSandboxAllowed(tenant, config);
 
     // 3. fail-closed scope: granted ∩ requested
-    const granted = JSON.parse(tenant.granted_scopes || "[]");
+    let granted; try { granted = JSON.parse(tenant.granted_scopes || "[]"); } catch { throw new PermissionError("invalid granted_scopes"); }
     const scope = enforceScope(granted, req.scope || []);
 
     // 4. build the injected ctx (no global state; PHI stays here)
@@ -44,6 +44,7 @@ export async function loadPatientContext(env, deps, req, io = {}) {
 
     // 5-6. fetch → normalize
     const connector = deps.connectors[req.connectorId];
+    if (!connector) throw new UpstreamError("connector not registered: " + req.connectorId);
     const raw = await connector.fetchPatient(ctx, req.patientRef);
     const bundle = await connector.normalize(ctx, raw);
     assertConsumable(bundle, SCCM_MAJOR);

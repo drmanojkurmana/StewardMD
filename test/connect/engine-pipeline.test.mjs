@@ -47,4 +47,5 @@ test("sandbox gate blocks a non-allow-listed base_url", async () => {
 test("non-member is denied (fail-closed) and audited as denied", async () => {
   const db = seed({ connect_membership: [] });
   await assert.rejects(() => loadPatientContext(ENV, deps(db), req(), { fetch: fetchOk }), PermissionError);
+  assert.ok(db._tables.connect_audit_event.some((r) => JSON.stringify(r).includes("denied")));
 });
