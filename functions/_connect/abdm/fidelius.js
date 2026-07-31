@@ -23,3 +23,19 @@ export async function sharedSecret(privateKey, peerPublicRaw) {
   if (bits.every((b) => b === 0)) throw new FideliusError("low-order/all-zero shared secret rejected");
   return bits;
 }
+
+export function nonce() { return randomBytes(32); }
+
+function xor(a, b) { const o = new Uint8Array(a.length); for (let i = 0; i < a.length; i++) o[i] = a[i] ^ b[i]; return o; }
+
+export async function deriveKeyIv(secret, ourNonce, theirNonce) {
+  if (ourNonce.length !== 32 || theirNonce.length !== 32) throw new FideliusError("nonces must be 32 bytes");
+  const x = xor(ourNonce, theirNonce);
+  const salt = x.slice(0, 20);      // Fidelius: first 20 bytes
+  const iv = x.slice(20, 32);       // Fidelius: last 12 bytes
+  const ikm = await subtle.importKey("raw", secret, "HKDF", false, ["deriveKey"]);
+  const key = await subtle.deriveKey(
+    { name: "HKDF", hash: "SHA-256", salt, info: new Uint8Array() },
+    ikm, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  return { key, iv };
+}

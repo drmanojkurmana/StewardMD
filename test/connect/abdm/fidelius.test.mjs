@@ -32,3 +32,23 @@ test("randomBytes returns the requested length and varies", () => {
   assert.equal(x.length, 32);
   assert.notDeepEqual([...x], [...y]);
 });
+
+import { nonce, deriveKeyIv } from "../../../functions/_connect/abdm/fidelius.js";
+
+test("nonce is 32 CSPRNG bytes", () => { assert.equal(nonce().length, 32); });
+
+test("deriveKeyIv is symmetric (both parties derive the same key material) and iv is 12 bytes", async () => {
+  const a = await generateKeyPair(), b = await generateKeyPair();
+  const nA = nonce(), nB = nonce();
+  const secA = await sharedSecret(a.privateKey, b.publicKeyRaw);
+  const secB = await sharedSecret(b.privateKey, a.publicKeyRaw);
+  const kiA = await deriveKeyIv(secA, nA, nB);   // "our" = A, "their" = B
+  const kiB = await deriveKeyIv(secB, nB, nA);   // "our" = B, "their" = A  (XOR is order-independent)
+  assert.equal(kiA.iv.length, 12);
+  assert.deepEqual([...kiA.iv], [...kiB.iv]);
+  // Prove the KEYS match by cross-encrypt/decrypt (raw AES-GCM here; seal/open come in Task 3):
+  const iv = kiA.iv, msg = new TextEncoder().encode("ping");
+  const ct = await globalThis.crypto.subtle.encrypt({ name: "AES-GCM", iv }, kiA.key, msg);
+  const pt = new TextDecoder().decode(await globalThis.crypto.subtle.decrypt({ name: "AES-GCM", iv }, kiB.key, ct));
+  assert.equal(pt, "ping");
+});
