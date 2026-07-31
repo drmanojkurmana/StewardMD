@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS connect_abdm_consent_req (
   care_contexts TEXT, purpose TEXT, date_range TEXT,   -- SIGNED scope persisted on verify (R4 reload authority)
   created_at TEXT, updated_at TEXT, expires_at TEXT );
 -- `consent_id` is the durable join (linked by the GRANT notify); index it for the by-consent reload path.
-CREATE INDEX IF NOT EXISTS idx_abdm_consent_req_cid ON connect_abdm_consent_req(consent_id) WHERE consent_id IS NOT NULL;
+-- UNIQUE (partial, NULLs excluded): a consentId maps to AT MOST ONE lifecycle row — the DB-layer backstop
+-- that makes the two-row split structurally impossible (persistGranted also fails closed on no-linked-row).
+CREATE UNIQUE INDEX IF NOT EXISTS idx_consent_req_cid ON connect_abdm_consent_req(consent_id) WHERE consent_id IS NOT NULL;
 
 CREATE TABLE IF NOT EXISTS connect_abdm_txn (
   request_id TEXT PRIMARY KEY,                 -- keyed by requestId (R17); transaction_id attached at on-request

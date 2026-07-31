@@ -12,7 +12,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fetchConsentArtifact, verifyConsentArtifact, revalidateForRequest, getConsentReqByConsentId, linkConsentId } from "../../../functions/_connect/abdm/consent.js";
-import { getConsentReq, putConsentReq, updateConsentStatus } from "../../../functions/_connect/abdm/state.js";
+import { putConsentReq, updateConsentStatus } from "../../../functions/_connect/abdm/state.js";
 import { ingestEvent } from "../../../functions/_connect/engine.js";
 import { requestHealthInformation } from "../../../functions/_connect/abdm/hiu.js";
 import { PermissionError } from "../../../functions/_connect/permission.js";
@@ -71,18 +71,42 @@ test("fetchConsentArtifact refuses to fire without a consentId (fail-closed)", a
 });
 
 // ───────────────────────── verifyConsentArtifact ─────────────────────────
-test("valid artifact JWS => persisted as GRANTED (consent_id + hi_types) and returns ok:true", async () => {
+// Seed the Task-1 lifecycle row (INITIATED) and LINK consent_id onto it (as the GRANT notify does), so the
+// verified artifact has ONE row to UPDATE (the notify-first order the real flow guarantees).
+async function seedLinkedRow(db, { requestId = "req-int-1", consentId = "consent-123" } = {}) {
+  await putConsentReq(db, { requestId, tenantId: "t1", actor: "fb:u1", patientAbhaHash: "h", now: NOW });
+  await linkConsentId(db, requestId, consentId, NOW);
+  return requestId;
+}
+
+test("valid artifact JWS (notify-first: consent_id LINKED) => persisted GRANTED onto the SAME row, ok:true", async () => {
   const deps = makeDeps();
+  const rid = await seedLinkedRow(deps.db);
   const r = await verifyConsentArtifact(JWKS_ENV, deps, { signature: "h.p.s" });
   assert.equal(r.ok, true);
+  assert.equal(r.persisted, true, "the linked row was persisted");
   assert.equal(r.consent.consentId, "consent-123");
   assert.equal(r.consent.status, "GRANTED");
   assert.equal(deps.verifyJws.calls.length, 1, "verifyJws was invoked");
-  const row = await getConsentReq(deps.db, "consent-123");
-  assert.ok(row, "GRANTED row persisted (keyed by consentId)");
+  const row = await getConsentReqByConsentId(deps.db, "consent-123");
+  assert.ok(row, "GRANTED row persisted (resolved by the consent_id join)");
+  assert.equal(row.request_id, rid, "the SAME lifecycle row was UPDATEd — no self-keyed orphan");
+  assert.equal(deps.db._tables.connect_abdm_consent_req.length, 1, "still exactly one row");
   assert.equal(row.status, "GRANTED");
   assert.equal(row.consent_id, "consent-123");
   assert.deepEqual(JSON.parse(row.hi_types), ["OPConsultation", "DiagnosticReport"]);
+});
+
+test("webhook REORDER: a verified artifact with NO linked row FAILS CLOSED (no-linked-row) — no row inserted", async () => {
+  // The GRANT notify's linkConsentId has not committed yet: there is no consent_id join. persistGranted must
+  // refuse rather than self-key an orphan row (which would reopen the two-row since-REVOKED fail-open).
+  const deps = makeDeps();   // empty db — nothing linked
+  const r = await verifyConsentArtifact(JWKS_ENV, deps, { signature: "h.p.s" });
+  assert.equal(r.ok, false, "fail-closed: nothing to bind to");
+  assert.equal(r.reason, "no-linked-row");
+  assert.equal((deps.db._tables.connect_abdm_consent_req || []).length, 0, "NO self-keyed row inserted (two-row split impossible)");
+  const denied = deps.audit.calls.find((f) => f.action === "consent.denied");
+  assert.ok(denied, "a consent.denied audit was emitted for the anomaly");
 });
 
 test("invalid signature => NOT persisted, fail-closed ok:false, audit consent.denied (metadata-only)", async () => {
@@ -120,6 +144,7 @@ test("scope fields are read from the VERIFIED payload, never the envelope (signe
   // The signed payload grants ONLY cc-A; the untrusted envelope claims cc-A AND cc-B. We must bind to the
   // signed payload, so a later request for cc-B must fail revalidation.
   const deps = makeDeps({ verifyJws: stubVerify({ ok: true, payload: signedDetail({ careContexts: [{ careContextReference: "cc-A" }] }) }) });
+  await seedLinkedRow(deps.db);   // notify-first: the consent_id join must exist before verify persists
   const r = await verifyConsentArtifact(JWKS_ENV, deps, {
     signature: "h.p.s", careContexts: [{ careContextReference: "cc-A" }, { careContextReference: "cc-B" }],
   });

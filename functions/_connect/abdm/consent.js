@@ -63,13 +63,18 @@ export async function verifyConsentArtifact(env, deps, artifact) {
     if (consent.status !== "GRANTED") return deny("not-granted");   // only a signed GRANT is persisted
 
     // Persist the FULL signed scope onto the ONE reconciled lifecycle row (resolved via consent_id) through
-    // the MONOTONIC guard. A refused (terminal/lower-rank) transition — e.g. a replayed GRANTED arriving after
-    // REVOKED — persists nothing and leaves the row terminal; we do NOT audit consent.verified in that case.
+    // the MONOTONIC guard. Two refusal shapes, both writing NOTHING:
+    //  - "no-linked-row": a webhook REORDER (artifact before the notify's link) — FAIL CLOSED (ok:false), so the
+    //    caller refuses/retries; nothing is bound and no self-keyed orphan row is created.
+    //  - "monotonic": a replayed GRANTED arriving after a terminal REVOKED/EXPIRED row — a BENIGN no-op: the
+    //    signature verified but the terminal state already wins, so we return ok:true, persisted:false.
+    // consent.verified is audited ONLY on an actual persist.
     const persisted = await persistGranted(db, {
       consentId: consent.consentId, careContexts: consent.careContexts, hiTypes: consent.hiTypes,
       purpose: consent.purpose, dateRange: consent.permission.dateRange,
       expiresAt: consent.expiry ?? consent.permission.dataEraseAt ?? null, now,
     });
+    if (!persisted.ok && persisted.reason === "no-linked-row") return deny("no-linked-row");
     if (persisted.ok && audit) await audit({
       action: "consent.verified", outcome: "ok", ts: now,
       resourceCounts: { hiTypes: consent.hiTypes.length, careContexts: consent.careContexts.length },
@@ -111,36 +116,28 @@ export async function linkConsentId(db, requestId, consentId, now) {
 // `status='GRANTED'`: a replayed GRANTED arriving after a terminal REVOKED/EXPIRED row is refused and the row
 // stays terminal. The full SIGNED scope (careContexts/hiTypes/purpose/dateRange/expiry) is persisted so the
 // data-request can revalidate off a DB reload. Fail-closed: every write checks res.success (like state.insertRow).
-// Returns { ok } — ok:false means a monotonic refusal (nothing written), ok:true means the grant was applied.
+// Returns { ok, reason? } — ok:false = a refusal that wrote NOTHING: reason "monotonic" (a terminal row wins) or
+// "no-linked-row" (see below); ok:true = the grant was applied to the linked row.
 async function persistGranted(db, { consentId, careContexts, hiTypes, purpose, dateRange, expiresAt, now }) {
   const enc = (v) => (v == null ? null : JSON.stringify(v));
   const cc = enc(careContexts), hi = enc(hiTypes), pu = enc(purpose), dr = enc(dateRange);
   const row = await getConsentReqByConsentId(db, consentId);
-  if (row) {
-    // MONOTONIC status FIRST (reuse state.js): a terminal/lower-rank row refuses here → we write NO scope, so a
-    // since-REVOKED row can never be un-revoked or have its scope re-widened by a replayed GRANTED artifact.
-    const guarded = await updateConsentStatus(db, row.request_id, "GRANTED", now);
-    if (!guarded.ok) return { ok: false, status: guarded.status };
-    const res = await db.prepare(
-      "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,expires_at=?,updated_at=? WHERE request_id=?")
-      .bind(cc, hi, pu, dr, expiresAt, now, row.request_id).run();
-    if (!res || res.success === false) throw new ConnectStateError("persistGranted scope update failed");
-    return { ok: true, status: "GRANTED" };
-  }
-  // Defensive fallback (// VERIFY ordering): in the normal flow the GRANT notify LINKS consent_id onto the
-  // requestConsent lifecycle row BEFORE this artifact webhook, so the row above is found. If it is not (notify
-  // not yet delivered), self-key a reconciled row by consentId so it is STILL findable by consent_id (one row,
-  // no split) with GRANTED as its first status (monotonicity holds — there is no prior state to regress).
-  const fresh = {
-    request_id: consentId, tenant_id: null, actor: null, patient_abha_hash: null,
-    status: "GRANTED", consent_id: consentId,
-    hi_types: hi, care_contexts: cc, purpose: pu, date_range: dr,
-    created_at: now, updated_at: now, expires_at: expiresAt,
-  };
-  const keys = Object.keys(fresh);
-  const res = await db.prepare(`INSERT INTO connect_abdm_consent_req (${keys.join(",")}) VALUES (${keys.map(() => "?").join(",")})`)
-    .bind(...keys.map((k) => fresh[k])).run();
-  if (!res || res.success === false) throw new ConnectStateError("persistGranted insert failed");
+  // FAIL CLOSED on NO linked row. The GRANT consent-notify's linkConsentId is the SOLE path that creates the
+  // consent_id join, so a verified artifact with no linked row means a webhook REORDER (the artifact was
+  // processed before the notify's link committed). We do NOT self-key an INSERT here: a self-keyed
+  // request_id=consentId row could go stale-GRANTED while a later REVOKE lands on the internal-requestId row,
+  // reopening the two-row since-REVOKED fail-open. Refusing keeps it ONE row — the data-request stays refused
+  // until the notify links + the artifact is re-verified (the fetch is triggered BY the notify, so in the real
+  // flow the link always commits first and this branch is unreachable). // VERIFY the notify→fetch ordering.
+  if (!row) return { ok: false, reason: "no-linked-row" };
+  // MONOTONIC status FIRST (reuse state.js): a terminal/lower-rank row refuses here → we write NO scope, so a
+  // since-REVOKED row can never be un-revoked or have its scope re-widened by a replayed GRANTED artifact.
+  const guarded = await updateConsentStatus(db, row.request_id, "GRANTED", now);
+  if (!guarded.ok) return { ok: false, reason: "monotonic", status: guarded.status };
+  const res = await db.prepare(
+    "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,expires_at=?,updated_at=? WHERE request_id=?")
+    .bind(cc, hi, pu, dr, expiresAt, now, row.request_id).run();
+  if (!res || res.success === false) throw new ConnectStateError("persistGranted scope update failed");
   return { ok: true, status: "GRANTED" };
 }
 
