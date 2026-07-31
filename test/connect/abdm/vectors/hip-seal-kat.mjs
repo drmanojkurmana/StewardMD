@@ -20,6 +20,11 @@ export const KAT = {
   // The bare peer scalar (hex) so the test can re-derive the shared secret + decrypt the sealed page.
   hiuScalarHex: "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb", // RFC 7748 scalar (Bob)
 
+  // EXTERNAL ANCHOR (not self-referential): with these RFC 7748 scalars the ECDH shared secret is the
+  // PUBLISHED RFC 7748 §6.1 value K = X25519(Alice_priv, Bob_pub). Pinning it proves the KAT's crypto
+  // matches an independent standards-body vector, not just fidelius's own output.
+  sharedSecretHex: "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742", // RFC 7748 §6.1 K
+
   plaintext: "{\"resourceType\":\"Bundle\",\"type\":\"document\",\"id\":\"kat-1\"}",
 
   // Expected sealed page (identical to fidelius-kat's content/checksum — the cross-anchor).

@@ -18,6 +18,7 @@ const subtle = globalThis.crypto.subtle;
 const b64 = (u8) => btoa(String.fromCharCode(...u8));
 const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 const hexToBytes = (h) => Uint8Array.from(h.match(/../g).map((x) => parseInt(x, 16)));
+const bytesToHex = (u8) => [...u8].map((x) => x.toString(16).padStart(2, "0")).join("");
 async function sha256hex(str) {
   const h = new Uint8Array(await subtle.digest("SHA-256", new TextEncoder().encode(str)));
   return [...h].map((x) => x.toString(16).padStart(2, "0")).join("");
@@ -89,7 +90,7 @@ test("sealForHiu: a single seal round-trips + emits well-formed keyMaterial (ECD
 // DETERMINISTIC KAT: fixed HIU keyMaterial + injected ephemeral ⇒ exact known ciphertext + checksum bytes.
 // ─────────────────────────────────────────────────────────────────────────────
 test("deterministic KAT: fixed HIU keyMaterial + io-injected ephemeral reproduce exact content/checksum/keyMaterial", async () => {
-  const io = { scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex) };
+  const io = { testOnly: true, scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex) };
   const page = await sealForHiu(KAT.hiuKeyMaterial, KAT.plaintext, io);
   assert.equal(page.content, KAT.content, "content must match the recorded KAT bytes");
   assert.equal(page.checksum, KAT.checksum, "checksum must match the recorded KAT bytes");
@@ -107,6 +108,15 @@ test("deterministic KAT is cross-anchored to fidelius-kat (same content/checksum
   const { KAT: FID } = await import("./vectors/fidelius-kat.mjs");
   assert.equal(KAT.content, FID.content, "hip-seal-kat.content must equal the independent fidelius-kat.content");
   assert.equal(KAT.checksum, FID.checksum, "hip-seal-kat.checksum must equal the independent fidelius-kat.checksum");
+});
+
+test("EXTERNAL ANCHOR: the KAT's derived ECDH shared secret equals the published RFC 7748 §6.1 value K", async () => {
+  const { importRawPrivate } = await import("../../../functions/_connect/abdm/fidelius.js");
+  const eph = await importRawPrivate(hexToBytes(KAT.ephScalarHex));           // RFC 7748 "Alice"
+  const secret = await sharedSecret(eph.privateKey, unb64(KAT.hiuKeyMaterial.dhPublicKey)); // X25519(Alice, Bob_pub)
+  assert.equal(bytesToHex(secret), KAT.sharedSecretHex, "KAT secret must match the pinned RFC value");
+  assert.equal(KAT.sharedSecretHex, "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+    "the pinned value must be RFC 7748 §6.1 K (external, standards-body anchor — not fidelius-derived)");
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -163,11 +173,11 @@ test("the module exposes NO batch/multi-plaintext-per-key form (surface audit)",
 test("sealEntries REJECTS a broadcast io.scalar/io.nonce (would reuse one (key,iv) across entries)", async () => {
   const hiu = await makeHiu();
   await assert.rejects(
-    () => sealEntries(hiu.keyMaterial, ["a", "b"], { scalar: hexToBytes(KAT.ephScalarHex) }),
+    () => sealEntries(hiu.keyMaterial, ["a", "b"], { testOnly: true, scalar: hexToBytes(KAT.ephScalarHex) }),
     FideliusError,
     "a single shared scalar across entries must be refused (R1)");
   await assert.rejects(
-    () => sealEntries(hiu.keyMaterial, ["a", "b"], { nonce: hexToBytes(KAT.ephNonceHex) }),
+    () => sealEntries(hiu.keyMaterial, ["a", "b"], { testOnly: true, nonce: hexToBytes(KAT.ephNonceHex) }),
     FideliusError,
     "a single shared nonce across entries must be refused (R1)");
 });
@@ -175,8 +185,33 @@ test("sealEntries REJECTS a broadcast io.scalar/io.nonce (would reuse one (key,i
 test("sealEntries rejects a per-entry io.entries[] whose length ≠ plaintexts.length (fail-closed)", async () => {
   const hiu = await makeHiu();
   await assert.rejects(
-    () => sealEntries(hiu.keyMaterial, ["a", "b", "c"], { entries: [{}, {}] }),
+    () => sealEntries(hiu.keyMaterial, ["a", "b", "c"], { testOnly: true, entries: [{}, {}] }),
     FideliusError);
+});
+
+// ── Hardening (dual-adversarial): io is TEST-ONLY-gated, and duplicate entries are refused. ──
+test("HARDENING #2: sealEntries REJECTS duplicate io.entries[] (same (scalar,nonce) ⇒ reused (key,iv))", async () => {
+  const hiu = await makeHiu();
+  const dup = { scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex) };
+  await assert.rejects(
+    () => sealEntries(hiu.keyMaterial, ["a", "b"], { testOnly: true, entries: [dup, { ...dup }] }),
+    FideliusError,
+    "two entries pinning the identical (scalar,nonce) must be refused");
+});
+
+test("HARDENING #1: a PROD call passing scalar/nonce WITHOUT testOnly IGNORES them and uses the CSPRNG path", async () => {
+  const hiu = await makeHiu();
+  const attacker = { scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex) }; // no testOnly
+  const p1 = await sealForHiu(hiu.keyMaterial, "phi", attacker);
+  const p2 = await sealForHiu(hiu.keyMaterial, "phi", attacker);
+  // If injection were honored both would equal the KAT ephemeral; instead each is a fresh CSPRNG keypair.
+  assert.notEqual(p1.keyMaterial.dhPublicKey, p2.keyMaterial.dhPublicKey, "two prod calls must yield DISTINCT dhPublicKey");
+  assert.notEqual(p1.keyMaterial.dhPublicKey, KAT.keyMaterial.dhPublicKey, "the injected scalar must have been ignored");
+  assert.notEqual(p1.keyMaterial.nonce, KAT.keyMaterial.nonce, "the injected nonce must have been ignored");
+  // sealEntries: same guarantee — an attacker object without testOnly cannot pin any entry's material.
+  const pages = await sealEntries(hiu.keyMaterial, ["x", "y"], attacker);
+  assert.notEqual(pages[0].keyMaterial.dhPublicKey, pages[1].keyMaterial.dhPublicKey);
+  assert.notEqual(pages[0].keyMaterial.dhPublicKey, KAT.keyMaterial.dhPublicKey);
 });
 
 test("R1 negation proof: two DIFFERENT plaintexts sealed independently never collide on (key,iv)", async () => {
