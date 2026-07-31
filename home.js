@@ -1746,8 +1746,8 @@
     }).catch(function () { if (host) host.innerHTML = '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>'; });
   }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", fundx: "FundX", followcare: "FollowCare", tts: "Text-to-speech" };
-    var ORDER = ["maik", "maik_case", "ecg", "thorex", "ocr", "stt"];
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", fundx: "FundX", followcare: "FollowCare", tts: "Text-to-speech" };
+    var ORDER = ["maik", "maik_case", "research", "ecg", "thorex", "ocr", "stt"];
     var limits = u.limits || {}, used = u.byModule || {}, rows = "";
     ORDER.forEach(function (id) {
       if (!(id in limits)) return;

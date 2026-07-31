@@ -17,7 +17,10 @@
   var TARGETS = [
     { sel: "#sbrefOverlay", body: "#sbrefBody", items: [".sbref-sec", ".sbref-syn > *"] },  // Syndrome library
     { sel: "#dxOverlay",    items: [".dx-body > *"] },                                        // Clinical Reasoning
-    { sel: "#ghisPanel",    items: [".ghis-setup-card", ".ghis-pt-card"] }                    // Ward Sync
+    { sel: "#ghisPanel",    items: [".ghis-setup-card", ".ghis-pt-card"] },                   // Ward Sync
+    // Every bottom sheet (AI Usage, Drugs, Calculators, settings, hospital picker, KU, ...) is the ONE
+    // reused .hv-sheet (openSheet re-renders its .hv-sheet-wrap and toggles .on). Stagger its content in.
+    { sel: ".hv-sheet", body: ".hv-sheet", items: [".hv-sheet-wrap > *:not(.hv-grab)"] }
   ];
 
   function reduced() { try { return !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; } }
