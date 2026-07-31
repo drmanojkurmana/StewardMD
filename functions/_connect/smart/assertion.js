@@ -16,11 +16,17 @@ const b64urlStr = (s) => b64url(new TextEncoder().encode(s));
 export async function signClientAssertion(deps, { clientId, tokenEndpoint, privateKeyJwk, kid, alg, jti, ttlSec }) {
   const spec = SIGN_ALG[alg];
   if (!spec) throw new AssertionError("unsupported alg (asymmetric-only): " + String(alg));   // before any key touch
-  if (!clientId || !tokenEndpoint || !privateKeyJwk || !kid) throw new AssertionError("clientId, tokenEndpoint, privateKeyJwk, kid required");
+  // Type-guard every claim input (defense in depth): a BigInt/Symbol/circular value must fail closed as an
+  // AssertionError, never a raw TypeError or a silently-dropped iss/sub/kid claim.
+  if (typeof clientId !== "string" || !clientId || typeof tokenEndpoint !== "string" || !tokenEndpoint || typeof kid !== "string" || !kid) throw new AssertionError("clientId, tokenEndpoint, kid must be non-empty strings");
+  if (!privateKeyJwk || typeof privateKeyJwk !== "object") throw new AssertionError("privateKeyJwk (jwk object) required");
+  if (jti != null && typeof jti !== "string") throw new AssertionError("jti must be a string");
+  // exp is ALWAYS bounded to iat+300: a non-numeric/non-positive ttlSec can never produce an absent/NaN exp.
+  const ttl = (typeof ttlSec === "number" && Number.isFinite(ttlSec) && ttlSec > 0) ? Math.min(ttlSec, 300) : 300;
   const nowMs = deps && typeof deps.now === "function" ? deps.now() : Date.now();              // injected clock
   const iat = Math.floor(nowMs / 1000);
   const header = { alg, kid, typ: "JWT" };
-  const claims = { iss: clientId, sub: clientId, aud: tokenEndpoint, iat, nbf: iat, exp: iat + Math.min(ttlSec || 300, 300), jti: jti || (crypto.randomUUID ? crypto.randomUUID() : String(iat) + "-" + Math.random().toString(36).slice(2)) };
+  const claims = { iss: clientId, sub: clientId, aud: tokenEndpoint, iat, nbf: iat, exp: iat + ttl, jti: jti || (crypto.randomUUID ? crypto.randomUUID() : String(iat) + "-" + Math.random().toString(36).slice(2)) };
   const data = b64urlStr(JSON.stringify(header)) + "." + b64urlStr(JSON.stringify(claims));
   let key;
   try { key = await crypto.subtle.importKey("jwk", privateKeyJwk, spec.importParams, false, ["sign"]); }
