@@ -568,7 +568,7 @@ test("sweep: in-flight non-expired non-terminal txn → untouched (txnsSwept===0
   await bufferEntry(r2, HMAC_ENV, "txn-L", "cc-ref-1", "CIPHER-L", "chk-1", NOW);
 
   const counts = await sweep(db, r2, HMAC_ENV, 100); // not expired (100<9999), not terminal
-  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
   const row = await getTxnByRequestId(db, "req-live");
   assert.ok(row);
   assert.equal(row.status, "RECEIVING");
@@ -591,7 +591,7 @@ test("sweep is idempotent: second sweep over a clean table → all-zero counts, 
   const first = await sweep(db, r2, HMAC_ENV, 2000);
   assert.equal(first.txnsSwept, 1);
   const second = await sweep(db, r2, HMAC_ENV, 2000); // table already clean
-  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
 });
 
 // ---- Stage-6 Task-1: PIN the sweep expires_at/now type contract to ISO-8601 (BLOCKING) --------------
@@ -638,7 +638,7 @@ test("sweep (ISO): future expires_at non-terminal txn → retained untouched", a
   await bufferEntry(r2, HMAC_ENV, "txn-ISO-F", "cc-ref-1", "CIPHER-F", "chk-1", ISO_NOW);
 
   const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW < ISO_FUTURE → NOT expired
-  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
   const row = await getTxnByRequestId(db, "req-iso-fut");
   assert.ok(row && row.eph_privkey_sealed && row.eph_privkey_sealed.length > 0); // key intact
   assert.equal((await listBuffered(r2, "txn-ISO-F")).length, 1);                 // buffer intact
@@ -682,4 +682,243 @@ test("sweep (ISO): terminal row with garbled expires_at → swept, not counted a
   assert.equal(counts.txnsSwept, 1);
   assert.equal(counts.anomalies, 0);
   assert.equal(await getTxnByRequestId(db, "req-term-garbled"), null);
+});
+
+// ---- Stage-6 Task-2: REVOKE + dataEraseAt-driven ERASURE (DPDP R15, §8(6)) — DUAL-ADVERSARIAL --------
+// The erasure-completeness proof. A REVOKED/EXPIRED consent, or one past its patient-level `data_erase_at`,
+// must have ALL its derived state erased NOW (not left until the txn TTL): its R2 buffers, its sealed
+// ephemeral keys, its txn rows, and — ONLY on a patient-level dataEraseAt/full-erase — its care-context
+// rows. A single residual sealed key / buffer object / txn row / servable care-context is a DPDP breach.
+// The erasure itself is audited (`data.erased`, metadata-only) and the PHI-free audit trail is RETAINED
+// (never deleted) under DPDP §8(6). Idempotent + fail-closed. The `now`/`data_erase_at` are ISO strings.
+
+const S6_FUT = "2026-08-30T00:00:00Z"; // well after ISO_NOW → an unexpired txn/consent
+// Seed a fully-formed consent_req row (direct seed gives control over status/consent_id/data_erase_at that the
+// putConsentReq happy-path does not expose). PHI-free: patient_abha_hash is an HMAC, never a raw ABHA.
+function seedConsentRow(o = {}) {
+  return {
+    request_id: o.request_id ?? "rq-c", tenant_id: o.tenant_id ?? "t1", actor: "dr-a",
+    patient_abha_hash: o.patient_abha_hash ?? "HMAC-P", status: o.status ?? "REVOKED",
+    consent_id: o.consent_id ?? "cid", hi_types: null, care_contexts: null, purpose: null,
+    date_range: null, created_at: NOW, updated_at: NOW,
+    expires_at: o.expires_at ?? S6_FUT, data_erase_at: o.data_erase_at ?? null,
+  };
+}
+const ccRow = (o = {}) => ({
+  id: o.id ?? "cc-id", tenant_id: o.tenant_id ?? "t1", patient_abha_hash: o.patient_abha_hash ?? "HMAC-P",
+  source: "followcare", ref: o.ref ?? "cc-ref", hi_type: "Prescription", display: "Visit", linked_at: NOW,
+});
+const erasedEvents = (db) => (db._tables.connect_audit_event || []).filter((e) => e.action === "data.erased");
+// Add one still-RECEIVING (non-expired, non-terminal) txn + its R2 buffer under a consent.
+async function addLiveTxn(db, r2, { requestId, consentId, txnId }) {
+  await putTxn(db, sealStub, {
+    requestId, tenantId: "t1", consentId,
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: S6_FUT, now: NOW, // NOT expired, NOT terminal — pass-1 GC would leave it
+  });
+  await attachTransactionId(db, requestId, txnId, NOW);
+  await bufferEntry(r2, HMAC_ENV, txnId, "cc-ref-1", "CIPHER", "chk-1", NOW);
+}
+
+// Crown jewel: a REVOKED consent with a still-RECEIVING txn → every store empty for it, erasure audited,
+// the earlier consent.revoked audit RETAINED. Proves REVOKE overrides the FSM/TTL (erase NOW, not at expiry).
+test("erase: REVOKED consent → ALL derived state (buffer+key+txn) GONE, audited, prior audit retained", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-A", consent_id: "cidA", status: "REVOKED" })],
+    connect_audit_event: [{ id: "aud-rev", action: "consent.revoked", consent_id: "cidA", tenant_id: "t1" }],
+  });
+  const r2 = makeR2();
+  await addLiveTxn(db, r2, { requestId: "rqA-txn", consentId: "cidA", txnId: "txnA" });
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+
+  // INVARIANT: zero residual for cidA — buffer object, sealed key, txn row all gone.
+  assert.equal(await getTxnByRequestId(db, "rqA-txn"), null, "txn row (and its sealed key) must be deleted");
+  assert.equal((db._tables.connect_abdm_txn || []).filter((t) => t.consent_id === "cidA").length, 0, "no residual txn row for cidA");
+  assert.equal((await listBuffered(r2, "txnA")).length, 0, "no residual R2 buffer for the txn");
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.keysErased, 1);
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal(counts.consentsErased, 1);
+  // The erasure is audited (metadata-only) AND the earlier consent.revoked audit is RETAINED (§8(6)).
+  const ev = erasedEvents(db);
+  assert.equal(ev.length, 1, "exactly one data.erased event");
+  assert.equal(ev[0].consent_id, "cidA");
+  assert.ok((db._tables.connect_audit_event || []).some((e) => e.id === "aud-rev"), "prior consent.revoked audit NOT deleted");
+  // The data.erased event carries NO PHI — only ids/counts (patient hash never passed to the sink).
+  assert.equal(ev[0].patient_ref_hash, null);
+});
+
+// A consent past its patient-level data_erase_at but STILL GRANTED → derived state erased (dataEraseAt is a
+// distinct, usually-later erasure bound; it must fire even though the consent is not REVOKED/EXPIRED).
+test("erase: GRANTED consent past data_erase_at → derived state erased", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-G", consent_id: "cidG", status: "GRANTED", data_erase_at: ISO_PAST })],
+  });
+  const r2 = makeR2();
+  await addLiveTxn(db, r2, { requestId: "rqG-txn", consentId: "cidG", txnId: "txnG" });
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW > ISO_PAST → data_erase_at passed
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.consentsErased, 1);
+  assert.equal(await getTxnByRequestId(db, "rqG-txn"), null);
+  assert.equal((await listBuffered(r2, "txnG")).length, 0);
+});
+
+// Both REVOKED and EXPIRED status trigger derived-state erasure (single-consent lifecycle end).
+test("erase: REVOKED and EXPIRED status each trigger derived-state erasure", async () => {
+  for (const status of ["REVOKED", "EXPIRED"]) {
+    const db = makeAbdmDb({
+      connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-S", consent_id: "cidS", status })],
+    });
+    const r2 = makeR2();
+    await addLiveTxn(db, r2, { requestId: "rqS-txn", consentId: "cidS", txnId: "txnS" });
+    const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+    assert.equal(counts.txnsSwept, 1, `${status} must erase its txn`);
+    assert.equal(await getTxnByRequestId(db, "rqS-txn"), null, `${status}: txn gone`);
+  }
+});
+
+// Isolation: erasing consent A must leave an UNRELATED live consent B's state completely intact.
+test("erase: an unrelated live consent's state is UNTOUCHED", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [
+      seedConsentRow({ request_id: "rq-A", consent_id: "cidA", status: "REVOKED", patient_abha_hash: "HMAC-A" }),
+      seedConsentRow({ request_id: "rq-B", consent_id: "cidB", status: "GRANTED", patient_abha_hash: "HMAC-B", data_erase_at: S6_FUT }),
+    ],
+    connect_abdm_carecontext: [ccRow({ id: "cc-B", patient_abha_hash: "HMAC-B", ref: "ref-B" })],
+  });
+  const r2 = makeR2();
+  await addLiveTxn(db, r2, { requestId: "rqA-txn", consentId: "cidA", txnId: "txnA" });
+  await addLiveTxn(db, r2, { requestId: "rqB-txn", consentId: "cidB", txnId: "txnB" });
+
+  await sweep(db, r2, HMAC_ENV, ISO_NOW);
+
+  // A erased ...
+  assert.equal(await getTxnByRequestId(db, "rqA-txn"), null);
+  // ... B fully intact: txn row, sealed key, buffer, and care-context registration all survive.
+  const bTxn = await getTxnByRequestId(db, "rqB-txn");
+  assert.ok(bTxn && bTxn.eph_privkey_sealed && bTxn.eph_privkey_sealed.length > 0, "B's sealed key intact");
+  assert.equal((await listBuffered(r2, "txnB")).length, 1, "B's buffer intact");
+  assert.equal((db._tables.connect_abdm_carecontext || []).length, 1, "B's care-context intact");
+});
+
+// Care-context SCOPE (owner decision): a single-consent REVOKE must NOT drop a care-context registration
+// (it may back OTHER live consents); a patient-level data_erase_at DOES erase the patient's care-contexts.
+test("erase: single-consent REVOKE does NOT erase care-context; patient-level data_erase_at DOES", async () => {
+  // (a) REVOKE only → care-context retained.
+  {
+    const db = makeAbdmDb({
+      connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-R", consent_id: "cidR", status: "REVOKED", patient_abha_hash: "HMAC-P" })],
+      connect_abdm_carecontext: [ccRow({ id: "cc-1", patient_abha_hash: "HMAC-P" })],
+    });
+    const r2 = makeR2();
+    await addLiveTxn(db, r2, { requestId: "rqR-txn", consentId: "cidR", txnId: "txnR" });
+    const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+    assert.equal(counts.careContextsErased, 0, "REVOKE must NOT erase care-context");
+    assert.equal((db._tables.connect_abdm_carecontext || []).length, 1, "care-context registration survives a single REVOKE");
+    assert.equal(await getTxnByRequestId(db, "rqR-txn"), null); // derived state still erased
+  }
+  // (b) patient-level data_erase_at → the patient's care-contexts erased (scoped to tenant + patient hash).
+  {
+    const db = makeAbdmDb({
+      connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-D", consent_id: "cidD", status: "GRANTED", patient_abha_hash: "HMAC-P", data_erase_at: ISO_PAST })],
+      connect_abdm_carecontext: [
+        ccRow({ id: "cc-P1", patient_abha_hash: "HMAC-P", ref: "r1" }),
+        ccRow({ id: "cc-P2", patient_abha_hash: "HMAC-P", ref: "r2" }),
+        ccRow({ id: "cc-Q", patient_abha_hash: "HMAC-OTHER", ref: "r3" }), // another patient — must survive
+      ],
+    });
+    const r2 = makeR2();
+    const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+    assert.equal(counts.careContextsErased, 2, "both of the patient's care-contexts erased");
+    const left = db._tables.connect_abdm_carecontext || [];
+    assert.equal(left.length, 1);
+    assert.equal(left[0].patient_abha_hash, "HMAC-OTHER", "a DIFFERENT patient's care-context is never collateral-erased");
+  }
+});
+
+// ADVERSARIAL: the mock-D1 NULL-matching trap. A REVOKED consent with a NULL consent_id must NOT
+// collateral-erase every OTHER txn whose consent_id is also NULL (a `WHERE consent_id=?` bind(NULL) would,
+// via String() coercion in the mock, match them all). The unlinked consent has no derived state anyway.
+test("erase: REVOKED consent with NULL consent_id never over-erases NULL-consent_id txns", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-N", consent_id: null, status: "REVOKED" })],
+  });
+  const r2 = makeR2();
+  // An UNRELATED, live txn that happens to carry a NULL consent_id (pre-link) and a FUTURE expiry.
+  await putTxn(db, sealStub, {
+    requestId: "rq-live-null", tenantId: "t1", consentId: null,
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: S6_FUT, now: NOW,
+  });
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(counts.txnsSwept, 0, "no txn should be erased");
+  assert.equal(counts.consentsErased, 0, "an unlinked consent has no derived state to erase");
+  const live = await getTxnByRequestId(db, "rq-live-null");
+  assert.ok(live && live.eph_privkey_sealed && live.eph_privkey_sealed.length > 0, "unrelated NULL-consent_id txn survives");
+});
+
+// Idempotent + no double-audit: a second sweep over an already-erased consent → all-zero, exactly one
+// data.erased event total (the REVOKED consent_req row is retained, but there is nothing left to erase).
+test("erase: idempotent — second sweep → zero counts, no duplicate data.erased", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-I", consent_id: "cidI", status: "REVOKED" })],
+  });
+  const r2 = makeR2();
+  await addLiveTxn(db, r2, { requestId: "rqI-txn", consentId: "cidI", txnId: "txnI" });
+
+  const first = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(first.consentsErased, 1);
+  const second = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0, careContextsErased: 0, consentsErased: 0 });
+  assert.equal(erasedEvents(db).length, 1, "no duplicate data.erased on re-sweep");
+});
+
+// T1 anomaly follow-up: the hard age-backstop. A NON-terminal txn with an UNPARSEABLE expires_at that is
+// older than SWEEP_MAX_TXN_AGE (created_at long ago) is force-swept (key erased) rather than leaking its
+// sealed key forever — while a RECENT garbled-expiry row stays surfaced-and-retained in `anomalies` (T1).
+test("age-backstop: aged non-terminal txn with garbled expires_at → force-swept (key erased); recent one retained", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  // Aged: created 2026-01-01, garbled expiry, non-terminal → past the 7-day backstop at ISO_NOW → swept.
+  await putTxn(db, sealStub, {
+    requestId: "rq-aged", tenantId: "t1", consentId: "cX",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "not-a-date", now: "2026-01-01T00:00:00Z",
+  });
+  await attachTransactionId(db, "rq-aged", "txn-aged", "2026-01-01T00:00:00Z");
+  await bufferEntry(r2, HMAC_ENV, "txn-aged", "cc-ref-1", "CIPHER", "chk-1", "2026-01-01T00:00:00Z");
+  // Recent: created at ISO_NOW, garbled expiry, non-terminal → NOT past the backstop → retained + anomaly.
+  await putTxn(db, sealStub, {
+    requestId: "rq-recent", tenantId: "t1", consentId: "cY",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "not-a-date", now: ISO_NOW,
+  });
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(counts.txnsSwept, 1, "only the aged garbled-expiry row is force-swept");
+  assert.equal(counts.keysErased, 1);
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal(counts.anomalies, 1, "the recent garbled-expiry row stays surfaced (not yet aged out)");
+  assert.equal(await getTxnByRequestId(db, "rq-aged"), null, "aged row erased (no lingering sealed key)");
+  assert.ok(await getTxnByRequestId(db, "rq-recent"), "recent garbled-expiry row retained pending the backstop");
+});
+
+// Fail-closed: a storage failure during the erasure surfaces as a typed ConnectStateError (never a silent
+// partial erase). Here the care-context DELETE throws mid-pass.
+test("erase: a storage failure during erasure rejects with ConnectStateError (fail-closed)", async () => {
+  const good = makeAbdmDb({
+    connect_abdm_consent_req: [seedConsentRow({ request_id: "rq-F", consent_id: "cidF", status: "GRANTED", data_erase_at: ISO_PAST })],
+    connect_abdm_carecontext: [ccRow({ id: "cc-F", patient_abha_hash: "HMAC-P" })],
+  });
+  // Wrap prepare so the care-context DELETE throws a raw error → sweep must wrap it as ConnectStateError.
+  const realPrepare = good.prepare.bind(good);
+  good.prepare = (sql) => {
+    if (/DELETE FROM connect_abdm_carecontext/i.test(sql)) {
+      return { bind: () => ({ run: async () => { throw new Error("d1 down"); } }) };
+    }
+    return realPrepare(sql);
+  };
+  await assert.rejects(() => sweep(good, makeR2(), HMAC_ENV, ISO_NOW), ConnectStateError);
 });

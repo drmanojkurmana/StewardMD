@@ -5,7 +5,7 @@
 // TIME CONTRACT (pinned): every timestamp column here (`created_at`/`updated_at`/`expires_at`) and every
 // injected `now` is an ISO-8601 string — NEVER epoch-ms. `sweep` compares them ISO-aware (Date.parse),
 // never `Number()` (which turns an ISO string into NaN and silently no-ops the expiry branch).
-import { hmacPseudonym } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC (patientRefHash) helper
+import { hmacPseudonym, makeAuditSink } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC + PHI-free audit sink
 export class ConnectStateError extends Error {}
 
 // Consent lifecycle ranks; terminal statuses refuse any further change.
@@ -246,18 +246,43 @@ export async function tryJoin(db, r2, env, transactionId) {
   }
 }
 
-// ---- Stage-3 Task-6: reconciliation GC sweep — bound ephemeral key + buffer lifetime ----------------
-// The cron-driven (Stage 6) garbage collector. It bounds the lifetime of ephemeral key material and
-// buffered ciphertext: for EVERY txn that is past its `expires_at` OR in a terminal status it erases the
-// sealed eph key, deletes the R2 push-buffer, and removes the row. This fires on ANY terminal outcome
-// (FAILED/PARTIAL too, not just the happy TRANSFERRED path) so nothing lingers when a transfer dies.
-// Dependency-injected db/r2/env/now — no Date.now/global reads. `expires_at` and `now` are ISO-8601
-// strings (see module TIME CONTRACT); expiry is detected ISO-aware, NEVER via `Number(iso)`→NaN (the
-// Stage-3 no-op bug that let expired non-terminal txns keep their sealed eph key past TTL — ADR-2D).
-// Fail-closed (ConnectStateError) on a genuine storage failure. Idempotent: a second sweep over an
-// already-clean table returns all-zero counts. A NON-terminal row whose `expires_at` is missing/unparseable
-// can't be aged out by expiry alone, so it is SURFACED in the returned `anomalies` count (never silently
-// kept forever) rather than swept — a data-integrity signal for the cron.
+// Hard backstop age for a NON-terminal txn whose `expires_at` is unparseable (so it can't be aged out by
+// expiry). Once `created_at + this <= now`, the row is force-swept rather than leaking its sealed eph key
+// forever. // VERIFY (owner): pin the backstop — a legitimate ABDM transfer completes in minutes-to-hours,
+// never days, so 7d is a safe "definitely-abandoned" bound that never erases an in-flight transfer.
+const SWEEP_MAX_TXN_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+// Erase a patient's HIP care-context registrations, scoped by (tenant, patient HMAC). Mock-safe WHERE (two
+// `col=?` predicates). Returns the number of rows removed. Called ONLY on a patient-level `data_erase_at`/
+// full-erase trigger — NEVER on a single-consent REVOKE (a registration may back OTHER live consents).
+async function eraseCareContexts(db, tenantId, patientAbhaHash) {
+  const del = await db.prepare("DELETE FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?")
+    .bind(tenantId, patientAbhaHash).run();
+  if (!del || del.success === false) throw new ConnectStateError("sweep care-context erase failed");
+  return (del.meta && del.meta.changes) || 0;
+}
+
+// ---- Stage-3 Task-6 + Stage-6 Task-2: reconciliation GC sweep — bound key/buffer lifetime + DPDP erasure --
+// The cron-driven (Stage 6) garbage collector, in TWO passes over the injected db/r2/env/now (no Date.now/
+// global reads). `expires_at`/`data_erase_at`/`now` are ALL ISO-8601 strings (module TIME CONTRACT); expiry
+// is detected ISO-aware, NEVER via `Number(iso)`→NaN (the Stage-3 no-op bug that kept expired keys past TTL).
+//   PASS 1 (Stage-3 T6, ISO-pinned T1) — expiry/terminal GC of `connect_abdm_txn`: for EVERY txn past its
+//     `expires_at` OR in a terminal status (TRANSFERRED/PARTIAL/FAILED — not just the happy path) erase the
+//     sealed eph key, delete the R2 push-buffer, remove the row. A NON-terminal row with an unparseable
+//     `expires_at` is a data-integrity anomaly: it is SURFACED in `anomalies` and RETAINED — UNLESS it is
+//     older than the SWEEP_MAX_TXN_AGE_MS hard backstop (T2), in which case it is force-swept so a garbled
+//     expiry can never linger PHI-adjacent key material forever.
+//   PASS 2 (Stage-6 T2, DPDP R15 / §8(6)) — REVOKE + dataEraseAt erasure of `connect_abdm_consent_req`: a
+//     consent that is REVOKED/EXPIRED, or one past its patient-level `data_erase_at`, has ALL its derived
+//     state erased NOW (not left until the txn TTL) — its txns' buffers + sealed keys + rows (joined by the
+//     durable `consent_id`), and — ONLY on a patient-level `data_erase_at`/full-erase — the patient's
+//     `connect_abdm_carecontext` rows (a single-consent REVOKE never drops a registration that may back
+//     OTHER live consents). Erasure-completeness is a DPDP breach surface: a single residual sealed key,
+//     buffer object, txn row, or servable care-context for that consent is a VIOLATION. The erasure ITSELF
+//     is audited (`data.erased`, metadata-only) and the PHI-free audit trail is RETAINED (never deleted)
+//     under DPDP §8(6). Erase-first-then-audit: erasure-completeness outranks the accountability write.
+// Fail-closed (ConnectStateError) on any storage failure. Idempotent: a re-sweep erases nothing more and
+// emits NO duplicate `data.erased`. Mock-safe SQL throughout (`col=?`/`col<>?`; JS-filter the rest).
 export async function sweep(db, r2, env, now) {
   // Txn terminal set — inlined here (small stable domain constant), NOT imported from the Task-4 FSM, to
   // avoid coupling the GC to that module's internals. Distinct from the module-scope consent `TERMINAL`.
@@ -267,35 +292,79 @@ export async function sweep(db, r2, env, now) {
   // number, so the branch can't silently no-op the way `Number("2026-…") < Number(now)` (NaN<NaN=false) did.
   const isExpired = (expiresAt, at) =>
     Number.isFinite(Date.parse(expiresAt)) && Number.isFinite(Date.parse(at)) && Date.parse(expiresAt) <= Date.parse(at);
+  // T2 hard age-backstop: a non-terminal row with an unparseable `expires_at` can't be aged out by expiry,
+  // so once it is at least SWEEP_MAX_TXN_AGE_MS old (by `created_at`) it is force-swept rather than leaking
+  // its sealed key indefinitely. Needs a PARSEABLE `created_at`; both garbled → stays surfaced in anomalies.
+  const isAgedOut = (createdAt, at) =>
+    Number.isFinite(Date.parse(createdAt)) && Number.isFinite(Date.parse(at)) &&
+    (Date.parse(at) - Date.parse(createdAt)) >= SWEEP_MAX_TXN_AGE_MS;
+  // Erase ONE txn's derived state, in the safe order: R2 buffer (scoped to its transaction_id) → sealed eph
+  // key set to "" → the row. Key erased BEFORE the row delete so it can NEVER be unsealed even if a delete
+  // races/fails. All WHERE = `request_id=?` (mock-safe). Returns the buffer count. Reused by BOTH passes.
+  const eraseTxn = async (row) => {
+    let buffersDeleted = 0;
+    if (row.transaction_id) buffersDeleted += await deleteBuffered(r2, row.transaction_id);
+    const upd = await db.prepare("UPDATE connect_abdm_txn SET eph_privkey_sealed=?,updated_at=? WHERE request_id=?")
+      .bind("", now, row.request_id).run();
+    if (!upd || upd.success === false) throw new ConnectStateError("sweep key-erase failed");
+    const del = await db.prepare("DELETE FROM connect_abdm_txn WHERE request_id=?").bind(row.request_id).run();
+    if (!del || del.success === false) throw new ConnectStateError("sweep row-delete failed");
+    return buffersDeleted;
+  };
   try {
     // VERIFY: a real D1 GC would enumerate victims with an indexed `WHERE expires_at < ?`; the mock D1
     // only supports `col=?`/`col<>?` (throws on `<`), so enumerate all rows no-WHERE and filter in JS.
     const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
-    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0;
+    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0, careContextsErased = 0, consentsErased = 0;
+
+    // ---- PASS 1: expiry/terminal GC + the garbled-expiry age-backstop. -------------------------------------
     for (const row of results) {
       const expired = isExpired(row.expires_at, now);
       if (!expired && !TERMINAL.has(row.status)) {
-        // In-flight, non-expired, non-terminal → keep. But a NULL/unparseable `expires_at` here can't be
-        // aged out by expiry, so surface it (don't silently keep PHI forever).
-        // VERIFY: created_at + SWEEP_MAX_TXN_AGE hard backstop so a garbled expiry can never linger PHI
-        // indefinitely (backstop wired in T2's erasure pass).
-        if (!Number.isFinite(Date.parse(row.expires_at))) anomalies++;
-        continue;
+        // In-flight, non-terminal, not-yet-expired.
+        if (Number.isFinite(Date.parse(row.expires_at))) continue;          // healthy future expiry → keep
+        // Unparseable `expires_at`: surface it and RETAIN — unless it is past the hard age backstop, in
+        // which case fall through to force-sweep (a garbled expiry must never linger PHI-adjacent forever).
+        if (!isAgedOut(row.created_at, now)) { anomalies++; continue; }
       }
-      // (1) drop the R2 push-buffer (scoped to this txn) when a transaction_id was ever attached.
-      if (row.transaction_id) buffersDeleted += await deleteBuffered(r2, row.transaction_id);
-      // (2) defensively erase the sealed eph key BEFORE deleting the row, so it can't be unsealed
-      //     post-expiry even if a delete races/fails. All WHERE = `request_id=?` (mock-safe).
-      const upd = await db.prepare("UPDATE connect_abdm_txn SET eph_privkey_sealed=?,updated_at=? WHERE request_id=?")
-        .bind("", now, row.request_id).run();
-      if (!upd || upd.success === false) throw new ConnectStateError("sweep key-erase failed");
-      keysErased++;
-      // (3) remove the row.
-      const del = await db.prepare("DELETE FROM connect_abdm_txn WHERE request_id=?").bind(row.request_id).run();
-      if (!del || del.success === false) throw new ConnectStateError("sweep row-delete failed");
-      txnsSwept++;
+      buffersDeleted += await eraseTxn(row); keysErased++; txnsSwept++;
     }
-    return { txnsSwept, buffersDeleted, keysErased, anomalies };
+
+    // ---- PASS 2: REVOKE + dataEraseAt-driven erasure (DPDP R15). --------------------------------------------
+    // Reuse the PHI-free audit sink — `buildAuditEvent` structurally drops anything outside the ALLOW list, so
+    // only ids/counts can reach the INSERT (no raw ABHA / careContextReference / decrypted content).
+    const auditErasure = makeAuditSink(env, db);
+    const { results: consents = [] } = await db.prepare("SELECT * FROM connect_abdm_consent_req").all();
+    for (const c of consents) {
+      const revokedOrExpired = c.status === "REVOKED" || c.status === "EXPIRED";
+      const eraseDeadlinePassed = isExpired(c.data_erase_at, now); // patient-level dataEraseAt (distinct from expiry)
+      if (!revokedOrExpired && !eraseDeadlinePassed) continue;
+
+      let cTxns = 0, cBuffers = 0, cKeys = 0, cCare = 0;
+      // (1) Derived state, scoped by the durable `consent_id` join — REVOKE overrides the FSM/TTL (erase NOW).
+      //     GUARD `consent_id != null`: a NULL bind would (in the mock, via String() coercion) collateral-match
+      //     EVERY NULL-consent_id txn — a mass over-erase. An unlinked consent was never granted → has no txns.
+      if (c.consent_id != null) {
+        const { results: txns = [] } = await db.prepare("SELECT * FROM connect_abdm_txn WHERE consent_id=?").bind(c.consent_id).all();
+        for (const t of txns) { cBuffers += await eraseTxn(t); cKeys++; cTxns++; }
+      }
+      // (2) Care-context rows are a PER-PATIENT registration that may back OTHER live consents, so they are
+      //     erased ONLY on a patient-level `data_erase_at`/full-erase — NEVER on a single-consent REVOKE/EXPIRE.
+      //     // VERIFY (owner): confirm the association (per-consent derived state vs per-patient registration).
+      if (eraseDeadlinePassed && c.tenant_id != null && c.patient_abha_hash) {
+        cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash);
+      }
+      // (3) Audit the erasure (metadata ONLY; §8(6) — the audit is RETAINED even as the data is erased). Emit
+      //     ONLY when something was actually erased → idempotent (a re-sweep finds nothing → no duplicate).
+      if (cTxns > 0 || cCare > 0) {
+        txnsSwept += cTxns; buffersDeleted += cBuffers; keysErased += cKeys; careContextsErased += cCare; consentsErased++;
+        await auditErasure({
+          action: "data.erased", outcome: "ok", ts: now, tenantId: c.tenant_id ?? null,
+          consentId: c.consent_id ?? null, resourceCounts: { txns: cTxns, buffers: cBuffers, keys: cKeys, careContexts: cCare },
+        });
+      }
+    }
+    return { txnsSwept, buffersDeleted, keysErased, anomalies, careContextsErased, consentsErased };
   } catch (e) {
     if (e instanceof ConnectStateError) throw e; // deleteBuffered already fail-closes R2 errors
     throw new ConnectStateError(`abdm sweep failed: ${e && e.message}`);

@@ -7,7 +7,14 @@ CREATE TABLE IF NOT EXISTS connect_abdm_consent_req (
   request_id TEXT PRIMARY KEY, tenant_id TEXT, actor TEXT, patient_abha_hash TEXT,   -- HMAC, not raw ABHA
   status TEXT, consent_id TEXT, hi_types TEXT,
   care_contexts TEXT, purpose TEXT, date_range TEXT,   -- SIGNED scope persisted on verify (R4 reload authority)
-  created_at TEXT, updated_at TEXT, expires_at TEXT );
+  created_at TEXT, updated_at TEXT, expires_at TEXT,
+  -- Stage-6 T2 (additive): patient-level ERASURE deadline (DPDP R15), DISTINCT from consent-validity `expires_at`
+  -- so "consent expired" and "data must be erased" are never conflated. state.js#sweep erases ALL derived state
+  -- (buffers/keys/txns) + the patient's care-contexts once `now` passes it. // VERIFY (owner): whether ABDM's
+  -- dataEraseAt equals the artifact expiry or is a separate (usually later) bound. NOTE: CREATE-IF-NOT-EXISTS
+  -- adds this only on a FRESH D1; a provisioned D1 needs `ALTER TABLE connect_abdm_consent_req ADD COLUMN
+  -- data_erase_at TEXT;` (SQLite has no ADD-COLUMN-IF-NOT-EXISTS) — see the T9 go-live checklist.
+  data_erase_at TEXT );
 -- `consent_id` is the durable join (linked by the GRANT notify); index it for the by-consent reload path.
 -- UNIQUE (partial, NULLs excluded): a consentId maps to AT MOST ONE lifecycle row — the DB-layer backstop
 -- that makes the two-row split structurally impossible (persistGranted also fails closed on no-linked-row).
