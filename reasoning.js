@@ -1662,7 +1662,7 @@
     dxh += evSub("Mimics", evList(mim));
     if (dxh) sections.push({ ic: rIco("steth"), title: "Diagnosis & workup", html: dxh });
     var rf = "";
-    rf += evSub("🚨 Red flags", evCallouts(e.redFlags, "danger", "🚨"));
+    rf += evSub("Red flags", evCallouts(e.redFlags, "danger", rIco("siren")));
     rf += evSub("Pitfalls", evCallouts(e.pitfalls, "warn", rIco("warn")));
     if (rf) sections.push({ ic: rIco("warn"), title: "Red flags & pitfalls", danger: true, html: rf });
     var cp = "";
@@ -1963,7 +1963,7 @@
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">📄</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -2205,7 +2205,7 @@
       _id: id, srcKey: "idsa", icon: rIco("book"), sourceName: g.society || "IDSA Clinical Practice Guideline",
       edition: g.year ? String(g.year) : "", tag: "Guideline", pages: "", pearlsLabel: "Key recommendations",
       pearls: g.recs || [], sections: sections, fullHTML: "",
-      cite: '<strong>📐 ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
+      cite: '<strong>' + rIco("book") + ' ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
         (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
         '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
     };
