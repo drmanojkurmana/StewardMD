@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { makeAbdmDb, makeR2 } from "../../../functions/_connect/abdm/abdm-testkit.js";
 import {
+  ConnectStateError,
   putConsentReq, getConsentReq, updateConsentStatus,
   putTxn, getTxnByRequestId, getTxnByTransactionId, attachTransactionId, unsealTxnKey,
   bufferEntry, listBuffered, deleteBuffered,
@@ -432,4 +433,75 @@ test("tryJoin: txn + buffer both present but sealed key empty → not ready (no-
   assert.equal(res.reason, "no-key");
   assert.deepEqual(res.entries, []); // short-circuits before listing/decrypting
   assert.ok(res.txn); // the row is still returned for the caller's diagnostics
+});
+
+// ---- Task-5 Fix Round 1: harden the safety proof (dual-adversarial review) --------------------------
+
+// Fix 1 (both reviewers): fail-closed is untested. A genuine storage failure on EITHER side must surface
+// as a typed ConnectStateError REJECTION — never a silent {ready:false}, never a raw leaked error. Prove
+// both halves: a db whose txn lookup throws (raw error → wrapped in ConnectStateError) and an r2 whose
+// listBuffered throws (already ConnectStateError from listBuffered → re-thrown as-is).
+test("tryJoin fails closed: a storage failure on either side rejects with ConnectStateError", async () => {
+  // (a) D1 lookup throws a RAW error → tryJoin must wrap+rethrow as ConnectStateError, not leak it.
+  const throwingDb = {
+    prepare: () => ({ bind: () => ({ first: async () => { throw new Error("d1 down"); } }) }),
+  };
+  await assert.rejects(() => tryJoin(throwingDb, makeR2(), HMAC_ENV, "txn-A"), ConnectStateError);
+
+  // (b) R2 list throws — reachable only past the txn half, so build a real, correlated txn first.
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-r2err", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-r2err", "txn-A", NOW);
+  const throwingR2 = {
+    list: async () => { throw new Error("r2 down"); },
+    get: async () => null, put: async () => {}, delete: async () => {},
+  };
+  await assert.rejects(() => tryJoin(db, throwingR2, HMAC_ENV, "txn-A"), ConnectStateError);
+});
+
+// Fix 2 (Reviewer A, mutant M4): the key half is only proven with "" — a guard narrowed to `=== ""`
+// would return ready:true on a NULL/undefined key (the exact false-ready defect). Prove BOTH falsy shapes:
+// a txn row with eph_privkey_sealed = null, and one = undefined, each WITH a buffered entry → no-key.
+test("tryJoin: NULL and undefined sealed key (with a buffer present) → not ready (no-key)", async () => {
+  for (const badKey of [null, undefined]) {
+    const db = makeAbdmDb({});
+    const r2 = makeR2();
+    const badSeal = { seal: async () => badKey, open: async (s) => s }; // sealed key comes back null/undefined
+    await putTxn(db, badSeal, {
+      requestId: "req-badkey", tenantId: "t1", consentId: "c1",
+      ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+      status: "REQUESTED", expiresAt: "z", now: NOW,
+    });
+    await attachTransactionId(db, "req-badkey", "txn-K", NOW);
+    await bufferEntry(r2, HMAC_ENV, "txn-K", "cc-ref-1", "CIPHER-K", "chk-1", NOW); // buffer half IS present
+
+    const res = await tryJoin(db, r2, HMAC_ENV, "txn-K");
+    assert.equal(res.ready, false, `sealed key=${String(badKey)} must not be ready`);
+    assert.equal(res.reason, "no-key", `sealed key=${String(badKey)} must be no-key`);
+    assert.deepEqual(res.entries, []);
+  }
+});
+
+// Fix 3 (Reviewer A, mutant M5): pin the guard ORDER. When BOTH the key half and the buffer half are
+// missing, the key guard runs first → reason must be "no-key", NOT "no-buffer". (A swapped guard order
+// would report "no-buffer" here.)
+test("tryJoin: both missing (null key + zero buffer) → reason 'no-key' (key guard precedes buffer guard)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2(); // nothing buffered
+  const nullSeal = { seal: async () => null, open: async (s) => s };
+  await putTxn(db, nullSeal, {
+    requestId: "req-both", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-both", "txn-Z", NOW);
+
+  const res = await tryJoin(db, r2, HMAC_ENV, "txn-Z");
+  assert.equal(res.ready, false);
+  assert.equal(res.reason, "no-key"); // NOT "no-buffer" — the key guard is checked first
+  assert.deepEqual(res.entries, []);
 });
