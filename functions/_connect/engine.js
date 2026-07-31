@@ -6,10 +6,27 @@ import { makeSecrets } from "./secrets.js";
 import { makeAuditSink, hmacPseudonym } from "./audit.js";
 import { validateBundle } from "./canonical/validate.js";
 import { assertConsumable, SCCM_MAJOR, RESOURCE_KEYS } from "./canonical/model.js";
+import { normalizeNdhm } from "./connectors/abdm/normalize.js";
+import { purposeKey } from "./abdm/consent.js";
 
 export class ValidationError extends Error {}
 
 const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
+
+// Shared consume TAIL (R9): validate (dangling refs nulled → warnings) then the defense-in-depth scope FILTER
+// (drop any resource type not in scope). Reused by BOTH the pull loadPatientContext and the push consumeNdhmBundle
+// so both sides apply EXACTLY the same SCCM rules. Behavior-identical to the former inline steps 7-8.
+function finalizeBundle(bundle, scope) {
+  const v = validateBundle(bundle);
+  if (!v.ok) throw new ValidationError(v.errors.join("; "));
+  bundle.meta.warnings.push(...v.warnings);
+  bundle.meta.scope = scope;
+  for (const key of RESOURCE_KEYS) {
+    const type = Object.keys(SCOPE_TO_KEY).find((t) => SCOPE_TO_KEY[t] === key);
+    if (type && !scope.includes(type)) bundle[key] = [];
+  }
+  return bundle;
+}
 
 export async function loadPatientContext(env, deps, req, io = {}) {
   const t0 = Date.now();
@@ -49,17 +66,8 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     const bundle = await connector.normalize(ctx, raw);
     assertConsumable(bundle, SCCM_MAJOR);
 
-    // 7. validate (mutates: dangling refs nulled)
-    const v = validateBundle(bundle);
-    if (!v.ok) throw new ValidationError(v.errors.join("; "));
-    bundle.meta.warnings.push(...v.warnings);
-    bundle.meta.scope = scope;
-
-    // 8. permission FILTER (defense in depth): drop any resource type not in scope
-    for (const key of RESOURCE_KEYS) {
-      const type = Object.keys(SCOPE_TO_KEY).find((t) => SCOPE_TO_KEY[t] === key);
-      if (type && !scope.includes(type)) bundle[key] = [];
-    }
+    // 7-8. shared consume tail: validate (dangling refs nulled) then the defense-in-depth scope filter.
+    finalizeBundle(bundle, scope);
 
     outcome = "ok";
     // 9. PHI-free audit (metadata only)
@@ -122,4 +130,22 @@ export async function ingestEvent(env, deps, rawEvent) {
     default:                                             // unknown/unsupported → graceful, no throw.
       return { handle: { type, unsupported: true }, bundle: null };
   }
+}
+
+// ---- Stage-6 Task-5: consumeNdhmBundle — the PUSH-side consume tail (R9) + DPDP §14.2/R15 purpose-binding. ----
+// consumeTransfer returns request-scoped decrypted NDHM JSON; THIS turns one such doc into a validated,
+// scope-filtered CanonicalBundle via the SAME tail as the pull side (finalizeBundle), then STAMPS the DPDP
+// evidence so every downstream use can be bound to the consented purpose (assertPurposeBound) with no secondary use:
+//   - meta.consentPurpose = purposeKey(consent.purpose) — the SAME canonical key revalidateForRequest binds at
+//     request time, so use-time binding compares like-for-like (no drift). An unconsented call (consent == null)
+//     stamps null → the bundle FAILS CLOSED at assertPurposeBound (never treated as all-purpose).
+//   - meta.dpdpRole = { fiduciary:"hospital", processor:"stewardmd-connect" } — the DPDP role split (R15).
+// NO PHI enters meta — only the purpose KEY (a code/text token) + the two role strings. `scope` is a list of SCCM
+// resource TYPES (defense-in-depth filter, per R9); absent/empty means all types in scope (no drop).
+export function consumeNdhmBundle(ctx, ndhmDoc, consent, scope) {
+  const bundle = normalizeNdhm(ctx, ndhmDoc);
+  finalizeBundle(bundle, Array.isArray(scope) && scope.length ? scope : Object.keys(SCOPE_TO_KEY));
+  bundle.meta.consentPurpose = consent ? purposeKey(consent.purpose) : null;
+  bundle.meta.dpdpRole = { fiduciary: "hospital", processor: "stewardmd-connect" };
+  return bundle;
 }

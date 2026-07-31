@@ -218,8 +218,10 @@ function ccKey(c) {
   if (typeof c === "object") return c.careContextReference ?? c.reference ?? c.id ?? null;
   return String(c);
 }
-// Purpose may be a string or an object { code, text } — compare on a canonical key.
-function purposeKey(p) {
+// Purpose may be a string or an object { code, text } — compare on a canonical key. EXPORTED (additive) so the
+// engine consume tail (meta.consentPurpose stamp) + the use-time assertPurposeBound bind on the SAME key this
+// request-time revalidate uses — request-time and use-time purpose-binding must never drift (DPDP §14.2, R15).
+export function purposeKey(p) {
   if (p == null) return null;
   if (typeof p === "object") return p.code ?? p.text ?? JSON.stringify(p);
   return String(p);
