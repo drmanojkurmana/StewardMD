@@ -7,12 +7,19 @@ export class SmartError extends Error {}
 // // VERIFY: the real hospital FHIR base host(s) AND their authorization-server host(s) (often DISTINCT).
 export const SMART_HOST_ALLOWLIST = Object.freeze(["launch.smarthealthit.org", "smart-mock.local"]);
 
-export function assertTokenEndpointAllowed(tokenEndpoint, hostAllowlist = SMART_HOST_ALLOWLIST) {
-  let u; try { u = new URL(tokenEndpoint); } catch { throw new SmartError("invalid token endpoint"); }
-  if (u.protocol !== "https:") throw new SmartError("token endpoint must be https");
-  if (u.username || u.password) throw new SmartError("token endpoint must not contain userinfo");
-  if (!hostAllowlist.includes(u.host)) throw new SmartError("token endpoint host not allow-listed: " + u.host);
+// The frozen list is the HARD CEILING. A per-tenant override (from config) may only NARROW it, never widen
+// it; a non-array override is ignored (defends against a string degrading `.includes` to substring match).
+export function effectiveAllowlist(override) {
+  if (!Array.isArray(override)) return SMART_HOST_ALLOWLIST;
+  return SMART_HOST_ALLOWLIST.filter((h) => override.includes(h));
 }
+export function assertHostAllowed(urlStr, override, label = "url") {
+  let u; try { u = new URL(urlStr); } catch { throw new SmartError("invalid " + label); }
+  if (u.protocol !== "https:") throw new SmartError(label + " must be https");
+  if (u.username || u.password) throw new SmartError(label + " must not contain userinfo");
+  if (!effectiveAllowlist(override).includes(u.host)) throw new SmartError(label + " host not allow-listed: " + u.host);
+}
+export function assertTokenEndpointAllowed(tokenEndpoint, hostAllowlist) { assertHostAllowed(tokenEndpoint, hostAllowlist, "token endpoint"); }
 
 function extractOauthToken(cs) {
   try {
@@ -37,6 +44,7 @@ async function fetchDisco(fetch, fhirBase) {
 export async function discoverSmart(deps, { fhirBase, tokenEndpointHint, hostAllowlist = SMART_HOST_ALLOWLIST }) {
   const { fetch, kv } = deps;
   let fhirHost; try { fhirHost = new URL(fhirBase).host; } catch { throw new SmartError("invalid fhirBase"); }
+  assertHostAllowed(fhirBase, hostAllowlist, "fhirBase");   // gate the base BEFORE any discovery fetch (no SSRF)
   const cacheKey = "connect:smart:disco:" + fhirHost;
   let disco = null, fromCache = false;
   if (tokenEndpointHint) disco = { tokenEndpoint: tokenEndpointHint };

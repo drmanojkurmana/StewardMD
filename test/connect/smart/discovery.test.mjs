@@ -41,6 +41,22 @@ test("second call hits the KV cache (one discovery fetch total)", async () => {
   assert.equal(wk, 1);                                          // second call served from cache
 });
 
+test("HARDENING: a config-supplied allowlist override can only NARROW, never widen (frozen ceiling)", () => {
+  // override lists the attacker host -> still refused (frozen list is the ceiling; override only intersects).
+  assert.throws(() => assertTokenEndpointAllowed("https://evil.exfil.example/token", ["evil.exfil.example"]), SmartError);
+  // a STRING override must not degrade .includes() to substring matching -> refused.
+  assert.throws(() => assertTokenEndpointAllowed("https://evil.exfil.example/token", "prefix-evil.exfil.example-suffix"), SmartError);
+  // a legitimate narrowing override still allows an on-frozen-list host.
+  assert.doesNotThrow(() => assertTokenEndpointAllowed("https://smart-mock.local/oauth/token", ["smart-mock.local"]));
+});
+
+test("HARDENING: fhirBase is gated (https + frozen host) before any discovery fetch (no SSRF)", async () => {
+  let fetched = false;
+  const deps = { fetch: async () => { fetched = true; return new Response("{}"); }, kv: makeMockKv(), now: () => Date.now(), logger: { warn() {} } };
+  await assert.rejects(() => discoverSmart(deps, { fhirBase: "http://169.254.169.254/latest/meta-data" }), SmartError);
+  assert.equal(fetched, false);                                // never fetched the metadata IP
+});
+
 test("fhirFlagOn requires BOTH smd_connect and smd_connect_fhir", () => {
   assert.equal(fhirFlagOn({ CONNECT_FLAG: "1", CONNECT_FHIR_FLAG: "1" }), true);
   assert.equal(fhirFlagOn({ CONNECT_FLAG: "1" }), false);

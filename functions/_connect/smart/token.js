@@ -11,6 +11,7 @@ const parseScope = (s) => String(s || "").split(/\s+/).filter(Boolean);
 
 export async function acquireAccessToken(deps, { config, requestedScopes, forceRefresh }) {
   const { fetch, kv, secrets, envelope, now, logger, tenantId, connectorId } = deps;
+  if (!tenantId || !connectorId) throw new TokenError("tenantId and connectorId required (no shared/empty cache key)");
   const nowMs = () => (typeof now === "function" ? now() : Date.now());
   const fhirBase = config.base_url;
   let hints = {}; try { hints = (JSON.parse(config.config || "{}").smart) || {}; } catch { hints = {}; }
