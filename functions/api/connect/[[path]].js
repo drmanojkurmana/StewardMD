@@ -7,6 +7,7 @@ import { makeSecrets } from "../../_connect/secrets.js";
 import { makeAuditSink } from "../../_connect/audit.js";
 import { handleIngress } from "../../_connect/abdm/ingress.js";
 import { identify } from "../../_usage.js";
+import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -33,6 +34,8 @@ export async function onRequest(context) {
     let body = {}; try { body = await request.json(); } catch {}
     const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: { "fhir-r4": fhirR4Connector } };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
+    // Track A: a FHIR-connector context request requires smd_connect_fhir too (no existence leak when off).
+    if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {

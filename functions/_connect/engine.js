@@ -34,7 +34,13 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     const ctx = {
       tenant: { id: tenant.id, mode: tenant.mode, settings: {} },
       config, scope,
-      secrets: async (name) => (name === "bearer" && config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null),
+      kv: env.MAIK_KV,                                       // NON-PHI SMART discovery + token cache (connect:smart:*) // VERIFY binding
+      secrets: async (name) => {
+        if (name === "smart") return config.secret_ref ? JSON.parse(await secrets.open(await secrets.get(config.secret_ref))) : null;
+        if (name === "bearer") return config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null;
+        return null;
+      },
+      envelope: { seal: secrets.seal, open: secrets.open },  // request-scoped envelope for connector token cache
       now: () => new Date(t0),
       fetch: io.fetch || fetch,
       audit: () => {},                    // connectors never write audit directly
