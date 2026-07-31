@@ -39,3 +39,31 @@ export async function deriveKeyIv(secret, ourNonce, theirNonce) {
     ikm, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
   return { key, iv };
 }
+
+// functions/_connect/abdm/fidelius.js  (append)
+const b64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
+const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+async function sha256hex(bytes) {
+  const h = new Uint8Array(await subtle.digest("SHA-256", bytes));
+  return [...h].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+
+export async function sealBundle(secret, ourNonce, theirNonce, plaintextStr) {
+  const { key, iv } = await deriveKeyIv(secret, ourNonce, theirNonce);
+  const pt = new TextEncoder().encode(plaintextStr);
+  const ct = await subtle.encrypt({ name: "AES-GCM", iv }, key, pt);
+  // R1: exactly one entry per derived (key, iv). No batch form exists — a second seal needs a fresh keyMaterial.
+  return { content: b64(ct), checksum: await sha256hex(pt) };
+}
+
+export async function openEntry(secret, ourNonce, theirNonce, contentB64, expectedChecksum) {
+  const { key, iv } = await deriveKeyIv(secret, ourNonce, theirNonce);
+  let ptBytes;
+  try { ptBytes = new Uint8Array(await subtle.decrypt({ name: "AES-GCM", iv }, key, unb64(contentB64))); }
+  catch (e) { throw new FideliusError("AES-GCM decrypt/auth failed: " + e.message); }
+  if (expectedChecksum != null) {
+    const got = await sha256hex(ptBytes);
+    if (got !== String(expectedChecksum).toLowerCase()) throw new FideliusError("entry checksum mismatch");
+  }
+  return new TextDecoder().decode(ptBytes);
+}

@@ -56,3 +56,34 @@ test("deriveKeyIv rejects a non-32-byte nonce in either position (fail-closed)",
   await assert.rejects(() => deriveKeyIv(new Uint8Array(32), randomBytes(31), nonce()), FideliusError);
   await assert.rejects(() => deriveKeyIv(new Uint8Array(32), nonce(), randomBytes(31)), FideliusError);
 });
+
+// test/connect/abdm/fidelius.test.mjs  (append)
+import { sealBundle, openEntry } from "../../../functions/_connect/abdm/fidelius.js";
+
+async function pair() {
+  const a = await generateKeyPair(), b = await generateKeyPair();
+  return { a, b, nA: nonce(), nB: nonce(),
+    secA: await sharedSecret(a.privateKey, b.publicKeyRaw),
+    secB: await sharedSecret(b.privateKey, a.publicKeyRaw) };
+}
+
+test("seal→open round-trips a FHIR bundle string across the two parties", async () => {
+  const p = await pair();
+  const bundle = JSON.stringify({ resourceType: "Bundle", type: "document", id: "synthetic-1" });
+  const entry = await sealBundle(p.secA, p.nA, p.nB, bundle);   // A (HIP) encrypts
+  const out = await openEntry(p.secB, p.nB, p.nA, entry.content, entry.checksum);  // B (HIU) decrypts+verifies
+  assert.equal(out, bundle);
+});
+
+test("openEntry rejects a tampered ciphertext (GCM auth) — fails closed", async () => {
+  const p = await pair();
+  const entry = await sealBundle(p.secA, p.nA, p.nB, "hello");
+  const bad = [...atob(entry.content)]; bad[bad.length - 1] = String.fromCharCode(bad[bad.length - 1].charCodeAt(0) ^ 1);
+  await assert.rejects(() => openEntry(p.secB, p.nB, p.nA, btoa(bad.join("")), entry.checksum), Error);
+});
+
+test("openEntry rejects a checksum mismatch (defence-in-depth)", async () => {
+  const p = await pair();
+  const entry = await sealBundle(p.secA, p.nA, p.nB, "hello");
+  await assert.rejects(() => openEntry(p.secB, p.nB, p.nA, entry.content, "00".repeat(32)), FideliusError);
+});
