@@ -42,14 +42,14 @@
     var s = document.createElement("style"); s.id = "smdEngCss";
     s.textContent = [
       ".smd-eng-ov{position:fixed;inset:0;z-index:99998;background:rgba(6,32,29,.5);backdrop-filter:blur(3px);display:flex;align-items:flex-end;justify-content:center}",
-      ".smd-eng{background:var(--hbg,#f3f6f5);color:var(--hink,#0f172a);width:100%;max-width:480px;height:94vh;border-radius:22px 22px 0 0;overflow:hidden;display:flex;flex-direction:column;font-family:var(--hfont,system-ui)}",
+      ".smd-eng{background:var(--hbg,#f3f6f5);color:var(--hink,#0f172a);width:100%;max-width:480px;height:94vh;max-height:calc(100vh - env(safe-area-inset-top,0px) - 8px);border-radius:22px 22px 0 0;overflow:hidden;display:flex;flex-direction:column;font-family:var(--hfont,system-ui)}",
       ".smd-eng-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e6efec)}",
       ".smd-eng-hd h3{margin:0;font:600 16px var(--hfont,system-ui)}",
       ".smd-eng-x{border:0;background:transparent;font-size:24px;line-height:1;color:var(--hmut,#64748b);cursor:pointer}",
       ".smd-eng-tabs{display:flex;gap:4px;padding:8px 12px;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e6efec);overflow-x:auto}",
       ".smd-eng-tab{flex:1;white-space:nowrap;border:0;background:transparent;color:var(--hmut,#64748b);font:600 13px var(--hfont,system-ui);padding:8px 10px;border-radius:10px;cursor:pointer}",
       ".smd-eng-tab.on{background:" + TINT + ";color:" + TEAL_D + "}",
-      ".smd-eng-bd{flex:1;overflow:auto;padding:14px;-webkit-overflow-scrolling:touch}",
+      ".smd-eng-bd{flex:1;overflow:auto;padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));-webkit-overflow-scrolling:touch}",
       ".smd-card{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e6efec);border-radius:16px;padding:16px;margin-bottom:12px}",
       ".smd-card h4{margin:0 0 12px;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)}",
       ".smd-row{display:flex;align-items:center;justify-content:space-between;gap:10px}",
