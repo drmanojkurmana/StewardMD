@@ -1,10 +1,10 @@
-/* Regression: _usage.js identify() must treat verifyFirebaseToken's return as a STRING uid.
+/* Regression: _usage.js identify() must key signed-in users PER-ACCOUNT as "fb:<uid>".
  *
- * Bug (31 Jul 2026): verifyFirebaseToken returns payload.sub (a STRING) or null, but identify() read
- * `fb.uid`/`fb.email` off it as an object — always undefined — so EVERY signed-in user fell through to
- * the guest branch and was metered by IP. Many doctors behind one hospital IP shared a single guest
- * quota bucket and hit the cap; guests-on-fresh-IPs and the admin-exempt owner emails still worked.
- * "MaiK works for guest but not for logged accounts (other than the 3 owner emails)." */
+ * verifyFirebaseToken (this file's OWN copy, ~line 59) returns an OBJECT { uid, email } or null, so
+ * identify() must read `.uid` off it. #590 wrongly treated the return as a string and did `"fb:" + <obj>`,
+ * which coerces to "fb:[object Object]" for EVERY signed-in user — collapsing all accounts onto ONE
+ * shared KU ledger + quota bucket (KU balances appeared to "reset" to the shared total; metering merged).
+ * Fixed to read fb.uid → per-account keys, so each doctor's real ledger (e.g. 789 KU) is read again. */
 import assert from "node:assert";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -24,9 +24,11 @@ ok(guest.guest === true && guest.id.startsWith("ip:"), "no token -> guest, id 'i
 const cfa = await identify(req({ "Cf-Access-Authenticated-User-Email": "Doc@Hosp.org" }), {});
 ok(cfa.guest === false && cfa.id.startsWith("cfa:") && cfa.email === "doc@hosp.org", "CF-Access email -> non-guest cfa id");
 
-// source guard: the fb-token branch uses the STRING uid (not fb.uid) and returns fb:<uid>
+// source guard: verifyFirebaseToken returns an OBJECT { uid, email }; identify() reads .uid and keys
+// per-account. Never "fb:" + the raw object (→ "fb:[object Object]", shared bucket for all users).
 const src = readFileSync(join(ROOT, "functions/_usage.js"), "utf8");
-ok(!/\bfb\.uid\b/.test(src), "identify no longer reads .uid off the token-verify return (the bug)");
-ok(/const uid = await verifyFirebaseToken\(tok, env\);\s*if \(uid\) return \{ id: "fb:" \+ uid/.test(src), "signed-in token -> { id:'fb:'+uid, guest:false }");
+ok(/return ok \? \{ uid: payload\.sub/.test(src), "verifyFirebaseToken returns an object { uid, email }");
+ok(/if \(fb && fb\.uid\) return \{ id: "fb:" \+ fb\.uid/.test(src), "identify keys signed-in users per-account: 'fb:'+fb.uid");
+ok(!/return \{ id: "fb:" \+ uid,/.test(src), "no 'fb:'+<object> coercion (that made fb:[object Object] for ALL signed-in users)");
 
 console.log(`\nALL ${pass} PASS — signed-in users are identified per-account, not lumped into the guest IP bucket`);

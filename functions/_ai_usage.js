@@ -126,6 +126,12 @@ const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
 // Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
 export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   if (!store || !isAiModule(moduleId)) { const l = moduleDailyLimit(env, moduleId); return { ok: true, unlimited: l === 0, limit: l }; }
+  // LAUNCH: no per-account per-module daily caps — AI (MaiK, web search, Evidence Review, Vision, ECG…)
+  // behaves IDENTICALLY for every account. checkQuota (_usage.js) already skips its per-user throttles;
+  // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
+  // maik:50 / research:2 while guests/natives (ip-keyed) don't. Usage is still RECORDED for dashboards
+  // (recordAiUsage runs regardless). Flip env MAIK_ENFORCE_CAPS="1" to re-enable the caps.
+  if (String(env && env.MAIK_ENFORCE_CAPS) !== "1") return { ok: true, unlimited: true, limit: 0 };
   const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
   if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;

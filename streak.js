@@ -165,8 +165,10 @@
   if (native && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
     try { C.Plugins.App.addListener("appStateChange", function (s) { setForeground(!!(s && s.isActive)); }); } catch (e) {}
   }
-  // Retry a pending qualify (and first-open) when the account becomes available.
-  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { pingOpen(); maybeQualify(); }); } catch (e) {}
+  // Retry a pending qualify (and first-open) when the account becomes available — DEFERRED to idle so
+  // the sign-in fan-out doesn't starve the JS thread AI needs (see ku.js _kuIdle note). Not time-critical.
+  function _stkIdle(fn) { try { (window.requestIdleCallback || function (f) { return setTimeout(f, 2200); })(function () { try { fn(); } catch (e) {} }, { timeout: 6000 }); } catch (e) { try { fn(); } catch (_e) {} } }
+  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { _stkIdle(function () { pingOpen(); maybeQualify(); }); }); } catch (e) {}
 
   window.SMD_STREAK = {
     progress: progress,
