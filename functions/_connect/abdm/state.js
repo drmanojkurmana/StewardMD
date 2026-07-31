@@ -371,24 +371,30 @@ export async function sweep(db, r2, env, now) {
   }
 }
 
-// ---- Stage-6 Task-3: reconcileNotify — recover a claimed-but-non-terminal txn (a LOST hiNotify receipt) --------
+// ---- Stage-6 Task-3: reconcileNotify — recover a claimed-but-receipt-unconfirmed txn (a LOST hiNotify) ---------
 // consumeTransfer (hiu.js) claims the ack via a single D1 CAS (claimAck) and, the INSTANT it wins, persists the
-// computed `session_status` outcome durably — BEFORE the hiNotify. A crash/throw ANYWHERE in the finalize tail
-// after that persist can strand the txn: ack_claimed=1, status STILL 'RECEIVING', session_status set, buffer
-// intact — and a plain retry LOSES the CAS, so the receipt is never re-sent and the txn never terminalises (until
-// the Task-2 expiry GC erases it). reconcileNotify makes that recoverable: it enumerates the stranded rows and
-// IDEMPOTENTLY re-runs the SAME tail — re-notify → delete buffer → advance RECEIVING→outcome.
-//   SELECT the strand: `ack_claimed=1 AND status='RECEIVING' AND session_status IS NOT NULL` (mock-safe: the mock
-//     D1 has no `IS NOT NULL`, so enumerate no-WHERE and filter in JS, exactly like `sweep`).
-//   IDEMPOTENT: a re-run after a prior success finds the row already terminal (status ≠ 'RECEIVING') → not
-//     selected → skipped; the buffer delete + FSM advance are themselves no-ops once done. A never-claimed row
-//     (ack_claimed=0) is NEVER reconciled — only the CAS winner ever persisted a session_status, so an in-flight
-//     RECEIVING transfer is never re-notified/terminalised out from under a live consume.
+// computed `session_status` outcome durably — BEFORE the hiNotify — then runs the fail-safe tail (advance → delete
+// → notify) and, ONLY after the notify returns, stamps `notify_confirmed`. So a crash/throw ANYWHERE after the
+// claim leaves `notify_confirmed` NULL, and the strand is recoverable REGARDLESS of how far the tail got:
+//   (a) crash before advance     → status RECEIVING, buffer intact, receipt unsent
+//   (b) crash between advance/del → status terminal, buffer intact, receipt unsent
+//   (c) notify throw / crash after delete → status terminal, buffer GONE, receipt unsent  (the COMMON case)
+// A plain retry LOSES the CAS, so the receipt is never re-sent (until the Task-2 expiry GC erases it). reconcile
+// makes ALL THREE recoverable by keying off the receipt-delivery marker (`notify_confirmed`), NOT the FSM status
+// (a `status='RECEIVING'` filter would miss (b)/(c) — the common terminal-but-receipt-lost strands).
+//   SELECT the strand: `ack_claimed=1 AND session_status IS NOT NULL AND notify_confirmed IS NULL` (mock-safe: the
+//     mock D1 has no `IS NOT NULL`, so enumerate no-WHERE and filter in JS, exactly like `sweep`).
+//   IDEMPOTENT tail, safe regardless of how far the original got: re-notify → deleteBuffered (no-op if already
+//     gone) → advanceStatus RECEIVING→outcome (no-op if already terminal) → stamp `notify_confirmed`. A row whose
+//     re-notify succeeds is stamped confirmed → a later pass does NOT select it. A never-claimed row
+//     (ack_claimed=0) is NEVER reconciled — only the CAS winner ever persists a session_status, so an in-flight
+//     transfer is never re-notified/terminalised out from under a live consume.
 //   FAIL-CLOSED PER ROW (best-effort): a gateway/storage error on ONE row is caught + audited (metadata-only) and
-//     does NOT abort the others; that row is left RECEIVING + buffer-intact → recovered on the NEXT pass. A
-//     duplicate hiNotify across passes is tolerated (at-least-once recovery; the gateway hiNotify is keyed by
-//     transactionId) — the receipt-loss it repairs is the worse failure. `deps = { gateway }`.
-// Returns { reissued, terminalized }: hiNotify re-issued count, and rows advanced RECEIVING→terminal.
+//     does NOT abort the others; that row stays notify_confirmed-NULL → recovered on the NEXT pass. A duplicate
+//     hiNotify across passes is tolerated (at-least-once recovery; the gateway hiNotify is keyed by transactionId)
+//     — the receipt-loss it repairs is the worse failure. `deps = { gateway }`.
+// Returns { reissued, terminalized }: hiNotify re-issued count, and rows advanced RECEIVING→terminal THIS pass
+// (strand (a) only; (b)/(c) were already terminal so their advance is a no-op — reissued still counts them).
 export async function reconcileNotify(db, r2, env, deps, now) {
   const audit = makeAuditSink(env, db);   // reuse the PHI-free sink — action strings + allow-listed ids/counts only
   const safeAudit = async (ev) => { try { await audit(ev); } catch { /* accountability write is best-effort; never abort reconcile */ } };
@@ -397,16 +403,20 @@ export async function reconcileNotify(db, r2, env, deps, now) {
     // Mock-safe enumerate-then-filter (the mock D1 rejects `col IS NOT NULL`; a real GC would index the predicate).
     const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
     for (const row of results) {
-      // The lost-receipt strand ONLY: claimed (ack=1), not yet terminal (still RECEIVING), outcome durable.
-      if (row.ack_claimed !== 1 || row.status !== "RECEIVING" || row.session_status == null) continue;
+      // The lost-receipt strand: claimed (ack=1) + outcome durable (session_status set) + receipt NOT yet confirmed.
+      if (row.ack_claimed !== 1 || row.session_status == null || row.notify_confirmed != null) continue;
       try {
-        // Re-run the finalize tail idempotently. Notify FIRST (so a notify failure leaves the row still RECEIVING
-        // + buffer-intact for the next pass), then delete the buffer, then advance RECEIVING → the persisted outcome.
+        // Re-run the finalize tail idempotently. Notify FIRST (a notify failure leaves notify_confirmed NULL for the
+        // next pass), then delete the (maybe-already-gone) buffer, then advance (maybe-already-terminal) → outcome,
+        // then STAMP notify_confirmed so this row is never re-notified once its receipt lands.
         await deps.gateway.post("hiNotify", { transactionId: row.transaction_id, sessionStatus: row.session_status });
         reissued++;
-        await deleteBuffered(r2, row.transaction_id);
-        const advanced = await advanceStatus(db, row.request_id, "RECEIVING", row.session_status, now);
+        await deleteBuffered(r2, row.transaction_id);                                    // no-op if already deleted
+        const advanced = await advanceStatus(db, row.request_id, "RECEIVING", row.session_status, now); // no-op if terminal
         if (advanced.ok === true) terminalized++;
+        const stamp = await db.prepare("UPDATE connect_abdm_txn SET notify_confirmed=?,updated_at=? WHERE transaction_id=?")
+          .bind(now, now, row.transaction_id).run();
+        if (!stamp || stamp.success === false) throw new ConnectStateError("reconcile notify_confirmed stamp failed");
         await safeAudit({
           action: "data.reconciled", outcome: "ok", ts: now, tenantId: row.tenant_id ?? null,
           consentId: row.consent_id ?? null, transactionId: row.transaction_id ?? null,

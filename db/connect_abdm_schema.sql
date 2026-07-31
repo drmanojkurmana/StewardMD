@@ -29,11 +29,19 @@ CREATE TABLE IF NOT EXISTS connect_abdm_txn (
   status TEXT, expires_at TEXT, created_at TEXT, updated_at TEXT,
   -- Stage-6 T3 (additive): the computed transfer OUTCOME (TRANSFERRED|PARTIAL|FAILED). consumeTransfer persists
   -- it the instant the ack is claimed and BEFORE the hiNotify, so a crash/throw in the finalize tail leaves a
-  -- RECOVERABLE strand (ack_claimed=1 + status still RECEIVING + session_status set) that state.js#reconcileNotify
+  -- RECOVERABLE strand (ack_claimed=1 + session_status set + notify_confirmed NULL) that state.js#reconcileNotify
   -- re-drives idempotently (re-notify + delete + terminalise). NOTE: CREATE-IF-NOT-EXISTS adds this only on a
   -- FRESH D1; a provisioned D1 needs `ALTER TABLE connect_abdm_txn ADD COLUMN session_status TEXT;` (SQLite has
   -- no ADD-COLUMN-IF-NOT-EXISTS) — see the T9 go-live checklist.
-  session_status TEXT );
+  session_status TEXT,
+  -- Stage-6 T3 (additive): the timestamp of the SUCCESSFUL hiNotify (NULL until the receipt is confirmed sent).
+  -- This is the receipt-delivery marker that closes ALL post-claim lost-receipt strands regardless of how far the
+  -- finalize tail got — including the COMMON gateway-notify-throw (status terminal + buffer already deleted +
+  -- receipt lost), which a `status='RECEIVING'` filter alone misses. reconcileNotify selects
+  -- `ack_claimed=1 AND session_status IS NOT NULL AND notify_confirmed IS NULL` and, on a successful re-notify,
+  -- stamps this — so a confirmed row is never re-notified. Same provisioned-D1 caveat:
+  -- `ALTER TABLE connect_abdm_txn ADD COLUMN notify_confirmed TEXT;`.
+  notify_confirmed TEXT );
 -- PARTIAL UNIQUE: one request row per transaction_id (exactly-once ack backstop); multiple NULLs allowed
 -- (transaction_id is attached later at on-request, so pre-attach rows all sit at NULL).
 CREATE UNIQUE INDEX IF NOT EXISTS idx_abdm_txn_txid ON connect_abdm_txn(transaction_id) WHERE transaction_id IS NOT NULL;

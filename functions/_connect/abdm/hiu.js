@@ -315,6 +315,13 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   await deleteBuffered(deps.r2, transactionId);
   await deps.gateway.post("hiNotify", { transactionId, sessionStatus });
 
+  // STAGE-6 T3 (receipt-delivery marker): the hiNotify RETURNED SUCCESSFULLY → stamp notify_confirmed so this txn
+  // is never re-notified by a reconcile pass. A throw ABOVE (advance/delete/notify) skips this stamp, leaving
+  // notify_confirmed NULL → the strand (ack_claimed=1 + session_status set + notify_confirmed NULL) is recovered by
+  // state.js#reconcileNotify regardless of how far the tail got (incl. the common notify-throw: terminal+buffer-gone).
+  await deps.db.prepare("UPDATE connect_abdm_txn SET notify_confirmed=?,updated_at=? WHERE transaction_id=?")
+    .bind(deps.now, deps.now, transactionId).run();
+
   // SURFACE (never swallow) a stale advance: a winner whose advanceStatus is a {ok:false} no-op (the txn was
   // not in RECEIVING) is an anomaly — an acked-but-non-terminal txn — flagged to the caller via `advanced:false`.
   return { decrypted, acked: true, advanced: advance.ok === true };

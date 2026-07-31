@@ -34,11 +34,12 @@ function spyGateway() {
   return { post: async (endpointKey, body) => { calls.push({ endpointKey, body }); return { status: 202, body: {} }; }, calls };
 }
 
-// Reproduce the LOST-RECEIPT strand exactly: a correlated txn in RECEIVING whose ack was CLAIMED (CAS winner) and
-// whose computed outcome was persisted to session_status — but the finalize tail never terminalised it and the
-// buffer is still present. (This is the state consumeTransfer leaves after a crash/throw between claim+persist and
-// the FSM advance.) `claimed`/`sessionStatus`/`status`/`buffer` are knobs for the negative cases.
-async function seedStrand(db, r2, { requestId, transactionId, sessionStatus = "TRANSFERRED", claimed = true, status = "RECEIVING", buffer = true }) {
+// Reproduce a LOST-RECEIPT strand exactly: a correlated txn whose ack was CLAIMED (CAS winner) and whose computed
+// outcome was persisted to session_status — but the finalize tail never stamped notify_confirmed (the receipt never
+// landed). The `status`/`buffer` knobs shape WHICH strand: (a) RECEIVING + buffer intact [crash before advance];
+// (b) TRANSFERRED + buffer intact [crash between advance and delete]; (c) TRANSFERRED + buffer gone [notify threw
+// after delete — the common case]. `claimed`/`sessionStatus`/`notifyConfirmed` drive the negative/skip cases.
+async function seedStrand(db, r2, { requestId, transactionId, sessionStatus = "TRANSFERRED", claimed = true, status = "RECEIVING", buffer = true, notifyConfirmed = null }) {
   await putTxn(db, sealStub, {
     requestId, tenantId: "t1", consentId: "c1",
     ephPrivKeyB64: "SCALAR", ephPubRaw: "PUB", ourNonce: "NONCE",
@@ -49,6 +50,10 @@ async function seedStrand(db, r2, { requestId, transactionId, sessionStatus = "T
   if (sessionStatus != null) {
     await db.prepare("UPDATE connect_abdm_txn SET session_status=?,updated_at=? WHERE transaction_id=?")
       .bind(sessionStatus, NOW, transactionId).run();
+  }
+  if (notifyConfirmed != null) {
+    await db.prepare("UPDATE connect_abdm_txn SET notify_confirmed=?,updated_at=? WHERE transaction_id=?")
+      .bind(notifyConfirmed, NOW, transactionId).run();
   }
   if (buffer) await bufferEntry(r2, ENV, transactionId, "cc-1", "ciphertext", "checksum-x", NOW);
 }
@@ -66,6 +71,57 @@ test("1. lost receipt (ack=1, RECEIVING, session_status set, buffer present) →
   assert.deepEqual(gw.calls[0], { endpointKey: "hiNotify", body: { transactionId: "txn-1", sessionStatus: "TRANSFERRED" } });
   assert.equal((await listBuffered(r2, "txn-1")).length, 0, "buffer deleted on reconcile");
   assert.equal((await getTxnByRequestId(db, "req-1")).status, "TRANSFERRED", "advanced RECEIVING → terminal outcome");
+  assert.ok((await getTxnByTransactionId(db, "txn-1")).notify_confirmed != null, "receipt stamped notify_confirmed");
+});
+
+// ── 1b. strand (b): crash BETWEEN advance and delete → TERMINAL + buffer INTACT + receipt unsent → recovered. ──
+test("1b. strand (b) terminal + buffer intact + notify_confirmed NULL → re-notify + delete + confirm (advance is a no-op)", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  await seedStrand(db, r2, { requestId: "req-1b", transactionId: "txn-1b", sessionStatus: "TRANSFERRED", status: "TRANSFERRED", buffer: true });
+
+  const gw = spyGateway();
+  const res = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+
+  // already terminal → advance is a no-op → terminalized 0, but the receipt is still re-issued + buffer cleaned up.
+  assert.deepEqual(res, { reissued: 1, terminalized: 0 });
+  assert.equal(gw.calls.length, 1, "re-issued the lost receipt");
+  assert.equal((await listBuffered(r2, "txn-1b")).length, 0, "leftover buffer deleted (idempotent)");
+  assert.equal((await getTxnByRequestId(db, "req-1b")).status, "TRANSFERRED", "already-terminal status untouched");
+  assert.ok((await getTxnByTransactionId(db, "txn-1b")).notify_confirmed != null, "receipt now confirmed");
+  // second pass → full no-op (confirmed row not selected).
+  const second = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+  assert.deepEqual(second, { reissued: 0, terminalized: 0 });
+  assert.equal(gw.calls.length, 1, "no duplicate hiNotify once confirmed");
+});
+
+// ── 1c. strand (c) — the COMMON case: notify threw AFTER delete → TERMINAL + buffer GONE + receipt unsent. ────
+test("1c. strand (c) terminal + buffer gone + notify_confirmed NULL → re-notify + confirm (delete is a no-op)", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  await seedStrand(db, r2, { requestId: "req-1c", transactionId: "txn-1c", sessionStatus: "PARTIAL", status: "PARTIAL", buffer: false });
+
+  const gw = spyGateway();
+  const res = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+
+  assert.deepEqual(res, { reissued: 1, terminalized: 0 }, "the common gateway-throw strand is now recovered");
+  assert.equal(gw.calls.length, 1, "re-issued the lost receipt (no buffer needed; delete is a no-op)");
+  assert.deepEqual(gw.calls[0], { endpointKey: "hiNotify", body: { transactionId: "txn-1c", sessionStatus: "PARTIAL" } });
+  assert.ok((await getTxnByTransactionId(db, "txn-1c")).notify_confirmed != null, "receipt now confirmed");
+  // second pass → full no-op.
+  const second = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+  assert.deepEqual(second, { reissued: 0, terminalized: 0 });
+  assert.equal(gw.calls.length, 1, "no duplicate hiNotify once confirmed");
+});
+
+// ── 1d. an already-CONFIRMED txn (notify_confirmed set) → NEVER re-notified (the happy-path completion). ──────
+test("1d. notify_confirmed already set → NOT reconciled (receipt already landed)", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  await seedStrand(db, r2, { requestId: "req-1d", transactionId: "txn-1d", sessionStatus: "TRANSFERRED", status: "TRANSFERRED", buffer: false, notifyConfirmed: NOW });
+
+  const gw = spyGateway();
+  const res = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+
+  assert.deepEqual(res, { reissued: 0, terminalized: 0 });
+  assert.equal(gw.calls.length, 0, "a confirmed receipt is never re-issued");
 });
 
 // ── 2. a second reconcileNotify after success → pure no-op (terminal row is not selected). ─────────────────────
@@ -163,6 +219,36 @@ test("5. consumeTransfer persists session_status the instant the ack is claimed 
     /gateway 503/);
 
   // The computed outcome was persisted BEFORE the notify → it survives the throw (the reconcile precondition).
-  assert.equal((await getTxnByTransactionId(db, "txn-5")).session_status, "TRANSFERRED", "outcome persisted before the notify");
+  const t5 = await getTxnByTransactionId(db, "txn-5");
+  assert.equal(t5.session_status, "TRANSFERRED", "outcome persisted before the notify");
+  assert.ok(t5.notify_confirmed == null, "notify_confirmed NULL — the receipt was lost → reconcile will recover it");
   assert.equal(calls.length, 1, "the notify was attempted (and threw)");
+});
+
+// ── 6. END-TO-END: consumeTransfer notify-throw (the common strand c) → reconcileNotify recovers it. ──────────
+test("6. consumeTransfer notify throw strands terminal+buffer-gone → a later reconcileNotify re-issues + confirms", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  const s = await makeSession();
+  const e = await s.seal(JSON.stringify({ resourceType: "Bundle", id: "n6" }));
+  await bufferEntry(r2, ENV, "txn-6", "cc-1", e.content, e.checksum, NOW);
+  await seedTxn(db, s, { requestId: "req-6", transactionId: "txn-6" });
+
+  // First consume: the gateway throws on the notify → fail-safe finalize (status terminal + buffer deleted) but the
+  // receipt is LOST (notify_confirmed NULL). This is strand (c) produced by the REAL consumeTransfer path.
+  const throwOnce = { post: async () => { throw new Error("gateway 503"); } };
+  await assert.rejects(() => consumeTransfer(ENV, { db, r2, secrets: sealStub, gateway: throwOnce, now: NOW2 },
+    { transactionId: "txn-6", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" }), /gateway 503/);
+  assert.equal((await getTxnByTransactionId(db, "txn-6")).status, "TRANSFERRED", "fail-safe: advanced to terminal");
+  assert.equal((await listBuffered(r2, "txn-6")).length, 0, "fail-safe: buffer deleted");
+  assert.ok((await getTxnByTransactionId(db, "txn-6")).notify_confirmed == null, "receipt lost (unconfirmed)");
+
+  // Reconcile with a healthy gateway → re-issues the lost receipt + confirms. terminalized 0 (already terminal).
+  const gw = spyGateway();
+  const res = await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2);
+  assert.deepEqual(res, { reissued: 1, terminalized: 0 });
+  assert.deepEqual(gw.calls[0], { endpointKey: "hiNotify", body: { transactionId: "txn-6", sessionStatus: "TRANSFERRED" } });
+  assert.ok((await getTxnByTransactionId(db, "txn-6")).notify_confirmed != null, "receipt now confirmed");
+  // idempotent: a second pass does nothing.
+  assert.deepEqual(await reconcileNotify(db, r2, ENV, { gateway: gw }, NOW2), { reissued: 0, terminalized: 0 });
+  assert.equal(gw.calls.length, 1, "exactly one recovery notify");
 });
