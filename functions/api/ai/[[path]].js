@@ -95,7 +95,7 @@ function withCors(request, resp) {
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
-import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic } from "../../_research.js";
+import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -432,7 +432,7 @@ const RESEARCH_SYS_SNIPPETS =
 const EVIDENCE_REVIEW_SYS =
   "You are MaiK in EVIDENCE REVIEW mode, a clinical evidence-synthesis assistant for qualified doctors. Give a clear, decisive, clinician-facing answer to the question, grounded in established medical evidence and major guidelines. " +
   "You MAY be given a numbered SOURCES list retrieved from trusted literature (PubMed/PMC, Cochrane, WHO, CDC, NICE, ICMR, specialty-society guidelines); use it to ground and cite specifics, but the sources are SUPPORT, not a limit on what you may answer. Follow ALL of these requirements:\n" +
-  "1. ANSWER THE QUESTION DIRECTLY, FIRST. Lead with the bottom line — the single best answer the clinician asked for (state your recommendation and the setting/caveats that change it) — then the supporting detail. Be concise and structured.\n" +
+  "1. ANSWER THE QUESTION DIRECTLY, FIRST. Lead with the bottom line — the single best answer the clinician asked for (state your recommendation and the setting/caveats that change it) — then the supporting detail. Be concise and structured. If the new question is a SHORT FOLLOW-UP ('which is better?', 'what do you think?', 'one answer', 'why?'), interpret it in the context of the RECENT CONVERSATION and answer about THAT topic — never treat it as a standalone or generic question.\n" +
   "2. Ground specifics in the SOURCES where they apply and cite them inline as [n] (use ONLY the numbers given; never invent a citation, figure, or guideline). Name a key guideline or trial with its YEAR the first time you rely on it (e.g. 'Baveno VII (2022)', 'the 2021 Surviving Sepsis Campaign').\n" +
   "3. State EVIDENCE QUALITY where it matters (randomised trial, meta-analysis, systematic review, observational, consensus; GRADE/strength if given) and distinguish well-established evidence from emerging or preliminary findings.\n" +
   "4. When approaches genuinely differ, say where the weight of evidence lies and where the disagreement is.\n" +
@@ -1175,8 +1175,15 @@ export async function onRequest(context) {
       if (body.mode === "evidence-review") {
         const store = usageKv(env);
         const ERE_MAX = Math.max(256, Math.min(1800, Number(env.MAIK_EVIDENCE_MAX_OUTPUT) || 1300));
+        // Recent conversation turns (client sends up to 4) so a short follow-up keeps its context.
+        const history = Array.isArray(body.history) ? body.history.slice(-4) : [];
+        // Retrieval topic WITH follow-up context: the question's own keywords, or — when the follow-up
+        // is vague ("which is better?", "one answer") — the most recent prior turn's topic.
+        const topicStr = researchTopic(q, history);
         // (1) Response cache: normalize -> sha256hex -> maik:research:v1:<hash>. HIT = free, slot-free.
-        const cacheKey = researchCacheKey(await sha256hex(normalizeResearchQuery(q)));
+        // Keyed on the question AND the resolved topic so an identical vague follow-up in a DIFFERENT
+        // conversation (different prior topic) does not collide on a stale cached answer.
+        const cacheKey = researchCacheKey(await sha256hex(normalizeResearchQuery(q) + "|" + normalizeResearchQuery(topicStr)));
         if (store) {
           let hit = null; try { hit = await store.get(cacheKey, "json"); } catch (e) {}
           if (hit && hit.text) {
@@ -1204,16 +1211,18 @@ export async function onRequest(context) {
         // (4) Retrieve trusted citations (PubMed guideline / systematic review / meta-analysis), then
         // synthesize with numbered [n] grounding. Zero sources -> synthesize from established medicine.
         let cites = [];
-        try { cites = await pubmedGuidelines(env, researchTermFor(q), RESEARCH_PUBTYPE_FILTER); } catch (e) { cites = []; }
+        try { cites = await pubmedGuidelines(env, topicStr, RESEARCH_PUBTYPE_FILTER); } catch (e) { cites = []; }
         // Relevance guard: never present off-topic papers as "the evidence". PubMed's automatic term
         // mapping can still surface loosely-matched reviews; drop any whose title shares no specific
-        // keyword with the question, so the model synthesizes from established medicine instead of junk.
-        const _kw = researchKeywords(q);
+        // keyword with the (context-resolved) topic, so the model synthesizes from established medicine.
+        const _kw = researchKeywords(topicStr);
         cites = cites.filter(function (c) { return sourceOnTopic(c.title, _kw); });
         const sources = cites.map(function (c, i) { return { n: i + 1, title: c.title + (c.year ? " (" + c.year + ")" : ""), url: c.url, site: c.journal || "PubMed", year: c.year, pmid: c.pmid, pubtype: c.pubtype }; });
         let srcBlock = "";
         if (sources.length) srcBlock = "\n\n=== SOURCES (cite inline as [n]; use ONLY these numbers) ===\n" + sources.map(function (s) { return s.n + ". " + s.title + (s.pubtype ? " [" + s.pubtype + "]" : "") + (s.site ? " - " + s.site : ""); }).join("\n");
-        const prompt = EVIDENCE_REVIEW_SYS + "\n\n=== CLINICIAN QUESTION ===\n" + q + srcBlock;
+        let histBlock = "";
+        if (history.length) histBlock = "\n\n=== RECENT CONVERSATION (context; the new question may be a short follow-up that refers to it) ===\n" + history.map(function (t) { var s = ""; if (t && t.q) s += "Clinician: " + clip(t.q, 300); if (t && t.a) s += (s ? "\n" : "") + "MaiK: " + clip(t.a, 300); return s; }).filter(Boolean).join("\n");
+        const prompt = EVIDENCE_REVIEW_SYS + histBlock + "\n\n=== CLINICIAN QUESTION ===\n" + q + srcBlock;
         const inTok = estTokens(prompt.length);
         let text;
         try { text = await callGemini(env, [{ text: prompt }], ERE_MAX, { temperature: 0.2 }); }
