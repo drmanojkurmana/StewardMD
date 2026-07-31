@@ -4,6 +4,7 @@
 // Reuses assertConnector/makeCtx, validateBundle, the audit ALLOW-list, and the typed errors. Synthetic only.
 import { assertConnector, makeCtx } from "../interfaces.js";
 import { validateBundle } from "../canonical/validate.js";
+import { RESOURCE_KEYS as BUNDLE_KEYS } from "../canonical/model.js";
 import { ALLOW } from "../audit.js";
 import { UpstreamError, AuthError } from "../permission.js";
 import { describe, assertDescriptor } from "./descriptor.js";
@@ -12,7 +13,8 @@ const ALLOW_SET = new Set(ALLOW);
 export class ConformanceError extends Error { constructor(msg, failed) { super(msg); this.name = "ConformanceError"; this.failed = failed || []; } }
 
 const rejectingFetch = async () => { throw new Error("upstream down"); };
-const BUNDLE_KEYS = ["encounters", "conditions", "medications", "allergies", "observations", "diagnosticReports", "documents"];
+// BUNDLE_KEYS is the single source of truth from the SCCM model (RESOURCE_KEYS) so check-7's id-counting
+// can never silently drift from the canonical bundle shape.
 
 function isTyped(e) {
   if (e instanceof UpstreamError || e instanceof AuthError) return true;   // the connector's own typed errors
@@ -36,7 +38,13 @@ export async function runConformance(connector, opts = {}) {
   let descriptor = null;
   try { assertConnector(connector); descriptor = describe(connector); assertDescriptor(descriptor); add("1-contract", true); }
   catch (e) { add("1-contract", false, e.message); return { passed: false, checks, descriptor }; }
-  const profile = descriptor.profile, emits = descriptor.capabilities.emitsBundle;
+  const profile = descriptor.profile;
+  // Checks 6/7 validate the emitted bundle. emitsBundle is connector-SELF-declared, so a pull connector that
+  // genuinely emits a bundle could set emitsBundle:false to SKIP the two checks that validate it and still
+  // certify. A pull connector ALWAYS emits a bundle, so force emits=true for pull regardless of the flag.
+  // VERIFY (Stage-4): for the event profile, derive emits from whether ingest actually produced a bundle
+  // rather than trusting the declared flag.
+  const emits = profile === "pull" ? true : descriptor.capabilities.emitsBundle;
 
   // 2 authenticate does not throw uncontrolled on a healthy ctx
   try { await connector.authenticate(ctxOf(opts)); add("2-authenticate", true); } catch (e) { add("2-authenticate", false, e.message); }

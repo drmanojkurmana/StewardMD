@@ -54,7 +54,14 @@ export async function onRequest(context) {
 
   if (path === "/context" && request.method === "POST") {
     let body = {}; try { body = await request.json(); } catch {}
-    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: defaultRegistry().asConnectorMap() };
+    // Track C: hand the PULL engine only the pull-profile connectors (event connectors like abdm have no
+    // fetchPatient). A wrong-profile/unknown connectorId then resolves to undefined and hits the engine's OWN
+    // guard (engine.js: "connector not registered" -> UpstreamError -> {error:"upstream"}) AFTER auth/membership,
+    // exactly as before Track C. Auth stays strictly first for every id (a wrong id is indistinguishable to an
+    // unauthenticated caller). Restores the precise pre-Track-C deps.connectors = { "fhir-r4": fhirR4Connector }.
+    const pullConnectors = {};
+    for (const [id, c] of Object.entries(defaultRegistry().asConnectorMap())) if (c.meta.profile === "pull") pullConnectors[id] = c;
+    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: pullConnectors };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
