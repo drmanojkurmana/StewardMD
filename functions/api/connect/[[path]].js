@@ -1,7 +1,7 @@
 // functions/api/connect/[[path]].js — StewardMD Connect HTTP surface (spec §8). Flag-gated; server-derived identity; no-store.
 import { flagOn, jsonResponse } from "../../_connect/testkit.js";
 import { loadPatientContext, ingestEvent } from "../../_connect/engine.js";
-import { fhirR4Connector } from "../../_connect/connectors/fhir-r4/connector.js";
+import { defaultRegistry } from "../../_connect/sdk/index.js"; // Track C: connectors resolved via the SDK registry (conformance-gated, frozen, per-request)
 import { AuthError, PermissionError, SandboxViolation } from "../../_connect/permission.js";
 import { makeSecrets } from "../../_connect/secrets.js";
 import { makeAuditSink } from "../../_connect/audit.js";
@@ -54,7 +54,7 @@ export async function onRequest(context) {
 
   if (path === "/context" && request.method === "POST") {
     let body = {}; try { body = await request.json(); } catch {}
-    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: { "fhir-r4": fhirR4Connector } };
+    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: defaultRegistry().asConnectorMap() };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
