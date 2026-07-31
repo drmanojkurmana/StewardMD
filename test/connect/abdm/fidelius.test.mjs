@@ -57,6 +57,14 @@ test("deriveKeyIv rejects a non-32-byte nonce in either position (fail-closed)",
   await assert.rejects(() => deriveKeyIv(new Uint8Array(32), nonce(), randomBytes(31)), FideliusError);
 });
 
+test("deriveKeyIv rejects a shared secret that is not exactly 32 bytes (fail-closed)", async () => {
+  await assert.rejects(() => deriveKeyIv(new Uint8Array(31), nonce(), nonce()), FideliusError);
+});
+
+test("deriveKeyIv rejects a non-Uint8Array secret (fail-closed)", async () => {
+  await assert.rejects(() => deriveKeyIv("not-a-uint8array", nonce(), nonce()), FideliusError);
+});
+
 // test/connect/abdm/fidelius.test.mjs  (append)
 import { sealBundle, openEntry } from "../../../functions/_connect/abdm/fidelius.js";
 
