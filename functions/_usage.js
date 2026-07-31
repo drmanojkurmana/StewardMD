@@ -92,10 +92,11 @@ export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
   if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  // verifyFirebaseToken returns the uid STRING (payload.sub) or null — NOT an object. Reading .uid off
-  // it made every signed-in user fall through to the guest branch, so accounts were metered by IP: many
-  // doctors behind one hospital IP shared a single guest bucket and hit the cap (owners are admin-exempt).
-  if (tok) { const uid = await verifyFirebaseToken(tok, env); if (uid) return { id: "fb:" + uid, guest: false, email: emailFromBearer(tok) }; }
+  // verifyFirebaseToken (THIS file's copy, ~line 59) returns an OBJECT { uid, email } or null. Read the
+  // .uid off it. Coercing the whole object into the key ("fb:" + obj → "fb:[object Object]") collapsed
+  // EVERY signed-in user onto ONE shared id, so all accounts shared a single KU ledger + quota bucket
+  // (balances appeared to "reset" to the shared total; metering merged). Per-account key = "fb:<uid>".
+  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok) }; }
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
