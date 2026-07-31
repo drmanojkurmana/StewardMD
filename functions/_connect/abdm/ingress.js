@@ -13,6 +13,12 @@ import {
   bufferEntry,
 } from "./state.js";
 import { linkConsentId, getConsentReqByConsentId, verifyConsentArtifact } from "./consent.js"; // one-row reconciliation join (state.js is frozen this stage)
+import { hipFlagOn } from "./hip-flags.js";                              // Stage-5 Task-7: the SECOND flag (BOTH smd_connect AND smd_connect_hip)
+import { handleDiscovery, serveTransfer, putHipConsent } from "./hip.js"; // Stage-5 HIP serve/discovery/consent primitives (deps-injectable for tests)
+
+// The HIP inbound event types (StewardMD as PROVIDER). Kept as a Set so the ingress can branch on membership in
+// one place; anything NOT in here falls through to the UNCHANGED Stage-4 HIU routing below.
+const HIP_TYPES = new Set(["discovery", "hip-consent-notify", "hip-hi-request"]);
 
 // Pinned inbound algs (asymmetric-only; jws.js re-intersects with its own allow-list, so HS*/none can never
 // survive even if this widened). // VERIFY which one ABDM actually signs with (research WAF-blocked).
@@ -106,6 +112,40 @@ export async function handleIngress(env, deps, request) {
 
     // (3) CORRELATE BEFORE BUFFER (R6): unknown id, or a header tenant-claim that disagrees with the row → 403.
     const corr = await correlate(deps.db, ev);
+
+    // (3b) HIP INBOUND ROUTING (Stage-5 Task-7) — StewardMD as PROVIDER. Reuses the SAME verified + replay-
+    //      defended + correlated spine above; NOTHING here is trusted from the body. Gated on the SECOND flag
+    //      (hipFlagOn = BOTH smd_connect AND smd_connect_hip): a HIP event with the HIP flag OFF → 404 (never
+    //      leaks that the HIP surface exists). Tenant is ALWAYS the correlation row's, never the body. Discovery
+    //      does its OWN care-context correlation (exact-match, no consent row) so it runs even off `corr==null`;
+    //      consent-notify + hi-request bind to the correlated row (unknown correlation → 403, no serve). Placed
+    //      BEFORE the HIU correlation-403 so a non-correlatable discovery still routes; the HIU branches below are
+    //      UNTOUCHED (a non-HIP type skips this block entirely). Handlers are deps-injectable (spies in tests).
+    if (HIP_TYPES.has(ev.type)) {
+      if (!hipFlagOn(env)) return reject(404, "not_found");   // second flag OFF → no existence leak
+      const now = deps.now;
+      if (ev.type === "discovery") {                          // synchronous exact-match query — self-correlating
+        const disc = deps.handleDiscovery || handleDiscovery;
+        const out = await disc(env, { db: deps.db, kv: deps.kv, audit: deps.audit }, { probe: ev.probe, sourceId: ev.sourceId, now });
+        if (nonceKey && deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
+        return jsonResponse({ ok: true, matched: out.matched, careContexts: out.careContexts }, { status: 200 });
+      }
+      if (!corr) return reject(403, "unknown_correlation");   // hi-request/consent-notify MUST bind to a known row
+      if (ev.type === "hip-consent-notify") {                 // monotonic HIP-side consent store (R6)
+        const put = deps.putHipConsent || putHipConsent;
+        await put(deps.db, { requestId: corr.requestId, tenantId: corr.tenantId, patientAbhaHash: ev.patientAbhaHash,
+          hiTypes: ev.hiTypes, expiresAt: ev.expiresAt, status: ev.status, now });
+      } else {                                                // hip-hi-request → serveTransfer (tenant from the ROW)
+        const serve = deps.serveTransfer || serveTransfer;
+        const serveDeps = { db: deps.db, secrets: deps.secrets, gateway: deps.gateway, fetch: deps.fetch,
+          audit: deps.audit, now, source: deps.source, jwks: deps.jwks };
+        await serve(env, serveDeps, { tenantId: corr.tenantId, consentId: ev.consentId, careContexts: ev.careContexts,
+          hiuKeyMaterial: ev.keyMaterial, dataPushUrl: ev.dataPushUrl, transactionId: ev.transactionId });
+      }
+      if (nonceKey && deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
+      return jsonResponse({ ok: true }, { status: 202 });
+    }
+
     if (!corr) return reject(403, "unknown_correlation");   // NO R2 write reached
     const claim = tenantClaim(request);
     if (claim != null && String(claim) !== String(corr.tenantId)) return reject(403, "tenant_mismatch");

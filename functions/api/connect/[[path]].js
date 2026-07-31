@@ -6,6 +6,9 @@ import { AuthError, PermissionError, SandboxViolation } from "../../_connect/per
 import { makeSecrets } from "../../_connect/secrets.js";
 import { makeAuditSink } from "../../_connect/audit.js";
 import { handleIngress } from "../../_connect/abdm/ingress.js";
+import { hipFlagOn } from "../../_connect/abdm/hip-flags.js";
+import { handleDiscovery, serveTransfer, putHipConsent, linkCareContext } from "../../_connect/abdm/hip.js";
+import { followcareSource } from "../../_connect/abdm/hip-sources/followcare.js";
 import { identify } from "../../_usage.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
@@ -24,10 +27,30 @@ export async function onRequest(context) {
   if (/^\/ingress\/abdm/.test(path)) {
     const deps = { db: env.CONNECT_DB, r2: env.CONNECT_R2, kv: env.MAIK_KV, secrets: makeSecrets(env),
       audit: makeAuditSink(env, env.CONNECT_DB),   // on-fetch → verifyConsentArtifact records consent.verified/denied (R14)
+      // Stage-5 HIP serve wiring: the FollowCare read-source + the HIP handlers (the ingress gates them on the
+      // second flag hipFlagOn; serveTransfer pushes sealed pages to the HIU's dataPushUrl). Tenant is the row's.
+      source: followcareSource, handleDiscovery, serveTransfer, putHipConsent,
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });
+
+  // ABDM HIP care-context REGISTRATION (Stage-5 Task-8, gated on the SECOND flag). Server-DERIVED identity:
+  // linkCareContext resolves the actor + tenant membership (AuthError/PermissionError before any write) and
+  // HMACs the raw ABHA before D1 — the body carries the ABHA once, never a trusted tenant/actor. Idempotent.
+  if (path === "/hip/care-contexts" && request.method === "POST") {
+    if (!hipFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    let body = {}; try { body = await request.json(); } catch {}
+    const deps = { db: env.CONNECT_DB, audit: makeAuditSink(env, env.CONNECT_DB), identify };
+    const req = { request, tenantId: body.tenantId, abhaAddress: body.abhaAddress, ref: body.ref,
+      hiType: body.hiType, display: body.display, source: body.source, now: () => new Date().toISOString() };
+    try {
+      const out = await linkCareContext(env, deps, req);
+      return jsonResponse({ ok: true, id: out.id });
+    } catch (e) {
+      return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });   // sanitized; no raw value/stack
+    }
+  }
 
   if (path === "/context" && request.method === "POST") {
     let body = {}; try { body = await request.json(); } catch {}
