@@ -30,3 +30,24 @@ test("mock R2 put/get/delete/list with prefix + metadata", async () => {
   await r2.delete("t1/cc1");
   assert.equal(await r2.get("t1/cc1"), null);
 });
+
+test("mock D1 supported WHERE shapes do NOT throw (=, and the CAS <> guard)", async () => {
+  const db = makeAbdmDb({ connect_abdm_txn: [{ request_id: "r1", transaction_id: "t1", status: "REQUESTED" }] });
+  await db.prepare("SELECT * FROM connect_abdm_txn WHERE request_id=?").bind("r1").first();
+  await db.prepare("UPDATE connect_abdm_txn SET status=? WHERE transaction_id=? AND status<>?").bind("ACKED", "t1", "ACKED").run();
+  assert.ok(true); // reached without throwing → `=` and `<>` are both accepted
+});
+
+test("mock D1 FAILS LOUD on an unsupported WHERE (SELECT ... expires_at < ?) — no silent drop-to-no-WHERE", async () => {
+  const db = makeAbdmDb({ connect_abdm_txn: [{ request_id: "r1", expires_at: "z" }] });
+  await assert.rejects(
+    async () => db.prepare("SELECT * FROM connect_abdm_txn WHERE expires_at < ?").bind("2020").all(),
+    /unsupported WHERE/);
+});
+
+test("mock D1 FAILS LOUD on an unsupported DELETE WHERE (would otherwise wipe the whole table)", async () => {
+  const db = makeAbdmDb({ connect_abdm_txn: [{ request_id: "r1", expires_at: "z" }] });   // seed a row so the filter actually evaluates the predicate
+  await assert.rejects(
+    async () => db.prepare("DELETE FROM connect_abdm_txn WHERE expires_at < ?").bind("2020").run(),
+    /unsupported WHERE/);
+});

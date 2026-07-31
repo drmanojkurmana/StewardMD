@@ -7,6 +7,14 @@ export function makeAbdmDb(seed = {}) {
     // supports: WHERE a=? [AND b<>?]  — enough for our lookups + the CAS guard.
     // Scan only the WHERE clause so an UPDATE's `SET col=?` isn't parsed as a guard condition.
     const clause = (sql.match(/\bWHERE\b([\s\S]*)$/i) || [, ""])[1];
+    // Fail LOUD on any predicate we don't implement. Silently dropping one (e.g. `expires_at < ?`)
+    // would collapse the WHERE to a no-op and match the whole table — a DELETE-everything landmine.
+    // Validate per-predicate shape (so the supported `<>` isn't false-flagged by a bare `<` scan).
+    for (const pred of clause.split(/\bAND\b/i).map((s) => s.trim()).filter(Boolean)) {
+      if (!/^\s*\w+\s*(=|<>)\s*\?\s*$/.test(pred)) {
+        throw new Error("abdm mock D1: unsupported WHERE (only 'col=? [AND col<>?]' supported) — filter in JS or extend the mock");
+      }
+    }
     const m = [...clause.matchAll(/(\w+)\s*(=|<>)\s*\?/g)];
     return rows.filter((r) => m.every((mm, i) => {
       const v = binds[bindOffset + i]; return mm[2] === "=" ? String(r[mm[1]]) === String(v) : String(r[mm[1]]) !== String(v);
