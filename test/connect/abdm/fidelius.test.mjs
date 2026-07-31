@@ -96,3 +96,35 @@ test("seal→open round-trips a LARGE (~600 KB) plaintext without overflowing th
   assert.equal(out, big);
   assert.equal(out.length, 600000);
 });
+
+// test/connect/abdm/fidelius.test.mjs  (append)
+import { KAT } from "./vectors/fidelius-kat.mjs";
+import { importRawPrivate } from "../../../functions/_connect/abdm/fidelius.js";
+const hexToBytes = (h) => Uint8Array.from(h.match(/../g).map((x) => parseInt(x, 16)));
+
+test("known-answer vector: fixed keys+nonces+plaintext reproduce the recorded ciphertext & checksum", async () => {
+  const aPriv = await importRawPrivate(hexToBytes(KAT.aPrivHex));
+  const bPriv = await importRawPrivate(hexToBytes(KAT.bPrivHex));
+  const secA = await sharedSecret(aPriv.privateKey, bPriv.publicKeyRaw);
+  const entry = await sealBundle(secA, hexToBytes(KAT.aNonceHex), hexToBytes(KAT.bNonceHex), KAT.plaintext);
+  assert.equal(entry.checksum, KAT.checksum);
+  assert.equal(entry.content, KAT.content);
+  // and it decrypts back with B's side
+  const secB = await sharedSecret(bPriv.privateKey, aPriv.publicKeyRaw);
+  const out = await openEntry(secB, hexToBytes(KAT.bNonceHex), hexToBytes(KAT.aNonceHex), entry.content, entry.checksum);
+  assert.equal(out, KAT.plaintext);
+});
+
+test("R1: two plaintexts NEVER share a derived (key, iv) — no batch/multi-entry-per-key API exists", async () => {
+  // The module intentionally exposes only sealBundle(single plaintext). Assert there is no batch export
+  // and that encrypting a second bundle requires deriving fresh key material (different nonce) → different iv.
+  const mod = await import("../../../functions/_connect/abdm/fidelius.js");
+  assert.equal(typeof mod.sealBundle, "function");
+  assert.equal("sealBundles" in mod, false);   // no batch form
+  assert.equal("sealMany" in mod, false);
+  const a = await generateKeyPair(), b = await generateKeyPair();
+  const sec = await sharedSecret(a.privateKey, b.publicKeyRaw);
+  const ki1 = await deriveKeyIv(sec, hexToBytes(KAT.aNonceHex), hexToBytes(KAT.bNonceHex));
+  const ki2 = await deriveKeyIv(sec, nonce(), hexToBytes(KAT.bNonceHex));   // fresh our-nonce
+  assert.notDeepEqual([...ki1.iv], [...ki2.iv]);   // a new keyMaterial exchange yields a new iv
+});

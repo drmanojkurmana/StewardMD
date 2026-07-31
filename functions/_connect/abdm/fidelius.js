@@ -61,6 +61,19 @@ export async function sealBundle(secret, ourNonce, theirNonce, plaintextStr) {
   return { content: b64(ct), checksum: await sha256hex(pt) };
 }
 
+// Import a raw 32-byte X25519 private scalar as a CryptoKey (for deterministic test vectors). PKCS8-wraps the raw key.
+export async function importRawPrivate(rawScalar) {
+  if (rawScalar.length !== 32) throw new FideliusError("raw private scalar must be 32 bytes");
+  const prefix = Uint8Array.from([0x30,0x2e,0x02,0x01,0x00,0x30,0x05,0x06,0x03,0x2b,0x65,0x6e,0x04,0x22,0x04,0x20]);
+  const pkcs8 = new Uint8Array(prefix.length + 32); pkcs8.set(prefix, 0); pkcs8.set(rawScalar, prefix.length);
+  const privateKey = await subtle.importKey("pkcs8", pkcs8, { name: "X25519" }, true, ["deriveBits"]);
+  // derive the matching public key by exporting the pair is not possible from a private import; compute via JWK round-trip:
+  const jwk = await subtle.exportKey("jwk", privateKey);
+  const pubKey = await subtle.importKey("jwk", { kty: jwk.kty, crv: jwk.crv, x: jwk.x }, { name: "X25519" }, true, []);
+  const publicKeyRaw = new Uint8Array(await subtle.exportKey("raw", pubKey));
+  return { privateKey, publicKeyRaw };
+}
+
 export async function openEntry(secret, ourNonce, theirNonce, contentB64, expectedChecksum) {
   const { key, iv } = await deriveKeyIv(secret, ourNonce, theirNonce);
   let ptBytes;
