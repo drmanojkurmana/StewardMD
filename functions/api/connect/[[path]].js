@@ -3,14 +3,14 @@ import { flagOn, jsonResponse } from "../../_connect/testkit.js";
 import { loadPatientContext } from "../../_connect/engine.js";
 import { fhirR4Connector } from "../../_connect/connectors/fhir-r4/connector.js";
 import { AuthError, PermissionError, SandboxViolation } from "../../_connect/permission.js";
-import { identify } from "../../_fbauth.js";
+import { identify } from "../../_usage.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
 
 export async function onRequest(context) {
   const { request, env } = context;
-  if (!flagOn(env)) return new Response("Not found", { status: 404 });
+  if (!flagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
   const url = new URL(request.url);
   const path = url.pathname.replace(/^\/api\/connect/, "") || "/";
 
