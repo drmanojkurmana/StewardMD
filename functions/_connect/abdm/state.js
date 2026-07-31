@@ -2,6 +2,7 @@
 // Stage-3 Task-2: monotonic consent status (R6 anti-replay) + sealed ephemeral key (ADR-2D).
 // Dependency-injected: caller passes `db` (D1), `secrets` ({seal,open}) and `now` (ISO string).
 // No env/global/Date.now reads here. Mock-friendly SQL only: WHERE `col=?`, SET `col=?,...`.
+import { hmacPseudonym } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC (patientRefHash) helper
 export class ConnectStateError extends Error {}
 
 // Consent lifecycle ranks; terminal statuses refuse any further change.
@@ -89,4 +90,66 @@ export async function attachTransactionId(db, requestId, transactionId, now) {
 
 export async function unsealTxnKey(secrets, txnRow) {
   return secrets.open(txnRow.eph_privkey_sealed);
+}
+
+// ---- Stage-3 Task-3: R2 encrypted push-buffer (Fidelius ciphertext at rest; R14) ----------------
+// Temporary hold for ABDM-pushed, ALREADY-ENCRYPTED payloads that land before we can join+decrypt
+// (buffer-then-join is Task 5; decrypt is Stage 4). Stores Fidelius ciphertext (contentB64) as-is —
+// never plaintext PHI, never a raw careContextReference, and adds no second encryption layer.
+// Dependency-injected r2/env/now; fail-closed (ConnectStateError) on a genuine R2 error.
+const BUFFER_PREFIX = "abdm/buffer";
+const txnPrefix = (txnId) => `${BUFFER_PREFIX}/${txnId}/`;
+
+// R14: HMAC the careContextReference so the RAW value never lands in a key, a body, or a log.
+// Reuse the existing keyed HMAC (CONNECT_HMAC_SALT); domain-separate from patient pseudonyms.
+async function hmacCareContext(env, careContextRef) {
+  return hmacPseudonym(env, "abdm/carecontext", String(careContextRef));
+}
+
+// Buffer one encrypted entry. Deterministic key `${prefix}/${txnId}/${HMAC(ref)}:${checksum}` means a
+// repeat of the same (txnId, careContextRef, checksum) overwrites the same object — idempotent dedupe.
+export async function bufferEntry(r2, env, txnId, careContextRef, contentB64, checksum, now) {
+  if (!txnId || careContextRef == null || checksum == null) {
+    throw new ConnectStateError("bufferEntry requires txnId, careContextRef and checksum");
+  }
+  const ref = await hmacCareContext(env, careContextRef);        // hex HMAC; the raw ref is never surfaced
+  const key = `${txnPrefix(txnId)}${ref}:${checksum}`;
+  const body = JSON.stringify({ careContextHash: ref, checksum, contentB64, createdAt: now });
+  try {
+    const existing = await r2.get(key);                          // deduped ⇔ this key was already buffered
+    await r2.put(key, body);
+    return { key, deduped: !!existing };
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e;
+    throw new ConnectStateError(`abdm buffer write failed: ${e && e.message}`);
+  }
+}
+
+// List one txn's buffered entries as parsed JSON bodies (R2 list returns keys only, so re-get each).
+export async function listBuffered(r2, txnId) {
+  try {
+    const { objects = [] } = (await r2.list({ prefix: txnPrefix(txnId) })) || {};
+    const out = [];
+    for (const o of objects) {
+      const obj = await r2.get(o.key);
+      if (obj) out.push(JSON.parse(await obj.text()));
+    }
+    return out;
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e;
+    throw new ConnectStateError(`abdm buffer list failed: ${e && e.message}`);
+  }
+}
+
+// Delete every buffered object under one txn prefix (scoped — never touches another txn). Returns count.
+export async function deleteBuffered(r2, txnId) {
+  try {
+    const { objects = [] } = (await r2.list({ prefix: txnPrefix(txnId) })) || {};
+    let n = 0;
+    for (const o of objects) { await r2.delete(o.key); n++; }
+    return n;
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e;
+    throw new ConnectStateError(`abdm buffer delete failed: ${e && e.message}`);
+  }
 }
