@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { generateKeyPair, sharedSecret, randomBytes, FideliusError } from "../../../functions/_connect/abdm/fidelius.js";
+import { generateKeyPair, sharedSecret, randomBytes, FideliusError, nonce, deriveKeyIv } from "../../../functions/_connect/abdm/fidelius.js";
 
 test("generateKeyPair yields a 32-byte raw public key + a deriving private key", async () => {
   const kp = await generateKeyPair();
@@ -33,8 +33,6 @@ test("randomBytes returns the requested length and varies", () => {
   assert.notDeepEqual([...x], [...y]);
 });
 
-import { nonce, deriveKeyIv } from "../../../functions/_connect/abdm/fidelius.js";
-
 test("nonce is 32 CSPRNG bytes", () => { assert.equal(nonce().length, 32); });
 
 test("deriveKeyIv is symmetric (both parties derive the same key material) and iv is 12 bytes", async () => {
@@ -51,4 +49,10 @@ test("deriveKeyIv is symmetric (both parties derive the same key material) and i
   const ct = await globalThis.crypto.subtle.encrypt({ name: "AES-GCM", iv }, kiA.key, msg);
   const pt = new TextDecoder().decode(await globalThis.crypto.subtle.decrypt({ name: "AES-GCM", iv }, kiB.key, ct));
   assert.equal(pt, "ping");
+});
+
+test("deriveKeyIv rejects a non-32-byte nonce in either position (fail-closed)", async () => {
+  // Dummy 32-byte "secret" — the guard fires on nonce length before the secret is used, so all-zero is fine here.
+  await assert.rejects(() => deriveKeyIv(new Uint8Array(32), randomBytes(31), nonce()), FideliusError);
+  await assert.rejects(() => deriveKeyIv(new Uint8Array(32), nonce(), randomBytes(31)), FideliusError);
 });
