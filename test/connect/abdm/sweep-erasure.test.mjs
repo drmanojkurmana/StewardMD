@@ -22,7 +22,7 @@ import { handleIngress } from "../../../functions/_connect/abdm/ingress.js";
 import { ingestEvent } from "../../../functions/_connect/engine.js";
 import {
   sweep, putConsentReq, updateConsentStatus, getConsentReq,
-  putTxn, attachTransactionId, getTxnByRequestId, bufferEntry, listBuffered, tryJoin,
+  putTxn, attachTransactionId, getTxnByRequestId, bufferEntry, bufferIndexPut, listBuffered, tryJoin,
 } from "../../../functions/_connect/abdm/state.js";
 import { verifyConsentArtifact, linkConsentId, getConsentReqByConsentId } from "../../../functions/_connect/abdm/consent.js";
 
@@ -32,9 +32,15 @@ const NOW = "2026-07-31T00:00:00Z";
 const ISO_NOW = "2026-07-31T12:00:00Z";
 const S6_FUT = "2026-08-30T00:00:00Z";
 const erasedEvents = (db) => (db._tables.connect_audit_event || []).filter((e) => e.action === "data.erased");
-// FIX-1's crown assertion: NO buffer object survives under ANY key anywhere in the store.
+// Paginate an R2 list across ALL pages (the mock models real R2 truncation when constructed with a small pageSize).
+const listAll = async (r2, prefix = "") => {
+  const keys = []; let cursor;
+  do { const r = (await r2.list({ prefix, cursor })) || {}; for (const o of (r.objects || [])) keys.push(o.key); cursor = r.truncated ? r.cursor : undefined; } while (cursor);
+  return keys;
+};
+// FIX-1's crown assertion: NO buffer object survives under ANY key anywhere in the store (across ALL pages).
 const assertR2Empty = async (r2) =>
-  assert.equal((await r2.list({ prefix: "" })).objects.length, 0, "R2 store must be GLOBALLY empty after erasure");
+  assert.equal((await listAll(r2)).length, 0, "R2 store must be GLOBALLY empty after erasure");
 
 // A retained-scope-bearing consent row (a real GRANTED-then-REVOKED consent keeps its signed scope until erased).
 function scopedConsentRow(o = {}) {
@@ -98,7 +104,7 @@ const outOfOrderPush = (o = {}) => ({
 
 // A push is out-of-order when the txn's transaction_id is NOT yet attached; the fix must NOT stamp it (that would
 // break the buffer-then-join deferral). It records a consent-scoped INDEX so the erase can still find the buffer.
-const bufidxKeys = async (r2, consentId) => (await r2.list({ prefix: `abdm/bufidx/${consentId}/` })).objects.map((o) => o.key);
+const bufidxKeys = async (r2, consentId) => listAll(r2, `abdm/bufidx/${consentId}/`);
 
 test("FIX-1 round-2: out-of-order push (reqC≠reqD, no requestId) → indexed, deferral preserved; zero orphan after REVOKE", async () => {
   const db = makeAbdmDb({
@@ -381,4 +387,65 @@ test("round-2 LOW: a dataEraseAt-triggered erase TERMINALIZES the GRANTED row (�
   const second = await sweep(db, r2, HMAC_ENV, ISO_NOW);
   assert.equal(second.consentsErased, 0);
   assert.equal(erasedEvents(db).length, 1, "no duplicate data.erased after terminalize");
+});
+
+// ───────────────────────── round-3 FIX-A: buffer/pointer guard symmetry ─────────────────────────
+// A buffer must NEVER be written without an erasure path. A push that reaches the buffer branch with NO resolvable
+// consentId AND whose transaction_id is not on any txn row is un-erasable → it must be REJECTED, buffering nothing.
+test("round-3 FIX-A: a data-push with no resolvable consentId and an unattached tid is REJECTED (no buffer, no pointer)", async () => {
+  const db = makeAbdmDb({
+    // A consent_req row whose consent_id was never linked (still NULL) → correlate resolves via requestId (branch 2)
+    // but corr.consentId is null. No txn row carries the pushed tid → the buffer would be un-erasable.
+    connect_abdm_consent_req: [{ request_id: "reqU", tenant_id: "t1", status: "INITIATED", consent_id: null, created_at: ING_NOW, updated_at: ING_NOW }],
+  });
+  const r2 = makeR2();
+  const deps = ingDeps({ db, r2, kv: makeMockKv(),
+    payload: { type: "data-push", transactionId: "txn-U", requestId: "reqU", // no consentId; tid not attached anywhere
+      entries: [{ careContextReference: "cc-A", content: "CIPHER", checksum: "chk-1" }] } });
+  const res = await handleIngress(ING_ENV, deps, ingRequest({ "REQUEST-ID": "rU", TIMESTAMP: ING_NOW, "X-HIU-ID": "t1" }));
+  assert.equal(res.status, 403, "un-indexable push (no consentId, no attached txn) is refused");
+  assert.equal((await listBuffered(r2, "txn-U")).length, 0, "NO buffer written");
+  await assertR2Empty(r2); // and NO pointer either — nothing at all reached R2
+});
+
+// ───────────────────────── round-3 FIX-B: R2 cursor-loop pagination (erasure complete at scale) ─────────────────────────
+// A consent with MANY buffered objects + pointers must be fully erased across R2 `list` pages (real R2 truncates
+// a single list at 1000 keys). The mock is constructed with pageSize:2 so the sweep MUST page through to be complete.
+test("round-3 FIX-B: erasure is complete across R2 list PAGES (>pageSize buffers + pointers under one consent)", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "reqP", consent_id: "cid-P", status: "REVOKED", tenant_id: "t1" })],
+  });
+  const r2 = makeR2({ pageSize: 2 }); // model R2 truncation: at most 2 keys per list call
+  // 5 orphan txns (pointer only, tid never on a txn row), each with 3 buffered objects → 5 pointers + 15 buffers,
+  // all under cid-P. With pageSize 2 the sweep must cursor-loop the pointer list AND each per-txn buffer list.
+  for (let i = 1; i <= 5; i++) {
+    await bufferIndexPut(r2, "cid-P", "T" + i);
+    for (let j = 0; j < 3; j++) await bufferEntry(r2, HMAC_ENV, "T" + i, "ref-" + j, "CIPHER", "chk-" + j, NOW);
+  }
+  assert.equal((await listAll(r2)).length, 20, "seeded 15 buffers + 5 pointers");
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(counts.buffersDeleted, 15, "every buffered object across all pages is deleted");
+  await assertR2Empty(r2); // CROWN at scale: nothing left on any page (buffers AND pointers)
+});
+
+// ───────────────────────── round-3 FIX-C: care-context parse fail-safe (retain on unparseable live scope) ─────────────────────────
+// If a LIVE consent's care_contexts is present but UNPARSEABLE, we cannot enumerate what it protects → we must
+// fail safe toward RETENTION and not over-erase the patient's care-contexts.
+test("round-3 FIX-C: an unparseable LIVE consent scope protects the patient's care-contexts (no over-erase)", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [
+      // cidA is being erased (past its dataEraseAt); it references ref-1.
+      scopedConsentRow({ request_id: "rqA", consent_id: "cidA", status: "GRANTED", data_erase_at: "2026-07-31T11:00:00Z",
+        care_contexts: JSON.stringify(["ref-1"]) }),
+      // cidB is LIVE (future dataEraseAt) but its care_contexts is GARBLED (present, unparseable).
+      scopedConsentRow({ request_id: "rqB", consent_id: "cidB", status: "GRANTED", data_erase_at: S6_FUT,
+        care_contexts: "{{not-valid-json" }),
+    ],
+    connect_abdm_carecontext: [ccReg({ id: "cc-1", ref: "ref-1" })],
+  });
+  const r2 = makeR2();
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // past cidA's dataEraseAt
+  assert.equal(counts.careContextsErased, 0, "an unparseable live scope is treated as protecting → nothing erased");
+  assert.equal((db._tables.connect_abdm_carecontext || []).length, 1, "the care-context is RETAINED (fail-safe, no data-loss)");
 });

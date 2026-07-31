@@ -46,12 +46,22 @@ export function makeAbdmDb(seed = {}) {
   };
 }
 
-export function makeR2() {
+// `pageSize` models real Cloudflare R2 `list` truncation: a single call returns at most `pageSize` keys and,
+// when more remain, `{ truncated: true, cursor }` for the next page (default Infinity = one page, the historical
+// behavior, so existing callers are unaffected). Set a small pageSize (e.g. 2) to prove cursor-loop pagination.
+export function makeR2({ pageSize = Infinity } = {}) {
   const m = new Map();
   return {
     put: async (k, v, opts = {}) => { m.set(k, { body: String(v), customMetadata: opts.customMetadata || {}, uploaded: (opts.customMetadata && opts.customMetadata.ts) || null }); },
     get: async (k) => { const o = m.get(k); return o ? { text: async () => o.body, customMetadata: o.customMetadata } : null; },
     delete: async (k) => { m.delete(k); },
-    list: async ({ prefix = "" } = {}) => ({ objects: [...m.entries()].filter(([k]) => k.startsWith(prefix)).map(([k, o]) => ({ key: k, customMetadata: o.customMetadata })) }),
+    list: async ({ prefix = "", cursor } = {}) => {
+      const all = [...m.entries()].filter(([k]) => k.startsWith(prefix)).map(([k, o]) => ({ key: k, customMetadata: o.customMetadata }));
+      const start = cursor ? Number(cursor) : 0;                       // offset cursor (stable while not mutating mid-list)
+      const page = all.slice(start, start + pageSize);
+      const nextStart = start + page.length;
+      const truncated = nextStart < all.length;
+      return { objects: page, truncated, cursor: truncated ? String(nextStart) : undefined };
+    },
   };
 }

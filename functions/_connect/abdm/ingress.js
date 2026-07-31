@@ -69,20 +69,22 @@ function fresh(tsHeader, nowFn) {
 // FSM (advanceStatus) can key off it even for a transfer event that shipped only a transaction_id.
 async function correlate(db, ev) {
   const tid = ev.transactionId, rid = ev.requestId, cid = ev.consentId;
+  // corr carries the RESOLVED consentId (from the txn row / consent_req row), NOT the echoed field — the data-push
+  // guard-symmetry (round-3 FIX-A) relies on this so a buffer is never written without an erasure pointer.
   if (tid != null) {
     const txn = await getTxnByTransactionId(db, tid);
-    if (txn) return { requestId: txn.request_id, transactionId: tid, tenantId: txn.tenant_id };
+    if (txn) return { requestId: txn.request_id, transactionId: tid, tenantId: txn.tenant_id, consentId: txn.consent_id ?? null };
   }
   if (rid != null) {
     const cr = await getConsentReq(db, rid);
-    if (cr) return { requestId: rid, transactionId: tid ?? null, tenantId: cr.tenant_id };
+    if (cr) return { requestId: rid, transactionId: tid ?? null, tenantId: cr.tenant_id, consentId: cr.consent_id ?? null };
   }
   // Durable-join fallback (R6/R3): once the GRANT notify LINKED consent_id onto the lifecycle row, a later
   // notify (REVOKE/EXPIRE) that echoes ONLY the consentId still correlates to that ONE row — removing the
   // dependence on ABDM re-echoing our internal requestId on every callback. // VERIFY the notify's real ids.
   if (cid != null) {
     const cr = await getConsentReqByConsentId(db, cid);
-    if (cr) return { requestId: cr.request_id, transactionId: tid ?? null, tenantId: cr.tenant_id };
+    if (cr) return { requestId: cr.request_id, transactionId: tid ?? null, tenantId: cr.tenant_id, consentId: cr.consent_id ?? cid };
   }
   return null;
 }
@@ -173,29 +175,32 @@ export async function handleIngress(env, deps, request) {
     };
     if (ev.type === "data-push") {
       const nowIso = typeof now === "function" ? now() : now;
-      // HIGH (Stage-6 T2 round-2): REJECT a LATE push for an already-terminal consent (REVOKED/EXPIRED/erased).
-      // The push carries consentId (the durable join), which resolves the RETAINED lifecycle row even after erase;
-      // buffering it would drop a fresh ciphertext object the sweep has already run past → a new orphan. Refuse
-      // with NO R2 write, NO route. (A still-GRANTED consent falls through to the normal buffer path below.)
-      if (ev.consentId != null) {
-        const cr = await getConsentReqByConsentId(deps.db, ev.consentId);
+      // HIGH (round-2): REJECT a LATE push for an already-terminal consent (REVOKED/EXPIRED/erased). Resolve the
+      // status via the CORRELATED consentId (corr.consentId — from the txn/consent_req row, not the echoed field);
+      // buffering for a terminal consent would drop a fresh ciphertext object the sweep has already run past.
+      if (corr.consentId != null) {
+        const cr = await getConsentReqByConsentId(deps.db, corr.consentId);
         if (cr && TERMINAL_CONSENT.has(cr.status)) return reject(403, "consent_terminal");
       }
       const entries = Array.isArray(ev[PUSH_FIELDS.entries]) ? ev[PUSH_FIELDS.entries] : [];
-      // FIX-1 round-2 (erasure-completeness, CRITICAL): record a CONSENT-SCOPED index of this buffer's
-      // transaction_id BEFORE buffering, so the REVOKE/dataEraseAt erasure can discover and delete the R2 object
-      // even in the out-of-order window where the txn row does not yet carry the transaction_id (the on-request
-      // attach has not landed) — otherwise eraseTxn's `if(row.transaction_id)` skips it → a PERMANENT orphan (DPDP
-      // §8 breach). This does NOT stamp the txn row (that would defeat the buffer-then-join deferral: tryJoin uses
-      // "transaction_id attached" as the on-request-happened signal, so an early stamp would let consumeTransfer
-      // decrypt before on-request). The buffer stays tid-keyed (consumeTransfer/deleteBuffered are untouched); only
-      // erasure gains a consent→tid pointer it can enumerate. The pointer is non-PHI (consentId + tid, R16).
-      if (corr.transactionId != null && ev.consentId != null) {
-        await bufferIndexPut(deps.r2, ev.consentId, corr.transactionId);
-      }
-      for (const e of entries) {
-        await bufferEntry(deps.r2, env, corr.transactionId,
-          e[PUSH_FIELDS.careContextRef], e[PUSH_FIELDS.content], e[PUSH_FIELDS.checksum], nowIso);
+      if (entries.length) {
+        // FIX-A (round-3, guard symmetry): a buffer must ALWAYS be erasable. It is erasable via EITHER (a) a
+        // CONSENT-SCOPED index pointer — written below whenever a consentId resolves — so REVOKE/dataEraseAt erasure
+        // enumerates and deletes it even in the out-of-order window (the pointer does NOT stamp the txn row, so the
+        // buffer-then-join deferral is preserved: tryJoin reads "transaction_id attached" as the on-request signal),
+        // OR (b) its transaction_id already sitting on a txn row, which pass-1 GC / the consent pass reach. If
+        // NEITHER can hold, FAIL CLOSED — never write an orphan-able buffer. A real push always resolves a consentId
+        // (correlate branch 1/3), so this reject is defense-in-depth against a malformed/contract-violating push.
+        if (corr.transactionId == null) return reject(403, "unindexable_push");   // no key → cannot buffer at all
+        if (corr.consentId != null) {
+          await bufferIndexPut(deps.r2, corr.consentId, corr.transactionId);      // (a) the erasure pointer (belt)
+        } else if (!(await getTxnByTransactionId(deps.db, corr.transactionId))) {
+          return reject(403, "unindexable_push");                                 // no pointer AND no attached txn → refuse
+        }
+        for (const e of entries) {
+          await bufferEntry(deps.r2, env, corr.transactionId,
+            e[PUSH_FIELDS.careContextRef], e[PUSH_FIELDS.content], e[PUSH_FIELDS.checksum], nowIso);
+        }
       }
     }
     await deps.ingestEvent(env, boundDeps, rawEvent);

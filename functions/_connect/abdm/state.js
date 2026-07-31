@@ -137,13 +137,27 @@ export async function bufferEntry(r2, env, txnId, careContextRef, contentB64, ch
   }
 }
 
+// Enumerate ALL keys under a prefix across R2 `list` PAGES. Real Cloudflare R2 truncates a single `list` at
+// 1000 keys and returns `{ truncated, cursor }`; a single un-looped call would leave everything past page 1
+// undeleted — a §8 residual at scale. We COLLECT all keys first (pure reads, so the offset cursor stays stable)
+// and let the caller mutate afterward — never delete DURING pagination (that would shift the offsets and skip keys).
+async function listAllKeys(r2, prefix) {
+  const keys = [];
+  let cursor;
+  do {
+    const res = (await r2.list({ prefix, cursor })) || {};
+    for (const o of (res.objects || [])) keys.push(o.key);
+    cursor = res.truncated ? res.cursor : undefined;
+  } while (cursor);
+  return keys;
+}
+
 // List one txn's buffered entries as parsed JSON bodies (R2 list returns keys only, so re-get each).
 export async function listBuffered(r2, txnId) {
   try {
-    const { objects = [] } = (await r2.list({ prefix: txnPrefix(txnId) })) || {};
     const out = [];
-    for (const o of objects) {
-      const obj = await r2.get(o.key);
+    for (const key of await listAllKeys(r2, txnPrefix(txnId))) {
+      const obj = await r2.get(key);
       if (obj) out.push(JSON.parse(await obj.text()));
     }
     return out;
@@ -156,10 +170,9 @@ export async function listBuffered(r2, txnId) {
 // Delete every buffered object under one txn prefix (scoped — never touches another txn). Returns count.
 export async function deleteBuffered(r2, txnId) {
   try {
-    const { objects = [] } = (await r2.list({ prefix: txnPrefix(txnId) })) || {};
-    let n = 0;
-    for (const o of objects) { await r2.delete(o.key); n++; }
-    return n;
+    const keys = await listAllKeys(r2, txnPrefix(txnId));   // collect ALL pages first, THEN delete (stable cursor)
+    for (const key of keys) await r2.delete(key);
+    return keys.length;
   } catch (e) {
     if (e instanceof ConnectStateError) throw e;
     throw new ConnectStateError(`abdm buffer delete failed: ${e && e.message}`);
@@ -191,12 +204,12 @@ export async function bufferIndexPut(r2, consentId, txnId) {
 async function eraseBufferIndex(r2, consentId) {
   if (consentId == null) return 0;
   try {
-    const { objects = [] } = (await r2.list({ prefix: bufidxPrefix(consentId) })) || {};
+    const keys = await listAllKeys(r2, bufidxPrefix(consentId));   // ALL pages first (a consent may point at >1000 txns)
     let n = 0;
-    for (const o of objects) {
-      const txnId = o.key.slice(bufidxPrefix(consentId).length);   // exact: slice by the known consent prefix length
+    for (const key of keys) {
+      const txnId = key.slice(bufidxPrefix(consentId).length);   // exact: slice by the known consent prefix length
       if (txnId) n += await deleteBuffered(r2, txnId);
-      await r2.delete(o.key);
+      await r2.delete(key);
     }
     return n;
   } catch (e) {
@@ -292,13 +305,17 @@ export async function tryJoin(db, r2, env, transactionId) {
 const SWEEP_MAX_TXN_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 // Parse a consent row's persisted `care_contexts` (JSON array of careContextReference strings — or, defensively,
-// objects {careContextReference|reference|id}) into a flat list of ref strings, for the over-erase guard below.
+// objects {careContextReference|reference|id}) for the over-erase guard. Returns { refs, opaque }: `opaque` is
+// true when scope is PRESENT but we cannot enumerate it (unparseable JSON / not an array / a non-empty array that
+// yields no usable ref). FIX-C (round-3): a LIVE consent that is `opaque` must be treated as protecting its
+// (unknown) refs — fail-safe toward RETENTION — so we never over-erase a care-context we cannot prove is unreferenced.
 function parseCareContextRefs(careContextsJson) {
-  if (careContextsJson == null) return [];
-  let arr; try { arr = JSON.parse(careContextsJson); } catch { return []; }
-  if (!Array.isArray(arr)) return [];
-  return arr.map((c) => (c == null ? null : typeof c === "string" ? c : (c.careContextReference ?? c.reference ?? c.id ?? null)))
+  if (careContextsJson == null) return { refs: [], opaque: false };   // absent → protects nothing
+  let arr; try { arr = JSON.parse(careContextsJson); } catch { return { refs: [], opaque: true }; }
+  if (!Array.isArray(arr)) return { refs: [], opaque: true };
+  const refs = arr.map((c) => (c == null ? null : typeof c === "string" ? c : (c.careContextReference ?? c.reference ?? c.id ?? null)))
     .filter((x) => x != null);
+  return { refs, opaque: arr.length > 0 && refs.length === 0 };       // non-empty array but no extractable ref → opaque
 }
 
 // Erase a patient's HIP care-context registrations, scoped by (tenant, patient HMAC). Called ONLY on a patient-
@@ -322,7 +339,15 @@ async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
     return !(Number.isFinite(de) && Number.isFinite(nowMs) && de <= nowMs);
   };
   const liveRefs = new Set();
-  for (const c of consents) if (stillLive(c)) for (const ref of parseCareContextRefs(c.care_contexts)) liveRefs.add(ref);
+  for (const c of consents) {
+    if (!stillLive(c)) continue;
+    const { refs, opaque } = parseCareContextRefs(c.care_contexts);
+    // FIX-C: a live consent whose scope we cannot enumerate protects EVERY care-context (we cannot prove any is
+    // unreferenced by it) → retain ALL of this patient's care-contexts this sweep rather than risk data-loss.
+    // // VERIFY (owner): confirm the consent.care_contexts ↔ carecontext.ref association (the base-carried pin).
+    if (opaque) return 0;
+    for (const ref of refs) liveRefs.add(ref);
+  }
   let n = 0;
   for (const cc of ccs) {
     if (liveRefs.has(cc.ref)) continue;   // still referenced by another live consent → never collateral-erase it
