@@ -34,3 +34,49 @@ export function researchConsumesSlot(cacheHit) { return !cacheHit; }
 // and so the retrieval allow-list never leaks into query REFUSAL (it filters sources, not topics).
 export const RESEARCH_PUBTYPE_FILTER =
   "(Practice Guideline[ptyp] OR Guideline[ptyp] OR systematic review[ptyp] OR Meta-Analysis[ptyp])";
+
+// ── PubMed query sanitization ────────────────────────────────────────────────
+// PubMed treats "and"/"or"/"not" as BOOLEAN OPERATORS, so a natural-language question like
+// "Carvedilol or Propranolol which is best or better for varices" silently SHATTERS the search
+// (each stray "or" splits it into OR-branches) and PubMed returns near-random systematic reviews.
+// We therefore build the search from the question's salient KEYWORDS only — dropping operator words
+// and question/comparison filler — and let PubMed's automatic term mapping AND them + expand synonyms.
+const RESEARCH_STOP = new Set((
+  "a an the and or nor not of to in into on at by for from with without vs versus v is are was were " +
+  "be been being do does did done should would could can cannot may might will shall must have has had " +
+  "which what who whom whose when where why how whether if then than that this these those it its their " +
+  "our your my his her they them we us i you he she as also more most least much many any some each " +
+  "best better worse worst superior inferior same equal give given single answer please tell think about " +
+  "compare comparison between difference good bad prefer preferred choice choose better-or-worse " +
+  "use used using role effect effects efficacy safety patient patients adult adults case cases per over " +
+  "just also only even still yet now here there really actually simply kindly want need get"
+).split(/\s+/));
+
+// The salient keyword set of a question (for building the query AND the relevance guard).
+export function researchKeywords(q) {
+  const out = [];
+  const seen = new Set();
+  String(q == null ? "" : q).toLowerCase().replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).forEach(function (w) {
+    w = w.replace(/^-+|-+$/g, "");
+    if (w.length > 1 && !RESEARCH_STOP.has(w) && !seen.has(w)) { seen.add(w); out.push(w); }
+  });
+  return out;
+}
+
+// A clean PubMed term: salient keywords only, capped, space-joined (PubMed ANDs + maps them).
+// Returns "" when the question carries no usable keywords (e.g. a vague "what do you think?").
+export function researchTermFor(q) {
+  return researchKeywords(q).slice(0, 12).join(" ").slice(0, 200);
+}
+
+// Relevance guard: a retrieved source is on-topic only if its title shares a SPECIFIC (>=5-char)
+// keyword with the question. Filters the off-topic systematic reviews PubMed can still return, so we
+// never present unrelated papers as "the evidence".
+export function sourceOnTopic(title, keywords) {
+  const t = String(title || "").toLowerCase();
+  for (var i = 0; i < (keywords || []).length; i++) {
+    var w = keywords[i];
+    if (w && w.length >= 5 && t.indexOf(w) >= 0) return true;
+  }
+  return false;
+}
