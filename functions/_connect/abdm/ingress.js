@@ -12,7 +12,7 @@ import {
   updateConsentStatus, attachTransactionId, advanceStatus, claimAck,
   bufferEntry,
 } from "./state.js";
-import { linkConsentId, getConsentReqByConsentId } from "./consent.js"; // one-row reconciliation join (state.js is frozen this stage)
+import { linkConsentId, getConsentReqByConsentId, verifyConsentArtifact } from "./consent.js"; // one-row reconciliation join (state.js is frozen this stage)
 
 // Pinned inbound algs (asymmetric-only; jws.js re-intersects with its own allow-list, so HS*/none can never
 // survive even if this widened). // VERIFY which one ABDM actually signs with (research WAF-blocked).
@@ -121,6 +121,10 @@ export async function handleIngress(env, deps, request) {
       attachTransactionId: (rid, tid, n) => attachTransactionId(deps.db, rid, tid, n),
       advanceStatus: (rid, f, t, n) => advanceStatus(deps.db, rid, f, t, n),
       claimAck: (tid, n) => claimAck(deps.db, tid, n),
+      // Stage-4 Task-9 composition-root wiring: on-fetch → verify the artifact JWS + persist onto the linked
+      // row. verifyConsentArtifact's deps (db/kv/fetch/audit) are injected db-appropriately-bound off the ingress
+      // deps — getPinnedJwks needs fetch/kv, the persist writes via db, and consent.verified/denied audits via audit.
+      verifyConsentArtifact: (artifact) => verifyConsentArtifact(env, { db: deps.db, kv: deps.kv, fetch: deps.fetch, audit: deps.audit, now }, artifact),
       now,
     };
     if (ev.type === "data-push") {

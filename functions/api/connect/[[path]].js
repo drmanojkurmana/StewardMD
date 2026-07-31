@@ -4,6 +4,7 @@ import { loadPatientContext, ingestEvent } from "../../_connect/engine.js";
 import { fhirR4Connector } from "../../_connect/connectors/fhir-r4/connector.js";
 import { AuthError, PermissionError, SandboxViolation } from "../../_connect/permission.js";
 import { makeSecrets } from "../../_connect/secrets.js";
+import { makeAuditSink } from "../../_connect/audit.js";
 import { handleIngress } from "../../_connect/abdm/ingress.js";
 import { identify } from "../../_usage.js";
 
@@ -22,6 +23,7 @@ export async function onRequest(context) {
   // getPinnedJwks; jwks is left unset so it is fetched+pinned per env.ABDM_JWKS_URL (fail-closed if unset).
   if (/^\/ingress\/abdm/.test(path)) {
     const deps = { db: env.CONNECT_DB, r2: env.CONNECT_R2, kv: env.MAIK_KV, secrets: makeSecrets(env),
+      audit: makeAuditSink(env, env.CONNECT_DB),   // on-fetch → verifyConsentArtifact records consent.verified/denied (R14)
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
   }

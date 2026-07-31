@@ -101,6 +101,13 @@ export async function ingestEvent(env, deps, rawEvent) {
       if (ev.consentId != null && deps.linkConsentId) await deps.linkConsentId(ev.requestId, ev.consentId, now);
       await deps.updateConsentStatus(ev.requestId, ev.status, now);
       return { handle, bundle: null };
+    case "on-fetch":                                     // the CM-delivered signed consent artifact (R3/R4/R6) — no bundle.
+      // Verify the artifact JWS + persist the FULL SIGNED scope onto the ONE reconciled lifecycle row (resolved
+      // via consent_id — the GRANT notify's linkConsentId ran FIRST). A no-linked-row artifact fails closed
+      // INSIDE verifyConsentArtifact (reconciliation model). Guarded — only bound on the real ingress path; db/kv/
+      // fetch/audit are injected there. The webhook may wrap the artifact under `artifact`, or BE the artifact.
+      if (deps.verifyConsentArtifact) await deps.verifyConsentArtifact(ev.artifact ?? ev);
+      return { handle, bundle: null };
     case "on-request":                                   // attach our correlation half, then advance FSM.
       await deps.attachTransactionId(ev.requestId, ev.transactionId, now);
       await deps.advanceStatus(ev.requestId, "CONSENT_GRANTED", "REQUESTED", now);
