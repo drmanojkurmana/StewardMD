@@ -1,4 +1,4 @@
-// test/connect/fixtures/fhir-synthetic.mjs — HAND-AUTHORED synthetic FHIR R4 (no real PHI; never from hapi.fhir.org)
+// test/connect/fixtures/fhir-synthetic.mjs — HAND-AUTHORED synthetic FHIR R4 (no real PHI; never captured from a live/public FHIR test server)
 export const SYNTHETIC = {
   patient: { resourceType: "Patient", id: "P1", gender: "female", birthDate: "1975-04-12",
     name: [{ text: "Synthetic Patient", family: "Patient", given: ["Synthetic"] }] },
