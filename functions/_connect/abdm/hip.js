@@ -19,6 +19,7 @@ import { hmacPseudonym } from "../audit.js";                                    
 import { SecretsUnavailable } from "../secrets.js";                            // fail-closed AND audited when a secret op is unavailable mid-guard
 import { resolveActor, resolveTenant } from "../identity.js";                   // Tasks 6+8: server-derived actor+membership (PermissionError before any write)
 import { putConsentReq, getConsentReq, updateConsentStatus } from "./state.js"; // Task 8: reuse the MONOTONIC (R6) consent lifecycle store
+import { guardedKvPut, looksLikePhi, PhiLeakError } from "./no-phi.js";         // R16: NON-PHI rate-limit KV write + owner-set `display` label validation
 
 // A cross-patient / out-of-scope over-share was refused (R5). Carries a stable, PHI-free `reason`.
 export class OverShareError extends Error {
@@ -331,7 +332,7 @@ async function bumpDiscoveryRate(kv, sourceId, nowMs, limit, windowSec) {
   try { rec = JSON.parse((await kv.get(key)) || "null"); } catch { rec = null; }
   const count = rec && rec.win === win ? (Number(rec.count) || 0) : 0;  // a new window resets the count
   if (count >= limit) return { limited: true };
-  await kv.put(key, JSON.stringify({ win, count: count + 1 }), { expirationTtl: windowSec * 2 });
+  await guardedKvPut(kv, key, JSON.stringify({ win, count: count + 1 }), { expirationTtl: windowSec * 2 }); // R16: key = sourceId only, value = counts — guard keeps it PHI-free
   return { limited: false };
 }
 
@@ -404,6 +405,10 @@ export async function handleDiscovery(env, deps, { probe, sourceId, now } = {}) 
 export async function linkCareContext(env, deps, req = {}) {
   const { db, audit, identify } = deps || {};
   const nowIso = isoOf(req.now);
+  // (R16) `display` is an OWNER-set episode LABEL only — reject a PHI-shaped label (name/ABHA/Aadhaar/mobile) and
+  // bound its length FIRST (cheap input guard), so a patient name/identifier can never be persisted as a label.
+  const display = req.display == null ? null : String(req.display).slice(0, 120);
+  if (display && looksLikePhi(display)) throw new PhiLeakError("care-context display must be a non-PHI owner-set label", "linkCareContext.display");
   // Server-derive identity + membership BEFORE any write. Both throw (AuthError / PermissionError) on failure.
   const actor = await resolveActor(identify, req.request, env);
   const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
@@ -420,7 +425,7 @@ export async function linkCareContext(env, deps, req = {}) {
   if (!existing) {
     const res = await db.prepare(
       "INSERT INTO connect_abdm_carecontext (id,tenant_id,patient_abha_hash,source,ref,hi_type,display,linked_at) VALUES (?,?,?,?,?,?,?,?)"
-    ).bind(id, tenant.id, patientAbhaHash, source, ref, req.hiType ?? null, req.display ?? null, nowIso).run();
+    ).bind(id, tenant.id, patientAbhaHash, source, ref, req.hiType ?? null, display, nowIso).run();
     if (!res || res.success === false) throw new Error("linkCareContext insert failed");
   }
 

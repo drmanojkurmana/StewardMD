@@ -1,4 +1,5 @@
 // functions/_connect/abdm/gateway.js — ABDM gateway adapter (spec §1/§3, ADR-2H). Dependency-injected; Workers+Node.
+import { guardedKvPut } from "./no-phi.js"; // R16: the token cache is NON-PHI — this guard keeps it that way, fail-closed.
 export class AbdmError extends Error {}
 
 // ── ADR-2H: THE one-file config seam. Every path here is corroborated-not-official (research WAS WAF-blocked);
@@ -60,7 +61,7 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secre
     const ttlSec = Math.min(Math.max(0, (Number(j[FIELDS.resExpiresIn]) || 0) - 30), 3600);  // 30s skew, cap at 1h (anti-wedge)
     const exp = clock().getTime() + ttlSec * 1000;
     if (ttlSec >= 60) {                       // only cache a usefully-long token; KV min TTL is 60s
-      try { await kv.put(tokKey, JSON.stringify({ token, exp }), { expirationTtl: ttlSec }); } catch { /* best-effort */ }
+      try { await guardedKvPut(kv, tokKey, JSON.stringify({ token, exp }), { expirationTtl: ttlSec }); } catch { /* best-effort */ }
     }
     return token;
   }

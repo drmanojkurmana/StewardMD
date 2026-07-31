@@ -6,6 +6,7 @@
 // The invariant that matters: a junk/unknown push NEVER touches R2 (correlate precedes buffer), consent
 // transitions stay monotonic, and the ingress REUSES the Stage-2/3 primitives — it reinvents none of them.
 import { flagOn, jsonResponse } from "../testkit.js";
+import { guardedKvPut } from "./no-phi.js"; // R16: the REQUEST-ID nonce cache is NON-PHI — guard every write, fail-closed.
 import { verifyJws, getPinnedJwks } from "./jws.js";
 import {
   getConsentReq, getTxnByTransactionId,
@@ -127,7 +128,7 @@ export async function handleIngress(env, deps, request) {
       if (ev.type === "discovery") {                          // synchronous exact-match query — self-correlating
         const disc = deps.handleDiscovery || handleDiscovery;
         const out = await disc(env, { db: deps.db, kv: deps.kv, audit: deps.audit }, { probe: ev.probe, sourceId: ev.sourceId, now });
-        if (nonceKey && deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
+        if (nonceKey && deps.kv) await guardedKvPut(deps.kv, nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
         return jsonResponse({ ok: true, matched: out.matched, careContexts: out.careContexts }, { status: 200 });
       }
       if (!corr) return reject(403, "unknown_correlation");   // hi-request/consent-notify MUST bind to a known row
@@ -142,7 +143,7 @@ export async function handleIngress(env, deps, request) {
         await serve(env, serveDeps, { tenantId: corr.tenantId, consentId: ev.consentId, careContexts: ev.careContexts,
           hiuKeyMaterial: ev.keyMaterial, dataPushUrl: ev.dataPushUrl, transactionId: ev.transactionId });
       }
-      if (nonceKey && deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
+      if (nonceKey && deps.kv) await guardedKvPut(deps.kv, nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
       return jsonResponse({ ok: true }, { status: 202 });
     }
 
@@ -178,7 +179,7 @@ export async function handleIngress(env, deps, request) {
     await deps.ingestEvent(env, boundDeps, rawEvent);
 
     // Record the REQUEST-ID nonce only AFTER a clean run, so a mid-flight failure is retried, not swallowed.
-    if (nonceKey && deps.kv) await deps.kv.put(nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
+    if (nonceKey && deps.kv) await guardedKvPut(deps.kv, nonceKey, "1", { expirationTtl: NONCE_TTL_SEC });
     return jsonResponse({ ok: true }, { status: 202 });
   } catch {
     return reject(500, "ingress_error");                    // genuine storage/route failure → fail-closed
