@@ -72,7 +72,13 @@ export async function verifyConsentArtifact(env, deps, artifact) {
     const persisted = await persistGranted(db, {
       consentId: consent.consentId, careContexts: consent.careContexts, hiTypes: consent.hiTypes,
       purpose: consent.purpose, dateRange: consent.permission.dateRange,
-      expiresAt: consent.expiry ?? consent.permission.dataEraseAt ?? null, now,
+      expiresAt: consent.expiry ?? consent.permission.dataEraseAt ?? null,
+      // FIX-2 (Stage-6 T2): the patient-level ERASURE deadline, written to its OWN `data_erase_at` column — kept
+      // DISTINCT from consent-VALIDITY `expiresAt` (dataEraseAt is usually a later, separate bound). Without this
+      // writer `data_erase_at` was always NULL, so state.js#sweep's dataEraseAt trigger AND care-context erasure
+      // were dead in prod (only the REVOKE path fired). // VERIFY (owner): whether ABDM's dataEraseAt equals the
+      // artifact expiry or is a separate (usually later) bound — see the schema pin on this column.
+      dataEraseAt: consent.permission.dataEraseAt ?? null, now,
     });
     if (!persisted.ok && persisted.reason === "no-linked-row") return deny("no-linked-row");
     if (persisted.ok && audit) await audit({
@@ -118,7 +124,7 @@ export async function linkConsentId(db, requestId, consentId, now) {
 // data-request can revalidate off a DB reload. Fail-closed: every write checks res.success (like state.insertRow).
 // Returns { ok, reason? } — ok:false = a refusal that wrote NOTHING: reason "monotonic" (a terminal row wins) or
 // "no-linked-row" (see below); ok:true = the grant was applied to the linked row.
-async function persistGranted(db, { consentId, careContexts, hiTypes, purpose, dateRange, expiresAt, now }) {
+async function persistGranted(db, { consentId, careContexts, hiTypes, purpose, dateRange, expiresAt, dataEraseAt, now }) {
   const enc = (v) => (v == null ? null : JSON.stringify(v));
   const cc = enc(careContexts), hi = enc(hiTypes), pu = enc(purpose), dr = enc(dateRange);
   const row = await getConsentReqByConsentId(db, consentId);
@@ -134,9 +140,12 @@ async function persistGranted(db, { consentId, careContexts, hiTypes, purpose, d
   // since-REVOKED row can never be un-revoked or have its scope re-widened by a replayed GRANTED artifact.
   const guarded = await updateConsentStatus(db, row.request_id, "GRANTED", now);
   if (!guarded.ok) return { ok: false, reason: "monotonic", status: guarded.status };
+  // FIX-2: persist `data_erase_at` alongside the scope, DISTINCT from `expires_at`. state.js#sweep reads this
+  // column to fire the patient-level dataEraseAt erasure (derived state + care-contexts); a NULL here (no dataEraseAt
+  // in the signed permission) leaves that trigger dormant, exactly as the REVOKE-only path behaved before.
   const res = await db.prepare(
-    "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,expires_at=?,updated_at=? WHERE request_id=?")
-    .bind(cc, hi, pu, dr, expiresAt, now, row.request_id).run();
+    "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,expires_at=?,data_erase_at=?,updated_at=? WHERE request_id=?")
+    .bind(cc, hi, pu, dr, expiresAt, dataEraseAt ?? null, now, row.request_id).run();
   if (!res || res.success === false) throw new ConnectStateError("persistGranted scope update failed");
   return { ok: true, status: "GRANTED" };
 }

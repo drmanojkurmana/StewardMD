@@ -171,6 +171,17 @@ export async function handleIngress(env, deps, request) {
     if (ev.type === "data-push") {
       const nowIso = typeof now === "function" ? now() : now;
       const entries = Array.isArray(ev[PUSH_FIELDS.entries]) ? ev[PUSH_FIELDS.entries] : [];
+      // FIX-1 (Stage-6 T2, erasure-completeness, CRITICAL): attach the transaction_id onto the correlation row
+      // BEFORE writing any buffer object. In the out-of-order window (the encrypted PUSH lands before the
+      // on-request callback that normally attaches transaction_id), the buffer is keyed by transaction_id while
+      // the correlation row still has transaction_id=NULL — so a later REVOKE-erase, which only deletes a txn's
+      // buffer when the row knows its transaction_id, would SKIP it and leave a PERMANENT orphan R2 object (a
+      // DPDP §8 breach: sealed key crypto-shredded but the ciphertext persists, unreachable by any sweep). The
+      // fix restores the invariant "a buffer object implies a known transaction_id on the row" AT THE SOURCE:
+      // attachTransactionId is idempotent (its own uniqueness guard) and a no-op-equivalent when already attached.
+      if (entries.length && corr.transactionId != null && corr.requestId != null) {
+        await attachTransactionId(deps.db, corr.requestId, corr.transactionId, nowIso);
+      }
       for (const e of entries) {
         await bufferEntry(deps.r2, env, corr.transactionId,
           e[PUSH_FIELDS.careContextRef], e[PUSH_FIELDS.content], e[PUSH_FIELDS.checksum], nowIso);

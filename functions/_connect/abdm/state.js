@@ -277,9 +277,12 @@ async function eraseCareContexts(db, tenantId, patientAbhaHash) {
 //     state erased NOW (not left until the txn TTL) — its txns' buffers + sealed keys + rows (joined by the
 //     durable `consent_id`), and — ONLY on a patient-level `data_erase_at`/full-erase — the patient's
 //     `connect_abdm_carecontext` rows (a single-consent REVOKE never drops a registration that may back
-//     OTHER live consents). Erasure-completeness is a DPDP breach surface: a single residual sealed key,
-//     buffer object, txn row, or servable care-context for that consent is a VIOLATION. The erasure ITSELF
-//     is audited (`data.erased`, metadata-only) and the PHI-free audit trail is RETAINED (never deleted)
+//     OTHER live consents). The RETAINED consent row (kept terminal for R6 anti-replay) has its raw SIGNED
+//     scope (`care_contexts`/`hi_types`/`purpose`/`date_range`) NULLED so no patient-linkable careContextReference
+//     lingers. Erasure-completeness is a DPDP breach surface: a single residual sealed key, buffer object, txn
+//     row, retained raw scope, or servable care-context for that consent is a VIOLATION. The erasure ITSELF
+//     is audited (`data.erased`, metadata-only, EXACTLY ONCE per consent even when PASS 1 pre-empted its txns)
+//     and the PHI-free audit trail is RETAINED (never deleted)
 //     under DPDP §8(6). Erase-first-then-audit: erasure-completeness outranks the accountability write.
 // Fail-closed (ConnectStateError) on any storage failure. Idempotent: a re-sweep erases nothing more and
 // emits NO duplicate `data.erased`. Mock-safe SQL throughout (`col=?`/`col<>?`; JS-filter the rest).
@@ -292,12 +295,23 @@ export async function sweep(db, r2, env, now) {
   // number, so the branch can't silently no-op the way `Number("2026-…") < Number(now)` (NaN<NaN=false) did.
   const isExpired = (expiresAt, at) =>
     Number.isFinite(Date.parse(expiresAt)) && Number.isFinite(Date.parse(at)) && Date.parse(expiresAt) <= Date.parse(at);
-  // T2 hard age-backstop: a non-terminal row with an unparseable `expires_at` can't be aged out by expiry,
-  // so once it is at least SWEEP_MAX_TXN_AGE_MS old (by `created_at`) it is force-swept rather than leaking
-  // its sealed key indefinitely. Needs a PARSEABLE `created_at`; both garbled → stays surfaced in anomalies.
-  const isAgedOut = (createdAt, at) =>
-    Number.isFinite(Date.parse(createdAt)) && Number.isFinite(Date.parse(at)) &&
-    (Date.parse(at) - Date.parse(createdAt)) >= SWEEP_MAX_TXN_AGE_MS;
+  // T2 hard age-backstop: a non-terminal row with an unparseable `expires_at` can't be aged out by expiry, so
+  // once it is at least SWEEP_MAX_TXN_AGE_MS old it is force-swept rather than leaking its sealed key indefinitely.
+  // Age is anchored to `created_at`; but if THAT is ALSO garbled (Stage-6 T2-fix FIX-5a: BOTH `expires_at` AND
+  // `created_at` unparseable) we fall back to `updated_at`, so a row whose creation stamp is corrupt STILL
+  // eventually GCs. A row with NO parseable timestamp ANYWHERE (expires_at + created_at + updated_at all garbled)
+  // is irredeemably corrupt and can never be aged, so it is force-swept on sight — never pinned as a permanent
+  // anomaly leaking key material. A garbled/absent `now` never sweeps (fail-safe: never age off a bad clock).
+  const ageAnchorMs = (row) =>
+    Number.isFinite(Date.parse(row.created_at)) ? Date.parse(row.created_at)
+      : Number.isFinite(Date.parse(row.updated_at)) ? Date.parse(row.updated_at) : NaN;
+  const isAgedOut = (row, at) => {
+    const atMs = Date.parse(at);
+    if (!Number.isFinite(atMs)) return false;                 // no trustworthy clock → never age-sweep
+    const anchor = ageAnchorMs(row);
+    if (!Number.isFinite(anchor)) return true;                // no parseable timestamp anywhere → force-sweep (no leak)
+    return (atMs - anchor) >= SWEEP_MAX_TXN_AGE_MS;
+  };
   // Erase ONE txn's derived state, in the safe order: R2 buffer (scoped to its transaction_id) → sealed eph
   // key set to "" → the row. Key erased BEFORE the row delete so it can NEVER be unsealed even if a delete
   // races/fails. All WHERE = `request_id=?` (mock-safe). Returns the buffer count. Reused by BOTH passes.
@@ -316,6 +330,11 @@ export async function sweep(db, r2, env, now) {
     // only supports `col=?`/`col<>?` (throws on `<`), so enumerate all rows no-WHERE and filter in JS.
     const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
     let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0, careContextsErased = 0, consentsErased = 0;
+    // FIX-4: the consent_ids whose txns PASS 1 pre-empts. Pass 1 emits no `data.erased` (it is pure txn-TTL GC),
+    // so when it erases a REVOKED/dataEraseAt consent's already-terminal/expired txn, PASS 2 would otherwise find
+    // nothing left and never audit that consent's erasure (a §8(6) accountability gap). This set lets PASS 2 still
+    // emit exactly one `data.erased` for such a consent. Empty on a re-sweep (nothing left) → no duplicate audit.
+    const pass1ErasedConsents = new Set();
 
     // ---- PASS 1: expiry/terminal GC + the garbled-expiry age-backstop. -------------------------------------
     for (const row of results) {
@@ -325,9 +344,10 @@ export async function sweep(db, r2, env, now) {
         if (Number.isFinite(Date.parse(row.expires_at))) continue;          // healthy future expiry → keep
         // Unparseable `expires_at`: surface it and RETAIN — unless it is past the hard age backstop, in
         // which case fall through to force-sweep (a garbled expiry must never linger PHI-adjacent forever).
-        if (!isAgedOut(row.created_at, now)) { anomalies++; continue; }
+        if (!isAgedOut(row, now)) { anomalies++; continue; }
       }
       buffersDeleted += await eraseTxn(row); keysErased++; txnsSwept++;
+      if (row.consent_id != null) pass1ErasedConsents.add(String(row.consent_id)); // FIX-4: PASS 2 audits this consent
     }
 
     // ---- PASS 2: REVOKE + dataEraseAt-driven erasure (DPDP R15). --------------------------------------------
@@ -344,8 +364,16 @@ export async function sweep(db, r2, env, now) {
       // (1) Derived state, scoped by the durable `consent_id` join — REVOKE overrides the FSM/TTL (erase NOW).
       //     GUARD `consent_id != null`: a NULL bind would (in the mock, via String() coercion) collateral-match
       //     EVERY NULL-consent_id txn — a mass over-erase. An unlinked consent was never granted → has no txns.
+      //     FIX-5b tenant belt (defense-in-depth): scope the join by (consent_id, tenant_id), not consent_id
+      //     alone. consent_id is globally unique so this changes nothing today, but it structurally stops a
+      //     cross-tenant consent_id collision from reaching another tenant's txns. Applied only when tenant_id is
+      //     present (a NULL bind would, via the mock's String() coercion, narrow to NULL-tenant rows); the belt is
+      //     status-agnostic so REVOKE-overrides-FSM (erase regardless of the txn's own status) is unaffected.
       if (c.consent_id != null) {
-        const { results: txns = [] } = await db.prepare("SELECT * FROM connect_abdm_txn WHERE consent_id=?").bind(c.consent_id).all();
+        const txnQuery = c.tenant_id != null
+          ? db.prepare("SELECT * FROM connect_abdm_txn WHERE consent_id=? AND tenant_id=?").bind(c.consent_id, c.tenant_id)
+          : db.prepare("SELECT * FROM connect_abdm_txn WHERE consent_id=?").bind(c.consent_id);
+        const { results: txns = [] } = await txnQuery.all();
         for (const t of txns) { cBuffers += await eraseTxn(t); cKeys++; cTxns++; }
       }
       // (2) Care-context rows are a PER-PATIENT registration that may back OTHER live consents, so they are
@@ -354,9 +382,28 @@ export async function sweep(db, r2, env, now) {
       if (eraseDeadlinePassed && c.tenant_id != null && c.patient_abha_hash) {
         cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash);
       }
-      // (3) Audit the erasure (metadata ONLY; §8(6) — the audit is RETAINED even as the data is erased). Emit
-      //     ONLY when something was actually erased → idempotent (a re-sweep finds nothing → no duplicate).
-      if (cTxns > 0 || cCare > 0) {
+      // (3) FIX-3: scrub the raw SIGNED scope from the RETAINED consent row. The row is kept (marked terminal) for
+      //     R6 anti-replay, but anti-replay needs ONLY {request_id, status, consent_id} + timestamps — it never
+      //     reads the scope (updateConsentStatus/getConsentReqByConsentId key off status/consent_id). Leaving the
+      //     raw `care_contexts` (a patient-linkable careContextReference list), `hi_types`, `purpose`, `date_range`
+      //     on a REVOKED row is DPDP over-retention, so NULL them. `hadScope` is also the exactly-once erasure
+      //     marker: true only on the FIRST pass that finds scope present, so a re-sweep (already-scrubbed) neither
+      //     re-scrubs-with-effect nor re-audits. (A txn implies a prior GRANT, which persisted scope, so a
+      //     pass-1-preempted consent still has scope here — pass 1 only touches the txn table, never these columns.)
+      const hadScope = c.care_contexts != null || c.hi_types != null || c.purpose != null || c.date_range != null;
+      if (hadScope) {
+        const scrub = await db.prepare(
+          "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,updated_at=? WHERE request_id=?")
+          .bind(null, null, null, null, now, c.request_id).run();
+        if (!scrub || scrub.success === false) throw new ConnectStateError("sweep consent scope-scrub failed");
+      }
+      // (4) Audit the erasure (metadata ONLY; §8(6) — the audit is RETAINED even as the data is erased). FIX-4:
+      //     emit EXACTLY ONE `data.erased` per consent whenever ANYTHING was erased for it — direct txns (cTxns),
+      //     care-contexts (cCare), the retained-scope scrub (hadScope), OR a txn that PASS 1 already pre-empted
+      //     (pass1ErasedConsents). Idempotent: a re-sweep finds no txns, no care-contexts, already-scrubbed scope,
+      //     and an empty pass1 set → NO duplicate. Pass 1 never audits, so this is the sole, non-double, audit.
+      const pass1Pre = c.consent_id != null && pass1ErasedConsents.has(String(c.consent_id));
+      if (cTxns > 0 || cCare > 0 || hadScope || pass1Pre) {
         txnsSwept += cTxns; buffersDeleted += cBuffers; keysErased += cKeys; careContextsErased += cCare; consentsErased++;
         await auditErasure({
           action: "data.erased", outcome: "ok", ts: now, tenantId: c.tenant_id ?? null,
