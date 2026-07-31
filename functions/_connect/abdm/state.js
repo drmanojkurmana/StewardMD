@@ -153,3 +153,49 @@ export async function deleteBuffered(r2, txnId) {
     throw new ConnectStateError(`abdm buffer delete failed: ${e && e.message}`);
   }
 }
+
+// ---- Stage-3 Task-4: transaction FSM + exactly-once D1 CAS ack-claim (the correctness spine) --------
+// The txn `status` column is a monotonic state machine; `ack_claimed` is a single-shot exactly-once flag.
+// BOTH mutations are ONE guarded conditional-UPDATE (compare-and-set): meta.changes===1 means THIS caller
+// won the row (its WHERE guard matched exactly the expected pre-state); ===0 means it lost (someone else
+// already moved it / claimed it). NEVER read-then-write — a getTxn-then-UPDATE is a TOCTOU race that would
+// let two concurrent callbacks both "win", defeating exactly-once. The CAS is the SOLE arbiter. No cache.
+
+// Legal directed FSM edges; terminal states carry an EMPTY successor set, so no exit from them is legal.
+const TXN_NEXT = {
+  INITIATED: ["CONSENT_GRANTED", "FAILED"],
+  CONSENT_GRANTED: ["REQUESTED", "FAILED"],
+  REQUESTED: ["RECEIVING", "FAILED"],
+  RECEIVING: ["TRANSFERRED", "PARTIAL", "FAILED"],
+  TRANSFERRED: [],
+  PARTIAL: [],
+  FAILED: [],
+};
+
+// Optimistic-concurrency FSM step. An illegal edge (unknown `from`, or `to` not in TXN_NEXT[from], which
+// includes any exit from a terminal) is refused in JS BEFORE any D1 access → {ok:false,reason:"illegal"}.
+// A legal edge becomes a single CAS guarded on the expected current status; a lost race (the row was not
+// `from` — advanced by someone else, or never was `from`) is a normal {ok:false,reason:"stale"} return.
+export async function advanceStatus(db, requestId, from, to, now) {
+  const allowed = TXN_NEXT[from];
+  if (!allowed || allowed.indexOf(to) === -1) return { ok: false, reason: "illegal" };
+  const res = await db
+    .prepare("UPDATE connect_abdm_txn SET status=?,updated_at=? WHERE request_id=? AND status=?")
+    .bind(to, now, requestId, from)
+    .run();
+  if (!res || res.success === false) throw new ConnectStateError("advanceStatus update failed");
+  return res.meta && res.meta.changes === 1 ? { ok: true, status: to } : { ok: false, reason: "stale" };
+}
+
+// Exactly-once ack claim. ONE conditional-UPDATE flips ack_claimed 0→1 guarded on ack_claimed<>1, so only
+// the FIRST caller matches a row (meta.changes===1 → true); every later/concurrent caller finds the row
+// already ==1, matches nothing (changes===0 → false). Returns a plain boolean; throws ConnectStateError
+// only on a genuine storage failure. A lost claim is a normal `false`, NOT a throw.
+export async function claimAck(db, transactionId, now) {
+  const res = await db
+    .prepare("UPDATE connect_abdm_txn SET ack_claimed=?,updated_at=? WHERE transaction_id=? AND ack_claimed<>?")
+    .bind(1, now, transactionId, 1)
+    .run();
+  if (!res || res.success === false) throw new ConnectStateError("claimAck update failed");
+  return !!(res.meta && res.meta.changes === 1);
+}

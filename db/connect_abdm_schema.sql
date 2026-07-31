@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS connect_abdm_txn (
   transaction_id TEXT, tenant_id TEXT, consent_id TEXT,
   eph_privkey_sealed TEXT,                      -- envelope-encrypted ephemeral X25519 private key (ADR-2D)
   eph_pub_raw TEXT, our_nonce TEXT,             -- our keyMaterial (public + nonce) — sent to the gateway
+  ack_claimed INTEGER NOT NULL DEFAULT 0,       -- exactly-once ack flag (D1 CAS single-shot; Stage-3 Task-4)
   status TEXT, expires_at TEXT, created_at TEXT, updated_at TEXT );
 CREATE INDEX IF NOT EXISTS idx_abdm_txn_txid ON connect_abdm_txn (transaction_id);
 

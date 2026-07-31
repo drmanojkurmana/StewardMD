@@ -6,6 +6,7 @@ import {
   putConsentReq, getConsentReq, updateConsentStatus,
   putTxn, getTxnByRequestId, getTxnByTransactionId, attachTransactionId, unsealTxnKey,
   bufferEntry, listBuffered, deleteBuffered,
+  advanceStatus, claimAck,
 } from "../../../functions/_connect/abdm/state.js";
 
 const NOW = "2026-07-31T00:00:00Z";
@@ -164,4 +165,99 @@ test("deleteBuffered clears only the target txn and returns the deleted count", 
   assert.equal(n, 2);
   assert.equal((await listBuffered(r2, "txnA")).length, 0); // txnA cleared
   assert.equal((await listBuffered(r2, "txnB")).length, 1); // txnB untouched
+});
+
+// ---- Stage-3 Task-4: transaction FSM + exactly-once D1 CAS ack-claim (the correctness spine) --------
+
+// Scenario 1 (crown jewel): two sequential claimAck for the same txn → EXACTLY ONE true. The mock D1
+// increments meta.changes only when the guard (ack_claimed<>1) actually matched a row, so this proves
+// the true single-shot semantics of the CAS, not a timing artifact. A guard-less UPDATE would return
+// changes=1 twice and FAIL this test.
+test("exactly-once ack: two sequential claimAck → exactly one true (D1 CAS decides, no read-then-write)", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-ack", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-ack", "txn-1", NOW);
+
+  const first = await claimAck(db, "txn-1", "2026-07-31T00:01:00Z");
+  const second = await claimAck(db, "txn-1", "2026-07-31T00:02:00Z");
+  assert.equal(first, true);
+  assert.equal(second, false);
+  assert.equal([first, second].filter(Boolean).length, 1); // EXACTLY one winner
+  // single-shot, not toggling: a third claim also loses.
+  assert.equal(await claimAck(db, "txn-1", "2026-07-31T00:03:00Z"), false);
+  // the winning claim persisted the flag + its OWN now; the losing claims did NOT overwrite updated_at.
+  const row = await getTxnByTransactionId(db, "txn-1");
+  assert.equal(row.ack_claimed, 1);
+  assert.equal(row.updated_at, "2026-07-31T00:01:00Z");
+});
+
+// Scenario 2: the legal FSM walk, end to end, persisted.
+test("FSM legal walk: INITIATED → CONSENT_GRANTED → REQUESTED → RECEIVING → TRANSFERRED", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-fsm", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "INITIATED", expiresAt: "z", now: NOW,
+  });
+  const walk = [
+    ["INITIATED", "CONSENT_GRANTED"],
+    ["CONSENT_GRANTED", "REQUESTED"],
+    ["REQUESTED", "RECEIVING"],
+    ["RECEIVING", "TRANSFERRED"],
+  ];
+  for (const [from, to] of walk) {
+    assert.deepEqual(await advanceStatus(db, "req-fsm", from, to, NOW), { ok: true, status: to });
+  }
+  assert.equal((await getTxnByRequestId(db, "req-fsm")).status, "TRANSFERRED");
+});
+
+// Scenario 3: illegal edge (map miss) and any exit from a terminal are both refused in JS BEFORE D1,
+// and the illegal case must not bump updated_at (proves D1 was never touched).
+test("FSM rejects illegal edges + any exit from a terminal (illegal case never writes D1)", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-ill", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "z", now: NOW,
+  });
+  // RECEIVING has no edge back to INITIATED — illegal.
+  assert.deepEqual(
+    await advanceStatus(db, "req-ill", "RECEIVING", "INITIATED", "2026-07-31T09:00:00Z"),
+    { ok: false, reason: "illegal" });
+  const still = await getTxnByRequestId(db, "req-ill");
+  assert.equal(still.status, "RECEIVING");   // unchanged
+  assert.equal(still.updated_at, NOW);       // illegal edge never touched D1 (updated_at not bumped)
+
+  // terminal state has an EMPTY successor set — no exit is legal.
+  await putTxn(db, sealStub, {
+    requestId: "req-term", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "TRANSFERRED", expiresAt: "z", now: NOW,
+  });
+  assert.deepEqual(
+    await advanceStatus(db, "req-term", "TRANSFERRED", "FAILED", "2026-07-31T09:00:00Z"),
+    { ok: false, reason: "illegal" });
+  assert.equal((await getTxnByRequestId(db, "req-term")).status, "TRANSFERRED"); // unchanged
+});
+
+// Scenario 4: distinct from the JS legality check — the edge IS legal in the map, but the row's real
+// status is not `from`, so the CAS guard matches 0 rows → stale. Proves the DB guard, not the argument.
+test("stale `from`: legal edge but wrong current status → CAS miss {ok:false, reason:'stale'}", async () => {
+  const db = makeAbdmDb({});
+  await putTxn(db, sealStub, {
+    requestId: "req-stale", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "CONSENT_GRANTED", expiresAt: "z", now: NOW,
+  });
+  // INITIATED→CONSENT_GRANTED IS a legal edge, but the row is NOT in INITIATED, so the guard misses.
+  assert.deepEqual(
+    await advanceStatus(db, "req-stale", "INITIATED", "CONSENT_GRANTED", "2026-07-31T10:00:00Z"),
+    { ok: false, reason: "stale" });
+  const back = await getTxnByRequestId(db, "req-stale");
+  assert.equal(back.status, "CONSENT_GRANTED"); // unchanged
+  assert.equal(back.updated_at, NOW);           // CAS matched 0 rows → no write
 });
