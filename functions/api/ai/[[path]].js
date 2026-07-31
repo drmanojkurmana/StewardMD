@@ -95,7 +95,7 @@ function withCors(request, resp) {
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
-import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER } from "../../_research.js";
+import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
@@ -430,16 +430,15 @@ const RESEARCH_SYS_SNIPPETS =
 // in those sources and cites them [n]. This is a model PROMPT — its output is AI text (exempt from the
 // no-em-dash app-text rule); the answer's own closing line is what the user reads.
 const EVIDENCE_REVIEW_SYS =
-  "You are MaiK in EVIDENCE REVIEW mode, a clinical evidence-synthesis assistant for qualified doctors. The clinician wants a structured review of what the published literature and guidelines say about their question. " +
-  "You are given a numbered SOURCES list retrieved from trusted medical literature (PubMed/PMC, Cochrane, WHO, CDC, NICE, ICMR, and major specialty-society guidelines). Answer from established medical knowledge, using these sources to ground and cite specifics. Follow ALL of these requirements:\n" +
-  "1. SYNTHESIZE the evidence into a clear, clinician-facing answer: lead with the bottom line, then the supporting detail. Be concise and structured (short headings or bullets where they genuinely help).\n" +
-  "2. COMPARE studies or guidelines when they differ; say where the weight of evidence lies and where there is genuine disagreement.\n" +
-  "3. Whenever you rely on a guideline or major trial, STATE ITS YEAR (e.g. 'the 2021 Surviving Sepsis Campaign', 'NICE 2019', 'ICMR 2022').\n" +
-  "4. State the EVIDENCE QUALITY behind key recommendations: the study type (randomised trial, meta-analysis, systematic review, observational, expert consensus) and, where a source gives it, the GRADE or strength of recommendation.\n" +
-  "5. Clearly DISTINGUISH well-established evidence from emerging or preliminary findings; never present a single small or preliminary study as settled practice.\n" +
-  "6. CITE sources inline as numbered [n] matching the SOURCES list, and name the source with its year in prose the first time you rely on it. Use ONLY the numbers provided; never invent a citation, a figure, or a guideline that is not supported by the sources or solidly-established medicine.\n" +
-  "7. If the evidence is limited, weak, or the sources do not cover the question, say so plainly in one line rather than overstating certainty.\n" +
-  "8. END with exactly this one line and nothing after it: 'This is an evidence summary, not a substitute for clinical judgment.'\n" +
+  "You are MaiK in EVIDENCE REVIEW mode, a clinical evidence-synthesis assistant for qualified doctors. Give a clear, decisive, clinician-facing answer to the question, grounded in established medical evidence and major guidelines. " +
+  "You MAY be given a numbered SOURCES list retrieved from trusted literature (PubMed/PMC, Cochrane, WHO, CDC, NICE, ICMR, specialty-society guidelines); use it to ground and cite specifics, but the sources are SUPPORT, not a limit on what you may answer. Follow ALL of these requirements:\n" +
+  "1. ANSWER THE QUESTION DIRECTLY, FIRST. Lead with the bottom line — the single best answer the clinician asked for (state your recommendation and the setting/caveats that change it) — then the supporting detail. Be concise and structured.\n" +
+  "2. Ground specifics in the SOURCES where they apply and cite them inline as [n] (use ONLY the numbers given; never invent a citation, figure, or guideline). Name a key guideline or trial with its YEAR the first time you rely on it (e.g. 'Baveno VII (2022)', 'the 2021 Surviving Sepsis Campaign').\n" +
+  "3. State EVIDENCE QUALITY where it matters (randomised trial, meta-analysis, systematic review, observational, consensus; GRADE/strength if given) and distinguish well-established evidence from emerging or preliminary findings.\n" +
+  "4. When approaches genuinely differ, say where the weight of evidence lies and where the disagreement is.\n" +
+  "5. CRITICAL — NEVER refuse or dead-end. If the SOURCES are empty, sparse, or clearly about a DIFFERENT topic than the question, IGNORE the off-topic ones and STILL answer the question fully from well-established medical knowledge and major guidelines; add ONE short line that this rests on established guidance rather than the retrieved sources. NEVER reply that 'the provided sources do not contain information' (or any equivalent) — the clinician always receives a real, direct answer.\n" +
+  "6. Never let an unrelated source pull your answer toward a different condition than the one the clinician asked about.\n" +
+  "7. END with exactly this one line and nothing after it: 'This is an evidence summary, not a substitute for clinical judgment.'\n" +
   "Do not describe your retrieval process or mention PubMed. Do not add any other disclaimer (the interface already shows one).";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
@@ -1124,7 +1123,7 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       let results = [];
-      try { results = await pubmedGuidelines(env, topic); }   // default guideline/review filter (unchanged behaviour)
+      try { results = await pubmedGuidelines(env, researchTermFor(topic) || topic); }   // sanitized keywords so free-text and/or don't become PubMed operators
       catch (e) { try { await recordUsage(gate, { inTok: estTokens(topic.length), outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "lookup-failed", source: "pubmed" }, 502); }
       await recordUsage(gate, { inTok: estTokens(topic.length), outTok: estTokens(JSON.stringify(results).length), status: "success" });
       return json({ results: results, source: "PubMed (NCBI)", query: topic, mode: "evidence" });
@@ -1205,7 +1204,12 @@ export async function onRequest(context) {
         // (4) Retrieve trusted citations (PubMed guideline / systematic review / meta-analysis), then
         // synthesize with numbered [n] grounding. Zero sources -> synthesize from established medicine.
         let cites = [];
-        try { cites = await pubmedGuidelines(env, q.replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 200), RESEARCH_PUBTYPE_FILTER); } catch (e) { cites = []; }
+        try { cites = await pubmedGuidelines(env, researchTermFor(q), RESEARCH_PUBTYPE_FILTER); } catch (e) { cites = []; }
+        // Relevance guard: never present off-topic papers as "the evidence". PubMed's automatic term
+        // mapping can still surface loosely-matched reviews; drop any whose title shares no specific
+        // keyword with the question, so the model synthesizes from established medicine instead of junk.
+        const _kw = researchKeywords(q);
+        cites = cites.filter(function (c) { return sourceOnTopic(c.title, _kw); });
         const sources = cites.map(function (c, i) { return { n: i + 1, title: c.title + (c.year ? " (" + c.year + ")" : ""), url: c.url, site: c.journal || "PubMed", year: c.year, pmid: c.pmid, pubtype: c.pubtype }; });
         let srcBlock = "";
         if (sources.length) srcBlock = "\n\n=== SOURCES (cite inline as [n]; use ONLY these numbers) ===\n" + sources.map(function (s) { return s.n + ". " + s.title + (s.pubtype ? " [" + s.pubtype + "]" : "") + (s.site ? " - " + s.site : ""); }).join("\n");
