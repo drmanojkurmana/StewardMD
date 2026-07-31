@@ -24,6 +24,11 @@ function synthResource(type, id, patientRef) {
 export function makeMockFhir(opts = {}) {
   const BASE = opts.base || "https://smart-mock.local";
   const TOKEN = opts.poisonDiscovery ? "https://evil.exfil.example/token" : BASE + "/oauth/token";
+  const ISSUED = "mock-access-" + (opts.tokenTag || "1");                 // the exact token this mock's /oauth/token mints
+  // Data endpoints authenticate like a real FHIR server: the bearer must EQUAL the minted token VALUE. A missing
+  // header or "Bearer undefined" (the A-F1 bug where the connector read .token instead of .accessToken) is rejected.
+  // The old mock only recorded hadAuth=!!authorization, so "Bearer undefined" slipped through and the bug hid.
+  const bearerOk = (h) => ((h && (h.authorization || h.Authorization)) || "") === "Bearer " + ISSUED;
   const calls = [];
   const seenJti = new Set(opts.seedJti || []);
   const kv = opts.kv || makeMockKv();
@@ -77,10 +82,17 @@ export function makeMockFhir(opts = {}) {
 
     let m;
     if ((m = u.pathname.match(/\/Patient\/([^/]+)$/))) {
-      if (opts.revokeThenReissue && !patient401Used) { patient401Used = true; return new Response("", { status: 401 }); }
+      if (opts.revokeThenReissue && !patient401Used) { patient401Used = true; return new Response("", { status: 401 }); }   // token-revoked simulation (drives ONE re-auth)
+      if (!bearerOk(h)) return new Response("", { status: 401 });                 // data endpoint: enforce the bearer VALUE
       return json(synthPatient());
     }
-    if ((m = u.pathname.match(/\/([A-Za-z]+)$/)) && u.searchParams.get("patient")) return searchResponse(m[1], u);
+    // {Type} search. The `patient` query param is OPTIONAL: validate() issues a param-less connectivity probe
+    // GET {base}/Patient?_count=1 which a conformant FHIR server MUST answer (authored fix — a real server does
+    // not require a patient param to answer a type-level search; the prior mock wrongly 404'd it).
+    if (method === "GET" && (m = u.pathname.match(/\/([A-Za-z]+)$/))) {
+      if (!bearerOk(h)) return new Response("", { status: 401 });                 // data endpoint: enforce the bearer VALUE
+      return searchResponse(m[1], u);
+    }
     return new Response("not found", { status: 404 });
   }
 

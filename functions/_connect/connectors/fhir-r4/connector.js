@@ -25,7 +25,7 @@ function authDeps(ctx) {
 const doAuth = (ctx, forceRefresh) => acquireAccessToken(authDeps(ctx), { config: ctx.config, requestedScopes: scopeToSmart(ctx.scope), forceRefresh });
 
 async function initialAuthHeader(ctx) {
-  if (smartOn(ctx)) return { authorization: "Bearer " + (await doAuth(ctx, false)).token };
+  if (smartOn(ctx)) return { authorization: "Bearer " + (await doAuth(ctx, false)).accessToken };   // acquireAccessToken returns {accessToken}, NOT {token} — .token was undefined => "Bearer undefined"
   const tok = ctx.secrets ? await ctx.secrets("bearer").catch(() => null) : null;     // Phase-0 sandbox path
   return tok ? { authorization: "Bearer " + tok } : {};
 }
@@ -67,7 +67,7 @@ export const fhirR4Connector = {
     let patient = await readPatient();
     if (patient === 401) {
       if (!smart) throw new UpstreamError("unauthorized");
-      authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).token };      // ONE bounded re-auth
+      authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).accessToken };      // ONE bounded re-auth
       patient = await readPatient();
       if (patient === 401) throw new UpstreamError("unauthorized after re-auth");
     }
@@ -77,7 +77,7 @@ export const fhirR4Connector = {
         (await searchPaged(pageDeps(), { base, resourceType: type, patientRef, count: ctx.budget.maxPagesPerResource })).forEach((r) => resources.push(r));
       } catch (e) {
         if (e instanceof ReauthNeeded && smart) {                                        // one re-auth then retry this family
-          authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).token };
+          authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).accessToken };
           (await searchPaged(pageDeps(), { base, resourceType: type, patientRef, count: ctx.budget.maxPagesPerResource })).forEach((r) => resources.push(r));
         } else throw e;
       }

@@ -62,10 +62,25 @@ test("poisonDiscovery puts the token endpoint on an off-allow-list host", () => 
 
 test("paged search returns link.next then a terminal page", async () => {
   const mock = makeMockFhir({ extraPages: 2 });
-  const p1 = await (await mock.fetch(mock.base + "/Observation?patient=P1&_page=1")).json();
+  const auth = { headers: { authorization: "Bearer mock-access-1" } };      // data endpoints now require the minted bearer
+  const p1 = await (await mock.fetch(mock.base + "/Observation?patient=P1&_page=1", auth)).json();
   assert.ok(p1.link && p1.link.find((l) => l.relation === "next"));
-  const p3 = await (await mock.fetch(mock.base + "/Observation?patient=P1&_page=3")).json();
+  const p3 = await (await mock.fetch(mock.base + "/Observation?patient=P1&_page=3", auth)).json();
   assert.equal(p3.link, undefined);                          // terminal
+});
+
+// A-F1: data endpoints validate the bearer VALUE (missing / "Bearer undefined" / wrong -> 401; minted -> 200).
+test("data endpoints reject a missing/wrong bearer and accept only the minted token", async () => {
+  const mock = makeMockFhir();
+  const P = mock.base + "/Patient/P1", S = mock.base + "/Observation?patient=P1";
+  assert.equal((await mock.fetch(P)).status, 401);                                                    // no auth
+  assert.equal((await mock.fetch(P, { headers: { authorization: "Bearer undefined" } })).status, 401); // the A-F1 bug's literal header
+  assert.equal((await mock.fetch(P, { headers: { authorization: "Bearer WRONG" } })).status, 401);
+  assert.equal((await mock.fetch(P, { headers: { authorization: "Bearer mock-access-1" } })).status, 200);
+  assert.equal((await mock.fetch(S)).status, 401);                                                    // search: no auth
+  assert.equal((await mock.fetch(S, { headers: { authorization: "Bearer mock-access-1" } })).status, 200);
+  // param-less type search (validate()'s connectivity probe) is answered when authenticated
+  assert.equal((await mock.fetch(mock.base + "/Patient?_count=1", { headers: { authorization: "Bearer mock-access-1" } })).status, 200);
 });
 
 test("smart-keys JWKS verifies its own signature", async () => {

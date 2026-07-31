@@ -28,6 +28,16 @@ test("authenticate acquires a SMART token; validate ok; capabilities include Med
   assert.ok((await fhirR4Connector.capabilities(ctx)).resources.includes("MedicationRequest"));
 });
 
+test("A-F1: the authenticated pull sends the REAL minted bearer (mock 401s a missing/'Bearer undefined' header)", async () => {
+  const mock = makeMockFhir(); const ctx = ctxFor(mock);
+  // With the mock now enforcing the bearer VALUE, this pull succeeds ONLY if the connector sent "Bearer mock-access-1".
+  // If the 3 sites regressed to `.token` (=> "Bearer undefined"), the Patient read + re-auth both 401 and this throws.
+  const raw = await fhirR4Connector.fetchPatient(ctx, "P1");
+  assert.equal(raw.patient.id, "P1");
+  const dataCalls = mock.calls.filter((c) => /\/(Patient\/P1|Observation|Condition|MedicationRequest)/.test(c.path));
+  assert.ok(dataCalls.length > 0 && dataCalls.every((c) => c.hadAuth), "every data-endpoint call carried an Authorization header");
+});
+
 test("fetchPatient pulls Patient + in-scope families incl MedicationRequest; normalize -> valid SCCM", async () => {
   const mock = makeMockFhir(); const ctx = ctxFor(mock);
   const raw = await fhirR4Connector.fetchPatient(ctx, "P1");

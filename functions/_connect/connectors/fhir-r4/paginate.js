@@ -17,7 +17,9 @@ export async function searchPaged(deps, { base, resourceType, patientRef, count,
   let pages = 0, subreq = 0;
   while (url) {
     if (pages >= maxPages || subreq >= maxSub || clock() > deadline) break;   // over-budget => partial, not a crash
-    let res; try { res = await fetch(url, { headers: authHeader }); } catch { throw new UpstreamError("FHIR search failed"); }
+    // redirect:"manual" — never auto-follow a 3xx from the (trusted) FHIR host to another origin with our
+    // authenticated, PHI-bearing request; the same-origin `next` check below is the only sanctioned hop.
+    let res; try { res = await fetch(url, { headers: authHeader, redirect: "manual" }); } catch { throw new UpstreamError("FHIR search failed"); }
     subreq++;
     if (res.status === 401) throw new ReauthNeeded(resourceType);              // re-auth signal (Task 6)
     if (!res.ok) throw new UpstreamError("FHIR search HTTP " + res.status);
