@@ -49,8 +49,12 @@ export async function handleFeedIngest(env, deps, request, kind) {
   // (3) replay defense: freshness + nonce
   const tsn = Number(ts);
   if (!Number.isFinite(tsn) || Math.abs((typeof t0 === "number" ? t0 : Date.now()) - tsn) > FRESH_MS) return sane(401);
-  const msgId = h.get("X-SMD-Msg-Id") || (await hmacHex(secret, "body." + rawBody));
-  const nonceKey = await feedNonceKey(secret, msgId);
+  // Bind the idempotency nonce to SIGNED material (timestamp + body) — NOT the unauthenticated X-SMD-Msg-Id
+  // header. Keying on the header would let ONE captured, validly-signed request replay-reprocess under a fresh
+  // msg-id on every hit within the freshness window (each new msg-id misses KV and re-runs the tail). Keying
+  // on (ts + body) means the exact signed request dedupes, while a genuinely-distinct message (different body
+  // or ts, hence a different signature) still processes.
+  const nonceKey = await feedNonceKey(secret, ts + "." + rawBody);
   try { if (deps.kv && (await deps.kv.get(nonceKey))) return jsonResponse({ ok: true, replay: true }, { status: 202 }); } catch { /* KV read miss -> proceed */ }
 
   // (4) correlate -> authoritative tenant/connector/msg-types (headers are cross-check only)

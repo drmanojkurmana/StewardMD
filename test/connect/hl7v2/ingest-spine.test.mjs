@@ -62,13 +62,24 @@ test("stale timestamp -> 401", async () => {
   assert.equal((await handleFeedIngest(env, deps(env), await req(env, ORU, { ts: Date.now() - 400_000 }), "hl7v2")).status, 401);
 });
 
-test("replayed message id -> 202 no-op (idempotent)", async () => {
+test("replay of the SAME signed request -> 202 no-op even under a DIFFERENT (unauthenticated) msg-id header", async () => {
   const env = await baseEnv(); const d = deps(env);
-  const r1 = await handleFeedIngest(env, d, await req(env, ORU, { msgId: "dup1" }), "hl7v2");
-  const r2 = await handleFeedIngest(env, d, await req(env, ORU, { msgId: "dup1" }), "hl7v2");
-  assert.equal(r1.status, 202); assert.equal(r2.status, 202);
-  assert.equal((await r2.json()).replay, true);
-  assert.equal(d.db._tables.connect_audit_event.length, 1);    // only the first ran the tail
+  const ts = String(Date.now());
+  const sig = await hmacHex(SECRET, ts + "." + ORU);           // capture ONE valid (ts, body, sig)
+  const shot = (msgId) => new Request("https://x", { method: "POST", headers: { "X-SMD-Feed": "f1", "X-SMD-Timestamp": ts, "X-SMD-Signature": sig, "X-SMD-Msg-Id": msgId }, body: ORU });
+  const r1 = await handleFeedIngest(env, d, shot("id-A"), "hl7v2");
+  const r2 = await handleFeedIngest(env, d, shot("id-B"), "hl7v2");   // varied header must NOT force reprocessing
+  const r3 = await handleFeedIngest(env, d, shot("id-C"), "hl7v2");
+  assert.equal(r1.status, 202); assert.equal((await r2.json()).replay, true); assert.equal((await r3.json()).replay, true);
+  assert.equal(d.db._tables.connect_audit_event.length, 1);    // the tail ran exactly ONCE (nonce bound to signed material)
+});
+
+test("two genuinely-distinct signed messages both process (not over-deduped)", async () => {
+  const env = await baseEnv(); const d = deps(env);
+  const r1 = await handleFeedIngest(env, d, await req(env, ORU), "hl7v2");
+  const r2 = await handleFeedIngest(env, d, await req(env, ORU + "OBX|9|NM|G^Glu^L||5|mmol|||F"), "hl7v2");   // different body -> different sig
+  assert.equal((await r1.json()).ok, true); assert.equal((await r2.json()).ok, true);
+  assert.equal(d.db._tables.connect_audit_event.length, 2);
 });
 
 test("unknown feed -> 401; connector-kind mismatch -> 403; header-connector mismatch -> 403", async () => {
