@@ -68,8 +68,14 @@
   function balance() { return (cache && cache.balance) || 0; }
   function onChange(f) { if (typeof f === "function") listeners.push(f); }
 
-  // On sign-in/out: reload the per-user cache, flush any queued events, notify listeners.
-  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { loadCache(); if (signedIn()) flush(); listeners.forEach(function (f) { try { f(cache); } catch (e) {} }); }); } catch (e) {}
+  // Run a NON-time-critical task when the main thread is idle (falls back to a short timeout), so it
+  // never competes with an in-progress AI warm-up / answer. Fail-safe: runs the task directly on error.
+  function _kuIdle(fn) { try { (window.requestIdleCallback || function (f) { return setTimeout(f, 1800); })(function () { try { fn(); } catch (e) {} }, { timeout: 5000 }); } catch (e) { try { fn(); } catch (_e) {} } }
+  // On sign-in/out: reload the per-user cache + notify listeners IMMEDIATELY (local, for the UI), but
+  // DEFER the network flush() to idle. The signed-in startup fan-out (this + streak + push) otherwise
+  // hammers the single JS thread the moment you sign in, starving MaiK/Vision/Research's KB warm-up and
+  // callbacks — the reason AI hung/was slow for signed-in accounts while guest (no fan-out) was fast.
+  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { loadCache(); listeners.forEach(function (f) { try { f(cache); } catch (e) {} }); if (signedIn()) _kuIdle(flush); }); } catch (e) {}
   try { window.addEventListener("beforeunload", function () { if (queue.length) { try { flush(); } catch (e) {} } }); } catch (e) {}
   loadCache();
 

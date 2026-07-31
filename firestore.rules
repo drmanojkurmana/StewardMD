@@ -11,11 +11,12 @@ service cloud.firestore {
     // Firebase custom claim (token.pro == true, optional token.proExp in ms). LAUNCH PROMO: until
     // 16 Sep 2026 (UTC) everyone is treated as Pro so the whole app is open for launch/testing.
     // Keep this promo cutoff in sync with PRO_FREE_UNTIL in functions/_entitlement.js.
+    // Pro removed (2026-08-01, owner decision): StewardMD is free for everyone, so this is
+    // unconditionally true — NO account is ever denied a group/share create for lacking a `pro`
+    // claim. (Previously gated on token.pro with a promo cutoff; a stale DEPLOYED ruleset still
+    // requiring the claim would deny every non-owner and churn the client — this removes that risk.)
     function isProUser() {
-      return request.time < timestamp.date(2026, 9, 16)
-             || (request.auth != null
-                 && request.auth.token.pro == true
-                 && (!('proExp' in request.auth.token) || request.auth.token.proExp > request.time.toMillis()));
+      return request.auth != null;
     }
 
     // A user's saved cases are PRIVATE to that user. (Previously this allowed any
