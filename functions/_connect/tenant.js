@@ -9,8 +9,9 @@ export async function loadConnectorConfig(db, tenantId, connectorId) {
   return db.prepare("SELECT * FROM connect_connector_config WHERE tenant_id=?").bind(tenantId).first();
 }
 export function assertSandboxAllowed(tenant, config, allowlist = SANDBOX_ALLOWLIST) {
-  if (tenant && tenant.mode === "live") throw new SandboxViolation("live mode refused in Phase 0 (no consent framework yet)");
-  let host; try { host = new URL(config.base_url).host; } catch { throw new SandboxViolation("invalid base_url"); }
-  if (!new URL(config.base_url).protocol.startsWith("https")) throw new SandboxViolation("base_url must be https");
-  if (!allowlist.includes(host)) throw new SandboxViolation("base_url host not on the sandbox allow-list: " + host);
+  if (!tenant) throw new SandboxViolation("tenant required");
+  if (tenant.mode === "live") throw new SandboxViolation("live mode refused in Phase 0 (no consent framework yet)");
+  let u; try { u = new URL(config.base_url); } catch { throw new SandboxViolation("invalid base_url"); }
+  if (u.protocol !== "https:") throw new SandboxViolation("base_url must be https");
+  if (!allowlist.includes(u.host)) throw new SandboxViolation("base_url host not on the sandbox allow-list: " + u.host);
 }
