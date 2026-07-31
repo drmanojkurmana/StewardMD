@@ -57,6 +57,21 @@
     });
   }
 
+  // Sync-hide the about-to-stagger items the INSTANT the overlay opens (in the MutationObserver
+  // callback, which runs before the browser paints) so the content never flashes in fully-visible a
+  // frame before play()'s Motion stagger fades it in — that flash was the "syndromes flickers on open"
+  // bug. reduced-motion skips priming (no animation will run, so items must stay visible).
+  function primeItems(overlay, itemSels) {
+    if (reduced()) return [];
+    var out = [];
+    itemSels.forEach(function (sel) {
+      Array.prototype.forEach.call(overlay.querySelectorAll(sel), function (n) {
+        if (visible(n)) { n.style.opacity = "0"; out.push(n); }
+      });
+    });
+    return out;
+  }
+
   // Per-overlay: fire once when it becomes visible; reset when hidden so the next open re-animates.
   // If `body` is set, a full re-render of that container (innerHTML swap) also re-animates.
   function bind(t) {
@@ -69,8 +84,10 @@
       if (!vis) { wasVis = false; return; }
       if (!force && wasVis) return;                              // already animated this open; don't re-run on interaction
       wasVis = true;
+      var primed = primeItems(overlay, t.items);                 // SYNC hide (before paint) -> no flash
       if (timer) clearTimeout(timer);
-      timer = setTimeout(function () { play(overlay, t.items); }, 40);
+      timer = setTimeout(function () { play(overlay, t.items); }, 30);
+      setTimeout(function () { primed.forEach(function (n) { try { n.style.opacity = ""; } catch (e) {} }); }, 1400);  // safety: never leave content hidden
     }
     new MutationObserver(function () { schedule(false); }).observe(overlay, { attributes: true, attributeFilter: ["class", "style"] });
     if (t.body) {
