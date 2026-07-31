@@ -611,6 +611,9 @@
   function fw(k) { return FW_VERYHIGH[k] ? 3 : (FW_LOW[k] ? 1 : 2); }
 
   function rIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+  // Involved-system picker: one custom line-icon per system (id -> ICONS catalog name),
+  // replacing the OS emoji that shipped in app.js's SYSTEM_PICKER_MAP + the two NI tabs below.
+  var SYS_ICON = { respiratory: "lungs", genitourinary: "kidney", gastrointestinal: "stomach", skin: "skin", neuro: "brain", systemic: "aware", cardiac: "heart", tropical: "bug", ni_endo: "endocrine", ni_tox: "skull" };
   var GROUP_TAG = { "General / Vitals":"GEN","Respiratory":"RESP","Gastrointestinal":"GI","Genitourinary":"GU","Central Nervous System":"CNS","Cardiac":"CVS","Tropical Fever":"ID","Skin / Soft Tissue":"DERM","Sepsis / Oncology-Specific":"GEN" };
   var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
@@ -1202,7 +1205,7 @@
       (gen.length ? gen.map(function (k) { return chipBtn(k, LABEL[k]); }).join("") : '<span class="dx-sel-empty">All added.</span>') + '</div></div>';
     // Step 2 · body system
     html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">2</span> Involved system</div><div class="dx-sysrow">' +
-      SYSPICK.map(function (s) { return '<button class="dx-sys' + (S.system === s.id ? " on" : "") + '" data-sys="' + s.id + '">' + esc((s.icon ? s.icon + " " : "") + s.label) + '</button>'; }).join("") +
+      SYSPICK.map(function (s) { var ic = rIco(SYS_ICON[s.id] || ""); return '<button class="dx-sys' + (S.system === s.id ? " on" : "") + '" data-sys="' + s.id + '">' + (ic ? '<span class="dx-sys-ic">' + ic + '</span>' : '') + esc(s.label) + '</button>'; }).join("") +
       '</div></div>';
     // Step 3 · findings for the chosen system (common first, rare behind Show more)
     if (S.system) {
@@ -1585,11 +1588,11 @@
   // choose a pearl card's accent + icon from the dominant clinical concept in it
   function pearlKind(t) {
     var s = (t || "").toLowerCase();
-    if (/persistent\s+\w+\s+bacter|persistent bacter|\bshock\b|hypotension|deteriorat|life[\s-]?threatening|high mortality|\bfatal\b|fulminant|until proven otherwise|do not delay|requires? urgent|impending|massive|emergenc/.test(s)) return { a: "warn", ic: "🚨", label: "Red flag" };
-    if (/source control|remove (?:the )?device|device removal|\bdrain\b|debridement|urgent surger|surgical|first[–\- ]line|drug of choice|mainstay|vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|\bantibiotics?\b|regimen|therapy is/.test(s)) return { a: "tx", ic: "💊", label: "Treatment pearl" };
-    if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|sensitivity|specificity|diagnostic|gold standard|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "🩺", label: "Diagnostic pearl" };
-    if (/most common|classic|pathognomonic|hallmark|triad|tetrad|pentad|remember|\bexam\b|associated with/.test(s)) return { a: "pearl", ic: "🎯", label: "Exam pearl" };
-    return { a: "pearl", ic: "💡", label: "Clinical pearl" };
+    if (/persistent\s+\w+\s+bacter|persistent bacter|\bshock\b|hypotension|deteriorat|life[\s-]?threatening|high mortality|\bfatal\b|fulminant|until proven otherwise|do not delay|requires? urgent|impending|massive|emergenc/.test(s)) return { a: "warn", ic: "siren", label: "Red flag" };
+    if (/source control|remove (?:the )?device|device removal|\bdrain\b|debridement|urgent surger|surgical|first[–\- ]line|drug of choice|mainstay|vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|\bantibiotics?\b|regimen|therapy is/.test(s)) return { a: "tx", ic: "pills", label: "Treatment pearl" };
+    if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|sensitivity|specificity|diagnostic|gold standard|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "steth", label: "Diagnostic pearl" };
+    if (/most common|classic|pathognomonic|hallmark|triad|tetrad|pentad|remember|\bexam\b|associated with/.test(s)) return { a: "pearl", ic: "target", label: "Exam pearl" };
+    return { a: "pearl", ic: "aware", label: "Clinical pearl" };
   }
   // Remove inline citations from displayed text — references are collected ONCE in
   // the source footer instead of repeating "(Harrison 22e p.1120)" on every point.
@@ -1683,12 +1686,12 @@
     var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
     var pages = evPages(e);
     return {
-      _id: id, srcKey: "harrison", icon: "📖",
+      _id: id, srcKey: "harrison", icon: rIco("book"),
       sourceName: srcName,
       edition: "22e", tag: "Primary Reference",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: '<strong>📖 ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
+      cite: '<strong>' + rIco("book") + ' ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
         '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
     };
   }
@@ -1929,19 +1932,19 @@
     ]
   };
   var EV_BRIEF_META = {
-    dontmiss: { ic: "🚨", label: "Don't miss", a: "warn" },
-    exam: { ic: "🎯", label: "Exam pearl", a: "pearl" },
-    pitfall: { ic: rIco("warn"), label: "Pitfall", a: "pitfall" },
-    tip: { ic: "📌", label: "Practice tip", a: "tip" },
-    action: { ic: "🔑", label: "Key action", a: "tx" },
-    dx: { ic: rIco("steth"), label: "Diagnostic pearl", a: "ix" }
+    dontmiss: { ic: "siren", label: "Don't miss", a: "warn" },
+    exam: { ic: "target", label: "Exam pearl", a: "pearl" },
+    pitfall: { ic: "warn", label: "Pitfall", a: "pitfall" },
+    tip: { ic: "note", label: "Practice tip", a: "tip" },
+    action: { ic: "bolt", label: "Key action", a: "tx" },
+    dx: { ic: "steth", label: "Diagnostic pearl", a: "ix" }
   };
   function evBriefing(id) {
     var b = EXAM_PEARLS[id]; if (!b || !b.length) return "";
-    return '<div class="ev-brief"><div class="ev-brief-h"><span>⭐</span> StewardMD clinical briefing<span class="ev-brief-by">clinician-curated</span></div>' +
+    return '<div class="ev-brief"><div class="ev-brief-h"><span class="ev-tick"></span>StewardMD clinical briefing<span class="ev-brief-by">clinician-curated</span></div>' +
       b.map(function (p) {
         var m = EV_BRIEF_META[p.t] || EV_BRIEF_META.exam;
-        return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + m.ic + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
+        return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + rIco(m.ic) + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
       }).join("") + '</div>';
   }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
@@ -1949,8 +1952,8 @@
     // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
     if (src.pearls && src.pearls.length) {
-      h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> ' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
-        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
+      h += '<div class="ev-pearls"><div class="ev-pearls-h"><span class="ev-tick"></span>' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
+        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + rIco(k.ic) + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
         '</div>';
     }
     (src.sections || []).forEach(function (s) {
@@ -2008,7 +2011,8 @@
     st.textContent = [
       ".ev-wrap{border:1px solid #e2e8f0;border-radius:14px;background:#fff;overflow:hidden;margin:8px 0;font-size:14px}",
       ".ev-top{display:flex;align-items:center;gap:11px;width:100%;border:none;background:linear-gradient(180deg,#f6fbfa,#eef6f4);padding:13px 14px;cursor:pointer;text-align:left;min-height:52px}",
-      ".ev-top-ic{font-size:18px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #e2e8f0;border-radius:10px}",
+      ".ev-top-ic{font-size:18px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #e2e8f0;border-radius:10px;color:#0f766e}",
+      ".ev-top-ic svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.8;fill:none}",
       ".ev-top-main{display:flex;flex-direction:column;flex:1;min-width:0}",
       ".ev-top-title{font-weight:700;color:#0f172a;font-size:13.5px;line-height:1.25}",
       ".ev-top-sub{font-size:11.5px;color:#0b5a54;margin-top:2px}",
@@ -2018,13 +2022,19 @@
       ".ev-wrap.ev-open>.ev-panel{grid-template-rows:1fr}",
       ".ev-panel-in{overflow:hidden;min-height:0}",
       ".ev-body{padding:13px 13px 4px}",
-      ".ev-pearls{background:linear-gradient(180deg,#faf7ff,#f4f0fe);border:1px solid #e9d5ff;border-radius:12px;padding:12px 13px;margin-bottom:13px}",
-      ".ev-pearls-h{font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#6d28d9;margin-bottom:9px;display:flex;align-items:center;gap:6px}",
-      ".ev-pearl{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:3px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:#0f172a}",
-      ".ev-pearl:last-child{margin-bottom:0}.ev-pearl-ic{flex:none;font-size:14px;line-height:1.45}",
-      ".ev-pearl--warn{border-left-color:#fb923c}.ev-pearl--tx{border-left-color:#34d399}.ev-pearl--ix{border-left-color:#60a5fa}.ev-pearl--pearl{border-left-color:#c4b5fd}",
+      ".ev-pearls{margin-bottom:14px}",
+      ".ev-tick{flex:none;width:3px;height:14px;border-radius:2px;background:var(--teal,#0f766e);display:inline-block}",
+      ".ev-pearls-h{display:flex;align-items:center;gap:8px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#334155;padding-bottom:9px;margin-bottom:2px;border-bottom:1px solid #eef0f4}",
+      ".ev-pearl{display:flex;gap:11px;align-items:flex-start;padding:12px 2px;border-bottom:1px solid #eef0f4;line-height:1.55;color:#1e293b}",
+      ".ev-pearl:last-child{border-bottom:0}",
+      ".ev-pearl-ic{flex:none;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-top:1px}",
+      ".ev-pearl-ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.9;fill:none}",
       ".ev-pearl-bd{flex:1;min-width:0}",
-      ".ev-pearl-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px;background:#ede9fe;color:#6d28d9}",
+      ".ev-pearl .ev-pearl-tag{display:block;background:none;padding:0;margin:0 0 3px;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}",
+      ".ev-pearl--pearl .ev-pearl-ic{background:#f3f0ff;color:#7c3aed}.ev-pearl--pearl .ev-pearl-tag{color:#6d28d9}",
+      ".ev-pearl--tx .ev-pearl-ic{background:#e7f4f2;color:#0f766e}.ev-pearl--tx .ev-pearl-tag{color:#0f766e}",
+      ".ev-pearl--ix .ev-pearl-ic{background:#e8f0fe;color:#2563eb}.ev-pearl--ix .ev-pearl-tag{color:#2563eb}",
+      ".ev-pearl--warn .ev-pearl-ic{background:#fdeaea;color:#dc2626}.ev-pearl--warn .ev-pearl-tag{color:#dc2626}",
       ".ev-tag--warn{background:#fee2e2;color:#991b1b}.ev-tag--tx{background:#dcfce7;color:#166534}.ev-tag--ix{background:#dbeafe;color:#1e40af}.ev-tag--pearl{background:#ede9fe;color:#6d28d9}",
       ".ev-callouts{display:flex;flex-direction:column;gap:7px;margin:4px 0}",
       ".ev-callout{display:flex;gap:9px;align-items:flex-start;border-radius:10px;padding:10px 11px;line-height:1.5;border:1px solid}",
@@ -2035,7 +2045,7 @@
       ".ev-brief-h{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#0f172a;margin-bottom:10px}",
       ".ev-brief-by{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0b5a54;background:#d9f0eb;padding:2px 8px;border-radius:20px}",
       ".ev-bc{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:4px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:#0f172a}",
-      ".ev-bc:last-child{margin-bottom:0}.ev-bc-ic{flex:none;font-size:15px;line-height:1.4}.ev-bc-bd{flex:1;min-width:0}",
+      ".ev-bc:last-child{margin-bottom:0}.ev-bc-ic{flex:none;font-size:15px;line-height:1.4;color:#64748b}.ev-bc-ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.9;fill:none;vertical-align:-.15em}.ev-bc-bd{flex:1;min-width:0}",
       ".ev-bc--warn{border-left-color:#ef4444}.ev-bc--pitfall{border-left-color:#f97316}.ev-bc--pearl{border-left-color:#8b5cf6}.ev-bc--tip{border-left-color:#0ea5e9}.ev-bc--tx{border-left-color:#10b981}.ev-bc--ix{border-left-color:#3b82f6}",
       ".ev-bc-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
@@ -2049,13 +2059,14 @@
       ".md-abs{font-weight:700;color:#0f172a}",
       ".md-key{font-weight:700;color:#1e293b}",
       ".md-hi,.md-sig{font-weight:700;color:#7c3aed}",
-      ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}",
+      ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}.ev-wrap[data-ev-src=idsa] .ev-top-ic{color:#5b21b6}",
       ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
       ".ev-rx-note{color:#94a3b8;font-size:.92em}",
       ".ev-sec-in a,.ev-cite a{color:#1d4ed8;text-decoration:underline;word-break:break-word}",
       ".md-cite{font-size:.86em;color:#94a3b8}",
       ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-left:3px solid #818cf8;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
       ".ev-cite strong{color:#334155}",
+      ".ev-cite strong svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.85;fill:none;vertical-align:-.12em}",
       ".ev-sec{border:1px solid #e2e8f0;border-radius:11px;margin-bottom:8px;overflow:hidden;background:#fff}",
       ".ev-sec.danger{border-color:#fecaca}",
       ".ev-sec-h{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#fbfdfd;padding:12px 13px;cursor:pointer;text-align:left;min-height:48px;font:inherit}",
@@ -2191,7 +2202,7 @@
     var sections = [];
     if (g.url) sections.push({ ic: rIco("link"), title: "Official guideline", html: '<p><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</a></p>' });
     return {
-      _id: id, srcKey: "idsa", icon: "📐", sourceName: g.society || "IDSA Clinical Practice Guideline",
+      _id: id, srcKey: "idsa", icon: rIco("book"), sourceName: g.society || "IDSA Clinical Practice Guideline",
       edition: g.year ? String(g.year) : "", tag: "Guideline", pages: "", pearlsLabel: "Key recommendations",
       pearls: g.recs || [], sections: sections, fullHTML: "",
       cite: '<strong>📐 ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
@@ -2847,8 +2858,9 @@
       ".dx-step-h{font:700 11.5px var(--sans);color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:7px}",
       ".dx-step-n{width:18px;height:18px;border-radius:50%;background:var(--teal);color:#fff;font:800 11px var(--sans);display:inline-flex;align-items:center;justify-content:center}",
       ".dx-sysrow{display:flex;flex-wrap:wrap;gap:7px}",
-      ".dx-sys{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:600 12.5px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
+      ".dx-sys{display:inline-flex;align-items:center;gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:600 12.5px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-sys.on{background:var(--teal);border-color:var(--teal);color:#fff}",
+      ".dx-sys-ic{display:inline-flex;flex:none;color:#64748b}.dx-sys.on .dx-sys-ic{color:#fff}.dx-sys-ic svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.85;fill:none}",
       ".dx-more-btn{margin-top:8px;background:transparent;border:1px dashed var(--line);border-radius:9px;padding:7px 12px;font:600 12px var(--sans);color:var(--teal);cursor:pointer}",
       ".dx-prompt{font:500 13px var(--sans);color:var(--slate-soft);padding:18px;text-align:center;border:1px dashed var(--line);border-radius:11px}",
       ".dx-threshold{font:700 13.5px var(--sans);color:var(--ink);padding:18px;text-align:center;border:1.5px dashed var(--teal);border-radius:12px;background:var(--teal-soft);line-height:1.5}",
@@ -3355,10 +3367,12 @@
     var res = scored.map(function (x) { return x.d; });
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = res.length + " of " + all.length + " entries";
     grid.innerHTML = res.slice(0, 400).map(function (d) {
-      return '<button class="kblib-card ' + d.cls + '" data-kb="' + d.id + '"><div class="kblib-name">' + esc(d.name) + '</div>' +
-        '<div class="kblib-meta"><span class="kblib-badge ' + d.cls + '">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</span>' +
-        '<span class="kblib-badge ' + (d.ref ? "ref" : "dx") + '">' + (d.ref ? "📖 Reference" : "⚙ Diagnostic") + '</span>' +
-        (d.sys ? '<span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div></button>';
+      return '<button class="kblib-row ' + d.cls + '" data-kb="' + d.id + '">' +
+        '<div class="kblib-eye">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</div>' +
+        '<div class="kblib-name">' + esc(d.name) + '</div>' +
+        '<div class="kblib-meta"><span class="kblib-src">' + rIco(d.ref ? "book" : "flask") + (d.ref ? "Reference" : "Diagnostic") + '</span>' +
+        (d.sys ? '<span class="kblib-sep">·</span><span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div>' +
+        '</button>';
     }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
   }
   // ONE delegated listener for the Knowledge Library — survives modal re-renders.
@@ -3377,7 +3391,7 @@
         try { kbRenderLibrary(); } catch (x) {}
         return;
       }
-      var card = t.closest(".kblib-card[data-kb]");
+      var card = t.closest(".kblib-row[data-kb]");
       if (card) kbOpen(card.getAttribute("data-kb"));
     }, false);
   }
@@ -3391,14 +3405,17 @@
       ".kblib-f{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer}" +
       ".kblib-f.on{background:#0f766e;color:#fff;border-color:#0f766e}" +
       ".kblib-count{font-size:12px;color:#475569;margin:10px 2px}" +
-      ".kblib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}" +
-      ".kblib-card{text-align:left;border:1px solid #e2e8f0;border-left:4px solid #0f766e;border-radius:9px;padding:9px 11px;background:#fff;cursor:pointer}" +
-      ".kblib-card.inf{border-left-color:#dc2626}.kblib-card.ni{border-left-color:#16a34a}" +
-      ".kblib-name{font-weight:600;font-size:13px;margin-bottom:5px}.kblib-meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center}" +
-      ".kblib-badge{font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600}" +
-      ".kblib-badge.inf{background:#fee2e2;color:#991b1b}.kblib-badge.ni{background:#dcfce7;color:#166534}" +
-      ".kblib-badge.ref{background:#eef2ff;color:#3730a3}.kblib-badge.dx{background:#fef3c7;color:#92400e}" +
-      ".kblib-sys{font-size:10.5px;color:#94a3b8}";
+      ".kblib-grid{display:block;border:1px solid #e8ecf1;border-radius:14px;overflow:hidden}" +
+      ".kblib-row{position:relative;display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #eef1f4;padding:13px 14px 14px 17px;cursor:pointer}" +
+      ".kblib-row:last-child{border-bottom:0}" +
+      ".kblib-row:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#16a34a}" +
+      ".kblib-row.inf:before{background:#dc2626}" +
+      ".kblib-eye{font-weight:800;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:5px}" +
+      ".kblib-row.inf .kblib-eye{color:#b91c1c}" +
+      ".kblib-name{font-weight:700;font-size:15px;line-height:1.32;color:#0f172a;letter-spacing:-.005em}" +
+      ".kblib-meta{display:flex;align-items:center;gap:8px;margin-top:7px;font-size:11px;font-weight:600;color:#64748b}" +
+      ".kblib-src{display:inline-flex;align-items:center;gap:5px}.kblib-src svg{width:13px;height:13px;color:#94a3b8;stroke:currentColor;stroke-width:1.85;fill:none}" +
+      ".kblib-sep{color:#d3dae2}.kblib-sys{color:#94a3b8;text-transform:uppercase;letter-spacing:.03em;font-size:10px;font-weight:700}";
     document.head.appendChild(st);
   }
   function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { smdWireRecentSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
