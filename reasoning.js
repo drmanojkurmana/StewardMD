@@ -3846,7 +3846,13 @@
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
-      var sfetch = isNative ? ((typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null) : (typeof fetch === "function" ? fetch : null);
+      // NATIVE: WKWebView BUFFERS SSE (no progressive tokens arrive) AND CapacitorWebFetch's promise can
+      // ignore the AbortController, so a stalled live stream never settles → the 90s hang (#562). So we
+      // never open a live SSE on native. Instead take the bounded whole-answer fetch and TYPE IT OUT via
+      // replay() — the answer still reveals word-by-word like ChatGPT (just after the fetch, not during
+      // generation, which the WebView can't do). Web keeps true token streaming below.
+      if (isNative) return fallback();
+      var sfetch = (typeof fetch === "function") ? fetch : null;
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
       // a momentary CORS/WebKit hiccup) must not force EVERY later query onto the slower whole-answer

@@ -76,11 +76,26 @@ async function verifyFirebaseToken(token, env) {
 export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
 
 // Returns { id, guest } — id is an opaque, non-PHI key. Never the raw email/IP in the clear.
+// Pull the email out of an ALREADY-VERIFIED Firebase token payload (verifyFirebaseToken checked the
+// signature/aud/iss/exp before we get here, so decoding the payload is safe).
+function emailFromBearer(tok) {
+  try {
+    const p = String(tok || "").split("."); if (p.length < 2) return null;
+    let s = p[1].replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "=";
+    const bin = atob(s), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const j = JSON.parse(new TextDecoder().decode(u));
+    return j && j.email ? String(j.email).toLowerCase() : null;
+  } catch (e) { return null; }
+}
+
 export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
   if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || null }; }
+  // verifyFirebaseToken returns the uid STRING (payload.sub) or null — NOT an object. Reading .uid off
+  // it made every signed-in user fall through to the guest branch, so accounts were metered by IP: many
+  // doctors behind one hospital IP shared a single guest bucket and hit the cap (owners are admin-exempt).
+  if (tok) { const uid = await verifyFirebaseToken(tok, env); if (uid) return { id: "fb:" + uid, guest: false, email: emailFromBearer(tok) }; }
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
