@@ -51,11 +51,12 @@ test("mock gateway can be told to fail the session (fail-closed path)", async ()
   assert.equal(s.status, 401);
 });
 
-test("mock gateway stores adversarial delivery knobs for Stage 4", () => {
+test("mock gateway stores independent adversarial delivery knobs for Stage 4", () => {
   const g = makeMockGateway();
-  g.setBehavior({ pushOrder: "out-of-order", callbackDelayMs: 10 });
-  assert.equal(g.behavior.pushOrder, "out-of-order");
-  assert.equal(g.behavior.callbackDelayMs, 10);
+  g.setBehavior({ outOfOrder: true, duplicate: true });   // independent flags combine
+  assert.equal(g.behavior.outOfOrder, true);
+  assert.equal(g.behavior.duplicate, true);
+  assert.equal(g.behavior.partial, false);                // untouched flags stay default
 });
 
 import { makeGateway } from "../../../functions/_connect/abdm/gateway.js";
@@ -94,10 +95,12 @@ test("session() fails closed on a non-2xx session response", async () => {
   await assert.rejects(() => gw.session(), AbdmError);
 });
 
-test("post() attaches a fresh REQUEST-ID + auth header and returns on 202", async () => {
+test("post() attaches a fresh REQUEST-ID + auth header and returns { status, body } on 202", async () => {
   const mock = makeMockGateway();
   const gw = makeGateway(deps(mock));
-  await gw.post("hiRequest", { hiRequest: { consent: { id: "c1" } } });
+  const r = await gw.post("hiRequest", { hiRequest: { consent: { id: "c1" } } });
+  assert.equal(r.status, 202);          // Stage-4 distinguishes 202-accept from 200-inline
+  assert.deepEqual(r.body, {});         // fire-and-forget: empty body
   const call = mock.calls.find((c) => c.path === ENDPOINTS.hiRequest);
   assert.ok(call.headers["REQUEST-ID"]);
   assert.equal(call.headers.authorization, "Bearer mock-token-1");

@@ -12,18 +12,28 @@ export const ENDPOINTS = {
   hiNotify:     "/health-information/notify",         // VERIFY
 };
 
+// ADR-2H field-name seam — VERIFY against live Postman/Swagger (OAuth2 is often snake_case; ABDM V1↔V3 differs).
+export const FIELDS = {
+  reqClientId:     "clientId",           // VERIFY session request body keys
+  reqClientSecret: "clientSecret",       // VERIFY
+  reqGrantType:    "grantType",          // VERIFY
+  grantTypeValue:  "client_credentials", // VERIFY
+  resAccessToken:  "accessToken",        // VERIFY session response keys (may be "access_token")
+  resExpiresIn:    "expiresIn",          // VERIFY (may be "expires_in")
+};
+
 export function requestId() { return globalThis.crypto.randomUUID(); }
 
 export function gatewayHeaders({ token, cmId, hiuId, hipId, now }) {
   const h = {
-    authorization: "Bearer " + token,
-    "X-CM-ID": cmId || "sbx",
-    "REQUEST-ID": requestId(),                       // fresh per call — gateway rejects reuse
-    TIMESTAMP: (now ? now() : new Date()).toISOString(),
-    "content-type": "application/json",
+    authorization: "Bearer " + token,                // VERIFY: header name
+    "X-CM-ID": cmId || "sbx",                         // VERIFY: header name
+    "REQUEST-ID": requestId(),                        // VERIFY: header name — fresh per call, gateway rejects reuse
+    TIMESTAMP: (now ? now() : new Date()).toISOString(), // VERIFY: header name
+    "content-type": "application/json",              // VERIFY: header name
   };
-  if (hiuId) h["X-HIU-ID"] = hiuId;
-  if (hipId) h["X-HIP-ID"] = hipId;
+  if (hiuId) h["X-HIU-ID"] = hiuId;                  // VERIFY: header name
+  if (hipId) h["X-HIP-ID"] = hipId;                  // VERIFY: header name
   return h;
 }
 
@@ -41,13 +51,13 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secre
     if (!clientId || !clientSecret) throw new AbdmError("ABDM client credentials not configured");
     let res;
     try { res = await fetch(baseUrl + ENDPOINTS.sessions, { method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ clientId, clientSecret, grantType: "client_credentials" }) }); }
+      body: JSON.stringify({ [FIELDS.reqClientId]: clientId, [FIELDS.reqClientSecret]: clientSecret, [FIELDS.reqGrantType]: FIELDS.grantTypeValue }) }); }
     catch (e) { throw new AbdmError("session request failed: " + e.message); }
     if (!res.ok) throw new AbdmError("session HTTP " + res.status);
     let j; try { j = await res.json(); } catch { throw new AbdmError("session returned invalid JSON"); }
-    const token = j.accessToken;
+    const token = j[FIELDS.resAccessToken];
     if (!token) throw new AbdmError("session returned no accessToken");
-    const ttlSec = Math.min(Math.max(0, (Number(j.expiresIn) || 0) - 30), 3600);  // 30s skew, cap at 1h (anti-wedge)
+    const ttlSec = Math.min(Math.max(0, (Number(j[FIELDS.resExpiresIn]) || 0) - 30), 3600);  // 30s skew, cap at 1h (anti-wedge)
     const exp = clock().getTime() + ttlSec * 1000;
     if (ttlSec >= 60) {                       // only cache a usefully-long token; KV min TTL is 60s
       try { await kv.put(tokKey, JSON.stringify({ token, exp }), { expirationTtl: ttlSec }); } catch { /* best-effort */ }
@@ -63,7 +73,8 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secre
     try { res = await fetch(baseUrl + path, { method: "POST", headers: gatewayHeaders({ token, cmId, hiuId, hipId, now: clock }), body: JSON.stringify(body) }); }
     catch (e) { throw new AbdmError(endpointKey + " request failed: " + e.message); }
     if (res.status !== 202 && !res.ok) throw new AbdmError(endpointKey + " HTTP " + res.status);
-    try { return await res.json(); } catch { return {}; }
+    let parsed; try { parsed = await res.json(); } catch { parsed = {}; }
+    return { status: res.status, body: parsed };   // Stage-4: distinguish 202-accept from 200-inline, log status
   }
 
   return { session, post };
