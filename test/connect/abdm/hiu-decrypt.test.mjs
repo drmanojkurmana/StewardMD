@@ -106,6 +106,7 @@ test("2. joined → each entry decrypts + checksum-verifies → acked:true, TRAN
   const res = await consumeTransfer(ENV, deps, { transactionId: "txn-2", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" });
 
   assert.equal(res.acked, true);
+  assert.equal(res.advanced, true, "winner advanced RECEIVING → terminal (surfaced, not swallowed)");
   assert.deepEqual(res.decrypted.sort(), [A, B].sort());        // both bundles recovered, checksum-verified
   // exactly-once notify with the transaction_id + the passed-through sessionStatus.
   assert.equal(deps.gateway.calls.length, 1);
@@ -219,9 +220,76 @@ test("5. pre-claimed ack (buffer still present) → claimAck loses → no notify
   const res = await consumeTransfer(ENV, deps, { transactionId: "txn-5", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" });
 
   assert.equal(res.acked, false, "lost the CAS → not the finaliser");
+  assert.deepEqual(res.decrypted, [], "lost-CAS caller receives NO plaintext (no re-decrypted PHI)");
   assert.equal(deps.gateway.calls.length, 0, "no duplicate hiNotify");
   assert.equal((await listBuffered(r2, "txn-5")).length, 1, "loser did NOT delete the buffer");
   assert.equal((await getTxnByRequestId(db, "req-5")).status, "RECEIVING", "loser did NOT advance the FSM");
+});
+
+// ── 7. a NON-Fidelius decrypt error is a genuine bug → it PROPAGATES (fail-closed): no ack/notify/delete. ─
+// (openEntry is a FideliusError fortress, so inject a plain-Error openEntry via the test-only deps seam.)
+test("7. a non-Fidelius decrypt error propagates (fail-closed) — no ack, notify, delete, or advance", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  const s = await makeSession();
+  const e = await s.seal("{}");
+  await bufferEntry(r2, ENV, "txn-7", "cc-1", e.content, e.checksum, NOW);
+  await seedTxn(db, s, { requestId: "req-7", transactionId: "txn-7" });
+
+  const deps = makeDeps(db, r2, { openEntry: async () => { throw new Error("boom-not-fidelius"); } });
+  await assert.rejects(
+    () => consumeTransfer(ENV, deps, { transactionId: "txn-7", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" }),
+    (err) => err instanceof Error && !(err instanceof FideliusError) && /boom-not-fidelius/.test(err.message));
+
+  // A propagated (non-Fidelius) error must leave NOTHING finalised.
+  assert.equal(deps.gateway.calls.length, 0, "no notify on a propagated bug");
+  assert.equal((await listBuffered(r2, "txn-7")).length, 1, "buffer intact (never deleted)");
+  assert.equal((await getTxnByTransactionId(db, "txn-7")).ack_claimed, 0, "ack never claimed");
+  assert.equal((await getTxnByRequestId(db, "req-7")).status, "RECEIVING", "FSM not advanced");
+});
+
+// ── 8. hiNotify throws AFTER the CAS win → fail-safe ordering leaves a CONSISTENT end state; retry ≠ double-notify.
+test("8. notify throws after the CAS win → buffer deleted + status terminal (fail-safe), retry does not re-notify", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  const s = await makeSession();
+  const e = await s.seal(JSON.stringify({ resourceType: "Bundle", id: "n8" }));
+  await bufferEntry(r2, ENV, "txn-8", "cc-1", e.content, e.checksum, NOW);
+  await seedTxn(db, s, { requestId: "req-8", transactionId: "txn-8" });
+
+  // Gateway RECORDS then THROWS — models a notify failure AFTER the winner already advanced + deleted.
+  const calls = [];
+  const throwingGateway = { post: async (endpointKey, body) => { calls.push({ endpointKey, body }); throw new Error("gateway 503"); }, calls };
+  const deps = makeDeps(db, r2, { gateway: throwingGateway });
+  const arg = { transactionId: "txn-8", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" };
+
+  await assert.rejects(() => consumeTransfer(ENV, deps, arg), /gateway 503/);
+  // FAIL-SAFE: advance + delete ran BEFORE the notify throw → status terminal + buffer gone (not a stranded RECEIVING).
+  assert.equal((await getTxnByRequestId(db, "req-8")).status, "TRANSFERRED", "status advanced to terminal before notify");
+  assert.equal((await listBuffered(r2, "txn-8")).length, 0, "buffer deleted before the notify throw");
+  assert.equal((await getTxnByTransactionId(db, "txn-8")).ack_claimed, 1, "ack was claimed (the winner)");
+  assert.equal(calls.length, 1, "notify attempted exactly once");
+
+  // RETRY after the fail-safe finalize: buffer gone → ready:false → pure no-op, NO double-notify (Stage-6 sweep re-notifies).
+  const retry = await consumeTransfer(ENV, deps, arg);
+  assert.deepEqual(retry, { decrypted: [], acked: false, advanced: false });
+  assert.equal(calls.length, 1, "retry did NOT re-notify");
+});
+
+// ── 9. a winner whose advanceStatus is a STALE {ok:false} no-op surfaces advanced:false (never swallowed). ─
+test("9. winner with a stale advance (txn not in RECEIVING) → acked:true but advanced:false (surfaced)", async () => {
+  const db = makeAbdmDb({}), r2 = makeR2();
+  const s = await makeSession();
+  const e = await s.seal(JSON.stringify({ resourceType: "Bundle", id: "st" }));
+  await bufferEntry(r2, ENV, "txn-9", "cc-1", e.content, e.checksum, NOW);
+  // Ready + correlated, but the txn is NOT in RECEIVING → advanceStatus("RECEIVING"→outcome) is a {ok:false} stale no-op.
+  await seedTxn(db, s, { requestId: "req-9", transactionId: "txn-9", status: "REQUESTED" });
+
+  const deps = makeDeps(db, r2);
+  const res = await consumeTransfer(ENV, deps, { transactionId: "txn-9", hipKeyMaterial: s.hipKeyMaterial, sessionStatus: "TRANSFERRED" });
+
+  assert.equal(res.acked, true, "won the CAS");
+  assert.equal(res.advanced, false, "stale advance SURFACED, not swallowed — flags an acked-but-non-terminal txn");
+  assert.equal(deps.gateway.calls.length, 1, "still the exactly-once notifier");
+  assert.equal((await getTxnByRequestId(db, "req-9")).status, "REQUESTED", "the stale advance left the FSM unchanged");
 });
 
 // ── 6. a low-order / bad HIP pubkey → FideliusError, FAIL-CLOSED (no decrypt-finalise, no ack/notify/delete). ─

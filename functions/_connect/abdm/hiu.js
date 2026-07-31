@@ -240,10 +240,13 @@ export async function requestHealthInformation(env, deps, req) {
 // checksum-verified in ISOLATION, so one entry's GCM-auth/checksum failure fails THAT entry closed
 // (contributing to PARTIAL/FAILED) and NEVER poisons its siblings — we NEVER batch/concatenate the ciphertexts.
 // Exactly-once (R8): a single D1 CAS (claimAck) is the SOLE arbiter of who finalises; ONLY that winner
-// notifies the gateway, deletes the R2 buffer (retiring the sealed key with the row on GC), and advances the
-// txn FSM. A retry after the ack either loses the CAS or finds the buffer already gone → a pure no-op: no
-// second notify, no duplicate ack, no re-buffer. The decrypted NDHM JSON is REQUEST-SCOPED ONLY — it is
-// returned to the caller and NEVER persisted or logged.
+// advances the txn FSM to its terminal outcome + deletes the R2 buffer, THEN notifies the gateway (FAIL-SAFE
+// ordering — a notify throw leaves buffer-gone + status-terminal + receipt-lost, recovered by a Stage-6 sweep
+// re-notify, never a stranded buffer-full RECEIVING txn). A retry after the ack either loses the CAS or finds
+// the buffer already gone → a pure no-op that returns NO plaintext: no second notify, no duplicate ack, no
+// re-buffer, and a lost-CAS caller receives an EMPTY decrypted set (never re-decrypted PHI). The winner also
+// SURFACES (never swallows) a stale advance via an `advanced` flag. The decrypted NDHM JSON is REQUEST-SCOPED
+// ONLY — returned to the winner and NEVER persisted or logged.
 const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0)); // local; no new deps
 
 // deps = { db, r2, secrets, gateway, now }. `hipKeyMaterial = { dhPublicKey, nonce }` (both base64) is the
@@ -253,7 +256,7 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   // (1) Join precondition. A push that landed BEFORE on-request (no correlated txn yet), or a buffer already
   //     deleted by a prior winning ack, is NOT ready → a clean no-op that leaves the buffer exactly as-is.
   const { ready, entries, txn } = await tryJoin(deps.db, deps.r2, env, transactionId);
-  if (!ready) return { decrypted: [], acked: false };
+  if (!ready) return { decrypted: [], acked: false, advanced: false };
 
   // (2) Unseal OUR ephemeral private scalar and derive the Fidelius shared secret against the HIP pubkey.
   //     sharedSecret fails CLOSED on a low-order/bad HIP pubkey (FideliusError) BEFORE any entry is touched and
@@ -267,28 +270,38 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   // (3) STRICT PER-ENTRY decrypt (R1). Each entry is opened + checksum-verified on its OWN; a FideliusError
   //     (GCM auth OR post-decrypt checksum mismatch) fails THAT one entry closed and is counted as a failure —
   //     it never poisons a sibling. Any NON-Fidelius error is a genuine bug and propagates (fail-closed).
+  // `deps.openEntry` is a TEST-ONLY injection seam (defaults to the real import) so the non-Fidelius error
+  // path is exercisable; production behaviour is identical (deps.openEntry is undefined in prod).
+  const open = deps.openEntry || openEntry;
   const decrypted = [];
   let failures = 0;
   for (const entry of entries) {
     try {
-      decrypted.push(await openEntry(secret, ourNonce, hipNonce, entry.contentB64, entry.checksum));
+      decrypted.push(await open(secret, ourNonce, hipNonce, entry.contentB64, entry.checksum));
     } catch (e) {
-      if (!(e instanceof FideliusError)) throw e;
+      if (!(e instanceof FideliusError)) throw e;   // a NON-Fidelius error is a genuine bug → propagate (fail-closed)
       failures++;
     }
   }
   const outcome = failures === 0 ? "TRANSFERRED" : decrypted.length > 0 ? "PARTIAL" : "FAILED";
 
   // (4) Exactly-once finalisation (R8). The D1 CAS is the SOLE arbiter — NO read-then-write. Only the caller
-  //     that flips ack_claimed 0→1 finalises. A lost CAS returns immediately as a pure no-op (no dup notify /
-  //     delete / advance). CARRY-FORWARD: advanceStatus is request_id-keyed but we hold only transactionId —
-  //     use txn.request_id from the join, NEVER the transactionId.
+  //     that flips ack_claimed 0→1 finalises. A LOST CAS (already-claimed retry) returns a pure no-op with an
+  //     EMPTY decrypted set — a non-winner must NEVER receive re-decrypted PHI (the plaintext it decrypted above
+  //     is discarded here).
   const won = await claimAck(deps.db, transactionId, deps.now);
-  if (!won) return { decrypted, acked: false };
+  if (!won) return { decrypted: [], acked: false, advanced: false };
 
-  await deps.gateway.post("hiNotify", { transactionId, sessionStatus });
+  // FAIL-SAFE ORDERING: advance the FSM to its terminal outcome and delete the R2 buffer BEFORE notifying, so a
+  // gateway notify throw leaves a CONSISTENT end state (status terminal + buffer deleted + receipt-lost) instead
+  // of a stranded buffer-full RECEIVING txn; the lost receipt is recovered by the Stage-6 sweep re-notify
+  // (documented carry-forward). Still exactly-once: only the CAS winner ever reaches this block.
+  // CARRY-FORWARD: advanceStatus is request_id-keyed but we hold only transactionId — use txn.request_id.
+  const advance = await advanceStatus(deps.db, txn.request_id, "RECEIVING", outcome, deps.now);
   await deleteBuffered(deps.r2, transactionId);
-  await advanceStatus(deps.db, txn.request_id, "RECEIVING", outcome, deps.now);
+  await deps.gateway.post("hiNotify", { transactionId, sessionStatus });
 
-  return { decrypted, acked: true };
+  // SURFACE (never swallow) a stale advance: a winner whose advanceStatus is a {ok:false} no-op (the txn was
+  // not in RECEIVING) is an anomaly — an acked-but-non-terminal txn — flagged to the caller via `advanced:false`.
+  return { decrypted, acked: true, advanced: advance.ok === true };
 }
