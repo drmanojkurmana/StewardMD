@@ -82,7 +82,7 @@ async function handleAnalyze(request, env) {
     const store = usageKv(env);
     if (store) {
       const who = await identify(request, env);
-      const mq = await gateAndCount(env, store, "ecg", who.id, who.guest ? "guest" : "unknown", Date.now());
+      const mq = await gateAndCount(env, store, "ecg", who.id, who.guest ? "guest" : "unknown", Date.now(), who.email);
       if (!mq.ok) return err(429, "daily_limit", "Daily limit reached: " + mq.limit + " ECG uploads per day. This resets at midnight.", "upload");
     }
   } catch (e) { /* fail-open */ }
