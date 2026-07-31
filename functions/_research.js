@@ -49,7 +49,8 @@ const RESEARCH_STOP = new Set((
   "best better worse worst superior inferior same equal give given single answer please tell think about " +
   "compare comparison between difference good bad prefer preferred choice choose better-or-worse " +
   "use used using role effect effects efficacy safety patient patients adult adults case cases per over " +
-  "just also only even still yet now here there really actually simply kindly want need get"
+  "just also only even still yet now here there really actually simply kindly want need get " +
+  "one two three four five six seven eight nine ten so them"
 ).split(/\s+/));
 
 // The salient keyword set of a question (for building the query AND the relevance guard).
@@ -79,4 +80,19 @@ export function sourceOnTopic(title, keywords) {
     if (w && w.length >= 5 && t.indexOf(w) >= 0) return true;
   }
   return false;
+}
+
+// Retrieval topic WITH follow-up context. Use the current question's keywords; but when the question
+// is a pure follow-up carrying NO topic keyword of its own ("which is better?", "what do you think?",
+// "one answer", "why?") — everything filtered as filler — fall back to the most recent PRIOR user turn
+// that HAS a topic, so the search stays on what's under discussion. `history` is [{q, a}, ...] (recent
+// last). A question that names ANY topic term of its own (even a short one like "DKA") uses itself.
+export function researchTopic(q, history) {
+  if (researchKeywords(q).length) return researchTermFor(q);
+  const h = Array.isArray(history) ? history : [];
+  for (var i = h.length - 1; i >= 0; i--) {
+    var pq = (h[i] && (h[i].q || h[i].question)) || "";
+    if (pq && researchKeywords(pq).length) return researchTermFor(pq + " " + q) || researchTermFor(pq);
+  }
+  return researchTermFor(q);
 }

@@ -3945,10 +3945,13 @@
     // one grounded call, short answer; only invoked on an explicit user tap.
     // `mode` is optional. Omit for the classic web-research path; pass "evidence-review" for MaiK
     // Research Mode (trusted medical-literature synthesis, PubMed-grounded, 2/day + cached server-side).
-    research: function (question, mode) {
+    research: function (question, mode, history) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
       var payload = { question: q }; if (mode) payload.mode = String(mode);
+      // Recent conversation turns so a short follow-up ("which is better?", "one answer") stays on the
+      // topic under discussion instead of re-searching the vague follow-up text.
+      if (Array.isArray(history) && history.length) payload.history = history.slice(-4).map(function (t) { return { q: String((t && t.q) || "").slice(0, 300), a: String((t && t.a) || "").slice(0, 300) }; });
       // Web research does an extra Google-grounding round-trip so it can run longer than a plain
       // explain — but it MUST still be bounded, or a stalled /research (Gemini grounding hang, flaky
       // network) leaves the "Researching the web…" bubble spinning forever. raceTimeout, not an

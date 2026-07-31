@@ -3198,7 +3198,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (_maikBusy) return;
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
       var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)">' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
-      window.SMD_AI.research(q, "evidence-review").then(function (r) {
+      window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
         _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         // Over the 2/day cap -> a clear message, NOT an error.
         if (r && r.over) {
@@ -3222,6 +3222,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           if (r.usage && r.usage.limit) { meta = ' <span style="opacity:.7">· ' + (r.usage.used || 0) + ' of ' + r.usage.limit + ' today' + (r.cached ? ', cached' : '') + '</span>'; }
           else if (r.cached) { meta = ' <span style="opacity:.7">· cached</span>'; }
           think.innerHTML = '<div class="maik-attr" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK Evidence Review</span><span style="opacity:.7">· trusted literature, verify independently</span>' + meta + '</div>' + bd + srcHTML;
+          try { _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } catch (e) {}
         } else {
           think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>';
         }

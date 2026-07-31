@@ -6,7 +6,7 @@
  * Fix: build the PubMed term from salient KEYWORDS only (researchTermFor), and drop off-topic
  * retrieved papers with a title-keyword relevance guard (sourceOnTopic). */
 import assert from "node:assert";
-import { researchTermFor, researchKeywords, sourceOnTopic } from "../functions/_research.js";
+import { researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../functions/_research.js";
 
 let pass = 0;
 const ok = (c, m) => { assert.ok(c, m); console.log("✅ " + m); pass++; };
@@ -34,4 +34,13 @@ ok(!sourceOnTopic("Preventive drug treatments for adults with chronic migraine",
 const vagueKw = researchKeywords("what do you think is superior or inferior or same? just answer single answer");
 ok(!vagueKw.some((w) => w.length >= 5), `vague follow-up has no specific keyword -> relevance guard blocks all (kw=${JSON.stringify(vagueKw)})`);
 
-console.log(`\nALL ${pass} PASS — research query is sanitized + relevance-guarded`);
+// ── follow-up context (researchTopic) ────────────────────────────────────────
+const HIST = [{ q: "Endoscopic banding vs beta blocker for esophageal varices", a: "carvedilol / EVL discussion" }];
+const t1 = researchTopic("what do you think? just one answer", HIST);
+ok(/varices/.test(t1) && /esophageal/.test(t1), `vague follow-up inherits prior topic (got "${t1}")`);
+const t2 = researchTopic("management of DKA", HIST);
+ok(/dka/.test(t2) && !/varices/.test(t2), `question naming its own topic ignores history, even a short abbrev (got "${t2}")`);
+ok(researchTopic("which is better?", []) === "", "vague follow-up with no history -> empty topic (answer from knowledge)");
+ok(researchTopic("esophageal varices treatment", HIST).includes("varices"), "normal question uses its own keywords");
+
+console.log(`\nALL ${pass} PASS — research query is sanitized + relevance-guarded + context-aware`);
