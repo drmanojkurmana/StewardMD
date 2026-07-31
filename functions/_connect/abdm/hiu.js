@@ -9,9 +9,9 @@
 // bites at the data request (R3), so a sandbox and a live tenant both reach the gateway the same way.
 import { resolveActor, resolveTenant } from "../identity.js";
 import { hmacPseudonym } from "../audit.js";
-import { putConsentReq, getConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered, advanceStatus } from "./state.js";
+import { putConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered, advanceStatus } from "./state.js";
 import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, FideliusError } from "./fidelius.js";
-import { revalidateForRequest } from "./consent.js";
+import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";
 import { AbdmError } from "./gateway.js";
 import { PermissionError } from "../permission.js";
 
@@ -152,6 +152,9 @@ export function buildHiRequestBody(F, { requestId, now, consentId, dateRange, da
 }
 
 const parseHiTypes = (v) => { if (v == null) return []; if (Array.isArray(v)) return v; try { return JSON.parse(v); } catch { return [v]; } };
+// Decode a persisted JSON scope column (care_contexts/purpose/date_range). Non-string ⇒ passthrough; a
+// non-JSON string ⇒ returned verbatim (fail-soft — revalidate's own array/purpose guards then fail closed).
+const parseJson = (v) => { if (v == null) return null; if (typeof v !== "string") return v; try { return JSON.parse(v); } catch { return v; } };
 
 // deps = { db, kv, secrets, gateway, identifyFn, audit, now }; req = { request, tenantId, consentId, consent,
 // careContexts, hiTypes, purpose, dateRange }. `req.consent` is the fetch-time JWS-verified grant, carrying its
@@ -166,21 +169,22 @@ export async function requestHealthInformation(env, deps, req) {
   const { tenant } = await resolveTenant(db, actor.id, req.tenantId);
   const tenantId = tenant.id;
 
-  // (1b) R3 mode:live GATE — reload the CURRENT consent state FRESH from D1 (the GRANTED row Task-5 persisted,
-  //      keyed by consentId) and re-run the request-time checklist. D1 is authoritative for the MUTABLE,
-  //      revocation-sensitive fields it persists (status, hiTypes, expiry) — so a since-REVOKED/EXPIRED/narrowed
-  //      consent is caught HERE, never trusted from a cached fetch-time status. The immutable JWS-signed scope
-  //      (careContexts, permission.dateRange, purpose) rides on the fetch-time-verified artifact (req.consent)
-  //      until persistGranted stores it too (see report concern). A missing row => status null => fail-closed.
-  const fresh = await getConsentReq(db, req.consentId);
+  // (1b) R3 mode:live GATE — reload the ONE reconciled consent row FRESH from D1 by its durable join key
+  //      (consent_id), then re-run the request-time checklist. The row is now AUTHORITATIVE for BOTH the
+  //      revocation-sensitive status AND the full SIGNED scope (careContexts/hiTypes/purpose/dateRange/expiry)
+  //      that verifyConsentArtifact persisted onto it — so a since-REVOKED/EXPIRED/narrowed consent is caught
+  //      HERE off the DB, never trusted from a cached fetch-time artifact. req.consent is only a defensive
+  //      fallback for a scope column not yet persisted (pre-reconciliation rows). A missing row => status null
+  //      => fail-closed. // VERIFY: resolves by consent_id (the join the GRANT notify linked), not request_id.
+  const fresh = await getConsentReqByConsentId(db, req.consentId);
   const bound = (req.consent && typeof req.consent === "object") ? req.consent : {};
   const consent = {
     id: (fresh && fresh.consent_id) || req.consentId,
-    careContexts: bound.careContexts || [],
-    purpose: bound.purpose ?? null,
-    permission: bound.permission || { dateRange: {} },
     status: fresh ? fresh.status : null,                                          // FRESH — the revocation catch
+    careContexts: (fresh && fresh.care_contexts != null) ? parseJson(fresh.care_contexts) : (bound.careContexts || []),
     hiTypes: (fresh && fresh.hi_types != null) ? parseHiTypes(fresh.hi_types) : (bound.hiTypes || []),
+    purpose: (fresh && fresh.purpose != null) ? parseJson(fresh.purpose) : (bound.purpose ?? null),
+    permission: { dateRange: (fresh && fresh.date_range != null) ? parseJson(fresh.date_range) : ((bound.permission && bound.permission.dateRange) || {}) },
     expiry: (fresh && fresh.expires_at != null) ? fresh.expires_at : (bound.expiry ?? null),
   };
   const gate = revalidateForRequest(consent, req, now);

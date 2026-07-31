@@ -12,6 +12,7 @@ import {
   updateConsentStatus, attachTransactionId, advanceStatus, claimAck,
   bufferEntry,
 } from "./state.js";
+import { linkConsentId, getConsentReqByConsentId } from "./consent.js"; // one-row reconciliation join (state.js is frozen this stage)
 
 // Pinned inbound algs (asymmetric-only; jws.js re-intersects with its own allow-list, so HS*/none can never
 // survive even if this widened). // VERIFY which one ABDM actually signs with (research WAF-blocked).
@@ -57,7 +58,7 @@ function fresh(tsHeader, nowFn) {
 // null (the caller 403s BEFORE any R2 write). requestId is CARRIED FORWARD from the txn so the request_id-keyed
 // FSM (advanceStatus) can key off it even for a transfer event that shipped only a transaction_id.
 async function correlate(db, ev) {
-  const tid = ev.transactionId, rid = ev.requestId;
+  const tid = ev.transactionId, rid = ev.requestId, cid = ev.consentId;
   if (tid != null) {
     const txn = await getTxnByTransactionId(db, tid);
     if (txn) return { requestId: txn.request_id, transactionId: tid, tenantId: txn.tenant_id };
@@ -65,6 +66,13 @@ async function correlate(db, ev) {
   if (rid != null) {
     const cr = await getConsentReq(db, rid);
     if (cr) return { requestId: rid, transactionId: tid ?? null, tenantId: cr.tenant_id };
+  }
+  // Durable-join fallback (R6/R3): once the GRANT notify LINKED consent_id onto the lifecycle row, a later
+  // notify (REVOKE/EXPIRE) that echoes ONLY the consentId still correlates to that ONE row — removing the
+  // dependence on ABDM re-echoing our internal requestId on every callback. // VERIFY the notify's real ids.
+  if (cid != null) {
+    const cr = await getConsentReqByConsentId(db, cid);
+    if (cr) return { requestId: cr.request_id, transactionId: tid ?? null, tenantId: cr.tenant_id };
   }
   return null;
 }
@@ -108,6 +116,7 @@ export async function handleIngress(env, deps, request) {
     const now = deps.now;
     const rawEvent = { ...ev, requestId: corr.requestId };
     const boundDeps = {
+      linkConsentId: (rid, cid, n) => linkConsentId(deps.db, rid, cid, n),
       updateConsentStatus: (rid, st, n) => updateConsentStatus(deps.db, rid, st, n),
       attachTransactionId: (rid, tid, n) => attachTransactionId(deps.db, rid, tid, n),
       advanceStatus: (rid, f, t, n) => advanceStatus(deps.db, rid, f, t, n),

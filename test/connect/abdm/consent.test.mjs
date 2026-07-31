@@ -11,8 +11,11 @@
 // the REAL pinned primitive, driven by a mock fetch (happy) or forced to fail-closed by an unset URL.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fetchConsentArtifact, verifyConsentArtifact, revalidateForRequest } from "../../../functions/_connect/abdm/consent.js";
-import { getConsentReq } from "../../../functions/_connect/abdm/state.js";
+import { fetchConsentArtifact, verifyConsentArtifact, revalidateForRequest, getConsentReqByConsentId, linkConsentId } from "../../../functions/_connect/abdm/consent.js";
+import { getConsentReq, putConsentReq, updateConsentStatus } from "../../../functions/_connect/abdm/state.js";
+import { ingestEvent } from "../../../functions/_connect/engine.js";
+import { requestHealthInformation } from "../../../functions/_connect/abdm/hiu.js";
+import { PermissionError } from "../../../functions/_connect/permission.js";
 import { ALLOW, buildAuditEvent } from "../../../functions/_connect/audit.js";
 import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
 
@@ -212,4 +215,116 @@ test("revalidate: fail-closed on a request that names no careContexts or no hiTy
 test("revalidate: fail-closed on a malformed dateRange or an unparseable `now`", () => {
   assert.equal(revalidateForRequest({ ...consent(), permission: { dateRange: { from: "x", to: "y" } } }, req(), NOW).ok, false);
   assert.equal(revalidateForRequest(consent(), req(), "not-a-date").ok, false);
+});
+
+// ── Adversary-A hardening (R4): purpose null must fail CLOSED; a non-array scope must not throw ──────────
+test("revalidate: purpose null on BOTH sides fails CLOSED (never a null==null match) → reason:purpose", () => {
+  const r = revalidateForRequest({ ...consent(), purpose: null }, req({ purpose: null }), NOW);
+  assert.deepEqual(r, { ok: false, reason: "purpose" });
+});
+
+test("revalidate: purpose absent on EITHER side alone fails closed", () => {
+  assert.equal(revalidateForRequest({ ...consent(), purpose: null }, req(), NOW).ok, false, "granted purpose absent");
+  assert.equal(revalidateForRequest(consent(), req({ purpose: undefined }), NOW).ok, false, "requested purpose absent");
+});
+
+test("revalidate: a non-array consent.careContexts returns {ok:false} — no throw on .map (Adversary-A)", () => {
+  const c = { ...consent(), careContexts: "cc-A" };   // corrupt/non-array granted scope
+  assert.doesNotThrow(() => revalidateForRequest(c, req(), NOW));
+  assert.equal(revalidateForRequest(c, req(), NOW).ok, false);
+});
+
+test("revalidate: a non-array consent.hiTypes returns {ok:false} — no throw on .map (Adversary-A)", () => {
+  const c = { ...consent(), hiTypes: { OPConsultation: true } };   // corrupt/non-array granted scope
+  assert.doesNotThrow(() => revalidateForRequest(c, req(), NOW));
+  assert.equal(revalidateForRequest(c, req(), NOW).ok, false);
+});
+
+// ── END-TO-END consent-binding reconciliation (R3/R4/R6) ────────────────────────────────────────────────
+// These prove the 3 Criticals are fixed through the REAL notify→updateConsentStatus→reload path (NOT by
+// hand-setting the row): the lifecycle converges on ONE monotonic row keyed by our internal requestId, with
+// the durable consent_id join linked by the GRANT notify and the full SIGNED scope persisted on verify.
+const RID = "req-internal-uuid-1", CID = "consent-xyz";
+const E2E_ENV = {
+  ...JWKS_ENV,
+  CONNECT_HMAC_SALT: Buffer.from("connect-test-hmac-salt-key-1234").toString("base64"),
+  CONNECT_ABDM_DATA_PUSH_URL: "https://stewardmd.in/api/connect/abdm/hiu/data",
+};
+const SD = () => signedDetail({ consentId: CID });   // signed artifact: cc-A/cc-B, OPConsultation/DiagnosticReport, CAREMGT, 2026 window
+const identifyUser = async () => ({ id: "fb:u1", guest: false });
+function spyGateway(status = 202) { const calls = []; return { post: async (endpointKey, body) => { calls.push({ endpointKey, body }); return { status, body: {} }; }, calls }; }
+const sealStub = { seal: async (s) => "SEALED:" + s, open: async (s) => s.slice(7) };
+
+function e2eDb() {
+  return makeAbdmDb({
+    connect_membership: [{ user_id: "fb:u1", tenant_id: "t1", role: "clinician" }],
+    connect_tenant: [{ id: "t1", mode: "sandbox" }],
+  });
+}
+// boundDeps mirroring ingress.js's composition root — real state fns, db pre-bound.
+const notifyDeps = (db) => ({
+  linkConsentId: (rid, cid, n) => linkConsentId(db, rid, cid, n),
+  updateConsentStatus: (rid, st, n) => updateConsentStatus(db, rid, st, n),
+  now: () => NOW,
+});
+const verifyDeps = (db) => ({
+  db, kv: kvMock(), secrets: null, gateway: null, fetch: jwksFetch(), audit: spyAudit(), now: () => NOW,
+  verifyJws: stubVerify({ ok: true, payload: SD() }),
+});
+const dataDeps = (db) => ({ db, kv: null, secrets: sealStub, gateway: spyGateway(), audit: spyAudit(), identifyFn: identifyUser, now: () => NOW });
+const dataReq = () => ({
+  request: {}, tenantId: "t1", consentId: CID, consent: undefined,   // no cached artifact — the DB row is authoritative
+  careContexts: ["cc-A"], hiTypes: ["OPConsultation"], purpose: { code: "CAREMGT" },
+  dateRange: { from: "2026-01-01T00:00:00.000Z", to: NOW },
+});
+// Seed the Task-1 lifecycle row (INITIATED, consent_id NULL) then deliver the GRANT notify + verify the artifact.
+async function grantThroughRealPath(db) {
+  await putConsentReq(db, { requestId: RID, tenantId: "t1", actor: "fb:u1", patientAbhaHash: "h", now: NOW });
+  await ingestEvent(E2E_ENV, notifyDeps(db), { type: "consent-notification", requestId: RID, consentId: CID, status: "GRANTED" });
+  const vr = await verifyConsentArtifact(E2E_ENV, verifyDeps(db), { signature: "h.p.s" });
+  assert.equal(vr.ok, true);
+}
+
+test("E2E reconciliation: GRANT notify links + verify persists the full SIGNED scope onto ONE row (no orphan)", async () => {
+  const db = e2eDb();
+  await grantThroughRealPath(db);
+  assert.equal(db._tables.connect_abdm_consent_req.length, 1, "exactly ONE lifecycle row — no orphan");
+  const row = await getConsentReqByConsentId(db, CID);
+  assert.equal(row.request_id, RID, "the SAME row keyed by our internal requestId (verify UPDATEd it, did not insert)");
+  assert.equal(row.status, "GRANTED");
+  assert.deepEqual(JSON.parse(row.care_contexts), ["cc-A", "cc-B"], "signed careContexts persisted");
+  assert.deepEqual(JSON.parse(row.hi_types), ["OPConsultation", "DiagnosticReport"], "signed hiTypes persisted");
+  assert.deepEqual(JSON.parse(row.purpose), { code: "CAREMGT", text: "Care Management" }, "signed purpose persisted");
+  const dr = JSON.parse(row.date_range);
+  assert.ok(dr.from && dr.to, "signed dateRange persisted");
+  // the data-request reloads THAT reconciled row (by consent_id) and is honored off the DB scope alone.
+  const dd = dataDeps(db);
+  const out = await requestHealthInformation(E2E_ENV, dd, dataReq());
+  assert.equal(out.status, "REQUESTED");
+  assert.equal(dd.gateway.calls.length, 1, "gateway called — the reload found GRANTED + full scope");
+});
+
+test("E2E R3: a since-REVOKED consent (revoked via the REAL notify path) refuses the data-request", async () => {
+  const db = e2eDb();
+  await grantThroughRealPath(db);
+  await ingestEvent(E2E_ENV, notifyDeps(db), { type: "consent-notification", requestId: RID, consentId: CID, status: "REVOKED" });
+  assert.equal((await getConsentReqByConsentId(db, CID)).status, "REVOKED", "the ONE row is now REVOKED");
+  const dd = dataDeps(db);
+  await assert.rejects(() => requestHealthInformation(E2E_ENV, dd, dataReq()), PermissionError);
+  assert.equal(dd.gateway.calls.length, 0, "no gateway call — the reloaded row is REVOKED");
+  assert.equal((db._tables.connect_abdm_txn || []).length, 0, "no txn row on a refused request");
+});
+
+test("E2E R6: replaying the GRANTED artifact after REVOKE leaves the row REVOKED; data-request stays refused", async () => {
+  const db = e2eDb();
+  await grantThroughRealPath(db);
+  await ingestEvent(E2E_ENV, notifyDeps(db), { type: "consent-notification", requestId: RID, consentId: CID, status: "REVOKED" });
+  // REPLAY the validly-signed GRANTED artifact — the monotonic guard must NOT un-revoke the row.
+  const replay = await verifyConsentArtifact(E2E_ENV, verifyDeps(db), { signature: "h.p.s" });
+  assert.equal(replay.ok, true, "the signature is still valid...");
+  assert.equal(replay.persisted, false, "...but persistGranted was refused by the monotonic guard (nothing written)");
+  assert.equal((await getConsentReqByConsentId(db, CID)).status, "REVOKED", "the row STAYS REVOKED");
+  assert.equal(db._tables.connect_abdm_consent_req.length, 1, "still exactly one row");
+  const dd = dataDeps(db);
+  await assert.rejects(() => requestHealthInformation(E2E_ENV, dd, dataReq()), PermissionError);
 });

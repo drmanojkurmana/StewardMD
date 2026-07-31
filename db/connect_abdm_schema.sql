@@ -1,7 +1,15 @@
 -- db/connect_abdm_schema.sql — ABDM async state (additive; new tables only). No PHI (abha is HMAC'd).
+-- The consent lifecycle is ONE row per request_id (our internal correlation id from requestConsent). The GRANT
+-- consent-notify LINKS `consent_id` onto that row (the durable join), and verifyConsentArtifact UPDATEs the SAME
+-- row with the full SIGNED scope (care_contexts/hi_types/purpose/date_range/expires_at) so the data-request can
+-- re-validate off a fresh DB reload — never a cached fetch-time artifact. Status is monotonic (state.js guard).
 CREATE TABLE IF NOT EXISTS connect_abdm_consent_req (
   request_id TEXT PRIMARY KEY, tenant_id TEXT, actor TEXT, patient_abha_hash TEXT,   -- HMAC, not raw ABHA
-  status TEXT, consent_id TEXT, hi_types TEXT, created_at TEXT, updated_at TEXT, expires_at TEXT );
+  status TEXT, consent_id TEXT, hi_types TEXT,
+  care_contexts TEXT, purpose TEXT, date_range TEXT,   -- SIGNED scope persisted on verify (R4 reload authority)
+  created_at TEXT, updated_at TEXT, expires_at TEXT );
+-- `consent_id` is the durable join (linked by the GRANT notify); index it for the by-consent reload path.
+CREATE INDEX IF NOT EXISTS idx_abdm_consent_req_cid ON connect_abdm_consent_req(consent_id) WHERE consent_id IS NOT NULL;
 
 CREATE TABLE IF NOT EXISTS connect_abdm_txn (
   request_id TEXT PRIMARY KEY,                 -- keyed by requestId (R17); transaction_id attached at on-request

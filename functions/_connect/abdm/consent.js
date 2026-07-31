@@ -22,6 +22,7 @@
 // (avoids spurious rejection at the exact boundary instant; ABDM's permission.dateRange is a closed interval).
 // `expiry` is REQUIRED: a missing/unparseable expiry is fail-closed (we NEVER read "no expiry" as "never expires").
 import { verifyJws as realVerifyJws, getPinnedJwks } from "./jws.js";
+import { updateConsentStatus, ConnectStateError } from "./state.js"; // REUSE the Stage-3 monotonic guard (R6); do not duplicate the rank logic.
 
 // ── fetchConsentArtifact ────────────────────────────────────────────────────────────────────────────────
 // On a GRANTED consent-notify, fire the artifact fetch (fire-and-forget: the gateway 202-accepts and the
@@ -61,16 +62,20 @@ export async function verifyConsentArtifact(env, deps, artifact) {
     if (!consent || !consent.consentId) return deny("no-consentId");
     if (consent.status !== "GRANTED") return deny("not-granted");   // only a signed GRANT is persisted
 
-    await persistGranted(db, {
-      consentId: consent.consentId, hiTypes: consent.hiTypes,
+    // Persist the FULL signed scope onto the ONE reconciled lifecycle row (resolved via consent_id) through
+    // the MONOTONIC guard. A refused (terminal/lower-rank) transition — e.g. a replayed GRANTED arriving after
+    // REVOKED — persists nothing and leaves the row terminal; we do NOT audit consent.verified in that case.
+    const persisted = await persistGranted(db, {
+      consentId: consent.consentId, careContexts: consent.careContexts, hiTypes: consent.hiTypes,
+      purpose: consent.purpose, dateRange: consent.permission.dateRange,
       expiresAt: consent.expiry ?? consent.permission.dataEraseAt ?? null, now,
     });
-    if (audit) await audit({
+    if (persisted.ok && audit) await audit({
       action: "consent.verified", outcome: "ok", ts: now,
       resourceCounts: { hiTypes: consent.hiTypes.length, careContexts: consent.careContexts.length },
       scope: { consentId: consent.consentId },   // consentId is a non-PHI artifact id (R16)
     });
-    return { ok: true, consent };
+    return { ok: true, consent, persisted: persisted.ok };
   } catch (e) {
     return deny("exception:" + (e && e.message));   // absolute fail-closed backstop — NEVER "valid"
   }
@@ -81,25 +86,62 @@ async function auditDenied(audit, reason, now) {
   if (audit) await audit({ action: "consent.denied", outcome: "denied", ts: now, scope: { reason } });
 }
 
-// Persist the verified GRANTED artifact. Keyed by consentId (as request_id PK): verifyConsentArtifact holds
-// ONLY the artifact, not the internal Task-1 requestId, and consentId is the durable gateway-authoritative
-// join key from notify onward. Read-then-write UPSERT => idempotent on artifact re-delivery (anti-dup); the
-// mock/real D1 both honor `WHERE consent_id=?`. (A UNIQUE(consent_id) index would harden this at scale.)
-async function persistGranted(db, { consentId, hiTypes, expiresAt, now }) {
-  const hi = hiTypes == null ? null : JSON.stringify(hiTypes);
-  const existing = await db.prepare("SELECT * FROM connect_abdm_consent_req WHERE consent_id=?").bind(consentId).first();
-  if (existing) {
-    await db.prepare("UPDATE connect_abdm_consent_req SET status=?,hi_types=?,expires_at=?,updated_at=? WHERE consent_id=?")
-      .bind("GRANTED", hi, expiresAt, now, consentId).run();
-    return;
+// ── reconciliation helpers (the ONE-row join) ───────────────────────────────────────────────────────────
+// Resolve the lifecycle row by its durable join key. `consent_id` is NULL until the GRANT notify links it,
+// so a null lookup value never matches. Kept here (not state.js) because state.js is frozen this stage.
+export async function getConsentReqByConsentId(db, consentId) {
+  if (consentId == null) return null;
+  return (await db.prepare("SELECT * FROM connect_abdm_consent_req WHERE consent_id=?").bind(consentId).first()) || null;
+}
+
+// LINK the gateway consentId onto our lifecycle row (keyed by our internal requestId). Called from the GRANT
+// consent-notify (engine routing): it carries BOTH ids, so this is where the two halves converge onto ONE row.
+// // VERIFY: assumes ABDM's notify echoes our correlation requestId AND the consent artefact id (field mapping
+// unconfirmed — research WAF-blocked). Idempotent: re-linking the same consentId is a no-op-equivalent write.
+export async function linkConsentId(db, requestId, consentId, now) {
+  if (requestId == null || consentId == null) return { ok: false };
+  const res = await db.prepare("UPDATE connect_abdm_consent_req SET consent_id=?,updated_at=? WHERE request_id=?")
+    .bind(consentId, now, requestId).run();
+  if (!res || res.success === false) throw new ConnectStateError("linkConsentId update failed");
+  return { ok: (res.meta?.changes || 0) > 0 };
+}
+
+// Persist the verified SIGNED grant onto the ONE reconciled lifecycle row (resolved via consent_id — the join
+// the GRANT notify linked). Status goes through the Stage-3 MONOTONIC guard (updateConsentStatus), NEVER a raw
+// `status='GRANTED'`: a replayed GRANTED arriving after a terminal REVOKED/EXPIRED row is refused and the row
+// stays terminal. The full SIGNED scope (careContexts/hiTypes/purpose/dateRange/expiry) is persisted so the
+// data-request can revalidate off a DB reload. Fail-closed: every write checks res.success (like state.insertRow).
+// Returns { ok } — ok:false means a monotonic refusal (nothing written), ok:true means the grant was applied.
+async function persistGranted(db, { consentId, careContexts, hiTypes, purpose, dateRange, expiresAt, now }) {
+  const enc = (v) => (v == null ? null : JSON.stringify(v));
+  const cc = enc(careContexts), hi = enc(hiTypes), pu = enc(purpose), dr = enc(dateRange);
+  const row = await getConsentReqByConsentId(db, consentId);
+  if (row) {
+    // MONOTONIC status FIRST (reuse state.js): a terminal/lower-rank row refuses here → we write NO scope, so a
+    // since-REVOKED row can never be un-revoked or have its scope re-widened by a replayed GRANTED artifact.
+    const guarded = await updateConsentStatus(db, row.request_id, "GRANTED", now);
+    if (!guarded.ok) return { ok: false, status: guarded.status };
+    const res = await db.prepare(
+      "UPDATE connect_abdm_consent_req SET care_contexts=?,hi_types=?,purpose=?,date_range=?,expires_at=?,updated_at=? WHERE request_id=?")
+      .bind(cc, hi, pu, dr, expiresAt, now, row.request_id).run();
+    if (!res || res.success === false) throw new ConnectStateError("persistGranted scope update failed");
+    return { ok: true, status: "GRANTED" };
   }
-  const row = {
+  // Defensive fallback (// VERIFY ordering): in the normal flow the GRANT notify LINKS consent_id onto the
+  // requestConsent lifecycle row BEFORE this artifact webhook, so the row above is found. If it is not (notify
+  // not yet delivered), self-key a reconciled row by consentId so it is STILL findable by consent_id (one row,
+  // no split) with GRANTED as its first status (monotonicity holds — there is no prior state to regress).
+  const fresh = {
     request_id: consentId, tenant_id: null, actor: null, patient_abha_hash: null,
-    status: "GRANTED", consent_id: consentId, hi_types: hi, created_at: now, updated_at: now, expires_at: expiresAt,
+    status: "GRANTED", consent_id: consentId,
+    hi_types: hi, care_contexts: cc, purpose: pu, date_range: dr,
+    created_at: now, updated_at: now, expires_at: expiresAt,
   };
-  const keys = Object.keys(row);
-  await db.prepare(`INSERT INTO connect_abdm_consent_req (${keys.join(",")}) VALUES (${keys.map(() => "?").join(",")})`)
-    .bind(...keys.map((k) => row[k])).run();
+  const keys = Object.keys(fresh);
+  const res = await db.prepare(`INSERT INTO connect_abdm_consent_req (${keys.join(",")}) VALUES (${keys.map(() => "?").join(",")})`)
+    .bind(...keys.map((k) => fresh[k])).run();
+  if (!res || res.success === false) throw new ConnectStateError("persistGranted insert failed");
+  return { ok: true, status: "GRANTED" };
 }
 
 // ── revalidateForRequest — the normative REQUEST-TIME checklist (R4) ─────────────────────────────────────
@@ -124,17 +166,25 @@ export function revalidateForRequest(consent, req, now) {
   if (t > expiry) return miss("expired");
 
   // 3. req.careContexts ⊆ consent.careContexts (a real request names >=1; an empty/absent set binds nothing).
+  //    BOTH sides must be arrays: a non-array granted scope is a corrupt/absent grant — fail closed, NEVER
+  //    throw on `.map` (Adversary-A: a hostile `consent.careContexts` string must not crash the gate).
   if (!Array.isArray(req.careContexts) || req.careContexts.length === 0) return miss("no-carecontexts");
-  const grantedCC = new Set((consent.careContexts || []).map(ccKey));
+  if (!Array.isArray(consent.careContexts)) return miss("care-context-scope");
+  const grantedCC = new Set(consent.careContexts.map(ccKey));
   for (const c of req.careContexts.map(ccKey)) if (!grantedCC.has(c)) return miss("care-context-scope");
 
-  // 4. req.hiTypes ⊆ consent.hiTypes.
+  // 4. req.hiTypes ⊆ consent.hiTypes. Same array guard on the granted side (never `.map` a non-array grant).
   if (!Array.isArray(req.hiTypes) || req.hiTypes.length === 0) return miss("no-hitypes");
-  const grantedHi = new Set((consent.hiTypes || []).map(String));
+  if (!Array.isArray(consent.hiTypes)) return miss("hi-type-scope");
+  const grantedHi = new Set(consent.hiTypes.map(String));
   for (const h of req.hiTypes.map(String)) if (!grantedHi.has(h)) return miss("hi-type-scope");
 
-  // 5. req.purpose === consent.purpose (compared on a canonical key: code, else text, else the raw value).
-  if (purposeKey(req.purpose) !== purposeKey(consent.purpose)) return miss("purpose");
+  // 5. req.purpose === consent.purpose (canonical key: code, else text, else raw). purpose is REQUIRED on BOTH
+  //    sides and fails CLOSED on null/absent EITHER side (Adversary-A: never let null==null read as a match —
+  //    it is the lone R4 field that otherwise fails OPEN; a purpose-present guard pins least-privilege).
+  const reqPurpose = purposeKey(req.purpose), grantedPurpose = purposeKey(consent.purpose);
+  if (reqPurpose == null || grantedPurpose == null) return miss("purpose");
+  if (reqPurpose !== grantedPurpose) return miss("purpose");
 
   return { ok: true };
 }

@@ -94,6 +94,11 @@ export async function ingestEvent(env, deps, rawEvent) {
 
   switch (type) {
     case "consent-notification":                         // consent lifecycle (monotonic R6) — no bundle.
+      // R3/R6 RECONCILIATION: the GRANT notify carries BOTH our correlation requestId AND the gateway consentId.
+      // LINK consentId onto the ONE lifecycle row (the durable join) FIRST, so verifyConsentArtifact and the
+      // data-request both reload the SAME row. Guarded — linkConsentId is only bound on the real ingress path,
+      // and a notify without a consentId (or a pure-status callback) simply skips the link. // VERIFY id-echoing.
+      if (ev.consentId != null && deps.linkConsentId) await deps.linkConsentId(ev.requestId, ev.consentId, now);
       await deps.updateConsentStatus(ev.requestId, ev.status, now);
       return { handle, bundle: null };
     case "on-request":                                   // attach our correlation half, then advance FSM.
