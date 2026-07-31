@@ -2815,6 +2815,10 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-thinking{color:var(--mk-mut);font:500 12.5px 'Inter'}
 .maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}
 .maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}
+/* Live activity light — a small pulsing StewardMD-green dot shown beside any "Searching/Researching…"
+   loader to signal that MaiK is actively using AI / the internet. Pure CSS glow pulse (battery-safe). */
+.maik-live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#16c60c;vertical-align:middle;margin-right:5px;box-shadow:0 0 6px 1px rgba(22,198,12,.75);animation:maikLive 1.35s ease-in-out infinite}
+@keyframes maikLive{0%{box-shadow:0 0 0 0 rgba(22,198,12,.6);opacity:1}70%{box-shadow:0 0 0 7px rgba(22,198,12,0);opacity:.65}100%{box-shadow:0 0 0 0 rgba(22,198,12,0);opacity:1}}
 @keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}
 /* tables */
 .maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}
@@ -3158,10 +3162,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
       if (srcEl) srcEl.disabled = true;
-      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">' + svg("spark", "smd-ico") + ' Researching…</div>');
-      var busy = container.querySelector(".maik-webbusy");
+      var busy = document.createElement("div");
+      busy.className = "maik-webbusy";
+      busy.style.cssText = "margin-top:8px;color:var(--slate-soft,#64748b)";
+      busy.innerHTML = '<span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching the web…';
+      container.appendChild(busy);
+      try { scroll(); } catch (e) {}
+      // Staged progress + the live green dot so a ~15s web round-trip (search + synthesis) is clearly
+      // WORKING, never a frozen "Researching…" line. Cleared the instant the answer/timeout lands.
+      var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there — finalizing"]].map(function (s) {
+        return setTimeout(function () { try { busy.innerHTML = '<span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' ' + s[1] + '…'; } catch (e) {} }, s[0]);
+      });
+      function _clr() { _wt.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); }
+      function _persistWeb() { try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} }
+      function _webFail() {
+        _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
+        var w = document.createElement("div"); w.className = "maik-welcome"; w.style.marginTop = "8px";
+        w.innerHTML = 'Web research didn’t come back in time. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a>';
+        container.appendChild(w);
+        var rl = w.querySelector(".maik-retry"); if (rl) rl.addEventListener("click", function (ev) { ev.preventDefault(); try { w.parentNode && w.parentNode.removeChild(w); } catch (e) {} if (srcEl) srcEl.disabled = false; maikRunWeb(container, q, srcEl); });
+        try { scroll(); } catch (e) {} _persistWeb();
+      }
       return window.SMD_AI.research(q).then(function (r) {
-        if (busy) busy.remove();
+        _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
         if (r && r.text) {
           var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
           // Clickable source links — the TinyFish fast path returns r.sources = [{title,url,site}]
@@ -3178,19 +3201,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             srcHTML = '<details class="maik-src" style="margin-top:6px"><summary>' + MK.book + r.sources.length + ' web source' + (r.sources.length > 1 ? 's' : '') + '</summary><ol>' + items + '</ol></details>';
           }
           container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div class="maik-attr" style="display:flex;align-items:center;gap:6px;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK</span><span style="opacity:.7">· web-sourced, verify independently</span></div>' + bd + srcHTML + '</div>');
+          try { scroll(); } catch (e) {} _persistWeb();
+        } else if (r && r.reason === "quota") {
+          container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now (usage limit reached). Please verify against a reference source.</div>');
+          try { scroll(); } catch (e) {} _persistWeb();
         } else {
-          container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
+          _webFail();   // timeout / network error / empty result → clear spinner + one-tap retry
         }
-        try { scroll(); } catch (e) {}
-        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
-      }).catch(function () {
-        // research() bounds itself (raceTimeout → {error}) so this is belt-and-suspenders: if it
-        // ever rejects/throws, still clear the spinner and fail gracefully rather than hang forever.
-        if (busy) busy.remove();
-        container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now. Please verify against a reference source.</div>');
-        try { scroll(); } catch (e) {}
-        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
-      });
+      }).catch(function () { _webFail(); });
     }
     function maikWebChipEl(q) {
       var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research on the web";
@@ -3203,7 +3221,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRunResearch(q) {
       if (_maikBusy) return;
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)">' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
+      var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
       window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
         _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         // Over the 2/day cap -> a clear message, NOT an error.
@@ -3432,7 +3450,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      var think = bubble("ai", '<span class="maik-thinking"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
       // Tie the answer to the CONVERSATION, not this sheet instance. If the user closes MaiK and reopens
       // (the thread is restored from localStorage), the still-running generation must render its answer
       // into the LIVE bubble and persist it — not into a detached node the reopened sheet never shows.
@@ -3513,7 +3531,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
         _stageT.push(setTimeout(function () {
           if (_maikDone || _streamStarted) return;
-          try { think.innerHTML = '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' ' + s[1] + '<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>'; scroll(); } catch (e) {}
+          try { think.innerHTML = '<span class="maik-thinking"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' ' + s[1] + '<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>'; scroll(); } catch (e) {}
         }, s[0]));
       });
       _armTO();
@@ -3554,7 +3572,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // a lexically-near but different condition; the web tier researches the ACTUAL topic.
           if (tm && tm.matched === false && tm.mode !== "assume") {
             var tp = maikEscH(tm.topic || question);
-            think.innerHTML = '<div class="maik-welcome">' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
+            think.innerHTML = '<div class="maik-welcome"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
             try { scroll(); } catch (e) {}
             return;
