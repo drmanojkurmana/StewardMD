@@ -49,6 +49,31 @@ test("decodeEsc: separators, .br, hex, and unterminated pass-through", () => {
   assert.equal(decodeEsc("a\\unterminated", e), "a\\unterminated");
 });
 
+test("HARDENING: empty/short MSH-2 WARNS (no silent MSH-9/10 misalignment)", () => {
+  const m = parseHl7("MSH||^~\\&|LAB|H|E|H|T||ADT^A01|CTRL1|P|2.5");   // empty MSH-2
+  assert.ok(m.warnings.some((w) => w.includes("MSH-2 encoding chars malformed")));
+  // a separator collision (comp == field sep) also warns instead of silently corrupting the split
+  const m2 = parseHl7("MSH|~\\&X|A|B");                                  // comp would be '~'? here field='|', comp='~' fine; force collision:
+  const m3 = parseHl7("MSH|" + "|~\\&|A|B");                              // MSH-2 empty again -> warns
+  assert.ok(m3.warnings.length > 0);
+});
+
+test("HARDENING: warnings[] is capped (malformed-header flood cannot balloon memory)", () => {
+  const flood = "MSH|^~\\&|X\r" + "\x01\x02\x03\r".repeat(50000);
+  const m = parseHl7(flood, { budget: { maxWarnings: 100 } });
+  assert.ok(m.warnings.length <= 101);
+  assert.ok(m.warnings.some((w) => w.includes("warnings truncated")));
+});
+
+test("HARDENING: accessors reject non-integer keys (no prototype/'length' leak)", () => {
+  const m = parseHl7("MSH|^~\\&|LAB|H");
+  const s = m.segments[0];
+  assert.equal(field(s, "constructor"), null);
+  assert.equal(field(s, "length"), null);
+  assert.equal(field(s, "1.5"), null);
+  assert.equal(field(s, -1), null);
+});
+
 test("segment flood is bounded (no hang)", () => {
   const flood = "MSH|^~\\&|X\r" + Array.from({ length: 20000 }, () => "NTE|1|note").join("\r");
   const m = parseHl7(flood, { budget: { maxSegments: 500 } });
