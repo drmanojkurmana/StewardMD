@@ -75,3 +75,39 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     throw e;                              // typed error; router sanitizes before HTTP
   }
 }
+
+// ---- Stage-3 Task-7: push-side ingest entry — DISTINCT from the pull loadPatientContext above. -------
+// R9: the ABDM webhook is server-to-server (gateway/signature) authenticated, so there is NO logged-in
+// client actor — this path NEVER calls resolveActor/identify/derives a doctor. It routes an already-
+// authenticated event by `type` to the INJECTED `deps` state functions (db pre-bound in the real wiring;
+// spies in tests), recording only the ABDM-authenticated context. It returns a NULLABLE bundle: a real
+// SCCM bundle only exists after the Stage-4 buffer-join + Fidelius decrypt, so every INTERMEDIATE event
+// correctly returns { handle, bundle:null } (not a failure). Fail-closed: a genuine state error propagates.
+// `now` is injected (deps.now or the event) — never Date.now/globals.
+export async function ingestEvent(env, deps, rawEvent) {
+  const ev = rawEvent || {};
+  const type = ev.type;
+  const now = (deps && typeof deps.now === "function") ? deps.now() : (ev.now ?? ev.receivedAt ?? ev.timestamp);
+  const handle = { type, requestId: ev.requestId, transactionId: ev.transactionId };
+  // Correlation key: request-keyed callbacks carry requestId; transfer-keyed callbacks carry transactionId.
+  const corr = ev.requestId ?? ev.transactionId;
+
+  switch (type) {
+    case "consent-notification":                         // consent lifecycle (monotonic R6) — no bundle.
+      await deps.updateConsentStatus(ev.requestId, ev.status, now);
+      return { handle, bundle: null };
+    case "on-request":                                   // attach our correlation half, then advance FSM.
+      await deps.attachTransactionId(ev.requestId, ev.transactionId, now);
+      await deps.advanceStatus(ev.requestId, "CONSENT_GRANTED", "REQUESTED", now);
+      return { handle, bundle: null };
+    case "data-push":                                    // Stage-4 buffers+joins ciphertext; here just FSM→RECEIVING.
+      await deps.advanceStatus(corr, "REQUESTED", "RECEIVING", now);
+      return { handle, bundle: null };
+    case "data-transfer-complete":                       // exactly-once ack (D1 CAS), then close FSM. Still no bundle in Stage 3.
+      await deps.claimAck(ev.transactionId, now);
+      await deps.advanceStatus(corr, "RECEIVING", "TRANSFERRED", now);
+      return { handle, bundle: null };
+    default:                                             // unknown/unsupported → graceful, no throw.
+      return { handle: { type, unsupported: true }, bundle: null };
+  }
+}
