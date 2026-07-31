@@ -1,9 +1,11 @@
 // functions/_connect/maik-context.js — SCCM → MaiK context + gated LLM egress (spec §7, C7)
 export class EgressBlocked extends Error {}
 
-// Phase-0 guard: real-patient bundles must NEVER reach MaiK's LLM egress until consent + BAA/DPA exist.
+// R7 egress guard: MaiK LLM egress requires a no-retention-provider BAA/DPA (tenant.egressBaaOk). A live
+// consented bundle NEVER silently opens Vertex/Gemini egress on mode alone — it feeds only the deterministic
+// MaiK context. Sandbox (synthetic-only) stays open for Phase-0 dev; everything else is fail-closed.
 export function assertEgressAllowed(bundle, tenant) {
-  if (!tenant || tenant.mode !== "sandbox") throw new EgressBlocked("MaiK LLM egress is sandbox-only until consent + provider BAA/DPA (Phase 1)");
+  if (!tenant || (tenant.mode !== "sandbox" && !tenant.egressBaaOk)) throw new EgressBlocked("MaiK LLM egress requires a no-retention-provider BAA/DPA (tenant.egressBaaOk); live bundles feed the deterministic MaiK context only");
 }
 
 // Flatten the canonical bundle into a compact MaiK-facing context. SCCM ONLY — no vendor fields, no provenance.

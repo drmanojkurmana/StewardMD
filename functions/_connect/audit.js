@@ -1,7 +1,10 @@
 // functions/_connect/audit.js — PHI-free-by-construction audit (spec §7, C8/C9)
 import { SecretsUnavailable } from "./secrets.js";
 
-export const ALLOW = ["id", "tenantId", "actor", "connectorId", "action", "resourceCounts", "scope", "patientRefHash", "latencyMs", "outcome", "ts"];
+// R14: metadata-only keys for ABDM consent/data events (consent.granted|denied|revoked, data.requested|
+// received|failed). careContextHash is the HMAC of the care-context reference — the raw careContextReference,
+// raw ABHA, and any decrypted content are NEVER allow-listed, so buildAuditEvent structurally drops them.
+export const ALLOW = ["id", "tenantId", "actor", "connectorId", "action", "resourceCounts", "scope", "patientRefHash", "latencyMs", "outcome", "ts", "consentId", "transactionId", "careContextHash"];
 
 export function buildAuditEvent(fields = {}) {
   const out = {};
