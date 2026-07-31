@@ -57,3 +57,49 @@ test("mock gateway stores adversarial delivery knobs for Stage 4", () => {
   assert.equal(g.behavior.pushOrder, "out-of-order");
   assert.equal(g.behavior.callbackDelayMs, 10);
 });
+
+import { makeGateway } from "../../../functions/_connect/abdm/gateway.js";
+
+function kvMock() { const m = new Map(); return { get: async (k) => m.get(k) ?? null, put: async (k, v) => void m.set(k, String(v)) }; }
+const secretsMock = (over = {}) => ({ get: async (n) => ({ ABDM_CLIENT_ID: "cid", ABDM_CLIENT_SECRET: "csec", ...over }[n] ?? null) });
+const deps = (mock, over = {}) => ({ baseUrl: "https://sbx", cmId: "sbx", hiuId: "SMD_HIU", fetch: mock.fetch, kv: kvMock(), now: () => new Date(1000), secrets: secretsMock(), ...over });
+
+test("session() obtains + caches a token; a second call reuses cache (no 2nd session HTTP)", async () => {
+  const mock = makeMockGateway({ sessionExpiresIn: 300 });
+  const gw = makeGateway(deps(mock));
+  const t1 = await gw.session();
+  const t2 = await gw.session();
+  assert.equal(t1, t2);
+  assert.equal(mock.calls.filter((c) => c.path === ENDPOINTS.sessions).length, 1);  // cached — one session call only
+});
+
+test("session() refreshes once the cached token has expired", async () => {
+  const mock = makeMockGateway({ sessionExpiresIn: 300 });
+  let t = 1000; const gw = makeGateway(deps(mock, { now: () => new Date(t) }));
+  await gw.session();
+  t += 400000;                       // jump past exp (300-30s)
+  await gw.session();
+  assert.equal(mock.calls.filter((c) => c.path === ENDPOINTS.sessions).length, 2);  // refreshed
+});
+
+test("session() fails closed on missing creds", async () => {
+  const mock = makeMockGateway();
+  const gw = makeGateway(deps(mock, { secrets: secretsMock({ ABDM_CLIENT_ID: null }) }));
+  await assert.rejects(() => gw.session(), AbdmError);
+});
+
+test("session() fails closed on a non-2xx session response", async () => {
+  const mock = makeMockGateway({ failSession: true });
+  const gw = makeGateway(deps(mock));
+  await assert.rejects(() => gw.session(), AbdmError);
+});
+
+test("post() attaches a fresh REQUEST-ID + auth header and returns on 202", async () => {
+  const mock = makeMockGateway();
+  const gw = makeGateway(deps(mock));
+  await gw.post("hiRequest", { hiRequest: { consent: { id: "c1" } } });
+  const call = mock.calls.find((c) => c.path === ENDPOINTS.hiRequest);
+  assert.ok(call.headers["REQUEST-ID"]);
+  assert.equal(call.headers.authorization, "Bearer mock-token-1");
+  assert.equal(call.headers["X-HIU-ID"], "SMD_HIU");
+});
