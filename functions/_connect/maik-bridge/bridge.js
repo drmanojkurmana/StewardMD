@@ -6,6 +6,7 @@ import { readBinding } from "./attach.js";
 import { splitLanes } from "./lanes.js";
 import { loadPatientContext } from "../engine.js";
 import { resolveActor } from "../identity.js";
+import { requireCan } from "../enterprise/guard.js";
 
 export const DEFAULT_SCOPE = ["Patient", "Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference"];
 
@@ -29,6 +30,12 @@ export async function pullLanes(env, deps, request, io = {}) {
   const actor = await resolveActor(deps.identifyFn, request, env);
   const binding = await readBinding(env, deps.kv, actor.id);
   if (!binding) return null;
+
+  // Re-check context:load at PULL time (defense-in-depth). The sealed binding lasts up to BIND_TTL_SEC (1h),
+  // so a clinician demoted mid-session must NOT keep auto-pulling. loadPatientContext gates membership + sandbox
+  // + scope but NOT the context:load RBAC action, and the AI-endpoint auto-pull path never re-checked it — only
+  // the explicit /connect/maik/context route did. Mirror that recheck here (fail-closed; caught by the hook's fail-safe).
+  await requireCan(deps, request, env, binding.tenantId, "context:load");
 
   // The engine re-derives identity + membership for this actor/tenant and enforces the sandbox gate,
   // scope intersection, validation, filter, and PHI-free audit. It persists no patient content.

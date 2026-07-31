@@ -17,7 +17,8 @@ New, additive (nothing existing modified except the one MaiK call-site):
 ## Verification (as run)
 
 - Connect suite: 118 pass / 0 fail. Top-level suite: 208 pass / 0 fail (incl. `maik-dosing-grounding` which imports the edited AI endpoint). Zero regression.
-- Egress invariant proven: flag ON + live bundle + `egressBaaOk=false` ⇒ zero patient bytes in the pkg handed to `callGemini`. Flag OFF ⇒ pkg byte-identical + bridge never called.
+- Egress invariant proven (via mocked `pullLanes`): flag ON + live bundle + `egressBaaOk=false` ⇒ zero patient bytes in the pkg handed to `callGemini`. Flag OFF ⇒ pkg byte-identical + bridge never called.
+  - CORRECTION (2026-08-01 review): that mocked test asserts `splitLanes` blocks a hand-fed live bundle, but it is NOT how the real boundary is confined. The real zero-real-PHI-egress property holds because the ENGINE refuses any non-sandbox tenant (`assertSandboxAllowed` throws for `mode!=="sandbox"`) and confines `base_url` to the synthetic `SANDBOX_ALLOWLIST` — so only synthetic sandbox bundles ever exist to be split. `egressBaaOk` is a SECONDARY, presently UN-WIRED gate (`maik-context.js` short-circuits `true` for sandbox). See `test/connect/maik-egress-boundary-e2e.test.mjs` for the real end-to-end guard, and `maik-context.js` for the honest wording.
 - Hot-path bench: `can()` 23 ns, max-bundle `splitLanes` ~5 µs, flag-OFF hook 63 ns.
 
 ## The RBAC matrix (`// VERIFY` — owner ratifies)

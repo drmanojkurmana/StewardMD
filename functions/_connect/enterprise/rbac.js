@@ -25,6 +25,9 @@ export const ROLE_MATRIX = Object.freeze({
     "member:read", "member:invite", "member:role", "member:remove",
     "connector:read", "connector:write", "connector:validate",
     "ratelimit:write", "audit:read", "observability:read",
+    // GUARDRAIL: egress:baa here is the RBAC *owner ROLE*, which is NOT the app-owner allow-list. No route
+    // consumes egress:baa today. Any future BAA-flip route MUST additionally require ownerOK(app-owner) — never
+    // this RBAC role alone — or a tenant-scoped "owner" could open real-PHI LLM egress. (See maik-context.js R7.)
     "egress:baa",
   ]),
   admin: Object.freeze([
