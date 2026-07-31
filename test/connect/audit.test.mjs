@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buildAuditEvent, hmacPseudonym, makeAuditSink } from "../../functions/_connect/audit.js";
 import { makeMockDb } from "../../functions/_connect/testkit.js";
+import { SecretsUnavailable } from "../../functions/_connect/secrets.js";
 
 const salt = "c2FsdA=="; // "salt"
 
@@ -27,4 +28,8 @@ test("sink inserts an allow-listed row and never a raw patient field", async () 
   const rows = db._tables.connect_audit_event;
   assert.equal(rows.length, 1);
   assert.equal(JSON.stringify(rows[0]).includes("LEAK"), false);
+});
+
+test("hmacPseudonym FAILS CLOSED when the salt is absent", async () => {
+  await assert.rejects(() => hmacPseudonym({}, "t1", "MRN123"), SecretsUnavailable);
 });
