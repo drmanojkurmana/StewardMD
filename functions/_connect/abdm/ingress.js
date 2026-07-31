@@ -11,7 +11,7 @@ import { verifyJws, getPinnedJwks } from "./jws.js";
 import {
   getConsentReq, getTxnByTransactionId,
   updateConsentStatus, attachTransactionId, advanceStatus, claimAck,
-  bufferEntry,
+  bufferEntry, bufferIndexPut,
 } from "./state.js";
 import { linkConsentId, getConsentReqByConsentId, verifyConsentArtifact } from "./consent.js"; // one-row reconciliation join (state.js is frozen this stage)
 import { hipFlagOn } from "./hip-flags.js";                              // Stage-5 Task-7: the SECOND flag (BOTH smd_connect AND smd_connect_hip)
@@ -27,6 +27,9 @@ const INGRESS_ALGS = Object.freeze(["RS256", "ES256"]);
 const FRESHNESS_MS = 5 * 60 * 1000;         // TIMESTAMP freshness window (R6). // VERIFY ABDM's real skew budget.
 const NONCE_PREFIX = "connect:abdm:nonce:"; // KV, NON-PHI (R16): the REQUEST-ID nonce only — never PHI.
 const NONCE_TTL_SEC = 15 * 60;              // >= freshness window, so a replay is caught by nonce OR freshness.
+// A consent past this lifecycle point accepts NO further data-push — buffering one would create a fresh orphan
+// past the erasure sweep (Stage-6 T2 round-2, HIGH). Mirrors the state.js consent TERMINAL set.
+const TERMINAL_CONSENT = new Set(["REVOKED", "EXPIRED", "DENIED"]);
 
 // ADR-2H inbound field seam — the data-push entry shape (// VERIFY vs the ABDM HIP transfer payload). Kept
 // local so a rename lands in exactly one place, mirroring hiu.js#CONSENT_FIELDS / gateway.js#FIELDS.
@@ -170,17 +173,25 @@ export async function handleIngress(env, deps, request) {
     };
     if (ev.type === "data-push") {
       const nowIso = typeof now === "function" ? now() : now;
+      // HIGH (Stage-6 T2 round-2): REJECT a LATE push for an already-terminal consent (REVOKED/EXPIRED/erased).
+      // The push carries consentId (the durable join), which resolves the RETAINED lifecycle row even after erase;
+      // buffering it would drop a fresh ciphertext object the sweep has already run past → a new orphan. Refuse
+      // with NO R2 write, NO route. (A still-GRANTED consent falls through to the normal buffer path below.)
+      if (ev.consentId != null) {
+        const cr = await getConsentReqByConsentId(deps.db, ev.consentId);
+        if (cr && TERMINAL_CONSENT.has(cr.status)) return reject(403, "consent_terminal");
+      }
       const entries = Array.isArray(ev[PUSH_FIELDS.entries]) ? ev[PUSH_FIELDS.entries] : [];
-      // FIX-1 (Stage-6 T2, erasure-completeness, CRITICAL): attach the transaction_id onto the correlation row
-      // BEFORE writing any buffer object. In the out-of-order window (the encrypted PUSH lands before the
-      // on-request callback that normally attaches transaction_id), the buffer is keyed by transaction_id while
-      // the correlation row still has transaction_id=NULL — so a later REVOKE-erase, which only deletes a txn's
-      // buffer when the row knows its transaction_id, would SKIP it and leave a PERMANENT orphan R2 object (a
-      // DPDP §8 breach: sealed key crypto-shredded but the ciphertext persists, unreachable by any sweep). The
-      // fix restores the invariant "a buffer object implies a known transaction_id on the row" AT THE SOURCE:
-      // attachTransactionId is idempotent (its own uniqueness guard) and a no-op-equivalent when already attached.
-      if (entries.length && corr.transactionId != null && corr.requestId != null) {
-        await attachTransactionId(deps.db, corr.requestId, corr.transactionId, nowIso);
+      // FIX-1 round-2 (erasure-completeness, CRITICAL): record a CONSENT-SCOPED index of this buffer's
+      // transaction_id BEFORE buffering, so the REVOKE/dataEraseAt erasure can discover and delete the R2 object
+      // even in the out-of-order window where the txn row does not yet carry the transaction_id (the on-request
+      // attach has not landed) — otherwise eraseTxn's `if(row.transaction_id)` skips it → a PERMANENT orphan (DPDP
+      // §8 breach). This does NOT stamp the txn row (that would defeat the buffer-then-join deferral: tryJoin uses
+      // "transaction_id attached" as the on-request-happened signal, so an early stamp would let consumeTransfer
+      // decrypt before on-request). The buffer stays tid-keyed (consumeTransfer/deleteBuffered are untouched); only
+      // erasure gains a consent→tid pointer it can enumerate. The pointer is non-PHI (consentId + tid, R16).
+      if (corr.transactionId != null && ev.consentId != null) {
+        await bufferIndexPut(deps.r2, ev.consentId, corr.transactionId);
       }
       for (const e of entries) {
         await bufferEntry(deps.r2, env, corr.transactionId,

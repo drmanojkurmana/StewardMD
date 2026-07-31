@@ -166,6 +166,45 @@ export async function deleteBuffered(r2, txnId) {
   }
 }
 
+// ---- Stage-6 Task-2 round-2: consent→buffer INDEX (the orphan-buffer close). ------------------------------------
+// The push-buffer is keyed by transaction_id so consumeTransfer/deleteBuffered stay tid-only. But a REVOKE/erase
+// only knows a consent's txns via `consent_id`, and in the out-of-order window a buffer's tid is not yet on any
+// txn row (on-request has not attached it) → eraseTxn skips it → a PERMANENT orphan. This index is a CONSENT-scoped
+// pointer (`abdm/bufidx/<consentId>/<txnId>`) written at buffer time, so eraseForConsent can ENUMERATE by consentId
+// and delete the buffer regardless of the txn attach. It NEVER stamps the txn row (that would break the buffer-then-
+// join deferral — tryJoin reads "transaction_id attached" as the on-request-happened signal). Non-PHI (consentId +
+// tid only, R16). Fail-closed. The pointer is retired by eraseBufferIndex at the consent's REVOKE/dataEraseAt sweep.
+const BUFIDX_PREFIX = "abdm/bufidx";
+const bufidxPrefix = (consentId) => `${BUFIDX_PREFIX}/${consentId}/`;
+export async function bufferIndexPut(r2, consentId, txnId) {
+  if (consentId == null || txnId == null) throw new ConnectStateError("bufferIndexPut requires consentId and txnId");
+  try {
+    await r2.put(`${bufidxPrefix(consentId)}${txnId}`, "1");   // empty marker; the value is irrelevant (non-PHI key)
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e;
+    throw new ConnectStateError(`abdm buffer-index write failed: ${e && e.message}`);
+  }
+}
+// Erase every buffer this consent ever pointed at (via the index) + retire the index markers. Catches the
+// out-of-order ORPHAN (tid never attached to a txn row). deleteBuffered is a no-op for an already-consumed/erased
+// tid, so this is idempotent and safe to run alongside the per-txn erase. Returns buffer objects deleted.
+async function eraseBufferIndex(r2, consentId) {
+  if (consentId == null) return 0;
+  try {
+    const { objects = [] } = (await r2.list({ prefix: bufidxPrefix(consentId) })) || {};
+    let n = 0;
+    for (const o of objects) {
+      const txnId = o.key.slice(bufidxPrefix(consentId).length);   // exact: slice by the known consent prefix length
+      if (txnId) n += await deleteBuffered(r2, txnId);
+      await r2.delete(o.key);
+    }
+    return n;
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e;
+    throw new ConnectStateError(`abdm buffer-index erase failed: ${e && e.message}`);
+  }
+}
+
 // ---- Stage-3 Task-4: transaction FSM + exactly-once D1 CAS ack-claim (the correctness spine) --------
 // The txn `status` column is a monotonic state machine; `ack_claimed` is a single-shot exactly-once flag.
 // BOTH mutations are ONE guarded conditional-UPDATE (compare-and-set): meta.changes===1 means THIS caller
@@ -252,14 +291,46 @@ export async function tryJoin(db, r2, env, transactionId) {
 // never days, so 7d is a safe "definitely-abandoned" bound that never erases an in-flight transfer.
 const SWEEP_MAX_TXN_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-// Erase a patient's HIP care-context registrations, scoped by (tenant, patient HMAC). Mock-safe WHERE (two
-// `col=?` predicates). Returns the number of rows removed. Called ONLY on a patient-level `data_erase_at`/
-// full-erase trigger — NEVER on a single-consent REVOKE (a registration may back OTHER live consents).
-async function eraseCareContexts(db, tenantId, patientAbhaHash) {
-  const del = await db.prepare("DELETE FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?")
-    .bind(tenantId, patientAbhaHash).run();
-  if (!del || del.success === false) throw new ConnectStateError("sweep care-context erase failed");
-  return (del.meta && del.meta.changes) || 0;
+// Parse a consent row's persisted `care_contexts` (JSON array of careContextReference strings — or, defensively,
+// objects {careContextReference|reference|id}) into a flat list of ref strings, for the over-erase guard below.
+function parseCareContextRefs(careContextsJson) {
+  if (careContextsJson == null) return [];
+  let arr; try { arr = JSON.parse(careContextsJson); } catch { return []; }
+  if (!Array.isArray(arr)) return [];
+  return arr.map((c) => (c == null ? null : typeof c === "string" ? c : (c.careContextReference ?? c.reference ?? c.id ?? null)))
+    .filter((x) => x != null);
+}
+
+// Erase a patient's HIP care-context registrations, scoped by (tenant, patient HMAC). Called ONLY on a patient-
+// level `data_erase_at` trigger — NEVER on a single-consent REVOKE. OVER-ERASE GUARD (round-2, MEDIUM): a
+// registration may back OTHER live consents, so a careContextReference still referenced by a GRANTED consent whose
+// OWN `data_erase_at` has NOT passed is KEPT; only refs with no remaining live consent are deleted. The consent
+// being erased is past its own dataEraseAt (or terminal), so it is correctly excluded from "live" and its
+// uniquely-backed refs ARE removed. Mock-safe (two-predicate SELECTs + single-id DELETEs). Returns rows removed.
+async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
+  const { results: ccs = [] } = await db.prepare(
+    "SELECT * FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?").bind(tenantId, patientAbhaHash).all();
+  if (ccs.length === 0) return 0;
+  const { results: consents = [] } = await db.prepare(
+    "SELECT * FROM connect_abdm_consent_req WHERE tenant_id=? AND patient_abha_hash=?").bind(tenantId, patientAbhaHash).all();
+  const nowMs = Date.parse(now);
+  // A consent "still backs live data" iff it is GRANTED and its own dataEraseAt has not passed (a REVOKED/EXPIRED/
+  // DENIED/INITIATED consent, or a GRANTED one past its dataEraseAt = being erased, does NOT keep a ref alive).
+  const stillLive = (c) => {
+    if (c.status !== "GRANTED") return false;
+    const de = Date.parse(c.data_erase_at);
+    return !(Number.isFinite(de) && Number.isFinite(nowMs) && de <= nowMs);
+  };
+  const liveRefs = new Set();
+  for (const c of consents) if (stillLive(c)) for (const ref of parseCareContextRefs(c.care_contexts)) liveRefs.add(ref);
+  let n = 0;
+  for (const cc of ccs) {
+    if (liveRefs.has(cc.ref)) continue;   // still referenced by another live consent → never collateral-erase it
+    const del = await db.prepare("DELETE FROM connect_abdm_carecontext WHERE id=?").bind(cc.id).run();
+    if (!del || del.success === false) throw new ConnectStateError("sweep care-context erase failed");
+    n += (del.meta && del.meta.changes) || 0;
+  }
+  return n;
 }
 
 // ---- Stage-3 Task-6 + Stage-6 Task-2: reconciliation GC sweep — bound key/buffer lifetime + DPDP erasure --
@@ -375,12 +446,16 @@ export async function sweep(db, r2, env, now) {
           : db.prepare("SELECT * FROM connect_abdm_txn WHERE consent_id=?").bind(c.consent_id);
         const { results: txns = [] } = await txnQuery.all();
         for (const t of txns) { cBuffers += await eraseTxn(t); cKeys++; cTxns++; }
+        // FIX-1 round-2: sweep the consent-scoped buffer INDEX → delete any ORPHAN buffer whose transaction_id
+        // never reached a txn row (out-of-order push erased before on-request attached it) + retire the pointers.
+        // Idempotent with the per-txn erase above (deleteBuffered no-ops an already-deleted tid).
+        cBuffers += await eraseBufferIndex(r2, c.consent_id);
       }
       // (2) Care-context rows are a PER-PATIENT registration that may back OTHER live consents, so they are
       //     erased ONLY on a patient-level `data_erase_at`/full-erase — NEVER on a single-consent REVOKE/EXPIRE.
       //     // VERIFY (owner): confirm the association (per-consent derived state vs per-patient registration).
       if (eraseDeadlinePassed && c.tenant_id != null && c.patient_abha_hash) {
-        cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash);
+        cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash, now);
       }
       // (3) FIX-3: scrub the raw SIGNED scope from the RETAINED consent row. The row is kept (marked terminal) for
       //     R6 anti-replay, but anti-replay needs ONLY {request_id, status, consent_id} + timestamps — it never
@@ -397,13 +472,19 @@ export async function sweep(db, r2, env, now) {
           .bind(null, null, null, null, now, c.request_id).run();
         if (!scrub || scrub.success === false) throw new ConnectStateError("sweep consent scope-scrub failed");
       }
+      // (3b) LOW (round-2): a dataEraseAt-triggered erase must not leave a GRANTED-but-scrubbed row — terminalize it
+      //      (GRANTED→EXPIRED via the monotonic guard) so the lifecycle reads honestly and a re-sweep is a clean
+      //      no-op. REVOKED/EXPIRED/DENIED rows are already terminal, so this only fires on the dataEraseAt path.
+      if (eraseDeadlinePassed && !revokedOrExpired && c.status !== "DENIED") {
+        await updateConsentStatus(db, c.request_id, "EXPIRED", now);
+      }
       // (4) Audit the erasure (metadata ONLY; §8(6) — the audit is RETAINED even as the data is erased). FIX-4:
       //     emit EXACTLY ONE `data.erased` per consent whenever ANYTHING was erased for it — direct txns (cTxns),
       //     care-contexts (cCare), the retained-scope scrub (hadScope), OR a txn that PASS 1 already pre-empted
       //     (pass1ErasedConsents). Idempotent: a re-sweep finds no txns, no care-contexts, already-scrubbed scope,
       //     and an empty pass1 set → NO duplicate. Pass 1 never audits, so this is the sole, non-double, audit.
       const pass1Pre = c.consent_id != null && pass1ErasedConsents.has(String(c.consent_id));
-      if (cTxns > 0 || cCare > 0 || hadScope || pass1Pre) {
+      if (cTxns > 0 || cBuffers > 0 || cCare > 0 || hadScope || pass1Pre) {
         txnsSwept += cTxns; buffersDeleted += cBuffers; keysErased += cKeys; careContextsErased += cCare; consentsErased++;
         await auditErasure({
           action: "data.erased", outcome: "ok", ts: now, tenantId: c.tenant_id ?? null,

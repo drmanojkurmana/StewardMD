@@ -22,7 +22,7 @@ import { handleIngress } from "../../../functions/_connect/abdm/ingress.js";
 import { ingestEvent } from "../../../functions/_connect/engine.js";
 import {
   sweep, putConsentReq, updateConsentStatus, getConsentReq,
-  putTxn, attachTransactionId, getTxnByRequestId, bufferEntry, listBuffered,
+  putTxn, attachTransactionId, getTxnByRequestId, bufferEntry, listBuffered, tryJoin,
 } from "../../../functions/_connect/abdm/state.js";
 import { verifyConsentArtifact, linkConsentId, getConsentReqByConsentId } from "../../../functions/_connect/abdm/consent.js";
 
@@ -57,11 +57,14 @@ async function addLiveTxn(db, r2, { requestId, consentId, txnId, tenantId = "t1"
   await bufferEntry(r2, HMAC_ENV, txnId, "cc-ref-1", "CIPHER", "chk-1", NOW);
 }
 
-// ───────────────────────── FIX-1: orphan R2 buffer survives REVOKE (CRITICAL, Adversary A) ─────────────────────────
-// Drive the REAL ingress data-push in the out-of-order window: the correlation txn row exists but its
-// transaction_id is still NULL (the on-request attach has not landed). Pre-fix, the push buffers under the tid
-// while the row stays NULL → a later REVOKE-erase skips the buffer (row.transaction_id null) → PERMANENT orphan.
-// Post-fix, the push ATTACHES the tid at buffer time, so the erase reaches and deletes the buffer.
+// ───────────────────────── FIX-1 (round-2): REAL orphan-buffer close via consent_id attach ─────────────────────────
+// PROD-FAITHFUL: the consent_req row (reqC) and the txn row (reqD) carry DISTINCT internal request_ids — hiu.js
+// mints reqC in requestConsent and a FRESH reqD in requestHealthInformation; they join ONLY by consent_id. An
+// out-of-order data-push carries transactionId + consentId but NO requestId (mock-gateway.mjs). Round-1 attached
+// by corr.requestId (=reqC) → `UPDATE ... WHERE request_id=reqC` matched 0 txn rows (txn is reqD) → NO-OP → the
+// R2 buffer stayed a PERMANENT orphan (the round-1 test masked this by seeding both tables with the SAME id).
+// Round-2 attaches by CONSENT_ID, which finds the txn's own row (reqD) and stamps its transaction_id, so the erase
+// reaches and deletes the buffer. CROWN assertion: the R2 store is GLOBALLY empty after erasure.
 const ING_NOW = "2026-07-31T10:00:00.000Z";
 const ING_ENV = { CONNECT_FLAG: "1", CONNECT_HMAC_SALT: HMAC_ENV.CONNECT_HMAC_SALT };
 function ingRequest(headers) {
@@ -80,36 +83,77 @@ function ingDeps({ db, r2, kv, payload }) {
     now: () => ING_NOW,
   };
 }
+// A pending txn row keyed by its OWN request_id (reqD), DISTINCT from the consent row's reqC — as in prod.
+const pendingTxnRow = (o = {}) => ({
+  request_id: o.request_id ?? "reqD", transaction_id: null, tenant_id: o.tenant_id ?? "t1", consent_id: o.consent_id ?? "cid-1",
+  eph_privkey_sealed: "S:x", eph_pub_raw: "P", our_nonce: "N", ack_claimed: 0,
+  status: "REQUESTED", expires_at: o.expires_at ?? "2026-12-31T00:00:00Z", created_at: ING_NOW, updated_at: ING_NOW,
+});
+// The out-of-order push the real gateway sends: transactionId + consentId, NO requestId.
+const outOfOrderPush = (o = {}) => ({
+  db: o.db, r2: o.r2, kv: makeMockKv(),
+  payload: { type: "data-push", transactionId: o.transactionId ?? "txn-1", consentId: o.consentId ?? "cid-1",
+    entries: [{ careContextReference: "cc-A", content: "CIPHER", checksum: "chk-1" }] },
+});
 
-test("FIX-1: out-of-order push attaches tid at BUFFER time → zero orphan R2 objects survive REVOKE", async () => {
+// A push is out-of-order when the txn's transaction_id is NOT yet attached; the fix must NOT stamp it (that would
+// break the buffer-then-join deferral). It records a consent-scoped INDEX so the erase can still find the buffer.
+const bufidxKeys = async (r2, consentId) => (await r2.list({ prefix: `abdm/bufidx/${consentId}/` })).objects.map((o) => o.key);
+
+test("FIX-1 round-2: out-of-order push (reqC≠reqD, no requestId) → indexed, deferral preserved; zero orphan after REVOKE", async () => {
   const db = makeAbdmDb({
-    connect_abdm_consent_req: [scopedConsentRow({ request_id: "req-1", consent_id: "cid-1", status: "GRANTED", expires_at: "2026-12-31T00:00:00Z" })],
-    // The txn row is present (created at hi-request) but its transaction_id is NOT yet attached (on-request pending).
-    connect_abdm_txn: [{
-      request_id: "req-1", transaction_id: null, tenant_id: "t1", consent_id: "cid-1",
-      eph_privkey_sealed: "S:x", eph_pub_raw: "P", our_nonce: "N", ack_claimed: 0,
-      status: "REQUESTED", expires_at: "2026-12-31T00:00:00Z", created_at: ING_NOW, updated_at: ING_NOW,
-    }],
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "reqC", consent_id: "cid-1", status: "GRANTED", expires_at: "2026-12-31T00:00:00Z" })],
+    connect_abdm_txn: [pendingTxnRow({ request_id: "reqD", consent_id: "cid-1" })],
   });
   const r2 = makeR2();
-  const deps = ingDeps({
-    db, r2, kv: makeMockKv(),
-    payload: { type: "data-push", transactionId: "txn-1", requestId: "req-1",
-      entries: [{ careContextReference: "cc-A", content: "CIPHER", checksum: "chk-1" }] },
-  });
-
-  const res = await handleIngress(ING_ENV, deps, ingRequest({ "REQUEST-ID": "r1", TIMESTAMP: ING_NOW, "X-HIU-ID": "t1" }));
+  const res = await handleIngress(ING_ENV, ingDeps(outOfOrderPush({ db, r2, transactionId: "txn-1", consentId: "cid-1" })),
+    ingRequest({ "REQUEST-ID": "r1", TIMESTAMP: ING_NOW, "X-HIU-ID": "t1" }));
   assert.equal(res.status, 202);
-  // Root-cause fix: the correlation row LEARNED its transaction_id at buffer time (was NULL before the push).
-  assert.equal((await getTxnByRequestId(db, "req-1")).transaction_id, "txn-1", "tid attached on the row at buffer time");
-  assert.equal((await listBuffered(r2, "txn-1")).length, 1, "the encrypted entry is buffered under txn-1");
+  assert.equal((await listBuffered(r2, "txn-1")).length, 1, "entry buffered under txn-1");
+  // DEFERRAL PRESERVED: the txn row (reqD) is NOT stamped, so tryJoin stays not-ready until on-request lands.
+  assert.equal((await getTxnByRequestId(db, "reqD")).transaction_id, null, "txn row NOT stamped (buffer-then-join deferral intact)");
+  assert.equal((await tryJoin(db, r2, ING_ENV, "txn-1")).ready, false, "tryJoin still defers (no-txn) — not consumed early");
+  // But a consent-scoped index pointer WAS written, so the erase can find the (otherwise orphan) buffer.
+  assert.deepEqual(await bufidxKeys(r2, "cid-1"), ["abdm/bufidx/cid-1/txn-1"], "consent→tid index recorded");
 
-  // The consent is later REVOKED; the GC sweep must leave ZERO residual.
-  await updateConsentStatus(db, "req-1", "REVOKED", ISO_NOW);
+  await updateConsentStatus(db, "reqC", "REVOKED", ISO_NOW);   // REVOKE lands on the consent row (reqC)
   const counts = await sweep(db, r2, ING_ENV, ISO_NOW);
-  assert.equal(counts.buffersDeleted, 1, "the (pre-fix orphanable) buffer is deleted by the erase");
-  assert.equal(await getTxnByRequestId(db, "req-1"), null, "txn row + sealed key gone");
-  await assertR2Empty(r2); // CROWN: no object under ANY key remains
+  assert.equal(counts.buffersDeleted, 1, "the (round-1-orphaned) buffer is deleted via the consent index");
+  assert.equal(await getTxnByRequestId(db, "reqD"), null, "txn row + sealed key gone");
+  assert.deepEqual(await bufidxKeys(r2, "cid-1"), [], "index pointer retired");
+  await assertR2Empty(r2); // CROWN: no object under ANY key
+});
+
+test("FIX-1 round-2: same out-of-order push, erased via patient dataEraseAt instead of REVOKE → zero orphan", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "reqC", consent_id: "cid-1", status: "GRANTED",
+      expires_at: "2026-12-31T00:00:00Z", data_erase_at: "2026-07-31T11:00:00Z" /* just before ISO_NOW */ })],
+    connect_abdm_txn: [pendingTxnRow({ request_id: "reqD", consent_id: "cid-1" })],
+  });
+  const r2 = makeR2();
+  const res = await handleIngress(ING_ENV, ingDeps(outOfOrderPush({ db, r2, transactionId: "txn-1", consentId: "cid-1" })),
+    ingRequest({ "REQUEST-ID": "r1", TIMESTAMP: ING_NOW, "X-HIU-ID": "t1" }));
+  assert.equal(res.status, 202);
+  assert.equal((await getTxnByRequestId(db, "reqD")).transaction_id, null, "deferral intact (no stamp)");
+
+  const counts = await sweep(db, r2, ING_ENV, ISO_NOW); // ISO_NOW is past data_erase_at
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal(await getTxnByRequestId(db, "reqD"), null);
+  assert.deepEqual(await bufidxKeys(r2, "cid-1"), [], "index pointer retired");
+  await assertR2Empty(r2);
+});
+
+test("FIX-1 round-2 HIGH: a LATE push for an already-REVOKED consent is REJECTED (403), nothing buffered", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "reqC", consent_id: "cid-1", status: "REVOKED" })],
+    connect_abdm_txn: [pendingTxnRow({ request_id: "reqD", consent_id: "cid-1" })],
+  });
+  const r2 = makeR2();
+  const res = await handleIngress(ING_ENV, ingDeps(outOfOrderPush({ db, r2, transactionId: "txn-late", consentId: "cid-1" })),
+    ingRequest({ "REQUEST-ID": "r-late", TIMESTAMP: ING_NOW, "X-HIU-ID": "t1" }));
+  assert.equal(res.status, 403, "late push for a terminal consent is refused");
+  await assertR2Empty(r2); // NO fresh orphan: nothing was buffered, no index pointer written
+  assert.deepEqual(await bufidxKeys(r2, "cid-1"), [], "no index pointer for a rejected late push");
 });
 
 // ───────────────────────── FIX-2: data_erase_at writer (Adversary B) ─────────────────────────
@@ -294,4 +338,47 @@ test("FIX-5b: pass-2 txn join is tenant-scoped — a same-consent_id txn under A
   assert.equal(await getTxnByRequestId(db, "rq5b-own"), null, "own-tenant txn erased");
   const other = await getTxnByRequestId(db, "rq5b-other");
   assert.ok(other && other.eph_privkey_sealed === "S:other", "the other tenant's txn is NOT collateral-erased");
+});
+
+// ───────────────────────── round-2 MEDIUM: care-context over-erase guard ─────────────────────────
+// One consent's dataEraseAt must NOT drop a care-context that ALSO backs another LIVE consent for the same patient.
+const ccReg = (o = {}) => ({ id: o.id, tenant_id: o.tenant_id ?? "t1", patient_abha_hash: o.patient_abha_hash ?? "HMAC-P",
+  source: "followcare", ref: o.ref, hi_type: "OPConsultation", display: "Visit", linked_at: NOW });
+test("round-2 MEDIUM: dataEraseAt on one consent keeps care-contexts still referenced by a LIVE consent", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [
+      // consentA is past its dataEraseAt → being erased; it references ref-1 (uniquely) and ref-2 (shared).
+      scopedConsentRow({ request_id: "rqA", consent_id: "cidA", status: "GRANTED", data_erase_at: "2026-07-31T11:00:00Z",
+        care_contexts: JSON.stringify(["ref-1", "ref-2"]) }),
+      // consentB is LIVE (GRANTED, future dataEraseAt); it references ref-2 (shared) and ref-3.
+      scopedConsentRow({ request_id: "rqB", consent_id: "cidB", status: "GRANTED", data_erase_at: S6_FUT,
+        care_contexts: JSON.stringify(["ref-2", "ref-3"]) }),
+    ],
+    connect_abdm_carecontext: [
+      ccReg({ id: "cc-1", ref: "ref-1" }), ccReg({ id: "cc-2", ref: "ref-2" }), ccReg({ id: "cc-3", ref: "ref-3" }),
+    ],
+  });
+  const r2 = makeR2();
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW past cidA's dataEraseAt, before cidB's
+  assert.equal(counts.careContextsErased, 1, "only the care-context UNIQUELY backed by the erased consent is dropped");
+  const left = (db._tables.connect_abdm_carecontext || []).map((c) => c.ref).sort();
+  assert.deepEqual(left, ["ref-2", "ref-3"], "ref-2 (shared with live cidB) and ref-3 (live) survive; ref-1 erased");
+});
+
+// ───────────────────────── round-2 LOW: dataEraseAt terminalizes the consent status ─────────────────────────
+test("round-2 LOW: a dataEraseAt-triggered erase TERMINALIZES the GRANTED row (→ EXPIRED), re-sweep is a no-op", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "rqT", consent_id: "cidT", status: "GRANTED", data_erase_at: "2026-07-31T11:00:00Z" })],
+  });
+  const r2 = makeR2();
+  await addLiveTxn(db, r2, { requestId: "rqT-txn", consentId: "cidT", txnId: "txnT" });
+
+  const first = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(first.consentsErased, 1);
+  const row = await getConsentReq(db, "rqT");
+  assert.equal(row.status, "EXPIRED", "the GRANTED-but-erased row is terminalized, not left GRANTED");
+  // Re-sweep: still selected (EXPIRED) but nothing left → no new erasure, no duplicate audit.
+  const second = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(second.consentsErased, 0);
+  assert.equal(erasedEvents(db).length, 1, "no duplicate data.erased after terminalize");
 });
