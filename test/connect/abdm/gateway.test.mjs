@@ -103,3 +103,10 @@ test("post() attaches a fresh REQUEST-ID + auth header and returns on 202", asyn
   assert.equal(call.headers.authorization, "Bearer mock-token-1");
   assert.equal(call.headers["X-HIU-ID"], "SMD_HIU");
 });
+
+test("post() fails closed on an unknown endpoint key (no fetch)", async () => {
+  const mock = makeMockGateway();
+  const gw = makeGateway(deps(mock));
+  await assert.rejects(() => gw.post("bogus", {}), AbdmError);
+  assert.equal(mock.calls.length, 0);      // threw before any fetch (not even a session call)
+});

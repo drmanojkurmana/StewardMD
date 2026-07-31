@@ -44,11 +44,14 @@ export function makeGateway({ baseUrl, cmId, hiuId, hipId, fetch, kv, now, secre
       body: JSON.stringify({ clientId, clientSecret, grantType: "client_credentials" }) }); }
     catch (e) { throw new AbdmError("session request failed: " + e.message); }
     if (!res.ok) throw new AbdmError("session HTTP " + res.status);
-    const j = await res.json();
-    const token = j.accessToken; const expiresIn = Number(j.expiresIn) || 0;
+    let j; try { j = await res.json(); } catch { throw new AbdmError("session returned invalid JSON"); }
+    const token = j.accessToken;
     if (!token) throw new AbdmError("session returned no accessToken");
-    const exp = clock().getTime() + Math.max(0, (expiresIn - 30)) * 1000;   // safety skew; runtime expiresIn (never hardcoded)
-    try { await kv.put(tokKey, JSON.stringify({ token, exp })); } catch { /* cache best-effort */ }
+    const ttlSec = Math.min(Math.max(0, (Number(j.expiresIn) || 0) - 30), 3600);  // 30s skew, cap at 1h (anti-wedge)
+    const exp = clock().getTime() + ttlSec * 1000;
+    if (ttlSec >= 60) {                       // only cache a usefully-long token; KV min TTL is 60s
+      try { await kv.put(tokKey, JSON.stringify({ token, exp }), { expirationTtl: ttlSec }); } catch { /* best-effort */ }
+    }
     return token;
   }
 
