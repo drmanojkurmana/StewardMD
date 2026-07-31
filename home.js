@@ -3162,6 +3162,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
       if (srcEl) srcEl.disabled = true;
+      // NATIVE: pause Firestore for the web-research round-trip. A signed-in session's Firestore sync
+      // hogs the single JS thread, so the /research fetch callback (and even the 45s raceTimeout) can't
+      // fire — the reason "Research on the web" hung forever for signed-in accounts while guests (no
+      // Firestore) were fast. Same mitigation the clinical answer uses (#568). Auto-resumes at 60s.
+      var _fsR = false, _fsResumeW = function () { if (_fsR) return; _fsR = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
+      try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResumeW, 60000); } } catch (e) {}
       var busy = document.createElement("div");
       busy.className = "maik-webbusy";
       busy.style.cssText = "margin-top:8px;color:var(--slate-soft,#64748b)";
@@ -3184,7 +3190,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { scroll(); } catch (e) {} _persistWeb();
       }
       return window.SMD_AI.research(q).then(function (r) {
-        _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
+        _fsResumeW(); _clr(); if (busy && busy.parentNode) busy.parentNode.removeChild(busy);
         if (r && r.text) {
           var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
           // Clickable source links — the TinyFish fast path returns r.sources = [{title,url,site}]
@@ -3208,7 +3214,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         } else {
           _webFail();   // timeout / network error / empty result → clear spinner + one-tap retry
         }
-      }).catch(function () { _webFail(); });
+      }).catch(function () { _fsResumeW(); _webFail(); });
     }
     function maikWebChipEl(q) {
       var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research on the web";
@@ -3221,9 +3227,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRunResearch(q) {
       if (_maikBusy) return;
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      // NATIVE: pause Firestore during the evidence-review round-trip (same thread-starvation fix as
+      // maikRunWeb / the clinical answer #568), so a signed-in session's Firestore sync can't stall it.
+      var _fsR2 = false, _fsResumeR = function () { if (_fsR2) return; _fsR2 = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
+      try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResumeR, 60000); } } catch (e) {}
       var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
       window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
-        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _fsResumeR(); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         // Over the 2/day cap -> a clear message, NOT an error.
         if (r && r.over) {
           think.innerHTML = '<div class="maik-welcome">' + maikEscH(r.message || "You've used your 2 evidence reviews today. Resets at midnight.") + '</div>';

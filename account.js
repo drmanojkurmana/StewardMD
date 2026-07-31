@@ -215,5 +215,8 @@
     if (!ok && n < 80) { setTimeout(function () { boot(n + 1); }, 250); return; }
     try { ensureCasesMigrated(); } catch (e) {}
   })(0);
-  onChange(function () { ensurePersistence(); try { ensureCasesMigrated(); } catch (e) {} });
+  // ensurePersistence stays immediate (one-time offline-persistence enable); DEFER the saved-cases
+  // migration read to idle so its Firestore .get()/deserialize doesn't starve the JS thread AI needs
+  // right after sign-in (see ku.js). Migration is not time-critical.
+  onChange(function () { ensurePersistence(); (window.requestIdleCallback || function (f) { return setTimeout(f, 2500); })(function () { try { ensureCasesMigrated(); } catch (e) {} }, { timeout: 8000 }); });
 })();

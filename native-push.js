@@ -197,7 +197,9 @@
     try {
       if (window.SMD_AUTH && SMD_AUTH.onAuthStateChanged) {
         SMD_AUTH.onAuthStateChanged(function () {
-          if (window.SMD_nativePushOn()) { try { plugin().register(); } catch (e) {} }
+          // Defer to idle: registering at the instant of sign-in piles onto the fan-out that starves the
+          // JS thread AI needs (see ku.js). Push registration is not time-critical.
+          if (window.SMD_nativePushOn()) { (window.requestIdleCallback || function (f) { return setTimeout(f, 2500); })(function () { try { plugin().register(); } catch (e) {} }, { timeout: 8000 }); }
         });
         return;
       }
