@@ -1385,7 +1385,9 @@ window.openExternal = function (u) {
      patient. Last clinical review: 2026-06.
      ============================================================================ -->
 
-<button class="inf-fab" id="infFab" onclick="(window.ICU?ICU.open('infusions'):INF.open())" title="Infusions &amp; vasopressor pumps" aria-label="Open infusions and vasopressor pumps">💉<small>Pumps</small></button>
+<!-- Global "Pumps" (💉) infusions FAB removed 2026-07-31: with no active ICU patient it opened a blank
+     Infusions page. The Infusions feature stays reachable inside an ICU patient (Infusions tab) and via
+     the Drugs → Infusion & Vasopressor Calculator (#infOverlay below / INF.openDrug). -->
 <div class="inf-overlay" id="infOverlay" role="dialog" aria-modal="true">
   <div class="inf-shell">
     <div class="inf-top">
