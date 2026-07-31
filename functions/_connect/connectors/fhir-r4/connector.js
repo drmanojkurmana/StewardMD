@@ -22,7 +22,7 @@ export const fhirR4Connector = {
     const base = ctx.config.base_url || "";
     const patient = await getJson(ctx, base + "/Patient/" + encodeURIComponent(patientRef));
     const resources = [];
-    for (const type of RES.slice(0, ctx.budget.maxSubrequests)) {
+    for (const type of RES.filter((t) => ctx.scope.includes(t)).slice(0, ctx.budget.maxSubrequests)) {
       const b = await getJson(ctx, base + "/" + type + "?patient=" + encodeURIComponent(patientRef) + "&_count=" + ctx.budget.maxPagesPerResource);
       (b.entry || []).forEach((e) => e.resource && resources.push(e.resource));
     }

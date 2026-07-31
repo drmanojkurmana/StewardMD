@@ -1,5 +1,6 @@
 // functions/_connect/interfaces.js — connector contract guards + injected ctx + conformance harness (spec §5)
 import { validateBundle } from "./canonical/validate.js";
+import { ALLOW as AUDIT_ALLOW_LIST } from "./audit.js";
 
 const PULL_METHODS = ["capabilities", "authenticate", "validate", "fetchPatient", "normalize"];
 const EVENT_METHODS = ["authenticate", "validate", "initiate", "ingest", "normalize"];
@@ -12,7 +13,7 @@ export function assertConnector(c) {
   if (c.meta.sccmVersion !== "1.0") throw new Error("connector must declare sccmVersion 1.0");
 }
 
-const AUDIT_ALLOW = new Set(["ts", "tenantId", "actor", "connectorId", "action", "resourceCounts", "scope", "patientRefHash", "latencyMs", "outcome"]);
+const AUDIT_ALLOW = new Set(AUDIT_ALLOW_LIST);
 
 // A valid injected ctx with a spying audit sink that RECORDS raw payloads so the harness can detect leaks.
 export function makeCtx(over = {}) {

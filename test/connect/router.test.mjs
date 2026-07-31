@@ -12,10 +12,11 @@ test("flag OFF -> 404 (router does not leak existence when disabled)", async () 
 });
 
 test("context route ignores a body-supplied tenantId (server-derived only)", async () => {
-  // No auth header in this request -> identify() returns null (real _fbauth.identify) -> engine's
-  // resolveActor throws AuthError -> sanitized 401, NOT a cross-tenant read of "attacker"'s tenant.
+  // No auth header in this request -> real _usage.identify() returns a guest object ({id:"ip:...",
+  // guest:true}), not null -> resolveActor's `who.guest` check rejects it -> sanitized 401, NOT a
+  // cross-tenant read of "attacker"'s tenant.
   const res = await onRequest(post("/api/connect/context", { tenantId: "attacker", patientRef: "P1", scope: ["Patient"] }, { CONNECT_FLAG: "1" }));
-  assert.equal(res.status, 401);                       // real identify() unauthenticated -> AuthError -> 401
+  assert.equal(res.status, 401);                       // real identify() -> guest -> resolveActor rejects -> 401
   assert.notEqual(res.status, 200);
   assert.ok(res.status < 300 === false);               // non-2xx
   const body = await res.json();

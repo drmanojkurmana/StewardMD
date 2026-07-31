@@ -1,7 +1,7 @@
 // functions/_connect/audit.js — PHI-free-by-construction audit (spec §7, C8/C9)
 import { SecretsUnavailable } from "./secrets.js";
 
-const ALLOW = ["id", "tenantId", "actor", "connectorId", "action", "resourceCounts", "scope", "patientRefHash", "latencyMs", "outcome", "ts"];
+export const ALLOW = ["id", "tenantId", "actor", "connectorId", "action", "resourceCounts", "scope", "patientRefHash", "latencyMs", "outcome", "ts"];
 
 export function buildAuditEvent(fields = {}) {
   const out = {};

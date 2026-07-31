@@ -19,6 +19,9 @@ test("non-https base_url is refused even on an allow-listed host", () => {
 test("scheme spoofing (httpsevil://) is refused, not accepted as https", () => {
   assert.throws(() => assertSandboxAllowed({ mode: "sandbox" }, { base_url: "httpsevil://r4.smarthealthit.org/fhir" }, SANDBOX_ALLOWLIST), SandboxViolation);
 });
+test("base_url with userinfo is refused even on an allow-listed host", () => {
+  assert.throws(() => assertSandboxAllowed({ mode: "sandbox" }, { base_url: "https://user:pass@r4.smarthealthit.org/fhir" }, SANDBOX_ALLOWLIST), SandboxViolation);
+});
 test("loadConnectorConfig picks the right row when a tenant has more than one connector", async () => {
   const db = makeMockDb({
     connect_connector_config: [
