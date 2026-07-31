@@ -32,8 +32,7 @@ const medSrc = readFileSync(join(ROOT, "medlist.js"), "utf8");
 ok(icuSrc.includes("/vendor/pdfjs/pdf.min.js") && icuSrc.includes("/vendor/pdfjs/pdf.worker.min.js"), "#12 icu.js loads local pdf.js first");
 ok(medSrc.includes("/vendor/pdfjs/pdf.min.js"), "#12 medlist.js loads local pdf.js first");
 const idx = readFileSync(join(ROOT, "index.html"), "utf8");
-ok(/ICU\.open\('infusions'\)/.test(idx), "#14 FAB calls ICU.open('infusions')");
-ok(/<small>Pumps<\/small>/.test(idx) && !/onclick="\(window\.ICU\?ICU\.open\(\):INF/.test(idx), "#14 FAB relabelled 'Pumps' (no duplicate 'ICU')");
+ok(!/id="infFab"/.test(idx) && !/<small>Pumps<\/small>/.test(idx), "#14 global 'Pumps' (syringe) infusions FAB removed — it opened a blank Infusions page with no active patient");
 
 let serveProc = null;
 async function ensureServer() { try { await fetch(BASE); return; } catch {} const port = (BASE.match(/:(\d+)/) || [, "8903"])[1]; serveProc = spawn("node", [join(HERE, "serve.mjs"), ROOT, port], { stdio: "ignore" }); for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } } }
