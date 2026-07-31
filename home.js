@@ -1860,7 +1860,7 @@
     });
     h += (rows || '<div class="aic-note">No AI activity yet today.</div>');
     var mk = Object.keys(byMod); if (mk.length) { h += '<div class="aic-note">By model: ' + mk.map(function (m) { return aiCtlEsc(m) + " " + byMod[m]; }).join(" &middot; ") + '</div>'; }
-    var td = usage.topDoctors || []; if (td.length) { h += '<div class="aic-note">Top doctors: ' + td.slice(0, 5).map(function (d) { return aiCtlEsc(String(d.doctor).slice(0, 10)) + "… (" + d.req + ")"; }).join(" &middot; ") + '</div>'; }
+    var td = usage.topDoctors || []; if (td.length) { h += '<div class="aic-note">Top doctors: ' + td.slice(0, 5).map(function (d) { return aiCtlEsc(d.email || (String(d.doctor).slice(0, 10) + "…")) + " (" + d.req + ")"; }).join(" &middot; ") + '</div>'; }
     h += '</div>';
     // 3) Quota editor
     var mods = limits.modules || [];
@@ -1882,7 +1882,7 @@
     h += '<div class="aic-sec"><div class="aic-h">Abuse watch</div>' +
       '<div class="aic-qrow"><span class="lbl">Flag doctors at</span><span class="def">req / day</span>' +
       '<input type="number" min="1" inputmode="numeric" value="' + athr + '" data-aic-abuse="1"></div>';
-    if (wl.length) { wl.forEach(function (d) { h += '<div class="aic-mdl"><span>' + aiCtlEsc(String(d.doctor).slice(0, 14)) + '…</span><span>' + (d.req | 0) + ' req</span></div>'; }); }
+    if (wl.length) { wl.forEach(function (d) { h += '<div class="aic-mdl"><span>' + aiCtlEsc(d.email || (String(d.doctor).slice(0, 14) + '…')) + '</span><span>' + (d.req | 0) + ' req</span></div>'; }); }
     else { h += '<div class="aic-note">No doctor is above ' + athr + ' requests today.</div>'; }
     h += '<div class="aic-note">Per-module caps already block runaway use (~185/day), so this only surfaces the heaviest users. Blank + Enter = env default.</div></div>';
     // 6) Provider health

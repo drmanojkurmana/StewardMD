@@ -95,6 +95,7 @@ export function buildUsageRecord(f) {
     ts: f.ts || 0,                                   // caller stamps (Date.now unavailable in some ctx)
     hospitalId: clip(f.hospitalId, 64),
     doctorId: clip(f.doctorId, 80),                  // already an opaque hashed id (fb:/cfa:/ip:)
+    email: (typeof f.email === "string" && f.email) ? clip(f.email, 120) : null,  // account email (owner console only)
     subscription: clip(f.subscription || "unknown", 20),
     module: isAiModule(f.module) ? f.module : "unknown",
     feature: clip(f.feature, 40),
@@ -147,6 +148,9 @@ export async function recordAiUsage(env, store, rec, now) {
     d.byModule[rec.module] = (d.byModule[rec.module] || 0) + 1;
     if (rec.status !== "success") d.fail += 1;
     await store.put(docKey, JSON.stringify(d), { expirationTtl: AIU_TTL });
+    // Owner-console-only reverse map so the admin sees WHO (email) not an opaque device/uid hash.
+    // Read only by the owner-gated globalUsageReport; never returned to a doctor's own summary.
+    if (rec.email) { try { await store.put("aiu:email:" + rec.doctorId, rec.email, { expirationTtl: 90 * 24 * 3600 }); } catch (e) {} }
     const gKey = "aiu:global:" + day;
     const g = (await store.get(gKey, "json")) || { req: 0, cost: 0, fail: 0, byModule: {}, byModel: {}, docs: {} };
     g.req += 1; g.cost += rec.estCostInr;
@@ -257,10 +261,10 @@ export async function getAudit(store) {
 // no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
 // (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now) {
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
   if (!q.ok) return q;                                     // at the daily cap → block
-  try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0 }), now); } catch (e) {}
+  try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now); } catch (e) {}
   return q;                                                // allowed; carries used/limit/remaining
 }
 
@@ -279,6 +283,8 @@ export async function globalUsageReport(env, store, now) {
       const docs = g.docs || {};
       out.activeDoctors = Object.keys(docs).length;
       out.topDoctors = Object.keys(docs).map((d) => ({ doctor: d, req: docs[d] })).sort((a, b) => b.req - a.req).slice(0, 20);
+      // Owner console: resolve each opaque doctor id to its account email (map written on AI requests).
+      await Promise.all(out.topDoctors.map(async (d) => { try { d.email = (await store.get("aiu:email:" + d.doctor)) || null; } catch (e) { d.email = null; } }));
     }
     out.modelOverride = await getModelOverride(store);
     // Real project cost + budget come from the _usage.js token rollup (this per-module rollup carries

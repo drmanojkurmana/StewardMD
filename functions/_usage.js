@@ -70,7 +70,7 @@ async function verifyFirebaseToken(token, env) {
   try {
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(parts[2]), new TextEncoder().encode(parts[0] + "." + parts[1]));
-    return ok ? payload.sub : null;
+    return ok ? { uid: payload.sub, email: (typeof payload.email === "string" ? payload.email : null) } : null;
   } catch (e) { return null; }
 }
 export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
@@ -78,9 +78,9 @@ export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-2
 // Returns { id, guest } — id is an opaque, non-PHI key. Never the raw email/IP in the clear.
 export async function identify(request, env) {
   const email = request.headers.get("Cf-Access-Authenticated-User-Email");
-  if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false };
+  if (email) return { id: "cfa:" + (await sha256hex(email.toLowerCase())), guest: false, email: email.toLowerCase() };
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (tok) { const uid = await verifyFirebaseToken(tok, env); if (uid) return { id: "fb:" + uid, guest: false }; }
+  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || null }; }
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
