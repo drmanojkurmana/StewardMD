@@ -16,5 +16,9 @@ CREATE TABLE IF NOT EXISTS connect_connector_config (
 CREATE TABLE IF NOT EXISTS connect_audit_event (    -- append-only; metadata only, NO PHI
   id TEXT PRIMARY KEY, tenant_id TEXT, ts TEXT, actor TEXT,
   connector_id TEXT, action TEXT, resource_counts TEXT, scope TEXT,
-  patient_ref_hash TEXT, latency_ms INTEGER, outcome TEXT );
+  patient_ref_hash TEXT, latency_ms INTEGER, outcome TEXT,
+  -- R14 accountability refs (non-PHI): consent/txn artifact ids + HMAC of the care-context reference
+  -- (NEVER the raw careContextReference, raw ABHA, or decrypted content).
+  consent_id TEXT, transaction_id TEXT, care_context_hash TEXT );
 CREATE INDEX IF NOT EXISTS idx_connect_audit_tenant_ts ON connect_audit_event (tenant_id, ts);
+CREATE INDEX IF NOT EXISTS idx_connect_audit_consent ON connect_audit_event (consent_id);

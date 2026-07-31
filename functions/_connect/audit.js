@@ -26,10 +26,13 @@ export function makeAuditSink(env, db) {
   return async (fields) => {
     const e = buildAuditEvent(fields);
     e.id = e.id || (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2));
+    // consent_id/transaction_id/care_context_hash are the R14 accountability trail — non-PHI (a consent/txn
+    // id is an artifact ref; care_context_hash is the HMAC). buildAuditEvent already dropped raw ABHA / raw
+    // careContextReference / decrypted content, so only these allow-listed ids can reach the INSERT.
     await db.prepare(
-      "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,connector_id,action,resource_counts,scope,patient_ref_hash,latency_ms,outcome) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+      "INSERT INTO connect_audit_event (id,tenant_id,ts,actor,connector_id,action,resource_counts,scope,patient_ref_hash,latency_ms,outcome,consent_id,transaction_id,care_context_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     ).bind(e.id, e.tenantId || null, e.ts || null, e.actor || null, e.connectorId || null, e.action || null,
       JSON.stringify(e.resourceCounts || null), JSON.stringify(e.scope || null), e.patientRefHash || null,
-      e.latencyMs || null, e.outcome || null).run();
+      e.latencyMs || null, e.outcome || null, e.consentId ?? null, e.transactionId ?? null, e.careContextHash ?? null).run();
   };
 }
