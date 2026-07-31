@@ -14,8 +14,9 @@
 import { flagOn } from "../testkit.js";
 import { sealEntries } from "./hip-crypto.js";                                  // Task 3: ONE fresh keyMaterial per page (call WITHOUT io — prod path)
 import { serializeNdhm, validateNdhmDoc } from "../connectors/abdm/serialize.js"; // Task 2: SCCM -> NDHM-FHIR + structural gate
-import { revalidateForRequest } from "./consent.js";                            // Stage-4: the request-time R4 checklist (fresh status/date/scope)
+import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";  // Stage-4: the request-time R4 checklist + the FRESH by-consentId D1 reload (R5 authority)
 import { hmacPseudonym } from "../audit.js";                                    // per-tenant HMAC pseudonym (raw ABHA never stored/logged)
+import { SecretsUnavailable } from "../secrets.js";                            // fail-closed AND audited when a secret op is unavailable mid-guard
 import { resolveActor, resolveTenant } from "../identity.js";                   // Tasks 6+8: server-derived actor+membership (PermissionError before any write)
 import { putConsentReq, getConsentReq, updateConsentStatus } from "./state.js"; // Task 8: reuse the MONOTONIC (R6) consent lifecycle store
 
@@ -56,63 +57,113 @@ function ctEqualHex(a, b) {
   for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return diff === 0;
 }
+// Decode a persisted scope column off the reloaded consent row — the SAME helpers hiu.js#requestHealthInformation
+// uses so the R5 guard revalidates against IDENTICAL fresh-from-D1 scope. Non-string ⇒ passthrough; a non-JSON
+// string ⇒ verbatim (fail-soft — revalidateForRequest's own array/purpose guards then fail closed).
+const parseHiTypes = (v) => { if (v == null) return []; if (Array.isArray(v)) return v; try { return JSON.parse(v); } catch { return [v]; } };
+const parseJson = (v) => { if (v == null) return null; if (typeof v !== "string") return v; try { return JSON.parse(v); } catch { return v; } };
 
 // ── assertServeAllowed — the R5 cross-patient OVER-SHARE guardrail (Task 5, DUAL-ADVERSARIAL) ───────────────
 // Throws OverShareError (audited `hip.denied`, metadata only) on ANY miss; returns void when the WHOLE transfer
 // is provably in-scope for ONE patient. Enforces R5 in FULL; a single miss refuses the WHOLE transfer — it never
 // drops-and-serves-the-rest. No cross-patient bytes ever reach the seal (this runs BEFORE serialize/seal).
-//   (i)   subject bind: HMAC(consent.patientAbha) == patient_abha_hash on EVERY served record;
-//   (ii)  each served careContextReference is EXPLICITLY in the freshly-verified artifact's careContexts;
-//   (iii) each record's hiType is a subset of consent.hiTypes;
-//   (iv)  the consent is bound FRESH via revalidateForRequest (status/dateRange/expiry + scope subset) so a
-//         since-REVOKED/EXPIRED/out-of-dateRange grant is refused, NOT the stored registration linkage.
-// The freshly-VERIFIED artifact (its JWS checked upstream by consent.js#verifyConsentArtifact at ingest) is
-// passed in as `consent`; this guard binds it to THIS request. args = { consent, careContexts, records, tenantId }.
-export async function assertServeAllowed(env, deps, { consent, careContexts, records, tenantId } = {}) {
+//
+// TRUST MODEL (dual-adversarial FIX): NOTHING here is trusted from the caller except the `consentId` it names.
+// The authoritative consent state is RELOADED FRESH from D1 by that id (getConsentReqByConsentId) — EXACTLY the
+// pattern hiu.js#requestHealthInformation uses — so status (since-REVOKED), the PERSISTED signed scope
+// (care_contexts/hi_types/purpose/date_range/expires_at) AND the subject pseudonym (patient_abha_hash) all come
+// from the DB row, never a caller-supplied `consent` object. A stale/widened/forged caller scope cannot pass, and
+// there is NO `hmacPseudonym(rawABHA)` recompute — subject binding is a hex compare against the row's hash, so an
+// attacker-pickable/self-referential ABHA (and its non-string "[object Object]" collision) is impossible.
+//   (iv) FRESH consent bind: revalidateForRequest against the RELOADED row (status/dateRange/expiry + scope subset)
+//        — a since-REVOKED/EXPIRED/out-of-dateRange or scope-widened request is refused off the DB.
+//   (i)  subject bind: EVERY loaded record's patientAbhaHash EQUALS the reloaded row's patient_abha_hash.
+//   (d)  registration bind: EVERY served careContext has a registered row (getServableCareContexts, scoped to the
+//        row's patient hash) — a careContext whose registration belongs to a DIFFERENT patient is refused.
+//   (ii) each served careContextReference is EXPLICITLY in the reloaded row's persisted careContexts;
+//   (iii) each record's hiType is a subset of the reloaded row's hiTypes.
+// A missing D1 row => status null => fail-closed. deps = { db, audit, now }; args = { consentId, careContexts,
+// records, tenantId }. A secret op that goes unavailable mid-guard (SecretsUnavailable) still audits hip.denied.
+export async function assertServeAllowed(env, deps, { consentId, careContexts, records, tenantId } = {}) {
   const nowIso = isoOf(deps && deps.now);
+  const db = deps && deps.db;
   const deny = async (reason) => {
     if (deps && deps.audit) await deps.audit({
       action: "hip.denied", outcome: "denied", ts: nowIso, tenantId,
-      consentId: (consent && consent.consentId) || null,   // a non-PHI artifact id (R16)
+      consentId: consentId || null,                        // a non-PHI artifact id (R16)
       scope: { reason },                                    // stable PHI-free reason; NEVER the ABHA/careContextRef
     });
     throw new OverShareError(reason);
   };
 
-  if (!consent || typeof consent !== "object") return deny("no-consent");
-  if (!Array.isArray(records)) return deny("no-records");
-  const servedCC = (Array.isArray(careContexts) ? careContexts : []).map(ccKey);
-  if (servedCC.length === 0) return deny("no-carecontexts");
+  try {
+    if (consentId == null) return await deny("no-consent");
+    if (!db) return await deny("no-db");                    // fail-closed: no authoritative store => refuse
+    if (!Array.isArray(records)) return await deny("no-records");
+    const servedCC = (Array.isArray(careContexts) ? careContexts : []).map(ccKey);
+    if (servedCC.length === 0) return await deny("no-carecontexts");
 
-  // (iv) FRESH consent bind FIRST — a since-REVOKED/EXPIRED/out-of-dateRange grant fails HERE even if it verified
-  //      cleanly at fetch time. revalidateForRequest ALSO subset-checks careContexts/hiTypes/purpose (R4), which
-  //      composes with the explicit per-record checks below (defence-in-depth).
-  const servedHi = [...new Set(records.map((r) => String(r && r.hiType)))];
-  const reval = revalidateForRequest(consent, { careContexts: servedCC, hiTypes: servedHi, purpose: consent.purpose }, nowIso);
-  if (!reval.ok) return deny("consent:" + reval.reason);
+    // RELOAD the ONE authoritative consent row FRESH from D1 (the Stage-4 by-consentId reconciled lookup). This is
+    // the whole fix: status + persisted scope + patient hash are read HERE, never trusted from the caller. A
+    // missing row (or a row with no persisted subject hash) fails closed.
+    const fresh = await getConsentReqByConsentId(db, consentId);
+    const rowHash = fresh && fresh.patient_abha_hash;
+    if (!fresh || typeof rowHash !== "string" || rowHash.length === 0) return await deny("no-consent-row");
+    const consent = {
+      id: fresh.consent_id || consentId,
+      status: fresh.status,                                                     // FRESH — the since-REVOKED catch
+      careContexts: fresh.care_contexts != null ? parseJson(fresh.care_contexts) : [],
+      hiTypes: fresh.hi_types != null ? parseHiTypes(fresh.hi_types) : [],
+      purpose: fresh.purpose != null ? parseJson(fresh.purpose) : null,
+      permission: { dateRange: fresh.date_range != null ? parseJson(fresh.date_range) : {} },
+      expiry: fresh.expires_at != null ? fresh.expires_at : null,
+    };
 
-  // (i) subject bind — compute the consent patient's per-tenant pseudonym ONCE. A missing patientAbha fails
-  //     closed (never null==null). hmacPseudonym throws if CONNECT_HMAC_SALT is unavailable (fail-closed).
-  if (consent.patientAbha == null) return deny("no-patient");
-  const expected = await hmacPseudonym(env, tenantId, consent.patientAbha);
+    // (iv) FRESH consent bind FIRST — revalidateForRequest binds status/dateRange/expiry AND subset-checks the
+    //      served careContexts/hiTypes/purpose against the RELOADED scope (so a stale/widened caller scope or a
+    //      since-REVOKED/EXPIRED grant is refused off the DB, defence-in-depth with the per-record checks below).
+    const servedHi = [...new Set(records.map((r) => String(r && r.hiType)))];
+    const reval = revalidateForRequest(consent, { careContexts: servedCC, hiTypes: servedHi, purpose: consent.purpose }, nowIso);
+    if (!reval.ok) return await deny("consent:" + reval.reason);
 
-  // The freshly-verified artifact's careContexts as an EXPLICIT allow-set (no wildcard, no registration-implied
-  // membership) + the granted hiTypes.
-  const artifactCC = new Set((Array.isArray(consent.careContexts) ? consent.careContexts : []).map(ccKey));
-  const grantedHi = new Set((Array.isArray(consent.hiTypes) ? consent.hiTypes : []).map(String));
+    // The reloaded row's persisted careContexts as an EXPLICIT allow-set (no wildcard, no registration-implied
+    // membership) + the granted hiTypes.
+    const artifactCC = new Set((Array.isArray(consent.careContexts) ? consent.careContexts : []).map(ccKey));
+    const grantedHi = new Set((Array.isArray(consent.hiTypes) ? consent.hiTypes : []).map(String));
 
-  for (const rec of records) {
-    if (!rec || typeof rec !== "object") return deny("bad-record");
-    // (i) subject == consent patient — a SINGLE mismatch refuses the WHOLE transfer (no cross-patient leak).
-    if (typeof rec.patientAbhaHash !== "string" || rec.patientAbhaHash.length === 0) return deny("record-no-subject");
-    if (!ctEqualHex(rec.patientAbhaHash, expected)) return deny("cross-patient");
-    // (ii) explicit careContext membership in the fresh artifact.
-    const ref = ccKey(rec.careContextRef);
-    if (ref == null || !artifactCC.has(ref)) return deny("carecontext-not-in-artifact");
-    // (iii) hiType subset of consent.hiTypes.
-    if (!grantedHi.has(String(rec.hiType))) return deny("hitype-out-of-scope");
+    // (d) The registered care-contexts for the CONSENT ROW's patient (D1-authoritative subject bind at the
+    //     care-context layer). getServableCareContexts is scoped to `rowHash`, so every returned row belongs to
+    //     the consent's patient; a served careContext whose registration is under a DIFFERENT patient is simply
+    //     absent from this set and refused below.
+    const servable = await getServableCareContexts(db, tenantId, rowHash);
+    const servableRefs = new Set();
+    for (const r of servable) {
+      if (!ctEqualHex(String(r && r.patient_abha_hash), rowHash)) return await deny("carecontext-cross-patient");
+      const rk = ccKey(r && r.ref);
+      if (rk != null) servableRefs.add(rk);
+    }
+
+    for (const rec of records) {
+      if (!rec || typeof rec !== "object") return await deny("bad-record");
+      // (i) subject == the reloaded row's patient hash — a SINGLE mismatch refuses the WHOLE transfer (no leak).
+      if (typeof rec.patientAbhaHash !== "string" || rec.patientAbhaHash.length === 0) return await deny("record-no-subject");
+      if (!ctEqualHex(rec.patientAbhaHash, rowHash)) return await deny("cross-patient");
+      // (ii) explicit careContext membership in the reloaded row's scope.
+      const ref = ccKey(rec.careContextRef);
+      if (ref == null || !artifactCC.has(ref)) return await deny("carecontext-not-in-artifact");
+      // (iii) hiType subset of the reloaded row's hiTypes.
+      if (!grantedHi.has(String(rec.hiType))) return await deny("hitype-out-of-scope");
+      // (d) the served careContext must be REGISTERED to the consent's patient (D1 subject bind).
+      if (!servableRefs.has(ref)) return await deny("carecontext-not-registered-to-patient");
+    }
+    // Provably one-patient, in-scope, fresh-D1-consent-bound. Void => allowed.
+  } catch (e) {
+    // A secret op going unavailable mid-guard (e.g. an at-rest unseal on the reload) must STILL audit hip.denied —
+    // fail-closed AND audited (the adversary's blind-spot: the old hmac recompute threw here unaudited). Any other
+    // error (incl. the OverShareError a normal deny already audited) propagates unchanged.
+    if (e instanceof SecretsUnavailable) return await deny("secrets-unavailable");
+    throw e;
   }
-  // Provably one-patient, in-scope, fresh-consent-bound. Void => allowed.
 }
 
 // ── dataPushUrl anti-SSRF gate ──────────────────────────────────────────────────────────────────────────────
@@ -168,7 +219,7 @@ async function pushPage(deps, req, nowIso, page, careContextReference) {
 }
 
 // ── serveTransfer — guard -> load -> serialize -> seal -> push (Task 4) ──────────────────────────────────────
-// deps = { db, secrets, gateway, fetch, audit, now, source, jwks }; req = { tenantId, consent, careContexts,
+// deps = { db, secrets, gateway, fetch, audit, now, source, jwks }; req = { tenantId, consentId, careContexts,
 // hiuKeyMaterial, dataPushUrl, transactionId }. Returns { pushed:boolean, pages:number, outcome, warnings }.
 // Fail-closed, in order: flag-gate -> load every requested record -> R5 GUARD (before any seal) -> anti-SSRF
 // URL gate (before any POST) -> per-record serialize/validate (skip+warn on failure => PARTIAL) -> seal ONE page
@@ -192,8 +243,9 @@ export async function serveTransfer(env, deps, req) {
   }
 
   // (1) R5 GUARD FIRST — refuse the WHOLE transfer on ANY cross-patient / out-of-scope record BEFORE any seal.
-  //     Throws OverShareError (audits hip.denied). Nothing below runs on a refused transfer.
-  await assertServeAllowed(env, deps, { consent: req.consent, careContexts, records: loaded, tenantId: req.tenantId });
+  //     Reloads the authoritative consent row FRESH from D1 by consentId. Throws OverShareError (audits
+  //     hip.denied). Nothing below runs on a refused transfer.
+  await assertServeAllowed(env, deps, { consentId: req.consentId, careContexts, records: loaded, tenantId: req.tenantId });
 
   // (2) Anti-SSRF: validate the HIU-supplied dataPushUrl BEFORE any seal/POST. A bad URL => nothing is sealed.
   assertPushUrlAllowed(env, req.dataPushUrl);
@@ -222,7 +274,7 @@ export async function serveTransfer(env, deps, req) {
   } catch (e) {
     if (deps.audit) await deps.audit({
       action: "hip.failed", outcome: "failed", ts: nowIso, tenantId: req.tenantId,
-      consentId: (req.consent && req.consent.consentId) || null, transactionId: req.transactionId,
+      consentId: req.consentId || null, transactionId: req.transactionId,
       resourceCounts: { pages: outbound.length, pushed }, scope: { error: String(e && e.message) },
     });
     throw e;
@@ -233,7 +285,7 @@ export async function serveTransfer(env, deps, req) {
   const outcome = outbound.length === 0 ? "FAILED" : (warnings.length > 0 ? "PARTIAL" : "SERVED");
   if (deps.audit) await deps.audit({
     action: "hip.served", outcome: "ok", ts: nowIso, tenantId: req.tenantId,
-    consentId: (req.consent && req.consent.consentId) || null, transactionId: req.transactionId,
+    consentId: req.consentId || null, transactionId: req.transactionId,
     careContextHash: outbound.length ? await hmacPseudonym(env, req.tenantId, outbound.map((o) => o.careContextRef).sort().join("|")) : null,
     resourceCounts: { pages: pushed, warnings: warnings.length },
   });

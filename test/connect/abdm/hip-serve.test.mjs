@@ -6,6 +6,10 @@
 //   -> sealEntries (Task-3, ONE fresh keyMaterial per page, prod path / no io) -> POST to a validated
 //   (https + host-allow-listed + no-userinfo) dataPushUrl. The NDHM plaintext is request-scoped and sealed
 //   immediately: the pushed body carries CIPHERTEXT + the HIP keyMaterial only, never the plaintext.
+// The R5 guard now binds to D1-AUTHORITATIVE consent state: serveTransfer passes req.consentId and the guard
+// RELOADS the consent row FRESH from D1 (status + persisted scope + patient_abha_hash) and binds every served
+// careContext against its connect_abdm_carecontext registration. So each test seeds BOTH the consent_req row and
+// the carecontext rows (via makeAbdmDb) instead of passing a trusted consent object.
 // This suite uses the REAL followcareSource + REAL fidelius crypto + REAL hmacPseudonym end-to-end.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -13,6 +17,7 @@ import { serveTransfer, OverShareError, PushUrlError } from "../../../functions/
 import { followcareSource } from "../../../functions/_connect/abdm/hip-sources/followcare.js";
 import { hmacPseudonym } from "../../../functions/_connect/audit.js";
 import { generateKeyPair, nonce, sharedSecret, openEntry } from "../../../functions/_connect/abdm/fidelius.js";
+import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
 import { makeReader } from "./fixtures/hip-followcare-synthetic.mjs";
 
 const TENANT = "t-hip";
@@ -47,15 +52,27 @@ function episode(ref, patientAbhaHash, dx, patientId = "fc-pat-A") {
     summary: { title: "Discharge summary", text: dx + " treated and discharged stable." },
   };
 }
-const consentFor = (abha, over = {}) => ({
-  consentId: "consent-1", patientAbha: abha, status: "GRANTED",
-  careContexts: ["cc-A-1", "cc-A-2"], hiTypes: ["DischargeSummary"],
-  purpose: { code: "CAREMGT", text: "Care Management" },
-  permission: { dateRange: { from: "2026-01-01T00:00:00Z", to: "2026-12-31T23:59:59Z" } },
-  expiry: "2026-12-31T23:59:59Z", ...over,
-});
-const depsWith = (fetch, audit, followcare, source = followcareSource) =>
-  ({ db: null, secrets: null, gateway: null, fetch, audit, now: NOW, source, jwks: null, followcare });
+
+// Seed the authoritative D1 state the guard reloads: the ONE consent_req row (consent_id + status + persisted
+// scope + patient_abha_hash) PLUS the connect_abdm_carecontext registration rows served refs bind against.
+function seedServeDb(patientAbhaHash, { consentId = "consent-1", careContexts = ["cc-A-1", "cc-A-2"], hiTypes = ["DischargeSummary"], status = "GRANTED", ccRows } = {}) {
+  const carecontext = ccRows || careContexts.map((ref) => ({
+    id: ref, tenant_id: TENANT, patient_abha_hash: patientAbhaHash, source: "followcare",
+    ref, hi_type: "DischargeSummary", display: "cc " + ref, linked_at: "2026-01-01T00:00:00Z",
+  }));
+  return makeAbdmDb({
+    connect_abdm_consent_req: [{
+      request_id: consentId, consent_id: consentId, tenant_id: TENANT, actor: null,
+      patient_abha_hash: patientAbhaHash, status, hi_types: JSON.stringify(hiTypes),
+      care_contexts: JSON.stringify(careContexts), purpose: JSON.stringify({ code: "CAREMGT", text: "Care Management" }),
+      date_range: JSON.stringify({ from: "2026-01-01T00:00:00Z", to: "2026-12-31T23:59:59Z" }),
+      created_at: "2026-01-01T00:00:00Z", updated_at: "2026-01-01T00:00:00Z", expires_at: "2026-12-31T23:59:59Z",
+    }],
+    connect_abdm_carecontext: carecontext,
+  });
+}
+const depsWith = (db, fetch, audit, followcare, source = followcareSource) =>
+  ({ db, secrets: null, gateway: null, fetch, audit, now: NOW, source, jwks: null, followcare });
 
 const DX1 = "Community-acquired pneumonia";
 const DX2 = "Acute pyelonephritis";
@@ -67,8 +84,9 @@ test("happy path: N care-contexts -> N pages, each pushed with a DISTINCT keyMat
   const { fetch, calls } = makeCapturingFetch();
   const audit = makeAudit();
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1), episode("cc-A-2", HASH_A, DX2)]);
-  const deps = depsWith(fetch, audit.fn, reader);
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"] });
+  const deps = depsWith(db, fetch, audit.fn, reader);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
 
   const out = await serveTransfer(env, deps, req);
   assert.equal(out.pages, 2);
@@ -96,8 +114,9 @@ test("the pushed body is CIPHERTEXT + keyMaterial only (plaintext dx ABSENT), an
   const hiu = await makeHiu();
   const { fetch, calls } = makeCapturingFetch();
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1), episode("cc-A-2", HASH_A, DX2)]);
-  const deps = depsWith(fetch, makeAudit().fn, reader);
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"] });
+  const deps = depsWith(db, fetch, makeAudit().fn, reader);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
 
   await serveTransfer(env, deps, req);
 
@@ -136,8 +155,9 @@ test("a serialize/validate failure on ONE record -> that page skipped + warned, 
       return loaded;
     },
   };
-  const deps = depsWith(fetch, audit.fn, reader, source);
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"] });
+  const deps = depsWith(db, fetch, audit.fn, reader, source);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
 
   const out = await serveTransfer(env, deps, req);
   assert.equal(out.outcome, "PARTIAL");
@@ -163,8 +183,9 @@ test("anti-SSRF: a non-https / off-allow-list / userinfo dataPushUrl -> refuse (
   ]) {
     const { fetch, calls } = makeCapturingFetch();
     const reader = makeReader([episode("cc-A-1", HASH_A, DX1)]);
-    const deps = depsWith(fetch, makeAudit().fn, reader);
-    const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: badUrl, transactionId: "txn-1" };
+    const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1"] });
+    const deps = depsWith(db, fetch, makeAudit().fn, reader);
+    const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: badUrl, transactionId: "txn-1" };
     await assert.rejects(() => serveTransfer(env, deps, req), PushUrlError, "must refuse dataPushUrl: " + badUrl);
     assert.equal(calls.length, 0, "NOTHING is pushed to a rejected dataPushUrl: " + badUrl);
   }
@@ -176,8 +197,9 @@ test("anti-SSRF: an empty / unconfigured host allow-list fails CLOSED (refuse al
   const hiu = await makeHiu();
   const { fetch, calls } = makeCapturingFetch();
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1)]);
-  const deps = depsWith(fetch, makeAudit().fn, reader);
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1"] });
+  const deps = depsWith(db, fetch, makeAudit().fn, reader);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
   await assert.rejects(() => serveTransfer(env, deps, req), PushUrlError);
   assert.equal(calls.length, 0);
 });
@@ -190,9 +212,17 @@ test("guard refusal at serve level: a cross-patient record -> OverShareError, no
   const { fetch, calls } = makeCapturingFetch();
   const audit = makeAudit();
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1), episode("cc-B-1", HASH_B, "Appendicitis", "fc-pat-B")]);
-  const deps = depsWith(fetch, audit.fn, reader);
-  // consent for A but the transfer includes B's care-context (subject B) -> the whole transfer is refused.
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx", { careContexts: ["cc-A-1", "cc-B-1"] }), careContexts: ["cc-A-1", "cc-B-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  // The consent row is patient A; the transfer includes cc-B-1 whose record subject is B AND whose registration
+  // is under B -> the whole transfer is refused (D1-authoritative subject bind).
+  const db = seedServeDb(HASH_A, {
+    careContexts: ["cc-A-1", "cc-B-1"],
+    ccRows: [
+      { id: "cc-A-1", tenant_id: TENANT, patient_abha_hash: HASH_A, source: "followcare", ref: "cc-A-1", hi_type: "DischargeSummary", display: "A", linked_at: "x" },
+      { id: "cc-B-1", tenant_id: TENANT, patient_abha_hash: HASH_B, source: "followcare", ref: "cc-B-1", hi_type: "DischargeSummary", display: "B", linked_at: "x" },
+    ],
+  });
+  const deps = depsWith(db, fetch, audit.fn, reader);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-B-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
 
   await assert.rejects(() => serveTransfer(env, deps, req), OverShareError);
   assert.equal(calls.length, 0, "not even the in-scope A record is pushed once a cross-patient record is present");
@@ -208,8 +238,9 @@ test("a push failure -> stop + hip.failed audited, error propagates (fail-closed
   const calls = [];
   const fetch = async (url, opts) => { calls.push(url); return { ok: false, status: 500, json: async () => ({}) }; };
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1)]);
-  const deps = depsWith(fetch, audit.fn, reader);
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1"] });
+  const deps = depsWith(db, fetch, audit.fn, reader);
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
   await assert.rejects(() => serveTransfer(env, deps, req));
   assert.ok(audit.events.some((e) => e.action === "hip.failed"), "hip.failed audited on a push error");
   assert.ok(!audit.events.some((e) => e.action === "hip.served"));
@@ -221,8 +252,8 @@ test("flag OFF -> no-op (DISABLED): neither smd_connect nor the HIP flag serve",
   const baseReq = (env) => {
     const { fetch, calls } = makeCapturingFetch();
     const reader = makeReader([episode("cc-A-1", HASH_A, DX1)]);
-    const deps = depsWith(fetch, makeAudit().fn, reader);
-    const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+    const deps = depsWith(seedServeDb(HASH_A, { careContexts: ["cc-A-1"] }), fetch, makeAudit().fn, reader);
+    const req = { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
     return { env, deps, req, calls };
   };
   for (const env of [envOf({ CONNECT_HIP_FLAG: "0" }), envOf({ CONNECT_FLAG: "0" }), envOf({ CONNECT_HIP_FLAG: undefined })]) {
@@ -239,8 +270,8 @@ test("empty care-contexts -> EMPTY no-op (nothing loaded, guarded, sealed, or pu
   const env = envOf();
   const hiu = await makeHiu();
   const { fetch, calls } = makeCapturingFetch();
-  const deps = depsWith(fetch, makeAudit().fn, makeReader([]));
-  const req = { tenantId: TENANT, consent: consentFor("A@sbx"), careContexts: [], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
+  const deps = depsWith(null, fetch, makeAudit().fn, makeReader([]));
+  const req = { tenantId: TENANT, consentId: "consent-1", careContexts: [], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-1" };
   const out = await serveTransfer(env, deps, req);
   assert.equal(out.outcome, "EMPTY");
   assert.equal(out.pages, 0);
