@@ -4227,7 +4227,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
   // Owner allowlist — mirrors functions/_adminauth.js OWNER_EMAILS. Client gate only shows the
   // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
-  var NOTIF_OWNERS = ["mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];   // drmanojkurmana@gmail.com removed (owner request 2026-08-01)
+  var NOTIF_OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
   function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;

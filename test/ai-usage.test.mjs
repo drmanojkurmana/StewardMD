@@ -94,7 +94,7 @@ test("buildUsageRecord: normalized metadata, NO prompt/PHI fields, clamps + stat
 });
 
 test("checkModuleQuota + recordAiUsage: per-module daily cap enforced across records", async () => {
-  const kv = mockKv(), env = { AI_LIMIT_ECG: "3" }, doc = "fb:u1";
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "3", MAIK_ENFORCE_CAPS: "1" }, doc = "fb:u1";   // caps are opt-in (launch default = unlimited)
   const rec = () => buildUsageRecord({ doctorId: doc, module: "ecg", model: "gemini-2.5-flash", promptTokens: 10, completionTokens: 5, estCostInr: 0.01, latencyMs: 1000 });
   for (let i = 0; i < 3; i++) {
     const q = await checkModuleQuota(env, kv, "ecg", doc, NOW);
@@ -112,6 +112,8 @@ test("checkModuleQuota + recordAiUsage: per-module daily cap enforced across rec
 test("checkModuleQuota: unlimited module + no-store both fail-open (never block)", async () => {
   assert.equal((await checkModuleQuota({}, mockKv(), "kb", "fb:u1", NOW)).ok, true);   // kb daily=0 → unlimited
   assert.equal((await checkModuleQuota({}, null, "ecg", "fb:u1", NOW)).ok, true);      // no store → allow
+  // LAUNCH default (caps opt-in): a normally-capped module is UNLIMITED unless MAIK_ENFORCE_CAPS="1".
+  assert.equal((await checkModuleQuota({ AI_LIMIT_ECG: "1" }, mockKv(), "ecg", "fb:u1", NOW)).unlimited, true);
 });
 
 test("doctorUsageSummary: reflects recorded usage + exposes limits", async () => {
@@ -127,7 +129,7 @@ test("doctorUsageSummary: reflects recorded usage + exposes limits", async () =>
 });
 
 test("gateAndCount: enforces the module cap AND counts each allowed call", async () => {
-  const kv = mockKv(), env = { AI_LIMIT_ECG: "2" }, doc = "fb:g1";
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "2", MAIK_ENFORCE_CAPS: "1" }, doc = "fb:g1";   // caps are opt-in (launch default = unlimited)
   const a = await gateAndCount(env, kv, "ecg", doc, "pro", NOW);
   assert.equal(a.ok, true); assert.equal(a.limit, 2);
   const b = await gateAndCount(env, kv, "ecg", doc, "pro", NOW);
@@ -179,7 +181,7 @@ test("setLimitOverride + limitOverrides: admin quota editor persists per module"
 });
 
 test("checkModuleQuota + summaries honour the KV limit override end-to-end", async () => {
-  const kv = mockKv(), env = { AI_LIMIT_ECG: "10" }, doc = "fb:o1";
+  const kv = mockKv(), env = { AI_LIMIT_ECG: "10", MAIK_ENFORCE_CAPS: "1" }, doc = "fb:o1";   // caps are opt-in (launch default = unlimited)
   await setLimitOverride(kv, "ecg", 1);                                 // admin tightens ECG to 1/day
   assert.equal((await gateAndCount(env, kv, "ecg", doc, "pro", NOW)).ok, true);
   const blocked = await checkModuleQuota(env, kv, "ecg", doc, NOW);
