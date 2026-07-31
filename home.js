@@ -77,15 +77,15 @@
 
   // MaiK Research Mode — a clinician EVIDENCE REVIEW over trusted medical literature (PubMed / WHO /
   // CDC / NICE / ICMR / Cochrane / specialty-society guidelines), NOT a general web search. Additive,
-  // flag-gated (smd_maik_research), DEFAULT OFF. Enable: ?research=1 (persists) or set localStorage
-  // smd_maik_research="1"; ?research=0 (or clearing the key) turns it off. When off, no toggle renders.
+  // flag-gated (smd_maik_research), DEFAULT ON (owner-enabled). Turn OFF: ?research=0 (persists) or set
+  // localStorage smd_maik_research="0"; ?research=1 (or clearing the key) turns it back on.
   function researchModeAvail() {
     try {
       var q = location.search || "";
-      if (/[?&]research=1\b/.test(q)) localStorage.setItem("smd_maik_research", "1");
-      else if (/[?&]research=0\b/.test(q)) localStorage.removeItem("smd_maik_research");
-      return localStorage.getItem("smd_maik_research") === "1";
-    } catch (e) { return false; }
+      if (/[?&]research=0\b/.test(q)) localStorage.setItem("smd_maik_research", "0");
+      else if (/[?&]research=1\b/.test(q)) localStorage.removeItem("smd_maik_research");
+      return localStorage.getItem("smd_maik_research") !== "0";
+    } catch (e) { return true; }
   }
 
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
