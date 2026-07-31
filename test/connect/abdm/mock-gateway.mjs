@@ -2,7 +2,7 @@
 import { ENDPOINTS, FIELDS } from "../../../functions/_connect/abdm/gateway.js";
 import { CONSENT_FIELDS, HIREQUEST_FIELDS } from "../../../functions/_connect/abdm/hiu.js";
 import { attachTransactionId, advanceStatus } from "../../../functions/_connect/abdm/state.js";
-import { sealBundle, sharedSecret, generateKeyPair, nonce } from "../../../functions/_connect/abdm/fidelius.js";
+import { sealBundle, sharedSecret, generateKeyPair, nonce, openEntry, deriveKeyIv } from "../../../functions/_connect/abdm/fidelius.js";
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
 const pathOf = (url) => new URL(url).pathname;
 
@@ -160,5 +160,128 @@ export async function makeHiuMockGateway({ env, deps, handleIngress, tenantId = 
       if (includeConsentId) payload.consentId = state.consentId;
       return deliverWebhook(payload);
     },
+  };
+}
+
+// ── Stage-5 Task-9: the end-to-end mock plays a HIU vs the REAL HIP SERVE path (mirror/inverse of the above) ──
+// Here the mock is the HEALTH INFORMATION USER. It (1) sends a `discovery` probe -> receives care-contexts;
+// (2) fires a JWS-signed `hip-consent-notify` (an inner signed consent artifact) + a `hip-hi-request` carrying
+// its OWN fresh HIU keyMaterial (a fresh keypair + nonce) + a dataPushUrl + a transactionId + the consentId —
+// BOTH through the REAL handleIngress; (3) captures the HIP's pushed transfer pages at that dataPushUrl (via the
+// injected deps.fetch) and DECRYPTS each page with fidelius.openEntry(secret, hiuNonce, pageKeyMaterial.nonce,
+// content, checksum) — the MIRRORED roles of hip-crypto.sealForHiu. Real crypto throughout: every webhook body
+// (and the inner artifact) is RS256-signed with a key whose public JWK is published as the pinned JWKS, so the
+// ingress body-verify runs its REAL verifyJws path — no verify stubs.
+//   Behavior knobs: `fuzzyProbe` (discovery sends demographics with NO exact ABHA -> a miss, never fuzzy),
+//   `crossPatient` (the hi-request appends a cross-patient careContext ref -> the HIP guard refuses the WHOLE
+//   transfer, nothing pushed), `tamper` (decrypt corrupts one ciphertext byte -> openEntry fails closed / GCM
+//   auth). `multiRecord` (N pages) and `flagOff` (the HIP flag OFF -> 404) are realized by the caller's
+//   careContexts list + a flag-off env respectively; they are accepted here for symmetry/documentation.
+export async function makeHipMockHiu({ env, deps, handleIngress, tenantId = "t-hip", now, dataPushUrl = "https://hiu.example.org/abdm/push", knobs = {} } = {}) {
+  const nowIso = () => { const n = typeof now === "function" ? now() : now; if (n && typeof n.toISOString === "function") return n.toISOString(); return n || new Date().toISOString(); };
+  const behavior = { fuzzyProbe: false, crossPatient: false, crossPatientRef: "cc-B-1", tamper: false, multiRecord: false, flagOff: false, ...knobs };
+
+  // CM signing key -> pinned JWKS (mirrors makeHiuMockGateway; no fixtures on disk). RS256 is in the ingress's
+  // INGRESS_ALGS allow-list, so the REAL verifyJws accepts a body signed with this key.
+  const rsa = await subtle.generateKey({ name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
+  const jwk = await subtle.exportKey("jwk", rsa.publicKey); jwk.kid = "abdm-cm-1"; jwk.alg = "RS256"; jwk.use = "sig";
+  const jwks = { keys: [jwk] };
+  const jwksFetch = async () => ({ ok: true, status: 200, json: async () => jwks });
+
+  // OUR fresh HIU half — a fresh X25519 keypair + a fresh 32-byte nonce. This is the material the HIP seals
+  // against; we keep the PRIVATE key so we can later decrypt every page (the round-trip proof).
+  const kp = await generateKeyPair();
+  const hiuNonce = nonce();
+  const hiuKeyMaterial = { cryptoAlg: "ECDH", curve: "Curve25519", dhPublicKey: b64(kp.publicKeyRaw), nonce: b64(hiuNonce) };
+
+  const pushedPages = [];   // every page the HIP POSTs to OUR dataPushUrl, in wire order: { url, body }
+  const calls = [];
+  let cb = 0;
+
+  // deps.fetch seam: capture the HIP's push at OUR dataPushUrl; also resolve the JWKS if body-verify ever fetches
+  // it (in practice we inject deps.jwks so this branch is unused — kept for robustness/symmetry). pushPage treats
+  // a { status:202 } as success.
+  const hiuFetch = async (url, init = {}) => {
+    calls.push({ url: String(url), init });
+    if (/certs|jwks/i.test(String(url))) return jwksFetch();
+    let body = null; try { body = init && init.body ? JSON.parse(init.body) : null; } catch {}
+    pushedPages.push({ url: String(url), body });
+    return { ok: true, status: 202, json: async () => ({}) };
+  };
+
+  async function deliver(payload) {
+    const body = await signJws({ alg: "RS256", kid: "abdm-cm-1", typ: "JWT" }, payload, rsa.privateKey);
+    return handleIngress(env, deps, mockRequest(body, { "REQUEST-ID": "hip-cb-" + (++cb), TIMESTAMP: nowIso(), "X-HIU-ID": tenantId }));
+  }
+
+  // The JWS-signed consent artifact (its OWN inner signature) carried inside the hip-consent-notify body — the
+  // shape a real CM signs. The ingress verifies the OUTER webbook body; the inner artifact is signed for fidelity.
+  async function signedArtifact(consentId, scope, status) {
+    const consentDetail = {
+      consentId, status, careContexts: scope.careContexts, hiTypes: scope.hiTypes, purpose: scope.purpose,
+      permission: { dateRange: scope.dateRange, dataEraseAt: scope.dataEraseAt }, expiry: scope.expiry,
+    };
+    return { signature: await signJws({ alg: "RS256", kid: "abdm-cm-1", typ: "JWT" }, { consentDetail, status }, rsa.privateKey) };
+  }
+
+  // Re-derive the (key,iv) each captured page decrypts under — used by both decryptPages and the caller's
+  // composed no-(key,iv)-reuse proof. secret is per-page (a fresh HIP ephemeral pub -> a fresh ECDH secret).
+  async function ivHexFor(body) {
+    const km = body.keyMaterial;
+    const secret = await sharedSecret(kp.privateKey, unb64(km.dhPublicKey));
+    const { iv } = await deriveKeyIv(secret, hiuNonce, unb64(km.nonce));
+    return [...iv].map((x) => x.toString(16).padStart(2, "0")).join("");
+  }
+
+  return {
+    jwks, jwksFetch, hiuFetch, hiuKeyMaterial, pushedPages, calls, behavior,
+
+    // (1) discovery probe. Exact-identifier by default; `fuzzy` (or knobs.fuzzyProbe) sends demographics ONLY
+    //     (no exact ABHA) so the HIP can never match — proving discovery is never fuzzy/demographic.
+    fireDiscovery: ({ abhaAddress, sourceId = "hiu-mock", fuzzy = behavior.fuzzyProbe, probe } = {}) => {
+      const p = probe || (fuzzy
+        ? { tenantId, name: "Synthetic Demographic", gender: "female", yearOfBirth: "1972" }
+        : { tenantId, abhaAddress });
+      return deliver({ type: "discovery", probe: p, sourceId });
+    },
+
+    // (2a) JWS-signed hip-consent-notify (with the inner signed artifact) -> putHipConsent (monotonic status).
+    fireConsentNotify: async ({ consentId, status = "GRANTED", scope, patientAbhaHash, hiTypes, expiresAt } = {}) => {
+      const payload = { type: "hip-consent-notify", consentId, status, patientAbhaHash, hiTypes, expiresAt };
+      if (scope) payload.artifact = await signedArtifact(consentId, scope, status);
+      return deliver(payload);
+    },
+
+    // (2b) hip-hi-request carrying OUR fresh HIU keyMaterial + the dataPushUrl + a transactionId + the consentId.
+    //      `crossPatient` (or knobs) appends a cross-patient careContext ref so the HIP guard refuses the WHOLE
+    //      transfer (OverShareError -> nothing pushed).
+    fireHiRequest: ({ consentId, careContexts = [], transactionId = "txn-hip-1", pushUrl = dataPushUrl, cross = behavior.crossPatient } = {}) => {
+      const ccs = cross ? [...careContexts, behavior.crossPatientRef] : careContexts.slice();
+      return deliver({ type: "hip-hi-request", consentId, transactionId, careContexts: ccs, keyMaterial: hiuKeyMaterial, dataPushUrl: pushUrl });
+    },
+
+    // A generic signed-webhook escape hatch (e.g. to prove a Stage-4 HIU data-push STILL routes with the HIP flag
+    // off). Signs + delivers any payload through the same REAL handleIngress spine.
+    fireEvent: (payload) => deliver(payload),
+
+    // (3) Decrypt every captured page with OUR HIU private key, mirroring the seal roles:
+    //     openEntry(secret, hiuNonce, hipNonce, content, checksum). `tamper` flips one ciphertext byte BEFORE
+    //     openEntry so the GCM tag fails (fail-closed decrypt). Returns the plaintext strings (in wire order).
+    decryptPages: async ({ tamper = behavior.tamper } = {}) => {
+      const out = [];
+      for (const { body } of pushedPages) {
+        const km = body.keyMaterial;
+        const secret = await sharedSecret(kp.privateKey, unb64(km.dhPublicKey));
+        const e = body.entries[0];
+        let content = e.content;
+        if (tamper) { const raw = [...atob(content)]; raw[raw.length - 1] = String.fromCharCode(raw[raw.length - 1].charCodeAt(0) ^ 1); content = btoa(raw.join("")); }
+        out.push(await openEntry(secret, hiuNonce, unb64(km.nonce), content, e.checksum));
+      }
+      return out;
+    },
+
+    // The composed nonce-safety proof helper: the DISTINCT iv each page decrypts under, re-derived via
+    // fidelius.deriveKeyIv. A collision would mean a reused (key,iv) — the caller asserts the set size == N.
+    deriveIvs: async () => { const ivs = []; for (const { body } of pushedPages) ivs.push(await ivHexFor(body)); return ivs; },
   };
 }
