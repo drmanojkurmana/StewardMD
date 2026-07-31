@@ -86,6 +86,11 @@ If your D1 already has `connect_abdm_consent_req` from before Stage-4/6, add the
   ```sql
   ALTER TABLE connect_abdm_consent_req ADD COLUMN data_erase_at TEXT;
   ```
+- [ ] Stage-6 T3 txn recoverable-finalization columns (a provisioned pre-Stage-6 D1 needs these or `consumeTransfer`'s `UPDATE ... SET session_status`/`notify_confirmed` fails on go-live):
+  ```sql
+  ALTER TABLE connect_abdm_txn ADD COLUMN session_status TEXT;
+  ALTER TABLE connect_abdm_txn ADD COLUMN notify_confirmed TEXT;
+  ```
 - [ ] Consent-id + txn-id uniqueness backstops (structurally prevent the two-row split / double-ack):
   ```sql
   CREATE UNIQUE INDEX IF NOT EXISTS idx_consent_req_cid
