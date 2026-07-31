@@ -484,7 +484,7 @@
     // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
     ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
-      "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
+      "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "ghisPanel", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
       "abgOverlay", "hvSheet", "hvScrim", "swShell", "swSheet", "swScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
     });
@@ -499,6 +499,11 @@
   }
   // Exposed so the Specialty Workspaces branch selector can return the user Home after picking a branch.
   window.SMD_goHome = goHome;
+  // Restore the home screen WITHOUT closing any open overlay. Ward Sync (#ghisPanel) uses this on its
+  // back button: "Import Patient" hides home (hideV2) before opening Ward Sync, so on cancel we must
+  // bring home back or the user is stranded on a blank page. Whatever module is legitimately on top
+  // (ICU/DX) stays on top — showV2 only re-adds the home layer underneath.
+  window.SMD_showHome = showV2;
   // logo (and brand text) anywhere → go home
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target.closest('.brand, .v3-mark, .v3-shield, img[alt="StewardMD"]') : null;

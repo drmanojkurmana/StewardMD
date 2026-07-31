@@ -1493,7 +1493,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1052-brain" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1062-email-console" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1063-email-console" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1657,7 +1657,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold997"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold998"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
