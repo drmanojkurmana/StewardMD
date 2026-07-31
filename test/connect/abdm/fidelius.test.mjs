@@ -79,11 +79,20 @@ test("openEntry rejects a tampered ciphertext (GCM auth) — fails closed", asyn
   const p = await pair();
   const entry = await sealBundle(p.secA, p.nA, p.nB, "hello");
   const bad = [...atob(entry.content)]; bad[bad.length - 1] = String.fromCharCode(bad[bad.length - 1].charCodeAt(0) ^ 1);
-  await assert.rejects(() => openEntry(p.secB, p.nB, p.nA, btoa(bad.join("")), entry.checksum), Error);
+  await assert.rejects(() => openEntry(p.secB, p.nB, p.nA, btoa(bad.join("")), entry.checksum), FideliusError);
 });
 
 test("openEntry rejects a checksum mismatch (defence-in-depth)", async () => {
   const p = await pair();
   const entry = await sealBundle(p.secA, p.nA, p.nB, "hello");
   await assert.rejects(() => openEntry(p.secB, p.nB, p.nA, entry.content, "00".repeat(32)), FideliusError);
+});
+
+test("seal→open round-trips a LARGE (~600 KB) plaintext without overflowing the call stack (b64 chunking)", async () => {
+  const p = await pair();
+  const big = "x".repeat(600000);
+  const entry = await sealBundle(p.secA, p.nA, p.nB, big);
+  const out = await openEntry(p.secB, p.nB, p.nA, entry.content, entry.checksum);
+  assert.equal(out, big);
+  assert.equal(out.length, 600000);
 });

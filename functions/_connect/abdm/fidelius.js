@@ -41,7 +41,12 @@ export async function deriveKeyIv(secret, ourNonce, theirNonce) {
 }
 
 // functions/_connect/abdm/fidelius.js  (append)
-const b64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
+function b64(bytes) {
+  const u = new Uint8Array(bytes); let s = "";
+  const CH = 0x8000;                         // 32k chunk, safe for String.fromCharCode.apply
+  for (let i = 0; i < u.length; i += CH) s += String.fromCharCode.apply(null, u.subarray(i, i + CH));
+  return btoa(s);
+}
 const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 async function sha256hex(bytes) {
   const h = new Uint8Array(await subtle.digest("SHA-256", bytes));
