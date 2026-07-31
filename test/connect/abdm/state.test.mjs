@@ -9,6 +9,7 @@ import {
   bufferEntry, listBuffered, deleteBuffered,
   advanceStatus, claimAck,
   tryJoin,
+  sweep,
 } from "../../../functions/_connect/abdm/state.js";
 
 const NOW = "2026-07-31T00:00:00Z";
@@ -504,4 +505,89 @@ test("tryJoin: both missing (null key + zero buffer) → reason 'no-key' (key gu
   assert.equal(res.ready, false);
   assert.equal(res.reason, "no-key"); // NOT "no-buffer" — the key guard is checked first
   assert.deepEqual(res.entries, []);
+});
+
+// ---- Stage-3 Task-6: reconciliation GC sweep — bound ephemeral key + buffer lifetime ----------------
+// The cron-driven garbage collector (Stage 6 calls it). For every txn PAST its expires_at OR in a
+// terminal status it must erase the sealed eph key, delete the R2 push-buffer, and remove the row — so
+// no key material or ciphertext lingers once a transfer completes OR dies (FAILED/PARTIAL too, not just
+// the happy TRANSFERRED path). Numeric expiresAt/now so `Number(expires_at) < Number(now)` is meaningful.
+
+// Scenario 1: an EXPIRED txn — its buffer AND its sealed key are gone and the row is removed.
+test("sweep: expired txn → buffer + key gone, row removed (txnsSwept===1)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-exp", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: 1000, now: NOW, // still in-flight, but past its TTL
+  });
+  await attachTransactionId(db, "req-exp", "txn-A", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-A", "cc-ref-1", "CIPHER-A", "chk-1", NOW);
+
+  const counts = await sweep(db, r2, HMAC_ENV, 2000); // now (2000) > expires_at (1000)
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.keysErased, 1);
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal((await listBuffered(r2, "txn-A")).length, 0);    // buffer gone
+  assert.equal(await getTxnByRequestId(db, "req-exp"), null);   // row removed (key gone with it)
+});
+
+// Scenario 2: a TERMINAL (FAILED) txn that has NOT expired yet — still cleaned. Proves the GC fires on a
+// NON-happy terminal outcome, independent of expiry (FAILED/PARTIAL must not leak key material either).
+test("sweep: terminal (FAILED) txn not yet expired → still cleaned", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-fail", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "FAILED", expiresAt: 9999, now: NOW, // FUTURE expiry — terminal is the sole trigger here
+  });
+  await attachTransactionId(db, "req-fail", "txn-F", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-F", "cc-ref-1", "CIPHER-F", "chk-1", NOW);
+
+  const counts = await sweep(db, r2, HMAC_ENV, 100); // now (100) < expires_at (9999): NOT expired
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal(await getTxnByRequestId(db, "req-fail"), null);
+  assert.equal((await listBuffered(r2, "txn-F")).length, 0);
+});
+
+// Scenario 3: an in-flight, non-expired, non-terminal txn — left completely untouched (zero counts).
+test("sweep: in-flight non-expired non-terminal txn → untouched (txnsSwept===0)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-live", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: 9999, now: NOW,
+  });
+  await attachTransactionId(db, "req-live", "txn-L", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-L", "cc-ref-1", "CIPHER-L", "chk-1", NOW);
+
+  const counts = await sweep(db, r2, HMAC_ENV, 100); // not expired (100<9999), not terminal
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0 });
+  const row = await getTxnByRequestId(db, "req-live");
+  assert.ok(row);
+  assert.equal(row.status, "RECEIVING");
+  assert.ok(row.eph_privkey_sealed && row.eph_privkey_sealed.length > 0); // key intact
+  assert.equal((await listBuffered(r2, "txn-L")).length, 1);              // buffer intact
+});
+
+// Scenario 4: idempotent — a second sweep over the now-clean table is a no-op returning all-zero counts.
+test("sweep is idempotent: second sweep over a clean table → all-zero counts, no errors", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-idem-sweep", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: 1000, now: NOW,
+  });
+  await attachTransactionId(db, "req-idem-sweep", "txn-I", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-I", "cc-ref-1", "CIPHER-I", "chk-1", NOW);
+
+  const first = await sweep(db, r2, HMAC_ENV, 2000);
+  assert.equal(first.txnsSwept, 1);
+  const second = await sweep(db, r2, HMAC_ENV, 2000); // table already clean
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0 });
 });

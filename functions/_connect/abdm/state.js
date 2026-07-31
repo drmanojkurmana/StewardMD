@@ -242,3 +242,42 @@ export async function tryJoin(db, r2, env, transactionId) {
     throw new ConnectStateError(`abdm tryJoin failed: ${e && e.message}`);
   }
 }
+
+// ---- Stage-3 Task-6: reconciliation GC sweep — bound ephemeral key + buffer lifetime ----------------
+// The cron-driven (Stage 6) garbage collector. It bounds the lifetime of ephemeral key material and
+// buffered ciphertext: for EVERY txn that is past its `expires_at` OR in a terminal status it erases the
+// sealed eph key, deletes the R2 push-buffer, and removes the row. This fires on ANY terminal outcome
+// (FAILED/PARTIAL too, not just the happy TRANSFERRED path) so nothing lingers when a transfer dies.
+// Dependency-injected db/r2/env/now — no Date.now/global reads. Fail-closed (ConnectStateError) on a
+// genuine storage failure. Idempotent: a second sweep over an already-clean table returns zero counts.
+export async function sweep(db, r2, env, now) {
+  // Txn terminal set — inlined here (small stable domain constant), NOT imported from the Task-4 FSM, to
+  // avoid coupling the GC to that module's internals. Distinct from the module-scope consent `TERMINAL`.
+  const TERMINAL = new Set(["TRANSFERRED", "PARTIAL", "FAILED"]);
+  try {
+    // VERIFY: a real D1 GC would enumerate victims with an indexed `WHERE expires_at < ?`; the mock D1
+    // only supports `col=?`/`col<>?` (throws on `<`), so enumerate all rows no-WHERE and filter in JS.
+    const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
+    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0;
+    for (const row of results) {
+      const expired = Number(row.expires_at) < Number(now);
+      if (!expired && !TERMINAL.has(row.status)) continue; // in-flight, non-expired, non-terminal → keep
+      // (1) drop the R2 push-buffer (scoped to this txn) when a transaction_id was ever attached.
+      if (row.transaction_id) buffersDeleted += await deleteBuffered(r2, row.transaction_id);
+      // (2) defensively erase the sealed eph key BEFORE deleting the row, so it can't be unsealed
+      //     post-expiry even if a delete races/fails. All WHERE = `request_id=?` (mock-safe).
+      const upd = await db.prepare("UPDATE connect_abdm_txn SET eph_privkey_sealed=?,updated_at=? WHERE request_id=?")
+        .bind("", now, row.request_id).run();
+      if (!upd || upd.success === false) throw new ConnectStateError("sweep key-erase failed");
+      keysErased++;
+      // (3) remove the row.
+      const del = await db.prepare("DELETE FROM connect_abdm_txn WHERE request_id=?").bind(row.request_id).run();
+      if (!del || del.success === false) throw new ConnectStateError("sweep row-delete failed");
+      txnsSwept++;
+    }
+    return { txnsSwept, buffersDeleted, keysErased };
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e; // deleteBuffered already fail-closes R2 errors
+    throw new ConnectStateError(`abdm sweep failed: ${e && e.message}`);
+  }
+}
