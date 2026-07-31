@@ -7,6 +7,7 @@ import {
   putTxn, getTxnByRequestId, getTxnByTransactionId, attachTransactionId, unsealTxnKey,
   bufferEntry, listBuffered, deleteBuffered,
   advanceStatus, claimAck,
+  tryJoin,
 } from "../../../functions/_connect/abdm/state.js";
 
 const NOW = "2026-07-31T00:00:00Z";
@@ -317,4 +318,118 @@ test("FSM: RECEIVING→PARTIAL is legal and PARTIAL is terminal", async () => {
   assert.deepEqual(await advanceStatus(db, "req-part", "PARTIAL", "FAILED", "2026-07-31T13:00:00Z"),
     { ok: false, reason: "illegal" });
   assert.equal((await getTxnByRequestId(db, "req-part")).status, "PARTIAL"); // unchanged
+});
+
+// ---- Stage-3 Task-5: buffer-then-join (tryJoin) — the read-side join precondition (STRICT AND) ------
+// Danger model (dual-adversarial review): a false `ready` would make Stage 4 unseal+decrypt garbage;
+// a permanent false not-ready would strand a transfer forever. These four+one scenarios prove the
+// predicate is a STRICT AND — (txn found AND its eph key sealed) AND (>=1 buffered entry) — never an OR,
+// and that tryJoin is a PURE read: no decrypt, no mutation, idempotent, buffer always retained.
+
+// Scenario 1: the async race the whole design exists for — the encrypted PUSH lands before ON-REQUEST
+// has correlated our side. No txn row is findable by that transaction_id yet → not ready (no-txn), and
+// the buffer MUST be retained so the later on-request can still join.
+test("tryJoin: push before on-request → not ready (no-txn), buffer retained (not consumed)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  // PUSH first: ciphertext buffered under txn-A, but nothing has attached transaction_id="txn-A" yet.
+  await bufferEntry(r2, HMAC_ENV, "txn-A", "cc-ref-1", "CIPHER-A", "chk-1", NOW);
+
+  const res = await tryJoin(db, r2, HMAC_ENV, "txn-A");
+  assert.equal(res.ready, false);
+  assert.equal(res.reason, "no-txn");
+  assert.equal(res.txn, null);
+  assert.deepEqual(res.entries, []);
+  // CRUX: the buffer is NOT consumed — a later on-request must still find the ciphertext to join.
+  const list = await listBuffered(r2, "txn-A");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].contentB64, "CIPHER-A");
+});
+
+// Scenario 2: both halves present — on-request attached the txn (with a sealed eph key) AND the push
+// buffered the ciphertext → ready, with the ciphertext entries and the txn (key) surfaced for Stage 4.
+test("tryJoin: on-request then push → ready with entries + sealed key (strict AND satisfied)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-join", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-join", "txn-A", NOW); // now getTxnByTransactionId finds it
+  await bufferEntry(r2, HMAC_ENV, "txn-A", "cc-ref-1", "CIPHER-A", "chk-1", NOW);
+
+  const res = await tryJoin(db, r2, HMAC_ENV, "txn-A");
+  assert.equal(res.ready, true);
+  assert.equal(res.reason, "ready");
+  assert.equal(res.entries.length, 1);
+  assert.equal(res.entries[0].contentB64, "CIPHER-A"); // the ciphertext, surfaced (still not decrypted)
+  assert.equal(res.txn.request_id, "req-join");
+  assert.ok(res.txn.eph_privkey_sealed && res.txn.eph_privkey_sealed.length > 0); // the sealed key half
+});
+
+// Scenario 3: the buffer side of the AND — the txn is fully correlated but nothing has been pushed yet.
+// Must be not-ready (no-buffer), NOT ready (proves ready is not driven by the txn half alone → no OR).
+test("tryJoin: on-request but no push → not ready (no-buffer) — proves the buffer side of the AND", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-nb", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-nb", "txn-B", NOW);
+  // NOTHING buffered under txn-B.
+  const res = await tryJoin(db, r2, HMAC_ENV, "txn-B");
+  assert.equal(res.ready, false);
+  assert.equal(res.reason, "no-buffer");
+  assert.deepEqual(res.entries, []);
+  assert.equal(res.txn.request_id, "req-nb"); // the txn half IS present; only the buffer half is missing
+});
+
+// Scenario 4: idempotent + pure. Repeating tryJoin in the ready case yields an identical result and
+// NEVER consumes or mutates the buffer (Stage 4 alone deletes it, after decrypt).
+test("tryJoin is idempotent + pure: two calls same result, buffer intact after both", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-idem", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-idem", "txn-A", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-A", "cc-ref-1", "CIPHER-A", "chk-1", NOW);
+
+  const first = await tryJoin(db, r2, HMAC_ENV, "txn-A");
+  const second = await tryJoin(db, r2, HMAC_ENV, "txn-A");
+  assert.equal(first.ready, true);
+  assert.equal(second.ready, true);
+  assert.equal(second.reason, "ready");
+  assert.deepEqual(first.entries, second.entries); // identical result across calls
+  // no decrypt, no mutation: the buffer is still fully intact after BOTH calls.
+  const list = await listBuffered(r2, "txn-A");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].contentB64, "CIPHER-A");
+});
+
+// Scenario 5 (belt for the review): the KEY half of the AND, isolated. A txn row AND a buffered entry
+// both exist, but the sealed eph key is empty → must be not-ready (no-key), never ready. This is the
+// case an OR (or a lenient truthy check) would wrongly pass, letting Stage 4 unseal an empty key.
+test("tryJoin: txn + buffer both present but sealed key empty → not ready (no-key), never OR", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  const emptySeal = { seal: async () => "", open: async (s) => s }; // pathological: sealed key comes back ""
+  await putTxn(db, emptySeal, {
+    requestId: "req-nk", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "REQUESTED", expiresAt: "z", now: NOW,
+  });
+  await attachTransactionId(db, "req-nk", "txn-C", NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-C", "cc-ref-1", "CIPHER-C", "chk-1", NOW); // buffer half IS present
+
+  const res = await tryJoin(db, r2, HMAC_ENV, "txn-C");
+  assert.equal(res.ready, false);
+  assert.equal(res.reason, "no-key");
+  assert.deepEqual(res.entries, []); // short-circuits before listing/decrypting
+  assert.ok(res.txn); // the row is still returned for the caller's diagnostics
 });

@@ -212,3 +212,33 @@ export async function claimAck(db, transactionId, now) {
   if (!res || res.success === false) throw new ConnectStateError("claimAck update failed");
   return !!(res.meta && res.meta.changes === 1);
 }
+
+// ---- Stage-3 Task-5: buffer-then-join — the read-side join precondition resolver -------------------
+// In the async ABDM flow the encrypted PUSH (Fidelius ciphertext, keyed by transaction_id) can land
+// BEFORE the ON-REQUEST callback that attaches our correlation half (the transaction_id link + the sealed
+// ephemeral key). tryJoin decides whether BOTH halves are present so Stage 4 can safely unseal+decrypt.
+// It is a STRICT AND and a PURE READ: never decrypts (Stage 4 owns that), never mutates/deletes the buffer
+// or the txn row, and is idempotent — the buffer is left intact for the caller every time.
+//   ready ⇔ (txn found via transaction_id  AND  txn.eph_privkey_sealed non-empty)  AND  (>=1 buffered entry)
+// A false `ready` would make Stage 4 unseal+decrypt garbage; a permanent false not-ready would strand a
+// transfer — so the predicate is this AND, NEVER an OR. A not-yet-joinable state is a NORMAL {ready:false}
+// return (never a throw); only a genuine storage failure throws ConnectStateError (fail-closed — a partial
+// read must never be presented as a join). `env` is part of the injected-deps signature (Stage-4 symmetry);
+// the read path derives everything it needs from db/r2/transactionId.
+export async function tryJoin(db, r2, env, transactionId) {
+  try {
+    const txn = await getTxnByTransactionId(db, transactionId);
+    // Half 1a — no correlated txn row yet ⇒ push-before-on-request. Retain the buffer for a later join.
+    if (!txn) return { ready: false, entries: [], txn: null, reason: "no-txn" };
+    // Half 1b — defensive: a txn row with no sealed key can't be unsealed; never declare ready.
+    if (!txn.eph_privkey_sealed) return { ready: false, entries: [], txn, reason: "no-key" };
+    // Half 2 — nothing pushed yet ⇒ on-request done, awaiting the encrypted push. Not ready.
+    const entries = await listBuffered(r2, transactionId);
+    if (entries.length === 0) return { ready: false, entries: [], txn, reason: "no-buffer" };
+    // BOTH halves present — ready. No mutation, no decrypt: Stage 4 consumes entries, unseals, decrypts, deletes.
+    return { ready: true, entries, txn, reason: "ready" };
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e; // listBuffered already fail-closes R2 errors
+    throw new ConnectStateError(`abdm tryJoin failed: ${e && e.message}`);
+  }
+}
