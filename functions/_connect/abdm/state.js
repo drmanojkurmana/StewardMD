@@ -370,3 +370,60 @@ export async function sweep(db, r2, env, now) {
     throw new ConnectStateError(`abdm sweep failed: ${e && e.message}`);
   }
 }
+
+// ---- Stage-6 Task-3: reconcileNotify — recover a claimed-but-non-terminal txn (a LOST hiNotify receipt) --------
+// consumeTransfer (hiu.js) claims the ack via a single D1 CAS (claimAck) and, the INSTANT it wins, persists the
+// computed `session_status` outcome durably — BEFORE the hiNotify. A crash/throw ANYWHERE in the finalize tail
+// after that persist can strand the txn: ack_claimed=1, status STILL 'RECEIVING', session_status set, buffer
+// intact — and a plain retry LOSES the CAS, so the receipt is never re-sent and the txn never terminalises (until
+// the Task-2 expiry GC erases it). reconcileNotify makes that recoverable: it enumerates the stranded rows and
+// IDEMPOTENTLY re-runs the SAME tail — re-notify → delete buffer → advance RECEIVING→outcome.
+//   SELECT the strand: `ack_claimed=1 AND status='RECEIVING' AND session_status IS NOT NULL` (mock-safe: the mock
+//     D1 has no `IS NOT NULL`, so enumerate no-WHERE and filter in JS, exactly like `sweep`).
+//   IDEMPOTENT: a re-run after a prior success finds the row already terminal (status ≠ 'RECEIVING') → not
+//     selected → skipped; the buffer delete + FSM advance are themselves no-ops once done. A never-claimed row
+//     (ack_claimed=0) is NEVER reconciled — only the CAS winner ever persisted a session_status, so an in-flight
+//     RECEIVING transfer is never re-notified/terminalised out from under a live consume.
+//   FAIL-CLOSED PER ROW (best-effort): a gateway/storage error on ONE row is caught + audited (metadata-only) and
+//     does NOT abort the others; that row is left RECEIVING + buffer-intact → recovered on the NEXT pass. A
+//     duplicate hiNotify across passes is tolerated (at-least-once recovery; the gateway hiNotify is keyed by
+//     transactionId) — the receipt-loss it repairs is the worse failure. `deps = { gateway }`.
+// Returns { reissued, terminalized }: hiNotify re-issued count, and rows advanced RECEIVING→terminal.
+export async function reconcileNotify(db, r2, env, deps, now) {
+  const audit = makeAuditSink(env, db);   // reuse the PHI-free sink — action strings + allow-listed ids/counts only
+  const safeAudit = async (ev) => { try { await audit(ev); } catch { /* accountability write is best-effort; never abort reconcile */ } };
+  let reissued = 0, terminalized = 0;
+  try {
+    // Mock-safe enumerate-then-filter (the mock D1 rejects `col IS NOT NULL`; a real GC would index the predicate).
+    const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
+    for (const row of results) {
+      // The lost-receipt strand ONLY: claimed (ack=1), not yet terminal (still RECEIVING), outcome durable.
+      if (row.ack_claimed !== 1 || row.status !== "RECEIVING" || row.session_status == null) continue;
+      try {
+        // Re-run the finalize tail idempotently. Notify FIRST (so a notify failure leaves the row still RECEIVING
+        // + buffer-intact for the next pass), then delete the buffer, then advance RECEIVING → the persisted outcome.
+        await deps.gateway.post("hiNotify", { transactionId: row.transaction_id, sessionStatus: row.session_status });
+        reissued++;
+        await deleteBuffered(r2, row.transaction_id);
+        const advanced = await advanceStatus(db, row.request_id, "RECEIVING", row.session_status, now);
+        if (advanced.ok === true) terminalized++;
+        await safeAudit({
+          action: "data.reconciled", outcome: "ok", ts: now, tenantId: row.tenant_id ?? null,
+          consentId: row.consent_id ?? null, transactionId: row.transaction_id ?? null,
+          resourceCounts: { reissued: 1, terminalized: advanced.ok === true ? 1 : 0 },
+        });
+      } catch (e) {
+        // Fail-closed per row: audit the failure metadata-only and continue; one bad row never aborts the pass.
+        await safeAudit({
+          action: "data.reconciled", outcome: "error", ts: now, tenantId: row.tenant_id ?? null,
+          consentId: row.consent_id ?? null, transactionId: row.transaction_id ?? null,
+          resourceCounts: { reissued: 0, terminalized: 0 },
+        });
+      }
+    }
+    return { reissued, terminalized };
+  } catch (e) {
+    if (e instanceof ConnectStateError) throw e; // deleteBuffered/advanceStatus already fail-close their storage errors
+    throw new ConnectStateError(`abdm reconcileNotify failed: ${e && e.message}`);
+  }
+}

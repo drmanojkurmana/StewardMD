@@ -261,6 +261,12 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   // (2) Unseal OUR ephemeral private scalar and derive the Fidelius shared secret against the HIP pubkey.
   //     sharedSecret fails CLOSED on a low-order/bad HIP pubkey (FideliusError) BEFORE any entry is touched and
   //     BEFORE the ack CAS — so poisoned keyMaterial never yields a (mis)decrypt, an ack, a notify, or a delete.
+  // LIVE PROTOCOL (reconciled with fidelius.js#sealBundle docstring): the exchange is ONE keyMaterial per transfer
+  // PAGE — we derive ONE (secret, ourNonce, hipNonce) for this page and open EVERY buffered entry under it. A
+  // well-behaved page carries EXACTLY ONE entry (per-page == per-entry); a HOSTILE multi-entry-under-one-keyMaterial
+  // page is tolerated ONLY because step (3) checksum-verifies EACH entry post-decrypt (a reused-(key,iv) sibling
+  // can never slip past that per-entry check).
+  // VERIFY: confirm against the ABDM /health-information/transfer wire-shape (one keyMaterial per page, one entry per page)
   const scalarB64 = await unsealTxnKey(deps.secrets, txn);
   const { privateKey } = await importRawPrivate(unb64(scalarB64));
   const secret = await sharedSecret(privateKey, unb64(hipKeyMaterial.dhPublicKey));
@@ -292,10 +298,18 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   const won = await claimAck(deps.db, transactionId, deps.now);
   if (!won) return { decrypted: [], acked: false, advanced: false };
 
+  // STAGE-6 T3 (recoverable finalize): the INSTANT the ack is claimed — and BEFORE the hiNotify — persist the
+  // computed `outcome` to session_status, so a crash/throw ANYWHERE in the tail below leaves a RECOVERABLE strand
+  // (ack_claimed=1 + session_status set) that state.js#reconcileNotify re-drives idempotently. session_status is
+  // the FSM outcome (TRANSFERRED|PARTIAL|FAILED), which is also what a re-issued receipt reports.
+  await deps.db.prepare("UPDATE connect_abdm_txn SET session_status=?,updated_at=? WHERE transaction_id=?")
+    .bind(outcome, deps.now, transactionId).run();
+
   // FAIL-SAFE ORDERING: advance the FSM to its terminal outcome and delete the R2 buffer BEFORE notifying, so a
   // gateway notify throw leaves a CONSISTENT end state (status terminal + buffer deleted + receipt-lost) instead
-  // of a stranded buffer-full RECEIVING txn; the lost receipt is recovered by the Stage-6 sweep re-notify
-  // (documented carry-forward). Still exactly-once: only the CAS winner ever reaches this block.
+  // of a stranded buffer-full RECEIVING txn. Because session_status was persisted above, ANY throw in this tail is
+  // recoverable by the Stage-6 reconcile pass (state.js#reconcileNotify) — it re-issues the receipt, deletes the
+  // buffer, and terminalises the FSM idempotently. Still exactly-once: only the CAS winner ever reaches this block.
   // CARRY-FORWARD: advanceStatus is request_id-keyed but we hold only transactionId — use txn.request_id.
   const advance = await advanceStatus(deps.db, txn.request_id, "RECEIVING", outcome, deps.now);
   await deleteBuffered(deps.r2, transactionId);

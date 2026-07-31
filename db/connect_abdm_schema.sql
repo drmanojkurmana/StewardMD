@@ -26,7 +26,14 @@ CREATE TABLE IF NOT EXISTS connect_abdm_txn (
   eph_privkey_sealed TEXT,                      -- envelope-encrypted ephemeral X25519 private key (ADR-2D)
   eph_pub_raw TEXT, our_nonce TEXT,             -- our keyMaterial (public + nonce) — sent to the gateway
   ack_claimed INTEGER NOT NULL DEFAULT 0,       -- exactly-once ack flag (D1 CAS single-shot; Stage-3 Task-4)
-  status TEXT, expires_at TEXT, created_at TEXT, updated_at TEXT );
+  status TEXT, expires_at TEXT, created_at TEXT, updated_at TEXT,
+  -- Stage-6 T3 (additive): the computed transfer OUTCOME (TRANSFERRED|PARTIAL|FAILED). consumeTransfer persists
+  -- it the instant the ack is claimed and BEFORE the hiNotify, so a crash/throw in the finalize tail leaves a
+  -- RECOVERABLE strand (ack_claimed=1 + status still RECEIVING + session_status set) that state.js#reconcileNotify
+  -- re-drives idempotently (re-notify + delete + terminalise). NOTE: CREATE-IF-NOT-EXISTS adds this only on a
+  -- FRESH D1; a provisioned D1 needs `ALTER TABLE connect_abdm_txn ADD COLUMN session_status TEXT;` (SQLite has
+  -- no ADD-COLUMN-IF-NOT-EXISTS) — see the T9 go-live checklist.
+  session_status TEXT );
 -- PARTIAL UNIQUE: one request row per transaction_id (exactly-once ack backstop); multiple NULLs allowed
 -- (transaction_id is attached later at on-request, so pre-attach rows all sit at NULL).
 CREATE UNIQUE INDEX IF NOT EXISTS idx_abdm_txn_txid ON connect_abdm_txn(transaction_id) WHERE transaction_id IS NOT NULL;

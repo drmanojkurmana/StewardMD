@@ -63,9 +63,16 @@ async function sha256hex(bytes) {
  * Encrypt ONE plaintext under the (key,iv) derived from (secret, ourNonce, theirNonce).
  * CALLER CONTRACT (critical): NEVER call sealBundle twice with the same (secret, ourNonce, theirNonce) —
  * the iv is deterministic, so a second call reuses the AES-GCM (key,iv), which is catastrophic
- * (keystream + GHASH-key recovery). Each entry MUST use fresh keyMaterial (a fresh peer keypair + nonce),
- * or a distinct per-entry IV. There is intentionally no batch/multi-entry API here; the ABDM HIP-encrypt
- * stage (Stage 5) is responsible for one keyMaterial per entry + a multi-entry known-answer vector.
+ * (keystream + GHASH-key recovery). A fresh (key,iv) needs fresh keyMaterial (a fresh peer keypair + nonce),
+ * or a distinct per-entry IV. There is intentionally no batch/multi-entry API here.
+ * LIVE PROTOCOL (reconciled with the as-built consume side, hiu.js#consumeTransfer): the exchange is ONE
+ * keyMaterial per transfer PAGE, and a well-behaved page carries EXACTLY ONE entry — so per-page == per-entry
+ * and this single-entry seal IS the whole page. consumeTransfer derives ONE (secret, ourNonce, hipNonce) per
+ * page and opens the page's entries under it; it tolerates a HOSTILE multi-entry-under-one-keyMaterial page
+ * ONLY because it checksum-verifies EACH entry post-decrypt (a reused-(key,iv) sibling can never be smuggled
+ * past that per-entry check). The Stage-5 HIP-encrypt owns fresh per-page keyMaterial + a multi-entry
+ * known-answer vector.
+ * // VERIFY: confirm against the ABDM /health-information/transfer wire-shape (one keyMaterial per page, one entry per page)
  */
 export async function sealBundle(secret, ourNonce, theirNonce, plaintextStr) {
   const { key, iv } = await deriveKeyIv(secret, ourNonce, theirNonce);
