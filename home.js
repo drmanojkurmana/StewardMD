@@ -3639,7 +3639,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           }
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
-            var call = (window.SMD_AI.explainGroundedStream && maikStreamOn() && !window.SMD_IS_NATIVE)
+            var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
               ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
               : window.SMD_AI.explainGrounded(pkg, { depth: depth });
             return call.then(function (r) {
