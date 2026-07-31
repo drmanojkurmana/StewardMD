@@ -8,6 +8,9 @@ import { makeAuditSink } from "../../_connect/audit.js";
 import { handleIngress } from "../../_connect/abdm/ingress.js";
 import { identify } from "../../_usage.js";
 import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
+import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
+import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
+import { fileConnector } from "../../_connect/connectors/file/connector.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -27,6 +30,12 @@ export async function onRequest(context) {
       audit: makeAuditSink(env, env.CONNECT_DB),   // on-fetch → verifyConsentArtifact records consent.verified/denied (R14)
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
+  }
+  // Track B: HMAC-gated legacy-feed ingest (HL7 v2 + file/CSV). No StewardMD actor; tenant from the feed row.
+  if (/^\/ingress\/hl7/.test(path) || /^\/ingress\/file/.test(path)) {
+    const kind = /^\/ingress\/hl7/.test(path) ? "hl7v2" : "file";
+    const feedDeps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), connectors: { hl7v2: hl7v2Connector, file: fileConnector }, audit: makeAuditSink(env, env.CONNECT_DB), now: () => Date.now() };
+    return handleFeedIngest(env, feedDeps, request, kind);
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });
 
