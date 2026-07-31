@@ -511,7 +511,9 @@ test("tryJoin: both missing (null key + zero buffer) → reason 'no-key' (key gu
 // The cron-driven garbage collector (Stage 6 calls it). For every txn PAST its expires_at OR in a
 // terminal status it must erase the sealed eph key, delete the R2 push-buffer, and remove the row — so
 // no key material or ciphertext lingers once a transfer completes OR dies (FAILED/PARTIAL too, not just
-// the happy TRANSFERRED path). Numeric expiresAt/now so `Number(expires_at) < Number(now)` is meaningful.
+// the happy TRANSFERRED path). TIME CONTRACT: `expires_at`/`now` are ISO-8601 strings and expiry is
+// detected ISO-aware (Date.parse), never `Number(iso)`→NaN. (The legacy numeric literals below still
+// order correctly because Date.parse coerces them to year-strings; the ISO-format tests are further down.)
 
 // Scenario 1: an EXPIRED txn — its buffer AND its sealed key are gone and the row is removed.
 test("sweep: expired txn → buffer + key gone, row removed (txnsSwept===1)", async () => {
@@ -566,7 +568,7 @@ test("sweep: in-flight non-expired non-terminal txn → untouched (txnsSwept===0
   await bufferEntry(r2, HMAC_ENV, "txn-L", "cc-ref-1", "CIPHER-L", "chk-1", NOW);
 
   const counts = await sweep(db, r2, HMAC_ENV, 100); // not expired (100<9999), not terminal
-  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0 });
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
   const row = await getTxnByRequestId(db, "req-live");
   assert.ok(row);
   assert.equal(row.status, "RECEIVING");
@@ -589,5 +591,95 @@ test("sweep is idempotent: second sweep over a clean table → all-zero counts, 
   const first = await sweep(db, r2, HMAC_ENV, 2000);
   assert.equal(first.txnsSwept, 1);
   const second = await sweep(db, r2, HMAC_ENV, 2000); // table already clean
-  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0 });
+  assert.deepEqual(second, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
+});
+
+// ---- Stage-6 Task-1: PIN the sweep expires_at/now type contract to ISO-8601 (BLOCKING) --------------
+// Carry-forward bug: the old `Number(row.expires_at) < Number(now)` assumed epoch-ms, but the module +
+// its callers pass ISO strings → `Number("2026-…")` = NaN → `NaN < NaN` = false → the expiry branch
+// SILENTLY NO-OPPED, so an expired non-terminal txn kept its sealed ephemeral key + buffer past TTL
+// (weakens ADR-2D). These tests exercise the STANDARDIZED ISO time format the Task-8 cron will pass.
+const ISO_NOW = "2026-07-31T12:00:00Z";
+const ISO_PAST = "2026-07-31T11:00:00Z";   // 1h before ISO_NOW → expired
+const ISO_FUTURE = "2026-07-31T13:00:00Z"; // 1h after  ISO_NOW → not yet expired
+
+// THE regression test: an EXPIRED (past-TTL) non-terminal txn with an ISO expires_at IS swept. This FAILS
+// against the old `Number()` code (NaN<NaN=false → nothing swept) and passes only with the ISO-aware fix.
+test("sweep (ISO): expired past-TTL non-terminal txn → swept (key erased, buffer gone, row removed)", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-iso-exp", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: ISO_PAST, now: ISO_PAST, // non-terminal, but past its ISO TTL
+  });
+  await attachTransactionId(db, "req-iso-exp", "txn-ISO-E", ISO_PAST);
+  await bufferEntry(r2, HMAC_ENV, "txn-ISO-E", "cc-ref-1", "CIPHER-E", "chk-1", ISO_PAST);
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW > ISO_PAST → expired
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.keysErased, 1);
+  assert.equal(counts.buffersDeleted, 1);
+  assert.equal(counts.anomalies, 0);
+  assert.equal(await getTxnByRequestId(db, "req-iso-exp"), null);       // row (and sealed key) gone
+  assert.equal((await listBuffered(r2, "txn-ISO-E")).length, 0);        // buffer erased
+});
+
+// A future ISO expires_at on a non-terminal txn → retained untouched (the comparison must not over-sweep).
+test("sweep (ISO): future expires_at non-terminal txn → retained untouched", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-iso-fut", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: ISO_FUTURE, now: ISO_NOW,
+  });
+  await attachTransactionId(db, "req-iso-fut", "txn-ISO-F", ISO_NOW);
+  await bufferEntry(r2, HMAC_ENV, "txn-ISO-F", "cc-ref-1", "CIPHER-F", "chk-1", ISO_NOW);
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW); // ISO_NOW < ISO_FUTURE → NOT expired
+  assert.deepEqual(counts, { txnsSwept: 0, buffersDeleted: 0, keysErased: 0, anomalies: 0 });
+  const row = await getTxnByRequestId(db, "req-iso-fut");
+  assert.ok(row && row.eph_privkey_sealed && row.eph_privkey_sealed.length > 0); // key intact
+  assert.equal((await listBuffered(r2, "txn-ISO-F")).length, 1);                 // buffer intact
+});
+
+// A null/garbled expires_at on a NON-terminal row → NOT erroneously swept, but SURFACED in `anomalies`
+// (a data-integrity signal), never silently kept as if healthy.
+test("sweep (ISO): null/garbled expires_at non-terminal → not swept, surfaced in anomalies", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, { // expiresAt null → stored as null
+    requestId: "req-anom-null", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: null, now: ISO_NOW,
+  });
+  await putTxn(db, sealStub, { // unparseable garbage expiry
+    requestId: "req-anom-garbled", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "RECEIVING", expiresAt: "not-a-date", now: ISO_NOW,
+  });
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(counts.txnsSwept, 0);          // neither erroneously swept
+  assert.equal(counts.keysErased, 0);
+  assert.equal(counts.anomalies, 2);          // both surfaced
+  assert.ok(await getTxnByRequestId(db, "req-anom-null"));     // rows retained (backstop lands in T2)
+  assert.ok(await getTxnByRequestId(db, "req-anom-garbled"));
+});
+
+// A terminal (FAILED) row with a garbled expires_at is STILL swept — terminal status is the sole trigger
+// and must not be mistaken for an anomaly (anomalies count only NON-terminal unparseable-expiry rows).
+test("sweep (ISO): terminal row with garbled expires_at → swept, not counted as an anomaly", async () => {
+  const db = makeAbdmDb({});
+  const r2 = makeR2();
+  await putTxn(db, sealStub, {
+    requestId: "req-term-garbled", tenantId: "t1", consentId: "c1",
+    ephPrivKeyB64: "cGsxMjM=", ephPubRaw: "PUB", ourNonce: "N",
+    status: "FAILED", expiresAt: "garbage", now: ISO_NOW,
+  });
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal(counts.txnsSwept, 1);
+  assert.equal(counts.anomalies, 0);
+  assert.equal(await getTxnByRequestId(db, "req-term-garbled"), null);
 });

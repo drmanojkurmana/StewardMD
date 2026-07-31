@@ -2,6 +2,9 @@
 // Stage-3 Task-2: monotonic consent status (R6 anti-replay) + sealed ephemeral key (ADR-2D).
 // Dependency-injected: caller passes `db` (D1), `secrets` ({seal,open}) and `now` (ISO string).
 // No env/global/Date.now reads here. Mock-friendly SQL only: WHERE `col=?`, SET `col=?,...`.
+// TIME CONTRACT (pinned): every timestamp column here (`created_at`/`updated_at`/`expires_at`) and every
+// injected `now` is an ISO-8601 string — NEVER epoch-ms. `sweep` compares them ISO-aware (Date.parse),
+// never `Number()` (which turns an ISO string into NaN and silently no-ops the expiry branch).
 import { hmacPseudonym } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC (patientRefHash) helper
 export class ConnectStateError extends Error {}
 
@@ -248,20 +251,37 @@ export async function tryJoin(db, r2, env, transactionId) {
 // buffered ciphertext: for EVERY txn that is past its `expires_at` OR in a terminal status it erases the
 // sealed eph key, deletes the R2 push-buffer, and removes the row. This fires on ANY terminal outcome
 // (FAILED/PARTIAL too, not just the happy TRANSFERRED path) so nothing lingers when a transfer dies.
-// Dependency-injected db/r2/env/now — no Date.now/global reads. Fail-closed (ConnectStateError) on a
-// genuine storage failure. Idempotent: a second sweep over an already-clean table returns zero counts.
+// Dependency-injected db/r2/env/now — no Date.now/global reads. `expires_at` and `now` are ISO-8601
+// strings (see module TIME CONTRACT); expiry is detected ISO-aware, NEVER via `Number(iso)`→NaN (the
+// Stage-3 no-op bug that let expired non-terminal txns keep their sealed eph key past TTL — ADR-2D).
+// Fail-closed (ConnectStateError) on a genuine storage failure. Idempotent: a second sweep over an
+// already-clean table returns all-zero counts. A NON-terminal row whose `expires_at` is missing/unparseable
+// can't be aged out by expiry alone, so it is SURFACED in the returned `anomalies` count (never silently
+// kept forever) rather than swept — a data-integrity signal for the cron.
 export async function sweep(db, r2, env, now) {
   // Txn terminal set — inlined here (small stable domain constant), NOT imported from the Task-4 FSM, to
   // avoid coupling the GC to that module's internals. Distinct from the module-scope consent `TERMINAL`.
   const TERMINAL = new Set(["TRANSFERRED", "PARTIAL", "FAILED"]);
+  // ISO-aware expiry: parse BOTH sides; a well-typed ISO `expiresAt` at-or-before `now` ⇒ expired. `<=` so
+  // an expiry exactly at `now` counts. A missing/unparseable timestamp yields NaN → NEVER coerced to a bogus
+  // number, so the branch can't silently no-op the way `Number("2026-…") < Number(now)` (NaN<NaN=false) did.
+  const isExpired = (expiresAt, at) =>
+    Number.isFinite(Date.parse(expiresAt)) && Number.isFinite(Date.parse(at)) && Date.parse(expiresAt) <= Date.parse(at);
   try {
     // VERIFY: a real D1 GC would enumerate victims with an indexed `WHERE expires_at < ?`; the mock D1
     // only supports `col=?`/`col<>?` (throws on `<`), so enumerate all rows no-WHERE and filter in JS.
     const { results = [] } = await db.prepare("SELECT * FROM connect_abdm_txn").all();
-    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0;
+    let txnsSwept = 0, buffersDeleted = 0, keysErased = 0, anomalies = 0;
     for (const row of results) {
-      const expired = Number(row.expires_at) < Number(now);
-      if (!expired && !TERMINAL.has(row.status)) continue; // in-flight, non-expired, non-terminal → keep
+      const expired = isExpired(row.expires_at, now);
+      if (!expired && !TERMINAL.has(row.status)) {
+        // In-flight, non-expired, non-terminal → keep. But a NULL/unparseable `expires_at` here can't be
+        // aged out by expiry, so surface it (don't silently keep PHI forever).
+        // VERIFY: created_at + SWEEP_MAX_TXN_AGE hard backstop so a garbled expiry can never linger PHI
+        // indefinitely (backstop wired in T2's erasure pass).
+        if (!Number.isFinite(Date.parse(row.expires_at))) anomalies++;
+        continue;
+      }
       // (1) drop the R2 push-buffer (scoped to this txn) when a transaction_id was ever attached.
       if (row.transaction_id) buffersDeleted += await deleteBuffered(r2, row.transaction_id);
       // (2) defensively erase the sealed eph key BEFORE deleting the row, so it can't be unsealed
@@ -275,7 +295,7 @@ export async function sweep(db, r2, env, now) {
       if (!del || del.success === false) throw new ConnectStateError("sweep row-delete failed");
       txnsSwept++;
     }
-    return { txnsSwept, buffersDeleted, keysErased };
+    return { txnsSwept, buffersDeleted, keysErased, anomalies };
   } catch (e) {
     if (e instanceof ConnectStateError) throw e; // deleteBuffered already fail-closes R2 errors
     throw new ConnectStateError(`abdm sweep failed: ${e && e.message}`);
