@@ -127,6 +127,55 @@ async function handleAnalyze(request, env) {
   }
 }
 
+// Image-model path (the LIVE default): proxy the photo to the kardiox-image Cloud Run service. This
+// is what the native app now calls (instead of hitting Cloud Run directly) so that (a) the per-doctor
+// ECG meter runs here and (b) any Cloud Run auth token lives server-side in the edge, never in the app.
+async function handleAnalyzeImage(request, env) {
+  if (request.method !== "POST") return err(405, "method_not_allowed", "Use POST", "upload");
+  if (!authOk(request, env)) return err(401, "unauthorized", "Missing or invalid app token", "upload");
+
+  // Per-doctor DAILY ECG cap (module "ecg") — same meter as the pipeline path. Fail-open: a metering
+  // error never blocks a clinical read. Counts the attempt before the model runs.
+  try {
+    const store = usageKv(env);
+    if (store) {
+      const who = await identify(request, env);
+      const mq = await gateAndCount(env, store, "ecg", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
+      if (!mq.ok) return err(429, "daily_limit", "Daily limit reached: " + mq.limit + " ECG uploads per day. This resets at midnight.", "upload");
+    }
+  } catch (e) { /* fail-open */ }
+
+  let form;
+  try { form = await request.formData(); } catch (e) { return err(400, "bad_image", "Malformed multipart body", "upload"); }
+  const image = form.get("image");
+  if (!image || typeof image === "string") return err(400, "bad_image", "No image in upload", "upload");
+  if (typeof image.size === "number" && image.size > MAX_BYTES) return err(400, "bad_image", "Image too large", "upload");
+  if (image.type && !OK_TYPE.test(image.type)) return err(400, "bad_image", "Unsupported image type", "upload");
+  if (!(await sniffImage(image))) return err(400, "bad_image", "File is not a recognized image", "upload");
+
+  const base = (env && env.KARDIOX_IMAGE_URL) || "https://kardiox-image-911280405587.asia-south1.run.app";
+  const variant = new URL(request.url).searchParams.get("variant");
+  const target = base.replace(/\/$/, "") + "/v1/ecg/analyze-image" + (variant ? ("?variant=" + encodeURIComponent(variant)) : "");
+  const fwd = new FormData();
+  fwd.append("image", image, image.name || "ecg.jpg");
+  const headers = { "Accept": "application/json" };
+  // Server-side token (never shipped in the app). Sent only if configured — set KARDIOX_IMAGE_TOKEN
+  // once the Cloud Run service starts enforcing PIPELINE_TOKEN, to lock the model to this edge.
+  if (env && env.KARDIOX_IMAGE_TOKEN) headers["X-Pipeline-Token"] = env.KARDIOX_IMAGE_TOKEN;
+
+  const t0 = Date.now();
+  try {
+    const res = await fetch(target, { method: "POST", headers, body: fwd });
+    let json = null; try { json = await res.json(); } catch (e) {}
+    log({ ev: "image-model", status: res.status, ms: Date.now() - t0 });
+    if (res.ok && json) return new Response(JSON.stringify(json), { status: 200, headers: secHeaders({ "content-type": MEDIA }) });
+    return err(res.status || 502, "pipeline_unavailable", "Image model error", "report");
+  } catch (e) {
+    log({ ev: "image-error", msg: String(e && e.message) });
+    return err(502, "pipeline_unavailable", "Edge/image-model failure", "report");
+  }
+}
+
 async function handleHealth(env) {
   const out = await pipeline(env, "health", null, "GET", "/v1/health");
   return new Response(JSON.stringify({ edge: "ok", pipeline: out.ok ? (out.json || "ok") : "unreachable", status: out.ok ? "ok" : "degraded" }),
@@ -139,6 +188,7 @@ export async function onRequest(context) {
   const path = "/" + parts.join("/");   // e.g. "/v1/ecg/analyze" or "/v1/health"
 
   if (path === "/v1/ecg/analyze") return handleAnalyze(request, env);
+  if (path === "/v1/ecg/analyze-image") return handleAnalyzeImage(request, env);
   if (path === "/v1/health") return handleHealth(env);
   return err(404, "not_found", "Unknown KardioX endpoint: " + path, "upload");
 }
