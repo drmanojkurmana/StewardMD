@@ -17,6 +17,8 @@ import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-ga
 import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
 import { fileConnector } from "../../_connect/connectors/file/connector.js";
 import { fhirPushConnector } from "../../_connect/connectors/fhir-push/connector.js"; // Track B: generic FHIR-push webhook
+import { defaultRegistry } from "../../_connect/sdk/index.js"; // Track C: Connector SDK registry (gated by smd_connect_sdk)
+import { sdkFlagOn } from "../../_connect/sdk/flags.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -90,7 +92,15 @@ export async function onRequest(context) {
 
   if (path === "/context" && request.method === "POST") {
     let body = {}; try { body = await request.json(); } catch {}
-    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: { "fhir-r4": fhirR4Connector } };
+    // Track C: with smd_connect_sdk OFF this is byte-identical to the pre-SDK literal map; ON, it is the
+    // pull-profile subset of the conformance-gated SDK registry (event connectors like abdm are filtered out).
+    let connectors = { "fhir-r4": fhirR4Connector };
+    if (sdkFlagOn(env)) {
+      connectors = {};
+      for (const [id, c] of Object.entries(defaultRegistry().asConnectorMap()))
+        if (c.meta && c.meta.profile === "pull") connectors[id] = c;
+    }
+    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
     // Track A: a FHIR-connector context request requires smd_connect_fhir too (no existence leak when off).
     if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });

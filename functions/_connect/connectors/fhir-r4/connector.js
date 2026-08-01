@@ -64,7 +64,16 @@ export const fhirR4Connector = {
       // redirect:"manual" — a 3xx is surfaced (never auto-followed) so a compromised FHIR host cannot bounce
       // this authenticated, PHI-bearing read to another origin. The onboard ctx.fetch is additionally redirect-
       // safe (re-validates + drops creds cross-origin); this hardens the engine path too. Mirrors paginate.
-      const res = await ctx.fetch(base + "/Patient/" + encodeURIComponent(patientRef), { headers: authHeader, redirect: "manual" });
+      let res;
+      try { res = await ctx.fetch(base + "/Patient/" + encodeURIComponent(patientRef), { headers: authHeader, redirect: "manual" }); }
+      catch (e) {
+        // Preserve an already-typed/controlled error (the onboard SSRF guard's OnboardError("ssrf"), UpstreamError,
+        // ReauthNeeded, ...) so its class/signal is never masked; only a BARE platform rejection (a network-level
+        // fetch throw -> Error/TypeError) is normalized to a typed UpstreamError, so it can't escape uncontrolled
+        // and be misclassified downstream (as {error:"type"} instead of {error:"upstream"}).
+        if (e && e.name && !["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError"].includes(e.name)) throw e;
+        throw new UpstreamError("Patient read failed");
+      }
       if (res.status === 401) return 401;
       if (!res.ok) throw new UpstreamError("Patient read HTTP " + res.status);
       return res.json();

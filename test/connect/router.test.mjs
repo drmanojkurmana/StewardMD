@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { onRequest } from "../../functions/api/connect/[[path]].js";
 import { makeMockDb } from "../../functions/_connect/testkit.js";
+import { sha256hex } from "../../functions/_usage.js";
 
 const post = (path, body, env, headers) => ({ request: new Request("https://x" + path, { method: "POST", body: JSON.stringify(body), headers: Object.assign({ "content-type": "application/json" }, headers || {}) }), env, params: {} });
 
@@ -50,4 +51,51 @@ test("reserved ingress route is 501 in Phase 0", async () => {
   const res = await onRequest(post("/api/connect/ingress/fhir-r4", {}, { CONNECT_FLAG: "1" }));
   assert.equal(res.status, 501);
   assert.equal(res.headers.get("cache-control"), "no-store");
+});
+
+// --- Track C (Connector SDK, smd_connect_sdk) --- with the flag ON the /context dispatch resolves connectors
+// through the pull-profile-filtered SDK registry; these pin that the filter + auth ordering are preserved.
+test("SDK ON: pull /context refuses an EVENT-profile connectorId via the engine's own guard (typed upstream, never a TypeError)", async () => {
+  // With the SDK registry ON, the pull engine is handed only PULL-profile connectors, so an event-profile id
+  // ("abdm") resolves to undefined and the engine's OWN guard fires (UpstreamError -> {error:"upstream"}) AFTER
+  // auth/membership -- never reaching a missing fetchPatient (which would be an uncontrolled {error:"type"}).
+  const actor = "cfa:" + (await sha256hex("doctor@example.com"));
+  const db = makeMockDb({
+    connect_membership: [{ user_id: actor, tenant_id: "t1", role: "clinician" }],
+    connect_tenant: [{ id: "t1", mode: "sandbox", granted_scopes: JSON.stringify(["Patient"]) }],
+    connect_connector_config: [{ tenant_id: "t1", connector_id: "abdm", kind: "abdm", profile: "event", base_url: "https://r4.smarthealthit.org/fhir", scope: JSON.stringify(["Patient"]) }],
+  });
+  const env = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_DB: db };
+  const res = await onRequest(post("/api/connect/context",
+    { tenantId: "t1", patientRef: "P1", scope: ["Patient"], connectorId: "abdm" },
+    env, { "Cf-Access-Authenticated-User-Email": "doctor@example.com" }));
+  const body = await res.json();
+  assert.equal(body.error, "upstream");                  // typed UpstreamError from the profile gate
+  assert.notEqual(body.error, "type");                   // NOT an uncontrolled TypeError
+  assert.equal(res.status, 400);
+  assert.deepEqual(Object.keys(body), ["error"]);        // sanitized: only {error: code}
+  assert.equal(res.headers.get("cache-control"), "no-store");
+});
+
+test("SDK ON: auth is checked FIRST for every connectorId — an unauthenticated caller cannot distinguish a pull id from an event id", async () => {
+  // Identity stays strictly ahead of the connector map: with no actor, BOTH a valid pull id (fhir-r4) and an
+  // event id (abdm) return the SAME 401/"auth" — the map is never consulted before auth.
+  const env = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_FHIR_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  for (const connectorId of ["fhir-r4", "abdm"]) {
+    const res = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Patient"], connectorId }, env));
+    assert.equal(res.status, 401);
+    assert.equal((await res.json()).error, "auth");
+  }
+});
+
+test("SDK ON: valid fhir-r4 (pull) /context path is unchanged — denied at membership, not upstream/type", async () => {
+  // Behavior-preserving for the valid pull id: fhir-r4 resolves cleanly through the registry, and an
+  // authenticated non-member is still denied at membership (403/"permission").
+  const env = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_FHIR_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  const res = await onRequest(post("/api/connect/context",
+    { tenantId: "t1", patientRef: "P1", scope: ["Patient"], connectorId: "fhir-r4" },
+    env, { "Cf-Access-Authenticated-User-Email": "doctor@example.com" }));
+  assert.equal(res.status, 403);
+  const body = await res.json();
+  assert.equal(body.error, "permission");                // not "upstream", not "type" — gate lets fhir-r4 through
 });
