@@ -93,7 +93,7 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex } from "../../_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
@@ -900,7 +900,7 @@ export async function onRequest(context) {
     if (_mod && !_isEvidReview) {
       try {
         const _who = await identify(request, env);
-        const _mq = await gateAndCount(env, _acStore, _mod, _who.id, _who.guest ? "guest" : "unknown", Date.now(), _who.email);
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
@@ -1188,7 +1188,7 @@ export async function onRequest(context) {
           let hit = null; try { hit = await store.get(cacheKey, "json"); } catch (e) {}
           if (hit && hit.text) {
             let used = 0, limit = 2;
-            try { const mq = await checkModuleQuota(env, store, "research", (await identify(request, env)).id, Date.now()); used = mq.used || 0; limit = mq.limit != null ? mq.limit : 2; } catch (e) {}
+            try { const mq = await checkModuleQuota(env, store, "research", usageKeyFor(await identify(request, env)), Date.now()); used = mq.used || 0; limit = mq.limit != null ? mq.limit : 2; } catch (e) {}
             return json({ text: hit.text, mode: "evidence-review", sources: hit.sources || [], cached: true, usage: { module: "research", used: used, limit: limit } });
           }
         }
@@ -1199,7 +1199,7 @@ export async function onRequest(context) {
         let usedNow = 0, capNow = 2;
         if (store) {
           const who = await identify(request, env);
-          const mq = await gateAndCount(env, store, "research", who.id, who.guest ? "guest" : "unknown", Date.now(), who.email);
+          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
           if (!mq.ok) {
             // Over-cap denial must NOT burn a general MaiK slot (no AI work done, and recordUsage's
             // general counter would decrement the shared 60/day allowance). gateAndCount already

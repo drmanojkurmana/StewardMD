@@ -101,6 +101,14 @@ export async function identify(request, env) {
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
 
+// The stable, human-readable usage/limit KEY for a caller: the verified email when signed in
+// (so web + native attribute to the SAME person), else the guest IP bucket. Used by the AI usage
+// pipeline so records land under "em:<email>" and per-user caps resolve off it.
+export function usageKeyFor(who) {
+  if (who && who.email) return "em:" + String(who.email).toLowerCase();
+  return (who && who.id) || "ip:0";
+}
+
 // ---- date keys ----
 function dayKey(d) { return d.toISOString().slice(0, 10); }
 function monthKey(d) { return d.toISOString().slice(0, 7); }
