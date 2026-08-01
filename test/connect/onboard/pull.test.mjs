@@ -39,6 +39,31 @@ test("pull returns a valid SCCM bundle (labs/vitals/meds) and writes a PHI-free 
   assert.equal(blob.includes("P1"), false);                          // raw patientId never persisted (hashed)
 });
 
+// --- rest-json: the same pull.js path, reused per the row's stored kind ---------------------------------
+test("a saved rest-json connection pulls through a mocked safe fetch -> valid SCCM bundle; token never in the audit", async () => {
+  const ROWS = [{ patientId: "P1", testCode: "718-7", testCodeSystem: "LN", testName: "Hemoglobin", value: 9.2, unit: "g/dL", orderId: "O1", collectedAt: "2026-08-01", resultStatus: "final" }];
+  const restFetch = async (url, init) => {
+    assert.match(String(url), /\/results\?patientId=P1$/);
+    assert.equal(init.headers.authorization, "Bearer rest-tok-1");
+    return new Response(JSON.stringify(ROWS), { status: 200 });
+  };
+  const db = seedDb();
+  const deps = { db, kv: makeMockKv(), secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }), fetch: restFetch, now: () => Date.now() };
+  const { connectionId } = await saveConnection(deps, req, env, "t1",
+    { name: "Lab API", type: "rest-json", baseUrl: "https://labs.example.org", auth: { method: "token", token: "rest-tok-1" } });
+
+  const bundle = await pullConnection(deps, req, env, "t1", connectionId, "P1");
+  assert.equal(validateBundle(bundle).ok, true);
+  assert.equal(bundle.observations.length, 1);
+  assert.equal(bundle.meta.sourceConnector, "rest-json");
+
+  const auditRows = db._tables.connect_audit_event || [];
+  assert.ok(auditRows.some((r) => r.action === "connect.onboard.pulled"));
+  const blob = JSON.stringify(auditRows);
+  for (const secret of ["rest-tok-1", "labs.example.org"]) assert.equal(blob.includes(secret), false);
+  assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
+});
+
 test("pull is denied for an auditor (PHI is not for the auditor role)", async () => {
   const mock = makeMockFhir({ base: "https://fhir.example.org" });
   const db = seedDb("auditor");

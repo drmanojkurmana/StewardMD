@@ -83,3 +83,51 @@ test("a non-member actor is denied (fail-closed RBAC, not a leak)", async () => 
   const otherDeps = { db, secrets: makeSecrets(env), identifyFn: async () => ({ id: "intruder", guest: false }) };
   await assert.rejects(() => saveConnection(otherDeps, req, env, "t1", tokenBody));   // PermissionError
 });
+
+// --- rest-json (generic REST/JSON lab-results pull connector) ------------------------------------------------
+const restBody = { name: "Lab API", type: "rest-json", baseUrl: "https://labs.example.org", auth: { method: "token", token: "sekret-rest-456" } };
+
+test("save accepts type 'rest-json' with auth.method 'token'; envelope-seals the credential", async () => {
+  const db = seedDb();
+  const res = await saveConnection(deps(db), req, env, "t1", restBody);
+  assert.equal(res.ok, true);
+  const rows = db._tables.connect_connector_config;
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].kind, "rest-json");
+  assert.equal(rows[0].profile, "pull");
+  const config = JSON.parse(rows[0].config);
+  assert.equal(config.type, "rest-json");
+  assert.equal(JSON.parse(rows[0].scope).join(","), "Patient,Observation,DiagnosticReport");
+  const stored = JSON.stringify(rows[0]);
+  assert.equal(stored.includes("sekret-rest-456"), false);           // raw token NEVER stored in the clear
+  const creds = JSON.parse(await makeSecrets(env).open(config.sealed));
+  assert.equal(creds.token, "sekret-rest-456");                      // round-trip
+});
+
+test("save rejects auth.method 'smart' for type 'rest-json' (token-only)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...restBody, auth: { method: "smart", clientId: "cid" } }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save SSRF-rejects a private/loopback baseUrl for type 'rest-json'", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...restBody, baseUrl: "https://169.254.169.254/labs" }),
+    (e) => e instanceof OnboardError && e.klass === "bad-url");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("list surfaces rest-json connections (resultsPath/patientParam) and never secret material", async () => {
+  const db = seedDb();
+  const { connectionId } = await saveConnection(deps(db), req, env, "t1", { ...restBody, resultsPath: "/api/labs", patientParam: "mrn" });
+  const list = await listConnections(deps(db), req, env, "t1");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].connectionId, connectionId);
+  assert.equal(list[0].type, "rest-json");
+  assert.equal(list[0].resultsPath, "/api/labs");
+  assert.equal(list[0].patientParam, "mrn");
+  assert.equal(JSON.stringify(list).includes("sekret-rest-456"), false);
+});

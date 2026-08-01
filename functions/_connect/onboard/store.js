@@ -11,6 +11,8 @@ import { OnboardError } from "./errors.js";
 
 // SCCM scope the onboarded FHIR connection pulls by default (Patient is always read; the rest are searched).
 export const ONBOARD_SCOPE = Object.freeze(["Patient", "Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference"]);
+// SCCM scope a rest-json connection can ever produce (normalizeCsvLab only ever emits these three resources).
+export const REST_ONBOARD_SCOPE = Object.freeze(["Patient", "Observation", "DiagnosticReport"]);
 
 const nonEmpty = (s) => typeof s === "string" && s.trim().length > 0;
 const now = () => new Date().toISOString();
@@ -20,7 +22,8 @@ const audit = (env, deps, tenant, actor, action, outcome, extra) =>
 // --- validation: returns { baseUrl, config } or throws OnboardError("invalid" | "bad-url") -----------------
 function buildRow(body) {
   if (!nonEmpty(body.name)) throw new OnboardError("invalid", "name required");
-  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir' is supported in Increment 1");
+  if (body.type === "rest-json") return buildRestJsonRow(body);
+  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir' or 'rest-json' is supported");
   const base = assertPublicHttpsUrl(body.fhirBaseUrl, "fhirBaseUrl");    // SSRF guard at save time
   const auth = body.auth || {};
   const config = { source: "onboard", name: String(body.name).trim(), type: "fhir", authMethod: auth.method, createdAt: now(), updatedAt: now(), lastTest: null };
@@ -35,6 +38,23 @@ function buildRow(body) {
   } else {
     throw new OnboardError("invalid", "auth.method must be 'token' or 'smart'");
   }
+  return { baseUrl: base.href.replace(/\/$/, ""), config };
+}
+
+// Generic REST/JSON lab-results pull connection. Token/API-key auth ONLY (no SMART — reject it explicitly so
+// the wizard can't silently ask this connector to do work it doesn't support). columnMap is OPTIONAL: if the
+// hospital doesn't supply one, the connector (rest-json/connector.js) falls back to the SAME best-effort
+// inferColumnMap the CSV upload path already uses — no separate mapping engine.
+function buildRestJsonRow(body) {
+  const base = assertPublicHttpsUrl(body.baseUrl, "baseUrl");           // SSRF guard at save time
+  const auth = body.auth || {};
+  if (auth.method !== "token") throw new OnboardError("invalid", "auth.method must be 'token' for type 'rest-json'");
+  if (!nonEmpty(auth.token)) throw new OnboardError("invalid", "auth.token required for method 'token'");
+  const config = { source: "onboard", name: String(body.name).trim(), type: "rest-json", authMethod: "token", createdAt: now(), updatedAt: now(), lastTest: null };
+  if (body.headerName != null) { if (!nonEmpty(body.headerName)) throw new OnboardError("invalid", "headerName must be a non-empty string"); config.headerName = String(body.headerName); }
+  if (body.resultsPath != null) { if (!nonEmpty(body.resultsPath)) throw new OnboardError("invalid", "resultsPath must be a non-empty string"); config.resultsPath = String(body.resultsPath); }
+  if (body.patientParam != null) { if (!nonEmpty(body.patientParam)) throw new OnboardError("invalid", "patientParam must be a non-empty string"); config.patientParam = String(body.patientParam); }
+  if (body.columnMap != null) { if (typeof body.columnMap !== "object" || Array.isArray(body.columnMap)) throw new OnboardError("invalid", "columnMap must be an object"); config.columnMap = body.columnMap; }
   return { baseUrl: base.href.replace(/\/$/, ""), config };
 }
 
@@ -54,9 +74,11 @@ export async function saveConnection(deps, request, env, tenantId, body = {}) {
   const { baseUrl, config } = buildRow(body);
   config.sealed = await deps.secrets.seal(JSON.stringify(sealMaterial(body.auth || {})));   // envelope-encrypted
   const connectionId = (crypto.randomUUID ? crypto.randomUUID() : "conn-" + Math.random().toString(36).slice(2));
+  const kind = config.type === "rest-json" ? "rest-json" : "fhir-r4";
+  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : ONBOARD_SCOPE;
   await deps.db.prepare(
     "INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)"
-  ).bind(tenant.id, connectionId, "fhir-r4", "pull", baseUrl, JSON.stringify(config), null, JSON.stringify(ONBOARD_SCOPE), "draft").run();
+  ).bind(tenant.id, connectionId, kind, "pull", baseUrl, JSON.stringify(config), null, JSON.stringify(scope), "draft").run();
   await audit(env, deps, tenant, actor, "connect.onboard.saved", "ok", { connectorId: connectionId });
   return { ok: true, connectionId };
 }
@@ -80,6 +102,8 @@ export function safeView(row) {
     headerName: c.headerName || null, tokenEndpoint: c.tokenEndpoint || null, clientId: c.clientId || null,
     status: row.status || null, createdAt: c.createdAt || null, updatedAt: c.updatedAt || null,
     lastTest: c.lastTest || null,
+    // rest-json-only (non-secret): the results endpoint shape the connector reads with.
+    resultsPath: c.resultsPath || null, patientParam: c.patientParam || null, columnMap: c.columnMap || null,
     // Automatic sync scheduler (additive, no schema change — lives in this same config JSON blob).
     syncIntervalMin: c.syncIntervalMin || 0, lastSyncAt: c.lastSyncAt || null,
   };

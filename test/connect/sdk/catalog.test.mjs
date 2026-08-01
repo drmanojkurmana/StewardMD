@@ -4,13 +4,15 @@ import assert from "node:assert/strict";
 import { defaultRegistry, BUILTIN } from "../../../functions/_connect/sdk/catalog.js";
 import * as sdk from "../../../functions/_connect/sdk/index.js";
 
-test("defaultRegistry has both built-ins with the right profiles", () => {
+test("defaultRegistry has all built-ins with the right profiles", () => {
   const r = defaultRegistry();
   assert.equal(r.has("fhir-r4"), true);
   assert.equal(r.has("abdm"), true);
+  assert.equal(r.has("rest-json"), true);
   assert.equal(r.resolve("fhir-r4").meta.profile, "pull");
   assert.equal(r.resolve("abdm").meta.profile, "event");
-  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "fhir-r4"]);
+  assert.equal(r.resolve("rest-json").meta.profile, "pull");
+  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "fhir-r4", "rest-json"]);
 });
 
 test("each defaultRegistry() call is a DISTINCT instance (per-request isolation)", () => {

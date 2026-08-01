@@ -3,9 +3,10 @@
 // registry per call (no module-level instance), registers each built-in fail-closed, and returns it.
 import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { abdmConnector } from "../abdm/connector.js";
+import { restJsonConnector } from "../connectors/rest-json/connector.js";
 import { createRegistry } from "./registry.js";
 
-export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector]);
+export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector, restJsonConnector]);
 
 export function defaultRegistry() {
   const reg = createRegistry();

@@ -97,3 +97,31 @@ test("sync-run: a valid admin token runs the sweep and returns PHI-free counts",
   const body = await res.json();
   assert.deepEqual(body, { ok: true, due: 0, ran: 0, errors: 0 });
 });
+
+// --- rest-json per-track flag gate (mirrors Track A's fhirFlagOn idiom): smd_connect_rest, default OFF -----
+test("rest-json save: 404 when CONNECT_REST_FLAG is off (base+onboard on); reachable (401) when on", async () => {
+  const restBody = { tenantId: "t1", name: "Lab API", type: "rest-json", baseUrl: "https://labs.example.org", auth: { method: "token", token: "SEKRET-REST" } };
+  const off = await onRequest(post("/api/connect/onboard/emr", restBody, BOTH));
+  assert.equal(off.status, 404);
+  const on = await onRequest(post("/api/connect/onboard/emr", restBody, Object.assign({}, BOTH, { CONNECT_REST_FLAG: "1" })));
+  assert.equal(on.status, 401);        // past the gate -> the normal unauthenticated RBAC 401
+  // fhir save is unaffected by the rest-json gate either way.
+  const fhirRes = await onRequest(post("/api/connect/onboard/emr",
+    { tenantId: "t1", name: "x", type: "fhir", fhirBaseUrl: "https://fhir.example.org", auth: { method: "token", token: "x" } }, BOTH));
+  assert.equal(fhirRes.status, 401);
+});
+
+test("rest-json test/pull: per-track flag gate on an existing rest-json row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "rj1", "rest-json", "pull", "https://labs.example.org", JSON.stringify({ source: "onboard", type: "rest-json" }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_REST_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/rj1", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/rj1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/rj1", { tenantId: "t1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/rj1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+});

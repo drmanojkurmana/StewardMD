@@ -69,14 +69,34 @@ export async function resolveAuth(deps, base, config, creds) {
   return { header: { authorization: "Bearer " + data.access_token }, bearer: data.access_token };
 }
 
+// Generic REST/JSON probe: GET {base}{resultsPath||"/results"} with the resolved auth header; ok iff 2xx AND
+// the body matches the SAME array/{results:[...]} contract the connector's fetchPatient accepts (never
+// invents rows). No fhirVersion/softwareName — there is no CapabilityStatement for a plain JSON API.
+// Reuses the shared PROBE_KLASSES enum: "not-fhir" doubles here as "not the expected JSON shape" (a bad
+// response body / unrecognized shape), matching its use elsewhere as "this endpoint isn't what we expected".
+async function runRestProbe(sfetch, base, config, header) {
+  const path = (config && config.resultsPath) || "/results";
+  let res;
+  try { res = await sfetch(base + path, { headers: header }); } catch (e) { return { ok: false, error: klassOf(e) }; }
+  if (res.status === 401 || res.status === 403) return { ok: false, error: "unauthorized" };
+  if (!res.ok) return { ok: false, error: "unreachable" };
+  let data;
+  try { data = await res.json(); } catch { return { ok: false, error: "not-fhir" }; }
+  if (!(Array.isArray(data) || (data && Array.isArray(data.results)))) return { ok: false, error: "not-fhir" };
+  return { ok: true };
+}
+
 // Run the probe against the base. Returns a client-safe result object; never throws for a connection fault
 // (those become { ok:false, error }); only a programmer/dep error would propagate.
 export async function runProbe(deps, base, config, creds) {
   const sfetch = makeSafeFetch(deps.fetch);              // redirect-safe: every hop re-validated, creds dropped cross-origin
   let b;
-  try { b = assertPublicHttpsUrl(base, "fhirBaseUrl").href.replace(/\/$/, ""); } catch (e) { return { ok: false, error: e.klass || "bad-url" }; }
+  try { b = assertPublicHttpsUrl(base, "baseUrl").href.replace(/\/$/, ""); } catch (e) { return { ok: false, error: e.klass || "bad-url" }; }
   let header;
   try { ({ header } = await resolveAuth(deps, b, config, creds)); } catch (e) { return { ok: false, error: e.klass || "unauthorized" }; }
+
+  // Generic REST/JSON connections probe a single results endpoint (no FHIR CapabilityStatement/Patient search).
+  if (config && config.type === "rest-json") return runRestProbe(sfetch, b, config, header);
 
   // 1. /metadata -> fhirVersion + software.name
   let mres;

@@ -12,7 +12,8 @@ import { RateLimited } from "../../../_connect/enterprise/ratelimit.js";
 import { identify } from "../../../_usage.js";
 import { ownerOK } from "../../../_adminauth.js";
 import { makeSecrets } from "../../../_connect/secrets.js";
-import { saveConnection, listConnections, deleteConnection } from "../../../_connect/onboard/store.js";
+import { saveConnection, listConnections, deleteConnection, getRow } from "../../../_connect/onboard/store.js";
+import { restFlagOn } from "../../../_connect/connectors/rest-json/flags.js";
 import { testConnection } from "../../../_connect/onboard/probe.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
@@ -32,6 +33,17 @@ const STATUS = (e) => e instanceof OnboardError ? (e.klass === "not-found" ? 404
   : e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : e instanceof RateLimited ? 429 : 400;
 const CODE = (e) => e instanceof OnboardError ? e.klass
   : (e && e.constructor && e.constructor.name ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error");
+
+// Per-track flag gate for the generic REST/JSON connector (mirrors Track A's fhirFlagOn idiom in the /context
+// router): rest-json save/test/pull additionally require smd_connect_rest, else 404 (no existence leak).
+// save knows the type from the request body (client-supplied); test/pull don't carry a type, so peek at the
+// stored row's kind — a lookup failure (missing row / no db) is NOT this gate's concern, so it just falls
+// through to the normal RBAC-gated call, which raises its own (identical) not-found/401.
+async function restGateBlocks(deps, tid, connectionId, env) {
+  if (restFlagOn(env)) return false;
+  try { const { row } = await getRow(deps.db, tid, connectionId); return row.kind === "rest-json"; }
+  catch { return false; }
+}
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -58,12 +70,21 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "all") return jsonResponse(Object.assign({ ok: true }, await listAll(deps, request, env, tid)));
     // Part 4 (Enterprise analytics): PHI-free per-connector integration health over the tenant's audit rows.
     if (method === "GET" && seg === "health") return jsonResponse({ ok: true, health: await readTenantIntegrationHealth(deps, request, env, tid) });
-    if (method === "POST" && seg === "emr") return jsonResponse(await saveConnection(deps, request, env, tid, body));
+    if (method === "POST" && seg === "emr") {
+      if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await saveConnection(deps, request, env, tid, body));
+    }
     if (method === "GET" && seg === "list") return jsonResponse({ ok: true, connections: await listConnections(deps, request, env, tid) });
     // Auto-discovery: unauthenticated capability probe (FHIR version/software/SMART support) for wizard pre-fill.
     if (method === "POST" && seg === "discover") return jsonResponse(await discoverCapabilities(deps, request, env, tid, body));
-    if (method === "POST" && parts[0] === "test" && parts[1]) return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
-    if (method === "POST" && parts[0] === "pull" && parts[1]) return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
+    if (method === "POST" && parts[0] === "test" && parts[1]) {
+      if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
+    }
+    if (method === "POST" && parts[0] === "pull" && parts[1]) {
+      if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
+    }
     // Automatic sync scheduler: the RBAC-gated per-connection interval setter (a hospital admin configures it
     // from the wizard); the cron-only sweep below is what actually runs the due connections.
     if (method === "POST" && parts[0] === "sync-config" && parts[1]) return jsonResponse(await setSyncConfig(deps, request, env, tid, parts[1], body));

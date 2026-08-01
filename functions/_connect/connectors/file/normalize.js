@@ -8,7 +8,8 @@ function hashId(s) { let h = 5381; const str = String(s || ""); for (let i = 0; 
 const sex = (v) => ({ M: "male", F: "female", m: "male", f: "female", male: "male", female: "female" }[String(v || "").trim()] || "unknown");
 const date = (v) => { const s = String(v || "").trim(); const m = s.match(/(\d{4})[-/]?(\d{2})[-/]?(\d{2})/); return m ? m[1] + "-" + m[2] + "-" + m[3] : (s || null); };
 
-export function normalizeCsvLab(ctx, parsed) {
+export function normalizeCsvLab(ctx, parsed, opts = {}) {
+  const src = opts.sourceConnector || "file";     // OPT-IN 3rd param: relabels bundle.meta + provenance only (e.g. "rest-json" reusing this verbatim)
   const warnings = (parsed.warnings || []).slice();
   // Bound warnings[] (parity with the CSV/HL7 parsers): a wide/blank/duplicate header must not balloon per-column warnings.
   const maxWarnings = (ctx.budget && ctx.budget.maxWarnings) || 500;
@@ -20,7 +21,7 @@ export function normalizeCsvLab(ctx, parsed) {
   for (const k of Object.keys(map)) if (map[k] && !header.includes(map[k])) warn("mapped column '" + k + "'->'" + map[k] + "' absent from feed");
   for (const col of header) if (!Object.values(map).includes(col)) warn("unmapped column '" + col + "' ignored");
 
-  const out = bundle({ tenantId: ctx.tenant.id, sourceConnector: "file", generatedAt: ctx.now().toISOString(), warnings, provenance: [{ resource: "file", sourceConnector: "file", sourceId: "file/" + hashId(header.join(",")) }] });
+  const out = bundle({ tenantId: ctx.tenant.id, sourceConnector: src, generatedAt: ctx.now().toISOString(), warnings, provenance: [{ resource: src, sourceConnector: src, sourceId: src + "/" + hashId(header.join(",")) }] });
   const reports = {};
   let patientSet = false;
   for (let i = 0; i < (parsed.rows || []).length; i++) {
