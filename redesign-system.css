@@ -541,10 +541,10 @@ html.rds-on .splash-tagline { font-family: var(--rds-font); }
 
 /* --- Header: at narrow widths the spacer collapsed and search glued to the
    wordmark. Shrink the header controls so a real gap returns. --- */
-#homeV2.rnav .rnav-head { gap: 3px; padding-left: 12px; padding-right: 12px; }
-#homeV2.rnav .rnav-head .rds-icon-btn { min-width: 38px; width: 38px; height: 40px; }
+#homeV2.rnav .rnav-head { gap: 2px; padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); }
+#homeV2.rnav .rnav-head .rds-icon-btn { min-width: 34px; width: 34px; height: 36px; flex-shrink: 0; }
 #homeV2.rnav .rnav-avatar { width: 34px; height: 34px; }
-#homeV2.rnav .rnav-head .rds-icon { font-size: 22px; }
+#homeV2.rnav .rnav-head .rds-icon { font-size: 20px; }
 #homeV2.rnav .rnav-brand { min-width: 0; overflow: visible; }
 #homeV2.rnav .rnav-brand span { white-space: nowrap; }
 #homeV2.rnav [data-act="search"] { margin-left: 4px; }  /* guarantee a gap from the brand */
@@ -605,6 +605,12 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-head [data-act="search"] { margin-left: auto; }
 #homeV2.rnav .rnav-brand { flex: 0 0 auto; }
 #homeV2.rnav .rnav-brand span { overflow: visible; text-overflow: clip; }
+/* Issue 4 (Build 6): the KU chip (mountKuChip) + the "Pro" badge (pro-badge.js) were added after this
+   header's width-fit pass and never budgeted, so the row overflowed padding-right and got clipped by
+   #homeV2{overflow:hidden} at the screen edge (bell cut off + perceived left/right asymmetry). Let them
+   shrink so the row always fits inside the symmetric inset above. */
+#homeV2.rnav .rnav-head .v3-ku { flex-shrink: 0; padding: 4px 7px; gap: 3px; font-size: 11.5px; }
+#homeV2.rnav .rnav-brand .smd-probadge { flex-shrink: 0; }
 
 /* Quick-action + quick-row tiles: equal height, content vertically centred, symmetric
    even when a label wraps to two lines (Scan Meds / Ward Sync). */

@@ -47,13 +47,13 @@
      @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
      used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
      different cursive. Self-hosting renders it identically on web + app. -->
-<link rel="stylesheet" href="/redesign-system.css?v=gold466-align">
+<link rel="stylesheet" href="/redesign-system.css?v=gold467-build6">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
-<link rel="stylesheet" href="/abx-wizard.css?v=bug808">
+<link rel="stylesheet" href="/abx-wizard.css?v=bug809-build6">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -65,7 +65,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <script defer src="/abx-redesign.js?v=gold476"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
-<script defer src="/abx-wizard.js?v=gold1056-aidisc"></script>
+<script defer src="/abx-wizard.js?v=gold1057-build6"></script>
 <script>
 /* Service worker (offline + instant repeat loads) — WEB ONLY.
    On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
@@ -643,6 +643,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 </div>
 
 <div id="accountGate" class="hidden">
+  <button type="button" id="accountGateClose" aria-label="Close" style="display:none;position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid rgba(148,163,184,.35);background:rgba(255,255,255,.08);color:inherit;font-size:19px;line-height:38px;text-align:center;cursor:pointer">✕</button>
   <div class="account-inner">
     <div class="splash-mark">
       <div class="splash-mark-logo" role="img" aria-label="StewardMD"></div>
@@ -1494,7 +1495,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1052-brain" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1069-aicdark" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/home.js?v=gold1070-build6" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
