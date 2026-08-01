@@ -64,6 +64,32 @@ test("a saved rest-json connection pulls through a mocked safe fetch -> valid SC
   assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
 });
 
+// --- dicomweb: the same pull.js path, reused per the row's stored kind ----------------------------------
+test("a saved dicomweb connection pulls through a mocked safe fetch -> valid SCCM bundle (imagingStudies); token never in the audit", async () => {
+  const STUDY = { "0020000D": { vr: "UI", Value: ["1.2.840.113619.2.55.1.1"] }, "00080061": { vr: "CS", Value: ["CT"] } };
+  const dicomFetch = async (url, init) => {
+    assert.match(String(url), /\/studies\?00100020=P1$/);
+    assert.equal(init.headers.authorization, "Bearer dicom-tok-1");
+    return new Response(JSON.stringify([STUDY]), { status: 200 });
+  };
+  const db = seedDb();
+  const deps = { db, kv: makeMockKv(), secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }), fetch: dicomFetch, now: () => Date.now() };
+  const { connectionId } = await saveConnection(deps, req, env, "t1",
+    { name: "Hospital PACS", type: "dicomweb", baseUrl: "https://pacs.example.org/dicom-web", auth: { method: "token", token: "dicom-tok-1" } });
+
+  const bundle = await pullConnection(deps, req, env, "t1", connectionId, "P1");
+  assert.equal(validateBundle(bundle).ok, true);
+  assert.equal(bundle.imagingStudies.length, 1);
+  assert.equal(bundle.imagingStudies[0].modality, "CT");
+  assert.equal(bundle.meta.sourceConnector, "dicomweb");
+
+  const auditRows = db._tables.connect_audit_event || [];
+  assert.ok(auditRows.some((r) => r.action === "connect.onboard.pulled"));
+  const blob = JSON.stringify(auditRows);
+  for (const secret of ["dicom-tok-1", "pacs.example.org"]) assert.equal(blob.includes(secret), false);
+  assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
+});
+
 test("pull is denied for an auditor (PHI is not for the auditor role)", async () => {
   const mock = makeMockFhir({ base: "https://fhir.example.org" });
   const db = seedDb("auditor");

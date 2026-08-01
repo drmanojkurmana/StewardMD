@@ -4,9 +4,10 @@
 import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { abdmConnector } from "../abdm/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
+import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
 import { createRegistry } from "./registry.js";
 
-export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector, restJsonConnector]);
+export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector, restJsonConnector, dicomWebConnector]);
 
 export function defaultRegistry() {
   const reg = createRegistry();

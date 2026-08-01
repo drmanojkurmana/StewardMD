@@ -12,16 +12,17 @@ import { validateBundle } from "../canonical/validate.js";
 import { assertConsumable, SCCM_MAJOR, RESOURCE_KEYS } from "../canonical/model.js";
 import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
+import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
 import { makeSafeFetch } from "./net.js";
 import { OnboardError } from "./errors.js";
-import { getRow, ONBOARD_SCOPE, REST_ONBOARD_SCOPE } from "./store.js";
+import { getRow, ONBOARD_SCOPE, REST_ONBOARD_SCOPE, DICOM_ONBOARD_SCOPE } from "./store.js";
 import { resolveAuth } from "./probe.js";
 
 // The stored row's `kind` selects which built-in connector reuses this same onboard pull path, and which
 // SCCM scope it is allowed to produce. Unknown/legacy kinds default to fhir-r4 (the original Increment-1 shape).
-const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector };
-const SCOPE_BY_KIND = { "fhir-r4": ONBOARD_SCOPE, "rest-json": REST_ONBOARD_SCOPE };
+const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector };
+const SCOPE_BY_KIND = { "fhir-r4": ONBOARD_SCOPE, "rest-json": REST_ONBOARD_SCOPE, "dicomweb": DICOM_ONBOARD_SCOPE };
 
 export async function pullConnection(deps, request, env, tenantId, connectionId, patientId) {
   // PHI read: gate on connector:read membership, and deny an auditor (RBAC reserves PHI away from auditors).
@@ -30,7 +31,7 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
   if (!patientId || typeof patientId !== "string") throw new OnboardError("invalid", "patientId required");
 
   const { row, config } = await getRow(deps.db, tenant.id, connectionId);
-  const kind = row.kind === "rest-json" ? "rest-json" : "fhir-r4";
+  const kind = row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : "fhir-r4";
   const connector = CONNECTORS_BY_KIND[kind];
   const scope = SCOPE_BY_KIND[kind];
   const base = assertPublicHttpsUrl(row.base_url, "baseUrl").href.replace(/\/$/, "");
@@ -47,9 +48,12 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
   // can never bounce the authenticated, PHI-bearing request to a private/other origin.
   const safeFetch = makeSafeFetch(deps.fetch);
   // fhir-r4's ctx.config stays byte-identical to before (no secret_ref => bearer-mode); rest-json additionally
-  // carries the results-endpoint shape (resultsPath/patientParam/headerName) + an optional explicit columnMap.
+  // carries the results-endpoint shape (resultsPath/patientParam/headerName) + an optional explicit columnMap;
+  // dicomweb carries the QIDO-RS studies-endpoint shape (studiesPath/patientTag/headerName).
   const cfg = kind === "rest-json"
     ? { base_url: base, connector_id: connectionId, resultsPath: config.resultsPath, patientParam: config.patientParam, headerName: config.headerName, config: { columnMap: config.columnMap || null } }
+    : kind === "dicomweb"
+    ? { base_url: base, connector_id: connectionId, studiesPath: config.studiesPath, patientTag: config.patientTag, headerName: config.headerName }
     : { base_url: base, connector_id: connectionId };           // NO secret_ref => connector stays in bearer mode
   const ctx = {
     tenant: { id: tenant.id, mode: tenant.mode || "sandbox", settings: {} },

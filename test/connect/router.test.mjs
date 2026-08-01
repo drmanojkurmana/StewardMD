@@ -112,3 +112,14 @@ test("SDK ON, rest flag OFF: /context rest-json is 404 (per-track smd_connect_re
   const r2 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "rest-json" }, on));
   assert.equal(r2.status, 401);                                        // past the gate -> unauthenticated
 });
+
+test("SDK ON, dicom flag OFF: /context dicomweb is 404 (per-track smd_connect_dicom gate)", async () => {
+  // dicomweb is in the SDK registry, so with smd_connect_sdk ON it would otherwise be reachable via /context.
+  // The per-track smd_connect_dicom gate must 404 it (before auth) exactly as the fhir-r4/rest-json gates do.
+  const off = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1" };            // no CONNECT_DICOM_FLAG
+  const r1 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "dicomweb" }, off));
+  assert.equal(r1.status, 404);
+  const on = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_DICOM_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  const r2 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "dicomweb" }, on));
+  assert.equal(r2.status, 401);                                        // past the gate -> unauthenticated
+});

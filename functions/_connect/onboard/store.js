@@ -13,6 +13,9 @@ import { OnboardError } from "./errors.js";
 export const ONBOARD_SCOPE = Object.freeze(["Patient", "Encounter", "Condition", "MedicationStatement", "AllergyIntolerance", "Observation", "DiagnosticReport", "DocumentReference"]);
 // SCCM scope a rest-json connection can ever produce (normalizeCsvLab only ever emits these three resources).
 export const REST_ONBOARD_SCOPE = Object.freeze(["Patient", "Observation", "DiagnosticReport"]);
+// SCCM scope a dicomweb connection can ever produce (the QIDO-RS connector only ever emits ImagingStudy — no
+// Patient demographics, no other resource; the bundle's `patient` is a hashed-ref placeholder, not scoped data).
+export const DICOM_ONBOARD_SCOPE = Object.freeze(["ImagingStudy"]);
 
 const nonEmpty = (s) => typeof s === "string" && s.trim().length > 0;
 const now = () => new Date().toISOString();
@@ -23,7 +26,8 @@ const audit = (env, deps, tenant, actor, action, outcome, extra) =>
 function buildRow(body) {
   if (!nonEmpty(body.name)) throw new OnboardError("invalid", "name required");
   if (body.type === "rest-json") return buildRestJsonRow(body);
-  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir' or 'rest-json' is supported");
+  if (body.type === "dicomweb") return buildDicomWebRow(body);
+  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir', 'rest-json' or 'dicomweb' is supported");
   const base = assertPublicHttpsUrl(body.fhirBaseUrl, "fhirBaseUrl");    // SSRF guard at save time
   const auth = body.auth || {};
   const config = { source: "onboard", name: String(body.name).trim(), type: "fhir", authMethod: auth.method, createdAt: now(), updatedAt: now(), lastTest: null };
@@ -62,6 +66,24 @@ function buildRestJsonRow(body) {
   return { baseUrl: base.href.replace(/\/$/, ""), config };
 }
 
+// Generic DICOMweb QIDO-RS imaging-metadata pull connection. Token/API-key auth ONLY (no SMART — same explicit
+// rejection as rest-json). studiesPath and patientTag are OPTIONAL request-shaping fields, shape-validated the
+// same way as rest-json's resultsPath/patientParam: studiesPath must be a real absolute PATH (no query/
+// fragment/whitespace/@/control) so it can never silently drop the patient-scoping query via a '#' fragment
+// (which would fetch unfiltered/all-patient studies) or pivot to another host:port; patientTag must be a real
+// 8-hex-digit DICOM tag (group+element), not an arbitrary query-parameter name.
+function buildDicomWebRow(body) {
+  const base = assertPublicHttpsUrl(body.baseUrl, "baseUrl");           // SSRF guard at save time
+  const auth = body.auth || {};
+  if (auth.method !== "token") throw new OnboardError("invalid", "auth.method must be 'token' for type 'dicomweb'");
+  if (!nonEmpty(auth.token)) throw new OnboardError("invalid", "auth.token required for method 'token'");
+  const config = { source: "onboard", name: String(body.name).trim(), type: "dicomweb", authMethod: "token", createdAt: now(), updatedAt: now(), lastTest: null };
+  if (body.headerName != null) { if (!nonEmpty(body.headerName) || !/^[A-Za-z0-9-]+$/.test(body.headerName)) throw new OnboardError("invalid", "headerName must be a simple header token (letters, digits, dashes)"); config.headerName = String(body.headerName); }
+  if (body.studiesPath != null) { if (!nonEmpty(body.studiesPath) || !/^\/[^\s#?@\x00-\x1f]*$/.test(body.studiesPath)) throw new OnboardError("invalid", "studiesPath must be an absolute path (start with /) with no query, fragment, whitespace, @ or control characters"); config.studiesPath = String(body.studiesPath); }
+  if (body.patientTag != null) { if (!nonEmpty(body.patientTag) || !/^[0-9A-Fa-f]{8}$/.test(body.patientTag)) throw new OnboardError("invalid", "patientTag must be an 8-hex-digit DICOM tag (e.g. 00100020)"); config.patientTag = String(body.patientTag); }
+  return { baseUrl: base.href.replace(/\/$/, ""), config };
+}
+
 // The client-facing credential material that gets envelope-sealed (never stored/returned in the clear).
 function sealMaterial(auth) {
   if (auth.method === "token") return { token: String(auth.token) };
@@ -78,8 +100,8 @@ export async function saveConnection(deps, request, env, tenantId, body = {}) {
   const { baseUrl, config } = buildRow(body);
   config.sealed = await deps.secrets.seal(JSON.stringify(sealMaterial(body.auth || {})));   // envelope-encrypted
   const connectionId = (crypto.randomUUID ? crypto.randomUUID() : "conn-" + Math.random().toString(36).slice(2));
-  const kind = config.type === "rest-json" ? "rest-json" : "fhir-r4";
-  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : ONBOARD_SCOPE;
+  const kind = config.type === "rest-json" ? "rest-json" : config.type === "dicomweb" ? "dicomweb" : "fhir-r4";
+  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : config.type === "dicomweb" ? DICOM_ONBOARD_SCOPE : ONBOARD_SCOPE;
   await deps.db.prepare(
     "INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)"
   ).bind(tenant.id, connectionId, kind, "pull", baseUrl, JSON.stringify(config), null, JSON.stringify(scope), "draft").run();
@@ -108,6 +130,8 @@ export function safeView(row) {
     lastTest: c.lastTest || null,
     // rest-json-only (non-secret): the results endpoint shape the connector reads with.
     resultsPath: c.resultsPath || null, patientParam: c.patientParam || null, columnMap: c.columnMap || null,
+    // dicomweb-only (non-secret): the QIDO-RS studies endpoint shape the connector reads with.
+    studiesPath: c.studiesPath || null, patientTag: c.patientTag || null,
     // Automatic sync scheduler (additive, no schema change — lives in this same config JSON blob).
     syncIntervalMin: c.syncIntervalMin || 0, lastSyncAt: c.lastSyncAt || null,
   };

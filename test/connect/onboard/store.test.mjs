@@ -146,3 +146,70 @@ test("save SHAPE-validates rest-json request-shaping fields (no fragment/query/h
   const ok = await saveConnection(deps(db), req, env, "t1", { ...restBody, resultsPath: "/api/v2/results", patientParam: "mrn_id" });
   assert.ok(ok.connectionId);                                            // a clean absolute path + simple param name is accepted
 });
+
+// --- dicomweb (DICOMweb QIDO-RS imaging-metadata pull connector) --------------------------------------------
+const dicomBody = { name: "Hospital PACS", type: "dicomweb", baseUrl: "https://pacs.example.org/dicom-web", auth: { method: "token", token: "sekret-dicom-789" } };
+
+test("save accepts type 'dicomweb' with auth.method 'token'; envelope-seals the credential", async () => {
+  const db = seedDb();
+  const res = await saveConnection(deps(db), req, env, "t1", dicomBody);
+  assert.equal(res.ok, true);
+  const rows = db._tables.connect_connector_config;
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].kind, "dicomweb");
+  assert.equal(rows[0].profile, "pull");
+  const config = JSON.parse(rows[0].config);
+  assert.equal(config.type, "dicomweb");
+  assert.equal(JSON.parse(rows[0].scope).join(","), "ImagingStudy");
+  const stored = JSON.stringify(rows[0]);
+  assert.equal(stored.includes("sekret-dicom-789"), false);        // raw token NEVER stored in the clear
+  const creds = JSON.parse(await makeSecrets(env).open(config.sealed));
+  assert.equal(creds.token, "sekret-dicom-789");                   // round-trip
+});
+
+test("save rejects auth.method 'smart' for type 'dicomweb' (token-only)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...dicomBody, auth: { method: "smart", clientId: "cid" } }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save SSRF-rejects a private/loopback baseUrl for type 'dicomweb'", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...dicomBody, baseUrl: "https://169.254.169.254/dicom-web" }),
+    (e) => e instanceof OnboardError && e.klass === "bad-url");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("list surfaces dicomweb connections (studiesPath/patientTag) and never secret material", async () => {
+  const db = seedDb();
+  const { connectionId } = await saveConnection(deps(db), req, env, "t1", { ...dicomBody, studiesPath: "/api/studies", patientTag: "00100020" });
+  const list = await listConnections(deps(db), req, env, "t1");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].connectionId, connectionId);
+  assert.equal(list[0].type, "dicomweb");
+  assert.equal(list[0].studiesPath, "/api/studies");
+  assert.equal(list[0].patientTag, "00100020");
+  assert.equal(JSON.stringify(list).includes("sekret-dicom-789"), false);
+});
+
+test("save SHAPE-validates dicomweb request-shaping fields (studiesPath + patientTag; no fragment/query/host-pivot/header-injection)", async () => {
+  const db = seedDb();
+  // Same rationale as rest-json's resultsPath: a '#' in studiesPath makes the patient-scoping query a URL
+  // fragment (never sent on the wire) -> a silent unfiltered/all-patient fetch.
+  for (const bad of ["/studies#dummy", ":8080/internal", "studies", "/a b", "/x?y=1", "/@evil.com"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...dicomBody, studiesPath: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "studiesPath '" + bad + "' must be rejected");
+  }
+  // patientTag must be a real 8-hex-digit DICOM tag, not an arbitrary string.
+  for (const bad of ["PatientID", "0010,0020", "001000200", "0010002", "zzzzzzzz"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...dicomBody, patientTag: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "patientTag '" + bad + "' must be rejected");
+  }
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...dicomBody, headerName: "X-Bad\r\nEvil: 1" }), (e) => e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);   // nothing was persisted
+  const ok = await saveConnection(deps(db), req, env, "t1", { ...dicomBody, studiesPath: "/api/v2/studies", patientTag: "00100020" });
+  assert.ok(ok.connectionId);                                            // a clean absolute path + valid tag is accepted
+});

@@ -125,3 +125,31 @@ test("rest-json test/pull: per-track flag gate on an existing rest-json row -> 4
   assert.equal((await onRequest(post("/api/connect/onboard/test/rj1", { tenantId: "t1" }, envOn))).status, 401);
   assert.equal((await onRequest(post("/api/connect/onboard/pull/rj1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
 });
+
+// --- dicomweb per-track flag gate (mirrors the rest-json idiom): smd_connect_dicom, default OFF -------------
+test("dicomweb save: 404 when CONNECT_DICOM_FLAG is off (base+onboard on); reachable (401) when on", async () => {
+  const dicomBody = { tenantId: "t1", name: "Hospital PACS", type: "dicomweb", baseUrl: "https://pacs.example.org/dicom-web", auth: { method: "token", token: "SEKRET-DICOM" } };
+  const off = await onRequest(post("/api/connect/onboard/emr", dicomBody, BOTH));
+  assert.equal(off.status, 404);
+  const on = await onRequest(post("/api/connect/onboard/emr", dicomBody, Object.assign({}, BOTH, { CONNECT_DICOM_FLAG: "1" })));
+  assert.equal(on.status, 401);        // past the gate -> the normal unauthenticated RBAC 401
+  // fhir save is unaffected by the dicomweb gate either way.
+  const fhirRes = await onRequest(post("/api/connect/onboard/emr",
+    { tenantId: "t1", name: "x", type: "fhir", fhirBaseUrl: "https://fhir.example.org", auth: { method: "token", token: "x" } }, BOTH));
+  assert.equal(fhirRes.status, 401);
+});
+
+test("dicomweb test/pull: per-track flag gate on an existing dicomweb row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "dw1", "dicomweb", "pull", "https://pacs.example.org/dicom-web", JSON.stringify({ source: "onboard", type: "dicomweb" }), null,
+      JSON.stringify(["ImagingStudy"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_DICOM_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/dw1", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/dw1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/dw1", { tenantId: "t1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/dw1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+});

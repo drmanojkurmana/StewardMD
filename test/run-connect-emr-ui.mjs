@@ -59,7 +59,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); var dis=o.filter(function(x){return x.disabled;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && dis.length>=1 && dis.every(function(x){return x.value==="dicom";});`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST active and DICOM disabled 'coming soon'");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb all active (no disabled 'coming soon' option)");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -126,6 +126,29 @@ try {
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
+  // DICOMweb / imaging (metadata) type: activates the DICOM subform (hides FHIR/Detect + CSV + HL7 + Webhook +
+  // REST); Save-and-test builds {type:"dicomweb", baseUrl, auth:{method:"token",token,headerName?}, studiesPath?,
+  // patientTag?} exactly per the backend contract, POSTs /emr then /test/:id (same two-step flow as REST/FHIR),
+  // and renders a DICOMweb-specific success message (not a FHIR-version string) through the shared say()/testMsg() path.
+  ok(await ev(`document.getElementById("aType").value="dicom"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fDicom")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none";`) === true, "DICOMweb type activates the DICOM subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST fields");
+  await ev(`window.ConnectEMR.setTenant("t-dicom"); window.ConnectEMR.setName("Hospital PACS");
+    document.getElementById("aDicomBase").value="https://pacs.example.org/dicom-web";
+    document.getElementById("aDicomToken").value="dicom-tok-1";
+    document.getElementById("aDicomPath").value="/studies";
+    window.__dicomSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__dicomSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"dicom-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/dicom-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.dicomSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__dicomSaved; return !!b && b.type==="dicomweb" && b.baseUrl==="https://pacs.example.org/dicom-web" && b.tenantId==="t-dicom" && b.name==="Hospital PACS" && b.auth&&b.auth.method==="token" && b.auth.token==="dicom-tok-1" && b.studiesPath==="/studies" && !("headerName" in (b.auth||{})) && !("patientTag" in b);`) === true, "DICOMweb Save-and-test POSTs /emr with type dicomweb + baseUrl + token auth + studiesPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("dicomMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("studies endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "DICOMweb Save-and-test reports success with DICOMweb-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aDicomBase").value===""&&document.getElementById("aDicomToken").value==="";`) === true, "DICOMweb form clears after a successful save");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
   // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
   // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
   await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
@@ -170,6 +193,8 @@ try {
   // (safeView.type), so a rest-json row must be badged by its REAL type, not the hardcoded "FHIR" of before. ----
   ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-2",name:"Lab REST Feed",type:"rest-json",fhirBaseUrl:"https://labs.example.org/api",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab REST Feed")>=0 && h.indexOf(">REST/JSON<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a rest-json row is badged REST/JSON (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-3",name:"Hospital PACS Feed",type:"dicomweb",fhirBaseUrl:"https://pacs.example.org/dicom-web",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Hospital PACS Feed")>=0 && h.indexOf(">DICOMweb<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a dicomweb row is badged DICOMweb (its real type), not hardcoded FHIR");
 
   // ---- Connection health panel (GET /health, Part 4 PHI-free integration-health analytics) ----
   // Two connectors: one fully healthy, one with failures + a recent-failure entry + warnings. Assert the
@@ -222,6 +247,14 @@ try {
     window.ConnectEMR.restSaveTest(); return 1;`);
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // dicomweb degrades through the SAME showFlagOff() path as every other type (no special-casing in doDicomSave).
+  await ev(`window.ConnectEMR.setTenant("t-final2"); document.getElementById("aName").value="PACS Final";
+    document.getElementById("aDicomBase").value="https://pacs.example.org"; document.getElementById("aDicomToken").value="tok-1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.dicomSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "DICOMweb save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
 
   // Connection health degrades through the SAME showFlagOff() path as every other GET on a 404.
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadHealth(); return 1;`);

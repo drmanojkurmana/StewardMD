@@ -20,6 +20,7 @@ import { fhirPushConnector } from "../../_connect/connectors/fhir-push/connector
 import { defaultRegistry } from "../../_connect/sdk/index.js"; // Track C: Connector SDK registry (gated by smd_connect_sdk)
 import { sdkFlagOn } from "../../_connect/sdk/flags.js";
 import { restFlagOn } from "../../_connect/connectors/rest-json/flags.js"; // per-track gate: smd_connect_rest
+import { dicomFlagOn } from "../../_connect/connectors/dicomweb/flags.js"; // per-track gate: smd_connect_dicom
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -108,6 +109,8 @@ export async function onRequest(context) {
     // Track: a rest-json context request requires smd_connect_rest too, so the per-track flag gates the SDK
     // /context path (with smd_connect_sdk ON) exactly as it gates the onboard save/test/pull routes.
     if (req.connectorId === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a dicomweb context request requires smd_connect_dicom too, same per-track gate idiom.
+    if (req.connectorId === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {

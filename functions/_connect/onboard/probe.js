@@ -86,6 +86,23 @@ async function runRestProbe(sfetch, base, config, header) {
   return { ok: true };
 }
 
+// Generic DICOMweb QIDO-RS probe: GET {base}{studiesPath||"/studies"}?limit=1 with the resolved auth header +
+// the DICOM-JSON Accept header; ok iff 2xx AND the body is a bare JSON array (the SAME shape the connector's
+// fetchPatient accepts — never invents studies). No fhirVersion/softwareName — there is no CapabilityStatement
+// for DICOMweb. Reuses "not-fhir" as "not the expected JSON shape", matching runRestProbe's convention.
+async function runDicomProbe(sfetch, base, config, header) {
+  const path = (config && config.studiesPath) || "/studies";
+  const acceptHeader = Object.assign({ accept: "application/dicom+json" }, header);
+  let res;
+  try { res = await sfetch(base + path + "?limit=1", { headers: acceptHeader }); } catch (e) { return { ok: false, error: klassOf(e) }; }
+  if (res.status === 401 || res.status === 403) return { ok: false, error: "unauthorized" };
+  if (!res.ok) return { ok: false, error: "unreachable" };
+  let data;
+  try { data = await res.json(); } catch { return { ok: false, error: "not-fhir" }; }
+  if (!Array.isArray(data)) return { ok: false, error: "not-fhir" };
+  return { ok: true };
+}
+
 // Run the probe against the base. Returns a client-safe result object; never throws for a connection fault
 // (those become { ok:false, error }); only a programmer/dep error would propagate.
 export async function runProbe(deps, base, config, creds) {
@@ -97,6 +114,8 @@ export async function runProbe(deps, base, config, creds) {
 
   // Generic REST/JSON connections probe a single results endpoint (no FHIR CapabilityStatement/Patient search).
   if (config && config.type === "rest-json") return runRestProbe(sfetch, b, config, header);
+  // Generic DICOMweb connections probe a single (limited, unfiltered) studies endpoint.
+  if (config && config.type === "dicomweb") return runDicomProbe(sfetch, b, config, header);
 
   // 1. /metadata -> fhirVersion + software.name
   let mres;
