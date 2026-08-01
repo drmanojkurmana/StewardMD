@@ -41,6 +41,13 @@
   .subform{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
   .json{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto;color:var(--ink)}
   .soon{font:600 11px var(--f);color:var(--mut);margin-top:6px}
+  table.dash{width:100%;border-collapse:collapse;font:500 13px var(--f)}
+  table.dash th{text-align:left;font:700 10.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px;border-bottom:1px solid var(--line)}
+  table.dash td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;word-break:break-word}
+  table.dash td.mono{font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut)}
+  table.dash td.acts{white-space:nowrap}
+  table.dash td.acts button{padding:6px 9px;font-size:12px;margin-right:5px;margin-bottom:4px}
+  table.dash .st{display:inline-block}
   @media(max-width:640px){.main{padding:16px 14px 70px}}
 </style>
 </head>
@@ -63,17 +70,26 @@
 
     <div id="work" data-need-auth style="display:none">
 
-      <!-- Organization -->
+      <!-- Organization: picked from the tenants your account is a member of (server-derived, no typing). -->
       <div class="card">
         <b>Organization</b>
-        <div class="hint" style="margin:4px 0 2px">Enter the tenant ID of the organization you are connecting. Every action below runs for this organization, and your account must be a member of it.</div>
-        <label for="tenantId">Organization / tenant ID</label>
+        <div class="hint" style="margin:4px 0 2px">Select the hospital or organization you are connecting. Only organizations your account is a member of are listed. Every action below runs for the selected organization.</div>
+        <label for="tenantSel">Your organization</label>
         <div class="row">
-          <div><input id="tenantId" placeholder="your organization's tenant ID" autocapitalize="off" spellcheck="false"></div>
-          <div style="flex:0 0 auto"><button class="primary" id="tenantLoad">Load connections</button></div>
+          <div><select id="tenantSel"><option value="" disabled selected>Loading your organizations...</option></select></div>
+          <div style="flex:0 0 auto"><button class="primary" id="tenantReload">Reload</button></div>
         </div>
         <div class="msg" id="tenantMsg"></div>
       </div>
+
+      <!-- No-membership empty state (GET /tenants returned an empty list). -->
+      <div id="noTenant" class="card" style="display:none">
+        <b>You are not a member of any hospital tenant</b>
+        <div class="hint" style="margin-top:6px">Your account is not a member of any organization yet. Ask your organization's owner to invite your StewardMD account, then use Reload above.</div>
+      </div>
+
+      <!-- Operational area: shown only once you belong to at least one organization. -->
+      <div id="opsArea">
 
       <!-- Add a connection -->
       <div class="card">
@@ -166,17 +182,14 @@
        </div>
       </div>
 
-      <!-- HL7 feeds list -->
-      <div class="card" id="hl7Card">
-        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">HL7 v2 feeds</b><button class="ghost" id="hl7Reload" style="padding:7px 11px">Reload</button></div>
-        <div id="hl7Feeds" style="margin-top:12px"><div class="hint">Enter an organization / tenant ID above and load its feeds.</div></div>
+      <!-- Connections dashboard: this organization's FHIR connections AND HL7 v2 feeds in one table. -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections dashboard</b><button class="ghost" id="dashReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" id="dashCounts" style="margin-top:4px"></div>
+        <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
       </div>
 
-      <!-- Connections list -->
-      <div class="card">
-        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections</b><button class="ghost" id="listReload" style="padding:7px 11px">Reload</button></div>
-        <div id="list" style="margin-top:12px"><div class="hint">Enter an organization / tenant ID above and load its connections.</div></div>
-      </div>
+      </div><!-- /opsArea -->
 
     </div>
   </main>
@@ -195,7 +208,8 @@
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
   function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
   function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
-  function tenant(){ return ($("tenantId").value||"").trim(); }
+  function tenant(){ var s=$("tenantSel"); return s?(s.value||"").trim():""; }
+  function ensureTenantOption(v){ var s=$("tenantSel"); if(!s||!v) return; if(![].slice.call(s.options).some(function(o){return o.value===v;})){ var o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); } }
   function host(u){ try{ return new URL(u).host; }catch(e){ return u||""; } }
 
   // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
@@ -306,45 +320,24 @@
       if(x.s===403){ hl7Say("err","Your account cannot manage feeds for this organization."); return; }
       if(x.s!==200||!x.d||!x.d.ok){ hl7Say("err",httpErr(x)); return; }
       hl7Say("ok","Feed created. Save the signing secret below now, it will not be shown again.");
-      renderHl7Created(x.d); loadHl7Feeds();
+      renderHl7Created(x.d); loadDashboard();
     }).catch(function(){ $("hl7Create").disabled=false; hl7Say("err","Sign in first."); });
   }
   $("hl7Create").onclick=hl7CreateGo;
   $("hl7Copy").onclick=function(){ var i=$("hl7Secret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } hl7Say("ok","Secret copied. Store it somewhere safe now."); };
 
-  function renderHl7Feeds(feeds){
-    var el=$("hl7Feeds");
-    if(!feeds.length){ el.innerHTML='<div class="hint">No HL7 feeds yet. Create one above.</div>'; return; }
-    el.innerHTML=feeds.map(function(f){ var id=esc(f.feedId);
-      var types=(f.allowedMessageTypes&&f.allowedMessageTypes.length)?f.allowedMessageTypes.join(", "):"any";
-      return '<div class="item" data-fid="'+id+'">'+
-        '<div class="h"><span class="cat">hl7 v2</span><span class="st verified">'+esc(f.status||"active")+'</span><span class="t">'+esc(when(f.createdAt))+'</span></div>'+
-        '<div class="title">'+esc(f.name||"(unnamed)")+'</div>'+
-        '<div class="meta"><b>Feed ID:</b> '+id+' &middot; <b>Message types:</b> '+esc(types)+'</div>'+
-        '<div class="foot"><button class="del" data-fact="del" data-fid="'+id+'" style="margin-left:auto">Delete</button></div>'+
-      '</div>';
-    }).join("");
-  }
-  function loadHl7Feeds(){
-    if(!tenant()){ $("hl7Feeds").innerHTML='<div class="hint">Enter an organization / tenant ID above and load its feeds.</div>'; return; }
-    $("hl7Feeds").innerHTML='<div class="hint">Loading…</div>';
-    api(API+"/hl7-feed/list?tenant="+encodeURIComponent(tenant())).then(function(x){
-      if(x.s===404){ showFlagOff(); return; }
-      hideFlagOff();
-      if(x.s!==200||!x.d||x.d.ok===false){ $("hl7Feeds").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
-      renderHl7Feeds(x.d.feeds||[]);
-    }).catch(function(){ $("hl7Feeds").innerHTML='<div class="hint">Sign in first.</div>'; });
-  }
+  // The constant webhook URL a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
+  // URL path), so this is safe to copy and is NOT a secret.
+  function ingestUrl(){ try{ return location.origin+"/api/connect/ingress/hl7"; }catch(e){ return "/api/connect/ingress/hl7"; } }
+  function copyFeedUrl(){ var u=ingestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
   function doDeleteFeed(id){
     if(!confirm("Delete this feed? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
     api(API+"/hl7-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
       if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
       if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
-      say("tenantMsg","ok","Feed deleted."); loadHl7Feeds();
+      say("tenantMsg","ok","Feed deleted."); loadDashboard();
     }).catch(function(){ say("tenantMsg","err","Sign in first."); });
   }
-  $("hl7Feeds").addEventListener("click",function(e){ var b=e.target.closest("[data-fact]"); if(!b)return; if(b.getAttribute("data-fact")==="del") doDeleteFeed(b.getAttribute("data-fid")); });
-  $("hl7Reload").onclick=loadHl7Feeds;
 
   // ---- add / save ----
   function addBody(){
@@ -372,7 +365,7 @@
       $("addSave").disabled=false; $("addSaveTest").disabled=false;
       if(x.s===404){ showFlagOff(); return; }
       if(x.s!==200||!x.d||!x.d.ok){ say("addMsg","err",httpErr(x)); return; }
-      var id=x.d.connectionId; clearAddForm(); loadList();
+      var id=x.d.connectionId; clearAddForm(); loadDashboard();
       if(thenTest){ say("addMsg","","Saved. Testing connection…"); runTest(id,"addMsg"); }
       else { say("addMsg","ok","Connection saved. Use Test below to check it."); }
     }).catch(function(){ $("addSave").disabled=false; $("addSaveTest").disabled=false; say("addMsg","err","Sign in first."); });
@@ -389,13 +382,13 @@
       var d=x.d||{};
       if(d.ok){ say(msgId,"ok","Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+"."); }
       else { say(msgId,"err",testMsg(d.error)); }
-      loadList();
+      loadDashboard();
     }).catch(function(){ say(msgId,"err","Sign in first."); });
   }
 
   // ---- pull a patient ----
   function doPull(id){
-    var input=$("list").querySelector('[data-pid="'+id+'"]'), out=$("list").querySelector('[data-json="'+id+'"]');
+    var input=$("dash").querySelector('[data-pid="'+id+'"]'), out=$("dash").querySelector('[data-json="'+id+'"]');
     var pid=input?(input.value||"").trim():"";
     if(!pid){ if(out){ out.style.display=""; out.textContent="Enter a patient ID first."; } return; }
     if(out){ out.style.display=""; out.textContent="Pulling patient…"; }
@@ -412,77 +405,125 @@
     api(API+"/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
       if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
       if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
-      say("tenantMsg","ok","Connection deleted."); loadList();
+      say("tenantMsg","ok","Connection deleted."); loadDashboard();
     }).catch(function(){ say("tenantMsg","err","Sign in first."); });
   }
 
-  // ---- list ----
+  // ---- tenant picker (populated from GET /tenants: the caller's OWN memberships) ----
+  function showNoMembership(){ $("noTenant").style.display=""; $("opsArea").style.display="none"; $("tenantSel").innerHTML='<option value="" disabled selected>No organizations available</option>'; }
+  function hideNoMembership(){ $("noTenant").style.display="none"; $("opsArea").style.display=""; }
+  function renderTenantOptions(ts){
+    // Preserve a still-valid prior selection; otherwise leave nothing selected (a placeholder). The selected
+    // option MUST be marked explicitly: a disabled placeholder with no `selected` would let the browser
+    // auto-select the first enabled option (a false auto-selection).
+    var s=$("tenantSel"), prev=s.value, keep=ts.some(function(t){return t.tenantId===prev;})?prev:"", html="";
+    if(ts.length!==1) html+='<option value="" disabled'+(keep?"":" selected")+'>Select your organization...</option>';
+    html+=ts.map(function(t){
+      var name=t.name?esc(t.name):esc(t.tenantId);
+      return '<option value="'+esc(t.tenantId)+'"'+(t.tenantId===keep?" selected":"")+'>'+name+' ('+esc(t.role)+')</option>';
+    }).join("");
+    s.innerHTML=html;
+  }
+  function onTenantChange(){ say("tenantMsg","",""); loadDashboard(); }
+  function loadTenants(){
+    api(API+"/tenants").then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ say("tenantMsg","err",httpErr(x)); return; }
+      var ts=x.d.tenants||[];
+      if(!ts.length){ showNoMembership(); return; }
+      hideNoMembership(); renderTenantOptions(ts);
+      if(ts.length===1){ $("tenantSel").value=ts[0].tenantId; onTenantChange(); }   // single tenant auto-selects
+      else if(tenant()){ onTenantChange(); }                                        // a still-valid selection refreshes
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- connections dashboard (unified FHIR connections + HL7 v2 feeds, one table) ----
   function statusBadge(c){
     var lt=c.lastTest;
     if(lt&&lt.ok) return '<span class="st verified">Connected</span>';
     if(lt&&!lt.ok) return '<span class="st rejected">'+esc(lt.error||"failed")+'</span>';
     return '<span class="st unverified">not tested</span>';
   }
-  function lastTestLine(c){
-    var lt=c.lastTest; if(!lt) return "";
-    if(lt.ok) return ' · <b>Last test:</b> connected'+(lt.fhirVersion?(" (FHIR "+esc(lt.fhirVersion)+(lt.softwareName?", "+esc(lt.softwareName):"")+")"):"");
-    return ' · <b>Last test:</b> '+esc(lt.error||"failed");
+  function feedStatusBadge(f){ var s=String(f.status||"active"); return '<span class="st '+(s==="active"?"verified":"unverified")+'">'+esc(s)+'</span>'; }
+  function fhirRow(c){ var id=esc(c.connectionId), lt=c.lastTest;
+    var last=lt?(lt.ok?("connected"+(lt.fhirVersion?" (FHIR "+esc(lt.fhirVersion)+")":"")):esc(lt.error||"failed")):"not tested";
+    return '<tr class="drow" data-cid="'+id+'">'+
+      '<td><b>'+esc(c.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Auth: '+esc(c.authMethod||"-")+'</div></td>'+
+      '<td><span class="cat">FHIR</span></td>'+
+      '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
+      '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
+      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
+    '</tr>'+
+    '<tr data-msgrow="'+id+'" style="display:none"><td colspan="5"><div class="rowmsg msg" data-msg="'+id+'"></div></td></tr>'+
+    '<tr data-pull="'+id+'" style="display:none"><td colspan="5">'+
+      '<label>Patient ID</label>'+
+      '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
+      '<div class="json" data-json="'+id+'" style="display:none"></div>'+
+    '</td></tr>';
   }
-  function renderList(conns){
-    var el=$("list");
-    if(!conns.length){ el.innerHTML='<div class="hint">No EMRs connected yet. Add one above.</div>'; return; }
-    el.innerHTML=conns.map(function(c){ var id=esc(c.connectionId);
-      return '<div class="item" data-cid="'+id+'">'+
-        '<div class="h"><span class="cat">'+esc(c.type||"fhir")+'</span>'+statusBadge(c)+'<span class="hint">'+esc(host(c.fhirBaseUrl))+'</span><span class="t">'+esc(when(c.updatedAt||c.createdAt))+'</span></div>'+
-        '<div class="title">'+esc(c.name||"(unnamed)")+'</div>'+
-        '<div class="meta"><b>Base:</b> '+esc(c.fhirBaseUrl||"-")+' · <b>Auth:</b> '+esc(c.authMethod||"-")+lastTestLine(c)+'</div>'+
-        '<div class="foot"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull a patient</button><button class="del" data-act="del" data-cid="'+id+'" style="margin-left:auto">Delete</button></div>'+
-        '<div class="rowmsg msg" data-msg="'+id+'"></div>'+
-        '<div class="subform" data-pull="'+id+'" style="display:none">'+
-          '<label>Patient ID</label>'+
-          '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
-          '<div class="json" data-json="'+id+'" style="display:none"></div>'+
-        '</div>'+
-      '</div>';
-    }).join("");
+  function hl7Row(f){ var id=esc(f.feedId);
+    var types=(f.allowedMessageTypes&&f.allowedMessageTypes.length)?f.allowedMessageTypes.join(", "):"any";
+    return '<tr class="drow" data-fid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Types: '+esc(types)+'</div></td>'+
+      '<td><span class="cat">HL7 v2</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-fact="copy" data-fid="'+id+'">Copy URL</button><button class="del" data-fact="del" data-fid="'+id+'">Delete</button></td>'+
+    '</tr>';
   }
-  function loadList(){
-    if(!tenant()){ $("list").innerHTML='<div class="hint">Enter an organization / tenant ID above and load its connections.</div>'; return; }
-    $("list").innerHTML='<div class="hint">Loading…</div>';
-    api(API+"/list?tenant="+encodeURIComponent(tenant())).then(function(x){
+  function renderDash(fhir,hl7,counts){
+    fhir=fhir||[]; hl7=hl7||[];
+    var c=$("dashCounts"), total=(counts&&counts.total!=null)?counts.total:(fhir.length+hl7.length);
+    var nf=(counts&&counts.fhir!=null)?counts.fhir:fhir.length, nh=(counts&&counts.hl7!=null)?counts.hl7:hl7.length;
+    c.textContent=total?(total+" connection"+(total===1?"":"s")+" ("+nf+" FHIR, "+nh+" HL7)"):"";
+    if(!total){ $("dash").innerHTML='<div class="hint">No connections yet. Add a FHIR connection or an HL7 v2 feed above.</div>'; return; }
+    var rows=fhir.map(fhirRow).join("")+hl7.map(hl7Row).join("");
+    $("dash").innerHTML='<table class="dash"><thead><tr><th>Name</th><th>Type</th><th>Host / feed ID</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  function loadDashboard(){
+    if(!tenant()){ $("dash").innerHTML='<div class="hint">Select your organization above to view its connections.</div>'; $("dashCounts").textContent=""; return; }
+    $("dash").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/all?tenant="+encodeURIComponent(tenant())).then(function(x){
       if(x.s===404){ showFlagOff(); return; }
       hideFlagOff();
-      if(x.s!==200||!x.d||x.d.ok===false){ $("list").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
-      renderList(x.d.connections||[]);
-    }).catch(function(){ $("list").innerHTML='<div class="hint">Sign in first.</div>'; });
+      if(x.s!==200||!x.d||x.d.ok===false){ $("dash").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("dashCounts").textContent=""; return; }
+      renderDash(x.d.fhir||[], x.d.hl7||[], x.d.counts||null);
+    }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
   }
 
-  // ---- list action delegation ----
-  function runTestRow(id){ var m=$("list").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
-  $("list").addEventListener("click",function(e){
-    var b=e.target.closest("[data-act]"); if(!b)return; var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
-    if(act==="test"){ runTestRow(id); }
-    else if(act==="pull"){ var sf=$("list").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
-    else if(act==="pullgo"){ doPull(id); }
-    else if(act==="del"){ doDelete(id); }
+  // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete) ----
+  function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
+  $("dash").addEventListener("click",function(e){
+    var b=e.target.closest("[data-act],[data-fact]"); if(!b)return;
+    if(b.hasAttribute("data-act")){ var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
+      if(act==="test"){ runTestRow(id); }
+      else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
+      else if(act==="pullgo"){ doPull(id); }
+      else if(act==="del"){ doDelete(id); }
+    } else { var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
+      if(fact==="copy"){ copyFeedUrl(); }
+      else if(fact==="del"){ doDeleteFeed(fid); }
+    }
   });
 
   // ---- controls ----
-  function loadAll(){ loadList(); loadHl7Feeds(); }
-  $("tenantLoad").onclick=loadAll;
-  $("listReload").onclick=loadList;
-  $("tenantId").addEventListener("keydown",function(e){ if(e.key==="Enter") loadAll(); });
+  $("tenantSel").onchange=onTenantChange;
+  $("tenantReload").onclick=loadTenants;
+  $("dashReload").onclick=loadDashboard;
 
   // ---- Firebase auth state ----
-  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u && tenant()) loadAll(); }); }
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u) loadTenants(); }); }
   else { $("who").textContent="Firebase failed to load."; signedInUI(null); }
 
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
-  window.ConnectEMR={ loadList:loadList, renderList:renderList, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+  window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
+    loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
-    hl7Create:hl7CreateGo, loadHl7Feeds:loadHl7Feeds, renderHl7Feeds:renderHl7Feeds, renderHl7Created:renderHl7Created,
+    hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
+    showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
-    setTenant:function(v){ $("tenantId").value=v; }, __setApi:function(fn){ api=fn; } };
+    setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
 })();
 </script>
 </body>

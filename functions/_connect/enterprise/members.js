@@ -3,6 +3,7 @@
 // Audit is PHI-free (action + actor + tenant + outcome only; target user-id/role are non-PHI account ids
 // but are not on the audit ALLOW-list, so they are intentionally not persisted — see spec §2 note).
 import { requireCan } from "./guard.js";
+import { resolveActor } from "../identity.js";
 import { ROLES } from "./rbac.js";
 import { PermissionError } from "../permission.js";
 import { makeAuditSink } from "../audit.js";
@@ -26,6 +27,29 @@ function audit(env, deps, tenant, actor, action, outcome) {
 export async function listMembers(deps, request, env, tenantId) {
   const { tenant } = await requireCan(deps, request, env, tenantId, "member:read");
   return membersOf(deps.db, tenant.id);
+}
+
+// listMyTenants — the CALLING user's OWN tenant memberships, for the self-service onboarding tenant picker
+// (an admin selects their hospital from a dropdown instead of typing a tenant id). The actor id is derived
+// SERVER-SIDE via resolveActor (identify()), NEVER read from the request body, so the query is keyed strictly
+// by the server actor id: there is NO cross-user enumeration (a caller can only ever list rows WHERE
+// user_id = <their own id>). This is a self-scoped read (any authenticated member lists their own tenants),
+// so it does NOT go through requireCan (there is no single target tenant to authorize against) — but it DOES
+// require an authenticated non-guest actor (resolveActor throws AuthError otherwise). Reuses connect_membership
+// + connect_tenant with NO new table and NO RBAC fork. Returns [{ tenantId, name?, role }]; `name` is included
+// ONLY when a real display name is stored (a name equal to the id is a default, not a display name, so it is
+// omitted rather than echoed back as if it were one — we never invent names).
+export async function listMyTenants(deps, request, env) {
+  const actor = await resolveActor(deps.identifyFn, request, env);   // AuthError if guest / unauthenticated
+  const r = await deps.db.prepare("SELECT * FROM connect_membership WHERE user_id=?").bind(actor.id).all();
+  const out = [];
+  for (const m of (r.results || [])) {
+    const item = { tenantId: m.tenant_id, role: m.role };
+    const t = await deps.db.prepare("SELECT * FROM connect_tenant WHERE id=?").bind(m.tenant_id).first();
+    if (t && t.name != null && String(t.name).trim() && String(t.name) !== String(m.tenant_id)) item.name = String(t.name);
+    out.push(item);
+  }
+  return out;
 }
 
 export async function invite(deps, request, env, tenantId, { userId, role }) {

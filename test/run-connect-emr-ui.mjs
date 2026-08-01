@@ -1,7 +1,11 @@
 /* Connect EMR onboarding admin page smoke test (headless Chrome via CDP).
- * Verifies: the page loads with ZERO console errors / uncaught exceptions, the Add-connection form
- * renders, the auth-method toggle works, a MOCKED api() list call renders a connection row with its
- * test status, and a MOCKED 404 shows the graceful "not enabled yet" flag-off state (not a crash).
+ * Verifies: the page loads with ZERO console errors / uncaught exceptions; the Add-connection form renders;
+ * the auth-method + type toggles work; the CSV one-shot upload + HL7-feed create flows render; the Part-3
+ * tenant PICKER populates from a MOCKED GET /tenants (multi-tenant shows a placeholder + no auto-select; a
+ * single tenant auto-selects); the unified Connections DASHBOARD renders MERGED FHIR + HL7 rows from a MOCKED
+ * GET /all (with type badges, status, and per-type actions, and NEVER a secret); Delete/Copy actions call the
+ * right endpoints; the no-membership empty state shows when /tenants is empty; and a MOCKED 404 shows the
+ * graceful "not enabled yet" flag-off state (not a crash).
  * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
  * USAGE: node test/run-connect-emr-ui.mjs
  */
@@ -29,7 +33,7 @@ async function attach(url) {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {}); await call("Page.navigate", { url });
-  for (let i = 0; i < 60; i++) { await sleep(300); if (await ev(`return !!(window.ConnectEMR && window.ConnectEMR.loadList)`) === true) return true; }
+  for (let i = 0; i < 60; i++) { await sleep(300); if (await ev(`return !!(window.ConnectEMR && window.ConnectEMR.loadDashboard)`) === true) return true; }
   return false;
 }
 
@@ -65,40 +69,62 @@ try {
   // reset back to FHIR for the remaining list mock
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
-  // HL7 v2 feed type: activates the HL7 subform, create returns the ingest URL + one-time secret, list renders
-  // a feed row with a delete affordance, and delete calls the DELETE endpoint (no secret ever shown in the list).
+  // HL7 v2 feed type: activates the HL7 subform; create returns the ingest URL + a one-time signing secret +
+  // the signed-POST config hint. (The created feed then surfaces in the unified dashboard, tested below.)
   ok(await ev(`document.getElementById("aType").value="hl7"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fHl7")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none";`) === true, "HL7 type activates the HL7 feed subform and hides the FHIR + CSV fields");
   await ev(`window.ConnectEMR.setTenant("t-hl7"); window.ConnectEMR.setName("GIMSR Lab Feed"); window.ConnectEMR.setHl7Types("ORU^R01");
     window.ConnectEMR.__setApi(function(path,opts){
       if(opts&&opts.method==="POST"){ return Promise.resolve({s:200,d:{ok:true,feedId:"feed-abc123",ingestUrl:"https://stewardmd.in/api/connect/ingress/hl7",secret:"S3CR3T-HMAC-KEY-0001",headers:{feed:"X-SMD-Feed",timestamp:"X-SMD-Timestamp",signature:"X-SMD-Signature"},allowedMessageTypes:["ORU^R01"]}}); }
-      return Promise.resolve({s:200,d:{ok:true,feeds:[{feedId:"feed-abc123",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"],createdAt:"2026-08-01T10:00:00Z"}]}});
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}});
     }); window.ConnectEMR.hl7Create(); return 1;`);
   await sleep(300);
   ok(await ev(`var r=document.getElementById("hl7Result"); return getComputedStyle(r).display!=="none" && document.getElementById("hl7Url").textContent.indexOf("/api/connect/ingress/hl7")>=0 && document.getElementById("hl7Secret").value==="S3CR3T-HMAC-KEY-0001";`) === true, "HL7 create shows the real ingest URL and the one-time signing secret");
   ok(await ev(`var h=document.getElementById("hl7Hint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("feed-abc123")>=0 && h.indexOf("\\u2014")<0;`) === true, "HL7 config hint explains the signed-POST contract (no em-dash)");
-  ok(await ev(`var h=document.getElementById("hl7Feeds").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("feed-abc123")>=0 && h.indexOf("ORU^R01")>=0 && h.indexOf('data-fact="del"')>=0 && h.indexOf("S3CR3T-HMAC-KEY-0001")<0;`) === true, "HL7 feeds list renders the feed row with delete (and NEVER the secret)");
-  // delete: confirm() stubbed true, DELETE recorded, list refetches empty
-  await ev(`window.__hl7del=[]; window.confirm=function(){return true;};
-    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="DELETE"){ window.__hl7del.push(path); return Promise.resolve({s:200,d:{ok:true}}); } return Promise.resolve({s:200,d:{ok:true,feeds:[]}}); });
-    document.querySelector('#hl7Feeds [data-fact="del"]').click(); return 1;`);
-  await sleep(300);
-  ok(await ev(`return window.__hl7del.length===1 && window.__hl7del[0].indexOf("/hl7-feed/feed-abc123")>=0 && document.getElementById("hl7Feeds").innerHTML.indexOf("No HL7 feeds yet")>=0;`) === true, "HL7 delete calls the DELETE endpoint and the list empties");
-  // reset back to FHIR for the remaining list mock
+  // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
-  // MOCKED api() success -> list renders a row + status
-  await ev(`window.ConnectEMR.setTenant("t-smoke"); window.ConnectEMR.__setApi(function(path,opts){ return Promise.resolve({s:200,d:{ok:true,connections:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",updatedAt:"2026-08-01T10:00:00Z",lastTest:{ok:true,at:"2026-08-01T10:00:00Z",fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}]}}); }); window.ConnectEMR.loadList(); return 1;`);
+  // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
+  // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(300);
-  ok(await ev(`var h=document.getElementById("list").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf("Connected")>=0 && h.indexOf("r4.smarthealthit.org")>=0;`) === true, "mocked list renders the connection row with host + Connected status");
-  ok(await ev(`var h=document.getElementById("list").innerHTML; return h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "row has Test / Pull / Delete actions");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#tenantSel option')); var vals=o.map(function(x){return x.value;}); var txt=o.map(function(x){return x.textContent;}).join("|"); return o.length===3 && vals.indexOf("t-a")>=0 && vals.indexOf("t-b")>=0 && txt.indexOf("GIMSR Hospital (admin)")>=0 && txt.indexOf("t-b (owner)")>=0 && document.getElementById("tenantSel").value==="";`) === true, "multi-tenant /tenants populates the dropdown (name + role) with a placeholder and NO auto-select");
+  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display==="none" && getComputedStyle(document.getElementById("opsArea")).display!=="none";`) === true, "with memberships, the ops area is shown and the no-membership state is hidden");
 
-  // MOCKED empty list -> empty state copy (no em-dash)
-  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,connections:[]}}); }); window.ConnectEMR.loadList(); return 1;`);
+  // Single-tenant: auto-selects and loads its dashboard.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var o=document.querySelectorAll('#tenantSel option'); return o.length===1 && document.getElementById("tenantSel").value==="solo-hosp";`) === true, "a single tenant AUTO-selects (no placeholder; dropdown value = the tenant id)");
+  ok(await ev(`return document.getElementById("dash").innerHTML.indexOf("No connections yet")>=0;`) === true, "auto-select triggers the dashboard load (empty state for a tenant with no connections)");
+
+  // ---- Part 3: unified DASHBOARD (GET /all) MERGES FHIR connections + HL7 feeds into one table ----
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,total:2},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadDashboard(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#dash table.dash');`) === true, "the dashboard renders a single table");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf(">FHIR<")>=0 && h.indexOf("r4.smarthealthit.org")>=0 && h.indexOf("Connected")>=0 && h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "the FHIR row renders with a FHIR badge, host, Connected status, and Test/Pull/Delete");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("HL7 v2")>=0 && h.indexOf("feed-xyz")>=0 && h.indexOf('data-fact="copy"')>=0 && h.indexOf('data-fact="del"')>=0;`) === true, "the HL7 feed row renders in the SAME table with an HL7 badge, feed id, and Copy URL / Delete");
+  ok(await ev(`var c=document.getElementById("dashCounts").textContent; return c.indexOf("2 connection")>=0 && c.indexOf("1 FHIR")>=0 && c.indexOf("1 HL7")>=0;`) === true, "the dashboard shows merged counts (2 total = 1 FHIR + 1 HL7)");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("S3CR3T")<0 && h.indexOf("sealed")<0 && h.indexOf("\\u2014")<0;`) === true, "NO secret material in the dashboard DOM, and no em-dash");
+
+  // Copy URL (HL7) surfaces the constant webhook URL; Delete actions call the right endpoints and reload.
+  await ev(`document.querySelector('#dash [data-fact="copy"]').click(); window.__msgs=document.getElementById("tenantMsg").textContent; return 1;`);
+  ok(await ev(`return window.__msgs.indexOf("/api/connect/ingress/hl7")>=0;`) === true, "HL7 Copy URL surfaces the constant ingest webhook URL");
+  await ev(`window.__del=[]; window.confirm=function(){return true;};
+    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="DELETE"){ window.__del.push(path); return Promise.resolve({s:200,d:{ok:true}}); } return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); });
+    document.querySelector('#dash [data-act="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/onboard/c-1")>=0 && document.getElementById("dash").innerHTML.indexOf("No connections yet")>=0;`) === true, "FHIR Delete calls DELETE /onboard/<id> and the dashboard reloads empty");
+  // re-render both rows locally, then delete the HL7 feed
+  await ev(`window.ConnectEMR.renderDash([{connectionId:"c-1",name:"X",type:"fhir",fhirBaseUrl:"https://h/fhir",authMethod:"token"}],[{feedId:"feed-xyz",name:"F",status:"active",allowedMessageTypes:[]}],{fhir:1,hl7:1,total:2}); window.__del=[]; document.querySelector('#dash [data-fact="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/hl7-feed/feed-xyz")>=0;`) === true, "HL7 Delete calls DELETE /hl7-feed/<id>");
+
+  // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);
-  ok(await ev(`var h=document.getElementById("list").innerHTML; return h.indexOf("No EMRs connected yet")>=0 && h.indexOf("\\u2014")<0;`) === true, "empty state shows 'No EMRs connected yet' with no em-dash");
+  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display!=="none" && getComputedStyle(document.getElementById("opsArea")).display==="none" && document.getElementById("noTenant").textContent.indexOf("not a member of any hospital tenant")>=0;`) === true, "an empty /tenants shows the 'not a member of any hospital tenant' state and hides the ops area");
 
-  // MOCKED 404 -> graceful flag-off state
-  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadList(); return 1;`);
+  // MOCKED 404 -> graceful flag-off state (the picker route only exists when the flag is on)
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true && getComputedStyle(document.getElementById("work")).display==="none";`) === true, "a 404 shows the graceful 'not enabled yet' state and hides the workspace");
 
