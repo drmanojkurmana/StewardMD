@@ -11,7 +11,7 @@ import { purposeKey } from "./abdm/consent.js";
 
 export class ValidationError extends Error {}
 
-const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
+const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents", ImagingStudy: "imagingStudies" };
 
 // Shared consume TAIL (R9): validate (dangling refs nulled → warnings) then the defense-in-depth scope FILTER
 // (drop any resource type not in scope). Reused by BOTH the pull loadPatientContext and the push consumeNdhmBundle

@@ -14,8 +14,8 @@ export function flagFhirPushOn(env) { return flagOn(env) && String(env && env.CO
 function ingestFlagOn(env, kind) { return kind === "fhir-push" ? flagFhirPushOn(env) : flagHl7On(env); }
 
 const FRESH_MS = 300_000;
-const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
-const RESOURCE_KEYS = ["encounters", "conditions", "medications", "allergies", "observations", "diagnosticReports", "documents"];
+const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents", ImagingStudy: "imagingStudies" };
+const RESOURCE_KEYS = ["encounters", "conditions", "medications", "allergies", "observations", "diagnosticReports", "documents", "imagingStudies"];
 
 async function hmacHex(secret, msg) {
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);

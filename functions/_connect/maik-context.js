@@ -41,5 +41,7 @@ export function buildMaikContext(bundle) {
     vitals: (bundle.observations || []).filter((o) => o.category === "vital-signs").map((o) => ({ label: txt(o.code), value: o.value })),
     reports: (bundle.diagnosticReports || []).map((d) => ({ label: txt(d.code), conclusion: d.conclusion })),
     documents: (bundle.documents || []).map((d) => ({ label: txt(d.type), text: d.text })),
+    // imaging — metadata only (no pixel data, no url); verbatim from bundle.imagingStudies, empty when absent.
+    imaging: (bundle.imagingStudies || []).map((im) => ({ modality: im.modality || null, bodySite: im.bodySite || null, studyDate: im.studyDate || null, description: im.description || null })),
   };
 }
