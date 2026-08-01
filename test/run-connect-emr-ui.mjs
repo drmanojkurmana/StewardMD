@@ -6,8 +6,12 @@
  * same flag-off state on a 404); the Part-3 tenant PICKER populates from a MOCKED GET /tenants (multi-tenant
  * shows a placeholder + no auto-select; a single tenant auto-selects); the unified Connections DASHBOARD
  * renders MERGED FHIR + HL7 rows from a MOCKED GET /all (with type badges, status, and per-type actions, and
- * NEVER a secret); Delete/Copy actions call the right endpoints; the no-membership empty state shows when
- * /tenants is empty; and a MOCKED 404 shows the graceful "not enabled yet" flag-off state (not a crash).
+ * NEVER a secret, and a rest-json row is badged REST/JSON by its real type, not a hardcoded FHIR); Delete/Copy
+ * actions call the right endpoints; the no-membership empty state shows when /tenants is empty; and a MOCKED
+ * 404 shows the graceful "not enabled yet" flag-off state (not a crash). Also verifies the Connection health
+ * panel: a MOCKED GET /health renders per-connector Healthy/Degraded status, counts, failure rate, recent
+ * failures with reasons, and a summary line, asserts the mocked payload carries only the documented PHI-free
+ * fields, shows the "No connector activity yet." empty state, and degrades to the same flag-off state on 404.
  * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
  * USAGE: node test/run-connect-emr-ui.mjs
  */
@@ -162,6 +166,45 @@ try {
   await sleep(300);
   ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/webhook-feed/wh-xyz")>=0;`) === true, "Webhook Delete calls DELETE /webhook-feed/<id>");
 
+  // ---- Row-type badge parity: the /all "fhir" array actually carries BOTH fhir and rest-json connector rows
+  // (safeView.type), so a rest-json row must be badged by its REAL type, not the hardcoded "FHIR" of before. ----
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-2",name:"Lab REST Feed",type:"rest-json",fhirBaseUrl:"https://labs.example.org/api",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab REST Feed")>=0 && h.indexOf(">REST/JSON<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a rest-json row is badged REST/JSON (its real type), not hardcoded FHIR");
+
+  // ---- Connection health panel (GET /health, Part 4 PHI-free integration-health analytics) ----
+  // Two connectors: one fully healthy, one with failures + a recent-failure entry + warnings. Assert the
+  // panel derives and renders status/labels/counts correctly, AND that the mocked health payload itself
+  // carries ONLY the documented PHI-free operational fields (defense-in-depth: the fixture matches the real
+  // backend contract, and nothing beyond it can leak into the rendered DOM).
+  await ev(`window.__healthMock={
+    perConnector:[
+      {connectorId:"fhir-main",total:40,ok:40,failed:0,failureRate:0,warningCount:0,lastOutcome:"ok",lastTs:"2026-08-01T10:00:00.000Z"},
+      {connectorId:"rest-labs",total:10,ok:6,failed:4,failureRate:0.4,warningCount:2,lastOutcome:"unauthorized",lastTs:"2026-08-01T11:00:00.000Z"}
+    ],
+    perAction:{pull:{total:50,byOutcome:{ok:46,unauthorized:4}}},
+    overall:{totalEvents:50,okRate:0.92,failedCount:4,activeConnectors:2},
+    recentFailures:[{action:"pull",connectorId:"rest-labs",outcome:"unauthorized",ts:"2026-08-01T11:00:00.000Z",reason:"bad-token"}],
+    warnings:{total:2,warnings:2,unmapped:0},
+    generatedFromCount:50
+  };
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/health")>=0) return Promise.resolve({s:200,d:{ok:true,health:window.__healthMock}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__healthMock; var SAFE_CONN=["connectorId","total","ok","failed","failureRate","warningCount","lastOutcome","lastTs"]; var SAFE_FAIL=["action","connectorId","outcome","ts","reason"];
+    var badConn=(m.perConnector||[]).some(function(c){ return Object.keys(c).some(function(k){ return SAFE_CONN.indexOf(k)<0; }); });
+    var badFail=(m.recentFailures||[]).some(function(f){ return Object.keys(f).some(function(k){ return SAFE_FAIL.indexOf(k)<0; }); });
+    var phiLike=/patient|mrn|dob|ssn|email|phone|address/i.test(JSON.stringify(m));
+    return !badConn && !badFail && !phiLike;`) === true, "the mocked health payload carries only the documented PHI-free operational fields (no patient identifiers)");
+  ok(await ev(`var h=document.getElementById("health"); return h.querySelector("table.dash")!=null && h.textContent.indexOf("fhir-main")>=0 && h.textContent.indexOf("Healthy")>=0 && h.textContent.indexOf("rest-labs")>=0 && h.textContent.indexOf("Degraded")>=0 && h.textContent.indexOf("40%")>=0;`) === true, "the health table renders both connectors with derived Healthy/Degraded status and failure rate");
+  ok(await ev(`var h=document.getElementById("health").textContent; return h.indexOf("Recent failures")>=0 && h.indexOf("rest-labs")>=0 && h.indexOf("unauthorized")>=0 && h.indexOf("bad-token")>=0;`) === true, "the recent-failures list renders the connector, outcome, and reason with a timestamp");
+  ok(await ev(`var s=document.getElementById("healthSummary").textContent; return s.indexOf("50 events")>=0 && s.indexOf("2 connectors")>=0 && s.indexOf("92% ok")>=0 && s.indexOf("2 warnings")>=0;`) === true, "the summary line shows total events, active connectors, ok rate, and warning count");
+  ok(await ev(`var t=document.getElementById("health").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the health panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Empty health object -> the documented empty state (no connector activity yet), not a blank/broken panel.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/health")>=0) return Promise.resolve({s:200,d:{ok:true,health:{perConnector:[],perAction:{},overall:{totalEvents:0,okRate:0,failedCount:0,activeConnectors:0},recentFailures:[],warnings:{total:0,warnings:0,unmapped:0},generatedFromCount:0}}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("health").textContent.indexOf("No connector activity yet.")>=0 && document.getElementById("healthSummary").textContent==="";`) === true, "an empty health object shows the 'No connector activity yet.' empty state");
+
   // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);
@@ -179,6 +222,11 @@ try {
     window.ConnectEMR.restSaveTest(); return 1;`);
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // Connection health degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /health on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
 
   ok(consoleErrors.length === 0, "zero console errors / uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 4)) : ""));
 

@@ -239,6 +239,14 @@
         <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
       </div>
 
+      <!-- Connection health: PHI-free operational health (Part 4 analytics), read on demand via Refresh so an
+           admin can see which of their connectors are healthy without contacting us. -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connection health</b><button class="ghost" id="healthReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="healthSummary" style="margin-top:4px"></div>
+        <div id="health" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view connection health.</div></div>
+      </div>
+
       </div><!-- /opsArea -->
 
     </div>
@@ -590,11 +598,15 @@
     return '<span class="st unverified">not tested</span>';
   }
   function feedStatusBadge(f){ var s=String(f.status||"active"); return '<span class="st '+(s==="active"?"verified":"unverified")+'">'+esc(s)+'</span>'; }
+  // Connection-type badge: the row's REAL type (server-derived, safeView.type), not a hardcoded label. Falls
+  // back to the raw type string for anything not yet in this map (forward-compatible, never hides a type).
+  var TYPE_LABEL={"fhir":"FHIR","rest-json":"REST/JSON","hl7v2":"HL7 v2","csv":"CSV","webhook":"Webhook"};
+  function typeLabel(t){ t=String(t||"fhir"); return TYPE_LABEL[t]||t; }
   function fhirRow(c){ var id=esc(c.connectionId), lt=c.lastTest;
     var last=lt?(lt.ok?("connected"+(lt.fhirVersion?" (FHIR "+esc(lt.fhirVersion)+")":"")):esc(lt.error||"failed")):"not tested";
     return '<tr class="drow" data-cid="'+id+'">'+
       '<td><b>'+esc(c.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Auth: '+esc(c.authMethod||"-")+'</div></td>'+
-      '<td><span class="cat">FHIR</span></td>'+
+      '<td><span class="cat">'+esc(typeLabel(c.type))+'</span></td>'+
       '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
       '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
       '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
@@ -647,6 +659,81 @@
     }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
   }
 
+  // ---- connection health (PHI-free integration-health analytics; GET /health, Part 4) ----
+  // The health payload is audit-derived counts/ids/timestamps only (see functions/_connect/maik/
+  // integration-health.js) — PHI-free by construction. As defense in depth, this renderer builds the DOM
+  // directly and writes every field via textContent (never innerHTML) so nothing in the payload can ever be
+  // interpreted as markup, even if the audit allow-list ever regressed.
+  function clearEl(e){ while(e.firstChild) e.removeChild(e.firstChild); }
+  function mkEl(tag,cls,text){ var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e; }
+  function healthStatus(rate){
+    if(!(rate>0)) return {cls:"verified",label:"Healthy"};
+    if(rate>=1) return {cls:"rejected",label:"Failing"};
+    return {cls:"pending",label:"Degraded"};
+  }
+  function renderHealth(h){
+    h=h||{};
+    var pc=Array.isArray(h.perConnector)?h.perConnector:[];
+    var rf=Array.isArray(h.recentFailures)?h.recentFailures:[];
+    var ov=(h.overall&&typeof h.overall==="object")?h.overall:{};
+    var w=(h.warnings&&typeof h.warnings==="object")?h.warnings:{};
+    var box=$("health"), sum=$("healthSummary");
+    clearEl(box);
+    if(!pc.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connector activity yet.")); return; }
+
+    var okPct=Math.round((ov.okRate||0)*100);
+    var sumTxt=(ov.totalEvents||0)+" event"+(ov.totalEvents===1?"":"s")+" in the last 7 days across "+
+      (ov.activeConnectors||0)+" connector"+(ov.activeConnectors===1?"":"s")+" · "+okPct+"% ok";
+    if(w.total) sumTxt+=" · "+w.total+" warning"+(w.total===1?"":"s");
+    sum.textContent=sumTxt;
+
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Connector","Status","Events","Failure rate","Warnings","Last activity"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    pc.forEach(function(c){
+      var rate=(typeof c.failureRate==="number"&&isFinite(c.failureRate))?c.failureRate:0;
+      var st=healthStatus(rate);
+      var tr=mkEl("tr");
+      var tdName=mkEl("td"); tdName.appendChild(mkEl("b",null,c.connectorId||"unknown")); tr.appendChild(tdName);
+      var tdSt=mkEl("td"); tdSt.appendChild(mkEl("span","st "+st.cls,st.label)); tr.appendChild(tdSt);
+      tr.appendChild(mkEl("td",null,(c.total||0)+" total, "+(c.ok||0)+" ok, "+(c.failed||0)+" failed"));
+      tr.appendChild(mkEl("td",null,Math.round(rate*100)+"%"));
+      tr.appendChild(mkEl("td",null,String(c.warningCount||0)));
+      var lastTxt=when(c.lastTs)+(c.lastOutcome?(" ("+c.lastOutcome+")"):"");
+      tr.appendChild(mkEl("td","hint",lastTxt));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+
+    if(rf.length){
+      var rfWrap=mkEl("div"); rfWrap.style.marginTop="12px";
+      rfWrap.appendChild(mkEl("div","hint","Recent failures"));
+      rf.forEach(function(f){
+        var item=mkEl("div","item"); item.style.marginTop="6px";
+        var hd=mkEl("div","h");
+        hd.appendChild(mkEl("span","cat",f.connectorId||"unknown"));
+        hd.appendChild(mkEl("span","t",when(f.ts)));
+        item.appendChild(hd);
+        var metaTxt=(f.action||"unknown")+" · "+(f.outcome||"failed")+(f.reason?(" · "+f.reason):"");
+        item.appendChild(mkEl("div","meta",metaTxt));
+        rfWrap.appendChild(item);
+      });
+      box.appendChild(rfWrap);
+    }
+  }
+  function loadHealth(){
+    if(!tenant()){ $("health").innerHTML='<div class="hint">Select your organization above, then Refresh, to view connection health.</div>'; $("healthSummary").textContent=""; return; }
+    $("health").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/health?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("health").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("healthSummary").textContent=""; return; }
+      renderHealth(x.d.health||{});
+    }).catch(function(){ $("health").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("healthReload").onclick=loadHealth;
+
   // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
   function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
   $("dash").addEventListener("click",function(e){
@@ -677,6 +764,7 @@
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
   window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    loadHealth:loadHealth, renderHealth:renderHealth,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
