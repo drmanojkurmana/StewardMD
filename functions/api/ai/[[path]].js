@@ -94,7 +94,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit } from "../../_ai_usage.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { tinyfishSearch } from "../../_search.js";
@@ -844,6 +844,28 @@ export async function onRequest(context) {
       return json({ ok: ok, model: nv, effective: modelId(env), allowed: ALLOWED_MODELS });
     }
     return json({ model: await getModelOverride(store), effective: modelId(env), allowed: ALLOWED_MODELS, rates: MODEL_RATES });
+  }
+
+  // AI Control Center: owner-facing per-user report + per-user cap editor.
+  if (seg === "admin/users") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    const day = (url.searchParams.get("day") || "").match(/^\d{4}-\d{2}-\d{2}$/) ? url.searchParams.get("day") : new Date().toISOString().slice(0, 10);
+    return json(await usersReport(usageKv(env), day));
+  }
+  if (seg === "admin/user-limit" && request.method === "POST") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+    const email = String(b.email || "").toLowerCase();
+    const module = String(b.module || "");
+    const limit = (b.limit == null || b.limit === "") ? null : Number(b.limit);
+    if (!email || !module) return json({ error: "bad-request" }, 400);
+    const store = usageKv(env);
+    const map = await setUserLimit(store, email, module, limit);
+    let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
+    try { await auditRecord(store, "user-limit", email + ":" + module + "=" + (limit == null ? "default" : limit), actorId, Date.now()); } catch (e) {}
+    return json({ ok: true, email: email, limits: map || {} });
   }
 
   // A doctor's OWN AI usage for today (never another doctor's). Powers the in-app AI Usage page.

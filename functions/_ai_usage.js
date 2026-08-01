@@ -338,3 +338,22 @@ export async function globalUsageReport(env, store, now) {
   } catch (e) {}
   return out;
 }
+
+// Owner dashboard: one row per SIGNED-IN user (email) for a day — usage + any per-user caps.
+export async function usersReport(store, day) {
+  if (!store) return { users: [], truncated: false };
+  const prefix = "aiu:doc:em:";
+  let names = [];
+  try { names = ((await store.list({ prefix: prefix })).keys || []).map((k) => k.name).filter((k) => k.endsWith(":" + day)); } catch (e) { return { users: [], truncated: false }; }
+  const truncated = names.length > 200;
+  names = names.slice(0, 200);
+  const users = [];
+  for (const key of names) {
+    const email = key.slice(prefix.length, key.length - (day.length + 1));   // aiu:doc:em:<email>:<day>
+    let d = {}; try { d = (await store.get(key, "json")) || {}; } catch (e) {}
+    const limits = (await getUserLimit(store, email)) || {};
+    users.push({ email: email, req: d.req || 0, cost: Math.round((d.cost || 0) * 100) / 100, byModule: d.byModule || {}, limits: limits });
+  }
+  users.sort((a, b) => b.req - a.req);
+  return { users: users, truncated: truncated };
+}

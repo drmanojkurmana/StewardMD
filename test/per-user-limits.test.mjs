@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { getUserLimit, setUserLimit, checkModuleQuota, recordAiUsage, buildUsageRecord } from "../functions/_ai_usage.js";
+import { getUserLimit, setUserLimit, checkModuleQuota, recordAiUsage, buildUsageRecord, usersReport } from "../functions/_ai_usage.js";
 import { deviceCheck } from "../functions/_usage.js";
 
 const NOW = 1800000000000;
@@ -78,4 +78,18 @@ test("deviceCheck: fail-open when disabled, no header, or no store", async () =>
   assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "0" }, kv, reqWithDevice("d"), NOW)).ok, true); // disabled
   assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "2" }, kv, reqWithDevice(null), NOW)).ok, true); // no header
   assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "2" }, null, reqWithDevice("d"), NOW)).ok, true); // no store
+});
+
+function dayOf(ms) { return new Date(ms).toISOString().slice(0, 10); }
+
+test("usersReport: lists users by email with usage + current limits", async () => {
+  const kv = mockKv(), day = dayOf(NOW);
+  // one user with 1 ocr + 1 maik today, and an ocr cap of 100
+  await recordAiUsage({}, kv, buildUsageRecord({ doctorId: "em:a@x.com", module: "ocr", estCostInr: 0.5, ts: NOW }), NOW);
+  await recordAiUsage({}, kv, buildUsageRecord({ doctorId: "em:a@x.com", module: "maik", estCostInr: 0.1, ts: NOW }), NOW);
+  await setUserLimit(kv, "a@x.com", "ocr", 100);
+  const rep = await usersReport(kv, day);
+  const u = rep.users.find((x) => x.email === "a@x.com");
+  assert.ok(u, "user present"); assert.equal(u.req, 2); assert.equal(u.byModule.ocr, 1);
+  assert.deepEqual(u.limits, { ocr: 100 });
 });
