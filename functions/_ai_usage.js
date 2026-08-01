@@ -21,7 +21,6 @@ export const AI_MODULES = {
   research:    { id: "research",    label: "Evidence Review",    group: "MaiK",          daily: 2,   provider: "vertex" }, // Research Mode: trusted-literature evidence review. env AI_LIMIT_RESEARCH / admin KV override.
   ecg:         { id: "ecg",         label: "KardiQ X (ECG)",     group: "KardiQ X",      daily: 10,  provider: "vertex" },
   thorex:      { id: "thorex",      label: "ThoreX (Chest X-ray)", group: "ThoreX",      daily: 10,  provider: "vertex" },
-  vision:      { id: "vision",      label: "Vision / OCR",       group: "Vision",        daily: 50,  provider: "vertex" },
   ocr:         { id: "ocr",         label: "Vision / OCR",       group: "OCR",           daily: 50,  provider: "vertex" }, // ICU + Scan Meds combined
   fundx:       { id: "fundx",       label: "FundX AI",           group: "FundX",         daily: 20,  provider: "vertex" },
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
