@@ -19,6 +19,7 @@ import { fileConnector } from "../../_connect/connectors/file/connector.js";
 import { fhirPushConnector } from "../../_connect/connectors/fhir-push/connector.js"; // Track B: generic FHIR-push webhook
 import { defaultRegistry } from "../../_connect/sdk/index.js"; // Track C: Connector SDK registry (gated by smd_connect_sdk)
 import { sdkFlagOn } from "../../_connect/sdk/flags.js";
+import { restFlagOn } from "../../_connect/connectors/rest-json/flags.js"; // per-track gate: smd_connect_rest
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -104,6 +105,9 @@ export async function onRequest(context) {
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
     // Track A: a FHIR-connector context request requires smd_connect_fhir too (no existence leak when off).
     if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a rest-json context request requires smd_connect_rest too, so the per-track flag gates the SDK
+    // /context path (with smd_connect_sdk ON) exactly as it gates the onboard save/test/pull routes.
+    if (req.connectorId === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {

@@ -99,3 +99,16 @@ test("SDK ON: valid fhir-r4 (pull) /context path is unchanged — denied at memb
   const body = await res.json();
   assert.equal(body.error, "permission");                // not "upstream", not "type" — gate lets fhir-r4 through
 });
+
+test("SDK ON, rest flag OFF: /context rest-json is 404 (per-track smd_connect_rest gate)", async () => {
+  // rest-json is in the SDK registry, so with smd_connect_sdk ON it would otherwise be reachable via /context.
+  // The per-track smd_connect_rest gate must 404 it (before auth) exactly as the fhir-r4 gate does — a connector
+  // is never reachable without its own flag. With the flag ON it clears the gate and falls through to the normal
+  // auth check (401 for an unauthenticated caller).
+  const off = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1" };            // no CONNECT_REST_FLAG
+  const r1 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "rest-json" }, off));
+  assert.equal(r1.status, 404);
+  const on = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_REST_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  const r2 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "rest-json" }, on));
+  assert.equal(r2.status, 401);                                        // past the gate -> unauthenticated
+});
