@@ -585,6 +585,23 @@
       return;
     }
 
+    // Not-an-ECG — the server's is-ECG gate refused to diagnose a non-ECG photo (a face photo used to
+    // return "AFib"). Show an honest card, NOT a diagnosis dashboard with zeroed metrics / a confidence bar.
+    if (a.notEcg || /^\s*(no ecg|not an ecg)/i.test(String(a.verdict || ""))) {
+      host.innerHTML = head +
+        '<div class="kx-rpt-body">' +
+          '<div class="kx-disc" style="background:#fff4e5;border:1px solid #f0b872;color:#8a4b00;font-weight:600;margin:0 0 12px">' + ic("warning") +
+            'Not an ECG &mdash; no reading was produced.' +
+          '</div>' +
+          '<div class="kx-rpt-empty">' + ic("monitor_heart") +
+            '<div class="kx-rpt-empty-t">This doesn’t look like an ECG</div>' +
+            '<div class="kx-rpt-empty-s">' + esc(a.clinicalInterpretation || "Upload a clear photo of a printed 12-lead ECG — the pink/red grid should fill the frame.") + '</div>' +
+          '</div>' +
+        '</div>';
+      wire(host, ctx);
+      return;
+    }
+
     var SEV = {
       critical: { label: "Critical", icon: "crisis_alert" },
       urgent:   { label: "Urgent",   icon: "priority_high" },

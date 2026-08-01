@@ -11,9 +11,10 @@ Everything else (calibration, Normal/defer, SBRAD barred, findings, disclaimers)
 Screening decision-support, NOT a diagnosis. Still does NOT assess STEMI/occlusion definitively."""
 import io, os, json, time, numpy as np, torch, timm
 try:
-    from layout_crop import crop_ecg   # isolate + deskew the ECG waveform region before resize
+    from layout_crop import crop_ecg, is_ecg   # crop_ecg: isolate/deskew ECG region; is_ecg: reject non-ECG photos
 except Exception:
-    def crop_ecg(x): return x          # fail-safe: no-op if OpenCV/module missing
+    def crop_ecg(x): return x                  # fail-safe: no-op if OpenCV/module missing
+    def is_ecg(x, **k): return (True, {"reason": "layout_crop-missing"})   # fail-open: never block
 from PIL import Image
 import torchvision.transforms as T
 from fastapi import FastAPI, UploadFile, File, Header, HTTPException, Form, Query
@@ -145,6 +146,26 @@ async def analyze_image(image: UploadFile = File(...), x_pipeline_token: str = H
     data = await image.read()
     try: img = Image.open(io.BytesIO(data))
     except Exception: raise HTTPException(400, "invalid image")
+    # ── is-ECG gate: refuse to "diagnose" a non-ECG photo. The classifier is a plain per-class sigmoid
+    # with no out-of-distribution notion, so before this gate a face photo was forced into a class and
+    # returned e.g. "Atrial fibrillation, urgent". An ECG is bright, low-saturation paper; a face/scene
+    # is colourful. Env-tunable KX_SAT_MAX; fail-open (a gate error never blocks a real read). ──
+    try:
+        _ecg_ok, _ecg_detail = is_ecg(img, sat_max=float(os.environ.get("KX_SAT_MAX", "85")))
+    except Exception:
+        _ecg_ok, _ecg_detail = True, {"reason": "gate-error"}
+    if not _ecg_ok:
+        return JSONResponse({
+            "schemaVersion": "1.1", "id": "", "engine": _ENGINE + "-3.2", "notEcg": True,
+            "verdict": "No ECG detected", "severity": "info", "confidence": 0.0, "confidenceBand": "n/a",
+            "reviewRecommended": False,
+            "measurements": {"ventRateBpm": None, "rhythm": "-", "prMs": None, "qrsMs": None, "qtcMs": None, "axisDeg": None},
+            "morphology": [], "findings": [], "differentials": [],
+            "clinicalInterpretation": "This image does not look like a 12-lead ECG, so KardiQ X did not attempt a reading. "
+                                      "Upload a clear photo of a printed 12-lead ECG — the pink/red grid should fill the frame.",
+            "notAssessed": NOT_ASSESSED, "whatToVerify": "No ECG detected in the image; nothing was analysed.",
+            "gate": _ecg_detail,
+        })
     # variant: "prod" (default, unchanged) | "candidate" (use the textbook-fine-tuned 19-class) |
     #          "compare" (prod result + a side-by-side compare19 block for A/B testing).
     _cand_ok = _model_v2 is not None
