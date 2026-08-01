@@ -103,10 +103,10 @@
           <option value="csv">CSV / flat file</option>
           <option value="hl7">HL7 v2 feed</option>
           <option value="webhook">Webhook / FHIR push</option>
-          <option value="rest" disabled>REST / custom API (coming soon)</option>
+          <option value="rest">REST / JSON lab API</option>
           <option value="dicom" disabled>DICOM (coming soon)</option>
         </select>
-        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds and Webhook / FHIR push are available now. REST and DICOM connect through the same wizard and are coming soon.</div>
+        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds, Webhook / FHIR push and REST / JSON lab API are available now. DICOM connects through the same wizard and is coming soon.</div>
 
        <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
@@ -151,6 +151,32 @@
           <button class="ghost" id="addSaveTest">Save and test connection</button>
         </div>
         <div class="msg" id="addMsg"></div>
+       </div>
+
+       <!-- REST / JSON lab API: a self-hosted REST endpoint returning a flat JSON array (or {results:[...]})
+            of lab-result rows. It is saved and tested the same way as a FHIR connection, and the rows are
+            normalized through the same mapper as the CSV upload (column names are detected automatically). -->
+       <div id="fRest" style="display:none">
+        <label for="aRestBase">REST base URL *</label>
+        <input id="aRestBase" maxlength="500" placeholder="https://your-lis.example.org/api" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aRestToken">Access token or API key *</label>
+        <input id="aRestToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+        <label for="aRestHeader">Header name (optional)</label>
+        <input id="aRestHeader" placeholder="Authorization (default). Set only if your API uses a custom header." autocapitalize="off" spellcheck="false">
+
+        <label for="aRestPath">Results path (optional)</label>
+        <input id="aRestPath" placeholder="/results" autocapitalize="off" spellcheck="false">
+        <label for="aRestParam">Patient ID parameter (optional)</label>
+        <input id="aRestParam" placeholder="patientId" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The results endpoint is called as {base URL}{results path}?{patient ID parameter}={patient ID} and must return a JSON array of rows, or {"results":[...]}.</div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="restSave">Save connection</button>
+          <button class="ghost" id="restSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="restMsg"></div>
        </div>
 
        <!-- CSV / flat file: a one-shot upload that is parsed and normalized in place (not saved). -->
@@ -260,7 +286,12 @@
     "not-fhir":"That endpoint did not return a FHIR CapabilityStatement.",
     "unreachable":"Could not reach that server. Check the URL and that it is online."
   };
-  function testMsg(err){ return TESTERR[err]||("The test failed ("+esc(err||"unknown")+")."); }
+  // "not-fhir" also doubles as "unexpected response shape" for a rest-json probe (no CapabilityStatement there), so
+  // give it REST-accurate copy instead of the FHIR-specific default when the caller tells us the connection type.
+  function testMsg(err,type){
+    if(type==="rest-json" && err==="not-fhir") return "That endpoint did not return the expected JSON shape (an array of rows, or {results:[...]}).";
+    return TESTERR[err]||("The test failed ("+esc(err||"unknown")+").");
+  }
 
   // ---- auth UI ----
   function signedInUI(user){
@@ -297,10 +328,11 @@
   }
   $("aDetect").onclick=doDetect;
 
-  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push) ----
-  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook";
-    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none";
-    $("fFhir").style.display=(csv||hl7||wh)?"none":""; }
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push vs REST/JSON) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook", rest=v==="rest";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none"; $("fRest").style.display=rest?"":"none";
+    // #fFhir also holds the FHIR-only Detect button, so hiding it for rest (as for csv/hl7/webhook) hides Detect too.
+    $("fFhir").style.display=(csv||hl7||wh||rest)?"none":""; }
   $("aType").onchange=applyType;
 
   // ---- CSV upload: one-shot parse + preview (no saved connection) ----
@@ -456,15 +488,44 @@
   $("addSave").onclick=function(){ doSave(false); };
   $("addSaveTest").onclick=function(){ doSave(true); };
 
+  // ---- REST / JSON lab API: save (+optional test), same shape as the FHIR add/save flow above ----
+  function restBody(){
+    var a={method:"token",token:($("aRestToken").value||"").trim()};
+    var h=($("aRestHeader").value||"").trim(); if(h)a.headerName=h;
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"rest-json", baseUrl:($("aRestBase").value||"").trim(), auth:a };
+    var rp=($("aRestPath").value||"").trim(); if(rp)body.resultsPath=rp;
+    var pp=($("aRestParam").value||"").trim(); if(pp)body.patientParam=pp;
+    return body;
+  }
+  function clearRestForm(){ ["aRestBase","aRestToken","aRestHeader","aRestPath","aRestParam"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function doRestSave(thenTest){
+    if(!tenant()){ say("restMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=restBody();
+    if(!body.name){ say("restMsg","err","A connection name is required."); return; }
+    if(!body.baseUrl){ say("restMsg","err","A REST base URL is required."); return; }
+    if(!body.auth.token){ say("restMsg","err","An access token or API key is required."); return; }
+    $("restSave").disabled=true; $("restSaveTest").disabled=true; say("restMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("restSave").disabled=false; $("restSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("restMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearRestForm(); loadDashboard();
+      if(thenTest){ say("restMsg","","Saved. Testing connection…"); runTest(id,"restMsg","rest-json"); }
+      else { say("restMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("restSave").disabled=false; $("restSaveTest").disabled=false; say("restMsg","err","Sign in first."); });
+  }
+  $("restSave").onclick=function(){ doRestSave(false); };
+  $("restSaveTest").onclick=function(){ doRestSave(true); };
+
   // ---- test ----
-  function runTest(id,msgId){
+  function runTest(id,msgId,type){
     say(msgId,"","Testing connection…");
     jpost(API+"/test/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
       if(x.s===404){ showFlagOff(); return; }
       if(x.s!==200){ say(msgId,"err",httpErr(x)); return; }
       var d=x.d||{};
-      if(d.ok){ say(msgId,"ok","Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+"."); }
-      else { say(msgId,"err",testMsg(d.error)); }
+      if(d.ok){ say(msgId,"ok",type==="rest-json"?"Connected. The results endpoint responded correctly.":("Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+".")); }
+      else { say(msgId,"err",testMsg(d.error,type)); }
       loadDashboard();
     }).catch(function(){ say(msgId,"err","Sign in first."); });
   }
@@ -619,6 +680,7 @@
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
+    restSave:function(){ doRestSave(false); }, restSaveTest:function(){ doRestSave(true); },
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };

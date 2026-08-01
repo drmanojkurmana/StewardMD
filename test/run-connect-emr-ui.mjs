@@ -1,11 +1,13 @@
 /* Connect EMR onboarding admin page smoke test (headless Chrome via CDP).
  * Verifies: the page loads with ZERO console errors / uncaught exceptions; the Add-connection form renders;
- * the auth-method + type toggles work; the CSV one-shot upload + HL7-feed create flows render; the Part-3
- * tenant PICKER populates from a MOCKED GET /tenants (multi-tenant shows a placeholder + no auto-select; a
- * single tenant auto-selects); the unified Connections DASHBOARD renders MERGED FHIR + HL7 rows from a MOCKED
- * GET /all (with type badges, status, and per-type actions, and NEVER a secret); Delete/Copy actions call the
- * right endpoints; the no-membership empty state shows when /tenants is empty; and a MOCKED 404 shows the
- * graceful "not enabled yet" flag-off state (not a crash).
+ * the auth-method + type toggles work; the CSV one-shot upload + HL7-feed create + Webhook create + REST/JSON
+ * save-and-test flows render (REST: type toggle shows #fRest and hides the rest, POSTs /emr with type
+ * rest-json + the entered fields, then /test/:id, renders REST-specific success copy, and degrades to the
+ * same flag-off state on a 404); the Part-3 tenant PICKER populates from a MOCKED GET /tenants (multi-tenant
+ * shows a placeholder + no auto-select; a single tenant auto-selects); the unified Connections DASHBOARD
+ * renders MERGED FHIR + HL7 rows from a MOCKED GET /all (with type badges, status, and per-type actions, and
+ * NEVER a secret); Delete/Copy actions call the right endpoints; the no-membership empty state shows when
+ * /tenants is empty; and a MOCKED 404 shows the graceful "not enabled yet" flag-off state (not a crash).
  * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
  * USAGE: node test/run-connect-emr-ui.mjs
  */
@@ -53,7 +55,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=document.querySelectorAll('#aType option'); var en=[].slice.call(o).filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && [].slice.call(o).filter(function(x){return x.disabled;}).length>=2;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook active and REST/DICOM disabled 'coming soon'");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); var dis=o.filter(function(x){return x.disabled;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && dis.length>=1 && dis.every(function(x){return x.value==="dicom";});`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST active and DICOM disabled 'coming soon'");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -94,6 +96,29 @@ try {
   await sleep(300);
   ok(await ev(`var r=document.getElementById("whResult"); return getComputedStyle(r).display!=="none" && document.getElementById("whUrl").textContent.indexOf("/api/connect/ingress/fhir")>=0 && document.getElementById("whSecret").value==="WH-HMAC-KEY-0001";`) === true, "Webhook create shows the real FHIR-push ingest URL and the one-time signing secret");
   ok(await ev(`var h=document.getElementById("whHint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("wh-abc123")>=0 && h.indexOf("FHIR")>=0 && h.indexOf("\\u2014")<0;`) === true, "Webhook config hint explains the signed FHIR-push contract (no em-dash)");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // REST / JSON lab API type: activates the REST subform (hides FHIR/Detect + CSV + HL7 + Webhook); Save-and-test
+  // builds {type:"rest-json", baseUrl, auth:{method:"token",token,headerName?}, resultsPath?, patientParam?} exactly
+  // per the backend contract, POSTs /emr then /test/:id (same two-step flow as the FHIR add/save-and-test), and
+  // renders a REST-specific success message (not a FHIR-version string) through the shared say()/testMsg() path.
+  ok(await ev(`document.getElementById("aType").value="rest"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fRest")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none";`) === true, "REST type activates the REST subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook fields");
+  await ev(`window.ConnectEMR.setTenant("t-rest"); window.ConnectEMR.setName("Lab REST API");
+    document.getElementById("aRestBase").value="https://labs.example.org/api";
+    document.getElementById("aRestToken").value="rest-tok-1";
+    document.getElementById("aRestPath").value="/lab-results";
+    window.__restSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__restSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"rest-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/rest-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.restSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__restSaved; return !!b && b.type==="rest-json" && b.baseUrl==="https://labs.example.org/api" && b.tenantId==="t-rest" && b.name==="Lab REST API" && b.auth&&b.auth.method==="token" && b.auth.token==="rest-tok-1" && b.resultsPath==="/lab-results" && !("headerName" in (b.auth||{})) && !("patientParam" in b);`) === true, "REST Save-and-test POSTs /emr with type rest-json + baseUrl + token auth + resultsPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("restMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("results endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "REST Save-and-test reports success with REST-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aRestBase").value===""&&document.getElementById("aRestToken").value==="";`) === true, "REST form clears after a successful save");
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
@@ -146,6 +171,14 @@ try {
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true && getComputedStyle(document.getElementById("work")).display==="none";`) === true, "a 404 shows the graceful 'not enabled yet' state and hides the workspace");
+
+  // rest-json degrades through the SAME showFlagOff() path as every other type (no special-casing in doRestSave).
+  await ev(`window.ConnectEMR.setTenant("t-final"); document.getElementById("aName").value="Lab Final";
+    document.getElementById("aRestBase").value="https://labs.example.org"; document.getElementById("aRestToken").value="tok-1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.restSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
 
   ok(consoleErrors.length === 0, "zero console errors / uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 4)) : ""));
 
