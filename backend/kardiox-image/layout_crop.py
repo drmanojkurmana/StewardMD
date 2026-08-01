@@ -94,6 +94,57 @@ def crop_ecg(pil, margin=0.02, deskew=True, max_det=1200):
         return pil                                # never break the pipeline
 
 
+# ---- is-ECG gate -----------------------------------------------------------
+# A photo of a paper ECG has a fine pink/red GRID spread across the whole frame (the ECG-specific
+# signal _ink_mask already keys on) and/or a strongly PERIODIC ruled-line pattern. Arbitrary photos
+# (a face, a document, an object) have neither: any red is LOCALISED (one blob, not a grid) and there
+# is no regular grid periodicity. The image classifier is a plain per-class sigmoid with no
+# out-of-distribution notion, so WITHOUT this gate a non-ECG photo is forced into a class (e.g. AFib).
+# Conservative + FAIL-OPEN: reject only when BOTH signals are clearly absent; never block on an error.
+def _axis_periodicity(edges, axis):
+    """Autocorrelation-peak strength (0..1) of the edge projection along one axis. A ruled grid of
+    regularly-spaced lines gives a strong periodic peak; skin, noise and prose do not. axis=0 sums
+    over rows -> a per-COLUMN profile whose periodicity reflects VERTICAL grid lines; axis=1 ->
+    per-ROW profile -> HORIZONTAL grid lines."""
+    proj = edges.sum(axis=axis).astype(np.float64)
+    proj -= proj.mean()
+    if proj.std() < 1e-6:
+        return 0.0
+    ac = np.correlate(proj, proj, mode="full")[len(proj) - 1:]
+    if ac[0] <= 0:
+        return 0.0
+    ac = ac / ac[0]
+    lo, hi = 4, max(6, len(ac) // 4)                # plausible grid-period lag band
+    return float(ac[lo:hi].max()) if hi > lo else 0.0
+
+
+def is_ecg(pil, grid_thr=0.22):
+    """Return (ok: bool, detail: dict). ok=False means 'this does not look like an ECG photo' and the
+    caller should refuse to diagnose it. Key signal: an ECG paper has a 2-D grid -> regular lines in
+    BOTH directions, so min(vertical, horizontal) line-periodicity is high. A face/object has neither;
+    a page of text has only horizontal regularity -> the min stays low. Tuned toward PASS (low thr) so
+    real ECGs are not wrongly rejected; a non-ECG (min ~ 0) is still well below. FAIL-OPEN on any error
+    or when cv2 is missing/image tiny — a gate error must never block a real clinical read."""
+    if not _HAVE_CV2:
+        return True, {"reason": "no-cv2"}
+    try:
+        rgb = np.array(pil.convert("RGB"))
+        H, W = rgb.shape[:2]
+        if H < 40 or W < 40:
+            return True, {"reason": "tiny"}
+        scale = min(1.0, 900.0 / max(H, W))
+        small = cv2.resize(rgb, (max(1, int(W * scale)), max(1, int(H * scale)))) if scale < 1 else rgb
+        gray = cv2.cvtColor(small, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 40, 120)
+        period_v = _axis_periodicity(edges, 0)      # vertical grid lines
+        period_h = _axis_periodicity(edges, 1)      # horizontal grid lines
+        grid = min(period_v, period_h)              # a true grid needs BOTH
+        return bool(grid >= grid_thr), {"gridBoth": round(grid, 3), "periodV": round(period_v, 3),
+                                        "periodH": round(period_h, 3), "thr": grid_thr}
+    except Exception as e:                          # never break the pipeline
+        return True, {"reason": "error:" + str(e)[:60]}
+
+
 # ---- QA / visualisation ----------------------------------------------------
 if __name__ == "__main__":
     import sys, os
