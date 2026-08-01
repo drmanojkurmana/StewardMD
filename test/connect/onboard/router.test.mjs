@@ -47,3 +47,20 @@ test("unauthenticated test/pull/delete -> 401 before any upstream fetch", async 
 test("unknown sub-path -> 404", async () => {
   assert.equal((await onRequest(get("/api/connect/onboard/nope", BOTH))).status, 404);
 });
+
+test("csv upload: flag OFF -> 404; unauthenticated -> sanitized 401 (no raw row echo)", async () => {
+  assert.equal((await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, {}))).status, 404);
+  const res = await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, BOTH));
+  assert.equal(res.status, 401);
+  assert.equal(res.headers.get("cache-control"), "no-store");
+  const body = await res.json();
+  assert.deepEqual(Object.keys(body), ["error"]);
+  assert.doesNotMatch(JSON.stringify(body), /SECRET-MRN/);
+});
+
+test("csv upload: an oversized Content-Length is rejected 413 before parsing", async () => {
+  const req = new Request("https://x/api/connect/onboard/csv", { method: "POST", body: "{}", headers: { "content-type": "application/json", "content-length": "9000000" } });
+  const res = await onRequest({ request: req, env: BOTH, params: {} });
+  assert.equal(res.status, 413);
+  assert.equal((await res.json()).error, "too-large");
+});

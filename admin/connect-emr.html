@@ -84,13 +84,14 @@
         <label for="aType">Connection type</label>
         <select id="aType">
           <option value="fhir" selected>FHIR (R4)</option>
+          <option value="csv">CSV / flat file</option>
           <option value="hl7" disabled>HL7 v2 (coming soon)</option>
-          <option value="csv" disabled>CSV / flat file (coming soon)</option>
           <option value="rest" disabled>REST / custom API (coming soon)</option>
           <option value="dicom" disabled>DICOM (coming soon)</option>
         </select>
-        <div class="soon">FHIR R4 is available now. HL7 v2, CSV, REST and DICOM connect through the same wizard and are coming soon.</div>
+        <div class="soon">FHIR R4 and CSV / flat file are available now. HL7 v2, REST and DICOM connect through the same wizard and are coming soon.</div>
 
+       <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
         <input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false">
         <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
@@ -129,6 +130,19 @@
           <button class="ghost" id="addSaveTest">Save and test connection</button>
         </div>
         <div class="msg" id="addMsg"></div>
+       </div>
+
+       <!-- CSV / flat file: a one-shot upload that is parsed and normalized in place (not saved). -->
+       <div id="fCsv" style="display:none">
+        <label for="aCsvFile">CSV file</label>
+        <input id="aCsvFile" type="file" accept=".csv,.tsv,.txt,text/csv,text/plain">
+        <div class="hint" style="margin-top:4px">Upload your EMR's lab or results export. The file is read in your browser and sent once to be normalized to StewardMD's canonical model. It is not saved. Common column names (MRN, test, value, unit, order, and so on) are detected automatically. Limit 2 MB.</div>
+        <div style="margin-top:14px"><button class="primary" id="csvParse">Parse and preview</button></div>
+        <div class="msg" id="csvMsg"></div>
+        <div class="meta" id="csvCounts" style="display:none;margin-top:8px"></div>
+        <div id="csvWarn" style="display:none"></div>
+        <div class="json" id="csvJson" style="display:none"></div>
+       </div>
       </div>
 
       <!-- Connections list -->
@@ -196,6 +210,50 @@
 
   // ---- auth method toggle ----
   $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
+
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload) ----
+  function applyType(){ var csv=$("aType").value==="csv"; $("fCsv").style.display=csv?"":"none"; $("fFhir").style.display=csv?"none":""; }
+  $("aType").onchange=applyType;
+
+  // ---- CSV upload: one-shot parse + preview (no saved connection) ----
+  var CSV_MAX=2000000;
+  function csvSay(k,t){ say("csvMsg",k,t); }
+  function renderCsvResult(resp){
+    resp=resp||{}; var b=resp.bundle||{}, w=resp.warnings||[];
+    var rows=resp.rowsParsed||0, cols=(resp.columns&&resp.columns.length)||0;
+    var obs=(b.observations&&b.observations.length)||0, drs=(b.diagnosticReports&&b.diagnosticReports.length)||0;
+    var c=$("csvCounts"); c.style.display="";
+    c.innerHTML='<b>Parsed:</b> '+rows+' row'+(rows===1?'':'s')+' x '+cols+' column'+(cols===1?'':'s')+' &middot; <b>Normalized:</b> '+obs+' observation'+(obs===1?'':'s')+', '+drs+' report'+(drs===1?'':'s');
+    var wd=$("csvWarn"); wd.style.display="";
+    if(w.length){ wd.innerHTML='<div class="meta" style="margin-top:8px"><b>Warnings ('+w.length+')</b></div><ul style="margin:6px 0 0;padding-left:18px">'+w.map(function(m){return '<li class="hint">'+esc(m)+'</li>';}).join("")+'</ul>'; }
+    else { wd.innerHTML='<div class="meta ok" style="margin-top:8px">No structural warnings.</div>'; }
+    var j=$("csvJson"); j.style.display=""; j.textContent=JSON.stringify(b,null,2);
+  }
+  function submitCsv(text){
+    if(!tenant()){ csvSay("err","Enter your organization / tenant ID at the top first."); return; }
+    if(!text||!text.trim()){ csvSay("err","That file looks empty."); return; }
+    if(text.length>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    $("csvParse").disabled=true; csvSay("","Parsing and normalizing...");
+    var name=($("aName").value||"").trim();
+    jpost(API+"/csv",{tenantId:tenant(),name:name||undefined,csv:text}).then(function(x){
+      $("csvParse").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===413||(x.d&&x.d.error==="too-large")){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+      if(x.s===403){ csvSay("err","Your account cannot view patient data for this organization."); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ csvSay("err",httpErr(x)); return; }
+      csvSay("ok","Parsed and normalized. Review the result below.");
+      renderCsvResult(x.d);
+    }).catch(function(){ $("csvParse").disabled=false; csvSay("err","Sign in first."); });
+  }
+  $("csvParse").onclick=function(){
+    var f=$("aCsvFile").files&&$("aCsvFile").files[0];
+    if(!f){ csvSay("err","Choose a CSV file first."); return; }
+    if(f.size>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    var rd=new FileReader();
+    rd.onload=function(){ submitCsv(String(rd.result||"")); };
+    rd.onerror=function(){ csvSay("err","Could not read that file."); };
+    rd.readAsText(f);
+  };
 
   // ---- add / save ----
   function addBody(){
@@ -329,6 +387,7 @@
 
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
   window.ConnectEMR={ loadList:loadList, renderList:renderList, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
     setTenant:function(v){ $("tenantId").value=v; }, __setApi:function(fn){ api=fn; } };
 })();
 </script>
