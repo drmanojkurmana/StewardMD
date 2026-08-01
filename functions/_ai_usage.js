@@ -21,6 +21,7 @@ export const AI_MODULES = {
   research:    { id: "research",    label: "Evidence Review",    group: "MaiK",          daily: 2,   provider: "vertex" }, // Research Mode: trusted-literature evidence review. env AI_LIMIT_RESEARCH / admin KV override.
   ecg:         { id: "ecg",         label: "KardiQ X (ECG)",     group: "KardiQ X",      daily: 10,  provider: "vertex" },
   thorex:      { id: "thorex",      label: "ThoreX (Chest X-ray)", group: "ThoreX",      daily: 10,  provider: "vertex" },
+  vision:      { id: "vision",      label: "Vision / OCR",       group: "Vision",        daily: 50,  provider: "vertex" },
   ocr:         { id: "ocr",         label: "Vision / OCR",       group: "OCR",           daily: 50,  provider: "vertex" }, // ICU + Scan Meds combined
   fundx:       { id: "fundx",       label: "FundX AI",           group: "FundX",         daily: 20,  provider: "vertex" },
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
@@ -47,6 +48,22 @@ export function resolveLimit(env, moduleId, overrides) {
     if (Number.isFinite(v) && v >= 0) return Math.floor(v);
   }
   return moduleDailyLimit(env, moduleId);
+}
+
+// ---- per-USER limit overrides (owner sets a cap for a specific email). Key: ai:ulimit:<email>. ----
+export async function getUserLimit(store, email) {
+  if (!store || !email) return null;
+  try { return (await store.get("ai:ulimit:" + String(email).toLowerCase(), "json")) || null; } catch (e) { return null; }
+}
+export async function setUserLimit(store, email, moduleId, limit) {
+  if (!store || !email || !isAiModule(moduleId)) return null;
+  const key = "ai:ulimit:" + String(email).toLowerCase();
+  const cur = (await store.get(key, "json")) || {};
+  if (limit == null) delete cur[moduleId];
+  else cur[moduleId] = Math.max(0, Math.floor(Number(limit) || 0));
+  if (Object.keys(cur).length) await store.put(key, JSON.stringify(cur), { expirationTtl: 60 * 60 * 24 * 400 });
+  else { try { await store.delete(key); } catch (e) {} }
+  return Object.keys(cur).length ? cur : null;
 }
 
 // ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Estimates; env-overridable.
