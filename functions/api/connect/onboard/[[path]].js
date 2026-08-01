@@ -19,6 +19,11 @@ import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7
 import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
 import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants } from "../../../_connect/enterprise/members.js";
+import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
+
+// Re-export the surface flag gate under the Part-4 analytics test's name (same predicate: master smd_connect
+// AND smd_connect_onboard). Integration merged Part-3 (onboardFlagOn) + Part-4 (flagOnboardOn) onto one router.
+export { onboardFlagOn as flagOnboardOn } from "../../../_connect/onboard/flags.js";
 
 const STATUS = (e) => e instanceof OnboardError ? (e.klass === "not-found" ? 404 : e.klass === "too-large" ? 413 : 400)
   : e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400;
@@ -48,6 +53,8 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "tenants") return jsonResponse({ ok: true, tenants: await listMyTenants(deps, request, env) });
     // Part 3 (Enterprise): the unified connections view (FHIR connections + HL7 feeds) for the selected tenant.
     if (method === "GET" && seg === "all") return jsonResponse(Object.assign({ ok: true }, await listAll(deps, request, env, tid)));
+    // Part 4 (Enterprise analytics): PHI-free per-connector integration health over the tenant's audit rows.
+    if (method === "GET" && seg === "health") return jsonResponse({ ok: true, health: await readTenantIntegrationHealth(deps, request, env, tid) });
     if (method === "POST" && seg === "emr") return jsonResponse(await saveConnection(deps, request, env, tid, body));
     if (method === "GET" && seg === "list") return jsonResponse({ ok: true, connections: await listConnections(deps, request, env, tid) });
     if (method === "POST" && parts[0] === "test" && parts[1]) return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
