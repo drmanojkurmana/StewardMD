@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { getUserLimit, setUserLimit, checkModuleQuota, recordAiUsage, buildUsageRecord } from "../functions/_ai_usage.js";
+import { deviceCheck } from "../functions/_usage.js";
 
 const NOW = 1800000000000;
 
@@ -58,4 +59,23 @@ test("checkModuleQuota: per-user cap of 0 means explicit unlimited", async () =>
   await setUserLimit(kv, "z@z.com", "ocr", 0);
   const q = await checkModuleQuota({}, kv, "ocr", key, NOW);
   assert.equal(q.ok, true); assert.equal(q.unlimited, true);
+});
+
+const reqWithDevice = (id) => ({ headers: { get: (k) => (String(k).toLowerCase() === "x-smd-device" ? id : null) } });
+
+test("deviceCheck: counts per device and hard-blocks at the cap", async () => {
+  const kv = mockKv(), env = { MAIK_DEVICE_DAILY_CAP: "2" }, req = reqWithDevice("dev-abc");
+  assert.equal((await deviceCheck(env, kv, req, NOW)).ok, true);   // 1
+  assert.equal((await deviceCheck(env, kv, req, NOW)).ok, true);   // 2
+  const blocked = await deviceCheck(env, kv, req, NOW);            // 3 → over
+  assert.equal(blocked.ok, false); assert.equal(blocked.reason, "device-cap"); assert.equal(blocked.cap, 2);
+  // a different device is independent
+  assert.equal((await deviceCheck(env, kv, reqWithDevice("dev-xyz"), NOW)).ok, true);
+});
+
+test("deviceCheck: fail-open when disabled, no header, or no store", async () => {
+  const kv = mockKv();
+  assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "0" }, kv, reqWithDevice("d"), NOW)).ok, true); // disabled
+  assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "2" }, kv, reqWithDevice(null), NOW)).ok, true); // no header
+  assert.equal((await deviceCheck({ MAIK_DEVICE_DAILY_CAP: "2" }, null, reqWithDevice("d"), NOW)).ok, true); // no store
 });

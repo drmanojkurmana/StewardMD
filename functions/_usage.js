@@ -199,6 +199,27 @@ export async function checkQuota(env, request, type, opts) {
   return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type };
 }
 
+// Best-effort per-DEVICE daily abuse cap (anti account-farming). Device id = X-SMD-Device header
+// (from device-id.js). Speed-bump only — resets on reinstall; the global cost breaker is the real
+// backstop. env MAIK_DEVICE_DAILY_CAP (default 300; 0 disables). Fail-open on any gap.
+export function deviceDailyCap(env) {
+  const v = Number(env && env.MAIK_DEVICE_DAILY_CAP);
+  return Number.isFinite(v) && v >= 0 ? v : 300;
+}
+export async function deviceCheck(env, store, request, now) {
+  const cap = deviceDailyCap(env);
+  if (!store || !cap) return { ok: true };
+  const dev = request.headers.get("X-SMD-Device");
+  if (!dev) return { ok: true };
+  const day = dayKey(new Date(now || Date.now()));
+  const key = "aiu:dev:" + dev + ":" + day;
+  let used = 0;
+  try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
+  if (used >= cap) return { ok: false, reason: "device-cap", used: used, cap: cap };
+  try { await store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); } catch (e) {}
+  return { ok: true, used: used + 1, cap: cap };
+}
+
 /* Post-call record. gate is the object returned by checkQuota (ok:true). Records counters +
    cost; NEVER any prompt/PHI. status ∈ success|failed|timeout|blocked. */
 export async function recordUsage(gate, info) {
