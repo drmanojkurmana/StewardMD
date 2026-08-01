@@ -159,3 +159,19 @@ The onboarding pipeline is a **Data Processor** for the hospital's data. Before 
 - [ ] **Per-connection** — revoke it from the dashboard: the row is deleted and its envelope-sealed secret is
       erased with it.
 - [ ] **Full revert** — revert the Connect commits on `main`; recovery tag `pre-connect-onboard-golive`.
+
+---
+
+## Section 7 — Automatic sync (no manual pull, no involvement from us)
+
+A hospital admin sets a per-connection refresh interval; the connection then keeps itself current with no one
+clicking Test. A scheduled sync re-runs the same capability probe as the manual Test button (reachability,
+FHIR version, auth) for every due connection, across all tenants, generically (no per-hospital code).
+
+- [ ] **Wire the cron.** Add a schedule to the `stewardmd-api` Worker (mirrors the existing ABDM sweep) that
+      POSTs `https://stewardmd.in/api/connect/onboard/sync-run` with header `X-Admin-Token: <UPDATES_ADMIN_TOKEN>`.
+      Every 5 to 15 minutes is enough; the endpoint only runs connections whose own interval has elapsed.
+- [ ] **Per-connection interval.** The wizard (or `POST /api/connect/onboard/sync-config/:id` with
+      `{ intervalMin }`) sets how often that one connection refreshes: 0 or absent is off, otherwise 15 to
+      10080 minutes (15 min floor, 7 day ceiling).
+- [ ] Nothing runs until `CONNECT_FLAG` + `CONNECT_ONBOARD_FLAG` are both on (same gate as the rest of this doc).

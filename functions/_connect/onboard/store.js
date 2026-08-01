@@ -72,7 +72,7 @@ export async function getRow(db, tenantId, connectionId) {
 }
 
 // Client-safe projection — NEVER includes sealed/token/private-key material.
-function safeView(row) {
+export function safeView(row) {
   let c = {}; try { c = JSON.parse(row.config || "{}"); } catch {}
   return {
     connectionId: row.connector_id, name: c.name || null, type: c.type || "fhir",
@@ -80,6 +80,8 @@ function safeView(row) {
     headerName: c.headerName || null, tokenEndpoint: c.tokenEndpoint || null, clientId: c.clientId || null,
     status: row.status || null, createdAt: c.createdAt || null, updatedAt: c.updatedAt || null,
     lastTest: c.lastTest || null,
+    // Automatic sync scheduler (additive, no schema change — lives in this same config JSON blob).
+    syncIntervalMin: c.syncIntervalMin || 0, lastSyncAt: c.lastSyncAt || null,
   };
 }
 

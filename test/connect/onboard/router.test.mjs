@@ -3,6 +3,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { onRequest } from "../../../functions/api/connect/onboard/[[path]].js";
+import { makeOnboardDb } from "./onboard-db.mjs";
 
 const post = (path, body, env) => ({ request: new Request("https://x" + path, { method: "POST", body: JSON.stringify(body || {}), headers: { "content-type": "application/json" } }), env, params: {} });
 const get = (path, env) => ({ request: new Request("https://x" + path), env, params: {} });
@@ -63,4 +64,36 @@ test("csv upload: an oversized Content-Length is rejected 413 before parsing", a
   const res = await onRequest({ request: req, env: BOTH, params: {} });
   assert.equal(res.status, 413);
   assert.equal((await res.json()).error, "too-large");
+});
+
+// Automatic sync scheduler routes: sync-config is the RBAC path (behaves like any other onboard route —
+// unauthenticated -> sanitized 401); sync-run is the CRON-ONLY admin-token-gated sweep (no RBAC/identify).
+test("sync-config: flag OFF -> 404; unauthenticated -> sanitized 401", async () => {
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-config/abc", { tenantId: "t1", intervalMin: 60 }, {}))).status, 404);
+  const res = await onRequest(post("/api/connect/onboard/sync-config/abc", { tenantId: "t1", intervalMin: 60 }, BOTH));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
+test("sync-run: flag OFF -> 404 (even with a valid admin token)", async () => {
+  const env = Object.assign({ UPDATES_ADMIN_TOKEN: "s3cret" }, {});   // no CONNECT_FLAG/CONNECT_ONBOARD_FLAG
+  const res = await onRequest({ request: new Request("https://x/api/connect/onboard/sync-run", { method: "POST", headers: { "X-Admin-Token": "s3cret" } }), env, params: {} });
+  assert.equal(res.status, 404);
+});
+
+test("sync-run: missing or wrong X-Admin-Token -> 401, no DB access", async () => {
+  const poisonDb = { prepare() { throw new Error("db must not be touched by an unauthorized sync-run"); } };
+  const env = Object.assign({}, BOTH, { UPDATES_ADMIN_TOKEN: "s3cret", CONNECT_DB: poisonDb });
+  const missing = await onRequest({ request: new Request("https://x/api/connect/onboard/sync-run", { method: "POST" }), env, params: {} });
+  assert.equal(missing.status, 401);
+  const wrong = await onRequest({ request: new Request("https://x/api/connect/onboard/sync-run", { method: "POST", headers: { "X-Admin-Token": "WRONG" } }), env, params: {} });
+  assert.equal(wrong.status, 401);
+});
+
+test("sync-run: a valid admin token runs the sweep and returns PHI-free counts", async () => {
+  const env = Object.assign({}, BOTH, { UPDATES_ADMIN_TOKEN: "s3cret", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest({ request: new Request("https://x/api/connect/onboard/sync-run", { method: "POST", headers: { "X-Admin-Token": "s3cret" } }), env, params: {} });
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.deepEqual(body, { ok: true, due: 0, ran: 0, errors: 0 });
 });

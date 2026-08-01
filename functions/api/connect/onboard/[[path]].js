@@ -16,6 +16,7 @@ import { saveConnection, listConnections, deleteConnection } from "../../../_con
 import { testConnection } from "../../../_connect/onboard/probe.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
+import { setSyncConfig, runDueSyncs } from "../../../_connect/onboard/sync.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
 import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7-feed.js";
 import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
@@ -63,6 +64,16 @@ export async function onRequest(context) {
     if (method === "POST" && seg === "discover") return jsonResponse(await discoverCapabilities(deps, request, env, tid, body));
     if (method === "POST" && parts[0] === "test" && parts[1]) return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
     if (method === "POST" && parts[0] === "pull" && parts[1]) return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
+    // Automatic sync scheduler: the RBAC-gated per-connection interval setter (a hospital admin configures it
+    // from the wizard); the cron-only sweep below is what actually runs the due connections.
+    if (method === "POST" && parts[0] === "sync-config" && parts[1]) return jsonResponse(await setSyncConfig(deps, request, env, tid, parts[1], body));
+    // CRON-ONLY: the stewardmd-api Worker's schedule POSTs here (mirrors /admin/sweep on the Phase-0 surface).
+    // Admin-token gated, NOT RBAC — there is no per-request clinician actor in a cron sweep. Missing/wrong
+    // token -> 401 before any DB access (no existence leak beyond the top-level flag gate, already checked).
+    if (method === "POST" && seg === "sync-run") {
+      if (!(await deps.ownerOk(request, env))) return jsonResponse({ error: "unauthorized" }, { status: 401 });
+      return jsonResponse(await runDueSyncs(deps, env, deps.now()));
+    }
     if (method === "POST" && seg === "csv") return jsonResponse(await parseCsvUpload(deps, request, env, tid, body));
     // Increment 3: HL7 v2 self-service feeds (create/list/revoke). The created feed is a connect_feed row the
     // Track-B ingest spine reads; the ingestUrl returned is the REAL /api/connect/ingress/hl7 endpoint.
