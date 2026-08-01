@@ -7,7 +7,6 @@
     "postinstall": "patch-package",
     "test": "for f in test/*.test.mjs test/connect/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node \"$f\" || exit 1; done",
     "build:www": "bash scripts/build-www.sh",
-    "ota:release": "node scripts/ota-release.mjs",
     "sync": "npm run build:www && npx cap sync",
     "ios": "npm run sync && npx cap open ios",
     "android": "npm run sync && npx cap open android"
@@ -32,6 +31,7 @@
     "@capacitor/splash-screen": "^8.0.1",
     "@capacitor/status-bar": "^8.0.2",
     "@capawesome/capacitor-file-picker": "^8.0.3",
+    "@capgo/capacitor-updater": "^8.51.3",
     "@stewardmd/capacitor-app-orientation": "file:local-plugins/capacitor-app-orientation",
     "@stewardmd/capacitor-ecg-digitiser": "file:local-plugins/capacitor-ecg-digitiser",
     "@stewardmd/capacitor-fundx-depth": "file:local-plugins/capacitor-fundx-depth",
