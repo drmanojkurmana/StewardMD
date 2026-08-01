@@ -1783,7 +1783,8 @@
     if (!document.getElementById("aic-css")) {
       var st = document.createElement("style"); st.id = "aic-css";
       st.textContent =
-        ".aic{padding:2px 2px 10px}" +
+        ".aic{padding:2px 2px 10px;--card:#f1f5f9;--bg:#ffffff}" +   /* dark-navy chips/cards were unreadable in LIGHT mode: --card/--bg were never defined so they stuck on the dark fallback while --ink flipped to dark text. Define them here so surfaces flip with the theme. */
+        "body.dark .aic{--card:#0f172a;--bg:#0b1220}" +               /* dark mode keeps the original dark surfaces (== old fallbacks) */
         ".aic-sec{margin:0 0 20px}" +
         ".aic-h{font:800 12px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:0 2px 9px}" +
         ".aic-model{font:800 16px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:9px}" +
