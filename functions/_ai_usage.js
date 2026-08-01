@@ -142,6 +142,19 @@ const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
 // Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
 export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   if (!store || !isAiModule(moduleId)) { const l = moduleDailyLimit(env, moduleId); return { ok: true, unlimited: l === 0, limit: l }; }
+  // Per-USER override (owner-set cap for this email) — ALWAYS enforces, independent of MAIK_ENFORCE_CAPS.
+  if (typeof doctorId === "string" && doctorId.indexOf("em:") === 0) {
+    const ul = await getUserLimit(store, doctorId.slice(3));
+    if (ul && typeof ul[moduleId] === "number") {
+      const cap = ul[moduleId];
+      if (cap === 0) return { ok: true, unlimited: true, limit: 0 };
+      const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
+      let used = 0;
+      try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
+      if (used >= cap) return { ok: false, reason: "user-limit", module: moduleId, limit: cap, used: used };
+      return { ok: true, remaining: cap - used, limit: cap, used: used, perUser: true };
+    }
+  }
   // LAUNCH: no per-account per-module daily caps — AI (MaiK, web search, Evidence Review, Vision, ECG…)
   // behaves IDENTICALLY for every account. checkQuota (_usage.js) already skips its per-user throttles;
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
