@@ -110,8 +110,12 @@
 
        <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
-        <input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false">
-        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+        <div class="row">
+          <div><input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false"></div>
+          <div style="flex:0 0 auto"><button class="ghost" id="aDetect" type="button">Detect</button></div>
+        </div>
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected. Use Detect to automatically fill in authentication from the server.</div>
+        <div class="msg" id="detectMsg"></div>
 
         <label for="aMethod">Authentication</label>
         <select id="aMethod">
@@ -271,6 +275,27 @@
 
   // ---- auth method toggle ----
   $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
+
+  // ---- Detect: unauthenticated FHIR capability probe (pre-fills auth method + token endpoint) ----
+  function detectSay(k,t){ say("detectMsg",k,t); }
+  function doDetect(){
+    if(!tenant()){ detectSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var base=($("aBase").value||"").trim();
+    if(!base){ detectSay("err","Enter a FHIR base URL first."); return; }
+    $("aDetect").disabled=true; detectSay("","Detecting...");
+    jpost(API+"/discover",{tenantId:tenant(),baseUrl:base}).then(function(x){
+      $("aDetect").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok||!x.d.detected){ detectSay("err",testMsg(x.d&&x.d.error)); return; }
+      var d=x.d.detected;
+      $("aType").value="fhir"; applyType();
+      $("aMethod").value=(d.smart&&d.smart.supported)?"smart":"token";
+      $("aMethod").onchange();
+      if(d.smart&&d.smart.tokenEndpoint) $("aTokenEp").value=d.smart.tokenEndpoint;
+      detectSay("ok","Detected"+(d.fhirVersion?(" FHIR "+d.fhirVersion):"")+(d.softwareName?(", "+d.softwareName):"")+". Authentication pre-filled, review before saving.");
+    }).catch(function(){ $("aDetect").disabled=false; detectSay("err","Sign in first."); });
+  }
+  $("aDetect").onclick=doDetect;
 
   // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push) ----
   function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook";
@@ -591,7 +616,7 @@
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
   window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
-    applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
+    applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,

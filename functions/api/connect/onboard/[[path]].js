@@ -13,6 +13,7 @@ import { ownerOK } from "../../../_adminauth.js";
 import { makeSecrets } from "../../../_connect/secrets.js";
 import { saveConnection, listConnections, deleteConnection } from "../../../_connect/onboard/store.js";
 import { testConnection } from "../../../_connect/onboard/probe.js";
+import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
 import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7-feed.js";
@@ -57,6 +58,8 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "health") return jsonResponse({ ok: true, health: await readTenantIntegrationHealth(deps, request, env, tid) });
     if (method === "POST" && seg === "emr") return jsonResponse(await saveConnection(deps, request, env, tid, body));
     if (method === "GET" && seg === "list") return jsonResponse({ ok: true, connections: await listConnections(deps, request, env, tid) });
+    // Auto-discovery: unauthenticated capability probe (FHIR version/software/SMART support) for wizard pre-fill.
+    if (method === "POST" && seg === "discover") return jsonResponse(await discoverCapabilities(deps, request, env, tid, body));
     if (method === "POST" && parts[0] === "test" && parts[1]) return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
     if (method === "POST" && parts[0] === "pull" && parts[1]) return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
     if (method === "POST" && seg === "csv") return jsonResponse(await parseCsvUpload(deps, request, env, tid, body));
