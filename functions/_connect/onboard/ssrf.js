@@ -49,7 +49,9 @@ export function assertPublicHttpsUrl(urlStr, label = "url") {
   try { u = new URL(String(urlStr)); } catch { throw new OnboardError("bad-url", label + " is not a valid URL"); }
   if (u.protocol !== "https:") throw new OnboardError("bad-url", label + " must be https");
   if (u.username || u.password) throw new OnboardError("bad-url", label + " must not contain userinfo");
-  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, "");    // strip IPv6 brackets, if any
+  // Strip IPv6 brackets AND a trailing FQDN dot ("localhost."/"...internal." would otherwise dodge the name
+  // checks below). IP literals with a trailing dot are already normalized away by the URL parser.
+  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, "").replace(/\.$/, "");
   if (!host) throw new OnboardError("bad-url", label + " has no host");
   if (host === "localhost" || host.endsWith(".localhost") || host.endsWith(".local") || host.endsWith(".internal"))
     throw new OnboardError("bad-url", label + " host is not a public name");

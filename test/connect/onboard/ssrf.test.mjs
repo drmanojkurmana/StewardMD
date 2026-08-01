@@ -50,3 +50,19 @@ test("rejects localhost / *.local / *.internal names", () => {
       (e) => e instanceof OnboardError && e.klass === "bad-url", h);
   }
 });
+
+test("rejects TRAILING-DOT name bypasses (localhost. / metadata.google.internal. / *.local.)", () => {
+  for (const h of ["localhost.", "metadata.google.internal.", "svc.cluster.internal.", "emr.local."]) {
+    assert.throws(() => assertPublicHttpsUrl("https://" + h + "/fhir"),
+      (e) => e instanceof OnboardError && e.klass === "bad-url", h);
+  }
+});
+
+test("rejects ALT-ENCODED loopback hosts (decimal int / hex octets normalize to 127.0.0.1)", () => {
+  // The WHATWG URL parser normalizes these to the dotted 127.0.0.1 literal, which the IPv4 guard rejects.
+  // Asserting them explicitly pins that the normalization + guard actually close the bypass.
+  for (const h of ["2130706433", "0x7f.0.0.1", "0x7f000001", "017700000001"]) {
+    assert.throws(() => assertPublicHttpsUrl("https://" + h + "/"),
+      (e) => e instanceof OnboardError && e.klass === "bad-url", h);
+  }
+});

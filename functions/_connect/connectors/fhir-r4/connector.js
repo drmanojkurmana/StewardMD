@@ -47,7 +47,9 @@ export const fhirR4Connector = {
       const authHeader = await initialAuthHeader(ctx);
       if (smartOn(ctx)) checks.push({ name: "authenticate", ok: !!authHeader.authorization });
       const base = (ctx.config.base_url || "").replace(/\/$/, "");
-      const res = await ctx.fetch(base + "/Patient?_count=1", { headers: authHeader });
+      // redirect:"manual" (like paginate) — never auto-follow a 3xx through the raw fetch to another origin
+      // with an authenticated request (the onboard ctx.fetch is redirect-safe; this hardens the engine path).
+      const res = await ctx.fetch(base + "/Patient?_count=1", { headers: authHeader, redirect: "manual" });
       checks.push({ name: "patient-search", ok: !!(res && res.ok) });
       return { ok: checks.every((c) => c.ok), checks };
     } catch (e) { checks.push({ name: "validate", ok: false, detail: e.message }); return { ok: false, checks }; }
@@ -59,7 +61,10 @@ export const fhirR4Connector = {
     let authHeader = await initialAuthHeader(ctx);
     const pageDeps = () => ({ fetch: ctx.fetch, authHeader, budget: ctx.budget, now: () => ctx.now().getTime(), logger: ctx.logger });
     const readPatient = async () => {
-      const res = await ctx.fetch(base + "/Patient/" + encodeURIComponent(patientRef), { headers: authHeader });
+      // redirect:"manual" — a 3xx is surfaced (never auto-followed) so a compromised FHIR host cannot bounce
+      // this authenticated, PHI-bearing read to another origin. The onboard ctx.fetch is additionally redirect-
+      // safe (re-validates + drops creds cross-origin); this hardens the engine path too. Mirrors paginate.
+      const res = await ctx.fetch(base + "/Patient/" + encodeURIComponent(patientRef), { headers: authHeader, redirect: "manual" });
       if (res.status === 401) return 401;
       if (!res.ok) throw new UpstreamError("Patient read HTTP " + res.status);
       return res.json();

@@ -3,5 +3,6 @@
 export class OnboardError extends Error {
   constructor(klass, message) { super(message || klass); this.name = "OnboardError"; this.klass = klass; }
 }
-// Probe/validation classes (spec §Backend test endpoint). `invalid`/`not-found` are onboard-CRUD classes.
-export const PROBE_KLASSES = Object.freeze(["bad-url", "tls", "unauthorized", "not-fhir", "unreachable"]);
+// Probe/validation classes (spec §Backend test endpoint). `ssrf` = a blocked redirect / SSRF-rejected hop.
+// `invalid`/`not-found` are onboard-CRUD classes.
+export const PROBE_KLASSES = Object.freeze(["bad-url", "tls", "unauthorized", "not-fhir", "unreachable", "ssrf"]);

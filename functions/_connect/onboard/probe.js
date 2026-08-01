@@ -8,8 +8,12 @@ import { requireCan } from "../enterprise/guard.js";
 import { makeAuditSink } from "../audit.js";
 import { signClientAssertion } from "../smart/assertion.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
+import { makeSafeFetch } from "./net.js";
 import { OnboardError } from "./errors.js";
 import { getRow, recordTest } from "./store.js";
+
+// A blocked-redirect / SSRF class propagates as OnboardError; anything else (network/TLS) is classified.
+const klassOf = (e) => (e instanceof OnboardError ? e.klass : classifyFetchError(e));
 
 // Map a thrown fetch error to a class WITHOUT surfacing its message. Node's undici raises a TypeError whose
 // .cause.code carries TLS failures (e.g. CERT_HAS_EXPIRED, DEPTH_ZERO_SELF_SIGNED_CERT, ERR_TLS_*).
@@ -45,17 +49,19 @@ export async function resolveAuth(deps, base, config, creds) {
     // based pull can still attempt Authorization: Bearer (the connector emits only a Bearer header).
     return { header: { [name]: value }, bearer: creds.token };
   }
-  // smart
+  // smart — all fetches (discovery + the signed token POST) go through the redirect-safe wrapper so a 30x
+  // can never bounce the signed client-assertion to a private/other host.
+  const sfetch = makeSafeFetch(deps.fetch);
   if (!creds.clientId || !creds.privateKeyJwk || !creds.kid || !creds.alg) throw new OnboardError("unauthorized", "SMART client key material missing");
-  let tokenEndpoint = config.tokenEndpoint || await discoverTokenEndpoint(deps, base);
+  let tokenEndpoint = config.tokenEndpoint || await discoverTokenEndpoint({ fetch: sfetch, now: deps.now }, base);
   assertPublicHttpsUrl(tokenEndpoint, "token endpoint");
   const assertion = await signClientAssertion({ now: deps.now }, { clientId: creds.clientId, tokenEndpoint, privateKeyJwk: creds.privateKeyJwk, kid: creds.kid, alg: creds.alg });
   const body = "grant_type=client_credentials&scope=" + encodeURIComponent("system/*.rs") +
     "&client_assertion_type=" + encodeURIComponent("urn:ietf:params:oauth:client-assertion-type:jwt-bearer") +
     "&client_assertion=" + encodeURIComponent(assertion);
   let res;
-  try { res = await deps.fetch(tokenEndpoint, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body }); }
-  catch (e) { throw new OnboardError(classifyFetchError(e), "token request failed"); }
+  try { res = await sfetch(tokenEndpoint, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body }); }
+  catch (e) { throw new OnboardError(klassOf(e), "token request failed"); }
   if (!res || res.status === 401 || res.status === 403 || !res.ok) throw new OnboardError("unauthorized", "token endpoint refused");
   let data; try { data = await res.json(); } catch { throw new OnboardError("unauthorized", "bad token response"); }
   if (!data.access_token) throw new OnboardError("unauthorized", "no access_token");
@@ -65,6 +71,7 @@ export async function resolveAuth(deps, base, config, creds) {
 // Run the probe against the base. Returns a client-safe result object; never throws for a connection fault
 // (those become { ok:false, error }); only a programmer/dep error would propagate.
 export async function runProbe(deps, base, config, creds) {
+  const sfetch = makeSafeFetch(deps.fetch);              // redirect-safe: every hop re-validated, creds dropped cross-origin
   let b;
   try { b = assertPublicHttpsUrl(base, "fhirBaseUrl").href.replace(/\/$/, ""); } catch (e) { return { ok: false, error: e.klass || "bad-url" }; }
   let header;
@@ -72,7 +79,7 @@ export async function runProbe(deps, base, config, creds) {
 
   // 1. /metadata -> fhirVersion + software.name
   let mres;
-  try { mres = await deps.fetch(b + "/metadata", { headers: header }); } catch (e) { return { ok: false, error: classifyFetchError(e) }; }
+  try { mres = await sfetch(b + "/metadata", { headers: header }); } catch (e) { return { ok: false, error: klassOf(e) }; }
   if (mres.status === 401 || mres.status === 403) return { ok: false, error: "unauthorized" };
   if (!mres.ok) return { ok: false, error: "unreachable" };
   let cs; try { cs = await mres.json(); } catch { return { ok: false, error: "not-fhir" }; }
@@ -82,7 +89,7 @@ export async function runProbe(deps, base, config, creds) {
 
   // 2. /Patient?_count=1 -> a searchset Bundle proves read+search works under this auth
   let pres;
-  try { pres = await deps.fetch(b + "/Patient?_count=1", { headers: header }); } catch (e) { return { ok: false, error: classifyFetchError(e) }; }
+  try { pres = await sfetch(b + "/Patient?_count=1", { headers: header }); } catch (e) { return { ok: false, error: klassOf(e) }; }
   if (pres.status === 401 || pres.status === 403) return { ok: false, error: "unauthorized" };
   if (!pres.ok) return { ok: false, error: "unreachable" };
   let pb; try { pb = await pres.json(); } catch { return { ok: false, error: "not-fhir" }; }

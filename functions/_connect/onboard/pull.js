@@ -11,6 +11,7 @@ import { validateBundle } from "../canonical/validate.js";
 import { assertConsumable, SCCM_MAJOR, RESOURCE_KEYS } from "../canonical/model.js";
 import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
+import { makeSafeFetch } from "./net.js";
 import { OnboardError } from "./errors.js";
 import { getRow, ONBOARD_SCOPE } from "./store.js";
 import { resolveAuth } from "./probe.js";
@@ -32,6 +33,9 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
   const { bearer } = await resolveAuth(deps, base, config, creds);
 
   const t0 = Date.now();
+  // The connector's own reads/searches go through the redirect-safe fetch: a compromised/redirecting FHIR
+  // host can never bounce the authenticated, PHI-bearing request to a private/other origin.
+  const safeFetch = makeSafeFetch(deps.fetch);
   const ctx = {
     tenant: { id: tenant.id, mode: tenant.mode || "sandbox", settings: {} },
     config: { base_url: base, connector_id: connectionId },     // NO secret_ref => connector stays in bearer mode
@@ -40,7 +44,7 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
     secrets: async (name) => (name === "bearer" ? bearer : null),
     envelope: deps.secrets && { seal: deps.secrets.seal, open: deps.secrets.open },
     now: () => new Date(),
-    fetch: deps.fetch,
+    fetch: safeFetch,
     audit: () => {},
     logger: { warn() {}, error() {} },
     budget: { maxSubrequests: 20, deadlineMs: 8000, maxPagesPerResource: 50 },
