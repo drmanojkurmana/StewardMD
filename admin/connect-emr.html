@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD Connect EMR</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
+  .main{max-width:820px;margin:0 auto;padding:20px 24px 70px}
+  .htop{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .htop h2{margin:0;font:800 20px var(--f);flex:1;display:flex;align-items:center;gap:9px}
+  .who{font:600 12.5px var(--f);color:var(--mut)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  .card>b{font:800 14.5px var(--f)}
+  label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
+  input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tl)}
+  textarea{min-height:76px;resize:vertical;font:500 12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{border:none;border-radius:11px;font:700 14px var(--f);padding:11px 15px;cursor:pointer}
+  button:disabled{opacity:.55;cursor:default}
+  .primary{background:var(--tl);color:#fff}.ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  .item{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg)}
+  .item .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .st{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
+  .st.pending{background:var(--amb)}.st.verified{background:var(--grn)}.st.rejected{background:var(--red)}.st.unverified{background:var(--mut)}
+  .cat{font:700 10px var(--f);text-transform:uppercase;color:var(--tl);background:var(--tls);border-radius:6px;padding:2px 8px}
+  .t{margin-left:auto;font:600 11px var(--f);color:var(--mut)}
+  .title{font:800 14px var(--f);margin-top:5px}
+  .meta{font:500 12px var(--f);color:var(--mut);margin-top:4px;line-height:1.5;word-break:break-word}.meta b{color:var(--ink)}
+  .foot{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+  .foot button{padding:8px 12px;font-size:13px}
+  .del{background:none;border:1px solid var(--line);color:var(--red)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  a{color:var(--tl)}code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
+  .rowmsg{min-height:0;margin-top:8px}
+  .subform{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .json{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto;color:var(--ink)}
+  .soon{font:600 11px var(--f);color:var(--mut);margin-top:6px}
+  @media(max-width:640px){.main{padding:16px 14px 70px}}
+</style>
+</head>
+<body>
+  <main class="main">
+    <div class="htop">
+      <h2>🔌 Connect EMR</h2>
+      <span class="who" id="who">Checking sign-in…</span>
+      <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
+      <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
+    </div>
+
+    <div id="gate" class="card hint">Sign in with your owner or admin Google account to connect an EMR.</div>
+
+    <!-- Feature-flag-off state (endpoints return 404 when smd_connect_onboard is off) -->
+    <div id="flagOff" class="card" style="display:none">
+      <b>EMR Connect is not enabled yet</b>
+      <div class="hint" style="margin-top:6px">This feature is behind a flag that is currently off for your account. Ask the StewardMD team to enable EMR Connect for your organization, then reload this page.</div>
+    </div>
+
+    <div id="work" data-need-auth style="display:none">
+
+      <!-- Organization -->
+      <div class="card">
+        <b>Organization</b>
+        <div class="hint" style="margin:4px 0 2px">Enter the tenant ID of the organization you are connecting. Every action below runs for this organization, and your account must be a member of it.</div>
+        <label for="tenantId">Organization / tenant ID</label>
+        <div class="row">
+          <div><input id="tenantId" placeholder="your organization's tenant ID" autocapitalize="off" spellcheck="false"></div>
+          <div style="flex:0 0 auto"><button class="primary" id="tenantLoad">Load connections</button></div>
+        </div>
+        <div class="msg" id="tenantMsg"></div>
+      </div>
+
+      <!-- Add a connection -->
+      <div class="card">
+        <b>Add a connection</b>
+        <label for="aName">Connection name *</label>
+        <input id="aName" maxlength="120" placeholder="e.g. Main hospital FHIR">
+
+        <label for="aType">Connection type</label>
+        <select id="aType">
+          <option value="fhir" selected>FHIR (R4)</option>
+          <option value="hl7" disabled>HL7 v2 (coming soon)</option>
+          <option value="csv" disabled>CSV / flat file (coming soon)</option>
+          <option value="rest" disabled>REST / custom API (coming soon)</option>
+          <option value="dicom" disabled>DICOM (coming soon)</option>
+        </select>
+        <div class="soon">FHIR R4 is available now. HL7 v2, CSV, REST and DICOM connect through the same wizard and are coming soon.</div>
+
+        <label for="aBase">FHIR base URL *</label>
+        <input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aMethod">Authentication</label>
+        <select id="aMethod">
+          <option value="token" selected>Token / API key</option>
+          <option value="smart">SMART Backend Services</option>
+        </select>
+
+        <!-- token fields -->
+        <div id="fToken">
+          <label for="aToken">Access token or API key *</label>
+          <input id="aToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+          <label for="aHeader">Header name (optional)</label>
+          <input id="aHeader" placeholder="Authorization (default). Set only if your EMR uses a custom header." autocapitalize="off" spellcheck="false">
+        </div>
+
+        <!-- smart fields -->
+        <div id="fSmart" style="display:none">
+          <label for="aClientId">Client ID *</label>
+          <input id="aClientId" placeholder="the client_id registered with the EMR" autocapitalize="off" spellcheck="false">
+          <label for="aTokenEp">Token endpoint (optional)</label>
+          <input id="aTokenEp" placeholder="https://…/token (discovered automatically if left blank)" autocapitalize="off" spellcheck="false">
+          <div class="hint" style="margin-top:6px">SMART Backend Services also needs the client key material below, or Test and Pull will report an authentication error.</div>
+          <label for="aJwk">Private key (JWK JSON)</label>
+          <textarea id="aJwk" placeholder='{"kty":"RSA", ...}'></textarea>
+          <div class="row">
+            <div><label for="aKid">Key ID (kid)</label><input id="aKid" placeholder="key id" autocapitalize="off" spellcheck="false"></div>
+            <div><label for="aAlg">Algorithm (alg)</label><input id="aAlg" placeholder="RS384 / ES384" autocapitalize="off" spellcheck="false"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="addSave">Save connection</button>
+          <button class="ghost" id="addSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="addMsg"></div>
+      </div>
+
+      <!-- Connections list -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections</b><button class="ghost" id="listReload" style="padding:7px 11px">Reload</button></div>
+        <div id="list" style="margin-top:12px"><div class="hint">Enter an organization / tenant ID above and load its connections.</div></div>
+      </div>
+
+    </div>
+  </main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  // Same Firebase project + owner sign-in as admin/index.html.
+  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
+  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+
+  var API="/api/connect/onboard";
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
+  function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
+  function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
+  function tenant(){ return ($("tenantId").value||"").trim(); }
+  function host(u){ try{ return new URL(u).host; }catch(e){ return u||""; } }
+
+  // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
+  var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
+  function jpost(path,obj){ return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(obj)}); }
+
+  // A GET /list returning 404 means the flag is off (the route only exists when the flag is on).
+  function showFlagOff(){ $("flagOff").style.display=""; $("work").style.display="none"; }
+  function hideFlagOff(){ $("flagOff").style.display="none"; }
+  function flagOffVisible(){ return $("flagOff").style.display!=="none"; }
+
+  // Map an HTTP result to a plain owner-facing error (404 is handled separately as flag-off).
+  function httpErr(x){
+    if(x.s===401) return "Sign in with an authorized owner or admin account.";
+    if(x.s===403) return "Your account cannot manage EMR connections for this organization.";
+    var e=x.d&&x.d.error;
+    return "Something went wrong"+(e?" ("+e+")":" ("+x.s+")")+".";
+  }
+  // Test-endpoint error classes -> actionable copy.
+  var TESTERR={
+    "bad-url":"That URL is not valid or is not an allowed https address.",
+    "tls":"There was a TLS or certificate problem reaching that server.",
+    "unauthorized":"Authentication failed. Check the token or SMART credentials.",
+    "not-fhir":"That endpoint did not return a FHIR CapabilityStatement.",
+    "unreachable":"Could not reach that server. Check the URL and that it is online."
+  };
+  function testMsg(err){ return TESTERR[err]||("The test failed ("+esc(err||"unknown")+")."); }
+
+  // ---- auth UI ----
+  function signedInUI(user){
+    var on=!!user;
+    $("who").textContent=on?("Signed in · "+(user.email||user.displayName||"")):"Not signed in";
+    $("signInBtn").style.display=on?"none":""; $("signOutBtn").style.display=on?"":"none";
+    $("gate").style.display=on?"none":"";
+    if(!flagOffVisible()) $("work").style.display=on?"":"none";
+  }
+  $("signInBtn").onclick=function(){ if(auth) auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ say("tenantMsg","err","Sign-in failed: "+((e&&e.message)||e)); }); };
+  $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
+
+  // ---- auth method toggle ----
+  $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
+
+  // ---- add / save ----
+  function addBody(){
+    var method=$("aMethod").value, a={method:method};
+    if(method==="token"){ a.token=($("aToken").value||"").trim(); var h=($("aHeader").value||"").trim(); if(h)a.headerName=h; }
+    else {
+      a.clientId=($("aClientId").value||"").trim();
+      var te=($("aTokenEp").value||"").trim(); if(te)a.tokenEndpoint=te;
+      var jwk=($("aJwk").value||"").trim(); if(jwk){ a.privateKeyJwk=JSON.parse(jwk); } // throws -> caught by caller
+      var kid=($("aKid").value||"").trim(); if(kid)a.kid=kid;
+      var alg=($("aAlg").value||"").trim(); if(alg)a.alg=alg;
+    }
+    return { tenantId:tenant(), name:($("aName").value||"").trim(), type:"fhir", fhirBaseUrl:($("aBase").value||"").trim(), auth:a };
+  }
+  function clearAddForm(){ ["aName","aBase","aToken","aHeader","aClientId","aTokenEp","aJwk","aKid","aAlg"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function doSave(thenTest){
+    if(!tenant()){ say("addMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body; try{ body=addBody(); }catch(e){ say("addMsg","err","The SMART private key must be valid JWK JSON."); return; }
+    if(!body.name){ say("addMsg","err","A connection name is required."); return; }
+    if(!body.fhirBaseUrl){ say("addMsg","err","A FHIR base URL is required."); return; }
+    if(body.auth.method==="token" && !body.auth.token){ say("addMsg","err","An access token or API key is required."); return; }
+    if(body.auth.method==="smart" && !body.auth.clientId){ say("addMsg","err","A client ID is required for SMART."); return; }
+    $("addSave").disabled=true; $("addSaveTest").disabled=true; say("addMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("addSave").disabled=false; $("addSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("addMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearAddForm(); loadList();
+      if(thenTest){ say("addMsg","","Saved. Testing connection…"); runTest(id,"addMsg"); }
+      else { say("addMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("addSave").disabled=false; $("addSaveTest").disabled=false; say("addMsg","err","Sign in first."); });
+  }
+  $("addSave").onclick=function(){ doSave(false); };
+  $("addSaveTest").onclick=function(){ doSave(true); };
+
+  // ---- test ----
+  function runTest(id,msgId){
+    say(msgId,"","Testing connection…");
+    jpost(API+"/test/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200){ say(msgId,"err",httpErr(x)); return; }
+      var d=x.d||{};
+      if(d.ok){ say(msgId,"ok","Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+"."); }
+      else { say(msgId,"err",testMsg(d.error)); }
+      loadList();
+    }).catch(function(){ say(msgId,"err","Sign in first."); });
+  }
+
+  // ---- pull a patient ----
+  function doPull(id){
+    var input=$("list").querySelector('[data-pid="'+id+'"]'), out=$("list").querySelector('[data-json="'+id+'"]');
+    var pid=input?(input.value||"").trim():"";
+    if(!pid){ if(out){ out.style.display=""; out.textContent="Enter a patient ID first."; } return; }
+    if(out){ out.style.display=""; out.textContent="Pulling patient…"; }
+    jpost(API+"/pull/"+encodeURIComponent(id),{tenantId:tenant(),patientId:pid}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ if(out) out.textContent=(x.s===403?"Your account cannot read patient data for this organization.":httpErr(x)); return; }
+      if(out) out.textContent=JSON.stringify(x.d.bundle,null,2);
+    }).catch(function(){ if(out) out.textContent="Sign in first."; });
+  }
+
+  // ---- delete ----
+  function doDelete(id){
+    if(!confirm("Delete this connection? This removes its stored credentials and cannot be undone.")) return;
+    api(API+"/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Connection deleted."); loadList();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- list ----
+  function statusBadge(c){
+    var lt=c.lastTest;
+    if(lt&&lt.ok) return '<span class="st verified">Connected</span>';
+    if(lt&&!lt.ok) return '<span class="st rejected">'+esc(lt.error||"failed")+'</span>';
+    return '<span class="st unverified">not tested</span>';
+  }
+  function lastTestLine(c){
+    var lt=c.lastTest; if(!lt) return "";
+    if(lt.ok) return ' · <b>Last test:</b> connected'+(lt.fhirVersion?(" (FHIR "+esc(lt.fhirVersion)+(lt.softwareName?", "+esc(lt.softwareName):"")+")"):"");
+    return ' · <b>Last test:</b> '+esc(lt.error||"failed");
+  }
+  function renderList(conns){
+    var el=$("list");
+    if(!conns.length){ el.innerHTML='<div class="hint">No EMRs connected yet. Add one above.</div>'; return; }
+    el.innerHTML=conns.map(function(c){ var id=esc(c.connectionId);
+      return '<div class="item" data-cid="'+id+'">'+
+        '<div class="h"><span class="cat">'+esc(c.type||"fhir")+'</span>'+statusBadge(c)+'<span class="hint">'+esc(host(c.fhirBaseUrl))+'</span><span class="t">'+esc(when(c.updatedAt||c.createdAt))+'</span></div>'+
+        '<div class="title">'+esc(c.name||"(unnamed)")+'</div>'+
+        '<div class="meta"><b>Base:</b> '+esc(c.fhirBaseUrl||"-")+' · <b>Auth:</b> '+esc(c.authMethod||"-")+lastTestLine(c)+'</div>'+
+        '<div class="foot"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull a patient</button><button class="del" data-act="del" data-cid="'+id+'" style="margin-left:auto">Delete</button></div>'+
+        '<div class="rowmsg msg" data-msg="'+id+'"></div>'+
+        '<div class="subform" data-pull="'+id+'" style="display:none">'+
+          '<label>Patient ID</label>'+
+          '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
+          '<div class="json" data-json="'+id+'" style="display:none"></div>'+
+        '</div>'+
+      '</div>';
+    }).join("");
+  }
+  function loadList(){
+    if(!tenant()){ $("list").innerHTML='<div class="hint">Enter an organization / tenant ID above and load its connections.</div>'; return; }
+    $("list").innerHTML='<div class="hint">Loading…</div>';
+    api(API+"/list?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("list").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
+      renderList(x.d.connections||[]);
+    }).catch(function(){ $("list").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+
+  // ---- list action delegation ----
+  function runTestRow(id){ var m=$("list").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
+  $("list").addEventListener("click",function(e){
+    var b=e.target.closest("[data-act]"); if(!b)return; var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
+    if(act==="test"){ runTestRow(id); }
+    else if(act==="pull"){ var sf=$("list").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
+    else if(act==="pullgo"){ doPull(id); }
+    else if(act==="del"){ doDelete(id); }
+  });
+
+  // ---- controls ----
+  $("tenantLoad").onclick=loadList;
+  $("listReload").onclick=loadList;
+  $("tenantId").addEventListener("keydown",function(e){ if(e.key==="Enter") loadList(); });
+
+  // ---- Firebase auth state ----
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u && tenant()) loadList(); }); }
+  else { $("who").textContent="Firebase failed to load."; signedInUI(null); }
+
+  // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
+  window.ConnectEMR={ loadList:loadList, renderList:renderList, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    setTenant:function(v){ $("tenantId").value=v; }, __setApi:function(fn){ api=fn; } };
+})();
+</script>
+</body>
+</html>
