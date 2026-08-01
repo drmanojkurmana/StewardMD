@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD Connect EMR</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
+  .main{max-width:820px;margin:0 auto;padding:20px 24px 70px}
+  .htop{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .htop h2{margin:0;font:800 20px var(--f);flex:1;display:flex;align-items:center;gap:9px}
+  .who{font:600 12.5px var(--f);color:var(--mut)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  .card>b{font:800 14.5px var(--f)}
+  label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
+  input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tl)}
+  textarea{min-height:76px;resize:vertical;font:500 12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{border:none;border-radius:11px;font:700 14px var(--f);padding:11px 15px;cursor:pointer}
+  button:disabled{opacity:.55;cursor:default}
+  .primary{background:var(--tl);color:#fff}.ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  .item{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg)}
+  .item .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .st{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
+  .st.pending{background:var(--amb)}.st.verified{background:var(--grn)}.st.rejected{background:var(--red)}.st.unverified{background:var(--mut)}
+  .cat{font:700 10px var(--f);text-transform:uppercase;color:var(--tl);background:var(--tls);border-radius:6px;padding:2px 8px}
+  .t{margin-left:auto;font:600 11px var(--f);color:var(--mut)}
+  .title{font:800 14px var(--f);margin-top:5px}
+  .meta{font:500 12px var(--f);color:var(--mut);margin-top:4px;line-height:1.5;word-break:break-word}.meta b{color:var(--ink)}
+  .foot{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+  .foot button{padding:8px 12px;font-size:13px}
+  .del{background:none;border:1px solid var(--line);color:var(--red)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  a{color:var(--tl)}code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
+  .rowmsg{min-height:0;margin-top:8px}
+  .subform{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .json{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto;color:var(--ink)}
+  .soon{font:600 11px var(--f);color:var(--mut);margin-top:6px}
+  table.dash{width:100%;border-collapse:collapse;font:500 13px var(--f)}
+  table.dash th{text-align:left;font:700 10.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px;border-bottom:1px solid var(--line)}
+  table.dash td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;word-break:break-word}
+  table.dash td.mono{font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut)}
+  table.dash td.acts{white-space:nowrap}
+  table.dash td.acts button{padding:6px 9px;font-size:12px;margin-right:5px;margin-bottom:4px}
+  table.dash .st{display:inline-block}
+  @media(max-width:640px){.main{padding:16px 14px 70px}}
+</style>
+</head>
+<body>
+  <main class="main">
+    <div class="htop">
+      <h2>🔌 Connect EMR</h2>
+      <span class="who" id="who">Checking sign-in…</span>
+      <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
+      <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
+    </div>
+
+    <div id="gate" class="card hint">Sign in with your owner or admin Google account to connect an EMR.</div>
+
+    <!-- Feature-flag-off state (endpoints return 404 when smd_connect_onboard is off) -->
+    <div id="flagOff" class="card" style="display:none">
+      <b>EMR Connect is not enabled yet</b>
+      <div class="hint" style="margin-top:6px">This feature is behind a flag that is currently off for your account. Ask the StewardMD team to enable EMR Connect for your organization, then reload this page.</div>
+    </div>
+
+    <div id="work" data-need-auth style="display:none">
+
+      <!-- Organization: picked from the tenants your account is a member of (server-derived, no typing). -->
+      <div class="card">
+        <b>Organization</b>
+        <div class="hint" style="margin:4px 0 2px">Select the hospital or organization you are connecting. Only organizations your account is a member of are listed. Every action below runs for the selected organization.</div>
+        <label for="tenantSel">Your organization</label>
+        <div class="row">
+          <div><select id="tenantSel"><option value="" disabled selected>Loading your organizations...</option></select></div>
+          <div style="flex:0 0 auto"><button class="primary" id="tenantReload">Reload</button></div>
+        </div>
+        <div class="msg" id="tenantMsg"></div>
+      </div>
+
+      <!-- No-membership empty state (GET /tenants returned an empty list). -->
+      <div id="noTenant" class="card" style="display:none">
+        <b>You are not a member of any hospital tenant</b>
+        <div class="hint" style="margin-top:6px">Your account is not a member of any organization yet. Ask your organization's owner to invite your StewardMD account, then use Reload above.</div>
+      </div>
+
+      <!-- Operational area: shown only once you belong to at least one organization. -->
+      <div id="opsArea">
+
+      <!-- Add a connection -->
+      <div class="card">
+        <b>Add a connection</b>
+        <label for="aName">Connection name *</label>
+        <input id="aName" maxlength="120" placeholder="e.g. Main hospital FHIR">
+
+        <label for="aType">Connection type</label>
+        <select id="aType">
+          <option value="fhir" selected>FHIR (R4)</option>
+          <option value="csv">CSV / flat file</option>
+          <option value="hl7">HL7 v2 feed</option>
+          <option value="webhook">Webhook / FHIR push</option>
+          <option value="rest" disabled>REST / custom API (coming soon)</option>
+          <option value="dicom" disabled>DICOM (coming soon)</option>
+        </select>
+        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds and Webhook / FHIR push are available now. REST and DICOM connect through the same wizard and are coming soon.</div>
+
+       <div id="fFhir">
+        <label for="aBase">FHIR base URL *</label>
+        <input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aMethod">Authentication</label>
+        <select id="aMethod">
+          <option value="token" selected>Token / API key</option>
+          <option value="smart">SMART Backend Services</option>
+        </select>
+
+        <!-- token fields -->
+        <div id="fToken">
+          <label for="aToken">Access token or API key *</label>
+          <input id="aToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+          <label for="aHeader">Header name (optional)</label>
+          <input id="aHeader" placeholder="Authorization (default). Set only if your EMR uses a custom header." autocapitalize="off" spellcheck="false">
+        </div>
+
+        <!-- smart fields -->
+        <div id="fSmart" style="display:none">
+          <label for="aClientId">Client ID *</label>
+          <input id="aClientId" placeholder="the client_id registered with the EMR" autocapitalize="off" spellcheck="false">
+          <label for="aTokenEp">Token endpoint (optional)</label>
+          <input id="aTokenEp" placeholder="https://…/token (discovered automatically if left blank)" autocapitalize="off" spellcheck="false">
+          <div class="hint" style="margin-top:6px">SMART Backend Services also needs the client key material below, or Test and Pull will report an authentication error.</div>
+          <label for="aJwk">Private key (JWK JSON)</label>
+          <textarea id="aJwk" placeholder='{"kty":"RSA", ...}'></textarea>
+          <div class="row">
+            <div><label for="aKid">Key ID (kid)</label><input id="aKid" placeholder="key id" autocapitalize="off" spellcheck="false"></div>
+            <div><label for="aAlg">Algorithm (alg)</label><input id="aAlg" placeholder="RS384 / ES384" autocapitalize="off" spellcheck="false"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="addSave">Save connection</button>
+          <button class="ghost" id="addSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="addMsg"></div>
+       </div>
+
+       <!-- CSV / flat file: a one-shot upload that is parsed and normalized in place (not saved). -->
+       <div id="fCsv" style="display:none">
+        <label for="aCsvFile">CSV file</label>
+        <input id="aCsvFile" type="file" accept=".csv,.tsv,.txt,text/csv,text/plain">
+        <div class="hint" style="margin-top:4px">Upload your EMR's lab or results export. The file is read in your browser and sent once to be normalized to StewardMD's canonical model. It is not saved. Common column names (MRN, test, value, unit, order, and so on) are detected automatically. Limit 2 MB.</div>
+        <div style="margin-top:14px"><button class="primary" id="csvParse">Parse and preview</button></div>
+        <div class="msg" id="csvMsg"></div>
+        <div class="meta" id="csvCounts" style="display:none;margin-top:8px"></div>
+        <div id="csvWarn" style="display:none"></div>
+        <div class="json" id="csvJson" style="display:none"></div>
+       </div>
+
+       <!-- HL7 v2 feed: register an inbound HMAC-gated webhook the hospital's integration engine POSTs to. -->
+       <div id="fHl7" style="display:none">
+        <label for="aHl7Types">Message types (optional)</label>
+        <input id="aHl7Types" maxlength="300" placeholder="e.g. ORU^R01, ADT^A01 (leave blank to accept any)" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">A feed receives HL7 v2 messages from your integration engine (Mirth, Rhapsody, and so on). We generate a signing secret and a webhook URL. The secret is shown once, so save it right away.</div>
+        <div style="margin-top:14px"><button class="primary" id="hl7Create">Create feed</button></div>
+        <div class="msg" id="hl7Msg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="hl7Result" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="hl7Url" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="hl7Secret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="hl7Copy">Copy</button></div>
+          </div>
+          <div class="hint" id="hl7Hint" style="margin-top:8px"></div>
+        </div>
+       </div>
+
+       <!-- Webhook / FHIR push: register an inbound HMAC-gated webhook the EMR POSTs a FHIR Bundle/resource to. -->
+       <div id="fWebhook" style="display:none">
+        <div class="hint" style="margin-top:4px">Your EMR or integration engine POSTs a FHIR R4 Bundle (or a single FHIR resource) to a per-feed webhook. We generate a signing secret and a webhook URL. The secret is shown once, so save it right away. The pushed FHIR is normalized to StewardMD's canonical model.</div>
+        <div style="margin-top:14px"><button class="primary" id="whCreate">Create webhook</button></div>
+        <div class="msg" id="whMsg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="whResult" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="whUrl" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="whSecret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="whCopy">Copy</button></div>
+          </div>
+          <div class="hint" id="whHint" style="margin-top:8px"></div>
+        </div>
+       </div>
+      </div>
+
+      <!-- Connections dashboard: this organization's FHIR connections AND HL7 v2 feeds in one table. -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections dashboard</b><button class="ghost" id="dashReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" id="dashCounts" style="margin-top:4px"></div>
+        <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
+      </div>
+
+      </div><!-- /opsArea -->
+
+    </div>
+  </main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  // Same Firebase project + owner sign-in as admin/index.html.
+  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
+  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+
+  var API="/api/connect/onboard";
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
+  function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
+  function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
+  function tenant(){ var s=$("tenantSel"); return s?(s.value||"").trim():""; }
+  function ensureTenantOption(v){ var s=$("tenantSel"); if(!s||!v) return; if(![].slice.call(s.options).some(function(o){return o.value===v;})){ var o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); } }
+  function host(u){ try{ return new URL(u).host; }catch(e){ return u||""; } }
+
+  // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
+  var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
+  function jpost(path,obj){ return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(obj)}); }
+
+  // A GET /list returning 404 means the flag is off (the route only exists when the flag is on).
+  function showFlagOff(){ $("flagOff").style.display=""; $("work").style.display="none"; }
+  function hideFlagOff(){ $("flagOff").style.display="none"; }
+  function flagOffVisible(){ return $("flagOff").style.display!=="none"; }
+
+  // Map an HTTP result to a plain owner-facing error (404 is handled separately as flag-off).
+  function httpErr(x){
+    if(x.s===401) return "Sign in with an authorized owner or admin account.";
+    if(x.s===403) return "Your account cannot manage EMR connections for this organization.";
+    var e=x.d&&x.d.error;
+    return "Something went wrong"+(e?" ("+e+")":" ("+x.s+")")+".";
+  }
+  // Test-endpoint error classes -> actionable copy.
+  var TESTERR={
+    "bad-url":"That URL is not valid or is not an allowed https address.",
+    "tls":"There was a TLS or certificate problem reaching that server.",
+    "unauthorized":"Authentication failed. Check the token or SMART credentials.",
+    "not-fhir":"That endpoint did not return a FHIR CapabilityStatement.",
+    "unreachable":"Could not reach that server. Check the URL and that it is online."
+  };
+  function testMsg(err){ return TESTERR[err]||("The test failed ("+esc(err||"unknown")+")."); }
+
+  // ---- auth UI ----
+  function signedInUI(user){
+    var on=!!user;
+    $("who").textContent=on?("Signed in · "+(user.email||user.displayName||"")):"Not signed in";
+    $("signInBtn").style.display=on?"none":""; $("signOutBtn").style.display=on?"":"none";
+    $("gate").style.display=on?"none":"";
+    if(!flagOffVisible()) $("work").style.display=on?"":"none";
+  }
+  $("signInBtn").onclick=function(){ if(auth) auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ say("tenantMsg","err","Sign-in failed: "+((e&&e.message)||e)); }); };
+  $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
+
+  // ---- auth method toggle ----
+  $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
+
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none";
+    $("fFhir").style.display=(csv||hl7||wh)?"none":""; }
+  $("aType").onchange=applyType;
+
+  // ---- CSV upload: one-shot parse + preview (no saved connection) ----
+  var CSV_MAX=2000000;
+  function csvSay(k,t){ say("csvMsg",k,t); }
+  function renderCsvResult(resp){
+    resp=resp||{}; var b=resp.bundle||{}, w=resp.warnings||[];
+    var rows=resp.rowsParsed||0, cols=(resp.columns&&resp.columns.length)||0;
+    var obs=(b.observations&&b.observations.length)||0, drs=(b.diagnosticReports&&b.diagnosticReports.length)||0;
+    var c=$("csvCounts"); c.style.display="";
+    c.innerHTML='<b>Parsed:</b> '+rows+' row'+(rows===1?'':'s')+' x '+cols+' column'+(cols===1?'':'s')+' &middot; <b>Normalized:</b> '+obs+' observation'+(obs===1?'':'s')+', '+drs+' report'+(drs===1?'':'s');
+    var wd=$("csvWarn"); wd.style.display="";
+    if(w.length){ wd.innerHTML='<div class="meta" style="margin-top:8px"><b>Warnings ('+w.length+')</b></div><ul style="margin:6px 0 0;padding-left:18px">'+w.map(function(m){return '<li class="hint">'+esc(m)+'</li>';}).join("")+'</ul>'; }
+    else { wd.innerHTML='<div class="meta ok" style="margin-top:8px">No structural warnings.</div>'; }
+    var j=$("csvJson"); j.style.display=""; j.textContent=JSON.stringify(b,null,2);
+  }
+  function submitCsv(text){
+    if(!tenant()){ csvSay("err","Enter your organization / tenant ID at the top first."); return; }
+    if(!text||!text.trim()){ csvSay("err","That file looks empty."); return; }
+    if(text.length>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    $("csvParse").disabled=true; csvSay("","Parsing and normalizing...");
+    var name=($("aName").value||"").trim();
+    jpost(API+"/csv",{tenantId:tenant(),name:name||undefined,csv:text}).then(function(x){
+      $("csvParse").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===413||(x.d&&x.d.error==="too-large")){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+      if(x.s===403){ csvSay("err","Your account cannot view patient data for this organization."); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ csvSay("err",httpErr(x)); return; }
+      csvSay("ok","Parsed and normalized. Review the result below.");
+      renderCsvResult(x.d);
+    }).catch(function(){ $("csvParse").disabled=false; csvSay("err","Sign in first."); });
+  }
+  $("csvParse").onclick=function(){
+    var f=$("aCsvFile").files&&$("aCsvFile").files[0];
+    if(!f){ csvSay("err","Choose a CSV file first."); return; }
+    if(f.size>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    var rd=new FileReader();
+    rd.onload=function(){ submitCsv(String(rd.result||"")); };
+    rd.onerror=function(){ csvSay("err","Could not read that file."); };
+    rd.readAsText(f);
+  };
+
+  // ---- HL7 v2 feed: create (secret shown once) / list / delete ----
+  function hl7Say(k,t){ say("hl7Msg",k,t); }
+  function parseTypes(){ var raw=($("aHl7Types").value||"").trim(); if(!raw) return undefined; var a=raw.split(",").map(function(s){return s.trim();}).filter(Boolean); return a.length?a:undefined; }
+  function renderHl7Created(d){
+    d=d||{}; $("hl7Result").style.display="";
+    $("hl7Url").textContent=d.ingestUrl||"";
+    $("hl7Secret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("hl7Hint").innerHTML='POST the raw HL7 v2 message as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function hl7CreateGo(){
+    if(!tenant()){ hl7Say("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ hl7Say("err","A feed name is required."); return; }
+    $("hl7Create").disabled=true; hl7Say("","Creating feed…");
+    var body={tenantId:tenant(),name:name}; var t=parseTypes(); if(t)body.allowedMessageTypes=t;
+    jpost(API+"/hl7-feed",body).then(function(x){
+      $("hl7Create").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ hl7Say("err","Your account cannot manage feeds for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ hl7Say("err",httpErr(x)); return; }
+      hl7Say("ok","Feed created. Save the signing secret below now, it will not be shown again.");
+      renderHl7Created(x.d); loadDashboard();
+    }).catch(function(){ $("hl7Create").disabled=false; hl7Say("err","Sign in first."); });
+  }
+  $("hl7Create").onclick=hl7CreateGo;
+  $("hl7Copy").onclick=function(){ var i=$("hl7Secret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } hl7Say("ok","Secret copied. Store it somewhere safe now."); };
+
+  // ---- Webhook / FHIR push: create (secret shown once) / copy URL / delete ----
+  function whSay(k,t){ say("whMsg",k,t); }
+  function renderWebhookCreated(d){
+    d=d||{}; $("whResult").style.display="";
+    $("whUrl").textContent=d.ingestUrl||"";
+    $("whSecret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("whHint").innerHTML='POST a FHIR R4 Bundle or a single FHIR resource as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function whCreateGo(){
+    if(!tenant()){ whSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ whSay("err","A webhook name is required."); return; }
+    $("whCreate").disabled=true; whSay("","Creating webhook…");
+    jpost(API+"/webhook-feed",{tenantId:tenant(),name:name}).then(function(x){
+      $("whCreate").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ whSay("err","Your account cannot manage webhooks for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ whSay("err",httpErr(x)); return; }
+      whSay("ok","Webhook created. Save the signing secret below now, it will not be shown again.");
+      renderWebhookCreated(x.d); loadDashboard();
+    }).catch(function(){ $("whCreate").disabled=false; whSay("err","Sign in first."); });
+  }
+  $("whCreate").onclick=whCreateGo;
+  $("whCopy").onclick=function(){ var i=$("whSecret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } whSay("ok","Secret copied. Store it somewhere safe now."); };
+
+  // The constant webhook URLs a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
+  // URL path), so these are safe to copy and are NOT secrets. HL7 -> /ingress/hl7; FHIR push -> /ingress/fhir.
+  function ingestUrl(){ try{ return location.origin+"/api/connect/ingress/hl7"; }catch(e){ return "/api/connect/ingress/hl7"; } }
+  function webhookIngestUrl(){ try{ return location.origin+"/api/connect/ingress/fhir"; }catch(e){ return "/api/connect/ingress/fhir"; } }
+  function copyFeedUrl(){ var u=ingestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
+  function copyWebhookUrl(){ var u=webhookIngestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
+  function doDeleteFeed(id){
+    if(!confirm("Delete this feed? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/hl7-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Feed deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+  function doDeleteWebhook(id){
+    if(!confirm("Delete this webhook? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/webhook-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Webhook deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- add / save ----
+  function addBody(){
+    var method=$("aMethod").value, a={method:method};
+    if(method==="token"){ a.token=($("aToken").value||"").trim(); var h=($("aHeader").value||"").trim(); if(h)a.headerName=h; }
+    else {
+      a.clientId=($("aClientId").value||"").trim();
+      var te=($("aTokenEp").value||"").trim(); if(te)a.tokenEndpoint=te;
+      var jwk=($("aJwk").value||"").trim(); if(jwk){ a.privateKeyJwk=JSON.parse(jwk); } // throws -> caught by caller
+      var kid=($("aKid").value||"").trim(); if(kid)a.kid=kid;
+      var alg=($("aAlg").value||"").trim(); if(alg)a.alg=alg;
+    }
+    return { tenantId:tenant(), name:($("aName").value||"").trim(), type:"fhir", fhirBaseUrl:($("aBase").value||"").trim(), auth:a };
+  }
+  function clearAddForm(){ ["aName","aBase","aToken","aHeader","aClientId","aTokenEp","aJwk","aKid","aAlg"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function doSave(thenTest){
+    if(!tenant()){ say("addMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body; try{ body=addBody(); }catch(e){ say("addMsg","err","The SMART private key must be valid JWK JSON."); return; }
+    if(!body.name){ say("addMsg","err","A connection name is required."); return; }
+    if(!body.fhirBaseUrl){ say("addMsg","err","A FHIR base URL is required."); return; }
+    if(body.auth.method==="token" && !body.auth.token){ say("addMsg","err","An access token or API key is required."); return; }
+    if(body.auth.method==="smart" && !body.auth.clientId){ say("addMsg","err","A client ID is required for SMART."); return; }
+    $("addSave").disabled=true; $("addSaveTest").disabled=true; say("addMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("addSave").disabled=false; $("addSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("addMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearAddForm(); loadDashboard();
+      if(thenTest){ say("addMsg","","Saved. Testing connection…"); runTest(id,"addMsg"); }
+      else { say("addMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("addSave").disabled=false; $("addSaveTest").disabled=false; say("addMsg","err","Sign in first."); });
+  }
+  $("addSave").onclick=function(){ doSave(false); };
+  $("addSaveTest").onclick=function(){ doSave(true); };
+
+  // ---- test ----
+  function runTest(id,msgId){
+    say(msgId,"","Testing connection…");
+    jpost(API+"/test/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200){ say(msgId,"err",httpErr(x)); return; }
+      var d=x.d||{};
+      if(d.ok){ say(msgId,"ok","Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+"."); }
+      else { say(msgId,"err",testMsg(d.error)); }
+      loadDashboard();
+    }).catch(function(){ say(msgId,"err","Sign in first."); });
+  }
+
+  // ---- pull a patient ----
+  function doPull(id){
+    var input=$("dash").querySelector('[data-pid="'+id+'"]'), out=$("dash").querySelector('[data-json="'+id+'"]');
+    var pid=input?(input.value||"").trim():"";
+    if(!pid){ if(out){ out.style.display=""; out.textContent="Enter a patient ID first."; } return; }
+    if(out){ out.style.display=""; out.textContent="Pulling patient…"; }
+    jpost(API+"/pull/"+encodeURIComponent(id),{tenantId:tenant(),patientId:pid}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ if(out) out.textContent=(x.s===403?"Your account cannot read patient data for this organization.":httpErr(x)); return; }
+      if(out) out.textContent=JSON.stringify(x.d.bundle,null,2);
+    }).catch(function(){ if(out) out.textContent="Sign in first."; });
+  }
+
+  // ---- delete ----
+  function doDelete(id){
+    if(!confirm("Delete this connection? This removes its stored credentials and cannot be undone.")) return;
+    api(API+"/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Connection deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- tenant picker (populated from GET /tenants: the caller's OWN memberships) ----
+  function showNoMembership(){ $("noTenant").style.display=""; $("opsArea").style.display="none"; $("tenantSel").innerHTML='<option value="" disabled selected>No organizations available</option>'; }
+  function hideNoMembership(){ $("noTenant").style.display="none"; $("opsArea").style.display=""; }
+  function renderTenantOptions(ts){
+    // Preserve a still-valid prior selection; otherwise leave nothing selected (a placeholder). The selected
+    // option MUST be marked explicitly: a disabled placeholder with no `selected` would let the browser
+    // auto-select the first enabled option (a false auto-selection).
+    var s=$("tenantSel"), prev=s.value, keep=ts.some(function(t){return t.tenantId===prev;})?prev:"", html="";
+    if(ts.length!==1) html+='<option value="" disabled'+(keep?"":" selected")+'>Select your organization...</option>';
+    html+=ts.map(function(t){
+      var name=t.name?esc(t.name):esc(t.tenantId);
+      return '<option value="'+esc(t.tenantId)+'"'+(t.tenantId===keep?" selected":"")+'>'+name+' ('+esc(t.role)+')</option>';
+    }).join("");
+    s.innerHTML=html;
+  }
+  function onTenantChange(){ say("tenantMsg","",""); loadDashboard(); }
+  function loadTenants(){
+    api(API+"/tenants").then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ say("tenantMsg","err",httpErr(x)); return; }
+      var ts=x.d.tenants||[];
+      if(!ts.length){ showNoMembership(); return; }
+      hideNoMembership(); renderTenantOptions(ts);
+      if(ts.length===1){ $("tenantSel").value=ts[0].tenantId; onTenantChange(); }   // single tenant auto-selects
+      else if(tenant()){ onTenantChange(); }                                        // a still-valid selection refreshes
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- connections dashboard (unified FHIR connections + HL7 v2 feeds, one table) ----
+  function statusBadge(c){
+    var lt=c.lastTest;
+    if(lt&&lt.ok) return '<span class="st verified">Connected</span>';
+    if(lt&&!lt.ok) return '<span class="st rejected">'+esc(lt.error||"failed")+'</span>';
+    return '<span class="st unverified">not tested</span>';
+  }
+  function feedStatusBadge(f){ var s=String(f.status||"active"); return '<span class="st '+(s==="active"?"verified":"unverified")+'">'+esc(s)+'</span>'; }
+  function fhirRow(c){ var id=esc(c.connectionId), lt=c.lastTest;
+    var last=lt?(lt.ok?("connected"+(lt.fhirVersion?" (FHIR "+esc(lt.fhirVersion)+")":"")):esc(lt.error||"failed")):"not tested";
+    return '<tr class="drow" data-cid="'+id+'">'+
+      '<td><b>'+esc(c.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Auth: '+esc(c.authMethod||"-")+'</div></td>'+
+      '<td><span class="cat">FHIR</span></td>'+
+      '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
+      '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
+      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
+    '</tr>'+
+    '<tr data-msgrow="'+id+'" style="display:none"><td colspan="5"><div class="rowmsg msg" data-msg="'+id+'"></div></td></tr>'+
+    '<tr data-pull="'+id+'" style="display:none"><td colspan="5">'+
+      '<label>Patient ID</label>'+
+      '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
+      '<div class="json" data-json="'+id+'" style="display:none"></div>'+
+    '</td></tr>';
+  }
+  function hl7Row(f){ var id=esc(f.feedId);
+    var types=(f.allowedMessageTypes&&f.allowedMessageTypes.length)?f.allowedMessageTypes.join(", "):"any";
+    return '<tr class="drow" data-fid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Types: '+esc(types)+'</div></td>'+
+      '<td><span class="cat">HL7 v2</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-fact="copy" data-fid="'+id+'">Copy URL</button><button class="del" data-fact="del" data-fid="'+id+'">Delete</button></td>'+
+    '</tr>';
+  }
+  function webhookRow(f){ var id=esc(f.feedId);
+    return '<tr class="drow" data-wid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">FHIR Bundle / resource push</div></td>'+
+      '<td><span class="cat">FHIR push</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-wact="copy" data-wid="'+id+'">Copy URL</button><button class="del" data-wact="del" data-wid="'+id+'">Delete</button></td>'+
+    '</tr>';
+  }
+  function renderDash(fhir,hl7,counts,webhook){
+    fhir=fhir||[]; hl7=hl7||[]; webhook=webhook||[];
+    var c=$("dashCounts");
+    var nf=(counts&&counts.fhir!=null)?counts.fhir:fhir.length, nh=(counts&&counts.hl7!=null)?counts.hl7:hl7.length, nw=(counts&&counts.webhook!=null)?counts.webhook:webhook.length;
+    var total=(counts&&counts.total!=null)?counts.total:(nf+nh+nw);
+    var seg=[nf+" FHIR", nh+" HL7"]; if(nw) seg.push(nw+" Webhook");
+    c.textContent=total?(total+" connection"+(total===1?"":"s")+" ("+seg.join(", ")+")"):"";
+    if(!total){ $("dash").innerHTML='<div class="hint">No connections yet. Add a FHIR connection, an HL7 v2 feed or a webhook above.</div>'; return; }
+    var rows=fhir.map(fhirRow).join("")+hl7.map(hl7Row).join("")+webhook.map(webhookRow).join("");
+    $("dash").innerHTML='<table class="dash"><thead><tr><th>Name</th><th>Type</th><th>Host / feed ID</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  function loadDashboard(){
+    if(!tenant()){ $("dash").innerHTML='<div class="hint">Select your organization above to view its connections.</div>'; $("dashCounts").textContent=""; return; }
+    $("dash").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/all?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("dash").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("dashCounts").textContent=""; return; }
+      renderDash(x.d.fhir||[], x.d.hl7||[], x.d.counts||null, x.d.webhook||[]);
+    }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+
+  // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
+  function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
+  $("dash").addEventListener("click",function(e){
+    var b=e.target.closest("[data-act],[data-fact],[data-wact]"); if(!b)return;
+    if(b.hasAttribute("data-act")){ var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
+      if(act==="test"){ runTestRow(id); }
+      else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
+      else if(act==="pullgo"){ doPull(id); }
+      else if(act==="del"){ doDelete(id); }
+    } else if(b.hasAttribute("data-fact")){ var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
+      if(fact==="copy"){ copyFeedUrl(); }
+      else if(fact==="del"){ doDeleteFeed(fid); }
+    } else { var wid=b.getAttribute("data-wid"), wact=b.getAttribute("data-wact");
+      if(wact==="copy"){ copyWebhookUrl(); }
+      else if(wact==="del"){ doDeleteWebhook(wid); }
+    }
+  });
+
+  // ---- controls ----
+  $("tenantSel").onchange=onTenantChange;
+  $("tenantReload").onclick=loadTenants;
+  $("dashReload").onclick=loadDashboard;
+
+  // ---- Firebase auth state ----
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u) loadTenants(); }); }
+  else { $("who").textContent="Firebase failed to load."; signedInUI(null); }
+
+  // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
+  window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
+    loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
+    hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
+    webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
+    showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
+    setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
+    setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
+})();
+</script>
+</body>
+</html>

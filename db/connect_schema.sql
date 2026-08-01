@@ -12,6 +12,10 @@ CREATE TABLE IF NOT EXISTS connect_connector_config (
   tenant_id TEXT, connector_id TEXT, kind TEXT, profile TEXT,
   base_url TEXT, config TEXT, secret_ref TEXT, scope TEXT, status TEXT DEFAULT 'draft',
   PRIMARY KEY (tenant_id, connector_id) );
+-- Self-service EMR onboarding (Part 3, Increment 1) REUSES this table with NO schema change / NO ALTER:
+-- each onboarded connection is a row where connector_id = a fresh connectionId and the config JSON holds
+-- { source:"onboard", name, authMethod, headerName?, tokenEndpoint?, clientId?, sealed:<envelope ciphertext
+-- of the credential material>, createdAt, updatedAt, lastTest }. status flips draft->active on a passing test.
 
 CREATE TABLE IF NOT EXISTS connect_audit_event (    -- append-only; metadata only, NO PHI
   id TEXT PRIMARY KEY, tenant_id TEXT, ts TEXT, actor TEXT,
