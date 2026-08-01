@@ -850,7 +850,7 @@ export async function onRequest(context) {
   if (seg === "usage") {
     const store = usageKv(env);
     const who = await identify(request, env);
-    return json(await doctorUsageSummary(env, store, who.id, Date.now()));
+    return json(await doctorUsageSummary(env, store, usageKeyFor(who), Date.now()));
   }
 
   if (seg === "health") {
