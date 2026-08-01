@@ -51,9 +51,13 @@ function buildRestJsonRow(body) {
   if (auth.method !== "token") throw new OnboardError("invalid", "auth.method must be 'token' for type 'rest-json'");
   if (!nonEmpty(auth.token)) throw new OnboardError("invalid", "auth.token required for method 'token'");
   const config = { source: "onboard", name: String(body.name).trim(), type: "rest-json", authMethod: "token", createdAt: now(), updatedAt: now(), lastTest: null };
-  if (body.headerName != null) { if (!nonEmpty(body.headerName)) throw new OnboardError("invalid", "headerName must be a non-empty string"); config.headerName = String(body.headerName); }
-  if (body.resultsPath != null) { if (!nonEmpty(body.resultsPath)) throw new OnboardError("invalid", "resultsPath must be a non-empty string"); config.resultsPath = String(body.resultsPath); }
-  if (body.patientParam != null) { if (!nonEmpty(body.patientParam)) throw new OnboardError("invalid", "patientParam must be a non-empty string"); config.patientParam = String(body.patientParam); }
+  // Shape-validate the admin-supplied request-shaping fields (not just non-empty): resultsPath must be a real
+  // absolute PATH (no query/fragment/whitespace/@/control), so it cannot silently drop the patient-scoping
+  // query via a '#' fragment (which would fetch unfiltered/all-patient data) or pivot to another host:port.
+  // patientParam is a query-parameter NAME (no &/=/# injection); headerName is an HTTP header token (no CRLF).
+  if (body.headerName != null) { if (!nonEmpty(body.headerName) || !/^[A-Za-z0-9-]+$/.test(body.headerName)) throw new OnboardError("invalid", "headerName must be a simple header token (letters, digits, dashes)"); config.headerName = String(body.headerName); }
+  if (body.resultsPath != null) { if (!nonEmpty(body.resultsPath) || !/^\/[^\s#?@\x00-\x1f]*$/.test(body.resultsPath)) throw new OnboardError("invalid", "resultsPath must be an absolute path (start with /) with no query, fragment, whitespace, @ or control characters"); config.resultsPath = String(body.resultsPath); }
+  if (body.patientParam != null) { if (!nonEmpty(body.patientParam) || !/^[A-Za-z0-9_.-]+$/.test(body.patientParam)) throw new OnboardError("invalid", "patientParam must be a simple query-parameter name (letters, digits, _ . -)"); config.patientParam = String(body.patientParam); }
   if (body.columnMap != null) { if (typeof body.columnMap !== "object" || Array.isArray(body.columnMap)) throw new OnboardError("invalid", "columnMap must be an object"); config.columnMap = body.columnMap; }
   return { baseUrl: base.href.replace(/\/$/, ""), config };
 }

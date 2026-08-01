@@ -131,3 +131,18 @@ test("list surfaces rest-json connections (resultsPath/patientParam) and never s
   assert.equal(list[0].patientParam, "mrn");
   assert.equal(JSON.stringify(list).includes("sekret-rest-456"), false);
 });
+
+test("save SHAPE-validates rest-json request-shaping fields (no fragment/query/host-pivot/header-injection)", async () => {
+  const db = seedDb();
+  // Important: a '#' in resultsPath makes the patient-scoping query a URL fragment (never sent on the wire) ->
+  // a silent unfiltered/all-patient fetch. Minor: a ':port' or non-'/' path pivots the host. Both fail closed.
+  for (const bad of ["/results#dummy", ":8080/internal", "results", "/a b", "/x?y=1", "/@evil.com"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...restBody, resultsPath: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "resultsPath '" + bad + "' must be rejected");
+  }
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...restBody, patientParam: "x&admin=true" }), (e) => e.klass === "invalid");
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...restBody, headerName: "X-Bad\r\nEvil: 1" }), (e) => e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);   // nothing was persisted
+  const ok = await saveConnection(deps(db), req, env, "t1", { ...restBody, resultsPath: "/api/v2/results", patientParam: "mrn_id" });
+  assert.ok(ok.connectionId);                                            // a clean absolute path + simple param name is accepted
+});
