@@ -11,6 +11,7 @@ import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_conn
 import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
 import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
 import { fileConnector } from "../../_connect/connectors/file/connector.js";
+import { fhirPushConnector } from "../../_connect/connectors/fhir-push/connector.js"; // Track B: generic FHIR-push webhook
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -31,10 +32,12 @@ export async function onRequest(context) {
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
   }
-  // Track B: HMAC-gated legacy-feed ingest (HL7 v2 + file/CSV). No StewardMD actor; tenant from the feed row.
-  if (/^\/ingress\/hl7/.test(path) || /^\/ingress\/file/.test(path)) {
-    const kind = /^\/ingress\/hl7/.test(path) ? "hl7v2" : "file";
-    const feedDeps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), connectors: { hl7v2: hl7v2Connector, file: fileConnector }, audit: makeAuditSink(env, env.CONNECT_DB), now: () => Date.now() };
+  // Track B: HMAC-gated feed ingest. No StewardMD actor; tenant from the feed row. HL7 v2 + file/CSV keep the
+  // HL7 flag; the generic FHIR-push webhook (/ingress/fhir) is routed to the SAME spine with kind 'fhir-push'
+  // and its OWN flag. The /ingress/fhir match is anchored (not /ingress/fhir-r4, which stays reserved -> 501).
+  if (/^\/ingress\/hl7/.test(path) || /^\/ingress\/file/.test(path) || /^\/ingress\/fhir(?:\/|$)/.test(path)) {
+    const kind = /^\/ingress\/hl7/.test(path) ? "hl7v2" : /^\/ingress\/fhir(?:\/|$)/.test(path) ? "fhir-push" : "file";
+    const feedDeps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), connectors: { hl7v2: hl7v2Connector, file: fileConnector, "fhir-push": fhirPushConnector }, audit: makeAuditSink(env, env.CONNECT_DB), now: () => Date.now() };
     return handleFeedIngest(env, feedDeps, request, kind);
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });

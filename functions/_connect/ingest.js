@@ -7,6 +7,11 @@ import { validateBundle } from "./canonical/validate.js";
 import { hmacPseudonym } from "./audit.js";
 
 export function flagHl7On(env) { return flagOn(env) && String(env && env.CONNECT_HL7_FLAG) === "1"; }   // smd_connect AND smd_connect_hl7
+// The generic push WEBHOOK (FHIR-push feed) has its OWN ingest flag so it can go live independently of HL7.
+export function flagFhirPushOn(env) { return flagOn(env) && String(env && env.CONNECT_FHIR_PUSH_FLAG) === "1"; }   // smd_connect AND smd_connect_fhir_push
+// Per-kind ingest gate. hl7v2 + file keep the EXISTING HL7 flag unchanged (backward-compatible); the
+// fhir-push webhook is gated by its own flag. Fail-closed: an unknown kind resolves to the HL7 gate.
+function ingestFlagOn(env, kind) { return kind === "fhir-push" ? flagFhirPushOn(env) : flagHl7On(env); }
 
 const FRESH_MS = 300_000;
 const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
@@ -28,7 +33,7 @@ export async function correlateFeed(db, feedId) {
 }
 
 export async function handleFeedIngest(env, deps, request, kind) {
-  if (!flagHl7On(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+  if (!ingestFlagOn(env, kind)) return jsonResponse({ error: "not_found" }, { status: 404 });
   const t0 = (deps.now ? deps.now() : Date.now());
   const h = request.headers;
   const feedId = h.get("X-SMD-Feed"), ts = h.get("X-SMD-Timestamp"), sig = h.get("X-SMD-Signature");

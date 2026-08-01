@@ -53,7 +53,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=document.querySelectorAll('#aType option'); var en=[].slice.call(o).filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=5 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && [].slice.call(o).filter(function(x){return x.disabled;}).length>=2;`) === true, "type picker shows FHIR + CSV + HL7 active and REST/DICOM disabled 'coming soon'");
+  ok(await ev(`var o=document.querySelectorAll('#aType option'); var en=[].slice.call(o).filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && [].slice.call(o).filter(function(x){return x.disabled;}).length>=2;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook active and REST/DICOM disabled 'coming soon'");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -83,6 +83,20 @@ try {
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
+  // Webhook / FHIR push type: activates the webhook subform; create returns the ingest URL (/ingress/fhir) +
+  // a one-time signing secret + the signed-POST config hint (POST a FHIR Bundle/resource).
+  ok(await ev(`document.getElementById("aType").value="webhook"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fWebhook")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none";`) === true, "Webhook type activates the webhook subform and hides the FHIR + HL7 fields");
+  await ev(`window.ConnectEMR.setTenant("t-wh"); window.ConnectEMR.setName("EMR Push");
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"){ return Promise.resolve({s:200,d:{ok:true,feedId:"wh-abc123",ingestUrl:"https://stewardmd.in/api/connect/ingress/fhir",secret:"WH-HMAC-KEY-0001",headers:{feed:"X-SMD-Feed",timestamp:"X-SMD-Timestamp",signature:"X-SMD-Signature"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    }); window.ConnectEMR.webhookCreate(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=document.getElementById("whResult"); return getComputedStyle(r).display!=="none" && document.getElementById("whUrl").textContent.indexOf("/api/connect/ingress/fhir")>=0 && document.getElementById("whSecret").value==="WH-HMAC-KEY-0001";`) === true, "Webhook create shows the real FHIR-push ingest URL and the one-time signing secret");
+  ok(await ev(`var h=document.getElementById("whHint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("wh-abc123")>=0 && h.indexOf("FHIR")>=0 && h.indexOf("\\u2014")<0;`) === true, "Webhook config hint explains the signed FHIR-push contract (no em-dash)");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
   // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
   // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
   await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
@@ -97,12 +111,13 @@ try {
   ok(await ev(`return document.getElementById("dash").innerHTML.indexOf("No connections yet")>=0;`) === true, "auto-select triggers the dashboard load (empty state for a tenant with no connections)");
 
   // ---- Part 3: unified DASHBOARD (GET /all) MERGES FHIR connections + HL7 feeds into one table ----
-  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,total:2},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadDashboard(); return 1;`);
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,webhook:1,total:3},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}],webhook:[{feedId:"wh-xyz",name:"EMR Push Feed",status:"active",connector:"fhir-push"}]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadDashboard(); return 1;`);
   await sleep(300);
   ok(await ev(`return !!document.querySelector('#dash table.dash');`) === true, "the dashboard renders a single table");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf(">FHIR<")>=0 && h.indexOf("r4.smarthealthit.org")>=0 && h.indexOf("Connected")>=0 && h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "the FHIR row renders with a FHIR badge, host, Connected status, and Test/Pull/Delete");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("HL7 v2")>=0 && h.indexOf("feed-xyz")>=0 && h.indexOf('data-fact="copy"')>=0 && h.indexOf('data-fact="del"')>=0;`) === true, "the HL7 feed row renders in the SAME table with an HL7 badge, feed id, and Copy URL / Delete");
-  ok(await ev(`var c=document.getElementById("dashCounts").textContent; return c.indexOf("2 connection")>=0 && c.indexOf("1 FHIR")>=0 && c.indexOf("1 HL7")>=0;`) === true, "the dashboard shows merged counts (2 total = 1 FHIR + 1 HL7)");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("EMR Push Feed")>=0 && h.indexOf("FHIR push")>=0 && h.indexOf("wh-xyz")>=0 && h.indexOf('data-wact="copy"')>=0 && h.indexOf('data-wact="del"')>=0;`) === true, "the webhook feed row renders in the SAME table with a FHIR push badge, feed id, and Copy URL / Delete");
+  ok(await ev(`var c=document.getElementById("dashCounts").textContent; return c.indexOf("3 connection")>=0 && c.indexOf("1 FHIR")>=0 && c.indexOf("1 HL7")>=0 && c.indexOf("1 Webhook")>=0;`) === true, "the dashboard shows merged counts (3 total = 1 FHIR + 1 HL7 + 1 Webhook)");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("S3CR3T")<0 && h.indexOf("sealed")<0 && h.indexOf("\\u2014")<0;`) === true, "NO secret material in the dashboard DOM, and no em-dash");
 
   // Copy URL (HL7) surfaces the constant webhook URL; Delete actions call the right endpoints and reload.
@@ -117,6 +132,10 @@ try {
   await ev(`window.ConnectEMR.renderDash([{connectionId:"c-1",name:"X",type:"fhir",fhirBaseUrl:"https://h/fhir",authMethod:"token"}],[{feedId:"feed-xyz",name:"F",status:"active",allowedMessageTypes:[]}],{fhir:1,hl7:1,total:2}); window.__del=[]; document.querySelector('#dash [data-fact="del"]').click(); return 1;`);
   await sleep(300);
   ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/hl7-feed/feed-xyz")>=0;`) === true, "HL7 Delete calls DELETE /hl7-feed/<id>");
+  // re-render with a webhook row, then delete the webhook feed
+  await ev(`window.ConnectEMR.renderDash([],[],{fhir:0,hl7:0,webhook:1,total:1},[{feedId:"wh-xyz",name:"W",status:"active"}]); window.__del=[]; document.querySelector('#dash [data-wact="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/webhook-feed/wh-xyz")>=0;`) === true, "Webhook Delete calls DELETE /webhook-feed/<id>");
 
   // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);

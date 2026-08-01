@@ -102,10 +102,11 @@
           <option value="fhir" selected>FHIR (R4)</option>
           <option value="csv">CSV / flat file</option>
           <option value="hl7">HL7 v2 feed</option>
+          <option value="webhook">Webhook / FHIR push</option>
           <option value="rest" disabled>REST / custom API (coming soon)</option>
           <option value="dicom" disabled>DICOM (coming soon)</option>
         </select>
-        <div class="soon">FHIR R4, CSV / flat file and HL7 v2 feeds are available now. REST and DICOM connect through the same wizard and are coming soon.</div>
+        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds and Webhook / FHIR push are available now. REST and DICOM connect through the same wizard and are coming soon.</div>
 
        <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
@@ -180,6 +181,25 @@
           <div class="hint" id="hl7Hint" style="margin-top:8px"></div>
         </div>
        </div>
+
+       <!-- Webhook / FHIR push: register an inbound HMAC-gated webhook the EMR POSTs a FHIR Bundle/resource to. -->
+       <div id="fWebhook" style="display:none">
+        <div class="hint" style="margin-top:4px">Your EMR or integration engine POSTs a FHIR R4 Bundle (or a single FHIR resource) to a per-feed webhook. We generate a signing secret and a webhook URL. The secret is shown once, so save it right away. The pushed FHIR is normalized to StewardMD's canonical model.</div>
+        <div style="margin-top:14px"><button class="primary" id="whCreate">Create webhook</button></div>
+        <div class="msg" id="whMsg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="whResult" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="whUrl" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="whSecret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="whCopy">Copy</button></div>
+          </div>
+          <div class="hint" id="whHint" style="margin-top:8px"></div>
+        </div>
+       </div>
       </div>
 
       <!-- Connections dashboard: this organization's FHIR connections AND HL7 v2 feeds in one table. -->
@@ -252,9 +272,10 @@
   // ---- auth method toggle ----
   $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
 
-  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed) ----
-  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7";
-    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fFhir").style.display=(csv||hl7)?"none":""; }
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none";
+    $("fFhir").style.display=(csv||hl7||wh)?"none":""; }
   $("aType").onchange=applyType;
 
   // ---- CSV upload: one-shot parse + preview (no saved connection) ----
@@ -326,16 +347,53 @@
   $("hl7Create").onclick=hl7CreateGo;
   $("hl7Copy").onclick=function(){ var i=$("hl7Secret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } hl7Say("ok","Secret copied. Store it somewhere safe now."); };
 
-  // The constant webhook URL a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
-  // URL path), so this is safe to copy and is NOT a secret.
+  // ---- Webhook / FHIR push: create (secret shown once) / copy URL / delete ----
+  function whSay(k,t){ say("whMsg",k,t); }
+  function renderWebhookCreated(d){
+    d=d||{}; $("whResult").style.display="";
+    $("whUrl").textContent=d.ingestUrl||"";
+    $("whSecret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("whHint").innerHTML='POST a FHIR R4 Bundle or a single FHIR resource as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function whCreateGo(){
+    if(!tenant()){ whSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ whSay("err","A webhook name is required."); return; }
+    $("whCreate").disabled=true; whSay("","Creating webhook…");
+    jpost(API+"/webhook-feed",{tenantId:tenant(),name:name}).then(function(x){
+      $("whCreate").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ whSay("err","Your account cannot manage webhooks for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ whSay("err",httpErr(x)); return; }
+      whSay("ok","Webhook created. Save the signing secret below now, it will not be shown again.");
+      renderWebhookCreated(x.d); loadDashboard();
+    }).catch(function(){ $("whCreate").disabled=false; whSay("err","Sign in first."); });
+  }
+  $("whCreate").onclick=whCreateGo;
+  $("whCopy").onclick=function(){ var i=$("whSecret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } whSay("ok","Secret copied. Store it somewhere safe now."); };
+
+  // The constant webhook URLs a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
+  // URL path), so these are safe to copy and are NOT secrets. HL7 -> /ingress/hl7; FHIR push -> /ingress/fhir.
   function ingestUrl(){ try{ return location.origin+"/api/connect/ingress/hl7"; }catch(e){ return "/api/connect/ingress/hl7"; } }
+  function webhookIngestUrl(){ try{ return location.origin+"/api/connect/ingress/fhir"; }catch(e){ return "/api/connect/ingress/fhir"; } }
   function copyFeedUrl(){ var u=ingestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
+  function copyWebhookUrl(){ var u=webhookIngestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
   function doDeleteFeed(id){
     if(!confirm("Delete this feed? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
     api(API+"/hl7-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
       if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
       if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
       say("tenantMsg","ok","Feed deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+  function doDeleteWebhook(id){
+    if(!confirm("Delete this webhook? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/webhook-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Webhook deleted."); loadDashboard();
     }).catch(function(){ say("tenantMsg","err","Sign in first."); });
   }
 
@@ -472,13 +530,24 @@
       '<td class="acts"><button class="ghost" data-fact="copy" data-fid="'+id+'">Copy URL</button><button class="del" data-fact="del" data-fid="'+id+'">Delete</button></td>'+
     '</tr>';
   }
-  function renderDash(fhir,hl7,counts){
-    fhir=fhir||[]; hl7=hl7||[];
-    var c=$("dashCounts"), total=(counts&&counts.total!=null)?counts.total:(fhir.length+hl7.length);
-    var nf=(counts&&counts.fhir!=null)?counts.fhir:fhir.length, nh=(counts&&counts.hl7!=null)?counts.hl7:hl7.length;
-    c.textContent=total?(total+" connection"+(total===1?"":"s")+" ("+nf+" FHIR, "+nh+" HL7)"):"";
-    if(!total){ $("dash").innerHTML='<div class="hint">No connections yet. Add a FHIR connection or an HL7 v2 feed above.</div>'; return; }
-    var rows=fhir.map(fhirRow).join("")+hl7.map(hl7Row).join("");
+  function webhookRow(f){ var id=esc(f.feedId);
+    return '<tr class="drow" data-wid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">FHIR Bundle / resource push</div></td>'+
+      '<td><span class="cat">FHIR push</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-wact="copy" data-wid="'+id+'">Copy URL</button><button class="del" data-wact="del" data-wid="'+id+'">Delete</button></td>'+
+    '</tr>';
+  }
+  function renderDash(fhir,hl7,counts,webhook){
+    fhir=fhir||[]; hl7=hl7||[]; webhook=webhook||[];
+    var c=$("dashCounts");
+    var nf=(counts&&counts.fhir!=null)?counts.fhir:fhir.length, nh=(counts&&counts.hl7!=null)?counts.hl7:hl7.length, nw=(counts&&counts.webhook!=null)?counts.webhook:webhook.length;
+    var total=(counts&&counts.total!=null)?counts.total:(nf+nh+nw);
+    var seg=[nf+" FHIR", nh+" HL7"]; if(nw) seg.push(nw+" Webhook");
+    c.textContent=total?(total+" connection"+(total===1?"":"s")+" ("+seg.join(", ")+")"):"";
+    if(!total){ $("dash").innerHTML='<div class="hint">No connections yet. Add a FHIR connection, an HL7 v2 feed or a webhook above.</div>'; return; }
+    var rows=fhir.map(fhirRow).join("")+hl7.map(hl7Row).join("")+webhook.map(webhookRow).join("");
     $("dash").innerHTML='<table class="dash"><thead><tr><th>Name</th><th>Type</th><th>Host / feed ID</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
   }
   function loadDashboard(){
@@ -488,22 +557,25 @@
       if(x.s===404){ showFlagOff(); return; }
       hideFlagOff();
       if(x.s!==200||!x.d||x.d.ok===false){ $("dash").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("dashCounts").textContent=""; return; }
-      renderDash(x.d.fhir||[], x.d.hl7||[], x.d.counts||null);
+      renderDash(x.d.fhir||[], x.d.hl7||[], x.d.counts||null, x.d.webhook||[]);
     }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
   }
 
-  // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete) ----
+  // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
   function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
   $("dash").addEventListener("click",function(e){
-    var b=e.target.closest("[data-act],[data-fact]"); if(!b)return;
+    var b=e.target.closest("[data-act],[data-fact],[data-wact]"); if(!b)return;
     if(b.hasAttribute("data-act")){ var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
       if(act==="test"){ runTestRow(id); }
       else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
       else if(act==="pullgo"){ doPull(id); }
       else if(act==="del"){ doDelete(id); }
-    } else { var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
+    } else if(b.hasAttribute("data-fact")){ var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
       if(fact==="copy"){ copyFeedUrl(); }
       else if(fact==="del"){ doDeleteFeed(fid); }
+    } else { var wid=b.getAttribute("data-wid"), wact=b.getAttribute("data-wact");
+      if(wact==="copy"){ copyWebhookUrl(); }
+      else if(wact==="del"){ doDeleteWebhook(wid); }
     }
   });
 
@@ -521,6 +593,7 @@
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
+    webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };

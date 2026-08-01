@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS connect_feed (
   feed_id        TEXT PRIMARY KEY,               -- opaque, non-PHI
   tenant_id      TEXT NOT NULL,
-  connector_id   TEXT NOT NULL,                  -- 'hl7v2' | 'file'
+  connector_id   TEXT NOT NULL,                  -- 'hl7v2' | 'file' | 'fhir-push' (generic FHIR push webhook)
   secret_ref     TEXT NOT NULL,                  -- env name of the envelope-sealed HMAC secret (statically-provisioned feeds)
   secret_sealed  TEXT,                           -- envelope-sealed HMAC secret stored INLINE (self-service feeds); NEVER the raw secret
   msg_types      TEXT,                           -- JSON allow-list, e.g. ["ORU","ADT","MDM"]

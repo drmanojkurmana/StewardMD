@@ -12,11 +12,15 @@
 // feed id/status for HL7) — no faked telemetry. A non-member / unauthenticated caller throws (fail-closed).
 import { listConnections } from "./store.js";
 import { listFeeds } from "./hl7-feed.js";
+import { listFeeds as listWebhookFeeds } from "./webhook-feed.js";
 
-// Returns { fhir:[...safeView], hl7:[...safeFeedView], counts:{ fhir, hl7, total } } for the selected tenant.
-// Both sub-calls independently enforce auth + RBAC + tenant membership; if either denies, this rejects.
+// Returns { fhir:[...safeView], hl7:[...safeFeedView], webhook:[...safeFeedView], counts } for the selected
+// tenant. Each sub-call independently enforces auth + RBAC + tenant membership; if any denies, this rejects.
+// The webhook (FHIR-push) feeds are ADDITIVE: existing fhir/hl7 keys are unchanged; a new webhook key + count
+// are added and total now includes them.
 export async function listAll(deps, request, env, tenantId) {
-  const fhir = await listConnections(deps, request, env, tenantId);   // requireCan connector:read + tenant-scoped
-  const hl7 = await listFeeds(deps, request, env, tenantId);          // requireCan connector:read + tenant-scoped
-  return { fhir, hl7, counts: { fhir: fhir.length, hl7: hl7.length, total: fhir.length + hl7.length } };
+  const fhir = await listConnections(deps, request, env, tenantId);       // requireCan connector:read + tenant-scoped
+  const hl7 = await listFeeds(deps, request, env, tenantId);              // requireCan connector:read + tenant-scoped
+  const webhook = await listWebhookFeeds(deps, request, env, tenantId);   // requireCan connector:read + tenant-scoped
+  return { fhir, hl7, webhook, counts: { fhir: fhir.length, hl7: hl7.length, webhook: webhook.length, total: fhir.length + hl7.length + webhook.length } };
 }

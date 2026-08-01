@@ -13,6 +13,7 @@ import { listMyTenants } from "../../../functions/_connect/enterprise/members.js
 import { listAll } from "../../../functions/_connect/onboard/dashboard.js";
 import { saveConnection } from "../../../functions/_connect/onboard/store.js";
 import { createFeed } from "../../../functions/_connect/onboard/hl7-feed.js";
+import { createFeed as createWebhookFeed } from "../../../functions/_connect/onboard/webhook-feed.js";
 import { makeSecrets } from "../../../functions/_connect/secrets.js";
 import { onRequest } from "../../../functions/api/connect/onboard/[[path]].js";
 import { makeOnboardDb } from "./onboard-db.mjs";
@@ -74,28 +75,33 @@ test("GET /tenants: an actor with no memberships gets an empty list (the no-memb
   assert.deepEqual(await listMyTenants(asUser(db, "nobody"), req.request, env), []);
 });
 
-test("unified /all: MERGES this tenant's FHIR connections + HL7 feeds with counts", async () => {
+test("unified /all: MERGES this tenant's FHIR connections + HL7 feeds + webhook feeds with counts", async () => {
   const db = world();
   await saveConnection(asUser(db, "u1"), req.request, env, "t-a", tokenBody("Main FHIR"));
   await saveConnection(asUser(db, "u1"), req.request, env, "t-a", tokenBody("Backup FHIR"));
   await createFeed(asUser(db, "u1"), req.request, env, "t-a", { name: "Lab Feed", allowedMessageTypes: ["ORU^R01"] });
+  await createWebhookFeed(asUser(db, "u1"), req.request, env, "t-a", { name: "Push Feed" });
 
   const all = await listAll(asUser(db, "u1"), req.request, env, "t-a");
   assert.equal(all.fhir.length, 2);
   assert.equal(all.hl7.length, 1);
-  assert.deepEqual(all.counts, { fhir: 2, hl7: 1, total: 3 });
+  assert.equal(all.webhook.length, 1);
+  assert.deepEqual(all.counts, { fhir: 2, hl7: 1, webhook: 1, total: 4 });
   assert.equal(all.fhir[0].type, "fhir");
   assert.equal(all.hl7[0].name, "Lab Feed");
   assert.deepEqual(all.hl7[0].allowedMessageTypes, ["ORU^R01"]);
+  assert.equal(all.webhook[0].name, "Push Feed");
+  assert.equal(all.webhook[0].connector, "fhir-push");
 });
 
 test("unified /all: NEVER returns secret material (sealed token / hmac secret)", async () => {
   const db = world();
   await saveConnection(asUser(db, "u1"), req.request, env, "t-a", tokenBody("Secure FHIR"));
   const created = await createFeed(asUser(db, "u1"), req.request, env, "t-a", { name: "Secure Feed" });
+  const createdW = await createWebhookFeed(asUser(db, "u1"), req.request, env, "t-a", { name: "Secure Push" });
   const all = await listAll(asUser(db, "u1"), req.request, env, "t-a");
   const blob = JSON.stringify(all);
-  for (const leak of ["sekret-bearer-Secure FHIR", "sealed", "secret_sealed", "secret_ref", created.secret]) {
+  for (const leak of ["sekret-bearer-Secure FHIR", "sealed", "secret_sealed", "secret_ref", created.secret, createdW.secret]) {
     assert.equal(blob.includes(leak), false);
   }
 });

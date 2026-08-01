@@ -16,6 +16,7 @@ import { testConnection } from "../../../_connect/onboard/probe.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
 import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7-feed.js";
+import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
 import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants } from "../../../_connect/enterprise/members.js";
 
@@ -57,6 +58,12 @@ export async function onRequest(context) {
     if (method === "POST" && seg === "hl7-feed") return jsonResponse(await createFeed(deps, request, env, tid, body));
     if (method === "GET" && seg === "hl7-feed/list") return jsonResponse({ ok: true, feeds: await listFeeds(deps, request, env, tid) });
     if (method === "DELETE" && parts[0] === "hl7-feed" && parts[1]) return jsonResponse(await deleteFeed(deps, request, env, tid, parts[1]));
+    // Generic push WEBHOOK (FHIR-push) self-service feeds (create/list/revoke). Same shape as HL7; the created
+    // feed is a connect_feed row the Track-B ingest spine reads, and the ingestUrl returned is the REAL
+    // /api/connect/ingress/fhir endpoint (routes pushed FHIR through normalizeFhir -> SCCM).
+    if (method === "POST" && seg === "webhook-feed") return jsonResponse(await createWebhookFeed(deps, request, env, tid, body));
+    if (method === "GET" && seg === "webhook-feed/list") return jsonResponse({ ok: true, feeds: await listWebhookFeeds(deps, request, env, tid) });
+    if (method === "DELETE" && parts[0] === "webhook-feed" && parts[1]) return jsonResponse(await deleteWebhookFeed(deps, request, env, tid, parts[1]));
     if (method === "DELETE" && parts.length === 1 && parts[0]) return jsonResponse(await deleteConnection(deps, request, env, tid, parts[0]));
     return jsonResponse({ error: "not_found" }, { status: 404 });
   } catch (e) {
