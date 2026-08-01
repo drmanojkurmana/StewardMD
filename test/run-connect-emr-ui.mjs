@@ -49,7 +49,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=document.querySelectorAll('#aType option'); var en=[].slice.call(o).filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=5 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && [].slice.call(o).filter(function(x){return x.disabled;}).length>=3;`) === true, "type picker shows FHIR + CSV active and the rest disabled 'coming soon'");
+  ok(await ev(`var o=document.querySelectorAll('#aType option'); var en=[].slice.call(o).filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=5 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && [].slice.call(o).filter(function(x){return x.disabled;}).length>=2;`) === true, "type picker shows FHIR + CSV + HL7 active and REST/DICOM disabled 'coming soon'");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -62,6 +62,27 @@ try {
   ok(await ev(`var j=document.getElementById("csvJson"); return getComputedStyle(j).display!=="none" && j.textContent.indexOf('"sccmVersion": "1.0"')>=0 && j.textContent.indexOf("Hemoglobin")>=0;`) === true, "CSV upload posts and renders the normalized SCCM bundle");
   ok(await ev(`var w=document.getElementById("csvWarn"); return getComputedStyle(w).display!=="none" && w.innerHTML.indexOf("unmapped column")>=0 && w.innerHTML.indexOf("ragged row")>=0;`) === true, "CSV warnings list surfaces the structural warnings");
   ok(await ev(`var c=document.getElementById("csvCounts"); return c.textContent.indexOf("2 row")>=0 && c.textContent.indexOf("4 column")>=0 && c.textContent.indexOf("\\u2014")<0;`) === true, "CSV counts show rows x columns (no em-dash)");
+  // reset back to FHIR for the remaining list mock
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // HL7 v2 feed type: activates the HL7 subform, create returns the ingest URL + one-time secret, list renders
+  // a feed row with a delete affordance, and delete calls the DELETE endpoint (no secret ever shown in the list).
+  ok(await ev(`document.getElementById("aType").value="hl7"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fHl7")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none";`) === true, "HL7 type activates the HL7 feed subform and hides the FHIR + CSV fields");
+  await ev(`window.ConnectEMR.setTenant("t-hl7"); window.ConnectEMR.setName("GIMSR Lab Feed"); window.ConnectEMR.setHl7Types("ORU^R01");
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"){ return Promise.resolve({s:200,d:{ok:true,feedId:"feed-abc123",ingestUrl:"https://stewardmd.in/api/connect/ingress/hl7",secret:"S3CR3T-HMAC-KEY-0001",headers:{feed:"X-SMD-Feed",timestamp:"X-SMD-Timestamp",signature:"X-SMD-Signature"},allowedMessageTypes:["ORU^R01"]}}); }
+      return Promise.resolve({s:200,d:{ok:true,feeds:[{feedId:"feed-abc123",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"],createdAt:"2026-08-01T10:00:00Z"}]}});
+    }); window.ConnectEMR.hl7Create(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=document.getElementById("hl7Result"); return getComputedStyle(r).display!=="none" && document.getElementById("hl7Url").textContent.indexOf("/api/connect/ingress/hl7")>=0 && document.getElementById("hl7Secret").value==="S3CR3T-HMAC-KEY-0001";`) === true, "HL7 create shows the real ingest URL and the one-time signing secret");
+  ok(await ev(`var h=document.getElementById("hl7Hint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("feed-abc123")>=0 && h.indexOf("\\u2014")<0;`) === true, "HL7 config hint explains the signed-POST contract (no em-dash)");
+  ok(await ev(`var h=document.getElementById("hl7Feeds").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("feed-abc123")>=0 && h.indexOf("ORU^R01")>=0 && h.indexOf('data-fact="del"')>=0 && h.indexOf("S3CR3T-HMAC-KEY-0001")<0;`) === true, "HL7 feeds list renders the feed row with delete (and NEVER the secret)");
+  // delete: confirm() stubbed true, DELETE recorded, list refetches empty
+  await ev(`window.__hl7del=[]; window.confirm=function(){return true;};
+    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="DELETE"){ window.__hl7del.push(path); return Promise.resolve({s:200,d:{ok:true}}); } return Promise.resolve({s:200,d:{ok:true,feeds:[]}}); });
+    document.querySelector('#hl7Feeds [data-fact="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__hl7del.length===1 && window.__hl7del[0].indexOf("/hl7-feed/feed-abc123")>=0 && document.getElementById("hl7Feeds").innerHTML.indexOf("No HL7 feeds yet")>=0;`) === true, "HL7 delete calls the DELETE endpoint and the list empties");
   // reset back to FHIR for the remaining list mock
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 

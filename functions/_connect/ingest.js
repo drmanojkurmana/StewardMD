@@ -40,7 +40,13 @@ export async function handleFeedIngest(env, deps, request, kind) {
   try {
     feed = await correlateFeed(deps.db, feedId);
     if (!feed || String(feed.status) === "disabled") return sane(401);
-    secret = await deps.secrets.open(await deps.secrets.get(feed.secret_ref));
+    // Secret resolution: a self-service (onboard) feed carries its envelope-sealed HMAC secret INLINE in the
+    // row (secret_sealed) because env vars cannot be written at runtime; a statically-provisioned feed instead
+    // names an env var (secret_ref). Prefer the inline ciphertext, else fall back to the env-named one.
+    // Backward-compatible (rows without secret_sealed are unchanged). Revoke deletes the row, so a revoked feed
+    // never reaches here (correlateFeed -> null -> 401 above); a soft-disabled/erased one fails to open -> 401.
+    const sealed = feed.secret_sealed != null ? feed.secret_sealed : await deps.secrets.get(feed.secret_ref);
+    secret = sealed ? await deps.secrets.open(sealed) : null;
     if (!secret) return sane(401);
   } catch { return sane(401); }
   const expected = await hmacHex(secret, ts + "." + rawBody);

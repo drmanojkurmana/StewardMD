@@ -85,11 +85,11 @@
         <select id="aType">
           <option value="fhir" selected>FHIR (R4)</option>
           <option value="csv">CSV / flat file</option>
-          <option value="hl7" disabled>HL7 v2 (coming soon)</option>
+          <option value="hl7">HL7 v2 feed</option>
           <option value="rest" disabled>REST / custom API (coming soon)</option>
           <option value="dicom" disabled>DICOM (coming soon)</option>
         </select>
-        <div class="soon">FHIR R4 and CSV / flat file are available now. HL7 v2, REST and DICOM connect through the same wizard and are coming soon.</div>
+        <div class="soon">FHIR R4, CSV / flat file and HL7 v2 feeds are available now. REST and DICOM connect through the same wizard and are coming soon.</div>
 
        <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
@@ -143,6 +143,33 @@
         <div id="csvWarn" style="display:none"></div>
         <div class="json" id="csvJson" style="display:none"></div>
        </div>
+
+       <!-- HL7 v2 feed: register an inbound HMAC-gated webhook the hospital's integration engine POSTs to. -->
+       <div id="fHl7" style="display:none">
+        <label for="aHl7Types">Message types (optional)</label>
+        <input id="aHl7Types" maxlength="300" placeholder="e.g. ORU^R01, ADT^A01 (leave blank to accept any)" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">A feed receives HL7 v2 messages from your integration engine (Mirth, Rhapsody, and so on). We generate a signing secret and a webhook URL. The secret is shown once, so save it right away.</div>
+        <div style="margin-top:14px"><button class="primary" id="hl7Create">Create feed</button></div>
+        <div class="msg" id="hl7Msg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="hl7Result" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="hl7Url" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="hl7Secret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="hl7Copy">Copy</button></div>
+          </div>
+          <div class="hint" id="hl7Hint" style="margin-top:8px"></div>
+        </div>
+       </div>
+      </div>
+
+      <!-- HL7 feeds list -->
+      <div class="card" id="hl7Card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">HL7 v2 feeds</b><button class="ghost" id="hl7Reload" style="padding:7px 11px">Reload</button></div>
+        <div id="hl7Feeds" style="margin-top:12px"><div class="hint">Enter an organization / tenant ID above and load its feeds.</div></div>
       </div>
 
       <!-- Connections list -->
@@ -211,8 +238,9 @@
   // ---- auth method toggle ----
   $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
 
-  // ---- connection type toggle (FHIR connection vs one-shot CSV upload) ----
-  function applyType(){ var csv=$("aType").value==="csv"; $("fCsv").style.display=csv?"":"none"; $("fFhir").style.display=csv?"none":""; }
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fFhir").style.display=(csv||hl7)?"none":""; }
   $("aType").onchange=applyType;
 
   // ---- CSV upload: one-shot parse + preview (no saved connection) ----
@@ -254,6 +282,69 @@
     rd.onerror=function(){ csvSay("err","Could not read that file."); };
     rd.readAsText(f);
   };
+
+  // ---- HL7 v2 feed: create (secret shown once) / list / delete ----
+  function hl7Say(k,t){ say("hl7Msg",k,t); }
+  function parseTypes(){ var raw=($("aHl7Types").value||"").trim(); if(!raw) return undefined; var a=raw.split(",").map(function(s){return s.trim();}).filter(Boolean); return a.length?a:undefined; }
+  function renderHl7Created(d){
+    d=d||{}; $("hl7Result").style.display="";
+    $("hl7Url").textContent=d.ingestUrl||"";
+    $("hl7Secret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("hl7Hint").innerHTML='POST the raw HL7 v2 message as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function hl7CreateGo(){
+    if(!tenant()){ hl7Say("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ hl7Say("err","A feed name is required."); return; }
+    $("hl7Create").disabled=true; hl7Say("","Creating feed…");
+    var body={tenantId:tenant(),name:name}; var t=parseTypes(); if(t)body.allowedMessageTypes=t;
+    jpost(API+"/hl7-feed",body).then(function(x){
+      $("hl7Create").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ hl7Say("err","Your account cannot manage feeds for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ hl7Say("err",httpErr(x)); return; }
+      hl7Say("ok","Feed created. Save the signing secret below now, it will not be shown again.");
+      renderHl7Created(x.d); loadHl7Feeds();
+    }).catch(function(){ $("hl7Create").disabled=false; hl7Say("err","Sign in first."); });
+  }
+  $("hl7Create").onclick=hl7CreateGo;
+  $("hl7Copy").onclick=function(){ var i=$("hl7Secret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } hl7Say("ok","Secret copied. Store it somewhere safe now."); };
+
+  function renderHl7Feeds(feeds){
+    var el=$("hl7Feeds");
+    if(!feeds.length){ el.innerHTML='<div class="hint">No HL7 feeds yet. Create one above.</div>'; return; }
+    el.innerHTML=feeds.map(function(f){ var id=esc(f.feedId);
+      var types=(f.allowedMessageTypes&&f.allowedMessageTypes.length)?f.allowedMessageTypes.join(", "):"any";
+      return '<div class="item" data-fid="'+id+'">'+
+        '<div class="h"><span class="cat">hl7 v2</span><span class="st verified">'+esc(f.status||"active")+'</span><span class="t">'+esc(when(f.createdAt))+'</span></div>'+
+        '<div class="title">'+esc(f.name||"(unnamed)")+'</div>'+
+        '<div class="meta"><b>Feed ID:</b> '+id+' &middot; <b>Message types:</b> '+esc(types)+'</div>'+
+        '<div class="foot"><button class="del" data-fact="del" data-fid="'+id+'" style="margin-left:auto">Delete</button></div>'+
+      '</div>';
+    }).join("");
+  }
+  function loadHl7Feeds(){
+    if(!tenant()){ $("hl7Feeds").innerHTML='<div class="hint">Enter an organization / tenant ID above and load its feeds.</div>'; return; }
+    $("hl7Feeds").innerHTML='<div class="hint">Loading…</div>';
+    api(API+"/hl7-feed/list?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("hl7Feeds").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; return; }
+      renderHl7Feeds(x.d.feeds||[]);
+    }).catch(function(){ $("hl7Feeds").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  function doDeleteFeed(id){
+    if(!confirm("Delete this feed? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/hl7-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Feed deleted."); loadHl7Feeds();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+  $("hl7Feeds").addEventListener("click",function(e){ var b=e.target.closest("[data-fact]"); if(!b)return; if(b.getAttribute("data-fact")==="del") doDeleteFeed(b.getAttribute("data-fid")); });
+  $("hl7Reload").onclick=loadHl7Feeds;
 
   // ---- add / save ----
   function addBody(){
@@ -377,17 +468,20 @@
   });
 
   // ---- controls ----
-  $("tenantLoad").onclick=loadList;
+  function loadAll(){ loadList(); loadHl7Feeds(); }
+  $("tenantLoad").onclick=loadAll;
   $("listReload").onclick=loadList;
-  $("tenantId").addEventListener("keydown",function(e){ if(e.key==="Enter") loadList(); });
+  $("tenantId").addEventListener("keydown",function(e){ if(e.key==="Enter") loadAll(); });
 
   // ---- Firebase auth state ----
-  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u && tenant()) loadList(); }); }
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u && tenant()) loadAll(); }); }
   else { $("who").textContent="Firebase failed to load."; signedInUI(null); }
 
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
   window.ConnectEMR={ loadList:loadList, renderList:renderList, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult,
+    hl7Create:hl7CreateGo, loadHl7Feeds:loadHl7Feeds, renderHl7Feeds:renderHl7Feeds, renderHl7Created:renderHl7Created,
+    setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ $("tenantId").value=v; }, __setApi:function(fn){ api=fn; } };
 })();
 </script>
