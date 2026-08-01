@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-01
 **Status:** Design (approved in brainstorming; pending spec review)
-**Owner decisions locked:** per-person + per-feature limits · hard-block until midnight · identity via cached verified token, keyed by **email**.
+**Owner decisions locked:** per-person + per-feature limits · hard-block until midnight · identity via cached verified token, keyed by **email** · plus a best-effort **per-device abuse cap** (anti account-farming).
 
 ## 1. Goal
 
@@ -79,6 +79,15 @@ Owner dashboard ← GET /admin/users, /admin/user  ← aiu:doc:em:*, ai:ulimit:*
 Owner sets cap → POST /admin/user-limit → ai:ulimit:<email>
 ```
 
+### 4F. Per-device abuse cap (anti account-farming)
+
+A best-effort layer so one phone can't spin up many throwaway Gmail accounts for fresh limits. **Honest limits:** the device id resets on uninstall/reinstall and differs per device, so this is a speed-bump, not a wall — the global daily **cost** circuit breaker (`_usage.js`) remains the hard backstop.
+
+- **Client:** `id-token.js` (the new cache module) also caches `window.SMD_DEVICE.getId()` once on load (async → cached string), exposing `window.SMD_DEVICEID()` (sync, may be `null`). `aiHeaders()` attaches `X-SMD-Device: <cached id>` on every AI call (web + native), flag-guarded by `smd_ai_devicecap` (default on).
+- **Server:** in `checkQuota`/the AI gate, count AI requests per device per day: `aiu:dev:<deviceId>:<day>`. If `count >= deviceDailyCap` → `{ ok:false, reason:"device-cap" }` → **429** "Daily AI limit for this device reached." Applies to **both** guest and signed-in requests (device-level).
+- **Config:** `deviceDailyCap` from env `MAIK_DEVICE_DAILY_CAP` (default **300** — high enough that a shared clinical device / heavy legit user is never hit; only farming triggers it), KV-overridable via the AI Control Center (`ai:devicecap`). `0` = disabled.
+- **Fail-open:** no device id header, or KV error → do not block (never break a clinical call on abuse control).
+
 ## 5. Security & privacy
 
 - Email is taken **only** from the server-verified token — never a client-claimed value, so limits can't be spoofed.
@@ -105,13 +114,13 @@ Owner sets cap → POST /admin/user-limit → ai:ulimit:<email>
 
 ## 8. Files to change
 
-- `reasoning.js` — `aiHeaders()` attaches the cached token (flag-guarded, cached-only).
-- `id-token.js` (new) or `account.js` — background cached-token module + `window.SMD_IDTOKEN()`.
-- `functions/_usage.js` — `usageEmail()` helper (email from verified token).
+- `reasoning.js` — `aiHeaders()` attaches the cached token + `X-SMD-Device` (both flag-guarded, cached-only).
+- `id-token.js` (new) — background cache module: `window.SMD_IDTOKEN()` + `window.SMD_DEVICEID()`.
+- `functions/_usage.js` — `usageEmail()` helper (email from verified token) + `deviceCheck()` (per-device daily abuse cap).
 - `functions/_ai_usage.js` — `checkModuleQuota` per-user resolution; `recordAiUsage` email-keying; new `getUserLimit`/`setUserLimit`.
-- `functions/api/ai/[[path]].js` — email-keyed `gateAndCount` call; new `/admin/users`, `/admin/user`, `/admin/user-limit` endpoints.
-- `home.js` — AI Control Center "Users" tab + per-user limit editor.
-- `test/ai-usage.test.mjs` (extend) + `test/per-user-limits.test.mjs` (new).
+- `functions/api/ai/[[path]].js` — email-keyed `gateAndCount` call; per-device cap check; new `/admin/users`, `/admin/user`, `/admin/user-limit`, `/admin/device-cap` endpoints.
+- `home.js` — AI Control Center "Users" tab + per-user limit editor + device-cap setting.
+- `test/ai-usage.test.mjs` (extend) + `test/per-user-limits.test.mjs` (new, incl. device-cap).
 
 ## 9. Open items to resolve during implementation
 
