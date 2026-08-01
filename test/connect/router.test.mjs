@@ -15,7 +15,7 @@ test("context route ignores a body-supplied tenantId (server-derived only)", asy
   // No auth header in this request -> real _usage.identify() returns a guest object ({id:"ip:...",
   // guest:true}), not null -> resolveActor's `who.guest` check rejects it -> sanitized 401, NOT a
   // cross-tenant read of "attacker"'s tenant.
-  const res = await onRequest(post("/api/connect/context", { tenantId: "attacker", patientRef: "P1", scope: ["Patient"] }, { CONNECT_FLAG: "1" }));
+  const res = await onRequest(post("/api/connect/context", { tenantId: "attacker", patientRef: "P1", scope: ["Patient"] }, { CONNECT_FLAG: "1", CONNECT_FHIR_FLAG: "1" }));
   assert.equal(res.status, 401);                       // real identify() -> guest -> resolveActor rejects -> 401
   assert.notEqual(res.status, 200);
   assert.ok(res.status < 300 === false);               // non-2xx
@@ -35,7 +35,7 @@ test("authenticated caller (correct identify object shape) passes auth and is de
   // caller clears resolveActor and is denied downstream at resolveTenant's membership lookup (403/
   // "permission") because CONNECT_DB has no connect_membership rows — i.e. it fails at membership,
   // not at auth. This distinguishes the two identify sources and pins the bug.
-  const env = { CONNECT_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  const env = { CONNECT_FLAG: "1", CONNECT_FHIR_FLAG: "1", CONNECT_DB: makeMockDb({}) };
   const res = await onRequest(post("/api/connect/context",
     { tenantId: "t1", patientRef: "P1", scope: ["Patient"], connectorId: "fhir-r4" },
     env,

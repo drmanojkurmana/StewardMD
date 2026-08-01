@@ -1,6 +1,6 @@
 // functions/_connect/tenant.js — tenant/config load + sandbox-only gate (spec §6/§7, C6)
 import { SandboxViolation } from "./permission.js";
-export const SANDBOX_ALLOWLIST = ["launch.smarthealthit.org", "r4.smarthealthit.org", "synthea.local"];
+export const SANDBOX_ALLOWLIST = ["launch.smarthealthit.org", "r4.smarthealthit.org", "synthea.local", "smart-mock.local"]; // // VERIFY real hospital FHIR host(s) before non-sandbox use
 
 export async function loadConnectorConfig(db, tenantId, connectorId) {
   const r = await db.prepare("SELECT * FROM connect_connector_config WHERE tenant_id=?").bind(tenantId).all();

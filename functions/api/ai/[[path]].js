@@ -97,6 +97,7 @@ import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit } from "../../_ai_usage.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
+import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
@@ -968,6 +969,13 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
+        // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
+        // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
+        // CANONICAL SCCM context into pkg. SECURITY: applyConnectContext adds ONLY the R7-gated LLM-
+        // egress lane (real PHI never reaches the model on flag-on alone); when the BAA/no-retention
+        // gate is closed it adds NOTHING to pkg. Fail-safe: any Connect error degrades to "no context"
+        // and never breaks/delays the answer. Inert + byte-identical unless BOTH Connect flags are on.
+        if (maikWiringOn(env)) { try { await applyConnectContext(env, request, pkg); } catch (e) {} }
         let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
         // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
         // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:

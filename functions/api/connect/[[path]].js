@@ -12,6 +12,10 @@ import { followcareSource } from "../../_connect/abdm/hip-sources/followcare.js"
 import { identify } from "../../_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { sweep } from "../../_connect/abdm/state.js";
+import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
+import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
+import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
+import { fileConnector } from "../../_connect/connectors/file/connector.js";
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -34,6 +38,12 @@ export async function onRequest(context) {
       source: followcareSource, handleDiscovery, serveTransfer, putHipConsent,
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
+  }
+  // Track B: HMAC-gated legacy-feed ingest (HL7 v2 + file/CSV). No StewardMD actor; tenant from the feed row.
+  if (/^\/ingress\/hl7/.test(path) || /^\/ingress\/file/.test(path)) {
+    const kind = /^\/ingress\/hl7/.test(path) ? "hl7v2" : "file";
+    const feedDeps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), connectors: { hl7v2: hl7v2Connector, file: fileConnector }, audit: makeAuditSink(env, env.CONNECT_DB), now: () => Date.now() };
+    return handleFeedIngest(env, feedDeps, request, kind);
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });
 
@@ -79,6 +89,8 @@ export async function onRequest(context) {
     let body = {}; try { body = await request.json(); } catch {}
     const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: { "fhir-r4": fhirR4Connector } };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
+    // Track A: a FHIR-connector context request requires smd_connect_fhir too (no existence leak when off).
+    if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {
