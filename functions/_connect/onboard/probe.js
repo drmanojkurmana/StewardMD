@@ -6,6 +6,7 @@
 // (bad-url | tls | unauthorized | not-fhir | unreachable); a stack / URL / token / upstream body NEVER leak.
 import { requireCan } from "../enterprise/guard.js";
 import { makeAuditSink } from "../audit.js";
+import { enforce } from "../enterprise/ratelimit.js";
 import { signClientAssertion } from "../smart/assertion.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
 import { makeSafeFetch } from "./net.js";
@@ -101,6 +102,7 @@ export async function runProbe(deps, base, config, creds) {
 // Endpoint: RBAC-gated (connector:validate), opens the sealed creds, probes, records + audits (PHI-free).
 export async function testConnection(deps, request, env, tenantId, connectionId) {
   const { actor, tenant } = await requireCan(deps, request, env, tenantId, "connector:validate");
+  await enforce(deps, env, tenant.id, "connector:validate", actor.id);   // throttle the egress-probe primitive (fail-open on a KV blip)
   const { row, config } = await getRow(deps.db, tenant.id, connectionId);
   let creds = {}; try { creds = JSON.parse(await deps.secrets.open(config.sealed)); } catch { creds = {}; }
   const result = await runProbe(deps, row.base_url, config, creds);

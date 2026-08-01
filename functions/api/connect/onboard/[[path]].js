@@ -8,6 +8,7 @@ import { jsonResponse } from "../../../_connect/testkit.js";
 import { onboardFlagOn } from "../../../_connect/onboard/flags.js";
 import { AuthError, PermissionError, SandboxViolation } from "../../../_connect/permission.js";
 import { OnboardError } from "../../../_connect/onboard/errors.js";
+import { RateLimited } from "../../../_connect/enterprise/ratelimit.js";
 import { identify } from "../../../_usage.js";
 import { ownerOK } from "../../../_adminauth.js";
 import { makeSecrets } from "../../../_connect/secrets.js";
@@ -27,7 +28,7 @@ import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-
 export { onboardFlagOn as flagOnboardOn } from "../../../_connect/onboard/flags.js";
 
 const STATUS = (e) => e instanceof OnboardError ? (e.klass === "not-found" ? 404 : e.klass === "too-large" ? 413 : 400)
-  : e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400;
+  : e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : e instanceof RateLimited ? 429 : 400;
 const CODE = (e) => e instanceof OnboardError ? e.klass
   : (e && e.constructor && e.constructor.name ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error");
 

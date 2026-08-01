@@ -10,6 +10,7 @@
 // and it is re-validated by assertPublicHttpsUrl at save time in store.js before ever being persisted).
 import { requireCan } from "../enterprise/guard.js";
 import { makeAuditSink } from "../audit.js";
+import { enforce } from "../enterprise/ratelimit.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
 import { makeSafeFetch } from "./net.js";
 import { OnboardError } from "./errors.js";
@@ -45,8 +46,13 @@ async function discoverSmart(sfetch, base, cs) {
       if (d && d.token_endpoint) return { supported: true, tokenEndpoint: String(d.token_endpoint) };
     }
   } catch { /* best-effort; fall through to the CapabilityStatement fallback below */ }
-  const tok = scanOauthToken(cs);
-  return tok ? { supported: true, tokenEndpoint: String(tok) } : { supported: false };
+  // A malformed rest[]/security/extension shape (e.g. a truthy non-array) must NEVER be fatal to discovery:
+  // scanOauthToken can throw on a hostile CapabilityStatement, so guard it here (keeps the "never fatal to the
+  // overall discovery" contract AND ensures discoverCapabilities still reaches its audit sink).
+  try {
+    const tok = scanOauthToken(cs);
+    return tok ? { supported: true, tokenEndpoint: String(tok) } : { supported: false };
+  } catch { return { supported: false }; }
 }
 
 // Pure capability probe: no RBAC, no audit (mirrors probe.js's runProbe). Returns a client-safe result;
@@ -77,6 +83,7 @@ export async function runDiscovery(deps, baseUrl) {
 // admin is about to save, same trust tier), audits PHI-free.
 export async function discoverCapabilities(deps, request, env, tenantId, body = {}) {
   const { actor, tenant } = await requireCan(deps, request, env, tenantId, "connector:validate");
+  await enforce(deps, env, tenant.id, "connector:validate", actor.id);   // throttle this egress-probe primitive (fail-open on a KV blip)
   const result = await runDiscovery(deps, body && body.baseUrl);
   await makeAuditSink(env, deps.db)({ tenantId: tenant.id, actor: actor.id, action: "connect.onboard.discovered", outcome: result.ok ? "ok" : "error", ts: new Date().toISOString() });
   return result;
