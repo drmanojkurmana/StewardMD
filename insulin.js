@@ -249,39 +249,31 @@
 
   /* ---------- Dashboard ---------- */
   function dashboardHTML() {
-    var res = compute(), warns = safety(res);
-    var crit = 0, i;
-    for (i = 0; i < warns.length; i++) if (warns[i].severity === "critical") crit++;
-    var snap, snapCls;
-    if (crit) { snapCls = "critical"; snap = crit + " critical safety item" + (crit > 1 ? "s" : "") + " on the current inputs."; }
-    else if (warns.length) { snapCls = "caution"; snap = warns.length + " advisory check" + (warns.length > 1 ? "s" : "") + " to review."; }
-    else { snapCls = "ok"; snap = "No safety flags on the current inputs."; }
-
     var log = loadLog(), recent = "";
     if (log.length) {
       recent = log.slice(0, 4).map(function (e) {
-        return '<div class="ins-rec-row"><div class="ins-rec-dose">' + e.confirmedDose + '<span>u</span></div>' +
+        var u = e.unit && e.unit.indexOf("hour") > -1 ? "u/h" : "u";
+        return '<div class="ins-rec-row"><div class="ins-rec-dose">' + e.confirmedDose + '<span>' + u + '</span></div>' +
           '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + '</div>' +
           '<div class="ins-rec-time">' + timeStr(e.ts) + (e.warnings && e.warnings.length ? ' &middot; ' + e.warnings.length + ' flag' + (e.warnings.length > 1 ? 's' : '') : '') + '</div></div></div>';
       }).join("");
     } else {
-      recent = '<div class="ins-empty">No doses recorded yet. Accept a recommendation to start the audit log.</div>';
+      recent = '<div class="ins-empty">No doses yet. When you accept a recommendation it is logged here as an audit trail.</div>';
     }
 
-    return patientBarHTML() +
-      '<div class="ins-stats ins-bf">' +
-        statTile("Current glucose", fmt(st.glucose), gUnit()) +
-        statTile("Target", fmt(st.target), gUnit()) +
-        statTile("Active insulin", fmt(st.iob), "units") +
+    // Real profile parameters only when a patient is loaded (glucose/IOB are live inputs, not dashboard data).
+    var summary = st.patientId ? '<div class="ins-stats ins-bf">' +
+        statTile("Target", fmt(st.target), gUnit()) + statTile("Carb ratio", fmt(st.icr), "g/u") + statTile("Sensitivity", fmt(st.isf), isfUnit()) +
+      '</div>' : "";
+
+    return patientBarHTML() + summary +
+      '<div class="ins-card ins-bf"><div class="ins-card-t">Start a calculation</div>' +
+        '<div class="ins-qa">' + qa("combined", "Combined dose") + qa("meal", "Meal bolus") + qa("correction", "Correction") + '</div>' +
+        '<div class="ins-hint">More inside each calculation: basal, sensitivity (ISF), carb ratio, active insulin, and the clinician DKA and paediatric calculators.</div>' +
       '</div>' +
-      '<div class="ins-snap ' + snapCls + ' ins-bf"><span class="ins-snap-dot"></span><span>' + snap + '</span></div>' +
-      '<div class="ins-card ins-bf"><div class="ins-card-t">Quick actions</div><div class="ins-qa">' +
-        qa("combined", "Combined dose") + qa("meal", "Meal bolus") + qa("correction", "Correction") +
-      '</div></div>' +
-      libEntryHTML() +
-      convEntryHTML() +
+      libEntryHTML() + convEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t ins-card-t-row">Recent doses' +
-        (loadLog().length ? '<button class="ins-linkbtn" data-ins="go-history">View all and export</button>' : '') + '</div>' + recent + '</div>';
+        (log.length ? '<button class="ins-linkbtn" data-ins="go-history">View all and export</button>' : '') + '</div>' + recent + '</div>';
   }
   function convEntryHTML() {
     if (!window.INSULIN_DB) return "";

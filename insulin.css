@@ -7,7 +7,7 @@
   --ins-primary: var(--teal, #0F766E);
   --ins-bg:      var(--paper, #F5F8F9);
   --ins-surface: var(--panel, #ffffff);
-  --ins-surface-2: var(--panel2, #F5F8F9);
+  --ins-surface-2: color-mix(in srgb, var(--ink, #0D1B24) 6%, var(--panel, #ffffff));
   --ins-ink:     var(--ink, #0D1B24);
   --ins-muted:   var(--slate, #5B7083);
   --ins-line:    var(--line, #E3EAEE);
@@ -339,6 +339,7 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-clin .bd { display: block; margin-top: 2px; font-size: 12.5px; color: var(--ins-muted); line-height: 1.45; }
 .ins-card-t-row { display: flex; align-items: center; justify-content: space-between; }
 .ins-linkbtn { border: 0; background: transparent; color: var(--ins-primary); font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: .03em; cursor: pointer; }
+.ins-hint { font-size: 12px; color: var(--ins-muted); margin-top: 12px; line-height: 1.5; }
 
 /* Rounding toggle */
 .ins-round { display: flex; gap: 6px; }
