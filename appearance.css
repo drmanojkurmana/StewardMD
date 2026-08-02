@@ -1,0 +1,220 @@
+/* appearance.css - app-wide "Liquid Glass" appearance, chosen in Display & Accessibility.
+ * Applied as html[data-appearance="frosted|liquid|tinted3d|blend"] by home.js applyD().
+ *
+ * SCOPE + SAFETY:
+ *  - Targets only NEUTRAL surface classes (cards / sheets / tiles / headers). It never
+ *    touches severity-coloured chips/banners, gradient hero/imaging tiles, scrims, or
+ *    per-row list items (per-row backdrop-filter is a WKWebView perf pitfall).
+ *  - The ICU dashboard (#icuRoot / .icu-*) and GHIS Ward Sync (#ghisPanel / .ghis-*) are
+ *    NEVER targeted here (they use exclusively those prefixes), so they stay fully opaque.
+ *  - Backgrounds use color-mix on the app's own --panel/--teal tokens, so glass stays
+ *    theme-correct (light + dark) and text remains readable.
+ *  - The value "standard" removes the attribute entirely => zero effect (default).
+ *
+ * Selector list repeated per style block on purpose (explicit > clever). Keep the three
+ * lists identical when editing.
+ */
+
+/* ---------------- shared glass geometry (all four styles) ---------------- */
+html[data-appearance] #homeV2.rnav .rnav-head,
+html[data-appearance] #homeV2.rnav .rnav-tabbar,
+html[data-appearance] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance] #homeV2.rnav .rnav-qc,
+html[data-appearance] #homeV2.rnav .rnav-resume,
+html[data-appearance] #homeV2.rnav .rnav-recent,
+html[data-appearance] .rds-card,
+html[data-appearance] .rds-vital,
+html[data-appearance] .rds-sheet,
+html[data-appearance] .rds-dialog,
+html[data-appearance] .hv-sheet,
+html[data-appearance] #maikSheet,
+html[data-appearance] #thorexRoot .tx-panel,
+html[data-appearance] #thorexRoot .tx-report,
+html[data-appearance] #kardioxRoot .kx-acs-card,
+html[data-appearance] #kardioxRoot .kx-dc-card,
+html[data-appearance] #kardioxRoot .kx-src-card,
+html[data-appearance] #kardioxRoot .kx-fc-card,
+html[data-appearance] #kardioxRoot .kx-lesson-panel,
+html[data-appearance] #fundxRoot .fundx-findings,
+html[data-appearance] #fundxRoot .fundx-head,
+html[data-appearance] .dx-card,
+html[data-appearance] .dx-gate-card,
+html[data-appearance] #mcOverlay .mc-card,
+html[data-appearance] #mdOverlay .mc-card,
+html[data-appearance] #miOverlay .mc-card,
+html[data-appearance] #insulinRoot .ins-card,
+html[data-appearance] #insulinRoot .ins-patbar {
+  /* !important: the native shell runs body.ui-v2 with !important surface rules on a few
+     cards (.mc-card/.dx-card); the glass is a deliberate top layer and must win there. */
+  -webkit-backdrop-filter: blur(18px) saturate(1.3) !important;
+  backdrop-filter: blur(18px) saturate(1.3) !important;
+  /* NB: do NOT set position here — several glassed surfaces (.rds-sheet, .rds-dialog,
+     .hv-sheet, #maikSheet) are position:fixed overlays and this block out-specifies their
+     base rule; forcing position would drop them out of fixed positioning. The only glass
+     that needs a positioning context is the sheen ::after, scoped to the home tiles below. */
+}
+
+/* ---------------- frosted material (Frosted + Liquid) ---------------- */
+html[data-appearance="frosted"] #homeV2.rnav .rnav-head,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-tabbar,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="frosted"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-qc,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-resume,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-recent,
+html[data-appearance="frosted"] .rds-card,
+html[data-appearance="frosted"] .rds-vital,
+html[data-appearance="frosted"] .rds-sheet,
+html[data-appearance="frosted"] .rds-dialog,
+html[data-appearance="frosted"] .hv-sheet,
+html[data-appearance="frosted"] #maikSheet,
+html[data-appearance="frosted"] #thorexRoot .tx-panel,
+html[data-appearance="frosted"] #thorexRoot .tx-report,
+html[data-appearance="frosted"] #kardioxRoot .kx-acs-card,
+html[data-appearance="frosted"] #kardioxRoot .kx-dc-card,
+html[data-appearance="frosted"] #kardioxRoot .kx-src-card,
+html[data-appearance="frosted"] #kardioxRoot .kx-fc-card,
+html[data-appearance="frosted"] #kardioxRoot .kx-lesson-panel,
+html[data-appearance="frosted"] #fundxRoot .fundx-findings,
+html[data-appearance="frosted"] #fundxRoot .fundx-head,
+html[data-appearance="frosted"] .dx-card,
+html[data-appearance="frosted"] .dx-gate-card,
+html[data-appearance="frosted"] #mcOverlay .mc-card,
+html[data-appearance="frosted"] #mdOverlay .mc-card,
+html[data-appearance="frosted"] #miOverlay .mc-card,
+html[data-appearance="frosted"] #insulinRoot .ins-card,
+html[data-appearance="frosted"] #insulinRoot .ins-patbar,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-head,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tabbar,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qc,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-resume,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-recent,
+html[data-appearance="liquid"] .rds-card,
+html[data-appearance="liquid"] .rds-vital,
+html[data-appearance="liquid"] .rds-sheet,
+html[data-appearance="liquid"] .rds-dialog,
+html[data-appearance="liquid"] .hv-sheet,
+html[data-appearance="liquid"] #maikSheet,
+html[data-appearance="liquid"] #thorexRoot .tx-panel,
+html[data-appearance="liquid"] #thorexRoot .tx-report,
+html[data-appearance="liquid"] #kardioxRoot .kx-acs-card,
+html[data-appearance="liquid"] #kardioxRoot .kx-dc-card,
+html[data-appearance="liquid"] #kardioxRoot .kx-src-card,
+html[data-appearance="liquid"] #kardioxRoot .kx-fc-card,
+html[data-appearance="liquid"] #kardioxRoot .kx-lesson-panel,
+html[data-appearance="liquid"] #fundxRoot .fundx-findings,
+html[data-appearance="liquid"] #fundxRoot .fundx-head,
+html[data-appearance="liquid"] .dx-card,
+html[data-appearance="liquid"] .dx-gate-card,
+html[data-appearance="liquid"] #mcOverlay .mc-card,
+html[data-appearance="liquid"] #mdOverlay .mc-card,
+html[data-appearance="liquid"] #miOverlay .mc-card,
+html[data-appearance="liquid"] #insulinRoot .ins-card,
+html[data-appearance="liquid"] #insulinRoot .ins-patbar {
+  background: color-mix(in srgb, var(--panel, #ffffff) 60%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--ink, #0d1b24) 10%, transparent) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+/* ---------------- tinted 3D material (Tinted 3D + Blend) ---------------- */
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-head,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tabbar,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-qc,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-resume,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-recent,
+html[data-appearance="tinted3d"] .rds-card,
+html[data-appearance="tinted3d"] .rds-vital,
+html[data-appearance="tinted3d"] .rds-sheet,
+html[data-appearance="tinted3d"] .rds-dialog,
+html[data-appearance="tinted3d"] .hv-sheet,
+html[data-appearance="tinted3d"] #maikSheet,
+html[data-appearance="tinted3d"] #thorexRoot .tx-panel,
+html[data-appearance="tinted3d"] #thorexRoot .tx-report,
+html[data-appearance="tinted3d"] #kardioxRoot .kx-acs-card,
+html[data-appearance="tinted3d"] #kardioxRoot .kx-dc-card,
+html[data-appearance="tinted3d"] #kardioxRoot .kx-src-card,
+html[data-appearance="tinted3d"] #kardioxRoot .kx-fc-card,
+html[data-appearance="tinted3d"] #kardioxRoot .kx-lesson-panel,
+html[data-appearance="tinted3d"] #fundxRoot .fundx-findings,
+html[data-appearance="tinted3d"] #fundxRoot .fundx-head,
+html[data-appearance="tinted3d"] .dx-card,
+html[data-appearance="tinted3d"] .dx-gate-card,
+html[data-appearance="tinted3d"] #mcOverlay .mc-card,
+html[data-appearance="tinted3d"] #mdOverlay .mc-card,
+html[data-appearance="tinted3d"] #miOverlay .mc-card,
+html[data-appearance="tinted3d"] #insulinRoot .ins-card,
+html[data-appearance="tinted3d"] #insulinRoot .ins-patbar,
+html[data-appearance="blend"] #homeV2.rnav .rnav-head,
+html[data-appearance="blend"] #homeV2.rnav .rnav-tabbar,
+html[data-appearance="blend"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="blend"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="blend"] #homeV2.rnav .rnav-qc,
+html[data-appearance="blend"] #homeV2.rnav .rnav-resume,
+html[data-appearance="blend"] #homeV2.rnav .rnav-recent,
+html[data-appearance="blend"] .rds-card,
+html[data-appearance="blend"] .rds-vital,
+html[data-appearance="blend"] .rds-sheet,
+html[data-appearance="blend"] .rds-dialog,
+html[data-appearance="blend"] .hv-sheet,
+html[data-appearance="blend"] #maikSheet,
+html[data-appearance="blend"] #thorexRoot .tx-panel,
+html[data-appearance="blend"] #thorexRoot .tx-report,
+html[data-appearance="blend"] #kardioxRoot .kx-acs-card,
+html[data-appearance="blend"] #kardioxRoot .kx-dc-card,
+html[data-appearance="blend"] #kardioxRoot .kx-src-card,
+html[data-appearance="blend"] #kardioxRoot .kx-fc-card,
+html[data-appearance="blend"] #kardioxRoot .kx-lesson-panel,
+html[data-appearance="blend"] #fundxRoot .fundx-findings,
+html[data-appearance="blend"] #fundxRoot .fundx-head,
+html[data-appearance="blend"] .dx-card,
+html[data-appearance="blend"] .dx-gate-card,
+html[data-appearance="blend"] #mcOverlay .mc-card,
+html[data-appearance="blend"] #mdOverlay .mc-card,
+html[data-appearance="blend"] #miOverlay .mc-card,
+html[data-appearance="blend"] #insulinRoot .ins-card,
+html[data-appearance="blend"] #insulinRoot .ins-patbar {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--teal, #0f766e) 18%, transparent), color-mix(in srgb, var(--panel, #ffffff) 55%, transparent) 60%) !important;
+  border: 1px solid color-mix(in srgb, var(--teal, #0f766e) 30%, transparent) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,.30), inset 0 1.5px 0 rgba(255,255,255,.22), inset 0 -3px 8px rgba(0,0,0,.18) !important;
+}
+
+/* ---------------- animated specular sheen (Liquid + Blend), home tiles only ---------------- */
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="blend"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="blend"] #homeV2.rnav .rnav-qa-btn { overflow: hidden; position: relative; }
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::after,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qa-btn::after,
+html[data-appearance="blend"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::after,
+html[data-appearance="blend"] #homeV2.rnav .rnav-qa-btn::after {
+  content: ""; position: absolute; top: 0; left: -45%; width: 45%; height: 100%; pointer-events: none; z-index: 0;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.14), transparent); transform: skewX(-16deg);
+  animation: appx-sheen 5.5s ease-in-out infinite;
+}
+@keyframes appx-sheen { 0% { left: -45%; } 55%, 100% { left: 135%; } }
+
+/* ---------------- home orb backdrop (behind the rnav content) ----------------
+ * .rnav-main paints an opaque --rds-bg that would hide the ::before orbs, so make
+ * the scroll body transparent; its glass cards then reveal the orb field behind. */
+html[data-appearance] #homeV2.rnav .rnav-main { background: transparent; }
+html[data-appearance] #homeV2.rnav::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(440px 440px at 12% 6%, color-mix(in srgb, var(--teal, #0f766e) 55%, transparent), transparent 62%),
+    radial-gradient(420px 420px at 90% 94%, rgba(31,109,176,.42), transparent 62%),
+    radial-gradient(360px 360px at 62% 40%, rgba(122,75,208,.26), transparent 62%),
+    radial-gradient(300px 300px at 6% 80%, color-mix(in srgb, var(--teal, #0f766e) 40%, transparent), transparent 62%);
+}
+html[data-appearance] #homeV2.rnav > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-appearance="liquid"] #homeV2.rnav .rnav-tile::after,
+  html[data-appearance="liquid"] #homeV2.rnav .rnav-qa-btn::after,
+  html[data-appearance="blend"] #homeV2.rnav .rnav-tile::after,
+  html[data-appearance="blend"] #homeV2.rnav .rnav-qa-btn::after { animation: none !important; }
+}
