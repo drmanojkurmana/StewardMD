@@ -79,12 +79,18 @@ All default OFF. The base flag is required together with each per-mode flag.
 | Flag (env var) | `smd_` name | Enables |
 |---|---|---|
 | **`CONNECT_FLAG`** | `smd_connect` | Base kill-switch. Required for everything. |
-| **`CONNECT_ONBOARD_FLAG`** | `smd_connect_onboard` | The onboarding wizard + management API (save/test/list/pull/delete a FHIR connection, CSV upload, create/list/revoke feeds, dashboard, tenant picker). |
+| **`CONNECT_ONBOARD_FLAG`** | `smd_connect_onboard` | The onboarding wizard + management API: save/test/list/pull/delete a connection (FHIR, plus REST/JSON + DICOMweb per the per-type flags below), CSV upload, create/list/revoke HL7 + webhook feeds, **auto-discovery** (paste a URL, detect FHIR), the per-connection **sync-config** setter, the connections **dashboard + health monitor**, and the tenant picker. |
 | **`CONNECT_HL7_FLAG`** | `smd_connect_hl7` | The HL7 v2 **ingest** endpoint a hospital's HL7 sender POSTs to (`flagHl7On`). Needed for a created HL7 feed to actually accept messages. |
 | **`CONNECT_FHIR_PUSH_FLAG`** | `smd_connect_fhir_push` | The FHIR-push **webhook ingest** endpoint (`flagFhirPushOn`). Needed for a created webhook feed to accept pushes. |
+| **`CONNECT_REST_FLAG`** | `smd_connect_rest` | The REST/JSON lab-API connector (`rest-json`): save/test/pull a plain REST+JSON results endpoint. Needed to save or use a rest-json connection (onboard routes and `/context`). |
+| **`CONNECT_DICOM_FLAG`** | `smd_connect_dicom` | The DICOMweb QIDO-RS imaging connector (`dicomweb`): study **metadata only** (modality, date, accession, series/instance counts, study UID); no pixel data / WADO. Needed to save or use a dicomweb connection. |
+| **`CONNECT_SDK_FLAG`** | `smd_connect_sdk` | Optional: routes `/api/connect/context` through the conformance-gated Connector SDK registry (pull-profile connectors). OFF = pre-SDK behavior, byte-identical. Not required for the onboarding wizard. |
 
-Set `CONNECT_FLAG=1` and `CONNECT_ONBOARD_FLAG=1` to open the wizard. Add `CONNECT_HL7_FLAG=1` and/or
-`CONNECT_FHIR_PUSH_FLAG=1` only when you want those inbound feeds to start accepting data.
+Set `CONNECT_FLAG=1` and `CONNECT_ONBOARD_FLAG=1` to open the wizard (FHIR/SMART + CSV + auto-discovery + sync +
+health monitor). Add `CONNECT_REST_FLAG=1` / `CONNECT_DICOM_FLAG=1` to enable the REST/JSON and DICOMweb
+connection types, and `CONNECT_HL7_FLAG=1` / `CONNECT_FHIR_PUSH_FLAG=1` when you want those inbound feeds to
+accept data. The auto-sync scheduler additionally needs the Worker cron wired to
+`POST /api/connect/onboard/sync-run` (see the Automatic sync section).
 
 > The "coming soon" site gate does **not** block this: `/api/*` and `/admin/*` pass straight through it and each
 > route enforces its own auth (the admin console gates itself with Google owner login). No workaround is needed.
