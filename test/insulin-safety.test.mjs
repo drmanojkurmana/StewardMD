@@ -41,3 +41,9 @@ test("results are sorted most-severe first", () => {
   const w = S.evaluate({ age: 8 }, { glucose: 55 }, { rounded: 2 });
   assert.equal(w[0].severity, "critical");
 });
+
+test("exercise and steroid flags each raise a caution", () => {
+  const w = S.evaluate({ exercise: true, steroids: true }, { glucose: 160 }, { rounded: 4 });
+  assert.ok(w.find(x => x.id === "exercise"));
+  assert.ok(w.find(x => x.id === "steroids"));
+});

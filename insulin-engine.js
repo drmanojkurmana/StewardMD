@@ -196,11 +196,77 @@
     };
   }
 
+  function pediatricInit(v) {
+    var formula = "TDD = weight x factor; basal = TDD x basalFraction; meal bolus = (TDD - basal) / 3";
+    if (!ok(v.weightKg) || v.weightKg <= 0) return ERR(formula);
+    var stageFactor = { prepubertal: 0.5, newlydx: 0.6, pubertal: 0.9 };
+    var factor = ok(v.factor) ? v.factor : (stageFactor[v.stage] || 0.5);
+    var frac = ok(v.basalFraction) ? v.basalFraction : 0.5;
+    var inc = v.increment || 0.5;                 // paediatric doses often titrated in 0.5 u steps
+    var tdd = r1(v.weightKg * factor);
+    var basal = roundDose(tdd * frac, inc);
+    var mealEach = roundDose((tdd - basal) / 3, inc);
+    return {
+      result: tdd, rounded: tdd, unit: "units/day", tdd: tdd, basal: basal, mealBolusEach: mealEach,
+      steps: [
+        { label: "Total daily dose", expr: v.weightKg + " kg x " + factor + " u/kg/day", value: tdd },
+        { label: "Basal share", expr: tdd + " x " + frac, value: basal },
+        { label: "Meal bolus each (3 meals)", expr: "(" + tdd + " - " + basal + ") / 3", value: mealEach }
+      ],
+      formula: formula,
+      assumptions: [
+        "Weight-based paediatric initiation. Starting factor " + factor + " u/kg/day (" + (v.stage || "prepubertal") +
+          "); typical ranges: prepubertal 0.4 to 0.6, newly diagnosed 0.5 to 0.75, pubertal 0.7 to 1.0.",
+        "Honeymoon-phase and very young children need lower doses; titrate in " + inc + " unit steps.",
+        "Basal-bolus split " + frac + " (configurable)."
+      ],
+      clinicalNotes: [
+        "Paediatric insulin is specialist-guided. Do not initiate without paediatric diabetes input.",
+        "Not for diabetic ketoacidosis - use the DKA protocol instead.",
+        "Monitor closely for hypoglycaemia; titrate to age-appropriate glucose targets."
+      ],
+      refs: ["ISPAD Clinical Practice Consensus Guidelines - weight-based paediatric insulin initiation."]
+    };
+  }
+
+  function dkaInsulin(v) {
+    var formula = "fixed-rate IV insulin infusion = weight x rate-per-kg (units/hour)";
+    if (!ok(v.weightKg) || v.weightKg <= 0) return ERR(formula);
+    var rate = ok(v.ratePerKg) ? v.ratePerKg : 0.1;   // 0.1 u/kg/h default; 0.05 an option / paediatric
+    var raw = v.weightKg * rate;
+    var capped = ok(v.maxRate) ? Math.min(raw, v.maxRate) : raw;
+    var rounded = r1(capped);
+    return {
+      result: rounded, rounded: rounded, unit: "units/hour",
+      steps: [{ label: "Fixed-rate infusion", expr: v.weightKg + " kg x " + rate + " u/kg/h", value: r1(raw) }]
+        .concat(ok(v.maxRate) && raw > v.maxRate ? [{ label: "Capped at protocol max", expr: "min(" + r1(raw) + ", " + v.maxRate + ")", value: rounded }] : []),
+      formula: formula,
+      assumptions: [
+        "Fixed-rate intravenous insulin infusion (FRIII) at " + rate + " units/kg/hour" + (v.paeds ? " (paediatric)" : "") + ".",
+        "Start ONLY after intravenous fluid resuscitation has begun.",
+        "No initial intravenous bolus in standard adult and paediatric DKA protocols."
+      ],
+      monitoring: [
+        "Check capillary glucose and ketones hourly; potassium and venous pH / bicarbonate every 1 to 2 hours initially.",
+        "Add intravenous dextrose (e.g. 10%) once glucose falls below about 250 to 300 mg/dL, continuing insulin to clear ketones.",
+        "Aim to reduce glucose by about 50 to 75 mg/dL per hour; if it is not falling, review hydration and the infusion.",
+        "Do not stop the infusion for glucose alone - continue until ketoacidosis resolves (ketones low, pH and bicarbonate corrected)."
+      ],
+      clinicalNotes: [
+        "For TRAINED CLINICIANS following an institutional DKA protocol only.",
+        "Potassium: do not start or continue insulin if potassium is below 3.3 mmol/L until it is replaced; add potassium to fluids per protocol.",
+        v.paeds ? "Paediatric DKA: watch for cerebral oedema; use 0.05 to 0.1 u/kg/h, no bolus, and cautious fluids."
+          : "Overlap with subcutaneous basal insulin before stopping the infusion to avoid rebound ketosis."
+      ],
+      refs: ["ADA / JBDS-IP adult DKA guidance; ISPAD paediatric DKA guidance. Follow your institutional protocol."]
+    };
+  }
+
   var API = {
     roundDose: roundDose, mmol: mmol,
     correctionDose: correctionDose, mealBolus: mealBolus, activeInsulin: activeInsulin,
     combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd,
-    basalInitiation: basalInitiation
+    basalInitiation: basalInitiation, pediatricInit: pediatricInit, dkaInsulin: dkaInsulin
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.INSULIN_ENGINE = API;

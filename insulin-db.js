@@ -164,6 +164,11 @@
       brands: [{ name: "Humulin R U-500", mfr: "Eli Lilly", countries: ["US", "CA"] }] }
   ];
 
+  // Stamp a references field onto every entry that lacks one (spec: each insulin carries references).
+  DATA.forEach(function (d) {
+    if (!d.references) d.references = "Manufacturer summary of product characteristics / prescribing information; ADA Standards of Care in Diabetes. Verify against the current local product label.";
+  });
+
   function low(s) { return (s || "").toLowerCase(); }
   function get(id) { for (var i = 0; i < DATA.length; i++) if (DATA[i].id === id) return DATA[i]; return null; }
   function byClass(cls) { return DATA.filter(function (d) { return d.cls === cls; }); }

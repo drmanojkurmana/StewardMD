@@ -15,7 +15,7 @@
     context = context || {}; input = input || {}; result = result || {};
     var out = [];
 
-    if (!num(input.glucose))
+    if (!input.noGlucose && !num(input.glucose))
       out.push(W("missing_input", "warning", "Missing glucose",
         "Enter a current blood glucose before accepting a dose."));
 
@@ -54,6 +54,14 @@
     if (context.hepatic)
       out.push(W("hepatic", "caution", "Liver disease",
         "Altered gluconeogenesis and insulin metabolism; dose conservatively and monitor."));
+
+    if (context.exercise)
+      out.push(W("exercise", "caution", "Planned exercise",
+        "Exercise increases insulin sensitivity. Consider reducing the meal bolus by about 25 to 50% and watch for delayed (post-exercise) hypoglycaemia for up to 24 hours."));
+
+    if (context.steroids)
+      out.push(W("steroids", "caution", "Steroid therapy",
+        "Glucocorticoids raise insulin requirements, mainly post-prandial and daytime. Anticipate higher doses and monitor; taper insulin as steroids reduce."));
 
     out.sort(function (a, b) { return RANK[b.severity] - RANK[a.severity]; });
     return out;
