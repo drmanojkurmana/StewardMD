@@ -109,3 +109,34 @@ test("basalInitiation: missing weight returns null", () => {
   const r = E.basalInitiation({ weightKg: NaN });
   assert.equal(r.result, null);
 });
+
+test("pediatricInit: weight-based TDD with pediatric split", () => {
+  const r = E.pediatricInit({ weightKg: 20, stage: "prepubertal" });
+  assert.equal(r.tdd, 10);        // 20 x 0.5
+  assert.equal(r.basal, 5);       // 50%
+  assert.equal(r.mealBolusEach, 1.5); // (10-5)/3 -> 1.5 (0.5 step)
+  assert.ok(r.clinicalNotes.some(n => /specialist/i.test(n)));
+});
+
+test("pediatricInit: pubertal factor is higher; missing weight null", () => {
+  assert.ok(E.pediatricInit({ weightKg: 40, stage: "pubertal" }).tdd > E.pediatricInit({ weightKg: 40, stage: "prepubertal" }).tdd);
+  assert.equal(E.pediatricInit({ weightKg: NaN }).result, null);
+});
+
+test("dkaInsulin: fixed-rate infusion = weight x rate/kg", () => {
+  assert.equal(E.dkaInsulin({ weightKg: 70 }).result, 7);          // 70 x 0.1
+  assert.equal(E.dkaInsulin({ weightKg: 70, ratePerKg: 0.05 }).result, 3.5);
+  assert.equal(E.dkaInsulin({ weightKg: 70 }).unit, "units/hour");
+});
+
+test("dkaInsulin: caps at protocol max, carries K+ + trained-clinician notes + monitoring", () => {
+  const r = E.dkaInsulin({ weightKg: 100, maxRate: 6 });
+  assert.equal(r.result, 6);      // min(10, 6)
+  assert.ok(r.monitoring.length >= 3);
+  assert.ok(r.clinicalNotes.some(n => /potassium/i.test(n)));
+  assert.ok(r.clinicalNotes.some(n => /TRAINED CLINICIANS/.test(n)));
+});
+
+test("dkaInsulin: missing weight returns null", () => {
+  assert.equal(E.dkaInsulin({ weightKg: 0 }).result, null);
+});

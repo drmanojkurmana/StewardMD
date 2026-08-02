@@ -56,17 +56,24 @@
   function getPatient(id) { var l = loadPatients(), i; for (i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return null; }
   function deletePatient(id) { savePatients(loadPatients().filter(function (p) { return p.id !== id; })); }
   function newProfile() {
-    return { id: null, name: "", sex: "", age: "", weightKg: "", notes: "", dxType: "",
-      pregnancy: false, renal: false, hepatic: false, icr: "", isf: "", target: "", bolus: st.bolus };
+    return { id: null, name: "", sex: "", age: "", heightCm: "", weightKg: "", notes: "", dxType: "", regimen: "",
+      pregnancy: false, renal: false, hepatic: false, steroids: false,
+      icr: "", isf: "", target: "", tdd: "", dia: "", maxBolus: "", maxDaily: "", bolus: st.bolus };
+  }
+  function bmiOf(p) {
+    if (!num(p.heightCm) || !num(p.weightKg) || Number(p.heightCm) <= 0) return null;
+    var mtr = Number(p.heightCm) / 100;
+    return Math.round((Number(p.weightKg) / (mtr * mtr)) * 10) / 10;
   }
   function applyProfile(p) {
     st.patientId = p.id; st.patientName = p.name || "Unnamed";
     if (num(p.age)) st.ctx.age = Number(p.age);
     if (num(p.weightKg)) st.ctx.weightKg = Number(p.weightKg);
-    st.ctx.pregnancy = !!p.pregnancy; st.ctx.renal = !!p.renal; st.ctx.hepatic = !!p.hepatic;
+    st.ctx.pregnancy = !!p.pregnancy; st.ctx.renal = !!p.renal; st.ctx.hepatic = !!p.hepatic; st.ctx.steroids = !!p.steroids;
     if (num(p.icr)) st.icr = Number(p.icr);
     if (num(p.isf)) st.isf = Number(p.isf);
     if (num(p.target)) st.target = Number(p.target);
+    if (num(p.tdd)) st.tdd = Number(p.tdd);
     if (p.bolus) st.bolus = p.bolus;
   }
   function num(x) { return x !== "" && x != null && isFinite(Number(x)); }
@@ -82,11 +89,14 @@
   /* ---------- state ---------- */
   var st = { screen: "dashboard", mode: "combined",
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
-    ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false },
+    ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false },
     acked: false, confirmed: false, bolus: "aspart", iobNote: "",
+    tdd: 40, isfRule: 1800, icrRule: 500, tddFactor: 0.4, basalFraction: 0.5,
+    dkaRate: 0.1, dkaMax: "", pedStage: "prepubertal", dkaPaeds: false, advAck: false,
     libQ: "", libClass: "all", libOpen: null, compare: [],
     patientId: null, patientName: "", editP: null, patQ: "",
-    convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convAck: false };
+    convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convAck: false,
+    histFilter: "all" };
 
   function initState() {
     var m = mmolMode();
@@ -97,7 +107,9 @@
     st.isf = m ? 3 : 50;
     st.iob = 2; st.increment = SET.increment;
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
-    st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false };
+    st.tdd = 40; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
+    st.dkaRate = 0.1; st.dkaMax = ""; st.pedStage = "prepubertal"; st.dkaPaeds = false; st.advAck = false;
+    st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
     st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convAck = false;
@@ -119,7 +131,12 @@
   var ICON_SWAP = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4"/><path d="M21 7H7"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h14"/></svg>';
   function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
   function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
-  function modeLabel(m) { return m === "meal" ? "Meal bolus" : m === "correction" ? "Correction" : "Combined meal + correction"; }
+  function modeLabel(m) {
+    var L = { combined: "Combined meal + correction", meal: "Meal bolus", correction: "Correction",
+      basal: "Basal initiation", isf: "Insulin sensitivity factor", icr: "Insulin-to-carb ratio",
+      iob: "Active insulin (IOB)", pediatric: "Paediatric initiation", dka: "DKA insulin infusion" };
+    return L[m] || "Insulin dose";
+  }
 
   function howItWorks(mode) {
     if (mode === "meal")
@@ -128,6 +145,24 @@
     if (mode === "correction")
       return "This brings a high glucose down toward target. It takes how far the current glucose is above " +
         "target and divides by the insulin sensitivity factor (ISF), where one unit lowers glucose by ISF. No correction is given at or below target.";
+    if (mode === "basal")
+      return "Weight-based basal-bolus initiation. Total daily dose = weight x a starting factor (u/kg/day); a share of that " +
+        "is basal and the remainder is split across three meals. A deliberately conservative start - titrate to targets.";
+    if (mode === "isf")
+      return "The insulin sensitivity (correction) factor estimated from total daily dose: 1800 divided by TDD for rapid " +
+        "analogues (1500 for regular insulin). It is how many mg/dL one unit is expected to lower glucose - an estimate to titrate.";
+    if (mode === "icr")
+      return "The insulin-to-carbohydrate ratio estimated from total daily dose: 500 divided by TDD for rapid analogues " +
+        "(450 for regular). It is the grams of carbohydrate covered by one unit - an estimate to titrate.";
+    if (mode === "iob")
+      return "Active insulin (insulin on board) summed from your confirmed bolus doses in the log, each decayed linearly over " +
+        "the selected insulin's duration of action. Subtract it from a new correction to avoid stacking.";
+    if (mode === "pediatric")
+      return "Weight-based paediatric initiation. TDD = weight x an age-stage factor, split basal and prandial. Specialist-guided, " +
+        "conservative, and not for ketoacidosis; titrate to age-appropriate targets.";
+    if (mode === "dka")
+      return "Fixed-rate intravenous insulin infusion for DKA: weight x the protocol rate per kg (units/hour), after fluids and a " +
+        "potassium check. Continue until ketoacidosis resolves, adding dextrose as glucose falls. Follow your institutional protocol.";
     return "This combines two doses. First it covers the meal: grams of carbohydrate divided by the ICR. Then it " +
       "adds a correction for a high glucose: the amount above target divided by the ISF. It then subtracts any insulin " +
       "still active from earlier doses (IOB) so a dose is not stacked, floors the total at zero, and rounds.";
@@ -186,6 +221,7 @@
     else if (st.screen === "patients") { s.innerHTML = patientsHTML(); renderPatientList(); }
     else if (st.screen === "patient") { s.innerHTML = patientEditHTML(); }
     else if (st.screen === "convert") { s.innerHTML = convertHTML(); renderConvert(); }
+    else if (st.screen === "history") { s.innerHTML = historyHTML(); renderHistList(); }
     else { s.innerHTML = calcHTML(); renderInputs(); render(); }
   }
   function go(screen) { st.screen = screen; paint(); springIn(document.getElementById("insScreen")); }
@@ -204,6 +240,7 @@
     else if (st.screen === "patients") { title = "Patients"; sub = loadPatients().length + " saved profiles"; }
     else if (st.screen === "patient") { title = st.editP && st.editP.id ? "Edit patient" : "New patient"; sub = "Reusable profile (no MRN or DOB)"; back = "go-patients"; }
     else if (st.screen === "convert") { title = "Insulin conversion"; sub = "Clinician-guided switch"; }
+    else if (st.screen === "history") { title = "Dose history"; sub = loadLog().length + " records (audit trail)"; }
     else { title = "Insulin dose"; sub = modeLabel(st.mode); }
     return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="' + back + '" aria-label="Back">' + ICON_BACK + '</button>' +
       '<div><div class="ins-title">' + title + '</div><div class="ins-sub">' + sub + '</div></div>' +
@@ -243,7 +280,8 @@
       '</div></div>' +
       libEntryHTML() +
       convEntryHTML() +
-      '<div class="ins-card ins-bf"><div class="ins-card-t">Recent doses</div>' + recent + '</div>';
+      '<div class="ins-card ins-bf"><div class="ins-card-t ins-card-t-row">Recent doses' +
+        (loadLog().length ? '<button class="ins-linkbtn" data-ins="go-history">View all and export</button>' : '') + '</div>' + recent + '</div>';
   }
   function convEntryHTML() {
     if (!window.INSULIN_DB) return "";
@@ -282,6 +320,40 @@
   }
   function qa(mode, label) { return '<button class="ins-qa-btn" data-ins="qa" data-mode="' + mode + '">' + label + '</button>'; }
   function timeStr(ts) { try { return new Date(ts).toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+
+  /* ---------- dose history (filter + export) ---------- */
+  function historyHTML() {
+    var filters = ["all", "combined", "meal", "correction", "basal", "pediatric", "dka"];
+    var chips = filters.map(function (f) {
+      return '<button class="ins-chip" data-ins="hist-filter" data-v="' + f + '" aria-pressed="' + (st.histFilter === f ? "true" : "false") + '">' + (f === "all" ? "All" : modeLabel(f)) + '</button>';
+    }).join("");
+    return '<div class="ins-libchips ins-chips ins-bf">' + chips + '</div>' +
+      '<div class="ins-patrow-actions ins-bf"><button class="ins-qa-btn" data-ins="hist-export">Copy CSV to clipboard</button></div>' +
+      '<div id="insHistList"></div>';
+  }
+  function histFiltered() {
+    var log = loadLog();
+    return st.histFilter === "all" ? log : log.filter(function (e) { return e.mode === st.histFilter; });
+  }
+  function renderHistList() {
+    var list = document.getElementById("insHistList"); if (!list) return;
+    var rows = histFiltered();
+    if (!rows.length) { list.innerHTML = '<div class="ins-empty">No records' + (st.histFilter === "all" ? " yet." : " for this filter.") + '</div>'; return; }
+    list.innerHTML = rows.map(function (e) {
+      var w = (e.warnings && e.warnings.length) ? e.warnings.length + " flag" + (e.warnings.length > 1 ? "s" : "") : "no flags";
+      var u = e.unit && e.unit.indexOf("hour") > -1 ? "u/h" : "u";
+      return '<div class="ins-rec-row"><div class="ins-rec-dose">' + e.confirmedDose + '<span>' + u + '</span></div>' +
+        '<div class="ins-rec-meta"><div class="ins-rec-mode">' + modeLabel(e.mode) + '</div>' +
+        '<div class="ins-rec-time">' + timeStr(e.ts) + ' &middot; ' + w + '</div></div></div>';
+    }).join("");
+  }
+  function histCSV() {
+    var rows = histFiltered();
+    var lines = rows.map(function (e) {
+      return [new Date(e.ts).toISOString(), e.mode, e.calculatedDose, e.confirmedDose, (e.unit || "units"), '"' + (e.warnings || []).join("; ") + '"'].join(",");
+    });
+    return ["timestamp,mode,calculated,confirmed,unit,warnings"].concat(lines).join("\n");
+  }
 
   /* ---------- Settings ---------- */
   function settingsHTML() {
@@ -356,7 +428,8 @@
         dlrow("Pregnancy", d.pregnancy) + dlrow("Paediatric", d.pediatric) + dlrow("Renal", d.renal) + dlrow("Hepatic", d.hepatic) +
         dlrow("Storage", d.storage) + dlrow("Notes", d.notes) +
         dlrow("Brands", d.brands.map(function (b) { return b.name + " (" + b.mfr + ")"; }).join("; ")) +
-        dlrow("Availability", db.brandCountries(d).map(function (c) { return db.COUNTRIES[c] || c; }).join(", ")) + '</div>';
+        dlrow("Availability", db.brandCountries(d).map(function (c) { return db.COUNTRIES[c] || c; }).join(", ")) +
+        (d.references ? dlrow("References", d.references) : "") + '</div>';
     }
     return '<div class="ins-il-card' + (open ? " open" : "") + '">' +
       '<button class="ins-il-head" data-ins="lib-open" data-id="' + d.id + '" aria-expanded="' + (open ? "true" : "false") + '">' +
@@ -422,16 +495,21 @@
       function opts(cls) { return '<optgroup label="' + cls + '">' + db.byClass(cls).map(function (d) { return '<option value="' + d.id + '"' + (d.id === p.bolus ? " selected" : "") + '>' + d.generic + '</option>'; }).join("") + '</optgroup>'; }
       return '<select class="ins-select" data-ins="p-field" data-k="bolus" aria-label="Preferred bolus insulin">' + opts("Rapid-acting") + opts("Short-acting") + '</select>';
     }
+    var bmi = bmiOf(p);
     return '<div class="ins-card ins-bf"><div class="ins-card-t">Identity</div>' +
         '<div class="ins-field">' + fld("name", "Name", p.name) + '</div>' +
         '<div class="ins-field"><div class="ins-grid2">' + fld("age", "Age (years)", p.age, "number") + fld("sex", "Sex", p.sex) + '</div></div>' +
-        '<div class="ins-field">' + fld("weightKg", "Weight (kg)", p.weightKg, "number") + '</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + fld("heightCm", "Height (cm)", p.heightCm, "number") + fld("weightKg", "Weight (kg)", p.weightKg, "number") + '</div>' +
+          (bmi ? '<div class="ins-tgt-note">BMI ' + bmi + ' kg/m2 (auto)</div>' : '') + '</div>' +
         '<div class="ins-field">' + fld("dxType", "Diabetes type", p.dxType) + '</div>' +
+        '<div class="ins-field">' + fld("regimen", "Current insulin regimen", p.regimen) + '</div>' +
         '<div class="ins-field">' + fld("notes", "Clinical notes", p.notes) + '</div></div>' +
       '<div class="ins-card ins-bf"><div class="ins-card-t">Insulin parameters</div>' +
         '<div class="ins-field"><div class="ins-grid2">' + fld("icr", "ICR g/u", p.icr, "number") + fld("isf", "ISF mg/dL/u", p.isf, "number") + fld("target", "Target mg/dL", p.target, "number") + '</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + fld("tdd", "TDD units/day", p.tdd, "number") + fld("dia", "Insulin action DIA (h)", p.dia, "number") + '</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + fld("maxBolus", "Max bolus (u)", p.maxBolus, "number") + fld("maxDaily", "Max daily (u)", p.maxDaily, "number") + '</div></div>' +
         '<div class="ins-field"><div class="ins-lab">Preferred bolus insulin</div>' + bsel() + '</div>' +
-        '<div class="ins-field"><div class="ins-lab">Flags</div><div class="ins-chips">' + tog("pregnancy", "Pregnancy") + tog("renal", "Renal") + tog("hepatic", "Hepatic") + '</div></div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Flags</div><div class="ins-chips">' + tog("pregnancy", "Pregnancy") + tog("renal", "Renal") + tog("hepatic", "Hepatic") + tog("steroids", "Steroids") + '</div></div></div>' +
       '<button class="ins-cta" data-ins="p-save">' + (p.id ? "Save changes" : "Save patient") + '</button>' +
       (p.id ? '<div class="ins-patedit-actions"><button class="ins-qa-btn" data-ins="p-use" data-id="' + p.id + '">Use in calculator</button>' +
         '<button class="ins-pt-del" data-ins="p-del" data-id="' + p.id + '">Delete</button></div>' : '');
@@ -491,18 +569,40 @@
   }
 
   /* ---------- Calculator ---------- */
+  function stGet(f) { if (f.indexOf(".") > -1) { var p = f.split("."); return Number(st[p[0]][p[1]]) || 0; } return Number(st[f]) || 0; }
+  function stSet(f, v) { if (f.indexOf(".") > -1) { var p = f.split("."); st[p[0]][p[1]] = v; } else st[f] = v; }
+
+  var MODES = [
+    { id: "combined", label: "Combined" }, { id: "meal", label: "Meal bolus" }, { id: "correction", label: "Correction" },
+    { id: "basal", label: "Basal init" }, { id: "isf", label: "ISF" }, { id: "icr", label: "Carb ratio" },
+    { id: "iob", label: "Active insulin" },
+    { id: "pediatric", label: "Pediatric", clin: true }, { id: "dka", label: "DKA infusion", clin: true }
+  ];
+  function glucoseMode(m) { return m === "combined" || m === "correction"; }
+  function bolusMode(m) { return ["combined", "meal", "correction", "iob"].indexOf(m) > -1; }
+  function clinMode(m) { return m === "pediatric" || m === "dka"; }
+  function doseUnitMode(m) { return ["combined", "meal", "correction", "basal", "pediatric"].indexOf(m) > -1; }
+
   function calcHTML() {
     return (st.patientId ? '<div class="ins-patchip ins-bf">' + ICON_USER + '<span>' + esc(st.patientName) + '</span>' +
         '<button data-ins="p-clear" aria-label="Clear patient">&times;</button></div>' : '') +
       '<div class="ins-ai ins-bf">' + ICON_AI +
         '<div><b>AI-assisted recommendation.</b> The treating physician makes the final decision. ' +
         'Every value below is shown with its formula and assumptions - nothing is hidden.</div></div>' +
-      '<div class="ins-seg ins-bf" role="tablist">' + seg("combined", "Combined") + seg("meal", "Meal bolus") + seg("correction", "Correction") + '</div>' +
+      '<div class="ins-modes ins-bf" role="tablist">' + MODES.map(function (m) {
+        return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-pressed="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
+      }).join("") + '</div>' +
       '<div class="ins-card ins-bf" id="insInputs"></div>' +
       '<div id="insOut"></div>';
   }
-  function seg(mode, label) {
-    return '<button role="tab" data-ins="mode" data-mode="' + mode + '" aria-pressed="' + (st.mode === mode ? "true" : "false") + '">' + label + '</button>';
+  function clinBanner(m) {
+    return '<div class="ins-clin ins-bf"><span class="ins-warn-band">' + SVG_TRI + '</span>' +
+      '<div class="ins-warn-body"><span class="ins-warn-sig">Trained clinicians only</span>' +
+      '<span class="bd">' + (m === "dka" ? "Clinician DKA insulin protocol. Verify against your institutional DKA guideline; start after fluids and a potassium check." :
+        "Paediatric insulin initiation. Specialist-guided; not for ketoacidosis.") + '</span></div></div>';
+  }
+  function rule(g, v, label) {
+    return '<button class="ins-round-b" data-ins="rule" data-g="' + g + '" data-v="' + v + '" aria-pressed="' + (st[g] === v ? "true" : "false") + '">' + label + '</button>';
   }
   function stepper(id, val, stepv) {
     return '<div class="ins-step">' +
@@ -553,53 +653,93 @@
     return { iob: r.result, n: doses.length, dia: dia };
   }
 
+  function pedChip(v, label) { return '<button class="ins-chip" data-ins="pedstage" data-v="' + v + '" aria-pressed="' + (st.pedStage === v ? "true" : "false") + '">' + label + '</button>'; }
   function renderInputs() {
     var m = st.mode, h = "", presets = targetPresets(), i;
-    h += '<div class="ins-field"><div class="ins-lab">Bolus insulin</div>' + bolusSelectHTML() + bolusGuideHTML() + '</div>';
-    if (m !== "meal") {
+    if (clinMode(m)) h += clinBanner(m);
+    if (bolusMode(m)) h += '<div class="ins-field"><div class="ins-lab">Bolus insulin</div>' + bolusSelectHTML() + bolusGuideHTML() + '</div>';
+
+    if (glucoseMode(m)) {
       h += '<div class="ins-field"><div class="ins-lab">Current glucose <span class="u">' + gUnit() + '</span></div>' + stepper("glucose", st.glucose, gStep()) + '</div>';
-      var chips = "";
-      for (i = 0; i < presets.length; i++) chips += tgtChip(presets[i]);
+      var chips = ""; for (i = 0; i < presets.length; i++) chips += tgtChip(presets[i]);
       h += '<div class="ins-field"><div class="ins-lab">Target glucose <span class="u">' + gUnit() + '</span></div>' +
         '<div class="ins-tgt"><input class="ins-tgt-in" data-ins="num" data-f="target" type="number" inputmode="decimal" min="1" value="' + st.target + '" aria-label="Target glucose">' +
         '<div class="ins-chips">' + chips + '</div></div>' +
-        '<div class="ins-tgt-note">Type any target - set a higher interim target for gradual correction of a very high glucose.</div></div>';
+        '<div class="ins-tgt-note">Type any target - a higher interim target gives gradual correction of a very high glucose.</div></div>';
     }
-    if (m !== "correction") {
-      h += '<div class="ins-field"><div class="ins-lab">Carbohydrates <span class="u">g</span></div>' + stepper("carbs", st.carbs, 5) + '</div>';
+    if (m === "combined" || m === "meal") h += '<div class="ins-field"><div class="ins-lab">Carbohydrates <span class="u">g</span></div>' + stepper("carbs", st.carbs, 5) + '</div>';
+
+    if (glucoseMode(m) || m === "meal") {
+      h += '<div class="ins-field"><div class="ins-grid2">';
+      if (glucoseMode(m)) h += mini("isf", "ISF " + isfUnit(), st.isf);
+      if (m === "combined" || m === "meal") h += mini("icr", "ICR g/u", st.icr);
+      if (m === "combined") h += mini("iob", "Active insulin (IOB) u", st.iob);
+      h += '</div></div>';
+      if (m === "combined") {
+        var nd = recentBolusDoses().length;
+        h += '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
+          (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
+          (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
+      }
     }
-    h += '<div class="ins-field"><div class="ins-grid2">';
-    if (m !== "meal") { h += mini("isf", "ISF " + isfUnit(), st.isf); }
-    if (m !== "correction") { h += mini("icr", "ICR g/u", st.icr); }
-    if (m === "combined") { h += mini("iob", "Active insulin (IOB) u", st.iob); }
-    h += '</div></div>';
-    if (m === "combined") {
-      var nd = recentBolusDoses().length;
-      h += '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
-        (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
-        (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
+
+    if (m === "isf")
+      h += '<div class="ins-field"><div class="ins-lab">Total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Rule</div><div class="ins-round">' + rule("isfRule", 1800, "1800 (rapid)") + rule("isfRule", 1500, "1500 (regular)") + '</div></div>';
+    if (m === "icr")
+      h += '<div class="ins-field"><div class="ins-lab">Total daily dose <span class="u">units/day</span></div>' + stepper("tdd", st.tdd, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Rule</div><div class="ins-round">' + rule("icrRule", 500, "500 (rapid)") + rule("icrRule", 450, "450 (regular)") + '</div></div>';
+    if (m === "basal")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("tddFactor", "Start factor u/kg/day", st.tddFactor) + mini("basalFraction", "Basal fraction", st.basalFraction) + '</div></div>';
+    if (m === "pediatric")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Stage</div><div class="ins-chips">' + pedChip("prepubertal", "Prepubertal") + pedChip("newlydx", "Newly diagnosed") + pedChip("pubertal", "Pubertal") + '</div></div>';
+    if (m === "dka")
+      h += '<div class="ins-field"><div class="ins-lab">Weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Infusion rate</div><div class="ins-round">' +
+          '<button class="ins-round-b" data-ins="dkarate" data-v="0.1" aria-pressed="' + (st.dkaRate === 0.1 ? "true" : "false") + '">0.1 u/kg/h</button>' +
+          '<button class="ins-round-b" data-ins="dkarate" data-v="0.05" aria-pressed="' + (st.dkaRate === 0.05 ? "true" : "false") + '">0.05 u/kg/h</button></div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("dkaMax", "Max rate u/h (optional)", st.dkaMax) + '</div>' +
+          '<button class="ins-chip" data-ins="dkapaeds" aria-pressed="' + (st.dkaPaeds ? "true" : "false") + '" style="margin-top:10px">Paediatric DKA</button></div>';
+    if (m === "iob") {
+      var doses = recentBolusDoses();
+      h += '<div class="ins-field"><div class="ins-lab">Active insulin from recent doses</div>' +
+        '<div class="ins-guide">Sums confirmed bolus doses within the selected insulin duration of action (' + bolusDia() + ' h). ' + doses.length + ' dose' + (doses.length !== 1 ? 's' : '') + ' in window.</div></div>';
     }
-    h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
+
+    if (doseUnitMode(m)) h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
       '<button data-ins="round" data-v="1" aria-pressed="' + (st.increment === 1 ? "true" : "false") + '">1 unit</button>' +
       '<button data-ins="round" data-v="0.5" aria-pressed="' + (st.increment === 0.5 ? "true" : "false") + '">0.5 unit</button></div></div>';
-    h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
-      ctxChip("pregnancy", "Pregnancy") + ctxChip("renal", "Renal") + ctxChip("hepatic", "Hepatic") +
-      '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.age < 18 ? "true" : "false") + '">Pediatric</button></div></div>';
+
+    if (["isf", "icr", "iob"].indexOf(m) < 0) h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
+      ctxChip("pregnancy", "Pregnancy") + ctxChip("renal", "Renal") + ctxChip("hepatic", "Hepatic") + ctxChip("exercise", "Exercise") + ctxChip("steroids", "Steroids") +
+      (m !== "pediatric" ? '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.age < 18 ? "true" : "false") + '">Pediatric</button>' : '') + '</div></div>';
+
     document.getElementById("insInputs").innerHTML = h;
   }
 
   function compute() {
-    var E = window.INSULIN_ENGINE, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
-    if (st.mode === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment });
-    if (st.mode === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, increment: st.increment });
+    var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
+    if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment });
+    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, increment: st.increment });
+    if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment });
+    if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
+    if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
+    if (m === "iob") return E.activeInsulin({ doses: recentBolusDoses(), dia: bolusDia() });
+    if (m === "pediatric") return E.pediatricInit({ weightKg: st.ctx.weightKg, stage: st.pedStage, increment: st.increment });
+    if (m === "dka") return E.dkaInsulin({ weightKg: st.ctx.weightKg, ratePerKg: st.dkaRate,
+      maxRate: (st.dkaMax !== "" && isFinite(Number(st.dkaMax)) ? Number(st.dkaMax) : undefined), paeds: st.dkaPaeds });
     return E.combinedDose({ carbs: st.carbs, icr: st.icr, glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment });
   }
   function safety(res) {
-    var S = window.INSULIN_SAFETY;
-    var input = { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: st.mode === "combined" ? st.iob : 0 };
+    var S = window.INSULIN_SAFETY, m = st.mode;
+    if (["isf", "icr", "iob"].indexOf(m) > -1) return S.evaluate({}, { noGlucose: true }, res);
+    var input = glucoseMode(m) ? { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: m === "combined" ? st.iob : 0 } : { noGlucose: true };
+    var boluses = ["combined", "meal", "correction"].indexOf(m) > -1;
     var ctx = { age: st.ctx.age, weightKg: st.ctx.weightKg, pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic,
-      maxBolus: SET.maxBolus, maxDaily: SET.maxDaily };
-    if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded;
+      exercise: st.ctx.exercise, steroids: st.ctx.steroids };
+    if (boluses) { ctx.maxBolus = SET.maxBolus; ctx.maxDaily = SET.maxDaily; if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded; }
     return S.evaluate(ctx, input, res);
   }
 
@@ -607,7 +747,7 @@
     st.acked = false; st.confirmed = false;
     var res = compute(), warns = safety(res), hasCritical = false, i;
     var selIns = bolusInsulin();
-    if (selIns && selIns.cls === "Short-acting") warns.push({ id: "reg_timing", severity: "info",
+    if (bolusMode(st.mode) && selIns && selIns.cls === "Short-acting") warns.push({ id: "reg_timing", severity: "info",
       title: "Short-acting (regular) insulin selected",
       detail: "Onset about 30 min, peak 2 to 4 h. Give about 30 min before the meal and re-check glucose before stacking a correction.", interrupt: false });
     for (i = 0; i < warns.length; i++) if (warns[i].interrupt) hasCritical = true;
@@ -631,27 +771,36 @@
         '<span class="wt">' + w.title + '</span><span class="bd">' + w.detail + '</span></div></div>';
     }).join("");
 
-    var extraRaw = st.mode === "combined" ? 'meal ' + res.mealComponent + 'u + correction ' + res.correctionComponent + 'u - IOB ' + res.iobSubtracted + 'u' : "";
+    var m = st.mode;
+    var actionable = ["combined", "meal", "correction", "basal", "pediatric", "dka"].indexOf(m) > -1;
+    var cardTitle = (m === "isf" || m === "icr") ? "Result" : m === "iob" ? "Active insulin (IOB)" : m === "dka" ? "Infusion rate" : (m === "basal" || m === "pediatric") ? "Suggested regimen" : "Recommended dose";
+    var extraRaw = m === "combined" ? 'meal ' + res.mealComponent + 'u + correction ' + res.correctionComponent + 'u - IOB ' + res.iobSubtracted + 'u' : "";
     var unitNote = mmolMode() ? ' &middot; working shown in mg/dL (canonical); entries converted from mmol/L' : '';
+    var fromraw = 'Computed ' + res.result + ' ' + res.unit + (doseUnitMode(m) ? ', rounded to ' + st.increment + ' unit' : '') + (extraRaw ? ' &middot; ' + extraRaw : '') + unitNote;
+    var monitoringHTML = (res.monitoring && res.monitoring.length) ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + res.monitoring.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' : "";
+    var showCritAck = hasCritical && !clinMode(m);
+    var ctaDisabled = showCritAck || (clinMode(m) && !st.advAck);
 
     out.innerHTML =
-      '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">Recommended dose</div>' +
+      '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">' + cardTitle + '</div>' +
         '<div class="ins-dose"><span class="n" id="insDoseN">0</span><span class="unit">' + res.unit + '</span></div>' +
-        '<div class="ins-fromraw">Computed ' + res.result + ' ' + res.unit + ', rounded to ' + st.increment + ' unit' + (extraRaw ? ' &middot; ' + extraRaw : '') + unitNote + '</div>' +
+        '<div class="ins-fromraw">' + fromraw + '</div>' +
         '<div class="ins-formula">' + res.formula + '</div>' +
-        '<ul class="ins-steps">' + stepsHTML + '</ul>' +
+        '<ul class="ins-steps">' + stepsHTML + '</ul>' + monitoringHTML +
         '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
         '<div class="ins-howp" hidden>' +
-          '<div class="ins-howp-sec"><h4>Method</h4><p>' + howItWorks(st.mode) + '</p></div>' +
+          '<div class="ins-howp-sec"><h4>Method</h4><p>' + howItWorks(m) + '</p></div>' +
           '<div class="ins-howp-sec"><h4>Formula</h4><code>' + res.formula + '</code></div>' +
           (assumeHTML ? '<div class="ins-howp-sec"><h4>What the numbers mean</h4><ul>' + assumeHTML + '</ul></div>' : '') +
           (refsHTML ? '<div class="ins-howp-sec ins-howp-src"><h4>Trusted medical source</h4><ul>' + refsHTML + '</ul></div>' : '') +
         '</div>' +
       '</div>' +
       (warnHTML ? '<div class="ins-card ins-warns ins-bf"><div class="ins-card-t">Safety checks</div>' + warnHTML +
-        (hasCritical ? '<label class="ins-ack"><input type="checkbox" data-ins="ack"> I have reviewed the critical warning above and take clinical responsibility.</label>' : '') + '</div>' : '') +
-      '<button class="ins-cta" data-ins="confirm"' + (hasCritical ? ' disabled' : '') + '>Accept ' + res.rounded + ' ' + res.unit + ' recommendation</button>' +
-      '<div class="ins-done" id="insDone" style="display:none">Recorded to dose history. The order remains the physician\'s to place.</div>';
+        (showCritAck ? '<label class="ins-ack"><input type="checkbox" data-ins="ack"> I have reviewed the critical warning above and take clinical responsibility.</label>' : '') + '</div>' : '') +
+      (actionable ?
+        (clinMode(m) ? '<label class="ins-ack"><input type="checkbox" data-ins="adv-ack"' + (st.advAck ? " checked" : "") + '> I am a trained clinician, have verified this against my institutional protocol, and take clinical responsibility.</label>' : '') +
+        '<button class="ins-cta" data-ins="confirm"' + (ctaDisabled ? ' disabled' : '') + '>Accept ' + res.rounded + ' ' + res.unit + '</button>' +
+        '<div class="ins-done" id="insDone" style="display:none">Recorded to history. The order remains the physician\'s to place.</div>' : '');
 
     var dn = document.getElementById("insDoseN"); if (dn) countUp(dn, res.rounded);
   }
@@ -699,6 +848,9 @@
       return;
     }
     if (a === "go-convert") return go("convert");
+    if (a === "go-history") return go("history");
+    if (a === "hist-filter") { st.histFilter = t.getAttribute("data-v"); var hb = document.querySelectorAll('[data-ins="hist-filter"]'); for (var hi = 0; hi < hb.length; hi++) hb[hi].setAttribute("aria-pressed", hb[hi].getAttribute("data-v") === st.histFilter); renderHistList(); return; }
+    if (a === "hist-export") { var csv = histCSV(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(csv); } catch (e) {} if (window.toast) toast("Dose history CSV copied to clipboard"); else t.textContent = "Copied"; return; }
     if (a === "conv-confirm") {
       var cc = document.querySelector(".ins-cta"); if (cc && cc.disabled) return;
       if (cc) cc.style.display = "none";
@@ -709,12 +861,17 @@
     if (a === "mode") { st.mode = t.getAttribute("data-mode"); syncSeg(); renderInputs(); render(); return; }
     if (a === "inc" || a === "dec") {
       var f = t.getAttribute("data-f"), s = parseFloat(t.getAttribute("data-s"));
-      st[f] = Math.max(0, Math.round(((Number(st[f]) || 0) + (a === "inc" ? s : -s)) * 100) / 100);
-      var inp = t.parentNode.querySelector('input[data-f="' + f + '"]'); if (inp) inp.value = st[f];
+      var nv = Math.max(0, Math.round((stGet(f) + (a === "inc" ? s : -s)) * 100) / 100);
+      stSet(f, nv);
+      var inp = t.parentNode.querySelector('input[data-f="' + f + '"]'); if (inp) inp.value = nv;
       if (st.screen === "convert") renderConvert(); else render(); return;
     }
     if (a === "round") { st.increment = parseFloat(t.getAttribute("data-v")); SET.increment = st.increment; saveSettings(); pressGroup("round"); if (st.screen === "calc") render(); return; }
     if (a === "target-chip") { st.target = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
+    if (a === "rule") { st[t.getAttribute("data-g")] = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
+    if (a === "pedstage") { st.pedStage = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "dkarate") { st.dkaRate = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
+    if (a === "dkapaeds") { st.dkaPaeds = !st.dkaPaeds; renderInputs(); render(); return; }
     if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
     if (a === "iob-est") {
@@ -736,7 +893,7 @@
   function onInput(e) {
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
-    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } if (st.screen === "convert") renderConvert(); else render(); return; }
+    if (a === "num") { var f = t.getAttribute("data-f"); stSet(f, parseFloat(t.value)); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } if (st.screen === "convert") renderConvert(); else render(); return; }
     if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
@@ -751,7 +908,8 @@
       else if (idx > -1) st.compare.splice(idx, 1);
       renderLibList(); return;
     }
-    if (a === "ack") { st.acked = t.checked; var cta = document.querySelector(".ins-cta"); if (cta) cta.disabled = !st.acked; }
+    if (a === "ack") { st.acked = t.checked; var cta = document.querySelector(".ins-cta"); if (cta) cta.disabled = !st.acked; return; }
+    if (a === "adv-ack") { st.advAck = t.checked; var cta2 = document.querySelector(".ins-cta"); if (cta2) cta2.disabled = !st.advAck; return; }
   }
   function syncSeg() {
     var b = document.querySelectorAll('[data-ins="mode"]');
