@@ -6,7 +6,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { makeSecrets } from "../../../functions/_connect/secrets.js";
 import { saveConnection, listConnections, getRow } from "../../../functions/_connect/onboard/store.js";
-import { isDue, setSyncConfig, runDueSyncs } from "../../../functions/_connect/onboard/sync.js";
+import { isDue, setSyncConfig, runDueSyncs, syncNow } from "../../../functions/_connect/onboard/sync.js";
 import { OnboardError } from "../../../functions/_connect/onboard/errors.js";
 import { makeOnboardDb } from "./onboard-db.mjs";
 import { makeMockFhir } from "../smart/mock-fhir-server.mjs";
@@ -190,6 +190,64 @@ test("runDueSyncs: a connection whose refresh throws is recorded as an error and
   assert.equal(synced.length, 2);
   assert.ok(synced.some((r) => r.outcome === "error"));
   assert.ok(synced.some((r) => r.outcome === "ok"));
+});
+
+// ---------- syncNow: manual "Sync now" for ONE connection (shares refreshOne with runDueSyncs) -------------
+test("syncNow: a non-member actor is denied (fail-closed RBAC)", async () => {
+  const db = seedDb();
+  const { connectionId } = await saveConnection(deps(db), req, env, "t1", tokenBody);
+  const intruderDeps = { db, secrets: makeSecrets(env), identifyFn: async () => ({ id: "intruder", guest: false }) };
+  await assert.rejects(() => syncNow(intruderDeps, req, env, "t1", connectionId));
+});
+
+test("syncNow: runs the probe, stamps lastSyncAt, writes a PHI-free audit, and returns {ok, outcome, lastSyncAt}", async () => {
+  const db = seedDb();
+  const mock = makeMockFhir({ base: "https://fhir-syncnow.example.org" });
+  const d = { db, secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }), fetch: mock.fetch, now: () => Date.now() };
+  const { connectionId } = await saveConnection(d, req, env, "t1", { name: "SyncNow", type: "fhir", fhirBaseUrl: mock.base, auth: { method: "token", token: "mock-access-1" } });
+
+  const res = await syncNow(d, req, env, "t1", connectionId);
+  assert.equal(res.ok, true);
+  assert.equal(res.outcome, "ok");
+  assert.ok(res.lastSyncAt);
+
+  const list = await listConnections(d, req, env, "t1");
+  assert.equal(list[0].lastSyncAt, res.lastSyncAt);   // stamped with the value returned to the caller
+  assert.equal(list[0].lastTest.ok, true);            // the SAME capability probe actually ran + was recorded
+
+  const auditRows = db._tables.connect_audit_event || [];
+  const synced = auditRows.filter((r) => r.action === "connect.onboard.synced");
+  assert.equal(synced.length, 1);
+  assert.equal(synced[0].outcome, "ok");
+  assert.equal(synced[0].connector_id, connectionId);
+  const blob = JSON.stringify(auditRows) + JSON.stringify(res);
+  for (const phi of ["Synthetic", "Testpatient", "P1", mock.base]) assert.equal(blob.includes(phi), false);
+});
+
+test("syncNow: a failing probe returns outcome 'error' (not thrown), still stamps lastSyncAt, and stays PHI-free", async () => {
+  const db = seedDb();
+  const d = {
+    db, secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }),
+    fetch: async () => { throw new Error("simulated network failure: unreachable-host.example.org"); }, now: () => Date.now(),
+  };
+  const { connectionId } = await saveConnection(d, req, env, "t1", { name: "Unreachable", type: "fhir", fhirBaseUrl: "https://fhir-unreachable.example.org", auth: { method: "token", token: "mock-access-1" } });
+
+  let res;
+  await assert.doesNotReject(async () => { res = await syncNow(d, req, env, "t1", connectionId); }, "a connection-level probe failure must never throw out of syncNow");
+  assert.equal(res.ok, true);
+  assert.equal(res.outcome, "error");
+  assert.ok(res.lastSyncAt);
+
+  const list = await listConnections(d, req, env, "t1");
+  assert.equal(list[0].lastSyncAt, res.lastSyncAt);   // stamped even on failure (mirrors runDueSyncs)
+  assert.equal(list[0].lastTest.ok, false);
+
+  const auditRows = db._tables.connect_audit_event || [];
+  const synced = auditRows.filter((r) => r.action === "connect.onboard.synced");
+  assert.equal(synced.length, 1);
+  assert.equal(synced[0].outcome, "error");
+  const blob = JSON.stringify(auditRows) + JSON.stringify(res);
+  for (const phi of ["simulated network failure", "unreachable-host.example.org", "fhir-unreachable.example.org"]) assert.equal(blob.includes(phi), false);
 });
 
 test("runDueSyncs: respects the `max` bound", async () => {

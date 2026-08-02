@@ -305,6 +305,18 @@
         <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
       </div>
 
+      <!-- Sync schedule: this organization's auto-sync cadence per connection (self-service refresh interval,
+           manual "Sync now", and a computed next-due), so an admin manages their own refresh cadence without
+           contacting us. Reuses the SAME connections list the dashboard above renders (GET /all); automatic
+           runs happen on the owner-wired cron (POST /sync-run) -- this panel only lets an admin set the
+           interval and trigger an on-demand run of the SAME reachability heartbeat. -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Sync schedule</b><button class="ghost" id="syncReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" style="margin-top:4px">Set how often each connection is automatically checked for reachability. Automatic runs happen on our schedule; use Sync now to run one on demand.</div>
+        <div class="hint" id="syncSummary" style="margin-top:4px"></div>
+        <div id="syncPanel" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Reload, to view the sync schedule.</div></div>
+      </div>
+
       <!-- Connection health: PHI-free operational health (Part 4 analytics), read on demand via Refresh so an
            admin can see which of their connectors are healthy without contacting us. -->
       <div class="card">
@@ -895,13 +907,122 @@
     }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
   }
 
+  function clearEl(e){ while(e.firstChild) e.removeChild(e.firstChild); }
+  function mkEl(tag,cls,text){ var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e; }
+
+  // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
+  // the Connections dashboard above renders) ----. Builds the DOM directly (mkEl/textContent only, never
+  // innerHTML), so a connection's name/type can never be interpreted as markup. "Next due" is a pure
+  // client-side read of syncIntervalMin + lastSyncAt (the same due rule sync.js's isDue() applies server-side,
+  // restated read-only here for display) -- it never round-trips to the server just to compute it.
+  function computeNextDue(c){
+    var interval=Number(c&&c.syncIntervalMin)||0;
+    if(!(interval>0)) return "off";
+    if(!c.lastSyncAt) return "due now";
+    var last=Date.parse(c.lastSyncAt);
+    if(!isFinite(last)) return "due now";
+    var next=last+interval*60000;
+    return next<=Date.now()?"due now":new Date(next).toLocaleString();
+  }
+  function saySync(id,k,t){ var m=$("syncPanel").querySelector('[data-smsg="'+id+'"]'); if(m){ m.className="rowmsg msg "+(k||""); m.textContent=t||""; } }
+  // Recompute and repaint ONLY the Next due cell for one row, from its CURRENT interval input value + its
+  // last-known lastSyncAt (stashed on the row via data-lastsyncat) -- used after Save interval / Sync now so
+  // those actions can update just the affected row in place, without a full panel reload that would also wipe
+  // the success/error message this same click just set.
+  function refreshNextDueCell(id){
+    var box=$("syncPanel"), tr=box.querySelector('tr[data-row-id="'+id+'"]'); if(!tr) return;
+    var inp=box.querySelector('[data-interval-input="'+id+'"]');
+    var interval=inp?parseInt((inp.value||"0"),10):0;
+    var cell=box.querySelector('[data-nextdue-cell="'+id+'"]');
+    if(cell) cell.textContent=computeNextDue({syncIntervalMin:interval,lastSyncAt:tr.getAttribute("data-lastsyncat")||null});
+  }
+  function renderSyncPanel(fhir){
+    fhir=Array.isArray(fhir)?fhir:[];
+    var box=$("syncPanel"), sum=$("syncSummary");
+    clearEl(box);
+    if(!fhir.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connections yet.")); return; }
+    var on=fhir.filter(function(c){return Number(c.syncIntervalMin)>0;}).length;
+    sum.textContent=fhir.length+" connection"+(fhir.length===1?"":"s")+", "+on+" with auto-sync on";
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Name","Type","Interval (min, 0 = off)","Last sync","Next due","Actions"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    fhir.forEach(function(c){
+      var id=c.connectionId;
+      var tr=mkEl("tr"); tr.setAttribute("data-row-id",id); tr.setAttribute("data-lastsyncat",c.lastSyncAt||"");
+      var tdName=mkEl("td"); tdName.appendChild(mkEl("b",null,c.name||"(unnamed)")); tr.appendChild(tdName);
+      tr.appendChild(mkEl("td",null,typeLabel(c.type)));
+      var tdInt=mkEl("td"); var inp=document.createElement("input");
+      inp.type="number"; inp.min="0"; inp.step="1"; inp.value=String(c.syncIntervalMin||0);
+      inp.setAttribute("data-interval-input",id); inp.style.width="90px";
+      tdInt.appendChild(inp); tr.appendChild(tdInt);
+      var tdLast=mkEl("td","hint",c.lastSyncAt?when(c.lastSyncAt):"never"); tdLast.setAttribute("data-lastsync-cell",id); tr.appendChild(tdLast);
+      var tdNext=mkEl("td","hint",computeNextDue(c)); tdNext.setAttribute("data-nextdue-cell",id); tr.appendChild(tdNext);
+      var tdAct=mkEl("td","acts");
+      var saveBtn=mkEl("button","ghost","Save interval"); saveBtn.setAttribute("data-sact","saveinterval"); saveBtn.setAttribute("data-cid",id);
+      var syncBtn=mkEl("button","ghost","Sync now"); syncBtn.setAttribute("data-sact","syncnow"); syncBtn.setAttribute("data-cid",id);
+      tdAct.appendChild(saveBtn); tdAct.appendChild(syncBtn);
+      tr.appendChild(tdAct);
+      tbody.appendChild(tr);
+      var msgTr=mkEl("tr"); var msgTd=document.createElement("td"); msgTd.colSpan=6;
+      var msgDiv=mkEl("div","rowmsg msg"); msgDiv.setAttribute("data-smsg",id);
+      msgTd.appendChild(msgDiv); msgTr.appendChild(msgTd); tbody.appendChild(msgTr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+  }
+  function loadSyncPanel(){
+    if(!tenant()){ $("syncPanel").innerHTML='<div class="hint">Select your organization above, then Reload, to view the sync schedule.</div>'; $("syncSummary").textContent=""; return; }
+    $("syncPanel").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/all?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("syncPanel").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("syncSummary").textContent=""; return; }
+      renderSyncPanel(x.d.fhir||[]);
+    }).catch(function(){ $("syncPanel").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  // Save interval / Sync now update ONLY their own row in place (interval/next-due, or last-sync/next-due)
+  // instead of reloading the whole panel -- a full reload would also wipe the success/error message this same
+  // action just set. Reload (or the next visit) still picks up the authoritative server state via GET /all.
+  function doSaveInterval(id){
+    var inp=$("syncPanel").querySelector('[data-interval-input="'+id+'"]');
+    var raw=inp?(inp.value||"").trim():"";
+    var n=raw===""?0:parseInt(raw,10);
+    if(!isFinite(n)||isNaN(n)||n<0){ saySync(id,"err","Enter 0 (off) or a whole number of minutes."); return; }
+    saySync(id,"","Saving interval...");
+    jpost(API+"/sync-config/"+encodeURIComponent(id),{tenantId:tenant(),intervalMin:n}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.connectionId){ saySync(id,"err",httpErr(x)); return; }
+      saySync(id,"ok", n>0?("Auto-sync set to every "+n+" minutes."):"Auto-sync turned off.");
+      refreshNextDueCell(id);
+    }).catch(function(){ saySync(id,"err","Sign in first."); });
+  }
+  function doSyncNow(id){
+    saySync(id,"","Syncing...");
+    jpost(API+"/sync-now/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ saySync(id,"err",httpErr(x)); return; }
+      saySync(id, x.d.outcome==="ok"?"ok":"err", x.d.outcome==="ok"?"Synced successfully.":"Sync ran but reported an error.");
+      if(x.d.lastSyncAt){
+        var box=$("syncPanel"), tr=box.querySelector('tr[data-row-id="'+id+'"]');
+        if(tr) tr.setAttribute("data-lastsyncat",x.d.lastSyncAt);
+        var lc=box.querySelector('[data-lastsync-cell="'+id+'"]'); if(lc) lc.textContent=when(x.d.lastSyncAt);
+      }
+      refreshNextDueCell(id);
+    }).catch(function(){ saySync(id,"err","Sign in first."); });
+  }
+  $("syncReload").onclick=loadSyncPanel;
+  $("syncPanel").addEventListener("click",function(e){
+    var b=e.target.closest("[data-sact]"); if(!b) return;
+    var id=b.getAttribute("data-cid"), act=b.getAttribute("data-sact");
+    if(act==="saveinterval") doSaveInterval(id);
+    else if(act==="syncnow") doSyncNow(id);
+  });
+
   // ---- connection health (PHI-free integration-health analytics; GET /health, Part 4) ----
   // The health payload is audit-derived counts/ids/timestamps only (see functions/_connect/maik/
   // integration-health.js) — PHI-free by construction. As defense in depth, this renderer builds the DOM
   // directly and writes every field via textContent (never innerHTML) so nothing in the payload can ever be
   // interpreted as markup, even if the audit allow-list ever regressed.
-  function clearEl(e){ while(e.firstChild) e.removeChild(e.firstChild); }
-  function mkEl(tag,cls,text){ var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e; }
   function healthStatus(rate){
     if(!(rate>0)) return {cls:"verified",label:"Healthy"};
     if(rate>=1) return {cls:"rejected",label:"Failing"};
@@ -1095,6 +1216,8 @@
   // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
   window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    loadSyncPanel:loadSyncPanel, renderSyncPanel:renderSyncPanel, computeNextDue:computeNextDue,
+    saveInterval:doSaveInterval, syncNow:doSyncNow,
     loadHealth:loadHealth, renderHealth:renderHealth,
     loadActivity:loadActivity, renderActivity:renderActivity,
     loadCatalog:loadCatalog, renderCatalog:renderCatalog,

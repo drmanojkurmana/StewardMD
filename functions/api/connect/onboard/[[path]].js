@@ -19,7 +19,7 @@ import { testConnection } from "../../../_connect/onboard/probe.js";
 import { validateConnection } from "../../../_connect/onboard/validate-engine.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
-import { setSyncConfig, runDueSyncs } from "../../../_connect/onboard/sync.js";
+import { setSyncConfig, runDueSyncs, syncNow } from "../../../_connect/onboard/sync.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
 import { aiMapFlagOn } from "../../../_connect/onboard/ai-map-flags.js";
 import { suggestMapping } from "../../../_connect/onboard/ai-map.js";
@@ -131,6 +131,14 @@ export async function onRequest(context) {
     // Automatic sync scheduler: the RBAC-gated per-connection interval setter (a hospital admin configures it
     // from the wizard); the cron-only sweep below is what actually runs the due connections.
     if (method === "POST" && parts[0] === "sync-config" && parts[1]) return jsonResponse(await setSyncConfig(deps, request, env, tid, parts[1], body));
+    // Automatic sync scheduler: manual "Sync now" for ONE connection -- the SAME RBAC tier + per-track gate as
+    // /test (it reuses the identical reachability probe), but also stamps config.lastSyncAt like the cron sweep
+    // does, so a manual run resets this connection's own auto-sync clock too.
+    if (method === "POST" && parts[0] === "sync-now" && parts[1]) {
+      if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await syncNow(deps, request, env, tid, parts[1]));
+    }
     // CRON-ONLY: the stewardmd-api Worker's schedule POSTs here (mirrors /admin/sweep on the Phase-0 surface).
     // Admin-token gated, NOT RBAC — there is no per-request clinician actor in a cron sweep. Missing/wrong
     // token -> 401 before any DB access (no existence leak beyond the top-level flag gate, already checked).

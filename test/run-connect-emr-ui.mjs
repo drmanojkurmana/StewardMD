@@ -302,6 +302,77 @@ try {
   ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-3",name:"Hospital PACS Feed",type:"dicomweb",fhirBaseUrl:"https://pacs.example.org/dicom-web",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Hospital PACS Feed")>=0 && h.indexOf(">DICOMweb<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a dicomweb row is badged DICOMweb (its real type), not hardcoded FHIR");
 
+  // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
+  // the Connections dashboard renders). Two connections: one auto-sync ON and never synced (next due = "due
+  // now"), one auto-sync OFF (next due = "off"). Asserts the panel renders schedule rows with pre-filled
+  // interval inputs, Save interval POSTs /sync-config/:id with the entered value, Sync now POSTs /sync-now/:id
+  // and surfaces both a success and a failing outcome without throwing, the next-due computation, the empty
+  // state, and the flag-off degrade path. ----
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:2,hl7:0,total:2},fhir:[
+      {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:null},
+      {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:0,lastSyncAt:null}
+    ],hl7:[]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#syncPanel table.dash');`) === true, "the sync schedule panel renders a table");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("On Sync Hospital")>=0 && t.indexOf("Off Sync Lab")>=0 && t.indexOf("REST/JSON")>=0;`) === true, "the sync schedule table renders both connections with their real type badge");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("due now")>=0 && t.indexOf("off")>=0;`) === true, "next-due computes 'due now' for an on/never-synced connection and 'off' for a zero-interval connection");
+  ok(await ev(`var i1=document.querySelector('[data-interval-input="sc-1"]'), i2=document.querySelector('[data-interval-input="sc-2"]'); return i1.value==="60" && i2.value==="0";`) === true, "each row's interval input is pre-filled with the connection's current syncIntervalMin");
+  ok(await ev(`var s=document.getElementById("syncSummary").textContent; return s.indexOf("2 connection")>=0 && s.indexOf("1 with auto-sync on")>=0;`) === true, "the summary line reports the connection count and how many have auto-sync on");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the sync schedule panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Save interval: editing the input then clicking Save interval POSTs /sync-config/:id with the entered value.
+  await ev(`window.__syncCfgReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/sync-config/sc-2")>=0){ window.__syncCfgReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{connectionId:"sc-2",syncIntervalMin:30}}); }
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[
+        {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:null},
+        {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}
+      ],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    var inp=document.querySelector('[data-interval-input="sc-2"]'); inp.value="30";
+    document.querySelector('#syncPanel [data-sact="saveinterval"][data-cid="sc-2"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__syncCfgReq; return !!r && r.intervalMin===30 && r.tenantId==="solo-hosp";`) === true, "Save interval POSTs /sync-config/:id with the entered intervalMin");
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-2"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("30 minutes")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "Save interval reports success with the new cadence, no em-dash");
+
+  // Sync now (success): clicking Sync now POSTs /sync-now/:id and reports the outcome.
+  await ev(`window.__syncNowReq=null; window.__syncNowPath=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/sync-now/sc-1")>=0){ window.__syncNowPath=path; window.__syncNowReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,outcome:"ok",lastSyncAt:"2026-08-02T10:00:00.000Z"}}); }
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[
+        {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:"2026-08-02T10:00:00.000Z"},
+        {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}
+      ],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    document.querySelector('#syncPanel [data-sact="syncnow"][data-cid="sc-1"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!window.__syncNowReq && window.__syncNowPath.indexOf("/sync-now/sc-1")>=0 && window.__syncNowReq.tenantId==="solo-hosp";`) === true, "Sync now POSTs /sync-now/:id for the clicked row's connection id");
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-1"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("Synced successfully")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "Sync now reports success, no em-dash");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("2026")>=0 || t.indexOf("ago")>=0;`) === true, "reloading after Sync now shows the freshly-stamped last-sync time");
+
+  // Sync now (failing outcome): reported without throwing / crashing the panel.
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/sync-now/sc-2")>=0) return Promise.resolve({s:200,d:{ok:true,outcome:"error",lastSyncAt:"2026-08-02T10:05:00.000Z"}});
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[{connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    document.querySelector('#syncPanel [data-sact="syncnow"][data-cid="sc-2"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-2"]'); return m.className.indexOf("err")>=0 && m.textContent.indexOf("reported an error")>=0;`) === true, "Sync now surfaces a failing outcome without throwing / crashing the panel");
+
+  // Empty connections -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("syncPanel").textContent.indexOf("No connections yet.")>=0 && document.getElementById("syncSummary").textContent==="";`) === true, "an empty connections list shows the 'No connections yet.' empty state");
+
+  // Sync schedule degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /all on a 404 (flag off) via the sync schedule Reload also shows the graceful 'not enabled yet' state");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
   // ---- Connection health panel (GET /health, Part 4 PHI-free integration-health analytics) ----
   // Two connectors: one fully healthy, one with failures + a recent-failure entry + warnings. Assert the
   // panel derives and renders status/labels/counts correctly, AND that the mocked health payload itself

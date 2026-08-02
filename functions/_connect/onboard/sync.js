@@ -68,15 +68,48 @@ function lastSyncAtMs(row) {
   catch { return -Infinity; }
 }
 
-// Re-run the capability probe for one onboarded connection (system-triggered: no request/actor to RBAC-check —
-// the ONLY gate on this whole batch is the caller endpoint's admin-token check). Returns the probe result;
-// throws only on an infra fault (D1/secrets), which the caller catches per-item.
+// Re-run the capability probe for one onboarded connection. Shared by BOTH the cron sweep (runDueSyncs, system-
+// triggered, no request/actor to RBAC-check) and the manual "Sync now" button (syncNow, RBAC-gated) — same
+// probe, same recordTest, one code path. Returns the probe result; throws only on an infra fault (D1/secrets)
+// or a not-found connection, which each caller handles per its own context (the batch catches per-item;
+// syncNow lets it propagate like /test does, since a manual sync targets a caller-supplied connectionId).
 async function refreshOne(deps, tenantId, connectionId) {
   const { row, config } = await getRow(deps.db, tenantId, connectionId);
   let creds = {}; try { creds = JSON.parse(await deps.secrets.open(config.sealed)); } catch { creds = {}; }
   const result = await runProbe(deps, row.base_url, config, creds);
   await recordTest(deps, tenantId, connectionId, result);
   return result;
+}
+
+// Stamp config.lastSyncAt regardless of the refresh outcome — success or failure — so a persistently-failing
+// connection cools down for its own interval instead of being retried immediately (mirrors what runDueSyncs
+// already does per-item). Shared by runDueSyncs AND syncNow. Best-effort: a stamp failure must never abort
+// the caller (runDueSyncs must keep sweeping the batch; syncNow must still return its result to the admin).
+async function stampLastSyncAt(deps, tenantId, connectionId, whenIso) {
+  try {
+    const { config } = await getRow(deps.db, tenantId, connectionId);
+    config.lastSyncAt = whenIso;
+    await deps.db.prepare("UPDATE connect_connector_config SET config=? WHERE tenant_id=? AND connector_id=?")
+      .bind(JSON.stringify(config), tenantId, connectionId).run();
+  } catch (e) { /* best-effort stamp; must not abort the caller */ }
+}
+
+// Endpoint: RBAC-gated (connector:write — the same tier setSyncConfig uses; this is a manual, on-demand trigger
+// of the identical reachability heartbeat runDueSyncs automates, NOT a data pull). Reuses refreshOne (getRow ->
+// open sealed creds -> runProbe -> recordTest) so the probe logic is never duplicated, then stamps
+// config.lastSyncAt (mirroring runDueSyncs's "always stamp" behavior) so a manual sync also resets this
+// connection's own auto-sync clock. A connection-level probe failure (unreachable/unauthorized/etc) is
+// reported as outcome:"error" and STILL RETURNS — runProbe already never throws for that class of fault, only
+// for a genuine infra/programmer fault (e.g. an unknown connectionId) does this propagate, same as /test.
+// PHI-free audit + PHI-free return: only outcome + lastSyncAt, never a bundle/error message/URL.
+export async function syncNow(deps, request, env, tenantId, connectionId) {
+  const { actor, tenant } = await requireCan(deps, request, env, tenantId, "connector:write");
+  const result = await refreshOne(deps, tenant.id, connectionId);
+  const outcome = (result && result.ok) ? "ok" : "error";
+  const lastSyncAt = new Date().toISOString();
+  await stampLastSyncAt(deps, tenant.id, connectionId, lastSyncAt);
+  await makeAuditSink(env, deps.db)({ tenantId: tenant.id, actor: actor.id, connectorId: connectionId, action: "connect.onboard.synced", outcome, ts: lastSyncAt });
+  return { ok: true, outcome, lastSyncAt };
 }
 
 // Endpoint (cron-only, admin-token-gated by the caller route — NOT RBAC): enumerate every onboarded FHIR pull
@@ -106,12 +139,7 @@ export async function runDueSyncs(deps, env, now, { max = 25 } = {}) {
     if (outcome === "error") errors++;
 
     // Always stamp lastSyncAt — success or failure — so a broken connection cools down for its own interval.
-    try {
-      const { config } = await getRow(deps.db, tenantId, connectionId);
-      config.lastSyncAt = new Date(Number(now)).toISOString();
-      await deps.db.prepare("UPDATE connect_connector_config SET config=? WHERE tenant_id=? AND connector_id=?")
-        .bind(JSON.stringify(config), tenantId, connectionId).run();
-    } catch (e) { /* best-effort stamp; must not abort the batch */ }
+    await stampLastSyncAt(deps, tenantId, connectionId, new Date(Number(now)).toISOString());
 
     // PHI-free: connectorId + outcome only — no bundle, no counts, no patient reference, no error message.
     try {

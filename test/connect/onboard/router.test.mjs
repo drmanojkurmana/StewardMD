@@ -127,6 +127,34 @@ test("sync-run: a valid admin token runs the sweep and returns PHI-free counts",
   assert.deepEqual(body, { ok: true, due: 0, ran: 0, errors: 0 });
 });
 
+// sync-now: manual "Sync now" for ONE connection -- the SAME RBAC tier as sync-config (unauthenticated -> 401),
+// plus the same per-track flag gate test/pull/validate already carry (rest-json/dicomweb rows 404 off, 401 on).
+test("sync-now: flag OFF -> 404; unauthenticated -> sanitized 401", async () => {
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/abc", { tenantId: "t1" }, {}))).status, 404);
+  const res = await onRequest(post("/api/connect/onboard/sync-now/abc", { tenantId: "t1" }, BOTH));
+  assert.equal(res.status, 401);
+  assert.equal(res.headers.get("cache-control"), "no-store");
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
+test("sync-now: rest-json/dicomweb per-track flag gate on an existing row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "rj1", "rest-json", "pull", "https://labs.example.org", JSON.stringify({ source: "onboard", type: "rest-json" }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "dw1", "dicomweb", "pull", "https://pacs.example.org/dicom-web", JSON.stringify({ source: "onboard", type: "dicomweb" }), null,
+      JSON.stringify(["ImagingStudy"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_REST_FLAG: "1", CONNECT_DICOM_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/rj1", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/dw1", { tenantId: "t1" }, envOff))).status, 404);
+
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/rj1", { tenantId: "t1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/dw1", { tenantId: "t1" }, envOn))).status, 401);
+});
+
 // --- rest-json per-track flag gate (mirrors Track A's fhirFlagOn idiom): smd_connect_rest, default OFF -----
 test("rest-json save: 404 when CONNECT_REST_FLAG is off (base+onboard on); reachable (401) when on", async () => {
   const restBody = { tenantId: "t1", name: "Lab API", type: "rest-json", baseUrl: "https://labs.example.org", auth: { method: "token", token: "SEKRET-REST" } };
