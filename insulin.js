@@ -27,6 +27,26 @@
   function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
   function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
 
+  var ICON_BOOK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+  var ICON_CHEV = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+
+  // Plain-language method per calculator, so the recommendation is auditable, not a black box.
+  function howItWorks(mode) {
+    if (mode === "meal")
+      return "This covers the carbohydrates in the meal. It divides the grams of carbohydrate by the " +
+        "insulin-to-carbohydrate ratio (ICR), so one unit of insulin is given for every ICR grams. " +
+        "The result is then rounded to your chosen increment.";
+    if (mode === "correction")
+      return "This brings a high glucose down toward target. It takes how far the current glucose is above " +
+        "target and divides by the insulin sensitivity factor (ISF), where one unit of insulin is expected " +
+        "to lower glucose by ISF mg/dL. No correction is given at or below target, and the result is rounded.";
+    return "This combines two doses. First it covers the meal: grams of carbohydrate divided by the " +
+      "insulin-to-carbohydrate ratio (ICR). Then it adds a correction for a high glucose: the amount above " +
+      "target divided by the insulin sensitivity factor (ISF). It then subtracts any insulin still active " +
+      "from earlier doses (IOB) so a dose is not stacked on top of one already working, floors the total at " +
+      "zero, and rounds to your chosen increment.";
+  }
+
   /* ---------- Motion helpers ---------- */
   function withMotion(cb) {
     if (window.Motion && window.Motion.animate) return cb(window.Motion);
@@ -119,17 +139,21 @@
     var m = st.mode, h = "";
     if (m !== "meal") {
       h += '<div class="ins-field"><div class="ins-lab">Current glucose <span class="u">mg/dL</span></div>' +
-        stepper("glucose", st.glucose, 5) +
-        '<div class="ins-chips" style="margin-top:9px">' +
-          tgtChip(100) + tgtChip(120) + tgtChip(140) +
-        '</div></div>';
+        stepper("glucose", st.glucose, 5) + '</div>';
+      h += '<div class="ins-field"><div class="ins-lab">Target glucose <span class="u">mg/dL</span></div>' +
+        '<div class="ins-tgt">' +
+          '<input class="ins-tgt-in" data-ins="num" data-f="target" type="number" inputmode="numeric" min="1" value="' + st.target + '" aria-label="Target glucose in mg/dL">' +
+          '<div class="ins-chips">' + tgtChip(100) + tgtChip(120) + tgtChip(140) + tgtChip(180) + '</div>' +
+        '</div>' +
+        '<div class="ins-tgt-note">Type any target - set a higher interim target for gradual correction (e.g. 300 when starting from 400).</div>' +
+      '</div>';
     }
     if (m !== "correction") {
       h += '<div class="ins-field"><div class="ins-lab">Carbohydrates <span class="u">g</span></div>' +
         stepper("carbs", st.carbs, 5) + '</div>';
     }
     h += '<div class="ins-field"><div class="ins-grid2">';
-    if (m !== "meal") { h += mini("target", "Target mg/dL", st.target) + mini("isf", "ISF mg/dL/u", st.isf); }
+    if (m !== "meal") { h += mini("isf", "ISF mg/dL/u", st.isf); }
     if (m !== "correction") { h += mini("icr", "ICR g/u", st.icr); }
     if (m === "combined") { h += mini("iob", "Active insulin (IOB) u", st.iob); }
     h += '</div></div>';
@@ -186,8 +210,8 @@
 
     var warnHTML = warns.map(function (w) {
       return '<div class="ins-warn ' + w.severity + '">' +
-        '<span class="ins-warn-ic">' + sevIcon(w.severity) + '</span>' +
-        '<div><span class="ins-warn-sev">' + sevLabel(w.severity) + '</span>' +
+        '<span class="ins-warn-band">' + sevIcon(w.severity) + '</span>' +
+        '<div class="ins-warn-body"><span class="ins-warn-sig">' + sevLabel(w.severity) + '</span>' +
         '<span class="wt">' + w.title + '</span><span class="bd">' + w.detail + '</span></div>' +
       '</div>';
     }).join("");
@@ -204,9 +228,13 @@
           (extraRaw ? ' &middot; ' + extraRaw : '') + '</div>' +
         '<div class="ins-formula">' + res.formula + '</div>' +
         '<ul class="ins-steps">' + stepsHTML + '</ul>' +
-        '<details class="ins-fold"><summary>Assumptions and notes</summary><ul>' + assumeHTML +
-          (refsHTML ? '</ul><summary style="cursor:default">References</summary><ul>' + refsHTML : '') +
-        '</ul></details>' +
+        '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
+        '<div class="ins-howp" hidden>' +
+          '<div class="ins-howp-sec"><h4>Method</h4><p>' + howItWorks(st.mode) + '</p></div>' +
+          '<div class="ins-howp-sec"><h4>Formula</h4><code>' + res.formula + '</code></div>' +
+          (assumeHTML ? '<div class="ins-howp-sec"><h4>What the numbers mean</h4><ul>' + assumeHTML + '</ul></div>' : '') +
+          (refsHTML ? '<div class="ins-howp-sec ins-howp-src"><h4>Trusted medical source</h4><ul>' + refsHTML + '</ul></div>' : '') +
+        '</div>' +
       '</div>' +
       (warnHTML ? '<div class="ins-card ins-warns ins-bf"><div class="ins-card-t">Safety checks</div>' + warnHTML +
         (hasCritical ? '<label class="ins-ack"><input type="checkbox" data-ins="ack"> I have reviewed the critical warning above and take clinical responsibility.</label>' : '') +
@@ -235,13 +263,24 @@
     if (a === "target-chip") { st.target = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
+    if (a === "how") {
+      var exp = t.getAttribute("aria-expanded") === "true";
+      var panel = t.nextElementSibling;
+      t.setAttribute("aria-expanded", exp ? "false" : "true");
+      if (exp) { if (panel) panel.hidden = true; }
+      else if (panel) {
+        panel.hidden = false;
+        if (!reduced()) withMotion(function (M) { try { M.animate(panel, { opacity: [0, 1], y: [-6, 0] }, { duration: 0.28, easing: [0.2, 0.7, 0.2, 1] }); } catch (e) {} });
+      }
+      return;
+    }
     if (a === "ack") return; // handled in onInput
     if (a === "confirm") return confirmDose(t);
   }
   function onInput(e) {
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
-    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); render(); return; }
+    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); render(); return; }
     if (a === "ack") {
       st.acked = t.checked;
       var cta = document.querySelector('.ins-cta'); if (cta) cta.disabled = !st.acked;
@@ -256,6 +295,11 @@
     var btns = document.querySelectorAll('[data-ins="' + name + '"]');
     for (var i = 0; i < btns.length; i++)
       btns[i].setAttribute("aria-pressed", parseFloat(btns[i].getAttribute("data-v")) === st.increment);
+  }
+  function syncTargetChips() {
+    var btns = document.querySelectorAll('[data-ins="target-chip"]');
+    for (var i = 0; i < btns.length; i++)
+      btns[i].setAttribute("aria-pressed", parseFloat(btns[i].getAttribute("data-v")) === st.target);
   }
   function confirmDose(btn) {
     if (btn.disabled) return;

@@ -142,6 +142,17 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 }
 .ins-mini input:focus { border-color: var(--ins-primary); }
 
+/* Manual target: editable value + preset quick-fills */
+.ins-tgt { display: flex; gap: 10px; align-items: center; }
+.ins-tgt-in { width: 92px; flex: 0 0 auto; border: 1px solid var(--ins-line); border-radius: 10px;
+  background: var(--ins-surface); font-family: var(--ins-mono); font-size: 18px; font-weight: 700;
+  color: var(--ins-primary); padding: 11px 10px; outline: 0; text-align: center;
+  transition: border-color .15s var(--ins-ease); }
+.ins-tgt-in:focus { border-color: var(--ins-primary); }
+.ins-tgt-in::-webkit-outer-spin-button, .ins-tgt-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.ins-tgt .ins-chips { flex: 1; }
+.ins-tgt-note { font-size: 11.5px; color: var(--ins-muted); margin-top: 8px; line-height: 1.4; }
+
 /* Rounding toggle */
 .ins-round { display: flex; gap: 6px; }
 .ins-round button { flex: 1; border: 1px solid var(--ins-line); background: var(--ins-surface);
@@ -180,35 +191,53 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-fold ul { margin: 4px 0 8px; padding-left: 18px; }
 .ins-fold li { font-size: 12.5px; color: var(--ins-muted); line-height: 1.5; margin-bottom: 4px; }
 
-/* ---- Warnings (clinical-flag treatment: severity spine + icon badge + mono eyebrow) ---- */
+/* How it works - method + source, for justification and trust */
+.ins-how { display: flex; align-items: center; gap: 9px; width: 100%; margin-top: 8px;
+  border: 1px solid var(--ins-line); background: var(--ins-surface-2); color: var(--ins-ink);
+  border-radius: 10px; padding: 12px 13px; font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background .15s var(--ins-ease); }
+.ins-how:hover { background: color-mix(in srgb, var(--ins-primary) 6%, var(--ins-surface-2)); }
+.ins-how > svg:first-child { color: var(--ins-primary); flex: 0 0 auto; }
+.ins-how .chev { margin-left: auto; color: var(--ins-muted); transition: transform .22s var(--ins-ease); }
+.ins-how[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.ins-howp { margin-top: 10px; display: flex; flex-direction: column; gap: 14px; }
+.ins-howp-sec h4 { margin: 0 0 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ins-muted); }
+.ins-howp-sec p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ins-ink); }
+.ins-howp-sec code { display: block; font-family: var(--ins-mono); font-size: 12px; color: var(--ins-ink);
+  background: var(--ins-surface-2); border: 1px solid var(--ins-line); border-radius: 8px; padding: 9px 11px; }
+.ins-howp-sec ul { margin: 0; padding-left: 16px; }
+.ins-howp-sec li { font-size: 12.5px; line-height: 1.5; color: var(--ins-muted); margin-bottom: 4px; }
+.ins-howp-src { border-left: 3px solid var(--ins-primary); padding: 9px 0 9px 13px;
+  background: color-mix(in srgb, var(--ins-primary) 5%, transparent); border-radius: 0 8px 8px 0; }
+.ins-howp-src h4 { color: var(--ins-primary); }
+.ins-howp-src li { color: var(--ins-ink); }
+
+/* ---- Warnings (signal-word placard: classic safety-sign treatment) ----
+   Solid severity band + white-knockout icon on the leading edge, the signal word
+   (CRITICAL / WARNING / CAUTION) letterspaced above the message. The icon color is
+   var(--ins-bg) so it knocks out correctly against the band in both light and dark. */
 .ins-warns { margin: 2px 0 0; display: flex; flex-direction: column; gap: 10px; }
 .ins-warn {
   --sv: var(--ins-muted);
-  position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start;
-  padding: 12px 14px 12px 18px; border-radius: 13px;
-  background: var(--ins-surface); border: 1px solid var(--ins-line);
-  box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04));
+  display: grid; grid-template-columns: 46px 1fr; align-items: stretch;
+  border: 1.5px solid var(--sv); border-radius: 11px; overflow: hidden;
+  background: var(--ins-surface); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04));
 }
-/* full-height severity spine on the leading edge */
-.ins-warn::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-  border-radius: 13px 0 0 13px; background: var(--sv); }
-.ins-warn-ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
-  color: var(--sv); background: color-mix(in srgb, var(--sv) 13%, var(--ins-surface));
-  border: 1px solid color-mix(in srgb, var(--sv) 22%, transparent); }
-.ins-warn-sev { font-family: var(--ins-mono); font-size: 9.5px; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--sv); display: block; margin-bottom: 3px; }
-.ins-warn .wt { font-weight: 700; font-size: 13.5px; color: var(--ins-ink); display: block; margin-bottom: 2px; letter-spacing: -.005em; }
+.ins-warn-band { background: var(--sv); color: var(--ins-bg); display: grid; place-items: center; }
+.ins-warn-band svg { width: 18px; height: 18px; }
+.ins-warn-body { padding: 11px 14px; min-width: 0; }
+.ins-warn-sig { font-weight: 800; font-size: 11px; letter-spacing: .19em; text-transform: uppercase;
+  color: var(--sv); margin-bottom: 3px; }
+.ins-warn .wt { font-weight: 700; font-size: 13.5px; color: var(--ins-ink); display: block; margin-bottom: 1px; letter-spacing: -.005em; }
 .ins-warn .bd { font-size: 12.5px; line-height: 1.46; color: var(--ins-muted); }
-.ins-warn.critical { --sv: var(--sev-critical-fg,#B42332); border-color: color-mix(in srgb, var(--sv) 34%, var(--ins-line)); }
+.ins-warn.critical { --sv: var(--sev-critical-fg,#B42332); }
 .ins-warn.warning  { --sv: var(--sev-warning-fg,#996007); }
 .ins-warn.caution  { --sv: var(--sev-urgent-fg,#C2410C); }
 .ins-warn.info     { --sv: var(--sev-info-fg,#1D6FA3); }
-/* criticals breathe once, subtly */
-.ins-warn.critical .ins-warn-ic { animation: ins-pulse 2.4s var(--ins-ease) infinite; }
-@keyframes ins-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--sv) 42%, transparent); }
-  55%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--sv) 0%, transparent); }
-}
+/* criticals: the band breathes, subtly */
+.ins-warn.critical .ins-warn-band { animation: ins-pulse 2.4s var(--ins-ease) infinite; }
+@keyframes ins-pulse { 0%, 100% { filter: brightness(1); } 55% { filter: brightness(1.14); } }
 
 .ins-ack { display: flex; align-items: center; gap: 8px; margin: 6px 0 12px; font-size: 12.5px;
   color: var(--ins-ink); cursor: pointer; }
@@ -240,6 +269,6 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   animation: ins-bf-in .5s var(--ins-ease) forwards; }
 @keyframes ins-bf-in { to { opacity: 1; transform: none; filter: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .ins-gridbg, .ins-cta::after, .ins-warn.critical .ins-warn-ic { animation: none; }
+  .ins-gridbg, .ins-cta::after, .ins-warn.critical .ins-warn-band { animation: none; }
   .ins-bf { animation: none; opacity: 1; transform: none; filter: none; }
 }
