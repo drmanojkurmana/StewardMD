@@ -95,7 +95,7 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   border-radius: 11px; padding: 14px 10px; font-family: inherit; font-size: 13px; font-weight: 600;
   cursor: pointer; transition: background .15s var(--ins-ease); }
 .ins-qa-btn:hover { background: color-mix(in srgb, var(--ins-primary) 7%, var(--ins-surface-2)); }
-.ins-qa-btn:first-child { grid-column: span 2; }
+.ins-qa > .ins-qa-btn:first-child { grid-column: span 2; }
 .ins-rec-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--ins-line); }
 .ins-rec-row:last-child { border-bottom: 0; }
 .ins-rec-dose { font-family: var(--ins-mono); font-size: 18px; font-weight: 700; color: var(--ins-primary); min-width: 46px; }
@@ -171,6 +171,40 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-cmp-k { font-weight: 700; color: var(--ins-muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; background: var(--ins-surface); }
 .ins-cmp-v { color: var(--ins-ink); background: var(--ins-surface); }
 .ins-cmp-corner { background: var(--ins-surface-2); }
+
+/* ---- Patient profiles ---- */
+.ins-patbar { display: flex; align-items: stretch; width: 100%; margin-bottom: 14px;
+  border: 1px solid var(--ins-line); background: var(--ins-surface); border-radius: 13px; overflow: hidden;
+  box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+.ins-patbar-main, .ins-patbar.ins-patbar-empty { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0;
+  border: 0; background: transparent; cursor: pointer; text-align: left; font-family: inherit; padding: 12px 14px; color: var(--ins-ink); }
+.ins-patbar-main > svg, .ins-patbar.ins-patbar-empty > svg:first-child { color: var(--ins-primary); flex: 0 0 auto; }
+.ins-patbar-tx { flex: 1; min-width: 0; }
+.ins-patbar-t { display: block; font-size: 13.5px; font-weight: 700; color: var(--ins-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ins-patbar-s { display: block; font-size: 11.5px; color: var(--ins-muted); margin-top: 1px; }
+.ins-patbar-x { flex: 0 0 auto; width: 42px; border: 0; border-left: 1px solid var(--ins-line);
+  background: transparent; color: var(--ins-muted); font-size: 18px; cursor: pointer; }
+.ins-patbar-x:hover { background: var(--ins-surface-2); }
+.ins-patbar.ins-patbar-empty .chevr { color: var(--ins-muted); }
+.ins-patchip { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px;
+  border: 1px solid color-mix(in srgb, var(--ins-primary) 30%, var(--ins-line)); border-radius: 999px;
+  padding: 6px 8px 6px 12px; background: color-mix(in srgb, var(--ins-primary) 7%, var(--ins-surface)); color: var(--ins-primary); font-size: 12.5px; font-weight: 600; }
+.ins-patchip svg { flex: 0 0 auto; }
+.ins-patchip button { border: 0; background: transparent; color: var(--ins-primary); font-size: 16px; cursor: pointer; line-height: 1; padding: 0 2px; }
+.ins-patrow-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.ins-patrow-actions .ins-qa-btn:only-child { grid-column: span 2; }
+.ins-pt-card { display: flex; align-items: stretch; border: 1px solid var(--ins-line); background: var(--ins-surface);
+  border-radius: 12px; overflow: hidden; margin-bottom: 10px; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+.ins-pt-main { flex: 1; min-width: 0; border: 0; background: transparent; cursor: pointer; text-align: left; font-family: inherit; padding: 13px 14px; }
+.ins-pt-name { font-size: 14px; font-weight: 700; color: var(--ins-ink); }
+.ins-pt-sub { display: block; font-size: 11.5px; font-weight: 500; color: var(--ins-muted); margin-top: 3px; }
+.ins-pt-use { flex: 0 0 auto; border: 0; border-left: 1px solid var(--ins-line); background: var(--ins-surface-2);
+  color: var(--ins-primary); font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; padding: 0 18px; }
+.ins-pt-use:hover { background: color-mix(in srgb, var(--ins-primary) 8%, var(--ins-surface-2)); }
+.ins-patedit-actions { display: flex; gap: 8px; margin-top: 10px; }
+.ins-patedit-actions .ins-qa-btn { flex: 1; }
+.ins-pt-del { flex: 0 0 auto; border: 1px solid var(--sev-critical-bd, #F0B7C0); background: var(--sev-critical-bg, #FBE9EC);
+  color: var(--sev-critical-fg, #B42332); border-radius: 11px; padding: 14px 16px; font-family: inherit; font-weight: 600; font-size: 13px; cursor: pointer; }
 
 /* ---- AI recommendation banner (persistent) ---- */
 .ins-ai {

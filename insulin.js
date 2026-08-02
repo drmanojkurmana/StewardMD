@@ -41,6 +41,36 @@
     return sum;
   }
 
+  /* ---------- patient profiles (dedicated per-uid store; no MRN/DOB) ---------- */
+  var pidSeq = 0;
+  function loadPatients() { try { return JSON.parse(localStorage.getItem(keyFor("patients")) || "[]"); } catch (e) { return []; } }
+  function savePatients(list) { try { localStorage.setItem(keyFor("patients"), JSON.stringify(list.slice(0, 100))); } catch (e) {} }
+  function savePatient(p) {
+    var list = loadPatients();
+    if (!p.id) p.id = "p" + Date.now() + "_" + (pidSeq++);
+    p.savedAt = Date.now();
+    var i = -1, j; for (j = 0; j < list.length; j++) if (list[j].id === p.id) { i = j; break; }
+    if (i > -1) list[i] = p; else list.unshift(p);
+    savePatients(list); return p;
+  }
+  function getPatient(id) { var l = loadPatients(), i; for (i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return null; }
+  function deletePatient(id) { savePatients(loadPatients().filter(function (p) { return p.id !== id; })); }
+  function newProfile() {
+    return { id: null, name: "", sex: "", age: "", weightKg: "", notes: "", dxType: "",
+      pregnancy: false, renal: false, hepatic: false, icr: "", isf: "", target: "", bolus: st.bolus };
+  }
+  function applyProfile(p) {
+    st.patientId = p.id; st.patientName = p.name || "Unnamed";
+    if (num(p.age)) st.ctx.age = Number(p.age);
+    if (num(p.weightKg)) st.ctx.weightKg = Number(p.weightKg);
+    st.ctx.pregnancy = !!p.pregnancy; st.ctx.renal = !!p.renal; st.ctx.hepatic = !!p.hepatic;
+    if (num(p.icr)) st.icr = Number(p.icr);
+    if (num(p.isf)) st.isf = Number(p.isf);
+    if (num(p.target)) st.target = Number(p.target);
+    if (p.bolus) st.bolus = p.bolus;
+  }
+  function num(x) { return x !== "" && x != null && isFinite(Number(x)); }
+
   /* ---------- units (display <-> canonical mg/dL) ---------- */
   function mmolMode() { return SET.units === "mmol"; }
   function gUnit() { return mmolMode() ? "mmol/L" : "mg/dL"; }
@@ -54,7 +84,8 @@
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
     ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false },
     acked: false, confirmed: false, bolus: "aspart", iobNote: "",
-    libQ: "", libClass: "all", libOpen: null, compare: [] };
+    libQ: "", libClass: "all", libOpen: null, compare: [],
+    patientId: null, patientName: "", editP: null, patQ: "" };
 
   function initState() {
     var m = mmolMode();
@@ -67,6 +98,7 @@
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
     st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false };
     st.acked = false; st.confirmed = false;
+    st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
   }
 
   /* ---------- icons ---------- */
@@ -81,6 +113,7 @@
   var ICON_PILL = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7Z"/><path d="m8.5 8.5 7 7"/></svg>';
   var ICON_CHEVR = '<svg class="chevr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
   var ICON_SEARCH = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>';
+  var ICON_USER = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
   function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
   function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
   function modeLabel(m) { return m === "meal" ? "Meal bolus" : m === "correction" ? "Correction" : "Combined meal + correction"; }
@@ -147,6 +180,8 @@
     else if (st.screen === "settings") { s.innerHTML = settingsHTML(); }
     else if (st.screen === "library") { s.innerHTML = libraryHTML(); renderLibList(); }
     else if (st.screen === "compare") { s.innerHTML = compareHTML(); }
+    else if (st.screen === "patients") { s.innerHTML = patientsHTML(); renderPatientList(); }
+    else if (st.screen === "patient") { s.innerHTML = patientEditHTML(); }
     else { s.innerHTML = calcHTML(); renderInputs(); render(); }
   }
   function go(screen) { st.screen = screen; paint(); springIn(document.getElementById("insScreen")); }
@@ -162,6 +197,8 @@
     if (st.screen === "settings") { title = "Settings"; sub = "Preferences and safety limits"; }
     else if (st.screen === "library") { title = "Insulin library"; sub = "Reference and comparison"; }
     else if (st.screen === "compare") { title = "Compare insulins"; sub = st.compare.length + " selected"; back = "go-library"; }
+    else if (st.screen === "patients") { title = "Patients"; sub = loadPatients().length + " saved profiles"; }
+    else if (st.screen === "patient") { title = st.editP && st.editP.id ? "Edit patient" : "New patient"; sub = "Reusable profile (no MRN or DOB)"; back = "go-patients"; }
     else { title = "Insulin dose"; sub = modeLabel(st.mode); }
     return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="' + back + '" aria-label="Back">' + ICON_BACK + '</button>' +
       '<div><div class="ins-title">' + title + '</div><div class="ins-sub">' + sub + '</div></div>' +
@@ -189,7 +226,8 @@
       recent = '<div class="ins-empty">No doses recorded yet. Accept a recommendation to start the audit log.</div>';
     }
 
-    return '<div class="ins-stats ins-bf">' +
+    return patientBarHTML() +
+      '<div class="ins-stats ins-bf">' +
         statTile("Current glucose", fmt(st.glucose), gUnit()) +
         statTile("Target", fmt(st.target), gUnit()) +
         statTile("Active insulin", fmt(st.iob), "units") +
@@ -209,6 +247,20 @@
       '<span class="ins-lib-tx"><span class="ins-lib-t">Insulin library</span>' +
       '<span class="ins-lib-s">' + db.list().length + ' insulins across ' + db.CLASSES.length + ' classes - search and compare</span></span>' +
       ICON_CHEVR + '</button>';
+  }
+  function patientBarHTML() {
+    if (st.patientId) {
+      var p = getPatient(st.patientId), meta = [];
+      if (p && p.age) meta.push(p.age + " y");
+      if (p && p.sex) meta.push(p.sex);
+      return '<div class="ins-patbar ins-bf"><button class="ins-patbar-main" data-ins="go-patients">' + ICON_USER +
+        '<span class="ins-patbar-tx"><span class="ins-patbar-t">' + esc(st.patientName) + '</span>' +
+        (meta.length ? '<span class="ins-patbar-s">' + meta.join(" &middot; ") + '</span>' : '') + '</span></button>' +
+        '<button class="ins-patbar-x" data-ins="p-clear" aria-label="Clear patient">&times;</button></div>';
+    }
+    return '<button class="ins-patbar ins-patbar-empty ins-bf" data-ins="go-patients">' + ICON_USER +
+      '<span class="ins-patbar-tx"><span class="ins-patbar-t">No patient selected</span>' +
+      '<span class="ins-patbar-s">Choose or create a reusable profile</span></span>' + ICON_CHEVR + '</button>';
   }
   function statTile(label, val, unit) {
     return '<div class="ins-stat"><div class="ins-stat-l">' + label + '</div>' +
@@ -320,9 +372,62 @@
   }
   function pressLibClass() { var b = document.querySelectorAll('[data-ins="lib-class"]'); for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-c") === st.libClass); }
 
+  /* ---------- patient profiles UI ---------- */
+  function patientsHTML() {
+    var hasCases = !!(window.SMD_CASES && window.SMD_OWNER_KEY);
+    return '<div class="ins-search ins-bf">' + ICON_SEARCH +
+        '<input id="insPatQ" data-ins="pat-q" type="search" placeholder="Search patients" value="' + esc(st.patQ) + '" aria-label="Search patients"></div>' +
+      '<div class="ins-patrow-actions ins-bf"><button class="ins-qa-btn" data-ins="p-new">New patient</button>' +
+        (hasCases ? '<button class="ins-qa-btn" data-ins="p-import">Import from saved cases</button>' : '') + '</div>' +
+      '<div id="insPatList"></div>';
+  }
+  function renderPatientList() {
+    var list = document.getElementById("insPatList"); if (!list) return;
+    var q = st.patQ.toLowerCase().trim(), all = loadPatients();
+    var pts = all.filter(function (p) {
+      if (!q) return true;
+      return (p.name || "").toLowerCase().indexOf(q) > -1 || (p.dxType || "").toLowerCase().indexOf(q) > -1 || (p.notes || "").toLowerCase().indexOf(q) > -1;
+    });
+    if (!pts.length) { list.innerHTML = '<div class="ins-empty">' + (all.length ? "No patients match." : "No saved patients yet. Create a reusable profile to carry ICR, ISF, target and flags between calculations. No MRN or DOB is stored.") + '</div>'; return; }
+    list.innerHTML = pts.map(function (p) {
+      var meta = [];
+      if (p.age) meta.push(p.age + " y"); if (p.sex) meta.push(p.sex); if (p.dxType) meta.push(p.dxType);
+      var params = [];
+      if (num(p.icr)) params.push("ICR " + p.icr); if (num(p.isf)) params.push("ISF " + p.isf); if (num(p.target)) params.push("Tgt " + p.target);
+      return '<div class="ins-pt-card"><button class="ins-pt-main" data-ins="p-open" data-id="' + p.id + '">' +
+        '<span class="ins-pt-name">' + esc(p.name || "Unnamed") + '<span class="ins-pt-sub">' + (meta.join(" &middot; ") || "No details") + (params.length ? "  ·  " + params.join(" · ") : "") + '</span></span></button>' +
+        '<button class="ins-pt-use" data-ins="p-use" data-id="' + p.id + '">Use</button></div>';
+    }).join("");
+  }
+  function patientEditHTML() {
+    var p = st.editP || newProfile();
+    function fld(k, label, val, type) { return '<div class="ins-mini"><label>' + label + '</label><input data-ins="p-field" data-k="' + k + '" type="' + (type || "text") + '"' + (type === "number" ? ' inputmode="decimal"' : '') + ' value="' + esc(val == null ? "" : val) + '"></div>'; }
+    function tog(k, label) { return '<button class="ins-chip" data-ins="p-flag" data-k="' + k + '" aria-pressed="' + (p[k] ? "true" : "false") + '">' + label + '</button>'; }
+    function bsel() {
+      var db = window.INSULIN_DB; if (!db) return "";
+      function opts(cls) { return '<optgroup label="' + cls + '">' + db.byClass(cls).map(function (d) { return '<option value="' + d.id + '"' + (d.id === p.bolus ? " selected" : "") + '>' + d.generic + '</option>'; }).join("") + '</optgroup>'; }
+      return '<select class="ins-select" data-ins="p-field" data-k="bolus" aria-label="Preferred bolus insulin">' + opts("Rapid-acting") + opts("Short-acting") + '</select>';
+    }
+    return '<div class="ins-card ins-bf"><div class="ins-card-t">Identity</div>' +
+        '<div class="ins-field">' + fld("name", "Name", p.name) + '</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + fld("age", "Age (years)", p.age, "number") + fld("sex", "Sex", p.sex) + '</div></div>' +
+        '<div class="ins-field">' + fld("weightKg", "Weight (kg)", p.weightKg, "number") + '</div>' +
+        '<div class="ins-field">' + fld("dxType", "Diabetes type", p.dxType) + '</div>' +
+        '<div class="ins-field">' + fld("notes", "Clinical notes", p.notes) + '</div></div>' +
+      '<div class="ins-card ins-bf"><div class="ins-card-t">Insulin parameters</div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + fld("icr", "ICR g/u", p.icr, "number") + fld("isf", "ISF mg/dL/u", p.isf, "number") + fld("target", "Target mg/dL", p.target, "number") + '</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Preferred bolus insulin</div>' + bsel() + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Flags</div><div class="ins-chips">' + tog("pregnancy", "Pregnancy") + tog("renal", "Renal") + tog("hepatic", "Hepatic") + '</div></div></div>' +
+      '<button class="ins-cta" data-ins="p-save">' + (p.id ? "Save changes" : "Save patient") + '</button>' +
+      (p.id ? '<div class="ins-patedit-actions"><button class="ins-qa-btn" data-ins="p-use" data-id="' + p.id + '">Use in calculator</button>' +
+        '<button class="ins-pt-del" data-ins="p-del" data-id="' + p.id + '">Delete</button></div>' : '');
+  }
+
   /* ---------- Calculator ---------- */
   function calcHTML() {
-    return '<div class="ins-ai ins-bf">' + ICON_AI +
+    return (st.patientId ? '<div class="ins-patchip ins-bf">' + ICON_USER + '<span>' + esc(st.patientName) + '</span>' +
+        '<button data-ins="p-clear" aria-label="Clear patient">&times;</button></div>' : '') +
+      '<div class="ins-ai ins-bf">' + ICON_AI +
         '<div><b>AI-assisted recommendation.</b> The treating physician makes the final decision. ' +
         'Every value below is shown with its formula and assumptions - nothing is hidden.</div></div>' +
       '<div class="ins-seg ins-bf" role="tablist">' + seg("combined", "Combined") + seg("meal", "Meal bolus") + seg("correction", "Correction") + '</div>' +
@@ -496,6 +601,36 @@
     if (a === "cmp-clear") { st.compare = []; renderLibList(); return; }
     if (a === "lib-class") { st.libClass = t.getAttribute("data-c"); pressLibClass(); renderLibList(); return; }
     if (a === "lib-open") { var lid = t.getAttribute("data-id"); st.libOpen = st.libOpen === lid ? null : lid; renderLibList(); return; }
+    if (a === "go-patients") { st.editP = null; return go("patients"); }
+    if (a === "p-new") { st.editP = newProfile(); return go("patient"); }
+    if (a === "p-open") { st.editP = clone(getPatient(t.getAttribute("data-id")) || newProfile()); return go("patient"); }
+    if (a === "p-save") { if (st.editP) savePatient(st.editP); st.editP = null; return go("patients"); }
+    if (a === "p-del") { var did = t.getAttribute("data-id"); deletePatient(did); if (st.patientId === did) { st.patientId = null; st.patientName = ""; } st.editP = null; return go("patients"); }
+    if (a === "p-flag") { if (!st.editP) st.editP = newProfile(); var fk = t.getAttribute("data-k"); st.editP[fk] = !st.editP[fk]; t.setAttribute("aria-pressed", st.editP[fk]); return; }
+    if (a === "p-clear") { st.patientId = null; st.patientName = ""; paint(); return; }
+    if (a === "p-use") {
+      var pu = (st.screen === "patient" && st.editP) ? savePatient(st.editP) : getPatient(t.getAttribute("data-id"));
+      if (pu) { applyProfile(pu); go("calc"); }
+      return;
+    }
+    if (a === "p-import") {
+      if (!window.SMD_CASES || !window.SMD_OWNER_KEY) return;
+      try {
+        SMD_CASES.getAll(SMD_OWNER_KEY(), false, function (cases) {
+          var existing = {}; loadPatients().forEach(function (p) { existing[(p.name || "").toLowerCase()] = 1; });
+          var added = 0;
+          (cases || []).forEach(function (c) {
+            var nm = (c.name || "").trim(); if (!nm || existing[nm.toLowerCase()]) return;
+            savePatient({ id: null, name: nm, sex: c.sex || "", age: c.age || "", weightKg: "", notes: c.notes || "",
+              dxType: "", pregnancy: false, renal: false, hepatic: false, icr: "", isf: "", target: "", bolus: st.bolus });
+            existing[nm.toLowerCase()] = 1; added++;
+          });
+          renderPatientList();
+          if (window.toast) toast(added ? added + " patient" + (added > 1 ? "s" : "") + " imported from cases" : "No new cases to import");
+        });
+      } catch (e) {}
+      return;
+    }
     if (a === "qa") { st.mode = t.getAttribute("data-mode"); go("calc"); return; }
     if (a === "mode") { st.mode = t.getAttribute("data-mode"); syncSeg(); renderInputs(); render(); return; }
     if (a === "inc" || a === "dec") {
@@ -532,6 +667,8 @@
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
+    if (a === "pat-q") { st.patQ = t.value; renderPatientList(); return; }
+    if (a === "p-field") { if (!st.editP) st.editP = newProfile(); st.editP[t.getAttribute("data-k")] = t.value; return; }
     if (a === "cmp") {
       var cid = t.getAttribute("data-id"), idx = st.compare.indexOf(cid);
       if (t.checked) { if (idx === -1) { if (st.compare.length >= 3) { t.checked = false; return; } st.compare.push(cid); } }
