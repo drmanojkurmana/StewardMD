@@ -5,7 +5,7 @@
  * localStorage, else the default.
  *
  * ADDITIVE + non-breaking: defining this namespace changes nothing on its own. ThoreX is gated by
- * `smd_thorex` (DEFAULT OFF) exactly like KardioX's `smd_kardiox`; when off, thorex.js returns early and
+ * `smd_thorex` (ON for private dev/testing — see PUBLIC-RELEASE-GATE in DEFS) like KardioX's `smd_kardiox`; when off, thorex.js returns early and
  * the whole module is a no-op. Exposed as window.SMD_THOREX_FLAGS.
  *
  * NOTE — `smd_thorex_model_base` is NOT a flag in DEFS below, and deliberately so: this registry only
@@ -23,7 +23,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_thorex:            { type: "bool", def: true,     query: "thorex",        desc: "ThoreX AI master flag (home card + module). DEFAULT OFF." },
+    smd_thorex:            { type: "bool", def: true,     query: "thorex",        desc: "ThoreX AI master flag (home card + module). ON for private dev/testing. PUBLIC-RELEASE-GATE: set def:false before any App-Store/Play/public release (needs GROQ + validation)." },
     smd_thorex_cloud:      { type: "tri",  def: null,      query: null,            desc: "Cloud analysis consent (null = ask once). Off = offline only." },
     smd_thorex_confidence: { type: "bool", def: true,      query: null,            desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_thorex_haptics:    { type: "bool", def: true,      query: null,            desc: "Haptic feedback for taps / result-ready / urgent." },

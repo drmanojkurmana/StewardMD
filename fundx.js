@@ -6,7 +6,9 @@
  * perception layer (window.SMD_FUNDX_DETECT) and persistence (window.SMD_FUNDX_STORE)
  * through their public contracts only.
  *
- * Additive + reversible: gated behind smd_fundx (DEFAULT OFF; ?fundx=1 or Settings). When
+ * Additive + reversible: gated behind smd_fundx. DEFAULT ON for private dev/testing (?fundx=0 to opt out).
+ * PUBLIC-RELEASE-GATE: restore fundxOn()'s unset-default to false before any App-Store/Play/public release
+ * (clinically unvalidated + regulatory-pending). When
  * off, this module returns early and is a complete no-op. Phase A UI is the frozen source
  * of truth; deviations forced by the web/Capacitor target are in the design Deviations log.
  *
@@ -21,7 +23,7 @@
       var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
       var v = localStorage.getItem("smd_fundx");
-      return v === null ? false : v === "1";
+      return v === null ? true : v === "1";   // PUBLIC-RELEASE-GATE: dev/testing default ON; restore to false before public release
     } catch (e) { return false; }
   }
   if (!fundxOn()) {

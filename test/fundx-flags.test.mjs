@@ -9,7 +9,7 @@ function load(searchStr) { const win = {}; const ls = fakeLS(); new Function("wi
 
 const { F } = load("");
 ok("flags: exposed", !!F && typeof F.get === "function");
-ok("flags: bool default false", F.get("smd_fundx") === false && F.bool("smd_fundx") === false);
+ok("flags: bool default true (smd_fundx ON for private dev/testing — PUBLIC-RELEASE-GATE)", F.get("smd_fundx") === true && F.bool("smd_fundx") === true);
 ok("flags: bool default true (flash)", F.get("smd_fundx_flash") === true);
 ok("flags: int default", F.get("smd_fundx_capture_threshold") === 60 && F.int("smd_fundx_capture_threshold") === 60);
 ok("flags: tri default null (cloud)", F.get("smd_fundx_cloud") === null);
@@ -31,7 +31,7 @@ ls3.setItem("smd_fundx", "0");
 ok("flags: ?query overrides localStorage", F3.get("smd_fundx") === true);
 
 const a = F.all();
-ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_fundx === false);
+ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_fundx === true);
 
 console.log(`\nfundx-flags: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
