@@ -741,6 +741,51 @@
     }).catch(function(){ if(out) out.textContent="Sign in first."; });
   }
 
+  // ---- Auto Validation: config + connector conformance + reachability in one report (goes beyond Test) ----
+  // The report is PHI-free (names + pass/fail + a short detail class only -- see functions/_connect/onboard/
+  // validate-engine.js); as defense in depth, this renderer builds the DOM directly and writes every field via
+  // textContent (never innerHTML), so nothing in the payload can ever be interpreted as markup.
+  var VALIDATE_CHECK_LABELS={"config":"Configuration","conformance":"Connector conformance","reachability":"Reachability"};
+  function validateCheckLabel(n){ return VALIDATE_CHECK_LABELS[n]||String(n||"check"); }
+  function renderValidateReport(container,report){
+    report=report||{}; clearEl(container);
+    var checks=Array.isArray(report.checks)?report.checks:[];
+    var overall=mkEl("div","item");
+    var ohd=mkEl("div","h");
+    ohd.appendChild(mkEl("b",null,"Validation report"));
+    var ochip=mkEl("span","st "+(report.ok?"verified":"rejected"),report.ok?"All checks passed":"Issues found");
+    ochip.style.marginLeft="auto";
+    ohd.appendChild(ochip);
+    overall.appendChild(ohd);
+    container.appendChild(overall);
+    checks.forEach(function(c){
+      var item=mkEl("div","item"); item.style.marginTop="6px";
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("b",null,validateCheckLabel(c.name)));
+      var chip=mkEl("span","st "+(c.ok?"verified":"rejected"),c.ok?"Pass":"Fail");
+      chip.style.marginLeft="auto";
+      hd.appendChild(chip);
+      item.appendChild(hd);
+      if(c.detail) item.appendChild(mkEl("div","meta",c.detail));
+      container.appendChild(item);
+    });
+  }
+  function doValidate(id){
+    var out=$("dash").querySelector('[data-vout="'+id+'"]');
+    if(out){ clearEl(out); out.appendChild(mkEl("div","hint","Validating...")); }
+    jpost(API+"/validate/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(!out) return;
+      if(x.s!==200||!x.d){ clearEl(out); out.appendChild(mkEl("div","hint",httpErr(x))); return; }
+      renderValidateReport(out,x.d);
+    }).catch(function(){ if(out){ clearEl(out); out.appendChild(mkEl("div","hint","Sign in first.")); } });
+  }
+  function runValidateRow(id){
+    var sf=$("dash").querySelector('[data-validate="'+id+'"]'); if(!sf) return;
+    sf.style.display=(sf.style.display==="none"?"":"none");
+    if(sf.style.display!=="none") doValidate(id);
+  }
+
   // ---- delete ----
   function doDelete(id){
     if(!confirm("Delete this connection? This removes its stored credentials and cannot be undone.")) return;
@@ -799,9 +844,10 @@
       '<td><span class="cat">'+esc(typeLabel(c.type))+'</span></td>'+
       '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
       '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
-      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
+      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="validate" data-cid="'+id+'">Validate</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
     '</tr>'+
     '<tr data-msgrow="'+id+'" style="display:none"><td colspan="5"><div class="rowmsg msg" data-msg="'+id+'"></div></td></tr>'+
+    '<tr data-validate="'+id+'" style="display:none"><td colspan="5"><div data-vout="'+id+'"></div></td></tr>'+
     '<tr data-pull="'+id+'" style="display:none"><td colspan="5">'+
       '<label>Patient ID</label>'+
       '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
@@ -933,6 +979,7 @@
     "connect.onboard.saved":"Connection saved",
     "connect.onboard.deleted":"Connection deleted",
     "connect.onboard.tested":"Tested",
+    "connect.onboard.validated":"Validated",
     "connect.onboard.pulled":"Pulled",
     "connect.onboard.synced":"Auto-synced",
     "connect.onboard.discovered":"Discovered",
@@ -1023,6 +1070,7 @@
     var b=e.target.closest("[data-act],[data-fact],[data-wact]"); if(!b)return;
     if(b.hasAttribute("data-act")){ var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
       if(act==="test"){ runTestRow(id); }
+      else if(act==="validate"){ runValidateRow(id); }
       else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
       else if(act==="pullgo"){ doPull(id); }
       else if(act==="del"){ doDelete(id); }
@@ -1050,6 +1098,7 @@
     loadHealth:loadHealth, renderHealth:renderHealth,
     loadActivity:loadActivity, renderActivity:renderActivity,
     loadCatalog:loadCatalog, renderCatalog:renderCatalog,
+    runValidate:doValidate, renderValidateReport:renderValidateReport,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,

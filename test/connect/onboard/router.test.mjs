@@ -45,6 +45,15 @@ test("unauthenticated test/pull/delete -> 401 before any upstream fetch", async 
   assert.equal((await onRequest(del("/api/connect/onboard/abc?tenant=t1", BOTH))).status, 401);
 });
 
+// Auto Validation: same flag gate + unauthenticated-401 shape as /test and /pull (no existence leak).
+test("validate: flag OFF -> 404; unauthenticated -> sanitized 401", async () => {
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/abc", { tenantId: "t1" }, {}))).status, 404);
+  const res = await onRequest(post("/api/connect/onboard/validate/abc", { tenantId: "t1" }, BOTH));
+  assert.equal(res.status, 401);
+  assert.equal(res.headers.get("cache-control"), "no-store");
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
 test("unknown sub-path -> 404", async () => {
   assert.equal((await onRequest(get("/api/connect/onboard/nope", BOTH))).status, 404);
 });
@@ -141,9 +150,11 @@ test("rest-json test/pull: per-track flag gate on an existing rest-json row -> 4
 
   assert.equal((await onRequest(post("/api/connect/onboard/test/rj1", { tenantId: "t1" }, envOff))).status, 404);
   assert.equal((await onRequest(post("/api/connect/onboard/pull/rj1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/rj1", { tenantId: "t1" }, envOff))).status, 404);
 
   assert.equal((await onRequest(post("/api/connect/onboard/test/rj1", { tenantId: "t1" }, envOn))).status, 401);
   assert.equal((await onRequest(post("/api/connect/onboard/pull/rj1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/rj1", { tenantId: "t1" }, envOn))).status, 401);
 });
 
 // --- dicomweb per-track flag gate (mirrors the rest-json idiom): smd_connect_dicom, default OFF -------------
@@ -186,7 +197,9 @@ test("dicomweb test/pull: per-track flag gate on an existing dicomweb row -> 404
 
   assert.equal((await onRequest(post("/api/connect/onboard/test/dw1", { tenantId: "t1" }, envOff))).status, 404);
   assert.equal((await onRequest(post("/api/connect/onboard/pull/dw1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/dw1", { tenantId: "t1" }, envOff))).status, 404);
 
   assert.equal((await onRequest(post("/api/connect/onboard/test/dw1", { tenantId: "t1" }, envOn))).status, 401);
   assert.equal((await onRequest(post("/api/connect/onboard/pull/dw1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/dw1", { tenantId: "t1" }, envOn))).status, 401);
 });

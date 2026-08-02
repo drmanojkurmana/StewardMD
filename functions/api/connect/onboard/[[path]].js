@@ -16,6 +16,7 @@ import { saveConnection, listConnections, deleteConnection, getRow } from "../..
 import { restFlagOn } from "../../../_connect/connectors/rest-json/flags.js";
 import { dicomFlagOn } from "../../../_connect/connectors/dicomweb/flags.js";
 import { testConnection } from "../../../_connect/onboard/probe.js";
+import { validateConnection } from "../../../_connect/onboard/validate-engine.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
 import { setSyncConfig, runDueSyncs } from "../../../_connect/onboard/sync.js";
@@ -119,6 +120,13 @@ export async function onRequest(context) {
       if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
+    }
+    // Auto Validation: config-shape + connector-conformance (synthetic, type-level) + reachability (the same
+    // live probe as /test) in one report. Same per-track gate as /test and /pull (no existence leak either way).
+    if (method === "POST" && parts[0] === "validate" && parts[1]) {
+      if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await validateConnection(deps, request, env, tid, parts[1]));
     }
     // Automatic sync scheduler: the RBAC-gated per-connection interval setter (a hospital admin configures it
     // from the wizard); the cron-only sweep below is what actually runs the due connections.

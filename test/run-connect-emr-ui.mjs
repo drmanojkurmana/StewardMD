@@ -237,11 +237,46 @@ try {
   await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,webhook:1,total:3},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}],webhook:[{feedId:"wh-xyz",name:"EMR Push Feed",status:"active",connector:"fhir-push"}]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadDashboard(); return 1;`);
   await sleep(300);
   ok(await ev(`return !!document.querySelector('#dash table.dash');`) === true, "the dashboard renders a single table");
-  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf(">FHIR<")>=0 && h.indexOf("r4.smarthealthit.org")>=0 && h.indexOf("Connected")>=0 && h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "the FHIR row renders with a FHIR badge, host, Connected status, and Test/Pull/Delete");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf(">FHIR<")>=0 && h.indexOf("r4.smarthealthit.org")>=0 && h.indexOf("Connected")>=0 && h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="validate"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "the FHIR row renders with a FHIR badge, host, Connected status, and Test/Validate/Pull/Delete");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("HL7 v2")>=0 && h.indexOf("feed-xyz")>=0 && h.indexOf('data-fact="copy"')>=0 && h.indexOf('data-fact="del"')>=0;`) === true, "the HL7 feed row renders in the SAME table with an HL7 badge, feed id, and Copy URL / Delete");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("EMR Push Feed")>=0 && h.indexOf("FHIR push")>=0 && h.indexOf("wh-xyz")>=0 && h.indexOf('data-wact="copy"')>=0 && h.indexOf('data-wact="del"')>=0;`) === true, "the webhook feed row renders in the SAME table with a FHIR push badge, feed id, and Copy URL / Delete");
   ok(await ev(`var c=document.getElementById("dashCounts").textContent; return c.indexOf("3 connection")>=0 && c.indexOf("1 FHIR")>=0 && c.indexOf("1 HL7")>=0 && c.indexOf("1 Webhook")>=0;`) === true, "the dashboard shows merged counts (3 total = 1 FHIR + 1 HL7 + 1 Webhook)");
   ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("S3CR3T")<0 && h.indexOf("sealed")<0 && h.indexOf("\\u2014")<0;`) === true, "NO secret material in the dashboard DOM, and no em-dash");
+
+  // ---- Auto Validation (Validate button -> POST /validate/:id -> renders check chips + overall) ----
+  // A mixed report: config + reachability pass, conformance fails -- asserts the overall chip AND each of the
+  // three check chips render independently (pass/fail is per-check, not just the top-level ok).
+  await ev(`window.__validateReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/validate/c-1")>=0){ window.__validateReq=JSON.parse(opts.body);
+        return Promise.resolve({s:200,d:{ok:false,checks:[{name:"config",ok:true,detail:""},{name:"conformance",ok:false,detail:"failed: 6-valid-sccm"},{name:"reachability",ok:true,detail:""}],conformance:{passed:false,checks:[{name:"6-valid-sccm",ok:false}]}}}); }
+      return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,webhook:1,total:3},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}],webhook:[{feedId:"wh-xyz",name:"EMR Push Feed",status:"active",connector:"fhir-push"}]}});
+    });
+    window.ConnectEMR.loadDashboard(); return 1;`);
+  await sleep(300);
+  await ev(`document.querySelector('#dash [data-act="validate"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return getComputedStyle(document.querySelector('[data-validate="c-1"]')).display!=="none";`) === true, "clicking Validate reveals the report row");
+  ok(await ev(`return !!window.__validateReq;`) === true, "Validate POSTs to /validate/:id");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("Issues found")>=0;`) === true, "the overall chip shows Issues found when any check fails");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); var t=out.textContent; return t.indexOf("Configuration")>=0 && t.indexOf("Connector conformance")>=0 && t.indexOf("Reachability")>=0;`) === true, "all three check names render (Configuration / Connector conformance / Reachability)");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); var pass=[].slice.call(out.querySelectorAll(".st")).filter(function(e){return e.textContent==="Pass";}).length; var fail=[].slice.call(out.querySelectorAll(".st")).filter(function(e){return e.textContent==="Fail";}).length; return pass===2 && fail===1;`) === true, "two Pass chips and one Fail chip render, matching the mocked per-check outcomes");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("failed: 6-valid-sccm")>=0;`) === true, "the failing check's detail class string renders");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("\\u2014")<0 && out.innerHTML.indexOf("undefined")<0;`) === true, "the validation report has no em-dash and no stray undefined");
+  // Clicking Validate again toggles the report row closed (same show/hide idiom as Pull).
+  ok(await ev(`document.querySelector('#dash [data-act="validate"]').click(); return getComputedStyle(document.querySelector('[data-validate="c-1"]')).display==="none";`) === true, "clicking Validate again hides the report row");
+
+  // All-pass report renders an "All checks passed" overall chip.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/validate/c-1")>=0) return Promise.resolve({s:200,d:{ok:true,checks:[{name:"config",ok:true,detail:""},{name:"conformance",ok:true,detail:""},{name:"reachability",ok:true,detail:""}],conformance:{passed:true,checks:[]}}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+    window.ConnectEMR.runValidate("c-1"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("All checks passed")>=0;`) === true, "an all-pass report shows the 'All checks passed' overall chip");
+
+  // Validate degrades through the SAME showFlagOff() path as every other action on a 404 (flag off).
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.runValidate("c-1"); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "Validate on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
 
   // Copy URL (HL7) surfaces the constant webhook URL; Delete actions call the right endpoints and reload.
   await ev(`document.querySelector('#dash [data-fact="copy"]').click(); window.__msgs=document.getElementById("tenantMsg").textContent; return 1;`);
