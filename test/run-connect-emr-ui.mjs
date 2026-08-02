@@ -657,7 +657,7 @@ try {
   // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);
-  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display!=="none" && getComputedStyle(document.getElementById("opsArea")).display==="none" && document.getElementById("noTenant").textContent.indexOf("not a member of any hospital tenant")>=0;`) === true, "an empty /tenants shows the 'not a member of any hospital tenant' state and hides the ops area");
+  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display!=="none" && getComputedStyle(document.getElementById("opsArea")).display==="none" && document.getElementById("noTenant").textContent.indexOf("Add your hospital")>=0 && !!document.getElementById("createHospName") && !!document.getElementById("createHospBtn");`) === true, "an empty /tenants shows the 'Add your hospital' self-service create form (P1) and hides the ops area");
 
   // MOCKED 404 -> graceful flag-off state (the picker route only exists when the flag is on)
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadTenants(); return 1;`);
