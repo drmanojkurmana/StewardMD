@@ -22,7 +22,7 @@
   }
   function keyFor(base) { return "smd_insulin_" + base + "_" + uid(); }
 
-  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "" };
+  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart" };
   var SET = clone(DEFAULTS);
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function loadSettings() {
@@ -53,7 +53,7 @@
   var st = { screen: "dashboard", mode: "combined",
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
     ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false },
-    acked: false, confirmed: false,
+    acked: false, confirmed: false, bolus: "aspart", iobNote: "",
     libQ: "", libClass: "all", libOpen: null, compare: [] };
 
   function initState() {
@@ -64,6 +64,7 @@
     st.carbs = 45; st.icr = 10;
     st.isf = m ? 3 : 50;
     st.iob = 2; st.increment = SET.increment;
+    st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
     st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false };
     st.acked = false; st.confirmed = false;
   }
@@ -344,8 +345,45 @@
   function ctxChip(key, label) { return '<button class="ins-chip" data-ins="ctx" data-k="' + key + '" aria-pressed="' + (st.ctx[key] ? "true" : "false") + '">' + label + '</button>'; }
   function tgtChip(v) { return '<button class="ins-chip" data-ins="target-chip" data-v="' + v + '" aria-pressed="' + (st.target === v ? "true" : "false") + '">' + v + '</button>'; }
 
+  /* ---------- selected bolus insulin (influences timing, IOB DIA, safety) ---------- */
+  function bolusInsulin() { var db = window.INSULIN_DB; return db ? db.get(st.bolus) : null; }
+  function bolusDia() { var d = bolusInsulin(); return d && d.dia ? d.dia : 4; }
+  function bolusSelectHTML() {
+    var db = window.INSULIN_DB; if (!db) return "";
+    function opts(cls) {
+      var g = db.byClass(cls).map(function (d) {
+        var brand = d.brands && d.brands[0] ? " (" + d.brands[0].name + ")" : "";
+        return '<option value="' + d.id + '"' + (d.id === st.bolus ? " selected" : "") + '>' + d.generic + brand + '</option>';
+      }).join("");
+      return '<optgroup label="' + cls + '">' + g + '</optgroup>';
+    }
+    return '<select class="ins-select" data-ins="bolus" aria-label="Bolus insulin">' + opts("Rapid-acting") + opts("Short-acting") + '</select>';
+  }
+  function bolusGuideHTML() {
+    var d = bolusInsulin(); if (!d) return "";
+    return '<div class="ins-guide">Give ' + d.timing.charAt(0).toLowerCase() + d.timing.slice(1) +
+      '. Onset ' + d.onset + ' &middot; peak ' + d.peak + ' &middot; lasts ' + d.duration + '.</div>';
+  }
+  function recentBolusDoses() {
+    var dia = bolusDia(), log = loadLog(), now = Date.now(), doses = [], i;
+    for (i = 0; i < log.length; i++) {
+      var e = log[i]; if (!e.ts) continue;
+      if (["meal", "correction", "combined"].indexOf(e.mode) < 0) continue;
+      var mins = (now - e.ts) / 60000;
+      if (mins < 0 || mins > dia * 60) continue;
+      doses.push({ units: Number(e.confirmedDose) || 0, minutesAgo: mins });
+    }
+    return doses;
+  }
+  function estimateIOB() {
+    var doses = recentBolusDoses(), dia = bolusDia();
+    var r = window.INSULIN_ENGINE.activeInsulin({ doses: doses, dia: dia });
+    return { iob: r.result, n: doses.length, dia: dia };
+  }
+
   function renderInputs() {
     var m = st.mode, h = "", presets = targetPresets(), i;
+    h += '<div class="ins-field"><div class="ins-lab">Bolus insulin</div>' + bolusSelectHTML() + bolusGuideHTML() + '</div>';
     if (m !== "meal") {
       h += '<div class="ins-field"><div class="ins-lab">Current glucose <span class="u">' + gUnit() + '</span></div>' + stepper("glucose", st.glucose, gStep()) + '</div>';
       var chips = "";
@@ -363,6 +401,12 @@
     if (m !== "correction") { h += mini("icr", "ICR g/u", st.icr); }
     if (m === "combined") { h += mini("iob", "Active insulin (IOB) u", st.iob); }
     h += '</div></div>';
+    if (m === "combined") {
+      var nd = recentBolusDoses().length;
+      h += '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
+        (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
+        (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
+    }
     h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
       '<button data-ins="round" data-v="1" aria-pressed="' + (st.increment === 1 ? "true" : "false") + '">1 unit</button>' +
       '<button data-ins="round" data-v="0.5" aria-pressed="' + (st.increment === 0.5 ? "true" : "false") + '">0.5 unit</button></div></div>';
@@ -390,6 +434,10 @@
   function render() {
     st.acked = false; st.confirmed = false;
     var res = compute(), warns = safety(res), hasCritical = false, i;
+    var selIns = bolusInsulin();
+    if (selIns && selIns.cls === "Short-acting") warns.push({ id: "reg_timing", severity: "info",
+      title: "Short-acting (regular) insulin selected",
+      detail: "Onset about 30 min, peak 2 to 4 h. Give about 30 min before the meal and re-check glucose before stacking a correction.", interrupt: false });
     for (i = 0; i < warns.length; i++) if (warns[i].interrupt) hasCritical = true;
     var out = document.getElementById("insOut");
     if (!out) return;
@@ -460,6 +508,13 @@
     if (a === "target-chip") { st.target = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
+    if (a === "iob-est") {
+      var est = estimateIOB(); st.iob = est.iob;
+      var bd = bolusInsulin();
+      st.iobNote = "IOB " + est.iob + " u estimated from " + est.n + " recent dose" + (est.n > 1 ? "s" : "") +
+        " using " + (bd ? bd.generic : "the selected insulin") + " (duration " + est.dia + " h).";
+      renderInputs(); render(); return;
+    }
     if (a === "how") {
       var exp = t.getAttribute("aria-expanded") === "true", panel = t.nextElementSibling;
       t.setAttribute("aria-expanded", exp ? "false" : "true");
@@ -472,7 +527,8 @@
   function onInput(e) {
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
-    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); render(); return; }
+    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } render(); return; }
+    if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
@@ -505,7 +561,7 @@
     var d = document.getElementById("insDone"); if (d) { d.style.display = "block"; springIn(d); }
   }
   function snapshot() {
-    return { units: SET.units, glucose: st.glucose, target: st.target, carbs: st.carbs, icr: st.icr,
+    return { units: SET.units, bolus: st.bolus, glucose: st.glucose, target: st.target, carbs: st.carbs, icr: st.icr,
       isf: st.isf, iob: st.iob, increment: st.increment, ctx: clone(st.ctx) };
   }
 
@@ -514,7 +570,9 @@
     if (!on()) return;
     if (!window.INSULIN_ENGINE || !window.INSULIN_SAFETY) return;
     SET = loadSettings();
-    SET.units = "mgdl"; saveSettings();   // mg/dL only (India standard); no other units
+    SET.units = "mgdl";                   // mg/dL only (India standard); no other units
+    if (!(SET.target >= 60 && SET.target <= 400)) SET.target = DEFAULTS.target;  // sanitise any stale/implausible target
+    saveSettings();
     initState();
     var el = root();
     el.classList.add("ins-open");
