@@ -48,18 +48,13 @@
   function toMgdl(v) { return mmolMode() ? v * 18 : v; }          // glucose/target/ISF share the /18 factor
   function gStep() { return mmolMode() ? 0.5 : 5; }
   function targetPresets() { return mmolMode() ? [5, 6, 7, 8] : [100, 120, 140, 180]; }
-  function convUnit(v, fromU, toU) {
-    if (fromU === toU) return v;
-    if (fromU === "mgdl" && toU === "mmol") return Math.round(v / 18 * 10) / 10;
-    if (fromU === "mmol" && toU === "mgdl") return Math.round(v * 18);
-    return v;
-  }
 
   /* ---------- state ---------- */
   var st = { screen: "dashboard", mode: "combined",
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
     ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false },
-    acked: false, confirmed: false };
+    acked: false, confirmed: false,
+    libQ: "", libClass: "all", libOpen: null, compare: [] };
 
   function initState() {
     var m = mmolMode();
@@ -82,6 +77,9 @@
   var SVG_INFO = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
   var ICON_BOOK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
   var ICON_CHEV = '<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+  var ICON_PILL = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7Z"/><path d="m8.5 8.5 7 7"/></svg>';
+  var ICON_CHEVR = '<svg class="chevr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+  var ICON_SEARCH = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>';
   function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
   function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
   function modeLabel(m) { return m === "meal" ? "Meal bolus" : m === "correction" ? "Correction" : "Combined meal + correction"; }
@@ -146,6 +144,8 @@
     var s = document.getElementById("insScreen");
     if (st.screen === "dashboard") { s.innerHTML = dashboardHTML(); }
     else if (st.screen === "settings") { s.innerHTML = settingsHTML(); }
+    else if (st.screen === "library") { s.innerHTML = libraryHTML(); renderLibList(); }
+    else if (st.screen === "compare") { s.innerHTML = compareHTML(); }
     else { s.innerHTML = calcHTML(); renderInputs(); render(); }
   }
   function go(screen) { st.screen = screen; paint(); springIn(document.getElementById("insScreen")); }
@@ -157,9 +157,12 @@
         '<button class="ins-hbtn" data-ins="go-settings" aria-label="Settings">' + ICON_GEAR + '</button>' +
         '<button class="ins-hbtn" data-ins="close" aria-label="Close">&times;</button></div>';
     }
-    var title = st.screen === "settings" ? "Settings" : "Insulin dose";
-    var sub = st.screen === "settings" ? "Preferences and safety limits" : modeLabel(st.mode);
-    return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="go-dash" aria-label="Back">' + ICON_BACK + '</button>' +
+    var title, sub, back = "go-dash";
+    if (st.screen === "settings") { title = "Settings"; sub = "Preferences and safety limits"; }
+    else if (st.screen === "library") { title = "Insulin library"; sub = "Reference and comparison"; }
+    else if (st.screen === "compare") { title = "Compare insulins"; sub = st.compare.length + " selected"; back = "go-library"; }
+    else { title = "Insulin dose"; sub = modeLabel(st.mode); }
+    return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="' + back + '" aria-label="Back">' + ICON_BACK + '</button>' +
       '<div><div class="ins-title">' + title + '</div><div class="ins-sub">' + sub + '</div></div>' +
       '<button class="ins-hbtn" data-ins="close" aria-label="Close">&times;</button></div>';
   }
@@ -194,7 +197,17 @@
       '<div class="ins-card ins-bf"><div class="ins-card-t">Quick actions</div><div class="ins-qa">' +
         qa("combined", "Combined dose") + qa("meal", "Meal bolus") + qa("correction", "Correction") +
       '</div></div>' +
+      libEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t">Recent doses</div>' + recent + '</div>';
+  }
+  function libEntryHTML() {
+    var db = window.INSULIN_DB;
+    if (!db) return "";
+    return '<button class="ins-lib-entry ins-bf" data-ins="go-library">' +
+      '<span class="ins-lib-ic">' + ICON_PILL + '</span>' +
+      '<span class="ins-lib-tx"><span class="ins-lib-t">Insulin library</span>' +
+      '<span class="ins-lib-s">' + db.list().length + ' insulins across ' + db.CLASSES.length + ' classes - search and compare</span></span>' +
+      ICON_CHEVR + '</button>';
   }
   function statTile(label, val, unit) {
     return '<div class="ins-stat"><div class="ins-stat-l">' + label + '</div>' +
@@ -206,9 +219,8 @@
   /* ---------- Settings ---------- */
   function settingsHTML() {
     return '<div class="ins-card ins-bf"><div class="ins-card-t">Units and rounding</div>' +
-        '<div class="ins-field"><div class="ins-lab">Glucose units</div><div class="ins-round">' +
-          setBtn("units", "mgdl", "mg/dL", SET.units === "mgdl") + setBtn("units", "mmol", "mmol/L", SET.units === "mmol") +
-        '</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Glucose units</div>' +
+          '<div class="ins-static">mg/dL - India standard (fixed)</div></div>' +
         '<div class="ins-field"><div class="ins-lab">Dose rounding</div><div class="ins-round">' +
           '<button data-ins="round" data-v="1" aria-pressed="' + (SET.increment === 1 ? "true" : "false") + '">1 unit</button>' +
           '<button data-ins="round" data-v="0.5" aria-pressed="' + (SET.increment === 0.5 ? "true" : "false") + '">0.5 unit</button>' +
@@ -225,11 +237,87 @@
       '</div>' +
       '<div class="ins-tgt-note ins-bf">Settings are stored on this device and applied to new calculations. Max limits drive the critical safety interrupts.</div>';
   }
-  function setBtn(k, v, label, pressed) { return '<button data-ins="set-units" data-v="' + v + '" aria-pressed="' + (pressed ? "true" : "false") + '">' + label + '</button>'; }
   function setNum(k, label, val) {
     return '<div class="ins-mini"><label>' + label + '</label>' +
       '<input data-ins="set-num" data-k="' + k + '" type="number" inputmode="decimal" value="' + val + '"></div>';
   }
+
+  /* ---------- Insulin library ---------- */
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  function libraryHTML() {
+    var db = window.INSULIN_DB;
+    if (!db) return '<div class="ins-empty">Insulin database not loaded.</div>';
+    var chips = '<button class="ins-chip" data-ins="lib-class" data-c="all" aria-pressed="' + (st.libClass === "all" ? "true" : "false") + '">All</button>';
+    db.CLASSES.forEach(function (c) {
+      chips += '<button class="ins-chip" data-ins="lib-class" data-c="' + c + '" aria-pressed="' + (st.libClass === c ? "true" : "false") + '">' + c + '</button>';
+    });
+    return '<div class="ins-search ins-bf">' + ICON_SEARCH +
+        '<input id="insLibQ" data-ins="lib-q" type="search" placeholder="Search generic, brand, maker, U-100, India" value="' + esc(st.libQ) + '" aria-label="Search insulins"></div>' +
+      '<div class="ins-chips ins-libchips ins-bf">' + chips + '</div>' +
+      '<div id="insCmpBar"></div><div id="insLibList"></div>';
+  }
+
+  function renderLibList() {
+    var db = window.INSULIN_DB, list = document.getElementById("insLibList");
+    if (!db || !list) return;
+    var res = db.search(st.libQ);
+    if (st.libClass !== "all") res = res.filter(function (d) { return d.cls === st.libClass; });
+    var bar = document.getElementById("insCmpBar");
+    if (bar) bar.innerHTML = st.compare.length ?
+      '<div class="ins-cmpbar"><span>' + st.compare.length + ' selected</span><span class="ins-cmpbar-b">' +
+      '<button class="ins-cmpbar-clear" data-ins="cmp-clear">Clear</button>' +
+      '<button class="ins-cmpbar-go" data-ins="go-compare"' + (st.compare.length < 2 ? " disabled" : "") + '>Compare</button></span></div>' : "";
+    if (!res.length) { list.innerHTML = '<div class="ins-empty">No insulins match. Try a generic, brand, maker, concentration (U-100), country, or class.</div>'; return; }
+    var html = "", i, j;
+    for (i = 0; i < db.CLASSES.length; i++) {
+      var cls = db.CLASSES[i], group = res.filter(function (d) { return d.cls === cls; });
+      if (!group.length) continue;
+      html += '<div class="ins-il-cls">' + cls + ' <span>' + group.length + '</span></div>';
+      for (j = 0; j < group.length; j++) html += cardHTML(group[j]);
+    }
+    list.innerHTML = html;
+  }
+
+  function cardHTML(d) {
+    var db = window.INSULIN_DB, open = st.libOpen === d.id, checked = st.compare.indexOf(d.id) > -1;
+    var brands = d.brands.map(function (b) { return b.name; }).join(", ");
+    var pk = '<span>Onset<b>' + d.onset + '</b></span><span>Peak<b>' + d.peak + '</b></span><span>Duration<b>' + d.duration + '</b></span>';
+    var detail = "";
+    if (open) {
+      detail = '<div class="ins-il-detail">' + dlrow("Timing", d.timing) + dlrow("Route", d.route) + dlrow("Devices", d.devices) +
+        dlrow("Pregnancy", d.pregnancy) + dlrow("Paediatric", d.pediatric) + dlrow("Renal", d.renal) + dlrow("Hepatic", d.hepatic) +
+        dlrow("Storage", d.storage) + dlrow("Notes", d.notes) +
+        dlrow("Brands", d.brands.map(function (b) { return b.name + " (" + b.mfr + ")"; }).join("; ")) +
+        dlrow("Availability", db.brandCountries(d).map(function (c) { return db.COUNTRIES[c] || c; }).join(", ")) + '</div>';
+    }
+    return '<div class="ins-il-card' + (open ? " open" : "") + '">' +
+      '<button class="ins-il-head" data-ins="lib-open" data-id="' + d.id + '" aria-expanded="' + (open ? "true" : "false") + '">' +
+        '<span class="ins-il-name">' + d.generic + '<span class="ins-il-sub">' + d.strengths.join(", ") + '  ·  ' + brands + '</span></span>' + ICON_CHEV + '</button>' +
+      '<div class="ins-il-pk">' + pk + '</div>' +
+      '<label class="ins-il-cmp"><input type="checkbox" data-ins="cmp" data-id="' + d.id + '"' + (checked ? " checked" : "") + '> Add to compare</label>' +
+      detail + '</div>';
+  }
+  function dlrow(k, v) { return '<div class="ins-dl"><dt>' + k + '</dt><dd>' + v + '</dd></div>'; }
+
+  function compareHTML() {
+    var db = window.INSULIN_DB;
+    var items = st.compare.map(function (id) { return db.get(id); }).filter(Boolean);
+    if (items.length < 2) return '<div class="ins-empty">Select at least two insulins in the library to compare.</div>';
+    var rows = [["Class", "cls"], ["Strength", function (d) { return d.strengths.join(", "); }],
+      ["Onset", "onset"], ["Peak", "peak"], ["Duration", "duration"], ["Typical timing", "timing"],
+      ["Devices", "devices"], ["Availability", function (d) { return db.brandCountries(d).join(", "); }]];
+    var cells = '<div class="ins-cmp-h ins-cmp-corner"></div>';
+    items.forEach(function (d) { cells += '<div class="ins-cmp-h">' + d.generic + '</div>'; });
+    rows.forEach(function (r) {
+      cells += '<div class="ins-cmp-k">' + r[0] + '</div>';
+      items.forEach(function (d) { var v = typeof r[1] === "function" ? r[1](d) : d[r[1]]; cells += '<div class="ins-cmp-v">' + v + '</div>'; });
+    });
+    var cols = "grid-template-columns:94px repeat(" + items.length + ",minmax(120px,1fr));";
+    return '<div class="ins-cmp-note ins-bf">Side-by-side reference. Onset, peak and duration are approximate label ranges - verify against local product information.</div>' +
+      '<div class="ins-cmp-scroll ins-bf"><div class="ins-cmp" style="' + cols + '">' + cells + '</div></div>';
+  }
+  function pressLibClass() { var b = document.querySelectorAll('[data-ins="lib-class"]'); for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-c") === st.libClass); }
 
   /* ---------- Calculator ---------- */
   function calcHTML() {
@@ -355,8 +443,12 @@
     if (a === "close") return close();
     if (a === "go-settings") return go("settings");
     if (a === "go-dash") return go("dashboard");
+    if (a === "go-library") return go("library");
+    if (a === "go-compare") { if (st.compare.length >= 2) go("compare"); return; }
+    if (a === "cmp-clear") { st.compare = []; renderLibList(); return; }
+    if (a === "lib-class") { st.libClass = t.getAttribute("data-c"); pressLibClass(); renderLibList(); return; }
+    if (a === "lib-open") { var lid = t.getAttribute("data-id"); st.libOpen = st.libOpen === lid ? null : lid; renderLibList(); return; }
     if (a === "qa") { st.mode = t.getAttribute("data-mode"); go("calc"); return; }
-    if (a === "set-units") { switchUnits(t.getAttribute("data-v")); paint(); return; }
     if (a === "mode") { st.mode = t.getAttribute("data-mode"); syncSeg(); renderInputs(); render(); return; }
     if (a === "inc" || a === "dec") {
       var f = t.getAttribute("data-f"), s = parseFloat(t.getAttribute("data-s"));
@@ -383,13 +475,14 @@
     if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
+    if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
+    if (a === "cmp") {
+      var cid = t.getAttribute("data-id"), idx = st.compare.indexOf(cid);
+      if (t.checked) { if (idx === -1) { if (st.compare.length >= 3) { t.checked = false; return; } st.compare.push(cid); } }
+      else if (idx > -1) st.compare.splice(idx, 1);
+      renderLibList(); return;
+    }
     if (a === "ack") { st.acked = t.checked; var cta = document.querySelector(".ins-cta"); if (cta) cta.disabled = !st.acked; }
-  }
-  function switchUnits(newU) {
-    if (newU === SET.units) return;
-    var old = SET.units;
-    st.glucose = convUnit(st.glucose, old, newU); st.target = convUnit(st.target, old, newU); st.isf = convUnit(st.isf, old, newU);
-    SET.target = convUnit(SET.target, old, newU); SET.units = newU; saveSettings();
   }
   function syncSeg() {
     var b = document.querySelectorAll('[data-ins="mode"]');
@@ -421,6 +514,7 @@
     if (!on()) return;
     if (!window.INSULIN_ENGINE || !window.INSULIN_SAFETY) return;
     SET = loadSettings();
+    SET.units = "mgdl"; saveSettings();   // mg/dL only (India standard); no other units
     initState();
     var el = root();
     el.classList.add("ins-open");
