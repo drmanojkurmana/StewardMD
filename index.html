@@ -59,6 +59,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
+<link rel="stylesheet" href="/insulin.css?v=ins1">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
@@ -552,11 +553,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <button type="button" class="consent-x" id="consentClose" aria-label="Close">✕</button>
         <div class="splash-disclaimer-title" id="consentTitle">Before you continue</div>
         <div class="splash-disclaimer-body">
-          StewardMD is an <b>educational clinical reasoning aid</b> — <b>not a validated decision-support tool</b>; drug data is <b>AI-summarised from official labels</b>, so <b>verify every dose against the primary source</b> and apply your own clinical judgment. No liability is accepted for clinical decisions.
+          StewardMD is an <b>educational clinical reasoning aid</b>, <b>not a validated decision-support tool</b>. Drug data is <b>AI-summarised from official labels</b>, so <b>verify every dose against the primary source</b> and apply your own clinical judgment. No liability is accepted for clinical decisions.
         </div>
         <label class="splash-ack-row">
           <input type="checkbox" id="splashAckCheckbox">
-          <span>I am a <b>qualified, registered healthcare professional</b> using this within my scope of practice. I have read and agree to the <b>Disclaimer</b>, <b>Terms of Use</b> and <b>Privacy Notice</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use. I am <b>authorised to enter any patient information</b> I use and have obtained any consent required under applicable law and my institution’s policy.</span>
+          <span>I am a <b>qualified, registered healthcare professional</b> using this within my scope of practice. I have read and agree to the <b>Disclaimer</b>, <b>Terms of Use</b> and <b>Privacy Notice</b>, and understand this is an educational aid with AI-summarised drug data, and I will independently verify every recommendation and dose before clinical use. I am <b>authorised to enter any patient information</b> I use and have obtained any consent required under applicable law and my institution’s policy.</span>
         </label>
         <div class="splash-ack-links">
           <button type="button" class="splash-foot-link" onclick="openModal('disclaimerModal')">Read Disclaimer</button> ·
@@ -1611,6 +1612,14 @@ window.openExternal = function (u) {
 <script src="/thorex-correlate.js?v=tx1" defer></script>
 <script src="/thorex-screens.js?v=tx14" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
+<!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
+     engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
+<script src="/insulin-flags.js?v=ins1" defer></script>
+<script src="/insulin-engine.js?v=ins1" defer></script>
+<script src="/insulin-safety.js?v=ins1" defer></script>
+<script src="/insulin-db.js?v=ins1" defer></script>
+<script src="/insulin-convert.js?v=ins1" defer></script>
+<script src="/insulin.js?v=ins1" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the

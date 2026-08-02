@@ -699,6 +699,22 @@
       });
     },
     electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
+    dosing: function () {
+      // Bedside-dosing hub: groups the Insulin module + Electrolyte correction behind one tile.
+      // Insulin row respects its flag (smd_insulin, DEFAULT ON; hide with ?insulin=0 / localStorage "0").
+      var insOn = false;
+      try { var q = (location.search.match(/[?&]insulin=([^&]+)/) || [])[1];
+        insOn = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") !== "0"); } catch (e) {}
+      openSheet('<div class="hv-sh-t">Bedside dosing</div>' +
+        (insOn ? mi("syringe", "Insulin dose", "Bolus · correction · basal · library · convert", "ins") : "") +
+        mi("flask", "Electrolyte correction", "ICU electrolyte replacement", "ely"));
+      sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var a = b.getAttribute("data-mi"); closeSheet();
+          setTimeout(function () { if (a === "ins") ACT.insulin(); else ACT.electrolytes(); }, 70);
+        });
+      });
+    },
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
@@ -733,6 +749,13 @@
       function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
+    },
+    insulin: function () {
+      // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
+      // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
+      // separately inside the module). Persist the flag so the tile stays visible, then open directly.
+      try { localStorage.setItem("smd_insulin", "1"); } catch (e) {}
+      if (window.INSULIN && INSULIN.open) INSULIN.open(); else toast("Insulin calculator loading…");
     },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
@@ -1338,7 +1361,7 @@
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
           rtile("interactions", "photo_camera", "Scan Meds", "Photo scan · interactions") +
-          rtile("electrolytes", "science", "Electrolytes", "ICU correction") +
+          rtile("dosing", "medication", "Dosing", "Insulin &middot; electrolytes") +
           rtile("guidelines", "book_2", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div id="rnavRecent"></div>' +
