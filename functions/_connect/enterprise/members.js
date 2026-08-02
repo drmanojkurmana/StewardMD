@@ -3,12 +3,15 @@
 // Audit is PHI-free (action + actor + tenant + outcome only; target user-id/role are non-PHI account ids
 // but are not on the audit ALLOW-list, so they are intentionally not persisted — see spec §2 note).
 import { requireCan } from "./guard.js";
-import { resolveActor } from "../identity.js";
-import { ROLES } from "./rbac.js";
+import { resolveActor, isSuperAdmin } from "../identity.js";
+import { TENANT_ROLES } from "./rbac.js";
 import { PermissionError } from "../permission.js";
 import { makeAuditSink } from "../audit.js";
 
-const validRole = (r) => ROLES.includes(r);
+// TENANT_ROLES (not the full ROLES list) — "superadmin" is a platform-operator role granted only via
+// the OWNER_EMAILS allow-list (identity.js isSuperAdmin), never via an invite/setRole grant. Validating
+// against TENANT_ROLES here closes off a second, weaker path to the same privilege.
+const validRole = (r) => TENANT_ROLES.includes(r);
 
 async function membersOf(db, tenantId) {
   const r = await db.prepare("SELECT * FROM connect_membership WHERE tenant_id=?").bind(tenantId).all();
@@ -41,6 +44,21 @@ export async function listMembers(deps, request, env, tenantId) {
 // omitted rather than echoed back as if it were one — we never invent names).
 export async function listMyTenants(deps, request, env) {
   const actor = await resolveActor(deps.identifyFn, request, env);   // AuthError if guest / unauthenticated
+  // Platform super-admin: no connect_membership rows exist for them (there is nothing to seed — the id
+  // is an opaque fb:<uid> we don't have), so the ordinary "my memberships" query would come back empty.
+  // Special-case it to every tenant, so the wizard tenant picker still shows something for them. Gated
+  // on the SAME verified-email check as resolveTenant's super-admin branch (identity.js isSuperAdmin) —
+  // never on a request-body value.
+  if (isSuperAdmin(actor, env)) {
+    const r = await deps.db.prepare("SELECT * FROM connect_tenant").all();
+    const out = [];
+    for (const t of (r.results || [])) {
+      const item = { tenantId: t.id, role: "superadmin" };
+      if (t.name != null && String(t.name).trim() && String(t.name) !== String(t.id)) item.name = String(t.name);
+      out.push(item);
+    }
+    return out;
+  }
   const r = await deps.db.prepare("SELECT * FROM connect_membership WHERE user_id=?").bind(actor.id).all();
   const out = [];
   for (const m of (r.results || [])) {

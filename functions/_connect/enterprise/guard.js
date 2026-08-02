@@ -7,9 +7,12 @@ import { PermissionError } from "../permission.js";
 import { can } from "./rbac.js";
 
 // deps: { db, identifyFn }. Returns { actor, tenant, role } on allow; throws (fail-closed) on deny.
+// Order is authenticate FIRST (resolveActor), THEN super-admin/tenant resolution (resolveTenant, which
+// consults the OWNER_EMAILS allow-list only via the actor resolveActor already authenticated), THEN the
+// permission check (can) — the allow-list is never consulted before authentication.
 export async function requireCan(deps, request, env, tenantId, action) {
   const actor = await resolveActor(deps.identifyFn, request, env);        // AuthError if guest/none
-  const { tenant, role } = await resolveTenant(deps.db, actor.id, tenantId); // PermissionError if non-member
+  const { tenant, role } = await resolveTenant(deps.db, actor, tenantId, env); // PermissionError if non-member (or non-existent tenant for a super-admin)
   if (!can(role, action)) throw new PermissionError("role '" + role + "' may not perform '" + action + "'");
   return { actor, tenant, role };
 }

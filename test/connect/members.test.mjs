@@ -1,7 +1,7 @@
 // test/connect/members.test.mjs — membership management RBAC + guards (spec §3.3).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { listMembers, invite, setRole, removeMember } from "../../functions/_connect/enterprise/members.js";
+import { listMembers, invite, setRole, removeMember, listMyTenants } from "../../functions/_connect/enterprise/members.js";
 import { PermissionError } from "../../functions/_connect/permission.js";
 import { makeMockDb } from "../../functions/_connect/testkit.js";
 // makeMockDb's UPDATE/DELETE are no-ops (append-only, by design -- see testkit.js), so it can assert the
@@ -32,6 +32,14 @@ test("clinician cannot invite (member:invite denied)", async () => {
 
 test("invalid role is refused", async () => {
   await assert.rejects(() => invite({ db: seed(TWO_OWNERS), identifyFn: idFn("u-admin") }, {}, {}, "t1", { userId: "x", role: "superuser" }), PermissionError);
+});
+
+// "superadmin" is the platform-operator role (OWNER_EMAILS allow-list, functions/_connect/identity.js
+// isSuperAdmin) — it must NEVER be grantable via a connect_membership invite/setRole, even by an owner.
+// That would be a second, weaker path to the same privilege that bypasses the email allow-list entirely.
+test("superadmin cannot be granted via invite or setRole, even by an owner", async () => {
+  await assert.rejects(() => invite({ db: seed(TWO_OWNERS), identifyFn: idFn("u-owner") }, {}, {}, "t1", { userId: "x", role: "superadmin" }), PermissionError);
+  await assert.rejects(() => setRole({ db: seed(TWO_OWNERS), identifyFn: idFn("u-owner") }, {}, {}, "t1", { userId: "u-admin", role: "superadmin" }), PermissionError);
 });
 
 test("only an owner may grant owner (admin cannot)", async () => {
@@ -97,4 +105,31 @@ test("setRole actually updates the row and writes a role.change audit row", asyn
   assert.equal(auditRows.length, 1);
   assert.equal(auditRows[0].action, "role.change");
   assert.equal(auditRows[0].outcome, "ok");
+});
+
+// listMyTenants + the platform super-admin (see test/connect/superadmin.test.mjs for the full matrix of
+// security scenarios; these two pin the tenant-picker behavior specifically).
+const idEmail = (id, email) => async () => ({ id, guest: false, email });
+test("listMyTenants: a super-admin (verified owner email) sees EVERY tenant, not just their own memberships", async () => {
+  const db = makeMockDb({
+    connect_tenant: [{ id: "t1", mode: "sandbox", name: "T1" }, { id: "t2", mode: "sandbox", name: "T2" }, { id: "t3", mode: "sandbox" }],
+    connect_membership: [{ user_id: "u-clin", tenant_id: "t1", role: "clinician" }],
+  });
+  const env = { OWNER_EMAILS: "owner@example.com" };
+  const mine = await listMyTenants({ db, identifyFn: idEmail("fb:whatever-uid", "owner@example.com") }, {}, env);
+  assert.deepEqual(mine.map((t) => t.tenantId).sort(), ["t1", "t2", "t3"]);
+  assert.ok(mine.every((t) => t.role === "superadmin"));
+  assert.equal(mine.find((t) => t.tenantId === "t3").name, undefined);   // name===id -> omitted, never invented
+});
+
+test("listMyTenants: a non-super-admin (even one with no memberships) sees only their own memberships, never every tenant", async () => {
+  const db = makeMockDb({
+    connect_tenant: [{ id: "t1", mode: "sandbox", name: "T1" }, { id: "t2", mode: "sandbox", name: "T2" }],
+    connect_membership: [{ user_id: "u-clin", tenant_id: "t1", role: "clinician" }],
+  });
+  const env = { OWNER_EMAILS: "owner@example.com" };
+  assert.deepEqual(await listMyTenants({ db, identifyFn: idEmail("u-nobody", "nobody@example.com") }, {}, env), []);
+  const clin = await listMyTenants({ db, identifyFn: idEmail("u-clin", "clinician@example.com") }, {}, env);
+  assert.deepEqual(clin.map((t) => t.tenantId), ["t1"]);
+  assert.equal(clin[0].role, "clinician");
 });

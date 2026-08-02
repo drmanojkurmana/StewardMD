@@ -9,7 +9,9 @@ const identifyUser = async () => ({ id: "fb:u1", guest: false });
 
 test("resolveActor rejects a guest", async () => {
   await assert.rejects(() => resolveActor(identifyGuest, {}, {}), AuthError);
-  assert.deepEqual(await resolveActor(identifyUser, {}, {}), { id: "fb:u1" });
+  // resolveActor now also carries the verified email (null when identify() didn't supply one) — see
+  // test/connect/superadmin.test.mjs for the super-admin gate this enables.
+  assert.deepEqual(await resolveActor(identifyUser, {}, {}), { id: "fb:u1", email: null });
 });
 
 test("resolveTenant requires membership", async () => {
