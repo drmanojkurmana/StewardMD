@@ -734,6 +734,13 @@
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
     },
+    insulin: function () {
+      // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT OFF);
+      // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
+      // separately inside the module). Persist the flag so the tile stays visible, then open directly.
+      try { localStorage.setItem("smd_insulin", "1"); } catch (e) {}
+      if (window.INSULIN && INSULIN.open) INSULIN.open(); else toast("Insulin calculator loading…");
+    },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
   };
@@ -1321,6 +1328,14 @@
                   '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
                 '</button>'
               ) : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // Insulin dose CDSS — flag smd_insulin, DEFAULT OFF. Owner reveals via ?insulin=1
+            // or localStorage "1"; home.js runs before insulin-flags.js (deferred), so resolve synchronously.
+            try {
+              var q = (location.search.match(/[?&]insulin=([^&]+)/) || [])[1];
+              var ion = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") === "1");
+              return ion ? rtile("insulin", "vaccines", "Insulin", "Dose calculator") : "";
             } catch (e) { return ""; }
           })() +
           (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT ON).
