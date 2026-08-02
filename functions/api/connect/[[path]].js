@@ -12,6 +12,17 @@ import { followcareSource } from "../../_connect/abdm/hip-sources/followcare.js"
 import { identify } from "../../_usage.js";
 import { ownerOK } from "../../_adminauth.js";
 import { sweep } from "../../_connect/abdm/state.js";
+import { fhirFlagOn } from "../../_connect/smart/flags.js"; // Track A: smd_connect_fhir gate (default OFF)
+import { handleFeedIngest } from "../../_connect/ingest.js"; // Track B: HMAC-gated legacy-feed ingest
+import { hl7v2Connector } from "../../_connect/connectors/hl7v2/connector.js";
+import { fileConnector } from "../../_connect/connectors/file/connector.js";
+import { fhirPushConnector } from "../../_connect/connectors/fhir-push/connector.js"; // Track B: generic FHIR-push webhook
+import { defaultRegistry } from "../../_connect/sdk/index.js"; // Track C: Connector SDK registry (gated by smd_connect_sdk)
+import { sdkFlagOn } from "../../_connect/sdk/flags.js";
+import { restFlagOn } from "../../_connect/connectors/rest-json/flags.js"; // per-track gate: smd_connect_rest
+import { dicomFlagOn } from "../../_connect/connectors/dicomweb/flags.js"; // per-track gate: smd_connect_dicom
+import { graphqlFlagOn } from "../../_connect/connectors/graphql/flags.js"; // per-track gate: smd_connect_graphql
+import { sqlFlagOn } from "../../_connect/connectors/sql/flags.js"; // per-track gate: smd_connect_sql
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";
@@ -34,6 +45,14 @@ export async function onRequest(context) {
       source: followcareSource, handleDiscovery, serveTransfer, putHipConsent,
       ingestEvent, fetch, now: () => new Date().toISOString() };
     return handleIngress(env, deps, request);
+  }
+  // Track B: HMAC-gated feed ingest. No StewardMD actor; tenant from the feed row. HL7 v2 + file/CSV keep the
+  // HL7 flag; the generic FHIR-push webhook (/ingress/fhir) is routed to the SAME spine with kind 'fhir-push'
+  // and its OWN flag. The /ingress/fhir match is anchored (not /ingress/fhir-r4, which stays reserved -> 501).
+  if (/^\/ingress\/hl7/.test(path) || /^\/ingress\/file/.test(path) || /^\/ingress\/fhir(?:\/|$)/.test(path)) {
+    const kind = /^\/ingress\/hl7/.test(path) ? "hl7v2" : /^\/ingress\/fhir(?:\/|$)/.test(path) ? "fhir-push" : "file";
+    const feedDeps = { db: env.CONNECT_DB, kv: env.MAIK_KV, secrets: makeSecrets(env), connectors: { hl7v2: hl7v2Connector, file: fileConnector, "fhir-push": fhirPushConnector }, audit: makeAuditSink(env, env.CONNECT_DB), now: () => Date.now() };
+    return handleFeedIngest(env, feedDeps, request, kind);
   }
   if (/^\/ingress\//.test(path)) return jsonResponse({ error: "not_implemented", phase: 1 }, { status: 501 });
 
@@ -77,8 +96,27 @@ export async function onRequest(context) {
 
   if (path === "/context" && request.method === "POST") {
     let body = {}; try { body = await request.json(); } catch {}
-    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors: { "fhir-r4": fhirR4Connector } };
+    // Track C: with smd_connect_sdk OFF this is byte-identical to the pre-SDK literal map; ON, it is the
+    // pull-profile subset of the conformance-gated SDK registry (event connectors like abdm are filtered out).
+    let connectors = { "fhir-r4": fhirR4Connector };
+    if (sdkFlagOn(env)) {
+      connectors = {};
+      for (const [id, c] of Object.entries(defaultRegistry().asConnectorMap()))
+        if (c.meta && c.meta.profile === "pull") connectors[id] = c;
+    }
+    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors };
     const req = { request, tenantId: body.tenantId, patientRef: body.patientRef, scope: body.scope, connectorId: body.connectorId || "fhir-r4" };
+    // Track A: a FHIR-connector context request requires smd_connect_fhir too (no existence leak when off).
+    if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a rest-json context request requires smd_connect_rest too, so the per-track flag gates the SDK
+    // /context path (with smd_connect_sdk ON) exactly as it gates the onboard save/test/pull routes.
+    if (req.connectorId === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a dicomweb context request requires smd_connect_dicom too, same per-track gate idiom.
+    if (req.connectorId === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a graphql context request requires smd_connect_graphql too, same per-track gate idiom.
+    if (req.connectorId === "graphql" && !graphqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a sql context request requires smd_connect_sql too, same per-track gate idiom.
+    if (req.connectorId === "sql" && !sqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {

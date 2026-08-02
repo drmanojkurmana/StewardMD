@@ -11,7 +11,7 @@ import { purposeKey } from "./abdm/consent.js";
 
 export class ValidationError extends Error {}
 
-const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents" };
+const SCOPE_TO_KEY = { Encounter: "encounters", Condition: "conditions", MedicationStatement: "medications", AllergyIntolerance: "allergies", Observation: "observations", DiagnosticReport: "diagnosticReports", DocumentReference: "documents", ImagingStudy: "imagingStudies" };
 
 // Shared consume TAIL (R9): validate (dangling refs nulled → warnings) then the defense-in-depth scope FILTER
 // (drop any resource type not in scope). Reused by BOTH the pull loadPatientContext and the push consumeNdhmBundle
@@ -51,7 +51,13 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     const ctx = {
       tenant: { id: tenant.id, mode: tenant.mode, settings: {} },
       config, scope,
-      secrets: async (name) => (name === "bearer" && config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null),
+      kv: env.MAIK_KV,                                       // NON-PHI SMART discovery + token cache (connect:smart:*) // VERIFY binding
+      secrets: async (name) => {
+        if (name === "smart") return config.secret_ref ? JSON.parse(await secrets.open(await secrets.get(config.secret_ref))) : null;
+        if (name === "bearer") return config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null;
+        return null;
+      },
+      envelope: { seal: secrets.seal, open: secrets.open },  // request-scoped envelope for connector token cache
       now: () => new Date(t0),
       fetch: io.fetch || fetch,
       audit: () => {},                    // connectors never write audit directly

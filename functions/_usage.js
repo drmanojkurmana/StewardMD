@@ -101,6 +101,14 @@ export async function identify(request, env) {
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
 
+// The stable, human-readable usage/limit KEY for a caller: the verified email when signed in
+// (so web + native attribute to the SAME person), else the guest IP bucket. Used by the AI usage
+// pipeline so records land under "em:<email>" and per-user caps resolve off it.
+export function usageKeyFor(who) {
+  if (who && who.email) return "em:" + String(who.email).toLowerCase();
+  return (who && who.id) || "ip:0";
+}
+
 // ---- date keys ----
 function dayKey(d) { return d.toISOString().slice(0, 10); }
 function monthKey(d) { return d.toISOString().slice(0, 7); }
@@ -189,6 +197,27 @@ export async function checkQuota(env, request, type, opts) {
   // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router + admin are exempt.
   if (type !== "router" && !exempt) await writeJson(store, rlKey, { t: Date.now() }, 60);
   return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type };
+}
+
+// Best-effort per-DEVICE daily abuse cap (anti account-farming). Device id = X-SMD-Device header
+// (from device-id.js). Speed-bump only — resets on reinstall; the global cost breaker is the real
+// backstop. env MAIK_DEVICE_DAILY_CAP (default 300; 0 disables). Fail-open on any gap.
+export function deviceDailyCap(env) {
+  const v = Number(env && env.MAIK_DEVICE_DAILY_CAP);
+  return Number.isFinite(v) && v >= 0 ? v : 300;
+}
+export async function deviceCheck(env, store, request, now) {
+  const cap = deviceDailyCap(env);
+  if (!store || !cap) return { ok: true };
+  const dev = request.headers.get("X-SMD-Device");
+  if (!dev) return { ok: true };
+  const day = dayKey(new Date(now || Date.now()));
+  const key = "aiu:dev:" + dev + ":" + day;
+  let used = 0;
+  try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
+  if (used >= cap) return { ok: false, reason: "device-cap", used: used, cap: cap };
+  try { await store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); } catch (e) {}
+  return { ok: true, used: used + 1, cap: cap };
 }
 
 /* Post-call record. gate is the object returned by checkQuota (ok:true). Records counters +

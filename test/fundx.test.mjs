@@ -288,7 +288,7 @@ function loadFundx(flagVal) {
   new Function("window", "localStorage", "location", src("fundx.js"))(win, ls, loc);
   return win.FUNDX;
 }
-ok("flag: default OFF → stub, enabled=false", loadFundx(null).enabled() === false);
+ok("flag: default ON (private dev/testing; PUBLIC-RELEASE-GATE) → real module, enabled=true", loadFundx(null).enabled() === true);
 ok("flag: '0' → stub, enabled=false", loadFundx("0").enabled() === false);
 ok("flag: '1' → real module, enabled=true", loadFundx("1").enabled() === true);
 // URL override on

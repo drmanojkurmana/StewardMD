@@ -1806,7 +1806,8 @@
     if (!document.getElementById("aic-css")) {
       var st = document.createElement("style"); st.id = "aic-css";
       st.textContent =
-        ".aic{padding:2px 2px 10px}" +
+        ".aic{padding:2px 2px 10px;--card:#f1f5f9;--bg:#ffffff}" +   /* dark-navy chips/cards were unreadable in LIGHT mode: --card/--bg were never defined so they stuck on the dark fallback while --ink flipped to dark text. Define them here so surfaces flip with the theme. */
+        "body.dark .aic{--card:#0f172a;--bg:#0b1220}" +               /* dark mode keeps the original dark surfaces (== old fallbacks) */
         ".aic-sec{margin:0 0 20px}" +
         ".aic-h{font:800 12px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:0 2px 9px}" +
         ".aic-model{font:800 16px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:9px}" +
@@ -1836,7 +1837,17 @@
         ".aic-qrow input.ov{border-color:var(--teal,#0e6e63)}" +
         ".aic-mdl{display:flex;justify-content:space-between;font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin:2px 0}" +
         ".aic-note{font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:8px;line-height:1.5}" +
-        ".aic-load,.aic-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+        ".aic-load,.aic-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}" +
+        ".aic-input{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:10px;border:1px solid var(--line,#1e293b);background:var(--bg,#0b1220);color:var(--ink,#e6edf3);font:600 13px var(--hfont,system-ui);margin-bottom:10px}" +
+        ".aic-users{max-height:360px;overflow-y:auto}" +
+        ".aic-user{padding:9px 6px;border-top:1px solid var(--line,#1e293b);cursor:pointer}" +
+        ".aic-user:first-child{border-top:none}" +
+        ".aic-user-em{font:700 13px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aic-user-meta{font:600 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:2px}" +
+        ".aic-limits{display:flex;flex-direction:column;gap:10px}" +
+        ".aic-lim{display:flex;justify-content:space-between;align-items:center;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aic-lim input{width:84px;padding:6px 8px;border-radius:8px;border:1px solid var(--line,#1e293b);background:var(--bg,#0b1220);color:var(--ink,#e6edf3);font:700 13px var(--hfont,system-ui);text-align:center}" +
+        ".aic-btn{width:100%;margin-top:6px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;padding:12px;font:700 13px var(--hfont,system-ui);cursor:pointer}";
       document.head.appendChild(st);
     }
     openSheet('<div class="hv-sh-t">AI Control Center</div><div id="aicBody" class="aic"><div class="aic-load">Loading…</div></div>');
@@ -1926,6 +1937,8 @@
       audit.slice(0, 8).forEach(function (a) { h += '<div class="aic-audit">' + aiCtlEsc(a.action) + ' &middot; ' + aiCtlEsc(a.detail) + '</div>'; });
       h += '</div>';
     }
+    // 8) Per-user usage + limits (owner search + edit; lazy-loaded by aicUsersInit)
+    h += '<div class="aic-sec"><div class="aic-h">Users</div><input id="aicUserSearch" class="aic-input" placeholder="Search by email…"><div id="aicUserList" class="aic-users"><div class="aic-load">Loading…</div></div></div>';
     return h;
   }
   function wireAiControl(host) {
@@ -1976,6 +1989,51 @@
       inp.addEventListener("change", save);
       inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); inp.blur(); } });
     });
+    aicUsersInit(host);
+  }
+  // ── AI Control Center: Users section (per-user usage + limits) ──
+  function aicUsersInit(host) {
+    var list = host.querySelector("#aicUserList");
+    if (!list) return;
+    aiAdminFetch("/admin/users").then(function (d) {
+      list = host.querySelector("#aicUserList"); if (!list) return;
+      var users = (d && d.users) || [];
+      function draw(q) {
+        var rows = users.filter(function (u) { return !q || String(u.email || "").toLowerCase().indexOf(q) >= 0; }).map(function (u) {
+          var caps = Object.keys(u.limits || {}).map(function (m) { return m + ":" + u.limits[m]; }).join(", ") || "no caps";
+          return '<div class="aic-user" data-email="' + aiCtlEsc(u.email) + '"><div class="aic-user-em">' + aiCtlEsc(u.email) + '</div>' +
+                 '<div class="aic-user-meta">' + (u.req | 0) + ' req &middot; ₹' + (typeof u.cost === "number" ? u.cost.toFixed(2) : (u.cost || 0)) + ' &middot; ' + aiCtlEsc(caps) + '</div></div>';
+        }).join("");
+        list.innerHTML = rows || '<div class="aic-note">No AI usage yet today.</div>';
+      }
+      draw("");
+      var s = host.querySelector("#aicUserSearch");
+      if (s) s.addEventListener("input", function () { draw(this.value.trim().toLowerCase()); });
+      list.addEventListener("click", function (e) {
+        var row = e.target.closest && e.target.closest(".aic-user");
+        if (row) aicEditUser(row.getAttribute("data-email"), users);
+      });
+    });
+  }
+  function aicEditUser(email, users) {
+    var MODS = [["maik", "MaiK"], ["maik_case", "MaiK Case"], ["ocr", "Vision"], ["ecg", "ECG"], ["thorex", "Chest X-ray"], ["research", "Evidence Review"]];
+    var u = (users || []).find(function (x) { return x.email === email; }) || { limits: {}, byModule: {} };
+    var body = MODS.map(function (m) {
+      var cur = (u.limits && typeof u.limits[m[0]] === "number") ? u.limits[m[0]] : "";
+      return '<label class="aic-lim"><span>' + aiCtlEsc(m[1]) + '</span><input type="number" min="0" data-mod="' + m[0] + '" value="' + cur + '" placeholder="no cap"></label>';
+    }).join("");
+    openSheet('<div class="hv-sh-t">' + aiCtlEsc(email) + '</div><div class="aic-limits">' + body + '<button id="aicLimSave" class="aic-btn">Save limits</button></div>');
+    var save = document.getElementById("aicLimSave");
+    if (save) save.addEventListener("click", function () {
+      var inputs = [].slice.call(document.querySelectorAll(".aic-limits input[data-mod]"));
+      var chain = Promise.resolve();
+      inputs.forEach(function (inp) {
+        var mod = inp.getAttribute("data-mod"), val = inp.value.trim();
+        if ((mod === "maik" || mod === "maik_case") && val !== "" && !window.confirm("Cap core MaiK clinical reasoning for " + email + "? This can block their clinical AI mid-shift.")) return;
+        chain = chain.then(function () { return aiAdminFetch("/admin/user-limit", { method: "POST", body: { email: email, module: mod, limit: val === "" ? null : Number(val) } }); });
+      });
+      chain.then(function () { toast("Limits saved for " + email); });
+    });
   }
   function openAccount() {
     var a = readAccount();
@@ -2023,7 +2081,7 @@
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var si = s.querySelector('[data-acct="signin"]');
-    if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
+    if (si) si.addEventListener("click", function () { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} });   // open the email+Google login screen, not straight to Google
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
     // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
@@ -5106,7 +5164,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   document.addEventListener("click", function (e) {
     var t = e.target; if (!t || !t.id) return;
     if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
-    else if (t.id === "smdSbSignIn") { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }
+    else if (t.id === "smdSbSignIn") { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }   // open the email+Google login screen, not straight to Google
+    else if (t.id === "accountGateClose") { var agc = document.getElementById("accountGate"); if (agc) agc.classList.add("hidden"); }   // escape hatch when the gate was opened manually
   }, false);
   // Keep the sidebar account row in sync when Firebase auth resolves. Google sign-in
   // via popup can complete asynchronously (onAuthStateChanged), not via the popup

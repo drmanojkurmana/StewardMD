@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { patient, encounter, condition, observation, diagnosticReport, documentReference, bundle } from "../../functions/_connect/canonical/model.js";
+import { patient, encounter, condition, observation, diagnosticReport, documentReference, bundle, imagingStudy } from "../../functions/_connect/canonical/model.js";
 import { codeable, reference } from "../../functions/_connect/canonical/coding.js";
 import { validateBundle } from "../../functions/_connect/canonical/validate.js";
 
@@ -54,4 +54,47 @@ test("DocumentReference.encounter resolves-or-nulls", () => {
   assert.equal(b.documents[0].encounter, null);
   assert.deepEqual(b.documents[1].encounter, { type: "Encounter", id: "e1" });
   assert.match(r.warnings.join(), /reference/i);
+});
+
+// ---- ImagingStudy (metadata-only) ---------------------------------------------------------------------------
+
+test("bundle with a valid imaging study validates", () => {
+  const im = imagingStudy({
+    id: "im1", modality: "CT", bodySite: "chest", studyDate: "2026-07-01",
+    accessionNumber: "ACC-1", description: "CT chest", seriesCount: 2, instanceCount: 120,
+    sourceStudyId: "1.2.3.4",
+  });
+  const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), imagingStudies: [im], sourceConnector: "x" });
+  const r = validateBundle(b);
+  assert.equal(r.ok, true);
+});
+
+test("imaging study with a bad-typed field fails", () => {
+  const bad = { id: "im2", seriesCount: "three" };   // simulates a connector bypassing imagingStudy()
+  const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), imagingStudies: [bad], sourceConnector: "x" });
+  const r = validateBundle(b);
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /seriesCount.*must be a number/);
+});
+
+test("imaging study carrying a url/binary field fails closed (no WADO-RS binary retrieval)", () => {
+  const withUrl = { id: "im3", modality: "CT", url: "https://pacs.example/studies/1.2.3.4" };
+  const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), imagingStudies: [withUrl], sourceConnector: "x" });
+  const r = validateBundle(b);
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /forbidden field/);
+});
+
+test("imaging study missing an id fails", () => {
+  const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), imagingStudies: [{ modality: "CT" }], sourceConnector: "x" });
+  const r = validateBundle(b);
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /missing\/invalid id/);
+});
+
+test("REGRESSION: a bundle with no imaging studies validates exactly as before", () => {
+  const b = bundle({ tenantId: "t1", patient: patient({ id: "p1" }), sourceConnector: "x" });
+  const r = validateBundle(b);
+  assert.equal(r.ok, true);
+  assert.deepEqual(b.imagingStudies, []);
 });

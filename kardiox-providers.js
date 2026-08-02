@@ -199,10 +199,12 @@
   // same-origin /api proxy — via the zero-storage direct-upload endpoint. The web build keeps the
   // same-origin Cloudflare edge proxy (which holds any server-side auth).
   function isNative() { try { return !!(typeof window !== "undefined" && window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; } }
-  var KX_BACKEND_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // pipeline decommissioned (DPDP: no US); rarely-hit fallback now degrades gracefully to India/unavailable
-  var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
-  var KX_IMAGE_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // end-to-end IMAGE model — INDIA (Mumbai/asia-south1) for DPDP data residency
-  function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
+  var KX_IMAGE_URL = "https://kardiox-image-911280405587.asia-south1.run.app";  // Cloud Run image model (Mumbai/asia-south1). ECG ANALYSIS now goes through the EDGE (edgeBase, below); this base is used only for the public model-lab status GET.
+  // The edge (/api/kardiox) is the single path for ECG analysis: it runs the per-doctor ECG meter and
+  // holds any server-side token, so the app ships NO backend token. Native -> https://stewardmd.in/api/kardiox
+  // (via SMD_API_BASE); web -> /api/kardiox (same origin).
+  function edgeBase() { return (typeof window !== "undefined" && window.SMD_API_BASE ? window.SMD_API_BASE : "") + "/api/kardiox"; }
+  function backendBase() { return edgeBase(); }
   // ── Model Lab (beta): allowed users (server-side admin allow-list) get the candidate 19-class model
   // shown ALONGSIDE production (variant=compare) as a labelled experimental second opinion — production
   // stays the authoritative reading. Access is checked once on open; never a full swap. ──
@@ -225,7 +227,7 @@
   function imageAnalyzer() {
     try {
       if (!isNative() || typeof window === "undefined" || !window.SMD_KARDIOX_NET || !window.SMD_KARDIOX_NET.remoteAnalyzer) return null;
-      var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: KX_IMAGE_URL, path: "/v1/ecg/analyze-image" + (modelLabOn() ? "?variant=compare" : "") });
+      var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: edgeBase(), path: "/v1/ecg/analyze-image" + (modelLabOn() ? "?variant=compare" : "") });
       // Stash the analysed image so the data-flywheel (kardiox-feedback.js) can attach it to a label.
       return { kind: "image", analyze: function (image, onStage) {
         try { if (image && image.data instanceof Blob) window.SMD_KARDIOX_LASTIMAGE = image.data; } catch (e) {}
@@ -250,9 +252,7 @@
   function remoteAnalyzer() {
     try {
       if (typeof window !== "undefined" && window.SMD_KARDIOX_NET && window.SMD_KARDIOX_NET.remoteAnalyzer) {
-        var cfg = isNative()
-          ? { baseUrl: KX_BACKEND_URL, path: "/v1/ecg/analyze-upload", token: KX_BACKEND_TOKEN }
-          : { baseUrl: "/api/kardiox", path: "/v1/ecg/analyze" };
+        var cfg = { baseUrl: edgeBase(), path: "/v1/ecg/analyze" };   // native + web both go through the edge (no client token)
         var r = window.SMD_KARDIOX_NET.remoteAnalyzer(cfg);
         return { kind: "remote", analyze: r.analyze };
       }

@@ -1,0 +1,797 @@
+/* Connect EMR onboarding admin page smoke test (headless Chrome via CDP).
+ * Verifies: the page loads with ZERO console errors / uncaught exceptions; the Add-connection form renders;
+ * the auth-method + type toggles work; the CSV one-shot upload + HL7-feed create + Webhook create + REST/JSON
+ * save-and-test flows render (REST: type toggle shows #fRest and hides the rest, POSTs /emr with type
+ * rest-json + the entered fields, then /test/:id, renders REST-specific success copy, and degrades to the
+ * same flag-off state on a 404); the Part-3 tenant PICKER populates from a MOCKED GET /tenants (multi-tenant
+ * shows a placeholder + no auto-select; a single tenant auto-selects); the unified Connections DASHBOARD
+ * renders MERGED FHIR + HL7 rows from a MOCKED GET /all (with type badges, status, and per-type actions, and
+ * NEVER a secret, and a rest-json row is badged REST/JSON by its real type, not a hardcoded FHIR); Delete/Copy
+ * actions call the right endpoints; the no-membership empty state shows when /tenants is empty; and a MOCKED
+ * 404 shows the graceful "not enabled yet" flag-off state (not a crash). Also verifies the Connection health
+ * panel: a MOCKED GET /health renders per-connector Healthy/Degraded status, counts, failure rate, recent
+ * failures with reasons, and a summary line, asserts the mocked payload carries only the documented PHI-free
+ * fields, shows the "No connector activity yet." empty state, and degrades to the same flag-off state on 404.
+ * Also verifies AI-assisted field mapping (CSV + REST): Suggest mapping POSTs ONLY the column headers (never
+ * csv text / row data) to /suggest-mapping, renders an EDITABLE map the admin reviews, and the reviewed map
+ * flows back into the next parse (CSV) / save (REST); degrades to the same flag-off state on a 404.
+ * Also verifies the SQL / database lab feed wizard: type toggle shows #fSql (with its own visible not-
+ * configured/Hyperdrive note) and hides the rest, Save POSTs /emr with type sql + bindingName + queryTemplate
+ * only (NO baseUrl, NO auth -- there is no URL or admin secret for a SQL/DB connection), AI-assisted mapping
+ * works the same way as REST/GraphQL, and Test HONESTLY renders the not-configured message as a failure
+ * (never a fake success) until the owner wires a live driver; degrades to the same flag-off state on a 404.
+ * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
+ * USAGE: node test/run-connect-emr-ui.mjs
+ */
+import { spawn } from "node:child_process";
+import { setTimeout as sleep } from "node:timers/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+const HERE = dirname(fileURLToPath(import.meta.url));
+const PORT = 8793, DBG = 9384, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/connect-emr-chrome";
+const BASE = `http://localhost:${PORT}/`;
+const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
+const serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), String(PORT)], { stdio: "ignore" });
+for (let i = 0; i < 30; i++) { try { await fetch(BASE); break; } catch { await sleep(200); } }
+
+const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${DBG}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu", "--mute-audio"], { stdio: "ignore" });
+
+let msgId = 1; const pending = new Map(); let ws, sessionId;
+const consoleErrors = [];
+const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
+const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
+let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
+
+async function attach(url) {
+  const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
+  const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
+  await call("Runtime.enable", {}); await call("Page.enable", {}); await call("Page.navigate", { url });
+  for (let i = 0; i < 60; i++) { await sleep(300); if (await ev(`return !!(window.ConnectEMR && window.ConnectEMR.loadDashboard)`) === true) return true; }
+  return false;
+}
+
+try {
+  let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${DBG}/json/version`)).json(); break; } catch { await sleep(200); } }
+  ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); return; }
+    // Capture real console.error output + uncaught exceptions from the page.
+    if (m.method === "Runtime.consoleAPICalled" && m.params && m.params.type === "error") consoleErrors.push((m.params.args || []).map(a => a.value || a.description || "").join(" "));
+    if (m.method === "Runtime.exceptionThrown") consoleErrors.push("EXCEPTION: " + (((m.params || {}).exceptionDetails || {}).text || "thrown"));
+  };
+
+  ok(await attach(BASE + "admin/connect-emr.html"), "page loads (window.ConnectEMR ready)");
+  await sleep(600); // let any async load settle
+
+  // form renders
+  ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=8 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0 && en.indexOf("graphql")>=0 && en.indexOf("sql")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL + SQL all active (no disabled 'coming soon' option)");
+  ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
+  ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
+  await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
+
+  // CSV type: activates the CSV subform, one-shot upload posts, mocked normalized bundle + warnings render
+  ok(await ev(`document.getElementById("aType").value="csv"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fCsv")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none";`) === true, "CSV type activates the CSV subform and hides the FHIR fields");
+  await ev(`window.ConnectEMR.setTenant("t-csv"); window.ConnectEMR.__setApi(function(path,opts){ return Promise.resolve({s:200,d:{ok:true,rowsParsed:2,columns:["MRN","Test","Value","Unit"],warnings:["unmapped column 'Extra' ignored","ragged row 2 (3 cols vs 4)"],bundle:{sccmVersion:"1.0",patient:{id:"h1a2",gender:"female"},observations:[{id:"row-0",category:"laboratory",code:{text:"Hemoglobin"},value:{value:9.2,unit:"g/dL"}},{id:"row-1",category:"laboratory",code:{text:"Creatinine"}}],diagnosticReports:[],meta:{warnings:[]}}}}); }); return 1;`);
+  await ev(`window.ConnectEMR.submitCsv("MRN,Test,Value,Unit\\nP1,Hemoglobin,9.2,g/dL\\nP1,Creatinine,1.1,mg/dL"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var j=document.getElementById("csvJson"); return getComputedStyle(j).display!=="none" && j.textContent.indexOf('"sccmVersion": "1.0"')>=0 && j.textContent.indexOf("Hemoglobin")>=0;`) === true, "CSV upload posts and renders the normalized SCCM bundle");
+  ok(await ev(`var w=document.getElementById("csvWarn"); return getComputedStyle(w).display!=="none" && w.innerHTML.indexOf("unmapped column")>=0 && w.innerHTML.indexOf("ragged row")>=0;`) === true, "CSV warnings list surfaces the structural warnings");
+  ok(await ev(`var c=document.getElementById("csvCounts"); return c.textContent.indexOf("2 row")>=0 && c.textContent.indexOf("4 column")>=0 && c.textContent.indexOf("\\u2014")<0;`) === true, "CSV counts show rows x columns (no em-dash)");
+
+  // AI-assisted field mapping (CSV): after a parse, "Suggest mapping" appears; clicking it POSTs the parsed
+  // headers (and ONLY the headers -- no row/cell data) to /suggest-mapping, then renders an EDITABLE map the
+  // admin can review before applying it back through the normal /csv parse path.
+  ok(await ev(`return getComputedStyle(document.getElementById("csvSuggestBtn")).display!=="none";`) === true, "Suggest mapping button appears once a CSV has been parsed");
+  await ev(`window.__mapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__mapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"heuristic",map:{MRN:"patientId",Test:"testName"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,rowsParsed:2,columns:["MRN","Test","Value","Unit"],warnings:[],bundle:{sccmVersion:"1.0",patient:{id:"h1a2"},observations:[],diagnosticReports:[],meta:{warnings:[]}}}});
+    });
+    window.ConnectEMR.suggestCsvMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__mapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["MRN","Test","Value","Unit"]) && !("csv" in r) && !("bundle" in r);`) === true, "Suggest mapping POSTs ONLY the parsed headers (no csv text / row data) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("csvMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var e=document.getElementById("csvMapEditor"); var inp=e.querySelectorAll("[data-map-header]"); return inp.length===4;`) === true, "the mapping editor renders one editable row per parsed header");
+  ok(await ev(`var m=window.ConnectEMR.readMapEditor("csvMapEditor"); return m.MRN==="patientId" && m.Test==="testName" && !("Value" in m) && !("Unit" in m);`) === true, "the editor pre-fills the suggested field for each mapped header and leaves unmapped headers blank");
+  ok(await ev(`var m=document.getElementById("csvMapMsg"); return m.textContent.indexOf("heuristic")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the suggestion message reports its source (heuristic here), no em-dash");
+  // Edit a field in the mapping editor, then Apply -- re-parses /csv with the reviewed columnMap.
+  await ev(`var e=document.getElementById("csvMapEditor"); var inp=e.querySelector('[data-map-header="Value"]'); inp.value="value";
+    window.__csvSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/csv")>=0){ window.__csvSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,rowsParsed:2,columns:["MRN","Test","Value","Unit"],warnings:[],bundle:{sccmVersion:"1.0",patient:{id:"h1a2"},observations:[],diagnosticReports:[],meta:{warnings:[]}}}}); }
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    window.ConnectEMR.applyCsvMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__csvSaved; return !!b && b.columnMap && b.columnMap.MRN==="patientId" && b.columnMap.Test==="testName" && b.columnMap.Value==="value" && !("Unit" in b.columnMap);`) === true, "Apply mapping re-parses /csv with the admin-reviewed columnMap");
+  // A 404 (flag off) on Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestCsvMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  // clear the flag-off state left by the mocked 404 above (a direct DOM reset, so it has no side effect on the
+  // tenant/dashboard mocks the remaining sections below rely on) before the remaining tests run
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR for the remaining list mock
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // HL7 v2 feed type: activates the HL7 subform; create returns the ingest URL + a one-time signing secret +
+  // the signed-POST config hint. (The created feed then surfaces in the unified dashboard, tested below.)
+  ok(await ev(`document.getElementById("aType").value="hl7"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fHl7")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none";`) === true, "HL7 type activates the HL7 feed subform and hides the FHIR + CSV fields");
+  await ev(`window.ConnectEMR.setTenant("t-hl7"); window.ConnectEMR.setName("GIMSR Lab Feed"); window.ConnectEMR.setHl7Types("ORU^R01");
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"){ return Promise.resolve({s:200,d:{ok:true,feedId:"feed-abc123",ingestUrl:"https://stewardmd.in/api/connect/ingress/hl7",secret:"S3CR3T-HMAC-KEY-0001",headers:{feed:"X-SMD-Feed",timestamp:"X-SMD-Timestamp",signature:"X-SMD-Signature"},allowedMessageTypes:["ORU^R01"]}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}});
+    }); window.ConnectEMR.hl7Create(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=document.getElementById("hl7Result"); return getComputedStyle(r).display!=="none" && document.getElementById("hl7Url").textContent.indexOf("/api/connect/ingress/hl7")>=0 && document.getElementById("hl7Secret").value==="S3CR3T-HMAC-KEY-0001";`) === true, "HL7 create shows the real ingest URL and the one-time signing secret");
+  ok(await ev(`var h=document.getElementById("hl7Hint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("feed-abc123")>=0 && h.indexOf("\\u2014")<0;`) === true, "HL7 config hint explains the signed-POST contract (no em-dash)");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // Webhook / FHIR push type: activates the webhook subform; create returns the ingest URL (/ingress/fhir) +
+  // a one-time signing secret + the signed-POST config hint (POST a FHIR Bundle/resource).
+  ok(await ev(`document.getElementById("aType").value="webhook"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fWebhook")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none";`) === true, "Webhook type activates the webhook subform and hides the FHIR + HL7 fields");
+  await ev(`window.ConnectEMR.setTenant("t-wh"); window.ConnectEMR.setName("EMR Push");
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"){ return Promise.resolve({s:200,d:{ok:true,feedId:"wh-abc123",ingestUrl:"https://stewardmd.in/api/connect/ingress/fhir",secret:"WH-HMAC-KEY-0001",headers:{feed:"X-SMD-Feed",timestamp:"X-SMD-Timestamp",signature:"X-SMD-Signature"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    }); window.ConnectEMR.webhookCreate(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=document.getElementById("whResult"); return getComputedStyle(r).display!=="none" && document.getElementById("whUrl").textContent.indexOf("/api/connect/ingress/fhir")>=0 && document.getElementById("whSecret").value==="WH-HMAC-KEY-0001";`) === true, "Webhook create shows the real FHIR-push ingest URL and the one-time signing secret");
+  ok(await ev(`var h=document.getElementById("whHint").innerHTML; return h.indexOf("HMAC-SHA256")>=0 && h.indexOf("X-SMD-Signature")>=0 && h.indexOf("wh-abc123")>=0 && h.indexOf("FHIR")>=0 && h.indexOf("\\u2014")<0;`) === true, "Webhook config hint explains the signed FHIR-push contract (no em-dash)");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // REST / JSON lab API type: activates the REST subform (hides FHIR/Detect + CSV + HL7 + Webhook); Save-and-test
+  // builds {type:"rest-json", baseUrl, auth:{method:"token",token,headerName?}, resultsPath?, patientParam?} exactly
+  // per the backend contract, POSTs /emr then /test/:id (same two-step flow as the FHIR add/save-and-test), and
+  // renders a REST-specific success message (not a FHIR-version string) through the shared say()/testMsg() path.
+  ok(await ev(`document.getElementById("aType").value="rest"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fRest")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none";`) === true, "REST type activates the REST subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook fields");
+  await ev(`window.ConnectEMR.setTenant("t-rest"); window.ConnectEMR.setName("Lab REST API");
+    document.getElementById("aRestBase").value="https://labs.example.org/api";
+    document.getElementById("aRestToken").value="rest-tok-1";
+    document.getElementById("aRestPath").value="/lab-results";
+    window.__restSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__restSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"rest-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/rest-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.restSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__restSaved; return !!b && b.type==="rest-json" && b.baseUrl==="https://labs.example.org/api" && b.tenantId==="t-rest" && b.name==="Lab REST API" && b.auth&&b.auth.method==="token" && b.auth.token==="rest-tok-1" && b.resultsPath==="/lab-results" && !("headerName" in (b.auth||{})) && !("patientParam" in b);`) === true, "REST Save-and-test POSTs /emr with type rest-json + baseUrl + token auth + resultsPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("restMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("results endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "REST Save-and-test reports success with REST-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aRestBase").value===""&&document.getElementById("aRestToken").value==="";`) === true, "REST form clears after a successful save");
+
+  // AI-assisted field mapping (REST): the admin types column headers (there is no server-side preview for a
+  // REST endpoint), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is then
+  // included as columnMap on the next Save.
+  await ev(`document.getElementById("aRestHeaders").value="mrn, test_name, result_value"; window.__restMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__restMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestRestMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__restMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "REST Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("restMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the REST suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("restMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the REST suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab REST API 2"; document.getElementById("aRestBase").value="https://labs.example.org/api";
+    document.getElementById("aRestToken").value="rest-tok-2";
+    window.__restSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__restSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"rest-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.restSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__restSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed REST mapping is included as columnMap on Save");
+  // A 404 (flag off) on REST Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  // (The prior Save cleared the form, including aRestHeaders -- re-enter a header so this call actually reaches
+  // the mocked network call instead of bailing out on the client-side "enter a header first" validation.)
+  await ev(`document.getElementById("aRestHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestRestMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // DICOMweb / imaging (metadata) type: activates the DICOM subform (hides FHIR/Detect + CSV + HL7 + Webhook +
+  // REST); Save-and-test builds {type:"dicomweb", baseUrl, auth:{method:"token",token,headerName?}, studiesPath?,
+  // patientTag?} exactly per the backend contract, POSTs /emr then /test/:id (same two-step flow as REST/FHIR),
+  // and renders a DICOMweb-specific success message (not a FHIR-version string) through the shared say()/testMsg() path.
+  ok(await ev(`document.getElementById("aType").value="dicom"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fDicom")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none";`) === true, "DICOMweb type activates the DICOM subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST fields");
+  await ev(`window.ConnectEMR.setTenant("t-dicom"); window.ConnectEMR.setName("Hospital PACS");
+    document.getElementById("aDicomBase").value="https://pacs.example.org/dicom-web";
+    document.getElementById("aDicomToken").value="dicom-tok-1";
+    document.getElementById("aDicomPath").value="/studies";
+    window.__dicomSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__dicomSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"dicom-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/dicom-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.dicomSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__dicomSaved; return !!b && b.type==="dicomweb" && b.baseUrl==="https://pacs.example.org/dicom-web" && b.tenantId==="t-dicom" && b.name==="Hospital PACS" && b.auth&&b.auth.method==="token" && b.auth.token==="dicom-tok-1" && b.studiesPath==="/studies" && !("headerName" in (b.auth||{})) && !("patientTag" in b);`) === true, "DICOMweb Save-and-test POSTs /emr with type dicomweb + baseUrl + token auth + studiesPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("dicomMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("studies endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "DICOMweb Save-and-test reports success with DICOMweb-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aDicomBase").value===""&&document.getElementById("aDicomToken").value==="";`) === true, "DICOMweb form clears after a successful save");
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // GraphQL lab API type: activates the GraphQL subform (hides FHIR/Detect + CSV + HL7 + Webhook + REST +
+  // DICOMweb); Save-and-test builds {type:"graphql", baseUrl, auth:{method:"token",token,headerName?}, query,
+  // patientVar?, resultsPath?} exactly per the backend contract, POSTs /emr then /test/:id (same two-step flow
+  // as REST/DICOMweb/FHIR), and renders a GraphQL-specific success message (not a FHIR-version string) through
+  // the shared say()/testMsg() path. The mocked /emr handler also asserts the query text carries NO patient
+  // value baked in (the wizard never string-interpolates a patient id into the query it sends to the server).
+  ok(await ev(`document.getElementById("aType").value="graphql"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fGraphql")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none" && getComputedStyle(document.getElementById("fDicom")).display==="none";`) === true, "GraphQL type activates the GraphQL subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST + DICOMweb fields");
+  await ev(`window.ConnectEMR.setTenant("t-gql"); window.ConnectEMR.setName("Lab GraphQL API");
+    document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql";
+    document.getElementById("aGraphqlToken").value="gql-tok-1";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId testName value unit } } }";
+    document.getElementById("aGraphqlResultsPath").value="patientLabs.rows";
+    window.__gqlSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__gqlSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"gql-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/gql-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.graphqlSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__gqlSaved; return !!b && b.type==="graphql" && b.baseUrl==="https://labs.example.org/graphql" && b.tenantId==="t-gql" && b.name==="Lab GraphQL API" && b.auth&&b.auth.method==="token" && b.auth.token==="gql-tok-1" && b.query.indexOf("$patientId")>=0 && b.resultsPath==="patientLabs.rows" && !("headerName" in (b.auth||{})) && !("patientVar" in b);`) === true, "GraphQL Save-and-test POSTs /emr with type graphql + baseUrl + token auth + query + resultsPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("graphqlMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("GraphQL endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "GraphQL Save-and-test reports success with GraphQL-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aGraphqlBase").value===""&&document.getElementById("aGraphqlToken").value===""&&document.getElementById("aGraphqlQuery").value==="";`) === true, "GraphQL form clears after a successful save");
+
+  // AI-assisted field mapping (GraphQL): the admin types column headers (there is no server-side preview for a
+  // GraphQL endpoint), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is
+  // then included as columnMap on the next Save.
+  await ev(`document.getElementById("aGraphqlHeaders").value="mrn, test_name, result_value"; window.__gqlMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__gqlMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestGraphqlMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__gqlMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "GraphQL Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("graphqlMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the GraphQL suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("graphqlMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the GraphQL suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab GraphQL API 2"; document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql";
+    document.getElementById("aGraphqlToken").value="gql-tok-2";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId } } }";
+    window.__gqlSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__gqlSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"gql-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.graphqlSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__gqlSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed GraphQL mapping is included as columnMap on Save");
+  // A 404 (flag off) on GraphQL Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`document.getElementById("aGraphqlHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestGraphqlMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GraphQL Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // SQL / database lab feed type: activates the SQL subform (hides FHIR/Detect + CSV + HL7 + Webhook + REST +
+  // DICOMweb + GraphQL); Save builds {type:"sql", bindingName, queryTemplate, columnMap?} exactly per the
+  // backend contract -- NO baseUrl, NO auth (there is no URL or admin secret for a SQL/DB connection; the
+  // database credentials live in the owner's Hyperdrive binding). The mocked Test response reports the HONEST
+  // not-configured class (no live driver wired yet), and the page renders the friendly not-configured copy
+  // (added to TESTERR above), never a fake success.
+  ok(await ev(`document.getElementById("aType").value="sql"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fSql")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none" && getComputedStyle(document.getElementById("fDicom")).display==="none" && getComputedStyle(document.getElementById("fGraphql")).display==="none";`) === true, "SQL type activates the SQL subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL fields");
+  ok(await ev(`return document.getElementById("fSql").textContent.indexOf("not configured")>=0 && document.getElementById("fSql").textContent.indexOf("Hyperdrive")>=0 && document.getElementById("fSql").textContent.indexOf("\\u2014")<0;`) === true, "the SQL subform carries a visible note that it needs a Hyperdrive driver wired and Test reports not configured until then, no em-dash");
+  await ev(`window.ConnectEMR.setTenant("t-sql"); window.ConnectEMR.setName("Lab DB");
+    document.getElementById("aSqlBinding").value="LABS_DB";
+    document.getElementById("aSqlQuery").value="SELECT patient_id, test_name, value, unit FROM labs WHERE patient_id = $1";
+    window.__sqlSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__sqlSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"sql-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/sql-1")>=0){ return Promise.resolve({s:200,d:{ok:false,error:"not-configured"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.sqlSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__sqlSaved; return !!b && b.type==="sql" && b.tenantId==="t-sql" && b.name==="Lab DB" && b.bindingName==="LABS_DB" && b.queryTemplate.indexOf("patient_id")>=0 && !("baseUrl" in b) && !("auth" in b) && !("columnMap" in b);`) === true, "SQL Save-and-test POSTs /emr with type sql + bindingName + queryTemplate only (NO baseUrl, NO auth -- there is no URL or admin secret for a SQL/DB connection)");
+  ok(await ev(`var m=document.getElementById("sqlMsg"); return m.className.indexOf("err")>=0 && m.className.indexOf("ok")<0 && m.textContent.indexOf("Hyperdrive")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "SQL Save-and-test HONESTLY reports the not-configured message as a FAILURE (never a fake success), no em-dash");
+  ok(await ev(`return document.getElementById("aSqlBinding").value===""&&document.getElementById("aSqlQuery").value==="";`) === true, "SQL form clears after a successful save");
+
+  // AI-assisted field mapping (SQL): the admin types column headers (there is no server-side preview for a SQL
+  // query), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is then included
+  // as columnMap on the next Save.
+  await ev(`document.getElementById("aSqlHeaders").value="mrn, test_name, result_value"; window.__sqlMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__sqlMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestSqlMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__sqlMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "SQL Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("sqlMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the SQL suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("sqlMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the SQL suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab DB 2"; document.getElementById("aSqlBinding").value="LABS_DB2";
+    document.getElementById("aSqlQuery").value="SELECT patient_id, test_name, value FROM labs WHERE patient_id = :patientId";
+    window.__sqlSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__sqlSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"sql-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.sqlSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__sqlSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed SQL mapping is included as columnMap on Save");
+  // A 404 (flag off) on SQL Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`document.getElementById("aSqlHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestSqlMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "SQL Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
+  // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
+  // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#tenantSel option')); var vals=o.map(function(x){return x.value;}); var txt=o.map(function(x){return x.textContent;}).join("|"); return o.length===3 && vals.indexOf("t-a")>=0 && vals.indexOf("t-b")>=0 && txt.indexOf("GIMSR Hospital (admin)")>=0 && txt.indexOf("t-b (owner)")>=0 && document.getElementById("tenantSel").value==="";`) === true, "multi-tenant /tenants populates the dropdown (name + role) with a placeholder and NO auto-select");
+  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display==="none" && getComputedStyle(document.getElementById("opsArea")).display!=="none";`) === true, "with memberships, the ops area is shown and the no-membership state is hidden");
+
+  // Single-tenant: auto-selects and loads its dashboard.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var o=document.querySelectorAll('#tenantSel option'); return o.length===1 && document.getElementById("tenantSel").value==="solo-hosp";`) === true, "a single tenant AUTO-selects (no placeholder; dropdown value = the tenant id)");
+  ok(await ev(`return document.getElementById("dash").innerHTML.indexOf("No connections yet")>=0;`) === true, "auto-select triggers the dashboard load (empty state for a tenant with no connections)");
+
+  // ---- Part 3: unified DASHBOARD (GET /all) MERGES FHIR connections + HL7 feeds into one table ----
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,webhook:1,total:3},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}],webhook:[{feedId:"wh-xyz",name:"EMR Push Feed",status:"active",connector:"fhir-push"}]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadDashboard(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#dash table.dash');`) === true, "the dashboard renders a single table");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("Smoke Hospital FHIR")>=0 && h.indexOf(">FHIR<")>=0 && h.indexOf("r4.smarthealthit.org")>=0 && h.indexOf("Connected")>=0 && h.indexOf('data-act="test"')>=0 && h.indexOf('data-act="validate"')>=0 && h.indexOf('data-act="pull"')>=0 && h.indexOf('data-act="del"')>=0;`) === true, "the FHIR row renders with a FHIR badge, host, Connected status, and Test/Validate/Pull/Delete");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("GIMSR Lab Feed")>=0 && h.indexOf("HL7 v2")>=0 && h.indexOf("feed-xyz")>=0 && h.indexOf('data-fact="copy"')>=0 && h.indexOf('data-fact="del"')>=0;`) === true, "the HL7 feed row renders in the SAME table with an HL7 badge, feed id, and Copy URL / Delete");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("EMR Push Feed")>=0 && h.indexOf("FHIR push")>=0 && h.indexOf("wh-xyz")>=0 && h.indexOf('data-wact="copy"')>=0 && h.indexOf('data-wact="del"')>=0;`) === true, "the webhook feed row renders in the SAME table with a FHIR push badge, feed id, and Copy URL / Delete");
+  ok(await ev(`var c=document.getElementById("dashCounts").textContent; return c.indexOf("3 connection")>=0 && c.indexOf("1 FHIR")>=0 && c.indexOf("1 HL7")>=0 && c.indexOf("1 Webhook")>=0;`) === true, "the dashboard shows merged counts (3 total = 1 FHIR + 1 HL7 + 1 Webhook)");
+  ok(await ev(`var h=document.getElementById("dash").innerHTML; return h.indexOf("S3CR3T")<0 && h.indexOf("sealed")<0 && h.indexOf("\\u2014")<0;`) === true, "NO secret material in the dashboard DOM, and no em-dash");
+
+  // ---- Auto Validation (Validate button -> POST /validate/:id -> renders check chips + overall) ----
+  // A mixed report: config + reachability pass, conformance fails -- asserts the overall chip AND each of the
+  // three check chips render independently (pass/fail is per-check, not just the top-level ok).
+  await ev(`window.__validateReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/validate/c-1")>=0){ window.__validateReq=JSON.parse(opts.body);
+        return Promise.resolve({s:200,d:{ok:false,checks:[{name:"config",ok:true,detail:""},{name:"conformance",ok:false,detail:"failed: 6-valid-sccm"},{name:"reachability",ok:true,detail:""}],conformance:{passed:false,checks:[{name:"6-valid-sccm",ok:false}]}}}); }
+      return Promise.resolve({s:200,d:{ok:true,counts:{fhir:1,hl7:1,webhook:1,total:3},fhir:[{connectionId:"c-1",name:"Smoke Hospital FHIR",type:"fhir",fhirBaseUrl:"https://r4.smarthealthit.org/fhir",authMethod:"token",status:"active",lastTest:{ok:true,fhirVersion:"4.0.1",softwareName:"SMART Reference Server"}}],hl7:[{feedId:"feed-xyz",name:"GIMSR Lab Feed",status:"active",allowedMessageTypes:["ORU^R01"]}],webhook:[{feedId:"wh-xyz",name:"EMR Push Feed",status:"active",connector:"fhir-push"}]}});
+    });
+    window.ConnectEMR.loadDashboard(); return 1;`);
+  await sleep(300);
+  await ev(`document.querySelector('#dash [data-act="validate"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return getComputedStyle(document.querySelector('[data-validate="c-1"]')).display!=="none";`) === true, "clicking Validate reveals the report row");
+  ok(await ev(`return !!window.__validateReq;`) === true, "Validate POSTs to /validate/:id");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("Issues found")>=0;`) === true, "the overall chip shows Issues found when any check fails");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); var t=out.textContent; return t.indexOf("Configuration")>=0 && t.indexOf("Connector conformance")>=0 && t.indexOf("Reachability")>=0;`) === true, "all three check names render (Configuration / Connector conformance / Reachability)");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); var pass=[].slice.call(out.querySelectorAll(".st")).filter(function(e){return e.textContent==="Pass";}).length; var fail=[].slice.call(out.querySelectorAll(".st")).filter(function(e){return e.textContent==="Fail";}).length; return pass===2 && fail===1;`) === true, "two Pass chips and one Fail chip render, matching the mocked per-check outcomes");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("failed: 6-valid-sccm")>=0;`) === true, "the failing check's detail class string renders");
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("\\u2014")<0 && out.innerHTML.indexOf("undefined")<0;`) === true, "the validation report has no em-dash and no stray undefined");
+  // Clicking Validate again toggles the report row closed (same show/hide idiom as Pull).
+  ok(await ev(`document.querySelector('#dash [data-act="validate"]').click(); return getComputedStyle(document.querySelector('[data-validate="c-1"]')).display==="none";`) === true, "clicking Validate again hides the report row");
+
+  // All-pass report renders an "All checks passed" overall chip.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/validate/c-1")>=0) return Promise.resolve({s:200,d:{ok:true,checks:[{name:"config",ok:true,detail:""},{name:"conformance",ok:true,detail:""},{name:"reachability",ok:true,detail:""}],conformance:{passed:true,checks:[]}}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+    window.ConnectEMR.runValidate("c-1"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var out=document.querySelector('[data-vout="c-1"]'); return out.textContent.indexOf("All checks passed")>=0;`) === true, "an all-pass report shows the 'All checks passed' overall chip");
+
+  // Validate degrades through the SAME showFlagOff() path as every other action on a 404 (flag off).
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.runValidate("c-1"); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "Validate on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // Copy URL (HL7) surfaces the constant webhook URL; Delete actions call the right endpoints and reload.
+  await ev(`document.querySelector('#dash [data-fact="copy"]').click(); window.__msgs=document.getElementById("tenantMsg").textContent; return 1;`);
+  ok(await ev(`return window.__msgs.indexOf("/api/connect/ingress/hl7")>=0;`) === true, "HL7 Copy URL surfaces the constant ingest webhook URL");
+  await ev(`window.__del=[]; window.confirm=function(){return true;};
+    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="DELETE"){ window.__del.push(path); return Promise.resolve({s:200,d:{ok:true}}); } return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); });
+    document.querySelector('#dash [data-act="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/onboard/c-1")>=0 && document.getElementById("dash").innerHTML.indexOf("No connections yet")>=0;`) === true, "FHIR Delete calls DELETE /onboard/<id> and the dashboard reloads empty");
+  // re-render both rows locally, then delete the HL7 feed
+  await ev(`window.ConnectEMR.renderDash([{connectionId:"c-1",name:"X",type:"fhir",fhirBaseUrl:"https://h/fhir",authMethod:"token"}],[{feedId:"feed-xyz",name:"F",status:"active",allowedMessageTypes:[]}],{fhir:1,hl7:1,total:2}); window.__del=[]; document.querySelector('#dash [data-fact="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/hl7-feed/feed-xyz")>=0;`) === true, "HL7 Delete calls DELETE /hl7-feed/<id>");
+  // re-render with a webhook row, then delete the webhook feed
+  await ev(`window.ConnectEMR.renderDash([],[],{fhir:0,hl7:0,webhook:1,total:1},[{feedId:"wh-xyz",name:"W",status:"active"}]); window.__del=[]; document.querySelector('#dash [data-wact="del"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return window.__del.length===1 && window.__del[0].indexOf("/webhook-feed/wh-xyz")>=0;`) === true, "Webhook Delete calls DELETE /webhook-feed/<id>");
+
+  // ---- Row-type badge parity: the /all "fhir" array actually carries BOTH fhir and rest-json connector rows
+  // (safeView.type), so a rest-json row must be badged by its REAL type, not the hardcoded "FHIR" of before. ----
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-2",name:"Lab REST Feed",type:"rest-json",fhirBaseUrl:"https://labs.example.org/api",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab REST Feed")>=0 && h.indexOf(">REST/JSON<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a rest-json row is badged REST/JSON (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-3",name:"Hospital PACS Feed",type:"dicomweb",fhirBaseUrl:"https://pacs.example.org/dicom-web",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Hospital PACS Feed")>=0 && h.indexOf(">DICOMweb<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a dicomweb row is badged DICOMweb (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-4",name:"Lab GraphQL Feed",type:"graphql",fhirBaseUrl:"https://labs.example.org/graphql",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab GraphQL Feed")>=0 && h.indexOf(">GraphQL<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a graphql row is badged GraphQL (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-5",name:"Lab DB Feed",type:"sql",fhirBaseUrl:"",authMethod:"binding"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab DB Feed")>=0 && h.indexOf(">SQL / database<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a sql row is badged SQL / database (its real type), not hardcoded FHIR");
+
+  // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
+  // the Connections dashboard renders). Two connections: one auto-sync ON and never synced (next due = "due
+  // now"), one auto-sync OFF (next due = "off"). Asserts the panel renders schedule rows with pre-filled
+  // interval inputs, Save interval POSTs /sync-config/:id with the entered value, Sync now POSTs /sync-now/:id
+  // and surfaces both a success and a failing outcome without throwing, the next-due computation, the empty
+  // state, and the flag-off degrade path. ----
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,counts:{fhir:2,hl7:0,total:2},fhir:[
+      {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:null},
+      {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:0,lastSyncAt:null}
+    ],hl7:[]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!document.querySelector('#syncPanel table.dash');`) === true, "the sync schedule panel renders a table");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("On Sync Hospital")>=0 && t.indexOf("Off Sync Lab")>=0 && t.indexOf("REST/JSON")>=0;`) === true, "the sync schedule table renders both connections with their real type badge");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("due now")>=0 && t.indexOf("off")>=0;`) === true, "next-due computes 'due now' for an on/never-synced connection and 'off' for a zero-interval connection");
+  ok(await ev(`var i1=document.querySelector('[data-interval-input="sc-1"]'), i2=document.querySelector('[data-interval-input="sc-2"]'); return i1.value==="60" && i2.value==="0";`) === true, "each row's interval input is pre-filled with the connection's current syncIntervalMin");
+  ok(await ev(`var s=document.getElementById("syncSummary").textContent; return s.indexOf("2 connection")>=0 && s.indexOf("1 with auto-sync on")>=0;`) === true, "the summary line reports the connection count and how many have auto-sync on");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the sync schedule panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Save interval: editing the input then clicking Save interval POSTs /sync-config/:id with the entered value.
+  await ev(`window.__syncCfgReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/sync-config/sc-2")>=0){ window.__syncCfgReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{connectionId:"sc-2",syncIntervalMin:30}}); }
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[
+        {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:null},
+        {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}
+      ],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    var inp=document.querySelector('[data-interval-input="sc-2"]'); inp.value="30";
+    document.querySelector('#syncPanel [data-sact="saveinterval"][data-cid="sc-2"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__syncCfgReq; return !!r && r.intervalMin===30 && r.tenantId==="solo-hosp";`) === true, "Save interval POSTs /sync-config/:id with the entered intervalMin");
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-2"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("30 minutes")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "Save interval reports success with the new cadence, no em-dash");
+
+  // Sync now (success): clicking Sync now POSTs /sync-now/:id and reports the outcome.
+  await ev(`window.__syncNowReq=null; window.__syncNowPath=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/sync-now/sc-1")>=0){ window.__syncNowPath=path; window.__syncNowReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,outcome:"ok",lastSyncAt:"2026-08-02T10:00:00.000Z"}}); }
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[
+        {connectionId:"sc-1",name:"On Sync Hospital",type:"fhir",fhirBaseUrl:"https://h1/fhir",authMethod:"token",syncIntervalMin:60,lastSyncAt:"2026-08-02T10:00:00.000Z"},
+        {connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}
+      ],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    document.querySelector('#syncPanel [data-sact="syncnow"][data-cid="sc-1"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return !!window.__syncNowReq && window.__syncNowPath.indexOf("/sync-now/sc-1")>=0 && window.__syncNowReq.tenantId==="solo-hosp";`) === true, "Sync now POSTs /sync-now/:id for the clicked row's connection id");
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-1"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("Synced successfully")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "Sync now reports success, no em-dash");
+  ok(await ev(`var t=document.getElementById("syncPanel").textContent; return t.indexOf("2026")>=0 || t.indexOf("ago")>=0;`) === true, "reloading after Sync now shows the freshly-stamped last-sync time");
+
+  // Sync now (failing outcome): reported without throwing / crashing the panel.
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/sync-now/sc-2")>=0) return Promise.resolve({s:200,d:{ok:true,outcome:"error",lastSyncAt:"2026-08-02T10:05:00.000Z"}});
+      if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[{connectionId:"sc-2",name:"Off Sync Lab",type:"rest-json",fhirBaseUrl:"https://labs/api",authMethod:"token",syncIntervalMin:30,lastSyncAt:null}],hl7:[]}});
+      return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}});
+    });
+    document.querySelector('#syncPanel [data-sact="syncnow"][data-cid="sc-2"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=document.querySelector('[data-smsg="sc-2"]'); return m.className.indexOf("err")>=0 && m.textContent.indexOf("reported an error")>=0;`) === true, "Sync now surfaces a failing outcome without throwing / crashing the panel");
+
+  // Empty connections -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/all")>=0) return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[]}}); return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"solo-hosp",name:"Solo Hospital",role:"owner"}]}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("syncPanel").textContent.indexOf("No connections yet.")>=0 && document.getElementById("syncSummary").textContent==="";`) === true, "an empty connections list shows the 'No connections yet.' empty state");
+
+  // Sync schedule degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadSyncPanel(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /all on a 404 (flag off) via the sync schedule Reload also shows the graceful 'not enabled yet' state");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // ---- Connection health panel (GET /health, Part 4 PHI-free integration-health analytics) ----
+  // Two connectors: one fully healthy, one with failures + a recent-failure entry + warnings. Assert the
+  // panel derives and renders status/labels/counts correctly, AND that the mocked health payload itself
+  // carries ONLY the documented PHI-free operational fields (defense-in-depth: the fixture matches the real
+  // backend contract, and nothing beyond it can leak into the rendered DOM).
+  await ev(`window.__healthMock={
+    perConnector:[
+      {connectorId:"fhir-main",total:40,ok:40,failed:0,failureRate:0,warningCount:0,lastOutcome:"ok",lastTs:"2026-08-01T10:00:00.000Z"},
+      {connectorId:"rest-labs",total:10,ok:6,failed:4,failureRate:0.4,warningCount:2,lastOutcome:"unauthorized",lastTs:"2026-08-01T11:00:00.000Z"}
+    ],
+    perAction:{pull:{total:50,byOutcome:{ok:46,unauthorized:4}}},
+    overall:{totalEvents:50,okRate:0.92,failedCount:4,activeConnectors:2},
+    recentFailures:[{action:"pull",connectorId:"rest-labs",outcome:"unauthorized",ts:"2026-08-01T11:00:00.000Z",reason:"bad-token"}],
+    warnings:{total:2,warnings:2,unmapped:0},
+    generatedFromCount:50
+  };
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/health")>=0) return Promise.resolve({s:200,d:{ok:true,health:window.__healthMock}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__healthMock; var SAFE_CONN=["connectorId","total","ok","failed","failureRate","warningCount","lastOutcome","lastTs"]; var SAFE_FAIL=["action","connectorId","outcome","ts","reason"];
+    var badConn=(m.perConnector||[]).some(function(c){ return Object.keys(c).some(function(k){ return SAFE_CONN.indexOf(k)<0; }); });
+    var badFail=(m.recentFailures||[]).some(function(f){ return Object.keys(f).some(function(k){ return SAFE_FAIL.indexOf(k)<0; }); });
+    var phiLike=/patient|mrn|dob|ssn|email|phone|address/i.test(JSON.stringify(m));
+    return !badConn && !badFail && !phiLike;`) === true, "the mocked health payload carries only the documented PHI-free operational fields (no patient identifiers)");
+  ok(await ev(`var h=document.getElementById("health"); return h.querySelector("table.dash")!=null && h.textContent.indexOf("fhir-main")>=0 && h.textContent.indexOf("Healthy")>=0 && h.textContent.indexOf("rest-labs")>=0 && h.textContent.indexOf("Degraded")>=0 && h.textContent.indexOf("40%")>=0;`) === true, "the health table renders both connectors with derived Healthy/Degraded status and failure rate");
+  ok(await ev(`var h=document.getElementById("health").textContent; return h.indexOf("Recent failures")>=0 && h.indexOf("rest-labs")>=0 && h.indexOf("unauthorized")>=0 && h.indexOf("bad-token")>=0;`) === true, "the recent-failures list renders the connector, outcome, and reason with a timestamp");
+  ok(await ev(`var s=document.getElementById("healthSummary").textContent; return s.indexOf("50 events")>=0 && s.indexOf("2 connectors")>=0 && s.indexOf("92% ok")>=0 && s.indexOf("2 warnings")>=0;`) === true, "the summary line shows total events, active connectors, ok rate, and warning count");
+  ok(await ev(`var t=document.getElementById("health").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the health panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Empty health object -> the documented empty state (no connector activity yet), not a blank/broken panel.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/health")>=0) return Promise.resolve({s:200,d:{ok:true,health:{perConnector:[],perAction:{},overall:{totalEvents:0,okRate:0,failedCount:0,activeConnectors:0},recentFailures:[],warnings:{total:0,warnings:0,unmapped:0},generatedFromCount:0}}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("health").textContent.indexOf("No connector activity yet.")>=0 && document.getElementById("healthSummary").textContent==="";`) === true, "an empty health object shows the 'No connector activity yet.' empty state");
+
+  // ---- Activity log panel (GET /activity, security-center-lite: read-only view of the existing PHI-free
+  // audit trail) ----. Two events across two connectors; asserts the panel renders friendly action labels,
+  // connector id, outcome and timestamp, AND that the mocked payload itself carries ONLY the documented
+  // PHI-free fields (defense-in-depth: nothing beyond action/outcome/connectorId/ts can leak into the DOM).
+  await ev(`window.__activityMock={events:[
+      {action:"connect.onboard.tested",outcome:"ok",connectorId:"fhir-main",ts:"2026-08-01T11:00:00.000Z"},
+      {action:"connect.onboard.saved",outcome:"ok",connectorId:"rest-labs",ts:"2026-08-01T09:00:00.000Z"}
+    ],truncated:false};
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:Object.assign({ok:true},window.__activityMock)}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__activityMock; var SAFE=["action","outcome","connectorId","ts"];
+    var bad=(m.events||[]).some(function(e){ return Object.keys(e).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/patient|mrn|dob|ssn|email|phone|address|consent|transaction|hash|actor/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked activity payload carries only the documented PHI-free fields (no patient identifiers, no correlation ids, no actor)");
+  ok(await ev(`var t=document.getElementById("activity").textContent; return t.indexOf("Tested")>=0 && t.indexOf("fhir-main")>=0 && t.indexOf("Connection saved")>=0 && t.indexOf("rest-labs")>=0;`) === true, "the activity panel renders friendly action labels + connector ids");
+  ok(await ev(`var s=document.getElementById("activitySummary").textContent; return s.indexOf("2 event")>=0;`) === true, "the activity summary shows the event count");
+  ok(await ev(`var t=document.getElementById("activity").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the activity panel never renders undefined/stringified-object values, and no em-dash");
+
+  // An unmapped/future action string falls back to itself (no crash, no blank label).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:{ok:true,events:[{action:"connect.onboard.some-future-action",outcome:"ok",connectorId:"c1",ts:"2026-08-01T12:00:00.000Z"}],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("activity").textContent.indexOf("connect.onboard.some-future-action")>=0;`) === true, "an unmapped action falls back to the raw action string (no crash, no blank label)");
+
+  // Empty events -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:{ok:true,events:[],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("activity").textContent.indexOf("No activity yet.")>=0 && document.getElementById("activitySummary").textContent==="";`) === true, "empty events shows the 'No activity yet.' empty state");
+
+  // Activity log degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /activity on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // ---- Consent dashboard panel (GET /consents, PHI-free; POST /consents/:ref/revoke) ----
+  // Two consents: one GRANTED (revocable) and one REVOKED (not revocable). Asserts the panel renders status
+  // chips, purpose, HI types, care-context count, date range, expiry, and a truncated patient hash; that the
+  // mocked payload itself carries only the documented PHI-free fields (defense-in-depth); that Revoke shows
+  // ONLY on the GRANTED row; that a successful revoke updates the row in place and surfaces the local-
+  // propagation note; the empty state; and that a 404 shows a PANEL-LOCAL flag-off message (NOT the shared
+  // page-wide showFlagOff()) since the rest of the page may still be enabled.
+  await ev(`window.__consentMock=[
+      {consentId:"CONSENT-1111",ref:"CONSENT-1111",status:"GRANTED",purpose:{code:"CAREMGT",text:"Care Management"},
+        hiTypes:["DiagnosticReport","Observation"],careContextCount:2,
+        dateRange:{from:"2026-01-01T00:00:00.000Z",to:"2026-12-31T23:59:59.000Z"},
+        expiresAt:"2026-12-31T23:59:59.000Z",dataEraseAt:"2027-01-31T23:59:59.000Z",
+        patientRefHash:"9a1b2c3d...",createdAt:"2026-07-01T00:00:00.000Z",updatedAt:"2026-08-01T09:00:00.000Z",revocable:true},
+      {consentId:"CONSENT-2222",ref:"CONSENT-2222",status:"REVOKED",purpose:"management",
+        hiTypes:["Prescription"],careContextCount:1,
+        dateRange:{from:"2026-02-01T00:00:00.000Z",to:"2026-06-30T23:59:59.000Z"},
+        expiresAt:"2026-06-30T23:59:59.000Z",dataEraseAt:null,
+        patientRefHash:"77aa88bb...",createdAt:"2026-05-01T00:00:00.000Z",updatedAt:"2026-08-01T11:00:00.000Z",revocable:false}
+    ];
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:window.__consentMock,truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__consentMock; var SAFE=["consentId","ref","status","purpose","hiTypes","careContextCount","dateRange","expiresAt","dataEraseAt","patientRefHash","createdAt","updatedAt","revocable"];
+    var bad=m.some(function(c){ return Object.keys(c).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/\\bmrn\\b|\\bssn\\b|\\bdob\\b|@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}|actor/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked consent payload carries only the documented PHI-free allow-list fields (no patient identifiers, no actor)");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("Care Management")>=0 && t.indexOf("management")>=0 && t.indexOf("DiagnosticReport")>=0 && t.indexOf("Prescription")>=0;`) === true, "the consent panel renders purpose and HI types for both rows");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("Care contexts: 2")>=0 && t.indexOf("Care contexts: 1")>=0;`) === true, "the consent panel renders the care-context COUNT, never a raw reference list");
+  ok(await ev(`var h=document.getElementById("consents").innerHTML; return h.indexOf("GRANTED")>=0 && h.indexOf("REVOKED")>=0 && h.indexOf("9a1b2c3d")>=0;`) === true, "the consent panel renders both status chips and the truncated patient ref hash");
+  ok(await ev(`return document.querySelector('#consents [data-cref="CONSENT-1111"]')!=null && document.querySelector('#consents [data-cref="CONSENT-2222"]')==null;`) === true, "Revoke shows ONLY on the GRANTED (revocable) row, never on the REVOKED row");
+  ok(await ev(`var s=document.getElementById("consentSummary").textContent; return s.indexOf("2 consent")>=0;`) === true, "the consent summary shows the total count");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the consent panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Revoke: confirm() stubbed true, mocked POST returns a local-only propagation; the row updates IN PLACE
+  // (chip flips to REVOKED, Revoke button disappears) and the local-HIE-pending note is shown, without a
+  // full-panel reload wiping the message.
+  await ev(`window.confirm=function(){return true;};
+    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="POST"&&path.indexOf("/consents/CONSENT-1111/revoke")>=0) return Promise.resolve({s:200,d:{ok:true,status:"REVOKED",propagated:"local"}}); if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:window.__consentMock,truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+    document.querySelector('#consents [data-cref="CONSENT-1111"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=document.querySelector('[data-cmsg="CONSENT-1111"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("Blocked locally; external HIE notification pending.")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "a local-propagated revoke shows the 'Blocked locally; external HIE notification pending' note, no em-dash");
+  ok(await ev(`return document.querySelector('[data-cchip="CONSENT-1111"]').textContent==="REVOKED" && document.querySelector('#consents [data-cref="CONSENT-1111"]')==null;`) === true, "the revoked row's chip updates to REVOKED and its Revoke button is removed, in place (no full-panel reload)");
+
+  // Empty consents -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:[],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("consents").textContent.indexOf("No consents yet.")>=0 && document.getElementById("consentSummary").textContent==="";`) === true, "an empty consent list shows the 'No consents yet.' empty state");
+
+  // Consent dashboard degrades through its OWN PANEL-LOCAL flag-off message on a 404 -- NOT the shared
+  // page-wide showFlagOff() (the rest of the page may still be fully enabled while just this feature is off).
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===false && getComputedStyle(document.getElementById("work")).display!=="none" && getComputedStyle(document.getElementById("consentFlagOff")).display!=="none";`) === true, "GET /consents on a 404 shows a PANEL-LOCAL flag-off message, and does NOT hide the rest of the page via the shared showFlagOff()");
+  await ev(`document.getElementById("consentFlagOff").style.display="none"; return 1;`);
+
+  // ---- Connector catalog panel (GET /connectors, marketplace-style self-service catalog) ----
+  // Two connector types: one enabled, one disabled. Asserts the panel renders names/categories/enabled chips,
+  // and that the mocked payload itself carries only client-safe metadata fields (defense-in-depth).
+  await ev(`window.__catalogMock=[
+    {id:"fhir-r4",name:"FHIR R4 (SMART-on-FHIR)",category:"pull",resources:["Patient","Encounter","Observation"],authKinds:["smart-backend-services","none"],profile:"pull",description:"SMART-on-FHIR R4 pull connection to your EMR's FHIR server.",enabled:true,flagEnv:"CONNECT_FHIR_FLAG"},
+    {id:"dicomweb",name:"DICOMweb QIDO-RS imaging metadata",category:"imaging",resources:["ImagingStudy"],authKinds:["token"],profile:"pull",description:"DICOMweb QIDO-RS pull connection that reads imaging study metadata only, never pixel data.",enabled:false,flagEnv:"CONNECT_DICOM_FLAG"}
+  ];
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/connectors")>=0) return Promise.resolve({s:200,d:{ok:true,connectors:window.__catalogMock}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__catalogMock; var SAFE=["id","name","category","resources","authKinds","profile","description","enabled","flagEnv"];
+    var bad=m.some(function(c){ return Object.keys(c).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    // "Patient"/"ImagingStudy" etc are SCCM RESOURCE-TYPE labels (metadata this catalog is meant to declare), not
+    // patient data, so they are expected here -- unlike the health/activity payloads, which should never mention
+    // a resource type at all. The PHI-shaped check below looks for actual identifier/contact patterns instead.
+    var phiLike=/\\bmrn\\b|\\bssn\\b|\\bdob\\b|@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked catalog payload carries only client-safe metadata fields (no patient identifiers)");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("FHIR R4 (SMART-on-FHIR)")>=0 && t.indexOf("DICOMweb QIDO-RS imaging metadata")>=0 && t.indexOf("Pull")>=0 && t.indexOf("Imaging")>=0;`) === true, "the catalog panel renders both connector names and their categories");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("Enabled")>=0 && t.indexOf("Disabled")>=0;`) === true, "the catalog panel renders an Enabled chip for the enabled type and a Disabled chip for the disabled type");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("Patient")>=0 && t.indexOf("ImagingStudy")>=0 && t.indexOf("smart-backend-services")>=0 && t.indexOf("token")>=0;`) === true, "the catalog panel renders each type's resources and auth kinds");
+  ok(await ev(`var s=document.getElementById("catalogSummary").textContent; return s.indexOf("2 connector type")>=0 && s.indexOf("1 enabled")>=0;`) === true, "the catalog summary shows the total type count and how many are enabled");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the catalog panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Empty catalog -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/connectors")>=0) return Promise.resolve({s:200,d:{ok:true,connectors:[]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("catalog").textContent.indexOf("No connector types available.")>=0 && document.getElementById("catalogSummary").textContent==="";`) === true, "an empty catalog shows the 'No connector types available.' empty state");
+
+  // Connector catalog degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /connectors on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return getComputedStyle(document.getElementById("noTenant")).display!=="none" && getComputedStyle(document.getElementById("opsArea")).display==="none" && document.getElementById("noTenant").textContent.indexOf("not a member of any hospital tenant")>=0;`) === true, "an empty /tenants shows the 'not a member of any hospital tenant' state and hides the ops area");
+
+  // MOCKED 404 -> graceful flag-off state (the picker route only exists when the flag is on)
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true && getComputedStyle(document.getElementById("work")).display==="none";`) === true, "a 404 shows the graceful 'not enabled yet' state and hides the workspace");
+
+  // rest-json degrades through the SAME showFlagOff() path as every other type (no special-casing in doRestSave).
+  await ev(`window.ConnectEMR.setTenant("t-final"); document.getElementById("aName").value="Lab Final";
+    document.getElementById("aRestBase").value="https://labs.example.org"; document.getElementById("aRestToken").value="tok-1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.restSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // dicomweb degrades through the SAME showFlagOff() path as every other type (no special-casing in doDicomSave).
+  await ev(`window.ConnectEMR.setTenant("t-final2"); document.getElementById("aName").value="PACS Final";
+    document.getElementById("aDicomBase").value="https://pacs.example.org"; document.getElementById("aDicomToken").value="tok-1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.dicomSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "DICOMweb save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // graphql degrades through the SAME showFlagOff() path as every other type (no special-casing in doGraphqlSave).
+  await ev(`window.ConnectEMR.setTenant("t-final3"); document.getElementById("aName").value="Lab GraphQL Final";
+    document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql"; document.getElementById("aGraphqlToken").value="tok-1";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId } } }";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.graphqlSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GraphQL save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // sql degrades through the SAME showFlagOff() path as every other type (no special-casing in doSqlSave).
+  await ev(`window.ConnectEMR.setTenant("t-final4"); document.getElementById("aName").value="Lab DB Final";
+    document.getElementById("aSqlBinding").value="LABS_DB"; document.getElementById("aSqlQuery").value="SELECT * FROM labs WHERE patient_id = $1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.sqlSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "SQL save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
+  // Connection health degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadHealth(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /health on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
+
+  // The immediately preceding test (GET /health on a 404) left flagOff shown / work hidden and never reset it
+  // (it was the last test in the suite) -- reset here, the SAME idiom every other simulated-404 test above uses.
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // ---- Enterprise Administration Portal: tab nav (ADDITIVE; card visibility only, no DOM moves) ----
+  // The nav mounts as #opsArea's first child and toggles ONLY the .card[data-section] elements' own display
+  // (never a descendant's) via CSS, so every existing id the tests above rely on keeps resolving exactly as
+  // before -- this section asserts the nav itself, then re-checks every prior id is still present.
+  ok(await ev(`return document.getElementById("opsArea").classList.contains("nav-on") && document.getElementById("opsArea").firstElementChild===document.querySelector(".emr-nav");`) === true, "the nav mounts as the FIRST child of #opsArea and #opsArea gets nav-on");
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none";`) === true, "the Onboard card (default active tab) is visible");
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="access"]')).display==="none";`) === true, "the Members (Access) card is hidden by default (Access is not the active tab)");
+  ok(await ev(`window.ConnectEMR.setSection("monitoring");
+    var mon=[].slice.call(document.querySelectorAll('.card[data-section="monitoring"]'));
+    var onboardHidden=getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display==="none";
+    return mon.length===2 && mon.every(function(c){return getComputedStyle(c).display!=="none";}) && onboardHidden;`) === true, "setSection('monitoring') shows the Connection health + Activity log cards and hides the Onboard card");
+  await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none" && getComputedStyle(document.querySelector('.card[data-section="monitoring"]')).display==="none";`) === true, "setSection('onboard') restores the Onboard card and re-hides Monitoring");
+  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fGraphql","fSql","fCsv","fHl7","fWebhook",
+      "tenantSel","tenantReload","tenantMsg","noTenant","opsArea","work","flagOff","gate",
+      "dash","dashReload","dashCounts","syncPanel","syncReload","syncSummary",
+      "health","healthReload","healthSummary","activity","activityReload","activitySummary",
+      "consents","consentReload","consentSummary","consentFlagOff","catalog","catalogReload","catalogSummary",
+      "members","membersReload","membersFlagOff","membersMsg"];
+    return ids.every(function(id){ return document.getElementById(id)!=null; });`) === true, "every id the existing panels (plus the new Members panel) use still resolves after the nav change");
+
+  // ---- Members / Access panel (GET /members -> {userId,role} projection; POST /members/role; POST
+  // /members/remove). Owner/admin caller sees editable role selects + Remove; auditor caller is read-only. ----
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-owner",name:"Owner Hospital",role:"owner"}]}});
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]}});
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  await ev(`window.ConnectEMR.setSection("access"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var t=document.getElementById("members").textContent; return t.indexOf("owner")>=0 && t.indexOf("admin")>=0;`) === true, "Members panel (owner caller) renders both member rows and their roles");
+  ok(await ev(`var m=[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]; var SAFE=["userId","role"];
+    var bad=m.some(function(r){ return Object.keys(r).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}|\\bmrn\\b|\\bdob\\b/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the members payload keys are a subset of {userId,role} only, and no PHI-shaped strings (email/phone/MRN/DOB)");
+  ok(await ev(`return !!document.querySelector('#members [data-role-select="fb:aaa"]') && !!document.querySelector('#members [data-remove="fb:aaa"]');`) === true, "an owner caller sees an editable role select + Remove button per member row");
+  ok(await ev(`var t=document.getElementById("members").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the members panel never renders undefined/stringified-object values, and no em-dash");
+
+  await ev(`window.__roleReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/members/role")>=0){ window.__roleReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    var sel=document.querySelector('#members [data-role-select="cfa:bbb"]'); sel.value="clinician";
+    sel.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__roleReq; return !!r && r.tenantId==="t-owner" && r.userId==="cfa:bbb" && r.role==="clinician";`) === true, "changing a member's role select POSTs /members/role with {tenantId,userId,role}");
+
+  await ev(`window.confirm=function(){return true;}; window.__removeReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/members/remove")>=0){ window.__removeReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true}}); }
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"}]}});
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    document.querySelector('#members [data-remove="cfa:bbb"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__removeReq; return !!r && r.tenantId==="t-owner" && r.userId==="cfa:bbb";`) === true, "clicking Remove (confirm -> true) POSTs /members/remove with {tenantId,userId}");
+
+  // Write controls HIDDEN for an auditor caller (read-only role labels; no select, no Remove).
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-aud",name:"Auditor Hospital",role:"auditor"}]}});
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]}});
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  await ev(`window.ConnectEMR.setSection("access"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var box=document.getElementById("members"); return box.textContent.indexOf("owner")>=0 && !box.querySelector("select") && !box.querySelector("[data-remove]");`) === true, "an auditor caller sees read-only roles (no role select, no Remove button)");
+
+  // Empty members -> the documented empty state.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadMembers(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("members").textContent.indexOf("No members yet.")>=0;`) === true, "an empty members list shows the 'No members yet.' empty state");
+
+  // Flag off: /members 404 -> a PANEL-LOCAL not-enabled message, and the GLOBAL flag-off gate must NOT trip.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadMembers(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return getComputedStyle(document.getElementById("membersFlagOff")).display!=="none" && window.ConnectEMR.flagOffVisible()===false && getComputedStyle(document.getElementById("work")).display!=="none";`) === true, "GET /members on a 404 shows a PANEL-LOCAL not-enabled message, and does NOT trip the shared page-wide flag-off gate");
+  await ev(`document.getElementById("membersFlagOff").style.display="none"; return 1;`);
+  await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
+
+  ok(consoleErrors.length === 0, "zero console errors / uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 4)) : ""));
+
+  console.log(fails === 0 ? "\nALL GREEN - Connect EMR admin page smoke test passed" : `\n${fails} FAILED`);
+} catch (e) { console.error("HARNESS ERROR:", e && e.message); fails++; }
+finally { try { ws && ws.close(); } catch {} chrome.kill(); serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

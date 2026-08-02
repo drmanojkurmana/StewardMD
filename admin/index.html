@@ -95,7 +95,6 @@
         <a data-p="push">📣 Push blast</a>
         <a data-p="watch">🧪 Lab-watch</a>
         <a data-p="ai">💸 AI usage</a>
-        <a data-p="ota">🚀 Live updates</a>
         <a data-p="kardiox">🫀 KardiQ X</a>
         <div class="grp">Beta</div>
         <a data-p="xa">⚗️ Experimental</a>
@@ -281,20 +280,6 @@
           <div class="msg" id="aiMsg"></div><div id="aiBox" style="margin-top:12px"></div>
         </div>
       </div>
-      <!-- LIVE UPDATES (OTA) -->
-      <div class="pane" id="pane-ota" data-need-auth>
-        <div class="card">
-          <b>Live updates (OTA)</b>
-          <div class="hint" style="margin:6px 0 10px">Push the latest <code>main</code> web build to installed native apps over the air — no App Store release. Runs the OTA GitHub Action (build → upload to R2); apps update on next launch. <b>Only reaches builds shipped WITH the updater plugin</b> (native build ≥ the min below).</div>
-          <div class="hint" style="margin-bottom:12px">Current live version: <b id="otaVer">…</b></div>
-          <div class="row">
-            <div><label>Channel</label><select id="otaChannel"><option value="production">Production</option><option value="beta">Beta</option></select></div>
-            <div><label>Min native build</label><input id="otaMin" type="number" value="3" min="1"></div>
-          </div>
-          <div class="qa" style="margin-top:12px"><button class="primary" data-ota="release">🚀 Push latest build</button><button class="ghost" data-ota="status">↻ Refresh status</button></div>
-          <div class="msg" id="otaMsg"></div>
-        </div>
-      </div>
       <!-- EXPERIMENTAL FEATURES -->
       <div class="pane" id="pane-xa" data-need-auth>
         <div class="stats">
@@ -393,8 +378,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai","ota","kardiox","xa"];
-  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",ota:"Live updates (OTA)",kardiox:"KardiQ X training",xa:"Experimental Features"};
+  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai","kardiox","xa"];
+  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -543,26 +528,6 @@
   }
   document.querySelectorAll("[data-et]").forEach(function(b){ b.onclick=function(){ etSend(b.getAttribute("data-et")); }; });
 
-  // ---- Live updates (OTA) ----
-  function otaLoad(){
-    var v=$("otaVer"); if(v)v.textContent="checking…";
-    api("/api/ota/status").then(function(x){
-      var d=(x.d&&x.d.live)||{};
-      if(x.s!==200){ if(v)v.textContent="(unauthorised)"; return; }
-      if(v)v.textContent=(d.version&&d.version!=="builtin")?(d.version+" · "+(d.channel||"production")):"none published yet — apps use the built-in bundle";
-    }).catch(function(){ if(v)v.textContent="(error)"; });
-  }
-  function otaRelease(){
-    if(!confirm("Build the latest main and push it OTA to installed apps? They update on next launch."))return;
-    say("otaMsg","","Dispatching build…");
-    api("/api/ota/release",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({channel:$("otaChannel").value,minNative:parseInt($("otaMin").value,10)||3})}).then(function(x){
-      var d=x.d||{};
-      if(x.s===200&&d.ok){ say("otaMsg","ok","✅ OTA build started — apps update on next launch once it finishes. Track it in GitHub → Actions → OTA Release."); }
-      else if(x.s===501){ say("otaMsg","err","GitHub token not configured yet (GITHUB_OTA_TOKEN)."); }
-      else { say("otaMsg","err",x.s===401?"Not an owner.":("Failed: "+(d.error||x.s))); }
-    }).catch(function(){ say("otaMsg","err","Sign in first."); });
-  }
-  document.querySelectorAll("[data-ota]").forEach(function(b){ b.onclick=function(){ b.getAttribute("data-ota")==="release"?otaRelease():otaLoad(); }; });
 
   // ---- Lab-watch ----
   $("wRun").onclick=function(){ say("wMsg","","Polling GHIS…"); $("wRun").disabled=true;
@@ -630,7 +595,7 @@
     $("xaCodeFilters").addEventListener("click",function(e){var b=e.target.closest("[data-cf]");if(!b)return;xaCF=b.getAttribute("data-cf");Array.prototype.forEach.call($("xaCodeFilters").children,function(p){p.classList.toggle("on",p===b);});xaLoadCodes();});
   } catch(e){}
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="ota")otaLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }

@@ -1,0 +1,109 @@
+// functions/_connect/onboard/pull.js — pull a patient through the REUSED per-kind connector (fhir-r4 or
+// rest-json, selected by the stored row's `kind`), normalize to SCCM, return the canonical bundle (for
+// in-app viewing; real-PHI-to-LLM stays behind the existing R7/BAA egress gate — unchanged). The onboard
+// layer owns SSRF-guarded auth acquisition (token bearer, or SMART discovery+client-credentials via
+// probe.resolveAuth); the connector then runs in its NO-SMART bearer mode (secret_ref unset => smartOn=false
+// for fhir-r4; rest-json has no SMART at all), so each connector is REUSED (not forked) and works against
+// any public host. The fhir-r4 connector's own paginate keeps its same-origin-next guard (no exfil hop).
+import { requireCan } from "../enterprise/guard.js";
+import { PermissionError } from "../permission.js";
+import { makeAuditSink, hmacPseudonym } from "../audit.js";
+import { validateBundle } from "../canonical/validate.js";
+import { assertConsumable, SCCM_MAJOR, RESOURCE_KEYS } from "../canonical/model.js";
+import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
+import { restJsonConnector } from "../connectors/rest-json/connector.js";
+import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
+import { graphqlConnector } from "../connectors/graphql/connector.js";
+import { sqlConnector } from "../connectors/sql/connector.js";
+import { assertPublicHttpsUrl } from "./ssrf.js";
+import { makeSafeFetch } from "./net.js";
+import { OnboardError } from "./errors.js";
+import { getRow, ONBOARD_SCOPE, REST_ONBOARD_SCOPE, DICOM_ONBOARD_SCOPE, GRAPHQL_ONBOARD_SCOPE, SQL_ONBOARD_SCOPE } from "./store.js";
+import { resolveAuth } from "./probe.js";
+
+// The stored row's `kind` selects which built-in connector reuses this same onboard pull path, and which
+// SCCM scope it is allowed to produce. Unknown/legacy kinds default to fhir-r4 (the original Increment-1 shape).
+const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector, "sql": sqlConnector };
+const SCOPE_BY_KIND = { "fhir-r4": ONBOARD_SCOPE, "rest-json": REST_ONBOARD_SCOPE, "dicomweb": DICOM_ONBOARD_SCOPE, "graphql": GRAPHQL_ONBOARD_SCOPE, "sql": SQL_ONBOARD_SCOPE };
+
+export async function pullConnection(deps, request, env, tenantId, connectionId, patientId) {
+  // PHI read: gate on connector:read membership, and deny an auditor (RBAC reserves PHI away from auditors).
+  const { actor, tenant, role } = await requireCan(deps, request, env, tenantId, "connector:read");
+  if (role === "auditor") throw new PermissionError("auditor may not read patient data");
+  if (!patientId || typeof patientId !== "string") throw new OnboardError("invalid", "patientId required");
+
+  const { row, config } = await getRow(deps.db, tenant.id, connectionId);
+  const kind = row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : row.kind === "sql" ? "sql" : "fhir-r4";
+  const connector = CONNECTORS_BY_KIND[kind];
+  const scope = SCOPE_BY_KIND[kind];
+  // SQL/DB connections have NO URL to reach and NO bearer to acquire: the DB credentials live in the owner's
+  // Hyperdrive binding (referenced by NAME) and are used by the injected driver, never here. Everything else
+  // keeps its SSRF-guarded base + auth acquisition exactly as before.
+  const base = kind === "sql" ? "" : assertPublicHttpsUrl(row.base_url, "baseUrl").href.replace(/\/$/, "");
+  let creds = {}; try { creds = JSON.parse(await deps.secrets.open(config.sealed)); } catch { creds = {}; }
+
+  // Acquire a bearer in the onboard layer (SSRF-guarded); hand it to the connector via secrets("bearer").
+  // // VERIFY: a token-method connection with a CUSTOM headerName pulls with Authorization: Bearer here for
+  // fhir-r4 (it only emits a Bearer header); the rest-json connector DOES honor config.headerName. The
+  // capability probe already honors the custom header for both kinds. (SQL has no bearer.)
+  const bearer = kind === "sql" ? null : (await resolveAuth(deps, base, config, creds)).bearer;
+
+  // The SQL driver seam: the owner wires deps.sqlDriverFactory(env, bindingName) -> { query(template, params) }.
+  // UNSET by default (see the router deps // VERIFY note), so driver is null and the connector HONESTLY returns
+  // notConfigured below — never a fabricated row / fake empty success. The driver's query MUST bind the patient
+  // value as a PARAMETER (never string-concatenate it: the SQL-injection invariant).
+  const driver = kind === "sql" ? (deps.sqlDriverFactory ? deps.sqlDriverFactory(env, config.bindingName) : null) : null;
+
+  const t0 = Date.now();
+  // The connector's own reads/searches go through the redirect-safe fetch: a compromised/redirecting host
+  // can never bounce the authenticated, PHI-bearing request to a private/other origin.
+  const safeFetch = makeSafeFetch(deps.fetch);
+  // fhir-r4's ctx.config stays byte-identical to before (no secret_ref => bearer-mode); rest-json additionally
+  // carries the results-endpoint shape (resultsPath/patientParam/headerName) + an optional explicit columnMap;
+  // dicomweb carries the QIDO-RS studies-endpoint shape (studiesPath/patientTag/headerName); graphql carries
+  // the hospital's own query + its variable/path shape (query/resultsPath/graphqlPath/patientVar/headerName)
+  // + an optional explicit columnMap.
+  const cfg = kind === "rest-json"
+    ? { base_url: base, connector_id: connectionId, resultsPath: config.resultsPath, patientParam: config.patientParam, headerName: config.headerName, config: { columnMap: config.columnMap || null } }
+    : kind === "dicomweb"
+    ? { base_url: base, connector_id: connectionId, studiesPath: config.studiesPath, patientTag: config.patientTag, headerName: config.headerName }
+    : kind === "graphql"
+    ? { base_url: base, connector_id: connectionId, query: config.query, resultsPath: config.resultsPath, graphqlPath: config.graphqlPath, patientVar: config.patientVar, headerName: config.headerName, config: { columnMap: config.columnMap || null } }
+    : kind === "sql"
+    // sql carries the read-only parameterized query + the injected driver seam (null unless the owner wired it)
+    // + an optional explicit columnMap. NO base_url, NO bearer.
+    ? { base_url: "", connector_id: connectionId, bindingName: config.bindingName, queryTemplate: config.queryTemplate, driver, config: { columnMap: config.columnMap || null } }
+    : { base_url: base, connector_id: connectionId };           // NO secret_ref => connector stays in bearer mode
+  const ctx = {
+    tenant: { id: tenant.id, mode: tenant.mode || "sandbox", settings: {} },
+    config: cfg,
+    scope: scope.slice(),
+    kv: deps.kv,
+    secrets: async (name) => (name === "bearer" ? bearer : null),
+    envelope: deps.secrets && { seal: deps.secrets.seal, open: deps.secrets.open },
+    now: () => new Date(),
+    fetch: safeFetch,
+    audit: () => {},
+    logger: { warn() {}, error() {} },
+    budget: { maxSubrequests: 20, deadlineMs: 8000, maxPagesPerResource: 50, maxRows: 50000 },
+  };
+
+  const raw = await connector.fetchPatient(ctx, patientId);
+  // HONEST not-configured surfacing: an un-wired SQL driver returns ZERO rows + notConfigured. Do NOT let that
+  // empty bundle read as a successful pull — surface it as an explicit not-configured error BEFORE normalize.
+  if (kind === "sql" && raw && raw.notConfigured) throw new OnboardError("not-configured", "sql connector has no wired driver");
+  const bundle = await connector.normalize(ctx, raw);
+  assertConsumable(bundle, SCCM_MAJOR);
+  const v = validateBundle(bundle);
+  if (!v.ok) throw new OnboardError("invalid", "normalized bundle failed validation");
+  bundle.meta.warnings.push(...v.warnings);
+
+  // PHI-free audit: counts + a pseudonymous patient-ref hash; never the raw patientId / URL / creds.
+  await makeAuditSink(env, deps.db)({
+    tenantId: tenant.id, actor: actor.id, connectorId: connectionId, action: "connect.onboard.pulled",
+    resourceCounts: RESOURCE_KEYS.reduce((a, k) => (a[k] = bundle[k].length, a), {}),
+    patientRefHash: await hmacPseudonym(env, tenant.id, patientId), latencyMs: Date.now() - t0, outcome: "ok",
+    ts: new Date().toISOString(),
+  });
+  return bundle;
+}

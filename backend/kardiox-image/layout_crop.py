@@ -94,6 +94,45 @@ def crop_ecg(pil, margin=0.02, deskew=True, max_det=1200):
         return pil                                # never break the pipeline
 
 
+# ---- is-ECG gate -----------------------------------------------------------
+# A photo of a paper ECG has a fine pink/red GRID spread across the whole frame (the ECG-specific
+# signal _ink_mask already keys on) and/or a strongly PERIODIC ruled-line pattern. Arbitrary photos
+# (a face, a document, an object) have neither: any red is LOCALISED (one blob, not a grid) and there
+# is no regular grid periodicity. The image classifier is a plain per-class sigmoid with no
+# out-of-distribution notion, so WITHOUT this gate a non-ECG photo is forced into a class (e.g. AFib).
+# Conservative + FAIL-OPEN: reject only when BOTH signals are clearly absent; never block on an error.
+def is_ecg(pil, sat_max=85):
+    """Return (ok: bool, detail: dict). ok=False means 'this is not an ECG photo' and the caller must
+    refuse to diagnose it.
+
+    Signal: an ECG photo is bright PAPER carrying thin ink, so its mean colour SATURATION is LOW
+    (mostly white/grey with thin pink grid + black trace). A face/scene/object photo is COLOURFUL
+    (high saturation). Validated on real photos: a real 12-lead ECG measured ~22, a face collage ~138
+    (a 6x margin). Saturation is lighting-robust and — unlike fine-grid periodicity or pink coverage —
+    immune to the JPEG/webp 8x8 block artefacts and to skin registering as 'red', both of which fooled
+    earlier heuristics on real compressed photos.
+
+    Measured on the ECG-grid region (crop_ecg) so colourful desk/hand clutter around a small ECG does
+    not push it over. Conservative + FAIL-OPEN: pass on any error, missing cv2, or a tiny image — a gate
+    error must never block a real clinical read. NOTE: a plain low-colour document also passes (harmless:
+    the model returns nothing diagnosable on blank paper); the real is-ECG classifier is the robust
+    long-term fix. Threshold is env-overridable by the caller."""
+    if not _HAVE_CV2:
+        return True, {"reason": "no-cv2"}
+    try:
+        base = np.array(pil.convert("RGB"))
+        if base.shape[0] < 40 or base.shape[1] < 40:
+            return True, {"reason": "tiny"}
+        focus = np.array(crop_ecg(pil).convert("RGB"))     # focus on the ECG region if one is found
+        H, W = focus.shape[:2]
+        scale = min(1.0, 800.0 / max(H, W))
+        small = cv2.resize(focus, (max(1, int(W * scale)), max(1, int(H * scale)))) if scale < 1 else focus
+        mean_sat = float(cv2.cvtColor(small, cv2.COLOR_RGB2HSV)[:, :, 1].mean())
+        return bool(mean_sat <= sat_max), {"meanSat": round(mean_sat, 1), "satMax": sat_max}
+    except Exception as e:                              # never break the pipeline
+        return True, {"reason": "error:" + str(e)[:60]}
+
+
 # ---- QA / visualisation ----------------------------------------------------
 if __name__ == "__main__":
     import sys, os

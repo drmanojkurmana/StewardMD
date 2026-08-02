@@ -93,10 +93,11 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold } from "../../_ai_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit } from "../../_ai_usage.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
+import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
@@ -846,11 +847,33 @@ export async function onRequest(context) {
     return json({ model: await getModelOverride(store), effective: modelId(env), allowed: ALLOWED_MODELS, rates: MODEL_RATES });
   }
 
+  // AI Control Center: owner-facing per-user report + per-user cap editor.
+  if (seg === "admin/users") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    const day = (url.searchParams.get("day") || "").match(/^\d{4}-\d{2}-\d{2}$/) ? url.searchParams.get("day") : new Date().toISOString().slice(0, 10);
+    return json(await usersReport(usageKv(env), day));
+  }
+  if (seg === "admin/user-limit" && request.method === "POST") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+    const email = String(b.email || "").toLowerCase();
+    const module = String(b.module || "");
+    const limit = (b.limit == null || b.limit === "") ? null : Number(b.limit);
+    if (!email || !module) return json({ error: "bad-request" }, 400);
+    const store = usageKv(env);
+    const map = await setUserLimit(store, email, module, limit);
+    let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
+    try { await auditRecord(store, "user-limit", email + ":" + module + "=" + (limit == null ? "default" : limit), actorId, Date.now()); } catch (e) {}
+    return json({ ok: true, email: email, limits: map || {} });
+  }
+
   // A doctor's OWN AI usage for today (never another doctor's). Powers the in-app AI Usage page.
   if (seg === "usage") {
     const store = usageKv(env);
     const who = await identify(request, env);
-    return json(await doctorUsageSummary(env, store, who.id, Date.now()));
+    return json(await doctorUsageSummary(env, store, usageKeyFor(who), Date.now()));
   }
 
   if (seg === "health") {
@@ -897,10 +920,16 @@ export async function onRequest(context) {
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
+    if (_mod || _isEvidReview) {
+      try {
+        const _dc = await deviceCheck(env, _acStore, request, Date.now());
+        if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
+      } catch (e) { /* fail-open */ }
+    }
     if (_mod && !_isEvidReview) {
       try {
         const _who = await identify(request, env);
-        const _mq = await gateAndCount(env, _acStore, _mod, _who.id, _who.guest ? "guest" : "unknown", Date.now(), _who.email);
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
@@ -940,6 +969,13 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
+        // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
+        // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
+        // CANONICAL SCCM context into pkg. SECURITY: applyConnectContext adds ONLY the R7-gated LLM-
+        // egress lane (real PHI never reaches the model on flag-on alone); when the BAA/no-retention
+        // gate is closed it adds NOTHING to pkg. Fail-safe: any Connect error degrades to "no context"
+        // and never breaks/delays the answer. Inert + byte-identical unless BOTH Connect flags are on.
+        if (maikWiringOn(env)) { try { await applyConnectContext(env, request, pkg); } catch (e) {} }
         let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
         // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
         // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:
@@ -1188,7 +1224,7 @@ export async function onRequest(context) {
           let hit = null; try { hit = await store.get(cacheKey, "json"); } catch (e) {}
           if (hit && hit.text) {
             let used = 0, limit = 2;
-            try { const mq = await checkModuleQuota(env, store, "research", (await identify(request, env)).id, Date.now()); used = mq.used || 0; limit = mq.limit != null ? mq.limit : 2; } catch (e) {}
+            try { const mq = await checkModuleQuota(env, store, "research", usageKeyFor(await identify(request, env)), Date.now()); used = mq.used || 0; limit = mq.limit != null ? mq.limit : 2; } catch (e) {}
             return json({ text: hit.text, mode: "evidence-review", sources: hit.sources || [], cached: true, usage: { module: "research", used: used, limit: limit } });
           }
         }
@@ -1199,7 +1235,7 @@ export async function onRequest(context) {
         let usedNow = 0, capNow = 2;
         if (store) {
           const who = await identify(request, env);
-          const mq = await gateAndCount(env, store, "research", who.id, who.guest ? "guest" : "unknown", Date.now(), who.email);
+          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
           if (!mq.ok) {
             // Over-cap denial must NOT burn a general MaiK slot (no AI work done, and recordUsage's
             // general counter would decrement the shared 60/day allowance). gateAndCount already

@@ -3603,15 +3603,14 @@
   // No signed-in user → plain headers (server applies a small guest quota by IP).
   function aiHeaders() {
     var base = { "Content-Type": "application/json" };
-    // NATIVE: send AI requests as a GUEST — no login token. Guest works reliably on every device and
-    // every login state; a logged-in native session's getIdToken (and the Firestore sync it kicks off)
-    // can stall the request so it never even leaves the app (MaiK/scan "took too long" for signed-in
-    // accounts). The server still answers (promo = everyone Pro); only per-user metering is skipped
-    // — acceptable in beta. Web keeps the token (it works there).
-    try { if (window.SMD_IS_NATIVE) return Promise.resolve(base); } catch (e) {}
+    // Device id (anti account-farming abuse cap) — cheap, always attach when cached.
+    try { var dev = window.SMD_DEVICEID && window.SMD_DEVICEID(); if (dev) base["X-SMD-Device"] = dev; } catch (e) {}
+    // Identity for per-user usage + limits: the CACHED verified ID token (never calls getIdToken here,
+    // so it can't revive the native signed-in hang). Empty cache OR disabled → guest headers (unchanged).
     try {
-      var u = window.firebase && firebase.auth && firebase.auth().currentUser;
-      if (u && u.getIdToken) return raceTimeout(u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; }), 5000, base);
+      var idOn = localStorage.getItem("smd_ai_idtoken") !== "0";
+      var tok = idOn && window.SMD_IDTOKEN && window.SMD_IDTOKEN();
+      if (tok) base["Authorization"] = "Bearer " + tok;
     } catch (e) {}
     return Promise.resolve(base);
   }

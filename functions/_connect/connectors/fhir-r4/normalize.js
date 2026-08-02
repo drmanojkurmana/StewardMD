@@ -10,6 +10,15 @@ function cc(fhirCC, fallback) {
 }
 const firstCoding = (arr) => (arr && arr[0] && arr[0].coding && arr[0].coding[0] && arr[0].coding[0].code) || null;
 
+// Derive the Observation bucket from the standard observation-category code so maik-context buckets
+// vitals vs labs correctly. Unknown -> laboratory + a warning (never a throw).
+function obsCategory(r) {
+  for (const c of r.category || []) for (const cd of c.coding || []) { if (cd.code === "vital-signs") return { cat: "vital-signs" }; if (cd.code === "laboratory") return { cat: "laboratory" }; }
+  return { cat: "laboratory", warn: "observation " + (r.id || "?") + " category defaulted to laboratory (source omitted it)" };
+}
+const qOrNull = (q) => (q && q.value != null ? quantity({ value: q.value, unit: q.unit, code: q.code }) : null);
+const refIdOf = (ref) => { const s = String((ref && ref.reference) || ""); return s ? (s.includes("/") ? s.split("/").pop() : s) : null; };
+
 export function normalizeFhir(ctx, raw) {
   const P = raw.patient || {};
   const out = bundle({
@@ -24,13 +33,25 @@ export function normalizeFhir(ctx, raw) {
       case "Encounter": out.encounters.push(encounter({ id: r.id, status: r.status, class: (r.class && r.class.code) || null })); break;
       case "Condition": out.conditions.push(condition({ id: r.id, code: cc(r.code, "condition"), clinicalStatus: firstCoding([r.clinicalStatus]) || "unknown" })); break;
       case "MedicationStatement": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "statement", status: r.status || "unknown", dosage: r.dosage && r.dosage[0] ? { text: r.dosage[0].text || null } : null })); break;
-      case "MedicationRequest": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "order", status: r.status || "unknown" })); break;
+      case "MedicationRequest": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "order", status: r.status || "unknown", dosage: r.dosageInstruction && r.dosageInstruction[0] && r.dosageInstruction[0].text ? { text: r.dosageInstruction[0].text } : null })); break;
       case "AllergyIntolerance": out.allergies.push(allergyIntolerance({ id: r.id, code: cc(r.code, "allergen"), criticality: r.criticality || "unable-to-assess" })); break;
-      case "Observation": out.observations.push(observation({ id: r.id, category: firstCoding(r.category) || "laboratory", code: cc(r.code, "observation"),
-        value: r.valueQuantity ? quantity({ value: r.valueQuantity.value, unit: r.valueQuantity.unit, code: r.valueQuantity.code }) : (r.valueString ? { text: r.valueString } : null),
-        effectiveDateTime: r.effectiveDateTime || null, status: r.status || "unknown" })); break;
-      case "DiagnosticReport": out.diagnosticReports.push(diagnosticReport({ id: r.id, code: cc(r.code, "report"), status: r.status || "unknown", conclusion: r.conclusion || null })); break;
-      case "DocumentReference": out.documents.push(documentReference({ id: r.id, type: cc(r.type, "document"), status: r.status || "unknown", text: (r.description || null) })); break;
+      case "Observation": {
+        const oc = obsCategory(r); if (oc.warn) out.meta.warnings.push(oc.warn);
+        const value = r.valueQuantity ? quantity({ value: r.valueQuantity.value, unit: r.valueQuantity.unit, code: r.valueQuantity.code })
+          : (r.valueString ? { text: r.valueString } : (r.valueCodeableConcept ? cc(r.valueCodeableConcept, "value") : null));
+        const rrIn = r.referenceRange && r.referenceRange[0];
+        const referenceRange = rrIn ? { low: qOrNull(rrIn.low), high: qOrNull(rrIn.high), text: rrIn.text || null } : null;
+        out.observations.push(observation({ id: r.id, category: oc.cat, code: cc(r.code, "observation"), value, referenceRange,
+          interpretation: r.interpretation && r.interpretation[0] ? cc(r.interpretation[0], "interpretation") : null,
+          effectiveDateTime: r.effectiveDateTime || null, status: r.status || "unknown" })); break;
+      }
+      case "DiagnosticReport": out.diagnosticReports.push(diagnosticReport({ id: r.id, code: cc(r.code, "report"), status: r.status || "unknown",
+        effectiveDateTime: r.effectiveDateTime || null, conclusion: r.conclusion || null,
+        results: (r.result || []).map((x) => { const id = refIdOf(x); return id ? { type: "Observation", id } : null; }).filter(Boolean) })); break;
+      case "DocumentReference": {
+        if (r.content && r.content.some((c) => c.attachment && c.attachment.data)) out.meta.warnings.push("document " + (r.id || "?") + " inline attachment bytes dropped (narrative-only)");
+        out.documents.push(documentReference({ id: r.id, type: cc(r.type, "document"), status: r.status || "unknown", date: r.date || null, text: r.description || (r.text && r.text.div) || null })); break;
+      }
     }
   }
   return out;

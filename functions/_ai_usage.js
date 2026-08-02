@@ -49,6 +49,22 @@ export function resolveLimit(env, moduleId, overrides) {
   return moduleDailyLimit(env, moduleId);
 }
 
+// ---- per-USER limit overrides (owner sets a cap for a specific email). Key: ai:ulimit:<email>. ----
+export async function getUserLimit(store, email) {
+  if (!store || !email) return null;
+  try { return (await store.get("ai:ulimit:" + String(email).toLowerCase(), "json")) || null; } catch (e) { return null; }
+}
+export async function setUserLimit(store, email, moduleId, limit) {
+  if (!store || !email || !isAiModule(moduleId)) return null;
+  const key = "ai:ulimit:" + String(email).toLowerCase();
+  const cur = (await store.get(key, "json")) || {};
+  if (limit == null) delete cur[moduleId];
+  else cur[moduleId] = Math.max(0, Math.floor(Number(limit) || 0));
+  if (Object.keys(cur).length) await store.put(key, JSON.stringify(cur), { expirationTtl: 60 * 60 * 24 * 400 });
+  else { try { await store.delete(key); } catch (e) {} }
+  return Object.keys(cur).length ? cur : null;
+}
+
 // ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Estimates; env-overridable.
 export const MODEL_RATES = {
   "gemini-2.5-flash":       { in: 0.007, out: 0.025 },
@@ -126,6 +142,19 @@ const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
 // Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
 export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   if (!store || !isAiModule(moduleId)) { const l = moduleDailyLimit(env, moduleId); return { ok: true, unlimited: l === 0, limit: l }; }
+  // Per-USER override (owner-set cap for this email) — ALWAYS enforces, independent of MAIK_ENFORCE_CAPS.
+  if (typeof doctorId === "string" && doctorId.indexOf("em:") === 0) {
+    const ul = await getUserLimit(store, doctorId.slice(3));
+    if (ul && typeof ul[moduleId] === "number") {
+      const cap = ul[moduleId];
+      if (cap === 0) return { ok: true, unlimited: true, limit: 0 };
+      const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
+      let used = 0;
+      try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
+      if (used >= cap) return { ok: false, reason: "user-limit", module: moduleId, limit: cap, used: used };
+      return { ok: true, remaining: cap - used, limit: cap, used: used, perUser: true };
+    }
+  }
   // LAUNCH: no per-account per-module daily caps — AI (MaiK, web search, Evidence Review, Vision, ECG…)
   // behaves IDENTICALLY for every account. checkQuota (_usage.js) already skips its per-user throttles;
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
@@ -308,4 +337,23 @@ export async function globalUsageReport(env, store, now) {
     out.abuseThreshold = abuseThreshold;
   } catch (e) {}
   return out;
+}
+
+// Owner dashboard: one row per SIGNED-IN user (email) for a day — usage + any per-user caps.
+export async function usersReport(store, day) {
+  if (!store) return { users: [], truncated: false };
+  const prefix = "aiu:doc:em:";
+  let names = [];
+  try { names = ((await store.list({ prefix: prefix })).keys || []).map((k) => k.name).filter((k) => k.endsWith(":" + day)); } catch (e) { return { users: [], truncated: false }; }
+  const truncated = names.length > 200;
+  names = names.slice(0, 200);
+  const users = [];
+  for (const key of names) {
+    const email = key.slice(prefix.length, key.length - (day.length + 1));   // aiu:doc:em:<email>:<day>
+    let d = {}; try { d = (await store.get(key, "json")) || {}; } catch (e) {}
+    const limits = (await getUserLimit(store, email)) || {};
+    users.push({ email: email, req: d.req || 0, cost: Math.round((d.cost || 0) * 100) / 100, byModule: d.byModule || {}, limits: limits });
+  }
+  users.sort((a, b) => b.req - a.req);
+  return { users: users, truncated: truncated };
 }

@@ -5,7 +5,7 @@
  * localStorage, else the default.
  *
  * ADDITIVE + non-breaking: defining this namespace changes nothing on its own. KardioX is gated by
- * `smd_kardiox` (DEFAULT OFF) exactly like FundX's `smd_fundx`; when off, kardiox.js returns early and
+ * `smd_kardiox` (ON for private dev/testing — see PUBLIC-RELEASE-GATE in DEFS) like FundX's `smd_fundx`; when off, kardiox.js returns early and
  * the whole module is a no-op. Exposed as window.SMD_KARDIOX_FLAGS.
  */
 (function () {
@@ -13,7 +13,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_kardiox:            { type: "bool", def: true,      query: "kardiox",     desc: "KardioX AI master flag (home card + module). DEFAULT OFF." },
+    smd_kardiox:            { type: "bool", def: true,      query: "kardiox",     desc: "KardioX AI master flag (home card + module). ON for private dev/testing. PUBLIC-RELEASE-GATE: set def:false before any App-Store/Play/public release (clinically unvalidated, regulatory-pending)." },
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },

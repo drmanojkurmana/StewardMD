@@ -585,6 +585,23 @@
       return;
     }
 
+    // Not-an-ECG — the server's is-ECG gate refused to diagnose a non-ECG photo (a face photo used to
+    // return "AFib"). Show an honest card, NOT a diagnosis dashboard with zeroed metrics / a confidence bar.
+    if (a.notEcg || /^\s*(no ecg|not an ecg)/i.test(String(a.verdict || ""))) {
+      host.innerHTML = head +
+        '<div class="kx-rpt-body">' +
+          '<div class="kx-disc" style="background:#fff4e5;border:1px solid #f0b872;color:#8a4b00;font-weight:600;margin:0 0 12px">' + ic("warning") +
+            'Not an ECG &mdash; no reading was produced.' +
+          '</div>' +
+          '<div class="kx-rpt-empty">' + ic("monitor_heart") +
+            '<div class="kx-rpt-empty-t">This doesn’t look like an ECG</div>' +
+            '<div class="kx-rpt-empty-s">' + esc(a.clinicalInterpretation || "Upload a clear photo of a printed 12-lead ECG — the pink/red grid should fill the frame.") + '</div>' +
+          '</div>' +
+        '</div>';
+      wire(host, ctx);
+      return;
+    }
+
     var SEV = {
       critical: { label: "Critical", icon: "crisis_alert" },
       urgent:   { label: "Urgent",   icon: "priority_high" },
@@ -659,14 +676,27 @@
         '<div class="kx-strip-label kx-data">' + esc(a.leadStripLabel) + '</div>' +
       '</div>';
   
+    // ── SAFETY (client harm-reduction; the real is-ECG gate belongs server-side): the image screen
+    // produces a reading for ANY photo — including non-ECGs (a face photo returned "AFib") — and is NOT
+    // a diagnosis. Reframe so it never reads as a CONFIRMED urgent finding, and warn up-front.
+    var isScreen = /kardiox-image/i.test(String(a.engine || "")) ||
+      /reads the photo|photo directly|EXPERIMENTAL decision-support/i.test(String(a.clinicalInterpretation || "") + " " + String(a.modelScope || ""));
+    var dxRaw = String(a.verdict || "");
+    var dxDisplay = (isScreen && dxRaw && !/^\s*(normal|inconclusive|-)/i.test(dxRaw)) ? ("Possible: " + dxRaw) : dxRaw;
+    var pillLabel = isScreen ? "Experimental screen" : sev.label;
+    var screenWarn = isScreen ?
+      '<div class="kx-disc" style="background:#fff4e5;border:1px solid #f0b872;color:#8a4b00;font-weight:600;margin:0 0 12px">' + ic("warning") +
+        'Experimental photo screen &mdash; it produces a reading for <b>any</b> photo, including images that are <b>not ECGs</b>, and is <b>not a diagnosis</b>. Confirm this is a clear 12-lead ECG and verify every finding on the original.' +
+      '</div>' : '';
+
     var hero =
       '<div class="kx-verdict kx-verdict--' + sevKey + '">' +
         '<div class="kx-verdict-top">' +
           '<div class="kx-verdict-row">' +
-            '<span class="kx-sev-pill">' + ic(sev.icon) + esc(sev.label) + '</span>' +
+            '<span class="kx-sev-pill">' + ic(sev.icon) + esc(pillLabel) + '</span>' +
             '<span class="kx-ai-mark">' + ic("auto_awesome") + 'KardiQ X AI</span>' +
           '</div>' +
-          '<div class="kx-verdict-dx">' + esc(a.verdict) + '</div>' +
+          '<div class="kx-verdict-dx">' + esc(dxDisplay) + '</div>' +
           (a.verdictQualifier ? '<div class="kx-verdict-qual">' + esc(a.verdictQualifier) + '</div>' : '') +
           '<div class="kx-conf">' +
             '<div class="kx-conf-bar" role="progressbar" aria-label="AI confidence" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '">' +
@@ -740,6 +770,7 @@
 
     var body =
       '<div class="kx-rpt-body">' +
+        screenWarn +
         hero +
         section("straighten", "Measurements &amp; intervals") +
         '<div class="kx-metrics">' + metricsHtml + '</div>' +

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD Connect EMR</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
+  .main{max-width:820px;margin:0 auto;padding:20px 24px 70px}
+  .htop{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .htop h2{margin:0;font:800 20px var(--f);flex:1;display:flex;align-items:center;gap:9px}
+  .who{font:600 12.5px var(--f);color:var(--mut)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  .card>b{font:800 14.5px var(--f)}
+  label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
+  input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tl)}
+  textarea{min-height:76px;resize:vertical;font:500 12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{border:none;border-radius:11px;font:700 14px var(--f);padding:11px 15px;cursor:pointer}
+  button:disabled{opacity:.55;cursor:default}
+  .primary{background:var(--tl);color:#fff}.ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  .item{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg)}
+  .item .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .st{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
+  .st.pending{background:var(--amb)}.st.verified{background:var(--grn)}.st.rejected{background:var(--red)}.st.unverified{background:var(--mut)}
+  .cat{font:700 10px var(--f);text-transform:uppercase;color:var(--tl);background:var(--tls);border-radius:6px;padding:2px 8px}
+  .t{margin-left:auto;font:600 11px var(--f);color:var(--mut)}
+  .title{font:800 14px var(--f);margin-top:5px}
+  .meta{font:500 12px var(--f);color:var(--mut);margin-top:4px;line-height:1.5;word-break:break-word}.meta b{color:var(--ink)}
+  .foot{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+  .foot button{padding:8px 12px;font-size:13px}
+  .del{background:none;border:1px solid var(--line);color:var(--red)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  a{color:var(--tl)}code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
+  .rowmsg{min-height:0;margin-top:8px}
+  .subform{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .json{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto;color:var(--ink)}
+  .soon{font:600 11px var(--f);color:var(--mut);margin-top:6px}
+  table.dash{width:100%;border-collapse:collapse;font:500 13px var(--f)}
+  table.dash th{text-align:left;font:700 10.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px;border-bottom:1px solid var(--line)}
+  table.dash td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;word-break:break-word}
+  table.dash td.mono{font:500 12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut)}
+  table.dash td.acts{white-space:nowrap}
+  table.dash td.acts button{padding:6px 9px;font-size:12px;margin-right:5px;margin-bottom:4px}
+  table.dash .st{display:inline-block}
+  @media(max-width:640px){.main{padding:16px 14px 70px}}
+  /* Enterprise Administration Portal: tab nav (ADDITIVE; organizes #opsArea's cards, no DOM moves). */
+  .emr-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .emr-nav button{background:var(--panel);color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font:700 12.5px var(--f);cursor:pointer}
+  .emr-nav button.active{background:var(--tl);color:#fff;border-color:var(--tl)}
+  #opsArea.nav-on .card[data-section]{display:none}
+  #opsArea.nav-on .card[data-section].sect-show{display:block}
+</style>
+</head>
+<body>
+  <main class="main">
+    <div class="htop">
+      <h2>🔌 Connect EMR</h2>
+      <span class="who" id="who">Checking sign-in…</span>
+      <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
+      <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
+    </div>
+
+    <div id="gate" class="card hint">Sign in with your owner or admin Google account to connect an EMR.</div>
+
+    <!-- Feature-flag-off state (endpoints return 404 when smd_connect_onboard is off) -->
+    <div id="flagOff" class="card" style="display:none">
+      <b>EMR Connect is not enabled yet</b>
+      <div class="hint" style="margin-top:6px">This feature is behind a flag that is currently off for your account. Ask the StewardMD team to enable EMR Connect for your organization, then reload this page.</div>
+    </div>
+
+    <div id="work" data-need-auth style="display:none">
+
+      <!-- Organization: picked from the tenants your account is a member of (server-derived, no typing). -->
+      <div class="card">
+        <b>Organization</b>
+        <div class="hint" style="margin:4px 0 2px">Select the hospital or organization you are connecting. Only organizations your account is a member of are listed. Every action below runs for the selected organization.</div>
+        <label for="tenantSel">Your organization</label>
+        <div class="row">
+          <div><select id="tenantSel"><option value="" disabled selected>Loading your organizations...</option></select></div>
+          <div style="flex:0 0 auto"><button class="primary" id="tenantReload">Reload</button></div>
+        </div>
+        <div class="msg" id="tenantMsg"></div>
+      </div>
+
+      <!-- No-membership empty state (GET /tenants returned an empty list). -->
+      <div id="noTenant" class="card" style="display:none">
+        <b>You are not a member of any hospital tenant</b>
+        <div class="hint" style="margin-top:6px">Your account is not a member of any organization yet. Ask your organization's owner to invite your StewardMD account, then use Reload above.</div>
+      </div>
+
+      <!-- Operational area: shown only once you belong to at least one organization. -->
+      <div id="opsArea">
+
+      <!-- Connector catalog: a self-service, marketplace-style catalog of every connector TYPE the platform
+           supports (metadata only -- no tenant/PHI data), so an admin can see what they can connect and whether
+           each type is enabled before adding a connection below. Read on demand via Refresh, same pattern as
+           Connection health / Activity log (GET /connectors, connector:read RBAC). -->
+      <div class="card" data-section="governance">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connector catalog</b><button class="ghost" id="catalogReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" style="margin-top:4px">Every connector type below is available in principle. Enabling a type for your organization is a flag flip made by the StewardMD team; ask us to enable a type marked Disabled.</div>
+        <div class="hint" id="catalogSummary" style="margin-top:4px"></div>
+        <div id="catalog" style="margin-top:12px"><div class="hint">Select your organization above, then Refresh, to view the connector catalog.</div></div>
+      </div>
+
+      <!-- Add a connection -->
+      <div class="card" data-section="onboard">
+        <b>Add a connection</b>
+        <label for="aName">Connection name *</label>
+        <input id="aName" maxlength="120" placeholder="e.g. Main hospital FHIR">
+
+        <label for="aType">Connection type</label>
+        <select id="aType">
+          <option value="fhir" selected>FHIR (R4)</option>
+          <option value="csv">CSV / flat file</option>
+          <option value="hl7">HL7 v2 feed</option>
+          <option value="webhook">Webhook / FHIR push</option>
+          <option value="rest">REST / JSON lab API</option>
+          <option value="dicom">DICOMweb / imaging (metadata)</option>
+          <option value="graphql">GraphQL lab API</option>
+          <option value="sql">SQL / database lab feed</option>
+        </select>
+        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds, Webhook / FHIR push, REST / JSON lab API, DICOMweb / imaging (metadata), GraphQL lab API and SQL / database lab feed are available now. DICOMweb reads study-level metadata only (modality, body site, study date, accession number, series/instance counts); it never retrieves images or pixel data. SQL / database is config-only today: saving and testing the shape works, but a live query needs the owner to wire a database driver first (see the note below).</div>
+
+       <div id="fFhir">
+        <label for="aBase">FHIR base URL *</label>
+        <div class="row">
+          <div><input id="aBase" maxlength="500" placeholder="https://your-emr.example.org/fhir" autocapitalize="off" spellcheck="false"></div>
+          <div style="flex:0 0 auto"><button class="ghost" id="aDetect" type="button">Detect</button></div>
+        </div>
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected. Use Detect to automatically fill in authentication from the server.</div>
+        <div class="msg" id="detectMsg"></div>
+
+        <label for="aMethod">Authentication</label>
+        <select id="aMethod">
+          <option value="token" selected>Token / API key</option>
+          <option value="smart">SMART Backend Services</option>
+        </select>
+
+        <!-- token fields -->
+        <div id="fToken">
+          <label for="aToken">Access token or API key *</label>
+          <input id="aToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+          <label for="aHeader">Header name (optional)</label>
+          <input id="aHeader" placeholder="Authorization (default). Set only if your EMR uses a custom header." autocapitalize="off" spellcheck="false">
+        </div>
+
+        <!-- smart fields -->
+        <div id="fSmart" style="display:none">
+          <label for="aClientId">Client ID *</label>
+          <input id="aClientId" placeholder="the client_id registered with the EMR" autocapitalize="off" spellcheck="false">
+          <label for="aTokenEp">Token endpoint (optional)</label>
+          <input id="aTokenEp" placeholder="https://…/token (discovered automatically if left blank)" autocapitalize="off" spellcheck="false">
+          <div class="hint" style="margin-top:6px">SMART Backend Services also needs the client key material below, or Test and Pull will report an authentication error.</div>
+          <label for="aJwk">Private key (JWK JSON)</label>
+          <textarea id="aJwk" placeholder='{"kty":"RSA", ...}'></textarea>
+          <div class="row">
+            <div><label for="aKid">Key ID (kid)</label><input id="aKid" placeholder="key id" autocapitalize="off" spellcheck="false"></div>
+            <div><label for="aAlg">Algorithm (alg)</label><input id="aAlg" placeholder="RS384 / ES384" autocapitalize="off" spellcheck="false"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="addSave">Save connection</button>
+          <button class="ghost" id="addSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="addMsg"></div>
+       </div>
+
+       <!-- REST / JSON lab API: a self-hosted REST endpoint returning a flat JSON array (or {results:[...]})
+            of lab-result rows. It is saved and tested the same way as a FHIR connection, and the rows are
+            normalized through the same mapper as the CSV upload (column names are detected automatically). -->
+       <div id="fRest" style="display:none">
+        <label for="aRestBase">REST base URL *</label>
+        <input id="aRestBase" maxlength="500" placeholder="https://your-lis.example.org/api" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aRestToken">Access token or API key *</label>
+        <input id="aRestToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+        <label for="aRestHeader">Header name (optional)</label>
+        <input id="aRestHeader" placeholder="Authorization (default). Set only if your API uses a custom header." autocapitalize="off" spellcheck="false">
+
+        <label for="aRestPath">Results path (optional)</label>
+        <input id="aRestPath" placeholder="/results" autocapitalize="off" spellcheck="false">
+        <label for="aRestParam">Patient ID parameter (optional)</label>
+        <input id="aRestParam" placeholder="patientId" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The results endpoint is called as {base URL}{results path}?{patient ID parameter}={patient ID} and must return a JSON array of rows, or {"results":[...]}.</div>
+
+        <label for="aRestHeaders">Column headers (optional)</label>
+        <textarea id="aRestHeaders" placeholder="mrn, test_name, result_value, result_unit (one per line, or comma-separated)"></textarea>
+        <div class="hint" style="margin-top:4px">List the field names your endpoint returns for each result row, then use Suggest mapping to get a starting column-to-field mapping you can review and edit before saving.</div>
+        <div style="margin-top:8px"><button class="ghost" id="restSuggestBtn" type="button">Suggest mapping</button></div>
+
+        <!-- AI-assisted field mapping (optional): behind a separate flag (smd_connect_ai_map); degrades to the
+             same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="restMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below and edit any field name before saving.</div>
+          <div id="restMapEditor"></div>
+          <div class="msg" id="restMapMsg"></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="restSave">Save connection</button>
+          <button class="ghost" id="restSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="restMsg"></div>
+       </div>
+
+       <!-- DICOMweb / imaging (metadata): a hospital PACS/VNA exposing a DICOMweb QIDO-RS studies endpoint.
+            Only study-LEVEL METADATA is read (modality, body site, study date, accession number, series/
+            instance counts); pixel data / images are NEVER retrieved (no WADO-RS call is ever made). Saved
+            and tested the same way as a FHIR/REST connection. -->
+       <div id="fDicom" style="display:none">
+        <label for="aDicomBase">DICOMweb base URL *</label>
+        <input id="aDicomBase" maxlength="500" placeholder="https://your-pacs.example.org/dicom-web" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aDicomToken">Access token or API key *</label>
+        <input id="aDicomToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+        <label for="aDicomHeader">Header name (optional)</label>
+        <input id="aDicomHeader" placeholder="Authorization (default). Set only if your PACS uses a custom header." autocapitalize="off" spellcheck="false">
+
+        <label for="aDicomPath">Studies path (optional)</label>
+        <input id="aDicomPath" placeholder="/studies" autocapitalize="off" spellcheck="false">
+        <label for="aDicomTag">Patient ID DICOM tag (optional)</label>
+        <input id="aDicomTag" placeholder="00100020" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The studies endpoint is called as {base URL}{studies path}?{patient ID tag}={patient ID} and must return a JSON array of DICOM-JSON study objects. Metadata only: images and pixel data are never retrieved.</div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="dicomSave">Save connection</button>
+          <button class="ghost" id="dicomSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="dicomMsg"></div>
+       </div>
+
+       <!-- GraphQL lab API: a self-hosted GraphQL endpoint. You supply your OWN query and the name of the
+            variable it uses for the patient id; the row array found at the results path is normalized through
+            the same mapper as the CSV upload and the REST/JSON connection (column names are detected
+            automatically). We never invent or guess your schema -- the query is entirely your input. -->
+       <div id="fGraphql" style="display:none">
+        <label for="aGraphqlBase">GraphQL endpoint URL *</label>
+        <input id="aGraphqlBase" maxlength="500" placeholder="https://your-lis.example.org/graphql" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">Must be an https address. Private, loopback and metadata addresses are rejected.</div>
+
+        <label for="aGraphqlToken">Access token or API key *</label>
+        <input id="aGraphqlToken" type="password" autocomplete="off" placeholder="pasted once, stored encrypted, never shown again">
+        <label for="aGraphqlHeader">Header name (optional)</label>
+        <input id="aGraphqlHeader" placeholder="Authorization (default). Set only if your API uses a custom header." autocapitalize="off" spellcheck="false">
+
+        <label for="aGraphqlQuery">GraphQL query *</label>
+        <textarea id="aGraphqlQuery" placeholder="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId testName value unit } } }"></textarea>
+        <div class="hint" style="margin-top:4px">Your own query, run as-is. It must declare and use a variable for the patient id (see Patient variable name below); it must not contain a mutation or subscription.</div>
+
+        <label for="aGraphqlVar">Patient variable name (optional)</label>
+        <input id="aGraphqlVar" placeholder="patientId (default)" autocapitalize="off" spellcheck="false">
+        <label for="aGraphqlResultsPath">Results path (optional)</label>
+        <input id="aGraphqlResultsPath" placeholder="e.g. patientLabs.rows" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The query is sent as {query, variables:{&lt;patient variable name&gt;: &lt;patient id&gt;}}. The results path locates the row array inside the response's data (dotted field names); leave it blank if data itself is the row array.</div>
+
+        <label for="aGraphqlHeaders">Column headers (optional)</label>
+        <textarea id="aGraphqlHeaders" placeholder="mrn, test_name, result_value, result_unit (one per line, or comma-separated)"></textarea>
+        <div class="hint" style="margin-top:4px">List the field names each row returns, then use Suggest mapping to get a starting column-to-field mapping you can review and edit before saving.</div>
+        <div style="margin-top:8px"><button class="ghost" id="graphqlSuggestBtn" type="button">Suggest mapping</button></div>
+
+        <!-- AI-assisted field mapping (optional): behind a separate flag (smd_connect_ai_map); degrades to the
+             same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="graphqlMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below and edit any field name before saving.</div>
+          <div id="graphqlMapEditor"></div>
+          <div class="msg" id="graphqlMapMsg"></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="graphqlSave">Save connection</button>
+          <button class="ghost" id="graphqlSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="graphqlMsg"></div>
+       </div>
+
+       <!-- SQL / database lab feed: a hospital whose lab data lives in a plain SQL database. There is NO URL --
+            the database credentials live in a Cloudflare Hyperdrive binding the owner configures separately; you
+            supply only the binding name and your own read-only, parameterized query. The row array the query
+            returns is normalized through the same mapper as the CSV/REST/GraphQL connections (column names are
+            detected automatically). CONFIG-ONLY TODAY: saving and testing the shape works now, but Test and Pull
+            report "not configured" until the StewardMD owner wires a real database driver behind this binding --
+            see the note below. -->
+       <div id="fSql" style="display:none">
+        <div class="hint" style="margin-top:4px"><b>Note:</b> SQL / database connections are config-only until the StewardMD owner wires a Hyperdrive-backed driver. You can save this connection now; Test and Pull will report "not configured" until that driver is wired, never a fake success.</div>
+
+        <label for="aSqlBinding">Hyperdrive binding name *</label>
+        <input id="aSqlBinding" maxlength="200" placeholder="LABS_DB" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The NAME of the Hyperdrive binding the owner configures for your database; we never store a connection string or password here.</div>
+
+        <label for="aSqlQuery">Read-only query template *</label>
+        <textarea id="aSqlQuery" placeholder="SELECT patient_id, test_name, value, unit FROM labs WHERE patient_id = $1"></textarea>
+        <div class="hint" style="margin-top:4px">Your own read-only, single-statement query. It must use a bound placeholder for the patient id ($1, :patientId or ?) and reference the patient; it must never contain a write or schema keyword (INSERT/UPDATE/DELETE/DROP and similar).</div>
+
+        <label for="aSqlHeaders">Column headers (optional)</label>
+        <textarea id="aSqlHeaders" placeholder="mrn, test_name, result_value, result_unit (one per line, or comma-separated)"></textarea>
+        <div class="hint" style="margin-top:4px">List the column names your query returns for each result row, then use Suggest mapping to get a starting column-to-field mapping you can review and edit before saving.</div>
+        <div style="margin-top:8px"><button class="ghost" id="sqlSuggestBtn" type="button">Suggest mapping</button></div>
+
+        <!-- AI-assisted field mapping (optional): behind a separate flag (smd_connect_ai_map); degrades to the
+             same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="sqlMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below and edit any field name before saving.</div>
+          <div id="sqlMapEditor"></div>
+          <div class="msg" id="sqlMapMsg"></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="sqlSave">Save connection</button>
+          <button class="ghost" id="sqlSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="sqlMsg"></div>
+       </div>
+
+       <!-- CSV / flat file: a one-shot upload that is parsed and normalized in place (not saved). -->
+       <div id="fCsv" style="display:none">
+        <label for="aCsvFile">CSV file</label>
+        <input id="aCsvFile" type="file" accept=".csv,.tsv,.txt,text/csv,text/plain">
+        <div class="hint" style="margin-top:4px">Upload your EMR's lab or results export. The file is read in your browser and sent once to be normalized to StewardMD's canonical model. It is not saved. Common column names (MRN, test, value, unit, order, and so on) are detected automatically. Limit 2 MB.</div>
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="csvParse">Parse and preview</button>
+          <button class="ghost" id="csvSuggestBtn" type="button" style="display:none">Suggest mapping</button>
+        </div>
+        <div class="msg" id="csvMsg"></div>
+        <div class="meta" id="csvCounts" style="display:none;margin-top:8px"></div>
+        <div id="csvWarn" style="display:none"></div>
+        <div class="json" id="csvJson" style="display:none"></div>
+
+        <!-- AI-assisted field mapping (optional): a suggested column-to-SCCM-field mapping the admin reviews
+             and edits before applying. Behind a separate flag (smd_connect_ai_map); Suggest mapping degrades
+             to the same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="csvMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below. Edit any field name, then apply to re-parse with your reviewed mapping.</div>
+          <div id="csvMapEditor"></div>
+          <div style="margin-top:10px"><button class="primary" id="csvApplyMapBtn" type="button" style="display:none">Apply mapping and re-parse</button></div>
+          <div class="msg" id="csvMapMsg"></div>
+        </div>
+       </div>
+
+       <!-- HL7 v2 feed: register an inbound HMAC-gated webhook the hospital's integration engine POSTs to. -->
+       <div id="fHl7" style="display:none">
+        <label for="aHl7Types">Message types (optional)</label>
+        <input id="aHl7Types" maxlength="300" placeholder="e.g. ORU^R01, ADT^A01 (leave blank to accept any)" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">A feed receives HL7 v2 messages from your integration engine (Mirth, Rhapsody, and so on). We generate a signing secret and a webhook URL. The secret is shown once, so save it right away.</div>
+        <div style="margin-top:14px"><button class="primary" id="hl7Create">Create feed</button></div>
+        <div class="msg" id="hl7Msg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="hl7Result" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="hl7Url" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="hl7Secret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="hl7Copy">Copy</button></div>
+          </div>
+          <div class="hint" id="hl7Hint" style="margin-top:8px"></div>
+        </div>
+       </div>
+
+       <!-- Webhook / FHIR push: register an inbound HMAC-gated webhook the EMR POSTs a FHIR Bundle/resource to. -->
+       <div id="fWebhook" style="display:none">
+        <div class="hint" style="margin-top:4px">Your EMR or integration engine POSTs a FHIR R4 Bundle (or a single FHIR resource) to a per-feed webhook. We generate a signing secret and a webhook URL. The secret is shown once, so save it right away. The pushed FHIR is normalized to StewardMD's canonical model.</div>
+        <div style="margin-top:14px"><button class="primary" id="whCreate">Create webhook</button></div>
+        <div class="msg" id="whMsg"></div>
+
+        <!-- one-time create result: webhook URL + signing secret (shown once) + config hint -->
+        <div id="whResult" style="display:none;margin-top:10px">
+          <div class="meta"><b>Webhook URL</b></div>
+          <div class="json" id="whUrl" style="display:block;margin-top:4px"></div>
+          <div class="meta" style="margin-top:8px"><b>Signing secret</b> <span class="hint">save this now, it will not be shown again</span></div>
+          <div class="row" style="margin-top:4px">
+            <div><input id="whSecret" readonly autocapitalize="off" spellcheck="false"></div>
+            <div style="flex:0 0 auto"><button class="ghost" id="whCopy">Copy</button></div>
+          </div>
+          <div class="hint" id="whHint" style="margin-top:8px"></div>
+        </div>
+       </div>
+      </div>
+
+      <!-- Connections dashboard: this organization's FHIR connections AND HL7 v2 feeds in one table. -->
+      <div class="card" data-section="connections">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections dashboard</b><button class="ghost" id="dashReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" id="dashCounts" style="margin-top:4px"></div>
+        <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
+      </div>
+
+      <!-- Sync schedule: this organization's auto-sync cadence per connection (self-service refresh interval,
+           manual "Sync now", and a computed next-due), so an admin manages their own refresh cadence without
+           contacting us. Reuses the SAME connections list the dashboard above renders (GET /all); automatic
+           runs happen on the owner-wired cron (POST /sync-run) -- this panel only lets an admin set the
+           interval and trigger an on-demand run of the SAME reachability heartbeat. -->
+      <div class="card" data-section="automation">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Sync schedule</b><button class="ghost" id="syncReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" style="margin-top:4px">Set how often each connection is automatically checked for reachability. Automatic runs happen on our schedule; use Sync now to run one on demand.</div>
+        <div class="hint" id="syncSummary" style="margin-top:4px"></div>
+        <div id="syncPanel" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Reload, to view the sync schedule.</div></div>
+      </div>
+
+      <!-- Connection health: PHI-free operational health (Part 4 analytics), read on demand via Refresh so an
+           admin can see which of their connectors are healthy without contacting us. -->
+      <div class="card" data-section="monitoring">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connection health</b><button class="ghost" id="healthReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="healthSummary" style="margin-top:4px"></div>
+        <div id="health" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view connection health.</div></div>
+      </div>
+
+      <!-- Activity log: security-center-lite. The tenant's own PHI-free audit trail (who created/tested/
+           pulled/synced/discovered/mapped which connection, and when), read on demand via Refresh so an admin
+           can audit their integration without contacting us. Reuses the existing append-only audit; this is a
+           read-only view of it (GET /activity, Part 3/4 sibling to /health). -->
+      <div class="card" data-section="monitoring">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Activity log</b><button class="ghost" id="activityReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="activitySummary" style="margin-top:4px"></div>
+        <div id="activity" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view the activity log.</div></div>
+      </div>
+
+      <!-- Consent dashboard: this organization's data-sharing consents (status/purpose/scope/expiry), read on
+           demand via Refresh (GET /consents, PHI-free -- see functions/_connect/onboard/consents.js). An owner
+           or admin can revoke a GRANTED consent; the revoke is a REAL, LOCAL write that our own data-request
+           gate enforces immediately, so a revoked consent genuinely blocks further sharing even though
+           notifying the external ABDM Consent Manager is not wired yet. Behind its OWN narrow flag (separate
+           from the base EMR-connect flag), so a 404 here shows a panel-local message, NOT the page-wide
+           flag-off state -- the rest of the page may still be fully enabled. -->
+      <div class="card" data-section="governance">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Consent dashboard</b><button class="ghost" id="consentReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="consentSummary" style="margin-top:4px"></div>
+        <div id="consentFlagOff" class="hint" style="display:none;margin-top:4px">Consent dashboard is not enabled yet for your organization.</div>
+        <div id="consents" style="margin-top:12px"><div class="hint">Select your organization above, then Refresh, to view data-sharing consents.</div></div>
+      </div>
+
+      <!-- Members & access: view this organization's members and roles; an owner or admin may change a
+           member's role or remove a member. Reuses the EXISTING RBAC-gated, last-owner-protected backend
+           (functions/_connect/enterprise/members.js via GET/POST /members*) UNCHANGED; this panel only renders
+           the client-safe {userId,role} projection the server returns, and ALWAYS via textContent (never
+           innerHTML), so an opaque account id can never be interpreted as markup -- and PHI is never rendered
+           here. Write controls (role select / Remove) show ONLY when the signed-in caller's OWN role for the
+           SELECTED organization is owner or admin; every other role sees a read-only role label. Behind its
+           OWN narrow flag (separate from the base EMR-connect flag), so a 404 here shows a panel-local
+           message, NOT the page-wide flag-off state. -->
+      <div class="card" data-section="access">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Members &amp; access</b><button class="ghost" id="membersReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" style="margin-top:4px">View this organization's members and their roles. Owners and admins may change a member's role or remove a member; the last owner of an organization can never be demoted or removed.</div>
+        <div id="membersFlagOff" class="hint" style="display:none;margin-top:4px">Members &amp; access is not enabled yet for your organization.</div>
+        <div class="msg" id="membersMsg"></div>
+        <div id="members" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view members.</div></div>
+      </div>
+
+      </div><!-- /opsArea -->
+
+    </div>
+  </main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  // Same Firebase project + owner sign-in as admin/index.html.
+  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
+  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+
+  var API="/api/connect/onboard";
+  // The signed-in caller's OWN role per tenant (tenantId -> role), stashed whenever GET /tenants renders the
+  // picker. Drives the Members/Access panel's write-controls gate (owner/admin edit, everyone else read-only)
+  // WITHOUT a second network round-trip -- the role for every membership is already in the /tenants response.
+  var TENANT_ROLES={};
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
+  function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
+  function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
+  function tenant(){ var s=$("tenantSel"); return s?(s.value||"").trim():""; }
+  function ensureTenantOption(v){ var s=$("tenantSel"); if(!s||!v) return; if(![].slice.call(s.options).some(function(o){return o.value===v;})){ var o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); } }
+  function host(u){ try{ return new URL(u).host; }catch(e){ return u||""; } }
+
+  // ---- AI-assisted field mapping: shared editable-map renderer for the CSV + REST wizards. The suggestion
+  // (headers + the fixed SCCM field list only, via /suggest-mapping) is always shown for review, never applied
+  // silently — the admin edits any field name here before it is used to re-parse (CSV) or save (REST). Every
+  // value is set/read via .value only (never innerHTML with server text). ----
+  function renderMapEditor(containerId,headers,map){
+    var box=$(containerId); if(!box) return; clearEl(box);
+    (headers||[]).forEach(function(h){
+      var row=mkEl("div","row"); row.style.marginTop="6px"; row.style.alignItems="center";
+      var hd=mkEl("div",null,h); hd.style.flex="1";
+      var wrap=mkEl("div"); wrap.style.flex="0 0 220px";
+      var input=document.createElement("input");
+      input.setAttribute("data-map-header",h); input.value=(map&&map[h])||""; input.placeholder="(unmapped)";
+      input.autocapitalize="off"; input.spellcheck=false;
+      wrap.appendChild(input);
+      row.appendChild(hd); row.appendChild(wrap);
+      box.appendChild(row);
+    });
+  }
+  function readMapEditor(containerId){
+    var box=$(containerId), map={}; if(!box) return map;
+    [].slice.call(box.querySelectorAll("[data-map-header]")).forEach(function(input){
+      var h=input.getAttribute("data-map-header"), v=(input.value||"").trim();
+      if(v) map[h]=v;
+    });
+    return map;
+  }
+  function splitHeaders(raw){ return String(raw||"").split(/[\n,]/).map(function(s){return s.trim();}).filter(Boolean); }
+
+  // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
+  var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
+  function jpost(path,obj){ return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(obj)}); }
+
+  // A GET /list returning 404 means the flag is off (the route only exists when the flag is on).
+  function showFlagOff(){ $("flagOff").style.display=""; $("work").style.display="none"; }
+  function hideFlagOff(){ $("flagOff").style.display="none"; }
+  function flagOffVisible(){ return $("flagOff").style.display!=="none"; }
+
+  // Map an HTTP result to a plain owner-facing error (404 is handled separately as flag-off).
+  function httpErr(x){
+    if(x.s===401) return "Sign in with an authorized owner or admin account.";
+    if(x.s===403) return "Your account cannot manage EMR connections for this organization.";
+    var e=x.d&&x.d.error;
+    return "Something went wrong"+(e?" ("+e+")":" ("+x.s+")")+".";
+  }
+  // Test-endpoint error classes -> actionable copy.
+  var TESTERR={
+    "bad-url":"That URL is not valid or is not an allowed https address.",
+    "tls":"There was a TLS or certificate problem reaching that server.",
+    "unauthorized":"Authentication failed. Check the token or SMART credentials.",
+    "not-fhir":"That endpoint did not return a FHIR CapabilityStatement.",
+    "unreachable":"Could not reach that server. Check the URL and that it is online.",
+    "not-configured":"This connection is not configured on the server yet. Ask the StewardMD owner to finish wiring a Hyperdrive database driver."
+  };
+  // "not-fhir" also doubles as "unexpected response shape" for a rest-json/dicomweb probe (no CapabilityStatement
+  // there), so give it accurate copy instead of the FHIR-specific default when the caller tells us the connection type.
+  function testMsg(err,type){
+    if(type==="rest-json" && err==="not-fhir") return "That endpoint did not return the expected JSON shape (an array of rows, or {results:[...]}).";
+    if(type==="dicomweb" && err==="not-fhir") return "That endpoint did not return the expected DICOM-JSON study array.";
+    if(type==="graphql" && err==="not-fhir") return "That endpoint did not return the expected GraphQL response shape (data or errors).";
+    return TESTERR[err]||("The test failed ("+esc(err||"unknown")+").");
+  }
+
+  // ---- auth UI ----
+  function signedInUI(user){
+    var on=!!user;
+    $("who").textContent=on?("Signed in · "+(user.email||user.displayName||"")):"Not signed in";
+    $("signInBtn").style.display=on?"none":""; $("signOutBtn").style.display=on?"":"none";
+    $("gate").style.display=on?"none":"";
+    if(!flagOffVisible()) $("work").style.display=on?"":"none";
+  }
+  $("signInBtn").onclick=function(){ if(auth) auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ say("tenantMsg","err","Sign-in failed: "+((e&&e.message)||e)); }); };
+  $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
+
+  // ---- auth method toggle ----
+  $("aMethod").onchange=function(){ var smart=$("aMethod").value==="smart"; $("fToken").style.display=smart?"none":""; $("fSmart").style.display=smart?"":"none"; };
+
+  // ---- Detect: unauthenticated FHIR capability probe (pre-fills auth method + token endpoint) ----
+  function detectSay(k,t){ say("detectMsg",k,t); }
+  function doDetect(){
+    if(!tenant()){ detectSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var base=($("aBase").value||"").trim();
+    if(!base){ detectSay("err","Enter a FHIR base URL first."); return; }
+    $("aDetect").disabled=true; detectSay("","Detecting...");
+    jpost(API+"/discover",{tenantId:tenant(),baseUrl:base}).then(function(x){
+      $("aDetect").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok||!x.d.detected){ detectSay("err",testMsg(x.d&&x.d.error)); return; }
+      var d=x.d.detected;
+      $("aType").value="fhir"; applyType();
+      $("aMethod").value=(d.smart&&d.smart.supported)?"smart":"token";
+      $("aMethod").onchange();
+      if(d.smart&&d.smart.tokenEndpoint) $("aTokenEp").value=d.smart.tokenEndpoint;
+      detectSay("ok","Detected"+(d.fhirVersion?(" FHIR "+d.fhirVersion):"")+(d.softwareName?(", "+d.softwareName):"")+". Authentication pre-filled, review before saving.");
+    }).catch(function(){ $("aDetect").disabled=false; detectSay("err","Sign in first."); });
+  }
+  $("aDetect").onclick=doDetect;
+
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push vs REST/JSON vs DICOMweb vs GraphQL vs SQL) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook", rest=v==="rest", dicom=v==="dicom", graphql=v==="graphql", sql=v==="sql";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none"; $("fRest").style.display=rest?"":"none"; $("fDicom").style.display=dicom?"":"none"; $("fGraphql").style.display=graphql?"":"none"; $("fSql").style.display=sql?"":"none";
+    // #fFhir also holds the FHIR-only Detect button, so hiding it for rest/dicom/graphql/sql (as for csv/hl7/webhook) hides Detect too.
+    $("fFhir").style.display=(csv||hl7||wh||rest||dicom||graphql||sql)?"none":""; }
+  $("aType").onchange=applyType;
+
+  // ---- CSV upload: one-shot parse + preview (no saved connection) ----
+  var CSV_MAX=2000000;
+  function csvSay(k,t){ say("csvMsg",k,t); }
+  function renderCsvResult(resp){
+    resp=resp||{}; var b=resp.bundle||{}, w=resp.warnings||[];
+    var rows=resp.rowsParsed||0, cols=(resp.columns&&resp.columns.length)||0;
+    var obs=(b.observations&&b.observations.length)||0, drs=(b.diagnosticReports&&b.diagnosticReports.length)||0;
+    var c=$("csvCounts"); c.style.display="";
+    c.innerHTML='<b>Parsed:</b> '+rows+' row'+(rows===1?'':'s')+' x '+cols+' column'+(cols===1?'':'s')+' &middot; <b>Normalized:</b> '+obs+' observation'+(obs===1?'':'s')+', '+drs+' report'+(drs===1?'':'s');
+    var wd=$("csvWarn"); wd.style.display="";
+    if(w.length){ wd.innerHTML='<div class="meta" style="margin-top:8px"><b>Warnings ('+w.length+')</b></div><ul style="margin:6px 0 0;padding-left:18px">'+w.map(function(m){return '<li class="hint">'+esc(m)+'</li>';}).join("")+'</ul>'; }
+    else { wd.innerHTML='<div class="meta ok" style="margin-top:8px">No structural warnings.</div>'; }
+    var j=$("csvJson"); j.style.display=""; j.textContent=JSON.stringify(b,null,2);
+  }
+  var lastCsvText="", lastCsvHeaders=[];
+  function submitCsv(text,columnMap){
+    if(!tenant()){ csvSay("err","Enter your organization / tenant ID at the top first."); return; }
+    if(!text||!text.trim()){ csvSay("err","That file looks empty."); return; }
+    if(text.length>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    $("csvParse").disabled=true; csvSay("","Parsing and normalizing...");
+    var name=($("aName").value||"").trim();
+    lastCsvText=text;
+    var body={tenantId:tenant(),name:name||undefined,csv:text};
+    if(columnMap&&Object.keys(columnMap).length) body.columnMap=columnMap;
+    jpost(API+"/csv",body).then(function(x){
+      $("csvParse").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===413||(x.d&&x.d.error==="too-large")){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+      if(x.s===403){ csvSay("err","Your account cannot view patient data for this organization."); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ csvSay("err",httpErr(x)); return; }
+      csvSay("ok","Parsed and normalized. Review the result below.");
+      lastCsvHeaders=x.d.columns||[];
+      $("csvSuggestBtn").style.display=lastCsvHeaders.length?"":"none";
+      renderCsvResult(x.d);
+    }).catch(function(){ $("csvParse").disabled=false; csvSay("err","Sign in first."); });
+  }
+  $("csvParse").onclick=function(){
+    var f=$("aCsvFile").files&&$("aCsvFile").files[0];
+    if(!f){ csvSay("err","Choose a CSV file first."); return; }
+    if(f.size>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
+    var rd=new FileReader();
+    rd.onload=function(){ submitCsv(String(rd.result||"")); };
+    rd.onerror=function(){ csvSay("err","Could not read that file."); };
+    rd.readAsText(f);
+  };
+
+  // ---- AI-assisted field mapping: CSV wizard (Suggest mapping -> review/edit -> Apply and re-parse) ----
+  function csvMapSay(k,t){ say("csvMapMsg",k,t); }
+  function csvSuggestGo(){
+    if(!tenant()){ csvMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    if(!lastCsvHeaders.length){ csvMapSay("err","Parse a CSV file first."); return; }
+    $("csvSuggestBtn").disabled=true; csvMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:lastCsvHeaders}).then(function(x){
+      $("csvSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ csvMapSay("err",httpErr(x)); return; }
+      $("csvMapWrap").style.display="";
+      renderMapEditor("csvMapEditor",lastCsvHeaders,x.d.map||{});
+      $("csvApplyMapBtn").style.display="";
+      csvMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field, then apply.");
+    }).catch(function(){ $("csvSuggestBtn").disabled=false; csvMapSay("err","Sign in first."); });
+  }
+  function csvApplyMapGo(){
+    if(!lastCsvText){ csvMapSay("err","Parse a CSV file first."); return; }
+    submitCsv(lastCsvText, readMapEditor("csvMapEditor"));
+  }
+  $("csvSuggestBtn").onclick=csvSuggestGo;
+  $("csvApplyMapBtn").onclick=csvApplyMapGo;
+
+  // ---- HL7 v2 feed: create (secret shown once) / list / delete ----
+  function hl7Say(k,t){ say("hl7Msg",k,t); }
+  function parseTypes(){ var raw=($("aHl7Types").value||"").trim(); if(!raw) return undefined; var a=raw.split(",").map(function(s){return s.trim();}).filter(Boolean); return a.length?a:undefined; }
+  function renderHl7Created(d){
+    d=d||{}; $("hl7Result").style.display="";
+    $("hl7Url").textContent=d.ingestUrl||"";
+    $("hl7Secret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("hl7Hint").innerHTML='POST the raw HL7 v2 message as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function hl7CreateGo(){
+    if(!tenant()){ hl7Say("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ hl7Say("err","A feed name is required."); return; }
+    $("hl7Create").disabled=true; hl7Say("","Creating feed…");
+    var body={tenantId:tenant(),name:name}; var t=parseTypes(); if(t)body.allowedMessageTypes=t;
+    jpost(API+"/hl7-feed",body).then(function(x){
+      $("hl7Create").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ hl7Say("err","Your account cannot manage feeds for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ hl7Say("err",httpErr(x)); return; }
+      hl7Say("ok","Feed created. Save the signing secret below now, it will not be shown again.");
+      renderHl7Created(x.d); loadDashboard();
+    }).catch(function(){ $("hl7Create").disabled=false; hl7Say("err","Sign in first."); });
+  }
+  $("hl7Create").onclick=hl7CreateGo;
+  $("hl7Copy").onclick=function(){ var i=$("hl7Secret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } hl7Say("ok","Secret copied. Store it somewhere safe now."); };
+
+  // ---- Webhook / FHIR push: create (secret shown once) / copy URL / delete ----
+  function whSay(k,t){ say("whMsg",k,t); }
+  function renderWebhookCreated(d){
+    d=d||{}; $("whResult").style.display="";
+    $("whUrl").textContent=d.ingestUrl||"";
+    $("whSecret").value=d.secret||"";
+    var H=d.headers||{}, feedH=H.feed||"X-SMD-Feed", tsH=H.timestamp||"X-SMD-Timestamp", sigH=H.signature||"X-SMD-Signature";
+    $("whHint").innerHTML='POST a FHIR R4 Bundle or a single FHIR resource as the request body. Sign <code>timestamp + "." + rawBody</code> with HMAC-SHA256 using the secret above.<br>'+
+      'Send headers <code>'+esc(feedH)+'</code> = <code>'+esc(d.feedId||"")+'</code>, <code>'+esc(tsH)+'</code> = milliseconds since epoch, and <code>'+esc(sigH)+'</code> = the hex HMAC.';
+  }
+  function whCreateGo(){
+    if(!tenant()){ whSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var name=($("aName").value||"").trim();
+    if(!name){ whSay("err","A webhook name is required."); return; }
+    $("whCreate").disabled=true; whSay("","Creating webhook…");
+    jpost(API+"/webhook-feed",{tenantId:tenant(),name:name}).then(function(x){
+      $("whCreate").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s===403){ whSay("err","Your account cannot manage webhooks for this organization."); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ whSay("err",httpErr(x)); return; }
+      whSay("ok","Webhook created. Save the signing secret below now, it will not be shown again.");
+      renderWebhookCreated(x.d); loadDashboard();
+    }).catch(function(){ $("whCreate").disabled=false; whSay("err","Sign in first."); });
+  }
+  $("whCreate").onclick=whCreateGo;
+  $("whCopy").onclick=function(){ var i=$("whSecret"); try{ i.select(); document.execCommand("copy"); }catch(e){} if(navigator.clipboard){ navigator.clipboard.writeText(i.value).catch(function(){}); } whSay("ok","Secret copied. Store it somewhere safe now."); };
+
+  // The constant webhook URLs a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
+  // URL path), so these are safe to copy and are NOT secrets. HL7 -> /ingress/hl7; FHIR push -> /ingress/fhir.
+  function ingestUrl(){ try{ return location.origin+"/api/connect/ingress/hl7"; }catch(e){ return "/api/connect/ingress/hl7"; } }
+  function webhookIngestUrl(){ try{ return location.origin+"/api/connect/ingress/fhir"; }catch(e){ return "/api/connect/ingress/fhir"; } }
+  function copyFeedUrl(){ var u=ingestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
+  function copyWebhookUrl(){ var u=webhookIngestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
+  function doDeleteFeed(id){
+    if(!confirm("Delete this feed? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/hl7-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Feed deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+  function doDeleteWebhook(id){
+    if(!confirm("Delete this webhook? Its signing secret is erased and the webhook stops accepting messages. This cannot be undone.")) return;
+    api(API+"/webhook-feed/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Webhook deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- add / save ----
+  function addBody(){
+    var method=$("aMethod").value, a={method:method};
+    if(method==="token"){ a.token=($("aToken").value||"").trim(); var h=($("aHeader").value||"").trim(); if(h)a.headerName=h; }
+    else {
+      a.clientId=($("aClientId").value||"").trim();
+      var te=($("aTokenEp").value||"").trim(); if(te)a.tokenEndpoint=te;
+      var jwk=($("aJwk").value||"").trim(); if(jwk){ a.privateKeyJwk=JSON.parse(jwk); } // throws -> caught by caller
+      var kid=($("aKid").value||"").trim(); if(kid)a.kid=kid;
+      var alg=($("aAlg").value||"").trim(); if(alg)a.alg=alg;
+    }
+    return { tenantId:tenant(), name:($("aName").value||"").trim(), type:"fhir", fhirBaseUrl:($("aBase").value||"").trim(), auth:a };
+  }
+  function clearAddForm(){ ["aName","aBase","aToken","aHeader","aClientId","aTokenEp","aJwk","aKid","aAlg"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function doSave(thenTest){
+    if(!tenant()){ say("addMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body; try{ body=addBody(); }catch(e){ say("addMsg","err","The SMART private key must be valid JWK JSON."); return; }
+    if(!body.name){ say("addMsg","err","A connection name is required."); return; }
+    if(!body.fhirBaseUrl){ say("addMsg","err","A FHIR base URL is required."); return; }
+    if(body.auth.method==="token" && !body.auth.token){ say("addMsg","err","An access token or API key is required."); return; }
+    if(body.auth.method==="smart" && !body.auth.clientId){ say("addMsg","err","A client ID is required for SMART."); return; }
+    $("addSave").disabled=true; $("addSaveTest").disabled=true; say("addMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("addSave").disabled=false; $("addSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("addMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearAddForm(); loadDashboard();
+      if(thenTest){ say("addMsg","","Saved. Testing connection…"); runTest(id,"addMsg"); }
+      else { say("addMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("addSave").disabled=false; $("addSaveTest").disabled=false; say("addMsg","err","Sign in first."); });
+  }
+  $("addSave").onclick=function(){ doSave(false); };
+  $("addSaveTest").onclick=function(){ doSave(true); };
+
+  // ---- REST / JSON lab API: save (+optional test), same shape as the FHIR add/save flow above ----
+  function restBody(){
+    var a={method:"token",token:($("aRestToken").value||"").trim()};
+    var h=($("aRestHeader").value||"").trim(); if(h)a.headerName=h;
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"rest-json", baseUrl:($("aRestBase").value||"").trim(), auth:a };
+    var rp=($("aRestPath").value||"").trim(); if(rp)body.resultsPath=rp;
+    var pp=($("aRestParam").value||"").trim(); if(pp)body.patientParam=pp;
+    var cm=readMapEditor("restMapEditor"); if(Object.keys(cm).length) body.columnMap=cm;
+    return body;
+  }
+  function clearRestForm(){
+    ["aRestBase","aRestToken","aRestHeader","aRestPath","aRestParam","aRestHeaders"].forEach(function(id){ var e=$(id); if(e)e.value=""; });
+    $("restMapWrap").style.display="none"; clearEl($("restMapEditor"));
+  }
+
+  // ---- AI-assisted field mapping: REST wizard (the admin types headers, since there is no server preview) ----
+  function restMapSay(k,t){ say("restMapMsg",k,t); }
+  function restSuggestGo(){
+    if(!tenant()){ restMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var headers=splitHeaders($("aRestHeaders").value);
+    if(!headers.length){ restMapSay("err","Enter at least one column header first."); return; }
+    $("restSuggestBtn").disabled=true; restMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:headers}).then(function(x){
+      $("restSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ restMapSay("err",httpErr(x)); return; }
+      $("restMapWrap").style.display="";
+      renderMapEditor("restMapEditor",headers,x.d.map||{});
+      restMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field before saving.");
+    }).catch(function(){ $("restSuggestBtn").disabled=false; restMapSay("err","Sign in first."); });
+  }
+  $("restSuggestBtn").onclick=restSuggestGo;
+  function doRestSave(thenTest){
+    if(!tenant()){ say("restMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=restBody();
+    if(!body.name){ say("restMsg","err","A connection name is required."); return; }
+    if(!body.baseUrl){ say("restMsg","err","A REST base URL is required."); return; }
+    if(!body.auth.token){ say("restMsg","err","An access token or API key is required."); return; }
+    $("restSave").disabled=true; $("restSaveTest").disabled=true; say("restMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("restSave").disabled=false; $("restSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("restMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearRestForm(); loadDashboard();
+      if(thenTest){ say("restMsg","","Saved. Testing connection…"); runTest(id,"restMsg","rest-json"); }
+      else { say("restMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("restSave").disabled=false; $("restSaveTest").disabled=false; say("restMsg","err","Sign in first."); });
+  }
+  $("restSave").onclick=function(){ doRestSave(false); };
+  $("restSaveTest").onclick=function(){ doRestSave(true); };
+
+  // ---- DICOMweb / imaging (metadata): save (+optional test), same shape as the REST/JSON save flow above ----
+  function dicomBody(){
+    var a={method:"token",token:($("aDicomToken").value||"").trim()};
+    var h=($("aDicomHeader").value||"").trim(); if(h)a.headerName=h;
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"dicomweb", baseUrl:($("aDicomBase").value||"").trim(), auth:a };
+    var sp=($("aDicomPath").value||"").trim(); if(sp)body.studiesPath=sp;
+    var pt=($("aDicomTag").value||"").trim(); if(pt)body.patientTag=pt;
+    return body;
+  }
+  function clearDicomForm(){ ["aDicomBase","aDicomToken","aDicomHeader","aDicomPath","aDicomTag"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function doDicomSave(thenTest){
+    if(!tenant()){ say("dicomMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=dicomBody();
+    if(!body.name){ say("dicomMsg","err","A connection name is required."); return; }
+    if(!body.baseUrl){ say("dicomMsg","err","A DICOMweb base URL is required."); return; }
+    if(!body.auth.token){ say("dicomMsg","err","An access token or API key is required."); return; }
+    $("dicomSave").disabled=true; $("dicomSaveTest").disabled=true; say("dicomMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("dicomSave").disabled=false; $("dicomSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("dicomMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearDicomForm(); loadDashboard();
+      if(thenTest){ say("dicomMsg","","Saved. Testing connection…"); runTest(id,"dicomMsg","dicomweb"); }
+      else { say("dicomMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("dicomSave").disabled=false; $("dicomSaveTest").disabled=false; say("dicomMsg","err","Sign in first."); });
+  }
+  $("dicomSave").onclick=function(){ doDicomSave(false); };
+  $("dicomSaveTest").onclick=function(){ doDicomSave(true); };
+
+  // ---- GraphQL lab API: save (+optional test), same shape as the REST/JSON save flow above. The query is
+  // sent AS-IS (never rewritten); the patient value travels ONLY inside variables, so it can never be typed
+  // into (or leak through) the query text itself. ----
+  function graphqlBody(){
+    var a={method:"token",token:($("aGraphqlToken").value||"").trim()};
+    var h=($("aGraphqlHeader").value||"").trim(); if(h)a.headerName=h;
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"graphql", baseUrl:($("aGraphqlBase").value||"").trim(), query:($("aGraphqlQuery").value||"").trim(), auth:a };
+    var pv=($("aGraphqlVar").value||"").trim(); if(pv)body.patientVar=pv;
+    var rp=($("aGraphqlResultsPath").value||"").trim(); if(rp)body.resultsPath=rp;
+    var cm=readMapEditor("graphqlMapEditor"); if(Object.keys(cm).length) body.columnMap=cm;
+    return body;
+  }
+  function clearGraphqlForm(){
+    ["aGraphqlBase","aGraphqlToken","aGraphqlHeader","aGraphqlQuery","aGraphqlVar","aGraphqlResultsPath","aGraphqlHeaders"].forEach(function(id){ var e=$(id); if(e)e.value=""; });
+    $("graphqlMapWrap").style.display="none"; clearEl($("graphqlMapEditor"));
+  }
+
+  // ---- AI-assisted field mapping: GraphQL wizard (the admin types headers, since there is no server preview) ----
+  function graphqlMapSay(k,t){ say("graphqlMapMsg",k,t); }
+  function graphqlSuggestGo(){
+    if(!tenant()){ graphqlMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var headers=splitHeaders($("aGraphqlHeaders").value);
+    if(!headers.length){ graphqlMapSay("err","Enter at least one column header first."); return; }
+    $("graphqlSuggestBtn").disabled=true; graphqlMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:headers}).then(function(x){
+      $("graphqlSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ graphqlMapSay("err",httpErr(x)); return; }
+      $("graphqlMapWrap").style.display="";
+      renderMapEditor("graphqlMapEditor",headers,x.d.map||{});
+      graphqlMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field before saving.");
+    }).catch(function(){ $("graphqlSuggestBtn").disabled=false; graphqlMapSay("err","Sign in first."); });
+  }
+  $("graphqlSuggestBtn").onclick=graphqlSuggestGo;
+  function doGraphqlSave(thenTest){
+    if(!tenant()){ say("graphqlMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=graphqlBody();
+    if(!body.name){ say("graphqlMsg","err","A connection name is required."); return; }
+    if(!body.baseUrl){ say("graphqlMsg","err","A GraphQL endpoint URL is required."); return; }
+    if(!body.auth.token){ say("graphqlMsg","err","An access token or API key is required."); return; }
+    if(!body.query){ say("graphqlMsg","err","A GraphQL query is required."); return; }
+    $("graphqlSave").disabled=true; $("graphqlSaveTest").disabled=true; say("graphqlMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("graphqlSave").disabled=false; $("graphqlSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("graphqlMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearGraphqlForm(); loadDashboard();
+      if(thenTest){ say("graphqlMsg","","Saved. Testing connection…"); runTest(id,"graphqlMsg","graphql"); }
+      else { say("graphqlMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("graphqlSave").disabled=false; $("graphqlSaveTest").disabled=false; say("graphqlMsg","err","Sign in first."); });
+  }
+  $("graphqlSave").onclick=function(){ doGraphqlSave(false); };
+  $("graphqlSaveTest").onclick=function(){ doGraphqlSave(true); };
+
+  // ---- SQL / database lab feed: save (+optional test). NO URL, NO admin secret -- the database credentials
+  // live in the owner's Hyperdrive binding (referenced here by NAME only); we never collect or store a
+  // connection string. Config-only today: Test/Pull honestly report "not configured" until the owner wires a
+  // real driver (see the note in the #fSql block above). ----
+  function sqlBody(){
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"sql",
+      bindingName:($("aSqlBinding").value||"").trim(), queryTemplate:($("aSqlQuery").value||"").trim() };
+    var cm=readMapEditor("sqlMapEditor"); if(Object.keys(cm).length) body.columnMap=cm;
+    return body;
+  }
+  function clearSqlForm(){
+    ["aSqlBinding","aSqlQuery","aSqlHeaders"].forEach(function(id){ var e=$(id); if(e)e.value=""; });
+    $("sqlMapWrap").style.display="none"; clearEl($("sqlMapEditor"));
+  }
+
+  // ---- AI-assisted field mapping: SQL wizard (the admin types headers, since there is no server preview) ----
+  function sqlMapSay(k,t){ say("sqlMapMsg",k,t); }
+  function sqlSuggestGo(){
+    if(!tenant()){ sqlMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var headers=splitHeaders($("aSqlHeaders").value);
+    if(!headers.length){ sqlMapSay("err","Enter at least one column header first."); return; }
+    $("sqlSuggestBtn").disabled=true; sqlMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:headers}).then(function(x){
+      $("sqlSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ sqlMapSay("err",httpErr(x)); return; }
+      $("sqlMapWrap").style.display="";
+      renderMapEditor("sqlMapEditor",headers,x.d.map||{});
+      sqlMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field before saving.");
+    }).catch(function(){ $("sqlSuggestBtn").disabled=false; sqlMapSay("err","Sign in first."); });
+  }
+  $("sqlSuggestBtn").onclick=sqlSuggestGo;
+  function doSqlSave(thenTest){
+    if(!tenant()){ say("sqlMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=sqlBody();
+    if(!body.name){ say("sqlMsg","err","A connection name is required."); return; }
+    if(!body.bindingName){ say("sqlMsg","err","A Hyperdrive binding name is required."); return; }
+    if(!body.queryTemplate){ say("sqlMsg","err","A read-only query template is required."); return; }
+    $("sqlSave").disabled=true; $("sqlSaveTest").disabled=true; say("sqlMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("sqlSave").disabled=false; $("sqlSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("sqlMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearSqlForm(); loadDashboard();
+      if(thenTest){ say("sqlMsg","","Saved. Testing connection…"); runTest(id,"sqlMsg","sql"); }
+      else { say("sqlMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("sqlSave").disabled=false; $("sqlSaveTest").disabled=false; say("sqlMsg","err","Sign in first."); });
+  }
+  $("sqlSave").onclick=function(){ doSqlSave(false); };
+  $("sqlSaveTest").onclick=function(){ doSqlSave(true); };
+
+  // ---- test ----
+  function runTest(id,msgId,type){
+    say(msgId,"","Testing connection…");
+    jpost(API+"/test/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200){ say(msgId,"err",httpErr(x)); return; }
+      var d=x.d||{};
+      if(d.ok){
+        var okMsg=type==="rest-json"?"Connected. The results endpoint responded correctly."
+          :type==="dicomweb"?"Connected. The studies endpoint responded correctly."
+          :type==="graphql"?"Connected. The GraphQL endpoint responded correctly."
+          :type==="sql"?"Connected. The database query responded correctly."
+          :("Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+".");
+        say(msgId,"ok",okMsg);
+      }
+      else { say(msgId,"err",testMsg(d.error,type)); }
+      loadDashboard();
+    }).catch(function(){ say(msgId,"err","Sign in first."); });
+  }
+
+  // ---- pull a patient ----
+  function doPull(id){
+    var input=$("dash").querySelector('[data-pid="'+id+'"]'), out=$("dash").querySelector('[data-json="'+id+'"]');
+    var pid=input?(input.value||"").trim():"";
+    if(!pid){ if(out){ out.style.display=""; out.textContent="Enter a patient ID first."; } return; }
+    if(out){ out.style.display=""; out.textContent="Pulling patient…"; }
+    jpost(API+"/pull/"+encodeURIComponent(id),{tenantId:tenant(),patientId:pid}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ if(out) out.textContent=(x.s===403?"Your account cannot read patient data for this organization.":httpErr(x)); return; }
+      if(out) out.textContent=JSON.stringify(x.d.bundle,null,2);
+    }).catch(function(){ if(out) out.textContent="Sign in first."; });
+  }
+
+  // ---- Auto Validation: config + connector conformance + reachability in one report (goes beyond Test) ----
+  // The report is PHI-free (names + pass/fail + a short detail class only -- see functions/_connect/onboard/
+  // validate-engine.js); as defense in depth, this renderer builds the DOM directly and writes every field via
+  // textContent (never innerHTML), so nothing in the payload can ever be interpreted as markup.
+  var VALIDATE_CHECK_LABELS={"config":"Configuration","conformance":"Connector conformance","reachability":"Reachability"};
+  function validateCheckLabel(n){ return VALIDATE_CHECK_LABELS[n]||String(n||"check"); }
+  function renderValidateReport(container,report){
+    report=report||{}; clearEl(container);
+    var checks=Array.isArray(report.checks)?report.checks:[];
+    var overall=mkEl("div","item");
+    var ohd=mkEl("div","h");
+    ohd.appendChild(mkEl("b",null,"Validation report"));
+    var ochip=mkEl("span","st "+(report.ok?"verified":"rejected"),report.ok?"All checks passed":"Issues found");
+    ochip.style.marginLeft="auto";
+    ohd.appendChild(ochip);
+    overall.appendChild(ohd);
+    container.appendChild(overall);
+    checks.forEach(function(c){
+      var item=mkEl("div","item"); item.style.marginTop="6px";
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("b",null,validateCheckLabel(c.name)));
+      var chip=mkEl("span","st "+(c.ok?"verified":"rejected"),c.ok?"Pass":"Fail");
+      chip.style.marginLeft="auto";
+      hd.appendChild(chip);
+      item.appendChild(hd);
+      if(c.detail) item.appendChild(mkEl("div","meta",c.detail));
+      container.appendChild(item);
+    });
+  }
+  function doValidate(id){
+    var out=$("dash").querySelector('[data-vout="'+id+'"]');
+    if(out){ clearEl(out); out.appendChild(mkEl("div","hint","Validating...")); }
+    jpost(API+"/validate/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(!out) return;
+      if(x.s!==200||!x.d){ clearEl(out); out.appendChild(mkEl("div","hint",httpErr(x))); return; }
+      renderValidateReport(out,x.d);
+    }).catch(function(){ if(out){ clearEl(out); out.appendChild(mkEl("div","hint","Sign in first.")); } });
+  }
+  function runValidateRow(id){
+    var sf=$("dash").querySelector('[data-validate="'+id+'"]'); if(!sf) return;
+    sf.style.display=(sf.style.display==="none"?"":"none");
+    if(sf.style.display!=="none") doValidate(id);
+  }
+
+  // ---- delete ----
+  function doDelete(id){
+    if(!confirm("Delete this connection? This removes its stored credentials and cannot be undone.")) return;
+    api(API+"/"+encodeURIComponent(id)+"?tenant="+encodeURIComponent(tenant()),{method:"DELETE"}).then(function(x){
+      if(x.s===404 && x.d && x.d.error==="not_found"){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("tenantMsg","err",httpErr(x)); return; }
+      say("tenantMsg","ok","Connection deleted."); loadDashboard();
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- tenant picker (populated from GET /tenants: the caller's OWN memberships) ----
+  function showNoMembership(){ $("noTenant").style.display=""; $("opsArea").style.display="none"; $("tenantSel").innerHTML='<option value="" disabled selected>No organizations available</option>'; }
+  function hideNoMembership(){ $("noTenant").style.display="none"; $("opsArea").style.display=""; }
+  function renderTenantOptions(ts){
+    // Stash each membership's role (used by the Members/Access panel to decide read-only vs editable).
+    TENANT_ROLES={}; ts.forEach(function(t){ TENANT_ROLES[t.tenantId]=t.role; });
+    // Preserve a still-valid prior selection; otherwise leave nothing selected (a placeholder). The selected
+    // option MUST be marked explicitly: a disabled placeholder with no `selected` would let the browser
+    // auto-select the first enabled option (a false auto-selection).
+    var s=$("tenantSel"), prev=s.value, keep=ts.some(function(t){return t.tenantId===prev;})?prev:"", html="";
+    if(ts.length!==1) html+='<option value="" disabled'+(keep?"":" selected")+'>Select your organization...</option>';
+    html+=ts.map(function(t){
+      var name=t.name?esc(t.name):esc(t.tenantId);
+      return '<option value="'+esc(t.tenantId)+'"'+(t.tenantId===keep?" selected":"")+'>'+name+' ('+esc(t.role)+')</option>';
+    }).join("");
+    s.innerHTML=html;
+  }
+  function onTenantChange(){ say("tenantMsg","",""); loadDashboard(); }
+  function loadTenants(){
+    api(API+"/tenants").then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ say("tenantMsg","err",httpErr(x)); return; }
+      var ts=x.d.tenants||[];
+      if(!ts.length){ showNoMembership(); return; }
+      hideNoMembership(); renderTenantOptions(ts);
+      if(ts.length===1){ $("tenantSel").value=ts[0].tenantId; onTenantChange(); }   // single tenant auto-selects
+      else if(tenant()){ onTenantChange(); }                                        // a still-valid selection refreshes
+    }).catch(function(){ say("tenantMsg","err","Sign in first."); });
+  }
+
+  // ---- connections dashboard (unified FHIR connections + HL7 v2 feeds, one table) ----
+  function statusBadge(c){
+    var lt=c.lastTest;
+    if(lt&&lt.ok) return '<span class="st verified">Connected</span>';
+    if(lt&&!lt.ok) return '<span class="st rejected">'+esc(lt.error||"failed")+'</span>';
+    return '<span class="st unverified">not tested</span>';
+  }
+  function feedStatusBadge(f){ var s=String(f.status||"active"); return '<span class="st '+(s==="active"?"verified":"unverified")+'">'+esc(s)+'</span>'; }
+  // Connection-type badge: the row's REAL type (server-derived, safeView.type), not a hardcoded label. Falls
+  // back to the raw type string for anything not yet in this map (forward-compatible, never hides a type).
+  var TYPE_LABEL={"fhir":"FHIR","rest-json":"REST/JSON","dicomweb":"DICOMweb","graphql":"GraphQL","sql":"SQL / database","hl7v2":"HL7 v2","csv":"CSV","webhook":"Webhook"};
+  function typeLabel(t){ t=String(t||"fhir"); return TYPE_LABEL[t]||t; }
+  function fhirRow(c){ var id=esc(c.connectionId), lt=c.lastTest;
+    var last=lt?(lt.ok?("connected"+(lt.fhirVersion?" (FHIR "+esc(lt.fhirVersion)+")":"")):esc(lt.error||"failed")):"not tested";
+    return '<tr class="drow" data-cid="'+id+'">'+
+      '<td><b>'+esc(c.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Auth: '+esc(c.authMethod||"-")+'</div></td>'+
+      '<td><span class="cat">'+esc(typeLabel(c.type))+'</span></td>'+
+      '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
+      '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
+      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="validate" data-cid="'+id+'">Validate</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
+    '</tr>'+
+    '<tr data-msgrow="'+id+'" style="display:none"><td colspan="5"><div class="rowmsg msg" data-msg="'+id+'"></div></td></tr>'+
+    '<tr data-validate="'+id+'" style="display:none"><td colspan="5"><div data-vout="'+id+'"></div></td></tr>'+
+    '<tr data-pull="'+id+'" style="display:none"><td colspan="5">'+
+      '<label>Patient ID</label>'+
+      '<div class="row"><div><input data-pid="'+id+'" placeholder="e.g. 123 (from the EMR)" autocapitalize="off" spellcheck="false"></div><div style="flex:0 0 auto"><button class="primary" data-act="pullgo" data-cid="'+id+'">Pull</button></div></div>'+
+      '<div class="json" data-json="'+id+'" style="display:none"></div>'+
+    '</td></tr>';
+  }
+  function hl7Row(f){ var id=esc(f.feedId);
+    var types=(f.allowedMessageTypes&&f.allowedMessageTypes.length)?f.allowedMessageTypes.join(", "):"any";
+    return '<tr class="drow" data-fid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">Types: '+esc(types)+'</div></td>'+
+      '<td><span class="cat">HL7 v2</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-fact="copy" data-fid="'+id+'">Copy URL</button><button class="del" data-fact="del" data-fid="'+id+'">Delete</button></td>'+
+    '</tr>';
+  }
+  function webhookRow(f){ var id=esc(f.feedId);
+    return '<tr class="drow" data-wid="'+id+'">'+
+      '<td><b>'+esc(f.name||"(unnamed)")+'</b><div class="hint" style="margin-top:2px">FHIR Bundle / resource push</div></td>'+
+      '<td><span class="cat">FHIR push</span></td>'+
+      '<td class="mono">'+id+'</td>'+
+      '<td>'+feedStatusBadge(f)+'</td>'+
+      '<td class="acts"><button class="ghost" data-wact="copy" data-wid="'+id+'">Copy URL</button><button class="del" data-wact="del" data-wid="'+id+'">Delete</button></td>'+
+    '</tr>';
+  }
+  function renderDash(fhir,hl7,counts,webhook){
+    fhir=fhir||[]; hl7=hl7||[]; webhook=webhook||[];
+    var c=$("dashCounts");
+    var nf=(counts&&counts.fhir!=null)?counts.fhir:fhir.length, nh=(counts&&counts.hl7!=null)?counts.hl7:hl7.length, nw=(counts&&counts.webhook!=null)?counts.webhook:webhook.length;
+    var total=(counts&&counts.total!=null)?counts.total:(nf+nh+nw);
+    var seg=[nf+" FHIR", nh+" HL7"]; if(nw) seg.push(nw+" Webhook");
+    c.textContent=total?(total+" connection"+(total===1?"":"s")+" ("+seg.join(", ")+")"):"";
+    if(!total){ $("dash").innerHTML='<div class="hint">No connections yet. Add a FHIR connection, an HL7 v2 feed or a webhook above.</div>'; return; }
+    var rows=fhir.map(fhirRow).join("")+hl7.map(hl7Row).join("")+webhook.map(webhookRow).join("");
+    $("dash").innerHTML='<table class="dash"><thead><tr><th>Name</th><th>Type</th><th>Host / feed ID</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  function loadDashboard(){
+    if(!tenant()){ $("dash").innerHTML='<div class="hint">Select your organization above to view its connections.</div>'; $("dashCounts").textContent=""; return; }
+    $("dash").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/all?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("dash").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("dashCounts").textContent=""; return; }
+      renderDash(x.d.fhir||[], x.d.hl7||[], x.d.counts||null, x.d.webhook||[]);
+    }).catch(function(){ $("dash").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+
+  function clearEl(e){ while(e.firstChild) e.removeChild(e.firstChild); }
+  function mkEl(tag,cls,text){ var e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e; }
+
+  // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
+  // the Connections dashboard above renders) ----. Builds the DOM directly (mkEl/textContent only, never
+  // innerHTML), so a connection's name/type can never be interpreted as markup. "Next due" is a pure
+  // client-side read of syncIntervalMin + lastSyncAt (the same due rule sync.js's isDue() applies server-side,
+  // restated read-only here for display) -- it never round-trips to the server just to compute it.
+  function computeNextDue(c){
+    var interval=Number(c&&c.syncIntervalMin)||0;
+    if(!(interval>0)) return "off";
+    if(!c.lastSyncAt) return "due now";
+    var last=Date.parse(c.lastSyncAt);
+    if(!isFinite(last)) return "due now";
+    var next=last+interval*60000;
+    return next<=Date.now()?"due now":new Date(next).toLocaleString();
+  }
+  function saySync(id,k,t){ var m=$("syncPanel").querySelector('[data-smsg="'+id+'"]'); if(m){ m.className="rowmsg msg "+(k||""); m.textContent=t||""; } }
+  // Recompute and repaint ONLY the Next due cell for one row, from its CURRENT interval input value + its
+  // last-known lastSyncAt (stashed on the row via data-lastsyncat) -- used after Save interval / Sync now so
+  // those actions can update just the affected row in place, without a full panel reload that would also wipe
+  // the success/error message this same click just set.
+  function refreshNextDueCell(id){
+    var box=$("syncPanel"), tr=box.querySelector('tr[data-row-id="'+id+'"]'); if(!tr) return;
+    var inp=box.querySelector('[data-interval-input="'+id+'"]');
+    var interval=inp?parseInt((inp.value||"0"),10):0;
+    var cell=box.querySelector('[data-nextdue-cell="'+id+'"]');
+    if(cell) cell.textContent=computeNextDue({syncIntervalMin:interval,lastSyncAt:tr.getAttribute("data-lastsyncat")||null});
+  }
+  function renderSyncPanel(fhir){
+    fhir=Array.isArray(fhir)?fhir:[];
+    var box=$("syncPanel"), sum=$("syncSummary");
+    clearEl(box);
+    if(!fhir.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connections yet.")); return; }
+    var on=fhir.filter(function(c){return Number(c.syncIntervalMin)>0;}).length;
+    sum.textContent=fhir.length+" connection"+(fhir.length===1?"":"s")+", "+on+" with auto-sync on";
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Name","Type","Interval (min, 0 = off)","Last sync","Next due","Actions"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    fhir.forEach(function(c){
+      var id=c.connectionId;
+      var tr=mkEl("tr"); tr.setAttribute("data-row-id",id); tr.setAttribute("data-lastsyncat",c.lastSyncAt||"");
+      var tdName=mkEl("td"); tdName.appendChild(mkEl("b",null,c.name||"(unnamed)")); tr.appendChild(tdName);
+      tr.appendChild(mkEl("td",null,typeLabel(c.type)));
+      var tdInt=mkEl("td"); var inp=document.createElement("input");
+      inp.type="number"; inp.min="0"; inp.step="1"; inp.value=String(c.syncIntervalMin||0);
+      inp.setAttribute("data-interval-input",id); inp.style.width="90px";
+      tdInt.appendChild(inp); tr.appendChild(tdInt);
+      var tdLast=mkEl("td","hint",c.lastSyncAt?when(c.lastSyncAt):"never"); tdLast.setAttribute("data-lastsync-cell",id); tr.appendChild(tdLast);
+      var tdNext=mkEl("td","hint",computeNextDue(c)); tdNext.setAttribute("data-nextdue-cell",id); tr.appendChild(tdNext);
+      var tdAct=mkEl("td","acts");
+      var saveBtn=mkEl("button","ghost","Save interval"); saveBtn.setAttribute("data-sact","saveinterval"); saveBtn.setAttribute("data-cid",id);
+      var syncBtn=mkEl("button","ghost","Sync now"); syncBtn.setAttribute("data-sact","syncnow"); syncBtn.setAttribute("data-cid",id);
+      tdAct.appendChild(saveBtn); tdAct.appendChild(syncBtn);
+      tr.appendChild(tdAct);
+      tbody.appendChild(tr);
+      var msgTr=mkEl("tr"); var msgTd=document.createElement("td"); msgTd.colSpan=6;
+      var msgDiv=mkEl("div","rowmsg msg"); msgDiv.setAttribute("data-smsg",id);
+      msgTd.appendChild(msgDiv); msgTr.appendChild(msgTd); tbody.appendChild(msgTr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+  }
+  function loadSyncPanel(){
+    if(!tenant()){ $("syncPanel").innerHTML='<div class="hint">Select your organization above, then Reload, to view the sync schedule.</div>'; $("syncSummary").textContent=""; return; }
+    $("syncPanel").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/all?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("syncPanel").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("syncSummary").textContent=""; return; }
+      renderSyncPanel(x.d.fhir||[]);
+    }).catch(function(){ $("syncPanel").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  // Save interval / Sync now update ONLY their own row in place (interval/next-due, or last-sync/next-due)
+  // instead of reloading the whole panel -- a full reload would also wipe the success/error message this same
+  // action just set. Reload (or the next visit) still picks up the authoritative server state via GET /all.
+  function doSaveInterval(id){
+    var inp=$("syncPanel").querySelector('[data-interval-input="'+id+'"]');
+    var raw=inp?(inp.value||"").trim():"";
+    var n=raw===""?0:parseInt(raw,10);
+    if(!isFinite(n)||isNaN(n)||n<0){ saySync(id,"err","Enter 0 (off) or a whole number of minutes."); return; }
+    saySync(id,"","Saving interval...");
+    jpost(API+"/sync-config/"+encodeURIComponent(id),{tenantId:tenant(),intervalMin:n}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.connectionId){ saySync(id,"err",httpErr(x)); return; }
+      saySync(id,"ok", n>0?("Auto-sync set to every "+n+" minutes."):"Auto-sync turned off.");
+      refreshNextDueCell(id);
+    }).catch(function(){ saySync(id,"err","Sign in first."); });
+  }
+  function doSyncNow(id){
+    saySync(id,"","Syncing...");
+    jpost(API+"/sync-now/"+encodeURIComponent(id),{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ saySync(id,"err",httpErr(x)); return; }
+      saySync(id, x.d.outcome==="ok"?"ok":"err", x.d.outcome==="ok"?"Synced successfully.":"Sync ran but reported an error.");
+      if(x.d.lastSyncAt){
+        var box=$("syncPanel"), tr=box.querySelector('tr[data-row-id="'+id+'"]');
+        if(tr) tr.setAttribute("data-lastsyncat",x.d.lastSyncAt);
+        var lc=box.querySelector('[data-lastsync-cell="'+id+'"]'); if(lc) lc.textContent=when(x.d.lastSyncAt);
+      }
+      refreshNextDueCell(id);
+    }).catch(function(){ saySync(id,"err","Sign in first."); });
+  }
+  $("syncReload").onclick=loadSyncPanel;
+  $("syncPanel").addEventListener("click",function(e){
+    var b=e.target.closest("[data-sact]"); if(!b) return;
+    var id=b.getAttribute("data-cid"), act=b.getAttribute("data-sact");
+    if(act==="saveinterval") doSaveInterval(id);
+    else if(act==="syncnow") doSyncNow(id);
+  });
+
+  // ---- connection health (PHI-free integration-health analytics; GET /health, Part 4) ----
+  // The health payload is audit-derived counts/ids/timestamps only (see functions/_connect/maik/
+  // integration-health.js) — PHI-free by construction. As defense in depth, this renderer builds the DOM
+  // directly and writes every field via textContent (never innerHTML) so nothing in the payload can ever be
+  // interpreted as markup, even if the audit allow-list ever regressed.
+  function healthStatus(rate){
+    if(!(rate>0)) return {cls:"verified",label:"Healthy"};
+    if(rate>=1) return {cls:"rejected",label:"Failing"};
+    return {cls:"pending",label:"Degraded"};
+  }
+  function renderHealth(h){
+    h=h||{};
+    var pc=Array.isArray(h.perConnector)?h.perConnector:[];
+    var rf=Array.isArray(h.recentFailures)?h.recentFailures:[];
+    var ov=(h.overall&&typeof h.overall==="object")?h.overall:{};
+    var w=(h.warnings&&typeof h.warnings==="object")?h.warnings:{};
+    var box=$("health"), sum=$("healthSummary");
+    clearEl(box);
+    if(!pc.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connector activity yet.")); return; }
+
+    var okPct=Math.round((ov.okRate||0)*100);
+    var sumTxt=(ov.totalEvents||0)+" event"+(ov.totalEvents===1?"":"s")+" in the last 7 days across "+
+      (ov.activeConnectors||0)+" connector"+(ov.activeConnectors===1?"":"s")+" · "+okPct+"% ok";
+    if(w.total) sumTxt+=" · "+w.total+" warning"+(w.total===1?"":"s");
+    sum.textContent=sumTxt;
+
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Connector","Status","Events","Failure rate","Warnings","Last activity"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    pc.forEach(function(c){
+      var rate=(typeof c.failureRate==="number"&&isFinite(c.failureRate))?c.failureRate:0;
+      var st=healthStatus(rate);
+      var tr=mkEl("tr");
+      var tdName=mkEl("td"); tdName.appendChild(mkEl("b",null,c.connectorId||"unknown")); tr.appendChild(tdName);
+      var tdSt=mkEl("td"); tdSt.appendChild(mkEl("span","st "+st.cls,st.label)); tr.appendChild(tdSt);
+      tr.appendChild(mkEl("td",null,(c.total||0)+" total, "+(c.ok||0)+" ok, "+(c.failed||0)+" failed"));
+      tr.appendChild(mkEl("td",null,Math.round(rate*100)+"%"));
+      tr.appendChild(mkEl("td",null,String(c.warningCount||0)));
+      var lastTxt=when(c.lastTs)+(c.lastOutcome?(" ("+c.lastOutcome+")"):"");
+      tr.appendChild(mkEl("td","hint",lastTxt));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+
+    if(rf.length){
+      var rfWrap=mkEl("div"); rfWrap.style.marginTop="12px";
+      rfWrap.appendChild(mkEl("div","hint","Recent failures"));
+      rf.forEach(function(f){
+        var item=mkEl("div","item"); item.style.marginTop="6px";
+        var hd=mkEl("div","h");
+        hd.appendChild(mkEl("span","cat",f.connectorId||"unknown"));
+        hd.appendChild(mkEl("span","t",when(f.ts)));
+        item.appendChild(hd);
+        var metaTxt=(f.action||"unknown")+" · "+(f.outcome||"failed")+(f.reason?(" · "+f.reason):"");
+        item.appendChild(mkEl("div","meta",metaTxt));
+        rfWrap.appendChild(item);
+      });
+      box.appendChild(rfWrap);
+    }
+  }
+  function loadHealth(){
+    if(!tenant()){ $("health").innerHTML='<div class="hint">Select your organization above, then Refresh, to view connection health.</div>'; $("healthSummary").textContent=""; return; }
+    $("health").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/health?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("health").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("healthSummary").textContent=""; return; }
+      renderHealth(x.d.health||{});
+    }).catch(function(){ $("health").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("healthReload").onclick=loadHealth;
+
+  // ---- activity log (security-center-lite; GET /activity) ----
+  // The activity payload is audit-derived action/outcome/connectorId/ts ONLY (see functions/_connect/onboard/
+  // activity.js) -- PHI-free by construction. As defense in depth, this renderer builds the DOM directly and
+  // writes every field via textContent (never innerHTML) so nothing in the payload can ever be interpreted
+  // as markup, even if the audit allow-list ever regressed.
+  var ACTIVITY_LABELS={
+    "connect.onboard.saved":"Connection saved",
+    "connect.onboard.deleted":"Connection deleted",
+    "connect.onboard.tested":"Tested",
+    "connect.onboard.validated":"Validated",
+    "connect.onboard.pulled":"Pulled",
+    "connect.onboard.synced":"Auto-synced",
+    "connect.onboard.discovered":"Discovered",
+    "connect.onboard.sync_configured":"Schedule set",
+    "connect.onboard.map_suggested":"Mapping suggested",
+    "connect.onboard.csv-parsed":"CSV parsed",
+    "connect.onboard.hl7-feed.created":"HL7 feed created",
+    "connect.onboard.hl7-feed.deleted":"HL7 feed deleted",
+    "connect.onboard.webhook-feed.created":"Webhook feed created",
+    "connect.onboard.webhook-feed.deleted":"Webhook feed deleted"
+  };
+  function activityLabel(action){ return ACTIVITY_LABELS[action]||String(action||"Activity"); }
+  function renderActivity(a){
+    a=a||{};
+    var ev=Array.isArray(a.events)?a.events:[];
+    var box=$("activity"), sum=$("activitySummary");
+    clearEl(box);
+    if(!ev.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No activity yet.")); return; }
+    sum.textContent=ev.length+" event"+(ev.length===1?"":"s")+(a.truncated?" (showing the most recent only)":"");
+    ev.forEach(function(e){
+      var item=mkEl("div","item");
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("span","cat",e.connectorId||"unknown"));
+      hd.appendChild(mkEl("span","t",when(e.ts)));
+      item.appendChild(hd);
+      var metaTxt=activityLabel(e.action)+" · "+(e.outcome||"unknown");
+      item.appendChild(mkEl("div","meta",metaTxt));
+      box.appendChild(item);
+    });
+  }
+  function loadActivity(){
+    if(!tenant()){ $("activity").innerHTML='<div class="hint">Select your organization above, then Refresh, to view the activity log.</div>'; $("activitySummary").textContent=""; return; }
+    $("activity").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/activity?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("activity").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("activitySummary").textContent=""; return; }
+      renderActivity(x.d||{});
+    }).catch(function(){ $("activity").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("activityReload").onclick=loadActivity;
+
+  // ---- Consent dashboard (GET /consents, PHI-free; POST /consents/:ref/revoke) ----
+  // The consent payload is the client-safe allow-list projection (see functions/_connect/onboard/consents.js
+  // #toConsentRow) -- consentId/ref/status/purpose/hiTypes/careContextCount/dateRange/expiresAt/dataEraseAt/a
+  // TRUNCATED patientRefHash/createdAt/updatedAt/revocable ONLY; the raw care-context list, the actor, and the
+  // full patient hash are structurally dropped server-side. As defense in depth, this renderer builds the DOM
+  // directly and writes every field via textContent (never innerHTML), so nothing in the payload can ever be
+  // interpreted as markup, even if the server-side allow-list ever regressed.
+  //
+  // This panel is behind its OWN narrow flag (separate from the base onboard flag), so a 404 here shows a
+  // PANEL-LOCAL message (consentFlagOff), NOT the shared page-wide showFlagOff() -- the rest of the page may
+  // still be fully enabled while this one feature is dark.
+  var CONSENT_STATUS_CHIP={"GRANTED":"verified","REVOKED":"rejected","EXPIRED":"unverified","DENIED":"unverified","INITIATED":"pending"};
+  function consentChip(status){ return CONSENT_STATUS_CHIP[status]||"unverified"; }
+  function fmtPurpose(p){ if(p==null) return "unspecified"; if(typeof p==="object") return String(p.text||p.code||JSON.stringify(p)); return String(p); }
+  function fmtDateRange(dr){ if(!dr||typeof dr!=="object") return "unspecified"; return (dr.from?when(dr.from):"?")+" to "+(dr.to?when(dr.to):"?"); }
+  function sayConsent(ref,k,t){ var m=$("consents").querySelector('[data-cmsg="'+ref+'"]'); if(m){ m.className="msg rowmsg "+(k||""); m.textContent=t||""; } }
+  function renderConsents(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("consents"), sum=$("consentSummary");
+    clearEl(box);
+    if(!list.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No consents yet.")); return; }
+    sum.textContent=list.length+" consent"+(list.length===1?"":"s");
+    list.forEach(function(c){
+      var item=mkEl("div","item"); item.setAttribute("data-crow",c.ref);
+      var hd=mkEl("div","h");
+      var chip=mkEl("span","st "+consentChip(c.status),c.status||"unknown"); chip.setAttribute("data-cchip",c.ref);
+      hd.appendChild(chip);
+      hd.appendChild(mkEl("span","t",when(c.updatedAt)));
+      item.appendChild(hd);
+      item.appendChild(mkEl("div","title",fmtPurpose(c.purpose)));
+      var metaTxt="HI types: "+((c.hiTypes&&c.hiTypes.length)?c.hiTypes.join(", "):"none")+" · Care contexts: "+(c.careContextCount||0)+
+        " · Range: "+fmtDateRange(c.dateRange)+" · Expires: "+(c.expiresAt?when(c.expiresAt):"unspecified");
+      item.appendChild(mkEl("div","meta",metaTxt));
+      if(c.patientRefHash) item.appendChild(mkEl("div","meta","Patient ref: "+c.patientRefHash));
+      var foot=mkEl("div","foot"); foot.setAttribute("data-cfoot",c.ref);
+      if(c.revocable){
+        var revBtn=mkEl("button","del","Revoke"); revBtn.setAttribute("data-cact","revoke"); revBtn.setAttribute("data-cref",c.ref);
+        foot.appendChild(revBtn);
+      }
+      item.appendChild(foot);
+      var msgDiv=mkEl("div","msg rowmsg"); msgDiv.setAttribute("data-cmsg",c.ref);
+      item.appendChild(msgDiv);
+      box.appendChild(item);
+    });
+  }
+  function loadConsents(){
+    if(!tenant()){ $("consents").innerHTML='<div class="hint">Select your organization above, then Refresh, to view data-sharing consents.</div>'; $("consentSummary").textContent=""; $("consentFlagOff").style.display="none"; return; }
+    $("consents").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/consents?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ $("consentFlagOff").style.display=""; $("consents").innerHTML=""; $("consentSummary").textContent=""; return; }
+      $("consentFlagOff").style.display="none";
+      if(x.s!==200||!x.d||x.d.ok===false){ $("consents").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("consentSummary").textContent=""; return; }
+      renderConsents(x.d.consents||[]);
+    }).catch(function(){ $("consents").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("consentReload").onclick=loadConsents;
+  // A successful revoke updates ONLY its own row in place (chip + Revoke button removal) instead of reloading
+  // the whole panel -- a full reload would also wipe the success message this same action just set.
+  function doRevokeConsent(ref){
+    if(!window.confirm("Revoke this consent? This blocks further data sharing under it immediately.")) return;
+    sayConsent(ref,"","Revoking...");
+    jpost(API+"/consents/"+encodeURIComponent(ref)+"/revoke",{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ $("consentFlagOff").style.display=""; return; }
+      if(x.s!==200||!x.d||!x.d.ok){ sayConsent(ref,"err",httpErr(x)); return; }
+      var note=x.d.noop?"Already revoked.":"Revoked.";
+      if(x.d.propagated==="local") note+=" Blocked locally; external HIE notification pending.";
+      sayConsent(ref,"ok",note);
+      var chip=$("consents").querySelector('[data-cchip="'+ref+'"]');
+      if(chip){ chip.className="st "+consentChip("REVOKED"); chip.textContent="REVOKED"; }
+      var foot=$("consents").querySelector('[data-cfoot="'+ref+'"]'); if(foot) clearEl(foot);
+    }).catch(function(){ sayConsent(ref,"err","Sign in first."); });
+  }
+  $("consents").addEventListener("click",function(e){
+    var b=e.target.closest("[data-cact]"); if(!b) return;
+    if(b.getAttribute("data-cact")==="revoke") doRevokeConsent(b.getAttribute("data-cref"));
+  });
+
+  // ---- Connector catalog (marketplace-style; GET /connectors) ----
+  // The catalog payload is a static capability list + per-track env flag state (see functions/_connect/onboard/
+  // registry-catalog.js) -- PHI-free and tenant-independent by construction (identical for every tenant). As
+  // defense in depth, this renderer builds the DOM directly and writes every field via textContent (never
+  // innerHTML), so nothing in the payload can ever be interpreted as markup.
+  var CATALOG_CATEGORY_LABELS={"pull":"Pull","feed":"Feed","imaging":"Imaging","file":"File"};
+  function catalogCategoryLabel(cat){ return CATALOG_CATEGORY_LABELS[cat]||String(cat||"connector"); }
+  function renderCatalog(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("catalog"), sum=$("catalogSummary");
+    clearEl(box);
+    if(!list.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connector types available.")); return; }
+    var enabledCount=list.filter(function(c){return !!c.enabled;}).length;
+    sum.textContent=list.length+" connector type"+(list.length===1?"":"s")+", "+enabledCount+" enabled";
+    list.forEach(function(c){
+      var item=mkEl("div","item"); item.style.marginTop="8px";
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("b",null,c.name||c.id||"connector"));
+      hd.appendChild(mkEl("span","cat",catalogCategoryLabel(c.category)));
+      var chip=mkEl("span","st "+(c.enabled?"verified":"unverified"),c.enabled?"Enabled":"Disabled");
+      chip.style.marginLeft="auto";
+      hd.appendChild(chip);
+      item.appendChild(hd);
+      if(c.description) item.appendChild(mkEl("div","meta",c.description));
+      var resources=(c.resources&&c.resources.length)?c.resources.join(", "):"none";
+      var authKinds=(c.authKinds&&c.authKinds.length)?c.authKinds.join(", "):"none";
+      item.appendChild(mkEl("div","meta","Resources: "+resources+" · Auth: "+authKinds));
+      box.appendChild(item);
+    });
+  }
+  function loadCatalog(){
+    if(!tenant()){ $("catalog").innerHTML='<div class="hint">Select your organization above, then Refresh, to view the connector catalog.</div>'; $("catalogSummary").textContent=""; return; }
+    $("catalog").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/connectors?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("catalog").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("catalogSummary").textContent=""; return; }
+      renderCatalog(x.d.connectors||[]);
+    }).catch(function(){ $("catalog").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("catalogReload").onclick=loadCatalog;
+
+  // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
+  function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
+  $("dash").addEventListener("click",function(e){
+    var b=e.target.closest("[data-act],[data-fact],[data-wact]"); if(!b)return;
+    if(b.hasAttribute("data-act")){ var id=b.getAttribute("data-cid"), act=b.getAttribute("data-act");
+      if(act==="test"){ runTestRow(id); }
+      else if(act==="validate"){ runValidateRow(id); }
+      else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
+      else if(act==="pullgo"){ doPull(id); }
+      else if(act==="del"){ doDelete(id); }
+    } else if(b.hasAttribute("data-fact")){ var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
+      if(fact==="copy"){ copyFeedUrl(); }
+      else if(fact==="del"){ doDeleteFeed(fid); }
+    } else { var wid=b.getAttribute("data-wid"), wact=b.getAttribute("data-wact");
+      if(wact==="copy"){ copyWebhookUrl(); }
+      else if(wact==="del"){ doDeleteWebhook(wid); }
+    }
+  });
+
+  // ---- Enterprise Administration Portal: tab nav (ADDITIVE; organizes #opsArea's growing card list into
+  // named sections WITHOUT moving a single card in the DOM -- each card just gains a data-section attribute,
+  // so every existing id/selector this page (and the smoke test) relies on keeps resolving exactly as before).
+  // Only the ACTIVE section's card(s) are shown (#opsArea.nav-on .card[data-section]{display:none} unless
+  // .sect-show); every panel's own loader (loadDashboard/loadHealth/etc.) is unchanged and still directly
+  // callable regardless of which tab is active. ----
+  var NAV_SECTIONS=[["onboard","Onboard"],["connections","Connections"],["monitoring","Monitoring"],["automation","Automation"],["governance","Governance"],["access","Access"]];
+  function setSection(id){
+    var root=$("opsArea"); if(!root) return;
+    [].slice.call(root.querySelectorAll(".card[data-section]")).forEach(function(c){
+      var secs=(c.getAttribute("data-section")||"").split(/\s+/);
+      c.classList.toggle("sect-show", secs.indexOf(id)>=0);
+    });
+    [].slice.call(root.querySelectorAll(".emr-nav [data-nav]")).forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-nav")===id);
+    });
+    if(id==="access") loadMembers();
+  }
+  function buildNav(){
+    var root=$("opsArea"); if(!root) return;
+    var nav=document.createElement("nav"); nav.className="emr-nav";
+    NAV_SECTIONS.forEach(function(s){
+      var b=document.createElement("button"); b.type="button"; b.setAttribute("data-nav",s[0]); b.textContent=s[1];
+      nav.appendChild(b);
+    });
+    root.insertBefore(nav, root.firstChild);
+    root.classList.add("nav-on");
+    nav.addEventListener("click",function(e){ var b=e.target.closest("[data-nav]"); if(b) setSection(b.getAttribute("data-nav")); });
+    setSection("onboard");
+  }
+
+  // ---- Members / Access (Enterprise Administration Portal): view a tenant's members + roles; an owner/admin
+  // may change a role or remove a member. Reuses the EXISTING RBAC-gated, last-owner-protected backend
+  // (functions/_connect/enterprise/members.js via GET/POST /members*) UNCHANGED -- this panel only renders the
+  // client-safe {userId,role} projection the server returns, always via textContent/mkEl (never innerHTML), so
+  // an opaque account id can never be interpreted as markup, and PHI is never rendered here (the projection
+  // structurally carries no PHI field). Write controls (role select / Remove) render ONLY when the caller's OWN
+  // role for the SELECTED tenant (TENANT_ROLES, stashed from GET /tenants) is owner or admin; every other role
+  // (auditor, clinician) sees a read-only role label. Behind its OWN narrow flag, so a 404 here shows a
+  // PANEL-LOCAL message, NOT the shared page-wide showFlagOff(). ----
+  var MEMBER_ROLES=["owner","admin","clinician","auditor"];
+  function memberCanWrite(){ return ["owner","admin"].indexOf(TENANT_ROLES[tenant()]||"")>=0; }
+  function truncMemberId(id){ id=String(id==null?"":id); return id.length>20?(id.slice(0,12)+"..."+id.slice(-4)):id; }
+  function membersSay(k,t){ say("membersMsg",k,t); }
+  function showMembersFlagOff(){ var f=$("membersFlagOff"); if(f) f.style.display=""; clearEl($("members")); }
+  function hideMembersFlagOff(){ var f=$("membersFlagOff"); if(f) f.style.display="none"; }
+  function renderMembers(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("members"); if(!box) return; clearEl(box);
+    if(!list.length){ box.appendChild(mkEl("div","hint","No members yet.")); return; }
+    var canWrite=memberCanWrite();
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Member","Role","Actions"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    list.forEach(function(m){
+      var tr=mkEl("tr");
+      var tdId=mkEl("td"); tdId.appendChild(mkEl("b",null,truncMemberId(m.userId))); tr.appendChild(tdId);
+      var tdRole=mkEl("td");
+      if(canWrite){
+        var sel=document.createElement("select"); sel.setAttribute("data-role-select",m.userId);
+        MEMBER_ROLES.forEach(function(r){ var o=document.createElement("option"); o.value=r; o.textContent=r; if(r===m.role)o.selected=true; sel.appendChild(o); });
+        tdRole.appendChild(sel);
+      } else { tdRole.appendChild(mkEl("span",null,m.role||"")); }
+      tr.appendChild(tdRole);
+      var tdAct=mkEl("td","acts");
+      if(canWrite){ var rm=mkEl("button","del","Remove"); rm.setAttribute("data-remove",m.userId); tdAct.appendChild(rm); }
+      tr.appendChild(tdAct);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+  }
+  function loadMembers(){
+    var box=$("members"); if(!box) return;
+    hideMembersFlagOff();
+    if(!tenant()){ clearEl(box); box.appendChild(mkEl("div","hint","Select your organization above, then Refresh, to view members.")); return; }
+    clearEl(box); box.appendChild(mkEl("div","hint","Loading..."));
+    api(API+"/members?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false){ clearEl(box); box.appendChild(mkEl("div","hint",httpErr(x))); return; }
+      renderMembers(x.d.members||[]);
+    }).catch(function(){ clearEl(box); box.appendChild(mkEl("div","hint","Sign in first.")); });
+  }
+  function doSetMemberRole(userId,role){
+    membersSay("","Saving...");
+    jpost(API+"/members/role",{tenantId:tenant(),userId:userId,role:role}).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ membersSay("err",httpErr(x)); return; }
+      membersSay("ok","Role updated.");
+    }).catch(function(){ membersSay("err","Sign in first."); });
+  }
+  function doRemoveMember(userId){
+    if(!window.confirm("Remove this member from the organization? This cannot be undone.")) return;
+    membersSay("","Removing...");
+    jpost(API+"/members/remove",{tenantId:tenant(),userId:userId}).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ membersSay("err",httpErr(x)); return; }
+      membersSay("ok","Member removed."); loadMembers();
+    }).catch(function(){ membersSay("err","Sign in first."); });
+  }
+  $("members").addEventListener("change",function(e){ var sel=e.target.closest("[data-role-select]"); if(!sel) return; doSetMemberRole(sel.getAttribute("data-role-select"),sel.value); });
+  $("members").addEventListener("click",function(e){ var b=e.target.closest("[data-remove]"); if(!b) return; doRemoveMember(b.getAttribute("data-remove")); });
+  $("membersReload").onclick=loadMembers;
+  buildNav();
+
+  // ---- controls ----
+  $("tenantSel").onchange=onTenantChange;
+  $("tenantReload").onclick=loadTenants;
+  $("dashReload").onclick=loadDashboard;
+
+  // ---- Firebase auth state ----
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u) loadTenants(); }); }
+  else { $("who").textContent="Firebase failed to load."; signedInUI(null); }
+
+  // Test seam: lets the headless smoke test drive rendering with a stubbed api(), no backend/Firebase needed.
+  window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
+    loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
+    loadSyncPanel:loadSyncPanel, renderSyncPanel:renderSyncPanel, computeNextDue:computeNextDue,
+    saveInterval:doSaveInterval, syncNow:doSyncNow,
+    loadHealth:loadHealth, renderHealth:renderHealth,
+    loadActivity:loadActivity, renderActivity:renderActivity,
+    loadConsents:loadConsents, renderConsents:renderConsents, revokeConsent:doRevokeConsent,
+    loadCatalog:loadCatalog, renderCatalog:renderCatalog,
+    runValidate:doValidate, renderValidateReport:renderValidateReport,
+    applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
+    hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
+    webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
+    restSave:function(){ doRestSave(false); }, restSaveTest:function(){ doRestSave(true); },
+    dicomSave:function(){ doDicomSave(false); }, dicomSaveTest:function(){ doDicomSave(true); },
+    graphqlSave:function(){ doGraphqlSave(false); }, graphqlSaveTest:function(){ doGraphqlSave(true); },
+    sqlSave:function(){ doSqlSave(false); }, sqlSaveTest:function(){ doSqlSave(true); },
+    suggestCsvMapping:csvSuggestGo, applyCsvMapping:csvApplyMapGo, suggestRestMapping:restSuggestGo, suggestGraphqlMapping:graphqlSuggestGo, suggestSqlMapping:sqlSuggestGo,
+    readMapEditor:readMapEditor,
+    showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
+    setSection:setSection, loadMembers:loadMembers, renderMembers:renderMembers,
+    setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
+    setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
+})();
+</script>
+</body>
+</html>

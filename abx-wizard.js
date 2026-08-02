@@ -302,6 +302,7 @@
               '<span class="abxw-tspct">100%</span>' +
             '</div>' +
           '</div>' +
+          '<button class="abxw-reset" data-act="reset" aria-label="Reset case">' + ms("restart_alt") + '<span class="abxw-reset-t">Reset</span></button>' +
         '</div>' +
       '</header>' +
       '<nav class="abxw-stepper" role="tablist" aria-label="Progress"></nav>' +
@@ -312,7 +313,6 @@
       '</div></div>' +
       '<div class="abxw-nav"><div class="abxw-navin">' +
         '<button class="abxw-back" data-act="back">' + ms("arrow_back") + 'Back</button>' +
-        '<button class="abxw-resetb" data-act="reset" aria-label="Reset case">' + ms("restart_alt") + '<span class="abxw-resetb-t">Reset</span></button>' +
         '<div class="abxw-cap"></div>' +
         '<button class="abxw-next" data-act="next"><span class="abxw-nextl"></span>' + ms("arrow_forward") + '</button>' +
       '</div></div>';

@@ -9,7 +9,7 @@ import assert from "node:assert";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { identify } from "../functions/_usage.js";
+import { identify, usageKeyFor } from "../functions/_usage.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 let pass = 0;
@@ -30,5 +30,10 @@ const src = readFileSync(join(ROOT, "functions/_usage.js"), "utf8");
 ok(/return ok \? \{ uid: payload\.sub/.test(src), "verifyFirebaseToken returns an object { uid, email }");
 ok(/if \(fb && fb\.uid\) return \{ id: "fb:" \+ fb\.uid/.test(src), "identify keys signed-in users per-account: 'fb:'+fb.uid");
 ok(!/return \{ id: "fb:" \+ uid,/.test(src), "no 'fb:'+<object> coercion (that made fb:[object Object] for ALL signed-in users)");
+
+ok(usageKeyFor({ id: "fb:abc", email: "Dr.X@Gmail.com", guest: false }) === "em:dr.x@gmail.com",
+  "usageKeyFor: signed-in → em:<lowercased email>");
+ok(usageKeyFor({ id: "ip:hash", guest: true }) === "ip:hash",
+  "usageKeyFor: guest (no email) → ip:hash");
 
 console.log(`\nALL ${pass} PASS — signed-in users are identified per-account, not lumped into the guest IP bucket`);
