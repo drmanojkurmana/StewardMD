@@ -206,6 +206,18 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-pt-del { flex: 0 0 auto; border: 1px solid var(--sev-critical-bd, #F0B7C0); background: var(--sev-critical-bg, #FBE9EC);
   color: var(--sev-critical-fg, #B42332); border-radius: 11px; padding: 14px 16px; font-family: inherit; font-weight: 600; font-size: 13px; cursor: pointer; }
 
+/* ---- Conversion ---- */
+.ins-conv-regimen { display: flex; gap: 12px; margin-bottom: 6px; }
+.ins-conv-cell { flex: 1; }
+.ins-conv-n { font-family: var(--ins-mono); font-size: 34px; font-weight: 700; color: var(--ins-primary); line-height: 1; font-variant-numeric: tabular-nums; }
+.ins-conv-u { display: block; font-size: 11px; color: var(--ins-muted); margin-top: 5px; }
+.ins-conv-sec { border-top: 1px solid var(--ins-line); margin-top: 12px; padding-top: 10px; }
+.ins-conv-sec h4 { margin: 0 0 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ins-muted); }
+.ins-conv-sec p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ins-ink); }
+.ins-conv-sec ul { margin: 0; padding-left: 16px; }
+.ins-conv-sec li { font-size: 12.5px; line-height: 1.5; color: var(--ins-muted); margin-bottom: 5px; }
+.ins-conv-sec.ins-howp-src { border-top: 0; }
+
 /* ---- AI recommendation banner (persistent) ---- */
 .ins-ai {
   display: flex; gap: 10px; align-items: flex-start;

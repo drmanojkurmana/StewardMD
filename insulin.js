@@ -85,7 +85,8 @@
     ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false },
     acked: false, confirmed: false, bolus: "aspart", iobNote: "",
     libQ: "", libClass: "all", libOpen: null, compare: [],
-    patientId: null, patientName: "", editP: null, patQ: "" };
+    patientId: null, patientName: "", editP: null, patQ: "",
+    convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convAck: false };
 
   function initState() {
     var m = mmolMode();
@@ -99,6 +100,7 @@
     st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
+    st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convAck = false;
   }
 
   /* ---------- icons ---------- */
@@ -114,6 +116,7 @@
   var ICON_CHEVR = '<svg class="chevr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
   var ICON_SEARCH = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>';
   var ICON_USER = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+  var ICON_SWAP = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4"/><path d="M21 7H7"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h14"/></svg>';
   function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
   function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
   function modeLabel(m) { return m === "meal" ? "Meal bolus" : m === "correction" ? "Correction" : "Combined meal + correction"; }
@@ -182,6 +185,7 @@
     else if (st.screen === "compare") { s.innerHTML = compareHTML(); }
     else if (st.screen === "patients") { s.innerHTML = patientsHTML(); renderPatientList(); }
     else if (st.screen === "patient") { s.innerHTML = patientEditHTML(); }
+    else if (st.screen === "convert") { s.innerHTML = convertHTML(); renderConvert(); }
     else { s.innerHTML = calcHTML(); renderInputs(); render(); }
   }
   function go(screen) { st.screen = screen; paint(); springIn(document.getElementById("insScreen")); }
@@ -199,6 +203,7 @@
     else if (st.screen === "compare") { title = "Compare insulins"; sub = st.compare.length + " selected"; back = "go-library"; }
     else if (st.screen === "patients") { title = "Patients"; sub = loadPatients().length + " saved profiles"; }
     else if (st.screen === "patient") { title = st.editP && st.editP.id ? "Edit patient" : "New patient"; sub = "Reusable profile (no MRN or DOB)"; back = "go-patients"; }
+    else if (st.screen === "convert") { title = "Insulin conversion"; sub = "Clinician-guided switch"; }
     else { title = "Insulin dose"; sub = modeLabel(st.mode); }
     return '<div class="ins-head ins-bf"><button class="ins-hbtn" data-ins="' + back + '" aria-label="Back">' + ICON_BACK + '</button>' +
       '<div><div class="ins-title">' + title + '</div><div class="ins-sub">' + sub + '</div></div>' +
@@ -237,7 +242,16 @@
         qa("combined", "Combined dose") + qa("meal", "Meal bolus") + qa("correction", "Correction") +
       '</div></div>' +
       libEntryHTML() +
+      convEntryHTML() +
       '<div class="ins-card ins-bf"><div class="ins-card-t">Recent doses</div>' + recent + '</div>';
+  }
+  function convEntryHTML() {
+    if (!window.INSULIN_DB) return "";
+    return '<button class="ins-lib-entry ins-bf" data-ins="go-convert">' +
+      '<span class="ins-lib-ic">' + ICON_SWAP + '</span>' +
+      '<span class="ins-lib-tx"><span class="ins-lib-t">Insulin conversion</span>' +
+      '<span class="ins-lib-s">Guided switch with assumptions, monitoring and follow-up</span></span>' +
+      ICON_CHEVR + '</button>';
   }
   function libEntryHTML() {
     var db = window.INSULIN_DB;
@@ -421,6 +435,59 @@
       '<button class="ins-cta" data-ins="p-save">' + (p.id ? "Save changes" : "Save patient") + '</button>' +
       (p.id ? '<div class="ins-patedit-actions"><button class="ins-qa-btn" data-ins="p-use" data-id="' + p.id + '">Use in calculator</button>' +
         '<button class="ins-pt-del" data-ins="p-del" data-id="' + p.id + '">Delete</button></div>' : '');
+  }
+
+  /* ---------- insulin conversion ---------- */
+  function convInsOpts(sel) {
+    var db = window.INSULIN_DB;
+    return db.CLASSES.map(function (c) {
+      return '<optgroup label="' + c + '">' + db.byClass(c).map(function (d) {
+        return '<option value="' + d.id + '"' + (d.id === sel ? " selected" : "") + '>' + d.generic + '</option>';
+      }).join("") + '</optgroup>';
+    }).join("");
+  }
+  function convertHTML() {
+    if (!window.INSULIN_DB) return '<div class="ins-empty">Insulin database not loaded.</div>';
+    var reasons = ["", "Simplify regimen", "Reduce hypoglycaemia", "Cost or availability", "Improve control", "Device preference", "Renal or hepatic change", "Pregnancy planning"];
+    var ropts = reasons.map(function (rz) { return '<option value="' + rz + '"' + (rz === st.convReason ? " selected" : "") + '>' + (rz || "Select a reason (optional)") + '</option>'; }).join("");
+    return '<div class="ins-card ins-bf"><div class="ins-card-t">Switch details</div>' +
+        '<div class="ins-field"><div class="ins-lab">Current insulin</div><select class="ins-select" data-ins="conv-sel" data-k="convFrom">' + convInsOpts(st.convFrom) + '</select></div>' +
+        '<div class="ins-field"><div class="ins-lab">Current total daily dose <span class="u">units</span></div>' + stepper("convDose", st.convDose, 1) + '</div>' +
+        '<div class="ins-field"><div class="ins-lab">Target insulin</div><select class="ins-select" data-ins="conv-sel" data-k="convTo">' + convInsOpts(st.convTo) + '</select></div>' +
+        '<div class="ins-field"><div class="ins-lab">Reason for switching</div><select class="ins-select" data-ins="conv-sel" data-k="convReason">' + ropts + '</select></div>' +
+      '</div><div id="insConvOut"></div>';
+  }
+  function renderConvert() {
+    var out = document.getElementById("insConvOut"); if (!out || !window.INSULIN_CONVERT) return;
+    st.convAck = false;
+    var res = window.INSULIN_CONVERT.convert({ fromId: st.convFrom, toId: st.convTo, dose: st.convDose, reason: st.convReason });
+    if (res.error) { out.innerHTML = '<div class="ins-card ins-result"><div class="ins-card-t">Suggested regimen</div><p style="color:var(--ins-muted);font-size:13px;margin:0">' + res.error + '</p></div>'; return; }
+    var headline;
+    if (res.suggested && typeof res.suggested === "object") {
+      headline = '<div class="ins-conv-regimen"><div class="ins-conv-cell"><span class="ins-conv-n">' + res.suggested.basal + '</span><span class="ins-conv-u">units basal</span></div>' +
+        '<div class="ins-conv-cell"><span class="ins-conv-n">' + res.suggested.bolusEach + '</span><span class="ins-conv-u">units per meal</span></div></div>' +
+        '<div class="ins-fromraw">' + res.fromName + ' &rarr; basal-bolus &middot; prandial ' + res.suggested.bolusInsulin + '</div>';
+    } else {
+      headline = '<div class="ins-dose"><span class="n">' + res.suggested + '</span><span class="unit">units/day</span></div>' +
+        '<div class="ins-fromraw">' + res.fromName + ' &rarr; ' + res.toName + ' &middot; ' + res.kind + '</div>';
+    }
+    function list(items) { return items.map(function (x) { return '<li>' + x + '</li>'; }).join(""); }
+    var steps = (res.steps || []).map(function (s) { return '<li><span class="k">' + s.label + '<br><span class="e">' + s.expr + '</span></span><span class="v">' + s.value + '</span></li>'; }).join("");
+    var warnHTML = (res.warnings || []).map(function (w) {
+      return '<div class="ins-warn caution"><span class="ins-warn-band">' + sevIcon("caution") + '</span><div class="ins-warn-body"><span class="ins-warn-sig">Caution</span><span class="bd">' + w + '</span></div></div>';
+    }).join("");
+    out.innerHTML =
+      '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">Suggested starting regimen</div>' + headline +
+        (steps ? '<ul class="ins-steps">' + steps + '</ul>' : '') +
+        (res.assumptions.length ? '<div class="ins-conv-sec"><h4>Assumptions</h4><ul>' + list(res.assumptions) + '</ul></div>' : '') +
+        (res.monitoring.length ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + list(res.monitoring) + '</ul></div>' : '') +
+        '<div class="ins-conv-sec"><h4>Follow-up</h4><p>' + res.followUp + '</p></div>' +
+        '<div class="ins-conv-sec ins-howp-src"><h4>Reference</h4><ul>' + list(res.refs) + '</ul></div>' +
+      '</div>' +
+      (warnHTML ? '<div class="ins-card ins-warns ins-bf"><div class="ins-card-t">Safety</div>' + warnHTML + '</div>' : '') +
+      '<label class="ins-ack"><input type="checkbox" data-ins="conv-ack"> I have reviewed this switch and will verify it against my institutional protocol.</label>' +
+      '<button class="ins-cta" data-ins="conv-confirm" disabled>Confirm and record switch</button>' +
+      '<div class="ins-done" id="insConvDone" style="display:none">Switch recorded. Titrate to target and review at follow-up. The order remains the physician\'s to place.</div>';
   }
 
   /* ---------- Calculator ---------- */
@@ -631,13 +698,20 @@
       } catch (e) {}
       return;
     }
+    if (a === "go-convert") return go("convert");
+    if (a === "conv-confirm") {
+      var cc = document.querySelector(".ins-cta"); if (cc && cc.disabled) return;
+      if (cc) cc.style.display = "none";
+      var cd = document.getElementById("insConvDone"); if (cd) { cd.style.display = "block"; springIn(cd); }
+      return;
+    }
     if (a === "qa") { st.mode = t.getAttribute("data-mode"); go("calc"); return; }
     if (a === "mode") { st.mode = t.getAttribute("data-mode"); syncSeg(); renderInputs(); render(); return; }
     if (a === "inc" || a === "dec") {
       var f = t.getAttribute("data-f"), s = parseFloat(t.getAttribute("data-s"));
       st[f] = Math.max(0, Math.round(((Number(st[f]) || 0) + (a === "inc" ? s : -s)) * 100) / 100);
       var inp = t.parentNode.querySelector('input[data-f="' + f + '"]'); if (inp) inp.value = st[f];
-      render(); return;
+      if (st.screen === "convert") renderConvert(); else render(); return;
     }
     if (a === "round") { st.increment = parseFloat(t.getAttribute("data-v")); SET.increment = st.increment; saveSettings(); pressGroup("round"); if (st.screen === "calc") render(); return; }
     if (a === "target-chip") { st.target = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
@@ -662,13 +736,15 @@
   function onInput(e) {
     var t = e.target.closest("[data-ins]"); if (!t) return;
     var a = t.getAttribute("data-ins");
-    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } render(); return; }
+    if (a === "num") { var f = t.getAttribute("data-f"); st[f] = parseFloat(t.value); if (f === "target") syncTargetChips(); if (f === "iob") { st.iobNote = ""; var nEl = document.querySelector(".ins-iob-note"); if (nEl) nEl.remove(); } if (st.screen === "convert") renderConvert(); else render(); return; }
     if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
     if (a === "pat-q") { st.patQ = t.value; renderPatientList(); return; }
     if (a === "p-field") { if (!st.editP) st.editP = newProfile(); st.editP[t.getAttribute("data-k")] = t.value; return; }
+    if (a === "conv-sel") { st[t.getAttribute("data-k")] = t.value; renderConvert(); return; }
+    if (a === "conv-ack") { st.convAck = t.checked; var cvc = document.querySelector(".ins-cta"); if (cvc) cvc.disabled = !st.convAck; return; }
     if (a === "cmp") {
       var cid = t.getAttribute("data-id"), idx = st.compare.indexOf(cid);
       if (t.checked) { if (idx === -1) { if (st.compare.length >= 3) { t.checked = false; return; } st.compare.push(cid); } }
