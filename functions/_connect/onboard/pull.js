@@ -14,16 +14,17 @@ import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
 import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
 import { graphqlConnector } from "../connectors/graphql/connector.js";
+import { sqlConnector } from "../connectors/sql/connector.js";
 import { assertPublicHttpsUrl } from "./ssrf.js";
 import { makeSafeFetch } from "./net.js";
 import { OnboardError } from "./errors.js";
-import { getRow, ONBOARD_SCOPE, REST_ONBOARD_SCOPE, DICOM_ONBOARD_SCOPE, GRAPHQL_ONBOARD_SCOPE } from "./store.js";
+import { getRow, ONBOARD_SCOPE, REST_ONBOARD_SCOPE, DICOM_ONBOARD_SCOPE, GRAPHQL_ONBOARD_SCOPE, SQL_ONBOARD_SCOPE } from "./store.js";
 import { resolveAuth } from "./probe.js";
 
 // The stored row's `kind` selects which built-in connector reuses this same onboard pull path, and which
 // SCCM scope it is allowed to produce. Unknown/legacy kinds default to fhir-r4 (the original Increment-1 shape).
-const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector };
-const SCOPE_BY_KIND = { "fhir-r4": ONBOARD_SCOPE, "rest-json": REST_ONBOARD_SCOPE, "dicomweb": DICOM_ONBOARD_SCOPE, "graphql": GRAPHQL_ONBOARD_SCOPE };
+const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector, "sql": sqlConnector };
+const SCOPE_BY_KIND = { "fhir-r4": ONBOARD_SCOPE, "rest-json": REST_ONBOARD_SCOPE, "dicomweb": DICOM_ONBOARD_SCOPE, "graphql": GRAPHQL_ONBOARD_SCOPE, "sql": SQL_ONBOARD_SCOPE };
 
 export async function pullConnection(deps, request, env, tenantId, connectionId, patientId) {
   // PHI read: gate on connector:read membership, and deny an auditor (RBAC reserves PHI away from auditors).
@@ -32,17 +33,26 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
   if (!patientId || typeof patientId !== "string") throw new OnboardError("invalid", "patientId required");
 
   const { row, config } = await getRow(deps.db, tenant.id, connectionId);
-  const kind = row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : "fhir-r4";
+  const kind = row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : row.kind === "sql" ? "sql" : "fhir-r4";
   const connector = CONNECTORS_BY_KIND[kind];
   const scope = SCOPE_BY_KIND[kind];
-  const base = assertPublicHttpsUrl(row.base_url, "baseUrl").href.replace(/\/$/, "");
+  // SQL/DB connections have NO URL to reach and NO bearer to acquire: the DB credentials live in the owner's
+  // Hyperdrive binding (referenced by NAME) and are used by the injected driver, never here. Everything else
+  // keeps its SSRF-guarded base + auth acquisition exactly as before.
+  const base = kind === "sql" ? "" : assertPublicHttpsUrl(row.base_url, "baseUrl").href.replace(/\/$/, "");
   let creds = {}; try { creds = JSON.parse(await deps.secrets.open(config.sealed)); } catch { creds = {}; }
 
   // Acquire a bearer in the onboard layer (SSRF-guarded); hand it to the connector via secrets("bearer").
   // // VERIFY: a token-method connection with a CUSTOM headerName pulls with Authorization: Bearer here for
   // fhir-r4 (it only emits a Bearer header); the rest-json connector DOES honor config.headerName. The
-  // capability probe already honors the custom header for both kinds.
-  const { bearer } = await resolveAuth(deps, base, config, creds);
+  // capability probe already honors the custom header for both kinds. (SQL has no bearer.)
+  const bearer = kind === "sql" ? null : (await resolveAuth(deps, base, config, creds)).bearer;
+
+  // The SQL driver seam: the owner wires deps.sqlDriverFactory(env, bindingName) -> { query(template, params) }.
+  // UNSET by default (see the router deps // VERIFY note), so driver is null and the connector HONESTLY returns
+  // notConfigured below — never a fabricated row / fake empty success. The driver's query MUST bind the patient
+  // value as a PARAMETER (never string-concatenate it: the SQL-injection invariant).
+  const driver = kind === "sql" ? (deps.sqlDriverFactory ? deps.sqlDriverFactory(env, config.bindingName) : null) : null;
 
   const t0 = Date.now();
   // The connector's own reads/searches go through the redirect-safe fetch: a compromised/redirecting host
@@ -59,6 +69,10 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
     ? { base_url: base, connector_id: connectionId, studiesPath: config.studiesPath, patientTag: config.patientTag, headerName: config.headerName }
     : kind === "graphql"
     ? { base_url: base, connector_id: connectionId, query: config.query, resultsPath: config.resultsPath, graphqlPath: config.graphqlPath, patientVar: config.patientVar, headerName: config.headerName, config: { columnMap: config.columnMap || null } }
+    : kind === "sql"
+    // sql carries the read-only parameterized query + the injected driver seam (null unless the owner wired it)
+    // + an optional explicit columnMap. NO base_url, NO bearer.
+    ? { base_url: "", connector_id: connectionId, bindingName: config.bindingName, queryTemplate: config.queryTemplate, driver, config: { columnMap: config.columnMap || null } }
     : { base_url: base, connector_id: connectionId };           // NO secret_ref => connector stays in bearer mode
   const ctx = {
     tenant: { id: tenant.id, mode: tenant.mode || "sandbox", settings: {} },
@@ -75,6 +89,9 @@ export async function pullConnection(deps, request, env, tenantId, connectionId,
   };
 
   const raw = await connector.fetchPatient(ctx, patientId);
+  // HONEST not-configured surfacing: an un-wired SQL driver returns ZERO rows + notConfigured. Do NOT let that
+  // empty bundle read as a successful pull — surface it as an explicit not-configured error BEFORE normalize.
+  if (kind === "sql" && raw && raw.notConfigured) throw new OnboardError("not-configured", "sql connector has no wired driver");
   const bundle = await connector.normalize(ctx, raw);
   assertConsumable(bundle, SCCM_MAJOR);
   const v = validateBundle(bundle);

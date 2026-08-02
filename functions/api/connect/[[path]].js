@@ -22,6 +22,7 @@ import { sdkFlagOn } from "../../_connect/sdk/flags.js";
 import { restFlagOn } from "../../_connect/connectors/rest-json/flags.js"; // per-track gate: smd_connect_rest
 import { dicomFlagOn } from "../../_connect/connectors/dicomweb/flags.js"; // per-track gate: smd_connect_dicom
 import { graphqlFlagOn } from "../../_connect/connectors/graphql/flags.js"; // per-track gate: smd_connect_graphql
+import { sqlFlagOn } from "../../_connect/connectors/sql/flags.js"; // per-track gate: smd_connect_sql
 
 const STATUS = (e) => (e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : e instanceof SandboxViolation ? 403 : 400);
 const CODE = (e) => (e && e.constructor && e.constructor.name) ? e.constructor.name.replace(/Error$/, "").toLowerCase() || "error" : "error";

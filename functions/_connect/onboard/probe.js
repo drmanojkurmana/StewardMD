@@ -121,10 +121,26 @@ async function runGraphQlProbe(sfetch, base, config, header) {
   return { ok: true };
 }
 
+// Generic SQL/DB probe: a driver-presence check (INTERFACE + STUB — see connectors/sql/connector.js). There is
+// NO URL to reach; without a wired driver (the default — deps.sqlDriverFactory is UNSET, see the router
+// // VERIFY note) there is nothing to connect to, so the probe HONESTLY reports "not-configured" rather than a
+// fabricated success. No fhirVersion/softwareName — SQL has no CapabilityStatement.
+function runSqlProbe(deps, config) {
+  const driver = deps.sqlDriverFactory ? deps.sqlDriverFactory(deps.env, config.bindingName) : null;
+  // No wired driver -> honestly not-configured (never a fake ok). OWNER // VERIFY: once a real Hyperdrive-backed
+  // driver is wired, replace the wired branch with a minimal PARAMETERIZED, read-only probe query and map its
+  // failures to a class; until then keep it not-configured so the probe can never report a fake success.
+  if (!driver) return { ok: false, error: "not-configured" };
+  return { ok: false, error: "not-configured" };
+}
+
 // Run the probe against the base. Returns a client-safe result object; never throws for a connection fault
 // (those become { ok:false, error }); only a programmer/dep error would propagate.
 export async function runProbe(deps, base, config, creds) {
   const sfetch = makeSafeFetch(deps.fetch);              // redirect-safe: every hop re-validated, creds dropped cross-origin
+  // Generic SQL/DB connections have NO URL to reach — dispatch the driver-presence probe BEFORE the base-URL
+  // SSRF guard (assertPublicHttpsUrl would reject the empty base a SQL row stores by design).
+  if (config && config.type === "sql") return runSqlProbe(deps, config);
   let b;
   try { b = assertPublicHttpsUrl(base, "baseUrl").href.replace(/\/$/, ""); } catch (e) { return { ok: false, error: e.klass || "bad-url" }; }
   let header;

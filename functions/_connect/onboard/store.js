@@ -19,6 +19,9 @@ export const DICOM_ONBOARD_SCOPE = Object.freeze(["ImagingStudy"]);
 // SCCM scope a graphql connection can ever produce — IDENTICAL to rest-json (the graphql connector reuses the
 // SAME normalizeCsvLab mapper, so it can never emit anything rest-json can't).
 export const GRAPHQL_ONBOARD_SCOPE = REST_ONBOARD_SCOPE;
+// SCCM scope a sql connection can ever produce — IDENTICAL to rest-json (the sql connector reuses the SAME
+// normalizeCsvLab mapper, so it can never emit anything rest-json can't).
+export const SQL_ONBOARD_SCOPE = REST_ONBOARD_SCOPE;
 
 const nonEmpty = (s) => typeof s === "string" && s.trim().length > 0;
 const now = () => new Date().toISOString();
@@ -31,7 +34,8 @@ function buildRow(body) {
   if (body.type === "rest-json") return buildRestJsonRow(body);
   if (body.type === "dicomweb") return buildDicomWebRow(body);
   if (body.type === "graphql") return buildGraphQlRow(body);
-  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir', 'rest-json', 'dicomweb' or 'graphql' is supported");
+  if (body.type === "sql") return buildSqlRow(body);
+  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir', 'rest-json', 'dicomweb', 'graphql' or 'sql' is supported");
   const base = assertPublicHttpsUrl(body.fhirBaseUrl, "fhirBaseUrl");    // SSRF guard at save time
   const auth = body.auth || {};
   const config = { source: "onboard", name: String(body.name).trim(), type: "fhir", authMethod: auth.method, createdAt: now(), updatedAt: now(), lastTest: null };
@@ -132,6 +136,33 @@ function buildGraphQlRow(body) {
   return { baseUrl: base.href.replace(/\/$/, ""), config };
 }
 
+// Generic SQL/DB lab-results pull connection (INTERFACE + STUB — see connectors/sql/connector.js). There is NO
+// URL (SQL has no HTTP endpoint, so no assertPublicHttpsUrl and baseUrl:"") and NO admin secret in our store:
+// the DB credentials live in the owner's Cloudflare Hyperdrive binding, referenced here by NAME only (we NEVER
+// store a connection string). `bindingName` is a simple binding identifier. `queryTemplate` is the owner's OWN
+// read-only, PARAMETERIZED query: SHAPE-VALIDATED (not just non-empty) so the patient value is ALWAYS a bound
+// parameter — the query must contain a placeholder ($1 / :patientId / ?) and reference the patient (never a
+// concatenated patient value: the SQL-injection invariant), must be a single statement (no ';'), and must not
+// contain any write/DDL keyword (read-only allow-list). columnMap is OPTIONAL (same inferColumnMap fallback as
+// rest-json). auth is "binding" (no admin secret), so save does the minimal conditional-seal (config.sealed=null).
+function buildSqlRow(body) {
+  if (!nonEmpty(body.bindingName) || !/^[A-Za-z_][A-Za-z0-9_]*$/.test(body.bindingName)) throw new OnboardError("invalid", "bindingName must be a simple Hyperdrive binding identifier (letters, digits, underscore; we store the NAME, never a connection string)");
+  if (!nonEmpty(body.queryTemplate)) throw new OnboardError("invalid", "queryTemplate required");
+  const q = String(body.queryTemplate).trim();
+  if (q.length > 8000) throw new OnboardError("invalid", "queryTemplate must be at most 8000 characters");
+  // READ-ONLY allow-list: a single statement (no ';' -> no stacked/second statement), and NO write/DDL keyword.
+  if (q.includes(";")) throw new OnboardError("invalid", "queryTemplate must be a single read-only statement (no ';')");
+  if (/\b(INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|GRANT|TRUNCATE|MERGE|REPLACE|CALL|EXEC(?:UTE)?)\b/i.test(q)) throw new OnboardError("invalid", "queryTemplate must be read-only (no INSERT/UPDATE/DELETE/DROP/ALTER/CREATE/GRANT/TRUNCATE)");
+  // PARAMETERIZED: the patient value MUST be a bound placeholder, never concatenated into the SQL.
+  if (!(/\$\d+/.test(q) || /:[A-Za-z_]\w*/.test(q) || q.includes("?"))) throw new OnboardError("invalid", "queryTemplate must be parameterized (use a $1, :patientId or ? placeholder for the patient id, never a concatenated value)");
+  // ...and it must reference the patient parameter the driver binds ({ patientId }): a named :patientId, or a
+  // patient-scoping column (e.g. WHERE patient_id = $1). Rejects an unscoped query that would fetch all patients.
+  if (!/patient/i.test(q)) throw new OnboardError("invalid", "queryTemplate must reference the patient parameter (e.g. WHERE patient_id = $1 or :patientId)");
+  const config = { source: "onboard", name: String(body.name).trim(), type: "sql", authMethod: "binding", bindingName: String(body.bindingName), queryTemplate: q, createdAt: now(), updatedAt: now(), lastTest: null };
+  if (body.columnMap != null) { if (typeof body.columnMap !== "object" || Array.isArray(body.columnMap)) throw new OnboardError("invalid", "columnMap must be an object"); config.columnMap = body.columnMap; }
+  return { baseUrl: "", config };   // SQL has no URL — an empty base_url is stored by design (pull.js/probe.js skip the URL guard for kind 'sql')
+}
+
 // The client-facing credential material that gets envelope-sealed (never stored/returned in the clear).
 function sealMaterial(auth) {
   if (auth.method === "token") return { token: String(auth.token) };
@@ -146,10 +177,13 @@ function sealMaterial(auth) {
 export async function saveConnection(deps, request, env, tenantId, body = {}) {
   const { actor, tenant } = await requireCan(deps, request, env, tenantId, "connector:write");
   const { baseUrl, config } = buildRow(body);
-  config.sealed = await deps.secrets.seal(JSON.stringify(sealMaterial(body.auth || {})));   // envelope-encrypted
+  // Conditional seal: a sql connection carries NO admin secret (DB creds live in the owner's Hyperdrive binding),
+  // so it stores config.sealed=null instead of requiring/sealing a credential. pull.js/probe.js already try/catch
+  // secrets.open(null) -> {}. Every other type envelope-seals its credential exactly as before.
+  config.sealed = config.type === "sql" ? null : await deps.secrets.seal(JSON.stringify(sealMaterial(body.auth || {})));   // envelope-encrypted
   const connectionId = (crypto.randomUUID ? crypto.randomUUID() : "conn-" + Math.random().toString(36).slice(2));
-  const kind = config.type === "rest-json" ? "rest-json" : config.type === "dicomweb" ? "dicomweb" : config.type === "graphql" ? "graphql" : "fhir-r4";
-  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : config.type === "dicomweb" ? DICOM_ONBOARD_SCOPE : config.type === "graphql" ? GRAPHQL_ONBOARD_SCOPE : ONBOARD_SCOPE;
+  const kind = config.type === "rest-json" ? "rest-json" : config.type === "dicomweb" ? "dicomweb" : config.type === "graphql" ? "graphql" : config.type === "sql" ? "sql" : "fhir-r4";
+  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : config.type === "dicomweb" ? DICOM_ONBOARD_SCOPE : config.type === "graphql" ? GRAPHQL_ONBOARD_SCOPE : config.type === "sql" ? SQL_ONBOARD_SCOPE : ONBOARD_SCOPE;
   await deps.db.prepare(
     "INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)"
   ).bind(tenant.id, connectionId, kind, "pull", baseUrl, JSON.stringify(config), null, JSON.stringify(scope), "draft").run();
@@ -184,6 +218,9 @@ export function safeView(row) {
     // reads with (resultsPath/columnMap are shared field names, already surfaced above). `query` carries no
     // patient value (the variable is bound at pull time, never embedded in the query string).
     query: c.query || null, graphqlPath: c.graphqlPath || null, patientVar: c.patientVar || null,
+    // sql-only (non-secret): the Hyperdrive binding NAME (never a connection string) + the read-only parameterized
+    // query template the connector runs. A connection string / DB credential is NEVER stored or surfaced.
+    bindingName: c.bindingName || null, queryTemplate: c.queryTemplate || null,
     // Automatic sync scheduler (additive, no schema change — lives in this same config JSON blob).
     syncIntervalMin: c.syncIntervalMin || 0, lastSyncAt: c.lastSyncAt || null,
   };
