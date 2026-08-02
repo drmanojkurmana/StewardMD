@@ -22,7 +22,9 @@
   }
   function keyFor(base) { return "smd_insulin_" + base + "_" + uid(); }
 
-  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart" };
+  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard" };
+  var GLASS_MAP = { frosted: "ins-glass ins-glass-frost", liquid: "ins-glass ins-glass-frost ins-glass-sheen",
+    tinted: "ins-glass ins-glass-tint", blend: "ins-glass ins-glass-tint ins-glass-sheen" };
   var SET = clone(DEFAULTS);
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function loadSettings() {
@@ -204,7 +206,7 @@
     el = document.createElement("div");
     el.id = ROOT_ID; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
     el.setAttribute("aria-label", "Insulin dose calculator");
-    el.innerHTML = '<div class="ins-gridbg"></div><div class="ins-scroll"><div class="ins-wrap">' +
+    el.innerHTML = '<div class="ins-gridbg"></div><div class="ins-orbs"></div><div class="ins-scroll"><div class="ins-wrap">' +
       '<div id="insHeader"></div><div id="insScreen"></div></div></div>';
     document.body.appendChild(el);
     el.addEventListener("click", onClick);
@@ -212,6 +214,12 @@
     return el;
   }
   function paint() {
+    var root = document.getElementById(ROOT_ID);
+    if (root) {
+      "ins-glass ins-glass-frost ins-glass-tint ins-glass-sheen".split(" ").forEach(function (c) { root.classList.remove(c); });
+      if (st.screen === "dashboard" && SET.homeGlass && SET.homeGlass !== "standard" && GLASS_MAP[SET.homeGlass])
+        GLASS_MAP[SET.homeGlass].split(" ").forEach(function (c) { root.classList.add(c); });
+    }
     document.getElementById("insHeader").innerHTML = headerHTML();
     var s = document.getElementById("insScreen");
     if (st.screen === "dashboard") { s.innerHTML = dashboardHTML(); }
@@ -356,6 +364,12 @@
           '<button data-ins="round" data-v="1" aria-pressed="' + (SET.increment === 1 ? "true" : "false") + '">1 unit</button>' +
           '<button data-ins="round" data-v="0.5" aria-pressed="' + (SET.increment === 0.5 ? "true" : "false") + '">0.5 unit</button>' +
         '</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Home appearance</div>' +
+          '<select class="ins-select" data-ins="set-glass">' +
+          [["standard", "Standard"], ["frosted", "Frosted glass"], ["liquid", "Liquid glass (sheen)"], ["tinted", "Tinted 3D glass"], ["blend", "Blend (tinted + sheen)"]].map(function (o) {
+            return '<option value="' + o[0] + '"' + (SET.homeGlass === o[0] ? " selected" : "") + '>' + o[1] + '</option>';
+          }).join("") + '</select>' +
+          '<div class="ins-tgt-note">Liquid-glass styling for the home screen only. Change it and return home to see it.</div></div>' +
       '</div>' +
       '<div class="ins-card ins-bf"><div class="ins-card-t">Defaults and safety limits</div>' +
         '<div class="ins-grid2">' +
@@ -889,6 +903,7 @@
     if (a === "bolus") { st.bolus = t.value; SET.bolusInsulin = st.bolus; saveSettings(); renderInputs(); render(); return; }
     if (a === "set-num") { var k = t.getAttribute("data-k"); var v = parseFloat(t.value); if (isFinite(v)) { SET[k] = v; saveSettings(); } return; }
     if (a === "set-text") { SET[t.getAttribute("data-k")] = t.value; saveSettings(); return; }
+    if (a === "set-glass") { SET.homeGlass = t.value; saveSettings(); return; }
     if (a === "lib-q") { st.libQ = t.value; renderLibList(); return; }
     if (a === "pat-q") { st.patQ = t.value; renderPatientList(); return; }
     if (a === "p-field") { if (!st.editP) st.editP = newProfile(); st.editP[t.getAttribute("data-k")] = t.value; return; }
