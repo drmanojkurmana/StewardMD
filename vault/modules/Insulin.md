@@ -54,14 +54,23 @@ decides: every recommendation is stamped AI-assisted and requires an explicit co
 - DONE (this pass): bolus-insulin selector in the calculator (persisted) - the chosen insulin drives
   timing/PK guidance, an IOB estimate from the confirmed-dose log via its DIA (INSULIN_ENGINE.activeInsulin),
   and a short-acting-insulin safety note.
-- NOT done (rest of v1 scope): basal/IOB dedicated screens (engine done); patient profiles on
-  `SMD_CASES`; conversion workflows; gated DKA + pediatric; tighten `refs` to pinned citations (R1 item);
-  expand the insulin dataset; native rebuild.
+- DONE (this pass): reusable patient profiles in a dedicated per-uid store
+  `smd_insulin_patients_<uid>` (name/age/sex/weight/dxType/notes + ICR/ISF/target/preferred-bolus +
+  pregnancy/renal/hepatic flags; NO MRN/DOB). Create/edit/use/delete + search; using a profile applies
+  params to the calculator and its flags feed the safety engine; dashboard patient bar + calc chip;
+  "Import from saved cases" bridge (app-only).
+- NOT done (rest of v1 scope): basal/IOB dedicated screens (engine done); conversion workflows;
+  gated DKA + pediatric; tighten `refs` to pinned citations (R1 item); expand the insulin dataset;
+  native rebuild.
 
 ## Gotchas
 - motion.dev (this build) mis-interpolates a `transform` **string** with a `"none"` keyframe and can
   settle at `scale(0)` (invisible). Use typed props (`scale`, `y`), never a transform string. See the
   `springIn()` fix in `insulin.js`.
 - Patient data must stay MRN/DOB-free (app deliberately avoids storing those; `caseshare.js` redacts
-  them). Persist to `SMD_CASES` (name/age/sex/notes) only.
+  them). Insulin profiles use their own store `smd_insulin_patients_<uid>`, NOT `SMD_CASES`.
+- `SMD_CASES` (account.js-wrapped) is a callback API: `save(ownerKey, useFs, caseObj, cb)` and
+  `getAll(ownerKey, useFs, cb)` - both return `undefined` if called without the ownerKey+callback (and
+  it's auth/owner-dependent + cloud-merged). Use `SMD_OWNER_KEY()` for ownerKey. Only used here for the
+  read-only "import from saved cases" bridge; do not build profile persistence on it.
 - Native app only sees this after build-www -> cap sync -> native rebuild + reinstall.
