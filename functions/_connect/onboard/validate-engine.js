@@ -19,12 +19,13 @@ import { runConformance } from "../sdk/conformance.js";
 import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
 import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
+import { graphqlConnector } from "../connectors/graphql/connector.js";
 
 // The SAME kind -> connector map + kind resolution pull.js uses, so validation ALWAYS conformance-checks the
 // exact connector object the real pull would run (mirrored here, not imported — pull.js keeps this map local
 // too; see its comment on why an unknown/legacy kind defaults to fhir-r4, the original Increment-1 shape).
-const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector };
-const kindOf = (row) => (row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : "fhir-r4");
+const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector };
+const kindOf = (row) => (row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : "fhir-r4");
 
 // --- CHECK 1: config validity -------------------------------------------------------------------------------
 // A minimal per-kind required-field check, mirroring store.js's buildRestJsonRow / buildDicomWebRow / the fhir
@@ -35,7 +36,7 @@ function checkConfig(row, config) {
   if (!row || !row.base_url) missing.push("base_url");
   if (!config || !config.sealed) missing.push("credentials");
   const kind = config && config.type;
-  if (kind === "rest-json" || kind === "dicomweb") {
+  if (kind === "rest-json" || kind === "dicomweb" || kind === "graphql") {
     if (!config || config.authMethod !== "token") missing.push("auth.method");
   } else {
     if (!config || (config.authMethod !== "token" && config.authMethod !== "smart")) missing.push("auth.method");
@@ -53,10 +54,15 @@ const SYNTHETIC_FHIR_PATIENT = { resourceType: "Patient", id: "P1", gender: "fem
 const SYNTHETIC_FHIR_RESOURCES = [{ resourceType: "Condition", id: "C1", code: { text: "synthetic" } }];
 const SYNTHETIC_REST_ROWS = [{ patientId: "P1", testCode: "718-7", testCodeSystem: "LN", testName: "Hemoglobin", value: 9.2, unit: "g/dL", orderId: "O1", collectedAt: "2026-08-01", resultStatus: "final" }];
 const SYNTHETIC_DICOM_STUDY = { "0020000D": { vr: "UI", Value: ["1.2.840.113619.2.55.1.1"] }, "00080061": { vr: "CS", Value: ["CT"] }, "00201206": { vr: "IS", Value: [2] }, "00201208": { vr: "IS", Value: [128] } };
+// A GraphQL response always wraps rows under `data` (the SAME synthetic row shape as rest-json's); no
+// resultsPath is configured for this synthetic fixture, so the connector accepts `data` as a bare array
+// (mirrors the connector's own "no path -> accept a bare array" contract, see connectors/graphql/connector.js).
+const SYNTHETIC_GRAPHQL_ROWS = SYNTHETIC_REST_ROWS;
 
 function syntheticFetch(kind) {
   if (kind === "rest-json") return async () => new Response(JSON.stringify(SYNTHETIC_REST_ROWS), { status: 200 });
   if (kind === "dicomweb") return async () => new Response(JSON.stringify([SYNTHETIC_DICOM_STUDY]), { status: 200 });
+  if (kind === "graphql") return async () => new Response(JSON.stringify({ data: SYNTHETIC_GRAPHQL_ROWS }), { status: 200 });
   return async (url) => {
     const u = String(url);
     if (/\/Patient\/[^/?]+$/.test(u)) return new Response(JSON.stringify(SYNTHETIC_FHIR_PATIENT));

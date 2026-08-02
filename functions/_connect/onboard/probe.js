@@ -103,6 +103,24 @@ async function runDicomProbe(sfetch, base, config, header) {
   return { ok: true };
 }
 
+// Generic GraphQL probe: POST {base}{graphqlPath||""} with the resolved auth header + a minimal, PHI-free
+// introspection-free probe query ("{ __typename }"); ok iff 2xx AND the body carries EITHER `data` or `errors`
+// (the SAME {data,errors} contract the connector's fetchPatient accepts — never invents a shape). No
+// fhirVersion/softwareName — there is no CapabilityStatement for a GraphQL API. Reuses "not-fhir" as "not the
+// expected JSON shape", matching runRestProbe's/runDicomProbe's convention.
+async function runGraphQlProbe(sfetch, base, config, header) {
+  const path = (config && config.graphqlPath) || "";
+  const jsonHeader = Object.assign({ "content-type": "application/json" }, header);
+  let res;
+  try { res = await sfetch(base + path, { method: "POST", headers: jsonHeader, body: JSON.stringify({ query: "{ __typename }" }) }); } catch (e) { return { ok: false, error: klassOf(e) }; }
+  if (res.status === 401 || res.status === 403) return { ok: false, error: "unauthorized" };
+  if (!res.ok) return { ok: false, error: "unreachable" };
+  let data;
+  try { data = await res.json(); } catch { return { ok: false, error: "not-fhir" }; }
+  if (!data || (!("data" in data) && !("errors" in data))) return { ok: false, error: "not-fhir" };
+  return { ok: true };
+}
+
 // Run the probe against the base. Returns a client-safe result object; never throws for a connection fault
 // (those become { ok:false, error }); only a programmer/dep error would propagate.
 export async function runProbe(deps, base, config, creds) {
@@ -116,6 +134,8 @@ export async function runProbe(deps, base, config, creds) {
   if (config && config.type === "rest-json") return runRestProbe(sfetch, b, config, header);
   // Generic DICOMweb connections probe a single (limited, unfiltered) studies endpoint.
   if (config && config.type === "dicomweb") return runDicomProbe(sfetch, b, config, header);
+  // Generic GraphQL connections probe a single minimal introspection-free query (no patient data sent).
+  if (config && config.type === "graphql") return runGraphQlProbe(sfetch, b, config, header);
 
   // 1. /metadata -> fhirVersion + software.name
   let mres;

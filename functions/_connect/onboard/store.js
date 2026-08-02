@@ -16,6 +16,9 @@ export const REST_ONBOARD_SCOPE = Object.freeze(["Patient", "Observation", "Diag
 // SCCM scope a dicomweb connection can ever produce (the QIDO-RS connector only ever emits ImagingStudy — no
 // Patient demographics, no other resource; the bundle's `patient` is a hashed-ref placeholder, not scoped data).
 export const DICOM_ONBOARD_SCOPE = Object.freeze(["ImagingStudy"]);
+// SCCM scope a graphql connection can ever produce — IDENTICAL to rest-json (the graphql connector reuses the
+// SAME normalizeCsvLab mapper, so it can never emit anything rest-json can't).
+export const GRAPHQL_ONBOARD_SCOPE = REST_ONBOARD_SCOPE;
 
 const nonEmpty = (s) => typeof s === "string" && s.trim().length > 0;
 const now = () => new Date().toISOString();
@@ -27,7 +30,8 @@ function buildRow(body) {
   if (!nonEmpty(body.name)) throw new OnboardError("invalid", "name required");
   if (body.type === "rest-json") return buildRestJsonRow(body);
   if (body.type === "dicomweb") return buildDicomWebRow(body);
-  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir', 'rest-json' or 'dicomweb' is supported");
+  if (body.type === "graphql") return buildGraphQlRow(body);
+  if (body.type !== "fhir") throw new OnboardError("invalid", "only type 'fhir', 'rest-json', 'dicomweb' or 'graphql' is supported");
   const base = assertPublicHttpsUrl(body.fhirBaseUrl, "fhirBaseUrl");    // SSRF guard at save time
   const auth = body.auth || {};
   const config = { source: "onboard", name: String(body.name).trim(), type: "fhir", authMethod: auth.method, createdAt: now(), updatedAt: now(), lastTest: null };
@@ -84,6 +88,50 @@ function buildDicomWebRow(body) {
   return { baseUrl: base.href.replace(/\/$/, ""), config };
 }
 
+// Generic GraphQL lab-results pull connection. Token/API-key auth ONLY (no SMART — same explicit rejection as
+// rest-json/dicomweb). `query` is the hospital's OWN GraphQL query text (their input; we never fabricate a
+// schema), SHAPE-VALIDATED (not just non-empty): bounded length, must look like a query operation (not a bare
+// fragment/garbage), and must NEVER contain a mutation/subscription (this connector only ever reads). Crucially
+// the query MUST reference the bound `$<patientVar>` variable — a query without it would still execute and
+// return SOME rows, but unscoped to the requested patient (a silent all-patient fetch), so that shape is
+// rejected here rather than merely "accepted but insecure". `graphqlPath`/`resultsPath` are shape-validated the
+// same way as rest-json's resultsPath/dicomweb's studiesPath (an absolute path with no query/fragment/
+// whitespace/@/control for graphqlPath; simple dotted identifier segments for resultsPath, with __proto__/
+// prototype/constructor segments rejected so a malicious path can never touch the Object prototype chain).
+function buildGraphQlRow(body) {
+  const base = assertPublicHttpsUrl(body.baseUrl, "baseUrl");           // SSRF guard at save time
+  const auth = body.auth || {};
+  if (auth.method !== "token") throw new OnboardError("invalid", "auth.method must be 'token' for type 'graphql'");
+  if (!nonEmpty(auth.token)) throw new OnboardError("invalid", "auth.token required for method 'token'");
+  const config = { source: "onboard", name: String(body.name).trim(), type: "graphql", authMethod: "token", createdAt: now(), updatedAt: now(), lastTest: null };
+
+  if (!nonEmpty(body.query)) throw new OnboardError("invalid", "query required");
+  const query = String(body.query).trim();
+  if (query.length > 8000) throw new OnboardError("invalid", "query must be at most 8000 characters");
+  if (!/^(query\b|\{)/.test(query)) throw new OnboardError("invalid", "query must start with 'query' or '{'");
+  if (/\bmutation\b|\bsubscription\b/.test(query)) throw new OnboardError("invalid", "query must not contain a mutation or subscription");
+
+  let patientVar = "patientId";
+  if (body.patientVar != null) {
+    if (!nonEmpty(body.patientVar) || !/^[A-Za-z_][A-Za-z0-9_]*$/.test(body.patientVar)) throw new OnboardError("invalid", "patientVar must be a simple identifier");
+    patientVar = String(body.patientVar);
+  }
+  // A query without this bound variable would fetch unscoped/all-patient data — reject, don't just warn.
+  if (!new RegExp("\\$" + patientVar + "\\b").test(query)) throw new OnboardError("invalid", "query must reference the bound variable $" + patientVar);
+  config.query = query;
+  config.patientVar = patientVar;
+
+  if (body.headerName != null) { if (!nonEmpty(body.headerName) || !/^[A-Za-z0-9-]+$/.test(body.headerName)) throw new OnboardError("invalid", "headerName must be a simple header token (letters, digits, dashes)"); config.headerName = String(body.headerName); }
+  if (body.graphqlPath != null) { if (!nonEmpty(body.graphqlPath) || !/^\/[^\s#?@\x00-\x1f]*$/.test(body.graphqlPath)) throw new OnboardError("invalid", "graphqlPath must be an absolute path (start with /) with no query, fragment, whitespace, @ or control characters"); config.graphqlPath = String(body.graphqlPath); }
+  if (body.resultsPath != null) {
+    if (!nonEmpty(body.resultsPath) || !/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*$/.test(body.resultsPath)) throw new OnboardError("invalid", "resultsPath must be dot-separated simple identifiers");
+    if (/(^|\.)(__proto__|prototype|constructor)(\.|$)/.test(body.resultsPath)) throw new OnboardError("invalid", "resultsPath must not reference __proto__, prototype or constructor");
+    config.resultsPath = String(body.resultsPath);
+  }
+  if (body.columnMap != null) { if (typeof body.columnMap !== "object" || Array.isArray(body.columnMap)) throw new OnboardError("invalid", "columnMap must be an object"); config.columnMap = body.columnMap; }
+  return { baseUrl: base.href.replace(/\/$/, ""), config };
+}
+
 // The client-facing credential material that gets envelope-sealed (never stored/returned in the clear).
 function sealMaterial(auth) {
   if (auth.method === "token") return { token: String(auth.token) };
@@ -100,8 +148,8 @@ export async function saveConnection(deps, request, env, tenantId, body = {}) {
   const { baseUrl, config } = buildRow(body);
   config.sealed = await deps.secrets.seal(JSON.stringify(sealMaterial(body.auth || {})));   // envelope-encrypted
   const connectionId = (crypto.randomUUID ? crypto.randomUUID() : "conn-" + Math.random().toString(36).slice(2));
-  const kind = config.type === "rest-json" ? "rest-json" : config.type === "dicomweb" ? "dicomweb" : "fhir-r4";
-  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : config.type === "dicomweb" ? DICOM_ONBOARD_SCOPE : ONBOARD_SCOPE;
+  const kind = config.type === "rest-json" ? "rest-json" : config.type === "dicomweb" ? "dicomweb" : config.type === "graphql" ? "graphql" : "fhir-r4";
+  const scope = config.type === "rest-json" ? REST_ONBOARD_SCOPE : config.type === "dicomweb" ? DICOM_ONBOARD_SCOPE : config.type === "graphql" ? GRAPHQL_ONBOARD_SCOPE : ONBOARD_SCOPE;
   await deps.db.prepare(
     "INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)"
   ).bind(tenant.id, connectionId, kind, "pull", baseUrl, JSON.stringify(config), null, JSON.stringify(scope), "draft").run();
@@ -132,6 +180,10 @@ export function safeView(row) {
     resultsPath: c.resultsPath || null, patientParam: c.patientParam || null, columnMap: c.columnMap || null,
     // dicomweb-only (non-secret): the QIDO-RS studies endpoint shape the connector reads with.
     studiesPath: c.studiesPath || null, patientTag: c.patientTag || null,
+    // graphql-only (non-secret): the hospital's OWN query text + the variable/graphqlPath shape the connector
+    // reads with (resultsPath/columnMap are shared field names, already surfaced above). `query` carries no
+    // patient value (the variable is bound at pull time, never embedded in the query string).
+    query: c.query || null, graphqlPath: c.graphqlPath || null, patientVar: c.patientVar || null,
     // Automatic sync scheduler (additive, no schema change — lives in this same config JSON blob).
     syncIntervalMin: c.syncIntervalMin || 0, lastSyncAt: c.lastSyncAt || null,
   };

@@ -15,6 +15,7 @@ import { makeSecrets } from "../../../_connect/secrets.js";
 import { saveConnection, listConnections, deleteConnection, getRow } from "../../../_connect/onboard/store.js";
 import { restFlagOn } from "../../../_connect/connectors/rest-json/flags.js";
 import { dicomFlagOn } from "../../../_connect/connectors/dicomweb/flags.js";
+import { graphqlFlagOn } from "../../../_connect/connectors/graphql/flags.js";
 import { testConnection } from "../../../_connect/onboard/probe.js";
 import { validateConnection } from "../../../_connect/onboard/validate-engine.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
@@ -58,6 +59,13 @@ async function restGateBlocks(deps, tid, connectionId, env) {
 async function dicomGateBlocks(deps, tid, connectionId, env) {
   if (dicomFlagOn(env)) return false;
   try { const { row } = await getRow(deps.db, tid, connectionId); return row.kind === "dicomweb"; }
+  catch { return false; }
+}
+
+// Same idiom for the generic GraphQL per-track gate (smd_connect_graphql).
+async function graphqlGateBlocks(deps, tid, connectionId, env) {
+  if (graphqlFlagOn(env)) return false;
+  try { const { row } = await getRow(deps.db, tid, connectionId); return row.kind === "graphql"; }
   catch { return false; }
 }
 
@@ -145,6 +153,7 @@ export async function onRequest(context) {
     if (method === "POST" && seg === "emr") {
       if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (body.type === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (body.type === "graphql" && !graphqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse(await saveConnection(deps, request, env, tid, body));
     }
     if (method === "GET" && seg === "list") return jsonResponse({ ok: true, connections: await listConnections(deps, request, env, tid) });
@@ -153,11 +162,13 @@ export async function onRequest(context) {
     if (method === "POST" && parts[0] === "test" && parts[1]) {
       if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await graphqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse(await testConnection(deps, request, env, tid, parts[1]));
     }
     if (method === "POST" && parts[0] === "pull" && parts[1]) {
       if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await graphqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
     }
     // Auto Validation: config-shape + connector-conformance (synthetic, type-level) + reachability (the same
@@ -165,6 +176,7 @@ export async function onRequest(context) {
     if (method === "POST" && parts[0] === "validate" && parts[1]) {
       if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await graphqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse(await validateConnection(deps, request, env, tid, parts[1]));
     }
     // Automatic sync scheduler: the RBAC-gated per-connection interval setter (a hospital admin configures it
@@ -176,6 +188,7 @@ export async function onRequest(context) {
     if (method === "POST" && parts[0] === "sync-now" && parts[1]) {
       if (await restGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await dicomGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      if (await graphqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse(await syncNow(deps, request, env, tid, parts[1]));
     }
     // CRON-ONLY: the stewardmd-api Worker's schedule POSTs here (mirrors /admin/sweep on the Phase-0 surface).

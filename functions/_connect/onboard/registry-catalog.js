@@ -11,7 +11,7 @@
 // "Marketplace architecture" here = a catalog model (typed entries + metadata + an enable-via-flag model) that
 // a future third-party marketplace would build on. The actual third-party install/publish flow is OUT OF SCOPE.
 //
-// Pull types (fhir-r4, rest-json, dicomweb) are DERIVED from the SDK registry (sdk/catalog.js's defaultRegistry
+// Pull types (fhir-r4, rest-json, dicomweb, graphql) are DERIVED from the SDK registry (sdk/catalog.js's defaultRegistry
 // -> asConnectorMap) + each connector's own capabilities(), so this never hand-duplicates their resource/auth
 // lists. The registry also carries the abdm connector (profile "event"), which is filtered OUT here: onboarding
 // lists PULL connection types only -- abdm is a different (event-profile) onboarding surface, not a self-service
@@ -26,6 +26,7 @@ import { onboardFlagOn } from "./flags.js";
 import { fhirFlagOn } from "../smart/flags.js";
 import { restFlagOn } from "../connectors/rest-json/flags.js";
 import { dicomFlagOn } from "../connectors/dicomweb/flags.js";
+import { graphqlFlagOn } from "../connectors/graphql/flags.js";
 import { flagHl7On, flagFhirPushOn } from "../ingest.js";
 
 // Per-track flag gate + a short one-line, non-em-dash description for each SDK-registry PULL connector.
@@ -41,6 +42,10 @@ const PULL_META = {
   "dicomweb": {
     category: "imaging", flagEnv: "CONNECT_DICOM_FLAG", enabledFn: dicomFlagOn,
     description: "DICOMweb QIDO-RS pull connection that reads imaging study metadata only, never pixel data.",
+  },
+  "graphql": {
+    category: "pull", flagEnv: "CONNECT_GRAPHQL_FLAG", enabledFn: graphqlFlagOn,
+    description: "Generic GraphQL lab-results pull connection using your own query, no EMR-specific code required.",
   },
 };
 

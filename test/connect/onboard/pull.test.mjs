@@ -90,6 +90,35 @@ test("a saved dicomweb connection pulls through a mocked safe fetch -> valid SCC
   assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
 });
 
+// --- graphql: the same pull.js path, reused per the row's stored kind ------------------------------------
+test("a saved graphql connection pulls through a mocked safe fetch -> valid SCCM bundle; the query and variables are correct, token never in the audit", async () => {
+  const ROWS = [{ patientId: "P1", testCode: "718-7", testCodeSystem: "LN", testName: "Hemoglobin", value: 9.2, unit: "g/dL", orderId: "O1", collectedAt: "2026-08-01", resultStatus: "final" }];
+  const QUERY = "query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId testCode testCodeSystem testName value unit orderId collectedAt resultStatus } } }";
+  const gqlFetch = async (url, init) => {
+    assert.match(String(url), /\/graphql$/);
+    assert.equal(init.headers.authorization, "Bearer gql-tok-1");
+    const body = JSON.parse(init.body);
+    assert.equal(body.query, QUERY);
+    assert.deepEqual(body.variables, { patientId: "P1" });
+    return new Response(JSON.stringify({ data: { patientLabs: { rows: ROWS } } }), { status: 200 });
+  };
+  const db = seedDb();
+  const deps = { db, kv: makeMockKv(), secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }), fetch: gqlFetch, now: () => Date.now() };
+  const { connectionId } = await saveConnection(deps, req, env, "t1",
+    { name: "Lab GraphQL API", type: "graphql", baseUrl: "https://labs.example.org/graphql", query: QUERY, resultsPath: "patientLabs.rows", auth: { method: "token", token: "gql-tok-1" } });
+
+  const bundle = await pullConnection(deps, req, env, "t1", connectionId, "P1");
+  assert.equal(validateBundle(bundle).ok, true);
+  assert.equal(bundle.observations.length, 1);
+  assert.equal(bundle.meta.sourceConnector, "graphql");
+
+  const auditRows = db._tables.connect_audit_event || [];
+  assert.ok(auditRows.some((r) => r.action === "connect.onboard.pulled"));
+  const blob = JSON.stringify(auditRows);
+  for (const secret of ["gql-tok-1", "labs.example.org"]) assert.equal(blob.includes(secret), false);
+  assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
+});
+
 test("pull is denied for an auditor (PHI is not for the auditor role)", async () => {
   const mock = makeMockFhir({ base: "https://fhir.example.org" });
   const db = seedDb("auditor");

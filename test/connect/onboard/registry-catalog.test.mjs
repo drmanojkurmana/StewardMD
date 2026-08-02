@@ -1,7 +1,7 @@
 // test/connect/onboard/registry-catalog.test.mjs — Connector Registry + Marketplace catalog: a self-service,
 // PHI-free, tenant-INDEPENDENT list of every connector TYPE the platform supports (metadata only). Pins: one
 // entry per known type with the right category/resources/authKinds, the pull entries matching the SDK registry
-// (fhir-r4/rest-json/dicomweb present, abdm event-profile NOT listed), `enabled` reflecting the per-track flag
+// (fhir-r4/rest-json/dicomweb/graphql present, abdm event-profile NOT listed), `enabled` reflecting the per-track flag
 // env, identical output across tenants (no tenant row is ever read), and fail-closed RBAC (a non-member / guest
 // is denied).
 import { test } from "node:test";
@@ -34,21 +34,23 @@ test("one entry per known connector type, with the right category", async () => 
   const r = await listConnectorCatalog({ db: seed(), identifyFn: idFn("u-admin") }, req("t1"), ON);
   assert.equal(r.ok, true);
   const ids = r.connectors.map((c) => c.id).sort();
-  assert.deepEqual(ids, ["dicomweb", "fhir-push", "fhir-r4", "file", "hl7v2", "rest-json"]);
+  assert.deepEqual(ids, ["dicomweb", "fhir-push", "fhir-r4", "file", "graphql", "hl7v2", "rest-json"]);
   assert.equal(byId(r.connectors, "fhir-r4").category, "pull");
   assert.equal(byId(r.connectors, "rest-json").category, "pull");
+  assert.equal(byId(r.connectors, "graphql").category, "pull");
   assert.equal(byId(r.connectors, "dicomweb").category, "imaging");
   assert.equal(byId(r.connectors, "file").category, "file");
   assert.equal(byId(r.connectors, "hl7v2").category, "feed");
   assert.equal(byId(r.connectors, "fhir-push").category, "feed");
 });
 
-test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb present); abdm NOT listed", async () => {
+test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb/graphql present); abdm NOT listed", async () => {
   const r = await listConnectorCatalog({ db: seed(), identifyFn: idFn("u-admin") }, req("t1"), ON);
   const ids = r.connectors.map((c) => c.id);
   assert.ok(ids.includes("fhir-r4"));
   assert.ok(ids.includes("rest-json"));
   assert.ok(ids.includes("dicomweb"));
+  assert.ok(ids.includes("graphql"));
   assert.equal(ids.includes("abdm"), false);   // profile "event" -- a different onboarding surface, not a self-service type here
 
   const fhir = byId(r.connectors, "fhir-r4");
@@ -65,6 +67,10 @@ test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb presen
   const dicom = byId(r.connectors, "dicomweb");
   assert.deepEqual(dicom.resources, ["ImagingStudy"]);
   assert.deepEqual(dicom.authKinds, ["token"]);
+
+  const gql = byId(r.connectors, "graphql");
+  assert.deepEqual(gql.resources.slice().sort(), ["DiagnosticReport", "Observation", "Patient"]);
+  assert.deepEqual(gql.authKinds, ["token"]);
 });
 
 test("every entry carries a description string and no undefined/null field", async () => {
@@ -90,6 +96,18 @@ test("enabled reflects the flag env: CONNECT_REST_FLAG on -> rest-json enabled, 
   assert.equal(byId(on.connectors, "rest-json").enabled, true);
   // other entries are unaffected by the rest-json flag
   assert.equal(byId(on.connectors, "fhir-r4").enabled, false);
+  assert.equal(byId(on.connectors, "dicomweb").enabled, false);
+  assert.equal(byId(on.connectors, "graphql").enabled, false);
+});
+
+test("enabled reflects the flag env: CONNECT_GRAPHQL_FLAG on -> graphql enabled, off -> disabled", async () => {
+  const db = seed();
+  const off = await listConnectorCatalog({ db, identifyFn: idFn("u-admin") }, req("t1"), ON);
+  assert.equal(byId(off.connectors, "graphql").enabled, false);
+  const on = await listConnectorCatalog({ db, identifyFn: idFn("u-admin") }, req("t1"), Object.assign({}, ON, { CONNECT_GRAPHQL_FLAG: "1" }));
+  assert.equal(byId(on.connectors, "graphql").enabled, true);
+  // other entries are unaffected by the graphql flag
+  assert.equal(byId(on.connectors, "rest-json").enabled, false);
   assert.equal(byId(on.connectors, "dicomweb").enabled, false);
 });
 

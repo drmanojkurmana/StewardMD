@@ -213,3 +213,108 @@ test("save SHAPE-validates dicomweb request-shaping fields (studiesPath + patien
   const ok = await saveConnection(deps(db), req, env, "t1", { ...dicomBody, studiesPath: "/api/v2/studies", patientTag: "00100020" });
   assert.ok(ok.connectionId);                                            // a clean absolute path + valid tag is accepted
 });
+
+// --- graphql (generic GraphQL lab-results pull connector) ----------------------------------------------------
+const gqlQuery = "query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId testName value unit } } }";
+const gqlBody = { name: "Lab GraphQL API", type: "graphql", baseUrl: "https://labs.example.org/graphql", query: gqlQuery, auth: { method: "token", token: "sekret-gql-123" } };
+
+test("save accepts type 'graphql' with auth.method 'token'; envelope-seals the credential", async () => {
+  const db = seedDb();
+  const res = await saveConnection(deps(db), req, env, "t1", gqlBody);
+  assert.equal(res.ok, true);
+  const rows = db._tables.connect_connector_config;
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].kind, "graphql");
+  assert.equal(rows[0].profile, "pull");
+  const config = JSON.parse(rows[0].config);
+  assert.equal(config.type, "graphql");
+  assert.equal(config.query, gqlQuery);
+  assert.equal(config.patientVar, "patientId");            // default when not supplied
+  assert.equal(JSON.parse(rows[0].scope).join(","), "Patient,Observation,DiagnosticReport");
+  const stored = JSON.stringify(rows[0]);
+  assert.equal(stored.includes("sekret-gql-123"), false);          // raw token NEVER stored in the clear
+  const creds = JSON.parse(await makeSecrets(env).open(config.sealed));
+  assert.equal(creds.token, "sekret-gql-123");                     // round-trip
+});
+
+test("save rejects auth.method 'smart' for type 'graphql' (token-only)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, auth: { method: "smart", clientId: "cid" } }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save SSRF-rejects a private/loopback baseUrl for type 'graphql'", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, baseUrl: "https://169.254.169.254/graphql" }),
+    (e) => e instanceof OnboardError && e.klass === "bad-url");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("list surfaces graphql connections (query/resultsPath/patientVar) and never secret material", async () => {
+  const db = seedDb();
+  const { connectionId } = await saveConnection(deps(db), req, env, "t1", { ...gqlBody, resultsPath: "patientLabs.rows", graphqlPath: "/api/graphql" });
+  const list = await listConnections(deps(db), req, env, "t1");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].connectionId, connectionId);
+  assert.equal(list[0].type, "graphql");
+  assert.equal(list[0].query, gqlQuery);
+  assert.equal(list[0].resultsPath, "patientLabs.rows");
+  assert.equal(list[0].graphqlPath, "/api/graphql");
+  assert.equal(list[0].patientVar, "patientId");
+  assert.equal(JSON.stringify(list).includes("sekret-gql-123"), false);
+});
+
+test("save rejects a query without the bound $patientVar (would fetch unscoped/all-patient data)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, query: "query { allLabs { rows { patientId testName value unit } } }" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  // a custom patientVar must ALSO be referenced, not just the default
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, patientVar: "mrn", query: gqlQuery }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+  const ok = await saveConnection(deps(db), req, env, "t1", { ...gqlBody, patientVar: "mrn", query: "query($mrn: ID!) { patientLabs(id: $mrn) { rows { patientId } } }" });
+  assert.ok(ok.connectionId);   // referencing the custom patientVar is accepted
+});
+
+test("save rejects a query containing a mutation or subscription (read-only connector)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, query: "mutation($patientId: ID!) { deletePatient(id: $patientId) }" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, query: "subscription($patientId: ID!) { labUpdated(id: $patientId) { value } }" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save rejects an oversized query", async () => {
+  const db = seedDb();
+  const huge = "query($patientId: ID!) { patientLabs(id: $patientId) { rows { " + "x".repeat(8100) + " } } }";
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...gqlBody, query: huge }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save SHAPE-validates graphql request-shaping fields (graphqlPath absolute-path guard; resultsPath dotted-identifier guard; no prototype-polluting segment)", async () => {
+  const db = seedDb();
+  for (const bad of ["/graphql#dummy", ":8080/internal", "graphql", "/a b", "/x?y=1", "/@evil.com"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...gqlBody, graphqlPath: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "graphqlPath '" + bad + "' must be rejected");
+  }
+  // resultsPath must be dotted simple identifiers; a __proto__/prototype/constructor segment is rejected even
+  // though it would otherwise match the dotted-identifier shape (defense in depth against prototype pollution).
+  for (const bad of ["patient labs", "patient.labs.", "patient..labs", "patient/labs", "__proto__.rows", "patient.__proto__", "patient.prototype.rows", "constructor.rows"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...gqlBody, resultsPath: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "resultsPath '" + bad + "' must be rejected");
+  }
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...gqlBody, headerName: "X-Bad\r\nEvil: 1" }), (e) => e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);   // nothing was persisted
+  const ok = await saveConnection(deps(db), req, env, "t1", { ...gqlBody, graphqlPath: "/api/v2/graphql", resultsPath: "patient.labs.rows" });
+  assert.ok(ok.connectionId);                                            // a clean absolute path + dotted resultsPath is accepted
+});

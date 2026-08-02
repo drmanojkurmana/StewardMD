@@ -62,7 +62,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=6 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb all active (no disabled 'coming soon' option)");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=7 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0 && en.indexOf("graphql")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL all active (no disabled 'coming soon' option)");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -220,6 +220,64 @@ try {
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
+  // GraphQL lab API type: activates the GraphQL subform (hides FHIR/Detect + CSV + HL7 + Webhook + REST +
+  // DICOMweb); Save-and-test builds {type:"graphql", baseUrl, auth:{method:"token",token,headerName?}, query,
+  // patientVar?, resultsPath?} exactly per the backend contract, POSTs /emr then /test/:id (same two-step flow
+  // as REST/DICOMweb/FHIR), and renders a GraphQL-specific success message (not a FHIR-version string) through
+  // the shared say()/testMsg() path. The mocked /emr handler also asserts the query text carries NO patient
+  // value baked in (the wizard never string-interpolates a patient id into the query it sends to the server).
+  ok(await ev(`document.getElementById("aType").value="graphql"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fGraphql")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none" && getComputedStyle(document.getElementById("fDicom")).display==="none";`) === true, "GraphQL type activates the GraphQL subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST + DICOMweb fields");
+  await ev(`window.ConnectEMR.setTenant("t-gql"); window.ConnectEMR.setName("Lab GraphQL API");
+    document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql";
+    document.getElementById("aGraphqlToken").value="gql-tok-1";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId testName value unit } } }";
+    document.getElementById("aGraphqlResultsPath").value="patientLabs.rows";
+    window.__gqlSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__gqlSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"gql-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/gql-1")>=0){ return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.graphqlSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__gqlSaved; return !!b && b.type==="graphql" && b.baseUrl==="https://labs.example.org/graphql" && b.tenantId==="t-gql" && b.name==="Lab GraphQL API" && b.auth&&b.auth.method==="token" && b.auth.token==="gql-tok-1" && b.query.indexOf("$patientId")>=0 && b.resultsPath==="patientLabs.rows" && !("headerName" in (b.auth||{})) && !("patientVar" in b);`) === true, "GraphQL Save-and-test POSTs /emr with type graphql + baseUrl + token auth + query + resultsPath (optional fields omitted when blank)");
+  ok(await ev(`var m=document.getElementById("graphqlMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("GraphQL endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "GraphQL Save-and-test reports success with GraphQL-specific copy (not a FHIR version string), no em-dash");
+  ok(await ev(`return document.getElementById("aGraphqlBase").value===""&&document.getElementById("aGraphqlToken").value===""&&document.getElementById("aGraphqlQuery").value==="";`) === true, "GraphQL form clears after a successful save");
+
+  // AI-assisted field mapping (GraphQL): the admin types column headers (there is no server-side preview for a
+  // GraphQL endpoint), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is
+  // then included as columnMap on the next Save.
+  await ev(`document.getElementById("aGraphqlHeaders").value="mrn, test_name, result_value"; window.__gqlMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__gqlMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestGraphqlMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__gqlMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "GraphQL Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("graphqlMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the GraphQL suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("graphqlMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the GraphQL suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab GraphQL API 2"; document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql";
+    document.getElementById("aGraphqlToken").value="gql-tok-2";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId } } }";
+    window.__gqlSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__gqlSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"gql-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.graphqlSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__gqlSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed GraphQL mapping is included as columnMap on Save");
+  // A 404 (flag off) on GraphQL Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`document.getElementById("aGraphqlHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestGraphqlMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GraphQL Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
   // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
   // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
   await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
@@ -301,6 +359,8 @@ try {
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab REST Feed")>=0 && h.indexOf(">REST/JSON<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a rest-json row is badged REST/JSON (its real type), not hardcoded FHIR");
   ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-3",name:"Hospital PACS Feed",type:"dicomweb",fhirBaseUrl:"https://pacs.example.org/dicom-web",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Hospital PACS Feed")>=0 && h.indexOf(">DICOMweb<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a dicomweb row is badged DICOMweb (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-4",name:"Lab GraphQL Feed",type:"graphql",fhirBaseUrl:"https://labs.example.org/graphql",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab GraphQL Feed")>=0 && h.indexOf(">GraphQL<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a graphql row is badged GraphQL (its real type), not hardcoded FHIR");
 
   // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
   // the Connections dashboard renders). Two connections: one auto-sync ON and never synced (next due = "due
@@ -557,6 +617,15 @@ try {
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "DICOMweb save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
 
+  // graphql degrades through the SAME showFlagOff() path as every other type (no special-casing in doGraphqlSave).
+  await ev(`window.ConnectEMR.setTenant("t-final3"); document.getElementById("aName").value="Lab GraphQL Final";
+    document.getElementById("aGraphqlBase").value="https://labs.example.org/graphql"; document.getElementById("aGraphqlToken").value="tok-1";
+    document.getElementById("aGraphqlQuery").value="query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId } } }";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.graphqlSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GraphQL save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
   // Connection health degrades through the SAME showFlagOff() path as every other GET on a 404.
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadHealth(); return 1;`);
   await sleep(200);
@@ -579,7 +648,7 @@ try {
     return mon.length===2 && mon.every(function(c){return getComputedStyle(c).display!=="none";}) && onboardHidden;`) === true, "setSection('monitoring') shows the Connection health + Activity log cards and hides the Onboard card");
   await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
   ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none" && getComputedStyle(document.querySelector('.card[data-section="monitoring"]')).display==="none";`) === true, "setSection('onboard') restores the Onboard card and re-hides Monitoring");
-  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fCsv","fHl7","fWebhook",
+  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fGraphql","fCsv","fHl7","fWebhook",
       "tenantSel","tenantReload","tenantMsg","noTenant","opsArea","work","flagOff","gate",
       "dash","dashReload","dashCounts","syncPanel","syncReload","syncSummary",
       "health","healthReload","healthSummary","activity","activityReload","activitySummary",

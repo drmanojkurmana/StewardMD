@@ -288,3 +288,46 @@ test("dicomweb test/pull: per-track flag gate on an existing dicomweb row -> 404
   assert.equal((await onRequest(post("/api/connect/onboard/pull/dw1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
   assert.equal((await onRequest(post("/api/connect/onboard/validate/dw1", { tenantId: "t1" }, envOn))).status, 401);
 });
+
+// --- graphql per-track flag gate (mirrors the rest-json/dicomweb idiom): smd_connect_graphql, default OFF ----
+test("graphql save: 404 when CONNECT_GRAPHQL_FLAG is off (base+onboard on); reachable (401) when on", async () => {
+  const gqlBody = { tenantId: "t1", name: "Lab GraphQL API", type: "graphql", baseUrl: "https://labs.example.org/graphql",
+    query: "query($patientId: ID!) { patientLabs(id: $patientId) { rows { patientId } } }", auth: { method: "token", token: "SEKRET-GQL" } };
+  const off = await onRequest(post("/api/connect/onboard/emr", gqlBody, BOTH));
+  assert.equal(off.status, 404);
+  const on = await onRequest(post("/api/connect/onboard/emr", gqlBody, Object.assign({}, BOTH, { CONNECT_GRAPHQL_FLAG: "1" })));
+  assert.equal(on.status, 401);        // past the gate -> the normal unauthenticated RBAC 401
+  // fhir save is unaffected by the graphql gate either way.
+  const fhirRes = await onRequest(post("/api/connect/onboard/emr",
+    { tenantId: "t1", name: "x", type: "fhir", fhirBaseUrl: "https://fhir.example.org", auth: { method: "token", token: "x" } }, BOTH));
+  assert.equal(fhirRes.status, 401);
+});
+
+test("graphql test/pull/validate: per-track flag gate on an existing graphql row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "gq1", "graphql", "pull", "https://labs.example.org/graphql", JSON.stringify({ source: "onboard", type: "graphql" }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_GRAPHQL_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/gq1", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/gq1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/gq1", { tenantId: "t1" }, envOff))).status, 404);
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/gq1", { tenantId: "t1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/gq1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/gq1", { tenantId: "t1" }, envOn))).status, 401);
+});
+
+test("sync-now: graphql per-track flag gate on an existing row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "gq2", "graphql", "pull", "https://labs.example.org/graphql", JSON.stringify({ source: "onboard", type: "graphql" }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_GRAPHQL_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/gq2", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/gq2", { tenantId: "t1" }, envOn))).status, 401);
+});
