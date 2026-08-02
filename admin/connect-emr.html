@@ -91,6 +91,17 @@
       <!-- Operational area: shown only once you belong to at least one organization. -->
       <div id="opsArea">
 
+      <!-- Connector catalog: a self-service, marketplace-style catalog of every connector TYPE the platform
+           supports (metadata only -- no tenant/PHI data), so an admin can see what they can connect and whether
+           each type is enabled before adding a connection below. Read on demand via Refresh, same pattern as
+           Connection health / Activity log (GET /connectors, connector:read RBAC). -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connector catalog</b><button class="ghost" id="catalogReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" style="margin-top:4px">Every connector type below is available in principle. Enabling a type for your organization is a flag flip made by the StewardMD team; ask us to enable a type marked Disabled.</div>
+        <div class="hint" id="catalogSummary" style="margin-top:4px"></div>
+        <div id="catalog" style="margin-top:12px"><div class="hint">Select your organization above, then Refresh, to view the connector catalog.</div></div>
+      </div>
+
       <!-- Add a connection -->
       <div class="card">
         <b>Add a connection</b>
@@ -964,6 +975,48 @@
   }
   $("activityReload").onclick=loadActivity;
 
+  // ---- Connector catalog (marketplace-style; GET /connectors) ----
+  // The catalog payload is a static capability list + per-track env flag state (see functions/_connect/onboard/
+  // registry-catalog.js) -- PHI-free and tenant-independent by construction (identical for every tenant). As
+  // defense in depth, this renderer builds the DOM directly and writes every field via textContent (never
+  // innerHTML), so nothing in the payload can ever be interpreted as markup.
+  var CATALOG_CATEGORY_LABELS={"pull":"Pull","feed":"Feed","imaging":"Imaging","file":"File"};
+  function catalogCategoryLabel(cat){ return CATALOG_CATEGORY_LABELS[cat]||String(cat||"connector"); }
+  function renderCatalog(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("catalog"), sum=$("catalogSummary");
+    clearEl(box);
+    if(!list.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No connector types available.")); return; }
+    var enabledCount=list.filter(function(c){return !!c.enabled;}).length;
+    sum.textContent=list.length+" connector type"+(list.length===1?"":"s")+", "+enabledCount+" enabled";
+    list.forEach(function(c){
+      var item=mkEl("div","item"); item.style.marginTop="8px";
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("b",null,c.name||c.id||"connector"));
+      hd.appendChild(mkEl("span","cat",catalogCategoryLabel(c.category)));
+      var chip=mkEl("span","st "+(c.enabled?"verified":"unverified"),c.enabled?"Enabled":"Disabled");
+      chip.style.marginLeft="auto";
+      hd.appendChild(chip);
+      item.appendChild(hd);
+      if(c.description) item.appendChild(mkEl("div","meta",c.description));
+      var resources=(c.resources&&c.resources.length)?c.resources.join(", "):"none";
+      var authKinds=(c.authKinds&&c.authKinds.length)?c.authKinds.join(", "):"none";
+      item.appendChild(mkEl("div","meta","Resources: "+resources+" · Auth: "+authKinds));
+      box.appendChild(item);
+    });
+  }
+  function loadCatalog(){
+    if(!tenant()){ $("catalog").innerHTML='<div class="hint">Select your organization above, then Refresh, to view the connector catalog.</div>'; $("catalogSummary").textContent=""; return; }
+    $("catalog").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/connectors?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("catalog").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("catalogSummary").textContent=""; return; }
+      renderCatalog(x.d.connectors||[]);
+    }).catch(function(){ $("catalog").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("catalogReload").onclick=loadCatalog;
+
   // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
   function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
   $("dash").addEventListener("click",function(e){
@@ -996,6 +1049,7 @@
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     loadHealth:loadHealth, renderHealth:renderHealth,
     loadActivity:loadActivity, renderActivity:renderActivity,
+    loadCatalog:loadCatalog, renderCatalog:renderCatalog,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,

@@ -28,6 +28,7 @@ import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants } from "../../../_connect/enterprise/members.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
 import { readTenantActivity } from "../../../_connect/onboard/activity.js";
+import { listConnectorCatalog } from "../../../_connect/onboard/registry-catalog.js";
 
 // Re-export the surface flag gate under the Part-4 analytics test's name (same predicate: master smd_connect
 // AND smd_connect_onboard). Integration merged Part-3 (onboardFlagOn) + Part-4 (flagOnboardOn) onto one router.
@@ -97,6 +98,10 @@ export async function onRequest(context) {
     // recent-first, client-safe projection only. Same connector:read RBAC as /health; ?limit= optionally tunes
     // the page size (default 50, hard max 200 -- see activity.js).
     if (method === "GET" && seg === "activity") return jsonResponse(await readTenantActivity(deps, request, env, tid, { limit: url.searchParams.get("limit") || undefined }));
+    // Connector Registry + Marketplace catalog: a self-service catalog of every connector TYPE the platform
+    // supports (metadata only -- no tenant/PHI data), so an admin sees what they can connect and whether each
+    // type is enabled. Same connector:read RBAC tier as /health and /activity.
+    if (method === "GET" && seg === "connectors") return jsonResponse(await listConnectorCatalog(deps, request, env));
     if (method === "POST" && seg === "emr") {
       if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (body.type === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });

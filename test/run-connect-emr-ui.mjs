@@ -336,6 +336,40 @@ try {
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /activity on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
   await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
 
+  // ---- Connector catalog panel (GET /connectors, marketplace-style self-service catalog) ----
+  // Two connector types: one enabled, one disabled. Asserts the panel renders names/categories/enabled chips,
+  // and that the mocked payload itself carries only client-safe metadata fields (defense-in-depth).
+  await ev(`window.__catalogMock=[
+    {id:"fhir-r4",name:"FHIR R4 (SMART-on-FHIR)",category:"pull",resources:["Patient","Encounter","Observation"],authKinds:["smart-backend-services","none"],profile:"pull",description:"SMART-on-FHIR R4 pull connection to your EMR's FHIR server.",enabled:true,flagEnv:"CONNECT_FHIR_FLAG"},
+    {id:"dicomweb",name:"DICOMweb QIDO-RS imaging metadata",category:"imaging",resources:["ImagingStudy"],authKinds:["token"],profile:"pull",description:"DICOMweb QIDO-RS pull connection that reads imaging study metadata only, never pixel data.",enabled:false,flagEnv:"CONNECT_DICOM_FLAG"}
+  ];
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/connectors")>=0) return Promise.resolve({s:200,d:{ok:true,connectors:window.__catalogMock}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__catalogMock; var SAFE=["id","name","category","resources","authKinds","profile","description","enabled","flagEnv"];
+    var bad=m.some(function(c){ return Object.keys(c).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    // "Patient"/"ImagingStudy" etc are SCCM RESOURCE-TYPE labels (metadata this catalog is meant to declare), not
+    // patient data, so they are expected here -- unlike the health/activity payloads, which should never mention
+    // a resource type at all. The PHI-shaped check below looks for actual identifier/contact patterns instead.
+    var phiLike=/\\bmrn\\b|\\bssn\\b|\\bdob\\b|@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked catalog payload carries only client-safe metadata fields (no patient identifiers)");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("FHIR R4 (SMART-on-FHIR)")>=0 && t.indexOf("DICOMweb QIDO-RS imaging metadata")>=0 && t.indexOf("Pull")>=0 && t.indexOf("Imaging")>=0;`) === true, "the catalog panel renders both connector names and their categories");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("Enabled")>=0 && t.indexOf("Disabled")>=0;`) === true, "the catalog panel renders an Enabled chip for the enabled type and a Disabled chip for the disabled type");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("Patient")>=0 && t.indexOf("ImagingStudy")>=0 && t.indexOf("smart-backend-services")>=0 && t.indexOf("token")>=0;`) === true, "the catalog panel renders each type's resources and auth kinds");
+  ok(await ev(`var s=document.getElementById("catalogSummary").textContent; return s.indexOf("2 connector type")>=0 && s.indexOf("1 enabled")>=0;`) === true, "the catalog summary shows the total type count and how many are enabled");
+  ok(await ev(`var t=document.getElementById("catalog").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the catalog panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Empty catalog -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/connectors")>=0) return Promise.resolve({s:200,d:{ok:true,connectors:[]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("catalog").textContent.indexOf("No connector types available.")>=0 && document.getElementById("catalogSummary").textContent==="";`) === true, "an empty catalog shows the 'No connector types available.' empty state");
+
+  // Connector catalog degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadCatalog(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /connectors on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
   // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);

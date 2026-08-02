@@ -60,6 +60,15 @@ test("activity: flag OFF -> 404; unauthenticated -> sanitized 401", async () => 
   assert.deepEqual(Object.keys(await res.json()), ["error"]);
 });
 
+// Connector Registry + Marketplace catalog: GET /connectors, same flag gate as every other onboard route (no
+// existence leak). Deep RBAC/catalog-shape logic is unit-tested in registry-catalog.test.mjs.
+test("connectors: flag OFF -> 404; unauthenticated -> sanitized 401", async () => {
+  assert.equal((await onRequest(get("/api/connect/onboard/connectors?tenant=t1", {}))).status, 404);
+  const res = await onRequest(get("/api/connect/onboard/connectors?tenant=t1", Object.assign({}, BOTH, { CONNECT_DB: makeOnboardDb() })));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
 test("csv upload: flag OFF -> 404; unauthenticated -> sanitized 401 (no raw row echo)", async () => {
   assert.equal((await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, {}))).status, 404);
   const res = await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, BOTH));
