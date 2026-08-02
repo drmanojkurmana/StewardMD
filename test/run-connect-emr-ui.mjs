@@ -301,6 +301,41 @@ try {
   await sleep(300);
   ok(await ev(`return document.getElementById("health").textContent.indexOf("No connector activity yet.")>=0 && document.getElementById("healthSummary").textContent==="";`) === true, "an empty health object shows the 'No connector activity yet.' empty state");
 
+  // ---- Activity log panel (GET /activity, security-center-lite: read-only view of the existing PHI-free
+  // audit trail) ----. Two events across two connectors; asserts the panel renders friendly action labels,
+  // connector id, outcome and timestamp, AND that the mocked payload itself carries ONLY the documented
+  // PHI-free fields (defense-in-depth: nothing beyond action/outcome/connectorId/ts can leak into the DOM).
+  await ev(`window.__activityMock={events:[
+      {action:"connect.onboard.tested",outcome:"ok",connectorId:"fhir-main",ts:"2026-08-01T11:00:00.000Z"},
+      {action:"connect.onboard.saved",outcome:"ok",connectorId:"rest-labs",ts:"2026-08-01T09:00:00.000Z"}
+    ],truncated:false};
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:Object.assign({ok:true},window.__activityMock)}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__activityMock; var SAFE=["action","outcome","connectorId","ts"];
+    var bad=(m.events||[]).some(function(e){ return Object.keys(e).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/patient|mrn|dob|ssn|email|phone|address|consent|transaction|hash|actor/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked activity payload carries only the documented PHI-free fields (no patient identifiers, no correlation ids, no actor)");
+  ok(await ev(`var t=document.getElementById("activity").textContent; return t.indexOf("Tested")>=0 && t.indexOf("fhir-main")>=0 && t.indexOf("Connection saved")>=0 && t.indexOf("rest-labs")>=0;`) === true, "the activity panel renders friendly action labels + connector ids");
+  ok(await ev(`var s=document.getElementById("activitySummary").textContent; return s.indexOf("2 event")>=0;`) === true, "the activity summary shows the event count");
+  ok(await ev(`var t=document.getElementById("activity").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the activity panel never renders undefined/stringified-object values, and no em-dash");
+
+  // An unmapped/future action string falls back to itself (no crash, no blank label).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:{ok:true,events:[{action:"connect.onboard.some-future-action",outcome:"ok",connectorId:"c1",ts:"2026-08-01T12:00:00.000Z"}],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("activity").textContent.indexOf("connect.onboard.some-future-action")>=0;`) === true, "an unmapped action falls back to the raw action string (no crash, no blank label)");
+
+  // Empty events -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/activity")>=0) return Promise.resolve({s:200,d:{ok:true,events:[],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("activity").textContent.indexOf("No activity yet.")>=0 && document.getElementById("activitySummary").textContent==="";`) === true, "empty events shows the 'No activity yet.' empty state");
+
+  // Activity log degrades through the SAME showFlagOff() path as every other GET on a 404.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadActivity(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /activity on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
   // ---- Part 3: no-membership empty state (GET /tenants -> []) ----
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:200,d:{ok:true,tenants:[]}}); }); window.ConnectEMR.loadTenants(); return 1;`);
   await sleep(200);

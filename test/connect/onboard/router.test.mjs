@@ -49,6 +49,17 @@ test("unknown sub-path -> 404", async () => {
   assert.equal((await onRequest(get("/api/connect/onboard/nope", BOTH))).status, 404);
 });
 
+// Self-service Activity log (security-center-lite): GET /activity, same flag gate as every other onboard
+// route (no existence leak). Deep RBAC/tenant-scoping/projection logic is unit-tested in activity.test.mjs.
+// A D1 binding is provided here (as production always has one when the flag is on) so the request reaches
+// RBAC instead of short-circuiting on readTenantActivity's "no D1 binding => empty list" ops-degrade path.
+test("activity: flag OFF -> 404; unauthenticated -> sanitized 401", async () => {
+  assert.equal((await onRequest(get("/api/connect/onboard/activity?tenant=t1", {}))).status, 404);
+  const res = await onRequest(get("/api/connect/onboard/activity?tenant=t1", Object.assign({}, BOTH, { CONNECT_DB: makeOnboardDb() })));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
 test("csv upload: flag OFF -> 404; unauthenticated -> sanitized 401 (no raw row echo)", async () => {
   assert.equal((await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, {}))).status, 404);
   const res = await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, BOTH));

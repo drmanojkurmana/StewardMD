@@ -27,6 +27,7 @@ import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteF
 import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants } from "../../../_connect/enterprise/members.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
+import { readTenantActivity } from "../../../_connect/onboard/activity.js";
 
 // Re-export the surface flag gate under the Part-4 analytics test's name (same predicate: master smd_connect
 // AND smd_connect_onboard). Integration merged Part-3 (onboardFlagOn) + Part-4 (flagOnboardOn) onto one router.
@@ -92,6 +93,10 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "all") return jsonResponse(Object.assign({ ok: true }, await listAll(deps, request, env, tid)));
     // Part 4 (Enterprise analytics): PHI-free per-connector integration health over the tenant's audit rows.
     if (method === "GET" && seg === "health") return jsonResponse({ ok: true, health: await readTenantIntegrationHealth(deps, request, env, tid) });
+    // Self-service Activity log (security-center-lite): the tenant's own PHI-free audit trail, bounded + most-
+    // recent-first, client-safe projection only. Same connector:read RBAC as /health; ?limit= optionally tunes
+    // the page size (default 50, hard max 200 -- see activity.js).
+    if (method === "GET" && seg === "activity") return jsonResponse(await readTenantActivity(deps, request, env, tid, { limit: url.searchParams.get("limit") || undefined }));
     if (method === "POST" && seg === "emr") {
       if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (body.type === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });

@@ -302,6 +302,16 @@
         <div id="health" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view connection health.</div></div>
       </div>
 
+      <!-- Activity log: security-center-lite. The tenant's own PHI-free audit trail (who created/tested/
+           pulled/synced/discovered/mapped which connection, and when), read on demand via Refresh so an admin
+           can audit their integration without contacting us. Reuses the existing append-only audit; this is a
+           read-only view of it (GET /activity, Part 3/4 sibling to /health). -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Activity log</b><button class="ghost" id="activityReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="activitySummary" style="margin-top:4px"></div>
+        <div id="activity" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view the activity log.</div></div>
+      </div>
+
       </div><!-- /opsArea -->
 
     </div>
@@ -903,6 +913,57 @@
   }
   $("healthReload").onclick=loadHealth;
 
+  // ---- activity log (security-center-lite; GET /activity) ----
+  // The activity payload is audit-derived action/outcome/connectorId/ts ONLY (see functions/_connect/onboard/
+  // activity.js) -- PHI-free by construction. As defense in depth, this renderer builds the DOM directly and
+  // writes every field via textContent (never innerHTML) so nothing in the payload can ever be interpreted
+  // as markup, even if the audit allow-list ever regressed.
+  var ACTIVITY_LABELS={
+    "connect.onboard.saved":"Connection saved",
+    "connect.onboard.deleted":"Connection deleted",
+    "connect.onboard.tested":"Tested",
+    "connect.onboard.pulled":"Pulled",
+    "connect.onboard.synced":"Auto-synced",
+    "connect.onboard.discovered":"Discovered",
+    "connect.onboard.sync_configured":"Schedule set",
+    "connect.onboard.map_suggested":"Mapping suggested",
+    "connect.onboard.csv-parsed":"CSV parsed",
+    "connect.onboard.hl7-feed.created":"HL7 feed created",
+    "connect.onboard.hl7-feed.deleted":"HL7 feed deleted",
+    "connect.onboard.webhook-feed.created":"Webhook feed created",
+    "connect.onboard.webhook-feed.deleted":"Webhook feed deleted"
+  };
+  function activityLabel(action){ return ACTIVITY_LABELS[action]||String(action||"Activity"); }
+  function renderActivity(a){
+    a=a||{};
+    var ev=Array.isArray(a.events)?a.events:[];
+    var box=$("activity"), sum=$("activitySummary");
+    clearEl(box);
+    if(!ev.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No activity yet.")); return; }
+    sum.textContent=ev.length+" event"+(ev.length===1?"":"s")+(a.truncated?" (showing the most recent only)":"");
+    ev.forEach(function(e){
+      var item=mkEl("div","item");
+      var hd=mkEl("div","h");
+      hd.appendChild(mkEl("span","cat",e.connectorId||"unknown"));
+      hd.appendChild(mkEl("span","t",when(e.ts)));
+      item.appendChild(hd);
+      var metaTxt=activityLabel(e.action)+" · "+(e.outcome||"unknown");
+      item.appendChild(mkEl("div","meta",metaTxt));
+      box.appendChild(item);
+    });
+  }
+  function loadActivity(){
+    if(!tenant()){ $("activity").innerHTML='<div class="hint">Select your organization above, then Refresh, to view the activity log.</div>'; $("activitySummary").textContent=""; return; }
+    $("activity").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/activity?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showFlagOff(); return; }
+      hideFlagOff();
+      if(x.s!==200||!x.d||x.d.ok===false){ $("activity").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("activitySummary").textContent=""; return; }
+      renderActivity(x.d||{});
+    }).catch(function(){ $("activity").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("activityReload").onclick=loadActivity;
+
   // ---- dashboard action delegation (FHIR: Test/Pull/Delete; HL7: Copy URL/Delete; Webhook: Copy URL/Delete) ----
   function runTestRow(id){ var mr=$("dash").querySelector('[data-msgrow="'+id+'"]'); if(mr) mr.style.display=""; var m=$("dash").querySelector('[data-msg="'+id+'"]'); if(m){ if(!m.id) m.id="rowmsg-"+id; runTest(id,m.id); } }
   $("dash").addEventListener("click",function(e){
@@ -934,6 +995,7 @@
   window.ConnectEMR={ loadTenants:loadTenants, renderTenantOptions:renderTenantOptions,
     loadDashboard:loadDashboard, renderDash:renderDash, showFlagOff:showFlagOff, flagOffVisible:flagOffVisible,
     loadHealth:loadHealth, renderHealth:renderHealth,
+    loadActivity:loadActivity, renderActivity:renderActivity,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,
     hl7Create:hl7CreateGo, renderHl7Created:renderHl7Created,
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
