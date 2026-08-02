@@ -472,7 +472,10 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
 
-  var API="/api/connect/onboard";
+  // API base: relative on the stewardmd.in website (unchanged); absolute when this console runs INSIDE
+  // the native app (Capacitor local scheme), where a relative /api would wrongly hit the local origin.
+  var API_ORIGIN=(location.hostname && /(^|\.)stewardmd\.in$/i.test(location.hostname))?"":"https://stewardmd.in";
+  var API=API_ORIGIN+"/api/connect/onboard";
   // The signed-in caller's OWN role per tenant (tenantId -> role), stashed whenever GET /tenants renders the
   // picker. Drives the Members/Access panel's write-controls gate (owner/admin edit, everyone else read-only)
   // WITHOUT a second network round-trip -- the role for every membership is already in the /tenants response.
@@ -514,7 +517,7 @@
   function splitHeaders(raw){ return String(raw||"").split(/[\n,]/).map(function(s){return s.trim();}).filter(Boolean); }
 
   // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
-  var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
+  var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch((path&&path.charAt(0)==="/"?API_ORIGIN+path:path),opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
   function jpost(path,obj){ return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(obj)}); }
 
   // A GET /list returning 404 means the flag is off (the route only exists when the flag is on).
@@ -716,8 +719,8 @@
 
   // The constant webhook URLs a feed is POSTed to (the feed is identified by the X-SMD-Feed header, not the
   // URL path), so these are safe to copy and are NOT secrets. HL7 -> /ingress/hl7; FHIR push -> /ingress/fhir.
-  function ingestUrl(){ try{ return location.origin+"/api/connect/ingress/hl7"; }catch(e){ return "/api/connect/ingress/hl7"; } }
-  function webhookIngestUrl(){ try{ return location.origin+"/api/connect/ingress/fhir"; }catch(e){ return "/api/connect/ingress/fhir"; } }
+  function ingestUrl(){ var o=API_ORIGIN||location.origin; return o+"/api/connect/ingress/hl7"; }
+  function webhookIngestUrl(){ var o=API_ORIGIN||location.origin; return o+"/api/connect/ingress/fhir"; }
   function copyFeedUrl(){ var u=ingestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
   function copyWebhookUrl(){ var u=webhookIngestUrl(); if(navigator.clipboard){ navigator.clipboard.writeText(u).catch(function(){}); } say("tenantMsg","ok","Webhook URL copied: "+u); }
   function doDeleteFeed(id){

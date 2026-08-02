@@ -78,6 +78,9 @@ done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
 
+# Connect EMR owner console (bundled so the owner-only in-app "Connect EMR" button in home.js opens it in-app).
+[ -f admin/connect-emr.html ] && cp admin/connect-emr.html "$WWW/connect-emr.html"
+
 # ── 6. Stamp a UNIQUE build number into the version display ───────────────────
 # Every build:www stamps the current git commit-count as the build number into the
 # About "· build N" line, so each build is uniquely identifiable (like the gold-NNN

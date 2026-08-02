@@ -758,6 +758,26 @@
       if (window.INSULIN && INSULIN.open) INSULIN.open(); else toast("Insulin calculator loading…");
     },
     hospadmin: function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); },
+    connect: function () {
+      // Owner-only in-app EMR onboarding console (StewardMD Connect). Opens the bundled connect-emr.html in a
+      // full-screen same-origin overlay so it runs INSIDE the app (no browser). The console detects the native
+      // origin and calls the absolute stewardmd.in API; the server re-checks owner + RBAC on every request.
+      if (!nIsOwner()) { if (window.toast) toast("Owner access only"); return; }
+      try {
+        var ex = document.getElementById("smdConnectOverlay"); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+        var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
+        ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
+        var bar = document.createElement("div");
+        bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
+        var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
+        var x = document.createElement("button"); x.textContent = "Close"; x.style.cssText = "background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:8px 14px;font:700 13px var(--hfont,sans-serif)";
+        x.onclick = function () { if (ov.parentNode) ov.parentNode.removeChild(ov); };
+        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn1";
+        fr.style.cssText = "flex:1;width:100%;border:0;background:#fff";
+        bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
+        document.body.appendChild(ov);
+      } catch (e) { if (window.toast) toast("Connect failed to open"); }
+    },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
   };
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
@@ -1702,6 +1722,7 @@
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
+      (nIsOwner() ? mi("framework", "Connect EMR", "Onboard a hospital EMR (owner)", "connect") : "") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
