@@ -25,6 +25,8 @@
   function C() { return window.SMD_CONNECT; }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function tt(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  function loadLast() { try { return JSON.parse(localStorage.getItem("smd_connect_last") || "null"); } catch (e) { return null; } }
+  function saveLast(tid, ref) { try { localStorage.setItem("smd_connect_last", JSON.stringify({ tenantId: tid, patientRef: ref })); } catch (e) {} }
 
   // ---- pure SCCM -> app mappers (unit-tested via the exposed _* handles) --------------------------
   function ageFromDob(dob, nowMs) {
@@ -137,6 +139,8 @@
     (C() ? C().tenants() : Promise.resolve([])).then(function (ts) {
       if (!ts || !ts.length) { sel.innerHTML = '<option value="">No connected hospital</option>'; msg("warn", "You have not connected a hospital yet. Use Connect EMR first."); return; }
       sel.innerHTML = ts.map(function (t) { return '<option value="' + esc(t.tenantId) + '">' + esc(t.name || t.tenantId) + '</option>'; }).join("");
+      var last = loadLast();   // P3: re-select the last-used hospital + patient so re-opening is instant
+      if (last) { if (last.tenantId && ts.some(function (t) { return t.tenantId === last.tenantId; })) sel.value = last.tenantId; var rf = document.getElementById("cptRef"); if (rf && last.patientRef) rf.value = last.patientRef; }
     });
     document.getElementById("cptPull").onclick = doPull;
     document.getElementById("cptRef").addEventListener("keydown", function (e) { if (e.key === "Enter") doPull(); });
@@ -176,6 +180,7 @@
     C().pullContext({ tenantId: tid, patientRef: ref }).then(function (r) {
       if (btn) btn.disabled = false;
       if (!r || !r.ok) { msg("err", "Could not pull: " + ((r && r.error) || "failed")); return; }
+      saveLast(tid, ref);
       var b = r.bundle || {}, icu = pushToICU(b);
       msg("ok", "Loaded into ICU: " + icu.labs + " lab value(s).");
       renderSummary(b, icu);
