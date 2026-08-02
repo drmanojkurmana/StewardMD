@@ -119,6 +119,25 @@ test("a saved graphql connection pulls through a mocked safe fetch -> valid SCCM
   assert.equal(blob.includes("P1"), false);      // raw patientId never persisted (hashed)
 });
 
+// --- sql: the same pull.js path, reused per the row's stored kind (INTERFACE + STUB) ----------------------
+test("a saved sql connection pulls with the router's default (unset) driver factory -> an EXPLICIT not-configured is THROWN, never an empty-success bundle", async () => {
+  const db = seedDb();
+  // deps here mirrors the router's own deps: no sqlDriverFactory is set (see functions/api/connect/onboard/
+  // [[path]].js's `sqlDriverFactory: undefined` // VERIFY), so pull.js's driver seam resolves to null and the
+  // sql connector honestly reports notConfigured, which pull.js turns into a THROWN OnboardError -- it must
+  // NEVER read as a successful pull of an empty bundle.
+  const deps = { db, kv: makeMockKv(), secrets: makeSecrets(env), identifyFn: async () => ({ id: "u1", guest: false }), fetch: async () => { throw new Error("sql has no HTTP endpoint; fetch must never be called"); }, now: () => Date.now() };
+  const { connectionId } = await saveConnection(deps, req, env, "t1",
+    { name: "Lab DB", type: "sql", bindingName: "LABS_DB", queryTemplate: "SELECT * FROM labs WHERE patient_id = $1" });
+
+  await assert.rejects(() => pullConnection(deps, req, env, "t1", connectionId, "P1"),
+    (e) => e && e.klass === "not-configured");
+
+  // nothing was ever persisted as a "pulled" audit row for this failed, not-configured attempt.
+  const auditRows = db._tables.connect_audit_event || [];
+  assert.equal(auditRows.some((r) => r.action === "connect.onboard.pulled"), false);
+});
+
 test("pull is denied for an auditor (PHI is not for the auditor role)", async () => {
   const mock = makeMockFhir({ base: "https://fhir.example.org" });
   const db = seedDb("auditor");

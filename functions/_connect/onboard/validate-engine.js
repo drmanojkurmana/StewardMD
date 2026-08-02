@@ -20,12 +20,13 @@ import { fhirR4Connector } from "../connectors/fhir-r4/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
 import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
 import { graphqlConnector } from "../connectors/graphql/connector.js";
+import { sqlConnector } from "../connectors/sql/connector.js";
 
 // The SAME kind -> connector map + kind resolution pull.js uses, so validation ALWAYS conformance-checks the
 // exact connector object the real pull would run (mirrored here, not imported — pull.js keeps this map local
 // too; see its comment on why an unknown/legacy kind defaults to fhir-r4, the original Increment-1 shape).
-const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector };
-const kindOf = (row) => (row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : "fhir-r4");
+const CONNECTORS_BY_KIND = { "fhir-r4": fhirR4Connector, "rest-json": restJsonConnector, "dicomweb": dicomWebConnector, "graphql": graphqlConnector, "sql": sqlConnector };
+const kindOf = (row) => (row.kind === "rest-json" ? "rest-json" : row.kind === "dicomweb" ? "dicomweb" : row.kind === "graphql" ? "graphql" : row.kind === "sql" ? "sql" : "fhir-r4");
 
 // --- CHECK 1: config validity -------------------------------------------------------------------------------
 // A minimal per-kind required-field check, mirroring store.js's buildRestJsonRow / buildDicomWebRow / the fhir
@@ -33,9 +34,17 @@ const kindOf = (row) => (row.kind === "rest-json" ? "rest-json" : row.kind === "
 // base_url was already SSRF-checked at save time). detail is a class string (field NAMES only, never values).
 function checkConfig(row, config) {
   const missing = [];
+  const kind = config && config.type;
+  // sql has NO base_url (SQL has no HTTP endpoint) and NO sealed credential (DB creds live in the owner's
+  // Hyperdrive binding, referenced by name) -- by design, not a missing-config defect. Check its OWN required
+  // shape instead (mirrors store.js's buildSqlRow required fields).
+  if (kind === "sql") {
+    if (!config || !config.bindingName) missing.push("bindingName");
+    if (!config || !config.queryTemplate) missing.push("queryTemplate");
+    return { name: "config", ok: missing.length === 0, detail: missing.length ? "missing: " + missing.join(",") : "" };
+  }
   if (!row || !row.base_url) missing.push("base_url");
   if (!config || !config.sealed) missing.push("credentials");
-  const kind = config && config.type;
   if (kind === "rest-json" || kind === "dicomweb" || kind === "graphql") {
     if (!config || config.authMethod !== "token") missing.push("auth.method");
   } else {
@@ -63,6 +72,9 @@ function syntheticFetch(kind) {
   if (kind === "rest-json") return async () => new Response(JSON.stringify(SYNTHETIC_REST_ROWS), { status: 200 });
   if (kind === "dicomweb") return async () => new Response(JSON.stringify([SYNTHETIC_DICOM_STUDY]), { status: 200 });
   if (kind === "graphql") return async () => new Response(JSON.stringify({ data: SYNTHETIC_GRAPHQL_ROWS }), { status: 200 });
+  // sql ignores ctx.fetch entirely (it reads via ctx.config.driver, never HTTP) -- this fetch is never called;
+  // the config-check + conformance kit both run through the connector's own honest not-configured empty path.
+  if (kind === "sql") return async () => new Response("{}", { status: 200 });
   return async (url) => {
     const u = String(url);
     if (/\/Patient\/[^/?]+$/.test(u)) return new Response(JSON.stringify(SYNTHETIC_FHIR_PATIENT));

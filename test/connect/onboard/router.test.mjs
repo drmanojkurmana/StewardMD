@@ -331,3 +331,45 @@ test("sync-now: graphql per-track flag gate on an existing row -> 404 off, reach
   assert.equal((await onRequest(post("/api/connect/onboard/sync-now/gq2", { tenantId: "t1" }, envOff))).status, 404);
   assert.equal((await onRequest(post("/api/connect/onboard/sync-now/gq2", { tenantId: "t1" }, envOn))).status, 401);
 });
+
+// --- sql per-track flag gate (mirrors the rest-json/dicomweb/graphql idiom): smd_connect_sql, default OFF ----
+test("sql save: 404 when CONNECT_SQL_FLAG is off (base+onboard on); reachable (401) when on", async () => {
+  const sqlBody = { tenantId: "t1", name: "Lab DB", type: "sql", bindingName: "LABS_DB", queryTemplate: "SELECT * FROM labs WHERE patient_id = $1" };
+  const off = await onRequest(post("/api/connect/onboard/emr", sqlBody, BOTH));
+  assert.equal(off.status, 404);
+  const on = await onRequest(post("/api/connect/onboard/emr", sqlBody, Object.assign({}, BOTH, { CONNECT_SQL_FLAG: "1" })));
+  assert.equal(on.status, 401);        // past the gate -> the normal unauthenticated RBAC 401
+  // fhir save is unaffected by the sql gate either way.
+  const fhirRes = await onRequest(post("/api/connect/onboard/emr",
+    { tenantId: "t1", name: "x", type: "fhir", fhirBaseUrl: "https://fhir.example.org", auth: { method: "token", token: "x" } }, BOTH));
+  assert.equal(fhirRes.status, 401);
+});
+
+test("sql test/pull/validate: per-track flag gate on an existing sql row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "sq1", "sql", "pull", "", JSON.stringify({ source: "onboard", type: "sql", bindingName: "LABS_DB", queryTemplate: "SELECT * FROM labs WHERE patient_id = $1", sealed: null }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_SQL_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/sq1", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/sq1", { tenantId: "t1", patientId: "P1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/sq1", { tenantId: "t1" }, envOff))).status, 404);
+
+  assert.equal((await onRequest(post("/api/connect/onboard/test/sq1", { tenantId: "t1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/pull/sq1", { tenantId: "t1", patientId: "P1" }, envOn))).status, 401);
+  assert.equal((await onRequest(post("/api/connect/onboard/validate/sq1", { tenantId: "t1" }, envOn))).status, 401);
+});
+
+test("sync-now: sql per-track flag gate on an existing row -> 404 off, reachable (401) on", async () => {
+  const db = makeOnboardDb();
+  await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
+    .bind("t1", "sq2", "sql", "pull", "", JSON.stringify({ source: "onboard", type: "sql", bindingName: "LABS_DB", queryTemplate: "SELECT * FROM labs WHERE patient_id = $1", sealed: null }), null,
+      JSON.stringify(["Patient", "Observation", "DiagnosticReport"]), "draft").run();
+  const envOff = Object.assign({}, BOTH, { CONNECT_DB: db });
+  const envOn = Object.assign({}, BOTH, { CONNECT_DB: db, CONNECT_SQL_FLAG: "1" });
+
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/sq2", { tenantId: "t1" }, envOff))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/sync-now/sq2", { tenantId: "t1" }, envOn))).status, 401);
+});

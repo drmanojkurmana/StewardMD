@@ -11,12 +11,14 @@ test("defaultRegistry has all built-ins with the right profiles", () => {
   assert.equal(r.has("rest-json"), true);
   assert.equal(r.has("dicomweb"), true);
   assert.equal(r.has("graphql"), true);
+  assert.equal(r.has("sql"), true);
   assert.equal(r.resolve("fhir-r4").meta.profile, "pull");
   assert.equal(r.resolve("abdm").meta.profile, "event");
   assert.equal(r.resolve("rest-json").meta.profile, "pull");
   assert.equal(r.resolve("dicomweb").meta.profile, "pull");
   assert.equal(r.resolve("graphql").meta.profile, "pull");
-  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "dicomweb", "fhir-r4", "graphql", "rest-json"]);
+  assert.equal(r.resolve("sql").meta.profile, "pull");
+  assert.deepEqual(Object.keys(r.asConnectorMap()).sort(), ["abdm", "dicomweb", "fhir-r4", "graphql", "rest-json", "sql"]);
 });
 
 test("each defaultRegistry() call is a DISTINCT instance (per-request isolation)", () => {

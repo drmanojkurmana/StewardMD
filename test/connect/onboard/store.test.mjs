@@ -318,3 +318,96 @@ test("save SHAPE-validates graphql request-shaping fields (graphqlPath absolute-
   const ok = await saveConnection(deps(db), req, env, "t1", { ...gqlBody, graphqlPath: "/api/v2/graphql", resultsPath: "patient.labs.rows" });
   assert.ok(ok.connectionId);                                            // a clean absolute path + dotted resultsPath is accepted
 });
+
+// --- sql (generic SQL/DB lab-results pull connector -- INTERFACE + STUB) --------------------------------------
+const sqlQuery = "SELECT patient_id AS \"patientId\", test_name AS \"testName\" FROM labs WHERE patient_id = $1";
+const sqlBody = { name: "Lab DB", type: "sql", bindingName: "LABS_DB", queryTemplate: sqlQuery };
+
+test("save accepts type 'sql': NO URL, NO admin secret (sealed=null, DB creds live in the owner's Hyperdrive binding)", async () => {
+  const db = seedDb();
+  const res = await saveConnection(deps(db), req, env, "t1", sqlBody);
+  assert.equal(res.ok, true);
+  const rows = db._tables.connect_connector_config;
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].kind, "sql");
+  assert.equal(rows[0].profile, "pull");
+  assert.equal(rows[0].base_url, "");                      // no URL -- SQL has no HTTP endpoint
+  const config = JSON.parse(rows[0].config);
+  assert.equal(config.type, "sql");
+  assert.equal(config.authMethod, "binding");
+  assert.equal(config.bindingName, "LABS_DB");
+  assert.equal(config.queryTemplate, sqlQuery);
+  assert.equal(config.sealed, null);                       // no admin secret to seal for a binding-auth connection
+  assert.equal(JSON.parse(rows[0].scope).join(","), "Patient,Observation,DiagnosticReport");
+});
+
+test("save rejects a bindingName that is not a simple identifier (never a connection string)", async () => {
+  const db = seedDb();
+  for (const bad of ["", "  ", "1LABS", "LABS DB", "postgres://user:pass@host/db", "LABS-DB", "LABS.DB"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...sqlBody, bindingName: bad }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "bindingName '" + bad + "' must be rejected");
+  }
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save rejects a non-parameterized queryTemplate (the patient value MUST be a bound placeholder, never concatenated)", async () => {
+  const db = seedDb();
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: "SELECT * FROM labs WHERE patient_id = 'P1'" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+  // a placeholder alone is not enough -- it must also reference the patient parameter
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: "SELECT * FROM labs WHERE id = $1" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  // all three placeholder styles are accepted once the patient parameter is referenced
+  for (const q of ["SELECT * FROM labs WHERE patient_id = $1", "SELECT * FROM labs WHERE patient_id = :patientId", "SELECT * FROM labs WHERE patient_id = ?"]) {
+    const ok = await saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: q });
+    assert.ok(ok.connectionId, "queryTemplate '" + q + "' must be accepted");
+  }
+});
+
+test("save rejects any write/DDL keyword (read-only allow-list) and a stacked (';') statement", async () => {
+  const db = seedDb();
+  for (const kw of ["INSERT INTO labs(patient_id) VALUES ($1)", "UPDATE labs SET v=1 WHERE patient_id=$1", "DELETE FROM labs WHERE patient_id=$1",
+    "DROP TABLE labs", "ALTER TABLE labs ADD c INT", "CREATE TABLE x(id INT)", "GRANT ALL ON labs TO x", "TRUNCATE labs",
+    "MERGE INTO labs USING x ON (1=1)", "REPLACE INTO labs VALUES ($1)", "CALL sp_patient($1)", "EXEC sp_patient $1", "EXECUTE sp_patient($1)"]) {
+    await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: kw + " -- patient_id" }),
+      (e) => e instanceof OnboardError && e.klass === "invalid", "write keyword in '" + kw + "' must be rejected");
+  }
+  // a stacked statement (second statement after ';') is rejected even if each half looks read-only
+  await assert.rejects(
+    () => saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: "SELECT * FROM labs WHERE patient_id=$1; SELECT * FROM secrets" }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("save rejects an oversized queryTemplate", async () => {
+  const db = seedDb();
+  const huge = "SELECT * FROM labs WHERE patient_id = $1 AND note = '" + "x".repeat(8100) + "'";
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...sqlBody, queryTemplate: huge }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});
+
+test("list/safeView surfaces bindingName/queryTemplate/columnMap for sql and NEVER a connection string or secret material", async () => {
+  const db = seedDb();
+  const { connectionId } = await saveConnection(deps(db), req, env, "t1", { ...sqlBody, columnMap: { patientId: "patient_id" } });
+  const list = await listConnections(deps(db), req, env, "t1");
+  assert.equal(list.length, 1);
+  assert.equal(list[0].connectionId, connectionId);
+  assert.equal(list[0].type, "sql");
+  assert.equal(list[0].bindingName, "LABS_DB");
+  assert.equal(list[0].queryTemplate, sqlQuery);
+  assert.deepEqual(list[0].columnMap, { patientId: "patient_id" });
+  assert.equal(list[0].fhirBaseUrl, "");                 // no URL was ever stored
+  const blob = JSON.stringify(list);
+  for (const s of ["postgres://", "mysql://", "sealed", "password", "connectionString"]) assert.equal(blob.includes(s), false);
+});
+
+test("save rejects a columnMap that is not a plain object", async () => {
+  const db = seedDb();
+  await assert.rejects(() => saveConnection(deps(db), req, env, "t1", { ...sqlBody, columnMap: ["a", "b"] }),
+    (e) => e instanceof OnboardError && e.klass === "invalid");
+  assert.equal((db._tables.connect_connector_config || []).length, 0);
+});

@@ -123,8 +123,9 @@
           <option value="rest">REST / JSON lab API</option>
           <option value="dicom">DICOMweb / imaging (metadata)</option>
           <option value="graphql">GraphQL lab API</option>
+          <option value="sql">SQL / database lab feed</option>
         </select>
-        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds, Webhook / FHIR push, REST / JSON lab API, DICOMweb / imaging (metadata) and GraphQL lab API are available now. DICOMweb reads study-level metadata only (modality, body site, study date, accession number, series/instance counts); it never retrieves images or pixel data.</div>
+        <div class="soon">FHIR R4, CSV / flat file, HL7 v2 feeds, Webhook / FHIR push, REST / JSON lab API, DICOMweb / imaging (metadata), GraphQL lab API and SQL / database lab feed are available now. DICOMweb reads study-level metadata only (modality, body site, study date, accession number, series/instance counts); it never retrieves images or pixel data. SQL / database is config-only today: saving and testing the shape works, but a live query needs the owner to wire a database driver first (see the note below).</div>
 
        <div id="fFhir">
         <label for="aBase">FHIR base URL *</label>
@@ -281,6 +282,45 @@
           <button class="ghost" id="graphqlSaveTest">Save and test connection</button>
         </div>
         <div class="msg" id="graphqlMsg"></div>
+       </div>
+
+       <!-- SQL / database lab feed: a hospital whose lab data lives in a plain SQL database. There is NO URL --
+            the database credentials live in a Cloudflare Hyperdrive binding the owner configures separately; you
+            supply only the binding name and your own read-only, parameterized query. The row array the query
+            returns is normalized through the same mapper as the CSV/REST/GraphQL connections (column names are
+            detected automatically). CONFIG-ONLY TODAY: saving and testing the shape works now, but Test and Pull
+            report "not configured" until the StewardMD owner wires a real database driver behind this binding --
+            see the note below. -->
+       <div id="fSql" style="display:none">
+        <div class="hint" style="margin-top:4px"><b>Note:</b> SQL / database connections are config-only until the StewardMD owner wires a Hyperdrive-backed driver. You can save this connection now; Test and Pull will report "not configured" until that driver is wired, never a fake success.</div>
+
+        <label for="aSqlBinding">Hyperdrive binding name *</label>
+        <input id="aSqlBinding" maxlength="200" placeholder="LABS_DB" autocapitalize="off" spellcheck="false">
+        <div class="hint" style="margin-top:4px">The NAME of the Hyperdrive binding the owner configures for your database; we never store a connection string or password here.</div>
+
+        <label for="aSqlQuery">Read-only query template *</label>
+        <textarea id="aSqlQuery" placeholder="SELECT patient_id, test_name, value, unit FROM labs WHERE patient_id = $1"></textarea>
+        <div class="hint" style="margin-top:4px">Your own read-only, single-statement query. It must use a bound placeholder for the patient id ($1, :patientId or ?) and reference the patient; it must never contain a write or schema keyword (INSERT/UPDATE/DELETE/DROP and similar).</div>
+
+        <label for="aSqlHeaders">Column headers (optional)</label>
+        <textarea id="aSqlHeaders" placeholder="mrn, test_name, result_value, result_unit (one per line, or comma-separated)"></textarea>
+        <div class="hint" style="margin-top:4px">List the column names your query returns for each result row, then use Suggest mapping to get a starting column-to-field mapping you can review and edit before saving.</div>
+        <div style="margin-top:8px"><button class="ghost" id="sqlSuggestBtn" type="button">Suggest mapping</button></div>
+
+        <!-- AI-assisted field mapping (optional): behind a separate flag (smd_connect_ai_map); degrades to the
+             same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="sqlMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below and edit any field name before saving.</div>
+          <div id="sqlMapEditor"></div>
+          <div class="msg" id="sqlMapMsg"></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="sqlSave">Save connection</button>
+          <button class="ghost" id="sqlSaveTest">Save and test connection</button>
+        </div>
+        <div class="msg" id="sqlMsg"></div>
        </div>
 
        <!-- CSV / flat file: a one-shot upload that is parsed and normalized in place (not saved). -->
@@ -495,7 +535,8 @@
     "tls":"There was a TLS or certificate problem reaching that server.",
     "unauthorized":"Authentication failed. Check the token or SMART credentials.",
     "not-fhir":"That endpoint did not return a FHIR CapabilityStatement.",
-    "unreachable":"Could not reach that server. Check the URL and that it is online."
+    "unreachable":"Could not reach that server. Check the URL and that it is online.",
+    "not-configured":"This connection is not configured on the server yet. Ask the StewardMD owner to finish wiring a Hyperdrive database driver."
   };
   // "not-fhir" also doubles as "unexpected response shape" for a rest-json/dicomweb probe (no CapabilityStatement
   // there), so give it accurate copy instead of the FHIR-specific default when the caller tells us the connection type.
@@ -541,11 +582,11 @@
   }
   $("aDetect").onclick=doDetect;
 
-  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push vs REST/JSON vs DICOMweb vs GraphQL) ----
-  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook", rest=v==="rest", dicom=v==="dicom", graphql=v==="graphql";
-    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none"; $("fRest").style.display=rest?"":"none"; $("fDicom").style.display=dicom?"":"none"; $("fGraphql").style.display=graphql?"":"none";
-    // #fFhir also holds the FHIR-only Detect button, so hiding it for rest/dicom/graphql (as for csv/hl7/webhook) hides Detect too.
-    $("fFhir").style.display=(csv||hl7||wh||rest||dicom||graphql)?"none":""; }
+  // ---- connection type toggle (FHIR connection vs one-shot CSV upload vs HL7 v2 feed vs webhook/FHIR push vs REST/JSON vs DICOMweb vs GraphQL vs SQL) ----
+  function applyType(){ var v=$("aType").value, csv=v==="csv", hl7=v==="hl7", wh=v==="webhook", rest=v==="rest", dicom=v==="dicom", graphql=v==="graphql", sql=v==="sql";
+    $("fCsv").style.display=csv?"":"none"; $("fHl7").style.display=hl7?"":"none"; $("fWebhook").style.display=wh?"":"none"; $("fRest").style.display=rest?"":"none"; $("fDicom").style.display=dicom?"":"none"; $("fGraphql").style.display=graphql?"":"none"; $("fSql").style.display=sql?"":"none";
+    // #fFhir also holds the FHIR-only Detect button, so hiding it for rest/dicom/graphql/sql (as for csv/hl7/webhook) hides Detect too.
+    $("fFhir").style.display=(csv||hl7||wh||rest||dicom||graphql||sql)?"none":""; }
   $("aType").onchange=applyType;
 
   // ---- CSV upload: one-shot parse + preview (no saved connection) ----
@@ -864,6 +905,57 @@
   $("graphqlSave").onclick=function(){ doGraphqlSave(false); };
   $("graphqlSaveTest").onclick=function(){ doGraphqlSave(true); };
 
+  // ---- SQL / database lab feed: save (+optional test). NO URL, NO admin secret -- the database credentials
+  // live in the owner's Hyperdrive binding (referenced here by NAME only); we never collect or store a
+  // connection string. Config-only today: Test/Pull honestly report "not configured" until the owner wires a
+  // real driver (see the note in the #fSql block above). ----
+  function sqlBody(){
+    var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"sql",
+      bindingName:($("aSqlBinding").value||"").trim(), queryTemplate:($("aSqlQuery").value||"").trim() };
+    var cm=readMapEditor("sqlMapEditor"); if(Object.keys(cm).length) body.columnMap=cm;
+    return body;
+  }
+  function clearSqlForm(){
+    ["aSqlBinding","aSqlQuery","aSqlHeaders"].forEach(function(id){ var e=$(id); if(e)e.value=""; });
+    $("sqlMapWrap").style.display="none"; clearEl($("sqlMapEditor"));
+  }
+
+  // ---- AI-assisted field mapping: SQL wizard (the admin types headers, since there is no server preview) ----
+  function sqlMapSay(k,t){ say("sqlMapMsg",k,t); }
+  function sqlSuggestGo(){
+    if(!tenant()){ sqlMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var headers=splitHeaders($("aSqlHeaders").value);
+    if(!headers.length){ sqlMapSay("err","Enter at least one column header first."); return; }
+    $("sqlSuggestBtn").disabled=true; sqlMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:headers}).then(function(x){
+      $("sqlSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ sqlMapSay("err",httpErr(x)); return; }
+      $("sqlMapWrap").style.display="";
+      renderMapEditor("sqlMapEditor",headers,x.d.map||{});
+      sqlMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field before saving.");
+    }).catch(function(){ $("sqlSuggestBtn").disabled=false; sqlMapSay("err","Sign in first."); });
+  }
+  $("sqlSuggestBtn").onclick=sqlSuggestGo;
+  function doSqlSave(thenTest){
+    if(!tenant()){ say("sqlMsg","err","Enter your organization / tenant ID at the top first."); return; }
+    var body=sqlBody();
+    if(!body.name){ say("sqlMsg","err","A connection name is required."); return; }
+    if(!body.bindingName){ say("sqlMsg","err","A Hyperdrive binding name is required."); return; }
+    if(!body.queryTemplate){ say("sqlMsg","err","A read-only query template is required."); return; }
+    $("sqlSave").disabled=true; $("sqlSaveTest").disabled=true; say("sqlMsg","","Saving…");
+    jpost(API+"/emr",body).then(function(x){
+      $("sqlSave").disabled=false; $("sqlSaveTest").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ say("sqlMsg","err",httpErr(x)); return; }
+      var id=x.d.connectionId; clearSqlForm(); loadDashboard();
+      if(thenTest){ say("sqlMsg","","Saved. Testing connection…"); runTest(id,"sqlMsg","sql"); }
+      else { say("sqlMsg","ok","Connection saved. Use Test below to check it."); }
+    }).catch(function(){ $("sqlSave").disabled=false; $("sqlSaveTest").disabled=false; say("sqlMsg","err","Sign in first."); });
+  }
+  $("sqlSave").onclick=function(){ doSqlSave(false); };
+  $("sqlSaveTest").onclick=function(){ doSqlSave(true); };
+
   // ---- test ----
   function runTest(id,msgId,type){
     say(msgId,"","Testing connection…");
@@ -875,6 +967,7 @@
         var okMsg=type==="rest-json"?"Connected. The results endpoint responded correctly."
           :type==="dicomweb"?"Connected. The studies endpoint responded correctly."
           :type==="graphql"?"Connected. The GraphQL endpoint responded correctly."
+          :type==="sql"?"Connected. The database query responded correctly."
           :("Connected. FHIR "+(d.fhirVersion||"version unknown")+(d.softwareName?(", "+d.softwareName):"")+".");
         say(msgId,"ok",okMsg);
       }
@@ -992,7 +1085,7 @@
   function feedStatusBadge(f){ var s=String(f.status||"active"); return '<span class="st '+(s==="active"?"verified":"unverified")+'">'+esc(s)+'</span>'; }
   // Connection-type badge: the row's REAL type (server-derived, safeView.type), not a hardcoded label. Falls
   // back to the raw type string for anything not yet in this map (forward-compatible, never hides a type).
-  var TYPE_LABEL={"fhir":"FHIR","rest-json":"REST/JSON","dicomweb":"DICOMweb","graphql":"GraphQL","hl7v2":"HL7 v2","csv":"CSV","webhook":"Webhook"};
+  var TYPE_LABEL={"fhir":"FHIR","rest-json":"REST/JSON","dicomweb":"DICOMweb","graphql":"GraphQL","sql":"SQL / database","hl7v2":"HL7 v2","csv":"CSV","webhook":"Webhook"};
   function typeLabel(t){ t=String(t||"fhir"); return TYPE_LABEL[t]||t; }
   function fhirRow(c){ var id=esc(c.connectionId), lt=c.lastTest;
     var last=lt?(lt.ok?("connected"+(lt.fhirVersion?" (FHIR "+esc(lt.fhirVersion)+")":"")):esc(lt.error||"failed")):"not tested";
@@ -1556,7 +1649,8 @@
     restSave:function(){ doRestSave(false); }, restSaveTest:function(){ doRestSave(true); },
     dicomSave:function(){ doDicomSave(false); }, dicomSaveTest:function(){ doDicomSave(true); },
     graphqlSave:function(){ doGraphqlSave(false); }, graphqlSaveTest:function(){ doGraphqlSave(true); },
-    suggestCsvMapping:csvSuggestGo, applyCsvMapping:csvApplyMapGo, suggestRestMapping:restSuggestGo, suggestGraphqlMapping:graphqlSuggestGo,
+    sqlSave:function(){ doSqlSave(false); }, sqlSaveTest:function(){ doSqlSave(true); },
+    suggestCsvMapping:csvSuggestGo, applyCsvMapping:csvApplyMapGo, suggestRestMapping:restSuggestGo, suggestGraphqlMapping:graphqlSuggestGo, suggestSqlMapping:sqlSuggestGo,
     readMapEditor:readMapEditor,
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
     setSection:setSection, loadMembers:loadMembers, renderMembers:renderMembers,

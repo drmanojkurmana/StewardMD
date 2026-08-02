@@ -94,6 +94,23 @@ test("a fhir connection (no live CapabilityStatement needed) still handles confo
   assert.equal(report.checks.find((c) => c.name === "reachability").ok, true);
 });
 
+test("a saved sql connection (no driver wired) validates: config ok, conformance ok (empty not-configured path), reachability honestly not-configured", async () => {
+  const e = env(), db = seedDb();
+  const deps = depsFor(db, e, async () => new Response("nf", { status: 404 }));   // fetch is irrelevant to sql -- never called
+  const { connectionId } = await saveConnection(deps, {}, e, "t1",
+    { name: "Lab DB", type: "sql", bindingName: "LABS_DB", queryTemplate: "SELECT * FROM labs WHERE patient_id = $1" });
+
+  const report = await validateConnection(deps, {}, e, "t1", connectionId);
+  assert.equal(report.checks.find((c) => c.name === "config").ok, true, JSON.stringify(report));
+  assert.equal(report.checks.find((c) => c.name === "conformance").ok, true, JSON.stringify(report.conformance));
+  assert.equal(report.conformance.passed, true);
+  // no wired driver (deps.sqlDriverFactory unset) -> reachability HONESTLY reports not-configured, never a fake ok
+  const reach = report.checks.find((c) => c.name === "reachability");
+  assert.equal(reach.ok, false);
+  assert.equal(reach.detail, "not-configured");
+  assert.equal(report.ok, false);
+});
+
 test("RBAC denies a non-member (fails closed, never throws PHI, never runs the checks)", async () => {
   const e = env(), db = seedDb();
   const deps = depsFor(db, e, async () => new Response("nf", { status: 404 }), "u-stranger");   // not in connect_membership

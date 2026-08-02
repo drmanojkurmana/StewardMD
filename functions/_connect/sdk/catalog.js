@@ -6,9 +6,10 @@ import { abdmConnector } from "../abdm/connector.js";
 import { restJsonConnector } from "../connectors/rest-json/connector.js";
 import { dicomWebConnector } from "../connectors/dicomweb/connector.js";
 import { graphqlConnector } from "../connectors/graphql/connector.js";
+import { sqlConnector } from "../connectors/sql/connector.js";
 import { createRegistry } from "./registry.js";
 
-export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector, restJsonConnector, dicomWebConnector, graphqlConnector]);
+export const BUILTIN = Object.freeze([fhirR4Connector, abdmConnector, restJsonConnector, dicomWebConnector, graphqlConnector, sqlConnector]);
 
 export function defaultRegistry() {
   const reg = createRegistry();

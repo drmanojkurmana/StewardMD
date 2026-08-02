@@ -11,7 +11,7 @@
 // "Marketplace architecture" here = a catalog model (typed entries + metadata + an enable-via-flag model) that
 // a future third-party marketplace would build on. The actual third-party install/publish flow is OUT OF SCOPE.
 //
-// Pull types (fhir-r4, rest-json, dicomweb, graphql) are DERIVED from the SDK registry (sdk/catalog.js's defaultRegistry
+// Pull types (fhir-r4, rest-json, dicomweb, graphql, sql) are DERIVED from the SDK registry (sdk/catalog.js's defaultRegistry
 // -> asConnectorMap) + each connector's own capabilities(), so this never hand-duplicates their resource/auth
 // lists. The registry also carries the abdm connector (profile "event"), which is filtered OUT here: onboarding
 // lists PULL connection types only -- abdm is a different (event-profile) onboarding surface, not a self-service
@@ -27,6 +27,7 @@ import { fhirFlagOn } from "../smart/flags.js";
 import { restFlagOn } from "../connectors/rest-json/flags.js";
 import { dicomFlagOn } from "../connectors/dicomweb/flags.js";
 import { graphqlFlagOn } from "../connectors/graphql/flags.js";
+import { sqlFlagOn } from "../connectors/sql/flags.js";
 import { flagHl7On, flagFhirPushOn } from "../ingest.js";
 
 // Per-track flag gate + a short one-line, non-em-dash description for each SDK-registry PULL connector.
@@ -46,6 +47,10 @@ const PULL_META = {
   "graphql": {
     category: "pull", flagEnv: "CONNECT_GRAPHQL_FLAG", enabledFn: graphqlFlagOn,
     description: "Generic GraphQL lab-results pull connection using your own query, no EMR-specific code required.",
+  },
+  "sql": {
+    category: "pull", flagEnv: "CONNECT_SQL_FLAG", enabledFn: sqlFlagOn,
+    description: "Generic SQL/database lab-results pull connection; config-only until the owner wires a Hyperdrive driver.",
   },
 };
 
@@ -76,7 +81,7 @@ const STATIC_ENTRIES = [
 ];
 
 // buildCatalog(env) -> connector[]. Deterministic ordering: registry pull types in BUILTIN order (fhir-r4,
-// rest-json, dicomweb -- abdm filtered out), then the static feed/file entries. No env I/O beyond reading the
+// rest-json, dicomweb, graphql, sql -- abdm filtered out), then the static feed/file entries. No env I/O beyond reading the
 // flag env vars; no tenant/request data is read here at all.
 async function buildCatalog(env) {
   const map = defaultRegistry().asConnectorMap();

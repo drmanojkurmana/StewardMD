@@ -34,23 +34,25 @@ test("one entry per known connector type, with the right category", async () => 
   const r = await listConnectorCatalog({ db: seed(), identifyFn: idFn("u-admin") }, req("t1"), ON);
   assert.equal(r.ok, true);
   const ids = r.connectors.map((c) => c.id).sort();
-  assert.deepEqual(ids, ["dicomweb", "fhir-push", "fhir-r4", "file", "graphql", "hl7v2", "rest-json"]);
+  assert.deepEqual(ids, ["dicomweb", "fhir-push", "fhir-r4", "file", "graphql", "hl7v2", "rest-json", "sql"]);
   assert.equal(byId(r.connectors, "fhir-r4").category, "pull");
   assert.equal(byId(r.connectors, "rest-json").category, "pull");
   assert.equal(byId(r.connectors, "graphql").category, "pull");
+  assert.equal(byId(r.connectors, "sql").category, "pull");
   assert.equal(byId(r.connectors, "dicomweb").category, "imaging");
   assert.equal(byId(r.connectors, "file").category, "file");
   assert.equal(byId(r.connectors, "hl7v2").category, "feed");
   assert.equal(byId(r.connectors, "fhir-push").category, "feed");
 });
 
-test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb/graphql present); abdm NOT listed", async () => {
+test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb/graphql/sql present); abdm NOT listed", async () => {
   const r = await listConnectorCatalog({ db: seed(), identifyFn: idFn("u-admin") }, req("t1"), ON);
   const ids = r.connectors.map((c) => c.id);
   assert.ok(ids.includes("fhir-r4"));
   assert.ok(ids.includes("rest-json"));
   assert.ok(ids.includes("dicomweb"));
   assert.ok(ids.includes("graphql"));
+  assert.ok(ids.includes("sql"));
   assert.equal(ids.includes("abdm"), false);   // profile "event" -- a different onboarding surface, not a self-service type here
 
   const fhir = byId(r.connectors, "fhir-r4");
@@ -71,6 +73,11 @@ test("the pull entries match the SDK registry (fhir-r4/rest-json/dicomweb/graphq
   const gql = byId(r.connectors, "graphql");
   assert.deepEqual(gql.resources.slice().sort(), ["DiagnosticReport", "Observation", "Patient"]);
   assert.deepEqual(gql.authKinds, ["token"]);
+
+  const sql = byId(r.connectors, "sql");
+  assert.equal(sql.profile, "pull");
+  assert.deepEqual(sql.resources.slice().sort(), ["DiagnosticReport", "Observation", "Patient"]);
+  assert.deepEqual(sql.authKinds, ["binding"]);
 });
 
 test("every entry carries a description string and no undefined/null field", async () => {
@@ -108,6 +115,19 @@ test("enabled reflects the flag env: CONNECT_GRAPHQL_FLAG on -> graphql enabled,
   assert.equal(byId(on.connectors, "graphql").enabled, true);
   // other entries are unaffected by the graphql flag
   assert.equal(byId(on.connectors, "rest-json").enabled, false);
+  assert.equal(byId(on.connectors, "dicomweb").enabled, false);
+  assert.equal(byId(on.connectors, "sql").enabled, false);
+});
+
+test("enabled reflects the flag env: CONNECT_SQL_FLAG on -> sql enabled, off -> disabled", async () => {
+  const db = seed();
+  const off = await listConnectorCatalog({ db, identifyFn: idFn("u-admin") }, req("t1"), ON);
+  assert.equal(byId(off.connectors, "sql").enabled, false);
+  const on = await listConnectorCatalog({ db, identifyFn: idFn("u-admin") }, req("t1"), Object.assign({}, ON, { CONNECT_SQL_FLAG: "1" }));
+  assert.equal(byId(on.connectors, "sql").enabled, true);
+  // other entries are unaffected by the sql flag
+  assert.equal(byId(on.connectors, "rest-json").enabled, false);
+  assert.equal(byId(on.connectors, "graphql").enabled, false);
   assert.equal(byId(on.connectors, "dicomweb").enabled, false);
 });
 

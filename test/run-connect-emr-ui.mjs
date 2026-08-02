@@ -15,6 +15,11 @@
  * Also verifies AI-assisted field mapping (CSV + REST): Suggest mapping POSTs ONLY the column headers (never
  * csv text / row data) to /suggest-mapping, renders an EDITABLE map the admin reviews, and the reviewed map
  * flows back into the next parse (CSV) / save (REST); degrades to the same flag-off state on a 404.
+ * Also verifies the SQL / database lab feed wizard: type toggle shows #fSql (with its own visible not-
+ * configured/Hyperdrive note) and hides the rest, Save POSTs /emr with type sql + bindingName + queryTemplate
+ * only (NO baseUrl, NO auth -- there is no URL or admin secret for a SQL/DB connection), AI-assisted mapping
+ * works the same way as REST/GraphQL, and Test HONESTLY renders the not-configured message as a failure
+ * (never a fake success) until the owner wires a live driver; degrades to the same flag-off state on a 404.
  * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
  * USAGE: node test/run-connect-emr-ui.mjs
  */
@@ -62,7 +67,7 @@ try {
 
   // form renders
   ok(await ev(`return !!(document.getElementById("aName") && document.getElementById("aBase") && document.getElementById("aMethod") && document.getElementById("addSave"));`) === true, "add-connection form renders");
-  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=7 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0 && en.indexOf("graphql")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL all active (no disabled 'coming soon' option)");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#aType option')); var en=o.filter(function(x){return !x.disabled;}).map(function(x){return x.value;}); return o.length>=8 && en.indexOf("fhir")>=0 && en.indexOf("csv")>=0 && en.indexOf("hl7")>=0 && en.indexOf("webhook")>=0 && en.indexOf("rest")>=0 && en.indexOf("dicom")>=0 && en.indexOf("graphql")>=0 && en.indexOf("sql")>=0;`) === true, "type picker shows FHIR + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL + SQL all active (no disabled 'coming soon' option)");
   ok(await ev(`return getComputedStyle(document.getElementById("fSmart")).display==="none";`) === true, "SMART fields hidden by default (token method)");
   ok(await ev(`document.getElementById("aMethod").value="smart"; document.getElementById("aMethod").onchange(); return getComputedStyle(document.getElementById("fSmart")).display!=="none" && getComputedStyle(document.getElementById("fToken")).display==="none";`) === true, "auth-method toggle reveals SMART fields, hides token fields");
   await ev(`document.getElementById("aMethod").value="token"; document.getElementById("aMethod").onchange(); return 1;`);
@@ -278,6 +283,62 @@ try {
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
+  // SQL / database lab feed type: activates the SQL subform (hides FHIR/Detect + CSV + HL7 + Webhook + REST +
+  // DICOMweb + GraphQL); Save builds {type:"sql", bindingName, queryTemplate, columnMap?} exactly per the
+  // backend contract -- NO baseUrl, NO auth (there is no URL or admin secret for a SQL/DB connection; the
+  // database credentials live in the owner's Hyperdrive binding). The mocked Test response reports the HONEST
+  // not-configured class (no live driver wired yet), and the page renders the friendly not-configured copy
+  // (added to TESTERR above), never a fake success.
+  ok(await ev(`document.getElementById("aType").value="sql"; document.getElementById("aType").onchange(); return getComputedStyle(document.getElementById("fSql")).display!=="none" && getComputedStyle(document.getElementById("fFhir")).display==="none" && getComputedStyle(document.getElementById("fCsv")).display==="none" && getComputedStyle(document.getElementById("fHl7")).display==="none" && getComputedStyle(document.getElementById("fWebhook")).display==="none" && getComputedStyle(document.getElementById("fRest")).display==="none" && getComputedStyle(document.getElementById("fDicom")).display==="none" && getComputedStyle(document.getElementById("fGraphql")).display==="none";`) === true, "SQL type activates the SQL subform and hides the FHIR (+ Detect) + CSV + HL7 + Webhook + REST + DICOMweb + GraphQL fields");
+  ok(await ev(`return document.getElementById("fSql").textContent.indexOf("not configured")>=0 && document.getElementById("fSql").textContent.indexOf("Hyperdrive")>=0 && document.getElementById("fSql").textContent.indexOf("\\u2014")<0;`) === true, "the SQL subform carries a visible note that it needs a Hyperdrive driver wired and Test reports not configured until then, no em-dash");
+  await ev(`window.ConnectEMR.setTenant("t-sql"); window.ConnectEMR.setName("Lab DB");
+    document.getElementById("aSqlBinding").value="LABS_DB";
+    document.getElementById("aSqlQuery").value="SELECT patient_id, test_name, value, unit FROM labs WHERE patient_id = $1";
+    window.__sqlSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__sqlSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"sql-1"}}); }
+      if(opts&&opts.method==="POST"&&path.indexOf("/test/sql-1")>=0){ return Promise.resolve({s:200,d:{ok:false,error:"not-configured"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.sqlSaveTest(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__sqlSaved; return !!b && b.type==="sql" && b.tenantId==="t-sql" && b.name==="Lab DB" && b.bindingName==="LABS_DB" && b.queryTemplate.indexOf("patient_id")>=0 && !("baseUrl" in b) && !("auth" in b) && !("columnMap" in b);`) === true, "SQL Save-and-test POSTs /emr with type sql + bindingName + queryTemplate only (NO baseUrl, NO auth -- there is no URL or admin secret for a SQL/DB connection)");
+  ok(await ev(`var m=document.getElementById("sqlMsg"); return m.className.indexOf("err")>=0 && m.className.indexOf("ok")<0 && m.textContent.indexOf("Hyperdrive")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "SQL Save-and-test HONESTLY reports the not-configured message as a FAILURE (never a fake success), no em-dash");
+  ok(await ev(`return document.getElementById("aSqlBinding").value===""&&document.getElementById("aSqlQuery").value==="";`) === true, "SQL form clears after a successful save");
+
+  // AI-assisted field mapping (SQL): the admin types column headers (there is no server-side preview for a SQL
+  // query), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is then included
+  // as columnMap on the next Save.
+  await ev(`document.getElementById("aSqlHeaders").value="mrn, test_name, result_value"; window.__sqlMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__sqlMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestSqlMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__sqlMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "SQL Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("sqlMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the SQL suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("sqlMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the SQL suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab DB 2"; document.getElementById("aSqlBinding").value="LABS_DB2";
+    document.getElementById("aSqlQuery").value="SELECT patient_id, test_name, value FROM labs WHERE patient_id = :patientId";
+    window.__sqlSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__sqlSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"sql-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.sqlSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__sqlSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed SQL mapping is included as columnMap on Save");
+  // A 404 (flag off) on SQL Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`document.getElementById("aSqlHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestSqlMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "SQL Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // reset back to FHIR
+  await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
+
   // ---- Part 3: tenant PICKER (GET /tenants -> the caller's own memberships) ----
   // Multi-tenant: the dropdown lists every membership (name + role), keeps a placeholder, and does NOT auto-select.
   await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-a",name:"GIMSR Hospital",role:"admin"},{tenantId:"t-b",role:"owner"}]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],counts:{fhir:0,hl7:0,total:0}}}); }); window.ConnectEMR.loadTenants(); return 1;`);
@@ -361,6 +422,8 @@ try {
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Hospital PACS Feed")>=0 && h.indexOf(">DICOMweb<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a dicomweb row is badged DICOMweb (its real type), not hardcoded FHIR");
   ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-4",name:"Lab GraphQL Feed",type:"graphql",fhirBaseUrl:"https://labs.example.org/graphql",authMethod:"token"}],[],{fhir:1,hl7:0,total:1});
     var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab GraphQL Feed")>=0 && h.indexOf(">GraphQL<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a graphql row is badged GraphQL (its real type), not hardcoded FHIR");
+  ok(await ev(`window.ConnectEMR.renderDash([{connectionId:"c-5",name:"Lab DB Feed",type:"sql",fhirBaseUrl:"",authMethod:"binding"}],[],{fhir:1,hl7:0,total:1});
+    var h=document.getElementById("dash").innerHTML; return h.indexOf("Lab DB Feed")>=0 && h.indexOf(">SQL / database<")>=0 && h.indexOf(">FHIR<")<0;`) === true, "a sql row is badged SQL / database (its real type), not hardcoded FHIR");
 
   // ---- Sync schedule panel (self-service auto-sync cadence per connection; reuses GET /all, the SAME list
   // the Connections dashboard renders). Two connections: one auto-sync ON and never synced (next due = "due
@@ -626,6 +689,14 @@ try {
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GraphQL save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
 
+  // sql degrades through the SAME showFlagOff() path as every other type (no special-casing in doSqlSave).
+  await ev(`window.ConnectEMR.setTenant("t-final4"); document.getElementById("aName").value="Lab DB Final";
+    document.getElementById("aSqlBinding").value="LABS_DB"; document.getElementById("aSqlQuery").value="SELECT * FROM labs WHERE patient_id = $1";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); });
+    window.ConnectEMR.sqlSaveTest(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "SQL save-and-test on a 404 (flag off) also shows the graceful 'not enabled yet' state, not a console error");
+
   // Connection health degrades through the SAME showFlagOff() path as every other GET on a 404.
   await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadHealth(); return 1;`);
   await sleep(200);
@@ -648,7 +719,7 @@ try {
     return mon.length===2 && mon.every(function(c){return getComputedStyle(c).display!=="none";}) && onboardHidden;`) === true, "setSection('monitoring') shows the Connection health + Activity log cards and hides the Onboard card");
   await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
   ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none" && getComputedStyle(document.querySelector('.card[data-section="monitoring"]')).display==="none";`) === true, "setSection('onboard') restores the Onboard card and re-hides Monitoring");
-  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fGraphql","fCsv","fHl7","fWebhook",
+  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fGraphql","fSql","fCsv","fHl7","fWebhook",
       "tenantSel","tenantReload","tenantMsg","noTenant","opsArea","work","flagOff","gate",
       "dash","dashReload","dashCounts","syncPanel","syncReload","syncSummary",
       "health","healthReload","healthSummary","activity","activityReload","activitySummary",

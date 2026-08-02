@@ -115,6 +115,8 @@ export async function onRequest(context) {
     if (req.connectorId === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // Track: a graphql context request requires smd_connect_graphql too, same per-track gate idiom.
     if (req.connectorId === "graphql" && !graphqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    // Track: a sql context request requires smd_connect_sql too, same per-track gate idiom.
+    if (req.connectorId === "sql" && !sqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
     // NOTE: engine derives actor via identify(request) and verifies membership for tenantId;
     // a body tenantId the actor is not a member of => PermissionError (no cross-tenant read).
     try {

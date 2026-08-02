@@ -134,3 +134,14 @@ test("SDK ON, graphql flag OFF: /context graphql is 404 (per-track smd_connect_g
   const r2 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "graphql" }, on));
   assert.equal(r2.status, 401);                                        // past the gate -> unauthenticated
 });
+
+test("SDK ON, sql flag OFF: /context sql is 404 (per-track smd_connect_sql gate)", async () => {
+  // sql is in the SDK registry, so with smd_connect_sdk ON it would otherwise be reachable via /context.
+  // The per-track smd_connect_sql gate must 404 it (before auth) exactly as the fhir-r4/rest-json/dicomweb/graphql gates do.
+  const off = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1" };            // no CONNECT_SQL_FLAG
+  const r1 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "sql" }, off));
+  assert.equal(r1.status, 404);
+  const on = { CONNECT_FLAG: "1", CONNECT_SDK_FLAG: "1", CONNECT_SQL_FLAG: "1", CONNECT_DB: makeMockDb({}) };
+  const r2 = await onRequest(post("/api/connect/context", { tenantId: "t1", patientRef: "P1", scope: ["Observation"], connectorId: "sql" }, on));
+  assert.equal(r2.status, 401);                                        // past the gate -> unauthenticated
+});
