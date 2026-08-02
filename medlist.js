@@ -592,7 +592,7 @@
     }
     var badges = el("div", { cls: "ml-row-badges" });
     var src = med.source || "manual";
-    var srcLabel = { index: "Drug Index", ghis: "Ward Sync", wardsync: "Ward Sync", scan: "Scan", paste: "Manual", manual: "Manual" }[src] || cap(src);
+    var srcLabel = { index: "Drug Index", ghis: "Ward Sync", wardsync: "Ward Sync", connect: "Connect EMR", scan: "Scan", paste: "Manual", manual: "Manual" }[src] || cap(src);
     badges.appendChild(el("span", { cls: "ml-source-badge ml-source-" + src, text: srcLabel }));
     if (med.source === "scan" && med.confidence) badges.appendChild(el("span", { cls: "ml-conf-badge ml-conf-" + med.confidence, text: med.confidence }));
     if (!med.generic) badges.appendChild(el("span", { cls: "ml-conf-badge ml-conf-low", text: "unmapped" }));

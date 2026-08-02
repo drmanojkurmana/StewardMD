@@ -48,12 +48,16 @@ test("pullContext without a signed-in user -> not-signed-in, never calls the net
   assert.equal(called, false);
 });
 
-test("resourcesOfType filters the pulled bundle by resourceType", async () => {
-  const C = load({ hostname: "localhost", fetchImpl: () => Promise.resolve({ status: 200, json: () => Promise.resolve({ ok: true, bundle: { resources: [{ resourceType: "MedicationStatement", id: "m1" }, { resourceType: "Observation", id: "o1" }] } }) }) });
-  const r = await C.resourcesOfType({ tenantId: "t1", patientRef: "P1" }, "MedicationStatement");
-  assert.equal(r.ok, true);
-  assert.equal(r.resources.length, 1);
-  assert.equal(r.resources[0].id, "m1");
+test("resourcesOfType returns the matching SCCM typed array (flat, not FHIR entry[])", async () => {
+  const bundle = { patient: { id: "P1", name: { text: "A B" } }, medications: [{ id: "m1", medication: { text: "Aspirin" } }], observations: [{ id: "o1", code: { text: "Na" } }] };
+  const C = load({ hostname: "localhost", fetchImpl: () => Promise.resolve({ status: 200, json: () => Promise.resolve({ ok: true, bundle }) }) });
+  const meds = await C.resourcesOfType({ tenantId: "t1", patientRef: "P1" }, "MedicationStatement");
+  assert.equal(meds.ok, true);
+  assert.equal(meds.resources.length, 1);
+  assert.equal(meds.resources[0].id, "m1");
+  const pt = await C.resourcesOfType({ tenantId: "t1", patientRef: "P1" }, "Patient");
+  assert.equal(pt.resources.length, 1);          // single patient object wrapped to []
+  assert.equal(pt.resources[0].id, "P1");
 });
 
 test("tenants() lists the signed-in user's hospitals", async () => {

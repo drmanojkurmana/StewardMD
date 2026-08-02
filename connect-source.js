@@ -58,15 +58,21 @@
     });
   }
 
-  // Pull + return only the resources of a given SCCM/FHIR type (e.g. "MedicationStatement", "Observation").
-  // Defensive over the bundle shape: accepts { resources:[{resourceType,...}] } or a FHIR Bundle { entry:[{resource}] }.
+  // The SCCM bundle uses FLAT typed arrays (bundle.medications, bundle.observations, ...) -- NOT FHIR entry[],
+  // and there is NO resourceType. Map a requested type -> its bundle key. `patient` is a single object (-> [p]).
+  var SCCM_KEY = {
+    Patient: "patient", Encounter: "encounters", Condition: "conditions",
+    MedicationStatement: "medications", MedicationRequest: "medications", Medication: "medications",
+    AllergyIntolerance: "allergies", Observation: "observations",
+    DiagnosticReport: "diagnosticReports", DocumentReference: "documents", ImagingStudy: "imagingStudies",
+  };
+  // Pull + return only the normalized SCCM resources of a given type (e.g. "MedicationStatement", "Observation").
   function resourcesOfType(opts, type) {
     return pullContext(opts).then(function (r) {
       if (!r.ok) return r;
-      var b = r.bundle || {};
-      var list = b.resources || b.entry || (b.resourceType === "Bundle" ? [] : []);
-      var out = [];
-      (list || []).forEach(function (e) { var res = (e && e.resource) || e; if (res && res.resourceType === type) out.push(res); });
+      var b = r.bundle || {}, key = SCCM_KEY[type] || (type ? String(type).toLowerCase() + "s" : null);
+      var v = key ? b[key] : null;
+      var out = v == null ? [] : (Array.isArray(v) ? v : [v]);   // patient is a single object
       return { ok: true, resources: out, type: type };
     });
   }

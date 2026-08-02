@@ -779,6 +779,7 @@
         document.body.appendChild(ov);
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
+    connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
   };
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
@@ -1724,6 +1725,7 @@
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
+      mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
