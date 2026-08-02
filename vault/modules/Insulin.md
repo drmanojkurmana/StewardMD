@@ -51,10 +51,12 @@ decides: every recommendation is stamped AI-assisted and requires an explicit co
   `smd_insulin_settings_<uid>`, `smd_insulin_log_<uid>`.
 - UNITS: mg/dL ONLY (India standard, owner decision) - mmol/L toggle and unit-switch code removed;
   `open()` forces `SET.units="mgdl"`. The mmol helpers remain as no-ops; do not re-add mmol without asking.
+- DONE (this pass): bolus-insulin selector in the calculator (persisted) - the chosen insulin drives
+  timing/PK guidance, an IOB estimate from the confirmed-dose log via its DIA (INSULIN_ENGINE.activeInsulin),
+  and a short-acting-insulin safety note.
 - NOT done (rest of v1 scope): basal/IOB dedicated screens (engine done); patient profiles on
-  `SMD_CASES`; insulin **selection influencing the calculators** (DIA/timing/safety from the chosen
-  insulin); conversion workflows; gated DKA + pediatric; tighten `refs` to pinned citations (R1 item);
-  native rebuild.
+  `SMD_CASES`; conversion workflows; gated DKA + pediatric; tighten `refs` to pinned citations (R1 item);
+  expand the insulin dataset; native rebuild.
 
 ## Gotchas
 - motion.dev (this build) mis-interpolates a `transform` **string** with a `"none"` keyframe and can
