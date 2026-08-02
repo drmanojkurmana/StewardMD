@@ -762,7 +762,8 @@
       // Owner-only in-app EMR onboarding console (StewardMD Connect). Opens the bundled connect-emr.html in a
       // full-screen same-origin overlay so it runs INSIDE the app (no browser). The console detects the native
       // origin and calls the absolute stewardmd.in API; the server re-checks owner + RBAC on every request.
-      if (!nIsOwner()) { if (window.toast) toast("Owner access only"); return; }
+      // Open to ANY signed-in user (P1 self-service): the console handles sign-in + create-your-hospital, and
+      // the server enforces membership/RBAC on every call. Not owner-gated anymore.
       try {
         var ex = document.getElementById("smdConnectOverlay"); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
@@ -772,7 +773,7 @@
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
         var x = document.createElement("button"); x.textContent = "Close"; x.style.cssText = "background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:8px 14px;font:700 13px var(--hfont,sans-serif)";
         x.onclick = function () { if (ov.parentNode) ov.parentNode.removeChild(ov); };
-        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn1";
+        var fr = document.createElement("iframe"); fr.src = "connect-emr.html?v=conn2";
         fr.style.cssText = "flex:1;width:100%;border:0;background:#fff";
         bar.appendChild(t); bar.appendChild(x); ov.appendChild(bar); ov.appendChild(fr);
         document.body.appendChild(ov);
@@ -1722,7 +1723,7 @@
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
-      (nIsOwner() ? mi("framework", "Connect EMR", "Onboard a hospital EMR (owner)", "connect") : "") +
+      mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +

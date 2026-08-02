@@ -29,6 +29,7 @@ import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7
 import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
 import { listAll } from "../../../_connect/onboard/dashboard.js";
 import { listMyTenants, listMembers, setRole, removeMember } from "../../../_connect/enterprise/members.js";
+import { selfCreateTenant } from "../../../_connect/enterprise/org.js";
 import { adminFlagOn } from "../../../_connect/onboard/admin-flags.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
 import { readTenantActivity } from "../../../_connect/onboard/activity.js";
@@ -82,6 +83,10 @@ async function sqlGateBlocks(deps, tid, connectionId, env) {
 // /consents/:ref/revoke are not scoped to one connector row.
 function consentGateBlocks(env) { return !consentFlagOn(env); }
 
+// Self-service tenant creation (P1). ON by default whenever onboarding is on (this router already 404s if
+// onboard is off); set CONNECT_SELFSERVE_FLAG="0" to disable just this surface without touching onboarding.
+function selfServeBlocks(env) { return !!(env && env.CONNECT_SELFSERVE_FLAG === "0"); }
+
 export async function onRequest(context) {
   const { request, env } = context;
   if (!onboardFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
@@ -127,6 +132,12 @@ export async function onRequest(context) {
     // Part 3 (Enterprise): the caller's OWN tenant memberships (server-derived actor id; the body is NOT read)
     // — this drives the UI's tenant picker so an admin selects their hospital instead of typing a tenant id.
     if (method === "GET" && seg === "tenants") return jsonResponse({ ok: true, tenants: await listMyTenants(deps, request, env) });
+    // Self-service (P1): create MY hospital -> the caller becomes its owner. Server generates the tenant id
+    // from the name (never client-supplied); sandbox mode, no PHI/live opened here. Off = CONNECT_SELFSERVE_FLAG="0".
+    if (method === "POST" && seg === "tenants") {
+      if (selfServeBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await selfCreateTenant(deps, request, env, { name: body.name }));
+    }
     // Part 3 (Enterprise): the unified connections view (FHIR connections + HL7 feeds) for the selected tenant.
     if (method === "GET" && seg === "all") return jsonResponse(Object.assign({ ok: true }, await listAll(deps, request, env, tid)));
     // Part 4 (Enterprise analytics): PHI-free per-connector integration health over the tenant's audit rows.

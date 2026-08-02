@@ -90,8 +90,13 @@
 
       <!-- No-membership empty state (GET /tenants returned an empty list). -->
       <div id="noTenant" class="card" style="display:none">
-        <b>You are not a member of any hospital tenant</b>
-        <div class="hint" style="margin-top:6px">Your account is not a member of any organization yet. Ask your organization's owner to invite your StewardMD account, then use Reload above.</div>
+        <b>Add your hospital</b>
+        <div class="hint" style="margin-top:6px">You are not part of any hospital yet. Create yours below (you become its owner), or ask an existing owner to invite your StewardMD account, then use Reload above.</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
+          <input id="createHospName" placeholder="Your hospital or clinic name" autocapitalize="words" spellcheck="false" style="flex:1;min-width:180px">
+          <button id="createHospBtn" style="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 15px;font-weight:700;cursor:pointer">Create hospital</button>
+        </div>
+        <div id="createHospMsg" class="msg" style="margin-top:6px"></div>
       </div>
 
       <!-- Operational area: shown only once you belong to at least one organization. -->
@@ -1077,6 +1082,23 @@
       else if(tenant()){ onTenantChange(); }                                        // a still-valid selection refreshes
     }).catch(function(){ say("tenantMsg","err","Sign in first."); });
   }
+
+  // Self-service (P1): create your own hospital here -> you become its owner, then reload so it auto-selects.
+  function createHospital(){
+    var el=$("createHospName"), nm=(el&&el.value||"").trim();
+    var msg=function(k,t){ var m=$("createHospMsg"); if(m){ m.className="msg "+(k||""); m.textContent=t||""; } };
+    if(!nm){ msg("err","Enter your hospital name."); return; }
+    var b=$("createHospBtn"); if(b) b.disabled=true; msg("","Creating...");
+    jpost(API+"/tenants",{name:nm}).then(function(x){
+      if(b) b.disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false){ msg("err",httpErr(x)); return; }
+      msg("ok","Created. You are the owner of "+nm+".");
+      if(el) el.value="";
+      loadTenants();
+    }).catch(function(){ if(b) b.disabled=false; msg("err","Could not create. Are you signed in?"); });
+  }
+  (function(){ var b=$("createHospBtn"); if(b) b.onclick=createHospital; })();
 
   // ---- connections dashboard (unified FHIR connections + HL7 v2 feeds, one table) ----
   function statusBadge(c){
