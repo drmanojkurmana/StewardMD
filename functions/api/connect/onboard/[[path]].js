@@ -20,6 +20,8 @@ import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
 import { setSyncConfig, runDueSyncs } from "../../../_connect/onboard/sync.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
+import { aiMapFlagOn } from "../../../_connect/onboard/ai-map-flags.js";
+import { suggestMapping } from "../../../_connect/onboard/ai-map.js";
 import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7-feed.js";
 import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
 import { listAll } from "../../../_connect/onboard/dashboard.js";
@@ -61,7 +63,19 @@ export async function onRequest(context) {
   const parts = seg ? seg.split("/") : [];
   const method = request.method;
 
-  const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, ownerOk: ownerOK, secrets: makeSecrets(env), fetch, now: () => Date.now() };
+  const deps = {
+    db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, ownerOk: ownerOK, secrets: makeSecrets(env), fetch, now: () => Date.now(),
+    // AI-assisted field mapping seam (functions/_connect/onboard/ai-map.js): intentionally UNSET here, so
+    // suggestFieldMap always falls back to the deterministic inferColumnMap while CONNECT_AI_MAP_FLAG is off
+    // (the default). // VERIFY before flipping that flag on: wire aiSuggest to a HEADERS-ONLY call routed
+    // through the AI Control Center's governed, no-retention model tier (functions/_ai_usage.js) — e.g.
+    //   aiSuggest: ({ headers, fields }) => callGovernedModel(env, "connect-map", { headers, fields })
+    // — and confirm with the compliance owner that this egress (header strings + the fixed SCCM field list,
+    // NEVER a row/cell/patient value) is acceptable BEFORE enabling. Do NOT point this at
+    // functions/api/ai/[[path]].js (the live clinician-facing MaiK/Gemini endpoint) — this is a separate,
+    // dedicated onboarding seam.
+    aiSuggest: undefined,
+  };
   // Hard byte cap for the CSV upload: reject an oversized body UP FRONT (before buffering/parsing it).
   if (method === "POST" && seg === "csv") {
     const cl = Number(request.headers.get("content-length") || 0);
@@ -107,6 +121,14 @@ export async function onRequest(context) {
       return jsonResponse(await runDueSyncs(deps, env, deps.now()));
     }
     if (method === "POST" && seg === "csv") return jsonResponse(await parseCsvUpload(deps, request, env, tid, body));
+    // AI-assisted field mapping suggestion: a SEPARATE per-track flag (smd_connect_ai_map, default OFF) on top
+    // of the base onboard gate, mirroring the rest-json/dicomweb idiom — flag off => 404 (no existence leak)
+    // and the wizard falls back to the existing deterministic mapping. See ai-map.js for the PHI-safety
+    // invariant (headers + the fixed SCCM field list only, never a row/cell/patient value).
+    if (method === "POST" && seg === "suggest-mapping") {
+      if (!aiMapFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await suggestMapping(deps, request, env, tid, body));
+    }
     // Increment 3: HL7 v2 self-service feeds (create/list/revoke). The created feed is a connect_feed row the
     // Track-B ingest spine reads; the ingestUrl returned is the REAL /api/connect/ingress/hl7 endpoint.
     if (method === "POST" && seg === "hl7-feed") return jsonResponse(await createFeed(deps, request, env, tid, body));

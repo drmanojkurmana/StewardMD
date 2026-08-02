@@ -139,6 +139,23 @@ test("dicomweb save: 404 when CONNECT_DICOM_FLAG is off (base+onboard on); reach
   assert.equal(fhirRes.status, 401);
 });
 
+// --- AI-assisted field mapping: per-track flag gate (mirrors the rest-json/dicomweb idiom): smd_connect_ai_map,
+// default OFF. Deep logic (RBAC, validation, PHI-safety, fallback) is unit-tested in ai-map.test.mjs. -----------
+test("suggest-mapping: 404 when CONNECT_AI_MAP_FLAG is off (base+onboard on); reachable (401) when on", async () => {
+  const suggestBody = { tenantId: "t1", headers: ["MRN", "Test", "Value"] };
+  const off = await onRequest(post("/api/connect/onboard/suggest-mapping", suggestBody, BOTH));
+  assert.equal(off.status, 404);
+  const on = await onRequest(post("/api/connect/onboard/suggest-mapping", suggestBody, Object.assign({}, BOTH, { CONNECT_AI_MAP_FLAG: "1" })));
+  assert.equal(on.status, 401);        // past the gate -> the normal unauthenticated RBAC 401
+  assert.equal(on.headers.get("cache-control"), "no-store");
+  assert.deepEqual(Object.keys(await on.json()), ["error"]);
+});
+
+test("suggest-mapping: 404 when the base onboard flag is off, even with CONNECT_AI_MAP_FLAG on", async () => {
+  const res = await onRequest(post("/api/connect/onboard/suggest-mapping", { tenantId: "t1", headers: ["MRN"] }, { CONNECT_AI_MAP_FLAG: "1" }));
+  assert.equal(res.status, 404);
+});
+
 test("dicomweb test/pull: per-track flag gate on an existing dicomweb row -> 404 off, reachable (401) on", async () => {
   const db = makeOnboardDb();
   await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")

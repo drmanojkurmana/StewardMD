@@ -41,6 +41,11 @@ const ALIASES = {
 };
 const norm = (s) => String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]/g, "");
 
+// The canonical SCCM field names this mapper ever assigns — the single source of truth for any other module
+// (e.g. ai-map.js's AI-suggest allow-list) that needs "every field this mapper could produce", so nothing else
+// hardcodes a second, divergent list that could drift from ALIASES above.
+export const SCCM_TARGET_FIELDS = Object.freeze(Object.keys(ALIASES));
+
 // Best-effort structural mapping from header names to canonical fields (never inspects a value).
 export function inferColumnMap(header = []) {
   const map = {}, used = new Set();

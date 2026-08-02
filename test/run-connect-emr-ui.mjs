@@ -12,6 +12,9 @@
  * panel: a MOCKED GET /health renders per-connector Healthy/Degraded status, counts, failure rate, recent
  * failures with reasons, and a summary line, asserts the mocked payload carries only the documented PHI-free
  * fields, shows the "No connector activity yet." empty state, and degrades to the same flag-off state on 404.
+ * Also verifies AI-assisted field mapping (CSV + REST): Suggest mapping POSTs ONLY the column headers (never
+ * csv text / row data) to /suggest-mapping, renders an EDITABLE map the admin reviews, and the reviewed map
+ * flows back into the next parse (CSV) / save (REST); degrades to the same flag-off state on a 404.
  * No Firebase sign-in and no backend are required (api() is stubbed via the window.ConnectEMR test seam).
  * USAGE: node test/run-connect-emr-ui.mjs
  */
@@ -72,6 +75,41 @@ try {
   ok(await ev(`var j=document.getElementById("csvJson"); return getComputedStyle(j).display!=="none" && j.textContent.indexOf('"sccmVersion": "1.0"')>=0 && j.textContent.indexOf("Hemoglobin")>=0;`) === true, "CSV upload posts and renders the normalized SCCM bundle");
   ok(await ev(`var w=document.getElementById("csvWarn"); return getComputedStyle(w).display!=="none" && w.innerHTML.indexOf("unmapped column")>=0 && w.innerHTML.indexOf("ragged row")>=0;`) === true, "CSV warnings list surfaces the structural warnings");
   ok(await ev(`var c=document.getElementById("csvCounts"); return c.textContent.indexOf("2 row")>=0 && c.textContent.indexOf("4 column")>=0 && c.textContent.indexOf("\\u2014")<0;`) === true, "CSV counts show rows x columns (no em-dash)");
+
+  // AI-assisted field mapping (CSV): after a parse, "Suggest mapping" appears; clicking it POSTs the parsed
+  // headers (and ONLY the headers -- no row/cell data) to /suggest-mapping, then renders an EDITABLE map the
+  // admin can review before applying it back through the normal /csv parse path.
+  ok(await ev(`return getComputedStyle(document.getElementById("csvSuggestBtn")).display!=="none";`) === true, "Suggest mapping button appears once a CSV has been parsed");
+  await ev(`window.__mapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__mapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"heuristic",map:{MRN:"patientId",Test:"testName"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,rowsParsed:2,columns:["MRN","Test","Value","Unit"],warnings:[],bundle:{sccmVersion:"1.0",patient:{id:"h1a2"},observations:[],diagnosticReports:[],meta:{warnings:[]}}}});
+    });
+    window.ConnectEMR.suggestCsvMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__mapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["MRN","Test","Value","Unit"]) && !("csv" in r) && !("bundle" in r);`) === true, "Suggest mapping POSTs ONLY the parsed headers (no csv text / row data) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("csvMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var e=document.getElementById("csvMapEditor"); var inp=e.querySelectorAll("[data-map-header]"); return inp.length===4;`) === true, "the mapping editor renders one editable row per parsed header");
+  ok(await ev(`var m=window.ConnectEMR.readMapEditor("csvMapEditor"); return m.MRN==="patientId" && m.Test==="testName" && !("Value" in m) && !("Unit" in m);`) === true, "the editor pre-fills the suggested field for each mapped header and leaves unmapped headers blank");
+  ok(await ev(`var m=document.getElementById("csvMapMsg"); return m.textContent.indexOf("heuristic")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the suggestion message reports its source (heuristic here), no em-dash");
+  // Edit a field in the mapping editor, then Apply -- re-parses /csv with the reviewed columnMap.
+  await ev(`var e=document.getElementById("csvMapEditor"); var inp=e.querySelector('[data-map-header="Value"]'); inp.value="value";
+    window.__csvSaved=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/csv")>=0){ window.__csvSaved=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,rowsParsed:2,columns:["MRN","Test","Value","Unit"],warnings:[],bundle:{sccmVersion:"1.0",patient:{id:"h1a2"},observations:[],diagnosticReports:[],meta:{warnings:[]}}}}); }
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    window.ConnectEMR.applyCsvMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__csvSaved; return !!b && b.columnMap && b.columnMap.MRN==="patientId" && b.columnMap.Test==="testName" && b.columnMap.Value==="value" && !("Unit" in b.columnMap);`) === true, "Apply mapping re-parses /csv with the admin-reviewed columnMap");
+  // A 404 (flag off) on Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestCsvMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  // clear the flag-off state left by the mocked 404 above (a direct DOM reset, so it has no side effect on the
+  // tenant/dashboard mocks the remaining sections below rely on) before the remaining tests run
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
   // reset back to FHIR for the remaining list mock
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 
@@ -123,6 +161,39 @@ try {
   ok(await ev(`var b=window.__restSaved; return !!b && b.type==="rest-json" && b.baseUrl==="https://labs.example.org/api" && b.tenantId==="t-rest" && b.name==="Lab REST API" && b.auth&&b.auth.method==="token" && b.auth.token==="rest-tok-1" && b.resultsPath==="/lab-results" && !("headerName" in (b.auth||{})) && !("patientParam" in b);`) === true, "REST Save-and-test POSTs /emr with type rest-json + baseUrl + token auth + resultsPath (optional fields omitted when blank)");
   ok(await ev(`var m=document.getElementById("restMsg"); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("results endpoint responded correctly")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "REST Save-and-test reports success with REST-specific copy (not a FHIR version string), no em-dash");
   ok(await ev(`return document.getElementById("aRestBase").value===""&&document.getElementById("aRestToken").value==="";`) === true, "REST form clears after a successful save");
+
+  // AI-assisted field mapping (REST): the admin types column headers (there is no server-side preview for a
+  // REST endpoint), Suggest mapping POSTs ONLY those headers to /suggest-mapping, and the reviewed map is then
+  // included as columnMap on the next Save.
+  await ev(`document.getElementById("aRestHeaders").value="mrn, test_name, result_value"; window.__restMapReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/suggest-mapping")>=0){ window.__restMapReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,source:"ai",map:{mrn:"patientId",test_name:"testName",result_value:"value"}}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.suggestRestMapping(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__restMapReq; return !!r && JSON.stringify(r.headers)===JSON.stringify(["mrn","test_name","result_value"]);`) === true, "REST Suggest mapping POSTs ONLY the entered headers (split on commas/newlines) to /suggest-mapping");
+  ok(await ev(`var w=document.getElementById("restMapWrap"); return getComputedStyle(w).display!=="none";`) === true, "the REST suggested-mapping editor is shown after a successful suggestion");
+  ok(await ev(`var m=document.getElementById("restMapMsg"); return m.textContent.indexOf("AI")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "the REST suggestion message reports its source (AI here), no em-dash");
+  await ev(`document.getElementById("aName").value="Lab REST API 2"; document.getElementById("aRestBase").value="https://labs.example.org/api";
+    document.getElementById("aRestToken").value="rest-tok-2";
+    window.__restSaved2=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(opts&&opts.method==="POST"&&path.indexOf("/emr")>=0){ window.__restSaved2=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true,connectionId:"rest-2"}}); }
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.restSave(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var b=window.__restSaved2; return !!b && b.columnMap && b.columnMap.mrn==="patientId" && b.columnMap.test_name==="testName" && b.columnMap.result_value==="value";`) === true, "the reviewed REST mapping is included as columnMap on Save");
+  // A 404 (flag off) on REST Suggest mapping degrades through the SAME showFlagOff() path as every other action.
+  // (The prior Save cleared the form, including aRestHeaders -- re-enter a header so this call actually reaches
+  // the mocked network call instead of bailing out on the client-side "enter a header first" validation.)
+  await ev(`document.getElementById("aRestHeaders").value="mrn";
+    window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.suggestRestMapping(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "REST Suggest mapping on a 404 (flag off) shows the graceful 'not enabled yet' state, not a console error");
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
   // reset back to FHIR
   await ev(`document.getElementById("aType").value="fhir"; document.getElementById("aType").onchange(); return 1;`);
 

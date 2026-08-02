@@ -172,6 +172,20 @@
         <input id="aRestParam" placeholder="patientId" autocapitalize="off" spellcheck="false">
         <div class="hint" style="margin-top:4px">The results endpoint is called as {base URL}{results path}?{patient ID parameter}={patient ID} and must return a JSON array of rows, or {"results":[...]}.</div>
 
+        <label for="aRestHeaders">Column headers (optional)</label>
+        <textarea id="aRestHeaders" placeholder="mrn, test_name, result_value, result_unit (one per line, or comma-separated)"></textarea>
+        <div class="hint" style="margin-top:4px">List the field names your endpoint returns for each result row, then use Suggest mapping to get a starting column-to-field mapping you can review and edit before saving.</div>
+        <div style="margin-top:8px"><button class="ghost" id="restSuggestBtn" type="button">Suggest mapping</button></div>
+
+        <!-- AI-assisted field mapping (optional): behind a separate flag (smd_connect_ai_map); degrades to the
+             same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="restMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below and edit any field name before saving.</div>
+          <div id="restMapEditor"></div>
+          <div class="msg" id="restMapMsg"></div>
+        </div>
+
         <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="primary" id="restSave">Save connection</button>
           <button class="ghost" id="restSaveTest">Save and test connection</button>
@@ -211,11 +225,25 @@
         <label for="aCsvFile">CSV file</label>
         <input id="aCsvFile" type="file" accept=".csv,.tsv,.txt,text/csv,text/plain">
         <div class="hint" style="margin-top:4px">Upload your EMR's lab or results export. The file is read in your browser and sent once to be normalized to StewardMD's canonical model. It is not saved. Common column names (MRN, test, value, unit, order, and so on) are detected automatically. Limit 2 MB.</div>
-        <div style="margin-top:14px"><button class="primary" id="csvParse">Parse and preview</button></div>
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" id="csvParse">Parse and preview</button>
+          <button class="ghost" id="csvSuggestBtn" type="button" style="display:none">Suggest mapping</button>
+        </div>
         <div class="msg" id="csvMsg"></div>
         <div class="meta" id="csvCounts" style="display:none;margin-top:8px"></div>
         <div id="csvWarn" style="display:none"></div>
         <div class="json" id="csvJson" style="display:none"></div>
+
+        <!-- AI-assisted field mapping (optional): a suggested column-to-SCCM-field mapping the admin reviews
+             and edits before applying. Behind a separate flag (smd_connect_ai_map); Suggest mapping degrades
+             to the same flag-off state as every other action here when the flag is off. -->
+        <div class="subform" id="csvMapWrap" style="display:none">
+          <b>Suggested mapping</b>
+          <div class="hint" style="margin:4px 0 8px">Review the suggested column to field mapping below. Edit any field name, then apply to re-parse with your reviewed mapping.</div>
+          <div id="csvMapEditor"></div>
+          <div style="margin-top:10px"><button class="primary" id="csvApplyMapBtn" type="button" style="display:none">Apply mapping and re-parse</button></div>
+          <div class="msg" id="csvMapMsg"></div>
+        </div>
        </div>
 
        <!-- HL7 v2 feed: register an inbound HMAC-gated webhook the hospital's integration engine POSTs to. -->
@@ -296,6 +324,34 @@
   function tenant(){ var s=$("tenantSel"); return s?(s.value||"").trim():""; }
   function ensureTenantOption(v){ var s=$("tenantSel"); if(!s||!v) return; if(![].slice.call(s.options).some(function(o){return o.value===v;})){ var o=document.createElement("option"); o.value=v; o.textContent=v; s.appendChild(o); } }
   function host(u){ try{ return new URL(u).host; }catch(e){ return u||""; } }
+
+  // ---- AI-assisted field mapping: shared editable-map renderer for the CSV + REST wizards. The suggestion
+  // (headers + the fixed SCCM field list only, via /suggest-mapping) is always shown for review, never applied
+  // silently — the admin edits any field name here before it is used to re-parse (CSV) or save (REST). Every
+  // value is set/read via .value only (never innerHTML with server text). ----
+  function renderMapEditor(containerId,headers,map){
+    var box=$(containerId); if(!box) return; clearEl(box);
+    (headers||[]).forEach(function(h){
+      var row=mkEl("div","row"); row.style.marginTop="6px"; row.style.alignItems="center";
+      var hd=mkEl("div",null,h); hd.style.flex="1";
+      var wrap=mkEl("div"); wrap.style.flex="0 0 220px";
+      var input=document.createElement("input");
+      input.setAttribute("data-map-header",h); input.value=(map&&map[h])||""; input.placeholder="(unmapped)";
+      input.autocapitalize="off"; input.spellcheck=false;
+      wrap.appendChild(input);
+      row.appendChild(hd); row.appendChild(wrap);
+      box.appendChild(row);
+    });
+  }
+  function readMapEditor(containerId){
+    var box=$(containerId), map={}; if(!box) return map;
+    [].slice.call(box.querySelectorAll("[data-map-header]")).forEach(function(input){
+      var h=input.getAttribute("data-map-header"), v=(input.value||"").trim();
+      if(v) map[h]=v;
+    });
+    return map;
+  }
+  function splitHeaders(raw){ return String(raw||"").split(/[\n,]/).map(function(s){return s.trim();}).filter(Boolean); }
 
   // auth-aware fetch (mirrors admin/index.html api()). Reassignable so the headless smoke test can inject a stub.
   var api=function(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); };
@@ -385,19 +441,25 @@
     else { wd.innerHTML='<div class="meta ok" style="margin-top:8px">No structural warnings.</div>'; }
     var j=$("csvJson"); j.style.display=""; j.textContent=JSON.stringify(b,null,2);
   }
-  function submitCsv(text){
+  var lastCsvText="", lastCsvHeaders=[];
+  function submitCsv(text,columnMap){
     if(!tenant()){ csvSay("err","Enter your organization / tenant ID at the top first."); return; }
     if(!text||!text.trim()){ csvSay("err","That file looks empty."); return; }
     if(text.length>CSV_MAX){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
     $("csvParse").disabled=true; csvSay("","Parsing and normalizing...");
     var name=($("aName").value||"").trim();
-    jpost(API+"/csv",{tenantId:tenant(),name:name||undefined,csv:text}).then(function(x){
+    lastCsvText=text;
+    var body={tenantId:tenant(),name:name||undefined,csv:text};
+    if(columnMap&&Object.keys(columnMap).length) body.columnMap=columnMap;
+    jpost(API+"/csv",body).then(function(x){
       $("csvParse").disabled=false;
       if(x.s===404){ showFlagOff(); return; }
       if(x.s===413||(x.d&&x.d.error==="too-large")){ csvSay("err","That file is too large. The limit is 2 MB."); return; }
       if(x.s===403){ csvSay("err","Your account cannot view patient data for this organization."); return; }
       if(x.s!==200||!x.d||x.d.ok===false||!x.d.bundle){ csvSay("err",httpErr(x)); return; }
       csvSay("ok","Parsed and normalized. Review the result below.");
+      lastCsvHeaders=x.d.columns||[];
+      $("csvSuggestBtn").style.display=lastCsvHeaders.length?"":"none";
       renderCsvResult(x.d);
     }).catch(function(){ $("csvParse").disabled=false; csvSay("err","Sign in first."); });
   }
@@ -410,6 +472,29 @@
     rd.onerror=function(){ csvSay("err","Could not read that file."); };
     rd.readAsText(f);
   };
+
+  // ---- AI-assisted field mapping: CSV wizard (Suggest mapping -> review/edit -> Apply and re-parse) ----
+  function csvMapSay(k,t){ say("csvMapMsg",k,t); }
+  function csvSuggestGo(){
+    if(!tenant()){ csvMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    if(!lastCsvHeaders.length){ csvMapSay("err","Parse a CSV file first."); return; }
+    $("csvSuggestBtn").disabled=true; csvMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:lastCsvHeaders}).then(function(x){
+      $("csvSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ csvMapSay("err",httpErr(x)); return; }
+      $("csvMapWrap").style.display="";
+      renderMapEditor("csvMapEditor",lastCsvHeaders,x.d.map||{});
+      $("csvApplyMapBtn").style.display="";
+      csvMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field, then apply.");
+    }).catch(function(){ $("csvSuggestBtn").disabled=false; csvMapSay("err","Sign in first."); });
+  }
+  function csvApplyMapGo(){
+    if(!lastCsvText){ csvMapSay("err","Parse a CSV file first."); return; }
+    submitCsv(lastCsvText, readMapEditor("csvMapEditor"));
+  }
+  $("csvSuggestBtn").onclick=csvSuggestGo;
+  $("csvApplyMapBtn").onclick=csvApplyMapGo;
 
   // ---- HL7 v2 feed: create (secret shown once) / list / delete ----
   function hl7Say(k,t){ say("hl7Msg",k,t); }
@@ -531,9 +616,31 @@
     var body={ tenantId:tenant(), name:($("aName").value||"").trim(), type:"rest-json", baseUrl:($("aRestBase").value||"").trim(), auth:a };
     var rp=($("aRestPath").value||"").trim(); if(rp)body.resultsPath=rp;
     var pp=($("aRestParam").value||"").trim(); if(pp)body.patientParam=pp;
+    var cm=readMapEditor("restMapEditor"); if(Object.keys(cm).length) body.columnMap=cm;
     return body;
   }
-  function clearRestForm(){ ["aRestBase","aRestToken","aRestHeader","aRestPath","aRestParam"].forEach(function(id){ var e=$(id); if(e)e.value=""; }); }
+  function clearRestForm(){
+    ["aRestBase","aRestToken","aRestHeader","aRestPath","aRestParam","aRestHeaders"].forEach(function(id){ var e=$(id); if(e)e.value=""; });
+    $("restMapWrap").style.display="none"; clearEl($("restMapEditor"));
+  }
+
+  // ---- AI-assisted field mapping: REST wizard (the admin types headers, since there is no server preview) ----
+  function restMapSay(k,t){ say("restMapMsg",k,t); }
+  function restSuggestGo(){
+    if(!tenant()){ restMapSay("err","Enter your organization / tenant ID at the top first."); return; }
+    var headers=splitHeaders($("aRestHeaders").value);
+    if(!headers.length){ restMapSay("err","Enter at least one column header first."); return; }
+    $("restSuggestBtn").disabled=true; restMapSay("","Suggesting a mapping...");
+    jpost(API+"/suggest-mapping",{tenantId:tenant(),headers:headers}).then(function(x){
+      $("restSuggestBtn").disabled=false;
+      if(x.s===404){ showFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ restMapSay("err",httpErr(x)); return; }
+      $("restMapWrap").style.display="";
+      renderMapEditor("restMapEditor",headers,x.d.map||{});
+      restMapSay("ok","Suggested a mapping ("+(x.d.source==="ai"?"AI":"heuristic")+"). Review each field before saving.");
+    }).catch(function(){ $("restSuggestBtn").disabled=false; restMapSay("err","Sign in first."); });
+  }
+  $("restSuggestBtn").onclick=restSuggestGo;
   function doRestSave(thenTest){
     if(!tenant()){ say("restMsg","err","Enter your organization / tenant ID at the top first."); return; }
     var body=restBody();
@@ -832,6 +939,8 @@
     webhookCreate:whCreateGo, renderWebhookCreated:renderWebhookCreated,
     restSave:function(){ doRestSave(false); }, restSaveTest:function(){ doRestSave(true); },
     dicomSave:function(){ doDicomSave(false); }, dicomSaveTest:function(){ doDicomSave(true); },
+    suggestCsvMapping:csvSuggestGo, applyCsvMapping:csvApplyMapGo, suggestRestMapping:restSuggestGo,
+    readMapEditor:readMapEditor,
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
