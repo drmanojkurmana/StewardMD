@@ -735,7 +735,7 @@
       openThorex();
     },
     insulin: function () {
-      // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT OFF);
+      // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
       // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
       // separately inside the module). Persist the flag so the tile stays visible, then open directly.
       try { localStorage.setItem("smd_insulin", "1"); } catch (e) {}
@@ -1330,11 +1330,11 @@
               ) : "";
             } catch (e) { return ""; }
           })() +
-          (function () {   // Insulin dose CDSS — flag smd_insulin, DEFAULT OFF. Owner reveals via ?insulin=1
-            // or localStorage "1"; home.js runs before insulin-flags.js (deferred), so resolve synchronously.
+          (function () {   // Insulin dose CDSS — flag smd_insulin, DEFAULT ON (owner enabled). Hide with ?insulin=0
+            // or localStorage "0"; home.js runs before insulin-flags.js (deferred), so resolve synchronously.
             try {
               var q = (location.search.match(/[?&]insulin=([^&]+)/) || [])[1];
-              var ion = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") === "1");
+              var ion = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") !== "0");
               return ion ? rtile("insulin", "vaccines", "Insulin", "Dose calculator") : "";
             } catch (e) { return ""; }
           })() +

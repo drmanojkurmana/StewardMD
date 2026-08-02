@@ -4,7 +4,7 @@
   "use strict";
   // type: bool. def: default when unset. query: ?alias (or null). All default OFF.
   var DEFS = {
-    smd_insulin:      { type: "bool", def: false, query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT OFF." },
+    smd_insulin:      { type: "bool", def: true,  query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
     smd_insulin_dka:  { type: "bool", def: false, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. DEFAULT OFF." },
     smd_insulin_peds: { type: "bool", def: false, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. DEFAULT OFF." }
   };
