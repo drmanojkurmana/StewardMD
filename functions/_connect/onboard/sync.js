@@ -19,6 +19,7 @@ import { makeAuditSink } from "../audit.js";
 import { OnboardError } from "./errors.js";
 import { getRow, recordTest, safeView } from "./store.js";
 import { runProbe } from "./probe.js";
+import { enforce } from "../enterprise/ratelimit.js";
 
 const SYNC_MIN_INTERVAL_MIN = 15;      // a sane floor — no connection may be polled more than every 15 min
 const SYNC_MAX_INTERVAL_MIN = 10080;   // 7 days — a sane ceiling (weekly heartbeat is still "automatic")
@@ -104,6 +105,7 @@ async function stampLastSyncAt(deps, tenantId, connectionId, whenIso) {
 // PHI-free audit + PHI-free return: only outcome + lastSyncAt, never a bundle/error message/URL.
 export async function syncNow(deps, request, env, tenantId, connectionId) {
   const { actor, tenant } = await requireCan(deps, request, env, tenantId, "connector:write");
+  await enforce(deps, env, tenant.id, "connector:validate", actor.id);   // syncNow triggers an outbound egress probe -> throttle it like /test and /discover (fail-open on a KV blip)
   const result = await refreshOne(deps, tenant.id, connectionId);
   const outcome = (result && result.ok) ? "ok" : "error";
   const lastSyncAt = new Date().toISOString();
