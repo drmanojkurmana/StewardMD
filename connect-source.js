@@ -77,5 +77,21 @@
     });
   }
 
-  window.SMD_CONNECT = { tenants: tenants, pullContext: pullContext, resourcesOfType: resourcesOfType, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
+  // Patient SEARCH by name (standard FHIR Patient?name=). -> Promise<{ ok:true, patients:[{id,name,gender,birthDate}] } | { error }>
+  function searchPatients(opts) {
+    opts = opts || {};
+    if (!opts.tenantId || !opts.query) return Promise.resolve({ ok: true, patients: [] });
+    return token().then(function (t) {
+      if (!t) return { error: "not-signed-in" };
+      return fetch(apiBase() + "/api/connect/patients/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({ tenantId: opts.tenantId, query: opts.query, connectorId: opts.connectorId || "fhir-r4" }),
+      }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); })
+        .then(function (x) { return (x.s === 200 && x.d && x.d.ok) ? { ok: true, patients: x.d.patients || [] } : { error: (x.d && x.d.error) || ("http-" + x.s) }; })
+        .catch(function () { return { error: "network" }; });
+    });
+  }
+
+  window.SMD_CONNECT = { tenants: tenants, pullContext: pullContext, resourcesOfType: resourcesOfType, searchPatients: searchPatients, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
 })();

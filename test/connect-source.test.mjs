@@ -71,3 +71,22 @@ test("tenants() returns [] when signed out (no token)", async () => {
   const C = load({ tokenVal: null });
   assert.deepEqual(await C.tenants(), []);
 });
+
+test("searchPatients posts tenant+query+token to /patients/search and returns the list", async () => {
+  let seen = null;
+  const C = load({ hostname: "localhost", fetchImpl: (url, opts) => { seen = { url, opts }; return Promise.resolve({ status: 200, json: () => Promise.resolve({ ok: true, patients: [{ id: "p1", name: "Jane" }] }) }); } });
+  const r = await C.searchPatients({ tenantId: "t1", query: "jane" });
+  assert.equal(r.ok, true);
+  assert.equal(r.patients.length, 1);
+  assert.equal(r.patients[0].id, "p1");
+  assert.equal(seen.url, "https://stewardmd.in/api/connect/patients/search");
+  const body = JSON.parse(seen.opts.body);
+  assert.equal(body.query, "jane");
+  assert.equal(body.tenantId, "t1");
+  assert.equal(body.connectorId, "fhir-r4");
+});
+
+test("searchPatients requires tenant + query (returns empty, no fetch)", async () => {
+  const C = load({});
+  assert.deepEqual(await C.searchPatients({ tenantId: "t1" }), { ok: true, patients: [] });
+});

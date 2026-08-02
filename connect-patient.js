@@ -118,7 +118,12 @@
         '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);margin-bottom:12px">Pull a patient from a hospital you connected, straight into the ICU dashboard.</div>' +
         '<label style="font-size:12px;font-weight:700">Hospital</label>' +
         '<select id="cptTenant" style="width:100%;margin:5px 0 12px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)"></select>' +
-        '<label style="font-size:12px;font-weight:700">Patient reference (as in the EMR)</label>' +
+        '<label style="font-size:12px;font-weight:700">Find patient by name</label>' +
+        '<div style="display:flex;gap:8px;margin:5px 0 8px;flex-wrap:wrap">' +
+          '<input id="cptSearch" placeholder="Type a name" autocapitalize="words" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
+          '<button id="cptSearchBtn" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:9px;padding:9px 16px;font-weight:700">Search</button></div>' +
+        '<div id="cptResults" style="margin:2px 0 12px"></div>' +
+        '<label style="font-size:12px;font-weight:700">Or enter a patient id directly</label>' +
         '<div style="display:flex;gap:8px;margin:5px 0 12px;flex-wrap:wrap">' +
           '<input id="cptRef" placeholder="e.g. patient id / MRN" autocapitalize="off" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
           '<button id="cptPull" style="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:700">Pull</button></div>' +
@@ -135,6 +140,31 @@
     });
     document.getElementById("cptPull").onclick = doPull;
     document.getElementById("cptRef").addEventListener("keydown", function (e) { if (e.key === "Enter") doPull(); });
+    document.getElementById("cptSearchBtn").onclick = doSearch;
+    document.getElementById("cptSearch").addEventListener("keydown", function (e) { if (e.key === "Enter") doSearch(); });
+  }
+
+  function doSearch() {
+    var tid = (document.getElementById("cptTenant") || {}).value, q = ((document.getElementById("cptSearch") || {}).value || "").trim();
+    var box = document.getElementById("cptResults");
+    if (!tid) { msg("err", "Pick a hospital."); return; }
+    if (!q) { if (box) box.innerHTML = ""; return; }
+    if (!C() || !C().searchPatients) { msg("err", "Search unavailable."); return; }
+    if (box) box.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2)">Searching...</div>';
+    C().searchPatients({ tenantId: tid, query: q }).then(function (r) {
+      if (!box) return;
+      if (!r || r.error) { box.innerHTML = '<div style="font-size:12.5px;color:#e5484d">Search failed: ' + esc((r && r.error) || "error") + '</div>'; return; }
+      var ps = r.patients || [];
+      if (!ps.length) { box.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2)">No matches.</div>'; return; }
+      box.innerHTML = ps.slice(0, 25).map(function (p) {
+        var sub = [p.gender, p.birthDate].filter(Boolean).join(" · ");
+        return '<button class="cpt-hit" data-pid="' + esc(p.id) + '" style="display:block;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:9px;padding:9px 11px;margin:4px 0;cursor:pointer">' +
+          '<div style="font-weight:700;font-size:13.5px">' + esc(p.name || "(unnamed)") + '</div>' + (sub ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2)">' + esc(sub) + '</div>' : "") + '</button>';
+      }).join("");
+      [].slice.call(box.querySelectorAll(".cpt-hit")).forEach(function (btn) {
+        btn.onclick = function () { var ref = document.getElementById("cptRef"); if (ref) ref.value = btn.getAttribute("data-pid"); doPull(); };
+      });
+    }).catch(function () { if (box) box.innerHTML = '<div style="font-size:12.5px;color:#e5484d">Search error.</div>'; });
   }
 
   function doPull() {

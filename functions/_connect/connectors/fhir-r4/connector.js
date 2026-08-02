@@ -18,6 +18,13 @@ const SCCM_TO_FHIR = { Encounter: ["Encounter"], Condition: ["Condition"], Medic
 const fhirTypesFor = (scope) => (scope || []).filter((t) => SCCM_TO_FHIR[t]).flatMap((t) => SCCM_TO_FHIR[t]);
 const scopeToSmart = (scope) => fhirTypesFor(scope).map((f) => "system/" + f + ".rs");   // // VERIFY .rs vs .read
 const smartOn = (ctx) => !!(ctx.config && ctx.config.secret_ref);
+// Display name from a FHIR Patient.name[0] (HumanName): prefer .text, else given + family.
+function fhirName(p) {
+  const n = (p && p.name && p.name[0]) || {};
+  if (n.text) return n.text;
+  const g = (n.given || []).join(" "), f = n.family || "";
+  return (g + " " + f).trim() || "(unnamed)";
+}
 
 function authDeps(ctx) {
   return { fetch: ctx.fetch, kv: ctx.kv, secrets: ctx.secrets, envelope: ctx.envelope, now: () => ctx.now().getTime(), logger: ctx.logger, tenantId: ctx.tenant.id, connectorId: (ctx.config && ctx.config.connector_id) || "fhir-r4" };
@@ -97,6 +104,41 @@ export const fhirR4Connector = {
       }
     }
     return { patient, resources };
+  },
+
+  // Patient SEARCH by name (standard FHIR: GET {base}/Patient?name=<q>&_count=N). Returns a lightweight
+  // list [{id,name,gender,birthDate}] for the picker; the full record is then pulled via fetchPatient by id.
+  // Same hardening as fetchPatient: redirect:"manual" (no auth'd cross-origin bounce), ONE bounded re-auth on
+  // 401 in SMART mode, bare-fetch-throw -> typed UpstreamError. Empty query -> [] (never an unbounded browse).
+  searchPatients: async (ctx, query) => {
+    const base = (ctx.config.base_url || "").replace(/\/$/, "");
+    const smart = smartOn(ctx);
+    const q = String(query == null ? "" : query).trim().slice(0, 100);
+    if (!q) return [];
+    const n = Math.min((ctx.budget && ctx.budget.maxSubrequests) || 20, 20);
+    let authHeader = await initialAuthHeader(ctx);
+    const url = base + "/Patient?name=" + encodeURIComponent(q) + "&_count=" + n;
+    const doSearch = async () => {
+      let res;
+      try { res = await ctx.fetch(url, { headers: authHeader, redirect: "manual" }); }
+      catch (e) {
+        if (e && e.name && !["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError"].includes(e.name)) throw e;
+        throw new UpstreamError("Patient search failed");
+      }
+      if (res.status === 401) return 401;
+      if (!res.ok) throw new UpstreamError("Patient search HTTP " + res.status);
+      return res.json();
+    };
+    let bundle = await doSearch();
+    if (bundle === 401) {
+      if (!smart) throw new UpstreamError("unauthorized");
+      authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).accessToken };
+      bundle = await doSearch();
+      if (bundle === 401) throw new UpstreamError("unauthorized after re-auth");
+    }
+    const entries = (bundle && bundle.entry) || [];
+    return entries.map((e) => e && e.resource).filter((r) => r && r.resourceType === "Patient")
+      .map((p) => ({ id: p.id, name: fhirName(p), gender: p.gender || "", birthDate: p.birthDate || "" }));
   },
 
   normalize: async (ctx, raw) => normalizeFhir(ctx, raw),

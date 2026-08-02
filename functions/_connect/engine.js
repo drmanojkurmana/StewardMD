@@ -28,6 +28,27 @@ function finalizeBundle(bundle, scope) {
   return bundle;
 }
 
+// Build the injected connector ctx (no global state; PHI stays here). Shared by loadPatientContext + searchPatients.
+function buildCtx(env, tenant, config, scope, t0, io) {
+  const secrets = makeSecrets(env);
+  return {
+    tenant: { id: tenant.id, mode: tenant.mode, settings: {} },
+    config, scope,
+    kv: env.MAIK_KV,                                       // NON-PHI SMART discovery + token cache (connect:smart:*)
+    secrets: async (name) => {
+      if (name === "smart") return config.secret_ref ? JSON.parse(await secrets.open(await secrets.get(config.secret_ref))) : null;
+      if (name === "bearer") return config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null;
+      return null;
+    },
+    envelope: { seal: secrets.seal, open: secrets.open },  // request-scoped envelope for connector token cache
+    now: () => new Date(t0),
+    fetch: (io && io.fetch) || fetch,
+    audit: () => {},                    // connectors never write audit directly
+    logger: { warn() {}, error() {} },
+    budget: { maxSubrequests: 20, deadlineMs: 8000, maxPagesPerResource: 50 },
+  };
+}
+
 export async function loadPatientContext(env, deps, req, io = {}) {
   const t0 = Date.now();
   const audit = makeAuditSink(env, deps.db);
@@ -46,24 +67,8 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     let granted; try { granted = JSON.parse(tenant.granted_scopes || "[]"); } catch { throw new PermissionError("invalid granted_scopes"); }
     const scope = enforceScope(granted, req.scope || []);
 
-    // 4. build the injected ctx (no global state; PHI stays here)
-    const secrets = makeSecrets(env);
-    const ctx = {
-      tenant: { id: tenant.id, mode: tenant.mode, settings: {} },
-      config, scope,
-      kv: env.MAIK_KV,                                       // NON-PHI SMART discovery + token cache (connect:smart:*) // VERIFY binding
-      secrets: async (name) => {
-        if (name === "smart") return config.secret_ref ? JSON.parse(await secrets.open(await secrets.get(config.secret_ref))) : null;
-        if (name === "bearer") return config.secret_ref ? secrets.open(await secrets.get(config.secret_ref)).catch(() => null) : null;
-        return null;
-      },
-      envelope: { seal: secrets.seal, open: secrets.open },  // request-scoped envelope for connector token cache
-      now: () => new Date(t0),
-      fetch: io.fetch || fetch,
-      audit: () => {},                    // connectors never write audit directly
-      logger: { warn() {}, error() {} },
-      budget: { maxSubrequests: 20, deadlineMs: 8000, maxPagesPerResource: 50 },
-    };
+    // 4. build the injected ctx (no global state; PHI stays here) — shared with searchPatients via buildCtx.
+    const ctx = buildCtx(env, tenant, config, scope, t0, io);
 
     // 5-6. fetch → normalize
     const connector = deps.connectors[req.connectorId];
@@ -87,6 +92,35 @@ export async function loadPatientContext(env, deps, req, io = {}) {
     outcome = e instanceof PermissionError ? "denied" : "error";
     try { await audit({ tenantId: req.tenantId || null, actor: actor.id || null, connectorId: req.connectorId, action: "context", latencyMs: Date.now() - t0, outcome, ts: new Date(t0).toISOString() }); } catch {}
     throw e;                              // typed error; router sanitizes before HTTP
+  }
+}
+
+// Patient SEARCH (P2): resolve identity + membership + connector EXACTLY like loadPatientContext, then call the
+// connector's searchPatients (standard FHIR Patient?name=). Returns a lightweight [{id,name,gender,birthDate}]
+// list for the picker; NO full record is pulled here (the chosen id is then fetched via loadPatientContext).
+export async function searchPatients(env, deps, req, io = {}) {
+  const t0 = Date.now();
+  const audit = makeAuditSink(env, deps.db);
+  let actor = { id: null }, outcome = "error";
+  try {
+    actor = await resolveActor(deps.identifyFn, req.request, env);
+    const { tenant } = await resolveTenant(deps.db, actor.id, req.tenantId);
+    const config = await loadConnectorConfig(deps.db, tenant.id, req.connectorId);
+    if (!config) throw new PermissionError("connector not configured for tenant");
+    assertSandboxAllowed(tenant, config);
+    const connector = deps.connectors[req.connectorId];
+    if (!connector) throw new UpstreamError("connector not registered: " + req.connectorId);
+    if (typeof connector.searchPatients !== "function") throw new UpstreamError("connector does not support patient search");
+    const ctx = buildCtx(env, tenant, config, ["Patient"], t0, io);
+    const q = String(req.query == null ? "" : req.query).trim();
+    const patients = q ? await connector.searchPatients(ctx, q) : [];
+    outcome = "ok";
+    await audit({ tenantId: tenant.id, actor: actor.id, connectorId: req.connectorId, action: "patient.search", resourceCounts: { patients: patients.length }, latencyMs: Date.now() - t0, outcome, ts: new Date(t0).toISOString() });
+    return patients;
+  } catch (e) {
+    outcome = e instanceof PermissionError ? "denied" : "error";
+    try { await audit({ tenantId: req.tenantId || null, actor: actor.id || null, connectorId: req.connectorId, action: "patient.search", latencyMs: Date.now() - t0, outcome, ts: new Date(t0).toISOString() }); } catch {}
+    throw e;
   }
 }
 
