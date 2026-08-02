@@ -180,19 +180,35 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-fold ul { margin: 4px 0 8px; padding-left: 18px; }
 .ins-fold li { font-size: 12.5px; color: var(--ins-muted); line-height: 1.5; margin-bottom: 4px; }
 
-/* ---- Warnings ---- */
-.ins-warns { margin: 4px 0 0; }
-.ins-warn { display: flex; gap: 10px; align-items: flex-start; border-radius: var(--ins-r-ctl);
-  padding: 10px 12px; margin-bottom: 8px; border: 1px solid; font-size: 12.5px; line-height: 1.45; }
-.ins-warn .wt { font-weight: 700; display: block; margin-bottom: 1px; }
-.ins-warn .dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex: 0 0 auto; }
-.ins-warn.critical { color: var(--sev-critical-fg,#B42332); background: var(--sev-critical-bg,#FBE9EC); border-color: var(--sev-critical-bd,#F0B7C0); }
-.ins-warn.warning  { color: var(--sev-warning-fg,#996007);  background: var(--sev-warning-bg,#FBF3DC);  border-color: var(--sev-warning-bd,#EAD28F); }
-.ins-warn.caution  { color: var(--sev-urgent-fg,#C2410C);   background: var(--sev-urgent-bg,#FDEEE4);   border-color: var(--sev-urgent-bd,#F5C6A5); }
-.ins-warn.info     { color: var(--sev-info-fg,#1D6FA3);     background: var(--sev-info-bg,#E8F2F9);     border-color: var(--sev-info-bd,#B5D4E8); }
-.ins-warn .dot.critical { background: var(--sev-critical-fg,#B42332); }
-.ins-warn .dot.warning  { background: var(--sev-warning-fg,#996007); }
-.ins-warn .dot.caution  { background: var(--sev-urgent-fg,#C2410C); }
+/* ---- Warnings (clinical-flag treatment: severity spine + icon badge + mono eyebrow) ---- */
+.ins-warns { margin: 2px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.ins-warn {
+  --sv: var(--ins-muted);
+  position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start;
+  padding: 12px 14px 12px 18px; border-radius: 13px;
+  background: var(--ins-surface); border: 1px solid var(--ins-line);
+  box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04));
+}
+/* full-height severity spine on the leading edge */
+.ins-warn::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  border-radius: 13px 0 0 13px; background: var(--sv); }
+.ins-warn-ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+  color: var(--sv); background: color-mix(in srgb, var(--sv) 13%, var(--ins-surface));
+  border: 1px solid color-mix(in srgb, var(--sv) 22%, transparent); }
+.ins-warn-sev { font-family: var(--ins-mono); font-size: 9.5px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sv); display: block; margin-bottom: 3px; }
+.ins-warn .wt { font-weight: 700; font-size: 13.5px; color: var(--ins-ink); display: block; margin-bottom: 2px; letter-spacing: -.005em; }
+.ins-warn .bd { font-size: 12.5px; line-height: 1.46; color: var(--ins-muted); }
+.ins-warn.critical { --sv: var(--sev-critical-fg,#B42332); border-color: color-mix(in srgb, var(--sv) 34%, var(--ins-line)); }
+.ins-warn.warning  { --sv: var(--sev-warning-fg,#996007); }
+.ins-warn.caution  { --sv: var(--sev-urgent-fg,#C2410C); }
+.ins-warn.info     { --sv: var(--sev-info-fg,#1D6FA3); }
+/* criticals breathe once, subtly */
+.ins-warn.critical .ins-warn-ic { animation: ins-pulse 2.4s var(--ins-ease) infinite; }
+@keyframes ins-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--sv) 42%, transparent); }
+  55%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--sv) 0%, transparent); }
+}
 
 .ins-ack { display: flex; align-items: center; gap: 8px; margin: 6px 0 12px; font-size: 12.5px;
   color: var(--ins-ink); cursor: pointer; }
@@ -224,6 +240,6 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   animation: ins-bf-in .5s var(--ins-ease) forwards; }
 @keyframes ins-bf-in { to { opacity: 1; transform: none; filter: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .ins-gridbg, .ins-cta::after { animation: none; }
+  .ins-gridbg, .ins-cta::after, .ins-warn.critical .ins-warn-ic { animation: none; }
   .ins-bf { animation: none; opacity: 1; transform: none; filter: none; }
 }

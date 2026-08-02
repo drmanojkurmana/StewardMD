@@ -21,6 +21,12 @@
 
   var ICON_AI = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3 4.9 4.9M19.1 19.1l-1.4-1.4M17.7 6.3l1.4-1.4M4.9 19.1l1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg>';
 
+  var SVG_TRI = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 4a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
+  var SVG_EXC = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>';
+  var SVG_INFO = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
+  function sevIcon(s) { return s === "critical" || s === "warning" ? SVG_TRI : s === "caution" ? SVG_EXC : SVG_INFO; }
+  function sevLabel(s) { return s === "critical" ? "Critical" : s === "warning" ? "Warning" : s === "caution" ? "Caution" : "Note"; }
+
   /* ---------- Motion helpers ---------- */
   function withMotion(cb) {
     if (window.Motion && window.Motion.animate) return cb(window.Motion);
@@ -179,8 +185,11 @@
     var refsHTML = (res.refs || []).map(function (r) { return '<li>' + r + '</li>'; }).join("");
 
     var warnHTML = warns.map(function (w) {
-      return '<div class="ins-warn ' + w.severity + '"><span class="dot ' + w.severity + '"></span>' +
-        '<div><span class="wt">' + w.title + '</span>' + w.detail + '</div></div>';
+      return '<div class="ins-warn ' + w.severity + '">' +
+        '<span class="ins-warn-ic">' + sevIcon(w.severity) + '</span>' +
+        '<div><span class="ins-warn-sev">' + sevLabel(w.severity) + '</span>' +
+        '<span class="wt">' + w.title + '</span><span class="bd">' + w.detail + '</span></div>' +
+      '</div>';
     }).join("");
 
     var extraRaw = "";
