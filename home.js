@@ -2058,7 +2058,7 @@
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var si = s.querySelector('[data-acct="signin"]');
-    if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
+    if (si) si.addEventListener("click", function () { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} });   // open the email+Google login screen, not straight to Google
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
     // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
@@ -5141,7 +5141,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   document.addEventListener("click", function (e) {
     var t = e.target; if (!t || !t.id) return;
     if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
-    else if (t.id === "smdSbSignIn") { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }
+    else if (t.id === "smdSbSignIn") { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }   // open the email+Google login screen, not straight to Google
+    else if (t.id === "accountGateClose") { var agc = document.getElementById("accountGate"); if (agc) agc.classList.add("hidden"); }   // escape hatch when the gate was opened manually
   }, false);
   // Keep the sidebar account row in sync when Firebase auth resolves. Google sign-in
   // via popup can complete asynchronously (onAuthStateChanged), not via the popup
