@@ -59,9 +59,18 @@ decides: every recommendation is stamped AI-assisted and requires an explicit co
   pregnancy/renal/hepatic flags; NO MRN/DOB). Create/edit/use/delete + search; using a profile applies
   params to the calculator and its flags feed the safety engine; dashboard patient bar + calc chip;
   "Import from saved cases" bridge (app-only).
-- NOT done (rest of v1 scope): basal/IOB dedicated screens (engine done); conversion workflows;
-  gated DKA + pediatric; tighten `refs` to pinned citations (R1 item); expand the insulin dataset;
-  native rebuild.
+- DONE (this pass): guided insulin **conversion** (`insulin-convert.js`, 9 tests) - conservative
+  bolus<->bolus / basal<->basal (NPH -20%) / premix<->premix / basal->basal-bolus, with assumptions +
+  monitoring + follow-up + mandatory verify-against-protocol confirm gate; dashboard entry.
+- iOS bundle assembled: `npm run build:www` (build #2276) then web assets copied into
+  `ios/App/App/public` (gitignored) + `ios/App/App/capacitor.config.json` taken from the main checkout
+  (22 plugins incl. WatchBridge). Did NOT run `cap sync` on purpose - `node_modules` here lacks
+  `@capacitor/cli` and an incomplete-`node_modules` sync drops plugins ([[watch-bridge-capapp-spm-gotcha]]).
+  Only web assets changed, so the manual public copy is equivalent + safe. Open `ios/App/App.xcodeproj`
+  (SPM, not `.xcworkspace`); devicectl uninstall before install to drop the stale SW.
+- NOT done (rest of v1 scope): basal/IOB dedicated screens (engine done); gated DKA + pediatric
+  (deliberately deferred - need cited protocol + R1 sign-off, high harm); tighten `refs` to pinned
+  citations (R1 item); expand the insulin dataset; on-device verification of the native build.
 
 ## Gotchas
 - motion.dev (this build) mis-interpolates a `transform` **string** with a `"none"` keyframe and can
