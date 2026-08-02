@@ -78,6 +78,28 @@ test("connectors: flag OFF -> 404; unauthenticated -> sanitized 401", async () =
   assert.deepEqual(Object.keys(await res.json()), ["error"]);
 });
 
+// Consent Dashboard: GET /consents + POST /consents/:ref/revoke, gated by their OWN narrow flag
+// (smd_connect_consent) ON TOP of the base onboard flag -- 404 when EITHER is off (no existence leak), even
+// with a real D1 binding present. Deep RBAC/tenant-scoping/projection/revoke logic is unit-tested in
+// consents.test.mjs.
+test("consents: 404 when the base onboard flag is off, and when CONNECT_CONSENT_FLAG is off; unauthenticated -> sanitized 401 once both are on", async () => {
+  assert.equal((await onRequest(get("/api/connect/onboard/consents?tenant=t1", {}))).status, 404);
+  assert.equal((await onRequest(get("/api/connect/onboard/consents?tenant=t1", BOTH))).status, 404);   // consent flag still off
+  const on = Object.assign({}, BOTH, { CONNECT_CONSENT_FLAG: "1", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest(get("/api/connect/onboard/consents?tenant=t1", on));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
+test("consents revoke: 404 when the base onboard flag is off, and when CONNECT_CONSENT_FLAG is off; unauthenticated -> sanitized 401 once both are on", async () => {
+  assert.equal((await onRequest(post("/api/connect/onboard/consents/REQ-1/revoke", { tenantId: "t1" }, {}))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/consents/REQ-1/revoke", { tenantId: "t1" }, BOTH))).status, 404);
+  const on = Object.assign({}, BOTH, { CONNECT_CONSENT_FLAG: "1", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest(post("/api/connect/onboard/consents/REQ-1/revoke", { tenantId: "t1" }, on));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
 test("csv upload: flag OFF -> 404; unauthenticated -> sanitized 401 (no raw row echo)", async () => {
   assert.equal((await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, {}))).status, 404);
   const res = await onRequest(post("/api/connect/onboard/csv", { tenantId: "t1", csv: "MRN,Test\nSECRET-MRN,Hb" }, BOTH));

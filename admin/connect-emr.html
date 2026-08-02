@@ -335,6 +335,20 @@
         <div id="activity" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view the activity log.</div></div>
       </div>
 
+      <!-- Consent dashboard: this organization's data-sharing consents (status/purpose/scope/expiry), read on
+           demand via Refresh (GET /consents, PHI-free -- see functions/_connect/onboard/consents.js). An owner
+           or admin can revoke a GRANTED consent; the revoke is a REAL, LOCAL write that our own data-request
+           gate enforces immediately, so a revoked consent genuinely blocks further sharing even though
+           notifying the external ABDM Consent Manager is not wired yet. Behind its OWN narrow flag (separate
+           from the base EMR-connect flag), so a 404 here shows a panel-local message, NOT the page-wide
+           flag-off state -- the rest of the page may still be fully enabled. -->
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Consent dashboard</b><button class="ghost" id="consentReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" id="consentSummary" style="margin-top:4px"></div>
+        <div id="consentFlagOff" class="hint" style="display:none;margin-top:4px">Consent dashboard is not enabled yet for your organization.</div>
+        <div id="consents" style="margin-top:12px"><div class="hint">Select your organization above, then Refresh, to view data-sharing consents.</div></div>
+      </div>
+
       </div><!-- /opsArea -->
 
     </div>
@@ -1143,6 +1157,83 @@
   }
   $("activityReload").onclick=loadActivity;
 
+  // ---- Consent dashboard (GET /consents, PHI-free; POST /consents/:ref/revoke) ----
+  // The consent payload is the client-safe allow-list projection (see functions/_connect/onboard/consents.js
+  // #toConsentRow) -- consentId/ref/status/purpose/hiTypes/careContextCount/dateRange/expiresAt/dataEraseAt/a
+  // TRUNCATED patientRefHash/createdAt/updatedAt/revocable ONLY; the raw care-context list, the actor, and the
+  // full patient hash are structurally dropped server-side. As defense in depth, this renderer builds the DOM
+  // directly and writes every field via textContent (never innerHTML), so nothing in the payload can ever be
+  // interpreted as markup, even if the server-side allow-list ever regressed.
+  //
+  // This panel is behind its OWN narrow flag (separate from the base onboard flag), so a 404 here shows a
+  // PANEL-LOCAL message (consentFlagOff), NOT the shared page-wide showFlagOff() -- the rest of the page may
+  // still be fully enabled while this one feature is dark.
+  var CONSENT_STATUS_CHIP={"GRANTED":"verified","REVOKED":"rejected","EXPIRED":"unverified","DENIED":"unverified","INITIATED":"pending"};
+  function consentChip(status){ return CONSENT_STATUS_CHIP[status]||"unverified"; }
+  function fmtPurpose(p){ if(p==null) return "unspecified"; if(typeof p==="object") return String(p.text||p.code||JSON.stringify(p)); return String(p); }
+  function fmtDateRange(dr){ if(!dr||typeof dr!=="object") return "unspecified"; return (dr.from?when(dr.from):"?")+" to "+(dr.to?when(dr.to):"?"); }
+  function sayConsent(ref,k,t){ var m=$("consents").querySelector('[data-cmsg="'+ref+'"]'); if(m){ m.className="msg rowmsg "+(k||""); m.textContent=t||""; } }
+  function renderConsents(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("consents"), sum=$("consentSummary");
+    clearEl(box);
+    if(!list.length){ sum.textContent=""; box.appendChild(mkEl("div","hint","No consents yet.")); return; }
+    sum.textContent=list.length+" consent"+(list.length===1?"":"s");
+    list.forEach(function(c){
+      var item=mkEl("div","item"); item.setAttribute("data-crow",c.ref);
+      var hd=mkEl("div","h");
+      var chip=mkEl("span","st "+consentChip(c.status),c.status||"unknown"); chip.setAttribute("data-cchip",c.ref);
+      hd.appendChild(chip);
+      hd.appendChild(mkEl("span","t",when(c.updatedAt)));
+      item.appendChild(hd);
+      item.appendChild(mkEl("div","title",fmtPurpose(c.purpose)));
+      var metaTxt="HI types: "+((c.hiTypes&&c.hiTypes.length)?c.hiTypes.join(", "):"none")+" · Care contexts: "+(c.careContextCount||0)+
+        " · Range: "+fmtDateRange(c.dateRange)+" · Expires: "+(c.expiresAt?when(c.expiresAt):"unspecified");
+      item.appendChild(mkEl("div","meta",metaTxt));
+      if(c.patientRefHash) item.appendChild(mkEl("div","meta","Patient ref: "+c.patientRefHash));
+      var foot=mkEl("div","foot"); foot.setAttribute("data-cfoot",c.ref);
+      if(c.revocable){
+        var revBtn=mkEl("button","del","Revoke"); revBtn.setAttribute("data-cact","revoke"); revBtn.setAttribute("data-cref",c.ref);
+        foot.appendChild(revBtn);
+      }
+      item.appendChild(foot);
+      var msgDiv=mkEl("div","msg rowmsg"); msgDiv.setAttribute("data-cmsg",c.ref);
+      item.appendChild(msgDiv);
+      box.appendChild(item);
+    });
+  }
+  function loadConsents(){
+    if(!tenant()){ $("consents").innerHTML='<div class="hint">Select your organization above, then Refresh, to view data-sharing consents.</div>'; $("consentSummary").textContent=""; $("consentFlagOff").style.display="none"; return; }
+    $("consents").innerHTML='<div class="hint">Loading...</div>';
+    api(API+"/consents?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ $("consentFlagOff").style.display=""; $("consents").innerHTML=""; $("consentSummary").textContent=""; return; }
+      $("consentFlagOff").style.display="none";
+      if(x.s!==200||!x.d||x.d.ok===false){ $("consents").innerHTML='<div class="hint">'+esc(httpErr(x))+'</div>'; $("consentSummary").textContent=""; return; }
+      renderConsents(x.d.consents||[]);
+    }).catch(function(){ $("consents").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("consentReload").onclick=loadConsents;
+  // A successful revoke updates ONLY its own row in place (chip + Revoke button removal) instead of reloading
+  // the whole panel -- a full reload would also wipe the success message this same action just set.
+  function doRevokeConsent(ref){
+    if(!window.confirm("Revoke this consent? This blocks further data sharing under it immediately.")) return;
+    sayConsent(ref,"","Revoking...");
+    jpost(API+"/consents/"+encodeURIComponent(ref)+"/revoke",{tenantId:tenant()}).then(function(x){
+      if(x.s===404){ $("consentFlagOff").style.display=""; return; }
+      if(x.s!==200||!x.d||!x.d.ok){ sayConsent(ref,"err",httpErr(x)); return; }
+      var note=x.d.noop?"Already revoked.":"Revoked.";
+      if(x.d.propagated==="local") note+=" Blocked locally; external HIE notification pending.";
+      sayConsent(ref,"ok",note);
+      var chip=$("consents").querySelector('[data-cchip="'+ref+'"]');
+      if(chip){ chip.className="st "+consentChip("REVOKED"); chip.textContent="REVOKED"; }
+      var foot=$("consents").querySelector('[data-cfoot="'+ref+'"]'); if(foot) clearEl(foot);
+    }).catch(function(){ sayConsent(ref,"err","Sign in first."); });
+  }
+  $("consents").addEventListener("click",function(e){
+    var b=e.target.closest("[data-cact]"); if(!b) return;
+    if(b.getAttribute("data-cact")==="revoke") doRevokeConsent(b.getAttribute("data-cref"));
+  });
+
   // ---- Connector catalog (marketplace-style; GET /connectors) ----
   // The catalog payload is a static capability list + per-track env flag state (see functions/_connect/onboard/
   // registry-catalog.js) -- PHI-free and tenant-independent by construction (identical for every tenant). As
@@ -1220,6 +1311,7 @@
     saveInterval:doSaveInterval, syncNow:doSyncNow,
     loadHealth:loadHealth, renderHealth:renderHealth,
     loadActivity:loadActivity, renderActivity:renderActivity,
+    loadConsents:loadConsents, renderConsents:renderConsents, revokeConsent:doRevokeConsent,
     loadCatalog:loadCatalog, renderCatalog:renderCatalog,
     runValidate:doValidate, renderValidateReport:renderValidateReport,
     applyType:applyType, submitCsv:submitCsv, renderCsvResult:renderCsvResult, detect:doDetect,

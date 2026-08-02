@@ -442,6 +442,61 @@ try {
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /activity on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
   await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
 
+  // ---- Consent dashboard panel (GET /consents, PHI-free; POST /consents/:ref/revoke) ----
+  // Two consents: one GRANTED (revocable) and one REVOKED (not revocable). Asserts the panel renders status
+  // chips, purpose, HI types, care-context count, date range, expiry, and a truncated patient hash; that the
+  // mocked payload itself carries only the documented PHI-free fields (defense-in-depth); that Revoke shows
+  // ONLY on the GRANTED row; that a successful revoke updates the row in place and surfaces the local-
+  // propagation note; the empty state; and that a 404 shows a PANEL-LOCAL flag-off message (NOT the shared
+  // page-wide showFlagOff()) since the rest of the page may still be enabled.
+  await ev(`window.__consentMock=[
+      {consentId:"CONSENT-1111",ref:"CONSENT-1111",status:"GRANTED",purpose:{code:"CAREMGT",text:"Care Management"},
+        hiTypes:["DiagnosticReport","Observation"],careContextCount:2,
+        dateRange:{from:"2026-01-01T00:00:00.000Z",to:"2026-12-31T23:59:59.000Z"},
+        expiresAt:"2026-12-31T23:59:59.000Z",dataEraseAt:"2027-01-31T23:59:59.000Z",
+        patientRefHash:"9a1b2c3d...",createdAt:"2026-07-01T00:00:00.000Z",updatedAt:"2026-08-01T09:00:00.000Z",revocable:true},
+      {consentId:"CONSENT-2222",ref:"CONSENT-2222",status:"REVOKED",purpose:"management",
+        hiTypes:["Prescription"],careContextCount:1,
+        dateRange:{from:"2026-02-01T00:00:00.000Z",to:"2026-06-30T23:59:59.000Z"},
+        expiresAt:"2026-06-30T23:59:59.000Z",dataEraseAt:null,
+        patientRefHash:"77aa88bb...",createdAt:"2026-05-01T00:00:00.000Z",updatedAt:"2026-08-01T11:00:00.000Z",revocable:false}
+    ];
+  window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:window.__consentMock,truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+  window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=window.__consentMock; var SAFE=["consentId","ref","status","purpose","hiTypes","careContextCount","dateRange","expiresAt","dataEraseAt","patientRefHash","createdAt","updatedAt","revocable"];
+    var bad=m.some(function(c){ return Object.keys(c).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/\\bmrn\\b|\\bssn\\b|\\bdob\\b|@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}|actor/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the mocked consent payload carries only the documented PHI-free allow-list fields (no patient identifiers, no actor)");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("Care Management")>=0 && t.indexOf("management")>=0 && t.indexOf("DiagnosticReport")>=0 && t.indexOf("Prescription")>=0;`) === true, "the consent panel renders purpose and HI types for both rows");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("Care contexts: 2")>=0 && t.indexOf("Care contexts: 1")>=0;`) === true, "the consent panel renders the care-context COUNT, never a raw reference list");
+  ok(await ev(`var h=document.getElementById("consents").innerHTML; return h.indexOf("GRANTED")>=0 && h.indexOf("REVOKED")>=0 && h.indexOf("9a1b2c3d")>=0;`) === true, "the consent panel renders both status chips and the truncated patient ref hash");
+  ok(await ev(`return document.querySelector('#consents [data-cref="CONSENT-1111"]')!=null && document.querySelector('#consents [data-cref="CONSENT-2222"]')==null;`) === true, "Revoke shows ONLY on the GRANTED (revocable) row, never on the REVOKED row");
+  ok(await ev(`var s=document.getElementById("consentSummary").textContent; return s.indexOf("2 consent")>=0;`) === true, "the consent summary shows the total count");
+  ok(await ev(`var t=document.getElementById("consents").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the consent panel never renders undefined/stringified-object values, and no em-dash");
+
+  // Revoke: confirm() stubbed true, mocked POST returns a local-only propagation; the row updates IN PLACE
+  // (chip flips to REVOKED, Revoke button disappears) and the local-HIE-pending note is shown, without a
+  // full-panel reload wiping the message.
+  await ev(`window.confirm=function(){return true;};
+    window.ConnectEMR.__setApi(function(path,opts){ if(opts&&opts.method==="POST"&&path.indexOf("/consents/CONSENT-1111/revoke")>=0) return Promise.resolve({s:200,d:{ok:true,status:"REVOKED",propagated:"local"}}); if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:window.__consentMock,truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); });
+    document.querySelector('#consents [data-cref="CONSENT-1111"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var m=document.querySelector('[data-cmsg="CONSENT-1111"]'); return m.className.indexOf("ok")>=0 && m.textContent.indexOf("Blocked locally; external HIE notification pending.")>=0 && m.textContent.indexOf("\\u2014")<0;`) === true, "a local-propagated revoke shows the 'Blocked locally; external HIE notification pending' note, no em-dash");
+  ok(await ev(`return document.querySelector('[data-cchip="CONSENT-1111"]').textContent==="REVOKED" && document.querySelector('#consents [data-cref="CONSENT-1111"]')==null;`) === true, "the revoked row's chip updates to REVOKED and its Revoke button is removed, in place (no full-panel reload)");
+
+  // Empty consents -> the documented empty state (not a blank/broken panel).
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/consents")>=0) return Promise.resolve({s:200,d:{ok:true,consents:[],truncated:false}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("consents").textContent.indexOf("No consents yet.")>=0 && document.getElementById("consentSummary").textContent==="";`) === true, "an empty consent list shows the 'No consents yet.' empty state");
+
+  // Consent dashboard degrades through its OWN PANEL-LOCAL flag-off message on a 404 -- NOT the shared
+  // page-wide showFlagOff() (the rest of the page may still be fully enabled while just this feature is off).
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadConsents(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return window.ConnectEMR.flagOffVisible()===false && getComputedStyle(document.getElementById("work")).display!=="none" && getComputedStyle(document.getElementById("consentFlagOff")).display!=="none";`) === true, "GET /consents on a 404 shows a PANEL-LOCAL flag-off message, and does NOT hide the rest of the page via the shared showFlagOff()");
+  await ev(`document.getElementById("consentFlagOff").style.display="none"; return 1;`);
+
   // ---- Connector catalog panel (GET /connectors, marketplace-style self-service catalog) ----
   // Two connector types: one enabled, one disabled. Asserts the panel renders names/categories/enabled chips,
   // and that the mocked payload itself carries only client-safe metadata fields (defense-in-depth).

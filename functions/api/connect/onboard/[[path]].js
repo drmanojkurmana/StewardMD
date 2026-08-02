@@ -30,6 +30,8 @@ import { listMyTenants } from "../../../_connect/enterprise/members.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
 import { readTenantActivity } from "../../../_connect/onboard/activity.js";
 import { listConnectorCatalog } from "../../../_connect/onboard/registry-catalog.js";
+import { consentFlagOn } from "../../../_connect/onboard/consent-flags.js";
+import { readTenantConsents, revokeTenantConsent } from "../../../_connect/onboard/consents.js";
 
 // Re-export the surface flag gate under the Part-4 analytics test's name (same predicate: master smd_connect
 // AND smd_connect_onboard). Integration merged Part-3 (onboardFlagOn) + Part-4 (flagOnboardOn) onto one router.
@@ -57,6 +59,11 @@ async function dicomGateBlocks(deps, tid, connectionId, env) {
   try { const { row } = await getRow(deps.db, tid, connectionId); return row.kind === "dicomweb"; }
   catch { return false; }
 }
+
+// Consent Dashboard per-track gate (smd_connect_consent, default OFF): 404 with no existence leak, the SAME
+// idiom as restGateBlocks/dicomGateBlocks/aiMapFlagOn -- but flat (not per-connection), since /consents and
+// /consents/:ref/revoke are not scoped to one connector row.
+function consentGateBlocks(env) { return !consentFlagOn(env); }
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -103,6 +110,18 @@ export async function onRequest(context) {
     // supports (metadata only -- no tenant/PHI data), so an admin sees what they can connect and whether each
     // type is enabled. Same connector:read RBAC tier as /health and /activity.
     if (method === "GET" && seg === "connectors") return jsonResponse(await listConnectorCatalog(deps, request, env));
+    // Consent Dashboard (Increment 1): PHI-free tenant-scoped read of the tenant's own data-sharing consents,
+    // plus a LOCAL revoke that our own data-request gate enforces immediately (see functions/_connect/onboard/
+    // consents.js). Same connector:read RBAC tier as /health and /activity for the read; the revoke additionally
+    // requires connector:write (owner/admin only). Gated by its OWN narrow flag on top of the base onboard gate.
+    if (method === "GET" && seg === "consents") {
+      if (consentGateBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await readTenantConsents(deps, request, env, tid, { limit: url.searchParams.get("limit") || undefined }));
+    }
+    if (method === "POST" && parts[0] === "consents" && parts[1] && parts[2] === "revoke") {
+      if (consentGateBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await revokeTenantConsent(deps, request, env, tid, parts[1]));
+    }
     if (method === "POST" && seg === "emr") {
       if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (body.type === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
