@@ -562,6 +562,94 @@ try {
   await sleep(200);
   ok(await ev(`return window.ConnectEMR.flagOffVisible()===true;`) === true, "GET /health on a 404 (flag off) also shows the graceful 'not enabled yet' state via the shared showFlagOff() path");
 
+  // The immediately preceding test (GET /health on a 404) left flagOff shown / work hidden and never reset it
+  // (it was the last test in the suite) -- reset here, the SAME idiom every other simulated-404 test above uses.
+  await ev(`document.getElementById("flagOff").style.display="none"; document.getElementById("work").style.display=""; return 1;`);
+
+  // ---- Enterprise Administration Portal: tab nav (ADDITIVE; card visibility only, no DOM moves) ----
+  // The nav mounts as #opsArea's first child and toggles ONLY the .card[data-section] elements' own display
+  // (never a descendant's) via CSS, so every existing id the tests above rely on keeps resolving exactly as
+  // before -- this section asserts the nav itself, then re-checks every prior id is still present.
+  ok(await ev(`return document.getElementById("opsArea").classList.contains("nav-on") && document.getElementById("opsArea").firstElementChild===document.querySelector(".emr-nav");`) === true, "the nav mounts as the FIRST child of #opsArea and #opsArea gets nav-on");
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none";`) === true, "the Onboard card (default active tab) is visible");
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="access"]')).display==="none";`) === true, "the Members (Access) card is hidden by default (Access is not the active tab)");
+  ok(await ev(`window.ConnectEMR.setSection("monitoring");
+    var mon=[].slice.call(document.querySelectorAll('.card[data-section="monitoring"]'));
+    var onboardHidden=getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display==="none";
+    return mon.length===2 && mon.every(function(c){return getComputedStyle(c).display!=="none";}) && onboardHidden;`) === true, "setSection('monitoring') shows the Connection health + Activity log cards and hides the Onboard card");
+  await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
+  ok(await ev(`return getComputedStyle(document.querySelector('.card[data-section="onboard"]')).display!=="none" && getComputedStyle(document.querySelector('.card[data-section="monitoring"]')).display==="none";`) === true, "setSection('onboard') restores the Onboard card and re-hides Monitoring");
+  ok(await ev(`var ids=["aName","aBase","aMethod","addSave","aType","fFhir","fSmart","fToken","fRest","fDicom","fCsv","fHl7","fWebhook",
+      "tenantSel","tenantReload","tenantMsg","noTenant","opsArea","work","flagOff","gate",
+      "dash","dashReload","dashCounts","syncPanel","syncReload","syncSummary",
+      "health","healthReload","healthSummary","activity","activityReload","activitySummary",
+      "consents","consentReload","consentSummary","consentFlagOff","catalog","catalogReload","catalogSummary",
+      "members","membersReload","membersFlagOff","membersMsg"];
+    return ids.every(function(id){ return document.getElementById(id)!=null; });`) === true, "every id the existing panels (plus the new Members panel) use still resolves after the nav change");
+
+  // ---- Members / Access panel (GET /members -> {userId,role} projection; POST /members/role; POST
+  // /members/remove). Owner/admin caller sees editable role selects + Remove; auditor caller is read-only. ----
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-owner",name:"Owner Hospital",role:"owner"}]}});
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]}});
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  await ev(`window.ConnectEMR.setSection("access"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var t=document.getElementById("members").textContent; return t.indexOf("owner")>=0 && t.indexOf("admin")>=0;`) === true, "Members panel (owner caller) renders both member rows and their roles");
+  ok(await ev(`var m=[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]; var SAFE=["userId","role"];
+    var bad=m.some(function(r){ return Object.keys(r).some(function(k){ return SAFE.indexOf(k)<0; }); });
+    var phiLike=/@[a-z0-9.-]+\\.[a-z]{2,}|\\+?\\d{10,}|\\bmrn\\b|\\bdob\\b/i.test(JSON.stringify(m));
+    return !bad && !phiLike;`) === true, "the members payload keys are a subset of {userId,role} only, and no PHI-shaped strings (email/phone/MRN/DOB)");
+  ok(await ev(`return !!document.querySelector('#members [data-role-select="fb:aaa"]') && !!document.querySelector('#members [data-remove="fb:aaa"]');`) === true, "an owner caller sees an editable role select + Remove button per member row");
+  ok(await ev(`var t=document.getElementById("members").textContent; return t.indexOf("undefined")<0 && t.indexOf("[object Object]")<0 && t.indexOf("\\u2014")<0;`) === true, "the members panel never renders undefined/stringified-object values, and no em-dash");
+
+  await ev(`window.__roleReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/members/role")>=0){ window.__roleReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true}}); }
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    var sel=document.querySelector('#members [data-role-select="cfa:bbb"]'); sel.value="clinician";
+    sel.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__roleReq; return !!r && r.tenantId==="t-owner" && r.userId==="cfa:bbb" && r.role==="clinician";`) === true, "changing a member's role select POSTs /members/role with {tenantId,userId,role}");
+
+  await ev(`window.confirm=function(){return true;}; window.__removeReq=null;
+    window.ConnectEMR.__setApi(function(path,opts){
+      if(path.indexOf("/members/remove")>=0){ window.__removeReq=JSON.parse(opts.body); return Promise.resolve({s:200,d:{ok:true}}); }
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"}]}});
+      return Promise.resolve({s:200,d:{ok:true}});
+    });
+    document.querySelector('#members [data-remove="cfa:bbb"]').click(); return 1;`);
+  await sleep(300);
+  ok(await ev(`var r=window.__removeReq; return !!r && r.tenantId==="t-owner" && r.userId==="cfa:bbb";`) === true, "clicking Remove (confirm -> true) POSTs /members/remove with {tenantId,userId}");
+
+  // Write controls HIDDEN for an auditor caller (read-only role labels; no select, no Remove).
+  await ev(`window.ConnectEMR.__setApi(function(path){
+      if(path.indexOf("/tenants")>=0) return Promise.resolve({s:200,d:{ok:true,tenants:[{tenantId:"t-aud",name:"Auditor Hospital",role:"auditor"}]}});
+      if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[{userId:"fb:aaa",role:"owner"},{userId:"cfa:bbb",role:"admin"}]}});
+      return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}});
+    });
+    window.ConnectEMR.loadTenants(); return 1;`);
+  await sleep(300);
+  await ev(`window.ConnectEMR.setSection("access"); return 1;`);
+  await sleep(300);
+  ok(await ev(`var box=document.getElementById("members"); return box.textContent.indexOf("owner")>=0 && !box.querySelector("select") && !box.querySelector("[data-remove]");`) === true, "an auditor caller sees read-only roles (no role select, no Remove button)");
+
+  // Empty members -> the documented empty state.
+  await ev(`window.ConnectEMR.__setApi(function(path){ if(path.indexOf("/members")>=0) return Promise.resolve({s:200,d:{ok:true,members:[]}}); return Promise.resolve({s:200,d:{ok:true,fhir:[],hl7:[],webhook:[],counts:{fhir:0,hl7:0,webhook:0,total:0}}}); }); window.ConnectEMR.loadMembers(); return 1;`);
+  await sleep(300);
+  ok(await ev(`return document.getElementById("members").textContent.indexOf("No members yet.")>=0;`) === true, "an empty members list shows the 'No members yet.' empty state");
+
+  // Flag off: /members 404 -> a PANEL-LOCAL not-enabled message, and the GLOBAL flag-off gate must NOT trip.
+  await ev(`window.ConnectEMR.__setApi(function(){ return Promise.resolve({s:404,d:{error:"not_found"}}); }); window.ConnectEMR.loadMembers(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return getComputedStyle(document.getElementById("membersFlagOff")).display!=="none" && window.ConnectEMR.flagOffVisible()===false && getComputedStyle(document.getElementById("work")).display!=="none";`) === true, "GET /members on a 404 shows a PANEL-LOCAL not-enabled message, and does NOT trip the shared page-wide flag-off gate");
+  await ev(`document.getElementById("membersFlagOff").style.display="none"; return 1;`);
+  await ev(`window.ConnectEMR.setSection("onboard"); return 1;`);
+
   ok(consoleErrors.length === 0, "zero console errors / uncaught exceptions" + (consoleErrors.length ? " -> " + JSON.stringify(consoleErrors.slice(0, 4)) : ""));
 
   console.log(fails === 0 ? "\nALL GREEN - Connect EMR admin page smoke test passed" : `\n${fails} FAILED`);

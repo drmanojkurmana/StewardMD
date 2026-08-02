@@ -49,6 +49,12 @@
   table.dash td.acts button{padding:6px 9px;font-size:12px;margin-right:5px;margin-bottom:4px}
   table.dash .st{display:inline-block}
   @media(max-width:640px){.main{padding:16px 14px 70px}}
+  /* Enterprise Administration Portal: tab nav (ADDITIVE; organizes #opsArea's cards, no DOM moves). */
+  .emr-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .emr-nav button{background:var(--panel);color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font:700 12.5px var(--f);cursor:pointer}
+  .emr-nav button.active{background:var(--tl);color:#fff;border-color:var(--tl)}
+  #opsArea.nav-on .card[data-section]{display:none}
+  #opsArea.nav-on .card[data-section].sect-show{display:block}
 </style>
 </head>
 <body>
@@ -95,7 +101,7 @@
            supports (metadata only -- no tenant/PHI data), so an admin can see what they can connect and whether
            each type is enabled before adding a connection below. Read on demand via Refresh, same pattern as
            Connection health / Activity log (GET /connectors, connector:read RBAC). -->
-      <div class="card">
+      <div class="card" data-section="governance">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connector catalog</b><button class="ghost" id="catalogReload" style="padding:7px 11px">Refresh</button></div>
         <div class="hint" style="margin-top:4px">Every connector type below is available in principle. Enabling a type for your organization is a flag flip made by the StewardMD team; ask us to enable a type marked Disabled.</div>
         <div class="hint" id="catalogSummary" style="margin-top:4px"></div>
@@ -103,7 +109,7 @@
       </div>
 
       <!-- Add a connection -->
-      <div class="card">
+      <div class="card" data-section="onboard">
         <b>Add a connection</b>
         <label for="aName">Connection name *</label>
         <input id="aName" maxlength="120" placeholder="e.g. Main hospital FHIR">
@@ -299,7 +305,7 @@
       </div>
 
       <!-- Connections dashboard: this organization's FHIR connections AND HL7 v2 feeds in one table. -->
-      <div class="card">
+      <div class="card" data-section="connections">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connections dashboard</b><button class="ghost" id="dashReload" style="padding:7px 11px">Reload</button></div>
         <div class="hint" id="dashCounts" style="margin-top:4px"></div>
         <div id="dash" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above to view its connections.</div></div>
@@ -310,7 +316,7 @@
            contacting us. Reuses the SAME connections list the dashboard above renders (GET /all); automatic
            runs happen on the owner-wired cron (POST /sync-run) -- this panel only lets an admin set the
            interval and trigger an on-demand run of the SAME reachability heartbeat. -->
-      <div class="card">
+      <div class="card" data-section="automation">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Sync schedule</b><button class="ghost" id="syncReload" style="padding:7px 11px">Reload</button></div>
         <div class="hint" style="margin-top:4px">Set how often each connection is automatically checked for reachability. Automatic runs happen on our schedule; use Sync now to run one on demand.</div>
         <div class="hint" id="syncSummary" style="margin-top:4px"></div>
@@ -319,7 +325,7 @@
 
       <!-- Connection health: PHI-free operational health (Part 4 analytics), read on demand via Refresh so an
            admin can see which of their connectors are healthy without contacting us. -->
-      <div class="card">
+      <div class="card" data-section="monitoring">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Connection health</b><button class="ghost" id="healthReload" style="padding:7px 11px">Refresh</button></div>
         <div class="hint" id="healthSummary" style="margin-top:4px"></div>
         <div id="health" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view connection health.</div></div>
@@ -329,7 +335,7 @@
            pulled/synced/discovered/mapped which connection, and when), read on demand via Refresh so an admin
            can audit their integration without contacting us. Reuses the existing append-only audit; this is a
            read-only view of it (GET /activity, Part 3/4 sibling to /health). -->
-      <div class="card">
+      <div class="card" data-section="monitoring">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Activity log</b><button class="ghost" id="activityReload" style="padding:7px 11px">Refresh</button></div>
         <div class="hint" id="activitySummary" style="margin-top:4px"></div>
         <div id="activity" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view the activity log.</div></div>
@@ -342,11 +348,28 @@
            notifying the external ABDM Consent Manager is not wired yet. Behind its OWN narrow flag (separate
            from the base EMR-connect flag), so a 404 here shows a panel-local message, NOT the page-wide
            flag-off state -- the rest of the page may still be fully enabled. -->
-      <div class="card">
+      <div class="card" data-section="governance">
         <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Consent dashboard</b><button class="ghost" id="consentReload" style="padding:7px 11px">Refresh</button></div>
         <div class="hint" id="consentSummary" style="margin-top:4px"></div>
         <div id="consentFlagOff" class="hint" style="display:none;margin-top:4px">Consent dashboard is not enabled yet for your organization.</div>
         <div id="consents" style="margin-top:12px"><div class="hint">Select your organization above, then Refresh, to view data-sharing consents.</div></div>
+      </div>
+
+      <!-- Members & access: view this organization's members and roles; an owner or admin may change a
+           member's role or remove a member. Reuses the EXISTING RBAC-gated, last-owner-protected backend
+           (functions/_connect/enterprise/members.js via GET/POST /members*) UNCHANGED; this panel only renders
+           the client-safe {userId,role} projection the server returns, and ALWAYS via textContent (never
+           innerHTML), so an opaque account id can never be interpreted as markup -- and PHI is never rendered
+           here. Write controls (role select / Remove) show ONLY when the signed-in caller's OWN role for the
+           SELECTED organization is owner or admin; every other role sees a read-only role label. Behind its
+           OWN narrow flag (separate from the base EMR-connect flag), so a 404 here shows a panel-local
+           message, NOT the page-wide flag-off state. -->
+      <div class="card" data-section="access">
+        <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Members &amp; access</b><button class="ghost" id="membersReload" style="padding:7px 11px">Refresh</button></div>
+        <div class="hint" style="margin-top:4px">View this organization's members and their roles. Owners and admins may change a member's role or remove a member; the last owner of an organization can never be demoted or removed.</div>
+        <div id="membersFlagOff" class="hint" style="display:none;margin-top:4px">Members &amp; access is not enabled yet for your organization.</div>
+        <div class="msg" id="membersMsg"></div>
+        <div id="members" style="margin-top:12px;overflow-x:auto"><div class="hint">Select your organization above, then Refresh, to view members.</div></div>
       </div>
 
       </div><!-- /opsArea -->
@@ -364,6 +387,10 @@
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
 
   var API="/api/connect/onboard";
+  // The signed-in caller's OWN role per tenant (tenantId -> role), stashed whenever GET /tenants renders the
+  // picker. Drives the Members/Access panel's write-controls gate (owner/admin edit, everyone else read-only)
+  // WITHOUT a second network round-trip -- the role for every membership is already in the /tenants response.
+  var TENANT_ROLES={};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
   function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
@@ -826,6 +853,8 @@
   function showNoMembership(){ $("noTenant").style.display=""; $("opsArea").style.display="none"; $("tenantSel").innerHTML='<option value="" disabled selected>No organizations available</option>'; }
   function hideNoMembership(){ $("noTenant").style.display="none"; $("opsArea").style.display=""; }
   function renderTenantOptions(ts){
+    // Stash each membership's role (used by the Members/Access panel to decide read-only vs editable).
+    TENANT_ROLES={}; ts.forEach(function(t){ TENANT_ROLES[t.tenantId]=t.role; });
     // Preserve a still-valid prior selection; otherwise leave nothing selected (a placeholder). The selected
     // option MUST be marked explicitly: a disabled placeholder with no `selected` would let the browser
     // auto-select the first enabled option (a false auto-selection).
@@ -1295,6 +1324,111 @@
     }
   });
 
+  // ---- Enterprise Administration Portal: tab nav (ADDITIVE; organizes #opsArea's growing card list into
+  // named sections WITHOUT moving a single card in the DOM -- each card just gains a data-section attribute,
+  // so every existing id/selector this page (and the smoke test) relies on keeps resolving exactly as before).
+  // Only the ACTIVE section's card(s) are shown (#opsArea.nav-on .card[data-section]{display:none} unless
+  // .sect-show); every panel's own loader (loadDashboard/loadHealth/etc.) is unchanged and still directly
+  // callable regardless of which tab is active. ----
+  var NAV_SECTIONS=[["onboard","Onboard"],["connections","Connections"],["monitoring","Monitoring"],["automation","Automation"],["governance","Governance"],["access","Access"]];
+  function setSection(id){
+    var root=$("opsArea"); if(!root) return;
+    [].slice.call(root.querySelectorAll(".card[data-section]")).forEach(function(c){
+      var secs=(c.getAttribute("data-section")||"").split(/\s+/);
+      c.classList.toggle("sect-show", secs.indexOf(id)>=0);
+    });
+    [].slice.call(root.querySelectorAll(".emr-nav [data-nav]")).forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-nav")===id);
+    });
+    if(id==="access") loadMembers();
+  }
+  function buildNav(){
+    var root=$("opsArea"); if(!root) return;
+    var nav=document.createElement("nav"); nav.className="emr-nav";
+    NAV_SECTIONS.forEach(function(s){
+      var b=document.createElement("button"); b.type="button"; b.setAttribute("data-nav",s[0]); b.textContent=s[1];
+      nav.appendChild(b);
+    });
+    root.insertBefore(nav, root.firstChild);
+    root.classList.add("nav-on");
+    nav.addEventListener("click",function(e){ var b=e.target.closest("[data-nav]"); if(b) setSection(b.getAttribute("data-nav")); });
+    setSection("onboard");
+  }
+
+  // ---- Members / Access (Enterprise Administration Portal): view a tenant's members + roles; an owner/admin
+  // may change a role or remove a member. Reuses the EXISTING RBAC-gated, last-owner-protected backend
+  // (functions/_connect/enterprise/members.js via GET/POST /members*) UNCHANGED -- this panel only renders the
+  // client-safe {userId,role} projection the server returns, always via textContent/mkEl (never innerHTML), so
+  // an opaque account id can never be interpreted as markup, and PHI is never rendered here (the projection
+  // structurally carries no PHI field). Write controls (role select / Remove) render ONLY when the caller's OWN
+  // role for the SELECTED tenant (TENANT_ROLES, stashed from GET /tenants) is owner or admin; every other role
+  // (auditor, clinician) sees a read-only role label. Behind its OWN narrow flag, so a 404 here shows a
+  // PANEL-LOCAL message, NOT the shared page-wide showFlagOff(). ----
+  var MEMBER_ROLES=["owner","admin","clinician","auditor"];
+  function memberCanWrite(){ return ["owner","admin"].indexOf(TENANT_ROLES[tenant()]||"")>=0; }
+  function truncMemberId(id){ id=String(id==null?"":id); return id.length>20?(id.slice(0,12)+"..."+id.slice(-4)):id; }
+  function membersSay(k,t){ say("membersMsg",k,t); }
+  function showMembersFlagOff(){ var f=$("membersFlagOff"); if(f) f.style.display=""; clearEl($("members")); }
+  function hideMembersFlagOff(){ var f=$("membersFlagOff"); if(f) f.style.display="none"; }
+  function renderMembers(list){
+    list=Array.isArray(list)?list:[];
+    var box=$("members"); if(!box) return; clearEl(box);
+    if(!list.length){ box.appendChild(mkEl("div","hint","No members yet.")); return; }
+    var canWrite=memberCanWrite();
+    var table=mkEl("table","dash"), thead=mkEl("thead"), htr=mkEl("tr");
+    ["Member","Role","Actions"].forEach(function(t){ htr.appendChild(mkEl("th",null,t)); });
+    thead.appendChild(htr); table.appendChild(thead);
+    var tbody=mkEl("tbody");
+    list.forEach(function(m){
+      var tr=mkEl("tr");
+      var tdId=mkEl("td"); tdId.appendChild(mkEl("b",null,truncMemberId(m.userId))); tr.appendChild(tdId);
+      var tdRole=mkEl("td");
+      if(canWrite){
+        var sel=document.createElement("select"); sel.setAttribute("data-role-select",m.userId);
+        MEMBER_ROLES.forEach(function(r){ var o=document.createElement("option"); o.value=r; o.textContent=r; if(r===m.role)o.selected=true; sel.appendChild(o); });
+        tdRole.appendChild(sel);
+      } else { tdRole.appendChild(mkEl("span",null,m.role||"")); }
+      tr.appendChild(tdRole);
+      var tdAct=mkEl("td","acts");
+      if(canWrite){ var rm=mkEl("button","del","Remove"); rm.setAttribute("data-remove",m.userId); tdAct.appendChild(rm); }
+      tr.appendChild(tdAct);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); box.appendChild(table);
+  }
+  function loadMembers(){
+    var box=$("members"); if(!box) return;
+    hideMembersFlagOff();
+    if(!tenant()){ clearEl(box); box.appendChild(mkEl("div","hint","Select your organization above, then Refresh, to view members.")); return; }
+    clearEl(box); box.appendChild(mkEl("div","hint","Loading..."));
+    api(API+"/members?tenant="+encodeURIComponent(tenant())).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||x.d.ok===false){ clearEl(box); box.appendChild(mkEl("div","hint",httpErr(x))); return; }
+      renderMembers(x.d.members||[]);
+    }).catch(function(){ clearEl(box); box.appendChild(mkEl("div","hint","Sign in first.")); });
+  }
+  function doSetMemberRole(userId,role){
+    membersSay("","Saving...");
+    jpost(API+"/members/role",{tenantId:tenant(),userId:userId,role:role}).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ membersSay("err",httpErr(x)); return; }
+      membersSay("ok","Role updated.");
+    }).catch(function(){ membersSay("err","Sign in first."); });
+  }
+  function doRemoveMember(userId){
+    if(!window.confirm("Remove this member from the organization? This cannot be undone.")) return;
+    membersSay("","Removing...");
+    jpost(API+"/members/remove",{tenantId:tenant(),userId:userId}).then(function(x){
+      if(x.s===404){ showMembersFlagOff(); return; }
+      if(x.s!==200||!x.d||!x.d.ok){ membersSay("err",httpErr(x)); return; }
+      membersSay("ok","Member removed."); loadMembers();
+    }).catch(function(){ membersSay("err","Sign in first."); });
+  }
+  $("members").addEventListener("change",function(e){ var sel=e.target.closest("[data-role-select]"); if(!sel) return; doSetMemberRole(sel.getAttribute("data-role-select"),sel.value); });
+  $("members").addEventListener("click",function(e){ var b=e.target.closest("[data-remove]"); if(!b) return; doRemoveMember(b.getAttribute("data-remove")); });
+  $("membersReload").onclick=loadMembers;
+  buildNav();
+
   // ---- controls ----
   $("tenantSel").onchange=onTenantChange;
   $("tenantReload").onclick=loadTenants;
@@ -1322,6 +1456,7 @@
     suggestCsvMapping:csvSuggestGo, applyCsvMapping:csvApplyMapGo, suggestRestMapping:restSuggestGo,
     readMapEditor:readMapEditor,
     showNoMembership:showNoMembership, hideNoMembership:hideNoMembership,
+    setSection:setSection, loadMembers:loadMembers, renderMembers:renderMembers,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
 })();

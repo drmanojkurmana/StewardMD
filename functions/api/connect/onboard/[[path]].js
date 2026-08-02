@@ -26,7 +26,8 @@ import { suggestMapping } from "../../../_connect/onboard/ai-map.js";
 import { createFeed, listFeeds, deleteFeed } from "../../../_connect/onboard/hl7-feed.js";
 import { createFeed as createWebhookFeed, listFeeds as listWebhookFeeds, deleteFeed as deleteWebhookFeed } from "../../../_connect/onboard/webhook-feed.js";
 import { listAll } from "../../../_connect/onboard/dashboard.js";
-import { listMyTenants } from "../../../_connect/enterprise/members.js";
+import { listMyTenants, listMembers, setRole, removeMember } from "../../../_connect/enterprise/members.js";
+import { adminFlagOn } from "../../../_connect/onboard/admin-flags.js";
 import { readTenantIntegrationHealth } from "../../../_connect/maik/integration-health.js";
 import { readTenantActivity } from "../../../_connect/onboard/activity.js";
 import { listConnectorCatalog } from "../../../_connect/onboard/registry-catalog.js";
@@ -121,6 +122,25 @@ export async function onRequest(context) {
     if (method === "POST" && parts[0] === "consents" && parts[1] && parts[2] === "revoke") {
       if (consentGateBlocks(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse(await revokeTenantConsent(deps, request, env, tid, parts[1]));
+    }
+    // Enterprise Administration Portal: Members/Access. Gated by its OWN narrow flag (smd_connect_admin) on top
+    // of the base onboard gate -- 404 when either is off (no existence leak), the SAME idiom as
+    // consentGateBlocks/aiMapFlagOn. listMembers/setRole/removeMember are the EXISTING RBAC-gated, last-owner-
+    // protected enterprise module (functions/_connect/enterprise/members.js) -- UNCHANGED here. listMembers
+    // returns raw {user_id,tenant_id,role} rows; this route PROJECTS each to a client-safe {userId,role} only
+    // (tenant_id is dropped -- the caller already knows it, it's the tenant they selected).
+    if (method === "GET" && seg === "members") {
+      if (!adminFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      const rows = await listMembers(deps, request, env, tid);
+      return jsonResponse({ ok: true, members: rows.map((r) => ({ userId: r.user_id, role: r.role })) });
+    }
+    if (method === "POST" && seg === "members/role") {
+      if (!adminFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await setRole(deps, request, env, tid, { userId: body.userId, role: body.role }));
+    }
+    if (method === "POST" && seg === "members/remove") {
+      if (!adminFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+      return jsonResponse(await removeMember(deps, request, env, tid, { userId: body.userId }));
     }
     if (method === "POST" && seg === "emr") {
       if (body.type === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });

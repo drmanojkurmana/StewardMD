@@ -237,6 +237,41 @@ test("suggest-mapping: 404 when the base onboard flag is off, even with CONNECT_
   assert.equal(res.status, 404);
 });
 
+// Enterprise Administration Portal (Members/Access): GET /members + POST /members/role + POST /members/remove,
+// gated by their OWN narrow flag (smd_connect_admin) ON TOP of the base onboard flag -- 404 when EITHER is off
+// (no existence leak), even with a real D1 binding present, the SAME idiom as the consents/rest-json/dicomweb
+// per-track gates above. Deep RBAC/last-owner/audit logic is unit-tested in members.test.mjs; listMembers/
+// setRole/removeMember are the EXISTING enterprise module, unchanged here.
+test("members: 404 when the base onboard flag is off, and when CONNECT_ADMIN_FLAG is off; unauthenticated -> sanitized 401 once both are on", async () => {
+  assert.equal((await onRequest(get("/api/connect/onboard/members?tenant=t1", {}))).status, 404);
+  assert.equal((await onRequest(get("/api/connect/onboard/members?tenant=t1", BOTH))).status, 404);   // admin flag still off
+  const on = Object.assign({}, BOTH, { CONNECT_ADMIN_FLAG: "1", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest(get("/api/connect/onboard/members?tenant=t1", on));
+  assert.equal(res.status, 401);
+  assert.equal(res.headers.get("cache-control"), "no-store");
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
+test("members/role: 404 when the base onboard flag is off, and when CONNECT_ADMIN_FLAG is off; unauthenticated -> sanitized 401 once both are on", async () => {
+  const body = { tenantId: "t1", userId: "u1", role: "admin" };
+  assert.equal((await onRequest(post("/api/connect/onboard/members/role", body, {}))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/members/role", body, BOTH))).status, 404);
+  const on = Object.assign({}, BOTH, { CONNECT_ADMIN_FLAG: "1", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest(post("/api/connect/onboard/members/role", body, on));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
+test("members/remove: 404 when the base onboard flag is off, and when CONNECT_ADMIN_FLAG is off; unauthenticated -> sanitized 401 once both are on", async () => {
+  const body = { tenantId: "t1", userId: "u1" };
+  assert.equal((await onRequest(post("/api/connect/onboard/members/remove", body, {}))).status, 404);
+  assert.equal((await onRequest(post("/api/connect/onboard/members/remove", body, BOTH))).status, 404);
+  const on = Object.assign({}, BOTH, { CONNECT_ADMIN_FLAG: "1", CONNECT_DB: makeOnboardDb() });
+  const res = await onRequest(post("/api/connect/onboard/members/remove", body, on));
+  assert.equal(res.status, 401);
+  assert.deepEqual(Object.keys(await res.json()), ["error"]);
+});
+
 test("dicomweb test/pull: per-track flag gate on an existing dicomweb row -> 404 off, reachable (401) on", async () => {
   const db = makeOnboardDb();
   await db.prepare("INSERT INTO connect_connector_config (tenant_id,connector_id,kind,profile,base_url,config,secret_ref,scope,status) VALUES (?,?,?,?,?,?,?,?,?)")
