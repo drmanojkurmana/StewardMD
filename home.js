@@ -699,6 +699,22 @@
       });
     },
     electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
+    dosing: function () {
+      // Bedside-dosing hub: groups the Insulin module + Electrolyte correction behind one tile.
+      // Insulin row respects its flag (smd_insulin, DEFAULT ON; hide with ?insulin=0 / localStorage "0").
+      var insOn = false;
+      try { var q = (location.search.match(/[?&]insulin=([^&]+)/) || [])[1];
+        insOn = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") !== "0"); } catch (e) {}
+      openSheet('<div class="hv-sh-t">Bedside dosing</div>' +
+        (insOn ? mi("syringe", "Insulin dose", "Bolus · correction · basal · library · convert", "ins") : "") +
+        mi("flask", "Electrolyte correction", "ICU electrolyte replacement", "ely"));
+      sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var a = b.getAttribute("data-mi"); closeSheet();
+          setTimeout(function () { if (a === "ins") ACT.insulin(); else ACT.electrolytes(); }, 70);
+        });
+      });
+    },
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
@@ -1330,14 +1346,6 @@
               ) : "";
             } catch (e) { return ""; }
           })() +
-          (function () {   // Insulin dose CDSS — flag smd_insulin, DEFAULT ON (owner enabled). Hide with ?insulin=0
-            // or localStorage "0"; home.js runs before insulin-flags.js (deferred), so resolve synchronously.
-            try {
-              var q = (location.search.match(/[?&]insulin=([^&]+)/) || [])[1];
-              var ion = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_insulin") !== "0");
-              return ion ? rtile("insulin", "vaccines", "Insulin", "Dose calculator") : "";
-            } catch (e) { return ""; }
-          })() +
           (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT ON).
             // home.js runs BEFORE followcare-flags.js/followcare.js (deferred), so this grid is often built
             // before those globals exist — resolve DEFAULT ON synchronously (like KardiQ X) so the tile still
@@ -1353,7 +1361,7 @@
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
           rtile("interactions", "photo_camera", "Scan Meds", "Photo scan · interactions") +
-          rtile("electrolytes", "science", "Electrolytes", "ICU correction") +
+          rtile("dosing", "medication", "Dosing", "Insulin &middot; electrolytes") +
           rtile("guidelines", "book_2", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div id="rnavRecent"></div>' +
