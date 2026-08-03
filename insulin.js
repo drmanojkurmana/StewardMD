@@ -22,7 +22,7 @@
   }
   function keyFor(base) { return "smd_insulin_" + base + "_" + uid(); }
 
-  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard" };
+  var DEFAULTS = { units: "mgdl", increment: 1, target: 120, maxBolus: 15, maxDaily: 100, institution: "", bolusInsulin: "aspart", homeGlass: "standard", advMode: false };
   var GLASS_MAP = { frosted: "ins-glass ins-glass-frost", liquid: "ins-glass ins-glass-frost ins-glass-sheen",
     tinted: "ins-glass ins-glass-tint", blend: "ins-glass ins-glass-tint ins-glass-sheen" };
   var SET = clone(DEFAULTS);
@@ -583,12 +583,18 @@
   function stGet(f) { if (f.indexOf(".") > -1) { var p = f.split("."); return Number(st[p[0]][p[1]]) || 0; } return Number(st[f]) || 0; }
   function stSet(f, v) { if (f.indexOf(".") > -1) { var p = f.split("."); st[p[0]][p[1]] = v; } else st[f] = v; }
 
+  // adv:true = shown only in Advanced. Simple keeps the four bedside questions
+  // ("what do I give now?"); the derivation calculators (ISF/ICR/IOB) and the
+  // specialist protocols (paediatric, DKA) move behind Advanced.
   var MODES = [
     { id: "combined", label: "Combined" }, { id: "meal", label: "Meal bolus" }, { id: "correction", label: "Correction" },
-    { id: "basal", label: "Basal init" }, { id: "isf", label: "ISF" }, { id: "icr", label: "Carb ratio" },
-    { id: "iob", label: "Active insulin" },
-    { id: "pediatric", label: "Pediatric", clin: true }, { id: "dka", label: "DKA infusion", clin: true }
+    { id: "basal", label: "Basal init" },
+    { id: "isf", label: "ISF", adv: true }, { id: "icr", label: "Carb ratio", adv: true },
+    { id: "iob", label: "Active insulin", adv: true },
+    { id: "pediatric", label: "Pediatric", clin: true, adv: true }, { id: "dka", label: "DKA infusion", clin: true, adv: true }
   ];
+  function advOn() { return !!SET.advMode; }
+  function visibleModes() { return MODES.filter(function (m) { return advOn() || !m.adv; }); }
   function glucoseMode(m) { return m === "combined" || m === "correction"; }
   function bolusMode(m) { return ["combined", "meal", "correction", "iob"].indexOf(m) > -1; }
   function clinMode(m) { return m === "pediatric" || m === "dka"; }
@@ -600,7 +606,13 @@
       '<div class="ins-ai ins-bf">' + ICON_AI +
         '<div><b>AI-assisted recommendation.</b> The treating physician makes the final decision. ' +
         'Every value below is shown with its formula and assumptions - nothing is hidden.</div></div>' +
-      '<div class="ins-modes ins-bf" role="tablist">' + MODES.map(function (m) {
+      '<div class="ins-levelrow ins-bf"><div class="ins-level" role="tablist" aria-label="Detail level">' +
+        '<button role="tab" data-ins="adv" data-v="0" aria-pressed="' + (!advOn() ? "true" : "false") + '">Simple</button>' +
+        '<button role="tab" data-ins="adv" data-v="1" aria-pressed="' + (advOn() ? "true" : "false") + '">Advanced</button>' +
+      '</div><span class="ins-level-h">' + (advOn()
+        ? 'All calculators, ratio derivation and specialist protocols.'
+        : 'The everyday doses. Switch to Advanced for ISF/carb-ratio derivation, paediatric and DKA.') + '</span></div>' +
+      '<div class="ins-modes ins-bf" role="tablist">' + visibleModes().map(function (m) {
         return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-pressed="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
       }).join("") + '</div>' +
       '<div class="ins-card ins-bf" id="insInputs"></div>' +
@@ -721,7 +733,9 @@
         '<div class="ins-guide">Sums confirmed bolus doses within the selected insulin duration of action (' + bolusDia() + ' h). ' + doses.length + ' dose' + (doses.length !== 1 ? 's' : '') + ' in window.</div></div>';
     }
 
-    if (doseUnitMode(m)) h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
+    // Rounding is a device/setup preference, not a per-dose decision — Advanced only
+    // (Simple uses the saved default, shown in the result line).
+    if (doseUnitMode(m) && advOn()) h += '<div class="ins-field"><div class="ins-lab">Rounding</div><div class="ins-round">' +
       '<button data-ins="round" data-v="1" aria-pressed="' + (st.increment === 1 ? "true" : "false") + '">1 unit</button>' +
       '<button data-ins="round" data-v="0.5" aria-pressed="' + (st.increment === 0.5 ? "true" : "false") + '">0.5 unit</button></div></div>';
 
@@ -910,6 +924,13 @@
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
     if (a === "tri") { var tv = parseInt(t.getAttribute("data-v"), 10); st.ctx.trimester = (st.ctx.trimester === tv ? null : tv); render(); return; }
     if (a === "convfreq") { st.convFromFreq = t.getAttribute("data-v"); paint(); return; }
+    if (a === "adv") {
+      SET.advMode = t.getAttribute("data-v") === "1"; saveSettings();
+      // Leaving Advanced while on an Advanced-only calculator would strand the user
+      // on a hidden tab — fall back to the default bedside mode.
+      if (!SET.advMode && MODES.some(function (x) { return x.id === st.mode && x.adv; })) st.mode = "combined";
+      paint(); return;
+    }
     if (a === "iob-est") {
       var est = estimateIOB(); st.iob = est.iob;
       var bd = bolusInsulin();
