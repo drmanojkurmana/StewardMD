@@ -260,3 +260,49 @@ test("pregnancy + renal combine: trimester factor then renal reduction", () => {
   assert.equal(r.contextMultiplier, 0.75);
   assert.equal(r.tdd, 47);    // 70 x 0.9 = 63, x 0.75 = 47.25 -> 47
 });
+
+/* ── Bolus context advice: toggling a context must visibly change the output ──
+ * Renal/pregnancy/etc. previously did nothing at all in meal/correction/combined
+ * mode (they only adjusted weight-based initiation). They now return concrete
+ * adjusted figures — but deliberately do NOT rescale the bolus silently, because
+ * the entered ICR/ISF may already account for the context. */
+test("bolusContextAdvice: no context -> nothing shown", () => {
+  assert.equal(E.bolusContextAdvice(5, {}).length, 0);
+});
+
+test("bolusContextAdvice: exercise gives the 25-50% pre-exercise range", () => {
+  const a = E.bolusContextAdvice(8, { exercise: true });
+  const ex = a.find(x => x.id === "exercise");
+  assert.ok(ex);
+  assert.equal(ex.value, "4 to 6 units");        // 50% .. 75% of 8
+});
+
+test("bolusContextAdvice: renal gives a banded figure, conditioned on ICR/ISF", () => {
+  const a30 = E.bolusContextAdvice(8, { renal: true, egfr: 30 }).find(x => x.id === "renal");
+  assert.equal(a30.value, "6 units");            // 75%
+  assert.ok(/not already/i.test(a30.detail));    // must warn against double-counting
+  const a5 = E.bolusContextAdvice(8, { renal: true, egfr: 5 }).find(x => x.id === "renal");
+  assert.equal(a5.value, "4 units");             // 50%
+});
+
+test("bolusContextAdvice: eGFR above 50 adds no renal row", () => {
+  assert.equal(E.bolusContextAdvice(8, { egfr: 80 }).filter(x => x.id === "renal").length, 0);
+});
+
+test("bolusContextAdvice: pregnancy surfaces the tighter targets", () => {
+  const p = E.bolusContextAdvice(6, { pregnancy: true }).find(x => x.id === "pregnancy");
+  assert.match(p.value, /95/);
+  assert.match(p.detail, /140/);
+});
+
+test("bolusContextAdvice: hepatic and steroids advise without a fabricated number", () => {
+  const h = E.bolusContextAdvice(6, { hepatic: true }).find(x => x.id === "hepatic");
+  assert.match(h.value, /no fixed adjustment/i);
+  const s = E.bolusContextAdvice(6, { steroids: true }).find(x => x.id === "steroids");
+  assert.match(s.detail, /PRANDIAL/);
+});
+
+test("bolusContextAdvice: multiple contexts each get a row; zero dose returns none", () => {
+  assert.equal(E.bolusContextAdvice(8, { exercise: true, renal: true, egfr: 30, hepatic: true }).length, 3);
+  assert.equal(E.bolusContextAdvice(0, { exercise: true }).length, 0);
+});
