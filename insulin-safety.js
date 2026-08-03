@@ -45,15 +45,21 @@
 
     if (context.pregnancy)
       out.push(W("pregnancy", "caution", "Pregnancy",
-        "Insulin requirements shift by trimester and glucose targets are tighter. Confirm current targets."));
+        "Requirements rise through gestation (about 0.7 u/kg/day in the 1st trimester, 0.8 in the 2nd, 0.9 to 1.0 in the 3rd) and targets are tighter: fasting under 95 mg/dL, 1-hour post-prandial under 140, 2-hour under 120. Requirements fall abruptly after delivery."));
 
-    if (context.renal)
+    if (context.renal || num(context.egfr)) {
+      var e = num(context.egfr) ? context.egfr : null;
+      var band = (context.dialysis || (e !== null && e < 10)) ? "about 50% of the usual dose"
+        : (e === null || e < 50) ? "about 75% of the usual dose" : null;
       out.push(W("renal", "caution", "Renal impairment",
-        "Reduced insulin clearance raises hypoglycemia risk; consider a lower dose."));
+        band ? "Insulin is renally cleared, so requirements fall" + (e !== null ? " (eGFR " + e + ")" : "") +
+               " - use " + band + " and monitor for hypoglycaemia." + (e === null ? " Enter an eGFR to band this properly (below 10 the reduction is 50%)." : "")
+             : "eGFR " + e + " mL/min - no routine reduction above 50, but recheck if renal function is falling."));
+    }
 
     if (context.hepatic)
       out.push(W("hepatic", "caution", "Liver disease",
-        "Altered gluconeogenesis and insulin metabolism; dose conservatively and monitor."));
+        "No validated dose multiplier - requirements are unpredictable: insulin resistance raises them, while impaired gluconeogenesis and reduced hepatic insulin clearance raise hypoglycaemia risk, especially fasting and overnight. Start at the low end, avoid excess basal, monitor closely."));
 
     if (context.exercise)
       out.push(W("exercise", "caution", "Planned exercise",

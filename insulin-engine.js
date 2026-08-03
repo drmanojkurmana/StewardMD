@@ -190,32 +190,93 @@
     };
   }
 
+  /* Guideline-based adjustment of the WEIGHT-BASED starting dose for patient context.
+   * Only conditions with a quantified, guideline-backed adjustment change the number:
+   *   Renal  - insulin is renally cleared, so requirements FALL as GFR falls:
+   *            eGFR 10-50 -> 75% of dose, eGFR <10 (or dialysis) -> 50%.
+   *   Pregnancy - requirements RISE through gestation; standard initiation is
+   *            ~0.7 (T1), 0.8 (T2), 0.9 (T3) u/kg/day, with tighter targets.
+   * Hepatic disease and glucocorticoids have NO validated multiplier (direction is
+   * real but the magnitude is patient-specific), so they never silently scale the
+   * dose - they return explicit guidance instead. */
+  function contextAdjust(ctx) {
+    ctx = ctx || {};
+    var out = { suggestedFactor: null, multiplier: 1, applied: [], advisories: [] };
+
+    if (ctx.pregnancy) {
+      var tri = ctx.trimester === 1 ? 1 : ctx.trimester === 2 ? 2 : ctx.trimester === 3 ? 3 : null;
+      var triFactor = { 1: 0.7, 2: 0.8, 3: 0.9 };
+      if (tri) {
+        out.suggestedFactor = triFactor[tri];
+        out.applied.push("Pregnancy (trimester " + tri + "): starting factor " + triFactor[tri] +
+          " u/kg/day - insulin requirement rises through gestation.");
+      } else {
+        out.advisories.push("Pregnancy: requirements rise through gestation (about 0.7 u/kg/day in the 1st trimester, 0.8 in the 2nd, 0.9 to 1.0 in the 3rd). Select a trimester to apply the right starting factor.");
+      }
+      out.advisories.push("Pregnancy targets are tighter: fasting under 95 mg/dL (5.3 mmol/L), 1-hour post-prandial under 140 (7.8), 2-hour under 120 (6.7).");
+      out.advisories.push("Requirements often DIP in early pregnancy (hypoglycaemia risk) and FALL abruptly after delivery - reduce the dose immediately post-partum.");
+    }
+
+    if (ctx.renal || ok(ctx.egfr)) {
+      var e = ok(ctx.egfr) ? ctx.egfr : null;
+      if (ctx.dialysis || (e !== null && e < 10)) {
+        out.multiplier *= 0.5;
+        out.applied.push("Renal" + (e !== null ? " (eGFR " + e + ")" : " (dialysis)") + ": dose reduced to 50% - insulin clearance is markedly reduced.");
+      } else if (e !== null && e < 50) {
+        out.multiplier *= 0.75;
+        out.applied.push("Renal (eGFR " + e + "): dose reduced to 75% - reduced insulin clearance raises hypoglycaemia risk.");
+      } else if (e !== null) {
+        out.advisories.push("eGFR " + e + " mL/min: no reduction applied (reduction starts below 50).");
+      } else {
+        out.multiplier *= 0.75;
+        out.applied.push("Renal impairment flagged without an eGFR: dose reduced to 75% (the eGFR 10-50 band). Enter an eGFR to refine - below 10 the reduction is 50%.");
+      }
+    }
+
+    if (ctx.hepatic) {
+      out.advisories.push("Liver disease: no validated dose multiplier exists - requirements are unpredictable (insulin resistance raises them, while impaired gluconeogenesis and reduced hepatic insulin clearance raise hypoglycaemia risk, especially overnight/fasting). Start at the low end, avoid excess basal, and monitor closely.");
+    }
+    if (ctx.steroids) {
+      out.advisories.push("Glucocorticoids: requirements rise, mainly post-prandial and daytime with morning steroid. Expect to increase PRANDIAL insulin first (basal often changes little) and to taper insulin as the steroid is reduced - no fixed multiplier applies.");
+    }
+    return out;
+  }
+
   function basalInitiation(v) {
-    var formula = "TDD = weight x factor; basal = TDD x basalFraction; meal bolus each = (TDD - basal) / 3";
+    var formula = "TDD = weight x factor (context-adjusted); basal = TDD x basalFraction; meal bolus each = (TDD - basal) / 3";
     if (!ok(v.weightKg) || v.weightKg <= 0) return ERR(formula);
-    var factor = ok(v.tddFactor) ? v.tddFactor : 0.4;
+    var adj = contextAdjust(v.ctx);
+    var userFactor = ok(v.tddFactor) ? v.tddFactor : 0.4;
+    // A guideline factor for pregnancy supersedes the generic default, but is stated openly.
+    var factor = adj.suggestedFactor != null ? adj.suggestedFactor : userFactor;
+    if (adj.suggestedFactor != null && ok(v.tddFactor) && v.tddFactor !== adj.suggestedFactor)
+      adj.applied.push("Selected factor " + v.tddFactor + " u/kg/day replaced by the pregnancy factor " + adj.suggestedFactor + ".");
     var frac = ok(v.basalFraction) ? v.basalFraction : 0.5;
     var inc = v.increment || 1;
-    var tdd = Math.round(v.weightKg * factor);
+    var preTdd = v.weightKg * factor;
+    var tdd = Math.round(preTdd * adj.multiplier);
     var basal = Math.round(tdd * frac);
     var mealEach = roundDose((tdd - basal) / 3, inc);
+    var steps = [{ label: "Total daily dose", expr: v.weightKg + " kg x " + factor + " u/kg/day", value: r1(preTdd) }];
+    if (adj.multiplier !== 1)
+      steps.push({ label: "Context adjustment", expr: r1(preTdd) + " x " + adj.multiplier, value: tdd });
+    steps.push({ label: "Basal share", expr: tdd + " x " + frac, value: basal });
+    steps.push({ label: "Meal bolus each (3 meals)", expr: "(" + tdd + " - " + basal + ") / 3", value: mealEach });
     return {
       result: tdd, rounded: tdd, unit: "units/day", tdd: tdd, basal: basal, mealBolusEach: mealEach,
-      steps: [
-        { label: "Total daily dose", expr: v.weightKg + " kg x " + factor + " u/kg/day", value: tdd },
-        { label: "Basal share", expr: tdd + " x " + frac, value: basal },
-        { label: "Meal bolus each (3 meals)", expr: "(" + tdd + " - " + basal + ") / 3", value: mealEach }
-      ],
+      contextFactor: factor, contextMultiplier: adj.multiplier, contextApplied: adj.applied,
+      steps: steps,
       formula: formula,
       assumptions: [
-        "Starting factor " + factor + " u/kg/day (typical range 0.3 to 0.5; lower in renal impairment or type 1 honeymoon).",
+        "Starting factor " + factor + " u/kg/day (typical range 0.3 to 0.5 outside pregnancy; lower in renal impairment or type 1 honeymoon)." +
+          (adj.multiplier !== 1 ? " Context multiplier " + adj.multiplier + " applied." : ""),
         "Basal fraction " + frac + " (50/50 basal-bolus split is the configurable default)."
-      ],
+      ].concat(adj.applied),
       clinicalNotes: [
         "A conservative initiation estimate. Start low, titrate to glucose targets, and reassess within days.",
         "Not for type 1 ketosis-prone initiation without specialist input."
-      ],
-      refs: ["Weight-based insulin initiation; ADA / AACE inpatient and outpatient guidance."]
+      ].concat(adj.advisories),
+      refs: ["Weight-based insulin initiation; ADA / AACE guidance. Renal banding (eGFR 10-50 -> 75%, <10 -> 50%). Pregnancy: ADA Standards of Care / ACOG - trimester factors and targets."]
     };
   }
 
@@ -288,7 +349,7 @@
   var API = {
     roundDose: roundDose, mmol: mmol,
     correctionDose: correctionDose, mealBolus: mealBolus, activeInsulin: activeInsulin,
-    combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd,
+    combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd, contextAdjust: contextAdjust,
     basalInitiation: basalInitiation, pediatricInit: pediatricInit, dkaInsulin: dkaInsulin
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

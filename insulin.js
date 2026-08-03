@@ -91,7 +91,7 @@
   /* ---------- state ---------- */
   var st = { screen: "dashboard", mode: "combined",
     glucose: 180, target: 120, carbs: 45, icr: 10, isf: 50, iob: 2, increment: 1,
-    ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false },
+    ctx: { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null },
     acked: false, confirmed: false, bolus: "aspart", iobNote: "",
     tdd: 40, isfRule: 1800, icrRule: 500, tddFactor: 0.4, basalFraction: 0.5,
     dkaRate: 0.1, dkaMax: "", pedStage: "prepubertal", dkaPaeds: false, advAck: false,
@@ -111,7 +111,7 @@
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
     st.tdd = 40; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
     st.dkaRate = 0.1; st.dkaMax = ""; st.pedStage = "prepubertal"; st.dkaPaeds = false; st.advAck = false;
-    st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false };
+    st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
     st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convAck = false;
@@ -720,9 +720,17 @@
       '<button data-ins="round" data-v="1" aria-pressed="' + (st.increment === 1 ? "true" : "false") + '">1 unit</button>' +
       '<button data-ins="round" data-v="0.5" aria-pressed="' + (st.increment === 0.5 ? "true" : "false") + '">0.5 unit</button></div></div>';
 
-    if (["isf", "icr", "iob"].indexOf(m) < 0) h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
+    if (["isf", "icr", "iob"].indexOf(m) < 0) {
+      h += '<div class="ins-field"><div class="ins-lab">Patient context</div><div class="ins-chips">' +
       ctxChip("pregnancy", "Pregnancy") + ctxChip("renal", "Renal") + ctxChip("hepatic", "Hepatic") + ctxChip("exercise", "Exercise") + ctxChip("steroids", "Steroids") +
       (m !== "pediatric" ? '<button class="ins-chip" data-ins="peds" aria-pressed="' + (st.ctx.age < 18 ? "true" : "false") + '">Pediatric</button>' : '') + '</div></div>';
+      // Renal and pregnancy carry QUANTIFIED guideline adjustments, so collect the one
+      // value each needs (eGFR band / trimester) instead of applying a blanket factor.
+      if (st.ctx.renal) h += '<div class="ins-field"><div class="ins-grid2">' + mini("ctx.egfr", "eGFR mL/min", st.ctx.egfr == null ? "" : st.ctx.egfr) +
+        '<div class="ins-chips"><button class="ins-chip" data-ins="ctx" data-k="dialysis" aria-pressed="' + (st.ctx.dialysis ? "true" : "false") + '">On dialysis</button></div></div></div>';
+      if (st.ctx.pregnancy) h += '<div class="ins-field"><div class="ins-lab">Trimester</div><div class="ins-chips">' +
+        [1, 2, 3].map(function (t) { return '<button class="ins-chip" data-ins="tri" data-v="' + t + '" aria-pressed="' + (st.ctx.trimester === t ? "true" : "false") + '">T' + t + '</button>'; }).join("") + '</div></div>';
+    }
 
     document.getElementById("insInputs").innerHTML = h;
   }
@@ -731,7 +739,7 @@
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
     if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment });
     if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment });
-    if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment });
+    if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment, ctx: st.ctx });
     if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
     if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
     if (m === "iob") return E.activeInsulin({ doses: recentBolusDoses(), dia: bolusDia() });
@@ -748,7 +756,7 @@
     var input = glucoseMode(m) ? { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: st.iob } : { noGlucose: true };
     var boluses = ["combined", "meal", "correction"].indexOf(m) > -1;
     var ctx = { age: st.ctx.age, weightKg: st.ctx.weightKg, pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic,
-      exercise: st.ctx.exercise, steroids: st.ctx.steroids };
+      exercise: st.ctx.exercise, steroids: st.ctx.steroids, egfr: st.ctx.egfr, dialysis: st.ctx.dialysis, trimester: st.ctx.trimester };
     if (boluses) { ctx.maxBolus = SET.maxBolus; ctx.maxDaily = SET.maxDaily; if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded; }
     return S.evaluate(ctx, input, res);
   }
@@ -887,6 +895,7 @@
     if (a === "dkapaeds") { st.dkaPaeds = !st.dkaPaeds; renderInputs(); render(); return; }
     if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
+    if (a === "tri") { var tv = parseInt(t.getAttribute("data-v"), 10); st.ctx.trimester = (st.ctx.trimester === tv ? null : tv); render(); return; }
     if (a === "iob-est") {
       var est = estimateIOB(); st.iob = est.iob;
       var bd = bolusInsulin();
