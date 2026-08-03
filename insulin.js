@@ -931,8 +931,11 @@
       if (k === "pregnancy") {
         if (st.ctx.pregnancy) { if (st.target > 110) { st._preTarget = st.target; st.target = 100; } }
         else if (st._preTarget) { st.target = st._preTarget; st._preTarget = null; }
-        renderInputs();
       }
+      // Rebuild the INPUT card, not just the result: some chips own a dependent field
+      // (Renal -> eGFR + dialysis, Pregnancy -> trimester) which otherwise never
+      // appears/disappears when the chip is toggled.
+      renderInputs();
       render(); return;
     }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }

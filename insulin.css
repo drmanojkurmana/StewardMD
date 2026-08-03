@@ -281,8 +281,13 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   border-radius: 999px; padding: 7px 13px; font-size: 12.5px; font-weight: 600; cursor: pointer;
   font-family: inherit; transition: all .14s var(--ins-ease);
 }
-.ins-chip[aria-pressed="true"] { border-color: var(--ins-primary); color: var(--ins-primary);
-  background: color-mix(in srgb, var(--ins-primary) 8%, var(--ins-surface)); }
+/* Selected must be unmistakable: an 8% tint was invisible on the glass themes, so
+   an active Renal/Pregnancy chip read as "off" and its eGFR/trimester field looked
+   like it was showing unconditionally. Solid fill + a tick, matching the level toggle. */
+.ins-chip[aria-pressed="true"] { border-color: var(--ins-primary); color: #fff;
+  background: var(--ins-primary); font-weight: 700;
+  box-shadow: 0 1px 6px color-mix(in srgb, var(--ins-primary) 35%, transparent); }
+.ins-chip[aria-pressed="true"]::before { content: "\2713"; margin-right: 5px; font-weight: 800; }
 
 /* Small inline number inputs (params) */
 .ins-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

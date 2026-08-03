@@ -61,6 +61,26 @@ try {
   ok(await has('[data-f="iob"]'), "IOB field STILL shown in Simple correction (prevents dose stacking)");
   ok(await has('[data-ins="ctx"]'), "patient-context chips STILL shown in Simple");
 
+  // ---- context chips: dependent fields must appear ONLY when the chip is selected,
+  //      and selection must be visually unmistakable (an 8% tint read as "off") ----
+  ok(!(await has('[data-f="ctx.egfr"]')), "eGFR field hidden until Renal is selected");
+  ok(!(await has('[data-ins="tri"]')), "Trimester chips hidden until Pregnancy is selected");
+  const chip = (k) => `var b=[].filter.call(document.querySelectorAll('[data-ins="ctx"]'),function(x){return x.getAttribute('data-k')==='${k}';})[0]; if(b) b.click(); return 1;`;
+  await ev(chip("renal")); await sleep(400);
+  ok(await has('[data-f="ctx.egfr"]'), "selecting Renal reveals the eGFR field");
+  ok(!(await has('[data-ins="tri"]')), "Renal does not reveal the Trimester chips");
+  const fill = await ev(`var b=[].filter.call(document.querySelectorAll('[data-ins="ctx"]'),function(x){return x.getAttribute('data-k')==='renal';})[0]; var c=getComputedStyle(b); return JSON.stringify({bg:c.backgroundColor,fg:c.color});`);
+  console.log("   selected chip style:", fill);
+  const fillObj = JSON.parse(fill || "{}");
+  ok(fillObj.fg === "rgb(255, 255, 255)" && !/rgba\(0, 0, 0, 0\)/.test(fillObj.bg || ""),
+    "selected chip is solid-filled with white text (clearly 'on')");
+  await ev(chip("pregnancy")); await sleep(400);
+  ok(await has('[data-ins="tri"]'), "selecting Pregnancy reveals the Trimester chips");
+  await ev(chip("renal")); await sleep(400);
+  ok(!(await has('[data-f="ctx.egfr"]')), "deselecting Renal hides the eGFR field again");
+  await ev(chip("pregnancy")); await sleep(400);
+  ok(!(await has('[data-ins="tri"]')), "deselecting Pregnancy hides the Trimester chips again");
+
   // ---- Advanced ----
   await ev(`document.querySelector('[data-ins="adv"][data-v="1"]').click(); return 1;`); await sleep(500);
   modes = JSON.parse(await modeLabels() || "[]");
