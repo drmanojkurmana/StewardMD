@@ -583,18 +583,20 @@
   function stGet(f) { if (f.indexOf(".") > -1) { var p = f.split("."); return Number(st[p[0]][p[1]]) || 0; } return Number(st[f]) || 0; }
   function stSet(f, v) { if (f.indexOf(".") > -1) { var p = f.split("."); st[p[0]][p[1]] = v; } else st[f] = v; }
 
-  // adv:true = shown only in Advanced. Simple keeps the four bedside questions
-  // ("what do I give now?"); the derivation calculators (ISF/ICR/IOB) and the
-  // specialist protocols (paediatric, DKA) move behind Advanced.
+  // The two levels show DIFFERENT sets, not a superset:
+  //   Simple   (adv:false) - the bedside sequence: Basal -> Correction -> Meal -> Combined
+  //   Advanced (adv:true)  - only the remainder: derivation calculators + specialist protocols
   var MODES = [
-    { id: "combined", label: "Combined" }, { id: "meal", label: "Meal bolus" }, { id: "correction", label: "Correction" },
-    { id: "basal", label: "Basal init" },
+    { id: "basal", label: "Basal init" }, { id: "correction", label: "Correction" },
+    { id: "meal", label: "Meal bolus" }, { id: "combined", label: "Combined" },
     { id: "isf", label: "ISF", adv: true }, { id: "icr", label: "Carb ratio", adv: true },
     { id: "iob", label: "Active insulin", adv: true },
     { id: "pediatric", label: "Pediatric", clin: true, adv: true }, { id: "dka", label: "DKA infusion", clin: true, adv: true }
   ];
   function advOn() { return !!SET.advMode; }
-  function visibleModes() { return MODES.filter(function (m) { return advOn() || !m.adv; }); }
+  function isAdvMode(id) { return MODES.some(function (m) { return m.id === id && m.adv; }); }
+  function visibleModes() { return MODES.filter(function (m) { return advOn() ? !!m.adv : !m.adv; }); }
+  function firstModeFor(adv) { var l = MODES.filter(function (m) { return adv ? !!m.adv : !m.adv; }); return l.length ? l[0].id : "combined"; }
   function glucoseMode(m) { return m === "combined" || m === "correction"; }
   function bolusMode(m) { return ["combined", "meal", "correction", "iob"].indexOf(m) > -1; }
   function clinMode(m) { return m === "pediatric" || m === "dka"; }
@@ -610,8 +612,8 @@
         '<button role="tab" data-ins="adv" data-v="0" aria-pressed="' + (!advOn() ? "true" : "false") + '">Simple</button>' +
         '<button role="tab" data-ins="adv" data-v="1" aria-pressed="' + (advOn() ? "true" : "false") + '">Advanced</button>' +
       '</div><span class="ins-level-h">' + (advOn()
-        ? 'All calculators, ratio derivation and specialist protocols.'
-        : 'The everyday doses. Switch to Advanced for ISF/carb-ratio derivation, paediatric and DKA.') + '</span></div>' +
+        ? 'Ratio derivation and specialist protocols. Switch to Simple for the everyday doses.'
+        : 'Basal, correction, meal and combined. Switch to Advanced for ISF/carb-ratio, active insulin, paediatric and DKA.') + '</span></div>' +
       '<div class="ins-modes ins-bf" role="tablist">' + visibleModes().map(function (m) {
         return '<button class="ins-modebtn' + (m.clin ? " clin" : "") + '" role="tab" data-ins="mode" data-mode="' + m.id + '" aria-pressed="' + (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
       }).join("") + '</div>' +
@@ -938,9 +940,9 @@
     if (a === "convfreq") { st.convFromFreq = t.getAttribute("data-v"); paint(); return; }
     if (a === "adv") {
       SET.advMode = t.getAttribute("data-v") === "1"; saveSettings();
-      // Leaving Advanced while on an Advanced-only calculator would strand the user
-      // on a hidden tab — fall back to the default bedside mode.
-      if (!SET.advMode && MODES.some(function (x) { return x.id === st.mode && x.adv; })) st.mode = "combined";
+      // The levels show disjoint sets, so a mode that belongs to the other level
+      // would leave the user on a hidden tab — land on that level's first tab.
+      if (isAdvMode(st.mode) !== SET.advMode) st.mode = firstModeFor(SET.advMode);
       paint(); return;
     }
     if (a === "iob-est") {
