@@ -19,6 +19,36 @@
       refs: [], error: "Enter all required values." };
   }
 
+  /* Combined multiplier APPLIED to a bolus for patient context.
+   * Direction rule: contexts that LOWER insulin need scale the dose; contexts that
+   * RAISE it (pregnancy, steroids) are never auto-increased - silently giving more
+   * insulin is the one direction that can kill, so those stay advisory (pregnancy
+   * instead changes the TARGET, which raises the correction legitimately).
+   *   renal    eGFR 10-50 -> x0.75, <10/dialysis -> x0.5   (guideline banding)
+   *   hepatic  x0.75 - CONSERVATIVE DEFAULT, no validated multiplier exists
+   *   exercise x0.75 - the cautious end of the 25-50% pre-exercise reduction */
+  function bolusContextFactor(ctx) {
+    ctx = ctx || {};
+    var f = 1, applied = [];
+    if (ctx.renal || ok(ctx.egfr)) {
+      var e = ok(ctx.egfr) ? ctx.egfr : null;
+      var m = (ctx.dialysis || (e !== null && e < 10)) ? 0.5 : (e === null || e < 50) ? 0.75 : 1;
+      if (m !== 1) { f *= m; applied.push({ id: "renal", mult: m, why: "Renal" + (e !== null ? " (eGFR " + e + ")" : "") + ": insulin is renally cleared, requirement falls to " + Math.round(m * 100) + "%" }); }
+    }
+    if (ctx.hepatic) { f *= 0.75; applied.push({ id: "hepatic", mult: 0.75, why: "Liver disease: conservative 25% reduction (no validated multiplier - impaired gluconeogenesis and reduced hepatic clearance raise hypoglycaemia risk)" }); }
+    if (ctx.exercise) { f *= 0.75; applied.push({ id: "exercise", mult: 0.75, why: "Exercise: 25% reduction applied (guideline range 25 to 50% - reduce further for longer or harder activity)" }); }
+    return { factor: r2(f), applied: applied };
+  }
+  // Apply the context factor to a computed bolus, appending transparent steps.
+  function applyBolusCtx(raw, inc, ctx, steps) {
+    var c = bolusContextFactor(ctx);
+    if (c.factor === 1 || !(raw > 0)) return { raw: raw, rounded: roundDose(raw, inc), ctx: c };
+    var adj = raw * c.factor;
+    c.applied.forEach(function (a) { steps.push({ label: "Context: " + a.id, expr: "x " + a.mult + " - " + a.why, value: null }); });
+    steps.push({ label: "Context-adjusted dose", expr: r2(raw) + " x " + c.factor, value: r2(adj) });
+    return { raw: adj, rounded: roundDose(adj, inc), ctx: c };
+  }
+
   function correctionDose(v) {
     var withIob = ok(v.iob) && v.iob > 0;
     var formula = withIob ? "correction = max(0, (glucose - target) / ISF - IOB)"
@@ -38,6 +68,7 @@
       { label: "Divide by ISF", expr: gap + " / " + v.isf + " (mg/dL per unit)", value: r2(gross) }
     ];
     if (withIob) steps.push({ label: "Subtract active insulin (IOB)", expr: r2(gross) + " - " + iob, value: r2(raw) });
+    var cx = applyBolusCtx(raw, inc, v.ctx, steps); raw = cx.raw; rounded = cx.rounded;
     steps.push({ label: "Round to " + inc + " unit", expr: "round(" + r2(raw) + ")", value: rounded });
     return {
       result: r1(raw),
@@ -45,6 +76,7 @@
       unit: "units",
       grossCorrection: r1(gross),
       iobSubtracted: iob,
+      contextFactor: cx.ctx.factor, contextApplied: cx.ctx.applied,
       steps: steps,
       formula: formula,
       assumptions: [
@@ -64,16 +96,19 @@
     if (!ok(v.carbs) || !ok(v.icr) || v.icr <= 0) return ERR(formula);
     var inc = v.increment || 1;
     var raw = v.carbs / v.icr;
-    var rounded = roundDose(raw, inc);
+    var steps = [
+      { label: "Carbohydrates", expr: v.carbs + " g", value: v.carbs },
+      { label: "Divide by ICR", expr: v.carbs + " / " + v.icr + " (g per unit)", value: r2(raw) }
+    ];
+    var cxm = applyBolusCtx(raw, inc, v.ctx, steps); raw = cxm.raw;
+    var rounded = cxm.rounded;
+    steps.push({ label: "Round to " + inc + " unit", expr: "round(" + r2(raw) + ")", value: rounded });
     return {
       result: r1(raw),
       rounded: rounded,
       unit: "units",
-      steps: [
-        { label: "Carbohydrates", expr: v.carbs + " g", value: v.carbs },
-        { label: "Divide by ICR", expr: v.carbs + " / " + v.icr + " (g per unit)", value: r2(raw) },
-        { label: "Round to " + inc + " unit", expr: "round(" + r2(raw) + ")", value: rounded }
-      ],
+      contextFactor: cxm.ctx.factor, contextApplied: cxm.ctx.applied,
+      steps: steps,
       formula: formula,
       assumptions: ["ICR (insulin-to-carbohydrate ratio) is grams of carbohydrate covered by 1 unit."],
       clinicalNotes: ["Confirm carbohydrate counting is accurate; estimation error propagates directly to the dose."],
@@ -130,17 +165,20 @@
     // post-prandial hyperglycaemia (standard bolus-calculator behaviour).
     var corrNet = corr - iob; if (corrNet < 0) corrNet = 0;
     var rawTotal = meal + corrNet;
-    var rounded = roundDose(rawTotal, inc);
+    var cSteps = [
+      { label: "Meal bolus", expr: v.carbs + " g / " + v.icr, value: meal },
+      { label: "Correction", expr: "max(0, (" + v.glucose + " - " + v.target + ") / " + v.isf + ")", value: corr },
+      { label: "Subtract active insulin (IOB) from the correction", expr: "max(0, " + corr + " - " + iob + ")", value: r1(corrNet) },
+      { label: "Add meal cover back", expr: meal + " + " + r1(corrNet), value: r2(rawTotal) }
+    ];
+    var cxc = applyBolusCtx(rawTotal, inc, v.ctx, cSteps); rawTotal = cxc.raw;
+    var rounded = cxc.rounded;
+    cSteps.push({ label: "Round to " + inc + " unit", expr: "round(" + r2(rawTotal) + ")", value: rounded });
     return {
       result: r1(rawTotal), rounded: rounded, unit: "units",
       mealComponent: meal, correctionComponent: corr, correctionAfterIob: r1(corrNet), iobSubtracted: iob,
-      steps: [
-        { label: "Meal bolus", expr: v.carbs + " g / " + v.icr, value: meal },
-        { label: "Correction", expr: "max(0, (" + v.glucose + " - " + v.target + ") / " + v.isf + ")", value: corr },
-        { label: "Subtract active insulin (IOB) from the correction", expr: "max(0, " + corr + " - " + iob + ")", value: r1(corrNet) },
-        { label: "Add meal cover back", expr: meal + " + " + r1(corrNet), value: r2(rawTotal) },
-        { label: "Round to " + inc + " unit", expr: "round(" + r2(rawTotal) + ")", value: rounded }
-      ],
+      contextFactor: cxc.ctx.factor, contextApplied: cxc.ctx.applied,
+      steps: cSteps,
       formula: formula,
       assumptions: [
         "IOB is subtracted from the correction only, so a stacked correction is not double-counted.",
@@ -259,26 +297,15 @@
       out.push({ id: "exercise", label: "Before exercise", value: r1(dose * 0.5) + " to " + r1(dose * 0.75) + " units",
         detail: "Reduce the pre-exercise meal bolus by 25 to 50% (more for longer or more intense activity). Watch for delayed hypoglycaemia for up to 24 hours afterwards." });
     }
-    if (ctx.renal || ok(ctx.egfr)) {
-      var e = ok(ctx.egfr) ? ctx.egfr : null;
-      var mult = (ctx.dialysis || (e !== null && e < 10)) ? 0.5 : (e === null || e < 50) ? 0.75 : 1;
-      if (mult !== 1) {
-        out.push({ id: "renal", label: "If ICR/ISF not already renal-adjusted", value: r1(dose * mult) + " units",
-          detail: "Insulin is renally cleared" + (e !== null ? " (eGFR " + e + ")" : "") + ", so requirements fall to about " +
-            Math.round(mult * 100) + "% . Apply this ONLY if the ICR/ISF above were not already derived for this renal function - otherwise the reduction is already included and cutting again will under-dose." });
-      }
-    }
+    // Renal / hepatic / exercise are APPLIED to the dose (see bolusContextFactor), so
+    // here they only explain what was done - they are not repeated as suggestions.
     if (ctx.pregnancy) {
-      out.push({ id: "pregnancy", label: "Pregnancy targets", value: "fasting <95 mg/dL",
-        detail: "1-hour post-prandial under 140, 2-hour under 120 mg/dL. Requirements RISE through gestation, so ICR and ISF need frequent revision (ratios fall); they drop abruptly after delivery." });
+      out.push({ id: "pregnancy", label: "Pregnancy targets applied", value: "fasting <95 mg/dL",
+        detail: "1-hour post-prandial under 140, 2-hour under 120 mg/dL. The correction target is tightened rather than scaling the dose, so any increase comes from the target you can see and override. Requirements RISE through gestation (ICR/ISF need frequent revision) and drop abruptly after delivery." });
     }
     if (ctx.steroids) {
-      out.push({ id: "steroids", label: "On glucocorticoids", value: "expect higher prandial need",
-        detail: "Steroid hyperglycaemia is mainly post-prandial and daytime. Increase the PRANDIAL dose first and taper as the steroid reduces - no fixed multiplier applies." });
-    }
-    if (ctx.hepatic) {
-      out.push({ id: "hepatic", label: "Liver disease", value: "no fixed adjustment",
-        detail: "Requirements are unpredictable: resistance raises them, while impaired gluconeogenesis and reduced hepatic clearance raise hypoglycaemia risk (especially fasting/overnight). Dose at the low end and monitor." });
+      out.push({ id: "steroids", label: "On glucocorticoids", value: "not auto-increased",
+        detail: "Steroid hyperglycaemia is mainly post-prandial and daytime. Insulin is never auto-increased here - raising a dose silently is the one direction that can cause harm. Increase the PRANDIAL dose yourself and taper as the steroid reduces." });
     }
     return out;
   }
@@ -391,7 +418,7 @@
     roundDose: roundDose, mmol: mmol,
     correctionDose: correctionDose, mealBolus: mealBolus, activeInsulin: activeInsulin,
     combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd,
-    contextAdjust: contextAdjust, bolusContextAdvice: bolusContextAdvice,
+    contextAdjust: contextAdjust, bolusContextAdvice: bolusContextAdvice, bolusContextFactor: bolusContextFactor,
     basalInitiation: basalInitiation, pediatricInit: pediatricInit, dkaInsulin: dkaInsulin
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
