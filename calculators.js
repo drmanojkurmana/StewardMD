@@ -5407,17 +5407,68 @@
       return { v:s, u:"/30", i:b+". The MMSE is copyrighted (PAR Inc.) — administer the official form; banding here is indicative only. Ref: Folstein, J Psychiatr Res 1975." };
     } },
 
-  { id:"insulin_rules", cat:"Endocrine", icon:"", title:"Insulin Dosing Rules (500 / 1800)",
-    desc:"Estimates carbohydrate ratio and correction factor from total daily dose.",
+  { id:"insulin_rules", cat:"Endocrine", icon:"", title:"Insulin dosing — TDD, basal/bolus, ICR & correction",
+    desc:"Starting total daily dose (weight-based if insulin-naive), 50/50 basal–bolus split, carb ratio and correction factor/dose. Analogue (500/1800) vs regular human insulin (450/1500).",
     inputs:[
-      { id:"tdd", label:"Total daily insulin dose", type:"number", unit:"units/day", step:"1" }
+      { id:"type", label:"Prandial insulin", type:"select", opts:[
+        {v:"rapid",t:"Rapid-acting analogue — lispro / aspart / glulisine (500 & 1800 rules)"},
+        {v:"reg",t:"Regular human insulin — Actrapid / Huminsulin R (450 & 1500 rules)"} ] },
+      { id:"tdd", label:"Total daily insulin dose — if already on insulin", type:"number", unit:"units/day", step:"1", min:"0" },
+      { id:"wt", label:"Weight — to estimate TDD if insulin-naive", type:"number", unit:"kg", step:"0.5", min:"0" },
+      { id:"factor", label:"Starting intensity (used only when TDD is blank)", type:"select", opts:[
+        {v:"0.4",t:"0.4 U/kg/day — usual adult start"},
+        {v:"0.3",t:"0.3 U/kg/day — elderly, eGFR <30, lean, hypo-prone"},
+        {v:"0.2",t:"0.2 U/kg/day — very cautious (frail, recurrent hypoglycaemia)"},
+        {v:"0.5",t:"0.5 U/kg/day — standard / type 1 at diagnosis"},
+        {v:"0.7",t:"0.7 U/kg/day — obese, insulin-resistant"},
+        {v:"1",t:"1.0 U/kg/day — marked resistance, glucocorticoids"} ] },
+      { id:"glu", label:"Current glucose — optional, for a correction dose", type:"number", unit:"mg/dL", step:"1", min:"0" },
+      { id:"tgt", label:"Correction target", type:"number", unit:"mg/dL", step:"5", def:150 }
     ],
     compute:function(v){
-      if(!ok(v.tdd)||v.tdd<=0) return ERR;
-      var icr=500/v.tdd;
-      var cf_mgdl=1800/v.tdd;
-      var cf_mmol=100/v.tdd;
-      return { v:r1(icr), u:"g carb/unit", i:"Insulin-to-carbohydrate ratio ≈ 1 unit per "+r1(icr)+" g carbohydrate (500 rule). Correction factor ≈ "+r0(cf_mgdl)+" mg/dL ("+r1(cf_mmol)+" mmol/L) per unit (1800 rule, rapid-acting). A starting estimate only — titrate to the individual. Ref: standard diabetes reference." };
+      var rapid = (v.type !== "reg");
+      // Rule constants are insulin-specific: analogues 500/1800, regular human insulin 450/1500.
+      var carbK = rapid ? 500 : 450, corrK = rapid ? 1800 : 1500;
+      var kg = (ok(v.wt) && v.wt > 0) ? v.wt : null;
+      var f = Number(v.factor) || 0.4;
+      var tdd = (ok(v.tdd) && v.tdd > 0) ? v.tdd : null, est = false;
+      if (tdd == null && kg != null) { tdd = kg * f; est = true; }
+      if (tdd == null) return { err: "Enter the total daily insulin dose, or a weight to estimate it." };
+
+      var icr = carbK / tdd;                 // g carbohydrate per unit
+      var isf = corrK / tdd;                 // mg/dL fall per unit
+      var isfM = isf / 18;                   // mmol/L fall per unit
+      var basal = tdd * 0.5, meal = tdd * 0.5 / 3;
+      var tgt = (ok(v.tgt) && v.tgt > 0) ? v.tgt : 150;
+
+      var W = [];                            // safety flags shown above the numbers
+      if (kg != null && (tdd / kg) > 2) W.push("Total daily dose is <b>" + r1(tdd / kg) + " U/kg/day</b> — above the usual range (recheck the entry; >2 U/kg/day is rarely appropriate outside severe resistance).");
+      if (est) W.push("TDD is an <b>estimate</b> from weight (" + r1(kg) + " kg × " + f + " U/kg/day) — a starting point only, not a validated dose.");
+
+      var corr = "";
+      if (ok(v.glu)) {
+        if (v.glu < 70) {
+          corr = '<div class="mc-warn"><b>Glucose ' + r0(v.glu) + ' mg/dL — hypoglycaemia.</b> Do NOT give correction insulin. Treat: 15–20 g fast-acting oral carbohydrate (or IV dextrose / IM glucagon if unable to swallow), recheck in 15 min.</div>';
+        } else if (v.glu <= tgt) {
+          corr = "<div><b>Correction dose:</b> none — glucose " + r0(v.glu) + " mg/dL is at or below the target of " + r0(tgt) + " mg/dL.</div>";
+        } else {
+          var units = (v.glu - tgt) / isf;
+          corr = "<div><b>Correction dose:</b> ≈ <b>" + (Math.round(units * 2) / 2) + " units</b> &nbsp;<small>((" + r0(v.glu) + " − " + r0(tgt) + ") ÷ " + r0(isf) + ")</small>" +
+            "<div class='mc-sub'>Round to the nearest unit your pen/syringe delivers. This is a <i>correction</i> dose — add it to the mealtime dose, do not repeat it within the insulin's action window (stacking causes hypoglycaemia).</div></div>";
+        }
+      }
+
+      return {
+        v: r0(tdd), u: "units/day (TDD)",
+        i: (W.length ? '<div class="mc-warn">⚠️ ' + W.join("<br>") + "</div>" : "") +
+          "<div><b>Basal–bolus split (50/50):</b> basal ≈ <b>" + r0(basal) + " units</b> once daily" +
+          " · prandial ≈ <b>" + r0(meal) + " units</b> with each of 3 meals (" + r0(meal * 3) + " units total).</div>" +
+          "<div><b>Carb ratio (" + carbK + " rule):</b> 1 unit per <b>" + r1(icr) + " g</b> carbohydrate.</div>" +
+          "<div><b>Correction factor (" + corrK + " rule):</b> 1 unit lowers glucose ≈ <b>" + r0(isf) + " mg/dL</b> (" + r1(isfM) + " mmol/L).</div>" +
+          corr +
+          "<div class='mc-sub'>Rules assume <b>" + (rapid ? "rapid-acting analogue" : "regular human insulin") + "</b>; switching insulin type changes both constants. Estimates only — titrate to capillary glucose over days.</div>" +
+          "<div class='mc-warn'>Not for DKA/HHS — use a fixed-rate IV insulin infusion (0.1 U/kg/h) with fluids and potassium, not these rules. Reduce TDD ~25% if eGFR &lt;30 (insulin clearance falls); review with steroids, sepsis, fasting, hepatic impairment and pregnancy.</div>"
+      };
     } },
 
   { id:"romhilt_estes", cat:"Cardiovascular", icon:"", title:"Romhilt-Estes LVH Point Score",
@@ -6664,7 +6715,7 @@
     mipi:["mipi","mantle cell lymphoma","mantle cell prognosis"],
     iron_ingestion:["iron ingestion","elemental iron","iron overdose","iron poisoning"],
     mmse:["mmse","mini mental","folstein","cognitive screen","dementia score"],
-    insulin_rules:["insulin dosing","500 rule","1800 rule","carb ratio","correction factor","insulin sensitivity factor"],
+    insulin_rules:["insulin dosing","insulin calculator","insulin","500 rule","450 rule","1800 rule","1500 rule","carb ratio","carbohydrate ratio","icr","correction factor","correction dose","insulin sensitivity factor","isf","basal bolus","tdd","total daily dose","starting insulin","insulin naive"],
     romhilt_estes:["romhilt estes","lvh point score","left ventricular hypertrophy ecg"],
     dapt:["dapt score","dual antiplatelet","stent duration","yeh score"],
     mehran:["mehran score","contrast induced nephropathy","cin","contrast nephropathy"],
@@ -7000,7 +7051,7 @@
     mipi:"Hoster E, et al. Blood 2008;111(2):558–65 (MIPI).",
     iron_ingestion:"Standard toxicology reference (elemental iron dose thresholds).",
     mmse:"Folstein MF, et al. J Psychiatr Res 1975;12(3):189–98 (MMSE; © PAR Inc.).",
-    insulin_rules:"Standard diabetes reference (500 rule and 1800/1500 rule).",
+    insulin_rules:"ADA Standards of Care (insulin initiation ~0.2–0.5 U/kg/day, 50/50 basal–bolus); 500/450 carbohydrate rule and 1800/1500 correction rule — analogue vs regular human insulin. DKA/HHS: fixed-rate IV infusion 0.1 U/kg/h (JBDS/ADA), not these rules.",
     romhilt_estes:"Romhilt DW, Estes EH. Am Heart J 1968;75(6):752–8.",
     dapt:"Yeh RW, et al. JAMA 2016;315(16):1735–49 (DAPT score).",
     mehran:"Mehran R, et al. J Am Coll Cardiol 2004;44(7):1393–9 (contrast nephropathy).",
@@ -7535,6 +7586,11 @@
       ".mc-res-num{font:800 26px var(--sans,system-ui);color:var(--teal,#0a9396)}",
       ".mc-res-num small{font-size:13px;font-weight:700;color:var(--slate,#555)}",
       ".mc-res-i{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.55;margin-top:7px}",
+      ".mc-res-i>div{margin-top:6px}",
+      // Safety callout + secondary caveat inside a result (e.g. insulin dosing guards).
+      ".mc-warn{background:var(--warn-soft,#fef3c7);border:1px solid var(--warn,#b45309);color:#7c4a03;border-radius:9px;padding:8px 10px;margin-top:8px;font:600 12px var(--sans,system-ui);line-height:1.5}",
+      "body.dark .mc-warn,body.v3-dark .mc-warn{background:#3a2a05;color:#f0c060;border-color:#8a6a10}",
+      ".mc-sub{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.5;margin-top:4px}",
       ".mc-res-i b{color:var(--teal,#0a9396)}",
       ".mc-res-err{font:600 12.5px var(--sans,system-ui);color:var(--slate-soft,#888);padding:11px;border:1px dashed var(--line,#e5e5e0);border-radius:10px;text-align:center}",
       ".mc-empty{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:30px;text-align:center}",
