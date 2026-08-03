@@ -277,32 +277,55 @@ test("bolusContextAdvice: exercise gives the 25-50% pre-exercise range", () => {
   assert.equal(ex.value, "4 to 6 units");        // 50% .. 75% of 8
 });
 
-test("bolusContextAdvice: renal gives a banded figure, conditioned on ICR/ISF", () => {
-  const a30 = E.bolusContextAdvice(8, { renal: true, egfr: 30 }).find(x => x.id === "renal");
-  assert.equal(a30.value, "6 units");            // 75%
-  assert.ok(/not already/i.test(a30.detail));    // must warn against double-counting
-  const a5 = E.bolusContextAdvice(8, { renal: true, egfr: 5 }).find(x => x.id === "renal");
-  assert.equal(a5.value, "4 units");             // 50%
-});
-
-test("bolusContextAdvice: eGFR above 50 adds no renal row", () => {
-  assert.equal(E.bolusContextAdvice(8, { egfr: 80 }).filter(x => x.id === "renal").length, 0);
-});
-
 test("bolusContextAdvice: pregnancy surfaces the tighter targets", () => {
   const p = E.bolusContextAdvice(6, { pregnancy: true }).find(x => x.id === "pregnancy");
   assert.match(p.value, /95/);
   assert.match(p.detail, /140/);
 });
 
-test("bolusContextAdvice: hepatic and steroids advise without a fabricated number", () => {
-  const h = E.bolusContextAdvice(6, { hepatic: true }).find(x => x.id === "hepatic");
-  assert.match(h.value, /no fixed adjustment/i);
+test("bolusContextAdvice: steroids explain why insulin is never auto-increased", () => {
   const s = E.bolusContextAdvice(6, { steroids: true }).find(x => x.id === "steroids");
+  assert.match(s.value, /not auto-increased/i);
   assert.match(s.detail, /PRANDIAL/);
 });
 
-test("bolusContextAdvice: multiple contexts each get a row; zero dose returns none", () => {
-  assert.equal(E.bolusContextAdvice(8, { exercise: true, renal: true, egfr: 30, hepatic: true }).length, 3);
+test("bolusContextAdvice: zero dose returns nothing", () => {
   assert.equal(E.bolusContextAdvice(0, { exercise: true }).length, 0);
+});
+
+
+/* ── Context now APPLIES to the bolus (reported: every context gave the same dose) ── */
+test("bolusContextFactor: lowering contexts scale, raising contexts never do", () => {
+  assert.equal(E.bolusContextFactor({}).factor, 1);
+  assert.equal(E.bolusContextFactor({ renal: true, egfr: 30 }).factor, 0.75);
+  assert.equal(E.bolusContextFactor({ renal: true, dialysis: true }).factor, 0.5);
+  assert.equal(E.bolusContextFactor({ hepatic: true }).factor, 0.75);
+  assert.equal(E.bolusContextFactor({ exercise: true }).factor, 0.75);
+  // never auto-INCREASE insulin
+  assert.equal(E.bolusContextFactor({ pregnancy: true }).factor, 1);
+  assert.equal(E.bolusContextFactor({ steroids: true }).factor, 1);
+});
+
+test("mealBolus: each context changes the dose (45 g / ICR 10 = 5 u)", () => {
+  const d = (ctx) => E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx }).rounded;
+  assert.equal(d({}), 5);
+  assert.equal(d({ renal: true, egfr: 30 }), 3);       // was 5
+  assert.equal(d({ renal: true, dialysis: true }), 2);
+  assert.equal(d({ hepatic: true }), 3);               // was 5
+  assert.equal(d({ exercise: true }), 3);
+});
+
+test("contexts compound and are shown as steps", () => {
+  const r = E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx: { renal: true, egfr: 30, hepatic: true } });
+  assert.equal(r.contextFactor, 0.56);                 // 0.75 x 0.75
+  assert.equal(r.contextApplied.length, 2);
+  assert.ok(r.steps.some(s => /Context-adjusted dose/.test(s.label)));
+});
+
+test("correction and combined also apply the context factor", () => {
+  const c = E.correctionDose({ glucose: 250, target: 150, isf: 50, increment: 1, ctx: { renal: true, egfr: 30 } });
+  assert.equal(c.rounded, 2);                          // 2 u gross -> x0.75 = 1.5 -> 2
+  assert.equal(c.contextFactor, 0.75);
+  const k = E.combinedDose({ carbs: 60, icr: 10, glucose: 150, target: 150, isf: 50, iob: 0, increment: 1, ctx: { hepatic: true } });
+  assert.equal(k.rounded, 5);                          // 6 u meal -> x0.75 = 4.5 -> 5
 });

@@ -756,8 +756,8 @@
 
   function compute() {
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
-    if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment });
-    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment });
+    if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment, ctx: st.ctx });
+    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment, ctx: st.ctx });
     if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment, ctx: st.ctx });
     if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
     if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
@@ -765,7 +765,7 @@
     if (m === "pediatric") return E.pediatricInit({ weightKg: st.ctx.weightKg, stage: st.pedStage, increment: st.increment });
     if (m === "dka") return E.dkaInsulin({ weightKg: st.ctx.weightKg, ratePerKg: st.dkaRate,
       maxRate: (st.dkaMax !== "" && isFinite(Number(st.dkaMax)) ? Number(st.dkaMax) : undefined), paeds: st.dkaPaeds });
-    return E.combinedDose({ carbs: st.carbs, icr: st.icr, glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment });
+    return E.combinedDose({ carbs: st.carbs, icr: st.icr, glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment, ctx: st.ctx });
   }
   function safety(res) {
     var S = window.INSULIN_SAFETY, m = st.mode;
@@ -920,7 +920,19 @@
     if (a === "pedstage") { st.pedStage = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "dkarate") { st.dkaRate = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "dkapaeds") { st.dkaPaeds = !st.dkaPaeds; renderInputs(); render(); return; }
-    if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
+    if (a === "ctx") {
+      var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]);
+      // Pregnancy raises insulin need, and auto-increasing a dose is the one direction
+      // that can kill — so instead of a hidden multiplier we tighten the TARGET (which
+      // is a visible field the clinician can see and override). A lower target legitimately
+      // increases the correction. Restored when pregnancy is switched off.
+      if (k === "pregnancy") {
+        if (st.ctx.pregnancy) { if (st.target > 110) { st._preTarget = st.target; st.target = 100; } }
+        else if (st._preTarget) { st.target = st._preTarget; st._preTarget = null; }
+        renderInputs();
+      }
+      render(); return;
+    }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
     if (a === "tri") { var tv = parseInt(t.getAttribute("data-v"), 10); st.ctx.trimester = (st.ctx.trimester === tv ? null : tv); render(); return; }
     if (a === "convfreq") { st.convFromFreq = t.getAttribute("data-v"); paint(); return; }
