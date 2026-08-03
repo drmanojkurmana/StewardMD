@@ -521,3 +521,12 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
 .ins-ctxadj-top .k { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--ins-ink); }
 .ins-ctxadj-top .v { font-size: 14px; font-weight: 800; color: var(--ins-accent, #14b8a6); white-space: nowrap; }
 .ins-ctxadj-row .d { margin-top: 4px; font-size: 11.5px; line-height: 1.5; color: var(--ins-muted); }
+
+/* ---- Simple / Advanced level toggle ---- */
+.ins-levelrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.ins-level { display: inline-flex; gap: 4px; background: var(--ins-surface); border: 1px solid var(--ins-line);
+  border-radius: 999px; padding: 3px; flex: 0 0 auto; }
+.ins-level button { border: none; background: none; color: var(--ins-muted); border-radius: 999px;
+  padding: 7px 16px; font-family: var(--ins-mono); font-weight: 600; font-size: 13px; cursor: pointer; }
+.ins-level button[aria-pressed="true"] { background: var(--ins-primary); color: #fff; }
+.ins-level-h { flex: 1; min-width: 180px; font-size: 11.5px; line-height: 1.45; color: var(--ins-muted); }
