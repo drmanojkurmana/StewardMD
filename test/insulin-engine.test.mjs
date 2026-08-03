@@ -140,3 +140,54 @@ test("dkaInsulin: caps at protocol max, carries K+ + trained-clinician notes + m
 test("dkaInsulin: missing weight returns null", () => {
   assert.equal(E.dkaInsulin({ weightKg: 0 }).result, null);
 });
+
+/* ── Regression: IOB must never eat into carbohydrate cover ─────────────────
+ * Previously `total = meal + correction - IOB` subtracted active insulin from the
+ * WHOLE bolus, so a patient about to eat received far less than their carbs needed
+ * (60 g at ICR 10 with 3 u IOB and glucose at target gave 3 u instead of 6 u) —
+ * a direct cause of post-prandial hyperglycaemia, and it contradicted the module's
+ * own stated assumption "meal coverage is never reduced". IOB now nets off the
+ * CORRECTION only, which is standard bolus-calculator behaviour. */
+test("combinedDose: IOB never reduces meal cover (at-target, IOB > correction)", () => {
+  const r = E.combinedDose({ carbs: 60, icr: 10, glucose: 120, target: 120, isf: 50, iob: 3, increment: 1 });
+  assert.equal(r.mealComponent, 6);
+  assert.equal(r.correctionComponent, 0);
+  assert.equal(r.correctionAfterIob, 0);       // correction floored, not driven negative
+  assert.equal(r.rounded, 6);                  // was 3 before the fix
+});
+
+test("combinedDose: IOB exceeding the correction leaves meal cover intact", () => {
+  const r = E.combinedDose({ carbs: 45, icr: 15, glucose: 180, target: 120, isf: 50, iob: 5, increment: 1 });
+  assert.equal(r.mealComponent, 3);            // 45/15
+  assert.equal(r.correctionComponent, 1.2);    // (180-120)/50
+  assert.equal(r.correctionAfterIob, 0);       // 1.2 - 5 -> floored
+  assert.equal(r.rounded, 3);                  // was 0 before the fix (whole meal missed)
+  assert.ok(r.clinicalNotes.some(n => /only the meal bolus/i.test(n)));
+});
+
+test("combinedDose: IOB below the correction still nets off correctly", () => {
+  const r = E.combinedDose({ carbs: 60, icr: 10, glucose: 250, target: 120, isf: 50, iob: 1, increment: 1 });
+  assert.equal(r.correctionComponent, 2.6);
+  assert.equal(r.correctionAfterIob, 1.6);
+  assert.equal(r.rounded, 8);                  // 6 + 1.6 -> 7.6 -> 8 (unchanged behaviour)
+});
+
+/* ── Regression: pure correction must account for active insulin ──────────── */
+test("correctionDose: subtracts IOB to prevent stacking", () => {
+  const r = E.correctionDose({ glucose: 250, target: 120, isf: 50, iob: 1.5, increment: 1 });
+  assert.equal(r.grossCorrection, 2.6);
+  assert.equal(r.iobSubtracted, 1.5);
+  assert.equal(r.rounded, 1);                  // 2.6 - 1.5 = 1.1 -> 1
+  assert.ok(/IOB/.test(r.formula));
+});
+
+test("correctionDose: IOB covering the whole gap gives no extra insulin", () => {
+  const r = E.correctionDose({ glucose: 200, target: 150, isf: 50, iob: 4, increment: 1 });
+  assert.equal(r.rounded, 0);                  // 1 u gross, 4 u already active
+});
+
+test("correctionDose: without IOB behaves as before but flags the risk", () => {
+  const r = E.correctionDose({ glucose: 250, target: 120, isf: 50, increment: 1 });
+  assert.equal(r.rounded, 3);                  // 2.6 -> 3, unchanged
+  assert.ok(r.assumptions.some(a => /may stack/i.test(a)));
+});

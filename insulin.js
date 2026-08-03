@@ -679,9 +679,11 @@
       h += '<div class="ins-field"><div class="ins-grid2">';
       if (glucoseMode(m)) h += mini("isf", "ISF " + isfUnit(), st.isf);
       if (m === "combined" || m === "meal") h += mini("icr", "ICR g/u", st.icr);
-      if (m === "combined") h += mini("iob", "Active insulin (IOB) u", st.iob);
+      // IOB matters just as much for a PURE correction (the classic stacking scenario) as
+      // for a combined bolus, so it is collected in both.
+      if (glucoseMode(m)) h += mini("iob", "Active insulin (IOB) u", st.iob);
       h += '</div></div>';
-      if (m === "combined") {
+      if (glucoseMode(m)) {
         var nd = recentBolusDoses().length;
         h += '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
           (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
@@ -728,7 +730,7 @@
   function compute() {
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
     if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment });
-    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, increment: st.increment });
+    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment });
     if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment });
     if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
     if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
@@ -741,7 +743,9 @@
   function safety(res) {
     var S = window.INSULIN_SAFETY, m = st.mode;
     if (["isf", "icr", "iob"].indexOf(m) > -1) return S.evaluate({}, { noGlucose: true }, res);
-    var input = glucoseMode(m) ? { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: m === "combined" ? st.iob : 0 } : { noGlucose: true };
+    // Pass the real IOB for BOTH glucose modes — a pure correction on top of active
+    // insulin is the commonest stacking error, so the caution must fire there too.
+    var input = glucoseMode(m) ? { glucose: toMgdl(st.glucose), target: toMgdl(st.target), iob: st.iob } : { noGlucose: true };
     var boluses = ["combined", "meal", "correction"].indexOf(m) > -1;
     var ctx = { age: st.ctx.age, weightKg: st.ctx.weightKg, pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic,
       exercise: st.ctx.exercise, steroids: st.ctx.steroids };
@@ -780,7 +784,10 @@
     var m = st.mode;
     var actionable = ["combined", "meal", "correction", "basal", "pediatric", "dka"].indexOf(m) > -1;
     var cardTitle = (m === "isf" || m === "icr") ? "Result" : m === "iob" ? "Active insulin (IOB)" : m === "dka" ? "Infusion rate" : (m === "basal" || m === "pediatric") ? "Suggested regimen" : "Recommended dose";
-    var extraRaw = m === "combined" ? 'meal ' + res.mealComponent + 'u + correction ' + res.correctionComponent + 'u - IOB ' + res.iobSubtracted + 'u' : "";
+    // Mirror the engine exactly: IOB nets off the CORRECTION, never the meal cover.
+    var extraRaw = m === "combined"
+      ? 'meal ' + res.mealComponent + 'u + correction ' + (res.iobSubtracted ? '(' + res.correctionComponent + ' - IOB ' + res.iobSubtracted + ' = ' + res.correctionAfterIob + ')u' : res.correctionComponent + 'u')
+      : (m === "correction" && res.iobSubtracted) ? 'correction ' + res.grossCorrection + 'u - IOB ' + res.iobSubtracted + 'u' : "";
     var unitNote = mmolMode() ? ' &middot; working shown in mg/dL (canonical); entries converted from mmol/L' : '';
     var fromraw = 'Computed ' + res.result + ' ' + res.unit + (doseUnitMode(m) ? ', rounded to ' + st.increment + ' unit' : '') + (extraRaw ? ' &middot; ' + extraRaw : '') + unitNote;
     var monitoringHTML = (res.monitoring && res.monitoring.length) ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + res.monitoring.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' : "";
