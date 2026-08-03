@@ -30,7 +30,9 @@
   function bolusContextFactor(ctx) {
     ctx = ctx || {};
     var f = 1, applied = [];
-    if (ctx.renal || ok(ctx.egfr)) {
+    // STRICTLY gated on the chip: a stale eGFR left in state must never keep
+    // reducing the dose after Renal is unticked.
+    if (ctx.renal) {
       var e = ok(ctx.egfr) ? ctx.egfr : null;
       var m = (ctx.dialysis || (e !== null && e < 10)) ? 0.5 : (e === null || e < 50) ? 0.75 : 1;
       if (m !== 1) { f *= m; applied.push({ id: "renal", mult: m, why: "Renal" + (e !== null ? " (eGFR " + e + ")" : "") + ": insulin is renally cleared, requirement falls to " + Math.round(m * 100) + "%" }); }
@@ -242,6 +244,7 @@
     var out = { suggestedFactor: null, multiplier: 1, applied: [], advisories: [] };
 
     if (ctx.pregnancy) {
+      // trimester only has meaning while Pregnancy is selected (this whole block is gated on it)
       var tri = ctx.trimester === 1 ? 1 : ctx.trimester === 2 ? 2 : ctx.trimester === 3 ? 3 : null;
       var triFactor = { 1: 0.7, 2: 0.8, 3: 0.9 };
       if (tri) {
@@ -255,7 +258,7 @@
       out.advisories.push("Requirements often DIP in early pregnancy (hypoglycaemia risk) and FALL abruptly after delivery - reduce the dose immediately post-partum.");
     }
 
-    if (ctx.renal || ok(ctx.egfr)) {
+    if (ctx.renal) {                                  // chip-gated, see bolusContextFactor
       var e = ok(ctx.egfr) ? ctx.egfr : null;
       if (ctx.dialysis || (e !== null && e < 10)) {
         out.multiplier *= 0.5;

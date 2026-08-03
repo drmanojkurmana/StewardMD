@@ -47,3 +47,8 @@ test("exercise and steroid flags each raise a caution", () => {
   assert.ok(w.find(x => x.id === "exercise"));
   assert.ok(w.find(x => x.id === "steroids"));
 });
+
+test("renal warning is gated on the chip, not a leftover eGFR", () => {
+  assert.equal(S.evaluate({ renal: false, egfr: 20 }, { noGlucose: true }, {}).filter(w => w.id === "renal").length, 0);
+  assert.equal(S.evaluate({ renal: true, egfr: 20 }, { noGlucose: true }, {}).filter(w => w.id === "renal").length, 1);
+});

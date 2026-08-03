@@ -329,3 +329,33 @@ test("correction and combined also apply the context factor", () => {
   const k = E.combinedDose({ carbs: 60, icr: 10, glucose: 150, target: 150, isf: 50, iob: 0, increment: 1, ctx: { hepatic: true } });
   assert.equal(k.rounded, 5);                          // 6 u meal -> x0.75 = 4.5 -> 5
 });
+
+/* ── Every context effect is gated on ITS OWN chip ──────────────────────────
+ * Requirement: the eGFR box appears, and the dose is based on eGFR, ONLY when
+ * Renal is selected. Previously `ctx.renal || ok(ctx.egfr)` meant a leftover
+ * eGFR kept reducing the dose after Renal was unticked — a silent reduction
+ * with nothing on screen to explain it. Same principle for pregnancy. */
+test("renal OFF with a stale eGFR does not touch the bolus", () => {
+  assert.equal(E.bolusContextFactor({ renal: false, egfr: 20 }).factor, 1);
+  assert.equal(E.bolusContextFactor({ egfr: 8, dialysis: true }).factor, 1);   // no chip -> no effect
+  assert.equal(E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx: { renal: false, egfr: 20 } }).rounded, 5);
+});
+
+test("renal ON uses the eGFR that is now visible", () => {
+  assert.equal(E.bolusContextFactor({ renal: true, egfr: 20 }).factor, 0.75);
+  assert.equal(E.mealBolus({ carbs: 45, icr: 10, increment: 1, ctx: { renal: true, egfr: 20 } }).rounded, 3);
+});
+
+test("renal OFF with a stale eGFR does not touch weight-based initiation", () => {
+  const r = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: false, egfr: 20 } });
+  assert.equal(r.contextMultiplier, 1);
+  assert.equal(r.tdd, 32);
+  assert.equal(E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: true, egfr: 20 } }).tdd, 24);
+});
+
+test("pregnancy OFF with a stale trimester does not change the starting dose", () => {
+  const off = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: false, trimester: 3 } });
+  assert.equal(off.tdd, 28);                       // plain 70 x 0.4
+  assert.equal(off.contextFactor, 0.4);
+  assert.equal(E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true, trimester: 3 } }).tdd, 63);
+});
