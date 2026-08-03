@@ -51,27 +51,44 @@ try {
   ok(await has('[data-ins="adv"]'), "Simple/Advanced toggle is present");
   let modes = JSON.parse(await modeLabels() || "[]");
   console.log("   simple modes:", modes.join(", "));
-  ok(modes.length === 4, "Simple shows only the 4 bedside modes (was 9 buttons)");
+  ok(JSON.stringify(modes) === JSON.stringify(["basal", "correction", "meal", "combined"]),
+    "Simple shows exactly Basal → Correction → Meal → Combined, in that order");
   ok(!modes.includes("dka") && !modes.includes("pediatric"), "specialist protocols (DKA, paediatric) hidden in Simple");
   ok(!modes.includes("isf") && !modes.includes("icr") && !modes.includes("iob"), "ratio-derivation calculators hidden in Simple");
   ok(!(await has('[data-ins="round"]')), "rounding preference hidden in Simple");
   // SAFETY: these must survive the simplification
-  ok(await has('[data-f="iob"]'), "IOB field STILL shown in Simple (prevents dose stacking)");
+  await ev(`var b=[].filter.call(document.querySelectorAll('[data-ins="mode"]'),function(x){return x.getAttribute('data-mode')==='correction';})[0]; if(b) b.click(); return 1;`); await sleep(400);
+  ok(await has('[data-f="iob"]'), "IOB field STILL shown in Simple correction (prevents dose stacking)");
   ok(await has('[data-ins="ctx"]'), "patient-context chips STILL shown in Simple");
 
   // ---- Advanced ----
   await ev(`document.querySelector('[data-ins="adv"][data-v="1"]').click(); return 1;`); await sleep(500);
   modes = JSON.parse(await modeLabels() || "[]");
   console.log("   advanced modes:", modes.join(", "));
-  ok(modes.length === 9, "Advanced exposes all 9 calculators");
-  ok(modes.includes("dka") && modes.includes("isf") && modes.includes("iob"), "Advanced restores DKA / ISF / IOB");
-  ok(await has('[data-ins="round"]'), "rounding preference returns in Advanced");
+  ok(JSON.stringify(modes) === JSON.stringify(["isf", "icr", "iob", "pediatric", "dka"]),
+    "Advanced shows ONLY the remaining 5 (disjoint from Simple, not a superset)");
+  ok(!modes.includes("combined") && !modes.includes("basal"), "Advanced does not repeat the Simple tabs");
+  // Rounding shows on dose modes only; in Advanced that is Pediatric (ISF/ICR/IOB have no dose to round).
+  await ev(`var b=[].filter.call(document.querySelectorAll('[data-ins="mode"]'),function(x){return x.getAttribute('data-mode')==='pediatric';})[0]; if(b) b.click(); return 1;`); await sleep(400);
+  ok(await has('[data-ins="round"]'), "rounding shows on an Advanced dose mode (Pediatric)");
 
-  // ---- switching back from an Advanced-only tab must not strand the user ----
+  // ---- neither direction may strand the user on a hidden tab ----
   await ev(`var b=[].filter.call(document.querySelectorAll('[data-ins="mode"]'),function(x){return x.getAttribute('data-mode')==='dka';})[0]; b.click(); return 1;`); await sleep(400);
   await ev(`document.querySelector('[data-ins="adv"][data-v="0"]').click(); return 1;`); await sleep(500);
-  const active = await ev(`var b=document.querySelector('[data-ins="mode"][aria-pressed="true"]'); return b?b.getAttribute('data-mode'):null;`);
-  ok(active === "combined", "leaving Advanced from a hidden tab falls back to Combined (no dead screen)");
+  let active = await ev(`var b=document.querySelector('[data-ins="mode"][aria-pressed="true"]'); return b?b.getAttribute('data-mode'):null;`);
+  ok(active === "basal", "Advanced → Simple from a hidden tab lands on the first Simple tab");
+  await ev(`document.querySelector('[data-ins="adv"][data-v="1"]').click(); return 1;`); await sleep(500);
+  active = await ev(`var b=document.querySelector('[data-ins="mode"][aria-pressed="true"]'); return b?b.getAttribute('data-mode'):null;`);
+  ok(active === "isf", "Simple → Advanced lands on the first Advanced tab (no dead screen either way)");
+  await ev(`document.querySelector('[data-ins="adv"][data-v="0"]').click(); return 1;`); await sleep(400);
+
+  // Decluttering Simple must not make rounding unreachable — it lives in Settings,
+  // whose gear sits on the dashboard header, so reload to get back there.
+  await call("Page.navigate", { url: BASE }); await sleep(1200);
+  for (let i = 0; i < 40; i++) { await sleep(300); if (await ev(`return !!(window.INSULIN && window.INSULIN.open);`)) break; }
+  await ev(`window.INSULIN.open(); return 1;`); await sleep(700);
+  await ev(`var b=document.querySelector('[data-ins="go-settings"]'); if(b) b.click(); return 1;`); await sleep(700);
+  ok(await has('[data-ins="round"]'), "rounding preference is still reachable in Settings");
 
   // ---- preference persists ----
   ok(await ev(`return (localStorage.getItem(Object.keys(localStorage).filter(function(k){return k.indexOf('smd_insulin_set')===0;})[0]||'')||'').indexOf('advMode')>-1;`) !== false, "level preference is persisted to settings");
