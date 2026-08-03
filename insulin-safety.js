@@ -47,7 +47,7 @@
       out.push(W("pregnancy", "caution", "Pregnancy",
         "Requirements rise through gestation (about 0.7 u/kg/day in the 1st trimester, 0.8 in the 2nd, 0.9 to 1.0 in the 3rd) and targets are tighter: fasting under 95 mg/dL, 1-hour post-prandial under 140, 2-hour under 120. Requirements fall abruptly after delivery."));
 
-    if (context.renal || num(context.egfr)) {
+    if (context.renal) {                              // chip-gated: a stale eGFR must not raise a renal warning
       var e = num(context.egfr) ? context.egfr : null;
       var band = (context.dialysis || (e !== null && e < 10)) ? "about 50% of the usual dose"
         : (e === null || e < 50) ? "about 75% of the usual dose" : null;
