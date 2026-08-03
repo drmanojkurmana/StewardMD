@@ -4206,7 +4206,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default" };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "standard" };
+  var APPEARANCES = [{ id: "standard", name: "Standard" }, { id: "frosted", name: "Frosted" }, { id: "liquid", name: "Liquid" }, { id: "tinted3d", name: "Tinted 3D" }, { id: "blend", name: "Blend" }];
   var THEMES = [
     { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
     { id: "blue", name: "Clinical Blue", accent: "#1560b0", paper: "#f5f7fa" },
@@ -4240,12 +4241,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (o && o.density in DENS) {
         var okTheme = THEMES.some(function (t) { return t.id === o.theme; });
         var okFont = FONTS.some(function (f) { return f.id === o.font; });
+        var okAppear = APPEARANCES.some(function (a) { return a.id === o.appearance; });
         return {
           fontScale: Math.min(1.25, Math.max(.8, +o.fontScale || 1)),
           density: o.density, autoFit: !!o.autoFit,
           theme: okTheme ? o.theme : "classic",
           font: okFont ? o.font : "plex",
-          headingStyle: o.headingStyle === "script" ? "script" : "default"
+          headingStyle: o.headingStyle === "script" ? "script" : "default",
+          appearance: okAppear ? o.appearance : "standard"
         };
       }
     } catch (e) {}
@@ -4266,6 +4269,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
     var el = document.documentElement;
     if (ds.theme && ds.theme !== "classic") el.setAttribute("data-theme", ds.theme); else el.removeAttribute("data-theme");
+    if (ds.appearance && ds.appearance !== "standard") el.setAttribute("data-appearance", ds.appearance); else el.removeAttribute("data-appearance");
     if (ds.font && ds.font !== "plex") el.setAttribute("data-font", ds.font); else el.removeAttribute("data-font");
     if (ds.headingStyle === "script") { el.setAttribute("data-head", "script"); ensureFont(SCRIPT_FONT); } else el.removeAttribute("data-head");
     var f = FONTS.filter(function (x) { return x.id === ds.font; })[0]; if (f && f.web) ensureFont(f.web);
@@ -4289,6 +4293,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
         THEMES.map(function (t) { return '<button class="hv-th" data-t="' + t.id + '" style="--sw-paper:' + t.paper + ';--sw-acc:' + t.accent + '"><span class="hv-th-dot"></span><span class="hv-th-nm">' + t.name + '</span></button>'; }).join("") +
       '</div></div>' +
+      '<div class="hv-d-sec"><h4>App appearance</h4><div class="hv-fonts" id="hvAppear">' +
+        APPEARANCES.map(function (a) { return '<button class="hv-fn" data-a="' + a.id + '">' + a.name + '</button>'; }).join("") +
+      '</div><div class="hv-info" style="margin-top:6px">Liquid-glass styling across the app. The ICU dashboard is never affected.</div></div>' +
       '<div class="hv-d-sec"><h4>Font</h4><div class="hv-fonts" id="hvFont">' +
         FONTS.map(function (f) { return '<button class="hv-fn" data-f="' + f.id + '" data-font="' + f.id + '">' + f.name + '</button>'; }).join("") +
       '</div></div>' +
@@ -4305,6 +4312,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (hp) hp.addEventListener("click", function () { var on = !(window.SMD_HAPTICS && SMD_HAPTICS.enabled()); if (window.SMD_HAPTICS) { SMD_HAPTICS.setEnabled(on); if (on) SMD_HAPTICS.medium(); } refreshD(); });
     s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-f"); var f = FONTS.filter(function (x) { return x.id === id; })[0]; if (f && f.web) ensureFont(f.web); ds.font = id; applyD(); refreshD(); }); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();
@@ -4320,6 +4328,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var hp = s.querySelector("#hvHaptics"); if (hp) hp.classList.toggle("on", !!(window.SMD_HAPTICS && SMD_HAPTICS.enabled()));
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
+    s.querySelectorAll("#hvAppear button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-a") === ds.appearance); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-h") === ds.headingStyle); });
   }
