@@ -97,7 +97,7 @@
     dkaRate: 0.1, dkaMax: "", pedStage: "prepubertal", dkaPaeds: false, advAck: false,
     libQ: "", libClass: "all", libOpen: null, compare: [],
     patientId: null, patientName: "", editP: null, patQ: "",
-    convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convAck: false,
+    convFrom: "glargine100", convTo: "degludec", convDose: 20, convReason: "", convFromFreq: "bd", convAck: false,
     histFilter: "all" };
 
   function initState() {
@@ -114,7 +114,7 @@
     st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
-    st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convAck = false;
+    st.convFrom = "glargine100"; st.convTo = "degludec"; st.convDose = 20; st.convReason = ""; st.convFromFreq = "bd"; st.convAck = false;
   }
 
   /* ---------- icons ---------- */
@@ -537,6 +537,11 @@
     return '<div class="ins-card ins-bf"><div class="ins-card-t">Switch details</div>' +
         '<div class="ins-field"><div class="ins-lab">Current insulin</div><select class="ins-select" data-ins="conv-sel" data-k="convFrom">' + convInsOpts(st.convFrom) + '</select></div>' +
         '<div class="ins-field"><div class="ins-lab">Current total daily dose <span class="u">units</span></div>' + stepper("convDose", st.convDose, 1) + '</div>' +
+        // Once- vs twice-daily NPH changes the starting dose per labelling (20%
+        // reduction applies only when coming off twice-daily), so ask when it matters.
+        (st.convFrom === "nph" ? '<div class="ins-field"><div class="ins-lab">Current NPH frequency</div><div class="ins-chips">' +
+          '<button class="ins-chip" data-ins="convfreq" data-v="bd" aria-pressed="' + (st.convFromFreq !== "od" ? "true" : "false") + '">Twice daily</button>' +
+          '<button class="ins-chip" data-ins="convfreq" data-v="od" aria-pressed="' + (st.convFromFreq === "od" ? "true" : "false") + '">Once daily</button></div></div>' : '') +
         '<div class="ins-field"><div class="ins-lab">Target insulin</div><select class="ins-select" data-ins="conv-sel" data-k="convTo">' + convInsOpts(st.convTo) + '</select></div>' +
         '<div class="ins-field"><div class="ins-lab">Reason for switching</div><select class="ins-select" data-ins="conv-sel" data-k="convReason">' + ropts + '</select></div>' +
       '</div><div id="insConvOut"></div>';
@@ -544,7 +549,7 @@
   function renderConvert() {
     var out = document.getElementById("insConvOut"); if (!out || !window.INSULIN_CONVERT) return;
     st.convAck = false;
-    var res = window.INSULIN_CONVERT.convert({ fromId: st.convFrom, toId: st.convTo, dose: st.convDose, reason: st.convReason });
+    var res = window.INSULIN_CONVERT.convert({ fromId: st.convFrom, toId: st.convTo, dose: st.convDose, reason: st.convReason, fromFreq: st.convFromFreq });
     if (res.error) { out.innerHTML = '<div class="ins-card ins-result"><div class="ins-card-t">Suggested regimen</div><p style="color:var(--ins-muted);font-size:13px;margin:0">' + res.error + '</p></div>'; return; }
     var headline;
     if (res.suggested && typeof res.suggested === "object") {
@@ -904,6 +909,7 @@
     if (a === "ctx") { var k = t.getAttribute("data-k"); st.ctx[k] = !st.ctx[k]; t.setAttribute("aria-pressed", st.ctx[k]); render(); return; }
     if (a === "peds") { st.ctx.age = st.ctx.age < 18 ? 40 : 8; t.setAttribute("aria-pressed", st.ctx.age < 18); render(); return; }
     if (a === "tri") { var tv = parseInt(t.getAttribute("data-v"), 10); st.ctx.trimester = (st.ctx.trimester === tv ? null : tv); render(); return; }
+    if (a === "convfreq") { st.convFromFreq = t.getAttribute("data-v"); paint(); return; }
     if (a === "iob-est") {
       var est = estimateIOB(); st.iob = est.iob;
       var bd = bolusInsulin();

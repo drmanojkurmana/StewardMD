@@ -35,11 +35,31 @@
       out.monitoring.push("Check pre-meal and 2-hour post-meal glucose; adjust the meal ratio to the post-prandial response.");
     } else if (fb && tb) {
       out.kind = "Basal switch";
-      var reduce = from.cls === "Intermediate";   // NPH -> analogue: start ~20% lower
-      out.ratio = reduce ? 0.8 : 1; out.suggested = r(dose * out.ratio);
-      out.steps.push({ label: reduce ? "Reduce 20% (NPH to analogue)" : "Unit-for-unit total", expr: dose + " x " + out.ratio, value: r(dose * out.ratio) });
-      if (reduce) out.assumptions.push("Switching from NPH to a long-acting analogue: start about 20% lower to reduce hypoglycaemia, then titrate up.");
+      // Product labelling gives TWO distinct 80% rules here, and they depend on
+      // different things - applying either one blindly causes harm:
+      //  (a) NPH -> long-acting analogue: reduce 20% ONLY when coming off
+      //      TWICE-daily NPH. From once-daily NPH the starting dose is the SAME
+      //      (glargine labelling); reducing there under-doses the patient.
+      //  (b) Coming OFF glargine U-300 (Toujeo) to any other basal: start at 80%
+      //      of the U-300 dose. U-300 units are not interchangeable 1:1 - a
+      //      straight swap OVERDOSES and causes hypoglycaemia.
+      var fromNph = from.cls === "Intermediate";
+      var twiceDaily = v.fromFreq !== "od";                  // default to BD (the safer assumption)
+      var nphReduce = fromNph && twiceDaily;
+      var u300Off = from.id === "glargine300";
+      out.ratio = (nphReduce || u300Off) ? 0.8 : 1;
+      out.suggested = r(dose * out.ratio);
+      out.steps.push({
+        label: u300Off ? "Reduce 20% (off glargine U-300)" : nphReduce ? "Reduce 20% (twice-daily NPH to analogue)" : "Unit-for-unit total",
+        expr: dose + " x " + out.ratio, value: r(dose * out.ratio) });
+      if (u300Off)
+        out.assumptions.push("Switching OFF glargine U-300: start at about 80% of the U-300 dose. U-300 units are not interchangeable unit-for-unit with other basal insulins - a straight swap risks hypoglycaemia.");
+      else if (nphReduce)
+        out.assumptions.push("Switching from TWICE-daily NPH to a long-acting analogue: start about 20% lower to reduce hypoglycaemia, then titrate up.");
+      else if (fromNph)
+        out.assumptions.push("Switching from ONCE-daily NPH: the starting dose is usually the SAME total daily units (the 20% reduction applies only when coming off twice-daily NPH), then titrate.");
       else out.assumptions.push("Long-acting basal analogues are started roughly 1:1 by total daily units, then titrated.");
+      if (fromNph) out.assumptions.push("Confirm whether the NPH was once- or twice-daily - it changes the starting dose.");
       if (to.id === "glargine300" || to.id === "degludec")
         out.assumptions.push("Ultra-long analogues (U-300 glargine, degludec) reach steady state over several days; do not up-titrate faster than every 3 to 4 days.");
       if (from.id === "detemir")
