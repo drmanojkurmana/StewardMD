@@ -512,3 +512,12 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   .ins-gridbg, .ins-cta::after, .ins-warn.critical .ins-warn-band { animation: none; }
   .ins-bf { animation: none; opacity: 1; transform: none; filter: none; }
 }
+
+/* Patient-context adjustment block inside a bolus result: concrete adjusted
+   figures for the active context chips (exercise / renal / pregnancy / …). */
+.ins-ctxadj-row { border: 1px solid var(--ins-line); border-radius: 10px; padding: 9px 11px; margin-bottom: 7px; background: var(--ins-panel2, rgba(127,127,127,.06)); }
+.ins-ctxadj-row:last-child { margin-bottom: 0; }
+.ins-ctxadj-top { display: flex; align-items: baseline; gap: 10px; }
+.ins-ctxadj-top .k { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--ins-ink); }
+.ins-ctxadj-top .v { font-size: 14px; font-weight: 800; color: var(--ins-accent, #14b8a6); white-space: nowrap; }
+.ins-ctxadj-row .d { margin-top: 4px; font-size: 11.5px; line-height: 1.5; color: var(--ins-muted); }

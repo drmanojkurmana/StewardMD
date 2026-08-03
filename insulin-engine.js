@@ -242,6 +242,47 @@
     return out;
   }
 
+  /* Context advice for a BOLUS (meal / correction / combined).
+   * Deliberately does NOT silently rescale the bolus: ICR and ISF are entered per
+   * patient and may already reflect renal function or gestation, so multiplying on
+   * top would double-count and under-dose. Instead each active context returns a
+   * CONCRETE suggested figure plus the condition under which it applies, so the
+   * clinician can see the adjusted number and decide.
+   *   dose = the computed (rounded) bolus in units. */
+  function bolusContextAdvice(dose, ctx) {
+    ctx = ctx || {};
+    var out = [];
+    if (!ok(dose) || dose <= 0) return out;
+
+    if (ctx.exercise) {
+      // The one context with a direct, guideline-backed bolus adjustment.
+      out.push({ id: "exercise", label: "Before exercise", value: r1(dose * 0.5) + " to " + r1(dose * 0.75) + " units",
+        detail: "Reduce the pre-exercise meal bolus by 25 to 50% (more for longer or more intense activity). Watch for delayed hypoglycaemia for up to 24 hours afterwards." });
+    }
+    if (ctx.renal || ok(ctx.egfr)) {
+      var e = ok(ctx.egfr) ? ctx.egfr : null;
+      var mult = (ctx.dialysis || (e !== null && e < 10)) ? 0.5 : (e === null || e < 50) ? 0.75 : 1;
+      if (mult !== 1) {
+        out.push({ id: "renal", label: "If ICR/ISF not already renal-adjusted", value: r1(dose * mult) + " units",
+          detail: "Insulin is renally cleared" + (e !== null ? " (eGFR " + e + ")" : "") + ", so requirements fall to about " +
+            Math.round(mult * 100) + "% . Apply this ONLY if the ICR/ISF above were not already derived for this renal function - otherwise the reduction is already included and cutting again will under-dose." });
+      }
+    }
+    if (ctx.pregnancy) {
+      out.push({ id: "pregnancy", label: "Pregnancy targets", value: "fasting <95 mg/dL",
+        detail: "1-hour post-prandial under 140, 2-hour under 120 mg/dL. Requirements RISE through gestation, so ICR and ISF need frequent revision (ratios fall); they drop abruptly after delivery." });
+    }
+    if (ctx.steroids) {
+      out.push({ id: "steroids", label: "On glucocorticoids", value: "expect higher prandial need",
+        detail: "Steroid hyperglycaemia is mainly post-prandial and daytime. Increase the PRANDIAL dose first and taper as the steroid reduces - no fixed multiplier applies." });
+    }
+    if (ctx.hepatic) {
+      out.push({ id: "hepatic", label: "Liver disease", value: "no fixed adjustment",
+        detail: "Requirements are unpredictable: resistance raises them, while impaired gluconeogenesis and reduced hepatic clearance raise hypoglycaemia risk (especially fasting/overnight). Dose at the low end and monitor." });
+    }
+    return out;
+  }
+
   function basalInitiation(v) {
     var formula = "TDD = weight x factor (context-adjusted); basal = TDD x basalFraction; meal bolus each = (TDD - basal) / 3";
     if (!ok(v.weightKg) || v.weightKg <= 0) return ERR(formula);
@@ -349,7 +390,8 @@
   var API = {
     roundDose: roundDose, mmol: mmol,
     correctionDose: correctionDose, mealBolus: mealBolus, activeInsulin: activeInsulin,
-    combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd, contextAdjust: contextAdjust,
+    combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd,
+    contextAdjust: contextAdjust, bolusContextAdvice: bolusContextAdvice,
     basalInitiation: basalInitiation, pediatricInit: pediatricInit, dkaInsulin: dkaInsulin
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

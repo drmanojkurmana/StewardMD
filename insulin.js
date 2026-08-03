@@ -799,6 +799,14 @@
     var unitNote = mmolMode() ? ' &middot; working shown in mg/dL (canonical); entries converted from mmol/L' : '';
     var fromraw = 'Computed ' + res.result + ' ' + res.unit + (doseUnitMode(m) ? ', rounded to ' + st.increment + ' unit' : '') + (extraRaw ? ' &middot; ' + extraRaw : '') + unitNote;
     var monitoringHTML = (res.monitoring && res.monitoring.length) ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + res.monitoring.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' : "";
+    // Patient-context effect on a BOLUS: concrete adjusted figures, shown rather than
+    // silently applied (ICR/ISF may already account for the context — see engine note).
+    var ctxAdvHTML = "";
+    if (bolusMode(m) && m !== "iob" && res.rounded != null) {
+      var adv = window.INSULIN_ENGINE.bolusContextAdvice(res.rounded, st.ctx) || [];
+      if (adv.length) ctxAdvHTML = '<div class="ins-conv-sec ins-ctxadj"><h4>Patient-context adjustment</h4>' +
+        adv.map(function (a) { return '<div class="ins-ctxadj-row"><div class="ins-ctxadj-top"><span class="k">' + a.label + '</span><span class="v">' + a.value + '</span></div><div class="d">' + a.detail + '</div></div>'; }).join("") + '</div>';
+    }
     var showCritAck = hasCritical && !clinMode(m);
     var ctaDisabled = showCritAck || (clinMode(m) && !st.advAck);
 
@@ -807,7 +815,7 @@
         '<div class="ins-dose"><span class="n" id="insDoseN">0</span><span class="unit">' + res.unit + '</span></div>' +
         '<div class="ins-fromraw">' + fromraw + '</div>' +
         '<div class="ins-formula">' + res.formula + '</div>' +
-        '<ul class="ins-steps">' + stepsHTML + '</ul>' + monitoringHTML +
+        '<ul class="ins-steps">' + stepsHTML + '</ul>' + ctxAdvHTML + monitoringHTML +
         '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
         '<div class="ins-howp" hidden>' +
           '<div class="ins-howp-sec"><h4>Method</h4><p>' + howItWorks(m) + '</p></div>' +
