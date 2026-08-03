@@ -20,25 +20,38 @@
   }
 
   function correctionDose(v) {
-    var formula = "correction = (glucose - target) / ISF";
+    var withIob = ok(v.iob) && v.iob > 0;
+    var formula = withIob ? "correction = max(0, (glucose - target) / ISF - IOB)"
+                          : "correction = (glucose - target) / ISF";
     if (!ok(v.glucose) || !ok(v.target) || !ok(v.isf) || v.isf <= 0) return ERR(formula);
     var inc = v.increment || 1;
+    var iob = withIob ? v.iob : 0;
     var gap = v.glucose - v.target;
-    var raw = gap > 0 ? gap / v.isf : 0;
+    var gross = gap > 0 ? gap / v.isf : 0;
+    // Insulin already acting is working on THIS glucose, so it must be netted off the
+    // correction — giving the gross dose on top of active insulin is textbook stacking
+    // and a leading cause of iatrogenic hypoglycaemia.
+    var raw = gross - iob; if (raw < 0) raw = 0;
     var rounded = roundDose(raw, inc);
+    var steps = [
+      { label: "Glucose above target", expr: v.glucose + " - " + v.target + " mg/dL", value: gap },
+      { label: "Divide by ISF", expr: gap + " / " + v.isf + " (mg/dL per unit)", value: r2(gross) }
+    ];
+    if (withIob) steps.push({ label: "Subtract active insulin (IOB)", expr: r2(gross) + " - " + iob, value: r2(raw) });
+    steps.push({ label: "Round to " + inc + " unit", expr: "round(" + r2(raw) + ")", value: rounded });
     return {
       result: r1(raw),
       rounded: rounded,
       unit: "units",
-      steps: [
-        { label: "Glucose above target", expr: v.glucose + " - " + v.target + " mg/dL", value: gap },
-        { label: "Divide by ISF", expr: gap + " / " + v.isf + " (mg/dL per unit)", value: r2(raw) },
-        { label: "Round to " + inc + " unit", expr: "round(" + r2(raw) + ")", value: rounded }
-      ],
+      grossCorrection: r1(gross),
+      iobSubtracted: iob,
+      steps: steps,
       formula: formula,
       assumptions: [
         "ISF (insulin sensitivity factor) is in mg/dL lowered per unit.",
         "No correction is given when glucose is at or below target.",
+        withIob ? "Active insulin (" + iob + " u) is netted off the correction to prevent stacking."
+                : "No active insulin entered - if a bolus was given within the insulin's duration of action, enter it or this dose may stack.",
         "Target " + v.target + " mg/dL (" + mmol(v.target) + " mmol/L)."
       ],
       clinicalNotes: ["Verify the patient's current ISF; it changes with regimen, illness, and time of day."],
@@ -103,34 +116,44 @@
   }
 
   function combinedDose(v) {
-    var formula = "total = (carbs / ICR) + max(0, (glucose - target) / ISF) - IOB";
+    var formula = "total = (carbs / ICR) + max(0, (glucose - target) / ISF - IOB)";
     if (!ok(v.carbs) || !ok(v.icr) || v.icr <= 0 || !ok(v.glucose) || !ok(v.target) || !ok(v.isf) || v.isf <= 0)
       return ERR(formula);
     var inc = v.increment || 1;
-    var iob = ok(v.iob) ? v.iob : 0;
+    var iob = (ok(v.iob) && v.iob > 0) ? v.iob : 0;
     var meal = r1(v.carbs / v.icr);
     var gap = v.glucose - v.target;
     var corr = r1(gap > 0 ? gap / v.isf : 0);
-    var rawTotal = meal + corr - iob;
-    if (rawTotal < 0) rawTotal = 0;
+    // IOB is netted off the CORRECTION ONLY, never off carbohydrate cover: the food about
+    // to be eaten still needs its full bolus, whereas active insulin is already working on
+    // the current glucose. Subtracting IOB from the total under-doses the meal and causes
+    // post-prandial hyperglycaemia (standard bolus-calculator behaviour).
+    var corrNet = corr - iob; if (corrNet < 0) corrNet = 0;
+    var rawTotal = meal + corrNet;
     var rounded = roundDose(rawTotal, inc);
     return {
       result: r1(rawTotal), rounded: rounded, unit: "units",
-      mealComponent: meal, correctionComponent: corr, iobSubtracted: iob,
+      mealComponent: meal, correctionComponent: corr, correctionAfterIob: r1(corrNet), iobSubtracted: iob,
       steps: [
         { label: "Meal bolus", expr: v.carbs + " g / " + v.icr, value: meal },
         { label: "Correction", expr: "max(0, (" + v.glucose + " - " + v.target + ") / " + v.isf + ")", value: corr },
-        { label: "Subtract active insulin (IOB)", expr: meal + " + " + corr + " - " + iob, value: r2(rawTotal) },
+        { label: "Subtract active insulin (IOB) from the correction", expr: "max(0, " + corr + " - " + iob + ")", value: r1(corrNet) },
+        { label: "Add meal cover back", expr: meal + " + " + r1(corrNet), value: r2(rawTotal) },
         { label: "Round to " + inc + " unit", expr: "round(" + r2(rawTotal) + ")", value: rounded }
       ],
       formula: formula,
       assumptions: [
-        "IOB is subtracted from the correction so a stacked dose is not double-counted.",
+        "IOB is subtracted from the correction only, so a stacked correction is not double-counted.",
         "Meal coverage is never reduced below what the carbohydrates require.",
-        "Total is floored at 0 units."
+        "The correction component is floored at 0 units."
       ],
-      clinicalNotes: ["If IOB is unknown, treat this total as an overestimate and reassess before dosing."],
-      refs: ["Bolus-calculator conventions (meal + correction - IOB)."]
+      clinicalNotes: [
+        "If IOB is unknown, treat the correction part as an overestimate and reassess before dosing.",
+        iob > 0 && corr > 0 && corr - iob <= 0
+          ? "Active insulin already covers the whole correction - only the meal bolus is advised."
+          : "Recheck glucose before giving any further correction within the insulin's duration of action."
+      ],
+      refs: ["Bolus-calculator conventions (meal bolus + [correction - IOB])."]
     };
   }
 
