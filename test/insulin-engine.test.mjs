@@ -191,3 +191,72 @@ test("correctionDose: without IOB behaves as before but flags the risk", () => {
   assert.equal(r.rounded, 3);                  // 2.6 -> 3, unchanged
   assert.ok(r.assumptions.some(a => /may stack/i.test(a)));
 });
+
+/* ── Context adjustment: renal / pregnancy must CHANGE the dose ──────────────
+ * Previously the renal, hepatic and pregnancy chips only emitted a generic
+ * caution — every combination produced an identical TDD. Conditions with a
+ * quantified guideline adjustment now scale the weight-based starting dose;
+ * those without a validated multiplier (hepatic, steroids) still must not. */
+test("basalInitiation: unchanged when no context flags are set", () => {
+  const r = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, increment: 1 });
+  assert.equal(r.tdd, 32);
+  assert.equal(r.contextMultiplier, 1);
+});
+
+test("renal: eGFR 10-50 gives 75% of the dose", () => {
+  const r = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, increment: 1, ctx: { renal: true, egfr: 30 } });
+  assert.equal(r.contextMultiplier, 0.75);
+  assert.equal(r.tdd, 24);                       // 32 -> 24, was 32 before
+  assert.ok(r.contextApplied.some(a => /75%/.test(a)));
+});
+
+test("renal: eGFR <10 or dialysis gives 50%", () => {
+  assert.equal(E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: true, egfr: 8 } }).tdd, 16);
+  assert.equal(E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: true, dialysis: true } }).tdd, 16);
+});
+
+test("renal: eGFR above 50 is not reduced", () => {
+  const r = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: false, egfr: 75 } });
+  assert.equal(r.contextMultiplier, 1);
+  assert.equal(r.tdd, 32);
+});
+
+test("renal flagged without an eGFR falls back to the 75% band and says so", () => {
+  const r = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { renal: true } });
+  assert.equal(r.tdd, 24);
+  assert.ok(r.contextApplied.some(a => /without an eGFR/i.test(a)));
+});
+
+test("pregnancy: trimester factors RAISE the dose (0.7 / 0.8 / 0.9 u/kg/day)", () => {
+  const t1 = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true, trimester: 1 } });
+  const t2 = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true, trimester: 2 } });
+  const t3 = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true, trimester: 3 } });
+  assert.equal(t1.tdd, 49);   // 70 x 0.7
+  assert.equal(t2.tdd, 56);   // 70 x 0.8
+  assert.equal(t3.tdd, 63);   // 70 x 0.9
+  assert.ok(t3.tdd > t2.tdd && t2.tdd > t1.tdd);
+  assert.ok(t2.clinicalNotes.some(n => /under 95 mg\/dL/.test(n)));   // tighter targets surfaced
+});
+
+test("pregnancy without a trimester does not guess, but advises the range", () => {
+  const r = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true } });
+  assert.equal(r.tdd, 28);                                            // unchanged
+  assert.ok(r.clinicalNotes.some(n => /Select a trimester/i.test(n)));
+});
+
+test("hepatic and steroids give guidance but never a fabricated multiplier", () => {
+  const h = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { hepatic: true } });
+  assert.equal(h.contextMultiplier, 1);
+  assert.equal(h.tdd, 32);
+  assert.ok(h.clinicalNotes.some(n => /no validated dose multiplier/i.test(n)));
+  const s = E.basalInitiation({ weightKg: 80, tddFactor: 0.4, ctx: { steroids: true } });
+  assert.equal(s.tdd, 32);
+  assert.ok(s.clinicalNotes.some(n => /PRANDIAL/i.test(n)));
+});
+
+test("pregnancy + renal combine: trimester factor then renal reduction", () => {
+  const r = E.basalInitiation({ weightKg: 70, tddFactor: 0.4, ctx: { pregnancy: true, trimester: 3, renal: true, egfr: 30 } });
+  assert.equal(r.contextFactor, 0.9);
+  assert.equal(r.contextMultiplier, 0.75);
+  assert.equal(r.tdd, 47);    // 70 x 0.9 = 63, x 0.75 = 47.25 -> 47
+});
