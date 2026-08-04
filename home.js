@@ -2839,6 +2839,14 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-refine .maik-fu::before{content:"+";font:800 13px/1 'Inter';opacity:.65;margin-right:-1px}
 .maik-refine .maik-fu:hover{background:var(--mk-bg);border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-refine .maik-fu:hover::before{opacity:1}
+/* Inline refine input: a tapped free-text factor chip becomes "factor: [ … ] →" so the clinician
+   supplies the value instead of the model assuming one. */
+.maik-refine-in{display:inline-flex;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
+.maik-refine-il{font:600 12px/1 'Inter';color:var(--mk-mut);white-space:nowrap}
+.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:96px;max-width:200px;flex:1 1 auto;padding:2px 0}
+.maik-refine-inp::placeholder{color:var(--mk-faint)}
+.maik-refine-go{flex:none;border:0;background:var(--mk-teal);color:#fff;width:24px;height:24px;border-radius:50%;font:800 14px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.maik-refine-go:hover{filter:brightness(1.08)}
 /* Phase 4 — "open in app" tool chips: bordered action chips with a trailing chevron */
 .maik-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px}
 .maik-tools-lbl{width:100%;font:700 10px/1.2 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--mk-mut);margin-bottom:1px}
@@ -2925,6 +2933,20 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#16c60c;vertical-align:middle;margin-right:5px;box-shadow:0 0 6px 1px rgba(22,198,12,.75);animation:maikLive 1.35s ease-in-out infinite}
 @keyframes maikLive{0%{box-shadow:0 0 0 0 rgba(22,198,12,.6);opacity:1}70%{box-shadow:0 0 0 7px rgba(22,198,12,0);opacity:.65}100%{box-shadow:0 0 0 0 rgba(22,198,12,0);opacity:1}}
 @keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}
+/* Buffering loader — polished skeleton shimmer + stage label (replaces the plain dots). */
+.maik-buffer{display:block}
+.maik-buffer-head{display:flex;align-items:center;gap:7px;font:700 11px/1.2 'Inter';letter-spacing:.02em;color:var(--mk-teal);margin-bottom:10px}
+.maik-buffer-head .smd-ico{width:15px;height:15px;flex:none;color:var(--mk-teal);animation:maikSpark 1.5s ease-in-out infinite}
+.maik-buffer-txt{color:var(--mk-mut);font-weight:600}
+.maik-sk{display:flex;flex-direction:column;gap:8px}
+.maik-sk span{display:block;height:9px;border-radius:6px;background:rgba(125,139,161,.22);position:relative;overflow:hidden}
+.maik-sk span:nth-child(1){width:100%}.maik-sk span:nth-child(2){width:90%}.maik-sk span:nth-child(3){width:62%}
+.maik-sk span::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.5) 50%,transparent 80%);animation:maikShimmer 1.15s linear infinite}
+@keyframes maikShimmer{100%{transform:translateX(100%)}}
+@keyframes maikSpark{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.14)}}
+/* "Answer ready" tappable toast — shown when a query finishes while MaiK is closed (background run). */
+.maik-ready-toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,18px);z-index:18000;background:var(--mk-teal,#0f766e);color:#fff;font:600 13px/1.25 'Inter';padding:12px 18px;border-radius:999px;box-shadow:0 10px 34px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .26s,transform .26s;cursor:pointer;max-width:88vw;display:flex;align-items:center;gap:8px}
+.maik-ready-toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 /* tables */
 .maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}
 .maik-tbl{border-collapse:collapse;width:100%;font:400 12px 'Inter'}
@@ -3276,13 +3298,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var busy = document.createElement("div");
       busy.className = "maik-webbusy";
       busy.style.cssText = "margin-top:8px;color:var(--slate-soft,#64748b)";
-      busy.innerHTML = '<span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching the web…';
+      busy.innerHTML = maikBufferHTML("Researching the web", "maik-webbusy");
       container.appendChild(busy);
       try { scroll(); } catch (e) {}
       // Staged progress + the live green dot so a ~15s web round-trip (search + synthesis) is clearly
       // WORKING, never a frozen "Researching…" line. Cleared the instant the answer/timeout lands.
       var _wt = [[5000, "Searching medical sources"], [12000, "Synthesizing the evidence"], [30000, "Almost there — finalizing"]].map(function (s) {
-        return setTimeout(function () { try { busy.innerHTML = '<span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' ' + s[1] + '…'; } catch (e) {} }, s[0]);
+        return setTimeout(function () { try { busy.innerHTML = maikBufferHTML(s[1], "maik-webbusy"); } catch (e) {} }, s[0]);
       });
       function _clr() { _wt.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); }
       function _persistWeb() { try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} }
@@ -3336,7 +3358,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // maikRunWeb / the clinical answer #568), so a signed-in session's Firestore sync can't stall it.
       var _fsR2 = false, _fsResumeR = function () { if (_fsR2) return; _fsR2 = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
       try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResumeR, 60000); } } catch (e) {}
-      var think = bubble("ai", '<div class="maik-webbusy" style="color:var(--slate-soft,#64748b)"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Reviewing the evidence…</div>');
+      var think = bubble("ai", maikBufferHTML("Reviewing the evidence", "maik-webbusy"));
       window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
         _fsResumeR(); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         // Over the 2/day cap -> a clear message, NOT an error.
@@ -3415,7 +3437,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRefineHTML(question, chips) {
       if (!chips || !chips.length) return "";
       var h = '<div class="maik-refine"><div class="maik-refine-lbl">Refine for this patient</div><div class="maik-followups">';
-      chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-refine="' + maikEscH(c) + '" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
+      chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-refine="' + maikEscH(c) + '" data-maik-baseq="' + maikEscH(String(question || "")) + '" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
       return h + '</div></div>';
     }
     // Some refinement factors map to a real in-app tool rather than a re-prompt: e.g. "local resistance
@@ -3464,6 +3486,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
         var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); think.appendChild(maikWebChipEl(question)); scroll(); return;
       }
+      // Background completion: the answer landed. If MaiK was closed mid-request, it is already saved to
+      // the thread (via _live()/data-mg) — ping the clinician so they can tap back in (ChatGPT-style).
+      if (question && !document.body.classList.contains("maik-open")) maikNotifyReady(question);
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
@@ -3565,7 +3590,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", '<span class="maik-thinking"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      var think = bubble("ai", maikBufferHTML("Searching StewardMD knowledge", "maik-thinking"));
       // Tie the answer to the CONVERSATION, not this sheet instance. If the user closes MaiK and reopens
       // (the thread is restored from localStorage), the still-running generation must render its answer
       // into the LIVE bubble and persist it — not into a detached node the reopened sheet never shows.
@@ -3646,7 +3671,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
         _stageT.push(setTimeout(function () {
           if (_maikDone || _streamStarted) return;
-          try { think.innerHTML = '<span class="maik-thinking"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' ' + s[1] + '<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>'; scroll(); } catch (e) {}
+          try { think.innerHTML = maikBufferHTML(s[1], "maik-thinking"); scroll(); } catch (e) {}
         }, s[0]));
       });
       _armTO();
@@ -4031,6 +4056,65 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
+    // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
+    // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
+    function maikBufferHTML(stage, cls) {
+      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + svg("spark", "smd-ico") +
+        '<span class="maik-buffer-txt">' + maikEscH(stage || "Searching StewardMD knowledge") + '</span></div>' +
+        '<div class="maik-sk"><span></span><span></span><span></span></div></div>';
+    }
+    // Background completion → tappable "answer ready" toast. Fires once per question and ONLY when MaiK
+    // is closed (the answer is already persisted to the thread, so tapping just reopens to it). Also
+    // schedules a native local notification if the plugin is present (app backgrounded), ChatGPT-style.
+    var _maikNotified = {};
+    function maikToastAction(msg, fn) {
+      try {
+        var t = document.createElement("div"); t.className = "maik-ready-toast";
+        t.innerHTML = svg("spark", "smd-ico") + '<span>' + maikEscH(msg) + '</span>';
+        t.addEventListener("click", function () { try { t.classList.remove("on"); setTimeout(function () { t.remove(); }, 300); } catch (e) {} try { fn(); } catch (e) {} });
+        document.body.appendChild(t);
+        requestAnimationFrame(function () { t.classList.add("on"); });
+        setTimeout(function () { try { t.classList.remove("on"); setTimeout(function () { t.remove(); }, 320); } catch (e) {} }, 7000);
+      } catch (e) {}
+    }
+    function maikNotifyReady(q) {
+      try {
+        var key = String(q || ""); if (_maikNotified[key]) return; _maikNotified[key] = 1;
+        var label = key ? (key.length > 46 ? key.slice(0, 46) + "…" : key) : "your question";
+        maikToastAction("MaiK answered — tap to view", function () { try { openAskAi(); } catch (e) {} });
+        try {
+          var LN = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.LocalNotifications;
+          if (LN && LN.schedule) LN.schedule({ notifications: [{ id: (Date.now() % 100000) + 1, title: "MaiK", body: "Your answer is ready — " + label }] }).catch(function () {});
+        } catch (e) {}
+      } catch (e) {}
+    }
+    // Inline refine input: replace a tapped free-text refine chip with "factor: [ text field ] →" so
+    // the clinician types the actual value; on submit we re-ask "<question> — <factor>: <value>". This
+    // stops MaiK from silently assuming a value (the "tapped specific infection → it assumed VAP" bug).
+    function maikRefineInput(chip, baseq, label) {
+      if (!chip || !chip.parentNode) return;
+      var row = document.createElement("span");
+      row.className = "maik-refine-in"; row.setAttribute("data-maik-inline", "1");
+      var lb = document.createElement("span"); lb.className = "maik-refine-il"; lb.textContent = label + ":";
+      var inp = document.createElement("input");
+      inp.type = "text"; inp.className = "maik-refine-inp"; inp.setAttribute("aria-label", label);
+      inp.placeholder = "specify…"; inp.autocomplete = "off"; inp.setAttribute("autocapitalize", "sentences");
+      var go = document.createElement("button");
+      go.type = "button"; go.className = "maik-refine-go"; go.setAttribute("aria-label", "Ask"); go.textContent = "→";
+      row.appendChild(lb); row.appendChild(inp); row.appendChild(go);
+      chip.parentNode.replaceChild(row, chip);
+      function submit() {
+        var v = (inp.value || "").trim();
+        if (!v) { try { inp.focus(); } catch (e) {} return; }
+        if (_maikBusy) return;
+        var q = (baseq ? baseq + " — " : "") + label + ": " + v;
+        var tpc = maikV2() ? maikCanonTopic(q) : q;
+        runClinical(q, q, "concise", maikActiveCase(), tpc);
+      }
+      go.addEventListener("click", function (e) { e.preventDefault(); submit(); });
+      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); submit(); } });
+      try { inp.focus(); } catch (e) {}
+    }
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
@@ -4058,6 +4142,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           setTimeout(function () { try { if (window.ABG && ABG.open) ABG.open(); else if (window.toast) toast("Antibiogram loading…"); } catch (e) {} }, 180);
           return;
         }
+        // Free-text factor (specific infection, pathogen suspected, comorbidities, clinical status…):
+        // do NOT re-ask with the bare factor appended — the model would GUESS a value (e.g. assume VAP).
+        // Expand the chip into an inline input so the clinician supplies the value, then re-ask
+        // "<question> — <factor>: <value>".
+        maikRefineInput(el, el.getAttribute("data-maik-baseq") || "", refine);
+        return;
       }
       // Phase 4 — "open in app" tool chips route straight into the matching module via the ACT map.
       var tool = el.getAttribute("data-maik-tool");
