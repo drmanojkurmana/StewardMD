@@ -223,11 +223,15 @@
     };
   }
 
+  // CONTRACT: buildReport ALWAYS returns a Promise<reportPayload> (never a bare object), on both
+  // the mock and deps.remote paths, so callers can uniformly .then()/await regardless of which
+  // path ran - a landmine class of bug (throwing "then is not a function", or silently losing
+  // redFlags/references off a mis-awaited object) is avoided by construction, not by convention.
   function buildReport(input, deps) {
     input = input || {};
     deps = deps || {};
-    if (typeof deps.remote === "function") return deps.remote(input); // REAL-GEMINI/VERTEX SWAP POINT: /api/sknx call replaces the mock below.
-    return mockReport(input);
+    if (typeof deps.remote === "function") return Promise.resolve(deps.remote(input)); // REAL-GEMINI/VERTEX SWAP POINT: /api/sknx call replaces the mock below.
+    return Promise.resolve(mockReport(input));
   }
 
   // ---- audience re-leveling: templates only re-word `discussion`, never touch citations ----

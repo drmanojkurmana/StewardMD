@@ -24,10 +24,10 @@ var referralAnalysis = {
   disclaimerKey: "educational_not_clinical"
 };
 
-test("no-hallucination: every reference and guidelineSummary url/source traces back to the passed evidence", () => {
+test("no-hallucination: every reference and guidelineSummary url/source traces back to the passed evidence", async () => {
   var evidence = EV.retrieve(["psoriasis"]);
   assert.ok(evidence.length >= 1, "fixture should retrieve at least one psoriasis evidence entry");
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
   var evidenceUrls = evidence.map((e) => e.url);
   var evidenceSources = evidence.map((e) => e.source);
 
@@ -42,14 +42,14 @@ test("no-hallucination: every reference and guidelineSummary url/source traces b
   }
 });
 
-test("no-hallucination: empty evidence -> references === [] and guidelineSummary === []", () => {
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
+test("no-hallucination: empty evidence -> references === [] and guidelineSummary === []", async () => {
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
   assert.deepEqual(report.references, []);
   assert.deepEqual(report.guidelineSummary, []);
 });
 
-test("analysis.referral === true forces at least one redFlag", () => {
-  var report = LLM.buildReport({
+test("analysis.referral === true forces at least one redFlag", async () => {
+  var report = await LLM.buildReport({
     analysis: referralAnalysis,
     features: { asymmetry: true, borderIrregular: true, colorVariegation: true, diameterMm: 8, evolving: true },
     evidence: [],
@@ -58,33 +58,33 @@ test("analysis.referral === true forces at least one redFlag", () => {
   assert.ok(report.redFlags.length >= 1);
 });
 
-test("analysis.referral === true with no explicit ABCDE feature flags still surfaces the referral reason as a red flag", () => {
-  var report = LLM.buildReport({ analysis: referralAnalysis, features: {}, evidence: [], context: {} });
+test("analysis.referral === true with no explicit ABCDE feature flags still surfaces the referral reason as a red flag", async () => {
+  var report = await LLM.buildReport({ analysis: referralAnalysis, features: {}, evidence: [], context: {} });
   assert.ok(report.redFlags.length >= 1);
 });
 
-test("referral === false may report zero redFlags", () => {
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
+test("referral === false may report zero redFlags", async () => {
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
   assert.ok(Array.isArray(report.redFlags));
 });
 
-test("no-Rx: payload contains no prescription/prescribe/rx tokens anywhere", () => {
+test("no-Rx: payload contains no prescription/prescribe/rx tokens anywhere", async () => {
   var evidence = EV.retrieve(["psoriasis"]);
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: { diameterMm: 4 }, evidence: evidence, context: {} });
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: { diameterMm: 4 }, evidence: evidence, context: {} });
   var json = JSON.stringify(report);
   assert.doesNotMatch(json, /prescription|prescrib|\brx\b/i);
 });
 
-test("no-Rx: no dose/mg drug-instruction anywhere in the payload", () => {
+test("no-Rx: no dose/mg drug-instruction anywhere in the payload", async () => {
   var evidence = EV.retrieve(["tinea"]);
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
   var json = JSON.stringify(report);
   assert.doesNotMatch(json, /\bdose\b/i);
   assert.doesNotMatch(json, /\d+\s*mg\b/i);
 });
 
-test("no-Rx: management entries are non-empty educational strings, not drug+dose instructions", () => {
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
+test("no-Rx: management entries are non-empty educational strings, not drug+dose instructions", async () => {
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
   assert.ok(Array.isArray(report.management) && report.management.length >= 1);
   for (const m of report.management) {
     assert.equal(typeof m, "string");
@@ -93,15 +93,15 @@ test("no-Rx: management entries are non-empty educational strings, not drug+dose
   }
 });
 
-test("no-Rx: referral case management defers to specialist and carries no treatment options", () => {
-  var report = LLM.buildReport({ analysis: referralAnalysis, features: {}, evidence: [], context: {} });
+test("no-Rx: referral case management defers to specialist and carries no treatment options", async () => {
+  var report = await LLM.buildReport({ analysis: referralAnalysis, features: {}, evidence: [], context: {} });
   assert.ok(report.management.length >= 1);
   assert.ok(report.management.some((m) => /refer/i.test(m)));
 });
 
-test("explainAs re-levels discussion by audience but leaves citations untouched", () => {
+test("explainAs re-levels discussion by audience but leaves citations untouched", async () => {
   var evidence = EV.retrieve(["psoriasis"]);
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: evidence, context: {} });
   var patient = LLM.explainAs(report, "patient");
   var consultant = LLM.explainAs(report, "consultant");
 
@@ -112,8 +112,8 @@ test("explainAs re-levels discussion by audience but leaves citations untouched"
   assert.deepEqual(consultant.guidelineSummary, report.guidelineSummary);
 });
 
-test("explainAs covers all five documented audiences with distinct-enough templates", () => {
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
+test("explainAs covers all five documented audiences with distinct-enough templates", async () => {
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
   var audiences = ["mbbs", "intern", "resident", "consultant", "patient"];
   var seen = new Set();
   for (const aud of audiences) {
@@ -125,8 +125,8 @@ test("explainAs covers all five documented audiences with distinct-enough templa
   assert.ok(seen.size >= 4, "expected most audience templates to differ from one another");
 });
 
-test("explainAs does not mutate the original report", () => {
-  var report = LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
+test("explainAs does not mutate the original report", async () => {
+  var report = await LLM.buildReport({ analysis: psoriasisAnalysis, features: {}, evidence: [], context: {} });
   var originalDiscussion = report.discussion;
   LLM.explainAs(report, "patient");
   assert.equal(report.discussion, originalDiscussion);
@@ -141,9 +141,9 @@ test("deps.remote swap seam is used instead of the mock when provided", async ()
   assert.equal(result, sentinel);
 });
 
-test("no em-dash in any user-visible text field", () => {
+test("no em-dash in any user-visible text field", async () => {
   var evidence = EV.retrieve(["psoriasis"]);
-  var report = LLM.buildReport({ analysis: referralAnalysis, features: { diameterMm: 8 }, evidence: evidence, context: {} });
+  var report = await LLM.buildReport({ analysis: referralAnalysis, features: { diameterMm: 8 }, evidence: evidence, context: {} });
   var fields = [report.visualFindings, report.discussion, report.disclaimer]
     .concat(report.management)
     .concat(report.investigations)
