@@ -117,3 +117,11 @@ Cloudflare Vectorize index (KB + curated derm evidence) + `functions/api/sknx` G
 - Web/PWA target (native only).
 - Autonomous diagnosis or prescribing; patient-facing output.
 - Teledermatology / storing patient-identifiable images beyond the analysis session.
+
+---
+
+## Delivery status (2026-08-04)
+- **Phase 1 (foundation):** merged (PR #621). Flag `smd_sknx` def:false.
+- **Phase 2 (evidence RAG + real Gemini educational report + Explain-Like + Compare):** MERGED (PR #622). R2 (AI-safety) + R1 (clinical) APPROVED; three hard invariants tested (no image/PHI to LLM, no hallucinated citations, no Rx); referral guardrail INTACT. 75 unit + 19 CDP e2e green.
+- **Phase 3 (clinician-confirmed Rx):** built on branch `claude/sknx-phase3`, flag `smd_sknx_rx` def:false (OFF). `sknx-rx.js` drafts a class-level first-line regimen the clinician confirms/doses/signs via the existing `SMD_RX` pad; malignant/referral cases are never draftable. **The flag must NOT flip on without R1 clinical + R3-DPDP + R7 sign-off.** 82 unit + 23 e2e green.
+- **Asset-dependent (not code):** the real vision models (ISIC/HAM10000/DermNet/Fitzpatrick/PAD-UFES) need weights + a native Core ML/TFLite toolchain. Everything else (Gemini reasoning, Vectorize RAG seam) is real or mock-swappable.
