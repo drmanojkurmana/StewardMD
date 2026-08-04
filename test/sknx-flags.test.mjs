@@ -18,3 +18,15 @@ test("smd_sknx_haptics is registered and defaults to true when unset", () => {
   const store = {};
   assert.equal(FLAGS.bool("smd_sknx_haptics", { store, query: "" }), true);
 });
+test("smd_sknx_rx (Phase 3 Rx) is registered and defaults to FALSE (R1-gated, must not ship on)", () => {
+  const store = {};
+  assert.equal(FLAGS.bool("smd_sknx_rx", { store, query: "" }), false);
+});
+test("smd_sknx_rx can be enabled per-device via ?sknxrx=1 (dev/testing only)", () => {
+  const store = {};
+  assert.equal(FLAGS.bool("smd_sknx_rx", { store, query: "?sknxrx=1" }), true);
+});
+test("smd_sknx_rx localStorage '1' enables it for a device", () => {
+  const store = { smd_sknx_rx: "1" };
+  assert.equal(FLAGS.bool("smd_sknx_rx", { store, query: "" }), true);
+});

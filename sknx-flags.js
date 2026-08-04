@@ -5,7 +5,8 @@
     smd_sknx:          { type: "bool", def: false, query: "sknx" }, // OFF by default while Phase 1 is mock-only; enable per-device with ?sknx=1 or localStorage. PUBLIC-RELEASE stays gated behind R1 clinical review + real models.
     smd_sknx_ondevice: { type: "bool", def: true, query: "sknxondevice" },
     smd_sknx_cloud:    { type: "tri",  def: null, query: null },
-    smd_sknx_haptics:  { type: "bool", def: true, query: null }
+    smd_sknx_haptics:  { type: "bool", def: true, query: null },
+    smd_sknx_rx:       { type: "bool", def: false, query: "sknxrx" } // Phase 3 clinician-confirmed Rx. HARD-GATED: def:false; must NOT ship on without R1 clinical + R3-DPDP + R7 sign-off. Only ever surfaces a draft on a NON-referral rxEligible case for a verified prescriber (see sknx-rx.js).
   };
   function readStore(opts) { if (opts && opts.store) return opts.store; try { return localStorage; } catch (e) { return {}; } }
   function readQuery(opts) { if (opts && typeof opts.query === "string") return opts.query; try { return location.search || ""; } catch (e) { return ""; } }
