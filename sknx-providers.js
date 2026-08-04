@@ -3,18 +3,24 @@
   "use strict";
   var STAGES = ["quality", "detect", "segment", "classify", "report"];
   var NULL_VISION = { available: function () { return false; }, analyze: function () { return Promise.reject(new Error("plugin_unavailable")); } };
-  // Prefer, in order: an injected vision (tests) > the EXPERIMENTAL on-device ONNX classifier when its
-  // flag (smd_sknx_realvision) is on and it reports available > the native SMD_SKNX_VISION plugin >
-  // nothing (-> mock). analyze()'s .catch(mockRaw) makes any real-vision failure fall back to the mock.
+  // Prefer, in order: an injected vision (tests) > the native iOS Core ML plugin (SMD_SKNX_VISION, whose
+  // available() is itself gated on smd_sknx_realvision + the plugin being present - Neural Engine, fastest)
+  // > the EXPERIMENTAL WASM ONNX classifier (SMD_SKNX_REALVISION, flag on + available) > nothing (-> mock).
+  // analyze()'s .catch(mockRaw) makes any real-vision failure fall back to the mock.
   function pickVision(injected) {
     if (injected && injected.vision) return injected.vision;
+    try {
+      if (typeof window !== "undefined" && window.SMD_SKNX_VISION && window.SMD_SKNX_VISION.available && window.SMD_SKNX_VISION.available()) {
+        return window.SMD_SKNX_VISION;
+      }
+    } catch (e) {}
     try {
       if (typeof window !== "undefined" && window.SMD_SKNX_REALVISION && window.SMD_SKNX_FLAGS &&
           window.SMD_SKNX_FLAGS.bool("smd_sknx_realvision") && window.SMD_SKNX_REALVISION.available()) {
         return window.SMD_SKNX_REALVISION;
       }
     } catch (e) {}
-    return (typeof window !== "undefined" && window.SMD_SKNX_VISION) || NULL_VISION;
+    return NULL_VISION;
   }
   function deps(injected) {
     injected = injected || {};
