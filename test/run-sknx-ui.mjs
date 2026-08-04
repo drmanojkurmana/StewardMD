@@ -113,15 +113,10 @@ try {
   ok(citeCount >= 1, "the report renders at least one citation link (#sknxReportHost a[href], got " + citeCount + ")");
   ok(await ev(`return document.querySelectorAll("#sknxRoot .sknx-rx").length === 0;`) === true, "NO .sknx-rx affordance in the benign report either (educational management only)");
 
-  // ---- 1c) Explain-Like re-levels the discussion for a different audience, citations untouched ----
-  const discBefore = await ev(`var e=document.querySelector("#sknxReportBody .sknx-report-discussion .sknx-report-p"); return e ? e.textContent : null;`);
-  ok(typeof discBefore === "string" && discBefore.length > 0, "the discussion paragraph is present before switching audience");
-  ok(await ev(`return !!document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"]');`) === true, "the patient Explain-Like segment is present");
-  await ev(`var b=document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"]'); if(b) b.click(); return 1;`);
-  await sleep(200);
-  const discAfter = await ev(`var e=document.querySelector("#sknxReportBody .sknx-report-discussion .sknx-report-p"); return e ? e.textContent : null;`);
-  ok(typeof discAfter === "string" && discAfter.length > 0 && discAfter !== discBefore, "clicking the patient Explain-Like segment changes the discussion text");
-  ok(await ev(`return !!document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"].is-active');`) === true, "the patient segment is marked is-active after switching");
+  // ---- 1c) the report shows an educational discussion; the Explain-Like audience control is REMOVED ----
+  const disc = await ev(`var e=document.querySelector("#sknxReportBody .sknx-report-discussion .sknx-report-p"); return e ? e.textContent : null;`);
+  ok(typeof disc === "string" && disc.length > 0, "the report shows an educational discussion paragraph");
+  ok(await ev(`return document.querySelectorAll('#sknxReportHost .sknx-explain-seg').length === 0;`) === true, "the Explain-Like audience control (Intern/Consultant/etc) is removed");
 
   // ---- 2) Melanoma mock -> referral banner, and CRITICALLY no Rx affordance anywhere ----
   await ev(`window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-test-melanoma", __mock: "melanoma" }); return 1;`);
