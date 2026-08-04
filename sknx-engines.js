@@ -3,6 +3,21 @@
   "use strict";
   var MALIGNANT = ["melanoma", "BCC", "SCC"];
   var REFER_THRESHOLD = 0.15; // false-negative-averse: refer on even a low malignancy signal
+  // Synonym/case map -> canonical MALIGNANT entry. A real classifier may emit "Melanoma",
+  // "bcc", "basal cell carcinoma", "squamous cell carcinoma", etc.; normalize before matching
+  // so the referral guardrail below can't be slipped past by casing/label-text drift.
+  var MALIGNANT_SYNONYMS = {
+    "melanoma": "melanoma",
+    "malignant melanoma": "melanoma",
+    "bcc": "BCC",
+    "basal cell carcinoma": "BCC",
+    "scc": "SCC",
+    "squamous cell carcinoma": "SCC"
+  };
+  function normalizeMalignantLabel(label) {
+    var k = String(label == null ? "" : label).toLowerCase().trim();
+    return MALIGNANT_SYNONYMS[k] || null;
+  }
   function band(p) { return p >= 0.66 ? "high" : p >= 0.33 ? "moderate" : "low"; }
   function rank(arr) { return (arr || []).slice().sort(function (a, b) { return b.prob - a.prob; }).map(function (x) { return { label: x.label, prob: x.prob, band: band(x.prob) }; }); }
   function redFlag(f) {
@@ -17,7 +32,7 @@
     if (entitlement === "v2beta") {
       var lr = rank(raw.lesionProbs)[0] || null;
       if (lr) { lesion = { top: lr.label, prob: lr.prob, band: lr.band }; }
-      var malig = (raw.lesionProbs || []).filter(function (x) { return MALIGNANT.indexOf(x.label) > -1; }).sort(function (a, b) { return b.prob - a.prob; })[0];
+      var malig = (raw.lesionProbs || []).filter(function (x) { return !!normalizeMalignantLabel(x.label); }).sort(function (a, b) { return b.prob - a.prob; })[0];
       if (malig && malig.prob >= REFER_THRESHOLD) { referral = true; reason = "Possible " + malig.label + " - specialist referral, do not prescribe."; }
     }
     if (redFlag(raw.features)) { referral = true; reason = reason || "Red-flag features (ABCDE / bleeding / ulceration) - specialist referral, do not prescribe."; }

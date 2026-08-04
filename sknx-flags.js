@@ -4,7 +4,8 @@
   var DEFS = {
     smd_sknx:          { type: "bool", def: true, query: "sknx" }, // PUBLIC-RELEASE-GATE: set def:false before any public release
     smd_sknx_ondevice: { type: "bool", def: true, query: "sknxondevice" },
-    smd_sknx_cloud:    { type: "tri",  def: null, query: null }
+    smd_sknx_cloud:    { type: "tri",  def: null, query: null },
+    smd_sknx_haptics:  { type: "bool", def: true, query: null }
   };
   function readStore(opts) { if (opts && opts.store) return opts.store; try { return localStorage; } catch (e) { return {}; } }
   function readQuery(opts) { if (opts && typeof opts.query === "string") return opts.query; try { return location.search || ""; } catch (e) { return ""; } }
