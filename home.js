@@ -750,6 +750,12 @@
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
     },
+    sknx: function () {
+      // SknX AI — dermatology (skin lesion/rash) tile, sibling of KardiQ X/ThoreX above. Unlike those,
+      // SknX is not code-gated via SMD_XACCESS — it's gated internally by SKNX.isOn() (flag + a
+      // non-free entitlement), so open() is already a complete no-op when the gate fails.
+      if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
+    },
     insulin: function () {
       // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
       // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
@@ -1369,6 +1375,16 @@
                   '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
                 '</button>'
               ) : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // SknX AI — sibling of the KardiQ X / ThoreX Clinical-Tools tiles above (skin lesion/rash AI).
+            // Prefer SKNX.isOn() (exact: flag + non-free entitlement), but fall back to the flag alone —
+            // sknx.js is a deferred script and may not have defined window.SKNX yet when this grid is built.
+            try {
+              var son;
+              if (window.SKNX && SKNX.isOn) son = SKNX.isOn();
+              else { var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; son = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") !== "0"); }
+              return son ? rtile("sknx", "dermatology", "SknX AI", "Skin lesion analysis") : "";
             } catch (e) { return ""; }
           })() +
           (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT ON).
