@@ -30,3 +30,11 @@ test("smd_sknx_rx localStorage '1' enables it for a device", () => {
   const store = { smd_sknx_rx: "1" };
   assert.equal(FLAGS.bool("smd_sknx_rx", { store, query: "" }), true);
 });
+test("smd_sknx_realvision (experimental ONNX classifier) defaults to FALSE", () => {
+  const store = {};
+  assert.equal(FLAGS.bool("smd_sknx_realvision", { store, query: "" }), false);
+});
+test("smd_sknx_realvision enables via ?sknxrv=1", () => {
+  const store = {};
+  assert.equal(FLAGS.bool("smd_sknx_realvision", { store, query: "?sknxrv=1" }), true);
+});

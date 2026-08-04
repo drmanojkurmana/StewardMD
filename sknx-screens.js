@@ -176,6 +176,14 @@
           '<div class="sknx-dx-empty">' + ic("check_circle") + "<span>No confident finding - correlate clinically.</span></div>") +
       "</div>";
 
+    // Experimental-model badge: shown when the EXPERIMENTAL on-device ONNX classifier produced this
+    // result (engine === "realvision-experimental"), so the clinician knows the read is from an
+    // uncalibrated public model, not a validated one. The mock/native paths show nothing.
+    var expHtml = (a.engine === "realvision-experimental") ?
+      '<div class="sknx-exp" role="note">' + ic("science") +
+        "<span>Experimental on-device model - uncalibrated, for testing only. Not a validated result; correlate clinically.</span>" +
+      "</div>" : "";
+
     // Red referral banner — icon + colour + text together (never colour alone). Shown ONLY when the
     // engine's malignancy/red-flag guardrail set referral=true; referralReason is always shown verbatim.
     var referHtml = a.referral ?
@@ -208,6 +216,7 @@
 
     var body =
       '<div class="sknx-result-body">' +
+        expHtml +
         referHtml +
         heatmapHtml +
         '<div class="sknx-sec-title">Differential</div>' +
