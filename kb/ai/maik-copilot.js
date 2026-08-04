@@ -48,10 +48,13 @@
   };
   function orchestrate(resolved) {
     var q = norm((resolved && resolved.query && resolved.query.raw) || ""), out = [];
-    var add = function (kind, arg, why) { var t = TOOLS[kind]; if (t && t.probe()) out.push({ kind: kind, label: t.label, arg: arg || null, why: why || "" }); };
-    // calculators: whatever the brain proactively suggested (Stage 6 relevance)
+    var add = function (kind, arg, why, labelOverride) { var t = TOOLS[kind]; if (t && t.probe()) out.push({ kind: kind, label: labelOverride || t.label, arg: arg || null, why: why || "" }); };
+    // calculators: whatever the brain proactively suggested (Stage 6 relevance). Label each chip with
+    // its OWN name (e.g. "CURB-65", "CRB-65") — not the generic "Open calculator" — so a topic that maps
+    // to two scores no longer renders two identical "Open calculator" chips.
     var calcs = (G("MaiKBrain") && G("MaiKBrain").suggestCalcs) ? G("MaiKBrain").suggestCalcs(q, resolved && resolved.primary) : [];
-    calcs.slice(0, 3).forEach(function (c) { add("calculator", c.id, c.why); });
+    var _mc = G("MEDCALC"), _cseen = {};
+    calcs.slice(0, 3).forEach(function (c) { if (!c || _cseen[c.id]) return; _cseen[c.id] = 1; var nm = (_mc && _mc.get && _mc.get(c.id) && _mc.get(c.id).title) || String(c.id || "").toUpperCase(); add("calculator", c.id, c.why, nm); });
     // modality intents
     if (/\becg\b|electrocardiogram|arrhythmia|\bst elevation\b/.test(q)) add("ecg", null, "interpret an ECG");
     if (/chest x.?ray|\bcxr\b|cxr\b/.test(q)) add("cxr", null, "interpret a chest X-ray");
