@@ -32,15 +32,32 @@ test("handle corrupt/non-array stored values gracefully", () => {
   assert.ok(id2);
 });
 
-test("id uniqueness: same at and top label produce different ids", () => {
+test("id uniqueness: same at and top label produce different ids even at cap", () => {
   const mem = {}; const s = { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = v; } };
+  // Fill store to 100-item cap with distinct entries (different labels)
+  for (let i = 0; i < 100; i++) {
+    STORE.save({ differential: [{ label: "disease_" + i, prob: 0.5 }], at: i }, s);
+  }
+  assert.equal(STORE.list(s).length, 100, "store should be at 100-item cap");
+
+  // Now save two records with SAME at (1000) and SAME label ("acne") but different prob
   const id1 = STORE.save({ differential: [{ label: "acne", prob: 0.8 }], at: 1000 }, s);
   const id2 = STORE.save({ differential: [{ label: "acne", prob: 0.9 }], at: 1000 }, s);
-  assert.notEqual(id1, id2, "ids must be different for distinct saves");
+
+  // IDs must be different despite identical at and label
+  assert.notEqual(id1, id2, "ids must be different even with identical at and label");
+
+  // Both should be in the list (2 newest entries at cap)
   const list = STORE.list(s);
-  assert.equal(list.length, 2, "both analyses should be in history");
+  assert.equal(list.length, 100, "list should still be capped at 100");
+  const id1InList = list.some(r => r.id === id1);
+  const id2InList = list.some(r => r.id === id2);
+  assert.ok(id1InList, "first new record should be in list");
+  assert.ok(id2InList, "second new record should be in list");
+
+  // get(id) must return the correct record for each
   const rec1 = STORE.get(id1, s);
   const rec2 = STORE.get(id2, s);
-  assert.equal(rec1.differential[0].prob, 0.8, "first record should have prob 0.8");
-  assert.equal(rec2.differential[0].prob, 0.9, "second record should have prob 0.9");
+  assert.equal(rec1.differential[0].prob, 0.8, "rec1 should have prob 0.8");
+  assert.equal(rec2.differential[0].prob, 0.9, "rec2 should have prob 0.9");
 });

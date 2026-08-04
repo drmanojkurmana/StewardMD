@@ -8,7 +8,8 @@
   function save(analysis, impl) {
     var s = store(impl); if (!s) return null;
     var all = readAll(s);
-    var id = "skn_" + (analysis.at || 0) + "_" + ((analysis.differential && analysis.differential[0] && analysis.differential[0].label) || "x") + "_" + all.length;
+    var nonce = Math.random().toString(36).slice(2, 8);
+    var id = "skn_" + (analysis.at || 0) + "_" + ((analysis.differential && analysis.differential[0] && analysis.differential[0].label) || "x") + "_" + nonce;
     all.unshift(Object.assign({ id: id }, analysis)); writeAll(s, all.slice(0, 100)); return id;
   }
   function list(impl) { var s = store(impl); if (!s) return []; return readAll(s).map(function (r) { return { id: r.id, at: r.at, top: (r.differential && r.differential[0] && r.differential[0].label) || null }; }); }
