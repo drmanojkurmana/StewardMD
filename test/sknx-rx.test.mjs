@@ -5,10 +5,11 @@ import { test } from "node:test";
 import assert from "node:assert";
 import RX from "../sknx-rx.js";
 
-// A benign, rx-eligible analysis (general engine, no referral).
-const benign = { differential: [{ label: "psoriasis", prob: 0.72, band: "high" }], referral: false, rxEligible: true };
+// A benign, rx-eligible analysis. `lesion` present => the v2beta dual-engine malignancy screen RAN and
+// cleared (a required precondition for any Rx draft; see the lesion-gate test below).
+const benign = { differential: [{ label: "psoriasis", prob: 0.72, band: "high" }], lesion: { top: "nevus", prob: 0.9, band: "high" }, referral: false, rxEligible: true };
 // A malignant/referral analysis (lesion engine forced referral).
-const malignant = { differential: [{ label: "melanoma", prob: 0.4, band: "moderate" }], referral: true, rxEligible: false };
+const malignant = { differential: [{ label: "melanoma", prob: 0.4, band: "moderate" }], lesion: { top: "melanoma", prob: 0.4, band: "moderate" }, referral: true, rxEligible: false };
 
 // deps that satisfy the flag + prescriber conditions (injected so the test never touches window globals).
 const ON = { flagOn: true, canPrescribe: () => true };
@@ -26,6 +27,15 @@ test("eligible: true only when rxEligible + not-referral + flag on + verified pr
 test("eligible defaults to FALSE with no deps (flag off + no prescriber in a bare env)", () => {
   // No window.SMD_SKNX_FLAGS / SMD_RX in node -> flagOn false, canPrescribe false -> never eligible.
   assert.equal(RX.eligible(benign), false);
+});
+
+test("eligible is FALSE when the malignancy screen never ran (no analysis.lesion, e.g. a v1 tier)", () => {
+  // Even with the flag on + a verified prescriber + rxEligible + not-referral, absence of a lesion read
+  // means no malignancy screen ran -> no Rx (R1 HIGH: don't offer Rx on a tier without the screen).
+  const noScreen = { differential: [{ label: "psoriasis", prob: 0.72, band: "high" }], referral: false, rxEligible: true };
+  assert.equal(RX.eligible(noScreen, ON), false);
+  // Adding the lesion read (screen ran and cleared) makes the same case eligible.
+  assert.equal(RX.eligible({ ...noScreen, lesion: { top: "nevus", band: "high" } }, ON), true);
 });
 
 test("draftFor: malignant/urgent conditions are NEVER draftable (return null)", () => {
@@ -48,6 +58,19 @@ test("draftFor: a curated benign condition returns class-level options with cite
   assert.ok(d.sources.length >= 1, "expected cited sources");
   for (const s of d.sources) assert.ok(s.url && /^https?:/i.test(s.url), "source has an http(s) url");
   assert.equal(d.topic, "psoriasis");
+});
+
+test("REGIMENS drug names are qualified, never a bare generic (pad must not auto-fill a dose)", () => {
+  // The SMD_RX pad auto-fills a Drug Index dose for a line whose name matches a bare generic. Every
+  // SknX drug line must stay class-level/qualified (a parenthetical or a class prefix) so it lands as
+  // an unverified line for the clinician to dose - never a pre-filled dose (R1 Medium).
+  for (const [cond, regimen] of Object.entries(RX.REGIMENS)) {
+    for (const r of regimen) {
+      if (r.isAdvice) continue;
+      assert.ok(/\(|^Topical|^Non-/.test(r.name), cond + ": drug name must be qualified, got '" + r.name + "'");
+      assert.doesNotMatch(r.name, /\b\d+\s?(mg|mcg|ml)\b/i, cond + ": no patient dose in a drug name");
+    }
+  }
 });
 
 test("openDraft: a referral/malignant analysis NEVER opens the Rx pad (zero calls)", () => {

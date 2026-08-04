@@ -76,3 +76,20 @@ R7 release gate). No code flips the flag here.
 - Draft regimens are curated + cited, never LLM-sourced, never a fixed patient dose (Task 2 tests).
 - The Phase-1/2 e2e still passes (no `.sknx-rx` on melanoma), plus the new eligible-only presence test.
 - `smd_sknx_rx` def:false; the flag is NOT flipped; R1/R3/R7 gate documented.
+
+---
+
+## R1 clinical review — VERDICT: GO (merge as flag-OFF, R1-gated scaffold)
+Reviewed 2026-08-04. Malignancy referral guardrail (`sknx-engines.js`) untouched; eligibility gate triple-layered and correct; flag ships OFF (no production flip); 87 sknx unit + 23 CDP e2e green.
+
+**Addressed in this branch (post-review hardening):**
+- HIGH: `eligible()` now also requires `analysis.lesion` (the v2beta dual-engine malignancy screen must have RUN and cleared) - no Rx on a tier without the screen.
+- MED: pad dose-injection - REGIMENS drug names kept qualified (never a bare generic); a test locks the contract.
+- MED: potent-steroid site caveat (psoriasis) + retinoid pregnancy caveat (acne) added as advice lines.
+- LOW: impetigo aligned to NICE first-line (topical hydrogen peroxide) + "widespread/bullous -> oral" caveat; tinea "scalp/nail -> oral" caveat.
+
+**Pre-flip conditions (BEFORE `smd_sknx_rx` is ever flipped on - not required for this flag-OFF merge):**
+1. R1 clinical sign-off on the final `REGIMENS` map (incl. the caveats above).
+2. R3-DPDP review: the pad writes prescriber/clinic identity and the draft topic is a diagnosis.
+3. R7 release gate: consider an access-code/entitlement gate for `smd_sknx_rx` (as ThoreX/KardioX use) rather than a bare URL/localStorage flip.
+4. stewardmd-security-reviewer pass on the Rx path before flip.

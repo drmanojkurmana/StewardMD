@@ -35,7 +35,8 @@
     "psoriasis": [
       { name: "Topical corticosteroid (potent, e.g. betamethasone valerate)", class: "topical corticosteroid" },
       { name: "Topical vitamin D analogue (e.g. calcipotriol)", class: "vitamin D analogue" },
-      { name: "Emollient", class: "emollient", isAdvice: true }
+      { name: "Emollient", class: "emollient", isAdvice: true },
+      { name: "Use a milder potency on the face, flexures, and genitals", class: "site caution", isAdvice: true }
     ],
     "eczema": [
       { name: "Emollient", class: "emollient", isAdvice: true },
@@ -52,20 +53,25 @@
     ],
     "acne": [
       { name: "Topical retinoid (e.g. adapalene)", class: "topical retinoid" },
-      { name: "Benzoyl peroxide", class: "topical antibacterial / keratolytic" }
+      { name: "Benzoyl peroxide (topical)", class: "topical antibacterial / keratolytic" },
+      { name: "Avoid topical retinoids in pregnancy; benzoyl peroxide is preferred", class: "pregnancy caution", isAdvice: true }
     ],
     "tinea": [
-      { name: "Topical antifungal (e.g. clotrimazole or terbinafine)", class: "topical antifungal" }
+      { name: "Topical antifungal (e.g. clotrimazole or terbinafine)", class: "topical antifungal" },
+      { name: "Scalp or nail involvement needs an oral antifungal - refer or adjust", class: "site caution", isAdvice: true }
     ],
     "tinea corporis": [
-      { name: "Topical antifungal (e.g. clotrimazole or terbinafine)", class: "topical antifungal" }
+      { name: "Topical antifungal (e.g. clotrimazole or terbinafine)", class: "topical antifungal" },
+      { name: "Scalp or nail involvement needs an oral antifungal - refer or adjust", class: "site caution", isAdvice: true }
     ],
     "urticaria": [
       { name: "Non-sedating antihistamine (e.g. cetirizine)", class: "non-sedating antihistamine" },
       { name: "Identify and avoid triggers where possible", class: "trigger avoidance", isAdvice: true }
     ],
     "impetigo": [
-      { name: "Topical antibacterial (e.g. fusidic acid)", class: "topical antibacterial" },
+      { name: "Topical hydrogen peroxide (localized, non-bullous; NICE first-line)", class: "topical antiseptic" },
+      { name: "Topical antibacterial (e.g. fusidic acid) if hydrogen peroxide is unsuitable", class: "topical antibacterial" },
+      { name: "Widespread or bullous impetigo needs an oral antibiotic - refer or adjust", class: "escalation caution", isAdvice: true },
       { name: "Hygiene measures to limit spread", class: "general measures", isAdvice: true }
     ],
     "rosacea": [
@@ -110,6 +116,12 @@
     if (!analysis) return false;
     if (analysis.rxEligible !== true) return false;
     if (analysis.referral === true) return false;
+    // R1 HIGH: require the lesion/malignancy screen to have RUN before any Rx is offered. The engine
+    // sets analysis.lesion ONLY at the v2beta dual-engine tier (sknx-engines.js) - at a lower tier no
+    // malignancy read exists and referral rests on red-flag heuristics alone, so a general-engine
+    // misread of a malignant lesion as a benign condition could otherwise reach an Rx draft. No lesion
+    // read -> no draft.
+    if (!analysis.lesion) return false;
     if (!flagOn(deps)) return false;
     if (!canPrescribe(deps)) return false;
     if (!draftFor(topLabel(analysis))) return false;
