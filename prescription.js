@@ -75,6 +75,14 @@
       ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:#2563eb;color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.rx-ico{width:14px;height:14px;vertical-align:-2px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.rx-x .rx-ico,.rx-del .rx-ico{width:16px;height:16px}.rx-print .rx-ico{margin-right:5px}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
+      ".rx-clinic-card{display:flex;align-items:center;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:9px 11px;margin-bottom:6px;background:var(--paper,#f8faf9)}.rx-clinic-logo{width:42px;height:42px;object-fit:contain;border-radius:8px;background:#fff}.rx-clinic-meta{flex:1;min-width:0}.rx-clinic-nm{font:800 14px var(--hfont);color:var(--hink)}.rx-clinic-ad{font:500 11.5px var(--hfont);color:var(--hmut,#64748b)}.rx-clinic-edit{border:0;background:transparent;color:var(--teal,#0e6e63);font:700 12px var(--hfont);cursor:pointer}" +
+      ".rx-clinic-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}.rx-clinic-form .rx-in{width:100%}.rx-logo-row{display:flex;align-items:center;gap:8px}.rx-logo-prev{width:54px;height:54px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 10px var(--hfont);color:var(--hmut);overflow:hidden;flex:none}.rx-logo-prev img{width:100%;height:100%;object-fit:contain}" +
+      ".rx-bp-ov{position:absolute;inset:0;background:rgba(15,23,42,.42);display:flex;align-items:flex-end;justify-content:center;z-index:6;border-radius:16px}.rx-bp{background:var(--hpanel,#fff);width:100%;max-height:82%;overflow:auto;border-radius:16px 16px 0 0;padding:14px}.rx-exp,.rx-sign-sheet{border-radius:16px}.rx-bp-h{display:flex;align-items:center;justify-content:space-between;font:800 15px var(--hfont);color:var(--hink)}.rx-bp-x{border:0;background:transparent;cursor:pointer;color:var(--hmut)}.rx-bp-sub{font:600 10.5px var(--hfont);color:var(--hmut);text-transform:uppercase;letter-spacing:.05em;margin:2px 0 8px}" +
+      ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
+      ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
+      ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
+      ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
+      ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}" +
       "@media print{body>*{display:none!important}body>.rx-scrim,body>.rx-sheet{display:block!important;position:static!important;transform:none!important;box-shadow:none!important;opacity:1!important;max-height:none!important;width:auto!important}.rx-scrim{background:none!important}.rx-x,.rx-del,.rx-add,.rx-print,.rx-row{display:none!important}.rx-in{border:none!important;padding:0!important;background:none!important}.rx-line{border:1px solid #ccc!important;background:none!important}}";
     document.head.appendChild(s);
   }
@@ -256,7 +264,7 @@
     }
     return '<div class="' + cls + '" data-i="' + i + '">' +
       '<div class="r1"><input class="rx-in rx-drug" data-f="drug" value="' + esc(l.drug) + '" placeholder="Drug (generic)">' +
-      '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand"><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
+      '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand"><button class="rx-brands" data-rx-brands="1" title="Pick a brand by price">₹ brands</button><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
       '<div class="r2"><input class="rx-in rx-dose" data-f="dose" value="' + esc(l.dose || "") + '" placeholder="Dose">' +
       '<input class="rx-in rx-freq" data-f="freq" value="' + esc(l.freq || "") + '" placeholder="Freq">' +
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
@@ -324,22 +332,27 @@
     var date = now.toISOString().slice(0, 10);
     var body =
       '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
-      '<div class="rx-clinic">StewardMD' + (topic ? ' · ' + esc(topic) : '') + '</div>' +
       '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+      '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
       '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
       '<div class="rx-symbol">℞</div>' +
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
-      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxPrint">'+rxIco("print")+' Print / PDF</button></div>' +
-      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>NMC Reg: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
+      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button></div>' +
+      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", close);
+    function wireClinic() { var a = sheet.querySelector("#rxClinicAdd"); if (a) a.onclick = function () { openClinicEditor(refreshClinic); }; var e = sheet.querySelector("#rxClinicEdit"); if (e) e.onclick = function () { openClinicEditor(refreshClinic); }; }
+    function refreshClinic() { var s = sheet.querySelector("#rxClinicSlot"); if (s) { s.innerHTML = clinicSummaryHTML(); wireClinic(); } }
+    wireClinic();
     sheet.querySelector("#rxAdd").addEventListener("click", function () {
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       bindDel();
       acAttach(wrap.lastElementChild);   // brand/composition search on the new line
     });
-    sheet.querySelector("#rxPrint").addEventListener("click", function () { try { doRxPrint(topic, regNo); } catch (e) {} });
+    sheet.querySelector("#rxExport").addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
+    // Brand-by-price picker (delegated so it also works on lines added later).
+    sheet.querySelector("#rxLines").addEventListener("click", function (e) { var b = e.target && e.target.closest ? e.target.closest(".rx-brands") : null; if (b) { var ln = b.closest(".rx-line"); if (ln) openBrandPicker(ln); } });
     bindDel();
     // Brand/composition search + auto-fill on every drug line (skips advice lines).
     sheet.querySelectorAll("#rxLines .rx-line").forEach(acAttach);
@@ -392,5 +405,114 @@
     build(getNmc());
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc };
+  // ================= Rx v2: clinic letterhead · brand-by-price · signature · PDF/JPEG =================
+  function rxToast(m){ try{ (window.SMD_toast||window.toast||function(){})(m); }catch(e){} }
+  function rxImgToDataURL(file, maxW, cb){
+    try{ var r=new FileReader(); r.onload=function(){ var img=new Image(); img.onload=function(){ var sc=Math.min(1, maxW/img.width); var cv=document.createElement("canvas"); cv.width=Math.round(img.width*sc); cv.height=Math.round(img.height*sc); cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height); try{ cb(cv.toDataURL("image/png")); }catch(e){ cb(r.result); } }; img.onerror=function(){ cb(r.result); }; img.src=r.result; }; r.readAsDataURL(file); }catch(e){}
+  }
+  // ---- Clinic letterhead (stored on THIS device, reused on every Rx) ----
+  function clinicKey(){ return "smd_rx_clinic_" + uid(); }
+  function getClinic(){ try{ return JSON.parse(localStorage.getItem(clinicKey())||"null")||{}; }catch(e){ return {}; } }
+  function setClinic(o){ try{ localStorage.setItem(clinicKey(), JSON.stringify(o||{})); }catch(e){} }
+  function clinicSummaryHTML(){
+    var c=getClinic(); if(!(c&&(c.name||c.address||c.phone||c.logo))) return '<button class="rx-btn rx-add" id="rxClinicAdd" style="width:100%">+ Add clinic name, address, phone & logo</button>';
+    return '<div class="rx-clinic-card">'+(c.logo?'<img class="rx-clinic-logo" src="'+esc(c.logo)+'" alt="">':'')+
+      '<div class="rx-clinic-meta"><div class="rx-clinic-nm">'+esc(c.name||"—")+'</div>'+
+      (c.address?'<div class="rx-clinic-ad">'+esc(c.address)+'</div>':'')+(c.phone?'<div class="rx-clinic-ad">'+esc(c.phone)+'</div>':'')+'</div>'+
+      '<button class="rx-clinic-edit" id="rxClinicEdit">Edit</button></div>';
+  }
+  function openClinicEditor(onSaved){
+    var c=getClinic(), logoData=c.logo||"";
+    var ov=document.createElement("div"); ov.className="rx-bp-ov";
+    ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Clinic details</b><button class="rx-bp-x">'+rxIco("close")+'</button></div>'+
+      '<div class="rx-bp-sub">your letterhead · stored only on this device</div>'+
+      '<div class="rx-clinic-form"><input class="rx-in" id="rxCName" placeholder="Clinic / hospital name" value="'+esc(c.name||"")+'"><textarea class="rx-in" id="rxCAddr" placeholder="Address" rows="2">'+esc(c.address||"")+'</textarea><input class="rx-in" id="rxCPhone" placeholder="Phone / contact" value="'+esc(c.phone||"")+'">'+
+      '<div class="rx-logo-row"><div class="rx-logo-prev" id="rxLogoPrev">'+(c.logo?'<img src="'+esc(c.logo)+'">':'Logo')+'</div><label class="rx-btn rx-add" style="cursor:pointer">Upload logo<input type="file" id="rxLogoIn" accept="image/*" style="display:none"></label><button class="rx-btn rx-add" id="rxLogoClr">Remove</button></div></div>'+
+      '<div class="rx-row"><button class="rx-btn rx-print" id="rxCSave" style="width:100%">Save clinic details</button></div></div>';
+    sheet.appendChild(ov);
+    ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
+    var li=ov.querySelector("#rxLogoIn"); if(li) li.addEventListener("change", function(){ var f=li.files&&li.files[0]; if(f) rxImgToDataURL(f,320,function(d){ logoData=d; var p=ov.querySelector("#rxLogoPrev"); if(p)p.innerHTML='<img src="'+esc(d)+'">'; }); });
+    var lc=ov.querySelector("#rxLogoClr"); if(lc) lc.addEventListener("click", function(){ logoData=""; var p=ov.querySelector("#rxLogoPrev"); if(p)p.textContent="Logo"; });
+    ov.querySelector("#rxCSave").addEventListener("click", function(){ setClinic({ name:(ov.querySelector("#rxCName").value||"").trim(), address:(ov.querySelector("#rxCAddr").value||"").trim(), phone:(ov.querySelector("#rxCPhone").value||"").trim(), logo:logoData }); ov.remove(); if(onSaved) onSaved(); });
+  }
+  // ---- Brand-by-price picker (MEDAPI: every Indian brand for the molecule, cheapest first) ----
+  function openBrandPicker(line){
+    var drugIn=line.querySelector('[data-f="drug"]'), brandIn=line.querySelector('[data-f="brand"]');
+    var drug=((drugIn||{}).value||"").trim();
+    if(!drug){ rxToast("Type the drug first"); if(drugIn)drugIn.focus(); return; }
+    if(!(window.MEDAPI&&MEDAPI.composition)){ rxToast("Brand database needs a connection"); return; }
+    var ov=document.createElement("div"); ov.className="rx-bp-ov";
+    ov.innerHTML='<div class="rx-bp"><div class="rx-bp-h"><b>Brands · '+esc(drug)+'</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-bp-sub">cheapest first · tap to use</div><div class="rx-bp-list">Loading…</div></div>';
+    sheet.appendChild(ov);
+    ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
+    ov.addEventListener("click", function(e){ if(e.target===ov) ov.remove(); });
+    MEDAPI.composition(drug, "price", "all", 40, 0).then(function(d){
+      var list=ov.querySelector(".rx-bp-list"), arr=(d&&d.brands)||[];
+      if(!arr.length){ list.innerHTML='<div class="rx-ac-empty">No brands found — try the exact molecule name.</div>'; return; }
+      list.innerHTML=arr.map(function(b,i){ var meta=[b.manufacturer,b.form].filter(Boolean).join(" · ");
+        return '<button class="rx-bp-it" data-i="'+i+'"><span class="rx-bp-nm">'+esc(b.brand)+(b.discontinued?' <em>(discontinued)</em>':'')+'</span>'+(meta?'<span class="rx-bp-mf">'+esc(meta)+'</span>':'')+'<span class="rx-bp-pr">'+(b.mrp!=null?'₹'+b.mrp:'')+'</span></button>'; }).join("");
+      Array.prototype.forEach.call(list.querySelectorAll(".rx-bp-it"), function(btn){ btn.addEventListener("click", function(){ var b=arr[+btn.getAttribute("data-i")]; if(brandIn) brandIn.value=b.brand; ov.remove(); }); });
+    }).catch(function(){ var l=ov.querySelector(".rx-bp-list"); if(l) l.innerHTML='<div class="rx-ac-empty">Couldn’t load brands — check connection.</div>'; });
+  }
+  // ---- Signature: draw or upload, optional save & reuse on this device ----
+  function signKey(){ return "smd_rx_sign_" + uid(); }
+  function getSign(){ try{ return localStorage.getItem(signKey())||""; }catch(e){ return ""; } }
+  function setSign(d){ try{ if(d) localStorage.setItem(signKey(), d); else localStorage.removeItem(signKey()); }catch(e){} }
+  function openSignPad(onDone){
+    var saved=getSign();
+    var ov=document.createElement("div"); ov.className="rx-bp-ov";
+    ov.innerHTML='<div class="rx-bp rx-sign-sheet"><div class="rx-bp-h"><b>Sign the prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-bp-sub">Sign with your finger, or upload your signature image.</div><canvas class="rx-sign-cv" width="600" height="200"></canvas><label class="rx-sign-reuse"><input type="checkbox" id="rxSignSave" '+(saved?'checked':'')+'> Save &amp; reuse on this device</label><div class="rx-row"><button class="rx-btn rx-add" id="rxSignClear">Clear</button><label class="rx-btn rx-add" style="cursor:pointer">Upload<input type="file" id="rxSignUp" accept="image/*" style="display:none"></label><button class="rx-btn rx-print" id="rxSignUse">Use signature →</button></div></div>';
+    sheet.appendChild(ov);
+    var cv=ov.querySelector(".rx-sign-cv"), ctx=cv.getContext("2d"); ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.strokeStyle="#0f172a";
+    var upImg="", drew=false, drawing=false, px=0, py=0;
+    if(saved){ var im0=new Image(); im0.onload=function(){ try{ ctx.drawImage(im0,0,0,cv.width,cv.height); }catch(e){} }; im0.src=saved; drew=true; }
+    function pos(e){ var r=cv.getBoundingClientRect(), t=(e.touches&&e.touches[0])||e; return { x:(t.clientX-r.left)*(cv.width/r.width), y:(t.clientY-r.top)*(cv.height/r.height) }; }
+    function down(e){ e.preventDefault(); drawing=true; drew=true; upImg=""; var p=pos(e); px=p.x; py=p.y; }
+    function move(e){ if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(p.x,p.y); ctx.stroke(); px=p.x; py=p.y; }
+    function up(){ drawing=false; }
+    cv.addEventListener("mousedown",down); cv.addEventListener("mousemove",move); window.addEventListener("mouseup",up);
+    cv.addEventListener("touchstart",down,{passive:false}); cv.addEventListener("touchmove",move,{passive:false}); cv.addEventListener("touchend",up);
+    ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); });
+    ov.querySelector("#rxSignClear").addEventListener("click", function(){ ctx.clearRect(0,0,cv.width,cv.height); drew=false; upImg=""; });
+    ov.querySelector("#rxSignUp").addEventListener("change", function(){ var f=this.files&&this.files[0]; if(f) rxImgToDataURL(f,600,function(d){ upImg=d; drew=true; var im=new Image(); im.onload=function(){ ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(im,0,0,cv.width,cv.height); }; im.src=d; }); });
+    ov.querySelector("#rxSignUse").addEventListener("click", function(){ if(!drew){ rxToast("Please sign or upload first"); return; } var data=upImg||cv.toDataURL("image/png"); setSign(ov.querySelector("#rxSignSave").checked?data:""); ov.remove(); if(onDone) onDone(data); });
+  }
+  // ---- Professional Rx document + PDF/JPEG export ----
+  function rxDoc(topic, regNo, signImg){
+    var d=collectRx(), c=getClinic(), date=""; try{ date=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}); }catch(e){}
+    var n=0;
+    var rows=d.lines.map(function(L){ if(L.advice) return '<tr class="advr"><td></td><td colspan="2">• '+esc(L.text)+'</td></tr>'; n++; var sub=[L.dose,L.freq,L.duration].filter(Boolean).join(" · "); return '<tr><td class="sn">'+n+'</td><td class="dg"><b>'+esc(L.drug)+'</b>'+(L.brand?' <span class="br">('+esc(L.brand)+')</span>':'')+'</td><td class="dz">'+esc(sub)+'</td></tr>'; }).join("");
+    var node=document.createElement("div"); node.className="rx-doc";
+    node.innerHTML='<div class="rxdoc-in"><div class="rxdoc-hd">'+(c.logo?'<img class="rxdoc-logo" src="'+esc(c.logo)+'">':'')+
+      '<div class="rxdoc-cl"><div class="rxdoc-nm">'+esc(c.name||docName()||"Prescription")+'</div>'+(c.address?'<div class="rxdoc-ad">'+esc(c.address)+'</div>':'')+(c.phone?'<div class="rxdoc-ad">Ph: '+esc(c.phone)+'</div>':'')+'</div></div>'+
+      '<div class="rxdoc-rule"></div><div class="rxdoc-pt"><span>'+(d.name?'<b>'+esc(d.name)+'</b>':'')+(d.age?' &nbsp; '+esc(d.age):'')+'</span><span class="rxdoc-dt">'+esc(date)+'</span></div>'+
+      (topic?'<div class="rxdoc-topic">'+esc(topic)+'</div>':'')+'<div class="rxdoc-rx">℞</div>'+
+      '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
+      '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
+      '<div class="rxdoc-dis">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div></div>';
+    return node;
+  }
+  function rxSaveOrShare(dataURL, filename){
+    if(rxNative()){ var P=rxPlugins(); var b64=(dataURL.split(",")[1]||""); if(P.Filesystem&&P.Filesystem.writeFile&&P.Share&&P.Share.share){ P.Filesystem.writeFile({ path:filename, data:b64, directory:"CACHE" }).then(function(res){ return P.Share.share({ title:"Prescription", url:res.uri, dialogTitle:"Save or share prescription" }); }).catch(function(){ rxToast("Export failed"); }); return; } }
+    try{ var a=document.createElement("a"); a.href=dataURL; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ rxToast("Export failed"); }
+  }
+  function exportRx(kind, topic, regNo, signImg){
+    if(!window.html2canvas){ rxToast("Export engine still loading — try again"); return; }
+    var node=rxDoc(topic, regNo, signImg); node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
+    window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
+      node.remove();
+      if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
+      var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }
+      var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
+      var imgW=pw, imgH=canvas.height*(pw/canvas.width), img=canvas.toDataURL("image/jpeg",0.95);
+      if(imgH<=ph){ pdf.addImage(img,"JPEG",0,0,imgW,imgH); } else { var y=0; while(y<imgH-1){ pdf.addImage(img,"JPEG",0,-y,imgW,imgH); y+=ph; if(y<imgH-1) pdf.addPage(); } }
+      rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+    }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
+  }
+  function signAndExport(topic, regNo){
+    function chooser(sig){ var ov=document.createElement("div"); ov.className="rx-bp-ov"; ov.innerHTML='<div class="rx-bp rx-exp"><div class="rx-bp-h"><b>Export prescription</b><button class="rx-bp-x">'+rxIco("close")+'</button></div><div class="rx-row" style="justify-content:center;margin-top:6px"><button class="rx-btn rx-print" id="rxExpPdf">'+rxIco("print")+' Save as PDF</button><button class="rx-btn rx-add" id="rxExpJpg">Save as JPEG</button></div></div>'; sheet.appendChild(ov); ov.querySelector(".rx-bp-x").addEventListener("click", function(){ ov.remove(); }); ov.querySelector("#rxExpPdf").addEventListener("click", function(){ ov.remove(); exportRx("pdf",topic,regNo,sig); }); ov.querySelector("#rxExpJpg").addEventListener("click", function(){ ov.remove(); exportRx("jpeg",topic,regNo,sig); }); }
+    var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
+  }
+
+  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic };
 })();

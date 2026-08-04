@@ -1446,7 +1446,11 @@ window.openExternal = function (u) {
 <script src="/signout-fix.js?v=gold339" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1024" defer></script>
-<script src="/prescription.js?v=gold979" defer></script>
+<!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
+     prescription.js; export is user-triggered so defer order is safe. -->
+<script src="/vendor-html2canvas.js?v=1" defer></script>
+<script src="/vendor-jspdf.js?v=1" defer></script>
+<script src="/prescription.js?v=gold980-rx2" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
