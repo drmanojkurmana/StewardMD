@@ -74,3 +74,61 @@ test("differently-cased benign label is not mistaken for malignant (no false pos
   assert.equal(a.referral, false);
   assert.equal(a.rxEligible, true);
 });
+
+// --- broadened malignant/refer set (beyond melanoma/BCC/SCC) ---
+test("Mycosis Fungoides (cutaneous lymphoma) forces referral, blocks Rx, names the finding", () => {
+  const a = ENG.makeAnalysis({
+    generalProbs: [{ label: "eczema", prob: 0.6 }],
+    lesionProbs:  [{ label: "Mycosis Fungoides", prob: 0.4 }, { label: "eczema", prob: 0.5 }],
+    features: {}
+  }, "v2beta");
+  assert.equal(a.referral, true);
+  assert.equal(a.rxEligible, false);
+  assert.match(a.referralReason, /Mycosis Fungoides/i);
+});
+
+test("Merkel cell carcinoma (and MCC / Kaposi / DFSP synonyms) force referral", () => {
+  for (const label of ["Merkel cell carcinoma", "MCC", "Kaposi sarcoma", "dermatofibrosarcoma protuberans", "sebaceous carcinoma", "cutaneous metastasis", "Bowen disease"]) {
+    const a = ENG.makeAnalysis({
+      generalProbs: [{ label: "psoriasis", prob: 0.6 }],
+      lesionProbs:  [{ label, prob: 0.3 }, { label: "nevus", prob: 0.6 }],
+      features: {}
+    }, "v2beta");
+    assert.equal(a.referral, true, "expected referral for malignant label: " + label);
+    assert.equal(a.rxEligible, false, "expected no Rx for malignant label: " + label);
+  }
+});
+
+test("benign 'dermatofibroma' is NOT mis-hit by the malignant 'dermatofibrosarcoma' key (exact-key match)", () => {
+  const a = ENG.makeAnalysis({
+    generalProbs: [{ label: "eczema", prob: 0.6 }],
+    lesionProbs:  [{ label: "dermatofibroma", prob: 0.9 }, { label: "nevus", prob: 0.05 }],
+    features: {}
+  }, "v2beta");
+  assert.equal(a.referral, false);
+  assert.equal(a.rxEligible, true);
+});
+
+test("melanoma subtypes + short code force referral (amelanotic/nodular/acral/lentigo maligna/mel)", () => {
+  for (const label of ["amelanotic melanoma", "nodular melanoma", "acral lentiginous melanoma", "lentigo maligna", "lentigo maligna melanoma", "mel", "keratoacanthoma", "atypical fibroxanthoma", "extramammary paget disease", "porocarcinoma"]) {
+    const a = ENG.makeAnalysis({
+      generalProbs: [{ label: "eczema", prob: 0.6 }],
+      lesionProbs:  [{ label, prob: 0.2 }, { label: "nevus", prob: 0.7 }],
+      features: {}
+    }, "v2beta");
+    assert.equal(a.referral, true, "expected referral for malignant label: " + label);
+    assert.equal(a.rxEligible, false, "expected no Rx for malignant label: " + label);
+  }
+});
+
+test("benign 'solar lentigo' / 'sebaceous hyperplasia' are NOT mis-hit as malignant (exact-key)", () => {
+  for (const label of ["solar lentigo", "lentigo", "sebaceous hyperplasia", "seborrheic keratosis"]) {
+    const a = ENG.makeAnalysis({
+      generalProbs: [{ label: "psoriasis", prob: 0.6 }],
+      lesionProbs:  [{ label, prob: 0.9 }, { label: "nevus", prob: 0.05 }],
+      features: {}
+    }, "v2beta");
+    assert.equal(a.referral, false, "benign label must NOT refer: " + label);
+    assert.equal(a.rxEligible, true, "benign label must stay Rx-eligible: " + label);
+  }
+});
