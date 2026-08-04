@@ -46,6 +46,7 @@
             '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
             '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">' + wIco("hospital") + ' GIMSR</button>' +
             '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+            '<div id="ghisConnectHosp"></div>' +
             '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">' + wIco("plus") + ' Add your hospital</button>' +
           '</div>' +
         '</div>' +
@@ -53,6 +54,7 @@
           '<div class="ghis-setup-card">' +
             '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
             '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
+            '<button class="ghis-connect-btn" onclick="ghisOpenConnectConsole()">' + wIco("hospital") + ' Connect an EMR now (self-service)</button>' +
             '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
             '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
             '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
@@ -172,10 +174,35 @@
         if ((el = document.getElementById('ghisAddHospital'))) el.style.display = name === 'addhospital' ? '' : 'none';
         document.getElementById('ghisSetup').style.display = name === 'setup' ? '' : 'none';
         document.getElementById('ghisWard').style.display  = name === 'ward'  ? '' : 'none';
+        if (name === 'hospital') { try { ghisRenderConnectHospitals(); } catch (e) {} }
       }
       window.showGhisScreen = showScreen;
       // Hospital picker actions.
       window.ghisSelectHospital = function (id) { if (id === 'gimsr') showScreen('setup'); };
+      // Connect platform: open the self-service EMR console (falls back to the request form if not loaded).
+      window.ghisOpenConnectConsole = function () { try { if (window.SMD_openConnectEmr) window.SMD_openConnectEmr(); else showScreen('addhospital'); } catch (e) {} };
+      // List the doctor's CONNECTED hospitals (Connect platform) in the picker, next to GIMSR. Tapping one
+      // closes Ward Sync and opens the Connect patient pull (search -> pull -> ICU) for that hospital. Only
+      // appears when the doctor actually has connected hospitals, so GIMSR-only users see no change.
+      function ghisRenderConnectHospitals() {
+        var box = document.getElementById('ghisConnectHosp'); if (!box) return;
+        box.innerHTML = '';
+        if (!window.SMD_CONNECT || !SMD_CONNECT.tenants) return;
+        SMD_CONNECT.tenants().then(function (ts) {
+          box = document.getElementById('ghisConnectHosp');
+          if (!box || !ts || !ts.length) return;
+          var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+          box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to pull a patient into ICU</div>' +
+            ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
+          [].slice.call(box.querySelectorAll('[data-conn-tid]')).forEach(function (b) {
+            b.onclick = function () {
+              var tid = b.getAttribute('data-conn-tid');
+              try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
+              if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(tid);
+            };
+          });
+        }).catch(function () {});
+      }
       // "My Ward" tab — open the StewardMD ward dashboard (the ICU dashboard tuned for ward patients:
       // ventilator hidden, "Ward" labels, own patient list; Treatment / instructions / deep review /
       // imaging / discharge reused). The Ward Sync panel (z 18000) sits ABOVE the dashboard (z 10000),

@@ -107,7 +107,7 @@
   function close() { var o = document.getElementById("smdConnectPtOverlay"); if (o && o.parentNode) o.parentNode.removeChild(o); }
   function msg(k, t) { var m = document.getElementById("cptMsg"); if (m) { m.textContent = t || ""; m.style.color = k === "err" ? "#e5484d" : k === "warn" ? "#d9a441" : "var(--slate,#9bb0c2)"; } }
 
-  function open() {
+  function open(preTenant) {
     if (!flagOn()) { tt("Connect EMR is off."); return; }
     close();
     var ov = document.createElement("div"); ov.id = "smdConnectPtOverlay";
@@ -141,6 +141,7 @@
       sel.innerHTML = ts.map(function (t) { return '<option value="' + esc(t.tenantId) + '">' + esc(t.name || t.tenantId) + '</option>'; }).join("");
       var last = loadLast();   // P3: re-select the last-used hospital + patient so re-opening is instant
       if (last) { if (last.tenantId && ts.some(function (t) { return t.tenantId === last.tenantId; })) sel.value = last.tenantId; var rf = document.getElementById("cptRef"); if (rf && last.patientRef) rf.value = last.patientRef; }
+      if (preTenant && ts.some(function (t) { return t.tenantId === preTenant; })) sel.value = preTenant;   // launched from Ward Sync with a chosen hospital
     });
     document.getElementById("cptPull").onclick = doPull;
     document.getElementById("cptRef").addEventListener("keydown", function (e) { if (e.key === "Enter") doPull(); });

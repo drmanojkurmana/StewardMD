@@ -782,6 +782,9 @@
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
   };
+  // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
+  try { window.SMD_openConnectEmr = function () { try { ACT.connect(); } catch (e) {} }; } catch (e) {}
+  try { window.SMD_openConnectPatient = function (tid) { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(tid); } catch (e) {} }; } catch (e) {}
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
   // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
   try {
