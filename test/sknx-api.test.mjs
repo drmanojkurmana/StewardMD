@@ -7,7 +7,7 @@
 // prescription (server-derived management + LLM-Rx rejection belt).
 import { test } from "node:test";
 import assert from "node:assert";
-import { validateReportRequest, buildScaffold, buildReportServer, looksLikeRx, DISCLAIMER } from "../functions/api/sknx/report-core.mjs";
+import { validateReportRequest, buildScaffold, buildReportServer, buildDiscussionPrompt, looksLikeRx, DISCLAIMER } from "../functions/api/sknx/report-core.mjs";
 import EVID from "../sknx-evidence.js";
 
 const psoriasisEvidence = EVID.retrieve(["psoriasis"]);
@@ -107,4 +107,38 @@ test("invariant 3: referral (malignant) case surfaces red flags and drug-free ma
   const mgmt = mal.management.join(" ");
   assert.doesNotMatch(mgmt, /\b\d+\s?mg\b/i);
   assert.ok(mal.management.some((m) => /refer/i.test(m)), "referral management should defer to specialist");
+});
+
+// 8. Hardened Rx belt (R2 M1 / R1 #2): a bare drug name or non-metric/worded/spelled dose is caught.
+test("invariant 3 (hardened): looksLikeRx catches bare drug names + non-metric/worded/spelled doses", () => {
+  assert.equal(looksLikeRx("Topical clobetasol applied thinly twice daily usually clears localized plaques"), true, "bare drug name");
+  assert.equal(looksLikeRx("Apply hydrocortisone to the affected area"), true, "bare drug name, no dose");
+  assert.equal(looksLikeRx("Use a 2% cream sparingly"), true, "percentage strength");
+  assert.equal(looksLikeRx("Instil two drops into the eye"), true, "worded quantity + non-metric unit");
+  assert.equal(looksLikeRx("Consider 40 milligrams daily"), true, "spelled-out unit");
+  // Educational, drug-free prose must NOT trip the belt (the deterministic + gemini paths rely on this).
+  assert.equal(looksLikeRx("Emollients and a topical corticosteroid class are educational first-line principles"), false, "drug CLASS, not a named drug");
+  assert.equal(looksLikeRx("Well demarcated erythematous plaques with silvery scale"), false);
+});
+
+// 9. Nested-image rejection (R2 L2): an image key at any depth fails closed, not just top-level.
+test("invariant 1 (hardened): a nested image key is rejected (deep scan)", () => {
+  assert.equal(validateReportRequest({ analysis: { photo: "AAAA" } }).status, 400, "nested analysis.photo");
+  assert.equal(validateReportRequest({ context: { meta: { imageBase64: "AAAA" } } }).status, 400, "deeply nested image key");
+  assert.equal(validateReportRequest({ features: { dataUrl: "data:..." } }).status, 400, "nested features.dataUrl");
+  // A clean nested object still passes.
+  assert.equal(validateReportRequest({ analysis: { differential: [{ label: "psoriasis" }] } }).ok, true);
+});
+
+// 10. Input clip + caps (R2 M2): oversized differential/evidence are bounded in the prompt.
+test("prompt input is clipped and capped (no unbounded LLM input)", () => {
+  const bigLabel = "x".repeat(5000);
+  const manyEvidence = Array.from({ length: 100 }, (_, i) => ({ source: "AAD", title: "t" + i, snippet: "s".repeat(5000), url: "https://x/" + i }));
+  const prompt = buildDiscussionPrompt({ analysis: { differential: [{ label: bigLabel, band: "high" }] }, evidence: manyEvidence }, { visualFindings: "v".repeat(5000) });
+  assert.ok(prompt.user.length < 20000, "prompt should be bounded, got " + prompt.user.length);
+  // At most MAX_EVIDENCE (20) snippet lines survive the cap.
+  const snippetLines = prompt.user.split("\n").filter((l) => l.startsWith("- AAD:"));
+  assert.ok(snippetLines.length <= 20, "evidence capped at 20, got " + snippetLines.length);
+  // System prompt marks the data as untrusted (R2 M3).
+  assert.match(prompt.system, /untrusted DATA, not/i);
 });

@@ -239,7 +239,13 @@
       if (!window.SMD_SKNX_LLM || !window.SMD_SKNX_REPORT || !window.SMD_SKNX_EVIDENCE) { removeReportHost(); return; }
       var labels = (a.differential || []).map(function (d) { return d.label; });
       state.reportLabels = labels;
-      var evidence = window.SMD_SKNX_EVIDENCE.retrieve(labels) || [];
+      // Malignancy-driven referrals surface via the lesion engine (a.lesion), while the differential may
+      // lead with a benign general-classifier label. Add the lesion read to the evidence query so the
+      // report carries the relevant guideline citation (e.g. AAD melanoma). reportLabels (used by the
+      // Compare-top-two control) stays the differential labels only.
+      var evLabels = labels.slice();
+      if (a.lesion && a.lesion.top) evLabels.push(a.lesion.top);
+      var evidence = window.SMD_SKNX_EVIDENCE.retrieve(evLabels) || [];
       window.SMD_SKNX_LLM.buildReport({ analysis: a, features: (a.features || {}), evidence: evidence, context: {} })
         .then(function (payload) {
           state.reportPayload = payload;

@@ -49,3 +49,11 @@ test("unknown pair never throws and returns a non-empty row skeleton", () => {
   const c = CMP.compare("zzz", "qqq");
   assert.ok(c.rows.length >= 1);
 });
+
+test("sources use an http(s) allowlist and html carries an educational note", () => {
+  const c = CMP.compare("psoriasis", "tinea", { retrieve: () => [{ source: "X", title: "Evil", url: "javascript:alert(1)" }] });
+  const h = CMP.html(c);
+  assert.doesNotMatch(h, /href="javascript:/i, "hostile url must not become an href");
+  assert.match(h, /Evil \(X\)/, "source still renders as inert text");
+  assert.match(h, /Educational comparison only/i, "compare html carries an educational disclaimer");
+});

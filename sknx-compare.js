@@ -18,6 +18,9 @@
   var EVID = (typeof require !== "undefined") ? require("./sknx-evidence.js") : (typeof window !== "undefined" ? window.SMD_SKNX_EVIDENCE : null);
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  // Scheme allowlist - only http(s) citation URLs become clickable (esc neutralizes HTML, not a
+  // javascript:/data: href); anything else renders as inert text.
+  function safeHref(u) { var s = String(u == null ? "" : u); return /^https?:\/\//i.test(s) ? s : ""; }
 
   function normLabel(l) { return String(l == null ? "" : l).toLowerCase().trim(); }
 
@@ -199,14 +202,17 @@
   function sourcesHtml(sources) {
     if (!sources || !sources.length) return "";
     var items = sources.map(function (s) {
-      return '<li><a href="' + esc(s.url) + '">' + esc(s.title) + " (" + esc(s.source) + ")</a></li>";
+      var url = safeHref(s.url), label = esc(s.title) + " (" + esc(s.source) + ")";
+      var inner = url ? ('<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + label + "</a>") : ('<span>' + label + "</span>");
+      return "<li>" + inner + "</li>";
     }).join("");
     return '<ul class="sknx-compare-sources">' + items + "</ul>";
   }
 
   function html(cmp) {
     cmp = cmp || { rows: [], sources: [], a: "", b: "" };
-    return '<div class="sknx-compare-wrap">' + tableHtml(cmp) + sourcesHtml(cmp.sources) + "</div>";
+    var note = '<p class="sknx-compare-note">Educational comparison only, not a diagnosis.</p>';
+    return '<div class="sknx-compare-wrap">' + tableHtml(cmp) + sourcesHtml(cmp.sources) + note + "</div>";
   }
 
   var API = {

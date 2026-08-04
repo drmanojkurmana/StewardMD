@@ -26,6 +26,9 @@
   function str(v) { return typeof v === "string" ? v : ""; }
   function arr(v) { return Array.isArray(v) ? v : []; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  // Scheme allowlist for citation links - esc() neutralizes HTML but not a javascript:/data: href, so
+  // only http(s) URLs become clickable; anything else renders as inert (non-link) text.
+  function safeHref(u) { var s = String(u == null ? "" : u); return /^https?:\/\//i.test(s) ? s : ""; }
 
   // Explain-Like audiences - duplicated here on purpose (not required from sknx-llm.js) so this
   // renderer stays dependency-free/pure, mirroring thorex-report.js's own duplication convention.
@@ -80,7 +83,7 @@
       body = '<p class="sknx-report-p sknx-report-empty">No guideline citations were retrieved for this analysis.</p>';
     } else {
       body = '<ul class="sknx-report-guideline">' + items.map(function (g) {
-        var url = str(g.url);
+        var url = safeHref(g.url);
         var link = url
           ? '<a class="sknx-cite" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(str(g.source)) + '</a>'
           : '<span class="sknx-cite sknx-cite-nolink">' + esc(str(g.source)) + '</span>';
@@ -106,7 +109,7 @@
       body = '<p class="sknx-report-p sknx-report-empty">No references were retrieved for this analysis.</p>';
     } else {
       body = '<ul class="sknx-report-refs">' + items.map(function (r) {
-        var url = str(r.url);
+        var url = safeHref(r.url);
         var label = esc(str(r.title)) + ' (' + esc(str(r.source)) + ')';
         var link = url
           ? '<a class="sknx-cite sknx-report-ref-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>'

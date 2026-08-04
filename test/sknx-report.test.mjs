@@ -86,3 +86,21 @@ test("dual export shape matches other sknx-*.js modules", () => {
   assert.equal(typeof REPORT.explainControls, "function");
   assert.equal(typeof REPORT.pdf, "function");
 });
+
+test("citation links use an http(s) scheme allowlist (no javascript:/data: hrefs)", () => {
+  // Payloads carry only vetted https URLs in practice, but harden the renderer against a hostile url.
+  const payload = {
+    quality: "usable", visualFindings: "n/a", differential: [],
+    redFlags: [], discussion: "d",
+    guidelineSummary: [{ point: "P", source: "AAD", url: "javascript:alert(1)" }],
+    investigations: [], management: [], followup: [],
+    references: [{ source: "AAD", title: "T", url: "data:text/html,evil" }],
+    disclaimer: "educational only"
+  };
+  const h = REPORT.html(payload);
+  assert.doesNotMatch(h, /href="javascript:/i, "must not render a javascript: href");
+  assert.doesNotMatch(h, /href="data:/i, "must not render a data: href");
+  // The source/title still render as inert text.
+  assert.match(h, /AAD/);
+  assert.match(h, /T \(AAD\)/);
+});
