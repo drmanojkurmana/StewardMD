@@ -21,7 +21,7 @@
   var SIZE = 224;
   var MEAN = [0.485, 0.456, 0.406], STD = [0.229, 0.224, 0.225]; // ImageNet (MobileNetV3 default)
   var ORT_BASE_DEFAULT = "/vendor/onnxruntime-web";
-  var DEFAULT_MODEL_URL = "/models/sknx/derm-mnv3-ham10000.onnx";
+  var DEFAULT_MODEL_URL = "https://models.stewardmd.in/sknx/derm-mnv3-ham10000.onnx"; // absolute so it resolves inside the native WebView (Android/iOS), not just the web origin
 
   // HAM10000 class order (alphabetical, from the model's class_info.json) -> SknX engine label. The
   // malignant ones (BCC, melanoma) map to the exact strings sknx-engines.js's guardrail recognizes.
