@@ -69,11 +69,11 @@
     var list = (data && data.results) || [];
     suppressLocalEmpty(list.length > 0);
     if (!list.length) { box.innerHTML = ""; return; }
-    var html = '<div class="sp-section-label">💊 Drugs · national database</div>';
+    var html = '<div class="sp-section-label">Drugs · national database</div>';
     list.forEach(function (r) {
       var sub = [r["class"], (r.brands != null ? r.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
       html += '<div class="sp-card smddb-hit" data-comp="' + esc(r.composition) + '">' +
-        '<div class="sp-card-top"><span class="sp-card-icon">💊</span><div><div class="sp-card-type">Generic — tap for brands &amp; prices</div><div class="sp-card-title">' + esc(r.composition) + '</div></div></div>' +
+        '<div class="sp-card-top"><div><div class="sp-card-type">Generic - tap for brands &amp; prices</div><div class="sp-card-title">' + esc(r.composition) + '</div></div></div>' +
         '<div class="sp-card-desc">' + esc(sub) + '</div></div>';
     });
     box.innerHTML = html;
@@ -482,7 +482,7 @@
   /* ---- GOLD-STANDARD template renderer (from curated gold JSON) ---- */
   function goldHTML(g) {
     function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
-    function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + ic + ' ' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
+    function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
     var H = "";
     if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
     if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
@@ -493,10 +493,10 @@
     if (g.contra) H += S('⛔', 'Contraindications & Cautions', 'Avoid when?', '<div class="gd-sev red"><h4>Absolute</h4>' + bl(g.contra.absolute) + '</div><div class="gd-sev amber"><h4>Relative / precautions</h4>' + bl(g.contra.relative) + '</div><div class="gd-sev blue"><h4>Monitor</h4>' + bl(g.contra.monitor) + '</div>');
     H += '<div class="gd-2">' + S('🤰', 'Pregnancy & Lactation', 'Can I use it?', '<div class="gd-kv"><b>Preg</b><span>' + esc(g.preg || '—') + '</span></div><div class="gd-kv"><b>Lact</b><span>' + esc(g.lact || '—') + '</span></div>') + S('🫘', 'Renal / Hepatic', 'Adjust?', '<div class="gd-kv"><b>Renal</b><span>' + esc(g.renal || '—') + '</span></div><div class="gd-kv"><b>Hepatic</b><span>' + esc(g.hepatic || '—') + '</span></div>') + '</div>';
     if (g.interactions) { var ix = g.interactions; H += S('🔗', 'Interactions', 'Worry about?', '<div class="gd-sev red"><h4>Major</h4>' + bl(ix.major) + '</div><div class="gd-sev amber"><h4>Moderate</h4>' + bl(ix.moderate) + '</div><div class="gd-sev grey"><h4>Minor</h4>' + bl(ix.minor) + '</div><div class="gd-kv"><b>Food</b><span>' + esc(ix.food || '—') + '</span></div><div class="gd-kv"><b>Alcohol</b><span>' + esc(ix.alcohol || '—') + '</span></div>' + (ix.diagnostics ? '<div class="gd-kv"><b>Dx</b><span>' + esc(ix.diagnostics) + '</span></div>' : '')); }
-    if (g.se) { var s = g.se; H += S('⚠️', 'Side Effects', 'What happens?', '<div class="gd-2"><div class="gd-sev green"><h4>Common</h4>' + bl(s.common) + '</div><div class="gd-sev red"><h4>Serious</h4>' + bl(s.serious) + '</div><div class="gd-sev amber"><h4>Rare (long-term)</h4>' + bl(s.rare) + '</div><div class="gd-sev red"><h4>🚨 Emergency</h4>' + bl(s.emergency) + '</div></div>'); }
+    if (g.se) { var s = g.se; H += S('⚠️', 'Side Effects', 'What happens?', '<div class="gd-2"><div class="gd-sev green"><h4>Common</h4>' + bl(s.common) + '</div><div class="gd-sev red"><h4>Serious</h4>' + bl(s.serious) + '</div><div class="gd-sev amber"><h4>Rare (long-term)</h4>' + bl(s.rare) + '</div><div class="gd-sev red"><h4>Emergency</h4>' + bl(s.emergency) + '</div></div>'); }
     if (g.monitoring) H += S('📈', 'Monitoring', 'Follow what?', '<ul class="gd-mon">' + g.monitoring.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     H += '<div class="gd-2">' + (g.counsel ? S('🗣', 'Counselling', 'Tell patient', bl(g.counsel)) : '') + S('⏱', 'Pharmacokinetics', 'Onset / duration', '<div class="gd-pk">' + (g.pk || []).map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>' + (g.missed ? '<div class="gd-kv"><b>Missed</b><span>' + esc(g.missed) + '</span></div>' : '') + (g.overdose ? '<div class="gd-kv"><b>Overdose</b><span>' + esc(g.overdose) + '</span></div>' : '')) + '</div>';
-    if (g.pearls) H += '<div class="gd-sec gd-pearls"><div class="gd-h">💡 Clinical Pearls <span class="gd-q">Expert tips</span></div>' + bl(g.pearls) + '</div>';
+    if (g.pearls) H += '<div class="gd-sec gd-pearls"><div class="gd-h">Clinical Pearls <span class="gd-q">Expert tips</span></div>' + bl(g.pearls) + '</div>';
     H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">Faithful summary — pending clinician sign-off; verify locally. Full official label preserved internally.</div>');
     return H;
   }

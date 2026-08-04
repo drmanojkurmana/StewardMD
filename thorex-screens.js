@@ -1281,8 +1281,16 @@
     }).catch(function (e) {
       state.running = false;
       try { console.log("TXDBG runPipeline failed:", e && e.code, "|", e && e.stage, "|", e && e.message); } catch (_) {}
-      var detail = e && (e.message || e.code) ? ((e.code ? "[" + e.code + "] " : "") + (e.message || "")) : "";
-      toast(detail ? ("Analysis failed: " + detail).slice(0, 180) : "Couldn't analyze this chest X-ray. Try again with a clear, well-lit image.");
+      // SECURITY: never surface raw internal detail (model URLs, HTTP status, host names) to the
+      // user - map the error code to a friendly message. Full detail stays in the console.log above.
+      var CODEMSG = {
+        model_unavailable:     "Couldn't download the AI model. Check your connection and try again.",
+        inference_unavailable: "The on-device AI model isn't ready yet. Check your connection and try again.",
+        runtime_unavailable:   "The on-device AI engine couldn't start on this device.",
+        bad_image:             "Couldn't read that image. Try a clear, well-lit chest X-ray.",
+        bad_model:             "The AI returned an unexpected result. Please try again."
+      };
+      toast((e && CODEMSG[e.code]) || "Couldn't analyze this chest X-ray. Try again with a clear, well-lit image.");
       show("source");
     });
   }
