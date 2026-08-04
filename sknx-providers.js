@@ -39,7 +39,18 @@
     var d = deps(injected);
     function stage(i) { try { if (onStage) onStage(STAGES[i], Math.round(((i + 1) / STAGES.length) * 100)); } catch (e) {} }
     stage(0); stage(1); stage(2);
-    var rawP = d.vision.available() ? d.vision.analyze(image).catch(function () { return mockRaw(entitlement, image); }) : Promise.resolve(mockRaw(entitlement, image));
+    var v = d.vision, rawP;
+    if (v.available()) {
+      // A REAL classifier is selected (native Core ML or WASM). Do NOT mask a failure with the canned
+      // mock - showing fake data (e.g. "psoriasis") for a failed real analysis is worse than an honest
+      // error. Surface + log it; the screen then shows "result unavailable, try again".
+      rawP = Promise.resolve(v.analyze(image)).catch(function (err) {
+        try { console.warn("[SknX] on-device analysis failed:", (err && err.message) || err); } catch (e) {}
+        var e2 = new Error("analysis_failed"); e2.cause = err; throw e2;
+      });
+    } else {
+      rawP = Promise.resolve(mockRaw(entitlement, image)); // no real vision configured -> dev/mock default
+    }
     return rawP.then(function (raw) {
       stage(3);
       var a = d.engines.makeAnalysis(raw, entitlement);

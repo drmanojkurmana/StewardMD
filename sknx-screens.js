@@ -289,8 +289,6 @@
     try {
       var rh = document.getElementById("sknxReportHost");
       if (!rh || !payload) return;
-      var aud = state.reportAudience || "resident";
-      var leveled = window.SMD_SKNX_LLM.explainAs(payload, aud);
       var compareHtml = "";
       if ((state.reportLabels || []).length >= 2 && window.SMD_SKNX_COMPARE) {
         compareHtml =
@@ -298,14 +296,9 @@
           '<div class="sknx-compare-host" id="sknxCompareHost"></div>';
       }
       rh.innerHTML =
-        window.SMD_SKNX_REPORT.explainControls() +
-        '<div class="sknx-report-body" id="sknxReportBody">' + window.SMD_SKNX_REPORT.html(leveled) + "</div>" +
+        '<div class="sknx-report-body" id="sknxReportBody">' + window.SMD_SKNX_REPORT.html(payload) + "</div>" +
         compareHtml +
         '<button class="sknx-btn sknx-btn-secondary sknx-report-pdf" type="button" data-act="sknx-report-pdf">' + ic("picture_as_pdf") + "Export PDF</button>";
-      var segs = rh.querySelectorAll(".sknx-explain-seg");
-      for (var i = 0; i < segs.length; i++) {
-        if (segs[i].getAttribute("data-audience") === aud) segs[i].classList.add("is-active");
-      }
     } catch (e) {}
   }
 
@@ -451,9 +444,8 @@
       case "sknx-source": haptic("light"); startCapture(t.getAttribute("data-source") || "library"); return;
       case "sknx-save": toast("Case saved."); return;
       case "sknx-new": state.analysis = null; state.reportPayload = null; state.reportAudience = "resident"; state.reportLabels = []; state.stack = ["capture"]; show("capture"); return;
-      case "sknx-explain": var aud = t.getAttribute("data-audience") || "resident"; state.reportAudience = aud; haptic("light"); if (state.reportPayload) renderReportInto(state.reportPayload); return;
       case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
-      case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(window.SMD_SKNX_LLM.explainAs(state.reportPayload, state.reportAudience || "resident")); } catch (e) {} haptic("light"); return;
+      case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(state.reportPayload); } catch (e) {} haptic("light"); return;
       case "sknx-rx-draft": haptic("light"); try { if (window.SMD_SKNX_RX) window.SMD_SKNX_RX.openDraft(state.analysis); } catch (e) {} return;
     }
     /* other data-act values (if any) are screen-internal. */

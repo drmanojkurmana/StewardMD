@@ -21,7 +21,7 @@
   var SIZE = 224;
   var MEAN = [0.485, 0.456, 0.406], STD = [0.229, 0.224, 0.225]; // ImageNet (MobileNetV3 default)
   var ORT_BASE_DEFAULT = "/vendor/onnxruntime-web";
-  var DEFAULT_MODEL_URL = "https://models.stewardmd.in/sknx/derm-mnv3-ham10000.onnx"; // absolute so it resolves inside the native WebView (Android/iOS), not just the web origin
+  var DEFAULT_MODEL_URL = "https://models.stewardmd.in/sknx/derm-mnv3-int8.onnx"; // int8-quantized (4.7MB vs 16.8MB fp32) for a fast one-time download; absolute so it resolves inside the native WebView
 
   // HAM10000 class order (alphabetical, from the model's class_info.json) -> SknX engine label. The
   // malignant ones (BCC, melanoma) map to the exact strings sknx-engines.js's guardrail recognizes.
@@ -120,21 +120,35 @@
   function decodeToRGBA(image) {
     return new Promise(function (resolve, reject) {
       if (typeof document === "undefined") { reject(new Error("decode_needs_dom")); return; }
-      function draw(src) {
+      function drawTo(src, closeable) {
         try {
           var c = document.createElement("canvas"); c.width = SIZE; c.height = SIZE;
           var ctx = c.getContext("2d"); ctx.drawImage(src, 0, 0, SIZE, SIZE);
-          resolve(ctx.getImageData(0, 0, SIZE, SIZE).data);
+          var data = ctx.getImageData(0, 0, SIZE, SIZE).data;
+          if (closeable && src.close) { try { src.close(); } catch (e) {} }
+          resolve(data);
         } catch (e) { reject(e); }
       }
+      // Image + object URL fallback (also the path for dataURL strings).
+      function viaImage(src, revoke) {
+        var im = new Image();
+        im.onload = function () { drawTo(im, false); if (revoke) { try { URL.revokeObjectURL(revoke); } catch (e) {} } };
+        im.onerror = function () { if (revoke) { try { URL.revokeObjectURL(revoke); } catch (e) {} } reject(new Error("img_load")); };
+        im.src = src;
+      }
       try {
-        if (image && image.nodeName === "IMG") { return draw(image); }
-        if (typeof image === "string") { var im = new Image(); im.onload = function () { draw(im); }; im.onerror = function () { reject(new Error("img_load")); }; im.src = image; return; }
+        if (image && image.nodeName === "IMG") return drawTo(image, false);
+        if (typeof image === "string") return viaImage(image, null);
         if (typeof Blob !== "undefined" && image instanceof Blob) {
-          var url = URL.createObjectURL(image), im2 = new Image();
-          im2.onload = function () { draw(im2); try { URL.revokeObjectURL(url); } catch (e) {} };
-          im2.onerror = function () { reject(new Error("img_load")); };
-          im2.src = url; return;
+          // createImageBitmap is the reliable path for large camera-photo Blobs in a WebView (a plain
+          // <img>+objectURL can fail/OOM on multi-MB photos). Fall back to <img> if it is unavailable.
+          if (typeof createImageBitmap === "function") {
+            createImageBitmap(image).then(function (bmp) { drawTo(bmp, true); }).catch(function () {
+              var url = URL.createObjectURL(image); viaImage(url, url);
+            });
+            return;
+          }
+          var u = URL.createObjectURL(image); return viaImage(u, u);
         }
         reject(new Error("unsupported_image"));
       } catch (e) { reject(e); }
