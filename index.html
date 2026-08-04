@@ -59,7 +59,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
-<link rel="stylesheet" href="/sknx-screens.css?v=sx7">
+<link rel="stylesheet" href="/sknx-screens.css?v=sx8">
 <link rel="stylesheet" href="/insulin.css?v=ins9">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
@@ -1635,21 +1635,21 @@ window.openExternal = function (u) {
      later native vision plugin swaps SMD_SKNX_VISION.analyze in without touching this load order.
      LOAD ORDER IS LOAD-BEARING: sknx-engines MUST load before sknx-providers (the provider resolves
      window.SMD_SKNX_ENGINES at call time; wrong order -> null engines in a pure browser). -->
-<script src="/sknx-flags.js?v=sx7" defer></script>
-<script src="/sknx-entitlement.js?v=sx7" defer></script>
-<script src="/sknx-engines.js?v=sx7" defer></script>
-<script src="/sknx-features.js?v=sx7" defer></script>
-<script src="/sknx-vision.js?v=sx7" defer></script>
-<script src="/sknx-realvision.js?v=sx7" defer></script>
-<script src="/sknx-providers.js?v=sx7" defer></script>
-<script src="/sknx-store.js?v=sx7" defer></script>
-<script src="/sknx-evidence.js?v=sx7" defer></script>
-<script src="/sknx-llm.js?v=sx7" defer></script>
-<script src="/sknx-report.js?v=sx7" defer></script>
-<script src="/sknx-compare.js?v=sx7" defer></script>
-<script src="/sknx-rx.js?v=sx7" defer></script>
-<script src="/sknx.js?v=sx7" defer></script>
-<script src="/sknx-screens.js?v=sx7" defer></script>
+<script src="/sknx-flags.js?v=sx8" defer></script>
+<script src="/sknx-entitlement.js?v=sx8" defer></script>
+<script src="/sknx-engines.js?v=sx8" defer></script>
+<script src="/sknx-features.js?v=sx8" defer></script>
+<script src="/sknx-vision.js?v=sx8" defer></script>
+<script src="/sknx-realvision.js?v=sx8" defer></script>
+<script src="/sknx-providers.js?v=sx8" defer></script>
+<script src="/sknx-store.js?v=sx8" defer></script>
+<script src="/sknx-evidence.js?v=sx8" defer></script>
+<script src="/sknx-llm.js?v=sx8" defer></script>
+<script src="/sknx-report.js?v=sx8" defer></script>
+<script src="/sknx-compare.js?v=sx8" defer></script>
+<script src="/sknx-rx.js?v=sx8" defer></script>
+<script src="/sknx.js?v=sx8" defer></script>
+<script src="/sknx-screens.js?v=sx8" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
 <script src="/insulin-flags.js?v=ins9" defer></script>

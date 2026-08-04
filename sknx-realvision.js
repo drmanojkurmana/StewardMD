@@ -167,8 +167,18 @@
   // available(): cheap sync gate the provider calls. True only in a DOM (WebView) with a model URL set.
   function available() { try { return typeof document !== "undefined" && !!modelUrl(); } catch (e) { return false; } }
 
+  // warmup(): preload the runtime + model + session AHEAD of the first analyze (call when SknX opens),
+  // so the classification itself is just inference (~50ms) instead of a ~10s cold download+init. The
+  // download+session happen while the clinician is framing the photo. Idempotent (getSession caches),
+  // fire-and-forget safe (never rejects).
+  function warmup(opts) {
+    opts = opts || {};
+    if (typeof document === "undefined") return Promise.resolve(false);
+    return loadOrt(opts.ortBase).then(function (ort) { return getSession(ort); }).then(function () { return true; }).catch(function () { return false; });
+  }
+
   var API = {
-    available: available, analyze: analyze,
+    available: available, analyze: analyze, warmup: warmup,
     rgbaToTensorData: rgbaToTensorData, mapProbsToRaw: mapProbsToRaw, softmax: softmax, toProbs: toProbs,
     CLASSES: CLASSES, modelUrl: modelUrl, SIZE: SIZE
   };
