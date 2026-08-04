@@ -3,12 +3,18 @@
   "use strict";
   var STAGES = ["quality", "detect", "segment", "classify", "report"];
   var NULL_VISION = { available: function () { return false; }, analyze: function () { return Promise.reject(new Error("plugin_unavailable")); } };
-  // Prefer, in order: an injected vision (tests) > the native iOS Core ML plugin (SMD_SKNX_VISION, whose
-  // available() is itself gated on smd_sknx_realvision + the plugin being present - Neural Engine, fastest)
-  // > the EXPERIMENTAL WASM ONNX classifier (SMD_SKNX_REALVISION, flag on + available) > nothing (-> mock).
-  // analyze()'s .catch(mockRaw) makes any real-vision failure fall back to the mock.
+  // Prefer, in order: an injected vision (tests) > the CLOUD Derm Foundation classifier (SMD_SKNX_CLOUDVISION,
+  // gated on smd_sknx_cloud - the only engine spanning 59 general-derm conditions, so it wins when opted in)
+  // > the native iOS Core ML plugin (SMD_SKNX_VISION, gated on smd_sknx_realvision + plugin present - Neural
+  // Engine, fastest) > the EXPERIMENTAL WASM ONNX classifier (SMD_SKNX_REALVISION, flag on + available) >
+  // nothing (-> mock). A real engine's failure surfaces an honest error (analyze() below), never the mock.
   function pickVision(injected) {
     if (injected && injected.vision) return injected.vision;
+    try {
+      if (typeof window !== "undefined" && window.SMD_SKNX_CLOUDVISION && window.SMD_SKNX_CLOUDVISION.available && window.SMD_SKNX_CLOUDVISION.available()) {
+        return window.SMD_SKNX_CLOUDVISION;
+      }
+    } catch (e) {}
     try {
       if (typeof window !== "undefined" && window.SMD_SKNX_VISION && window.SMD_SKNX_VISION.available && window.SMD_SKNX_VISION.available()) {
         return window.SMD_SKNX_VISION;
