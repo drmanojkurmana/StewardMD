@@ -219,10 +219,26 @@
           '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic("bookmark") + "Save case</button>" +
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
         "</div>" +
+        rxAffordance(a) +
       "</div>";
 
     host.innerHTML = head + body;
     mountReport(a);
+  }
+
+  /* Phase 3 clinician-confirmed Rx affordance. GUARDED by SMD_SKNX_RX.eligible(a): it renders the ONLY
+   * `.sknx-rx` element in SknX, and ONLY when the analysis is rxEligible + not-referral, the smd_sknx_rx
+   * flag is on, AND the user is a verified prescriber. A malignant/referral case (rxEligible false) can
+   * never reach it. Clicking opens the existing SMD_RX pad pre-filled with a class-level draft that the
+   * clinician confirms, doses, and signs - SknX never prescribes autonomously. */
+  function rxAffordance(a) {
+    try {
+      if (!window.SMD_SKNX_RX || !window.SMD_SKNX_RX.eligible(a)) return "";
+      return '<div class="sknx-rx-wrap">' +
+        '<button class="sknx-rx sknx-btn sknx-btn-secondary" type="button" data-act="sknx-rx-draft">' + ic("edit_note") + "Draft prescription</button>" +
+        '<p class="sknx-rx-note">Draft only. You confirm, edit, and sign every prescription. Not patient facing.</p>' +
+      "</div>";
+    } catch (e) { return ""; }
   }
 
   /* ═══════════════════ Educational report mount (Phase 2 — evidence + LLM + report renderer) ═══════
@@ -426,6 +442,7 @@
       case "sknx-explain": var aud = t.getAttribute("data-audience") || "resident"; state.reportAudience = aud; haptic("light"); if (state.reportPayload) renderReportInto(state.reportPayload); return;
       case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
       case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(window.SMD_SKNX_LLM.explainAs(state.reportPayload, state.reportAudience || "resident")); } catch (e) {} haptic("light"); return;
+      case "sknx-rx-draft": haptic("light"); try { if (window.SMD_SKNX_RX) window.SMD_SKNX_RX.openDraft(state.analysis); } catch (e) {} return;
     }
     /* other data-act values (if any) are screen-internal. */
   }

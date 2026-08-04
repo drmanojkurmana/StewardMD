@@ -326,3 +326,8 @@ html.sknx-lock .ghis-ward-fab { display: none !important; }
 /* Compare / Export-PDF actions sit as direct children of #sknxReportHost, full-width like the primary
  * result actions above them. */
 #sknxRoot .sknx-report-host > .sknx-btn { width: 100%; margin: 4px 0 10px; }
+
+/* Phase 3 clinician-confirmed Rx affordance (only rendered when SMD_SKNX_RX.eligible is true). */
+#sknxRoot .sknx-rx-wrap { margin-top: 14px; padding-top: 12px; border-top: 1px dashed color-mix(in srgb, var(--sknx-derm, #B45309) 40%, transparent); }
+#sknxRoot .sknx-rx { width: 100%; border: 1.5px solid var(--sknx-derm, #B45309); color: var(--sknx-derm, #B45309); background: color-mix(in srgb, var(--sknx-derm, #B45309) 8%, transparent); font-weight: 700; }
+#sknxRoot .sknx-rx-note { margin: 8px 2px 0; font-size: 11.5px; line-height: 1.45; color: var(--sknx-muted, #64748b); }

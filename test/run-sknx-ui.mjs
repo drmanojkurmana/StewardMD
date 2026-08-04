@@ -137,6 +137,39 @@ try {
   ok(await ev(`return !document.querySelector("#sknxRoot [data-act*='rx']");`) === true, "no rx-flavoured data-act affordance either");
   ok(await ev(`return document.querySelectorAll("#sknxRoot .sknx-dx .sknx-dx-row").length > 0;`) === true, "the referral screen still carries the differential (referral augments, doesn't replace, the result)");
 
+  // ---- 3) Phase 3 clinician-confirmed Rx: the guarded draft affordance appears ONLY on an eligible
+  //         benign case WITH the smd_sknx_rx flag on AND a verified prescriber, and NEVER on a malignant
+  //         referral even then. A spy SMD_RX proves the pad is opened (draft only) but never autonomously.
+  await ev(`localStorage.setItem("smd_sknx_rx","1"); window.SMD_RX = { canPrescribe: function(){ return true; }, open: function(ctx){ window.__sknxRxOpened = ctx; } }; window.__sknxRxOpened = null; return 1;`);
+
+  // 3a) Eligible benign case -> exactly one draft-prescription affordance.
+  await ev(`window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-rx-benign" }); return 1;`);
+  let rxBtn = 0;
+  for (let i = 0; i < 40; i++) {
+    rxBtn = await ev(`return document.querySelectorAll('#sknxRoot .sknx-rx[data-act="sknx-rx-draft"]').length;`);
+    if (rxBtn > 0) break;
+    await sleep(250);
+  }
+  ok(rxBtn === 1, "Phase 3: an eligible benign case (flag on + verified prescriber) shows exactly one .sknx-rx draft affordance (got " + rxBtn + ")");
+
+  // 3b) Clicking it opens the existing SMD_RX pad with a {topic, regimen} draft (clinician confirms/signs).
+  await ev(`var b=document.querySelector('#sknxRoot .sknx-rx[data-act="sknx-rx-draft"]'); if(b) b.click(); return 1;`);
+  await sleep(200);
+  ok(await ev(`return !!(window.__sknxRxOpened && window.__sknxRxOpened.topic && Array.isArray(window.__sknxRxOpened.regimen) && window.__sknxRxOpened.regimen.length >= 1);`) === true,
+    "clicking Draft prescription opens SMD_RX with a {topic, regimen} draft (never autonomous)");
+
+  // 3c) SAFETY: even with the flag ON and a verified prescriber, a MALIGNANT referral shows ZERO .sknx-rx.
+  await ev(`window.__sknxRxOpened = null; window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-rx-melanoma", __mock: "melanoma" }); return 1;`);
+  let referVisible2 = false;
+  for (let i = 0; i < 40; i++) {
+    referVisible2 = await ev(`var r=document.querySelector("#sknxRoot .sknx-refer"); return !!(r && r.offsetParent !== null);`);
+    if (referVisible2) break;
+    await sleep(250);
+  }
+  ok(referVisible2 === true, "Phase 3 safety: the malignant mock still routes to a referral banner");
+  ok(await ev(`return document.querySelectorAll("#sknxRoot .sknx-rx").length === 0;`) === true,
+    "Phase 3 SAFETY: a malignant referral shows ZERO .sknx-rx even with the flag ON and a verified prescriber");
+
   console.log(fails === 0 ? "\nALL GREEN — SknX AI end-to-end flow test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
