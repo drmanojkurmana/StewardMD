@@ -81,8 +81,8 @@
       ".rx-bp-it{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:9px 4px;cursor:pointer}.rx-bp-nm{font:700 13.5px var(--hfont);color:var(--hink);flex:1 1 44%}.rx-bp-nm em{color:#ef4444;font-weight:600;font-style:normal;font-size:11px}.rx-bp-mf{font:500 11px var(--hfont);color:var(--hmut);flex:1 1 40%}.rx-bp-pr{font:800 13px var(--hfont);color:var(--teal,#0e6e63)}" +
       ".rx-sign-cv{width:100%;height:180px;border:1px dashed var(--hbd,#cbd5e1);border-radius:10px;background:#fff;touch-action:none;margin:6px 0}.rx-sign-reuse{display:flex;align-items:center;gap:6px;font:600 12.5px var(--hfont);color:var(--hink);margin:4px 0}" +
       ".rx-brands{border:1px solid var(--teal,#0e6e63);background:rgba(14,110,99,.08);color:var(--teal,#0e6e63);border-radius:8px;font:700 10.5px var(--hfont);padding:0 8px;cursor:pointer;white-space:nowrap;flex:none}" +
-      ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
-      ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}.rxdoc-foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px}.rxdoc-brand{display:flex;align-items:center;gap:8px;font:400 11.5px Georgia,serif;color:#0e6e63}.rxdoc-smdlogo{width:22px;height:22px;object-fit:contain}.rxdoc-smdwm{font:800 13px Georgia,serif;color:#0e6e63}.rxdoc-smdwm b{color:#111}.rxdoc-resp{margin-top:6px;font:400 10px Georgia,serif;color:#555;line-height:1.55}" +
+      ".rx-doc{font-family:Georgia,'Times New Roman',serif;color:#111;background:#fff}.rxdoc-in{padding:40px 44px;word-spacing:1px}.rxdoc-hd{display:flex;align-items:center;gap:16px}.rxdoc-logo{width:64px;height:64px;object-fit:contain}.rxdoc-nm{font:800 22px Georgia,serif;color:#0e6e63}.rxdoc-ad{font:400 12.5px Georgia,serif;color:#444;margin-top:2px}.rxdoc-rule{height:3px;background:#0e6e63;margin-top:12px}.rxdoc-pt{display:flex;justify-content:space-between;align-items:baseline;font:400 14px Georgia,serif;color:#222;margin:12px 0 2px;border-bottom:1px solid #ddd;padding-bottom:6px}.rxdoc-dt{color:#555;font-size:12.5px}.rxdoc-topic{font:italic 400 12.5px Georgia,serif;color:#555;margin-top:4px}.rxdoc-rx{font:800 30px Georgia,serif;color:#0e6e63;margin:10px 0 2px}" +
+      ".rxdoc-tbl{width:100%;border-collapse:collapse}.rxdoc-tbl td{padding:7px 4px;border-bottom:1px solid #eee;vertical-align:top;font:400 14px Georgia,serif}.rxdoc-tbl .sn{width:24px;color:#888}.rxdoc-tbl .br{color:#0e6e63;font-weight:600}.rxdoc-tbl .dz{color:#444;font-size:12.5px;white-space:nowrap}.rxdoc-tbl .advr td{color:#555;font-style:italic;border-bottom:0}.rxdoc-ft{margin-top:40px;display:flex;justify-content:flex-end}.rxdoc-sg{text-align:center;min-width:210px}.rxdoc-sgimg{height:54px;object-fit:contain;display:block;margin:0 auto 2px}.rxdoc-drn{font-weight:700;border-top:1px solid #333;padding-top:4px;font-size:14px}.rxdoc-reg{font-size:11.5px;color:#555}.rxdoc-dis{margin-top:26px;border-top:1px solid #ddd;padding-top:10px;font:400 10px Georgia,serif;color:#777;line-height:1.5}.rxdoc-foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px}.rxdoc-brand{font:400 12px Georgia,serif;color:#0e6e63}.rxdoc-smdlogo{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:6px;display:inline-block}.rxdoc-smdwm{font:800 13px Georgia,serif;color:#0e6e63}.rxdoc-smdwm b{color:#111}.rxdoc-resp{margin-top:8px;font:400 11px Georgia,serif;color:#555;line-height:1.6}.rxdoc-line{font:400 12.5px Georgia,serif;color:#333;margin:3px 0}.rxdoc-line b{color:#111}.rx-ac-x{color:#ef4444;font-size:10px;font-weight:600}" +
       "@media print{body>*{display:none!important}body>.rx-scrim,body>.rx-sheet{display:block!important;position:static!important;transform:none!important;box-shadow:none!important;opacity:1!important;max-height:none!important;width:auto!important}.rx-scrim{background:none!important}.rx-x,.rx-del,.rx-add,.rx-print,.rx-row{display:none!important}.rx-in{border:none!important;padding:0!important;background:none!important}.rx-line{border:1px solid #ccc!important;background:none!important}}";
     document.head.appendChild(s);
   }
@@ -105,6 +105,9 @@
   function collectRx() {
     var name = (sheet.querySelector("#rxPtName") || {}).value || "";
     var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
+    var dx = ((sheet.querySelector("#rxDx") || {}).value || "").trim();
+    var cc = ((sheet.querySelector("#rxCc") || {}).value || "").trim();
+    var vitals = ((sheet.querySelector("#rxVitals") || {}).value || "").trim();
     var lines = [];
     sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) {
       if (ln.style.display === "none") return;
@@ -119,7 +122,7 @@
         duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
       });
     });
-    return { name: name, age: age, lines: lines };
+    return { name: name, age: age, dx: dx, complaints: cc, vitals: vitals, lines: lines };
   }
   function rxPrintHTML(topic, regNo) {
     var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
@@ -264,7 +267,7 @@
     }
     return '<div class="' + cls + '" data-i="' + i + '">' +
       '<div class="r1"><input class="rx-in rx-drug" data-f="drug" value="' + esc(l.drug) + '" placeholder="Drug (generic)">' +
-      '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand"><button class="rx-brands" data-rx-brands="1" title="Pick a brand by price">₹ brands</button><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
+      '<input class="rx-in rx-brand" data-f="brand" value="' + esc(l.brand || "") + '" placeholder="Brand — tap for brands + prices"><button class="rx-del" title="Remove">'+rxIco("close")+'</button></div>' +
       '<div class="r2"><input class="rx-in rx-dose" data-f="dose" value="' + esc(l.dose || "") + '" placeholder="Dose">' +
       '<input class="rx-in rx-freq" data-f="freq" value="' + esc(l.freq || "") + '" placeholder="Freq">' +
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
@@ -320,11 +323,40 @@
     drugIn.addEventListener("input", function () { search(drugIn.value, false); });
     drugIn.addEventListener("keydown", function (e) { onKey(e, false, drugIn.value); });
     drugIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
-    if (brandIn) {
-      brandIn.addEventListener("input", function () { search(brandIn.value, true); });
-      brandIn.addEventListener("keydown", function (e) { onKey(e, true, brandIn.value); });
-      brandIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    // The Brand field is handled by rxBrandAC() — a live MEDAPI lookup of real brands + prices for the
+    // drug on this line (resolves the molecule fuzzily, so spelling slips still find brands). Wired in renderRx.
+  }
+  // Live brand picker on the Brand field: resolve the drug → its composition (fuzzy via MEDAPI search,
+  // so "amoxcillin" still finds amoxicillin), then list every brand cheapest-first with ₹price; type to
+  // filter, tap to fill. Replaces the old "₹ brands" button and the local-only brand search.
+  function rxBrandAC(line) {
+    if (!line || line.classList.contains("adv") || line._brandWired) return;
+    var drugIn = line.querySelector('[data-f="drug"]'), brandIn = line.querySelector('[data-f="brand"]'), r1 = line.querySelector(".r1");
+    if (!drugIn || !brandIn || !r1) return; line._brandWired = true;
+    var box = null, brands = [], loadedFor = "", loading = false;
+    function closeB() { if (box) { box.remove(); box = null; } }
+    function draw(msg) {
+      if (!box) { box = document.createElement("div"); box.className = "rx-ac"; r1.insertAdjacentElement("afterend", box); }
+      if (msg) { box.innerHTML = '<div class="rx-ac-empty">' + esc(msg) + '</div>'; return; }
+      var q = (brandIn.value || "").trim().toLowerCase();
+      var list = q ? brands.filter(function (b) { return String(b.brand || "").toLowerCase().indexOf(q) >= 0; }) : brands;
+      if (!list.length) { box.innerHTML = '<div class="rx-ac-empty">' + (brands.length ? "No matching brand" : "Type the drug first, then tap here for brands") + '</div>'; return; }
+      box.innerHTML = list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = list[+btn.getAttribute("data-i")].brand; closeB(); }); });
     }
+    function load(drug) {
+      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw("Type the drug first, then tap here for brands"); return; }
+      if (drug === loadedFor) { draw(); return; }
+      if (loading) return; loading = true; draw("Loading brands for " + drug + "…");
+      MEDAPI.searchCompositions(drug, 6).then(function (d) {
+        var comp = ((d && d.results) || []).map(function (r) { return r.composition; }).filter(Boolean)[0];
+        if (!comp) { loading = false; brands = []; loadedFor = drug; draw("No match for “" + drug + "” — check the spelling"); return; }
+        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) { brands = (c && c.brands) || []; loadedFor = drug; loading = false; draw(); });
+      }).catch(function () { loading = false; brands = []; loadedFor = drug; draw("Couldn’t load brands — check connection"); });
+    }
+    brandIn.addEventListener("focus", function () { load(drugIn.value); });
+    brandIn.addEventListener("input", function () { if ((drugIn.value || "").trim() === loadedFor) draw(); else load(drugIn.value); });
+    brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
   function renderRx(topic, lines, regNo) {
@@ -335,6 +367,8 @@
       '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '<div class="rx-clinic-slot" id="rxClinicSlot">' + clinicSummaryHTML() + '</div>' +
       '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
+      '<div class="rx-pt"><input class="rx-in" id="rxDx" placeholder="Diagnosis" value="' + esc(topic || "") + '" style="flex:1"></div>' +
+      '<div class="rx-pt"><input class="rx-in" id="rxCc" placeholder="Complaints (optional)"><input class="rx-in" id="rxVitals" placeholder="Vitals — BP/HR/T/SpO₂ (optional)"></div>' +
       '<div class="rx-symbol">℞</div>' +
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
       '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button></div>' +
@@ -348,14 +382,12 @@
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       bindDel();
-      acAttach(wrap.lastElementChild);   // brand/composition search on the new line
+      acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild);   // drug AC + live brand picker
     });
     sheet.querySelector("#rxExport").addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
-    // Brand-by-price picker (delegated so it also works on lines added later).
-    sheet.querySelector("#rxLines").addEventListener("click", function (e) { var b = e.target && e.target.closest ? e.target.closest(".rx-brands") : null; if (b) { var ln = b.closest(".rx-line"); if (ln) openBrandPicker(ln); } });
     bindDel();
-    // Brand/composition search + auto-fill on every drug line (skips advice lines).
-    sheet.querySelectorAll("#rxLines .rx-line").forEach(acAttach);
+    // Drug autocomplete (generic + DB dose, local) AND the live brand picker (MEDAPI brands + prices).
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); });
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) ln.remove(); }; }); }
   }
 
@@ -490,7 +522,10 @@
     node.innerHTML='<div class="rxdoc-in"><div class="rxdoc-hd">'+(c.logo?'<img class="rxdoc-logo" src="'+esc(c.logo)+'">':'')+
       '<div class="rxdoc-cl"><div class="rxdoc-nm">'+esc(c.name||docName()||"Prescription")+'</div>'+(c.address?'<div class="rxdoc-ad">'+esc(c.address)+'</div>':'')+(c.phone?'<div class="rxdoc-ad">Ph: '+esc(c.phone)+'</div>':'')+'</div></div>'+
       '<div class="rxdoc-rule"></div><div class="rxdoc-pt"><span>'+(d.name?'<b>'+esc(d.name)+'</b>':'')+(d.age?' &nbsp; '+esc(d.age):'')+'</span><span class="rxdoc-dt">'+esc(date)+'</span></div>'+
-      (topic?'<div class="rxdoc-topic">'+esc(topic)+'</div>':'')+'<div class="rxdoc-rx">℞</div>'+
+      (d.complaints?'<div class="rxdoc-line"><b>Complaints:</b> '+esc(d.complaints)+'</div>':'')+
+      (d.vitals?'<div class="rxdoc-line"><b>Vitals:</b> '+esc(d.vitals)+'</div>':'')+
+      ((d.dx||topic)?'<div class="rxdoc-line"><b>Diagnosis:</b> '+esc(d.dx||topic)+'</div>':'')+
+      '<div class="rxdoc-rx">℞</div>'+
       '<table class="rxdoc-tbl">'+(rows||'<tr><td colspan="3">No items.</td></tr>')+'</table>'+
       '<div class="rxdoc-ft"><div class="rxdoc-sg">'+(signImg?'<img class="rxdoc-sgimg" src="'+esc(signImg)+'">':'')+'<div class="rxdoc-drn">Dr. '+esc(docName()||"—")+'</div><div class="rxdoc-reg">Reg. No: '+esc(regNo||"—")+'</div></div></div>'+
       '<div class="rxdoc-foot"><div class="rxdoc-brand">'+(_smdLogoData?'<img class="rxdoc-smdlogo" src="'+_smdLogoData+'">':'<span class="rxdoc-smdwm">Steward<b>MD</b></span>')+'<span>Prescription generated using <b>StewardMD</b></span></div>'+
