@@ -245,3 +245,84 @@ html.sknx-lock #infFab,
 html.sknx-lock .inf-fab,
 html.sknx-lock #dxLaunch,
 html.sknx-lock .ghis-ward-fab { display: none !important; }
+
+/* ═══════════════ Phase 2 · Educational report + Explain-Like + Compare (additive) ═══════════════════
+ * Renders window.SMD_SKNX_REPORT.html()/explainControls() output (sknx-report.js) and
+ * window.SMD_SKNX_COMPARE.html() output (sknx-compare.js) inside #sknxReportHost, mounted by
+ * mountReport()/renderReportInto() in sknx-screens.js after the differential/referral. Uses the same
+ * --sknx-primary (teal #0F766E) / --sknx-derm (amber #B45309) tokens as the rest of the module, so it
+ * inherits dark-mode behaviour for free wherever those tokens are re-pointed at --rds-* vars. */
+#sknxRoot .sknx-report-host { margin: 4px 0 16px; }
+#sknxRoot .sknx-report-loading {
+  display: flex; align-items: center; gap: 8px; padding: 14px;
+  border: 1px solid var(--sknx-hairline); border-radius: var(--sknx-r-ctl); background: var(--sknx-surf-2);
+  font-size: 12.5px; font-weight: 600; color: var(--sknx-text-2);
+}
+#sknxRoot .sknx-report-loading .material-symbols-rounded { color: var(--sknx-primary); animation: sknxSpin 1.2s linear infinite; }
+
+/* Explain-Like segmented control (sknx-report.js's explainControls()) */
+#sknxRoot .sknx-explain-controls {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px;
+  padding: 4px; border-radius: 999px; background: var(--sknx-surf-2); border: 1px solid var(--sknx-hairline);
+}
+#sknxRoot .sknx-explain-seg {
+  flex: 1 1 auto; min-height: 34px; padding: 0 10px; border: 0; border-radius: 999px;
+  background: transparent; color: var(--sknx-text-2); font-family: var(--sknx-sans);
+  font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  transition: background .15s var(--sknx-ease), color .15s var(--sknx-ease);
+}
+#sknxRoot .sknx-explain-seg.is-active { background: var(--sknx-derm); color: #fff; }
+
+/* Report body sections (sknx-report.js's html()) */
+#sknxRoot .sknx-report-body { margin-bottom: 12px; }
+#sknxRoot .sknx-report { display: flex; flex-direction: column; }
+#sknxRoot .sknx-report-title { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: var(--sknx-text); margin: 0 0 8px; text-align: center; }
+#sknxRoot .sknx-report-section { padding: 12px 0; border-bottom: 1px solid var(--sknx-hairline); }
+#sknxRoot .sknx-report-section:last-of-type { border-bottom: 0; }
+#sknxRoot .sknx-report-h {
+  margin: 0 0 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--sknx-primary); border-bottom: 1.5px solid var(--sknx-primary); padding-bottom: 4px; display: inline-block;
+}
+#sknxRoot .sknx-report-p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--sknx-text); }
+#sknxRoot .sknx-report-empty { color: var(--sknx-text-2); font-style: italic; }
+#sknxRoot .sknx-report-list { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.55; color: var(--sknx-text); }
+#sknxRoot .sknx-report-list li { margin-bottom: 4px; }
+#sknxRoot .sknx-report-redflags-list li { color: var(--sknx-sev-critical); font-weight: 600; }
+
+#sknxRoot .sknx-report-differential { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+#sknxRoot .sknx-report-ddx-item { padding: 10px 12px; border: 1px solid var(--sknx-hairline); border-radius: var(--sknx-r-ctl); background: var(--sknx-card); }
+#sknxRoot .sknx-report-ddx-label { font-weight: 700; font-size: 13.5px; color: var(--sknx-text); text-transform: capitalize; margin-bottom: 3px; }
+#sknxRoot .sknx-report-ddx-why, #sknxRoot .sknx-report-ddx-whynot { font-size: 12px; line-height: 1.45; color: var(--sknx-text-2); }
+#sknxRoot .sknx-report-ddx-why b, #sknxRoot .sknx-report-ddx-whynot b { color: var(--sknx-text); }
+
+#sknxRoot .sknx-report-guideline, #sknxRoot .sknx-report-refs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#sknxRoot .sknx-report-guideline-point { font-size: 12.5px; color: var(--sknx-text); margin-right: 4px; }
+#sknxRoot .sknx-cite { color: var(--sknx-primary); text-decoration: underline; font-weight: 600; font-size: 12.5px; }
+#sknxRoot .sknx-cite-nolink { color: var(--sknx-text-2); text-decoration: none; }
+
+#sknxRoot .sknx-report-mgmt-note { margin: 0 0 6px; font-size: 11.5px; font-style: italic; color: var(--sknx-text-2); }
+
+/* Educational disclaimer footer inside the report — accent-bordered, amber background (never colour
+ * alone: paired with the "Educational disclaimer" label + full text). */
+#sknxRoot .sknx-report-disclaimer {
+  margin-top: 8px; padding: 12px 14px; border-radius: var(--sknx-r-ctl);
+  border: 1.5px solid var(--sknx-derm);
+  background: color-mix(in srgb, var(--sknx-derm) 12%, var(--sknx-card));
+}
+#sknxRoot .sknx-report-disclaimer-label { display: block; margin-bottom: 4px; font-size: 11.5px; font-weight: 700; color: var(--sknx-derm); text-transform: uppercase; letter-spacing: .04em; }
+#sknxRoot .sknx-report-disclaimer .sknx-report-p { color: var(--sknx-text); font-size: 12px; }
+
+/* Compare-top-two table (sknx-compare.js's html()) */
+#sknxRoot .sknx-compare-host { margin-top: 10px; }
+#sknxRoot .sknx-compare-wrap { overflow-x: auto; }
+#sknxRoot table.sknx-compare { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+#sknxRoot table.sknx-compare th, #sknxRoot table.sknx-compare td {
+  border: 1px solid var(--sknx-hairline); padding: 8px 10px; text-align: left; vertical-align: top; color: var(--sknx-text);
+}
+#sknxRoot table.sknx-compare th { background: var(--sknx-surf-2); color: var(--sknx-primary); font-weight: 700; text-transform: capitalize; }
+#sknxRoot .sknx-compare-sources { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+#sknxRoot .sknx-compare-sources a { color: var(--sknx-primary); text-decoration: underline; font-size: 11.5px; }
+
+/* Compare / Export-PDF actions sit as direct children of #sknxReportHost, full-width like the primary
+ * result actions above them. */
+#sknxRoot .sknx-report-host > .sknx-btn { width: 100%; margin: 4px 0 10px; }

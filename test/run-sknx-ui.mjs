@@ -6,6 +6,10 @@
  *     wired in home.js, hidden/shown by SKNX.isOn()) dispatches to SKNX.open() via the app's normal
  *     [data-act] click delegation.
  *  2. A normal mock analysis renders a ranked differential (#sknxRoot .sknx-dx .sknx-dx-row, >=1).
+ *  2b. Phase 2 educational report: mountReport()/renderReportInto() (sknx-screens.js) async-mount a
+ *      report into #sknxReportHost with >=1 real citation link, Explain-Like re-levels the discussion
+ *      text for a different audience (citations/sections stay put, only the wording changes), and the
+ *      report NEVER carries a .sknx-rx affordance either.
  *  3. SAFETY: the __mock:"melanoma" image, analyzed under a v2beta (dual-engine) entitlement, routes
  *     to a visible referral banner (#sknxRoot .sknx-refer) AND there is NO .sknx-rx element anywhere
  *     in #sknxRoot — Rx is a Phase 3 feature and must never surface on a referral in Phase 1.
@@ -96,6 +100,28 @@ try {
   }
   ok(dxCount > 0, "normal mock analysis renders a ranked differential (#sknxRoot .sknx-dx has >=1 item, got " + dxCount + ")");
   ok(await ev(`var r=document.querySelector("#sknxRoot .sknx-refer"); return !r;`) === true, "the benign mock does NOT show a referral banner");
+
+  // ---- 1b) Educational report (Phase 2): async-mounted into #sknxReportHost after the differential ----
+  let reportMounted = false;
+  for (let i = 0; i < 30; i++) {
+    reportMounted = await ev(`var h=document.getElementById("sknxReportHost"); return !!(h && (h.querySelector(".sknx-report") || h.querySelector("a[href]")));`);
+    if (reportMounted) break;
+    await sleep(250);
+  }
+  ok(reportMounted === true, "educational report mounts into #sknxReportHost after the differential (.sknx-report present)");
+  const citeCount = await ev(`return document.querySelectorAll("#sknxReportHost a[href]").length;`);
+  ok(citeCount >= 1, "the report renders at least one citation link (#sknxReportHost a[href], got " + citeCount + ")");
+  ok(await ev(`return document.querySelectorAll("#sknxRoot .sknx-rx").length === 0;`) === true, "NO .sknx-rx affordance in the benign report either (educational management only)");
+
+  // ---- 1c) Explain-Like re-levels the discussion for a different audience, citations untouched ----
+  const discBefore = await ev(`var e=document.querySelector("#sknxReportBody .sknx-report-discussion .sknx-report-p"); return e ? e.textContent : null;`);
+  ok(typeof discBefore === "string" && discBefore.length > 0, "the discussion paragraph is present before switching audience");
+  ok(await ev(`return !!document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"]');`) === true, "the patient Explain-Like segment is present");
+  await ev(`var b=document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"]'); if(b) b.click(); return 1;`);
+  await sleep(200);
+  const discAfter = await ev(`var e=document.querySelector("#sknxReportBody .sknx-report-discussion .sknx-report-p"); return e ? e.textContent : null;`);
+  ok(typeof discAfter === "string" && discAfter.length > 0 && discAfter !== discBefore, "clicking the patient Explain-Like segment changes the discussion text");
+  ok(await ev(`return !!document.querySelector('#sknxReportHost .sknx-explain-seg[data-audience="patient"].is-active');`) === true, "the patient segment is marked is-active after switching");
 
   // ---- 2) Melanoma mock -> referral banner, and CRITICALLY no Rx affordance anywhere ----
   await ev(`window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-test-melanoma", __mock: "melanoma" }); return 1;`);

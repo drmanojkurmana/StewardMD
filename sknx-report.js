@@ -147,7 +147,7 @@
   function explainControls() {
     var out = '<div class="sknx-explain-controls" role="tablist" aria-label="Explain like">';
     AUDIENCES.forEach(function (aud) {
-      out += '<button class="sknx-explain-seg" type="button" role="tab" data-audience="' + aud + '">' +
+      out += '<button class="sknx-explain-seg" type="button" role="tab" data-act="sknx-explain" data-audience="' + aud + '">' +
         esc(AUDIENCE_LABELS[aud] || aud) + '</button>';
     });
     out += '</div>';
