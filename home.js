@@ -2965,6 +2965,11 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-src ol{margin:6px 0 0 18px;padding:0;color:var(--mk-mut);font:500 10.5px/1.5 'Inter'}
 .maik-src li{margin:2px 0}
 .maik-more{background:none;border:none;color:var(--mk-teal);font:700 12px 'Inter';cursor:pointer;padding:4px 0}
+/* Concise-first "Know more →" pill + the revealed tier-2 detail. */
+.maik-know{display:inline-flex;align-items:center;gap:5px;margin:11px 0 2px;padding:8px 15px;border:1px solid var(--mk-teal);background:var(--mk-tsoft);color:var(--mk-teal);border-radius:999px;font:700 12.5px 'Inter';cursor:pointer;transition:background .15s,color .15s}
+.maik-know:hover{background:var(--mk-teal);color:#fff}
+.maik-detail{margin-top:6px;padding-top:10px;border-top:1px dashed var(--mk-bd)}
+.maik-detail[hidden]{display:none}
 /* generic chips still used by web-research / Rx / help / patient / extract replies */
 .maik-chip{background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;font:600 11.5px 'Inter';color:var(--mk-teal);cursor:pointer}
 .maik-chip:hover{border-color:var(--mk-teal)}
@@ -3437,6 +3442,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (m && m[1]) chips = m[1].split("|").map(function (s) { return s.trim().replace(/^[-•]\s*/, ""); }).filter(Boolean).slice(0, 6);
       return { text: maikStripRefine(md), chips: chips };
     }
+    // Concise-first: split an answer on the @@MORE@@ marker → tier-1 bottom line + tier-2 detail.
+    // Flag smd_maik_concise="0" reverts to the classic single-block answer without a redeploy.
+    function maikConciseOn() { try { return localStorage.getItem("smd_maik_concise") !== "0"; } catch (e) { return true; } }
+    function maikSplitMore(s) {
+      var parts = String(s == null ? "" : s).split(/@@\s*MORE\s*@@/i);
+      if (parts.length < 2) return { lead: String(s == null ? "" : s).trim(), detail: "" };
+      return { lead: parts[0].trim(), detail: parts.slice(1).join("\n\n").trim() };
+    }
     function maikRefineHTML(question, chips) {
       if (!chips || !chips.length) return "";
       var h = '<div class="maik-refine"><div class="maik-refine-lbl">Refine for this patient</div><div class="maik-followups">';
@@ -3492,6 +3505,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Background completion: the answer landed. If MaiK was closed mid-request, it is already saved to
       // the thread (via _live()/data-mg) — ping the clinician so they can tap back in (ChatGPT-style).
       if (question && !document.body.classList.contains("maik-open")) maikNotifyReady(question);
+      var _more = maikSplitMore(md); var _concise = maikConciseOn() && !!_more.detail;
+      md = _more.detail ? (_more.lead + "\n\n" + _more.detail) : _more.lead;   // strip @@MORE@@; md = full answer (length/cache/Rx)
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
@@ -3505,7 +3520,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
-      if (md.length > 700) {
+      if (_concise) {
+        // Concise bottom line first + a "Know more →" reveal for the detail (UpToDate-style).
+        var _rmd = function (x) { return (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(x) : maikEscH(x); };
+        think.innerHTML = attrHTML + eduHTML + _rmd(_more.lead) + '<div class="maik-detail" hidden>' + _rmd(_more.detail) + '</div>' + srcHTML;
+        var kmb = document.createElement("button"); kmb.className = "maik-know"; kmb.textContent = "Know more →";
+        think.insertBefore(kmb, think.querySelector(".maik-detail") || null);
+      } else if (md.length > 700) {
         think.innerHTML = attrHTML + eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
         var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
         var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
@@ -3733,7 +3754,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
             _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
             if (!_perfTTFT) _perfTTFT = maikNow();
-            var _accS = maikStripRefine(acc);   // hide the trailing @@REFINE@@ line while streaming
+            var _accS = maikStripRefine(acc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
             _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
             try { scroll(); } catch (e) {}
@@ -4131,6 +4152,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (sum) { var dts = sum.parentNode; if (dts && dts.tagName === "DETAILS") { ev.preventDefault(); dts.open = !dts.open; } return; }
       // Show more / less: delegated (the live-render listener is gone once the thread HTML is rebuilt
       // from cache), so it keeps working when a saved conversation is reopened.
+      // Concise-first "Know more →" → reveal the tier-2 detail (delegated so it survives cache restore).
+      var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;
+      if (know) { var kbub = know.closest(".maik-b.ai"); var kdet = kbub && kbub.querySelector(".maik-detail"); if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} } know.remove(); return; }
       var more = ev.target && ev.target.closest ? ev.target.closest(".maik-more") : null;
       if (more) { var mbub = more.closest(".maik-b.ai"); var cd2 = mbub && mbub.querySelector(".maik-collapsed"); if (cd2) { var opened = cd2.style.maxHeight === "none"; cd2.style.maxHeight = opened ? "260px" : "none"; cd2.style.overflow = opened ? "hidden" : ""; more.textContent = opened ? "Show more ▾" : "Show less ▴"; } return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
