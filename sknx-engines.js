@@ -1,18 +1,101 @@
 // sknx-engines.js — SknX dual-engine result logic + malignancy/red-flag referral guardrail.
 (function () {
   "use strict";
-  var MALIGNANT = ["melanoma", "BCC", "SCC"];
+  // Cutaneous malignancies (and other refer-mandatory neoplasms) that MUST route to "refer, do not
+  // prescribe". Broadened beyond the big three (melanoma/BCC/SCC) after a real-image test surfaced a
+  // classifier emitting "Mycosis Fungoides" (a cutaneous lymphoma / cancer) that the old set let
+  // through. Purely false-negative-averse: adding an entry can only ADD referrals, never remove one.
+  // Matching is EXACT-KEY (see MALIGNANT_SYNONYMS + normalizeMalignantLabel), so a benign look-alike
+  // (e.g. "dermatofibroma") can never be mis-hit by a malignant key (e.g. "dermatofibrosarcoma
+  // protuberans"). R1 CLINICAL REVIEW GATE: this list is the guardrail's ground truth - review before
+  // any real deployment; err toward inclusion.
+  var MALIGNANT = ["melanoma", "BCC", "SCC", "Merkel cell carcinoma", "cutaneous lymphoma", "Kaposi sarcoma", "cutaneous sarcoma", "sebaceous carcinoma", "adnexal carcinoma", "cutaneous Paget disease", "cutaneous metastasis"];
   var REFER_THRESHOLD = 0.15; // false-negative-averse: refer on even a low malignancy signal
-  // Synonym/case map -> canonical MALIGNANT entry. A real classifier may emit "Melanoma",
-  // "bcc", "basal cell carcinoma", "squamous cell carcinoma", etc.; normalize before matching
-  // so the referral guardrail below can't be slipped past by casing/label-text drift.
+  // Synonym/case map -> canonical MALIGNANT entry. A real classifier may emit "Melanoma", "bcc",
+  // "basal cell carcinoma", "Mycosis Fungoides", "MCC", etc.; normalize before matching so the referral
+  // guardrail below can't be slipped past by casing/label-text drift. Add a label variant here (never
+  // a substring rule) whenever a classifier's class name maps to a refer-mandatory malignancy.
   var MALIGNANT_SYNONYMS = {
+    // melanoma (+ subtypes; exact-key, so every variant string a classifier may emit is enumerated.
+    // NOTE: bare "lentigo"/"solar lentigo" are benign and deliberately NOT here; "lentigo maligna" is
+    // melanoma in situ and IS.)
     "melanoma": "melanoma",
+    "mel": "melanoma",
     "malignant melanoma": "melanoma",
+    "melanoma, nos": "melanoma",
+    "melanoma invasive": "melanoma",
+    "melanoma in situ": "melanoma",
+    "melanoma metastasis": "melanoma",
+    "metastatic melanoma": "melanoma",
+    "amelanotic melanoma": "melanoma",
+    "nodular melanoma": "melanoma",
+    "acral lentiginous melanoma": "melanoma",
+    "superficial spreading melanoma": "melanoma",
+    "desmoplastic melanoma": "melanoma",
+    "lentigo maligna": "melanoma",
+    "lentigo maligna melanoma": "melanoma",
+    // basal cell carcinoma
     "bcc": "BCC",
     "basal cell carcinoma": "BCC",
+    "basal cell carcinoma, nos": "BCC",
+    // squamous cell carcinoma (incl. Bowen disease / SCC in situ; keratoacanthoma = well-differentiated
+    // SCC variant, refer to exclude - a clinical judgment call, kept in on the false-negative-averse side)
     "scc": "SCC",
-    "squamous cell carcinoma": "SCC"
+    "squamous cell carcinoma": "SCC",
+    "cutaneous squamous cell carcinoma": "SCC",
+    "invasive squamous cell carcinoma": "SCC",
+    "squamous cell carcinoma, nos": "SCC",
+    "squamous cell carcinoma in situ": "SCC",
+    "squamous cell carcinoma in situ, bowen disease": "SCC",
+    "bowen disease": "SCC",
+    "bowen's disease": "SCC",
+    "verrucous carcinoma": "SCC",
+    "keratoacanthoma": "SCC",
+    // Merkel cell carcinoma
+    "merkel cell carcinoma": "Merkel cell carcinoma",
+    "merkel cell": "Merkel cell carcinoma",
+    "mcc": "Merkel cell carcinoma",
+    // cutaneous lymphoma (CTCL/CBCL, mycosis fungoides, Sezary)
+    "cutaneous lymphoma": "cutaneous lymphoma",
+    "primary cutaneous lymphoma": "cutaneous lymphoma",
+    "cutaneous t-cell lymphoma": "cutaneous lymphoma",
+    "cutaneous b-cell lymphoma": "cutaneous lymphoma",
+    "ctcl": "cutaneous lymphoma",
+    "cbcl": "cutaneous lymphoma",
+    "mycosis fungoides": "cutaneous lymphoma",
+    "sezary syndrome": "cutaneous lymphoma",
+    "sézary syndrome": "cutaneous lymphoma",
+    // Kaposi sarcoma
+    "kaposi sarcoma": "Kaposi sarcoma",
+    "kaposi's sarcoma": "Kaposi sarcoma",
+    "kaposi": "Kaposi sarcoma",
+    // other cutaneous sarcomas / atypical fibroxanthoma (DFSP is intermediate-grade but still refer)
+    "cutaneous sarcoma": "cutaneous sarcoma",
+    "angiosarcoma": "cutaneous sarcoma",
+    "cutaneous angiosarcoma": "cutaneous sarcoma",
+    "dermatofibrosarcoma protuberans": "cutaneous sarcoma",
+    "dfsp": "cutaneous sarcoma",
+    "atypical fibroxanthoma": "cutaneous sarcoma",
+    "afx": "cutaneous sarcoma",
+    // sebaceous carcinoma (NOT sebaceous hyperplasia/adenoma/nevus, which are benign and absent here)
+    "sebaceous carcinoma": "sebaceous carcinoma",
+    // cutaneous adnexal carcinomas
+    "adnexal carcinoma": "adnexal carcinoma",
+    "cutaneous adnexal carcinoma": "adnexal carcinoma",
+    "microcystic adnexal carcinoma": "adnexal carcinoma",
+    "porocarcinoma": "adnexal carcinoma",
+    "hidradenocarcinoma": "adnexal carcinoma",
+    "trichilemmal carcinoma": "adnexal carcinoma",
+    // cutaneous Paget disease (extramammary + mammary; an intraepithelial adenocarcinoma)
+    "cutaneous paget disease": "cutaneous Paget disease",
+    "extramammary paget disease": "cutaneous Paget disease",
+    "extramammary paget's disease": "cutaneous Paget disease",
+    "mammary paget disease": "cutaneous Paget disease",
+    "paget disease of the nipple": "cutaneous Paget disease",
+    // cutaneous metastasis
+    "cutaneous metastasis": "cutaneous metastasis",
+    "skin metastasis": "cutaneous metastasis",
+    "cutaneous metastases": "cutaneous metastasis"
   };
   function normalizeMalignantLabel(label) {
     var k = String(label == null ? "" : label).toLowerCase().trim();
