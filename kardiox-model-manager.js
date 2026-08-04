@@ -41,7 +41,15 @@
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function isNative() { var c = cap(); return !!(c && c.isNativePlatform && c.isNativePlatform()); }
   function fs() { var c = cap(); return (c && c.Plugins && c.Plugins.Filesystem) || null; }
-  function fetchImpl() { return (typeof fetch !== "undefined") ? fetch : null; }
+  // Prefer the original, streamable web fetch (window.CapacitorWebFetch) for the model downloads.
+  // On native, CapacitorHttp replaces window.fetch with a native-bridge version that base64-marshals
+  // the whole response over the JS bridge — fragile for the ECG models (7 x ~22.5 MB = ~157 MB) and
+  // can fail ("Load failed"). CapacitorWebFetch downloads straight through the WebView's native
+  // networking, so the large downloads complete reliably. Falls back to global fetch on web / tests.
+  function fetchImpl() {
+    try { if (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") return window.CapacitorWebFetch.bind(window); } catch (e) {}
+    return (typeof fetch !== "undefined") ? fetch : null;
+  }
   function pack(id) { var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p; }
   function relPath(file) { return SUBDIR + "/" + file; }
 
