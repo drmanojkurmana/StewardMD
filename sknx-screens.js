@@ -176,13 +176,21 @@
           '<div class="sknx-dx-empty">' + ic("check_circle") + "<span>No confident finding - correlate clinically.</span></div>") +
       "</div>";
 
-    // Experimental-model badge: shown when the EXPERIMENTAL on-device ONNX classifier produced this
-    // result (engine === "realvision-experimental"), so the clinician knows the read is from an
-    // uncalibrated public model, not a validated one. The mock/native paths show nothing.
-    var expHtml = (a.engine === "realvision-experimental") ?
-      '<div class="sknx-exp" role="note">' + ic("science") +
+    // Experimental-model badge: shown when an EXPERIMENTAL classifier produced this result, so the
+    // clinician knows the read is from an uncalibrated/validation-only model. The cloud engine carries
+    // an ADDITIONAL melanoma caveat at the point of decision: it has no melanoma class and reads no
+    // ABCDE history, so a benign-looking, non-referral result must not be read as ruling melanoma out
+    // (R1 finding C2). The mock/native paths show nothing.
+    var expHtml = "";
+    if (a.engine === "realvision-experimental") {
+      expHtml = '<div class="sknx-exp" role="note">' + ic("science") +
         "<span>Experimental on-device model - uncalibrated, for testing only. Not a validated result; correlate clinically.</span>" +
-      "</div>" : "";
+      "</div>";
+    } else if (a.engine === "derm-foundation-cloud") {
+      expHtml = '<div class="sknx-exp" role="note">' + ic("science") +
+        "<span>Experimental cloud model (59 conditions), validation only. <b>Does not cover melanoma</b> - assess any pigmented, changing, or bleeding lesion clinically regardless of this result. Correlate clinically.</span>" +
+      "</div>";
+    }
 
     // Red referral banner — icon + colour + text together (never colour alone). Shown ONLY when the
     // engine's malignancy/red-flag guardrail set referral=true; referralReason is always shown verbatim.

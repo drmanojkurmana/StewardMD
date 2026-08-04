@@ -112,11 +112,17 @@
     raw = raw || {};
     var differential = rank(raw.generalProbs);
     var lesion = null, referral = false, reason = null;
+    // SAFETY GUARDRAIL - runs at EVERY tier. The malignancy referral must NOT be entitlement-gated:
+    // a vision engine selectable at v1 (e.g. the cloud classifier, whose available() is tier-independent)
+    // can emit a named carcinoma in lesionProbs, and a tier gate here would let it pass as benign+Rx-
+    // eligible (R1 finding C1). False-negative-averse: refer on any malignant signal >= threshold.
+    var malig = (raw.lesionProbs || []).filter(function (x) { return !!normalizeMalignantLabel(x.label); }).sort(function (a, b) { return b.prob - a.prob; })[0];
+    if (malig && malig.prob >= REFER_THRESHOLD) { referral = true; reason = "Possible " + malig.label + " - specialist referral, do not prescribe."; }
+    // The lesion DISPLAY object (top lesion class + confidence band surfaced in the UI) stays a v2beta
+    // surfacing - a paid feature, not a safety mechanism.
     if (entitlement === "v2beta") {
       var lr = rank(raw.lesionProbs)[0] || null;
       if (lr) { lesion = { top: lr.label, prob: lr.prob, band: lr.band }; }
-      var malig = (raw.lesionProbs || []).filter(function (x) { return !!normalizeMalignantLabel(x.label); }).sort(function (a, b) { return b.prob - a.prob; })[0];
-      if (malig && malig.prob >= REFER_THRESHOLD) { referral = true; reason = "Possible " + malig.label + " - specialist referral, do not prescribe."; }
     }
     if (redFlag(raw.features)) { referral = true; reason = reason || "Red-flag features (ABCDE / bleeding / ulceration) - specialist referral, do not prescribe."; }
     return {

@@ -54,6 +54,16 @@ test("analyze() BCC -> SknX REFERS, no Rx (full path, injected fetch)", async ()
   assert.match(a.referralReason, /basal cell carcinoma/i);
 });
 
+test("R1 C1 regression: cloud BCC at v1 tier STILL refers (guardrail is not entitlement-gated)", async () => {
+  // The cloud provider is selectable at v1 (available() is tier-independent), so a v1 clinician can
+  // reach a named carcinoma. The guardrail must fire regardless of tier - not just at v2beta.
+  const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: fetchStub(BCC) });
+  const a = ENG.makeAnalysis(raw, "v1");
+  assert.equal(a.referral, true, "v1 + cloud BCC must refer");
+  assert.equal(a.rxEligible, false, "v1 + cloud BCC must NOT be Rx-eligible");
+  assert.match(a.referralReason, /basal cell carcinoma/i);
+});
+
 test("analyze() SCC/SCCIS -> refers via the SCC guardrail", async () => {
   const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: fetchStub(SCC) });
   const a = ENG.makeAnalysis(raw, "v2beta");

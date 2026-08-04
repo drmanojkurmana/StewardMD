@@ -34,13 +34,26 @@ test("an ABCDE red-flag feature forces referral even with low malignancy prob", 
   assert.equal(a.rxEligible, false);
 });
 
-test("v1 entitlement omits the lesion engine but STILL applies red-flag features", () => {
+test("v1 entitlement hides the lesion DISPLAY but the malignancy guardrail STILL refers (safety, tier-independent)", () => {
   const a = ENG.makeAnalysis({
     generalProbs: [{ label: "acne", prob: 0.8 }],
-    lesionProbs:  [{ label: "melanoma", prob: 0.9 }], // ignored at v1
+    lesionProbs:  [{ label: "melanoma", prob: 0.9 }],
     features: {}
   }, "v1");
-  assert.equal(a.lesion, null);
+  assert.equal(a.lesion, null, "lesion display object stays a v2beta surfacing");
+  assert.equal(a.referral, true, "R1 C1: a named malignancy must refer even at v1 (guardrail is not tier-gated)");
+  assert.equal(a.rxEligible, false, "must NOT be Rx-eligible when a carcinoma is present");
+  assert.match(a.referralReason, /melanoma/i);
+});
+
+test("v1 benign lesion: no referral, no lesion display (guardrail only fires on malignancy)", () => {
+  const a = ENG.makeAnalysis({
+    generalProbs: [{ label: "psoriasis", prob: 0.7 }],
+    lesionProbs:  [{ label: "nevus", prob: 0.95 }],
+    features: {}
+  }, "v1");
+  assert.equal(a.lesion, null, "no lesion display at v1");
+  assert.equal(a.referral, false);
   assert.equal(a.rxEligible, true);
 });
 
