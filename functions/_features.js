@@ -8,6 +8,7 @@ import { verifyFirebaseToken } from "./_fbauth.js";
 
 export const FEATURE_REGISTRY = [
   { key: "thorex_llm",       label: "ThoreX Learn-more / correlate LLM", defaultOn: true },
+  { key: "sknx_llm",         label: "SknX educational-report LLM",        defaultOn: true },
   { key: "kardiox_ecg19",    label: "KardioX 19-class ECG model",        defaultRoles: [] },
   { key: "scribe_dictation", label: "MaiK Scribe clinical dictation",    defaultRoles: ["physician", "resident"] },
   { key: "lab_watch",        label: "Apple Watch Lab Watch sync",        defaultRoles: ["physician", "resident", "student"] },
