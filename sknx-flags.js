@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   var DEFS = {
-    smd_sknx:          { type: "bool", def: true, query: "sknx" }, // PUBLIC-RELEASE-GATE: set def:false before any public release
+    smd_sknx:          { type: "bool", def: false, query: "sknx" }, // OFF by default while Phase 1 is mock-only; enable per-device with ?sknx=1 or localStorage. PUBLIC-RELEASE stays gated behind R1 clinical review + real models.
     smd_sknx_ondevice: { type: "bool", def: true, query: "sknxondevice" },
     smd_sknx_cloud:    { type: "tri",  def: null, query: null },
     smd_sknx_haptics:  { type: "bool", def: true, query: null }
