@@ -34,7 +34,20 @@
 
   function realCaches() { try { return typeof caches !== "undefined" ? caches : null; } catch (e) { return null; } }
   function realIndexedDB() { try { return typeof indexedDB !== "undefined" ? indexedDB : null; } catch (e) { return null; } }
-  function realFetch() { try { return typeof fetch !== "undefined" ? fetch : null; } catch (e) { return null; } }
+  // Prefer the ORIGINAL, streamable browser fetch for the (large) model download. On native,
+  // CapacitorHttp (enabled in capacitor.config) replaces window.fetch with a native-bridge version
+  // that buffers the whole response and marshals it as base64 across the JS bridge: it CANNOT stream
+  // byte-progress (so the "Downloading model" bar is stuck indeterminate) and it fails outright on the
+  // large (28 MB clinical + 87 MB X-Raydar) model binaries ("Load failed" -> inference_unavailable).
+  // Capacitor preserves the untouched web fetch as window.CapacitorWebFetch — using it downloads the
+  // model straight through the WebView's native networking, so res.body.getReader() streams REAL
+  // progress AND the big download completes reliably. Falls back to global fetch on web / in tests.
+  function realFetch() {
+    try {
+      if (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") return window.CapacitorWebFetch.bind(window);
+    } catch (e) {}
+    try { return typeof fetch !== "undefined" ? fetch : null; } catch (e) { return null; }
+  }
 
   // ── Cache API path ──────────────────────────────────────────────────────────────────────────────
   function cacheApiGet(cachesImpl, cacheName, url) {
