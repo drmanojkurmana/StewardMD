@@ -3793,7 +3793,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -3881,7 +3881,7 @@
       arm(FIRST_MS);
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }), signal: ctrl.signal });
+        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }

@@ -988,6 +988,11 @@ export async function onRequest(context) {
             const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
             grounded = ("RANKED EVIDENCE (StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from this ranked evidence — do not copy any single item verbatim; merge overlapping points; cite sources; if items conflict, state the disagreement and the higher-authority position:\n" + ebLines + "\n\n" + grounded).slice(0, MAX_IN_CHARS);
           }
+          // Lazy two-call generation (client flag smd_maik_lazy). tier 1 = bottom line ONLY (cheap,
+          // fast); tier 2 = the depth, fetched only if the clinician taps "Know more". Inert unless the
+          // client sends body.tier, so the default single-call behaviour is byte-identical.
+          if (body && body.tier === 1) sysA = sysA + "\n\nOUTPUT MODE — BOTTOM LINE ONLY: give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
+          else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for this question — rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance. Do NOT repeat the bottom line and do NOT write @@MORE@@.";
         } catch (e) {}
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
@@ -1014,7 +1019,7 @@ export async function onRequest(context) {
         // Non-stream is now the default delivery (native, and stream requests routed here), so a
         // concise answer uses the TIGHTER cap → generation finishes ~2x faster (the ~10-15s native
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
-        const nsCap = (body && body.depth === "detailed") ? MAX_OUT : NONSTREAM_BASE;
+        const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }

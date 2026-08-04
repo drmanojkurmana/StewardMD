@@ -3445,6 +3445,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Concise-first: split an answer on the @@MORE@@ marker → tier-1 bottom line + tier-2 detail.
     // Flag smd_maik_concise="0" reverts to the classic single-block answer without a redeploy.
     function maikConciseOn() { try { return localStorage.getItem("smd_maik_concise") !== "0"; } catch (e) { return true; } }
+    // Lazy two-tier generation (flag smd_maik_lazy, default OFF): the FIRST call fetches only the concise
+    // bottom line (cheap + fast); the tier-2 detail is fetched on demand when "Know more" is tapped. Cuts
+    // output tokens ~40-60% since most reads stop at the bottom line. Off by default → test then enable.
+    function maikLazyOn() { try { return localStorage.getItem("smd_maik_lazy") === "1"; } catch (e) { return false; } }
+    var _maikLazyCtx = {}, _maikLazySeq = 0;
     function maikSplitMore(s) {
       var parts = String(s == null ? "" : s).split(/@@\s*MORE\s*@@/i);
       if (parts.length < 2) return { lead: String(s == null ? "" : s).trim(), detail: "" };
@@ -3520,7 +3525,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
-      if (_concise) {
+      if (maikLazyOn()) {
+        // Lazy: only the bottom line was fetched (tier 1). The tier-2 detail is fetched on demand when
+        // "Know more" is tapped — most reads stop here, so we never spend those output tokens.
+        var _lg = "lz" + (++_maikLazySeq); _maikLazyCtx[_lg] = { pkg: pkg, question: question, lead: md };
+        think.innerHTML = attrHTML + eduHTML + rendered + '<div class="maik-detail" hidden></div>' + srcHTML;
+        var lzb = document.createElement("button"); lzb.className = "maik-know"; lzb.setAttribute("data-lazy-gid", _lg); lzb.textContent = "Know more →";
+        think.insertBefore(lzb, think.querySelector(".maik-detail") || null);
+      } else if (_concise) {
         // Concise bottom line first + a "Know more →" reveal for the detail (UpToDate-style).
         var _rmd = function (x) { return (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(x) : maikEscH(x); };
         think.innerHTML = attrHTML + eduHTML + _rmd(_more.lead) + '<div class="maik-detail" hidden>' + _rmd(_more.detail) + '</div>' + srcHTML;
@@ -3835,9 +3847,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           }
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
+            var _tier = maikLazyOn() ? 1 : undefined;   // lazy: first call fetches ONLY the bottom line
             var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
-              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
-              : window.SMD_AI.explainGrounded(pkg, { depth: depth });
+              ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth, tier: _tier }, onDelta)
+              : window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier });
             return call.then(function (r) {
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
@@ -4152,9 +4165,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (sum) { var dts = sum.parentNode; if (dts && dts.tagName === "DETAILS") { ev.preventDefault(); dts.open = !dts.open; } return; }
       // Show more / less: delegated (the live-render listener is gone once the thread HTML is rebuilt
       // from cache), so it keeps working when a saved conversation is reopened.
-      // Concise-first "Know more →" → reveal the tier-2 detail (delegated so it survives cache restore).
+      // "Know more →": lazy mode fetches the tier-2 detail on demand; concise-first mode reveals the
+      // detail already in the bubble. Delegated so it survives a cache-restored thread.
       var know = ev.target && ev.target.closest ? ev.target.closest(".maik-know") : null;
-      if (know) { var kbub = know.closest(".maik-b.ai"); var kdet = kbub && kbub.querySelector(".maik-detail"); if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} } know.remove(); return; }
+      if (know) {
+        var kbub = know.closest(".maik-b.ai"); var kdet = kbub && kbub.querySelector(".maik-detail");
+        var _lgid = know.getAttribute("data-lazy-gid");
+        if (_lgid && _maikLazyCtx[_lgid] && window.SMD_AI && SMD_AI.explainGrounded) {
+          var _ctx = _maikLazyCtx[_lgid]; know.textContent = "Loading detail…"; know.disabled = true;
+          SMD_AI.explainGrounded(_ctx.pkg, { tier: 2, depth: "detailed", priorLead: _ctx.lead }).then(function (r) {
+            var _dt = (r && r.text) ? maikStripRefine(String(r.text)).replace(/@@\s*MORE\s*@@/gi, "").trim() : "";
+            if (kdet && _dt) { kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_dt) : maikEscH(_dt); }
+            else if (kdet) { kdet.textContent = "Couldn't load the detail — re-ask for the full answer."; }
+            if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+            try { delete _maikLazyCtx[_lgid]; } catch (e) {}
+            know.remove();
+          }).catch(function () { know.textContent = "Know more →"; know.disabled = false; });
+          return;
+        }
+        if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} } know.remove(); return;
+      }
       var more = ev.target && ev.target.closest ? ev.target.closest(".maik-more") : null;
       if (more) { var mbub = more.closest(".maik-b.ai"); var cd2 = mbub && mbub.querySelector(".maik-collapsed"); if (cd2) { var opened = cd2.style.maxHeight === "none"; cd2.style.maxHeight = opened ? "260px" : "none"; cd2.style.overflow = opened ? "hidden" : ""; more.textContent = opened ? "Show more ▾" : "Show less ▴"; } return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
