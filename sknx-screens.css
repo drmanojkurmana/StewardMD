@@ -1,0 +1,247 @@
+/* sknx-screens.css — SknX AI · module + per-screen styles. Cloned/adapted from thorex.css +
+ * thorex-screens.css, collapsed into ONE file for Phase 1 (no separate sknx.css exists yet).
+ *
+ * ALL selectors are scoped to #sknxRoot / .sknx-* — additive, zero global leakage (mirrors the
+ * ThoreX/KardioX gate). Reuses StewardMD design tokens (--rds-*, --sev-*) so light/dark themes flow
+ * through with no extra work; module-local --sknx-* tokens are defined ON #sknxRoot only.
+ *
+ * Flag-gated by smd_sknx (+ non-free entitlement) via sknx.js; when off, sknx.js never mounts
+ * #sknxRoot so none of this applies.
+ */
+
+/* ─────────────────────────── Design tokens (module-local, on the root only) ─────────────────────── */
+#sknxRoot {
+  --sknx-primary: var(--rds-primary, #0F766E);
+  --sknx-primary-2: var(--rds-primary-2, #115E59);
+  --sknx-derm: #B45309;                 /* skin/derm accent (SknX's equivalent of ThoreX's --tx-pulmonary) */
+  --sknx-bg: var(--rds-bg, #F5F8F9);
+  --sknx-surf-2: var(--rds-surface-2, #EEF3F5);
+  --sknx-ink: var(--rds-ink, #0D1B24);
+  --sknx-text: var(--rds-ink, #0D1B24);
+  --sknx-text-2: var(--rds-muted, #5B7083);
+  --sknx-muted: var(--rds-muted, #8CA2B1);
+  --sknx-hairline: var(--rds-line, #E3EAEE);
+  --sknx-card: var(--rds-surface, #ffffff);
+  --sknx-sev-critical: var(--sev-critical, #B42332);
+  --sknx-sev-stable: var(--sev-stable, #1C7A4A);
+  --sknx-sev-info: var(--sev-info, #1D6FA3);
+  --sknx-band-high: var(--sev-critical, #B42332);
+  --sknx-band-moderate: var(--sev-warn, #996007);
+  --sknx-band-low: var(--sev-stable, #1C7A4A);
+  --sknx-r: 16px;
+  --sknx-r-ctl: 12px;
+  --sknx-ease: cubic-bezier(.2, .7, .2, 1);
+  --sknx-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sknx-sans: "IBM Plex Sans", var(--rds-font, system-ui), -apple-system, sans-serif;
+}
+
+/* ─────────────────────────── Module overlay shell ───────────────────────────────────────────────── */
+#sknxRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;                        /* above the app shell, sibling of #thorexRoot/#kardioxRoot */
+  display: none;                        /* sknx.js flips this to flex when opened */
+  flex-direction: column;
+  background: var(--sknx-bg);
+  color: var(--sknx-text);
+  font-family: var(--sknx-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+#sknxRoot.sknx-open { display: flex; }
+#sknxRoot .sknx-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
+@media (min-width: 820px) {
+  #sknxRoot .sknx-scroll { padding-left: max(16px, calc((100% - 760px) / 2)); padding-right: max(16px, calc((100% - 760px) / 2)); }
+}
+#sknxRoot .sknx-data { font-family: var(--sknx-mono); font-variant-numeric: tabular-nums; }
+
+/* ─────────────────────────── Buttons (base) ─────────────────────────────────────────────────────── */
+#sknxRoot .sknx-btn { min-height: 44px; border-radius: var(--sknx-r-ctl); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 1px solid transparent; }
+#sknxRoot .sknx-btn-primary { background: var(--sknx-primary); color: #fff; box-shadow: 0 6px 16px rgba(15, 118, 110, .28); }
+#sknxRoot .sknx-btn-secondary { background: var(--sknx-card); color: var(--sknx-text); border-color: var(--sknx-hairline); }
+#sknxRoot button:focus-visible, #sknxRoot [role="button"]:focus-visible, #sknxRoot a:focus-visible,
+#sknxRoot [tabindex]:focus-visible, #sknxRoot input:focus-visible {
+  outline: 2px solid var(--sknx-primary); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ═════════════════════════════ Screen 1 · Capture ═══════════════════════════════════════════════════ */
+#sknxRoot .sknx-capture { animation: sknxRise .32s var(--sknx-ease) both; }
+#sknxRoot .sknx-cap-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 12px;
+  border-bottom: 1px solid var(--sknx-hairline);
+  background: var(--sknx-bg);
+  position: sticky; top: 0; z-index: 2;
+}
+#sknxRoot .sknx-cap-close {
+  width: 44px; height: 44px; margin-left: -6px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: var(--sknx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#sknxRoot .sknx-cap-close .material-symbols-rounded { font-size: 24px; }
+#sknxRoot .sknx-cap-title { flex: 1; margin: 0; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--sknx-text); }
+#sknxRoot .sknx-cap-body { padding: 16px; }
+
+/* Source cards: camera / library / files */
+#sknxRoot .sknx-src-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+#sknxRoot .sknx-src-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+  min-height: 44px; padding: 16px 12px; text-align: left; cursor: pointer;
+  border: 1px solid var(--sknx-hairline); border-radius: 14px; background: var(--sknx-card);
+  font-family: var(--sknx-sans); color: var(--sknx-text);
+  transition: transform .15s var(--sknx-ease), box-shadow .15s var(--sknx-ease), border-color .15s var(--sknx-ease);
+}
+#sknxRoot .sknx-src-card:hover { border-color: var(--sknx-primary); box-shadow: 0 4px 14px rgba(13, 27, 36, .06); }
+#sknxRoot .sknx-src-card:active { transform: scale(.98); }
+#sknxRoot .sknx-src-ic { color: var(--sknx-primary); display: inline-flex; }
+#sknxRoot .sknx-src-ic .material-symbols-rounded { font-size: 26px; }
+#sknxRoot .sknx-src-name { margin-top: 8px; font-weight: 700; font-size: 13.5px; color: var(--sknx-text); }
+#sknxRoot .sknx-src-hint { font-size: 10.5px; font-weight: 500; color: var(--sknx-text-2); }
+@media (max-width: 380px) {
+  #sknxRoot .sknx-src-grid { grid-template-columns: 1fr; }
+}
+
+/* Capture-tip banner (framing / lighting guidance) */
+#sknxRoot .sknx-tip {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding: 12px 14px; border-radius: var(--sknx-r-ctl);
+  background: #E8F2F9; border: 1px solid #B5D4E8;
+}
+#sknxRoot .sknx-tip .material-symbols-rounded { flex: 0 0 auto; color: var(--sknx-sev-info); font-size: 19px; }
+#sknxRoot .sknx-tip-txt { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--sknx-text); }
+
+#sknxRoot .sknx-cap-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 18px; font-size: 11px; font-weight: 500; color: var(--sknx-muted);
+}
+#sknxRoot .sknx-cap-foot .material-symbols-rounded { font-size: 14px; color: var(--sknx-sev-stable); }
+
+/* ═════════════════════════════ Screen 2 · Processing ═════════════════════════════════════════════════ */
+#sknxRoot .sknx-proc { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 24px 16px; animation: sknxRise .32s var(--sknx-ease) both; }
+#sknxRoot .sknx-proc-inner { width: 100%; max-width: 360px; text-align: center; }
+#sknxRoot .sknx-proc-ring { position: relative; width: 128px; height: 128px; margin: 0 auto 18px; }
+#sknxRoot .sknx-proc-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+#sknxRoot .sknx-proc-track { fill: none; stroke: var(--sknx-hairline); stroke-width: 8; }
+#sknxRoot .sknx-proc-arc { fill: none; stroke: var(--sknx-primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .3s var(--sknx-ease); }
+#sknxRoot .sknx-proc-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#sknxRoot .sknx-proc-pct { font-family: var(--sknx-mono); font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 700; color: var(--sknx-text); }
+#sknxRoot .sknx-proc-cap { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--sknx-text-2); margin-top: 2px; }
+#sknxRoot .sknx-proc-title { font-size: 17px; font-weight: 700; color: var(--sknx-text); margin: 4px 0 2px; }
+#sknxRoot .sknx-proc-sub { font-size: 13px; color: var(--sknx-text-2); margin: 0 0 18px; }
+
+#sknxRoot .sknx-stages { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+#sknxRoot .sknx-stage { padding: 10px 12px; border-radius: var(--sknx-r-ctl); border: 1px solid var(--sknx-hairline); background: var(--sknx-card); opacity: .55; transition: opacity .2s var(--sknx-ease); }
+#sknxRoot .sknx-stage.is-active, #sknxRoot .sknx-stage.is-done { opacity: 1; }
+#sknxRoot .sknx-stage-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#sknxRoot .sknx-stage-name { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--sknx-text); }
+#sknxRoot .sknx-stage-name .material-symbols-rounded { font-size: 18px; color: var(--sknx-text-2); }
+#sknxRoot .sknx-stage.is-active .sknx-stage-name .material-symbols-rounded { color: var(--sknx-primary); animation: sknxSpin 1s linear infinite; }
+#sknxRoot .sknx-stage.is-done .sknx-stage-name .material-symbols-rounded { color: var(--sknx-sev-stable); }
+#sknxRoot .sknx-stage-val { font-family: var(--sknx-mono); font-size: 11.5px; font-weight: 600; color: var(--sknx-text-2); }
+#sknxRoot .sknx-stage-track { margin-top: 6px; height: 4px; border-radius: 999px; background: var(--sknx-surf-2); overflow: hidden; }
+#sknxRoot .sknx-stage-fill { height: 100%; width: 0%; background: var(--sknx-primary); border-radius: 999px; transition: width .25s var(--sknx-ease); }
+#sknxRoot .sknx-stage.is-done .sknx-stage-fill { background: var(--sknx-sev-stable); }
+
+#sknxRoot .sknx-proc-foot { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 20px; font-size: 11px; font-weight: 500; color: var(--sknx-muted); }
+#sknxRoot .sknx-proc-foot .material-symbols-rounded { font-size: 14px; color: var(--sknx-sev-stable); }
+
+/* ═════════════════════════════ Screen 3 · Result ═════════════════════════════════════════════════════ */
+#sknxRoot .sknx-result-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 12px;
+  border-bottom: 1px solid var(--sknx-hairline);
+  background: var(--sknx-bg);
+  position: sticky; top: 0; z-index: 2;
+}
+#sknxRoot .sknx-result-back, #sknxRoot .sknx-result-close {
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: var(--sknx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#sknxRoot .sknx-result-back { margin-left: -6px; }
+#sknxRoot .sknx-result-back .material-symbols-rounded, #sknxRoot .sknx-result-close .material-symbols-rounded { font-size: 22px; }
+#sknxRoot .sknx-result-title { flex: 1; font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--sknx-text); }
+#sknxRoot .sknx-result-body { padding: 16px; animation: sknxRise .32s var(--sknx-ease) both; }
+
+/* Referral banner — colour + icon + text together (never colour alone). Only rendered when the
+ * malignancy/red-flag guardrail (sknx-engines.js) sets analysis.referral = true. */
+#sknxRoot .sknx-refer {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 14px; padding: 13px 14px; border-radius: var(--sknx-r);
+  background: color-mix(in srgb, var(--sknx-sev-critical) 12%, var(--sknx-card));
+  border: 1px solid color-mix(in srgb, var(--sknx-sev-critical) 45%, transparent);
+}
+#sknxRoot .sknx-refer .material-symbols-rounded { flex: 0 0 auto; color: var(--sknx-sev-critical); font-size: 24px; }
+#sknxRoot .sknx-refer-body { display: flex; flex-direction: column; gap: 2px; }
+#sknxRoot .sknx-refer-title { font-size: 14.5px; font-weight: 700; color: var(--sknx-sev-critical); }
+#sknxRoot .sknx-refer-reason { font-size: 12.5px; font-weight: 500; color: var(--sknx-text); line-height: 1.4; }
+
+/* Heatmap slot */
+#sknxRoot .sknx-heatmap-wrap { margin-bottom: 14px; border-radius: var(--sknx-r); overflow: hidden; background: #0a0f14; }
+#sknxRoot .sknx-heatmap-wrap:has(img[hidden]) { display: none; }
+#sknxRoot .sknx-heatmap { display: block; width: 100%; max-height: 320px; object-fit: contain; }
+
+#sknxRoot .sknx-sec-title { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--sknx-text-2); margin: 0 2px 10px; }
+
+/* Ranked differential list */
+#sknxRoot .sknx-dx { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+#sknxRoot .sknx-dx-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 12px 14px; border: 1px solid var(--sknx-hairline); border-radius: var(--sknx-r-ctl); background: var(--sknx-card);
+}
+#sknxRoot .sknx-dx-label { font-weight: 700; font-size: 14px; color: var(--sknx-text); text-transform: capitalize; }
+#sknxRoot .sknx-dx-band {
+  flex: 0 0 auto; font-family: var(--sknx-mono); font-size: 11.5px; font-weight: 700;
+  padding: 3px 9px; border-radius: 999px; background: var(--sknx-surf-2); color: var(--sknx-text-2);
+}
+#sknxRoot .sknx-dx-band--high { color: #fff; background: var(--sknx-band-high); }
+#sknxRoot .sknx-dx-band--moderate { color: #fff; background: var(--sknx-band-moderate); }
+#sknxRoot .sknx-dx-band--low { color: var(--sknx-band-low); background: color-mix(in srgb, var(--sknx-band-low) 14%, var(--sknx-card)); }
+#sknxRoot .sknx-dx-empty {
+  display: flex; align-items: center; gap: 8px; padding: 14px;
+  border: 1px solid var(--sknx-hairline); border-radius: var(--sknx-r-ctl); background: var(--sknx-card);
+  font-size: 13px; font-weight: 600; color: var(--sknx-text-2);
+}
+#sknxRoot .sknx-dx-empty .material-symbols-rounded { color: var(--sknx-sev-stable); }
+
+#sknxRoot .sknx-lesion {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 11px 13px;
+  border: 1px solid var(--sknx-hairline); border-radius: var(--sknx-r-ctl); background: var(--sknx-surf-2);
+  font-size: 12.5px; font-weight: 500; color: var(--sknx-text);
+}
+#sknxRoot .sknx-lesion .material-symbols-rounded { color: var(--sknx-sev-info); font-size: 18px; flex: 0 0 auto; }
+
+/* Mandatory educational disclaimer — shown once, at the bottom of the result body. */
+#sknxRoot .sknx-disc {
+  display: flex; align-items: flex-start; gap: 8px; margin: 6px 0 16px;
+  padding: 11px 13px; border-radius: var(--sknx-r-ctl);
+  background: var(--sknx-surf-2); border: 1px solid var(--sknx-hairline);
+  font-size: 11.5px; line-height: 1.45; font-weight: 500; color: var(--sknx-text-2);
+}
+#sknxRoot .sknx-disc .material-symbols-rounded { flex: 0 0 auto; font-size: 16px; color: var(--sknx-sev-info); }
+
+#sknxRoot .sknx-actions { display: flex; gap: 10px; }
+#sknxRoot .sknx-actions .sknx-btn { flex: 1; }
+
+/* Empty / unavailable state (shared by the result screen when there is no analysis to show). */
+#sknxRoot .sknx-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 60px 24px; }
+#sknxRoot .sknx-empty .material-symbols-rounded { font-size: 40px; color: var(--sknx-muted); }
+#sknxRoot .sknx-empty-title { font-size: 16px; font-weight: 700; color: var(--sknx-text); }
+#sknxRoot .sknx-empty-sub { font-size: 13px; color: var(--sknx-text-2); max-width: 28ch; }
+
+/* ─────────────────────────── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes sknxRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sknxSpin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #sknxRoot *, #sknxRoot *::before, #sknxRoot *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* While the SknX overlay is open (html.sknx-lock), hide the app's floating action buttons — mirrors
+ * html.tx-lock / html.kx-lock in thorex.css / kardiox.css. */
+html.sknx-lock .hv-fab,
+html.sknx-lock #hvFab,
+html.sknx-lock #infFab,
+html.sknx-lock .inf-fab,
+html.sknx-lock #dxLaunch,
+html.sknx-lock .ghis-ward-fab { display: none !important; }
