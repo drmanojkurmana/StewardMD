@@ -48,7 +48,17 @@
       return a;
     });
   }
-  var API = { analyze: analyze, mockRaw: mockRaw, STAGES: STAGES };
+  // warmup(): preload the active real-vision engine (WASM or native) when SknX opens, so the first
+  // analyze after a capture is just inference, not a ~10s cold download+init. No-op for the mock.
+  function warmup(injected) {
+    try {
+      var v = pickVision(injected || {});
+      if (v && typeof v.warmup === "function") return Promise.resolve(v.warmup()).catch(function () {});
+    } catch (e) {}
+    return Promise.resolve();
+  }
+
+  var API = { analyze: analyze, warmup: warmup, mockRaw: mockRaw, STAGES: STAGES };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_SKNX_PROVIDERS = API;
 })();

@@ -72,3 +72,8 @@ test("analyze() -> benign (nevus) output -> SknX does NOT refer, Rx-eligible", a
 test("available() is false without a DOM (node) so the provider never picks real-vision in tests", () => {
   assert.equal(RV.available(), false);
 });
+
+test("warmup() is exported and no-ops safely without a DOM (node)", async () => {
+  assert.equal(typeof RV.warmup, "function");
+  assert.equal(await RV.warmup(), false);
+});

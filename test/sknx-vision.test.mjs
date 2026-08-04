@@ -80,3 +80,10 @@ test("a dataURL image is stripped to raw base64 for the bridge", async () => {
   assert.equal(p.lastClassify.base64Image, "ZZZZ");
   assert.equal(p.lastClassify.modelPath, "/m");
 });
+
+test("warmup() preloads the model (downloads once) when flag + plugin present", async () => {
+  const p = fakePlugin([0,0,0,0,0,1,0], { ready: false });
+  const ok = await VIS.warmup(win(true, p));
+  assert.equal(ok, true);
+  assert.equal(p.calls.prepare, 1, "warmup pre-downloads the model");
+});

@@ -74,7 +74,16 @@
     });
   }
 
-  var API = { available: available, analyze: analyze, mapProbs: mapProbs, modelBaseUrl: modelBaseUrl };
+  // warmup(): pre-download the .mlpackage (native) ahead of the first classify, so the classification
+  // is just Neural-Engine inference. Idempotent, fire-and-forget safe.
+  function warmup(win) {
+    if (!available(win)) return Promise.resolve(false);
+    var p = cap(win);
+    if (!p) return Promise.resolve(false);
+    return ensureModel(p, win).then(function () { return true; }).catch(function () { return false; });
+  }
+
+  var API = { available: available, analyze: analyze, warmup: warmup, mapProbs: mapProbs, modelBaseUrl: modelBaseUrl };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_SKNX_VISION = API;
 })();

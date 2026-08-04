@@ -352,6 +352,9 @@
     state.reportAudience = "resident";
     state.reportLabels = [];
     show("capture");
+    // Preload the on-device classifier NOW (download model + build the inference session) while the
+    // clinician frames the photo, so the analyze after capture is ~50ms inference, not a ~10s cold load.
+    try { var P = providers(); if (P && P.warmup) P.warmup(); } catch (e) {}
   }
 
   // ── On-device capture: Camera / Photo Library / Files with a hidden <input type=file> web fallback
