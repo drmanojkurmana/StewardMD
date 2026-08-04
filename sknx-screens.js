@@ -214,6 +214,7 @@
         dxHtml +
         lesionHtml +
         '<div class="sknx-disc">' + ic("info") + "<span>" + esc(disclaimerText(a.disclaimerKey)) + "</span></div>" +
+        '<div class="sknx-report-host" id="sknxReportHost" aria-live="polite"><div class="sknx-report-loading">' + ic("hourglass_empty") + "<span>Preparing educational report&hellip;</span></div></div>" +
         '<div class="sknx-actions">' +
           '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic("bookmark") + "Save case</button>" +
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
@@ -221,11 +222,71 @@
       "</div>";
 
     host.innerHTML = head + body;
+    mountReport(a);
+  }
+
+  /* ═══════════════════ Educational report mount (Phase 2 — evidence + LLM + report renderer) ═══════
+   * Additive and defensive by construction: never throws, and if any of the three sknx-evidence.js /
+   * sknx-llm.js / sknx-report.js scripts are missing (e.g. an older cached bundle), the report host is
+   * simply removed and the differential/referral screen above is unaffected. Phase 2 default is the
+   * ON-DEVICE mock reasoner (buildReport with no deps.remote) — the /api/sknx remote endpoint is an
+   * optional seam and is intentionally NOT called from here. */
+  function removeReportHost() {
+    try { var h = document.getElementById("sknxReportHost"); if (h && h.parentNode) h.parentNode.removeChild(h); } catch (e) {}
+  }
+  function mountReport(a) {
+    try {
+      if (!window.SMD_SKNX_LLM || !window.SMD_SKNX_REPORT || !window.SMD_SKNX_EVIDENCE) { removeReportHost(); return; }
+      var labels = (a.differential || []).map(function (d) { return d.label; });
+      state.reportLabels = labels;
+      // Malignancy-driven referrals surface via the lesion engine (a.lesion), while the differential may
+      // lead with a benign general-classifier label. Add the lesion read to the evidence query so the
+      // report carries the relevant guideline citation (e.g. AAD melanoma). reportLabels (used by the
+      // Compare-top-two control) stays the differential labels only.
+      var evLabels = labels.slice();
+      if (a.lesion && a.lesion.top) evLabels.push(a.lesion.top);
+      var evidence = window.SMD_SKNX_EVIDENCE.retrieve(evLabels) || [];
+      window.SMD_SKNX_LLM.buildReport({ analysis: a, features: (a.features || {}), evidence: evidence, context: {} })
+        .then(function (payload) {
+          state.reportPayload = payload;
+          state.reportAudience = state.reportAudience || "resident";
+          renderReportInto(payload);
+        })
+        .catch(function () { removeReportHost(); });
+    } catch (e) { removeReportHost(); }
+  }
+
+  // renderReportInto(payload) — re-finds #sknxReportHost fresh (the result screen may have re-rendered
+  // since mountReport() kicked off the async build) and fills it with the Explain-Like segmented
+  // control, the report body leveled for the current state.reportAudience, an optional Compare-top-two
+  // control (only when >=2 differential labels exist), and an Export PDF action.
+  function renderReportInto(payload) {
+    try {
+      var rh = document.getElementById("sknxReportHost");
+      if (!rh || !payload) return;
+      var aud = state.reportAudience || "resident";
+      var leveled = window.SMD_SKNX_LLM.explainAs(payload, aud);
+      var compareHtml = "";
+      if ((state.reportLabels || []).length >= 2 && window.SMD_SKNX_COMPARE) {
+        compareHtml =
+          '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-compare">Compare top two</button>' +
+          '<div class="sknx-compare-host" id="sknxCompareHost"></div>';
+      }
+      rh.innerHTML =
+        window.SMD_SKNX_REPORT.explainControls() +
+        '<div class="sknx-report-body" id="sknxReportBody">' + window.SMD_SKNX_REPORT.html(leveled) + "</div>" +
+        compareHtml +
+        '<button class="sknx-btn sknx-btn-secondary sknx-report-pdf" type="button" data-act="sknx-report-pdf">' + ic("picture_as_pdf") + "Export PDF</button>";
+      var segs = rh.querySelectorAll(".sknx-explain-seg");
+      for (var i = 0; i < segs.length; i++) {
+        if (segs[i].getAttribute("data-audience") === aud) segs[i].classList.add("is-active");
+      }
+    } catch (e) {}
   }
 
   /* ══════════════════════════════ Router (SMD_SKNX_SCREENS) ══════════════════════════════════════ */
   var SCREENS = { capture: renderCapture, processing: renderProcessing, result: renderResult };
-  var state = { analysis: null, running: false, stack: [] };
+  var state = { analysis: null, running: false, stack: [], reportPayload: null, reportAudience: "resident", reportLabels: [] };
 
   function providers() { try { return (typeof window !== "undefined" && window.SMD_SKNX_PROVIDERS) || null; } catch (e) { return null; } }
   function host() { return document.getElementById("sknxScroll"); }
@@ -262,6 +323,9 @@
     init(root);
     state.stack = ["capture"];
     state.analysis = null;
+    state.reportPayload = null;
+    state.reportAudience = "resident";
+    state.reportLabels = [];
     show("capture");
   }
 
@@ -358,7 +422,10 @@
       case "sknx-back": haptic("light"); back(); return;
       case "sknx-source": haptic("light"); startCapture(t.getAttribute("data-source") || "library"); return;
       case "sknx-save": toast("Case saved."); return;
-      case "sknx-new": state.analysis = null; state.stack = ["capture"]; show("capture"); return;
+      case "sknx-new": state.analysis = null; state.reportPayload = null; state.reportAudience = "resident"; state.reportLabels = []; state.stack = ["capture"]; show("capture"); return;
+      case "sknx-explain": var aud = t.getAttribute("data-audience") || "resident"; state.reportAudience = aud; haptic("light"); if (state.reportPayload) renderReportInto(state.reportPayload); return;
+      case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
+      case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(window.SMD_SKNX_LLM.explainAs(state.reportPayload, state.reportAudience || "resident")); } catch (e) {} haptic("light"); return;
     }
     /* other data-act values (if any) are screen-internal. */
   }
