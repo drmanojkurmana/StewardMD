@@ -76,9 +76,14 @@
     // interactions — ≥2 drugs ALWAYS prompts a check; upgraded to a specific warning if the engine finds one
     if (drugs.length >= 2) {
       var found = null, INTX = G("INTERACTIONS");
-      if (INTX && INTX.checkInteractions) { try { found = INTX.checkInteractions(drugs); } catch (e) {} }
-      var has = !!(found && (found.length || (found.pairs && found.pairs.length)));
-      alerts.push({ level: has ? "warn" : "info", kind: "interaction", msg: has ? ("Interaction flagged between " + drugs.join(" + ") + " — review before prescribing.") : ("Multiple drugs (" + drugs.join(", ") + ") — verify interactions.") });
+      // checkInteractions expects [{generic}] objects and returns SEVERITY BUCKETS, not a flat array.
+      if (INTX && INTX.checkInteractions) { try { found = INTX.checkInteractions(drugs.map(function (d) { return { generic: d }; })); } catch (e) {} }
+      // One-directional: only UPGRADE to a specific warning on a >= major engine finding. A miss (empty
+      // result, an extraction gap, or a throw) degrades to the generic "verify" nudge - it must NEVER
+      // assert "no interactions", because the ruleset is a screen, not proof of safety.
+      var hits = found ? [].concat(found.critical || [], found.major || []) : [];
+      var has = hits.length > 0;
+      alerts.push({ level: has ? "warn" : "info", kind: "interaction", msg: has ? ("Interaction flagged between " + drugs.join(" + ") + " - review before prescribing.") : ("Multiple drugs (" + drugs.join(", ") + ") - verify interactions.") });
     }
     // high-risk medication
     if (HIGH_RISK.test(q)) alerts.push({ level: "warn", kind: "high_risk", msg: "High-risk medication — confirm indication, dose and monitoring." });

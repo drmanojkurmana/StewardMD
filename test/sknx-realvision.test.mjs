@@ -60,12 +60,15 @@ test("analyze() (injected ort/session/decode) -> melanoma output -> SknX REFERS,
   assert.match(a.referralReason, /melanoma/i);
 });
 
-test("analyze() -> benign (nevus) output -> SknX does NOT refer, Rx-eligible", async () => {
+test("analyze() -> benign (nevus) output -> SknX does NOT refer, but is NOT Rx-eligible (H7)", async () => {
   const session = fakeSession([0, 0, 0, 0, 0, 6, 0]); // nevus dominant (index 5)
   const raw = await RV.analyze({}, { ort: fakeOrt(), session, decode: fakeDecode });
   const a = ENG.makeAnalysis(raw, "v2beta");
   assert.equal(a.referral, false);
-  assert.equal(a.rxEligible, true);
+  // H7 (clinical_safety.md): a pigmented/melanocytic read can be an unrecognised melanoma, so it is
+  // never Rx-eligible and carries a "cannot exclude melanoma" caveat even without a red flag.
+  assert.equal(a.rxEligible, false);
+  assert.match(String(a.caution || ""), /melanoma/i);
   assert.equal(a.lesion.top, "nevus");
 });
 

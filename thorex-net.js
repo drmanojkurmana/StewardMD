@@ -23,7 +23,15 @@
   // Placeholder direct-backend URL for the native app — replace once the ThoreX Cloud Run service is
   // provisioned (see kardiox-providers.js KX_BACKEND_URL for the pattern this mirrors).
   var TX_BACKEND_URL = "https://thorex-pipeline-yislqrddsq-uc.a.run.app";
-  function defaultBaseUrl() { return isNative() ? TX_BACKEND_URL : "/api/thorex"; }
+  // Production egress posture (security H1): route through the authenticated Worker proxy instead of
+  // POSTing the CXR straight to raw Cloud Run. Gated on smd_thorex_secure_egress; default OFF keeps the
+  // native direct-backend validation path unchanged. The proxy enforces sign-in + feature gate and fails
+  // closed (503) until THOREX_ANALYZE_URL is provisioned server-side. Web builds already use the edge.
+  function secureEgress() {
+    try { return !!(typeof window !== "undefined" && window.SMD_THOREX_FLAGS && window.SMD_THOREX_FLAGS.bool && window.SMD_THOREX_FLAGS.bool("smd_thorex_secure_egress")); }
+    catch (e) { return false; }
+  }
+  function defaultBaseUrl() { return isNative() ? (secureEgress() ? "https://stewardmd.in/api/thorex" : TX_BACKEND_URL) : "/api/thorex"; }
 
   var ERROR_MAP = {
     400: { code: "bad_image", stage: "quality" },

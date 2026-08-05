@@ -19,6 +19,20 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // DPDP retention cap. `expiresAt` is the field the ICU 7-day Firestore TTL policy acts on, and it
+    // is set client-side. Without a cap an authorised unit member (or a future client bug) could write
+    // a far-future value and silently defeat the "cleared automatically after 7 days" promise. Cap it
+    // at ~8 days out (7d window + ~1d slack for latency/clock skew) so a legitimate now+7d write never
+    // false-rejects. Cap-WHEN-PRESENT: writes that omit the field (setReviewed's merge, task
+    // status/explain updates, legacy docs predating the field) still pass and carry the prior, already
+    // valid expiresAt forward. Mirrors the sharedCases expiry cap; ICU expiresAt is a Timestamp (not
+    // millis), so the bound uses request.time + duration, not toMillis().
+    function retentionCapped() {
+      return !('expiresAt' in request.resource.data)
+             || (request.resource.data.expiresAt is timestamp
+                 && request.resource.data.expiresAt <= request.time + duration.value(8, 'd'));
+    }
+
     // A user's saved cases are PRIVATE to that user. (Previously this allowed any
     // signed-in user to read/write ANY user's cases — broken access control / PHI IDOR.)
     match /users/{userId}/cases/{caseId} {
@@ -181,14 +195,14 @@ service cloud.firestore {
       // instructing role may delete (discharge / remove) a patient.
       match /patients/{pid} {
         allow read: if isMember(groupId);
-        allow create, update: if isMember(groupId);
+        allow create, update: if isMember(groupId) && retentionCapped();
         allow delete: if canInstruct(groupId);
 
         // Append-only audit trail: a member may add an event authored AS THEMSELVES;
         // events can NEVER be edited or deleted.
         match /timeline/{eid} {
           allow read: if isMember(groupId);
-          allow create: if isMember(groupId) && request.resource.data.by == request.auth.uid;
+          allow create: if isMember(groupId) && request.resource.data.by == request.auth.uid && retentionCapped();
           allow update, delete: if false;
         }
 
@@ -198,16 +212,17 @@ service cloud.firestore {
           allow read: if isMember(groupId);
           // ANY member may create a tracked task — a resident routinely logs the consultant's verbal
           // round order (attribution kept in assignedBy/onBehalfOf). Delete stays instructor-only.
-          allow create: if isMember(groupId);
-          allow update: if isMember(groupId);
+          allow create: if isMember(groupId) && retentionCapped();
+          allow update: if isMember(groupId) && retentionCapped();
           allow delete: if canInstruct(groupId);
         }
 
         // Presence heartbeat: a member may read who's viewing; you may only write
-        // your OWN presence doc.
+        // your OWN presence doc. Carries the same retention cap so orphaned presence
+        // (a member's viewing metadata left behind after discharge) is TTL-eligible too.
         match /presence/{uid} {
           allow read: if isMember(groupId);
-          allow write: if request.auth.uid == uid && isMember(groupId);
+          allow write: if request.auth.uid == uid && isMember(groupId) && retentionCapped();
         }
       }
     }

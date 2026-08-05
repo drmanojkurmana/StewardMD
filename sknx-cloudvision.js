@@ -16,6 +16,11 @@
   // the closed-endpoint production posture, set this to the Worker proxy "https://stewardmd.in/api/sknx"
   // + provision the secrets (see sknx-server/deploy.sh hardening notes).
   var DEFAULT_ENDPOINT = "https://sknx-derm-yislqrddsq-el.a.run.app";
+  // Production egress posture (security H1): the authenticated Worker proxy. classify() appends "/classify",
+  // hitting POST /api/sknx/classify — which enforces sign-in + feature gate + rate-limit, keeps the Cloud
+  // Run URL + key server-side, and fails closed (503) until SKNX_CLASSIFY_URL is provisioned. Selected only
+  // when the smd_sknx_secure_egress flag is ON (see endpoint()); default OFF keeps the direct validation path.
+  var PROXY_ENDPOINT = "https://stewardmd.in/api/sknx";
 
   // The two true cutaneous malignancies among the 59 SCIN conditions -> a label sknx-engines.js's
   // guardrail recognizes (normalizeMalignantLabel). These are pushed into lesionProbs so the malignancy
@@ -29,9 +34,13 @@
   function endpoint() {
     try {
       if (typeof window !== "undefined") {
+        // An explicit override always wins (validation/QA can pin a specific endpoint).
         if (window.SMD_SKNX_CLOUD_ENDPOINT) return window.SMD_SKNX_CLOUD_ENDPOINT;
         var ls = null; try { ls = localStorage.getItem("sknx_cloud_endpoint"); } catch (e) {}
         if (ls) return ls;
+        // Flag ON -> route through the authenticated Worker proxy (auth-enforced edge). Default OFF ->
+        // the raw Cloud Run URL, so the active validation path is untouched (security H1).
+        try { if (window.SMD_SKNX_FLAGS && window.SMD_SKNX_FLAGS.bool("smd_sknx_secure_egress")) return PROXY_ENDPOINT; } catch (e) {}
       }
     } catch (e) {}
     return DEFAULT_ENDPOINT;
@@ -122,16 +131,26 @@
     return Promise.resolve(null);
   }
 
+  function doPost(f, url, headers, body) {
+    return f(url, { method: "POST", headers: headers, body: body }).then(function (r) {
+      if (!r.ok) { var e = new Error("cloud_http_" + r.status); e.status = r.status; throw e; }
+      return r.json();
+    });
+  }
   function classify(dataURL, ep, fetchImpl) {
     var f = fetchImpl || (typeof fetch === "function" ? fetch : null);
     if (!f) return Promise.reject(new Error("no_fetch"));
+    var url = ep.replace(/\/$/, "") + "/classify";
     return idToken().then(function (tok) {
       var headers = { "Content-Type": "application/json" };
       if (tok) headers.Authorization = "Bearer " + tok;
-      return f(ep.replace(/\/$/, "") + "/classify", { method: "POST", headers: headers, body: JSON.stringify({ image: dataURL }) });
-    }).then(function (r) {
-      if (!r.ok) throw new Error("cloud_http_" + r.status);
-      return r.json();
+      var body = JSON.stringify({ image: dataURL });
+      return doPost(f, url, headers, body).catch(function (err) {
+        // Retry ONCE on a transient network/DNS blip (fetch rejects, no status) or a 5xx - the device's
+        // resolver + a scale-to-zero instance occasionally miss the first attempt. Never retry a 4xx.
+        if (err && err.status && err.status < 500) throw err;
+        return new Promise(function (res) { setTimeout(res, 900); }).then(function () { return doPost(f, url, headers, body); });
+      });
     });
   }
 
@@ -193,15 +212,21 @@
     });
   }
 
-  // warmup(): wake the (scale-to-zero) Cloud Run instance when SknX opens so the first real analysis
-  // isn't a ~60-120s cold start. Fire-and-forget, never rejects. Hits /health (starts the instance);
-  // the model itself loads lazily on the first /classify.
+  // warmup(): warm-on-open. The endpoint scales to zero (free when idle), so the first real scan would
+  // otherwise be a ~60-90s cold start (spin-up + model load). Called when SknX opens, this sends a tiny
+  // THROWAWAY 16x16 image to /classify so the server loads the model WHILE the clinician is framing the
+  // photo - by capture time it is usually warm. Fire-and-forget, never rejects; not a patient image so
+  // no consent gate. A no-op off the native app (endpoint unset) or without a DOM.
   function warmup(opts) {
     opts = opts || {};
     var ep = opts.endpoint || endpoint();
-    if (!ep || ep.indexOf("__SKNX_CLOUD") === 0 || typeof fetch !== "function") return Promise.resolve(false);
-    return fetch(ep.replace(/\/$/, "") + "/health", { method: "GET" })
-      .then(function () { return true; }).catch(function () { return false; });
+    if (!ep || ep.indexOf("__SKNX_CLOUD") === 0 || typeof fetch !== "function" || typeof document === "undefined") return Promise.resolve(false);
+    try {
+      var c = document.createElement("canvas"); c.width = 16; c.height = 16;
+      c.getContext("2d").fillRect(0, 0, 16, 16);
+      var tiny = c.toDataURL("image/jpeg", 0.5);
+      return classify(tiny, ep, opts.fetchImpl).then(function () { return true; }).catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
   }
 
   var API = {

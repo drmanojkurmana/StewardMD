@@ -86,6 +86,35 @@ to **Enforce** in the console.
 
 ---
 
+## PART B2 — Firestore TTL policies (DPDP 7-day auto-clear) — REQUIRED for the privacy notice
+
+**Why not repo-only:** the client now stamps `expiresAt` (= now + 7 days, refreshed on every write) on
+the shared ICU docs (`icu-collab.js retentionExpiry()`), but the actual deletion is done by a **Firestore
+TTL policy**, which is configured in the **Firebase/GCP console**, not in the repo. Without the policy the
+"kept for 7 days, then cleared automatically" promise in the ICU notice + privacy policy (§14) is NOT met.
+
+Configure a TTL policy on the **`expiresAt`** field for each of these **collection groups** (Firestore →
+project `stewardmd-*` (asia-south1) → *Time-to-live (TTL)* → Create policy; or
+`gcloud firestore fields ttls update expiresAt --collection-group=<cg> --enable-ttl`):
+- `patients`   (the PHI-bearing shared patient doc — `icuGroups/{gid}/patients/{pid}`)
+- `timeline`   (append-only audit — `.../patients/{pid}/timeline/{eid}`)
+- `tasks`      (`.../patients/{pid}/tasks/{tid}`)
+- `presence`   (viewing-metadata heartbeat — `.../patients/{pid}/presence/{uid}`; clinician name, NOT
+  patient PHI, but orphaned forever on discharge without this, since Firestore doesn't cascade-delete
+  subcollections — data-hygiene, recommended)
+
+Notes:
+- TTL deletes within ~72h of the `expiresAt` instant (Google SLA), so real deletion is ~7–10 days —
+  acceptable for the notice; the field is refreshed on every write so an ACTIVELY-used patient never
+  expires, and explicit discharge deletes immediately.
+- **Deploy the rules too:** `firestore.rules` now caps the client-set `expiresAt` at ~8 days
+  (`retentionCapped()`) so the auto-delete can't be defeated by a bad/forged value — `firebase deploy
+  --only firestore:rules`. (Rules edits do NOT change production on their own.)
+- **Verify:** in the console, a test doc with `expiresAt` in the past is gone within the TTL window;
+  the TTL dashboard shows the four policies "Serving".
+
+---
+
 ## PART C — Clean native rebuild (ships ALL of today's fixes to devices)
 
 **Why not repo-only:** the installed app runs the bundle from its last build; the fixes on `main`

@@ -111,6 +111,21 @@
     var abcde = (f.asymmetry ? 1 : 0) + (f.borderIrregular ? 1 : 0) + (f.colorVariegation ? 1 : 0) + ((f.diameterMm || 0) >= 6 ? 1 : 0) + (f.evolving ? 1 : 0);
     return abcde >= 2 || !!f.bleeding || !!f.ulceration || !!f.rapidGrowth || !!f.systemicSymptoms;
   }
+  // H7 (R1 clinical): the deployed differential model has NO melanoma class, so a melanoma can be read
+  // as a benign pigmented/melanocytic lesion (nevus, lentigo, seborrheic keratosis) with no ABCDE ticked
+  // and no OOD - which would otherwise pass as benign + Rx-eligible. For ANY pigmented/melanocytic TOP
+  // differential we cannot exclude melanoma: surface a point-of-decision caveat and force rxEligible=false
+  // (never prescribe onto a possible melanoma). Substring match keeps it robust to label-string variants.
+  // Includes non-pigmented melanoma MIMICS (dermatofibroma, vascular lesion) that a nodular/amelanotic
+  // melanoma can be read as (R1 re-review). The always-on educational disclaimer additionally states the
+  // tool cannot detect melanoma on EVERY read - the deployed differential taxonomy has no melanocytic class,
+  // so a melanoma read as an inflammatory label would otherwise carry no lesion-specific caveat here.
+  var PIGMENTED_KEYWORDS = ["nevus", "naevus", "melanocytic", "melanoma", "mole", "lentigo", "lentigin", "pigment", "seborrheic keratosis", "seborrhoeic keratosis", "benign keratosis", "freckle", "ephelis", "cafe au lait", "café", "dermatofibroma", "vascular lesion"];
+  function isPigmentedMelanocytic(label) {
+    var k = String(label == null ? "" : label).toLowerCase();
+    for (var i = 0; i < PIGMENTED_KEYWORDS.length; i++) { if (k.indexOf(PIGMENTED_KEYWORDS[i]) !== -1) return true; }
+    return false;
+  }
   function makeAnalysis(raw, entitlement) {
     raw = raw || {};
     var differential = rank(raw.generalProbs);
@@ -135,6 +150,14 @@
     var caution = null;
     var scar = (differential || []).filter(function (x) { return !!SCAR_RISK[String(x.label == null ? "" : x.label).toLowerCase().trim()] && (x === differential[0] || x.prob >= 0.5); })[0];
     if (scar) { caution = "Possible " + scar.label + " - if mucosal involvement, skin pain, blistering, target lesions, or systemic symptoms, treat as a possible severe reaction (SJS / TEN / DRESS) and refer urgently."; }
+    // H7: pigmented/melanocytic TOP differential -> melanoma cannot be excluded (see isPigmentedMelanocytic).
+    // Force rxEligible=false and surface the melanoma caveat (as the caution when nothing more urgent has
+    // already claimed it, so the referral > OOD > caution banner still shows the strongest finding).
+    var pigmented = !!(differential && differential[0] && isPigmentedMelanocytic(differential[0].label));
+    var melanomaCaveat = pigmented
+      ? "Cannot exclude melanoma. This tool does not detect melanoma, and any pigmented, nodular, or changing lesion needs clinical judgement. Do not prescribe; use dermoscopy or refer if the lesion is new, changing, irregular, or otherwise concerning."
+      : null;
+    if (pigmented && !caution) caution = melanomaCaveat;
     // OOD / low-confidence (vision engine withheld a differential): never Rx-eligible, and surfaced as a
     // distinct "no confident reading" state - not a benign result (AI-safety C1).
     var ood = !!raw.ood;
@@ -144,9 +167,10 @@
       referral: referral,
       referralReason: reason,
       caution: caution,
+      melanomaCaveat: melanomaCaveat,
       ood: ood,
       oodReason: ood ? (raw.oodReason || null) : null,
-      rxEligible: !referral && !ood,
+      rxEligible: !referral && !ood && !pigmented,
       disclaimerKey: "educational_not_clinical"
     };
   }

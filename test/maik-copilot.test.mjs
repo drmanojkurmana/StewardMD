@@ -48,6 +48,16 @@ test("Stage 7 — proactive safety flags interactions / high-risk / renal / preg
   assert.ok(hr.some(a => a.kind === "high_risk"), "warfarin → high-risk flag");
   const intx = C.safetyScan(resolved("warfarin and amiodarone together"));
   assert.ok(intx.some(a => a.kind === "interaction"), "two drugs → interaction check");
+  // R2 AI-safety fix: the DDI hook must actually UPGRADE to a specific warning on a real >= major
+  // interaction (it previously passed strings + read .length/.pairs, so it could never fire).
+  const iw = intx.find(a => a.kind === "interaction");
+  assert.equal(iw.level, "warn", "warfarin + amiodarone (>= major) upgrades to a warn-level interaction alert");
+  assert.match(iw.msg, /Interaction flagged/);
+  // One-directional: a benign 2-drug pair stays at the generic 'verify' info level and NEVER claims
+  // 'no interactions' (the ruleset is a screen, not proof of safety).
+  const benign = C.safetyScan(resolved("amlodipine and atorvastatin")).find(a => a.kind === "interaction");
+  assert.ok(benign && benign.level === "info", "a benign pair stays info-level, not warn");
+  assert.doesNotMatch(benign.msg, /no interaction/i);
   assert.ok(C.safetyScan(resolved("gentamicin in CKD")).some(a => a.kind === "renal"), "CKD → renal adjustment");
   assert.ok(C.safetyScan(resolved("enalapril in pregnancy")).some(a => a.kind === "pregnancy"), "pregnancy → safety-category flag");
   assert.deepEqual(C.safetyScan(resolved("define hypertension")), [], "a benign definition query raises no false alarms");

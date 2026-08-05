@@ -16,7 +16,8 @@ Ready-to-paste answers for **Google Play Data Safety** and **Apple App Privacy (
 |---|---|---|---|---|---|
 | **Name** | Yes | No* | Account management, app functionality | Only if you sign in | Yes |
 | **Email address** | Yes | No* | Account management | Only if you sign in | Yes |
-| **Photos** (profile photo from Google; captured clinical images for AI) | Yes | **Yes** (images → Google Vertex AI to extract text) | App functionality | Yes (AI is optional) | Profile photo: yes · AI images: not stored |
+| **Photos** (profile photo from Google; captured clinical images for AI) | Yes | **Yes** (ICU AI-Vision reads text **on-device** — image not uploaded; when an experimental module (e.g. SknX skin / ThoreX chest X-ray) is enabled, the clinical **image** is sent to StewardMD's own cloud endpoint — Google Cloud Run, Mumbai — and not retained) | App functionality | Yes (AI is optional, off by default) | Profile photo: yes · AI images: not stored |
+| **Audio** (voice or sound recordings) | Yes | **Yes** (MaiK Scribe dictation: Android hands audio to the system speech recognizer, typically Google's speech service; the iOS on-device Whisper option processes locally) | App functionality | Yes (optional) | No |
 | **Health info** (clinical case findings; AI clinical queries; Ward Sync labs/radiology/patient lists) | Yes | **Yes** (AI queries → Google Vertex AI; Ward Sync relays your institution's data) | App functionality | Yes | Saved cases: yes |
 | **App activity** (preferences, recent-case history) | **No** — stored only on device, never transmitted | — | — | — | — |
 | **Device/other IDs** (push subscription id) | Yes | No | Send medical-update notifications | Yes | No |

@@ -139,3 +139,18 @@ test("consent withdrawal: revokeConsent clears it so analyze re-prompts (DPDP ri
     await assert.rejects(() => CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: () => Promise.resolve({ ok: true, json: () => ({}) }) }), /cloud_consent_declined/);
   } finally { delete globalThis.window; }
 });
+
+test("classify retries once on a transient network failure, then succeeds", async () => {
+  let calls = 0;
+  const flaky = () => { calls++; return calls === 1 ? Promise.reject(new TypeError("Failed to fetch")) : Promise.resolve({ ok: true, json: () => Promise.resolve({ differential: BENIGN }) }); };
+  const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: flaky, skipConsent: true });
+  assert.equal(calls, 2, "exactly one retry after the transient failure");
+  assert.equal(raw.engine, "derm-foundation-cloud");
+});
+
+test("classify does NOT retry a 4xx (e.g. 401 auth) - fails fast", async () => {
+  let calls = 0;
+  const four = () => { calls++; return Promise.resolve({ ok: false, status: 401, json: () => Promise.resolve({}) }); };
+  await assert.rejects(() => CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: four, skipConsent: true }), /cloud_http_401/);
+  assert.equal(calls, 1, "no retry on a 4xx");
+});

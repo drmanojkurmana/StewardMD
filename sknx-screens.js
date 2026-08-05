@@ -31,7 +31,7 @@
   // Fixed educational disclaimer text, keyed by sknx-engines.js's disclaimerKey ("educational_not_clinical"
   // is the only key in Phase 1; the map is future-proofing, not a live requirement).
   var DISCLAIMERS = {
-    educational_not_clinical: "Educational preview only, not a clinical diagnosis. AI-generated findings must be correlated with clinical examination and, where indicated, biopsy or specialist referral before any treatment decision."
+    educational_not_clinical: "Educational preview only, not a clinical diagnosis. This tool does not detect melanoma: evaluate any pigmented, new, or changing lesion clinically. AI-generated findings must be correlated with clinical examination and, where indicated, biopsy or specialist referral before any treatment decision."
   };
   function disclaimerText(key) { return DISCLAIMERS[key] || DISCLAIMERS.educational_not_clinical; }
 
@@ -73,7 +73,7 @@
           '<div class="sknx-tip" role="note">' + ic("tips_and_updates") +
             '<span class="sknx-tip-txt">Good lighting, fill the frame with the lesion or rash, avoid glare - SknX auto-enhances the image before analysis.</span>' +
           "</div>" +
-          '<div class="sknx-cap-foot">' + ic("lock") + "<span>Processed on-device &middot; image not stored after analysis</span></div>" +
+          '<div class="sknx-cap-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
         "</div>" +
       "</section>";
   }
@@ -107,7 +107,8 @@
           '<h2 class="sknx-proc-title">Analyzing your photo&hellip;</h2>' +
           '<p class="sknx-proc-sub">SknX is checking quality and running detection</p>' +
           '<div class="sknx-stages">' + STAGE_DEFS.map(function (s, i) { return stageRow(i); }).join("") + "</div>" +
-          '<div class="sknx-proc-foot">' + ic("lock") + "<span>Processed on-device &middot; image not stored after analysis</span></div>" +
+          '<div class="sknx-proc-note">' + ic("schedule") + "<span>The first scan after opening can take up to a minute while the analyzer starts up. Later scans are quick.</span></div>" +
+          '<div class="sknx-proc-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
         "</div>" +
       "</section>";
 

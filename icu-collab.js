@@ -215,6 +215,11 @@
     return null;
   }
   function nowMs() { return Date.now(); }
+  // DPDP 7-day auto-clear: shared ICU data carries an `expiresAt` and is deleted by a Firestore TTL
+  // policy (configured on the patients / timeline / tasks collection groups). Refreshed on each write,
+  // so it's a sliding 7-day-since-last-activity window; explicit discharge deletes immediately.
+  var RETENTION_MS = 7 * 24 * 3600 * 1000;
+  function retentionExpiry() { return new Date(nowMs() + RETENTION_MS); }
   // Strip DERIVED alerts (recomputed on load, exactly like savePatient) but keep everything
   // else — crucially ICU_STATE.src (engine-scored source tags) is carried through unchanged.
   function sanitizeState(state) {
@@ -868,6 +873,7 @@
           name: pt.name || "Patient", dx: pt.diagnosis || "", bed: pt.bed || "",
           state: clean,
           savedAt: nowMs(),
+          expiresAt: retentionExpiry(),   // DPDP 7-day auto-clear: the PHI-bearing patient doc is now TTL-eligible too (was only timeline/tasks); refreshed on every update
           updatedAt: fieldValue().serverTimestamp(),
           lastUpdate: { by: uid, byName: currentName(), text: String(lastUpdateText || "Updated patient"), at: fieldValue().serverTimestamp() }
         };
@@ -910,7 +916,7 @@
         if (!db || !uid) return reject(new Error("firestore-unavailable"));
         var e = buildTimelineEvent(ev, { uid: uid, name: currentName(), role: _ctx.role });
         e.ts = fieldValue().serverTimestamp();
-        e.expiresAt = new Date(nowMs() + 7 * 24 * 3600 * 1000);   // 7-day retention — a Firestore TTL policy on timeline.expiresAt auto-deletes it
+        e.expiresAt = retentionExpiry();   // 7-day retention — Firestore TTL policy on timeline.expiresAt
         track(ptRef(db, gid, pid).collection("timeline").add(e)).then(function (ref) { resolve(ref.id); }, reject);
       });
     });
@@ -936,7 +942,7 @@
         if (!db || !uid) return reject(new Error("firestore-unavailable"));
         var t = buildTask(info, { uid: uid, name: currentName() });
         t.ts = fieldValue().serverTimestamp();
-        t.expiresAt = new Date(nowMs() + 7 * 24 * 3600 * 1000);   // 7-day retention — Firestore TTL policy on tasks.expiresAt auto-deletes it
+        t.expiresAt = retentionExpiry();   // 7-day retention — Firestore TTL policy on tasks.expiresAt
         track(ptRef(db, gid, pid).collection("tasks").add(t)).then(function (ref) { resolve(ref.id); }, reject);
       });
     });
@@ -976,8 +982,8 @@
       if (!db || !uid || !_presence.gid || !_presence.pid) return;
       try {
         ptRef(db, _presence.gid, _presence.pid).collection("presence").doc(uid)
-          .set({ name: currentName(), at: fieldValue().serverTimestamp() }, { merge: true })
-          .catch(function () {});
+          .set({ name: currentName(), at: fieldValue().serverTimestamp(), expiresAt: retentionExpiry() }, { merge: true })
+          .catch(function () {});   // expiresAt: presence orphaned after discharge (Firestore doesn't cascade-delete subcollections) is TTL-cleared within the window
       } catch (e) {}
     });
   }
@@ -1085,6 +1091,7 @@
     // pure test seams (deterministic transforms — used by the rules/logic harness)
     _mapGroupDoc: mapGroupDoc, _mapMemberDoc: mapMemberDoc, _mapPatientDoc: mapPatientDoc, _mapTimeline: mapTimeline, _mapTask: mapTask,
     _buildTimelineEvent: buildTimelineEvent, _buildTask: buildTask, _taskStatusPatch: taskStatusPatch,
+    _retentionExpiry: retentionExpiry, _RETENTION_MS: RETENTION_MS,
     _sanitizeState: sanitizeState, _normStatus: normStatus, _normRole: normRole, _normInviteRole: normInviteRole,
     _genSmdId: genSmdId, _emailHash: emailHash, _looksLikeEmail: looksLikeEmail, _normalizeId: normalizeId,
     _parseJoinParam: parseJoinParam, _inviteUrl: inviteUrl, _isAdminRole: isAdminRole,

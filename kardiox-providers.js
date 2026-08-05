@@ -268,13 +268,30 @@
   // PHOTO still routes to the backend until the on-device digitiser ships (then this handles photos too).
   var _ondeviceReady = false;
   function modelMgr() { return (typeof window !== "undefined" && window.SMD_KARDIOX_MODELMGR) || null; }
+  // CR4: cache the ORT analyzer so the 7-head ONNX ensemble loads ONCE and is reused across every analysis,
+  // instead of building a fresh analyzer (and reloading ~157 MB of models) per photo - the no-reuse pattern
+  // that drove peak memory to 300-450 MB and risked OOM. SINGLE-SLOT with disposal (R6): if a later call
+  // resolves to a different config ("mgr" cached bytes vs "url"), the superseded ensemble is released
+  // before the new one loads, so two ~157 MB sets are never resident at once.
+  var _ortBase = null, _ortBaseKey = "";
+  function cachedOrt(key, makeOpts) {
+    if (_ortBase && _ortBaseKey === key) return _ortBase;
+    var O = (typeof window !== "undefined") && window.SMD_KARDIOX_ORT;
+    if (!O || !O.makeOrtAnalyzer) return null;
+    if (_ortBase && typeof _ortBase.dispose === "function") { try { _ortBase.dispose(); } catch (e) {} }
+    var base = O.makeOrtAnalyzer(makeOpts);
+    _ortBase = base || null; _ortBaseKey = base ? key : "";
+    return base;
+  }
   function digitizer() { return (typeof window !== "undefined" && window.SMD_KARDIOX_DIGITIZE) || null; }
   function ortAnalyzer() {
     try {
       if (typeof window === "undefined" || !window.SMD_KARDIOX_ORT) return null;
       var mgr = modelMgr(), base = null;
-      if (mgr && _ondeviceReady) base = window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
-      else if (window.ort) base = window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+      if (mgr && _ondeviceReady) base = cachedOrt("mgr", { modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
+      // "url" is the no-model-manager (web/dev) path; gate it on !mgr so a native session (where the model
+      // manager is essentially always present) never loads a SECOND, url-sourced ensemble alongside "mgr" (R6).
+      else if (!mgr && window.ort) base = cachedOrt("url", { baseUrl: "kardiox-models" });
       if (!base) return null;
       var DIG = digitizer();
       // Photos are digitised ON-DEVICE (kardiox-digitize.js) → reconstruction layer → analyzePaper
@@ -319,8 +336,8 @@
       var O = (typeof window !== "undefined") && window.SMD_KARDIOX_ORT;
       if (!O || !O.makeOrtAnalyzer) return null;
       var mgr = modelMgr();
-      if (mgr) return O.makeOrtAnalyzer({ modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
-      if (window.ort) return O.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+      if (mgr) return cachedOrt("mgr", { modelManager: mgr, ortBase: "/vendor/onnxruntime-web" });
+      if (window.ort) return cachedOrt("url", { baseUrl: "kardiox-models" });
     } catch (e) {}
     return null;
   }

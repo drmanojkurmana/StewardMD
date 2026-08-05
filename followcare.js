@@ -352,7 +352,7 @@
     body.appendChild(h("div", { style: "margin:12px 0;color:var(--slate,#5a7184);font-size:14px", text: "Set your hospital once — every patient you enroll is recorded under it." }));
     var hid = h("input", { type: "text", placeholder: "Hospital ID (e.g. GIMSR)" });
     var hnm = h("input", { type: "text", placeholder: "Hospital name (optional)" });
-    var err = h("div");
+    var err = h("div", { role: "alert", tabindex: "-1" });   // role=alert -> VoiceOver announces errors
     var save = h("button", { "class": "fc-btn", text: "Save hospital" });
     save.addEventListener("click", function () {
       err.innerHTML = "";
@@ -382,7 +382,7 @@
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     body.appendChild(h("div", { style: "margin:8px 0 4px;color:var(--slate,#5a7184);font-size:12.5px", text: "Hospital: " + (hosp.hospitalName || hosp.hospitalId) }));
     if (prefill.name || pfPathway) body.appendChild(h("div", { style: "margin:0 0 8px;color:#0e6e63;font-size:12.5px;font-weight:600", text: "Pre-filled from discharge" + (form.phone ? "" : " — add the patient's mobile number") }));
-    var errBox = h("div");
+    var errBox = h("div", { role: "alert", tabindex: "-1" });   // role=alert -> VoiceOver announces errors as they appear
     function loadPathwaysThen(render) { if (PATHWAYS) return render(PATHWAYS); API.pathways().then(function (r) { PATHWAYS = (r.body && r.body.pathways) || []; render(PATHWAYS); }); }
     loadPathwaysThen(function (pw) {
       var sel = h("select", { onchange: function (e) { form.pathwayId = e.target.value; } }, [h("option", { value: "", text: "Select a recovery pathway…" })].concat(pw.map(function (p) { return h("option", { value: p.id, text: p.name }); })));
@@ -575,7 +575,7 @@
       hdrIc ? h("span", { "class": "fc-ai", "aria-hidden": "true", html: hdrIc, style: "color:" + (def.priority === "high" ? "#c9302c" : "#0e6e63") }) : null,
       h("span", { text: def.label })
     ]));
-    var errBox = h("div"), form = { type: type, fields: [] };
+    var errBox = h("div", { role: "alert", tabindex: "-1" }), form = { type: type, fields: [] };   // role=alert -> VoiceOver announces errors
     var wrap = h("div");
 
     function textareaField(placeholder, aiKind) {

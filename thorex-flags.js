@@ -23,14 +23,15 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_thorex:            { type: "bool", def: true,     query: "thorex",        desc: "ThoreX AI master flag (home card + module). ON for private dev/testing. PUBLIC-RELEASE-GATE: set def:false before any App-Store/Play/public release (needs GROQ + validation)." },
+    smd_thorex:            { type: "bool", def: false,    query: "thorex",        desc: "ThoreX AI master flag (home card + module). def:false = OFF by default for public/release (needs GROQ + validation). Unlocked PER DEVICE via the sidebar Experimental access code (openThorex sets smd_thorex=1 on the passcode-verified unlock) or ?thorex=1 for dev." },
     smd_thorex_cloud:      { type: "tri",  def: null,      query: null,            desc: "Cloud analysis consent (null = ask once). Off = offline only." },
     smd_thorex_confidence: { type: "bool", def: true,      query: null,            desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_thorex_haptics:    { type: "bool", def: true,      query: null,            desc: "Haptic feedback for taps / result-ready / urgent." },
     smd_thorex_dev:        { type: "bool", def: false,     query: "thorexdev",     desc: "Developer overlay (pipeline stages, provider, timings)." },
-    smd_thorex_backend:    { type: "bool", def: false,      query: "thorexbackend", desc: "Use the live ThoreX pipeline backend (RemoteAnalyzer via /api/thorex) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT ON." },
+    smd_thorex_backend:    { type: "bool", def: false,      query: "thorexbackend", desc: "Use the live ThoreX pipeline backend (RemoteAnalyzer via /api/thorex) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. def:false (opt-in)." },
     smd_thorex_demo:       { type: "bool", def: false,     query: "thorexdemo",    desc: "EXPLICIT demo mode — use the deterministic mock analyzer (canned sample, no real inference). Off by default: Analyze runs the REAL pipeline (backend/on-device ONNX) or reports 'inference unavailable', never a fabricated result." },
-    smd_thorex_ondevice:   { type: "bool", def: true,     query: "thorexondevice", desc: "Prefer FULLY ON-DEVICE inference (onnxruntime-web via thorex-ort.js) — no upload, runs in the WebView. Runs BOTH engines: Clinical Engine 1 (torchxrayvision) + the educational Clinical Engine 2 (X-Raydar), for everyone with ThoreX access. DEFAULT ON." }
+    smd_thorex_ondevice:   { type: "bool", def: true,     query: "thorexondevice", desc: "Prefer FULLY ON-DEVICE inference (onnxruntime-web via thorex-ort.js) — no upload, runs in the WebView. Runs BOTH engines: Clinical Engine 1 (torchxrayvision) + the educational Clinical Engine 2 (X-Raydar), for everyone with ThoreX access. DEFAULT ON." },
+    smd_thorex_secure_egress: { type: "bool", def: false, query: "thorexsecure", desc: "PRODUCTION egress posture (security H1): route the native CXR analysis through the Firebase-auth Worker proxy (/api/thorex/v1/cxr/analyze) instead of POSTing the image straight to raw Cloud Run. def:false so the current validation path (direct backend) is UNCHANGED; flip ON only once THOREX_ANALYZE_URL is provisioned server-side (the proxy fails closed 503 otherwise)." }
   };
 
   function store() { try { return localStorage; } catch (e) { return null; } }

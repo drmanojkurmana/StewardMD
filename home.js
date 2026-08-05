@@ -1346,7 +1346,7 @@
             try {
               var kon;
               if (window.KARDIOX && KARDIOX.isOn) kon = KARDIOX.isOn();
-              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") !== "0"); }
+              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); }   // hidden by default; shown once unlocked via the Experimental access code (parity with ThoreX)
               return kon ? (
                 '<button class="rnav-tile kx-tile" data-act="kardiox" aria-label="Open KardiQ X AI — ECG interpretation">' +
                   '<div class="kx-home-head kx-tile-head"><span class="kx-home-heart">' + ric("cardiology") + '</span><span class="kx-home-pill">' + ric("bolt") + 'AI ECG</span></div>' +
@@ -4406,8 +4406,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var okFont = FONTS.some(function (f) { return f.id === o.font; });
         var okAppear = APPEARANCES.some(function (a) { return a.id === o.appearance; });
         return {
-          fontScale: Math.min(1.25, Math.max(.8, +o.fontScale || 1)),
-          density: o.density, autoFit: !!o.autoFit,
+          fontScale: Math.min(2, Math.max(.8, +o.fontScale || 1)),
+          density: o.density, autoFit: !!o.autoFit, userSet: !!o.userSet,
           theme: okTheme ? o.theme : "classic",
           font: okFont ? o.font : "plex",
           headingStyle: o.headingStyle === "script" ? "script" : "default",
@@ -4420,7 +4420,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {
     try {
-      var _sc = Math.min(1.25, Math.max(.8, +ds.fontScale || 1)); ds.fontScale = _sc;   // BUG-07: bound scale to a reachable max
+      var _sc = Math.min(2, Math.max(.8, +ds.fontScale || 1)); ds.fontScale = _sc;   // BUG-07: bound scale to a reachable max
       document.documentElement.style.zoom = _sc;
       // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
       // controls needed to recover are always reachable, even at max scale.
@@ -4445,12 +4445,32 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
   }
-  var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.25, density: "large" } };
+  // Seed the app font scale from the OS accessibility text size (iOS Dynamic Type / Android font scale) on
+  // launch, so a user who set a larger SYSTEM size gets it without hunting for the in-app slider (CR5). Only
+  // when they have NOT set their own display prefs (an explicit in-app choice always wins); clamped to the
+  // app range. Async-safe (native read may be a Promise). No-op until the native reader is present.
+  function seedOSTextScale() {
+    try {
+      if (ds.userSet) return;                                       // respect an explicit in-app font-size choice
+      var N = (typeof window !== "undefined") && window.SMD_NATIVE;
+      if (!N || typeof N.osTextScale !== "function") return;
+      var apply = function (scale) {
+        var s = +scale; if (!isFinite(s) || s <= 0) return;
+        s = Math.min(2, Math.max(.8, s));
+        if (Math.abs(s - 1) < 0.02) return;                         // OS at default -> keep the app default
+        ds.fontScale = s; ds.autoFit = false; applyD();
+      };
+      var r = N.osTextScale();
+      if (r && typeof r.then === "function") r.then(apply, function () {});
+      else if (r != null) apply(r);
+    } catch (e) {}
+  }
+  var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.25, density: "large" }, access: { fontScale: 1.75, density: "large" } };
   function openDisplay() {
     openSheet('<div class="hv-sh-t">Display &amp; Accessibility</div>' +
-      '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="125" step="5" value="100"></div>' +
+      '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="200" step="5" value="100" aria-label="Font size percent"><div class="hv-info" style="margin-top:6px">Up to 200% for low vision. Follows your device text size if set larger.</div></div>' +
       '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
-      '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button></div></div>' +
+      '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button><button data-p="access">Accessibility XL</button></div></div>' +
       '<div class="hv-d-sec"><h4>Auto fit</h4><div class="hv-sw"><div><div class="lab">Optimise for this device</div><div class="sub" id="hvDet"></div></div><button class="hv-tg" id="hvAuto"></button></div></div>' +
       ((window.SMD_HAPTICS && SMD_HAPTICS.supported()) ? '<div class="hv-d-sec"><h4>Haptics</h4><div class="hv-sw"><div><div class="lab">Vibration feedback on tap</div><div class="sub">A subtle tap on buttons and actions</div></div><button class="hv-tg" id="hvHaptics"></button></div></div>' : '') +
       '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
@@ -4466,10 +4486,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
       '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
     var s = sheetEl();
-    try { var _z = 1 / (Math.min(1.25, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
-    s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
+    try { var _z = 1 / (Math.min(2, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
+    s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.userSet = true; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
-    s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.userSet = true; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });
     s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
     var hp = s.querySelector("#hvHaptics");
     if (hp) hp.addEventListener("click", function () { var on = !(window.SMD_HAPTICS && SMD_HAPTICS.enabled()); if (window.SMD_HAPTICS) { SMD_HAPTICS.setEnabled(on); if (on) SMD_HAPTICS.medium(); } refreshD(); });
@@ -5379,7 +5399,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
   })();
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); seedOSTextScale(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
     try { initResume(); } catch (e) {}
     try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {

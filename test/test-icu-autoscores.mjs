@@ -97,5 +97,30 @@ ok(cp && cp.value === 6, "Child-Pugh = 6 when ascites/enceph explicitly absent")
 const cpUn = AS.compute({ patient: { diagnosis: "cirrhosis with ascites" }, vitals: [{}], labs: { recent: { bili: 1.0, alb: 3.0, inr: 1.2 } }, abg: {}, ventilator: {}, infusions: [], findings: [] }, MED).find(r => r.id === "childpugh");
 ok(cpUn && cpUn.missing && cpUn.missing.indexOf("ascites grade") >= 0, "Child-Pugh ungraded ascites -> needs ascites grade");
 
+// ── H3: SOFA cardiovascular respects the vasopressor DOSE UNIT (mcg/kg/min only when the unit says so) ──
+const sofaCardioBand = (infusions) => {
+  const s = { patient: { age: 60 }, vitals: state.vitals, labs: state.labs, abg: state.abg, ventilator: state.ventilator, infusions };
+  return AS.compute(s, MED).find(r => r.id === "sofa").inputs.cardio;
+};
+ok(sofaCardioBand([{ drug: "noradrenaline", dose: 0.2, unit: "mcg/kg/min" }]) === 4, "H3: noradrenaline 0.2 mcg/kg/min -> SOFA cardio 4");
+ok(sofaCardioBand([{ drug: "noradrenaline", dose: 0.05, unit: "mcg/kg/min" }]) === 3, "H3: noradrenaline 0.05 mcg/kg/min -> SOFA cardio 3");
+ok(sofaCardioBand([{ drug: "noradrenaline", dose: 8, unit: "mL/h" }]) === 3, "H3: noradrenaline 8 mL/h is NOT read as 8 mcg/kg/min (floors at 3, was a false 4)");
+ok(sofaCardioBand([{ drug: "noradrenaline", rateMlHr: 5 }]) === 3, "H3: a pressor recorded only as a pump rate still counts as on-a-pressor (3, was 0)");
+ok(sofaCardioBand([]) === 0, "H3: no pressor + MAP 72 -> SOFA cardio 0 (unchanged)");
+ok(sofaCardioBand([{ drug: "noradrenaline", dose: 0, unit: "mcg/kg/min" }]) === 0, "H3: a pressor line titrated to 0 is NOT counted as on-a-pressor (R1 hardening)");
+
+// ── M3: adult scores are flagged (not silently reported) for a paediatric patient ──
+const peds = AS.compute({ patient: { age: 8, diagnosis: "severe acute pancreatitis" }, vitals: state.vitals, labs: state.labs, abg: state.abg, ventilator: state.ventilator, infusions: [] }, MED);
+ok(get(peds, "sofa").peds === true && /not validated in children/i.test(get(peds, "sofa").interp), "M3: SOFA carries a paediatric 'not validated in children' caveat for age 8");
+ok(get(peds, "qsofa").peds === true, "M3: qSOFA flagged paediatric too");
+ok(!get(rows, "sofa").peds, "M3: an adult SOFA is NOT flagged paediatric");
+
+// ── M5: NEWS2 supplemental-O2 point from an explicit flag, an ABG FiO2, and NOT from room air ──
+const news2o2 = (extra) => AS.compute(Object.assign({ patient: { age: 60 }, vitals: [Object.assign({ rr: 18, spo2: 95, temp: 37, sbp: 120, hr: 80, gcs: 15 }, extra.v || {})], labs: { recent: {} }, abg: extra.abg || {}, ventilator: extra.vent || {}, infusions: [] }), MED).find(r => r.id === "news2").inputs.o2;
+ok(news2o2({ v: { o2: "Yes" } }) === true, "M5: explicit 'on supplemental O2' flag scores the NEWS2 O2 point (nasal-cannula ward patient)");
+ok(news2o2({ abg: { fio2: 40 } }) === true, "M5: a recorded ABG FiO2 40% infers supplemental O2");
+ok(news2o2({}) === false, "M5: room air (no FiO2, no flag) does NOT score the O2 point");
+ok(news2o2({ vent: { fio2: 21 } }) === false, "M5: FiO2 21% (room air) does NOT falsely score the O2 point");
+
 console.log(fail ? `\n${fail} FAILED` : "\nALL PASSED");
 process.exit(fail ? 1 : 0);

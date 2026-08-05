@@ -206,9 +206,7 @@
     ],
     "lisinopril": [
       "ace_inhibitor",
-      "diuretic",
-      "raas",
-      "thiazide_diuretic"
+      "raas"
     ],
     "perindopril": [
       "ace_inhibitor",
@@ -321,6 +319,7 @@
     "amiodarone": [
       "antiarrhythmic",
       "cyp1a2_inhibitor",
+      "cyp2c9_inhibitor",
       "cyp2d6_inhibitor",
       "epc:cardiovascular_agent",
       "epc:established_pharmacologic_classes",
@@ -667,7 +666,6 @@
     ],
     "verapamil": [
       "calcium_channel_blocker",
-      "dihydropyridine_ccb",
       "epc:calcium_channel_agent",
       "epc:cardiovascular_agent",
       "epc:established_pharmacologic_classes",
@@ -721,13 +719,14 @@
     "co-trimoxazole": [
       "antibiotic",
       "antifolate",
+      "cyp2c9_inhibitor",
       "qt_prolonging"
     ],
     "cotrimoxazole": [
       "antibiotic",
       "antifolate",
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp2c9_inhibitor",
+      "qt_prolonging"
     ],
     "allopurinol": [
       "epc:enzyme_inhibitor",
@@ -1007,6 +1006,7 @@
       "ssri"
     ],
     "fluvoxamine": [
+      "cyp1a2_inhibitor",
       "epc:established_pharmacologic_classes",
       "epc:nervous_system_agent",
       "serotonergic",
@@ -1563,7 +1563,6 @@
     ],
     "fondaparinux": [
       "anticoagulant",
-      "doac",
       "epc:enzyme_inhibitor",
       "epc:enzyme_interaction",
       "epc:established_pharmacologic_classes",
@@ -1591,7 +1590,6 @@
     ],
     "bivalirudin": [
       "anticoagulant",
-      "doac",
       "epc:anti_coagulant",
       "epc:anti_infective",
       "epc:antimicrobial",
@@ -1630,7 +1628,6 @@
       "epc:unfractionated_heparin"
     ],
     "edetic acid": [
-      "anticoagulant",
       "epc:anti_coagulant",
       "epc:established_pharmacologic_classes",
       "epc:hematology_agent",
@@ -2963,8 +2960,7 @@
     "sarecycline": [
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
-      "epc:tetracycline_class_drug",
-      "pgp_inhibitor"
+      "epc:tetracycline_class_drug"
     ],
     "venetoclax": [
       "epc:bcl_2_inhibitor",
@@ -3111,14 +3107,11 @@
       "epc:immunologic_agent",
       "pgp_inhibitor"
     ],
-    "abciximab": [
-      "pgp_inhibitor"
-    ],
+    "abciximab": [],
     "zonisamide": [
       "epc:anti_epileptic_agent",
       "epc:established_pharmacologic_classes",
-      "epc:nervous_system_agent",
-      "pgp_inhibitor"
+      "epc:nervous_system_agent"
     ],
     "suvorexant": [
       "epc:established_pharmacologic_classes",
@@ -3485,6 +3478,7 @@
     ],
     "betamethasone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3494,6 +3488,7 @@
     ],
     "prednisolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3530,6 +3525,7 @@
     ],
     "cortisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3539,6 +3535,7 @@
     ],
     "prednisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3647,6 +3644,7 @@
     ],
     "dexamethasone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3692,6 +3690,7 @@
     ],
     "triamcinolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3701,6 +3700,7 @@
     ],
     "hydrocortisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3728,6 +3728,7 @@
     ],
     "methylprednisolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3737,6 +3738,7 @@
     ],
     "deflazacort": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3861,6 +3863,7 @@
       "serotonergic"
     ],
     "metronidazole": [
+      "cyp2c9_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:chemical_structure",
@@ -4269,6 +4272,10 @@
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin": [
       "hypoglycemic",
       "insulin"
     ],
@@ -4909,7 +4916,6 @@
     ],
     "clozapine": [
       "antipsychotic",
-      "benzodiazepine",
       "cns_depressant",
       "epc:established_pharmacologic_classes",
       "epc:nervous_system_agent",
@@ -7727,12 +7733,10 @@
       "epc:receptor_interaction"
     ],
     "naloxone": [
-      "cns_depressant",
       "epc:established_pharmacologic_classes",
       "epc:opioid_antagonist",
       "epc:receptor_antagonist",
-      "epc:receptor_interaction",
-      "opioid"
+      "epc:receptor_interaction"
     ],
     "naltrexone": [
       "cns_depressant",
@@ -8292,6 +8296,7 @@
       "epc:glucosylceramide_synthase_inhibitor"
     ],
     "cimetidine": [
+      "cyp1a2_inhibitor",
       "epc:established_pharmacologic_classes",
       "epc:gastrointestinal_agent",
       "epc:histamine_2_receptor_antagonist",
@@ -16682,8 +16687,7 @@
       "anticholinergic"
     ],
     "paracetamol": [
-      "cns_depressant",
-      "opioid"
+      "analgesic"
     ],
     "parnaparin": [
       "anticoagulant"
@@ -16727,9 +16731,7 @@
     "procyclidine": [
       "anticholinergic"
     ],
-    "protamine sulfate": [
-      "anticoagulant"
-    ],
+    "protamine sulfate": [],
     "prulifloxacin": [
       "fluoroquinolone",
       "qt_prolonging"
@@ -16767,9 +16769,7 @@
       "aminoglycoside",
       "nephrotoxic"
     ],
-    "sodium citrate": [
-      "anticoagulant"
-    ],
+    "sodium citrate": [],
     "solifenacin succinate": [
       "anticholinergic"
     ],
@@ -21035,6 +21035,54 @@
       "specialistReview": false
     },
     {
+      "id": "mech-cyp3a4strong-nondhp-ccb",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "non_dihydropyridine_ccb"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "A strong CYP3A4 inhibitor raises exposure to verapamil and diltiazem, which are CYP3A4 substrates that also slow AV-nodal conduction.",
+      "effect": "Exaggerated hypotension and bradycardia or AV block.",
+      "action": "Reduce the calcium-channel-blocker dose and monitor; consider an alternative to the inhibitor or the CCB.",
+      "monitoring": "Blood pressure, heart rate, and ECG/PR interval; postural symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-pde5i-nondhp-ccb",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "pde5_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "non_dihydropyridine_ccb"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "A PDE5 inhibitor and a non-dihydropyridine calcium-channel blocker (verapamil, diltiazem) have additive systemic vasodilation, and the CCB inhibits CYP3A4-mediated clearance of the PDE5 inhibitor.",
+      "effect": "Additive hypotension; increased PDE5-inhibitor exposure.",
+      "action": "Start the PDE5 inhibitor at a low dose and monitor blood pressure; separate dosing does not remove the effect.",
+      "monitoring": "Blood pressure and postural symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "mech-cyp3a4strong-pde5i",
       "type": "pair",
       "subjects": [
@@ -21107,6 +21155,54 @@
       "specialistReview": false
     },
     {
+      "id": "pair-lithium-thiazide",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "thiazide_diuretic"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Thiazide diuretics cause sodium loss, which increases proximal renal reabsorption of lithium and reduces its clearance.",
+      "effect": "Rising serum lithium and risk of toxicity (tremor, confusion, ataxia, seizures, arrhythmia); a classic cause of lithium toxicity.",
+      "action": "Avoid where possible; if combined, reduce the lithium dose and monitor levels closely when starting, changing, or stopping the diuretic.",
+      "monitoring": "Serum lithium, renal function, sodium and volume status; watch for signs of lithium toxicity.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-lithium-loop",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "loop_diuretic"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Loop diuretics can reduce renal lithium clearance, particularly where they cause volume depletion.",
+      "effect": "Rising serum lithium and risk of toxicity (tremor, confusion, ataxia, seizures, arrhythmia).",
+      "action": "Monitor lithium levels closely and adjust the lithium dose when starting, changing, or stopping the diuretic; maintain hydration and sodium intake.",
+      "monitoring": "Serum lithium, renal function, sodium and volume status; watch for signs of lithium toxicity.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "pair-ace-potassium-sparing",
       "type": "pair",
       "subjects": [
@@ -21131,12 +21227,36 @@
       "specialistReview": false
     },
     {
-      "id": "pair-allopurinol-azathioprine",
+      "id": "pair-potassium-sparing-supplement",
       "type": "pair",
       "subjects": [
         {
-          "kind": "generic",
-          "value": "allopurinol"
+          "kind": "class",
+          "value": "potassium_sparing_diuretic"
+        },
+        {
+          "kind": "class",
+          "value": "potassium_supplement"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Potassium-sparing diuretics reduce renal potassium excretion; adding a potassium supplement (or salt substitute) delivers an additional potassium load.",
+      "effect": "Risk of significant hyperkalaemia, which can cause life-threatening arrhythmias, especially in renal impairment or diabetes.",
+      "action": "Avoid routine potassium supplements with a potassium-sparing diuretic unless a documented deficit needs correction; if combined, use the lowest dose and recheck early.",
+      "monitoring": "Check serum potassium and renal function within 1 week of starting or dose change, then periodically.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-xanthineoxidase-azathioprine",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "xanthine_oxidase_inhibitor"
         },
         {
           "kind": "generic",
@@ -21227,7 +21347,7 @@
       "specialistReview": false
     },
     {
-      "id": "pair-digoxin-amiodarone",
+      "id": "pair-digoxin-pgp",
       "type": "pair",
       "subjects": [
         {
@@ -21235,42 +21355,42 @@
           "value": "digoxin"
         },
         {
-          "kind": "generic",
-          "value": "amiodarone"
+          "kind": "class",
+          "value": "pgp_inhibitor"
         }
       ],
       "severity": "major",
-      "mechanism": "Amiodarone inhibits P-glycoprotein–mediated renal and biliary elimination of digoxin, raising serum digoxin concentrations.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, heart block) as levels roughly double.",
-      "action": "Reduce the digoxin dose (commonly by about half) when starting amiodarone and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting amiodarone; monitor for toxicity.",
+      "mechanism": "P-glycoprotein inhibitors (amiodarone, verapamil, clarithromycin, cyclosporine and similar) inhibit P-gp-mediated renal and biliary elimination of digoxin, raising serum digoxin concentrations; some (amiodarone, verapamil) also slow AV-nodal conduction.",
+      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); levels may rise by roughly 50-100%.",
+      "action": "Anticipate a rise in digoxin level when starting the P-gp inhibitor; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
+      "monitoring": "Check serum digoxin level and ECG/heart rate after starting or changing the interacting drug; monitor for toxicity.",
       "sourceId": "openfda-labeling",
       "evidence": "established",
-      "reviewDate": "2026-07-04",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": false
     },
     {
-      "id": "pair-digoxin-verapamil",
+      "id": "pair-doac-pgp",
       "type": "pair",
       "subjects": [
         {
-          "kind": "generic",
-          "value": "digoxin"
+          "kind": "class",
+          "value": "doac"
         },
         {
-          "kind": "generic",
-          "value": "verapamil"
+          "kind": "class",
+          "value": "pgp_inhibitor"
         }
       ],
       "severity": "major",
-      "mechanism": "Verapamil inhibits P-glycoprotein–mediated renal and biliary clearance of digoxin, raising serum digoxin concentrations; both drugs also independently slow AV-nodal conduction.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); digoxin levels may rise by roughly 50–75%.",
-      "action": "Anticipate a rise in digoxin level when starting verapamil; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting or changing verapamil; monitor for toxicity.",
+      "mechanism": "P-glycoprotein inhibitors (and, for apixaban/rivaroxaban, concomitant strong CYP3A4 inhibition) reduce clearance of direct oral anticoagulants, raising drug exposure.",
+      "effect": "Increased anticoagulant exposure and bleeding risk; the effect is greatest when the inhibitor blocks both P-gp and CYP3A4 (e.g. clarithromycin, ketoconazole, itraconazole).",
+      "action": "Review the specific combination against the DOAC label: avoid or dose-reduce where the label advises, or select an alternative anticoagulant or interacting drug.",
+      "monitoring": "Monitor for signs of bleeding; assess renal function, which compounds the exposure increase for dabigatran and edoxaban.",
       "sourceId": "openfda-labeling",
       "evidence": "established",
-      "reviewDate": "2026-07-07",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": false
     },
@@ -21395,26 +21515,194 @@
       "specialistReview": false
     },
     {
-      "id": "pair-warfarin-aspirin",
+      "id": "pair-amiodarone-statin",
       "type": "pair",
       "subjects": [
         {
           "kind": "generic",
-          "value": "warfarin"
+          "value": "amiodarone"
         },
         {
-          "kind": "generic",
-          "value": "aspirin"
+          "kind": "class",
+          "value": "statin"
         }
       ],
       "severity": "major",
-      "mechanism": "Additive haemostatic impairment: warfarin inhibits vitamin-K–dependent clotting factors while aspirin irreversibly inhibits platelet aggregation and injures gastric mucosa.",
-      "effect": "Substantially increased risk of major and gastrointestinal bleeding.",
-      "action": "Use together only for a clear evidence-based indication (e.g. certain mechanical valves or recent ACS on specialist advice). Otherwise avoid; add gastroprotection when combined.",
-      "monitoring": "Monitor INR and for signs of bleeding; confirm the combination remains indicated at each review.",
+      "mechanism": "Amiodarone inhibits CYP3A4 and P-glycoprotein, reducing metabolism of CYP3A4-dependent statins and raising statin exposure; this is additive to amiodarone's own myopathy signal.",
+      "effect": "Increased risk of myopathy and rhabdomyolysis, greatest with simvastatin and lovastatin.",
+      "action": "Cap simvastatin at 20 mg/day and lovastatin at 40 mg/day with amiodarone, or switch to a statin not dependent on CYP3A4 (pravastatin, rosuvastatin, or pitavastatin), which are unaffected and preferred.",
+      "monitoring": "Advise the patient to report muscle pain/weakness or dark urine; check creatine kinase if symptomatic.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-carbamazepine-cyp3a4",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "carbamazepine"
+        },
+        {
+          "kind": "class",
+          "value": "cyp3a4_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Carbamazepine is a CYP3A4 substrate; a CYP3A4 inhibitor (e.g. macrolides, azole antifungals) reduces its clearance and raises serum levels.",
+      "effect": "Carbamazepine toxicity (diplopia, ataxia, drowsiness, hyponatraemia, arrhythmia); narrow therapeutic index.",
+      "action": "Avoid the combination where possible; if unavoidable, reduce the carbamazepine dose and monitor levels closely, or choose a non-interacting antimicrobial (e.g. azithromycin instead of clarithromycin).",
+      "monitoring": "Serum carbamazepine level and clinical signs of toxicity when starting or stopping the inhibitor.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-phenytoin-cyp2c9",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "phenytoin"
+        },
+        {
+          "kind": "class",
+          "value": "cyp2c9_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Phenytoin is metabolised mainly by CYP2C9; a CYP2C9 inhibitor reduces its clearance, and because phenytoin has saturable kinetics small changes cause large level swings.",
+      "effect": "Phenytoin toxicity (nystagmus, ataxia, confusion, sedation); narrow therapeutic index.",
+      "action": "Reduce the phenytoin dose and monitor levels closely when starting or stopping the inhibitor; interpret with albumin/free phenytoin where relevant.",
+      "monitoring": "Serum phenytoin level (free level if hypoalbuminaemic) and clinical signs of toxicity.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-phenytoin-azole",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "phenytoin"
+        },
+        {
+          "kind": "class",
+          "value": "azole_antifungal"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Azole antifungals (notably fluconazole and miconazole) inhibit CYP2C9/CYP2C19-mediated phenytoin metabolism.",
+      "effect": "Phenytoin toxicity (nystagmus, ataxia, confusion, sedation); narrow therapeutic index.",
+      "action": "Reduce the phenytoin dose and monitor levels closely when starting or stopping the azole; phenytoin can also lower azole levels, so watch antifungal efficacy.",
+      "monitoring": "Serum phenytoin level and clinical signs of toxicity; antifungal response.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-theophylline-cyp1a2",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "theophylline"
+        },
+        {
+          "kind": "class",
+          "value": "cyp1a2_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Theophylline is a CYP1A2 substrate; a CYP1A2 inhibitor (e.g. ciprofloxacin, fluvoxamine) reduces its clearance and raises serum levels.",
+      "effect": "Theophylline toxicity (nausea, tachyarrhythmia, agitation, seizures); narrow therapeutic index.",
+      "action": "Reduce the theophylline dose (commonly by about a third to half) and monitor levels when starting the inhibitor, or choose a non-interacting agent (e.g. a non-fluoroquinolone antibiotic).",
+      "monitoring": "Serum theophylline level, heart rate/rhythm, and toxicity symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-corticosteroid-nsaid",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "systemic_corticosteroid"
+        },
+        {
+          "kind": "class",
+          "value": "nsaid"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Systemic corticosteroids and NSAIDs both injure the gastrointestinal mucosa and impair its defence; the effects are additive.",
+      "effect": "Markedly increased risk of peptic ulceration and gastrointestinal bleeding.",
+      "action": "Avoid the combination where possible; if both are needed, use the lowest doses for the shortest time and add gastroprotection (a proton-pump inhibitor).",
+      "monitoring": "Watch for dyspepsia, GI bleeding (melaena, anaemia); check haemoglobin if symptomatic.",
       "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
-      "reviewDate": "2026-07-04",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-loop-aminoglycoside",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "loop_diuretic"
+        },
+        {
+          "kind": "class",
+          "value": "aminoglycoside"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Loop diuretics and aminoglycosides are independently ototoxic and nephrotoxic; combined use and diuretic-induced volume depletion increase aminoglycoside exposure to the inner ear and kidney.",
+      "effect": "Additive ototoxicity (hearing loss, which can be permanent) and nephrotoxicity.",
+      "action": "Avoid the combination where possible; if both are needed, maintain hydration, use the shortest aminoglycoside course, and dose the aminoglycoside by levels.",
+      "monitoring": "Renal function and aminoglycoside levels; ask about hearing/tinnitus and balance.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-anticoagulant-antiplatelet",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "anticoagulant"
+        },
+        {
+          "kind": "class",
+          "value": "antiplatelet"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Additive impairment of haemostasis: the anticoagulant reduces clot formation while the antiplatelet irreversibly blocks platelet aggregation (and, for aspirin, injures gastric mucosa).",
+      "effect": "Substantially increased risk of major and gastrointestinal bleeding.",
+      "action": "Use together only for a clear evidence-based indication (e.g. recent ACS or PCI, or certain mechanical valves) on specialist advice. Otherwise avoid; add gastroprotection and use the shortest necessary duration when combined.",
+      "monitoring": "Monitor for signs of bleeding (and INR when a vitamin-K antagonist is involved); confirm the combination remains indicated at each review.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": true
     },
@@ -21465,6 +21753,102 @@
       "reviewDate": "2026-07-04",
       "doseTimingSeparation": false,
       "specialistReview": false
+    },
+    {
+      "id": "pair-warfarin-cyp2c9",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "warfarin"
+        },
+        {
+          "kind": "class",
+          "value": "cyp2c9_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "These agents inhibit CYP2C9, the main enzyme clearing S-warfarin (metronidazole, co-trimoxazole/sulfonamides and amiodarone are potent CYP2C9 inhibitors); some also displace warfarin from protein binding or disturb vitamin-K-producing gut flora.",
+      "effect": "Marked rise in INR with a high risk of major, gastrointestinal or intracranial bleeding during and shortly after the course.",
+      "action": "Choose a lower-interaction agent where feasible; if unavoidable, anticipate the INR rise and consider a pre-emptive warfarin dose reduction.",
+      "monitoring": "Check INR 3-5 days after starting the interacting drug and again after it stops; adjust warfarin accordingly.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-warfarin-fluoroquinolone",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "warfarin"
+        },
+        {
+          "kind": "class",
+          "value": "fluoroquinolone"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Fluoroquinolones potentiate warfarin through CYP inhibition and disruption of vitamin-K-producing gut flora.",
+      "effect": "Rise in INR with increased bleeding risk during and shortly after the course.",
+      "action": "Anticipate an INR rise; choose a lower-interaction antibiotic where feasible.",
+      "monitoring": "Check INR 3-5 days after starting the fluoroquinolone and again after it finishes.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-colchicine-cyp3a4strong",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "colchicine"
+        },
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "Strong CYP3A4 inhibitors (clarithromycin, azole antifungals such as ketoconazole/itraconazole, ritonavir and similar) block colchicine metabolism.",
+      "effect": "Colchicine accumulation causing potentially fatal toxicity (pancytopenia, neuromyopathy, multi-organ failure), especially in renal or hepatic impairment.",
+      "action": "Avoid the combination. If a strong CYP3A4 inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label; the combination is contraindicated in renal or hepatic impairment.",
+      "monitoring": "If unavoidable, monitor full blood count and for GI/neuromuscular toxicity, and involve a specialist.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": true
+    },
+    {
+      "id": "pair-colchicine-pgp",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "colchicine"
+        },
+        {
+          "kind": "class",
+          "value": "pgp_inhibitor"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "P-glycoprotein inhibitors (ciclosporin/cyclosporine, verapamil, amiodarone and similar) block colchicine efflux and elimination. Cyclosporine + colchicine is an explicit on-label contraindication.",
+      "effect": "Colchicine accumulation causing potentially fatal toxicity (pancytopenia, neuromyopathy, multi-organ failure), especially in renal or hepatic impairment.",
+      "action": "Avoid the combination. If a P-gp inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label; the combination is contraindicated in renal or hepatic impairment.",
+      "monitoring": "If unavoidable, monitor full blood count and for GI/neuromuscular toxicity, and involve a specialist.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": true
     },
     {
       "id": "dup-anticholinergic",

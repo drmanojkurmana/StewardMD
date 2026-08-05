@@ -47,7 +47,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Camera for the ICU Snapshot → AI-vision feature (optional: don't exclude camera-less devices) -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Microphone for MaiK Scribe voice intake (on-device speech-to-text; audio stays on device) -->
+    <!-- Microphone for MaiK Scribe voice intake. NOTE: iOS uses on-device Whisper (flag-gated); Android
+         uses the system SpeechRecognizer, which on most devices sends the audio to Google's speech service
+         — so audio does NOT stay on device on Android. Disclosed as Audio in the Play Data Safety form. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- Post notifications (Android 13+) for medical-update push -->
