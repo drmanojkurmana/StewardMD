@@ -18,10 +18,25 @@ All three CRITICALs below were remediated after this audit, test-first
 pre-existing UI-tile locator). Full suite 1640 tests / 1635 pass, no new failures. Fix summary:
 CR1 -> new `cyp2c9_inhibitor` class on metronidazole/co-trimoxazole/cotrimoxazole/amiodarone + a
 `pair-warfarin-cyp2c9` rule + a `pair-warfarin-fluoroquinolone` rule + the co-trimoxazole hyphen bug
-reconciled. CR2 -> a `pair-colchicine-cyp3a4-pgp` contraindicated rule. CR3 -> removed the wrong
-`opioid`/`cns_depressant` classes from paracetamol + naloxone (combo products like paracetamol+codeine
-unaffected; morphine+diazepam still fires). **R1 re-review of the patch is in flight.** H1-H7 + M/L below
-remain open. The original findings are preserved below for the record.
+reconciled. CR2 -> two contraindicated rules (`pair-colchicine-cyp3a4strong` + `pair-colchicine-pgp`). CR3 ->
+removed the wrong `opioid`/`cns_depressant` classes from paracetamol + naloxone (combo products like
+paracetamol+codeine unaffected; morphine+diazepam still fires).
+
+**R1 RE-REVIEW: CONFIRMED-GOOD** (commit 4f318012). The reviewer loaded the engine, probed a broad drug
+spread, and confirmed all three CRITICALs are correctly closed with **no new false-positives and no new
+misses**: cyp2c9_inhibitor has exactly the 4 correct drugs (no double-fire, non-CYP antibiotics stay
+silent), hyphen bug fully reconciled, paracetamol/naloxone now inert with the genuine opioid+benzo alert
+preserved and combo products intact. It flagged ONE residual in my own CR2 fix (the rule claimed "P-gp"
+but only keyed on strong CYP3A4, so colchicine + cyclosporine still missed) - **now closed** by splitting
+into the two rules above (colchicine + cyclosporine/verapamil/amiodarone now contraindicated).
+
+**Known minor (fast-follow, not a safety issue):** colchicine + a drug that is BOTH a strong CYP3A4 AND
+a P-gp inhibitor (clarithromycin, ketoconazole, itraconazole, ritonavir) fires the contraindicated alert
+twice. This is a true-positive redundancy (both alerts are correct), not the CR3 false-alert problem; a
+rule-match dedup by drug-pair in the engine would collapse it. Also open (pre-existing, non-regression):
+colchicine + erythromycin/diltiazem (not tagged strong-CYP3A4 or P-gp) still miss - a data-tagging gap.
+
+H1-H7 + M/L below remain open. The original findings are preserved below for the record.
 
 ## CRITICAL (engine-reproduced - now FIXED, see status above)
 
