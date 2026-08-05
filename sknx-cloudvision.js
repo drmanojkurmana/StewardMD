@@ -46,23 +46,41 @@
     } catch (e) { return false; }
   }
 
-  // image (dataURL string | Blob/File | <img>) -> base64 dataURL string for the JSON body.
+  // image (dataURL string | Blob/File | <img>) -> base64 dataURL for the JSON body. Blobs/Files/dataURLs
+  // are RE-ENCODED through a canvas (downscaled to <=1024px), which STRIPS EXIF/GPS/timestamp metadata
+  // before the image leaves the device (de-identification - AI-safety I2). In node/tests (no DOM) a
+  // string passes through unchanged.
   function toDataURL(image) {
+    var MAX = 1024;
     return new Promise(function (resolve, reject) {
       try {
-        if (typeof image === "string") return resolve(image); // already a dataURL/base64
-        if (typeof Blob !== "undefined" && image instanceof Blob) {
-          var r = new FileReader();
-          r.onload = function () { resolve(r.result); };
-          r.onerror = function () { reject(new Error("read_failed")); };
-          r.readAsDataURL(image);
-          return;
+        if (typeof document === "undefined") { // node/tests - can't canvas
+          if (typeof image === "string") return resolve(image);
+          return reject(new Error("no_dom"));
         }
-        if (image && image.nodeName === "IMG" && typeof document !== "undefined") {
-          var c = document.createElement("canvas");
-          c.width = image.naturalWidth || image.width; c.height = image.naturalHeight || image.height;
-          c.getContext("2d").drawImage(image, 0, 0);
-          return resolve(c.toDataURL("image/jpeg", 0.9));
+        function fromImg(im, revoke) {
+          try {
+            var w = im.naturalWidth || im.width, h = im.naturalHeight || im.height;
+            var s = Math.min(1, MAX / Math.max(w || 1, h || 1));
+            var c = document.createElement("canvas");
+            c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
+            c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+            if (revoke) { try { URL.revokeObjectURL(revoke); } catch (e) {} }
+            resolve(c.toDataURL("image/jpeg", 0.9)); // re-encode -> EXIF/GPS dropped
+          } catch (e) { reject(e); }
+        }
+        if (image && image.nodeName === "IMG") return fromImg(image, null);
+        if (typeof Blob !== "undefined" && image instanceof Blob) {
+          var url = URL.createObjectURL(image); var im = new Image();
+          im.onload = function () { fromImg(im, url); };
+          im.onerror = function () { try { URL.revokeObjectURL(url); } catch (e) {} reject(new Error("img_load")); };
+          im.src = url; return;
+        }
+        if (typeof image === "string") { // a dataURL - re-encode to strip embedded metadata + downscale
+          var im2 = new Image();
+          im2.onload = function () { fromImg(im2, null); };
+          im2.onerror = function () { resolve(image); }; // fall back to the original if it won't decode
+          im2.src = image; return;
         }
         reject(new Error("unsupported_image"));
       } catch (e) { reject(e); }
@@ -103,7 +121,14 @@
       var ls = window.localStorage;
       if (ls && ls.getItem("sknx_cloud_consent") === "1") return true;
       if (typeof window.confirm === "function") {
-        var ok = window.confirm("SknX cloud analysis sends this photo to StewardMD's server for analysis. Nothing is stored. Continue?");
+        // DPDP §5 notice content: Data Fiduciary (StewardMD), processor (Google Cloud, Mumbai region),
+        // specific + experimental purpose, non-retention, and how to withdraw. Use only de-identified
+        // images or with the patient's consent. (No em-dash in app-facing text.)
+        var ok = window.confirm(
+          "SknX cloud analysis (StewardMD) will send this photo to a StewardMD server, processed via " +
+          "Google Cloud (Mumbai), for EXPERIMENTAL dermatology analysis. It is NOT a diagnosis. Nothing " +
+          "is stored. Use only de-identified images or with the patient's consent. You can withdraw later " +
+          "by clearing SknX data. Continue?");
         if (ok && ls) { try { ls.setItem("sknx_cloud_consent", "1"); } catch (e) {} }
         return !!ok;
       }
@@ -117,6 +142,9 @@
     opts = opts || {};
     var ep = opts.endpoint || endpoint();
     if (!ep || ep.indexOf("__SKNX_CLOUD") === 0) return Promise.reject(new Error("cloud_endpoint_unset"));
+    // Never send a patient image over a non-TLS endpoint (guards a localStorage/window override that
+    // downgrades to http:// - security B4). https:// only.
+    if (!/^https:\/\//i.test(ep)) return Promise.reject(new Error("cloud_insecure_endpoint"));
     if (!ensureConsent(opts)) return Promise.reject(new Error("cloud_consent_declined"));
     return toDataURL(image).then(function (dataURL) {
       return classify(dataURL, ep, opts.fetchImpl);

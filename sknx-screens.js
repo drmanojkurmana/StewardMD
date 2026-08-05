@@ -187,7 +187,9 @@
         "<span>Experimental on-device model - uncalibrated, for testing only. Not a validated result; correlate clinically.</span>" +
       "</div>";
     } else if (a.engine === "derm-foundation-cloud") {
-      expHtml = '<div class="sknx-exp" role="note">' + ic("science") +
+      // role="alert" (not "note"): this cancer-limitation caveat is a point-of-decision safety message,
+      // not an aside - the differential below looks authoritative (AI-safety A2).
+      expHtml = '<div class="sknx-exp" role="alert">' + ic("science") +
         "<span>Experimental cloud model (59 conditions), validation only. <b>Not a cancer screen</b> - no melanoma coverage and BCC/SCC detection is weak; assess any suspicious, pigmented, changing, or bleeding lesion clinically regardless of this result.</span>" +
       "</div>";
     }
