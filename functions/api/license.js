@@ -10,6 +10,7 @@
 // (Play Billing + App Store Server API), not just the owner list + env allowlist stub below.
 import { identify } from "../_usage.js";
 import { ownerEmails } from "../_adminauth.js";
+import { entitlementFor } from "../_entitlement.js";
 
 const GRACE_SECONDS = 2 * 60 * 60;   // 2h offline grace (owner-chosen)
 
@@ -20,17 +21,21 @@ function json(obj, status) {
   });
 }
 
-// Entitled to run the app? Owner emails always are. Otherwise a Pro subscription is required.
-// STUB: owner OR an env allowlist (LICENSE_PRO_EMAILS, comma-separated). // VERIFY Phase 3: replace the
-// allowlist branch with a real IAP-receipt / subscription-state check (Play Billing + App Store Server API).
-function isPro(who, env) {
+// Entitled to run the app? Owner emails always are, then a test/comp allowlist, then the REAL Pro entitlement
+// (entitlementFor -> the Firebase pro claim granted by Razorpay / IAP / an admin comp, which also honours the
+// launch promo PRO_FREE_UNTIL: everyone is Pro until that instant, then only real subscribers). So the native
+// lock unlocks for everyone during the free-launch window and for paid subscribers after it -- the owner moves
+// the cutoff via PRO_FREE_UNTIL, with no code change.
+async function isPro(who, env) {
   try {
     const email = (who && who.email) ? String(who.email).toLowerCase() : "";
-    if (!email) return false;
-    if (ownerEmails(env).indexOf(email) > -1) return true;
+    if (email && ownerEmails(env).indexOf(email) > -1) return true;                       // owner: always
     const allow = (env && env.LICENSE_PRO_EMAILS ? String(env.LICENSE_PRO_EMAILS).split(",") : [])
       .map((s) => s.trim().toLowerCase()).filter(Boolean);
-    return allow.indexOf(email) > -1;
+    if (email && allow.indexOf(email) > -1) return true;                                   // test / comp allowlist
+    const uid = (who && who.id && who.id.indexOf("fb:") === 0) ? who.id.slice(3) : null;   // identify() -> "fb:<uid>"
+    if (uid) { const e = await entitlementFor(env, uid); return !!(e && e.pro); }
+    return false;
   } catch (e) { return false; }
 }
 
@@ -43,7 +48,7 @@ export async function onRequest(context) {
   // identify() -> { id, guest, email }: Cf-Access (verified header) or Firebase (verified token) only; a guest
   // (ip:hash) or missing id is never entitled. The email is server-derived, never a request-body value.
   if (!who || who.guest || !who.id) return json({ error: "auth" }, 401);
-  if (!isPro(who, env)) return json({ ok: false, pro: false, error: "not_pro" }, 402);
+  if (!(await isPro(who, env))) return json({ ok: false, pro: false, error: "not_pro" }, 402);
 
   // Authorized. Deliver the KB/engine decryption key (set as the Pages secret APP_KB_KEY once Phase 2b's
   // build-time encryption is on) + the 2h grace. Until APP_KB_KEY exists, we return the entitlement with no

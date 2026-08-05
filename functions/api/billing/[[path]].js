@@ -17,6 +17,7 @@
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlement.js";
+import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 
@@ -86,6 +87,22 @@ export async function onRequest(context) {
     }
     if (method === "GET" && seg === "plans") {
       return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env) });
+    }
+
+    // ---- native IAP: the app POSTs a verified Play/App Store subscription purchase -> we confirm it with
+    // the store SERVER-side (functions/_iap.js) and grantPro into the SAME entitlement store. 501 until the
+    // owner wires store credentials; a purchase is NEVER trusted from the client. ----
+    if (method === "POST" && seg === "iap" && sub === "verify") {
+      const uid = rawUid(await identify(request, env));
+      if (!uid) return json({ error: "signin-required" }, 401);
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      const platform = body.platform, tok = body.purchaseToken || body.receipt;
+      if (!platform || !tok) return json({ error: "platform-and-token-required" }, 400);
+      const v = await verifyPurchase(env, { platform: platform, productId: body.productId, purchaseToken: tok });
+      if (!v.configured) return json({ error: "iap-not-configured", platform: platform, reason: v.reason }, 501);
+      if (!v.valid) return json({ ok: false, valid: false, reason: v.reason || "invalid" }, 402);
+      const g = await grantPro(env, uid, { days: daysFromExpiry(v.expiresAt), source: "iap-" + platform });
+      return json(Object.assign({ ok: true, valid: true, platform: platform, expiresAt: v.expiresAt || null }, g));
     }
 
     // ---- owner-only Pro management: grant (forever / months / days / 7-day trial), revoke, lookup ----
