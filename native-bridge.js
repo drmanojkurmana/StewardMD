@@ -122,6 +122,19 @@
         return P.Share.share({ title: title || "StewardMD report", files: [uri], dialogTitle: "Save PDF / Print / Share" });
       });
     },
+    // OS accessibility text scale — iOS Dynamic Type / Android configuration.fontScale — as a multiplier
+    // (1 = system default, ~1.35 at the largest standard size, up to ~3.1 at the Larger-Accessibility-Sizes
+    // top). Resolves to a Promise<number|null>; null when no native reader is present so the caller keeps
+    // its in-app default. Native side maps UIApplication.preferredContentSizeCategory (iOS) /
+    // resources.configuration.fontScale (Android) and exposes it as TextZoom.getPreferred() -> {value}.
+    osTextScale: function () {
+      var P = plugins();
+      try {
+        if (P && P.TextZoom && P.TextZoom.getPreferred) return P.TextZoom.getPreferred().then(function (r) { return r ? (r.value != null ? r.value : (r.scale != null ? r.scale : null)) : null; }, function () { return null; });
+        if (P && P.VisionOcr && P.VisionOcr.textScale) return P.VisionOcr.textScale().then(function (r) { return r ? (r.scale != null ? r.scale : (r.value != null ? r.value : null)) : null; }, function () { return null; });
+      } catch (e) {}
+      return Promise.resolve(null);
+    },
     // Native camera / photo picker → resolves to a data: URL string (rejects on cancel/error).
     // opts.camera → CAMERA; opts.prompt → PROMPT action sheet; else PHOTOS.
     pickImage: function (opts) {
