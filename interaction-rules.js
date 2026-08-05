@@ -321,6 +321,7 @@
     "amiodarone": [
       "antiarrhythmic",
       "cyp1a2_inhibitor",
+      "cyp2c9_inhibitor",
       "cyp2d6_inhibitor",
       "epc:cardiovascular_agent",
       "epc:established_pharmacologic_classes",
@@ -721,13 +722,14 @@
     "co-trimoxazole": [
       "antibiotic",
       "antifolate",
+      "cyp2c9_inhibitor",
       "qt_prolonging"
     ],
     "cotrimoxazole": [
       "antibiotic",
       "antifolate",
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp2c9_inhibitor",
+      "qt_prolonging"
     ],
     "allopurinol": [
       "epc:enzyme_inhibitor",
@@ -3861,6 +3863,7 @@
       "serotonergic"
     ],
     "metronidazole": [
+      "cyp2c9_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:chemical_structure",
@@ -7727,12 +7730,10 @@
       "epc:receptor_interaction"
     ],
     "naloxone": [
-      "cns_depressant",
       "epc:established_pharmacologic_classes",
       "epc:opioid_antagonist",
       "epc:receptor_antagonist",
-      "epc:receptor_interaction",
-      "opioid"
+      "epc:receptor_interaction"
     ],
     "naltrexone": [
       "cns_depressant",
@@ -16682,8 +16683,7 @@
       "anticholinergic"
     ],
     "paracetamol": [
-      "cns_depressant",
-      "opioid"
+      "analgesic"
     ],
     "parnaparin": [
       "anticoagulant"
@@ -21465,6 +21465,78 @@
       "reviewDate": "2026-07-04",
       "doseTimingSeparation": false,
       "specialistReview": false
+    },
+    {
+      "id": "pair-warfarin-cyp2c9",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "warfarin"
+        },
+        {
+          "kind": "class",
+          "value": "cyp2c9_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "These agents inhibit CYP2C9, the main enzyme clearing S-warfarin (metronidazole, co-trimoxazole/sulfonamides and amiodarone are potent CYP2C9 inhibitors); some also displace warfarin from protein binding or disturb vitamin-K-producing gut flora.",
+      "effect": "Marked rise in INR with a high risk of major, gastrointestinal or intracranial bleeding during and shortly after the course.",
+      "action": "Choose a lower-interaction agent where feasible; if unavoidable, anticipate the INR rise and consider a pre-emptive warfarin dose reduction.",
+      "monitoring": "Check INR 3-5 days after starting the interacting drug and again after it stops; adjust warfarin accordingly.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-warfarin-fluoroquinolone",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "warfarin"
+        },
+        {
+          "kind": "class",
+          "value": "fluoroquinolone"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Fluoroquinolones potentiate warfarin through CYP inhibition and disruption of vitamin-K-producing gut flora.",
+      "effect": "Rise in INR with increased bleeding risk during and shortly after the course.",
+      "action": "Anticipate an INR rise; choose a lower-interaction antibiotic where feasible.",
+      "monitoring": "Check INR 3-5 days after starting the fluoroquinolone and again after it finishes.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-colchicine-cyp3a4-pgp",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "colchicine"
+        },
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "Strong CYP3A4 and P-glycoprotein inhibitors (macrolides such as clarithromycin/erythromycin, azole antifungals, ritonavir, and similar) block colchicine elimination.",
+      "effect": "Colchicine accumulation causing potentially fatal toxicity (pancytopenia, neuromyopathy, multi-organ failure), especially in renal or hepatic impairment.",
+      "action": "Avoid the combination. If a strong CYP3A4/P-gp inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label, and the combination is contraindicated in renal or hepatic impairment.",
+      "monitoring": "If unavoidable, monitor full blood count and for GI/neuromuscular toxicity, and involve a specialist.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": true
     },
     {
       "id": "dup-anticholinergic",
