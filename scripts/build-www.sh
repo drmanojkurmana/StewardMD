@@ -78,6 +78,18 @@ done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
 
+# Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
+# base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),
+# and flip window.SMD_KB_ENC=1 so kb-loader.js takes the licensed path. Default (unset) = plaintext, unchanged.
+if [ "${KB_ENCRYPT:-}" = "1" ]; then
+  [ -n "${KB_KEY:-}" ] || { echo "  KB_ENCRYPT=1 requires env KB_KEY (base64 32-byte key = the APP_KB_KEY Pages secret)"; exit 1; }
+  KBENC="kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js kb/dist/kb.enrichment.2.js kb/dist/kb.expanded.js"
+  node "$ROOT/scripts/encrypt-kb.mjs" --out "$WWW" $KBENC >/dev/null || { echo "  KB encrypt FAILED"; exit 1; }
+  for f in $KBENC; do rm -f "$WWW/$f"; done   # ship ONLY the .enc; the plaintext KB never reaches the bundle
+  [ -f "$WWW/index.html" ] && sed -i.bak 's/window\.SMD_KB_ENC=0;/window.SMD_KB_ENC=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
+  echo "  KB ENCRYPTED (SMD_KB_ENC=1, .enc only; plaintext KB dropped from www/)"
+fi
+
 # Connect EMR owner console (bundled so the owner-only in-app "Connect EMR" button in home.js opens it in-app).
 [ -f admin/connect-emr.html ] && cp admin/connect-emr.html "$WWW/connect-emr.html"
 
