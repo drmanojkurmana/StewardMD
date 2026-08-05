@@ -23,7 +23,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_thorex:            { type: "bool", def: true,     query: "thorex",        desc: "ThoreX AI master flag (home card + module). ON for private dev/testing. PUBLIC-RELEASE-GATE: set def:false before any App-Store/Play/public release (needs GROQ + validation)." },
+    smd_thorex:            { type: "bool", def: false,    query: "thorex",        desc: "ThoreX AI master flag (home card + module). def:false = OFF by default for public/release (needs GROQ + validation). Unlocked PER DEVICE via the sidebar Experimental access code (openThorex sets smd_thorex=1 on the passcode-verified unlock) or ?thorex=1 for dev." },
     smd_thorex_cloud:      { type: "tri",  def: null,      query: null,            desc: "Cloud analysis consent (null = ask once). Off = offline only." },
     smd_thorex_confidence: { type: "bool", def: true,      query: null,            desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_thorex_haptics:    { type: "bool", def: true,      query: null,            desc: "Haptic feedback for taps / result-ready / urgent." },

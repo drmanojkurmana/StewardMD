@@ -9,7 +9,7 @@ function load(searchStr) { const win = {}; const ls = fakeLS(); new Function("wi
 
 const { F } = load("");
 ok("flags: exposed", !!F && typeof F.get === "function");
-ok("flags: master default ON (production rollout)", F.get("smd_kardiox") === true && F.bool("smd_kardiox") === true);
+ok("flags: master default OFF for public/release (unlocked per device via the Experimental access code)", F.get("smd_kardiox") === false && F.bool("smd_kardiox") === false);
 ok("flags: confidence default true", F.get("smd_kardiox_confidence") === true);
 ok("flags: haptics default true", F.get("smd_kardiox_haptics") === true);
 ok("flags: cloud tri default null", F.get("smd_kardiox_cloud") === null);
@@ -26,7 +26,7 @@ ls3.setItem("smd_kardiox", "0");
 ok("flags: ?kardiox=1 overrides localStorage off", F3.get("smd_kardiox") === true);
 
 const a = F.all();
-ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_kardiox === true);
+ok("flags: all() lists every flag", Object.keys(a).length === Object.keys(F.DEFS).length && a.smd_kardiox === false);
 
 console.log(`\nkardiox-flags: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

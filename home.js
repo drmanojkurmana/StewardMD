@@ -1346,7 +1346,7 @@
             try {
               var kon;
               if (window.KARDIOX && KARDIOX.isOn) kon = KARDIOX.isOn();
-              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") !== "0"); }
+              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); }   // hidden by default; shown once unlocked via the Experimental access code (parity with ThoreX)
               return kon ? (
                 '<button class="rnav-tile kx-tile" data-act="kardiox" aria-label="Open KardiQ X AI — ECG interpretation">' +
                   '<div class="kx-home-head kx-tile-head"><span class="kx-home-heart">' + ric("cardiology") + '</span><span class="kx-home-pill">' + ric("bolt") + 'AI ECG</span></div>' +
