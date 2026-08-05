@@ -122,16 +122,26 @@
     return Promise.resolve(null);
   }
 
+  function doPost(f, url, headers, body) {
+    return f(url, { method: "POST", headers: headers, body: body }).then(function (r) {
+      if (!r.ok) { var e = new Error("cloud_http_" + r.status); e.status = r.status; throw e; }
+      return r.json();
+    });
+  }
   function classify(dataURL, ep, fetchImpl) {
     var f = fetchImpl || (typeof fetch === "function" ? fetch : null);
     if (!f) return Promise.reject(new Error("no_fetch"));
+    var url = ep.replace(/\/$/, "") + "/classify";
     return idToken().then(function (tok) {
       var headers = { "Content-Type": "application/json" };
       if (tok) headers.Authorization = "Bearer " + tok;
-      return f(ep.replace(/\/$/, "") + "/classify", { method: "POST", headers: headers, body: JSON.stringify({ image: dataURL }) });
-    }).then(function (r) {
-      if (!r.ok) throw new Error("cloud_http_" + r.status);
-      return r.json();
+      var body = JSON.stringify({ image: dataURL });
+      return doPost(f, url, headers, body).catch(function (err) {
+        // Retry ONCE on a transient network/DNS blip (fetch rejects, no status) or a 5xx - the device's
+        // resolver + a scale-to-zero instance occasionally miss the first attempt. Never retry a 4xx.
+        if (err && err.status && err.status < 500) throw err;
+        return new Promise(function (res) { setTimeout(res, 900); }).then(function () { return doPost(f, url, headers, body); });
+      });
     });
   }
 
