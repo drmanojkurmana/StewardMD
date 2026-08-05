@@ -165,12 +165,33 @@ The four DDI-ruleset MEDIUM items are remediated, test-first
   entering bare `insulin`, which was UNCLASSIFIED - now added to `drugClasses` as `["hypoglycemic","insulin"]`
   so bare `insulin` resolves. (No redundant insulin x sulfonylurea rule added, to avoid a double-fire.)
 
-**M4 (AI general-knowledge path) - NOT auto-fixed; routed to R2 AI-safety review.** It is a different
-subsystem (`functions/api/ai`), any AI/prompt/serving change is mandatorily R2-reviewed, and its substantive
-half (cross-checking AI-suggested drugs through the DDI engine) is a NEW feature with its own failure modes
-(drug-mention extraction can give false reassurance) - not a high-confidence one-line fix. The ungrounded-dose
-half is already guarded (ground-check rule #8, dosing rule #3, education-not-individualised rule #4, persistent
-UI advisory). Left open pending an R2-designed cross-check. **R1 re-review of M1-M3/M5: in flight.**
+**R1 RE-REVIEW of M1-M3/M5: CONFIRMED-GOOD, not merge-blocking** (no tier-1 false negative, no wrong
+dose/score, golden unchanged). Its three fast-follows are now CLOSED (guarded in
+`test/interaction-medium-fixes.test.mjs`, now 27/27):
+- Regression the M3 verapamil de-tag introduced (verapamil+PDE5i dropped to silent) - restored with a new
+  `mech-pde5i-nondhp-ccb` rule (verapamil/diltiazem + sildenafil/tadalafil now fire again).
+- `pair-corticosteroid-nsaid` over-fired a major GI-bleed alert on inhaled/topical/ophthalmic steroids -
+  scoped to a new `systemic_corticosteroid` subclass (prednisolone/prednisone/methylprednisolone/dexa/
+  hydrocortisone/betamethasone/triamcinolone/deflazacort/cortisone); fluticasone/budesonide/mometasone +
+  NSAID now stay silent while systemic steroid + NSAID still fires.
+- theophylline + fluvoxamine/cimetidine (the rule text named fluvoxamine but the class lacked it) - added
+  `cyp1a2_inhibitor` to fluvoxamine + cimetidine.
+Advisory residuals R1 noted, left open: phenytoin+clotrimazole (topical azole) and furosemide+neomycin (oral)
+minor over-alerts; verapamil/diltiazem+simvastatin FDA dose-cap gap (pre-existing).
+
+**M4 (AI general-knowledge path) - R2 AI-safety review done: DEFER the feature, one REQUIRED fix applied.**
+R2 confirmed the ungrounded-dose half is adequately guarded (ground-check rule #8, dosing rule #3,
+education-not-individualised rule #4, persistent UI advisory) - **DEFER**, with one recommended prompt
+hardening now APPLIED: a high-alert / narrow-therapeutic-index / weight-based / paediatric / renally-adjusted
+dosing carve-out added to `KNOWLEDGE_SYS` rule 3 (`functions/api/ai/[[path]].js`) so MaiK gives the principle
+and defers the exact figure unless it is in the retrieved KB. The DDI-cross-check-on-AI-output half is a NEW
+feature with its own failure modes (extraction gaps giving false reassurance) - **DEFER** (if built: client-
+side, advisory-only, one-directional). **R2 REQUIRED and now FIXED:** the live, default-ON `MaiKCopilot.safetyScan`
+DDI hook (`kb/ai/maik-copilot.js`) was silently inert - it passed drug *strings* to `checkInteractions`
+(which reads `.generic`) and tested `.length`/`.pairs` (the result is severity buckets), so it could NEVER
+upgrade to a real warning. Fixed to pass `{generic}` objects and read the critical/major buckets, staying
+one-directional (a miss degrades to the generic "verify" nudge, never "no interactions"). Guarded in
+`test/maik-copilot.test.mjs` (warfarin+amiodarone now upgrades to a warn; benign pair stays info).
 
 - **M1** Amiodarone + simvastatin (myopathy; FDA caps simva 20mg) not flagged - amiodarone lacks `cyp3a4_inhibitor`.
 - **M2** NTI CYP victims not wired: `carbamazepine+clarithromycin`, `phenytoin+fluconazole`, `theophylline+ciprofloxacin` MISS.

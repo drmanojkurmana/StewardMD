@@ -31,11 +31,15 @@ Per your rules: clinical logic was NOT auto-modified; one safe fix was applied (
 ## MEDIUM
 Security: upload byte-cap spoofable (M1), empty-Origin app-gate (M2), admin trusts email w/o `email_verified`
 (M6), no CSP on shared-case HTML (M7), client-side PHI redaction on public docs (M8), config files served at
-web root (M9). Clinical: **FIXED (2026-08-05, test-driven)** amiodarone+statin, NTI CYP victims
-(carbamazepine/phenytoin/theophylline), misclassifications (clozapine benzo + verapamil DHP; lisinopril was
-done in H4), additive-toxicity pairs (corticosteroid+NSAID, loop+aminoglycoside; insulin+sulfonylurea already
-fired, bare `insulin` now classified) - see `clinical_safety.md` MEDIUM status; **M4 AI ungrounded-dose /
-no-DDI-cross-check deferred to R2 AI-safety review**. Performance: Firestore listeners no `.limit()`,
+web root (M9). Clinical: **FIXED (2026-08-05, test-driven; R1 CONFIRMED-GOOD + 3 fast-follows closed)**
+amiodarone+statin, NTI CYP victims (carbamazepine/phenytoin/theophylline + fluvoxamine/cimetidine),
+misclassifications (clozapine benzo + verapamil DHP, with `mech-pde5i-nondhp-ccb` added to restore the
+verapamil+PDE5i alert; lisinopril was done in H4), additive-toxicity pairs (corticosteroid+NSAID scoped to a
+`systemic_corticosteroid` subclass so inhaled/topical steroids don't false-fire, loop+aminoglycoside;
+insulin+sulfonylurea already fired, bare `insulin` now classified) - see `clinical_safety.md` MEDIUM status.
+**M4: R2 done - DEFER the AI-output DDI-cross-check feature + ungrounded-dose residual (guarded), with a
+high-alert/weight-based dosing carve-out added to the MaiK prompt; and R2-REQUIRED fix of the silently-inert
+default-ON `MaiKCopilot.safetyScan` DDI hook (`kb/ai/maik-copilot.js`) now applied.** Performance: Firestore listeners no `.limit()`,
 interaction-rules eager parse, files approaching 25 MiB. UX: sub-AA muted text, ellipsis truncation, placeholder labels.
 
 ## LOW

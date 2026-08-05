@@ -1006,6 +1006,7 @@
       "ssri"
     ],
     "fluvoxamine": [
+      "cyp1a2_inhibitor",
       "epc:established_pharmacologic_classes",
       "epc:nervous_system_agent",
       "serotonergic",
@@ -3477,6 +3478,7 @@
     ],
     "betamethasone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3486,6 +3488,7 @@
     ],
     "prednisolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3522,6 +3525,7 @@
     ],
     "cortisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3531,6 +3535,7 @@
     ],
     "prednisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3639,6 +3644,7 @@
     ],
     "dexamethasone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3684,6 +3690,7 @@
     ],
     "triamcinolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3693,6 +3700,7 @@
     ],
     "hydrocortisone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3720,6 +3728,7 @@
     ],
     "methylprednisolone": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -3729,6 +3738,7 @@
     ],
     "deflazacort": [
       "corticosteroid",
+      "systemic_corticosteroid",
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:hormone",
@@ -8286,6 +8296,7 @@
       "epc:glucosylceramide_synthase_inhibitor"
     ],
     "cimetidine": [
+      "cyp1a2_inhibitor",
       "epc:established_pharmacologic_classes",
       "epc:gastrointestinal_agent",
       "epc:histamine_2_receptor_antagonist",
@@ -21048,6 +21059,30 @@
       "specialistReview": false
     },
     {
+      "id": "mech-pde5i-nondhp-ccb",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "pde5_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "non_dihydropyridine_ccb"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "A PDE5 inhibitor and a non-dihydropyridine calcium-channel blocker (verapamil, diltiazem) have additive systemic vasodilation, and the CCB inhibits CYP3A4-mediated clearance of the PDE5 inhibitor.",
+      "effect": "Additive hypotension; increased PDE5-inhibitor exposure.",
+      "action": "Start the PDE5 inhibitor at a low dose and monitor blood pressure; separate dosing does not remove the effect.",
+      "monitoring": "Blood pressure and postural symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "mech-cyp3a4strong-pde5i",
       "type": "pair",
       "subjects": [
@@ -21605,7 +21640,7 @@
       "subjects": [
         {
           "kind": "class",
-          "value": "corticosteroid"
+          "value": "systemic_corticosteroid"
         },
         {
           "kind": "class",
