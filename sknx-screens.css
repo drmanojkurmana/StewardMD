@@ -23,6 +23,7 @@
   --sknx-hairline: var(--rds-line, #E3EAEE);
   --sknx-card: var(--rds-surface, #ffffff);
   --sknx-sev-critical: var(--sev-critical, #B42332);
+  --sknx-sev-warning: var(--sev-warning, #B4791F);
   --sknx-sev-stable: var(--sev-stable, #1C7A4A);
   --sknx-sev-info: var(--sev-info, #1D6FA3);
   --sknx-band-high: var(--sev-critical, #B42332);
@@ -175,6 +176,16 @@
 #sknxRoot .sknx-refer-body { display: flex; flex-direction: column; gap: 2px; }
 #sknxRoot .sknx-refer-title { font-size: 14.5px; font-weight: 700; color: var(--sknx-sev-critical); }
 #sknxRoot .sknx-refer-reason { font-size: 12.5px; font-weight: 500; color: var(--sknx-text); line-height: 1.4; }
+
+/* Severe-reaction caution (amber) - distinct from the red malignancy referral */
+#sknxRoot .sknx-caution {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 14px; padding: 13px 14px; border-radius: var(--sknx-r);
+  background: color-mix(in srgb, var(--sknx-sev-warning) 12%, var(--sknx-card));
+  border: 1px solid color-mix(in srgb, var(--sknx-sev-warning) 45%, transparent);
+}
+#sknxRoot .sknx-caution .material-symbols-rounded { flex: 0 0 auto; color: var(--sknx-sev-warning); font-size: 24px; }
+#sknxRoot .sknx-caution .sknx-refer-title { color: var(--sknx-sev-warning); }
 
 /* Heatmap slot */
 #sknxRoot .sknx-heatmap-wrap { margin-bottom: 14px; border-radius: var(--sknx-r); overflow: hidden; background: #0a0f14; }

@@ -92,3 +92,21 @@ test("toDataURL passes a dataURL string through unchanged", async () => {
   const s = "data:image/png;base64,AAAA";
   assert.equal(await CV.toDataURL(s), s);
 });
+
+test("consent gate: analyze rejects (no image sent) when the user declines consent", async () => {
+  const store = {};
+  globalThis.window = { localStorage: { getItem: (k) => store[k] || null, setItem: (k, v) => { store[k] = v; } }, confirm: () => false };
+  let called = false;
+  try {
+    await assert.rejects(
+      () => CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: () => { called = true; return Promise.resolve({ ok: true, json: () => ({}) }); } }),
+      /cloud_consent_declined/
+    );
+    assert.equal(called, false, "the fetch (image egress) must NOT happen without consent");
+  } finally { delete globalThis.window; }
+});
+
+test("consent gate: skipConsent bypasses (already consented upstream)", async () => {
+  const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: fetchStub(BENIGN), skipConsent: true });
+  assert.equal(raw.engine, "derm-foundation-cloud");
+});

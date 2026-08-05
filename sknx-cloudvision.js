@@ -93,12 +93,31 @@
     });
   }
 
+  // ensureConsent(): explicit per-user consent before ANY image leaves the device (PHI egress). Stored
+  // once in localStorage. In a DOM it prompts on first use; in node (tests) there is no window, so it is
+  // a no-op. Returns true if consent is granted. opts.skipConsent bypasses (already consented upstream).
+  function ensureConsent(opts) {
+    if (opts && opts.skipConsent) return true;
+    if (typeof window === "undefined") return true; // node/tests - not applicable
+    try {
+      var ls = window.localStorage;
+      if (ls && ls.getItem("sknx_cloud_consent") === "1") return true;
+      if (typeof window.confirm === "function") {
+        var ok = window.confirm("SknX cloud analysis sends this photo to StewardMD's server for analysis. Nothing is stored. Continue?");
+        if (ok && ls) { try { ls.setItem("sknx_cloud_consent", "1"); } catch (e) {} }
+        return !!ok;
+      }
+    } catch (e) {}
+    return false; // no way to obtain consent -> do not send
+  }
+
   // analyze(image, opts) -> Promise<raw>. Rejects on any failure so sknx-providers surfaces an honest
-  // error (never masks with the mock). opts.{endpoint, fetchImpl} injectable for tests.
+  // error (never masks with the mock). opts.{endpoint, fetchImpl, skipConsent} injectable for tests.
   function analyze(image, opts) {
     opts = opts || {};
     var ep = opts.endpoint || endpoint();
     if (!ep || ep.indexOf("__SKNX_CLOUD") === 0) return Promise.reject(new Error("cloud_endpoint_unset"));
+    if (!ensureConsent(opts)) return Promise.reject(new Error("cloud_consent_declined"));
     return toDataURL(image).then(function (dataURL) {
       return classify(dataURL, ep, opts.fetchImpl);
     }).then(function (res) {
@@ -119,7 +138,7 @@
   }
 
   var API = {
-    available: available, analyze: analyze, warmup: warmup,
+    available: available, analyze: analyze, warmup: warmup, ensureConsent: ensureConsent,
     mapDiffToRaw: mapDiffToRaw, toDataURL: toDataURL, endpoint: endpoint, MALIGNANT_MAP: MALIGNANT_MAP
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

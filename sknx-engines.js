@@ -11,6 +11,9 @@
   // any real deployment; err toward inclusion.
   var MALIGNANT = ["melanoma", "BCC", "SCC", "Merkel cell carcinoma", "cutaneous lymphoma", "Kaposi sarcoma", "cutaneous sarcoma", "sebaceous carcinoma", "adnexal carcinoma", "cutaneous Paget disease", "cutaneous metastasis"];
   var REFER_THRESHOLD = 0.15; // false-negative-averse: refer on even a low malignancy signal
+  // Drug-reaction patterns that can be early SJS/TEN/DRESS (a dermatologic emergency). Exact-key (lower).
+  // Used for a SEVERE-REACTION caution, not a hard referral - most drug rashes are benign.
+  var SCAR_RISK = { "drug rash": 1, "erythema multiforme": 1 };
   // Synonym/case map -> canonical MALIGNANT entry. A real classifier may emit "Melanoma", "bcc",
   // "basal cell carcinoma", "Mycosis Fungoides", "MCC", etc.; normalize before matching so the referral
   // guardrail below can't be slipped past by casing/label-text drift. Add a label variant here (never
@@ -125,11 +128,19 @@
       if (lr) { lesion = { top: lr.label, prob: lr.prob, band: lr.band }; }
     }
     if (redFlag(raw.features)) { referral = true; reason = reason || "Red-flag features (ABCDE / bleeding / ulceration) - specialist referral, do not prescribe."; }
+    // SEVERE CUTANEOUS ADVERSE REACTION caution (R1 finding I1): a prominent drug-reaction pattern may be
+    // early SJS/TEN/DRESS - a dermatologic emergency. Surface a caution (not a hard referral: most drug
+    // rashes are benign) prompting the clinician to check for the danger features. Fires when a SCAR-risk
+    // condition is the top differential or scores high.
+    var caution = null;
+    var scar = (differential || []).filter(function (x) { return !!SCAR_RISK[String(x.label == null ? "" : x.label).toLowerCase().trim()] && (x === differential[0] || x.prob >= 0.5); })[0];
+    if (scar) { caution = "Possible " + scar.label + " - if mucosal involvement, skin pain, blistering, target lesions, or systemic symptoms, treat as a possible severe reaction (SJS / TEN / DRESS) and refer urgently."; }
     return {
       differential: differential,
       lesion: lesion,
       referral: referral,
       referralReason: reason,
+      caution: caution,
       rxEligible: !referral,
       disclaimerKey: "educational_not_clinical"
     };

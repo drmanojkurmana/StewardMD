@@ -57,6 +57,24 @@ test("v1 benign lesion: no referral, no lesion display (guardrail only fires on 
   assert.equal(a.rxEligible, true);
 });
 
+test("SCAR caution: a prominent 'Drug Rash' surfaces a severe-reaction caution (not a hard referral)", () => {
+  const a = ENG.makeAnalysis({
+    generalProbs: [{ label: "Drug Rash", prob: 0.8 }, { label: "Eczema", prob: 0.2 }],
+    lesionProbs: [], features: {}
+  }, "v2beta");
+  assert.match(a.caution || "", /severe reaction|SJS|TEN|DRESS/i);
+  assert.equal(a.referral, false, "caution is not a hard referral");
+  assert.equal(a.rxEligible, true);
+});
+
+test("SCAR caution: a benign top differential has no caution", () => {
+  const a = ENG.makeAnalysis({
+    generalProbs: [{ label: "Psoriasis", prob: 0.9 }, { label: "Drug Rash", prob: 0.1 }],
+    lesionProbs: [], features: {}
+  }, "v2beta");
+  assert.equal(a.caution, null, "low-scoring, non-top Drug Rash does not trigger the caution");
+});
+
 test("capitalized 'Melanoma' label still forces referral (case-insensitive guardrail)", () => {
   const a = ENG.makeAnalysis({
     generalProbs: [{ label: "eczema", prob: 0.6 }],

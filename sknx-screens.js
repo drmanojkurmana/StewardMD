@@ -188,7 +188,7 @@
       "</div>";
     } else if (a.engine === "derm-foundation-cloud") {
       expHtml = '<div class="sknx-exp" role="note">' + ic("science") +
-        "<span>Experimental cloud model (59 conditions), validation only. <b>Does not cover melanoma</b> - assess any pigmented, changing, or bleeding lesion clinically regardless of this result. Correlate clinically.</span>" +
+        "<span>Experimental cloud model (59 conditions), validation only. <b>Not a cancer screen</b> - no melanoma coverage and BCC/SCC detection is weak; assess any suspicious, pigmented, changing, or bleeding lesion clinically regardless of this result.</span>" +
       "</div>";
     }
 
@@ -199,6 +199,16 @@
         '<div class="sknx-refer-body">' +
           '<b class="sknx-refer-title">Specialist referral recommended</b>' +
           '<span class="sknx-refer-reason">' + esc(a.referralReason || "Refer for specialist evaluation.") + "</span>" +
+        "</div>" +
+      "</div>" : "";
+
+    // Severe-reaction caution (SJS/TEN/DRESS) — amber, distinct from the red malignancy referral. Shown
+    // when the engine set a.caution (a prominent drug-reaction pattern); prompts a danger-feature check.
+    var cautionHtml = a.caution ?
+      '<div class="sknx-caution" role="alert">' + ic("warning") +
+        '<div class="sknx-refer-body">' +
+          '<b class="sknx-refer-title">Check for severe reaction</b>' +
+          '<span class="sknx-refer-reason">' + esc(a.caution) + "</span>" +
         "</div>" +
       "</div>" : "";
 
@@ -226,6 +236,7 @@
       '<div class="sknx-result-body">' +
         expHtml +
         referHtml +
+        cautionHtml +
         heatmapHtml +
         '<div class="sknx-sec-title">Differential</div>' +
         dxHtml +
