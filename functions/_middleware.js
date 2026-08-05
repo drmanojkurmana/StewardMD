@@ -179,16 +179,14 @@ export async function onRequest(context) {
   // deployment (the <hash>.stewardmd.pages.dev bypass above), NOT on stewardmd.in.
   // Emergency valve: set SITE_ALLOW_WEB="1" in the Pages env to serve the web app again instantly (no redeploy).
   if (env && env.SITE_ALLOW_WEB === "1") return next();
-  const dest = request.headers.get("Sec-Fetch-Dest");
-  const accept = request.headers.get("Accept") || "";
-  const isPageView =
-    request.method === "GET" && (dest === "document" || (!dest && accept.includes("text/html")));
-  // A top-level browser navigation -> the marketing page; ANY other request (an app asset) -> a hard 404, so
-  // the app bundle can never be scraped or served to a browser. (Assets no longer "pass through".)
-  if (!isPageView) {
+  // Blocked (this is the app). Decide page vs asset by PATH SHAPE, not by request headers (Sec-Fetch-Dest /
+  // Accept get dropped by some clients + edges, which is what 404'd the site root): the root, any extension-
+  // less path, and .htm(l) pages get the marketing "coming soon" page; a real static asset (.js/.css/.json/
+  // .map/kb/…) gets a hard 404 so the app bundle can never be downloaded or run in a browser.
+  const isAsset = /\.[a-z0-9]+$/i.test(url.pathname) && !/\.html?$/i.test(url.pathname);
+  if (isAsset) {
     return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });
   }
-
   return new Response(COMING_SOON_HTML, {
     status: 200,
     headers: {

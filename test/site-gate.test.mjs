@@ -13,20 +13,23 @@ function ctx(path, { host = "stewardmd.in", doc = false, method = "GET", env = {
 }
 const text = (r) => r.text();
 
-test("app page navigation (/) -> marketing page, NOT the app", async () => {
-  const r = await onRequest(ctx("/", { doc: true }));
-  assert.equal(r.status, 200);
-  const b = await text(r);
-  assert.notEqual(b, APP);
-  assert.match(b, /Coming soon/i);
+test("site root -> marketing page even WITHOUT Sec-Fetch-Dest/Accept (the header-drop bug that 404'd it)", async () => {
+  for (const req of [ctx("/"), ctx("/", { doc: true })]) {
+    const r = await onRequest(req);
+    assert.equal(r.status, 200);
+    const b = await text(r);
+    assert.notEqual(b, APP);
+    assert.match(b, /Coming soon/i);
+  }
 });
 
-test("app assets (home.js / index.html / kb) -> hard 404 (bundle not downloadable)", async () => {
+test("app JS/CSS/kb assets -> hard 404 (bundle not downloadable); .html pages -> marketing", async () => {
   assert.equal((await onRequest(ctx("/home.js"))).status, 404);
   assert.equal((await onRequest(ctx("/kb/dist/kb.core.js"))).status, 404);
-  assert.equal((await onRequest(ctx("/index.html"))).status, 404);           // asset request
-  const doc = await onRequest(ctx("/index.html", { doc: true }));            // document request -> marketing
-  assert.notEqual(await text(doc), APP);
+  assert.equal((await onRequest(ctx("/app.css"))).status, 404);
+  const idx = await onRequest(ctx("/index.html"));   // .html -> marketing page, never the app, never a bare 404
+  assert.equal(idx.status, 200);
+  assert.notEqual(await text(idx), APP);
 });
 
 test("/api/* is always served (native backend)", async () => {
