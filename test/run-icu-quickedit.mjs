@@ -40,12 +40,22 @@ try {
 
   // Seed a patient with a full vitals set + labs + net fluid
   await ev(`ICU.reset();
-    ICU.ingestPatient({name:"QEPT",age:60,sex:"M",bed:"3",diagnosis:"Septic shock"});
+    ICU.ingestPatient({name:"QEPT",age:60,sex:"M",bed:"3",diagnosis:"Septic shock",codeStatus:"DNR / DNAR",allergies:"Penicillin (rash)"});
     ICU.ingestMonitor({hr:88,sbp:102,dbp:75,spo2:94,rr:18,temp:38.9,lactate:8});
     ICU.ingestLabs({k:6.5});
     var s=ICU.state(); s.fluids=s.fluids||{}; s.fluids.net24h=500;
     ICU.open('overview'); return 1;`);
   await sleep(500);
+
+  // Persistent banner: resuscitation status + allergy flags (H2) and the abnormal mini-vital highlight (UX#3)
+  const B = JSON.parse(await ev(`return JSON.stringify({
+    code: !!document.querySelector('.icu-v2-flag.code'),
+    allergy: !!document.querySelector('.icu-v2-flag.allergy'),
+    critMv: !!document.querySelector('.icu-v2-mv.crit')
+  });`) || "{}");
+  ok(B.code, "banner shows the resuscitation-status flag (DNR/DNAR) on every tab (H2)");
+  ok(B.allergy, "banner shows the allergy flag");
+  ok(B.critMv, "an abnormal mini-vital (lactate 8) is visually flagged, not colour-only (UX#3)");
 
   // Tiles are tappable (the scalar values) — and Pressors/Infusions are NOT
   const tiles = await ev(`return JSON.stringify({

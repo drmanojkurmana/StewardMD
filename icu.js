@@ -1156,6 +1156,15 @@
       '#icuRoot.icu-v2 .icu-v2-mv{flex:1;background:rgba(255,255,255,.14);border-radius:10px;padding:6px 4px;text-align:center;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 9px var(--font);color:rgba(255,255,255,.8);letter-spacing:.03em}' +
       '#icuRoot.icu-v2 .icu-v2-mv-v{font:700 15px var(--mono);margin-top:1px;color:#fff}' +
+      // abnormal mini-vitals stand out on the acuity-coloured banner (ring/weight, not colour alone)
+      '#icuRoot.icu-v2 .icu-v2-mv.warn{background:rgba(255,255,255,.26)}' +
+      '#icuRoot.icu-v2 .icu-v2-mv.crit{background:rgba(255,255,255,.30);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.9)}' +
+      '#icuRoot.icu-v2 .icu-v2-mv.crit .icu-v2-mv-v{font-weight:800}' +
+      // persistent safety flags (resuscitation status + allergy)
+      '#icuRoot.icu-v2 .icu-v2-banner-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-flag{font:800 9.5px var(--font);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.22);color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-flag.code{background:#fff;color:#b3261e}' +
+      '#icuRoot.icu-v2 .icu-v2-flag.allergy{background:#fde68a;color:#7c2d12}' +
       // presence + sync
       '#icuRoot.icu-v2 .icu-v2-presence{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 15px;background:var(--panel);border-bottom:1px solid var(--border)}' +
       '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
@@ -3540,20 +3549,28 @@
     if (p.doctor) meta.push("Dr " + esc(p.doctor));
     if (p.diagnosis) meta.push(esc(p.diagnosis));
     var mv = [
-      { k: "MAP", val: snap.map != null ? snap.map : "—" },
-      { k: "HR", val: snap.hr != null ? snap.hr : "—" },
-      { k: "SpO₂", val: snap.spo2 != null ? snap.spo2 + "%" : "—" },
-      { k: "LACT", val: snap.lactate != null ? snap.lactate : "—" }
+      { k: "MAP", val: snap.map != null ? snap.map : "—", st: vstat(snap.map, 65, 110, 60, null) },
+      { k: "HR", val: snap.hr != null ? snap.hr : "—", st: vstat(snap.hr, 50, 110, 40, 140) },
+      { k: "SpO₂", val: snap.spo2 != null ? snap.spo2 + "%" : "—", st: vstat(snap.spo2, 92, null, 88, null) },
+      { k: "LACT", val: snap.lactate != null ? snap.lactate : "—", st: vstat(snap.lactate, null, 2, null, 4) }
     ];
+    // Safety flags ON the persistent banner (visible on every tab): resuscitation status (a DNR/DNAR must
+    // be unmissable before any intervention - R1 H2) and a known allergy. "Full code"/"Nil known" show
+    // plainly; a limitation or a real allergy is highlighted.
+    var flags = [];
+    if (p.codeStatus) flags.push('<span class="icu-v2-flag' + (/dnr|dnar|dni|comfort/i.test(p.codeStatus) ? " code" : "") + '">' + esc(p.codeStatus) + '</span>');
+    if (p.allergies && p.allergies.trim() && !/^(nil|none|nkda|no known)/i.test(p.allergies.trim())) flags.push('<span class="icu-v2-flag allergy">⚠ ' + esc(p.allergies) + '</span>');
     return '<div class="icu-v2-banner ' + sev + '"><div class="icu-v2-banner-top">' +
       '<button class="icu-v2-back" data-icu-act="icuboard" aria-label="Back to unit board">‹</button>' +
       '<div class="icu-v2-banner-id">' +
         '<div class="icu-v2-banner-nm">' + esc(p.name || "ICU patient") + '<span class="icu-v2-banner-pill">' + V2_LABEL[sev] + '</span></div>' +
         '<div class="icu-v2-banner-meta">' + (meta.length ? meta.join(" · ") : "Add patient details") + '</div>' +
+        (flags.length ? '<div class="icu-v2-banner-flags">' + flags.join("") + '</div>' : '') +
       '</div>' +
       '<button class="icu-v2-handover" data-icu-act="tab:handover" aria-label="Shift handover (SBAR)" title="Shift handover (SBAR)">' + ico("copy", "⇄") + '</button>' +
       '</div><div class="icu-v2-banner-vitals">' + mv.map(function (v) {
-        return '<div class="icu-v2-mv"><div class="icu-v2-mv-k">' + v.k + '</div><div class="icu-v2-mv-v">' + esc(v.val) + '</div></div>';
+        var lab = v.k + " " + (v.val === "—" ? "not recorded" : v.val) + (v.st === "crit" ? ", critical" : v.st === "warn" ? ", abnormal" : "");
+        return '<div class="icu-v2-mv ' + (v.st || "") + '" role="group" aria-label="' + esc(lab) + '"><div class="icu-v2-mv-k">' + v.k + '</div><div class="icu-v2-mv-v">' + esc(v.val) + '</div></div>';
       }).join("") + '</div></div>';
   }
   // Presence + sync line — Phase 1 is LOCAL/single-user; group mode shows real viewers + live sync.
