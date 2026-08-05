@@ -170,9 +170,11 @@
     function add(sev, title, msg, source) { a.push({ severity: sev, title: title, msg: msg, source: source }); }
     var L = (s.labs && s.labs.recent) || {}, lv = mergedVitals(s.vitals), g = s.abg || {}, p = s.patient || {};
     // Lactate can arrive from the vitals form, the ABG slip, or the lab panel / Ward Sync (R1 C2). Take the
-    // first available so hyperlactataemia + sepsis screening never go silent just because it was not typed
-    // into the one Vitals field.
-    var lac = lv.lactate != null ? lv.lactate : (g.lactate != null ? g.lactate : (L.lactate != null ? L.lactate : null));
+    // WORST (highest) value across sources, NOT a source-priority pick: with the C1 forward-fill a stale
+    // bedside lactate must never mask a fresher, higher lab/ABG value (a missed hyperlactataemia + sepsis
+    // screen). Max is false-negative-averse and cannot miss the dangerous reading.
+    var _ls = [lv.lactate, g.lactate, L.lactate].map(Number).filter(function (x) { return isFinite(x); });
+    var lac = _ls.length ? Math.max.apply(null, _ls) : null;
     var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
 
     // ---- Electrolytes ----
@@ -897,6 +899,11 @@
       '.icu-imp-actions{display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}.icu-imp-actions .icu-btn{flex:1}.icu-imp-go{background:var(--teal,#0e6e63)!important;color:#fff!important;border-color:var(--teal,#0e6e63)!important}' +
       '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;box-shadow:var(--sh);min-width:0}' +
+      '.icu-vc-tap{cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;transition:transform .06s ease}' +
+      '.icu-vc-tap:active{transform:scale(.97)}' +
+      '.icu-vc-tap:focus-visible{outline:2px solid var(--primary);outline-offset:2px}' +
+      '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
+      '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
       '.icu-vc .vl{font:700 9.5px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.icu-vc .vv{font:800 19px/1.1 var(--mono);margin-top:3px}.icu-vc .vu{font:600 10px var(--font);color:var(--muted);margin-left:2px}' +
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
@@ -1395,16 +1402,23 @@
     var d = pts.map(function (p, i) { return (i ? "L" : "M") + (pad + (W - 2 * pad) * (p.ts - minX) / spanX).toFixed(1) + " " + (H - pad - (H - 2 * pad) * (p.v - minY) / spanY).toFixed(1); }).join(" ");
     return '<svg class="icu-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
   }
-  function vitalCard(label, value, unit, status, series) {
+  function vitalCard(label, value, unit, status, series, edit) {
     // BUG #17: an empty tile means the value was NOT recorded — say so (visible dash is
     // muted + carries title/aria "not recorded") so "K⁺ —" is never mistaken for a real
     // measured value, and screen readers announce the full label + value or its absence.
+    // `edit` (e.g. "monitor:hr") makes the tile a button that opens a focused single-value editor.
     var empty = (value == null || value === "");
     var vv = empty
       ? '<span class="icu-vc-na" title="Not recorded" style="color:var(--muted)">—</span>'
       : (esc(value) + (unit ? '<span class="vu">' + esc(unit) + "</span>" : ""));
-    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? " " + esc(unit) : ""));
-    return '<div class="icu-vc ' + (status || "") + '" role="group" aria-label="' + al + '"><div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
+    // R5 UX#6: severity is announced, not conveyed by colour alone.
+    var sev = status === "crit" ? " — critical, verify" : status === "warn" ? " — abnormal" : "";
+    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? " " + esc(unit) : "")) + sev;
+    var attrs = edit
+      ? ' data-icu-act="editvital:' + edit + '" role="button" tabindex="0" aria-label="' + al + ' — tap to edit"'
+      : ' role="group" aria-label="' + al + '"';
+    var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">✎</span>' : '';
+    return '<div class="icu-vc ' + (status || "") + (edit ? " icu-vc-tap" : "") + '"' + attrs + '>' + pencil + '<div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
   function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
   // BUG #7: group the alert list by TRUE source, in clinical priority order.
@@ -1429,18 +1443,18 @@
     var mp = curMap();
     var pressors = (_raw.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var cards = [
-      vitalCard("Heart Rate", lv.hr, "bpm", vstat(lv.hr, 50, 110, 40, 140), vitalSeries("hr", _trendWin)),
-      vitalCard("BP", (lv.sbp != null && lv.dbp != null) ? lv.sbp + "/" + lv.dbp : null, "", ""),
-      vitalCard("MAP", mp, "mmHg", vstat(mp, 65, 110, 60, null), mapSeries(_trendWin)),
-      vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin)),
-      vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin)),
-      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, 35, 39), vitalSeries("temp", _trendWin)),
-      vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin)),
-      vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin)),
+      vitalCard("Heart Rate", lv.hr, "bpm", vstat(lv.hr, 50, 110, 40, 140), vitalSeries("hr", _trendWin), "monitor:hr"),
+      vitalCard("BP", (lv.sbp != null && lv.dbp != null) ? lv.sbp + "/" + lv.dbp : null, "", "", null, "monitor:bp"),
+      vitalCard("MAP", mp, "mmHg", vstat(mp, 65, 110, 60, null), mapSeries(_trendWin), "monitor:map"),
+      vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin), "monitor:spo2"),
+      vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin), "monitor:rr"),
+      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, 35, 39), vitalSeries("temp", _trendWin), "monitor:temp"),
+      vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin), "monitor:uop"),
+      vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin), "monitor:lactate"),
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
-      vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // BUG #5: shared crit constant with the alert engine
+      vitalCard("Net Fluid", f.net24h, "mL", "", null, "fluids:net24h"),
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin), "labs:k")   // BUG #5: shared crit constant with the alert engine
     ];
     return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -5462,6 +5476,57 @@
     closeForm();
   }
 
+  /* ---- Tap-to-edit a single Live-Status tile (R5): a focused one-value editor for the tapped card,
+   * instead of opening the full Add/update form. Vitals + labs still route through the import-review
+   * confirm sheet (the mistype safety net, e.g. K 68 vs 6.8); net-fluid applies directly. ---- */
+  var QV_SPEC = {
+    "monitor:hr": { l: "Heart rate", u: "bpm" }, "monitor:map": { l: "MAP", u: "mmHg" },
+    "monitor:spo2": { l: "SpO₂", u: "%" }, "monitor:rr": { l: "Respiratory rate", u: "/min" },
+    "monitor:temp": { l: "Temperature", u: "°C" }, "monitor:uop": { l: "Urine output", u: "mL/h" },
+    "monitor:lactate": { l: "Lactate", u: "mmol/L" }, "monitor:bp": { l: "Blood pressure", bp: true },
+    "labs:k": { l: "Potassium (K⁺)", u: "mEq/L" }, "fluids:net24h": { l: "Net fluid balance (24h)", u: "mL" }
+  };
+  function openQuickVital(key) {
+    var spec = QV_SPEC[key]; if (!spec) return;
+    injectCSS(); ensureModal();
+    var parts = key.split(":"), domain = parts[0], k = parts[1];
+    var lv = mergedVitals(_raw.vitals), L = (_raw.labs && _raw.labs.recent) || {}, fl = _raw.fluids || {};
+    var body;
+    if (spec.bp) {
+      body = '<div class="icu-fld"><label for="qv-sbp">Systolic (mmHg)</label><input id="qv-sbp" data-k="sbp" type="number" inputmode="decimal" step="any" value="' + esc(lv.sbp != null ? lv.sbp : "") + '"></div>' +
+             '<div class="icu-fld"><label for="qv-dbp">Diastolic (mmHg)</label><input id="qv-dbp" data-k="dbp" type="number" inputmode="decimal" step="any" value="' + esc(lv.dbp != null ? lv.dbp : "") + '"></div>';
+    } else {
+      var cur = domain === "labs" ? L[k] : domain === "fluids" ? fl[k] : lv[k];
+      body = '<div class="icu-fld" style="grid-column:1/-1"><label for="qv-val">' + esc(spec.l) + (spec.u ? " (" + esc(spec.u) + ")" : "") + '</label>' +
+        '<input id="qv-val" data-k="' + esc(k) + '" type="number" inputmode="decimal" step="any" value="' + esc(cur != null ? cur : "") + '"></div>';
+    }
+    var review = (domain === "monitor" || domain === "labs");
+    modalEl.setAttribute("data-qv", key);
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Edit ' + esc(spec.l) + '"><h3>✎ Edit ' + esc(spec.l) + '</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">' + (review ? "You will confirm the new value against the current reading before it is applied." : "Updates this value directly.") + '</p>' +
+      '<div class="icu-grid2">' + body + '</div>' +
+      '<button class="icu-btn" data-icu-act="savequickvital">Save</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+    setTimeout(function () { try { var el = modalEl.querySelector("#qv-val, #qv-sbp"); if (el) { el.focus(); if (el.select) el.select(); } } catch (e) {} }, 60);
+  }
+  function saveQuickVital() {
+    if (!modalEl) return;
+    var key = modalEl.getAttribute("data-qv"); if (!key) { closeForm(); return; }
+    var domain = key.split(":")[0], obj = {};
+    modalEl.querySelectorAll("[data-k]").forEach(function (el) { var v = num(el.value); if (v != null && !isNaN(v)) obj[el.getAttribute("data-k")] = v; });
+    modalEl.removeAttribute("data-qv");
+    if (!Object.keys(obj).length) { closeForm(); return; }
+    // Vitals/labs -> the same clinician review sheet manual entry uses (mistype safety; unit-safe).
+    if (domain === "monitor" || domain === "labs") { closeForm(); openImportReview(domain, obj, null, null, "Manual"); return; }
+    if (domain === "fluids") {
+      if (!STATE.fluids) STATE.fluids = {};
+      Object.keys(obj).forEach(function (kk) { STATE.fluids[kk] = obj[kk]; });
+      closeForm(); if (window.toast) toast("Net fluid updated"); paint();
+      return;
+    }
+    closeForm();
+  }
+
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
     ensureModal();
@@ -5758,7 +5823,10 @@
     sec("RESULTS / CULTURES PENDING", f.pendingResults);
     sec("PROCEDURES / INTERVENTIONS", f.procedures);
     sec("CONDITION AT DISCHARGE", f.condition);
-    sec("DISCHARGE MEDICATIONS", f.meds);
+    // Discharge meds are high-risk med-reconciliation: always show the heading, with a completion prompt
+    // when nothing carried from the Treatment list, rather than silently omitting the whole section (R1 M2).
+    if (f.meds && f.meds.trim()) { out.push("DISCHARGE MEDICATIONS:"); out.push(f.meds.trim()); out.push(""); }
+    else { out.push("DISCHARGE MEDICATIONS:"); out.push("[ complete - none carried from the Treatment list ]"); out.push(""); }
     sec("FOLLOW-UP", f.followup);
     sec("ADVICE TO PATIENT / CARER", f.advice);
     if (f.doctor && f.doctor.trim()) out.push("Discharging doctor: " + f.doctor.trim());
@@ -5777,7 +5845,7 @@
     var v = String(mrn == null ? "" : mrn).trim();
     if (!v) return "";
     // already labelled? e.g. "MR26134446", "MR 26134446", "MRN/123", "UHID-77" -> show verbatim.
-    return /^(mrn?|uhid|uid|reg)[\s#:.\-]*\d/i.test(v) ? v : "MR " + v;
+    return /^(mrn?|uhid|uid|reg)[\s#:.\-/]*\d/i.test(v) ? v : "MR " + v;
   }
   // Professional, self-contained discharge summary. Returns { css, body }: the WKWebView->PDF renderer
   // (and the print iframe) have NONE of the app's stylesheets, so all styling is inlined here. Renders a
@@ -5794,12 +5862,15 @@
     var allergyText = (f.allergies && String(f.allergies).trim()) ? String(f.allergies).trim() : (p.allergies || "");
     var row = function (l, v) { return (v && String(v).trim()) ? '<div class="row"><span class="k">' + e(l) + '</span><span class="v">' + e(v) + '</span></div>' : ""; };
     var sec = function (title, val) { return (val && String(val).trim()) ? '<section><h2>' + e(title) + '</h2><div class="body">' + ml(val) + '</div></section>' : ""; };
-    var medsSec = "";
+    var medsSec;
     if (f.meds && f.meds.trim()) {
       var lines = f.meds.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
       medsSec = '<section><h2>Discharge medications</h2>' +
         (lines.length > 1 ? '<ol class="meds">' + lines.map(function (l) { return '<li>' + e(l) + '</li>'; }).join("") + '</ol>' : '<div class="body">' + ml(f.meds) + '</div>') +
         '</section>';
+    } else {
+      // High-risk field: always show the heading with a completion prompt, never silently omit it (R1 M2).
+      medsSec = '<section><h2>Discharge medications</h2><div class="body">[ complete - none carried from the Treatment list ]</div></section>';
     }
     var genTs = ""; try { genTs = new Date().toLocaleString(); } catch (e2) {}
     var css = '*{box-sizing:border-box}body{margin:0;font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a2b32;background:#fff}' +
@@ -7227,6 +7298,8 @@
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
+      case "editvital": openQuickVital(arg); break;      // tap a Live-Status tile to edit that one value
+      case "savequickvital": saveQuickVital(); break;
       case "coach": _coachForce = true; paint(); break;
       case "coachdone": setIcuSeen(); _coachForce = false; paint(); break;
       case "tip": showTip(arg); break;

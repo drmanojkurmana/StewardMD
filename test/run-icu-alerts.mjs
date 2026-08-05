@@ -143,6 +143,16 @@ try {
   `);
   ok(c2b.titles.some(t => /hyperlactat/i.test(t)), "C2: lactate 9 from the ABG slip fires hyperlactataemia");
 
+  // C2c (R1 blocker): a STALE low bedside lactate must NOT mask a fresher HIGH lab lactate (worst wins)
+  const c2c = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"STALELACT",age:60,sex:"M"});
+    ICU.ingestMonitor({ ts:1000, lactate:1.5 });   // normal bedside lactate on admission
+    ICU.ingestLabs({ lactate:6 });                  // later formal lab: deteriorated
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}) });
+  `);
+  ok(c2c.titles.some(t => /hyperlactat/i.test(t)), "C2: a stale bedside lactate 1.5 does NOT mask a fresh lab lactate 6 (worst-value wins)");
+
   // H4: extreme HR / RR now alert
   const h4 = await J(`
     var out = {};
