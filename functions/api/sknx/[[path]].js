@@ -34,7 +34,7 @@ import { usageKv, estTokens, meterTokens } from "../../_usage.js";
 import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { requireFeature } from "../../_features.js";
-import { validateReportRequest, buildReportServer } from "./report-core.mjs";
+import { validateReportRequest, buildReportServer, rerankDifferential } from "./report-core.mjs";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -106,6 +106,23 @@ export async function onRequest(context) {
       const upstream = await fetch(target.replace(/\/$/, "") + "/classify", { method: "POST", headers, body: JSON.stringify({ image: body.image }) });
       const text = await upstream.text();
       return new Response(text, { status: upstream.status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) });
+    }
+
+    // POST /api/sknx/rerank - history-reasoned differential re-rank. TEXT-ONLY: the client sends
+    // { differential:[{label,prob}], history:{...} } (NO image); rerankDifferential builds the prompt from
+    // clipped labels + known history fields only, so no image data can reach the LLM. The LLM only reorders
+    // the given labels + writes a rationale; it never touches referral/rxEligible (those stay client-side).
+    if (seg === "rerank" && request.method === "POST") {
+      const uid = await callerUid(request, env);
+      if (!uid) return json({ ok: false, error: "signin_required" }, 401, request);
+      const feat = await requireFeature(env, request, "sknx_llm", { uid });
+      if (!feat.allowed) return json({ ok: false, error: "feature_off", feature: "sknx_llm" }, 403, request);
+      const rl = await rateLimit(env, uid);
+      if (!rl.ok) return json({ ok: false, error: "rate_limited" }, rl.status || 429, request);
+      const body = await readBody(request);
+      const callLLM = async (prompt) => callGemini(env, [{ text: prompt.system + "\n\n" + prompt.user }], 300, { temperature: 0.2 });
+      const out = await rerankDifferential(env, { differential: body.differential, history: body.history }, { callLLM });
+      return json({ ok: true, provider: out.provider, differential: out.differential, rationale: out.rationale, advisory: out.advisory }, 200, request);
     }
 
     if (seg !== "report" || request.method !== "POST") return json({ error: "not_found" }, 404, request);

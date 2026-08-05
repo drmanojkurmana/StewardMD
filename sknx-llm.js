@@ -274,7 +274,33 @@
     return out;
   }
 
-  var API = { buildReport: buildReport, explainAs: explainAs, AUDIENCES: AUDIENCES, DISCLAIMER: DISCLAIMER };
+  // Phase 2: history-reasoned differential re-rank. POSTs { differential, history } (TEXT only, no image)
+  // to the authenticated Worker /api/sknx/rerank; the server LLM reorders the labels + writes a rationale.
+  // Any failure / no differential -> passthrough (the input differential). Never blocks, never mutates
+  // referral/rxEligible (this only reorders the DISPLAY differential + adds a rationale).
+  function apiBase() { try { return (typeof window !== "undefined" && window.SMD_API_BASE) || ""; } catch (e) { return ""; } }
+  function idToken() {
+    try { var u = typeof window !== "undefined" && window.firebase && firebase.auth && firebase.auth().currentUser; if (u && u.getIdToken) return u.getIdToken().catch(function () { return null; }); } catch (e) {}
+    return Promise.resolve(null);
+  }
+  function rerank(differential, history, opts) {
+    opts = opts || {};
+    var f = opts.fetchImpl || (typeof fetch === "function" ? fetch : null);
+    var pass = { provider: "offline", differential: differential || [], rationale: null, advisory: null };
+    if (!f || !(differential && differential.length)) return Promise.resolve(pass);
+    return idToken().then(function (tok) {
+      var headers = { "Content-Type": "application/json" };
+      if (tok) headers.Authorization = "Bearer " + tok;
+      return f(apiBase() + "/api/sknx/rerank", { method: "POST", headers: headers, body: JSON.stringify({ differential: differential, history: history || {} }) });
+    }).then(function (r) { if (!r.ok) throw new Error("rerank_http_" + r.status); return r.json(); })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.differential) || !d.differential.length) return pass;
+        return { provider: d.provider || "gemini", differential: d.differential, rationale: d.rationale || null, advisory: d.advisory || null };
+      })
+      .catch(function () { return pass; });
+  }
+
+  var API = { buildReport: buildReport, explainAs: explainAs, rerank: rerank, AUDIENCES: AUDIENCES, DISCLAIMER: DISCLAIMER };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_SKNX_LLM = API;
 })();

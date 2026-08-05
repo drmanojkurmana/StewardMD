@@ -223,6 +223,7 @@
       '<div class="sknx-result-body">' +
         '<div class="sknx-sec-title">Differential</div>' +
         dxHtml +
+        '<div class="sknx-rerank-host" id="sknxRerankHost" aria-live="polite"></div>' +
         findingHtml +
         lesionHtml +
         heatmapHtml +
@@ -238,6 +239,33 @@
 
     host.innerHTML = head + body;
     mountReport(a);
+    mountRerank(a);
+  }
+
+  // mountRerank(a): if the case carries clinical history, ask the LLM to reorder the differential and
+  // write a rationale (Phase 2), then render a "History-adjusted" section under the image differential.
+  // Display-only + best-effort: it NEVER changes referral/rxEligible, and a no-LLM/offline result hides
+  // the section (no false "adjusted" claim).
+  function mountRerank(a) {
+    try {
+      var el = document.getElementById("sknxRerankHost");
+      if (!el) return;
+      var LLM = window.SMD_SKNX_LLM, hist = a && a.history;
+      var hasHist = hist && typeof hist === "object" && Object.keys(hist).length > 0;
+      if (!hasHist || !LLM || !LLM.rerank || !(a.differential && a.differential.length)) { el.innerHTML = ""; return; }
+      el.innerHTML = '<div class="sknx-rerank-loading">' + ic("neurology") + "<span>Re-checking with the history&hellip;</span></div>";
+      Promise.resolve(LLM.rerank(a.differential, hist)).then(function (res) {
+        if (!res || res.provider === "offline" || !(res.differential && res.differential.length)) { el.innerHTML = ""; return; }
+        var rows = res.differential.slice(0, 6).map(function (d, i) {
+          return '<div class="sknx-dx-row"><span class="sknx-dx-rank">' + (i + 1) + '</span><span class="sknx-dx-label">' + esc(d.label) + "</span></div>";
+        }).join("");
+        el.innerHTML =
+          '<div class="sknx-sec-title">History-adjusted</div>' +
+          '<div class="sknx-dx sknx-dx-adjusted">' + rows + "</div>" +
+          (res.rationale ? '<div class="sknx-rationale">' + ic("neurology") + "<span>" + esc(res.rationale) + "</span></div>" : "") +
+          (res.advisory ? '<div class="sknx-rationale sknx-rationale-adv">' + ic("info") + "<span>" + esc(res.advisory) + "</span></div>" : "");
+      }).catch(function () { el.innerHTML = ""; });
+    } catch (e) {}
   }
 
   /* Phase 3 clinician-confirmed Rx affordance. GUARDED by SMD_SKNX_RX.eligible(a): it renders the ONLY

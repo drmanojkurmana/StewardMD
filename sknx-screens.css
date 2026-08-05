@@ -197,6 +197,15 @@
 #sknxRoot .sknx-footer { display: flex; gap: 6px; align-items: flex-start; margin-top: 16px; color: var(--sknx-muted); font-size: 11.5px; line-height: 1.4; }
 #sknxRoot .sknx-footer .material-symbols-rounded { font-size: 15px; flex: 0 0 auto; }
 
+/* History-adjusted (Phase 2 LLM re-rank) - shown under the image differential when history is applied */
+#sknxRoot .sknx-rerank-host:empty { display: none; }
+#sknxRoot .sknx-rerank-loading { display: flex; gap: 6px; align-items: center; margin: 8px 0; color: var(--sknx-muted); font-size: 12px; }
+#sknxRoot .sknx-rerank-loading .material-symbols-rounded { font-size: 16px; }
+#sknxRoot .sknx-dx-adjusted { border-left: 2px solid color-mix(in srgb, var(--sknx-sev-info) 60%, transparent); padding-left: 8px; }
+#sknxRoot .sknx-rationale { display: flex; gap: 6px; align-items: flex-start; margin: 6px 0 2px; font-size: 12.5px; line-height: 1.4; color: var(--sknx-text, inherit); }
+#sknxRoot .sknx-rationale .material-symbols-rounded { font-size: 16px; flex: 0 0 auto; color: var(--sknx-sev-info); }
+#sknxRoot .sknx-rationale-adv { color: var(--sknx-muted); }
+
 /* Clinical-history intake form (sknx-history.js formHtml) */
 #sknxRoot .sknx-hx { display: flex; flex-direction: column; gap: 12px; margin: 6px 0 2px; }
 #sknxRoot .sknx-hx-row { display: flex; flex-direction: column; gap: 6px; }
