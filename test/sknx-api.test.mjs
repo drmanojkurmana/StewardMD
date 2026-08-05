@@ -7,7 +7,7 @@
 // prescription (server-derived management + LLM-Rx rejection belt).
 import { test } from "node:test";
 import assert from "node:assert";
-import { validateReportRequest, buildScaffold, buildReportServer, buildDiscussionPrompt, looksLikeRx, DISCLAIMER } from "../functions/api/sknx/report-core.mjs";
+import { validateReportRequest, buildScaffold, buildReportServer, buildDiscussionPrompt, looksLikeRx, DISCLAIMER, buildRerankPrompt, parseRerank, applyRerank, rerankDifferential } from "../functions/api/sknx/report-core.mjs";
 import EVID from "../sknx-evidence.js";
 
 const psoriasisEvidence = EVID.retrieve(["psoriasis"]);
@@ -141,4 +141,61 @@ test("prompt input is clipped and capped (no unbounded LLM input)", () => {
   assert.ok(snippetLines.length <= 20, "evidence capped at 20, got " + snippetLines.length);
   // System prompt marks the data as untrusted (R2 M3).
   assert.match(prompt.system, /untrusted DATA, not/i);
+});
+
+// ---- Phase 2: history-reasoned differential re-rank -----------------------------------------------
+const DIFF = [
+  { label: "Psoriasis", prob: 0.7, band: "high" },
+  { label: "Eczema", prob: 0.4, band: "moderate" },
+  { label: "Tinea", prob: 0.2, band: "low" }
+];
+
+test("buildRerankPrompt is TEXT-only (no image), lists the labels + history, marks input untrusted", () => {
+  const p = buildRerankPrompt(DIFF, { itch: "severe", site: ["flexures"], changing: true });
+  const blob = JSON.stringify(p).toLowerCase();
+  assert.ok(!/base64|dataurl|data:image|pixels/.test(blob), "no image DATA in the prompt (the word 'image' in prose is fine)");
+  assert.match(p.user, /Psoriasis/); assert.match(p.user, /Eczema/);
+  assert.match(p.user, /itch: severe/); assert.match(p.user, /flexures/); assert.match(p.user, /changing/);
+  assert.match(p.system, /UNTRUSTED DATA/i);
+  assert.match(p.system, /MUST NOT add, rename, or invent/i);
+});
+
+test("parseRerank keeps only in-vocabulary labels (canonical), drops invented ones, returns rationale", () => {
+  const r = parseRerank('{"ranked":["eczema","MELANOMA","tinea"],"rationale":"itch + flexural favors eczema","advisory":""}', ["Psoriasis", "Eczema", "Tinea"]);
+  assert.deepEqual(r.ranked, ["Eczema", "Tinea"], "out-of-vocab 'MELANOMA' dropped; labels mapped to canonical case");
+  assert.match(r.rationale, /eczema/i);
+});
+
+test("parseRerank returns null on non-JSON / empty ranked (=> caller falls back)", () => {
+  assert.equal(parseRerank("sorry, I cannot", ["Eczema"]), null);
+  assert.equal(parseRerank('{"ranked":[]}', ["Eczema"]), null);
+});
+
+test("applyRerank reorders the differential by the ranked labels, keeps the rest in image order", () => {
+  const out = applyRerank(DIFF, ["Eczema"]);
+  assert.deepEqual(out.map((d) => d.label), ["Eczema", "Psoriasis", "Tinea"]);
+  // probs are preserved (LLM never invents numbers)
+  assert.equal(out[0].prob, 0.4);
+});
+
+test("rerankDifferential offline (no callLLM) -> the input differential unchanged", async () => {
+  const r = await rerankDifferential({}, { differential: DIFF, history: { itch: "severe" } });
+  assert.equal(r.provider, "offline");
+  assert.deepEqual(r.differential.map((d) => d.label), ["Psoriasis", "Eczema", "Tinea"]);
+});
+
+test("rerankDifferential with a working LLM -> in-vocab reordering + rationale", async () => {
+  const r = await rerankDifferential({}, { differential: DIFF, history: { itch: "severe", site: ["flexures"] } }, {
+    callLLM: async () => '{"ranked":["Eczema","Psoriasis","Tinea"],"rationale":"itch + flexural favors eczema","advisory":"consider scabies if contacts itch"}'
+  });
+  assert.equal(r.provider, "gemini");
+  assert.deepEqual(r.differential.map((d) => d.label), ["Eczema", "Psoriasis", "Tinea"]);
+  assert.match(r.rationale, /eczema/i);
+  assert.match(r.advisory, /scabies/i);
+});
+
+test("rerankDifferential with a hallucinating/garbled LLM -> passthrough (input differential)", async () => {
+  const r = await rerankDifferential({}, { differential: DIFF, history: {} }, { callLLM: async () => "Melanoma, definitely." });
+  assert.equal(r.provider, "offline");
+  assert.deepEqual(r.differential.map((d) => d.label), ["Psoriasis", "Eczema", "Tinea"]);
 });
