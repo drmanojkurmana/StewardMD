@@ -152,9 +152,13 @@
         return manP.then(function (man) {
           _manifest = man; _sessions = {};
           var heads = (man.heads || []).filter(function (h) { return h.file; });
-          return Promise.all(heads.map(function (h) {
-            return sessionFor(h.file).then(function (s) { _sessions[h.pathology] = s; });
-          }));
+          // Load the ensemble heads SEQUENTIALLY, not with Promise.all (CR4): creating all ~7 ONNX
+          // sessions at once briefly holds several models' decode buffers simultaneously, spiking peak
+          // memory on a phone. One-at-a-time keeps the transient footprint to a single model; the sessions
+          // are cached (reused across analyses) so this one-time load cost is paid once.
+          return heads.reduce(function (chain, h) {
+            return chain.then(function () { return sessionFor(h.file).then(function (s) { _sessions[h.pathology] = s; }); });
+          }, Promise.resolve());
         });
       });
     }

@@ -43,5 +43,15 @@ let threw = null;
 try { await ORT.makeOrtAnalyzer({ ort: fakeOrt, manifest, baseUrl: "x" }).analyze({ id: "t3" }, () => {}); } catch (e) { threw = e; }
 ok("no signal + no digitiser → typed needs_signal error (never fabricates)", threw && threw.code === "needs_signal");
 
+// CR4: ensemble heads load SEQUENTIALLY (peak footprint = one model at a time), not all at once via
+// Promise.all (which briefly holds every model's decode buffer → the memory spike that risked OOM).
+let live = 0, maxLive = 0;
+const seqOrt = {
+  Tensor: function (t, d, dm) { this.type = t; this.data = d; this.dims = dm; },
+  InferenceSession: { create: async (p) => { live++; if (live > maxLive) maxLive = live; await Promise.resolve(); await Promise.resolve(); live--; const logit = /AFIB/.test(String(p)) ? 4.0 : -4.0; return { run: async () => ({ logit: { data: Float32Array.from([logit]) } }) }; } }
+};
+await ORT.makeOrtAnalyzer({ ort: seqOrt, manifest, baseUrl: "x" }).analyze({ id: "seq", signal: leads }, () => {});
+ok("ensemble heads load sequentially — peak 1 concurrent session, not the full ensemble at once (CR4)", maxLive === 1);
+
 console.log(`\nkardiox-ort: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
