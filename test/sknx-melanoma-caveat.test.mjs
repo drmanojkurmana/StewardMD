@@ -38,11 +38,31 @@ test("H7: seborrheic/benign keratosis (pigmented mimic) is NOT rxEligible", () =
   assert.equal(a.rxEligible, false);
 });
 
+// Melanoma MIMICS (R1 re-review): a nodular/amelanotic melanoma can read as dermatofibroma or vascular lesion
+test("H7: dermatofibroma top differential (melanoma mimic) is NOT rxEligible", () => {
+  const a = ENG.makeAnalysis({ generalProbs: [gp("dermatofibroma", 0.7)], features: {} }, "v1");
+  assert.equal(a.rxEligible, false);
+});
+test("H7: vascular lesion top differential (melanoma mimic) is NOT rxEligible", () => {
+  const a = ENG.makeAnalysis({ generalProbs: [gp("vascular lesion", 0.7)], features: {} }, "v1");
+  assert.equal(a.rxEligible, false);
+});
+
 // No-over-trigger: a non-pigmented inflammatory read with no red flag stays Rx-eligible, no melanoma caveat
 test("no-over-trigger: psoriasis top differential stays rxEligible with no melanoma caveat", () => {
   const a = ENG.makeAnalysis({ generalProbs: [gp("psoriasis", 0.8), gp("eczema", 0.1)], features: {} }, "v1");
   assert.equal(a.rxEligible, true);
   assert.doesNotMatch(String(a.caution || ""), /melanoma/i);
+});
+
+// Blanket footer limitation: the always-shown educational disclaimer must state the tool cannot detect
+// melanoma, so a melanoma read as an inflammatory label (the deployed cloud taxonomy has no melanocytic
+// class) still carries the limitation even when the per-lesion caveat does not fire (R1 re-review).
+test("blanket: the SknX educational disclaimer states the tool does not detect melanoma", () => {
+  const src = fs.readFileSync(join(ROOT, "sknx-screens.js"), "utf8");
+  const m = src.match(/educational_not_clinical:\s*"([^"]*)"/);
+  assert.ok(m, "disclaimer string present");
+  assert.match(m[1], /does not detect melanoma/i);
 });
 
 // Regressions: the pre-existing guardrails must still hold

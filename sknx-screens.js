@@ -31,7 +31,7 @@
   // Fixed educational disclaimer text, keyed by sknx-engines.js's disclaimerKey ("educational_not_clinical"
   // is the only key in Phase 1; the map is future-proofing, not a live requirement).
   var DISCLAIMERS = {
-    educational_not_clinical: "Educational preview only, not a clinical diagnosis. AI-generated findings must be correlated with clinical examination and, where indicated, biopsy or specialist referral before any treatment decision."
+    educational_not_clinical: "Educational preview only, not a clinical diagnosis. This tool does not detect melanoma: evaluate any pigmented, new, or changing lesion clinically. AI-generated findings must be correlated with clinical examination and, where indicated, biopsy or specialist referral before any treatment decision."
   };
   function disclaimerText(key) { return DISCLAIMERS[key] || DISCLAIMERS.educational_not_clinical; }
 

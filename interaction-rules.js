@@ -1563,7 +1563,6 @@
     ],
     "fondaparinux": [
       "anticoagulant",
-      "doac",
       "epc:enzyme_inhibitor",
       "epc:enzyme_interaction",
       "epc:established_pharmacologic_classes",
@@ -1591,7 +1590,6 @@
     ],
     "bivalirudin": [
       "anticoagulant",
-      "doac",
       "epc:anti_coagulant",
       "epc:anti_infective",
       "epc:antimicrobial",
@@ -1630,7 +1628,6 @@
       "epc:unfractionated_heparin"
     ],
     "edetic acid": [
-      "anticoagulant",
       "epc:anti_coagulant",
       "epc:established_pharmacologic_classes",
       "epc:hematology_agent",
@@ -2963,8 +2960,7 @@
     "sarecycline": [
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
-      "epc:tetracycline_class_drug",
-      "pgp_inhibitor"
+      "epc:tetracycline_class_drug"
     ],
     "venetoclax": [
       "epc:bcl_2_inhibitor",
@@ -3111,14 +3107,11 @@
       "epc:immunologic_agent",
       "pgp_inhibitor"
     ],
-    "abciximab": [
-      "pgp_inhibitor"
-    ],
+    "abciximab": [],
     "zonisamide": [
       "epc:anti_epileptic_agent",
       "epc:established_pharmacologic_classes",
-      "epc:nervous_system_agent",
-      "pgp_inhibitor"
+      "epc:nervous_system_agent"
     ],
     "suvorexant": [
       "epc:established_pharmacologic_classes",
@@ -16725,9 +16718,7 @@
     "procyclidine": [
       "anticholinergic"
     ],
-    "protamine sulfate": [
-      "anticoagulant"
-    ],
+    "protamine sulfate": [],
     "prulifloxacin": [
       "fluoroquinolone",
       "qt_prolonging"
@@ -16765,9 +16756,7 @@
       "aminoglycoside",
       "nephrotoxic"
     ],
-    "sodium citrate": [
-      "anticoagulant"
-    ],
+    "sodium citrate": [],
     "solifenacin succinate": [
       "anticholinergic"
     ],

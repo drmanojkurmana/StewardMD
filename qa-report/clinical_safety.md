@@ -70,7 +70,30 @@ benign nevus (no ABCDE, not OOD) would have been `referral=false, rxEligible=tru
 two on-device-vision tests that asserted the old (unsafe) "nevus -> Rx-eligible" contract were updated to the
 new contract.
 
-**R1 RE-REVIEW: in flight** (dispatched after this commit, mirroring the CR loop).
+**R1 RE-REVIEW: CONFIRMED-GOOD, no blocking defects.** The reviewer loaded the engine, ran ~60 pairs beyond
+the test file, ran all 59 deployed cloud labels + the on-device labels through the H7 matcher, and confirmed
+the golden is untouched (68/68 across the four fix suites). All seven intended fixes fire correctly and close
+the stated false negatives. It surfaced Important fast-follows (all failing in the safe direction, none
+eroding a specific alert) which are **now closed:**
+- Class-hygiene FPs that widening-to-class exposed: the auto-derived `anticoagulant` class carried three
+  non-anticoagulants (`protamine sulfate` - a reversal agent whose alert was backwards, `sodium citrate`,
+  `edetic acid`); `doac` carried parenterals (`fondaparinux`, `bivalirudin`); `pgp_inhibitor` carried
+  non-inhibitors (`abciximab`, `zonisamide`, `sarecycline`). These are de-tagged (fondaparinux/bivalirudin
+  keep `anticoagulant`, so their genuine antiplatelet interaction still fires). Guarded by 8 new no-FP
+  assertions in `test/interaction-high-fixes.test.mjs` (now 25/25).
+- H7 coverage on the deployed model: the label-gated force only fires on melanocytic label strings, and the
+  deployed 59-class taxonomy has no melanocytic class - so a melanoma read as an inflammatory label carried
+  no caveat. Closed with a **blanket** limitation in the always-shown educational disclaimer
+  (`sknx-screens.js`): "This tool does not detect melanoma: evaluate any pigmented, new, or changing lesion
+  clinically." The per-lesion force now also covers the `dermatofibroma`/`vascular lesion` mimics.
+  `test/sknx-melanoma-caveat.test.mjs` now 11/11.
+
+**Residual (documented, not blocking):** DOAC + ticagrelor fires twice (`pair-doac-pgp` + `pair-anticoagulant-
+antiplatelet`, since ticagrelor is both an antiplatelet and a P-gp inhibitor) - a true-positive redundancy;
+collapsing it needs the engine-level drug-pair dedup already noted for the CR2 overlap case. Advisory: the
+`"pigment"` substring also forces `rxEligible=false` + the melanoma caveat on two benign cloud labels
+(post-inflammatory hyperpigmentation, pigmented purpuric eruption) - conservative (no Rx offered on a benign
+pigmented read; Rx is flag-OFF regardless), not a safety issue.
 
 M/L below remain open. The original findings are preserved below for the record.
 

@@ -56,3 +56,30 @@ test("H6: dabigatran + verapamil is flagged", () => assert.ok(fires("dabigatran"
 test("no-FP: amlodipine + paracetamol produces no interaction", () => {
   assert.equal(alerts("amlodipine", "paracetamol").length, 0);
 });
+
+// Class-hygiene (R1 re-review of the HIGH fixes): widening to classes surfaced latent bad class
+// memberships. These non-anticoagulants / non-DOACs / non-P-gp-inhibitors must NOT fire the new rules.
+test("no-FP: protamine sulfate + aspirin does not fire (protamine is a reversal agent, not an anticoagulant)", () => {
+  assert.equal(alerts("protamine sulfate", "aspirin").length, 0);
+});
+test("no-FP: sodium citrate + aspirin does not fire (urinary alkaliniser, not a systemic anticoagulant)", () => {
+  assert.equal(alerts("sodium citrate", "aspirin").length, 0);
+});
+test("no-FP: edetic acid + clopidogrel does not fire (chelator, not an anticoagulant)", () => {
+  assert.equal(alerts("edetic acid", "clopidogrel").length, 0);
+});
+test("no-FP: fondaparinux + clarithromycin does not fire the DOAC P-gp rule (not a P-gp substrate)", () => {
+  assert.equal(alerts("fondaparinux", "clarithromycin").length, 0);
+});
+test("regression: fondaparinux + aspirin STILL fires (genuine anticoagulant x antiplatelet)", () => {
+  assert.ok(fires("fondaparinux", "aspirin"));
+});
+test("no-FP: digoxin + zonisamide does not fire (zonisamide is not a P-gp inhibitor)", () => {
+  assert.equal(alerts("digoxin", "zonisamide").length, 0);
+});
+test("no-FP: digoxin + sarecycline does not fire (not a P-gp inhibitor)", () => {
+  assert.equal(alerts("digoxin", "sarecycline").length, 0);
+});
+test("no-FP: digoxin + abciximab does not fire (GPIIb/IIIa antiplatelet, not a P-gp inhibitor)", () => {
+  assert.equal(alerts("digoxin", "abciximab").length, 0);
+});

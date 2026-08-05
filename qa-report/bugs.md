@@ -55,7 +55,11 @@ GoogleService-Info.plist committed (public-safe), owner emails in wrangler.toml 
   azathioprine+febuxostat, digoxin+P-gp inhibitors, K-sparing+K supplement, lithium+thiazide/loop,
   anticoagulant+antiplatelet, and DOAC+P-gp inhibitor now flagged (widen-to-class over stack-new to avoid
   double-fires; lisinopril de-tagged as a prerequisite); SknX now forces `rxEligible=false` + a melanoma
-  caveat on any pigmented/melanocytic top differential. **R1 re-review of the HIGH fixes in flight.**
+  caveat on any pigmented/melanocytic top differential. **R1 re-review CONFIRMED-GOOD** - its Important
+  fast-follows are closed in the same pass: de-tagged class-hygiene FPs the widening exposed (protamine/
+  sodium-citrate/edetic-acid off `anticoagulant`; fondaparinux/bivalirudin off `doac`; abciximab/zonisamide/
+  sarecycline off `pgp_inhibitor`), and added a blanket "does not detect melanoma" line to the SknX
+  educational disclaimer + dermatofibroma/vascular-lesion mimics to the H7 matcher. Tests: 25/25 + 11/11.
   (Security H1/H9-H12, quota H13, and all Medium/Low remain open.)
 - **`calculators.js:5463`** - removed the `⚠️` emoji from a warning div (no-UI-emoji convention). `no-ui-emoji`
   test now green.
