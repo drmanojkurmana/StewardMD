@@ -5460,7 +5460,7 @@
 
       return {
         v: r0(tdd), u: "units/day (TDD)",
-        i: (W.length ? '<div class="mc-warn">⚠️ ' + W.join("<br>") + "</div>" : "") +
+        i: (W.length ? '<div class="mc-warn">' + W.join("<br>") + "</div>" : "") +
           "<div><b>Basal–bolus split (50/50):</b> basal ≈ <b>" + r0(basal) + " units</b> once daily" +
           " · prandial ≈ <b>" + r0(meal) + " units</b> with each of 3 meals (" + r0(meal * 3) + " units total).</div>" +
           "<div><b>Carb ratio (" + carbK + " rule):</b> 1 unit per <b>" + r1(icr) + " g</b> carbohydrate.</div>" +
