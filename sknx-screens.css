@@ -187,6 +187,28 @@
 #sknxRoot .sknx-caution .material-symbols-rounded { flex: 0 0 auto; color: var(--sknx-sev-warning); font-size: 24px; }
 #sknxRoot .sknx-caution .sknx-refer-title { color: var(--sknx-sev-warning); }
 
+/* Concise finding line (a RESULT: referral / OOD / severe-reaction) - one line, not a big alert block */
+#sknxRoot .sknx-finding { display: flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 600; margin: 10px 0 4px; padding: 8px 10px; border-radius: 10px; }
+#sknxRoot .sknx-finding .material-symbols-rounded { font-size: 18px; flex: 0 0 auto; }
+#sknxRoot .sknx-finding-refer { color: var(--sknx-sev-critical); background: color-mix(in srgb, var(--sknx-sev-critical) 10%, var(--sknx-card)); }
+#sknxRoot .sknx-finding-caution, #sknxRoot .sknx-finding-ood { color: var(--sknx-sev-warning); background: color-mix(in srgb, var(--sknx-sev-warning) 10%, var(--sknx-card)); }
+
+/* Concise footer caveat - one small muted line at the very bottom (results lead the screen) */
+#sknxRoot .sknx-footer { display: flex; gap: 6px; align-items: flex-start; margin-top: 16px; color: var(--sknx-muted); font-size: 11.5px; line-height: 1.4; }
+#sknxRoot .sknx-footer .material-symbols-rounded { font-size: 15px; flex: 0 0 auto; }
+
+/* Clinical-history intake form (sknx-history.js formHtml) */
+#sknxRoot .sknx-hx { display: flex; flex-direction: column; gap: 12px; margin: 6px 0 2px; }
+#sknxRoot .sknx-hx-row { display: flex; flex-direction: column; gap: 6px; }
+#sknxRoot .sknx-hx-label { font-size: 12px; font-weight: 700; color: var(--sknx-muted); text-transform: uppercase; letter-spacing: .03em; }
+#sknxRoot .sknx-hx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+#sknxRoot .sknx-chip { font: inherit; font-size: 12.5px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--sknx-line, #2a3550); background: transparent; color: var(--sknx-text, inherit); cursor: pointer; }
+#sknxRoot .sknx-chip[aria-pressed="true"] { background: color-mix(in srgb, var(--sknx-sev-info) 16%, var(--sknx-card)); border-color: var(--sknx-sev-info); color: var(--sknx-sev-info); font-weight: 600; }
+#sknxRoot .sknx-hx-toggles { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+#sknxRoot .sknx-hx-toggle { display: flex; align-items: center; gap: 6px; font-size: 12.5px; }
+#sknxRoot .sknx-hx-abcde summary { font-size: 12.5px; color: var(--sknx-muted); cursor: pointer; }
+#sknxRoot .sknx-hx-note { width: 100%; box-sizing: border-box; font: inherit; font-size: 13px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--sknx-line, #2a3550); background: transparent; color: var(--sknx-text, inherit); resize: vertical; }
+
 /* Heatmap slot */
 #sknxRoot .sknx-heatmap-wrap { margin-bottom: 14px; border-radius: var(--sknx-r); overflow: hidden; background: #0a0f14; }
 #sknxRoot .sknx-heatmap-wrap:has(img[hidden]) { display: none; }

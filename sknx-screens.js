@@ -176,53 +176,25 @@
           '<div class="sknx-dx-empty">' + ic("check_circle") + "<span>No confident finding - correlate clinically.</span></div>") +
       "</div>";
 
-    // Experimental-model badge: shown when an EXPERIMENTAL classifier produced this result, so the
-    // clinician knows the read is from an uncalibrated/validation-only model. The cloud engine carries
-    // an ADDITIONAL melanoma caveat at the point of decision: it has no melanoma class and reads no
-    // ABCDE history, so a benign-looking, non-referral result must not be read as ruling melanoma out
-    // (R1 finding C2). The mock/native paths show nothing.
-    var expHtml = "";
-    if (a.engine === "realvision-experimental") {
-      expHtml = '<div class="sknx-exp" role="note">' + ic("science") +
-        "<span>Experimental on-device model - uncalibrated, for testing only. Not a validated result; correlate clinically.</span>" +
-      "</div>";
-    } else if (a.engine === "derm-foundation-cloud") {
-      // role="alert" (not "note"): this cancer-limitation caveat is a point-of-decision safety message,
-      // not an aside - the differential below looks authoritative (AI-safety A2).
-      expHtml = '<div class="sknx-exp" role="alert">' + ic("science") +
-        "<span>Experimental cloud model (59 conditions), validation only. <b>Not a cancer screen</b> - no melanoma coverage and BCC/SCC detection is weak; assess any suspicious, pigmented, changing, or bleeding lesion clinically regardless of this result.</span>" +
-      "</div>";
+    // A specific FINDING (referral > OOD > severe-reaction) is a RESULT - kept visible but ONE concise
+    // line, not a full-width alert. A malignancy/red-flag referral outranks the others. The generic
+    // experimental/educational caveat is NOT here - it is the concise footer below (owner: results first,
+    // warnings small at the foot; no model names in the copy).
+    var findingHtml = "";
+    if (a.referral) {
+      findingHtml = '<div class="sknx-finding sknx-finding-refer" role="alert">' + ic("crisis_alert") +
+        "<span>" + esc(a.referralReason || "Refer for specialist evaluation.") + "</span></div>";
+    } else if (a.ood) {
+      findingHtml = '<div class="sknx-finding sknx-finding-ood" role="alert">' + ic("help") +
+        "<span>" + esc(a.oodReason || "No confident reading. Re-take the photo or assess clinically.") + "</span></div>";
+    } else if (a.caution) {
+      findingHtml = '<div class="sknx-finding sknx-finding-caution" role="alert">' + ic("warning") +
+        "<span>" + esc(a.caution) + "</span></div>";
     }
 
-    // Red referral banner — icon + colour + text together (never colour alone). Shown ONLY when the
-    // engine's malignancy/red-flag guardrail set referral=true; referralReason is always shown verbatim.
-    var referHtml = a.referral ?
-      '<div class="sknx-refer" role="alert">' + ic("crisis_alert") +
-        '<div class="sknx-refer-body">' +
-          '<b class="sknx-refer-title">Specialist referral recommended</b>' +
-          '<span class="sknx-refer-reason">' + esc(a.referralReason || "Refer for specialist evaluation.") + "</span>" +
-        "</div>" +
-      "</div>" : "";
-
-    // OOD / no-confident-reading banner — shown when the engine withheld a differential (off-domain or
-    // low-confidence image). Distinct from a benign result: prompts a re-take / clinical assessment.
-    var oodHtml = a.ood ?
-      '<div class="sknx-caution" role="alert">' + ic("help") +
-        '<div class="sknx-refer-body">' +
-          '<b class="sknx-refer-title">No confident reading</b>' +
-          '<span class="sknx-refer-reason">' + esc(a.oodReason || "The image is not a clear, gradable lesion. Re-take the photo or assess clinically.") + "</span>" +
-        "</div>" +
-      "</div>" : "";
-
-    // Severe-reaction caution (SJS/TEN/DRESS) — amber, distinct from the red malignancy referral. Shown
-    // when the engine set a.caution (a prominent drug-reaction pattern); prompts a danger-feature check.
-    var cautionHtml = a.caution ?
-      '<div class="sknx-caution" role="alert">' + ic("warning") +
-        '<div class="sknx-refer-body">' +
-          '<b class="sknx-refer-title">Check for severe reaction</b>' +
-          '<span class="sknx-refer-reason">' + esc(a.caution) + "</span>" +
-        "</div>" +
-      "</div>" : "";
+    // Concise footer caveat - ONE muted line. NO model names/sizes/architecture in the copy.
+    var footerHtml = '<div class="sknx-footer">' + ic("info") +
+      "<span>Experimental, educational only - not a diagnosis. Does not exclude skin cancer; correlate clinically.</span></div>";
 
     var lesionHtml = a.lesion ?
       '<div class="sknx-lesion">' + ic("info") +
@@ -244,23 +216,22 @@
         '<button class="sknx-result-close" type="button" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
       "</div>";
 
+    // RESULTS FIRST (owner directive): the differential leads; the concise finding line follows; generic
+    // caveats live in the small footer at the very bottom.
     var body =
       '<div class="sknx-result-body">' +
-        expHtml +
-        oodHtml +
-        referHtml +
-        cautionHtml +
-        heatmapHtml +
         '<div class="sknx-sec-title">Differential</div>' +
         dxHtml +
+        findingHtml +
         lesionHtml +
-        '<div class="sknx-disc">' + ic("info") + "<span>" + esc(disclaimerText(a.disclaimerKey)) + "</span></div>" +
+        heatmapHtml +
         '<div class="sknx-report-host" id="sknxReportHost" aria-live="polite"><div class="sknx-report-loading">' + ic("hourglass_empty") + "<span>Preparing educational report&hellip;</span></div></div>" +
         '<div class="sknx-actions">' +
           '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic("bookmark") + "Save case</button>" +
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
         "</div>" +
         rxAffordance(a) +
+        footerHtml +
       "</div>";
 
     host.innerHTML = head + body;
