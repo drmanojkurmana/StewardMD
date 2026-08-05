@@ -21515,7 +21515,7 @@
       "specialistReview": false
     },
     {
-      "id": "pair-colchicine-cyp3a4-pgp",
+      "id": "pair-colchicine-cyp3a4strong",
       "type": "pair",
       "subjects": [
         {
@@ -21528,9 +21528,33 @@
         }
       ],
       "severity": "contraindicated",
-      "mechanism": "Strong CYP3A4 and P-glycoprotein inhibitors (macrolides such as clarithromycin/erythromycin, azole antifungals, ritonavir, and similar) block colchicine elimination.",
+      "mechanism": "Strong CYP3A4 inhibitors (clarithromycin, azole antifungals such as ketoconazole/itraconazole, ritonavir and similar) block colchicine metabolism.",
       "effect": "Colchicine accumulation causing potentially fatal toxicity (pancytopenia, neuromyopathy, multi-organ failure), especially in renal or hepatic impairment.",
-      "action": "Avoid the combination. If a strong CYP3A4/P-gp inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label, and the combination is contraindicated in renal or hepatic impairment.",
+      "action": "Avoid the combination. If a strong CYP3A4 inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label; the combination is contraindicated in renal or hepatic impairment.",
+      "monitoring": "If unavoidable, monitor full blood count and for GI/neuromuscular toxicity, and involve a specialist.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": true
+    },
+    {
+      "id": "pair-colchicine-pgp",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "colchicine"
+        },
+        {
+          "kind": "class",
+          "value": "pgp_inhibitor"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "P-glycoprotein inhibitors (ciclosporin/cyclosporine, verapamil, amiodarone and similar) block colchicine efflux and elimination. Cyclosporine + colchicine is an explicit on-label contraindication.",
+      "effect": "Colchicine accumulation causing potentially fatal toxicity (pancytopenia, neuromyopathy, multi-organ failure), especially in renal or hepatic impairment.",
+      "action": "Avoid the combination. If a P-gp inhibitor is essential, colchicine must be interrupted or substantially dose-reduced per label; the combination is contraindicated in renal or hepatic impairment.",
       "monitoring": "If unavoidable, monitor full blood count and for GI/neuromuscular toxicity, and involve a specialist.",
       "sourceId": "openfda-labeling",
       "evidence": "established",

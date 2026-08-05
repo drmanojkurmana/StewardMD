@@ -36,6 +36,15 @@ test("CR2: colchicine + clarithromycin is flagged (contraindicated)", () => {
   assert.match(text("colchicine", "clarithromycin"), /contraindicated/);
 });
 
+// ── CR2 residual (R1 re-review): P-gp inhibitors (cyclosporine/verapamil) must also be flagged ──
+test("CR2: colchicine + cyclosporine (on-label contraindication) is flagged", () => {
+  assert.ok(fires("colchicine", "cyclosporine"), "must fire");
+  assert.match(text("colchicine", "cyclosporine"), /contraindicated/);
+});
+test("CR2: colchicine + verapamil (P-gp inhibitor) is flagged", () => {
+  assert.ok(fires("colchicine", "verapamil"));
+});
+
 // ── CR3: paracetamol/naloxone are NOT opioids/CNS-depressants -> no false alerts ──
 test("CR3: paracetamol + diazepam produces NO interaction (was a false coma/respiratory alert)", () => {
   assert.equal(alerts("paracetamol", "diazepam").length, 0);
