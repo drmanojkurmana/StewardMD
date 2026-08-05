@@ -3054,9 +3054,10 @@
       var body = order.map(function (g) {
         return '<div class="icu-sec-lbl" style="margin:8px 0 2px">' + esc(g) + "</div>" + groups[g].map(function (it) {
           var r = _raw.rounds[it.k] || {};
-          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;color:' + (r.done ? "var(--ok)" : "var(--muted)") + '">' + (r.done ? "☑" : "☐") + "</button>" +
+          // R5 UX#5: icon-only round buttons need a VoiceOver name + a >=44pt tap target.
+          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" aria-label="' + (r.done ? "Mark not done: " : "Mark done: ") + esc(it.label) + '" aria-pressed="' + (r.done ? "true" : "false") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;min-width:44px;min-height:44px;color:' + (r.done ? "var(--ok)" : "var(--muted)") + '">' + (r.done ? "☑" : "☐") + "</button>" +
             '<span style="flex:1">' + esc(it.label) + (r.note ? ' <span style="color:var(--muted);font-size:12px">— ' + esc(r.note) + "</span>" : "") + "</span>" +
-            '<button data-icu-act="roundnote:' + it.k + '" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:14px">✎</button></div>';
+            '<button data-icu-act="roundnote:' + it.k + '" aria-label="Edit note: ' + esc(it.label) + '" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:14px;min-width:44px;min-height:44px">✎</button></div>';
         }).join("");
       }).join("");
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
@@ -5636,7 +5637,7 @@
     }
   }
 
-  function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
+  function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; modalEl.setAttribute("role", "dialog"); modalEl.setAttribute("aria-modal", "true"); document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
   function openRoundNote(k) {
     ensureModal();
     var it = ROUNDS_ITEMS.filter(function (x) { return x.k === k; })[0] || { label: k };
@@ -7051,9 +7052,9 @@
         '<p class="icu-doc-sub" style="margin:0 0 10px">Remove this patient from the shared unit for everyone. This cannot be undone.</p>' +
         '<button class="icu-btn ghost" data-icu-act="grprmpt" style="color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Remove patient from unit</button></div>';
     }
-    return '<div class="icu-card"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("trash", "🗑") + ' Discharge / remove patient</div>' +
-      '<p class="icu-doc-sub" style="margin:0 0 10px">Remove this patient from your board and saved patients. This cannot be undone.</p>' +
-      '<button class="icu-btn ghost" data-icu-act="dischargept" style="color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Discharge / remove patient</button></div>';
+    return '<div class="icu-card"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("trash", "🗑") + ' Remove patient</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Delete this patient from your board and saved patients. This cannot be undone. To write a discharge summary, use the Discharge Creator above instead.</p>' +
+      '<button class="icu-btn ghost" data-icu-act="dischargept" style="color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Remove patient from board</button></div>';
   }
   // Discharge / remove the CURRENT patient from the workspace → confirm → remove saved copy (if any)
   // → clear the live state → back to the unit board. Solo mode (group has grpRemovePatient).
