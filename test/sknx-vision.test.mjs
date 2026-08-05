@@ -56,11 +56,14 @@ test("analyze() melanoma classification -> SknX REFERS, no Rx (full native path,
   assert.match(a.referralReason, /melanoma/i);
 });
 
-test("analyze() benign (nevus) -> no referral, Rx-eligible", async () => {
+test("analyze() benign (nevus) -> no referral, NOT Rx-eligible (H7 melanoma caveat)", async () => {
   const raw = await VIS.analyze({}, undefined, { plugin: fakePlugin(NEV), base64: "AAAA" });
   const a = ENG.makeAnalysis(raw, "v2beta");
   assert.equal(a.referral, false);
-  assert.equal(a.rxEligible, true);
+  // H7 (clinical_safety.md): a pigmented/melanocytic read can be an unrecognised melanoma, so it is
+  // never Rx-eligible and carries a "cannot exclude melanoma" caveat even without a red flag.
+  assert.equal(a.rxEligible, false);
+  assert.match(String(a.caution || ""), /melanoma/i);
   assert.equal(a.lesion.top, "nevus");
 });
 

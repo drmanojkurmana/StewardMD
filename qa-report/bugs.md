@@ -21,7 +21,7 @@ Per your rules: clinical logic was NOT auto-modified; one safe fix was applied (
 | # | Area | Issue | Where |
 |---|---|---|---|
 | H1 | Security | Native SknX/ThoreX POST patient images **directly to raw Cloud Run**, bypassing the (existing) auth edge | `sknx-cloudvision.js:18`, `thorex-net.js:26` |
-| H2-H8 | Clinical | Missed tier-1 DDIs: azathioprine+febuxostat, digoxin+clarithromycin, K-sparing+K, lithium+thiazide, anticoag+antiplatelet, DOAC+CYP3A4/P-gp; SknX melanoma can be rxEligible | see `clinical_safety.md` H1-H7 |
+| ~~H2-H8~~ | Clinical | **FIXED** (2026-08-05, test-driven) - azathioprine+febuxostat, digoxin+clarithromycin, K-sparing+K, lithium+thiazide/loop, anticoag+antiplatelet, DOAC+P-gp now flagged; SknX pigmented/melanocytic read forced `rxEligible=false` + melanoma caveat | see `clinical_safety.md` H1-H7 status |
 | H9 | Performance | 26 MB KB enrichment parsed on **every** cold start (comment says 4.8 MB) | `kb.enrichment*.js`, `index.html:1487` |
 | H10 | Performance | 67 feature scripts (~4.3 MB) load on every boot regardless of use | `index.html` script list |
 | H11 | Performance | GHIS search: no debounce + full re-render per keystroke; import fans out 25 concurrent proxy calls | `ghis-ward.js:942-959,516-650` |
@@ -49,7 +49,14 @@ GoogleService-Info.plist committed (public-safe), owner emails in wrangler.toml 
   antibiotics/amiodarone + fluoroquinolones now flagged (new `cyp2c9_inhibitor` class + 2 rules + hyphen
   data-bug reconciled); colchicine x strong CYP3A4/P-gp inhibitor now CONTRAINDICATED; paracetamol/naloxone
   de-classified so the false "coma and death" alerts are gone while the genuine opioid+benzo alert is
-  preserved. **R1 re-review in flight.** (H1-H8, quota H13, and all Medium/Low remain open.)
+  preserved. **R1 re-review CONFIRMED-GOOD** (commit 4f318012).
+- **H1-H7 (clinical HIGH items) - FIXED, test-driven** (`test/interaction-high-fixes.test.mjs` 17/17,
+  `test/sknx-melanoma-caveat.test.mjs` 8/8, golden regression unchanged, critical-fix suite still 12/12):
+  azathioprine+febuxostat, digoxin+P-gp inhibitors, K-sparing+K supplement, lithium+thiazide/loop,
+  anticoagulant+antiplatelet, and DOAC+P-gp inhibitor now flagged (widen-to-class over stack-new to avoid
+  double-fires; lisinopril de-tagged as a prerequisite); SknX now forces `rxEligible=false` + a melanoma
+  caveat on any pigmented/melanocytic top differential. **R1 re-review of the HIGH fixes in flight.**
+  (Security H1/H9-H12, quota H13, and all Medium/Low remain open.)
 - **`calculators.js:5463`** - removed the `⚠️` emoji from a warning div (no-UI-emoji convention). `no-ui-emoji`
   test now green.
 - Net: test failures 6 -> 5 (remaining 5 = documented quota bug + 3 environment-dependent).

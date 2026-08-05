@@ -36,7 +36,43 @@ twice. This is a true-positive redundancy (both alerts are correct), not the CR3
 rule-match dedup by drug-pair in the engine would collapse it. Also open (pre-existing, non-regression):
 colchicine + erythromycin/diltiazem (not tagged strong-CYP3A4 or P-gp) still miss - a data-tagging gap.
 
-H1-H7 + M/L below remain open. The original findings are preserved below for the record.
+## STATUS UPDATE (2026-08-05): H1-H7 FIXED (test-driven)
+
+All seven HIGH items are now remediated, test-first, with the golden regression unchanged.
+
+**H1-H6 (DDI ruleset, `interaction-rules.js`)** - guarded by `test/interaction-high-fixes.test.mjs` (17/17),
+`test/interaction-critical-fixes.test.mjs` still 12/12, `run-golden.mjs` all green, `run-interactions.mjs`
+clinical assertions pass (its 1 failure is the pre-existing home-tile locator, not the ruleset). A
+false-positive sweep of common safe pairs (amlodipine+metformin, lisinopril+atorvastatin, aspirin+paracetamol,
+digoxin+amlodipine, apixaban+metformin, spironolactone+metformin, lithium+paracetamol, HCTZ+metformin,
+potassium+metformin) stays silent. Fix summary:
+- **H1** - `pair-allopurinol-azathioprine` -> `pair-xanthineoxidase-azathioprine`, subject widened to the
+  `xanthine_oxidase_inhibitor` class so azathioprine + febuxostat now fires (allopurinol still fires).
+- **H2** - the two named `pair-digoxin-amiodarone` + `pair-digoxin-verapamil` rules collapsed into one
+  `pair-digoxin-pgp` (digoxin x `pgp_inhibitor` class). digoxin + clarithromycin now fires; amiodarone fires
+  exactly once (no double).
+- **H3** - new `pair-potassium-sparing-supplement` (`potassium_sparing_diuretic` x `potassium_supplement`);
+  spironolactone/amiloride + potassium now fire.
+- **H4** - lisinopril de-tagged (`["ace_inhibitor","raas"]`, was mis-tagged diuretic/thiazide) + two new rules
+  `pair-lithium-thiazide` and `pair-lithium-loop`; lithium + HCTZ/furosemide now fire, lithium + lisinopril
+  still fires exactly once.
+- **H5** - `pair-warfarin-aspirin` -> `pair-anticoagulant-antiplatelet` (class x class); warfarin+clopidogrel,
+  apixaban+aspirin, warfarin+aspirin all fire. (warfarin+aspirin also fires the pre-existing warfarin x NSAID
+  rule - a true-positive redundancy, count unchanged from before the fix.)
+- **H6** - new `pair-doac-pgp` (`doac` x `pgp_inhibitor`); apixaban+clarithromycin, rivaroxaban+ketoconazole,
+  dabigatran+verapamil now fire.
+
+**H7 (SknX, `sknx-engines.js`)** - guarded by `test/sknx-melanoma-caveat.test.mjs` (8/8). ANY pigmented/
+melanocytic TOP differential (nevus, lentigo, seborrheic/benign keratosis, ...) now forces `rxEligible=false`
+and surfaces a "cannot exclude melanoma" point-of-decision caveat, closing the gap where a melanoma read as a
+benign nevus (no ABCDE, not OOD) would have been `referral=false, rxEligible=true`. Non-pigmented reads
+(psoriasis) stay Rx-eligible; the existing malignant-lesion, red-flag, and OOD guardrails are unchanged. The
+two on-device-vision tests that asserted the old (unsafe) "nevus -> Rx-eligible" contract were updated to the
+new contract.
+
+**R1 RE-REVIEW: in flight** (dispatched after this commit, mirroring the CR loop).
+
+M/L below remain open. The original findings are preserved below for the record.
 
 ## CRITICAL (engine-reproduced - now FIXED, see status above)
 
@@ -105,9 +141,11 @@ H1-H7 + M/L below remain open. The original findings are preserved below for the
 - FollowCare correctly routes side-effects to `notify_doctor`, never changes drugs, blocks a false "Green"
   on unanswered red-flags.
 
-## Gate decision (from the clinical auditor)
-**Block the DDI ruleset until C1-C3 are remediated** (missed warfarin-antibiotic + colchicine interactions;
-the paracetamol/naloxone false-positive eroding the opioid+benzo alert). H1-H6 are class-wiring fixes on
-well-known interactions - ship in the same pass. H7 (SknX melanoma) is flag-OFF but needs the pigmented-
-lesion caveat before enablement. **These are the single highest-priority items in the whole QA pass** -
-they are direct patient-safety gaps, and per your instruction NONE were auto-modified.
+## Gate decision (from the clinical auditor) - UPDATED 2026-08-05
+Original decision: **Block the DDI ruleset until C1-C3 are remediated** (missed warfarin-antibiotic +
+colchicine interactions; the paracetamol/naloxone false-positive eroding the opioid+benzo alert), with H1-H6
+class-wiring fixes shipped in the same pass and H7 (SknX melanoma) caveated before enablement.
+
+**Now:** CR1-CR3 and H1-H7 are all remediated test-first (see the two STATUS UPDATE blocks above); the DDI
+ruleset block is cleared pending the R1 re-review of the HIGH fixes. The remaining Medium/Low items are
+alert-quality / coverage-breadth improvements, not tier-1 patient-safety gaps, and stay open as fast-follow.

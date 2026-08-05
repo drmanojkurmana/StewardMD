@@ -206,9 +206,7 @@
     ],
     "lisinopril": [
       "ace_inhibitor",
-      "diuretic",
-      "raas",
-      "thiazide_diuretic"
+      "raas"
     ],
     "perindopril": [
       "ace_inhibitor",
@@ -21107,6 +21105,54 @@
       "specialistReview": false
     },
     {
+      "id": "pair-lithium-thiazide",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "thiazide_diuretic"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Thiazide diuretics cause sodium loss, which increases proximal renal reabsorption of lithium and reduces its clearance.",
+      "effect": "Rising serum lithium and risk of toxicity (tremor, confusion, ataxia, seizures, arrhythmia); a classic cause of lithium toxicity.",
+      "action": "Avoid where possible; if combined, reduce the lithium dose and monitor levels closely when starting, changing, or stopping the diuretic.",
+      "monitoring": "Serum lithium, renal function, sodium and volume status; watch for signs of lithium toxicity.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-lithium-loop",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "loop_diuretic"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Loop diuretics can reduce renal lithium clearance, particularly where they cause volume depletion.",
+      "effect": "Rising serum lithium and risk of toxicity (tremor, confusion, ataxia, seizures, arrhythmia).",
+      "action": "Monitor lithium levels closely and adjust the lithium dose when starting, changing, or stopping the diuretic; maintain hydration and sodium intake.",
+      "monitoring": "Serum lithium, renal function, sodium and volume status; watch for signs of lithium toxicity.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "pair-ace-potassium-sparing",
       "type": "pair",
       "subjects": [
@@ -21131,12 +21177,36 @@
       "specialistReview": false
     },
     {
-      "id": "pair-allopurinol-azathioprine",
+      "id": "pair-potassium-sparing-supplement",
       "type": "pair",
       "subjects": [
         {
-          "kind": "generic",
-          "value": "allopurinol"
+          "kind": "class",
+          "value": "potassium_sparing_diuretic"
+        },
+        {
+          "kind": "class",
+          "value": "potassium_supplement"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Potassium-sparing diuretics reduce renal potassium excretion; adding a potassium supplement (or salt substitute) delivers an additional potassium load.",
+      "effect": "Risk of significant hyperkalaemia, which can cause life-threatening arrhythmias, especially in renal impairment or diabetes.",
+      "action": "Avoid routine potassium supplements with a potassium-sparing diuretic unless a documented deficit needs correction; if combined, use the lowest dose and recheck early.",
+      "monitoring": "Check serum potassium and renal function within 1 week of starting or dose change, then periodically.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-xanthineoxidase-azathioprine",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "xanthine_oxidase_inhibitor"
         },
         {
           "kind": "generic",
@@ -21227,7 +21297,7 @@
       "specialistReview": false
     },
     {
-      "id": "pair-digoxin-amiodarone",
+      "id": "pair-digoxin-pgp",
       "type": "pair",
       "subjects": [
         {
@@ -21235,42 +21305,42 @@
           "value": "digoxin"
         },
         {
-          "kind": "generic",
-          "value": "amiodarone"
+          "kind": "class",
+          "value": "pgp_inhibitor"
         }
       ],
       "severity": "major",
-      "mechanism": "Amiodarone inhibits P-glycoprotein–mediated renal and biliary elimination of digoxin, raising serum digoxin concentrations.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, heart block) as levels roughly double.",
-      "action": "Reduce the digoxin dose (commonly by about half) when starting amiodarone and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting amiodarone; monitor for toxicity.",
+      "mechanism": "P-glycoprotein inhibitors (amiodarone, verapamil, clarithromycin, cyclosporine and similar) inhibit P-gp-mediated renal and biliary elimination of digoxin, raising serum digoxin concentrations; some (amiodarone, verapamil) also slow AV-nodal conduction.",
+      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); levels may rise by roughly 50-100%.",
+      "action": "Anticipate a rise in digoxin level when starting the P-gp inhibitor; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
+      "monitoring": "Check serum digoxin level and ECG/heart rate after starting or changing the interacting drug; monitor for toxicity.",
       "sourceId": "openfda-labeling",
       "evidence": "established",
-      "reviewDate": "2026-07-04",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": false
     },
     {
-      "id": "pair-digoxin-verapamil",
+      "id": "pair-doac-pgp",
       "type": "pair",
       "subjects": [
         {
-          "kind": "generic",
-          "value": "digoxin"
+          "kind": "class",
+          "value": "doac"
         },
         {
-          "kind": "generic",
-          "value": "verapamil"
+          "kind": "class",
+          "value": "pgp_inhibitor"
         }
       ],
       "severity": "major",
-      "mechanism": "Verapamil inhibits P-glycoprotein–mediated renal and biliary clearance of digoxin, raising serum digoxin concentrations; both drugs also independently slow AV-nodal conduction.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); digoxin levels may rise by roughly 50–75%.",
-      "action": "Anticipate a rise in digoxin level when starting verapamil; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting or changing verapamil; monitor for toxicity.",
+      "mechanism": "P-glycoprotein inhibitors (and, for apixaban/rivaroxaban, concomitant strong CYP3A4 inhibition) reduce clearance of direct oral anticoagulants, raising drug exposure.",
+      "effect": "Increased anticoagulant exposure and bleeding risk; the effect is greatest when the inhibitor blocks both P-gp and CYP3A4 (e.g. clarithromycin, ketoconazole, itraconazole).",
+      "action": "Review the specific combination against the DOAC label: avoid or dose-reduce where the label advises, or select an alternative anticoagulant or interacting drug.",
+      "monitoring": "Monitor for signs of bleeding; assess renal function, which compounds the exposure increase for dabigatran and edoxaban.",
       "sourceId": "openfda-labeling",
       "evidence": "established",
-      "reviewDate": "2026-07-07",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": false
     },
@@ -21395,26 +21465,26 @@
       "specialistReview": false
     },
     {
-      "id": "pair-warfarin-aspirin",
+      "id": "pair-anticoagulant-antiplatelet",
       "type": "pair",
       "subjects": [
         {
-          "kind": "generic",
-          "value": "warfarin"
+          "kind": "class",
+          "value": "anticoagulant"
         },
         {
-          "kind": "generic",
-          "value": "aspirin"
+          "kind": "class",
+          "value": "antiplatelet"
         }
       ],
       "severity": "major",
-      "mechanism": "Additive haemostatic impairment: warfarin inhibits vitamin-K–dependent clotting factors while aspirin irreversibly inhibits platelet aggregation and injures gastric mucosa.",
+      "mechanism": "Additive impairment of haemostasis: the anticoagulant reduces clot formation while the antiplatelet irreversibly blocks platelet aggregation (and, for aspirin, injures gastric mucosa).",
       "effect": "Substantially increased risk of major and gastrointestinal bleeding.",
-      "action": "Use together only for a clear evidence-based indication (e.g. certain mechanical valves or recent ACS on specialist advice). Otherwise avoid; add gastroprotection when combined.",
-      "monitoring": "Monitor INR and for signs of bleeding; confirm the combination remains indicated at each review.",
+      "action": "Use together only for a clear evidence-based indication (e.g. recent ACS or PCI, or certain mechanical valves) on specialist advice. Otherwise avoid; add gastroprotection and use the shortest necessary duration when combined.",
+      "monitoring": "Monitor for signs of bleeding (and INR when a vitamin-K antagonist is involved); confirm the combination remains indicated at each review.",
       "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
-      "reviewDate": "2026-07-04",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": true
     },
