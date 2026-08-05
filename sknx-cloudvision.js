@@ -99,12 +99,23 @@
     return { generalProbs: general, lesionProbs: lesion, features: {}, engine: "derm-foundation-cloud" };
   }
 
+  // Firebase ID token (same pattern as thorex-llm). Attached when present so the endpoint can be the
+  // authenticated Worker proxy (/api/sknx). Null in a validation build hitting Cloud Run directly.
+  function idToken() {
+    try {
+      var u = typeof window !== "undefined" && window.firebase && firebase.auth && firebase.auth().currentUser;
+      if (u && u.getIdToken) return u.getIdToken().catch(function () { return null; });
+    } catch (e) {}
+    return Promise.resolve(null);
+  }
+
   function classify(dataURL, ep, fetchImpl) {
     var f = fetchImpl || (typeof fetch === "function" ? fetch : null);
     if (!f) return Promise.reject(new Error("no_fetch"));
-    return f(ep.replace(/\/$/, "") + "/classify", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image: dataURL })
+    return idToken().then(function (tok) {
+      var headers = { "Content-Type": "application/json" };
+      if (tok) headers.Authorization = "Bearer " + tok;
+      return f(ep.replace(/\/$/, "") + "/classify", { method: "POST", headers: headers, body: JSON.stringify({ image: dataURL }) });
     }).then(function (r) {
       if (!r.ok) throw new Error("cloud_http_" + r.status);
       return r.json();
@@ -136,6 +147,17 @@
     return false; // no way to obtain consent -> do not send
   }
 
+  // revokeConsent(): withdraw cloud-analysis consent (DPDP right to withdraw). Clears the stored flag so
+  // the next analyze re-prompts; a settings toggle / the console's "revoke" link call this.
+  function revokeConsent() {
+    try { if (typeof window !== "undefined" && window.localStorage) window.localStorage.removeItem("sknx_cloud_consent"); } catch (e) {}
+    return true;
+  }
+  // hasConsent(): current consent state (for a settings toggle to reflect).
+  function hasConsent() {
+    try { return typeof window !== "undefined" && window.localStorage && window.localStorage.getItem("sknx_cloud_consent") === "1"; } catch (e) { return false; }
+  }
+
   // analyze(image, opts) -> Promise<raw>. Rejects on any failure so sknx-providers surfaces an honest
   // error (never masks with the mock). opts.{endpoint, fetchImpl, skipConsent} injectable for tests.
   function analyze(image, opts) {
@@ -150,7 +172,11 @@
       return classify(dataURL, ep, opts.fetchImpl);
     }).then(function (res) {
       if (!res || !res.differential) throw new Error("cloud_bad_response");
-      return mapDiffToRaw(res.differential);
+      var raw = mapDiffToRaw(res.differential);
+      // OOD/low-confidence: the server withheld the differential (off-domain / ungradable image). Carry
+      // the flag so the screen shows a "no confident reading" state, not a benign-looking empty result.
+      if (res.ood) { raw.ood = true; raw.oodReason = res.caveat || "No confident reading - re-take the photo (in focus, lesion centered) or assess clinically."; }
+      return raw;
     });
   }
 
@@ -166,7 +192,8 @@
   }
 
   var API = {
-    available: available, analyze: analyze, warmup: warmup, ensureConsent: ensureConsent,
+    available: available, analyze: analyze, warmup: warmup,
+    ensureConsent: ensureConsent, revokeConsent: revokeConsent, hasConsent: hasConsent,
     mapDiffToRaw: mapDiffToRaw, toDataURL: toDataURL, endpoint: endpoint, MALIGNANT_MAP: MALIGNANT_MAP
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

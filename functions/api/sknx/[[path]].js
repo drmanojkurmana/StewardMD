@@ -85,6 +85,29 @@ export async function onRequest(context) {
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
 
   try {
+    // POST /api/sknx/classify - authenticated proxy to the PRIVATE Cloud Run dermatology classifier.
+    // The image travels to our OWN endpoint (server-to-server); the Cloud Run URL + X-Sknx-Key stay
+    // server-side (never in the client bundle). This is the production posture that replaces the
+    // client's direct-to-Cloud-Run validation path (security B1 / DPDP C2). Returns 503 until
+    // SKNX_CLASSIFY_URL is provisioned, so it fails closed.
+    if (seg === "classify" && request.method === "POST") {
+      const uid = await callerUid(request, env);
+      if (!uid) return json({ ok: false, error: "signin_required" }, 401, request);
+      const feat = await requireFeature(env, request, "sknx_cloud", { uid });
+      if (!feat.allowed) return json({ ok: false, error: "feature_off", feature: "sknx_cloud" }, 403, request);
+      const rl = await rateLimit(env, uid);
+      if (!rl.ok) return json({ ok: false, error: "rate_limited" }, rl.status || 429, request);
+      const target = env.SKNX_CLASSIFY_URL;
+      if (!target) return json({ ok: false, error: "classify_unconfigured" }, 503, request);
+      const body = await readBody(request);
+      if (!body || typeof body.image !== "string" || !body.image) return json({ ok: false, error: "image_required" }, 400, request);
+      const headers = { "Content-Type": "application/json" };
+      if (env.SKNX_API_KEY) headers["X-Sknx-Key"] = env.SKNX_API_KEY;
+      const upstream = await fetch(target.replace(/\/$/, "") + "/classify", { method: "POST", headers, body: JSON.stringify({ image: body.image }) });
+      const text = await upstream.text();
+      return new Response(text, { status: upstream.status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) });
+    }
+
     if (seg !== "report" || request.method !== "POST") return json({ error: "not_found" }, 404, request);
 
     const uid = await callerUid(request, env);

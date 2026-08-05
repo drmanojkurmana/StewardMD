@@ -79,6 +79,16 @@ test("analyze() benign differential -> no referral, Rx-eligible, top dx surfaced
   assert.equal(a.differential[0].label, "Psoriasis");
 });
 
+test("analyze() OOD response -> raw.ood carried through, engine refuses a confident read", async () => {
+  const oodStub = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ differential: [], ood: true, caveat: "off-domain image" }) });
+  const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: oodStub, skipConsent: true });
+  assert.equal(raw.ood, true);
+  assert.match(raw.oodReason, /off-domain/);
+  const a = ENG.makeAnalysis(raw, "v2beta");
+  assert.equal(a.ood, true);
+  assert.equal(a.rxEligible, false);
+});
+
 test("analyze() rejects (never masks) when the endpoint is unset", async () => {
   await assert.rejects(() => CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: "__SKNX_CLOUD_ENDPOINT__" }), /cloud_endpoint_unset/);
 });
@@ -109,4 +119,15 @@ test("consent gate: analyze rejects (no image sent) when the user declines conse
 test("consent gate: skipConsent bypasses (already consented upstream)", async () => {
   const raw = await CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: fetchStub(BENIGN), skipConsent: true });
   assert.equal(raw.engine, "derm-foundation-cloud");
+});
+
+test("consent withdrawal: revokeConsent clears it so analyze re-prompts (DPDP right to withdraw)", async () => {
+  const store = { sknx_cloud_consent: "1" };
+  globalThis.window = { localStorage: { getItem: (k) => store[k] || null, setItem: (k, v) => { store[k] = v; }, removeItem: (k) => { delete store[k]; } }, confirm: () => false };
+  try {
+    assert.equal(CV.hasConsent(), true);
+    CV.revokeConsent();
+    assert.equal(CV.hasConsent(), false, "consent cleared");
+    await assert.rejects(() => CV.analyze("data:image/jpeg;base64,ZZZ", { endpoint: EP, fetchImpl: () => Promise.resolve({ ok: true, json: () => ({}) }) }), /cloud_consent_declined/);
+  } finally { delete globalThis.window; }
 });

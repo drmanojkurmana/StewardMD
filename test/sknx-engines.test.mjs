@@ -57,6 +57,14 @@ test("v1 benign lesion: no referral, no lesion display (guardrail only fires on 
   assert.equal(a.rxEligible, true);
 });
 
+test("OOD: a withheld (ood) raw -> ood output, not Rx-eligible, no differential", () => {
+  const a = ENG.makeAnalysis({ generalProbs: [], lesionProbs: [], features: {}, ood: true, oodReason: "off-domain" }, "v2beta");
+  assert.equal(a.ood, true);
+  assert.equal(a.oodReason, "off-domain");
+  assert.equal(a.rxEligible, false, "an ungradable image must never be Rx-eligible");
+  assert.equal(a.differential.length, 0);
+});
+
 test("SCAR caution: a prominent 'Drug Rash' surfaces a severe-reaction caution (not a hard referral)", () => {
   const a = ENG.makeAnalysis({
     generalProbs: [{ label: "Drug Rash", prob: 0.8 }, { label: "Eczema", prob: 0.2 }],

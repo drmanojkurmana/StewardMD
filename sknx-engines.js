@@ -135,13 +135,18 @@
     var caution = null;
     var scar = (differential || []).filter(function (x) { return !!SCAR_RISK[String(x.label == null ? "" : x.label).toLowerCase().trim()] && (x === differential[0] || x.prob >= 0.5); })[0];
     if (scar) { caution = "Possible " + scar.label + " - if mucosal involvement, skin pain, blistering, target lesions, or systemic symptoms, treat as a possible severe reaction (SJS / TEN / DRESS) and refer urgently."; }
+    // OOD / low-confidence (vision engine withheld a differential): never Rx-eligible, and surfaced as a
+    // distinct "no confident reading" state - not a benign result (AI-safety C1).
+    var ood = !!raw.ood;
     return {
       differential: differential,
       lesion: lesion,
       referral: referral,
       referralReason: reason,
       caution: caution,
-      rxEligible: !referral,
+      ood: ood,
+      oodReason: ood ? (raw.oodReason || null) : null,
+      rxEligible: !referral && !ood,
       disclaimerKey: "educational_not_clinical"
     };
   }

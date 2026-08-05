@@ -204,6 +204,16 @@
         "</div>" +
       "</div>" : "";
 
+    // OOD / no-confident-reading banner — shown when the engine withheld a differential (off-domain or
+    // low-confidence image). Distinct from a benign result: prompts a re-take / clinical assessment.
+    var oodHtml = a.ood ?
+      '<div class="sknx-caution" role="alert">' + ic("help") +
+        '<div class="sknx-refer-body">' +
+          '<b class="sknx-refer-title">No confident reading</b>' +
+          '<span class="sknx-refer-reason">' + esc(a.oodReason || "The image is not a clear, gradable lesion. Re-take the photo or assess clinically.") + "</span>" +
+        "</div>" +
+      "</div>" : "";
+
     // Severe-reaction caution (SJS/TEN/DRESS) — amber, distinct from the red malignancy referral. Shown
     // when the engine set a.caution (a prominent drug-reaction pattern); prompts a danger-feature check.
     var cautionHtml = a.caution ?
@@ -237,6 +247,7 @@
     var body =
       '<div class="sknx-result-body">' +
         expHtml +
+        oodHtml +
         referHtml +
         cautionHtml +
         heatmapHtml +
