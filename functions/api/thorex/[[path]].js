@@ -176,6 +176,28 @@ export async function routeLLM(env, kind, body) {
 
 const VALID_KINDS = ["learn", "impression", "correlate", "ddx"];
 
+// Per-uid abuse gate for the image-analyze proxy (mirrors the sknx classify + thorex-llm limiters): a
+// >=2 s min gap + a daily cap, so one signed-in clinician can't loop multi-MB uploads at a GPU backend.
+// Namespaced "tx:analyze:" so it never collides with the llm limiter. Fail-open if no KV is bound.
+async function analyzeRateLimit(env, uid) {
+  const store = usageKv(env);
+  if (!store) return { ok: true };
+  const nowS = Math.floor(Date.now() / 1000);
+  try {
+    const minKey = "tx:analyze:rate:" + uid;
+    const last = await store.get(minKey);
+    if (last && (nowS - Number(last)) < 2) return { ok: false, status: 429 };
+    await store.put(minKey, String(nowS), { expirationTtl: 60 });
+    const day = new Date(nowS * 1000).toISOString().slice(0, 10);
+    const capKey = "tx:analyze:count:" + uid + ":" + day;
+    const cur = Number(await store.get(capKey)) || 0;
+    const cap = Number(env.THOREX_ANALYZE_DAILY_CAP) || 120;
+    if (cur >= cap) return { ok: false, status: 429 };
+    await store.put(capKey, String(cur + 1), { expirationTtl: 90000 });
+  } catch (e) { /* fail-open */ }
+  return { ok: true };
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -193,10 +215,15 @@ export async function onRequest(context) {
       if (!auid) return json({ ok: false, error: "signin_required" }, 401, request);
       const afeat = await requireFeature(env, request, "thorex_backend", { uid: auid });
       if (!afeat.allowed) return json({ ok: false, error: "feature_off", feature: "thorex_backend" }, 403, request);
+      const arl = await analyzeRateLimit(env, auid);
+      if (!arl.ok) return json({ ok: false, error: "rate_limited" }, arl.status || 429, request);
       const target = env.THOREX_ANALYZE_URL;
       if (!target) return json({ ok: false, error: "analyze_unconfigured" }, 503, request);
       let form;
       try { form = await request.formData(); } catch (e) { return json({ ok: false, error: "bad_multipart" }, 400, request); }
+      // Bound the upload before buffering/forwarding (edge memory + cost protection).
+      const filePart = form.get("file");
+      if (filePart && typeof filePart.size === "number" && filePart.size > 12 * 1024 * 1024) return json({ ok: false, error: "image_too_large" }, 413, request);
       const fheaders = {};
       if (env.THOREX_API_KEY) fheaders["X-Thorex-Key"] = env.THOREX_API_KEY;
       const up = await fetch(target.replace(/\/$/, "") + "/v1/cxr/analyze", { method: "POST", headers: fheaders, body: form });

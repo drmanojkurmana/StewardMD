@@ -14,7 +14,7 @@ function captureFetch(rec) {
 }
 async function urlFor(opts) {
   const rec = {};
-  const a = NET.remoteAnalyzer({ fetchImpl: captureFetch(rec) });
+  const a = NET.remoteAnalyzer({ fetchImpl: captureFetch(rec), timerFn: function () { return 0; } });   // no-op timer -> no dangling 90s timeout
   try { await a.analyze({ data: "x" }, "v1", () => {}); } catch (e) { /* expected 400 */ }
   return rec.url;
 }
