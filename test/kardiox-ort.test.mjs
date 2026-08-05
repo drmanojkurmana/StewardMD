@@ -53,5 +53,31 @@ const seqOrt = {
 await ORT.makeOrtAnalyzer({ ort: seqOrt, manifest, baseUrl: "x" }).analyze({ id: "seq", signal: leads }, () => {});
 ok("ensemble heads load sequentially — peak 1 concurrent session, not the full ensemble at once (CR4)", maxLive === 1);
 
+// R6 #2: a head-load failure must NOT poison the cached analyzer (leave a truthy partial _sessions that
+// silently runs a smaller ensemble forever). All-or-nothing: it surfaces an error, and the SAME analyzer
+// retries + fully loads on the next analysis.
+const flakyOrt = {
+  Tensor: fakeOrt.Tensor, _recovered: false,
+  InferenceSession: { create: async (p) => {
+    const s = String(p);
+    if (/STACH/.test(s) && !flakyOrt._recovered) { flakyOrt._recovered = true; throw new Error("simulated decode OOM"); }
+    return { run: async () => ({ logit: { data: Float32Array.from([/AFIB/.test(s) ? 4.0 : -4.0]) } }) };
+  } }
+};
+const flaky = ORT.makeOrtAnalyzer({ ort: flakyOrt, manifest, baseUrl: "x" });
+let ferr = null;
+try { await flaky.analyze({ id: "f1", signal: leads }, () => {}); } catch (e) { ferr = e; }
+ok("a head-load failure surfaces an error, not a silent partial ensemble (R6 #2)", !!ferr);
+const recovered = await flaky.analyze({ id: "f2", signal: leads }, () => {});
+ok("the SAME cached analyzer retries + fully loads next analysis (ensure not poisoned)", recovered && recovered.verdict === "Atrial fibrillation");
+
+// R6 #4: dispose() releases every cached ONNX session (frees the ensemble) so the provider cache can evict.
+let released = 0;
+const relOrt = { Tensor: fakeOrt.Tensor, InferenceSession: { create: async (p) => ({ run: async () => ({ logit: { data: Float32Array.from([/AFIB/.test(String(p)) ? 4.0 : -4.0]) } }), release: () => { released++; } }) } };
+const disp = ORT.makeOrtAnalyzer({ ort: relOrt, manifest, baseUrl: "x" });
+await disp.analyze({ id: "d1", signal: leads }, () => {});
+disp.dispose();
+ok("dispose() releases every cached session (frees the ~157 MB ensemble)", typeof disp.dispose === "function" && released === manifest.heads.length);
+
 console.log(`\nkardiox-ort: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

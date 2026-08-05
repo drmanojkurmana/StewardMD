@@ -150,15 +150,21 @@
           : (fetchImpl ? Promise.resolve(fetchImpl(resolve("manifest.json"))).then(function (r) { return r.json(); })
             : Promise.reject(err("runtime_unavailable", "no manifest and no fetch", "rhythm")));
         return manP.then(function (man) {
-          _manifest = man; _sessions = {};
+          _manifest = man;
           var heads = (man.heads || []).filter(function (h) { return h.file; });
           // Load the ensemble heads SEQUENTIALLY, not with Promise.all (CR4): creating all ~7 ONNX
           // sessions at once briefly holds several models' decode buffers simultaneously, spiking peak
           // memory on a phone. One-at-a-time keeps the transient footprint to a single model; the sessions
           // are cached (reused across analyses) so this one-time load cost is paid once.
+          // Build into a LOCAL dict and commit to _sessions ONLY after every head loads (R6): otherwise a
+          // single head failure would leave a truthy, partial _sessions that the ensure() guard treats as
+          // "loaded" forever - silently running a smaller ensemble (e.g. a missing AFIB head) for the rest
+          // of the session. All-or-nothing: a rejection leaves _sessions null, so the next call retries
+          // cleanly and we never run a clinically-incomplete ensemble without surfacing it.
+          var loaded = {};
           return heads.reduce(function (chain, h) {
-            return chain.then(function () { return sessionFor(h.file).then(function (s) { _sessions[h.pathology] = s; }); });
-          }, Promise.resolve());
+            return chain.then(function () { return sessionFor(h.file).then(function (s) { loaded[h.pathology] = s; }); });
+          }, Promise.resolve()).then(function () { _sessions = loaded; });
         });
       });
     }
@@ -367,7 +373,14 @@
       });
     }
 
-    return { kind: "ecglib-ort", analyze: analyze, analyzePaper: analyzePaper, ensure: ensure,
+    // Release the cached ONNX sessions (onnxruntime-web InferenceSession.release) and reset so the next
+    // ensure() reloads cleanly. Lets the provider cache free a superseded ensemble instead of holding it
+    // resident for the whole app session (R6).
+    function dispose() {
+      try { if (_sessions) Object.keys(_sessions).forEach(function (k) { var s = _sessions[k]; try { if (s && typeof s.release === "function") s.release(); } catch (e) {} }); } catch (e) {}
+      _sessions = null;
+    }
+    return { kind: "ecglib-ort", analyze: analyze, analyzePaper: analyzePaper, ensure: ensure, dispose: dispose,
              _diag: { preprocess: preprocess, rpeaks: rpeaks, toLeads: toLeads } };
   }
 
