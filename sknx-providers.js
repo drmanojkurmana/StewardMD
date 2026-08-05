@@ -45,12 +45,17 @@
     var d = deps(injected);
     function stage(i) { try { if (onStage) onStage(STAGES[i], Math.round(((i + 1) / STAGES.length) * 100)); } catch (e) {} }
     stage(0); stage(1); stage(2);
+    // The capture pipeline (sknx-screens runPipeline) wraps the captured Blob as { id, source, data: Blob }.
+    // Every vision provider (cloud/WASM/native) expects the RAW Blob/dataURL, so unwrap .data here at the
+    // single seam. Without this the provider rejects "unsupported_image" synchronously (the photo never
+    // leaves the device). The mock still receives the original wrapper (it reads image.__mock).
+    var visImg = (image && image.data && ((typeof Blob !== "undefined" && image.data instanceof Blob) || typeof image.data === "string")) ? image.data : image;
     var v = d.vision, rawP;
     if (v.available()) {
       // A REAL classifier is selected (native Core ML or WASM). Do NOT mask a failure with the canned
       // mock - showing fake data (e.g. "psoriasis") for a failed real analysis is worse than an honest
       // error. Surface + log it; the screen then shows "result unavailable, try again".
-      rawP = Promise.resolve(v.analyze(image)).catch(function (err) {
+      rawP = Promise.resolve(v.analyze(visImg)).catch(function (err) {
         try { console.warn("[SknX] on-device analysis failed:", (err && err.message) || err); } catch (e) {}
         var e2 = new Error("analysis_failed"); e2.cause = err; throw e2;
       });

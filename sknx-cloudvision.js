@@ -61,33 +61,37 @@
   // string passes through unchanged.
   function toDataURL(image) {
     var MAX = 1024;
+    // encode(src): draw an ImageBitmap or <img> to a downscaled canvas + JPEG re-encode (strips EXIF/GPS).
+    function encode(src) {
+      var w = src.naturalWidth || src.width, h = src.naturalHeight || src.height;
+      var s = Math.min(1, MAX / Math.max(w || 1, h || 1));
+      var c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
+      c.getContext("2d").drawImage(src, 0, 0, c.width, c.height);
+      try { if (src.close) src.close(); } catch (e) {}
+      return c.toDataURL("image/jpeg", 0.9);
+    }
     return new Promise(function (resolve, reject) {
       try {
         if (typeof document === "undefined") { // node/tests - can't canvas
           if (typeof image === "string") return resolve(image);
           return reject(new Error("no_dom"));
         }
-        function fromImg(im, revoke) {
-          try {
-            var w = im.naturalWidth || im.width, h = im.naturalHeight || im.height;
-            var s = Math.min(1, MAX / Math.max(w || 1, h || 1));
-            var c = document.createElement("canvas");
-            c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
-            c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
-            if (revoke) { try { URL.revokeObjectURL(revoke); } catch (e) {} }
-            resolve(c.toDataURL("image/jpeg", 0.9)); // re-encode -> EXIF/GPS dropped
-          } catch (e) { reject(e); }
-        }
-        if (image && image.nodeName === "IMG") return fromImg(image, null);
+        if (image && image.nodeName === "IMG") return resolve(encode(image));
         if (typeof Blob !== "undefined" && image instanceof Blob) {
-          var url = URL.createObjectURL(image); var im = new Image();
-          im.onload = function () { fromImg(im, url); };
+          // createImageBitmap is the reliable decode for multi-MB camera photos in a WebView (a plain
+          // <img>+objectURL can OOM/stall). Fall back to <img> only if it's unavailable.
+          if (typeof createImageBitmap === "function") {
+            return createImageBitmap(image).then(function (b) { resolve(encode(b)); }).catch(function (e) { reject(e); });
+          }
+          var url = URL.createObjectURL(image), im = new Image();
+          im.onload = function () { try { resolve(encode(im)); } finally { try { URL.revokeObjectURL(url); } catch (e) {} } };
           im.onerror = function () { try { URL.revokeObjectURL(url); } catch (e) {} reject(new Error("img_load")); };
           im.src = url; return;
         }
-        if (typeof image === "string") { // a dataURL - re-encode to strip embedded metadata + downscale
+        if (typeof image === "string") { // a dataURL - re-encode via <img> to strip metadata + downscale
           var im2 = new Image();
-          im2.onload = function () { fromImg(im2, null); };
+          im2.onload = function () { resolve(encode(im2)); };
           im2.onerror = function () { resolve(image); }; // fall back to the original if it won't decode
           im2.src = image; return;
         }
