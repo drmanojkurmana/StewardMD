@@ -169,6 +169,16 @@ try {
   ok(h4.brady && h4.tachy, "H4: HR 30 → severe bradycardia, HR 190 → severe tachycardia (were silent)");
   ok(h4.bradyp && h4.tachyp, "H4: RR 6 → bradypnoea, RR 44 → severe tachypnoea (were silent)");
 
+  // Unit guard: a Fahrenheit temperature is auto-converted, not scored as a lethal Celsius hyperpyrexia
+  const tg = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"FTEMP",age:60,sex:"M"});
+    ICU.ingestMonitor({ temp:102 });   // 102 F = 38.9 C
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}), temp: (ICU.state().vitals[0]||{}).temp });
+  `);
+  ok(!tg.titles.some(t => /hyperpyrexia/i.test(t)), "unit guard: 102 (Fahrenheit) is NOT scored as a 102°C hyperpyrexia");
+  ok(Math.abs((tg.temp || 0) - 38.9) < 0.2, "unit guard: 102°F auto-converted to ~38.9°C");
+
   console.log(fails === 0 ? "\nALL GREEN — ICU alert-engine safety test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

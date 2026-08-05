@@ -175,14 +175,18 @@
     // screen). Max is false-negative-averse and cannot miss the dangerous reading.
     var _ls = [lv.lactate, g.lactate, L.lactate].map(Number).filter(function (x) { return isFinite(x); });
     var lac = _ls.length ? Math.max.apply(null, _ls) : null;
-    var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
+    var wtKnown = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0);
+    var wt = wtKnown ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown (adult population default)
+    var pedsPt = (p.age != null && p.age !== "" && !isNaN(+p.age) && +p.age < 16);   // R1 M3: the 70 kg default is unsafe for a child
 
     // ---- Electrolytes ----
     if (L.k != null) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_CRIT_HI + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_WARN_HI + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + L.k + " mEq/L (<" + K_CRIT_LO + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + L.k + " mEq/L", "Renal / Metabolic"); }
     if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + L.na + " mEq/L — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + L.na + " mEq/L", "Renal / Metabolic"); }
 
     // ---- Renal (creatinine / eGFR) + AKI composite (BUG #1, #9) ----
-    var oliguric = (lv.uop != null && lv.uop < 0.5 * wt), renalHigh = false;
+    // Oliguria is weight-based; for a child WITHOUT a recorded weight the 70 kg default would badly mis-set
+    // the threshold, so skip the weight-based flag until a paediatric weight is entered (R1 M3).
+    var oliguric = (lv.uop != null && (wtKnown || !pedsPt) && lv.uop < 0.5 * wt), renalHigh = false;
     if (L.creat != null) { if (L.creat > 3.4) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + L.creat + " mg/dL (>3.4) — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 1.5) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + L.creat + " mg/dL (>1.5)", "Renal / Metabolic"); } }
     if (L.egfr != null) { if (L.egfr < 15) { renalHigh = true; add("crit", "Critically low eGFR", "eGFR " + L.egfr + " mL/min (<15) — renal-failure range", "Renal / Metabolic"); } else if (L.egfr < 30) { renalHigh = true; add("warn", "Low eGFR", "eGFR " + L.egfr + " mL/min (<30)", "Renal / Metabolic"); } }
     if (oliguric) add("warn", "Oliguria", "Urine " + lv.uop + " mL/h (<0.5 mL/kg/h at " + wt + " kg" + (p.weightKg == null || +p.weightKg <= 0 ? ", assumed" : "") + ")", "Renal / Metabolic");
@@ -244,8 +248,13 @@
   // from captured images. They write into ICU_STATE → the whole dashboard
   // updates with zero UI changes. Manual-entry forms call them too.
   function ingestMonitor(o) {
-    o = o || {}; var v = pick(o, ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate", "cvp", "etco2", "gcs"]);
+    o = o || {}; var v = pick(o, ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate", "cvp", "etco2", "gcs", "o2"]);
     if (v.map == null && v.sbp != null && v.dbp != null) v.map = mapCalc(v.sbp, v.dbp);
+    // Unit guard (R1 advisory): a temperature above the ~45 C survivable ceiling is a Fahrenheit entry, so
+    // convert it (an OCR'd / typed 102 F becomes 38.9 C, not a false 102 C hyperpyrexia). Only done where
+    // it is UNAMBIGUOUS - glucose/PaO2 are NOT auto-detected because a wrong guess there could mask a real
+    // critical value (e.g. glucose 25 mg/dL is a true severe hypo, not 25 mmol/L).
+    if (v.temp != null && !isNaN(+v.temp) && +v.temp > 45) v.temp = Math.round(((+v.temp - 32) * 5 / 9) * 10) / 10;
     v.ts = o.ts || nowTs();
     STATE.vitals.push(v);
     if (STATE.vitals.length > MAX_SERIES) STATE.vitals.splice(0, STATE.vitals.length - MAX_SERIES);
@@ -5408,7 +5417,8 @@
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
-      { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
+      { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" },
+      { k: "o2", l: "On supplemental O₂?", t: "select", opts: ["", "No", "Yes"] } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
       { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
       { k: "ca", l: "Ca mg/dL", t: "number" }, { k: "ica", l: "Ionised Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mg/dL", t: "number" }, { k: "po4", l: "PO₄ mg/dL", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },

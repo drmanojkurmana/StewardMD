@@ -33,19 +33,30 @@
     if (pf >= 400) return 0; if (pf >= 300) return 1;
     if (pf >= 200) return 2; if (pf >= 100) return vent ? 3 : 2; return vent ? 4 : 2;
   }
+  // A vasopressor dose is only a mcg/kg/min value when the infusion UNIT says so (R1 H3). ICU infusions
+  // store a free-text unit + a mL/h pump rate; treating a raw mL/h as mcg/kg/min massively over-scores,
+  // and a pressor recorded only as mL/h must still count as "on a pressor" (not 0). So: compare against
+  // the mcg/kg/min thresholds ONLY when weight-based; otherwise recognise the pressor is running and floor
+  // the score at its "present" tier (never jump to the >0.1 top tier on an uninterpretable dose).
+  function wtBasedDose(i) {
+    var u = String(i.unit || "").toLowerCase().replace(/\s+/g, "");
+    return /(mcg|ug|µg)\/kg\/min/.test(u) ? num(i.dose) : null;
+  }
   function sofaCardio(state) {
     var v = V(state), map = num(v.map);
-    var dop = 0, dob = 0, epi = 0, nor = 0, inf = state.infusions || [];
-    inf.forEach(function (i) {
-      var n = (i.name || i.drug || "").toLowerCase(), d = num(i.rate != null ? i.rate : i.dose) || 0;
-      if (/dopamine/.test(n)) dop = Math.max(dop, d);
-      if (/dobutamine/.test(n)) dob = Math.max(dob, d);
-      if (/(epinephrine|adrenaline)/.test(n) && !/nor/.test(n)) epi = Math.max(epi, d);
-      if (/(norepinephrine|noradrenaline)/.test(n)) nor = Math.max(nor, d);
+    var dop = 0, dob = 0, epi = 0, nor = 0;                              // interpretable (mcg/kg/min) doses
+    var dopOn = false, dobOn = false, epiOn = false, norOn = false;      // present at all (any unit/rate)
+    (state.infusions || []).forEach(function (i) {
+      var n = (i.name || i.drug || "").toLowerCase(); if (!n) return;
+      var wd = wtBasedDose(i), on = (num(i.dose) || 0) > 0 || (num(i.rateMlHr) || 0) > 0 || wd != null;
+      if (/dopamine/.test(n)) { dopOn = dopOn || on; if (wd != null) dop = Math.max(dop, wd); }
+      else if (/dobutamine/.test(n)) { dobOn = dobOn || on; if (wd != null) dob = Math.max(dob, wd); }
+      else if (/(epinephrine|adrenaline)/.test(n) && !/nor/.test(n)) { epiOn = epiOn || on; if (wd != null) epi = Math.max(epi, wd); }
+      else if (/(norepinephrine|noradrenaline)/.test(n)) { norOn = norOn || on; if (wd != null) nor = Math.max(nor, wd); }
     });
-    if (dop > 15 || epi > 0.1 || nor > 0.1) return 4;
-    if (dop > 5 || (epi > 0 && epi <= 0.1) || (nor > 0 && nor <= 0.1)) return 3;
-    if ((dop > 0 && dop <= 5) || dob > 0) return 2;
+    if (dop > 15 || epi > 0.1 || nor > 0.1) return 4;                    // only from an interpretable high dose
+    if (dop > 5 || epiOn || norOn) return 3;                            // any nor/epi (incl. mL/h-only) floors at 3
+    if (dopOn || dobOn) return 2;                                       // dopamine low / dobutamine
     if (map !== null && map < 70) return 1;
     return 0;
   }
@@ -120,7 +131,11 @@
         ["rr", "spo2", "temp", "sbp", "hr"].forEach(function (k) { if (!has(v[k])) m.push(k.toUpperCase()); });
         if (!has(v.gcs)) m.push("GCS");
         if (m.length) return { __missing: m };
-        return { rr: v.rr, spo2: v.spo2, o2: (num(vent.fio2) || 0) > 0.21, temp: v.temp, sbp: v.sbp, hr: v.hr, acvpu: (v.gcs < 15 ? "x" : "a") };
+        // Supplemental-O2 point (R1 M5): honour an explicit "on O2" vitals flag, else infer from a recorded
+        // FiO2 (ventilator OR ABG), normalised to a fraction so room-air 21% does not falsely score.
+        var f = num(vent.fio2); if (f == null) f = num((s.abg || {}).fio2);
+        var onO2 = (v.o2 === "Yes") || (f != null && (f > 1 ? f / 100 : f) > 0.21);
+        return { rr: v.rr, spo2: v.spo2, o2: onO2, temp: v.temp, sbp: v.sbp, hr: v.hr, acvpu: (v.gcs < 15 ? "x" : "a") };
       }
     },
     {
@@ -228,10 +243,15 @@
     }
   ];
 
+  // Adult-derived / adult-validated scores — flagged when the patient is a child (R1 M3): qSOFA, SOFA,
+  // APACHE II, NEWS2 and the liver scores are not validated in paediatrics.
+  var ADULT_ONLY = { qsofa: 1, sofa: 1, apache2: 1, news2: 1, meld: 1, childpugh: 1 };
   function compute(state, medcalc) {
     medcalc = medcalc || window.MEDCALC;
     var byId = {}; ((medcalc && medcalc._calcs) || []).forEach(function (c) { byId[c.id] = c; });
     var dx = (state.patient && state.patient.diagnosis) || "";
+    var age = state.patient && state.patient.age;
+    var peds = (age != null && age !== "" && !isNaN(+age) && +age < 16);
     var out = [];
     DEFS.forEach(function (def) {
       if (!def.always) { if (!def.dx || !def.dx.test(dx)) return; }
@@ -240,7 +260,9 @@
       if (v && v.__missing) { out.push({ id: def.id, label: def.label, missing: v.__missing }); return; }
       var r; try { r = c.compute(v); } catch (e) { return; }
       if (!r || r.err) { out.push({ id: def.id, label: def.label, missing: ["valid inputs"] }); return; }
-      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: (r.i || "") + (def.note ? " " + def.note : ""), used: Object.keys(v), inputs: v });
+      var pedCaveat = (peds && ADULT_ONLY[def.id]);
+      var interp = (pedCaveat ? "Adult score, not validated in children (<16y) - interpret with caution. " : "") + (r.i || "") + (def.note ? " " + def.note : "");
+      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: interp, peds: !!pedCaveat, used: Object.keys(v), inputs: v });
     });
     return out;
   }
