@@ -43,6 +43,13 @@ GoogleService-Info.plist committed (public-safe), owner emails in wrangler.toml 
 `firestore-rules/rules.test.mjs` (needs Firebase emulator), `maik-routing.test.mjs`, `maik-native-stream.test.mjs`
 (need a live/staged backend).
 
-## FIXED in this pass (high-confidence, safe)
+## FIXED in this pass
+- **CR1, CR2, CR3 (clinical CRITICALs) - FIXED, test-driven** (commit 34fc5153,
+  `test/interaction-critical-fixes.test.mjs` 10/10, golden regression unchanged): warfarin+CYP2C9
+  antibiotics/amiodarone + fluoroquinolones now flagged (new `cyp2c9_inhibitor` class + 2 rules + hyphen
+  data-bug reconciled); colchicine x strong CYP3A4/P-gp inhibitor now CONTRAINDICATED; paracetamol/naloxone
+  de-classified so the false "coma and death" alerts are gone while the genuine opioid+benzo alert is
+  preserved. **R1 re-review in flight.** (H1-H8, quota H13, and all Medium/Low remain open.)
 - **`calculators.js:5463`** - removed the `⚠️` emoji from a warning div (no-UI-emoji convention). `no-ui-emoji`
-  test now green. (Test failures: 6 -> 5.)
+  test now green.
+- Net: test failures 6 -> 5 (remaining 5 = documented quota bug + 3 environment-dependent).

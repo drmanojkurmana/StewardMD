@@ -10,7 +10,20 @@ right class; `normalizeMed` strips `epc:*` umbrella classes. The whole ruleset i
 + 34 major** rules ("broad screen, not exhaustive"). The misses below are tier-1 interactions any
 clinician expects a checker to catch, plus data errors that fire dangerous alerts on SAFE combinations.
 
-## CRITICAL (block: these are patient-harm gaps, engine-reproduced)
+## STATUS UPDATE (2026-08-05): CR1-CR3 FIXED (commit 34fc5153, test-driven)
+
+All three CRITICALs below were remediated after this audit, test-first
+(`test/interaction-critical-fixes.test.mjs`, 10/10), with the golden regression unchanged
+(`run-golden.mjs` all green; `run-interactions.mjs` clinical assertions pass, its 1 failure is a
+pre-existing UI-tile locator). Full suite 1640 tests / 1635 pass, no new failures. Fix summary:
+CR1 -> new `cyp2c9_inhibitor` class on metronidazole/co-trimoxazole/cotrimoxazole/amiodarone + a
+`pair-warfarin-cyp2c9` rule + a `pair-warfarin-fluoroquinolone` rule + the co-trimoxazole hyphen bug
+reconciled. CR2 -> a `pair-colchicine-cyp3a4-pgp` contraindicated rule. CR3 -> removed the wrong
+`opioid`/`cns_depressant` classes from paracetamol + naloxone (combo products like paracetamol+codeine
+unaffected; morphine+diazepam still fires). **R1 re-review of the patch is in flight.** H1-H7 + M/L below
+remain open. The original findings are preserved below for the record.
+
+## CRITICAL (engine-reproduced - now FIXED, see status above)
 
 - **C1 - Warfarin + common antibiotics silently NOT flagged.** The only warfarin-antimicrobial rule keys
   on `cyp3a4_inhibitor`. Verified MISS: `warfarin + ciprofloxacin`, `+ metronidazole`, `+ co-trimoxazole`,
