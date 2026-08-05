@@ -111,6 +111,54 @@ try {
   `);
   ok(!c6.hypo, "latest vital chosen by max ts, not last-pushed — older hypotensive reading ignored (#6)");
 
+  // C1: a SPARSE follow-up reading must NOT blank still-active critical alerts (forward-filled snapshot)
+  const c1s = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"SPARSE",age:60,sex:"M"});
+    ICU.ingestMonitor({ ts:1000, hr:128, sbp:76, dbp:44, rr:30, spo2:84, temp:38.6, lactate:5.5, gcs:13 });
+    ICU.ingestMonitor({ ts:2000, spo2:93 });   // nurse re-charts ONLY the improved SpO2
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}) });
+  `);
+  ok(c1s.titles.some(t => /hypotension/i.test(t)), "C1: after a sparse SpO₂-only update, the still-active hypotension alert PERSISTS (not blanked)");
+  ok(c1s.titles.some(t => /lactat/i.test(t)) && c1s.titles.some(t => /qSOFA/i.test(t)), "C1: lactate + qSOFA alerts persist through the sparse update");
+  ok(!c1s.titles.some(t => /Severe hypoxaemia/i.test(t)), "C1: the improved SpO₂ 93 correctly clears the severe-hypoxaemia alert");
+
+  // C2: lactate from the LAB panel (not the vitals form) must still fire hyperlactataemia + sepsis
+  const c2 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"LACT",age:60,sex:"M"});
+    ICU.ingestMonitor({ rr:24, sbp:96 });        // 2 qSOFA-ish inputs, NO vitals lactate
+    ICU.ingestLabs({ lactate:8 });               // lactate arrives via the lab panel / Ward Sync
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}) });
+  `);
+  ok(c2.titles.some(t => /hyperlactat/i.test(t)), "C2: lactate 8 from the lab panel fires hyperlactataemia (was silent unless typed into Vitals)");
+
+  // C2b: lactate from the ABG slip must also fire
+  const c2b = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"ABGLACT",age:60,sex:"M"});
+    var s = ICU.state(); s.abg = { ph:7.28, lactate:9 };
+    ICU.ingestMonitor({ hr:96 });                // trigger recompute
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}) });
+  `);
+  ok(c2b.titles.some(t => /hyperlactat/i.test(t)), "C2: lactate 9 from the ABG slip fires hyperlactataemia");
+
+  // H4: extreme HR / RR now alert
+  const h4 = await J(`
+    var out = {};
+    ICU.reset(); ICU.ingestPatient({name:"BRADY",age:60,sex:"M"}); ICU.ingestMonitor({ hr:30 });
+    out.brady = (ICU.state().alerts||[]).some(function(a){return /bradycardia/i.test(a.title);});
+    ICU.reset(); ICU.ingestPatient({name:"TACHY",age:60,sex:"M"}); ICU.ingestMonitor({ hr:190 });
+    out.tachy = (ICU.state().alerts||[]).some(function(a){return /tachycardia/i.test(a.title);});
+    ICU.reset(); ICU.ingestPatient({name:"BRADYP",age:60,sex:"M"}); ICU.ingestMonitor({ rr:6 });
+    out.bradyp = (ICU.state().alerts||[]).some(function(a){return /bradypnoea/i.test(a.title);});
+    ICU.reset(); ICU.ingestPatient({name:"TACHYP",age:60,sex:"M"}); ICU.ingestMonitor({ rr:44 });
+    out.tachyp = (ICU.state().alerts||[]).some(function(a){return /tachypnoea/i.test(a.title);});
+    return JSON.stringify(out);
+  `);
+  ok(h4.brady && h4.tachy, "H4: HR 30 → severe bradycardia, HR 190 → severe tachycardia (were silent)");
+  ok(h4.bradyp && h4.tachyp, "H4: RR 6 → bradypnoea, RR 44 → severe tachypnoea (were silent)");
+
   console.log(fails === 0 ? "\nALL GREEN — ICU alert-engine safety test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

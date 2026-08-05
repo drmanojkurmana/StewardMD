@@ -12,7 +12,17 @@
   function num(x) { return (typeof x === "number" && isFinite(x)) ? x : null; }
   function has(x) { return x !== null && x !== undefined && x !== "" && !(typeof x === "number" && isNaN(x)); }
   function L(state) { return (state.labs && state.labs.recent) || {}; }
-  function V(state) { return last(state.vitals); }
+  // Forward-filled current-vitals snapshot: newest non-null value per field across the series, so a sparse
+  // re-charting of one vital does not blank the other score inputs and grey out SOFA/qSOFA/NEWS2/APACHE
+  // (mirrors icu.js mergedVitals / R1 C1). Raw vitals[] remains available for trends.
+  function V(state) {
+    var arr = state && state.vitals;
+    if (!arr || !arr.length) return {};
+    var rows = arr.slice().sort(function (a, b) { return ((a && a.ts) || 0) - ((b && b.ts) || 0); });
+    var m = {};
+    for (var i = 0; i < rows.length; i++) { var v = rows[i]; if (!v) continue; for (var k in v) { if (k === "ts" || !Object.prototype.hasOwnProperty.call(v, k)) continue; if (v[k] != null && v[k] !== "") m[k] = v[k]; } }
+    return m;
+  }
 
   /* ---- banding helpers (encode published thresholds; verified by tests) ---- */
   function sofaPlt(p) { return p >= 150 ? 0 : p >= 100 ? 1 : p >= 50 ? 2 : p >= 20 ? 3 : 4; }

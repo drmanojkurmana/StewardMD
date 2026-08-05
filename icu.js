@@ -139,10 +139,22 @@
   // Latest reading = the one with the newest TIMESTAMP (not merely the last-pushed element).
   function latestByTs(arr) { if (!arr || !arr.length) return {}; var b = arr[0]; for (var i = 1; i < arr.length; i++) { if (((arr[i] && arr[i].ts) || 0) >= ((b && b.ts) || 0)) b = arr[i]; } return b || {}; }
   function latestVitals() { return latestByTs(_raw.vitals); }
+  // Forward-filled "current vitals" snapshot: the newest non-null value for EACH field across the series,
+  // NOT just the newest-timestamp row (R1 C1). A sparse update (e.g. re-charting only SpO2) must NOT blank
+  // MAP / lactate / GCS and silently drop still-active critical alerts and vital-based scores. Mirrors how
+  // labs.recent already forward-fills. Raw vitals[] is still used for trend charts.
+  function mergedVitals(arr) {
+    if (!arr || !arr.length) return {};
+    var rows = arr.slice().sort(function (a, b) { return ((a && a.ts) || 0) - ((b && b.ts) || 0); });
+    var m = {};
+    for (var i = 0; i < rows.length; i++) { var v = rows[i]; if (!v) continue; for (var k in v) { if (k === "ts" || !Object.prototype.hasOwnProperty.call(v, k)) continue; if (v[k] != null && v[k] !== "") m[k] = v[k]; } }
+    m.ts = (rows[rows.length - 1] || {}).ts;   // newest timestamp (for staleness display)
+    return m;
+  }
   // One pressor/vasoactive detector (was duplicated in renderLiveStatus + interpretHemo).
   function isPressor(drug) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine|pressor/i.test(drug || ""); }
-  function curMap() { var lv = latestVitals(); return lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp); }
-  function shockIndex() { var lv = latestVitals(); return (lv.hr && lv.sbp) ? +(lv.hr / lv.sbp).toFixed(2) : null; }
+  function curMap() { var lv = mergedVitals(_raw.vitals); return lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp); }
+  function shockIndex() { var lv = mergedVitals(_raw.vitals); return (lv.hr && lv.sbp) ? +(lv.hr / lv.sbp).toFixed(2) : null; }
 
   /* ------------------------------------------ recompute: derive alerts */
   // The seed of the "smart ICU engine": one place that turns raw values into
@@ -156,7 +168,11 @@
   function recompute(s) {
     var a = [];
     function add(sev, title, msg, source) { a.push({ severity: sev, title: title, msg: msg, source: source }); }
-    var L = (s.labs && s.labs.recent) || {}, lv = latestByTs(s.vitals), g = s.abg || {}, p = s.patient || {};
+    var L = (s.labs && s.labs.recent) || {}, lv = mergedVitals(s.vitals), g = s.abg || {}, p = s.patient || {};
+    // Lactate can arrive from the vitals form, the ABG slip, or the lab panel / Ward Sync (R1 C2). Take the
+    // first available so hyperlactataemia + sepsis screening never go silent just because it was not typed
+    // into the one Vitals field.
+    var lac = lv.lactate != null ? lv.lactate : (g.lactate != null ? g.lactate : (L.lactate != null ? L.lactate : null));
     var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
 
     // ---- Electrolytes ----
@@ -181,10 +197,14 @@
     // ---- Hemodynamics ----
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     if (mp != null) { if (mp < 60) add("crit", "Hypotension", "MAP " + mp + " mmHg (<60) — resuscitate", "Hemodynamics"); else if (mp < 65) add("warn", "Low MAP", "MAP " + mp + " mmHg (target ≥65)", "Hemodynamics"); }
-    if (lv.lactate != null) { if (lv.lactate > 4) add("crit", "Hyperlactataemia", "Lactate " + lv.lactate + " mmol/L (>4) — hypoperfusion", "Hemodynamics"); else if (lv.lactate > 2) add("warn", "Raised lactate", "Lactate " + lv.lactate + " mmol/L (>2)", "Hemodynamics"); }
+    // Extreme heart rate (R1 H4): peri-arrest brady/tachycardia produced no alert before.
+    if (lv.hr != null) { if (lv.hr < 40) add("crit", "Severe bradycardia", "HR " + lv.hr + " /min (<40) — assess perfusion, 12-lead ECG", "Hemodynamics"); else if (lv.hr > 140) add("crit", "Severe tachycardia", "HR " + lv.hr + " /min (>140) — identify & treat the cause", "Hemodynamics"); }
+    if (lac != null) { if (lac > 4) add("crit", "Hyperlactataemia", "Lactate " + lac + " mmol/L (>4) — hypoperfusion", "Hemodynamics"); else if (lac > 2) add("warn", "Raised lactate", "Lactate " + lac + " mmol/L (>2)", "Hemodynamics"); }
 
     // ---- Respiratory (BUG #7: SpO₂/PaO₂ are respiratory, not haemodynamic) ----
     if (lv.spo2 != null) { if (lv.spo2 < 88) add("crit", "Severe hypoxaemia", "SpO₂ " + lv.spo2 + "% (<88)", "Respiratory"); else if (lv.spo2 < 92) add("warn", "Hypoxaemia", "SpO₂ " + lv.spo2 + "% (<92)", "Respiratory"); }
+    // Extreme respiratory rate (R1 H4): impending-arrest brady/tachypnoea produced no standalone alert.
+    if (lv.rr != null) { if (lv.rr < 8) add("crit", "Bradypnoea — impending arrest", "RR " + lv.rr + " /min (<8) — support ventilation, call for help", "Respiratory"); else if (lv.rr > 30) add("crit", "Severe tachypnoea", "RR " + lv.rr + " /min (>30)", "Respiratory"); }
 
     // ---- Temperature / pyrexia (BUG #8) ----
     if (lv.temp != null) { if (lv.temp >= 40) add("crit", "Hyperpyrexia", "Temp " + lv.temp + " °C (≥40)", "Sepsis / Temperature"); else if (lv.temp <= 35) add("crit", "Hypothermia", "Temp " + lv.temp + " °C (≤35)", "Sepsis / Temperature"); else if (lv.temp >= 38.3) add("warn", "Pyrexia", "Temp " + lv.temp + " °C (≥38.3) — screen for infection / sepsis", "Sepsis / Temperature"); }
@@ -195,7 +215,7 @@
     if ((lv.sbp != null && lv.sbp <= 100) || (lv.sbp == null && mp != null && mp < 65)) { q++; qp.push(lv.sbp != null ? "SBP " + lv.sbp : "MAP " + mp); }
     if (lv.gcs != null && lv.gcs < 15) { q++; qp.push("GCS " + lv.gcs); }
     if (q >= 2) add("crit", "qSOFA " + q + "/3 — screen for sepsis", "Meets qSOFA (" + qp.join(", ") + "). Suspect sepsis → cultures + lactate, source control, early antibiotics; record GCS if not done.", "Sepsis / Temperature");
-    else if (q === 1 && ((lv.lactate != null && lv.lactate > 2) || (lv.temp != null && lv.temp >= 38.3))) add("warn", "Possible sepsis", "1 qSOFA criterion (" + qp.join(", ") + ") with raised lactate/fever — reassess and record GCS.", "Sepsis / Temperature");
+    else if (q === 1 && ((lac != null && lac > 2) || (lv.temp != null && lv.temp >= 38.3))) add("warn", "Possible sepsis", "1 qSOFA criterion (" + qp.join(", ") + ") with raised lactate/fever — reassess and record GCS.", "Sepsis / Temperature");
 
     // ---- ABG ----
     if (g.ph != null) { if (g.ph < 7.2 || g.ph > 7.55) add("crit", "Severe acid–base disturbance", "pH " + g.ph, "Acid–base"); else if (g.ph < 7.30 || g.ph > 7.50) add("warn", "Acid–base disturbance", "pH " + g.ph, "Acid–base"); }
@@ -231,7 +251,7 @@
     return v;
   }
   function ingestLabs(o) {
-    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
+    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct", "lactate"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
     Object.keys(rec).forEach(function (k) { STATE.labs.recent[k] = rec[k]; });
     STATE.labs.trends.push(Object.assign({ ts: ts }, rec));
@@ -5363,7 +5383,7 @@
       { k: "alb", l: "Albumin g/dL", t: "number" }, { k: "glu", l: "Glucose mg/dL", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
-      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
+      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" }, { k: "lactate", l: "Lactate mmol/L", t: "number" } ] },
     ventilator: { title: "Ventilator settings", ingest: ingestVentilator, fields: [
       { k: "mode", l: "Mode", t: "text" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "peep", l: "PEEP cmH₂O", t: "number" }, { k: "tv", l: "Tidal volume mL", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "plateau", l: "Plateau cmH₂O", t: "number" }, { k: "drivingP", l: "Driving pressure", t: "number" }, { k: "compliance", l: "Compliance", t: "number" } ] },
