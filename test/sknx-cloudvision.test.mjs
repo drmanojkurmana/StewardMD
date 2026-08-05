@@ -9,11 +9,13 @@ import ENG from "../sknx-engines.js";
 
 const EP = "https://sknx-derm.example.run.app";
 
-// a fake `window` with the cloud flag on/off + an endpoint
-function win(flagOn, ep) {
+// a fake `window` with the cloud flag on/off + an endpoint + a native (Capacitor) platform. native
+// defaults true; pass false to simulate a web build.
+function win(flagOn, ep, native) {
   return {
     SMD_SKNX_CLOUD_ENDPOINT: ep,
-    SMD_SKNX_FLAGS: { bool: (k) => (k === "smd_sknx_cloud" ? !!flagOn : false) }
+    SMD_SKNX_FLAGS: { bool: (k) => (k === "smd_sknx_cloud" ? !!flagOn : false) },
+    Capacitor: { isNativePlatform: () => (native === undefined ? true : !!native) }
   };
 }
 // a fetch stub that returns a fixed differential for /classify
@@ -30,8 +32,14 @@ const SCC = [{ label: "SCC/SCCIS", prob: 0.55 }, { label: "Seborrheic Dermatitis
 test("available(): needs BOTH the cloud flag ON and a real (non-placeholder) endpoint", () => {
   assert.equal(CV.available(win(true, EP)), true, "flag on + endpoint -> available");
   assert.equal(CV.available(win(false, EP)), false, "flag OFF -> not available (opt-in only)");
-  assert.equal(CV.available(win(true, "")), false, "no endpoint -> not available");
   assert.equal(CV.available(win(true, "__SKNX_CLOUD_ENDPOINT__")), false, "unfilled placeholder -> not available");
+});
+
+test("available(): APP-ONLY - not available on a web build (no native Capacitor platform)", () => {
+  assert.equal(CV.available(win(true, EP, false)), false, "web (isNativePlatform false) -> not available");
+  const noCapacitor = { SMD_SKNX_CLOUD_ENDPOINT: EP, SMD_SKNX_FLAGS: { bool: () => true } };
+  assert.equal(CV.available(noCapacitor), false, "no Capacitor object (plain web) -> not available");
+  assert.equal(CV.available(win(true, EP, true)), true, "native app -> available");
 });
 
 test("mapDiffToRaw: generalProbs = full differential; lesionProbs = only mapped malignancies", () => {

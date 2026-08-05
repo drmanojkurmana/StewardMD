@@ -12,8 +12,10 @@
 (function () {
   "use strict";
 
-  // Filled at deploy time with the live Cloud Run URL; overridable at runtime (window/localStorage).
-  var DEFAULT_ENDPOINT = "__SKNX_CLOUD_ENDPOINT__";
+  // Live Cloud Run classifier (deployed 2026-08-05). Overridable at runtime (window/localStorage). For
+  // the closed-endpoint production posture, set this to the Worker proxy "https://stewardmd.in/api/sknx"
+  // + provision the secrets (see sknx-server/deploy.sh hardening notes).
+  var DEFAULT_ENDPOINT = "https://sknx-derm-yislqrddsq-el.a.run.app";
 
   // The two true cutaneous malignancies among the 59 SCIN conditions -> a label sknx-engines.js's
   // guardrail recognizes (normalizeMalignantLabel). These are pushed into lesionProbs so the malignancy
@@ -34,12 +36,19 @@
     } catch (e) {}
     return DEFAULT_ENDPOINT;
   }
-  // available(): opt-in flag ON + a real endpoint configured + fetch present. No DOM needed (works in
-  // the native WebView). endpoint must not still be the unfilled placeholder.
+  // NATIVE-ONLY: the cloud classifier runs ONLY inside the iOS/Android app (Capacitor native), never in
+  // a browser. There is no public web console. Enforced here so a web build can never invoke the model.
+  function isNative(w) {
+    try { return !!(w && w.Capacitor && typeof w.Capacitor.isNativePlatform === "function" && w.Capacitor.isNativePlatform()); }
+    catch (e) { return false; }
+  }
+  // available(): NATIVE app + opt-in flag ON + a real endpoint configured + fetch present. endpoint must
+  // not still be the unfilled placeholder.
   function available(win) {
     try {
       var w = win || (typeof window !== "undefined" ? window : null);
       if (!w) return false;
+      if (!isNative(w)) return false; // app-only: no web execution
       var on = w.SMD_SKNX_FLAGS && w.SMD_SKNX_FLAGS.bool("smd_sknx_cloud");
       var ep = (w.SMD_SKNX_CLOUD_ENDPOINT) || endpoint();
       return !!on && !!ep && ep.indexOf("__SKNX_CLOUD") !== 0 && typeof fetch === "function";
