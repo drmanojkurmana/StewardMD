@@ -5,7 +5,7 @@
  *  `npm i -D @firebase/rules-unit-testing firebase`.)
  */
 import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
-import { doc, getDoc, setDoc, deleteDoc, updateDoc, collection, collectionGroup, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc, setDoc, deleteDoc, updateDoc, collection, collectionGroup, query, where, getDocs, Timestamp } from "firebase/firestore";
 import { readFileSync } from "node:fs";
 
 const RULES = new URL("../../firestore.rules", import.meta.url).pathname;
@@ -145,6 +145,17 @@ const cases = [
   ["patient: member updates status", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1"), { name: "R.K.", dx: "sepsis" }, { merge: true })), true, "icu members update status"],
   ["patient: non-member updates", await allowed(setDoc(doc(C, "icuGroups/GRPI/patients/p1"), { dx: "x" }, { merge: true })), false, "icu non-member denied"],
   ["patient: head deletes", await allowed(deleteDoc(doc(A, "icuGroups/GRPI/patients/p2"))), true, "icu instructor may delete"],
+
+  // ── DPDP retention cap (retentionCapped) — client-set `expiresAt` bounded to ~8 days ──────────
+  // Guards the 7-day auto-clear: a member (or a client bug) must not be able to write a far-future
+  // expiresAt and defeat the TTL delete. Cap-when-present, so an absent field still passes (above).
+  ["retention: patient update w/ valid expiresAt (now+7d)", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1"), { dx: "x", expiresAt: Timestamp.fromMillis(now + 7 * 864e5) }, { merge: true })), true, "cap allows now+7d"],
+  ["retention: patient update w/ far-future expiresAt (now+30d)", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1"), { dx: "x", expiresAt: Timestamp.fromMillis(now + 30 * 864e5) }, { merge: true })), false, "cap blocks far-future"],
+  ["retention: patient update w/ non-timestamp expiresAt", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1"), { dx: "x", expiresAt: now }, { merge: true })), false, "cap requires a Timestamp"],
+  ["retention: timeline create w/ far-future expiresAt", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/timeline/eCap"), { by: "docB", type: "note", title: "x", expiresAt: Timestamp.fromMillis(now + 30 * 864e5) })), false, "cap blocks far-future (timeline)"],
+  ["retention: task create w/ far-future expiresAt", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/tasks/tCap"), { text: "x", status: "pending", assignedBy: "docB", expiresAt: Timestamp.fromMillis(now + 30 * 864e5) })), false, "cap blocks far-future (tasks)"],
+  ["retention: presence write w/ valid expiresAt (now+7d)", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1/presence/docA"), { name: "Dr A", at: now, expiresAt: Timestamp.fromMillis(now + 7 * 864e5) })), true, "cap allows now+7d (presence)"],
+  ["retention: presence write w/ far-future expiresAt", await allowed(setDoc(doc(A, "icuGroups/GRPI/patients/p1/presence/docA"), { name: "Dr A", at: now, expiresAt: Timestamp.fromMillis(now + 30 * 864e5) })), false, "cap blocks far-future (presence)"],
 ];
 await env.cleanup();
 

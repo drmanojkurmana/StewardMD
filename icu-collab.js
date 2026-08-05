@@ -982,8 +982,8 @@
       if (!db || !uid || !_presence.gid || !_presence.pid) return;
       try {
         ptRef(db, _presence.gid, _presence.pid).collection("presence").doc(uid)
-          .set({ name: currentName(), at: fieldValue().serverTimestamp() }, { merge: true })
-          .catch(function () {});
+          .set({ name: currentName(), at: fieldValue().serverTimestamp(), expiresAt: retentionExpiry() }, { merge: true })
+          .catch(function () {});   // expiresAt: presence orphaned after discharge (Firestore doesn't cascade-delete subcollections) is TTL-cleared within the window
       } catch (e) {}
     });
   }

@@ -99,14 +99,19 @@ project `stewardmd-*` (asia-south1) → *Time-to-live (TTL)* → Create policy; 
 - `patients`   (the PHI-bearing shared patient doc — `icuGroups/{gid}/patients/{pid}`)
 - `timeline`   (append-only audit — `.../patients/{pid}/timeline/{eid}`)
 - `tasks`      (`.../patients/{pid}/tasks/{tid}`)
+- `presence`   (viewing-metadata heartbeat — `.../patients/{pid}/presence/{uid}`; clinician name, NOT
+  patient PHI, but orphaned forever on discharge without this, since Firestore doesn't cascade-delete
+  subcollections — data-hygiene, recommended)
 
 Notes:
 - TTL deletes within ~72h of the `expiresAt` instant (Google SLA), so real deletion is ~7–10 days —
   acceptable for the notice; the field is refreshed on every write so an ACTIVELY-used patient never
   expires, and explicit discharge deletes immediately.
-- Firestore rules already `allow create, update: if isMember` on these paths, so the field writes pass.
+- **Deploy the rules too:** `firestore.rules` now caps the client-set `expiresAt` at ~8 days
+  (`retentionCapped()`) so the auto-delete can't be defeated by a bad/forged value — `firebase deploy
+  --only firestore:rules`. (Rules edits do NOT change production on their own.)
 - **Verify:** in the console, a test doc with `expiresAt` in the past is gone within the TTL window;
-  the TTL dashboard shows the three policies "Serving".
+  the TTL dashboard shows the four policies "Serving".
 
 ---
 
