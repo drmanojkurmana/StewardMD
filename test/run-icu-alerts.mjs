@@ -178,6 +178,16 @@ try {
   `);
   ok(!tg.titles.some(t => /hyperpyrexia/i.test(t)), "unit guard: 102 (Fahrenheit) is NOT scored as a 102°C hyperpyrexia");
   ok(Math.abs((tg.temp || 0) - 38.9) < 0.2, "unit guard: 102°F auto-converted to ~38.9°C");
+  // R1 hardening: a genuine hyperthermic Celsius temp (>45) must NOT be silently converted to a false
+  // hypothermia — it stays put and fires the hyperpyrexia alert loudly.
+  const tg2 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"MH",age:60,sex:"M"});
+    ICU.ingestMonitor({ temp:45.5 });   // malignant-hyperthermia Celsius reading
+    var al = ICU.state().alerts || [];
+    return JSON.stringify({ titles: al.map(function(a){return a.title;}), temp: (ICU.state().vitals[0]||{}).temp });
+  `);
+  ok(Math.abs((tg2.temp || 0) - 45.5) < 0.01, "unit guard: a true 45.5°C is left as-is (not converted to a false 7.5°C)");
+  ok(tg2.titles.some(t => /hyperpyrexia/i.test(t)) && !tg2.titles.some(t => /hypothermia/i.test(t)), "unit guard: 45.5°C fires hyperpyrexia, not a false hypothermia");
 
   console.log(fails === 0 ? "\nALL GREEN — ICU alert-engine safety test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

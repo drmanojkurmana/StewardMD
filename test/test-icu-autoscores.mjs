@@ -107,6 +107,7 @@ ok(sofaCardioBand([{ drug: "noradrenaline", dose: 0.05, unit: "mcg/kg/min" }]) =
 ok(sofaCardioBand([{ drug: "noradrenaline", dose: 8, unit: "mL/h" }]) === 3, "H3: noradrenaline 8 mL/h is NOT read as 8 mcg/kg/min (floors at 3, was a false 4)");
 ok(sofaCardioBand([{ drug: "noradrenaline", rateMlHr: 5 }]) === 3, "H3: a pressor recorded only as a pump rate still counts as on-a-pressor (3, was 0)");
 ok(sofaCardioBand([]) === 0, "H3: no pressor + MAP 72 -> SOFA cardio 0 (unchanged)");
+ok(sofaCardioBand([{ drug: "noradrenaline", dose: 0, unit: "mcg/kg/min" }]) === 0, "H3: a pressor line titrated to 0 is NOT counted as on-a-pressor (R1 hardening)");
 
 // ── M3: adult scores are flagged (not silently reported) for a paediatric patient ──
 const peds = AS.compute({ patient: { age: 8, diagnosis: "severe acute pancreatitis" }, vitals: state.vitals, labs: state.labs, abg: state.abg, ventilator: state.ventilator, infusions: [] }, MED);

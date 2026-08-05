@@ -254,7 +254,7 @@
     // convert it (an OCR'd / typed 102 F becomes 38.9 C, not a false 102 C hyperpyrexia). Only done where
     // it is UNAMBIGUOUS - glucose/PaO2 are NOT auto-detected because a wrong guess there could mask a real
     // critical value (e.g. glucose 25 mg/dL is a true severe hypo, not 25 mmol/L).
-    if (v.temp != null && !isNaN(+v.temp) && +v.temp > 45) v.temp = Math.round(((+v.temp - 32) * 5 / 9) * 10) / 10;
+    if (v.temp != null && !isNaN(+v.temp) && +v.temp > 45) { var _tc = (+v.temp - 32) * 5 / 9; if (_tc >= 30 && _tc <= 45) v.temp = Math.round(_tc * 10) / 10; }   // only convert when the RESULT is a plausible body temp, so a true 45.5 C (malignant hyperthermia) or a garbage entry is left to alert loudly, not silently turned into a false hypothermia (R1)
     v.ts = o.ts || nowTs();
     STATE.vitals.push(v);
     if (STATE.vitals.length > MAX_SERIES) STATE.vitals.splice(0, STATE.vitals.length - MAX_SERIES);

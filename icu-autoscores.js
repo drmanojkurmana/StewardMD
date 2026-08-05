@@ -48,7 +48,7 @@
     var dopOn = false, dobOn = false, epiOn = false, norOn = false;      // present at all (any unit/rate)
     (state.infusions || []).forEach(function (i) {
       var n = (i.name || i.drug || "").toLowerCase(); if (!n) return;
-      var wd = wtBasedDose(i), on = (num(i.dose) || 0) > 0 || (num(i.rateMlHr) || 0) > 0 || wd != null;
+      var wd = wtBasedDose(i), on = (num(i.dose) || 0) > 0 || (num(i.rateMlHr) || 0) > 0;   // a line titrated to 0 is not "on" (R1)
       if (/dopamine/.test(n)) { dopOn = dopOn || on; if (wd != null) dop = Math.max(dop, wd); }
       else if (/dobutamine/.test(n)) { dobOn = dobOn || on; if (wd != null) dob = Math.max(dob, wd); }
       else if (/(epinephrine|adrenaline)/.test(n) && !/nor/.test(n)) { epiOn = epiOn || on; if (wd != null) epi = Math.max(epi, wd); }
