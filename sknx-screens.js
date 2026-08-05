@@ -69,6 +69,7 @@
             srcCard("library", "photo_library", "Photo Library", "PNG, JPEG, HEIC") +
             srcCard("files", "folder", "Files", "Browse iCloud") +
           "</div>" +
+          hxFormHtml("capture") +
           '<div class="sknx-tip" role="note">' + ic("tips_and_updates") +
             '<span class="sknx-tip-txt">Good lighting, fill the frame with the lesion or rash, avoid glare - SknX auto-enhances the image before analysis.</span>' +
           "</div>" +
@@ -231,6 +232,7 @@
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
         "</div>" +
         rxAffordance(a) +
+        hxFormHtml("refine") +
         footerHtml +
       "</div>";
 
@@ -317,10 +319,22 @@
   function closeMod() { try { if (window.SKNX && window.SKNX.close) window.SKNX.close(); } catch (e) {} }
   function ctx() { return { analysis: state.analysis, entitlement: resolveEntitlement() }; }
 
+  // Optional clinical-history intake (sknx-history.js). All helpers are no-ops if the module is absent.
+  function hx() { try { return (typeof window !== "undefined" && window.SMD_SKNX_HISTORY) || null; } catch (e) { return null; } }
+  function hxFormHtml(kind) {
+    var H = hx(); if (!H) return "";
+    var label = kind === "refine" ? "Refine with clinical history" : "Add clinical history (optional)";
+    var apply = kind === "refine" ? '<button class="sknx-btn sknx-btn-secondary sknx-hx-apply" type="button" data-act="sknx-refine-apply">' + ic("check") + "Apply history</button>" : "";
+    return '<details class="sknx-hx-wrap"><summary>' + ic("clinical_notes") + esc(label) + "</summary>" + H.formHtml() + apply + "</details>";
+  }
+  function readHx() { try { var H = hx(); var r = host() && host().querySelector(".sknx-hx"); return (H && r) ? H.readForm(r) : null; } catch (e) { return null; } }
+  function bindHx(h) { try { var H = hx(); var r = h && h.querySelector && h.querySelector(".sknx-hx"); if (H && r) H.bindForm(r); } catch (e) {} }
+
   function show(key) {
     var h = host(), fn = SCREENS[key];
     if (!h || !fn) return;
     try { fn(h, ctx()); } catch (e) { try { console.warn("[SknX] screen " + key, e); } catch (_) {} }
+    try { bindHx(h); } catch (e) {}
     try { h.scrollTop = 0; } catch (_) {}
   }
   function go(key) {
@@ -400,8 +414,9 @@
   }
 
   function startCapture(src) {
+    var history = readHx();   // read the capture-screen history form (if any) before the picker opens
     captureImage(src).then(function (blob) {
-      runPipeline({ id: "sknx-" + Date.now(), source: src, data: blob });
+      runPipeline({ id: "sknx-" + Date.now(), source: src, data: blob }, history);
     }).catch(function (err) {
       if (err && err.cancelled) return;
       toast("Couldn't open the " + (src === "camera" ? "camera" : "picker") + ". " + ((err && err.message) || ""));
@@ -411,18 +426,21 @@
   // runPipeline(image): resolve entitlement -> SMD_SKNX_PROVIDERS.analyze() (mock in Phase 1) -> save
   // to history -> show the result. Exposed on the router so a test harness (or a future retry action)
   // can drive an analysis directly without going through the native camera/file pickers.
-  function runPipeline(image) {
+  function runPipeline(image, history) {
     if (state.running) return;
     state.running = true;
+    state.lastImage = image;                          // persist so "Refine with history" can re-run
+    if (typeof history !== "undefined") state.lastHistory = history;
     show("processing");
     var P = providers();
     if (!P || !P.analyze) { state.running = false; toast("SknX analyzer unavailable."); show("capture"); return; }
     var entitlement = resolveEntitlement();
     P.analyze(image, entitlement, function (stage, pct) {
       try { var h = host(); if (h && h._sknxApplyStage) h._sknxApplyStage(stage, pct); } catch (e) {}
-    }).then(function (a) {
+    }, undefined, state.lastHistory).then(function (a) {
       state.running = false;
       state.analysis = a || null;
+      try { if (state.analysis) state.analysis.history = state.lastHistory || null; } catch (e) {}
       try {
         if (state.analysis && window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.save) {
           state.analysis.at = state.analysis.at || Date.now();
@@ -450,6 +468,7 @@
       case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
       case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(state.reportPayload); } catch (e) {} haptic("light"); return;
       case "sknx-rx-draft": haptic("light"); try { if (window.SMD_SKNX_RX) window.SMD_SKNX_RX.openDraft(state.analysis); } catch (e) {} return;
+      case "sknx-refine-apply": haptic("light"); if (state.lastImage) runPipeline(state.lastImage, readHx() || {}); return;
     }
     /* other data-act values (if any) are screen-internal. */
   }
