@@ -32,7 +32,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "", allergies: "", codeStatus: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -3499,7 +3499,7 @@
     var p = _raw.patient || {}, sev = v2Severity(_raw), snap = v2Snapshot(_raw);
     var meta = [];
     if (p.bed) meta.push("Bed " + esc(p.bed));
-    if (p.mrn) meta.push("MR " + esc(p.mrn));
+    if (p.mrn) meta.push(esc(mrDisplay(p.mrn)));
     if (p.age != null) meta.push(esc(p.age) + (p.sex ? "/" + esc(p.sex) : ""));
     if (p.icuDay != null) meta.push("ICU day " + esc(p.icuDay));
     if (p.dept) meta.push(esc(p.dept));
@@ -5349,7 +5349,10 @@
       { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
       { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
       { k: "mrn", l: "MR / UHID", t: "text" }, { k: "doctor", l: "Treating doctor", t: "text" }, { k: "dept", l: "Department / specialty", t: "text" },
-      { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" }, { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
+      { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" },
+      { k: "allergies", l: "Allergies / ADR", t: "text", wide: true, ph: "e.g. Penicillin (rash); or Nil known" },
+      { k: "codeStatus", l: "Resuscitation status", t: "select", opts: ["", "Full code", "DNR / DNAR", "DNI", "Comfort care only"] },
+      { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
@@ -5567,13 +5570,12 @@
   // print sheet). If pop-ups are blocked (some WKWebViews), fall back to the summary + Share.
   function printSummary() { phiExportConfirm("print / PDF export", doPrintSummary); }   // KI-H6 consent gate
   function doPrintSummary() {
-    var name = _raw.patient.name || "ICU patient";
-    var html = '<!doctype html><meta charset="utf-8"><title>StewardMD ICU — ' + esc(name) + '</title>' +
-      '<style>body{font:13px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#111;padding:24px;max-width:720px;margin:auto}h1{font-size:18px;margin:0 0 4px}.m{color:#666;font-size:12px;margin-bottom:16px}pre{white-space:pre-wrap;font:inherit}</style>' +
-      '<h1>StewardMD ICU Summary</h1><div class="m">' + esc(name) + ' · generated for clinician review — verify before use</div><pre>' + esc(buildSummary()) + "</pre>";
-    var w = null; try { w = window.open("", "_blank"); } catch (e) {}
-    if (w && w.document) { w.document.open(); w.document.write(html); w.document.close(); setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350); }
-    else { openSummary(); if (window.toast) toast("Pop-up blocked — use Share to export as PDF"); }
+    var name = _raw.patient.name || (ctxLabel() + " patient"), summary = buildSummary(), label = esc(ctxLabel());
+    var frag = '<style>body{font:13px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a2b32;margin:0}h1{font-size:18px;color:#0f172a;margin:0 0 2px}' +
+      '.m{color:#64748b;font-size:11.5px;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid #0f766e}pre{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#1e293b}@page{margin:14mm}</style>' +
+      '<h1>StewardMD ' + label + ' Summary</h1><div class="m">' + esc(name) + ' &middot; generated for clinician review - verify before use</div><pre>' + esc(summary) + '</pre>';
+    var doc = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + label + ' summary - ' + esc(name) + '</title></head><body>' + frag + '</body></html>';
+    icuExportPdf(doc, frag, "StewardMD-" + ctxLabel() + "-summary-" + name, "StewardMD " + ctxLabel() + " summary - " + name, summary);
   }
 
   /* ---- Discharge Creator: a STRUCTURED, clinician-reviewable discharge summary. Each section is a
@@ -5585,11 +5587,13 @@
   var DISCHARGE_FIELDS = [
     { k: "admitDate", l: "Admission date", t: "text", ph: "e.g. 10 Jul 2026" },
     { k: "dischargeDate", l: "Discharge date", t: "text", ph: "e.g. 15 Jul 2026" },
+    { k: "allergies", l: "Allergies / ADR", t: "text", wide: true, ph: "e.g. Penicillin (rash); or Nil known" },
     { k: "finalDx", l: "Final diagnosis", t: "text", wide: true },
     { k: "secondaryDx", l: "Secondary diagnoses / comorbidities", t: "textarea", wide: true },
     { k: "complaints", l: "Reason for admission", t: "textarea", wide: true },
     { k: "course", l: "Hospital course", t: "textarea", wide: true, rows: 6 },
     { k: "investigations", l: "Key investigations", t: "textarea", wide: true, rows: 4 },
+    { k: "pendingResults", l: "Results / cultures pending", t: "textarea", wide: true, ph: "e.g. Blood cultures at 48h; awaiting histology" },
     { k: "procedures", l: "Procedures / interventions", t: "textarea", wide: true },
     { k: "condition", l: "Condition at discharge", t: "textarea", wide: true, rows: 4 },
     { k: "meds", l: "Discharge medications", t: "textarea", wide: true, rows: 6 },
@@ -5628,10 +5632,14 @@
     if (f.net24h != null || f.cumulative != null) cond.push("Fluid balance: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + (f.cumulative != null ? ", cumulative " + f.cumulative + " mL" : ""));
     var crit = alerts.filter(function (a) { return a.severity === "crit"; }); if (crit.length) cond.push("Active issues: " + crit.map(function (a) { return a.title; }).join("; "));
     d.condition = cond.map(function (x) { return "- " + x; }).join("\n");
-    // Discharge medications — pre-filled from the editable Treatment list (fallback: running infusions).
+    // Discharge medications — pre-filled from the editable Treatment list ONLY. Running ICU infusions
+    // (vasopressors, sedation) are deliberately NOT seeded here (R1 M2): a patient is not discharged on a
+    // drip, and auto-listing them risks a summary telling the GP the patient goes home on noradrenaline.
     var meds = tx.map(function (t) { var dsg = [t.dose, t.route, t.freq].filter(Boolean).join(" "); return "- " + t.name + (dsg ? " " + dsg : "") + (t.cat && t.cat !== "other" ? "  (" + txCatLabel(t.cat) + ")" : ""); });
-    if (!meds.length) meds = infusions.map(function (i) { return "- " + i.drug + (i.dose != null ? " " + i.dose + (i.unit || "") : ""); });
     d.meds = meds.join("\n");
+    // Allergies carry from the patient record; pending results are clinician-entered (never auto-asserted).
+    d.allergies = p.allergies || "";
+    d.pendingResults = "";
     d.followup = "";
     d.advice = "";
     var who = v2AccountName(); if (who === "You") who = ""; if (who && grpActive() && _grp && _grp.myRole) who += " (" + grpRoleLabel(_grp.myRole) + ")";
@@ -5641,6 +5649,7 @@
   var _dischargeDefaults = {};
   function dischargeHeaderLine(p) {
     return (p.name || (ctxLabel() + " patient")) + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") +
+      (p.mrn ? " · " + mrDisplay(p.mrn) : "") +
       (p.bed ? " · Bed " + p.bed : "") + (_unit.type ? " · " + _unit.type : "") + (p.hospital || _unit.hospital ? " · " + (p.hospital || _unit.hospital) : "");
   }
   // FollowCare (post-discharge recovery follow-up) — flag-gated. The button in the Discharge Creator hands
@@ -5698,8 +5707,8 @@
       '<p class="icu-doc-sub" style="margin:0 0 12px">Auto-filled from recorded data (incl. discharge meds from the Treatment list). <b>Review &amp; complete every section</b>, then copy, print or share. Nothing is sent anywhere.</p>' +
       '<div class="icu-grid2">' + fieldsHTML + '</div>' +
       '<button class="icu-btn" data-icu-act="dischargecopy">' + ico("copy", "📋") + ' Copy summary</button>' +
-      '<button class="icu-btn ghost" data-icu-act="dischargeprint">' + ico("copy", "🖨") + ' Print / PDF</button>' +
-      '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share</button>' +
+      '<button class="icu-btn ghost" data-icu-act="dischargeprint">' + ico("print", "🖨") + ' Print / PDF</button>' +
+      '<button class="icu-btn ghost" data-icu-act="dischargeshare">' + ico("share", "📤") + ' Share</button>' +
       (fcEnabled() ? '<button class="icu-btn ghost" data-icu-act="followcare" title="Enroll this patient for post-discharge recovery follow-up">🩺 FollowCare</button>' : '') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
@@ -5717,6 +5726,7 @@
     out.push("STEWARDMD — " + ctxLabel().toUpperCase() + " DISCHARGE SUMMARY (DRAFT — clinician review required)");
     out.push(dischargeHeaderLine(p));
     if (f.admitDate || f.dischargeDate) out.push("Admitted: " + (f.admitDate || "[ ]") + "    Discharged: " + (f.dischargeDate || "[ ]"));
+    out.push("ALLERGIES / ADR: " + (f.allergies && f.allergies.trim() ? f.allergies.trim() : "[ confirm - do not leave blank ]"));
     out.push("");
     var sec = function (title, val) { if (val && String(val).trim()) { out.push(title + ":"); out.push(String(val).trim()); out.push(""); } };
     out.push("FINAL DIAGNOSIS: " + (f.finalDx || "[ complete ]"));
@@ -5725,6 +5735,7 @@
     sec("REASON FOR ADMISSION", f.complaints);
     sec("HOSPITAL COURSE", f.course);
     sec("KEY INVESTIGATIONS", f.investigations);
+    sec("RESULTS / CULTURES PENDING", f.pendingResults);
     sec("PROCEDURES / INTERVENTIONS", f.procedures);
     sec("CONDITION AT DISCHARGE", f.condition);
     sec("DISCHARGE MEDICATIONS", f.meds);
@@ -5740,25 +5751,154 @@
     if (window.toast) toast("Discharge summary copied — verify before use");
   }
   function printDischarge() { phiExportConfirm("discharge print / PDF export", doPrintDischarge); }   // KI-H6 consent gate
+  // Normalise an MR/UHID so we never DOUBLE-PREFIX it ("MR MR26134446"): if the value already begins
+  // with an MR/MRN/UHID/UID/Reg label, show it verbatim; otherwise prepend "MR ".
+  function mrDisplay(mrn) {
+    var v = String(mrn == null ? "" : mrn).trim();
+    if (!v) return "";
+    // already labelled? e.g. "MR26134446", "MR 26134446", "MRN/123", "UHID-77" -> show verbatim.
+    return /^(mrn?|uhid|uid|reg)[\s#:.\-]*\d/i.test(v) ? v : "MR " + v;
+  }
+  // Professional, self-contained discharge summary. Returns { css, body }: the WKWebView->PDF renderer
+  // (and the print iframe) have NONE of the app's stylesheets, so all styling is inlined here. Renders a
+  // hospital letterhead, a full patient-details grid, each completed section, discharge meds as a numbered
+  // list, and a signature + verify/disclaimer block. Empty sections are omitted.
+  function dischargeDocParts(f, p) {
+    f = f || dischargeFieldVals(); p = p || _raw.patient || {};
+    var e = function (x) { return esc(x == null ? "" : String(x)); };
+    var ml = function (x) { return e(String(x).trim()).replace(/\n/g, "<br>"); };
+    var hospital = p.hospital || _unit.hospital || "StewardMD";
+    var unit = _unit.type || ctxLabel();
+    var ageSex = (p.age != null && p.age !== "" ? p.age + "y" : "") + (p.sex ? (p.age != null && p.age !== "" ? " " : "") + p.sex : "");
+    var bedWard = (p.bed ? "Bed " + p.bed : "") + (unit ? (p.bed ? " / " : "") + unit : "");
+    var allergyText = (f.allergies && String(f.allergies).trim()) ? String(f.allergies).trim() : (p.allergies || "");
+    var row = function (l, v) { return (v && String(v).trim()) ? '<div class="row"><span class="k">' + e(l) + '</span><span class="v">' + e(v) + '</span></div>' : ""; };
+    var sec = function (title, val) { return (val && String(val).trim()) ? '<section><h2>' + e(title) + '</h2><div class="body">' + ml(val) + '</div></section>' : ""; };
+    var medsSec = "";
+    if (f.meds && f.meds.trim()) {
+      var lines = f.meds.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
+      medsSec = '<section><h2>Discharge medications</h2>' +
+        (lines.length > 1 ? '<ol class="meds">' + lines.map(function (l) { return '<li>' + e(l) + '</li>'; }).join("") + '</ol>' : '<div class="body">' + ml(f.meds) + '</div>') +
+        '</section>';
+    }
+    var genTs = ""; try { genTs = new Date().toLocaleString(); } catch (e2) {}
+    var css = '*{box-sizing:border-box}body{margin:0;font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a2b32;background:#fff}' +
+      '.sheet{max-width:760px;margin:0 auto;padding:26px 30px}' +
+      '.lh{border-bottom:3px solid #0f766e;padding-bottom:10px;margin-bottom:14px}' +
+      '.lh .hosp{font-size:20px;font-weight:800;color:#0f172a;letter-spacing:-.01em}' +
+      '.lh .doc-title{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0f766e;margin-top:3px}' +
+      '.lh .unit{font-size:11px;color:#64748b;margin-top:2px}' +
+      '.draft{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;color:#92620a;background:#fef3c7;border:1px solid #fcd34d;border-radius:999px;padding:2px 7px;margin-left:8px;vertical-align:middle}' +
+      '.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-bottom:14px}' +
+      '.row{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dotted #e5edf0;font-size:12.5px}' +
+      '.row .k{color:#64748b;font-weight:600}.row .v{color:#0f172a;font-weight:700;text-align:right}' +
+      '.dx{margin:0 0 14px;padding:9px 14px;background:#ecfdf5;border-left:4px solid #0f766e;border-radius:0 8px 8px 0}' +
+      '.dx .k{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e}' +
+      '.dx .dxv{font-size:15px;font-weight:800;color:#0f172a;margin-top:2px}.dx .sdx{font-size:12px;color:#334155;margin-top:4px}' +
+      'section{margin:0 0 12px}section h2{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#0f766e;margin:0 0 4px;padding-bottom:3px;border-bottom:1px solid #e2e8f0}' +
+      'section .body{font-size:12.5px;color:#1e293b}ol.meds{margin:4px 0 0;padding-left:22px}ol.meds li{font-size:12.5px;color:#1e293b;margin:2px 0}' +
+      '.sign{margin-top:26px}.sign .sig-line{min-height:20px;border-bottom:1px solid #94a3b8;max-width:280px;font-weight:700;color:#0f172a;padding-top:18px}' +
+      '.sign .sig-cap{font-size:10.5px;color:#64748b;margin-top:4px}' +
+      '.ft{margin-top:20px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;line-height:1.5}' +
+      '.alg{margin:0 0 12px;padding:8px 14px;border-radius:8px;font-size:12.5px;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12}' +
+      '.alg .k{display:inline-block;font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:10px;color:#c2410c;margin-right:8px}' +
+      '@page{margin:13mm}@media print{.sheet{max-width:none;padding:0}}';
+    var body = '<div class="sheet">' +
+      '<header class="lh"><div class="hosp">' + e(hospital) + '</div>' +
+        '<div class="doc-title">Discharge Summary <span class="draft">DRAFT &middot; REVIEW REQUIRED</span></div>' +
+        (unit ? '<div class="unit">' + e(unit) + ' unit</div>' : '') + '</header>' +
+      '<div class="grid">' +
+        row("Patient", p.name) +
+        row("MR / UHID", mrDisplay(p.mrn)) +
+        row("Age / Sex", ageSex) +
+        row("Bed / Ward", bedWard) +
+        row("Admitted", f.admitDate) +
+        row("Discharged", f.dischargeDate) +
+        row("Consultant", f.doctor || p.doctor) +
+        row("Department", p.dept) +
+        row("Resuscitation", p.codeStatus) +
+        row("Weight", p.weightKg ? p.weightKg + " kg" : "") +
+        row("Hospital", hospital) +
+      '</div>' +
+      '<div class="alg"><span class="k">Allergies / ADR</span>' + (allergyText ? e(allergyText) : '<b>[ confirm - not recorded ]</b>') + '</div>' +
+      '<div class="dx"><span class="k">Final diagnosis</span><div class="dxv">' + e(f.finalDx || "[ to complete ]") + '</div>' +
+        (f.secondaryDx && f.secondaryDx.trim() ? '<div class="sdx"><b>Secondary / comorbidities:</b> ' + ml(f.secondaryDx) + '</div>' : '') + '</div>' +
+      sec("Reason for admission", f.complaints) +
+      sec("Hospital course", f.course) +
+      sec("Key investigations", f.investigations) +
+      sec("Results / cultures pending", f.pendingResults) +
+      sec("Procedures / interventions", f.procedures) +
+      sec("Condition at discharge", f.condition) +
+      medsSec +
+      sec("Follow-up", f.followup) +
+      sec("Advice to patient / carer", f.advice) +
+      '<div class="sign"><div class="sig-line">' + e(f.doctor || p.doctor || "") + '</div>' +
+        '<div class="sig-cap">Discharging doctor &middot; signature &amp; stamp</div></div>' +
+      '<footer class="ft">Draft generated from recorded data' + (genTs ? ' on ' + e(genTs) : '') + '. Every value must be verified by the treating clinician before use. Decision support only, not a substitute for clinical judgement. Generated with StewardMD.</footer>' +
+      '</div>';
+    return { css: css, body: body };
+  }
+  function dischargeDocHtml(f, p) {
+    var x = dischargeDocParts(f, p), name = (p || _raw.patient || {}).name || "patient";
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Discharge summary - ' + esc(name) + '</title><style>' + x.css + '</style></head><body>' + x.body + '</body></html>';
+  }
+  // Real PDF export. Native: WKWebView->PDF via SMD_NATIVE.sharePdfFromHtml, falling back to sharing the
+  // styled HTML file (share sheet -> Print -> Save as PDF), then to a plain-text share. Web/PWA: a HIDDEN
+  // IFRAME print (the browser "Save as PDF") - NOT window.open, which the Capacitor WebView blocks (the
+  // old "Pop-up blocked" failure the clinician hit). Consent-gated upstream via phiExportConfirm.
+  // Shared PDF/print export (Discharge Creator + Daily Summary). Native: WKWebView->real PDF
+  // (SMD_NATIVE.sharePdfFromHtml) -> share the styled HTML file (share sheet -> Print -> Save as PDF) ->
+  // plain-text share. Web/PWA: a HIDDEN IFRAME print (browser "Save as PDF"), NEVER window.open (which the
+  // Capacitor WebView blocks - the old "Pop-up blocked" failure). `doc` = full <!doctype html>; `frag` =
+  // the same content as a styled fragment for the file fallback; `textFallback` = last-resort plain text.
+  function icuExportPdf(doc, frag, filename, title, textFallback) {
+    filename = String(filename || "StewardMD").replace(/[^\w.-]+/g, "-");
+    try {
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        var N = window.SMD_NATIVE;
+        if (typeof N.sharePdfFromHtml === "function") {
+          var r = N.sharePdfFromHtml(doc, filename, title);
+          if (r && typeof r.catch === "function") r.catch(function () { icuShareHtmlOrText(frag, filename, title, textFallback); });
+          return;
+        }
+        icuShareHtmlOrText(frag, filename, title, textFallback);
+        return;
+      }
+    } catch (e) {}
+    try {
+      if (typeof document !== "undefined" && document.createElement) {
+        var ifr = document.createElement("iframe");
+        ifr.setAttribute("aria-hidden", "true");
+        ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+        document.body.appendChild(ifr);
+        var d = ifr.contentWindow.document; d.open(); d.write(doc); d.close();
+        setTimeout(function () {
+          try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+          setTimeout(function () { try { ifr.parentNode && ifr.parentNode.removeChild(ifr); } catch (e2) {} }, 1500);
+        }, 350);
+        return;
+      }
+    } catch (e) {}
+    if (window.toast) toast("Export unavailable on this device - use Copy instead");
+  }
+  function icuShareHtmlOrText(frag, filename, title, textFallback) {
+    var N = window.SMD_NATIVE;
+    try {
+      if (N && typeof N.saveHtmlFile === "function") {
+        N.saveHtmlFile(frag, title, filename).catch(function () { try { if (textFallback != null && N.exportPdf) N.exportPdf(textFallback, title); } catch (e) {} });
+        return;
+      }
+      if (N && typeof N.exportPdf === "function" && textFallback != null) { N.exportPdf(textFallback, title); return; }
+    } catch (e) {}
+    if (window.toast) toast("Export unavailable on this device - use Copy instead");
+  }
   function doPrintDischarge() {
-    var f = dischargeFieldVals(), p = _raw.patient || {}, name = p.name || (ctxLabel() + " patient");
-    var esc2 = function (x) { return esc(x == null ? "" : x); };
-    var block = function (title, val) { return (val && String(val).trim()) ? '<h2>' + esc2(title) + '</h2><div class="b">' + esc2(String(val).trim()).replace(/\n/g, "<br>") + '</div>' : ""; };
-    var html = '<!doctype html><meta charset="utf-8"><title>Discharge summary — ' + esc2(name) + '</title>' +
-      '<style>body{font:13px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#111;padding:26px;max-width:740px;margin:auto}h1{font-size:19px;margin:0 0 2px}h2{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#0f766e;margin:16px 0 4px;border-bottom:1px solid #e2e8f0;padding-bottom:3px}.id{font-size:13px;margin:2px 0 2px;font-weight:600}.m{color:#666;font-size:11px;margin-bottom:8px}.b{white-space:normal}.draft{display:inline-block;font-size:10px;font-weight:700;color:#92620a;background:#fef3c7;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}.dx{font-size:14px;font-weight:700;margin:14px 0 2px}</style>' +
-      '<h1>StewardMD ' + esc2(ctxLabel()) + ' Discharge Summary<span class="draft">DRAFT</span></h1>' +
-      '<div class="id">' + esc2(dischargeHeaderLine(p)) + '</div>' +
-      ((f.admitDate || f.dischargeDate) ? '<div class="m">Admitted: ' + esc2(f.admitDate || "—") + ' &nbsp;&middot;&nbsp; Discharged: ' + esc2(f.dischargeDate || "—") + '</div>' : '') +
-      '<div class="dx">Final diagnosis: ' + esc2(f.finalDx || "[ complete ]") + '</div>' +
-      (f.secondaryDx && f.secondaryDx.trim() ? '<div class="b">Secondary: ' + esc2(f.secondaryDx.trim()).replace(/\n/g, "<br>") + '</div>' : '') +
-      block("Reason for admission", f.complaints) + block("Hospital course", f.course) + block("Key investigations", f.investigations) +
-      block("Procedures / interventions", f.procedures) + block("Condition at discharge", f.condition) + block("Discharge medications", f.meds) +
-      block("Follow-up", f.followup) + block("Advice to patient / carer", f.advice) +
-      (f.doctor && f.doctor.trim() ? '<h2>Discharging doctor</h2><div class="b">' + esc2(f.doctor.trim()) + '</div>' : '') +
-      '<div class="m" style="margin-top:18px">Draft generated from recorded data — verify every value before use. Decision support only. StewardMD.</div>';
-    var w = null; try { w = window.open("", "_blank"); } catch (e) {}
-    if (w && w.document) { w.document.open(); w.document.write(html); w.document.close(); setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350); }
-    else if (window.toast) toast("Pop-up blocked — use Copy or Share to export (Print needs a browser)");
+    var p = _raw.patient || {}, name = p.name || (ctxLabel() + " patient");
+    var parts = dischargeDocParts(dischargeFieldVals(), p);
+    var doc = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Discharge summary - ' + esc(name) + '</title><style>' + parts.css + '</style></head><body>' + parts.body + '</body></html>';
+    icuExportPdf(doc, '<style>' + parts.css + '</style>' + parts.body, "StewardMD-discharge-" + name, "StewardMD discharge summary - " + name, assembleDischarge());
   }
 
   // Search & select diagnosis — reuses the clinical reasoning engine's KB disease search
@@ -6617,6 +6757,10 @@
   }
   function doShareCase() { if (!shareText("StewardMD ICU — " + (_raw.patient.name || "ICU patient"), buildSummary())) openSummary(); }
   function shareCase() { phiExportConfirm("share to another app", doShareCase); }   // KI-H6 consent gate
+  // Discharge Creator "Share" must share the DISCHARGE DRAFT (with the clinician's edits), not the general
+  // Daily Summary (R1/UX #1: the button used to dispatch "sharecase" and silently share the wrong document).
+  function doShareDischarge() { var name = (_raw.patient && _raw.patient.name) || (ctxLabel() + " patient"); if (!shareText("StewardMD discharge summary — " + name, assembleDischarge())) copyDischarge(); }
+  function shareDischarge() { phiExportConfirm("share discharge summary", doShareDischarge); }   // KI-H6 consent gate
   function sharePatient(id) {
     if (!id || id === _raw.patient._id) { shareCase(); return; }
     var r = loadRoster(), e = null, i; for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
@@ -6999,6 +7143,7 @@
       }
       case "dischargecopy": copyDischarge(); break;
       case "dischargeprint": printDischarge(); break;
+      case "dischargeshare": shareDischarge(); break;
       case "followcare": openFollowCareEnroll(); break;   // enroll this patient into FollowCare (pre-filled)
       // Lab Watch
       case "labwatch": _lwDraft = null; openLabWatch(); break;
@@ -7465,6 +7610,8 @@
     _lwBadge: function () { return _lwBadge; },
     _lwStartWith: function (cfg) { cfg = cfg || {}; _lwDraft = { analytes: (cfg.analytes || []).slice(), mode: cfg.mode || "meaningful", dur: cfg.dur != null ? cfg.dur : 12, delivery: "inapp", q: "" }; lwStart(); return lwGet(); },
     buildDischarge: function (st) { _dischargeDefaults = dischargeDefaults(st); return assembleDischarge(_dischargeDefaults); }, openDischarge: openDischarge,
+    // Test seam: the professional PDF/print document (full <!doctype html>) + the MR/UHID de-dupe helper.
+    buildDischargeDoc: function (st) { _dischargeDefaults = dischargeDefaults(st); return dischargeDocHtml(_dischargeDefaults, (st && st.patient) || _raw.patient || {}); }, _mrDisplay: mrDisplay,
     // KI-M3 test seams (per-account live-buffer scoping)
     _bufKey: bufKey, _reconcileOwner: reconcileOwner, _loadOwnerBuffer: loadOwnerBuffer, _resetBufSync: function () { _ownerBufSynced = false; },
     // Phase 3 pure-transform test seams (deterministic, DOM-free): round-note→plan, auto-timeline

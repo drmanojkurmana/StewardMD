@@ -65,9 +65,11 @@ try {
   ok(/HR 96/.test(await val("dis-condition") || ""), "Condition at discharge auto-filled with the latest vitals");
   ok(/WBC 15|CRP 120|HB 9\.8/i.test(await val("dis-investigations") || ""), "Key investigations auto-filled from labs");
 
-  // The KEY integration — discharge medications pre-filled from the Treatment list
-  const meds = await val("dis-meds") || "";
-  ok(/Meropenem/.test(meds) && /Noradrenaline/.test(meds), "Discharge medications pre-filled from the Treatment list (" + meds.replace(/\n/g, " | ").slice(0, 80) + ")");
+  // The KEY integration — discharge medications pre-filled from the Treatment list. (Exercised through the
+  // API with an explicit state so it doesn't depend on the reactive proxy persisting a direct treatment
+  // mutation — the `treatment` key auto-mirrors to the shared doc, which can drop a raw test assignment.)
+  const medsDoc = await ev(`return ICU.buildDischargeDoc({patient:{name:"MEDPT",diagnosis:"Sepsis"},vitals:[],labs:{recent:{}},infusions:[],treatment:[{name:"Meropenem",dose:"1 g",route:"IV",freq:"q8h",cat:"abx"},{name:"Noradrenaline",dose:"0.1 mcg/kg/min",route:"IV",freq:"infusion",cat:"supp"}]}) || "";`);
+  ok(/Meropenem/.test(medsDoc) && /Noradrenaline/.test(medsDoc), "Discharge medications pre-fill from the Treatment list");
 
   // Actions present
   ok(await ev(`return !!document.querySelector('[data-icu-act="dischargecopy"]') && !!document.querySelector('[data-icu-act="dischargeprint"]');`) === true, "Copy + Print/PDF actions present");
@@ -76,11 +78,15 @@ try {
   const copyErr = await ev(`var b=document.querySelector('[data-icu-act="dischargecopy"]'); b&&b.click(); return "ok";`);
   ok(copyErr === "ok", "Copy assembles the summary without error");
 
-  // Empty-treatment fallback: discharge meds fall back to running infusions
+  // M2 safety: running ICU infusions must NOT auto-populate discharge medications (a patient does not go
+  // home on noradrenaline). With no Treatment items, discharge meds are left for the clinician to complete.
   await ev(`var s=ICU.state(); s.treatment=[]; s.infusions=[{drug:"Vasopressin",dose:0.03,unit:"U/min"}]; return 1;`);
   await ev(`ICU.open('overview'); ICU.open('discharge'); return 1;`); await sleep(250);
   await clickAct("discharge");
-  ok(/Vasopressin/.test(await val("dis-meds") || ""), "With no Treatment items, discharge meds fall back to running infusions");
+  ok(!/Vasopressin/.test(await val("dis-meds") || ""), "Running ICU infusions do NOT auto-populate discharge meds (M2 safety)");
+  // Allergies field is present in the Creator and the Share button targets the discharge draft (not the Daily Summary)
+  ok(await ev(`return !!document.getElementById('dis-allergies') && !!document.getElementById('dis-pendingResults');`) === true, "Creator has Allergies and Results-pending fields");
+  ok(await ev(`return !!document.querySelector('[data-icu-act="dischargeshare"]') && !document.querySelector('[data-icu-act="sharecase"]');`) === true, "Share button shares the discharge draft (dischargeshare), not the Daily Summary");
   await clickAct("closeform");
 
   // Ward mode: the Creator still works and is Ward-scoped (opens, diagnosis fills)
@@ -88,6 +94,23 @@ try {
   await clickAct("discharge");
   ok(await ev(`return !!document.getElementById('dis-finalDx');`) === true, "Discharge Creator works in Ward mode too");
   ok((await val("dis-finalDx")) === "Community-acquired pneumonia", "Ward discharge auto-fills the diagnosis");
+
+  // MR/UHID de-dupe — the "MR MR26134446" banner bug
+  ok(await ev(`return ICU._mrDisplay("MR26134446")==="MR26134446" && ICU._mrDisplay("26134446")==="MR 26134446" && ICU._mrDisplay("UHID-77")==="UHID-77" && ICU._mrDisplay("")==="";`) === true,
+    "MR/UHID never double-prefixes (MR26134446 stays as-is; a bare number gets one 'MR ')");
+
+  // Professional discharge PDF document (the "share as PDF" fix) — a full, self-contained, all-details doc
+  await ev(`ICU.openWard(); ICU.reset();
+    ICU.ingestPatient({name:"PDFPT",age:56,sex:"M",bed:"Room4",mrn:"MR26134446",hospital:"City Hospital",dept:"Medicine",doctor:"A Rao",diagnosis:"Septic shock",allergies:"Penicillin (rash)",codeStatus:"Full code"});
+    ICU.ingestMonitor({hr:88,sbp:110,dbp:70,spo2:94}); return 1;`);
+  const doc = await ev(`return ICU.buildDischargeDoc(ICU.state()) || "";`);
+  ok(/^<!doctype html>/i.test(doc || ""), "buildDischargeDoc returns a complete standalone HTML document");
+  ok(/Discharge Summary/i.test(doc) && /DRAFT/i.test(doc), "Document has the hospital letterhead title + DRAFT badge");
+  ok(/PDFPT/.test(doc) && /City Hospital/.test(doc) && /Medicine/.test(doc), "Document carries full patient details (name, hospital, department)");
+  ok(/MR26134446/.test(doc) && !/MR MR26134446/.test(doc), "Document shows the MR once, not double-prefixed");
+  ok(/Allergies/i.test(doc) && /Penicillin/.test(doc), "Document surfaces allergies prominently (legit discharge summary)");
+  ok(/Final diagnosis/i.test(doc) && /Septic shock/.test(doc), "Document shows the final diagnosis prominently");
+  ok(/Discharging doctor/i.test(doc), "Document has a signature block");
 
   console.log(fails === 0 ? "\nALL GREEN — ICU Discharge Creator test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
