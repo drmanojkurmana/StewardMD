@@ -16,6 +16,11 @@
   // the closed-endpoint production posture, set this to the Worker proxy "https://stewardmd.in/api/sknx"
   // + provision the secrets (see sknx-server/deploy.sh hardening notes).
   var DEFAULT_ENDPOINT = "https://sknx-derm-yislqrddsq-el.a.run.app";
+  // Production egress posture (security H1): the authenticated Worker proxy. classify() appends "/classify",
+  // hitting POST /api/sknx/classify — which enforces sign-in + feature gate + rate-limit, keeps the Cloud
+  // Run URL + key server-side, and fails closed (503) until SKNX_CLASSIFY_URL is provisioned. Selected only
+  // when the smd_sknx_secure_egress flag is ON (see endpoint()); default OFF keeps the direct validation path.
+  var PROXY_ENDPOINT = "https://stewardmd.in/api/sknx";
 
   // The two true cutaneous malignancies among the 59 SCIN conditions -> a label sknx-engines.js's
   // guardrail recognizes (normalizeMalignantLabel). These are pushed into lesionProbs so the malignancy
@@ -29,9 +34,13 @@
   function endpoint() {
     try {
       if (typeof window !== "undefined") {
+        // An explicit override always wins (validation/QA can pin a specific endpoint).
         if (window.SMD_SKNX_CLOUD_ENDPOINT) return window.SMD_SKNX_CLOUD_ENDPOINT;
         var ls = null; try { ls = localStorage.getItem("sknx_cloud_endpoint"); } catch (e) {}
         if (ls) return ls;
+        // Flag ON -> route through the authenticated Worker proxy (auth-enforced edge). Default OFF ->
+        // the raw Cloud Run URL, so the active validation path is untouched (security H1).
+        try { if (window.SMD_SKNX_FLAGS && window.SMD_SKNX_FLAGS.bool("smd_sknx_secure_egress")) return PROXY_ENDPOINT; } catch (e) {}
       }
     } catch (e) {}
     return DEFAULT_ENDPOINT;

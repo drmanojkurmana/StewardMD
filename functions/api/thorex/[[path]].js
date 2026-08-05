@@ -184,6 +184,26 @@ export async function onRequest(context) {
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
 
   try {
+    // POST /api/thorex/v1/cxr/analyze — authenticated proxy to the PRIVATE ThoreX CXR pipeline (security
+    // H1). Forwards the multipart upload server-to-server so the Cloud Run URL + key never reach the client
+    // bundle; enforces sign-in + feature gate, and FAILS CLOSED (503) until THOREX_ANALYZE_URL is
+    // provisioned. Selected only when the native client's smd_thorex_secure_egress flag is ON.
+    if (seg === "analyze" && request.method === "POST") {
+      const auid = await callerUid(request, env);
+      if (!auid) return json({ ok: false, error: "signin_required" }, 401, request);
+      const afeat = await requireFeature(env, request, "thorex_backend", { uid: auid });
+      if (!afeat.allowed) return json({ ok: false, error: "feature_off", feature: "thorex_backend" }, 403, request);
+      const target = env.THOREX_ANALYZE_URL;
+      if (!target) return json({ ok: false, error: "analyze_unconfigured" }, 503, request);
+      let form;
+      try { form = await request.formData(); } catch (e) { return json({ ok: false, error: "bad_multipart" }, 400, request); }
+      const fheaders = {};
+      if (env.THOREX_API_KEY) fheaders["X-Thorex-Key"] = env.THOREX_API_KEY;
+      const up = await fetch(target.replace(/\/$/, "") + "/v1/cxr/analyze", { method: "POST", headers: fheaders, body: form });
+      const body = await up.text();
+      return new Response(body, { status: up.status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) });
+    }
+
     if (seg !== "llm" || request.method !== "POST") return json({ error: "not_found" }, 404, request);
 
     const uid = await callerUid(request, env);
