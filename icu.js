@@ -4417,6 +4417,12 @@
     return '<div class="icu-v2-presence">' + av + '<span class="icu-v2-presence-tx">' + esc(txt) + '</span>' + grpSyncHTML() + '</div>';
   }
   function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; var sv = { round: "pulse", task: "check", imaging: "xray", abg: "droplet", vent: "lungs", pressor: "syringe", note: "note" }; return m[type] ? ico(sv[type] || "note", m[type]) : "•"; }
+  // User-configurable shared-data retention window (days). Mirrors icu-collab retentionDays(): default 7,
+  // hard-capped at 90. The chosen value drives both the write-time expiresAt (via the collab module) and
+  // the notice text below. Only NEW writes take a changed window; existing docs keep their stamped expiry.
+  function icuRetentionDays() {
+    try { var v = parseInt(localStorage.getItem("smd_icu_retention_days"), 10); if (!v || isNaN(v) || v < 1) return 7; return Math.min(v, 90); } catch (e) { return 7; }
+  }
   // Prepended to the Rounds tab in group mode — the LIVE instructions/tasks + append-only timeline
   // from subscribePatient, plus the reviewed state. (The no-type round-note composer is a later phase.)
   function grpRoundsPanel() {
@@ -4490,8 +4496,13 @@
     } else {
       out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, author- and time-stamped.</p></div>';
     }
-    // Retention notice — so doctors know how long the shared history is kept.
-    out += '<p class="icu-doc-sub" style="margin:10px 2px 0;opacity:.75;font-size:11.5px">' + ico("info", "ⓘ") + ' Shared timeline &amp; tasks are kept for 7 days, then cleared automatically — and removed when the patient is discharged. Export or note anything you need to keep.</p>';
+    // Retention notice + user-configurable window — so doctors know (and control) how long shared history is kept.
+    var _rd = icuRetentionDays();
+    out += '<p class="icu-doc-sub" style="margin:10px 2px 0;opacity:.75;font-size:11.5px">' + ico("info", "ⓘ") + ' Shared timeline &amp; tasks are kept for ' + _rd + ' days, then cleared automatically, and removed when the patient is discharged. Export or note anything you need to keep.</p>';
+    out += '<div class="icu-row" style="gap:6px;margin:5px 2px 0;flex-wrap:wrap;align-items:center" role="group" aria-label="How long to keep shared items">' +
+      '<span class="icu-doc-sub" style="margin:0;font-size:11px;opacity:.7">Keep for</span>' +
+      [7, 30, 60, 90].map(function (d) { return '<button class="icu-chip' + (d === _rd ? ' icu-chip-primary' : '') + '" data-icu-act="setretention:' + d + '" aria-pressed="' + (d === _rd ? 'true' : 'false') + '" style="padding:4px 11px;min-height:30px;font-size:11.5px">' + d + ' days</button>'; }).join('') +
+      '</div>';
     out += '</div>';
     return out;
   }
@@ -7247,17 +7258,36 @@
         grpCopyText(_htxt, "Handover copied — verify before use");
         break;
       }
+      case "setretention": {
+        var _rdays = Math.max(1, Math.min(90, parseInt(arg, 10) || 7));
+        try { localStorage.setItem("smd_icu_retention_days", String(_rdays)); } catch (e) {}
+        if (window.toast) toast("New shared items will be kept for " + _rdays + " days");
+        paint();
+        break;
+      }
       case "handovershift": {
         if (!grpActive() || !_grpPtId) { if (window.toast) toast("Open a shared (Group) patient to hand over to the unit"); break; }
         var _api2 = groupsApi();
+        if (!_api2 || !_api2.addTimelineEvent) { if (window.toast) toast("Shared units are unavailable right now. Try again in a moment."); break; }
         var _sb = buildSBAR(_raw), _detail = _sb.map(function (x) { return x.label + ": " + x.body; }).join(" | ");
-        // 1) record the full SBAR in the shared timeline (the incoming shift reads it there)
-        if (_api2 && _api2.addTimelineEvent) { try { _api2.addTimelineEvent(_grp.id, _grpPtId, { type: "handover", title: "Shift handover", detail: _detail }).then(null, function () {}); } catch (e) {} }
-        // 2) notify the unit (best-effort push to registered teammates = the incoming shift)
-        try { grpNotifyHandover(_grp.id, _grpPtId, _sb); } catch (e) {}
-        if (window.toast) toast("Handover posted to the unit timeline");
-        // 3) jump to Rounds so the handover entry is visible (so it clearly did something)
+        var _hg = _grp.id, _hp = _grpPtId;   // capture: the open patient may change before the write resolves
+        // jump to Rounds so the entry shows the moment it lands
         _active = "rounds"; _ws = wsOf("rounds"); _wsLast[_ws] = "rounds"; _tlAll = false; _paintTop = true; paint();
+        if (window.toast) toast("Posting handover to the unit timeline...");
+        // Toast the REAL result. A shift handover reporting a false success is a safety risk, so the
+        // write must actually land in the shared timeline; a hang or failure is surfaced, never swallowed.
+        var _hdone = false;
+        var _hto = setTimeout(function () { if (_hdone) return; _hdone = true; if (window.toast) toast("Handover is taking too long to sync. It may not have saved. Open the timeline to confirm."); }, 12000);
+        try {
+          _api2.addTimelineEvent(_hg, _hp, { type: "handover", title: "Shift handover", detail: _detail }).then(function () {
+            if (_hdone) return; _hdone = true; clearTimeout(_hto);
+            if (window.toast) toast("Handover posted to the unit timeline");
+            try { grpNotifyHandover(_hg, _hp, _sb); } catch (e) {}   // notify the unit only after it actually saved
+          }, function () {
+            if (_hdone) return; _hdone = true; clearTimeout(_hto);
+            if (window.toast) toast("Could not post handover. It was not saved. Check your connection and try again.");
+          });
+        } catch (e) { _hdone = true; clearTimeout(_hto); if (window.toast) toast("Could not post handover. It was not saved. Check your connection and try again."); }
         break;
       }
       case "dischargecopy": copyDischarge(); break;

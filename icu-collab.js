@@ -101,15 +101,33 @@
   }
 
   /* --------------------------------------------------- firebase / firestore */
-  var _db = null, _persistTried = false;
+  var _db = null, _persistTried = false, _lpTried = false;
   function fbReady() { try { return !!(window.firebase && window.firebase.firestore); } catch (e) { return false; } }
   function getDb() {
     try {
       if (_db) return _db;
-      if (window.SMD_DB) { _db = window.SMD_DB; return _db; }
-      if (window.firebase && firebase.firestore) { _db = firebase.firestore(); return _db; }
+      var db = window.SMD_DB || ((window.firebase && firebase.firestore) ? firebase.firestore() : null);
+      if (!db) return null;
+      forceLongPollingOnce(db);   // native fresh-signin WRITE-HANG fix (see below) - before ICU's first read/write
+      _db = db; return _db;
     } catch (e) {}
     return null;
+  }
+  // NATIVE Firestore WRITE-HANG fix. In the Capacitor WebView the default WebChannel Write stream can
+  // stall forever (Listens survive, writes never ack) - the "fresh sign-in" ICU/handover hang: a
+  // clinician posts a handover, gets a success toast, but nothing lands in the shared timeline. The
+  // reliable transport is long-polling, routed through native-bridge's pristine (un-CapacitorHttp) XHR.
+  // app.js applies experimentalForceLongPolling at boot, but a duplicate initializeApp or an early
+  // instance start can make that throw BEFORE it lands. Re-assert it here, before ICU's first read/write,
+  // best-effort: if the instance was already started the call throws and we are no worse off than today.
+  // Web/PWA are untouched (native only); idempotent via _lpTried.
+  function forceLongPollingOnce(db) {
+    if (_lpTried || !db || !db.settings) return;
+    _lpTried = true;
+    try {
+      var isNative = window.SMD_IS_NATIVE || (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+      if (isNative) db.settings({ experimentalForceLongPolling: true });
+    } catch (e) {}
   }
   function fieldValue() {
     try { return window.firebase.firestore.FieldValue; } catch (e) {}
@@ -218,8 +236,20 @@
   // DPDP 7-day auto-clear: shared ICU data carries an `expiresAt` and is deleted by a Firestore TTL
   // policy (configured on the patients / timeline / tasks collection groups). Refreshed on each write,
   // so it's a sliding 7-day-since-last-activity window; explicit discharge deletes immediately.
-  var RETENTION_MS = 7 * 24 * 3600 * 1000;
-  function retentionExpiry() { return new Date(nowMs() + RETENTION_MS); }
+  // DPDP retention window (days) for shared ICU data. User-configurable via localStorage
+  // (smd_icu_retention_days): default 7, HARD-CAPPED at 90 so the "cleared automatically" promise -
+  // and the firestore.rules retentionCapped() bound (91d = 90 + ~1d slack) - always holds. Only NEW
+  // writes take the new window; existing docs keep the expiresAt stamped when they were written.
+  var RETENTION_DEFAULT_DAYS = 7, RETENTION_MAX_DAYS = 90;
+  var RETENTION_MS = RETENTION_DEFAULT_DAYS * 24 * 3600 * 1000;   // legacy default window (ms)
+  function retentionDays() {
+    try {
+      var v = parseInt((typeof localStorage !== "undefined") ? localStorage.getItem("smd_icu_retention_days") : null, 10);
+      if (!v || isNaN(v) || v < 1) return RETENTION_DEFAULT_DAYS;
+      return Math.min(v, RETENTION_MAX_DAYS);
+    } catch (e) { return RETENTION_DEFAULT_DAYS; }
+  }
+  function retentionExpiry() { return new Date(nowMs() + retentionDays() * 24 * 3600 * 1000); }
   // Strip DERIVED alerts (recomputed on load, exactly like savePatient) but keep everything
   // else — crucially ICU_STATE.src (engine-scored source tags) is carried through unchanged.
   function sanitizeState(state) {
@@ -1092,6 +1122,7 @@
     _mapGroupDoc: mapGroupDoc, _mapMemberDoc: mapMemberDoc, _mapPatientDoc: mapPatientDoc, _mapTimeline: mapTimeline, _mapTask: mapTask,
     _buildTimelineEvent: buildTimelineEvent, _buildTask: buildTask, _taskStatusPatch: taskStatusPatch,
     _retentionExpiry: retentionExpiry, _RETENTION_MS: RETENTION_MS,
+    _retentionDays: retentionDays, _RETENTION_MAX_DAYS: RETENTION_MAX_DAYS, _RETENTION_DEFAULT_DAYS: RETENTION_DEFAULT_DAYS,
     _sanitizeState: sanitizeState, _normStatus: normStatus, _normRole: normRole, _normInviteRole: normInviteRole,
     _genSmdId: genSmdId, _emailHash: emailHash, _looksLikeEmail: looksLikeEmail, _normalizeId: normalizeId,
     _parseJoinParam: parseJoinParam, _inviteUrl: inviteUrl, _isAdminRole: isAdminRole,
