@@ -154,7 +154,8 @@ export async function onRequest(context) {
   //   • /api/* — in-app AI, Resend-triggering endpoints, the emailed approve/reject links
   //     (/api/verifications/action), the native app, and cron. Each endpoint self-authorises.
   //   • /admin/* — the admin console gates itself with Google owner login (_adminauth.js).
-  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin")) {
+  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
+      url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare")) {
     return next();
   }
 
@@ -172,23 +173,20 @@ export async function onRequest(context) {
     return next();
   }
 
-  // Already unlocked on this browser? Let the real web app through.
-  const cookie = readCookie(request.headers.get("Cookie"), COOKIE_NAME);
-  if (cookie && safeEqual(cookie, token)) {
-    return next();
-  }
-
-  // The ONLY thing the gate hides is a genuine top-level page navigation (a human typing/clicking
-  // to a site page in a browser). Sec-Fetch-Dest:"document" marks that in every modern browser;
-  // we fall back to the Accept header for the rare client that omits it. Scripts, styles, images,
-  // JSON/fetch/XHR and any non-GET request have a different Dest (or none) and sail through, so no
-  // asset or feature is ever replaced — only the public web UI shell.
+  // WEB APP KILLED (native-only). Everything past here IS the clinical app (index.html, the JS bundle, kb/,
+  // engine, sw.js, assets). StewardMD runs ONLY in the native iOS/Android apps: they bundle www/ locally and
+  // only call /api/*, so a browser may neither RUN nor DOWNLOAD it. Owner testing is on device or on a preview
+  // deployment (the <hash>.stewardmd.pages.dev bypass above), NOT on stewardmd.in.
+  // Emergency valve: set SITE_ALLOW_WEB="1" in the Pages env to serve the web app again instantly (no redeploy).
+  if (env && env.SITE_ALLOW_WEB === "1") return next();
   const dest = request.headers.get("Sec-Fetch-Dest");
   const accept = request.headers.get("Accept") || "";
   const isPageView =
     request.method === "GET" && (dest === "document" || (!dest && accept.includes("text/html")));
+  // A top-level browser navigation -> the marketing page; ANY other request (an app asset) -> a hard 404, so
+  // the app bundle can never be scraped or served to a browser. (Assets no longer "pass through".)
   if (!isPageView) {
-    return next();
+    return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });
   }
 
   return new Response(COMING_SOON_HTML, {
