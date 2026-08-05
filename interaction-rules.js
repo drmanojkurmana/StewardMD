@@ -666,7 +666,6 @@
     ],
     "verapamil": [
       "calcium_channel_blocker",
-      "dihydropyridine_ccb",
       "epc:calcium_channel_agent",
       "epc:cardiovascular_agent",
       "epc:established_pharmacologic_classes",
@@ -4266,6 +4265,10 @@
       "hypoglycemic",
       "insulin"
     ],
+    "insulin": [
+      "hypoglycemic",
+      "insulin"
+    ],
     "insulin lispro": [
       "epc:antidote",
       "epc:blood_glucose_regulator",
@@ -4903,7 +4906,6 @@
     ],
     "clozapine": [
       "antipsychotic",
-      "benzodiazepine",
       "cns_depressant",
       "epc:established_pharmacologic_classes",
       "epc:nervous_system_agent",
@@ -21022,6 +21024,30 @@
       "specialistReview": false
     },
     {
+      "id": "mech-cyp3a4strong-nondhp-ccb",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "non_dihydropyridine_ccb"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "A strong CYP3A4 inhibitor raises exposure to verapamil and diltiazem, which are CYP3A4 substrates that also slow AV-nodal conduction.",
+      "effect": "Exaggerated hypotension and bradycardia or AV block.",
+      "action": "Reduce the calcium-channel-blocker dose and monitor; consider an alternative to the inhibitor or the CCB.",
+      "monitoring": "Blood pressure, heart rate, and ECG/PR interval; postural symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "mech-cyp3a4strong-pde5i",
       "type": "pair",
       "subjects": [
@@ -21450,6 +21476,174 @@
       "sourceId": "openfda-labeling",
       "evidence": "established",
       "reviewDate": "2026-07-04",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-amiodarone-statin",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "amiodarone"
+        },
+        {
+          "kind": "class",
+          "value": "statin"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Amiodarone inhibits CYP3A4 and P-glycoprotein, reducing metabolism of CYP3A4-dependent statins and raising statin exposure; this is additive to amiodarone's own myopathy signal.",
+      "effect": "Increased risk of myopathy and rhabdomyolysis, greatest with simvastatin and lovastatin.",
+      "action": "Cap simvastatin at 20 mg/day and lovastatin at 40 mg/day with amiodarone, or switch to a statin not dependent on CYP3A4 (pravastatin, rosuvastatin, or pitavastatin), which are unaffected and preferred.",
+      "monitoring": "Advise the patient to report muscle pain/weakness or dark urine; check creatine kinase if symptomatic.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-carbamazepine-cyp3a4",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "carbamazepine"
+        },
+        {
+          "kind": "class",
+          "value": "cyp3a4_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Carbamazepine is a CYP3A4 substrate; a CYP3A4 inhibitor (e.g. macrolides, azole antifungals) reduces its clearance and raises serum levels.",
+      "effect": "Carbamazepine toxicity (diplopia, ataxia, drowsiness, hyponatraemia, arrhythmia); narrow therapeutic index.",
+      "action": "Avoid the combination where possible; if unavoidable, reduce the carbamazepine dose and monitor levels closely, or choose a non-interacting antimicrobial (e.g. azithromycin instead of clarithromycin).",
+      "monitoring": "Serum carbamazepine level and clinical signs of toxicity when starting or stopping the inhibitor.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-phenytoin-cyp2c9",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "phenytoin"
+        },
+        {
+          "kind": "class",
+          "value": "cyp2c9_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Phenytoin is metabolised mainly by CYP2C9; a CYP2C9 inhibitor reduces its clearance, and because phenytoin has saturable kinetics small changes cause large level swings.",
+      "effect": "Phenytoin toxicity (nystagmus, ataxia, confusion, sedation); narrow therapeutic index.",
+      "action": "Reduce the phenytoin dose and monitor levels closely when starting or stopping the inhibitor; interpret with albumin/free phenytoin where relevant.",
+      "monitoring": "Serum phenytoin level (free level if hypoalbuminaemic) and clinical signs of toxicity.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-phenytoin-azole",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "phenytoin"
+        },
+        {
+          "kind": "class",
+          "value": "azole_antifungal"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Azole antifungals (notably fluconazole and miconazole) inhibit CYP2C9/CYP2C19-mediated phenytoin metabolism.",
+      "effect": "Phenytoin toxicity (nystagmus, ataxia, confusion, sedation); narrow therapeutic index.",
+      "action": "Reduce the phenytoin dose and monitor levels closely when starting or stopping the azole; phenytoin can also lower azole levels, so watch antifungal efficacy.",
+      "monitoring": "Serum phenytoin level and clinical signs of toxicity; antifungal response.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-theophylline-cyp1a2",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "theophylline"
+        },
+        {
+          "kind": "class",
+          "value": "cyp1a2_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Theophylline is a CYP1A2 substrate; a CYP1A2 inhibitor (e.g. ciprofloxacin, fluvoxamine) reduces its clearance and raises serum levels.",
+      "effect": "Theophylline toxicity (nausea, tachyarrhythmia, agitation, seizures); narrow therapeutic index.",
+      "action": "Reduce the theophylline dose (commonly by about a third to half) and monitor levels when starting the inhibitor, or choose a non-interacting agent (e.g. a non-fluoroquinolone antibiotic).",
+      "monitoring": "Serum theophylline level, heart rate/rhythm, and toxicity symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-corticosteroid-nsaid",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "corticosteroid"
+        },
+        {
+          "kind": "class",
+          "value": "nsaid"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Systemic corticosteroids and NSAIDs both injure the gastrointestinal mucosa and impair its defence; the effects are additive.",
+      "effect": "Markedly increased risk of peptic ulceration and gastrointestinal bleeding.",
+      "action": "Avoid the combination where possible; if both are needed, use the lowest doses for the shortest time and add gastroprotection (a proton-pump inhibitor).",
+      "monitoring": "Watch for dyspepsia, GI bleeding (melaena, anaemia); check haemoglobin if symptomatic.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "pair-loop-aminoglycoside",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "loop_diuretic"
+        },
+        {
+          "kind": "class",
+          "value": "aminoglycoside"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "Loop diuretics and aminoglycosides are independently ototoxic and nephrotoxic; combined use and diuretic-induced volume depletion increase aminoglycoside exposure to the inner ear and kidney.",
+      "effect": "Additive ototoxicity (hearing loss, which can be permanent) and nephrotoxicity.",
+      "action": "Avoid the combination where possible; if both are needed, maintain hydration, use the shortest aminoglycoside course, and dose the aminoglycoside by levels.",
+      "monitoring": "Renal function and aminoglycoside levels; ask about hearing/tinnitus and balance.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-08-05",
       "doseTimingSeparation": false,
       "specialistReview": false
     },

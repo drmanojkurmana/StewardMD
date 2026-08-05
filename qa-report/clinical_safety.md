@@ -143,6 +143,35 @@ M/L below remain open. The original findings are preserved below for the record.
 
 ## MEDIUM
 
+## STATUS UPDATE (2026-08-05): M1-M3 + M5 FIXED (test-driven); M4 deferred to R2
+
+The four DDI-ruleset MEDIUM items are remediated, test-first
+(`test/interaction-medium-fixes.test.mjs` 19/19, golden regression unchanged, critical/high suites still
+12/12 and 25/25, full unit suite no new failures). Fix summary (all in `interaction-rules.js`):
+- **M1** - new `pair-amiodarone-statin` (amiodarone x `statin` class, major) with the FDA simvastatin-20mg /
+  lovastatin-40mg dose caps and a steer to pravastatin/rosuvastatin/pitavastatin in the action text. (Did
+  NOT add `cyp3a4_inhibitor` to amiodarone, which would have double-fired warfarin via the existing
+  `pair-warfarin-macrolide-azole`.)
+- **M2** - new victim rules: `pair-carbamazepine-cyp3a4` (x `cyp3a4_inhibitor`), `pair-phenytoin-cyp2c9`
+  (x `cyp2c9_inhibitor`) + `pair-phenytoin-azole` (x `azole_antifungal`, so phenytoin+fluconazole fires
+  WITHOUT re-tagging fluconazole and double-firing warfarin), `pair-theophylline-cyp1a2` (x `cyp1a2_inhibitor`).
+- **M3** - removed the `benzodiazepine` mis-tag from clozapine (its opioid+benzo "coma and death" false alert
+  is gone; the genuine additive-CNS alert survives via `cns_depressant`) and the `dihydropyridine_ccb`
+  mis-tag from verapamil, adding `mech-cyp3a4strong-nondhp-ccb` so the genuine clarithromycin+verapamil
+  interaction is preserved and clarithromycin+diltiazem (previously missed) now fires. (The lisinopril
+  mis-tag from M3 was already fixed in H4.)
+- **M5** - new `pair-corticosteroid-nsaid` (GI bleeding) and `pair-loop-aminoglycoside` (oto/nephrotoxicity).
+  insulin+sulfonylurea was NOT actually a miss (it already fires `dup-hypoglycemic`); the auditor hit it by
+  entering bare `insulin`, which was UNCLASSIFIED - now added to `drugClasses` as `["hypoglycemic","insulin"]`
+  so bare `insulin` resolves. (No redundant insulin x sulfonylurea rule added, to avoid a double-fire.)
+
+**M4 (AI general-knowledge path) - NOT auto-fixed; routed to R2 AI-safety review.** It is a different
+subsystem (`functions/api/ai`), any AI/prompt/serving change is mandatorily R2-reviewed, and its substantive
+half (cross-checking AI-suggested drugs through the DDI engine) is a NEW feature with its own failure modes
+(drug-mention extraction can give false reassurance) - not a high-confidence one-line fix. The ungrounded-dose
+half is already guarded (ground-check rule #8, dosing rule #3, education-not-individualised rule #4, persistent
+UI advisory). Left open pending an R2-designed cross-check. **R1 re-review of M1-M3/M5: in flight.**
+
 - **M1** Amiodarone + simvastatin (myopathy; FDA caps simva 20mg) not flagged - amiodarone lacks `cyp3a4_inhibitor`.
 - **M2** NTI CYP victims not wired: `carbamazepine+clarithromycin`, `phenytoin+fluconazole`, `theophylline+ciprofloxacin` MISS.
 - **M3** Misclassifications -> false positives (alert fatigue): `clozapine` tagged `benzodiazepine`;
