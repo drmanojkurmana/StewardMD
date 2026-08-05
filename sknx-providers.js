@@ -35,13 +35,16 @@
       engines: injected.engines || (typeof window !== "undefined" && window.SMD_SKNX_ENGINES) || (typeof require !== "undefined" ? require("./sknx-engines.js") : null)
     };
   }
+  function historyApi() {
+    try { return (typeof window !== "undefined" && window.SMD_SKNX_HISTORY) || (typeof require !== "undefined" ? require("./sknx-history.js") : null); } catch (e) { return null; }
+  }
   function mockRaw(entitlement, image) {
     if (image && image.__mock === "melanoma") {
       return { generalProbs: [{ label: "benign keratosis", prob: 0.5 }], lesionProbs: [{ label: "melanoma", prob: 0.35 }, { label: "nevus", prob: 0.5 }], features: {} };
     }
     return { generalProbs: [{ label: "psoriasis", prob: 0.71 }, { label: "eczema", prob: 0.16 }], lesionProbs: [{ label: "nevus", prob: 0.92 }, { label: "melanoma", prob: 0.02 }], features: { diameterMm: 4 } };
   }
-  function analyze(image, entitlement, onStage, injected) {
+  function analyze(image, entitlement, onStage, injected, history) {
     var d = deps(injected);
     function stage(i) { try { if (onStage) onStage(STAGES[i], Math.round(((i + 1) / STAGES.length) * 100)); } catch (e) {} }
     stage(0); stage(1); stage(2);
@@ -64,6 +67,12 @@
     }
     return rawP.then(function (raw) {
       stage(3);
+      // Merge optional clinical-history danger-signs into features so the deterministic red-flag guardrail
+      // fires regardless of engine (the cloud engine sends features:{}). No-op when history is absent.
+      try {
+        var hf = historyApi(); var extra = hf ? hf.historyToFeatures(history) : null;
+        if (extra && Object.keys(extra).length) { raw.features = Object.assign({}, raw.features || {}, extra); }
+      } catch (e) {}
       var a = d.engines.makeAnalysis(raw, entitlement);
       try { a.engine = (raw && raw.engine) || "mock"; } catch (e) {} // "realvision-experimental" | "mock" | plugin engine — for the UI badge
       stage(4);
