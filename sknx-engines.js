@@ -11,6 +11,9 @@
   // any real deployment; err toward inclusion.
   var MALIGNANT = ["melanoma", "BCC", "SCC", "Merkel cell carcinoma", "cutaneous lymphoma", "Kaposi sarcoma", "cutaneous sarcoma", "sebaceous carcinoma", "adnexal carcinoma", "cutaneous Paget disease", "cutaneous metastasis"];
   var REFER_THRESHOLD = 0.15; // false-negative-averse: refer on even a low malignancy signal
+  // Drug-reaction patterns that can be early SJS/TEN/DRESS (a dermatologic emergency). Exact-key (lower).
+  // Used for a SEVERE-REACTION caution, not a hard referral - most drug rashes are benign.
+  var SCAR_RISK = { "drug rash": 1, "erythema multiforme": 1 };
   // Synonym/case map -> canonical MALIGNANT entry. A real classifier may emit "Melanoma", "bcc",
   // "basal cell carcinoma", "Mycosis Fungoides", "MCC", etc.; normalize before matching so the referral
   // guardrail below can't be slipped past by casing/label-text drift. Add a label variant here (never
@@ -112,19 +115,38 @@
     raw = raw || {};
     var differential = rank(raw.generalProbs);
     var lesion = null, referral = false, reason = null;
+    // SAFETY GUARDRAIL - runs at EVERY tier. The malignancy referral must NOT be entitlement-gated:
+    // a vision engine selectable at v1 (e.g. the cloud classifier, whose available() is tier-independent)
+    // can emit a named carcinoma in lesionProbs, and a tier gate here would let it pass as benign+Rx-
+    // eligible (R1 finding C1). False-negative-averse: refer on any malignant signal >= threshold.
+    var malig = (raw.lesionProbs || []).filter(function (x) { return !!normalizeMalignantLabel(x.label); }).sort(function (a, b) { return b.prob - a.prob; })[0];
+    if (malig && malig.prob >= REFER_THRESHOLD) { referral = true; reason = "Possible " + malig.label + " - specialist referral, do not prescribe."; }
+    // The lesion DISPLAY object (top lesion class + confidence band surfaced in the UI) stays a v2beta
+    // surfacing - a paid feature, not a safety mechanism.
     if (entitlement === "v2beta") {
       var lr = rank(raw.lesionProbs)[0] || null;
       if (lr) { lesion = { top: lr.label, prob: lr.prob, band: lr.band }; }
-      var malig = (raw.lesionProbs || []).filter(function (x) { return !!normalizeMalignantLabel(x.label); }).sort(function (a, b) { return b.prob - a.prob; })[0];
-      if (malig && malig.prob >= REFER_THRESHOLD) { referral = true; reason = "Possible " + malig.label + " - specialist referral, do not prescribe."; }
     }
     if (redFlag(raw.features)) { referral = true; reason = reason || "Red-flag features (ABCDE / bleeding / ulceration) - specialist referral, do not prescribe."; }
+    // SEVERE CUTANEOUS ADVERSE REACTION caution (R1 finding I1): a prominent drug-reaction pattern may be
+    // early SJS/TEN/DRESS - a dermatologic emergency. Surface a caution (not a hard referral: most drug
+    // rashes are benign) prompting the clinician to check for the danger features. Fires when a SCAR-risk
+    // condition is the top differential or scores high.
+    var caution = null;
+    var scar = (differential || []).filter(function (x) { return !!SCAR_RISK[String(x.label == null ? "" : x.label).toLowerCase().trim()] && (x === differential[0] || x.prob >= 0.5); })[0];
+    if (scar) { caution = "Possible " + scar.label + " - if mucosal involvement, skin pain, blistering, target lesions, or systemic symptoms, treat as a possible severe reaction (SJS / TEN / DRESS) and refer urgently."; }
+    // OOD / low-confidence (vision engine withheld a differential): never Rx-eligible, and surfaced as a
+    // distinct "no confident reading" state - not a benign result (AI-safety C1).
+    var ood = !!raw.ood;
     return {
       differential: differential,
       lesion: lesion,
       referral: referral,
       referralReason: reason,
-      rxEligible: !referral,
+      caution: caution,
+      ood: ood,
+      oodReason: ood ? (raw.oodReason || null) : null,
+      rxEligible: !referral && !ood,
       disclaimerKey: "educational_not_clinical"
     };
   }

@@ -69,6 +69,7 @@
             srcCard("library", "photo_library", "Photo Library", "PNG, JPEG, HEIC") +
             srcCard("files", "folder", "Files", "Browse iCloud") +
           "</div>" +
+          hxFormHtml("capture") +
           '<div class="sknx-tip" role="note">' + ic("tips_and_updates") +
             '<span class="sknx-tip-txt">Good lighting, fill the frame with the lesion or rash, avoid glare - SknX auto-enhances the image before analysis.</span>' +
           "</div>" +
@@ -176,23 +177,25 @@
           '<div class="sknx-dx-empty">' + ic("check_circle") + "<span>No confident finding - correlate clinically.</span></div>") +
       "</div>";
 
-    // Experimental-model badge: shown when the EXPERIMENTAL on-device ONNX classifier produced this
-    // result (engine === "realvision-experimental"), so the clinician knows the read is from an
-    // uncalibrated public model, not a validated one. The mock/native paths show nothing.
-    var expHtml = (a.engine === "realvision-experimental") ?
-      '<div class="sknx-exp" role="note">' + ic("science") +
-        "<span>Experimental on-device model - uncalibrated, for testing only. Not a validated result; correlate clinically.</span>" +
-      "</div>" : "";
+    // A specific FINDING (referral > OOD > severe-reaction) is a RESULT - kept visible but ONE concise
+    // line, not a full-width alert. A malignancy/red-flag referral outranks the others. The generic
+    // experimental/educational caveat is NOT here - it is the concise footer below (owner: results first,
+    // warnings small at the foot; no model names in the copy).
+    var findingHtml = "";
+    if (a.referral) {
+      findingHtml = '<div class="sknx-finding sknx-finding-refer" role="alert">' + ic("crisis_alert") +
+        "<span>" + esc(a.referralReason || "Refer for specialist evaluation.") + "</span></div>";
+    } else if (a.ood) {
+      findingHtml = '<div class="sknx-finding sknx-finding-ood" role="alert">' + ic("help") +
+        "<span>" + esc(a.oodReason || "No confident reading. Re-take the photo or assess clinically.") + "</span></div>";
+    } else if (a.caution) {
+      findingHtml = '<div class="sknx-finding sknx-finding-caution" role="alert">' + ic("warning") +
+        "<span>" + esc(a.caution) + "</span></div>";
+    }
 
-    // Red referral banner — icon + colour + text together (never colour alone). Shown ONLY when the
-    // engine's malignancy/red-flag guardrail set referral=true; referralReason is always shown verbatim.
-    var referHtml = a.referral ?
-      '<div class="sknx-refer" role="alert">' + ic("crisis_alert") +
-        '<div class="sknx-refer-body">' +
-          '<b class="sknx-refer-title">Specialist referral recommended</b>' +
-          '<span class="sknx-refer-reason">' + esc(a.referralReason || "Refer for specialist evaluation.") + "</span>" +
-        "</div>" +
-      "</div>" : "";
+    // Concise footer caveat - ONE muted line. NO model names/sizes/architecture in the copy.
+    var footerHtml = '<div class="sknx-footer">' + ic("info") +
+      "<span>Experimental, educational only - not a diagnosis. Does not exclude skin cancer; correlate clinically.</span></div>";
 
     var lesionHtml = a.lesion ?
       '<div class="sknx-lesion">' + ic("info") +
@@ -214,25 +217,55 @@
         '<button class="sknx-result-close" type="button" data-act="sknx-close" aria-label="Close SknX">' + ic("close") + "</button>" +
       "</div>";
 
+    // RESULTS FIRST (owner directive): the differential leads; the concise finding line follows; generic
+    // caveats live in the small footer at the very bottom.
     var body =
       '<div class="sknx-result-body">' +
-        expHtml +
-        referHtml +
-        heatmapHtml +
         '<div class="sknx-sec-title">Differential</div>' +
         dxHtml +
+        '<div class="sknx-rerank-host" id="sknxRerankHost" aria-live="polite"></div>' +
+        findingHtml +
         lesionHtml +
-        '<div class="sknx-disc">' + ic("info") + "<span>" + esc(disclaimerText(a.disclaimerKey)) + "</span></div>" +
+        heatmapHtml +
         '<div class="sknx-report-host" id="sknxReportHost" aria-live="polite"><div class="sknx-report-loading">' + ic("hourglass_empty") + "<span>Preparing educational report&hellip;</span></div></div>" +
         '<div class="sknx-actions">' +
           '<button class="sknx-btn sknx-btn-primary" type="button" data-act="sknx-save">' + ic("bookmark") + "Save case</button>" +
           '<button class="sknx-btn sknx-btn-secondary" type="button" data-act="sknx-new">' + ic("add_a_photo") + "New photo</button>" +
         "</div>" +
         rxAffordance(a) +
+        hxFormHtml("refine") +
+        footerHtml +
       "</div>";
 
     host.innerHTML = head + body;
     mountReport(a);
+    mountRerank(a);
+  }
+
+  // mountRerank(a): if the case carries clinical history, ask the LLM to reorder the differential and
+  // write a rationale (Phase 2), then render a "History-adjusted" section under the image differential.
+  // Display-only + best-effort: it NEVER changes referral/rxEligible, and a no-LLM/offline result hides
+  // the section (no false "adjusted" claim).
+  function mountRerank(a) {
+    try {
+      var el = document.getElementById("sknxRerankHost");
+      if (!el) return;
+      var LLM = window.SMD_SKNX_LLM, hist = a && a.history;
+      var hasHist = hist && typeof hist === "object" && Object.keys(hist).length > 0;
+      if (!hasHist || !LLM || !LLM.rerank || !(a.differential && a.differential.length)) { el.innerHTML = ""; return; }
+      el.innerHTML = '<div class="sknx-rerank-loading">' + ic("neurology") + "<span>Re-checking with the history&hellip;</span></div>";
+      Promise.resolve(LLM.rerank(a.differential, hist)).then(function (res) {
+        if (!res || res.provider === "offline" || !(res.differential && res.differential.length)) { el.innerHTML = ""; return; }
+        var rows = res.differential.slice(0, 6).map(function (d, i) {
+          return '<div class="sknx-dx-row"><span class="sknx-dx-rank">' + (i + 1) + '</span><span class="sknx-dx-label">' + esc(d.label) + "</span></div>";
+        }).join("");
+        el.innerHTML =
+          '<div class="sknx-sec-title">History-adjusted</div>' +
+          '<div class="sknx-dx sknx-dx-adjusted">' + rows + "</div>" +
+          (res.rationale ? '<div class="sknx-rationale">' + ic("neurology") + "<span>" + esc(res.rationale) + "</span></div>" : "") +
+          (res.advisory ? '<div class="sknx-rationale sknx-rationale-adv">' + ic("info") + "<span>" + esc(res.advisory) + "</span></div>" : "");
+      }).catch(function () { el.innerHTML = ""; });
+    } catch (e) {}
   }
 
   /* Phase 3 clinician-confirmed Rx affordance. GUARDED by SMD_SKNX_RX.eligible(a): it renders the ONLY
@@ -314,10 +347,22 @@
   function closeMod() { try { if (window.SKNX && window.SKNX.close) window.SKNX.close(); } catch (e) {} }
   function ctx() { return { analysis: state.analysis, entitlement: resolveEntitlement() }; }
 
+  // Optional clinical-history intake (sknx-history.js). All helpers are no-ops if the module is absent.
+  function hx() { try { return (typeof window !== "undefined" && window.SMD_SKNX_HISTORY) || null; } catch (e) { return null; } }
+  function hxFormHtml(kind) {
+    var H = hx(); if (!H) return "";
+    var label = kind === "refine" ? "Refine with clinical history" : "Add clinical history (optional)";
+    var apply = kind === "refine" ? '<button class="sknx-btn sknx-btn-secondary sknx-hx-apply" type="button" data-act="sknx-refine-apply">' + ic("check") + "Apply history</button>" : "";
+    return '<details class="sknx-hx-wrap"><summary>' + ic("clinical_notes") + esc(label) + "</summary>" + H.formHtml() + apply + "</details>";
+  }
+  function readHx() { try { var H = hx(); var r = host() && host().querySelector(".sknx-hx"); return (H && r) ? H.readForm(r) : null; } catch (e) { return null; } }
+  function bindHx(h) { try { var H = hx(); var r = h && h.querySelector && h.querySelector(".sknx-hx"); if (H && r) H.bindForm(r); } catch (e) {} }
+
   function show(key) {
     var h = host(), fn = SCREENS[key];
     if (!h || !fn) return;
     try { fn(h, ctx()); } catch (e) { try { console.warn("[SknX] screen " + key, e); } catch (_) {} }
+    try { bindHx(h); } catch (e) {}
     try { h.scrollTop = 0; } catch (_) {}
   }
   function go(key) {
@@ -397,8 +442,9 @@
   }
 
   function startCapture(src) {
+    var history = readHx();   // read the capture-screen history form (if any) before the picker opens
     captureImage(src).then(function (blob) {
-      runPipeline({ id: "sknx-" + Date.now(), source: src, data: blob });
+      runPipeline({ id: "sknx-" + Date.now(), source: src, data: blob }, history);
     }).catch(function (err) {
       if (err && err.cancelled) return;
       toast("Couldn't open the " + (src === "camera" ? "camera" : "picker") + ". " + ((err && err.message) || ""));
@@ -408,18 +454,21 @@
   // runPipeline(image): resolve entitlement -> SMD_SKNX_PROVIDERS.analyze() (mock in Phase 1) -> save
   // to history -> show the result. Exposed on the router so a test harness (or a future retry action)
   // can drive an analysis directly without going through the native camera/file pickers.
-  function runPipeline(image) {
+  function runPipeline(image, history) {
     if (state.running) return;
     state.running = true;
+    state.lastImage = image;                          // persist so "Refine with history" can re-run
+    if (typeof history !== "undefined") state.lastHistory = history;
     show("processing");
     var P = providers();
     if (!P || !P.analyze) { state.running = false; toast("SknX analyzer unavailable."); show("capture"); return; }
     var entitlement = resolveEntitlement();
     P.analyze(image, entitlement, function (stage, pct) {
       try { var h = host(); if (h && h._sknxApplyStage) h._sknxApplyStage(stage, pct); } catch (e) {}
-    }).then(function (a) {
+    }, undefined, state.lastHistory).then(function (a) {
       state.running = false;
       state.analysis = a || null;
+      try { if (state.analysis) state.analysis.history = state.lastHistory || null; } catch (e) {}
       try {
         if (state.analysis && window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.save) {
           state.analysis.at = state.analysis.at || Date.now();
@@ -447,6 +496,7 @@
       case "sknx-compare": var L = state.reportLabels || []; if (L.length >= 2 && window.SMD_SKNX_COMPARE) { var cmp = window.SMD_SKNX_COMPARE.compare(L[0], L[1]); var ch = document.getElementById("sknxCompareHost"); if (ch) ch.innerHTML = window.SMD_SKNX_COMPARE.html(cmp); } haptic("light"); return;
       case "sknx-report-pdf": try { if (window.SMD_SKNX_REPORT && state.reportPayload) window.SMD_SKNX_REPORT.pdf(state.reportPayload); } catch (e) {} haptic("light"); return;
       case "sknx-rx-draft": haptic("light"); try { if (window.SMD_SKNX_RX) window.SMD_SKNX_RX.openDraft(state.analysis); } catch (e) {} return;
+      case "sknx-refine-apply": haptic("light"); if (state.lastImage) runPipeline(state.lastImage, readHx() || {}); return;
     }
     /* other data-act values (if any) are screen-internal. */
   }

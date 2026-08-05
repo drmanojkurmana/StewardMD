@@ -99,7 +99,11 @@ try {
     await sleep(250);
   }
   ok(dxCount > 0, "normal mock analysis renders a ranked differential (#sknxRoot .sknx-dx has >=1 item, got " + dxCount + ")");
-  ok(await ev(`var r=document.querySelector("#sknxRoot .sknx-refer"); return !r;`) === true, "the benign mock does NOT show a referral banner");
+  ok(await ev(`var r=document.querySelector("#sknxRoot .sknx-finding-refer"); return !r;`) === true, "the benign mock does NOT show a referral banner");
+  // RESULTS FIRST (owner): the differential precedes the concise footer caveat; footer is present,
+  // one line, and names NO model.
+  ok(await ev(`var dx=document.querySelector("#sknxRoot .sknx-dx"), ft=document.querySelector("#sknxRoot .sknx-footer"); return !!(dx&&ft&&(dx.compareDocumentPosition(ft)&Node.DOCUMENT_POSITION_FOLLOWING));`) === true, "RESULTS FIRST: the differential precedes the footer caveat");
+  ok(await ev(`var ft=document.querySelector("#sknxRoot .sknx-footer"); return !!ft && /educational/i.test(ft.textContent) && !/Derm Foundation|HAM|59-condition|cloud model/i.test(ft.textContent);`) === true, "footer caveat present, concise, names no model");
 
   // ---- 1b) Educational report (Phase 2): async-mounted into #sknxReportHost after the differential ----
   let reportMounted = false;
@@ -122,7 +126,7 @@ try {
   await ev(`window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-test-melanoma", __mock: "melanoma" }); return 1;`);
   let referVisible = false;
   for (let i = 0; i < 40; i++) {
-    referVisible = await ev(`var r=document.querySelector("#sknxRoot .sknx-refer"); return !!(r && r.offsetParent !== null);`);
+    referVisible = await ev(`var r=document.querySelector("#sknxRoot .sknx-finding-refer"); return !!(r && r.offsetParent !== null);`);
     if (referVisible) break;
     await sleep(250);
   }
@@ -157,7 +161,7 @@ try {
   await ev(`window.__sknxRxOpened = null; window.SMD_SKNX_SCREENS.runPipeline({ id: "sknx-rx-melanoma", __mock: "melanoma" }); return 1;`);
   let referVisible2 = false;
   for (let i = 0; i < 40; i++) {
-    referVisible2 = await ev(`var r=document.querySelector("#sknxRoot .sknx-refer"); return !!(r && r.offsetParent !== null);`);
+    referVisible2 = await ev(`var r=document.querySelector("#sknxRoot .sknx-finding-refer"); return !!(r && r.offsetParent !== null);`);
     if (referVisible2) break;
     await sleep(250);
   }

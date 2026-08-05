@@ -4,7 +4,7 @@
   var DEFS = {
     smd_sknx:          { type: "bool", def: false, query: "sknx" }, // OFF by default while Phase 1 is mock-only; enable per-device with ?sknx=1 or localStorage. PUBLIC-RELEASE stays gated behind R1 clinical review + real models.
     smd_sknx_ondevice: { type: "bool", def: true, query: "sknxondevice" },
-    smd_sknx_cloud:    { type: "tri",  def: null, query: null },
+    smd_sknx_cloud:    { type: "tri",  def: null, query: "sknxcloud" }, // EXPERIMENTAL cloud classifier (sknx-cloudvision.js): Google Derm Foundation + SCIN head, 59 general-derm conditions, served from Cloud Run. def OFF; opt-in per device (?sknxcloud=1 / localStorage). SENDS the image to a StewardMD endpoint - validation-only; needs consent gate + R1/R3 before non-validation use.
     smd_sknx_haptics:  { type: "bool", def: true, query: null },
     smd_sknx_rx:         { type: "bool", def: false, query: "sknxrx" }, // Phase 3 clinician-confirmed Rx. HARD-GATED: def:false; must NOT ship on without R1 clinical + R3-DPDP + R7 sign-off. Only ever surfaces a draft on a NON-referral rxEligible case for a verified prescriber (see sknx-rx.js).
     smd_sknx_realvision: { type: "bool", def: false, query: "sknxrv" } // EXPERIMENTAL on-device ONNX classifier (sknx-realvision.js) instead of the mock. def:false; uncalibrated public model - for testing/validation only. Falls back to the mock on any failure.

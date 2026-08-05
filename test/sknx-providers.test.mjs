@@ -14,6 +14,42 @@ test("mock analyze resolves an engine-shaped analysis and walks the stages", asy
   assert.deepEqual(stages, ["quality", "detect", "segment", "classify", "report"]);
 });
 
+test("capture wrapper { data } is unwrapped: the vision provider gets the raw image, not the {id,source,data} object", async () => {
+  let received;
+  await PROV.analyze({ id: "sknx-1", source: "camera", data: "data:image/jpeg;base64,ZZZ" }, "v2beta", () => {}, {
+    vision: { available: () => true, analyze: (img) => { received = img; return Promise.resolve({ generalProbs: [{ label: "eczema", prob: 0.6 }], lesionProbs: [], features: {}, engine: "t" }); } },
+    engines: ENG
+  });
+  assert.equal(received, "data:image/jpeg;base64,ZZZ", "vision must receive image.data (raw), not the wrapper");
+});
+
+test("a raw image (no wrapper) is passed through unchanged", async () => {
+  let received;
+  await PROV.analyze("data:image/png;base64,AAAA", "v2beta", () => {}, {
+    vision: { available: () => true, analyze: (img) => { received = img; return Promise.resolve({ generalProbs: [], lesionProbs: [], features: {}, engine: "t" }); } },
+    engines: ENG
+  });
+  assert.equal(received, "data:image/png;base64,AAAA");
+});
+
+test("history danger-signs force referral even on a benign image differential", async () => {
+  const benignRaw = { generalProbs: [{ label: "eczema", prob: 0.7 }], lesionProbs: [], features: {}, engine: "t" };
+  const a = await PROV.analyze("data:image/jpeg;base64,ZZZ", "v2beta", () => {}, {
+    vision: { available: () => true, analyze: () => Promise.resolve(benignRaw) },
+    engines: ENG
+  }, { bleeding: true, changing: true });   // <- optional clinical history
+  assert.equal(a.referral, true, "bleeding history must force referral");
+  assert.equal(a.rxEligible, false);
+});
+
+test("no history -> image-only behaviour unchanged (no referral on a benign case)", async () => {
+  const benignRaw = { generalProbs: [{ label: "eczema", prob: 0.7 }], lesionProbs: [], features: {}, engine: "t" };
+  const a = await PROV.analyze("data:image/jpeg;base64,ZZZ", "v2beta", () => {}, {
+    vision: { available: () => true, analyze: () => Promise.resolve(benignRaw) }, engines: ENG
+  });
+  assert.equal(a.referral, false);
+});
+
 test("a mock melanoma case routes to referral through the real engine logic", async () => {
   const a = await PROV.analyze({ __mock: "melanoma" }, "v2beta", () => {}, {
     vision: { available: () => false, analyze: () => Promise.reject(new Error("x")) },
