@@ -73,7 +73,7 @@
           '<div class="sknx-tip" role="note">' + ic("tips_and_updates") +
             '<span class="sknx-tip-txt">Good lighting, fill the frame with the lesion or rash, avoid glare - SknX auto-enhances the image before analysis.</span>' +
           "</div>" +
-          '<div class="sknx-cap-foot">' + ic("lock") + "<span>Processed on-device &middot; image not stored after analysis</span></div>" +
+          '<div class="sknx-cap-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
         "</div>" +
       "</section>";
   }
@@ -107,7 +107,8 @@
           '<h2 class="sknx-proc-title">Analyzing your photo&hellip;</h2>' +
           '<p class="sknx-proc-sub">SknX is checking quality and running detection</p>' +
           '<div class="sknx-stages">' + STAGE_DEFS.map(function (s, i) { return stageRow(i); }).join("") + "</div>" +
-          '<div class="sknx-proc-foot">' + ic("lock") + "<span>Processed on-device &middot; image not stored after analysis</span></div>" +
+          '<div class="sknx-proc-note">' + ic("schedule") + "<span>The first scan after opening can take up to a minute while the analyzer starts up. Later scans are quick.</span></div>" +
+          '<div class="sknx-proc-foot">' + ic("lock") + "<span>Image not stored after analysis</span></div>" +
         "</div>" +
       "</section>";
 

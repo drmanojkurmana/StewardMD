@@ -193,15 +193,21 @@
     });
   }
 
-  // warmup(): wake the (scale-to-zero) Cloud Run instance when SknX opens so the first real analysis
-  // isn't a ~60-120s cold start. Fire-and-forget, never rejects. Hits /health (starts the instance);
-  // the model itself loads lazily on the first /classify.
+  // warmup(): warm-on-open. The endpoint scales to zero (free when idle), so the first real scan would
+  // otherwise be a ~60-90s cold start (spin-up + model load). Called when SknX opens, this sends a tiny
+  // THROWAWAY 16x16 image to /classify so the server loads the model WHILE the clinician is framing the
+  // photo - by capture time it is usually warm. Fire-and-forget, never rejects; not a patient image so
+  // no consent gate. A no-op off the native app (endpoint unset) or without a DOM.
   function warmup(opts) {
     opts = opts || {};
     var ep = opts.endpoint || endpoint();
-    if (!ep || ep.indexOf("__SKNX_CLOUD") === 0 || typeof fetch !== "function") return Promise.resolve(false);
-    return fetch(ep.replace(/\/$/, "") + "/health", { method: "GET" })
-      .then(function () { return true; }).catch(function () { return false; });
+    if (!ep || ep.indexOf("__SKNX_CLOUD") === 0 || typeof fetch !== "function" || typeof document === "undefined") return Promise.resolve(false);
+    try {
+      var c = document.createElement("canvas"); c.width = 16; c.height = 16;
+      c.getContext("2d").fillRect(0, 0, 16, 16);
+      var tiny = c.toDataURL("image/jpeg", 0.5);
+      return classify(tiny, ep, opts.fetchImpl).then(function () { return true; }).catch(function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
   }
 
   var API = {
