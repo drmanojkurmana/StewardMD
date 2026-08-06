@@ -49,3 +49,11 @@ data class WatchTask(
     val assignedBy: String? = null,
     val ts: Long? = null,
 )
+
+/** Shared ICU patient board doc (top-level fields of icuGroups/{gid}/patients/{pid}). */
+data class PatientState(
+    val name: String? = null,
+    val dx: String? = null,
+    val bed: String? = null,
+    val severity: String? = null,
+)
