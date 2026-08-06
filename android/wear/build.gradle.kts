@@ -9,6 +9,13 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+// google-services.json is gitignored (per-project secret hygiene). Apply the plugin ONLY when the file
+// is present (mirrors :app) so a fresh checkout / CI without it still builds — Firebase just stays
+// uninitialised there, exactly like the app module.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "in.stewardmd.wear"
     compileSdk = 36
