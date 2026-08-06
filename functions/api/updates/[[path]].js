@@ -29,9 +29,13 @@ import { classifyDocument } from "../../_summarize.js";
 import { tinyfishSearch } from "../../_search.js";
 import { buildDigest } from "../../_digest.js";
 
-const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
-  status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
+const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
+  status, headers: { "Content-Type": "application/json", "Cache-Control": cache }
 });
+// Public, user-identical GETs (news feed + weekly digest) — safe to cache. No PHI,
+// no per-user data; changes at most daily (cron). Client/edge cache cuts repeat
+// app-open hits. Personalized branches (bookmarks) keep the no-store default.
+const PUB_CACHE = "public, max-age=120";
 
 const CATS = ["drug", "approval", "safety", "recall", "guideline", "study", "general"];
 const CAT_TYPE = { approval: "drug_approval", drug: "drug_approval", safety: "safety_alert", recall: "safety_alert", guideline: "guideline", study: "trial", general: "guideline" };
@@ -175,11 +179,11 @@ export async function onRequest(context) {
       before: url.searchParams.get("before") || "",
       limit: url.searchParams.get("limit") || "20",
     });
-    return json({ enabled: repo.hasDb(env) || feed.items.length > 0, items: feed.items, nextCursor: feed.nextCursor });
+    return json({ enabled: repo.hasDb(env) || feed.items.length > 0, items: feed.items, nextCursor: feed.nextCursor }, 200, PUB_CACHE);
   }
   // Public: latest weekly "This Week in Medicine" digest (for the feed banner).
   if (method === "GET" && head === "digest") {
-    return json({ enabled: repo.hasDb(env), digest: await repo.getLatestDigest(env) });
+    return json({ enabled: repo.hasDb(env), digest: await repo.getLatestDigest(env) }, 200, "public, max-age=600");
   }
 
   /* ---------- user-authenticated (any signed-in doctor; NOT owner-only) ---------- */

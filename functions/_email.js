@@ -3,6 +3,8 @@
    @stewardmd.in address requires the domain to be verified in Resend (DNS records);
    until then set FROM_EMAIL to a verified sender or Resend will reject the send. */
 
+import { fetchWithTimeout } from "./_fetch.js";
+
 const LOGO = "https://stewardmd.in/android-chrome-192x192.png";
 const TEAL = "#0e6e63";
 const APP = "https://stewardmd.in";
@@ -45,7 +47,7 @@ export async function sendBranded(env, { to, subject, title, bodyHtml, preheader
   if (!env.RESEND_API_KEY || !to) return { ok: false, skipped: true };
   let r;
   try {
-    r = await fetch("https://api.resend.com/emails", {
+    r = await fetchWithTimeout("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Authorization": "Bearer " + env.RESEND_API_KEY, "Content-Type": "application/json" },
       body: JSON.stringify({ from: fromAddr(env), to: [to], reply_to: replyTo || undefined, subject: subject, html: shell(title, bodyHtml, preheader) }),

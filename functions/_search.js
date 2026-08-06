@@ -7,11 +7,13 @@
  * Key is a Cloudflare secret (env.TINYFISH_API_KEY) — never hardcoded. Best-effort: no key, or any
  * network/parse error, returns [] and the caller proceeds without enrichment. Never throws.
  */
+import { fetchWithTimeout } from "./_fetch.js";
+
 export async function tinyfishSearch(env, query) {
   const key = env && env.TINYFISH_API_KEY;
   if (!key || !query) return [];
   try {
-    const r = await fetch("https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)), {
+    const r = await fetchWithTimeout("https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)), {
       headers: { "X-API-Key": key },
       redirect: "follow",
     });

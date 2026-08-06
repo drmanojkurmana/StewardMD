@@ -7,6 +7,8 @@
    per-IP rate limit + a same-origin/app CORS allow-list to stop anonymous email-flooding and
    Resend-quota exhaustion — NOT by auth (which would break the legitimate request flow). */
 
+import { fetchWithTimeout } from "../_fetch.js";
+
 const ORIGINS = ["https://stewardmd.in", "https://www.stewardmd.in", "https://stewardmd.pages.dev", "https://localhost", "http://localhost", "capacitor://localhost", "ionic://localhost"];
 function corsOrigin(request) { const o = request.headers.get("Origin") || ""; return ORIGINS.indexOf(o) > -1 ? o : ""; }
 
@@ -75,7 +77,7 @@ export async function onRequestPost({ request, env }) {
 
   let r;
   try {
-    r = await fetch("https://api.resend.com/emails", {
+    r = await fetchWithTimeout("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -21,8 +21,8 @@ import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 
-const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
-  status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
+  status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
 });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
 
@@ -86,7 +86,8 @@ export async function onRequest(context) {
       return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env) }, state));
     }
     if (method === "GET" && seg === "plans") {
-      return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env) });
+      // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
+      return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env) }, 200, "public, max-age=600");
     }
 
     // ---- native IAP: the app POSTs a verified Play/App Store subscription purchase -> we confirm it with
