@@ -35,6 +35,7 @@ data class CodeBlueUi(
     val paused: Boolean = false,
     val elapsedSeconds: Int = 0,
     val cycle: Int = 1,
+    val cycleProgress: Float = 0f,   // 0..1 within the current 2-min rhythm-check cycle (drives the ring)
     val prompt: String = "",
     val shocks: Int = 0,
 )
@@ -108,6 +109,7 @@ class CodeBlueService : Service(), SensorEventListener {
             paused = analyzer.paused,
             elapsedSeconds = model.elapsedSeconds,
             cycle = model.cycle,
+            cycleProgress = (model.elapsedSeconds % 120) / 120f,
             prompt = model.drugPrompt,
             shocks = model.shockCount,
         )

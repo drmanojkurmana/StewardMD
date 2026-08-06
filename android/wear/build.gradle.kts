@@ -60,6 +60,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Compose for Wear OS (not part of the Compose BOM — pin explicitly).
     implementation("androidx.wear.compose:compose-material:1.4.1")
