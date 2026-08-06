@@ -44,14 +44,25 @@ class ApiClient(
         }
     }
 
-    /** Absolute URL when [path] already starts with http(s), else prefixed with [base]. */
-    suspend fun request(method: HttpMethod, path: String, body: Any? = null, needsAuth: Boolean = false): HttpResponse {
+    /**
+     * Absolute URL when [path] already starts with http(s), else prefixed with [base]. Auth:
+     * [bearer] (an explicit token, e.g. the GHIS session token) wins; else [needsAuth] uses the
+     * Firebase token from [tokenProvider]; else no Authorization header.
+     */
+    suspend fun request(
+        method: HttpMethod,
+        path: String,
+        body: Any? = null,
+        needsAuth: Boolean = false,
+        bearer: String? = null,
+    ): HttpResponse {
         val url = if (path.startsWith("http")) path else base + path
+        val token = bearer ?: if (needsAuth) tokenProvider.currentToken() else null
         val resp = try {
             http.request(url) {
                 this.method = method
                 if (body != null) { contentType(ContentType.Application.Json); setBody(body) }
-                if (needsAuth) tokenProvider.currentToken()?.let { header(HttpHeaders.Authorization, "Bearer $it") }
+                token?.let { header(HttpHeaders.Authorization, "Bearer $it") }
             }
         } catch (e: ApiError) {
             throw e
@@ -65,9 +76,9 @@ class ApiClient(
         }
     }
 
-    suspend inline fun <reified T> get(path: String, needsAuth: Boolean = false): T =
-        request(HttpMethod.Get, path, null, needsAuth).body()
+    suspend inline fun <reified T> get(path: String, needsAuth: Boolean = false, bearer: String? = null): T =
+        request(HttpMethod.Get, path, null, needsAuth, bearer).body()
 
-    suspend inline fun <reified T> post(path: String, body: Any? = null, needsAuth: Boolean = false): T =
-        request(HttpMethod.Post, path, body, needsAuth).body()
+    suspend inline fun <reified T> post(path: String, body: Any? = null, needsAuth: Boolean = false, bearer: String? = null): T =
+        request(HttpMethod.Post, path, body, needsAuth, bearer).body()
 }
