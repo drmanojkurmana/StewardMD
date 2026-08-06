@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+    <!-- Android 14 requires the health FGS to also hold one of ACTIVITY_RECOGNITION / BODY_SENSORS /
+         HIGH_SAMPLING_RATE_SENSORS. The last is a NORMAL (install-time) permission — no runtime prompt —
+         and fits the accelerometer-based compression detector. -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
