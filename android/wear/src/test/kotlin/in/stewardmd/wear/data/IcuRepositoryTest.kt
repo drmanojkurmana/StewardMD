@@ -31,6 +31,16 @@ class IcuRepositoryTest {
     }
 
     @Test
+    fun mapPatientRefExtractsAndDefaults() {
+        val r = IcuRepository.mapPatientRef("p9", mapOf("name" to "S.M.", "bed" to "7", "severity" to "critical"))
+        assertEquals("p9", r.pid)
+        assertEquals("S.M.", r.name)
+        assertEquals("7", r.bed)
+        assertEquals("critical", r.severity)
+        assertEquals("Patient", IcuRepository.mapPatientRef("p0", emptyMap()).name)   // default name
+    }
+
+    @Test
     fun mapPatientExtractsBoardFields() {
         val p = IcuRepository.mapPatient(
             mapOf("name" to "R.K.", "dx" to "sepsis", "bed" to "5", "severity" to "critical", "state" to mapOf<String, Any?>()),

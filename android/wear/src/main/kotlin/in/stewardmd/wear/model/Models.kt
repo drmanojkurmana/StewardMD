@@ -50,6 +50,14 @@ data class WatchTask(
     val ts: Long? = null,
 )
 
+/** A patient in a shared ICU unit — the pick-list entry feeding Tasks / Handover. */
+data class PatientRef(
+    val pid: String,
+    val name: String,
+    val bed: String? = null,
+    val severity: String? = null,
+)
+
 /** Shared ICU patient board doc (top-level fields of icuGroups/{gid}/patients/{pid}). */
 data class PatientState(
     val name: String? = null,

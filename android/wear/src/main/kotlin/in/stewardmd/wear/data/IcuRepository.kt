@@ -1,5 +1,6 @@
 package `in`.stewardmd.wear.data
 
+import `in`.stewardmd.wear.model.PatientRef
 import `in`.stewardmd.wear.model.PatientState
 import `in`.stewardmd.wear.model.WatchTask
 import com.google.firebase.Timestamp
@@ -32,6 +33,24 @@ class IcuRepository(private val db: FirebaseFirestore) {
         awaitClose { reg.remove() }
     }
 
+    /** The gids of the ICU units I'm a member of (collectionGroup members where uid == me). */
+    fun myGroupIds(uid: String): Flow<List<String>> = callbackFlow {
+        val reg = db.collectionGroup("members").whereEqualTo("uid", uid).addSnapshotListener { snap, err ->
+            if (err != null || snap == null) { trySend(emptyList()); return@addSnapshotListener }
+            trySend(snap.documents.mapNotNull { it.reference.parent.parent?.id }.distinct())
+        }
+        awaitClose { reg.remove() }
+    }
+
+    /** Live patient list for a unit (for the picker feeding Tasks/Handover). */
+    fun patientRefs(gid: String): Flow<List<PatientRef>> = callbackFlow {
+        val reg = db.collection("icuGroups").document(gid).collection("patients").addSnapshotListener { snap, err ->
+            if (err != null || snap == null) { trySend(emptyList()); return@addSnapshotListener }
+            trySend(snap.documents.map { mapPatientRef(it.id, it.data ?: emptyMap()) })
+        }
+        awaitClose { reg.remove() }
+    }
+
     /** Live patient board doc, or null if it's gone (discharged). */
     fun patient(gid: String, pid: String): Flow<PatientState?> = callbackFlow {
         val reg = patientRef(gid, pid).addSnapshotListener { snap, err ->
@@ -60,6 +79,13 @@ class IcuRepository(private val db: FirebaseFirestore) {
         fun mapPatient(data: Map<String, Any?>): PatientState = PatientState(
             name = data["name"] as? String,
             dx = data["dx"] as? String,
+            bed = data["bed"] as? String,
+            severity = data["severity"] as? String,
+        )
+
+        fun mapPatientRef(id: String, data: Map<String, Any?>): PatientRef = PatientRef(
+            pid = id,
+            name = (data["name"] as? String) ?: "Patient",
             bed = data["bed"] as? String,
             severity = data["severity"] as? String,
         )

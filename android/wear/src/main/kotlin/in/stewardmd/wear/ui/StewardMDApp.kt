@@ -41,6 +41,9 @@ import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import `in`.stewardmd.wear.ui.codeblue.CodeBlueScreen
+import `in`.stewardmd.wear.ui.handover.HandoverScreen
+import `in`.stewardmd.wear.ui.labs.LabsScreen
+import `in`.stewardmd.wear.ui.tasks.TasksScreen
 import `in`.stewardmd.wear.ui.watchlist.WatchlistScreen
 
 /** A tool the launcher offers. Label is clinician-facing (what they do), not the enum name. */
@@ -64,9 +67,11 @@ fun StewardMDApp() {
         when (screen) {
             Screen.Root -> RootList { screen = it }
             Screen.Watchlist -> WatchlistScreen(back)
+            Screen.Labs -> LabsScreen(back)
+            Screen.Tasks -> TasksScreen(back)
+            Screen.Handover -> HandoverScreen(back)
             Screen.CodeBlue -> CodeBlueScreen(back)
-            Screen.Labs, Screen.Tasks, Screen.Handover, Screen.Drugs, Screen.Calc ->
-                ComingSoon(TOOLS.first { it.screen == screen }.label, back)
+            Screen.Drugs, Screen.Calc -> ComingSoon(TOOLS.first { it.screen == screen }.label, back)
         }
     }
 }
