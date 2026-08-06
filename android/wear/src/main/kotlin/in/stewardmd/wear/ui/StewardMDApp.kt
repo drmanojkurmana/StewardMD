@@ -66,10 +66,10 @@ fun StewardMDApp() {
     SmdWearTheme {
         when (screen) {
             Screen.Root -> RootList { screen = it }
-            Screen.Watchlist -> WatchlistScreen(back)
-            Screen.Labs -> LabsScreen(back)
-            Screen.Tasks -> TasksScreen(back)
-            Screen.Handover -> HandoverScreen(back)
+            Screen.Watchlist -> AuthGate(back) { WatchlistScreen(back) }
+            Screen.Labs -> AuthGate(back) { LabsScreen(back) }
+            Screen.Tasks -> AuthGate(back) { TasksScreen(back) }
+            Screen.Handover -> AuthGate(back) { HandoverScreen(back) }
             Screen.CodeBlue -> CodeBlueScreen(back)
             Screen.Drugs, Screen.Calc -> ComingSoon(TOOLS.first { it.screen == screen }.label, back)
         }

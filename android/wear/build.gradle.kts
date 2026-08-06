@@ -73,6 +73,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-wearable:19.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
 
+    // On-watch Google Sign-In (Path A): the watch authenticates itself via Credential Manager using the
+    // paired Google account, then signs into Firebase with the Google credential. No phone token bridge.
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
     // Networking (Task 2): Ktor + kotlinx-serialization + coroutines.
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")

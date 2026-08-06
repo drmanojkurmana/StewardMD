@@ -38,5 +38,15 @@
             android:name=".codeblue.CodeBlueService"
             android:exported="false"
             android:foregroundServiceType="health" />
+
+        <!-- Receives the GHIS ward token bridged from the phone over the Data Layer. -->
+        <service
+            android:name=".data.SmdWearListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/smd" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>
