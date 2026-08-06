@@ -3,6 +3,12 @@
 
     <uses-feature android:name="android.hardware.type.watch" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="false"
         android:label="StewardMD"
@@ -21,5 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Code Blue CPR-assist keep-alive: health foreground service so compression sensing survives
+             the wrist dropping / screen-off for a whole code. -->
+        <service
+            android:name=".codeblue.CodeBlueService"
+            android:exported="false"
+            android:foregroundServiceType="health" />
     </application>
 </manifest>
