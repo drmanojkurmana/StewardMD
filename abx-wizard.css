@@ -25,7 +25,7 @@ html body.dark.abx-ui #abxWizard, html.abx-ui body.dark #abxWizard {
   --w-teal-ink:#3fc7b3; /* bright teal for TEXT/ICONS on dark (fills keep --w-teal + white text) */
 }
 html.abx-ui #abxWizard .abxw-scroll { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-html.abx-ui #abxWizard .abxw-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px 130px; }
+html.abx-ui #abxWizard .abxw-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px calc(130px + env(safe-area-inset-bottom)); }
 html.abx-ui #abxWizard .abx-ms { font-family: 'Material Symbols Rounded'; font-weight: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr; display: inline-block; vertical-align: middle; -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
 html.abx-ui #abxWizard button { font-family: inherit; cursor: pointer; }
 html.abx-ui #abxWizard button:focus-visible, html.abx-ui #abxWizard input:focus-visible, html.abx-ui #abxWizard select:focus-visible { outline: 3px solid var(--w-teal); outline-offset: 2px; }
@@ -94,7 +94,7 @@ html.abx-ui #abxWizard .abxw-dot { width: 32px; height: 32px; border-radius: 50%
 html.abx-ui #abxWizard .abxw-dot .abx-ms { font-size: 17px; }
 html.abx-ui #abxWizard .abxw-step.done .abxw-dot, html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { background: var(--w-teal); }
 html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { box-shadow: 0 0 0 4px rgba(14,110,99,.18); }
-html.abx-ui #abxWizard .abxw-steplbl { font: 600 11.5px var(--w-sans); color: var(--w-soft); text-align: center; line-height: 1.2; }
+html.abx-ui #abxWizard .abxw-steplbl { font: 600 11.5px var(--w-sans); color: var(--w-soft); text-align: center; line-height: 1.2; display: block; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 html.abx-ui #abxWizard .abxw-step.cur .abxw-steplbl { color: var(--w-teal); font-weight: 700; }
 
 /* headings */
@@ -334,7 +334,6 @@ html body.dark.abx-ui #abxWizard .abxw-emerg-list li { color: #ffc2cc; }
 }
 
 /* --- RESPONSIVE (phone) ---------------------------------------------------- */
-html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
 @media (max-width: 480px) {
   html.abx-ui #abxWizard .abxw-stepper { gap: 4px; }
   html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }

@@ -44,7 +44,7 @@
   function sevOf(cls) { return SEV[cls] || SEV.none; }
 
   var STEPS = [
-    { n: 1, label: "Vitals & labs", icon: "monitor_heart" },
+    { n: 1, label: "Vitals", icon: "monitor_heart" },
     { n: 2, label: "Systems", icon: "fact_check" },
     { n: 3, label: "Differential", icon: "stacked_line_chart" },
     { n: 4, label: "Decision", icon: "gavel" },
