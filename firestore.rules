@@ -267,6 +267,17 @@ service cloud.firestore {
     match /fc_doctors/{uid}          { allow read, write: if false; }
     match /fc_comms/{commId}         { allow read, write: if false; }   // Doctor Action Center — encrypted PHI messages
 
+    // ── Smart OPD Queue (functions/_queue.js) — server-only, PHI ──────────────
+    // Sessions, tickets (name/mobile encrypted at rest), append-only audit, per-doctor config + ETA
+    // learning stats. Managed ENTIRELY server-side via the service account (which BYPASSES these rules);
+    // the app talks to /api/queue/* and patients reach their ticket only through an opaque signed token.
+    // Denied explicitly (not just via the catch-all) so a future rule edit can never expose queue PHI.
+    match /q_sessions/{sessionId}    { allow read, write: if false; }
+    match /q_tickets/{ticketId}      { allow read, write: if false; }   // encrypted patient name/mobile
+    match /q_events/{eventId}        { allow read, write: if false; }   // audit + notification timeline
+    match /q_config/{doctorUid}      { allow read, write: if false; }
+    match /q_stats/{doctorUid}       { allow read, write: if false; }   // ETA-learning aggregates
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;
