@@ -9,12 +9,16 @@
   var LS = (function () { try { return G.localStorage; } catch (e) { return null; } })();
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
+  // PUBLIC-RELEASE-GATE: OPD Queue + EMR are DEV/TESTING features (server provisioning + clinical validation
+  // pending). Flipped ON here for owner/device testing per the "enable everything implemented" dev posture.
+  // Set these four back to def:false before ANY App-Store/Play/public release. `smd_opd_emr_write` STAYS def:false
+  // always (and QUEUE_EMR_WRITE stays unset) until CreateDrugs is captured/verified and writes are test-patient tested.
   var DEFS = {
-    smd_opd_queue: { type: "bool", def: false, query: "q", desc: "Smart OPD Queue master flag" },
-    smd_opd_queue_patient: { type: "bool", def: false, query: "qpatient", desc: "Patient live tracking page" },
-    smd_opd_queue_import: { type: "bool", def: false, query: "qimport", desc: "GHIS/EMR roster auto-import" },
-    smd_opd_emr: { type: "bool", def: false, query: "qemr", desc: "Read-only OPD patient profile + reports (P1)" },
-    smd_opd_emr_write: { type: "bool", def: false, query: "qemrwrite", desc: "OPD write-back: order/prescribe/assessment (P2-P4)" }
+    smd_opd_queue: { type: "bool", def: true, query: "q", desc: "Smart OPD Queue master flag" },
+    smd_opd_queue_patient: { type: "bool", def: true, query: "qpatient", desc: "Patient live tracking page" },
+    smd_opd_queue_import: { type: "bool", def: true, query: "qimport", desc: "GHIS/EMR roster auto-import" },
+    smd_opd_emr: { type: "bool", def: true, query: "qemr", desc: "Read-only OPD patient profile + reports (P1)" },
+    smd_opd_emr_write: { type: "bool", def: false, query: "qemrwrite", desc: "OPD write-back: order/prescribe/assessment (P2-P4) — INERT, keep OFF" }
   };
 
   function raw(key) {
