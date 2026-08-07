@@ -66,5 +66,30 @@ export function mintTicketToken(env, ticketId, expMs, ver) { return signToken({ 
 export function verifyTicketToken(env, token, curVer) { return verifyToken(token, queueSecret(env), curVer, Date.now()); }
 export const ticketIdFromToken = idFromToken;
 
+// ---- PHI at rest (AES-256-GCM), reusing the app's FOLLOWCARE_PHI_KEY. blob = base64url(iv[12]||ct).
+// Self-contained (same reason as the token) so the queue runtime path stays lean and unit-testable.
+async function phiKey(env) {
+  const raw = env && env.FOLLOWCARE_PHI_KEY;
+  if (!raw) throw Object.assign(new Error("phi_key_missing"), { code: "config", status: 500 });
+  const bytes = unb64u(raw);
+  if (bytes.length !== 32) throw Object.assign(new Error("phi_key_bad_length"), { code: "config", status: 500 });
+  return crypto.subtle.importKey("raw", bytes, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+}
+export async function encPHI(env, plaintext) {
+  if (plaintext == null || plaintext === "") return "";
+  const key = await phiKey(env);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(String(plaintext))));
+  const out = new Uint8Array(iv.length + ct.length); out.set(iv, 0); out.set(ct, iv.length);
+  return b64u(out);
+}
+export async function decPHI(env, blob) {
+  if (!blob) return "";
+  const key = await phiKey(env);
+  const all = unb64u(blob), iv = all.slice(0, 12), ct = all.slice(12);
+  const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+  return dec.decode(pt);
+}
+
 // ---- Firestore collections (service-account writes; deny-all client rules) ----------------
 export const Q_COLL = { sessions: "q_sessions", tickets: "q_tickets", events: "q_events", config: "q_config", stats: "q_stats" };
