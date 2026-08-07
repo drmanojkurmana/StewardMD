@@ -106,7 +106,7 @@
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
     var doctorName = s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
-    var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand">' + ms("monitor_heart", true) + "StewardMD</div><div class=\"q-top-r\">" +
+    var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
       (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
       '<div class="q-avatar">' + esc(initials(doctorName)) + "</div></div></div></header>";

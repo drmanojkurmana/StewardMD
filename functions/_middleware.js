@@ -177,6 +177,13 @@ export async function onRequest(context) {
     return next();
   }
 
+  // Brand images needed by the public pages (marketing "coming soon" + the login-free patient portals:
+  // FollowCare, OPD Queue). These are public, non-sensitive brand assets — not app code — so serving the
+  // logo/favicons to anonymous visitors is safe and expected. Everything else stays 404'd below.
+  if (/^\/(logo\.png|favicon\.ico|favicon-\d+x\d+\.png|apple-touch-icon[\w-]*\.png|android-chrome-[\w-]*\.png)$/i.test(url.pathname)) {
+    return next();
+  }
+
   // WEB APP KILLED (native-only). Everything past here IS the clinical app (index.html, the JS bundle, kb/,
   // engine, sw.js, assets). StewardMD runs ONLY in the native iOS/Android apps: they bundle www/ locally and
   // only call /api/*, so a browser may neither RUN nor DOWNLOAD it. Owner testing is on device or on a preview

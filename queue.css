@@ -37,8 +37,10 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-main { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100%; position: relative; }
 #smdQueue .q-top { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--sc-low); box-shadow: 0 1px 2px rgba(20,32,43,.04); }
 #smdQueue .q-top-in { display: flex; justify-content: space-between; align-items: center; padding: calc(12px + env(safe-area-inset-top)) 24px 12px; }
-#smdQueue .q-brand { display: flex; align-items: center; gap: 8px; color: var(--primary); font: 800 22px var(--q-sans); }
-#smdQueue .q-brand .material-symbols-outlined { font-size: 28px; }
+#smdQueue .q-brand { display: flex; align-items: center; gap: 9px; font: 800 22px var(--q-sans); }
+#smdQueue .q-logo-mark { width: 30px; height: 30px; flex: 0 0 auto; background: var(--primary); -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; }
+#smdQueue .q-wordmark { color: var(--on-surface); }
+#smdQueue .q-wordmark span { color: var(--primary); }
 #smdQueue .q-top-r { display: flex; align-items: center; gap: 14px; }
 #smdQueue .q-online { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; background: var(--sc-high); border: 1px solid var(--outline-variant); border-radius: 999px; font: 700 12px var(--q-sans); color: var(--on-surface-variant); cursor: pointer; }
 #smdQueue .q-online .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }

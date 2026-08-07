@@ -24,8 +24,9 @@
   .fill{ font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; }
   header{ position:sticky; top:0; z-index:50; background:var(--surface); box-shadow:0 1px 2px rgba(20,32,43,.06); }
   .hd{ display:flex; align-items:center; gap:8px; max-width:480px; margin:0 auto; padding:calc(14px + env(safe-area-inset-top)) 20px 14px; }
-  .hd .material-symbols-outlined{ color:var(--primary); font-size:26px; }
-  .hd h1{ font:800 20px Inter; color:var(--primary); margin:0; }
+  .hd .mark{ width:26px; height:26px; background:var(--primary); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
+  .hd h1{ font:800 20px Inter; color:var(--on-surface); margin:0; }
+  .hd h1 span{ color:var(--primary); }
   main{ max-width:480px; margin:0 auto; padding:20px 20px 130px; display:flex; flex-direction:column; gap:18px; }
   .top{ text-align:center; }
   .top h2{ font:700 22px Inter; margin:0; }
@@ -78,7 +79,7 @@
 </style>
 </head>
 <body>
-<header><div class="hd"><span class="material-symbols-outlined fill">monitor_heart</span><h1>StewardMD</h1></div></header>
+<header><div class="hd"><span class="mark" aria-hidden="true"></span><h1>Steward<span>MD</span></h1></div></header>
 <main id="app"><div class="msg"><span class="material-symbols-outlined">hourglass_top</span><h2>Loading…</h2></div></main>
 <div class="actions"><div class="in">
   <button data-act="directions"><span class="material-symbols-outlined">directions</span>Directions</button>
