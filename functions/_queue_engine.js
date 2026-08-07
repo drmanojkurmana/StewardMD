@@ -8,7 +8,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, computeEtas, canTransition, isTerminal, updateStats, meanFor, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 
 const now = () => Date.now();
@@ -52,17 +52,28 @@ async function getStats(env, doctorUid) {
   try { const d = await fsGet(env, "q_stats/" + sanitize(doctorUid)); if (d && d.fields && d.fields.data) return JSON.parse(d.fields.data); } catch (e) {}
   return null;
 }
+export async function getConfig(env, doctorUid) {
+  try { const d = await fsGet(env, "q_config/" + sanitize(doctorUid)); if (d && d.fields && d.fields.data) return mergeConfig(JSON.parse(d.fields.data)); } catch (e) {}
+  return mergeConfig(null);
+}
+export async function saveConfig(env, doctorUid, patch) {
+  const merged = mergeConfig(Object.assign({}, await getConfig(env, doctorUid), patch || {}));
+  await fsCommit(env, [wUpdate(env, "q_config/" + sanitize(doctorUid), { data: JSON.stringify(merged), updatedAt: now() })]);
+  return merged;
+}
+export async function analytics(env, session) { return aggregate(await listTickets(env, session.id), now()); }
 
 // ---- recompute positions + ETAs (delegates to the pure engine); returns the updated tickets ----------
 export async function recompute(env, session, tickets) {
   tickets = tickets || await listTickets(env, session.id);
-  const stats = await getStats(env, session.doctorUid);
+  const cfg = await getConfig(env, session.doctorUid);
+  const stats = cfg.etaLearning ? await getStats(env, session.doctorUid) : null;   // learning toggle
   const ordered = orderQueue(tickets);
   const cur = tickets.find((t) => t.id === session.currentTicketId && t.status === "in_consultation");
   let inFlight = 0;
-  if (cur) { const mean = meanFor(stats, cur.visitType); const elapsed = (now() - (cur.consultStartAt || now())) / 60000; inFlight = Math.max(0, mean - elapsed); }
+  if (cur) { const mean = meanFor(stats, cur.visitType) || cfg.defaultConsultMin; const elapsed = (now() - (cur.consultStartAt || now())) / 60000; inFlight = Math.max(0, mean - elapsed); }
   const pad = (session.doctorStatus === "emergency" || session.status === "paused") ? EMERGENCY_PAD_MIN : 0;
-  const etas = computeEtas(ordered, { nowMs: now(), stats, inFlightRemainingMin: inFlight, emergencyPadMin: pad });
+  const etas = computeEtas(ordered, { nowMs: now(), stats, defaultConsultMin: cfg.defaultConsultMin, inFlightRemainingMin: inFlight, emergencyPadMin: pad });
   const byId = {}; etas.forEach((e) => (byId[e.id] = e));
   const writes = [];
   tickets.forEach((t) => {
@@ -74,7 +85,7 @@ export async function recompute(env, session, tickets) {
     }
   });
   if (writes.length) await fsCommit(env, writes);
-  try { await runQueueNotifications(env, session, tickets, {}); } catch (e) {}   // fire ahead5/ahead2/next (idempotent)
+  if (cfg.smsEnabled || cfg.waEnabled) { try { await runQueueNotifications(env, session, tickets, { early: cfg.early, prep: cfg.prep }); } catch (e) {} }
   return tickets;
 }
 
@@ -118,7 +129,7 @@ export async function setStatus(env, session, ticketId, to, actor) {
   }
   const writes = [wUpdate(env, "q_tickets/" + ticketId, patch)];
   if (Object.keys(sessPatch).length) { sessPatch.updatedAt = now(); writes.push(wUpdate(env, "q_sessions/" + session.id, sessPatch)); Object.assign(session, sessPatch); }
-  if (learn != null) { const s2 = updateStats(await getStats(env, session.doctorUid), learn, t.visitType); writes.push(wUpdate(env, "q_stats/" + sanitize(session.doctorUid), { data: JSON.stringify(s2), updatedAt: now() })); }
+  if (learn != null && (await getConfig(env, session.doctorUid)).etaLearning) { const s2 = updateStats(await getStats(env, session.doctorUid), learn, t.visitType); writes.push(wUpdate(env, "q_stats/" + sanitize(session.doctorUid), { data: JSON.stringify(s2), updatedAt: now() })); }
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: to, meta: from });
   if (to === "completed") { try { await notifyTicket(env, session, Object.assign({}, t, patch), "complete", {}); } catch (e) {} }

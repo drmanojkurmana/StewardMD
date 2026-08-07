@@ -8,7 +8,7 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
   var API = "/api/queue";
   var POLL_MS = 8000;
-  var st = { session: null, tickets: [], me: {}, pollId: 0 };
+  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0 };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
@@ -78,56 +78,94 @@
       "</div></div></div>";
   }
 
-  function _render(state) {
+  function sidebar(view, doctorName, dept) {
+    return '<aside class="q-side">' +
+      '<div class="q-side-hd"><div class="q-avatar">' + esc(initials(doctorName)) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
+      navItem("dashboard", "Dashboard", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") +
+      navItem("settings", "Settings", view === "settings") + navItem("notifications", "Notifications", false) + "</aside>";
+  }
+  function dashboardCanvas(state) {
     var s = state.session || {}, tickets = (state.tickets || []).slice();
     var ordered = tickets.filter(function (t) { return isQueued(t.status); }).sort(function (a, b) { return (a.position || 99) - (b.position || 99) || (a.registeredAt || 0) - (b.registeredAt || 0); });
     var cur = tickets.filter(function (t) { return t.status === "in_consultation"; })[0] || null;
-    var k = computeKpis(tickets), ins = insightFor(tickets);
-    var paused = s.status === "paused";
-    var doctorName = s.doctorName || state.me.name || "Doctor";
-    var dept = s.department || state.me.dept || "OPD";
-
-    var side = '<aside class="q-side">' +
-      '<div class="q-side-hd"><div class="q-avatar">' + esc(initials(doctorName)) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
-      navItem("dashboard", "Dashboard", true) + navItem("analytics", "Analytics", false) + navItem("settings", "Settings", false) + navItem("notifications", "Notifications", false) +
-      "</aside>";
-
-    var header = '<header class="q-top"><div class="q-top-in">' +
-      '<div class="q-brand">' + ms("monitor_heart", true) + "StewardMD</div>" +
-      '<div class="q-top-r">' +
-        '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
-        '<button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" +
-        '<div class="q-avatar">' + esc(initials(doctorName)) + "</div>" +
-      "</div></div></header>";
-
+    var k = computeKpis(tickets), ins = insightFor(tickets), paused = s.status === "paused";
     var kpis = '<section class="q-kpis">' +
       kpi("Patients Waiting", "groups", String(k.waiting), (k.waiting ? ' <span class="q-kpi-trend">' + ms("groups") + " in queue</span>" : "")) +
       kpi("Avg. Wait", "schedule", k.avgWait + "<u>m</u>", "") +
       kpi("Avg. Consultation", "timer", k.avgConsult + "<u>m</u>", "") +
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
-
     var rows = ordered.length ? ordered.map(function (t, i) { return ticketRow(t, i, ordered); }).join("") : '<div class="q-empty">Queue is empty. Import from Ward Sync or add a patient.</div>';
-    var timeline = '<div class="q-tl">' +
-      '<div class="q-tl-head"><div class="c">Pos</div><div>Patient</div><div class="r">Actions</div></div>' + rows +
-      '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + tickets.filter(function (t) { return isQueued(t.status); }).length + ")</a></div></div>";
-
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><div class="c">Pos</div><div>Patient</div><div class="r">Actions</div></div>' + rows +
+      '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + ordered.length + ")</a></div></div>";
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : "";
-
-    var main = '<div class="q-main"><header></header>' + header +
-      '<div class="q-canvas">' + kpis +
-        '<section class="q-grid">' +
-          '<div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
-            '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
-          '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div>" +
-        "</section>" +
-      "</div>" +
-      '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", true) + navItem("analytics", "Analytics", false) + navItem("settings", "Settings", false) + "</nav>" +
-      "</div>";
-
-    return '<div class="q-app">' + side + main + "</div>";
+    return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
+      '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
+      '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div></section>";
+  }
+  function _render(state) {
+    var s = state.session || {}, view = state.view || "dashboard";
+    var doctorName = s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
+    var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand">' + ms("monitor_heart", true) + "StewardMD</div><div class=\"q-top-r\">" +
+      '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
+      (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
+      '<div class="q-avatar">' + esc(initials(doctorName)) + "</div></div></div></header>";
+    var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
+    var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
+    var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
+    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // ---- Analytics view (Stitch queue_analytics port) ---------------------------------------
+  function peakChart(peak) {
+    if (!peak || !peak.length) return '<div class="q-empty" style="padding:20px">No registrations yet today.</div>';
+    var max = Math.max.apply(null, peak.map(function (p) { return p.count; })) || 1;
+    var W = 300, H = 96, n = peak.length, bw = Math.max(6, Math.floor((W - (n - 1) * 4) / n));
+    var bars = peak.map(function (p, i) {
+      var h = Math.max(2, Math.round(p.count / max * (H - 20))), x = i * (bw + 4);
+      return '<rect x="' + x + '" y="' + (H - 18 - h) + '" width="' + bw + '" height="' + h + '" rx="2" fill="var(--primary)"></rect>' +
+        '<text x="' + (x + bw / 2) + '" y="' + (H - 5) + '" text-anchor="middle" font-size="8" fill="var(--secondary)">' + p.h + '</text>';
+    }).join("");
+    return '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" preserveAspectRatio="xMidYMax meet" style="max-height:120px">' + bars + "</svg>";
+  }
+  function analyticsCanvas(state) {
+    var a = state.analytics;
+    if (!a) return '<h2 class="q-h2">' + ms("analytics") + 'Performance analytics</h2><div class="q-empty" style="padding:60px">Loading analytics…</div>';
+    var acc = a.etaAccuracyPct == null ? "—" : a.etaAccuracyPct + "%";
+    var kpis = '<section class="q-kpis">' +
+      kpi("Completed", "task_alt", String(a.completed), "") + kpi("Avg. Wait", "schedule", a.avgWaitMin + "<u>m</u>", "") +
+      kpi("Avg. Consult", "timer", a.avgConsultMin + "<u>m</u>", "") + kpi("No-shows", "person_off", String(a.noShow), "") + "</section>";
+    var eta = '<div class="q-card"><div class="q-card-h">' + ms("trending_up") + 'ETA accuracy</div><div class="q-bignum">' + acc + '</div><div class="q-sub">predictions within 10 minutes</div></div>';
+    var peak = '<div class="q-card"><div class="q-card-h">' + ms("calendar_month") + "Peak hours (by registration)</div>" + peakChart(a.peakHours) + "</div>";
+    var out = '<div class="q-card"><div class="q-card-h">' + ms("insights") + "Outcomes</div>" +
+      '<div class="q-out"><span>Completed</span><b>' + a.completed + "</b></div><div class=\"q-out\"><span>No-show</span><b>" + a.noShow + "</b></div>" +
+      '<div class="q-out"><span>Cancelled</span><b>' + a.cancelled + "</b></div><div class=\"q-out\"><span>In queue</span><b>" + a.waiting + "</b></div></div>";
+    return '<h2 class="q-h2">' + ms("analytics") + "Performance analytics</h2>" + kpis + '<section class="q-grid2">' + eta + peak + out + "</section>";
+  }
+
+  // ---- Settings view (Stitch queue_configuration_settings port) ---------------------------
+  function num(k, label, val, hint) { return '<div class="q-fld"><label>' + label + '</label><input type="number" min="1" data-cfg="' + k + '" value="' + esc(val) + '"><span class="q-hint">' + (hint || "") + "</span></div>"; }
+  function tog(k, label, val, hint) { return '<div class="q-togrow"><div><div class="q-togl">' + label + "</div>" + (hint ? '<div class="q-hint">' + hint + "</div>" : "") + '</div><label class="q-tog"><input type="checkbox" data-cfg="' + k + '"' + (val ? " checked" : "") + "><span></span></label></div>"; }
+  function settingsCanvas(state) {
+    var c = state.config;
+    if (!c) return '<h2 class="q-h2">' + ms("settings") + 'Queue configuration</h2><div class="q-empty" style="padding:60px">Loading settings…</div>';
+    return '<div class="q-set-hd"><h2 class="q-h2" style="margin:0">' + ms("settings") + 'Queue configuration</h2>' +
+        '<button class="q-finish" style="font-size:14px;padding:10px 18px" data-q-act="savecfg">' + ms("save") + " Save changes</button></div>" +
+      '<section class="q-grid2">' +
+        '<div class="q-card"><div class="q-card-h">' + ms("notifications_active") + "Notification triggers</div>" +
+          num("early", "Early warning (patients ahead)", c.early, "SMS/WhatsApp when this many are ahead") +
+          num("prep", "Preparation alert (patients ahead)", c.prep, "'Please head over' — kept ≤ early") +
+          '<div class="q-out"><span>Next-in-line</span><b>Always at position 1</b></div>' +
+          tog("smsEnabled", "SMS channel", c.smsEnabled) + tog("waEnabled", "WhatsApp channel", c.waEnabled, "needs a configured provider") +
+        "</div>" +
+        '<div class="q-card"><div class="q-card-h">' + ms("rule") + "Rule engine</div>" +
+          num("noShowTimeoutMin", "Auto no-show timeout (min)", c.noShowTimeoutMin, "after 'called', offer no-show") +
+          num("defaultConsultMin", "Default consult (min)", c.defaultConsultMin, "used before ETA learning kicks in") +
+          tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
+        "</div>" +
+      "</section>";
+  }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
   function authHeaders() { var h = { "Content-Type": "application/json" }; try { var t = G.SMD_QUEUE_AUTH && G.SMD_QUEUE_AUTH(); if (t) h.Authorization = "Bearer " + t; } catch (e) {} return h; }
@@ -139,15 +177,29 @@
   function paint() { root().innerHTML = _render(st); }
 
   function refresh() {
-    if (!st.session) return;
+    if (!st.session || st.view === "settings") return;   // don't clobber unsaved settings edits mid-poll
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
   }
   function act(sessId, path, body) { body = body || {}; body.sessionId = sessId; return apiPost(path, body).then(function (r) { if (r && r.ok && r.tickets) { st.tickets = r.tickets; paint(); } else if (r && r.ok && r.session) { st.session = r.session; paint(); } return r; }); }
+  function switchView(view) {
+    if (view === "queue") view = "dashboard";
+    if (view !== "dashboard" && view !== "analytics" && view !== "settings") return;
+    st.view = view; paint();
+    if (view === "analytics" && st.session) apiGet("/analytics?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok && st.view === "analytics") { st.analytics = r.analytics; paint(); } }).catch(function () {});
+    if (view === "settings") apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {});
+  }
+  function saveCfg() {
+    var cfg = {};
+    root().querySelectorAll("[data-cfg]").forEach(function (inp) { cfg[inp.getAttribute("data-cfg")] = inp.type === "checkbox" ? inp.checked : Number(inp.value); });
+    apiPost("/config", { config: cfg }).then(function (r) { if (r && r.ok) { st.config = r.config; paint(); try { G.toast && G.toast("Settings saved"); } catch (e) {} } }).catch(function () {});
+  }
 
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-q-act]"); if (!b) return;
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
-    var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss") return;
+    var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
+    if (cmd === "nav") { switchView(arg); return; }
+    if (cmd === "savecfg") { saveCfg(); return; }
     if (cmd === "finish") act(sid, "/advance");
     else if (cmd === "start") act(sid, "/status", { ticketId: arg, status: "in_consultation" });
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });

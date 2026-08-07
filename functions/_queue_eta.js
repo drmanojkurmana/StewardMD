@@ -86,3 +86,48 @@ export function computeEtas(ordered, opts) {
   });
   return out;
 }
+
+// ---- per-doctor settings (q_config) -------------------------------------------------------
+export const CONFIG_DEFAULTS = {
+  early: 5, prep: 2,                 // notification thresholds (patients-ahead)
+  noShowTimeoutMin: 10,              // minutes after "called" before auto no-show is offered
+  defaultConsultMin: 12,             // ETA fallback before any learning
+  etaLearning: true,                 // learn consult durations
+  smsEnabled: true, waEnabled: false,// notification channels
+  lateArrivalSlots: 3                // slots a late arrival drops
+};
+export function mergeConfig(saved) {
+  const c = Object.assign({}, CONFIG_DEFAULTS, saved || {});
+  c.early = Math.max(1, +c.early || CONFIG_DEFAULTS.early);
+  c.prep = Math.min(c.early, Math.max(1, +c.prep || CONFIG_DEFAULTS.prep));
+  c.defaultConsultMin = Math.max(1, +c.defaultConsultMin || CONFIG_DEFAULTS.defaultConsultMin);
+  c.noShowTimeoutMin = Math.max(1, +c.noShowTimeoutMin || CONFIG_DEFAULTS.noShowTimeoutMin);
+  c.etaLearning = !!c.etaLearning; c.smsEnabled = !!c.smsEnabled; c.waEnabled = !!c.waEnabled;
+  return c;
+}
+
+// ---- PURE analytics over a session's tickets ----------------------------------------------
+export function aggregate(tickets, nowMs) {
+  tickets = tickets || [];
+  let waiting = 0, completed = 0, noShow = 0, cancelled = 0, waitSum = 0, waitN = 0, conSum = 0, conN = 0, etaHit = 0, etaN = 0;
+  const hours = {};
+  const min = (ms) => Math.round(ms / 60000);
+  tickets.forEach((t) => {
+    if (t.status === "completed") completed++;
+    else if (t.status === "no_show") noShow++;
+    else if (t.status === "cancelled") cancelled++;
+    else if (t.status === "registered" || t.status === "waiting" || t.status === "called") waiting++;
+    if (t.consultStartAt && t.registeredAt) { waitSum += (t.consultStartAt - t.registeredAt); waitN++; }
+    if (t.consultEndAt && t.consultStartAt) { conSum += (t.consultEndAt - t.consultStartAt); conN++; }
+    if (t.consultStartAt && t.etaStart) { etaN++; if (Math.abs(t.consultStartAt - t.etaStart) <= 10 * 60000) etaHit++; }
+    if (t.registeredAt) { const h = new Date(t.registeredAt).getHours(); hours[h] = (hours[h] || 0) + 1; }
+  });
+  const peak = []; for (let h = 0; h < 24; h++) if (hours[h]) peak.push({ h, count: hours[h] });
+  return {
+    total: tickets.length, waiting, completed, noShow, cancelled,
+    avgWaitMin: waitN ? min(waitSum / waitN) : 0,
+    avgConsultMin: conN ? min(conSum / conN) : 0,
+    etaAccuracyPct: etaN ? Math.round((etaHit / etaN) * 100) : null,   // % of predictions within 10 min
+    peakHours: peak
+  };
+}

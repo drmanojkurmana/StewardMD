@@ -84,8 +84,15 @@ export async function onRequest(context) {
       return json(Object.assign({ ok: true }, await Q.linkFor(env, t)), 200, request);
     }
 
+    if (method === "GET" && seg === "config") return json({ ok: true, config: await Q.getConfig(env, who.id) }, 200, request);
+    if (method === "GET" && seg === "analytics") {
+      const { s, err } = await loadOwned(env, url.searchParams.get("sessionId"), who); if (err) return err;
+      return json({ ok: true, analytics: await Q.analytics(env, s) }, 200, request);
+    }
+
     if (method === "POST") {
       const body = await readBody(request);
+      if (seg === "config") return json({ ok: true, config: await Q.saveConfig(env, who.id, body.config || body) }, 200, request);  // per-doctor, no session
       const { s, err } = await loadOwned(env, body.sessionId, who); if (err) return err;
       if (seg === "ticket") { const t = await Q.addTicket(env, s, body, who.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
       if (seg === "import") { const r = await importRoster(env, s, body.rows || [], who.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
