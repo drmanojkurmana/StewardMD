@@ -31,6 +31,12 @@ const SSO  = 'https://gimsrlogin.gitam.edu';
 const SESSION_TTL_MS = 15 * 60 * 1000;     // refresh within GHIS's ~20-min idle window
 const SESS_KV_TTL = 1800;                  // 30 min in KV
 
+// EMR write-back master gate (P2/P3/P4). Writes into a LIVE hospital EMR, so every POST route is INERT
+// (returns 501, nothing reaches GHIS) unless the owner sets QUEUE_EMR_WRITE=1 server-side AFTER verifying
+// the reverse-engineered payloads against a real captured request. This is one of TWO independent gates
+// (the other is the client flag smd_opd_emr_write) plus an explicit user confirm() — all three required.
+function emrWriteEnabled(env) { return env && env.QUEUE_EMR_WRITE === '1'; }
+
 // ── crypto (encrypt stored credentials) ──────────────────────────────────────
 const b64ToBytes = (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 const bytesToB64 = (u8) => { let s = ''; for (const b of u8) s += String.fromCharCode(b); return btoa(s); };
@@ -296,6 +302,100 @@ async function getOpdProfile(env, token, patientId, recordNo) {
   };
 }
 
+// ── OPD write-back: search (safe GETs), assessment read, and INERT write plumbing (P2/P3/P4) ─────────
+// PURE, exported for unit tests. GHIS autocomplete (FilterServices / FilterDrugs) returns an array of items
+// whose id/label key names vary; map each tolerantly to {id,name} and drop rows missing either. No I/O.
+export function parseSearchRows(data) {
+  let arr = data;
+  if (typeof arr === 'string') { try { arr = JSON.parse(arr); } catch (e) { arr = []; } }
+  if (arr && !Array.isArray(arr) && Array.isArray(arr.data)) arr = arr.data;
+  if (!Array.isArray(arr)) return [];
+  const idKeys = ['Id', 'id', 'value', 'Value', 'ServiceId', 'Code'];
+  const nameKeys = ['Text', 'text', 'label', 'Label', 'name', 'Name', 'DisplayText'];
+  const pick = (o, keys) => { for (let i = 0; i < keys.length; i++) { const v = o[keys[i]]; if (v != null && String(v).trim() !== '') return String(v).trim(); } return ''; };
+  const out = [];
+  for (let i = 0; i < arr.length; i++) {
+    const o = arr[i]; if (!o || typeof o !== 'object') continue;
+    const id = pick(o, idKeys), name = pick(o, nameKeys);
+    if (id && name) out.push({ id: id, name: name });
+  }
+  return out;
+}
+async function getInvSearch(env, token, q) {
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/FilterServices?searchText=' + encodeURIComponent(q || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  return r.unauth ? r : { rows: parseSearchRows(parseGhis(r.body)) };
+}
+async function getDrugSearch(env, token, q) {
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/FilterDrugs?searchText=' + encodeURIComponent(q || '') + '&chemoflag=0', null, { 'X-Requested-With': 'XMLHttpRequest' });
+  return r.unauth ? r : { rows: parseSearchRows(parseGhis(r.body)) };
+}
+// Human-readable label from a form field name (txtChiefComplaint / chief_complaint -> "Chief Complaint").
+function labelize(name) {
+  const s = String(name || '').replace(/^(txt|ddl|chk|rdo|hdn|sel|input)/i, '').replace(/[_\-]+/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\s+/g, ' ').trim();
+  return s ? s.replace(/\b\w/g, (c) => c.toUpperCase()) : String(name || '');
+}
+// Tolerant extraction of editable form fields (text inputs + textareas) so the assessment can round-trip.
+// Skips hidden/submit/checkbox/etc + the antiforgery token; caps at 60 fields.
+function parseAssessmentFields(html) {
+  html = String(html || '');
+  const out = [], seen = {};
+  const add = (name, value, kind) => { if (!name || seen[name] || /verificationtoken/i.test(name)) return; seen[name] = 1; out.push({ name: name, label: labelize(name), value: value || '', kind: kind }); };
+  let m;
+  const inputRe = /<input\b[^>]*>/gi;
+  while ((m = inputRe.exec(html)) && out.length < 60) {
+    const tag = m[0], type = ((tag.match(/\btype\s*=\s*["']?([^"'\s>]+)/i) || [])[1] || 'text').toLowerCase();
+    if (['hidden', 'submit', 'button', 'image', 'reset', 'file', 'checkbox', 'radio', 'password'].indexOf(type) >= 0) continue;
+    add((tag.match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1], (tag.match(/\bvalue\s*=\s*["']([^"']*)["']/i) || [])[1] || '', 'input');
+  }
+  const taRe = /<textarea\b([^>]*)>([\s\S]*?)<\/textarea>/gi;
+  while ((m = taRe.exec(html)) && out.length < 60) add((m[1].match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1], htmlToText(m[2]), 'textarea');
+  return out;
+}
+// GET the Initial Assessment form (same page getDemographics reads for phone). May 302 to SSO -> unauth.
+async function getAssessmentForm(env, token, patientId) {
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  const html = r.body || '';
+  return { fields: parseAssessmentFields(html), raw: htmlToText(html).slice(0, 8000) };
+}
+// WRITE: order an investigation. Body built TOLERANTLY — only `srchDiagnostic` + the CSRF token are captured
+// field names; every other name is a GUESS marked UNVERIFIED and must be fixed against a real captured POST
+// before QUEUE_EMR_WRITE is set. Sends what we have; never fabricates values for fields we don't have.
+async function orderInvestigation(env, token, body) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  body = body || {};
+  const p = new URLSearchParams();
+  p.set('__RequestVerificationToken', s.csrf || '');
+  p.set('srchDiagnostic', String(body.diagnosis || ''));                 // captured field name
+  if (body.serviceId != null) p.set('serviceId', String(body.serviceId)); // UNVERIFIED: service id field name
+  p.set('emergency', body.emergency ? '1' : '0');                        // UNVERIFIED: emergency flag field name
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateServices', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
+  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
+}
+// WRITE: prescribe a medication (Medication_form, ~14 fields). Only `frequency` + CSRF are captured names;
+// the rest are UNVERIFIED guesses built tolerantly from the body. Fix against a real capture before enabling.
+async function prescribe(env, token, body) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  body = body || {};
+  const p = new URLSearchParams();
+  p.set('__RequestVerificationToken', s.csrf || '');
+  if (body.drugId != null) p.set('drugId', String(body.drugId));         // UNVERIFIED: drug id field name
+  p.set('route', String(body.route || ''));                              // UNVERIFIED: route field name
+  p.set('form', String(body.form || ''));                                // UNVERIFIED: form field name
+  p.set('qty', String(body.qty || ''));                                  // UNVERIFIED: quantity field name
+  p.set('frequency', String(body.frequency || ''));                      // captured field name
+  p.set('duration', String(body.duration || ''));                        // UNVERIFIED: duration field name
+  p.set('remarks', String(body.remarks || ''));                          // UNVERIFIED: remarks field name
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateDrugs', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
+  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
+}
+// WRITE: save the assessment. The Save POST URL + fields are NOT captured (only the READ,
+// GetInitialAssessmentnew). Documented stub: capture the Save request on the GHIS Initial Assessment form
+// (DevTools Network) and pin the POST URL + field names before wiring this.
+function saveAssessment(/* env, token, body */) {
+  return json({ error: 'assessment_write_not_captured', detail: 'Capture the Save request on the GHIS Initial Assessment form (DevTools Network) and pin the POST URL + field names before enabling' }, 501);
+}
+
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 // The GHIS session token grants live patient PHI — accept it ONLY from headers, never the ?token= query
 // string (which would leak it into edge/proxy access logs, browser history, and Referer). The client always
@@ -365,6 +465,26 @@ export async function onRequest(context) {
     if (seg === 'radiology-report'){ const r = await getRadiologyReport(env, token, q.get('resultid') || '', q.get('type') || 'manual'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'medications')     { const r = await getMedications(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'profile')         { const r = await getOpdProfile(env, token, q.get('patientId') || '', q.get('recordNo') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+
+    // ---- OPD write-back: safe search/read GETs (NOT gated) ----
+    if (seg === 'inv-search')      { const r = await getInvSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'drug-search')     { const r = await getDrugSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+
+    // ---- OPD write-back: WRITES (P2/P3/P4). Gate FIRST: inert (501, nothing hits GHIS) until QUEUE_EMR_WRITE=1 ----
+    const writeGate = () => json({ error: 'emr_write_disabled', detail: 'Set QUEUE_EMR_WRITE=1 server-side only after the payload is verified against a real captured request' }, 501);
+    if (seg === 'inv-order' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      const r = await orderInvestigation(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
+    }
+    if (seg === 'prescribe' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      const r = await prescribe(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
+    }
+    if (seg === 'assessment-save' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      return saveAssessment(env, token, await request.json().catch(() => ({})));
+    }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);
