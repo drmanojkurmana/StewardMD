@@ -54,19 +54,21 @@ export async function notifyTicket(env, session, ticket, event, vars) {
   var stageNum = STAGE[event], boolFlag = BOOL[event];
   if (stageNum && (ticket.n_stage || 0) >= stageNum) return { skipped: true, reason: "already_sent" };
   if (boolFlag && ticket[boolFlag]) return { skipped: true, reason: "already_sent" };
-  var res = { skipped: true, reason: "no_phone" }, mobile = "";
+  var mobile = "";
+  try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
+  // No number yet (e.g. a GHIS-imported ticket before the lazy demographics lookup): skip WITHOUT
+  // marking, so the tier fires once a mobile is attached. No send attempt = no spam (just a cheap re-check).
+  if (!mobile) return { skipped: true, reason: "no_phone" };
+  var res;
   try {
-    mobile = await decPHI(env, ticket.encMobile);
-    if (mobile) {
-      var link = await linkUrl(env, ticket);
-      var body = I18n.t("queue.msg." + event, ticket.lang || "en", {
-        dept: session.department || "the clinic", doctor: session.doctorName || "", link: link,
-        ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
-      });
-      res = await send(env, mobile, body, link);
-    }
+    var link = await linkUrl(env, ticket);
+    var body = I18n.t("queue.msg." + event, ticket.lang || "en", {
+      dept: session.department || "the clinic", doctor: session.doctorName || "", link: link,
+      ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
+    });
+    res = await send(env, mobile, body, link);
   } catch (e) { res = { ok: false, reason: "exception" }; }
-  // Mark attempted (even on no_phone) so it never re-fires; audit masked. Best-effort writes.
+  // Mark the tier attempted (we had a number) so it never re-fires; audit masked. Best-effort writes.
   var patch = { updatedAt: Date.now() };
   if (stageNum) patch.n_stage = stageNum;
   if (boolFlag) patch[boolFlag] = true;

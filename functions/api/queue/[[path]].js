@@ -18,6 +18,7 @@
 import { queueEnabled, isQueueConfigured } from "../../_queue.js";
 import { identify } from "../../_usage.js";
 import * as Q from "../../_queue_engine.js";
+import { importRoster } from "../../_queue_ghis.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -87,6 +88,7 @@ export async function onRequest(context) {
       const body = await readBody(request);
       const { s, err } = await loadOwned(env, body.sessionId, who); if (err) return err;
       if (seg === "ticket") { const t = await Q.addTicket(env, s, body, who.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
+      if (seg === "import") { const r = await importRoster(env, s, body.rows || [], who.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
       if (seg === "advance") return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, who.id)) }, 200, request);
       if (seg === "status") return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, who.id)) }, 200, request);
       if (seg === "priority") return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, who.id)) }, 200, request);
