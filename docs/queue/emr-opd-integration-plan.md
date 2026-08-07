@@ -66,3 +66,33 @@ For each action below: open DevTools → Network, do the action in GHIS, click t
 
 With those five, P2 + P3 are a direct build. P1 (profile + reports, read-only) I can start now on the
 existing endpoints once you approve this plan.
+
+## Captured GHIS OPD endpoints (2026-08-07, live network capture — GIMSR, Dr Chandu Gopala Krishna)
+Same-origin `ghis.gitam.edu`, `X-Requested-With: XMLHttpRequest`, doctor's authenticated GHIS session (the
+proxy already handles session/CSRF). `<MR>`=patient id (e.g. MR26132843); `<episode>`=OP visit id (e.g.
+OPMR260273888); `<serviceId>` e.g. LAB1118 (CBC).
+
+READS (safe; P1 uses these):
+- Open/demographics: `POST /Doctor/Home/Searchnew`  ·  Initial assessment: `GET /Doctor/Home/GetInitialAssessmentnew/?id=<MR>`
+- Investigation history: `GET /Doctor/Home/GetServices/?id=<MR>`
+- Current meds: `GET /Doctor/Home/GetMedicines/?id=<MR>` (HTML table — existing getMedications)
+- Patient profile/visits: `GET /Doctor/Home/PatientprofileVisits/?Visitid=<episode>`
+- Lab result detail: `POST /Lab/Home/GetPrintLabResultDetailsAuth` (existing getLabDetail)
+- Billing: `GET /Doctor/Home/SearchPatPaymentInfo`  ·  Keepalive: `GET /Doctor/Home/CheckSession`
+
+SEARCH (autocomplete; JSON):
+- Investigations: `GET /Doctor/Home/FilterServices?searchText=<q>`
+- Medications: `GET /Doctor/Home/FilterDrugs?searchText=<q>&chemoflag=0`
+- Select an investigation: `GET /Doctor/Home/addservices?Id=<serviceId>` (name ambiguous — may mutate a draft; treat as write-ish)
+
+WRITES (P2/P3 — endpoints known from the forms' telemetry; reverse-engineer the body, never call blind):
+- Order investigation: `POST /Doctor/Home/CreateServices` (form `Services_form`; fields incl `srchDiagnostic`)
+- Prescribe: `POST /Doctor/Home/CreateDrugs` (form `Medication_form`; ~14 fields incl `frequency`)
+- Queue status: `POST /Doctor/Home/updatestatus` {visitid,status,current_doc,consult,tat,token}
+
+STILL NEEDED (the MCP can't grab bodies on this page — buffer expires + evaluate_script/click/fill time out;
+only snapshot + list/get-network-request work): JSON SHAPES of FilterServices / FilterDrugs /
+PatientprofileVisits, and exact POST fields of CreateServices / CreateDrugs. Fastest reliable capture = in the
+owner's OWN Chrome (past Cloudflare, DevTools works): right-click each → Copy → **Copy Response** for the two
+searches + the profile; for the two writes, place ONE order/prescription on a TEST patient + Copy the
+**Payload**. Until then, P2/P3 can be wired with tolerant parsing + validated against a live search.
