@@ -99,6 +99,7 @@ export async function onRequest(context) {
       if (seg === "advance") return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, who.id)) }, 200, request);
       if (seg === "status") return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, who.id)) }, 200, request);
       if (seg === "priority") return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, who.id)) }, 200, request);
+      if (seg === "revoke") { await Q.revokeTicket(env, s, body.ticketId, who.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
       if (seg === "session" && sub === "status") return json({ ok: true, session: await Q.setSessionStatus(env, s, body, who.id) }, 200, request);
     }
 

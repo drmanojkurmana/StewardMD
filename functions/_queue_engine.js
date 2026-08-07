@@ -127,6 +127,9 @@ export async function setStatus(env, session, ticketId, to, actor) {
     if (session.currentTicketId === ticketId) sessPatch.currentTicketId = "";
     if (t.consultStartAt) learn = Math.max(0.5, (now() - t.consultStartAt) / 60000);
   }
+  // Privacy: at visit end the patient link must die. Bumping tokenVer makes every outstanding token fail
+  // verifyTicketToken, so a shared/forwarded link stops resolving the moment the visit closes.
+  if (isTerminal(to)) patch.tokenVer = (t.tokenVer || 1) + 1;
   const writes = [wUpdate(env, "q_tickets/" + ticketId, patch)];
   if (Object.keys(sessPatch).length) { sessPatch.updatedAt = now(); writes.push(wUpdate(env, "q_sessions/" + session.id, sessPatch)); Object.assign(session, sessPatch); }
   if (learn != null && (await getConfig(env, session.doctorUid)).etaLearning) { const s2 = updateStats(await getStats(env, session.doctorUid), learn, t.visitType); writes.push(wUpdate(env, "q_stats/" + sanitize(session.doctorUid), { data: JSON.stringify(s2), updatedAt: now() })); }
@@ -136,6 +139,15 @@ export async function setStatus(env, session, ticketId, to, actor) {
   return recompute(env, session);
 }
 
+// DPDP erasure: kill the patient link (bump ver) AND wipe the encrypted name/mobile at rest. Used for an
+// explicit "remove/forget" and by discharge. Audit records the action, never the data.
+export async function revokeTicket(env, session, ticketId, actor) {
+  const t = await getTicket(env, ticketId);
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { tokenVer: (t.tokenVer || 1) + 1, encName: "", encMobile: "", updatedAt: now() })]);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "revoke", meta: "erase" });
+  return { ok: true };
+}
 export async function setPriority(env, session, ticketId, priority, actor) {
   const t = await getTicket(env, ticketId);
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
