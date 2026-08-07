@@ -276,6 +276,26 @@ async function getRadiologyReport(env, token, resultid, type) {
   return { testName:x.testdesc||x.test_desc||'', report:htmlToText(x.result||x.final_rad_result||''), orderDate:x.order_date||x.reg_date||'', reported:x.result_enteredtime||x.entered_time||'', doctor:x.doctor_name||x.consultingdoc||'', enteredBy:x.generated_by_name||x.generated_name||'' };
 }
 
+// OPD patient-profile bundle (READ ONLY, flag smd_opd_emr on the client). Merges the existing read calls
+// in parallel; each is caught so one failing scrape doesn't kill the bundle. Returns {unauth:true} up front
+// when the session is gone (mirrors every data fn) so the route can 401. No new scraping.
+async function getOpdProfile(env, token, patientId, recordNo) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const safe = (p) => Promise.resolve(p).then(r => (r && r.unauth) ? null : r).catch(() => null);
+  const [labs, radiology, meds, demo] = await Promise.all([
+    safe(getLabOrders(env, token, patientId)),
+    safe(getRadiologyOrders(env, token, patientId)),
+    safe(getMedications(env, token, patientId)),
+    recordNo ? safe(getDemographics(env, token, patientId, recordNo)) : Promise.resolve(null)
+  ]);
+  return {
+    labs: (labs && labs.orders) || [],
+    radiology: (radiology && radiology.orders) || [],
+    medications: (meds && meds.rows) || [],
+    phone: (demo && demo.phone) || ''
+  };
+}
+
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 // The GHIS session token grants live patient PHI — accept it ONLY from headers, never the ?token= query
 // string (which would leak it into edge/proxy access logs, browser history, and Referer). The client always
@@ -344,6 +364,7 @@ export async function onRequest(context) {
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology-report'){ const r = await getRadiologyReport(env, token, q.get('resultid') || '', q.get('type') || 'manual'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'medications')     { const r = await getMedications(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'profile')         { const r = await getOpdProfile(env, token, q.get('patientId') || '', q.get('recordNo') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);

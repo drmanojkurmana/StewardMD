@@ -1,0 +1,64 @@
+/* opd-emr.css — READ-ONLY OPD patient profile + reports overlay (window.OPDEMR, flag smd_opd_emr).
+ * Reuses the Smart OPD Queue "Clinical Precision" palette + Material Symbols (@font-face from
+ * redesign-system.css). No emoji. #smdOpdEmr exists only when a profile is opened. */
+#smdOpdEmr {
+  --primary: #00685f; --on-primary: #fff; --primary-container: #008378; --on-primary-container: #f4fffc;
+  --secondary: #565e74; --secondary-container: #dae2fd; --on-secondary-container: #5c647a;
+  --error: #ba1a1a; --on-error: #fff; --error-container: #ffdad6; --on-error-container: #93000a;
+  --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
+  --sc-lowest: #fff; --sc-low: #f2f4f6; --sc-high: #e6e8ea; --sc-highest: #e0e3e5;
+  --outline-variant: #bcc9c6;
+  --q-sans: Inter, var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --q-mono: var(--mono, ui-monospace, "SF Mono", Menlo, monospace);
+  position: fixed; inset: 0; z-index: 12010; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
+}
+#smdOpdEmr.on { display: block; }
+body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; --on-surface-variant: #bcc9c6;
+  --sc-lowest: #1f2325; --sc-low: #23272a; --sc-high: #2d3133; --sc-highest: #333739; --outline-variant: #3d4947; --secondary: #bec6e0; }
+#smdOpdEmr .material-symbols-outlined { font-family: "Material Symbols Outlined", "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; vertical-align: middle; user-select: none; }
+#smdOpdEmr .material-symbols-outlined.fill { font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24; }
+
+#smdOpdEmr .oe-app { display: flex; flex-direction: column; height: 100%; }
+#smdOpdEmr .oe-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--surface); border-bottom: 1px solid var(--sc-low); box-shadow: 0 1px 2px rgba(20,32,43,.04); padding: calc(12px + env(safe-area-inset-top)) 20px 12px; }
+#smdOpdEmr .oe-brand { display: flex; align-items: center; gap: 9px; font: 800 22px var(--q-sans); }
+#smdOpdEmr .oe-logo-mark { width: 28px; height: 28px; flex: 0 0 auto; background: var(--primary); -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; }
+#smdOpdEmr .oe-wordmark { color: var(--on-surface); }
+#smdOpdEmr .oe-wordmark span { color: var(--primary); }
+#smdOpdEmr .oe-close { border: 1px solid var(--outline-variant); background: var(--sc-lowest); color: var(--secondary); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+#smdOpdEmr .oe-close:hover { background: var(--sc-high); color: var(--primary); }
+
+#smdOpdEmr .oe-canvas { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 20px; max-width: 720px; margin: 0 auto; width: 100%; }
+
+/* patient header */
+#smdOpdEmr .oe-phead { display: flex; align-items: center; gap: 14px; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 18px; box-shadow: 0 1px 3px rgba(20,32,43,.05); }
+#smdOpdEmr .oe-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font: 700 18px var(--q-sans); flex: 0 0 auto; }
+#smdOpdEmr .oe-pmeta h2 { font: 700 24px var(--q-sans); letter-spacing: -.02em; margin: 0 0 4px; }
+#smdOpdEmr .oe-prow { display: flex; flex-wrap: wrap; gap: 14px; color: var(--secondary); font: 400 14px var(--q-sans); }
+#smdOpdEmr .oe-prow span { display: inline-flex; align-items: center; gap: 4px; }
+#smdOpdEmr .oe-prow .material-symbols-outlined { font-size: 18px; }
+#smdOpdEmr .oe-prow .mono { font-family: var(--q-mono); font-weight: 600; color: var(--on-surface); }
+
+/* sections + rows */
+#smdOpdEmr .oe-sec { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 8px 8px 6px; box-shadow: 0 1px 3px rgba(20,32,43,.05); }
+#smdOpdEmr .oe-h3 { font: 600 16px var(--q-sans); color: var(--on-surface); display: flex; align-items: center; gap: 8px; margin: 8px 10px 10px; }
+#smdOpdEmr .oe-h3 .material-symbols-outlined { color: var(--primary); font-size: 20px; }
+#smdOpdEmr .oe-h3 .oe-sub { margin-left: auto; font: 500 12px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-row { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 12px 10px; border: none; border-top: 1px solid var(--sc-low); background: none; color: var(--on-surface); cursor: pointer; }
+#smdOpdEmr .oe-sec .oe-row:first-of-type { border-top: none; }
+#smdOpdEmr .oe-row.static { cursor: default; }
+#smdOpdEmr .oe-row:not(.static):hover { background: var(--sc-low); }
+#smdOpdEmr .oe-row-ic { width: 36px; height: 36px; flex: 0 0 auto; border-radius: 10px; background: var(--sc-high); color: var(--primary); display: grid; place-items: center; }
+#smdOpdEmr .oe-row-ic .material-symbols-outlined { font-size: 20px; }
+#smdOpdEmr .oe-row-b { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#smdOpdEmr .oe-row-t { font: 600 14px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-row-m { font: 400 12.5px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-row .material-symbols-outlined { color: var(--secondary); }
+#smdOpdEmr .oe-tag { font: 600 11px var(--q-sans); letter-spacing: .03em; text-transform: uppercase; color: var(--on-secondary-container); background: var(--secondary-container); padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+#smdOpdEmr .oe-when { font: 500 11.5px var(--q-mono); color: var(--secondary); white-space: nowrap; }
+
+/* empty / loading / error */
+#smdOpdEmr .oe-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 60px 24px; text-align: center; color: var(--secondary); font: 500 15px var(--q-sans); }
+#smdOpdEmr .oe-empty.sm { padding: 22px 12px; font-size: 13.5px; }
+#smdOpdEmr .oe-empty .material-symbols-outlined { font-size: 32px; color: var(--secondary); }
+#smdOpdEmr .oe-empty.err { color: var(--error); }
+#smdOpdEmr .oe-empty.err .material-symbols-outlined { color: var(--error); }

@@ -44,7 +44,8 @@ export async function listTickets(env, sid) {
 // Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
 export async function decorateForDoctor(env, tickets) {
   return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
-    name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined
+    name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
+    ghisPatientId: t.ghisPatientId || ""   // full MR# for the View-EMR-profile action (smd_opd_emr)
   })));
 }
 
@@ -97,6 +98,7 @@ export async function addTicket(env, session, body, actor) {
     visitType: body.visitType === "followup" ? "followup" : "new", priority: clampPriority(body.priority),
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
     mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
+    ghisPatientId: String(body.mrn || ""),   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
     visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
     lang: String(body.lang || "en"),
     n_stage: 0, n_reg: false, n_complete: false,

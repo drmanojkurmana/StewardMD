@@ -12,7 +12,8 @@
   var DEFS = {
     smd_opd_queue: { type: "bool", def: false, query: "q", desc: "Smart OPD Queue master flag" },
     smd_opd_queue_patient: { type: "bool", def: false, query: "qpatient", desc: "Patient live tracking page" },
-    smd_opd_queue_import: { type: "bool", def: false, query: "qimport", desc: "GHIS/EMR roster auto-import" }
+    smd_opd_queue_import: { type: "bool", def: false, query: "qimport", desc: "GHIS/EMR roster auto-import" },
+    smd_opd_emr: { type: "bool", def: false, query: "qemr", desc: "Read-only OPD patient profile + reports (P1)" }
   };
 
   function raw(key) {

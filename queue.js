@@ -16,6 +16,7 @@
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }
   function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
   function now() { return Date.now(); }
+  function emrOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
 
   // ---- derived display data (pure) --------------------------------------------------------
   function computeKpis(tickets) {
@@ -62,6 +63,7 @@
           '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
+          (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
         "</div></div>";
   }
   function renderConsult(cur) {
@@ -207,6 +209,7 @@
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
     else if (cmd === "importopd") importOpd();
+    else if (cmd === "profile") openEmrProfile(arg);
     else if (cmd === "add") openAdd();
     else if (cmd === "dismiss") { var ai = root().querySelector(".q-ai"); if (ai) ai.style.display = "none"; }
     // notify/nav/viewall/docstatus/skip: Phase 2/3
@@ -221,6 +224,12 @@
       if (!rows.length) { try { G.toast && G.toast("No OPD patients found for today"); } catch (e) {} return; }
       act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok) { try { G.toast && G.toast("Imported " + (res.imported || 0) + " patient(s)"); } catch (e) {} } });
     }).catch(function () { try { G.toast && G.toast("Could not reach Ward Sync"); } catch (e) {} });
+  }
+  // View EMR profile (flag smd_opd_emr): look up the ticket locally for its full MR# + name, hand to OPDEMR.
+  function openEmrProfile(ticketId) {
+    var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
+    if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", name: t.name || "" });
   }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;
