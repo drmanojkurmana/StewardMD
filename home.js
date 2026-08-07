@@ -719,6 +719,7 @@
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
     antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
@@ -1205,6 +1206,15 @@
           tileV4("drugmenu", "pills", "Drugs &amp; Interactions", "Database · interaction checker") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
+          (function () {   // Smart OPD Queue tile (flag smd_opd_queue, DEFAULT ON dev/testing; PUBLIC-RELEASE-GATE)
+            try {
+              var qon, q = (location.search.match(/[?&]q=([^&]+)/) || [])[1];
+              if (q != null) qon = (q === "1" || q === "on" || q === "true");
+              else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
+              else qon = (localStorage.getItem("smd_opd_queue") !== "0");
+              return qon ? tileV4("queue", "ward", "OPD Queue", "Smart patient queue") : "";
+            } catch (e) { return ""; }
+          })() +
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
@@ -1398,6 +1408,15 @@
               else if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) fon = SMD_FOLLOWCARE_FLAGS.on();
               else fon = (localStorage.getItem("smd_followcare") !== "0");
               return fon ? rtile("followcare", "health_and_safety", "FollowCare", "Recovery follow-up") : "";
+            } catch (e) { return ""; }
+          })() +
+          (function () {   // Smart OPD Queue — flag smd_opd_queue (DEFAULT ON for dev/testing; PUBLIC-RELEASE-GATE). Opens QUEUE.open().
+            try {
+              var qon, q = (location.search.match(/[?&]q=([^&]+)/) || [])[1];
+              if (q != null) qon = (q === "1" || q === "on" || q === "true");
+              else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
+              else qon = (localStorage.getItem("smd_opd_queue") !== "0");
+              return qon ? rtile("queue", "groups", "OPD Queue", "Smart patient queue") : "";
             } catch (e) { return ""; }
           })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
