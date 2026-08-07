@@ -361,17 +361,49 @@ async function getAssessmentForm(env, token, patientId) {
   const html = r.body || '';
   return { fields: parseAssessmentFields(html), raw: htmlToText(html).slice(0, 8000) };
 }
-// WRITE: order an investigation. Body built TOLERANTLY — only `srchDiagnostic` + the CSRF token are captured
-// field names; every other name is a GUESS marked UNVERIFIED and must be fixed against a real captured POST
-// before QUEUE_EMR_WRITE is set. Sends what we have; never fabricates values for fields we don't have.
+// WRITE helper: after a service is picked, GHIS needs its pack-rate id + price, which FilterServices does NOT
+// return. The `addservices?Id=<id>` GET carries them. Its response shape is UNVERIFIED (not captured) — parsed
+// tolerantly; the client can also pass packRateId/price through to skip this lookup.
+async function getServiceDetail(env, token, id) {
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/addservices?Id=' + encodeURIComponent(id || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  let d = parseGhis(r.body); if (Array.isArray(d)) d = d[0] || {}; d = d || {};
+  const pk = (ks) => { for (let i = 0; i < ks.length; i++) { const v = d[ks[i]]; if (v != null && String(v).trim() !== '') return String(v).trim(); } return ''; };
+  return {
+    packRateId: pk(['servicePackRateId', 'serv_pack_rate_id', 'ServicePackRateId']),
+    price: pk(['price', 'service_price', 'Price']),
+    deptId: pk(['dept_id', 'mat_dept_id']), groupId: pk(['material_group_sp_id', 'mat_grp_sp_id']),
+    desc: pk(['material_desc', 'Service_desc']), serviceType: pk(['Service_type']) || 'In house'
+  };
+}
+// WRITE: order an investigation. Field names VERIFIED from a live CreateServices capture (2026-08-07). serviceId,
+// deptId, groupId, desc come from the search row; pack-rate id + price (absent from search) are fetched via
+// getServiceDetail (addservices) unless the body supplies them. `antibiotics` is GHIS's (odd) name for the
+// typed indication field. Never fabricates values we don't have.
 async function orderInvestigation(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
+  const id = String(body.serviceId || '');
+  if (!id) return { ok: false, status: 400, error: 'missing serviceId' };
+  let det = {};
+  try { const d = await getServiceDetail(env, token, id); if (d && !d.unauth) det = d; } catch (e) {}
   const p = new URLSearchParams();
   p.set('__RequestVerificationToken', s.csrf || '');
-  p.set('srchDiagnostic', String(body.diagnosis || ''));                 // captured field name
-  if (body.serviceId != null) p.set('serviceId', String(body.serviceId)); // UNVERIFIED: service id field name
-  p.set('emergency', body.emergency ? '1' : '0');                        // UNVERIFIED: emergency flag field name
+  p.set('mat_dept_id', String(body.deptId || det.deptId || ''));
+  p.set('mat_grp_sp_id', String(body.groupId || det.groupId || ''));
+  p.set('mat_serv_sp_id', id);
+  p.set('Service_id', id);
+  p.set('serv_pack_rate_id', String(body.packRateId || det.packRateId || ''));
+  p.set('serv_alias', String(body.alias || ''));
+  p.set('serv_code', String(body.code || ''));
+  p.set('Service_desc', String(body.desc || det.desc || ''));
+  p.set('Remarks', String(body.remarks || ''));
+  p.set('service_price', String(body.price || det.price || ''));
+  p.set('Service_type', String(body.serviceType || det.serviceType || 'In house'));
+  p.set('antibiotics', String(body.indication || body.antibiotics || ''));  // captured: carries the typed indication
+  p.set('collection', String(body.collection || ''));
+  p.set('specimen', String(body.specimen || ''));
+  p.set('X-Requested-With', 'XMLHttpRequest');
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateServices', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
   return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
 }
@@ -392,11 +424,28 @@ async function prescribe(env, token, body) {
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateDrugs', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
   return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
 }
-// WRITE: save the assessment. The Save POST URL + fields are NOT captured (only the READ,
-// GetInitialAssessmentnew). Documented stub: capture the Save request on the GHIS Initial Assessment form
-// (DevTools Network) and pin the POST URL + field names before wiring this.
-function saveAssessment(/* env, token, body */) {
-  return json({ error: 'assessment_write_not_captured', detail: 'Capture the Save request on the GHIS Initial Assessment form (DevTools Network) and pin the POST URL + field names before enabling' }, 501);
+// WRITE: save the Initial Assessment. Endpoint + `assessment.` field convention VERIFIED from a live capture
+// (2026-08-07, POST /Doctor/Home/CreateinitialAssessmentnew — note the lowercase 'i'). GHIS posts the WHOLE
+// form at once, so the client reads the form (getAssessmentForm), overlays the doctor's edits, and sends the
+// full name->value map in body.fields; we normalise to the assessment. namespace + attach ids + CSRF. New = docId 0.
+async function saveAssessment(env, token, body) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  body = body || {};
+  const p = new URLSearchParams();
+  p.set('__RequestVerificationToken', s.csrf || '');
+  p.set('assessment.Initial_Assessment_doc_id', String(body.docId || '0'));
+  p.set('assessment.patient_id', String(body.patientId || ''));
+  p.set('assessment.episode_id', String(body.episodeId || ''));
+  const fields = body.fields || {};
+  Object.keys(fields).forEach(function (k) {
+    // client may send bare ("Temp") or namespaced ("assessment.Temp" / "val.investigation_desc") names.
+    const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
+    if (['assessment.Initial_Assessment_doc_id', 'assessment.patient_id', 'assessment.episode_id'].indexOf(name) >= 0) return;
+    p.set(name, fields[k] == null ? '' : String(fields[k]));
+  });
+  p.set('X-Requested-With', 'XMLHttpRequest');
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
+  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
@@ -486,7 +535,7 @@ export async function onRequest(context) {
     }
     if (seg === 'assessment-save' && request.method === 'POST') {
       if (!emrWriteEnabled(env)) return writeGate();
-      return saveAssessment(env, token, await request.json().catch(() => ({})));
+      const r = await saveAssessment(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
