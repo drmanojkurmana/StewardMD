@@ -9,6 +9,7 @@
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
 import { orderQueue, computeEtas, canTransition, isTerminal, updateStats, meanFor, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -73,6 +74,7 @@ export async function recompute(env, session, tickets) {
     }
   });
   if (writes.length) await fsCommit(env, writes);
+  try { await runQueueNotifications(env, session, tickets, {}); } catch (e) {}   // fire ahead5/ahead2/next (idempotent)
   return tickets;
 }
 
@@ -85,13 +87,17 @@ export async function addTicket(env, session, body, actor) {
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
     mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
     visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
+    lang: String(body.lang || "en"),
+    n_stage: 0, n_reg: false, n_complete: false,
     registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
     createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
   };
   await fsCommit(env, [wCreate(env, "q_tickets/" + id, f)]);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType });
   await recompute(env, session);
-  return withId(id, f);
+  const ticket = withId(id, f);
+  try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
+  return ticket;
 }
 
 // ---- explicit status change (call / no_show / cancel / investigation / followup / complete / start) --
@@ -115,6 +121,7 @@ export async function setStatus(env, session, ticketId, to, actor) {
   if (learn != null) { const s2 = updateStats(await getStats(env, session.doctorUid), learn, t.visitType); writes.push(wUpdate(env, "q_stats/" + sanitize(session.doctorUid), { data: JSON.stringify(s2), updatedAt: now() })); }
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: to, meta: from });
+  if (to === "completed") { try { await notifyTicket(env, session, Object.assign({}, t, patch), "complete", {}); } catch (e) {} }
   return recompute(env, session);
 }
 

@@ -115,6 +115,39 @@
   // {placeholders} are filled by t(...vars). English is complete; hi/te reviewed for the patient-facing
   // surfaces; other languages fall back to English until a reviewer fills them in.
   var STR = {
+    // Smart OPD Queue outbound messages. PHI-LIGHT by design: NO patient name/MRN — only dept, doctor,
+    // an opaque link, and counts/times. hi/te are best-effort and flagged for native clinical review
+    // before the queue's non-English channel is enabled (owner TODO), same posture as the fc.* strings.
+    "queue.msg.registered": {
+      en: "You're in the queue at {dept}. Track your turn live — we'll text you when it's nearly time: {link}",
+      hi: "आप {dept} की कतार में हैं। अपनी बारी लाइव देखें — समय पास आने पर हम आपको संदेश भेजेंगे: {link}",
+      te: "మీరు {dept} క్యూలో ఉన్నారు. మీ వంతును లైవ్‌గా చూడండి — సమయం దగ్గర పడినప్పుడు మేము మెసేజ్ చేస్తాము: {link}"
+    },
+    "queue.msg.ahead5": {
+      en: "About {ahead} patients ahead of you at {dept}. Please start heading over. Live status: {link}",
+      hi: "{dept} पर आपसे आगे लगभग {ahead} मरीज़ हैं। कृपया आना शुरू करें। लाइव स्थिति: {link}",
+      te: "{dept} వద్ద మీ ముందు సుమారు {ahead} మంది రోగులు ఉన్నారు. దయచేసి బయలుదేరండి. లైవ్ స్థితి: {link}"
+    },
+    "queue.msg.ahead2": {
+      en: "Almost your turn at {dept} — {ahead} patients ahead. Please be ready near the OPD. {link}",
+      hi: "{dept} पर लगभग आपकी बारी — {ahead} मरीज़ आगे। कृपया OPD के पास तैयार रहें। {link}",
+      te: "{dept} వద్ద దాదాపు మీ వంతు — {ahead} మంది ముందు ఉన్నారు. దయచేసి OPD దగ్గర సిద్ధంగా ఉండండి. {link}"
+    },
+    "queue.msg.next": {
+      en: "You're next at {dept}. Please proceed to the OPD now. {link}",
+      hi: "{dept} पर अब आपकी बारी है। कृपया अभी OPD में आएं। {link}",
+      te: "{dept} వద్ద ఇప్పుడు మీ వంతు. దయచేసి ఇప్పుడు OPD కి రండి. {link}"
+    },
+    "queue.msg.delayed": {
+      en: "The doctor is running a little behind at {dept}. Updated estimate: {eta}. Live status: {link}",
+      hi: "{dept} पर डॉक्टर थोड़ा देर से चल रहे हैं। नया अनुमान: {eta}. लाइव स्थिति: {link}",
+      te: "{dept} వద్ద డాక్టర్ కొంచెం ఆలస్యంగా ఉన్నారు. కొత్త అంచనా: {eta}. లైవ్ స్థితి: {link}"
+    },
+    "queue.msg.complete": {
+      en: "Your consultation at {dept} is complete. Thank you for visiting StewardMD.",
+      hi: "{dept} पर आपका परामर्श पूरा हुआ। StewardMD पर आने के लिए धन्यवाद।",
+      te: "{dept} వద్ద మీ సంప్రదింపు పూర్తయింది. StewardMD ని సందర్శించినందుకు ధన్యవాదాలు."
+    },
     // Outbound messages (SMS / WhatsApp / email body). Keep PHI-light: first name + opaque link only.
     "fc.msg.send": {
       en: "Hi {name}, this is your StewardMD recovery check-in. It only takes a minute: {link}",
