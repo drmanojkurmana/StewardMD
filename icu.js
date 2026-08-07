@@ -1340,6 +1340,11 @@
       '#icuRoot.icu-v2 .icu-v2-obchip .icu-ico{width:15px;height:15px}' +
       '#icuRoot.icu-v2 .icu-v2-obrole{font:600 11px var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-tlfull{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
+      '#icuRoot .icu-tl-bar{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0 8px;scrollbar-width:none}' +
+      '#icuRoot .icu-tl-bar::-webkit-scrollbar{display:none}' +
+      '#icuRoot .icu-tl-chip{flex:0 0 auto;font:700 12px var(--font);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 13px;min-height:34px;cursor:pointer}' +
+      '#icuRoot .icu-tl-chip.on{color:#fff;background:var(--primary);border-color:var(--primary)}' +
+      '#icuRoot .icu-tl-day{position:sticky;top:0;z-index:1;font:800 11px var(--font);letter-spacing:.03em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:8px;padding:5px 10px;margin:10px 0 6px}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
       '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 10px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
@@ -2683,7 +2688,7 @@
   var PRIORITY_ORDER = ["immediate", "high", "moderate", "low"];
   var _roundPriority = "high"; // round-note composer: selected priority for the instructions being posted
   var _roundOnBehalf = null;   // round-note composer: uid the instruction is attributed to (null = me). Lets a resident log a consultant's verbal order under the consultant's name.
-  var _tlAll = false;          // timeline: show the FULL history (all events) vs the recent slice
+  var _tlDay = "full";         // timeline day filter: "full" (all, grouped by day) or a day number
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -4476,19 +4481,46 @@
     out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
     out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline' + (tl.length ? ' <span class="icu-phase">' + tl.length + '</span>' : "") + '</div>';
     if (tl.length) {
-      var TL_RECENT = 15, tlShown = _tlAll ? tl : tl.slice(0, TL_RECENT);
-      out += '<div class="icu-card' + (_tlAll ? " icu-v2-tlfull" : "") + '">' + tlShown.map(function (e) {
+      // Day-wise grouping. Day 1 = the admission date if it parses, else the earliest recorded
+      // event's calendar day; every later calendar day increments the number.
+      var _dayMs = 86400000;
+      var _dayStart = function (ms) { var d = new Date(ms); d.setHours(0, 0, 0, 0); return d.getTime(); };
+      var _evTs = tl.map(function (e) { return e.ts; }).filter(Boolean);
+      var _first = _evTs.length ? Math.min.apply(null, _evTs) : nowTs();
+      var _admit = null; try { _admit = parseWardDate(pt.admitDate); } catch (e0) {}
+      var _anchor = _dayStart(_admit && _admit <= _first ? _admit : _first);
+      var _tlDayOf = function (ts) { return Math.floor((_dayStart(ts || nowTs()) - _anchor) / _dayMs) + 1; };
+      // Selector bar: Full + one chip per day that has events (Day 1..N, ascending).
+      var _seen = {}; tl.forEach(function (e) { _seen[_tlDayOf(e.ts)] = 1; });
+      var _days = Object.keys(_seen).map(Number).sort(function (a, b) { return a - b; });
+      var _sel = _tlDay;
+      out += '<div class="icu-tl-bar" role="tablist" aria-label="Filter timeline by day">' +
+        '<button class="icu-tl-chip' + (_sel === "full" ? " on" : "") + '" data-icu-act="tlday:full" role="tab" aria-selected="' + (_sel === "full") + '">Full</button>' +
+        _days.map(function (dn) { return '<button class="icu-tl-chip' + (_sel === dn ? " on" : "") + '" data-icu-act="tlday:' + dn + '" role="tab" aria-selected="' + (_sel === dn) + '">Day ' + dn + '</button>'; }).join("") +
+        '</div>';
+      var _shown = (_sel === "full") ? tl : tl.filter(function (e) { return _tlDayOf(e.ts) === _sel; });
+      var _lastDay = null;
+      out += '<div class="icu-card icu-v2-tlfull">' + (_shown.length ? _shown.map(function (e) {
+        // Day header whenever the day changes (list is newest-first, so headers count down).
+        var dn = _tlDayOf(e.ts), hdr = "";
+        if (dn !== _lastDay) {
+          _lastDay = dn;
+          var dd = new Date(e.ts || nowTs());
+          var dl = isFinite(dd.getTime()) ? dd.toLocaleDateString([], { weekday: "short", day: "numeric", month: "short" }) : "";
+          hdr = '<div class="icu-tl-day">Day ' + dn + (dl ? ' · ' + dl : "") + '</div>';
+        }
         var _bm = (_grpMembers || []).filter(function (x) { return x.uid === e.by; })[0];
         var byTitle = (_bm && _bm.designation) ? _bm.designation : (e.byRole ? grpRoleLabel(e.byRole) : "");
-        var by = (e.byName || "") + (byTitle ? " · " + byTitle : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
-        return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
+        // Per-row: actual clock time (the day header carries the date) + friendly "x ago".
+        // Pending events (serverTimestamp not resolved -> ts null) show "just now", never blank.
+        var clock = e.ts ? ((new Date(e.ts)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + (fmtAgo(e.ts) ? " · " + fmtAgo(e.ts) : "")) : "just now";
+        var by = (e.byName || "") + (byTitle ? " · " + byTitle : "") + " · " + clock;
+        return hdr + '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
           '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
           '<span style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="icu-v2-tlav">' + esc(v2Initials(e.byName || "")) + '</span><span style="font:600 11px var(--font);color:var(--muted)">' + esc(by) + '</span></span></span></div>';
-      }).join("") + '</div>';
-      // Full-history button — the whole audit trail is fetched (no cap); this just reveals it all.
-      if (tl.length > TL_RECENT) out += '<button class="icu-btn ghost" data-icu-act="tlall">' + ico("clock", "🕑") + (_tlAll ? ' Show recent only' : ' View full history (' + tl.length + ' events)') + '</button>';
+      }).join("") : '<p class="icu-doc-sub" style="margin:0">No updates on this day.</p>') + '</div>';
     } else {
-      out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, author- and time-stamped.</p></div>';
+      out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, day- and time-stamped.</p></div>';
     }
     // Retention notice — so doctors know how long the shared history is kept.
     out += '<p class="icu-doc-sub" style="margin:10px 2px 0;opacity:.75;font-size:11.5px">' + ico("info", "ⓘ") + ' Shared timeline &amp; tasks are kept for 7 days, then cleared automatically — and removed when the patient is discharged. Export or note anything you need to keep.</p>';
@@ -7213,7 +7245,7 @@
       case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
       case "grptaskexplainsave": grpTaskExplainSave(); break;
       case "grpnudge": grpNudgeTask(decodeURIComponent(arg)); break;   // re-push a task reminder to the executor roles
-      case "tlall": _tlAll = !_tlAll; _paintTop = true; paint(); break;
+      case "tlday": _tlDay = (arg === "full" ? "full" : (+arg)); _paintTop = true; paint(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       case "pushnotedismiss": grpPushNoteDismiss(); break;   // dismiss the "teammates weren't alerted" board notice
       // ---- ICU v2 group mode Phase 5 — doctor ID + membership (add/invite-link/leave/remove/join) ----
@@ -7257,7 +7289,7 @@
         try { grpNotifyHandover(_grp.id, _grpPtId, _sb); } catch (e) {}
         if (window.toast) toast("Handover posted to the unit timeline");
         // 3) jump to Rounds so the handover entry is visible (so it clearly did something)
-        _active = "rounds"; _ws = wsOf("rounds"); _wsLast[_ws] = "rounds"; _tlAll = false; _paintTop = true; paint();
+        _active = "rounds"; _ws = wsOf("rounds"); _wsLast[_ws] = "rounds"; _tlDay = "full"; _paintTop = true; paint();
         break;
       }
       case "dischargecopy": copyDischarge(); break;
