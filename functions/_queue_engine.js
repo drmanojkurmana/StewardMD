@@ -151,7 +151,7 @@ export async function setSessionStatus(env, session, patch, actor) {
 export function linkFor(env, ticket) {
   const base = (env && env.QUEUE_LINK_BASE) || "https://stewardmd.in";
   return mintTicketToken(env, ticket.id, ticket.expiresAt || endOfDayMs(ticket.date), ticket.tokenVer || 1)
-    .then((tok) => ({ token: tok, url: base.replace(/\/+$/, "") + "/q?t=" + tok }));
+    .then((tok) => ({ token: tok, url: base.replace(/\/+$/, "") + "/queue?t=" + tok }));
 }
 // Verify a patient token → PHI-FREE snapshot. Never returns name/MRN/phone.
 export async function portalContext(env, token) {
@@ -169,7 +169,7 @@ export async function portalContext(env, token) {
   await qAudit(env, { hospitalId: t.hospitalId, ticketId: id, actor: "patient", action: "portal_view", meta: "" });
   return {
     ok: true,
-    department: session ? session.department : "", doctorStatus: session ? session.doctorStatus : "consulting",
+    department: session ? session.department : "", doctorName: session ? session.doctorName : "", doctorStatus: session ? session.doctorStatus : "consulting",
     status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead,
     etaStart: t.etaStart || 0, etaEnd: t.etaEnd || 0, confidence: t.etaConfidence || 0,
     journey: { registeredAt: t.registeredAt || 0, calledAt: t.calledAt || 0, consultStartAt: t.consultStartAt || 0, done: isTerminal(t.status) },

@@ -168,7 +168,11 @@ export async function onRequest(context) {
   // no account and no /realapp cookie, so it must resolve for anonymous visitors. It is safe to expose —
   // it carries no PHI in the URL and its own /api/followcare/* endpoints self-authorise via the signed token.
   // Match both the clean URL (/privacy) and the .html form (/privacy.html), with or without slashes.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare"];
+  // "queue" is the login-free, install-free OPD patient wait page (Smart OPD Queue): a patient opens it
+  // from an SMS/WhatsApp link (…/queue?t=<opaque token>) with no app/account/cookie, so it must resolve
+  // for anonymous visitors. Safe to expose — no PHI in the URL, and /api/queue/* self-authorises via the
+  // signed token (only position/ETA/status are returned, never name/MRN/phone).
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

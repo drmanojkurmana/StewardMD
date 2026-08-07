@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="robots" content="noindex"/>
+<meta name="referrer" content="no-referrer"/>
+<title>Your place in the queue · StewardMD</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&display=swap" rel="stylesheet"/>
+<!-- Self-contained patient wait page (Smart OPD Queue). No login, no app, NO PHI: only position/ETA/
+     status from /api/queue/portal via the opaque signed token. Faithful port of the Google Stitch design. -->
+<style>
+  :root{ --primary:#00685f; --on-primary:#fff; --primary-container:#008378; --on-primary-container:#f4fffc;
+    --primary-fixed:#89f5e7; --on-primary-fixed-variant:#005049; --secondary:#565e74;
+    --tertiary-container:#66768d; --on-tertiary-container:#fdfcff; --error:#ba1a1a;
+    --bg:#f7f9fb; --surface:#f7f9fb; --on-surface:#191c1e; --on-surface-variant:#3d4947;
+    --sc-lowest:#fff; --sc-low:#f2f4f6; --sc-highest:#e0e3e5; --surface-variant:#e0e3e5; --outline-variant:#bcc9c6; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#191c1e; --surface:#23272a; --on-surface:#eff1f3; --on-surface-variant:#bcc9c6;
+    --sc-lowest:#1f2325; --sc-low:#23272a; --sc-highest:#333739; --surface-variant:#3d4947; --outline-variant:#3d4947; --secondary:#bec6e0; --primary:#6bd8cb; } }
+  *{box-sizing:border-box} html,body{margin:0}
+  body{ background:var(--bg); color:var(--on-surface); font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; min-height:100dvh; -webkit-font-smoothing:antialiased; }
+  .material-symbols-outlined{ font-family:"Material Symbols Outlined"; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; user-select:none; line-height:1; }
+  .fill{ font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; }
+  header{ position:sticky; top:0; z-index:50; background:var(--surface); box-shadow:0 1px 2px rgba(20,32,43,.06); }
+  .hd{ display:flex; align-items:center; gap:8px; max-width:480px; margin:0 auto; padding:calc(14px + env(safe-area-inset-top)) 20px 14px; }
+  .hd .material-symbols-outlined{ color:var(--primary); font-size:26px; }
+  .hd h1{ font:800 20px Inter; color:var(--primary); margin:0; }
+  main{ max-width:480px; margin:0 auto; padding:20px 20px 130px; display:flex; flex-direction:column; gap:18px; }
+  .top{ text-align:center; }
+  .top h2{ font:700 22px Inter; margin:0; }
+  .top .doc{ font:500 14px Inter; color:var(--secondary); margin:4px 0 12px; display:flex; align-items:center; justify-content:center; gap:5px; }
+  .live{ display:inline-flex; align-items:center; gap:7px; padding:7px 14px; border-radius:999px; background:color-mix(in srgb,var(--tertiary-container) 14%,transparent); color:var(--on-surface-variant); font:700 12px Inter; }
+  .live .material-symbols-outlined{ color:var(--primary); font-size:18px; }
+  .card{ background:var(--sc-lowest); border:1px solid var(--surface-variant); border-radius:18px; box-shadow:0 1px 3px rgba(20,32,43,.05); }
+  .pos{ padding:22px; display:flex; flex-direction:column; align-items:center; position:relative; overflow:hidden; }
+  .pos .bar{ position:absolute; top:0; left:0; height:4px; width:100%; background:var(--surface-variant); }
+  .pos .bar i{ display:block; height:100%; background:var(--primary); border-radius:0 4px 4px 0; }
+  .pos .lbl{ font:700 12px Inter; letter-spacing:.14em; text-transform:uppercase; color:var(--secondary); margin:8px 0 6px; }
+  .pos .n{ display:flex; align-items:baseline; gap:3px; color:var(--primary); }
+  .pos .n b{ font:800 68px Inter; line-height:1; letter-spacing:-.03em; }
+  .pos .n sup{ font:700 18px Inter; color:var(--secondary); }
+  .pos .split{ display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; margin-top:18px; padding-top:18px; border-top:1px solid var(--surface-variant); text-align:center; }
+  .pos .split .k{ font:700 12px Inter; color:var(--secondary); margin-bottom:4px; }
+  .pos .split .v{ font:700 20px Inter; }
+  .pos .split .col+.col{ border-left:1px solid var(--surface-variant); }
+  .pos .split .dot{ width:8px; height:8px; border-radius:50%; background:var(--error); display:inline-block; margin-right:5px; }
+  .eta{ background:var(--primary-container); color:var(--on-primary-container); border-radius:16px; padding:16px; display:flex; align-items:center; gap:14px; }
+  .eta .ic{ background:rgba(255,255,255,.18); padding:12px; border-radius:12px; display:grid; place-items:center; }
+  .eta .ic .material-symbols-outlined{ font-size:28px; }
+  .eta .k{ font:700 12px Inter; letter-spacing:.04em; text-transform:uppercase; opacity:.85; margin-bottom:2px; }
+  .eta .v{ font:700 18px Inter; }
+  .eta .conf{ margin-left:auto; background:var(--primary-fixed); color:var(--on-primary-fixed-variant); padding:5px 11px; border-radius:999px; font:700 12px Inter; display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+  .eta .conf .material-symbols-outlined{ font-size:15px; }
+  .journey{ padding:16px; }
+  .journey h3{ font:700 12px Inter; letter-spacing:.03em; color:var(--secondary); margin:0 0 16px; }
+  .steps{ position:relative; padding-left:26px; display:flex; flex-direction:column; gap:20px; }
+  .steps::before{ content:""; position:absolute; top:8px; bottom:8px; left:-17px; width:1px; background:var(--surface-variant); }
+  .step .node{ position:absolute; left:-26px; top:0; width:20px; height:20px; border-radius:50%; display:grid; place-items:center; box-shadow:0 0 0 4px var(--sc-lowest); }
+  .step{ position:relative; }
+  .step .node.done{ background:var(--primary); color:var(--on-primary); }
+  .step .node.done .material-symbols-outlined{ font-size:13px; }
+  .step .node.cur{ background:var(--primary-container); } .step .node.cur i{ width:8px; height:8px; background:var(--on-primary-container); border-radius:50%; }
+  .step .node.todo{ background:var(--sc-highest); border:2px solid var(--surface-variant); }
+  .step .t{ font:600 14px Inter; } .step.cur .t{ color:var(--primary); }
+  .step .m{ font:500 12px ui-monospace,Menlo,monospace; color:var(--secondary); }
+  .note{ background:var(--sc-low); border:1px solid var(--surface-variant); border-radius:12px; padding:14px; display:flex; gap:10px; align-items:flex-start; }
+  .note .material-symbols-outlined{ color:var(--secondary); font-size:20px; }
+  .note .t{ font:600 14px Inter; } .note .m{ font:400 13px Inter; color:var(--secondary); margin-top:2px; }
+  .actions{ position:fixed; left:0; right:0; bottom:0; z-index:40; background:color-mix(in srgb,var(--sc-lowest) 92%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-top:1px solid var(--surface-variant); padding:12px 16px calc(16px + env(safe-area-inset-bottom)); }
+  .actions .in{ max-width:480px; margin:0 auto; display:flex; gap:10px; }
+  .actions button{ flex:1; border:none; border-radius:12px; padding:12px; font:700 12px Inter; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; background:var(--sc-highest); color:var(--on-surface-variant); border:1px solid var(--outline-variant); }
+  .actions button.primary{ background:var(--primary); color:var(--on-primary); border:none; }
+  .actions button .material-symbols-outlined{ font-size:20px; }
+  .msg{ text-align:center; padding:60px 24px; color:var(--secondary); }
+  .msg .material-symbols-outlined{ font-size:48px; color:var(--outline-variant); display:block; margin:0 auto 14px; }
+  .msg h2{ font:700 20px Inter; color:var(--on-surface); margin:0 0 6px; }
+</style>
+</head>
+<body>
+<header><div class="hd"><span class="material-symbols-outlined fill">monitor_heart</span><h1>StewardMD</h1></div></header>
+<main id="app"><div class="msg"><span class="material-symbols-outlined">hourglass_top</span><h2>Loading…</h2></div></main>
+<div class="actions"><div class="in">
+  <button data-act="directions"><span class="material-symbols-outlined">directions</span>Directions</button>
+  <button class="primary" data-act="call"><span class="material-symbols-outlined">call</span>Call Desk</button>
+  <button data-act="share"><span class="material-symbols-outlined">share</span>Share</button>
+</div></div>
+<script>
+(function(){
+  "use strict";
+  var P = new URLSearchParams(location.search);
+  var token = P.get("t") || "";
+  var app = document.getElementById("app");
+  function ms(n,f){ return '<span class="material-symbols-outlined'+(f?' fill':'')+'">'+n+'</span>'; }
+  function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function ord(n){ var s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+  function clock(msv){ try{ return new Date(msv).toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"}); }catch(e){ return ""; } }
+  function msgView(icon, title, sub){ app.innerHTML = '<div class="msg">'+ms(icon)+'<h2>'+esc(title)+'</h2><p>'+esc(sub||"")+'</p></div>'; }
+
+  function render(d){
+    if(!d || !d.ok){
+      if(d && d.error==="link_expired") return msgView("event_busy","This tracking link has expired","Your visit is complete. Thank you for visiting.");
+      if(d && d.error==="not_configured") return msgView("hourglass_top","Queue is being set up","Please check back shortly.");
+      return msgView("link_off","Link not valid","This queue tracking link isn't active. Ask the front desk for a new one.");
+    }
+    if(d.journey && d.journey.done) return msgView("task_alt","Your consultation is complete","Thank you for visiting. You may close this page.");
+    var inConsult = d.status==="in_consultation";
+    var dept = d.department || "Your clinic", doc = d.doctorName || "";
+    var posBlock = inConsult
+      ? '<div class="n"><b>Now</b></div>'
+      : '<div class="n"><b>'+ (d.position||0) +'</b><sup>'+ (String(ord(d.position||0)).replace(/^\d+/,"")) +'</sup></div>';
+    var etaBlock = (!inConsult && d.etaStart)
+      ? '<section class="eta"><div class="ic">'+ms("schedule",true)+'</div><div style="flex:1"><div class="k">Estimated consultation</div><div class="v">'+clock(d.etaStart)+' &ndash; '+clock(d.etaEnd)+'</div></div>'
+        + (d.confidence? '<div class="conf">'+ms("check_circle")+ d.confidence +'% conf.</div>':'') +'</section>'
+      : "";
+    var j = d.journey||{};
+    var regDone = !!j.registeredAt, inRoom = !inConsult, consulting = inConsult;
+    var steps =
+      '<div class="step"><div class="node done">'+ms("check")+'</div><div class="t">Registered</div><div class="m">'+(regDone?clock(j.registeredAt):"—")+'</div></div>'+
+      '<div class="step'+(inRoom?' cur':'')+'"><div class="node '+(inRoom?'cur':'done')+'">'+(inRoom?'<i></i>':ms("check"))+'</div><div class="t">In waiting room</div><div class="m">'+(inRoom?"Currently":(j.calledAt?clock(j.calledAt):"Done"))+'</div></div>'+
+      '<div class="step'+(consulting?' cur':'')+'"><div class="node '+(consulting?'cur':'todo')+'">'+(consulting?'<i></i>':'')+'</div><div class="t">Consultation</div><div class="m">'+(consulting?"Now":"Upcoming")+'</div></div>';
+    var docStatus = inConsult ? "In consultation" : (d.doctorStatus==="break"?"On a short break": d.doctorStatus==="emergency"?"Handling an emergency": d.doctorStatus==="procedure"?"In a procedure":"Seeing patients");
+
+    app.innerHTML =
+      '<section class="top"><h2>'+esc(dept)+'</h2>'+ (doc? '<p class="doc">'+ms("person")+esc(doc)+'</p>':'') +
+        '<span class="live">'+ms("sync")+'Live tracking active</span></section>'+
+      '<section class="card pos"><div class="bar"><i style="width:'+(inConsult?100:Math.max(8,100-(d.ahead||0)*12))+'%"></i></div>'+
+        '<div class="lbl">'+(inConsult?"You are being seen":"Your position")+'</div>'+ posBlock +
+        '<div class="split"><div class="col"><div class="k">Patients ahead</div><div class="v">'+(inConsult?0:(d.ahead||0))+'</div></div>'+
+          '<div class="col"><div class="k">Doctor status</div><div class="v" style="font-size:14px;font-weight:600"><span class="dot"></span>'+esc(docStatus)+'</div></div></div></section>'+
+      etaBlock +
+      '<section class="card journey"><h3>Appointment journey</h3><div class="steps">'+steps+'</div></section>'+
+      '<section class="note">'+ms("sms")+'<div><div class="t">We’ll text you</div><div class="m">You’ll get an SMS when it’s nearly your turn, so you can step away if you need to.</div></div></section>';
+  }
+
+  // actions
+  document.querySelector(".actions").addEventListener("click", function(e){
+    var b = e.target.closest("[data-act]"); if(!b) return;
+    var a = b.getAttribute("data-act");
+    if(a==="share"){ if(navigator.share){ navigator.share({title:"My place in the queue", url:location.href}).catch(function(){}); } else { try{ navigator.clipboard.writeText(location.href); }catch(x){} } }
+    else if(a==="call"){ /* front-desk number is hospital-configured (Phase later) */ }
+    else if(a==="directions"){ /* hospital map link is hospital-configured (Phase later) */ }
+  });
+
+  function load(){
+    if(P.get("mock")==="1"){ var now=Date.now(); return render({ ok:true, department:"StewardMD Cardiology", doctorName:"Dr. Sarah Richardson", doctorStatus:"consulting", status:"waiting", position:4, ahead:3, etaStart:now+18*60000, etaEnd:now+25*60000, confidence:96, journey:{ registeredAt:now-90*60000, calledAt:0, consultStartAt:0, done:false } }); }
+    if(!token) return msgView("link_off","No tracking link","Open the link from your SMS or WhatsApp message.");
+    fetch("/api/queue/portal?t="+encodeURIComponent(token), {headers:{"Accept":"application/json"}})
+      .then(function(r){ return r.json(); }).then(render)
+      .catch(function(){ msgView("wifi_off","Can’t reach the queue","Check your connection and try again."); });
+  }
+  load();
+  if(P.get("mock")!=="1" && token) setInterval(load, 20000);   // live refresh (poll)
+})();
+</script>
+</body>
+</html>
