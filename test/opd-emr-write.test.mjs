@@ -14,6 +14,16 @@ test("parseSearchRows maps varied id/name key shapes to {id,name}", () => {
   assert.deepEqual(parseSearchRows([{ ServiceId: "S1", DisplayText: "Bar" }]), [{ id: "S1", name: "Bar" }]);
 });
 
+test("parseSearchRows handles the REAL GHIS shape (FilterServices + FilterDrugs, verified 2026-08-07)", () => {
+  // service: no basic_material_desc -> {id,name}; drug: basic_material_desc present -> +sub (generic).
+  assert.deepEqual(
+    parseSearchRows([{ material_service_sp_id: "LAB1118", material_desc: "Complete blood count", basic_material_desc: null }]),
+    [{ id: "LAB1118", name: "Complete blood count" }]);
+  assert.deepEqual(
+    parseSearchRows([{ material_service_sp_id: "P0110", material_desc: "CALPOL 650MG TAB", basic_material_desc: "PARACETAMOL-650MG TABLET" }]),
+    [{ id: "P0110", name: "CALPOL 650MG TAB", sub: "PARACETAMOL-650MG TABLET" }]);
+});
+
 test("parseSearchRows drops rows missing id or name, and tolerates strings / non-arrays", () => {
   const out = parseSearchRows([{ Id: "", Text: "x" }, { Id: "y", Text: "" }, { Text: "noId" }, null, "str", { Id: "z", Text: "Keep" }]);
   assert.deepEqual(out, [{ id: "z", name: "Keep" }]);

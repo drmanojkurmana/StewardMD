@@ -310,14 +310,17 @@ export function parseSearchRows(data) {
   if (typeof arr === 'string') { try { arr = JSON.parse(arr); } catch (e) { arr = []; } }
   if (arr && !Array.isArray(arr) && Array.isArray(arr.data)) arr = arr.data;
   if (!Array.isArray(arr)) return [];
-  const idKeys = ['Id', 'id', 'value', 'Value', 'ServiceId', 'Code'];
-  const nameKeys = ['Text', 'text', 'label', 'Label', 'name', 'Name', 'DisplayText'];
+  // Real GHIS shape (verified 2026-08-07, FilterServices + FilterDrugs are identical): id=material_service_sp_id
+  // (e.g. LAB1118 / P0110), name=material_desc, generic/composition=basic_material_desc. Guessed keys kept as fallback.
+  const idKeys = ['material_service_sp_id', 'Id', 'id', 'value', 'Value', 'ServiceId', 'Code'];
+  const nameKeys = ['material_desc', 'Text', 'text', 'label', 'Label', 'name', 'Name', 'DisplayText'];
+  const subKeys = ['basic_material_desc', 'generic', 'composition'];
   const pick = (o, keys) => { for (let i = 0; i < keys.length; i++) { const v = o[keys[i]]; if (v != null && String(v).trim() !== '') return String(v).trim(); } return ''; };
   const out = [];
   for (let i = 0; i < arr.length; i++) {
     const o = arr[i]; if (!o || typeof o !== 'object') continue;
-    const id = pick(o, idKeys), name = pick(o, nameKeys);
-    if (id && name) out.push({ id: id, name: name });
+    const id = pick(o, idKeys), name = pick(o, nameKeys), sub = pick(o, subKeys);
+    if (id && name) out.push(sub ? { id: id, name: name, sub: sub } : { id: id, name: name });
   }
   return out;
 }
