@@ -1,0 +1,185 @@
+/* functions/_queue_engine.js — Smart OPD Queue engine: Firestore orchestration over the pure logic in
+ * _queue_eta.js. All writes go through the service account (deny-all client rules). PHI (name/mobile) is
+ * encrypted at rest; nothing here puts PHI in a URL, query, or audit row.
+ *
+ * NOTE: this is the I/O layer — exercised by the API + on-device/integration, not by node --test (which
+ * can't reach Firestore). Every DECISION (transitions, ordering, ETA, learning) is delegated to the
+ * unit-tested _queue_eta.js, so the untested surface here is thin CRUD.
+ */
+import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
+import { orderQueue, computeEtas, canTransition, isTerminal, updateStats, meanFor, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+
+const now = () => Date.now();
+const EMERGENCY_PAD_MIN = 10;
+function newId() { return crypto.randomUUID().replace(/-/g, ""); }
+function sanitize(s) { return String(s == null ? "" : s).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 60); }
+function sessionId(hospitalId, doctorUid, dept, date) { return [hospitalId, doctorUid, dept, date].map(sanitize).join("__"); }
+function endOfDayMs(date) { const t = Date.parse(String(date) + "T23:59:59Z"); return Number.isFinite(t) ? t : now() + 12 * 3600e3; }
+function clampPriority(p) { p = Number(p) || 0; return p < 0 ? 0 : p > 2 ? 2 : Math.round(p); }
+const withId = (id, f) => Object.assign({ id }, f || {});
+
+// ---- sessions -----------------------------------------------------------------------------
+export async function getOrCreateSession(env, p) {
+  const id = sessionId(p.hospitalId, p.doctorUid, p.department, p.date);
+  const existing = await fsGet(env, "q_sessions/" + id);
+  if (existing) return withId(id, existing.fields);
+  const f = {
+    hospitalId: p.hospitalId || "", doctorUid: p.doctorUid || "", doctorName: p.doctorName || "",
+    department: p.department || "", date: p.date, status: "active", doctorStatus: "consulting",
+    currentTicketId: "", source: p.source || "manual", createdAt: now(), updatedAt: now(), expiresAt: endOfDayMs(p.date)
+  };
+  try { await fsCommit(env, [wCreate(env, "q_sessions/" + id, f)]); }
+  catch (e) { if (e && e.code === "precondition") { const again = await fsGet(env, "q_sessions/" + id); if (again) return withId(id, again.fields); } throw e; }
+  return withId(id, f);
+}
+export async function getSession(env, id) { const d = await fsGet(env, "q_sessions/" + id); return d ? withId(id, d.fields) : null; }
+export async function getTicket(env, id) { const d = await fsGet(env, "q_tickets/" + id); return d ? withId(id, d.fields) : null; }
+
+export async function listTickets(env, sid) {
+  const rows = await fsQuery(env, "q_tickets", { where: { field: "sessionId", value: sid }, limit: 500 });
+  return rows.map((r) => withId(r.id, r.fields));
+}
+// Doctor-facing view: decrypt name/mobile (the authed owner may see them). Never sent to a patient page.
+export async function decorateForDoctor(env, tickets) {
+  return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
+    name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined
+  })));
+}
+
+async function getStats(env, doctorUid) {
+  try { const d = await fsGet(env, "q_stats/" + sanitize(doctorUid)); if (d && d.fields && d.fields.data) return JSON.parse(d.fields.data); } catch (e) {}
+  return null;
+}
+
+// ---- recompute positions + ETAs (delegates to the pure engine); returns the updated tickets ----------
+export async function recompute(env, session, tickets) {
+  tickets = tickets || await listTickets(env, session.id);
+  const stats = await getStats(env, session.doctorUid);
+  const ordered = orderQueue(tickets);
+  const cur = tickets.find((t) => t.id === session.currentTicketId && t.status === "in_consultation");
+  let inFlight = 0;
+  if (cur) { const mean = meanFor(stats, cur.visitType); const elapsed = (now() - (cur.consultStartAt || now())) / 60000; inFlight = Math.max(0, mean - elapsed); }
+  const pad = (session.doctorStatus === "emergency" || session.status === "paused") ? EMERGENCY_PAD_MIN : 0;
+  const etas = computeEtas(ordered, { nowMs: now(), stats, inFlightRemainingMin: inFlight, emergencyPadMin: pad });
+  const byId = {}; etas.forEach((e) => (byId[e.id] = e));
+  const writes = [];
+  tickets.forEach((t) => {
+    const e = byId[t.id];
+    const pos = e ? e.position : 0, es = e ? e.etaStart : 0, ee = e ? e.etaEnd : 0, ec = e ? e.etaConfidence : 0;
+    if (t.position !== pos || t.etaStart !== es || t.etaEnd !== ee || t.etaConfidence !== ec) {
+      t.position = pos; t.etaStart = es; t.etaEnd = ee; t.etaConfidence = ec; t.updatedAt = now();
+      writes.push(wUpdate(env, "q_tickets/" + t.id, { position: pos, etaStart: es, etaEnd: ee, etaConfidence: ec, updatedAt: t.updatedAt }));
+    }
+  });
+  if (writes.length) await fsCommit(env, writes);
+  return tickets;
+}
+
+// ---- add a ticket (manual or import) ------------------------------------------------------
+export async function addTicket(env, session, body, actor) {
+  const id = newId();
+  const f = {
+    sessionId: session.id, hospitalId: session.hospitalId, status: "registered", position: 0,
+    visitType: body.visitType === "followup" ? "followup" : "new", priority: clampPriority(body.priority),
+    tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
+    mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
+    visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
+    registeredAt: now(), calledAt: 0, consultStartAt: 0, consultEndAt: 0, etaStart: 0, etaEnd: 0, etaConfidence: 0,
+    createdAt: now(), updatedAt: now(), expiresAt: session.expiresAt
+  };
+  await fsCommit(env, [wCreate(env, "q_tickets/" + id, f)]);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType });
+  await recompute(env, session);
+  return withId(id, f);
+}
+
+// ---- explicit status change (call / no_show / cancel / investigation / followup / complete / start) --
+export async function setStatus(env, session, ticketId, to, actor) {
+  const t = await getTicket(env, ticketId);
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  const from = t.status;
+  if (!canTransition(from, to)) throw Object.assign(new Error("bad_transition"), { status: 400, detail: from + "->" + to });
+  const patch = { status: to, updatedAt: now() };
+  const sessPatch = {};
+  if (to === "called" && !t.calledAt) patch.calledAt = now();
+  if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
+  let learn = null;
+  if (from === "in_consultation" && (to === "completed" || to === "investigation" || to === "followup" || to === "cancelled")) {
+    patch.consultEndAt = now();
+    if (session.currentTicketId === ticketId) sessPatch.currentTicketId = "";
+    if (t.consultStartAt) learn = Math.max(0.5, (now() - t.consultStartAt) / 60000);
+  }
+  const writes = [wUpdate(env, "q_tickets/" + ticketId, patch)];
+  if (Object.keys(sessPatch).length) { sessPatch.updatedAt = now(); writes.push(wUpdate(env, "q_sessions/" + session.id, sessPatch)); Object.assign(session, sessPatch); }
+  if (learn != null) { const s2 = updateStats(await getStats(env, session.doctorUid), learn, t.visitType); writes.push(wUpdate(env, "q_stats/" + sanitize(session.doctorUid), { data: JSON.stringify(s2), updatedAt: now() })); }
+  await fsCommit(env, writes);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: to, meta: from });
+  return recompute(env, session);
+}
+
+export async function setPriority(env, session, ticketId, priority, actor) {
+  const t = await getTicket(env, ticketId);
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { priority: clampPriority(priority), updatedAt: now() })]);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "priority", meta: String(clampPriority(priority)) });
+  return recompute(env, session);
+}
+
+// "Next Patient": finish the current consult (with learning), start the next ordered ticket. Bespoke
+// (compound) op — stamps call+start together, which is how a real OPD "next" works.
+export async function advance(env, session, actor) {
+  let tickets = await listTickets(env, session.id);
+  const cur = tickets.find((t) => t.id === session.currentTicketId && t.status === "in_consultation");
+  if (cur) { await setStatus(env, session, cur.id, "completed", actor); tickets = await listTickets(env, session.id); }
+  const next = orderQueue(tickets)[0];
+  if (next) await setStatus(env, session, next.id, "in_consultation", actor);
+  return listTickets(env, session.id);
+}
+
+export async function setSessionStatus(env, session, patch, actor) {
+  const f = { updatedAt: now() };
+  if (patch.status && ["active", "paused", "finished"].indexOf(patch.status) >= 0) f.status = patch.status;
+  if (patch.doctorStatus && ["consulting", "break", "emergency", "procedure", "meeting", "finished"].indexOf(patch.doctorStatus) >= 0) f.doctorStatus = patch.doctorStatus;
+  await fsCommit(env, [wUpdate(env, "q_sessions/" + session.id, f)]);
+  Object.assign(session, f);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId: "", actor, action: "session:" + (f.status || f.doctorStatus || "update"), meta: "" });
+  return session;
+}
+
+// ---- patient link + PHI-free portal -------------------------------------------------------
+export function linkFor(env, ticket) {
+  const base = (env && env.QUEUE_LINK_BASE) || "https://stewardmd.in";
+  return mintTicketToken(env, ticket.id, ticket.expiresAt || endOfDayMs(ticket.date), ticket.tokenVer || 1)
+    .then((tok) => ({ token: tok, url: base.replace(/\/+$/, "") + "/q?t=" + tok }));
+}
+// Verify a patient token → PHI-FREE snapshot. Never returns name/MRN/phone.
+export async function portalContext(env, token) {
+  const id = ticketIdFromToken(token);
+  if (!id) return { ok: false, error: "invalid_link" };
+  const t = await getTicket(env, id);
+  if (!t) return { ok: false, error: "invalid_link" };
+  const v = await verifyTicketToken(env, token, t.tokenVer || 1);
+  if (!v.ok) return { ok: false, error: v.reason === "expired" ? "link_expired" : "invalid_link" };
+  const session = await getSession(env, t.sessionId);
+  const tickets = await listTickets(env, t.sessionId);
+  const ordered = orderQueue(tickets);
+  const idx = ordered.findIndex((x) => x.id === id);
+  const ahead = idx < 0 ? 0 : idx;                     // people ahead (0 = you're next / being seen)
+  await qAudit(env, { hospitalId: t.hospitalId, ticketId: id, actor: "patient", action: "portal_view", meta: "" });
+  return {
+    ok: true,
+    department: session ? session.department : "", doctorStatus: session ? session.doctorStatus : "consulting",
+    status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead,
+    etaStart: t.etaStart || 0, etaEnd: t.etaEnd || 0, confidence: t.etaConfidence || 0,
+    journey: { registeredAt: t.registeredAt || 0, calledAt: t.calledAt || 0, consultStartAt: t.consultStartAt || 0, done: isTerminal(t.status) },
+    lastUpdated: now()
+  };
+}
+
+// ---- append-only audit (PHI-free; fixed field allow-list) ---------------------------------
+export async function qAudit(env, ev) {
+  const id = newId();
+  const f = { ts: now(), hospitalId: ev.hospitalId || "", ticketId: ev.ticketId || "", actor: ev.actor || "", action: ev.action || "", meta: String(ev.meta == null ? "" : ev.meta).slice(0, 200) };
+  try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}   // best-effort; never blocks the action
+}

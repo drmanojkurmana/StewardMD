@@ -13,8 +13,8 @@ export const DEFAULT_CONSULT_MIN = 12;
 // ---- status state machine ----------------------------------------------------------------
 export const STATUS = ["registered", "waiting", "called", "in_consultation", "investigation", "followup", "completed", "cancelled", "no_show"];
 const NEXT = {
-  registered:      ["waiting", "called", "cancelled", "no_show"],
-  waiting:         ["called", "cancelled", "no_show"],
+  registered:      ["waiting", "called", "in_consultation", "cancelled", "no_show"],
+  waiting:         ["called", "in_consultation", "cancelled", "no_show"],
   called:          ["in_consultation", "waiting", "no_show", "cancelled"],
   in_consultation: ["completed", "investigation", "followup", "cancelled"],
   investigation:   ["waiting", "called", "in_consultation", "completed", "followup", "cancelled"],
