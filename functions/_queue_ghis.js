@@ -13,21 +13,24 @@
  */
 import { addTicket, listTickets } from "./_queue_engine.js";
 
-// PURE: one GHIS roster row -> a queue-ticket body. Tolerant of field-name variants; mobile usually absent.
+// First non-empty value across candidate keys (handles IPD camelCase + OPD .NET PascalCase).
+function pick(row, keys) { for (var i = 0; i < keys.length; i++) { var v = row[keys[i]]; if (v != null && String(v).trim() !== "") return String(v).trim(); } return ""; }
+
+// PURE: one GHIS roster row (IPD GetIPWL or OPD DashboardUnit) -> a queue-ticket body. Tolerant of
+// field-name variants; mobile is usually absent from the roster (lazy /api/ghis/demographics).
 export function mapGhisRow(row) {
   row = row || {};
-  var name = row.patientFirstName || row.name || row.patientName || "";
-  var last = row.patientLastName || "";
-  if (last) name = (name + " " + last).trim();
-  var epi = row.episodeId || row.encounterId || row.visitId || "";
-  var vt = String(row.visitType || "").toLowerCase();
+  var name = pick(row, ["patientFirstName", "PatientName", "patientName", "patient_name", "PatientFullName", "PName", "pname", "name"]);
+  var last = pick(row, ["patientLastName", "PatientLastName"]);
+  if (last && name.indexOf(last) < 0) name = (name + " " + last).trim();
+  var epi = pick(row, ["episodeId", "episode_id", "VisitId", "visitId", "VisitID", "OPVisitId", "OPNo", "VisitNo", "encounterId"]);
   return {
-    name: String(name).trim(),
-    mobile: row.mobile || row.phone || "",                 // roster omits it -> lazy /api/ghis/demographics
-    mrn: String(row.patientId || row.mrn || row.uhid || ""),
-    visitId: String(row.visitId || epi || ""),
-    ghisEpisodeId: String(epi),
-    visitType: (vt === "followup" || /follow/.test(vt)) ? "followup" : "new",
+    name: name,
+    mobile: pick(row, ["mobile", "phone", "MobileNo", "mobileNo", "PatientMobile", "ContactNo", "Mobile"]),
+    mrn: pick(row, ["patientId", "PatientId", "PatientID", "MRNo", "MRNumber", "PatientMRNo", "UHID", "uhid", "mrn"]),
+    visitId: pick(row, ["VisitId", "visitId", "VisitID"]) || epi,
+    ghisEpisodeId: epi,
+    visitType: (function (v) { v = pick(row, ["visitType", "VisitType", "OPType"]).toLowerCase(); return (v === "followup" || /follow/.test(v)) ? "followup" : "new"; })(),
     priority: 0
   };
 }

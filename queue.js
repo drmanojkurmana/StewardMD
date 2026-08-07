@@ -108,7 +108,7 @@
     var doctorName = s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
     var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
-      (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
+      (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
       '<div class="q-avatar">' + esc(initials(doctorName)) + "</div></div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
@@ -206,11 +206,22 @@
     else if (cmd === "prio") act(sid, "/priority", { ticketId: arg, priority: 2 });
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
+    else if (cmd === "importopd") importOpd();
     else if (cmd === "add") openAdd();
     else if (cmd === "dismiss") { var ai = root().querySelector(".q-ai"); if (ai) ai.style.display = "none"; }
     // notify/nav/viewall/docstatus/skip: Phase 2/3
   }
 
+  function importOpd() {
+    if (!st.session) return;
+    try { G.toast && G.toast("Importing today's OPD list…"); } catch (e) {}
+    fetch("/api/ghis/opd-patients", { headers: authHeaders(), credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
+      if (r && r.error === "login_required") { try { G.toast && G.toast("Connect Ward Sync (GHIS) first, then import"); } catch (e) {} return; }
+      var rows = (r && r.rows) || [];
+      if (!rows.length) { try { G.toast && G.toast("No OPD patients found for today"); } catch (e) {} return; }
+      act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok) { try { G.toast && G.toast("Imported " + (res.imported || 0) + " patient(s)"); } catch (e) {} } });
+    }).catch(function () { try { G.toast && G.toast("Could not reach Ward Sync"); } catch (e) {} });
+  }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;
     var mobile = prompt("Mobile (optional)?") || "";

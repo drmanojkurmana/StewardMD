@@ -115,6 +115,45 @@ async function getPatients(env, token) {
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetIPWL?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
   return r.unauth ? r : parseGhis(r.body);
 }
+// OPD (out-patient) worklist — the Smart OPD Queue's live source. GITAM endpoint captured 2026-08-07:
+//   GET /Doctor/Home/DashboardUnit?type=docopdlist&sdate=<DD-MON-YYYY>&checkbox=0
+// (No CSRF in the query, unlike GetIPWL.) Normalise the DataTables-ish body to a plain rows array.
+function ghisToday() { const d = new Date(); const M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return ('0' + d.getDate()).slice(-2) + '-' + M[d.getMonth()] + '-' + d.getFullYear(); }
+// DashboardUnit returns text/html (a DataTable fragment), NOT JSON. Parse it by HEADER LABEL so the mapping
+// survives column reordering: <th> texts -> field, then each <tbody> <tr>'s <td>s map to those fields.
+function parseOpdHtml(html) {
+  html = String(html || ''); if (html.indexOf('<') < 0) return [];
+  const strip = (s) => String(s).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
+  const fieldFor = (label) => { const t = strip(label).toLowerCase().replace(/[^a-z]/g, '');
+    if (/patientid|^mrno|mrnumber|uhid/.test(t)) return 'patientId';
+    if (/visitid|opno|visitno|episode/.test(t)) return 'visitId';
+    if (/patientname|name/.test(t)) return 'patientName';
+    if (/department|dept/.test(t)) return 'department';
+    if (/^age/.test(t)) return 'age';
+    if (/gender|sex/.test(t)) return 'gender';
+    if (/doctor|consultant|physician/.test(t)) return 'doctor';
+    if (/mobile|contact|phone/.test(t)) return 'mobile';
+    return ''; };
+  const head = (html.match(/<th[\s\S]*?<\/th>/gi) || []).map(fieldFor);
+  const body = (html.match(/<tbody[\s\S]*?<\/tbody>/i) || [html])[0];
+  const rows = [];
+  (body.match(/<tr[\s\S]*?<\/tr>/gi) || []).forEach((tr) => {
+    const tds = tr.match(/<td[\s\S]*?<\/td>/gi); if (!tds || tds.length < 3) return;
+    const o = {}; tds.forEach((td, i) => { const f = head[i]; if (f) o[f] = strip(td); });
+    if (o.patientName || o.patientId) rows.push(o);
+  });
+  return rows;
+}
+async function getOpdPatients(env, token, sdate) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const p = new URLSearchParams({ type: 'docopdlist', sdate: sdate || ghisToday(), checkbox: '0' });
+  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  const j = parseGhis(r.body);                               // fallback: some GHIS actions return JSON
+  if (Array.isArray(j) && j.length) return j;
+  if (j && Array.isArray(j.data) && j.data.length) return j.data;
+  return parseOpdHtml(r.body);                               // DashboardUnit = text/html table
+}
 // ── patient demographics → primary contact number (for FollowCare enrollment) ───────────
 // GHIS exposes the patient's phone on the Initial-Assessment form (GetInitialAssessmentnew?id=<MR>), NOT on
 // the doctor worklist. We fetch that ONE form for a given MR and extract ONLY the primary contact number —
@@ -298,6 +337,7 @@ export async function onRequest(context) {
     const unauth = (r) => r && r.unauth;
     if (seg === 'status')          { const s = await getSession(env, token); return json({ connected: !!s, userId: s ? s.userId : null }); }
     if (seg === 'patients')        { const r = await getPatients(env, token);        return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'opd-patients')    { const r = await getOpdPatients(env, token, q.get('sdate') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json({ rows: r }); }
     if (seg === 'demographics')    { const r = await getDemographics(env, token, q.get('patientId') || '', q.get('recordNo') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab')             { const r = await getLabOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
