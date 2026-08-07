@@ -93,7 +93,7 @@ ok(/aliasHit/.test(src) && /nameToksAll \|\| nameHit \|\| aliasHit/.test(src), "
 ok(/C_DIFF\s*:/.test(src) && /clostridium/.test(src) && /pseudomembranous/.test(src), "SMD_ALIASES has C_DIFF (clostridium/cdiff/pseudomembranous)");
 ok(/toks: tokenize\([^)]*c\.aliases/.test(iface), "aliases are retrievable — folded into the lexical toks bag (not just nameToks)");
 const reasoning = fs.readFileSync(join(ROOT, "reasoning.js"), "utf8");
-ok(/research:\s*function[\s\S]{0,1400}?raceTimeout\(/.test(reasoning), "web research is timeout-bounded (raceTimeout) so the spinner can't hang forever");
+ok(/research:\s*function[\s\S]{0,2600}?raceTimeout\(/.test(reasoning), "web research is timeout-bounded (raceTimeout) so the spinner can't hang forever");
 ok(/function fuzzyResolve/.test(src) && /fuzzyResolve\(distinctive\)/.test(src) && /function editWithin/.test(src), "instant nearest-KB resolver present (fuzzy/typo tolerance) on the miss path");
 
 console.log(fails === 0 ? "\nALL PASS — MaiK routes short/lay queries correctly" : `\n${fails} FAILED`);

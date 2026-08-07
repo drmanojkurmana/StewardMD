@@ -23,7 +23,10 @@
       var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
       var v = localStorage.getItem("smd_fundx");
-      return v === "1";   // OFF by default for public/release; unlocked per device via the sidebar Experimental access code (openFundx sets smd_fundx=1) or ?fundx=1 for dev
+      // PUBLIC-RELEASE-GATE: default ON for private dev/device testing (owner "open for all" posture).
+      // Set back to `return v === "1"` before ANY App-Store/Play/public release (clinically unvalidated).
+      // ?fundx=0 or Settings-off disables per device; the Experimental access code still sets smd_fundx=1.
+      return v !== "0";
     } catch (e) { return false; }
   }
   if (!fundxOn()) {

@@ -1,12 +1,10 @@
-/* Regression guard: native MaiK must ATTEMPT real streaming (feels like Gemini) via the pristine
- * WebView fetch, with a safe fallback — not unconditionally fetch the whole answer.
- *
- * Context (21 Jul 2026): native felt far slower than the Gemini app because it never streamed — the
- * app's window.fetch is the CapacitorHttp bridge, which BUFFERS SSE, so explainGroundedStream did
- * `if (SMD_IS_NATIVE) return fallback()` and waited for the entire answer before rendering anything.
- * Fix: stream via window.CapacitorWebFetch (the pristine WebView fetch, which CAN stream a cross-origin
- * SSE); require a CLEAN {done} completion on native so a dropped stream never surfaces a truncated
- * clinical answer (falls back to the proven whole-answer fetch); cache a native failure per session.
+/* Regression guard: MaiK streaming behaviour (design reversed after native-hang findings).
+ *  - WEB live-streams the answer via SSE (explain?stream=1) so it types out like the Gemini app.
+ *  - NATIVE deliberately does NOT live-stream: WKWebView BUFFERS SSE (no progressive tokens arrive) AND
+ *    CapacitorWebFetch ignores the AbortController, so a stalled stream never fell back and hung to the
+ *    90s watchdog ("MaiK took too long"). Native takes the bounded whole-answer path (explainGrounded).
+ *  - Safety retained: require a clean {done} completion before using streamed text, else fall back to the
+ *    proven whole-answer fetch; cache a native failure per session so it does not re-probe every query.
  *
  * Source-shape assertions (explainGroundedStream is deep provider code, not unit-extractable). */
 import fs from "node:fs";
@@ -19,11 +17,12 @@ const hj = fs.readFileSync(join(ROOT, "home.js"), "utf8");
 let fails = 0;
 const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
-// the streaming fn no longer bails out unconditionally on native
-ok(!/if \(window\.SMD_IS_NATIVE \|\| typeof ReadableStream/.test(rj), "native no longer unconditionally skips streaming");
+// WEB live-streams a real SSE (explain?stream=1) so the answer types out like Gemini
+ok(/explain\?stream=1/.test(rj) && /text\/event-stream/.test(rj), "web live-streams the answer via SSE (explain?stream=1)");
 
-// it streams through the pristine WebView fetch on native
-ok(/window\.CapacitorWebFetch/.test(rj) && /var sfetch = isNative/.test(rj), "native streams via pristine window.CapacitorWebFetch");
+// NATIVE deliberately does NOT live-stream (WKWebView buffers SSE + CapacitorWebFetch ignores the abort
+// -> a stalled stream used to hang to the 90s watchdog); it takes the bounded whole-answer path instead.
+ok(/if \(isNative\) return fallback\(\);/.test(rj), "native takes the bounded whole-answer path (no live SSE hang)");
 
 // clean-completion safety: native only accepts a stream that signalled {done}
 ok(/if \(ev && ev\.done\) \{ gotDone = true/.test(rj), "tracks the {done} completion event");
