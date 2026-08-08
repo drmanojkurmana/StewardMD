@@ -8,7 +8,7 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
   var API = "/api/queue";
   var POLL_MS = 8000;
-  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0 };
+  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", demo: false, openOpts: {} };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
@@ -64,6 +64,7 @@
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
+          (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="Assessment (GHIS Initial Assessment)" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
         "</div></div>";
   }
   function renderConsult(cur) {
@@ -76,6 +77,7 @@
       '<div class="q-notes"><div class="q-notes-l">Quick Notes</div><textarea class="q-notes-in" placeholder="Add consultation notes…"></textarea></div>' +
       '<div class="q-cta">' +
         '<button class="q-finish" data-q-act="finish">' + ms("task_alt", true) + " Finish Consultation</button>" +
+        (emrOn() && cur.ghisPatientId ? '<button class="q-emerg" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + " Assessment</button>" : "") +
         '<button class="q-emerg" data-q-act="emergency">' + ms("emergency") + " Emergency</button>" +
       "</div></div></div>";
   }
@@ -191,7 +193,7 @@
   function paint() { root().innerHTML = _render(st); }
 
   function refresh() {
-    if (!st.session || st.view === "settings") return;   // don't clobber unsaved settings edits mid-poll
+    if (st.demo || !st.session || st.view === "settings") return;   // demo has no server session; don't clobber unsaved settings mid-poll
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
   }
   function act(sessId, path, body) { body = body || {}; body.sessionId = sessId; return apiPost(path, body).then(function (r) { if (r && r.ok && r.tickets) { st.tickets = r.tickets; paint(); } else if (r && r.ok && r.session) { st.session = r.session; paint(); } return r; }); }
@@ -199,6 +201,7 @@
     if (view === "queue") view = "dashboard";
     if (view !== "dashboard" && view !== "analytics" && view !== "settings") return;
     st.view = view; paint();
+    if (st.demo) return;   // demo has no server session to fetch analytics/config from
     if (view === "analytics" && st.session) apiGet("/analytics?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok && st.view === "analytics") { st.analytics = r.analytics; paint(); } }).catch(function () {});
     if (view === "settings") apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {});
   }
@@ -211,7 +214,11 @@
   function onClick(e) {
     var b = e.target.closest && e.target.closest("[data-q-act]"); if (!b) return;
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    if (cmd === "close") { close(); return; }
+    if (cmd === "ghislogin") { ghisLogin(); return; }
+    if (cmd === "demo") { demo(); return; }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
+    if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
     if (cmd === "finish") act(sid, "/advance");
@@ -222,6 +229,7 @@
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
     else if (cmd === "importopd") importOpd();
     else if (cmd === "profile") openEmrProfile(arg);
+    else if (cmd === "assess") openAssessment(arg);
     else if (cmd === "add") openAdd();
     else if (cmd === "dismiss") { var ai = root().querySelector(".q-ai"); if (ai) ai.style.display = "none"; }
     // notify/nav/viewall/docstatus/skip: Phase 2/3
@@ -230,7 +238,8 @@
   function importOpd() {
     if (!st.session) return;
     try { G.toast && G.toast("Importing today's OPD list…"); } catch (e) {}
-    authHeaders().then(function (h) { return fetch("/api/ghis/opd-patients", { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }).then(function (r) {
+    var gh = { "Content-Type": "application/json" }; if (st.ghisToken) gh.Authorization = "Bearer " + st.ghisToken;
+    fetch("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
       if (r && r.error === "login_required") { try { G.toast && G.toast("Connect Ward Sync (GHIS) first, then import"); } catch (e) {} return; }
       var rows = (r && r.rows) || [];
       if (!rows.length) { try { G.toast && G.toast("No OPD patients found for today"); } catch (e) {} return; }
@@ -243,6 +252,12 @@
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
     G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", name: t.name || "" });
   }
+  // Open the GHIS Initial Assessment form straight away for this patient (EMR overlay, "assess" tab).
+  function openAssessment(ticketId) {
+    var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
+    if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", name: t.name || "", tab: "assess" });
+  }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;
     var mobile = prompt("Mobile (optional)?") || "";
@@ -250,19 +265,71 @@
     act(st.session.id, "/ticket", { name: name, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
   }
 
-  function open(opts) {
-    opts = opts || {};
-    if (G.SMD_QUEUE_FLAGS && !G.SMD_QUEUE_FLAGS.on()) { try { G.toast && G.toast("Smart OPD Queue is off"); } catch (e) {} return; }
-    var el = root(); el.classList.add("on"); el.innerHTML = '<div class="q-empty" style="padding:80px">Loading queue…</div>';
-    el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+  // ---- GHIS login gate + demo mode --------------------------------------------------------
+  function _gate(err) {
+    var who = ""; try { var u = G.SMD_AUTH && G.SMD_AUTH.currentUser; if (u && u.email) who = u.email; } catch (e) {}
+    return '<div class="q-gate"><div class="q-gate-card">' +
+      '<div class="q-brand q-gate-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div>' +
+      '<h2 class="q-gate-h">OPD Queue</h2>' +
+      '<p class="q-gate-sub">Sign in to GHIS to load today\'s OPD queue.</p>' +
+      '<input id="qGhisUser" class="q-gate-in" type="text" autocomplete="username" autocapitalize="off" autocorrect="off" placeholder="GHIS User ID">' +
+      '<input id="qGhisPwd" class="q-gate-in" type="password" autocomplete="current-password" placeholder="Password">' +
+      '<div class="q-gate-err">' + (err ? esc(err) : "") + "</div>" +
+      '<button class="q-gate-btn" data-q-act="ghislogin">Sign in</button>' +
+      '<div class="q-gate-or"><span>or</span></div>' +
+      '<button class="q-gate-demo" data-q-act="demo">' + ms("science") + " Try with demo data</button>" +
+      '<button class="q-gate-close" data-q-act="close">Close</button>' +
+      (who ? '<div class="q-gate-foot">App account: ' + esc(who) + "</div>" : "") +
+      "</div></div>";
+  }
+  function ghisLogin() {
+    var uEl = document.getElementById("qGhisUser"), pEl = document.getElementById("qGhisPwd");
+    var userId = uEl ? uEl.value.trim() : "", password = pEl ? pEl.value : "";
+    var errEl = root().querySelector(".q-gate-err"), btn = root().querySelector(".q-gate-btn");
+    if (!userId || !password) { if (errEl) errEl.textContent = "Enter your GHIS User ID and password."; return; }
+    if (btn) { btn.disabled = true; btn.textContent = "Signing in…"; }
+    authHeaders().then(function (h) { return fetch("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; loadSession(); return; }
+        var msg = (r && r.error === "needs-pro") ? "Ward Sync needs a Pro account." : (r && r.error === "bad_credentials") ? "Wrong GHIS User ID or password." : "Sign-in failed. Please try again.";
+        if (errEl) errEl.textContent = msg; if (btn) { btn.disabled = false; btn.textContent = "Sign in"; }
+      })
+      .catch(function () { if (errEl) errEl.textContent = "Could not reach the server. Check your connection."; if (btn) { btn.disabled = false; btn.textContent = "Sign in"; } });
+  }
+  function demo() {
+    st.demo = true; var nm = now();
+    st.session = { id: "demo", doctorName: st.ghisUser || "Demo Doctor", department: "General Medicine OPD", status: "active", doctorStatus: "consulting" };
+    st.me = { name: st.session.doctorName, dept: st.session.department };
+    st.tickets = [
+      { id: "d1", name: "Ramesh Kumar", mrnLast4: "4821", ghisPatientId: "MR26100001", status: "in_consultation", visitType: "new", registeredAt: nm - 26 * 60000 },
+      { id: "d2", name: "Lakshmi Devi", mrnLast4: "7734", ghisPatientId: "MR26100002", status: "called", visitType: "followup", priority: 0, position: 1, registeredAt: nm - 19 * 60000, etaStart: nm + 2 * 60000 },
+      { id: "d3", name: "Abdul Rahman", mrnLast4: "1902", ghisPatientId: "MR26100003", status: "waiting", visitType: "new", priority: 2, position: 2, registeredAt: nm - 44 * 60000, etaStart: nm - 4 * 60000 },
+      { id: "d4", name: "Sita Mahalakshmi", mrnLast4: "5560", ghisPatientId: "MR26100004", status: "waiting", visitType: "new", priority: 0, position: 3, registeredAt: nm - 9 * 60000, etaStart: nm + 14 * 60000 },
+      { id: "d5", name: "John Peter", mrnLast4: "3341", ghisPatientId: "MR26100005", status: "registered", visitType: "followup", priority: 0, position: 4, registeredAt: nm - 4 * 60000, etaStart: nm + 22 * 60000 }
+    ];
+    st.view = "dashboard"; paint();
+  }
+  function loadSession() {
+    var opts = st.openOpts || {}, el = root();
+    el.innerHTML = '<div class="q-empty" style="padding:80px">Loading your queue…</div>';
     var q = "?hospitalId=" + encodeURIComponent(opts.hospitalId || "manual") + "&department=" + encodeURIComponent(opts.department || "") + "&source=" + encodeURIComponent(opts.source || "manual");
     apiGet("/session" + q).then(function (r) {
-      if (!r || !r.ok) { el.innerHTML = '<div class="q-empty" style="padding:80px">Queue is being set up.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="close">Close</button></div>'; return; }
+      if (!r || !r.ok) { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not start the queue (' + esc((r && r.error) || "error") + ').<br><button class="q-pause" style="max-width:220px;margin:16px auto 0" data-q-act="close">Close</button></div>'; return; }
       st.session = r.session; st.tickets = r.tickets || []; st.me = { name: r.session.doctorName, dept: r.session.department }; paint();
       clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);
     }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not load the queue.</div>'; });
   }
-  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); }
+  function open(opts) {
+    if (G.SMD_QUEUE_FLAGS && !G.SMD_QUEUE_FLAGS.on()) { try { G.toast && G.toast("Smart OPD Queue is off"); } catch (e) {} return; }
+    st.openOpts = opts || {};
+    var el = root(); el.classList.add("on");
+    el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    if (st.ghisToken || st.demo) { loadSession(); return; }          // already signed in this session -> straight to the queue
+    el.innerHTML = _gate();                                          // otherwise show the GHIS login gate first
+    setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80);
+  }
+  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st };
 

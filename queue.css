@@ -151,8 +151,30 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 /* bottom nav (mobile) */
 #smdQueue .q-bottomnav { display: none; }
 
+/* ---- GHIS login gate + demo entry ---- */
+#smdQueue .q-gate { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; background: var(--bg); }
+#smdQueue .q-gate-card { width: 100%; max-width: 360px; box-sizing: border-box; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 20px; box-shadow: 0 8px 28px rgba(20,32,43,.10); padding: 28px 22px; display: flex; flex-direction: column; }
+#smdQueue .q-gate-brand { justify-content: center; font-size: 22px; margin-bottom: 2px; }
+#smdQueue .q-gate-h { margin: 8px 0 2px; text-align: center; font: 800 21px var(--q-sans); color: var(--on-surface); }
+#smdQueue .q-gate-sub { margin: 0 0 18px; text-align: center; font: 500 13px var(--q-sans); color: var(--on-surface-variant); line-height: 1.4; }
+#smdQueue .q-gate-in { width: 100%; box-sizing: border-box; background: var(--bg); border: 1px solid var(--outline-variant); border-radius: 10px; color: var(--on-surface); font: 500 15px var(--q-sans); padding: 13px 14px; margin-bottom: 10px; }
+#smdQueue .q-gate-in:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,104,95,.12); }
+#smdQueue .q-gate-err { min-height: 18px; color: #dc2626; font: 600 12px var(--q-sans); margin: 0 2px 8px; }
+#smdQueue .q-gate-btn { width: 100%; background: var(--primary); color: var(--on-primary); border: none; border-radius: 12px; padding: 14px; font: 700 15px var(--q-sans); cursor: pointer; }
+#smdQueue .q-gate-btn:disabled { opacity: .6; }
+#smdQueue .q-gate-or { display: flex; align-items: center; gap: 12px; margin: 15px 0; color: var(--on-surface-variant); font: 600 11px var(--q-sans); }
+#smdQueue .q-gate-or::before, #smdQueue .q-gate-or::after { content: ""; flex: 1; height: 1px; background: var(--outline-variant); }
+#smdQueue .q-gate-demo { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--sc-high, #e6ecea); color: var(--on-surface); border: 1px solid var(--outline-variant); border-radius: 12px; padding: 13px; font: 700 14px var(--q-sans); cursor: pointer; }
+#smdQueue .q-gate-demo .material-symbols-outlined { font-size: 18px; }
+#smdQueue .q-gate-close { width: 100%; background: none; border: none; color: var(--on-surface-variant); font: 600 13px var(--q-sans); padding: 14px 0 2px; cursor: pointer; }
+#smdQueue .q-gate-foot { text-align: center; font: 500 11px var(--q-sans); color: var(--on-surface-variant); margin-top: 12px; }
+
 @media (max-width: 900px) {
   #smdQueue .q-side { display: none; }
+  #smdQueue .q-top-in { padding-left: 16px; padding-right: 16px; }
+  #smdQueue .q-brand { font-size: 18px; }
+  #smdQueue .q-online { display: none; }
+  #smdQueue .q-top-r { gap: 10px; }
   #smdQueue .q-kpis { grid-template-columns: repeat(2, 1fr); }
   #smdQueue .q-grid, #smdQueue .q-grid2 { grid-template-columns: 1fr; }
   #smdQueue .q-cn h3 { font-size: 28px; }

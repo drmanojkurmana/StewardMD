@@ -272,8 +272,10 @@
     st.patient = { name: opts.name || "", mrn: opts.patientId || "" };
     st.recordNo = opts.recordNo || "";
     st.writeOn = writeFlagOn();
+    if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     paint();
     loadProfile(opts);
+    if (opts.tab === "assess") loadAssessment();              // jump straight to the GHIS Initial Assessment
   }
   function close() { var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
