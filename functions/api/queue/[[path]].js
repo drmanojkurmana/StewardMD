@@ -20,6 +20,7 @@ import { identify } from "../../_usage.js";
 import { ownerEmails } from "../../_adminauth.js";
 import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
+import * as QT from "../../_queue_timeline.js";
 import { importRoster } from "../../_queue_ghis.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -85,10 +86,15 @@ export async function onRequest(context) {
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
-    // ---- PATIENT: token only, PHI-free, no auth ----
-    if (method === "GET" && seg === "portal") {
+    // ---- PATIENT: token only, no auth ----
+    if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       return json(await Q.portalContext(env, url.searchParams.get("t") || ""), 200, request);
+    }
+    // Patient's own sealed encounter timeline (their data, secure token, 7-30d window). No auth/login.
+    if (method === "GET" && seg === "timeline" && url.searchParams.get("t")) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
+      return json(await QT.getTimelineByToken(env, url.searchParams.get("t") || ""), 200, request);
     }
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
@@ -144,6 +150,20 @@ export async function onRequest(context) {
       return json({ ok: true, staff: await Q.listStaff(env, url.searchParams.get("hospitalId") || "") }, 200, request);
     }
 
+    // Encounter timeline, staff/doctor view (decrypted). Needs EMR view rights.
+    if (method === "GET" && seg === "timeline") {
+      const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
+      requireCap(actor.role, CAPS.EMR_VIEW);
+      const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
+      if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+      return json({ ok: true, timeline: await QT.getTimeline(env, t.id) }, 200, request);
+    }
+    // Doctor's treated-patient history (self-expiring at the link's 7-30d window).
+    if (method === "GET" && seg === "treated") {
+      requireCap(actor.role, CAPS.EMR_VIEW);
+      return json({ ok: true, treated: await QT.listTreated(env, actor.id) }, 200, request);
+    }
+
     if (method === "GET" && seg === "link") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
       requireCap(actor.role, CAPS.QUEUE_VIEW);
@@ -177,6 +197,32 @@ export async function onRequest(context) {
       if (seg === "assign") { requireCap(actor.role, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
       if (seg === "revoke") { requireCap(actor.role, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
       if (seg === "session" && sub === "status") { requireCap(actor.role, CAPS.SESSION_MANAGE); return json({ ok: true, session: await Q.setSessionStatus(env, s, body, actor.id) }, 200, request); }
+
+      // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
+      // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
+      if (seg === "timeline" && sub === "extend") {
+        requireCap(actor.role, CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        return json(Object.assign({ ok: true }, await QT.extendTimeline(env, t.id, body.days)), 200, request);
+      }
+      if (seg === "timeline") {
+        requireCap(actor.role, QT.tlKind(body.kind) === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
+      }
+      // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
+      if (seg === "checkout") {
+        requireCap(actor.role, CAPS.QUEUE_STATUS);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        const fin = await QT.finalizeCheckout(env, s, t, actor.id);
+        if (t.status !== "in_consultation" && t.status !== "completed") await Q.setStatus(env, s, t.id, "in_consultation", actor.id).catch(() => {});
+        await Q.setStatus(env, s, t.id, "completed", actor.id).catch(() => {});
+        const tickets = await Q.callNext(env, s, actor.id);
+        return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, tickets: await ticketView(env, tickets) }, 200, request);
+      }
     }
 
     return json({ ok: false, error: "not_found" }, 404, request);

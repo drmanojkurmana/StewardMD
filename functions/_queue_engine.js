@@ -253,6 +253,14 @@ export async function listSessions(env, hospitalId, date) {
   const rows = await fsQuery(env, "q_sessions", { where: { field: "hospitalId", value: hospitalId }, limit: 200 });
   return rows.map((r) => withId(r.id, r.fields)).filter((s) => !date || s.date === date);
 }
+// Call the next queued patient (used by slide-to-checkout: close one -> call the next). No-op if none
+// waiting or one is already called/consulting.
+export async function callNext(env, session, actor) {
+  const tickets = await listTickets(env, session.id);
+  const next = orderQueue(tickets)[0];
+  if (next && next.status !== "called" && next.status !== "in_consultation") return setStatus(env, session, next.id, "called", actor);
+  return tickets;
+}
 
 // "Next Patient": finish the current consult (with learning), start the next ordered ticket. Bespoke
 // (compound) op — stamps call+start together, which is how a real OPD "next" works.
