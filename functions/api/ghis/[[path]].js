@@ -525,6 +525,23 @@ export async function onRequest(context) {
       return json({ token: t, userId: String(body.userId), doctorName: (sess && sess.doctorName) || '' });
     }
 
+    // ---- STAFF login (OPD staff platform) : GHIS employee-id + password, NO StewardMD Pro required ----
+    // Staff (nurse/reception/supervisor) operate the OPD queue from opd.stewardmd.in without a StewardMD
+    // account. GHIS is the identity provider (their real hospital credentials); the queue router derives
+    // their ROLE from the owner-managed q_staff mapping (least-privilege viewer if unmapped). Gated by
+    // env QUEUE_STAFF_ENABLED so it is inert until the owner turns the platform on.
+    if (seg === 'staff-login' && request.method === 'POST') {
+      if (env.QUEUE_STAFF_ENABLED !== '1') return json({ error: 'staff_disabled' }, 404);
+      const body = await request.json().catch(() => ({}));
+      if (!body.userId || !body.password) return json({ error: 'missing_credentials' }, 400);
+      let sess;
+      try { sess = await loginGhis(String(body.userId), String(body.password)); }
+      catch (e) { return json({ error: e.code === 'bad_credentials' ? 'bad_credentials' : 'login_failed' }, 401); }
+      const t = randToken();
+      await env.GHIS_KV.put('sess:' + t, JSON.stringify({ ...sess, userId: String(body.userId), staff: true, ts: Date.now() }), { expirationTtl: SESS_KV_TTL });
+      return json({ token: t, userId: String(body.userId), doctorName: (sess && sess.doctorName) || '' });
+    }
+
     // ---- silent session refresh (Lab Watch 24/7 users only) ----
     // When the client's short-lived GHIS session times out, re-mint one WITHOUT re-prompting — but
     // ONLY from the encrypted creds the doctor already CONSENTED to store for 24/7 background alerts

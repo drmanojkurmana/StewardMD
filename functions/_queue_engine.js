@@ -10,6 +10,7 @@ import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
+import { isRole } from "./_queue_roles.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -215,6 +216,42 @@ export async function auditTimeline(env, session, limit) {
     .slice(0, Math.max(1, Math.min(200, Number(limit) || 100)))
     .map((e) => ({ ts: e.ts, actor: e.actor, action: e.action, meta: e.meta,
       mrnLast4: (byId[e.ticketId] && byId[e.ticketId].mrnLast4) || "" }));
+}
+
+// ---- staff role mapping (employeeId -> role) : owner-managed, server-side RBAC source of truth -----
+// A recognised login with NO q_staff record resolves to least-privilege "viewer" (see _queue_roles).
+export async function getStaff(env, employeeId) {
+  const id = sanitize(employeeId); if (!id) return null;
+  try { const d = await fsGet(env, "q_staff/" + id); return d ? withId(id, d.fields) : null; } catch (e) { return null; }
+}
+export async function setStaff(env, employeeId, patch, actor) {
+  const id = sanitize(employeeId); patch = patch || {};
+  if (patch.role && !isRole(patch.role)) throw Object.assign(new Error("bad_role"), { status: 400, detail: patch.role });
+  const cur = (await getStaff(env, employeeId)) || {};
+  const f = {
+    employeeId: String(employeeId), role: patch.role || cur.role || "viewer",
+    name: patch.name != null ? String(patch.name).slice(0, 80) : (cur.name || ""),
+    doctors: Array.isArray(patch.doctors) ? patch.doctors.map(String) : (cur.doctors || []),
+    hospitalId: patch.hospitalId || cur.hospitalId || "", updatedAt: now()
+  };
+  await fsCommit(env, [wUpdate(env, "q_staff/" + id, f)]);
+  await qAudit(env, { hospitalId: f.hospitalId, ticketId: "", actor, action: "staff:set", meta: String(employeeId) + ":" + f.role });
+  return withId(id, f);
+}
+export async function removeStaff(env, employeeId, actor) {
+  const id = sanitize(employeeId); if (!id) return { ok: true };
+  await fsCommit(env, [wUpdate(env, "q_staff/" + id, { role: "viewer", removedAt: now() })]);   // demote, don't hard-delete (audit trail)
+  await qAudit(env, { hospitalId: "", ticketId: "", actor, action: "staff:remove", meta: String(employeeId) });
+  return { ok: true };
+}
+export async function listStaff(env, hospitalId) {
+  const rows = await fsQuery(env, "q_staff", hospitalId ? { where: { field: "hospitalId", value: hospitalId }, limit: 200 } : { limit: 200 });
+  return rows.map((r) => withId(r.id, r.fields)).filter((s) => s.removedAt == null);
+}
+// ---- sessions for a hospital+day (the multi-doctor front-desk board) -------------------------------
+export async function listSessions(env, hospitalId, date) {
+  const rows = await fsQuery(env, "q_sessions", { where: { field: "hospitalId", value: hospitalId }, limit: 200 });
+  return rows.map((r) => withId(r.id, r.fields)).filter((s) => !date || s.date === date);
 }
 
 // "Next Patient": finish the current consult (with learning), start the next ordered ticket. Bespoke
