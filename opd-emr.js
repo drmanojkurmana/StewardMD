@@ -70,7 +70,7 @@
       return '<button class="oe-result" data-oe-act="' + kind + '-pick:' + i + '">' + ms("add") + "<span>" + esc(r.name) + "</span></button>";
     }).join("") + "</div>";
   }
-  function fieldRow(label, inp) { return '<label class="oe-field"><span>' + esc(label) + "</span>" + inp + "</label>"; }
+  function fieldRow(label, inp, req) { return '<label class="oe-field"><span>' + esc(label) + (req ? ' <b class="oe-req">*</b>' : "") + "</span>" + inp + "</label>"; }
   function textInp(name, value, ph) { return '<input class="oe-inp" data-oe-inp="' + esc(name) + '" value="' + esc(value || "") + '" placeholder="' + esc(ph || "") + '">'; }
 
   function profileTab(st) {
@@ -113,18 +113,126 @@
     var current = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
     return searchBox("med", st.medQuery, "Search medications…") + resultList("med", st.medResults) + draft + current;
   }
+  // ---- GHIS Initial Assessment schema (field names VERBATIM from a live CreateinitialAssessmentnew capture,
+  // 2026-08-07). `val.*` names keep their prefix; bare names get `assessment.` server-side. kind: text|number|
+  // textarea|yesno(Y/N)|check(true/false)|select(rendered as a plain text input — no GHIS option values captured).
+  // OMITTED radio groups (write field names NOT captured — do not guess): level of consciousness, neck stiffness,
+  // dyspnoea, abdomen shape, pain scale, birth history, general condition, diet, menstrual status/cycles/flow.
+  function F(n, l, k, req, ph) { return { n: n, l: l, k: k || "text", r: !!req, p: ph || "" }; }
+  var ASSESS_SCHEMA = [
+    { t: "History", i: "description", f: [
+      F("Chief_complaints_duration", "Chief complaints", "textarea", true),
+      F("History_present_illness", "Present history", "textarea", true),
+      F("History_past_illness", "Past history", "textarea", true) ] },
+    { t: "Pre-admission investigation / treatment", i: "biotech", f: [
+      F("val.investigation_desc", "Investigation"), F("val.investigation_diagnostic", "Diagnostics"), F("val.investigation_date", "Date"),
+      F("val.treatment_received", "Treatment received"), F("val.treatment_received_date", "Date"), F("val.treatment_received_hospital", "Hospital") ] },
+    { t: "Co-morbid conditions", i: "coronavirus", f: [
+      F("Diabetes_yesNo", "Diabetes", "yesno"), F("Diabetes_details", "Diabetes details"),
+      F("Hypertension_yesNo", "Hypertension", "yesno"), F("Hypertension_details", "Hypertension details"),
+      F("Cardiac_yesNo", "Cardiac illness", "yesno"), F("Cardiac_details", "Cardiac details"),
+      F("Bronchial_yesNo", "Bronchial asthma", "yesno"), F("Bronchial_details", "Bronchial asthma details"),
+      F("Tuberculosis_yesNo", "Tuberculosis", "yesno"), F("Tuberculosis_details", "Tuberculosis details"),
+      F("Thyroid_yesNo", "Thyroid disorder", "yesno"), F("Thyroid_details", "Thyroid details"),
+      F("Epilepsy_yesNo", "Epilepsy", "yesno"), F("Epilepsy_details", "Epilepsy details"),
+      F("Others_details", "Others") ] },
+    { t: "Immunisation status", i: "vaccines", f: [
+      F("immunization_status", "Immunisation status", "text", false, "IAP guidelines") ] },
+    { t: "Personal history", i: "person", f: [
+      F("Single_married", "Marital status", "select"), F("No_of_children", "Children", "select"), F("Consanguinity", "Consanguinity", "select"),
+      F("Appetite", "Appetite", "select"), F("Bowels", "Bowels", "select"), F("Micturition", "Micturition", "select"),
+      F("Mic_abnorml_details", "Micturition details"), F("Known_allergies_details", "Known allergies"),
+      F("Habitat_addiction_yesno", "Habits", "yesno"),
+      F("Habitat_addiction_alcohol", "Alcohol", "check"), F("Habitat_addiction_smoking", "Smoking", "check"),
+      F("Habitat_addiction_drug", "Drug use", "check"), F("Habitat_addiction_tobacco", "Chewing of tobacco", "check"),
+      F("Habitat_addiction_others", "Details") ] },
+    { t: "Family history", i: "groups", f: [
+      F("Family_history_yesno", "Family history", "yesno"),
+      F("Family_history_diabetics", "Diabetes", "check"), F("Family_history_hypertension", "Hypertension", "check"),
+      F("Family_history_Heart", "Heart disease", "check"), F("Family_history_cancer", "Cancers", "check"),
+      F("Family_history_TB", "TB", "check"), F("Family_history_asthma", "Bronchial asthma", "check"),
+      F("Family_history_psych", "Psychiatric", "check"), F("Family_history_others", "Others", "check"),
+      F("Family_history_othersdetails", "Details") ] },
+    { t: "Menstrual / Obstetric / Contraceptive / HRT history", i: "pregnant_woman", f: [
+      F("menstrual_history_y_n", "Menstrual history significant", "yesno"), F("LMP", "LMP"),
+      F("age_menarche", "Age of menarche", "number"), F("age_menopause", "Age of menopause", "number"), F("age_marriage", "Age of marriage", "number"),
+      F("dysmenorrhoea", "Dysmenorrhoea"), F("Others", "Menstrual - others", "textarea"),
+      F("obstetric_history_yes_no", "Obstetric history applicable", "yesno"), F("no_of_abortions", "No. of abortions", "number"),
+      F("children_living", "Children alive", "number"), F("children_died", "Children died", "number"),
+      F("LCB", "LCB"), F("IUD", "IUD"), F("still_birth", "Still birth"), F("neonatal_death", "Neonatal death"), F("lactating", "Lactating"),
+      F("first_delivery_age", "Age of first delivery"), F("last_delivery_age", "Age of last delivery"),
+      F("breast_feeding", "Breast feeding"), F("feeding_duration", "Duration"), F("molar_pregnancy", "Molar pregnancy"),
+      F("pregnancy_comlications", "Pregnancy complications"), F("contracception", "Contraception"), F("sterilization", "Sterilization") ] },
+    { t: "Nutritional screening", i: "monitor_weight", f: [
+      F("Height", "Height (cms)", "number"), F("Weight", "Weight (kgs)", "number"), F("BMI", "BMI"), F("bsa", "BSA (m2)") ] },
+    { t: "Physical examination - vital parameters", i: "vital_signs", f: [
+      F("Temp", "Temperature (F)", "number", true), F("BP_SYS", "BP systolic", "number", true), F("BP_dia", "BP diastolic", "number", true),
+      F("Nutrtion", "Nutrition"), F("hydration", "Hydration"),
+      F("Pulse", "Pulse rate /min", "number", true), F("respiratory", "Respiratory rate /min", "number", true),
+      F("pallor", "Pallor", "check"), F("icterus", "Icterus", "check"), F("cyanosis", "Cyanosis", "check"), F("clubbing", "Clubbing", "check"),
+      F("Oedema", "Oedema", "check"), F("Lymphadenopathy", "Lymphadenopathy", "check"), F("Rash", "Rash", "check"), F("goitre", "Goitre", "check"),
+      F("sys_examination", "Systemic examination", "textarea") ] },
+    { t: "Examination", i: "stethoscope", f: [
+      F("cranial_nerves", "Cranial nerves"), F("sensory_sys", "Sensory system"), F("gait", "Gait"), F("motor_sys", "Motor system"),
+      F("speech", "Speech"), F("reflexes", "Reflexes"), F("plantar", "Plantars"), F("glasgow_scale", "Glasgow scale"),
+      F("cerebellar_sign", "Cerebellar signs"), F("cardiac_sound", "Cardiac sounds"), F("JVP", "JVP"),
+      F("musculo_skeletal_system", "Musculoskeletal system", "textarea"), F("skin", "Skin", "textarea"),
+      F("breast_exam", "Examination of breast", "textarea"), F("ENT_exam", "Examination of ENT", "textarea"),
+      F("teeth_exam", "Teeth and oral cavity", "textarea"), F("head_neck_exam", "Head and neck", "textarea"),
+      F("tenderness_yesNo", "Abdomen tenderness", "yesno"), F("tenderness_details", "Tenderness details"),
+      F("palpable_mass_yesNo", "Palpable mass", "yesno"), F("palpable_mass_details", "Palpable mass details"),
+      F("hernial_orifices", "Hernial orifices normal", "yesno"), F("hernial_orifices_details", "Hernial orifices details"),
+      F("genital", "Genitalia"), F("external_genitilia_perineum", "External genital & perineum"), F("examination", "P/R examination") ] },
+    { t: "Diagnosis & plan", i: "assignment_turned_in", f: [
+      F("provisional_diagnosis", "Provisional diagnosis", "textarea"), F("management_plan", "Management plan", "textarea"),
+      F("refered_management_plan", "Referred to & management plan", "textarea"),
+      F("informany_attendant", "Informant name"), F("informant_relation", "Relation with attendant", "select") ] }
+  ];
+  function defVal(k) { return k === "yesno" ? "N" : (k === "check" ? "false" : ""); }
+  function assessGet(vals, f) { return (vals && vals[f.n] != null) ? String(vals[f.n]) : defVal(f.k); }
+  function ynRow(f, val) {
+    val = (val === "Y") ? "Y" : "N";
+    var nm = "oe-" + f.n;
+    function r(v, lbl) { return '<label class="oe-radio"><input type="radio" name="' + esc(nm) + '" data-oe-inp="assess:' + esc(f.n) + '" value="' + v + '"' + (val === v ? " checked" : "") + "><span>" + lbl + "</span></label>"; }
+    return '<div class="oe-yn"><span>' + esc(f.l) + (f.r ? ' <b class="oe-req">*</b>' : "") + '</span><div class="oe-yn-opts">' + r("Y", "Yes") + r("N", "No") + "</div></div>";
+  }
+  function checkBox(f, val) {
+    return '<label class="oe-check"><input type="checkbox" data-oe-inp="assess:' + esc(f.n) + '"' + (val === "true" ? " checked" : "") + "><span>" + esc(f.l) + "</span></label>";
+  }
+  function assessField(f, vals) {
+    var val = assessGet(vals, f), id = "assess:" + f.n;
+    if (f.k === "textarea") return fieldRow(f.l, '<textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>", f.r);
+    if (f.k === "yesno") return ynRow(f, val);
+    var type = f.k === "number" ? "number" : "text";
+    return fieldRow(f.l, '<input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">', f.r);
+  }
+  function assessSection(sec, vals) {
+    var html = "", run = [];
+    function flush() { if (run.length) { html += '<div class="oe-checks">' + run.map(function (f) { return checkBox(f, assessGet(vals, f)); }).join("") + "</div>"; run = []; } }
+    sec.f.forEach(function (f) { if (f.k === "check") { run.push(f); return; } flush(); html += assessField(f, vals); });
+    flush();
+    return '<section class="oe-sec"><h3 class="oe-h3">' + ms(sec.i) + esc(sec.t) + '</h3><div class="oe-form">' + html + "</div></section>";
+  }
+  // pure payload builder: EVERY schema field -> string value (yesno Y/N, check true/false, empties ""). Exposed for tests.
+  function buildAssessPayload(vals) {
+    var out = {};
+    ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { out[f.n] = assessGet(vals, f); }); });
+    return out;
+  }
+  // prefill schema values from the server field list (matched by name); missing = default.
+  function buildAssessVals(serverFields) {
+    var byName = {}; (serverFields || []).forEach(function (f) { if (f && f.name) byName[f.name] = f.value != null ? String(f.value) : ""; });
+    var vals = {};
+    ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { vals[f.n] = byName.hasOwnProperty(f.n) ? byName[f.n] : defVal(f.k); }); });
+    return vals;
+  }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
-    var fields = st.assessFields || [];
-    var form = fields.length ? fields.map(function (f) {
-      var inp = f.kind === "textarea"
-        ? '<textarea class="oe-inp" data-oe-inp="assess:' + esc(f.name) + '">' + esc(f.value || "") + "</textarea>"
-        : textInp("assess:" + f.name, f.value, "");
-      return fieldRow(f.label || f.name, inp);
-    }).join("") : '<div class="oe-empty sm">No editable assessment fields found.</div>';
-    var save = fields.length ? (st.writeOn ? '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save assessment</button>" : writeNote()) : "";
-    return '<section class="oe-sec"><h3 class="oe-h3">' + ms("clinical_notes") + "Patient assessment</h3><div class=\"oe-form\">" + form + save + "</div></section>";
+    var vals = st.assessVals || {};
+    var body = ASSESS_SCHEMA.map(function (sec) { return assessSection(sec, vals); }).join("");
+    var save = st.writeOn ? '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save assessment</button>" : writeNote();
+    return body + '<div class="oe-form oe-actions">' + save + "</div>";
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -146,7 +254,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessFields: [] }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {} }; }
   function paint() { root().innerHTML = _render(st); }
   function paintKeepFocus(kind) {
     paint();
@@ -164,13 +272,13 @@
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
-    if (inp.indexOf("assess:") === 0) { var name = inp.slice(7); (st.assessFields || []).forEach(function (f) { if (f.name === name) f.value = val; }); }
+    if (inp.indexOf("assess:") === 0) { st.assessVals = st.assessVals || {}; st.assessVals[inp.slice(7)] = val; }
   }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
     if (inp === "inv-q") { st.invQuery = el.value; scheduleSearch("inv"); return; }
     if (inp === "med-q") { st.medQuery = el.value; scheduleSearch("med"); return; }
-    setField(inp, el.value);
+    setField(inp, el.type === "checkbox" ? (el.checked ? "true" : "false") : el.value);   // radios carry Y/N in value
   }
   var searchTimer = null;
   function scheduleSearch(kind) { if (searchTimer) clearTimeout(searchTimer); searchTimer = setTimeout(function () { runSearch(kind); }, 250); }
@@ -223,7 +331,7 @@
       .then(function (res) {
         st.assessLoading = false; st.assessLoaded = true;
         if (!res.ok || res.d.error === "login_required") st.assessErr = "Connect Ward Sync (GHIS) first, then reopen this tab.";
-        else st.assessFields = res.d.fields || [];
+        else st.assessVals = buildAssessVals(res.d.fields || []);
         paint();
       })
       .catch(function () { st.assessLoading = false; st.assessLoaded = true; st.assessErr = "Could not load the assessment form."; paint(); });
@@ -258,8 +366,7 @@
   }
   function submitAssessment() {
     if (!confirmed("Save this assessment to GHIS?")) return;
-    var vals = {}; (st.assessFields || []).forEach(function (f) { vals[f.name] = f.value || ""; });
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", fields: vals }, "Assessment saved.");
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment saved.");
   }
 
   function openProfile(opts) {
@@ -279,5 +386,5 @@
   }
   function close() { var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload };
 })();

@@ -66,6 +66,35 @@ test("write buttons PRESENT when smd_opd_emr_write is on", () => {
   assert.match(assess, /data-oe-act="assess-save"/);
 });
 
+// ---- assessment: full GHIS Initial Assessment schema form -------------------------------
+test("assessment tab renders the full GHIS schema (sections + Temp + Diabetes yesno, no emoji)", () => {
+  const OE = load();
+  const html = OE._render(withTab({ tab: "assess", writeOn: true, assessLoaded: true, assessVals: {} }));
+  assert.match(html, /Co-morbid/);                       // section titles present
+  assert.match(html, /vital parameters/i);
+  assert.match(html, /Provisional/);
+  assert.match(html, /data-oe-inp="assess:Temp"/);       // a vitals number field
+  assert.match(html, /data-oe-inp="assess:Diabetes_yesNo"/);
+  assert.match(html, /type="radio"[^>]*value="Y"/);      // yesno renders as radios
+  assert.match(html, /data-oe-act="assess-save"/);       // save shown (writeOn)
+  assert.ok(!NO_EMOJI.test(html), "assessment form must contain no emoji");
+});
+
+test("assessment payload builder emits every schema field (bare + val.*) as strings with defaults", () => {
+  const OE = load();
+  const p = OE._assessPayload({ Chief_complaints_duration: "fever x3d", Temp: "101", "val.investigation_desc": "CBC", Diabetes_yesNo: "Y", pallor: "true" });
+  assert.equal(p.Chief_complaints_duration, "fever x3d");
+  assert.equal(p.Temp, "101");
+  assert.equal(p["val.investigation_desc"], "CBC");      // val.* prefix preserved (server keeps it)
+  assert.equal(p.Diabetes_yesNo, "Y");
+  assert.equal(p.pallor, "true");
+  assert.equal(p.Hypertension_yesNo, "N");               // untouched yesno -> "N"
+  assert.equal(p.icterus, "false");                      // untouched check -> "false"
+  assert.equal(p.provisional_diagnosis, "");             // untouched text -> ""
+  assert.ok(Object.prototype.hasOwnProperty.call(p, "management_plan"));
+  assert.ok(Object.keys(p).length > 100, "full form has 100+ fields, not the old thin list");
+});
+
 test("investigation search results render as pickable rows; tabs + drafts contain no emoji", () => {
   const OE = load();
   const inv = OE._render(withTab({ tab: "inv", writeOn: true, invResults: [{ id: "LAB1118", name: "Complete Blood Count" }] }));
