@@ -318,6 +318,9 @@
       if (!r || !r.ok) { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not start the queue (' + esc((r && r.error) || "error") + ').<br><button class="q-pause" style="max-width:220px;margin:16px auto 0" data-q-act="close">Close</button></div>'; return; }
       st.session = r.session; st.tickets = r.tickets || []; st.me = { name: r.session.doctorName, dept: r.session.department }; paint();
       clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);
+      // Primary data source: auto-pull today's GHIS Out-patients list into the queue right after a GHIS sign-in
+      // (dedupes server-side by episode id, so it is safe to run on every entry). Manual "Import" button remains.
+      if (st.ghisToken && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(); } catch (e) {} }
     }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not load the queue.</div>'; });
   }
   function open(opts) {
