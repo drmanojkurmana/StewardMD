@@ -134,7 +134,11 @@ async function getPatients(env, token) {
 // OPD (out-patient) worklist — the Smart OPD Queue's live source. GITAM endpoint captured 2026-08-07:
 //   GET /Doctor/Home/DashboardUnit?type=docopdlist&sdate=<DD-MON-YYYY>&checkbox=0
 // (No CSRF in the query, unlike GetIPWL.) Normalise the DataTables-ish body to a plain rows array.
-function ghisToday() { const d = new Date(); const M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return ('0' + d.getDate()).slice(-2) + '-' + M[d.getMonth()] + '-' + d.getFullYear(); }
+// GHIS's OPD day is IST (Asia/Kolkata, UTC+5:30). Cloudflare runs in UTC, so shift +5:30 before reading the
+// date, else near/after local midnight we query the wrong day and the Out-patients list comes back empty.
+function ghisDay(offMs) { const M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; const d = new Date(Date.now() + 19800000 + (offMs || 0)); return ('0' + d.getUTCDate()).slice(-2) + '-' + M[d.getUTCMonth()] + '-' + d.getUTCFullYear(); }
+function ghisToday() { return ghisDay(0); }
+function ghisYesterday() { return ghisDay(-86400000); }
 // DashboardUnit returns text/html (a DataTable fragment), NOT JSON. Parse it by HEADER LABEL so the mapping
 // survives column reordering: <th> texts -> field, then each <tbody> <tr>'s <td>s map to those fields.
 export function parseOpdHtml(html) {
@@ -165,14 +169,22 @@ export function parseOpdHtml(html) {
 }
 async function getOpdPatients(env, token, sdate, debug) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  const p = new URLSearchParams({ type: 'docopdlist', sdate: sdate || ghisToday(), checkbox: '0' });
-  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (r.unauth) return r;
-  const j = parseGhis(r.body);                               // fallback: some GHIS actions return JSON
-  const rows = (Array.isArray(j) && j.length) ? j : (j && Array.isArray(j.data) && j.data.length) ? j.data : parseOpdHtml(r.body);
+  const pull = async (day) => {
+    const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: '0' });
+    const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
+    if (r.unauth) return { unauth: true };
+    const j = parseGhis(r.body);                             // fallback: some GHIS actions return JSON
+    const rows = (Array.isArray(j) && j.length) ? j : (j && Array.isArray(j.data) && j.data.length) ? j.data : parseOpdHtml(r.body);
+    return { r: r, rows: rows, day: day };
+  };
+  let res = await pull(sdate || ghisToday());
+  if (res.unauth) return res;
+  // Near midnight / on a holiday, today's OPD list can be empty while GHIS still shows the last active day's
+  // list. If no date was explicitly requested and today is empty, fall back one day so the active list loads.
+  if (!sdate && (!res.rows || !res.rows.length)) { const y = await pull(ghisYesterday()); if (!y.unauth && y.rows && y.rows.length) res = y; }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
-  if (debug) return { _debug: true, sdate: p.get('sdate'), rawLen: (r.body || '').length, thCount: ((r.body || '').match(/<th\b/gi) || []).length, trCount: ((r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((r.body || '').match(/<td\b/gi) || []).length, parsed: rows.length, raw: String(r.body || '').slice(0, 3500) };
-  return rows;                                                // DashboardUnit = text/html table (parseOpdHtml)
+  if (debug) return { _debug: true, sdate: res.day, rawLen: (res.r.body || '').length, thCount: ((res.r.body || '').match(/<th\b/gi) || []).length, trCount: ((res.r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((res.r.body || '').match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: String(res.r.body || '').slice(0, 3500) };
+  return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
 // ── patient demographics → primary contact number (for FollowCare enrollment) ───────────
 // GHIS exposes the patient's phone on the Initial-Assessment form (GetInitialAssessmentnew?id=<MR>), NOT on
