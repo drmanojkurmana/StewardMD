@@ -186,8 +186,18 @@
     return Promise.resolve(null);
   }
   function authHeaders() { return fbToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t; return h; }); }
-  function apiGet(path) { return authHeaders().then(function (h) { return fetch(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
-  function apiPost(path, body) { return authHeaders().then(function (h) { return fetch(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
+  // Retry transient network/DNS failures (e.g. a momentary "Unable to resolve host" right after app launch or a
+  // WiFi/data switch) so the app self-heals and users NEVER touch WiFi/DNS settings. Only retries a REJECTED
+  // fetch (network error) — never an HTTP error status. 3 tries with ~0.7s backoff.
+  function fetchRetry(url, opts, tries) {
+    tries = tries || 3;
+    return fetch(url, opts).catch(function (e) {
+      if (tries <= 1) throw e;
+      return new Promise(function (res) { setTimeout(res, 700); }).then(function () { return fetchRetry(url, opts, tries - 1); });
+    });
+  }
+  function apiGet(path) { return authHeaders().then(function (h) { return fetchRetry(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  function apiPost(path, body) { return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
 
   // ---- controller -------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
@@ -223,6 +233,7 @@
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
+    if (cmd === "retry") { loadSession(); return; }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
@@ -246,7 +257,7 @@
     var say = function (m) { if (silent) return; try { G.toast && G.toast(m); } catch (e) {} };
     say("Importing today's OPD list…");
     var gh = { "Content-Type": "application/json" }; if (st.ghisToken) gh.Authorization = "Bearer " + st.ghisToken;
-    fetch("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
+    fetchRetry("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
       if (r && r.error === "login_required") { say("Connect Ward Sync (GHIS) first, then import"); return; }
       var rows = (r && r.rows) || [];
       if (!rows.length) { say("No OPD patients found for today"); return; }
@@ -295,7 +306,7 @@
     var errEl = root().querySelector(".q-gate-err"), btn = root().querySelector(".q-gate-btn");
     if (!userId || !password) { if (errEl) errEl.textContent = "Enter your GHIS User ID and password."; return; }
     if (btn) { btn.disabled = true; btn.textContent = "Signing in…"; }
-    authHeaders().then(function (h) { return fetch("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
+    authHeaders().then(function (h) { return fetchRetry("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
       .then(function (r) { return r.json(); })
       .then(function (r) {
         if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; loadSession(); return; }
@@ -328,7 +339,7 @@
       // Primary data source: auto-pull today's GHIS Out-patients list into the queue right after a GHIS sign-in
       // (dedupes server-side by episode id, so it is safe to run on every entry). Manual "Import" button remains.
       if (st.ghisToken && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(); } catch (e) {} }
-    }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not load the queue.</div>'; });
+    }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not reach the server. Check your connection.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="retry">Retry</button></div>'; });
   }
   function open(opts) {
     if (G.SMD_QUEUE_FLAGS && !G.SMD_QUEUE_FLAGS.on()) { try { G.toast && G.toast("Smart OPD Queue is off"); } catch (e) {} return; }
