@@ -58,6 +58,10 @@ OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gma
 AI_ABUSE_REQ_THRESHOLD = "150"
 # Smart OPD Queue backend switch (dev/testing). PUBLIC-RELEASE-GATE: set "0" before public/store release.
 QUEUE_ENABLED = "1"
+# LIVE EMR WRITE-BACK: "1" lets the assessment + investigation-order submits POST into GHIS (each ALSO needs the
+# client smd_opd_emr_write flag + an explicit confirm()). Prescribe stays server-hard-blocked (needs the separate
+# QUEUE_EMR_PRESCRIBE_OK) until the CreateDrugs payload is verified. PUBLIC-RELEASE-GATE: set "0" before release.
+QUEUE_EMR_WRITE = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -67,6 +71,7 @@ FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
 OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com"
 QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testing; set "0" before release
+QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation orders (prescribe stays blocked). PUBLIC-RELEASE-GATE
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

@@ -11,14 +11,15 @@
 
   // PUBLIC-RELEASE-GATE: OPD Queue + EMR are DEV/TESTING features (server provisioning + clinical validation
   // pending). Flipped ON here for owner/device testing per the "enable everything implemented" dev posture.
-  // Set these four back to def:false before ANY App-Store/Play/public release. `smd_opd_emr_write` STAYS def:false
-  // always (and QUEUE_EMR_WRITE stays unset) until CreateDrugs is captured/verified and writes are test-patient tested.
+  // Set these back to def:false before ANY App-Store/Play/public release. Writes are STILL doubly gated:
+  // server needs QUEUE_EMR_WRITE=1 (assessment + investigation orders), and PRESCRIBE stays server-hard-blocked
+  // (QUEUE_EMR_PRESCRIBE_OK) until the CreateDrugs payload is captured/verified. Every submit needs a confirm().
   var DEFS = {
     smd_opd_queue: { type: "bool", def: true, query: "q", desc: "Smart OPD Queue master flag" },
     smd_opd_queue_patient: { type: "bool", def: true, query: "qpatient", desc: "Patient live tracking page" },
     smd_opd_queue_import: { type: "bool", def: true, query: "qimport", desc: "GHIS/EMR roster auto-import" },
     smd_opd_emr: { type: "bool", def: true, query: "qemr", desc: "Read-only OPD patient profile + reports (P1)" },
-    smd_opd_emr_write: { type: "bool", def: false, query: "qemrwrite", desc: "OPD write-back: order/prescribe/assessment (P2-P4) — INERT, keep OFF" }
+    smd_opd_emr_write: { type: "bool", def: true, query: "qemrwrite", desc: "OPD write-back submit buttons (assessment + investigation orders live w/ QUEUE_EMR_WRITE; prescribe server-blocked). PUBLIC-RELEASE-GATE" }
   };
 
   function raw(key) {

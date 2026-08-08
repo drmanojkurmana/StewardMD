@@ -530,6 +530,10 @@ export async function onRequest(context) {
       const r = await orderInvestigation(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
     if (seg === 'prescribe' && request.method === 'POST') {
+      // SAFETY HARD-BLOCK: the CreateDrugs payload is NOT captured/verified, so prescribing stays inert even when
+      // QUEUE_EMR_WRITE=1 (a wrong field could mis-prescribe a drug). Owner sets QUEUE_EMR_PRESCRIBE_OK=1 ONLY after
+      // the real CreateDrugs request is captured and prescribe()'s field names are verified.
+      if (env.QUEUE_EMR_PRESCRIBE_OK !== '1') return json({ error: 'prescribe_not_verified', detail: 'Prescribing is not enabled yet (CreateDrugs payload not verified). Assessment + investigation orders are live.' }, 501);
       if (!emrWriteEnabled(env)) return writeGate();
       const r = await prescribe(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
