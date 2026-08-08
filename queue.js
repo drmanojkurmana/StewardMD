@@ -278,9 +278,10 @@
   }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;
+    var mrn = prompt("GHIS MR number (enables EMR profile + assessment for this patient)?") || "";
     var mobile = prompt("Mobile (optional)?") || "";
     var vt = (prompt("Visit type: new / followup", "new") || "new").toLowerCase();
-    act(st.session.id, "/ticket", { name: name, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
+    act(st.session.id, "/ticket", { name: name, mrn: mrn, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
   }
 
   // ---- GHIS login gate + demo mode --------------------------------------------------------
