@@ -173,19 +173,29 @@ async function getOpdPatients(env, token, sdate, debug, cb) {
   // which leaves the GHIS session in in-patient context -> the OPD list (docopdlist) then returns an empty
   // shell. Hitting /Doctor/Home (the Out-patients dashboard the browser fires docopdlist from) resets it.
   let home = null; try { home = await ghisReq(env, token, 'GET', '/Doctor/Home', null, {}); } catch (e) {}
-  const pull = async (day) => {
-    const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: (cb == null || cb === '') ? '0' : String(cb) });
+  const pull = async (day, cbVal) => {
+    const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: String(cbVal) });
     const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
     if (r.unauth) return { unauth: true };
     const j = parseGhis(r.body);                             // fallback: some GHIS actions return JSON
     const rows = (Array.isArray(j) && j.length) ? j : (j && Array.isArray(j.data) && j.data.length) ? j.data : parseOpdHtml(r.body);
-    return { r: r, rows: rows, day: day };
+    return { r: r, rows: rows, day: day, cb: cbVal };
   };
-  let res = await pull(sdate || ghisToday());
-  if (res.unauth) return res;
-  // Near midnight / on a holiday, today's OPD list can be empty while GHIS still shows the last active day's
-  // list. If no date was explicitly requested and today is empty, fall back one day so the active list loads.
-  if (!sdate && (!res.rows || !res.rows.length)) { const y = await pull(ghisYesterday()); if (!y.unauth && y.rows && y.rows.length) res = y; }
+  // Resilient fetch: try the doctor's own list (checkbox=0) first; if empty (the app's server-side session can
+  // lack the my-patients consultant filter), widen to All patients (checkbox=1). And near midnight / on a
+  // holiday, today's list can be empty while GHIS still shows yesterday's active list, so fall back a day.
+  // Return the FIRST non-empty combination. An explicit ?cb/?sdate pins the query (diagnostics).
+  const days = sdate ? [sdate] : [ghisToday(), ghisYesterday()];
+  const cbs = (cb == null || cb === '') ? ['0', '1'] : [String(cb)];
+  let res = null;
+  for (let di = 0; di < days.length && (!res || !res.rows || !res.rows.length); di++) {
+    for (let ci = 0; ci < cbs.length; ci++) {
+      const rr = await pull(days[di], cbs[ci]);
+      if (rr.unauth) return rr;
+      if (!res) res = rr;
+      if (rr.rows && rr.rows.length) { res = rr; break; }
+    }
+  }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
   if (debug) return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: (home && home.body || '').length, docName: parseDoctorName((home && home.body) || ''), rawLen: (res.r.body || '').length, thCount: ((res.r.body || '').match(/<th\b/gi) || []).length, trCount: ((res.r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((res.r.body || '').match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: String(res.r.body || '').slice(0, 2500) };
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
