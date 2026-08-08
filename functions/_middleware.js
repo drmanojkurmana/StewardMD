@@ -172,7 +172,10 @@ export async function onRequest(context) {
   // from an SMS/WhatsApp link (…/queue?t=<opaque token>) with no app/account/cookie, so it must resolve
   // for anonymous visitors. Safe to expose — no PHI in the URL, and /api/queue/* self-authorises via the
   // signed token (only position/ETA/status are returned, never name/MRN/phone).
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue"];
+  // "opd" is the staff OPD operations console (opd.stewardmd.in / stewardmd.in/opd): staff sign in with
+  // their GHIS employee-id inside the page; /api/queue/* + /api/ghis/staff-login self-authorise. The shell
+  // must load for anonymous visitors (no StewardMD account). No PHI in the URL.
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue", "opd"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

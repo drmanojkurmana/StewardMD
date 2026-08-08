@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>StewardMD OPD Console</title>
+<style>
+  :root{--tl:#0f766e;--tl-d:#0b5c56;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--card:#fff;
+    --amber:#b45309;--red:#b91c1c;--ok:#15803d;--r:14px;--sh:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.04)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  button{font:inherit;cursor:pointer;border:0;border-radius:10px}
+  input,select{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:10px;width:100%;background:#fff}
+  .wrap{max-width:1200px;margin:0 auto;padding:16px}
+  /* header */
+  header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;gap:12px;padding:12px 16px}
+  .brand{font-weight:800;font-size:19px}.brand span{color:var(--tl)}
+  .role{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:10px;align-items:center}
+  .chip{background:#ecfdf5;color:var(--tl-d);padding:4px 10px;border-radius:999px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.02em}
+  .ghost{background:#f1f5f9;color:var(--ink);padding:8px 12px}
+  /* login */
+  .login{max-width:380px;margin:8vh auto;background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:26px}
+  .login h1{margin:0 0 4px;font-size:22px}.login p{margin:0 0 18px;color:var(--mut)}
+  .login label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}
+  .btn{background:var(--tl);color:#fff;padding:13px 16px;font-weight:700;width:100%;margin-top:16px}
+  .btn:active{background:var(--tl-d)}
+  .err{color:var(--red);font-size:13px;margin-top:10px;min-height:16px}
+  /* board */
+  .toolbar{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap}
+  .toolbar .grow{flex:1}
+  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .doc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+  .doc>h2{margin:0;padding:14px 16px;font-size:16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .doc>h2 small{margin-left:auto;font-weight:600;color:var(--mut);font-size:12px}
+  .rows{padding:8px;display:flex;flex-direction:column;gap:8px;min-height:60px}
+  .empty{color:var(--mut);text-align:center;padding:22px 8px;font-size:14px}
+  .row{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+  .row.p2{border-color:#fecaca;background:#fef2f2}.row.p1{border-color:#fed7aa;background:#fff7ed}
+  .row .top{display:flex;align-items:center;gap:8px}
+  .pos{width:26px;height:26px;border-radius:8px;background:var(--tl);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;flex:none}
+  .pos.consult{background:var(--ok)}
+  .nm{font-weight:700}.mrn{color:var(--mut);font-weight:600;font-size:12px;margin-left:4px}
+  .meta{color:var(--mut);font-size:12px;margin-top:2px}
+  .st{margin-left:auto;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--tl-d)}
+  .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .acts button{background:#f1f5f9;color:var(--ink);padding:8px 11px;font-weight:600;font-size:13px}
+  .acts button.pri{background:var(--tl);color:#fff}
+  .acts button.warn{background:#fef2f2;color:var(--red)}
+  /* modal */
+  .scrim{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:flex-end;justify-content:center;z-index:20}
+  .scrim.on{display:flex}
+  .sheet{background:#fff;width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:20px;max-height:88vh;overflow:auto}
+  @media(min-width:600px){.scrim{align-items:center}.sheet{border-radius:18px}}
+  .sheet h3{margin:0 0 12px}
+  .cats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .cats button{background:#f1f5f9;color:var(--ink);padding:9px 13px;font-weight:600;border:2px solid transparent}
+  .cats button.on{border-color:var(--tl);background:#ecfdf5;color:var(--tl-d)}
+  .sheet .row2{display:flex;gap:10px;margin-top:16px}.sheet .row2 button{flex:1;padding:13px}
+  .cancel{background:#f1f5f9;color:var(--ink)}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:10px;z-index:40;opacity:0;transition:.2s;max-width:90%}
+  .toast.on{opacity:1}
+  .drawer{padding:6px 0}
+  .ev{border-left:3px solid var(--line);padding:8px 0 8px 12px;margin-left:4px}
+  .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
+  .link{word-break:break-all;background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:10px;font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="scrim" id="scrim"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  "use strict";
+  var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital";
+  var st={tok:localStorage.getItem(LS_TOK)||"", who:null, hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
+  var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
+  var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
+  var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
+  function api(path,opts){
+    opts=opts||{}; var h=opts.headers||{}; h["Content-Type"]="application/json";
+    if(st.tok) h["X-Staff-Token"]=st.tok;
+    return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined})
+      .then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});});
+  }
+  function can(cap){return st.who&&st.who.caps&&st.who.caps.indexOf(cap)>-1;}
+
+  // ---- login ----
+  function renderLogin(msg){
+    app.innerHTML='<div class="login"><h1>StewardMD <span style="color:#0f766e">OPD</span></h1>'+
+      '<p>Sign in with your hospital employee ID.</p>'+
+      '<label>Employee ID</label><input id="uid" autocomplete="username" inputmode="numeric">'+
+      '<label>Password</label><input id="pwd" type="password" autocomplete="current-password">'+
+      '<label>Hospital code</label><input id="hosp" value="'+esc(st.hospital)+'">'+
+      '<button class="btn" id="go">Sign in</button><div class="err" id="err">'+esc(msg||"")+'</div></div>';
+    document.getElementById("go").onclick=doLogin;
+    document.getElementById("pwd").onkeydown=function(e){if(e.key==="Enter")doLogin();};
+  }
+  function doLogin(){
+    var uid=document.getElementById("uid").value.trim(), pwd=document.getElementById("pwd").value, hosp=document.getElementById("hosp").value.trim()||"manual";
+    var err=document.getElementById("err"); err.textContent="Signing in…";
+    fetch("/api/ghis/staff-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({userId:uid,password:pwd})})
+      .then(function(r){return r.json();}).then(function(r){
+        if(!r||!r.token){ err.textContent=r&&r.error==="staff_disabled"?"OPD staff access is not enabled yet.":(r&&r.error==="bad_credentials"?"Wrong employee ID or password.":"Sign-in failed."); return; }
+        st.tok=r.token; st.hospital=hosp; localStorage.setItem(LS_TOK,r.token); localStorage.setItem(LS_HOSP,hosp);
+        boot();
+      }).catch(function(){err.textContent="Could not reach the server.";});
+  }
+  function logout(){ st.tok=""; localStorage.removeItem(LS_TOK); st.who=null; renderLogin(); }
+
+  // ---- boot: whoami then board ----
+  function boot(){
+    app.innerHTML='<div class="login"><p>Loading…</p></div>';
+    api("whoami").then(function(r){
+      if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
+      st.who=r; if(r.hospitalId) st.hospital=r.hospitalId;
+      loadBoard();
+    });
+  }
+  function loadBoard(){
+    api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
+      if(!r||!r.ok){ renderShell('<div class="empty">'+(r&&r.error==="forbidden"?"You do not have access to this hospital.":"Could not load the board.")+'</div>'); return; }
+      st.board=r.board||[]; renderBoard();
+    });
+  }
+
+  function renderShell(inner){
+    var name=st.who?(st.who.name||"Staff"):"", role=st.who?st.who.role:"";
+    app.innerHTML='<header><div class="wrap"><div class="brand">Steward<span>MD</span> OPD</div>'+
+      '<div class="role"><span>'+esc(name)+'</span><span class="chip">'+esc(role)+'</span>'+
+      '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
+      '<div class="wrap"><div class="toolbar">'+
+        '<div class="grow"><b>OPD Board</b> · '+esc(st.hospital)+' · '+esc(st.date)+'</div>'+
+        (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
+        '<button class="ghost" id="ref">Refresh</button>'+
+      '</div>'+inner+'</div>';
+    document.getElementById("lo").onclick=logout;
+    var ref=document.getElementById("ref"); if(ref) ref.onclick=loadBoard;
+    var walk=document.getElementById("walk"); if(walk) walk.onclick=openWalkin;
+  }
+  function renderBoard(){
+    if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
+    var docs=st.board.map(function(b){
+      var s=b.session, tickets=(b.tickets||[]).filter(function(t){return ["registered","waiting","called","in_consultation"].indexOf(t.status)>-1;});
+      var rows=tickets.length? tickets.map(function(t,i){return ticketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">No patients waiting</div>';
+      return '<div class="doc"><h2>'+esc(s.doctorName||s.doctorUid||"Doctor")+'<small>'+tickets.length+' in queue</small></h2>'+
+        '<div class="rows">'+rows+'</div>'+
+        '<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right">'+
+          '<button class="ghost" data-audit="'+esc(s.id)+'" style="font-size:13px">View audit trail</button></div></div>';
+    }).join("");
+    renderShell('<div class="docs">'+docs+'</div>');
+    Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
+    wireRowActions();
+  }
+  function ticketRow(s,t,i,n){
+    var cls=t.priority>=2?"p2":(t.priority>=1?"p1":""); var consult=t.status==="in_consultation";
+    var eta=t.etaStart?Math.max(0,Math.round((t.etaStart-Date.now())/60000)):null;
+    var b=[];
+    if(!consult&&can("queue.status")) b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>');
+    if(!consult&&can("queue.status")) b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>');
+    if(can("queue.reorder")&&i>0) b.push('<button data-a="up" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▲</button>');
+    if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
+    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
+    if(can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Assign</button>');
+    if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout ▸</button>');
+    return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?"▶":(i+1))+'</div>'+
+      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
+      '<div class="st">'+esc(t.status.replace(/_/g," "))+'</div></div>'+
+      '<div class="acts">'+b.join("")+'</div></div>';
+  }
+  function wireRowActions(){
+    Array.prototype.forEach.call(document.querySelectorAll(".acts [data-a]"),function(btn){
+      btn.onclick=function(){
+        var a=btn.getAttribute("data-a"), sid=btn.getAttribute("data-s"), tid=btn.getAttribute("data-t");
+        if(a==="call") post("status",{sessionId:sid,ticketId:tid,status:"called"});
+        else if(a==="start") post("status",{sessionId:sid,ticketId:tid,status:"in_consultation"});
+        else if(a==="prio") post("priority",{sessionId:sid,ticketId:tid,priority:+btn.getAttribute("data-p")});
+        else if(a==="up") openMove(sid,tid,+btn.getAttribute("data-i")-1);
+        else if(a==="down") openMove(sid,tid,+btn.getAttribute("data-i")+1);
+        else if(a==="top") openMove(sid,tid,0);
+        else if(a==="assign") openAssign(sid,tid);
+        else if(a==="checkout") doCheckout(sid,tid);
+      };
+    });
+  }
+  function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||loadBoard)(r); }); }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status."}[e]||e; }
+
+  // ---- reorder-with-reason modal (anti-misuse) ----
+  var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
+  function openMove(sid,tid,toIndex){
+    var chosen="";
+    var chips=CATS.map(function(c){return '<button data-c="'+c+'">'+c+'</button>';}).join("");
+    open('<h3>Move patient — reason required</h3><p style="color:#64748b;margin:0 0 8px">Every move is recorded in the audit trail.</p>'+
+      '<div class="cats">'+chips+'</div>'+
+      '<input id="rz" placeholder="Optional note (why)">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Move</button></div>');
+    Array.prototype.forEach.call(sheet.querySelectorAll(".cats [data-c]"),function(b){b.onclick=function(){chosen=b.getAttribute("data-c");Array.prototype.forEach.call(sheet.querySelectorAll(".cats button"),function(x){x.classList.remove("on");});b.classList.add("on");};});
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var reason=sheet.querySelector("#rz").value.trim();
+      if(!chosen&&!reason){toast("Pick a reason category");return;}
+      close(); post("move",{sessionId:sid,ticketId:tid,toIndex:toIndex,category:chosen,reason:reason});
+    };
+  }
+  // ---- assign-to-doctor modal ----
+  function openAssign(sid,tid){
+    var opts=st.board.map(function(b){return '<option value="'+esc(b.session.doctorUid)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
+    open('<h3>Assign to doctor</h3><select id="dsel">'+opts+'</select>'+
+      '<input id="arz" placeholder="Optional note" style="margin-top:10px">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){ var d=sheet.querySelector("#dsel").value, rz=sheet.querySelector("#arz").value.trim(); close(); post("assign",{sessionId:sid,ticketId:tid,toDoctorUid:d,reason:rz}); };
+  }
+  // ---- add walk-in ----
+  function openWalkin(){
+    var opts=st.board.map(function(b){return '<option value="'+esc(b.session.id)+'">'+esc(b.session.doctorName||b.session.doctorUid)+'</option>';}).join("");
+    open('<h3>Add walk-in patient</h3>'+
+      '<input id="wn" placeholder="Patient name" style="margin-bottom:10px">'+
+      '<input id="wm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
+      (opts?'<select id="wsel">'+opts+'</select>':'<div class="empty">No doctor queue yet — a doctor must sign in first.</div>')+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    var ok=sheet.querySelector("#ok");
+    ok.onclick=function(){
+      var n=sheet.querySelector("#wn").value.trim(); if(!n){toast("Enter a name");return;}
+      var sel=sheet.querySelector("#wsel"); if(!sel){toast("No doctor queue available");return;}
+      close(); post("ticket",{sessionId:sel.value,name:n,mobile:sheet.querySelector("#wm").value.trim(),visitType:"new"});
+    };
+  }
+  // ---- checkout ----
+  function doCheckout(sid,tid){
+    if(!confirm("Check out this patient? The visit will be closed and the next patient called.")) return;
+    api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
+      loadBoard();
+      if(r.timelineUrl) open('<h3>Patient checked out</h3><p style="color:#64748b">Visit timeline link (valid 7 days):</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'), sheet.querySelector("#cx").onclick=close;
+    });
+  }
+  // ---- audit drawer ----
+  function openAudit(sid){
+    open('<h3>Audit trail</h3><div class="drawer" id="ad">Loading…</div><div class="row2"><button class="cancel" id="cx" style="margin:0">Close</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    api("audit?sessionId="+encodeURIComponent(sid)).then(function(r){
+      var el=sheet.querySelector("#ad"); if(!el) return;
+      if(!r||!r.ok||!r.events||!r.events.length){ el.innerHTML='<div class="empty">No recorded actions yet.</div>'; return; }
+      el.innerHTML=r.events.map(function(e){
+        var m=e.meta; try{ var j=JSON.parse(e.meta); if(j.from&&j.to) m="#"+j.from+" → #"+j.to+(j.category?" ("+j.category+")":"")+(j.reason?" — "+j.reason:""); else if(j.toDoctor) m="reassigned to "+j.toDoctor+(j.reason?" — "+j.reason:""); }catch(_){}
+        var when=new Date(e.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+        return '<div class="ev"><div><b>'+esc(e.action)+'</b> · '+esc(e.mrnLast4?("#"+e.mrnLast4):"")+' <span class="t">'+when+' · '+esc(e.actor)+'</span></div><div class="t">'+esc(m)+'</div></div>';
+      }).join("");
+    });
+  }
+
+  function open(html){ sheet.innerHTML=html; scrim.classList.add("on"); }
+  function close(){ scrim.classList.remove("on"); sheet.innerHTML=""; }
+  scrim.onclick=function(e){ if(e.target===scrim) close(); };
+
+  if(st.tok) boot(); else renderLogin();
+})();
+</script>
+</body>
+</html>
