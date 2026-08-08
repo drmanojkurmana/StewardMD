@@ -1,7 +1,7 @@
 // test/queue-eta.test.mjs — pure queue logic: state machine, ordering, ETA, learning.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { canTransition, isTerminal, orderQueue, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
+import { canTransition, isTerminal, orderQueue, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
 
 test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("registered", "waiting"), true);
@@ -25,6 +25,47 @@ test("ordering: emergency > priority > arrival; excludes in-consult/terminal", (
   ];
   const ids = orderQueue(tickets).map((t) => t.id);
   assert.deepEqual(ids, ["b", "c", "f", "a"]);   // emergency, priority, then arrival order
+});
+
+test("reorderSeq: move-to-#1 / down / no-op, and the persisted seq re-sorts the queue", () => {
+  // A same-priority band ordered by arrival (registeredAt as default seq).
+  const q = [
+    { id: "a", status: "waiting", priority: 0, registeredAt: 100 },
+    { id: "b", status: "waiting", priority: 0, registeredAt: 200 },
+    { id: "c", status: "waiting", priority: 0, registeredAt: 300 },
+    { id: "d", status: "waiting", priority: 0, registeredAt: 400 }
+  ];
+  const ordered = orderQueue(q);
+  assert.deepEqual(ordered.map((t) => t.id), ["a", "b", "c", "d"]);
+
+  // Move d (last, #4) to #1: it should sort first after we persist the returned seq.
+  const rd = reorderSeq(ordered, "d", 0);
+  assert.ok(rd && rd.seq < 100, "seq below the current top");
+  q.find((t) => t.id === "d").seq = rd.seq;
+  assert.deepEqual(orderQueue(q).map((t) => t.id), ["d", "a", "b", "c"]);
+
+  // Move a down to index 2 (between the current occupants of slots 1 and 2).
+  const ordered2 = orderQueue(q);   // ["d","a","b","c"]
+  const ra = reorderSeq(ordered2, "a", 2);
+  q.find((t) => t.id === "a").seq = ra.seq;
+  assert.deepEqual(orderQueue(q).map((t) => t.id), ["d", "b", "a", "c"]);
+
+  // No-op / invalid moves return null.
+  assert.equal(reorderSeq(orderQueue(q), "a", orderQueue(q).findIndex((t) => t.id === "a")), null);
+  assert.equal(reorderSeq(ordered, "zzz", 0), null);
+});
+
+test("reorderSeq: emergencies stay on top — a manual move reorders within its priority band", () => {
+  const q = [
+    { id: "emg", status: "waiting", priority: 2, registeredAt: 500 },
+    { id: "x", status: "waiting", priority: 0, registeredAt: 100 },
+    { id: "y", status: "waiting", priority: 0, registeredAt: 200 }
+  ];
+  const ordered = orderQueue(q);   // ["emg","x","y"]
+  // Try to move y to the very top (index 0): priority keeps emg first; y leads the normal band.
+  const r = reorderSeq(ordered, "y", 0);
+  q.find((t) => t.id === "y").seq = r.seq;
+  assert.deepEqual(orderQueue(q).map((t) => t.id), ["emg", "y", "x"]);
 });
 
 test("computeEtas: cumulative windows from when the doctor is free; confidence in [40,99]", () => {

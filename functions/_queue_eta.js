@@ -28,11 +28,36 @@ export function isTerminal(s) { return s === "completed" || s === "cancelled" ||
 // Tickets still waiting for the doctor (get a position + ETA). in_consultation/investigation/terminal excluded.
 export function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
 
-// ---- ordering: emergency/priority first, then arrival order -------------------------------
+// ---- ordering: emergency/priority first, then MANUAL order, then arrival --------------------
+// A ticket's ordering key is its manual `seq` (set by a staff reorder) when present, else its arrival
+// time — so nothing changes until someone reorders. Priority still sorts first, so a manual move
+// reorders WITHIN a priority band (emergencies stay on top — medically correct).
+function seqKey(t) { return (t && t.seq != null && isFinite(t.seq)) ? t.seq : (t && t.registeredAt) || 0; }
 export function orderQueue(tickets) {
   return (tickets || [])
     .filter((t) => isQueued(t.status))
-    .sort((a, b) => (b.priority || 0) - (a.priority || 0) || (a.registeredAt || 0) - (b.registeredAt || 0));
+    .sort((a, b) => (b.priority || 0) - (a.priority || 0) || seqKey(a) - seqKey(b));
+}
+
+// PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered
+// queue. Returns { seq } to persist, or null for a no-op/invalid move. Midpoint indexing => only the
+// moved ticket changes (concurrency-friendly, no full renumber).
+export function reorderSeq(orderedQueued, moveId, toIndex) {
+  const q = (orderedQueued || []);
+  const from = q.findIndex((t) => t.id === moveId);
+  if (from < 0) return null;
+  const without = q.filter((t) => t.id !== moveId);
+  const to = Math.max(0, Math.min(without.length, toIndex | 0));
+  if (to === from) return null;
+  const above = to > 0 ? without[to - 1] : null;
+  const below = to < without.length ? without[to] : null;
+  const GAP = 1000;
+  let seq;
+  if (!above && !below) return null;
+  else if (!above) seq = seqKey(below) - GAP;              // to the very top of its band
+  else if (!below) seq = seqKey(above) + GAP;              // to the very bottom
+  else seq = (seqKey(above) + seqKey(below)) / 2;          // between two neighbours (midpoint)
+  return { seq: seq };
 }
 
 // ---- learned consult duration -------------------------------------------------------------

@@ -8,7 +8,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
-import { orderQueue, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
+import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 
 const now = () => Date.now();
@@ -156,6 +156,65 @@ export async function setPriority(env, session, ticketId, priority, actor) {
   await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { priority: clampPriority(priority), updatedAt: now() })]);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "priority", meta: String(clampPriority(priority)) });
   return recompute(env, session);
+}
+
+// ---- staff manual reorder (move up/down/to-#1) with a MANDATORY reason -> full audit trail --------
+// Anti-misuse: no reorder without a category or reason, and every move records who/when/from->to/why.
+// Only queued (registered/waiting/called) patients can be reordered; the pure reorderSeq keeps
+// emergencies on top. `opts` = { toIndex, reason, category }.
+export async function moveTicket(env, session, ticketId, opts, actor) {
+  opts = opts || {};
+  const reason = String(opts.reason || "").slice(0, 180);
+  const category = String(opts.category || "").slice(0, 40);
+  if (!category && !reason) throw Object.assign(new Error("reason_required"), { status: 400 });
+  const t = await getTicket(env, ticketId);
+  if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (!isQueued(t.status)) throw Object.assign(new Error("not_queued"), { status: 400, detail: t.status });
+  const ordered = orderQueue(await listTickets(env, session.id));
+  const fromPos = ordered.findIndex((x) => x.id === ticketId) + 1;
+  const toIndex = Math.max(0, Number(opts.toIndex) | 0);
+  const r = reorderSeq(ordered, ticketId, toIndex);
+  if (!r) return recompute(env, session);   // no-op move (already there / invalid)
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { seq: r.seq, updatedAt: now() })]);
+  await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "move",
+    meta: JSON.stringify({ from: fromPos, to: toIndex + 1, category: category, reason: reason }) });
+  return recompute(env, session);
+}
+
+// ---- assign / transfer a patient to (a different) doctor's OPD queue for the same day -------------
+// The front desk assigns each auto-fetched / walk-in patient to one of the doctors (by doctorUid). The
+// ticket is re-parented to the target doctor's session (same hospital+date), its manual seq reset to
+// arrival order, status reset to registered. Both queues reflow. Audited from->to doctor.
+export async function assignTicket(env, fromSession, ticketId, toDoctorUid, opts, actor) {
+  opts = opts || {};
+  const t = await getTicket(env, ticketId);
+  if (!t || t.sessionId !== fromSession.id) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (!isQueued(t.status)) throw Object.assign(new Error("not_queued"), { status: 400, detail: t.status });
+  const target = await getOrCreateSession(env, { hospitalId: fromSession.hospitalId, doctorUid: String(toDoctorUid),
+    department: opts.department || fromSession.department, date: fromSession.date, source: "assign" });
+  if (target.id === fromSession.id) return recompute(env, fromSession);   // same doctor -> no-op
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { sessionId: target.id, seq: (t.registeredAt || now()),
+    status: "registered", position: 0, updatedAt: now(), expiresAt: target.expiresAt })]);
+  await qAudit(env, { hospitalId: fromSession.hospitalId, ticketId, actor, action: "assign",
+    meta: JSON.stringify({ fromDoctor: fromSession.doctorUid, toDoctor: String(toDoctorUid), reason: String(opts.reason || "").slice(0, 120) }) });
+  await recompute(env, fromSession);   // reflow the old queue
+  return recompute(env, target);       // and the target queue
+}
+
+// ---- audit timeline: decode q_events for a session's tickets (newest first). NO PHI (ticketId +
+// masked mrnLast4 only). `meta` for move/assign is JSON; left as-is for the client to render. --------
+export async function auditTimeline(env, session, limit) {
+  const tickets = await listTickets(env, session.id);
+  const byId = {}; tickets.forEach((t) => (byId[t.id] = t));
+  const ids = new Set(tickets.map((t) => t.id));
+  const rows = await fsQuery(env, "q_events", { where: { field: "hospitalId", value: session.hospitalId }, limit: 500 });
+  return rows
+    .map((r) => withId(r.id, r.fields))
+    .filter((e) => e.ticketId && ids.has(e.ticketId))
+    .sort((a, b) => (b.ts || 0) - (a.ts || 0))
+    .slice(0, Math.max(1, Math.min(200, Number(limit) || 100)))
+    .map((e) => ({ ts: e.ts, actor: e.actor, action: e.action, meta: e.meta,
+      mrnLast4: (byId[e.ticketId] && byId[e.ticketId].mrnLast4) || "" }));
 }
 
 // "Next Patient": finish the current consult (with learning), start the next ordered ticket. Bespoke
