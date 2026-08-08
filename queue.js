@@ -8,7 +8,7 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
   var API = "/api/queue";
   var POLL_MS = 8000;
-  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", demo: false, openOpts: {} };
+  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0 };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
@@ -109,11 +109,12 @@
   }
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
-    var doctorName = s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
+    var doctorName = state.ghisDoctorName || (state.ghisToken && state.ghisUser ? ("Dr " + state.ghisUser) : "") || s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
     var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
       (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
-      '<div class="q-avatar">' + esc(initials(doctorName)) + "</div></div></div></header>";
+      (state.ghisToken ? '<button class="q-iconbtn" data-q-act="logout" title="Sign out of GHIS">' + ms("logout") + "</button>" : "") +
+      '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div></div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
@@ -194,6 +195,10 @@
 
   function refresh() {
     if (st.demo || !st.session || st.view === "settings") return;   // demo has no server session; don't clobber unsaved settings mid-poll
+    st.pollN = (st.pollN || 0) + 1;
+    // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
+    // registered patients appear without a manual import (dedupes server-side by visit id).
+    if (st.ghisToken && st.pollN % 5 === 0 && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(true); } catch (e) {} }
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
   }
   function act(sessId, path, body) { body = body || {}; body.sessionId = sessId; return apiPost(path, body).then(function (r) { if (r && r.ok && r.tickets) { st.tickets = r.tickets; paint(); } else if (r && r.ok && r.session) { st.session = r.session; paint(); } return r; }); }
@@ -217,6 +222,7 @@
     if (cmd === "close") { close(); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
+    if (cmd === "logout") { doLogout(); return; }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
@@ -235,16 +241,17 @@
     // notify/nav/viewall/docstatus/skip: Phase 2/3
   }
 
-  function importOpd() {
+  function importOpd(silent) {
     if (!st.session) return;
-    try { G.toast && G.toast("Importing today's OPD list…"); } catch (e) {}
+    var say = function (m) { if (silent) return; try { G.toast && G.toast(m); } catch (e) {} };
+    say("Importing today's OPD list…");
     var gh = { "Content-Type": "application/json" }; if (st.ghisToken) gh.Authorization = "Bearer " + st.ghisToken;
     fetch("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
-      if (r && r.error === "login_required") { try { G.toast && G.toast("Connect Ward Sync (GHIS) first, then import"); } catch (e) {} return; }
+      if (r && r.error === "login_required") { say("Connect Ward Sync (GHIS) first, then import"); return; }
       var rows = (r && r.rows) || [];
-      if (!rows.length) { try { G.toast && G.toast("No OPD patients found for today"); } catch (e) {} return; }
-      act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok) { try { G.toast && G.toast("Imported " + (res.imported || 0) + " patient(s)"); } catch (e) {} } });
-    }).catch(function () { try { G.toast && G.toast("Could not reach Ward Sync"); } catch (e) {} });
+      if (!rows.length) { say("No OPD patients found for today"); return; }
+      act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
+    }).catch(function () { say("Could not reach Ward Sync"); });
   }
   // View EMR profile (flag smd_opd_emr): look up the ticket locally for its full MR# + name, hand to OPDEMR.
   function openEmrProfile(ticketId) {
@@ -291,7 +298,7 @@
     authHeaders().then(function (h) { return fetch("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
       .then(function (r) { return r.json(); })
       .then(function (r) {
-        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; loadSession(); return; }
+        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; loadSession(); return; }
         var msg = (r && r.error === "needs-pro") ? "Ward Sync needs a Pro account." : (r && r.error === "bad_credentials") ? "Wrong GHIS User ID or password." : "Sign-in failed. Please try again.";
         if (errEl) errEl.textContent = msg; if (btn) { btn.disabled = false; btn.textContent = "Sign in"; }
       })
@@ -333,6 +340,15 @@
     setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80);
   }
   function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }
+  // Sign out of GHIS: drop the GHIS session token + doctor identity, tell the server to forget the session,
+  // and re-open the login gate so a different doctor can sign in.
+  function doLogout() {
+    clearInterval(st.pollId);
+    var tok = st.ghisToken;
+    st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = ""; st.demo = false; st.session = null; st.tickets = []; st.pollN = 0;
+    if (tok) { try { fetch("/api/ghis/logout", { method: "POST", headers: { "Authorization": "Bearer " + tok }, credentials: "include" }).catch(function () {}); } catch (e) {} }
+    open(st.openOpts);   // ghisToken now null -> the GHIS login gate shows again
+  }
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st };
 

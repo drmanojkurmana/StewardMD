@@ -72,6 +72,15 @@ const parseGhis = (b) => { if (!b) return []; try { let v = JSON.parse(b); retur
 function htmlToText(s){ if(!s) return ''; return String(s).replace(/<\s*(br|\/p|\/div|\/tr|\/h[1-6])\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&ndash;/gi,'–').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&quot;/gi,'"').replace(/&#39;/gi,"'").replace(/\n{3,}/g,'\n\n').replace(/[ \t]{2,}/g,' ').trim(); }
 
 // ── GHIS login (one doctor's credentials) ────────────────────────────────────
+// Best-effort scrape of the logged-in doctor's display name from GHIS home HTML (falls back to '' -> the
+// client shows "Dr <userId>"). GHIS shows an all-caps name in the top bar (e.g. "CHANDU GOPALA KRISHNA").
+function parseDoctorName(html) {
+  html = String(html || '');
+  var m = html.match(/(?:Welcome[,\s]+|Dr\.?\s+)([A-Z][A-Z][A-Z .]{4,44}[A-Z])/) ||
+          html.match(/(?:data-user-name|data-username|title)="([A-Z][A-Z][A-Z .]{5,44})"/) ||
+          html.match(/>\s*([A-Z]{2,}(?:\s+[A-Z]{2,}){1,3})\s*<\/(?:span|b|strong|div|a)>/);
+  return m ? m[1].replace(/\s+/g, ' ').trim() : '';
+}
 async function loginGhis(userId, password) {
   const jar = {};
   const lp = await raw(jar, 'GET', SSO + '/');
@@ -81,12 +90,13 @@ async function loginGhis(userId, password) {
   let ok = false; try { ok = (JSON.parse(li.body).param1 == 200); } catch {}
   if (!ok) { const e = new Error('bad_credentials'); e.code = 'bad_credentials'; throw e; }
   await raw(jar, 'GET', SSO + '/apps');
-  await follow(jar, await raw(jar, 'GET', GHIS + '/Home'));
+  const homeResp = await follow(jar, await raw(jar, 'GET', GHIS + '/Home'));
   const cookie = jarHeader(jar, 'ghis.gitam.edu');
   if (!/AspNetCore\.Session/.test(cookie)) throw new Error('session_not_established');
   const wl = await raw({ 'ghis.gitam.edu': Object.fromEntries(cookie.split('; ').map(p => { const i = p.indexOf('='); return [p.slice(0, i), p.slice(i + 1)]; })) }, 'GET', GHIS + '/Doctor/Home/Nurseipwlnew/?id=');
   const csrf = (wl.body.match(/name="__RequestVerificationToken"[^>]*value="([^"]+)"/) || [])[1] || '';
-  return { cookie, csrf };
+  const doctorName = parseDoctorName((homeResp && homeResp.body) || '') || parseDoctorName(wl.body || '');
+  return { cookie, csrf, doctorName };
 }
 
 // ── per-token session (token-only; passwords are NEVER stored) ───────────────
@@ -478,7 +488,7 @@ export async function onRequest(context) {
       // NOTE: we intentionally do NOT persist credentials (no "remember" store) — the
       // password never leaves this request. Sessions are token-only; on GHIS timeout the
       // doctor logs in again. `body.remember` is accepted but ignored for compatibility.
-      return json({ token: t, userId: String(body.userId) });
+      return json({ token: t, userId: String(body.userId), doctorName: (sess && sess.doctorName) || '' });
     }
 
     // ---- silent session refresh (Lab Watch 24/7 users only) ----
