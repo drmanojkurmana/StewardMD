@@ -169,6 +169,10 @@ export function parseOpdHtml(html) {
 }
 async function getOpdPatients(env, token, sdate, debug) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
+  // Prime the OPD dashboard context. Login fetches the IPD nurse worklist (Nurseipwlnew) for its CSRF token,
+  // which leaves the GHIS session in in-patient context -> the OPD list (docopdlist) then returns an empty
+  // shell. Hitting /Doctor/Home (the Out-patients dashboard the browser fires docopdlist from) resets it.
+  try { await ghisReq(env, token, 'GET', '/Doctor/Home', null, {}); } catch (e) {}
   const pull = async (day) => {
     const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: '0' });
     const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
