@@ -143,7 +143,34 @@
     else if(a==="directions"){ /* hospital map link is hospital-configured (Phase later) */ }
   });
 
+  // ---- sealed visit timeline (patient's own record, shared at checkout: /queue?t=..&v=t) ----
+  var TL_LABEL={note:"Clinical note",assessment:"Assessment",medication:"Medication",vitals:"Vitals",checkout:"Visit completed"};
+  var TL_ICON={note:"description",assessment:"assignment",medication:"medication",vitals:"monitor_heart",checkout:"task_alt"};
+  function renderTimeline(d){
+    if(!d || !d.ok){
+      if(d && d.error==="expired") return msgView("event_busy","This visit link has expired","Ask your doctor to re-share it if you still need it.");
+      if(d && d.error==="not_ready") return msgView("hourglass_top","Visit not finished yet","Your summary will be here once your visit is complete.");
+      return msgView("link_off","Link not valid","This visit link isn't active. Ask the front desk for a new one.");
+    }
+    var items=(d.entries||[]).filter(function(e){ return TL_LABEL[e.kind]; });
+    var rows=items.length? items.map(function(e){
+      return '<div class="step"><div class="node done">'+ms(TL_ICON[e.kind]||"description")+'</div>'+
+        '<div class="t">'+esc(TL_LABEL[e.kind]||"Note")+'</div>'+
+        '<div class="m">'+clock(e.ts)+'</div>'+
+        (e.text? '<p style="margin:4px 0 0;white-space:pre-wrap;grid-column:2/-1">'+esc(e.text)+'</p>':'')+'</div>';
+    }).join("") : '<div class="msg" style="padding:20px 0"><p>No notes were recorded for this visit.</p></div>';
+    app.innerHTML='<section class="top"><h2>Your visit summary</h2>'+
+      '<span class="live">'+ms("verified")+'Shared securely by your doctor</span></section>'+
+      '<section class="card journey"><h3>What happened during your visit</h3><div class="steps">'+rows+'</div></section>'+
+      '<section class="note">'+ms("info")+'<div><div class="t">Keep this for your records</div><div class="m">This link is private to you and expires automatically.</div></div></section>';
+  }
   function load(){
+    if(P.get("v")==="t"){
+      if(!token) return msgView("link_off","No visit link","Open the link from your SMS message.");
+      return fetch("/api/queue/timeline?t="+encodeURIComponent(token), {headers:{"Accept":"application/json"}})
+        .then(function(r){ return r.json(); }).then(renderTimeline)
+        .catch(function(){ msgView("wifi_off","Can’t load your summary","Check your connection and try again."); });
+    }
     if(P.get("mock")==="1"){ var now=Date.now(); return render({ ok:true, department:"StewardMD Cardiology", doctorName:"Dr. Sarah Richardson", doctorStatus:"consulting", status:"waiting", position:4, ahead:3, etaStart:now+18*60000, etaEnd:now+25*60000, confidence:96, journey:{ registeredAt:now-90*60000, calledAt:0, consultStartAt:0, done:false } }); }
     if(!token) return msgView("link_off","No tracking link","Open the link from your SMS or WhatsApp message.");
     fetch("/api/queue/portal?t="+encodeURIComponent(token), {headers:{"Accept":"application/json"}})
@@ -151,7 +178,7 @@
       .catch(function(){ msgView("wifi_off","Can’t reach the queue","Check your connection and try again."); });
   }
   load();
-  if(P.get("mock")!=="1" && token) setInterval(load, 20000);   // live refresh (poll)
+  if(P.get("v")!=="t" && P.get("mock")!=="1" && token) setInterval(load, 20000);   // live refresh (poll); timeline is static
 })();
 </script>
 </body>
