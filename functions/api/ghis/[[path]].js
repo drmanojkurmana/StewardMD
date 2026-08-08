@@ -141,6 +141,10 @@ function ghisToday() { return ghisDay(0); }
 function ghisYesterday() { return ghisDay(-86400000); }
 // DashboardUnit returns text/html (a DataTable fragment), NOT JSON. Parse it by HEADER LABEL so the mapping
 // survives column reordering: <th> texts -> field, then each <tbody> <tr>'s <td>s map to those fields.
+// The docopdlist worklist mixes visit types (OPD / EMERGENCY / IP). The browser's "Out patients" tab
+// keeps only Visit type == OPD; match it exactly so the app never imports Emergency/IP patients into the
+// OPD queue. Column 9 of the worklist ("Visit type") holds the value; OPD rows read "OPD".
+export const isOpdVisit = (r) => { const vt = String((r && r.visitType) || '').trim().toUpperCase(); return vt === 'OPD' || vt === 'OP' || vt.indexOf('OUT') === 0; };
 export function parseOpdHtml(html) {
   html = String(html || ''); if (html.indexOf('<') < 0) return [];
   const strip = (s) => String(s).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
@@ -178,15 +182,15 @@ async function getOpdPatients(env, token, sdate, debug, cb) {
     const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
     if (r.unauth) return { unauth: true };
     const j = parseGhis(r.body);                             // fallback: some GHIS actions return JSON
-    const rows = (Array.isArray(j) && j.length) ? j : (j && Array.isArray(j.data) && j.data.length) ? j.data : parseOpdHtml(r.body);
+    const parsed = parseOpdHtml(r.body).filter(isOpdVisit);  // OPD visit-type only == browser "Out patients" tab
+    const rows = (Array.isArray(j) && j.length) ? j : (j && Array.isArray(j.data) && j.data.length) ? j.data : parsed;
     return { r: r, rows: rows, day: day, cb: cbVal };
   };
-  // Resilient fetch: try the doctor's own list (checkbox=0) first; if empty (the app's server-side session can
-  // lack the my-patients consultant filter), widen to All patients (checkbox=1). And near midnight / on a
-  // holiday, today's list can be empty while GHIS still shows yesterday's active list, so fall back a day.
-  // Return the FIRST non-empty combination. An explicit ?cb/?sdate pins the query (diagnostics).
-  const days = sdate ? [sdate] : [ghisToday(), ghisYesterday()];
-  const cbs = (cb == null || cb === '') ? ['0', '1'] : [String(cb)];
+  // Match the browser's "Out patients" tab exactly: TODAY only, checkbox=0 (the doctor's own patients).
+  // No yesterday fallback (it would import stale rows) and no widen-to-All-patients (it would break the
+  // per-doctor scoping the owner requires). An explicit ?cb/?sdate pins the query (diagnostics).
+  const days = sdate ? [sdate] : [ghisToday()];
+  const cbs = (cb == null || cb === '') ? ['0'] : [String(cb)];
   let res = null;
   for (let di = 0; di < days.length && (!res || !res.rows || !res.rows.length); di++) {
     for (let ci = 0; ci < cbs.length; ci++) {

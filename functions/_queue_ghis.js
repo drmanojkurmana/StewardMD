@@ -11,7 +11,7 @@
  *
  * mapGhisRow / filterNew are PURE (unit-tested); importRoster is thin I/O over the tested engine.
  */
-import { addTicket, listTickets } from "./_queue_engine.js";
+import { addTicket, listTickets, setStatus } from "./_queue_engine.js";
 
 // First non-empty value across candidate keys (handles IPD camelCase + OPD .NET PascalCase).
 function pick(row, keys) { for (var i = 0; i < keys.length; i++) { var v = row[keys[i]]; if (v != null && String(v).trim() !== "") return String(v).trim(); } return ""; }
@@ -49,11 +49,29 @@ export function filterNew(rows, existingEpisodeIds) {
   return out;
 }
 
-// I/O: import the roster into the session (adds only new patients). Returns { imported, skipped }.
+// PURE: which existing tickets should be dropped because they left the EMR Out-patients list. Only
+// auto-imported (has ghisEpisodeId), still-untouched ("registered") tickets whose episode is absent from
+// the current NON-EMPTY batch. A doctor-touched (called/consulting/done) or manual (no episode) ticket is
+// never dropped, and an empty batch never reconciles (a failed/empty fetch must not clear the queue).
+export function staleImportedIds(existing, batchEpisodeIds) {
+  if (!batchEpisodeIds || !batchEpisodeIds.length) return [];
+  var keep = {}; batchEpisodeIds.forEach(function (e) { if (e) keep[String(e)] = 1; });
+  return (existing || []).filter(function (t) {
+    return t && t.ghisEpisodeId && t.status === "registered" && !keep[String(t.ghisEpisodeId)];
+  }).map(function (t) { return t.id; });
+}
+
+// I/O: mirror the EMR Out-patients tab into the session — add new patients AND cancel still-waiting
+// imports that dropped off the list. Returns { imported, skipped, removed }.
 export async function importRoster(env, session, rows, actor) {
-  var existing = (await listTickets(env, session.id)).map(function (t) { return t.ghisEpisodeId; }).filter(Boolean);
+  var current = await listTickets(env, session.id);
+  var existing = current.map(function (t) { return t.ghisEpisodeId; }).filter(Boolean);
   var fresh = filterNew(rows, existing);
   var imported = 0;
   for (var i = 0; i < fresh.length; i++) { try { await addTicket(env, session, fresh[i], actor || "import"); imported++; } catch (e) {} }
-  return { imported: imported, skipped: (rows || []).length - imported };
+  var batchEpi = (rows || []).map(function (r) { return mapGhisRow(r).ghisEpisodeId; }).filter(Boolean);
+  var stale = staleImportedIds(current, batchEpi);
+  var removed = 0;
+  for (var k = 0; k < stale.length; k++) { try { await setStatus(env, session, stale[k], "cancelled", actor || "import:reconcile"); removed++; } catch (e) {} }
+  return { imported: imported, skipped: (rows || []).length - imported, removed: removed };
 }
