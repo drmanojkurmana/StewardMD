@@ -56,6 +56,8 @@ OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gma
 # The owner can override this live from the AI Control Center console (KV ai:abuse:threshold, no
 # redeploy); this env value is the fallback when no KV override is set.
 AI_ABUSE_REQ_THRESHOLD = "150"
+# Smart OPD Queue backend switch (dev/testing). PUBLIC-RELEASE-GATE: set "0" before public/store release.
+QUEUE_ENABLED = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -64,6 +66,7 @@ compatibility_date = "2026-06-28"
 FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
 OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com"
+QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testing; set "0" before release
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
