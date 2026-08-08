@@ -167,14 +167,14 @@ export function parseOpdHtml(html) {
   });
   return rows;
 }
-async function getOpdPatients(env, token, sdate, debug) {
+async function getOpdPatients(env, token, sdate, debug, cb) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   // Prime the OPD dashboard context. Login fetches the IPD nurse worklist (Nurseipwlnew) for its CSRF token,
   // which leaves the GHIS session in in-patient context -> the OPD list (docopdlist) then returns an empty
   // shell. Hitting /Doctor/Home (the Out-patients dashboard the browser fires docopdlist from) resets it.
-  try { await ghisReq(env, token, 'GET', '/Doctor/Home', null, {}); } catch (e) {}
+  let home = null; try { home = await ghisReq(env, token, 'GET', '/Doctor/Home', null, {}); } catch (e) {}
   const pull = async (day) => {
-    const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: '0' });
+    const p = new URLSearchParams({ type: 'docopdlist', sdate: day, checkbox: (cb == null || cb === '') ? '0' : String(cb) });
     const r = await ghisReq(env, token, 'GET', '/Doctor/Home/DashboardUnit?' + p.toString(), null, { 'X-Requested-With': 'XMLHttpRequest' });
     if (r.unauth) return { unauth: true };
     const j = parseGhis(r.body);                             // fallback: some GHIS actions return JSON
@@ -187,7 +187,7 @@ async function getOpdPatients(env, token, sdate, debug) {
   // list. If no date was explicitly requested and today is empty, fall back one day so the active list loads.
   if (!sdate && (!res.rows || !res.rows.length)) { const y = await pull(ghisYesterday()); if (!y.unauth && y.rows && y.rows.length) res = y; }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
-  if (debug) return { _debug: true, sdate: res.day, rawLen: (res.r.body || '').length, thCount: ((res.r.body || '').match(/<th\b/gi) || []).length, trCount: ((res.r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((res.r.body || '').match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: String(res.r.body || '').slice(0, 3500) };
+  if (debug) return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: (home && home.body || '').length, docName: parseDoctorName((home && home.body) || ''), rawLen: (res.r.body || '').length, thCount: ((res.r.body || '').match(/<th\b/gi) || []).length, trCount: ((res.r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((res.r.body || '').match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: String(res.r.body || '').slice(0, 2500) };
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
 // ── patient demographics → primary contact number (for FollowCare enrollment) ───────────
@@ -539,7 +539,7 @@ export async function onRequest(context) {
     const unauth = (r) => r && r.unauth;
     if (seg === 'status')          { const s = await getSession(env, token); return json({ connected: !!s, userId: s ? s.userId : null }); }
     if (seg === 'patients')        { const r = await getPatients(env, token);        return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
-    if (seg === 'opd-patients')    { const dbg = q.get('raw') === '1'; const r = await getOpdPatients(env, token, q.get('sdate') || '', dbg); return unauth(r) ? json({ error: 'login_required' }, 401) : (dbg ? json(r) : json({ rows: r })); }
+    if (seg === 'opd-patients')    { const dbg = q.get('raw') === '1'; const r = await getOpdPatients(env, token, q.get('sdate') || '', dbg, q.get('cb') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : (dbg ? json(r) : json({ rows: r })); }
     if (seg === 'demographics')    { const r = await getDemographics(env, token, q.get('patientId') || '', q.get('recordNo') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab')             { const r = await getLabOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
