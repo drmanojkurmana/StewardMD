@@ -170,9 +170,21 @@
   }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
-  function authHeaders() { var h = { "Content-Type": "application/json" }; try { var t = G.SMD_QUEUE_AUTH && G.SMD_QUEUE_AUTH(); if (t) h.Authorization = "Bearer " + t; } catch (e) {} return h; }
-  function apiGet(path) { return fetch(API + path, { headers: authHeaders(), credentials: "include" }).then(function (r) { return r.json(); }); }
-  function apiPost(path, body) { return fetch(API + path, { method: "POST", headers: authHeaders(), credentials: "include", body: JSON.stringify(body || {}) }).then(function (r) { return r.json(); }); }
+  // Authenticate like every other module: the doctor's Firebase ID token (window.SMD_AUTH) as Bearer, so the
+  // server identify() resolves the owner. getIdToken() is async, so authHeaders() returns a Promise. A
+  // window.SMD_QUEUE_AUTH() override is still honored if some caller sets one. (Without this the queue sent NO
+  // token -> server saw a guest -> /session 'unauthorized' -> the app stuck on "Queue is being set up".)
+  function fbToken() {
+    try {
+      var ov = G.SMD_QUEUE_AUTH && G.SMD_QUEUE_AUTH(); if (ov) return Promise.resolve(ov);
+      var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser);
+      if (u && u.getIdToken) return u.getIdToken().catch(function () { return null; });
+    } catch (e) {}
+    return Promise.resolve(null);
+  }
+  function authHeaders() { return fbToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t; return h; }); }
+  function apiGet(path) { return authHeaders().then(function (h) { return fetch(API + path, { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }); }
+  function apiPost(path, body) { return authHeaders().then(function (h) { return fetch(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); }).then(function (r) { return r.json(); }); }
 
   // ---- controller -------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
@@ -218,7 +230,7 @@
   function importOpd() {
     if (!st.session) return;
     try { G.toast && G.toast("Importing today's OPD list…"); } catch (e) {}
-    fetch("/api/ghis/opd-patients", { headers: authHeaders(), credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
+    authHeaders().then(function (h) { return fetch("/api/ghis/opd-patients", { headers: h, credentials: "include" }); }).then(function (r) { return r.json(); }).then(function (r) {
       if (r && r.error === "login_required") { try { G.toast && G.toast("Connect Ward Sync (GHIS) first, then import"); } catch (e) {} return; }
       var rows = (r && r.rows) || [];
       if (!rows.length) { try { G.toast && G.toast("No OPD patients found for today"); } catch (e) {} return; }
