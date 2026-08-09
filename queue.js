@@ -110,7 +110,7 @@
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
     var doctorName = state.ghisDoctorName || (state.ghisToken && state.ghisUser ? ("Dr " + state.ghisUser) : "") || s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
-    var header = '<header class="q-top"><div class="q-top-in"><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
+    var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
       (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
       (state.ghisToken ? '<button class="q-iconbtn" data-q-act="logout" title="Sign out of GHIS">' + ms("logout") + "</button>" : "") +
@@ -231,6 +231,7 @@
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "chooser") { root().innerHTML = _chooseType(); return; }                // back to Hospital / Personal clinic
+    if (cmd === "switch") { clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
@@ -314,7 +315,7 @@
     var el = root(); el.innerHTML = _wrap('<div class="q-empty" style="padding:40px 8px">Loading hospitals…</div>');
     apiGet("/orgs").then(function (r) {
       var rows = '<button class="q-gate-btn" style="text-align:left" data-q-act="pickghis">' + ms("local_hospital") + " GITAM — GHIS<br><small style=\"opacity:.85;font-weight:400\">Hospital EMR · Ward Sync</small></button>";
-      ((r && r.orgs) || []).filter(function (o) { return o.mode === "connect"; }).forEach(function (o) {
+      ((r && r.orgs) || []).filter(function (o) { return o.mode === "connect" && o.connectorId; }).forEach(function (o) {   // only real EMR-connected hospitals (a connect org with no connector is malformed, never shown)
         rows += '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickhosp:' + esc(o.id) + '">' + ms("local_hospital") + " " + esc(o.name || "Hospital") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + " · EMR-connected</small></button>";
       });
       el.innerHTML = _wrap('<p class="q-gate-sub">Choose your hospital.</p>' + rows + '<button class="q-gate-close" data-q-act="chooser">Back</button>');
@@ -377,7 +378,7 @@
       '<button class="q-gate-btn" data-q-act="ghislogin">Sign in</button>' +
       '<div class="q-gate-or"><span>or</span></div>' +
       '<button class="q-gate-demo" data-q-act="demo">' + ms("science") + " Try with demo data</button>" +
-      '<button class="q-gate-close" data-q-act="close">Close</button>' +
+      '<button class="q-gate-close" data-q-act="chooser">‹ Back</button>' +
       (who ? '<div class="q-gate-foot">App account: ' + esc(who) + "</div>" : "") +
       "</div></div>";
   }
