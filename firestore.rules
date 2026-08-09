@@ -277,6 +277,14 @@ service cloud.firestore {
     match /q_events/{eventId}        { allow read, write: if false; }   // audit + notification timeline
     match /q_config/{doctorUid}      { allow read, write: if false; }
     match /q_stats/{doctorUid}       { allow read, write: if false; }   // ETA-learning aggregates
+    match /q_staff/{employeeId}      { allow read, write: if false; }   // staff role mapping
+    match /q_timeline/{ticketId}     { allow read, write: if false; }   // encrypted encounter timeline (PHI)
+    // OPD platform multi-tenant config (Phase 3) — server-only; isolation enforced at the API layer.
+    match /q_orgs/{orgId}            { allow read, write: if false; }
+    match /q_departments/{deptId}    { allow read, write: if false; }
+    match /q_opds/{opdId}            { allow read, write: if false; }
+    match /q_rooms/{roomId}          { allow read, write: if false; }
+    match /q_members/{memberId}      { allow read, write: if false; }
 
     // Everything else is denied.
     match /{document=**} {

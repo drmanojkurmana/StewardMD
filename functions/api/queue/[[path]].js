@@ -23,6 +23,7 @@ import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
+import * as ORG from "../../_opd_org_store.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -121,6 +122,18 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "whoami")
       return json({ ok: true, role: actor.role, caps: capsFor(actor.role), kind: actor.kind, name: actor.name, hospitalId: actor.hospitalId || "", doctors: actor.doctors || [] }, 200, request);
 
+    // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
+    if (method === "GET" && seg === "orgs")
+      return json({ ok: true, orgs: actor.kind === "firebase" ? await ORG.listOrgsForOwner(env, actor.id) : [] }, 200, request);
+    if (method === "GET" && (seg === "org" || seg === "rooms" || seg === "members")) {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId) }, 200, request);
+      if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
+      return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
+    }
+
     if (method === "GET" && seg === "session") {
       requireCap(actor.role, CAPS.QUEUE_VIEW);
       const doctorUid = (actor.kind === "firebase" && !actor.isOwner) ? actor.id : (url.searchParams.get("doctorUid") || actor.id);
@@ -200,6 +213,36 @@ export async function onRequest(context) {
         requireCap(actor.role, CAPS.STAFF_ADMIN);
         if (body.remove) { await Q.removeStaff(env, body.employeeId, actor.id); return json({ ok: true }, 200, request); }
         return json({ ok: true, staff: await Q.setStaff(env, body.employeeId, body, actor.id) }, 200, request);
+      }
+      // ---- org / rooms / members config + onboarding (Phase 3, isolation-gated) ----
+      const azOrg = async (cap, target) => ORG.authorizeOrg(env, actor, body.orgId, cap, target);
+      const deny = (az) => json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const needAccount = () => actor.kind !== "firebase";   // creating an org needs a StewardMD account (= the owner)
+      if (seg === "org" && !sub) { if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request); return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request); }
+      if (seg === "org" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, org: await ORG.updateOrg(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "dept") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, department: await ORG.createDepartment(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
+      if (seg === "room" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request); }
+      if (seg === "member") {
+        const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        if (body.remove) { await ORG.removeMembership(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
+        return json({ ok: true, member: await ORG.setMembership(env, body.orgId, body.identity, body, actor.id) }, 200, request);
+      }
+      if (seg === "onboard" && sub === "clinic") {   // private-clinic quick setup: native org + one room
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        const o = await ORG.createOrg(env, { name: body.name || "My Clinic", mode: "native" }, actor.id);
+        const r = await ORG.createRoom(env, o.id, { name: body.roomName || "Consulting Room", assignment: { mode: "primary", primary: actor.id, doctors: [actor.id] } }, actor.id);
+        return json({ ok: true, org: o, room: r }, 200, request);
+      }
+      if (seg === "onboard" && sub === "hospital") {  // EMR hospital: connect org (connector by config)
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        const o = await ORG.createOrg(env, { id: body.hospitalId || undefined, name: body.name || "Hospital", mode: "connect", connectorId: body.connectorId || null }, actor.id);
+        return json({ ok: true, org: o }, 200, request);
+      }
+      if (seg === "migrate" && sub === "backfill") {  // idempotent legacy hospitalId -> org
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
       if (seg === "ticket") { requireCap(actor.role, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
