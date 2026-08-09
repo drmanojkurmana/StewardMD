@@ -64,16 +64,15 @@ async function connectWorklist(env, tenantId, connectionId, dateStr) {
   const res = await safeFetch(url, { headers: h, redirect: "manual" });
   if (!res || !res.ok) throw new Error("fhir_worklist_" + ((res && res.status) || "err"));
   const rows = encountersToRows(await res.json());
-  // Resolve real names for rows whose Encounter had no subject.display (fetch the Patient). Bounded.
-  let looked = 0;
-  for (const r of rows) {
-    if (looked >= 20 || !/^Patient /.test(r.PatientName)) continue;
+  // Resolve real names for rows whose Encounter had no subject.display (fetch the Patient). Bounded (≤20)
+  // and PARALLEL so the first import is ~2s, not ~30s (steady-state re-imports resolve only new patients).
+  const need = rows.filter((r) => /^Patient /.test(r.PatientName)).slice(0, 20);
+  await Promise.all(need.map(async (r) => {
     try {
       const pr = await safeFetch(base + "/Patient/" + encodeURIComponent(r.PatientId), { headers: h, redirect: "manual" });
-      looked++;
-      if (pr && pr.ok) { const p = await pr.json(); const nm = fhirName(p); if (nm) r.PatientName = nm; }
+      if (pr && pr.ok) { const nm = fhirName(await pr.json()); if (nm) r.PatientName = nm; }
     } catch (e) { /* leave the fallback name */ }
-  }
+  }));
   return { rows };
 }
 
