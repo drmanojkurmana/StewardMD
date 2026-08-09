@@ -28,7 +28,7 @@ export function roomStatus(waiting, inConsult, t) {
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
-  return { id: s(o.id), code: s(o.code), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+  return { id: s(o.id), code: s(o.code), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
 }
 // Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
 const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";

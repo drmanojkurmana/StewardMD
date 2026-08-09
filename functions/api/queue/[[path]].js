@@ -28,6 +28,7 @@ import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
+import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -390,7 +391,10 @@ export async function onRequest(context) {
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
       if (seg === "import-from-source") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
-        const org = opdOrgFor(env, s.hospitalId);
+        // A stored connect org (linked to an EMR-Connect hospital) uses its own connector + linkage; a GHIS
+        // org (env-mapped hospitalId like "manual", no stored record) falls back to the env connector map.
+        const stored = await ORG.getOrg(env, s.hospitalId);
+        const org = (stored && stored.mode === "connect") ? stored : opdOrgFor(env, s.hospitalId);
         const ghisToken = request.headers.get("X-Ghis-Token") || "";
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
         return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
