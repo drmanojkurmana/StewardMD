@@ -217,11 +217,13 @@ export async function onRequest(context) {
       return json({ ok: true, session: s, tickets: await ticketView(env, tickets) }, 200, request);
     }
 
-    // Multi-doctor front-desk board: every OPD queue in the hospital for the day.
+    // Multi-doctor front-desk board (LEGACY; deprecated in favour of opd-board). Requires org
+    // OWNERSHIP/MEMBERSHIP of the hospitalId — no global-role bypass, no cross-account reads.
     if (method === "GET" && seg === "board") {
       const hospitalId = url.searchParams.get("hospitalId") || "";
       if (!hospitalId) return json({ ok: false, error: "hospital_required" }, 400, request);
-      await requireOrgOrGlobal(env, actor, hospitalId, CAPS.QUEUE_VIEW);   // org membership — no cross-tenant board reads
+      const azb = await ORG.authorizeOrg(env, actor, hospitalId, CAPS.QUEUE_VIEW);
+      if (!azb.ok) return json({ ok: false, error: azb.reason || "forbidden" }, azb.reason === "org_not_found" ? 404 : 403, request);
       const sessions = await Q.listSessions(env, hospitalId, url.searchParams.get("date") || today());
       const board = [];
       for (const s of sessions) board.push({ session: s, tickets: await ticketView(env, await Q.listTickets(env, s.id)) });

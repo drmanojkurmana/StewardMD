@@ -93,7 +93,7 @@
 (function(){
   "use strict";
   var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital", LS_TT="smd_opd_toktype";
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
@@ -168,7 +168,8 @@
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
       st.who=r; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital;
       // Owner with no clinic yet -> onboarding wizard; owner with clinics -> use the first.
-      if(r.kind==="firebase"&&r.role==="admin"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){openWizard();return;} st.orgId=list[0].id; st.hospital=list[0].id; loadDash(); }); return; }
+      // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
+      if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){openWizard();return;} st.orgId=list[0].id; st.hospital=list[0].id; st.ownsOrg=true; loadDash(); }); return; }
       loadDash();
     });
   }
@@ -176,9 +177,10 @@
   // existing doctor board (legacy path, unchanged). A single-room clinic shows just its room queue.
   function loadDash(){
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
-      if(r&&r.ok&&r.rooms&&r.rooms.length){ st.opd=r; renderNurseStation(r); }
-      else loadBoard();
-    }).catch(loadBoard);
+      if(r&&r.ok){ st.opd=r; renderNurseStation(r); return; }   // org-scoped board only; NO shared legacy board
+      if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
+      else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
+    }).catch(function(){ renderShell('<div class="empty">Could not reach the server.</div>'); });
   }
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
@@ -194,8 +196,8 @@
       '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · '+esc(st.hospital)+' · '+esc(st.date)+'</div>'+
-        (st.who&&st.who.kind==="firebase"&&st.who.role==="admin"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
-        (can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
+        (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
