@@ -8,7 +8,7 @@
  * pendingEvent() is PURE and unit-tested; the sender is thin best-effort I/O.
  */
 import I18n from "../followcare-i18n.js";
-import { sendSms } from "./_followcare_sms.js";
+import { sendSms, smsConfigured } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { decPHI, mintTicketToken } from "./_queue.js";
 import { fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
@@ -36,11 +36,15 @@ async function linkUrl(env, ticket) {
 }
 async function send(env, toE164, body, link) {
   var payload = { toE164: toE164, body: body, vars: { link: link, text: body } };
-  // Match FollowCare: use WhatsApp only when it's actually configured, else fall back to SMS.
+  // WhatsApp first (when configured); if that send fails or the patient isn't on WhatsApp, fall back to
+  // SMS (2Factor). Otherwise SMS is the primary channel.
   if (String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase() === "whatsapp" && waConfigured(env)) {
-    try { return await sendWhatsApp(env, payload); } catch (e) { return { ok: false, reason: "wa_exception" }; }
+    var wa; try { wa = await sendWhatsApp(env, payload); } catch (e) { wa = { ok: false, reason: "wa_exception" }; }
+    if (wa && wa.ok) return Object.assign({ channel: "whatsapp" }, wa);
+    if (smsConfigured(env)) return Object.assign({ channel: "sms", waFellBack: true }, await sendSms(env, payload));
+    return Object.assign({ channel: "whatsapp" }, wa);
   }
-  return sendSms(env, payload);
+  return Object.assign({ channel: "sms" }, await sendSms(env, payload));
 }
 function mask(p) { var d = String(p || "").replace(/\D/g, ""); return d.length >= 4 ? "•••••" + d.slice(-4) : "••••"; }
 async function auditNotify(env, session, ticket, event, res, masked) {

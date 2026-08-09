@@ -41,11 +41,15 @@ and `[env.production.vars]`). Remaining owner steps to actually test:
 1. **Bootstrap an admin**: set `QUEUE_STAFF_ADMIN_IDS = "<your GHIS employee id>"` (comma-separated for
    several) in `wrangler.toml` `[env.production.vars]`. Those ids sign in to the console as **admin** and
    can map everyone else from the **Staff** button — no curl needed. (Un-mapped logins are read-only.)
-2. **WhatsApp creds** (the link send is inert until these are set): `FOLLOWCARE_WA_PROVIDER` +
-   its creds. Quick personal test = `callmebot` + `CALLMEBOT_APIKEY` (sends to a number that authorised
-   the CallMeBot bot). Production = a real BSP via `custom` (`FOLLOWCARE_WA_URL` + `FOLLOWCARE_WA_BODY`).
-   Set these the way you set your other Pages env. SMS via 2Factor is the next wiring (flip
-   `FOLLOWCARE_MSG_CHANNEL="sms"`).
+2. **Messaging creds.** Channel = `FOLLOWCARE_MSG_CHANNEL="whatsapp"` (already set): **WhatsApp first,
+   automatic SMS (2Factor) fallback** when WA fails or the patient isn't on WhatsApp.
+   - WhatsApp: `FOLLOWCARE_WA_PROVIDER` + creds. Personal test = `callmebot` + `CALLMEBOT_APIKEY`;
+     production = a BSP via `custom` (`FOLLOWCARE_WA_URL` + `FOLLOWCARE_WA_BODY`).
+   - SMS fallback: `FOLLOWCARE_SMS_PROVIDER="twofactor"` + `TWOFACTOR_API_KEY` + `TWOFACTOR_SENDER` +
+     `TWOFACTOR_TEMPLATE_CHECKIN` (a DLT-approved transactional template; the link is sent as VAR2).
+   - Set either/both the way you set your other Pages secrets. Each fails safe if unset (the send is a
+     no-op; checkout still shows the link to share manually). To make SMS the *primary* channel later,
+     flip `FOLLOWCARE_MSG_CHANNEL="sms"`.
 3. **Hospital id must match** the doctor app's sessions (it defaults to `hospitalId="manual"`). Use the
    same value in the console's hospital field, each staff record, and — ideally — set the doctor app to
    pass a real hospital id. Otherwise the board finds no queues.
