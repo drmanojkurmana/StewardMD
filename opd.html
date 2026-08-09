@@ -404,9 +404,9 @@
   function openNotes(sid,tid,name){
     open('<h3>Clinical notes'+(name?' — '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
     sheet.querySelector("#cx").onclick=close;
-    api("timeline?sessionId="+encodeURIComponent(sid)+"&ticketId="+encodeURIComponent(tid)).then(function(r){
+    var show=function(r){
       var el=sheet.querySelector("#nd"); if(!el) return;
-      if(!r||!r.ok){ el.innerHTML='<div class="empty">'+((r&&(r.error==="forbidden"||r&&r.error==="out_of_scope"))?"You don't have permission to view these notes.":"Could not load the notes.")+'</div>'; return; }
+      if(!r||!r.ok){ el.innerHTML='<div class="empty">'+((r&&(r.error==="forbidden"||r.error==="out_of_scope"))?"You don't have permission to view these notes.":"Could not load the notes.")+'</div>'; return; }
       var tl=r.timeline||{}, entries=tl.entries||[];
       if(!entries.length){ el.innerHTML='<div class="empty">No clinical notes recorded for this visit yet.</div>'; return; }
       el.innerHTML=entries.map(function(e){
@@ -414,7 +414,14 @@
         return '<div class="ev"><div><b>'+esc(NOTE_KIND[e.kind]||e.kind||"Note")+'</b> <span class="t">'+when+(e.by?" · "+esc(e.by):"")+'</span></div><div style="white-space:pre-wrap;margin-top:2px">'+esc(e.text||"")+'</div></div>';
       }).join("");
       var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=false; dl.onclick=function(){ downloadNotes(name,tl); }; }
-    });
+    };
+    if(st.orgId==="demo"){ var n=Date.now(); show({ok:true,timeline:{mrnLast4:"4821",entries:[
+      {ts:n-40*60000,kind:"vitals",by:"Sister Anu",text:"BP 128/82 · Temp 98.4°F · SpO2 98% · Pulse 78/min"},
+      {ts:n-32*60000,kind:"assessment",by:"Dr Manoj",text:"C/o epigastric pain 3 days, worse after meals. No alarm features. Likely GERD."},
+      {ts:n-30*60000,kind:"order",by:"Dr Manoj",text:"CBC, LFT, USG abdomen"},
+      {ts:n-28*60000,kind:"meds",by:"Dr Manoj",text:"Pantoprazole 40mg OD x 2 weeks; antacid syrup PRN"}
+    ]}}); return; }
+    api("timeline?sessionId="+encodeURIComponent(sid)+"&ticketId="+encodeURIComponent(tid)).then(show);
   }
   // Save the notes locally as a plain-text file (no PHI ever leaves via a URL/log — a local Blob download).
   function downloadNotes(name,tl){
@@ -672,7 +679,7 @@
 
   // Preview mode (?mock=1): render the central-routing control with sample data — no auth/network.
   if(new URLSearchParams(location.search||"").get("mock")==="1"){
-    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
     var nm=Date.now();
     renderNurseStation({mode:"native",rooms:[
       {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[
