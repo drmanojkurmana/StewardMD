@@ -37,6 +37,8 @@ export function encodeValue(v) {
   if (v === null || v === undefined) return { nullValue: null };
   if (typeof v === "boolean") return { booleanValue: v };
   if (typeof v === "number") return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v };
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(encodeValue) } };
+  if (typeof v === "object") return { mapValue: { fields: encodeFields(v) } };   // nested object -> Firestore map
   return { stringValue: String(v) };
 }
 export function encodeFields(obj) {
@@ -52,6 +54,8 @@ export function decodeValue(v) {
   if ("booleanValue" in v) return v.booleanValue;
   if ("nullValue" in v) return null;
   if ("timestampValue" in v) return v.timestampValue;
+  if ("arrayValue" in v) return ((v.arrayValue && v.arrayValue.values) || []).map(decodeValue);
+  if ("mapValue" in v) return decodeFields((v.mapValue && v.mapValue.fields) || {});   // Firestore map -> nested object
   return null;
 }
 export function decodeFields(fields) {
