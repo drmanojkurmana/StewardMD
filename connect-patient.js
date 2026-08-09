@@ -278,7 +278,7 @@
       // GHIS (GITAM/GIMSR) is a hospital like any other -- list it alongside the Connect-onboarded ones
       // whenever the doctor has a live GHIS session with a loaded ward list (its roster shape matches).
       var opts = [];
-      if (ghisReady()) opts.push({ id: "__ghis__", name: "GIMSR · GHIS" });
+      if (ghisAvailable()) opts.push({ id: "__ghis__", name: "GIMSR · GHIS" });   // always listed; sign-in prompted on pick if no session
       (ts || []).forEach(function (t) { opts.push({ id: t.tenantId, name: t.name || t.tenantId }); });
       if (!opts.length) { sel.innerHTML = '<option value="">No connected hospital</option>'; list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Connect a hospital (Connect EMR), or sign in to GHIS from Ward Sync, first.</div>'; return; }
       sel.innerHTML = opts.map(function (o) { return '<option value="' + esc(o.id) + '">' + esc(o.name) + '</option>'; }).join("");
@@ -352,6 +352,14 @@
       if (!id) { list.innerHTML = ""; return; }
       list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Loading ward list...</div>';
       if (id === "__ghis__") {   // GHIS: reuse its already-loaded roster + its own no-navigate add / full open
+        if (!ghisReady()) {   // no live GHIS session (or roster not loaded yet) -> send them to the GHIS sign-in
+          var connd = false; try { connd = !!(window.GHIS && GHIS.isConnected && GHIS.isConnected()); } catch (e) {}
+          list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0 12px">' +
+            (connd ? "Open Ward Sync to load today’s GIMSR ward list." : "Sign in to GHIS (your GITAM login) to load the GIMSR ward list here.") + '</div>' +
+            '<button id="cptrGhisSignin" style="width:100%;background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:10px;padding:12px;font-weight:800;font-size:14px;cursor:pointer">' + (connd ? "Open Ward Sync" : "Sign in to GHIS") + '</button>';
+          var gb = document.getElementById("cptrGhisSignin"); if (gb) gb.onclick = function () { closeRoster(); try { if (window.openGHIS) openGHIS(); } catch (e) {} };
+          return;
+        }
         renderRows(window.GHIS.getPatients(), {
           add: function (p) { try { window.GHIS.addToDashboard(p.episodeId, p.patientId, p.patientFirstName); } catch (e) {} return true; },
           view: function (p) { try { window.GHIS.loadIntoICU(p.patientId); } catch (e) {} },
@@ -371,7 +379,9 @@
       }).catch(function () { list.innerHTML = '<div style="font-size:12.5px;color:#e5484d;padding:8px 0">Network error loading the ward list.</div>'; });
     }
   }
-  // True when GHIS has a live session with a loaded ward list (so it can be listed + admitted like any hospital).
+  // The GHIS/GITAM ward integration is present at all (module loaded) -> always list GIMSR as a hospital;
+  // ghisReady() adds the stronger condition that there's a live session with a loaded ward list.
+  function ghisAvailable() { try { return !!(window.GHIS && GHIS.isConnected); } catch (e) { return false; } }
   function ghisReady() { try { return !!(window.GHIS && GHIS.isConnected && GHIS.isConnected() && GHIS.getPatients && GHIS.getPatients().length); } catch (e) { return false; } }
 
   // Called by the ICU Admit action. If the doctor has connected hospitals, offer a choice; otherwise fall
@@ -380,7 +390,7 @@
     var blank = (typeof onBlank === "function") ? onBlank : function () {};
     if (!flagOn() || !C()) { blank(); return; }
     C().tenants().then(function (ts) {
-      if ((!ts || !ts.length) && !ghisReady()) { blank(); return; }   // no connected hospital AND no GHIS -> identical to today's behavior
+      if ((!ts || !ts.length) && !ghisAvailable()) { blank(); return; }   // no connected hospital AND no GHIS integration -> identical to today's behavior
       var ov = document.createElement("div"); ov.id = "cptAdmitChooser";
       ov.style.cssText = "position:fixed;inset:0;z-index:100001;background:rgba(3,7,12,.55);display:flex;align-items:flex-end;font-family:var(--hfont,-apple-system,sans-serif)";
       ov.innerHTML =
