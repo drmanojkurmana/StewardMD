@@ -136,7 +136,7 @@
   function close() { var o = document.getElementById("smdConnectPtOverlay"); if (o && o.parentNode) o.parentNode.removeChild(o); }
   function msg(k, t) { var m = document.getElementById("cptMsg"); if (m) { m.textContent = t || ""; m.style.color = k === "err" ? "#e5484d" : k === "warn" ? "#d9a441" : "var(--slate,#9bb0c2)"; } }
 
-  function open(preTenant, prePatient) {
+  function open(preTenant, prePatient, preConn) {
     if (!flagOn()) { tt("Connect EMR is off."); return; }
     close();
     var ov = document.createElement("div"); ov.id = "smdConnectPtOverlay";
@@ -171,7 +171,7 @@
       var last = loadLast();   // P3: re-select the last-used hospital + patient so re-opening is instant
       if (last) { if (last.tenantId && ts.some(function (t) { return t.tenantId === last.tenantId; })) sel.value = last.tenantId; var rf = document.getElementById("cptRef"); if (rf && last.patientRef) rf.value = last.patientRef; }
       if (preTenant && ts.some(function (t) { return t.tenantId === preTenant; })) sel.value = preTenant;   // launched from Ward Sync with a chosen hospital
-      if (prePatient) { var rf2 = document.getElementById("cptRef"); if (rf2) rf2.value = prePatient; doPull(); }   // Ward Sync roster tap: auto-pull this patient into ICU
+      if (prePatient) { var rf2 = document.getElementById("cptRef"); if (rf2) rf2.value = prePatient; doPull(preConn); }   // Ward Sync roster tap: auto-pull this patient into ICU (via the roster's exact connection)
     });
     document.getElementById("cptPull").onclick = doPull;
     document.getElementById("cptRef").addEventListener("keydown", function (e) { if (e.key === "Enter") doPull(); });
@@ -202,13 +202,14 @@
     }).catch(function () { if (box) box.innerHTML = '<div style="font-size:12.5px;color:#e5484d">Search error.</div>'; });
   }
 
-  function doPull() {
+  function doPull(connId) {
+    connId = (typeof connId === "string") ? connId : "";   // onclick passes an Event; only a roster auto-pull passes the connectionId string
     var tid = (document.getElementById("cptTenant") || {}).value, ref = ((document.getElementById("cptRef") || {}).value || "").trim();
     if (!tid) { msg("err", "Pick a hospital."); return; }
     if (!ref) { msg("err", "Enter a patient reference."); return; }
     if (!C()) { msg("err", "Connect is unavailable."); return; }
     var btn = document.getElementById("cptPull"); if (btn) btn.disabled = true; msg("", "Pulling...");
-    C().pullContext({ tenantId: tid, patientRef: ref }).then(function (r) {
+    C().pullContext({ tenantId: tid, patientRef: ref, connectionId: connId || undefined }).then(function (r) {
       if (btn) btn.disabled = false;
       if (!r || !r.ok) { msg("err", "Could not pull: " + ((r && r.error) || "failed")); return; }
       saveLast(tid, ref);

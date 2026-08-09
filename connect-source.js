@@ -36,25 +36,37 @@
   }
 
   // Pull one patient's normalized SCCM bundle from a connected EMR.
-  // opts: { tenantId, patientRef, scope?, connectorId? } -> Promise<{ ok:true, bundle } | { error:<code> }>
+  // opts: { tenantId, patientRef, scope?, connectorId?, connectionId? } -> Promise<{ ok:true, bundle } | { error:<code> }>
+  // A REAL connected hospital (onboard wizard) uses the real-host pull route /onboard/pull/:id -- the Phase-0
+  // /context endpoint is sandbox-locked (host allow-list) and cannot reach hosts like hapi.fhir.org. So we
+  // prefer the tenant's onboard FHIR connection when it has one, and fall back to /context for sandbox tenants.
+  function pullViaOnboard(t, tenantId, connectionId, patientRef) {
+    return fetch(apiBase() + "/api/connect/onboard/pull/" + encodeURIComponent(connectionId), {
+      method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+      body: JSON.stringify({ tenantId: tenantId, patientId: patientRef }),
+    }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); })
+      .then(function (x) { return (x.s === 200 && x.d && x.d.ok) ? { ok: true, bundle: x.d.bundle } : { error: (x.d && x.d.error) || ("http-" + x.s) }; })
+      .catch(function () { return { error: "network" }; });
+  }
+  function pullViaContext(t, opts) {
+    var body = { tenantId: opts.tenantId, patientRef: opts.patientRef, scope: opts.scope || DEFAULT_SCOPE, connectorId: opts.connectorId || "fhir-r4" };
+    return fetch(apiBase() + "/api/connect/context", {
+      method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+      body: JSON.stringify(body),
+    }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); })
+      .then(function (x) { return (x.s === 200 && x.d && x.d.ok) ? { ok: true, bundle: x.d.bundle } : { error: (x.d && x.d.error) || ("http-" + x.s) }; })
+      .catch(function () { return { error: "network" }; });
+  }
   function pullContext(opts) {
     opts = opts || {};
     if (!opts.tenantId || !opts.patientRef) return Promise.resolve({ error: "tenant-and-patient-required" });
     return token().then(function (t) {
       if (!t) return { error: "not-signed-in" };
-      var body = {
-        tenantId: opts.tenantId, patientRef: opts.patientRef,
-        scope: opts.scope || DEFAULT_SCOPE, connectorId: opts.connectorId || "fhir-r4",
-      };
-      return fetch(apiBase() + "/api/connect/context", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
-        body: JSON.stringify(body),
-      }).then(function (r) {
-        return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; });
-      }).then(function (x) {
-        return (x.s === 200 && x.d && x.d.ok) ? { ok: true, bundle: x.d.bundle } : { error: (x.d && x.d.error) || ("http-" + x.s) };
-      }).catch(function () { return { error: "network" }; });
+      if (opts.connectionId) return pullViaOnboard(t, opts.tenantId, opts.connectionId, opts.patientRef);   // caller already knows the connection (roster tap)
+      return connections(opts.tenantId).then(function (cons) {
+        var fhir = (cons || []).filter(function (c) { return c && c.connectionId; })[0];
+        return fhir ? pullViaOnboard(t, opts.tenantId, fhir.connectionId, opts.patientRef) : pullViaContext(t, opts);
+      });
     });
   }
 
