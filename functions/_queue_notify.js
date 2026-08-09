@@ -9,7 +9,7 @@
  */
 import I18n from "../followcare-i18n.js";
 import { sendSms } from "./_followcare_sms.js";
-import { sendWhatsApp } from "./_followcare_whatsapp.js";
+import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { decPHI, mintTicketToken } from "./_queue.js";
 import { fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 
@@ -36,7 +36,8 @@ async function linkUrl(env, ticket) {
 }
 async function send(env, toE164, body, link) {
   var payload = { toE164: toE164, body: body, vars: { link: link, text: body } };
-  if (String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase() === "whatsapp") {
+  // Match FollowCare: use WhatsApp only when it's actually configured, else fall back to SMS.
+  if (String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase() === "whatsapp" && waConfigured(env)) {
     try { return await sendWhatsApp(env, payload); } catch (e) { return { ok: false, reason: "wa_exception" }; }
   }
   return sendSms(env, payload);
@@ -46,6 +47,20 @@ async function auditNotify(env, session, ticket, event, res, masked) {
   var id = crypto.randomUUID().replace(/-/g, "");
   var f = { ts: Date.now(), hospitalId: session.hospitalId || "", ticketId: ticket.id, actor: "system", action: "notify:" + event, meta: (res.ok ? "sent " : res.skipped ? "skipped " : "failed ") + masked };
   try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}
+}
+
+// Send the sealed visit-timeline link to the patient at checkout (channel = FOLLOWCARE_MSG_CHANNEL,
+// WhatsApp for now). Best-effort; skips silently when the ticket has no mobile yet.
+export async function notifyTimeline(env, session, ticket, url) {
+  var mobile = "";
+  try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
+  if (!mobile) return { skipped: true, reason: "no_phone" };
+  var doctor = session.doctorName || "your doctor";
+  var body = "Your visit summary from " + doctor + " is ready. View it here (private link, valid 7 days): " + url;
+  var res;
+  try { res = await send(env, mobile, body, url); } catch (e) { res = { ok: false, reason: "exception" }; }
+  await auditNotify(env, session, ticket, "timeline", res, mask(mobile));
+  return res;
 }
 
 // Send one event for one ticket (idempotent, best-effort — never throws to the caller).

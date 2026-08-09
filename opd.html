@@ -239,7 +239,7 @@
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
       loadBoard();
-      if(r.timelineUrl) open('<h3>Patient checked out</h3><p style="color:#64748b">Visit timeline link (valid 7 days):</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'), sheet.querySelector("#cx").onclick=close;
+      if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:#64748b">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
     });
   }
   // ---- audit drawer ----

@@ -21,6 +21,7 @@ import { ownerEmails } from "../../_adminauth.js";
 import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
+import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster } from "../../_queue_ghis.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -220,8 +221,9 @@ export async function onRequest(context) {
         const fin = await QT.finalizeCheckout(env, s, t, actor.id);
         if (t.status !== "in_consultation" && t.status !== "completed") await Q.setStatus(env, s, t.id, "in_consultation", actor.id).catch(() => {});
         await Q.setStatus(env, s, t.id, "completed", actor.id).catch(() => {});
+        let sent = null; try { sent = await notifyTimeline(env, s, t, fin.url); } catch (e) {}   // WhatsApp/SMS the link
         const tickets = await Q.callNext(env, s, actor.id);
-        return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, tickets: await ticketView(env, tickets) }, 200, request);
+        return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, sent: !!(sent && sent.ok), tickets: await ticketView(env, tickets) }, 200, request);
       }
     }
 

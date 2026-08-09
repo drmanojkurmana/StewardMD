@@ -62,6 +62,10 @@ QUEUE_ENABLED = "1"
 # client smd_opd_emr_write flag + an explicit confirm()). Prescribe stays server-hard-blocked (needs the separate
 # QUEUE_EMR_PRESCRIBE_OK) until the CreateDrugs payload is verified. PUBLIC-RELEASE-GATE: set "0" before release.
 QUEUE_EMR_WRITE = "1"
+# OPD staff platform (roles/assignment/reorder-audit/timeline/checkout). PUBLIC-RELEASE-GATE: set "0" before release.
+QUEUE_STAFF_ENABLED = "1"
+# Patient messaging channel for the queue (timeline link etc.). "whatsapp" for now; switch to "sms" (2Factor) later.
+FOLLOWCARE_MSG_CHANNEL = "whatsapp"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -72,6 +76,8 @@ AI_ABUSE_REQ_THRESHOLD = "150"
 OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com"
 QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testing; set "0" before release
 QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation orders (prescribe stays blocked). PUBLIC-RELEASE-GATE
+QUEUE_STAFF_ENABLED = "1"   # OPD staff platform on for dev/testing. PUBLIC-RELEASE-GATE: set "0" before release
+FOLLOWCARE_MSG_CHANNEL = "whatsapp"   # queue patient messages via WhatsApp for now; switch to "sms" (2Factor) later
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
