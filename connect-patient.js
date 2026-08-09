@@ -265,12 +265,14 @@
         '<b style="flex:1;font-size:15px">Admit from a connected hospital</b></div>' +
       '<div style="padding:14px 14px 6px">' +
         '<label style="font-size:12px;font-weight:700">Hospital</label>' +
-        '<select id="cptrTenant" style="width:100%;margin:5px 0 6px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)"></select>' +
-        '<div style="font-size:12px;color:var(--slate,#9bb0c2)">Tap a patient to pull their record and admit them into the ICU.</div></div>' +
+        '<select id="cptrTenant" style="width:100%;margin:5px 0 8px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)"></select>' +
+        '<div id="cptrUnit" style="display:flex;align-items:center;margin:0 0 8px"></div>' +   // Adding to [ICU unit / ward ▾] -- destination, freely interchangeable
+        '<div style="font-size:12px;color:var(--slate,#9bb0c2)">Tap <b>Add</b> to admit into the unit above (add several). Tap a name to open the full record.</div></div>' +
       '<div id="cptrList" style="padding:8px 14px 14px;overflow:auto;flex:1"></div>';
     document.body.appendChild(ov);
     document.getElementById("cptrBack").onclick = closeRoster;
     var sel = document.getElementById("cptrTenant"), list = document.getElementById("cptrList");
+    renderUnitBar();
     sel.innerHTML = '<option value="">Loading your hospitals...</option>';
     C().tenants().then(function (ts) {
       // GHIS (GITAM/GIMSR) is a hospital like any other -- list it alongside the Connect-onboarded ones
@@ -283,27 +285,77 @@
       sel.onchange = function () { loadRoster(sel.value); };
       loadRoster(sel.value);
     });
-    // One row renderer for every hospital -- GHIS and Connect return the same {patientId, patientFirstName,
-    // bedName, employeeFirstName, deptDescription, gender, dob} shape. pick(row) routes the admit per source.
-    function renderRows(rows, pick) {
+    // "Adding to [unit ▾]" -- the destination ICU unit OR ward, freely switchable (reuses the dashboard's own
+    // unit registry, so ICU units and wards are interchangeable here). Mirrors the GHIS ward "Adding to" bar.
+    function renderUnitBar() {
+      var bar = document.getElementById("cptrUnit"); if (!bar) return;   // overlay closed -> stale callback no-ops
+      if (!(window.ICU && ICU.unitList)) { bar.style.display = "none"; return; }
+      var units = []; try { units = (ICU.ensureUnits ? ICU.ensureUnits(renderUnitBar) : ICU.unitList()) || []; } catch (e) {}
+      bar.style.display = "flex"; bar.style.alignItems = "center";
+      if (!units.length) {
+        bar.innerHTML = '<span style="font-size:12px;font-weight:700;color:var(--slate,#9bb0c2)">Adding to the dashboard</span>' +
+          '<button id="cptrSetup" style="margin-left:auto;background:none;border:none;color:var(--teal,#0e6e63);font-weight:700;font-size:12px;cursor:pointer">Set up a unit ›</button>';
+        var su = document.getElementById("cptrSetup"); if (su) su.onclick = function () { closeRoster(); try { if (window.ICU && ICU.openUnits) ICU.openUnits(); } catch (e) {} };
+        return;
+      }
+      var opts = units.map(function (u) { return '<option value="' + esc(u.key) + '"' + (u.active ? " selected" : "") + '>' + esc(u.label) + '</option>'; }).join("");
+      bar.innerHTML = '<span style="font-size:12px;font-weight:700;color:var(--slate,#9bb0c2);flex:0 0 auto">Adding to</span>' +
+        '<select id="cptrUnitSel" style="flex:1;min-width:0;margin-left:8px;padding:8px;border-radius:8px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);font-weight:600;font-size:13px">' + opts + '</select>';
+      var us = document.getElementById("cptrUnitSel");
+      if (us) us.onchange = function () { try { if (window.ICU && ICU.selectUnitByKey) ICU.selectUnitByKey(us.value); } catch (e) {} renderUnitBar(); };
+    }
+    var added = {};   // patientId -> true, this session (multi-add "Added" state)
+    // ctx.add(row) admits into the selected unit WITHOUT navigating (multi-add) -> Promise<bool>;
+    // ctx.view(row) closes the picker and opens the full record. Both routed per source.
+    function renderRows(rows, ctx) {
       if (!rows || !rows.length) { list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">No patients on today’s ward list.</div>'; return; }
       list.innerHTML = rows.map(function (p, i) {
         var sub = [p.bedName ? "Bed " + p.bedName : "", p.deptDescription, p.employeeFirstName].filter(Boolean).join(" · ");
-        var dem = [p.gender, p.dob].filter(Boolean).join(" · ");
-        return '<button class="cptr-hit" data-i="' + i + '" style="display:block;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:11px;padding:11px 13px;margin:6px 0;cursor:pointer">' +
-          '<div style="font-weight:700;font-size:14px">' + esc(p.patientFirstName || "(unnamed)") + '</div>' +
-          (sub ? '<div style="font-size:12px;color:var(--teal,#4ec9b8);margin-top:2px">' + esc(sub) + '</div>' : "") +
-          (dem ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2);margin-top:1px">' + esc(dem) + '</div>' : "") + '</button>';
+        var dem = [p.gender, p.dob].filter(Boolean).join(" · "), on = !!added[p.patientId];
+        return '<div style="display:flex;align-items:center;gap:10px;background:var(--panel,#111820);border:1px solid var(--line,#22303c);border-radius:11px;padding:10px 12px;margin:6px 0">' +
+          '<button class="cptr-add" data-i="' + i + '" style="flex:0 0 auto;background:' + (on ? "transparent" : "var(--teal,#0e6e63)") + ';color:' + (on ? "var(--teal,#0e6e63)" : "#fff") + ';border:' + (on ? "1px solid var(--teal,#0e6e63)" : "0") + ';border-radius:9px;padding:9px 15px;font-weight:800;font-size:13px;cursor:pointer">' + (on ? "Added" : "Add") + '</button>' +
+          '<button class="cptr-view" data-i="' + i + '" style="flex:1;min-width:0;text-align:left;background:transparent;border:0;color:var(--ink,#e8eef4);padding:0;cursor:pointer">' +
+            '<div style="font-weight:700;font-size:14px">' + esc(p.patientFirstName || "(unnamed)") + '</div>' +
+            (sub ? '<div style="font-size:12px;color:var(--teal,#4ec9b8);margin-top:2px">' + esc(sub) + '</div>' : "") +
+            (dem ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2);margin-top:1px">' + esc(dem) + '</div>' : "") + '</button>' +
+          '</div>';
       }).join("");
-      [].slice.call(list.querySelectorAll(".cptr-hit")).forEach(function (btn) {
-        btn.onclick = function () { var p = rows[+btn.getAttribute("data-i")]; if (!p) return; closeRoster(); pick(p); };
+      [].slice.call(list.querySelectorAll(".cptr-view")).forEach(function (b) {
+        b.onclick = function () { var p = rows[+b.getAttribute("data-i")]; if (!p) return; closeRoster(); ctx.view(p); };
+      });
+      [].slice.call(list.querySelectorAll(".cptr-add")).forEach(function (b) {
+        b.onclick = function () {
+          var p = rows[+b.getAttribute("data-i")]; if (!p || added[p.patientId]) return;
+          b.disabled = true; b.textContent = "Adding...";
+          Promise.resolve(ctx.add(p)).then(function (ok) {
+            b.disabled = false;
+            if (ok) { added[p.patientId] = true; b.textContent = "Added"; b.style.background = "transparent"; b.style.color = "var(--teal,#0e6e63)"; b.style.border = "1px solid var(--teal,#0e6e63)"; }
+            else { b.textContent = "Add"; }
+          });
+        };
+      });
+    }
+    // Admit a Connect (FHIR) patient into the CURRENT unit without navigating: pull -> addWardPatientToRoster.
+    function addConnect(tenantId, connectionId, p) {
+      return C().pullContext({ tenantId: tenantId, patientRef: p.patientId, connectionId: connectionId }).then(function (r) {
+        if (!r || !r.ok) { tt("Could not pull " + (p.patientFirstName || "patient") + "."); return false; }
+        var b = r.bundle || {};
+        if (p.patientFirstName && (!b.patient || !b.patient.name)) { b.patient = b.patient || {}; b.patient.name = { text: p.patientFirstName }; }
+        var dem = demographics(b); if (p.bedName) dem.bed = p.bedName;
+        if (!(window.ICU && ICU.addWardPatientToRoster)) { tt("Open the ICU dashboard and pick a unit first."); return false; }
+        return Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: p.patientId, source: "Connect EMR", labs: labRows(b) })).then(function () {
+          tt("Added " + (dem.name || "patient") + " to " + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : "the dashboard")); return true;
+        }, function () { tt("Couldn’t add — open the dashboard and choose a unit first."); return false; });
       });
     }
     function loadRoster(id) {
       if (!id) { list.innerHTML = ""; return; }
       list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Loading ward list...</div>';
-      if (id === "__ghis__") {   // GHIS: reuse its already-loaded roster + its own ICU admit path
-        renderRows(window.GHIS.getPatients(), function (p) { try { window.GHIS.loadIntoICU(p.patientId); } catch (e) {} });
+      if (id === "__ghis__") {   // GHIS: reuse its already-loaded roster + its own no-navigate add / full open
+        renderRows(window.GHIS.getPatients(), {
+          add: function (p) { try { window.GHIS.addToDashboard(p.episodeId, p.patientId, p.patientFirstName); } catch (e) {} return true; },
+          view: function (p) { try { window.GHIS.loadIntoICU(p.patientId); } catch (e) {} },
+        });
         return;
       }
       C().connections(id).then(function (cons) {
@@ -311,7 +363,10 @@
         if (!fhir) { list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">No FHIR connection on this hospital yet.</div>'; return; }
         return C().worklist({ tenantId: id, connectionId: fhir.connectionId }).then(function (r) {
           if (!r || r.error) { list.innerHTML = '<div style="font-size:12.5px;color:#e5484d;padding:8px 0">Could not load the ward list: ' + esc((r && r.error) || "error") + '</div>'; return; }
-          renderRows(r.rows || [], function (p) { open(id, p.patientId, fhir.connectionId, p.patientFirstName); });
+          renderRows(r.rows || [], {
+            add: function (p) { return addConnect(id, fhir.connectionId, p); },
+            view: function (p) { open(id, p.patientId, fhir.connectionId, p.patientFirstName); },
+          });
         });
       }).catch(function () { list.innerHTML = '<div style="font-size:12.5px;color:#e5484d;padding:8px 0">Network error loading the ward list.</div>'; });
     }
