@@ -571,6 +571,24 @@
   function close(){ scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
+  // Preview mode (?mock=1): render the central-routing control with sample data — no auth/network.
+  if(new URLSearchParams(location.search||"").get("mock")==="1"){
+    st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    var nm=Date.now();
+    renderNurseStation({mode:"native",rooms:[
+      {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[
+        {id:"t1",name:"Ramesh Kumar",mrnLast4:"4821",status:"in_consultation",priority:0,registeredAt:nm-22*60000},
+        {id:"t2",name:"Lakshmi Devi",mrnLast4:"7734",status:"called",priority:0,registeredAt:nm-14*60000},
+        {id:"t3",name:"Abdul Rahman",mrnLast4:"1902",status:"waiting",priority:2,registeredAt:nm-30*60000}]},
+      {room:{id:"r2",name:"Cardiology",number:"104",department:"Cardiology",assignment:{primary:"drB"}},doctorUid:"drB",sessionId:"s2",waiting:1,status:"normal",tickets:[
+        {id:"t4",name:"Sita Mahalakshmi",mrnLast4:"5560",status:"waiting",priority:0,registeredAt:nm-6*60000}]},
+      {room:{id:"r3",name:"Dermatology",number:"106",department:"Dermatology",assignment:{}},doctorUid:null,sessionId:null,waiting:0,status:"unavailable",tickets:[]}],
+      pool:[
+        {id:"p1",name:"John Peter",mrnLast4:"3341",department:"Cardiology",priority:0,registeredAt:nm-4*60000},
+        {id:"p2",name:"Fatima Begum",mrnLast4:"9021",department:"General",priority:2,registeredAt:nm-18*60000},
+        {id:"p3",name:"Vikram Rao",mrnLast4:"6655",department:"Dermatology",priority:0,registeredAt:nm-2*60000}]});
+    return;
+  }
   // Entry: a StewardMD account (Firebase) persists in the SDK; wait for it. Staff sessions use the stored token.
   if(st.tokType==="firebase"){ var a=fbAuth(); if(a){ a.onAuthStateChanged(function(u){ u?boot():renderLogin(); }); } else renderLogin("Account sign-in unavailable. Use PIN or email."); }
   else if(st.tok) boot(); else renderLogin();
