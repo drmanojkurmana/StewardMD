@@ -64,6 +64,9 @@ QUEUE_ENABLED = "1"
 QUEUE_EMR_WRITE = "1"
 # OPD staff platform (roles/assignment/reorder-audit/timeline/checkout). PUBLIC-RELEASE-GATE: set "0" before release.
 QUEUE_STAFF_ENABLED = "1"
+# GHIS employee ids that get admin in the OPD console (so they can map staff -> roles). TESTING BOOTSTRAP
+# = the account currently used for testing. PUBLIC-RELEASE-GATE: replace with the real admin id(s) / empty before release.
+QUEUE_STAFF_ADMIN_IDS = "502862"
 # Patient messaging channel for the queue (timeline link etc.). "whatsapp" for now; switch to "sms" (2Factor) later.
 FOLLOWCARE_MSG_CHANNEL = "whatsapp"
 
@@ -77,6 +80,7 @@ OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gma
 QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testing; set "0" before release
 QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation orders (prescribe stays blocked). PUBLIC-RELEASE-GATE
 QUEUE_STAFF_ENABLED = "1"   # OPD staff platform on for dev/testing. PUBLIC-RELEASE-GATE: set "0" before release
+QUEUE_STAFF_ADMIN_IDS = "502862"   # TESTING BOOTSTRAP admin (GHIS id). PUBLIC-RELEASE-GATE: real admin id(s)/empty before release
 FOLLOWCARE_MSG_CHANNEL = "whatsapp"   # queue patient messages via WhatsApp for now; switch to "sms" (2Factor) later
 
 [[env.production.kv_namespaces]]
