@@ -1,7 +1,7 @@
 // test/queue-eta.test.mjs — pure queue logic: state machine, ordering, ETA, learning.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { canTransition, isTerminal, orderQueue, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
+import { canTransition, isTerminal, orderQueue, orderRoomView, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
 
 test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("registered", "waiting"), true);
@@ -53,6 +53,25 @@ test("reorderSeq: move-to-#1 / down / no-op, and the persisted seq re-sorts the 
   // No-op / invalid moves return null.
   assert.equal(reorderSeq(orderQueue(q), "a", orderQueue(q).findIndex((t) => t.id === "a")), null);
   assert.equal(reorderSeq(ordered, "zzz", 0), null);
+});
+
+test("orderRoomView: in-consultation pinned on top, then priority+seq order (the nurse room board)", () => {
+  // Regression: the OPD room board returned tickets in raw store order, so priority bumps and manual
+  // moves never reordered what the nurse saw. orderRoomView is what the board must apply.
+  const t = [
+    { id: "q1", status: "waiting", priority: 0, registeredAt: 100 },
+    { id: "consulting", status: "in_consultation", priority: 0, registeredAt: 50 },
+    { id: "urgent", status: "registered", priority: 2, registeredAt: 300 },
+    { id: "q2", status: "called", priority: 0, registeredAt: 200 },
+  ];
+  // in_consultation first, then priority-2 urgent, then the rest by arrival.
+  assert.deepEqual(orderRoomView(t).map((x) => x.id), ["consulting", "urgent", "q1", "q2"]);
+  // A manual move (seq) reorders within the waiting band without disturbing the pinned consult.
+  t.find((x) => x.id === "q2").seq = 1;   // move q2 ahead of q1
+  assert.deepEqual(orderRoomView(t).map((x) => x.id), ["consulting", "urgent", "q2", "q1"]);
+  // Empty / null safe.
+  assert.deepEqual(orderRoomView([]), []);
+  assert.deepEqual(orderRoomView(null), []);
 });
 
 test("concurrency: two independent moves computed against the same order never corrupt the queue", () => {

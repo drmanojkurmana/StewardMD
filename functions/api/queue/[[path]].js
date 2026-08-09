@@ -25,6 +25,7 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { resolveRoomDoctor, roomStatus } from "../../_opd_org.js";
+import { orderQueue, orderRoomView } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
@@ -111,11 +112,11 @@ async function boardForOrg(env, org, date) {
     const waiting = tickets.filter((t) => WAITING.indexOf(t.status) > -1).length;
     const inConsult = tickets.some((t) => t.status === "in_consultation");
     out.push({ room: rm, doctorUid: doctorUid || null, sessionId: sess ? sess.id : null, waiting: waiting,
-      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, tickets) });
+      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, orderRoomView(tickets)) });
   }
   const pool = await Q.getOrCreatePoolSession(env, org, date);
   const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
-  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, poolTickets), poolSessionId: pool.id };
+  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, orderQueue(poolTickets)), poolSessionId: pool.id };
 }
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.

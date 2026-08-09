@@ -38,6 +38,12 @@ export function orderQueue(tickets) {
     .filter((t) => isQueued(t.status))
     .sort((a, b) => (b.priority || 0) - (a.priority || 0) || seqKey(a) - seqKey(b));
 }
+// A room's display order: the patient in consultation pinned on top (▶), then the waiting queue in true
+// order. orderQueue alone drops in_consultation, so the nurse board needs this to show reorders/priority.
+export function orderRoomView(tickets) {
+  const t = tickets || [];
+  return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
+}
 
 // PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered
 // queue. Returns { seq } to persist, or null for a no-op/invalid move. Midpoint indexing => only the
