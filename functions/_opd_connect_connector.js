@@ -37,6 +37,15 @@ export function encountersToRows(bundle) {
   return out;
 }
 
+// A display name from a FHIR R4 Patient resource: prefer name.text, else given + family.
+export function fhirName(p) {
+  const n = ((p && p.name) || [])[0] || {};
+  if (n.text) return String(n.text).trim();
+  const given = Array.isArray(n.given) ? n.given.join(" ") : (n.given || "");
+  const full = (given + " " + (n.family || "")).trim();
+  return full || "";
+}
+
 // Load a stored Connect FHIR connection and pull today's OPD Encounters as worklist rows. Throws on any
 // problem (missing binding/key, non-FHIR connection, bad URL, FHIR error) — the caller degrades to native.
 async function connectWorklist(env, tenantId, connectionId, dateStr) {
@@ -50,10 +59,22 @@ async function connectWorklist(env, tenantId, connectionId, dateStr) {
   const bearer = (await resolveAuth({ fetch: fetch, now: () => new Date() }, base, config, creds)).bearer;
   const safeFetch = makeSafeFetch(fetch);
   const today = /^\d{4}-\d{2}-\d{2}$/.test(dateStr || "") ? dateStr : new Date().toISOString().slice(0, 10);
+  const h = { Authorization: "Bearer " + bearer, Accept: "application/fhir+json" };
   const url = base + "/Encounter?date=ge" + today + "&_count=50";
-  const res = await safeFetch(url, { headers: { Authorization: "Bearer " + bearer, Accept: "application/fhir+json" }, redirect: "manual" });
+  const res = await safeFetch(url, { headers: h, redirect: "manual" });
   if (!res || !res.ok) throw new Error("fhir_worklist_" + ((res && res.status) || "err"));
-  return { rows: encountersToRows(await res.json()) };
+  const rows = encountersToRows(await res.json());
+  // Resolve real names for rows whose Encounter had no subject.display (fetch the Patient). Bounded.
+  let looked = 0;
+  for (const r of rows) {
+    if (looked >= 20 || !/^Patient /.test(r.PatientName)) continue;
+    try {
+      const pr = await safeFetch(base + "/Patient/" + encodeURIComponent(r.PatientId), { headers: h, redirect: "manual" });
+      looked++;
+      if (pr && pr.ok) { const p = await pr.json(); const nm = fhirName(p); if (nm) r.PatientName = nm; }
+    } catch (e) { /* leave the fallback name */ }
+  }
+  return { rows };
 }
 
 export function connectOpdConnector(env, org) {
