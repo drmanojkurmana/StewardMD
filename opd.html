@@ -143,7 +143,7 @@
     var form="";
     if(method==="account") form='<p>Clinic owner or doctor — your StewardMD account.</p><button class="btn" id="fbG" style="margin-top:0">Sign in with Google</button><div style="text-align:center;color:#94a3b8;margin:12px 0;font-size:12px">or email + password</div><input id="fe" placeholder="Email" autocomplete="username" style="margin-bottom:8px"><input id="fp" type="password" placeholder="Password" autocomplete="current-password"><button class="btn" id="fbE">Sign in</button>';
     else if(method==="staff") form='<p>Front-desk / clinic staff sign-in.</p><label>Clinic code</label><input id="sorg" value="'+esc(st.orgCode||"")+'" placeholder="SMD-XXXXXX"><label>Staff ID or email</label><input id="sid" autocomplete="username"><label>PIN or password</label><input id="spw" type="password" autocomplete="current-password"><button class="btn" id="goStaff">Unlock</button><div style="margin-top:10px;color:#94a3b8;font-size:12px">Use your <b>clinic code + staff ID + PIN</b>, or just your <b>email + password</b> (works from any device).</div>';
-    else form='<p>GITAM staff — GHIS employee ID (optional; not required for other clinics).</p><label>Employee ID</label><input id="uid" inputmode="numeric" autocomplete="username"><label>Password</label><input id="pwd" type="password" autocomplete="current-password"><label>Hospital code</label><input id="hosp" value="'+esc(st.hospital)+'"><button class="btn" id="go">Sign in</button>';
+    else form='<p>GITAM (GIMSR) staff — sign in with your GHIS employee ID. This is the GITAM hospital queue.</p><label>Employee ID</label><input id="uid" inputmode="numeric" autocomplete="username"><label>Password</label><input id="pwd" type="password" autocomplete="current-password"><button class="btn" id="go">Sign in</button>';
     app.innerHTML='<div class="login"><h1>StewardMD <span style="color:#0f766e">OPD</span></h1><div class="ltabs">'+tabs+'</div>'+form+'<div class="err" id="err">'+esc(msg||"")+'</div></div>';
     Array.prototype.forEach.call(app.querySelectorAll(".lt"),function(b){b.onclick=function(){renderLogin(null,b.getAttribute("data-m"));};});
     var $=function(id){return document.getElementById(id);};
@@ -169,7 +169,7 @@
     }).catch(function(){err("Could not reach the server.");});
   }
   function doGhisLogin(){
-    var uid=document.getElementById("uid").value.trim(), pwd=document.getElementById("pwd").value, hosp=document.getElementById("hosp").value.trim()||"manual";
+    var uid=document.getElementById("uid").value.trim(), pwd=document.getElementById("pwd").value, hosp="manual";   // GITAM (GHIS) is the hospital — no code to type
     if(!uid||!pwd){err("Enter your employee ID and password.");return;} err("Signing in…");
     fetch("/api/ghis/staff-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({userId:uid,password:pwd})}).then(function(r){return r.json();}).then(function(r){
       if(!r||!r.token){ err(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(r&&r.error==="bad_credentials"?"Wrong employee ID or password.":"Sign-in failed.")); return; }

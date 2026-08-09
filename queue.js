@@ -240,6 +240,7 @@
     if (cmd === "pickclinic") { startClinic(arg); return; }                             // a personal clinic
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
@@ -318,6 +319,7 @@
       ((r && r.orgs) || []).filter(function (o) { return o.mode === "connect" && o.connectorId; }).forEach(function (o) {   // only real EMR-connected hospitals (a connect org with no connector is malformed, never shown)
         rows += '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickhosp:' + esc(o.id) + '">' + ms("local_hospital") + " " + esc(o.name || "Hospital") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + " · EMR-connected</small></button>";
       });
+      rows += '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="addhosp">' + ms("add_business") + " Add hospital (Connect EMR)</button>";
       el.innerHTML = _wrap('<p class="q-gate-sub">Choose your hospital.</p>' + rows + '<button class="q-gate-close" data-q-act="chooser">Back</button>');
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
   }
