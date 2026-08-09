@@ -413,7 +413,7 @@
     var wall=rooms.length? rooms.map(function(rm){ var s={id:rm.sessionId}, tickets=rm.tickets||[];
       var q=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty" style="padding:18px 8px">'+(rm.doctorUid?"No patients":"No doctor — set one in Rooms")+'</div>';
       var pd=(rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid||"";
-      var doc=rm.doctorUid?("Dr "+esc(pd.length>16?pd.slice(0,8):pd)):"No doctor";
+      var doc=rm.doctorUid?(docLabel(pd,rm.doctorName)||"Doctor"):"No doctor";
       return '<div class="rcard '+esc(rm.status)+'"><h3>'+esc(rm.room.name||"Room")+(rm.room.number?" · "+esc(rm.room.number):"")+'<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h3>'+
         '<div class="docline"><span class="dot2'+(rm.doctorUid?" on":"")+'"></span>'+esc(doc)+' · '+rm.waiting+' waiting'+(rm.room.department?" · "+esc(rm.room.department):"")+'</div>'+
         '<div class="rows">'+q+'</div>'+
@@ -475,12 +475,24 @@
   // ---- ROOMS EDITOR (owner/admin): add rooms + assign/rotate doctors ----
   var ASSIGN_MODES=[["primary","One doctor"],["rotating","Rotating (multiple)"],["unassigned","No doctor (unassigned)"]];
   function meUid(){ try{ var a=fbAuth(); return (a&&a.currentUser&&a.currentUser.uid)||""; }catch(e){ return ""; } }
+  function meName(){ try{ var u=fbAuth().currentUser; return (u&&u.displayName)||""; }catch(e){ return ""; } }
+  function withDr(n){ n=String(n||"").trim(); return n?(/^dr\.?\s/i.test(n)?n:"Dr "+n):""; }
+  function prettyLocal(e){ return String(e||"").split("@")[0].replace(/[._]+/g," ").replace(/\d+/g,"").trim().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+  // Friendly doctor label from a stored doctor id (Firebase uid for the account, or a member email for
+  // invited doctors). Never surface the raw hex uid. Prefers the account display name for this device.
+  function docLabel(pd,doctorName){
+    if(!pd) return "";
+    if(pd===meUid()) return withDr(meName()) || withDr(prettyLocal((st.who&&st.who.name)||"")) || "You";
+    if(doctorName && doctorName.indexOf("@")===-1 && !/^[a-z0-9]{16,}$/i.test(doctorName)) return withDr(doctorName);
+    if(pd.indexOf("@")>-1) return withDr(prettyLocal(pd));
+    return "Dr "+String(pd).slice(0,8);
+  }
   function doctorOptions(){ // "Me" (this account) + org members with role doctor
     var opts=[{id:meUid(),label:"Me (this account)"}];
     (st.docMembers||[]).forEach(function(m){ if(m.role==="doctor") opts.push({id:m.identity,label:m.identity}); });
     return opts.filter(function(o){return o.id;});
   }
-  function roomDoctorLabel(rm){ var a=rm.assignment||{}; if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor"; if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")"; var d=a.primary||(a.doctors||[])[0]||""; return d===meUid()?"You":(d?("Dr "+String(d).slice(0,8)):"No doctor"); }
+  function roomDoctorLabel(rm){ var a=rm.assignment||{}; if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor"; if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")"; var d=a.primary||(a.doctors||[])[0]||""; return d?(docLabel(d)||"Doctor"):"No doctor"; }
   function openRoomsAdmin(){
     open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(st.orgCode||st.orgId)+'</div><div id="rlist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
