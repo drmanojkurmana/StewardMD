@@ -83,6 +83,26 @@
   .poolwrap{background:var(--card);border:1px solid var(--tl);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
   .poolwrap>h2{margin:0;padding:14px 16px;font-size:16px;border-bottom:1px solid var(--line);background:#ecfdf5}
   .assignbtn{background:var(--tl);color:#fff;padding:9px 14px;font-weight:700;font-size:13px;margin-left:auto;flex:none}
+  /* central-routing control (GIMSR two-nurse station): routing inbox + room wall */
+  .tot{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .tot .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 16px;box-shadow:var(--sh);font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.02em;font-weight:700}
+  .tot .kpi b{display:block;font-size:24px;color:var(--ink);font-weight:800}
+  .ctl{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
+  @media(max-width:860px){.ctl{grid-template-columns:1fr}}
+  .pool{background:var(--card);border:2px solid var(--tl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+  @media(min-width:861px){.pool{position:sticky;top:74px}}
+  .pool>h3{margin:0;padding:13px 15px;font-size:15px;background:#ecfdf5;color:var(--tl-d);border-bottom:1px solid var(--line)}
+  .pool .rows{padding:8px;display:flex;flex-direction:column;gap:8px;max-height:72vh;overflow:auto}
+  .pcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+  .pcard.urg{border-color:#fecaca;background:#fef2f2}
+  .dept{display:inline-block;background:#eef2ff;color:#3730a3;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px}
+  .wt{font-size:12px;color:var(--mut)} .wt.late{color:var(--red);font-weight:800}
+  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+  .rcard.busy{border-top:3px solid var(--red)} .rcard.moderate{border-top:3px solid var(--amber)} .rcard.normal{border-top:3px solid var(--ok)} .rcard.unavailable{border-top:3px solid #94a3b8}
+  .rcard>h3{margin:0;padding:12px 14px;font-size:15px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+  .rcard .docline{padding:7px 14px;font-size:12px;color:var(--mut);border-bottom:1px solid var(--line);display:flex;gap:7px;align-items:center}
+  .dot2{width:8px;height:8px;border-radius:50%;background:#94a3b8;flex:none} .dot2.on{background:var(--ok)}
 </style>
 </head>
 <body>
@@ -197,6 +217,7 @@
         '<div class="grow"><b>OPD Board</b> · <span title="Clinic code — staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
@@ -205,6 +226,7 @@
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("newclinic"); if(nc) nc.onclick=openWizard;
+    var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
   function renderBoard(){
@@ -369,26 +391,31 @@
   // ---- NURSE STATION (unassigned pool -> assign to room -> room queue) ----
   var STATUS_LABEL={normal:"Normal",moderate:"Moderate",busy:"Busy",unavailable:"Doctor offline",available:"Available"};
   function waitMin(t){ return t.registeredAt?Math.max(0,Math.round((Date.now()-t.registeredAt)/60000)):0; }
+  // GIMSR two-nurse central-routing control: LEFT = the routing inbox (unassigned pool nurses route from);
+  // RIGHT = the room wall (each room's status + queue). Doctors see their room queue via the app.
   function renderNurseStation(bd){
-    var pool=bd.pool||[];
-    var poolRows=pool.length? pool.map(function(t){
-      return '<div class="row"><div class="top" style="align-items:center"><div style="flex:1">'+
-        '<div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
-        '<div class="meta">'+esc(t.department||"General")+' · waiting '+waitMin(t)+'m'+(t.priority>=2?' · <b style="color:#b91c1c">URGENT</b>':'')+'</div></div>'+
-        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'">Assign to room</button>':'')+'</div></div>';
-    }).join("") : '<div class="empty">No unassigned patients.</div>';
-    var poolBlock=(bd.mode!=="native"||pool.length)?'<div class="poolwrap"><h2>Unassigned pool · '+pool.length+' waiting</h2><div class="rows">'+poolRows+'</div></div>':'';
-    var cards=(bd.rooms||[]).map(function(rm){
-      var tickets=rm.tickets||[]; var s={id:rm.sessionId};
-      var rows=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">'+(rm.doctorUid?"No patients":"No doctor assigned")+'</div>';
-      var doc=rm.doctorUid?("Dr "+esc((rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid)):"Unassigned";
-      return '<div class="doc"><h2>'+esc(rm.room.name||"Room")+(rm.room.number?(" · "+esc(rm.room.number)):"")+
-        '<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h2>'+
-        '<div style="padding:6px 16px;color:var(--mut);font-size:12px;border-bottom:1px solid var(--line)">'+esc(doc)+' · '+rm.waiting+' waiting</div>'+
-        '<div class="rows">'+rows+'</div>'+
-        (rm.sessionId?'<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right"><button class="ghost" data-audit="'+esc(rm.sessionId)+'" style="font-size:13px">Audit</button></div>':'')+'</div>';
-    }).join("");
-    renderShell(poolBlock+'<div class="docs">'+cards+'</div>');
+    st.opd=bd; var pool=bd.pool||[], rooms=bd.rooms||[];
+    var inRooms=0, consulting=0;
+    rooms.forEach(function(rm){ inRooms+=rm.waiting||0; (rm.tickets||[]).forEach(function(t){ if(t.status==="in_consultation") consulting++; }); });
+    // routing inbox
+    var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
+      return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:#fee2e2;color:#b91c1c">URGENT</span>':'')+'</div>'+
+        '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">'+ms("schedule")+' '+w+'m</span></div>'+
+        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room ▸</button>':"")+'</div>';
+    }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
+    var poolPanel='<div class="pool"><h3>'+ms("groups")+' Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
+    // room wall
+    var wall=rooms.length? rooms.map(function(rm){ var s={id:rm.sessionId}, tickets=rm.tickets||[];
+      var q=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty" style="padding:18px 8px">'+(rm.doctorUid?"No patients":"No doctor — set one in Rooms")+'</div>';
+      var pd=(rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid||"";
+      var doc=rm.doctorUid?("Dr "+esc(pd.length>16?pd.slice(0,8):pd)):"No doctor";
+      return '<div class="rcard '+esc(rm.status)+'"><h3>'+esc(rm.room.name||"Room")+(rm.room.number?" · "+esc(rm.room.number):"")+'<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h3>'+
+        '<div class="docline"><span class="dot2'+(rm.doctorUid?" on":"")+'"></span>'+esc(doc)+' · '+rm.waiting+' waiting'+(rm.room.department?" · "+esc(rm.room.department):"")+'</div>'+
+        '<div class="rows">'+q+'</div>'+
+        (rm.sessionId?'<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right"><button class="ghost" data-audit="'+esc(rm.sessionId)+'" style="font-size:13px">Audit trail</button></div>':"")+'</div>';
+    }).join("") : '<div class="empty">No rooms yet. Open <b>Rooms</b> to add consultation rooms + assign doctors.</div>';
+    var totals='<div class="tot"><div class="kpi"><b>'+pool.length+'</b>To route</div><div class="kpi"><b>'+inRooms+'</b>In room queues</div><div class="kpi"><b>'+consulting+'</b>Consulting now</div></div>';
+    renderShell(totals+'<div class="ctl">'+poolPanel+'<div class="wall">'+wall+'</div></div>');
     Array.prototype.forEach.call(document.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openAssignRoom(b.getAttribute("data-assign"));};});
     Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
     wireRowActions();
@@ -405,9 +432,14 @@
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
   }
   function openAssignRoom(tid){
+    var pt=((st.opd&&st.opd.pool)||[]).filter(function(x){return x.id===tid;})[0]||{};
+    var dept=(pt.department||"").toLowerCase();
+    // GIMSR routing: matching-department rooms first, then the rest; shortest queue reads at a glance.
     var rooms=((st.opd&&st.opd.rooms)||[]).filter(function(r){return r.doctorUid;});
-    var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+esc(r.room.name||"Room")+' — '+esc(STATUS_LABEL[r.status]||r.status)+' ('+r.waiting+' waiting)</option>';}).join("");
-    open('<h3>Assign to room</h3>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available (assign a doctor to a room first).</div>')+
+    var match=function(r){ return dept && String(r.room.department||"").toLowerCase()===dept; };
+    rooms.sort(function(a,b){ return (match(b)?1:0)-(match(a)?1:0) || (a.waiting||0)-(b.waiting||0); });
+    var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+(match(r)?"✓ ":"")+esc(r.room.name||"Room")+(r.room.department?" ("+esc(r.room.department)+")":"")+' — '+esc(STATUS_LABEL[r.status]||r.status)+' · '+r.waiting+' waiting</option>';}).join("");
+    open('<h3>Route '+esc(pt.name||"patient")+'</h3><p class="t" style="margin:0 0 8px">'+(dept?"Billed department: <b>"+esc(pt.department)+"</b> — matching rooms first.":"Pick the consulting room.")+'</p>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available. Assign a doctor to a room in <b>Rooms</b> first.</div>')+
       '<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>'+
       '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
       '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
@@ -432,6 +464,60 @@
       var body={orgId:st.orgId,name:n,mobile:sheet.querySelector("#pm").value.trim(),department:sheet.querySelector("#pd").value.trim(),visitType:"new",date:st.date};
       close();
       api("pool",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
+    };
+  }
+
+  // ---- ROOMS EDITOR (owner/admin): add rooms + assign/rotate doctors ----
+  var ASSIGN_MODES=[["primary","One doctor"],["rotating","Rotating (multiple)"],["unassigned","No doctor (unassigned)"]];
+  function meUid(){ try{ var a=fbAuth(); return (a&&a.currentUser&&a.currentUser.uid)||""; }catch(e){ return ""; } }
+  function doctorOptions(){ // "Me" (this account) + org members with role doctor
+    var opts=[{id:meUid(),label:"Me (this account)"}];
+    (st.docMembers||[]).forEach(function(m){ if(m.role==="doctor") opts.push({id:m.identity,label:m.identity}); });
+    return opts.filter(function(o){return o.id;});
+  }
+  function roomDoctorLabel(rm){ var a=rm.assignment||{}; if(a.mode==="unassigned"||(!a.primary&&!(a.doctors||[]).length)) return "No doctor"; if(a.mode==="rotating") return "Rotating ("+(a.doctors||[]).length+")"; var d=a.primary||(a.doctors||[])[0]||""; return d===meUid()?"You":(d?("Dr "+String(d).slice(0,8)):"No doctor"); }
+  function openRoomsAdmin(){
+    open('<h3>Rooms</h3><div class="t" style="margin-bottom:8px">Clinic '+esc(st.orgCode||st.orgId)+'</div><div id="rlist">Loading…</div>'+
+      '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
+      '<input id="nrn" placeholder="New room name (e.g. Room 1 / Cardiology)" style="margin-bottom:8px">'+
+      '<input id="nrnum" placeholder="Room number (optional)">'+
+      '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Add room</button></div></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var n=sheet.querySelector("#nrn").value.trim(); if(!n){toast("Enter a room name");return;}
+      api("room",{method:"POST",body:{orgId:st.orgId,name:n,number:sheet.querySelector("#nrnum").value.trim(),assignment:{mode:"primary",primary:meUid(),doctors:[meUid()]}}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} toast("Room added (assigned to you)"); sheet.querySelector("#nrn").value="";sheet.querySelector("#nrnum").value=""; loadRoomsList();
+      });
+    };
+    // load the org's doctor members (for the picker) then the rooms
+    api("members?orgId="+encodeURIComponent(st.orgId)).then(function(r){ st.docMembers=(r&&r.members)||[]; }).catch(function(){}).then(loadRoomsList);
+  }
+  function loadRoomsList(){
+    api("rooms?orgId="+encodeURIComponent(st.orgId)).then(function(r){
+      var el=sheet.querySelector("#rlist"); if(!el) return;
+      var rooms=(r&&r.rooms)||[];
+      el.innerHTML=rooms.length? rooms.map(function(rm){
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(rm.name||"Room")+'</b>'+(rm.number?' <span class="t">#'+esc(rm.number)+'</span>':'')+'<div class="t">'+esc(roomDoctorLabel(rm))+'</div></div>'+
+          '<button class="cancel" data-assign="'+esc(rm.id)+'" style="padding:6px 10px">Assign</button></div>';
+      }).join("") : '<div class="empty">No rooms yet. Add one below.</div>';
+      Array.prototype.forEach.call(el.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openRoomAssign(b.getAttribute("data-assign"));};});
+    });
+  }
+  function openRoomAssign(roomId){
+    var docs=doctorOptions();
+    var modeSel='<select id="ram">'+ASSIGN_MODES.map(function(m){return '<option value="'+m[0]+'">'+m[1]+'</option>';}).join("")+'</select>';
+    var docList=docs.length? docs.map(function(d){return '<label style="display:block;margin:6px 0"><input type="checkbox" class="rdoc" value="'+esc(d.id)+'"'+(d.label==="Me (this account)"?" checked":"")+'> '+esc(d.label)+'</label>';}).join("") : '<div class="t">No doctors yet — invite doctors in Staff, or assign yourself.</div>';
+    open('<h3>Assign doctor to room</h3><label>Mode</label>'+modeSel+'<label style="display:block;margin-top:10px">Doctor(s)</label>'+docList+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Save</button></div>');
+    sheet.querySelector("#cx").onclick=function(){openRoomsAdmin();};
+    sheet.querySelector("#ok").onclick=function(){
+      var mode=sheet.querySelector("#ram").value;
+      var picked=Array.prototype.map.call(sheet.querySelectorAll(".rdoc:checked"),function(c){return c.value;});
+      var assignment=(mode==="unassigned")?{mode:"unassigned",doctors:[],primary:null}:{mode:mode,doctors:picked,primary:picked[0]||null};
+      if(mode!=="unassigned"&&!picked.length){toast("Pick at least one doctor");return;}
+      api("room/update",{method:"POST",body:{orgId:st.orgId,roomId:roomId,assignment:assignment}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Room updated"); openRoomsAdmin();
+      });
     };
   }
 
