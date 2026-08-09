@@ -230,6 +230,12 @@
     var b = e.target.closest && e.target.closest("[data-q-act]"); if (!b) return;
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "chooser") { root().innerHTML = _chooseRole(); return; }               // back to Doctor/Staff
+    if (cmd === "roledoc") { root().innerHTML = _chooseContext(); return; }             // Doctor -> clinic/hospital
+    if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // Staff -> web console
+    if (cmd === "ctxclinic") { startMyClinic(); return; }                               // Doctor: my StewardMD clinic
+    if (cmd === "ctxghis") { root().innerHTML = _gate(); setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80); return; }  // Doctor: GITAM/GHIS
+    if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
@@ -282,6 +288,40 @@
     var mobile = prompt("Mobile (optional)?") || "";
     var vt = (prompt("Visit type: new / followup", "new") || "new").toLowerCase();
     act(st.session.id, "/ticket", { name: name, mrn: mrn, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
+  }
+
+  // ---- OPD entry chooser: Doctor vs Staff; Doctor -> My clinic (StewardMD) vs Hospital (GITAM/GHIS) ----
+  function _wrap(inner) {
+    return '<div class="q-gate"><div class="q-gate-card">' +
+      '<div class="q-brand q-gate-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div>' +
+      '<h2 class="q-gate-h">OPD Queue</h2>' + inner + "</div></div>";
+  }
+  function _chooseRole() {
+    return _wrap('<p class="q-gate-sub">Who is signing in?</p>' +
+      '<button class="q-gate-btn" data-q-act="roledoc">' + ms("stethoscope") + " Doctor</button>" +
+      '<button class="q-gate-btn" data-q-act="rolestaff" style="margin-top:10px;background:#f1f5f9;color:#0f172a">' + ms("badge") + " Front desk / Staff</button>" +
+      '<button class="q-gate-close" data-q-act="close">Close</button>');
+  }
+  function _chooseContext() {
+    return _wrap('<p class="q-gate-sub">Where are you consulting?</p>' +
+      '<button class="q-gate-btn" data-q-act="ctxclinic">' + ms("home_health") + " My StewardMD clinic</button>" +
+      '<button class="q-gate-btn" data-q-act="ctxghis" style="margin-top:10px;background:#0b5c56">' + ms("local_hospital") + " Hospital — GIMSR (GHIS)</button>" +
+      '<button class="q-gate-close" data-q-act="chooser">Back</button>');
+  }
+  function _staffNote() {
+    return _wrap('<p class="q-gate-sub">Front-desk staff use the OPD web console — no app install needed.</p>' +
+      '<button class="q-gate-btn" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
+      '<button class="q-gate-close" data-q-act="chooser">Back</button>');
+  }
+  // Doctor at their OWN StewardMD clinic: load the clinic they own (Firebase-authed), no GHIS.
+  function startMyClinic() {
+    var el = root(); el.innerHTML = '<div class="q-empty" style="padding:80px">Loading your clinic…</div>';
+    apiGet("/orgs").then(function (r) {
+      var list = (r && r.orgs) || [];
+      if (!list.length) { el.innerHTML = _wrap('<p class="q-gate-sub">You don\'t have a clinic yet. Set one up in the OPD web console, then come back.</p><button class="q-gate-btn" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>"); return; }
+      st.openOpts = { hospitalId: list[0].id, source: "clinic" };   // their clinic queue (owner session), no GHIS import
+      loadSession();
+    }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
   }
 
   // ---- GHIS login gate + demo mode --------------------------------------------------------
@@ -348,8 +388,7 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     if (st.ghisToken || st.demo) { loadSession(); return; }          // already signed in this session -> straight to the queue
-    el.innerHTML = _gate();                                          // otherwise show the GHIS login gate first
-    setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80);
+    el.innerHTML = _chooseRole();                                    // otherwise: Doctor vs Staff (then clinic vs GITAM/GHIS)
   }
   function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }
   // Sign out of GHIS: drop the GHIS session token + doctor identity, tell the server to forget the session,

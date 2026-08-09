@@ -62,7 +62,12 @@ export async function userSmdId(env, uid, email) {
 }
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
-  return r.map((x) => M.org(withId(x.id, x.fields)));
+  return r.filter((x) => !(x.fields && x.fields.deleted)).map((x) => M.org(withId(x.id, x.fields)));
+}
+export async function deleteOrg(env, orgId, actorId) {
+  await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { deleted: true, deletedAt: now() })]);   // soft-delete
+  await audit(env, orgId, actorId, "org:delete", "");
+  return { ok: true };
 }
 export async function updateOrg(env, orgId, patch, actorId) {
   const cur = await getOrg(env, orgId); if (!cur) return null;
