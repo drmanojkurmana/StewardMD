@@ -194,12 +194,17 @@
   }
   // Config-driven: if the org has rooms configured -> nurse-station (pool + room board); else the
   // existing doctor board (legacy path, unchanged). A single-room clinic shows just its room queue.
-  function loadDash(){
+  function loadDash(tries){
+    tries=tries||0;
     api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
       if(r&&r.ok){ st.opd=r; renderNurseStation(r); return; }   // org-scoped board only; NO shared legacy board
+      if(r&&(r.error==="bad_response")&&tries<3){ setTimeout(function(){loadDash(tries+1);},700); return; }
       if(st.ownsOrg||(st.who&&st.who.role==="admin")) renderShell('<div class="empty">No rooms yet.<br>Tap <b>+ Clinic</b> to set up your clinic and rooms.</div>');
       else renderShell('<div class="empty">'+((r&&r.error==="forbidden"||r&&r.error==="not_a_member")?"You are not assigned to this clinic. Ask the owner to add you.":"No queue available yet.")+'</div>');
-    }).catch(function(){ renderShell('<div class="empty">Could not reach the server.</div>'); });
+    }).catch(function(){ // transient network (weak WiFi): retry a few times before showing an error
+      if(tries<3){ if(!document.querySelector(".ctl")) app.innerHTML='<div class="login"><p>Loading your queue… (retrying)</p></div>'; setTimeout(function(){loadDash(tries+1);},800); return; }
+      renderShell('<div class="empty">Could not reach the server. Check the connection, then tap <b>Refresh</b>.</div>');
+    });
   }
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
@@ -400,10 +405,10 @@
     // routing inbox
     var poolRows=pool.length? pool.map(function(t){ var w=waitMin(t), urg=t.priority>=2;
       return '<div class="pcard'+(urg?" urg":"")+'"><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span>'+(urg?' <span class="dept" style="background:#fee2e2;color:#b91c1c">URGENT</span>':'')+'</div>'+
-        '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">'+ms("schedule")+' '+w+'m</span></div>'+
+        '<div style="margin:5px 0"><span class="dept">'+esc(t.department||"General")+'</span> <span class="wt'+(w>=15?" late":"")+'">waited '+w+'m</span></div>'+
         (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'" style="width:100%;margin-left:0;margin-top:4px">Route to a room ▸</button>':"")+'</div>';
     }).join("") : '<div class="empty">No one waiting to be routed.'+(can("queue.add")?'<br>Tap <b>+ Walk-in</b> to register an arrival.':"")+'</div>';
-    var poolPanel='<div class="pool"><h3>'+ms("groups")+' Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
+    var poolPanel='<div class="pool"><h3>Central routing · '+pool.length+' waiting</h3><div class="rows">'+poolRows+'</div></div>';
     // room wall
     var wall=rooms.length? rooms.map(function(rm){ var s={id:rm.sessionId}, tickets=rm.tickets||[];
       var q=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty" style="padding:18px 8px">'+(rm.doctorUid?"No patients":"No doctor — set one in Rooms")+'</div>';
