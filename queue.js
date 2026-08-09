@@ -209,6 +209,7 @@
     // real-time-ish sync: silently re-pull today's GHIS Out-patients list every ~5 polls (~40s) so newly
     // registered patients appear without a manual import (dedupes server-side by visit id).
     if (st.ghisToken && st.pollN % 5 === 0 && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(true); } catch (e) {} }
+    if (st.openOpts && st.openOpts.source === "connect" && st.pollN % 5 === 0) { try { importFromSource(true); } catch (e) {} }   // re-pull the connected EMR worklist periodically
     apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok) { st.tickets = r.tickets || []; paint(); } }).catch(function () {});
   }
   function act(sessId, path, body) { body = body || {}; body.sessionId = sessId; return apiPost(path, body).then(function (r) { if (r && r.ok && r.tickets) { st.tickets = r.tickets; paint(); } else if (r && r.ok && r.session) { st.session = r.session; paint(); } return r; }); }
@@ -236,7 +237,7 @@
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
     if (cmd === "pickghis") { root().innerHTML = _gate(); setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80); return; }  // GITAM / GHIS
-    if (cmd === "pickhosp") { loadRoom(arg, ""); return; }                              // EMR-Connect hospital (future, auto-listed): room-based like a clinic
+    if (cmd === "pickhosp") { st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS)
     if (cmd === "pickclinic") { startClinic(arg); return; }                             // a personal clinic
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
@@ -423,7 +424,16 @@
       // Primary data source: auto-pull today's GHIS Out-patients list into the queue right after a GHIS sign-in
       // (dedupes server-side by episode id, so it is safe to run on every entry). Manual "Import" button remains.
       if (st.ghisToken && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(); } catch (e) {} }
+      // Connected EMR (Connect) hospital: auto-pull today's worklist from the linked FHIR EMR — same model as GHIS.
+      if (opts.source === "connect") { try { importFromSource(); } catch (e) {} }
     }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not reach the server. Check your connection.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="retry">Retry</button></div>'; });
+  }
+  // Pull today's worklist from the org's connected EMR (Connect FHIR) into this session. Auto on entry + poll.
+  function importFromSource(silent) {
+    if (!st.session) return;
+    apiPost("/import-from-source", { sessionId: st.session.id }).then(function (r) {
+      if (r && r.ok) { st.tickets = r.tickets || st.tickets; paint(); if (!silent && r.imported != null) { try { G.toast && G.toast("Imported " + r.imported + " patient(s) from the EMR"); } catch (e) {} } }
+    }).catch(function () {});
   }
   function open(opts) {
     if (G.SMD_QUEUE_FLAGS && !G.SMD_QUEUE_FLAGS.on()) { try { G.toast && G.toast("Smart OPD Queue is off"); } catch (e) {} return; }

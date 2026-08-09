@@ -31,6 +31,7 @@ export function mapGhisRow(row) {
     mrn: pick(row, ["patientId", "PatientId", "PatientID", "MRNo", "MRNumber", "PatientMRNo", "UHID", "uhid", "mrn"]),
     visitId: pick(row, ["VisitId", "visitId", "VisitID"]) || epi,
     ghisEpisodeId: epi,
+    department: pick(row, ["Department", "department", "deptDescription", "Dept", "dept", "specialty", "clinic"]),
     visitType: (function (v) { v = pick(row, ["visitType", "VisitType", "OPType"]).toLowerCase(); return (v === "followup" || /follow/.test(v)) ? "followup" : "new"; })(),
     priority: 0
   };

@@ -985,6 +985,17 @@
   }
 
   // ---- pull a patient ----
+  // One-tap: make this connected hospital an OPD hospital (appears in the app's Hospital list; its FHIR
+  // worklist auto-imports when a doctor opens it). Calls the queue API with the same owner Firebase token.
+  function useInOpd(id){
+    var t=tenant(); if(!t){ alert("Pick a hospital (tenant) at the top first."); return; }
+    var row=$("dash").querySelector('.drow[data-cid="'+id+'"]');
+    var nm=row?(((row.querySelector("b")||{}).textContent)||"Connected Hospital"):"Connected Hospital";
+    jpost("/api/queue/org/from-connect",{name:nm,connectTenantId:t,connectConnectionId:id}).then(function(x){
+      if(x.s===200&&x.d&&x.d.ok){ var o=x.d.org||{}; alert("Added to OPD as “"+(o.name||nm)+"” ("+(o.code||"")+").\nOpen the app → OPD Queue → Hospital to use it."); }
+      else alert("Could not add to OPD: "+((x.d&&x.d.error)||("HTTP "+x.s)));
+    }).catch(function(){ alert("Sign in first."); });
+  }
   function doPull(id){
     var input=$("dash").querySelector('[data-pid="'+id+'"]'), out=$("dash").querySelector('[data-json="'+id+'"]');
     var pid=input?(input.value||"").trim():"";
@@ -1119,7 +1130,7 @@
       '<td><span class="cat">'+esc(typeLabel(c.type))+'</span></td>'+
       '<td class="mono">'+esc(host(c.fhirBaseUrl))+'</td>'+
       '<td>'+statusBadge(c)+'<div class="hint" style="margin-top:2px">Last: '+last+'</div></td>'+
-      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="validate" data-cid="'+id+'">Validate</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
+      '<td class="acts"><button class="ghost" data-act="test" data-cid="'+id+'">Test</button><button class="ghost" data-act="validate" data-cid="'+id+'">Validate</button><button class="ghost" data-act="pull" data-cid="'+id+'">Pull</button><button class="ghost" data-act="useopd" data-cid="'+id+'">Use in OPD</button><button class="del" data-act="del" data-cid="'+id+'">Delete</button></td>'+
     '</tr>'+
     '<tr data-msgrow="'+id+'" style="display:none"><td colspan="5"><div class="rowmsg msg" data-msg="'+id+'"></div></td></tr>'+
     '<tr data-validate="'+id+'" style="display:none"><td colspan="5"><div data-vout="'+id+'"></div></td></tr>'+
@@ -1534,6 +1545,7 @@
       else if(act==="validate"){ runValidateRow(id); }
       else if(act==="pull"){ var sf=$("dash").querySelector('[data-pull="'+id+'"]'); if(sf) sf.style.display=(sf.style.display==="none"?"":"none"); }
       else if(act==="pullgo"){ doPull(id); }
+      else if(act==="useopd"){ useInOpd(id); }
       else if(act==="del"){ doDelete(id); }
     } else if(b.hasAttribute("data-fact")){ var fid=b.getAttribute("data-fid"), fact=b.getAttribute("data-fact");
       if(fact==="copy"){ copyFeedUrl(); }
