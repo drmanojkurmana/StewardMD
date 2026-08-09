@@ -89,3 +89,15 @@ test("authorizeOrgAccess: owner bypass, cross-org denial, capability + scope bou
   // missing/mismatched org
   assert.equal(authorizeOrgAccess(null, nurse, "n", "org1").reason, "org_not_found");
 });
+
+test("hardening: revoked/disabled staff denied; unmapped identity denied (no 502862-style bootstrap)", () => {
+  const orgDoc = { id: "org1", ownerUid: "owner1" };
+  // A disabled membership is blocked immediately (revocation is effective at the authz gate).
+  const disabled = membership({ id: "m", orgId: "org1", identity: "n", role: "nurse", active: false });
+  assert.equal(authorizeOrgAccess(orgDoc, disabled, "n", "org1", "queue.reorder").reason, "not_a_member");
+  // An identity with NO membership gets NOTHING — there is no hard-coded id that grants admin.
+  assert.equal(authorizeOrgAccess(orgDoc, null, "ghis:502862", "org1", "queue.view").reason, "not_a_member");
+  assert.equal(authorizeOrgAccess(orgDoc, null, "ghis:502862", "org1", "staff.admin").reason, "not_a_member");
+  // Only the real owner is admin — by ownerUid, never by an employee id.
+  assert.equal(authorizeOrgAccess(orgDoc, null, "owner1", "org1", "staff.admin").ok, true);
+});

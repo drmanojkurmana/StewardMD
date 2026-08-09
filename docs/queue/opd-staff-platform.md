@@ -38,9 +38,10 @@ tag: `pre-opd-staff-platform`.
 `QUEUE_STAFF_ENABLED="1"` + `FOLLOWCARE_MSG_CHANNEL="whatsapp"` are set in `wrangler.toml` (both `[vars]`
 and `[env.production.vars]`). Remaining owner steps to actually test:
 
-1. **Bootstrap an admin**: set `QUEUE_STAFF_ADMIN_IDS = "<your GHIS employee id>"` (comma-separated for
-   several) in `wrangler.toml` `[env.production.vars]`. Those ids sign in to the console as **admin** and
-   can map everyone else from the **Staff** button — no curl needed. (Un-mapped logins are read-only.)
+1. **Admin sign-in (Phase 5 — no bootstrap id).** The clinic **owner signs in to the console with their
+   StewardMD account** (Owner/Doctor tab → Google or email+password) and is admin over the org they own.
+   From **Staff** they invite everyone else (role + PIN and/or email login). `QUEUE_STAFF_ADMIN_IDS`/`502862`
+   is **retired** — there is no hard-coded admin id.
 2. **Messaging creds.** Channel = `FOLLOWCARE_MSG_CHANNEL="whatsapp"` (already set): **WhatsApp first,
    automatic SMS (2Factor) fallback** when WA fails or the patient isn't on WhatsApp.
    - WhatsApp: `FOLLOWCARE_WA_PROVIDER` + creds. Personal test = `callmebot` + `CALLMEBOT_APIKEY`;

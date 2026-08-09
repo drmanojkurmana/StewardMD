@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>StewardMD OPD Console</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  // StewardMD account (owner/doctor) sign-in for the console — GHIS-independent. Best-effort: if the SDK
+  // fails to load, the PIN/email/GHIS methods still work.
+  try { firebase.initializeApp({ apiKey: "AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain: "stewardmd-498ec.firebaseapp.com", projectId: "stewardmd-498ec", appId: "1:911280405587:web:d09038e15e98d69dc79aa6" }); } catch (e) {}
+</script>
 <style>
   :root{--tl:#0f766e;--tl-d:#0b5c56;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--card:#fff;
     --amber:#b45309;--red:#b91c1c;--ok:#15803d;--r:14px;--sh:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.04)}
@@ -28,6 +35,9 @@
   .btn{background:var(--tl);color:#fff;padding:13px 16px;font-weight:700;width:100%;margin-top:16px}
   .btn:active{background:var(--tl-d)}
   .err{color:var(--red);font-size:13px;margin-top:10px;min-height:16px}
+  .ltabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .lt{background:#f1f5f9;color:var(--mut);padding:7px 10px;font-size:12px;font-weight:700;border-radius:8px}
+  .lt.on{background:#ecfdf5;color:var(--tl-d)}
   /* board */
   .toolbar{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap}
   .toolbar .grow{flex:1}
@@ -82,48 +92,81 @@
 <script>
 (function(){
   "use strict";
-  var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital";
-  var st={tok:localStorage.getItem(LS_TOK)||"", who:null, hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
+  var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital", LS_TT="smd_opd_toktype";
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
+  function fbAuth(){ try{ return (window.firebase&&firebase.auth)?firebase.auth():null; }catch(e){ return null; } }
+  function fbToken(){ var a=fbAuth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); }
   function api(path,opts){
     opts=opts||{}; var h=opts.headers||{}; h["Content-Type"]="application/json";
-    if(st.tok) h["X-Staff-Token"]=st.tok;
-    return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined})
-      .then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});});
+    var send=function(){ return fetch("/api/queue/"+path,{method:opts.method||"GET",headers:h,body:opts.body?JSON.stringify(opts.body):undefined}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
+    if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });
+    if(st.tok) h["X-Staff-Token"]=st.tok;   // GHIS token OR StewardMD staff session (server tries both)
+    return send();
   }
   function can(cap){return st.who&&st.who.caps&&st.who.caps.indexOf(cap)>-1;}
+  function onLogin(tokType,tok,orgId){ st.tokType=tokType; st.tok=tok||""; if(orgId){st.hospital=orgId;localStorage.setItem(LS_HOSP,orgId);} localStorage.setItem(LS_TT,tokType); if(tok)localStorage.setItem(LS_TOK,tok); else localStorage.removeItem(LS_TOK); boot(); }
 
-  // ---- login ----
-  function renderLogin(msg){
-    app.innerHTML='<div class="login"><h1>StewardMD <span style="color:#0f766e">OPD</span></h1>'+
-      '<p>Sign in with your hospital employee ID.</p>'+
-      '<label>Employee ID</label><input id="uid" autocomplete="username" inputmode="numeric">'+
-      '<label>Password</label><input id="pwd" type="password" autocomplete="current-password">'+
-      '<label>Hospital code</label><input id="hosp" value="'+esc(st.hospital)+'">'+
-      '<button class="btn" id="go">Sign in</button><div class="err" id="err">'+esc(msg||"")+'</div></div>';
-    document.getElementById("go").onclick=doLogin;
-    document.getElementById("pwd").onkeydown=function(e){if(e.key==="Enter")doLogin();};
+  // ---- login: StewardMD account (owner/doctor) · Staff PIN · Staff email · GITAM/GHIS ----
+  function renderLogin(msg,method){
+    method=method||"pin";
+    var tabs=[["account","Owner / Doctor"],["pin","Staff PIN"],["email","Staff email"],["ghis","GITAM / GHIS"]]
+      .map(function(m){return '<button class="lt'+(m[0]===method?" on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>';}).join("");
+    var form="";
+    if(method==="account") form='<p>Clinic owner or doctor — your StewardMD account.</p><button class="btn" id="fbG" style="margin-top:0">Sign in with Google</button><div style="text-align:center;color:#94a3b8;margin:12px 0;font-size:12px">or email + password</div><input id="fe" placeholder="Email" autocomplete="username" style="margin-bottom:8px"><input id="fp" type="password" placeholder="Password" autocomplete="current-password"><button class="btn" id="fbE">Sign in</button>';
+    else if(method==="pin") form='<p>Front-desk / clinic staff quick sign-in.</p><label>Clinic code</label><input id="porg" value="'+esc(st.hospital)+'"><label>Staff ID</label><input id="pid" autocomplete="username"><label>PIN</label><input id="ppin" type="password" inputmode="numeric" autocomplete="off"><button class="btn" id="goPin">Unlock</button>';
+    else if(method==="email") form='<p>Clinic staff with an email login.</p><label>Email</label><input id="eem" autocomplete="username"><label>Password</label><input id="epw" type="password" autocomplete="current-password"><button class="btn" id="goEm">Sign in</button>';
+    else form='<p>GITAM staff — GHIS employee ID (optional; not required for other clinics).</p><label>Employee ID</label><input id="uid" inputmode="numeric" autocomplete="username"><label>Password</label><input id="pwd" type="password" autocomplete="current-password"><label>Hospital code</label><input id="hosp" value="'+esc(st.hospital)+'"><button class="btn" id="go">Sign in</button>';
+    app.innerHTML='<div class="login"><h1>StewardMD <span style="color:#0f766e">OPD</span></h1><div class="ltabs">'+tabs+'</div>'+form+'<div class="err" id="err">'+esc(msg||"")+'</div></div>';
+    Array.prototype.forEach.call(app.querySelectorAll(".lt"),function(b){b.onclick=function(){renderLogin(null,b.getAttribute("data-m"));};});
+    var $=function(id){return document.getElementById(id);};
+    if($("goPin")) $("goPin").onclick=doPinLogin;
+    if($("goEm")) $("goEm").onclick=doEmailLogin;
+    if($("go")) $("go").onclick=doGhisLogin;
+    if($("fbG")) $("fbG").onclick=function(){doFirebase("google");};
+    if($("fbE")) $("fbE").onclick=function(){doFirebase("email");};
   }
-  function doLogin(){
+  function err(m){ var e=document.getElementById("err"); if(e) e.textContent=m; }
+  function doPinLogin(){
+    var body={orgId:(document.getElementById("porg").value.trim()||"manual"),identity:document.getElementById("pid").value.trim(),pin:document.getElementById("ppin").value};
+    if(!body.identity||!body.pin){err("Enter your staff ID and PIN.");return;} err("Signing in…");
+    fetch("/api/queue/auth/pin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":"Wrong staff ID or PIN.")); return; }
+      onLogin("staff",r.token,r.orgId);
+    }).catch(function(){err("Could not reach the server.");});
+  }
+  function doEmailLogin(){
+    var body={email:document.getElementById("eem").value.trim(),password:document.getElementById("epw").value};
+    if(!body.email||!body.password){err("Enter your email and password.");return;} err("Signing in…");
+    fetch("/api/queue/auth/email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      if(!r||!r.ok){ err("Wrong email or password."); return; } onLogin("staff",r.token,r.orgId);
+    }).catch(function(){err("Could not reach the server.");});
+  }
+  function doGhisLogin(){
     var uid=document.getElementById("uid").value.trim(), pwd=document.getElementById("pwd").value, hosp=document.getElementById("hosp").value.trim()||"manual";
-    var err=document.getElementById("err"); err.textContent="Signing in…";
-    fetch("/api/ghis/staff-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({userId:uid,password:pwd})})
-      .then(function(r){return r.json();}).then(function(r){
-        if(!r||!r.token){ err.textContent=r&&r.error==="staff_disabled"?"OPD staff access is not enabled yet.":(r&&r.error==="bad_credentials"?"Wrong employee ID or password.":"Sign-in failed."); return; }
-        st.tok=r.token; st.hospital=hosp; localStorage.setItem(LS_TOK,r.token); localStorage.setItem(LS_HOSP,hosp);
-        boot();
-      }).catch(function(){err.textContent="Could not reach the server.";});
+    if(!uid||!pwd){err("Enter your employee ID and password.");return;} err("Signing in…");
+    fetch("/api/ghis/staff-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({userId:uid,password:pwd})}).then(function(r){return r.json();}).then(function(r){
+      if(!r||!r.token){ err(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(r&&r.error==="bad_credentials"?"Wrong employee ID or password.":"Sign-in failed.")); return; }
+      onLogin("staff",r.token,hosp);
+    }).catch(function(){err("Could not reach the server.");});
   }
-  function logout(){ st.tok=""; localStorage.removeItem(LS_TOK); st.who=null; renderLogin(); }
+  function doFirebase(mode){
+    var a=fbAuth(); if(!a){err("Account sign-in unavailable here. Use PIN or email.");return;} err("Signing in…");
+    var p;
+    if(mode==="google") p=a.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    else { var em=document.getElementById("fe").value.trim(), pw=document.getElementById("fp").value; if(!em||!pw){err("Enter email and password.");return;} p=a.signInWithEmailAndPassword(em,pw); }
+    p.then(function(){ onLogin("firebase",""); }).catch(function(e){ err((e&&e.message)||"Sign-in failed."); });
+  }
+  function logout(){ if(st.tokType==="firebase"){ var a=fbAuth(); if(a) try{a.signOut();}catch(e){} } st.tok=""; st.tokType=""; st.who=null; localStorage.removeItem(LS_TOK); localStorage.removeItem(LS_TT); renderLogin(); }
 
   // ---- boot: whoami then board ----
   function boot(){
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
-      st.who=r; if(r.hospitalId) st.hospital=r.hospitalId; st.orgId=r.hospitalId||st.hospital;
+      st.who=r; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital;
       loadDash();
     });
   }
@@ -276,34 +319,44 @@
   }
 
   // ---- staff admin (owner/admin): map employee id -> role ----
+  // Staff & roles = ORGANIZATION MEMBERSHIP (q_members). Owner/admin invites staff, assigns role, sets a
+  // PIN or email login, and can disable/restore — all server-authorized. Identity = a chosen staff id
+  // (private clinic) or "ghis:<employeeId>" (GITAM). No GHIS required.
   var ROLES=["nurse","reception","supervisor","intern","resident","doctor","admin","viewer"];
   function openStaffAdmin(){
-    open('<h3>Staff & roles</h3><div id="slist">Loading…</div>'+
+    open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:8px">Organization: '+esc(st.orgId)+'</div><div id="slist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
-      '<input id="se" placeholder="Employee ID" inputmode="numeric" style="margin-bottom:8px">'+
-      '<input id="sn" placeholder="Name (optional)" style="margin-bottom:8px">'+
-      '<select id="sr">'+ROLES.map(function(r){return '<option value="'+r+'"'+(r==="nurse"?" selected":"")+'>'+r+'</option>';}).join("")+'</select>'+
-      '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Save</button></div></div>');
+      '<input id="se" placeholder="Staff ID (e.g. recep1, or ghis:502862)" style="margin-bottom:8px">'+
+      '<select id="sr" style="margin-bottom:8px">'+ROLES.map(function(r){return '<option value="'+r+'"'+(r==="nurse"?" selected":"")+'>'+r+'</option>';}).join("")+'</select>'+
+      '<input id="spin" placeholder="Set a PIN (optional)" inputmode="numeric" style="margin-bottom:8px">'+
+      '<input id="sem" placeholder="Email login (optional)" style="margin-bottom:6px">'+
+      '<input id="spw" type="password" placeholder="Email password (if email set)">'+
+      '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Invite / Save</button></div></div>');
     sheet.querySelector("#cx").onclick=close;
     sheet.querySelector("#ok").onclick=function(){
-      var e=sheet.querySelector("#se").value.trim(); if(!e){toast("Enter an employee ID");return;}
-      api("staff",{method:"POST",body:{employeeId:e,role:sheet.querySelector("#sr").value,name:sheet.querySelector("#sn").value.trim(),hospitalId:st.hospital}}).then(function(r){
-        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Saved"); loadStaffList();
-        sheet.querySelector("#se").value=""; sheet.querySelector("#sn").value="";
+      var id=sheet.querySelector("#se").value.trim(); if(!id){toast("Enter a staff ID");return;}
+      var role=sheet.querySelector("#sr").value, pin=sheet.querySelector("#spin").value.trim(), em=sheet.querySelector("#sem").value.trim(), pw=sheet.querySelector("#spw").value;
+      api("member",{method:"POST",body:{orgId:st.orgId,identity:id,role:role}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;}
+        var chain=Promise.resolve();
+        if(pin) chain=chain.then(function(){return api("member/pin",{method:"POST",body:{orgId:st.orgId,identity:id,pin:pin}});});
+        if(em&&pw) chain=chain.then(function(){return api("member/password",{method:"POST",body:{orgId:st.orgId,identity:id,email:em,password:pw}});});
+        chain.then(function(){ toast("Saved"); loadStaffList(); ["se","spin","sem","spw"].forEach(function(x){var el=sheet.querySelector("#"+x);if(el)el.value="";}); });
       });
     };
     loadStaffList();
   }
   function loadStaffList(){
-    api("staff?hospitalId="+encodeURIComponent(st.hospital)).then(function(r){
+    api("members?orgId="+encodeURIComponent(st.orgId)).then(function(r){
       var el=sheet.querySelector("#slist"); if(!el) return;
-      var rows=(r&&r.staff)||[];
-      el.innerHTML=rows.length? rows.map(function(s){
-        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(s.name||s.employeeId)+'</b> <span class="t">#'+esc(s.employeeId)+'</span><div class="t">'+esc(s.role)+'</div></div>'+
-          '<button class="cancel" data-rm="'+esc(s.employeeId)+'" style="padding:6px 10px">Remove</button></div>';
-      }).join("") : '<div class="empty">No staff mapped yet.</div>';
-      Array.prototype.forEach.call(el.querySelectorAll("[data-rm]"),function(b){b.onclick=function(){
-        api("staff",{method:"POST",body:{employeeId:b.getAttribute("data-rm"),remove:true}}).then(function(){toast("Removed");loadStaffList();});
+      var rows=(r&&r.members)||[];
+      el.innerHTML=rows.length? rows.map(function(m){
+        var login=(m.hasPin?"PIN":"")+(m.email?((m.hasPin?" + ":"")+"email"):""); if(!login) login="no login set";
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(m.identity)+'</b>'+(m.active?"":' <span class="t" style="color:#b91c1c">(disabled)</span>')+'<div class="t">'+esc(m.role)+' · '+esc(login)+'</div></div>'+
+          '<button class="cancel" data-tog="'+esc(m.identity)+'" data-act="'+(m.active?"disable":"restore")+'" style="padding:6px 10px">'+(m.active?"Disable":"Restore")+'</button></div>';
+      }).join("") : '<div class="empty">No staff yet. Invite one below.</div>';
+      Array.prototype.forEach.call(el.querySelectorAll("[data-tog]"),function(b){b.onclick=function(){
+        api("member/"+b.getAttribute("data-act"),{method:"POST",body:{orgId:st.orgId,identity:b.getAttribute("data-tog")}}).then(function(){toast("Updated");loadStaffList();});
       };});
     });
   }
@@ -381,7 +434,9 @@
   function close(){ scrim.classList.remove("on"); sheet.innerHTML=""; }
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
-  if(st.tok) boot(); else renderLogin();
+  // Entry: a StewardMD account (Firebase) persists in the SDK; wait for it. Staff sessions use the stored token.
+  if(st.tokType==="firebase"){ var a=fbAuth(); if(a){ a.onAuthStateChanged(function(u){ u?boot():renderLogin(); }); } else renderLogin("Account sign-in unavailable. Use PIN or email."); }
+  else if(st.tok) boot(); else renderLogin();
 })();
 </script>
 </body>

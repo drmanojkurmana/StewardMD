@@ -25,6 +25,7 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { resolveRoomDoctor, roomStatus } from "../../_opd_org.js";
+import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -45,8 +46,10 @@ async function ghisUserId(env, token) {
   if (!token || !env.GHIS_KV) return "";
   try { const raw = await env.GHIS_KV.get("sess:" + token); if (!raw) return ""; return String(JSON.parse(raw).userId || ""); } catch (e) { return ""; }
 }
-// The one auth entry point. Firebase (doctor/owner) first — unchanged when staff is OFF. When staff is
-// ON, a GHIS staff token resolves to an employeeId -> q_staff role (least-privilege viewer if unmapped).
+// The one identity entry point. AUTHORITY is never decided here — a session only proves WHO you are;
+// what you may do is org-membership (authorizeOrg) server-side. Global role is "admin" only for a
+// StewardMD owner, "doctor" for a signed-in StewardMD doctor (their own legacy session), else "viewer".
+// NO hard-coded admin/GHIS ids, NO QUEUE_STAFF_ADMIN_IDS bootstrap (retired in Phase 5).
 async function resolveActor(request, env) {
   const who = await identify(request, env);
   if (who && !who.guest) {
@@ -55,14 +58,13 @@ async function resolveActor(request, env) {
   }
   if (staffEnabled(env)) {
     const tok = request.headers.get("X-Staff-Token") || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-    const eid = await ghisUserId(env, tok);
-    if (eid) {
-      const rec = await Q.getStaff(env, eid);
-      // Bootstrap: employee ids in QUEUE_STAFF_ADMIN_IDS get admin (so the owner can seed staff from the
-      // console before anyone is mapped). Everyone else uses their q_staff role (viewer if unmapped).
-      const adminIds = String(env.QUEUE_STAFF_ADMIN_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
-      const role = adminIds.indexOf(eid) > -1 ? "admin" : roleForActor(null, rec, false);
-      return { kind: "staff", id: "staff:" + eid, employeeId: eid, name: (rec && rec.name) || eid, isOwner: false, role: role, hospitalId: (rec && rec.hospitalId) || "", doctors: (rec && rec.doctors) || [], ghisToken: tok };
+    if (tok) {
+      // 1. StewardMD-native staff session (email/PIN login) — signed HMAC, org-bound. Authority via q_members.
+      const ss = await verifyStaffSession(env, tok, Date.now());
+      if (ss) return { kind: "staff", id: ss.identity, orgId: ss.orgId, role: "viewer", name: ss.identity, ghisToken: "" };
+      // 2. GHIS session — an identity provider only; it maps into org membership, never a global elevation.
+      const eid = await ghisUserId(env, tok);
+      if (eid) return { kind: "ghis", id: "ghis:" + eid, employeeId: eid, role: "viewer", name: eid, hospitalId: "", ghisToken: tok };
     }
   }
   return null;
@@ -122,6 +124,26 @@ export async function onRequest(context) {
   if (!queueEnabled(env)) return json({ ok: false, error: "disabled" }, 404, request);
 
   try {
+    // ---- StewardMD-native staff login (email / PIN) — GHIS-INDEPENDENT (Phase 5), pre-auth ----
+    if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email")) {
+      if (!staffEnabled(env)) return json({ ok: false, error: "staff_disabled" }, 404, request);
+      const b = await readBody(request);
+      if (sub === "pin") {
+        const auth = await ORG.getMemberAuth(env, b.orgId || "", b.identity || "");
+        if (!auth || !auth.active || !auth.pinHash) return json({ ok: false, error: "invalid_login" }, 401, request);
+        const gate = pinLocked(auth, Date.now());
+        if (gate.locked) return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request);
+        const ok = await verifySecret(String(b.pin || ""), auth.pinSalt, auth.pinHash);
+        const nx = nextPinState(auth, Date.now(), ok);
+        await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
+        if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
+        return json({ ok: true, token: await mintStaffSession(env, auth.orgId, auth.identity, Date.now()), orgId: auth.orgId, identity: auth.identity }, 200, request);
+      }
+      const m = await ORG.findMemberByEmail(env, b.email || "");
+      if (!m || !m.active || !m.passHash || !(await verifySecret(String(b.password || ""), m.passSalt, m.passHash))) return json({ ok: false, error: "invalid_login" }, 401, request);
+      return json({ ok: true, token: await mintStaffSession(env, m.orgId, m.identity, Date.now()), orgId: m.orgId, identity: m.identity }, 200, request);
+    }
+
     // ---- PATIENT: token only, no auth ----
     if (method === "GET" && seg === "portal") {   // PHI-free live position
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
@@ -140,8 +162,12 @@ export async function onRequest(context) {
     const who = actor;   // compat alias: a plain doctor's actor.id === their Firebase uid
 
     // Role + capabilities, so the client can adapt its UI (server still re-checks every mutation).
-    if (method === "GET" && seg === "whoami")
-      return json({ ok: true, role: actor.role, caps: capsFor(actor.role), kind: actor.kind, name: actor.name, hospitalId: actor.hospitalId || "", doctors: actor.doctors || [] }, 200, request);
+    if (method === "GET" && seg === "whoami") {
+      // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
+      let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
+      if (actor.kind !== "firebase" && orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok) role = az.role; }
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, name: actor.name, hospitalId: actor.hospitalId || "" }, 200, request);
+    }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
     if (method === "GET" && seg === "orgs")
@@ -253,8 +279,13 @@ export async function onRequest(context) {
       if (seg === "opd") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, opd: await ORG.createOpd(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && !sub) { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.createRoom(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "room" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN, { roomId: body.roomId }); if (!az.ok) return deny(az); return json({ ok: true, room: await ORG.updateRoom(env, body.roomId, body, actor.id) }, 200, request); }
-      if (seg === "member") {
+      if (seg === "member") {   // staff lifecycle (owner/admin only): invite/role/scope + credentials + enable/disable
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        if (sub === "pin") { await ORG.setMemberPin(env, body.orgId, body.identity, body.pin, actor.id); return json({ ok: true }, 200, request); }
+        if (sub === "password") { await ORG.setMemberPassword(env, body.orgId, body.identity, body.email, body.password, actor.id); return json({ ok: true }, 200, request); }
+        if (sub === "disable") { await ORG.setMemberActive(env, body.orgId, body.identity, false, actor.id); return json({ ok: true }, 200, request); }
+        if (sub === "restore") { await ORG.setMemberActive(env, body.orgId, body.identity, true, actor.id); return json({ ok: true }, 200, request); }
+        if (sub === "reset") { await ORG.resetMemberAccess(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
         if (body.remove) { await ORG.removeMembership(env, body.orgId, body.identity, actor.id); return json({ ok: true }, 200, request); }
         return json({ ok: true, member: await ORG.setMembership(env, body.orgId, body.identity, body, actor.id) }, 200, request);
       }

@@ -10,6 +10,7 @@
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
 import * as M from "./_opd_org.js";
+import { genSalt, hashSecret } from "./_opd_auth.js";
 
 const now = () => Date.now();
 function newId() { return crypto.randomUUID().replace(/-/g, ""); }
@@ -86,13 +87,53 @@ export async function getMembership(env, orgId, identity) {
   const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
   return d ? M.membership(withId(memberId(orgId, identity), d.fields)) : null;
 }
+// Public projection — NEVER leak secret hashes to the client. `email`/`hasPin` are safe hints.
+function publicMember(id, f) {
+  const m = M.membership(withId(id, f));
+  return { id: m.id, orgId: m.orgId, identity: m.identity, role: m.role, scope: m.scope, active: m.active, email: (f && f.email) || "", hasPin: !!(f && f.pinHash), createdAt: m.createdAt };
+}
 export async function listMembers(env, orgId) {
   const r = await fsQuery(env, "q_members", { where: { field: "orgId", value: sanitize(orgId) }, limit: 300 });
-  return r.map((x) => M.membership(withId(x.id, x.fields))).filter((m) => m.active);
+  return r.map((x) => publicMember(x.id, x.fields));   // includes disabled so admin can restore; active flag shown
 }
-export async function removeMembership(env, orgId, identity, actorId) {
-  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: false, updatedAt: now() })]);
-  await audit(env, orgId, actorId, "member:remove", identity); return { ok: true };
+// Lifecycle. disable/remove -> active:false blocks OPD access IMMEDIATELY (authorizeOrg checks active).
+export async function setMemberActive(env, orgId, identity, active, actorId) {
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { active: !!active, updatedAt: now() })]);
+  await audit(env, orgId, actorId, active ? "member:restore" : "member:disable", identity); return { ok: true };
+}
+export async function removeMembership(env, orgId, identity, actorId) { return setMemberActive(env, orgId, identity, false, actorId); }
+
+// ---- staff credentials (email + PIN) — hashed at rest, owner-managed ----------------------------
+export async function setMemberPin(env, orgId, identity, pin, actorId) {
+  const salt = genSalt(); const pinHash = await hashSecret(String(pin), salt);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinSalt: salt, pinHash: pinHash, pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:set_pin", identity); return { ok: true };
+}
+export async function setMemberPassword(env, orgId, identity, email, password, actorId) {
+  const salt = genSalt(); const passHash = await hashSecret(String(password), salt);
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { email: String(email || "").toLowerCase(), passSalt: salt, passHash: passHash, updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:set_password", identity); return { ok: true };
+}
+export async function resetMemberAccess(env, orgId, identity, actorId) {
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinHash: "", pinSalt: "", passHash: "", passSalt: "", pinAttempts: 0, pinLockedUntil: 0, updatedAt: now() })]);
+  await audit(env, orgId, actorId, "member:reset_access", identity); return { ok: true };
+}
+// Raw auth record for the login path (NEVER returned to a client).
+export async function getMemberAuth(env, orgId, identity) {
+  const d = await fsGet(env, "q_members/" + memberId(orgId, identity));
+  if (!d) return null;
+  const f = d.fields || {};
+  return { orgId: sanitize(orgId), identity: String(identity), active: f.active !== false, role: f.role || "viewer", email: f.email || "", pinSalt: f.pinSalt || "", pinHash: f.pinHash || "", passSalt: f.passSalt || "", passHash: f.passHash || "", pinAttempts: f.pinAttempts || 0, pinLockedUntil: f.pinLockedUntil || 0 };
+}
+export async function recordMemberPinAttempt(env, orgId, identity, patch) {
+  await fsCommit(env, [wUpdate(env, "q_members/" + memberId(orgId, identity), { pinAttempts: patch.pinAttempts, pinLockedUntil: patch.pinLockedUntil, updatedAt: now() })]);
+}
+export async function findMemberByEmail(env, email) {
+  const r = await fsQuery(env, "q_members", { where: { field: "email", value: String(email || "").toLowerCase() }, limit: 5 });
+  const row = r.find((x) => x.fields && x.fields.active !== false) || r[0];
+  if (!row) return null;
+  const f = row.fields || {};
+  return { orgId: f.orgId || "", identity: f.identity || "", active: f.active !== false, email: f.email || "", passSalt: f.passSalt || "", passHash: f.passHash || "" };
 }
 
 // ---- THE isolation gate (I/O wrapper over the pure authorizeOrgAccess) --------------------------
