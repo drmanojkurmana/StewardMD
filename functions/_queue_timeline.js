@@ -64,7 +64,7 @@ export async function getTimelineByToken(env, token) {
   const id = ticketIdFromToken(token); if (!id) return { error: "invalid" };
   const d = await fsGet(env, "q_timeline/" + id); if (!d) return { error: "not_found" };
   const doc = d.fields;
-  const v = verifyTicketToken(env, token, doc.tokenVer || 1); if (!v || !v.ok) return { error: "invalid" };
+  const v = verifyTicketToken(env, token, doc.tokenVer || 1); if (!v || !v.ok) return { error: "invalid", _dbg: { reason: v && v.reason, ver: doc.tokenVer, verType: typeof doc.tokenVer, closed: doc.closed } };
   if (!doc.closed) return { error: "not_ready" };
   if (!timelineLive(doc, now())) return { error: "expired" };
   const entries = await Promise.all((doc.entries || []).map(async (e) => ({ ts: e.ts, kind: e.kind, text: await decPHI(env, e.enc) })));  // 'by' omitted for the patient
