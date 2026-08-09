@@ -7215,7 +7215,7 @@
       case "icuboard": if (grpActive()) grpTeardownPatient(); _screen = "board"; _paintTop = true; paint(); break;
       case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
-      case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
+      case "icuadmit": { var _doAdmit = function () { _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); }; if (window.CONNECTPT && CONNECTPT.openAdmitChooser) CONNECTPT.openAdmitChooser(_doAdmit); else _doAdmit(); break; }
       case "icumore": _screen = "patient"; _active = "more"; _ws = "documents"; _paintTop = true; paint(); break;   // "more" is now the Tools sub-tab of the Records workspace
       case "icusettings": _screen = "settings"; _paintTop = true; paint(); break;   // unit-level settings (group mode + notifications), separate from per-patient tools
       case "testpush": grpTestPush(); break;

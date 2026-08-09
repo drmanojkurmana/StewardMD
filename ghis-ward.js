@@ -608,7 +608,7 @@
         onPatient: function(episodeId, patientId, name) {
           if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
             try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid);
+            if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
             return;
           }
           if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }

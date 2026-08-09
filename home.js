@@ -791,7 +791,7 @@
   };
   // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
   try { window.SMD_openConnectEmr = function () { try { ACT.connect(); } catch (e) {} }; } catch (e) {}
-  try { window.SMD_openConnectPatient = function (tid, pid, cid) { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(tid, pid, cid); } catch (e) {} }; } catch (e) {}
+  try { window.SMD_openConnectPatient = function (tid, pid, cid, nm) { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(tid, pid, cid, nm); } catch (e) {} }; } catch (e) {}
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
   // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
   try {
