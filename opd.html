@@ -223,6 +223,7 @@
         (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
@@ -232,8 +233,18 @@
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
     var nc=document.getElementById("newclinic"); if(nc) nc.onclick=openWizard;
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
+    var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
+  // Owner/admin: mint the login-free waiting-room display link for a wall TV/tablet.
+  function openDisplayLink(){
+    api("display-link",{method:"POST",body:{orgId:st.orgId}}).then(function(r){
+      if(!r||!r.ok||!r.url){ toast(r&&r.error?friendly(r.error):"Could not create the display link"); return; }
+      open('<h3>Waiting-room display</h3><p class="t" style="margin:0 0 10px">Open this on the waiting-area TV or tablet. It shows each room and who is being called (first name only, no other details) and refreshes itself. Valid ~90 days.</p><div class="link">'+esc(r.url)+'</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Open display</button></div>');
+      sheet.querySelector("#cx").onclick=close;
+      sheet.querySelector("#ok").onclick=function(){ window.open(r.url,"_blank"); };
+    });
+  }
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
     var docs=st.board.map(function(b){

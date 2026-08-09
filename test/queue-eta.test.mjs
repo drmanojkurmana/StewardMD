@@ -1,7 +1,7 @@
 // test/queue-eta.test.mjs — pure queue logic: state machine, ordering, ETA, learning.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { canTransition, isTerminal, orderQueue, orderRoomView, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
+import { canTransition, isTerminal, orderQueue, orderRoomView, shortName, displayBoard, reorderSeq, computeEtas, updateStats, meanFor, confidence, DEFAULT_CONSULT_MIN } from "../functions/_queue_eta.js";
 
 test("state machine allows real transitions, blocks illegal ones", () => {
   assert.equal(canTransition("registered", "waiting"), true);
@@ -72,6 +72,32 @@ test("orderRoomView: in-consultation pinned on top, then priority+seq order (the
   // Empty / null safe.
   assert.deepEqual(orderRoomView([]), []);
   assert.deepEqual(orderRoomView(null), []);
+});
+
+test("displayBoard: PHI-minimal wall projection (first name + last initial, calling/serving/waiting)", () => {
+  assert.equal(shortName("Ramesh Kumar Reddy"), "Ramesh R");   // first + LAST initial
+  assert.equal(shortName("Priya"), "Priya");                    // one word as-is
+  assert.equal(shortName("  "), "Patient");                     // empty guard
+  const board = { rooms: [
+    { doctorUid: "d1", status: "moderate", room: { name: "Medicine 1", number: "101", department: "General" }, tickets: [
+      { status: "in_consultation", name: "Anita Sharma" },
+      { status: "called", name: "Ramesh Kumar" },
+      { status: "waiting", name: "Sita Devi" },
+      { status: "registered", name: "Vikram Rao" },
+    ] },
+    { doctorUid: null, status: "unavailable", room: { name: "Empty" }, tickets: [] },   // no resolved doctor -> dropped
+  ] };
+  const out = displayBoard({ name: "Dr MK Clinic", code: "SMD-J267ZE" }, board);
+  assert.equal(out.ok, true);
+  assert.equal(out.org.name, "Dr MK Clinic");
+  assert.equal(out.rooms.length, 1, "rooms without a resolved doctor are not shown");
+  const r = out.rooms[0];
+  assert.deepEqual(r.calling, ["Ramesh K"]);
+  assert.equal(r.serving, "Anita S");
+  assert.equal(r.waiting, 2);
+  assert.deepEqual(r.upcoming, ["Sita D", "Vikram R"]);
+  // NEVER leak a full name / MRN / phone anywhere in the projection.
+  assert.ok(!JSON.stringify(out).match(/Kumar|Sharma|Devi|Rao/), "no surnames in the public projection");
 });
 
 test("concurrency: two independent moves computed against the same order never corrupt the queue", () => {

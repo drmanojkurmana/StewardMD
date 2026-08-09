@@ -15,7 +15,7 @@
  *   GET  /api/queue/link?sessionId=&ticketId=              -> { token, url }         (patient tracking link)
  *   GET  /api/queue/portal?t=<token>                       -> PHI-free live snapshot  (PATIENT, no auth)
  */
-import { queueEnabled, isQueueConfigured } from "../../_queue.js";
+import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify } from "../../_usage.js";
 import { ownerEmails } from "../../_adminauth.js";
 import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles.js";
@@ -25,7 +25,7 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { resolveRoomDoctor, roomStatus } from "../../_opd_org.js";
-import { orderQueue, orderRoomView } from "../../_queue_eta.js";
+import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
@@ -170,6 +170,16 @@ export async function onRequest(context) {
       if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
       return json(await QT.getTimelineByToken(env, url.searchParams.get("t") || ""), 200, request);
     }
+    // WALL DISPLAY: org-scoped signed token, no auth/login (a waiting-room screen). PHI-minimal
+    // (first name + last initial only — never MRN/phone). Read-only projection of the nurse board.
+    if (method === "GET" && seg === "display" && url.searchParams.get("t")) {
+      if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
+      const orgId = await verifyDisplayToken(env, url.searchParams.get("t") || "");
+      if (!orgId) return json({ ok: false, error: "invalid" }, 200, request);
+      const org = await ORG.getOrg(env, orgId);
+      if (!org) return json({ ok: false, error: "not_found" }, 200, request);
+      return json(displayBoard(org, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+    }
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
     const actor = await resolveActor(request, env);
@@ -205,6 +215,17 @@ export async function onRequest(context) {
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const org = await ORG.getOrg(env, orgId);
       return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+    }
+    // Owner/admin mints the login-free wall-display link for a waiting-room screen (90-day, regenerable).
+    if (method === "POST" && seg === "display-link") {
+      const b = await readBody(request);
+      const orgId = b.orgId || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const exp = Date.now() + 90 * 24 * 3600 * 1000;
+      const base = (env && env.QUEUE_LINK_BASE) || "https://stewardmd.in";
+      const token = await mintDisplayToken(env, orgId, exp);
+      return json({ ok: true, url: base.replace(/\/+$/, "") + "/opd-display?t=" + token, expiresAt: exp }, 200, request);
     }
 
     if (method === "GET" && seg === "session") {

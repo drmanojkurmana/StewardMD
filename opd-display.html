@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OPD Display · StewardMD</title>
+<meta name="robots" content="noindex">
+<style>
+  /* Waiting-room WALL screen: high-contrast, large type, readable across a room. Clinical teal on ink. */
+  :root{
+    --ink:#07141c; --ink2:#0d2230; --panel:#102b3a; --line:#1e3d4f;
+    --teal:#2fd4bf; --teal-deep:#0e6e63; --text:#eef6f8; --muted:#8fb0c0;
+    --call:#ffcf5c; --call-deep:#b8860b; --serve:#57e08b; --busy:#ff7a7a;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    background:radial-gradient(1200px 700px at 80% -10%, #123244 0%, var(--ink) 60%);
+    color:var(--text); font-family:"Segoe UI",Roboto,system-ui,-apple-system,sans-serif;
+    overflow:hidden; -webkit-font-smoothing:antialiased;
+  }
+  #app{ height:100vh; display:flex; flex-direction:column; padding:2.2vh 2.4vw; gap:1.6vh; }
+  header{ display:flex; align-items:center; gap:1.2vw; }
+  .brand{ font-size:clamp(20px,2.4vw,40px); font-weight:800; letter-spacing:.5px; }
+  .brand span{ color:var(--teal); }
+  .clinic{ font-size:clamp(14px,1.5vw,24px); color:var(--muted); font-weight:600; }
+  .grow{ flex:1; }
+  .live{ display:flex; align-items:center; gap:.5vw; color:var(--muted); font-size:clamp(12px,1.1vw,18px); font-weight:600; }
+  .dot{ width:.8vw; height:.8vw; min-width:9px; min-height:9px; border-radius:50%; background:var(--serve); }
+  .clock{ font-variant-numeric:tabular-nums; font-size:clamp(16px,1.7vw,30px); font-weight:700; letter-spacing:1px; }
+
+  /* NOW CALLING hero banner */
+  .banner{ display:none; align-items:center; gap:1.6vw; background:linear-gradient(90deg,#3a2c07,#5c4708);
+    border:2px solid var(--call); border-radius:18px; padding:1.6vh 1.8vw; box-shadow:0 0 40px rgba(255,207,92,.18); }
+  .banner.on{ display:flex; }
+  .banner .tag{ font-size:clamp(16px,1.6vw,28px); font-weight:900; letter-spacing:3px; color:var(--call);
+    text-transform:uppercase; white-space:nowrap; }
+  .banner .items{ display:flex; flex-wrap:wrap; gap:.8vw 2vw; flex:1; }
+  .banner .item{ font-size:clamp(20px,2.2vw,44px); font-weight:800; }
+  .banner .item b{ color:var(--call); }
+  .banner .item .arrow{ color:var(--muted); margin:0 .5vw; font-weight:600; }
+
+  main{ flex:1; display:grid; gap:1.6vh 1.4vw; grid-template-columns:repeat(auto-fill,minmax(clamp(280px,22vw,460px),1fr));
+    align-content:start; overflow:hidden; }
+  .card{ background:linear-gradient(180deg,var(--panel),var(--ink2)); border:1px solid var(--line);
+    border-top:5px solid var(--teal-deep); border-radius:16px; padding:1.6vh 1.4vw; display:flex; flex-direction:column; gap:1vh;
+    min-height:0; will-change:transform,opacity; }
+  .card.normal{ border-top-color:var(--serve); } .card.moderate{ border-top-color:var(--call); }
+  .card.busy{ border-top-color:var(--busy); } .card.unavailable{ border-top-color:#43596a; opacity:.75; }
+  .card.calling{ border-color:var(--call); box-shadow:0 0 34px rgba(255,207,92,.22); }
+  .rhead{ display:flex; align-items:baseline; gap:.8vw; }
+  .rname{ font-size:clamp(20px,1.9vw,36px); font-weight:800; }
+  .rnum{ font-size:clamp(18px,1.7vw,32px); font-weight:800; color:var(--teal); }
+  .rdept{ color:var(--muted); font-size:clamp(12px,1.1vw,18px); font-weight:600; text-transform:uppercase; letter-spacing:1.5px; margin-top:-.4vh; }
+  .now{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:.4vh; padding:.6vh 0; }
+  .now .lbl{ font-size:clamp(12px,1.1vw,18px); font-weight:800; letter-spacing:2px; text-transform:uppercase; }
+  .now.call .lbl{ color:var(--call); } .now.serve .lbl{ color:var(--serve); } .now.idle .lbl{ color:var(--muted); }
+  .now .who{ font-size:clamp(26px,2.8vw,58px); font-weight:900; line-height:1.05; }
+  .now .cnt{ font-size:clamp(26px,2.8vw,58px); font-weight:900; color:var(--muted); }
+  .up{ color:var(--muted); font-size:clamp(13px,1.2vw,20px); font-weight:600; border-top:1px solid var(--line); padding-top:.9vh; min-height:1.2em; }
+  .up b{ color:var(--text); font-weight:800; }
+  footer{ color:var(--muted); font-size:clamp(11px,1vw,16px); text-align:center; }
+  .msg{ margin:auto; text-align:center; color:var(--muted); font-size:clamp(18px,2vw,34px); font-weight:600; max-width:70%; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand">Steward<span>MD</span></div>
+    <div class="clinic" id="clinic"></div>
+    <div class="grow"></div>
+    <div class="live"><span class="dot" id="livedot"></span><span id="livetxt">Live</span></div>
+    <div class="clock" id="clock"></div>
+  </header>
+  <section class="banner" id="banner"><div class="tag">Now Calling</div><div class="items" id="bannerItems"></div></section>
+  <main id="grid"></main>
+  <footer id="foot"></footer>
+</div>
+
+<script type="module">
+  // motion.dev drives EVERY animation in this module. Loaded from the ESM CDN; if it is blocked (an
+  // offline waiting-room TV) we fall back to no-op animators so the board still renders and updates.
+  let animate = () => ({ finished: Promise.resolve() });
+  let stagger = () => 0;
+  try {
+    const m = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    if (m && m.animate) { animate = m.animate; stagger = m.stagger || (() => 0); }
+  } catch (e) { /* CDN blocked -> unanimated but fully functional */ }
+
+  const $ = (id) => document.getElementById(id);
+  const token = new URLSearchParams(location.search).get("t") || "";
+  const grid = $("grid"), banner = $("banner"), bannerItems = $("bannerItems");
+  let prevCalling = new Set();
+
+  function clock(){ const d = new Date(); $("clock").textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }
+  clock(); setInterval(clock, 15000);
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c])); }
+  function message(t){ grid.innerHTML = '<div class="msg">' + esc(t) + '</div>'; banner.classList.remove("on"); }
+
+  function renderBanner(rooms){
+    const calls = [];
+    rooms.forEach((r) => (r.calling || []).forEach((n) => calls.push({ n, room: r.number || r.name })));
+    if (!calls.length){ banner.classList.remove("on"); return; }
+    bannerItems.innerHTML = calls.map((c) => '<span class="item"><b>' + esc(c.n) + '</b><span class="arrow">&rarr;</span>Room ' + esc(c.room) + '</span>').join("");
+    const wasOn = banner.classList.contains("on");
+    banner.classList.add("on");
+    // new call since last poll? attention pulse on the whole banner
+    const key = calls.map((c) => c.room + "|" + c.n).sort().join(",");
+    const fresh = calls.some((c) => !prevCalling.has(c.room + "|" + c.n));
+    if (!wasOn) animate(banner, { opacity: [0, 1], scale: [0.94, 1] }, { duration: 0.45 });
+    if (fresh) animate(banner, { scale: [1, 1.03, 1] }, { duration: 0.9, easing: "ease-in-out" });
+  }
+
+  function card(r){
+    const el = document.createElement("div");
+    el.className = "card " + (r.status || "");
+    const calling = (r.calling && r.calling.length) ? r.calling[0] : "";
+    if (calling) el.classList.add("calling");
+    let now;
+    if (calling) now = '<div class="now call"><div class="lbl">Now calling</div><div class="who">' + esc(calling) + '</div></div>';
+    else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(r.serving) + '</div></div>';
+    else if (r.status === "unavailable") now = '<div class="now idle"><div class="lbl">Not available</div><div class="who">&mdash;</div></div>';
+    else now = '<div class="now idle"><div class="lbl">Waiting</div><div class="cnt">' + (r.waiting || 0) + '</div></div>';
+    const up = (r.upcoming || []).filter((n, i) => !(i === 0 && (calling || r.serving)));
+    const upTxt = up.length ? 'Next: ' + up.map((n) => '<b>' + esc(n) + '</b>').join(" &middot; ") : (r.waiting ? '' : 'No one waiting');
+    el.innerHTML = '<div class="rhead"><span class="rname">' + esc(r.name) + '</span>' + (r.number ? '<span class="rnum">' + esc(r.number) + '</span>' : '') + '</div>' +
+      (r.department ? '<div class="rdept">' + esc(r.department) + '</div>' : '') + now +
+      '<div class="up">' + upTxt + '</div>';
+    return el;
+  }
+
+  function renderGrid(rooms){
+    grid.innerHTML = "";
+    if (!rooms.length){ message("No consultation rooms are open yet."); return; }
+    const els = rooms.map(card);
+    els.forEach((el) => grid.appendChild(el));
+    // motion: stagger the cards in; pulse the ones actively calling
+    animate(els, { opacity: [0, 1], transform: ["translateY(22px)", "translateY(0)"] }, { duration: 0.5, delay: stagger(0.06) });
+    els.forEach((el) => { if (el.classList.contains("calling")) animate(el, { transform: ["scale(1)", "scale(1.015)", "scale(1)"] }, { duration: 1.4, repeat: Infinity, easing: "ease-in-out" }); });
+  }
+
+  async function load(){
+    if (!token){ message("This display link is missing its code. Open the link from the OPD console (Display button)."); return; }
+    try {
+      const r = await fetch("/api/queue/display?t=" + encodeURIComponent(token), { headers: { Accept: "application/json" } });
+      const d = await r.json().catch(() => ({}));
+      $("livedot").style.background = "var(--serve)"; $("livetxt").textContent = "Live";
+      if (!d || !d.ok){
+        if (d && d.error === "invalid") return message("This display link is not valid or has expired. Generate a new one from the OPD console.");
+        if (d && d.error === "not_configured") return message("The OPD board is not set up yet.");
+        return message("Could not load the board.");
+      }
+      $("clinic").textContent = (d.org && d.org.name) ? "· " + d.org.name : "";
+      renderBanner(d.rooms || []);
+      renderGrid(d.rooms || []);
+      prevCalling = new Set(); (d.rooms || []).forEach((r) => (r.calling || []).forEach((n) => prevCalling.add((r.number || r.name) + "|" + n)));
+    } catch (e) {
+      $("livedot").style.background = "var(--busy)"; $("livetxt").textContent = "Reconnecting";
+      // keep the last board on screen through a transient network blip
+    }
+  }
+  load();
+  setInterval(load, 6000);
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 // and the env wrappers must honour QUEUE_TOKEN_SECRET with a FOLLOWCARE_TOKEN_SECRET fallback.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { signToken, verifyToken, idFromToken, mintTicketToken, verifyTicketToken } from "../functions/_queue.js";
+import { signToken, verifyToken, idFromToken, mintTicketToken, verifyTicketToken, mintDisplayToken, verifyDisplayToken } from "../functions/_queue.js";
 
 const SECRET = "x".repeat(40);          // >= 32 chars
 const now = 1_000_000_000_000;
@@ -59,4 +59,16 @@ test("mint/verify via env, with FOLLOWCARE_TOKEN_SECRET fallback", async () => {
   assert.equal(v.id, "tk_1");
   // same secret provided only via the FollowCare fallback verifies the same token
   assert.equal((await verifyTicketToken({ FOLLOWCARE_TOKEN_SECRET: SECRET }, t, 1)).ok, true);
+});
+
+test("display token: round-trips to the orgId, rejects tamper/expiry/non-display tokens", async () => {
+  const env = { QUEUE_TOKEN_SECRET: SECRET };
+  const tok = await mintDisplayToken(env, "org_abc123", Date.now() + 90 * 864e5);
+  assert.equal(await verifyDisplayToken(env, tok), "org_abc123");          // round-trip
+  assert.equal(await verifyDisplayToken(env, tok.slice(0, -3) + "aaa"), null); // tampered sig -> null
+  assert.equal(await verifyDisplayToken(env, await mintDisplayToken(env, "org_x", Date.now() - 1000)), null); // expired -> null
+  // a ticket token (no "disp:" prefix) must NOT be accepted as a display token
+  const ticket = await mintTicketToken(env, "tk_9", Date.now() + 3600e3, 1);
+  assert.equal(await verifyDisplayToken(env, ticket), null);
+  assert.equal(await verifyDisplayToken(env, "garbage"), null);
 });

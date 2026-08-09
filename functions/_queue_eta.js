@@ -45,6 +45,31 @@ export function orderRoomView(tickets) {
   return t.filter((x) => x.status === "in_consultation").concat(orderQueue(t));
 }
 
+// PHI-minimal name for a PUBLIC waiting-room screen: first name + last initial only (e.g. "Ramesh K"),
+// never full name / MRN / phone. A one-word name is shown as-is.
+export function shortName(n) {
+  const p = String(n || "").trim().split(/\s+/).filter(Boolean);
+  if (!p.length) return "Patient";
+  return p.length > 1 ? p[0] + " " + p[p.length - 1][0].toUpperCase() : p[0];
+}
+// Project the nurse board (boardForOrg output) to a login-free wall display: room-centric, PHI-minimal.
+// Tickets are already priority/seq-ordered by boardForOrg (orderRoomView), so `calling`/`upcoming`
+// reflect true order. `calling` = summoned-not-yet-entered (the attention state); `serving` = in room.
+export function displayBoard(org, board) {
+  const rooms = (board.rooms || []).filter((rm) => rm.doctorUid).map((rm) => {
+    const ts = rm.tickets || [];
+    const waiting = ts.filter((t) => t.status === "registered" || t.status === "waiting");
+    return {
+      name: (rm.room && rm.room.name) || "Room", number: (rm.room && rm.room.number) || "",
+      department: (rm.room && rm.room.department) || "", status: rm.status,
+      calling: ts.filter((t) => t.status === "called").map((t) => shortName(t.name)),
+      serving: ts.filter((t) => t.status === "in_consultation").map((t) => shortName(t.name))[0] || "",
+      waiting: waiting.length, upcoming: waiting.slice(0, 3).map((t) => shortName(t.name)),
+    };
+  });
+  return { ok: true, org: { name: (org && org.name) || "OPD", code: (org && org.code) || "" }, rooms: rooms };
+}
+
 // PURE: the new `seq` to give `moveId` so it lands at visible index `toIndex` in the CURRENT ordered
 // queue. Returns { seq } to persist, or null for a no-op/invalid move. Midpoint indexing => only the
 // moved ticket changes (concurrency-friendly, no full renumber).

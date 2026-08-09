@@ -66,6 +66,17 @@ export function mintTicketToken(env, ticketId, expMs, ver) { return signToken({ 
 export function verifyTicketToken(env, token, curVer) { return verifyToken(token, queueSecret(env), curVer, Date.now()); }
 export const ticketIdFromToken = idFromToken;
 
+// ---- wall-display link token: org-scoped, read-only, login-free (a waiting-room screen) ----------
+// Same signed opaque format as the ticket token but keyed to an org, not a ticket. 90-day default;
+// regenerate to rotate. verify is async — callers MUST await it.
+export function mintDisplayToken(env, orgId, expMs) { return signToken({ id: "disp:" + orgId, exp: expMs, ver: 1 }, queueSecret(env)); }
+export async function verifyDisplayToken(env, token) {
+  const id = idFromToken(token);
+  if (!id || id.indexOf("disp:") !== 0) return null;
+  const v = await verifyToken(token, queueSecret(env), 1, Date.now());
+  return v && v.ok ? id.slice(5) : null;
+}
+
 // ---- PHI at rest (AES-256-GCM), reusing the app's FOLLOWCARE_PHI_KEY. blob = base64url(iv[12]||ct).
 // Self-contained (same reason as the token) so the queue runtime path stays lean and unit-testable.
 async function phiKey(env) {

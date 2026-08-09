@@ -175,7 +175,10 @@ export async function onRequest(context) {
   // "opd" is the staff OPD operations console (opd.stewardmd.in / stewardmd.in/opd): staff sign in with
   // their GHIS employee-id inside the page; /api/queue/* + /api/ghis/staff-login self-authorise. The shell
   // must load for anonymous visitors (no StewardMD account). No PHI in the URL.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue", "opd"];
+  // "opd-display" is the login-free OPD waiting-room WALL screen: opened on a TV/monitor from a signed
+  // …/opd-display?t=<org token> link, no app/account/cookie. Safe to expose — /api/queue/display self-
+  // authorises via the signed token and returns a PHI-minimal board (first name + last initial, no MRN).
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue", "opd", "opd-display"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }
