@@ -167,6 +167,8 @@
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
       st.who=r; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital;
+      // Owner with no clinic yet -> onboarding wizard; owner with clinics -> use the first.
+      if(r.kind==="firebase"&&r.role==="admin"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){openWizard();return;} st.orgId=list[0].id; st.hospital=list[0].id; loadDash(); }); return; }
       loadDash();
     });
   }
@@ -192,6 +194,7 @@
       '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · '+esc(st.hospital)+' · '+esc(st.date)+'</div>'+
+        (st.who&&st.who.kind==="firebase"&&st.who.role==="admin"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
         (can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
@@ -200,6 +203,7 @@
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
+    var nc=document.getElementById("newclinic"); if(nc) nc.onclick=openWizard;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
   function renderBoard(){
@@ -428,6 +432,52 @@
       close();
       api("pool",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
     };
+  }
+
+  // ---- ONBOARDING WIZARD (short for a private clinic; scaffolded for a hospital) ----
+  function openWizard(){
+    var type="native";
+    open('<h3>Set up your OPD</h3>'+
+      '<label>Clinic / hospital name</label><input id="wzn" placeholder="e.g. Dr Rao Clinic">'+
+      '<label style="display:block;margin-top:12px">Type</label>'+
+      '<div class="cats" id="wzt"><button data-t="native" class="on">Private clinic</button><button data-t="connect">Hospital / EMR</button></div>'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Create</button></div>');
+    Array.prototype.forEach.call(sheet.querySelectorAll("#wzt [data-t]"),function(b){b.onclick=function(){type=b.getAttribute("data-t");Array.prototype.forEach.call(sheet.querySelectorAll("#wzt button"),function(x){x.classList.remove("on");});b.classList.add("on");};});
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var name=sheet.querySelector("#wzn").value.trim(); if(!name){toast("Enter a name");return;}
+      var ep=type==="native"?"onboard/clinic":"onboard/hospital";
+      api(ep,{method:"POST",body:{name:name,roomName:"Consulting Room"}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Setup failed");return;}
+        st.orgId=r.org.id; st.hospital=r.org.id; localStorage.setItem(LS_HOSP,r.org.id);
+        (type==="native")?wizReception(r.org.id):wizRooms(r.org.id);
+      });
+    };
+  }
+  function wizReception(orgId){   // private clinic: your room is ready (you = the doctor); add reception, or skip.
+    open('<h3>Add reception (optional)</h3><p class="t" style="margin-top:0">Your clinic and consulting room are ready. Add a front-desk login now, or skip and start.</p>'+
+      '<input id="wri" placeholder="Reception staff ID (e.g. front1)" style="margin-bottom:8px"><input id="wrp" placeholder="Set a PIN" inputmode="numeric" type="password">'+
+      '<div class="row2"><button class="cancel" id="skip">Skip · Start</button><button class="btn" id="ok" style="margin:0">Add & start</button></div>');
+    sheet.querySelector("#skip").onclick=function(){close();toast("Clinic ready");loadDash();};
+    sheet.querySelector("#ok").onclick=function(){
+      var id=sheet.querySelector("#wri").value.trim(), pin=sheet.querySelector("#wrp").value.trim();
+      if(!id){close();loadDash();return;}
+      api("member",{method:"POST",body:{orgId:orgId,identity:id,role:"reception"}}).then(function(){
+        var done=function(){close();toast("Clinic ready");loadDash();};
+        pin?api("member/pin",{method:"POST",body:{orgId:orgId,identity:id,pin:pin}}).then(done):done();
+      });
+    };
+  }
+  function wizRooms(orgId){   // hospital: add rooms fast; assign doctors + staff afterwards from Staff.
+    var added=[];
+    open('<h3>Add rooms</h3><p class="t" style="margin-top:0">Add your consultation rooms. Assign doctors and staff afterwards from the Staff panel.</p>'+
+      '<input id="rmn" placeholder="Room name (e.g. Medicine 1)"><div id="rmlist" class="t" style="margin:8px 0"></div>'+
+      '<div class="row2"><button class="cancel" id="add">Add room</button><button class="btn" id="ok" style="margin:0">Finish</button></div>');
+    sheet.querySelector("#add").onclick=function(){
+      var n=sheet.querySelector("#rmn").value.trim(); if(!n){toast("Room name?");return;}
+      api("room",{method:"POST",body:{orgId:orgId,name:n}}).then(function(r){ if(r&&r.ok){added.push(n);sheet.querySelector("#rmlist").textContent="Added: "+added.join(", ");sheet.querySelector("#rmn").value="";toast("Room added");} });
+    };
+    sheet.querySelector("#ok").onclick=function(){close();toast("Hospital ready");loadDash();};
   }
 
   function open(html){ sheet.innerHTML=html; scrim.classList.add("on"); }

@@ -74,13 +74,27 @@ async function resolveActor(request, env) {
 async function loadSessionFor(env, sessionId, actor) {
   const s = sessionId ? await Q.getSession(env, sessionId) : null;
   if (!s) return { err: json({ ok: false, error: "not_found" }, 404) };
-  if (actor.isOwner) return { s };
-  if (actor.kind === "staff") {
-    if (actor.hospitalId && s.hospitalId && actor.hospitalId !== s.hospitalId) return { err: json({ ok: false, error: "forbidden" }, 403) };
-    return { s };
+  if (actor.kind === "firebase") {
+    if (actor.isOwner || s.doctorUid === actor.id) return { s };   // owner any; doctor only their own session
+    return { err: json({ ok: false, error: "forbidden" }, 403) };
   }
-  if (s.doctorUid !== actor.id) return { err: json({ ok: false, error: "forbidden" }, 403) };
+  // staff (ghis/pin/email): must be an ACTIVE member of the session's ORG (cap+scope via requireSessionCap).
+  const az = await ORG.authorizeOrg(env, actor, s.orgId || s.hospitalId, null);
+  if (!az.ok) return { err: json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403) };
   return { s };
+}
+// Capability + scope for a session op: Firebase (owner/doctor) via global role; staff via the session's
+// org membership + room/dept scope. Throws a 403/404-shaped error (caught by the router).
+async function requireSessionCap(env, actor, s, cap) {
+  if (actor.kind === "firebase") { requireCap(actor.role, cap); return; }
+  const az = await ORG.authorizeOrg(env, actor, s.orgId || s.hospitalId, cap, { roomId: s.roomId, departmentId: s.department });
+  if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
+}
+// Capability for an org-level op named by a raw orgId/hospitalId (board, session create).
+async function requireOrgOrGlobal(env, actor, orgId, cap) {
+  if (actor.kind === "firebase") { requireCap(actor.role, cap); return; }
+  const az = await ORG.authorizeOrg(env, actor, orgId, cap);
+  if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
 const ACTIVE = ["registered", "waiting", "called", "in_consultation"];
@@ -190,10 +204,11 @@ export async function onRequest(context) {
     }
 
     if (method === "GET" && seg === "session") {
-      requireCap(actor.role, CAPS.QUEUE_VIEW);
+      const hospitalId = url.searchParams.get("hospitalId") || "manual";
+      await requireOrgOrGlobal(env, actor, hospitalId, CAPS.QUEUE_VIEW);   // staff must be a member of this org
       const doctorUid = (actor.kind === "firebase" && !actor.isOwner) ? actor.id : (url.searchParams.get("doctorUid") || actor.id);
       const s = await Q.getOrCreateSession(env, {
-        hospitalId: (actor.kind === "staff" && actor.hospitalId) || url.searchParams.get("hospitalId") || "manual",
+        hospitalId: hospitalId,
         doctorUid: doctorUid, doctorName: url.searchParams.get("doctorName") || actor.name || "",
         department: url.searchParams.get("department") || "", date: url.searchParams.get("date") || today(),
         source: url.searchParams.get("source") || "manual"
@@ -204,9 +219,9 @@ export async function onRequest(context) {
 
     // Multi-doctor front-desk board: every OPD queue in the hospital for the day.
     if (method === "GET" && seg === "board") {
-      requireCap(actor.role, CAPS.QUEUE_VIEW);
-      const hospitalId = (actor.kind === "staff" && actor.hospitalId) || url.searchParams.get("hospitalId") || "";
+      const hospitalId = url.searchParams.get("hospitalId") || "";
       if (!hospitalId) return json({ ok: false, error: "hospital_required" }, 400, request);
+      await requireOrgOrGlobal(env, actor, hospitalId, CAPS.QUEUE_VIEW);   // org membership — no cross-tenant board reads
       const sessions = await Q.listSessions(env, hospitalId, url.searchParams.get("date") || today());
       const board = [];
       for (const s of sessions) board.push({ session: s, tickets: await ticketView(env, await Q.listTickets(env, s.id)) });
@@ -215,14 +230,14 @@ export async function onRequest(context) {
 
     if (method === "GET" && seg === "list") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
-      requireCap(actor.role, CAPS.QUEUE_VIEW);
+      await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       return json({ ok: true, session: s, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
     }
 
     // Audit timeline (transparency / anti-misuse) — anyone who can view the queue can see the trail.
     if (method === "GET" && seg === "audit") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
-      requireCap(actor.role, CAPS.QUEUE_VIEW);
+      await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       return json({ ok: true, events: await Q.auditTimeline(env, s, url.searchParams.get("limit")) }, 200, request);
     }
 
@@ -235,7 +250,7 @@ export async function onRequest(context) {
     // Encounter timeline, staff/doctor view (decrypted). Needs EMR view rights.
     if (method === "GET" && seg === "timeline") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
-      requireCap(actor.role, CAPS.EMR_VIEW);
+      await requireSessionCap(env, actor, s, CAPS.EMR_VIEW);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
       return json({ ok: true, timeline: await QT.getTimeline(env, t.id) }, 200, request);
@@ -248,7 +263,7 @@ export async function onRequest(context) {
 
     if (method === "GET" && seg === "link") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
-      requireCap(actor.role, CAPS.QUEUE_VIEW);
+      await requireSessionCap(env, actor, s, CAPS.QUEUE_VIEW);
       const t = await Q.getTicket(env, url.searchParams.get("ticketId") || "");
       if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
       return json(Object.assign({ ok: true }, await Q.linkFor(env, t)), 200, request);
@@ -257,7 +272,7 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "config") return json({ ok: true, config: await Q.getConfig(env, actor.id) }, 200, request);
     if (method === "GET" && seg === "analytics") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
-      requireCap(actor.role, CAPS.ANALYTICS_VIEW);
+      await requireSessionCap(env, actor, s, CAPS.ANALYTICS_VIEW);
       return json({ ok: true, analytics: await Q.analytics(env, s) }, 200, request);
     }
 
@@ -321,42 +336,42 @@ export async function onRequest(context) {
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
-      if (seg === "ticket") { requireCap(actor.role, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
-      if (seg === "import") { requireCap(actor.role, CAPS.QUEUE_ADD); const r = await importRoster(env, s, body.rows || [], actor.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
+      if (seg === "ticket") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
+      if (seg === "import") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const r = await importRoster(env, s, body.rows || [], actor.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
       // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
       // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
       if (seg === "import-from-source") {
-        requireCap(actor.role, CAPS.QUEUE_ADD);
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD);
         const org = opdOrgFor(env, s.hospitalId);
         const ghisToken = request.headers.get("X-Ghis-Token") || "";
         const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
         return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
       }
-      if (seg === "advance") { requireCap(actor.role, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
-      if (seg === "status") { requireCap(actor.role, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, actor.id)) }, 200, request); }
-      if (seg === "priority") { requireCap(actor.role, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
-      if (seg === "move") { requireCap(actor.role, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
-      if (seg === "assign") { requireCap(actor.role, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
-      if (seg === "revoke") { requireCap(actor.role, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
-      if (seg === "session" && sub === "status") { requireCap(actor.role, CAPS.SESSION_MANAGE); return json({ ok: true, session: await Q.setSessionStatus(env, s, body, actor.id) }, 200, request); }
+      if (seg === "advance") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
+      if (seg === "status") { await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, actor.id)) }, 200, request); }
+      if (seg === "priority") { await requireSessionCap(env, actor, s, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }
+      if (seg === "move") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REORDER); return json({ ok: true, tickets: await ticketView(env, await Q.moveTicket(env, s, body.ticketId, body, actor.id)) }, 200, request); }
+      if (seg === "assign") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ASSIGN); return json({ ok: true, tickets: await ticketView(env, await Q.assignTicket(env, s, body.ticketId, body.toDoctorUid, body, actor.id)) }, 200, request); }
+      if (seg === "revoke") { await requireSessionCap(env, actor, s, CAPS.QUEUE_REMOVE); await Q.revokeTicket(env, s, body.ticketId, actor.id); return json({ ok: true, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
+      if (seg === "session" && sub === "status") { await requireSessionCap(env, actor, s, CAPS.SESSION_MANAGE); return json({ ok: true, session: await Q.setSessionStatus(env, s, body, actor.id) }, 200, request); }
 
       // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
       // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
       if (seg === "timeline" && sub === "extend") {
-        requireCap(actor.role, CAPS.EMR_TREAT);
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
         return json(Object.assign({ ok: true }, await QT.extendTimeline(env, t.id, body.days)), 200, request);
       }
       if (seg === "timeline") {
-        requireCap(actor.role, QT.tlKind(body.kind) === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        await requireSessionCap(env, actor, s, QT.tlKind(body.kind) === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
         return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
       }
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
       if (seg === "checkout") {
-        requireCap(actor.role, CAPS.QUEUE_STATUS);
+        await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
         const fin = await QT.finalizeCheckout(env, s, t, actor.id);
