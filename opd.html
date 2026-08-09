@@ -66,6 +66,13 @@
   .ev{border-left:3px solid var(--line);padding:8px 0 8px 12px;margin-left:4px}
   .ev b{color:var(--ink)}.ev .t{color:var(--mut);font-size:12px}
   .link{word-break:break-all;background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:10px;font-size:13px;margin-top:8px}
+  /* nurse station */
+  .rstat{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:3px 9px;border-radius:999px;margin-left:auto}
+  .rstat.normal{background:#ecfdf5;color:#15803d}.rstat.moderate{background:#fff7ed;color:#b45309}
+  .rstat.busy{background:#fef2f2;color:#b91c1c}.rstat.unavailable{background:#f1f5f9;color:#64748b}
+  .poolwrap{background:var(--card);border:1px solid var(--tl);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
+  .poolwrap>h2{margin:0;padding:14px 16px;font-size:16px;border-bottom:1px solid var(--line);background:#ecfdf5}
+  .assignbtn{background:var(--tl);color:#fff;padding:9px 14px;font-weight:700;font-size:13px;margin-left:auto;flex:none}
 </style>
 </head>
 <body>
@@ -116,9 +123,17 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
-      st.who=r; if(r.hospitalId) st.hospital=r.hospitalId;
-      loadBoard();
+      st.who=r; if(r.hospitalId) st.hospital=r.hospitalId; st.orgId=r.hospitalId||st.hospital;
+      loadDash();
     });
+  }
+  // Config-driven: if the org has rooms configured -> nurse-station (pool + room board); else the
+  // existing doctor board (legacy path, unchanged). A single-room clinic shows just its room queue.
+  function loadDash(){
+    api("opd-board?orgId="+encodeURIComponent(st.orgId)+"&date="+st.date).then(function(r){
+      if(r&&r.ok&&r.rooms&&r.rooms.length){ st.opd=r; renderNurseStation(r); }
+      else loadBoard();
+    }).catch(loadBoard);
   }
   function loadBoard(){
     api("board?hospitalId="+encodeURIComponent(st.hospital)+"&date="+st.date).then(function(r){
@@ -139,10 +154,11 @@
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
     document.getElementById("lo").onclick=logout;
-    var ref=document.getElementById("ref"); if(ref) ref.onclick=loadBoard;
-    var walk=document.getElementById("walk"); if(walk) walk.onclick=openWalkin;
+    var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
+    var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
   }
+  function refresh(){ st.opd?loadDash():loadBoard(); }
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
     var docs=st.board.map(function(b){
@@ -190,8 +206,8 @@
       };
     });
   }
-  function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||loadBoard)(r); }); }
-  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status."}[e]||e; }
+  function post(seg,body,after){ api(seg,{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Action failed");return;} (after||refresh)(r); }); }
+  function friendly(e){ return {forbidden:"You don't have permission for that.",reason_required:"A reason is required to reorder.",not_queued:"That patient can't be moved now.",bad_transition:"Not allowed from the current status.",room_unassigned:"That room has no doctor assigned.",room_not_found:"Room not found.",cross_org:"That patient belongs to another organization.",out_of_scope:"That room is outside your assigned scope."}[e]||e; }
 
   // ---- reorder-with-reason modal (anti-misuse) ----
   var CATS=["Elderly","Bedridden","Disabled","Acutely unwell","Urgent","Other"];
@@ -240,7 +256,7 @@
     if(!confirm("Check out this patient? The visit will be closed and the next patient called.")) return;
     api("checkout",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
       if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Checkout failed");return;}
-      loadBoard();
+      refresh();
       if(r.timelineUrl){ open('<h3>Patient checked out</h3><p style="color:#64748b">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary (valid 7 days):")+'</p><div class="link">'+esc(r.timelineUrl)+'</div><div class="row2"><button class="btn" id="cx" style="margin:0">Done</button></div>'); sheet.querySelector("#cx").onclick=close; }
     });
   }
@@ -290,6 +306,75 @@
         api("staff",{method:"POST",body:{employeeId:b.getAttribute("data-rm"),remove:true}}).then(function(){toast("Removed");loadStaffList();});
       };});
     });
+  }
+
+  // ---- NURSE STATION (unassigned pool -> assign to room -> room queue) ----
+  var STATUS_LABEL={normal:"Normal",moderate:"Moderate",busy:"Busy",unavailable:"Doctor offline",available:"Available"};
+  function waitMin(t){ return t.registeredAt?Math.max(0,Math.round((Date.now()-t.registeredAt)/60000)):0; }
+  function renderNurseStation(bd){
+    var pool=bd.pool||[];
+    var poolRows=pool.length? pool.map(function(t){
+      return '<div class="row"><div class="top" style="align-items:center"><div style="flex:1">'+
+        '<div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+        '<div class="meta">'+esc(t.department||"General")+' · waiting '+waitMin(t)+'m'+(t.priority>=2?' · <b style="color:#b91c1c">URGENT</b>':'')+'</div></div>'+
+        (can("queue.assign")?'<button class="assignbtn" data-assign="'+esc(t.id)+'">Assign to room</button>':'')+'</div></div>';
+    }).join("") : '<div class="empty">No unassigned patients.</div>';
+    var poolBlock=(bd.mode!=="native"||pool.length)?'<div class="poolwrap"><h2>Unassigned pool · '+pool.length+' waiting</h2><div class="rows">'+poolRows+'</div></div>':'';
+    var cards=(bd.rooms||[]).map(function(rm){
+      var tickets=rm.tickets||[]; var s={id:rm.sessionId};
+      var rows=(rm.sessionId&&tickets.length)? tickets.map(function(t,i){return roomTicketRow(s,t,i,tickets.length);}).join("") : '<div class="empty">'+(rm.doctorUid?"No patients":"No doctor assigned")+'</div>';
+      var doc=rm.doctorUid?("Dr "+esc((rm.room.assignment&&rm.room.assignment.primary)||rm.doctorUid)):"Unassigned";
+      return '<div class="doc"><h2>'+esc(rm.room.name||"Room")+(rm.room.number?(" · "+esc(rm.room.number)):"")+
+        '<span class="rstat '+esc(rm.status)+'">'+esc(STATUS_LABEL[rm.status]||rm.status)+'</span></h2>'+
+        '<div style="padding:6px 16px;color:var(--mut);font-size:12px;border-bottom:1px solid var(--line)">'+esc(doc)+' · '+rm.waiting+' waiting</div>'+
+        '<div class="rows">'+rows+'</div>'+
+        (rm.sessionId?'<div style="padding:8px 12px;border-top:1px solid var(--line);text-align:right"><button class="ghost" data-audit="'+esc(rm.sessionId)+'" style="font-size:13px">Audit</button></div>':'')+'</div>';
+    }).join("");
+    renderShell(poolBlock+'<div class="docs">'+cards+'</div>');
+    Array.prototype.forEach.call(document.querySelectorAll("[data-assign]"),function(b){b.onclick=function(){openAssignRoom(b.getAttribute("data-assign"));};});
+    Array.prototype.forEach.call(document.querySelectorAll("[data-audit]"),function(b){b.onclick=function(){openAudit(b.getAttribute("data-audit"));};});
+    wireRowActions();
+  }
+  function roomTicketRow(s,t,i,n){
+    var consult=t.status==="in_consultation"; var cls=t.priority>=2?"p2":(t.priority>=1?"p1":"");
+    var b=[];
+    if(!consult&&can("queue.status")){ b.push('<button data-a="call" data-s="'+s.id+'" data-t="'+t.id+'">Call</button>'); b.push('<button class="pri" data-a="start" data-s="'+s.id+'" data-t="'+t.id+'">Start</button>'); }
+    if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
+    if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
+    if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
+    return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?"▶":(i+1))+'</div>'+
+      '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
+      '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';
+  }
+  function openAssignRoom(tid){
+    var rooms=((st.opd&&st.opd.rooms)||[]).filter(function(r){return r.doctorUid;});
+    var opts=rooms.map(function(r){return '<option value="'+esc(r.room.id)+'">'+esc(r.room.name||"Room")+' — '+esc(STATUS_LABEL[r.status]||r.status)+' ('+r.waiting+' waiting)</option>';}).join("");
+    open('<h3>Assign to room</h3>'+(opts?'<select id="rsel">'+opts+'</select>':'<div class="empty">No staffed room available (assign a doctor to a room first).</div>')+
+      '<label style="display:block;margin:12px 0 6px;font-weight:600;font-size:13px"><input type="checkbox" id="urg"> Urgent (front of the room queue)</label>'+
+      '<input id="arz" placeholder="Optional note" style="margin-top:6px">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Assign</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var sel=sheet.querySelector("#rsel"); if(!sel){toast("No room available");return;}
+      var body={orgId:st.orgId,ticketId:tid,roomId:sel.value,date:st.date,reason:sheet.querySelector("#arz").value.trim()};
+      if(sheet.querySelector("#urg").checked) body.priority=2;
+      close();
+      api("assign-room",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Assign failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
+    };
+  }
+  function openPoolAdd(){
+    open('<h3>Register walk-in (unassigned)</h3>'+
+      '<input id="pn" placeholder="Patient name" style="margin-bottom:10px">'+
+      '<input id="pm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
+      '<input id="pd" placeholder="Department (optional)">'+
+      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add to pool</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var n=sheet.querySelector("#pn").value.trim(); if(!n){toast("Enter a name");return;}
+      var body={orgId:st.orgId,name:n,mobile:sheet.querySelector("#pm").value.trim(),department:sheet.querySelector("#pd").value.trim(),visitType:"new",date:st.date};
+      close();
+      api("pool",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
+    };
   }
 
   function open(html){ sheet.innerHTML=html; scrim.classList.add("on"); }

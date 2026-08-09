@@ -11,6 +11,7 @@ import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken }
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
 import { isRole } from "./_queue_roles.js";
+import { resolveRoomDoctor } from "./_opd_org.js";
 
 const now = () => Date.now();
 const EMERGENCY_PAD_MIN = 10;
@@ -46,7 +47,8 @@ export async function listTickets(env, sid) {
 export async function decorateForDoctor(env, tickets) {
   return Promise.all(tickets.map(async (t) => Object.assign({}, t, {
     name: await decPHI(env, t.encName), mobile: await decPHI(env, t.encMobile), encName: undefined, encMobile: undefined,
-    ghisPatientId: t.ghisPatientId || ""   // full MR# for the View-EMR-profile action (smd_opd_emr)
+    ghisPatientId: t.ghisPatientId || "",   // full MR# for the View-EMR-profile action (smd_opd_emr)
+    roomId: t.roomId || "", department: t.department || ""   // OPD platform: room + department (Phase 4)
   })));
 }
 
@@ -100,6 +102,7 @@ export async function addTicket(env, session, body, actor) {
     tokenVer: 1, encName: await encPHI(env, body.name), encMobile: await encPHI(env, body.mobile),
     mrnLast4: String(body.mrn || "").replace(/\D/g, "").slice(-4),
     ghisPatientId: String(body.mrn || ""),   // full MR# (for GHIS OPD profile lookups; smd_opd_emr)
+    department: String(body.department || ""), roomId: String(body.roomId || ""),   // OPD platform (Phase 4)
     visitId: String(body.visitId || ""), ghisEpisodeId: String(body.ghisEpisodeId || ""),
     lang: String(body.lang || "en"),
     n_stage: 0, n_reg: false, n_complete: false,
@@ -260,6 +263,50 @@ export async function callNext(env, session, actor) {
   const next = orderQueue(tickets)[0];
   if (next && next.status !== "called" && next.status !== "in_consultation") return setStatus(env, session, next.id, "called", actor);
   return tickets;
+}
+
+// ---- OPD platform runtime: unassigned pool + assign-to-room (Phase 4) ---------------------------
+// BRIDGE: a room's queue is its RESOLVED doctor's existing session (so the doctor app + legacy queue are
+// untouched). Only the pool is a new, doctor-less holding session (doctorUid = POOL_DOCTOR). Assigning a
+// pool patient to a room = re-parent the ticket to the room-doctor's session — the proven mechanism.
+export const POOL_DOCTOR = "__pool__";
+const opdDate = (d) => { if (d) return String(d); try { return new Date(now() + 19800000).toISOString().slice(0, 10); } catch (e) { return ""; } }; // IST day
+
+export async function getOrCreatePoolSession(env, org, date) {
+  return getOrCreateSession(env, { hospitalId: org.id, doctorUid: POOL_DOCTOR, department: "", date: opdDate(date), source: "pool", doctorName: "Unassigned" });
+}
+// Register an unassigned (department-level) patient into the central pool.
+export async function addToPool(env, org, body, actor) {
+  const pool = await getOrCreatePoolSession(env, org, body && body.date);
+  return addTicket(env, pool, body || {}, actor);
+}
+// The session backing a room = its resolved doctor's session (roomId stamped for the board label).
+export async function getOrCreateRoomSession(env, org, room, date, doctorName) {
+  const doctorUid = resolveRoomDoctor(room);
+  if (!doctorUid) return null;   // temporarily-unassigned room has no queue to route into
+  const s = await getOrCreateSession(env, { hospitalId: org.id, doctorUid: doctorUid, department: room.department || "", date: opdDate(date), source: "room", doctorName: doctorName || "" });
+  if (s.roomId !== room.id) { try { await fsCommit(env, [wUpdate(env, "q_sessions/" + s.id, { roomId: room.id, updatedAt: now() })]); s.roomId = room.id; } catch (e) {} }
+  return s;
+}
+// Nurse assigns a (pool or any) ticket to a room. Re-parents to the room-doctor's session, sets roomId,
+// resets to registered at arrival order (or front if priority), audits from->to, reflows both queues.
+export async function assignToRoom(env, org, ticketId, room, opts, actor) {
+  opts = opts || {};
+  const t = await getTicket(env, ticketId);
+  if (!t) throw Object.assign(new Error("not_found"), { status: 404 });
+  if (t.hospitalId && String(t.hospitalId) !== String(org.id)) throw Object.assign(new Error("cross_org"), { status: 403 });
+  const doctorUid = resolveRoomDoctor(room, opts);
+  if (!doctorUid) throw Object.assign(new Error("room_unassigned"), { status: 400 });
+  const target = await getOrCreateRoomSession(env, org, room, opts.date, opts.doctorName);
+  const fromSessionId = t.sessionId;
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, {
+    sessionId: target.id, roomId: room.id, department: room.department || t.department || "",
+    status: "registered", position: 0, seq: (t.registeredAt || now()), updatedAt: now(), expiresAt: target.expiresAt
+  })]);
+  if (opts.priority) { try { await setPriority(env, target, ticketId, opts.priority, actor); } catch (e) {} }   // priority -> front
+  await qAudit(env, { hospitalId: org.id, ticketId: ticketId, actor: actor, action: "assign_room", meta: JSON.stringify({ room: room.id, doctor: doctorUid, reason: String(opts.reason || "").slice(0, 120) }) });
+  if (fromSessionId && fromSessionId !== target.id) { const src = await getSession(env, fromSessionId); if (src) await recompute(env, src); }
+  return recompute(env, target);
 }
 
 // "Next Patient": finish the current consult (with learning), start the next ordered ticket. Bespoke

@@ -24,6 +24,7 @@ import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
+import { resolveRoomDoctor, roomStatus } from "../../_opd_org.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -80,6 +81,26 @@ async function loadSessionFor(env, sessionId, actor) {
   return { s };
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
+const ACTIVE = ["registered", "waiting", "called", "in_consultation"];
+const WAITING = ["registered", "waiting", "called"];
+// The nurse-station board for an org: each room (its resolved-doctor session) with count + status, plus
+// the central unassigned pool. Status uses the org's CONFIGURABLE thresholds (Phase 3), not hard-codes.
+async function boardForOrg(env, org, date) {
+  const rooms = await ORG.listRooms(env, org.id);
+  const out = [];
+  for (const rm of rooms) {
+    const doctorUid = resolveRoomDoctor(rm);
+    let tickets = [], sess = null;
+    if (doctorUid) { sess = await Q.getOrCreateRoomSession(env, org, rm, date); if (sess) tickets = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1); }
+    const waiting = tickets.filter((t) => WAITING.indexOf(t.status) > -1).length;
+    const inConsult = tickets.some((t) => t.status === "in_consultation");
+    out.push({ room: rm, doctorUid: doctorUid || null, sessionId: sess ? sess.id : null, waiting: waiting,
+      status: doctorUid ? roomStatus(waiting, inConsult, org.thresholds) : "unavailable", tickets: await ticketView(env, tickets) });
+  }
+  const pool = await Q.getOrCreatePoolSession(env, org, date);
+  const poolTickets = (await Q.listTickets(env, pool.id)).filter((t) => WAITING.indexOf(t.status) > -1);
+  return { mode: org.mode, thresholds: org.thresholds, rooms: out, pool: await ticketView(env, poolTickets), poolSessionId: pool.id };
+}
 // Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
 // native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.
 // (Phase 3 moves this to per-clinic records; the shape { id, mode, connectorId } is stable.)
@@ -132,6 +153,14 @@ export async function onRequest(context) {
       if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId) }, 200, request);
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       return json({ ok: true, members: await ORG.listMembers(env, orgId) }, 200, request);
+    }
+    // Nurse-station board: rooms (status/counts) + unassigned pool for an org+day.
+    if (method === "GET" && seg === "opd-board") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
     }
 
     if (method === "GET" && seg === "session") {
@@ -243,6 +272,22 @@ export async function onRequest(context) {
       if (seg === "migrate" && sub === "backfill") {  // idempotent legacy hospitalId -> org
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
         return json({ ok: true, org: await ORG.backfillOrg(env, body.hospitalId, actor.id, body.mode, body.connectorId) }, 200, request);
+      }
+      // ---- nurse-station runtime: register into the pool + assign a patient to a room ----
+      if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
+        const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
+        const org = await ORG.getOrg(env, body.orgId);
+        const t = await Q.addToPool(env, org, body, actor.id);
+        return json({ ok: true, ticket: (await ticketView(env, [t]))[0], board: await boardForOrg(env, org, body.date || "") }, 200, request);
+      }
+      if (seg === "assign-room") {   // nurse assigns a pool/room ticket to a specific room
+        const room = await ORG.getRoom(env, body.roomId);
+        if (!room || String(room.orgId) !== String(body.orgId)) return json({ ok: false, error: "room_not_found" }, 404, request);
+        const az = await azOrg(CAPS.QUEUE_ASSIGN, { roomId: room.id, departmentId: room.departmentId }); if (!az.ok) return deny(az);
+        const org = await ORG.getOrg(env, body.orgId);
+        try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: body.priority, reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
+        catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
+        return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
       if (seg === "ticket") { requireCap(actor.role, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }

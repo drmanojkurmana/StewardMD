@@ -55,6 +55,28 @@ test("reorderSeq: move-to-#1 / down / no-op, and the persisted seq re-sorts the 
   assert.equal(reorderSeq(ordered, "zzz", 0), null);
 });
 
+test("concurrency: two independent moves computed against the same order never corrupt the queue", () => {
+  // Two nurses reorder at the same instant; each reorderSeq is computed against the ORIGINAL order and
+  // only writes its own ticket's seq. Applying both must yield a valid total order: all tickets present,
+  // no duplicates, deterministic sort. (Last-writer wins on intent, but ordering is never corrupted.)
+  const base = () => [
+    { id: "a", status: "waiting", priority: 0, registeredAt: 100 },
+    { id: "b", status: "waiting", priority: 0, registeredAt: 200 },
+    { id: "c", status: "waiting", priority: 0, registeredAt: 300 },
+    { id: "d", status: "waiting", priority: 0, registeredAt: 400 }
+  ];
+  const q = base();
+  const ordered = orderQueue(q);                       // [a,b,c,d]
+  const m1 = reorderSeq(ordered, "d", 0);              // nurse 1: d -> #1  (vs original order)
+  const m2 = reorderSeq(ordered, "c", 1);              // nurse 2: c -> #2  (vs the SAME original order)
+  q.find((t) => t.id === "d").seq = m1.seq;
+  q.find((t) => t.id === "c").seq = m2.seq;
+  const result = orderQueue(q).map((t) => t.id);
+  assert.equal(result.length, 4, "no tickets lost");
+  assert.equal(new Set(result).size, 4, "no duplicate positions");
+  assert.deepEqual(orderQueue(q).map((t) => t.id), result, "sort is deterministic (stable on re-run)");
+});
+
 test("reorderSeq: emergencies stay on top — a manual move reorders within its priority band", () => {
   const q = [
     { id: "emg", status: "waiting", priority: 2, registeredAt: 500 },
