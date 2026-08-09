@@ -140,7 +140,7 @@
     if (!flagOn()) { tt("Connect EMR is off."); return; }
     close();
     var ov = document.createElement("div"); ov.id = "smdConnectPtOverlay";
-    ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);color:var(--ink,#e8eef4);display:flex;flex-direction:column;font-family:var(--hfont,-apple-system,sans-serif)";
+    ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--paper,#0b1016);color:var(--ink,#e8eef4);display:flex;flex-direction:column;font-family:var(--hfont,-apple-system,sans-serif)";
     ov.innerHTML =
       '<div style="display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;border-bottom:1px solid var(--line,#22303c)">' +
         '<b style="flex:1;font-size:15px">Connect patient</b>' +
@@ -157,7 +157,7 @@
         '<label style="font-size:12px;font-weight:700">Or enter a patient id directly</label>' +
         '<div style="display:flex;gap:8px;margin:5px 0 12px;flex-wrap:wrap">' +
           '<input id="cptRef" placeholder="e.g. patient id / MRN" autocapitalize="off" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
-          '<button id="cptPull" style="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:700">Pull</button></div>' +
+          '<button id="cptPull" style="background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:700">Pull</button></div>' +
         '<div id="cptMsg" style="font-size:12.5px;margin:6px 0"></div>' +
         '<div id="cptSummary"></div>' +
       '</div>';
@@ -243,7 +243,7 @@
         section("Medications (" + meds.length + ")", meds) +
         section("Labs loaded to ICU (" + labs.length + ")", labs.map(function (r) { return r.test + ": " + r.result + (r.units ? " " + r.units : ""); })) +
         '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
-          '<button id="cptOpenIcu" style="background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:700">Open ICU dashboard</button>' +
+          '<button id="cptOpenIcu" style="background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:700">Open ICU dashboard</button>' +
           (meds.length ? '<button id="cptSendMeds" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:9px;padding:10px 16px;font-weight:700">Send ' + meds.length + ' meds to med list</button>' : "") +
         '</div></div>';
     var oi = document.getElementById("cptOpenIcu"); if (oi) oi.onclick = function () { close(); try { if (window.ICU && window.ICU.open) window.ICU.open(); } catch (e) {} };
@@ -258,7 +258,7 @@
     if (!C()) { tt("Connect is unavailable."); return; }
     closeRoster();
     var ov = document.createElement("div"); ov.id = "cptRosterOverlay";
-    ov.style.cssText = "position:fixed;inset:0;z-index:100001;background:var(--bg,#0b1016);color:var(--ink,#e8eef4);display:flex;flex-direction:column;font-family:var(--hfont,-apple-system,sans-serif)";
+    ov.style.cssText = "position:fixed;inset:0;z-index:100001;background:var(--paper,#0b1016);color:var(--ink,#e8eef4);display:flex;flex-direction:column;font-family:var(--hfont,-apple-system,sans-serif)";
     ov.innerHTML =
       '<div style="display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;border-bottom:1px solid var(--line,#22303c)">' +
         '<button id="cptrBack" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:8px;padding:7px 12px;font-weight:700">Back</button>' +
@@ -273,36 +273,51 @@
     var sel = document.getElementById("cptrTenant"), list = document.getElementById("cptrList");
     sel.innerHTML = '<option value="">Loading your hospitals...</option>';
     C().tenants().then(function (ts) {
-      if (!ts || !ts.length) { sel.innerHTML = '<option value="">No connected hospital</option>'; list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Connect a hospital first (Connect EMR).</div>'; return; }
-      sel.innerHTML = ts.map(function (t) { return '<option value="' + esc(t.tenantId) + '">' + esc(t.name || t.tenantId) + '</option>'; }).join("");
+      // GHIS (GITAM/GIMSR) is a hospital like any other -- list it alongside the Connect-onboarded ones
+      // whenever the doctor has a live GHIS session with a loaded ward list (its roster shape matches).
+      var opts = [];
+      if (ghisReady()) opts.push({ id: "__ghis__", name: "GIMSR · GHIS" });
+      (ts || []).forEach(function (t) { opts.push({ id: t.tenantId, name: t.name || t.tenantId }); });
+      if (!opts.length) { sel.innerHTML = '<option value="">No connected hospital</option>'; list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Connect a hospital (Connect EMR), or sign in to GHIS from Ward Sync, first.</div>'; return; }
+      sel.innerHTML = opts.map(function (o) { return '<option value="' + esc(o.id) + '">' + esc(o.name) + '</option>'; }).join("");
       sel.onchange = function () { loadRoster(sel.value); };
       loadRoster(sel.value);
     });
-    function loadRoster(tid) {
-      if (!tid) { list.innerHTML = ""; return; }
+    // One row renderer for every hospital -- GHIS and Connect return the same {patientId, patientFirstName,
+    // bedName, employeeFirstName, deptDescription, gender, dob} shape. pick(row) routes the admit per source.
+    function renderRows(rows, pick) {
+      if (!rows || !rows.length) { list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">No patients on today’s ward list.</div>'; return; }
+      list.innerHTML = rows.map(function (p, i) {
+        var sub = [p.bedName ? "Bed " + p.bedName : "", p.deptDescription, p.employeeFirstName].filter(Boolean).join(" · ");
+        var dem = [p.gender, p.dob].filter(Boolean).join(" · ");
+        return '<button class="cptr-hit" data-i="' + i + '" style="display:block;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:11px;padding:11px 13px;margin:6px 0;cursor:pointer">' +
+          '<div style="font-weight:700;font-size:14px">' + esc(p.patientFirstName || "(unnamed)") + '</div>' +
+          (sub ? '<div style="font-size:12px;color:var(--teal,#4ec9b8);margin-top:2px">' + esc(sub) + '</div>' : "") +
+          (dem ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2);margin-top:1px">' + esc(dem) + '</div>' : "") + '</button>';
+      }).join("");
+      [].slice.call(list.querySelectorAll(".cptr-hit")).forEach(function (btn) {
+        btn.onclick = function () { var p = rows[+btn.getAttribute("data-i")]; if (!p) return; closeRoster(); pick(p); };
+      });
+    }
+    function loadRoster(id) {
+      if (!id) { list.innerHTML = ""; return; }
       list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">Loading ward list...</div>';
-      C().connections(tid).then(function (cons) {
+      if (id === "__ghis__") {   // GHIS: reuse its already-loaded roster + its own ICU admit path
+        renderRows(window.GHIS.getPatients(), function (p) { try { window.GHIS.loadIntoICU(p.patientId); } catch (e) {} });
+        return;
+      }
+      C().connections(id).then(function (cons) {
         var fhir = (cons || []).filter(function (c) { return c && c.connectionId; })[0];
         if (!fhir) { list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">No FHIR connection on this hospital yet.</div>'; return; }
-        return C().worklist({ tenantId: tid, connectionId: fhir.connectionId }).then(function (r) {
+        return C().worklist({ tenantId: id, connectionId: fhir.connectionId }).then(function (r) {
           if (!r || r.error) { list.innerHTML = '<div style="font-size:12.5px;color:#e5484d;padding:8px 0">Could not load the ward list: ' + esc((r && r.error) || "error") + '</div>'; return; }
-          var rows = r.rows || [];
-          if (!rows.length) { list.innerHTML = '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);padding:8px 0">No patients on today’s ward list.</div>'; return; }
-          list.innerHTML = rows.map(function (p) {
-            var sub = [p.bedName ? "Bed " + p.bedName : "", p.deptDescription, p.employeeFirstName].filter(Boolean).join(" · ");
-            var dem = [p.gender, p.dob].filter(Boolean).join(" · ");
-            return '<button class="cptr-hit" data-pid="' + esc(p.patientId) + '" data-cid="' + esc(fhir.connectionId) + '" data-tid="' + esc(tid) + '" data-name="' + esc(p.patientFirstName || "") + '" style="display:block;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:11px;padding:11px 13px;margin:6px 0;cursor:pointer">' +
-              '<div style="font-weight:700;font-size:14px">' + esc(p.patientFirstName || "(unnamed)") + '</div>' +
-              (sub ? '<div style="font-size:12px;color:var(--tl,#4ec9b8);margin-top:2px">' + esc(sub) + '</div>' : "") +
-              (dem ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2);margin-top:1px">' + esc(dem) + '</div>' : "") + '</button>';
-          }).join("");
-          [].slice.call(list.querySelectorAll(".cptr-hit")).forEach(function (btn) {
-            btn.onclick = function () { closeRoster(); open(btn.getAttribute("data-tid"), btn.getAttribute("data-pid"), btn.getAttribute("data-cid"), btn.getAttribute("data-name")); };
-          });
+          renderRows(r.rows || [], function (p) { open(id, p.patientId, fhir.connectionId, p.patientFirstName); });
         });
       }).catch(function () { list.innerHTML = '<div style="font-size:12.5px;color:#e5484d;padding:8px 0">Network error loading the ward list.</div>'; });
     }
   }
+  // True when GHIS has a live session with a loaded ward list (so it can be listed + admitted like any hospital).
+  function ghisReady() { try { return !!(window.GHIS && GHIS.isConnected && GHIS.isConnected() && GHIS.getPatients && GHIS.getPatients().length); } catch (e) { return false; } }
 
   // Called by the ICU Admit action. If the doctor has connected hospitals, offer a choice; otherwise fall
   // straight through to onBlank() so the default admit flow is unchanged for everyone else.
@@ -310,14 +325,14 @@
     var blank = (typeof onBlank === "function") ? onBlank : function () {};
     if (!flagOn() || !C()) { blank(); return; }
     C().tenants().then(function (ts) {
-      if (!ts || !ts.length) { blank(); return; }   // no connected hospital -> identical to today's behavior
+      if ((!ts || !ts.length) && !ghisReady()) { blank(); return; }   // no connected hospital AND no GHIS -> identical to today's behavior
       var ov = document.createElement("div"); ov.id = "cptAdmitChooser";
       ov.style.cssText = "position:fixed;inset:0;z-index:100001;background:rgba(3,7,12,.55);display:flex;align-items:flex-end;font-family:var(--hfont,-apple-system,sans-serif)";
       ov.innerHTML =
-        '<div style="width:100%;background:var(--bg,#0b1016);color:var(--ink,#e8eef4);border-top-left-radius:18px;border-top-right-radius:18px;border-top:1px solid var(--line,#22303c);padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 16px)">' +
+        '<div style="width:100%;background:var(--paper,#0b1016);color:var(--ink,#e8eef4);border-top-left-radius:18px;border-top-right-radius:18px;border-top:1px solid var(--line,#22303c);padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 16px)">' +
           '<div style="font-size:15px;font-weight:800;margin-bottom:12px">Admit a patient</div>' +
           '<button id="cptAcBlank" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:12px;padding:13px 14px;margin-bottom:8px;font-weight:700;font-size:14px">Blank patient</button>' +
-          '<button id="cptAcConnect" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--tl,#0e6e63);color:#fff;border:0;border-radius:12px;padding:13px 14px;font-weight:700;font-size:14px">From a connected hospital</button>' +
+          '<button id="cptAcConnect" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:12px;padding:13px 14px;font-weight:700;font-size:14px">From a connected hospital</button>' +
           '<button id="cptAcCancel" style="width:100%;background:transparent;color:var(--slate,#9bb0c2);border:0;padding:12px;margin-top:6px;font-weight:700">Cancel</button></div>';
       document.body.appendChild(ov);
       function shut() { if (ov.parentNode) ov.parentNode.removeChild(ov); }

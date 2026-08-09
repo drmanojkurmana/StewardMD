@@ -7,7 +7,8 @@
 <title>StewardMD Connect EMR</title>
 <style>
   :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
-  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  /* Theme follows the APP (body.dark), not the device — synced by the script below. html.dark wins over :root. */
+  html.dark{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}
   *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
   .main{max-width:820px;margin:0 auto;padding:20px 24px 70px}
   .htop{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
@@ -1693,6 +1694,19 @@
     setSection:setSection, loadMembers:loadMembers, renderMembers:renderMembers,
     setName:function(v){ $("aName").value=v; }, setHl7Types:function(v){ $("aHl7Types").value=v; },
     setTenant:function(v){ ensureTenantOption(v); $("tenantSel").value=v; }, __setApi:function(fn){ api=fn; } };
+})();
+</script>
+<script>
+/* Mirror the host app's light/dark theme onto this console (it loads in an in-app iframe). The app themes via
+   body.dark; we set html.dark to match, so text/surfaces invert with the app. Poll so a runtime toggle in the
+   app is reflected live. Standalone (no reachable parent): fall back to the device's prefers-color-scheme. */
+(function () {
+  function appIsDark() {
+    try { var b = window.parent && window.parent !== window && window.parent.document && window.parent.document.body; if (b) return b.classList.contains("dark"); } catch (e) {}
+    try { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; } catch (e) { return false; }
+  }
+  function sync() { document.documentElement.classList.toggle("dark", !!appIsDark()); }
+  sync(); setInterval(sync, 700);
 })();
 </script>
 </body>
