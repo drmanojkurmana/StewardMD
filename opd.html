@@ -38,6 +38,12 @@
   .ltabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
   .lt{background:#f1f5f9;color:var(--mut);padding:7px 10px;font-size:12px;font-weight:700;border-radius:8px}
   .lt.on{background:#ecfdf5;color:var(--tl-d)}
+  /* clinic picker */
+  .crow{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+  .cinfo{flex:1;min-width:0}.cinfo b{display:block;font-size:16px;line-height:1.2}.cinfo .t{font-size:12px;color:var(--mut)}
+  .cact{display:flex;gap:8px;flex-shrink:0}
+  .cact .cbtn{width:auto;margin:0;padding:9px 16px}
+  .cact .del{padding:9px 12px;color:#b91c1c;background:#fef2f2}
   /* board */
   .toolbar{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap}
   .toolbar .grow{flex:1}
@@ -131,37 +137,35 @@
 
   // ---- login: StewardMD account (owner/doctor) · Staff PIN · Staff email · GITAM/GHIS ----
   function renderLogin(msg,method){
-    method=method||"pin";
-    var tabs=[["account","Owner / Doctor"],["pin","Staff PIN"],["email","Staff email"],["ghis","GITAM / GHIS"]]
+    method=method||"staff";
+    var tabs=[["account","Owner / Doctor"],["staff","Staff"],["ghis","GITAM / GHIS"]]
       .map(function(m){return '<button class="lt'+(m[0]===method?" on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>';}).join("");
     var form="";
     if(method==="account") form='<p>Clinic owner or doctor — your StewardMD account.</p><button class="btn" id="fbG" style="margin-top:0">Sign in with Google</button><div style="text-align:center;color:#94a3b8;margin:12px 0;font-size:12px">or email + password</div><input id="fe" placeholder="Email" autocomplete="username" style="margin-bottom:8px"><input id="fp" type="password" placeholder="Password" autocomplete="current-password"><button class="btn" id="fbE">Sign in</button>';
-    else if(method==="pin") form='<p>Front-desk / clinic staff quick sign-in.</p><label>Clinic code</label><input id="porg" value="'+esc(st.hospital)+'"><label>Staff ID</label><input id="pid" autocomplete="username"><label>PIN</label><input id="ppin" type="password" inputmode="numeric" autocomplete="off"><button class="btn" id="goPin">Unlock</button>';
-    else if(method==="email") form='<p>Clinic staff with an email login.</p><label>Email</label><input id="eem" autocomplete="username"><label>Password</label><input id="epw" type="password" autocomplete="current-password"><button class="btn" id="goEm">Sign in</button>';
+    else if(method==="staff") form='<p>Front-desk / clinic staff sign-in.</p><label>Clinic code</label><input id="sorg" value="'+esc(st.orgCode||"")+'" placeholder="SMD-XXXXXX"><label>Staff ID or email</label><input id="sid" autocomplete="username"><label>PIN or password</label><input id="spw" type="password" autocomplete="current-password"><button class="btn" id="goStaff">Unlock</button><div style="margin-top:10px;color:#94a3b8;font-size:12px">Use your <b>clinic code + staff ID + PIN</b>, or just your <b>email + password</b> (works from any device).</div>';
     else form='<p>GITAM staff — GHIS employee ID (optional; not required for other clinics).</p><label>Employee ID</label><input id="uid" inputmode="numeric" autocomplete="username"><label>Password</label><input id="pwd" type="password" autocomplete="current-password"><label>Hospital code</label><input id="hosp" value="'+esc(st.hospital)+'"><button class="btn" id="go">Sign in</button>';
     app.innerHTML='<div class="login"><h1>StewardMD <span style="color:#0f766e">OPD</span></h1><div class="ltabs">'+tabs+'</div>'+form+'<div class="err" id="err">'+esc(msg||"")+'</div></div>';
     Array.prototype.forEach.call(app.querySelectorAll(".lt"),function(b){b.onclick=function(){renderLogin(null,b.getAttribute("data-m"));};});
     var $=function(id){return document.getElementById(id);};
-    if($("goPin")) $("goPin").onclick=doPinLogin;
-    if($("goEm")) $("goEm").onclick=doEmailLogin;
+    if($("goStaff")) $("goStaff").onclick=doStaffLogin;
     if($("go")) $("go").onclick=doGhisLogin;
     if($("fbG")) $("fbG").onclick=function(){doFirebase("google");};
     if($("fbE")) $("fbE").onclick=function(){doFirebase("email");};
   }
   function err(m){ var e=document.getElementById("err"); if(e) e.textContent=m; }
-  function doPinLogin(){
-    var body={clinicCode:(document.getElementById("porg").value.trim()),identity:document.getElementById("pid").value.trim(),pin:document.getElementById("ppin").value};
-    if(!body.identity||!body.pin){err("Enter your staff ID and PIN.");return;} err("Signing in…");
-    fetch("/api/queue/auth/pin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
-      if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":"Wrong staff ID or PIN.")); return; }
+  // One staff sign-in for both PIN and email: an "@" in the ID -> email+password (any device, no clinic
+  // code); otherwise clinic-code + staff-ID + PIN. Same two server endpoints, one merged form.
+  function doStaffLogin(){
+    var id=document.getElementById("sid").value.trim(), pw=document.getElementById("spw").value;
+    if(!id||!pw){err("Enter your staff ID (or email) and PIN (or password).");return;}
+    var isEmail=id.indexOf("@")>-1;
+    if(!isEmail && !document.getElementById("sorg").value.trim()){err("Enter your clinic code (or sign in with your email).");return;}
+    err("Signing in…");
+    var url=isEmail?"/api/queue/auth/email":"/api/queue/auth/pin";
+    var body=isEmail?{email:id,password:pw}:{clinicCode:document.getElementById("sorg").value.trim(),identity:id,pin:pw};
+    fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
+      if(!r||!r.ok){ err(r&&r.error==="locked"?"Too many attempts. Try again later.":(r&&r.error==="staff_disabled"?"OPD access not enabled yet.":(isEmail?"Wrong email or password.":"Wrong clinic code, staff ID or PIN."))); return; }
       onLogin("staff",r.token,r.orgId);
-    }).catch(function(){err("Could not reach the server.");});
-  }
-  function doEmailLogin(){
-    var body={email:document.getElementById("eem").value.trim(),password:document.getElementById("epw").value};
-    if(!body.email||!body.password){err("Enter your email and password.");return;} err("Signing in…");
-    fetch("/api/queue/auth/email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(r){
-      if(!r||!r.ok){ err("Wrong email or password."); return; } onLogin("staff",r.token,r.orgId);
     }).catch(function(){err("Could not reach the server.");});
   }
   function doGhisLogin(){
@@ -188,9 +192,42 @@
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout();return;} renderLogin("Session expired. Sign in again."); return; }
       st.who=r; st.smdId=r.smdId||""; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
-      if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){openWizard();return;} st.orgId=list[0].id; st.orgCode=list[0].code||""; st.hospital=list[0].id; st.ownsOrg=true; loadDash(); }); return; }
+      // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
+      if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
+        if(!list.length){ openWizard(); return; }
+        if(list.length===1){ openClinic(list[0]); return; }
+        renderClinics(list);
+      }); return; }
       loadDash();
     });
+  }
+  // ---- multi-clinic manager: one StewardMD account can own several clinics (open / add / delete) ----
+  function openClinic(c){ st.orgId=c.id; st.orgCode=c.code||""; st.hospital=c.id; st.ownsOrg=true; if(c.id) localStorage.setItem(LS_HOSP,c.id); loadDash(); }
+  function openClinics(){
+    app.innerHTML='<div class="login"><p>Loading your clinics…</p></div>';
+    api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; if(!list.length){ openWizard(); return; } renderClinics(list); })
+      .catch(function(){ renderShell('<div class="empty">Could not load your clinics. Tap <b>Refresh</b>.</div>'); });
+  }
+  function renderClinics(list){
+    var rows=list.map(function(c){
+      return '<div class="crow"><div class="cinfo"><b>'+esc(c.name||"Clinic")+'</b><span class="t">'+esc(c.code||c.id)+'</span></div>'+
+        '<div class="cact"><button class="btn cbtn" data-open="'+esc(c.id)+'" data-code="'+esc(c.code||"")+'">Open</button>'+
+        '<button class="ghost del" data-del="'+esc(c.id)+'" data-name="'+esc(c.name||"clinic")+'">Delete</button></div></div>';
+    }).join("");
+    app.innerHTML='<div class="login clinics"><h1>Your clinics</h1><p class="t" style="margin:-6px 0 10px">Open a clinic to run its OPD, or add another.</p>'+rows+
+      '<button class="btn" id="newc" style="margin-top:14px">+ New clinic</button>'+
+      '<button class="ghost" id="lo2" style="margin-top:8px;width:100%">Sign out</button></div>';
+    Array.prototype.forEach.call(app.querySelectorAll("[data-open]"),function(b){b.onclick=function(){ openClinic({id:b.getAttribute("data-open"),code:b.getAttribute("data-code")}); };});
+    Array.prototype.forEach.call(app.querySelectorAll("[data-del]"),function(b){b.onclick=function(){ delClinic(b.getAttribute("data-del"),b.getAttribute("data-name")); };});
+    document.getElementById("newc").onclick=openWizard;
+    document.getElementById("lo2").onclick=logout;
+  }
+  function delClinic(id,name){
+    if(!confirm('Delete "'+name+'"? Its queue and rooms will be removed. This cannot be undone.')) return;
+    api("org/delete",{method:"POST",body:{orgId:id}}).then(function(r){
+      if(!r||!r.ok){ toast(r&&r.error?friendly(r.error):"Could not delete the clinic"); return; }
+      toast("Clinic deleted"); openClinics();
+    }).catch(function(){ toast("Could not reach the server"); });
   }
   // Config-driven: if the org has rooms configured -> nurse-station (pool + room board); else the
   // existing doctor board (legacy path, unchanged). A single-room clinic shows just its room queue.
@@ -220,7 +257,7 @@
       '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · <span title="Clinic code — staff use this to sign in">'+esc(st.orgCode||st.hospital)+'</span> · '+esc(st.date)+'</div>'+
-        (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="newclinic">+ Clinic</button>':'')+
+        (st.who&&st.who.kind==="firebase"?'<button class="ghost" id="clinics">Clinics</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
@@ -231,7 +268,7 @@
     var ref=document.getElementById("ref"); if(ref) ref.onclick=refresh;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=function(){ st.opd?openPoolAdd():openWalkin(); };
     var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
-    var nc=document.getElementById("newclinic"); if(nc) nc.onclick=openWizard;
+    var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
   }
