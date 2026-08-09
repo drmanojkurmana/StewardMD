@@ -93,5 +93,32 @@
     });
   }
 
-  window.SMD_CONNECT = { tenants: tenants, pullContext: pullContext, resourcesOfType: resourcesOfType, searchPatients: searchPatients, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
+  // A connected hospital's FHIR connections (to pick a connectionId for the worklist). -> Promise<[{connectionId,name,...}]>
+  function connections(tenantId) {
+    if (!tenantId) return Promise.resolve([]);
+    return token().then(function (t) {
+      if (!t) return [];
+      return fetch(apiBase() + "/api/connect/onboard/all?tenant=" + encodeURIComponent(tenantId), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .then(function (d) { return (d && d.fhir) || []; })
+        .catch(function () { return []; });
+    });
+  }
+  // Today's roster (inpatient/OPD) from a connected FHIR hospital -> Promise<{ ok:true, rows } | { error }>.
+  // rows use Ward Sync's shape: {patientId, patientFirstName, gender, bedName, employeeFirstName, deptDescription, dob, episodeId}.
+  function worklist(opts) {
+    opts = opts || {};
+    if (!opts.tenantId || !opts.connectionId) return Promise.resolve({ error: "tenant-and-connection-required" });
+    return token().then(function (t) {
+      if (!t) return { error: "not-signed-in" };
+      return fetch(apiBase() + "/api/connect/onboard/worklist/" + encodeURIComponent(opts.connectionId), {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({ tenantId: opts.tenantId, date: opts.date || "" }),
+      }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); })
+        .then(function (x) { return (x.s === 200 && x.d && x.d.ok) ? { ok: true, rows: x.d.rows || [] } : { error: (x.d && x.d.error) || ("http-" + x.s) }; })
+        .catch(function () { return { error: "network" }; });
+    });
+  }
+
+  window.SMD_CONNECT = { tenants: tenants, connections: connections, worklist: worklist, pullContext: pullContext, resourcesOfType: resourcesOfType, searchPatients: searchPatients, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
 })();

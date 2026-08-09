@@ -95,6 +95,7 @@
         ? 'http://localhost:3456'
         : '/api/ghis');
       var _patients = [];
+      var _connectCtx = null;   // {tid,cid,name} when the roster is from a Connect (FHIR) hospital; null for GHIS
       var _addedPids = {};   // ward patientIds ticked "add to dashboard" this session (checkbox state)
       var _connected = false;
     
@@ -192,13 +193,12 @@
           box = document.getElementById('ghisConnectHosp');
           if (!box || !ts || !ts.length) return;
           var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
-          box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to pull a patient into ICU</div>' +
-            ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
+          box.innerHTML = '<div class="ghis-setup-sub" style="margin:12px 0 4px">Your connected hospitals · tap to load today\'s ward list</div>' +
+            ts.map(function (t) { return '<button class="ghis-connect-btn" style="margin-top:6px" data-conn-tid="' + esc(t.tenantId) + '" data-conn-name="' + esc(t.name || t.tenantId) + '">' + wIco('hospital') + ' ' + esc(t.name || t.tenantId) + '</button>'; }).join('');
           [].slice.call(box.querySelectorAll('[data-conn-tid]')).forEach(function (b) {
             b.onclick = function () {
-              var tid = b.getAttribute('data-conn-tid');
-              try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
-              if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(tid);
+              var tid = b.getAttribute('data-conn-tid'), nm = b.getAttribute('data-conn-name');
+              if (window.ghisLoadConnectRoster) window.ghisLoadConnectRoster(tid, nm);   // load the connected hospital's ward roster
             };
           });
         }).catch(function () {});
@@ -606,6 +606,11 @@
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode
         // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.
         onPatient: function(episodeId, patientId, name) {
+          if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
+            try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
+            if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId);
+            return;
+          }
           if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }
           else { GHIS.openLab(episodeId, patientId, name); }
         },
@@ -893,10 +898,32 @@
       };
     
       window.ghisRefresh = function() {
+        if (_connectCtx) { window.ghisLoadConnectRoster(_connectCtx.tid, _connectCtx.name); return; }
         if (_connected) ghisLoadPatients();
       };
     
+      // ── Connected (Connect EMR / FHIR) hospital roster — the source-neutral equivalent of GHIS /patients.
+      // Loads today's inpatients from a connected hospital into the SAME ward list; tapping a card pulls that
+      // patient into ICU via the Connect patient pull (labs/vitals/imaging/meds), mirroring the GHIS path.
+      window.ghisLoadConnectRoster = function (tid, hospName) {
+        var el = document.getElementById('ghisPatientList');
+        try { showGhisScreen('ward'); } catch (e) {}
+        if (el) el.innerHTML = '<div class="ghis-loading">Loading ' + esc(hospName || 'hospital') + ' ward list…</div>';
+        if (!window.SMD_CONNECT || !SMD_CONNECT.connections) { if (el) el.innerHTML = '<div class="ghis-empty">Connect is unavailable.</div>'; return; }
+        SMD_CONNECT.connections(tid).then(function (conns) {
+          var fhir = (conns || []).filter(function (c) { return c && c.connectionId; })[0];
+          if (!fhir) { if (el) el.innerHTML = '<div class="ghis-empty">No FHIR connection on this hospital yet. Add one in Connect EMR.</div>'; return; }
+          return SMD_CONNECT.worklist({ tenantId: tid, connectionId: fhir.connectionId }).then(function (r) {
+            if (!r || r.error) { if (el) el.innerHTML = '<div class="ghis-empty">Could not load the ward list: ' + esc((r && r.error) || 'error') + '</div>'; return; }
+            _connectCtx = { tid: tid, cid: fhir.connectionId, name: hospName || '' };
+            _patients = (r.rows || []);
+            populateFilterOptions();
+            ghisApplyFilters();
+          });
+        }).catch(function () { if (el) el.innerHTML = '<div class="ghis-empty">Network error loading the ward list.</div>'; });
+      };
       function ghisLoadPatients() {
+        _connectCtx = null;   // a GHIS roster load clears any Connect-hospital context
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-loading">Loading ward patients…</div>';
         authFetch('/patients')
@@ -974,7 +1001,7 @@
           var now = ghisOwner();
           if (now === lastOwner) return;      // same account (e.g. token refresh) — leave as-is
           lastOwner = now;
-          _connected = false; _patients = []; dot(false);
+          _connected = false; _patients = []; _connectCtx = null; dot(false);
           var panel = document.getElementById('ghisPanel');
           if (panel && panel.classList.contains('open')) {
             // Panel is open during the switch → re-run the normal entry logic so it

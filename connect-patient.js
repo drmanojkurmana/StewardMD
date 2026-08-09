@@ -136,7 +136,7 @@
   function close() { var o = document.getElementById("smdConnectPtOverlay"); if (o && o.parentNode) o.parentNode.removeChild(o); }
   function msg(k, t) { var m = document.getElementById("cptMsg"); if (m) { m.textContent = t || ""; m.style.color = k === "err" ? "#e5484d" : k === "warn" ? "#d9a441" : "var(--slate,#9bb0c2)"; } }
 
-  function open(preTenant) {
+  function open(preTenant, prePatient) {
     if (!flagOn()) { tt("Connect EMR is off."); return; }
     close();
     var ov = document.createElement("div"); ov.id = "smdConnectPtOverlay";
@@ -171,6 +171,7 @@
       var last = loadLast();   // P3: re-select the last-used hospital + patient so re-opening is instant
       if (last) { if (last.tenantId && ts.some(function (t) { return t.tenantId === last.tenantId; })) sel.value = last.tenantId; var rf = document.getElementById("cptRef"); if (rf && last.patientRef) rf.value = last.patientRef; }
       if (preTenant && ts.some(function (t) { return t.tenantId === preTenant; })) sel.value = preTenant;   // launched from Ward Sync with a chosen hospital
+      if (prePatient) { var rf2 = document.getElementById("cptRef"); if (rf2) rf2.value = prePatient; doPull(); }   // Ward Sync roster tap: auto-pull this patient into ICU
     });
     document.getElementById("cptPull").onclick = doPull;
     document.getElementById("cptRef").addEventListener("keydown", function (e) { if (e.key === "Enter") doPull(); });

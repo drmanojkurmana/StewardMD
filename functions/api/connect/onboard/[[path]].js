@@ -21,6 +21,7 @@ import { testConnection } from "../../../_connect/onboard/probe.js";
 import { validateConnection } from "../../../_connect/onboard/validate-engine.js";
 import { discoverCapabilities } from "../../../_connect/onboard/discover.js";
 import { pullConnection } from "../../../_connect/onboard/pull.js";
+import { pullWorklist } from "../../../_connect/onboard/worklist.js";
 import { setSyncConfig, runDueSyncs, syncNow } from "../../../_connect/onboard/sync.js";
 import { parseCsvUpload, CSV_MAX_BYTES } from "../../../_connect/onboard/csv-upload.js";
 import { aiMapFlagOn } from "../../../_connect/onboard/ai-map-flags.js";
@@ -204,6 +205,10 @@ export async function onRequest(context) {
       if (await graphqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       if (await sqlGateBlocks(deps, tid, parts[1], env)) return jsonResponse({ error: "not_found" }, { status: 404 });
       return jsonResponse({ ok: true, bundle: await pullConnection(deps, request, env, tid, parts[1], body.patientId) });
+    }
+    // Today's roster (Ward Sync / OPD) from a connected FHIR hospital — enriched Encounter list. FHIR-only.
+    if (method === "POST" && parts[0] === "worklist" && parts[1]) {
+      return jsonResponse(await pullWorklist(deps, request, env, tid, parts[1], body));
     }
     // Auto Validation: config-shape + connector-conformance (synthetic, type-level) + reachability (the same
     // live probe as /test) in one report. Same per-track gate as /test and /pull (no existence leak either way).
