@@ -38,19 +38,21 @@ export const ROLE_CAPS = {
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW],
-  // OPD supervisor: full queue control + analytics, but NO EMR treatment.
+  // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
-               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW],
-  // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — AND may record
-  // vitals/temperature. Explicitly NO emr.treat (no orders/prescriptions). This is the owner's core ask.
+               C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW],
+  // Nurse ("sister"): runs the queue at the desk — add/reorder/assign/status/priority — may record
+  // vitals/temperature, and may READ a patient's clinical notes/history (view-only, e.g. from the
+  // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS],
+          C.EMR_VITALS, C.EMR_VIEW],
   // Intern / resident: clinical trainees — see the queue, advance status, record vitals, view EMR. No
   // reorder/assign/treat.
   intern: [C.QUEUE_VIEW, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
   resident: [C.QUEUE_VIEW, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
-  // Reception / front desk: register walk-ins, mark arrived, assign to a doctor. No reorder/priority/EMR.
-  reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN],
+  // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
+  // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
+  reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };

@@ -326,6 +326,7 @@
         else if(a==="top") openMove(sid,tid,0);
         else if(a==="assign") openAssign(sid,tid);
         else if(a==="checkout") doCheckout(sid,tid);
+        else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
       };
     });
   }
@@ -396,6 +397,38 @@
         return '<div class="ev"><div><b>'+esc(e.action)+'</b> · '+esc(e.mrnLast4?("#"+e.mrnLast4):"")+' <span class="t">'+when+' · '+esc(e.actor)+'</span></div><div class="t">'+esc(m)+'</div></div>';
       }).join("");
     });
+  }
+
+  // ---- clinical notes drawer (READ-ONLY; staff can view + download, never edit) ----
+  var NOTE_KIND={vitals:"Vitals",note:"Clinical note",assessment:"Assessment",meds:"Medication",order:"Investigation",checkout:"Visit closed"};
+  function openNotes(sid,tid,name){
+    open('<h3>Clinical notes'+(name?' — '+esc(name):'')+'</h3><p class="t" style="margin:-6px 0 10px">View only. Doctors record notes; you can read and download.</p><div class="drawer" id="nd">Loading…</div><div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="dl" style="margin:0" disabled>Download</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    api("timeline?sessionId="+encodeURIComponent(sid)+"&ticketId="+encodeURIComponent(tid)).then(function(r){
+      var el=sheet.querySelector("#nd"); if(!el) return;
+      if(!r||!r.ok){ el.innerHTML='<div class="empty">'+((r&&(r.error==="forbidden"||r&&r.error==="out_of_scope"))?"You don't have permission to view these notes.":"Could not load the notes.")+'</div>'; return; }
+      var tl=r.timeline||{}, entries=tl.entries||[];
+      if(!entries.length){ el.innerHTML='<div class="empty">No clinical notes recorded for this visit yet.</div>'; return; }
+      el.innerHTML=entries.map(function(e){
+        var when=new Date(e.ts).toLocaleString([],{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+        return '<div class="ev"><div><b>'+esc(NOTE_KIND[e.kind]||e.kind||"Note")+'</b> <span class="t">'+when+(e.by?" · "+esc(e.by):"")+'</span></div><div style="white-space:pre-wrap;margin-top:2px">'+esc(e.text||"")+'</div></div>';
+      }).join("");
+      var dl=sheet.querySelector("#dl"); if(dl){ dl.disabled=false; dl.onclick=function(){ downloadNotes(name,tl); }; }
+    });
+  }
+  // Save the notes locally as a plain-text file (no PHI ever leaves via a URL/log — a local Blob download).
+  function downloadNotes(name,tl){
+    var L=["StewardMD — Clinical notes","Patient: "+(name||"Patient")+(tl.mrnLast4?" (#"+tl.mrnLast4+")":""),"Clinic: "+(st.orgCode||st.orgId||""),"Downloaded: "+new Date().toLocaleString(),"------------------------------------------------------------",""];
+    (tl.entries||[]).forEach(function(e){
+      L.push("["+new Date(e.ts).toLocaleString()+"] "+(NOTE_KIND[e.kind]||e.kind||"Note")+(e.by?" · "+e.by:""));
+      L.push(String(e.text||"").trim()); L.push("");
+    });
+    var blob=new Blob([L.join("\n")],{type:"text/plain;charset=utf-8"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="notes-"+String(name||"patient").replace(/[^a-z0-9]+/gi,"-").toLowerCase()+".txt";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ try{URL.revokeObjectURL(a.href);}catch(e){} a.remove(); },200);
+    try{ toast("Notes downloaded"); }catch(e){}
   }
 
   // ---- staff admin (owner/admin): map employee id -> role ----
@@ -480,6 +513,7 @@
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear":"Urgent")+'</button>');
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout</button>');
+    if(can("emr.view")) b.push('<button data-a="notes" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"Patient")+'">Notes</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?"▶":(i+1))+'</div>'+
       '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+esc(t.status.replace(/_/g," "))+'</div></div></div><div class="acts">'+b.join("")+'</div></div>';

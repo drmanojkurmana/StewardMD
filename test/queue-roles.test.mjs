@@ -9,8 +9,17 @@ test("nurse can run the queue + record vitals but NEVER treat", () => {
   assert.equal(can("nurse", CAPS.QUEUE_ASSIGN), true);
   assert.equal(can("nurse", CAPS.QUEUE_PRIORITY), true);
   assert.equal(can("nurse", CAPS.EMR_VITALS), true);
-  assert.equal(can("nurse", CAPS.EMR_TREAT), false);   // the load-bearing safety rule
+  assert.equal(can("nurse", CAPS.EMR_VIEW), true);     // may READ clinical notes/history (view-only)
+  assert.equal(can("nurse", CAPS.EMR_TREAT), false);   // the load-bearing safety rule (never edit/prescribe)
   assert.equal(can("nurse", CAPS.STAFF_ADMIN), false);
+});
+
+test("outside staff may READ clinical notes/history but never edit them", () => {
+  // Owner ask: the sister/front-desk can view + download a patient's notes; only doctors write.
+  ["nurse", "supervisor", "reception"].forEach((r) => {
+    assert.equal(can(r, CAPS.EMR_VIEW), true, r + " reads notes");
+    assert.equal(can(r, CAPS.EMR_TREAT), false, r + " cannot edit/order/prescribe");
+  });
 });
 
 test("only doctor/admin may treat; only admin manages staff", () => {
