@@ -22,7 +22,8 @@ import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
-import { importRoster } from "../../_queue_ghis.js";
+import { importRoster, importFromSource } from "../../_queue_ghis.js";
+import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -78,6 +79,14 @@ async function loadSessionFor(env, sessionId, actor) {
   return { s };
 }
 async function ticketView(env, tickets) { return Q.decorateForDoctor(env, tickets); }
+// Org config → OPD connector. Read from env OPD_CONNECTORS (JSON: { "<hospitalId>": "ghis", "*": "..." });
+// native by default. NO hard-coded GHIS org/user id — a hospital is wired to a connector purely by config.
+// (Phase 3 moves this to per-clinic records; the shape { id, mode, connectorId } is stable.)
+function opdOrgFor(env, hospitalId) {
+  let map = {}; try { map = JSON.parse((env && env.OPD_CONNECTORS) || "{}"); } catch (e) { map = {}; }
+  const cid = map[hospitalId] || map["*"] || null;
+  return { id: hospitalId || "", mode: cid ? "connect" : "native", connectorId: cid };
+}
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -195,6 +204,15 @@ export async function onRequest(context) {
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
       if (seg === "ticket") { requireCap(actor.role, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
       if (seg === "import") { requireCap(actor.role, CAPS.QUEUE_ADD); const r = await importRoster(env, s, body.rows || [], actor.id); return json({ ok: true, imported: r.imported, skipped: r.skipped, removed: r.removed, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request); }
+      // OPD engine → resolveOpdSource(org) → connector → existing EMR. Server pulls the worklist via the
+      // org's connector (GHIS or other) instead of the client hitting /api/ghis; degrades to native.
+      if (seg === "import-from-source") {
+        requireCap(actor.role, CAPS.QUEUE_ADD);
+        const org = opdOrgFor(env, s.hospitalId);
+        const ghisToken = request.headers.get("X-Ghis-Token") || "";
+        const r = await importFromSource(env, s, org, { ghisToken: ghisToken, date: body.date || "", cb: body.cb || "", actor: actor.id });
+        return json({ ok: true, source: r.source, connector: org.connectorId || null, imported: r.imported || 0, skipped: r.skipped || 0, removed: r.removed || 0, degraded: !!r.degraded, native: !!r.native, tickets: await ticketView(env, await Q.listTickets(env, s.id)) }, 200, request);
+      }
       if (seg === "advance") { requireCap(actor.role, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.advance(env, s, actor.id)) }, 200, request); }
       if (seg === "status") { requireCap(actor.role, CAPS.QUEUE_STATUS); return json({ ok: true, tickets: await ticketView(env, await Q.setStatus(env, s, body.ticketId, body.status, actor.id)) }, 200, request); }
       if (seg === "priority") { requireCap(actor.role, CAPS.QUEUE_PRIORITY); return json({ ok: true, tickets: await ticketView(env, await Q.setPriority(env, s, body.ticketId, body.priority, actor.id)) }, 200, request); }

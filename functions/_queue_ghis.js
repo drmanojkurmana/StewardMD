@@ -12,6 +12,7 @@
  * mapGhisRow / filterNew are PURE (unit-tested); importRoster is thin I/O over the tested engine.
  */
 import { addTicket, listTickets, setStatus } from "./_queue_engine.js";
+import { resolveOpdSource, opdSupports } from "./_opd_source.js";
 
 // First non-empty value across candidate keys (handles IPD camelCase + OPD .NET PascalCase).
 function pick(row, keys) { for (var i = 0; i < keys.length; i++) { var v = row[keys[i]]; if (v != null && String(v).trim() !== "") return String(v).trim(); } return ""; }
@@ -74,4 +75,18 @@ export async function importRoster(env, session, rows, actor) {
   var removed = 0;
   for (var k = 0; k < stale.length; k++) { try { await setStatus(env, session, stale[k], "cancelled", actor || "import:reconcile"); removed++; } catch (e) {} }
   return { imported: imported, skipped: (rows || []).length - imported, removed: removed };
+}
+
+// OPD-engine → EMR boundary: pull today's worklist through the org's OPD source (connector or native) and
+// import it. The engine never touches /api/ghis directly — GHIS is just the connector behind
+// resolveOpdSource. Degrades to native (no external import, current queue untouched) when the org is
+// native, the connector is absent, or the EMR session/worklist is unavailable (architecture §6/§7).
+export async function importFromSource(env, session, org, ctx) {
+  ctx = ctx || {};
+  var src = resolveOpdSource(env, org);
+  if (!opdSupports(src, "getWorklist")) return { source: src.kind, native: true, imported: 0, skipped: 0, removed: 0 };
+  var r;
+  try { r = await src.getWorklist(ctx, { date: ctx.date || "", cb: ctx.cb || "" }); } catch (e) { r = { error: true }; }
+  if (!r || r.unauth || r.error) return { source: src.kind, degraded: true, imported: 0, skipped: 0, removed: 0 };
+  return Object.assign({ source: src.kind }, await importRoster(env, session, r.rows || [], ctx.actor || "import"));
 }

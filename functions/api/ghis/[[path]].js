@@ -171,7 +171,7 @@ export function parseOpdHtml(html) {
   });
   return rows;
 }
-async function getOpdPatients(env, token, sdate, debug, cb) {
+export async function getOpdPatients(env, token, sdate, debug, cb) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   // Prime the OPD dashboard context. Login fetches the IPD nurse worklist (Nurseipwlnew) for its CSRF token,
   // which leaves the GHIS session in in-patient context -> the OPD list (docopdlist) then returns an empty
@@ -329,7 +329,7 @@ async function getRadiologyReport(env, token, resultid, type) {
 // OPD patient-profile bundle (READ ONLY, flag smd_opd_emr on the client). Merges the existing read calls
 // in parallel; each is caught so one failing scrape doesn't kill the bundle. Returns {unauth:true} up front
 // when the session is gone (mirrors every data fn) so the route can 401. No new scraping.
-async function getOpdProfile(env, token, patientId, recordNo) {
+export async function getOpdProfile(env, token, patientId, recordNo) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const safe = (p) => Promise.resolve(p).then(r => (r && r.unauth) ? null : r).catch(() => null);
   const [labs, radiology, meds, demo] = await Promise.all([
@@ -424,7 +424,7 @@ async function getServiceDetail(env, token, id) {
 // deptId, groupId, desc come from the search row; pack-rate id + price (absent from search) are fetched via
 // getServiceDetail (addservices) unless the body supplies them. `antibiotics` is GHIS's (odd) name for the
 // typed indication field. Never fabricates values we don't have.
-async function orderInvestigation(env, token, body) {
+export async function orderInvestigation(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
   const id = String(body.serviceId || '');
@@ -472,7 +472,7 @@ async function prescribe(env, token, body) {
 // (2026-08-07, POST /Doctor/Home/CreateinitialAssessmentnew — note the lowercase 'i'). GHIS posts the WHOLE
 // form at once, so the client reads the form (getAssessmentForm), overlays the doctor's edits, and sends the
 // full name->value map in body.fields; we normalise to the assessment. namespace + attach ids + CSRF. New = docId 0.
-async function saveAssessment(env, token, body) {
+export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
   const p = new URLSearchParams();
