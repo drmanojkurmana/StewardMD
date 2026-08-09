@@ -3,7 +3,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   org, department, opd, room, membership, thresholds, roomStatus, resolveRoomDoctor,
-  isOwnerOfOrg, canAccessOrg, roleInOrg, withinScope, authorizeOrgAccess, ROOM_ASSIGN_MODES
+  isOwnerOfOrg, canAccessOrg, roleInOrg, withinScope, authorizeOrgAccess, ROOM_ASSIGN_MODES,
+  normDocId, roomForActor
 } from "../functions/_opd_org.js";
 
 test("org: mode/connector; native default; thresholds normalised", () => {
@@ -100,4 +101,26 @@ test("hardening: revoked/disabled staff denied; unmapped identity denied (no 502
   assert.equal(authorizeOrgAccess(orgDoc, null, "ghis:502862", "org1", "staff.admin").reason, "not_a_member");
   // Only the real owner is admin — by ownerUid, never by an employee id.
   assert.equal(authorizeOrgAccess(orgDoc, null, "owner1", "org1", "staff.admin").ok, true);
+});
+
+test("roomForActor: maps a doctor's login to the room the sister routes into (identity mapping)", () => {
+  const rooms = [
+    { id: "r1", name: "Medicine 1", department: "General", assignment: { mode: "primary", primary: "fb:ownerUID", doctors: ["fb:ownerUID"] } },
+    { id: "r2", name: "Gastro", department: "Gastroenterology", assignment: { mode: "primary", primary: "drgastro@clinic.in", doctors: ["drgastro@clinic.in"] } },
+    { id: "r3", name: "Cardio", department: "Cardiology", assignment: { mode: "rotating", doctors: ["ghis:502862", "cardio2@x.in"] } },
+    { id: "r4", name: "Spare", assignment: { mode: "unassigned", doctors: [], primary: null } },
+  ];
+  // normalization: fb:/ghis: prefixes + case are stripped for comparison
+  assert.equal(normDocId("fb:ABC"), "abc");
+  assert.equal(normDocId("ghis:502862"), "502862");
+  // owner: assignment "fb:ownerUID" matches an actor whose id is "fb:ownerUID" OR the raw "ownerUID"
+  assert.equal(roomForActor(rooms, { id: "fb:ownerUID" }).id, "r1");
+  assert.equal(roomForActor(rooms, { id: "ownerUID" }).id, "r1");
+  // invited doctor: assigned by EMAIL, matched via the firebase account's email (id is an unrelated uid)
+  assert.equal(roomForActor(rooms, { id: "fb:someOtherUid", email: "DrGastro@Clinic.in" }).id, "r2");
+  // GHIS employee id matches a rotating-room member ("ghis:502862")
+  assert.equal(roomForActor(rooms, { id: "ghis:502862" }).id, "r3");
+  // unassigned room is never returned; a doctor with no assignment gets null (app -> room picker)
+  assert.equal(roomForActor(rooms, { id: "fb:nobody", email: "nobody@x.in" }), null);
+  assert.equal(roomForActor([], { id: "fb:x" }), null);
 });

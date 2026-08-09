@@ -61,6 +61,26 @@ export function resolveRoomDoctor(rm, opts) {
   return a.primary || docs[0] || null;   // primary / multiple: primary, else first listed
 }
 
+// Normalize a doctor identity for matching: drop the auth-provider prefix (fb:/ghis:) + lowercase, so a
+// room assigned as "fb:<uid>", the raw "<uid>", or a "ghis:<eid>" all compare equal to the actor's id.
+export function normDocId(id) { return String(id == null ? "" : id).toLowerCase().replace(/^(fb:|ghis:)/, ""); }
+// Which room is THIS actor manning? Match the actor's identities (id + email) against each room's assigned
+// doctor id(s), normalized. Returns the room, or null if none is assigned to them. This is how the doctor's
+// app finds the exact room the sister routes into on the console (identity mapping, patient-safety critical).
+export function roomForActor(rooms, actor) {
+  const cand = new Set();
+  const add = (x) => { const n = normDocId(x); if (n) cand.add(n); };
+  add(actor && actor.id);
+  if (actor && actor.email) add(actor.email);
+  for (const rm of (rooms || [])) {
+    const a = (rm && rm.assignment) || {};
+    if (a.mode === "unassigned") continue;
+    const ids = [a.primary].concat(a.doctors || []).filter(Boolean).map(normDocId);
+    if (ids.some((id) => cand.has(id))) return rm;
+  }
+  return null;
+}
+
 // ---- membership (org-based access: role + scope) -----------------------------------------------
 export function membership(o = {}) {
   requireId(o);

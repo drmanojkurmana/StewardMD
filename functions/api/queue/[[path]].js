@@ -24,7 +24,7 @@ import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
-import { resolveRoomDoctor, roomStatus } from "../../_opd_org.js";
+import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
@@ -215,6 +215,25 @@ export async function onRequest(context) {
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const org = await ORG.getOrg(env, orgId);
       return json(Object.assign({ ok: true }, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+    }
+    // The doctor's OWN room session in an org — the exact queue the sister routes into on the console.
+    // Resolves WHICH room by normalized identity (fb uid / email / ghis id); ?roomId= loads a specific
+    // room (the app's picker fallback when no room is auto-assigned to this doctor).
+    if (method === "GET" && seg === "my-room") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.QUEUE_VIEW);
+      if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
+      const org = await ORG.getOrg(env, orgId);
+      const rooms = await ORG.listRooms(env, orgId);
+      const roomId = url.searchParams.get("roomId") || "";
+      const rm = roomId ? rooms.filter((r) => r.id === roomId)[0] : roomForActor(rooms, actor);
+      if (!rm || !resolveRoomDoctor(rm)) {
+        const staffed = rooms.filter((r) => resolveRoomDoctor(r)).map((r) => ({ id: r.id, name: r.name, number: r.number, department: r.department }));
+        return json({ ok: true, resolved: false, rooms: staffed }, 200, request);
+      }
+      const sess = await Q.getOrCreateRoomSession(env, org, rm, url.searchParams.get("date") || "");
+      const tickets = await Q.recompute(env, sess);
+      return json({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, tickets) }, 200, request);
     }
     // Owner/admin mints the login-free wall-display link for a waiting-room screen (90-day, regenerable).
     if (method === "POST" && seg === "display-link") {

@@ -235,8 +235,9 @@
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
     if (cmd === "pickghis") { root().innerHTML = _gate(); setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80); return; }  // GITAM / GHIS
-    if (cmd === "pickhosp") { st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital (future, auto-listed)
+    if (cmd === "pickhosp") { loadRoom(arg, ""); return; }                              // EMR-Connect hospital (future, auto-listed): room-based like a clinic
     if (cmd === "pickclinic") { startClinic(arg); return; }                             // a personal clinic
+    if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
@@ -335,11 +336,32 @@
       '<button class="q-gate-btn" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
       '<button class="q-gate-close" data-q-act="chooser">Back</button>');
   }
-  // Doctor at a CHOSEN StewardMD clinic (Firebase-authed), no GHIS. The console/sister controls the same queue.
-  function startClinic(orgId) {
-    if (!orgId) { _listClinics(); return; }
-    st.openOpts = { hospitalId: orgId, source: "clinic" };
-    loadSession();
+  // Doctor at a CHOSEN StewardMD org (clinic or Connect hospital). Loads the doctor's ROOM session — the
+  // SAME queue the sister routes into on the console (server resolves the room by identity). No GHIS.
+  function startClinic(orgId) { if (!orgId) { _listClinics(); return; } loadRoom(orgId, ""); }
+  function loadRoom(orgId, roomId) {
+    st.orgId = orgId;
+    var el = root(); el.innerHTML = '<div class="q-empty" style="padding:80px">Loading your room…</div>';
+    var q = "?orgId=" + encodeURIComponent(orgId) + (roomId ? "&roomId=" + encodeURIComponent(roomId) : "");
+    apiGet("/my-room" + q).then(function (r) {
+      if (r && r.ok && r.resolved && r.session) {
+        st.session = r.session; st.tickets = r.tickets || [];
+        st.me = { name: (r.room && r.room.name) || r.session.doctorName || "Room", dept: (r.room && r.room.department) || "" };
+        st.view = "dashboard"; paint();
+        clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);   // refresh() polls /list by session id
+        return;
+      }
+      if (r && r.ok && !r.resolved) { _pickRoom(orgId, r.rooms || []); return; }
+      el.innerHTML = _wrap('<p class="q-gate-sub">Could not open this clinic (' + esc((r && r.error) || "error") + ').</p><button class="q-gate-close" data-q-act="chooser">Back</button>');
+    }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
+  }
+  // No room auto-assigned to this doctor here -> let them pick which room they are manning today.
+  function _pickRoom(orgId, rooms) {
+    if (!rooms.length) { root().innerHTML = _wrap('<p class="q-gate-sub">No consulting room is set up for you here yet. Ask the clinic admin, or add rooms in the console.</p><button class="q-gate-btn" style="background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("open_in_new") + " Open console</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>"); return; }
+    var rows = rooms.map(function (rm) {
+      return '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickroom:' + esc(orgId) + '~' + esc(rm.id) + '">' + ms("meeting_room") + " " + esc(rm.name || "Room") + (rm.number ? " · " + esc(rm.number) : "") + (rm.department ? "<br><small style=\"opacity:.85;font-weight:400\">" + esc(rm.department) + "</small>" : "") + "</button>";
+    }).join("");
+    root().innerHTML = _wrap('<p class="q-gate-sub">Which room are you in?</p>' + rows + '<button class="q-gate-close" data-q-act="chooser">Back</button>');
   }
 
   // ---- GHIS login gate + demo mode --------------------------------------------------------
