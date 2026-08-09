@@ -232,8 +232,9 @@ export async function onRequest(context) {
         return json({ ok: true, resolved: false, rooms: staffed }, 200, request);
       }
       const sess = await Q.getOrCreateRoomSession(env, org, rm, url.searchParams.get("date") || "");
-      const tickets = await Q.recompute(env, sess);
-      return json({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, tickets) }, 200, request);
+      await Q.recompute(env, sess);   // refresh ETAs/positions, then return only the LIVE queue (no terminal/checked-out)
+      const active = (await Q.listTickets(env, sess.id)).filter((t) => ACTIVE.indexOf(t.status) > -1);
+      return json({ ok: true, resolved: true, room: { id: rm.id, name: rm.name, number: rm.number, department: rm.department }, session: sess, tickets: await ticketView(env, orderRoomView(active)) }, 200, request);
     }
     // Owner/admin mints the login-free wall-display link for a waiting-room screen (90-day, regenerable).
     if (method === "POST" && seg === "display-link") {
