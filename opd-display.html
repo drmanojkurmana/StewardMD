@@ -122,11 +122,13 @@
     else if (r.serving) now = '<div class="now serve"><div class="lbl">In consultation</div><div class="who">' + esc(r.serving) + '</div></div>';
     else if (r.status === "unavailable") now = '<div class="now idle"><div class="lbl">Not available</div><div class="who">&mdash;</div></div>';
     else now = '<div class="now idle"><div class="lbl">Waiting</div><div class="cnt">' + (r.waiting || 0) + '</div></div>';
-    const up = (r.upcoming || []).filter((n, i) => !(i === 0 && (calling || r.serving)));
-    const upTxt = up.length ? 'Next: ' + up.map((n) => '<b>' + esc(n) + '</b>').join(" &middot; ") : (r.waiting ? '' : 'No one waiting');
+    // r.upcoming is already the waiting-only list (server excludes called/in-consultation), show it as-is.
+    const up = r.upcoming || [];
+    const serveLine = (calling && r.serving) ? '<span class="up-serve">In consultation: <b>' + esc(r.serving) + '</b></span> ' : '';
+    const upTxt = (up.length ? 'Next: ' + up.map((n) => '<b>' + esc(n) + '</b>').join(" &middot; ") : (r.waiting ? '' : (calling || r.serving ? '' : 'No one waiting')));
     el.innerHTML = '<div class="rhead"><span class="rname">' + esc(r.name) + '</span>' + (r.number ? '<span class="rnum">' + esc(r.number) + '</span>' : '') + '</div>' +
       (r.department ? '<div class="rdept">' + esc(r.department) + '</div>' : '') + now +
-      '<div class="up">' + upTxt + '</div>';
+      '<div class="up">' + serveLine + upTxt + '</div>';
     return el;
   }
 
