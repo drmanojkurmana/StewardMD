@@ -55,7 +55,11 @@ async function resolveActor(request, env) {
     const eid = await ghisUserId(env, tok);
     if (eid) {
       const rec = await Q.getStaff(env, eid);
-      return { kind: "staff", id: "staff:" + eid, employeeId: eid, name: (rec && rec.name) || eid, isOwner: false, role: roleForActor(null, rec, false), hospitalId: (rec && rec.hospitalId) || "", doctors: (rec && rec.doctors) || [], ghisToken: tok };
+      // Bootstrap: employee ids in QUEUE_STAFF_ADMIN_IDS get admin (so the owner can seed staff from the
+      // console before anyone is mapped). Everyone else uses their q_staff role (viewer if unmapped).
+      const adminIds = String(env.QUEUE_STAFF_ADMIN_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
+      const role = adminIds.indexOf(eid) > -1 ? "admin" : roleForActor(null, rec, false);
+      return { kind: "staff", id: "staff:" + eid, employeeId: eid, name: (rec && rec.name) || eid, isOwner: false, role: role, hospitalId: (rec && rec.hospitalId) || "", doctors: (rec && rec.doctors) || [], ghisToken: tok };
     }
   }
   return null;

@@ -33,18 +33,23 @@ tag: `pre-opd-staff-platform`.
   board → call/start/priority/reorder-with-reason/assign/checkout → audit drawer → add walk-in.
 - **Patient view** — `queue.html?t=<token>&v=t` renders the sealed visit summary.
 
-## Go-live (owner)
+## Go-live (owner) — already ON for testing
 
-1. **Turn it on**: add `QUEUE_STAFF_ENABLED = "1"` to `wrangler.toml` `[vars]` **and**
-   `[env.production.vars]` (same rule as `QUEUE_ENABLED` — a lone Pages secret does NOT bind; never
-   also create it as a secret or the build fails on a duplicate binding). Push.
-2. **Seed staff roles** (from an owner/admin Firebase session — the mobile app or an authed call):
-   `POST /api/queue/staff  { employeeId, role, name, hospitalId }`  (role ∈ the list above).
-   Un-seeded logins stay read-only viewers.
-3. **Hospital id must match** the doctor app's sessions. The doctor app currently creates sessions under
-   `hospitalId="manual"` unless a `hospitalId` is passed; set the console's hospital field + each staff
-   record's `hospitalId` to the same value so the board finds the queues.
-4. Staff open `stewardmd.in/opd` and sign in with their employee id.
+`QUEUE_STAFF_ENABLED="1"` + `FOLLOWCARE_MSG_CHANNEL="whatsapp"` are set in `wrangler.toml` (both `[vars]`
+and `[env.production.vars]`). Remaining owner steps to actually test:
+
+1. **Bootstrap an admin**: set `QUEUE_STAFF_ADMIN_IDS = "<your GHIS employee id>"` (comma-separated for
+   several) in `wrangler.toml` `[env.production.vars]`. Those ids sign in to the console as **admin** and
+   can map everyone else from the **Staff** button — no curl needed. (Un-mapped logins are read-only.)
+2. **WhatsApp creds** (the link send is inert until these are set): `FOLLOWCARE_WA_PROVIDER` +
+   its creds. Quick personal test = `callmebot` + `CALLMEBOT_APIKEY` (sends to a number that authorised
+   the CallMeBot bot). Production = a real BSP via `custom` (`FOLLOWCARE_WA_URL` + `FOLLOWCARE_WA_BODY`).
+   Set these the way you set your other Pages env. SMS via 2Factor is the next wiring (flip
+   `FOLLOWCARE_MSG_CHANNEL="sms"`).
+3. **Hospital id must match** the doctor app's sessions (it defaults to `hospitalId="manual"`). Use the
+   same value in the console's hospital field, each staff record, and — ideally — set the doctor app to
+   pass a real hospital id. Otherwise the board finds no queues.
+4. Staff open `stewardmd.in/opd`, sign in with their GHIS employee id.
 
 ## Not built yet (follow-ups, honest list)
 

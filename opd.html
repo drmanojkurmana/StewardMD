@@ -134,12 +134,14 @@
       '<button class="ghost" id="lo">Sign out</button></div></div></header>'+
       '<div class="wrap"><div class="toolbar">'+
         '<div class="grow"><b>OPD Board</b> · '+esc(st.hospital)+' · '+esc(st.date)+'</div>'+
+        (can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
     document.getElementById("lo").onclick=logout;
     var ref=document.getElementById("ref"); if(ref) ref.onclick=loadBoard;
     var walk=document.getElementById("walk"); if(walk) walk.onclick=openWalkin;
+    var stf=document.getElementById("staff"); if(stf) stf.onclick=openStaffAdmin;
   }
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
@@ -254,6 +256,39 @@
         var when=new Date(e.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
         return '<div class="ev"><div><b>'+esc(e.action)+'</b> · '+esc(e.mrnLast4?("#"+e.mrnLast4):"")+' <span class="t">'+when+' · '+esc(e.actor)+'</span></div><div class="t">'+esc(m)+'</div></div>';
       }).join("");
+    });
+  }
+
+  // ---- staff admin (owner/admin): map employee id -> role ----
+  var ROLES=["nurse","reception","supervisor","intern","resident","doctor","admin","viewer"];
+  function openStaffAdmin(){
+    open('<h3>Staff & roles</h3><div id="slist">Loading…</div>'+
+      '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
+      '<input id="se" placeholder="Employee ID" inputmode="numeric" style="margin-bottom:8px">'+
+      '<input id="sn" placeholder="Name (optional)" style="margin-bottom:8px">'+
+      '<select id="sr">'+ROLES.map(function(r){return '<option value="'+r+'"'+(r==="nurse"?" selected":"")+'>'+r+'</option>';}).join("")+'</select>'+
+      '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Save</button></div></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var e=sheet.querySelector("#se").value.trim(); if(!e){toast("Enter an employee ID");return;}
+      api("staff",{method:"POST",body:{employeeId:e,role:sheet.querySelector("#sr").value,name:sheet.querySelector("#sn").value.trim(),hospitalId:st.hospital}}).then(function(r){
+        if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Save failed");return;} toast("Saved"); loadStaffList();
+        sheet.querySelector("#se").value=""; sheet.querySelector("#sn").value="";
+      });
+    };
+    loadStaffList();
+  }
+  function loadStaffList(){
+    api("staff?hospitalId="+encodeURIComponent(st.hospital)).then(function(r){
+      var el=sheet.querySelector("#slist"); if(!el) return;
+      var rows=(r&&r.staff)||[];
+      el.innerHTML=rows.length? rows.map(function(s){
+        return '<div class="ev" style="display:flex;align-items:center;gap:8px"><div style="flex:1"><b>'+esc(s.name||s.employeeId)+'</b> <span class="t">#'+esc(s.employeeId)+'</span><div class="t">'+esc(s.role)+'</div></div>'+
+          '<button class="cancel" data-rm="'+esc(s.employeeId)+'" style="padding:6px 10px">Remove</button></div>';
+      }).join("") : '<div class="empty">No staff mapped yet.</div>';
+      Array.prototype.forEach.call(el.querySelectorAll("[data-rm]"),function(b){b.onclick=function(){
+        api("staff",{method:"POST",body:{employeeId:b.getAttribute("data-rm"),remove:true}}).then(function(){toast("Removed");loadStaffList();});
+      };});
     });
   }
 
