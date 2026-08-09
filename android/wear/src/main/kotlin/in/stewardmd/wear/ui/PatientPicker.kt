@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.ListHeader
@@ -29,6 +31,7 @@ fun PatientPicker(icu: IcuRepository, header: String, onPick: (gid: String, pati
     val gid = gids.firstOrNull()
 
     val state = rememberScalingLazyListState()
+    val fr = rememberActiveFocusRequester()
     SmdScaffold(state) {
         if (gid == null) {
             Centered { Text("No shared units", style = MaterialTheme.typography.body2, color = MaterialTheme.colors.onSurfaceVariant) }
@@ -36,7 +39,7 @@ fun PatientPicker(icu: IcuRepository, header: String, onPick: (gid: String, pati
         }
         val patientsFlow = remember(gid) { icu.patientRefs(gid) }
         val patients by patientsFlow.collectAsState(initial = emptyList())
-        ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth()) {
+        ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth().rotaryScrollable(RotaryScrollableDefaults.behavior(state), fr)) {
             item { ListHeader { Text(header) } }
             if (patients.isEmpty()) {
                 item { Text("No patients in this unit", style = MaterialTheme.typography.caption2, color = MaterialTheme.colors.onSurfaceVariant) }

@@ -29,6 +29,8 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Icon
@@ -90,10 +92,11 @@ fun SmdScaffold(state: ScalingLazyListState, content: @Composable () -> Unit) {
 @Composable
 private fun RootList(onSelect: (Screen) -> Unit) {
     val state = rememberScalingLazyListState()
+    val fr = rememberActiveFocusRequester()
     SmdScaffold(state) {
         ScalingLazyColumn(
             state = state,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().rotaryScrollable(RotaryScrollableDefaults.behavior(state), fr),
             autoCentering = AutoCenteringParams(itemIndex = 0),
         ) {
             item { ListHeader { Text("StewardMD") } }

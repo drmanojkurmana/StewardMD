@@ -21,6 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
+import `in`.stewardmd.wear.ui.rememberActiveFocusRequester
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
@@ -39,6 +42,7 @@ fun WatchlistScreen(onBack: () -> Unit) {
     LaunchedEffect(Unit) { ui = loader.load() }
 
     val state = rememberScalingLazyListState()
+    val fr = rememberActiveFocusRequester()
     SmdScaffold(state) {
         when (val s = ui) {
             WatchlistUi.Loading -> Centered { CircularProgressIndicator() }
@@ -50,7 +54,7 @@ fun WatchlistScreen(onBack: () -> Unit) {
             )
             is WatchlistUi.Error -> Message(Icons.Filled.PhonelinkLock, "Not signed in", s.msg, onBack)
             is WatchlistUi.Loaded ->
-                ScalingLazyColumn(state = state, modifier = Modifier.fillMaxSize()) {
+                ScalingLazyColumn(state = state, modifier = Modifier.fillMaxSize().rotaryScrollable(RotaryScrollableDefaults.behavior(state), fr)) {
                     item { ListHeader { Text("Watched") } }
                     if (s.patients.isEmpty()) {
                         item {

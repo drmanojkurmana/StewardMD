@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
+import `in`.stewardmd.wear.ui.rememberActiveFocusRequester
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CompactChip
@@ -56,8 +59,9 @@ private fun TaskList(icu: IcuRepository, gid: String, patient: PatientRef, onBac
     val tasks by tasksFlow.collectAsState(initial = emptyList())
     val scope = rememberCoroutineScope()
     val state = rememberScalingLazyListState()
+    val fr = rememberActiveFocusRequester()
     SmdScaffold(state) {
-        ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth()) {
+        ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth().rotaryScrollable(RotaryScrollableDefaults.behavior(state), fr)) {
             item { ListHeader { Text(patient.name) } }
             if (tasks.isEmpty()) {
                 item { Text("No open tasks", style = MaterialTheme.typography.caption2, color = MaterialTheme.colors.onSurfaceVariant) }

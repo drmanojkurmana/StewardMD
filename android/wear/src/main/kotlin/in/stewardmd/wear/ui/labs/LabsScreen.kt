@@ -16,6 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
+import `in`.stewardmd.wear.ui.rememberActiveFocusRequester
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
@@ -63,13 +66,14 @@ fun LabsScreen(onBack: () -> Unit) {
     LaunchedEffect(Unit) { ui = loader.load(Session.signedIn(), GhisSession.token) }
 
     val state = rememberScalingLazyListState()
+    val fr = rememberActiveFocusRequester()
     SmdScaffold(state) {
         when (val s = ui) {
             LabsUi.Loading -> Centered { CircularProgressIndicator() }
             LabsUi.NeedsSignIn -> SmdMessage(Icons.Filled.PhonelinkLock, "Not signed in", "Sign in on your phone", onBack)
             LabsUi.NeedsPro -> SmdMessage(Icons.Filled.PhonelinkLock, "Pro feature", "Lab Watch needs a Pro account", onBack)
             is LabsUi.Error -> SmdMessage(Icons.Filled.PhonelinkLock, "Can't load", s.msg, onBack)
-            is LabsUi.Loaded -> ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth()) {
+            is LabsUi.Loaded -> ScalingLazyColumn(state = state, modifier = Modifier.fillMaxWidth().rotaryScrollable(RotaryScrollableDefaults.behavior(state), fr)) {
                 item { ListHeader { Text("New labs") } }
                 if (!s.wardSession) {
                     item {
