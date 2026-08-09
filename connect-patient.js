@@ -61,8 +61,9 @@
     if (v.text != null) return v.text;     // valueString / valueCodeableConcept
     return "";
   }
+  // LAB observations only (vital-signs are routed to the ICU monitor separately, see vitalsFromObs).
   function labRows(bundle) {
-    var obs = (bundle && bundle.observations) || [];
+    var obs = ((bundle && bundle.observations) || []).filter(function (o) { return o.category !== "vital-signs"; });
     return obs.map(function (o) {
       return {
         test: (o.code && o.code.text) || "",
@@ -74,6 +75,31 @@
       };
     }).filter(function (r) { return r.test && r.result !== ""; });
   }
+  // VITAL-SIGNS observations -> the ICU monitor's vitals object (LOINC-coded, with a BP-panel + text fallback).
+  var VITAL_LOINC = { "8867-4": "hr", "8480-6": "sbp", "8462-4": "dbp", "8478-0": "map", "9279-1": "rr", "2708-6": "spo2", "59408-5": "spo2", "8310-5": "temp", "8329-5": "temp" };
+  function obsNum(o) { var v = o && o.value; return (v && v.value != null && !isNaN(+v.value)) ? +v.value : null; }
+  function vitalsFromObs(bundle) {
+    var out = {};
+    ((bundle && bundle.observations) || []).forEach(function (o) {
+      if (o.category !== "vital-signs") return;
+      var codes = ((o.code && o.code.coding) || []).map(function (c) { return c.code; });
+      (o.components || o.component || []).forEach(function (c) {   // BP panel components
+        var cc = ((c.code && c.code.coding) || []).map(function (x) { return x.code; });
+        var k = cc.indexOf("8480-6") > -1 ? "sbp" : cc.indexOf("8462-4") > -1 ? "dbp" : null;
+        var val = c.value && c.value.value; if (k && val != null && !isNaN(+val) && out[k] == null) out[k] = +val;
+      });
+      var key = null; for (var i = 0; i < codes.length; i++) { if (VITAL_LOINC[codes[i]]) { key = VITAL_LOINC[codes[i]]; break; } }
+      if (!key) { var t = ((o.code && o.code.text) || "").toLowerCase(); key = /heart rate|pulse/.test(t) ? "hr" : /systolic/.test(t) ? "sbp" : /diastolic/.test(t) ? "dbp" : /respirat/.test(t) ? "rr" : /oxygen sat|spo2|o2 sat/.test(t) ? "spo2" : /temperature/.test(t) ? "temp" : null; }
+      var n = obsNum(o); if (key && n != null && out[key] == null) out[key] = n;
+    });
+    return out;
+  }
+  // DiagnosticReports -> ICU imaging/report records (the shape ICU.ingestWardImaging normalizes).
+  function imagingRows(bundle) {
+    return ((bundle && bundle.diagnosticReports) || []).map(function (r) {
+      return { studyName: (r.code && r.code.text) || r.category || "Diagnostic report", report: r.conclusion || "", date: r.effectiveDateTime || r.issued || "" };
+    }).filter(function (x) { return x.report || x.studyName; });
+  }
   function medText(m) {
     var n = (m && m.medication && m.medication.text) || "";
     var d = (m && m.dosage && m.dosage.text) || "";
@@ -82,15 +108,18 @@
 
   // ---- feed the app's existing surfaces ----------------------------------------------------------
   function pushToICU(bundle) {
-    var out = { labs: 0 };
+    var out = { labs: 0, vitals: 0, imaging: 0 };
     try {
       var demo = demographics(bundle);
+      var pid = (bundle.patient && bundle.patient.id) || "";
       if (window.ICU && window.ICU.ingestPatient) window.ICU.ingestPatient({ name: demo.name, sex: demo.sex, age: demo.age, mrn: demo.mrn, diagnosis: demo.diagnosis });
-      var labs = labRows(bundle);
-      if (labs.length && window.ICU && window.ICU.ingestWardHistory) {
-        window.ICU.ingestWardHistory({ patient: { name: demo.name }, patientId: (bundle.patient && bundle.patient.id) || "", source: "Connect EMR", labs: labs });
-        out.labs = labs.length;
+      var labs = labRows(bundle), vitals = vitalsFromObs(bundle);
+      if ((labs.length || Object.keys(vitals).length) && window.ICU && window.ICU.ingestWardHistory) {
+        window.ICU.ingestWardHistory({ patient: { name: demo.name }, patientId: pid, source: "Connect EMR", labs: labs, vitals: Object.keys(vitals).length ? vitals : undefined });
+        out.labs = labs.length; out.vitals = Object.keys(vitals).length;
       }
+      var img = imagingRows(bundle);
+      if (img.length && window.ICU && window.ICU.ingestWardImaging) { window.ICU.ingestWardImaging({ patientId: pid, source: "Connect EMR", imaging: img }); out.imaging = img.length; }
     } catch (e) {}
     return out;
   }
