@@ -19,15 +19,47 @@ const withId = (id, f) => Object.assign({ id }, f || {});
 const audit = (env, orgId, actor, action, meta) => qAudit(env, { hospitalId: orgId, ticketId: "", actor: actor || "", action, meta: meta || "" });
 
 // ---- organizations -----------------------------------------------------------------------------
+async function uniqueOrgCode(env) {
+  for (let i = 0; i < 6; i++) { const c = M.genSmdCode("SMD-", 6); if (!(await getOrgByCode(env, c))) return c; }
+  return M.genSmdCode("SMD-", 8);   // wider space fallback (collisions astronomically unlikely)
+}
 export async function createOrg(env, body, ownerUid) {
   body = body || {};
   const id = body.id ? sanitize(body.id) : newId();
-  const f = M.org({ id, name: body.name, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
+  const code = await uniqueOrgCode(env);
+  const f = M.org({ id, code, name: body.name, mode: body.mode, connectorId: body.connectorId, ownerUid, thresholds: body.thresholds, createdAt: now() });
   await fsCommit(env, [wCreate(env, "q_orgs/" + id, f)]);
-  await audit(env, id, ownerUid, "org:create", f.mode);
+  await audit(env, id, ownerUid, "org:create", f.mode + " " + code);
   return f;
 }
-export async function getOrg(env, orgId) { const d = await fsGet(env, "q_orgs/" + sanitize(orgId)); return d ? M.org(withId(sanitize(orgId), d.fields)) : null; }
+export async function getOrg(env, orgId) {
+  const d = await fsGet(env, "q_orgs/" + sanitize(orgId)); if (!d) return null;
+  const o = M.org(withId(sanitize(orgId), d.fields));
+  if (!o.code) {   // lazy-assign a StewardMD ID to a legacy org on first load
+    o.code = await uniqueOrgCode(env);
+    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { code: o.code })]); } catch (e) {}
+  }
+  return o;
+}
+// Resolve a clinic StewardMD code (SMD-XXXXXX) OR a raw orgId to the orgId.
+export async function getOrgByCode(env, code) {
+  const c = M.normalizeSmdId(code); if (!c) return null;
+  const r = await fsQuery(env, "q_orgs", { where: { field: "code", value: c }, limit: 1 });
+  return r && r[0] ? M.org(withId(r[0].id, r[0].fields)) : null;
+}
+export async function resolveOrgId(env, codeOrId) {
+  if (M.looksLikeSmdCode(codeOrId)) { const o = await getOrgByCode(env, codeOrId); return o ? o.id : ""; }
+  return String(codeOrId || "");
+}
+// Stable StewardMD ID per Google account (uid) — get-or-create.
+export async function userSmdId(env, uid, email) {
+  const id = sanitize(uid); if (!id) return "";
+  const d = await fsGet(env, "q_users/" + id);
+  if (d && d.fields && d.fields.smdId) return d.fields.smdId;
+  const smdId = M.genSmdCode("SMD-U-", 5);
+  try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
+  return smdId;
+}
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
   return r.map((x) => M.org(withId(x.id, x.fields)));

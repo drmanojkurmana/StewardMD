@@ -285,6 +285,7 @@ service cloud.firestore {
     match /q_opds/{opdId}            { allow read, write: if false; }
     match /q_rooms/{roomId}          { allow read, write: if false; }
     match /q_members/{memberId}      { allow read, write: if false; }
+    match /q_users/{uid}             { allow read, write: if false; }   // StewardMD-ID per account
 
     // Everything else is denied.
     match /{document=**} {

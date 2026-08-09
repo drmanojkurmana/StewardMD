@@ -28,7 +28,16 @@ export function roomStatus(waiting, inConsult, t) {
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
-  return { id: s(o.id), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+  return { id: s(o.id), code: s(o.code), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+}
+// Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
+const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+export function normalizeSmdId(x) { return String(x || "").toUpperCase().replace(/[^0-9A-Z-]/g, "").trim(); }
+export function looksLikeSmdCode(x) { return /^SMD-/.test(normalizeSmdId(x)); }
+export function genSmdCode(prefix, n) {   // uses CSPRNG; prefix e.g. "SMD-" or "SMD-U-"
+  const bytes = crypto.getRandomValues(new Uint8Array(n || 6));
+  let out = ""; for (let i = 0; i < bytes.length; i++) out += SMD_ALPHABET[bytes[i] % SMD_ALPHABET.length];
+  return (prefix || "SMD-") + out;
 }
 export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code) }; }
 export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name) }; }

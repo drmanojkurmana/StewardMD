@@ -143,7 +143,8 @@ export async function onRequest(context) {
       if (!staffEnabled(env)) return json({ ok: false, error: "staff_disabled" }, 404, request);
       const b = await readBody(request);
       if (sub === "pin") {
-        const auth = await ORG.getMemberAuth(env, b.orgId || "", b.identity || "");
+        const orgId = await ORG.resolveOrgId(env, b.clinicCode || b.orgId || "");   // accept the SMD-XXXXXX clinic code
+        const auth = await ORG.getMemberAuth(env, orgId, b.identity || "");
         if (!auth || !auth.active || !auth.pinHash) return json({ ok: false, error: "invalid_login" }, 401, request);
         const gate = pinLocked(auth, Date.now());
         if (gate.locked) return json({ ok: false, error: "locked", retryInMs: gate.remainingMs }, 429, request);
@@ -180,7 +181,9 @@ export async function onRequest(context) {
       // For non-owner/non-doctor identities, the real role is org-scoped (q_members), not the global viewer.
       let role = actor.role, orgId = actor.orgId || url.searchParams.get("orgId") || actor.hospitalId || "";
       if (actor.kind !== "firebase" && orgId) { const az = await ORG.authorizeOrg(env, actor, orgId, null); if (az.ok) role = az.role; }
-      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, name: actor.name, hospitalId: actor.hospitalId || "" }, 200, request);
+      const smdId = actor.kind === "firebase" ? await ORG.userSmdId(env, actor.id, actor.email) : "";   // StewardMD ID per account
+      let orgCode = ""; if (orgId) { const o = await ORG.getOrg(env, orgId); if (o) orgCode = o.code || ""; }
+      return json({ ok: true, role: role, caps: capsFor(role), kind: actor.kind, orgId: orgId, orgCode: orgCode, smdId: smdId, name: actor.name, hospitalId: actor.hospitalId || "" }, 200, request);
     }
 
     // ---- org / rooms / members config (Phase 3: multi-tenant, isolation-gated) ----
