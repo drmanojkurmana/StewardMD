@@ -56,7 +56,8 @@ async function resolveActor(request, env) {
   const who = await identify(request, env);
   if (who && !who.guest) {
     const owner = isOwnerEmail(env, who.email);
-    return { kind: "firebase", id: who.id, email: who.email || "", isOwner: owner, role: owner ? "admin" : "doctor", hospitalId: "", name: who.email || "" };
+    // Patient-facing name = the Firebase displayName ("Dr Manoj"), NEVER the email (no email exposure to patients).
+    return { kind: "firebase", id: who.id, email: who.email || "", isOwner: owner, role: owner ? "admin" : "doctor", hospitalId: "", name: who.name || "Doctor" };
   }
   if (staffEnabled(env)) {
     const tok = request.headers.get("X-Staff-Token") || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");

@@ -70,7 +70,7 @@ async function verifyFirebaseToken(token, env) {
   try {
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64urlToBytes(parts[2]), new TextEncoder().encode(parts[0] + "." + parts[1]));
-    return ok ? { uid: payload.sub, email: (typeof payload.email === "string" ? payload.email : null) } : null;
+    return ok ? { uid: payload.sub, email: (typeof payload.email === "string" ? payload.email : null), name: (typeof payload.name === "string" ? payload.name : null) } : null;
   } catch (e) { return null; }
 }
 export async function sha256hex(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("").slice(0, 24); }
@@ -96,7 +96,7 @@ export async function identify(request, env) {
   // .uid off it. Coercing the whole object into the key ("fb:" + obj → "fb:[object Object]") collapsed
   // EVERY signed-in user onto ONE shared id, so all accounts shared a single KU ledger + quota bucket
   // (balances appeared to "reset" to the shared total; metering merged). Per-account key = "fb:<uid>".
-  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok) }; }
+  if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok), name: fb.name || null }; }
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
