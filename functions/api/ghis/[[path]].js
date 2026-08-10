@@ -18,6 +18,8 @@
  *   POST /api/ghis/login    {userId,password,remember}     -> {token, userId}
  *   POST /api/ghis/logout   (Authorization: Bearer <token>)-> {ok:true}
  *   GET  /api/ghis/status | patients | lab | lab-detail | radiology | radiology-report | medications
+ *        | assessment-form   (Initial-Assessment input discovery — see _assessment.js)
+ *   POST /api/ghis/save-assessment {patientId,fields}  (Initial-Assessment write-back; fail-closed)
  *        (all require  Authorization: Bearer <token>)
  * ---------------------------------------------------------------------------
  */
@@ -25,6 +27,7 @@
 import { identify } from '../../_fbauth.js';
 import { getCred } from '../../_watch.js';
 import { requirePro } from '../../_entitlement.js';
+import { buildAssessmentBody, parseFormInputs, GHIS_FIELD_MAP, GHIS_SAVE_PATH } from './_assessment.js';
 
 const GHIS = 'https://ghis.gitam.edu';
 const SSO  = 'https://gimsrlogin.gitam.edu';
@@ -304,6 +307,30 @@ export async function onRequest(context) {
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology-report'){ const r = await getRadiologyReport(env, token, q.get('resultid') || '', q.get('type') || 'manual'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'medications')     { const r = await getMedications(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+
+    // ---- Initial Assessment: discover the form's inputs (one-time mapping aid) ----
+    // GET /api/ghis/assessment-form?patientId=<MR> → [{name,id,type,label,options}] for every input.
+    if (seg === 'assessment-form') {
+      const s = await getSession(env, token); if (!s) return json({ error: 'login_required' }, 401);
+      const r = await ghisReq(env, token, 'GET', `/Doctor/Home/GetInitialAssessmentnew/?id=${encodeURIComponent(q.get('patientId') || '')}`, null, { 'X-Requested-With': 'XMLHttpRequest' });
+      if (unauth(r)) return json({ error: 'login_required' }, 401);
+      return json({ inputs: parseFormInputs(r.body || ''), htmlLength: (r.body || '').length, savePathConfigured: !!GHIS_SAVE_PATH });
+    }
+
+    // ---- Initial Assessment: write-back (Save & sign off) ----
+    // POST /api/ghis/save-assessment {patientId, fields:{schemaFieldId:value}} -> {ok,status}
+    // FAIL-CLOSED: until _assessment.js is configured, returns {ok:false, error} and the app keeps
+    // the local save (Save & sign off degrades to "saved locally, GHIS sign-off pending").
+    if (seg === 'save-assessment' && request.method === 'POST') {
+      const s = await getSession(env, token); if (!s) return json({ error: 'login_required' }, 401);
+      const body = await request.json().catch(() => ({}));
+      const built = buildAssessmentBody(body.fields || {}, { csrf: s.csrf, patientId: body.patientId, map: GHIS_FIELD_MAP, savePath: GHIS_SAVE_PATH });
+      if (!built.ok) return json({ ok: false, error: built.error });   // never fabricate a sign-off
+      const r = await ghisReq(env, token, 'POST', GHIS_SAVE_PATH, built.body, { 'X-Requested-With': 'XMLHttpRequest' });
+      if (unauth(r)) return json({ error: 'login_required' }, 401);
+      return json({ ok: r.status >= 200 && r.status < 300, status: r.status });
+    }
+
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);
