@@ -149,3 +149,13 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-empty .material-symbols-outlined { font-size: 32px; color: var(--secondary); }
 #smdOpdEmr .oe-empty.err { color: var(--error); }
 #smdOpdEmr .oe-empty.err .material-symbols-outlined { color: var(--error); }
+
+/* voice fill (SMD_AMBIENT) */
+#smdOpdEmr .oe-voicebar { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: color-mix(in srgb, var(--surface) 92%, var(--primary)); }
+#smdOpdEmr .oe-voicebar .oe-btn { flex: 0 0 auto; background: var(--primary); color: var(--on-primary); padding: 10px 16px; }
+#smdOpdEmr .oe-voicebar .oe-btn.live { background: var(--error, #b91c1c); color: var(--on-error, #fff); animation: oeVoicePulse 1.3s infinite; }
+@keyframes oeVoicePulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 50%, transparent); } 50% { box-shadow: 0 0 0 8px transparent; } }
+#smdOpdEmr .oe-voice-status { font: 600 12px var(--q-sans); color: var(--secondary); min-width: 0; }
+/* fields the voice engine filled (doctor can still edit) */
+#smdOpdEmr .oe-field.oe-voice .oe-inp { border-color: var(--green, #1c7a4a); background: var(--green-bg, #e7f5ec); }
+#smdOpdEmr .oe-check.oe-voice, #smdOpdEmr .oe-yn.oe-voice { outline: 2px solid color-mix(in srgb, var(--green, #1c7a4a) 40%, transparent); outline-offset: 2px; border-radius: 8px; }
