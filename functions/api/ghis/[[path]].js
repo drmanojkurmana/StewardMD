@@ -89,8 +89,15 @@ async function loginGhis(userId, password) {
   const li = await raw(jar, 'POST', SSO + '/Index', form, { 'X-Requested-With': 'XMLHttpRequest', 'Referer': SSO + '/' });
   let ok = false; try { ok = (JSON.parse(li.body).param1 == 200); } catch {}
   if (!ok) { const e = new Error('bad_credentials'); e.code = 'bad_credentials'; throw e; }
-  await raw(jar, 'GET', SSO + '/apps');
-  const homeResp = await follow(jar, await raw(jar, 'GET', GHIS + '/Home'));
+  // SSO -> GHIS launch handoff (THE fix for empty worklists). The SSO /apps launcher links each module to
+  // /route?id=<encrypted>. The "Doctor" module's route 302s SSO /route -> GHIS /Login/?id=<token> -> /Doctor/Home,
+  // and ONLY that establishes a DATA-capable ghis.gitam.edu session. Hitting /Doctor/Home directly (as before)
+  // yields a session that loads page shells but returns EMPTY worklists (IPD "No data", OPD 0 rows). Parse the
+  // Doctor route from /apps; fall back to the known module id if the label markup ever changes.
+  const apps = await raw(jar, 'GET', SSO + '/apps');
+  const rm = (apps.body || '').match(/href="(route\?id=[^"]+)"[\s\S]{0,400}?<h4>\s*Doctor\s*<\/h4>/i) || (apps.body || '').match(/href="(route\?id=[^"]+)"/i);
+  const routePath = ((rm && rm[1]) || 'route?id=k/9J1c3NUFVni8P5uxUR6Q==').replace(/&amp;/g, '&');
+  const homeResp = await follow(jar, await raw(jar, 'GET', SSO + '/' + routePath));   // -> GHIS/Login -> /Doctor/Home
   const cookie = jarHeader(jar, 'ghis.gitam.edu');
   if (!/AspNetCore\.Session/.test(cookie)) throw new Error('session_not_established');
   const wl = await raw({ 'ghis.gitam.edu': Object.fromEntries(cookie.split('; ').map(p => { const i = p.indexOf('='); return [p.slice(0, i), p.slice(i + 1)]; })) }, 'GET', GHIS + '/Doctor/Home/Nurseipwlnew/?id=');
