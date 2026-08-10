@@ -8,7 +8,7 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
   var API = "/api/queue";
   var POLL_MS = 8000;
-  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0 };
+  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
@@ -67,6 +67,25 @@
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="Assessment (GHIS Initial Assessment)" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
         "</div></div>";
   }
+  function orderedTickets(state) {
+    return (state.tickets || []).slice()
+      .filter(function (t) { return isQueued(t.status); })
+      .sort(function (a, b) { return (a.position || 99) - (b.position || 99) || (a.registeredAt || 0) - (b.registeredAt || 0); });
+  }
+  function matchTicket(t, q) {
+    return String(t.name || "").toLowerCase().indexOf(q) >= 0 ||
+           String(t.mrnLast4 || "").toLowerCase().indexOf(q) >= 0 ||
+           String(t.ghisPatientId || "").toLowerCase().indexOf(q) >= 0;
+  }
+  // Rows for the queue timeline, filtered by the live search box. Position numbers keep the
+  // TRUE queue index (a searched patient still shows #12, not #1).
+  function timelineRows(state) {
+    var ordered = orderedTickets(state);
+    var q = (state.search || "").trim().toLowerCase();
+    var vis = q ? ordered.filter(function (t) { return matchTicket(t, q); }) : ordered;
+    if (!vis.length) return '<div class="q-empty">' + (q ? "No patients match “" + esc(state.search) + "”." : "Queue is empty. Import from Ward Sync or add a patient.") + "</div>";
+    return vis.map(function (t) { return ticketRow(t, ordered.indexOf(t), ordered); }).join("");
+  }
   function renderConsult(cur) {
     if (!cur) return '<div class="q-consult"><div class="q-empty">' + ms("play_circle") + "<div style=\"margin-top:8px\">No one in consultation. Tap a patient's <b>Start</b> or <b>Finish</b> to advance the queue.</div></div></div>";
     var vt = cur.visitType === "followup" ? "Follow-up" : "New";
@@ -90,7 +109,7 @@
   }
   function dashboardCanvas(state) {
     var s = state.session || {}, tickets = (state.tickets || []).slice();
-    var ordered = tickets.filter(function (t) { return isQueued(t.status); }).sort(function (a, b) { return (a.position || 99) - (b.position || 99) || (a.registeredAt || 0) - (b.registeredAt || 0); });
+    var ordered = orderedTickets(state);
     var cur = tickets.filter(function (t) { return t.status === "in_consultation"; })[0] || null;
     var k = computeKpis(tickets), ins = insightFor(tickets), paused = s.status === "paused";
     var kpis = '<section class="q-kpis">' +
@@ -99,8 +118,9 @@
       kpi("Avg. Consultation", "timer", k.avgConsult + "<u>m</u>", "") +
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
-    var rows = ordered.length ? ordered.map(function (t, i) { return ticketRow(t, i, ordered); }).join("") : '<div class="q-empty">Queue is empty. Import from Ward Sync or add a patient.</div>';
-    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + rows +
+    var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + searchBox +
+      '<div id="qTlRows">' + timelineRows(state) + "</div>" +
       '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + ordered.length + ")</a></div></div>";
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : "";
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
@@ -201,7 +221,16 @@
 
   // ---- controller -------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
-  function paint() { root().innerHTML = _render(st); }
+  function paint() {
+    var r = root();
+    // Preserve scroll + search focus across the 8s poll repaint (innerHTML rebuild otherwise
+    // yanks the list back to the top and drops focus mid-type).
+    var prev = r.querySelector(".q-canvas"), top = prev ? prev.scrollTop : 0;
+    var ae = document.activeElement, onSearch = !!(ae && ae.classList && ae.classList.contains("q-tl-search")), caret = onSearch ? ae.selectionStart : 0;
+    r.innerHTML = _render(st);
+    var next = r.querySelector(".q-canvas"); if (next && top) next.scrollTop = top;
+    if (onSearch) { var si = r.querySelector(".q-tl-search"); if (si) { si.focus(); try { si.setSelectionRange(caret, caret); } catch (e) {} } }
+  }
 
   function refresh() {
     if (st.demo || !st.session || st.view === "settings") return;   // demo has no server session; don't clobber unsaved settings mid-poll
@@ -231,6 +260,7 @@
     var b = e.target.closest && e.target.closest("[data-q-act]"); if (!b) return;
     var a = b.getAttribute("data-q-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "clearsearch") { st.search = ""; paint(); return; }
     if (cmd === "chooser") { root().innerHTML = _chooseType(); return; }                // back to Hospital / Personal clinic
     if (cmd === "switch") { clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
@@ -394,7 +424,7 @@
     authHeaders().then(function (h) { return fetchRetry("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
       .then(function (r) { return r.json(); })
       .then(function (r) {
-        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; loadSession(); return; }
+        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(r.token); } catch (e) {} loadSession(); return; }
         var msg = (r && r.error === "needs-pro") ? "Ward Sync needs a Pro account." : (r && r.error === "bad_credentials") ? "Wrong GHIS User ID or password." : "Sign-in failed. Please try again.";
         if (errEl) errEl.textContent = msg; if (btn) { btn.disabled = false; btn.textContent = "Sign in"; }
       })
@@ -440,6 +470,9 @@
     st.openOpts = opts || {};
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
+    // Universal GHIS session: reuse the token Ward Sync (window.GHIS) already holds so the doctor
+    // never signs in twice. Empty when not signed in anywhere -> the gate shows as before.
+    if (!st.ghisToken) { try { var shared = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; if (shared) st.ghisToken = shared; } catch (e) {} }
     if (st.ghisToken || st.demo) { loadSession(); return; }          // already signed in this session -> straight to the queue
     el.innerHTML = _chooseType();                                    // otherwise: Hospital vs Personal clinic, then choose the place
   }
@@ -450,11 +483,19 @@
     clearInterval(st.pollId);
     var tok = st.ghisToken;
     st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = ""; st.demo = false; st.session = null; st.tickets = []; st.pollN = 0;
+    try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(""); } catch (e) {}   // universal session: signing out here signs out everywhere
     if (tok) { try { fetch("/api/ghis/logout", { method: "POST", headers: { "Authorization": "Bearer " + tok }, credentials: "include" }).catch(function () {}); } catch (e) {} }
     open(st.openOpts);   // ghisToken now null -> the GHIS login gate shows again
   }
 
-  G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st };
+  G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st,
+    // Live filter of the queue timeline — updates ONLY the rows container so the search input
+    // keeps focus while typing (no full repaint).
+    _search: function (v) {
+      st.search = v;
+      var b = document.getElementById("qTlRows"); if (b) b.innerHTML = timelineRows(st);
+      var x = document.querySelector(".q-tl-search-x"); if (x) x.style.display = (v && String(v).trim()) ? "" : "none";
+    } };
 
   // Testing launch hook (no nav coupling yet): with the flag on, ?queue=1 auto-opens. The proper
   // sidebar/home tile is a small follow-up. e.g. stewardmd.in/?q=1&queue=1 (preview) or in-app.

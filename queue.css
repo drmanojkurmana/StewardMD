@@ -96,6 +96,14 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-tl { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; box-shadow: 0 1px 3px rgba(20,32,43,.05); overflow: hidden; }
 #smdQueue .q-tl-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--sc-low); border-bottom: 1px solid var(--outline-variant); font: 600 11px var(--q-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--secondary); }
 #smdQueue .q-tl-head .r { color: var(--primary); }
+#smdQueue .q-tl-search-wrap { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--outline-variant); background: var(--surface); }
+#smdQueue .q-tl-search-wrap .material-symbols-outlined { font-size: 20px; color: var(--secondary); flex: 0 0 auto; }
+#smdQueue .q-tl-search { flex: 1; min-width: 0; border: none; background: none; outline: none; font: 500 15px var(--q-sans); color: var(--on-surface); padding: 2px 0; }
+#smdQueue .q-tl-search::placeholder { color: var(--secondary); }
+#smdQueue .q-tl-search::-webkit-search-cancel-button { display: none; }
+#smdQueue .q-tl-search-x { flex: 0 0 auto; border: none; background: none; cursor: pointer; color: var(--secondary); padding: 4px; display: inline-flex; border-radius: 8px; }
+#smdQueue .q-tl-search-x:active { background: var(--sc-highest); }
+#smdQueue .q-tl-search-x .material-symbols-outlined { font-size: 18px; }
 /* Two-line row: [pos][patient] on top, action buttons on a full-width line below so none run off-screen. */
 #smdQueue .q-tl-row { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; row-gap: 8px; padding: 13px 14px; align-items: center; border-bottom: 1px solid var(--sc-low); }
 #smdQueue .q-tl-row > .q-pos { grid-column: 1; grid-row: 1; }

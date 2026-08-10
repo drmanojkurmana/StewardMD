@@ -403,6 +403,10 @@
         getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
+        // Persist a token another module obtained via the SAME /login proxy (e.g. the OPD
+        // queue's sign-in) so the whole app shares ONE GHIS session — sign in once, everywhere.
+        // Empty string signs out everywhere. Scoped per Firebase uid like every GHIS token here.
+        setToken: function(t) { setToken(t || ''); _connected = !!t; try { dot(!!t); } catch (e) {} },
         // Programmatic login for device-local Auto-fetch (autofetch.js): silently sign in with a
         // credential the doctor stored in the OS Keychain/Keystore ON THIS DEVICE. Same /login as
         // the manual form; resolves true on success. Never persists the password anywhere here.
