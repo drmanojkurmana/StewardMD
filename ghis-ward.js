@@ -462,6 +462,7 @@
           // "turn on 24/7" inside). Adding to the dashboard is done via the list checkbox; auto-fetch
           // lives in the dashboard (removed here).
           body.innerHTML =
+            (window.SMD_ASSESSFORM ? '<button class="ghis-connect-btn" style="margin:0 0 8px" onclick="GHIS.openAssessment(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">' + wIco("pulse") + ' Initial Assessment (voice autofill)</button>' : '') +
             (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + ' Lab Watch — alerts on new labs</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
@@ -478,6 +479,39 @@
           } catch (e) {}
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
+        },
+        // Open the voice-driven Initial Assessment form for this patient IN the same drawer.
+        // Reuses SMD_ASSESSFORM (GHIS-mirrored fields + ambient autofill). The header ← Back
+        // closes the drawer (which stops any live mic via closeLabDrawer). Save = local draft;
+        // Save & sign off → GHIS.saveAssessment (write-back is live once the proxy route + the
+        // schema `ghis:` field map are configured from one live GHIS session — see the plan).
+        openAssessment: function(patientId, name) {
+          var drawer = document.getElementById('ghisLabDrawer');
+          var title  = document.getElementById('ghisLabTitle');
+          var body   = document.getElementById('ghisLabBody');
+          if (!drawer || !window.SMD_ASSESSFORM) { alert('Assessment form not loaded.'); return; }
+          try { if (GHIS._assessCtl) { GHIS._assessCtl.stop(); GHIS._assessCtl = null; } } catch (e) {}
+          GHIS._selectedPatient = { patientId: patientId, name: name };
+          GHIS._patientId = patientId;
+          title.textContent = 'Initial Assessment — ' + name;
+          drawer.style.display = ''; drawer.scrollTop = 0;
+          body.innerHTML = '<div id="ghisAssessHost"></div>';
+          GHIS._assessCtl = window.SMD_ASSESSFORM.mount(document.getElementById('ghisAssessHost'), {
+            patient: { id: patientId, mrn: patientId, name: name },
+            onSignOff: function(payload) { return GHIS.saveAssessment(patientId, payload); }
+          });
+        },
+        // Write the assessment back to GHIS. Reuses the proxy + bearer token. Resolves {ok:true}
+        // on a 2xx; anything else (incl. the not-yet-configured write route) resolves {ok:false}
+        // so the form keeps the local save and tells the doctor sign-off is pending, never losing data.
+        saveAssessment: function(patientId, payload) {
+          var tok = getToken(); if (!tok) return Promise.resolve({ ok: false, reason: 'not_connected' });
+          return fetch(PROXY + '/save-assessment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+            body: JSON.stringify({ patientId: patientId, fields: payload })
+          }).then(function(r) { return r.ok ? r.json().then(function(d) { return { ok: !!(d && d.ok), reason: d && d.error }; }, function() { return { ok: true }; }) : { ok: false, reason: 'http_' + r.status }; })
+            .catch(function() { return { ok: false, reason: 'network' }; });
         },
         // Bridge a ward patient into the ICU dashboard. Transfers DEMOGRAPHICS only
         // (name/age/sex/bed/dept) — structured lab auto-import is deliberately NOT done
@@ -835,6 +869,7 @@
       };
     
       window.closeLabDrawer = function() {
+        try { if (window.GHIS && GHIS._assessCtl) { GHIS._assessCtl.stop(); GHIS._assessCtl = null; } } catch (e) {}
         document.getElementById('ghisLabDrawer').style.display = 'none';
         // Restore the patient-list scroll position saved when the drawer opened (openLab reset it
         // to 0 so the detail opened from its top) — back returns you where you were in the list.

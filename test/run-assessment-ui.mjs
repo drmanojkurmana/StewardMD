@@ -20,6 +20,8 @@ const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}
 let msgId = 1; const pending = new Map(); let ws, sessionId;
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
+// promise-aware: expression must evaluate to a Promise; CDP awaits it before returning by value
+const evP = async (e) => { const r = await call("Runtime.evaluate", { expression: e, returnByValue: true, awaitPromise: true }); return r.result && r.result.result ? r.result.result.value : null; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 try {
@@ -58,6 +60,14 @@ try {
 
   // 3) patient-reported objective dropped
   ok((R.ptDropped || []).indexOf("bpSys") >= 0, "patient-reported BP dropped (not written to vitals)");
+
+  // 4) Save & sign off contract (what GHIS.openAssessment wires): onSignOff gets the payload,
+  //    and ok vs pending is surfaced to the doctor.
+  const OKR = (await evP(`window.__runSignOff({ok:true})`)) || {};
+  ok(OKR.captured && OKR.captured.cc === "fever x3 days", "sign-off hands the collected assessment payload to onSignOff");
+  ok(/[Ss]igned off/.test(OKR.status || ""), `GHIS sign-off success surfaced ("${OKR.status}")`);
+  const PR = (await evP(`window.__runSignOff({ok:false})`)) || {};
+  ok(/pending|locally/i.test(PR.status || ""), `sign-off failure keeps local save + says pending ("${PR.status}")`);
 
   console.log(fails ? `\n${fails} check(s) failed` : "\nAll assessment-UI checks passed");
 } catch (x) { console.error(x); process.exitCode = 1; fails++; }

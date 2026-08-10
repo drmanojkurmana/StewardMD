@@ -47,4 +47,26 @@ window.__runScenario = function () {
     ptDropped: (ptRes.dropped || []).map(function (d) { return d.field; })
   };
 };
+
+// Verifies the exact contract GHIS.openAssessment relies on: mount({patient, onSignOff}) and the
+// Save & sign off round-trip (payload handed to onSignOff; ok vs pending reflected to the doctor).
+window.__runSignOff = function (signOffResult) {
+  var host = document.getElementById("host"); host.innerHTML = "";
+  var captured = null;
+  window.SMD_ASSESSFORM.mount(host, {
+    patient: { id: "MR123", mrn: "MR123", name: "Test Patient" },
+    onSignOff: function (payload) { captured = payload; return signOffResult; }
+  });
+  // fill one field by voice-style put, then a manual field, then sign off
+  var recs = window.SMD_VVITALS.extract("BP 118/76, pulse 80 regular");
+  var res = window.SMD_EMRMAP.merge(recs, { speaker: "doctor", state: {}, now: 0 });
+  res.updates.forEach(function () {}); // applied by the form below
+  // apply through the form's own controller by re-mounting path is complex; just set + click
+  var cc = host.querySelector("#af_cc"); cc.value = "fever x3 days"; cc.dispatchEvent(new Event("input", { bubbles: true }));
+  host.querySelector("#afSignoff").click();
+  var status = host.querySelector("#afStatus");
+  return new Promise(function (resolve) {
+    setTimeout(function () { resolve({ captured: captured, status: status ? status.textContent : null }); }, 20);
+  });
+};
 </script></body></html>
