@@ -232,6 +232,60 @@
     ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { vals[f.n] = byName.hasOwnProperty(f.n) ? byName[f.n] : defVal(f.k); }); });
     return vals;
   }
+
+  // ---- voice autofill: SMD_AMBIENT engine field id -> this form's GHIS field name -------------
+  // Only fields opd-emr can actually SAVE are mapped; the engine also extracts radio-group findings
+  // (LOC, neck stiffness, murmurs, breath sounds, abdomen shape, bowel sounds, dyspnoea, pain, …) that
+  // opd-emr omits because their GHIS write-names aren't captured — those are DROPPED, never guessed.
+  var OPD_KIND = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_KIND[f.n] = f.k; }); });
+  var VOICE_MAP = {
+    cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
+    temp: "Temp", bpSys: "BP_SYS", bpDia: "BP_dia", pulse: "Pulse", rr: "respiratory",
+    pallor: "pallor", icterus: "icterus", cyanosis: "cyanosis", clubbing: "clubbing",
+    oedema: "Oedema", lymphadenopathy: "Lymphadenopathy", rash: "Rash", goitre: "goitre",
+    systemicExam: "sys_examination", gcs: "glasgow_scale", cardiacSounds: "cardiac_sound",
+    tenderness: "tenderness_yesNo", abdoMass: "palpable_mass_yesNo",
+    provisionalDx: "provisional_diagnosis", managementPlan: "management_plan",
+    heightCm: "Height", weightKg: "Weight",
+    dm: "Diabetes_yesNo", htn: "Hypertension_yesNo", cardiac: "Cardiac_yesNo",
+    asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo"
+  };
+  // coerce the engine's value to this form's wire value for the target field kind. null = don't set.
+  function voiceCoerce(name, value) {
+    var k = OPD_KIND[name];
+    if (k === "check") return (value === true || value === "true" || value === "Yes" || value === "Y") ? "true"
+      : (value === false || value === "false" || value === "No" || value === "N") ? "false" : null;
+    if (k === "yesno") return (value === "Yes" || value === true || value === "Y") ? "Y"
+      : (value === "No" || value === false || value === "N") ? "N" : null;
+    return value == null ? null : String(value);
+  }
+  // PURE: fold SMD_AMBIENT updates into assessVals. Skips map-gated (patient-speech) + doctor-edited
+  // fields (conflict, never overwrite) + unmapped engine findings. Exposed for tests. No DOM.
+  function _voiceMerge(assessVals, touched, updates) {
+    var out = {}, k; assessVals = assessVals || {}; touched = touched || {};
+    for (k in assessVals) if (assessVals.hasOwnProperty(k)) out[k] = assessVals[k];
+    var filled = [], dropped = [], conflicts = [];
+    (updates || []).forEach(function (u) {
+      if (!u || u.applied === false) return;                 // map-level gate (e.g. patient-reported)
+      var name = VOICE_MAP[u.field];
+      if (!name) { dropped.push(u.field); return; }           // engine finding opd-emr can't save
+      if (touched[name]) { conflicts.push({ name: name, incoming: u.value }); return; }  // manual edit wins
+      var wire = voiceCoerce(name, u.value);
+      if (wire == null) return;
+      out[name] = wire; filled.push(name);
+    });
+    return { vals: out, filled: filled, dropped: dropped, conflicts: conflicts };
+  }
+
+  // Voice-fill control (shown only when the ambient engine is loaded). Toggles on-device dictation
+  // that fills the fields below for review; nothing is saved until the doctor taps Save to GHIS.
+  function voiceBar(st) {
+    if (!G.SMD_AMBIENT) return "";
+    var on = !!st.voiceOn;
+    return '<div class="oe-voicebar"><button class="oe-btn' + (on ? " live" : "") + '" data-oe-act="voice-toggle">' +
+      ms(on ? "stop" : "mic") + (on ? "Stop voice" : "Voice fill") + '</button>' +
+      '<span class="oe-voice-status" id="oeVoiceStatus">' + esc(st.voiceStatus || "") + "</span></div>";
+  }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
@@ -244,7 +298,7 @@
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
-    return '<div class="oe-accwrap">' + body + "</div>" + bar;
+    return voiceBar(st) + '<div class="oe-accwrap">' + body + "</div>" + bar;
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -305,7 +359,7 @@
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
-    if (inp.indexOf("assess:") === 0) { st.assessVals = st.assessVals || {}; st.assessVals[inp.slice(7)] = val; }
+    if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; }
   }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
@@ -339,6 +393,7 @@
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
+    if (cmd === "voice-toggle") return st.voiceOn ? stopVoice() : startVoice();
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
@@ -406,6 +461,43 @@
       { kind: "assessment", text: assessSummary(st.assessVals) });
   }
 
+  // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
+  var _amb = null;
+  function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
+  function putVoiceDom(name) {
+    try {
+      var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
+      var els = document.querySelectorAll('#smdOpdEmr [data-oe-inp="assess:' + esc2 + '"]');
+      if (!els.length) return;
+      var wire = st.assessVals[name];
+      if (OPD_KIND[name] === "yesno") { [].forEach.call(els, function (r) { r.checked = (r.value === wire); }); tint(els[0]); return; }
+      var el = els[0];
+      if (el.type === "checkbox") el.checked = (wire === "true"); else el.value = wire;
+      tint(el);
+    } catch (x) {}
+  }
+  function tint(el) { try { var f = el.closest ? (el.closest(".oe-field") || el.closest(".oe-yn") || el.closest(".oe-check") || el) : el; if (f && f.classList) f.classList.add("oe-voice"); } catch (x) {} }
+  function applyVoice(res) {
+    var m = _voiceMerge(st.assessVals, st.assessTouched, (res && res.updates) || []);
+    st.assessVals = m.vals;
+    m.filled.forEach(putVoiceDom);
+    var msg = m.filled.length ? ("Filled " + m.filled.length + " field" + (m.filled.length === 1 ? "" : "s")) : "";
+    if (m.conflicts.length) msg += (msg ? " · " : "") + m.conflicts.length + " kept (you edited)";
+    if (msg) setVoiceStatus(msg);
+  }
+  function startVoice() {
+    if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
+    st.voiceOn = true; st.voiceStatus = "Starting…"; paint();
+    _amb = G.SMD_AMBIENT.start({
+      speaker: "doctor",
+      getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
+      onUpdate: applyVoice,
+      onState: function (s) { setVoiceStatus(s === "listening" ? "Listening…" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
+      onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; paint(); }
+    });
+  }
+  function stopVoice() { if (_amb) { try { _amb.stop(); } catch (x) {} _amb = null; } st.voiceOn = false; st.voiceStatus = ""; paint(); }
+
   function openProfile(opts) {
     opts = opts || {};
     if (!flagOn()) return;                       // inert unless smd_opd_emr is on
@@ -422,7 +514,8 @@
     loadProfile(opts);
     if (opts.tab === "assess") loadAssessment();              // jump straight to the GHIS Initial Assessment
   }
-  function close() { var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
+  function close() { stopVoice(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP };
 })();
