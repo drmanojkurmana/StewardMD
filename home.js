@@ -719,6 +719,13 @@
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    // Voice Assessment: it is per-patient, so open Ward Sync and point the doctor at the patient's
+    // "Initial Assessment" action. If a patient is already open in the drawer, jump straight in.
+    assess: function () {
+      try { var d = document.getElementById("ghisLabDrawer"); if (d && d.style.display !== "none" && window.GHIS && GHIS._patientId && GHIS.openAssessment) { GHIS.openAssessment(GHIS._patientId, (GHIS._selectedPatient && GHIS._selectedPatient.name) || GHIS._patientId); return; } } catch (e) {}
+      if (window.openGHIS) { window.openGHIS(); toast("Pick a patient, then tap Initial Assessment."); }
+      else toast("Ward Sync loading…");
+    },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
     antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
@@ -1201,6 +1208,7 @@
         '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient</span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
         '<div class="v4-sec">Clinical tools</div>' +
         '<div class="v4-grid">' +
+          tileV4("assess", "steth", "Voice Assessment", "Speak to fill the GHIS EMR") +
           tileV4("calculators", "calc", "Calculators", "400+ clinical tools") +
           tileV4("drugmenu", "pills", "Drugs &amp; Interactions", "Database · interaction checker") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
@@ -1400,6 +1408,7 @@
               return fon ? rtile("followcare", "health_and_safety", "FollowCare", "Recovery follow-up") : "";
             } catch (e) { return ""; }
           })() +
+          rtile("assess", "clinical_notes", "Voice Assessment", "Speak to fill the GHIS EMR") +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
           rtile("interactions", "photo_camera", "Scan Meds", "Photo scan · interactions") +
           rtile("dosing", "medication", "Dosing", "Insulin &middot; electrolytes") +
