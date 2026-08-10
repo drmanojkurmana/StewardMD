@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Assessment autofill harness</title></head>
+<body>
+<div id="host"></div>
+<!-- loaded from repo root (file://) — the real production modules, no mocks -->
+<script src="../assessment-schema.js"></script>
+<script src="../voice-vitals.js"></script>
+<script src="../voice-emr-map.js"></script>
+<script src="../voice-ambient.js"></script>
+<script src="../assessment.js"></script>
+<script>
+// Drives the REAL form the way SMD_AMBIENT would, but with scripted transcripts (no mic).
+window.__runScenario = function () {
+  var host = document.getElementById("host");
+  var ctl = window.SMD_ASSESSFORM.mount(host, {});
+  function feed(transcript, speaker) {
+    var recs = window.SMD_VVITALS.extract(transcript);
+    var res = window.SMD_EMRMAP.merge(recs, { speaker: speaker || "doctor", state: ctl.getState(), now: 0 });
+    ctl.applyUpdates(res);
+    return res;
+  }
+  function v(id) { var e = host.querySelector("#af_" + id); if (!e) return null;
+    if (e.classList.contains("af-seg")) { var o = e.querySelector(".af-seg-b.on"); return o ? o.getAttribute("data-val") : null; }
+    if (e.type === "checkbox") return e.checked; return e.value; }
+  function chip(id) { var c = host.querySelector('[data-chip="' + id + '"]'); return c ? c.textContent : null; }
+  function read() { return { bpSys: v("bpSys"), bpDia: v("bpDia"), pulse: v("pulse"), temp: v("temp"),
+      tenderness: v("tenderness"), murmurs: v("murmurs"), breathSounds: v("breathSounds"), loc: v("loc"),
+      orientation: v("orientation"), pallor: v("pallor"), bpChip: chip("bpSys"), pulseChip: chip("pulse") }; }
+
+  // 1) doctor dictates vitals + exam → boxes fill
+  feed("BP 100/60, pulse 88 regular, temperature 101 F. per abdomen soft non-tender, " +
+       "S1 S2 normal no murmur, bilateral air entry equal, conscious oriented, no pallor");
+  var afterVitals = read();
+
+  // 2) doctor MANUALLY edits systolic → 130; then voice says 100 again → must NOT overwrite
+  var bp = host.querySelector("#af_bpSys"); bp.value = "130";
+  bp.dispatchEvent(new Event("input", { bubbles: true }));
+  feed("BP 100/60");
+  var afterEdit = read();
+
+  // 3) patient-reported objective value must be dropped
+  var ptRes = feed("my BP was 150 by 90", "patient");
+
+  return {
+    formFields: host.querySelectorAll("[data-fid]").length,
+    afterVitals: afterVitals,
+    afterEdit: afterEdit,
+    ptDropped: (ptRes.dropped || []).map(function (d) { return d.field; })
+  };
+};
+</script></body></html>

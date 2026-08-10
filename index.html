@@ -1565,6 +1565,15 @@ window.openExternal = function (u) {
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=gold1006" defer></script>
+<!-- Ambient Voice → GHIS Initial Assessment autofill. Deterministic-first (SMD_VVITALS +
+     SMD_EMRMAP) with SMD_AMBIENT driving on-device Whisper (SMD_VOICE); SMD_ASSESSFORM renders
+     the GHIS-mirrored form. Load order: schema → vitals (needs clinical-nlp) → map (needs schema)
+     → ambient (needs vitals+map+SMD_VOICE) → form. -->
+<script src="/assessment-schema.js?v=gold1" defer></script>
+<script src="/voice-vitals.js?v=gold1" defer></script>
+<script src="/voice-emr-map.js?v=gold1" defer></script>
+<script src="/voice-ambient.js?v=gold1" defer></script>
+<script src="/assessment.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
      one-device beta unlock gate. Loaded before FundX so its tile/Settings entry can gate on it.
