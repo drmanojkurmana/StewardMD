@@ -1566,6 +1566,14 @@ window.openExternal = function (u) {
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=gold1006" defer></script>
+<!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
+     zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
+     manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
+     inert until a consumer drives it. Load order: schema -> vitals (needs clinical-nlp) -> map -> ambient. -->
+<script src="/assessment-schema.js?v=gold1" defer></script>
+<script src="/voice-vitals.js?v=gold1" defer></script>
+<script src="/voice-emr-map.js?v=gold1" defer></script>
+<script src="/voice-ambient.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
      one-device beta unlock gate. Loaded before FundX so its tile/Settings entry can gate on it.
