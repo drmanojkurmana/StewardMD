@@ -202,15 +202,18 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
   }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
   if (debug) {
-    // Probe the DATA endpoint the browser actually uses: GET ./Home/Dashboard?type=docopdlist&sdate= (JSON).
-    let dash = null; try { dash = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: res.day }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
-    const db = String((dash && dash.body) || ''); const dj = parseGhis(db);
-    const arr = Array.isArray(dj) ? dj : (dj && Array.isArray(dj.data) ? dj.data : (dj && Array.isArray(dj.aaData) ? dj.aaData : []));
-    return { _debug: true, sdate: res.day, docName: parseDoctorName(String((home && home.body) || '')),
-      dashboardUnit_tbody_empty: (res.r.body || '').indexOf('<tbody>\n\n        </tbody>') > -1 || res.rows.length === 0,
-      dash_len: db.length, dash_isArray: Array.isArray(dj), dash_count: arr.length,
-      dash_row0_keys: arr[0] ? Object.keys(arr[0]) : [], dash_row0: arr[0] || null,
-      dash_raw_head: db.slice(0, 400) };
+    const hb = String((home && home.body) || '');
+    const grab = (s, re, n) => { const m = s.match(re); return m ? m[0].slice(0, n || 700) : ""; };
+    // Dashboard with Accept: application/json (content-negotiation might switch HTML shell -> JSON rows).
+    let dashJson = null; try { dashJson = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: res.day }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json, text/javascript, */*' }); } catch (e) {}
+    const dbj = String((dashJson && dashJson.body) || '');
+    return { _debug: true, sdate: res.day, docName: parseDoctorName(hb),
+      // the browser's docopdlist ajax block (full success handler shows how rows are populated / the real URL)
+      opd_ajax_block: grab(hb, /docopdlist[\s\S]{0,1900}/i, 1900),
+      // every DataTable() init in home (server-side ajax source lives here if it's DataTables-driven)
+      datatable_inits: (hb.match(/\.DataTable\s*\(\s*\{[\s\S]{0,500}?\}\s*\)/gi) || []).slice(0, 4).map((s) => s.slice(0, 500)),
+      ajax_sources: (hb.match(/(?:ajax|sAjaxSource)\s*:\s*[\s\S]{0,160}/gi) || []).slice(0, 8),
+      dash_json_len: dbj.length, dash_json_head: dbj.slice(0, 300), dash_json_looksJson: /^\s*[\[{]/.test(dbj) };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
