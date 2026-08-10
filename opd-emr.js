@@ -70,7 +70,7 @@
       return '<button class="oe-result" data-oe-act="' + kind + '-pick:' + i + '">' + ms("add") + "<span>" + esc(r.name) + "</span></button>";
     }).join("") + "</div>";
   }
-  function fieldRow(label, inp, req) { return '<label class="oe-field"><span>' + esc(label) + (req ? ' <b class="oe-req">*</b>' : "") + "</span>" + inp + "</label>"; }
+  function fieldRow(label, inp, req, reqEmpty) { return '<label class="oe-field' + (reqEmpty ? " req-empty" : "") + '"><span>' + esc(label) + (req ? ' <b class="oe-req">*</b>' : "") + "</span>" + inp + "</label>"; }
   function textInp(name, value, ph) { return '<input class="oe-inp" data-oe-inp="' + esc(name) + '" value="' + esc(value || "") + '" placeholder="' + esc(ph || "") + '">'; }
 
   function profileTab(st) {
@@ -200,18 +200,24 @@
     return '<label class="oe-check"><input type="checkbox" data-oe-inp="assess:' + esc(f.n) + '"' + (val === "true" ? " checked" : "") + "><span>" + esc(f.l) + "</span></label>";
   }
   function assessField(f, vals) {
-    var val = assessGet(vals, f), id = "assess:" + f.n;
-    if (f.k === "textarea") return fieldRow(f.l, '<textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>", f.r);
+    var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
+    if (f.k === "textarea") return fieldRow(f.l, '<textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>", f.r, re);
     if (f.k === "yesno") return ynRow(f, val);
     var type = f.k === "number" ? "number" : "text";
-    return fieldRow(f.l, '<input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">', f.r);
+    return fieldRow(f.l, '<input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">', f.r, re);
   }
-  function assessSection(sec, vals) {
+  // one section = a native <details> accordion (zero-JS collapse; survives typing since onInput doesn't re-render).
+  // header shows a required-badge (n/m) or a filled count so the doctor sees at a glance what still needs attention.
+  function assessSection(sec, vals, open) {
     var html = "", run = [];
     function flush() { if (run.length) { html += '<div class="oe-checks">' + run.map(function (f) { return checkBox(f, assessGet(vals, f)); }).join("") + "</div>"; run = []; } }
     sec.f.forEach(function (f) { if (f.k === "check") { run.push(f); return; } flush(); html += assessField(f, vals); });
     flush();
-    return '<section class="oe-sec"><h3 class="oe-h3">' + ms(sec.i) + esc(sec.t) + '</h3><div class="oe-form">' + html + "</div></section>";
+    var reqN = 0, reqDone = 0, filled = 0;
+    sec.f.forEach(function (f) { var v = assessGet(vals, f); var has = v && v !== "" && v !== "N" && v !== "false"; if (has) filled++; if (f.r) { reqN++; if (v) reqDone++; } });
+    var badge = reqN ? '<span class="oe-req-badge ' + (reqDone >= reqN ? "done" : "pending") + '">' + reqDone + "/" + reqN + " required</span>"
+      : (filled ? '<span class="oe-cnt">' + filled + "</span>" : "");
+    return '<details class="oe-acc"' + (open ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms(sec.i) + '</span><span class="oe-acc-t">' + esc(sec.t) + "</span>" + badge + '<span class="oe-chev">' + ms("expand_more") + "</span></summary><div class=\"oe-acc-body\">" + html + "</div></details>";
   }
   // pure payload builder: EVERY schema field -> string value (yesno Y/N, check true/false, empties ""). Exposed for tests.
   function buildAssessPayload(vals) {
@@ -230,9 +236,15 @@
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
     var vals = st.assessVals || {};
-    var body = ASSESS_SCHEMA.map(function (sec) { return assessSection(sec, vals); }).join("");
-    var save = st.writeOn ? '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save assessment</button>" : writeNote();
-    return body + '<div class="oe-form oe-actions">' + save + "</div>";
+    var body = ASSESS_SCHEMA.map(function (sec, i) { return assessSection(sec, vals, i === 0); }).join("");   // History expanded, rest collapsed
+    // overall required progress -> shown in the sticky save bar
+    var reqAll = 0, reqDone = 0;
+    ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.r) { reqAll++; if (assessGet(vals, f)) reqDone++; } }); });
+    var done = reqDone >= reqAll;
+    if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+    var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
+      '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
+    return '<div class="oe-accwrap">' + body + "</div>" + bar;
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -283,9 +295,9 @@
   }
   function assessSummary(v) {
     v = v || {}; var p = [];
-    if (v.complaints) p.push("Complaints: " + v.complaints);
+    if (v.Chief_complaints_duration) p.push("Complaints: " + v.Chief_complaints_duration);
     if (v.provisional_diagnosis) p.push("Provisional diagnosis: " + v.provisional_diagnosis);
-    if (v.management_plan || v.plan) p.push("Plan: " + (v.management_plan || v.plan));
+    if (v.management_plan) p.push("Plan: " + v.management_plan);
     return p.length ? p.join("\n") : "Initial assessment completed.";
   }
 
