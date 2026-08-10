@@ -24,8 +24,8 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-logo-mark { width: 28px; height: 28px; flex: 0 0 auto; background: var(--primary); -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; }
 #smdOpdEmr .oe-wordmark { color: var(--on-surface); }
 #smdOpdEmr .oe-wordmark span { color: var(--primary); }
-#smdOpdEmr .oe-close { border: 1px solid var(--outline-variant); background: var(--sc-lowest); color: var(--secondary); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
-#smdOpdEmr .oe-close:hover { background: var(--sc-high); color: var(--primary); }
+#smdOpdEmr .oe-close, #smdOpdEmr .oe-back { border: 1px solid var(--outline-variant); background: var(--sc-lowest); color: var(--secondary); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; flex: 0 0 auto; }
+#smdOpdEmr .oe-close:hover, #smdOpdEmr .oe-back:hover { background: var(--sc-high); color: var(--primary); }
 
 #smdOpdEmr .oe-canvas { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 20px; max-width: 720px; margin: 0 auto; width: 100%; }
 
@@ -121,6 +121,21 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-savebar .prog.done { color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-savebar .prog .material-symbols-outlined { font-size: 18px; }
 #smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 18px; }
+
+/* ---- report detail drawer (tap a lab / radiology row) ---- */
+#smdOpdEmr .oe-report { position: fixed; inset: 0; z-index: 40; background: var(--surface); display: flex; flex-direction: column; }
+#smdOpdEmr .oe-rep-title { flex: 1; text-align: center; font: 800 17px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-rep-meta { font: 500 12.5px var(--q-sans); color: var(--secondary); background: var(--sc-low); border: 1px solid var(--outline-variant); border-radius: 12px; padding: 10px 14px; }
+#smdOpdEmr .oe-lab-tbl { border: 1px solid var(--outline-variant); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(20,32,43,.05); }
+#smdOpdEmr .oe-lab-hd { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; padding: 10px 14px; background: var(--sc-low); border-bottom: 1px solid var(--outline-variant); font: 700 10.5px var(--q-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--secondary); }
+#smdOpdEmr .oe-lab-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--sc-low); align-items: baseline; }
+#smdOpdEmr .oe-lab-row:last-child { border-bottom: none; }
+#smdOpdEmr .oe-lab-t { font: 600 13.5px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-lab-v { font: 700 14px var(--q-mono); color: var(--on-surface); }
+#smdOpdEmr .oe-lab-v.abn { color: var(--error); }
+#smdOpdEmr .oe-lab-r { font: 400 12px var(--q-mono); color: var(--secondary); }
+#smdOpdEmr .oe-lab-abx { grid-column: 1 / -1; font: 500 12.5px var(--q-mono); color: var(--on-surface); background: color-mix(in srgb, var(--primary-container) 30%, transparent); border-radius: 8px; padding: 8px 10px; margin: 0 14px 12px; white-space: pre-wrap; }
+#smdOpdEmr .oe-rep-text { font: 400 14px var(--q-sans); line-height: 1.6; color: var(--on-surface); white-space: pre-wrap; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 14px; padding: 16px; }
 
 /* empty / loading / error */
 #smdOpdEmr .oe-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 60px 24px; text-align: center; color: var(--secondary); font: 500 15px var(--q-sans); }

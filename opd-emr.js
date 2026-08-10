@@ -15,7 +15,9 @@
 
   // ---- PURE render: state -> HTML (the demo/tests use this verbatim) -----------------------
   function header() {
-    return '<header class="oe-top"><div class="oe-brand"><span class="oe-logo-mark" aria-hidden="true"></span>' +
+    return '<header class="oe-top">' +
+      '<button class="oe-back" data-oe-act="close" title="Back to queue" aria-label="Back to queue">' + ms("arrow_back") + "</button>" +
+      '<div class="oe-brand"><span class="oe-logo-mark" aria-hidden="true"></span>' +
       '<span class="oe-wordmark">Steward<span>MD</span></span></div>' +
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
@@ -257,7 +259,8 @@
       else if (active === "assess") body = head + assessTab(st);
       else body = head + profileTab(st);
     }
-    return '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
+    var app = '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
+    return (st.report && st.report.open) ? app + reportView(st.report) : app;   // report drawer overlays the workspace
   }
 
   // ---- overlay + controller ----------------------------------------------------------------
@@ -266,7 +269,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null }; }
   function paint() { root().innerHTML = _render(st); }
   function paintKeepFocus(kind) {
     paint();
@@ -330,7 +333,8 @@
     var a = b.getAttribute("data-oe-act"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
     if (cmd === "close") return close();
     if (cmd === "tab") return switchTab(arg);
-    if (cmd === "lab" || cmd === "rad") { toast("Report detail view is coming soon."); return; }
+    if (cmd === "lab" || cmd === "rad") return openReport(cmd, arg);
+    if (cmd === "report-close") { st.report = null; paint(); return; }
     if (cmd === "inv-pick") { var s = st.invResults[+arg]; if (s) { st.invDraft = { service: s, diagnosis: (st.invDraft && st.invDraft.diagnosis) || "", emergency: false }; st.invResults = []; st.invQuery = ""; paint(); } return; }
     if (cmd === "inv-clear") { st.invDraft = {}; paint(); return; }
     if (cmd === "inv-emg") { st.invDraft = st.invDraft || {}; st.invDraft.emergency = !st.invDraft.emergency; paint(); return; }
@@ -343,6 +347,56 @@
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
 
+  // ---- report detail: tap a lab/radiology row -> fetch + show the actual result (GHIS lab-detail / radiology-report) ----
+  function openReport(kind, arg) {
+    var parts = String(arg || "").split(":");
+    st.report = { open: true, kind: kind, loading: true, err: "", data: null, title: kind === "lab" ? "Lab report" : "Radiology report" };
+    paint();
+    var a = ghisAuth(), url = kind === "lab"
+      ? "/lab-detail?renderId=" + encodeURIComponent(parts[0] || "") + "&episodeId=" + encodeURIComponent(parts[1] || "")
+      : "/radiology-report?resultid=" + encodeURIComponent(parts[0] || "") + "&type=" + encodeURIComponent(parts[1] || "manual");
+    fetch(a.base + url, { headers: authHeaders(), credentials: "include" })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: r.ok, d: {} }; }); })
+      .then(function (res) {
+        if (!st.report) return;
+        if (!res.ok || res.d.error) { st.report.loading = false; st.report.err = res.d.error === "login_required" ? "Connect Ward Sync (GHIS) first." : "Could not load this report."; paint(); return; }
+        st.report.loading = false; st.report.data = res.d; paint();
+      })
+      .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  function abnormal(t) {
+    var v = parseFloat(t.result); if (isNaN(v)) return false;
+    if (t.low !== "" && t.low != null && !isNaN(parseFloat(t.low)) && v < parseFloat(t.low)) return true;
+    if (t.high !== "" && t.high != null && !isNaN(parseFloat(t.high)) && v > parseFloat(t.high)) return true;
+    return !!(t.critical && String(t.critical).trim() && String(t.critical).toLowerCase() !== "n");
+  }
+  function reportView(rp) {
+    var body;
+    if (rp.loading) body = loadingBox("Loading report…");
+    else if (rp.err) body = errorBox(rp.err);
+    else {
+      var d = rp.data || {};
+      if (rp.kind === "lab") {
+        var meta = [d.group, d.department, d.reported && ("Reported " + d.reported)].filter(Boolean).join("  ·  ");
+        var rows = (d.tests || []).map(function (t) {
+          var ab = abnormal(t);
+          return '<div class="oe-lab-row"><div class="oe-lab-t">' + esc(t.test || "") + "</div>" +
+            '<div class="oe-lab-v' + (ab ? " abn" : "") + '">' + esc(String(t.result == null ? "" : t.result)) + (t.units ? " " + esc(t.units) : "") + "</div>" +
+            '<div class="oe-lab-r">' + esc(t.range || "") + "</div></div>" +
+            (t.antibiogram && String(t.antibiogram).trim() ? '<div class="oe-lab-abx">' + esc(String(t.antibiogram)) + "</div>" : "");
+        }).join("");
+        body = (meta ? '<div class="oe-rep-meta">' + esc(meta) + "</div>" : "") + (rows ? '<div class="oe-lab-tbl"><div class="oe-lab-hd"><span>Test</span><span>Result</span><span>Reference</span></div>' + rows + "</div>" : '<div class="oe-empty sm">No values recorded in this report.</div>');
+      } else {
+        var meta2 = [d.testName, d.reported && ("Reported " + d.reported), d.doctor].filter(Boolean).join("  ·  ");
+        body = (meta2 ? '<div class="oe-rep-meta">' + esc(meta2) + "</div>" : "") + (d.report ? '<div class="oe-rep-text">' + esc(d.report) + "</div>" : '<div class="oe-empty sm">No report text available yet.</div>');
+      }
+    }
+    return '<div class="oe-report"><header class="oe-top">' +
+      '<button class="oe-back" data-oe-act="report-close" title="Back" aria-label="Back">' + ms("arrow_back") + "</button>" +
+      '<div class="oe-rep-title">' + esc(rp.title) + "</div>" +
+      '<button class="oe-close" data-oe-act="report-close" title="Close" aria-label="Close">' + ms("close") + "</button></header>" +
+      '<div class="oe-canvas">' + body + "</div></div>";
+  }
   function loadProfile(opts) {
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
