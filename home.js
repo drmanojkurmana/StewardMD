@@ -721,6 +721,21 @@
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
+    // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
+    // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
+    hospital: function () {
+      openSheet('<div class="hv-sh-t">Hospital</div>' +
+        mi("list", "OPD Queue", "Smart out-patient queue · live GHIS list", "opd") +
+        mi("icu", "ICU", "Critical-care dashboard · monitoring · rounds", "icu") +
+        mi("ward", "Ward Sync", "In-patient list · labs · imaging", "ward") +
+        mi("heart", "FollowCare", "Post-discharge recovery follow-up", "fc"));
+      sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var a = b.getAttribute("data-mi"); closeSheet();
+          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : ACT.followcare)(); }, 70);
+        });
+      });
+    },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
     antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
@@ -1198,8 +1213,7 @@
         '<section class="v4-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
           '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
-          '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
-          '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
+          '<button class="v4-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + svg("hospital") + '<span>Hospital</span></button>' +
           '<button class="v4-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("antibiogram") + '<span>Antibiogram</span></button>' +
         '</div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
@@ -1324,11 +1338,14 @@
           '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
         '</div>' +
+        '<button class="rnav-hospital" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare" style="display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:15px 16px;border:none;border-radius:16px;background:linear-gradient(135deg,#0e6e63,#0a4f47);color:#fff;cursor:pointer;margin:2px 0 6px;box-shadow:0 2px 10px rgba(14,110,99,.25)">' +
+          '<span style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.16)">' + ric("local_hospital") + '</span>' +
+          '<span style="flex:1;min-width:0"><span style="display:block;font-weight:800;font-size:17px">Hospital</span><span style="display:block;font-weight:600;font-size:12.5px;opacity:.9;margin-top:2px">OPD · ICU · Ward · FollowCare</span></span>' +
+          '<span style="flex:0 0 auto;display:inline-flex;opacity:.9">' + ric("chevron_right") + '</span>' +
+        '</button>' +
         '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
-          '<button class="rnav-qc" data-act="ward" aria-label="Ward Sync">' + ric("local_hospital") + '<span>Ward Sync</span></button>' +
-          '<button class="rnav-qc" data-act="icu" aria-label="ICU">' + ric("monitor_heart") + '<span>ICU</span></button>' +
           '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
