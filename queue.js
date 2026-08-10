@@ -58,7 +58,7 @@
       : '<span class="q-tl-eta">' + ms(isNext ? "check_circle" : "pending", false) + (isNext ? '' : '') + " ETA: " + (etaMin == null ? "—" : etaMin + "m") + "</span>";
     return '<div class="q-tl-row' + (isNext ? " next" : "") + (late ? " late" : "") + '" data-q-tid="' + esc(t.id) + '">' +
         '<div class="q-pos">' + (idx + 1) + "</div>" +
-        '<div><div class="q-tl-nm">' + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
+        '<div class="q-tl-info"><div class="q-tl-nm">' + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
         '<div class="q-tl-acts">' +
           '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
@@ -100,7 +100,7 @@
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
     var rows = ordered.length ? ordered.map(function (t, i) { return ticketRow(t, i, ordered); }).join("") : '<div class="q-empty">Queue is empty. Import from Ward Sync or add a patient.</div>';
-    var timeline = '<div class="q-tl"><div class="q-tl-head"><div class="c">Pos</div><div>Patient</div><div class="r">Actions</div></div>' + rows +
+    var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + rows +
       '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + ordered.length + ")</a></div></div>";
     var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : "";
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
