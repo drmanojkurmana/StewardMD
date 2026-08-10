@@ -99,6 +99,7 @@ import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, rese
 import { ownerOK } from "../../_adminauth.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
+import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -1330,6 +1331,17 @@ export async function onRequest(context) {
           if (!Object.keys(patient).length) patient = undefined;
         }
         return json({ findings: findings, patient: patient, unmatched: unmatched, mode: "reasoning" });
+      }
+      if (body.kind === "assessment") {
+        // Ambient assessment: transcript → narrative fields only (cc/history/dx/plan). Vitals + exam
+        // are handled deterministically on-device (never the LLM). Output is whitelisted to 5 text
+        // fields so no invented finding/vital/dx can reach the app.
+        const prompt = assessmentExtractPrompt(transcript);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "assessment", fields: sanitizeAssessmentFields(parseJsonLoose(text)), mode: "assessment" });
       }
       const k = VISION_SYS[body.kind] ? body.kind : "monitor";
       const prompt = transcriptExtractPrompt(k, transcript);
