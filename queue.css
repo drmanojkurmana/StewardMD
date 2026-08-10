@@ -108,6 +108,9 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-tl-row.late .q-pos { background: var(--error-container); color: var(--on-error-container); }
 #smdQueue .q-tl-nm { font: 600 14px var(--q-sans); color: var(--on-surface); }
 #smdQueue .q-tl-nm .id { color: var(--secondary); font: 400 12px var(--q-mono); margin-left: 4px; }
+#smdQueue .q-pri { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font: 700 9.5px var(--q-sans); text-transform: uppercase; letter-spacing: .05em; vertical-align: middle; }
+#smdQueue .q-pri.emerg { background: var(--error-container); color: var(--on-error-container); }
+#smdQueue .q-pri.prio { background: var(--yellow-bg, #fdf2de); color: var(--yellow, #92620a); }
 #smdQueue .q-tl-eta { font: 500 12px var(--q-mono); color: var(--secondary); display: flex; align-items: center; gap: 4px; margin-top: 4px; }
 #smdQueue .q-tl-eta.late { color: var(--error); }
 #smdQueue .q-tl-eta .material-symbols-outlined { font-size: 14px; }
