@@ -38,7 +38,7 @@
   // origin (never a runtime hotlink). The SHA-256 is PINNED here and verified NATIVELY before first
   // use (mismatch → model-corrupted → re-download). Audio is NEVER uploaded — only this model file
   // is fetched, once. Default is base multilingual q5_1 (~57 MB); tiny q5_1 (~31 MB) for low-end. ──
-  var WHISPER_MODEL_HOST = "https://models.stewardmd.in/whisper";   // TODO(host): confirm R2 vs Pages origin before enabling in prod
+  var WHISPER_MODEL_HOST = "https://models.stewardmd.in/whisper";   // verified live (2026-08): serves ggml-<model>.bin with HTTP range support (base-q5_1 = 59,707,625 B, SHA-pinned below)
   var WHISPER_MODELS = {
     // Default: small English-only q5_1 (~181 MB) — best accuracy for accented (Indian) English +
     // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
