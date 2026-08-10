@@ -226,10 +226,12 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
     // (3) the real patient-data endpoints referenced in home JS (Nurse worklist / opwl / worklist / etc.)
     const eps = (hb.match(/url\s*:\s*['"][^'"]*(?:Nurse|opwl|OPWL|worklist|Worklist|GetOP|Dashboard|Doclist|Patientlist|appoint)[^'"]*['"]/gi) || []).slice(0, 12);
     const actions = (hb.match(/["'][A-Za-z]*(?:opwl|OPWL|OpWorkList|opworklist|GetOpd|Docopd|docopd)[A-Za-z]*["']/gi) || []).slice(0, 10);
+    // Identify the logged-in doctor: the name sits right after the countDown span in the top bar.
+    const ci = hb.indexOf('countDown'); const nameRegion = ci > -1 ? hb.slice(ci, ci + 500).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : '';
+    const anyName = (hb.match(/GOPALA|CHANDU|MANOJ|KRISHNA/gi) || []).slice(0, 4);
     return { _debug: true, docName: parseDoctorName(hb), datepicker_fmt: dpFmt,
-      home_tdCount: homeTd, home_MRhits: homeMR,
-      ref_tdCount: (rfb.match(/<td\b/gi) || []).length, ref_len: rfb.length,
-      endpoints: eps, opd_actions: actions, sdate_probe: probe };
+      home_tdCount: homeTd, home_MRhits: homeMR, ref_tdCount: (rfb.match(/<td\b/gi) || []).length,
+      name_region: nameRegion.slice(0, 220), name_hits: anyName, endpoints: eps, opd_actions: actions, sdate_probe: probe };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
