@@ -218,8 +218,16 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
       const b = String((rr && rr.body) || ''); const td = (b.match(/<td\b/gi) || []).length;
       probe.push({ sdate: sd || '(empty)', tdCount: td, parsed: parseOpdHtml(b).length });
     }
-    const nameBar = grab(hb, /Session timeout[\s\S]{0,400}/i) || grab(hb, /(?:CHANDU|Dr\.?\s+[A-Z])[\s\S]{0,60}/);
-    return { _debug: true, docName: parseDoctorName(hb), homeLen: hb.length, nameBar: nameBar, datepicker_val: dpVal, datepicker_fmt: dpFmt, sdate_probe: probe };
+    // WHO is this session? grab the uppercase name near the account/logout area of the home bar.
+    const whoName = (hb.match(/([A-Z][A-Z]{2,}(?:\s+[A-Z]{2,}){1,3})/g) || []).filter((n) => n.length > 6 && !/SESSION|TIMEOUT|DOCTOR|SYSTEM|PATIENT|SEARCH|ADMIN|PORTAL|HOME|LOGOUT/.test(n)).slice(0, 6);
+    // does the SAME mechanism return rows for IPD? (isolates OPD-specific vs session-wide empty)
+    let ipd = null; try { ipd = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docipdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
+    const ib = String((ipd && ipd.body) || '');
+    // full head of the docopdlist response (empty shell? error? redirect?)
+    let od = null; try { od = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
+    return { _debug: true, docName: parseDoctorName(hb), whoName: whoName, datepicker_fmt: dpFmt,
+      ipd_tdCount: (ib.match(/<td\b/gi) || []).length, opd_tdCount: ((String((od && od.body) || '')).match(/<td\b/gi) || []).length,
+      opd_body_len: (od && od.body || '').length, opd_body_tail: String((od && od.body) || '').slice(-1200), sdate_probe: probe };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
