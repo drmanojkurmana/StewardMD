@@ -268,6 +268,27 @@
   }
   function authHeaders(extra) { var a = ghisAuth(), h = extra || {}; if (a.token) h.Authorization = "Bearer " + a.token; return h; }
 
+  // ---- mirror each OPD action into the patient's visit-summary timeline (so the summary = the whole visit) ----
+  // The queue timeline is a StewardMD (Firebase-authed) endpoint, NOT GHIS — so it needs the Firebase token +
+  // the stewardmd.in base in-app (relative /api hits the Capacitor local origin). Best-effort; silent on failure.
+  function qBase() { try { var h = (G.location && G.location.hostname) || ""; return /(^|\.)stewardmd\.in$/i.test(h) ? "" : "https://stewardmd.in"; } catch (e) { return "https://stewardmd.in"; } }
+  function fbTok() { try { var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || (G.firebase && G.firebase.auth && G.firebase.auth().currentUser); return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
+  function addToTimeline(kind, text) {
+    if (!st.ticketId || !st.sessionId || !text) return;   // only when opened from a queue ticket
+    fbTok().then(function (t) {
+      if (!t) return;
+      fetch(qBase() + "/api/queue/timeline", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) }) }).catch(function () {});
+    }).catch(function () {});
+  }
+  function assessSummary(v) {
+    v = v || {}; var p = [];
+    if (v.complaints) p.push("Complaints: " + v.complaints);
+    if (v.provisional_diagnosis) p.push("Provisional diagnosis: " + v.provisional_diagnosis);
+    if (v.management_plan || v.plan) p.push("Plan: " + (v.management_plan || v.plan));
+    return p.length ? p.join("\n") : "Initial assessment completed.";
+  }
+
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
@@ -338,7 +359,7 @@
   }
 
   // Every write: explicit confirm() -> POST. 501 / disabled -> clean "being set up" toast (never a raw error).
-  function postWrite(path, body, okMsg) {
+  function postWrite(path, body, okMsg, tl) {
     var a = ghisAuth();
     fetch(a.base + path, { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), credentials: "include", body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
@@ -348,6 +369,7 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast("Could not complete the request. Please try again."); return; }
         toast(okMsg);
+        if (tl && tl.text) addToTimeline(tl.kind, tl.text);   // mirror this action into the patient's visit summary
         st.invDraft = {}; st.medDraft = {};
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
       })
@@ -357,16 +379,19 @@
   function submitInvOrder() {
     var d = st.invDraft || {}; if (!d.service) return;
     if (!confirmed('Order "' + d.service.name + '" for this patient in GHIS?')) return;
-    postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.");
+    postWrite("/inv-order", { serviceId: d.service.id, diagnosis: d.diagnosis || "", emergency: !!d.emergency }, "Investigation ordered.",
+      { kind: "note", text: "Investigation ordered: " + d.service.name + (d.diagnosis ? " (for " + d.diagnosis + ")" : "") + (d.emergency ? " [emergency]" : "") });
   }
   function submitPrescribe() {
     var d = st.medDraft || {}; if (!d.drug) return;
     if (!confirmed('Prescribe "' + d.drug.name + '" for this patient in GHIS?')) return;
-    postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.");
+    postWrite("/prescribe", { drugId: d.drug.id, route: d.route || "", form: d.form || "", qty: d.qty || "", frequency: d.frequency || "", duration: d.duration || "", remarks: d.remarks || "" }, "Prescription saved.",
+      { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
   }
   function submitAssessment() {
     if (!confirmed("Save this assessment to GHIS?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment saved.");
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment saved.",
+      { kind: "assessment", text: assessSummary(st.assessVals) });
   }
 
   function openProfile(opts) {
@@ -378,6 +403,7 @@
     st = freshState();
     st.patient = { name: opts.name || "", mrn: opts.patientId || "" };
     st.recordNo = opts.recordNo || "";
+    st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
     st.writeOn = writeFlagOn();
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     paint();
