@@ -218,16 +218,18 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
       const b = String((rr && rr.body) || ''); const td = (b.match(/<td\b/gi) || []).length;
       probe.push({ sdate: sd || '(empty)', tdCount: td, parsed: parseOpdHtml(b).length });
     }
-    // WHO is this session? grab the uppercase name near the account/logout area of the home bar.
-    const whoName = (hb.match(/([A-Z][A-Z]{2,}(?:\s+[A-Z]{2,}){1,3})/g) || []).filter((n) => n.length > 6 && !/SESSION|TIMEOUT|DOCTOR|SYSTEM|PATIENT|SEARCH|ADMIN|PORTAL|HOME|LOGOUT/.test(n)).slice(0, 6);
-    // does the SAME mechanism return rows for IPD? (isolates OPD-specific vs session-wide empty)
-    let ipd = null; try { ipd = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docipdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
-    const ib = String((ipd && ipd.body) || '');
-    // full head of the docopdlist response (empty shell? error? redirect?)
-    let od = null; try { od = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
-    return { _debug: true, docName: parseDoctorName(hb), whoName: whoName, datepicker_fmt: dpFmt,
-      ipd_tdCount: (ib.match(/<td\b/gi) || []).length, opd_tdCount: ((String((od && od.body) || '')).match(/<td\b/gi) || []).length,
-      opd_body_len: (od && od.body || '').length, opd_body_tail: String((od && od.body) || '').slice(-1200), sdate_probe: probe };
+    // (1) does the INITIAL home page already carry the patient rows (server-rendered)?
+    const homeTd = (hb.match(/<td\b/gi) || []).length, homeMR = (hb.match(/OPMR\d|MR\d{5,}/g) || []).length;
+    // (2) Dashboard WITH a browser-like Referer + Accept (GHIS may gate content on Referer)
+    let ref = null; try { ref = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/Home', 'Accept': 'text/html, */*; q=0.01' }); } catch (e) {}
+    const rfb = String((ref && ref.body) || '');
+    // (3) the real patient-data endpoints referenced in home JS (Nurse worklist / opwl / worklist / etc.)
+    const eps = (hb.match(/url\s*:\s*['"][^'"]*(?:Nurse|opwl|OPWL|worklist|Worklist|GetOP|Dashboard|Doclist|Patientlist|appoint)[^'"]*['"]/gi) || []).slice(0, 12);
+    const actions = (hb.match(/["'][A-Za-z]*(?:opwl|OPWL|OpWorkList|opworklist|GetOpd|Docopd|docopd)[A-Za-z]*["']/gi) || []).slice(0, 10);
+    return { _debug: true, docName: parseDoctorName(hb), datepicker_fmt: dpFmt,
+      home_tdCount: homeTd, home_MRhits: homeMR,
+      ref_tdCount: (rfb.match(/<td\b/gi) || []).length, ref_len: rfb.length,
+      endpoints: eps, opd_actions: actions, sdate_probe: probe };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
