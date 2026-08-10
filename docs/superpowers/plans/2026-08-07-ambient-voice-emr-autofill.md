@@ -8,6 +8,20 @@
 
 **Architecture:** Extend existing pieces — `SMD_VOICE` (on-device Whisper, download-on-first-use), `SMD_NLP` (deterministic findings) + a NEW numeric-vitals/exam extractor, `/api/ai/extract` (LLM only for complex chunks), `ghis-ward.js`/`ghis-proxy.js` (GHIS read; add write). Buildless ES5 IIFE, no new deps.
 
+## STATUS — 2026-08-10
+- **Task 1 DONE + tested** (11 unit): `assessment-schema.js` (66 GHIS fields, validated against both PDFs), `voice-vitals.js` (deterministic numeric-vitals + exam-phrase → GHIS enums, clause-scoped negation, never invents), `voice-emr-map.js` (patient-speech + manual-override safety gate).
+- **Task 2 DONE + tested** (6 unit): `voice-ambient.js` — thin controller over `SMD_VOICE.listen(engine:clinical, model:base-q5_1, language:auto)` = Telugu/code-switch multilingual; deterministic-first, throttled LLM escalation only for genuine narrative; offline when no LLM injected.
+- **Task 3 DONE + tested** (15 checks, REAL headless Chrome/CDP): `assessment.js` renders the GHIS-mirrored form; scripted voice fills BP/pulse/temp/abdomen/CVS/resp/CNS boxes with source chips; manual edit not overwritten (conflict shown); patient-reported BP dropped. Wired into `index.html`. **← the user's bar (real EMR boxes populating) is met.**
+- **Task 4 GHIS write-back — GATED on a live GHIS session.** Infra exists (`ghisReq` POST + CSRF); the client `onSignOff(payload)` hook is in place. Missing = the form's input `name`s + Submit URL, which live only in the authenticated `GetInitialAssessmentnew` HTML. Discovery recipe below; fill `assessment-schema.js` `ghis:` from it, then add a `save-assessment` POST route.
+- **Task 2b Android whisper.cpp bridge — GATED on Android NDK build** (device). iOS on-device works today via the existing plugin; ambient already passes the multilingual model. Recipe below.
+- **Task 5 on-device Telugu benchmark — GATED on a physical watch/phone + Telugu audio samples.** Text-level extraction (incl. code-switch) is covered by the Task 1/2 suites.
+
+### Task 4 discovery recipe (owner, one-time, live GHIS session)
+1. Connect GHIS in the app, then `GET /api/ghis/raw?path=/Doctor/Home/GetInitialAssessmentnew/?id=<MR>` (the passthrough already exists in `ghis-proxy.js`).
+2. From that HTML read each field's `name`/`id` and the Submit handler's POST URL (likely `/Doctor/Home/Save…`).
+3. Put each `name` into the matching `assessment-schema.js` field's `ghis:`; add a `save-assessment` route: `ghisReq(env, token, 'POST', SAVE_PATH, '__RequestVerificationToken='+csrf+'&'+encoded(map(payload)), {'X-Requested-With':'XMLHttpRequest'})`.
+4. Set the form's `onSignOff` to POST the payload to that route. Save (local) already works offline.
+
 ## Global Constraints
 - Reuse, don't rebuild. Extend `SMD_VOICE`/`SMD_NLP`/`/api/ai/extract`/GHIS proxy. No new ASR stack, no new provider, no bundled model (Whisper stays download-on-first-use; base multilingual ~57 MB). Base app +0 MB.
 - Both platforms: on-device Whisper — iOS via the existing whisper.cpp plugin; **Android needs the native whisper.cpp bridge** (build it; do NOT substitute cloud STT). If Android native genuinely can't compile in-scope, document precisely and ship iOS on-device + Android interim = on-device OS STT (audio-on-device), never a paid cloud STT.
