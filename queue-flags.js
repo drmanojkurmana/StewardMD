@@ -1,5 +1,6 @@
 /* Smart OPD Queue — feature flags (mirrors followcare-flags.js). Resolution: ?query → localStorage → default.
- * Master flag smd_opd_queue DEFAULT OFF (feature in development; not approved for prod). Fails SAFE: with the
+ * Master flag smd_opd_queue DEFAULT ON (go-live 2026-08-10: server QUEUE_ENABLED=1, secrets configured,
+ * Firestore TTL set; ready:{enabled,configured}=true). Still fails SAFE: with the
  * flag on but server secrets unprovisioned, the module shows a clean "being set up" state and does nothing
  * (isQueueConfigured() guard) — no PHI processed, no message sent. Set ?q=1 (or localStorage) to preview.
  * Exposes window.SMD_QUEUE_FLAGS. No PHI, no network. */
