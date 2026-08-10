@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ward Sync lab-drawer overlay harness</title>
+<style id="wardcss"></style>
+<style>html,body{margin:0;height:100%}</style>
+</head><body>
+<!-- Mirrors the real PANEL_HTML structure: a fixed panel whose .ghis-body scroller holds the
+     patient list AND the lab drawer. The bug: the drawer used to live inside that scroller. -->
+<div id="ghisPanel" class="open">
+  <div class="ghis-header"><button class="ghis-back">‹</button><div class="ghis-title">Ward Sync</div></div>
+  <div id="ghisWard" class="ghis-body">
+    <div class="ghis-filter-row"><input id="ghisSearchPt" class="ghis-filter-input" placeholder="Search patient ID or name…"></div>
+    <div id="ghisPatientList" class="ghis-pt-list"></div>
+    <div id="ghisLabDrawer" class="ghis-lab-drawer" style="display:none;">
+      <div class="ghis-lab-header"><button class="ghis-back-sm">‹ Back</button><div class="ghis-lab-title" id="ghisLabTitle">Labs</div></div>
+      <div id="ghisLabBody" class="ghis-lab-body"></div>
+    </div>
+  </div>
+</div>
+<script>
+// Build tall content in both layers so scrolling/overlap is exercised.
+(function () {
+  var list = document.getElementById("ghisPatientList");
+  for (var i = 1; i <= 24; i++) list.insertAdjacentHTML("beforeend",
+    '<div class="ghis-pt-card"><div class="ghis-pt-top"><div style="flex:1"><div class="ghis-pt-name">PATIENT ' + i + ' · MR' + (2500000 + i) + '</div><div class="ghis-pt-meta">45 · Male · Bed W' + i + '</div></div></div></div>');
+  var labs = document.getElementById("ghisLabBody");
+  for (var j = 1; j <= 30; j++) labs.insertAdjacentHTML("beforeend",
+    '<div class="ghis-lab-row"><span class="ghis-lab-test">Test ' + j + '</span><span class="ghis-lab-val">VAL' + j + '</span></div>');
+})();
+// Inject the REAL CSS string from ghis-ward.js (faithful test of the actual fix).
+window.__ready = false;
+fetch("../ghis-ward.js").then(function (r) { return r.text(); }).then(function (src) {
+  var m = src.match(/var CSS = ("(?:[^"\\]|\\.)*");/);
+  if (!m) { window.__ready = "no-css"; return; }
+  document.getElementById("wardcss").textContent = Function("return " + m[1])();
+  window.__ready = true;
+}).catch(function (e) { window.__ready = "err:" + e; });
+// Open the lab drawer the way openLab does (clears the inline display:none).
+window.__openDrawer = function () { document.getElementById("ghisLabDrawer").style.display = ""; return true; };
+</script>
+</body></html>
