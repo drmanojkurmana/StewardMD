@@ -357,13 +357,13 @@
   function openEmrProfile(ticketId) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
   }
   // Open the GHIS Initial Assessment form straight away for this patient (EMR overlay, "assess" tab).
   function openAssessment(ticketId) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
   }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;

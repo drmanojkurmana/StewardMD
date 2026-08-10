@@ -504,9 +504,12 @@ export async function saveAssessment(env, token, body) {
     if (['assessment.Initial_Assessment_doc_id', 'assessment.patient_id', 'assessment.episode_id'].indexOf(name) >= 0) return;
     p.set(name, fields[k] == null ? '' : String(fields[k]));
   });
-  p.set('X-Requested-With', 'XMLHttpRequest');
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
-  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300, status: r.status };
+  // GHIS (ASP.NET) can answer 200 even when it rejects the post, so surface a short, PHI-free snippet of the
+  // reply for diagnosis and only call it saved when the body doesn't look like an error/login page.
+  const rb = String(r.body || '');
+  const looksBad = /login|log in|error|exception|invalid|not\s*authori|fail/i.test(rb);
+  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300 && !looksBad, status: r.status, resp: rb.slice(0, 160) };
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });

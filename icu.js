@@ -4531,19 +4531,24 @@
   /* --------------------------- group-mode action sheets + write actions ----------------------- */
   function grpOpenPicker() {
     ensureModal();
-    // Only units of the CURRENT category (ICU vs Ward) — the two stay separate. Older units without a
-    // kind are treated as ICU (backward compat).
-    var cat = _unit.cat || "icu";
-    var list = (_grpList || []).filter(function (g) { return (g.kind || "icu") === cat; });
-    var rows = list.length ? list.map(function (g) {
+    // Show ALL the doctor's shared units — ICU units AND Wards — in ONE list so any is a single tap to
+    // switch (grpSelect adopts the tapped unit's kind, so picking a Ward flips the dashboard to Ward mode).
+    var all = (_grpList || []);
+    function rowFor(g) {
       var active = _grp && _grp.id === g.id;
       return '<button class="icu-btn ghost" data-icu-act="grpsel:' + encodeURIComponent(g.id) + '" style="justify-content:flex-start;text-align:left">' +
-        (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || (ctxLabel() + " unit")) + (g.unitType || g.unit ? " · " + esc(g.unitType || g.unit) : "") +
+        (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || (unitCatMeta(g.kind || "icu").label + " unit")) + (g.unitType || g.unit ? " · " + esc(g.unitType || g.unit) : "") +
         '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole)) + '</span></span></button>';
-    }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared " + ctxLabel() + " units yet.") + '</div>';
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ' + ctxLabel() + ' units"><h3>Your ' + ctxLabel() + ' units</h3>' + rows +
-      '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a ' + ctxLabel() + ' unit</button>' +
-      '<button class="icu-btn ghost" data-icu-act="unitpick" style="margin-top:8px">Switch ICU / Ward</button>' +
+    }
+    function sect(kind, label) {
+      var l = all.filter(function (g) { return (g.kind || "icu") === kind; });
+      return l.length ? '<div class="icu-doc-sub" style="margin:12px 2px 4px;font-weight:700">' + esc(label) + '</div>' + l.map(rowFor).join("") : "";
+    }
+    var body = (_grpList === null) ? '<div class="icu-empty">Connecting to your shared units…</div>'
+      : (!all.length ? '<div class="icu-empty">No shared units yet. Create one below.</div>' : sect("icu", "ICU units") + sect("ward", "Wards"));
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your units and wards"><h3>Your units &amp; wards</h3>' + body +
+      '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:12px">' + ico("plus", "＋") + ' Create ' + (ctxLabel() === "ICU" ? "an" : "a") + ' ' + ctxLabel() + ' unit</button>' +
+      '<button class="icu-btn ghost" data-icu-act="unitpick" style="margin-top:8px">More unit options</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
     modalEl.classList.add("on");
   }
@@ -7233,7 +7238,7 @@
       case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
-      case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); if (_screen === "units") { _screen = "board"; _paintTop = true; paint(); } break; }
+      case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint(); break; }
       case "grpnew": grpOpenCreate(_unit.cat); break;
       case "grpcreate": grpDoCreate(); break;
       case "grpinvite": grpOpenInvite(); break;

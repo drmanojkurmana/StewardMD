@@ -473,7 +473,7 @@
   }
   function submitAssessment() {
     if (!confirmed("Save this assessment to GHIS?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment saved.",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment sent to GHIS. Open the patient in GHIS to confirm it appears under Clinical notes.",
       { kind: "assessment", text: assessSummary(st.assessVals) });
   }
 
@@ -486,6 +486,7 @@
     st = freshState();
     st.patient = { name: opts.name || "", mrn: opts.patientId || "" };
     st.recordNo = opts.recordNo || "";
+    st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
     st.writeOn = writeFlagOn();
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
