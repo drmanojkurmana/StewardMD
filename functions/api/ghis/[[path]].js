@@ -202,13 +202,15 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
   }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
   if (debug) {
-    const rb = String(res.r.body || ''), hb = String((home && home.body) || '');
-    const grab = (s, re) => { const m = s.match(re); return m ? m[0].slice(0, 700) : ""; };
-    // DataTables usually populates an empty <tbody> via a separate ajax source; find how data_tables1 is inited.
-    return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: hb.length, docName: parseDoctorName(hb),
-      rawLen: rb.length, thCount: (rb.match(/<th\b/gi) || []).length, trCount: (rb.match(/<tr\b/gi) || []).length, tdCount: (rb.match(/<td\b/gi) || []).length, parsed: res.rows.length,
-      dt_frag: grab(rb, /data_tables1[\s\S]{0,650}/i), ajax_frag: grab(rb, /ajax[\s\S]{0,400}/i), url_frags: (rb.match(/url\s*:\s*['"][^'"]+['"]/gi) || []).slice(0, 8),
-      dt_home: grab(hb, /data_tables1[\s\S]{0,650}/i), ajax_home: grab(hb, /docopdlist[\s\S]{0,400}/i), home_urls: (hb.match(/url\s*:\s*['"][^'"]+['"]/gi) || []).filter((u) => /dashboard|opd|worklist|list|appoint/i.test(u)).slice(0, 10) };
+    // Probe the DATA endpoint the browser actually uses: GET ./Home/Dashboard?type=docopdlist&sdate= (JSON).
+    let dash = null; try { dash = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: res.day }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
+    const db = String((dash && dash.body) || ''); const dj = parseGhis(db);
+    const arr = Array.isArray(dj) ? dj : (dj && Array.isArray(dj.data) ? dj.data : (dj && Array.isArray(dj.aaData) ? dj.aaData : []));
+    return { _debug: true, sdate: res.day, docName: parseDoctorName(String((home && home.body) || '')),
+      dashboardUnit_tbody_empty: (res.r.body || '').indexOf('<tbody>\n\n        </tbody>') > -1 || res.rows.length === 0,
+      dash_len: db.length, dash_isArray: Array.isArray(dj), dash_count: arr.length,
+      dash_row0_keys: arr[0] ? Object.keys(arr[0]) : [], dash_row0: arr[0] || null,
+      dash_raw_head: db.slice(0, 400) };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
