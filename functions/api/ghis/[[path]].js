@@ -203,17 +203,21 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
   if (debug) {
     const hb = String((home && home.body) || '');
-    const grab = (s, re, n) => { const m = s.match(re); return m ? m[0].slice(0, n || 700) : ""; };
-    // Dashboard with Accept: application/json (content-negotiation might switch HTML shell -> JSON rows).
-    let dashJson = null; try { dashJson = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: res.day }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json, text/javascript, */*' }); } catch (e) {}
-    const dbj = String((dashJson && dashJson.body) || '');
-    return { _debug: true, sdate: res.day, docName: parseDoctorName(hb),
-      // the browser's docopdlist ajax block (full success handler shows how rows are populated / the real URL)
-      opd_ajax_block: grab(hb, /docopdlist[\s\S]{0,1900}/i, 1900),
-      // every DataTable() init in home (server-side ajax source lives here if it's DataTables-driven)
-      datatable_inits: (hb.match(/\.DataTable\s*\(\s*\{[\s\S]{0,500}?\}\s*\)/gi) || []).slice(0, 4).map((s) => s.slice(0, 500)),
-      ajax_sources: (hb.match(/(?:ajax|sAjaxSource)\s*:\s*[\s\S]{0,160}/gi) || []).slice(0, 8),
-      dash_json_len: dbj.length, dash_json_head: dbj.slice(0, 300), dash_json_looksJson: /^\s*[\[{]/.test(dbj) };
+    const grab = (s, re, n) => { const m = s.match(re); return m ? m[0].slice(0, n || 300) : ""; };
+    // The browser injects GET ./Home/Dashboard?type=docopdlist&sdate=<#datepicker1 value> (populated HTML) and
+    // client-side DataTable-izes it. Our empty tbody => wrong sdate FORMAT. Probe the datepicker + several formats.
+    const dpVal = grab(hb, /id="datepicker1"[^>]*value="[^"]*"/i) || grab(hb, /datepicker1[\s\S]{0,120}/i);
+    const dpFmt = grab(hb, /datepicker\s*\(\s*\{[\s\S]{0,220}?format[\s\S]{0,60}/i) || grab(hb, /dateFormat[\s\S]{0,40}/i);
+    const cands = [res.day, '', new Date().toISOString().slice(0, 10)];   // + a few date-format guesses:
+    const d0 = new Date(); const dd = String(d0.getUTCDate()).padStart(2, '0'), mm = String(d0.getUTCMonth() + 1).padStart(2, '0'), yy = d0.getUTCFullYear();
+    cands.push(dd + '/' + mm + '/' + yy, mm + '/' + dd + '/' + yy, dd + '-' + mm + '-' + yy, yy + '/' + mm + '/' + dd);
+    const probe = [];
+    for (const sd of cands) {
+      let rr = null; try { rr = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: sd }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
+      const b = String((rr && rr.body) || ''); const td = (b.match(/<td\b/gi) || []).length;
+      probe.push({ sdate: sd || '(empty)', tdCount: td, parsed: parseOpdHtml(b).length });
+    }
+    return { _debug: true, docName: parseDoctorName(hb), datepicker_val: dpVal, datepicker_fmt: dpFmt, sdate_probe: probe };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
