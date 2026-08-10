@@ -201,7 +201,15 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
     }
   }
   // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
-  if (debug) return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: (home && home.body || '').length, docName: parseDoctorName((home && home.body) || ''), rawLen: (res.r.body || '').length, thCount: ((res.r.body || '').match(/<th\b/gi) || []).length, trCount: ((res.r.body || '').match(/<tr\b/gi) || []).length, tdCount: ((res.r.body || '').match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: String(res.r.body || '').slice(0, 2500) };
+  if (debug) {
+    const rb = String(res.r.body || ''), hb = String((home && home.body) || '');
+    const grab = (s, re) => { const m = s.match(re); return m ? m[0].slice(0, 700) : ""; };
+    // DataTables usually populates an empty <tbody> via a separate ajax source; find how data_tables1 is inited.
+    return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: hb.length, docName: parseDoctorName(hb),
+      rawLen: rb.length, thCount: (rb.match(/<th\b/gi) || []).length, trCount: (rb.match(/<tr\b/gi) || []).length, tdCount: (rb.match(/<td\b/gi) || []).length, parsed: res.rows.length,
+      dt_frag: grab(rb, /data_tables1[\s\S]{0,650}/i), ajax_frag: grab(rb, /ajax[\s\S]{0,400}/i), url_frags: (rb.match(/url\s*:\s*['"][^'"]+['"]/gi) || []).slice(0, 8),
+      dt_home: grab(hb, /data_tables1[\s\S]{0,650}/i), ajax_home: grab(hb, /docopdlist[\s\S]{0,400}/i), home_urls: (hb.match(/url\s*:\s*['"][^'"]+['"]/gi) || []).filter((u) => /dashboard|opd|worklist|list|appoint/i.test(u)).slice(0, 10) };
+  }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
 // ── patient demographics → primary contact number (for FollowCare enrollment) ───────────
