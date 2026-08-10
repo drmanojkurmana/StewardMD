@@ -364,6 +364,15 @@
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
   }
+  // GHIS lab results can be HTML (histopath/culture narratives). Turn block tags into line breaks, drop the
+  // rest, decode entities -> readable plain text (mirrors the server's htmlToText for radiology).
+  function plainText(s) {
+    return String(s == null ? "" : s)
+      .replace(/<\s*(br|\/p|\/div|\/li|\/tr|\/h[1-6])\s*\/?>/gi, "\n")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#39;/g, "'").replace(/&quot;/gi, '"')
+      .replace(/[ \t]{2,}/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
   function abnormal(t) {
     var v = parseFloat(t.result); if (isNaN(v)) return false;
     if (t.low !== "" && t.low != null && !isNaN(parseFloat(t.low)) && v < parseFloat(t.low)) return true;
@@ -378,12 +387,20 @@
       var d = rp.data || {};
       if (rp.kind === "lab") {
         var meta = [d.group, d.department, d.reported && ("Reported " + d.reported)].filter(Boolean).join("  ·  ");
+        // GHIS results are often HTML (histopath/culture narratives) -> render as readable text, not raw tags.
         var rows = (d.tests || []).map(function (t) {
+          var res = plainText(t.result), abx = plainText(t.antibiogram);
+          // long / multi-line narrative (histopathology, culture report) -> full-width readable block
+          if (res.length > 70 || /\n/.test(res) || abx) {
+            return '<div class="oe-lab-report"><div class="oe-lab-t">' + esc(t.test || "Report") + (t.units ? ' <span class="oe-lab-u">' + esc(t.units) + "</span>" : "") + "</div>" +
+              (res ? '<div class="oe-rep-text">' + esc(res) + "</div>" : "") +
+              (abx ? '<div class="oe-lab-abx">' + esc(abx) + "</div>" : "") + "</div>";
+          }
+          // short numeric value -> compact Test / Result / Reference row
           var ab = abnormal(t);
           return '<div class="oe-lab-row"><div class="oe-lab-t">' + esc(t.test || "") + "</div>" +
-            '<div class="oe-lab-v' + (ab ? " abn" : "") + '">' + esc(String(t.result == null ? "" : t.result)) + (t.units ? " " + esc(t.units) : "") + "</div>" +
-            '<div class="oe-lab-r">' + esc(t.range || "") + "</div></div>" +
-            (t.antibiogram && String(t.antibiogram).trim() ? '<div class="oe-lab-abx">' + esc(String(t.antibiogram)) + "</div>" : "");
+            '<div class="oe-lab-v' + (ab ? " abn" : "") + '">' + esc(res) + (t.units ? " " + esc(t.units) : "") + "</div>" +
+            '<div class="oe-lab-r">' + esc(t.range || "") + "</div></div>";
         }).join("");
         body = (meta ? '<div class="oe-rep-meta">' + esc(meta) + "</div>" : "") + (rows ? '<div class="oe-lab-tbl"><div class="oe-lab-hd"><span>Test</span><span>Result</span><span>Reference</span></div>' + rows + "</div>" : '<div class="oe-empty sm">No values recorded in this report.</div>');
       } else {

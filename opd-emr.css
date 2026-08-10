@@ -136,6 +136,12 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-lab-r { font: 400 12px var(--q-mono); color: var(--secondary); }
 #smdOpdEmr .oe-lab-abx { grid-column: 1 / -1; font: 500 12.5px var(--q-mono); color: var(--on-surface); background: color-mix(in srgb, var(--primary-container) 30%, transparent); border-radius: 8px; padding: 8px 10px; margin: 0 14px 12px; white-space: pre-wrap; }
 #smdOpdEmr .oe-rep-text { font: 400 14px var(--q-sans); line-height: 1.6; color: var(--on-surface); white-space: pre-wrap; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 14px; padding: 16px; }
+/* full-width text report (histopath / culture) inside the lab table */
+#smdOpdEmr .oe-lab-report { padding: 12px 14px 14px; border-bottom: 1px solid var(--sc-low); }
+#smdOpdEmr .oe-lab-report:last-child { border-bottom: none; }
+#smdOpdEmr .oe-lab-report .oe-lab-t { display: block; margin-bottom: 8px; }
+#smdOpdEmr .oe-lab-report .oe-lab-u { font: 400 11px var(--q-mono); color: var(--secondary); }
+#smdOpdEmr .oe-lab-report .oe-rep-text { margin: 0; }
 
 /* empty / loading / error */
 #smdOpdEmr .oe-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 60px 24px; text-align: center; color: var(--secondary); font: 500 15px var(--q-sans); }
