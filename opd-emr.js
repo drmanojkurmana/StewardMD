@@ -556,12 +556,21 @@
     if (m.conflicts.length) msg += (msg ? " · " : "") + m.conflicts.length + " kept (you edited)";
     if (msg) setVoiceStatus(msg);
   }
+  // narrative fields (complaints / history / stated dx & plan) via the LLM extractor — vitals + exam
+  // stay deterministic on-device. SMD_AMBIENT throttles this + only calls it for genuine narrative.
+  function assessLLM(transcript) {
+    if (!(G.SMD_AI && G.SMD_AI.extract)) return null;
+    return G.SMD_AI.extract(transcript, "assessment").then(function (r) {
+      return (r && !r.error && r.fields && Object.keys(r.fields).length) ? { fields: r.fields, confidence: 0.7 } : null;
+    }).catch(function () { return null; });
+  }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
     st.voiceOn = true; st.voiceStatus = "Starting…"; paint();
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
+      llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
       onState: function (s) { setVoiceStatus(s === "listening" ? "Listening…" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; paint(); }
