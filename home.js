@@ -1757,6 +1757,7 @@
         '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
+      mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
@@ -1789,6 +1790,7 @@
         if (a === "aictl") { closeSheet(); return openAiControl(); }
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
+        if (a === "nmcsearch") { closeSheet(); setTimeout(function () { try { window.SMD_NMC ? SMD_NMC.open() : toast("Loading…"); } catch (e) {} }, 120); return; }
         if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
         // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
         // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
