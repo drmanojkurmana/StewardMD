@@ -208,16 +208,18 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
     // client-side DataTable-izes it. Our empty tbody => wrong sdate FORMAT. Probe the datepicker + several formats.
     const dpVal = grab(hb, /id="datepicker1"[^>]*value="[^"]*"/i) || grab(hb, /datepicker1[\s\S]{0,120}/i);
     const dpFmt = grab(hb, /datepicker\s*\(\s*\{[\s\S]{0,220}?format[\s\S]{0,60}/i) || grab(hb, /dateFormat[\s\S]{0,40}/i);
-    const cands = [res.day, '', new Date().toISOString().slice(0, 10)];   // + a few date-format guesses:
-    const d0 = new Date(); const dd = String(d0.getUTCDate()).padStart(2, '0'), mm = String(d0.getUTCMonth() + 1).padStart(2, '0'), yy = d0.getUTCFullYear();
-    cands.push(dd + '/' + mm + '/' + yy, mm + '/' + dd + '/' + yy, dd + '-' + mm + '-' + yy, yy + '/' + mm + '/' + dd);
+    // jQuery-UI datepicker fmt = 'yy-M-d' => e.g. "2026-Aug-10" (4-digit year, short month, no-pad day).
+    const d0 = new Date(); const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const dNoPad = d0.getUTCDate(), ddp = String(dNoPad).padStart(2, '0'), mon = MON[d0.getUTCMonth()], yy = d0.getUTCFullYear();
+    const cands = [yy + '-' + mon + '-' + dNoPad, yy + '-' + mon + '-' + ddp, res.day, ''];   // yy-M-d first
     const probe = [];
     for (const sd of cands) {
       let rr = null; try { rr = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: sd }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
       const b = String((rr && rr.body) || ''); const td = (b.match(/<td\b/gi) || []).length;
       probe.push({ sdate: sd || '(empty)', tdCount: td, parsed: parseOpdHtml(b).length });
     }
-    return { _debug: true, docName: parseDoctorName(hb), datepicker_val: dpVal, datepicker_fmt: dpFmt, sdate_probe: probe };
+    const nameBar = grab(hb, /Session timeout[\s\S]{0,400}/i) || grab(hb, /(?:CHANDU|Dr\.?\s+[A-Z])[\s\S]{0,60}/);
+    return { _debug: true, docName: parseDoctorName(hb), homeLen: hb.length, nameBar: nameBar, datepicker_val: dpVal, datepicker_fmt: dpFmt, sdate_probe: probe };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
