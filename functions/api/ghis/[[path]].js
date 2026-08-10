@@ -286,13 +286,19 @@ async function getMedications(env, token, patientId) {
     '/Doctor/Home/GetMedicines/?id=' + encodeURIComponent(patientId || ''),
     null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
-  const body = r.body || '';
+  // Strip <script>/<style> so the page's own row-building JS template
+  // (literal `" + item.description + "`) is never scraped as a med row.
+  const body = (r.body || '').replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, '');
   const rows = [];
   for (const tr of (body.match(/<tr[\s\S]*?<\/tr>/gi) || [])) {
+    // Entry-form rows carry form controls, not data — their <select> option
+    // lists otherwise flatten into blobs like "ORALTOPICALOTIC…". Skip them.
+    if (/<(select|option|input|textarea|button)\b/i.test(tr)) continue;
     const tds = (tr.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || []).map(td => htmlToText(td));
     if (tds.length < 7) continue;                                 // header (<th>) / non-data rows
     const drugText = (tds[1] || '').trim();
     if (!drugText || /^drug\s*name$/i.test(drugText)) continue;   // skip a stray header-in-<td>
+    if (/\bitem\.\w+|["']\s*\+\s*"/.test(drugText)) continue;     // leftover JS-template junk
     // PHI-strip: keep ONLY medication fields — never the "gen by" staff name (tds[11]),
     // patient identity, or billing/balance figures elsewhere on the page.
     rows.push({
