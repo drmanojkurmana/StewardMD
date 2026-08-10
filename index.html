@@ -1690,7 +1690,7 @@ window.openExternal = function (u) {
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 <script src="/queue-flags.js?v=q1" defer></script>
-<script src="/queue.js?v=q4bcdef" defer></script>
+<script src="/queue.js?v=q5search" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
 <script src="/opd-emr.js?v=oe5" defer></script>
@@ -1728,7 +1728,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold999"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1000"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
