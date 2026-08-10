@@ -565,7 +565,7 @@
                 .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, date: o.orderDate || o.date }); }); }).catch(function () {});
             }));
           }).catch(function () {}).then(function () {
-            Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })).then(function () {
+            Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, episodeId: episodeId, source: 'Ward Sync', labs: labs })).then(function () {
               _addedPids[patientId] = true;
               try { if (window.toast) toast('Added ' + (dem.name || 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {}
             }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });

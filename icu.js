@@ -795,6 +795,9 @@
   // Returns a Promise. Never disturbs the currently-open live patient (buildWardState is pure).
   function addWardPatientToRoster(bundle) {
     var st = buildWardState(bundle), wardId = (st.wardSync && st.wardSync.patientId) || null;
+    // Auto-link the GHIS visit/episode id so this inpatient stays connected to their GHIS record
+    // (needed for the EMR workspace + Initial Assessment write-back). Travels with the shared unit too.
+    if (bundle && bundle.episodeId) { st.wardSync = st.wardSync || {}; st.wardSync.episodeId = String(bundle.episodeId); }
     if (grpActive() && _grp && _grp.id) {
       var api = groupsApi(), pid = "w_" + (wardId || nowTs());
       st.patient._id = pid;
