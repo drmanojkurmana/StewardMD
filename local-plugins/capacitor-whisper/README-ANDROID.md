@@ -30,10 +30,15 @@ cd android
 JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
   ./gradlew :app:assembleDebug     # compiles Java + builds libwhisper_jni.so (arm64) into the APK
 ```
-Requires the Android NDK `26.1.10909125` + CMake `3.22.1` (install via
-`sdkmanager "ndk;26.1.10909125" "cmake;3.22.1"`).
+Requires the Android NDK `27.2.12479018` (matches `build.gradle` `ndkVersion`; r27+ links the
+`.so` with 16 KB-page LOAD alignment, required for Android 15 devices + Play) + CMake `3.22.1`
+(install via `sdkmanager "ndk;27.2.12479018" "cmake;3.22.1"`).
 
-The submodule must be present: `git submodule update --init --recursive`.
+**The whisper.cpp submodule must be checked out first:** `git submodule update --init --recursive`
+(pinned to v1.9.1 `f049fff`; URL `github.com/ggml-org/whisper.cpp`). If `src/main/cpp/whisper-cpp/`
+is empty, CMake's `add_subdirectory(whisper-cpp)` fails, `libwhisper_jni.so` is never produced, and
+`WhisperNative.isAvailable()` is false → Clinical Dictation silently falls back. (This was the
+gap: the submodule URL previously pointed at the renamed `ggerganov` org.)
 
 ## Testing (must be a REAL arm64 device)
 Install the APK on a physical arm64 Android phone (x86_64 emulators may not run inference — do not
@@ -42,12 +47,15 @@ treat an emulator failure as a code bug):
    transcript lands in the editable box.
 2. Confirm **no** cloud transcription endpoint is hit (audio stays on-device); only the ggml model
    is fetched from `https://models.stewardmd.in/whisper/…` with the pinned SHA-256 (see
-   `native-bridge.js` `WHISPER_MODELS` — default `small.en-q5_1`, ~181 MB).
+   `native-bridge.js` `WHISPER_MODELS`; **Android defaults to `base-q5_1`, the ~57 MB multilingual
+   model, so English + Telugu + code-switch work**; iOS uses `small.en-q5_1`).
 
 ## Open items
-- **Model host** — `native-bridge.js` points at `https://models.stewardmd.in/whisper/` (marked TODO
-  there). That host must actually serve `ggml-small.en-q5_1.bin` etc. with the pinned SHA-256 before
-  Clinical works end-to-end on a device (see `docs/WHISPER_MODEL_HOSTING.md`).
+- **Model host** — RESOLVED: `https://models.stewardmd.in/whisper/` serves the ggml models with
+  HTTP range support and the pinned sizes/SHA-256 (verified 2026-08: `ggml-base-q5_1.bin` -> `200`,
+  `59,707,625` B, matching `WHISPER_MODELS`). No further hosting work needed.
+- On-device compile + arm64 inference latency + the Telugu clinical benchmark still need a **real
+  arm64 device** (cannot be validated in CI or on an x86_64 emulator).
 - Only `arm64-v8a` is built. Add `x86_64` in `build.gradle` `abiFilters` if emulator inference is
   needed.
 
