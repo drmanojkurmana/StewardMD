@@ -1167,14 +1167,17 @@
       var n = String((a && a.name) || "").trim();
       if (!n || (a && a.type === "guest" && !a.name)) return "";
       if (n.indexOf("@") > -1) return "";                 // Apple private-relay etc. store an email as "name" — don't greet with it
-      return n.split(/\s+/)[0];
+      n = n.replace(/^\s*(dr|prof|mr|mrs|ms)\.?\s*/i, "").trim();   // strip a leading honorific so we never render "Dr Dr"
+      var first = n.split(/\s+/)[0] || "";
+      if (!first || /^(dr|prof|mr|mrs|ms)\.?$/i.test(first)) return "";   // name was just a title -> greet without one
+      return first;
     } catch (e) { return ""; }
   }
   function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function greetLineV4() {
     var f = acctFirstV4(), nm = f ? ", Dr " + escV4(f) : "";
     var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
-    if (mins <= 270) return "Hi night owl" + nm + " \u2014 it\u2019s too early to say good morning";  // 00:00\u201304:30
+    if (mins <= 270) return "Hi night owl" + nm + ". It\u2019s too early to say good morning";  // 00:00\u201304:30
     return greetV4() + nm;
   }
   function tileV4(act, icon, tt, sub) {

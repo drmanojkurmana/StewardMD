@@ -84,10 +84,26 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-notes-l { font: 600 12px var(--q-sans); letter-spacing: .03em; text-transform: uppercase; color: var(--secondary); margin-bottom: 8px; }
 #smdQueue .q-notes p, #smdQueue textarea.q-notes-in { font: 400 14px var(--q-sans); color: var(--on-surface-variant); line-height: 1.6; margin: 0; }
 #smdQueue textarea.q-notes-in { width: 100%; border: none; background: none; resize: vertical; min-height: 64px; outline: none; }
-#smdQueue .q-cta { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+#smdQueue .q-cta { display: flex; flex-direction: column; gap: 12px; }
+/* Swipe-to-end-consultation slider */
+#smdQueue .q-swipe { position: relative; height: 62px; border-radius: 15px; background: var(--sc-highest); border: 1px solid var(--outline-variant); overflow: hidden; user-select: none; touch-action: none; }
+#smdQueue .q-swipe-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 60px; background: var(--primary); opacity: .16; transition: width .25s ease; pointer-events: none; }
+#smdQueue .q-swipe.armed .q-swipe-fill { opacity: .3; }
+#smdQueue .q-swipe-txt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-left: 44px; font: 600 15px var(--q-sans); color: var(--secondary); pointer-events: none; }
+#smdQueue .q-swipe.armed .q-swipe-txt { color: var(--primary); }
+#smdQueue .q-swipe-knob { position: absolute; left: 4px; top: 4px; width: 54px; height: 54px; border-radius: 12px; background: var(--primary); color: var(--on-primary); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(20,32,43,.2); transition: transform .25s ease; touch-action: none; cursor: grab; }
+#smdQueue .q-swipe-knob:active { cursor: grabbing; }
+#smdQueue .q-swipe-knob .material-symbols-outlined { font-size: 30px; }
+/* Assessment + Emergency, symmetric */
+#smdQueue .q-cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#smdQueue .q-cta-row.one { grid-template-columns: 1fr; }
+#smdQueue .q-cta-btn { border: none; border-radius: 14px; padding: 14px; min-height: 68px; font: 600 14px var(--q-sans); display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+#smdQueue .q-cta-btn .material-symbols-outlined { font-size: 22px; }
+#smdQueue .q-cta-btn.assess { background: var(--primary-container); color: var(--on-primary-container); }
+#smdQueue .q-cta-btn.emerg { background: var(--error); color: var(--on-error); }
+#smdQueue .q-cta-btn:active { transform: translateY(1px); }
 #smdQueue .q-finish { background: var(--primary); color: var(--on-primary); border: none; border-radius: 10px; padding: 16px; font: 600 20px var(--q-sans); display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: 0 1px 2px rgba(20,32,43,.06); }
 #smdQueue .q-finish:active { transform: translateY(1px); }
-#smdQueue .q-emerg { background: var(--error); color: var(--on-error); border: none; border-radius: 10px; padding: 16px; font: 600 12px var(--q-sans); letter-spacing: .04em; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; }
 #smdQueue .q-pause { width: 100%; margin-top: 16px; background: var(--sc-lowest); border: 1px solid var(--outline-variant); color: var(--secondary); border-radius: 10px; padding: 12px; font: 600 12px var(--q-sans); display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; }
 #smdQueue .q-empty { padding: 40px 24px; text-align: center; color: var(--secondary); font: 500 15px var(--q-sans); }
 

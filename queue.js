@@ -95,9 +95,15 @@
         '<div class="q-vt">' + vt + "</div></div>" +
       '<div class="q-notes"><div class="q-notes-l">Quick Notes</div><textarea class="q-notes-in" placeholder="Add consultation notes…"></textarea></div>' +
       '<div class="q-cta">' +
-        '<button class="q-finish" data-q-act="finish">' + ms("task_alt", true) + " Finish Consultation</button>" +
-        (emrOn() && cur.ghisPatientId ? '<button class="q-emerg" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + " Assessment</button>" : "") +
-        '<button class="q-emerg" data-q-act="emergency">' + ms("emergency") + " Emergency</button>" +
+        '<div class="q-swipe" id="qSwipe" role="button" aria-label="Swipe to end consultation">' +
+          '<div class="q-swipe-fill"></div>' +
+          '<span class="q-swipe-txt">Swipe to end consultation</span>' +
+          '<div class="q-swipe-knob" id="qSwipeKnob">' + ms("chevron_right") + "</div>" +
+        "</div>" +
+        '<div class="q-cta-row' + (emrOn() && cur.ghisPatientId ? "" : " one") + '">' +
+          (emrOn() && cur.ghisPatientId ? '<button class="q-cta-btn assess" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Assessment</span></button>" : "") +
+          '<button class="q-cta-btn emerg" data-q-act="emergency">' + ms("warning") + "<span>Emergency</span></button>" +
+        "</div>" +
       "</div></div></div>";
   }
 
@@ -221,15 +227,55 @@
 
   // ---- controller -------------------------------------------------------------------------
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
+  // Swipe-to-end control on the Currently Consulting card. Rebound after each full paint;
+  // move/up listeners live only during an active drag (added on down, removed on up) so no leak.
+  function initConsultSwipe() {
+    var track = document.getElementById("qSwipe"), knob = document.getElementById("qSwipeKnob");
+    if (!track || !knob) return;
+    var fill = track.querySelector(".q-swipe-fill");
+    var startX = 0, curX = 0, maxX = 0, dragging = false;
+    var DONE = 0.85;   // ponytail: fraction of the track that counts as "ended"; raise if mis-fires
+    function px(e) { return e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX; }
+    function move(e) {
+      if (!dragging) return;
+      curX = Math.max(0, Math.min(maxX, px(e) - startX));
+      knob.style.transform = "translateX(" + curX + "px)";
+      if (fill) fill.style.width = (curX + knob.offsetWidth + 4) + "px";
+      track.classList.toggle("armed", !!maxX && curX / maxX > DONE);
+      if (e.cancelable) e.preventDefault();
+    }
+    function up() {
+      if (!dragging) return; dragging = false;
+      document.removeEventListener("touchmove", move); document.removeEventListener("touchend", up);
+      document.removeEventListener("mousemove", move); document.removeEventListener("mouseup", up);
+      knob.style.transition = ""; if (fill) fill.style.transition = "";
+      if (maxX && curX / maxX > DONE) { knob.style.transform = "translateX(" + maxX + "px)"; try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} }
+      else { curX = 0; knob.style.transform = "translateX(0)"; if (fill) fill.style.width = ""; track.classList.remove("armed"); }
+    }
+    function down(e) {
+      dragging = true; maxX = track.clientWidth - knob.offsetWidth - 8; startX = px(e) - curX;
+      knob.style.transition = "none"; if (fill) fill.style.transition = "none";
+      document.addEventListener("touchmove", move, { passive: false }); document.addEventListener("touchend", up);
+      document.addEventListener("mousemove", move); document.addEventListener("mouseup", up);
+      if (e.cancelable) e.preventDefault();
+    }
+    knob.addEventListener("touchstart", down, { passive: false });
+    knob.addEventListener("mousedown", down);
+  }
   function paint() {
     var r = root();
-    // Preserve scroll + search focus across the 8s poll repaint (innerHTML rebuild otherwise
-    // yanks the list back to the top and drops focus mid-type).
+    // While the user is typing in search, DON'T rebuild the DOM — a full innerHTML swap blurs
+    // the input and closes the Android soft keyboard. Refresh only the filtered rows in place.
+    var ae = document.activeElement;
+    if (ae && ae.classList && ae.classList.contains("q-tl-search")) {
+      var box = document.getElementById("qTlRows"); if (box) box.innerHTML = timelineRows(st);
+      return;
+    }
+    // Preserve scroll across the 8s poll repaint (rebuild otherwise yanks the list to the top).
     var prev = r.querySelector(".q-canvas"), top = prev ? prev.scrollTop : 0;
-    var ae = document.activeElement, onSearch = !!(ae && ae.classList && ae.classList.contains("q-tl-search")), caret = onSearch ? ae.selectionStart : 0;
     r.innerHTML = _render(st);
     var next = r.querySelector(".q-canvas"); if (next && top) next.scrollTop = top;
-    if (onSearch) { var si = r.querySelector(".q-tl-search"); if (si) { si.focus(); try { si.setSelectionRange(caret, caret); } catch (e) {} } }
+    try { initConsultSwipe(); } catch (e) {}
   }
 
   function refresh() {
