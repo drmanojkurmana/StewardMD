@@ -200,38 +200,11 @@ export async function getOpdPatients(env, token, sdate, debug, cb) {
       if (rr.rows && rr.rows.length) { res = rr; break; }
     }
   }
-  // ?raw=1 diagnostic: surface the actual DashboardUnit response so the parser can be verified against it.
+  // ?raw=1 diagnostic: surface the actual DashboardUnit response + row counts so the parser/account can be verified.
   if (debug) {
-    const hb = String((home && home.body) || '');
-    const grab = (s, re, n) => { const m = s.match(re); return m ? m[0].slice(0, n || 300) : ""; };
-    // The browser injects GET ./Home/Dashboard?type=docopdlist&sdate=<#datepicker1 value> (populated HTML) and
-    // client-side DataTable-izes it. Our empty tbody => wrong sdate FORMAT. Probe the datepicker + several formats.
-    const dpVal = grab(hb, /id="datepicker1"[^>]*value="[^"]*"/i) || grab(hb, /datepicker1[\s\S]{0,120}/i);
-    const dpFmt = grab(hb, /datepicker\s*\(\s*\{[\s\S]{0,220}?format[\s\S]{0,60}/i) || grab(hb, /dateFormat[\s\S]{0,40}/i);
-    // jQuery-UI datepicker fmt = 'yy-M-d' => e.g. "2026-Aug-10" (4-digit year, short month, no-pad day).
-    const d0 = new Date(); const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const dNoPad = d0.getUTCDate(), ddp = String(dNoPad).padStart(2, '0'), mon = MON[d0.getUTCMonth()], yy = d0.getUTCFullYear();
-    const cands = [yy + '-' + mon + '-' + dNoPad, yy + '-' + mon + '-' + ddp, res.day, ''];   // yy-M-d first
-    const probe = [];
-    for (const sd of cands) {
-      let rr = null; try { rr = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: sd }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest' }); } catch (e) {}
-      const b = String((rr && rr.body) || ''); const td = (b.match(/<td\b/gi) || []).length;
-      probe.push({ sdate: sd || '(empty)', tdCount: td, parsed: parseOpdHtml(b).length });
-    }
-    // (1) does the INITIAL home page already carry the patient rows (server-rendered)?
-    const homeTd = (hb.match(/<td\b/gi) || []).length, homeMR = (hb.match(/OPMR\d|MR\d{5,}/g) || []).length;
-    // (2) Dashboard WITH a browser-like Referer + Accept (GHIS may gate content on Referer)
-    let ref = null; try { ref = await ghisReq(env, token, 'GET', '/Doctor/Home/Dashboard?' + new URLSearchParams({ type: 'docopdlist', sdate: cands[0] }).toString(), null, { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/Home', 'Accept': 'text/html, */*; q=0.01' }); } catch (e) {}
-    const rfb = String((ref && ref.body) || '');
-    // (3) the real patient-data endpoints referenced in home JS (Nurse worklist / opwl / worklist / etc.)
-    const eps = (hb.match(/url\s*:\s*['"][^'"]*(?:Nurse|opwl|OPWL|worklist|Worklist|GetOP|Dashboard|Doclist|Patientlist|appoint)[^'"]*['"]/gi) || []).slice(0, 12);
-    const actions = (hb.match(/["'][A-Za-z]*(?:opwl|OPWL|OpWorkList|opworklist|GetOpd|Docopd|docopd)[A-Za-z]*["']/gi) || []).slice(0, 10);
-    // Identify the logged-in doctor: the name sits right after the countDown span in the top bar.
-    const ci = hb.indexOf('countDown'); const nameRegion = ci > -1 ? hb.slice(ci, ci + 500).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : '';
-    const anyName = (hb.match(/GOPALA|CHANDU|MANOJ|KRISHNA/gi) || []).slice(0, 4);
-    return { _debug: true, docName: parseDoctorName(hb), datepicker_fmt: dpFmt,
-      home_tdCount: homeTd, home_MRhits: homeMR, ref_tdCount: (rfb.match(/<td\b/gi) || []).length,
-      name_region: nameRegion.slice(0, 220), name_hits: anyName, endpoints: eps, opd_actions: actions, sdate_probe: probe };
+    const rb = String(res.r.body || '');
+    return { _debug: true, sdate: res.day, cb: (cb == null || cb === '') ? '0' : String(cb), homeLen: (home && home.body || '').length,
+      rawLen: rb.length, tdCount: (rb.match(/<td\b/gi) || []).length, parsed: res.rows.length, raw: rb.slice(0, 2500) };
   }
   return res.rows;                                            // DashboardUnit = text/html table (parseOpdHtml)
 }
