@@ -447,7 +447,8 @@
     device: '<rect x="6" y="3" width="12" height="18" rx="2.5"/><line x1="10.5" y1="18" x2="13.5" y2="18"/>',
     stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
     hourglass: '<path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 4 5.5 5 9-1 3.5-5 4.5-5 9M17 3c0 4.5-4 5.5-5 9 1 3.5 5 4.5 5 9"/>',
-    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>'
+    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
