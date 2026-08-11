@@ -1002,3 +1002,24 @@ html[data-appearance="blend"] #sbDrawer:not(#_) {
   border: 1px solid color-mix(in srgb, var(--teal, #0f766e) 30%, transparent) !important;
   box-shadow: 0 16px 40px rgba(0,0,0,.30), inset 0 1.5px 0 rgba(255,255,255,.22), inset 0 -3px 8px rgba(0,0,0,.18) !important;
 }
+
+/* ── Home Clinical-Tools + quick tiles: flatter (drop the heavy square-3D shadow) + higher
+   contrast, across every glass appearance (Frosted/Liquid/Blend/Tinted3D). Mirrors the
+   glass block's :not() specificity and comes later, so it wins. The round 3D badge is
+   untouched — only the square CARD is flattened + made more legible. */
+html[data-appearance="frosted"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="blend"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="frosted"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="blend"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance="frosted"] #homeV2.rnav .rnav-qc,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-qc,
+html[data-appearance="blend"] #homeV2.rnav .rnav-qc,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-qc {
+  background: color-mix(in srgb, var(--panel,#ffffff) 84%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--ink,#0d1b24) 16%, transparent) !important;
+  box-shadow: 0 1px 3px rgba(13,27,36,.07) !important;
+}
