@@ -5,7 +5,8 @@
  * would call) and asserts:
  *   - emrFields fold into the assessment form (cc filled)
  *   - the AI suggestions panel is labelled, shows Dx/DD/investigation rows each tagged "Review"
- *   - nothing lands in the provisional-diagnosis EMR field until the doctor taps Accept
+ *   - SAFETY (Task 6): nothing lands in the provisional-diagnosis EMR field, and no investigation
+ *     order draft exists, before AND after a refine pass -- only until the doctor taps Accept
  *   - tapping Accept on the Dx writes it into the provisional-diagnosis field
  *   - tapping Accept on an investigation adds an inv-order draft
  *   - a manual edit (assessTouched) survives a second _applyRefine pass (override still holds)
@@ -50,7 +51,22 @@ try {
   ok(await ev(`return document.querySelector('[data-oe-inp="assess:Chief_complaints_duration"]').value;`) === "", "cc field starts empty");
   ok(await ev(`return !document.querySelector('.oe-ai-panel');`) === true, "no AI suggestions panel before any refine result");
 
+  // Task 6 SAFETY: before ANY refine result, every EMR/order surface a suggestion could touch is empty.
+  ok(await ev(`return document.querySelector('[data-oe-inp="assess:provisional_diagnosis"]').value;`) === "", "SAFETY: provisional-diagnosis field starts empty (nothing auto-written)");
+  await ev(`document.querySelector('[data-oe-act="tab:inv"]').click(); return 1;`);
+  await sleep(150);
+  ok(await ev(`return !document.querySelector('.oe-draft-h');`) === true, "SAFETY: no investigation-order draft exists before any suggestion is accepted");
+  await ev(`document.querySelector('[data-oe-act="tab:assess"]').click(); return 1;`);
+  await sleep(150);
+
   await ev(`window.OPDEMR._applyRefine({ emrFields:{cc:"fever x3d"}, suggestions:{ provisionalDx:"viral fever", ddx:[{label:"Dengue",source:"ai"}], investigations:[{label:"CBC",source:"engine"}] } }); return 1;`);
+  await sleep(150);
+
+  // SAFETY: a refine pass with narrative + suggestions still leaves the investigation order surface empty until Accept.
+  await ev(`document.querySelector('[data-oe-act="tab:inv"]').click(); return 1;`);
+  await sleep(150);
+  ok(await ev(`return !document.querySelector('.oe-draft-h');`) === true, "SAFETY: a suggested investigation (CBC) does NOT auto-create an order draft before Accept");
+  await ev(`document.querySelector('[data-oe-act="tab:assess"]').click(); return 1;`);
   await sleep(150);
 
   ok(await ev(`return document.querySelector('[data-oe-inp="assess:Chief_complaints_duration"]').value;`) === "fever x3d", "emrFields folded: cc box filled from the refine result");

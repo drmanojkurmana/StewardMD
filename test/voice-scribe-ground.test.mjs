@@ -17,3 +17,29 @@ test("no findings + no llm => empty (never fabricates)", () => {
   const r = G.ground("", {}, { findings:[], differential:()=>[], investigationsFor:()=>[] });
   assert.deepEqual(r.ddx, []); assert.deepEqual(r.investigations, []);
 });
+
+// ── Task 6: SAFETY -- "fever and cough" must not surface pneumonia unless the clinician stated it ──
+test("SAFETY: 'fever and cough' does not surface pneumonia when neither the engine nor the clinician (LLM ddx) named it", () => {
+  // A bare fever+cough transcript, with a differential engine that (correctly, per the real
+  // finding set) returns only a viral URI -- no consolidation/crepitations were reported, so
+  // pneumonia is not a grounded consideration. LLM also returned no ddx.
+  const r = G.ground("patient has fever and cough for two days", { ddx: [], investigations: [] }, {
+    findings: ["fever", "cough"],
+    differential: () => [{ dx: "Viral URI", score: 0.7 }],
+    investigationsFor: () => []
+  });
+  const labels = r.ddx.map(d => d.label.toLowerCase());
+  assert.ok(!labels.includes("pneumonia"), "pneumonia must not be invented from a bare fever+cough complaint");
+  assert.deepEqual(labels, ["viral uri"]);
+});
+
+test("SAFETY: pneumonia MAY appear, but only sourced + tagged 'ai' when the clinician's own extract named it -- never auto-written, review-only", () => {
+  const r = G.ground("cough with crepitations, decreased air entry right base, doctor suspects pneumonia", { ddx: ["Pneumonia"], investigations: [] }, {
+    findings: ["fever", "cough"],
+    differential: () => [{ dx: "Viral URI", score: 0.7 }],   // engine still doesn't independently reach pneumonia
+    investigationsFor: () => []
+  });
+  const entry = r.ddx.find(d => d.label === "Pneumonia");
+  assert.ok(entry, "pneumonia surfaces only because the clinician's own words named it");
+  assert.equal(entry.source, "ai", "attributed to the clinician's stated assessment, not the engine -- a review-tagged suggestion, never a confirmed finding");
+});
