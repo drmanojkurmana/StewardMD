@@ -1021,5 +1021,18 @@ html[data-appearance="blend"] #homeV2.rnav .rnav-qc,
 html[data-appearance="tinted3d"] #homeV2.rnav .rnav-qc {
   background: color-mix(in srgb, var(--panel,#ffffff) 84%, transparent) !important;
   border: 1px solid color-mix(in srgb, var(--ink,#0d1b24) 16%, transparent) !important;
-  box-shadow: 0 1px 3px rgba(13,27,36,.07) !important;
+  box-shadow: 0 1px 3px rgba(13,27,36,.07) !important;   /* FLAT square card — no raised 3D */
+  -webkit-appearance: none !important; appearance: none !important;   /* kill iOS native button 3D/glass */
+  background-clip: padding-box !important;
+  transform: none !important;
 }
+/* Kill the raised bevel from ANY glass appearance in one shot (generic [data-appearance] — same
+   specificity as the =value rules, later source order wins) + the animated sheen that reads as gloss. */
+html[data-appearance] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance] #homeV2.rnav .rnav-qa-btn,
+html[data-appearance] #homeV2.rnav .rnav-qc {
+  box-shadow: 0 1px 3px rgba(13,27,36,.07) !important;
+  -webkit-appearance: none !important; appearance: none !important;
+}
+html[data-appearance] #homeV2.rnav .rnav-tile::after,
+html[data-appearance] #homeV2.rnav .rnav-qa-btn::after { display: none !important; }
