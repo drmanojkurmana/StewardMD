@@ -1376,7 +1376,7 @@
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
     return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + '">' +
-      '<span class="rnav-badge">' + (t.feat ? '<span class="rnav-dot"></span>' : '') + icon + '</span>' +
+      '<span class="rnav-badge">' + icon + '</span>' +
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
