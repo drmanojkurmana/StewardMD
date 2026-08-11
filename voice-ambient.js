@@ -47,6 +47,42 @@
     return words.length >= minWords ? tail : "";
   }
 
+  // Accumulate transcript chunk: append chunkText to prev, trimming word-level overlap at seam.
+  // Deterministic: word-boundary overlap only, case-insensitive match, prefer longer overlap.
+  function accumulate(prev, chunkText) {
+    prev = String(prev || "").trim();
+    chunkText = String(chunkText || "").trim();
+    if (!prev) return chunkText;
+    if (!chunkText) return prev;
+    // Find the longest word-level overlap: scan from the end of prev to find a prefix of chunkText.
+    var prevWords = prev.split(/\s+/);
+    var chunkWords = chunkText.split(/\s+/);
+    var maxOverlap = 0, overlapLen = 0;
+    for (var i = 1; i <= Math.min(prevWords.length, chunkWords.length); i++) {
+      var prevTail = prevWords.slice(-i).join(" ").toLowerCase();
+      var chunkHead = chunkWords.slice(0, i).join(" ").toLowerCase();
+      if (prevTail === chunkHead) {
+        overlapLen = i;
+      }
+    }
+    if (overlapLen > 0) {
+      // Trim overlapping words from the start of chunkText
+      return prev + " " + chunkWords.slice(overlapLen).join(" ");
+    }
+    return prev + " " + chunkText;
+  }
+
+  // Check if this state should trigger a refine (LLM pass for narrative polish).
+  // Fires on final OR every refineEveryChunks (guard against 0/undefined).
+  function needsRefine(state) {
+    state = state || {};
+    if (state.final === true) return true;
+    var refineEveryChunks = state.refineEveryChunks;
+    var chunkN = state.chunkN;
+    if (!refineEveryChunks || refineEveryChunks <= 0 || !chunkN || chunkN <= 0) return false;
+    return chunkN % refineEveryChunks === 0;
+  }
+
   function now() { try { return Date.now(); } catch (e) { return 0; } }
 
   function start(opts) {
@@ -55,6 +91,9 @@
     var getState = opts.getState || function () { return {}; };
     var running = true, paused = false, sentChars = 0, tmr = null, lastTranscript = "";
     var THROTTLE = opts.throttleMs || 1200;
+    var chunkMs = opts.chunkMs || 15000;
+    var refineEveryChunks = opts.refineEveryChunks;
+    var onRefine = opts.onRefine;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -105,7 +144,7 @@
     };
   }
 
-  var API = { start: start, reduce: reduce, needsLLM: needsLLM, _version: "1.0" };
+  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, _version: "1.0" };
   if (root) root.SMD_AMBIENT = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);
