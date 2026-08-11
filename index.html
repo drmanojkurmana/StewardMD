@@ -1567,7 +1567,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=gold1007-te" defer></script>
+<script src="/voice.js?v=gold1722-te" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -1575,7 +1575,7 @@ window.openExternal = function (u) {
 <script src="/assessment-schema.js?v=gold1" defer></script>
 <script src="/voice-vitals.js?v=gold1" defer></script>
 <script src="/voice-emr-map.js?v=gold1" defer></script>
-<script src="/voice-ambient.js?v=gold1" defer></script>
+<script src="/voice-ambient.js?v=gold1722" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
@@ -1694,7 +1694,7 @@ window.openExternal = function (u) {
 <script src="/queue.js?v=q5search" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe7-ground" defer></script>
+<script src="/opd-emr.js?v=oe8-ground" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.

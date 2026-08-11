@@ -79,7 +79,7 @@ function freshAmbientWithMockVoice(listenImpl) {
   return mod;
 }
 
-test("chunk-cycling: onError re-arms the next window instead of killing the loop", () => {
+test("chunk-cycling: onError re-arms the next window instead of killing the loop", async () => {
   const sessions = [];
   const AMB2 = freshAmbientWithMockVoice((opts) => {
     const s = { opts: opts, stop: () => {} };
@@ -89,8 +89,33 @@ test("chunk-cycling: onError re-arms the next window instead of killing the loop
   const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), chunkMs: 5 });
   assert.equal(sessions.length, 1, "first window armed on start()");
   sessions[0].opts.onError({ code: "recording-failure" });
+  // re-arm is DEFERRED (a timer) on purpose: a synchronous re-arm from the error path recurses
+  // armChunk→listen→onError→armChunk… to a stack blow when the engine fails immediately.
+  await new Promise((r) => setTimeout(r, 350));
   assert.equal(sessions.length, 2, "onError re-armed a fresh window (loop not killed)");
   ctl.stop();
+});
+
+test("chunk-cycling: clinical-unavailable falls back to device STT without recursing or dying", async () => {
+  // Mirrors voice.js: engine:"clinical" with no Whisper reports "clinical-unavailable" SYNCHRONOUSLY
+  // and returns null. The loop must NOT stack-overflow (the old "does nothing without Whisper" bug),
+  // must switch to a non-clinical engine, and must signal "fallback" (not a terminal onError).
+  const engines = [], states = [], errors = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    engines.push(opts.engine);
+    if (opts.engine === "clinical") { opts.onError("clinical-unavailable"); return null; }
+    return { opts: opts, stop: () => {} };                  // device STT available
+  });
+  let threw = false, ctl;
+  try { ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), chunkMs: 60000, onState: (s) => states.push(s), onError: (e) => errors.push(e) }); }
+  catch (e) { threw = true; }
+  assert.equal(threw, false, "start() does not throw / stack-overflow when Whisper is unavailable");
+  assert.equal(engines[0], "clinical", "clinical tried first");
+  assert.ok(states.includes("fallback"), "loop signals 'fallback'");
+  assert.ok(!errors.includes("clinical-unavailable"), "clinical-unavailable is recovered, not a terminal error");
+  await new Promise((r) => setTimeout(r, 350));
+  assert.ok(engines.some((e) => e !== "clinical"), "loop re-armed on a non-clinical (device STT) engine");
+  ctl && ctl.stop();
 });
 
 test("chunk-cycling: onRefine does not fire for a window that finished while paused", () => {
