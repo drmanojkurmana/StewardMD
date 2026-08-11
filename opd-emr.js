@@ -611,8 +611,37 @@
   // not wired here yet (the antibiotic/reasoning engine's differential() is closure-bound to its own
   // finding state, not a plain findingKeys->ddx function) — ground() with empty engine inputs still
   // safely forwards the LLM's own ddx/investigations (source:"ai"), never fabricating anything.
-  // ponytail: wire a real findings/differential/investigationsFor adapter when reasoning.js exposes one.
-  function groundOpts() { return { findings: [], differential: function () { return []; }, investigationsFor: function () { return []; } }; }
+  // Build the SMD_NLP extraction context from the DX engine's finding catalog (keys + labels).
+  function nlpCtx() {
+    var cat = (G.DX && G.DX.findingCatalog) ? G.DX.findingCatalog() : [];
+    var valid = {}, labels = {};
+    cat.forEach(function (c) { if (c && c.key) { valid[c.key] = 1; labels[c.key] = c.label || c.key; } });
+    return { valid: valid, labels: labels, syn: {} };
+  }
+  // Pure findingKeys -> ranked differential via the DX engine, WITHOUT disturbing the live reasoning
+  // workspace: snapshot S.f, score on the given keys, restore. Synchronous, so nothing interleaves;
+  // derived caches (fInf/_dom) self-heal on the next real differential() call.
+  function differentialFor(keys) {
+    var DX = G.DX;
+    if (!(DX && DX._differential && DX._state)) return [];
+    var S = DX._state, savedF = S.f;
+    try {
+      var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = true; });
+      S.f = f;
+      var d = DX._differential() || {};
+      return (d.inf || []).concat(d.ni || []).map(function (r) { return { dx: r.name, score: r.score, inv: r.inv || [] }; });
+    } catch (e) { return []; } finally { S.f = savedF; }
+  }
+  // Grounding options for SMD_SCRIBEGROUND.ground(): extract findings from the transcript
+  // (deterministic, SMD_NLP over the DX catalog) and anchor the differential + investigations to the
+  // StewardMD engine. Precomputed once, so it is independent of ground()'s call order.
+  function groundOpts(transcript) {
+    var findings = (G.SMD_NLP && G.SMD_NLP.extract) ? ((G.SMD_NLP.extract(transcript || "", nlpCtx()) || {}).present || []) : [];
+    var diff = differentialFor(findings);
+    var invMap = {}; diff.forEach(function (x) { if (x.inv && x.inv.length) invMap[x.dx] = x.inv; });
+    var ddx = diff.map(function (x) { return { dx: x.dx, score: x.score }; });
+    return { findings: findings, differential: function () { return ddx; }, investigationsFor: function (dx) { return invMap[dx] || []; } };
+  }
   // opd-scribe refine pass: full transcript -> LLM extract -> grounded suggestions -> _applyRefine.
   // Suggest-only: nothing here is written to the EMR/orders until the doctor taps Accept (_applyRefine
   // only stages st.scribeSuggestions + folds emrFields the same protected way as applyVoice).
@@ -628,7 +657,7 @@
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (!r || r.error) return;
       var sg = r.suggestions || {};
-      var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts())
+      var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
       _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations } });
     }).catch(function () {});
@@ -718,6 +747,6 @@
   }
   function close() { stopVoice(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor };
 })();
