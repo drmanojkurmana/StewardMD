@@ -48,26 +48,34 @@
   }
 
   // Accumulate transcript chunk: append chunkText to prev, trimming word-level overlap at seam.
-  // Deterministic: word-boundary overlap only, case-insensitive match, prefer longer overlap.
+  // Handles Whisper's terminal punctuation at clause boundaries (exactly where 15s chunks split).
+  // Requires >= 2-word overlap to avoid spurious single-word dedup (protects "no"/"the"/etc).
   function accumulate(prev, chunkText) {
     prev = String(prev || "").trim();
     chunkText = String(chunkText || "").trim();
     if (!prev) return chunkText;
     if (!chunkText) return prev;
-    // Find the longest word-level overlap: scan from the end of prev to find a prefix of chunkText.
+    // Normalize word for comparison: strip trailing punctuation and lowercase.
+    function normWord(w) { return String(w || "").toLowerCase().replace(/[.,!?;:]+$/, ""); }
     var prevWords = prev.split(/\s+/);
     var chunkWords = chunkText.split(/\s+/);
-    var maxOverlap = 0, overlapLen = 0;
+    var overlapLen = 0;
+    // Find longest word-level overlap (after punctuation normalization).
     for (var i = 1; i <= Math.min(prevWords.length, chunkWords.length); i++) {
-      var prevTail = prevWords.slice(-i).join(" ").toLowerCase();
-      var chunkHead = chunkWords.slice(0, i).join(" ").toLowerCase();
-      if (prevTail === chunkHead) {
-        overlapLen = i;
-      }
+      var prevTail = prevWords.slice(-i).map(normWord).join(" ");
+      var chunkHead = chunkWords.slice(0, i).map(normWord).join(" ");
+      if (prevTail === chunkHead) { overlapLen = i; }
     }
-    if (overlapLen > 0) {
-      // Trim overlapping words from the start of chunkText
-      return prev + " " + chunkWords.slice(overlapLen).join(" ");
+    // Only trim if overlap is >= 2 words (avoid spurious single-word dedup).
+    if (overlapLen >= 2) {
+      var remaining = chunkWords.slice(overlapLen).join(" ");
+      if (remaining) {
+        // Strip trailing punctuation from prev at overlap point (Whisper adds period at seams)
+        var prevNorm = prev.replace(/[.,!?;:]+$/, "");
+        return prevNorm + " " + remaining;
+      } else {
+        return prev;
+      }
     }
     return prev + " " + chunkText;
   }
