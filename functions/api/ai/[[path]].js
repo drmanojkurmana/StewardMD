@@ -100,6 +100,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
+import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -1342,6 +1343,19 @@ export async function onRequest(context) {
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         return json({ kind: "assessment", fields: sanitizeAssessmentFields(parseJsonLoose(text)), mode: "assessment" });
+      }
+      if (body.kind === "opd-scribe") {
+        // OPD scribe: transcript → EMR fields + suggestion lists (differential, investigations).
+        // Vitals + exam are handled deterministically on-device (never the LLM). Output is
+        // whitelisted to narrative fields + three suggestion arrays, so no invented diagnosis,
+        // symptom, finding, dose, vital or investigation can reach the app.
+        const prompt = scribeExtractPrompt(transcript);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
+        return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
       }
       const k = VISION_SYS[body.kind] ? body.kind : "monitor";
       const prompt = transcriptExtractPrompt(k, transcript);

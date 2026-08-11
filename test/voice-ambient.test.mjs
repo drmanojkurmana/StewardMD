@@ -66,3 +66,109 @@ test("controller: llmExtract fired once for narrative on final, merged into upda
   assert.ok(updates.some((u) => u.updates.some((x) => x.field === "cc")), "LLM cc field merged in");
   ctl.stop();
 });
+
+// Chunk-cycling (armChunk/onChunkFinal) needs root.SMD_VOICE to be reachable — reload the module
+// fresh with a mocked global.window.SMD_VOICE (same mock-SMD_VOICE pattern the CDP harnesses use)
+// so the review-fix regressions (pause-gated refine, error re-arm) stay covered going forward.
+function freshAmbientWithMockVoice(listenImpl) {
+  const modPath = join(HERE, "..", "voice-ambient.js");
+  delete require.cache[require.resolve(modPath)];
+  global.window = { SMD_VOICE: { listen: listenImpl } };
+  const mod = require(modPath);
+  delete global.window;
+  return mod;
+}
+
+test("chunk-cycling: onError re-arms the next window instead of killing the loop", () => {
+  const sessions = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), chunkMs: 5 });
+  assert.equal(sessions.length, 1, "first window armed on start()");
+  sessions[0].opts.onError({ code: "recording-failure" });
+  assert.equal(sessions.length, 2, "onError re-armed a fresh window (loop not killed)");
+  ctl.stop();
+});
+
+test("chunk-cycling: onRefine does not fire for a window that finished while paused", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({
+    speaker: "doctor",
+    getState: () => ({}),
+    refineEveryChunks: 1,
+    onRefine: (t) => refined.push(t),
+    chunkMs: 5
+  });
+  ctl.pause();                                             // doctor taps Pause mid-window
+  sessions[0].opts.onFinal("some transcript");             // in-flight window still folds in
+  assert.equal(refined.length, 0, "refine must not fire for audio captured after pause");
+  ctl.stop();
+});
+
+test("chunk-cycling: onRefine fires normally on final when not paused", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({
+    speaker: "doctor",
+    getState: () => ({}),
+    refineEveryChunks: 1,
+    onRefine: (t) => refined.push(t),
+    chunkMs: 5
+  });
+  sessions[0].opts.onFinal("some transcript");
+  assert.equal(refined.length, 1, "refine fires on the un-paused chunk boundary");
+  ctl.stop();
+});
+
+// stop()'s return value is the contract opd-emr.js's stopVoice() relies on to avoid firing its
+// own (stale) refine alongside the flush's (complete) one -- see opd-emr.js stopVoice()/doRefine().
+test("stop(): flushing an in-flight, un-paused chunk returns true, and that flush's onRefine fires exactly once with the complete transcript", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
+  const willRefine = ctl.stop();
+  assert.equal(willRefine, true, "stop() reports the flush will call onRefine itself (caller should skip its own fallback)");
+  sessions[0].opts.onFinal("complete transcript");   // simulates the async native stop -> transcribe -> onFinal
+  assert.equal(refined.length, 1, "onRefine fired exactly once");
+  assert.equal(refined[0], "complete transcript", "with the COMPLETE (post-flush) transcript, not a stale one");
+});
+
+test("stop(): stopping while paused returns false (the flush won't call onRefine, so a caller-side fallback is still needed)", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
+  ctl.pause();
+  const willRefine = ctl.stop();
+  assert.equal(willRefine, false, "stop() reports no refine is coming from the flush while paused");
+  sessions[0].opts.onFinal("complete transcript");
+  assert.equal(refined.length, 0, "confirmed: the paused flush does not call onRefine");
+});
+
+test("stop(): no in-flight chunk (no ASR host) returns false, so the caller knows to make its own refine call", () => {
+  const ctl = AMB.start({ speaker: "doctor", getState: () => ({}), onRefine: () => {} });   // real module; no window.SMD_VOICE in Node -> armChunk() is a no-op
+  assert.equal(ctl.stop(), false, "nothing to flush -> caller must refine itself");
+});

@@ -66,6 +66,29 @@ plugin makes exactly one network call type: downloading the model file from the 
 `WhisperEngine` saves the shared session's `category`/`mode`/`options` before recording and restores
 them on stop/cancel, so the existing SFSpeech (Fast Dictation) path is unaffected afterwards.
 
+## Continuous capture upgrade path (device-gated, not yet built)
+Today's plugin is **record-then-transcribe**: `startTranscribe` records, `stopTranscribe` stops the
+mic and runs one inference pass, firing `whisperFinal` once. `whisperPartial` is reserved but never
+emitted. `voice-ambient.js`'s ambient/OPD-scribe controller works around this in JS today (option
+**b**, shipped): it calls `stopTranscribe`/`startTranscribe` back-to-back in ~15s windows and stitches
+the per-window finals into one transcript (`accumulate()` in `voice-ambient.js`). That re-arm has a
+real ceiling — the mic is briefly closed and reopened at every window boundary, so audio spanning the
+seam (a few hundred ms) can be clipped.
+
+The fix is **native continuous capture**, either:
+- **(a) Ring buffer** — keep `AVAudioEngine`/`AudioRecord` running continuously; every ~15s, hand the
+  whisper.cpp context the last N seconds of PCM (a sliding/ring buffer) without ever stopping the mic.
+- **(c) Continuous-record-with-flush** — keep recording into one buffer for the whole session; every
+  ~15s, run inference on the buffer accumulated so far (or the new tail) and flush, without closing
+  the audio session between windows.
+
+**Contract for either**: emit `whisperPartial {text}` once per ~15s window *while recording
+continues* (no `stopTranscribe`/`startTranscribe` round trip), and still emit one `whisperFinal` when
+the caller actually calls `stopTranscribe`. `voice-ambient.js` already consumes `whisperPartial` via
+`onPartial` (currently a no-op in practice since it's never fired) — wiring this in would let the JS
+re-arm loop go away with no `SMD_AMBIENT` API change. Needs a **real device** to validate (mic
+continuity + inference timing can't be verified on a simulator/emulator).
+
 ## Licenses
 MIT (this plugin). Links whisper.cpp (MIT, ggml authors). ggml Whisper models are MIT
 (OpenAI Whisper) — redistribution/mirroring permitted; notice retained in `LICENSE`.

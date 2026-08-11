@@ -150,12 +150,29 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-empty.err { color: var(--error); }
 #smdOpdEmr .oe-empty.err .material-symbols-outlined { color: var(--error); }
 
-/* voice fill (SMD_AMBIENT) */
-#smdOpdEmr .oe-voicebar { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: color-mix(in srgb, var(--surface) 92%, var(--primary)); }
+/* voice fill (SMD_AMBIENT) + ambient consultation controls */
+#smdOpdEmr .oe-voicebar { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: color-mix(in srgb, var(--surface) 92%, var(--primary)); flex-wrap: wrap; }
 #smdOpdEmr .oe-voicebar .oe-btn { flex: 0 0 auto; background: var(--primary); color: var(--on-primary); padding: 10px 16px; }
 #smdOpdEmr .oe-voicebar .oe-btn.live { background: var(--error, #b91c1c); color: var(--on-error, #fff); animation: oeVoicePulse 1.3s infinite; }
 @keyframes oeVoicePulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 50%, transparent); } 50% { box-shadow: 0 0 0 8px transparent; } }
 #smdOpdEmr .oe-voice-status { font: 600 12px var(--q-sans); color: var(--secondary); min-width: 0; }
+#smdOpdEmr .oe-consult-controls { display: inline-flex; gap: 8px; }
+#smdOpdEmr .oe-consult-controls .oe-btn.sm { padding: 8px 12px; font-size: 13px; background: var(--sc-lowest); color: var(--on-surface); border: 1px solid var(--outline-variant); }
+#smdOpdEmr .oe-consult-controls .oe-btn.sm.danger { color: var(--on-error, #fff); background: var(--error, #b91c1c); border-color: var(--error, #b91c1c); }
+#smdOpdEmr .oe-consult-timer { font: 700 14px var(--q-mono); color: var(--on-surface); }
 /* fields the voice engine filled (doctor can still edit) */
 #smdOpdEmr .oe-field.oe-voice .oe-inp { border-color: var(--green, #1c7a4a); background: var(--green-bg, #e7f5ec); }
 #smdOpdEmr .oe-check.oe-voice, #smdOpdEmr .oe-yn.oe-voice { outline: 2px solid color-mix(in srgb, var(--green, #1c7a4a) 40%, transparent); outline-offset: 2px; border-radius: 8px; }
+
+/* AI suggestions panel (review-first: nothing here is in the EMR until Accept is tapped) */
+#smdOpdEmr .oe-ai-panel { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 8px 14px 14px; box-shadow: 0 1px 3px rgba(20,32,43,.05); }
+#smdOpdEmr .oe-ai-panel .oe-h3 { margin: 10px 0 8px; }
+#smdOpdEmr .oe-ai-group + .oe-ai-group { margin-top: 10px; }
+#smdOpdEmr .oe-ai-group h4 { font: 700 11px var(--q-sans); text-transform: uppercase; letter-spacing: .04em; color: var(--secondary); margin: 0 0 6px; }
+#smdOpdEmr .oe-ai-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--sc-low); }
+#smdOpdEmr .oe-ai-group h4 + .oe-ai-row { border-top: none; }
+#smdOpdEmr .oe-ai-label { flex: 1; min-width: 0; font: 600 14px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-ai-src { font: 600 10.5px var(--q-sans); text-transform: uppercase; color: var(--secondary); }
+#smdOpdEmr .oe-ai-row .oe-btn.sm { flex: 0 0 auto; padding: 7px 12px; font-size: 12.5px; background: var(--primary); color: var(--on-primary); }
+#smdOpdEmr .oe-ai-added { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; font: 700 12.5px var(--q-sans); color: var(--green, #1c7a4a); }
+#smdOpdEmr .oe-ai-added .material-symbols-outlined { font-size: 18px; }

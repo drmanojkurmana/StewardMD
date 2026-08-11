@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPD AI Suggestions panel + ambient consultation harness</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<!-- Stub the flags OPDEMR checks BEFORE opd-emr.js loads (flagOn()/writeFlagOn() read this at call
+     time, so order only matters relative to when openProfile() runs, not to script load order). -->
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };
+// Stub SMD_AMBIENT so the consultation UI (mic/pause/stop) renders without a real ASR engine.
+window.SMD_AMBIENT = { start: function (opts) { window.__ambOpts = opts; return { stop: function () {}, pause: function () {}, resume: function () {} }; } };
+// Mock fetch: /profile and /assessment succeed with minimal data so openProfile()/loadAssessment()
+// never hit st.error (a profile-load error blocks EVERY tab, not just Profile -- existing behaviour).
+var _origFetch = window.fetch;
+window.fetch = function (url) {
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  if (url.indexOf("/assessment") >= 0) return Promise.resolve({ ok: true, json: function () { return Promise.resolve({ fields: [] }); } });
+  return Promise.resolve({ ok: true, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.OPDEMR._applyRefine);"></script>
+</body></html>
