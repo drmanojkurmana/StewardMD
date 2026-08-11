@@ -279,21 +279,52 @@
     return { vals: out, filled: filled, dropped: dropped, conflicts: conflicts };
   }
 
-  // Voice-fill control (shown only when the ambient engine is loaded). Toggles on-device dictation
-  // that fills the fields below for review; nothing is saved until the doctor taps Save to GHIS.
-  function voiceBar(st) {
+  // Ambient consultation control bar (shown only when the ambient engine is loaded): start/pause/stop
+  // the whole-visit voice consultation, elapsed timer, the language toggle, and a live "filled N ·
+  // N suggestions" readout once a refine pass has landed. Nothing is saved until the doctor taps Save
+  // to GHIS (fields) or Accept (suggestions) — this bar only ever starts/stops capture.
+  function fmtElapsed(ms) { var s = Math.max(0, Math.floor((ms || 0) / 1000)), m = Math.floor(s / 60); s = s % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
+  function consultBar(st) {
     if (!G.SMD_AMBIENT) return "";
-    var on = !!st.voiceOn, lang = st.voiceLang || "auto";
+    var on = !!st.voiceOn, paused = !!st.voicePaused, lang = st.voiceLang || "auto";
     function lb(v, t) {
       var sel = lang === v;
       return '<button data-oe-act="vlang:' + v + '" style="border:1px solid var(--outline-variant,#e2e8f0);background:' +
         (sel ? "var(--primary,#0f766e)" : "transparent") + ';color:' + (sel ? "#fff" : "inherit") +
         ';font:700 11px inherit;padding:5px 9px;border-radius:8px;cursor:pointer;margin-left:4px">' + t + "</button>";
     }
-    return '<div class="oe-voicebar"><button class="oe-btn' + (on ? " live" : "") + '" data-oe-act="voice-toggle">' +
-      ms(on ? "stop" : "mic") + (on ? "Stop voice" : "Voice fill") + '</button>' +
+    var controls = !on
+      ? '<button class="oe-btn" data-oe-act="voice-toggle">' + ms("mic") + "Start consultation</button>"
+      : '<span class="oe-consult-controls">' +
+          '<button class="oe-btn sm" data-oe-act="voice-pause">' + ms(paused ? "play_arrow" : "pause") + (paused ? "Resume" : "Pause") + "</button>" +
+          '<button class="oe-btn sm danger" data-oe-act="voice-stop">' + ms("stop") + "Stop</button></span>";
+    var stats = st.scribeStats ? (" · " + (st.scribeStats.filled || 0) + " filled · " + (st.scribeStats.suggestions || 0) + " suggestions") : "";
+    return '<div class="oe-voicebar' + (on ? " live" : "") + '">' + controls +
+      (on ? '<span class="oe-consult-timer mono" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" : "") +
       '<span style="display:inline-flex">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</span>" +
-      '<span class="oe-voice-status" id="oeVoiceStatus">' + esc(st.voiceStatus || "") + "</span></div>";
+      '<span class="oe-voice-status" id="oeVoiceStatus">' + esc(st.voiceStatus || "") + stats + "</span></div>";
+  }
+  function now() { try { return Date.now(); } catch (e) { return 0; } }
+
+  // ---- AI suggestions panel (review-first: Dx / differential / investigations from a refine pass).
+  // Nothing here is written to the EMR or an order until the doctor taps Accept on that specific row.
+  function scribeRow(kind, idx, label, source, accepted) {
+    return '<div class="oe-ai-row"><span class="oe-ai-label">' + esc(label) + "</span>" +
+      (source ? '<span class="oe-ai-src">' + esc(source === "engine" ? "engine" : "AI") + "</span>" : "") +
+      '<span class="oe-tag oe-review">Review</span>' +
+      (accepted ? '<span class="oe-ai-added">' + ms("check_circle") + "Added</span>"
+        : '<button class="oe-btn sm" data-oe-act="scribe-accept:' + kind + ":" + idx + '">' + ms("add_task") + "Accept</button>") +
+      "</div>";
+  }
+  function suggestionsPanel(st) {
+    var s = st.scribeSuggestions; if (!s) return "";
+    var body = "";
+    if (s.provisionalDx) body += '<div class="oe-ai-group"><h4>Provisional diagnosis</h4>' + scribeRow("dx", 0, s.provisionalDx, "", !!s.acceptedDx) + "</div>";
+    if (s.ddx && s.ddx.length) body += '<div class="oe-ai-group"><h4>Differential</h4>' + s.ddx.map(function (d, i) { return scribeRow("ddx", i, d.label, d.source, !!(s.acceptedDdx && s.acceptedDdx[i])); }).join("") + "</div>";
+    if (s.investigations && s.investigations.length) body += '<div class="oe-ai-group"><h4>Investigations to consider</h4>' + s.investigations.map(function (d, i) { return scribeRow("inv", i, d.label, d.source, !!(s.acceptedInv && s.acceptedInv[i])); }).join("") + "</div>";
+    if (!body) return "";
+    return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "AI suggestions" +
+      '<span class="oe-tag oe-review">Review before use</span></h3>' + body + "</section>";
   }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
@@ -307,7 +338,7 @@
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
-    return voiceBar(st) + '<div class="oe-accwrap">' + body + "</div>" + bar;
+    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar;
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -330,7 +361,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null }; }
   function paint() { root().innerHTML = _render(st); }
   function paintKeepFocus(kind) {
     paint();
@@ -404,8 +435,11 @@
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
-    if (cmd === "voice-toggle") return st.voiceOn ? stopVoice() : startVoice();
+    if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
+    if (cmd === "voice-pause") return togglePauseVoice();
+    if (cmd === "voice-stop") return stopVoice();
     if (cmd === "vlang") { st.voiceLang = arg; if (st.voiceOn) { stopVoice(); } else { paint(); } return; }
+    if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
@@ -541,8 +575,9 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null;
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "";
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
+  function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
   function putVoiceDom(name) {
     try {
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
@@ -572,20 +607,85 @@
       return (r && !r.error && r.fields && Object.keys(r.fields).length) ? { fields: r.fields, confidence: 0.7 } : null;
     }).catch(function () { return null; });
   }
+  // Grounding inputs for SMD_SCRIBEGROUND.ground(): the differential/investigations engine adapter is
+  // not wired here yet (the antibiotic/reasoning engine's differential() is closure-bound to its own
+  // finding state, not a plain findingKeys->ddx function) — ground() with empty engine inputs still
+  // safely forwards the LLM's own ddx/investigations (source:"ai"), never fabricating anything.
+  // ponytail: wire a real findings/differential/investigationsFor adapter when reasoning.js exposes one.
+  function groundOpts() { return { findings: [], differential: function () { return []; }, investigationsFor: function () { return []; } }; }
+  // opd-scribe refine pass: full transcript -> LLM extract -> grounded suggestions -> _applyRefine.
+  // Suggest-only: nothing here is written to the EMR/orders until the doctor taps Accept (_applyRefine
+  // only stages st.scribeSuggestions + folds emrFields the same protected way as applyVoice).
+  function doRefine(transcript) {
+    if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) return;
+    G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
+      if (!r || r.error) return;
+      var sg = r.suggestions || {};
+      var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts())
+        : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
+      _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations } });
+    }).catch(function () {});
+  }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voiceStatus = "Starting…"; paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); _lastFullTranscript = ""; paint();
+    if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
       language: st.voiceLang || "auto",                     // en | auto | te — multilingual Whisper decodes Telugu + code-switch
+      chunkMs: 15000, refineEveryChunks: 4,                  // forward-compat with the native continuous-capture cadence (Task 5)
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
+      onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; },
+      onRefine: doRefine,                                    // fires once the chunk cadence (Task 5) is wired; see the manual call in stopVoice() for today's single-listen mode
       onState: function (s) { setVoiceStatus(s === "listening" ? "Listening…" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
-      onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; paint(); }
+      onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
     });
   }
-  function stopVoice() { if (_amb) { try { _amb.stop(); } catch (x) {} _amb = null; } st.voiceOn = false; st.voiceStatus = ""; paint(); }
+  function togglePauseVoice() { if (!_amb) return; if (st.voicePaused) { try { _amb.resume(); } catch (x) {} st.voicePaused = false; } else { try { _amb.pause(); } catch (x) {} st.voicePaused = true; } paint(); }
+  function stopVoice() {
+    if (_amb) { try { _amb.stop(); } catch (x) {} _amb = null; }
+    if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; }
+    st.voiceOn = false; st.voicePaused = false; st.voiceStatus = "";
+    doRefine(_lastFullTranscript);                          // end-of-consult refine pass over the whole transcript
+    paint();
+  }
+
+  // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
+  // draft; every other suggestion stays untouched until its own Accept is tapped.
+  function scribeAccept(kind, idx) {
+    var s = st.scribeSuggestions; if (!s) return;
+    if (kind === "dx" || kind === "ddx") {
+      var label = kind === "dx" ? s.provisionalDx : (s.ddx[idx] && s.ddx[idx].label);
+      if (!label) return;
+      var m = _voiceMerge(st.assessVals, st.assessTouched, [{ field: "provisionalDx", value: label, applied: true }]);
+      st.assessVals = m.vals;
+      if (kind === "dx") s.acceptedDx = true; else { s.acceptedDdx = s.acceptedDdx || {}; s.acceptedDdx[idx] = true; }
+    } else if (kind === "inv") {
+      var inv = s.investigations[idx]; if (!inv) return;
+      st.invDraft = { service: { id: null, name: inv.label }, diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "", emergency: false, fromSuggestion: true };
+      s.acceptedInv = s.acceptedInv || {}; s.acceptedInv[idx] = true;
+    }
+    paint();
+  }
+  // PURE-ish: fold a Task-1 opd-scribe extract + Task-2 grounded suggestions into state. emrFields fold
+  // via the SAME _voiceMerge manual-override guard as live dictation; suggestions are staged for review
+  // only — nothing lands in the EMR/orders until scribeAccept() runs for that specific row. Exposed for
+  // testing (CDP + a real audio pipeline both call this the same way).
+  function _applyRefine(result) {
+    result = result || {};
+    var ef = result.emrFields || {};
+    var updates = Object.keys(ef).map(function (k) { return { field: k, value: ef[k], applied: true }; });
+    var m = _voiceMerge(st.assessVals, st.assessTouched, updates);
+    st.assessVals = m.vals;
+    var sg = result.suggestions || {};
+    var ddx = sg.ddx || [], inv = sg.investigations || [];
+    st.scribeSuggestions = { provisionalDx: sg.provisionalDx || "", ddx: ddx, investigations: inv, acceptedDx: false, acceptedDdx: {}, acceptedInv: {} };
+    st.scribeStats = { filled: m.filled.length, suggestions: (sg.provisionalDx ? 1 : 0) + ddx.length + inv.length };
+    paint();
+    return { filled: m.filled, dropped: m.dropped, conflicts: m.conflicts };
+  }
 
   function openProfile(opts) {
     opts = opts || {};
@@ -606,6 +706,6 @@
   }
   function close() { stopVoice(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine };
 })();
