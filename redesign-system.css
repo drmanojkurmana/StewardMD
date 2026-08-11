@@ -674,3 +674,17 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   width: auto; height: auto; min-height: 0; line-height: 1;
   display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
 }
+
+/* ── Clinical Tools: circular-badge tiles + Add Tool customize (2026-08) ───────────────────
+   Overrides the earlier .rnav-grid / .rnav-tile rules (later source order wins). Icons sit in
+   a round badge; the featured tile gets the dark "signature" badge + dot. */
+#homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
+#homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
+#homeV2.rnav .rnav-badge { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background: color-mix(in srgb, var(--rds-primary) 13%, var(--rds-surface, #fff)); color: var(--rds-primary); }
+#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: inherit; margin: 0; }
+#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
+#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
+#homeV2.rnav .rnav-tile.feat .rnav-badge { background: radial-gradient(circle at 60% 35%, #155e54, #0c332e); color: #fff; }
+#homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
+#homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }

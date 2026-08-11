@@ -810,7 +810,8 @@
       } catch (e) { if (window.toast) toast("Connect failed to open"); }
     },
     connectpatient: function () { try { if (window.CONNECTPT && CONNECTPT.open) CONNECTPT.open(); else toast("Connect patient loading…"); } catch (e) {} },
-    followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); }
+    followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
+    customizetools: function () { openToolsCustomize(); }
   };
   // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
   try { window.SMD_openConnectEmr = function () { try { ACT.connect(); } catch (e) {} }; } catch (e) {}
@@ -968,6 +969,11 @@
       ".hv-tile.pri{background:var(--hp);border-color:var(--hp);color:#fff;box-shadow:0 6px 18px -8px var(--hp)}.hv-tile.pri svg{color:#fff}.hv-tile.pri .tc{color:rgba(255,255,255,.85)}",
       "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
       "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
+      // Customize-tools sheet (Add Tool): row toggles.
+      ".hv-sub2{font:500 12.5px var(--hfont);color:var(--hmut);margin:-6px 0 14px}",
+      ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
+      ".hv-tog{flex:0 0 auto;width:42px;height:25px;border-radius:13px;background:var(--hbd);position:relative;transition:background .15s}",
+      ".hv-tog:after{content:'';position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.hv-tog.on{background:var(--hp)}.hv-tog.on:after{left:20px}",
       // display engine controls
       ".hv-d-sec{margin:6px 0 16px}.hv-d-sec h4{font:800 11px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin:0 0 9px}",
       ".hv-d-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.hv-d-val{font:800 14px var(--hfont);color:var(--hp)}",
@@ -1334,6 +1340,64 @@
     return '<button class="rnav-tile" data-act="' + act + '" aria-label="' + tt + '">' + ric(icon) +
       '<span class="rnav-tile-tt">' + tt + '</span><span class="rnav-tile-sub">' + sub + '</span></button>';
   }
+  // ---- Home "Clinical tools" registry (data-driven so users can customise the grid) ----------
+  // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
+  // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
+  // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
+  var HOME_TOOLS = [
+    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1"); } catch (e) { return false; } } },
+    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG",
+      eligible: function () { try { if (window.KARDIOX && KARDIOX.isOn) return KARDIOX.isOn(); var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); } catch (e) { return false; } } },
+    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray",
+      eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
+    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis",
+      eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") !== "0"); } catch (e) { return false; } } },
+    { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
+      eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
+    { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
+      eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") !== "0"; } catch (e) { return true; } } },
+    { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
+    { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
+    { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
+    { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
+  ];
+  function homeToolByAct(a) { for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i]; return null; }
+  function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
+  function homeToolVisible(t) { var p = homeToolPrefs(); return Object.prototype.hasOwnProperty.call(p, t.act) ? !!p[t.act] : (t.defOn !== false); }
+  function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
+  function homeToolTile(t) {
+    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + '">' +
+      '<span class="rnav-badge">' + (t.feat ? '<span class="rnav-dot"></span>' : '') + ric(t.ic) + '</span>' +
+      '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
+  }
+  function renderHomeToolsGrid() {
+    var html = "";
+    for (var i = 0; i < HOME_TOOLS.length; i++) { var t = HOME_TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
+    html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
+      '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
+    return html;
+  }
+  function openToolsCustomize() {
+    var rows = "";
+    for (var i = 0; i < HOME_TOOLS.length; i++) {
+      var t = HOME_TOOLS[i]; if (!homeToolEligible(t)) continue;
+      rows += '<button class="hv-mi hv-tool-tog" data-tool="' + t.act + '">' + ric(t.ic) +
+        '<div class="ml">' + t.tt + '<div class="mc">' + t.sub + '</div></div>' +
+        '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span></button>';
+    }
+    openSheet('<div class="hv-sh-t">Customize tools</div><div class="hv-sub2">Show or hide the tools on your home screen. Saved on this device.</div>' + rows);
+    sheetEl().querySelectorAll(".hv-tool-tog").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = homeToolByAct(b.getAttribute("data-tool")); if (!t) return;
+        var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
+        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e) {}
+        var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
+        var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
+      });
+    });
+  }
+
   function homeRedesignMarkup() {
     return '' +
       '<header class="rnav-head rds-safe-top">' +
@@ -1354,115 +1418,15 @@
           '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<button class="rnav-hospital" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare" style="display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:15px 16px;border:none;border-radius:16px;background:linear-gradient(135deg,#0e6e63,#0a4f47);color:#fff;cursor:pointer;margin:2px 0 6px;box-shadow:0 2px 10px rgba(14,110,99,.25)">' +
-          '<span style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.16)">' + ric("local_hospital") + '</span>' +
-          '<span style="flex:1;min-width:0"><span style="display:block;font-weight:800;font-size:17px">Hospital</span><span style="display:block;font-weight:600;font-size:12.5px;opacity:.9;margin-top:2px">OPD · ICU · Ward · FollowCare</span></span>' +
-          '<span style="flex:0 0 auto;display:inline-flex;opacity:.9">' + ric("chevron_right") + '</span>' +
-        '</button>' +
         '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
-          '<button class="rnav-qc" data-act="guidelines" aria-label="Guides">' + ric("menu_book") + '<span>Guides</span></button>' +
-          '<button class="rnav-qc" data-act="electrolytes" aria-label="Electrolytes">' + ric("science") + '<span>Electrolytes</span></button>' +
+          '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
+          '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
-        '<div class="rnav-grid">' +
-          (function () {
-            // FundX AI retinal-scan tile — shown only when the smd_fundx flag is on
-            // (?fundx=1 or Settings). Self-contained + order-independent so it never
-            // depends on fundx.js having loaded first.
-            try {
-              var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
-              var on = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1");
-              return on ? (
-                '<button class="rnav-tile fx-tile" data-act="retinalscan" aria-label="Open FundX AI — retinal scan">' +
-                  '<div class="fx-tile-head"><span class="fx-eye">' + ric("visibility") + '</span><span class="fx-pill">' + ric("bolt") + 'AI</span></div>' +
-                  '<svg class="fx-tile-fundus" viewBox="0 0 120 30" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
-                    '<defs><radialGradient id="fxFund" cx="40%" cy="45%" r="65%"><stop offset="0%" stop-color="#f6c169"/><stop offset="55%" stop-color="#d9803c"/><stop offset="100%" stop-color="#5e2416"/></radialGradient></defs>' +
-                    '<circle cx="16" cy="15" r="13" fill="url(#fxFund)"/><circle cx="12" cy="13" r="3.4" fill="#ffe7b8"/>' +
-                    '<g fill="none" stroke="#7a3320" stroke-width="1.3" stroke-linecap="round" opacity=".85"><path d="M12 13 q9 -5 18 -3"/><path d="M12 13 q7 7 16 10"/><path d="M12 13 q-4 9 0 15"/></g>' +
-                    '<path d="M30 15 q22 -7 46 -1 t44 1" fill="none" stroke="rgba(246,193,105,.45)" stroke-width="1.4" stroke-linecap="round"/>' +
-                  '</svg>' +
-                  '<span class="rnav-tile-tt">FundX AI</span><span class="rnav-tile-sub">Retinal scan · Fundus</span>' +
-                '</button>'
-              ) : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // KardiQ X AI — moved from the big top hero into a Clinical-Tools tile beside FundX.
-            // Prefer KARDIOX.isOn() (exact), but fall back to the flag synchronously — kardiox.js is a
-            // deferred script and may not have defined window.KARDIOX yet when this grid is built.
-            try {
-              var kon;
-              if (window.KARDIOX && KARDIOX.isOn) kon = KARDIOX.isOn();
-              else { var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; kon = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); }   // hidden by default; shown once unlocked via the Experimental access code (parity with ThoreX)
-              return kon ? (
-                '<button class="rnav-tile kx-tile" data-act="kardiox" aria-label="Open KardiQ X AI — ECG interpretation">' +
-                  '<div class="kx-home-head kx-tile-head"><span class="kx-home-heart">' + ric("cardiology") + '</span><span class="kx-home-pill">' + ric("bolt") + 'AI ECG</span></div>' +
-                  '<svg class="kx-home-trace kx-tile-trace" viewBox="0 0 320 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 H36 l6 -2 6 4 4 -18 5 30 6 -14 H88 l6 -2 6 4 4 -18 5 30 6 -14 H160 l6 -2 6 4 4 -18 5 30 6 -14 H236 l6 -2 6 4 4 -18 5 30 6 -14 H320"/></svg>' +
-                  '<span class="rnav-tile-tt">KardiQ X AI</span><span class="rnav-tile-sub">ECG interpretation</span>' +
-                '</button>'
-              ) : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // ThoreX AI — sibling of the KardiQ X Clinical-Tools tile above (chest X-ray AI).
-            // Prefer THOREX.isOn() (exact), but fall back to the flag synchronously — thorex.js is a
-            // deferred script and may not have defined window.THOREX yet when this grid is built.
-            try {
-              var ton;
-              if (window.THOREX && THOREX.isOn) ton = THOREX.isOn();
-              else { var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; ton = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); }
-              return ton ? (
-                '<button class="rnav-tile tx-tile" data-act="thorex" aria-label="Open ThoreX AI — chest X-ray interpretation">' +
-                  '<div class="tx-tile-head kx-tile-head"><span class="tx-tile-lungs">' + ric("pulmonology") + '</span><span class="tx-tile-pill">' + ric("bolt") + 'AI CXR</span></div>' +
-                  '<svg class="tx-tile-scan" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true">' +
-                    '<defs><linearGradient id="txScanGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(94,234,212,0)"/><stop offset=".5" stop-color="rgba(94,234,212,.6)"/><stop offset="1" stop-color="rgba(94,234,212,0)"/></linearGradient></defs>' +
-                    '<g fill="none" stroke="rgba(94,234,212,.5)" stroke-width="1.2" stroke-linecap="round"><path d="M6 5 q54 7 108 0"/><path d="M9 11 q51 7 102 0"/><path d="M12 17 q48 7 96 0"/><path d="M15 23 q45 7 90 0"/></g>' +
-                    '<line x1="60" y1="3" x2="60" y2="27" stroke="rgba(94,234,212,.32)" stroke-width="1.3"/>' +
-                    '<rect class="tx-scanline" x="-14" y="0" width="14" height="30" fill="url(#txScanGrad)"><animate attributeName="x" from="-14" to="120" dur="2.6s" repeatCount="indefinite"/></rect>' +
-                  '</svg>' +
-                  '<span class="rnav-tile-tt">ThoreX AI</span><span class="rnav-tile-sub">Chest X-ray interpretation</span>' +
-                '</button>'
-              ) : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // SknX AI — sibling of the KardiQ X / ThoreX Clinical-Tools tiles above (skin lesion/rash AI).
-            // Prefer SKNX.isOn() (exact: flag + non-free entitlement), but fall back to the flag alone —
-            // sknx.js is a deferred script and may not have defined window.SKNX yet when this grid is built.
-            try {
-              var son;
-              if (window.SKNX && SKNX.isOn) son = SKNX.isOn();
-              else { var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; son = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") !== "0"); }
-              return son ? rtile("sknx", "dermatology", "SknX AI", "Skin lesion analysis") : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // FollowCare AI — post-discharge recovery follow-up (flag smd_followcare, DEFAULT ON).
-            // home.js runs BEFORE followcare-flags.js/followcare.js (deferred), so this grid is often built
-            // before those globals exist — resolve DEFAULT ON synchronously (like KardiQ X) so the tile still
-            // shows on a fresh install. ?fc=0 or localStorage "0" (or the flag turned off) hides it.
-            try {
-              var fon, q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1];
-              if (q != null) fon = (q === "1" || q === "on" || q === "true");
-              else if (window.FollowCare && FollowCare.enabled) fon = FollowCare.enabled();
-              else if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) fon = SMD_FOLLOWCARE_FLAGS.on();
-              else fon = (localStorage.getItem("smd_followcare") !== "0");
-              return fon ? rtile("followcare", "health_and_safety", "FollowCare", "Recovery follow-up") : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // Smart OPD Queue — flag smd_opd_queue (DEFAULT ON for dev/testing; PUBLIC-RELEASE-GATE). Opens QUEUE.open().
-            try {
-              var qon, q = (location.search.match(/[?&]q=([^&]+)/) || [])[1];
-              if (q != null) qon = (q === "1" || q === "on" || q === "true");
-              else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
-              else qon = (localStorage.getItem("smd_opd_queue") !== "0");
-              return qon ? rtile("queue", "groups", "OPD Queue", "Smart patient queue") : "";
-            } catch (e) { return ""; }
-          })() +
-          rtile("dictate", "mic", "Dictate", "Voice to text") +
-          rtile("interactions", "photo_camera", "Scan Meds", "Photo scan · interactions") +
-          rtile("dosing", "medication", "Dosing", "Insulin &middot; electrolytes") +
-          rtile("guidelines", "book_2", "Guides", "Protocols &amp; references") +
-        '</div>' +
+        '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>' +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
