@@ -489,21 +489,54 @@ async function prescribe(env, token, body) {
 // (2026-08-07, POST /Doctor/Home/CreateinitialAssessmentnew — note the lowercase 'i'). GHIS posts the WHOLE
 // form at once, so the client reads the form (getAssessmentForm), overlays the doctor's edits, and sends the
 // full name->value map in body.fields; we normalise to the assessment. namespace + attach ids + CSRF. New = docId 0.
+// Extract EVERY posted field from the live GHIS form HTML (hidden incl. the pre-allocated
+// Initial_Assessment_doc_id + __RequestVerificationToken, text/number inputs, the CHECKED radio of each
+// group, textareas, and the SELECTED option of each select). This is the whole model GHIS binds — a
+// partial post (or doc_id 0) is silently not persisted.
+function extractAssessmentForm(html) {
+  html = String(html || '');
+  const out = {}; let m;
+  const inputRe = /<input\b[^>]*>/gi;
+  while ((m = inputRe.exec(html))) {
+    const tag = m[0];
+    const name = (tag.match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1]; if (!name) continue;
+    const type = ((tag.match(/\btype\s*=\s*["']?([^"'\s>]+)/i) || [])[1] || 'text').toLowerCase();
+    if (['submit', 'button', 'image', 'reset', 'file'].indexOf(type) >= 0) continue;
+    const val = (tag.match(/\bvalue\s*=\s*["']([^"']*)["']/i) || [])[1] || '';
+    if (type === 'radio' || type === 'checkbox') { if (/\bchecked\b/i.test(tag)) out[name] = val; continue; }
+    out[name] = val;
+  }
+  let ta; const taRe = /<textarea\b([^>]*)>([\s\S]*?)<\/textarea>/gi;
+  while ((ta = taRe.exec(html))) { const n = (ta[1].match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1]; if (n) out[n] = htmlToText(ta[2]); }
+  let se; const selRe = /<select\b([^>]*)>([\s\S]*?)<\/select>/gi;
+  while ((se = selRe.exec(html))) {
+    const n = (se[1].match(/\bname\s*=\s*["']([^"']+)["']/i) || [])[1]; if (!n) continue;
+    let om, sel = ''; const optRe = /<option\b([^>]*)>[\s\S]*?<\/option>/gi;
+    while ((om = optRe.exec(se[2]))) { if (/\bselected\b/i.test(om[1])) { sel = (om[1].match(/\bvalue\s*=\s*["']([^"']*)["']/i) || [])[1] || ''; break; } }
+    out[n] = sel;
+  }
+  return out;
+}
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
-  const p = new URLSearchParams();
-  p.set('__RequestVerificationToken', s.csrf || '');
-  p.set('assessment.Initial_Assessment_doc_id', String(body.docId || '0'));
-  p.set('assessment.patient_id', String(body.patientId || ''));
-  p.set('assessment.episode_id', String(body.episodeId || ''));
+  // Reserialize the CURRENT form so GHIS gets the complete model + its own pre-allocated doc_id/token,
+  // then overlay the doctor's edits — exactly what GHIS's own "Save" posts. Without this, a partial body
+  // with doc_id 0 returns 200 but is never persisted ("No records found").
+  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(body.patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (gr.unauth) return gr;
+  const all = extractAssessmentForm(gr.body || '');
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
-    // client may send bare ("Temp") or namespaced ("assessment.Temp" / "val.investigation_desc") names.
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
-    if (['assessment.Initial_Assessment_doc_id', 'assessment.patient_id', 'assessment.episode_id'].indexOf(name) >= 0) return;
-    p.set(name, fields[k] == null ? '' : String(fields[k]));
+    all[name] = fields[k] == null ? '' : String(fields[k]);   // overlay edits (never the ids/token below)
   });
+  if (body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
+  if (body.patientId) all['assessment.patient_id'] = String(body.patientId);
+  if (body.episodeId) all['assessment.episode_id'] = String(body.episodeId);
+  if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
+  const p = new URLSearchParams();
+  Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
   // GHIS (ASP.NET) can answer 200 even when it rejects the post, so surface a short, PHI-free snippet of the
   // reply for diagnosis and only call it saved when the body doesn't look like an error/login page.
