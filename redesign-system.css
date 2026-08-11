@@ -688,3 +688,24 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
 #homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
 #homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }
+
+/* ── AI tile live-icon animations (dark feat badge) ────────────────────────────
+   eye blink · ECG sweep · lesion pulse · X-ray beam. Motion only when the user
+   allows it (reduced-motion keeps a clean static icon). */
+#homeV2.rnav .rnav-badge .ai-anim { width: 32px; height: 32px; fill: none; stroke: #eafff8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #eafff8; }
+#homeV2.rnav .rnav-badge .ai-ecg { width: 36px; }
+#homeV2.rnav .ai-eye .pupil, #homeV2.rnav .ai-derm .p { fill: #eafff8; stroke: none; }
+#homeV2.rnav .ai-cxr .beam { fill: rgba(138,255,234,.5); stroke: none; }
+@media (prefers-reduced-motion: no-preference) {
+  #homeV2.rnav .ai-eye { transform-origin: center; animation: aiBlink 3.6s infinite; }
+  @keyframes aiBlink { 0%,90%,100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+  #homeV2.rnav .ai-eye .pupil { transform-origin: center; animation: aiLook 3.6s infinite; }
+  @keyframes aiLook { 0%,100% { transform: translateX(0); } 30% { transform: translateX(-2px); } 60% { transform: translateX(2px); } }
+  #homeV2.rnav .ai-ecg path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: aiEcg 2.2s linear infinite; }
+  @keyframes aiEcg { to { stroke-dashoffset: 0; } }
+  #homeV2.rnav .ai-derm .p { transform-origin: center; animation: aiPulse 1.8s infinite; }
+  #homeV2.rnav .ai-derm .p2 { animation-delay: .5s; } #homeV2.rnav .ai-derm .p3 { animation-delay: 1s; }
+  @keyframes aiPulse { 0%,100% { opacity: .25; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.15); } }
+  #homeV2.rnav .ai-cxr .beam { animation: aiBeam 2.4s ease-in-out infinite; }
+  @keyframes aiBeam { 0% { transform: translateX(-6px); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(30px); opacity: 0; } }
+}

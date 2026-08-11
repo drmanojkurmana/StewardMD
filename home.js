@@ -1344,13 +1344,13 @@
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
   var HOME_TOOLS = [
-    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true,
+    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, anim: "eye",
       eligible: function () { try { var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1"); } catch (e) { return false; } } },
-    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG",
+    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, anim: "ecg",
       eligible: function () { try { if (window.KARDIOX && KARDIOX.isOn) return KARDIOX.isOn(); var q = (location.search.match(/[?&]kardiox=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_kardiox") === "1"); } catch (e) { return false; } } },
-    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray",
+    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, anim: "cxr",
       eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
-    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis",
+    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
       eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
@@ -1365,9 +1365,18 @@
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
   function homeToolVisible(t) { var p = homeToolPrefs(); return Object.prototype.hasOwnProperty.call(p, t.act) ? !!p[t.act] : (t.defOn !== false); }
   function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
+  // Live animated icons for the AI tiles (dark badge). CSS in redesign-system.css animates these
+  // (eye blink · ECG sweep · lesion pulse · X-ray beam); reduced-motion disables the motion.
+  var ANIM_ICON = {
+    eye: '<svg class="ai-anim ai-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3.1"/></svg>',
+    ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
+    derm: '<svg class="ai-anim ai-derm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle class="p" cx="10" cy="10" r="1.7"/><circle class="p p2" cx="15" cy="14" r="1.7"/><circle class="p p3" cx="9.5" cy="15" r="1.3"/></svg>',
+    cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>'
+  };
   function homeToolTile(t) {
+    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
     return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + '">' +
-      '<span class="rnav-badge">' + (t.feat ? '<span class="rnav-dot"></span>' : '') + ric(t.ic) + '</span>' +
+      '<span class="rnav-badge">' + (t.feat ? '<span class="rnav-dot"></span>' : '') + icon + '</span>' +
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
@@ -5383,7 +5392,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       box.innerHTML = pic +
         '<div class="smd-sba-info"><div class="smd-sba-name">' + smdEsc(a.name || "Signed in") + '</div>' +
         '<div class="smd-sba-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="smd-sba-prov">' + acctProviderLabel(a, false) + '</div></div>' +
+        '<div class="smd-sba-prov">' + acctProviderLabel(a, false) + '</div>' +
+        ((a.hospital || a.hospitalName) ? '<div class="smd-sba-hosp" style="font:600 11.5px var(--sans,system-ui);color:var(--teal,#0e6e63);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + smdEsc(a.hospital || a.hospitalName) + '</div>' : '') +
+        '</div>' +
         '<button class="smd-sba-btn" id="smdSbSignOut" type="button">Sign out</button>';
     } else {
       box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +
