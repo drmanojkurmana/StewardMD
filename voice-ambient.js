@@ -197,14 +197,21 @@
     }
     armChunk();                                          // no-op (guarded) outside a browser/SMD_VOICE host
 
+    // Returns true when an in-flight chunk is being flushed AND that flush will itself call
+    // onRefine (with the COMPLETE transcript) via onChunkFinal — i.e. the caller does not need
+    // its own fallback refine. False covers both "nothing to flush" and "flush won't refine"
+    // (e.g. stopped while paused — onChunkFinal's onRefine is gated on !paused, see below).
     function teardown() {
-      if (!running) return;
+      if (!running) return false;
       stopping = true;
       if (tmr) { clearTimeout(tmr); tmr = null; }
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
-      // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and refines
-      if (curSession && curSession.stop) { try { curSession.stop(); } catch (e) {} }
+      var willRefine = !!(curSession && curSession.stop && onRefine && !paused);
+      // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and,
+      // if not paused, refines
+      if (curSession && curSession.stop) { try { curSession.stop(); return willRefine; } catch (e) {} }
       else { running = false; }
+      return false;
     }
     return {
       stop: teardown,

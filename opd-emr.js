@@ -616,8 +616,15 @@
   // opd-scribe refine pass: full transcript -> LLM extract -> grounded suggestions -> _applyRefine.
   // Suggest-only: nothing here is written to the EMR/orders until the doctor taps Accept (_applyRefine
   // only stages st.scribeSuggestions + folds emrFields the same protected way as applyVoice).
+  // Dedup guard: skip a call whose transcript is identical to (or a prefix of) the last one we
+  // actually refined -- defense-in-depth against a redundant call carrying no new content (the
+  // main double-call-on-Stop fix is in stopVoice(), which no longer races its own stale call
+  // against the teardown flush's onRefine).
+  var _lastRefinedTranscript = "";
   function doRefine(transcript) {
     if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) return;
+    if (_lastRefinedTranscript.indexOf(transcript) === 0) return;   // no new content since the last refine
+    _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (!r || r.error) return;
       var sg = r.suggestions || {};
@@ -628,7 +635,7 @@
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voicePaused = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); _lastFullTranscript = ""; paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); _lastFullTranscript = ""; _lastRefinedTranscript = ""; paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -638,17 +645,22 @@
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
       onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; },
-      onRefine: doRefine,                                    // fires once the chunk cadence (Task 5) is wired; see the manual call in stopVoice() for today's single-listen mode
+      onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
       onState: function (s) { setVoiceStatus(s === "listening" ? "Listening…" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
     });
   }
   function togglePauseVoice() { if (!_amb) return; if (st.voicePaused) { try { _amb.resume(); } catch (x) {} st.voicePaused = false; } else { try { _amb.pause(); } catch (x) {} st.voicePaused = true; } paint(); }
   function stopVoice() {
-    if (_amb) { try { _amb.stop(); } catch (x) {} _amb = null; }
+    // _amb.stop() returns true when an in-flight chunk is being flushed AND that flush will itself
+    // call onRefine with the COMPLETE transcript (see teardown() in voice-ambient.js) -- in that case
+    // don't also refine here with our own stale (pre-flush) transcript. Only fall back to a manual
+    // call when there's nothing to flush (or the flush won't refine, e.g. stopped while paused).
+    var flushing = false;
+    if (_amb) { try { flushing = !!_amb.stop(); } catch (x) {} _amb = null; }
     if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; }
     st.voiceOn = false; st.voicePaused = false; st.voiceStatus = "";
-    doRefine(_lastFullTranscript);                          // end-of-consult refine pass over the whole transcript
+    if (!flushing) doRefine(_lastFullTranscript);           // fallback end-of-consult refine over the whole transcript
     paint();
   }
 

@@ -133,3 +133,42 @@ test("chunk-cycling: onRefine fires normally on final when not paused", () => {
   assert.equal(refined.length, 1, "refine fires on the un-paused chunk boundary");
   ctl.stop();
 });
+
+// stop()'s return value is the contract opd-emr.js's stopVoice() relies on to avoid firing its
+// own (stale) refine alongside the flush's (complete) one -- see opd-emr.js stopVoice()/doRefine().
+test("stop(): flushing an in-flight, un-paused chunk returns true, and that flush's onRefine fires exactly once with the complete transcript", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
+  const willRefine = ctl.stop();
+  assert.equal(willRefine, true, "stop() reports the flush will call onRefine itself (caller should skip its own fallback)");
+  sessions[0].opts.onFinal("complete transcript");   // simulates the async native stop -> transcribe -> onFinal
+  assert.equal(refined.length, 1, "onRefine fired exactly once");
+  assert.equal(refined[0], "complete transcript", "with the COMPLETE (post-flush) transcript, not a stale one");
+});
+
+test("stop(): stopping while paused returns false (the flush won't call onRefine, so a caller-side fallback is still needed)", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
+  ctl.pause();
+  const willRefine = ctl.stop();
+  assert.equal(willRefine, false, "stop() reports no refine is coming from the flush while paused");
+  sessions[0].opts.onFinal("complete transcript");
+  assert.equal(refined.length, 0, "confirmed: the paused flush does not call onRefine");
+});
+
+test("stop(): no in-flight chunk (no ASR host) returns false, so the caller knows to make its own refine call", () => {
+  const ctl = AMB.start({ speaker: "doctor", getState: () => ({}), onRefine: () => {} });   // real module; no window.SMD_VOICE in Node -> armChunk() is a no-op
+  assert.equal(ctl.stop(), false, "nothing to flush -> caller must refine itself");
+});
