@@ -570,7 +570,7 @@
   }
   function submitAssessment() {
     if (!confirmed("Save this assessment to GHIS?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Assessment sent to GHIS. Open the patient in GHIS to confirm it appears under Clinical notes.",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to GHIS. It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) });
   }
 
