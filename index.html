@@ -55,7 +55,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q3b">
-<link rel="stylesheet" href="/opd-emr.css?v=oe5">
+<link rel="stylesheet" href="/opd-emr.css?v=oe6-te">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1567,7 +1567,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=gold1006" defer></script>
+<script src="/voice.js?v=gold1007-te" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -1693,7 +1693,7 @@ window.openExternal = function (u) {
 <script src="/queue.js?v=q5search" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe5" defer></script>
+<script src="/opd-emr.js?v=oe6-te" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.
