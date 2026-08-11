@@ -724,15 +724,22 @@
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
-      openSheet('<div class="hv-sh-t">Hospital</div>' +
-        mi("list", "OPD Queue", "Smart out-patient queue · live GHIS list", "opd") +
-        mi("icu", "ICU", "Critical-care dashboard · monitoring · rounds", "icu") +
-        mi("ward", "Ward Sync", "In-patient list · labs · imaging", "ward") +
-        mi("heart", "FollowCare", "Post-discharge recovery follow-up", "fc"));
+      // 2x2 tile grid. ICU & Ward is one destination (the ICU dashboard covers critical care + inpatient);
+      // Ward Sync is still reachable from the home quick-links + Settings. Connect opens the EMR console.
+      function tile(icon, title, cap, act, pri) {
+        return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
+          '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
+      }
+      openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
+        tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
+        tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
+        tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
+        tile("share", "Connect", "Link your hospital EMR", "connect") +
+        '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : ACT.followcare)(); }, 70);
+          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
         });
       });
     },
@@ -952,6 +959,15 @@
       ".hv-sh-t{font:800 17px var(--hfont);margin:2px 0 12px}",
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
       ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
+      // Hospital hub — 2x2 tile grid (signature tile = teal). svg fill-fix so stroke icons don't render solid black.
+      ".hv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:2px 0 6px}",
+      ".hv-tile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;background:var(--hbg);border:1.5px solid var(--hbd);border-radius:16px;padding:15px 14px;min-height:114px;cursor:pointer;color:var(--hink);transition:transform .12s,border-color .12s,box-shadow .12s}",
+      ".hv-tile:hover{border-color:var(--hp)}.hv-tile:active{transform:scale(.975)}",
+      ".hv-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--hp)}",
+      ".hv-tile .tl{font:800 15px var(--hfont);margin-top:11px}.hv-tile .tc{font:500 12px var(--hfont);color:var(--hmut);margin-top:3px;line-height:1.35}",
+      ".hv-tile.pri{background:var(--hp);border-color:var(--hp);color:#fff;box-shadow:0 6px 18px -8px var(--hp)}.hv-tile.pri svg{color:#fff}.hv-tile.pri .tc{color:rgba(255,255,255,.85)}",
+      "@media (prefers-reduced-motion:no-preference){.hv-tile{animation:hvTileIn .3s cubic-bezier(.2,.7,.2,1) both}.hv-tile:nth-child(2){animation-delay:.05s}.hv-tile:nth-child(3){animation-delay:.1s}.hv-tile:nth-child(4){animation-delay:.15s}}",
+      "@keyframes hvTileIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}",
       // display engine controls
       ".hv-d-sec{margin:6px 0 16px}.hv-d-sec h4{font:800 11px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin:0 0 9px}",
       ".hv-d-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.hv-d-val{font:800 14px var(--hfont);color:var(--hp)}",
@@ -1240,7 +1256,7 @@
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
-        '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
+        '<button class="v3-tab" data-act="hospital" aria-label="Hospital">' + svg("hospital") + '<span>Hospital</span></button>' +
         '<button class="v3-tab" data-act="cases" aria-label="Cases">' + svg("folder") + '<span>Cases</span></button>' +
         '<button class="v3-tab" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
         '<button class="v3-tab" data-act="askai" aria-label="Ask Maik">' + svg("ai") + '<span>Ask Maik</span></button>' +
@@ -1347,6 +1363,8 @@
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
+          '<button class="rnav-qc" data-act="guidelines" aria-label="Guides">' + ric("menu_book") + '<span>Guides</span></button>' +
+          '<button class="rnav-qc" data-act="electrolytes" aria-label="Electrolytes">' + ric("science") + '<span>Electrolytes</span></button>' +
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
         '<div class="rnav-grid">' +
@@ -1452,7 +1470,7 @@
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
       '<nav class="rnav-tabbar rds-safe-bottom">' +
-        '<button class="rnav-tab active" data-act="home" aria-label="Home">' + ric("home") + '<span>Home</span></button>' +
+        '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
         '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("auto_awesome") + '<span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
