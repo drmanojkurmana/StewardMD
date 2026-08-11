@@ -134,7 +134,34 @@
       "#sbMenu[data-sbr] .sbr-sw>span{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s}",
       "#sbMenu[data-sbr] .sbr-sw.on>span{left:19px}",
       "#sbMenu[data-sbr] .sbr-note{font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding-top:2px}",
-      "#sbMenu[data-sbr] .sbr-adv .smd-nav-row{padding:8px 0}"
+      "#sbMenu[data-sbr] .sbr-adv .smd-nav-row{padding:8px 0}",
+      /* ── Dark-teal shell (Clinical Precision). Overrides the light rules above; recovery tag pre-sidebar-v2. ── */
+      "#sbDrawer{background:linear-gradient(180deg,#0d5c4f,#003c32)!important}",
+      "#sbDrawer .sb-head{background:transparent!important;border-bottom:1px solid rgba(143,212,195,.18)!important;color:#eafff8!important}",
+      "#sbDrawer .sb-head *{color:#eafff8!important}",
+      "#sbDrawer .smd-sba{background:rgba(255,255,255,.06)!important;border:1px solid rgba(143,212,195,.22)!important;border-radius:16px!important;margin:10px 12px!important;padding:12px!important}",
+      "#sbDrawer .smd-sba-name{color:#fff!important}",
+      "#sbDrawer .smd-sba-email,#sbDrawer .smd-sba-prov{color:#bfe6dc!important}",
+      "#sbDrawer .smd-sba-hosp{color:#8fd4c3!important}",
+      "#sbDrawer .smd-sba-btn{background:rgba(255,255,255,.12)!important;color:#eafff8!important;border:1px solid rgba(143,212,195,.3)!important}",
+      "#sbMenu[data-sbr]{background:transparent}",
+      "#sbMenu[data-sbr] .sbr-sec{color:#8fd4c3}",
+      "#sbMenu[data-sbr] .sbr-row{color:#dff3ee;border-radius:14px;padding:12px 15px}",
+      "#sbMenu[data-sbr] .sbr-row:hover{background:rgba(255,255,255,.09)}",
+      "#sbMenu[data-sbr] .sbr-ic{color:#8fd4c3}",
+      "#sbMenu[data-sbr] .sbr-badge{background:rgba(115,245,217,.18);color:#8fd4c3}",
+      "#sbMenu[data-sbr] .sbr-chev{color:#8fd4c3}",
+      "#sbMenu[data-sbr] .sbr-card{background:rgba(255,255,255,.06);border-color:rgba(143,212,195,.2)}",
+      "#sbMenu[data-sbr] .sbr-tg-t{color:#eafff8}",
+      "#sbMenu[data-sbr] .sbr-tg-s{color:#a9cfc6}",
+      "#sbMenu[data-sbr] .sbr-card .sbr-tg{border-top-color:rgba(143,212,195,.14)}",
+      "#sbMenu[data-sbr] .sbr-sw{background:rgba(255,255,255,.22)}",
+      "#sbMenu[data-sbr] .sbr-sw.on{background:#73f5d9}",
+      "#sbMenu[data-sbr] .sbr-sw.on>span{background:#00382e}",
+      "#sbMenu[data-sbr] .sbr-note{color:#a9cfc6}",
+      "#sbMenu[data-sbr] .sbr-adv button{color:#dff3ee}",
+      "#sbMenu[data-sbr] .sbr-status{margin:16px 4px 6px;padding:12px 14px;border-radius:12px;background:rgba(0,0,0,.22);display:flex;align-items:center;gap:9px;color:#bfe6dc;font:600 12.5px/1 var(--sans,system-ui)}",
+      "#sbMenu[data-sbr] .sbr-status b{width:9px;height:9px;border-radius:50%;background:#73f5d9;display:inline-block}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -215,7 +242,8 @@
       row("applewatch", "watch", "Apple Watch") +
       '<button class="sbr-row" data-sbr-adv="1">' + svg("spark") +
         '<span class="sbr-lbl">Advanced &amp; Experimental</span><span class="sbr-chev">▸</span></button>' +
-      '<div class="sbr-adv" data-sbr-advbody>' + advBody() + "</div>";
+      '<div class="sbr-adv" data-sbr-advbody>' + advBody() + "</div>" +
+      '<div class="sbr-status"><b></b>System Online</div>';
 
     // Let the Image Engine wire up its own controls inside the freshly-built block.
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
