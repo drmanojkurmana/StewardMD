@@ -4081,7 +4081,7 @@
    * recovery tag reasoning-v1-stable. Signatures are AUTO-DERIVED — for review.
    * ---------------------------------------------------------------------- */
   var _expInf = [], _expNi = [];
-  function smdKbExpandedOn() { try { return localStorage.getItem("smd_kb_expanded") === "1"; } catch (e) { return false; } }   // default OFF
+  function smdKbExpandedOn() { try { return localStorage.getItem("smd_kb_expanded") !== "0"; } catch (e) { return true; } }   // default ON (toggle removed 2026-08; on unless explicitly disabled)
   function scoreExpInf(d) { var r = scoreNI(d); if (r) { r.inf = true; if (!r.system) r.system = "Infectious"; } return r; }
   function smdApplyExpandedKB() {
     _expInf = []; _expNi = [];

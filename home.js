@@ -189,7 +189,6 @@
       var setBody = document.getElementById("sbsub_set");
       if (setBody && !setBody.querySelector("[data-smd-adv]")) {
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
-          swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
           '<div class="smd-nav-note">' + svg("flask", "smd-ico") + ' Experimental — for clinician review.</div>';
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", true)) +
