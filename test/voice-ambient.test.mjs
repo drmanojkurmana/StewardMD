@@ -66,3 +66,70 @@ test("controller: llmExtract fired once for narrative on final, merged into upda
   assert.ok(updates.some((u) => u.updates.some((x) => x.field === "cc")), "LLM cc field merged in");
   ctl.stop();
 });
+
+// Chunk-cycling (armChunk/onChunkFinal) needs root.SMD_VOICE to be reachable — reload the module
+// fresh with a mocked global.window.SMD_VOICE (same mock-SMD_VOICE pattern the CDP harnesses use)
+// so the review-fix regressions (pause-gated refine, error re-arm) stay covered going forward.
+function freshAmbientWithMockVoice(listenImpl) {
+  const modPath = join(HERE, "..", "voice-ambient.js");
+  delete require.cache[require.resolve(modPath)];
+  global.window = { SMD_VOICE: { listen: listenImpl } };
+  const mod = require(modPath);
+  delete global.window;
+  return mod;
+}
+
+test("chunk-cycling: onError re-arms the next window instead of killing the loop", () => {
+  const sessions = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), chunkMs: 5 });
+  assert.equal(sessions.length, 1, "first window armed on start()");
+  sessions[0].opts.onError({ code: "recording-failure" });
+  assert.equal(sessions.length, 2, "onError re-armed a fresh window (loop not killed)");
+  ctl.stop();
+});
+
+test("chunk-cycling: onRefine does not fire for a window that finished while paused", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({
+    speaker: "doctor",
+    getState: () => ({}),
+    refineEveryChunks: 1,
+    onRefine: (t) => refined.push(t),
+    chunkMs: 5
+  });
+  ctl.pause();                                             // doctor taps Pause mid-window
+  sessions[0].opts.onFinal("some transcript");             // in-flight window still folds in
+  assert.equal(refined.length, 0, "refine must not fire for audio captured after pause");
+  ctl.stop();
+});
+
+test("chunk-cycling: onRefine fires normally on final when not paused", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({
+    speaker: "doctor",
+    getState: () => ({}),
+    refineEveryChunks: 1,
+    onRefine: (t) => refined.push(t),
+    chunkMs: 5
+  });
+  sessions[0].opts.onFinal("some transcript");
+  assert.equal(refined.length, 1, "refine fires on the un-paused chunk boundary");
+  ctl.stop();
+});

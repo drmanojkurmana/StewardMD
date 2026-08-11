@@ -162,12 +162,22 @@
         language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // no-op today (record-mode has no partials); ready if a future plugin streams them
         onFinal: onChunkFinal,
-        onError: opts.onError,
+        onError: onChunkError,
         onState: opts.onState
       });
       if (curSession) chunkTimer = setTimeout(closeChunk, chunkMs);
     }
     function closeChunk() { chunkTimer = null; if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
+    // A transient native error (recording-failure/transcription-failure) on one window must not
+    // permanently kill the rolling loop: re-arm the next window (mirrors what onFinal does) instead
+    // of leaving curSession/chunkTimer dangling with nothing left to call armChunk() again.
+    function onChunkError(err) {
+      curSession = null;
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (opts.onError) opts.onError(err);
+      if (stopping) { running = false; return; }
+      if (running && !paused) armChunk();
+    }
     // ponytail: stop→transcribe→restart (re-arm) drops the audio spanning the mic/model spin-up at
     // each chunk boundary — a real word can land right on a 15s seam and get clipped on one side.
     // Ceiling: a few hundred ms per boundary, worst case a short word lost. Ships because it makes
@@ -179,7 +189,7 @@
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
       tick(fullTranscript, stopping);
-      if (onRefine && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: stopping })) {
+      if (onRefine && !paused && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: stopping })) {
         try { onRefine(fullTranscript); } catch (e) {}
       }
       if (stopping) { running = false; return; }
