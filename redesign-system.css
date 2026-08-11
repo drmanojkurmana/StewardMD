@@ -684,7 +684,17 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: inherit; margin: 0; }
 #homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
 #homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
-#homeV2.rnav .rnav-tile.feat .rnav-badge { background: radial-gradient(circle at 60% 35%, #155e54, #0c332e); color: #fff; }
+/* Round 3D glossy sphere for the AI tiles (light top sheen + dark base + drop shadow). */
+#homeV2.rnav .rnav-tile.feat .rnav-badge {
+  background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
+  color: #fff;
+  box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
+}
+#homeV2.rnav .rnav-tile.feat .rnav-badge::before {
+  content: ""; position: absolute; top: 9%; left: 21%; width: 34%; height: 26%; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
 #homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
 #homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
 #homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }
