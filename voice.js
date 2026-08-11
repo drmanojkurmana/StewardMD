@@ -52,7 +52,12 @@
   function isAndroidNative() {
     try { var C = window.Capacitor; return !!(C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform) === "android"); } catch (e) { return false; }
   }
-  function whisperModel() { return isAndroidNative() ? "base-q5_1" : "small.en-q5_1"; }
+  // English uses the per-platform accuracy pick; any NON-English (Telugu / auto / code-switch) needs
+  // the MULTILINGUAL base model on BOTH platforms — small.en cannot decode Telugu at all.
+  function whisperModel(lang) {
+    if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
+    return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
+  }
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
@@ -100,7 +105,7 @@
       if (whisperAvailable()) {
         try {
           var wstop = window.SMD_NATIVE.transcribeWhisper({
-            language: opts.language || WHISPER_LANG, model: opts.model || whisperModel(), initialPrompt: opts.initialPrompt || buildInitialPrompt(),
+            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(),
             onPartial: opts.onPartial, onFinal: opts.onFinal,
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
@@ -194,12 +199,23 @@
         '</div><div class="smdv-mode-hint" id="smdvModeHint"></div>' +
         '<div class="smdv-model-mgr" id="smdvModelMgr"></div>'
       : "";
+    // Clinical (Whisper) dictation language. English default (unchanged); Auto / Telugu switch to the
+    // MULTILINGUAL model so Telugu + code-switch decode. Picking a non-English language auto-selects
+    // the Clinical engine (Fast / native STT can't guarantee Telugu).
+    var langSel = whisperAvailable()
+      ? '<div class="smdv-langs" role="group" aria-label="Dictation language">' +
+          '<button class="smdv-lang on" data-lang="en">English</button>' +
+          '<button class="smdv-lang" data-lang="auto">Auto</button>' +
+          '<button class="smdv-lang" data-lang="te">తెలుగు</button>' +
+        '</div>'
+      : "";
     root.innerHTML =
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
         '<div class="smdv-hd"><span class="smdv-ttl">' + vcIco("mic") + ' MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">' + vcIco("close") + '</button></div>' +
         '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
         modeSel +
+        langSel +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
@@ -228,13 +244,14 @@
     var reviewEl = root.querySelector("#smdvReview");
     var kind = target === "icu" ? "monitor" : "reasoning";
     var engineMode = "fast";                 // Fast is always the default; only changes if the user picks Clinical
+    var dictLang = "en";                     // Clinical dictation language: en | auto | te (Telugu)
     var recording = false, base = "";
 
     function refreshExtract() { extractBtn.disabled = !ta.value.trim(); }
     ta.addEventListener("input", function () { base = ta.value; refreshExtract(); });
 
     root.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-act],[data-kind],[data-mode]"); if (!b) return;
+      var b = e.target.closest("[data-act],[data-kind],[data-mode],[data-lang]"); if (!b) return;
       if (b.getAttribute("data-act") === "close") return close();
       if (b.getAttribute("data-act") === "delmodel") {
         if (!window.confirm("Remove the downloaded Clinical Dictation model? It will re-download next time you use Clinical.")) return;
@@ -255,7 +272,18 @@
         engineMode = mm;
         [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
         var hint = root.querySelector("#smdvModeHint");
-        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads a ~181 MB model. Better for long notes, accents & drug names." : "";
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Telugu / Auto use the ~57 MB multilingual model." : "";
+      }
+      var lg = b.getAttribute("data-lang");
+      if (lg) {
+        if (recording) { stop(); recording = false; setState("idle"); }
+        dictLang = lg;
+        [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); });
+        // Telugu / Auto can only be decoded by the on-device multilingual model → force Clinical.
+        if (lg !== "en" && engineMode !== "clinical") {
+          engineMode = "clinical";
+          [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "clinical"); });
+        }
       }
     });
 
@@ -273,6 +301,7 @@
       recording = true; base = ta.value ? ta.value.trim() : "";
       listen({
         engine: engineMode,                    // "fast" (default, unchanged) | "clinical" (Whisper)
+        language: dictLang,                    // en | auto | te — Clinical uses the multilingual model for non-en
         onPartial: function (t) { ta.value = (base ? base + " " : "") + t; refreshExtract(); },
         onFinal: function (t) { if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; } refreshExtract(); recording = false; setState("idle"); },
         onDownloadProgress: function (p) { engEl.textContent = "Downloading model… " + Math.round((p || 0) * 100) + "%"; },
@@ -378,6 +407,9 @@
       ".smdv-modes{display:flex;gap:6px;margin-bottom:8px}",
       ".smdv-mode{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 13px var(--sans);padding:10px;border-radius:12px;cursor:pointer}",
       ".smdv-mode.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-langs{display:flex;gap:6px;margin-bottom:8px}",
+      ".smdv-lang{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 12.5px var(--sans);padding:8px;border-radius:10px;cursor:pointer}",
+      ".smdv-lang.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
       ".smdv-mode-hint{font:600 11px/1.4 var(--sans);color:var(--slate-soft,#64748b);margin:-2px 0 10px;min-height:0}",
       ".smdv-model-mgr{margin:-2px 0 10px;min-height:0}",
       ".smdv-model-del{border:1px solid var(--line,#e2e8f0);background:transparent;color:var(--slate-soft,#64748b);font:700 11.5px var(--sans);padding:7px 11px;border-radius:10px;cursor:pointer}",

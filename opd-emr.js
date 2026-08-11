@@ -283,9 +283,16 @@
   // that fills the fields below for review; nothing is saved until the doctor taps Save to GHIS.
   function voiceBar(st) {
     if (!G.SMD_AMBIENT) return "";
-    var on = !!st.voiceOn;
+    var on = !!st.voiceOn, lang = st.voiceLang || "auto";
+    function lb(v, t) {
+      var sel = lang === v;
+      return '<button data-oe-act="vlang:' + v + '" style="border:1px solid var(--outline-variant,#e2e8f0);background:' +
+        (sel ? "var(--primary,#0f766e)" : "transparent") + ';color:' + (sel ? "#fff" : "inherit") +
+        ';font:700 11px inherit;padding:5px 9px;border-radius:8px;cursor:pointer;margin-left:4px">' + t + "</button>";
+    }
     return '<div class="oe-voicebar"><button class="oe-btn' + (on ? " live" : "") + '" data-oe-act="voice-toggle">' +
       ms(on ? "stop" : "mic") + (on ? "Stop voice" : "Voice fill") + '</button>' +
+      '<span style="display:inline-flex">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</span>" +
       '<span class="oe-voice-status" id="oeVoiceStatus">' + esc(st.voiceStatus || "") + "</span></div>";
   }
   function assessTab(st) {
@@ -398,6 +405,7 @@
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
     if (cmd === "voice-toggle") return st.voiceOn ? stopVoice() : startVoice();
+    if (cmd === "vlang") { st.voiceLang = arg; if (st.voiceOn) { stopVoice(); } else { paint(); } return; }
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
@@ -569,6 +577,7 @@
     st.voiceOn = true; st.voiceStatus = "Starting…"; paint();
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
+      language: st.voiceLang || "auto",                     // en | auto | te — multilingual Whisper decodes Telugu + code-switch
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
