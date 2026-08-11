@@ -87,13 +87,14 @@
     { id: "reason", title: "Reasoning v2", sub: "Live differential in the workflow", def: true, key: "smd_reason_v2" },
     { id: "safety", title: "Organ-safety overlay", sub: "Renal / hepatic / QT flags on advice", def: true, key: "smd_safety_overlay" },
     { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: true, key: "smd_ai" },
-    { id: "expanded", title: "Expanded Harrison KB", sub: "+268 reference diseases as candidates", def: false, key: "smd_kb_expanded" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
+    // AI imaging modules — all gated OFF by default; turned on ONLY here (Experimental section). Home tile appears on reload.
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
-    { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: true, key: "smd_kardiox" },
-    { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" }
+    { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" },
+    { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" },
+    { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" }
   ];
   function setToggle(id, key, on) {
     try {
