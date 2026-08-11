@@ -7,12 +7,23 @@
  * to an injected LLM extractor — THROTTLED, and only when a chunk is actually narrative, never
  * per word. No LLM injected ⇒ deterministic-only ⇒ fully offline.
  *
+ * ROLLING CAPTURE (Task 5): today's Whisper plugin only transcribes on stop (record-then-
+ * transcribe, no mid-recording partials), so start() re-arms `SMD_VOICE.listen` in back-to-back
+ * `chunkMs` windows — each window's onFinal is folded into a running transcript via accumulate(),
+ * then the next window starts immediately. `onRefine(fullTranscript)` fires per needsRefine(state)
+ * (every `refineEveryChunks` windows + on stop) so a caller can run an LLM+grounding pass on the
+ * growing transcript. See the native continuous-capture upgrade path documented in
+ * local-plugins/capacitor-whisper/README.md + README-ANDROID.md.
+ *
  *   SMD_AMBIENT.start({ speaker, getState, onUpdate, onTranscript, onState, onError,
- *                       language, model, llmExtract }) → { stop, pause, resume }
+ *                       language, model, llmExtract, chunkMs, refineEveryChunks, onRefine })
+ *     → { stop, pause, resume }
  *
  * Pure, exported helpers (Node-testable, no timers/DOM):
  *   reduce(transcript, {speaker,state,now}) → { updates, dropped }   (deterministic path)
  *   needsLLM(transcript, sentChars) → new narrative tail to send, or ""  (escalation gate)
+ *   accumulate(prev, chunkText) → fullTranscript                    (seam-overlap-safe join)
+ *   needsRefine(state) → bool                                       (refine cadence gate)
  *
  * window.SMD_AMBIENT + module.exports.
  */
@@ -102,6 +113,8 @@
     var chunkMs = opts.chunkMs || 15000;
     var refineEveryChunks = opts.refineEveryChunks;
     var onRefine = opts.onRefine;
+    // rolling-capture state (Task 5) — see armChunk() below
+    var fullTranscript = "", chunkN = 0, chunkTimer = null, curSession = null, stopping = false;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -133,21 +146,60 @@
       tmr = setTimeout(function () { tmr = null; maybeLLM(lastTranscript, false); }, THROTTLE);
     }
 
-    var session = (root && root.SMD_VOICE) ? root.SMD_VOICE.listen({
-      engine: "clinical",
-      model: opts.model || "base-q5_1",                 // multilingual base — Telugu + code-switch
-      language: opts.language || "auto",                // NOT forced "en": ambient may be Telugu/mixed
-      onPartial: function (t) { tick(t, false); },
-      onFinal: function (t) { tick(t, true); },
-      onError: opts.onError,
-      onState: opts.onState
-    }) : null;
+    // Rolling capture (Task 5, option b — JS re-arm): today's Whisper plugin is record-then-
+    // transcribe (no mid-recording partials — see capacitor-whisper README, `whisperPartial`
+    // reserved), so a single `listen()` call would only yield one transcript at the very end.
+    // Instead we run back-to-back chunkMs-bounded recordings: start → chunkMs later, stop (which
+    // triggers on-device transcription → onFinal for THAT window) → fold into the running
+    // transcript via accumulate() → immediately start the next window. The deterministic path
+    // (tick→apply→reduce) and the throttled per-chunk LLM (maybeLLM) run over the accumulated
+    // transcript exactly as before; onRefine additionally fires per needsRefine(state).
+    function armChunk() {
+      if (!running || paused || !root || !root.SMD_VOICE) return;
+      curSession = root.SMD_VOICE.listen({
+        engine: "clinical",
+        model: opts.model || "base-q5_1",                // multilingual base — Telugu + code-switch
+        language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
+        onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // no-op today (record-mode has no partials); ready if a future plugin streams them
+        onFinal: onChunkFinal,
+        onError: opts.onError,
+        onState: opts.onState
+      });
+      if (curSession) chunkTimer = setTimeout(closeChunk, chunkMs);
+    }
+    function closeChunk() { chunkTimer = null; if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
+    // ponytail: stop→transcribe→restart (re-arm) drops the audio spanning the mic/model spin-up at
+    // each chunk boundary — a real word can land right on a 15s seam and get clipped on one side.
+    // Ceiling: a few hundred ms per boundary, worst case a short word lost. Ships because it makes
+    // the FULL pipeline (capture→accumulate→refine) work end-to-end today; the fix is a native
+    // ring-buffer / continuous-record-with-flush plugin that never stops the mic (documented in
+    // local-plugins/capacitor-whisper/README.md + README-ANDROID.md, "continuous capture upgrade").
+    function onChunkFinal(chunkText) {
+      curSession = null;
+      chunkN++;
+      fullTranscript = accumulate(fullTranscript, chunkText);
+      tick(fullTranscript, stopping);
+      if (onRefine && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: stopping })) {
+        try { onRefine(fullTranscript); } catch (e) {}
+      }
+      if (stopping) { running = false; return; }
+      if (running && !paused) armChunk();
+    }
+    armChunk();                                          // no-op (guarded) outside a browser/SMD_VOICE host
 
-    function teardown() { running = false; if (tmr) { clearTimeout(tmr); tmr = null; } if (session && session.stop) try { session.stop(); } catch (e) {} }
+    function teardown() {
+      if (!running) return;
+      stopping = true;
+      if (tmr) { clearTimeout(tmr); tmr = null; }
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and refines
+      if (curSession && curSession.stop) { try { curSession.stop(); } catch (e) {} }
+      else { running = false; }
+    }
     return {
       stop: teardown,
       pause: function () { paused = true; },
-      resume: function () { paused = false; },
+      resume: function () { paused = false; if (running && !stopping && !curSession) armChunk(); },
       _tick: tick                                       // exposed for the controller test
     };
   }

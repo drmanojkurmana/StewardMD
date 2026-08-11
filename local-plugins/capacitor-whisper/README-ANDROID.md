@@ -64,3 +64,21 @@ treat an emulator failure as a code bug):
   `startTranscribe({model,language,initialPrompt})`, `stopTranscribe()`, `cancel()`.
 - Events: `whisperState{state}`, `whisperPartial{text}`, `whisperFinal{text}`,
   `whisperError{code,message}`, `whisperDownloadProgress{progress}`.
+
+## Continuous capture upgrade path (device-gated, not yet built)
+`WhisperEngine.java`'s `AudioRecord` capture is record-then-transcribe today: `stopTranscribe()`
+stops the recorder and runs whisper.cpp once over the whole buffer, emitting a single `whisperFinal`.
+`whisperPartial` is reserved but never emitted. `voice-ambient.js`'s ambient/OPD-scribe controller
+works around this in JS today (shipped): it calls `stopTranscribe`/`startTranscribe` back-to-back in
+~15s windows and stitches the finals together (`accumulate()`). Each restart briefly closes and
+reopens the `AudioRecord`, so audio right at a 15s seam can be clipped (a few hundred ms) — the
+boundary-gap ceiling of the JS re-arm.
+
+The native fix (mirrors the iOS README): keep `AudioRecord` open across windows and either (a) feed
+whisper.cpp a ring buffer of the last ~N seconds, or (c) keep one growing buffer and run inference
+on it every ~15s without ever calling `stop()`/`release()` between windows. **Contract**: emit
+`whisperPartial {text}` once per ~15s window while the mic stays open, still emit one `whisperFinal`
+when the JS actually calls `stopTranscribe()`. `voice-ambient.js` already wires `onPartial` for this
+(currently unreachable since `whisperPartial` is never fired) — no `SMD_AMBIENT` API change needed to
+adopt it, only the native engine. Must be validated on a **real arm64 device** (mic continuity +
+inference timing, per the "Testing" section above).
