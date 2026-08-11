@@ -1346,8 +1346,9 @@ export async function onRequest(context) {
       }
       if (body.kind === "opd-scribe") {
         // OPD scribe: transcript → EMR fields + suggestion lists (differential, investigations).
-        // Output is whitelisted to narrative fields + three suggestion arrays, so no invented
-        // diagnosis, symptom, finding, dose or investigation can reach the app.
+        // Vitals + exam are handled deterministically on-device (never the LLM). Output is
+        // whitelisted to narrative fields + three suggestion arrays, so no invented diagnosis,
+        // symptom, finding, dose, vital or investigation can reach the app.
         const prompt = scribeExtractPrompt(transcript);
         let text;
         try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }

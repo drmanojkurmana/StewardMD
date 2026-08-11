@@ -5,7 +5,8 @@ test("whitelist: only emrFields + suggestions{provisionalDx,ddx,investigations};
     suggestions:{ provisionalDx:"viral fever", ddx:["dengue","enteric fever"], investigations:["CBC","NS1"], drug:"metformin" },
     foo:"bar" });
   assert.deepEqual(Object.keys(o).sort(), ["emrFields","suggestions"]);
-  assert.equal(o.emrFields.cc, "fever x3d"); assert.equal(o.emrFields.Temp, "101");
+  assert.equal(o.emrFields.cc, "fever x3d");
+  assert.equal("Temp" in o.emrFields, false);             // vital dropped — vitals are on-device only
   assert.equal("vitals" in o.emrFields, false);           // non-string dropped
   assert.equal(o.suggestions.provisionalDx, "viral fever");
   assert.deepEqual(o.suggestions.ddx, ["dengue","enteric fever"]);

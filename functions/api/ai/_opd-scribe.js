@@ -7,7 +7,7 @@
  * Imported by functions/api/ai/[[path]].js (kind:"opd-scribe").
  */
 
-export const EMR_FIELD_KEYS = ["cc","presentHx","pastHx","comorbidsNote","Temp","dm","htn","cardiac","asthma","tb","thyroid","epilepsy"];
+export const EMR_FIELD_KEYS = ["cc","presentHx","pastHx","comorbidsNote","dm","htn","cardiac","asthma","tb","thyroid","epilepsy"];
 
 export function scribeExtractPrompt(transcript) {
   return "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
