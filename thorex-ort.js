@@ -552,9 +552,15 @@
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
     var includeEducational = !!opts.includeEducational;
     var cacheOpts = {
-      fetch: fetchImpl,
-      caches: opts.caches,
-      indexedDB: opts.indexedDB,
+      // The model download MUST go through thorex-model-cache.js's realFetch() (CapacitorWebFetch on
+      // native — the only fetch that streams byte-progress AND completes the 28 MB binary). Only forward
+      // an EXPLICITLY injected fetch (tests); never the Capacitor-patched global fetch, which buffers +
+      // fails on large files. Default caches/IndexedDB to the real globals so cacheInfraAvailable() is
+      // true and getSession takes the loadModelBytes path (real progress + on-device cache) instead of
+      // ort's own fetch — otherwise first-run analysis errors "model isn't ready" with no progress bar.
+      fetch: opts.fetch,
+      caches: opts.caches !== undefined ? opts.caches : (typeof caches !== "undefined" ? caches : undefined),
+      indexedDB: opts.indexedDB !== undefined ? opts.indexedDB : (typeof indexedDB !== "undefined" ? indexedDB : undefined),
       cacheName: opts.modelCacheName,
       onProgress: opts.onProgress
     };
