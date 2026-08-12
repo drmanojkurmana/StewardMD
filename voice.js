@@ -324,12 +324,12 @@
         return;
       }
       var kk = b.getAttribute("data-kind");
-      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); }); return; }
+      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); }); return; }
       var mm = b.getAttribute("data-mode");
       if (mm) {
         if (recording) { stop(); recording = false; setState("idle"); }   // switching engine mid-session stops the current one
         engineMode = mm;
-        [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
+        [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
         var hint = root.querySelector("#smdvModeHint");
         if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Hindi / Telugu / Auto use the on-device multilingual model." : "";
       }
@@ -337,7 +337,7 @@
       if (lg) {
         if (recording) { stop(); recording = false; setState("idle"); }
         dictLang = lg;
-        [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); });
+        [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
         // Telugu / Hindi / Auto can only be decoded by the on-device multilingual model → force Clinical.
         if (lg !== "en" && engineMode !== "clinical") {
           engineMode = "clinical";
@@ -348,7 +348,7 @@
       if (tr) {
         if (recording) { stop(); recording = false; setState("idle"); }
         try { localStorage.setItem("smd_voice_tier", tr); } catch (e) {}
-        [].forEach.call(root.querySelectorAll(".smdv-tier"), function (x) { x.classList.toggle("on", x === b); });
+        [].forEach.call(root.querySelectorAll(".smdv-tier"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
       }
       if (mm || lg || tr) updateDiag();   // reflect the new engine/language/tier in the diagnostic line
     });
@@ -676,7 +676,7 @@
       var t = b.getAttribute("data-smdv-ms-tier");
       if (t) {   // picking a tier turns tiers ON and selects it
         try { localStorage.setItem("smd_voice_tiers", "1"); localStorage.setItem("smd_voice_tier", t); } catch (e2) {}
-        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); });
+        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
         renderModels(); return;
       }
       if (b.hasAttribute("data-smdv-ms-off")) {
