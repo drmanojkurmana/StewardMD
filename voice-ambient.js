@@ -115,6 +115,10 @@
     var onRefine = opts.onRefine;
     // rolling-capture state (Task 5) — see armChunk() below
     var fullTranscript = "", chunkN = 0, chunkTimer = null, curSession = null, stopping = false;
+    // Rolling capture starts on clinical (on-device Whisper). If Whisper is unavailable on this
+    // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
+    // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
+    var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -157,10 +161,11 @@
     function armChunk() {
       if (!running || paused || !root || !root.SMD_VOICE) return;
       curSession = root.SMD_VOICE.listen({
-        engine: "clinical",
+        engine: engine,
         model: opts.model || "base-q5_1",                // multilingual base — Telugu + code-switch
         language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
-        onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // no-op today (record-mode has no partials); ready if a future plugin streams them
+        noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
+        onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
         onError: onChunkError,
         onState: opts.onState
@@ -171,12 +176,26 @@
     // A transient native error (recording-failure/transcription-failure) on one window must not
     // permanently kill the rolling loop: re-arm the next window (mirrors what onFinal does) instead
     // of leaving curSession/chunkTimer dangling with nothing left to call armChunk() again.
+    // Deferred re-arm — NEVER re-arm synchronously from an error path. listen() reports
+    // "clinical-unavailable" SYNCHRONOUSLY (and returns null), so a synchronous re-arm would recurse
+    // armChunk→listen→onError→armChunk… until the stack blows (the exact "does nothing on a device
+    // without Whisper" bug). A timer breaks the cycle.
+    function reArm() { if (rearmTimer) return; rearmTimer = setTimeout(function () { rearmTimer = null; if (running && !paused && !curSession) armChunk(); }, 300); }
     function onChunkError(err) {
       curSession = null;
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (stopping) { running = false; if (opts.onError) opts.onError(err); return; }
+      // Whisper missing/failing → fall back ONCE to the device's built-in on-device STT so autofill
+      // still works (immediately on "clinical-unavailable"; after 2 clinical errors if it fails mid-run).
+      if (engine === "clinical" && (err === "clinical-unavailable" || ++clinicalErrs >= 2)) {
+        engine = "fast";
+        if (opts.onState) opts.onState("fallback");
+        if (running && !paused) reArm();
+        return;
+      }
       if (opts.onError) opts.onError(err);
-      if (stopping) { running = false; return; }
-      if (running && !paused) armChunk();
+      // transient window error: re-arm, but stop hammering if the engine fails immediately every time
+      if (++errStreak <= 3 && running && !paused) reArm(); else running = false;
     }
     // ponytail: stop→transcribe→restart (re-arm) drops the audio spanning the mic/model spin-up at
     // each chunk boundary — a real word can land right on a 15s seam and get clipped on one side.
@@ -186,6 +205,7 @@
     // local-plugins/capacitor-whisper/README.md + README-ANDROID.md, "continuous capture upgrade").
     function onChunkFinal(chunkText) {
       curSession = null;
+      errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
       tick(fullTranscript, stopping);
@@ -206,6 +226,7 @@
       stopping = true;
       if (tmr) { clearTimeout(tmr); tmr = null; }
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
       var willRefine = !!(curSession && curSession.stop && onRefine && !paused);
       // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and,
       // if not paused, refines
@@ -215,7 +236,7 @@
     }
     return {
       stop: teardown,
-      pause: function () { paused = true; },
+      pause: function () { paused = true; if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; } },
       resume: function () { paused = false; if (running && !stopping && !curSession) armChunk(); },
       _tick: tick                                       // exposed for the controller test
     };

@@ -146,6 +146,9 @@
         return _active;
       } catch (e) { /* fall through */ }
     }
+    // On-device-only callers (the ambient consultation scribe) must never ship audio to the cloud
+    // recorder below: if no on-device engine was available, report unavailable and stop.
+    if (opts.noCloud) { if (opts.onError) opts.onError("stt-unavailable"); return null; }
     // 3) AI STT fallback — record mic, transcribe on stop via /api/ai/transcribe.
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) {
       var chunks = [], mr = null, stream = null, stopped = false;

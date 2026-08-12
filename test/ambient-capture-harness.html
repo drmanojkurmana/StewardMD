@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ambient capture loop harness</title></head>
+<body>
+<!--
+  Drives the REAL SMD_AMBIENT capture loop (voice-ambient.js) over the REAL deterministic layer
+  (voice-vitals.js + voice-emr-map.js). Only the lowest layer -- SMD_VOICE.listen (the ASR) -- is
+  mocked, exactly the seam a device supplies. Lets the test prove the loop actually fires onUpdate
+  and fills fields, AND that "Whisper unavailable" falls back to device STT instead of dying.
+-->
+<script>
+  window.__calls = []; window.__updates = []; window.__states = []; window.__errors = []; window.__last = null;
+  window.__mock = { whisperOK: false };
+  // Mimics voice.js listen(): engine:"clinical" with no Whisper reports "clinical-unavailable"
+  // SYNCHRONOUSLY and returns null (the exact shape that used to recurse the loop to a stack blow).
+  window.SMD_VOICE = {
+    listen: function (opts) {
+      window.__calls.push({ engine: opts.engine, noCloud: !!opts.noCloud });
+      if (opts.engine === "clinical" && !window.__mock.whisperOK) { if (opts.onError) opts.onError("clinical-unavailable"); return null; }
+      window.__last = opts;
+      if (opts.onState) opts.onState("listening");
+      return { stop: function () {}, pause: function () {}, resume: function () {} };
+    },
+    stop: function () {}
+  };
+</script>
+<script src="/assessment-schema.js"></script>
+<script src="/voice-vitals.js"></script>
+<script src="/voice-emr-map.js"></script>
+<script src="/voice-ambient.js" onload="window.__ready = !!(window.SMD_AMBIENT && window.SMD_AMBIENT.start && window.SMD_VVITALS && window.SMD_EMRMAP && window.SMD_ASSESS)"></script>
+</body>
+</html>
