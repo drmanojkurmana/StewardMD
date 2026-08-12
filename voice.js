@@ -71,6 +71,17 @@
     if (tier === "pro")      return te ? "telugu-small-q8_0" : "small-q8_0";
     return "small-q8_0";     // BASE: multilingual Whisper Small INT8 for en / hi / te / auto
   }
+  // Which model keys each tier needs (for the Settings download dashboard).
+  var TIER_MODELS = {
+    base: ["small-q8_0"],
+    pro: ["small-q8_0", "telugu-small-q8_0"],
+    ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0"]
+  };
+  var MODEL_META = {
+    "small-q8_0":          { label: "Whisper Small · multilingual (INT8)", mb: 252 },
+    "telugu-small-q8_0":   { label: "Telugu specialist · Small (INT8)", mb: 252 },
+    "large-v3-turbo-q5_0": { label: "Whisper Large-v3-Turbo (Q5)", mb: 547 }
+  };
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
@@ -471,10 +482,101 @@
       ".smdv-apply{width:100%;margin-top:12px;border:none;border-radius:12px;background:var(--teal,#0f766e);color:#fff;font:800 14px var(--sans);padding:13px;cursor:pointer}",
       ".smdv-apply:disabled{opacity:.5;cursor:default}",
       "body.dark .smdv-sheet{--panel:#132030;--ink:#e8edf2}",
-      "body.dark .smdv-unmatched{background:#0d1b26}"
+      "body.dark .smdv-unmatched{background:#0d1b26}",
+      // Settings dashboard (sidebar)
+      ".smdv-ms{font:600 12.5px var(--sans)}",
+      ".smdv-ms-note{font:600 12px var(--sans);color:var(--slate-soft,#64748b);padding:4px 0}",
+      ".smdv-ms-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}",
+      ".smdv-ms-lbl{color:var(--ink,#14202b)}.smdv-ms-lbl em{color:var(--slate-soft,#64748b);font-style:normal;font-weight:600}",
+      ".smdv-ms-sw{width:40px;height:23px;border-radius:999px;border:none;background:var(--line,#cbd5e1);position:relative;cursor:pointer;flex:none}",
+      ".smdv-ms-sw>span{position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:999px;background:#fff;transition:left .15s}",
+      ".smdv-ms-sw.on{background:var(--teal,#0f766e)}.smdv-ms-sw.on>span{left:19px}",
+      ".smdv-ms-tiers{display:flex;gap:6px;margin-bottom:9px}",
+      ".smdv-ms-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 12px var(--sans);padding:7px;border-radius:9px;cursor:pointer}",
+      ".smdv-ms-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-ms-m{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line,#eef2f5)}",
+      ".smdv-ms-mt{display:block;color:var(--ink,#14202b);font:700 12.5px var(--sans)}",
+      ".smdv-ms-mb{display:block;color:var(--slate-soft,#64748b);font:600 11.5px var(--sans);margin-top:1px}",
+      ".smdv-ms-dl,.smdv-ms-del{border:1px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 12px var(--sans);padding:6px 12px;border-radius:9px;cursor:pointer;min-width:74px}",
+      ".smdv-ms-dl:disabled{opacity:.7;cursor:default}",
+      ".smdv-ms-del{border-color:#d99;background:#fdebe1;color:#b5460f}",
+      ".smdv-ms-hint{font:600 11px/1.5 var(--sans);color:var(--slate-soft,#64748b);margin-top:8px}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }
 
-  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
+  // ── MaiK Scribe · Voice-model dashboard (rendered in the sidebar Settings ▸ Advanced block).
+  // Lets the clinician enable tiers, pick Base/Pro/Ultimate, and DOWNLOAD/DELETE each on-device model
+  // with a progress %, so first use doesn't depend on dictating (and never needs a dev console). ──
+  function modelSettingsHTML() {
+    if (!whisperPluginPresent()) return '<div class="smdv-ms-note">On-device voice models are available in the iOS app only.</div>';
+    var on = tiersFlagOn(), tier = voiceTier();
+    return '<div class="smdv-ms" data-smdv-ms>' +
+      '<div class="smdv-ms-row"><span class="smdv-ms-lbl">Multilingual tiers <em>(English · Hindi · Telugu)</em></span>' +
+        '<button class="smdv-ms-sw' + (on ? " on" : "") + '" data-smdv-ms-flag role="switch" aria-checked="' + on + '" aria-label="Enable Steward Voice tiers"><span></span></button></div>' +
+      '<div class="smdv-ms-tiers"' + (on ? "" : ' style="opacity:.4;pointer-events:none"') + '>' +
+        ["base", "pro", "ultimate"].map(function (t) { return '<button class="smdv-ms-tier' + (tier === t ? " on" : "") + '" data-smdv-ms-tier="' + t + '">' + t.charAt(0).toUpperCase() + t.slice(1) + "</button>"; }).join("") +
+      '</div>' +
+      '<div class="smdv-ms-models" data-smdv-ms-models></div>' +
+      '<div class="smdv-ms-hint">Downloads once over Wi-Fi. Telugu routes to the specialist on Pro/Ultimate.</div>' +
+    '</div>';
+  }
+  function wireModelSettings(container) {
+    if (!container) return;
+    var box = container.querySelector("[data-smdv-ms]"); if (!box) return;
+    var modelsEl = box.querySelector("[data-smdv-ms-models]");
+    var N = window.SMD_NATIVE;
+    function metaRow(key) {
+      var meta = MODEL_META[key] || { label: key, mb: "?" };
+      return '<div class="smdv-ms-m" data-key="' + key + '">' +
+        '<div class="smdv-ms-ml"><span class="smdv-ms-mt">' + meta.label + '</span><span class="smdv-ms-mb">~' + meta.mb + ' MB · <b data-st>checking…</b></span></div>' +
+        '<div class="smdv-ms-actions"><button class="smdv-ms-dl" data-dl>Download</button><button class="smdv-ms-del" data-del style="display:none">Delete</button></div>' +
+      '</div>';
+    }
+    function refreshStatus(key) {
+      var rowEl = modelsEl.querySelector('.smdv-ms-m[data-key="' + key + '"]'); if (!rowEl) return;
+      var st = rowEl.querySelector("[data-st]"), dl = rowEl.querySelector("[data-dl]"), del = rowEl.querySelector("[data-del]");
+      if (!(N && N.whisperModelInstalled)) { st.textContent = "native app only"; dl.style.display = "none"; return; }
+      N.whisperModelInstalled(key).then(function (r) {
+        var ok = r && r.installed;
+        st.textContent = ok ? "Installed" : "Not installed";
+        dl.style.display = ok ? "none" : ""; del.style.display = ok ? "" : "none";
+        if (!ok) { dl.disabled = false; dl.textContent = "Download"; }
+      }).catch(function () { st.textContent = "—"; });
+    }
+    function renderModels() {
+      if (!tiersFlagOn()) { modelsEl.innerHTML = ""; return; }
+      var keys = TIER_MODELS[voiceTier()] || [];
+      modelsEl.innerHTML = keys.map(metaRow).join("");
+      keys.forEach(refreshStatus);
+    }
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-smdv-ms-flag],[data-smdv-ms-tier],[data-dl],[data-del]"); if (!b) return;
+      if (b.hasAttribute("data-smdv-ms-flag")) {
+        var now = !tiersFlagOn(); try { localStorage.setItem("smd_voice_tiers", now ? "1" : "0"); } catch (e2) {}
+        b.classList.toggle("on", now); b.setAttribute("aria-checked", now);
+        var tiers = box.querySelector(".smdv-ms-tiers"); if (tiers) { tiers.style.opacity = now ? "" : ".4"; tiers.style.pointerEvents = now ? "" : "none"; }
+        renderModels(); return;
+      }
+      var t = b.getAttribute("data-smdv-ms-tier");
+      if (t) { try { localStorage.setItem("smd_voice_tier", t); } catch (e2) {} [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); }); renderModels(); return; }
+      var mrow = b.closest(".smdv-ms-m"); if (!mrow) return; var key = mrow.getAttribute("data-key");
+      if (b.hasAttribute("data-dl")) {
+        if (!(N && N.downloadWhisperModel)) { (window.toast || function () {})("Available in the app."); return; }
+        b.disabled = true; b.textContent = "0%";
+        N.downloadWhisperModel(key, { onProgress: function (p) { b.textContent = Math.round((p || 0) * 100) + "%"; } })
+          .then(function () { refreshStatus(key); (window.toast || function () {})("Model downloaded."); })
+          .catch(function (err) { b.disabled = false; b.textContent = "Retry"; (window.toast || function () {})("Download failed: " + err); });
+        return;
+      }
+      if (b.hasAttribute("data-del")) {
+        if (!window.confirm("Delete this voice model? It will re-download when needed.")) return;
+        if (N && N.deleteWhisperModel) N.deleteWhisperModel(key).then(function () { refreshStatus(key); (window.toast || function () {})("Model removed."); }).catch(function () {});
+        return;
+      }
+    });
+    renderModels();
+  }
+
+  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

@@ -358,6 +358,22 @@
       var keys = model ? [model] : Object.keys(WHISPER_MODELS);
       return Promise.all(keys.map(function (k) { return W.deleteModel({ model: k }).catch(function () {}); }));
     },
+    // Pre-download a Clinical model ON DEMAND (Settings dashboard), independent of dictation. Lets the
+    // user fetch a tier's weights over Wi-Fi before first use. opts:{onProgress?(0..1)} → Promise.
+    downloadWhisperModel: function (model, opts) {
+      opts = opts || {};
+      var P = plugins(); var W = P && P.Whisper;
+      if (!(W && W.downloadModel)) return Promise.reject(new Error("whisper-unavailable"));
+      var m = WHISPER_MODELS[model]; if (!m) return Promise.reject(new Error("whisper-unknown-model"));
+      var sub = null;
+      if (opts.onProgress) { try { sub = W.addListener("whisperDownloadProgress", function (d) { opts.onProgress(Number(d && d.progress) || 0); }); } catch (e) {} }
+      function cleanup() { try { if (sub) { if (sub.remove) sub.remove(); else if (sub.then) sub.then(function (h) { try { h && h.remove && h.remove(); } catch (e) {} }); } } catch (e) {} }
+      return W.isModelInstalled({ model: model }).then(function (r) {
+        if (r && r.installed) { cleanup(); return { installed: true, bytes: r.bytes || 0 }; }
+        return W.downloadModel({ model: model, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
+          .then(function () { cleanup(); return { installed: true }; });
+      }).catch(function (e) { cleanup(); throw new Error((e && e.code) || "model-download-failed"); });
+    },
     _wToken: 0,
     _wSubs: null,
     _removeWhisperSubs: function () {

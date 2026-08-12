@@ -183,6 +183,12 @@
         html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + "</div>";
       }
     } catch (e) {}
+    // MaiK Scribe voice-model dashboard (enable tiers + download/delete on-device models).
+    try {
+      if (window.SMD_VOICE && SMD_VOICE.modelSettingsHTML) {
+        html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">MaiK Scribe · Voice models</div>' + SMD_VOICE.modelSettingsHTML() + "</div>";
+      }
+    } catch (e) {}
     // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
     // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
     try {
@@ -245,6 +251,7 @@
 
     // Let the Image Engine wire up its own controls inside the freshly-built block.
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
+    try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
 
     if (menu.__sbrClick) return;   // delegate once per element (survives innerHTML rebuilds)
     menu.__sbrClick = true;
