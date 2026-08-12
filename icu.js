@@ -3316,7 +3316,10 @@
   // Ward Sync status — non-technical, never shows raw API errors.
   function renderWardBanner() {
     var w = _raw.wardSync || {}; var loggedIn = false;
-    try { loggedIn = !!localStorage.getItem("ghis_token"); } catch (e) {}
+    // ONE GHIS session across the app: read the shared window.GHIS store (scoped per account), not the
+    // legacy bare "ghis_token" key (which the ghis-ward migration removes). Signing in at Ward Sync / OPD
+    // now shows as connected here too.
+    try { loggedIn = !!(window.GHIS && GHIS.getToken && GHIS.getToken()); } catch (e) {}
     var s;
     if (w.connected && w.lastTs) s = { c: "ok", t: '<span style="color:#16a34a">●</span> Ward Sync connected · synced ' + fmtAgo(w.lastTs) };
     else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
