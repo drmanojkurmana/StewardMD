@@ -52,11 +52,24 @@
   function isAndroidNative() {
     try { var C = window.Capacitor; return !!(C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform) === "android"); } catch (e) { return false; }
   }
-  // English uses the per-platform accuracy pick; any NON-English (Telugu / auto / code-switch) needs
-  // the MULTILINGUAL base model on BOTH platforms — small.en cannot decode Telugu at all.
+  // Steward Voice tiers — smd_voice_tiers gates the multilingual upgrade. OFF (default) keeps the
+  // original hosted small.en/base models byte-for-byte; flip ON only AFTER host-whisper-models.sh
+  // publishes the tier files (small-q8_0 / large-v3-turbo-q5_0 / telugu-small-q8_0) + a native rebuild.
+  //   BASE     : Whisper Small INT8 (multilingual) for every language
+  //   PRO      : Small INT8 (en/hi/auto) + verified Telugu Small INT8 (te)
+  //   ULTIMATE : Large-v3-Turbo Q5 (en/hi/auto) + verified Telugu Small INT8 (te)
+  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") === "1"; } catch (e) { return false; } }
+  function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
-    if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
-    return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
+    if (!tiersFlagOn()) {
+      // legacy (pre-tier) behaviour — only small.en/base/tiny are hosted until the tier rollout
+      if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
+      return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
+    }
+    var tier = voiceTier(), te = (lang === "te");
+    if (tier === "ultimate") return te ? "telugu-small-q8_0" : "large-v3-turbo-q5_0";
+    if (tier === "pro")      return te ? "telugu-small-q8_0" : "small-q8_0";
+    return "small-q8_0";     // BASE: multilingual Whisper Small INT8 for en / hi / te / auto
   }
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
@@ -209,7 +222,16 @@
       ? '<div class="smdv-langs" role="group" aria-label="Dictation language">' +
           '<button class="smdv-lang on" data-lang="en">English</button>' +
           '<button class="smdv-lang" data-lang="auto">Auto</button>' +
+          '<button class="smdv-lang" data-lang="hi">हिंदी</button>' +
           '<button class="smdv-lang" data-lang="te">తెలుగు</button>' +
+        '</div>'
+      : "";
+    // Steward Voice tier selector — only when the tier models are enabled (smd_voice_tiers).
+    var tierSel = (whisperAvailable() && tiersFlagOn())
+      ? '<div class="smdv-tiers" role="group" aria-label="Voice model tier">' +
+          '<button class="smdv-tier' + (voiceTier() === "base" ? " on" : "") + '" data-tier="base">Base</button>' +
+          '<button class="smdv-tier' + (voiceTier() === "pro" ? " on" : "") + '" data-tier="pro">Pro</button>' +
+          '<button class="smdv-tier' + (voiceTier() === "ultimate" ? " on" : "") + '" data-tier="ultimate">Ultimate</button>' +
         '</div>'
       : "";
     root.innerHTML =
@@ -218,6 +240,7 @@
         '<div class="smdv-hd"><span class="smdv-ttl">' + vcIco("mic") + ' MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">' + vcIco("close") + '</button></div>' +
         '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
         modeSel +
+        tierSel +
         langSel +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
@@ -254,7 +277,7 @@
     ta.addEventListener("input", function () { base = ta.value; refreshExtract(); });
 
     root.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-act],[data-kind],[data-mode],[data-lang]"); if (!b) return;
+      var b = e.target.closest("[data-act],[data-kind],[data-mode],[data-lang],[data-tier]"); if (!b) return;
       if (b.getAttribute("data-act") === "close") return close();
       if (b.getAttribute("data-act") === "delmodel") {
         if (!window.confirm("Remove the downloaded Clinical Dictation model? It will re-download next time you use Clinical.")) return;
@@ -275,18 +298,24 @@
         engineMode = mm;
         [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
         var hint = root.querySelector("#smdvModeHint");
-        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Telugu / Auto use the ~57 MB multilingual model." : "";
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Hindi / Telugu / Auto use the on-device multilingual model." : "";
       }
       var lg = b.getAttribute("data-lang");
       if (lg) {
         if (recording) { stop(); recording = false; setState("idle"); }
         dictLang = lg;
         [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); });
-        // Telugu / Auto can only be decoded by the on-device multilingual model → force Clinical.
+        // Telugu / Hindi / Auto can only be decoded by the on-device multilingual model → force Clinical.
         if (lg !== "en" && engineMode !== "clinical") {
           engineMode = "clinical";
           [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "clinical"); });
         }
+      }
+      var tr = b.getAttribute("data-tier");
+      if (tr) {
+        if (recording) { stop(); recording = false; setState("idle"); }
+        try { localStorage.setItem("smd_voice_tier", tr); } catch (e) {}
+        [].forEach.call(root.querySelectorAll(".smdv-tier"), function (x) { x.classList.toggle("on", x === b); });
       }
     });
 
@@ -413,6 +442,9 @@
       ".smdv-langs{display:flex;gap:6px;margin-bottom:8px}",
       ".smdv-lang{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 12.5px var(--sans);padding:8px;border-radius:10px;cursor:pointer}",
       ".smdv-lang.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-tiers{display:flex;gap:6px;margin-bottom:8px}",
+      ".smdv-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 12.5px var(--sans);padding:8px;border-radius:10px;cursor:pointer}",
+      ".smdv-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
       ".smdv-mode-hint{font:600 11px/1.4 var(--sans);color:var(--slate-soft,#64748b);margin:-2px 0 10px;min-height:0}",
       ".smdv-model-mgr{margin:-2px 0 10px;min-height:0}",
       ".smdv-model-del{border:1px solid var(--line,#e2e8f0);background:transparent;color:var(--slate-soft,#64748b);font:700 11.5px var(--sans);padding:7px 11px;border-radius:10px;cursor:pointer}",

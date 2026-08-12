@@ -44,7 +44,17 @@
     // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
     "small.en-q5_1": { file: "ggml-small.en-q5_1.bin", sha256: "bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30", bytes: 190098681 },
     "base-q5_1": { file: "ggml-base-q5_1.bin", sha256: "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898", bytes: 59707625 },
-    "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 }
+    "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 },
+    // ── Steward Voice tiers (MULTILINGUAL). Gated behind smd_voice_tiers (voice.js). Each file must be
+    //    published by scripts/host-whisper-models.sh + a native rebuild BEFORE the flag is flipped ON. ──
+    // BASE + PRO(non-Telugu): multilingual Whisper Small INT8 (q8_0, ~252 MB) — English/Hindi/Telugu/code-switch.
+    "small-q8_0": { file: "ggml-small-q8_0.bin", sha256: "49c8fb02b65e6049d5fa6c04f81f53b867b5ec9540406812c643f177317f779f", bytes: 264464607 },
+    // ULTIMATE(non-Telugu): Large-v3-Turbo Q5_0 (~547 MB) — best on-device English/Hindi (measured en 6.2% WER).
+    "large-v3-turbo-q5_0": { file: "ggml-large-v3-turbo-q5_0.bin", sha256: "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2", bytes: 574041195 },
+    // PRO + ULTIMATE Telugu route: vasista22 Telugu-small → ggml → INT8 (q8_0). Benchmark-best Telugu
+    // (te WER 14.7%). NOT an off-the-shelf HF file — built by scripts/convert-telugu-whisper-ggml.sh;
+    // sha256/bytes stay PENDING (feature flag-gated OFF) until that conversion + upload is done.
+    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "PENDING_CONVERSION", bytes: 0 }
   };
 
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
