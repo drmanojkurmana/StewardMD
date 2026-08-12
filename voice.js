@@ -702,5 +702,8 @@
     renderModels();
   }
 
-  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
+  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings,
+    pickModel: function (lang) { return whisperModel(lang); },                      // which on-device model a language routes to (tier-aware)
+    modelCode: function (k) { return MODEL_CODE[k] || k; },                          // branded short code (SV-Telugu / SV-Ultra / …)
+    available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

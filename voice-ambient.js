@@ -105,6 +105,9 @@
   function now() { try { return Date.now(); } catch (e) { return 0; } }
   // Lightweight tracing for on-device debugging (visible in Safari Web Inspector). Prefix [SV-amb].
   function dbg() { try { if (root && root.console && console.info) console.info.apply(console, ["[SV-amb]"].concat([].slice.call(arguments))); } catch (e) {} }
+  // Detect the chunk's language from its script so Auto mode can route the NEXT chunk to the right
+  // model (Telugu → specialist, Devanagari → Hindi, else English). Telugu block U+0C00–0C7F, Devanagari U+0900–097F.
+  function detectScript(t) { t = String(t || ""); if (/[ఀ-౿]/.test(t)) return "te"; if (/[ऀ-ॿ]/.test(t)) return "hi"; if (/[a-z]/i.test(t)) return "en"; return ""; }
 
   function start(opts) {
     opts = opts || {};
@@ -121,6 +124,9 @@
     // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
     // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
     var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null;
+    // Auto-mode adaptive routing: the language observed in the last chunk picks the model for the next
+    // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands.
+    var detectedLang = null;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -162,12 +168,22 @@
     // transcript exactly as before; onRefine additionally fires per needsRefine(state).
     function armChunk() {
       if (!running || paused || !root || !root.SMD_VOICE) return;
-      dbg("arm", "engine=" + engine, "lang=" + (opts.language || "auto"), "model=" + (opts.model || "(tier-routed)"));
+      // In Auto, once we've seen a chunk's language, route the next chunk to that language's model.
+      var reqLang = opts.language || "auto";
+      var effLang = (reqLang === "auto" && detectedLang) ? detectedLang : reqLang;
+      // Tell the caller which on-device model this chunk will use (for the "which model" chip).
+      try {
+        if (opts.onModel && engine === "clinical" && root.SMD_VOICE.pickModel) {
+          var mk = root.SMD_VOICE.pickModel(effLang);
+          opts.onModel(root.SMD_VOICE.modelCode ? root.SMD_VOICE.modelCode(mk) : mk, effLang);
+        } else if (opts.onModel && engine === "fast") { opts.onModel("Device STT", effLang); }
+      } catch (e) {}
+      dbg("arm", "engine=" + engine, "reqLang=" + reqLang, "effLang=" + effLang, "model=" + (opts.model || "(tier-routed)"));
       curSession = root.SMD_VOICE.listen({
         engine: engine,
-        model: opts.model,                                // undefined ⇒ SMD_VOICE routes by tier+language
+        model: opts.model,                                // undefined ⇒ SMD_VOICE routes by tier+effLang
                                                           // (Telugu → StewardVoice specialist); no hardcoded weak base model
-        language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
+        language: effLang,                                // Auto adapts per-chunk to the detected language
         noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
@@ -213,6 +229,8 @@
       dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
       curSession = null;
       errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
+      // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
+      if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
       tick(fullTranscript, stopping);

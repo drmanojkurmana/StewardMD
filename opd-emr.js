@@ -331,7 +331,7 @@
         '<span class="oe-vc-live"><span class="oe-vc-dot' + (paused ? " paused" : "") + '"></span>' +
           '<span class="oe-vc-livetxt">' + (paused ? "Scribe paused" : "MaiK Scribe · Listening") + "</span></span>" +
         '<span class="oe-vc-meta"><span class="oe-vc-timer" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" +
-          '<span class="oe-vc-chip">' + langChip + "</span></span>" +
+          '<span class="oe-vc-chip" id="oeVcModel" title="On-device model in use">' + esc(st.voiceModel || langChip) + "</span></span>" +
         '<span class="oe-vc-acts">' +
           '<button class="oe-vc-ic" data-oe-act="voice-pause" aria-label="' + (paused ? "Resume" : "Pause") + '">' + ms(paused ? "play_arrow" : "pause") + "</button>" +
           '<button class="oe-vc-ic stop" data-oe-act="voice-stop" aria-label="Stop">' + ms("stop") + "</button></span></div>";
@@ -682,6 +682,8 @@
       var box = e.parentNode; if (box && box.scrollHeight) box.scrollTop = box.scrollHeight;
     } catch (x) {}
   }
+  // Which on-device model is transcribing right now (updates live as Auto mode adapts per chunk).
+  function setModelChip(code) { st.voiceModel = code || ""; try { var e = document.getElementById("oeVcModel"); if (e && code) e.textContent = code; } catch (x) {} }
   function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
   function putVoiceDom(name) {
     try {
@@ -978,7 +980,7 @@
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; st.voiceModel = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -988,6 +990,7 @@
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
       onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; setTranscript(_lastFullTranscript); },
+      onModel: function (code) { setModelChip(code); },     // "which model" chip (Auto adapts per chunk)
       onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
       onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "Listening (device dictation)…" : "Listening…") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
