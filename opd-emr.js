@@ -269,7 +269,10 @@
       : (value === false || value === "false" || value === "No" || value === "N") ? "false" : null;
     if (k === "yesno") return (value === "Yes" || value === true || value === "Y") ? "Y"
       : (value === "No" || value === false || value === "N") ? "N" : null;
-    return value == null ? null : String(value);
+    // null = don't set. Treat empty/whitespace as "no value" too, so a later empty extraction can't
+    // silently BLANK a field the doctor already voice-filled (voice writes aren't marked 'touched').
+    if (value == null) return null;
+    var s = String(value); return s.trim() ? s : null;
   }
   // PURE: fold SMD_AMBIENT updates into assessVals. Skips map-gated (patient-speech) + doctor-edited
   // fields (conflict, never overwrite) + unmapped engine findings. Exposed for tests. No DOM.
@@ -300,7 +303,7 @@
   function consultBar(st) {
     if (!G.SMD_AMBIENT) return "";
     var on = !!st.voiceOn, paused = !!st.voicePaused, processing = !!st.voiceProcessing, lang = st.voiceLang || "auto";
-    function lb(v, t) { return '<button class="oe-vc-lang' + (lang === v ? " on" : "") + '" data-oe-act="vlang:' + v + '">' + t + "</button>"; }
+    function lb(v, t) { return '<button class="oe-vc-lang' + (lang === v ? " on" : "") + '" data-oe-act="vlang:' + v + '" aria-pressed="' + (lang === v) + '">' + t + "</button>"; }
     var langs = '<div class="oe-vc-langs">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</div>";
     var langChip = { auto: "AUTO", en: "EN", te: "TE" }[lang] || "AUTO";
     var tx = st.voiceTranscript || "";
@@ -339,8 +342,8 @@
           '<button class="oe-vc-ic stop" data-oe-act="voice-stop" aria-label="Stop">' + ms("stop") + "</button></span></div>";
     var readout = (st.scribeStats && st.scribeStats.filled) ? '<div class="oe-vc-readout"><span class="oe-vc-dot ok"></span>' + st.scribeStats.filled + " field" + (st.scribeStats.filled === 1 ? "" : "s") + " filled</div>" : "";
     return '<div class="oe-vc ' + (paused ? "paused" : "listening") + ' on">' + bar +
-      '<button class="oe-vc-orb" aria-label="Listening"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
-      '<div class="oe-vc-status2" id="oeVoiceStatus">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
+      '<button class="oe-vc-orb" data-oe-act="voice-pause" aria-label="' + (paused ? "Resume dictation" : "Pause dictation") + '"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
+      '<div class="oe-vc-status2" id="oeVoiceStatus" aria-live="polite" aria-atomic="true">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
       txBox + readout + langs +
       '<div class="oe-vc-priv sm">' + ms("lock") + "<span>On-device · not saved or sent to the cloud</span></div>" +
     "</div>";
@@ -420,7 +423,7 @@
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
   function postConsultPanel() {
     return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Close the consult, or send to Emergency.</div>" +
-      '<div class="oe-swipe" id="oeSwipe" role="button" aria-label="Swipe to close consult"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
+      '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
   function _render(state) {
@@ -1199,6 +1202,8 @@
     function down(e) { dragging = true; maxX = track.clientWidth - knob.offsetWidth - 8; startX = px(e) - curX; document.addEventListener("touchmove", move, { passive: false }); document.addEventListener("touchend", up); document.addEventListener("mousemove", move); document.addEventListener("mouseup", up); if (e.cancelable) e.preventDefault(); }
     knob.addEventListener("touchstart", down, { passive: false });
     knob.addEventListener("mousedown", down);
+    // Keyboard / VoiceOver / Switch-Control path (the swipe alone excluded anyone who can't drag).
+    track.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); endConsult(); } });
   }
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
