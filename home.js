@@ -723,8 +723,8 @@
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
-      // 2x2 tile grid. ICU & Ward is one destination (the ICU dashboard covers critical care + inpatient);
-      // Ward Sync is still reachable from the home quick-links + Settings. Connect opens the EMR console.
+      // Tile grid. ICU & Ward opens the ICU dashboard (critical care + inpatient boards); Ward Sync opens the
+      // GHIS inpatient list (labs/imaging import); Connect opens the EMR console.
       function tile(icon, title, cap, act, pri) {
         return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
@@ -732,13 +732,14 @@
       openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
         tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
+        tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
+          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
         });
       });
     },
