@@ -298,27 +298,48 @@
   // Only ever starts/stops capture; nothing is written until Save to GHIS / Accept.
   function consultBar(st) {
     if (!G.SMD_AMBIENT) return "";
-    var on = !!st.voiceOn, paused = !!st.voicePaused, lang = st.voiceLang || "auto";
+    var on = !!st.voiceOn, paused = !!st.voicePaused, processing = !!st.voiceProcessing, lang = st.voiceLang || "auto";
     function lb(v, t) { return '<button class="oe-vc-lang' + (lang === v ? " on" : "") + '" data-oe-act="vlang:' + v + '">' + t + "</button>"; }
     var langs = '<div class="oe-vc-langs">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</div>";
-    var orbState = !on ? "idle" : (paused ? "paused" : "listening");
-    var status = !on ? "Tap the mic to start" : (paused ? "Paused" : (st.voiceStatus || "Listening…"));
-    var timer = on ? ' <span class="oe-vc-sep">·</span> <span class="oe-vc-timer" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" : "";
+    var langChip = { auto: "AUTO", en: "EN", te: "TE" }[lang] || "AUTO";
     var tx = st.voiceTranscript || "";
-    var transcript = on ? '<div class="oe-vc-box"><div class="oe-vc-tx" id="oeTranscript">' + (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>" : "";
-    var controls = !on
-      ? '<button class="oe-btn primary oe-vc-start" data-oe-act="voice-toggle">' + ms("graphic_eq") + "Start voice consult</button>"
-      : '<div class="oe-vc-controls">' +
-          '<button class="oe-btn sm" data-oe-act="voice-pause">' + ms(paused ? "play_arrow" : "pause") + (paused ? "Resume" : "Pause") + "</button>" +
-          '<button class="oe-btn sm danger" data-oe-act="voice-stop">' + ms("stop") + "Stop</button></div>";
-    var readout = (on && st.scribeStats) ? '<div class="oe-vc-readout"><span class="oe-vc-dot"></span>' + (st.scribeStats.filled || 0) + " fields filled · " + (st.scribeStats.suggestions || 0) + " suggestions</div>" : "";
-    var sub = on ? "" : '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — fields fill as you talk.</div>';
-    return '<div class="oe-vc ' + orbState + (on ? " on" : "") + '">' +
-      '<div class="oe-vc-head"><span class="oe-vc-eyebrow">Voice Consult</span>' + langs + "</div>" +
-      '<button class="oe-vc-orb"' + (on ? "" : ' data-oe-act="voice-toggle"') + ' aria-label="' + (on ? "Listening" : "Start voice consult") + '">' +
-        '<span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
-      '<div class="oe-vc-status"><span id="oeVoiceStatus">' + esc(status) + "</span>" + timer + "</div>" +
-      sub + transcript + controls + readout +
+    var txBox = '<div class="oe-vc-box live"><div class="oe-vc-tx" id="oeTranscript">' + (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
+
+    // PROCESSING (after Stop) — the last chunk is still transcribing + notes are drafting on-device.
+    if (processing) {
+      return '<div class="oe-vc processing">' +
+        '<div class="oe-vc-head"><span class="oe-vc-eyebrow proc">Processing</span></div>' +
+        '<div class="oe-vc-procwrap"><span class="oe-vc-spin"></span>' +
+          '<div class="oe-vc-proctext"><b>Finishing your dictation…</b><span>Transcribing the last part and drafting notes.</span></div></div>' +
+        '<div class="oe-vc-shimmer"><i></i></div>' +
+        (tx ? '<div class="oe-vc-box"><div class="oe-vc-tx">' + esc(tx) + "</div></div>" : "") +
+      "</div>";
+    }
+
+    // OFF (idle) — invite to start.
+    if (!on) {
+      return '<div class="oe-vc idle">' +
+        '<div class="oe-vc-head"><span class="oe-vc-eyebrow">Voice Consult</span>' + langs + "</div>" +
+        '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start voice consult"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
+        '<div class="oe-vc-status">Tap the mic to start</div>' +
+        '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — the transcript appears below and fields fill as you talk.</div>' +
+      "</div>";
+    }
+
+    // ON (listening / paused) — Stitch-style pill + breathing orb + live transcript.
+    var bar = '<div class="oe-vc-bar">' +
+        '<span class="oe-vc-live"><span class="oe-vc-dot' + (paused ? " paused" : "") + '"></span>' +
+          '<span class="oe-vc-livetxt">' + (paused ? "Scribe paused" : "MaiK Scribe · Listening") + "</span></span>" +
+        '<span class="oe-vc-meta"><span class="oe-vc-timer" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" +
+          '<span class="oe-vc-chip">' + langChip + "</span></span>" +
+        '<span class="oe-vc-acts">' +
+          '<button class="oe-vc-ic" data-oe-act="voice-pause" aria-label="' + (paused ? "Resume" : "Pause") + '">' + ms(paused ? "play_arrow" : "pause") + "</button>" +
+          '<button class="oe-vc-ic stop" data-oe-act="voice-stop" aria-label="Stop">' + ms("stop") + "</button></span></div>";
+    var readout = (st.scribeStats && st.scribeStats.filled) ? '<div class="oe-vc-readout"><span class="oe-vc-dot ok"></span>' + st.scribeStats.filled + " field" + (st.scribeStats.filled === 1 ? "" : "s") + " filled</div>" : "";
+    return '<div class="oe-vc ' + (paused ? "paused" : "listening") + ' on">' + bar +
+      '<button class="oe-vc-orb" aria-label="Listening"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
+      '<div class="oe-vc-status2" id="oeVoiceStatus">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
+      txBox + readout + langs +
     "</div>";
   }
   function now() { try { return Date.now(); } catch (e) { return 0; } }
@@ -648,7 +669,9 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "";
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null;
+  // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
+  function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
   // Live transcript into the Voice Consult box (updates the DOM without a full repaint; keeps it scrolled).
   function setTranscript(t) {
@@ -942,8 +965,8 @@
   // against the teardown flush's onRefine).
   var _lastRefinedTranscript = "";
   function doRefine(transcript) {
-    if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) return;
-    if (_lastRefinedTranscript.indexOf(transcript) === 0) return;   // no new content since the last refine
+    if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) { finishProcessing(); return; }
+    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (!r || r.error) return;
@@ -951,11 +974,11 @@
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
       _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations } });
-    }).catch(function () {});
+    }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voicePaused = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -980,8 +1003,14 @@
     if (_amb) { try { flushing = !!_amb.stop(); } catch (x) {} _amb = null; }
     if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; }
     st.voiceOn = false; st.voicePaused = false; st.voiceStatus = "";
+    // Show a "Finishing…" state while the last chunk transcribes + notes draft (finishProcessing clears it).
+    var willProcess = flushing || !!_lastFullTranscript;
+    st.voiceProcessing = willProcess;
+    if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
+    if (willProcess) _procTmr = setTimeout(finishProcessing, 15000);   // safety: never hang the panel
     if (!flushing) doRefine(_lastFullTranscript);           // fallback end-of-consult refine over the whole transcript
     paint();
+    if (!willProcess) finishProcessing();
   }
 
   // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
@@ -1057,10 +1086,9 @@
     var updates = Object.keys(ef).map(function (k) { return { field: k, value: ef[k], applied: true }; });
     var m = _voiceMerge(st.assessVals, st.assessTouched, updates);
     st.assessVals = m.vals;
-    var sg = result.suggestions || {};
-    var ddx = sg.ddx || [], inv = sg.investigations || [];
-    st.scribeSuggestions = { provisionalDx: sg.provisionalDx || "", ddx: ddx, investigations: inv, acceptedDx: false, acceptedDdx: {}, acceptedInv: {} };
-    st.scribeStats = { filled: m.filled.length, suggestions: (sg.provisionalDx ? 1 : 0) + ddx.length + inv.length };
+    // Voice refine autofills the EMR fields ONLY. Diagnostic / investigation SUGGESTIONS are NOT
+    // auto-shown after a consult — the clinician taps "Ask MaiK" to pull them on demand.
+    st.scribeStats = { filled: m.filled.length, suggestions: 0 };
     paint();
     return { filled: m.filled, dropped: m.dropped, conflicts: m.conflicts };
   }
