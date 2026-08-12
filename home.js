@@ -1361,6 +1361,20 @@
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
+    // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
+    { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
+    { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
+    { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
+    { act: "connect", ic: "hub", tt: "Connect EMR", sub: "Link your hospital", defOn: false },
+    { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
+    { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Differential", defOn: false },
+    { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
+    { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
+    { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
+    { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },
+    { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Dose · convert", defOn: false },
+    { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },
+    { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Local resistance", defOn: false },
   ];
   function homeToolByAct(a) { for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i]; return null; }
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
