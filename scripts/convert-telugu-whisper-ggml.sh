@@ -22,14 +22,15 @@ WCPP="$ROOT/local-plugins/capacitor-whisper/android/src/main/cpp/whisper-cpp"   
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT
 echo "▸ work dir: $WORK"
 
-# 1) deps: HF model + the openai/whisper package (supplies mel filters + tokenizer assets the converter needs)
-python3 -m pip install -q -U "transformers" torch huggingface_hub openai-whisper
+# 1) deps: HF model + the openai/whisper REPO (convert-h5-to-ggml.py reads <repo>/whisper/assets/*)
+python3 -m pip install -q -U "transformers" torch huggingface_hub
 python3 - "$HF_MODEL" "$WORK/hf" <<'PY'
 import sys; from huggingface_hub import snapshot_download
 snapshot_download(sys.argv[1], local_dir=sys.argv[2], local_dir_use_symlinks=False)
 print("downloaded", sys.argv[1])
 PY
-ASSETS="$(python3 -c 'import os,whisper;print(os.path.dirname(whisper.__file__))')"
+git clone --depth 1 https://github.com/openai/whisper "$WORK/whisper-repo"
+ASSETS="$WORK/whisper-repo"
 
 # 2) convert HF -> ggml f16  (whisper.cpp models/convert-h5-to-ggml.py: <hf_model_dir> <whisper_assets_dir> <out_dir>)
 python3 "$WCPP/models/convert-h5-to-ggml.py" "$WORK/hf" "$ASSETS" "$WORK/out"
