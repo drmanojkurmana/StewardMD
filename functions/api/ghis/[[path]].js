@@ -549,9 +549,8 @@ export async function saveAssessment(env, token, body) {
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
-    const v = fields[k] == null ? '' : String(fields[k]);
-    if (v !== '') all[name] = v;   // overlay ONLY fields the doctor actually filled — a blank app field must
-                                   // never wipe GHIS's existing value (the app form loads blank, so most are empty)
+    all[name] = fields[k] == null ? '' : String(fields[k]);   // overlay the form's exact state, blanks included
+                                                              // (a blank field is an intentional clear — supported by design)
   });
   // The GET form is authoritative for the ids + antiforgery token — the doctor only edits clinical
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
