@@ -532,10 +532,18 @@ function extractAssessmentForm(html) {
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
+  const mr = String(body.patientId || ''), epi = String(body.episodeId || '');
+  // ACTIVATE THE VISIT first: POST Searchnew with recordNo=<MR>-<episode>, the same call getDemographics
+  // uses to load a patient's visit. Without it the assessment form GET returns a BLANK form (doc_id 0, no
+  // episode), so GHIS "Successfully submitted" an orphan record under no visit instead of UPDATING the real
+  // one on the doctor's screen. (Session context is server-side, keyed by the shared session cookie.)
+  if (mr && epi) {
+    try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {}
+  }
   // Reserialize the CURRENT form so GHIS gets the complete model + its own pre-allocated doc_id/token,
   // then overlay the doctor's edits — exactly what GHIS's own "Save" posts. Without this, a partial body
   // with doc_id 0 returns 200 but is never persisted ("No records found").
-  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(body.patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (gr.unauth) return gr;
   const all = extractAssessmentForm(gr.body || '');
   const fields = body.fields || {};
