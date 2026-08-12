@@ -293,3 +293,7 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-vc-shimmer > i { display:block; height:100%; width:38%; border-radius:999px; background:linear-gradient(90deg,transparent,#caa4ff,transparent); animation:oeVcSlide 1.2s ease-in-out infinite; }
 @keyframes oeVcSlide { 0% { transform:translateX(-120%); } 100% { transform:translateX(330%); } }
 @media (prefers-reduced-motion:reduce) { #smdOpdEmr .oe-vc-aura,#smdOpdEmr .oe-vc-dot,#smdOpdEmr .oe-vc-spin,#smdOpdEmr .oe-vc-shimmer>i { animation:none; } #smdOpdEmr .oe-vc-aura { opacity:.28; } }
+/* recording disclaimer / on-device consent note */
+#smdOpdEmr .oe-vc-priv { display: flex; align-items: center; gap: 8px; justify-content: flex-start; margin-top: 12px; padding: 9px 11px; border: 1px solid var(--vc-line); border-radius: 11px; background: rgba(61, 220, 151, .06); font: 600 11px/1.45 var(--q-sans); color: var(--vc-muted); text-align: left; }
+#smdOpdEmr .oe-vc-priv .material-symbols-outlined { font-size: 16px; color: #3ddc97; flex: 0 0 auto; }
+#smdOpdEmr .oe-vc-priv.sm { margin-top: 10px; padding: 6px 10px; justify-content: center; font-size: 10.5px; background: transparent; border-color: transparent; }

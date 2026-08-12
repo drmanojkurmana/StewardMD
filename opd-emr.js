@@ -323,6 +323,7 @@
         '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start voice consult"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
         '<div class="oe-vc-status">Tap the mic to start</div>' +
         '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — the transcript appears below and fields fill as you talk.</div>' +
+        '<div class="oe-vc-priv">' + ms("lock") + "<span>Processed on this phone only — never recorded, saved, or sent to the cloud. Please let the patient know you are taking voice notes.</span></div>" +
       "</div>";
     }
 
@@ -340,6 +341,7 @@
       '<button class="oe-vc-orb" aria-label="Listening"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
       '<div class="oe-vc-status2" id="oeVoiceStatus">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
       txBox + readout + langs +
+      '<div class="oe-vc-priv sm">' + ms("lock") + "<span>On-device · not saved or sent to the cloud</span></div>" +
     "</div>";
   }
   function now() { try { return Date.now(); } catch (e) { return 0; } }
