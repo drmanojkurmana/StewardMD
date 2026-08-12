@@ -3496,6 +3496,13 @@
 
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
+    // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
+    // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
+    findingsFromText: function (text) {
+      if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return [];
+      var nr = SMD_NLP.extract(String(text), { valid: VALID, labels: LABEL, syn: FT_SYN }) || {};
+      return (nr.present || []).filter(function (k) { return VALID[k]; });
+    },
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
     openRef: function (id) { var wasOpen = !!(root && root.classList.contains("on")); try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id, { standalone: !wasOpen }); } catch (e) {} }, 90); },

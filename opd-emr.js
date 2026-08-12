@@ -712,6 +712,13 @@
     return { rx: rx, steps: (rec.steps || []).slice(0, 4), regimen: rec.regimenLabel || "" };
   }
 
+  // PURE: differentialFor returns infective THEN non-infective (the antibiotic gate's order); rank the
+  // DIFFERENTIAL purely by score so a higher-scoring non-infective dx (e.g. ACS) is not buried beneath a
+  // lower-scoring infective one. Stable within equal scores; does not mutate the input.
+  function rankDifferential(diff) {
+    return (diff || []).slice().sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+  }
+
   // PURE: engine differential (+ treatments keyed by dx id) -> the review-panel model.
   // Dx = provisional + differential (with scores); Mx = deduped investigation workup; Rx = drug
   // regimens + management steps for the TOP-2 working diagnoses (deduped, case-insensitive).
@@ -764,8 +771,11 @@
     var v = st.assessVals || {};
     var text = assessFindingsText(v);
     if (!text.replace(/[.\s]/g, "")) { toast("Type the complaint / history first, then Ask MaiK."); return; }
-    var keys = (G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : [];
-    var diff = differentialFor(keys);
+    // Extract findings with the engine's OWN synonym set (rich FT_SYN) when available, so risk factors
+    // like "known diabetic" -> diabetesHx are captured; fall back to the bare SMD_NLP context otherwise.
+    var keys = (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
+      : ((G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : []);
+    var diff = rankDifferential(differentialFor(keys));
     if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
     st.maikBusy = true; paint();
     // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object
@@ -975,6 +985,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential };
 })();

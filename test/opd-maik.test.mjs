@@ -88,6 +88,20 @@ test("buildMaikSuggestions: Dx (provisional+ddx), Mx (dedup inv), Rx (top-2 dx, 
   assert.ok(rxLabels.includes("Urgent PCI"), "non-drug management step included in Rx group");
 });
 
+test("rankDifferential: ranks by score so a higher non-infective dx isn't buried under infective", () => {
+  // differentialFor returns infective (pneumonia) THEN non-infective (ACS), regardless of score.
+  const raw = [
+    { id: "hap", dx: "Hospital Acquired Pneumonia", score: 45, inv: [] },   // infective, listed first
+    { id: "cap", dx: "Community Acquired Pneumonia", score: 45, inv: [] },
+    { id: "acs", dx: "Acute coronary syndrome", score: 56, inv: [] }         // non-infective, higher score, listed last
+  ];
+  const ranked = OPD._rankDifferential(raw);
+  assert.equal(ranked[0].dx, "Acute coronary syndrome", "highest score wins the provisional slot");
+  assert.equal(ranked[0].score, 56);
+  assert.equal(raw[0].dx, "Hospital Acquired Pneumonia", "input array not mutated");
+  assert.deepEqual(OPD._rankDifferential([]), []);
+});
+
 test("buildMaikSuggestions: empty differential -> empty model", () => {
   const sg = OPD._buildMaikSuggestions([], {});
   assert.equal(sg.provisionalDx, "");
