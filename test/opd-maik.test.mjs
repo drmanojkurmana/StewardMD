@@ -64,9 +64,9 @@ test("treatmentLines: highest-precedence recommendation -> drug lines + steps", 
 
 test("buildMaikSuggestions: Dx (provisional+ddx), Mx (dedup inv), Rx (top-2 dx, dedup)", () => {
   const diff = [
-    { id: "acs", dx: "Acute coronary syndrome", score: 88, inv: ["ECG", "Troponin"] },
-    { id: "aortic_dissection", dx: "Aortic dissection", score: 40, inv: ["CT aortogram", "ECG"] },
-    { id: "pe", dx: "Pulmonary embolism", score: 20, inv: ["D-dimer"] }
+    { id: "acs", dx: "Acute coronary syndrome", score: 88, inv: ["ECG", "Troponin"], reason: "Ischaemic features favour ACS.", red: ["STEMI needs reperfusion"] },
+    { id: "aortic_dissection", dx: "Aortic dissection", score: 40, inv: ["CT aortogram", "ECG"], reason: "Tearing pain raises dissection.", red: ["BP differential"] },
+    { id: "pe", dx: "Pulmonary embolism", score: 20, inv: ["D-dimer"], reason: "", red: ["STEMI needs reperfusion"] } // dup red flag
   ];
   const treatMap = {
     acs: { rx: ["aspirin · 325 mg PO stat", "atorvastatin · 80 mg PO OD"], steps: ["Urgent PCI"] },
@@ -74,8 +74,14 @@ test("buildMaikSuggestions: Dx (provisional+ddx), Mx (dedup inv), Rx (top-2 dx, 
   };
   const sg = OPD._buildMaikSuggestions(diff, treatMap);
   assert.equal(sg.provisionalDx, "Acute coronary syndrome");
+  assert.equal(sg.provisionalWhy, "Ischaemic features favour ACS.", "provisional carries the engine's reasoning");
   assert.equal(sg.ddx.length, 2);
-  assert.match(sg.ddx[0].label, /Aortic dissection \(40\)/);
+  assert.equal(sg.ddx[0].dx, "Aortic dissection", "ddx carries the clean dx name (for accepting without the score)");
+  assert.equal(sg.ddx[0].label, "Aortic dissection", "label is the clean name (score rendered separately as a chip)");
+  assert.equal(sg.ddx[0].score, 40, "score carried as its own field");
+  assert.equal(sg.ddx[0].why, "Tearing pain raises dissection.");
+  // red flags: union across leading dx, deduped
+  assert.deepEqual(sg.redFlags, ["STEMI needs reperfusion", "BP differential"]);
   // investigations: union, deduped case-insensitively (ECG appears in two dx -> once)
   const invLabels = sg.investigations.map((x) => x.label);
   assert.deepEqual(invLabels, ["ECG", "Troponin", "CT aortogram", "D-dimer"]);
@@ -86,6 +92,18 @@ test("buildMaikSuggestions: Dx (provisional+ddx), Mx (dedup inv), Rx (top-2 dx, 
   assert.ok(rxLabels.includes("atorvastatin · 80 mg PO OD"));
   assert.ok(rxLabels.includes("labetalol · IV titrate"));
   assert.ok(rxLabels.includes("Urgent PCI"), "non-drug management step included in Rx group");
+});
+
+test("cleanClinical: em-dash -> comma, en-dash range -> hyphen, arrow -> to; drug hyphen kept", () => {
+  const diff = [{ id: "acs", dx: "ACS", score: 90, inv: ["BP 70–90 target"], reason: "Ischaemia — reperfusion", red: ["STEMI → reperfusion"] }];
+  const treatMap = { acs: { rx: ["piperacillin-tazobactam · 4.5 g"], steps: ["EMERGENCY — call surgery"] } };
+  const sg = OPD._buildMaikSuggestions(diff, treatMap);
+  assert.equal(sg.provisionalWhy, "Ischaemia, reperfusion", "em-dash becomes a comma");
+  assert.equal(sg.redFlags[0], "STEMI to reperfusion", "arrow becomes 'to'");
+  assert.equal(sg.investigations[0].label, "BP 70-90 target", "en-dash range becomes a hyphen");
+  assert.ok(sg.treatment.some((t) => t.label === "piperacillin-tazobactam · 4.5 g"), "drug-name hyphen preserved");
+  assert.ok(sg.treatment.some((t) => t.label === "EMERGENCY, call surgery"), "step em-dash becomes a comma");
+  assert.ok(!sg.treatment.some((t) => /—/.test(t.label)), "no em-dash reaches the accepted chart text");
 });
 
 test("rankDifferential: ranks by score so a higher non-infective dx isn't buried under infective", () => {
@@ -108,6 +126,53 @@ test("buildMaikSuggestions: empty differential -> empty model", () => {
   assert.deepEqual(sg.ddx, []);
   assert.deepEqual(sg.investigations, []);
   assert.deepEqual(sg.treatment, []);
+});
+
+test("emrCorrections: Rx in the diagnosis field flagged as misplaced -> Management plan", () => {
+  const c = OPD._emrCorrections({ provisional_diagnosis: "Community acquired pneumonia\nTab Azithromycin 500 mg OD x 3 days" });
+  const mis = c.find((x) => x.type === "misplaced" && x.field === "provisional_diagnosis");
+  assert.ok(mis, "detects prescription text in the diagnosis field");
+  assert.equal(mis.targetField, "management_plan");
+  assert.match(mis.from, /Azithromycin/);
+  assert.ok(!/Community acquired pneumonia/.test(mis.from), "the actual diagnosis line is NOT flagged for moving");
+});
+
+test("emrCorrections: substance history in the complaint field flagged -> Personal history", () => {
+  const c = OPD._emrCorrections({ Chief_complaints_duration: "Chest pain 2 hours\nConsumes alcohol daily for 10 years" });
+  const mis = c.find((x) => x.type === "misplaced" && x.field === "Chief_complaints_duration");
+  assert.ok(mis, "detects substance history in the complaint field");
+  assert.equal(mis.targetField, "Habitat_addiction_others");
+  assert.match(mis.from, /alcohol/);
+});
+
+test("emrCorrections: clear medical typo -> spelling fix; clean note -> no corrections", () => {
+  const c = OPD._emrCorrections({ History_present_illness: "known diabetis with hypertention" });
+  const sp = c.filter((x) => x.type === "spelling").map((x) => x.from + "->" + x.to);
+  assert.ok(sp.includes("diabetis->diabetes"));
+  assert.ok(sp.includes("hypertention->hypertension"));
+  assert.deepEqual(OPD._emrCorrections({ Chief_complaints_duration: "fever and cough 3 days" }), [], "clean note yields no false corrections");
+});
+
+test("_render: red-flags banner + EMR corrections + accept-all render", () => {
+  const html = loadRender()._render({
+    loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {},
+    scribeSuggestions: {
+      provisionalDx: "Acute coronary syndrome", provisionalWhy: "Ischaemic features.",
+      ddx: [{ label: "Aortic dissection (48)", dx: "Aortic dissection", source: "engine", why: "Tearing pain." }],
+      investigations: [{ label: "ECG", source: "engine" }, { label: "Troponin", source: "engine" }],
+      treatment: [{ label: "aspirin · 325 mg PO stat", source: "engine" }],
+      redFlags: ["STEMI needs immediate reperfusion"],
+      corrections: [{ type: "spelling", field: "History_present_illness", from: "diabetis", to: "diabetes" }],
+      acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik"
+    }
+  });
+  assert.match(html, /Must-not-miss red flags/);
+  assert.match(html, /STEMI needs immediate reperfusion/);
+  assert.match(html, /Ischaemic features\./, "provisional why shown");
+  assert.match(html, /EMR corrections/);
+  assert.match(html, /data-oe-act="scribe-accept:fix:0"/);
+  assert.match(html, /data-oe-act="scribe-acceptall:inv"/, "accept-all offered for investigations (>1)");
+  assert.match(html, /Decision support only/, "advisory disclaimer present");
 });
 
 test("_render: Ask MaiK button shows on the assessment save bar (engine present, write on)", () => {

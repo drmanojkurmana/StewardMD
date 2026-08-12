@@ -247,6 +247,8 @@
   // (LOC, neck stiffness, murmurs, breath sounds, abdomen shape, bowel sounds, dyspnoea, pain, …) that
   // opd-emr omits because their GHIS write-names aren't captured — those are DROPPED, never guessed.
   var OPD_KIND = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_KIND[f.n] = f.k; }); });
+  var OPD_LABEL = {}; ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { OPD_LABEL[f.n] = f.l; }); });
+  function fieldLabel(n) { return OPD_LABEL[n] || n; }
   var VOICE_MAP = {
     cc: "Chief_complaints_duration", presentHx: "History_present_illness", pastHx: "History_past_illness",
     temp: "Temp", bpSys: "BP_SYS", bpDia: "BP_dia", pulse: "Pulse", rr: "respiratory",
@@ -315,24 +317,49 @@
 
   // ---- AI suggestions panel (review-first: Dx / differential / investigations from a refine pass).
   // Nothing here is written to the EMR or an order until the doctor taps Accept on that specific row.
-  function scribeRow(kind, idx, label, source, accepted) {
-    return '<div class="oe-ai-row"><span class="oe-ai-label">' + esc(label) + "</span>" +
-      (source ? '<span class="oe-ai-src">' + esc(source === "engine" ? "engine" : "AI") + "</span>" : "") +
-      '<span class="oe-tag oe-review">Review</span>' +
-      (accepted ? '<span class="oe-ai-added">' + ms("check_circle") + "Added</span>"
-        : '<button class="oe-btn sm" data-oe-act="scribe-accept:' + kind + ":" + idx + '">' + ms("add_task") + "Accept</button>") +
+  // One suggestion row: text column (name + optional score chip + optional why) on the left, a compact
+  // top-aligned Accept on the right. opts = { label, score, why, accepted }.
+  function scribeRow(kind, idx, opts) {
+    opts = opts || {};
+    return '<div class="oe-ai-row">' +
+      '<div class="oe-ai-main"><div class="oe-ai-label">' + esc(opts.label) +
+        (opts.score != null ? '<span class="oe-ai-score">' + Math.round(opts.score) + "</span>" : "") + "</div>" +
+        (opts.why ? '<div class="oe-ai-why">' + esc(opts.why) + "</div>" : "") + "</div>" +
+      (opts.accepted ? '<span class="oe-ai-added">' + ms("check") + "Added</span>"
+        : '<button class="oe-ai-accept" data-oe-act="scribe-accept:' + kind + ":" + idx + '">' + ms("add") + "Accept</button>") +
       "</div>";
+  }
+  // A suggestion group: header (with an optional "Accept all" for sections where accepting every row is
+  // meaningful — investigations, treatment, corrections; NOT the differential or the single provisional).
+  function aiGroup(title, rowsHtml, acceptAllKind, count) {
+    return '<div class="oe-ai-group"><div class="oe-ai-ghead"><h4>' + title + "</h4>" +
+      (acceptAllKind && count > 1 ? '<button class="oe-ai-acceptall" data-oe-act="scribe-acceptall:' + acceptAllKind + '">' + ms("done_all") + "Accept all</button>" : "") +
+      "</div>" + rowsHtml + "</div>";
+  }
+  function correctionLabel(c) { return c.type === "spelling" ? ('Spelling: "' + c.from + '" to "' + c.to + '"') : c.issue; }
+  function correctionSub(c) {
+    if (c.type === "spelling") return "in " + fieldLabel(c.field);
+    return "Move to " + fieldLabel(c.targetField) + ': "' + String(c.from).replace(/\n/g, " / ").slice(0, 60) + '"';
   }
   function suggestionsPanel(st) {
     var s = st.scribeSuggestions; if (!s) return "";
     var body = "";
-    if (s.provisionalDx) body += '<div class="oe-ai-group"><h4>Provisional diagnosis</h4>' + scribeRow("dx", 0, s.provisionalDx, "", !!s.acceptedDx) + "</div>";
-    if (s.ddx && s.ddx.length) body += '<div class="oe-ai-group"><h4>Differential</h4>' + s.ddx.map(function (d, i) { return scribeRow("ddx", i, d.label, d.source, !!(s.acceptedDdx && s.acceptedDdx[i])); }).join("") + "</div>";
-    if (s.investigations && s.investigations.length) body += '<div class="oe-ai-group"><h4>Investigations to consider</h4>' + s.investigations.map(function (d, i) { return scribeRow("inv", i, d.label, d.source, !!(s.acceptedInv && s.acceptedInv[i])); }).join("") + "</div>";
-    if (s.treatment && s.treatment.length) body += '<div class="oe-ai-group"><h4>Management / Treatment</h4>' + s.treatment.map(function (d, i) { return scribeRow("rx", i, d.label, d.source, !!(s.acceptedRx && s.acceptedRx[i])); }).join("") + "</div>";
+    // Must-not-miss red flags first — surfaced only, never accepted or written to the chart.
+    if (s.redFlags && s.redFlags.length) {
+      body += '<div class="oe-ai-redflags">' + ms("warning") + "<div><b>Must-not-miss red flags</b><ul>" +
+        s.redFlags.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div></div>";
+    }
+    if (s.provisionalDx) body += aiGroup("Provisional diagnosis", scribeRow("dx", 0, { label: s.provisionalDx, why: s.provisionalWhy, accepted: !!s.acceptedDx }), null, 1);
+    if (s.ddx && s.ddx.length) body += aiGroup("Differential", s.ddx.map(function (d, i) { return scribeRow("ddx", i, { label: d.label, score: d.score, why: d.why, accepted: !!(s.acceptedDdx && s.acceptedDdx[i]) }); }).join(""), null, s.ddx.length);
+    if (s.investigations && s.investigations.length) body += aiGroup("Investigations to consider", s.investigations.map(function (d, i) { return scribeRow("inv", i, { label: d.label, accepted: !!(s.acceptedInv && s.acceptedInv[i]) }); }).join(""), "inv", s.investigations.length);
+    if (s.treatment && s.treatment.length) body += aiGroup("Management / Treatment", s.treatment.map(function (d, i) { return scribeRow("rx", i, { label: d.label, accepted: !!(s.acceptedRx && s.acceptedRx[i]) }); }).join(""), "rx", s.treatment.length);
+    if (s.corrections && s.corrections.length) body += aiGroup("EMR corrections", s.corrections.map(function (c, i) { return scribeRow("fix", i, { label: correctionLabel(c), why: correctionSub(c), accepted: !!(s.acceptedFix && s.acceptedFix[i]) }); }).join(""), "fix", s.corrections.length);
     if (!body) return "";
-    return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "AI suggestions" +
-      '<span class="oe-tag oe-review">Review before use</span></h3>' + body + "</section>";
+    return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "MaiK suggestions" +
+      '<span class="oe-tag oe-review">Review before use</span></h3>' + body +
+      '<div class="oe-ai-disc">' + ms("info") +
+      "<span>Decision support only. Provisional and advisory; not a substitute for clinical judgement. Nothing is saved until you Accept and Save. Verify doses, contraindications and local protocol.</span></div>" +
+      "</section>";
   }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
@@ -459,6 +486,7 @@
     if (cmd === "voice-stop") return stopVoice();
     if (cmd === "vlang") { st.voiceLang = arg; if (st.voiceOn) { stopVoice(); } else { paint(); } return; }
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
+    if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "consult-er") return consultToER();
   }
@@ -660,7 +688,7 @@
       var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = true; });
       S.f = f;
       var d = DX._differential() || {};
-      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, inv: r.inv || [] }; });
+      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, inv: r.inv || [], reason: r.reason || "", red: r.red || [] }; });
     } catch (e) { return []; } finally { S.f = savedF; }
   }
   // Grounding options for SMD_SCRIBEGROUND.ground(): extract findings from the transcript
@@ -695,6 +723,42 @@
     return parts.filter(function (x) { return x && String(x).trim(); }).map(function (x) { return String(x).trim(); }).join(". ");
   }
 
+  // Clear medical-term misspellings (NOT real words, so replacement is safe). Deliberately small and
+  // conservative — a doctor's shorthand must never be "corrected" into something wrong.
+  var MED_TYPOS = {
+    diabetis: "diabetes", diabetese: "diabetes", hypertention: "hypertension", hypertenstion: "hypertension",
+    pancreatits: "pancreatitis", pnuemonia: "pneumonia", astma: "asthma", jaundince: "jaundice",
+    vomitting: "vomiting", breathlessnes: "breathlessness", headche: "headache", feaver: "fever",
+    tuberculosos: "tuberculosis", ceizure: "seizure", palpitaion: "palpitation", giddyness: "giddiness"
+  };
+  function rxLike(s) { return /\b\d+\s*mg\b|\b(tab|cap|inj|tablet|capsule|syrup|syp)\b|\b(bd|od|tds|tid|qid|q\d+h|hs|sos|stat)\b/i.test(s); }
+  function substanceLike(s) { return /\b(alcohol|alcoholic|smoking|smoker|tobacco|cigarette|beedi|bidi|gutka|chewing tobacco)\b/i.test(s); }
+  // PURE: deterministic EMR-hygiene checks over the entered assessment. Conservative (high-confidence
+  // patterns only) so it never nags on legitimate text. Returns correction objects; NOTHING is applied
+  // until the doctor taps Accept on that row. Two kinds: "misplaced" (content that belongs in another
+  // field -> accept moves it) and "spelling" (a clear medical typo -> accept replaces it in place).
+  function emrCorrections(v) {
+    v = v || {}; var out = [];
+    // 1) Prescription-looking text sitting in the Diagnosis field -> Management plan.
+    var dxLines = String(v.provisional_diagnosis || "").split("\n").filter(function (l) { return l.trim(); });
+    var rxInDx = dxLines.filter(rxLike);
+    if (rxInDx.length) out.push({ type: "misplaced", field: "provisional_diagnosis", targetField: "management_plan",
+      issue: "Looks like a prescription in the Diagnosis field", from: rxInDx.join("\n"), fromLines: rxInDx });
+    // 2) Substance/social history sitting in the Chief complaint field -> Personal history (habits).
+    var ccLines = String(v.Chief_complaints_duration || "").split("\n").filter(function (l) { return l.trim(); });
+    var subInCc = ccLines.filter(substanceLike);
+    if (subInCc.length) out.push({ type: "misplaced", field: "Chief_complaints_duration", targetField: "Habitat_addiction_others",
+      issue: "Substance/social history in the Complaint field", from: subInCc.join("\n"), fromLines: subInCc });
+    // 3) Clear medical-term spelling fixes across the narrative fields.
+    ["Chief_complaints_duration", "History_present_illness", "History_past_illness", "provisional_diagnosis", "management_plan"].forEach(function (fld) {
+      var txt = String(v[fld] || ""); if (!txt) return;
+      Object.keys(MED_TYPOS).forEach(function (bad) {
+        if (new RegExp("\\b" + bad + "\\b", "i").test(txt)) out.push({ type: "spelling", field: fld, issue: "Spelling", from: bad, to: MED_TYPOS[bad] });
+      });
+    });
+    return out;
+  }
+
   // PURE: a disease-treatment JSON (kb/treatments/<id>.json) -> Rx lines. Picks the highest-precedence
   // recommendation, then its drug regimens (composition — dose route freq) and up to 4 non-drug steps.
   function treatmentLines(tj) {
@@ -719,6 +783,13 @@
     return (diff || []).slice().sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
   }
 
+  // Keep surfaced/accepted clinical text app-clean: em-dash -> comma (sentence separator), en-dash ->
+  // hyphen (number ranges like 70-90), arrow -> "to". Drug-name hyphens (piperacillin-tazobactam) are
+  // untouched. Applied to everything MaiK shows AND to what Accept folds into the chart, so no em-dash
+  // ever reaches GHIS.
+  function cleanClinical(s) {
+    return String(s == null ? "" : s).replace(/\s*—\s*/g, ", ").replace(/–/g, "-").replace(/\s*→\s*/g, " to ").replace(/\s+,/g, ",").replace(/\s{2,}/g, " ").trim();
+  }
   // PURE: engine differential (+ treatments keyed by dx id) -> the review-panel model.
   // Dx = provisional + differential (with scores); Mx = deduped investigation workup; Rx = drug
   // regimens + management steps for the TOP-2 working diagnoses (deduped, case-insensitive).
@@ -726,12 +797,13 @@
     diff = diff || []; treatMap = treatMap || {};
     var top = diff.slice(0, 6);
     var provisionalDx = top.length ? top[0].dx : "";
-    var ddx = top.slice(1).map(function (r) { return { label: r.dx + (r.score != null ? " (" + Math.round(r.score) + ")" : ""), source: "engine" }; });
+    var provisionalWhy = top.length ? cleanClinical(top[0].reason || "") : "";
+    var ddx = top.slice(1).map(function (r) { return { label: r.dx, dx: r.dx, score: r.score, source: "engine", why: cleanClinical(r.reason || "") }; });
     var invSeen = {}, investigations = [];
     top.forEach(function (r) {
       (r.inv || []).forEach(function (ix) {
         var k = String(ix).toLowerCase();
-        if (ix && !invSeen[k]) { invSeen[k] = 1; investigations.push({ label: ix, source: "engine" }); }
+        if (ix && !invSeen[k]) { invSeen[k] = 1; investigations.push({ label: cleanClinical(ix), source: "engine" }); }
       });
     });
     var rxSeen = {}, treatment = [];
@@ -739,10 +811,18 @@
       var t = treatMap[r.id]; if (!t) return;
       (t.rx || []).concat(t.steps || []).forEach(function (line) {
         var k = String(line).toLowerCase();
-        if (line && !rxSeen[k]) { rxSeen[k] = 1; treatment.push({ label: line, source: "engine", dx: r.dx }); }
+        if (line && !rxSeen[k]) { rxSeen[k] = 1; treatment.push({ label: cleanClinical(line), source: "engine", dx: r.dx }); }
       });
     });
-    return { provisionalDx: provisionalDx, ddx: ddx, investigations: investigations, treatment: treatment };
+    // Must-not-miss red flags across the leading differentials (deduped) — surfaced, never accepted/written.
+    var redSeen = {}, redFlags = [];
+    top.slice(0, 4).forEach(function (r) {
+      (r.red || []).forEach(function (rf) {
+        var k = String(rf).toLowerCase();
+        if (rf && !redSeen[k]) { redSeen[k] = 1; redFlags.push(cleanClinical(rf)); }
+      });
+    });
+    return { provisionalDx: provisionalDx, provisionalWhy: provisionalWhy, ddx: ddx, investigations: investigations, treatment: treatment, redFlags: redFlags };
   }
 
   // Fetch a STATIC disease-treatment file (no PHI). Tries the id verbatim then upper/lower-case
@@ -790,8 +870,9 @@
       var treatMap = {}; loaded.forEach(function (x) { if (x.t) treatMap[x.id] = x.t; });
       var sg = buildMaikSuggestions(diff, treatMap);
       st.maikBusy = false;
-      st.scribeSuggestions = { provisionalDx: sg.provisionalDx, ddx: sg.ddx, investigations: sg.investigations, treatment: sg.treatment,
-        acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, source: "maik" };
+      st.scribeSuggestions = { provisionalDx: sg.provisionalDx, provisionalWhy: sg.provisionalWhy, ddx: sg.ddx,
+        investigations: sg.investigations, treatment: sg.treatment, redFlags: sg.redFlags, corrections: emrCorrections(v),
+        acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
       st.scribeStats = { filled: 0, suggestions: (sg.provisionalDx ? 1 : 0) + sg.ddx.length + sg.investigations.length + sg.treatment.length };
       paint();
     }).catch(function () {
@@ -853,24 +934,57 @@
 
   // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
   // draft; every other suggestion stays untouched until its own Accept is tapped.
-  function scribeAccept(kind, idx) {
-    var s = st.scribeSuggestions; if (!s) return;
+  function scribeAccept(kind, idx) { if (scribeAcceptOne(kind, idx)) paint(); }
+  // Apply ONE accepted row into the assessment. NO repaint (accept-all batches then paints once).
+  // Returns true if it changed state. Every path folds into st.assessVals only — never GHIS directly.
+  function scribeAcceptOne(kind, idx) {
+    var s = st.scribeSuggestions; if (!s) return false;
     if (kind === "dx" || kind === "ddx") {
-      var label = kind === "dx" ? s.provisionalDx : (s.ddx[idx] && s.ddx[idx].label);
-      if (!label) return;
-      var m = _voiceMerge(st.assessVals, st.assessTouched, [{ field: "provisionalDx", value: label, applied: true }]);
+      var name = kind === "dx" ? s.provisionalDx : (s.ddx[idx] && (s.ddx[idx].dx || s.ddx[idx].label));   // clean name, not "name (score)"
+      if (!name) return false;
+      var m = _voiceMerge(st.assessVals, st.assessTouched, [{ field: "provisionalDx", value: name, applied: true }]);
       st.assessVals = m.vals;
       if (kind === "dx") s.acceptedDx = true; else { s.acceptedDdx = s.acceptedDdx || {}; s.acceptedDdx[idx] = true; }
     } else if (kind === "inv") {
-      var inv = s.investigations[idx]; if (!inv) return;
-      st.invDraft = { service: { id: null, name: inv.label }, diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "", emergency: false, fromSuggestion: true };
+      var inv = s.investigations[idx]; if (!inv) return false;
+      // Ask MaiK folds the workup into the Management plan; the voice-scribe path keeps its order draft.
+      if (s.source === "maik") appendPlan("management_plan", "Ix: " + inv.label);
+      else st.invDraft = { service: { id: null, name: inv.label }, diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "", emergency: false, fromSuggestion: true };
       s.acceptedInv = s.acceptedInv || {}; s.acceptedInv[idx] = true;
     } else if (kind === "rx") {
-      var rx = s.treatment && s.treatment[idx]; if (!rx) return;
+      var rx = s.treatment && s.treatment[idx]; if (!rx) return false;
       appendPlan("management_plan", "Rx: " + rx.label);
       s.acceptedRx = s.acceptedRx || {}; s.acceptedRx[idx] = true;
+    } else if (kind === "fix") {
+      var fx = s.corrections && s.corrections[idx]; if (!fx) return false;
+      applyCorrection(fx);
+      s.acceptedFix = s.acceptedFix || {}; s.acceptedFix[idx] = true;
+    } else return false;
+    return true;
+  }
+  // Accept every not-yet-accepted row in a section (investigations / treatment / corrections), one repaint.
+  function scribeAcceptAll(kind) {
+    var s = st.scribeSuggestions; if (!s) return;
+    var list = kind === "inv" ? s.investigations : kind === "rx" ? s.treatment : kind === "fix" ? s.corrections : null;
+    if (!list) return;
+    var changed = false;
+    for (var i = 0; i < list.length; i++) { if (scribeAcceptOne(kind, i)) changed = true; }
+    if (changed) paint();
+  }
+  // Apply an EMR correction to st.assessVals (spelling = in-place replace; misplaced = move offending
+  // lines from the source field to the target field). Append-only into the target; never clears elsewhere.
+  function applyCorrection(fx) {
+    if (!fx) return;
+    st.assessVals = st.assessVals || {};
+    var cur = st.assessVals[fx.field] || "";
+    if (fx.type === "spelling") {
+      st.assessVals[fx.field] = cur.replace(new RegExp("\\b" + String(fx.from).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "gi"), fx.to);
+    } else {
+      var drop = {}; (fx.fromLines || []).forEach(function (l) { drop[String(l).trim()] = 1; });
+      st.assessVals[fx.field] = cur.split("\n").filter(function (l) { return !drop[l.trim()]; }).join("\n").replace(/\n{3,}/g, "\n\n").replace(/^\s+|\s+$/g, "");
+      appendPlan(fx.targetField, fx.from);
     }
-    paint();
+    st.assessTouched = st.assessTouched || {}; st.assessTouched[fx.field] = true;
   }
   // Append a line into a plan textarea without disturbing what the doctor already typed (dedup on
   // substring, never clears). Marks the field touched so a later voice pass won't overwrite it.
@@ -985,6 +1099,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections };
 })();
