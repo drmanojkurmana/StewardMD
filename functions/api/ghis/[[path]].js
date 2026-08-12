@@ -504,6 +504,9 @@ function extractAssessmentForm(html) {
     if (['submit', 'button', 'image', 'reset', 'file'].indexOf(type) >= 0) continue;
     const val = (tag.match(/\bvalue\s*=\s*["']([^"']*)["']/i) || [])[1] || '';
     if (type === 'radio' || type === 'checkbox') { if (/\bchecked\b/i.test(tag)) out[name] = val; continue; }
+    // ASP.NET renders each checkbox as <input checkbox value=true> + a trailing <input hidden value=false>
+    // of the SAME name. Never let that hidden 'false' clobber a checked box we already recorded as 'true'.
+    if (type === 'hidden' && out[name] !== undefined) continue;
     out[name] = val;
   }
   let ta; const taRe = /<textarea\b([^>]*)>([\s\S]*?)<\/textarea>/gi;
@@ -531,18 +534,22 @@ export async function saveAssessment(env, token, body) {
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
     all[name] = fields[k] == null ? '' : String(fields[k]);   // overlay edits (never the ids/token below)
   });
-  if (body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
-  if (body.patientId) all['assessment.patient_id'] = String(body.patientId);
-  if (body.episodeId) all['assessment.episode_id'] = String(body.episodeId);
+  // The GET form is authoritative for the ids + antiforgery token — the doctor only edits clinical
+  // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
+  // form's real episode/doc id with a stale client value makes GHIS reject the post ("Unable to process").
+  if (!all['assessment.Initial_Assessment_doc_id'] && body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
+  if (!all['assessment.patient_id'] && body.patientId) all['assessment.patient_id'] = String(body.patientId);
+  if (!all['assessment.episode_id'] && body.episodeId) all['assessment.episode_id'] = String(body.episodeId);
   if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
   const p = new URLSearchParams();
   Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
-  // GHIS (ASP.NET) can answer 200 even when it rejects the post, so surface a short, PHI-free snippet of the
-  // reply for diagnosis and only call it saved when the body doesn't look like an error/login page.
+  // GHIS returns a PLAIN STRING at HTTP 200: "Successfully submitted" / "Successfully updated" on
+  // success, else "Unable to process your request !". Key on the success string (the old error-keyword
+  // check let "Unable to process" pass as success, so the app falsely reported "saved").
   const rb = String(r.body || '');
-  const looksBad = /login|log in|error|exception|invalid|not\s*authori|fail/i.test(rb);
-  return r.unauth ? r : { ok: r.status >= 200 && r.status < 300 && !looksBad, status: r.status, resp: rb.slice(0, 160) };
+  const ok = /successfully\s+(submitted|updated)/i.test(rb);
+  return r.unauth ? r : { ok: ok, status: r.status, resp: rb.slice(0, 200) };
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });

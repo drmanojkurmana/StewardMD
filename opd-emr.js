@@ -547,7 +547,7 @@
         var d = res.d;
         if (res.status === 501 || d.error === "emr_write_disabled" || d.error === "assessment_write_not_captured") { toast("This is being set up and is not live yet."); return; }
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
-        if (!res.ok || d.ok === false) { toast("Could not complete the request. Please try again."); return; }
+        if (!res.ok || d.ok === false) { toast(d.resp ? ("GHIS: " + String(d.resp).slice(0, 90)) : "Could not complete the request. Please try again."); return; }
         toast(okMsg);
         if (tl && tl.text) addToTimeline(tl.kind, tl.text);   // mirror this action into the patient's visit summary
         st.invDraft = {}; st.medDraft = {};
