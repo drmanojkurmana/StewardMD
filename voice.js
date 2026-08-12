@@ -88,7 +88,10 @@
   // (antibiotics/vasopressors/organisms/labs/units that are frequently misheard) plus the app's own
   // drug names from window.MEDDRUGS._list. Capped well under Whisper's ~224-token prompt budget so it
   // biases without truncation. Pure hint — the doctor still edits the transcript before import.
-  function buildInitialPrompt() {
+  // LANGUAGE-AWARE: only for English. An English primer forced onto Telugu/Hindi/auto decoding
+  // suppresses the target language (Telugu came out empty/garbled) — so return "" for non-English.
+  function buildInitialPrompt(lang) {
+    if (lang && lang !== "en") return "";
     var seed = [
       "piperacillin-tazobactam", "meropenem", "cefoperazone-sulbactam", "ceftriaxone", "cefepime",
       "amikacin", "gentamicin", "vancomycin", "teicoplanin", "colistin", "polymyxin B", "linezolid",
@@ -129,7 +132,7 @@
       if (whisperAvailable()) {
         try {
           var wstop = window.SMD_NATIVE.transcribeWhisper({
-            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(),
+            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(opts.language || WHISPER_LANG),
             onPartial: opts.onPartial, onFinal: opts.onFinal,
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
@@ -330,44 +333,115 @@
       }
     });
 
-    function setState(state, engine) {
-      if (state === "listening") { recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live"); engEl.textContent = engine ? engine + " · speak now" : ""; }
-      else if (state === "recording") { recBtn.innerHTML = vcIco("stop") + " Recording… tap to stop"; recBtn.classList.add("live"); engEl.textContent = "AI · recording (transcribes when you stop)"; }
-      else if (state === "transcribing") { recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "AI") + " · transcribing"; }
-      else if (state === "downloading") { recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live"); }
-      else if (state === "preparing") { recBtn.innerHTML = vcIco("hourglass") + " Preparing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "") + " · preparing"; }
-      else { recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live"); recording = false; }
+    // ── Honest record→transcribe state machine. Record-mode engines (Clinical Whisper / AI) capture
+    // until the user taps Done, THEN transcribe on-device (seconds) — so we must (a) confirm listening
+    // with a live timer, (b) hard-cap the duration, (c) show a clear "Transcribing… please wait" after
+    // Done instead of snapping to idle, and (d) tell the user when nothing was heard. ──
+    var activeMode = null, elapsed = 0, timerId = null, autoStopId = null, fallbackId = null, txGuardId = null, lastState = "";
+    var MAX_REC_MS = 90000;   // record-mode can never run forever
+    function clearTimers() {
+      if (timerId) clearInterval(timerId); if (autoStopId) clearTimeout(autoStopId);
+      if (fallbackId) clearTimeout(fallbackId); if (txGuardId) clearTimeout(txGuardId);
+      timerId = autoStopId = fallbackId = txGuardId = null;
+    }
+    function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+    function paint(state, engine, note) {
+      lastState = state;
+      if (state === "recording") {
+        recBtn.innerHTML = vcIco("stop") + " Done — tap to transcribe"; recBtn.classList.add("live");
+        engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + " — speak, then tap Done";
+      } else if (state === "listening") {   // stream engines (Fast): text appears live as you speak
+        recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live");
+        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || "On-device") + " · speak now";
+      } else if (state === "transcribing") {
+        recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live");
+        engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device — a few seconds. Please wait…';
+      } else if (state === "downloading") {
+        recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live");
+        engEl.textContent = note || "Downloading the voice model (first use)…";
+      } else if (state === "preparing") {
+        recBtn.innerHTML = vcIco("hourglass") + " Preparing…"; recBtn.classList.remove("live");
+        engEl.textContent = "Getting the on-device model ready…";
+      } else if (state === "empty") {
+        recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
+        engEl.textContent = note || "Didn't catch any speech — tap the mic and try again.";
+      } else {   // idle
+        recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
+        engEl.textContent = (note != null) ? note : "";
+      }
+    }
+    var setState = paint;   // listen()'s onState + other handlers call setState(...)
+    function startRecTimer() {
+      if (timerId || !recording) return;
+      paint("recording");
+      timerId = setInterval(function () { if (!recording) return; elapsed++; paint("recording"); }, 1000);
+      if (!autoStopId) autoStopId = setTimeout(function () { if (recording) finishRecording(); }, MAX_REC_MS);
+    }
+    function stopRecTimer() { if (timerId) { clearInterval(timerId); timerId = null; } if (autoStopId) { clearTimeout(autoStopId); autoStopId = null; } }
+    // Map whatever the native engine reports into our display + timer.
+    function onEngineState(s, engine) {
+      s = String(s || "").toLowerCase();
+      if (/download/.test(s)) { stopRecTimer(); paint("downloading", engine); }
+      else if (/prepar|load|init/.test(s)) { stopRecTimer(); paint("preparing", engine); }
+      else if (/transcrib|process|decod/.test(s)) { stopRecTimer(); paint("transcribing", engine); }
+      else if (/record|listen|captur|speak/.test(s)) { startRecTimer(); }
+    }
+    function finishRecording() {   // user tapped Done, or hit the max-duration cap
+      if (!recording) return;
+      recording = false; stopRecTimer(); if (fallbackId) { clearTimeout(fallbackId); fallbackId = null; }
+      stop();
+      if (activeMode === "record") {
+        paint("transcribing");
+        // safety: if the native transcription never calls back, don't leave the user hanging
+        txGuardId = setTimeout(function () { paint("idle", null, "Transcription took too long — tap the mic to try again."); }, 45000);
+      } else { paint("idle"); }   // stream engines already delivered text live
     }
 
     recBtn.addEventListener("click", function () {
-      if (recording) { recording = false; stop(); setState("idle"); return; }
-      recording = true; base = ta.value ? ta.value.trim() : "";
-      listen({
-        engine: engineMode,                    // "fast" (default, unchanged) | "clinical" (Whisper)
-        language: dictLang,                    // en | auto | te — Clinical uses the multilingual model for non-en
+      if (recording) { finishRecording(); return; }
+      base = ta.value ? ta.value.trim() : "";
+      recording = true; activeMode = null; elapsed = 0; clearTimers();
+      paint(engineMode === "clinical" ? "preparing" : "listening", engineMode === "clinical" ? "Clinical (on-device)" : "");
+      var handle = listen({
+        engine: engineMode,                    // "fast" (stream) | "clinical" (Whisper, record→transcribe)
+        language: dictLang,                    // en | auto | hi | te
         onPartial: function (t) { ta.value = (base ? base + " " : "") + t; refreshExtract(); },
-        onFinal: function (t) { if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; } refreshExtract(); recording = false; setState("idle"); },
-        onDownloadProgress: function (p) { engEl.textContent = "Downloading model… " + Math.round((p || 0) * 100) + "%"; },
+        onFinal: function (t) {
+          clearTimers(); recording = false;
+          t = t ? String(t).trim() : "";
+          if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; refreshExtract(); paint("idle", null, ""); }
+          else { refreshExtract(); paint("empty"); }
+        },
+        onDownloadProgress: function (p) { paint("downloading", null, "Downloading voice model… " + Math.round((p || 0) * 100) + "%"); },
         onError: function (err) {
-          recording = false; setState("idle");
+          clearTimers(); recording = false;
           if (err === "clinical-unavailable") {
-            engEl.textContent = "Clinical Dictation unavailable — switched to Fast. Tap to speak.";
             engineMode = "fast";
             [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "fast"); });
-            return;
+            paint("idle", null, "On-device Clinical model isn't ready — switched to Fast. Tap to speak."); return;
           }
-          engEl.textContent =
-            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone, then tap to speak." :
-            // BUG-12: give the AVAudioSession/engine failure an actionable message instead of the raw code.
-            (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check microphone access in Settings, close other apps using the mic, then tap to try again." :
-            err === "model-download-failed" ? "Model download failed — check your connection and tap to retry." :
-            (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable — tap to re-download." :
-            (err === "insufficient-storage" || err === "low-memory") ? "Not enough free space/memory for the voice model. Free up some space and try again, or use Fast mode." :
+          paint("idle", null,
+            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone." :
+            (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check mic access, close other mic apps, then tap to try again." :
+            err === "model-download-failed" ? "Model download failed — retry, or download it in Settings ▸ Voice models." :
+            (err === "model-corrupted" || err === "model-missing") ? "Voice model not on device — download it in Settings ▸ Voice models, then try again." :
+            (err === "insufficient-storage" || err === "low-memory") ? "Not enough space/memory for the voice model. Free space, or use Fast mode." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
-            "Couldn't capture audio — tap to try again.";
+            "Couldn't capture audio — tap to try again.");
         },
-        onState: setState
+        onState: onEngineState
       });
+      activeMode = handle && handle.mode;   // 'record' (Clinical/AI) | 'stream' (Fast)
+      if (!handle) { recording = false; return; }
+      if (activeMode === "stream") paint("listening", handle.engine);
+      else if (activeMode === "record") {
+        // Record mode: if the model is already installed the native side begins capturing immediately.
+        // A short fallback guarantees a visible "Recording" + timer even if the engine emits no state
+        // (unless a download/prepare state has taken over).
+        fallbackId = setTimeout(function () {
+          if (recording && !timerId && lastState !== "downloading" && lastState !== "transcribing") startRecTimer();
+        }, 2000);
+      }
     });
 
     extractBtn.addEventListener("click", function () {
@@ -464,7 +538,11 @@
       ".smdv-rec{width:100%;border:none;border-radius:14px;background:var(--teal,#0f766e);color:#fff;font:800 15px var(--sans);padding:15px;cursor:pointer;margin-bottom:8px}",
       ".smdv-rec.live{background:#b91c1c;animation:smdvpulse 1.3s infinite}",
       "@keyframes smdvpulse{0%,100%{box-shadow:0 0 0 0 rgba(185,28,28,.5)}50%{box-shadow:0 0 0 8px rgba(185,28,28,0)}}",
-      ".smdv-eng{font:600 11.5px var(--sans);color:var(--slate-soft,#64748b);text-align:center;min-height:15px;margin-bottom:8px}",
+      ".smdv-eng{font:600 11.5px var(--sans);color:var(--slate-soft,#64748b);text-align:center;min-height:15px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}",
+      ".smdv-dot{width:9px;height:9px;border-radius:999px;background:#e5484d;display:inline-block;animation:smdvpulse 1.1s ease-in-out infinite}",
+      "@keyframes smdvpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}",
+      ".smdv-spin{width:12px;height:12px;border-radius:999px;border:2px solid var(--line,#cbd5e1);border-top-color:var(--teal,#0f766e);display:inline-block;animation:smdvspin .8s linear infinite}",
+      "@keyframes smdvspin{to{transform:rotate(360deg)}}",
       ".smdv-ta{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e2e8f0);border-radius:12px;padding:11px 13px;font:500 14px/1.5 var(--sans);background:var(--panel,#fff);color:var(--ink,#0f172a);resize:vertical;margin-bottom:8px}",
       ".smdv-disc{font:500 11px/1.5 var(--sans);color:var(--slate-soft,#64748b);margin-bottom:12px}",
       ".smdv-extract{width:100%;border:1.5px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 14px var(--sans);padding:13px;border-radius:12px;cursor:pointer}",
