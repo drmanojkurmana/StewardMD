@@ -353,7 +353,7 @@
     if (s.ddx && s.ddx.length) body += aiGroup("Differential", s.ddx.map(function (d, i) { return scribeRow("ddx", i, { label: d.label, score: d.score, why: d.why, accepted: !!(s.acceptedDdx && s.acceptedDdx[i]) }); }).join(""), null, s.ddx.length);
     if (s.investigations && s.investigations.length) body += aiGroup("Investigations to consider", s.investigations.map(function (d, i) { return scribeRow("inv", i, { label: d.label, accepted: !!(s.acceptedInv && s.acceptedInv[i]) }); }).join(""), "inv", s.investigations.length);
     if (s.treatment && s.treatment.length) body += aiGroup("Management / Treatment", s.treatment.map(function (d, i) { return scribeRow("rx", i, { label: d.label, accepted: !!(s.acceptedRx && s.acceptedRx[i]) }); }).join(""), "rx", s.treatment.length);
-    if (s.corrections && s.corrections.length) body += aiGroup("EMR corrections", s.corrections.map(function (c, i) { return scribeRow("fix", i, { label: correctionLabel(c), why: correctionSub(c), accepted: !!(s.acceptedFix && s.acceptedFix[i]) }); }).join(""), "fix", s.corrections.length);
+    if (s.corrections && s.corrections.length) body += aiGroup("EMR corrections", s.corrections.map(function (c, i) { return scribeRow("fix", i, { label: correctionLabel(c), why: correctionSub(c), accepted: !!(s.acceptedFix && s.acceptedFix[i]) }); }).join(""), null, s.corrections.length);
     if (!body) return "";
     return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "MaiK suggestions" +
       '<span class="oe-tag oe-review">Review before use</span></h3>' + body +
@@ -371,16 +371,23 @@
     ASSESS_SCHEMA.forEach(function (sec) { sec.f.forEach(function (f) { if (f.r) { reqAll++; if (assessGet(vals, f)) reqDone++; } }); });
     var done = reqDone >= reqAll;
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
+    // Ask MaiK: its own glowing AI banner (Option C), separate from the save actions.
+    var maikCta = (maikOn() && G.DX) ?
+      '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
+        '<span class="oe-maik-glow" aria-hidden="true"></span>' +
+        '<span class="oe-maik-ico">' + ms(st.maikBusy ? "hourglass_top" : "auto_awesome") + "</span>" +
+        '<span class="oe-maik-txt"><b>' + (st.maikBusy ? "MaiK is thinking" : "Ask MaiK") + "</b>" +
+        "<span>" + (st.maikBusy ? "Reading your notes" : "Diagnosis, investigations &amp; treatment from your notes") + "</span></span>" +
+      "</button>" : "";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
-      (maikOn() && G.DX ? '<button class="oe-btn ghost" data-oe-act="assess-maik" title="On-device suggestions: diagnosis, investigations and treatment from the notes"' + (st.maikBusy ? " disabled" : "") + ">" + ms(st.maikBusy ? "hourglass_top" : "auto_awesome") + (st.maikBusy ? "Thinking…" : "Ask MaiK") + "</button>" : "") +
-      '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save the blank assessment">' + ms("delete_sweep") + "Clear</button>" +
-      '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
-    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar + (st.savedConsult ? postConsultPanel() : "");
+      '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
+      '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button></div>";
+    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
   function postConsultPanel() {
-    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to GHIS Initial Assessment. Close the consult, or send to Emergency.</div>" +
+    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Close the consult, or send to Emergency.</div>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" aria-label="Swipe to close consult"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
@@ -619,16 +626,16 @@
       { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
   }
   function submitAssessment() {
-    if (!confirmed("Save this assessment to GHIS?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to GHIS. It appears under the patient's Initial Assessment (not Clinical notes).",
+    if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
   function clearAssessment() {
-    if (!confirmed("Clear every field and save a blank assessment to GHIS? This wipes the current Initial Assessment.")) return;
+    if (!confirmed("Clear every field and save a blank assessment to " + emrLabel() + "? This wipes the current Initial Assessment.")) return;
     st.assessVals = {}; st.assessTouched = {};
     paint();
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in GHIS.",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared" });
   }
 
@@ -709,6 +716,9 @@
   // engine "M"; the Pro (Vertex) tier is a later phase.
   // ON by default (advisory-only); kill on a device with localStorage.setItem("smd_opd_maik","off").
   function maikOn() { try { if (G.localStorage && localStorage.getItem("smd_opd_maik") === "off") return false; } catch (e) {} return true; }
+  // GHIS is GIMSR's EMR; any other connected EMR (Connect) shows a generic label. Set from openProfile
+  // opts.emrLabel / opts.source; defaults to GHIS.
+  function emrLabel() { return (st && st.emrLabel) ? st.emrLabel : "GHIS"; }
 
   // PURE: the free-text the engine reasons over — only the narrative + comorbid fields the doctor
   // already typed. Positive comorbids are appended as plain words so the engine weighs them.
@@ -731,22 +741,38 @@
     vomitting: "vomiting", breathlessnes: "breathlessness", headche: "headache", feaver: "fever",
     tuberculosos: "tuberculosis", ceizure: "seizure", palpitaion: "palpitation", giddyness: "giddiness"
   };
-  function rxLike(s) { return /\b\d+\s*mg\b|\b(tab|cap|inj|tablet|capsule|syrup|syp)\b|\b(bd|od|tds|tid|qid|q\d+h|hs|sos|stat)\b/i.test(s); }
-  function substanceLike(s) { return /\b(alcohol|alcoholic|smoking|smoker|tobacco|cigarette|beedi|bidi|gutka|chewing tobacco)\b/i.test(s); }
+  // A prescription line: STARTS with a dosage-form word (Tab/Cap/Inj/Syp...) AND carries a dose. Both
+  // conditions are required so we never flag bare "mg" (lab values like "450 mg/dl"), "OD" (right eye),
+  // or "CAP" (community-acquired pneumonia). A line that matches is entirely a prescription, so moving
+  // the whole line is safe (no mixed diagnosis text to evict).
+  function rxLine(line) {
+    var t = String(line).trim();
+    return /^(tab|tablet|cap|capsule|inj|injection|syp|syr|syrup|oint|ointment|neb|supp|susp|drops?)\b\.?\s+\S/i.test(t) && /\b\d+\s*(mg|mcg|ml|g|iu|units?)\b/i.test(t);
+  }
+  // A substance/social HISTORY statement (belongs in Personal history, not the Complaint): a substance
+  // word WITH a consumption/history marker, and NOT reading like an acute presenting complaint.
+  function substanceHistoryLine(line) {
+    var t = String(line);
+    if (!/\b(alcohol|alcoholic|smoking|smoker|tobacco|cigarette|beedi|bidi|gutka)\b/i.test(t)) return false;
+    if (!/\b(h\/o|k\/c\/o|history|chronic|consum|intake|addict|dependen|abuse|since|daily|regularly|\d+\s*(years?|yrs?|pegs?|packs?|ml|cigarettes?))\b/i.test(t)) return false;
+    if (/\b(pain|fever|cough|breathless|dyspn|vomit|nausea|headache|giddi|dizz|swelling|bleed|rash|weakness|loss)\b/i.test(t)) return false;   // reads like a complaint
+    if (/\b(x|since|for)\s*\d+\s*(day|days|hour|hours|hr|hrs|week|weeks)\b/i.test(t)) return false;                                             // acute duration = complaint
+    return true;
+  }
   // PURE: deterministic EMR-hygiene checks over the entered assessment. Conservative (high-confidence
   // patterns only) so it never nags on legitimate text. Returns correction objects; NOTHING is applied
   // until the doctor taps Accept on that row. Two kinds: "misplaced" (content that belongs in another
   // field -> accept moves it) and "spelling" (a clear medical typo -> accept replaces it in place).
   function emrCorrections(v) {
     v = v || {}; var out = [];
-    // 1) Prescription-looking text sitting in the Diagnosis field -> Management plan.
+    // 1) Prescription line sitting in the Diagnosis field -> Management plan.
     var dxLines = String(v.provisional_diagnosis || "").split("\n").filter(function (l) { return l.trim(); });
-    var rxInDx = dxLines.filter(rxLike);
+    var rxInDx = dxLines.filter(rxLine);
     if (rxInDx.length) out.push({ type: "misplaced", field: "provisional_diagnosis", targetField: "management_plan",
       issue: "Looks like a prescription in the Diagnosis field", from: rxInDx.join("\n"), fromLines: rxInDx });
     // 2) Substance/social history sitting in the Chief complaint field -> Personal history (habits).
     var ccLines = String(v.Chief_complaints_duration || "").split("\n").filter(function (l) { return l.trim(); });
-    var subInCc = ccLines.filter(substanceLike);
+    var subInCc = ccLines.filter(substanceHistoryLine);
     if (subInCc.length) out.push({ type: "misplaced", field: "Chief_complaints_duration", targetField: "Habitat_addiction_others",
       issue: "Substance/social history in the Complaint field", from: subInCc.join("\n"), fromLines: subInCc });
     // 3) Clear medical-term spelling fixes across the narrative fields.
@@ -796,9 +822,9 @@
   function buildMaikSuggestions(diff, treatMap) {
     diff = diff || []; treatMap = treatMap || {};
     var top = diff.slice(0, 6);
-    var provisionalDx = top.length ? top[0].dx : "";
+    var provisionalDx = top.length ? cleanClinical(top[0].dx) : "";
     var provisionalWhy = top.length ? cleanClinical(top[0].reason || "") : "";
-    var ddx = top.slice(1).map(function (r) { return { label: r.dx, dx: r.dx, score: r.score, source: "engine", why: cleanClinical(r.reason || "") }; });
+    var ddx = top.slice(1).map(function (r) { var nm = cleanClinical(r.dx); return { label: nm, dx: nm, score: r.score, source: "engine", why: cleanClinical(r.reason || "") }; });
     var invSeen = {}, investigations = [];
     top.forEach(function (r) {
       (r.inv || []).forEach(function (ix) {
@@ -875,6 +901,12 @@
         acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
       st.scribeStats = { filled: 0, suggestions: (sg.provisionalDx ? 1 : 0) + sg.ddx.length + sg.investigations.length + sg.treatment.length };
       paint();
+      // bring the panel into view (the doctor taps from the bottom save bar; the panel renders on top)
+      try {
+        var p = document.querySelector("#smdOpdEmr .oe-ai-panel");
+        var reduce = G.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (p && p.scrollIntoView) p.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      } catch (e) {}
     }).catch(function () {
       if (st !== forPatient) return;
       st.maikBusy = false; toast("MaiK could not load suggestions. Try again."); paint();
@@ -1024,6 +1056,7 @@
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
+    st.emrLabel = opts.emrLabel || (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS");   // GHIS for GIMSR, generic EMR for other connected systems
     st.writeOn = writeFlagOn();
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     paint();

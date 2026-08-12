@@ -153,6 +153,15 @@ test("emrCorrections: clear medical typo -> spelling fix; clean note -> no corre
   assert.deepEqual(OPD._emrCorrections({ Chief_complaints_duration: "fever and cough 3 days" }), [], "clean note yields no false corrections");
 });
 
+test("emrCorrections: NO false positives on CAP / lab values / a smoker who is the complaint", () => {
+  // "CAP" (community-acquired pneumonia), "OD" (right eye), and lab "mg/dl" must NOT be read as a prescription
+  assert.deepEqual(OPD._emrCorrections({ provisional_diagnosis: "s/o CAP, moderate severity; glucose 450 mg/dl; corneal ulcer OD" }).filter((x) => x.type === "misplaced"), [], "CAP / lab value / OD are not prescriptions");
+  // a smoker/alcohol mentioned as the acute presenting complaint must NOT be moved out of the complaint
+  assert.deepEqual(OPD._emrCorrections({ Chief_complaints_duration: "Cough and breathlessness in a chronic smoker x 1 week" }).filter((x) => x.type === "misplaced"), [], "substance-as-complaint is left in place");
+  // but a genuine prescription line (form word + dose) IS flagged
+  assert.ok(OPD._emrCorrections({ provisional_diagnosis: "Cap Amoxicillin 500 mg TDS" }).some((x) => x.type === "misplaced"), "a real prescription line is still caught");
+});
+
 test("_render: red-flags banner + EMR corrections + accept-all render", () => {
   const html = loadRender()._render({
     loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {},
@@ -175,10 +184,20 @@ test("_render: red-flags banner + EMR corrections + accept-all render", () => {
   assert.match(html, /Decision support only/, "advisory disclaimer present");
 });
 
-test("_render: Ask MaiK button shows on the assessment save bar (engine present, write on)", () => {
+test("_render: Ask MaiK is a glowing AI banner; Save label defaults to GHIS", () => {
   const html = loadRender()._render({ loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {} });
   assert.match(html, /Ask MaiK/);
   assert.match(html, /data-oe-act="assess-maik"/);
+  assert.match(html, /oe-maik-cta/, "renders the glowing CTA banner, not a plain save-bar button");
+  assert.match(html, /oe-maik-glow/, "includes the animated glow element");
+  assert.match(html, /Save to GHIS/, "GIMSR default label is GHIS");
+});
+
+test("_render: Save label is generic 'EMR' for a non-GHIS connected source", () => {
+  // openProfile sets st.emrLabel from opts.source ('connect' -> 'EMR'); assessTab renders it from its state
+  const html = loadRender()._render({ loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {}, emrLabel: "EMR" });
+  assert.match(html, /Save to EMR/, "non-GIMSR EMR shows a generic label");
+  assert.ok(!/Save to GHIS/.test(html), "GHIS label not shown for a non-GHIS source");
 });
 
 test("_render: treatment group + per-row rx accept render, review-first", () => {

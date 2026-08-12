@@ -195,6 +195,23 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-ai-disc { display: flex; gap: 6px; align-items: flex-start; font: 400 11px/1.45 var(--q-sans); color: var(--on-surface-variant, #94a3b8); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sc-low); }
 #smdOpdEmr .oe-ai-disc .material-symbols-outlined { font-size: 15px; flex: 0 0 auto; margin-top: 1px; }
 
+/* Ask MaiK — AI call-to-action with an animated Gemini-style multi-colour glow (pure CSS, GPU) */
+#smdOpdEmr .oe-maik-cta { position: relative; display: flex; align-items: center; gap: 13px; width: 100%; padding: 15px 16px; margin: 6px 0 10px; border: 0; border-radius: 16px; cursor: pointer; background: var(--surface); color: var(--on-surface); text-align: left; overflow: hidden; isolation: isolate; animation: oeMaikGlow 6s ease-in-out infinite; }
+#smdOpdEmr .oe-maik-cta:active { transform: scale(.99); }
+#smdOpdEmr .oe-maik-cta[disabled] { cursor: default; }
+#smdOpdEmr .oe-maik-glow { position: absolute; z-index: 0; left: 50%; top: 50%; width: 170%; height: 460%; transform: translate(-50%, -50%) rotate(0deg); background: conic-gradient(#4285f4, #9b72cb, #d96570, #f2a60c, #34a853, #4285f4); animation: oeMaikSpin 5s linear infinite; }
+#smdOpdEmr .oe-maik-cta::after { content: ""; position: absolute; z-index: 1; inset: 2px; border-radius: 14px; background: var(--surface); }
+#smdOpdEmr .oe-maik-ico, #smdOpdEmr .oe-maik-txt { position: relative; z-index: 2; }
+#smdOpdEmr .oe-maik-ico { display: inline-flex; flex: 0 0 auto; }
+#smdOpdEmr .oe-maik-ico .material-symbols-outlined { font-size: 26px; background: linear-gradient(120deg, #4285f4, #9b72cb, #d96570, #f2a60c); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#smdOpdEmr .oe-maik-txt { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+#smdOpdEmr .oe-maik-txt b { font: 700 15px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-maik-txt span { font: 400 11.5px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-maik-cta.busy .oe-maik-glow { animation-duration: 1.5s; }
+@keyframes oeMaikSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes oeMaikGlow { 0%, 100% { box-shadow: 0 2px 18px -6px rgba(66, 133, 244, .55); } 33% { box-shadow: 0 2px 18px -6px rgba(155, 114, 203, .55); } 66% { box-shadow: 0 2px 18px -6px rgba(242, 166, 12, .55); } }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta { animation: none; box-shadow: 0 2px 14px -6px rgba(66, 133, 244, .5); } #smdOpdEmr .oe-maik-glow { animation: none; background: linear-gradient(120deg, #4285f4, #9b72cb, #d96570, #f2a60c); } }
+
 /* per-field dictation mic — dictate into ONE column only (deterministic placement) */
 #smdOpdEmr .oe-inp-wrap { display: flex; align-items: stretch; gap: 6px; }
 #smdOpdEmr .oe-inp-wrap .oe-inp { flex: 1 1 auto; min-width: 0; }
