@@ -128,7 +128,16 @@ async function ghisReq(env, token, method, path, body, extra = {}) {
   // passwords), so surface unauth and let the client re-login — never call the removed refreshFromCreds()
   // (that dangling reference threw a ReferenceError on every session expiry).
   if (res.status === 302) return { unauth: true };
-  return { status: res.status, body: await res.text(), csrf: s.csrf };
+  const setCookie = res.headers.getSetCookie ? res.headers.getSetCookie() : (res.headers.get('set-cookie') ? [res.headers.get('set-cookie')] : []);
+  return { status: res.status, body: await res.text(), csrf: s.csrf, setCookie: setCookie };
+}
+// Overlay any Set-Cookie values onto a cookie string (last-write-wins), so a POST can carry the
+// fresh .AspNetCore.Antiforgery cookie GHIS handed back on the preceding form GET.
+function mergeCookies(base, setCookieArr) {
+  const jar = {};
+  String(base || '').split(/;\s*/).forEach(p => { const i = p.indexOf('='); if (i > 0) jar[p.slice(0, i).trim()] = p.slice(i + 1); });
+  (setCookieArr || []).forEach(c => { const p = String(c).split(';')[0]; const i = p.indexOf('='); if (i > 0) jar[p.slice(0, i).trim()] = p.slice(i + 1).trim(); });
+  return Object.keys(jar).map(k => k + '=' + jar[k]).join('; ');
 }
 
 // ── data endpoints ───────────────────────────────────────────────────────────
@@ -543,7 +552,11 @@ export async function saveAssessment(env, token, body) {
   if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
   const p = new URLSearchParams();
   Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
-  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest' });
+  // The form's __RequestVerificationToken is paired with the .AspNetCore.Antiforgery cookie GHIS set on
+  // THIS GET. Our login-time session cookie lacks it, so send the merged cookie on the POST — else GHIS
+  // fails antiforgery and silently discards the save (200 "Unable to process").
+  const postCookie = mergeCookies(s.cookie, gr.setCookie);
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': postCookie });
   // GHIS returns a PLAIN STRING at HTTP 200: "Successfully submitted" / "Successfully updated" on
   // success, else "Unable to process your request !". Key on the success string (the old error-keyword
   // check let "Unable to process" pass as success, so the app falsely reported "saved").
