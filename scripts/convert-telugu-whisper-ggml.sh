@@ -38,8 +38,8 @@ F16="$WORK/out/ggml-model.bin"; [ -f "$F16" ] || { echo "✗ conversion produced
 
 # 3) build the quantize tool from the bundled whisper.cpp, then quantize f16 -> q8_0 (INT8)
 cmake -S "$WCPP" -B "$WORK/build" -DGGML_METAL=OFF -DWHISPER_BUILD_EXAMPLES=ON >/dev/null
-cmake --build "$WORK/build" --target quantize -j >/dev/null 2>&1 || cmake --build "$WORK/build" -j >/dev/null
-QZ="$(find "$WORK/build" -name quantize -type f | head -1)"; [ -n "$QZ" ] || { echo "✗ quantize tool not built"; exit 1; }
+cmake --build "$WORK/build" --target whisper-quantize -j >/dev/null 2>&1 || cmake --build "$WORK/build" -j >/dev/null
+QZ="$(find "$WORK/build" -name whisper-quantize -type f | head -1)"; [ -n "$QZ" ] || { echo "✗ whisper-quantize tool not built"; exit 1; }
 "$QZ" "$F16" "$WORK/$OUT_NAME" q8_0
 
 # 4) pin values
