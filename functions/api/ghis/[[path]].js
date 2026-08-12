@@ -549,7 +549,9 @@ export async function saveAssessment(env, token, body) {
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
-    all[name] = fields[k] == null ? '' : String(fields[k]);   // overlay edits (never the ids/token below)
+    const v = fields[k] == null ? '' : String(fields[k]);
+    if (v !== '') all[name] = v;   // overlay ONLY fields the doctor actually filled — a blank app field must
+                                   // never wipe GHIS's existing value (the app form loads blank, so most are empty)
   });
   // The GET form is authoritative for the ids + antiforgery token — the doctor only edits clinical
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
@@ -570,8 +572,6 @@ export async function saveAssessment(env, token, body) {
   // check let "Unable to process" pass as success, so the app falsely reported "saved").
   const rb = String(r.body || '');
   const ok = /successfully\s+(submitted|updated)/i.test(rb);
-  // TEMP diagnostic (single line; reply is GHIS's status string, no PHI). doc/epi identify create-vs-update.
-  try { console.log('[assessment-save] ' + JSON.stringify({ status: r.status, reply: rb.slice(0, 60), formDoc: all['assessment.Initial_Assessment_doc_id'], clientEpi: String(body.episodeId || ''), sentEpi: all['assessment.episode_id'], antiforgery: /Antiforgery/i.test(postCookie), fields: Object.keys(all).length })); } catch (e) {}
   return r.unauth ? r : { ok: ok, status: r.status, resp: rb.slice(0, 200) };
 }
 
