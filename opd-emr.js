@@ -1145,7 +1145,15 @@
       language: (st.voiceLang && st.voiceLang !== "auto") ? st.voiceLang : undefined,
       noCloud: true,
       onPartial: function (t) { put(t, false); },
-      onFinal: function (t) { put(t, true); },
+      onFinal: function (t) {
+        var s = String(t || "");
+        // GHIS + MaiK must be English — if the dictation is Telugu/Hindi, translate the final before filling.
+        if (/[ऀ-ॿఀ-౿]/.test(s) && G.SMD_AI && G.SMD_AI.translate) {
+          setVoiceStatus("Translating…");
+          G.SMD_AI.translate(s).then(function (r) { put((r && r.text && !r.error) ? r.text : s, true); setVoiceStatus(""); })
+            .catch(function () { put(s, true); setVoiceStatus(""); });
+        } else { put(s, true); }
+      },
       onError: function () { setVoiceStatus("On-device voice unavailable"); stopFieldMic(); },
       onState: function () {}
     });
