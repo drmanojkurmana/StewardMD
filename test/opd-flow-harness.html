@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPD consult-flow harness (field mic + post-save actions)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };            // smd_opd_emr + _write on
+window.SMD_AMBIENT = { start: function (o) { window.__ambOpts = o; return { stop: function(){}, pause: function(){}, resume: function(){} }; } };
+window.confirm = function () { return true; };                              // auto-confirm save / ER prompts
+window.toast = function (m) { window.__toast = m; };
+// Controllable on-device STT the per-field mic drives. Test triggers onFinal via window.__emitFinal.
+window.__vopts = null;
+window.SMD_VOICE = { listen: function (o) { window.__vopts = o; return { stop: function () { window.__vstopped = true; } }; }, stop: function(){} };
+window.__emitFinal = function (t) { if (window.__vopts && window.__vopts.onFinal) window.__vopts.onFinal(t); };
+// Capture the consult-finish events opd-emr fires for the queue.
+window.__events = [];
+document.addEventListener("smd:consult-end", function (e) { window.__events.push({ type: "end", ticketId: e.detail && e.detail.ticketId }); });
+document.addEventListener("smd:consult-emergency", function (e) { window.__events.push({ type: "emergency", ticketId: e.detail && e.detail.ticketId }); });
+// Mock fetch: profile/assessment loads + assessment-save all succeed.
+window.fetch = function (url) {
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  if (url.indexOf("/assessment") >= 0 && url.indexOf("assessment-save") < 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ fields: [] }); } });
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true }); } });
+};
+window.__ready = false;
+</script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.OPDEMR._toggleFieldMic && window.OPDEMR._consultToER)"></script>
+</body></html>

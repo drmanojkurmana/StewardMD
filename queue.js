@@ -93,7 +93,6 @@
       '<div class="q-cn"><div><h3>' + esc(cur.name || "Patient") + "</h3>" +
         '<div class="q-cn-meta"><span>' + ms("badge") + " MRN: <span class=\"mono\">" + esc(cur.mrnLast4 || "—") + "</span></span></div></div>" +
         '<div class="q-vt">' + vt + "</div></div>" +
-      '<div class="q-notes"><div class="q-notes-l">Quick Notes</div><textarea class="q-notes-in" placeholder="Add consultation notes…"></textarea></div>' +
       '<div class="q-cta">' +
         '<div class="q-swipe" id="qSwipe" role="button" aria-label="Swipe to end consultation">' +
           '<div class="q-swipe-fill"></div>' +
@@ -328,7 +327,7 @@
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
     if (cmd === "finish") act(sid, "/advance");
-    else if (cmd === "start") act(sid, "/status", { ticketId: arg, status: "in_consultation" });
+    else if (cmd === "start") { act(sid, "/status", { ticketId: arg, status: "in_consultation" }); openAssessment(arg); }   // Start consult -> straight into the Initial Assessment (the consult record)
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });
     else if (cmd === "prio") act(sid, "/priority", { ticketId: arg, priority: 2 });
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
@@ -533,6 +532,15 @@
     if (tok) { try { fetch("/api/ghis/logout", { method: "POST", headers: { "Authorization": "Bearer " + tok }, credentials: "include" }).catch(function () {}); } catch (e) {} }
     open(st.openOpts);   // ghisToken now null -> the GHIS login gate shows again
   }
+
+  // Bridge from the EMR overlay (opd-emr.js): after a GHIS save the doctor finishes the consult
+  // from inside the assessment. The EMR owns no queue session, so it fires a DOM event we act on here.
+  try {
+    document.addEventListener("smd:consult-end", function () { try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} });
+    document.addEventListener("smd:consult-emergency", function (e) {
+      try { if (!st.session) return; var tid = e && e.detail && e.detail.ticketId; if (tid) act(st.session.id, "/priority", { ticketId: tid, priority: 2 }); act(st.session.id, "/advance"); } catch (x) {}
+    });
+  } catch (e) {}
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st,
     // Live filter of the queue timeline — updates ONLY the rows container so the search input
