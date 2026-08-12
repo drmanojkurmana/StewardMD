@@ -259,6 +259,7 @@
         kindSel +
         '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
+        '<div class="smdv-diag" id="smdvDiag"></div>' +
         '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
         '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
         '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? vcIco("check") + " Use this text" : "Extract &amp; fill") + '</button>' +
@@ -284,8 +285,21 @@
     var reviewEl = root.querySelector("#smdvReview");
     var kind = target === "icu" ? "monitor" : "reasoning";
     var engineMode = "fast";                 // Fast is always the default; only changes if the user picks Clinical
-    var dictLang = "en";                     // Clinical dictation language: en | auto | te (Telugu)
+    var dictLang = "en";                     // Clinical dictation language: en | auto | hi | te
     var recording = false, base = "";
+    // Diagnostic line — shows exactly which engine/tier/model/language will run, so device
+    // logs & screenshots pin down any remaining native issue at a glance.
+    var diagEl = root.querySelector("#smdvDiag");
+    function diagText() {
+      if (engineMode === "clinical" && whisperPluginPresent())
+        return "Clinical · " + (tiersFlagOn() ? voiceTier() : "legacy") + " · " + whisperModel(dictLang) + " · " + dictLang;
+      if (window.SMD_NATIVE && window.SMD_NATIVE.transcribe) return "Fast · on-device STT · " + dictLang;
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SR && !isIOS()) return "Fast · browser STT";
+      return "AI · server (Gemini)";
+    }
+    function updateDiag() { if (diagEl) diagEl.textContent = diagText(); }
+    updateDiag();
 
     function refreshExtract() { extractBtn.disabled = !ta.value.trim(); }
     ta.addEventListener("input", function () { base = ta.value; refreshExtract(); });
@@ -331,6 +345,7 @@
         try { localStorage.setItem("smd_voice_tier", tr); } catch (e) {}
         [].forEach.call(root.querySelectorAll(".smdv-tier"), function (x) { x.classList.toggle("on", x === b); });
       }
+      if (mm || lg || tr) updateDiag();   // reflect the new engine/language/tier in the diagnostic line
     });
 
     // ── Honest record→transcribe state machine. Record-mode engines (Clinical Whisper / AI) capture
@@ -543,6 +558,7 @@
       "@keyframes smdvpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}",
       ".smdv-spin{width:12px;height:12px;border-radius:999px;border:2px solid var(--line,#cbd5e1);border-top-color:var(--teal,#0f766e);display:inline-block;animation:smdvspin .8s linear infinite}",
       "@keyframes smdvspin{to{transform:rotate(360deg)}}",
+      ".smdv-diag{font:700 10.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;color:var(--slate-soft,#94a3b8);text-align:center;margin:-2px 0 8px;opacity:.85}",
       ".smdv-ta{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e2e8f0);border-radius:12px;padding:11px 13px;font:500 14px/1.5 var(--sans);background:var(--panel,#fff);color:var(--ink,#0f172a);resize:vertical;margin-bottom:8px}",
       ".smdv-disc{font:500 11px/1.5 var(--sans);color:var(--slate-soft,#64748b);margin-bottom:12px}",
       ".smdv-extract{width:100%;border:1.5px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 14px var(--sans);padding:13px;border-radius:12px;cursor:pointer}",
