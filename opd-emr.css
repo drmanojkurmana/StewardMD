@@ -176,3 +176,25 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-ai-row .oe-btn.sm { flex: 0 0 auto; padding: 7px 12px; font-size: 12.5px; background: var(--primary); color: var(--on-primary); }
 #smdOpdEmr .oe-ai-added { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; font: 700 12.5px var(--q-sans); color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-ai-added .material-symbols-outlined { font-size: 18px; }
+
+/* per-field dictation mic — dictate into ONE column only (deterministic placement) */
+#smdOpdEmr .oe-inp-wrap { display: flex; align-items: stretch; gap: 6px; }
+#smdOpdEmr .oe-inp-wrap .oe-inp { flex: 1 1 auto; min-width: 0; }
+#smdOpdEmr .oe-fmic { flex: 0 0 auto; width: 40px; min-height: 42px; border: 1px solid var(--outline-variant); background: var(--surface); color: var(--primary); border-radius: 10px; display: grid; place-items: center; cursor: pointer; }
+#smdOpdEmr .oe-fmic .material-symbols-outlined { font-size: 20px; }
+#smdOpdEmr .oe-fmic:hover { background: var(--sc-high); }
+#smdOpdEmr .oe-fmic.on { background: var(--error); color: var(--on-error); border-color: var(--error); animation: oe-fmic-pulse 1.2s ease-in-out infinite; }
+@keyframes oe-fmic-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 45%, transparent); } 50% { box-shadow: 0 0 0 6px transparent; } }
+
+/* post-save consult actions: swipe to close, or red button to send to Emergency (ER) */
+#smdOpdEmr .oe-postsave { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; padding: 16px 14px; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 16px; box-shadow: 0 -3px 14px rgba(20, 32, 43, .08); }
+#smdOpdEmr .oe-postsave-msg { display: flex; align-items: center; gap: 8px; font: 600 13px var(--q-sans); color: var(--green, #1c7a4a); }
+#smdOpdEmr .oe-postsave-msg .material-symbols-outlined { font-size: 20px; }
+#smdOpdEmr .oe-swipe { position: relative; height: 54px; border-radius: 27px; background: var(--sc-high, #e7eef0); overflow: hidden; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
+#smdOpdEmr .oe-swipe-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: color-mix(in srgb, var(--primary) 22%, transparent); }
+#smdOpdEmr .oe-swipe-txt { position: relative; font: 700 14px var(--q-sans); color: var(--secondary); pointer-events: none; }
+#smdOpdEmr .oe-swipe.armed .oe-swipe-txt { color: var(--primary); }
+#smdOpdEmr .oe-swipe-knob { position: absolute; left: 4px; top: 4px; width: 46px; height: 46px; border-radius: 50%; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; box-shadow: 0 2px 8px rgba(20, 32, 43, .2); }
+#smdOpdEmr .oe-swipe-knob .material-symbols-outlined { font-size: 24px; }
+#smdOpdEmr .oe-btn.er { background: var(--error); color: var(--on-error); }
+#smdOpdEmr .oe-btn.er:hover { background: var(--on-error-container); }

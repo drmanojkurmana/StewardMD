@@ -201,12 +201,19 @@
   function checkBox(f, val) {
     return '<label class="oe-check"><input type="checkbox" data-oe-inp="assess:' + esc(f.n) + '"' + (val === "true" ? " checked" : "") + "><span>" + esc(f.l) + "</span></label>";
   }
+  // per-field dictation mic: fills ONLY this column (dictate-into-field) - deterministic placement,
+  // no LLM guessing. Shown only when a voice engine is present. Number fields keep the first number.
+  function fmicBtn(name) {
+    if (!G.SMD_VOICE) return "";
+    var on = st.fieldMic === name;
+    return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
+  }
   function assessField(f, vals) {
     var val = assessGet(vals, f), id = "assess:" + f.n, re = f.r && !val;
-    if (f.k === "textarea") return fieldRow(f.l, '<textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>", f.r, re);
+    if (f.k === "textarea") return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + "</span>", f.r, re);
     if (f.k === "yesno") return ynRow(f, val);
     var type = f.k === "number" ? "number" : "text";
-    return fieldRow(f.l, '<input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">', f.r, re);
+    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
   }
   // one section = a native <details> accordion (zero-JS collapse; survives typing since onInput doesn't re-render).
   // header shows a required-badge (n/m) or a filled count so the doctor sees at a glance what still needs attention.
@@ -338,7 +345,14 @@
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
-    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar;
+    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar + (st.savedConsult ? postConsultPanel() : "");
+  }
+  // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
+  // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
+  function postConsultPanel() {
+    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to GHIS Initial Assessment. Close the consult, or send to Emergency.</div>" +
+      '<div class="oe-swipe" id="oeSwipe" role="button" aria-label="Swipe to close consult"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
+      '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -361,8 +375,8 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null }; }
-  function paint() { root().innerHTML = _render(st); }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false }; }
+  function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
     try { var el = document.querySelector('#smdOpdEmr [data-oe-inp="' + kind + '-q"]'); if (el) { el.focus(); var v = el.value; el.value = ""; el.value = v; } } catch (e) {}
@@ -440,6 +454,8 @@
     if (cmd === "voice-stop") return stopVoice();
     if (cmd === "vlang") { st.voiceLang = arg; if (st.voiceOn) { stopVoice(); } else { paint(); } return; }
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
+    if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "consult-er") return consultToER();
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
@@ -539,7 +555,7 @@
   }
 
   // Every write: explicit confirm() -> POST. 501 / disabled -> clean "being set up" toast (never a raw error).
-  function postWrite(path, body, okMsg, tl) {
+  function postWrite(path, body, okMsg, tl, onOk) {
     var a = ghisAuth();
     fetch(a.base + path, { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), credentials: "include", body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }); })
@@ -551,6 +567,7 @@
         toast(okMsg);
         if (tl && tl.text) addToTimeline(tl.kind, tl.text);   // mirror this action into the patient's visit summary
         st.invDraft = {}; st.medDraft = {};
+        if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
       })
       .catch(function () { toast("Could not complete the request. Please try again."); });
@@ -571,7 +588,7 @@
   function submitAssessment() {
     if (!confirmed("Save this assessment to GHIS?")) return;
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to GHIS. It appears under the patient's Initial Assessment (not Clinical notes).",
-      { kind: "assessment", text: assessSummary(st.assessVals) });
+      { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
@@ -583,6 +600,7 @@
       var esc2 = (G.CSS && CSS.escape) ? CSS.escape(name) : name;
       var els = document.querySelectorAll('#smdOpdEmr [data-oe-inp="assess:' + esc2 + '"]');
       if (!els.length) return;
+      var acc = els[0].closest && els[0].closest("details.oe-acc"); if (acc && !acc.open) acc.open = true;   // reveal a section the voice just filled (vitals live in a collapsed accordion)
       var wire = st.assessVals[name];
       if (OPD_KIND[name] === "yesno") { [].forEach.call(els, function (r) { r.checked = (r.value === wire); }); tint(els[0]); return; }
       var el = els[0];
@@ -745,8 +763,75 @@
     loadProfile(opts);
     if (opts.tab === "assess") loadAssessment();              // jump straight to the GHIS Initial Assessment
   }
-  function close() { stopVoice(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
+  // ---- per-field dictation (fill ONLY the tapped column) ---------------------------------------
+  var _fieldSession = null;
+  function fmicNode(name) { var l = document.querySelectorAll("#smdOpdEmr .oe-fmic"); for (var i = 0; i < l.length; i++) { if (l[i].getAttribute("data-oe-act") === "fieldmic:" + name) return l[i]; } return null; }
+  function setFmicUI(name, on) { var b = fmicNode(name); if (b) { b.classList.toggle("on", !!on); b.innerHTML = ms(on ? "stop" : "mic"); } }
+  function stopFieldMic() {
+    if (_fieldSession) { try { _fieldSession.stop(); } catch (x) {} _fieldSession = null; }
+    if (st.fieldMic) { setFmicUI(st.fieldMic, false); st.fieldMic = null; }
+  }
+  function coerceFieldValue(name, transcript) {
+    var t = (transcript || "").trim(); if (!t) return null;
+    if (OPD_KIND[name] === "number") { var m = t.match(/-?\d+(\.\d+)?/); return m ? m[0] : null; }   // vitals etc: keep the first number the doctor said
+    return t;
+  }
+  // Dictate into one field only. Uses the device's on-device STT (noCloud: audio never leaves the
+  // phone) and degrades gracefully via voice.js. Never touches any other column - deterministic placement.
+  function toggleFieldMic(name) {
+    if (st.fieldMic === name) { stopFieldMic(); return; }
+    stopFieldMic();                                        // only one field mic at a time
+    if (!G.SMD_VOICE || !G.SMD_VOICE.listen) { toast("On-device voice not available on this build."); return; }
+    st.fieldMic = name; setFmicUI(name, true);
+    function put(transcript, done) {
+      var v = coerceFieldValue(name, transcript);
+      if (v != null) { st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.assessVals[name] = v; st.assessTouched[name] = true; putVoiceDom(name); }
+      if (done) stopFieldMic();
+    }
+    _fieldSession = G.SMD_VOICE.listen({
+      language: (st.voiceLang && st.voiceLang !== "auto") ? st.voiceLang : undefined,
+      noCloud: true,
+      onPartial: function (t) { put(t, false); },
+      onFinal: function (t) { put(t, true); },
+      onError: function () { setVoiceStatus("On-device voice unavailable"); stopFieldMic(); },
+      onState: function () {}
+    });
+    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); }   // listen returned null (no engine)
+  }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor };
+  // ---- finish the consult (shown after a GHIS save) --------------------------------------------
+  // The queue (queue.js) owns the session, so we bridge with a DOM event it listens for.
+  function endConsult() {
+    try { document.dispatchEvent(new CustomEvent("smd:consult-end", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
+    close();
+  }
+  function consultToER() {
+    if (!confirmed("Send this patient to Emergency (ER)?")) return;
+    // 1) best-effort GHIS referral note (skips silently if EMR write is off)
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    var cur = st.assessVals.refered_management_plan || "";
+    if (!/emergency/i.test(cur)) { st.assessVals.refered_management_plan = (cur ? cur + " " : "") + "Refer to Emergency (ER)."; st.assessTouched.refered_management_plan = true; }
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
+    // 2) escalate in the queue + end the consult (works even when the GHIS write is off)
+    try { document.dispatchEvent(new CustomEvent("smd:consult-emergency", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
+    close();
+  }
+  // swipe-to-close: a deliberate drag (0.85 of the track) ends the consult; a short drag snaps back.
+  function initCloseSwipe() {
+    var track = document.getElementById("oeSwipe"), knob = document.getElementById("oeSwipeKnob");
+    if (!track || !knob) return;
+    var fill = track.querySelector(".oe-swipe-fill");
+    var startX = 0, curX = 0, maxX = 0, dragging = false, DONE = 0.85;
+    function px(e) { return e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX; }
+    function move(e) { if (!dragging) return; curX = Math.max(0, Math.min(maxX, px(e) - startX)); knob.style.transform = "translateX(" + curX + "px)"; if (fill) fill.style.width = (curX + knob.offsetWidth + 4) + "px"; track.classList.toggle("armed", !!maxX && curX / maxX > DONE); if (e.cancelable) e.preventDefault(); }
+    function up() { if (!dragging) return; dragging = false; document.removeEventListener("touchmove", move); document.removeEventListener("touchend", up); document.removeEventListener("mousemove", move); document.removeEventListener("mouseup", up); if (maxX && curX / maxX > DONE) { endConsult(); } else { curX = 0; knob.style.transform = "translateX(0)"; if (fill) fill.style.width = ""; track.classList.remove("armed"); } }
+    function down(e) { dragging = true; maxX = track.clientWidth - knob.offsetWidth - 8; startX = px(e) - curX; document.addEventListener("touchmove", move, { passive: false }); document.addEventListener("touchend", up); document.addEventListener("mousemove", move); document.addEventListener("mouseup", up); if (e.cancelable) e.preventDefault(); }
+    knob.addEventListener("touchstart", down, { passive: false });
+    knob.addEventListener("mousedown", down);
+  }
+
+  function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
+
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER };
   if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor };
 })();
