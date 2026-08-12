@@ -425,11 +425,19 @@ function parseAssessmentFields(html) {
   return out;
 }
 // GET the Initial Assessment form (same page getDemographics reads for phone). May 302 to SSO -> unauth.
-async function getAssessmentForm(env, token, patientId) {
+async function getAssessmentForm(env, token, patientId, episodeId) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const epi = String(episodeId || '');
+  // Activate the patient's visit first (same Searchnew as save) so the form loads the EXISTING assessment
+  // instead of a blank one — the doctor edits rather than retypes.
+  if (patientId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(patientId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
   const html = r.body || '';
-  return { fields: parseAssessmentFields(html), raw: htmlToText(html).slice(0, 8000) };
+  // Full field map keyed by BARE name (strip assessment./val.) so the client prefills by schema field name.
+  const all = extractAssessmentForm(html), fields = [];
+  Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^(assessment|val)\./, ''), value: all[k] }); });
+  return { fields: fields, raw: htmlToText(html).slice(0, 8000) };
 }
 // WRITE helper: after a service is picked, GHIS needs its pack-rate id + price, which FilterServices does NOT
 // return. The `addservices?Id=<id>` GET carries them. Its response shape is UNVERIFIED (not captured) — parsed
@@ -664,7 +672,7 @@ export async function onRequest(context) {
     // ---- OPD write-back: safe search/read GETs (NOT gated) ----
     if (seg === 'inv-search')      { const r = await getInvSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'drug-search')     { const r = await getDrugSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
-    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
 
     // ---- OPD write-back: WRITES (P2/P3/P4). Gate FIRST: inert (501, nothing hits GHIS) until QUEUE_EMR_WRITE=1 ----
     const writeGate = () => json({ error: 'emr_write_disabled', detail: 'Set QUEUE_EMR_WRITE=1 server-side only after the payload is verified against a real captured request' }, 501);

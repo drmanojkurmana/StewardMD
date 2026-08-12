@@ -337,6 +337,7 @@
     var done = reqDone >= reqAll;
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
+      '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save the blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
     return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar;
   }
@@ -435,6 +436,7 @@
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
+    if (cmd === "assess-clear") return clearAssessment();
     if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
     if (cmd === "voice-pause") return togglePauseVoice();
     if (cmd === "voice-stop") return stopVoice();
@@ -527,7 +529,7 @@
   function loadAssessment() {
     st.assessLoading = true; st.assessErr = ""; paint();
     var a = ghisAuth();
-    fetch(a.base + "/assessment?patientId=" + encodeURIComponent(st.patient.mrn || ""), { headers: authHeaders(), credentials: "include" })
+    fetch(a.base + "/assessment?patientId=" + encodeURIComponent(st.patient.mrn || "") + "&episodeId=" + encodeURIComponent(st.episodeId || ""), { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }); })
       .then(function (res) {
         st.assessLoading = false; st.assessLoaded = true;
@@ -572,6 +574,14 @@
     if (!confirmed("Save this assessment to GHIS?")) return;
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to GHIS. It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) });
+  }
+  // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
+  function clearAssessment() {
+    if (!confirmed("Clear every field and save a blank assessment to GHIS? This wipes the current Initial Assessment.")) return;
+    st.assessVals = {}; st.assessTouched = {};
+    paint();
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in GHIS.",
+      { kind: "assessment", text: "Assessment cleared" });
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
