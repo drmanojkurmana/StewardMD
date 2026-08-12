@@ -119,7 +119,8 @@
     var refineEveryChunks = opts.refineEveryChunks;
     var onRefine = opts.onRefine;
     // rolling-capture state (Task 5) — see armChunk() below
-    var fullTranscript = "", chunkN = 0, chunkTimer = null, curSession = null, stopping = false;
+    var fullTranscript = "", chunkN = 0, chunkTimer = null, fbTimer = null, curSession = null, stopping = false;
+    var chunkStarted = false, sawDownload = false;   // per-chunk: gate the window timer on real recording
     // Rolling capture starts on clinical (on-device Whisper). If Whisper is unavailable on this
     // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
     // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
@@ -168,6 +169,7 @@
     // transcript exactly as before; onRefine additionally fires per needsRefine(state).
     function armChunk() {
       if (!running || paused || !root || !root.SMD_VOICE) return;
+      chunkStarted = false; sawDownload = false;   // reset per-window recording gate
       // In Auto, once we've seen a chunk's language, route the next chunk to that language's model.
       var reqLang = opts.language || "auto";
       var effLang = (reqLang === "auto" && detectedLang) ? detectedLang : reqLang;
@@ -188,12 +190,36 @@
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
         onError: onChunkError,
-        onState: function (s) { dbg("state", s); if (opts.onState) opts.onState(s); }
+        onState: function (s) {
+          dbg("state", s); if (opts.onState) opts.onState(s);
+          // BUGFIX: only start the 15s window timer once the engine is actually RECORDING. Starting it
+          // immediately (as before) let a first-use model download (252-547MB, >15s) get killed by
+          // closeChunk mid-download → orphaned session that never re-arms ("nothing transcribed").
+          var ss = String(s || "").toLowerCase();
+          if (/download/.test(ss)) sawDownload = true;
+          else if (/record|listen|captur|speak/.test(ss)) startChunkTimer();
+        }
       });
       dbg("armed", "session=" + (curSession ? "yes" : "NULL"));
-      if (curSession) chunkTimer = setTimeout(closeChunk, chunkMs);
+      if (!curSession) return;
+      // Fallback: if the engine never announces a recording state (and isn't downloading), start the
+      // timer anyway so the chunk still closes. While a download is in flight, defer and re-check.
+      function scheduleFallback(delay) {
+        fbTimer = setTimeout(function () {
+          fbTimer = null; if (chunkStarted || !running || paused) return;
+          if (sawDownload) { sawDownload = false; scheduleFallback(20000); } else startChunkTimer();
+        }, delay);
+      }
+      scheduleFallback(2500);
     }
-    function closeChunk() { chunkTimer = null; if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
+    function startChunkTimer() {
+      if (chunkStarted || !running || paused) return;
+      chunkStarted = true;
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      if (chunkTimer) clearTimeout(chunkTimer);
+      chunkTimer = setTimeout(closeChunk, chunkMs);
+    }
+    function closeChunk() { chunkTimer = null; if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; } if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
     // A transient native error (recording-failure/transcription-failure) on one window must not
     // permanently kill the rolling loop: re-arm the next window (mirrors what onFinal does) instead
     // of leaving curSession/chunkTimer dangling with nothing left to call armChunk() again.
@@ -206,7 +232,10 @@
       dbg("chunkError", err, "engine=" + engine);
       curSession = null;
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
-      if (stopping) { running = false; if (opts.onError) opts.onError(err); return; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      // BUGFIX: on Stop, if the flushed chunk ERRORS (vs finalizes), still run the promised final refine
+      // over whatever transcript we have — else teardown()'s willRefine=true leaves the note un-drafted.
+      if (stopping) { running = false; if (onRefine && !paused) { try { onRefine(fullTranscript); } catch (e) {} } if (opts.onError) opts.onError(err); return; }
       // Whisper missing/failing → fall back ONCE to the device's built-in on-device STT so autofill
       // still works (immediately on "clinical-unavailable"; after 2 clinical errors if it fails mid-run).
       if (engine === "clinical" && (err === "clinical-unavailable" || ++clinicalErrs >= 2)) {
@@ -228,6 +257,8 @@
     function onChunkFinal(chunkText) {
       dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
       curSession = null;
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
       errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
       // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
       if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
@@ -251,6 +282,7 @@
       stopping = true;
       if (tmr) { clearTimeout(tmr); tmr = null; }
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
       if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
       var willRefine = !!(curSession && curSession.stop && onRefine && !paused);
       // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and,
@@ -261,7 +293,13 @@
     }
     return {
       stop: teardown,
-      pause: function () { paused = true; if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; } },
+      pause: function () {   // BUGFIX: actually stop the mic on pause (was recording up to a full chunk after)
+        paused = true;
+        if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
+        if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+        if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+        if (curSession && curSession.stop) { try { curSession.stop(); } catch (e) {} }
+      },
       resume: function () { paused = false; if (running && !stopping && !curSession) armChunk(); },
       _tick: tick                                       // exposed for the controller test
     };

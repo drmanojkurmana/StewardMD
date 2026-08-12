@@ -205,6 +205,7 @@
   // no LLM guessing. Shown only when a voice engine is present. Number fields keep the first number.
   function fmicBtn(name) {
     if (!G.SMD_VOICE) return "";
+    if (st.voiceOn || st.voiceProcessing) return "";   // the Voice Consult owns the mic — single-field dictation is disabled while it runs (they shared one global session and stomped each other)
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
@@ -714,7 +715,12 @@
   function assessLLM(transcript) {
     if (!(G.SMD_AI && G.SMD_AI.extract)) return null;
     return G.SMD_AI.extract(transcript, "assessment").then(function (r) {
-      return (r && !r.error && r.fields && Object.keys(r.fields).length) ? { fields: r.fields, confidence: 0.7 } : null;
+      if (!(r && !r.error && r.fields)) return null;
+      // Avoid racing the opd-scribe refine (onRefine → doRefine) over cc/presentHx/pastHx: keep ONLY the
+      // fields opd-scribe does not emit (the doctor's explicit provisional dx / plan). Two async LLM
+      // calls writing the same fields had no ordering guarantee (last write wins).
+      var f = {}; ["provisionalDx", "managementPlan"].forEach(function (k) { if (r.fields[k]) f[k] = r.fields[k]; });
+      return Object.keys(f).length ? { fields: f, confidence: 0.7 } : null;
     }).catch(function () { return null; });
   }
   // Grounding inputs for SMD_SCRIBEGROUND.ground(): the differential/investigations engine adapter is
@@ -1028,8 +1034,11 @@
     if (kind === "dx" || kind === "ddx") {
       var name = kind === "dx" ? s.provisionalDx : (s.ddx[idx] && (s.ddx[idx].dx || s.ddx[idx].label));   // clean name, not "name (score)"
       if (!name) return false;
-      var m = _voiceMerge(st.assessVals, st.assessTouched, [{ field: "provisionalDx", value: name, applied: true }]);
-      st.assessVals = m.vals;
+      // Explicit Accept OVERRIDES the touched-guard: that guard protects against PASSIVE ambient fill,
+      // not a deliberate tap. _voiceMerge would silently drop this to conflicts while the UI shows
+      // "Added" — so force-apply the value and mark it edited.
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      st.assessVals.provisional_diagnosis = name; st.assessTouched.provisional_diagnosis = true;
       if (kind === "dx") s.acceptedDx = true; else { s.acceptedDdx = s.acceptedDdx || {}; s.acceptedDdx[idx] = true; }
     } else if (kind === "inv") {
       var inv = s.investigations[idx]; if (!inv) return false;
@@ -1132,6 +1141,7 @@
   // Dictate into one field only. Uses the device's on-device STT (noCloud: audio never leaves the
   // phone) and degrades gracefully via voice.js. Never touches any other column - deterministic placement.
   function toggleFieldMic(name) {
+    if (st.voiceOn || st.voiceProcessing) { toast("Stop the Voice Consult first to dictate a single field."); return; }
     if (st.fieldMic === name) { stopFieldMic(); return; }
     stopFieldMic();                                        // only one field mic at a time
     if (!G.SMD_VOICE || !G.SMD_VOICE.listen) { toast("On-device voice not available on this build."); return; }
