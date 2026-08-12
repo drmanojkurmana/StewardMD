@@ -562,6 +562,8 @@ export async function saveAssessment(env, token, body) {
   // check let "Unable to process" pass as success, so the app falsely reported "saved").
   const rb = String(r.body || '');
   const ok = /successfully\s+(submitted|updated)/i.test(rb);
+  // TEMP diagnostic (no PHI: reply is GHIS's "Successfully…" / "Unable to process" status string).
+  try { console.log('[assessment-save]', JSON.stringify({ status: r.status, reply: rb.slice(0, 90), antiforgery: /Antiforgery/i.test(postCookie), getSetCookies: (gr.setCookie || []).length, fields: Object.keys(all).length, hasToken: !!all['__RequestVerificationToken'], docSet: !!all['assessment.Initial_Assessment_doc_id'], epiSet: !!all['assessment.episode_id'] })); } catch (e) {}
   return r.unauth ? r : { ok: ok, status: r.status, resp: rb.slice(0, 200) };
 }
 
