@@ -73,15 +73,16 @@
       while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
     })();
 
-    var btn = document.createElement('button');
-    btn.id = 'ghisBtn';
-    btn.className = 'ghis-ward-fab';
-    btn.title = 'GHIS Ward Sync';
-    btn.innerHTML = wIco("hospital") + ' Ward';
-    btn.addEventListener('click', function () { window.openGHIS(); });
-    var sel = window.GHIS_BUTTON_SELECTOR;
-    var host = sel ? document.querySelector(sel) : null;
-    (host || document.body).appendChild(btn);
+    // Ward Sync now lives inside the Home "Hospital" hub tile, so the floating Ward FAB is retired to avoid
+    // a duplicate entry point. Only mounted if a host explicitly opts in via window.GHIS_BUTTON_SELECTOR.
+    var sel = window.GHIS_BUTTON_SELECTOR, host = sel ? document.querySelector(sel) : null;
+    if (host) {
+      var btn = document.createElement('button');
+      btn.id = 'ghisBtn'; btn.className = 'ghis-ward-fab'; btn.title = 'GHIS Ward Sync';
+      btn.innerHTML = wIco("hospital") + ' Ward';
+      btn.addEventListener('click', function () { window.openGHIS(); });
+      host.appendChild(btn);
+    }
 
     initGHIS();
   }
