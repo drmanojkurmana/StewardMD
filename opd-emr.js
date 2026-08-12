@@ -293,25 +293,33 @@
   // N suggestions" readout once a refine pass has landed. Nothing is saved until the doctor taps Save
   // to GHIS (fields) or Accept (suggestions) — this bar only ever starts/stops capture.
   function fmtElapsed(ms) { var s = Math.max(0, Math.floor((ms || 0) / 1000)), m = Math.floor(s / 60); s = s % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
+  // "Voice Consult" panel — a glowing mic orb (breathes while listening), a live transcript box so
+  // the clinician sees words land in real time, language toggle, and pause/stop + a fill readout.
+  // Only ever starts/stops capture; nothing is written until Save to GHIS / Accept.
   function consultBar(st) {
     if (!G.SMD_AMBIENT) return "";
     var on = !!st.voiceOn, paused = !!st.voicePaused, lang = st.voiceLang || "auto";
-    function lb(v, t) {
-      var sel = lang === v;
-      return '<button data-oe-act="vlang:' + v + '" style="border:1px solid var(--outline-variant,#e2e8f0);background:' +
-        (sel ? "var(--primary,#0f766e)" : "transparent") + ';color:' + (sel ? "#fff" : "inherit") +
-        ';font:700 11px inherit;padding:5px 9px;border-radius:8px;cursor:pointer;margin-left:4px">' + t + "</button>";
-    }
+    function lb(v, t) { return '<button class="oe-vc-lang' + (lang === v ? " on" : "") + '" data-oe-act="vlang:' + v + '">' + t + "</button>"; }
+    var langs = '<div class="oe-vc-langs">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</div>";
+    var orbState = !on ? "idle" : (paused ? "paused" : "listening");
+    var status = !on ? "Tap the mic to start" : (paused ? "Paused" : (st.voiceStatus || "Listening…"));
+    var timer = on ? ' <span class="oe-vc-sep">·</span> <span class="oe-vc-timer" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" : "";
+    var tx = st.voiceTranscript || "";
+    var transcript = on ? '<div class="oe-vc-box"><div class="oe-vc-tx" id="oeTranscript">' + (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>" : "";
     var controls = !on
-      ? '<button class="oe-btn" data-oe-act="voice-toggle">' + ms("mic") + "Start consultation</button>"
-      : '<span class="oe-consult-controls">' +
+      ? '<button class="oe-btn primary oe-vc-start" data-oe-act="voice-toggle">' + ms("graphic_eq") + "Start voice consult</button>"
+      : '<div class="oe-vc-controls">' +
           '<button class="oe-btn sm" data-oe-act="voice-pause">' + ms(paused ? "play_arrow" : "pause") + (paused ? "Resume" : "Pause") + "</button>" +
-          '<button class="oe-btn sm danger" data-oe-act="voice-stop">' + ms("stop") + "Stop</button></span>";
-    var stats = st.scribeStats ? (" · " + (st.scribeStats.filled || 0) + " filled · " + (st.scribeStats.suggestions || 0) + " suggestions") : "";
-    return '<div class="oe-voicebar' + (on ? " live" : "") + '">' + controls +
-      (on ? '<span class="oe-consult-timer mono" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" : "") +
-      '<span style="display:inline-flex">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</span>" +
-      '<span class="oe-voice-status" id="oeVoiceStatus">' + esc(st.voiceStatus || "") + stats + "</span></div>";
+          '<button class="oe-btn sm danger" data-oe-act="voice-stop">' + ms("stop") + "Stop</button></div>";
+    var readout = (on && st.scribeStats) ? '<div class="oe-vc-readout"><span class="oe-vc-dot"></span>' + (st.scribeStats.filled || 0) + " fields filled · " + (st.scribeStats.suggestions || 0) + " suggestions</div>" : "";
+    var sub = on ? "" : '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — fields fill as you talk.</div>';
+    return '<div class="oe-vc ' + orbState + (on ? " on" : "") + '">' +
+      '<div class="oe-vc-head"><span class="oe-vc-eyebrow">Voice Consult</span>' + langs + "</div>" +
+      '<button class="oe-vc-orb"' + (on ? "" : ' data-oe-act="voice-toggle"') + ' aria-label="' + (on ? "Listening" : "Start voice consult") + '">' +
+        '<span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
+      '<div class="oe-vc-status"><span id="oeVoiceStatus">' + esc(status) + "</span>" + timer + "</div>" +
+      sub + transcript + controls + readout +
+    "</div>";
   }
   function now() { try { return Date.now(); } catch (e) { return 0; } }
 
@@ -642,6 +650,15 @@
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
   var _amb = null, _elapsedTmr = null, _lastFullTranscript = "";
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
+  // Live transcript into the Voice Consult box (updates the DOM without a full repaint; keeps it scrolled).
+  function setTranscript(t) {
+    st.voiceTranscript = t || "";
+    try {
+      var e = document.getElementById("oeTranscript"); if (!e) return;
+      if (t) e.textContent = t; else e.innerHTML = '<span class="oe-vc-ph">Your words will appear here as you speak…</span>';
+      var box = e.parentNode; if (box && box.scrollHeight) box.scrollTop = box.scrollHeight;
+    } catch (x) {}
+  }
   function tickElapsed() { try { var e = document.getElementById("oeElapsed"); if (e) e.textContent = fmtElapsed(now() - (st.voiceStartedAt || now())); } catch (x) {} }
   function putVoiceDom(name) {
     try {
@@ -938,7 +955,7 @@
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voicePaused = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); _lastFullTranscript = ""; _lastRefinedTranscript = ""; paint();
+    st.voiceOn = true; st.voicePaused = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -947,7 +964,7 @@
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
-      onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; },
+      onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; setTranscript(_lastFullTranscript); },
       onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
       onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "Listening (device dictation)…" : "Listening…") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }

@@ -231,3 +231,36 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-swipe-knob .material-symbols-outlined { font-size: 24px; }
 #smdOpdEmr .oe-btn.er { background: var(--error); color: var(--on-error); }
 #smdOpdEmr .oe-btn.er:hover { background: var(--on-error-container); }
+
+/* ── Voice Consult panel — glowing mic orb + live transcript (MaiK Scribe, OPD) ─────────────── */
+#smdOpdEmr .oe-vc { border: 1px solid var(--outline-variant); border-radius: 20px; padding: 16px 16px 14px; margin: 0 0 14px; text-align: center;
+  background: radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--primary) 12%, var(--surface)) 0%, var(--sc-lowest) 62%); }
+#smdOpdEmr .oe-vc-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#smdOpdEmr .oe-vc-eyebrow { font: 700 11px var(--q-mono, ui-monospace, monospace); letter-spacing: .2em; text-transform: uppercase; color: var(--primary); }
+#smdOpdEmr .oe-vc-langs { display: inline-flex; gap: 4px; }
+#smdOpdEmr .oe-vc-lang { border: 1px solid var(--outline-variant); background: transparent; color: var(--on-surface-variant); font: 700 11px var(--q-sans); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
+#smdOpdEmr .oe-vc-lang.on { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+#smdOpdEmr .oe-vc-orb { position: relative; width: 92px; height: 92px; margin: 14px auto 10px; border: none; border-radius: 999px; display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--primary) 78%, #fff) 0%, var(--primary) 78%);
+  color: var(--on-primary); box-shadow: 0 10px 30px -8px color-mix(in srgb, var(--primary) 70%, transparent); transition: filter .2s, opacity .2s; }
+#smdOpdEmr .oe-vc-orb .material-symbols-outlined { font-size: 36px; position: relative; z-index: 1; }
+#smdOpdEmr .oe-vc.idle .oe-vc-orb { filter: saturate(.85); box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--primary) 55%, transparent); }
+#smdOpdEmr .oe-vc.paused .oe-vc-orb { filter: grayscale(.55); opacity: .72; }
+#smdOpdEmr .oe-vc-aura { position: absolute; inset: 0; border-radius: 999px; border: 2px solid color-mix(in srgb, var(--primary) 60%, transparent); opacity: 0; pointer-events: none; }
+#smdOpdEmr .oe-vc.listening .oe-vc-aura { animation: oeVcBreathe 2.4s ease-out infinite; }
+#smdOpdEmr .oe-vc.listening .oe-vc-aura.d2 { animation-delay: 1.2s; }
+@keyframes oeVcBreathe { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.95); opacity: 0; } }
+#smdOpdEmr .oe-vc-status { font: 700 15px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-vc-timer { font: 600 14px var(--q-mono, ui-monospace, monospace); color: var(--on-surface-variant); }
+#smdOpdEmr .oe-vc-sep { color: var(--outline-variant); }
+#smdOpdEmr .oe-vc-sub { font: 500 12.5px/1.5 var(--q-sans); color: var(--on-surface-variant); margin: 4px auto 0; max-width: 34ch; }
+#smdOpdEmr .oe-vc-box { margin: 13px 0 2px; border: 1px solid var(--outline-variant); border-radius: 13px; background: var(--surface); text-align: left; max-height: 128px; overflow-y: auto; }
+#smdOpdEmr .oe-vc-tx { padding: 12px 14px; font: 500 14px/1.65 var(--q-sans); color: var(--on-surface); white-space: pre-wrap; word-break: break-word; min-height: 46px; }
+#smdOpdEmr .oe-vc-ph { color: var(--on-surface-variant); font-style: italic; }
+#smdOpdEmr .oe-vc-start { margin-top: 14px; width: 100%; }
+#smdOpdEmr .oe-vc-controls { display: flex; gap: 10px; justify-content: center; margin-top: 13px; }
+#smdOpdEmr .oe-vc-controls .oe-btn.sm { flex: 1; max-width: 168px; padding: 11px 14px; font: 700 14px var(--q-sans); background: var(--sc-lowest); color: var(--on-surface); border: 1px solid var(--outline-variant); }
+#smdOpdEmr .oe-vc-controls .oe-btn.sm.danger { background: var(--error-container, #fdecea); color: var(--on-error-container, #b3261e); border-color: transparent; }
+#smdOpdEmr .oe-vc-readout { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 11px; font: 600 12px var(--q-sans); color: var(--on-surface-variant); }
+#smdOpdEmr .oe-vc-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--green, #16a34a); }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-vc.listening .oe-vc-aura { animation: none; opacity: .3; } }
