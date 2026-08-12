@@ -162,7 +162,8 @@
       if (!running || paused || !root || !root.SMD_VOICE) return;
       curSession = root.SMD_VOICE.listen({
         engine: engine,
-        model: opts.model || "base-q5_1",                // multilingual base — Telugu + code-switch
+        model: opts.model,                                // undefined ⇒ SMD_VOICE routes by tier+language
+                                                          // (Telugu → StewardVoice specialist); no hardcoded weak base model
         language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
         noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
