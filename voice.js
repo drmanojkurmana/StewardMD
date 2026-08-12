@@ -77,11 +77,14 @@
     pro: ["small-q8_0", "telugu-small-q8_0"],
     ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0"]
   };
+  // User-facing branding ONLY — never expose the underlying engine/quant names.
   var MODEL_META = {
-    "small-q8_0":          { label: "Whisper Small · multilingual (INT8)", mb: 252 },
-    "telugu-small-q8_0":   { label: "Telugu specialist · Small (INT8)", mb: 252 },
-    "large-v3-turbo-q5_0": { label: "Whisper Large-v3-Turbo (Q5)", mb: 547 }
+    "small-q8_0":          { label: "StewardVoice · Multilingual", tag: "EN · HI · TE", mb: 252 },
+    "telugu-small-q8_0":   { label: "StewardVoice · Telugu", tag: "తెలుగు specialist", mb: 252 },
+    "large-v3-turbo-q5_0": { label: "StewardVoice · Ultra", tag: "EN · HI, highest accuracy", mb: 547 }
   };
+  // Short branded code for the diagnostic line (still hides the real engine).
+  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "base-q5_1": "SV-Lite", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny" };
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
@@ -291,8 +294,10 @@
     // logs & screenshots pin down any remaining native issue at a glance.
     var diagEl = root.querySelector("#smdvDiag");
     function diagText() {
-      if (engineMode === "clinical" && whisperPluginPresent())
-        return "Clinical · " + (tiersFlagOn() ? voiceTier() : "legacy") + " · " + whisperModel(dictLang) + " · " + dictLang;
+      if (engineMode === "clinical" && whisperPluginPresent()) {
+        var mk = whisperModel(dictLang);
+        return "StewardVoice · " + (tiersFlagOn() ? voiceTier() : "lite") + " · " + (MODEL_CODE[mk] || mk) + " · " + dictLang;
+      }
       if (window.SMD_NATIVE && window.SMD_NATIVE.transcribe) return "Fast · on-device STT · " + dictLang;
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (SR && !isIOS()) return "Fast · browser STT";
@@ -577,24 +582,32 @@
       ".smdv-apply:disabled{opacity:.5;cursor:default}",
       "body.dark .smdv-sheet{--panel:#132030;--ink:#e8edf2}",
       "body.dark .smdv-unmatched{background:#0d1b26}",
-      // Settings dashboard (sidebar)
+      // Settings dashboard (sidebar) — glass-card, StewardVoice-branded
       ".smdv-ms{font:600 12.5px var(--sans)}",
-      ".smdv-ms-note{font:600 12px var(--sans);color:var(--slate-soft,#64748b);padding:4px 0}",
-      ".smdv-ms-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}",
-      ".smdv-ms-lbl{color:var(--ink,#14202b)}.smdv-ms-lbl em{color:var(--slate-soft,#64748b);font-style:normal;font-weight:600}",
-      ".smdv-ms-sw{width:40px;height:23px;border-radius:999px;border:none;background:var(--line,#cbd5e1);position:relative;cursor:pointer;flex:none}",
-      ".smdv-ms-sw>span{position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:999px;background:#fff;transition:left .15s}",
-      ".smdv-ms-sw.on{background:var(--teal,#0f766e)}.smdv-ms-sw.on>span{left:19px}",
-      ".smdv-ms-tiers{display:flex;gap:6px;margin-bottom:9px}",
-      ".smdv-ms-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 12px var(--sans);padding:7px;border-radius:9px;cursor:pointer}",
-      ".smdv-ms-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
-      ".smdv-ms-m{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line,#eef2f5)}",
-      ".smdv-ms-mt{display:block;color:var(--ink,#14202b);font:700 12.5px var(--sans)}",
-      ".smdv-ms-mb{display:block;color:var(--slate-soft,#64748b);font:600 11.5px var(--sans);margin-top:1px}",
-      ".smdv-ms-dl,.smdv-ms-del{border:1px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 12px var(--sans);padding:6px 12px;border-radius:9px;cursor:pointer;min-width:74px}",
-      ".smdv-ms-dl:disabled{opacity:.7;cursor:default}",
-      ".smdv-ms-del{border-color:#d99;background:#fdebe1;color:#b5460f}",
-      ".smdv-ms-hint{font:600 11px/1.5 var(--sans);color:var(--slate-soft,#64748b);margin-top:8px}"
+      ".smdv-ms-note{font:600 12px var(--sans);color:var(--slate-soft,#64748b);padding:10px 12px;border:1px dashed var(--line,#cbd5e1);border-radius:12px;text-align:center}",
+      ".smdv-ms-sub{font:600 12px var(--sans);color:var(--slate-soft,#64748b);margin-bottom:10px}.smdv-ms-sub em{font-style:italic;color:var(--slate-soft,#94a3b8)}",
+      ".smdv-ms-tiers{display:flex;gap:6px;margin-bottom:12px}",
+      ".smdv-ms-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--slate,#475569);font:800 11.5px var(--sans);letter-spacing:.03em;padding:7px 6px;border-radius:999px;cursor:pointer;transition:all .15s}",
+      ".smdv-ms-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e);box-shadow:0 4px 16px -4px var(--teal,#0f766e)}",
+      ".smdv-ms-models{display:flex;flex-direction:column;gap:10px}",
+      ".smdv-card{border:1px solid var(--line,#e2e8f0);border-radius:14px;padding:13px;background:linear-gradient(180deg,var(--bg,#f8fafc) 0%,var(--panel,#fff) 100%)}",
+      ".smdv-card.installed{border-color:var(--teal,#0f766e)}",
+      ".smdv-card-top{display:flex;align-items:flex-start;gap:10px}",
+      ".smdv-card-info{flex:1;min-width:0}",
+      ".smdv-card-t{font:700 13.5px var(--sans);color:var(--ink,#0f172a)}",
+      ".smdv-card-s{font:600 11px var(--sans);color:var(--slate-soft,#64748b);margin-top:3px}",
+      ".smdv-card-tag{color:var(--teal,#0f766e);font-weight:700}",
+      ".smdv-st.off{color:#c2410c}.smdv-st.ok{color:var(--teal,#0f766e)}.smdv-st.dl{color:var(--slate,#475569)}",
+      ".smdv-card-btn{flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--teal,#0f766e);cursor:pointer}",
+      ".smdv-card-btn svg{width:18px;height:18px}",
+      ".smdv-card-btn.del{color:#c2410c;border-color:#f0c9b4}",
+      ".smdv-prog{display:flex;align-items:center;gap:9px;margin-top:11px}",
+      ".smdv-pct{font:700 10.5px ui-monospace,Menlo,monospace;color:var(--slate,#475569);background:var(--bg,#f1f5f9);padding:2px 6px;border-radius:6px;min-width:38px;text-align:center}",
+      ".smdv-prog-track{flex:1;height:5px;background:var(--line,#e2e8f0);border-radius:999px;overflow:hidden}",
+      ".smdv-prog-track>i{display:block;height:100%;width:0;background:var(--teal,#0f766e);border-radius:999px;box-shadow:0 0 10px var(--teal,#0f766e);transition:width .25s}",
+      ".smdv-ms-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}",
+      ".smdv-ms-hint{font:600 11px/1.5 var(--sans);color:var(--slate-soft,#64748b)}",
+      ".smdv-ms-off{border:none;background:none;color:var(--slate-soft,#94a3b8);font:700 11px var(--sans);text-decoration:underline;text-underline-offset:2px;cursor:pointer;flex:none}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }
@@ -603,68 +616,83 @@
   // Lets the clinician enable tiers, pick Base/Pro/Ultimate, and DOWNLOAD/DELETE each on-device model
   // with a progress %, so first use doesn't depend on dictating (and never needs a dev console). ──
   function modelSettingsHTML() {
-    if (!whisperPluginPresent()) return '<div class="smdv-ms-note">On-device voice models are available in the iOS app only.</div>';
+    if (!whisperPluginPresent()) return '<div class="smdv-ms-note">On-device StewardVoice models are available in the iOS app only.</div>';
     var on = tiersFlagOn(), tier = voiceTier();
     return '<div class="smdv-ms" data-smdv-ms>' +
-      '<div class="smdv-ms-row"><span class="smdv-ms-lbl">Multilingual tiers <em>(English · Hindi · Telugu)</em></span>' +
-        '<button class="smdv-ms-sw' + (on ? " on" : "") + '" data-smdv-ms-flag role="switch" aria-checked="' + on + '" aria-label="Enable Steward Voice tiers"><span></span></button></div>' +
-      '<div class="smdv-ms-tiers"' + (on ? "" : ' style="opacity:.4;pointer-events:none"') + '>' +
-        ["base", "pro", "ultimate"].map(function (t) { return '<button class="smdv-ms-tier' + (tier === t ? " on" : "") + '" data-smdv-ms-tier="' + t + '">' + t.charAt(0).toUpperCase() + t.slice(1) + "</button>"; }).join("") +
+      '<div class="smdv-ms-sub">Multilingual voice <em>· English · Hindi · Telugu</em></div>' +
+      '<div class="smdv-ms-tiers">' +
+        ["base", "pro", "ultimate"].map(function (t) {
+          return '<button class="smdv-ms-tier' + (on && tier === t ? " on" : "") + '" data-smdv-ms-tier="' + t + '">' + t.charAt(0).toUpperCase() + t.slice(1) + "</button>";
+        }).join("") +
       '</div>' +
       '<div class="smdv-ms-models" data-smdv-ms-models></div>' +
-      '<div class="smdv-ms-hint">Downloads once over Wi-Fi. Telugu routes to the specialist on Pro/Ultimate.</div>' +
+      '<div class="smdv-ms-foot" data-smdv-ms-foot></div>' +
     '</div>';
   }
   function wireModelSettings(container) {
     if (!container) return;
     var box = container.querySelector("[data-smdv-ms]"); if (!box) return;
     var modelsEl = box.querySelector("[data-smdv-ms-models]");
+    var footEl = box.querySelector("[data-smdv-ms-foot]");
     var N = window.SMD_NATIVE;
-    function metaRow(key) {
-      var meta = MODEL_META[key] || { label: key, mb: "?" };
-      return '<div class="smdv-ms-m" data-key="' + key + '">' +
-        '<div class="smdv-ms-ml"><span class="smdv-ms-mt">' + meta.label + '</span><span class="smdv-ms-mb">~' + meta.mb + ' MB · <b data-st>checking…</b></span></div>' +
-        '<div class="smdv-ms-actions"><button class="smdv-ms-dl" data-dl>Download</button><button class="smdv-ms-del" data-del style="display:none">Delete</button></div>' +
+    function card(key) {
+      var m = MODEL_META[key] || { label: key, tag: "", mb: "?" };
+      return '<div class="smdv-card" data-key="' + key + '">' +
+        '<div class="smdv-card-top">' +
+          '<div class="smdv-card-info"><div class="smdv-card-t">' + m.label + '</div>' +
+            '<div class="smdv-card-s">' + (m.tag ? '<span class="smdv-card-tag">' + m.tag + '</span> · ' : "") + '~' + m.mb + ' MB · <b data-st class="smdv-st">checking…</b></div></div>' +
+          '<button class="smdv-card-btn dl" data-dl aria-label="Download">' + vcIco("download") + '</button>' +
+          '<button class="smdv-card-btn del" data-del aria-label="Delete" style="display:none">' + vcIco("trash") + '</button>' +
+        '</div>' +
+        '<div class="smdv-prog" data-prog style="display:none"><span class="smdv-pct" data-pct>0%</span><div class="smdv-prog-track"><i data-fill></i></div></div>' +
       '</div>';
     }
     function refreshStatus(key) {
-      var rowEl = modelsEl.querySelector('.smdv-ms-m[data-key="' + key + '"]'); if (!rowEl) return;
-      var st = rowEl.querySelector("[data-st]"), dl = rowEl.querySelector("[data-dl]"), del = rowEl.querySelector("[data-del]");
-      if (!(N && N.whisperModelInstalled)) { st.textContent = "native app only"; dl.style.display = "none"; return; }
+      var el = modelsEl.querySelector('.smdv-card[data-key="' + key + '"]'); if (!el) return;
+      var st = el.querySelector("[data-st]"), dl = el.querySelector("[data-dl]"), del = el.querySelector("[data-del]"), prog = el.querySelector("[data-prog]");
+      if (!(N && N.whisperModelInstalled)) { st.textContent = "iOS app only"; st.className = "smdv-st"; dl.style.display = "none"; return; }
       N.whisperModelInstalled(key).then(function (r) {
         var ok = r && r.installed;
-        st.textContent = ok ? "Installed" : "Not installed";
+        st.textContent = ok ? "Installed" : "Not installed"; st.className = "smdv-st " + (ok ? "ok" : "off");
         dl.style.display = ok ? "none" : ""; del.style.display = ok ? "" : "none";
-        if (!ok) { dl.disabled = false; dl.textContent = "Download"; }
+        prog.style.display = "none"; el.classList.toggle("installed", !!ok);
       }).catch(function () { st.textContent = "—"; });
     }
     function renderModels() {
-      if (!tiersFlagOn()) { modelsEl.innerHTML = ""; return; }
+      if (!tiersFlagOn()) {
+        modelsEl.innerHTML = '<div class="smdv-ms-note">Pick a tier above to turn on multilingual voice.</div>';
+        footEl.innerHTML = ""; return;
+      }
       var keys = TIER_MODELS[voiceTier()] || [];
-      modelsEl.innerHTML = keys.map(metaRow).join("");
+      modelsEl.innerHTML = keys.map(card).join("");
+      footEl.innerHTML = '<span class="smdv-ms-hint">Downloads once over Wi-Fi.</span><button class="smdv-ms-off" data-smdv-ms-off>Turn off</button>';
       keys.forEach(refreshStatus);
     }
     box.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-smdv-ms-flag],[data-smdv-ms-tier],[data-dl],[data-del]"); if (!b) return;
-      if (b.hasAttribute("data-smdv-ms-flag")) {
-        var now = !tiersFlagOn(); try { localStorage.setItem("smd_voice_tiers", now ? "1" : "0"); } catch (e2) {}
-        b.classList.toggle("on", now); b.setAttribute("aria-checked", now);
-        var tiers = box.querySelector(".smdv-ms-tiers"); if (tiers) { tiers.style.opacity = now ? "" : ".4"; tiers.style.pointerEvents = now ? "" : "none"; }
+      var b = e.target.closest("[data-smdv-ms-tier],[data-smdv-ms-off],[data-dl],[data-del]"); if (!b) return;
+      var t = b.getAttribute("data-smdv-ms-tier");
+      if (t) {   // picking a tier turns tiers ON and selects it
+        try { localStorage.setItem("smd_voice_tiers", "1"); localStorage.setItem("smd_voice_tier", t); } catch (e2) {}
+        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); });
         renderModels(); return;
       }
-      var t = b.getAttribute("data-smdv-ms-tier");
-      if (t) { try { localStorage.setItem("smd_voice_tier", t); } catch (e2) {} [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); }); renderModels(); return; }
-      var mrow = b.closest(".smdv-ms-m"); if (!mrow) return; var key = mrow.getAttribute("data-key");
+      if (b.hasAttribute("data-smdv-ms-off")) {
+        try { localStorage.setItem("smd_voice_tiers", "0"); } catch (e2) {}
+        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.remove("on"); });
+        renderModels(); return;
+      }
+      var el = b.closest(".smdv-card"); if (!el) return; var key = el.getAttribute("data-key");
       if (b.hasAttribute("data-dl")) {
         if (!(N && N.downloadWhisperModel)) { (window.toast || function () {})("Available in the app."); return; }
-        b.disabled = true; b.textContent = "0%";
-        N.downloadWhisperModel(key, { onProgress: function (p) { b.textContent = Math.round((p || 0) * 100) + "%"; } })
-          .then(function () { refreshStatus(key); (window.toast || function () {})("Model downloaded."); })
-          .catch(function (err) { b.disabled = false; b.textContent = "Retry"; (window.toast || function () {})("Download failed: " + err); });
+        var prog = el.querySelector("[data-prog]"), pct = el.querySelector("[data-pct]"), fill = el.querySelector("[data-fill]"), st = el.querySelector("[data-st]");
+        b.style.display = "none"; prog.style.display = ""; st.textContent = "Downloading…"; st.className = "smdv-st dl";
+        N.downloadWhisperModel(key, { onProgress: function (p) { var v = Math.round((p || 0) * 100); pct.textContent = v + "%"; fill.style.width = v + "%"; } })
+          .then(function () { (window.toast || function () {})("StewardVoice model ready."); refreshStatus(key); })
+          .catch(function () { prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed — tap to retry"; st.className = "smdv-st off"; });
         return;
       }
       if (b.hasAttribute("data-del")) {
-        if (!window.confirm("Delete this voice model? It will re-download when needed.")) return;
+        if (!window.confirm("Delete this StewardVoice model? It will re-download when needed.")) return;
         if (N && N.deleteWhisperModel) N.deleteWhisperModel(key).then(function () { refreshStatus(key); (window.toast || function () {})("Model removed."); }).catch(function () {});
         return;
       }
