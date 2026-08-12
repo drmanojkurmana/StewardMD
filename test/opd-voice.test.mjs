@@ -58,7 +58,8 @@ test("assess tab renders the voice bar when the engine is present, with merged v
   try {
     const merged = _voiceMerge({}, {}, [u("temp", 101), u("tenderness", "No")]).vals;
     const html = OPD._render({ tab: "assess", writeOn: true, assessLoaded: true, patient: { mrn: "MR9" }, assessVals: merged });
-    assert.match(html, /oe-voicebar/, "voice bar rendered");
+    assert.match(html, /oe-vc\b/, "Voice Consult panel rendered");
+    assert.match(html, /oe-vc-orb/, "glowing mic orb present");
     assert.match(html, /data-oe-act="voice-toggle"/, "mic toggle present");
     assert.match(html, /data-oe-act="assess-save"/, "GHIS save bar still present");
     assert.match(html, /value="101"/, "voice-filled temperature shows in the box");
