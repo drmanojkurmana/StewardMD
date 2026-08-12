@@ -156,10 +156,14 @@ test("emrCorrections: clear medical typo -> spelling fix; clean note -> no corre
 test("emrCorrections: NO false positives on CAP / lab values / a smoker who is the complaint", () => {
   // "CAP" (community-acquired pneumonia), "OD" (right eye), and lab "mg/dl" must NOT be read as a prescription
   assert.deepEqual(OPD._emrCorrections({ provisional_diagnosis: "s/o CAP, moderate severity; glucose 450 mg/dl; corneal ulcer OD" }).filter((x) => x.type === "misplaced"), [], "CAP / lab value / OD are not prescriptions");
-  // a smoker/alcohol mentioned as the acute presenting complaint must NOT be moved out of the complaint
+  // a diagnosis clause that starts with an overloaded form-word but has the dose in a LATER clause: keep the dx
+  assert.deepEqual(OPD._emrCorrections({ provisional_diagnosis: "CAP - started Augmentin 625mg BD" }).filter((x) => x.type === "misplaced"), [], "diagnosis 'CAP' is not evicted when the dose is in a later clause");
+  // a smoker/alcohol mention that carries a presenting complaint must NOT be moved out of the complaint
   assert.deepEqual(OPD._emrCorrections({ Chief_complaints_duration: "Cough and breathlessness in a chronic smoker x 1 week" }).filter((x) => x.type === "misplaced"), [], "substance-as-complaint is left in place");
-  // but a genuine prescription line (form word + dose) IS flagged
+  assert.deepEqual(OPD._emrCorrections({ Chief_complaints_duration: "Chronic smoker with hemoptysis" }).filter((x) => x.type === "misplaced"), [], "complaint attached to a substance mention is not evicted");
+  // but genuine, clean lines ARE caught
   assert.ok(OPD._emrCorrections({ provisional_diagnosis: "Cap Amoxicillin 500 mg TDS" }).some((x) => x.type === "misplaced"), "a real prescription line is still caught");
+  assert.ok(OPD._emrCorrections({ Chief_complaints_duration: "h/o alcohol intake daily for 10 years" }).some((x) => x.type === "misplaced"), "a clear substance history line is still caught");
 });
 
 test("_render: red-flags banner + EMR corrections + accept-all render", () => {

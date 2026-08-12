@@ -741,22 +741,25 @@
     vomitting: "vomiting", breathlessnes: "breathlessness", headche: "headache", feaver: "fever",
     tuberculosos: "tuberculosis", ceizure: "seizure", palpitaion: "palpitation", giddyness: "giddiness"
   };
-  // A prescription line: STARTS with a dosage-form word (Tab/Cap/Inj/Syp...) AND carries a dose. Both
-  // conditions are required so we never flag bare "mg" (lab values like "450 mg/dl"), "OD" (right eye),
-  // or "CAP" (community-acquired pneumonia). A line that matches is entirely a prescription, so moving
-  // the whole line is safe (no mixed diagnosis text to evict).
+  // A prescription line. We only look at the line's LEADING clause (before the first comma/semicolon or
+  // a spaced dash) so "CAP - started Augmentin 625mg" keeps the diagnosis clause "CAP" and is not moved.
+  // That clause must START with a dosage-form word AND carry a dose in the SAME clause. This never flags
+  // bare "mg" (lab "450 mg/dl"), "OD" (right eye), or "CAP" (community-acquired pneumonia). A line that
+  // matches is a pure prescription, so moving the whole line evicts nothing else.
   function rxLine(line) {
-    var t = String(line).trim();
-    return /^(tab|tablet|cap|capsule|inj|injection|syp|syr|syrup|oint|ointment|neb|supp|susp|drops?)\b\.?\s+\S/i.test(t) && /\b\d+\s*(mg|mcg|ml|g|iu|units?)\b/i.test(t);
+    var clause = String(line).trim().split(/[,;]|\s[-–]\s/)[0].trim();   // leading clause only; spaced dash, not drug hyphens
+    return /^(tab|tablet|cap|capsule|inj|injection|syp|syr|syrup|oint|ointment|neb|supp|susp|drops?)\b\.?\s+\S/i.test(clause) && /\b\d+\s*(mg|mcg|ml|g|iu|units?)\b/i.test(clause);
   }
-  // A substance/social HISTORY statement (belongs in Personal history, not the Complaint): a substance
-  // word WITH a consumption/history marker, and NOT reading like an acute presenting complaint.
+  // A substance/social HISTORY statement (belongs in Personal history, not the Complaint). Conservative:
+  // requires the line to be PHRASED as history (an explicit h/o / known prefix, or a consumption verb),
+  // and NOT to attach a presenting complaint (so "chronic smoker with hemoptysis" is left in place).
   function substanceHistoryLine(line) {
     var t = String(line);
     if (!/\b(alcohol|alcoholic|smoking|smoker|tobacco|cigarette|beedi|bidi|gutka)\b/i.test(t)) return false;
-    if (!/\b(h\/o|k\/c\/o|history|chronic|consum|intake|addict|dependen|abuse|since|daily|regularly|\d+\s*(years?|yrs?|pegs?|packs?|ml|cigarettes?))\b/i.test(t)) return false;
-    if (/\b(pain|fever|cough|breathless|dyspn|vomit|nausea|headache|giddi|dizz|swelling|bleed|rash|weakness|loss)\b/i.test(t)) return false;   // reads like a complaint
-    if (/\b(x|since|for)\s*\d+\s*(day|days|hour|hours|hr|hrs|week|weeks)\b/i.test(t)) return false;                                             // acute duration = complaint
+    var phrasedAsHistory = /\b(h\/o|k\/c\/o|history of|known)\b/i.test(t) || /\b(consum\w*|drinks?|smokes?|uses?|takes?|intake|addicted|dependence)\b/i.test(t);
+    if (!phrasedAsHistory) return false;
+    // a conjunction that pulls in a symptom means a complaint is attached to this line -> do not move it
+    if (/\b(with|and|presenting|complain|c\/o|since|for|x)\b[^]*\b(pain|fever|cough|breathless|dyspn|vomit|nausea|headache|giddi|dizz|swelling|bleed|rash|weak|loss|hemoptysis|h[ae]matemesis|melena|jaundice|palpitation|seizure|altered|confus|hematuria|dysuria|discharge)\b/i.test(t)) return false;
     return true;
   }
   // PURE: deterministic EMR-hygiene checks over the entered assessment. Conservative (high-confidence
