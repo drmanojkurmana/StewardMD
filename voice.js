@@ -616,6 +616,7 @@
   // Lets the clinician enable tiers, pick Base/Pro/Ultimate, and DOWNLOAD/DELETE each on-device model
   // with a progress %, so first use doesn't depend on dictating (and never needs a dev console). ──
   function modelSettingsHTML() {
+    injectCSS();   // the dashboard lives in the sidebar (dialog never opened) — ensure its styles exist
     if (!whisperPluginPresent()) return '<div class="smdv-ms-note">On-device StewardVoice models are available in the iOS app only.</div>';
     var on = tiersFlagOn(), tier = voiceTier();
     return '<div class="smdv-ms" data-smdv-ms>' +
@@ -631,6 +632,7 @@
   }
   function wireModelSettings(container) {
     if (!container) return;
+    injectCSS();
     var box = container.querySelector("[data-smdv-ms]"); if (!box) return;
     var modelsEl = box.querySelector("[data-smdv-ms-models]");
     var footEl = box.querySelector("[data-smdv-ms-foot]");
