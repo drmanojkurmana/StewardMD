@@ -322,18 +322,22 @@
       var lang = opts.language || "en";   // default English (Indian-English handled by initial_prompt + model); not the device locale
       function begin() {
         if (!current()) return;
+        try { console.info("[SV-native] startTranscribe model=" + modelKey + " lang=" + lang); } catch (e) {}
         W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "" })
-          .catch(function (e) { fail((e && e.code) || "recording-failure"); });
+          .catch(function (e) { try { console.info("[SV-native] startTranscribe FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "recording-failure"); });
       }
       // Ensure the model is installed (download only if missing), then start recording.
+      try { console.info("[SV-native] transcribeWhisper model=" + modelKey + " lang=" + lang); } catch (e) {}
       W.isModelInstalled({ model: modelKey }).then(function (r) {
         if (!current()) return;
+        try { console.info("[SV-native] installed=" + !!(r && r.installed) + " model=" + modelKey); } catch (e) {}
         if (r && r.installed) { begin(); return; }
         if (opts.onStateChange) opts.onStateChange("downloading");
+        try { console.info("[SV-native] downloading " + modelKey + " <- " + WHISPER_MODEL_HOST + "/" + m.file); } catch (e) {}
         W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
-          .then(function () { begin(); })
-          .catch(function (e) { fail((e && e.code) || "model-download-failed"); });
-      }).catch(function (e) { fail((e && e.code) || "transcription-failure"); });
+          .then(function () { try { console.info("[SV-native] download done " + modelKey); } catch (e) {} begin(); })
+          .catch(function (e) { try { console.info("[SV-native] download FAIL " + modelKey + " " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "model-download-failed"); });
+      }).catch(function (e) { try { console.info("[SV-native] isModelInstalled FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "transcription-failure"); });
 
       return function () { self.stopWhisper(); };
     },

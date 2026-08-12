@@ -103,6 +103,8 @@
   }
 
   function now() { try { return Date.now(); } catch (e) { return 0; } }
+  // Lightweight tracing for on-device debugging (visible in Safari Web Inspector). Prefix [SV-amb].
+  function dbg() { try { if (root && root.console && console.info) console.info.apply(console, ["[SV-amb]"].concat([].slice.call(arguments))); } catch (e) {} }
 
   function start(opts) {
     opts = opts || {};
@@ -160,6 +162,7 @@
     // transcript exactly as before; onRefine additionally fires per needsRefine(state).
     function armChunk() {
       if (!running || paused || !root || !root.SMD_VOICE) return;
+      dbg("arm", "engine=" + engine, "lang=" + (opts.language || "auto"), "model=" + (opts.model || "(tier-routed)"));
       curSession = root.SMD_VOICE.listen({
         engine: engine,
         model: opts.model,                                // undefined ⇒ SMD_VOICE routes by tier+language
@@ -169,8 +172,9 @@
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
         onError: onChunkError,
-        onState: opts.onState
+        onState: function (s) { dbg("state", s); if (opts.onState) opts.onState(s); }
       });
+      dbg("armed", "session=" + (curSession ? "yes" : "NULL"));
       if (curSession) chunkTimer = setTimeout(closeChunk, chunkMs);
     }
     function closeChunk() { chunkTimer = null; if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
@@ -183,6 +187,7 @@
     // without Whisper" bug). A timer breaks the cycle.
     function reArm() { if (rearmTimer) return; rearmTimer = setTimeout(function () { rearmTimer = null; if (running && !paused && !curSession) armChunk(); }, 300); }
     function onChunkError(err) {
+      dbg("chunkError", err, "engine=" + engine);
       curSession = null;
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
       if (stopping) { running = false; if (opts.onError) opts.onError(err); return; }
@@ -205,6 +210,7 @@
     // ring-buffer / continuous-record-with-flush plugin that never stops the mic (documented in
     // local-plugins/capacitor-whisper/README.md + README-ANDROID.md, "continuous capture upgrade").
     function onChunkFinal(chunkText) {
+      dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
       curSession = null;
       errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
       chunkN++;
