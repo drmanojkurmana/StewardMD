@@ -73,6 +73,28 @@ capture path on-device; say the word and I'll strip them before merge.
 
 ---
 
+## Second review pass — more bugs found + fixed (4 code-review agents total)
+
+**GHIS save path (`functions/api/ghis/[[path]].js`) — 3 critical data-safety bugs:**
+- The `val.*` fields (Pre-admission investigation/treatment section) had their prefix
+  wrongly stripped on read → the section always prefilled **blank** and every Save
+  **overwrote** that GHIS data with empties. Fixed.
+- **Cross-patient write guard**: GHIS keys the assessment form by doctor token, not patient;
+  a stale/interleaved request could return another patient's form and write your edits into
+  **their** chart. Now the reserialized form's `patient_id` must match before overlay/POST.
+- **Blank-record guard**: refuse to POST an unactivated `doc_id 0` form (it silently created a
+  duplicate while showing "Saved").
+- `voiceCoerce` now treats empty extraction as "no value" so it can't blank a filled field.
+
+⚠️ These GHIS-save fixes are **not deployed** (they touch the `QUEUE_EMR_WRITE`-gated write path
+and need your validation against live GHIS first). Say "deploy ghis fixes" once you've sanity-checked.
+
+**UI / accessibility (Voice Consult + dialog):**
+- Fixed a duplicate `@keyframes` that broke the recording-button halo animation.
+- Swipe-to-close is now keyboard/VoiceOver operable; status is `aria-live`; language pills expose
+  `aria-pressed`; the listening orb now pauses on tap; Pause/Stop hit area 34→42px; reduced-motion
+  covers the real animations; header wraps on iPhone SE; muted-text contrast fixed to AA.
+
 ## Your action items (in order)
 1. **Rebuild** `feat/voice-tiers` in Xcode (⌘R) → the UI + capture fixes go live on the phone.
 2. **Deploy the functions** (say "deploy functions") → the Telugu→English EMR fix goes live.
