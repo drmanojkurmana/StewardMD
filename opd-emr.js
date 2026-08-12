@@ -329,6 +329,7 @@
     if (s.provisionalDx) body += '<div class="oe-ai-group"><h4>Provisional diagnosis</h4>' + scribeRow("dx", 0, s.provisionalDx, "", !!s.acceptedDx) + "</div>";
     if (s.ddx && s.ddx.length) body += '<div class="oe-ai-group"><h4>Differential</h4>' + s.ddx.map(function (d, i) { return scribeRow("ddx", i, d.label, d.source, !!(s.acceptedDdx && s.acceptedDdx[i])); }).join("") + "</div>";
     if (s.investigations && s.investigations.length) body += '<div class="oe-ai-group"><h4>Investigations to consider</h4>' + s.investigations.map(function (d, i) { return scribeRow("inv", i, d.label, d.source, !!(s.acceptedInv && s.acceptedInv[i])); }).join("") + "</div>";
+    if (s.treatment && s.treatment.length) body += '<div class="oe-ai-group"><h4>Management / Treatment</h4>' + s.treatment.map(function (d, i) { return scribeRow("rx", i, d.label, d.source, !!(s.acceptedRx && s.acceptedRx[i])); }).join("") + "</div>";
     if (!body) return "";
     return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "AI suggestions" +
       '<span class="oe-tag oe-review">Review before use</span></h3>' + body + "</section>";
@@ -344,6 +345,7 @@
     var done = reqDone >= reqAll;
     if (!st.writeOn) return '<div class="oe-accwrap">' + body + '</div><div class="oe-actions">' + writeNote() + "</div>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
+      (maikOn() && G.DX ? '<button class="oe-btn ghost" data-oe-act="assess-maik" title="On-device suggestions: diagnosis, investigations and treatment from the notes"' + (st.maikBusy ? " disabled" : "") + ">" + ms(st.maikBusy ? "hourglass_top" : "auto_awesome") + (st.maikBusy ? "Thinking…" : "Ask MaiK") + "</button>" : "") +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save the blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to GHIS</button></div>";
     return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + bar + (st.savedConsult ? postConsultPanel() : "");
@@ -450,6 +452,7 @@
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
+    if (cmd === "assess-maik") return askMaik();
     if (cmd === "assess-clear") return clearAssessment();
     if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
     if (cmd === "voice-pause") return togglePauseVoice();
@@ -657,7 +660,7 @@
       var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = true; });
       S.f = f;
       var d = DX._differential() || {};
-      return (d.inf || []).concat(d.ni || []).map(function (r) { return { dx: r.name, score: r.score, inv: r.inv || [] }; });
+      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, inv: r.inv || [] }; });
     } catch (e) { return []; } finally { S.f = savedF; }
   }
   // Grounding options for SMD_SCRIBEGROUND.ground(): extract findings from the transcript
@@ -670,6 +673,123 @@
     var ddx = diff.map(function (x) { return { dx: x.dx, score: x.score }; });
     return { findings: findings, differential: function () { return ddx; }, investigationsFor: function (dx) { return invMap[dx] || []; } };
   }
+  // ---- Ask MaiK (on-device, PHI-safe): the entered assessment -> Dx / Mx / Rx suggestions --------
+  // Everything below reasons in-memory on-device. The ONLY network call is loadTreatment()'s fetch of a
+  // STATIC disease-treatment file (/kb/treatments/<id>.json) whose URL carries a disease id, never a
+  // patient identifier — no PHI leaves the device. Advisory only: nothing is written to the EMR until
+  // the doctor taps Accept on a specific row (and then Save to GHIS). Base (free) tier — the reasoning
+  // engine "M"; the Pro (Vertex) tier is a later phase.
+  // ON by default (advisory-only); kill on a device with localStorage.setItem("smd_opd_maik","off").
+  function maikOn() { try { if (G.localStorage && localStorage.getItem("smd_opd_maik") === "off") return false; } catch (e) {} return true; }
+
+  // PURE: the free-text the engine reasons over — only the narrative + comorbid fields the doctor
+  // already typed. Positive comorbids are appended as plain words so the engine weighs them.
+  function assessFindingsText(v) {
+    v = v || {};
+    var parts = [v.Chief_complaints_duration, v.History_present_illness, v.History_past_illness, v.sys_examination, v.provisional_diagnosis];
+    if (v.Diabetes_yesNo === "Y") parts.push("diabetes");
+    if (v.Hypertension_yesNo === "Y") parts.push("hypertension");
+    if (v.Cardiac_yesNo === "Y") parts.push("cardiac disease");
+    if (v.Bronchial_yesNo === "Y") parts.push("asthma");
+    if (v.Tuberculosis_yesNo === "Y") parts.push("tuberculosis");
+    return parts.filter(function (x) { return x && String(x).trim(); }).map(function (x) { return String(x).trim(); }).join(". ");
+  }
+
+  // PURE: a disease-treatment JSON (kb/treatments/<id>.json) -> Rx lines. Picks the highest-precedence
+  // recommendation, then its drug regimens (composition — dose route freq) and up to 4 non-drug steps.
+  function treatmentLines(tj) {
+    if (!tj || !tj.recommendations || !tj.recommendations.length) return { rx: [], steps: [] };
+    var prec = tj.precedence || [];
+    var recs = tj.recommendations.slice().sort(function (a, b) {
+      var ai = prec.indexOf(a.tier), bi = prec.indexOf(b.tier);
+      return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+    });
+    var rec = recs[0];
+    var rx = (rec.drugRefs || []).map(function (d) {
+      var dosing = [d.dose, d.route, d.freq].filter(Boolean).join(" ");
+      return [d.composition, dosing].filter(Boolean).join(" · ");
+    }).filter(Boolean);
+    return { rx: rx, steps: (rec.steps || []).slice(0, 4), regimen: rec.regimenLabel || "" };
+  }
+
+  // PURE: engine differential (+ treatments keyed by dx id) -> the review-panel model.
+  // Dx = provisional + differential (with scores); Mx = deduped investigation workup; Rx = drug
+  // regimens + management steps for the TOP-2 working diagnoses (deduped, case-insensitive).
+  function buildMaikSuggestions(diff, treatMap) {
+    diff = diff || []; treatMap = treatMap || {};
+    var top = diff.slice(0, 6);
+    var provisionalDx = top.length ? top[0].dx : "";
+    var ddx = top.slice(1).map(function (r) { return { label: r.dx + (r.score != null ? " (" + Math.round(r.score) + ")" : ""), source: "engine" }; });
+    var invSeen = {}, investigations = [];
+    top.forEach(function (r) {
+      (r.inv || []).forEach(function (ix) {
+        var k = String(ix).toLowerCase();
+        if (ix && !invSeen[k]) { invSeen[k] = 1; investigations.push({ label: ix, source: "engine" }); }
+      });
+    });
+    var rxSeen = {}, treatment = [];
+    top.slice(0, 2).forEach(function (r) {
+      var t = treatMap[r.id]; if (!t) return;
+      (t.rx || []).concat(t.steps || []).forEach(function (line) {
+        var k = String(line).toLowerCase();
+        if (line && !rxSeen[k]) { rxSeen[k] = 1; treatment.push({ label: line, source: "engine", dx: r.dx }); }
+      });
+    });
+    return { provisionalDx: provisionalDx, ddx: ddx, investigations: investigations, treatment: treatment };
+  }
+
+  // Fetch a STATIC disease-treatment file (no PHI). Tries the id verbatim then upper/lower-case
+  // filename variants; resolves to null on 404 so the caller falls back to the DX_MGMT global.
+  function loadTreatment(id) {
+    if (!id || typeof fetch !== "function") return Promise.resolve(null);
+    var tries = [id, id.toUpperCase(), id.toLowerCase()].filter(function (x, i, a) { return a.indexOf(x) === i; });
+    function attempt(i) {
+      if (i >= tries.length) return Promise.resolve(null);
+      return fetch("/kb/treatments/" + encodeURIComponent(tries[i]) + ".json")
+        .then(function (r) { return r.ok ? r.json() : attempt(i + 1); })
+        .catch(function () { return attempt(i + 1); });
+    }
+    return attempt(0);
+  }
+  // Sync fallback Rx/Mx from the on-device DX_MGMT global (no network) when no treatment file exists.
+  function mgmtFallback(id) {
+    var m = (G.DX_MGMT && G.DX_MGMT[id]) || null;
+    if (!m || !(m.tx && m.tx.length)) return null;
+    return { rx: m.tx.slice(0, 8), steps: [], regimen: "" };
+  }
+
+  // The button: derive findings from the typed assessment, run the engine, load treatment for the
+  // top-2 dx, stage the review panel. Async only for the static-file loads; never blocks on network.
+  function askMaik() {
+    var v = st.assessVals || {};
+    var text = assessFindingsText(v);
+    if (!text.replace(/[.\s]/g, "")) { toast("Type the complaint / history first, then Ask MaiK."); return; }
+    var keys = (G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : [];
+    var diff = differentialFor(keys);
+    if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
+    st.maikBusy = true; paint();
+    // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object
+    // per patient, so if the doctor switches patients before these static-file loads resolve, we MUST NOT
+    // write one patient's Dx/Rx into another's panel (accepted rows fold straight into the chart).
+    var forPatient = st;
+    var top2 = diff.slice(0, 2);
+    Promise.all(top2.map(function (r) {
+      return loadTreatment(r.id).then(function (tj) { return { id: r.id, t: tj ? treatmentLines(tj) : mgmtFallback(r.id) }; });
+    })).then(function (loaded) {
+      if (st !== forPatient) return;                        // doctor moved to another patient mid-flight
+      var treatMap = {}; loaded.forEach(function (x) { if (x.t) treatMap[x.id] = x.t; });
+      var sg = buildMaikSuggestions(diff, treatMap);
+      st.maikBusy = false;
+      st.scribeSuggestions = { provisionalDx: sg.provisionalDx, ddx: sg.ddx, investigations: sg.investigations, treatment: sg.treatment,
+        acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, source: "maik" };
+      st.scribeStats = { filled: 0, suggestions: (sg.provisionalDx ? 1 : 0) + sg.ddx.length + sg.investigations.length + sg.treatment.length };
+      paint();
+    }).catch(function () {
+      if (st !== forPatient) return;
+      st.maikBusy = false; toast("MaiK could not load suggestions. Try again."); paint();
+    });
+  }
+
   // opd-scribe refine pass: full transcript -> LLM extract -> grounded suggestions -> _applyRefine.
   // Suggest-only: nothing here is written to the EMR/orders until the doctor taps Accept (_applyRefine
   // only stages st.scribeSuggestions + folds emrFields the same protected way as applyVoice).
@@ -735,8 +855,21 @@
       var inv = s.investigations[idx]; if (!inv) return;
       st.invDraft = { service: { id: null, name: inv.label }, diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "", emergency: false, fromSuggestion: true };
       s.acceptedInv = s.acceptedInv || {}; s.acceptedInv[idx] = true;
+    } else if (kind === "rx") {
+      var rx = s.treatment && s.treatment[idx]; if (!rx) return;
+      appendPlan("management_plan", "Rx: " + rx.label);
+      s.acceptedRx = s.acceptedRx || {}; s.acceptedRx[idx] = true;
     }
     paint();
+  }
+  // Append a line into a plan textarea without disturbing what the doctor already typed (dedup on
+  // substring, never clears). Marks the field touched so a later voice pass won't overwrite it.
+  function appendPlan(name, line) {
+    st.assessVals = st.assessVals || {};
+    var cur = st.assessVals[name] || "";
+    if (cur.indexOf(line) !== -1) return;
+    st.assessVals[name] = cur ? (cur.replace(/\s+$/, "") + "\n" + line) : line;
+    st.assessTouched = st.assessTouched || {}; st.assessTouched[name] = true;
   }
   // PURE-ish: fold a Task-1 opd-scribe extract + Task-2 grounded suggestions into state. emrFields fold
   // via the SAME _voiceMerge manual-override guard as live dictation; suggestions are staged for review
@@ -842,6 +975,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions };
 })();
