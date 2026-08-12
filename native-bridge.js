@@ -54,7 +54,7 @@
     // PRO + ULTIMATE Telugu route: vasista22 Telugu-small → ggml → INT8 (q8_0). Benchmark-best Telugu
     // (te WER 14.7%). NOT an off-the-shelf HF file — built by scripts/convert-telugu-whisper-ggml.sh;
     // sha256/bytes stay PENDING (feature flag-gated OFF) until that conversion + upload is done.
-    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "PENDING_CONVERSION", bytes: 0 }
+    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 }
   };
 
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
