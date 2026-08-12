@@ -113,7 +113,17 @@ async function loginGhis(userId, password) {
 async function getSession(env, token) {
   if (!token || !env.GHIS_KV) return null;
   const sess = await env.GHIS_KV.get('sess:' + token, 'json');
-  return sess ? { token, ...sess } : null;   // GHIS validates freshness; a stale cookie → unauth → re-login
+  if (!sess) return null;                     // GHIS validates freshness; a stale cookie → unauth → re-login
+  // SLIDING expiry: on use, extend the KV TTL to 30 min from NOW so an ACTIVE session never times out
+  // mid-work (it only lapses after 30 min of inactivity). Throttled to ~once per 5 min to avoid a KV write
+  // on every request; GHIS's own server session is likewise kept alive because we hit it on each call.
+  try {
+    if (Date.now() - (sess.ts || 0) > 5 * 60 * 1000) {
+      sess.ts = Date.now();
+      await env.GHIS_KV.put('sess:' + token, JSON.stringify(sess), { expirationTtl: SESS_KV_TTL });
+    }
+  } catch (e) {}
+  return { token, ...sess };
 }
 async function ghisReq(env, token, method, path, body, extra = {}) {
   let s = await getSession(env, token);
