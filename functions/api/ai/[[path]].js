@@ -1357,6 +1357,17 @@ export async function onRequest(context) {
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
       }
+      if (body.kind === "translate") {
+        // Field mic: translate a single dictated field to clinical English so GHIS + MaiK stay English.
+        const prompt = "Translate this clinical dictation to clear clinical ENGLISH. Keep drug names, doses, units, " +
+          "numbers and standard abbreviations (BP, IV, BD, OD) exactly. If it is already English, return it unchanged. " +
+          "Output ONLY the translation — no preamble, labels or quotes.\n\n=== TEXT ===\n" + transcript;
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ text: String(text || "").replace(/^["']+|["']+$/g, "").trim(), mode: "translate" });
+      }
       const k = VISION_SYS[body.kind] ? body.kind : "monitor";
       const prompt = transcriptExtractPrompt(k, transcript);
       let text;

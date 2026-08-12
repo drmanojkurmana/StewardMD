@@ -12,6 +12,10 @@ export const EMR_FIELD_KEYS = ["cc","presentHx","pastHx","comorbidsNote","dm","h
 export function scribeExtractPrompt(transcript) {
   return "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
     "Return ONLY JSON: {\"emrFields\":{...}, \"suggestions\":{\"provisionalDx\":\"\",\"ddx\":[],\"investigations\":[]}}.\n" +
+    "OUTPUT LANGUAGE — CRITICAL: write EVERY emrFields value and EVERY suggestion in clear clinical ENGLISH. " +
+    "The transcript may be Telugu, Hindi, or code-switched Indian English; TRANSLATE the clinical meaning to English. " +
+    "Never output Telugu or Devanagari script in any field. Keep drug names, doses, units, numbers and standard " +
+    "abbreviations (BP, IV, BD, OD) exactly as stated. Translate faithfully — do not add or drop clinical content.\n" +
     "emrFields keys allowed: cc, presentHx, pastHx, comorbidsNote (+ dm/htn/cardiac/asthma/tb/thyroid/epilepsy as 'Yes'/'No' only if clearly stated).\n" +
     "RULES: use ONLY what is explicitly said; NEVER invent a diagnosis, symptom, finding, drug, dose or investigation. " +
     "provisionalDx ONLY if the clinician explicitly stated their own assessment. " +

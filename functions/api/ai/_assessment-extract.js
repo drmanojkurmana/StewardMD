@@ -13,7 +13,10 @@ export const ASSESSMENT_FIELDS = ["cc", "presentHx", "pastHx", "provisionalDx", 
 
 export function assessmentExtractPrompt(transcript) {
   return "You are transcribing a clinician's spoken consultation into an initial-assessment note. " +
-    "Return ONLY JSON containing any of these keys, each a short plain-text string in the clinician's own words:\n" +
+    "OUTPUT LANGUAGE — CRITICAL: write every value in clear clinical ENGLISH. The transcript may be " +
+    "Telugu, Hindi or code-switched Indian English; translate the clinical meaning to English and never " +
+    "output Telugu or Devanagari script. Keep drug names, doses, units, numbers and standard abbreviations exact.\n" +
+    "Return ONLY JSON containing any of these keys, each a short plain-text string (in English):\n" +
     '{"cc": chief complaints and their duration, ' +
     '"presentHx": history of present illness, ' +
     '"pastHx": past medical / surgical history, ' +
