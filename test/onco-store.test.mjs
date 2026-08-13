@@ -296,3 +296,24 @@ test("getAdminRecords returns [] for an empty/missing cycleId, never throws", as
   assert.deepEqual(await ONCO.getAdminRecords({}, "", io), []);
   assert.deepEqual(await ONCO.getAdminRecords({}, "no-such-cycle", io), []);
 });
+
+// The nurse read (GET /onco/cycle) must give the nurse drug NAMES/routes/days/premeds for the
+// give-list, but NEVER the calculation inputs - the nurse view never recalculates.
+test("_nurseTemplate keeps names/routes/days/premeds but strips every dose formula", () => {
+  const full = {
+    name: "R-CHOP", cycleLengthDays: 21, premedications: [{ name: "Rituximab premed" }],
+    supportiveCare: ["antiemetics"], clearanceChecks: ["CBC/platelets"],
+    drugs: [{ id: "doxorubicin", name: "Doxorubicin", basis: "bsa", dosePerUnit: 50, unit: "mg/m2", route: "IV", days: [1], roundingRule: { increment: 5 }, caps: { cumulativeLifetime: { warn: 450 } }, notes: "anthracycline" }],
+  };
+  const nt = ONCO._nurseTemplate(full);
+  assert.equal(nt.name, "R-CHOP");
+  assert.equal(nt.premedications.length, 1);
+  assert.equal(nt.drugs[0].name, "Doxorubicin");   // name kept (give-list needs it)
+  assert.equal(nt.drugs[0].route, "IV");
+  assert.deepEqual(nt.drugs[0].days, [1]);
+  // formulas gone: no path can recompute a dose from the nurse payload
+  assert.equal(nt.drugs[0].dosePerUnit, undefined);
+  assert.equal(nt.drugs[0].basis, undefined);
+  assert.equal(nt.drugs[0].roundingRule, undefined);
+  assert.equal(nt.drugs[0].caps, undefined);
+});

@@ -360,12 +360,15 @@ export async function onRequest(context) {
       if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
       await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.QUEUE_VIEW);
       const adminRecords = await ONCO.getAdminRecords(env, cyc.cycleId);
+      // Nurse-safe template: drug names / routes / days / premeds for the give-list, NO dose formulas.
+      const nurseTmpl = ONCO._nurseTemplate(plan.lockedTemplate);
       return json({ ok: true, cycle: cyc, plan: {
         protocolId: plan.protocolId,
-        name: plan.lockedTemplate && plan.lockedTemplate.name,
+        name: nurseTmpl.name,
         ghisPatientId: plan.ghisPatientId,
         intent: plan.intent,
-        cycleLengthDays: plan.lockedTemplate && plan.lockedTemplate.cycleLengthDays,
+        cycleLengthDays: nurseTmpl.cycleLengthDays,
+        lockedTemplate: nurseTmpl,
       }, adminRecords: adminRecords }, 200, request);
     }
 

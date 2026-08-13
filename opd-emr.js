@@ -677,7 +677,10 @@
       // needs) - only seed a minimal stand-in when nothing else populated st.oncoPlan at all.
       if (!st.oncoPlan && res.d.plan) {
         st.oncoPlan = { protocolId: res.d.plan.protocolId, ghisPatientId: res.d.plan.ghisPatientId, intent: res.d.plan.intent,
-          confirmedDoses: cyc.confirmedDoses || [], lockedTemplate: { name: res.d.plan.name, cycleLengthDays: res.d.plan.cycleLengthDays } };
+          confirmedDoses: cyc.confirmedDoses || [],
+          // the fetched nurse-safe template carries drug names/routes/days + premeds so the give-list
+          // renders on a fresh nurse device (it has NO dose formulas); fall back to the header only.
+          lockedTemplate: res.d.plan.lockedTemplate || { name: res.d.plan.name, cycleLengthDays: res.d.plan.cycleLengthDays } };
       }
       paint();
     }).catch(function () {});

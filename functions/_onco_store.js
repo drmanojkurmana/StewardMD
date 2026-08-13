@@ -283,7 +283,20 @@ export async function completeCycle(env, cycleId, deps) {
   return Object.assign({}, cyc, { state: "done", updatedAt: now });
 }
 
+// Give-list projection for the NURSE read (GET /onco/cycle): the drug NAMES / routes / days / units
+// and premeds a nurse needs to administer, WITHOUT the calculation inputs (dosePerUnit / basis /
+// roundingRule / caps). The nurse gets confirmed FINAL doses off the cycle and never sees or re-runs
+// the formula - this keeps "the nurse view never calculates" true even for the data it is handed.
+function _nurseTemplate(template) {
+  const t = template || {};
+  return {
+    name: t.name || "", cycleLengthDays: t.cycleLengthDays || null,
+    premedications: t.premedications || [], supportiveCare: t.supportiveCare || [], clearanceChecks: t.clearanceChecks || [],
+    drugs: (t.drugs || []).map((d) => ({ id: d.id, name: d.name, route: d.route, days: d.days, unit: d.unit, notes: d.notes || "" })),
+  };
+}
+
 export {
-  sanitize, newId, _cycleId, _snapshot, _recordOverride, _canTransition,
+  sanitize, newId, _cycleId, _snapshot, _recordOverride, _canTransition, _nurseTemplate,
   CYCLE_STATES, CYCLE_TRANSITIONS, CLEARANCE_STATUSES,
 };
