@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onco Home harness (Phase 8 P0, read-only reference workbench)</title>
+<link rel="stylesheet" href="/onco-home.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return k === "smd_onco_home"; } };   // only our flag is on
+
+// ---- Stub MEDCALC: a tiny catalog incl. Khorana/ECOG, plus a spy on open()/openList() ----
+window.__medcalcOpenCalls = [];
+window.__medcalcOpenListCalls = [];
+window.MEDCALC = {
+  list: function () {
+    return [
+      { id: "khorana", title: "Khorana Score (Chemotherapy VTE Risk)", cat: "Oncology", desc: "VTE risk in ambulatory cancer patients starting chemotherapy." },
+      { id: "ecog", title: "ECOG Performance Status", cat: "Oncology", desc: "Functional status grade used in oncology." }
+    ];
+  },
+  open: function (id) { window.__medcalcOpenCalls.push(id); },
+  openList: function (cat) { window.__medcalcOpenListCalls.push(cat); }
+};
+
+// ---- Stub KB_ENRICHMENT: one oncology-tagged disease (mirrors the real kb.enrichment shape) ----
+window.KB_ENRICHMENT = { byId: {
+  lung_cancer: { name: "Lung cancer", system: "Oncology / Pulmonary", class: "non_infective",
+    aliases: ["nsclc", "sclc"], clinicalPearls: ["EGFR and ALK mutation testing guides first-line therapy in NSCLC."] }
+} };
+
+// ---- Stub MEDDRUGS ----
+window.__medDrugsOpenListCalls = 0;
+window.__medDrugsInteractionsCalls = 0;
+window.MEDDRUGS = {
+  searchIndex: function (q) {
+    q = (q || "").toLowerCase();
+    var hay = "pantoprazole pan pantop pantocid";
+    return (q && hay.indexOf(q) >= 0) ? [{ generic: "Pantoprazole", cls: "Proton pump inhibitor (PPI)", brands: ["pantop"], dose: "40 mg IV/PO once daily." }] : [];
+  },
+  openList: function () { window.__medDrugsOpenListCalls++; },
+  openInteractions: function () { window.__medDrugsInteractionsCalls++; }
+};
+window.toast = function (m) { window.__toasts = (window.__toasts || []).concat([m]); };
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-dose.js (real BSA formula, window.SMD_ONCODOSE) + onco-evidence.js
+     before onco-home.js. -->
+<script src="/onco-dose.js"></script>
+<script src="/onco-evidence.js"></script>
+<script src="/onco-home.js" onload="window.__ready = !!(window.SMD_ONCOHOME && window.SMD_ONCOHOME.open && window.SMD_ONCOHOME.search)"></script>
+</body></html>
