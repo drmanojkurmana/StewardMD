@@ -116,6 +116,33 @@ body.dark {
   font-display: block;
   src: url(/assets/fonts/sacramento.woff2) format('woff2');
 }
+/* ---- Primary UI type: Inter (Latin) + Noto Sans Telugu / Devanagari (Indic) ----------
+   SELF-HOSTED for the SAME reason as above: the Google Fonts CDN <link> does not reliably
+   apply inside the WKWebView, so the app fell back to the system font (Roboto). Bundling the
+   variable woff2 makes Inter render identically on web + native, and gives clean Telugu/Hindi
+   glyphs for the MaiK Scribe transcript instead of tofu / a mismatched system fallback.
+   font-display:swap so text paints immediately in a fallback and reflows when the font lands. */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/inter-variable.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans Telugu';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/noto-sans-telugu.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/assets/fonts/noto-sans-devanagari.woff2) format('woff2');
+}
 .rds-icon {
   font-family: 'Material Symbols Rounded';
   font-weight: normal; font-style: normal; line-height: 1;

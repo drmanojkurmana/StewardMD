@@ -8,7 +8,7 @@
   --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
   --sc-lowest: #fff; --sc-low: #f2f4f6; --sc-high: #e6e8ea; --sc-highest: #e0e3e5;
   --outline-variant: #bcc9c6;
-  --q-sans: Inter, var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --q-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   --q-mono: var(--mono, ui-monospace, "SF Mono", Menlo, monospace);
   position: fixed; inset: 0; z-index: 12010; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
 }
@@ -253,7 +253,7 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
   border:1px solid var(--vc-line); border-radius:20px; padding:16px; margin:0 0 14px; text-align:center; color:var(--vc-ink);
   background:radial-gradient(135% 100% at 50% -20%, #123f42 0%, #0c1517 52%, #0a1113 100%); box-shadow:0 12px 40px -14px rgba(0,0,0,.55); }
 #smdOpdEmr .oe-vc-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-#smdOpdEmr .oe-vc-eyebrow { font:700 11px var(--q-mono,ui-monospace,monospace); letter-spacing:.24em; text-transform:uppercase; color:var(--vc-cyan); }
+#smdOpdEmr .oe-vc-eyebrow { font:800 14px var(--q-sans); letter-spacing:.005em; text-transform:none; color:var(--vc-cyan); }
 #smdOpdEmr .oe-vc-eyebrow.proc { color:#caa4ff; }
 #smdOpdEmr .oe-vc-langs { display:inline-flex; gap:4px; }
 #smdOpdEmr .oe-vc-lang { border:1px solid var(--vc-line); background:transparent; color:var(--vc-muted); font:700 11px var(--q-sans); padding:5px 10px; border-radius:999px; cursor:pointer; }

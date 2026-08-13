@@ -414,7 +414,7 @@
     // PROCESSING (after Stop) — the last chunk is still transcribing + notes are drafting on-device.
     if (processing) {
       return '<div class="oe-vc processing">' +
-        '<div class="oe-vc-head"><span class="oe-vc-eyebrow proc">Processing</span></div>' +
+        '<div class="oe-vc-head"><span class="oe-vc-eyebrow proc">MaiK Scribe</span></div>' +
         '<div class="oe-vc-procwrap"><span class="oe-vc-spin"></span>' +
           '<div class="oe-vc-proctext"><b>Finishing your dictation…</b><span>Transcribing the last part and drafting notes.</span></div></div>' +
         '<div class="oe-vc-shimmer"><i></i></div>' +
@@ -426,20 +426,20 @@
     // OFF (idle) — invite to start.
     if (!on) {
       return '<div class="oe-vc idle">' +
-        '<div class="oe-vc-head"><span class="oe-vc-eyebrow">Voice Consult</span>' + langs + "</div>" +
-        '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start voice consult"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
-        '<div class="oe-vc-status">' + (tx ? "Tap the mic to add more" : "Tap the mic to start") + "</div>" +
+        '<div class="oe-vc-head"><span class="oe-vc-eyebrow">MaiK Scribe</span>' + langs + "</div>" +
+        '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start MaiK Scribe"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
+        '<div class="oe-vc-status">' + (tx ? "MaiK Scribe completed" : "Start MaiK Scribe") + "</div>" +
         invChips() +
         (tx ? notesBox(false, true) : "") +
-        '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — the transcript appears below and fields fill as you talk.</div>' +
-        '<div class="oe-vc-priv">' + ms("lock") + "<span>Processed on this phone only — never recorded, saved, or sent to the cloud. Please let the patient know you are taking voice notes.</span></div>" +
+        '<div class="oe-vc-sub">Listen &amp; document</div>' +
+        '<div class="oe-vc-priv">' + ms("lock") + "<span>Processed on this phone only. Never recorded, saved, or sent to the cloud. Please let the patient know you are taking voice notes.</span></div>" +
       "</div>";
     }
 
     // ON (listening / paused) — Stitch-style pill + breathing orb + live transcript.
     var bar = '<div class="oe-vc-bar">' +
         '<span class="oe-vc-live"><span class="oe-vc-dot' + (paused ? " paused" : "") + '"></span>' +
-          '<span class="oe-vc-livetxt">' + (paused ? "Scribe paused" : "MaiK Scribe · Listening") + "</span></span>" +
+          '<span class="oe-vc-livetxt">' + (paused ? "MaiK Scribe paused" : "MaiK Scribe is listening") + "</span></span>" +
         '<span class="oe-vc-meta"><span class="oe-vc-timer" id="oeElapsed">' + esc(fmtElapsed((st._now || now()) - (st.voiceStartedAt || now()))) + "</span>" +
           '<span class="oe-vc-chip" id="oeVcModel" title="On-device model in use">' + esc(st.voiceModel || langChip) + "</span></span>" +
         '<span class="oe-vc-acts">' +
@@ -448,7 +448,7 @@
     var readout = (st.scribeStats && st.scribeStats.filled) ? '<div class="oe-vc-readout"><span class="oe-vc-dot ok"></span>' + st.scribeStats.filled + " field" + (st.scribeStats.filled === 1 ? "" : "s") + " filled</div>" : "";
     return '<div class="oe-vc ' + (paused ? "paused" : "listening") + ' on">' + bar +
       '<button class="oe-vc-orb" data-oe-act="voice-pause" aria-label="' + (paused ? "Resume dictation" : "Pause dictation") + '"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
-      '<div class="oe-vc-status2" id="oeVoiceStatus" aria-live="polite" aria-atomic="true">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
+      '<div class="oe-vc-status2" id="oeVoiceStatus" aria-live="polite" aria-atomic="true">' + esc(paused ? "MaiK Scribe paused" : (st.voiceStatus || "MaiK Scribe is listening")) + "</div>" +
       (paused ? "" : '<div class="oe-vc-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>') +
       txBox + invChips() + readout + langs +
       '<div class="oe-vc-priv sm">' + ms("lock") + "<span>On-device · not saved or sent to the cloud</span></div>" +
@@ -1281,7 +1281,7 @@
       onTranscript: function (t) { _lastFullTranscript = _priorTranscript + (t || ""); setTranscript(_lastFullTranscript); },
       onModel: function (code) { setModelChip(code); },     // "which model" chip (Auto adapts per chunk)
       onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
-      onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "Listening (device dictation)…" : "Listening…") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
+      onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "MaiK Scribe is listening (device dictation)" : "MaiK Scribe is listening") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
     });
   }
@@ -1434,7 +1434,7 @@
   // Dictate into one field only. Uses the device's on-device STT (noCloud: audio never leaves the
   // phone) and degrades gracefully via voice.js. Never touches any other column - deterministic placement.
   function toggleFieldMic(name) {
-    if (st.voiceOn || st.voiceProcessing) { toast("Stop the Voice Consult first to dictate a single field."); return; }
+    if (st.voiceOn || st.voiceProcessing) { toast("Stop MaiK Scribe first to dictate a single field."); return; }
     if (st.fieldMic === name) { stopFieldMic(); return; }
     stopFieldMic();                                        // only one field mic at a time
     if (!G.SMD_VOICE || !G.SMD_VOICE.listen) { toast("On-device voice not available on this build."); return; }
