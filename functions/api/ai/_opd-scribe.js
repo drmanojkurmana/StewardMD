@@ -8,7 +8,7 @@
  */
 
 export const EMR_FIELD_KEYS = ["cc","presentHx","pastHx","comorbidsNote","dm","htn","cardiac","asthma","tb","thyroid","epilepsy",
-  "habits","alcohol","smoking","drug","tobacco"];
+  "habits","alcohol","smoking","recDrug","tobacco"];
 
 export function scribeExtractPrompt(transcript) {
   return "You are an OPD scribe turning a doctor-patient consultation transcript into a structured note. " +
@@ -22,7 +22,7 @@ export function scribeExtractPrompt(transcript) {
     "abbreviations (BP, IV, BD, OD) exactly as stated. Translate faithfully — do not add or drop clinical content.\n" +
     "emrFields keys allowed: cc, presentHx, pastHx, comorbidsNote (+ dm/htn/cardiac/asthma/tb/thyroid/epilepsy as 'Yes'/'No' only if clearly stated).\n" +
     "PERSONAL HISTORY / HABITS: if the patient states a habit, set the matching emrFields key to 'Yes' " +
-    "(only when explicitly affirmed): alcohol, smoking, drug (recreational drug use), tobacco (chewing " +
+    "(only when explicitly affirmed): alcohol, smoking, recDrug (recreational drug use), tobacco (chewing " +
     "tobacco). Set habits='Yes' if ANY of these is present. Also add a top-level \"alcoholDetail\" string " +
     "with the EXACT amount + type the patient stated (e.g. '60 ml whisky per day', '2 beers daily') when " +
     "given, so the app can compute grams of alcohol + standard drinks. Only from what was explicitly said.\n" +
