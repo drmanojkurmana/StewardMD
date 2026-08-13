@@ -163,6 +163,16 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-onco-warn .material-symbols-outlined { font-size: 18px; }
 #smdOpdEmr .oe-onco-drawer-actions { display: flex; gap: 10px; padding: 16px 14px; }
 
+/* ---- Oncology Phase 4: review + override panel (apply-protocol reuses .oe-ai-group above) ---- */
+#smdOpdEmr .oe-onco-review-line { padding: 10px 0; border-top: 1px solid var(--sc-low); }
+#smdOpdEmr .oe-onco-review-line:first-of-type { border-top: none; padding-top: 0; }
+#smdOpdEmr .oe-onco-review-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+#smdOpdEmr .oe-onco-review-val { margin-left: auto; font: 700 14px var(--q-sans); }
+#smdOpdEmr .oe-onco-review-edit { display: flex; gap: 8px; margin-top: 6px; }
+#smdOpdEmr .oe-onco-review-edit .oe-inp { flex: 1 1 auto; min-width: 0; padding: 8px 10px; font-size: 13px; }
+#smdOpdEmr .oe-onco-ov-note { font: 500 12px var(--q-sans); color: var(--secondary); margin-top: 2px; }
+#smdOpdEmr .oe-btn[disabled] { opacity: .45; cursor: not-allowed; }
+
 /* empty / loading / error */
 #smdOpdEmr .oe-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 60px 24px; text-align: center; color: var(--secondary); font: 500 15px var(--q-sans); }
 #smdOpdEmr .oe-empty.sm { padding: 22px 12px; font-size: 13.5px; }

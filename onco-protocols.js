@@ -104,7 +104,79 @@
       '<div class="oe-canvas">' + rows + warn + actions + "</div></div>";
   }
 
-  var API = { _buildOncoMatrix: _buildOncoMatrix, doseDrawerView: doseDrawerView, _dayMarker: dayMarker, _doseAdminText: doseAdminText, _version: "1.0" };
+  // ---- Phase 4: apply-protocol suggestion list + review/override panel ---------------------------
+  // Still PURE (no DOM, no fetch) - staging into st.oncoDraft and the actual create/confirm POSTs
+  // live entirely in opd-emr.js. Visually mirrors the aiGroup/scribeRow suggestion primitive (same
+  // oe-ai-* CSS classes) without importing opd-emr.js's private closures.
+
+  // ONLY "active" protocols may ever be offered - R-CHOP ships lifecycleState "draft" on purpose
+  // (activation is a separate owner/R1 governance step). Filters defensively even when the caller
+  // (opd-emr.js) already filtered, so this builder is safe to call directly, from anywhere, forever.
+  function _buildApplyPanel(protocols) {
+    var active = (protocols || []).filter(function (p) { return p && p.lifecycleState === "active"; });
+    if (!active.length) return "";
+    var rows = active.map(function (p) {
+      return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(p.name || p.id) +
+        (p.version ? '<span class="oe-ai-score">v' + esc(p.version) + "</span>" : "") + "</div></div>" +
+        '<button class="oe-ai-accept" data-oe-act="onco-apply:' + esc(p.id) + '">' + ms("add") + "Apply</button></div>";
+    }).join("");
+    return '<section class="oe-ai-panel"><div class="oe-ai-group"><div class="oe-ai-ghead"><h4>Oncology protocol</h4></div>' + rows + "</div></section>";
+  }
+
+  // One review line: the current EFFECTIVE dose (an active override wins over the calculated
+  // lineage), a "verify" badge when the lineage is not computable (never-invent - no fabricated
+  // number), and an inline edit affordance (a dose input + a REQUIRED reason input) wired by
+  // opd-emr.js's onInput/onClick.
+  function _reviewLine(drug, lin, override) {
+    drug = drug || {}; lin = lin || {};
+    var verify = lin.final == null || (lin.warnings && lin.warnings.length > 0);
+    var effective = override ? override.now : lin.final;
+    var valueHtml = effective != null ? esc(effective) + " mg" : "verify";
+    var badge = (verify && !override) ? ' <span class="oe-tag oe-review">verify</span>' : "";
+    var note = override ? '<div class="oe-onco-ov-note">Override: ' + esc(override.was == null ? "verify" : override.was) +
+      " mg &rarr; " + esc(override.now) + " mg. Reason: " + esc(override.reason) + "</div>" : "";
+    return '<div class="oe-onco-review-line"><div class="oe-onco-review-head"><b>' + esc(drug.name || drug.id || "") + "</b>" + badge +
+      '<span class="oe-onco-review-val">' + valueHtml + "</span></div>" + note +
+      '<div class="oe-onco-review-edit">' +
+        '<input class="oe-inp" type="number" step="any" data-oe-inp="onco-ov-val:' + esc(drug.id) + '" placeholder="' + (effective != null ? esc(effective) : "mg") + '">' +
+        '<input class="oe-inp" type="text" data-oe-inp="onco-ov-reason:' + esc(drug.id) + '" placeholder="Reason for override (required)">' +
+        '<button class="oe-btn ghost" data-oe-act="onco-override:' + esc(drug.id) + '">' + ms("edit") + "Save override</button>" +
+      "</div></div>";
+  }
+
+  // Every calculated line, reviewable; [Create & Activate] is disabled whenever an override already
+  // staged in the draft is missing a reason. Staging itself (_stageOverride below) never lets that
+  // happen, but this builder stays trustworthy standalone - same belt-and-suspenders discipline as
+  // the server's _recordOverride throwing even though the UI also guards (functions/_onco_store.js).
+  function _buildReviewPanel(draft) {
+    draft = draft || {};
+    var tmpl = draft.template || {}, drugs = tmpl.drugs || [];
+    var doseByDrug = {}; (draft.calculatedDoses || []).forEach(function (d) { if (d && d.drugId) doseByDrug[d.drugId] = d; });
+    var ovByDrug = {}; (draft.overrides || []).forEach(function (o) { if (o && o.drugId) ovByDrug[o.drugId] = o; });
+    var lines = drugs.map(function (drug) { return _reviewLine(drug, doseByDrug[drug.id], ovByDrug[drug.id]); }).join("");
+    var badOverride = (draft.overrides || []).some(function (o) { return !o || !String(o.reason || "").trim(); });
+    return '<section class="oe-ai-panel oe-onco-review"><h3 class="oe-h3">Review treatment plan &middot; ' + esc(tmpl.name || draft.protocolId || "") + "</h3>" +
+      lines +
+      '<button class="oe-btn primary" data-oe-act="onco-create"' + (badOverride ? " disabled" : "") + ">" + ms("check_circle") + "Create &amp; Activate</button></section>";
+  }
+
+  // Override-needs-reason, enforced HERE too (a client-side mirror of the server's _recordOverride)
+  // so a reasonless edit can never even enter st.oncoDraft.overrides. Rejects (returns null) with no
+  // reason; otherwise returns the new overrides[] with this drug's entry added/replaced.
+  function _stageOverride(overrides, o) {
+    o = o || {};
+    var reason = String(o.reason == null ? "" : o.reason).trim();
+    if (!reason) return null;
+    var out = (overrides || []).filter(function (x) { return x && x.drugId !== o.drugId; });
+    out.push({ drugId: o.drugId, was: o.was, now: o.now, reason: reason });
+    return out;
+  }
+
+  var API = {
+    _buildOncoMatrix: _buildOncoMatrix, doseDrawerView: doseDrawerView, _dayMarker: dayMarker, _doseAdminText: doseAdminText,
+    _buildApplyPanel: _buildApplyPanel, _buildReviewPanel: _buildReviewPanel, _stageOverride: _stageOverride,
+    _version: "1.0"
+  };
   if (root) root.SMD_ONCOUI = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : null));

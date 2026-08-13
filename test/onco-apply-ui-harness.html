@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oncology apply/review/confirm harness (Phase 4, suggest-and-confirm)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };   // smd_onco_protocols + smd_opd_emr(+_write) on
+window.confirm = function () { return true; };   // auto-confirm the "Create & Activate" dialog
+
+// Record EVERY fetch call (method + url + parsed body) so the CDP test can assert exact POST
+// ordering and a hard zero before the confirm tap. The test script fills window.__MANIFEST and
+// window.__TEMPLATES with its fixtures AFTER load, before calling OPDEMR.openProfile().
+window.__fetchCalls = [];
+window.__MANIFEST = { protocols: [] };
+window.__TEMPLATES = {};
+window.fetch = function (url, opts) {
+  opts = opts || {};
+  var body = null; try { body = opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__fetchCalls.push({ method: opts.method || "GET", url: String(url), body: body });
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  if (url.indexOf("/kb/protocols/index.json") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(window.__MANIFEST); } });
+  var m = url.match(/\/kb\/protocols\/([^/]+)\.json$/);
+  if (m && window.__TEMPLATES[m[1]]) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(window.__TEMPLATES[m[1]]); } });
+  if (url.indexOf("/api/queue/onco/plan") >= 0) {
+    var confirming = url.indexOf("/confirm") >= 0;
+    return Promise.resolve({ ok: true, status: 200, json: function () {
+      return Promise.resolve({ ok: true, plan: { planId: "TP-cdp-fixture", status: confirming ? "active" : "draft" } });
+    } });
+  }
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-dose.js, then onco-protocols.js, then opd-emr.js. -->
+<script src="/onco-dose.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_ONCOUI && window.SMD_ONCODOSE);"></script>
+</body></html>

@@ -116,3 +116,101 @@ test("opd-emr.js _render (onco tab) is inert when the flag would be off - covere
     assert.ok(/not enabled/i.test(html), "inert 'not enabled' state when the flag is off");
   } finally { global.SMD_QUEUE_FLAGS = saved; }
 });
+
+/* Phase 4 unit tests: apply-protocol suggestion list, review/override panel, override-needs-reason
+ * (both the pure onco-protocols.js builders and their opd-emr.js Assess-tab wiring). RCHOP itself
+ * stays lifecycleState "draft" (activation is a separate owner/R1 step) - a FIXTURE active protocol
+ * stands in for "some protocol an owner has actually activated". */
+function fixtureActiveTemplate() {
+  return Object.assign({}, RCHOP, { id: "fixture-active", name: "Fixture Active Protocol", version: "1.0", lifecycleState: "active" });
+}
+
+test("_buildApplyPanel offers an ACTIVE protocol and never a draft one (defensive filter)", () => {
+  const active = fixtureActiveTemplate();
+  const html = ONCOUI._buildApplyPanel([active, RCHOP]);   // RCHOP ships lifecycleState "draft"
+  assert.ok(html.indexOf('data-oe-act="onco-apply:' + active.id + '"') >= 0, "the active protocol is offered");
+  assert.ok(html.indexOf("onco-apply:" + RCHOP.id) < 0, "the draft protocol (rchop) is never offered");
+});
+
+test("_buildApplyPanel offers nothing when there are zero active protocols (matches the real repo today)", () => {
+  assert.equal(ONCOUI._buildApplyPanel([RCHOP]), "", "only a draft protocol on file -> nothing offered");
+  assert.equal(ONCOUI._buildApplyPanel([]), "");
+  assert.equal(ONCOUI._buildApplyPanel(null), "");
+});
+
+test("apply-protocol staging produces one calculated line per drug via planDoses", () => {
+  const active = fixtureActiveTemplate();
+  const params = { height: 165, weight: 60 };
+  const calculatedDoses = DOSE.planDoses(active, params);
+  assert.equal(calculatedDoses.length, active.drugs.length, "one lineage per template drug");
+  const draft = { protocolId: active.id, template: active, params: params, calculatedDoses: calculatedDoses, overrides: [] };
+  const html = ONCOUI._buildReviewPanel(draft);
+  active.drugs.forEach(function (d) { assert.ok(html.indexOf(d.name) >= 0, "review panel shows " + d.name); });
+});
+
+test("_buildReviewPanel renders a 'verify' badge for a line whose lineage.final is null (never-invent)", () => {
+  const active = fixtureActiveTemplate();
+  const calculatedDoses = DOSE.planDoses(active, {});   // no height/weight -> every BSA drug is non-computable
+  const draft = { protocolId: active.id, template: active, params: {}, calculatedDoses: calculatedDoses, overrides: [] };
+  const html = ONCOUI._buildReviewPanel(draft);
+  assert.ok(html.indexOf(">verify<") >= 0, "a non-computable line shows verify, not a guessed number");
+  assert.ok(/class="oe-tag oe-review">verify</.test(html), "the verify state carries the review badge, same style as the rest of the AI-assist UI");
+});
+
+test("_stageOverride rejects an override with no reason", () => {
+  assert.equal(ONCOUI._stageOverride([], { drugId: "rituximab", was: 700, now: 600, reason: "" }), null);
+  assert.equal(ONCOUI._stageOverride([], { drugId: "rituximab", was: 700, now: 600, reason: "   " }), null);
+  assert.equal(ONCOUI._stageOverride([], { drugId: "rituximab", was: 700, now: 600 }), null);
+});
+
+test("_stageOverride records {drugId,was,now,reason} once a reason is given, and replaces a prior override for the same drug", () => {
+  const first = ONCOUI._stageOverride([], { drugId: "rituximab", was: 700, now: 600, reason: "Renal impairment" });
+  assert.equal(first.length, 1);
+  assert.deepEqual(first[0], { drugId: "rituximab", was: 700, now: 600, reason: "Renal impairment" });
+  const second = ONCOUI._stageOverride(first, { drugId: "rituximab", was: 700, now: 650, reason: "Revised after labs" });
+  assert.equal(second.length, 1, "same drug replaces, never duplicates");
+  assert.equal(second[0].now, 650);
+});
+
+test("_buildReviewPanel disables Create & Activate when a staged override is missing a reason (defensive, belt-and-suspenders)", () => {
+  const active = fixtureActiveTemplate();
+  const params = { height: 165, weight: 60 };
+  const draft = { protocolId: active.id, template: active, params: params, calculatedDoses: DOSE.planDoses(active, params), overrides: [{ drugId: "rituximab", was: 700, now: 600, reason: "" }] };
+  const html = ONCOUI._buildReviewPanel(draft);
+  assert.ok(/data-oe-act="onco-create"\s+disabled/.test(html), "Create & Activate is disabled");
+});
+
+test("_buildReviewPanel enables Create & Activate once every staged override carries a reason", () => {
+  const active = fixtureActiveTemplate();
+  const params = { height: 165, weight: 60 };
+  const draft = { protocolId: active.id, template: active, params: params, calculatedDoses: DOSE.planDoses(active, params), overrides: [{ drugId: "rituximab", was: 700, now: 600, reason: "Renal impairment" }] };
+  const html = ONCOUI._buildReviewPanel(draft);
+  assert.ok(!/data-oe-act="onco-create"\s+disabled/.test(html), "Create & Activate is enabled");
+  assert.ok(html.indexOf("Renal impairment") >= 0, "the override reason is shown in the review line");
+});
+
+test("opd-emr.js assessTab (write mode, oncoFlagOn) offers the apply panel for an ACTIVE protocol only", () => {
+  const active = fixtureActiveTemplate();
+  const state = { tab: "assess", writeOn: true, assessVals: {}, oncoProtocols: [active, RCHOP], patient: {}, loading: false, error: "" };
+  const html = OPDEMR._render(state);
+  assert.ok(html.indexOf('data-oe-act="onco-apply:' + active.id + '"') >= 0, "active protocol offered near the assessment");
+  assert.ok(html.indexOf("onco-apply:" + RCHOP.id) < 0, "draft protocol not offered");
+});
+
+test("opd-emr.js assessTab shows the review panel (not the apply list) once a plan is staged in st.oncoDraft", () => {
+  const active = fixtureActiveTemplate();
+  const params = { height: 165, weight: 60 };
+  const draft = { protocolId: active.id, template: active, params: params, calculatedDoses: DOSE.planDoses(active, params), overrides: [] };
+  const state = { tab: "assess", writeOn: true, assessVals: {}, oncoDraft: draft, oncoProtocols: [active], patient: {}, loading: false, error: "" };
+  const html = OPDEMR._render(state);
+  assert.ok(html.indexOf('data-oe-act="onco-create"') >= 0, "review panel with Create & Activate is shown");
+  assert.ok(html.indexOf("onco-apply:") < 0, "the apply list is replaced by the review panel while a draft is staged");
+});
+
+test("opd-emr.js assessTab offers nothing oncology-related when smd_opd_emr_write is off (writeOn false)", () => {
+  const active = fixtureActiveTemplate();
+  const state = { tab: "assess", writeOn: false, assessVals: {}, oncoProtocols: [active], patient: {}, loading: false, error: "" };
+  const html = OPDEMR._render(state);
+  assert.ok(html.indexOf("onco-apply:") < 0);
+  assert.ok(html.indexOf("onco-create") < 0);
+});

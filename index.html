@@ -1692,13 +1692,16 @@ window.openExternal = function (u) {
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 <script src="/queue-flags.js?v=q1" defer></script>
 <script src="/queue.js?v=q6consult" defer></script>
-<!-- Oncology treatment-plan matrix + read-only dose drawer (flag smd_onco_protocols, default OFF),
-     rendered inside the opd-emr.js Oncology tab. Read-only over a plan already in state; creating a
-     plan is Phase 4. Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
-<script src="/onco-protocols.js?v=onco3" defer></script>
+<!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
+     computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
+<script src="/onco-dose.js?v=onco1" defer></script>
+<!-- Oncology treatment-plan matrix + read-only dose drawer + Phase 4 apply/review/override panels
+     (flag smd_onco_protocols, default OFF), rendered inside the opd-emr.js Oncology/Assess tabs.
+     Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
+<script src="/onco-protocols.js?v=onco4" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe17-onco" defer></script>
+<script src="/opd-emr.js?v=oe18-onco" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.
