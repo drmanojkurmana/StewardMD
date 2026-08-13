@@ -66,14 +66,22 @@
       if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
       return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
     }
-    var tier = voiceTier(), te = (lang === "te");
-    if (tier === "ultimate") return te ? "telugu-small-q8_0" : "large-v3-turbo-q5_0";
-    if (tier === "pro")      return te ? "telugu-small-q8_0" : "small-q8_0";
-    return "small-q8_0";     // BASE: multilingual Whisper Small INT8 for en / hi / te / auto
+    var tier = voiceTier();
+    // Telugu ALWAYS routes to the Telugu specialist (every tier) — never the en/hi Whisper. This is the
+    // "route through BOTH models" the clinic wants: Telugu speech to the Telugu model, en/hi to Whisper.
+    if (lang === "te") return "telugu-small-q8_0";
+    // Unknown language (Auto, before the first chunk is detected): use a MULTILINGUAL-capable model so a
+    // Telugu opening isn't mangled by the English-only Turbo. BASE carries the multilingual small; PRO and
+    // ULTIMATE reuse the Telugu specialist they already hold (Whisper-small still decodes en/hi acceptably).
+    // Detection then routes the NEXT chunk to the en/hi Whisper below.
+    if (!lang || lang === "auto") return (tier === "base") ? "small-q8_0" : "telugu-small-q8_0";
+    // English / Hindi:
+    if (tier === "ultimate") return "large-v3-turbo-q5_0";
+    return "small-q8_0";     // base + pro: multilingual Whisper Small INT8
   }
   // Which model keys each tier needs (for the Settings download dashboard).
   var TIER_MODELS = {
-    base: ["small-q8_0"],
+    base: ["small-q8_0", "telugu-small-q8_0"],   // BASE now carries the Telugu specialist too, so Telugu routes to it (dual-model)
     pro: ["small-q8_0", "telugu-small-q8_0"],
     ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0"]
   };
