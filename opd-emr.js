@@ -1285,7 +1285,23 @@
       onError: function (err) { setVoiceStatus(err === "clinical-unavailable" ? "On-device voice unavailable on this build." : "Voice error - tap to retry."); st.voiceOn = false; _amb = null; if (_elapsedTmr) { clearInterval(_elapsedTmr); _elapsedTmr = null; } paint(); }
     });
   }
-  function togglePauseVoice() { if (!_amb) return; if (st.voicePaused) { try { _amb.resume(); } catch (x) {} st.voicePaused = false; } else { try { _amb.pause(); } catch (x) {} st.voicePaused = true; } paint(); }
+  function togglePauseVoice() {
+    if (!_amb) return;
+    if (st.voicePaused) {                                   // Resume — back to listening, transcript keeps appending
+      try { _amb.resume(); } catch (x) {}
+      st.voicePaused = false; paint(); return;
+    }
+    // Pause = flush + process the audio so far: show "Finishing your dictation", refine the captured
+    // transcript, then land on the paused state with the fresh transcript. Mirrors Stop but keeps the
+    // session alive (resumable). The engine gates its own onRefine on !paused, so we refine here.
+    try { _amb.pause(); } catch (x) {}
+    st.voicePaused = true;
+    st.voiceProcessing = true;                              // render checks processing first -> the finishing animation
+    if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
+    _procTmr = setTimeout(finishProcessing, 15000);         // safety: never hang the panel
+    paint();
+    doRefine(st.voiceTranscript || _lastFullTranscript || "");   // updates the transcript; doRefine's .then(finishProcessing) clears the state
+  }
   function stopVoice() {
     // _amb.stop() returns true when an in-flight chunk is being flushed AND that flush will itself
     // call onRefine with the COMPLETE transcript (see teardown() in voice-ambient.js) -- in that case
