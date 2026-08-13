@@ -1,0 +1,207 @@
+{
+  "_note": "CTCAE grading catalog for the StewardMD onco-ctcae engine (Phase 8 P2). CTCAE is NCI public-domain, so REAL grade definitions are seeded here, but ACCURACY over coverage: only a curated set of the most common chemo/IO-relevant adverse events is included, each grade quoted verbatim from NCI CTCAE v5.0 and flagged requiresR1Verification. A grade that CTCAE does not define at that level is represented by null (rendered as an honest 'not defined at this grade'), NEVER by an invented cut-off. Any adverse event NOT listed here is an explicit gap: consult the full NCI CTCAE v5.0. The v4.03 edition is present in the version toggle but intentionally NOT seeded (a marked gap) because the v4.03 grade deltas are not reproduced here. Do not flip requiresR1Verification off, and do not add or edit a threshold, without R1 clinical sign-off against the licensed/official NCI CTCAE source.",
+  "schemaVersion": "1.0",
+  "gapMessage": "Consult the full NCI CTCAE v5.0. This adverse event (or grade) is not seeded in StewardMD.",
+  "versions": [
+    { "version": "CTCAE v5.0", "seeded": true, "requiresR1Verification": true, "provenance": "Grade definitions quoted from NCI CTCAE v5.0 (Common Terminology Criteria for Adverse Events, US National Cancer Institute, public domain). Curated subset only; requires R1 clinical verification before use." },
+    { "version": "CTCAE v4.03", "seeded": false }
+  ],
+  "aes": [
+    {
+      "id": "neutrophil_count_decreased",
+      "name": "Neutrophil count decreased",
+      "category": "Investigations",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "<LLN - 1500/mm3 (<LLN - 1.5 x10^9 /L)",
+        "2": "<1500 - 1000/mm3 (<1.5 - 1.0 x10^9 /L)",
+        "3": "<1000 - 500/mm3 (<1.0 - 0.5 x10^9 /L)",
+        "4": "<500/mm3 (<0.5 x10^9 /L)",
+        "5": null
+      }
+    },
+    {
+      "id": "anemia",
+      "name": "Anemia",
+      "category": "Blood and lymphatic system disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Hemoglobin <LLN - 10.0 g/dL (<LLN - 100 g/L; <LLN - 6.2 mmol/L)",
+        "2": "Hemoglobin <10.0 - 8.0 g/dL (<100 - 80 g/L; <6.2 - 4.9 mmol/L)",
+        "3": "Hemoglobin <8.0 g/dL (<80 g/L; <4.9 mmol/L); transfusion indicated",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": "Death"
+      }
+    },
+    {
+      "id": "platelet_count_decreased",
+      "name": "Platelet count decreased",
+      "category": "Investigations",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "<LLN - 75,000/mm3 (<LLN - 75.0 x10^9 /L)",
+        "2": "<75,000 - 50,000/mm3 (<75.0 - 50.0 x10^9 /L)",
+        "3": "<50,000 - 25,000/mm3 (<50.0 - 25.0 x10^9 /L)",
+        "4": "<25,000/mm3 (<25.0 x10^9 /L)",
+        "5": null
+      }
+    },
+    {
+      "id": "febrile_neutropenia",
+      "name": "Febrile neutropenia",
+      "category": "Blood and lymphatic system disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": null,
+        "2": null,
+        "3": "ANC <1000/mm3 with a single temperature of >38.3 degrees C (101 degrees F) or a sustained temperature of >=38 degrees C (100.4 degrees F) for more than one hour",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": "Death"
+      }
+    },
+    {
+      "id": "nausea",
+      "name": "Nausea",
+      "category": "Gastrointestinal disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Loss of appetite without alteration in eating habits",
+        "2": "Oral intake decreased without significant weight loss, dehydration or malnutrition",
+        "3": "Inadequate oral caloric or fluid intake; tube feeding, TPN or hospitalization indicated",
+        "4": null,
+        "5": null
+      }
+    },
+    {
+      "id": "vomiting",
+      "name": "Vomiting",
+      "category": "Gastrointestinal disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "1 - 2 episodes (separated by 5 minutes) in 24 hours",
+        "2": "3 - 5 episodes (separated by 5 minutes) in 24 hours",
+        "3": ">=6 episodes (separated by 5 minutes) in 24 hours; tube feeding, TPN or hospitalization indicated",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": "Death"
+      }
+    },
+    {
+      "id": "diarrhea",
+      "name": "Diarrhea",
+      "category": "Gastrointestinal disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Increase of <4 stools per day over baseline; mild increase in ostomy output compared to baseline",
+        "2": "Increase of 4 - 6 stools per day over baseline; moderate increase in ostomy output compared to baseline; limiting instrumental ADL",
+        "3": "Increase of >=7 stools per day over baseline; hospitalization indicated; severe increase in ostomy output compared to baseline; limiting self care ADL",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": "Death"
+      }
+    },
+    {
+      "id": "mucositis_oral",
+      "name": "Mucositis oral",
+      "category": "Gastrointestinal disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Asymptomatic or mild symptoms; intervention not indicated",
+        "2": "Moderate pain or ulcer that does not interfere with oral intake; modified diet indicated",
+        "3": "Severe pain; interfering with oral intake",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": "Death"
+      }
+    },
+    {
+      "id": "fatigue",
+      "name": "Fatigue",
+      "category": "General disorders and administration site conditions",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Fatigue relieved by rest",
+        "2": "Fatigue not relieved by rest; limiting instrumental ADL",
+        "3": "Fatigue not relieved by rest, limiting self care ADL",
+        "4": null,
+        "5": null
+      }
+    },
+    {
+      "id": "peripheral_sensory_neuropathy",
+      "name": "Peripheral sensory neuropathy",
+      "category": "Nervous system disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Asymptomatic; loss of deep tendon reflexes or paresthesia",
+        "2": "Moderate symptoms; limiting instrumental ADL",
+        "3": "Severe symptoms; limiting self care ADL",
+        "4": "Life-threatening consequences; urgent intervention indicated",
+        "5": null
+      }
+    },
+    {
+      "id": "alt_increased",
+      "name": "Alanine aminotransferase increased",
+      "category": "Investigations",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": ">ULN - 3.0 x ULN (if baseline normal); 1.5 - 3.0 x baseline (if baseline abnormal)",
+        "2": ">3.0 - 5.0 x ULN (if baseline normal); >3.0 - 5.0 x baseline (if baseline abnormal)",
+        "3": ">5.0 - 20.0 x ULN (if baseline normal); >5.0 - 20.0 x baseline (if baseline abnormal)",
+        "4": ">20.0 x ULN (if baseline normal); >20.0 x baseline (if baseline abnormal)",
+        "5": null
+      }
+    },
+    {
+      "id": "ast_increased",
+      "name": "Aspartate aminotransferase increased",
+      "category": "Investigations",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": ">ULN - 3.0 x ULN (if baseline normal); 1.5 - 3.0 x baseline (if baseline abnormal)",
+        "2": ">3.0 - 5.0 x ULN (if baseline normal); >3.0 - 5.0 x baseline (if baseline abnormal)",
+        "3": ">5.0 - 20.0 x ULN (if baseline normal); >5.0 - 20.0 x baseline (if baseline abnormal)",
+        "4": ">20.0 x ULN (if baseline normal); >20.0 x baseline (if baseline abnormal)",
+        "5": null
+      }
+    },
+    {
+      "id": "creatinine_increased",
+      "name": "Creatinine increased",
+      "category": "Investigations",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": ">1 - 1.5 x baseline; >ULN - 1.5 x ULN",
+        "2": ">1.5 - 3.0 x baseline; >1.5 - 3.0 x ULN",
+        "3": ">3.0 x baseline; >3.0 - 6.0 x ULN",
+        "4": ">6.0 x ULN",
+        "5": null
+      }
+    },
+    {
+      "id": "rash_maculopapular",
+      "name": "Rash maculo-papular",
+      "category": "Skin and subcutaneous tissue disorders",
+      "source": "NCI CTCAE v5.0",
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Macules/papules covering <10% BSA with or without symptoms (e.g. pruritus, burning, tightness)",
+        "2": "Macules/papules covering 10 - 30% BSA with or without symptoms (e.g. pruritus, burning, tightness); limiting instrumental ADL; rash covering >30% BSA with or without mild symptoms",
+        "3": "Macules/papules covering >30% BSA with moderate or severe symptoms; limiting self care ADL",
+        "4": null,
+        "5": null
+      }
+    }
+  ]
+}

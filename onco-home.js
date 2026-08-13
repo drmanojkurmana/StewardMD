@@ -145,7 +145,46 @@
    * The header + search input are painted ONCE (paintShell); only #ohResults is repainted per
    * keystroke, so typing never blurs the input (same fix queue.js applies to its live search).
    * ========================================================================================== */
-  var st = { q: "", ctx: null, mode: null };
+  var st = { q: "", ctx: null, mode: null, favIndex: {} };
+
+  /* ---- Feature 4: Favorites + Recent (onco-favorites.js). Pure UX, no clinical content. Star a tool
+   * card / disease / calculator, and a recent-items list across Onco Home. Star rendering + recording
+   * are entirely no-op unless the flag is on AND window.SMD_ONCOFAV loaded (private-mode safe). ---- */
+  function favOn() { return flag("smd_onco_favorites") && !!G.SMD_ONCOFAV; }
+  function starHtml(item) {
+    if (!favOn()) return "";
+    st.favIndex[item.id] = item;
+    var on = false; try { on = G.SMD_ONCOFAV.has(item.id); } catch (e) {}
+    return '<button class="oh-star' + (on ? " on" : "") + '" data-oh-fav="' + esc(item.id) + '" aria-label="' + (on ? "Remove favourite" : "Add favourite") + '">' + (on ? "★" : "☆") + "</button>";
+  }
+  // Wrap navigational HTML with a star sibling (never nested inside the button) when favorites is on.
+  function wrapStar(inner, item, cls) { var s = starHtml(item); return s ? '<div class="' + (cls || "oh-star-row") + '">' + inner + s + "</div>" : inner; }
+  function favRowHtml(item) {
+    st.favIndex[item.id] = item;
+    var inner = '<button class="oh-favchip" data-oh-act="' + esc(item.act) + '"><span class="oh-favchip-t">' + esc(item.label) + "</span></button>";
+    return wrapStar(inner, item, "oh-star-row");
+  }
+  function favSection() {
+    if (!favOn()) return "";
+    var favs = [], recents = [];
+    try { favs = G.SMD_ONCOFAV.all() || []; } catch (e) {}
+    try { recents = G.SMD_ONCOFAV.recent() || []; } catch (e) {}
+    if (!favs.length && !recents.length) return "";
+    var out = "";
+    if (favs.length) out += '<div class="oh-grp"><div class="oh-grp-h">Favourites</div><div class="oh-favlist">' + favs.map(favRowHtml).join("") + "</div></div>";
+    if (recents.length) out += '<div class="oh-grp"><div class="oh-grp-h">Recent</div><div class="oh-favlist">' + recents.map(favRowHtml).join("") + "</div></div>";
+    return out;
+  }
+  function toggleFav(id) {
+    try { if (G.SMD_ONCOFAV) G.SMD_ONCOFAV.toggle(st.favIndex[id] || { id: id, label: id, act: "" }); } catch (e) {}
+    renderResults();
+  }
+  function recordRecent(b, act) {
+    if (!favOn() || !act) return;
+    var labelEl = b && b.querySelector ? (b.querySelector(".oh-card-t") || b.querySelector(".oh-row-t") || b.querySelector(".oh-favchip-t")) : null;
+    var label = labelEl ? labelEl.textContent : (b && b.textContent) || act;
+    try { G.SMD_ONCOFAV.record({ id: act, label: String(label || act).trim(), act: act }); } catch (e) {}
+  }
 
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } }
   function flag(name) { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool(name)); } catch (e) { return false; } }
@@ -197,8 +236,8 @@
   function evForDisease(d) { try { return (G.SMD_ONCOEV && G.SMD_ONCOEV.forDisease) ? G.SMD_ONCOEV.forDisease(d) : ""; } catch (e) { return ""; } }
 
   function resultSection(label, itemsHtml) { return itemsHtml ? '<div class="oh-sec"><div class="oh-sec-h">' + esc(label) + "</div>" + itemsHtml + "</div>" : ""; }
-  function calcRowHtml(c) { return '<button class="oh-row" data-oh-act="calc:' + esc(c.id) + '"><span class="oh-row-t">' + esc(c.title) + '</span><span class="oh-row-s">' + esc(c.cat || "") + "</span>" + evForCalc(c) + "</button>"; }
-  function diseaseRowHtml(d) { return '<button class="oh-row" data-oh-act="kb:' + esc(d.id) + '"><span class="oh-row-t">' + esc(d.name) + '</span><span class="oh-row-s">' + esc(d.system || "") + "</span>" + evForDisease(d) + "</button>"; }
+  function calcRowHtml(c) { var inner = '<button class="oh-row" data-oh-act="calc:' + esc(c.id) + '"><span class="oh-row-t">' + esc(c.title) + '</span><span class="oh-row-s">' + esc(c.cat || "") + "</span>" + evForCalc(c) + "</button>"; return wrapStar(inner, { id: "calc:" + c.id, label: c.title, act: "calc:" + c.id }, "oh-star-row"); }
+  function diseaseRowHtml(d) { var inner = '<button class="oh-row" data-oh-act="kb:' + esc(d.id) + '"><span class="oh-row-t">' + esc(d.name) + '</span><span class="oh-row-s">' + esc(d.system || "") + "</span>" + evForDisease(d) + "</button>"; return wrapStar(inner, { id: "kb:" + d.id, label: d.name, act: "kb:" + d.id }, "oh-star-row"); }
   function drugRowHtml(d) { return '<button class="oh-row" data-oh-act="drug-browse"><span class="oh-row-t">' + esc(d.generic) + '</span><span class="oh-row-s">' + esc(d.cls || "") + "</span></button>"; }
   function protocolRowHtml(p) { return '<button class="oh-row" data-oh-act="protocol-open"><span class="oh-row-t">' + esc(p.name || p.id) + '</span><span class="oh-row-s">' + esc(p.lifecycleState || "") + "</span></button>"; }
 
@@ -230,8 +269,11 @@
       { title: "Protocol Reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref" }
     ] },
     { group: "Monitoring", cards: [
-      { title: "Toxicity / CTCAE", sub: "Coming in P1", placeholder: true },
-      { title: "IO Toxicity", sub: "Coming in P2", placeholder: true }
+      { title: "Toxicity / CTCAE", sub: "CTCAE v5.0 grading (R1-pending)", act: "ctcae-open", flag: "smd_onco_ctcae", phSub: "Coming in P2" },
+      { title: "IO Toxicity (irAE)", sub: "irAE management principles (ASCO / NCCN / SITC)", act: "iotox-open", flag: "smd_onco_iotox", phSub: "Coming in P2" }
+    ] },
+    { group: "Response assessment", cards: [
+      { title: "RECIST 1.1", sub: "Target-lesion response calculator", act: "recist-open", flag: "smd_onco_recist", phSub: "Coming in P2" }
     ] },
     { group: "Medication", cards: [
       { title: "Drug Info & Interaction", sub: "Formulary + interaction checker", act: "drug-browse" }
@@ -251,7 +293,8 @@
       return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.phSub) + "</div></div>";
     }
     if (c.placeholder) return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></div>";
-    return '<button class="oh-card" data-oh-act="' + esc(c.act) + '"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></button>";
+    var inner = '<button class="oh-card" data-oh-act="' + esc(c.act) + '"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></button>";
+    return wrapStar(inner, { id: "card:" + c.act, label: c.title, act: c.act }, "oh-card-wrap");
   }
   function gridHtml() {
     return GRID.map(function (g) { return '<div class="oh-grp"><div class="oh-grp-h">' + esc(g.group) + '</div><div class="oh-grid">' + g.cards.map(cardHtml).join("") + "</div></div>"; }).join("");
@@ -314,7 +357,7 @@
     if (state.mode === "kb") return kbBrowseHtml();
     if (state.mode === "drugonco") return drugOncoHtml();
     if (state.mode === "protoref") return protoRefHtml();
-    return contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
+    return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
 
   function renderResults() { var box = document.getElementById("ohResults"); if (box) box.innerHTML = bodyHtml(st); }
@@ -333,10 +376,15 @@
   }
 
   function onClick(e) {
-    var t = e.target, b = (t && t.closest) ? t.closest("[data-oh-act]") : null;
+    var t = e.target;
+    var star = (t && t.closest) ? t.closest("[data-oh-fav]") : null;
+    if (star) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); toggleFav(star.getAttribute("data-oh-fav")); return; }
+    var b = (t && t.closest) ? t.closest("[data-oh-act]") : null;
     if (!b) return;
     var act = b.getAttribute("data-oh-act") || "";
     var i = act.indexOf(":"), verb = i >= 0 ? act.slice(0, i) : act, arg = i >= 0 ? act.slice(i + 1) : "";
+    // Recent: record navigational cards/rows/chips (never close/back/toggles). No-op unless favorites on.
+    if (b.classList && (b.classList.contains("oh-card") || b.classList.contains("oh-row") || b.classList.contains("oh-favchip"))) recordRecent(b, act);
     if (verb === "close") { close(); return; }
     if (verb === "calc-cat") { try { G.MEDCALC && G.MEDCALC.openList && G.MEDCALC.openList("Oncology"); } catch (e2) {} return; }
     if (verb === "calc") { try { G.MEDCALC && G.MEDCALC.open && G.MEDCALC.open(arg); } catch (e2) {} return; }
@@ -349,6 +397,9 @@
     if (verb === "drug-interactions") { try { G.MEDDRUGS && G.MEDDRUGS.openInteractions && G.MEDDRUGS.openInteractions(); } catch (e2) {} return; }
     if (verb === "protoref-open") { st.mode = "protoref"; renderResults(); return; }
     if (verb === "staging-open") { try { G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList && G.SMD_ONCOSTAGING.openList(); } catch (e2) {} return; }
+    if (verb === "ctcae-open") { try { G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList && G.SMD_ONCOCTCAE.openList(); } catch (e2) {} return; }
+    if (verb === "iotox-open") { try { G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList && G.SMD_ONCOIOTOX.openList(); } catch (e2) {} return; }
+    if (verb === "recist-open") { try { G.SMD_ONCORECIST && G.SMD_ONCORECIST.open && G.SMD_ONCORECIST.open(); } catch (e2) {} return; }
     if (verb === "protocol-open") { openProtocolContext(); return; }
   }
 

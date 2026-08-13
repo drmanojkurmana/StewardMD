@@ -103,6 +103,41 @@ body.oh-lock { overflow: hidden; }
 .stg-gap-t { font: 700 13.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
 .stg-gap-s { font: 500 11.5px var(--sans, system-ui); color: var(--slate, #555); margin-top: 6px; line-height: 1.5; }
 
+/* ===== CTCAE grading + IO toxicity overlays (onco-ctcae.js / onco-iotox.js) — reuse .oh-*/.stg-* chrome ===== */
+.ctc-note { font: 500 11.5px var(--sans, system-ui); color: var(--slate, #555); background: var(--teal-soft, #e0f2f1); border-radius: 8px; padding: 8px 10px; margin-bottom: 14px; line-height: 1.5; }
+.ctc-grow { display: flex; gap: 10px; padding: 9px 11px; border: 1px solid var(--line, #e5e5e0); border-radius: 8px; margin-bottom: 6px; background: var(--panel, #fff); align-items: baseline; }
+.ctc-gnum { flex: 0 0 68px; font: 800 12.5px var(--sans, system-ui); color: var(--teal, #0a9396); }
+.ctc-gtext { flex: 1; font: 500 12.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.5; }
+.ctc-nd { font: 500 12px var(--sans, system-ui); color: var(--slate-soft, #888); font-style: italic; }
+
+/* ===== RECIST 1.1 calculator (onco-recist.js) ===== */
+.rec-form { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+@media (min-width: 560px) { .rec-form { grid-template-columns: 1fr 1fr; } }
+.rec-field { display: flex; flex-direction: column; gap: 5px; }
+.rec-field > span { font: 700 11.5px var(--sans, system-ui); color: var(--slate, #555); }
+.rec-field .oh-search { margin-bottom: 0; }
+.rec-check { display: flex; align-items: center; gap: 8px; font: 600 13px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.rec-out { border: 1px solid var(--line, #e5e5e0); border-left-width: 5px; border-radius: 12px; padding: 13px 14px; margin-bottom: 12px; background: var(--panel, #fff); }
+.rec-cat { font: 800 15px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.rec-reason { font: 500 12.5px var(--sans, system-ui); color: var(--slate, #555); margin-top: 5px; line-height: 1.5; }
+.rec-nums { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font: 700 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.rec-CR { border-left-color: #047857; } .rec-PR { border-left-color: var(--teal, #0a9396); }
+.rec-SD { border-left-color: var(--slate-soft, #888); } .rec-PD { border-left-color: var(--warn, #d97706); }
+.rec-PD .rec-cat { color: #b45309; }
+
+/* ===== Favorites + Recent (onco-favorites.js, folded into onco-home.js) ===== */
+.oh-card-wrap { position: relative; }
+.oh-card-wrap .oh-star { position: absolute; top: 7px; right: 7px; }
+.oh-star-row { display: flex; align-items: stretch; gap: 6px; margin-bottom: 7px; }
+.oh-star-row .oh-row, .oh-star-row .oh-favchip { flex: 1; margin-bottom: 0; }
+.oh-star { flex: 0 0 auto; background: transparent; border: none; color: var(--slate-soft, #888); font-size: 18px; line-height: 1; padding: 4px 6px; cursor: pointer; border-radius: 8px; }
+.oh-star.on { color: var(--teal, #0a9396); }
+.oh-star:active { transform: scale(.9); }
+.oh-favlist { display: flex; flex-direction: column; gap: 0; }
+.oh-favchip { text-align: left; background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+.oh-favchip:active { border-color: var(--teal, #0a9396); }
+.oh-favchip-t { font: 700 13px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+
 body.dark .oh-overlay, body.v3-dark .oh-overlay { background: var(--paper, #0f1a1a); }
 body.dark .oh-ctx, body.v3-dark .oh-ctx { background: #0c2b29; }
 body.dark .oev-guideline, body.v3-dark .oev-guideline { background: #1e2352; color: #a5b4fc; }

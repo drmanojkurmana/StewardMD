@@ -56,7 +56,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q3b">
 <link rel="stylesheet" href="/opd-emr.css?v=oe18-onco6">
-<link rel="stylesheet" href="/onco-home.css?v=oh2">
+<link rel="stylesheet" href="/onco-home.css?v=oh3">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1722,7 +1722,16 @@ window.openExternal = function (u) {
      protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
 <script src="/onco-staging.js?v=oh2" defer></script>
-<script src="/onco-home.js?v=oh2" defer></script>
+<!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
+     all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
+     fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
+     doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
+     before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
+<script src="/onco-ctcae.js?v=oh3" defer></script>
+<script src="/onco-iotox.js?v=oh3" defer></script>
+<script src="/onco-recist.js?v=oh3" defer></script>
+<script src="/onco-favorites.js?v=oh3" defer></script>
+<script src="/onco-home.js?v=oh3" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.
