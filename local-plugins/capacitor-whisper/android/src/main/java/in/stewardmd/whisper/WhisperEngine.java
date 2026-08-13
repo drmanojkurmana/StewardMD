@@ -75,6 +75,47 @@ public class WhisperEngine {
         loadedModelPath = null;
     }
 
+    /**
+     * Transcribe a 16 kHz mono 16-bit PCM WAV file directly (bypasses the mic). Runs whisper.cpp on
+     * the file's samples and returns the text synchronously. Used to validate on-device inference
+     * against a known audio clip (also handy for transcribing a recorded voice memo). No cloud.
+     */
+    public synchronized String transcribeFile(String modelPath, String wavPath, String language, String initialPrompt) throws Exception {
+        if (!WhisperNative.isAvailable()) throw new IllegalStateException("unsupported-architecture");
+        if (!loadModel(modelPath) || ctx == 0L) throw new IllegalStateException("model-load-failed");
+        float[] audio = readWav16kMono(wavPath);
+        if (audio.length < 3200) return "";   // < ~0.2 s
+        int nThreads = Math.max(1, Math.min(4, Runtime.getRuntime().availableProcessors() - 1));
+        String text = WhisperNative.fullTranscribe(
+            ctx, audio, (language == null || language.isEmpty()) ? "auto" : language,
+            initialPrompt == null ? "" : initialPrompt, nThreads, 5);
+        return text == null ? "" : text;
+    }
+
+    // Minimal WAV reader: expects 16 kHz mono PCM16 (what afconvert/ffmpeg produce for whisper).
+    // Walks the RIFF chunks to find `data`, then reads little-endian int16 -> float [-1,1].
+    private static float[] readWav16kMono(String path) throws Exception {
+        java.io.File file = new java.io.File(path);
+        byte[] b = new byte[(int) file.length()];
+        java.io.DataInputStream dis = new java.io.DataInputStream(new java.io.FileInputStream(file));
+        try { dis.readFully(b); } finally { dis.close(); }
+        int off = 12, dataOff = -1, dataLen = 0;   // skip RIFF header (12 bytes)
+        while (off + 8 <= b.length) {
+            int id = ((b[off] & 0xff) << 24) | ((b[off + 1] & 0xff) << 16) | ((b[off + 2] & 0xff) << 8) | (b[off + 3] & 0xff);
+            int sz = (b[off + 4] & 0xff) | ((b[off + 5] & 0xff) << 8) | ((b[off + 6] & 0xff) << 16) | ((b[off + 7] & 0xff) << 24);
+            if (id == 0x64617461) { dataOff = off + 8; dataLen = sz; break; }   // 'data'
+            off += 8 + sz + (sz & 1);
+        }
+        if (dataOff < 0) { dataOff = 44; dataLen = b.length - 44; }   // fallback: canonical 44-byte header
+        int n = Math.max(0, Math.min(dataLen, b.length - dataOff) / 2);
+        float[] f = new float[n];
+        for (int k = 0; k < n; k++) {
+            short s = (short) ((b[dataOff + 2 * k] & 0xff) | (b[dataOff + 2 * k + 1] << 8));
+            f[k] = s / 32768f;
+        }
+        return f;
+    }
+
     private void emitState(String s) {
         if (onState != null) onState.on(s);
     }
