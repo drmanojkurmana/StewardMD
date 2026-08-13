@@ -620,6 +620,7 @@
       '<div class="oe-canvas">' + body + "</div></div>";
   }
   function loadProfile(opts) {
+    if (st.source === "local") { st.loading = false; paint(); return; }   // personal clinic: no hospital profile/labs to fetch
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     fetch(a.base + "/profile" + q, { headers: authHeaders(), credentials: "include" })
@@ -633,6 +634,11 @@
       .catch(function () { st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
+    if (st.source === "local") {   // personal clinic: prefill from the on-device store (no GHIS fetch)
+      st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
+      st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
+      paint(); return;
+    }
     st.assessLoading = true; st.assessErr = ""; paint();
     var a = ghisAuth();
     fetch(a.base + "/assessment?patientId=" + encodeURIComponent(st.patient.mrn || "") + "&episodeId=" + encodeURIComponent(st.episodeId || ""), { headers: authHeaders(), credentials: "include" })
@@ -678,6 +684,11 @@
       { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
   }
   function submitAssessment() {
+    if (st.source === "local") {   // personal clinic: save the consult on-device (no GHIS)
+      if (!confirmed("Save this consult to " + emrLabel() + " on this phone?")) return;
+      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}); } catch (e) {}
+      st.savedConsult = true; toast("Saved to " + emrLabel() + " on this device."); paint(); return;
+    }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
@@ -1156,13 +1167,16 @@
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.emrLabel = opts.emrLabel || (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS");   // GHIS for GIMSR, generic EMR for other connected systems
-    st.writeOn = writeFlagOn();
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic, on-device)
+    _localStore = (st.source === "local") ? (opts.localStore || null) : null;
+    st.emrLabel = opts.emrLabel || (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"));
+    st.writeOn = (st.source === "local") ? true : writeFlagOn();   // local save is always allowed (on-device, no server gate)
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     paint();
     loadProfile(opts);
-    if (opts.tab === "assess") loadAssessment();              // jump straight to the GHIS Initial Assessment
+    if (opts.tab === "assess") loadAssessment();              // jump straight to the Initial Assessment
   }
+  var _localStore = null;   // personal-clinic backend (getConsult/saveConsult), set when source === "local"
   // ---- per-field dictation (fill ONLY the tapped column) ---------------------------------------
   var _fieldSession = null;
   function fmicNode(name) { var l = document.querySelectorAll("#smdOpdEmr .oe-fmic"); for (var i = 0; i < l.length; i++) { if (l[i].getAttribute("data-oe-act") === "fieldmic:" + name) return l[i]; } return null; }
