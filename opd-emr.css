@@ -196,20 +196,25 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-ai-disc .material-symbols-outlined { font-size: 15px; flex: 0 0 auto; margin-top: 1px; }
 
 /* Ask MaiK — AI call-to-action with a soft drifting "aurora" glow behind frosted glass (pure CSS, GPU) */
-#smdOpdEmr .oe-maik-cta { display: flex; align-items: center; gap: 13px; width: 100%; padding: 13px 15px; margin: 8px 0 12px; border: 1px solid var(--outline-variant); border-radius: 16px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; transition: box-shadow .15s, border-color .15s, transform .08s; }
-#smdOpdEmr .oe-maik-cta:hover { border-color: rgba(124, 58, 237, .4); box-shadow: 0 8px 20px -12px rgba(124, 58, 237, .45); }
+#smdOpdEmr .oe-maik-cta { position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: center; gap: 13px; width: 100%; padding: 13px 15px; margin: 8px 0 12px; border: 1px solid rgba(124, 58, 237, .32); border-radius: 16px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; transition: transform .08s; animation: oeMaikBloom 6s ease-in-out infinite; }
 #smdOpdEmr .oe-maik-cta:active { transform: scale(.99); }
-#smdOpdEmr .oe-maik-cta[disabled] { cursor: default; opacity: .7; }
-#smdOpdEmr .oe-maik-glow { display: none; }   /* legacy aurora removed */
+#smdOpdEmr .oe-maik-cta[disabled] { cursor: default; }
+/* symmetric aurora glow: a mirror-symmetric multi-colour sheen that drifts evenly left<->right behind
+   the content (never lopsided), + a symmetric colour-shifting outer bloom on .oe-maik-cta. */
+#smdOpdEmr .oe-maik-glow { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; background: linear-gradient(90deg, rgba(99,102,241,.22), rgba(168,85,247,.16), rgba(236,72,153,.22), rgba(168,85,247,.16), rgba(99,102,241,.22)); background-size: 220% 100%; animation: oeMaikAurora 7s ease-in-out infinite; }
+#smdOpdEmr .oe-maik-ico, #smdOpdEmr .oe-maik-txt { position: relative; z-index: 1; }
 #smdOpdEmr .oe-maik-ico { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); box-shadow: 0 5px 14px -5px rgba(124, 58, 237, .55); }
 #smdOpdEmr .oe-maik-ico .material-symbols-outlined { font-size: 22px; color: #fff; background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #fff; }
 #smdOpdEmr .oe-maik-txt { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; flex: 1; }
 #smdOpdEmr .oe-maik-txt b { font: 800 15px var(--q-sans); color: var(--on-surface); }
 #smdOpdEmr .oe-maik-txt span { font: 500 12px var(--q-sans); color: var(--on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#smdOpdEmr .oe-maik-cta::after { content: "\203A"; flex: 0 0 auto; font: 700 22px var(--q-sans); color: var(--on-surface-variant); line-height: 1; }
+#smdOpdEmr .oe-maik-cta::after { content: "\203A"; position: relative; z-index: 1; flex: 0 0 auto; font: 700 22px var(--q-sans); color: var(--on-surface-variant); line-height: 1; }
 #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico { animation: oeMaikPulse 1.2s ease-in-out infinite; }
+#smdOpdEmr .oe-maik-cta.busy .oe-maik-glow { animation-duration: 2.4s; }
+@keyframes oeMaikAurora { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes oeMaikBloom { 0%, 100% { box-shadow: 0 4px 22px -8px rgba(99, 102, 241, .5); } 50% { box-shadow: 0 6px 26px -6px rgba(236, 72, 153, .55); } }
 @keyframes oeMaikPulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on { animation: none; } }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on, #smdOpdEmr .oe-maik-cta, #smdOpdEmr .oe-maik-glow { animation: none; } #smdOpdEmr .oe-maik-cta { box-shadow: 0 4px 18px -8px rgba(124, 58, 237, .45); } }
 
 /* per-field dictation mic — dictate into ONE column only (deterministic placement) */
 #smdOpdEmr .oe-inp-wrap { display: flex; align-items: stretch; gap: 6px; }
