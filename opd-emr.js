@@ -401,7 +401,7 @@
     // (also strips its line from the Management plan); tap the order glyph to place it in GHIS.
     function invChips() {
       var list = st.dictatedInv || []; if (!list.length) return "";
-      var canOrder = st.source !== "local";
+      var canOrder = st.source !== "local" && !st.noStore;   // GHIS ordering only; local/decision-support have no server to order against
       return '<div class="oe-vc-orders"><div class="oe-vc-orders-h">' + ms("science") + "<span>Investigations advised</span></div><div class=\"oe-vc-chips\">" +
         list.map(function (nm, i) {
           return '<span class="oe-vc-chip2">' + esc(nm) +
@@ -889,8 +889,14 @@
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
   function clearAssessment() {
-    if (!confirmed("Clear every field and save a blank assessment to " + emrLabel() + "? This wipes the current Initial Assessment.")) return;
+    var q = st.noStore ? "Clear every field?" : ("Clear every field and save a blank assessment to " + emrLabel() + "? This wipes the current Initial Assessment.");
+    if (!confirmed(q)) return;
     st.assessVals = {}; st.assessTouched = {};
+    if (st.noStore) { paint(); return; }                                   // nothing is stored — just clear the form
+    if (st.source === "local") {                                           // clear the on-device consult (auto Drive backup), no GHIS
+      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload({}), {}); } catch (e) {}
+      toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
+    }
     paint();
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared" });
