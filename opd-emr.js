@@ -1012,12 +1012,15 @@
       }
       // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
       // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
-      if (r.alcoholDetail) {
-        var note = String(r.alcoholDetail), ac = alcoholCalc(r.alcoholDetail);
-        if (ac) note += " (" + ac.pureMl + " ml pure alcohol, ~" + ac.grams + " g, ~" + ac.std + " standard drink" + (ac.std === 1 ? "" : "s") + ")";
+      var alcAff = (r.emrFields && r.emrFields.alcohol === "Yes") || !!r.alcoholDetail;
+      var ac = alcoholCalc(r.alcoholDetail || r.en || "");   // parse "<n> ml <drink>" from the detail OR the English transcript (needs a drink-type word, so 'ml saline' won't trigger)
+      if (alcAff || ac) {
         applyVoice({ updates: [{ field: "habits", value: "Yes", applied: true }, { field: "alcohol", value: "Yes", applied: true }] });
-        st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
-        if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
+        if (ac) {
+          var note = (r.alcoholDetail || (ac.ml + " ml " + ac.type)) + " (" + ac.pureMl + " ml pure alcohol, ~" + ac.grams + " g, ~" + ac.std + " standard drink" + (ac.std === 1 ? "" : "s") + ")";
+          st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+          if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
+        }
       }
     }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
