@@ -112,6 +112,7 @@ const S = {
   reference: loadJson(join(KB, 'schema/reference.schema.json')),
   treatment: loadJson(join(KB, 'schema/treatment.schema.json')),
   policy: loadJson(join(KB, 'schema/policy-overlay.schema.json')),
+  protocol: loadJson(join(KB, 'schema/protocol.schema.json')),
 };
 
 // ---- gather ids for referential-integrity checks ---------------------------
@@ -199,6 +200,9 @@ const FORMULARY_TABLE = {
 }
 
 run('policies', S.policy);
+
+// Oncology protocol templates (reusable regimens; snapshotted into treatment plans).
+run('protocols', S.protocol);
 
 // ---- summary ----------------------------------------------------------------
 if (!QUIET) {
