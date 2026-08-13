@@ -38,6 +38,9 @@ export function maikExtractPrompt(ctx, transcript) {
     "The patient was just asked about: \"" + String(ctx.targetHint || ctx.targetField || "") + "\".\n" +
     "Return ONLY JSON: {\"findings\":[{\"field\":\"\",\"value\":\"\",\"confidence\":0.0}]}.\n" +
     "field MUST be one of these allowed field names (name only, no prefix): " + JSON.stringify(allowed).slice(0, 500) + ".\n" +
+    ((ctx.targetKind === "redflag" || ctx.targetKind === "associated")
+      ? "This was a yes/no screening question: the value for \"" + String(ctx.targetField || "") + "\" MUST be exactly \"present\" or \"absent\" (present if the patient affirms or DESCRIBES the symptom, absent only if they clearly deny it). "
+      : "") +
     "value = a SHORT clinical value in ENGLISH (e.g. 'right-sided', 'present', 'absent', '3 days', 'pulsatile', 'high grade'). " +
     "confidence = 0..1. Include a finding ONLY if the patient explicitly stated it. If nothing was clearly stated, return " +
     "{\"findings\":[]}. The answer may be Telugu, Hindi, English, or code-switched — understand it and output English values. " +
