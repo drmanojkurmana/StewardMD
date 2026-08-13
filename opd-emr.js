@@ -532,7 +532,16 @@
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       saveBtn + "</div>";
-    return consultBar(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + maikAskBtn(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+  }
+  // "Let MaiK Ask" — optional AI-guided history taking (flag smd_maik_ask). Shown only when the feature
+  // is on AND a complaint is documented (MaiK needs to know what to ask about). Delegates to SMD_MAIKASK.
+  function maikAskBtn(st) {
+    try { if (!(G.SMD_MAIKASK && G.SMD_MAIKASK.flagOn && G.SMD_MAIKASK.flagOn())) return ""; } catch (e) { return ""; }
+    var v = st.assessVals || {}; var complaint = v.Chief_complaints_duration || v.History_present_illness || "";
+    if (!String(complaint).trim()) return "";
+    return '<button class="oe-maikask" data-oe-act="maik-ask"><span class="oe-maikask-ic">' + ms("record_voice_over") + "</span>" +
+      '<span class="oe-maikask-tx"><b>Let MaiK Ask</b><span>MaiK asks the patient the missing history</span></span></button>';
   }
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
@@ -638,6 +647,7 @@
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
     if (cmd === "assess-maik") return askMaik();
+    if (cmd === "maik-ask") return maikAsk();
     if (cmd === "assess-maik-pro") return askMaikPro();
     if (cmd === "assess-clear") return clearAssessment();
     if (cmd === "storage-info") return;   // passive "Not saved" note (decision-support only) — no action
@@ -1119,6 +1129,43 @@
         .catch(function () { return attempt(i + 1); });
     }
     return attempt(0);
+  }
+  // ---- MaiK Ask (AI-guided history) -----------------------------------------------------------------
+  // Hand the current complaint + known assessment to SMD_MAIKASK; fold the patient-reported findings back
+  // into the SAME assessVals (doctor-override guard preserved) tagged source:"patient_spoken_via_MaiK".
+  function maikAsk() {
+    if (!(G.SMD_MAIKASK && G.SMD_MAIKASK.start)) { toast("MaiK Ask is not available on this build."); return; }
+    var v = st.assessVals || {};
+    var complaint = v.Chief_complaints_duration || v.History_present_illness || _lastFullTranscript || "";
+    // Demo/test mode (localStorage smd_maik_ask_demo=1): scripted patient answers, no ASR/TTS, and the
+    // findings are NOT written to the real record — for trying the flow without a patient.
+    var demo = false; try { demo = localStorage.getItem("smd_maik_ask_demo") === "1"; } catch (e) {}
+    G.SMD_MAIKASK.start({
+      complaint: complaint || (demo ? "headache" : ""), known: v, demo: demo,
+      demoAnswers: demo ? ["no", "no", "no", "gradually", "right side", "throbbing type", "very severe", "nausea undi"] : null,
+      onFindings: demo ? function () {} : maikApplyFindings,     // demo never touches the EMR
+      onReview: function () { switchTab("assess"); }
+    });
+  }
+  function maikApplyFindings(findings) {
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.maikSources = st.maikSources || {};
+    var applied = 0;
+    (findings || []).forEach(function (f) {
+      var key = f.emr; if (!key) return;
+      var isFree = /History_present_illness|management_plan|_others|note/i.test(key);
+      if (isFree) {
+        var cur = st.assessVals[key] || "";
+        var label = String(f.target || f.field).replace(/_/g, " ");
+        var line = label.charAt(0).toUpperCase() + label.slice(1) + ": " + f.value;
+        if (cur.indexOf(f.value) === -1) { st.assessVals[key] = cur ? (cur.replace(/\s+$/, "") + "\n" + line) : line; applied++; }
+      } else if (!st.assessTouched[key]) {                 // dedicated field: never overwrite a doctor edit
+        st.assessVals[key] = f.value; applied++;
+      }
+      st.maikSources[key] = "patient_spoken_via_MaiK";      // provenance; NOT marked doctor_confirmed
+      try { putVoiceDom(key); } catch (e) {}
+    });
+    if (applied) toast(applied + " field" + (applied === 1 ? "" : "s") + " added from MaiK Ask");
+    paint();
   }
   // Sync fallback Rx/Mx from the on-device DX_MGMT global (no network) when no treatment file exists.
   function mgmtFallback(id) {

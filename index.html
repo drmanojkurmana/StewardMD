@@ -49,6 +49,7 @@
      different cursive. Self-hosting renders it identically on web + app. -->
 <link rel="stylesheet" href="/redesign-system.css?v=gold1082-fonts">
 <link rel="stylesheet" href="/motion.css?v=gold1">
+<link rel="stylesheet" href="/maik-ask.css?v=maik1">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
@@ -1578,6 +1579,9 @@ window.openExternal = function (u) {
 <script src="/voice-emr-map.js?v=gold1" defer></script>
 <script src="/voice-ambient.js?v=gold1723-mix" defer></script>
 <script src="/voice-diarize.js?v=gold1" defer></script>
+<script src="/maik-reasoning.js?v=maik3" defer></script>
+<script src="/maik-pathways.js?v=maik1" defer></script>
+<script src="/maik-ask.js?v=maik3" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
