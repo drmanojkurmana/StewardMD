@@ -101,6 +101,7 @@ import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/ho
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
+import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -1356,6 +1357,17 @@ export async function onRequest(context) {
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
+      }
+      if (body.kind === "opd-suggest") {
+        // OPD Ask MaiK — Pro tier: typed assessment → decision-support differential (dx / ddx / workup /
+        // treatment / red flags). Output is whitelisted to bounded plain-text (no invented structured
+        // data), advisory only. EMR corrections stay on-device (deterministic), never from the LLM.
+        const prompt = opdSuggestPrompt(transcript);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "opd-suggest", ...sanitizeOpdSuggest(parseJsonLoose(text)), mode: "opd-suggest" });
       }
       if (body.kind === "translate") {
         // Field mic: translate a single dictated field to clinical English so GHIS + MaiK stay English.

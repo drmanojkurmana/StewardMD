@@ -482,8 +482,14 @@
     if (s.treatment && s.treatment.length) body += aiGroup("Management / Treatment", s.treatment.map(function (d, i) { return scribeRow("rx", i, { label: d.label, accepted: !!(s.acceptedRx && s.acceptedRx[i]) }); }).join(""), "rx", s.treatment.length);
     if (s.corrections && s.corrections.length) body += aiGroup("EMR corrections", s.corrections.map(function (c, i) { return scribeRow("fix", i, { label: correctionLabel(c), why: correctionSub(c), accepted: !!(s.acceptedFix && s.acceptedFix[i]) }); }).join(""), null, s.corrections.length);
     if (!body) return "";
+    // Pro (Vertex) upgrade: offer a deeper LLM differential (explicit tap = consent to send the note).
+    var pro = (G.SMD_AI && G.SMD_AI.extract && s.source !== "pro")
+      ? '<button class="oe-maik-pro" data-oe-act="assess-maik-pro"' + (st.maikProBusy ? " disabled" : "") + ">" + ms(st.maikProBusy ? "hourglass_top" : "auto_awesome") +
+        "<span>" + (st.maikProBusy ? "MaiK Pro is thinking" : "Deepen with MaiK Pro") + "<span class=\"oe-maik-pro-note\">" + (st.maikProBusy ? "sending the note to AI" : "sends the note (no name / MR) to AI") + "</span></span></button>"
+      : "";
     return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "MaiK suggestions" +
-      '<span class="oe-tag oe-review">Review before use</span></h3>' + body +
+      (s.source === "pro" ? '<span class="oe-tag oe-pro">MaiK Pro</span>' : "") +
+      '<span class="oe-tag oe-review">Review before use</span></h3>' + body + pro +
       '<div class="oe-ai-disc">' + ms("info") +
       "<span>Decision support only. Provisional and advisory; not a substitute for clinical judgement. Nothing is saved until you Accept and Save. Verify doses, contraindications and local protocol.</span></div>" +
       "</section>";
@@ -615,6 +621,7 @@
     if (cmd === "med-rx") return submitPrescribe();
     if (cmd === "assess-save") return submitAssessment();
     if (cmd === "assess-maik") return askMaik();
+    if (cmd === "assess-maik-pro") return askMaikPro();
     if (cmd === "assess-clear") return clearAssessment();
     if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
     if (cmd === "voice-pause") return togglePauseVoice();
@@ -1137,6 +1144,51 @@
     });
   }
 
+  // Assessment -> a compact clinical summary for the Pro (Vertex) tier. Clinical content only — NO name,
+  // MR number, or any identifier ever leaves the device.
+  function assessProText(v) {
+    v = v || {};
+    function ln(lbl, val) { return (val && String(val).trim()) ? (lbl + ": " + String(val).trim()) : ""; }
+    var yn = function (k, lbl) { return v[k] === "Y" ? lbl : ""; };
+    var co = [yn("Diabetes_yesNo", "diabetes"), yn("Hypertension_yesNo", "hypertension"), yn("Cardiac_yesNo", "cardiac disease"), yn("Bronchial_yesNo", "asthma"), yn("Tuberculosis_yesNo", "TB"), yn("Thyroid_yesNo", "thyroid disorder"), yn("Epilepsy_yesNo", "epilepsy")].filter(Boolean).join(", ");
+    var vit = [v.Temp ? ("Temp " + v.Temp) : "", (v.BP_SYS && v.BP_dia) ? ("BP " + v.BP_SYS + "/" + v.BP_dia) : "", v.Pulse ? ("Pulse " + v.Pulse) : "", v.respiratory ? ("RR " + v.respiratory) : ""].filter(Boolean).join(", ");
+    return [ln("Chief complaint", v.Chief_complaints_duration), ln("History of present illness", v.History_present_illness), ln("Past history", v.History_past_illness),
+      co ? ("Comorbidities: " + co) : "", vit ? ("Vitals: " + vit) : "", ln("Systemic examination", v.sys_examination), ln("Provisional diagnosis (doctor)", v.provisional_diagnosis)].filter(Boolean).join("\n");
+  }
+
+  // Pro tier — send the (de-identified) assessment to Vertex for a deeper differential. Explicit action
+  // (the tap is the consent to send). Falls back cleanly to the on-device base result on any error/quota.
+  // EMR corrections stay on-device (deterministic); the LLM only refines Dx / Mx / Rx / red flags.
+  function askMaikPro() {
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { toast("MaiK Pro (AI) is not available on this build."); return; }
+    var v = st.assessVals || {};
+    var text = assessProText(v);
+    if (!text.replace(/[:\s]/g, "")) { toast("Type the complaint / history first."); return; }
+    if (!confirmed("Send this assessment (no name or MR number) to MaiK Pro (AI) for a deeper differential?")) return;
+    st.maikProBusy = true; paint();
+    var forPatient = st;
+    G.SMD_AI.extract(text, "opd-suggest").then(function (r) {
+      if (st !== forPatient) return;
+      st.maikProBusy = false;
+      if (!r || r.error || !(r.provisionalDx || (r.ddx && r.ddx.length))) {
+        toast(r && r.error === "quota" ? "Daily AI limit reached. Use the on-device result or try again tomorrow." : "MaiK Pro is unavailable right now; the on-device result stands.");
+        paint(); return;
+      }
+      var ddx = (r.ddx || []).map(function (d) { return { label: cleanClinical(d.dx), dx: cleanClinical(d.dx), source: "ai", why: cleanClinical(d.why || "") }; }).filter(function (d) { return d.dx; });
+      var prov = cleanClinical(r.provisionalDx || "") || (ddx[0] && ddx[0].dx) || "";
+      var provWhy = "";
+      var ddxOut = ddx.filter(function (d) { if (d.dx === prov) { if (!provWhy) provWhy = d.why; return false; } return true; });
+      st.scribeSuggestions = { provisionalDx: prov, provisionalWhy: provWhy, ddx: ddxOut,
+        investigations: (r.investigations || []).map(function (x) { return { label: cleanClinical(x), source: "ai" }; }),
+        treatment: (r.treatment || []).map(function (x) { return { label: cleanClinical(x), source: "ai" }; }),
+        redFlags: (r.redFlags || []).map(function (x) { return cleanClinical(x); }), corrections: emrCorrections(v),
+        acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "pro" };
+      st.scribeStats = { filled: 0, suggestions: (prov ? 1 : 0) + ddxOut.length };
+      paint();
+      try { var p = document.querySelector("#smdOpdEmr .oe-ai-panel"); if (p && p.scrollIntoView) p.scrollIntoView({ block: "start" }); } catch (e) {}
+    }).catch(function () { if (st !== forPatient) return; st.maikProBusy = false; toast("MaiK Pro is unavailable right now."); paint(); });
+  }
+
   // opd-scribe refine pass: full transcript -> LLM extract -> grounded suggestions -> _applyRefine.
   // Suggest-only: nothing here is written to the EMR/orders until the doctor taps Accept (_applyRefine
   // only stages st.scribeSuggestions + folds emrFields the same protected way as applyVoice).
@@ -1418,6 +1470,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
 })();
