@@ -72,3 +72,17 @@ test("planDoses returns one lineage per template drug", () => {
   assert.equal(out[0].final, 100);
   assert.equal(out[1].final, 700); // 375*1.8=675 -> nearest 50 = 700
 });
+
+test("R1: a cumulativeLifetime cap surfaces a warning even with a valid dose (doxorubicin)", () => {
+  const drug = { id: "doxorubicin", basis: "bsa", dosePerUnit: 50, caps: { cumulativeLifetime: { warn: 450, hard: 550, unit: "mg/m2" } }, roundingRule: { increment: 5 } };
+  const lin = D.doseForDrug(drug, { bsa: 1.8 });
+  assert.equal(lin.final, 90); // 50*1.8=90
+  assert.ok(lin.warnings.some((w) => /cumulative/i.test(w)), "cumulative-limit warning must be present");
+});
+
+test("R1 never-invent: malformed dosePerUnit (NaN) yields null final + warning, never a NaN dose", () => {
+  const lin = D.doseForDrug({ id: "x", basis: "bsa", dosePerUnit: undefined }, { bsa: 1.8 });
+  assert.equal(lin.final, null);
+  assert.equal(lin.calculated, null);
+  assert.ok(lin.warnings.length > 0);
+});

@@ -19,7 +19,7 @@
   function gfrCockcroft(o) {
     o = o || {};
     var age = o.age, wKg = o.wKg, scr = o.scr;
-    if (!(age > 0) || !(wKg > 0) || !(scr > 0)) return null;
+    if (!(age >= 1 && age <= 120) || !(wKg > 0) || !(scr > 0)) return null;  // age bound mirrors calculators.js:549 (age>140 would give a negative GFR)
     var g = ((140 - age) * wKg) / (72 * scr);
     if (String(o.sex || "").toLowerCase().charAt(0) === "f") g *= 0.85;
     return g;
@@ -74,12 +74,19 @@
       default:
         lin.warnings.push("Unknown dosing basis: " + drug.basis); break;
     }
-    if (calc == null) return lin;                 // never-invent: no guessed number
+    if (calc == null || !isFinite(calc)) {        // never-invent: missing OR malformed input -> no guessed number (NaN != null, so isFinite guards a bad dosePerUnit)
+      if (!lin.warnings.length) lin.warnings.push("Invalid or missing dose input");
+      return lin;
+    }
     lin.calculated = round2(calc);
     lin.rounded = roundDose(calc, drug.roundingRule);
     var capped = applyCap(lin.rounded, drug.caps);
     lin.capApplied = capped.capApplied;
     lin.final = capped.mg;
+    // A cumulative lifetime cap (e.g. anthracyclines) is NOT auto-enforced in v1 (needs cross-encounter
+    // history, Phase 5). Surface it so the absence of enforcement is never silent (R1 requirement).
+    var cl = drug.caps && drug.caps.cumulativeLifetime;
+    if (cl) lin.warnings.push("Cumulative lifetime dose (warn " + cl.warn + " / hard " + cl.hard + " " + (cl.unit || "mg/m2") + ") is NOT auto-enforced in v1 - verify prior exposure manually.");
     return lin;
   }
 
