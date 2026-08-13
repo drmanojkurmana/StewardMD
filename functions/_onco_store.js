@@ -16,7 +16,7 @@
  * wUpdate,qAudit} so node --test can inject fakes and run the whole plan -> cycle -> admin flow
  * without touching real Firestore. Defaults to the real imports; production callers never pass deps.
  */
-import { fsGet, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
 // onco-dose.js is a root-level UMD/CommonJS module (module.exports, no ESM export) - same shape as
 // followcare-comms.js / followcare-pathways.js, which functions/_followcare_comms.js already imports
@@ -62,7 +62,7 @@ function _canTransition(from, to) { return !!(CYCLE_TRANSITIONS[from] && CYCLE_T
 
 // ---- Firestore I/O (env-taking; deps-injectable for tests) --------------------------------------
 
-const REAL_DEPS = { fsGet, fsCommit, wCreate, wUpdate, qAudit };
+const REAL_DEPS = { fsGet, fsQuery, fsCommit, wCreate, wUpdate, qAudit };
 
 // PHI-free audit: hospitalId scoping, actor id, action, and a JSON meta blob that may carry MRN
 // (ghisPatientId - explicitly allowed, spec R1) and dose numbers, but NEVER patient name/mobile.
@@ -254,6 +254,19 @@ export async function recordAdmin(env, body, deps) {
   await auditOnco(io, env, plan && plan.hospitalId, f.administeredBy, "onco:admin:record",
     { mrn: plan && plan.ghisPatientId, drugId: f.drugId, actualDose: f.actual });
   return Object.assign({ id: id }, f);
+}
+
+// All append-only q_onco_admin rows for one cycle (single-field equality on cycleId - no composite
+// index needed). This is the NURSE-READ counterpart to recordAdmin's write: a fresh session (new
+// device/reload) has no local memory of what was already given, so the give-list/admin table must
+// read this back from Firestore, not rely on a client-side array patched in-session. Sorted by
+// createdAt so the administration record renders in the order doses were actually given.
+export async function getAdminRecords(env, cycleId, deps) {
+  const io = deps || REAL_DEPS;
+  const id = sanitize(cycleId);
+  if (!id) return [];
+  const rows = await io.fsQuery(env, "q_onco_admin", { where: { field: "cycleId", value: id }, limit: 200 });
+  return rows.map((r) => Object.assign({ id: r.id }, r.fields)).sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
 }
 
 // administering -> done ("Complete cycle").

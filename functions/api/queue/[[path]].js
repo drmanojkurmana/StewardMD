@@ -347,6 +347,27 @@ export async function onRequest(context) {
       await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
       return json({ ok: true, plan: plan }, 200, request);
     }
+    // Cycle read (gap-fix, Phase 5): gated on CAPS.QUEUE_VIEW - the org-member READ cap every role
+    // holds (down to a bare "viewer") - NOT CAPS.EMR_TREAT like /onco/plan above. A nurse has no
+    // EMR_TREAT, so this is the ONLY way a nurse session can ever read a cycle's give-list +
+    // administration history. The plan is deliberately reduced (no lockedTemplate/dose formulas) -
+    // just enough to label the header (name/MRN/intent/cycle length); the clinically-actionable
+    // CONFIRMED doses travel on the cycle itself (cycle.confirmedDoses), same as the doctor matrix.
+    if (method === "GET" && seg === "onco" && sub === "cycle") {
+      const cyc = await ONCO.getCycle(env, url.searchParams.get("cycleId"));
+      if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+      const plan = await ONCO.getPlan(env, cyc.planId);
+      if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.QUEUE_VIEW);
+      const adminRecords = await ONCO.getAdminRecords(env, cyc.cycleId);
+      return json({ ok: true, cycle: cyc, plan: {
+        protocolId: plan.protocolId,
+        name: plan.lockedTemplate && plan.lockedTemplate.name,
+        ghisPatientId: plan.ghisPatientId,
+        intent: plan.intent,
+        cycleLengthDays: plan.lockedTemplate && plan.lockedTemplate.cycleLengthDays,
+      }, adminRecords: adminRecords }, 200, request);
+    }
 
     if (method === "POST") {
       const body = await readBody(request);

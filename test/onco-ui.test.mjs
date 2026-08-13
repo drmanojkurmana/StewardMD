@@ -197,6 +197,90 @@ test("opd-emr.js assessTab (write mode, oncoFlagOn) offers the apply panel for a
   assert.ok(html.indexOf("onco-apply:" + RCHOP.id) < 0, "draft protocol not offered");
 });
 
+/* Phase 5 gap-fix unit tests: the DOCTOR per-cycle control panel (create cycle / pre-chemo
+ * clearance attestation / confirm to ready) - _buildCyclePanel (onco-protocols.js, pure) + its
+ * opd-emr.js wiring (flag+write gated, doctor-view only). */
+
+test("_nextCycleNo: 1 with no cycle yet, else one past the cycle already on file", () => {
+  assert.equal(ONCOUI._nextCycleNo(null), 1);
+  assert.equal(ONCOUI._nextCycleNo({ cycleNo: 1 }), 2);
+  assert.equal(ONCOUI._nextCycleNo({ cycleNo: 3 }), 4);
+});
+
+test("_buildCyclePanel: no cycle yet -> offers [Create cycle 1], no clearance UI", () => {
+  const plan = fixturePlan();
+  const html = ONCOUI._buildCyclePanel(plan, null, {});
+  assert.ok(html.indexOf('data-oe-act="onco-cycle-create:1"') >= 0, "Create cycle 1 offered");
+  assert.ok(html.indexOf("onco-clr-resolve") < 0, "no clearance panel while there is no cycle");
+});
+
+test("_buildCyclePanel: cycle already 'done' -> offers the NEXT cycle number, not a duplicate of the same one", () => {
+  const plan = fixturePlan();
+  const html = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "done", clearance: { status: "cleared" } }, {});
+  assert.ok(html.indexOf('data-oe-act="onco-cycle-create:2"') >= 0, "Create cycle 2 offered once cycle 1 is done");
+});
+
+test("_buildCyclePanel: at plannedCycles cap -> no Create button, a friendly completion message instead", () => {
+  const plan = Object.assign({}, fixturePlan(), { plannedCycles: 1 });
+  const html = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "done", clearance: { status: "cleared" } }, {});
+  assert.ok(html.indexOf("onco-cycle-create") < 0, "no further Create action once every planned cycle is done");
+  assert.ok(/all planned cycles/i.test(html));
+});
+
+test("_buildCyclePanel: a LIVE cycle (planned/ready/administering) shows one toggle per protocol clearanceChecks entry + a status select", () => {
+  const plan = fixturePlan();
+  const cycle = { cycleId: "TP-fixture__1", cycleNo: 1, state: "planned", clearance: { status: "pending" } };
+  const html = ONCOUI._buildCyclePanel(plan, cycle, {});
+  RCHOP.clearanceChecks.forEach((name) => {
+    assert.ok(html.indexOf('data-oe-act="onco-clr-toggle:' + name + '"') >= 0, "toggle present for check: " + name);
+  });
+  assert.ok(html.indexOf('data-oe-inp="onco-clr-status"') >= 0, "overall status <select> present");
+  assert.ok(html.indexOf("cleared") >= 0 && html.indexOf("not_cleared") >= 0, "status options include cleared/review/not_cleared");
+  assert.ok(html.indexOf('data-oe-act="onco-clr-resolve:TP-fixture__1"') >= 0, "[Resolve clearance] present");
+});
+
+test("_buildCyclePanel: [Confirm cycle to ready] is DISABLED unless the cycle's OWN persisted clearance.status is 'cleared' - never the un-submitted draft", () => {
+  const plan = fixturePlan();
+  const confirmSel = 'data-oe-act="onco-cycle-confirm:TP-fixture__1"';
+
+  const pending = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "planned", clearance: { status: "pending" } }, {});
+  assert.ok(new RegExp(confirmSel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+disabled").test(pending), "disabled while clearance is pending");
+
+  const reviewed = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "planned", clearance: { status: "review" } }, { status: "cleared" });
+  assert.ok(new RegExp(confirmSel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+disabled").test(reviewed), "disabled while the PERSISTED status is 'review', even if the un-submitted draft select says 'cleared'");
+
+  const cleared = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "planned", clearance: { status: "cleared" } }, {});
+  assert.ok(!new RegExp(confirmSel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+disabled").test(cleared), "enabled once the persisted status is 'cleared'");
+});
+
+test("_buildCyclePanel escapes clearance-check names (no raw HTML injection)", () => {
+  const plan = Object.assign({}, fixturePlan());
+  plan.lockedTemplate = Object.assign({}, RCHOP, { clearanceChecks: ["<img src=x onerror=alert(1)>"] });
+  const html = ONCOUI._buildCyclePanel(plan, { cycleId: "TP-fixture__1", cycleNo: 1, state: "planned", clearance: {} }, {});
+  assert.ok(html.indexOf("<img") < 0, "raw tag never lands in the output");
+  assert.ok(html.indexOf("&lt;img") >= 0, "escaped instead");
+});
+
+test("opd-emr.js oncoTab (doctor view, writeOn) renders the cycle panel next to the matrix", () => {
+  const plan = fixturePlan();
+  const html = OPDEMR.oncoTab({ oncoPlan: plan, oncoView: "doctor", writeOn: true, oncoClearanceDraft: {} });
+  assert.ok(html.indexOf("oe-onco-tbl") >= 0, "the dose matrix is still rendered");
+  assert.ok(html.indexOf('data-oe-act="onco-cycle-create:1"') >= 0, "the doctor cycle panel is rendered alongside it");
+});
+
+test("opd-emr.js oncoTab (doctor view, writeOn false) hides the cycle panel - a read-only doctor session gets no write UI", () => {
+  const plan = fixturePlan();
+  const html = OPDEMR.oncoTab({ oncoPlan: plan, oncoView: "doctor", writeOn: false });
+  assert.ok(html.indexOf("onco-cycle-create") < 0, "no create action while writeOn is false");
+});
+
+test("opd-emr.js oncoTab never renders the doctor cycle panel while in nurse view", () => {
+  const plan = fixturePlan();
+  const cycle = { cycleId: "TP-fixture__1", planId: "TP-fixture", cycleNo: 1, day: 1, state: "ready", clearance: { status: "cleared" }, confirmedDoses: plan.confirmedDoses, administrationSequence: [] };
+  const html = OPDEMR.oncoTab({ oncoPlan: plan, oncoCycle: cycle, oncoView: "nurse", writeOn: true });
+  assert.ok(html.indexOf("onco-cycle-create") < 0 && html.indexOf("onco-clr-resolve") < 0, "the doctor cycle panel never renders in nurse mode");
+});
+
 test("opd-emr.js assessTab shows the review panel (not the apply list) once a plan is staged in st.oncoDraft", () => {
   const active = fixtureActiveTemplate();
   const params = { height: 165, weight: 60 };

@@ -200,6 +200,10 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-onco-admtbl { width: 100%; border-collapse: collapse; margin-top: 4px; }
 #smdOpdEmr .oe-onco-admtbl th { text-align: left; font: 700 10.5px var(--q-sans); text-transform: uppercase; letter-spacing: .03em; color: var(--secondary); padding: 6px 8px; border-bottom: 1px solid var(--outline-variant); }
 #smdOpdEmr .oe-onco-admtbl td { padding: 6px 8px; font: 500 12.5px var(--q-sans); border-bottom: 1px solid var(--sc-low); }
+#smdOpdEmr .oe-onco-cyclepanel { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--outline-variant); }
+#smdOpdEmr .oe-onco-clr-current { font: 500 12.5px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-onco-clr-list { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdOpdEmr .oe-onco-cyclepanel-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 #smdOpdEmr .oe-btn[disabled] { opacity: .45; cursor: not-allowed; }
 
 /* empty / loading / error */

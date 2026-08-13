@@ -75,6 +75,19 @@ function makeFakeIO() {
       const f = docs.get(path);
       return f ? { id: path.split("/").pop(), fields: structuredClone(f), updateTime: "" } : null;
     },
+    // Mirrors _fbfirestore.js's fsQuery(env, collectionId, opts) shape closely enough for a
+    // single-field-equality scan over this fake's flat path->fields map (real Firestore uses its
+    // single-field index the same way - no composite index, same optional opts.where contract).
+    fsQuery: async (env, collectionId, opts) => {
+      opts = opts || {};
+      const out = [];
+      for (const [path, fields] of docs) {
+        if (path.slice(0, path.lastIndexOf("/")) !== collectionId) continue;
+        if (opts.where && opts.where.field && fields[opts.where.field] !== opts.where.value) continue;
+        out.push({ id: path.slice(path.lastIndexOf("/") + 1), fields: structuredClone(fields) });
+      }
+      return opts.limit ? out.slice(0, opts.limit) : out;
+    },
     wCreate: (env, path, fieldsObj) => ({ __op: "create", path, fields: fieldsObj }),
     wUpdate: (env, path, fieldsObj) => ({ __op: "update", path, fields: fieldsObj }),
     fsCommit: async (env, writes) => {
@@ -256,4 +269,30 @@ test("no PHI (patient name/mobile) ever reaches qAudit meta, even if the caller'
   assert.ok(!/Jane Q Patient/.test(blob), "patient name leaked into qAudit meta");
   assert.ok(!/9876543210/.test(blob), "mobile number leaked into qAudit meta");
   assert.ok(/MRN-777/.test(blob), "MRN scoping is explicitly allowed and should be present");
+});
+
+// ---- Phase 5 gap-fix: getAdminRecords (the NURSE-READ data-layer counterpart to recordAdmin) ------
+
+test("getAdminRecords returns exactly this cycle's rows via fsQuery, scoped by cycleId, sorted oldest-first", async () => {
+  const { io } = makeFakeIO();
+  const body = { hospitalId: "hosp1", doctorUid: "dr1", ghisPatientId: "MRN-601", protocolId: "test-protocol", patientParams: {} };
+  const plan = await ONCO.createPlan({}, body, FIXTURE_TEMPLATE, io);
+  const cyc = await ONCO.createCycle({}, plan.planId, 1, io);
+  const otherCyc = await ONCO.createCycle({}, plan.planId, 2, io);   // a DIFFERENT cycle - must never leak in
+
+  const a1 = await ONCO.recordAdmin({}, { cycleId: cyc.cycleId, planId: plan.planId, drugId: "drugA", actual: 100, administeredBy: "nurse1", administered: true }, io);
+  const a2 = await ONCO.recordAdmin({}, { cycleId: cyc.cycleId, planId: plan.planId, drugId: "drugA", actual: 90, administeredBy: "nurse1", administered: true }, io);
+  await ONCO.recordAdmin({}, { cycleId: otherCyc.cycleId, planId: plan.planId, drugId: "drugA", actual: 999, administeredBy: "nurse1", administered: true }, io);
+
+  const rows = await ONCO.getAdminRecords({}, cyc.cycleId, io);
+  assert.equal(rows.length, 2, "only rows for THIS cycle come back, the other cycle's row is excluded");
+  assert.deepEqual(rows.map((r) => r.id).sort(), [a1.id, a2.id].sort());
+  assert.ok(rows.every((r) => r.cycleId === cyc.cycleId));
+  assert.ok(rows[0].createdAt <= rows[1].createdAt, "sorted oldest-first");
+});
+
+test("getAdminRecords returns [] for an empty/missing cycleId, never throws", async () => {
+  const { io } = makeFakeIO();
+  assert.deepEqual(await ONCO.getAdminRecords({}, "", io), []);
+  assert.deepEqual(await ONCO.getAdminRecords({}, "no-such-cycle", io), []);
 });

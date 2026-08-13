@@ -172,10 +172,61 @@
     return out;
   }
 
+  // ---- Phase 5 gap-fix: per-cycle DOCTOR control panel (create cycle, pre-chemo clearance
+  // attestation, confirm to ready). Still PURE (no DOM, no fetch, no confirm() dialog) - opd-emr.js
+  // owns the confirm() gate + the actual POSTs, exactly like the apply/override wiring above. The
+  // NURSE path never sees this (nurse view stays execution-only - onco-nurse.js has no equivalent).
+
+  var CLEARANCE_STATUS_OPTIONS = ["cleared", "review", "not_cleared"];
+
+  // The lean v1 state machine runs cycles strictly in sequence (never two live cycles for one plan
+  // at once - spec R5): "next" is one past whatever cycle is currently on file, or 1 if there's none.
+  function _nextCycleNo(cycle) { return cycle ? Number(cycle.cycleNo || 0) + 1 : 1; }
+
+  // No cycle yet, or the current one already ran to completion -> offer [Create cycle N]. Otherwise
+  // the cycle is live (planned/ready/administering/held) -> show the clearance attestation panel.
+  function _buildCyclePanel(plan, cycle, draft) {
+    plan = plan || {}; draft = draft || {};
+    if (!cycle || cycle.state === "done") {
+      var nextNo = _nextCycleNo(cycle && cycle.state === "done" ? cycle : null);
+      if (plan.plannedCycles && nextNo > Number(plan.plannedCycles)) {
+        return '<div class="oe-onco-cyclepanel"><div class="oe-empty sm">All planned cycles are complete.</div></div>';
+      }
+      return '<div class="oe-onco-cyclepanel"><button class="oe-btn primary" data-oe-act="onco-cycle-create:' + nextNo + '">' + ms("add_circle") + "Create cycle " + nextNo + "</button></div>";
+    }
+
+    var checks = draft.checks || {};
+    var checkNames = (plan.lockedTemplate && plan.lockedTemplate.clearanceChecks) || [];
+    var checkRows = checkNames.map(function (name) {
+      var on = !!checks[name];
+      return '<button class="oe-toggle' + (on ? " on" : "") + '" data-oe-act="onco-clr-toggle:' + esc(name) + '">' + ms(on ? "check_box" : "check_box_outline_blank") + esc(name) + "</button>";
+    }).join("");
+
+    var status = draft.status || "";
+    var options = [["", "Select status"]].concat(CLEARANCE_STATUS_OPTIONS.map(function (s) { return [s, s]; })).map(function (o) {
+      return '<option value="' + o[0] + '"' + (status === o[0] ? " selected" : "") + '>' + esc(o[1]) + "</option>";
+    }).join("");
+
+    // Belt-and-suspenders: [Confirm cycle to ready] is disabled here until the CYCLE'S OWN persisted
+    // clearance.status is "cleared" (never the un-submitted draft select) - the server (confirmCycle)
+    // holds the real gate and refuses regardless; this is only a friendlier UI mirror of it.
+    var cleared = !!(cycle.clearance && cycle.clearance.status === "cleared");
+    return '<div class="oe-onco-cyclepanel">' +
+      '<h4 class="oe-onco-nurse-h4">Pre-chemo clearance &middot; Cycle ' + esc(cycle.cycleNo) + "</h4>" +
+      (cycle.clearance && cycle.clearance.status ? '<div class="oe-onco-clr-current">Current status: <b>' + esc(cycle.clearance.status) + "</b></div>" : "") +
+      '<div class="oe-onco-clr-list">' + checkRows + "</div>" +
+      '<select class="oe-inp" data-oe-inp="onco-clr-status">' + options + "</select>" +
+      '<div class="oe-onco-cyclepanel-actions">' +
+        '<button class="oe-btn ghost" data-oe-act="onco-clr-resolve:' + esc(cycle.cycleId) + '">' + ms("fact_check") + "Resolve clearance</button>" +
+        '<button class="oe-btn primary" data-oe-act="onco-cycle-confirm:' + esc(cycle.cycleId) + '"' + (cleared ? "" : " disabled") + ">" + ms("check_circle") + "Confirm cycle to ready</button>" +
+      "</div></div>";
+  }
+
   var API = {
     _buildOncoMatrix: _buildOncoMatrix, doseDrawerView: doseDrawerView, _dayMarker: dayMarker, _doseAdminText: doseAdminText,
     _buildApplyPanel: _buildApplyPanel, _buildReviewPanel: _buildReviewPanel, _stageOverride: _stageOverride,
-    _version: "1.0"
+    _buildCyclePanel: _buildCyclePanel, _nextCycleNo: _nextCycleNo,
+    _version: "1.1"
   };
   if (root) root.SMD_ONCOUI = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
