@@ -260,8 +260,25 @@
     provisionalDx: "provisional_diagnosis", managementPlan: "management_plan",
     heightCm: "Height", weightKg: "Weight",
     dm: "Diabetes_yesNo", htn: "Hypertension_yesNo", cardiac: "Cardiac_yesNo",
-    asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo"
+    asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo",
+    habits: "Habitat_addiction_yesno", alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
+    drug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
   };
+  // Alcohol quantification: "60 ml whisky" -> grams of ethanol + WHO standard drinks (10 g each).
+  // grams = volume(ml) x ABV x 0.789 (ethanol density). Returns null if volume or drink-type is missing.
+  var ALC_ABV = { whisky: .40, whiskey: .40, rum: .40, vodka: .40, brandy: .40, gin: .40, tequila: .40,
+    "feni": .30, wine: .12, champagne: .12, beer: .05, toddy: .05, arrack: .35 };
+  function alcoholCalc(detail) {
+    var s = String(detail || "").toLowerCase();
+    var ml = null, m = s.match(/(\d+(?:\.\d+)?)\s*(ml|milli\w*|cc)\b/);
+    if (m) ml = parseFloat(m[1]);
+    else { m = s.match(/(\d+(?:\.\d+)?)\s*(l|lit\w*)\b/); if (m) ml = parseFloat(m[1]) * 1000; }
+    var abv = 0, type = ""; for (var k in ALC_ABV) if (s.indexOf(k) >= 0) { abv = ALC_ABV[k]; type = k; break; }
+    if (!ml || !abv) return null;
+    // volume of pure alcohol (ml) = ml x ABV; grams = that x 0.79 (ethanol density); 14 g = 1 standard drink.
+    var pureMl = ml * abv, grams = pureMl * 0.79, std = grams / 14;
+    return { ml: ml, type: type, pureMl: Math.round(pureMl * 10) / 10, grams: Math.round(grams * 10) / 10, std: Math.round(std * 10) / 10 };
+  }
   // coerce the engine's value to this form's wire value for the target field kind. null = don't set.
   function voiceCoerce(name, value) {
     var k = OPD_KIND[name];
@@ -987,6 +1004,21 @@
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
       _applyRefine({ emrFields: r.emrFields || {}, suggestions: { provisionalDx: sg.provisionalDx, ddx: grounded.ddx, investigations: grounded.investigations } });
+      // Multilingual VITALS: the deterministic extractor (voice-vitals) is English-regex only, so a
+      // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
+      // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
+      if (r.en && G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) {
+        try { applyVoice(G.SMD_AMBIENT.reduce(r.en, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
+      }
+      // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
+      // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
+      if (r.alcoholDetail) {
+        var note = String(r.alcoholDetail), ac = alcoholCalc(r.alcoholDetail);
+        if (ac) note += " (" + ac.pureMl + " ml pure alcohol, ~" + ac.grams + " g, ~" + ac.std + " standard drink" + (ac.std === 1 ? "" : "s") + ")";
+        applyVoice({ updates: [{ field: "habits", value: "Yes", applied: true }, { field: "alcohol", value: "Yes", applied: true }] });
+        st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+        if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
+      }
     }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
   function startVoice() {
@@ -1208,6 +1240,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc };
 })();
