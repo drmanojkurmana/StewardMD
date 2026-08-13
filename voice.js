@@ -62,9 +62,13 @@
   function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
     if (!tiersFlagOn()) {
-      // legacy (pre-tier) behaviour — only small.en/base/tiny are hosted until the tier rollout
-      if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
-      return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
+      // legacy (pre-tier) default. ANDROID DEFAULT = small-q8_0 (StewardVoice Multilingual, ~252MB):
+      // base-q5_1 (~57MB) hallucinated on hard audio (owner-tested 2026-08-14 on a real clip); the
+      // small INT8 is far more accurate AND multilingual (EN/HI/TE + code-switch). Slower on the
+      // CPU-only build, accepted for clinical accuracy. iOS keeps small.en (Metal-fast) / base.
+      if (isAndroidNative()) return "small-q8_0";
+      if (lang && lang !== "en") return "base-q5_1";            // iOS multilingual: Telugu, auto-detect, code-switch
+      return "small.en-q5_1";                                    // iOS English-only accuracy pick
     }
     var tier = voiceTier();
     // Telugu ALWAYS routes to the Telugu specialist (every tier) — never the en/hi Whisper. This is the
@@ -76,8 +80,10 @@
     // English. So a Telugu opening is captured immediately; detection then routes the NEXT chunk below.
     if (!lang || lang === "auto") return "telugu-small-q8_0";
     // English / Hindi:
-    if (tier === "ultimate") return "large-v3-turbo-q5_0";
-    return "small-q8_0";     // base + pro: multilingual Whisper Small INT8
+    // large-v3-turbo (~547MB) is Metal-fast on iOS but too slow on the Android CPU-only build, so
+    // Android's Ultimate tier decodes en/hi on small-q8_0 too (still multilingual, ~252MB).
+    if (tier === "ultimate" && !isAndroidNative()) return "large-v3-turbo-q5_0";
+    return "small-q8_0";     // base + pro (+ Android ultimate): multilingual Whisper Small INT8
   }
   // Which model keys each tier needs (for the Settings download dashboard).
   var TIER_MODELS = {

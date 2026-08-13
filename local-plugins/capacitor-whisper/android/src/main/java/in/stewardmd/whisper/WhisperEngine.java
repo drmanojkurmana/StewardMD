@@ -86,10 +86,45 @@ public class WhisperEngine {
         float[] audio = readWav16kMono(wavPath);
         if (audio.length < 3200) return "";   // < ~0.2 s
         int nThreads = Math.max(1, Math.min(4, Runtime.getRuntime().availableProcessors() - 1));
-        String text = WhisperNative.fullTranscribe(
-            ctx, audio, (language == null || language.isEmpty()) ? "auto" : language,
-            initialPrompt == null ? "" : initialPrompt, nThreads, 5);
+        return transcribeWithFallback(audio, language, initialPrompt, nThreads);
+    }
+
+    // Fallback languages tried, in order, when "auto" yields nothing on audio that clearly has sound.
+    private static final String[] FALLBACK_LANGS = { "en", "te", "hi" };
+
+    /**
+     * Run whisper.cpp, with an auto→language recovery. whisper's language auto-detect can return an
+     * EMPTY transcript on energetic-but-ambiguous audio (music / heavily-produced clips, sometimes a
+     * short code-switched opener). When the request was "auto" AND the clip clearly has sound, retry
+     * once per app language (en/te/hi) and take the first that yields text — so a doctor who actually
+     * spoke never gets a blank note. On genuine silence (no energy) it stays blank, no wasted passes.
+     */
+    private String transcribeWithFallback(float[] audio, String language, String initialPrompt, int nThreads) {
+        String want = (language == null || language.isEmpty()) ? "auto" : language;
+        String prompt = initialPrompt == null ? "" : initialPrompt;
+        String text = WhisperNative.fullTranscribe(ctx, audio, want, prompt, nThreads, 5);
+        if (!isBlank(text) || !"auto".equals(want) || !hasEnergy(audio)) return text == null ? "" : text;
+        for (String fb : FALLBACK_LANGS) {
+            String alt = WhisperNative.fullTranscribe(ctx, audio, fb, prompt, nThreads, 5);
+            if (!isBlank(alt)) { Log.i(TAG, "auto->" + fb + " fallback recovered a transcript"); return alt; }
+        }
         return text == null ? "" : text;
+    }
+
+    private static boolean isBlank(String t) {
+        if (t == null) return true;
+        String s = t.trim();
+        return s.isEmpty() || s.equals("[BLANK_AUDIO]");
+    }
+
+    // Peak-based energy gate: > ~2% of full scale somewhere means there's real sound (not digital
+    // silence), so an empty "auto" result is a detect miss worth retrying — not a silent clip.
+    private static boolean hasEnergy(float[] a) {
+        if (a == null || a.length == 0) return false;
+        float peak = 0f;
+        int step = Math.max(1, a.length / 48000);   // sample ~ every few ms; enough to spot speech
+        for (int i = 0; i < a.length; i += step) { float v = Math.abs(a[i]); if (v > peak) peak = v; }
+        return peak > 0.02f;
     }
 
     // Minimal WAV reader: expects 16 kHz mono PCM16 (what afconvert/ffmpeg produce for whisper).
@@ -264,8 +299,7 @@ public class WhisperEngine {
         long t0 = System.currentTimeMillis();
         String text;
         try {
-            text = WhisperNative.fullTranscribe(
-                ctx, audio, language.isEmpty() ? "auto" : language, initialPrompt, nThreads, 5);
+            text = transcribeWithFallback(audio, language, initialPrompt, nThreads);
         } catch (Throwable t) {
             Log.e(TAG, "native fullTranscribe threw", t);
             emitError(WhisperErr.TRANSCRIPTION_FAILURE, t.getClass().getSimpleName());
