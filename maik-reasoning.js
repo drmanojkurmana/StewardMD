@@ -115,7 +115,20 @@
   GeminiVertexProvider.prototype.next = function (ctx, opts) { return this._transport("next", ctx, opts || {}); };
   GeminiVertexProvider.prototype.extract = function (ctx, transcript, opts) { return this._transport("extract", { ctx: ctx, transcript: transcript }, opts || {}); };
 
-  var _provider = new GeminiVertexProvider();
+  // Default transport → the server (SMD_AI.maik). Resolved LAZILY so load order doesn't matter, and so
+  // that in Node/tests (no SMD_AI) it returns null → the seam falls back to the pathway template. A
+  // server response carrying {error} also returns null → fallback (never a broken/blank question).
+  function serverTransport(op, payload) {
+    var AI = root && root.SMD_AI;
+    if (!AI || typeof AI.maik !== "function") return null;
+    var p = (op === "next") ? AI.maik("maik-ask-next", payload, "")
+          : (op === "extract") ? AI.maik("maik-ask-extract", payload.ctx, payload.transcript)
+          : null;
+    if (!p) return null;
+    return p.then(function (r) { return (r && r.error) ? null : r; });
+  }
+
+  var _provider = new GeminiVertexProvider(serverTransport);
 
   // Call a provider method inside a promise so a SYNCHRONOUS throw becomes a catchable rejection.
   function call(fn) { return Promise.resolve().then(fn); }
