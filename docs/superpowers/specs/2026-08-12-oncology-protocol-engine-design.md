@@ -1,129 +1,215 @@
-# Oncology KB Expansion + Chemotherapy Protocol Engine — Design
+# Oncology Treatment-Plan System — Design Spec (v2)
 
-**Status:** DRAFT for owner review. No code or clinical content is generated until this spec is approved.
+**Status:** DRAFT for owner review. No code or clinical content is generated until approved.
+**Supersedes:** v1 (dose-calculator framing). This v2 reframes the product per owner amendment (Tata-style longitudinal protocol + patient treatment-plan system).
 
-**Goal:** Expand StewardMD's cancer coverage to full depth (all-cancer diseases: solid + heme + breast), and add a TATA-Memorial-style **chemotherapy protocol engine** that lets a clinician assign a regimen to a diagnosed patient, computing per-drug doses (BSA/AUC/etc.) and generating a cycle schedule — delivered as **reviewable, clinician-confirmed decision support**, never as an auto-generated order.
+## What we are actually building
 
-**Why:** Oncology is today the KB's biggest depth gap (130 Oncology diseases, only 3 with any treatment depth; cancer also spans ~290 Hematology + a Breast bucket). This turns "what is this cancer / what to rule out" into "here is the guideline-backed regimen and a computed, confirmable dosing plan."
+Not a chemotherapy calculator. A **patient-specific oncology treatment-plan system** where:
+- the **Tata-style protocol sheet** is the printable representation,
+- the **interactive multi-cycle matrix** is the doctor's main view,
+- the **cycle administration screen** is the nurse's operational view,
+- and a single **Treatment Plan** object is the one source of truth behind all three (app, nurse view, PDF) and the EMR history.
+
+**Core mental model:**
+```
+Protocol Template   = reusable clinical template (R-CHOP v2.1)
+Treatment Plan      = patient-specific instance of a template (Rajesh Kumar -> R-CHOP v2.1)
+Cycle Instance      = a scheduled instance of the plan (Cycle 3 / Day 1 / 20-Aug-2026)
+Administration Record = what actually happened (planned vs actual, per drug)
+Protocol PDF        = printable representation of the same Treatment Plan
+```
+
+Guideline source: **NCCN (nccn.org)** + the owner's licensed textbook. Citations show `NCCN <panel> v<ver>` + `"<Textbook name>"`, no page numbers, original synthesis only.
 
 ---
 
 ## Global Constraints (bind every task in the plan)
 
-- **Suggest-and-confirm, always.** Every computed dose and every cycle date is a DRAFT. The oncologist reviews, may edit, and must explicitly confirm each value before it becomes anything actionable. Nothing is auto-applied to a patient, auto-ordered, or auto-sent to GHIS.
-- **Never invent.** No dose, schedule, drug, guideline, or citation appears unless it is grounded in a provided source (the licensed textbook and/or NCCN). Anything not verifiable against a source is surfaced as a "verify" flag, never guessed. This is the hard rule of the existing KB, made stricter for cytotoxics.
-- **Correct dosing basis per drug — never "everything by BSA."** BSA (Mosteller) is the default for most cytotoxics; **carboplatin uses AUC/Calvert**; some agents are mg/kg; some are flat-dosed; some capped. The dosing basis is a per-drug field, not an assumption.
-- **Citations:** show `NCCN <panel> (v<version>)` and the textbook as **"<Textbook name>"** only — **no page numbers** (per licensing instruction). Content is **original synthesis**, not reproduction or close paraphrase of the source prose.
-- **Reversible + gated:** everything behind feature flag `smd_onco_protocols` (**default OFF**) + a git tag recovery point before each wave. Made permanent only on owner approval.
-- **Clinical review is mandatory + blocking:** R1 (clinical safety) signs off every regimen batch and the dose-engine math; golden-regression protects the dose math from silent drift.
-- **No PHI in logs/URLs.** Height/weight/creatinine/BSA are clinical data — handled per existing PHI rules; not logged, not put in URLs.
-- **No em-dash in app-facing text** (existing convention).
+- **Single source of truth.** One Treatment Plan object drives the app UI, the nurse view, and the PDF. No duplicate dose logic, no separate PDF/nurse calculations.
+- **Review-then-confirm-plan (not per-line confirm).** Every line (drug/dose/date) is *reviewable* and inspectable; the physician confirms the **treatment plan** (and each cycle before it goes READY). Any value that differs from the calculated value is an **override** requiring a reason, recorded with physician + timestamp (audit). This replaces v1's "confirm every line."
+- **The engine flags; the clinician decides.** Dose-modification rules and clearance can flag/hold/recommend, but the system never independently decides to administer, never auto-orders, never auto-writes to GHIS.
+- **Never invent.** No drug, dose, rule, schedule, guideline, or citation without a provided source (NCCN + textbook). Unverifiable values are surfaced as "verify," never guessed.
+- **Dosing basis + caps are data, not assumptions.** Per-drug basis (BSA/AUC/mg-kg/flat). Caps are **protocol- or drug-defined** (`none | protocol | drug | institutional`) — there is **no universal hidden BSA 2.0 cap**.
+- **Immutable version locking.** A Treatment Plan locks the exact Protocol Template version it was created from. Publishing a newer template version never alters existing plans or historical cycles.
+- **Dose lineage is preserved end-to-end** (protocol -> calculated -> rounded -> modified -> confirmed -> administered).
+- **Reversible + gated.** Behind flag `smd_onco_protocols` (default OFF) + a git recovery point per wave. R1 clinical review mandatory + blocking; golden-regression on the dose math.
+- **No PHI in logs/URLs.** Height/weight/creatinine/BSA/labs handled per existing PHI rules.
+- **No em-dash in app-facing text.**
+
+## Non-goals (v1 of the product)
+
+Auto-prescribing/administration; replacing pharmacy verification; being the administration system of record for the hospital; regulatory clearance (flagged, owner decision); automated regimen *selection* (biomarker gates are shown as notes, selection stays the clinician's).
 
 ---
 
-## Non-goals (v1)
+## 1. Core entities (Phase 0 locks these)
 
-- Auto-prescribing or transmitting orders without clinician confirmation.
-- Replacing pharmacy verification, or being the system of record for administration.
-- Regulatory clearance (see "Regulatory" — flagged as an owner decision, not built here).
-- Genomic/biomarker-driven regimen *selection* logic (we link biomarker-gated regimens, but selection stays the clinician's).
+**A. Protocol Template** (not patient-specific): `id, name (R-CHOP), version, lifecycleState, drugs[], cycleLengthDays, cycles, premedications[], supportiveCare[], monitoring[], doseModificationRules[], caps, source{nccn, textbook}, institution{provenance, approval}`.
+Each `drug`: `name, basis (bsa|auc|mgkg|flat), dosePerUnit, unit, route, days[], caps{perDose?, cumulativeLifetime?}, roundingRule, modificationRules[], notes`.
 
----
+**B. Patient Treatment Plan** (attached to the patient EMR): `id (TP-...), patientId, protocolTemplateId + lockedVersion, intent, patientParams{height, weight, bsa, age, sex, creatinine, renalFn, relevantLabs}, calculatedDoses[], physicianModifications[], confirmedDoses[], plannedCycles[], plannedDates[], status, confirmations[]`.
 
-## Architecture
+**C. Cycle Instance:** `planId, cycleNo, day, plannedDate, state, clearance{}, confirmedDrugs[], confirmedDoses[], administrationSequence[], holds/delays[], actualAdministration[]`.
 
-Five units, each testable in isolation:
+**D. Administration Record** (per drug, per cycle): `planned, actual, startTime, endTime, nurse, reaction, notes, prepared, administered`.
 
-1. **Regimen/protocol library** (`kb/protocols/*.json`) — the data: each regimen's drugs, dosing basis, schedule pattern, cycles, indications, source citations. This is also the "cancer KB content" deliverable.
-2. **Dose engine** (`onco-dose.js`, pure functions, no DOM) — BSA (Mosteller + DuBois option), Calvert/AUC, mg/kg, flat; caps; rounding. Golden-regression tested. The dangerous core, isolated and hand-verified.
-3. **Disease→protocol link** — maps KB cancer disease ids to applicable regimens (many-to-many), with intent (curative / adjuvant / neoadjuvant / palliative) and any biomarker gate shown as a note.
-4. **Protocol UI** (in the OPD/EMR surface) — disease → pick regimen → enter height/weight (or type values manually) → see computed draft doses + schedule with the formula and inputs shown → clinician confirms each line.
-5. **Patient assignment + scheduler** — from the confirmed plan, generate draft cycle dates (e.g. q21d × 6) editable for count-delays/holidays; optionally mirror the confirmed plan into the patient timeline as a draft note. Behind the flag.
+Dose lineage (kept on every drug line):
+```
+Protocol dose -> Calculated -> Rounded -> Physician-modified -> Confirmed -> Administered
+```
+If any two differ, the reason is visible.
 
 ---
 
-## Data model — regimen schema (sketch, finalized in the plan)
+## 2. Architecture — one source of truth
 
 ```
-{
-  "id": "breast-ac-t",
-  "name": "AC-T (dose-dense)",
-  "indications": ["breast-cancer-her2neg-early"],   // KB disease ids / cancer types
-  "intent": "adjuvant",
-  "source": { "nccn": "Breast Cancer vX.YYYY", "textbook": "<Textbook name>" },
-  "cycleLengthDays": 14,
-  "cycles": 4,
-  "biomarkerGate": "HER2-negative",                  // shown as a note, not auto-decided
-  "drugs": [
-    { "name": "Doxorubicin", "basis": "bsa", "dose": 60, "unit": "mg/m2", "route": "IV",
-      "days": [1], "caps": { "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
-      "adjust": { "hepatic": "..." }, "notes": "..." },
-    { "name": "Cyclophosphamide", "basis": "bsa", "dose": 600, "unit": "mg/m2", "route": "IV", "days": [1] }
-    // ... carboplatin example would use "basis":"auc","auc":5 (Calvert), not bsa
-  ],
-  "premeds": [...], "monitoring": [...], "redFlags": [...]
-}
+                 PROTOCOL ENGINE (dose math, pure + golden-tested)
+                              |
+                       TREATMENT PLAN  (the single object)
+                              |
+          +-------------------+-------------------+
+          v                   v                   v
+      APP UI              NURSE VIEW            PROTOCOL PDF
+   (interactive)        (execution)           (printable)
+          +-------------------+-------------------+
+                              v
+                         EMR HISTORY (plan + actuals)
+```
+App and PDF share data, not presentation: the app is an interactive dashboard; the PDF is a formal hospital document. The PDF is generated FROM the treatment plan, never built first and embedded.
+
+---
+
+## 3. App UI
+
+**Header (always):** `Mr. Rajesh Kumar | DLBCL, Stage III, Curative | R-CHOP v2.1, 6 cycles, Active`.
+
+**Tabs:** `Overview | Cycle View | Dose Calculation | Clearance | Administration | Documents` with a `... | Print/PDF | Edit Plan` action.
+
+**Overview = the longitudinal matrix (primary screen).** Drug rows x cycle columns, exactly like the Tata sheet:
+```
+Drug              Dose & Administration    C1     C2     C3   ...  Cn
+Rituximab         375 mg/m2 IV             D1 ✓   D1 ✓   D1        D1
+Cyclophosphamide  750 mg/m2 IV             D1 ✓   D1 ✓   D1        D1
+...
+Prednisolone      100 mg PO D1-5           D1-5✓  D1-5   D1-5      D1-5
+```
+Cells are interactive. Click a cell -> **dose calculation drawer** (contextual side panel), not a page change:
+```
+Cyclophosphamide
+Protocol dose: 750 mg/m2   BSA: 1.54 m2
+Calculation: 750 x 1.54 = 1,155 mg
+Rounding (protocol-defined): 1,150 mg
+Previous cycle dose: 1,150 mg   Modification: None
+Final confirmed: 1,150 mg
+[View calculation] [View protocol source] [View audit trail]
+Confirmed by: Dr. ___
+```
+So the paper sheet's simplicity is preserved; the software power is one click away.
+
+**Apply-Protocol workflow (how a plan is created):**
+```
+Diagnosis (DLBCL) -> Oncology -> Applicable protocols -> select R-CHOP
+ -> auto-pull patient params from EMR (height, weight, BSA, age, labs, renal)
+ -> calculate -> REVIEW (every line inspectable; overrides need reason)
+ -> Create Treatment Plan -> Physician CONFIRM & ACTIVATE -> plan attached to patient
 ```
 
 ---
 
-## Dose computation rules (the core — every value is shown with its formula and requires confirm)
+## 4. Nurse view (separate, execution-only)
 
-- **BSA (Mosteller):** `BSA = sqrt(height_cm * weight_kg / 3600)`. DuBois offered as an alternate.
-- **BSA-based dose:** `dose = dose_per_m2 * min(BSA, cap)`. Cap default **2.0 m²** (owner-set), overridable only with an explicit reason (audited).
-- **Carboplatin (Calvert):** `dose_mg = AUC * (GFR + 25)`. GFR via Cockcroft-Gault (needs age, sex, weight, serum creatinine), with a GFR cap (e.g. 125 mL/min). If creatinine is missing, the engine prompts — it does not assume.
-- **mg/kg:** `dose = dose_per_kg * weight` (capping option).
-- **Flat / fixed:** used verbatim from the regimen.
-- **Rounding:** to a practical/vial increment (configurable per drug).
-- **Cumulative caps:** track within-course cumulative dose; anthracyclines warn/hard-flag against lifetime limits, with a manual "prior anthracycline exposure" input for v1 (true lifetime tracking needs cross-visit history — a later phase).
-- **Sanity bounds:** each drug carries a plausible min/max per-dose; a computed value outside bounds is flagged, not shown as final.
-- Every computed dose renders **the formula, the inputs used, and the source** so the clinician can verify at a glance.
-
-## Scheduling
-
-- From `cycleLengthDays`, `cycles`, and each drug's `days`, generate cycle dates from a chosen start date → a draft calendar. Clinician edits for count recovery, holidays, delays. No auto-commit.
+"Today's Chemotherapy": patient / protocol / cycle / day, big **clearance status** (green/amber/red), then only what to give:
+```
+CLEARANCE  🟢 Cleared
+1. Premedication              [Start]
+2. Rituximab        700 mg IV [Start]
+3. Cyclophosphamide 1,150 mg IV [Start]
+...
+ADMINISTRATION RECORD  actual dose | start | end | reaction | nurse
+[ COMPLETE CYCLE ]
+```
+No manual calculation, no navigating the whole oncology system. Doctor sees intelligence (why this dose, what changed, parameters, cleared?); nurse sees execution (what/how much/route/when/administered/reaction).
 
 ---
 
-## Phases (the plan expands these into bite-sized tasks)
+## 5. Pre-chemotherapy clearance (first-class, before READY)
 
-**Phase 1 — Dose engine + schema + seed regimens.** Build `onco-dose.js` (pure, golden-tested across BSA / Calvert-AUC / mg-kg / flat / caps / rounding) and the regimen schema, seeded with ~6 regimens chosen to exercise every dosing basis (e.g. AC-T, CHOP, FOLFOX, carbo/paclitaxel [AUC], a mg/kg agent, a flat-dose biologic). **R1 review + golden regression before anything else.** This proves the math is right on a small, hand-checked set.
+A cycle cannot reach READY until clearance is resolved: `CBC/platelets, renal, liver, protocol-specific tests, prior-cycle status, physician fitness-to-proceed` -> `🟢 CLEARED | 🟠 REVIEW REQUIRED | 🔴 NOT CLEARED`. Pulls from the EMR so the nurse never hunts for labs.
 
-**Phase 2 — Cancer KB + protocol library content (ultracode fan-out).** Expand all-cancer diseases (overview→management, cited) and populate the regimen library from the PDF + NCCN, in **waves by cancer type**, each wave: fan-out drafting grounded in specific PDF sections → adversarial clinical verification → **R1 sign-off** → merge → coverage-matrix rebuild → git recovery point. This is where the Workflow/ultracode fan-out runs, pointed at your source.
+## 6. Cycle state machine
 
-**Phase 3 — Protocol UI (suggest-and-confirm).** Disease → regimen picker → dose calculator (height/weight or manual) → draft plan with formulas shown → per-line confirm. Behind `smd_onco_protocols`. CDP test proves nothing is applied pre-confirm.
+```
+PLANNED -> DUE -> CLEARANCE -> PHYSICIAN CONFIRMED -> READY -> ADMINISTRATION -> COMPLETED
+alt: HELD | DELAYED | MODIFIED | CANCELLED
+```
 
-**Phase 4 — Patient assignment + scheduler.** Confirmed plan → draft cycle dates (editable) → optional draft mirror to the patient timeline. Heaviest safety gating.
+## 7. Scheduling (auto, but visible and never silent)
 
----
-
-## Sourcing & citation
-
-- Content is **original synthesis** grounded in NCCN + the licensed textbook. No verbatim/near-verbatim reproduction of either source's prose (attribution is not a license; NCCN prose is copyrighted).
-- Display: `NCCN <panel> v<version>` + `<Textbook name>` (no page numbers).
-- **"Latest guideline":** guideline versions come from the provided sources. Assistant knowledge cutoff is Jan 2026; any version claimed beyond what the sources state is marked "verify version" for the owner, never fabricated.
+Dates generated from protocol interval + start date (e.g. C1 20-Aug -> +21d -> C2 10-Sep ...). A delay recalculates future dates as a **proposal** shown to the physician; the schedule is never silently changed.
 
 ---
 
-## Testing & safety
+## 8. Dose engine (the dangerous core — pure, golden-tested)
 
-- **Golden regression** for `onco-dose.js`: hand-verified cases per dosing basis, caps, Calvert, rounding. A change that alters any golden dose fails CI.
-- **R1 clinical review** on the dose engine and every regimen wave (mandatory + blocking).
-- **CDP UI test:** asserts a computed plan is never applied/ordered before explicit per-line confirm; manual edits survive; nothing writes to GHIS without confirm.
-- **Never-invent assertion:** regimen/disease content with no source citation cannot ship.
+- BSA Mosteller default (`sqrt(h_cm*w_kg/3600)`), DuBois alternate.
+- BSA dose = `dosePerM2 * BSA`, then apply the drug/protocol cap **if the data defines one** (no universal cap).
+- Carboplatin/AUC Calvert: `AUC * (GFR + 25)`, GFR via Cockcroft-Gault; prompts if creatinine missing.
+- mg/kg, flat/fixed as specified.
+- Rounding: protocol/drug-defined increment.
+- Per-drug sanity bounds + cumulative-lifetime tracking (anthracyclines) with a manual prior-exposure input in v1.
+- Every value renders formula + inputs + source.
+
+## 9. Dose-modification rules (first-class)
+
+```
+Condition -> Check -> Possible protocol action: continue | reduce | hold | delay | discontinue | recalculate
+```
+The engine evaluates and **flags "review required"**; the physician decides. It never independently reduces/holds/administers.
+
+## 10. Institutional protocols, lifecycle, version locking
+
+- Provenance chain: `NCCN/reference regimen -> institutional review -> institution-approved protocol (e.g. GIMSR R-CHOP v1.3) -> StewardMD ACTIVE`. Reference provenance is never lost.
+- Lifecycle: `DRAFT -> CLINICAL REVIEW -> APPROVED -> ACTIVE -> SUPERSEDED -> RETIRED`. Only ACTIVE templates are selectable for new plans.
+- Version locking: a plan created on v2.1 stays on v2.1 forever, even after v2.2 publishes.
 
 ---
 
-## Regulatory (owner decision, flagged not built)
+## 11. Printable Protocol PDF (best of both reference sheets)
 
-A tool that computes and assigns cytotoxic doses/schedules to patients is very likely a regulated medical-device (SaMD) function (CDSCO India; FDA/EU-MDR abroad). The suggest-and-confirm, clinician-in-the-loop model with visible formulas and a disclaimer is the defensible decision-support posture; auto-prescribing is not. Owner decides the regulatory stance; this spec assumes decision-support-only.
+Formal hospital document, generated from the Treatment Plan, looks nothing like the app.
+
+**Page 1 — Protocol matrix:** header (Patient, MRN, Age/Sex, Diagnosis, Stage, Intent, Protocol+version, Planned cycles, Treatment Plan ID, Start date, Status) + patient-specific parameters (Height, Weight, BSA, Creatinine, Renal function) + the longitudinal drug x cycle matrix (day markers + per-cycle calculated dose) + Legend / Schedule / Safety notes.
+
+**Page 2 — Cycle detail & administration:** cycle header (Cycle n of N, Day, Planned date, Status, BSA/weight/renal, physician status) + pre-chemo clearance table + dose-calculation trace/lineage (Drug | basis | inputs/formula | calculated | rounding/modification | final confirmed) + nursing administration record (Seq | drug | final confirmed | prepared | administered | actual | start | end | nurse | reaction) + physician confirmation & next-cycle + deviation/hold + safety disclaimer.
 
 ---
 
-## Open items (needed before Phase 2 content generation)
+## 12. Sourcing, testing, regulatory (unchanged intent from v1)
 
-1. **The PDF** on disk (path) + the **exact textbook title** for the citation label.
-2. **NCCN** confirmed as the guideline source (was written "NCCM").
-3. Regulatory/SaMD stance + the disclaimer wording to show in the protocol UI.
-4. Preferences: BSA cap default (2.0 m²?), rounding policy, DuBois vs Mosteller default.
-5. v1 scope of Phase 4: keep the plan in-app, or mirror a draft into GHIS?
+- Original synthesis from NCCN + licensed textbook; cite by name, no page numbers; no verbatim reproduction.
+- Golden regression on the dose engine; R1 clinical review on the engine and every regimen wave; CDP tests prove nothing is applied/ordered before physician confirm and that overrides capture a reason; never-invent assertion (no citation -> cannot ship).
+- Regulatory: a plan-computing/scheduling tool is likely SaMD (CDSCO/FDA/MDR). Decision-support-with-clinician-confirmation posture + disclaimer; owner decides regulatory stance.
+
+---
+
+## 13. Implementation phases (revised)
+
+- **Phase 0 — Data architecture + safety model.** The four entities, cycle state machine, version locking, provenance, dose-lineage shape. Pure schema + validation. (No UI.)
+- **Phase 1 — Dose engine.** BSA/AUC/mg-kg/flat/rounding/protocol-caps, golden-tested + R1.
+- **Phase 2 — 6-10 deeply verified protocols + the full workflow** (template -> plan -> cycle -> administration), tested end-to-end, not just the math. R1.
+- **Phase 3 — Protocol UI.** Tata-style matrix Overview + interactive dose drawer. Flag-gated. CDP test.
+- **Phase 4 — Patient Treatment Plan.** Apply protocol to a real EMR patient; review + confirm & activate.
+- **Phase 5 — Cycle + clearance + nurse administration view.** State machine + clearance + administration record.
+- **Phase 6 — Protocol PDF.** Two-page sheet generated from the same plan.
+- **Phase 7 — KB expansion (ultracode fan-out).** 130+ cancer diseases + protocol library in R1-gated waves, grounded in the PDF + NCCN.
+- **Phase 8 — GHIS integration.** Only after the internal workflow is proven; draft-only, clinician-confirmed, no silent writes.
+
+## 14. Open items (needed before content phases)
+
+1. Exact **textbook title** for the citation label (PDF is at `~/Downloads/StewardMD_Chemo_Protocol_Sheet_Tata_Inspired.pdf` + concept on Desktop; the actual clinical-content textbook PDF still to be provided for Phase 2/7).
+2. Regulatory/SaMD stance + disclaimer wording.
+3. Preferences: Mosteller vs DuBois default; default rounding policy; whether any institution-wide cap exists (else none).
+4. Institution identity for approved variants (e.g. GIMSR) and who signs the R1/institutional approval.
+5. Phase 8 scope: what (if anything) mirrors to GHIS.
