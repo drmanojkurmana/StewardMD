@@ -171,19 +171,61 @@ export async function getCycle(env, cycleId, deps) {
   return d ? Object.assign({ cycleId: id }, d.fields) : null;
 }
 
-// planned -> ready. Clearance gating (spec R5/Phase 5) is NOT enforced yet - Phase 5 adds the
-// clearance-resolved precondition once the nurse/clearance view exists.
+// Pre-chemo clearance (spec R5/Phase 5): v1 is a physician ATTESTATION - each named check gets a
+// status the physician typed/tapped, plus one overall status. Fail-closed: an unrecognised status is
+// rejected rather than silently downgraded, so a bug here can never masquerade as "cleared". Never
+// pulls or fabricates a real lab VALUE (deferred; see file header) - "checks" carries only the
+// physician's attestation text, not a lab result.
+const CLEARANCE_STATUSES = ["cleared", "review", "not_cleared"];
+export async function resolveClearance(env, cycleId, input, deps) {
+  const io = deps || REAL_DEPS;
+  const id = sanitize(cycleId);
+  const cyc = await getCycle(env, id, io);
+  if (!cyc) throw new Error("cycle_not_found");
+  input = input || {};
+  const status = String(input.status || "");
+  if (CLEARANCE_STATUSES.indexOf(status) < 0) throw new Error("invalid_clearance_status");
+  const checks = (input.checks || []).map((c) => ({ name: String((c && c.name) || ""), status: String((c && c.status) || "") }));
+  const now = Date.now();
+  const clearance = { status, checks, resolvedBy: String(input.by || ""), resolvedAt: now };
+  const plan = await getPlan(env, cyc.planId, io);
+  await io.fsCommit(env, [io.wUpdate(env, "q_onco_cycles/" + id, { clearance, updatedAt: now })]);
+  await auditOnco(io, env, plan && plan.hospitalId, input.by, "onco:cycle:clearance", { mrn: plan && plan.ghisPatientId, cycleId: id, status, checks: checks.length });
+  return Object.assign({}, cyc, { clearance, updatedAt: now });
+}
+
+// planned -> ready. Clearance BLOCKS ready (spec R5/Phase 5, non-negotiable): a cycle can only reach
+// "ready" once its OWN clearance object says "cleared" - "pending" (the createCycle default) and
+// "review"/"not_cleared" all refuse, same as an invalid state transition. Checked at the data layer
+// (not just a UI-disabled button) so no caller can route around it.
 export async function confirmCycle(env, cycleId, deps) {
   const io = deps || REAL_DEPS;
   const id = sanitize(cycleId);
   const cyc = await getCycle(env, id, io);
   if (!cyc) throw new Error("cycle_not_found");
   if (!_canTransition(cyc.state, "ready")) throw new Error("invalid_cycle_transition:" + cyc.state + "->ready");
+  if (!cyc.clearance || cyc.clearance.status !== "cleared") throw new Error("clearance_not_resolved");
   const now = Date.now();
   const plan = await getPlan(env, cyc.planId, io);
   await io.fsCommit(env, [io.wUpdate(env, "q_onco_cycles/" + id, { state: "ready", updatedAt: now })]);
   await auditOnco(io, env, plan && plan.hospitalId, plan && plan.doctorUid, "onco:cycle:confirm", { mrn: plan && plan.ghisPatientId, cycleId: id });
   return Object.assign({}, cyc, { state: "ready", updatedAt: now });
+}
+
+// ready -> administering ("nurse taps Start on the first drug" / opens the execution view). No
+// clearance re-check here - clearance already gated planned -> ready; ready -> administering is a
+// nurse-cap transition (spec R11), never a dose/clearance decision.
+export async function startCycle(env, cycleId, deps) {
+  const io = deps || REAL_DEPS;
+  const id = sanitize(cycleId);
+  const cyc = await getCycle(env, id, io);
+  if (!cyc) throw new Error("cycle_not_found");
+  if (!_canTransition(cyc.state, "administering")) throw new Error("invalid_cycle_transition:" + cyc.state + "->administering");
+  const now = Date.now();
+  const plan = await getPlan(env, cyc.planId, io);
+  await io.fsCommit(env, [io.wUpdate(env, "q_onco_cycles/" + id, { state: "administering", updatedAt: now })]);
+  await auditOnco(io, env, plan && plan.hospitalId, plan && plan.doctorUid, "onco:cycle:start", { mrn: plan && plan.ghisPatientId, cycleId: id });
+  return Object.assign({}, cyc, { state: "administering", updatedAt: now });
 }
 
 // Append-only: writes ONE new q_onco_admin row, never mutates an existing one. No calculation here -
@@ -230,5 +272,5 @@ export async function completeCycle(env, cycleId, deps) {
 
 export {
   sanitize, newId, _cycleId, _snapshot, _recordOverride, _canTransition,
-  CYCLE_STATES, CYCLE_TRANSITIONS,
+  CYCLE_STATES, CYCLE_TRANSITIONS, CLEARANCE_STATUSES,
 };

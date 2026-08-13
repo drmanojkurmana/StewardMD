@@ -138,6 +138,9 @@ test("gate ON: full plan -> cycle -> administration -> complete flow at the data
   assert.equal(cyc1.cycleId, ONCO._cycleId(plan.planId, 1)); // deterministic id
   assert.equal(cyc1.state, "planned");
 
+  // Phase 5: confirmCycle refuses planned -> ready until clearance is explicitly "cleared".
+  await assert.rejects(() => ONCO.confirmCycle({}, cyc1.cycleId, io), /clearance_not_resolved/);
+  await ONCO.resolveClearance({}, cyc1.cycleId, { checks: [{ name: "CBC/platelets", status: "ok" }], status: "cleared", by: "dr1" }, io);
   const ready = await ONCO.confirmCycle({}, cyc1.cycleId, io);
   assert.equal(ready.state, "ready");
 
@@ -158,13 +161,84 @@ test("gate ON: full plan -> cycle -> administration -> complete flow at the data
   assert.notEqual(admin1.id, admin2.id);
   assert.ok(docs.has("q_onco_admin/" + admin1.id) && docs.has("q_onco_admin/" + admin2.id));
 
-  // simulate the (Phase 5) nurse-start transition so completeCycle's administering->done guard holds.
-  await io.fsCommit({}, [io.wUpdate({}, "q_onco_cycles/" + cyc1.cycleId, { state: "administering" })]);
+  // Phase 5: the nurse-start transition (ready -> administering) so completeCycle's
+  // administering->done guard holds.
+  const administering = await ONCO.startCycle({}, cyc1.cycleId, io);
+  assert.equal(administering.state, "administering");
   const done = await ONCO.completeCycle({}, cyc1.cycleId, io);
   assert.equal(done.state, "done");
 
   // completeCycle refuses an out-of-order transition (already done -> done again).
   await assert.rejects(() => ONCO.completeCycle({}, cyc1.cycleId, io), /invalid_cycle_transition/);
+});
+
+// ---- Phase 5: clearance gate + nurse-start transition ---------------------------------------------
+
+test("confirmCycle (planned -> ready) is BLOCKED unless clearance.status === 'cleared' - the safety gate this phase exists to add", async () => {
+  const { io } = makeFakeIO();
+  const body = { hospitalId: "hosp1", orgId: "hosp1", doctorUid: "dr1", ghisPatientId: "MRN-501", protocolId: "test-protocol", patientParams: {} };
+  const plan = await ONCO.createPlan({}, body, FIXTURE_TEMPLATE, io);
+  await ONCO.confirmPlan({}, plan.planId, [], io);
+  const cyc = await ONCO.createCycle({}, plan.planId, 1, io);
+  assert.equal(cyc.clearance.status, "pending", "createCycle defaults clearance to pending, never pre-cleared");
+
+  // pending (the untouched default) refuses.
+  await assert.rejects(() => ONCO.confirmCycle({}, cyc.cycleId, io), /clearance_not_resolved/);
+
+  // "review" - an explicit, resolved status - STILL refuses; only "cleared" unblocks ready.
+  await ONCO.resolveClearance({}, cyc.cycleId, { checks: [{ name: "CBC/platelets", status: "borderline" }], status: "review", by: "dr1" }, io);
+  await assert.rejects(() => ONCO.confirmCycle({}, cyc.cycleId, io), /clearance_not_resolved/);
+
+  // "not_cleared" - also refuses.
+  await ONCO.resolveClearance({}, cyc.cycleId, { checks: [], status: "not_cleared", by: "dr1" }, io);
+  await assert.rejects(() => ONCO.confirmCycle({}, cyc.cycleId, io), /clearance_not_resolved/);
+
+  // "cleared" - and ONLY "cleared" - unblocks planned -> ready.
+  await ONCO.resolveClearance({}, cyc.cycleId, { checks: [{ name: "CBC/platelets", status: "ok" }, { name: "renal", status: "ok" }], status: "cleared", by: "dr1" }, io);
+  const ready = await ONCO.confirmCycle({}, cyc.cycleId, io);
+  assert.equal(ready.state, "ready");
+});
+
+test("resolveClearance sets cycle.clearance {status,checks,resolvedBy,resolvedAt}, audits, and rejects an invalid status", async () => {
+  const { io, events } = makeFakeIO();
+  const body = { hospitalId: "hosp1", doctorUid: "dr1", ghisPatientId: "MRN-502", protocolId: "test-protocol", patientParams: {} };
+  const plan = await ONCO.createPlan({}, body, FIXTURE_TEMPLATE, io);
+  const cyc = await ONCO.createCycle({}, plan.planId, 1, io);
+
+  await assert.rejects(() => ONCO.resolveClearance({}, cyc.cycleId, { status: "not_a_real_status", by: "dr1" }, io), /invalid_clearance_status/);
+  await assert.rejects(() => ONCO.resolveClearance({}, "no-such-cycle", { status: "cleared", by: "dr1" }, io), /cycle_not_found/);
+
+  const before = events.length;
+  const resolved = await ONCO.resolveClearance({}, cyc.cycleId, {
+    checks: [{ name: "CBC/platelets", status: "ok" }, { name: "renal", status: "ok" }],
+    status: "cleared", by: "dr1",
+  }, io);
+  assert.equal(resolved.clearance.status, "cleared");
+  assert.equal(resolved.clearance.checks.length, 2);
+  assert.equal(resolved.clearance.resolvedBy, "dr1");
+  assert.ok(resolved.clearance.resolvedAt > 0);
+  assert.ok(events.length > before, "resolveClearance must call qAudit");
+
+  const reloaded = await ONCO.getCycle({}, cyc.cycleId, io);
+  assert.equal(reloaded.clearance.status, "cleared", "clearance is persisted onto the cycle doc");
+});
+
+test("startCycle: ready -> administering only; blocked directly from planned (must go through ready first)", async () => {
+  const { io } = makeFakeIO();
+  const body = { hospitalId: "hosp1", doctorUid: "dr1", ghisPatientId: "MRN-503", protocolId: "test-protocol", patientParams: {} };
+  const plan = await ONCO.createPlan({}, body, FIXTURE_TEMPLATE, io);
+  const cyc = await ONCO.createCycle({}, plan.planId, 1, io);
+
+  // planned -> administering directly is refused (can't skip ready/clearance).
+  await assert.rejects(() => ONCO.startCycle({}, cyc.cycleId, io), /invalid_cycle_transition:planned->administering/);
+
+  await ONCO.resolveClearance({}, cyc.cycleId, { checks: [], status: "cleared", by: "dr1" }, io);
+  await ONCO.confirmCycle({}, cyc.cycleId, io);   // planned -> ready
+  const started = await ONCO.startCycle({}, cyc.cycleId, io);
+  assert.equal(started.state, "administering");
+
+  // already administering -> starting again is refused (administering is not a "ready" state).
+  await assert.rejects(() => ONCO.startCycle({}, cyc.cycleId, io), /invalid_cycle_transition:administering->administering/);
 });
 
 test("no PHI (patient name/mobile) ever reaches qAudit meta, even if the caller's body carries it", async () => {

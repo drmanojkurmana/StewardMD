@@ -171,6 +171,35 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-onco-review-edit { display: flex; gap: 8px; margin-top: 6px; }
 #smdOpdEmr .oe-onco-review-edit .oe-inp { flex: 1 1 auto; min-width: 0; padding: 8px 10px; font-size: 13px; }
 #smdOpdEmr .oe-onco-ov-note { font: 500 12px var(--q-sans); color: var(--secondary); margin-top: 2px; }
+
+/* ---- Oncology Phase 5: doctor/nurse toggle + nurse execution view ("Today's Chemotherapy") ---- */
+#smdOpdEmr .oe-onco-viewtoggle { display: flex; gap: 8px; margin-bottom: 14px; }
+#smdOpdEmr .oe-onco-viewtoggle .oe-btn { padding: 8px 14px; font-size: 13px; }
+#smdOpdEmr .oe-onco-viewtoggle .oe-btn.on { background: var(--primary); color: var(--on-primary); }
+#smdOpdEmr .oe-onco-nurse-head { margin-bottom: 12px; }
+#smdOpdEmr .oe-onco-nurse-title { font: 700 16px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-onco-nurse-sub { font: 500 12.5px var(--q-sans); color: var(--secondary); margin-top: 2px; }
+#smdOpdEmr .oe-onco-nurse-h4 { font: 700 12px var(--q-sans); text-transform: uppercase; letter-spacing: .03em; color: var(--secondary); margin: 18px 0 8px; }
+#smdOpdEmr .oe-onco-clr { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; border-radius: 14px; font: 700 14px var(--q-sans); }
+#smdOpdEmr .oe-onco-clr .material-symbols-outlined { font-size: 22px; }
+#smdOpdEmr .oe-onco-clr.oe-clr-green { background: color-mix(in srgb, #2e7d32 18%, var(--surface)); color: #1b5e20; }
+#smdOpdEmr .oe-onco-clr.oe-clr-amber { background: color-mix(in srgb, #ef6c00 18%, var(--surface)); color: #8a4b00; }
+#smdOpdEmr .oe-onco-clr.oe-clr-red { background: color-mix(in srgb, var(--error) 20%, var(--surface)); color: var(--error); }
+#smdOpdEmr .oe-onco-clr-txt { font: 700 14px var(--q-sans); }
+#smdOpdEmr .oe-onco-clr-checks { font: 500 12px var(--q-sans); opacity: .85; margin-top: 2px; }
+#smdOpdEmr .oe-onco-done { margin-top: 12px; }
+#smdOpdEmr .oe-onco-give { display: flex; flex-direction: column; gap: 8px; }
+#smdOpdEmr .oe-onco-giverow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; flex-wrap: wrap; }
+#smdOpdEmr .oe-onco-giverow.premed { background: var(--sc-lowest); }
+#smdOpdEmr .oe-onco-giverow.done { opacity: .7; }
+#smdOpdEmr .oe-onco-give-main { display: flex; flex-direction: column; }
+#smdOpdEmr .oe-onco-give-name { font: 600 13.5px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-onco-give-dose { font: 500 12.5px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-onco-give-inputs { display: flex; gap: 6px; align-items: center; }
+#smdOpdEmr .oe-onco-give-inputs .oe-inp { width: 84px; padding: 7px 8px; font-size: 12.5px; }
+#smdOpdEmr .oe-onco-admtbl { width: 100%; border-collapse: collapse; margin-top: 4px; }
+#smdOpdEmr .oe-onco-admtbl th { text-align: left; font: 700 10.5px var(--q-sans); text-transform: uppercase; letter-spacing: .03em; color: var(--secondary); padding: 6px 8px; border-bottom: 1px solid var(--outline-variant); }
+#smdOpdEmr .oe-onco-admtbl td { padding: 6px 8px; font: 500 12.5px var(--q-sans); border-bottom: 1px solid var(--sc-low); }
 #smdOpdEmr .oe-btn[disabled] { opacity: .45; cursor: not-allowed; }
 
 /* empty / loading / error */

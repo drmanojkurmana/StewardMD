@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oncology nurse execution view harness (Phase 5, Today's Chemotherapy)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };   // smd_onco_protocols (+ smd_opd_emr) on
+window.confirm = function () { return true; };   // auto-confirm the Start / Complete cycle dialogs
+
+// Record EVERY fetch call (method + url + parsed body) so the CDP test can assert exact POST counts.
+window.__fetchCalls = [];
+window.fetch = function (url, opts) {
+  opts = opts || {};
+  var body = null; try { body = opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__fetchCalls.push({ method: opts.method || "GET", url: String(url), body: body });
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  if (url.indexOf("/api/queue/onco/admin") >= 0) {
+    var admin = Object.assign({ id: "ADM-cdp-1", status: body && body.administered ? "administered" : "recorded", administeredBy: "Nurse Test" }, body || {});
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, admin: admin }); } });
+  }
+  if (url.indexOf("/api/queue/onco/cycle/complete") >= 0) {
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, cycle: Object.assign({}, window.__FIXTURE_CYCLE, { state: "done" }) }); } });
+  }
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-dose.js, onco-protocols.js, onco-nurse.js, then opd-emr.js. -->
+<script src="/onco-dose.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/onco-nurse.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_ONCOUI && window.SMD_ONCONURSE && window.SMD_ONCODOSE);"></script>
+</body></html>

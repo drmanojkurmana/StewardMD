@@ -401,16 +401,34 @@
       '<div class="oe-swipe" id="oeSwipe" role="button" aria-label="Swipe to close consult"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
-  // Oncology tab (flag smd_onco_protocols, default OFF): the Tata-style drug x cycle dose matrix,
-  // READ-ONLY over a treatment plan already in state (st.oncoPlan). Never fetches or writes on its
-  // own - creating/persisting a plan is Phase 4. Delegates the matrix build to onco-protocols.js
-  // (window.SMD_ONCOUI) so opd-emr.js stays the shell; inert (not enabled / no plan) never crashes.
+  // Oncology tab (flag smd_onco_protocols, default OFF): the Tata-style drug x cycle dose matrix
+  // (doctor view, READ-ONLY over st.oncoPlan) or, once toggled, the Phase 5 nurse execution view
+  // ("Today's Chemotherapy", READ-ONLY over st.oncoPlan + st.oncoCycle - it never calculates a dose).
+  // Delegates markup to onco-protocols.js / onco-nurse.js so opd-emr.js stays the shell; inert (not
+  // enabled / no plan) never crashes.
   function oncoTab(st) {
     if (!oncoFlagOn()) return section("vaccines", "Oncology", "", "", "Oncology protocols are not enabled for this account.");
     var plan = st.oncoPlan;
     if (!plan) return section("vaccines", "Oncology", "", "", "No active treatment plan for this patient yet.");
-    var matrix = (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : '<div class="oe-empty sm">Oncology module unavailable.</div>';
-    return section("vaccines", "Oncology", (plan.protocolId || "").toUpperCase(), matrix, "");
+    var toggle = oncoViewToggle(st);
+    var body;
+    if (st.oncoView === "nurse") {
+      var cycle = st.oncoCycle;
+      body = cycle
+        ? ((G.SMD_ONCONURSE && G.SMD_ONCONURSE.buildNurseView) ? G.SMD_ONCONURSE.buildNurseView(plan, cycle) : '<div class="oe-empty sm">Nurse view unavailable.</div>')
+        : '<div class="oe-empty sm">No cycle ready for administration yet.</div>';
+    } else {
+      body = (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : '<div class="oe-empty sm">Oncology module unavailable.</div>';
+    }
+    return section("vaccines", "Oncology", (plan.protocolId || "").toUpperCase(), toggle + body, "");
+  }
+  // Doctor/Nurse toggle for the Oncology tab (st.oncoView "doctor" | "nurse", default doctor). Purely
+  // a local view switch - no fetch, mirrors the other data-oe-act toggles in this file.
+  function oncoViewToggle(st) {
+    var nurse = st.oncoView === "nurse";
+    return '<div class="oe-onco-viewtoggle">' +
+      '<button class="oe-btn ghost' + (nurse ? "" : " on") + '" data-oe-act="onco-view:doctor">' + ms("person") + "Doctor</button>" +
+      '<button class="oe-btn ghost' + (nurse ? " on" : "") + '" data-oe-act="onco-view:nurse">' + ms("healing") + "Nurse</button></div>";
   }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
@@ -437,7 +455,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoDraft: null, oncoOverrideDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {} }; }
   function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
@@ -482,6 +500,11 @@
     // the doctor taps "Save override" (oncoSaveOverride), which requires the reason to be non-empty.
     if (inp.indexOf("onco-ov-val:") === 0) { var dv = inp.slice(12); st.oncoOverrideDraft = st.oncoOverrideDraft || {}; st.oncoOverrideDraft[dv] = st.oncoOverrideDraft[dv] || {}; st.oncoOverrideDraft[dv].val = val; return; }
     if (inp.indexOf("onco-ov-reason:") === 0) { var dr = inp.slice(15); st.oncoOverrideDraft = st.oncoOverrideDraft || {}; st.oncoOverrideDraft[dr] = st.oncoOverrideDraft[dr] || {}; st.oncoOverrideDraft[dr].reason = val; return; }
+    // Nurse administration staging (Phase 5): keyed by the SAME "<cycleId>:<drugId>" string the
+    // [Start] button's data-oe-act carries, so oncoStart() reads it back with zero re-parsing.
+    // Silent (no repaint) - same reason as the override inputs above.
+    if (inp.indexOf("onco-admin-dose:") === 0) { var adk = inp.slice(16); st.oncoAdminDraft = st.oncoAdminDraft || {}; st.oncoAdminDraft[adk] = st.oncoAdminDraft[adk] || {}; st.oncoAdminDraft[adk].dose = val; return; }
+    if (inp.indexOf("onco-admin-reaction:") === 0) { var ark = inp.slice(20); st.oncoAdminDraft = st.oncoAdminDraft || {}; st.oncoAdminDraft[ark] = st.oncoAdminDraft[ark] || {}; st.oncoAdminDraft[ark].reaction = val; return; }
   }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
@@ -531,6 +554,9 @@
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-override") return oncoSaveOverride(arg);
     if (cmd === "onco-create") return oncoCreateAndActivate();
+    if (cmd === "onco-view") { st.oncoView = arg; paint(); return; }
+    if (cmd === "onco-start") return oncoStart(arg);
+    if (cmd === "onco-complete") return oncoComplete(arg);
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
@@ -629,6 +655,44 @@
         toast("Treatment plan created and activated.");
         paint();
       });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase 5: nurse execution - start a drug (record administration), complete the cycle ---------
+  // Staged confirm: the actual-dose/reaction inputs are staged silently (setField, above) into
+  // st.oncoAdminDraft keyed by the SAME "<cycleId>:<drugId>" string the [Start] button carries; the
+  // tap itself is the ONE confirm() gate, then exactly one POST to /onco/admin fires. No dose is ever
+  // computed here - `actual` is whatever the nurse typed (or null), never derived from the plan.
+  function oncoStart(arg) {
+    var i = String(arg || "").indexOf(":"), cycleId = i < 0 ? arg : arg.slice(0, i), drugId = i < 0 ? "" : arg.slice(i + 1);
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    var draft = (st.oncoAdminDraft && st.oncoAdminDraft[arg]) || {};
+    var actual = null;
+    if (draft.dose != null && draft.dose !== "") { var n = Number(draft.dose); if (isFinite(n)) actual = n; }
+    if (!confirmed("Record this dose as given?")) return;
+    var now = Date.now();
+    oncoPost("/admin", { cycleId: cycleId, planId: st.oncoPlan && st.oncoPlan.planId, drugId: drugId,
+      actual: actual, administered: true, startTime: now, endTime: now, reaction: draft.reaction || "" })
+      .then(function (res) {
+        if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+        if (!res.ok || res.d.ok === false || !res.d.admin) { toast("Could not record the administration. Please try again."); return; }
+        cycle.administrationSequence = (cycle.administrationSequence || []).concat([res.d.admin]);
+        if (st.oncoAdminDraft) delete st.oncoAdminDraft[arg];
+        toast("Administration recorded.");
+        paint();
+      }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  // [Complete cycle]: one confirm() gate, then exactly one POST to /onco/cycle/complete
+  // (administering -> done, guarded server-side by _canTransition).
+  function oncoComplete(cycleId) {
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    if (!confirmed("Complete this chemotherapy cycle?")) return;
+    oncoPost("/cycle/complete", { cycleId: cycleId }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.cycle) { toast("Could not complete the cycle. Please try again."); return; }
+      st.oncoCycle = res.d.cycle;
+      toast("Cycle completed.");
+      paint();
     }).catch(function () { toast("Could not complete the request. Please try again."); });
   }
 
@@ -1195,6 +1259,8 @@
     st.writeOn = writeFlagOn();
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
+    if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
+    if (opts.oncoView) st.oncoView = opts.oncoView;            // test/Phase-5 seam: open directly on the nurse view
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     paint();
     loadProfile(opts);
