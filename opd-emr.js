@@ -1137,9 +1137,13 @@
     if (!(G.SMD_MAIKASK && G.SMD_MAIKASK.start)) { toast("MaiK Ask is not available on this build."); return; }
     var v = st.assessVals || {};
     var complaint = v.Chief_complaints_duration || v.History_present_illness || _lastFullTranscript || "";
+    // Demo/test mode (localStorage smd_maik_ask_demo=1): scripted patient answers, no ASR/TTS, and the
+    // findings are NOT written to the real record — for trying the flow without a patient.
+    var demo = false; try { demo = localStorage.getItem("smd_maik_ask_demo") === "1"; } catch (e) {}
     G.SMD_MAIKASK.start({
-      complaint: complaint, known: v,
-      onFindings: maikApplyFindings,
+      complaint: complaint || (demo ? "headache" : ""), known: v, demo: demo,
+      demoAnswers: demo ? ["no", "no", "no", "gradually", "right side", "throbbing type", "very severe", "nausea undi"] : null,
+      onFindings: demo ? function () {} : maikApplyFindings,     // demo never touches the EMR
       onReview: function () { switchTab("assess"); }
     });
   }
