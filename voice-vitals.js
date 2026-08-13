@@ -24,6 +24,42 @@
   function num(x) { return parseFloat(x); }
   function inRange(v, lo, hi) { return v >= lo && v <= hi; }
 
+  // ── spoken numbers -> digits, so "BP one twenty by eighty, pulse eighty eight" fills like the
+  // digit form. SAFE by construction: this only exposes digits; a vital is still only extracted when
+  // a cue word (bp/pulse/temp/...) sits next to it, so a stray conversion elsewhere invents nothing.
+  var ONES = { zero: 0, oh: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9 };
+  var TEENS = { ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19 };
+  var TENS = { twenty: 20, thirty: 30, forty: 40, fourty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+  function parseNumber(t, i) {
+    function c(k) { return k < t.length ? String(t[k] || "").replace(/[.,;:!?]+$/, "") : ""; }
+    var w = c(i), start = i, value, hundredBase = false;
+    if ((w === "a" || w === "an") && c(i + 1) === "hundred") { value = 100; i += 2; hundredBase = true; }
+    else if (w in ONES && c(i + 1) === "hundred") { value = ONES[w] * 100; i += 2; hundredBase = true; }
+    else if (w === "hundred") { value = 100; i += 1; hundredBase = true; }
+    else if (w in ONES && c(i + 1) in TENS) { value = ONES[w] * 100 + TENS[c(i + 1)]; i += 2; if (c(i) in ONES) { value += ONES[c(i)]; i += 1; } }   // colloquial "one twenty [five]" = 120/125
+    else if (w in ONES && c(i + 1) in TEENS) { value = ONES[w] * 100 + TEENS[c(i + 1)]; i += 2; }   // colloquial "one ten/one fifteen" = 110/115
+    else if (w in TENS) { value = TENS[w]; i += 1; if (c(i) in ONES) { value += ONES[c(i)]; i += 1; } }
+    else if (w in TEENS) { value = TEENS[w]; i += 1; }
+    else if (w in ONES) { value = ONES[w]; i += 1; }
+    else return null;
+    if (hundredBase) { if (c(i) === "and") i += 1; var w2 = c(i);
+      if (w2 in TENS) { value += TENS[w2]; i += 1; if (c(i) in ONES) { value += ONES[c(i)]; i += 1; } }
+      else if (w2 in TEENS) { value += TEENS[w2]; i += 1; }
+      else if (w2 in ONES) { value += ONES[w2]; i += 1; } }
+    if (c(i) === "point") { var dec = "", k = i + 1, any = false; while (c(k) in ONES) { dec += String(ONES[c(k)]); k++; any = true; } if (any) { value = parseFloat(value + "." + dec); i = k; } }
+    return { value: value, end: i, took: i - start };
+  }
+  function wordsToNumbers(text) {
+    var orig = String(text == null ? "" : text).split(/\s+/), lc = orig.map(function (t) { return t.toLowerCase(); });
+    var out = [], i = 0;
+    while (i < orig.length) {
+      var r = parseNumber(lc, i);
+      if (r && r.value != null && r.took > 0) { out.push(String(r.value)); i = r.end; }
+      else { out.push(orig[i]); i++; }
+    }
+    return out.join(" ");
+  }
+
   // ── clause-scoped negation (so "no pallor" ≠ pallor; cue must sit in the SAME clause) ──
   var NEG = /(^|[^a-z])(no|not|without|nil|denies|denied|absent|free of|negative for|n\/a)([^a-z]|$)/;
   function clauses(n) { return n.split(/[.,;]| and | with | but | who /); }
@@ -42,6 +78,7 @@
   }
 
   function extract(text) {
+    text = wordsToNumbers(text);                       // "pulse eighty eight" -> "pulse 88" before the digit regexes run
     var raw = " " + String(text || "").toLowerCase() + " ";
     var n = norm(text);
     var out = [], m;
@@ -138,7 +175,7 @@
     return Object.keys(best).map(function (k) { return best[k]; });
   }
 
-  var API = { extract: extract, _version: "1.0" };
+  var API = { extract: extract, wordsToNumbers: wordsToNumbers, _version: "1.0" };
   if (root) root.SMD_VVITALS = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

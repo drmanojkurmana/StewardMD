@@ -197,3 +197,29 @@ test("stop(): no in-flight chunk (no ASR host) returns false, so the caller know
   const ctl = AMB.start({ speaker: "doctor", getState: () => ({}), onRefine: () => {} });   // real module; no window.SMD_VOICE in Node -> armChunk() is a no-op
   assert.equal(ctl.stop(), false, "nothing to flush -> caller must refine itself");
 });
+
+test("isSilence: SFSpeech silence endpoints are benign, real errors are not", () => {
+  // These fire on every natural pause in a consultation — must NOT count toward the failure breaker.
+  for (const s of ["No speech detected", "No match", "Retry", "kAFAssistantErrorDomain 1110", "code 203"])
+    assert.equal(AMB.isSilence(s), true, `"${s}" should be treated as benign silence`);
+  // Genuine failures must still count (so a truly broken engine stops instead of looping forever).
+  for (const s of ["recording-failure", "transcription-failed", "mic-denied", "clinical-unavailable", ""])
+    assert.equal(AMB.isSilence(s), false, `"${s}" must remain a hard error`);
+});
+
+test("chunk-cycling: repeated silence endpoints keep the loop alive (do not trip the failure breaker)", async () => {
+  // A real consult has many pauses. Each pause makes iOS SFSpeech end a window with "No speech
+  // detected". Before the fix, >3 of these tripped errStreak and killed the loop ("worked first
+  // time, suddenly stopped"). Now each silence must re-arm without counting or surfacing an error.
+  const sessions = [], errors = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => { const s = { opts, stop: () => {} }; sessions.push(s); return s; });
+  const ctl = AMB2.start({ speaker: "doctor", engine: "fast", getState: () => ({}), chunkMs: 60000, onError: (e) => errors.push(e) });
+  const ROUNDS = 6;                                          // more than the old 3-strike breaker
+  for (let i = 0; i < ROUNDS; i++) {
+    sessions[sessions.length - 1].opts.onError("No speech detected");
+    await new Promise((r) => setTimeout(r, 320));            // let the 300ms re-arm fire
+  }
+  assert.ok(sessions.length >= ROUNDS, `loop kept re-arming across ${ROUNDS} pauses (got ${sessions.length})`);
+  assert.ok(!errors.includes("No speech detected"), "benign silence is never surfaced as an error");
+  ctl.stop();
+});

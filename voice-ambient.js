@@ -108,6 +108,10 @@
   // Detect the chunk's language from its script so Auto mode can route the NEXT chunk to the right
   // model (Telugu → specialist, Devanagari → Hindi, else English). Telugu block U+0C00–0C7F, Devanagari U+0900–097F.
   function detectScript(t) { t = String(t || ""); if (/[ఀ-౿]/.test(t)) return "te"; if (/[ऀ-ॿ]/.test(t)) return "hi"; if (/[a-z]/i.test(t)) return "en"; return ""; }
+  // A benign "the speaker just paused" endpoint, not a real failure — iOS SFSpeech reports these on
+  // every silence gap ("No speech detected"/"No match"/"Retry"). Kept separate from hard errors
+  // (recording-failure, transcription-failed, mic-denied) which SHOULD count toward the breaker.
+  function isSilence(e) { var s = String(e || "").toLowerCase(); return s.indexOf("no speech") >= 0 || s.indexOf("no match") >= 0 || s.indexOf("nomatch") >= 0 || s.indexOf("retry") >= 0 || s.indexOf("1110") >= 0 || s.indexOf("203") >= 0; }
 
   function start(opts) {
     opts = opts || {};
@@ -124,7 +128,7 @@
     // Rolling capture starts on clinical (on-device Whisper). If Whisper is unavailable on this
     // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
     // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
-    var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null;
+    var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null, silenceStreak = 0;
     // Auto-mode adaptive routing: the language observed in the last chunk picks the model for the next
     // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands.
     var detectedLang = null;
@@ -236,6 +240,13 @@
       // BUGFIX: on Stop, if the flushed chunk ERRORS (vs finalizes), still run the promised final refine
       // over whatever transcript we have — else teardown()'s willRefine=true leaves the note un-drafted.
       if (stopping) { running = false; if (onRefine && !paused) { try { onRefine(fullTranscript); } catch (e) {} } if (opts.onError) opts.onError(err); return; }
+      // Benign silence endpoint: iOS SFSpeech (the fast fallback) ends a window with "No speech
+      // detected"/"no match" on EVERY natural pause in a consultation. That is NOT a failure —
+      // re-arm and keep listening, without counting it toward the 3-strike breaker or surfacing a
+      // scary error. Otherwise a few pauses trip errStreak>3 and kill the whole loop mid-consult
+      // ("worked first time then suddenly stopped"). A high cap (reset by any good chunk) still
+      // stops a truly dead mic that only ever endpoints on silence.
+      if (isSilence(err)) { if (++silenceStreak <= 40 && running && !paused) reArm(); else running = false; return; }
       // Whisper missing/failing → fall back ONCE to the device's built-in on-device STT so autofill
       // still works (immediately on "clinical-unavailable"; after 2 clinical errors if it fails mid-run).
       if (engine === "clinical" && (err === "clinical-unavailable" || ++clinicalErrs >= 2)) {
@@ -259,7 +270,7 @@
       curSession = null;
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
       if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
-      errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
+      errStreak = 0; clinicalErrs = 0; silenceStreak = 0;   // a good window means the current engine works
       // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
       if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
       chunkN++;
@@ -305,7 +316,7 @@
     };
   }
 
-  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, _version: "1.0" };
+  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, _version: "1.0" };
   if (root) root.SMD_AMBIENT = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

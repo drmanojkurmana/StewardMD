@@ -191,6 +191,8 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-gate-sub { margin: 0 0 18px; text-align: center; font: 500 13px var(--q-sans); color: var(--on-surface-variant); line-height: 1.4; }
 #smdQueue .q-gate-in { width: 100%; box-sizing: border-box; background: var(--bg); border: 1px solid var(--outline-variant); border-radius: 10px; color: var(--on-surface); font: 500 15px var(--q-sans); padding: 13px 14px; margin-bottom: 10px; }
 #smdQueue .q-gate-in:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,104,95,.12); }
+#smdQueue .q-gate-remember { display: flex; align-items: center; gap: 8px; margin: 2px 2px 12px; color: var(--secondary); font: 500 13px var(--q-sans); cursor: pointer; user-select: none; }
+#smdQueue .q-gate-remember input { width: 17px; height: 17px; accent-color: var(--primary); flex: 0 0 auto; }
 #smdQueue .q-gate-err { min-height: 18px; color: #dc2626; font: 600 12px var(--q-sans); margin: 0 2px 8px; }
 #smdQueue .q-gate-btn { width: 100%; background: var(--primary); color: var(--on-primary); border: none; border-radius: 12px; padding: 14px; font: 700 15px var(--q-sans); cursor: pointer; }
 #smdQueue .q-gate-btn:disabled { opacity: .6; }

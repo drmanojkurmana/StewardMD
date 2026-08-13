@@ -54,8 +54,8 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
-<link rel="stylesheet" href="/queue.css?v=q3b">
-<link rel="stylesheet" href="/opd-emr.css?v=oe17-maik">
+<link rel="stylesheet" href="/queue.css?v=q4">
+<link rel="stylesheet" href="/opd-emr.css?v=oe18-maik">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1576,6 +1576,7 @@ window.openExternal = function (u) {
 <script src="/voice-vitals.js?v=gold2" defer></script>
 <script src="/voice-emr-map.js?v=gold1" defer></script>
 <script src="/voice-ambient.js?v=gold1723" defer></script>
+<script src="/voice-diarize.js?v=gold1" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
@@ -1691,10 +1692,10 @@ window.openExternal = function (u) {
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 <script src="/queue-flags.js?v=q1" defer></script>
-<script src="/queue.js?v=q6consult" defer></script>
+<script src="/queue.js?v=q7consult" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe17-maik" defer></script>
+<script src="/opd-emr.js?v=oe18-maik" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold1" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
@@ -1731,7 +1732,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1001"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1002"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.

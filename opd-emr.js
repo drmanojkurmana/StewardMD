@@ -372,13 +372,27 @@
     // "Clinical notes" box = the WHOLE consult transcript, A-to-Z. Persistent: stays below the mic
     // while listening AND after Stop. `edit` (after Stop) makes it an editable textarea with a
     // Copy + "Save to Present history" toolbar so the doctor can correct + keep the note.
+    // Q&A view: best-effort Doctor/Patient turns (SMD_DIARIZE), display-only, never touches the EMR.
+    // Prefers the English translation (voiceTranscriptEn) where cues are clearest; falls back to raw.
+    function qaHtml() {
+      var src = st.voiceTranscriptEn || tx;
+      var turns = (G.SMD_DIARIZE && G.SMD_DIARIZE.toQA && src) ? G.SMD_DIARIZE.toQA(src) : [];
+      if (!turns.length) return '<div class="oe-vc-box"><div class="oe-vc-tx"><span class="oe-vc-ph">The Q&amp;A view appears once there is some back-and-forth to label.</span></div></div>';
+      return '<div class="oe-vc-qa">' + turns.map(function (t) {
+        return '<div class="oe-vc-turn ' + (t.speaker === "doctor" ? "dr" : "pt") + '"><span class="oe-vc-who">' + (t.speaker === "doctor" ? "Doctor" : "Patient") + "</span>" + esc(t.text) + "</div>";
+      }).join("") + '<div class="oe-vc-qa-note">' + ms("info") + "Auto-labelled from the conversation - may be imperfect. Never changes an EMR field.</div></div>";
+    }
     function notesBox(live, edit) {
-      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>Clinical notes</span>" +
-        (edit && tx ? '<span class="oe-vc-notes-acts">' +
-          '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy notes">' + ms("content_copy") + "Copy</button>" +
-          '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button></span>" : "") + "</div>";
-      var body = edit
-        ? '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>"
+      var qa = st.notesView === "qa";
+      var tog = tx ? '<span class="oe-vc-vtog">' +
+        '<button class="oe-vc-vt' + (qa ? "" : " on") + '" data-oe-act="notes-view:raw">Raw</button>' +
+        '<button class="oe-vc-vt' + (qa ? " on" : "") + '" data-oe-act="notes-view:qa">Q&amp;A</button></span>' : "";
+      var acts = (edit && !qa && tx) ? '<span class="oe-vc-notes-acts">' +
+        '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy notes">' + ms("content_copy") + "Copy</button>" +
+        '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button></span>" : "";
+      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>Clinical notes</span>" + tog + acts + "</div>";
+      var body = qa ? qaHtml()
+        : edit ? '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>"
         : '<div class="oe-vc-box' + (live ? " live" : "") + '"><div class="oe-vc-tx" id="oeTranscript">' +
           (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
       return '<div class="oe-vc-notes">' + head + body + "</div>";
@@ -545,7 +559,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", _notesSavedText: "" }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "" }; }
   function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
@@ -635,6 +649,7 @@
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
     if (cmd === "notes-copy") return copyNotes();
     if (cmd === "notes-save") return saveNotesToHistory();
+    if (cmd === "notes-view") { st.notesView = (arg === "qa") ? "qa" : "raw"; paint(); return; }
   }
   // Drop one dictated-investigation's line from the Management plan (paired with removing its chip).
   function stripPlanLine(name) {
@@ -1211,6 +1226,7 @@
       // Telugu/Hindi consult (native-script transcript) never matched "BP 120/80" etc. Re-run the SAME
       // deterministic extractor on the LLM's faithful English translation — still no LLM-invented numbers.
       if (r.en && G.SMD_AMBIENT && G.SMD_AMBIENT.reduce) {
+        st.voiceTranscriptEn = r.en;                       // full English translation-so-far -> powers the Q&A speaker view
         try { applyVoice(G.SMD_AMBIENT.reduce(r.en, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
       }
       // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed

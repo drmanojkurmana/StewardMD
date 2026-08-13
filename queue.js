@@ -311,7 +311,7 @@
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
-    if (cmd === "pickghis") { root().innerHTML = _gate(); setTimeout(function () { try { var u = document.getElementById("qGhisUser"); if (u) u.focus(); } catch (e) {} }, 80); return; }  // GITAM / GHIS
+    if (cmd === "pickghis") { root().innerHTML = _gate(); prefillGate(); return; }  // GITAM / GHIS (prefill remembered userId + tick Remember me)
     if (cmd === "pickhosp") { st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS)
     if (cmd === "pickclinic") { startClinic(arg); return; }                             // a personal clinic
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
@@ -346,7 +346,7 @@
     say("Importing today's OPD list…");
     var gh = { "Content-Type": "application/json" }; if (st.ghisToken) gh.Authorization = "Bearer " + st.ghisToken;
     fetchRetry("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
-      if (r && r.error === "login_required") { say("Connect Ward Sync (GHIS) first, then import"); return; }
+      if (r && r.error === "login_required") { ghisReauth(); return; }   // expired -> silent re-login from remembered cred, else the gate (no manual sign-out)
       var rows = (r && r.rows) || [];
       if (!rows.length) { say("No OPD patients found for today"); return; }
       act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
@@ -452,6 +452,7 @@
       '<p class="q-gate-sub">Sign in to GHIS to load today\'s OPD queue.</p>' +
       '<input id="qGhisUser" class="q-gate-in" type="text" autocomplete="username" autocapitalize="off" autocorrect="off" placeholder="GHIS User ID">' +
       '<input id="qGhisPwd" class="q-gate-in" type="password" autocomplete="current-password" placeholder="Password">' +
+      '<label class="q-gate-remember"><input id="qRemember" type="checkbox"><span>Remember me on this device</span></label>' +
       '<div class="q-gate-err">' + (err ? esc(err) : "") + "</div>" +
       '<button class="q-gate-btn" data-q-act="ghislogin">Sign in</button>' +
       '<div class="q-gate-or"><span>or</span></div>' +
@@ -459,6 +460,47 @@
       '<button class="q-gate-close" data-q-act="chooser">‹ Back</button>' +
       (who ? '<div class="q-gate-foot">App account: ' + esc(who) + "</div>" : "") +
       "</div></div>";
+  }
+  // ── "Remember me" — GHIS credential stored ONLY on this device, never our server ────────────────
+  // Reuses autofetch's device secure store (iOS Keychain / Android Keystore via SMD_SECURE) + the SAME
+  // key, so one remembered login also powers silent auto-reconnect. userId (non-sensitive) is kept in
+  // localStorage for prefill + as the "remembered" flag; the password lives only in the OS secure store.
+  // Keys are SCOPED PER APP-ACCOUNT (Firebase uid, mirroring GHIS token scoping) so a remembered GHIS
+  // login can never leak to a different doctor who signs into the app on the SAME shared device.
+  function remUid() { try { var u = G.SMD_AUTH && G.SMD_AUTH.currentUser; return (u && u.uid) || "anon"; } catch (e) { return "anon"; } }
+  function remCredKey() { return "smd_ghis_rememcred:" + remUid(); }   // device secure store (Keychain/Keystore)
+  function remUserKey() { return "smd_ghis_rememuser:" + remUid(); }   // localStorage: userId prefill + "remembered" flag (non-sensitive)
+  function remStore(u, p) { try { localStorage.setItem(remUserKey(), u || ""); } catch (e) {} try { if (window.SMD_SECURE) return window.SMD_SECURE.set(remCredKey(), { u: u, p: p }); } catch (e) {} return Promise.resolve(); }
+  function remForget() { try { localStorage.removeItem(remUserKey()); } catch (e) {} try { if (window.SMD_SECURE) return window.SMD_SECURE.remove(remCredKey()); } catch (e) {} return Promise.resolve(); }
+  function remUser() { try { return localStorage.getItem(remUserKey()) || ""; } catch (e) { return ""; } }
+  function remRead() { if (!(window.SMD_SECURE && window.SMD_SECURE.get)) return Promise.resolve(null); return window.SMD_SECURE.get(remCredKey()).then(function (raw) { try { return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }).catch(function () { return null; }); }
+  // Session died mid-use: try a SILENT re-login from the remembered device credential; only if that
+  // fails show the login gate (prefilled) — never force the doctor to sign out first.
+  function ghisReauth(reason) {
+    clearInterval(st.pollId);
+    st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = "";
+    try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(""); } catch (e) {}
+    remRead().then(function (c) {
+      if (!(c && c.u && c.p)) { showGate(reason); return; }
+      authHeaders().then(function (h) { return fetchRetry("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: c.u, password: c.p }) }); })
+        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || c.u; st.ghisDoctorName = r.doctorName || ""; try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(r.token); } catch (e) {} loadSession(); return; }
+          showGate(reason);   // remembered creds rejected (e.g. password changed) -> gate, prefilled
+        })
+        .catch(function () { showGate(reason); });
+    });
+  }
+  function showGate(reason) { root().innerHTML = _gate(reason || "Your GHIS session expired. Please sign in again."); prefillGate(); }
+  function prefillGate() {
+    setTimeout(function () {
+      try {
+        var u = document.getElementById("qGhisUser"), ru = remUser();
+        if (u && ru) u.value = ru;
+        var cb = document.getElementById("qRemember"); if (cb) cb.checked = !!ru;
+        var f = ru ? document.getElementById("qGhisPwd") : u; if (f) f.focus();
+      } catch (e) {}
+    }, 80);
   }
   function ghisLogin() {
     var uEl = document.getElementById("qGhisUser"), pEl = document.getElementById("qGhisPwd");
@@ -469,7 +511,7 @@
     authHeaders().then(function (h) { return fetchRetry("/api/ghis/login", { method: "POST", headers: h, credentials: "include", body: JSON.stringify({ userId: userId, password: password }) }); })
       .then(function (r) { return r.json(); })
       .then(function (r) {
-        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(r.token); } catch (e) {} loadSession(); return; }
+        if (r && r.token) { st.ghisToken = r.token; st.ghisUser = r.userId || userId; st.ghisDoctorName = r.doctorName || ""; try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(r.token); } catch (e) {} var rem = false; try { var cb = document.getElementById("qRemember"); rem = !!(cb && cb.checked); } catch (e) {} (rem ? remStore(userId, password) : remForget()); loadSession(); return; }
         var msg = (r && r.error === "needs-pro") ? "Ward Sync needs a Pro account." : (r && r.error === "bad_credentials") ? "Wrong GHIS User ID or password." : "Sign-in failed. Please try again.";
         if (errEl) errEl.textContent = msg; if (btn) { btn.disabled = false; btn.textContent = "Sign in"; }
       })
