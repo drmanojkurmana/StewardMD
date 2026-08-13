@@ -43,7 +43,7 @@
     // Default: small English-only q5_1 (~181 MB) — best accuracy for accented (Indian) English +
     // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
     "small.en-q5_1": { file: "ggml-small.en-q5_1.bin", sha256: "bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30", bytes: 190098681 },
-    "base-q5_1": { file: "ggml-base-q5_1.bin", sha256: "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898", bytes: 59707625 },
+    // base-q5_1 RETIRED 2026-08-14 (owner: "remove base") — hallucinated on hard audio; small-q8_0 replaces it everywhere.
     "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 },
     // ── Steward Voice tiers (MULTILINGUAL). Gated behind smd_voice_tiers (voice.js). Each file must be
     //    published by scripts/host-whisper-models.sh + a native rebuild BEFORE the flag is flipped ON. ──
@@ -301,7 +301,7 @@
       var P = plugins(); var W = P && P.Whisper;
       if (!(W && W.startTranscribe)) throw new Error("whisper-unavailable");
       var self = this;
-      var modelKey = opts.model || "base-q5_1";
+      var modelKey = opts.model || "small-q8_0";
       var m = WHISPER_MODELS[modelKey]; if (!m) throw new Error("whisper-unknown-model");
       // Session token: a new session supersedes stale event handlers/callbacks from a prior one.
       var token = (self._wToken = (self._wToken || 0) + 1);

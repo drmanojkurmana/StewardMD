@@ -62,13 +62,12 @@
   function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
     if (!tiersFlagOn()) {
-      // legacy (pre-tier) default. ANDROID DEFAULT = small-q8_0 (StewardVoice Multilingual, ~252MB):
-      // base-q5_1 (~57MB) hallucinated on hard audio (owner-tested 2026-08-14 on a real clip); the
-      // small INT8 is far more accurate AND multilingual (EN/HI/TE + code-switch). Slower on the
-      // CPU-only build, accepted for clinical accuracy. iOS keeps small.en (Metal-fast) / base.
-      if (isAndroidNative()) return "small-q8_0";
-      if (lang && lang !== "en") return "base-q5_1";            // iOS multilingual: Telugu, auto-detect, code-switch
-      return "small.en-q5_1";                                    // iOS English-only accuracy pick
+      // base-q5_1 RETIRED (owner: "remove base") — it hallucinated on hard audio (owner-tested
+      // 2026-08-14). Multilingual default is now small-q8_0 (StewardVoice Multilingual, ~252MB INT8) on
+      // BOTH platforms — far more accurate + EN/HI/TE code-switch. iOS keeps small.en for pure English
+      // (Metal-fast, best en accuracy); Android uses small-q8_0 for everything (one model, CPU-only).
+      if (lang && lang !== "en") return "small-q8_0";           // multilingual: Telugu, auto-detect, code-switch
+      return isAndroidNative() ? "small-q8_0" : "small.en-q5_1"; // en: Android multilingual small, iOS English small
     }
     var tier = voiceTier();
     // Telugu ALWAYS routes to the Telugu specialist (every tier) — never the en/hi Whisper. This is the
@@ -98,7 +97,7 @@
     "large-v3-turbo-q5_0": { label: "StewardVoice · Ultra", tag: "EN · HI, highest accuracy", mb: 547 }
   };
   // Short branded code for the diagnostic line (still hides the real engine).
-  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "base-q5_1": "SV-Lite", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny" };
+  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny" };
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
