@@ -347,8 +347,8 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 /* MaiK Pro (Vertex) upgrade affordance + badge (OPD Ask MaiK Pro tier) */
 #smdOpdEmr .oe-maik-pro { display: flex; align-items: center; gap: 11px; width: 100%; margin: 12px 0 0; padding: 11px 13px; border: 1px solid rgba(124, 58, 237, .28); border-radius: 12px; background: color-mix(in srgb, var(--primary) 5%, var(--surface, #fff)); color: var(--on-surface); text-align: left; cursor: pointer; }
 #smdOpdEmr .oe-maik-pro[disabled] { opacity: .7; cursor: default; }
-#smdOpdEmr .oe-maik-pro .material-symbols-outlined { font-size: 21px; flex: 0 0 auto; background: linear-gradient(120deg, #6366f1, #a855f7, #ec4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-#smdOpdEmr .oe-maik-pro > span { display: flex; flex-direction: column; font: 700 13.5px var(--q-sans); }
+#smdOpdEmr .oe-maik-pro .material-symbols-outlined { font-size: 21px; flex: 0 0 auto; color: #7c3aed; }
+#smdOpdEmr .oe-maik-pro > span:not(.material-symbols-outlined) { display: flex; flex-direction: column; font: 700 13.5px var(--q-sans); }
 #smdOpdEmr .oe-maik-pro-note { font: 400 11px var(--q-sans); color: var(--secondary); margin-top: 1px; }
 #smdOpdEmr .oe-tag.oe-pro { background: linear-gradient(120deg, #6366f1, #a855f7, #ec4899); color: #fff; }
 
