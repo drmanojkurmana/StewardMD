@@ -201,7 +201,10 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-maik-cta[disabled] { cursor: default; }
 /* symmetric aurora glow: a mirror-symmetric multi-colour sheen that drifts evenly left<->right behind
    the content (never lopsided), + a symmetric colour-shifting outer bloom on .oe-maik-cta. */
-#smdOpdEmr .oe-maik-glow { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; background: linear-gradient(90deg, rgba(99,102,241,.38), rgba(168,85,247,.26), rgba(236,72,153,.38), rgba(168,85,247,.26), rgba(99,102,241,.38)); background-size: 220% 100%; animation: oeMaikAurora 7s ease-in-out infinite; }
+#smdOpdEmr .oe-maik-glow { display: block; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; background: linear-gradient(90deg, rgba(99,102,241,.26), rgba(168,85,247,.18), rgba(236,72,153,.26), rgba(168,85,247,.18), rgba(99,102,241,.26)); background-size: 220% 100%; animation: oeMaikAurora 7s ease-in-out infinite; }
+/* dark mode: the gradient FILL goes muddy over the dark surface — drop it, keep the outer glow + icon */
+body.dark #smdOpdEmr .oe-maik-glow { opacity: .16; }
+body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: rgba(139, 128, 248, .4); }
 #smdOpdEmr .oe-maik-ico, #smdOpdEmr .oe-maik-txt { position: relative; z-index: 1; }
 #smdOpdEmr .oe-maik-ico { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); box-shadow: 0 5px 14px -5px rgba(124, 58, 237, .55); }
 #smdOpdEmr .oe-maik-ico .material-symbols-outlined { font-size: 22px; color: #fff; background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #fff; }
