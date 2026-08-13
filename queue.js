@@ -560,7 +560,21 @@
     // Universal GHIS session: reuse the token Ward Sync (window.GHIS) already holds so the doctor
     // never signs in twice. Empty when not signed in anywhere -> the gate shows as before.
     if (!st.ghisToken) { try { var shared = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; if (shared) st.ghisToken = shared; } catch (e) {} }
-    if (st.ghisToken || st.demo) { loadSession(); return; }          // already signed in this session -> straight to the queue
+    if (st.demo) { loadSession(); return; }
+    if (st.ghisToken) {
+      // ASK FIRST: verify the GHIS session BEFORE the queue/landing renders. If it has expired, silently
+      // re-login from the remembered device credential, else show the login gate UP FRONT — never land on
+      // the dashboard and then surprise the doctor with a login wall when the first fetch fails.
+      if (G.GHIS && G.GHIS.checkSession) {
+        el.innerHTML = '<div class="q-empty" style="padding:80px">Checking your GHIS session…</div>';
+        G.GHIS.checkSession().then(function (ok) {
+          if (ok) { try { st.ghisToken = (G.GHIS.getToken && G.GHIS.getToken()) || st.ghisToken; } catch (e) {} loadSession(); }
+          else ghisReauth();   // remembered silent login, else the prefilled gate — before the dashboard
+        }).catch(function () { loadSession(); });
+        return;
+      }
+      loadSession(); return;                                         // no checkSession available -> old behaviour
+    }
     el.innerHTML = _chooseType();                                    // otherwise: Hospital vs Personal clinic, then choose the place
   }
   function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }
