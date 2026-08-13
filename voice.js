@@ -70,11 +70,11 @@
     // Telugu ALWAYS routes to the Telugu specialist (every tier) — never the en/hi Whisper. This is the
     // "route through BOTH models" the clinic wants: Telugu speech to the Telugu model, en/hi to Whisper.
     if (lang === "te") return "telugu-small-q8_0";
-    // Unknown language (Auto, before the first chunk is detected): use a MULTILINGUAL-capable model so a
-    // Telugu opening isn't mangled by the English-only Turbo. BASE carries the multilingual small; PRO and
-    // ULTIMATE reuse the Telugu specialist they already hold (Whisper-small still decodes en/hi acceptably).
-    // Detection then routes the NEXT chunk to the en/hi Whisper below.
-    if (!lang || lang === "auto") return (tier === "base") ? "small-q8_0" : "telugu-small-q8_0";
+    // Unknown language (Auto, before the first chunk is detected): open on the Telugu specialist on EVERY
+    // tier. MEASURED (real Telugu consult audio): the multilingual small hallucinates repeated-syllable
+    // garbage on Telugu, while the specialist transcribes it near-perfectly AND still auto-detects/decodes
+    // English. So a Telugu opening is captured immediately; detection then routes the NEXT chunk below.
+    if (!lang || lang === "auto") return "telugu-small-q8_0";
     // English / Hindi:
     if (tier === "ultimate") return "large-v3-turbo-q5_0";
     return "small-q8_0";     // base + pro: multilingual Whisper Small INT8

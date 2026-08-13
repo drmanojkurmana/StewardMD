@@ -26,8 +26,6 @@ test("English routes to the tier's Whisper (never the Telugu specialist)", () =>
   assert.equal(code(load("ultimate"), "en"), "SV-Ultra");
 });
 
-test("Auto/undetected chunk uses a multilingual-capable model, not English-only Turbo", () => {
-  assert.equal(code(load("base"), "auto"), "SV-Multi");
-  assert.equal(code(load("pro"), "auto"), "SV-Telugu");       // pro/ultimate reuse the te specialist (multilingual)
-  assert.notEqual(code(load("ultimate"), "auto"), "SV-Ultra"); // must NOT be the en-only Turbo for an unknown chunk
+test("Auto/undetected chunk opens on the Telugu specialist on every tier (multilingual small hallucinates on Telugu)", () => {
+  for (const tier of ["base", "pro", "ultimate"]) assert.equal(code(load(tier), "auto"), "SV-Telugu", tier);
 });
