@@ -501,7 +501,7 @@
       ? '<button class="oe-maik-pro" data-oe-act="assess-maik-pro"' + (st.maikProBusy ? " disabled" : "") + ">" + ms(st.maikProBusy ? "hourglass_top" : "auto_awesome") +
         "<span>" + (st.maikProBusy ? "MaiK Pro is thinking" : "Deepen with MaiK Pro") + "<span class=\"oe-maik-pro-note\">" + (st.maikProBusy ? "sending the note to AI" : "sends the note (no name / MR) to AI") + "</span></span></button>"
       : "";
-    return '<section class="oe-ai-panel"><h3 class="oe-h3">' + ms("auto_awesome") + "MaiK suggestions" +
+    return '<section class="oe-ai-panel' + (st.scribeAnim ? " smd-in" : "") + '"><h3 class="oe-h3">' + ms("auto_awesome") + "MaiK suggestions" +
       (s.source === "pro" ? '<span class="oe-tag oe-pro">MaiK Pro</span>' : "") +
       '<span class="oe-tag oe-review">Review before use</span></h3>' + body + pro +
       '<div class="oe-ai-disc">' + ms("info") +
@@ -529,7 +529,7 @@
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button></div>";
-    return consultBar(st) + suggestionsPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
@@ -1146,7 +1146,7 @@
         investigations: sg.investigations, treatment: sg.treatment, redFlags: sg.redFlags, corrections: emrCorrections(v),
         acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
       st.scribeStats = { filled: 0, suggestions: (sg.provisionalDx ? 1 : 0) + sg.ddx.length + sg.investigations.length + sg.treatment.length };
-      paint();
+      st.scribeAnim = true; paint();
       // bring the panel into view (the doctor taps from the bottom save bar; the panel renders on top)
       try {
         var p = document.querySelector("#smdOpdEmr .oe-ai-panel");
@@ -1199,7 +1199,7 @@
         redFlags: (r.redFlags || []).map(function (x) { return cleanClinical(x); }), corrections: emrCorrections(v),
         acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "pro" };
       st.scribeStats = { filled: 0, suggestions: (prov ? 1 : 0) + ddxOut.length };
-      paint();
+      st.scribeAnim = true; paint();
       try { var p = document.querySelector("#smdOpdEmr .oe-ai-panel"); if (p && p.scrollIntoView) p.scrollIntoView({ block: "start" }); } catch (e) {}
     }).catch(function () { if (st !== forPatient) return; st.maikProBusy = false; toast("MaiK Pro is unavailable right now."); paint(); });
   }
@@ -1297,7 +1297,7 @@
 
   // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
   // draft; every other suggestion stays untouched until its own Accept is tapped.
-  function scribeAccept(kind, idx) { if (scribeAcceptOne(kind, idx)) paint(); }
+  function scribeAccept(kind, idx) { st.scribeAnim = false; if (scribeAcceptOne(kind, idx)) paint(); }
   // Apply ONE accepted row into the assessment. NO repaint (accept-all batches then paints once).
   // Returns true if it changed state. Every path folds into st.assessVals only — never GHIS directly.
   function scribeAcceptOne(kind, idx) {
@@ -1335,7 +1335,7 @@
     if (!list) return;
     var changed = false;
     for (var i = 0; i < list.length; i++) { if (scribeAcceptOne(kind, i)) changed = true; }
-    if (changed) paint();
+    st.scribeAnim = false; if (changed) paint();
   }
   // Apply an EMR correction to st.assessVals (spelling = in-place replace; misplaced = move offending
   // lines from the source field to the target field). Append-only into the target; never clears elsewhere.
