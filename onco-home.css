@@ -61,6 +61,48 @@ body.oh-lock { overflow: hidden; }
 .oev-why { font: 500 11.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.5; }
 .oev-source { font: 500 10.5px var(--sans, system-ui); color: var(--slate-soft, #888); margin-top: 2px; }
 
+/* Static (non-navigational) info rows — protocol reference + tall-man name rows never order/act. */
+.oh-row-static { cursor: default; }
+.oh-row-static:active { border-color: var(--line, #e5e5e0); }
+
+/* Lifecycle / status badges (protocol reference library). */
+.oh-badge { display: inline-block; font: 700 9.5px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .03em; border-radius: 7px; padding: 2px 7px; margin-left: 6px; background: var(--line, #e5e5e0); color: var(--slate, #555); vertical-align: middle; }
+.oh-badge-draft { background: var(--warn-soft, #fef3c7); color: #7c4a03; }
+
+/* ===== AJCC/TNM staging overlay (onco-staging.js) — reuses .oh-overlay/.oh-top/.oh-body chrome ===== */
+.stg-intro { font: 500 12px var(--sans, system-ui); color: var(--slate, #555); line-height: 1.55; border: 1px dashed var(--line, #e5e5e0); border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; }
+.stg-badge { display: inline-block; font: 700 9px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .03em; border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+.stg-badge-sc { background: #eef2ff; color: #4338ca; }
+.stg-badge-gap { background: var(--warn-soft, #fef3c7); color: #7c4a03; }
+
+/* Version toggle (segmented) */
+.stg-vtoggle { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+.stg-vbtn { background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 9px; padding: 7px 12px; font: 700 12px var(--sans, system-ui); color: var(--slate, #555); cursor: pointer; }
+.stg-vbtn.on { background: var(--teal, #0a9396); border-color: var(--teal, #0a9396); color: #fff; }
+
+/* Provenance / R1 flag */
+.stg-prov { border: 1px dashed var(--teal, #0a9396); background: var(--teal-soft, #e0f2f1); border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; }
+.stg-prov-t { font: 500 11.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.55; margin-top: 6px; }
+.stg-r1 { display: inline-block; font: 800 9.5px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .04em; background: var(--warn-soft, #fef3c7); color: #7c4a03; border-radius: 6px; padding: 2px 7px; }
+
+/* T/N/M category tables + stage groups */
+.stg-cat { margin-bottom: 16px; }
+.stg-cat-h { font: 800 12px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .04em; color: var(--slate-soft, #888); margin: 0 0 7px; }
+.stg-trow { display: flex; gap: 10px; padding: 7px 10px; border: 1px solid var(--line, #e5e5e0); border-radius: 8px; margin-bottom: 5px; background: var(--panel, #fff); }
+.stg-code { flex: 0 0 44px; font: 800 12.5px var(--sans, system-ui); color: var(--teal, #0a9396); }
+.stg-lab { font: 500 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.45; }
+.stg-grow { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; padding: 8px 10px; border: 1px solid var(--line, #e5e5e0); border-radius: 8px; margin-bottom: 5px; background: var(--panel, #fff); }
+.stg-stage { font: 800 12.5px var(--sans, system-ui); color: var(--teal, #0a9396); }
+.stg-map { font: 700 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.stg-basis { flex: 1 1 100%; font: 500 11px var(--sans, system-ui); color: var(--slate, #555); line-height: 1.45; }
+.stg-gapnote { font: 500 11.5px var(--sans, system-ui); color: #7c4a03; background: var(--warn-soft, #fef3c7); border-radius: 8px; padding: 8px 10px; margin-top: 6px; line-height: 1.5; }
+
+/* Honest content-gap card */
+.stg-gap { border: 1px solid var(--warn, #d97706); background: var(--warn-soft, #fef3c7); border-radius: 12px; padding: 14px; }
+.stg-gap-h { font: 800 12px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .04em; color: #7c4a03; margin-bottom: 6px; }
+.stg-gap-t { font: 700 13.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.stg-gap-s { font: 500 11.5px var(--sans, system-ui); color: var(--slate, #555); margin-top: 6px; line-height: 1.5; }
+
 body.dark .oh-overlay, body.v3-dark .oh-overlay { background: var(--paper, #0f1a1a); }
 body.dark .oh-ctx, body.v3-dark .oh-ctx { background: #0c2b29; }
 body.dark .oev-guideline, body.v3-dark .oev-guideline { background: #1e2352; color: #a5b4fc; }

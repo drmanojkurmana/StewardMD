@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onco P1 harness (Phase 8 P1: staging engine + tall-man + drug view + protocol reference)</title>
+<link rel="stylesheet" href="/onco-home.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+// All P1 onco flags ON (plus smd_onco_home). The staging engine fetches the REAL kb/onco/staging/*.json
+// from the served repo root; the protocol reference fetches the REAL kb/protocols/index.json.
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return String(k).indexOf("smd_onco_") === 0; } };
+
+window.__medcalcOpenCalls = [];
+window.MEDCALC = { list: function () { return [{ id: "khorana", title: "Khorana Score", cat: "Oncology", desc: "VTE risk." }]; }, open: function (id) { window.__medcalcOpenCalls.push(id); }, openList: function () {} };
+window.KB_ENRICHMENT = { byId: { lung_cancer: { name: "Lung cancer", system: "Oncology / Pulmonary", aliases: ["nsclc"], clinicalPearls: ["EGFR testing."] } } };
+
+// MEDDRUGS with a small real-shaped formulary: supportive-care drugs (kept) + a non-onco drug (dropped).
+window.__medDrugsOpenListCalls = 0; window.__medDrugsInteractionsCalls = 0;
+window.MEDDRUGS = {
+  _list: [
+    { generic: "Ondansetron", cls: "Antiemetic (5-HT3 antagonist)", dose: "4-8 mg IV/PO q8h." },
+    { generic: "Dexamethasone", cls: "Corticosteroid", dose: "4-8 mg IV/PO." },
+    { generic: "Enoxaparin", cls: "Low-molecular-weight heparin (LMWH)", dose: "1 mg/kg SC q12h." },
+    { generic: "Amlodipine", cls: "Calcium channel blocker", dose: "5-10 mg PO od." }
+  ],
+  searchIndex: function () { return []; },
+  openList: function () { window.__medDrugsOpenListCalls++; },
+  openInteractions: function () { window.__medDrugsInteractionsCalls++; }
+};
+window.toast = function (m) { window.__toasts = (window.__toasts || []).concat([m]); };
+window.__ready = false;
+</script>
+<script src="/onco-dose.js"></script>
+<script src="/onco-evidence.js"></script>
+<script src="/onco-tallman.js"></script>
+<script src="/onco-staging.js"></script>
+<script src="/onco-home.js" onload="window.__ready = !!(window.SMD_ONCOHOME && window.SMD_ONCOSTAGING && window.SMD_ONCOTALLMAN)"></script>
+</body></html>

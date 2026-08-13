@@ -148,6 +148,9 @@
   var st = { q: "", ctx: null, mode: null };
 
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } }
+  function flag(name) { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool(name)); } catch (e) { return false; } }
+  // Tall-man (item 2): applied only when smd_onco_tallman is on; a no-op otherwise. Never fabricates.
+  function tallman(name) { try { return (G.SMD_ONCOTALLMAN && flag("smd_onco_tallman")) ? G.SMD_ONCOTALLMAN.apply(name) : name; } catch (e) { return name; } }
   function rootEl() { var el = document.getElementById("smdOncoHome"); if (!el) { el = document.createElement("div"); el.id = "smdOncoHome"; el.className = "oh-overlay"; document.body.appendChild(el); } return el; }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
 
@@ -220,10 +223,11 @@
   var GRID = [
     { group: "Diagnosis & Staging", cards: [
       { title: "Diseases & Knowledge Base", sub: "Oncology reference (KB)", act: "kb-browse" },
-      { title: "AJCC / TNM Staging", sub: "Coming in P1", placeholder: true }
+      { title: "AJCC / TNM Staging", sub: "TNM framework + honest gaps (R1-pending)", act: "staging-open", flag: "smd_onco_staging", phSub: "Coming in P1" }
     ] },
     { group: "Treatment", cards: [
-      { title: "Treatment-Plan Protocols", sub: "Tata-style dose matrix (per patient)", act: "protocol-open" }
+      { title: "Treatment-Plan Protocols", sub: "Tata-style dose matrix (per patient)", act: "protocol-open" },
+      { title: "Protocol Reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref" }
     ] },
     { group: "Monitoring", cards: [
       { title: "Toxicity / CTCAE", sub: "Coming in P1", placeholder: true },
@@ -240,6 +244,12 @@
     ] }
   ];
   function cardHtml(c) {
+    // A flag-gated card: when its flag is OFF, show a labelled placeholder if it has phSub, else omit
+    // entirely (never a broken/dead link). When ON, it is a real active card.
+    if (c.flag && !flag(c.flag)) {
+      if (!c.phSub) return "";
+      return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.phSub) + "</div></div>";
+    }
     if (c.placeholder) return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></div>";
     return '<button class="oh-card" data-oh-act="' + esc(c.act) + '"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></button>";
   }
@@ -252,12 +262,58 @@
       '<div class="oh-sec-h">Oncology diseases (' + list.length + ")</div>" + list.map(diseaseRowHtml).join("");
   }
 
+  /* ---- Feature 3: oncology drug + interaction view (reuses MEDDRUGS + onco-tallman, never a new DB) ---- */
+  // Supportive-care filter over the REAL ward formulary (drugs.js) — no doses invented, no drug added.
+  var ONCO_SUPPORT_RE = /antiemetic|ondansetron|metoclopramide|domperidone|dexamethasone|prednisolone|methylprednisolone|hydrocortisone|corticosteroid|enoxaparin|heparin|dalteparin|morphine|fentanyl|tramadol|lorazepam|allopurinol|filgrastim|granisetron|palonosetron|aprepitant/i;
+  function oncoSupportive(list) {
+    return (list || []).filter(function (d) { return ONCO_SUPPORT_RE.test((d.generic || "") + " " + (d.cls || "")); });
+  }
+  function drugOncoHtml() {
+    var tm = (G.SMD_ONCOTALLMAN && G.SMD_ONCOTALLMAN.MAP) || {};
+    var tmOn = flag("smd_onco_tallman"), tmRows = "";
+    for (var gen in tm) {
+      if (!Object.prototype.hasOwnProperty.call(tm, gen)) continue;
+      var disp = tmOn ? tm[gen].tallman : (gen.charAt(0).toUpperCase() + gen.slice(1));
+      var partners = (G.SMD_ONCOTALLMAN.confusedWith(gen) || []).join(", ");
+      tmRows += '<div class="oh-row oh-row-static"><span class="oh-row-t">' + esc(disp) + '</span><span class="oh-row-s">Look-alike name: confused with ' + esc(partners) + "</span></div>";
+    }
+    var tmEv = "";
+    try { tmEv = (G.SMD_ONCOEV && G.SMD_ONCOEV.build) ? G.SMD_ONCOEV.build([{ kind: "guideline", why: "Tall-man lettering reduces look-alike drug-name errors.", source: { name: (G.SMD_ONCOTALLMAN && G.SMD_ONCOTALLMAN.SOURCE) || "ISMP" } }]) : ""; } catch (e) {}
+    var list = []; try { list = (G.MEDDRUGS && G.MEDDRUGS._list) || []; } catch (e) {}
+    var supRows = oncoSupportive(list).map(function (d) {
+      return '<button class="oh-row" data-oh-act="drug-formulary"><span class="oh-row-t">' + esc(tallman(d.generic)) + '</span><span class="oh-row-s">' + esc(d.cls || "") + "</span></button>";
+    }).join("");
+    return '<button class="oh-back-inline" data-oh-act="home-dash">&lsaquo; Back</button>' +
+      '<div class="oh-sec-h">Oncology drugs &amp; interactions</div>' +
+      '<div class="oh-quick"><button class="oh-qa" data-oh-act="drug-interactions">Interaction check</button><button class="oh-qa" data-oh-act="drug-formulary">Full formulary</button></div>' +
+      '<div class="oh-sec"><div class="oh-sec-h">Antineoplastic agents (tall-man names)</div>' + (tmRows || '<div class="oh-empty">Tall-man table unavailable.</div>') + tmEv + "</div>" +
+      '<div class="oh-sec"><div class="oh-sec-h">Oncology supportive care (from formulary)</div>' + (supRows || '<div class="oh-empty">No supportive-care drugs found in the formulary.</div>') + "</div>" +
+      '<div class="oh-ctx-note">Names shown for look-alike safety. Formulary doses are adult reference values, verify before use. No prescription is created here.</div>';
+  }
+
+  /* ---- Feature 4: protocol reference library (read-only; distinct from the per-patient matrix) ---- */
+  function protoBadge(state) {
+    if (state === "draft") return '<span class="oh-badge oh-badge-draft">DRAFT - not activated</span>';
+    return state ? '<span class="oh-badge">' + esc(state) + "</span>" : "";
+  }
+  function protoRefHtml() {
+    var rows = (_protocols || []).map(function (p) {
+      return '<div class="oh-row oh-row-static"><span class="oh-row-t">' + esc(p.name || p.id) + " " + protoBadge(p.lifecycleState) + '</span><span class="oh-row-s">' + esc((p.diseaseId || "") + (p.version ? " · v" + p.version : "")) + "</span></div>";
+    }).join("");
+    return '<button class="oh-back-inline" data-oh-act="home-dash">&lsaquo; Back</button>' +
+      '<div class="oh-sec-h">Protocol reference library (read-only)</div>' +
+      '<div class="oh-ctx-note" style="margin-bottom:12px">Reference only. Not for ordering or administration. Per-patient plans are built in the treatment-plan matrix.</div>' +
+      (rows || '<div class="oh-empty">Protocol index loading or unavailable.</div>');
+  }
+
   // PURE: state -> HTML (repainted into #ohResults only, never the search input's shell).
   function bodyHtml(state) {
     state = state || {};
     var q = String(state.q || "").trim();
     if (q) return searchResultsHtml(search(q));
     if (state.mode === "kb") return kbBrowseHtml();
+    if (state.mode === "drugonco") return drugOncoHtml();
+    if (state.mode === "protoref") return protoRefHtml();
     return contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
 
@@ -286,8 +342,13 @@
     if (verb === "calc") { try { G.MEDCALC && G.MEDCALC.open && G.MEDCALC.open(arg); } catch (e2) {} return; }
     if (verb === "kb-browse") { st.mode = (st.mode === "kb") ? null : "kb"; renderResults(); return; }
     if (verb === "kb") { try { G.DX && G.DX.openRef && G.DX.openRef(arg); } catch (e2) {} return; }
-    if (verb === "drug-browse") { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} return; }
+    if (verb === "home-dash") { st.mode = null; renderResults(); return; }
+    // Drug card: with the onco drug view flag ON, open the in-overlay onco drug view; else the P0 formulary.
+    if (verb === "drug-browse") { if (flag("smd_onco_drugview")) { st.mode = "drugonco"; renderResults(); } else { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} } return; }
+    if (verb === "drug-formulary") { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} return; }
     if (verb === "drug-interactions") { try { G.MEDDRUGS && G.MEDDRUGS.openInteractions && G.MEDDRUGS.openInteractions(); } catch (e2) {} return; }
+    if (verb === "protoref-open") { st.mode = "protoref"; renderResults(); return; }
+    if (verb === "staging-open") { try { G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList && G.SMD_ONCOSTAGING.openList(); } catch (e2) {} return; }
     if (verb === "protocol-open") { openProtocolContext(); return; }
   }
 
@@ -326,6 +387,6 @@
     }
   } catch (e) {}
 
-  G.SMD_ONCOHOME = { open: open, close: close, search: search, _render: bodyHtml, _kbIndex: kbIndex, _st: st, _version: "1.0" };
-  if (typeof module !== "undefined" && module.exports) module.exports = { search: search, _render: bodyHtml };
+  G.SMD_ONCOHOME = { open: open, close: close, search: search, _render: bodyHtml, _kbIndex: kbIndex, _oncoSupportive: oncoSupportive, _protoBadge: protoBadge, _st: st, _version: "1.0" };
+  if (typeof module !== "undefined" && module.exports) module.exports = { search: search, _render: bodyHtml, _oncoSupportive: oncoSupportive, _protoBadge: protoBadge };
 })();
