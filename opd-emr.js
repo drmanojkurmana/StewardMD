@@ -262,7 +262,7 @@
     dm: "Diabetes_yesNo", htn: "Hypertension_yesNo", cardiac: "Cardiac_yesNo",
     asthma: "Bronchial_yesNo", tb: "Tuberculosis_yesNo", thyroid: "Thyroid_yesNo", epilepsy: "Epilepsy_yesNo",
     habits: "Habitat_addiction_yesno", alcohol: "Habitat_addiction_alcohol", smoking: "Habitat_addiction_smoking",
-    drug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
+    recDrug: "Habitat_addiction_drug", tobacco: "Habitat_addiction_tobacco"
   };
   // Alcohol quantification: "60 ml whisky" -> grams of ethanol + WHO standard drinks (10 g each).
   // grams = volume(ml) x ABV x 0.789 (ethanol density). Returns null if volume or drink-type is missing.
@@ -278,6 +278,51 @@
     // volume of pure alcohol (ml) = ml x ABV; grams = that x 0.79 (ethanol density); 14 g = 1 standard drink.
     var pureMl = ml * abv, grams = pureMl * 0.79, std = grams / 14;
     return { ml: ml, type: type, pureMl: Math.round(pureMl * 10) / 10, grams: Math.round(grams * 10) / 10, std: Math.round(std * 10) / 10 };
+  }
+  // Doctor-dictated investigation orders ("let's do CBC, LFT, RFT") -> canonical names for the plan.
+  // Short acronyms match word-bounded (so "esr" inside a word can't false-trigger); multi-word panels
+  // match as substrings. Deterministic + on-device; a draft the doctor reviews before saving.
+  var INV_DICT = [
+    ["CBC", ["cbc", "cbp", "complete blood count", "full blood count", "fbc", "hemogram", "haemogram"]],
+    ["LFT", ["lft", "liver function"]],
+    ["RFT", ["rft", "kft", "renal function", "kidney function"]],
+    ["Serum electrolytes", ["serum electrolyte", "electrolyte"]],
+    ["Blood sugar", ["blood sugar", "rbs", "fbs", "ppbs", "grbs", "fasting sugar", "random sugar"]],
+    ["HbA1c", ["hba1c", "glycated"]],
+    ["Lipid profile", ["lipid profile", "lipid panel"]],
+    ["Thyroid profile", ["tsh", "thyroid profile", "thyroid function"]],
+    ["CRP", ["crp", "c reactive protein", "c-reactive"]],
+    ["ESR", ["esr"]],
+    ["Urine routine", ["urine routine", "urine r/e", "urine microscopy", "urine examination", "urine analysis"]],
+    ["Chest X-ray", ["chest x-ray", "chest x ray", "chest xray", "cxr", "chest radiograph"]],
+    ["ECG", ["ecg", "ekg", "electrocardiogram"]],
+    ["2D Echo", ["2d echo", "echocardiogram", "echocardiography"]],
+    ["USG abdomen", ["usg abdomen", "ultrasound abdomen", "abdominal ultrasound", "abdomen sonography"]],
+    ["Blood culture", ["blood culture"]],
+    ["Urine culture", ["urine culture"]],
+    ["D-dimer", ["d-dimer", "d dimer"]],
+    ["Troponin", ["troponin", "trop t", "trop i"]],
+    ["ABG", ["abg", "arterial blood gas"]],
+    ["PT/INR", ["pt inr", "pt/inr", "prothrombin", "inr"]],
+    ["Peripheral smear", ["peripheral smear", "peripheral blood smear"]],
+    ["Dengue serology", ["dengue", "ns1"]],
+    ["Widal", ["widal"]],
+    ["CT scan", ["ct scan", "ct brain", "ct head", "cect", "hrct"]],
+    ["MRI", ["mri"]]
+  ];
+  function detectInvestigations(text) {
+    var s = " " + String(text || "").toLowerCase().replace(/[^a-z0-9/ -]+/g, " ") + " ";
+    var out = [], seen = {};
+    INV_DICT.forEach(function (row) {
+      var canon = row[0], al = row[1];
+      for (var i = 0; i < al.length; i++) {
+        var a = al[i], hit;
+        if (/^[a-z0-9/]{1,5}$/.test(a)) hit = new RegExp("(^| )" + a.replace(/\//g, "[/ ]") + "( |$)").test(s);   // short acronym: word-bounded
+        else hit = s.indexOf(a) >= 0;
+        if (hit) { if (!seen[canon]) { out.push(canon); seen[canon] = 1; } break; }
+      }
+    });
+    return out;
   }
   // coerce the engine's value to this form's wire value for the target field kind. null = don't set.
   function voiceCoerce(name, value) {
@@ -324,7 +369,33 @@
     var langs = '<div class="oe-vc-langs">' + lb("auto", "Auto") + lb("en", "EN") + lb("te", "తె") + "</div>";
     var langChip = { auto: "AUTO", en: "EN", te: "TE" }[lang] || "AUTO";
     var tx = st.voiceTranscript || "";
-    var txBox = '<div class="oe-vc-box live"><div class="oe-vc-tx" id="oeTranscript">' + (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
+    // "Clinical notes" box = the WHOLE consult transcript, A-to-Z. Persistent: stays below the mic
+    // while listening AND after Stop. `edit` (after Stop) makes it an editable textarea with a
+    // Copy + "Save to Present history" toolbar so the doctor can correct + keep the note.
+    function notesBox(live, edit) {
+      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>Clinical notes</span>" +
+        (edit && tx ? '<span class="oe-vc-notes-acts">' +
+          '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy notes">' + ms("content_copy") + "Copy</button>" +
+          '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button></span>" : "") + "</div>";
+      var body = edit
+        ? '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>"
+        : '<div class="oe-vc-box' + (live ? " live" : "") + '"><div class="oe-vc-tx" id="oeTranscript">' +
+          (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
+      return '<div class="oe-vc-notes">' + head + body + "</div>";
+    }
+    // Dictated investigations as removable chips (source of truth = st.dictatedInv). Tap x to drop it
+    // (also strips its line from the Management plan); tap the order glyph to place it in GHIS.
+    function invChips() {
+      var list = st.dictatedInv || []; if (!list.length) return "";
+      var canOrder = st.source !== "local";
+      return '<div class="oe-vc-orders"><div class="oe-vc-orders-h">' + ms("science") + "<span>Investigations advised</span></div><div class=\"oe-vc-chips\">" +
+        list.map(function (nm, i) {
+          return '<span class="oe-vc-chip2">' + esc(nm) +
+            (canOrder ? '<button class="oe-vc-chiporder" data-oe-act="ivorder:' + i + '" title="Order in GHIS" aria-label="Order ' + esc(nm) + ' in GHIS">' + ms("send") + "</button>" : "") +
+            '<button class="oe-vc-chipx" data-oe-act="ivx:' + i + '" title="Remove" aria-label="Remove ' + esc(nm) + '">' + ms("close") + "</button></span>";
+        }).join("") + "</div></div>";
+    }
+    var txBox = notesBox(true);
 
     // PROCESSING (after Stop) — the last chunk is still transcribing + notes are drafting on-device.
     if (processing) {
@@ -333,7 +404,8 @@
         '<div class="oe-vc-procwrap"><span class="oe-vc-spin"></span>' +
           '<div class="oe-vc-proctext"><b>Finishing your dictation…</b><span>Transcribing the last part and drafting notes.</span></div></div>' +
         '<div class="oe-vc-shimmer"><i></i></div>' +
-        (tx ? '<div class="oe-vc-box"><div class="oe-vc-tx">' + esc(tx) + "</div></div>" : "") +
+        invChips() +
+        (tx ? notesBox(false) : "") +
       "</div>";
     }
 
@@ -342,7 +414,9 @@
       return '<div class="oe-vc idle">' +
         '<div class="oe-vc-head"><span class="oe-vc-eyebrow">Voice Consult</span>' + langs + "</div>" +
         '<button class="oe-vc-orb" data-oe-act="voice-toggle" aria-label="Start voice consult"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
-        '<div class="oe-vc-status">Tap the mic to start</div>' +
+        '<div class="oe-vc-status">' + (tx ? "Tap the mic to add more" : "Tap the mic to start") + "</div>" +
+        invChips() +
+        (tx ? notesBox(false, true) : "") +
         '<div class="oe-vc-sub">Speak the visit in English, Hindi or Telugu — the transcript appears below and fields fill as you talk.</div>' +
         '<div class="oe-vc-priv">' + ms("lock") + "<span>Processed on this phone only — never recorded, saved, or sent to the cloud. Please let the patient know you are taking voice notes.</span></div>" +
       "</div>";
@@ -361,7 +435,8 @@
     return '<div class="oe-vc ' + (paused ? "paused" : "listening") + ' on">' + bar +
       '<button class="oe-vc-orb" data-oe-act="voice-pause" aria-label="' + (paused ? "Resume dictation" : "Pause dictation") + '"><span class="oe-vc-aura"></span><span class="oe-vc-aura d2"></span>' + ms("mic", true) + "</button>" +
       '<div class="oe-vc-status2" id="oeVoiceStatus" aria-live="polite" aria-atomic="true">' + esc(paused ? "Paused" : (st.voiceStatus || "Listening…")) + "</div>" +
-      txBox + readout + langs +
+      (paused ? "" : '<div class="oe-vc-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>') +
+      txBox + invChips() + readout + langs +
       '<div class="oe-vc-priv sm">' + ms("lock") + "<span>On-device · not saved or sent to the cloud</span></div>" +
     "</div>";
   }
@@ -464,7 +539,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", _notesSavedText: "" }; }
   function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
@@ -509,6 +584,7 @@
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
     if (inp === "inv-q") { st.invQuery = el.value; scheduleSearch("inv"); return; }
     if (inp === "med-q") { st.medQuery = el.value; scheduleSearch("med"); return; }
+    if (inp === "notes") { st.voiceTranscript = el.value; _lastFullTranscript = el.value; return; }   // doctor edits the clinical-notes transcript after Stop
     setField(inp, el.type === "checkbox" ? (el.checked ? "true" : "false") : el.value);   // radios carry Y/N in value
   }
   var searchTimer = null;
@@ -548,6 +624,41 @@
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "consult-er") return consultToER();
+    if (cmd === "ivx") { var xi = +arg, xn = (st.dictatedInv || [])[xi]; if (xn != null) { st.dictatedInv.splice(xi, 1); stripPlanLine(xn); paint(); } return; }
+    if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
+    if (cmd === "notes-copy") return copyNotes();
+    if (cmd === "notes-save") return saveNotesToHistory();
+  }
+  // Drop one dictated-investigation's line from the Management plan (paired with removing its chip).
+  function stripPlanLine(name) {
+    if (!(st.assessVals && st.assessVals.management_plan)) return;
+    var kept = st.assessVals.management_plan.split("\n").filter(function (l) { return l.trim() !== ("Ix: " + name); });
+    st.assessVals.management_plan = kept.join("\n"); putVoiceDom("management_plan");
+  }
+  function copyNotes() {
+    var t = st.voiceTranscript || ""; if (!t) { toast("Nothing to copy"); return; }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { toast("Notes copied"); }, function () { toast("Copy failed"); }); return; } } catch (e) {}
+    toast("Copy not available on this device");
+  }
+  // Fold the whole consult transcript into the assessment's Present history (append, never overwrite),
+  // then jump to the Assessment tab so the doctor sees it landed.
+  // PURE + idempotent: fold the consult note `t` into existing Present-history `cur`. If a prior Save
+  // already folded a block (`prev`) in, drop that exact block first so re-saving refreshes rather than
+  // duplicates. Returns null when there's nothing to save. Exposed for tests.
+  function mergeNoteIntoHistory(cur, prev, t) {
+    t = String(t == null ? "" : t).trim(); if (!t) return null;
+    cur = String(cur || ""); prev = String(prev || "");
+    if (prev && cur.indexOf(prev) >= 0) cur = cur.replace(prev, "").replace(/\n{2,}/g, "\n").trim();
+    return { text: cur ? (cur.replace(/\s+$/, "") + "\n" + t) : t, saved: t };
+  }
+  function saveNotesToHistory() {
+    var m = mergeNoteIntoHistory(st.assessVals && st.assessVals.History_present_illness, st._notesSavedText, st.voiceTranscript);
+    if (!m) { toast("Nothing to save"); return; }
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    st.assessVals.History_present_illness = m.text; st._notesSavedText = m.saved;
+    st.assessTouched.History_present_illness = true;
+    toast("Saved to Present history");
+    switchTab("assess");
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
@@ -703,7 +814,7 @@
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
-  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null;
+  var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
   function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
@@ -893,6 +1004,35 @@
     return (diff || []).slice().sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
   }
 
+  // Classically AFEBRILE presentations — fever is a strong argument against these.
+  var AFEBRILE_MIMIC = [/subarachnoid/i, /\bcolic\b/i, /cholelithiasis/i, /biliary/i, /migraine/i, /tension-type/i, /non-cardiac chest/i, /\bgerd\b/i, /panic|anxiety/i, /pneumothorax/i, /aortic dissection/i, /aortic stenosis/i, /musculoskeletal/i, /tamponade/i, /hypovol|haemorrhagic|hemorrhagic shock/i];
+  // Chronic / rare "diagnosis of exclusion" conditions that over-trigger on generic fever in the base
+  // score model — they should not LEAD an acute febrile presentation (still shown, just not on top).
+  var NOT_ACUTE_LEAD = [/hemophagocytic|\bHLH\b/i, /sarcoidosis/i, /malignancy/i, /serotonin syndrome|\bNMS\b/i, /systemic vasculitis/i];
+  // PURE: nudge the engine differential with robust, textbook clinical discriminators the base score
+  // model misses (measured gaps: infective dx losing to non-infective mimics). Adjustments are MODERATE
+  // (re-rank, not override) and preserve every field on each entry. Shared with the benchmark so each
+  // rule's effect is measured. Only fires when the discriminating findings are present.
+  function clinicalRerank(list, keys) {
+    var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = 1; });
+    var scored = (list || []).map(function (e) {
+      var adj = 0, n = e.dx || e.name || "";
+      if (f.fever) {
+        if (AFEBRILE_MIMIC.some(function (re) { return re.test(n); })) adj -= 18;                          // fever vs an afebrile dx
+        if (NOT_ACUTE_LEAD.some(function (re) { return re.test(n); })) adj -= 20;                          // don't lead with a chronic/rare dx on acute fever
+      }
+      if (/thyroid storm|thyrotox/i.test(n) && !(f.goitre || f.tremor || f.heatIntolerance || f.thyroidHx || f.weightLoss)) adj -= 28;   // no thyroid storm without thyroid signs
+      if (f.fever && f.neckStiffness && /mening/i.test(n)) adj += 26;                                      // fever + meningism -> meningitis
+      if (f.fever && f.purulentSputum && /pneumonia/i.test(n)) adj += 26;                                   // fever + PURULENT sputum -> pneumonia (cough alone is too weak — it displaces TB)
+      if (f.fever && (f.dysuria || f.flankPain) && /(pyelo|urinary|uti)/i.test(n)) adj += 20;               // fever + urinary -> pyelonephritis
+      if (f.fever && f.jaundice && /cholangitis/i.test(n)) adj += 24;                                       // fever + jaundice (Charcot) -> cholangitis
+      if (f.hypotension && (f.lactate || f.tachycardia) && /(sepsis|septic)/i.test(n)) adj += 22;           // shock + lactate -> sepsis
+      if (f.purulentSputum && /asthma/i.test(n)) adj -= 16;                                                 // purulent sputum is not asthma
+      var c = {}; for (var k in e) c[k] = e[k]; c.score = (e.score || 0) + adj; return c;
+    });
+    return scored.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+  }
+
   // Keep surfaced/accepted clinical text app-clean: em-dash -> comma (sentence separator), en-dash ->
   // hyphen (number ranges like 70-90), arrow -> "to". Drug-name hyphens (piperacillin-tazobactam) are
   // untouched. Applied to everything MaiK shows AND to what Accept folds into the chart, so no em-dash
@@ -965,7 +1105,7 @@
     // like "known diabetic" -> diabetesHx are captured; fall back to the bare SMD_NLP context otherwise.
     var keys = (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
       : ((G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : []);
-    var diff = rankDifferential(differentialFor(keys));
+    var diff = clinicalRerank(differentialFor(keys), keys);   // score-rank + textbook clinical discriminators
     if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
     st.maikBusy = true; paint();
     // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object
@@ -1033,11 +1173,25 @@
           if (!st.assessTouched.Habitat_addiction_others) { st.assessVals.Habitat_addiction_others = note; putVoiceDom("Habitat_addiction_others"); }
         }
       }
+      // Doctor-dictated investigations ("let's do CBC, LFT, RFT") -> Management plan. Deterministic +
+      // on-device (works for GHIS AND personal clinic; no catalog needed); appendPlan dedups so a
+      // re-run over the growing transcript never duplicates a line.
+      var invs = detectInvestigations((r.en || "") + " " + transcript);
+      if (invs.length) {
+        st.dictatedInv = st.dictatedInv || []; var added = false;
+        invs.forEach(function (n) { if (st.dictatedInv.indexOf(n) < 0) { st.dictatedInv.push(n); added = true; } appendPlan("management_plan", "Ix: " + n); });
+        putVoiceDom("management_plan");
+        // Surface new investigation chips (infrequent: per refine, not per tick) — but NOT while the
+        // doctor is mid-edit in the notes textarea (a late refine resolving after Stop would steal focus).
+        if (added) { var ed = null; try { ed = document.getElementById("oeNotesEdit"); } catch (e) {} if (!ed || document.activeElement !== ed) paint(); }
+      }
     }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
-    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceTranscript = ""; st.voiceModel = ""; _lastFullTranscript = ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
+    // Preserve any prior transcript so restarting after Stop APPENDS ("record more") instead of wiping it.
+    _priorTranscript = (st.voiceTranscript || "").trim() ? ((st.voiceTranscript || "").trim() + "\n") : "";
+    st.voiceOn = true; st.voicePaused = false; st.voiceProcessing = false; st.voiceFallback = false; st.voiceStatus = "Starting…"; st.voiceStartedAt = now(); st.voiceModel = ""; _lastFullTranscript = st.voiceTranscript || ""; _lastRefinedTranscript = ""; if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } paint();
     if (_elapsedTmr) clearInterval(_elapsedTmr); _elapsedTmr = setInterval(tickElapsed, 1000);
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
@@ -1046,7 +1200,7 @@
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,
-      onTranscript: function (t) { _lastFullTranscript = t || _lastFullTranscript; setTranscript(_lastFullTranscript); },
+      onTranscript: function (t) { _lastFullTranscript = _priorTranscript + (t || ""); setTranscript(_lastFullTranscript); },
       onModel: function (code) { setModelChip(code); },     // "which model" chip (Auto adapts per chunk)
       onRefine: doRefine,                                    // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush
       onState: function (s) { if (s === "fallback") st.voiceFallback = true; setVoiceStatus(s === "listening" ? (st.voiceFallback ? "Listening (device dictation)…" : "Listening…") : s === "fallback" ? "Whisper model not installed - using device dictation" : s === "preparing" ? "Preparing model…" : s === "downloading" ? "Downloading model…" : ""); },
@@ -1159,6 +1313,13 @@
   function openProfile(opts) {
     opts = opts || {};
     if (!flagOn()) return;                       // inert unless smd_opd_emr is on
+    // Reopened the app straight into OPD with a stale GHIS session? Verify (and silently refresh)
+    // BEFORE opening an empty EMR — if the doctor must sign in again, show Ward Sync up front
+    // instead of failing mid-load. Local (personal clinic) source needs no GHIS session.
+    if ((opts.source || "ghis") === "ghis" && G.GHIS && G.GHIS.ensureSession && !opts._sessionOk) {
+      G.GHIS.ensureSession().then(function (ok) { if (ok) { opts._sessionOk = true; openProfile(opts); } });
+      return;
+    }
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
@@ -1257,6 +1418,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
 })();

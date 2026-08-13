@@ -20,18 +20,21 @@ shim("location", { href: "https://stewardmd.in/", search: "" });
 shim("matchMedia", () => ({ matches: false, addEventListener() {} }));
 shim("navigator", { userAgent: "node", language: "en" });
 const load = (r) => { try { vm.runInThisContext(fs.readFileSync(path.join(ROOT, r), "utf8"), { filename: r }); } catch (e) { console.log("LOAD ERR", r, String(e.message).slice(0, 80)); } };
-["kb/ai/ambig-abbrev.js","kb/dist/kb.core.js","kb/dist/kb.clinical.js","kb/dist/kb.enrichment.js","kb/dist/kb.enrichment.2.js","kb/dist/kb.rag.js","kb/dist/kb.expanded.js","drugs.js","clinical-nlp.js","clinical-vocab.js","dxmgmt.js","reasoning.js"].forEach(load);
+["kb/ai/ambig-abbrev.js","kb/dist/kb.core.js","kb/dist/kb.clinical.js","kb/dist/kb.enrichment.js","kb/dist/kb.enrichment.2.js","kb/dist/kb.rag.js","kb/dist/kb.expanded.js","drugs.js","clinical-nlp.js","clinical-vocab.js","dxmgmt.js","reasoning.js","opd-emr.js"].forEach(load);
 const DX = globalThis.DX;
 if (!DX || !DX._differential) { console.error("engine failed to load"); process.exit(1); }
 DX.findingCatalog();   // trigger the lazy ontology so VALID/LABEL/findingsFromText are populated
+// the OPD path's clinical re-ranking (shared with opd-emr's askMaik). RERANK=0 disables it (baseline).
+const RERANK = process.env.RERANK !== "0";
+const rerank = (globalThis.OPDEMR && globalThis.OPDEMR._clinicalRerank) || ((l) => l.slice().sort((a, b) => (b.score || 0) - (a.score || 0)));
 
 // ---- helpers -----------------------------------------------------------------------------------
 function rank(findings) {
   const S = DX._state, saved = S.f;
   try { const f = {}; (findings || []).forEach((k) => { if (k) f[k] = true; }); S.f = f;
     const d = DX._differential() || {};
-    return (d.inf || []).concat(d.ni || []).map((r) => ({ id: r.id, name: r.name, score: r.score }))
-      .sort((a, b) => (b.score || 0) - (a.score || 0));
+    const list = (d.inf || []).concat(d.ni || []).map((r) => ({ id: r.id, name: r.name, score: r.score }));
+    return RERANK ? rerank(list, findings) : list.slice().sort((a, b) => (b.score || 0) - (a.score || 0));
   } finally { S.f = saved; }
 }
 const norm = (s) => String(s || "").toLowerCase();

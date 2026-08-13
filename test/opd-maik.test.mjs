@@ -120,6 +120,24 @@ test("rankDifferential: ranks by score so a higher non-infective dx isn't buried
   assert.deepEqual(OPD._rankDifferential([]), []);
 });
 
+test("clinicalRerank: textbook discriminators re-rank the differential, fields preserved", () => {
+  // fever + neck stiffness: meningitis must beat afebrile mimics (SAH); score chip/fields kept
+  const list = [
+    { id: "sah", dx: "Subarachnoid hemorrhage", score: 54, inv: ["CT head"], reason: "why-sah" },
+    { id: "meningitis", dx: "Acute Bacterial Meningitis", score: 40, inv: ["LP"], reason: "why-men" }
+  ];
+  const out = OPD._clinicalRerank(list, ["fever", "neckStiffness", "headache"]);
+  assert.equal(out[0].dx, "Acute Bacterial Meningitis", "meningitis leads over SAH when fever + meningism present");
+  assert.equal(out[0].inv[0], "LP", "entry fields (inv/reason) preserved through re-rank");
+  assert.equal(out[0].reason, "why-men");
+  // no findings that trigger a rule -> pure score order, unchanged
+  const plain = OPD._clinicalRerank([{ dx: "A", score: 10 }, { dx: "B", score: 20 }], ["chestPain"]);
+  assert.equal(plain[0].dx, "B");
+  // thyroid storm without any thyroid sign is demoted
+  const th = OPD._clinicalRerank([{ dx: "Thyroid storm", score: 58 }, { dx: "Septic shock", score: 40 }], ["fever", "hypotension", "lactate"]);
+  assert.equal(th[0].dx, "Septic shock", "no thyroid storm without thyroid signs; sepsis leads on shock+lactate");
+});
+
 test("buildMaikSuggestions: empty differential -> empty model", () => {
   const sg = OPD._buildMaikSuggestions([], {});
   assert.equal(sg.provisionalDx, "");
