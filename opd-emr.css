@@ -117,19 +117,13 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-cnt { font: 700 11px var(--q-mono); color: var(--secondary); background: var(--sc-high); border-radius: 999px; padding: 2px 9px; }
 #smdOpdEmr .oe-field.req-empty .oe-inp { border-color: color-mix(in srgb, var(--error) 45%, var(--outline-variant)); background: color-mix(in srgb, var(--error-container) 14%, var(--surface)); }
 #smdOpdEmr .oe-savebar { position: sticky; bottom: 0; z-index: 2; display: flex; align-items: center; gap: 12px; margin-top: 4px; padding: 12px 14px; background: color-mix(in srgb, var(--surface) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--outline-variant); border-radius: 14px; box-shadow: 0 -3px 14px rgba(20,32,43,.08); }
-#smdOpdEmr .oe-savebar .prog { flex: 1; min-width: 0; display: flex; align-items: center; gap: 6px; font: 600 12.5px var(--q-sans); color: var(--secondary); }
+/* prog + Clear stay compact (flex:0 0 auto, nowrap) so the primary Save button (flex:1) fills the
+   rest and nothing wraps to multiple lines on a narrow phone. */
+#smdOpdEmr .oe-savebar .prog { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; font: 600 13px var(--q-sans); color: var(--secondary); white-space: nowrap; }
 #smdOpdEmr .oe-savebar .prog.done { color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-savebar .prog .material-symbols-outlined { font-size: 18px; }
-#smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 18px; }
-
-/* ---- where-this-case-is-saved strip (no-MRN patients -> My Clinic + Drive) ---- */
-#smdOpdEmr .oe-store { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: color-mix(in srgb, var(--primary) 6%, var(--surface)); }
-#smdOpdEmr .oe-store.note { background: color-mix(in srgb, var(--secondary) 8%, var(--surface)); }
-#smdOpdEmr .oe-store > .material-symbols-outlined { font-size: 22px; color: var(--primary); flex: 0 0 auto; }
-#smdOpdEmr .oe-store.note > .material-symbols-outlined { color: var(--secondary); }
-#smdOpdEmr .oe-store-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-#smdOpdEmr .oe-store-txt b { font: 700 13.5px var(--q-sans); color: var(--on-surface); }
-#smdOpdEmr .oe-store-txt span { font: 500 12px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 16px; white-space: nowrap; }
+#smdOpdEmr .oe-savebar .oe-btn.primary { flex: 1 1 auto; min-width: 0; }
 
 /* ---- report detail drawer (tap a lab / radiology row) ---- */
 #smdOpdEmr .oe-report { position: fixed; inset: 0; z-index: 40; background: var(--surface); display: flex; flex-direction: column; }

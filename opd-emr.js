@@ -508,23 +508,6 @@
       "<span>Decision support only. Provisional and advisory; not a substitute for clinical judgement. Nothing is saved until you Accept and Save. Verify doses, contraindications and local protocol.</span></div>" +
       "</section>";
   }
-  // "All cases auto-backup to Drive" toggle, shared with personal-clinic's scheduleSync (default ON).
-  function storeAutoSyncOn() { try { return !(G.localStorage && localStorage.getItem("smd_clinic_autosync") === "0"); } catch (e) { return true; } }
-  // Where THIS case is saved — a status strip only. GHIS/EMR -> the hospital record (no strip). No-MRN ->
-  // My Clinic on this device with encrypted Google Drive backup. The controls live in Queue Settings.
-  function storageStrip(st) {
-    if (st.noStore) {
-      return '<div class="oe-store note">' + ms("info") +
-        '<div class="oe-store-txt"><b>Decision support only</b><span>This case is not saved. Ask MaiK runs on your notes.</span></div></div>';
-    }
-    if (st.source !== "local") return "";   // hospital record — saved to GHIS/EMR, no extra strip
-    var C = G.SMD_CLINIC;
-    var hasPw = !!(C && C.hasPassword && C.hasPassword());
-    var sub = !hasPw ? "On this device · set up Google Drive backup in Settings"
-      : (storeAutoSyncOn() ? "On this device · auto backup to Google Drive" : "On this device · manual Drive backup");
-    return '<div class="oe-store">' + ms(hasPw ? "cloud_done" : "cloud_off") +
-      '<div class="oe-store-txt"><b>Saving to My Clinic</b><span>' + sub + "</span></div></div>";
-  }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
@@ -546,10 +529,10 @@
     var saveBtn = st.noStore
       ? '<span class="oe-btn ghost" data-oe-act="storage-info" title="This case is not saved" style="cursor:default">' + ms("info") + "Not saved</span>"
       : '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button>";
-    var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
+    var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       saveBtn + "</div>";
-    return consultBar(st) + storageStrip(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
