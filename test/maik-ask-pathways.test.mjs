@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
-const P = require("../pathways.js");
+const P = require("../maik-pathways.js");
 const load = (f) => JSON.parse(readFileSync(new URL("../clinical-pathways/" + f, import.meta.url), "utf8"));
 ["headache.json", "fever.json", "cough.json"].forEach((f) => P.register(load(f)));
 
