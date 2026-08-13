@@ -168,15 +168,15 @@
       });
     }).catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
   }
-  // WhatsApp model: local is the source of truth (instant reads, no Drive). Drive is a DAILY encrypted
-  // backup only — a save just triggers a backup if the last one was over a day ago, never per-save.
+  // Local is the source of truth (instant reads, Drive never read during use). Drive is an encrypted
+  // backup after EVERY save — debounced ~15s so a burst of edits in one consult coalesces into a single
+  // upload. Clinic data is small text, so per-save backup is cheap AND safe (no on-phone-only window).
   var _syncTmr = null;
   function autoSyncOn() { try { return localStorage.getItem("smd_clinic_autosync") !== "0"; } catch (e) { return true; } }
   function scheduleSync() {
     if (!autoSyncOn()) return;
-    if (Date.now() - lastBackupAt() < 24 * 60 * 60 * 1000) return;   // at most once per 24h
     if (_syncTmr) clearTimeout(_syncTmr);
-    _syncTmr = setTimeout(function () { _syncTmr = null; syncNow(); }, 5000);   // silent daily backup
+    _syncTmr = setTimeout(function () { _syncTmr = null; syncNow(); }, 15000);   // silent, ~15s after the last edit
   }
   // Restore from an encrypted envelope (reinstall / new device) with the clinic password. Local only after.
   function restoreFromEnvelope(envelope, password) {
