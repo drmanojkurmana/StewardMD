@@ -351,3 +351,29 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-maik-pro > span { display: flex; flex-direction: column; font: 700 13.5px var(--q-sans); }
 #smdOpdEmr .oe-maik-pro-note { font: 400 11px var(--q-sans); color: var(--secondary); margin-top: 1px; }
 #smdOpdEmr .oe-tag.oe-pro { background: linear-gradient(120deg, #6366f1, #a855f7, #ec4899); color: #fff; }
+
+/* ── motion (tokens + keyframes from motion.css) — GPU-composited transform/opacity only ───────── */
+#smdOpdEmr.on { animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+/* tab switch / open: header + each section rise in, lightly staggered */
+#smdOpdEmr .oe-phead { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-sec, #smdOpdEmr .oe-search-wrap, #smdOpdEmr .oe-results { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-canvas > *:nth-child(2) { animation-delay: .04s; }
+#smdOpdEmr .oe-canvas > *:nth-child(3) { animation-delay: .08s; }
+#smdOpdEmr .oe-canvas > *:nth-child(4) { animation-delay: .12s; }
+#smdOpdEmr .oe-canvas > *:nth-child(n+5) { animation-delay: .15s; }
+/* Voice Consult: each state (idle/listening/processing) pops in; orb + boxes settle after */
+#smdOpdEmr .oe-vc { animation: smdPopIn var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-vc-orb { animation: smdPopIn var(--smd-dur-lg, .42s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-vc-notes, #smdOpdEmr .oe-vc-orders, #smdOpdEmr .oe-vc-readout, #smdOpdEmr .oe-vc-procwrap { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; animation-delay: .05s; }
+/* chips + Q&A bubbles stagger in */
+#smdOpdEmr .oe-vc-chip2 { animation: smdPopIn var(--smd-dur-sm, .2s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-vc-chip2:nth-child(2) { animation-delay: .04s; }
+#smdOpdEmr .oe-vc-chip2:nth-child(3) { animation-delay: .08s; }
+#smdOpdEmr .oe-vc-chip2:nth-child(n+4) { animation-delay: .12s; }
+#smdOpdEmr .oe-vc-turn { animation: smdFadeUp var(--smd-dur-sm, .22s) var(--smd-ease, ease) both; }
+#smdOpdEmr .oe-vc-turn:nth-child(2) { animation-delay: .05s; }
+#smdOpdEmr .oe-vc-turn:nth-child(3) { animation-delay: .1s; }
+#smdOpdEmr .oe-vc-turn:nth-child(n+4) { animation-delay: .14s; }
+/* tab underline + AI suggestions glide */
+#smdOpdEmr .oe-tab { transition: color .2s var(--smd-ease, ease), border-color .2s var(--smd-ease, ease); }
+#smdOpdEmr .oe-ai-card, #smdOpdEmr .oe-draft { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
