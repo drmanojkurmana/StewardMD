@@ -77,6 +77,8 @@ for f in kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js \
 done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
+# MaiK Ask clinical pathways (fetched at runtime by pathways.js SMD_PATHWAYS.loadAll)
+[ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),

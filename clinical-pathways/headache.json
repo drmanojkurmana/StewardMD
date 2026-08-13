@@ -1,0 +1,26 @@
+{
+  "id": "headache",
+  "version": "1.0",
+  "label": "Headache",
+  "reviewed": false,
+  "match": ["headache", "head ache", "head pain", "తలనొప్పి", "తల నొప్పి", "sir dard", "sirdard"],
+  "maxQuestions": 7,
+  "askThreshold": 4,
+  "fields": {
+    "onset":     { "priority": 2, "emr": "History_present_illness", "ask": "how it started, suddenly or gradually", "cues": ["sudden", "gradual", "slowly", "acute onset"] },
+    "duration":  { "priority": 2, "emr": "Chief_complaints_duration", "ask": "how many days it has been present" },
+    "location":  { "priority": 3, "emr": "History_present_illness", "ask": "whether it is on one side or both sides", "cues": ["one side", "both side", "left", "right", "unilateral", "bilateral", "frontal", "occipital"] },
+    "character": { "priority": 3, "emr": "History_present_illness", "ask": "what the pain feels like, throbbing or tight/pressing", "cues": ["throbbing", "pulsatile", "dull", "tight", "band", "pressing", "stabbing"] },
+    "severity":  { "priority": 3, "emr": "History_present_illness", "ask": "how severe it is", "cues": ["severe", "mild", "moderate", "worst", "out of 10", "/10"] }
+  },
+  "associated": {
+    "nausea":      { "priority": 4, "emr": "History_present_illness", "cues": ["nausea", "nauseous"] },
+    "vomiting":    { "priority": 4, "emr": "History_present_illness", "cues": ["vomit", "vomiting"] },
+    "photophobia": { "priority": 5, "emr": "History_present_illness", "cues": ["light", "photophobia"] }
+  },
+  "redFlags": {
+    "thunderclap_onset":    { "priority": 1, "ask": "whether it started very suddenly, like a sudden severe pain within seconds" },
+    "neuro_deficit":        { "priority": 2, "ask": "any weakness, numbness, or difficulty speaking" },
+    "fever_neck_stiffness": { "priority": 2, "ask": "any fever along with neck stiffness" }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "fever",
+  "version": "1.0",
+  "label": "Fever",
+  "reviewed": false,
+  "match": ["fever", "temperature", "జ్వరం", "jwaram", "bukhar", "bukhaar"],
+  "maxQuestions": 7,
+  "askThreshold": 4,
+  "fields": {
+    "duration":    { "priority": 2, "emr": "Chief_complaints_duration", "ask": "how many days the fever has been present" },
+    "pattern":     { "priority": 3, "emr": "History_present_illness", "ask": "whether the fever is continuous or comes and goes", "cues": ["continuous", "intermittent", "on and off", "comes and goes"] },
+    "grade":       { "priority": 3, "emr": "History_present_illness", "ask": "whether it is high grade or low grade, with or without chills", "cues": ["high grade", "low grade", "chills", "rigor"] }
+  },
+  "associated": {
+    "cough":       { "priority": 4, "emr": "History_present_illness", "cues": ["cough"] },
+    "burning_urine": { "priority": 4, "emr": "History_present_illness", "cues": ["burning", "dysuria", "urine"] },
+    "loose_stools": { "priority": 4, "emr": "History_present_illness", "cues": ["loose", "diarrhea", "stools"] },
+    "body_pains":  { "priority": 4, "emr": "History_present_illness", "cues": ["body pain", "body ache", "myalgia"] }
+  },
+  "redFlags": {
+    "breathlessness":       { "priority": 1, "ask": "any difficulty in breathing" },
+    "altered_consciousness":{ "priority": 1, "ask": "any drowsiness or confusion" },
+    "neck_stiffness":       { "priority": 2, "ask": "any neck stiffness or severe headache" },
+    "bleeding_rash":        { "priority": 2, "ask": "any bleeding, or a rash that does not fade on pressing" }
+  }
+}
