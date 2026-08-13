@@ -128,8 +128,14 @@
   function getPassword() { var s = SS(); if (s && s.get) return Promise.resolve(s.get({ key: "smd_clinic_pw" })).then(function (r) { return r && r.value || null; }).catch(function () { return null; }); try { return Promise.resolve(localStorage.getItem("stewardmd.clinic.pw")); } catch (e) { return Promise.resolve(null); } }
   function hasPassword() { return getPassword().then(function (p) { return !!p; }); }
 
-  /* ---- Drive auth token (drive.file scope) — provided by native-auth's SMD_getDriveToken() ---- */
-  function getDriveToken() { try { if (window.SMD_getDriveToken) return Promise.resolve(window.SMD_getDriveToken()); } catch (e) {} return Promise.resolve(null); }
+  /* ---- Drive auth token (drive.file scope) — from native-auth's SMD_getDriveToken(), cached ~50 min
+     so debounced auto-sync doesn't re-trigger the scoped Google sign-in on every save. ---- */
+  var _tok = null, _tokAt = 0;
+  function getDriveToken() {
+    try { if (_tok && (Date.now() - _tokAt) < 50 * 60 * 1000) return Promise.resolve(_tok); } catch (e) {}
+    try { if (window.SMD_getDriveToken) return Promise.resolve(window.SMD_getDriveToken()).then(function (t) { if (t) { _tok = t; try { _tokAt = Date.now(); } catch (e) {} } return t; }); } catch (e) {}
+    return Promise.resolve(null);
+  }
 
   /* ---- sync: encrypt the whole clinic + upload to Drive (create or update ONE file) ---- */
   function uploadEncrypted(token, envelope) {
