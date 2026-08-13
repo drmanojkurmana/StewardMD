@@ -75,3 +75,9 @@ test("detectLanguage: local script detection + code-switch", () => {
   assert.equal(mixed.style, "mixed");
   assert.equal(R.detectLanguage("I have a headache").primary, "english");
 });
+
+test("fallbackQuestion never emits a blank question (associated field with no ask template)", () => {
+  const q = R._fallbackQuestion({ pathway: { associated: { nausea: {} } }, targetField: "nausea" });
+  assert.equal(q.action, "ask");
+  assert.ok(q.question && q.question.trim().length > 0, "synthesized a non-empty question");
+});

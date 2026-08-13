@@ -93,9 +93,13 @@
       tmpl = (d && d.ask) ? String(d.ask) : "";
     } catch (e) {}
     if (!tf) return { action: "finish", question: "", language: ctx.language || "", targetField: "", priority: "normal", reason: "no target field" };
+    // NEVER emit a blank question: synthesize a plain phrase from the field name when the pathway has
+    // no `ask` template (e.g. associated symptoms). A real provider replaces this wording; this is the
+    // safety net when the LLM is unusable so the patient never faces an empty "…" prompt.
+    var q = tmpl ? ("Please tell me: " + tmpl + ".") : ("Do you also have " + tf.replace(/_/g, " ") + "?");
     return {
       action: "ask",
-      question: tmpl ? ("Please tell me: " + tmpl + ".") : "",   // wording is deliberately plain; a real provider replaces this
+      question: q,
       language: ctx.language || "",
       targetField: ctx.targetField || tf,
       priority: "normal",

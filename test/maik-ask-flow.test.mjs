@@ -100,3 +100,30 @@ test("TTS lang map: te/hi/en -> -IN locales", () => {
   assert.equal(A._ttsLang("en"), "en-IN");
   assert.equal(A._ttsLang("something"), "en-IN");
 });
+
+test("red flag: descriptive positive alerts, explicit negation does not (critical fix)", () => {
+  const rf = { field: "neuro_deficit", kind: "redflag", ask: "any weakness" };
+  assert.ok(A._positiveRedFlag(rf, [{ field: "neuro_deficit", value: "numbness in right hand since morning" }]), "descriptive positive -> alert");
+  assert.equal(A._positiveRedFlag(rf, [{ field: "neuro_deficit", value: "absent" }]), null, "absent -> no alert");
+  assert.equal(A._positiveRedFlag(rf, [{ field: "neuro_deficit", value: "no weakness" }]), null, "'no weakness' -> no alert");
+  assert.equal(A._positiveRedFlag(rf, [{ field: "neuro_deficit", value: "ledu" }]), null, "Telugu negation -> no alert");
+});
+
+test("descriptive red-flag answer via the LLM path still stops + alerts", async () => {
+  const readFileSync2 = (await import("node:fs")).readFileSync;
+  const headache = PW.get("headache");
+  let alerted = false;
+  const ctl = A._runInterview({
+    pathway: headache, pathways: PW,
+    // LLM returns a DESCRIPTIVE value (no yes/no word) for the first red-flag target
+    provider: {
+      generateNextQuestion: (ctx) => Promise.resolve({ action: "ask", question: "Q", targetField: ctx.targetField }),
+      extractPatientAnswer: (ctx) => Promise.resolve({ findings: [{ field: ctx.targetField, value: "started very suddenly, worst pain ever", confidence: 0.9 }] })
+    },
+    listen: () => Promise.resolve("it just came on all of a sudden, terrible pain"),   // no yes/no keyword -> LLM path
+    onRedFlag: () => (alerted = true)
+  });
+  const s = await ctl.promise;
+  assert.equal(s.stoppedReason, "red-flag");
+  assert.ok(alerted, "doctor alerted on a descriptive red-flag answer");
+});

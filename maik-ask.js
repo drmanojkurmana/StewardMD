@@ -53,12 +53,20 @@
     }
     return [];
   }
+  // A negated red-flag answer (in any of the 3 languages). Everything else with a value counts as a
+  // POSITIVE red flag — safer to alert the doctor on a descriptive answer ("numbness since morning")
+  // than to miss it because it didn't say the word "yes".
+  function isNegated(value) {
+    var v = " " + String(value == null ? "" : value).toLowerCase() + " ";
+    return /\b(absent|no|none|negative|denies|denied|nil|not|never|without|ledu|led|nahi|nahin|illa|kaadu|kadu)\b/.test(v);
+  }
   function positiveRedFlag(target, findings) {
     if (!target || target.kind !== "redflag") return null;
     for (var i = 0; i < findings.length; i++) {
-      if (findings[i].field === target.field && /present|yes|positive/i.test(String(findings[i].value))) {
-        return { field: target.field, ask: target.ask };
-      }
+      var f = findings[i];
+      if (f.field !== target.field) continue;
+      var v = String(f.value == null ? "" : f.value).trim();
+      if (v && !isNegated(v)) return { field: target.field, ask: target.ask };   // present OR descriptive-positive -> alert
     }
     return null;
   }
@@ -140,7 +148,7 @@
             };
             if (det.length) return applyFindings(det);          // deterministic-first (no LLM call)
             return provider.extractPatientAnswer({ complaint: ctx.complaint, targetField: target.field, targetHint: target.ask,
-              allowedFields: allowed, question: q.question, pathway: pathway }, transcript)
+              targetKind: target.kind, allowedFields: allowed, question: q.question, pathway: pathway }, transcript)
               .then(function (r) { return applyFindings((r && r.findings) || []); });
           });
         }).catch(function () { if (running) return step(); });    // never die on one bad turn
