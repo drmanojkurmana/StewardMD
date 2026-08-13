@@ -508,6 +508,58 @@
       "<span>Decision support only. Provisional and advisory; not a substitute for clinical judgement. Nothing is saved until you Accept and Save. Verify doses, contraindications and local protocol.</span></div>" +
       "</section>";
   }
+  // "All cases auto-backup to Drive" toggle, shared with personal-clinic's scheduleSync (default ON).
+  function storeAutoSyncOn() { try { return !(G.localStorage && localStorage.getItem("smd_clinic_autosync") === "0"); } catch (e) { return true; } }
+  // Where THIS case is saved. GHIS/EMR -> the hospital record (no strip). No-MRN -> My Clinic on this
+  // device with encrypted Google Drive backup; the gear opens the storage settings sheet.
+  function storageStrip(st) {
+    if (st.noStore) {
+      return '<div class="oe-store note">' + ms("info") +
+        '<div class="oe-store-txt"><b>Decision support only</b><span>This case is not saved. Ask MaiK runs on your notes.</span></div></div>';
+    }
+    if (st.source !== "local") return "";   // hospital record — saved to GHIS/EMR, no extra strip
+    var C = G.SMD_CLINIC;
+    var hasPw = !!(C && C.hasPassword && C.hasPassword());
+    var sub = !hasPw ? "On this device · set up Google Drive backup"
+      : (storeAutoSyncOn() ? "On this device · auto backup to Google Drive" : "On this device · manual Drive backup");
+    return '<div class="oe-store">' + ms(hasPw ? "cloud_done" : "cloud_off") +
+      '<div class="oe-store-txt"><b>Saving to My Clinic</b><span>' + sub + "</span></div>" +
+      '<button class="oe-store-set" data-oe-act="storage-settings" title="Where cases are saved">' + ms("settings") + "</button></div>";
+  }
+  // The "where to save cases" settings sheet (owner-requested). Opens over the assessment.
+  function storageSheet(st) {
+    if (!st.storageSheet) return "";
+    var C = G.SMD_CLINIC;
+    var hasPw = !!(C && C.hasPassword && C.hasPassword());
+    var autoOn = storeAutoSyncOn();
+    var backedUp = !!(C && C.lastBackupAt && C.lastBackupAt());
+    return '<div class="oe-sheet-wrap" data-oe-act="storage-close">' +
+      '<div class="oe-sheet" data-oe-act="storage-noop">' +
+        '<div class="oe-sheet-h"><b>Where cases are saved</b>' +
+          '<button class="oe-close" data-oe-act="storage-close" aria-label="Close">' + ms("close") + "</button></div>" +
+        '<div class="oe-sheet-b">' +
+          '<div class="oe-store-opt info"><div><b>Patients with a hospital MRN</b><span>Saved to ' + esc((st && st.emrLabel === "My Clinic") ? "GHIS" : ((st && st.emrLabel) || "GHIS")) + ", the hospital record.</span></div></div>" +
+          '<div class="oe-store-opt info"><div><b>Patients with no MRN</b><span>Saved to My Clinic on this device' + (hasPw ? ", backed up to Google Drive (encrypted)." : ". Set a password below to back up to Drive.") + "</span></div></div>" +
+          '<button class="oe-store-opt toggle' + (autoOn ? " on" : "") + '" data-oe-act="storage-auto" role="switch" aria-checked="' + autoOn + '"><div><b>Back up all cases automatically</b><span>' + (autoOn ? "On · every case backs up to Drive ~15s after you save" : "Off · back up each case manually below") + "</span></div><span class=\"oe-sw\"></span></button>" +
+          (hasPw
+            ? '<button class="oe-store-opt act" data-oe-act="storage-syncnow"><div><b>Back up to Drive now</b><span>' + (backedUp ? "Backed up before · sync the latest" : "Not backed up yet · upload now") + "</span></div>" + ms("cloud_upload") + "</button>"
+            : '<button class="oe-store-opt act" data-oe-act="storage-setup"><div><b>Set up Google Drive backup</b><span>Set a clinic password to enable encrypted backup</span></div>' + ms("lock") + "</button>") +
+        "</div>" +
+      "</div></div>";
+  }
+  // Push the current My Clinic data (this case included, once saved) to encrypted Google Drive now.
+  function storageSyncNow() {
+    var C = G.SMD_CLINIC;
+    if (!C || !C.syncNow) { toast("Backup unavailable"); return; }
+    toast("Backing up to Google Drive…");
+    C.syncNow().then(function (r) {
+      if (r && r.ok) toast("Backed up to Google Drive.");
+      else if (r && r.error === "no_password") { toast("Set a backup password first."); try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (C.open) C.open(); }
+      else if (r && r.error === "no_token") toast("Sign in to Google Drive first.");
+      else toast("Backup failed. Try again.");
+      st.storageSheet = false; paint();
+    });
+  }
   function assessTab(st) {
     if (st.assessLoading) return loadingBox("Loading assessment…");
     if (st.assessErr) return errorBox(st.assessErr);
@@ -526,10 +578,13 @@
         '<span class="oe-maik-txt"><b>' + (st.maikBusy ? "MaiK is thinking" : "Ask MaiK") + "</b>" +
         "<span>" + (st.maikBusy ? "Reading your notes" : "Diagnosis, investigations &amp; treatment from your notes") + "</span></span>" +
       "</button>" : "";
+    var saveBtn = st.noStore
+      ? '<span class="oe-btn ghost" data-oe-act="storage-info" title="This case is not saved" style="cursor:default">' + ms("info") + "Not saved</span>"
+      : '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button>";
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + " / " + reqAll + " required filled</span></div>" +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
-      '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button></div>";
-    return consultBar(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+      saveBtn + "</div>";
+    return consultBar(st) + storageStrip(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + storageSheet(st) + (st.savedConsult ? postConsultPanel() : "");
   }
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
@@ -637,6 +692,12 @@
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "assess-maik-pro") return askMaikPro();
     if (cmd === "assess-clear") return clearAssessment();
+    if (cmd === "storage-settings") { st.storageSheet = true; paint(); return; }
+    if (cmd === "storage-close") { st.storageSheet = false; paint(); return; }
+    if (cmd === "storage-noop" || cmd === "storage-info") return;   // sheet body click / passive note — do nothing
+    if (cmd === "storage-auto") { try { localStorage.setItem("smd_clinic_autosync", storeAutoSyncOn() ? "0" : "1"); } catch (e) {} paint(); return; }
+    if (cmd === "storage-syncnow") return storageSyncNow();
+    if (cmd === "storage-setup") { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} st.storageSheet = false; paint(); if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); return; }
     if (cmd === "voice-toggle") { if (!st.voiceOn) startVoice(); return; }
     if (cmd === "voice-pause") return togglePauseVoice();
     if (cmd === "voice-stop") return stopVoice();
@@ -1384,7 +1445,7 @@
     // Reopened the app straight into OPD with a stale GHIS session? Verify (and silently refresh)
     // BEFORE opening an empty EMR — if the doctor must sign in again, show Ward Sync up front
     // instead of failing mid-load. Local (personal clinic) source needs no GHIS session.
-    if ((opts.source || "ghis") === "ghis" && G.GHIS && G.GHIS.ensureSession && !opts._sessionOk) {
+    if (!opts.noStore && (opts.source || "ghis") === "ghis" && G.GHIS && G.GHIS.ensureSession && !opts._sessionOk) {
       G.GHIS.ensureSession().then(function (ok) { if (ok) { opts._sessionOk = true; openProfile(opts); } });
       return;
     }
@@ -1397,10 +1458,12 @@
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
     st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic, on-device)
+    st.noStore = !!opts.noStore && st.source !== "local";    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
     _localStore = (st.source === "local") ? (opts.localStore || null) : null;
     st.emrLabel = opts.emrLabel || (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"));
-    st.writeOn = (st.source === "local") ? true : writeFlagOn();   // local save is always allowed (on-device, no server gate)
+    st.writeOn = (st.source === "local" || st.noStore) ? true : writeFlagOn();   // local save is always allowed (on-device, no server gate)
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
+    if (st.noStore) { st.loading = false; st.tab = "assess"; st.assessLoaded = true; st.assessVals = {}; paint(); return; }   // blank form for Ask MaiK; skip GHIS/local load
     paint();
     loadProfile(opts);
     if (opts.tab === "assess") loadAssessment();              // jump straight to the Initial Assessment

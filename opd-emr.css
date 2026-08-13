@@ -122,6 +122,39 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-savebar .prog .material-symbols-outlined { font-size: 18px; }
 #smdOpdEmr .oe-savebar .oe-btn { flex: 0 0 auto; padding: 11px 18px; }
 
+/* ---- where-this-case-is-saved strip (no-MRN patients -> My Clinic + Drive) ---- */
+#smdOpdEmr .oe-store { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--outline-variant); border-radius: 12px; background: color-mix(in srgb, var(--primary) 6%, var(--surface)); }
+#smdOpdEmr .oe-store.note { background: color-mix(in srgb, var(--secondary) 8%, var(--surface)); }
+#smdOpdEmr .oe-store > .material-symbols-outlined { font-size: 22px; color: var(--primary); flex: 0 0 auto; }
+#smdOpdEmr .oe-store.note > .material-symbols-outlined { color: var(--secondary); }
+#smdOpdEmr .oe-store-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#smdOpdEmr .oe-store-txt b { font: 700 13.5px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-store-txt span { font: 500 12px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr .oe-store-set { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: none; border-radius: 10px; background: transparent; color: var(--secondary); cursor: pointer; }
+#smdOpdEmr .oe-store-set:hover { background: color-mix(in srgb, var(--on-surface) 8%, transparent); }
+#smdOpdEmr .oe-store-set .material-symbols-outlined { font-size: 21px; }
+
+/* ---- "where cases are saved" settings sheet ---- */
+#smdOpdEmr .oe-sheet-wrap { position: fixed; inset: 0; z-index: 45; display: flex; align-items: flex-end; justify-content: center; background: rgba(12,20,28,.42); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); animation: oeSheetIn .18s ease; }
+#smdOpdEmr .oe-sheet { width: 100%; max-width: 560px; background: var(--surface); border-radius: 20px 20px 0 0; box-shadow: 0 -8px 30px rgba(12,20,28,.28); padding: 6px 16px 22px; animation: oeSheetUp .22s cubic-bezier(.2,.8,.2,1); }
+@keyframes oeSheetIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes oeSheetUp { from { transform: translateY(16px); } to { transform: translateY(0); } }
+#smdOpdEmr .oe-sheet-h { display: flex; align-items: center; gap: 10px; padding: 12px 2px 8px; }
+#smdOpdEmr .oe-sheet-h b { flex: 1; font: 800 17px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-sheet-b { display: flex; flex-direction: column; gap: 10px; }
+#smdOpdEmr .oe-store-opt { display: flex; align-items: center; gap: 12px; text-align: left; padding: 13px 14px; border: 1px solid var(--outline-variant); border-radius: 14px; background: var(--sc-lowest); }
+#smdOpdEmr .oe-store-opt.info { background: transparent; }
+#smdOpdEmr .oe-store-opt > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#smdOpdEmr .oe-store-opt b { font: 700 14px var(--q-sans); color: var(--on-surface); }
+#smdOpdEmr .oe-store-opt span { font: 500 12.5px var(--q-sans); color: var(--secondary); }
+#smdOpdEmr button.oe-store-opt { cursor: pointer; }
+#smdOpdEmr button.oe-store-opt:hover { border-color: var(--primary); }
+#smdOpdEmr .oe-store-opt.act > .material-symbols-outlined { color: var(--primary); font-size: 24px; }
+#smdOpdEmr .oe-store-opt .oe-sw { flex: 0 0 auto; width: 46px; height: 28px; border-radius: 999px; background: color-mix(in srgb, var(--on-surface) 22%, transparent); position: relative; transition: background .16s ease; }
+#smdOpdEmr .oe-store-opt .oe-sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .16s ease; }
+#smdOpdEmr .oe-store-opt.toggle.on .oe-sw { background: var(--primary); }
+#smdOpdEmr .oe-store-opt.toggle.on .oe-sw::after { transform: translateX(18px); }
+
 /* ---- report detail drawer (tap a lab / radiology row) ---- */
 #smdOpdEmr .oe-report { position: fixed; inset: 0; z-index: 40; background: var(--surface); display: flex; flex-direction: column; }
 #smdOpdEmr .oe-rep-title { flex: 1; text-align: center; font: 800 17px var(--q-sans); color: var(--on-surface); }
@@ -196,7 +229,10 @@ body.dark #smdOpdEmr { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3;
 #smdOpdEmr .oe-ai-disc .material-symbols-outlined { font-size: 15px; flex: 0 0 auto; margin-top: 1px; }
 
 /* Ask MaiK — AI call-to-action with a soft drifting "aurora" glow behind frosted glass (pure CSS, GPU) */
-#smdOpdEmr .oe-maik-cta { position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: center; gap: 14px; width: 100%; padding: 16px 16px; margin: 10px 0 14px; border: 1px solid rgba(124, 58, 237, .45); border-radius: 18px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; transition: transform .08s; animation: oeMaikBloom 5.5s ease-in-out infinite; }
+/* flex: 0 0 auto + min-height are load-bearing: overflow:hidden (for the glow) sets this flex item's
+   automatic min-size to 0, so the scrolling flex-column canvas would otherwise shrink it and clip the
+   title. 0 0 auto keeps its natural height; min-height is the floor for the 2-line label. */
+#smdOpdEmr .oe-maik-cta { position: relative; overflow: hidden; isolation: isolate; display: flex; flex: 0 0 auto; align-items: center; gap: 14px; width: 100%; min-height: 74px; padding: 16px 16px; margin: 10px 0 14px; border: 1px solid rgba(124, 58, 237, .45); border-radius: 18px; background: var(--sc-lowest); color: var(--on-surface); text-align: left; cursor: pointer; transition: transform .08s; animation: oeMaikBloom 5.5s ease-in-out infinite; }
 #smdOpdEmr .oe-maik-cta:active { transform: scale(.99); }
 #smdOpdEmr .oe-maik-cta[disabled] { cursor: default; }
 /* symmetric aurora glow: a mirror-symmetric multi-colour sheen that drifts evenly left<->right behind

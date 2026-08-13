@@ -64,7 +64,7 @@
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
-          (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="Assessment (GHIS Initial Assessment)" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
+          (emrOn() ? '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
         "</div></div>";
   }
   function orderedTickets(state) {
@@ -99,8 +99,8 @@
           '<span class="q-swipe-txt">Swipe to end consultation</span>' +
           '<div class="q-swipe-knob" id="qSwipeKnob">' + ms("chevron_right") + "</div>" +
         "</div>" +
-        '<div class="q-cta-row' + (emrOn() && cur.ghisPatientId ? "" : " one") + '">' +
-          (emrOn() && cur.ghisPatientId ? '<button class="q-cta-btn assess" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Assessment</span></button>" : "") +
+        '<div class="q-cta-row' + (emrOn() ? "" : " one") + '">' +
+          (emrOn() ? '<button class="q-cta-btn assess" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Assessment</span></button>" : "") +
           '<button class="q-cta-btn emerg" data-q-act="emergency">' + ms("warning") + "<span>Emergency</span></button>" +
         "</div>" +
       "</div></div></div>";
@@ -358,10 +358,32 @@
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
     G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
   }
-  // Open the GHIS Initial Assessment form straight away for this patient (EMR overlay, "assess" tab).
+  // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
+  // the same patient reuses their record instead of creating a duplicate each time).
+  function localClinicId(t, C) {
+    var MAP = "stewardmd.opd.localmap", map = {};
+    try { map = JSON.parse(localStorage.getItem(MAP) || "{}") || {}; } catch (e) {}
+    var id = map[t.id];
+    if (id && C.getPatient && C.getPatient(id)) return id;
+    id = C.addPatient({ name: t.name || "Patient" });
+    map[t.id] = id; try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {}
+    return id;
+  }
+  // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab). GHIS patients
+  // save to the hospital record; patients with no hospital MRN save to My Clinic on this device with
+  // encrypted Google Drive backup (reuses the personal-clinic backend) so nothing is lost.
   function openAssessment(ticketId) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
+    if (!t.ghisPatientId) {
+      var C = G.SMD_CLINIC;
+      if (C && C.addPatient && C.localStore) {
+        G.OPDEMR.openProfile({ source: "local", localStore: C.localStore, name: t.name || "", patientId: localClinicId(t, C), tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
+      } else {
+        G.OPDEMR.openProfile({ name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id, noStore: true });
+      }
+      return;
+    }
     G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
   }
   function openAdd() {
