@@ -49,6 +49,7 @@
     writeJSON(KEY_P(id), r);
     var idx = listPatients(); for (var i = 0; i < idx.length; i++) if (idx[i].id === id) { idx[i].updatedAt = nowISO(); break; }
     writeJSON(KEY_PTS, idx);
+    try { scheduleSync(); } catch (e) {}   // auto-encrypt + upload to Drive (debounced)
   }
   var localStore = { getConsult: getConsult, saveConsult: saveConsult };
 
@@ -91,19 +92,83 @@
       return { ok: true, downloaded: true };
     } catch (e) { return { ok: false, error: "share_unavailable" }; }
   }
-  // Direct Google Drive upload (multipart, appDataFolder). Needs an OAuth access token (Drive scope).
-  // Owner wires the OAuth client; this uploads the backup as one file, overwriting by name if present.
-  function uploadToDrive(accessToken) {
-    if (!accessToken) return Promise.resolve({ ok: false, error: "no_token" });
-    var data = exportJSON(), name = "stewardmd-clinic-backup.json";
-    var meta = { name: name, parents: ["appDataFolder"] };
-    var boundary = "smdclinic" + Date.now();
-    var body = "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" + JSON.stringify(meta) +
-      "\r\n--" + boundary + "\r\nContent-Type: application/json\r\n\r\n" + data + "\r\n--" + boundary + "--";
-    return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-      method: "POST", headers: { "Authorization": "Bearer " + accessToken, "Content-Type": "multipart/related; boundary=" + boundary }, body: body
-    }).then(function (r) { return r.ok ? { ok: true } : { ok: false, error: "http_" + r.status }; })
+  /* ---- encryption (AES-GCM + PBKDF2). The Drive file is a readable envelope whose PHI payload is
+     encrypted — only the clinic password (held by StewardMD, in the device Keychain) can open it. ---- */
+  var DRIVE_FILE = "stewardmd-clinic.smdbak";
+  function b64(buf) { var b = new Uint8Array(buf), s = ""; for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s); }
+  function unb64(str) { var s = atob(str), b = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) b[i] = s.charCodeAt(i); return b; }
+  function subtle() { var c = (typeof crypto !== "undefined" && crypto) || (typeof window !== "undefined" && window.crypto) || null; return c && c.subtle ? c : null; }
+  function deriveKey(password, salt) {
+    var c = subtle(); var enc = new TextEncoder();
+    return c.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]).then(function (mat) {
+      return c.subtle.deriveKey({ name: "PBKDF2", salt: salt, iterations: 200000, hash: "SHA-256" }, mat, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+    });
+  }
+  function encryptBackup(plaintext, password) {
+    var c = subtle(); if (!c) return Promise.reject(new Error("no_webcrypto"));
+    var salt = c.getRandomValues(new Uint8Array(16)), iv = c.getRandomValues(new Uint8Array(12));
+    return deriveKey(password, salt).then(function (key) {
+      return c.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, new TextEncoder().encode(plaintext));
+    }).then(function (ct) {
+      return JSON.stringify({ smd_enc: 1, app: "StewardMD My Clinic", alg: "AES-GCM", kdf: "PBKDF2-SHA256", iter: 200000, salt: b64(salt), iv: b64(iv), ct: b64(ct) });
+    });
+  }
+  function decryptBackup(envelope, password) {
+    var c = subtle(); if (!c) return Promise.reject(new Error("no_webcrypto"));
+    var e; try { e = (typeof envelope === "string") ? JSON.parse(envelope) : envelope; } catch (x) { return Promise.reject(new Error("bad_envelope")); }
+    if (!e || e.smd_enc !== 1) return Promise.reject(new Error("not_encrypted_backup"));
+    return deriveKey(password, unb64(e.salt)).then(function (key) {
+      return c.subtle.decrypt({ name: "AES-GCM", iv: unb64(e.iv) }, key, unb64(e.ct));
+    }).then(function (pt) { return new TextDecoder().decode(pt); });
+  }
+
+  /* ---- clinic password (Keychain via SecureStoragePlugin; localStorage fallback on web) ---- */
+  function SS() { try { var P = window.Capacitor && window.Capacitor.Plugins; return (P && P.SecureStoragePlugin) || null; } catch (e) { return null; } }
+  function setPassword(pw) { var s = SS(); if (s && s.set) return Promise.resolve(s.set({ key: "smd_clinic_pw", value: pw })).then(function () { return true; }).catch(function () { return false; }); try { localStorage.setItem("stewardmd.clinic.pw", pw); } catch (e) {} return Promise.resolve(true); }
+  function getPassword() { var s = SS(); if (s && s.get) return Promise.resolve(s.get({ key: "smd_clinic_pw" })).then(function (r) { return r && r.value || null; }).catch(function () { return null; }); try { return Promise.resolve(localStorage.getItem("stewardmd.clinic.pw")); } catch (e) { return Promise.resolve(null); } }
+  function hasPassword() { return getPassword().then(function (p) { return !!p; }); }
+
+  /* ---- Drive auth token (drive.file scope) — provided by native-auth's SMD_getDriveToken() ---- */
+  function getDriveToken() { try { if (window.SMD_getDriveToken) return Promise.resolve(window.SMD_getDriveToken()); } catch (e) {} return Promise.resolve(null); }
+
+  /* ---- sync: encrypt the whole clinic + upload to Drive (create or update ONE file) ---- */
+  function uploadEncrypted(token, envelope) {
+    var q = encodeURIComponent("name='" + DRIVE_FILE + "' and trashed=false");
+    return fetch("https://www.googleapis.com/drive/v3/files?q=" + q + "&spaces=drive&fields=files(id)", { headers: { "Authorization": "Bearer " + token } })
+      .then(function (r) { return r.json(); })
+      .then(function (fj) {
+        var id = fj && fj.files && fj.files[0] && fj.files[0].id;
+        var boundary = "smdc" + Date.now();
+        var meta = id ? {} : { name: DRIVE_FILE, description: "StewardMD My Clinic encrypted backup" };
+        var body = "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" + JSON.stringify(meta) +
+          "\r\n--" + boundary + "\r\nContent-Type: application/json\r\n\r\n" + envelope + "\r\n--" + boundary + "--";
+        var url = id ? ("https://www.googleapis.com/upload/drive/v3/files/" + id + "?uploadType=multipart")
+          : "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart";
+        return fetch(url, { method: id ? "PATCH" : "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "multipart/related; boundary=" + boundary }, body: body });
+      })
+      .then(function (r) { return r.ok ? { ok: true } : { ok: false, error: "http_" + r.status }; })
       .catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
+  }
+  function syncNow() {
+    return getPassword().then(function (pw) {
+      if (!pw) return { ok: false, error: "no_password" };
+      return getDriveToken().then(function (token) {
+        if (!token) return { ok: false, error: "no_token" };
+        return encryptBackup(exportJSON(), pw).then(function (env) { return uploadEncrypted(token, env); });
+      });
+    }).catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
+  }
+  // Auto-sync on every save (debounced). Silent — only surfaces failures the doctor can act on.
+  var _syncTmr = null;
+  function autoSyncOn() { try { return localStorage.getItem("smd_clinic_autosync") !== "0"; } catch (e) { return true; } }
+  function scheduleSync() {
+    if (!autoSyncOn()) return;
+    if (_syncTmr) clearTimeout(_syncTmr);
+    _syncTmr = setTimeout(function () { _syncTmr = null; syncNow().then(function (r) { if (r && r.ok) toast("Backed up to Google Drive."); else if (r && r.error === "no_password") { /* set-password prompt is offered in the UI */ } }); }, 3000);
+  }
+  // Restore from the encrypted Drive backup (or a pasted/opened envelope) with the clinic password.
+  function restoreFromEnvelope(envelope, password) {
+    return decryptBackup(envelope, password).then(function (plain) { return importJSON(plain); });
   }
 
   /* ------------------------------ UI ------------------------------ */
@@ -124,7 +189,7 @@
     el.innerHTML =
       '<div class="pc-top"><button class="pc-ic" data-pc="close" aria-label="Close">&#10005;</button>' +
         '<div class="pc-ttl">My Clinic</div>' +
-        '<button class="pc-ic" data-pc="backup" aria-label="Back up to Drive" title="Back up / Save to Drive">&#8681;</button></div>' +
+        '<button class="pc-ic" data-pc="backupmenu" aria-label="Backup & sync" title="Backup &amp; Google Drive sync">&#8681;</button></div>' +
       '<div class="pc-body">' +
         '<button class="pc-add" data-pc="new">+ New patient</button>' +
         (pts.length ? '<div class="pc-list">' + pts.map(function (p) {
@@ -157,6 +222,35 @@
     });
   }
 
+  function renderBackup() {
+    var el = document.getElementById("smdClinic"); if (!el) return;
+    el.innerHTML =
+      '<div class="pc-top"><button class="pc-ic" data-pc="list" aria-label="Back">&#8249;</button><div class="pc-ttl">Backup &amp; Sync</div><span class="pc-ic"></span></div>' +
+      '<div class="pc-body">' +
+        '<div class="pc-card"><div class="pc-card-t">Encrypted Google Drive sync</div>' +
+          '<div class="pc-card-s" data-pc-status>Checking…</div>' +
+          '<form id="pcPw" class="pc-form" style="margin-top:10px">' +
+            '<label class="pc-f"><span>Clinic backup password</span><input name="pw" type="password" autocomplete="new-password" placeholder="Set / change password"></label>' +
+            '<button class="pc-add" type="submit" style="margin:0">Save password</button></form>' +
+          '<button class="pc-btn2" data-pc="syncnow" style="margin-top:10px">Sync to Google Drive now</button>' +
+        '</div>' +
+        '<div class="pc-card"><div class="pc-card-t">Local backup file</div>' +
+          '<div class="pc-card-s">Save an encrypted-or-plain copy to Files / share to Drive manually.</div>' +
+          '<button class="pc-btn2" data-pc="backupfile" style="margin-top:10px">Save backup file</button></div>' +
+        '<div class="pc-foot">Backups are encrypted with your clinic password (AES-256). Only StewardMD with that password can open them. Keep the password safe: without it a backup cannot be restored.</div>' +
+      '</div>';
+    var f = document.getElementById("pcPw");
+    if (f) f.addEventListener("submit", function (e) { e.preventDefault(); var v = f.elements.pw && f.elements.pw.value; if (!v || v.length < 4) { toast("Use at least 4 characters."); return; } setPassword(v).then(function () { toast("Backup password saved."); f.elements.pw.value = ""; refreshBackupStatus(); }); });
+    refreshBackupStatus();
+  }
+  function refreshBackupStatus() {
+    var s = document.querySelector("#smdClinic [data-pc-status]"); if (!s) return;
+    hasPassword().then(function (has) {
+      var drive = !!(window.SMD_getDriveToken);
+      s.innerHTML = (has ? "Password set. " : "<b>Set a password to enable sync.</b> ") +
+        (drive ? "Auto-syncs an encrypted backup to Google Drive after every save." : "Google sign-in required for Drive sync.");
+    });
+  }
   function openConsult(id) {
     var p = getPatient(id); if (!p) return;
     close();
@@ -170,7 +264,9 @@
     if (act === "close") return close();
     if (act === "list") return renderList();
     if (act === "new") return renderNew();
-    if (act === "backup") { Promise.resolve(backup()).then(function (r) { toast(r && r.ok ? (r.downloaded ? "Backup downloaded." : "Choose Google Drive to save your backup.") : "Backup failed."); }); return; }
+    if (act === "backupmenu") return renderBackup();
+    if (act === "syncnow") { Promise.resolve(syncNow()).then(function (r) { toast(r && r.ok ? "Synced to Google Drive." : (r && r.error === "no_password" ? "Set a backup password first." : r && r.error === "no_token" ? "Sign in with Google (Drive) to sync." : "Sync failed — check the Drive setup.")); }); return; }
+    if (act === "backupfile") { Promise.resolve(backup()).then(function (r) { toast(r && r.ok ? (r.downloaded ? "Backup downloaded." : "Choose where to save your backup.") : "Backup failed."); }); return; }
     if (act.indexOf("open:") === 0) return openConsult(act.slice(5));
   }
 
@@ -198,6 +294,10 @@
       "#smdClinic .pc-f{display:flex;flex-direction:column;gap:5px}",
       "#smdClinic .pc-f>span{font:700 12px var(--sans);color:var(--slate,#475569)}",
       "#smdClinic .pc-f input,#smdClinic .pc-f select{border:1.5px solid var(--line,#e2e8f0);border-radius:11px;padding:12px;font:500 15px var(--sans);background:var(--panel,#fff);color:var(--ink,#0f172a)}",
+      "#smdClinic .pc-card{border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:14px;margin-bottom:14px}",
+      "#smdClinic .pc-card-t{font:800 15px var(--sans);color:var(--ink,#0f172a);margin-bottom:4px}",
+      "#smdClinic .pc-card-s{font:500 12.5px/1.5 var(--sans);color:var(--slate-soft,#64748b)}",
+      "#smdClinic .pc-btn2{width:100%;border:1px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 14px var(--sans);padding:12px;border-radius:11px;cursor:pointer}",
       "body.dark #smdClinic{--bg:#191c1e;--panel:#1f2325;--ink:#eff1f3;--line:#3d4947}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
@@ -206,7 +306,9 @@
   var API = { open: open, close: close, flagOn: flagOn, localStore: localStore,
     listPatients: listPatients, getPatient: getPatient, addPatient: addPatient, deletePatient: deletePatient,
     getConsult: getConsult, saveConsult: saveConsult, exportJSON: exportJSON, importJSON: importJSON,
-    backup: backup, uploadToDrive: uploadToDrive, configure: configure };
+    backup: backup, configure: configure,
+    encryptBackup: encryptBackup, decryptBackup: decryptBackup, setPassword: setPassword, getPassword: getPassword, hasPassword: hasPassword,
+    syncNow: syncNow, restoreFromEnvelope: restoreFromEnvelope };
   if (typeof window !== "undefined") window.SMD_CLINIC = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })();

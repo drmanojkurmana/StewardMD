@@ -67,6 +67,20 @@
     return out;
   }
 
+  // ---- Google Drive access token for My Clinic backup ---------------------
+  // Reuses the native Google sign-in but requests the drive.file scope, returning the OAuth access
+  // token (~1h). Requires the Drive API enabled + the drive.file scope on the OAuth consent screen.
+  // Kept separate from signInWithGoogle so a normal login never asks for Drive permission.
+  async function getDriveToken() {
+    var P = plugin(); if (!P || !P.signInWithGoogle) return null;
+    try {
+      var res = await P.signInWithGoogle({ scopes: ["https://www.googleapis.com/auth/drive.file"] });
+      var cred = (res && res.credential) || {};
+      return cred.accessToken || (res && res.accessToken) || null;
+    } catch (e) { return null; }
+  }
+  window.SMD_getDriveToken = getDriveToken;
+
   // ---- Native Apple → app's Firebase web session --------------------------
   // The plugin generates + SHA-256-hashes the nonce for Apple and returns the RAW
   // nonce in credential.nonce, which Firebase needs to verify the identity token.
