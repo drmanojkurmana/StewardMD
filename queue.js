@@ -177,13 +177,51 @@
   // ---- Settings view (Stitch queue_configuration_settings port) ---------------------------
   function num(k, label, val, hint) { return '<div class="q-fld"><label>' + label + '</label><input type="number" min="1" data-cfg="' + k + '" value="' + esc(val) + '"><span class="q-hint">' + (hint || "") + "</span></div>"; }
   function tog(k, label, val, hint) { return '<div class="q-togrow"><div><div class="q-togl">' + label + "</div>" + (hint ? '<div class="q-hint">' + hint + "</div>" : "") + '</div><label class="q-tog"><input type="checkbox" data-cfg="' + k + '"' + (val ? " checked" : "") + "><span></span></label></div>"; }
+  // ---- Case storage (LOCAL device prefs, not server config) ----------------------------------
+  // No-MRN OPD patients save to My Clinic on this device (SMD_CLINIC) with encrypted Google Drive
+  // backup. These controls flip localStorage immediately (independent of "Save changes").
+  function storeAutoSyncOn() { try { return localStorage.getItem("smd_clinic_autosync") !== "0"; } catch (e) { return true; } }
+  // A toggle row wired to a local action (data-q-act) instead of a server config key. onclick:return false
+  // stops the native checkbox flip so the visual is driven purely by `on` on the next paint().
+  function localTog(label, on, hint, act) {
+    return '<div class="q-togrow" data-q-act="' + act + '"><div><div class="q-togl">' + label + "</div>" +
+      (hint ? '<div class="q-hint">' + hint + "</div>" : "") +
+      '</div><label class="q-tog"><input type="checkbox"' + (on ? " checked" : "") + ' onclick="return false"><span></span></label></div>';
+  }
+  function storageCard() {
+    if (!emrOn()) return "";   // storage is only meaningful when the EMR/assessment is on
+    var C = G.SMD_CLINIC;
+    var hasPw = !!(C && C.hasPassword && C.hasPassword());
+    var autoOn = storeAutoSyncOn();
+    return '<div class="q-card"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
+      '<div class="q-hint" style="margin:-4px 0 12px">Patients with a hospital MRN save to GHIS. Patients with no MRN save to My Clinic on this device' +
+        (hasPw ? ", backed up to Google Drive (encrypted)." : ". Set a Drive password below to enable backup.") + "</div>" +
+      localTog("Back up all cases to Google Drive", autoOn, autoOn ? "On · every case backs up ~15s after you save" : "Off · back up each case manually", "storagetoggle") +
+      (hasPw
+        ? '<button class="q-set-btn" data-q-act="storagesync">' + ms("cloud_upload") + " Back up to Drive now</button>"
+        : '<button class="q-set-btn" data-q-act="storagesetup">' + ms("lock") + " Set up Google Drive backup</button>") +
+      "</div>";
+  }
+  // Push My Clinic data (encrypted) to Drive now. Reuses personal-clinic's syncNow (all-patients envelope).
+  function storageSyncNow() {
+    var C = G.SMD_CLINIC;
+    if (!C || !C.syncNow) { try { G.toast && G.toast("Backup unavailable"); } catch (e) {} return; }
+    try { G.toast && G.toast("Backing up to Google Drive…"); } catch (e) {}
+    C.syncNow().then(function (r) {
+      var m = (r && r.ok) ? "Backed up to Google Drive."
+        : (r && r.error === "no_password") ? "Set a backup password first."
+        : (r && r.error === "no_token") ? "Sign in to Google Drive first." : "Backup failed. Try again.";
+      try { G.toast && G.toast(m); } catch (e) {}
+      if (r && (r.error === "no_password")) { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (C.open) C.open(); }
+      paint();
+    });
+  }
   function settingsCanvas(state) {
     var c = state.config;
-    if (!c) return '<h2 class="q-h2">' + ms("settings") + 'Queue configuration</h2><div class="q-empty" style="padding:60px">Loading settings…</div>';
-    return '<div class="q-set-hd"><h2 class="q-h2" style="margin:0">' + ms("settings") + 'Queue configuration</h2>' +
-        '<button class="q-finish" style="font-size:14px;padding:10px 18px" data-q-act="savecfg">' + ms("save") + " Save changes</button></div>" +
-      '<section class="q-grid2">' +
-        '<div class="q-card"><div class="q-card-h">' + ms("notifications_active") + "Notification triggers</div>" +
+    var head = '<div class="q-set-hd"><h2 class="q-h2" style="margin:0">' + ms("settings") + "Queue configuration</h2>" +
+      (c ? '<button class="q-finish" style="font-size:14px;padding:10px 18px" data-q-act="savecfg">' + ms("save") + " Save changes</button>" : "") + "</div>";
+    var cfgCards = c
+      ? '<div class="q-card"><div class="q-card-h">' + ms("notifications_active") + "Notification triggers</div>" +
           num("early", "Early warning (patients ahead)", c.early, "SMS/WhatsApp when this many are ahead") +
           num("prep", "Preparation alert (patients ahead)", c.prep, "'Please head over' — kept ≤ early") +
           '<div class="q-out"><span>Next-in-line</span><b>Always at position 1</b></div>' +
@@ -193,8 +231,9 @@
           num("noShowTimeoutMin", "Auto no-show timeout (min)", c.noShowTimeoutMin, "after 'called', offer no-show") +
           num("defaultConsultMin", "Default consult (min)", c.defaultConsultMin, "used before ETA learning kicks in") +
           tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
-        "</div>" +
-      "</section>";
+        "</div>"
+      : '<div class="q-card"><div class="q-empty" style="padding:40px">Loading queue settings…</div></div>';
+    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>";
   }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
@@ -322,6 +361,10 @@
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
     if (cmd === "retry") { loadSession(); return; }
+    // Case-storage prefs are LOCAL (device) — work with no session and in demo, and never touch the server.
+    if (cmd === "storagetoggle") { try { localStorage.setItem("smd_clinic_autosync", storeAutoSyncOn() ? "0" : "1"); } catch (e) {} paint(); return; }
+    if (cmd === "storagesync") { storageSyncNow(); return; }
+    if (cmd === "storagesetup") { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); return; }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
