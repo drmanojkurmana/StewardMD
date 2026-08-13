@@ -49,8 +49,8 @@ test("_recordOverride throws on an empty/whitespace reason, else stores {was,now
   assert.throws(() => ONCO._recordOverride({ was: 1, now: 2, reason: "", by: "dr1" }), /override_reason_required/);
   assert.throws(() => ONCO._recordOverride({ was: 1, now: 2, reason: "   ", by: "dr1" }), /override_reason_required/);
   assert.throws(() => ONCO._recordOverride({ was: 1, now: 2, by: "dr1" }), /override_reason_required/); // missing entirely
-  const r = ONCO._recordOverride({ was: 100, now: 90, reason: "renal dose reduction", by: "dr1", at: 12345 });
-  assert.deepEqual(r, { was: 100, now: 90, reason: "renal dose reduction", by: "dr1", at: 12345 });
+  const r = ONCO._recordOverride({ drugId: "doxorubicin", was: 100, now: 90, reason: "renal dose reduction", by: "dr1", at: 12345 });
+  assert.deepEqual(r, { drugId: "doxorubicin", was: 100, now: 90, reason: "renal dose reduction", by: "dr1", at: 12345 });
 });
 
 test("cycle state machine: only the lean v1 transitions are allowed", () => {
@@ -126,10 +126,13 @@ test("gate ON: full plan -> cycle -> administration -> complete flow at the data
     /override_reason_required/
   );
 
-  const confirmed = await ONCO.confirmPlan({}, plan.planId, [{ was: 100, now: 90, reason: "renal dose reduction", by: "dr1" }], io);
+  const confirmed = await ONCO.confirmPlan({}, plan.planId, [{ drugId: "drugA", was: 100, now: 90, reason: "renal dose reduction", by: "dr1" }], io);
   assert.equal(confirmed.status, "active");
   assert.equal(confirmed.physicianModifications.length, 1);
   assert.equal(confirmed.physicianModifications[0].reason, "renal dose reduction");
+  // dose lineage modified -> confirmed: the override actually becomes the operative confirmed dose
+  assert.equal(confirmed.confirmedDoses[0].final, 90, "physician override must reach the confirmed dose");
+  assert.equal(confirmed.confirmedDoses[0].modifiedReason, "renal dose reduction");
 
   const cyc1 = await ONCO.createCycle({}, plan.planId, 1, io);
   assert.equal(cyc1.cycleId, ONCO._cycleId(plan.planId, 1)); // deterministic id
@@ -144,6 +147,7 @@ test("gate ON: full plan -> cycle -> administration -> complete flow at the data
     administeredBy: "nurse1", administered: true,
   }, io);
   assert.equal(admin1.status, "administered");
+  assert.equal(admin1.planned.final, 90, "admin record's planned dose must be the confirmed (overridden) dose, not the pre-override calc");
   assert.ok(events.length > before, "recordAdmin must call qAudit");
 
   // append-only: a second admin record for the same cycle/drug creates a NEW doc, never overwrites.

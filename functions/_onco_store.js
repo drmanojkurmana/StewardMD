@@ -44,7 +44,7 @@ function _recordOverride(o) {
   o = o || {};
   const reason = String(o.reason == null ? "" : o.reason).trim();
   if (!reason) throw new Error("override_reason_required");
-  return { was: o.was, now: o.now, reason: reason, by: o.by || "", at: o.at != null ? o.at : Date.now() };
+  return { drugId: o.drugId != null ? String(o.drugId) : "", was: o.was, now: o.now, reason: reason, by: o.by || "", at: o.at != null ? o.at : Date.now() };
 }
 
 // Lean v1 cycle state machine (spec R5): DUE/CLEARANCE/PHYSICIAN-CONFIRMED/READY/ADMINISTRATION/
@@ -122,9 +122,18 @@ export async function confirmPlan(env, planId, overrides, deps) {
   if (!plan) throw new Error("plan_not_found");
   const now = Date.now();
   const mods = (overrides || []).map((o) => _recordOverride(Object.assign({ at: now }, o)));
+  // Dose lineage modified -> confirmed: apply each override's `now` onto the matching drug's calculated
+  // lineage so the CONFIRMED dose (what the nurse view, the admin record's `planned`, and the PDF read)
+  // is the physician's value, not the pre-override calculation. Without this a dose reduction would be
+  // recorded in physicianModifications but never operative - a real safety gap.
+  const byDrug = {}; mods.forEach((m) => { if (m.drugId) byDrug[m.drugId] = m; });
+  const confirmedDoses = (plan.calculatedDoses || []).map((d) => {
+    const m = d && byDrug[d.drugId];
+    return m ? Object.assign({}, d, { modified: m.now, modifiedReason: m.reason, final: m.now }) : d;
+  });
   const patch = {
     physicianModifications: (plan.physicianModifications || []).concat(mods),
-    confirmedDoses: plan.calculatedDoses || [],
+    confirmedDoses: confirmedDoses,
     status: "active",
     confirmations: (plan.confirmations || []).concat([{ by: plan.doctorUid || "", at: now }]),
     updatedAt: now,
