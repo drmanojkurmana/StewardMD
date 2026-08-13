@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 globalThis.SMD_VVITALS = require("../voice-vitals.js");
-const PW = require("../pathways.js");
+const PW = require("../maik-pathways.js");
 const A = require("../maik-ask.js");
 PW.register(JSON.parse(readFileSync(new URL("../clinical-pathways/headache.json", import.meta.url), "utf8")));
 const headache = PW.get("headache");
@@ -77,4 +77,26 @@ test("doctor stop ends the loop immediately", async () => {
   ctl.stop();
   const s = await ctl.promise;
   assert.equal(s.stoppedReason, "doctor-stopped");
+});
+
+test("UI renders: confirm sheet, live card, review — with safety copy, no diagnosis", () => {
+  const pw = { label: "Headache", maxQuestions: 7 };
+  const c = A._renderConfirm(pw, "Telugu");
+  assert.match(c, /Let MaiK ask/);
+  assert.match(c, /data-mka="start"/);
+  assert.match(c, /does not diagnose/i);
+  const card = A._renderCard({ question: "Is it one side or both?", n: 2, of: 6, state: "listening" });
+  assert.match(card, /Listening/);
+  assert.match(card, /data-mka="stop"/);
+  const rv = A._renderReview({ asked: 3, findings: [{ target: "location", value: "right-sided" }], stoppedReason: "complete" }, pw);
+  assert.match(rv, /Location:/);
+  assert.match(rv, /right-sided/);
+  assert.match(rv, /Review in record/);
+});
+
+test("TTS lang map: te/hi/en -> -IN locales", () => {
+  assert.equal(A._ttsLang("te-en"), "te-IN");
+  assert.equal(A._ttsLang("hi"), "hi-IN");
+  assert.equal(A._ttsLang("en"), "en-IN");
+  assert.equal(A._ttsLang("something"), "en-IN");
 });

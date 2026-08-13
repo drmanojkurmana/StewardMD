@@ -70,7 +70,7 @@ decides HOW to word it in the patient's language. The LLM never invents the inte
 ## 4. Clinical Pathway Engine
 
 `clinical-pathways/*.json` — one file per complaint, versioned, human-reviewed. Loaded by
-`SMD_PATHWAYS` (new `pathways.js`). The engine is pure/deterministic and testable.
+`SMD_PATHWAYS` (new `maik-pathways.js`). The engine is pure/deterministic and testable.
 
 ### 4.1 Pathway schema (v1)
 ```json
@@ -241,7 +241,7 @@ code-switch style.
 ```
 maik-ask.js               window.SMD_MAIKASK  — the turn-based interview controller + UI
 maik-reasoning.js         window.SMD_MAIK_REASON — provider interface + GeminiVertexProvider
-pathways.js               window.SMD_PATHWAYS — pure pathway engine
+maik-pathways.js              window.SMD_PATHWAYS — pure pathway engine
 clinical-pathways/*.json  content (versioned, clinician-reviewed): headache, fever, cough, …
 functions/api/ai/_maik-ask.js   server prompts + sanitizers for the 2 new kinds
 maik-ask.css              patient card + doctor controls (reuses motion.css tokens)

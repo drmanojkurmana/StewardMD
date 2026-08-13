@@ -1,0 +1,33 @@
+/* maik-ask.css — MaiK Ask overlay (patient interview card). Flag smd_maik_ask. Reuses motion.css tokens. */
+#smdMaikAsk { position: fixed; inset: 0; z-index: 12030; display: none; }
+#smdMaikAsk.on { display: block; }
+#smdMaikAsk .mka-sheet { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(8, 12, 16, .58); backdrop-filter: blur(3px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+#smdMaikAsk .mka-card { width: 100%; max-width: 440px; box-sizing: border-box; background: #0f1720; color: #eaf2f5; border: 1px solid rgba(0, 220, 229, .16); border-radius: 20px; padding: 22px 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); text-align: center; animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
+#smdMaikAsk .mka-brand { display: flex; align-items: center; justify-content: center; gap: 7px; font: 800 15px/1 var(--sans); letter-spacing: .01em; margin-bottom: 14px; }
+#smdMaikAsk .mka-spark { color: #00dce5; font-size: 16px; }
+#smdMaikAsk .mka-demo { margin-left: 8px; font: 800 9px/1 var(--sans); letter-spacing: .1em; color: #ffcf5a; border: 1px solid rgba(255,207,90,.4); border-radius: 6px; padding: 3px 6px; }
+#smdMaikAsk .mka-confirm-t { font: 700 19px/1.3 var(--sans); margin: 6px 0 8px; }
+#smdMaikAsk .mka-confirm-s { font: 500 13.5px/1.6 var(--sans); color: #9fb2ba; margin-bottom: 18px; }
+#smdMaikAsk .mka-q { font: 700 22px/1.4 var(--sans); margin: 10px 0 6px; min-height: 62px; display: flex; align-items: center; justify-content: center; }
+#smdMaikAsk .mka-ans { font: 500 14px/1.5 var(--sans); color: #8fe9ee; margin: 4px 0 6px; }
+#smdMaikAsk .mka-meta { font: 600 11.5px/1 var(--sans); color: #7c909a; letter-spacing: .04em; margin: 6px 0; }
+#smdMaikAsk .mka-status { font: 700 14px/1 var(--sans); color: #9fb2ba; margin: 12px 0 6px; }
+#smdMaikAsk .mka-status.on { color: #ff6b6b; }
+#smdMaikAsk .mka-alert { display: flex; flex-direction: column; gap: 2px; align-items: center; background: rgba(255, 107, 107, .1); border: 1px solid rgba(255, 107, 107, .3); border-radius: 12px; padding: 10px; margin: 12px 0; font: 500 12.5px/1.4 var(--sans); }
+#smdMaikAsk .mka-warn { color: #ff8a5a; font-size: 18px; }
+#smdMaikAsk .mka-row { display: flex; gap: 10px; margin-top: 16px; }
+#smdMaikAsk .mka-btn { flex: 1; padding: 13px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: #eaf2f5; font: 700 14px/1 var(--sans); cursor: pointer; }
+#smdMaikAsk .mka-btn.primary { border-color: rgba(0,220,229,.5); background: rgba(0,220,229,.16); color: #aef3f6; }
+#smdMaikAsk .mka-btn.stop { border-color: rgba(255,107,107,.45); background: rgba(255,107,107,.14); color: #ffc2c2; }
+#smdMaikAsk .mka-btn:active { transform: scale(.97); }
+#smdMaikAsk .mka-priv { display: flex; align-items: center; gap: 7px; margin-top: 14px; font: 600 10.5px/1.4 var(--sans); color: #7c909a; text-align: left; }
+#smdMaikAsk .mka-review-h { font: 700 15px/1.3 var(--sans); margin: 6px 0 12px; }
+#smdMaikAsk .mka-findings { list-style: none; padding: 0; margin: 0 0 6px; text-align: left; }
+#smdMaikAsk .mka-findings li { padding: 9px 12px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; margin-bottom: 7px; font: 500 13.5px/1.4 var(--sans); }
+#smdMaikAsk .mka-empty { color: #7c909a; font: 500 13px var(--sans); margin: 10px 0; }
+/* the "Let MaiK Ask" launcher button in the OPD-EMR assessment */
+#smdOpdEmr .oe-maikask { display: flex; align-items: center; gap: 11px; width: 100%; text-align: left; margin: 4px 0 2px; padding: 13px 15px; border: 1px solid rgba(0,131,120,.35); border-radius: 14px; background: linear-gradient(120deg, rgba(0,131,120,.08), rgba(0,220,229,.05)); color: var(--on-surface); cursor: pointer; }
+#smdOpdEmr .oe-maikask-ic { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 9px; background: var(--primary); color: #fff; display: grid; place-items: center; }
+#smdOpdEmr .oe-maikask-tx { display: flex; flex-direction: column; }
+#smdOpdEmr .oe-maikask-tx b { font: 700 14px var(--q-sans); }
+#smdOpdEmr .oe-maikask-tx span { font: 500 12px var(--q-sans); color: var(--secondary); }
