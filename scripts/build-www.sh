@@ -11,7 +11,7 @@ WWW="$ROOT/www"
 cd "$ROOT"
 
 rm -rf "$WWW"
-mkdir -p "$WWW" "$WWW/kb/dist" "$WWW/kb/ai" "$WWW/kb/treatments"
+mkdir -p "$WWW" "$WWW/kb/dist" "$WWW/kb/ai" "$WWW/kb/treatments" "$WWW/kb/protocols"
 
 # ── 1. Shipping HTML (exclude demos + site-verification pages) ────────────────
 for f in index.html privacy.html terms.html disclaimer.html support.html; do
@@ -77,6 +77,9 @@ for f in kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js \
 done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
+# Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
+# encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).
+[ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),

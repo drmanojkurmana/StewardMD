@@ -29,6 +29,15 @@ import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
+import * as ONCO from "../../_onco_store.js";
+// Static protocol templates (Phase 2 ships ONE protocol; a registry/lookup-by-file only makes sense
+// once Phase 7 adds many - see kb/protocols/rchop.json + kb/schema/protocol.schema.json). Same JSON-
+// import shape esbuild already resolves for Cloudflare Pages Functions (matches the `import X from
+// "../../../kb/ai/maik-scope.js"` root-JS-import precedent in functions/api/ai/[[path]].js, just for
+// a .json leaf instead of a UMD .js leaf).
+import RCHOP_TEMPLATE from "../../../kb/protocols/rchop.json";
+const ONCO_PROTOCOLS = { rchop: RCHOP_TEMPLATE };
+function oncoProtocolTemplate(protocolId) { return ONCO_PROTOCOLS[String(protocolId || "").toLowerCase()] || null; }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -41,6 +50,9 @@ async function readBody(request) { try { return await request.json(); } catch (e
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
 const staffEnabled = (env) => env && env.QUEUE_STAFF_ENABLED === "1";
+// Oncology treatment-plan writes (Phase 2) - mirrors emrWriteEnabled in functions/api/ghis/[[path]].js:
+// inert (501, never touches Firestore) until the owner sets QUEUE_ONCO_WRITE=1 server-side.
+function oncoWriteEnabled(env) { return !!(env && env.QUEUE_ONCO_WRITE === "1"); }
 function isOwnerEmail(env, email) { try { return !!(email && ownerEmails(env).indexOf(email) > -1); } catch (e) { return false; } }
 // Resolve the employeeId behind a GHIS session token (staff identity). Reads GHIS_KV directly — a 3-line
 // mirror of the ghis proxy's getSession, avoiding a heavyweight cross-import.
@@ -325,6 +337,17 @@ export async function onRequest(context) {
       return json({ ok: true, analytics: await Q.analytics(env, s) }, 200, request);
     }
 
+    // ---- Oncology treatment plans (Phase 2, data layer; no UI wiring yet - flag smd_onco_protocols
+    // gates the client). Read is allowed even with QUEUE_ONCO_WRITE unset (nothing to disable on a
+    // GET); the doctor EMR_TREAT cap is authorized against the PLAN'S OWN hospitalId/orgId (fetched
+    // first, same fetch-then-authorize order as loadSessionFor), never a client-supplied one. ----
+    if (method === "GET" && seg === "onco" && sub === "plan") {
+      const plan = await ONCO.getPlan(env, url.searchParams.get("planId"));
+      if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+      return json({ ok: true, plan: plan }, 200, request);
+    }
+
     if (method === "POST") {
       const body = await readBody(request);
       if (seg === "config") { requireCap(actor.role, CAPS.SESSION_MANAGE); return json({ ok: true, config: await Q.saveConfig(env, actor.id, body.config || body) }, 200, request); }
@@ -393,6 +416,59 @@ export async function onRequest(context) {
         try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: body.priority, reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
         catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
+      }
+      // ---- Oncology treatment plans (Phase 2, data layer only; suggest-and-confirm, no auto-order).
+      // Every mutating route is inert (501) until QUEUE_ONCO_WRITE=1; then gated by the doctor
+      // EMR_TREAT cap (same cap the timeline "extend"/assessment write path uses) via
+      // requireOrgOrGlobal, authorized against the underlying plan's OWN hospitalId - resource is
+      // fetched first (cycle -> its plan) so a caller can never borrow a hospitalId they belong to
+      // to reach a cycle/plan that belongs to a different org.
+      if (seg === "onco") {
+        if (!oncoWriteEnabled(env)) return json({ error: "onco_write_disabled" }, 501, request);
+        const sub2 = parts[2] || "";
+        if (sub === "plan" && !sub2) {   // create
+          const tmpl = oncoProtocolTemplate(body.protocolId);
+          if (!tmpl) return json({ ok: false, error: "protocol_not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, body.hospitalId || body.orgId, CAPS.EMR_TREAT);
+          return json({ ok: true, plan: await ONCO.createPlan(env, body, tmpl) }, 200, request);
+        }
+        if (sub === "plan" && sub2 === "confirm") {
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, body.overrides || []) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && !sub2) {   // create
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          return json({ ok: true, cycle: await ONCO.createCycle(env, body.planId, body.cycleNo) }, 200, request);
+        }
+        if (sub === "cycle" && sub2 === "confirm") {
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          try { return json({ ok: true, cycle: await ONCO.confirmCycle(env, body.cycleId) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && sub2 === "complete") {
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          try { return json({ ok: true, cycle: await ONCO.completeCycle(env, body.cycleId) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "complete_failed" }, 400, request); }
+        }
+        if (sub === "admin" && !sub2) {
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          return json({ ok: true, admin: await ONCO.recordAdmin(env, Object.assign({}, body, { administeredBy: actor.id })) }, 200, request);
+        }
+        return json({ ok: false, error: "not_found" }, 404, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
       if (seg === "ticket") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }
