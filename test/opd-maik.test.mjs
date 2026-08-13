@@ -277,8 +277,8 @@ test("_render: no-MRN (local) case -> 'Saving to My Clinic' strip + My Clinic sa
     loading: false, tab: "assess", writeOn: true, source: "local",
     patient: { name: "Dr MK", mrn: "loc_1" }, emrLabel: "My Clinic", assessVals: {}
   });
-  assert.match(html, /Saving to My Clinic/, "local source shows the storage strip");
-  assert.match(html, /data-oe-act="storage-settings"/, "gear opens the storage settings");
+  assert.match(html, /Saving to My Clinic/, "local source shows the storage status strip");
+  assert.ok(!/data-oe-act="storage-settings"/.test(html), "strip is status-only — no gear (controls live in Queue Settings)");
   assert.match(html, /Save to My Clinic/, "save button targets My Clinic, not GHIS");
   assert.ok(!/Save to GHIS/.test(html), "no GHIS save for a local patient");
 });
@@ -291,15 +291,4 @@ test("_render: no store available -> decision-support-only, nothing saved", () =
   assert.match(html, /Decision support only/, "no-store shows the advisory note");
   assert.match(html, /data-oe-act="storage-info"/, "save slot is a passive note");
   assert.ok(!/Save to /.test(html), "no Save-to-anything button when nothing is stored");
-});
-
-test("_render: storage sheet -> 'Where cases are saved' with auto-backup toggle (default on)", () => {
-  const html = loadRender()._render({
-    loading: false, tab: "assess", writeOn: true, source: "local", storageSheet: true,
-    patient: { name: "Dr MK", mrn: "loc_1" }, emrLabel: "My Clinic", assessVals: {}
-  });
-  assert.match(html, /Where cases are saved/, "settings sheet title");
-  assert.match(html, /data-oe-act="storage-auto"/, "all-cases auto-backup toggle present");
-  assert.match(html, /oe-store-opt toggle on/, "auto-backup defaults ON (all cases)");
-  assert.match(html, /data-oe-act="storage-close"/, "sheet can be dismissed");
 });
