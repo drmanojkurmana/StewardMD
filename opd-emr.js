@@ -420,6 +420,7 @@
     } else {
       body = (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : '<div class="oe-empty sm">Oncology module unavailable.</div>';
       body += oncoCyclePanelHtml(st);   // doctor-only: create cycle / pre-chemo clearance / confirm to ready
+      body += oncoPrintButtonHtml();    // Phase 6: 2-page Protocol PDF, built from this same plan/cycle
     }
     return section("vaccines", "Oncology", (plan.protocolId || "").toUpperCase(), toggle + body, "");
   }
@@ -429,6 +430,11 @@
   function oncoCyclePanelHtml(st) {
     if (!oncoFlagOn() || !st.writeOn) return "";
     return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildCyclePanel) ? G.SMD_ONCOUI._buildCyclePanel(st.oncoPlan, st.oncoCycle, st.oncoClearanceDraft) : "";
+  }
+  // Phase 6: Print/PDF action, doctor view only. Read-only (no fetch, no write) so it is gated by the
+  // module flag alone, not st.writeOn - a read-only doctor session can still print what is on screen.
+  function oncoPrintButtonHtml() {
+    return '<button class="oe-btn ghost oe-onco-print" data-oe-act="onco-print">' + ms("picture_as_pdf") + "Print / PDF</button>";
   }
   // Doctor/Nurse toggle for the Oncology tab (st.oncoView "doctor" | "nurse", default doctor). Purely
   // a local view switch - no fetch, mirrors the other data-oe-act toggles in this file.
@@ -572,6 +578,7 @@
     if (cmd === "onco-clr-toggle") { st.oncoClearanceDraft = st.oncoClearanceDraft || {}; st.oncoClearanceDraft.checks = st.oncoClearanceDraft.checks || {}; st.oncoClearanceDraft.checks[arg] = !st.oncoClearanceDraft.checks[arg]; paint(); return; }
     if (cmd === "onco-clr-resolve") return oncoResolveClearance(arg);
     if (cmd === "onco-cycle-confirm") return oncoConfirmCycleReady(arg);
+    if (cmd === "onco-print") return oncoPrintProtocol();
   }
 
   function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
@@ -795,6 +802,69 @@
       toast("Cycle confirmed and ready for administration.");
       paint();
     }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase 6: Protocol PDF (reuses the ThoreX print pipeline unchanged) --------------------------
+  // Built PURELY from what is already in state (st.oncoPlan / st.oncoCycle - the exact same objects
+  // the matrix and nurse view already read); no fetch, no write. onco-protocol-report.js reads every
+  // dose off the plan/cycle itself (single source of truth, never recomputed here).
+  function oncoPrintProtocol() {
+    var plan = st.oncoPlan; if (!plan) return;
+    var R = G.SMD_ONCOREPORT;
+    if (!R || !R.buildProtocolSheet) { toast("Print is not available on this build."); return; }
+    var html = R.buildProtocolSheet(plan, {
+      cycle: st.oncoCycle,
+      patientName: (st.patient && st.patient.name) || "",
+      diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "",
+    });
+    oncoExportHtmlDoc(html, "StewardMD-" + (plan.protocolId || "protocol") + "-" + (plan.planId || ""));
+  }
+  // Fallback: share the HTML document as a file (older builds without the native PDF renderer).
+  // Copied from thorex-screens.js's nativeShareHtml (same Filesystem/Share dance, oncology strings).
+  function oncoShareHtml(html, filename) {
+    try {
+      var P = G.Capacitor && G.Capacitor.Plugins;
+      if (P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+        var name = filename + ".html";
+        P.Filesystem.writeFile({ path: name, data: html, directory: "CACHE", encoding: "utf8" })
+          .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
+          .then(function (r) { return P.Share.share({ title: "StewardMD - Protocol sheet", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
+          .catch(function () { toast("Export unavailable on this device."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Export not available on this device.");
+  }
+  // Write the finished HTML document out. Native -> render a REAL PDF (VisionOcr.htmlToPdf) and share
+  // it; fall back to sharing the HTML file if the native renderer is not present. Web -> hidden-iframe
+  // print (the browser print dialog offers "Save as PDF"). Copied verbatim (~15 lines) from
+  // thorex-screens.js's exportHtmlDoc - the ~15-line dual-path pipeline the plan called for reusing.
+  // The native path is device-only (per the iOS build gotcha); this file only wires it, never tests it.
+  function oncoExportHtmlDoc(html, filename) {
+    var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
+    if (G.SMD_IS_NATIVE) {
+      var N = G.SMD_NATIVE;
+      if (N && N.sharePdfFromHtml) {
+        toast("Building PDF...");
+        N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        return;
+      }
+      oncoShareHtml(html, name);
+      return;
+    }
+    try {
+      var ifr = document.createElement("iframe");
+      ifr.setAttribute("aria-hidden", "true");
+      ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+      document.body.appendChild(ifr);
+      var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+      setTimeout(function () {
+        try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+        setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+      }, 350);
+      return;
+    } catch (e) {}
+    toast("Export not available on this device.");
   }
 
   // ---- report detail: tap a lab/radiology row -> fetch + show the actual result (GHIS lab-detail / radiology-report) ----

@@ -1703,9 +1703,13 @@ window.openExternal = function (u) {
      administration record). Reads confirmed doses off the plan/cycle only - never calculates.
      Loaded before opd-emr.js so window.SMD_ONCONURSE is present when it renders. -->
 <script src="/onco-nurse.js?v=onco1" defer></script>
+<!-- Oncology Phase 6: printable 2-page Protocol PDF, built purely from the plan/cycle already in
+     state (reuses the ThoreX PRO_CSS + exportHtmlDoc print/PDF pipeline). Loaded before opd-emr.js so
+     window.SMD_ONCOREPORT is present when the Print/PDF action runs. -->
+<script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe20-onco6" defer></script>
+<script src="/opd-emr.js?v=oe20-onco7" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.
