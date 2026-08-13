@@ -155,26 +155,53 @@
       .then(function (r) { return r.ok ? { ok: true } : { ok: false, error: "http_" + r.status }; })
       .catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
   }
+  var LAST_KEY = "stewardmd.clinic.lastbackup";
+  function lastBackupAt() { try { return +(localStorage.getItem(LAST_KEY) || 0); } catch (e) { return 0; } }
+  function markBackup() { try { localStorage.setItem(LAST_KEY, String(Date.now())); } catch (e) {} }
   function syncNow() {
     return getPassword().then(function (pw) {
       if (!pw) return { ok: false, error: "no_password" };
       return getDriveToken().then(function (token) {
         if (!token) return { ok: false, error: "no_token" };
-        return encryptBackup(exportJSON(), pw).then(function (env) { return uploadEncrypted(token, env); });
+        return encryptBackup(exportJSON(), pw).then(function (env) { return uploadEncrypted(token, env); })
+          .then(function (r) { if (r && r.ok) markBackup(); return r; });
       });
     }).catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
   }
-  // Auto-sync on every save (debounced). Silent — only surfaces failures the doctor can act on.
+  // WhatsApp model: local is the source of truth (instant reads, no Drive). Drive is a DAILY encrypted
+  // backup only — a save just triggers a backup if the last one was over a day ago, never per-save.
   var _syncTmr = null;
   function autoSyncOn() { try { return localStorage.getItem("smd_clinic_autosync") !== "0"; } catch (e) { return true; } }
   function scheduleSync() {
     if (!autoSyncOn()) return;
+    if (Date.now() - lastBackupAt() < 24 * 60 * 60 * 1000) return;   // at most once per 24h
     if (_syncTmr) clearTimeout(_syncTmr);
-    _syncTmr = setTimeout(function () { _syncTmr = null; syncNow().then(function (r) { if (r && r.ok) toast("Backed up to Google Drive."); else if (r && r.error === "no_password") { /* set-password prompt is offered in the UI */ } }); }, 3000);
+    _syncTmr = setTimeout(function () { _syncTmr = null; syncNow(); }, 5000);   // silent daily backup
   }
-  // Restore from the encrypted Drive backup (or a pasted/opened envelope) with the clinic password.
+  // Restore from an encrypted envelope (reinstall / new device) with the clinic password. Local only after.
   function restoreFromEnvelope(envelope, password) {
     return decryptBackup(envelope, password).then(function (plain) { return importJSON(plain); });
+  }
+  // Download the encrypted backup FROM Drive (one-time, on reinstall) and restore it into local storage.
+  function downloadFromDrive(token) {
+    var q = encodeURIComponent("name='" + DRIVE_FILE + "' and trashed=false");
+    return fetch("https://www.googleapis.com/drive/v3/files?q=" + q + "&spaces=drive&fields=files(id)", { headers: { "Authorization": "Bearer " + token } })
+      .then(function (r) { return r.json(); })
+      .then(function (fj) {
+        var id = fj && fj.files && fj.files[0] && fj.files[0].id; if (!id) return null;
+        return fetch("https://www.googleapis.com/drive/v3/files/" + id + "?alt=media", { headers: { "Authorization": "Bearer " + token } }).then(function (r) { return r.ok ? r.text() : null; });
+      });
+  }
+  function restoreFromDrive(password) {
+    if (!password) return Promise.resolve({ ok: false, error: "no_password" });
+    return getDriveToken().then(function (token) {
+      if (!token) return { ok: false, error: "no_token" };
+      return downloadFromDrive(token).then(function (env) {
+        if (!env) return { ok: false, error: "no_backup" };
+        return restoreFromEnvelope(env, password).then(function (r) { if (r && r.ok) { markBackup(); if (window.SMD_CLINIC) try { renderList(); } catch (e) {} } return r; })
+          .catch(function () { return { ok: false, error: "wrong_password" }; });
+      });
+    }).catch(function (e) { return { ok: false, error: String(e && e.message || e) }; });
   }
 
   /* ------------------------------ UI ------------------------------ */
@@ -243,7 +270,10 @@
         '<div class="pc-card"><div class="pc-card-t">Local backup file</div>' +
           '<div class="pc-card-s">Save an encrypted-or-plain copy to Files / share to Drive manually.</div>' +
           '<button class="pc-btn2" data-pc="backupfile" style="margin-top:10px">Save backup file</button></div>' +
-        '<div class="pc-foot">Backups are encrypted with your clinic password (AES-256). Only StewardMD with that password can open them. Keep the password safe: without it a backup cannot be restored.</div>' +
+        '<div class="pc-card"><div class="pc-card-t">Restore from Google Drive</div>' +
+          '<div class="pc-card-s">New phone or reinstall? Set the SAME clinic password above, then restore all your patients from the encrypted Drive backup.</div>' +
+          '<button class="pc-btn2" data-pc="restore" style="margin-top:10px">Restore from Drive</button></div>' +
+        '<div class="pc-foot">Backups are encrypted with your clinic password (AES-256). Data lives on THIS phone for instant access; Drive is only a daily encrypted backup. Only StewardMD with that password can open a backup — keep the password safe, it cannot be recovered without it.</div>' +
       '</div>';
     var f = document.getElementById("pcPw");
     if (f) f.addEventListener("submit", function (e) { e.preventDefault(); var v = f.elements.pw && f.elements.pw.value; if (!v || v.length < 4) { toast("Use at least 4 characters."); return; } setPassword(v).then(function () { toast("Backup password saved."); f.elements.pw.value = ""; refreshBackupStatus(); }); });
@@ -273,6 +303,19 @@
     if (act === "backupmenu") return renderBackup();
     if (act === "syncnow") { Promise.resolve(syncNow()).then(function (r) { toast(r && r.ok ? "Synced to Google Drive." : (r && r.error === "no_password" ? "Set a backup password first." : r && r.error === "no_token" ? "Sign in with Google (Drive) to sync." : "Sync failed — check the Drive setup.")); }); return; }
     if (act === "backupfile") { Promise.resolve(backup()).then(function (r) { toast(r && r.ok ? (r.downloaded ? "Backup downloaded." : "Choose where to save your backup.") : "Backup failed."); }); return; }
+    if (act === "restore") {
+      getPassword().then(function (pw) {
+        if (!pw) { toast("Set your clinic password first (the one you backed up with)."); return; }
+        toast("Restoring from Drive…");
+        Promise.resolve(restoreFromDrive(pw)).then(function (r) {
+          toast(r && r.ok ? ("Restored " + (r.added || 0) + " patient(s) from Drive.") :
+            r && r.error === "no_backup" ? "No backup found in your Drive." :
+            r && r.error === "wrong_password" ? "Wrong password for this backup." :
+            r && r.error === "no_token" ? "Sign in with Google to restore." : "Restore failed.");
+        });
+      });
+      return;
+    }
     if (act.indexOf("open:") === 0) return openConsult(act.slice(5));
   }
 
@@ -314,7 +357,7 @@
     getConsult: getConsult, saveConsult: saveConsult, exportJSON: exportJSON, importJSON: importJSON,
     backup: backup, configure: configure,
     encryptBackup: encryptBackup, decryptBackup: decryptBackup, setPassword: setPassword, getPassword: getPassword, hasPassword: hasPassword,
-    syncNow: syncNow, restoreFromEnvelope: restoreFromEnvelope };
+    syncNow: syncNow, restoreFromEnvelope: restoreFromEnvelope, restoreFromDrive: restoreFromDrive, lastBackupAt: lastBackupAt };
   if (typeof window !== "undefined") window.SMD_CLINIC = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })();
