@@ -177,6 +177,12 @@
       // In Auto, once we've seen a chunk's language, route the next chunk to that language's model.
       var reqLang = opts.language || "auto";
       var effLang = (reqLang === "auto" && detectedLang) ? detectedLang : reqLang;
+      // MODEL = best weights for the (detected) language — Telugu routes to the Telugu specialist.
+      // DECODE language = "auto" in Auto mode so ONE person speaking a mixed Telugu+English+Hindi
+      // utterance is transcribed in whichever language actually dominates that window (Whisper
+      // auto-detects) instead of being force-decoded as a single language. Forced EN/TE keep their hint.
+      var routedModel = opts.model || (root.SMD_VOICE.pickModel ? root.SMD_VOICE.pickModel(effLang) : undefined);
+      var decodeLang = (reqLang === "auto") ? "auto" : reqLang;
       // Tell the caller which on-device model this chunk will use (for the "which model" chip).
       try {
         if (opts.onModel && engine === "clinical" && root.SMD_VOICE.pickModel) {
@@ -187,9 +193,8 @@
       dbg("arm", "engine=" + engine, "reqLang=" + reqLang, "effLang=" + effLang, "model=" + (opts.model || "(tier-routed)"));
       curSession = root.SMD_VOICE.listen({
         engine: engine,
-        model: opts.model,                                // undefined ⇒ SMD_VOICE routes by tier+effLang
-                                                          // (Telugu → StewardVoice specialist); no hardcoded weak base model
-        language: effLang,                                // Auto adapts per-chunk to the detected language
+        model: routedModel,                               // Telugu-containing / undetected chunks -> Telugu specialist weights
+        language: decodeLang,                             // "auto" in Auto mode -> Whisper detects the window's language (code-switch friendly)
         noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,

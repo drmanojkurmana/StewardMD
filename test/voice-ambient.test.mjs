@@ -223,3 +223,19 @@ test("chunk-cycling: repeated silence endpoints keep the loop alive (do not trip
   assert.ok(!errors.includes("No speech detected"), "benign silence is never surfaced as an error");
   ctl.stop();
 });
+
+test("Auto mode decodes with language='auto' so a mixed utterance code-switches (not forced single language)", () => {
+  let first = null;
+  const AMB2 = freshAmbientWithMockVoice((opts) => { if (!first) first = opts; return { opts, stop: () => {} }; });
+  const ctl = AMB2.start({ speaker: "doctor", engine: "clinical", getState: () => ({}), chunkMs: 60000, language: "auto" });
+  assert.equal(first.language, "auto", "Auto mode must pass language=auto to Whisper");
+  ctl.stop();
+});
+
+test("Forced Telugu mode keeps the 'te' decode hint", () => {
+  let first = null;
+  const AMB2 = freshAmbientWithMockVoice((opts) => { if (!first) first = opts; return { opts, stop: () => {} }; });
+  const ctl = AMB2.start({ speaker: "doctor", engine: "clinical", getState: () => ({}), chunkMs: 60000, language: "te" });
+  assert.equal(first.language, "te");
+  ctl.stop();
+});
