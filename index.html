@@ -57,7 +57,8 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q8prof">
-<link rel="stylesheet" href="/opd-emr.css?v=oe31-timeline">
+<link rel="stylesheet" href="/opd-emr.css?v=oe36-merge">
+<link rel="stylesheet" href="/onco-home.css?v=oh5">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1698,11 +1699,57 @@ window.openExternal = function (u) {
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 <script src="/queue-flags.js?v=q1" defer></script>
 <script src="/queue.js?v=q11prof" defer></script>
+<!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
+     computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
+<script src="/onco-dose.js?v=onco1" defer></script>
+<!-- Oncology treatment-plan matrix + read-only dose drawer + Phase 4 apply/review/override panels
+     (flag smd_onco_protocols, default OFF), rendered inside the opd-emr.js Oncology/Assess tabs.
+     Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
+<script src="/onco-protocols.js?v=onco5" defer></script>
+<!-- Oncology Phase 5: nurse execution view ("Today's Chemotherapy" - clearance banner, give-list,
+     administration record). Reads confirmed doses off the plan/cycle only - never calculates.
+     Loaded before opd-emr.js so window.SMD_ONCONURSE is present when it renders. -->
+<script src="/onco-nurse.js?v=onco1" defer></script>
+<!-- Oncology Phase 6: printable 2-page Protocol PDF, built purely from the plan/cycle already in
+     state (reuses the ThoreX PRO_CSS + exportHtmlDoc print/PDF pipeline). Loaded before opd-emr.js so
+     window.SMD_ONCOREPORT is present when the Print/PDF action runs. -->
+<script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe35-timeline2" defer></script>
+<script src="/opd-emr.js?v=oe36-merge" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold1" defer></script>
+<!-- Onco Home Phase 8 P0 (flag smd_onco_home, default OFF): the reference/tool-library workbench —
+     global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
+     their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the
+     flag is on + SMD_ONCOHOME.open() is called (a home tile, or ?oncohome=1 for testing). -->
+<script src="/onco-evidence.js?v=oh2" defer></script>
+<!-- Onco Home Phase 8 P1 (flags smd_onco_staging / smd_onco_tallman / smd_onco_drugview /
+     smd_onco_protoref, all DEFAULT OFF): AJCC/TNM staging engine (versioned scaffold + honest gaps,
+     no proprietary tables), ISMP tall-man drug names, onco drug+interaction view, and a read-only
+     protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
+<script src="/onco-tallman.js?v=oh2" defer></script>
+<script src="/onco-staging.js?v=oh2" defer></script>
+<!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
+     all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
+     fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
+     doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
+     before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
+<script src="/onco-ctcae.js?v=oh3" defer></script>
+<script src="/onco-iotox.js?v=oh3" defer></script>
+<script src="/onco-recist.js?v=oh3" defer></script>
+<script src="/onco-favorites.js?v=oh3" defer></script>
+<!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
+     (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
+     for a phenotype and never auto-selects/prescribes. Loaded before onco-home.js. -->
+<script src="/onco-recommend.js?v=oh1" defer></script>
+<!-- ONCQIS Phase D (flags smd_onco_protocols AND smd_onco_recommend, BOTH DEFAULT OFF): the doctor
+     FIND -> COMPARE -> SELECT -> patient-specific Tata digital-protocol flow (window.SMD_ONCOFLOW).
+     Decision-support only; SELECT is always an explicit physician click (never auto-selected) and
+     every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
+     (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
+<script src="/onco-plan-flow.js?v=oh1" defer></script>
+<script src="/onco-home.js?v=oh3" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
      Foundational registry for identity verification & anchor-email enrollment.

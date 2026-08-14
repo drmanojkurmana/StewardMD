@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD — ONCQIS Knowledge Center</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);padding:0 0 60px}
+  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:16px 18px;position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .top h1{margin:0;font:800 18px var(--f);flex:1}.top p{margin:4px 0 0;font:500 12px var(--f);color:var(--mut);width:100%}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  h2{font:800 14px var(--f);margin:0 0 12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+  label{display:block;font:700 11px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:10px 0 5px}
+  input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:500 13.5px var(--f);background:var(--bg);color:var(--ink)}
+  textarea{min-height:70px;resize:vertical}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:130px}
+  .chk{display:flex;align-items:center;gap:8px;margin-top:12px}.chk input{width:auto}.chk label{margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
+  button{border:none;border-radius:10px;font:700 13px var(--f);padding:10px 14px;cursor:pointer}
+  .primary{background:var(--tl);color:#fff}.ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12px var(--f);margin-top:8px;min-height:15px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  /* render-module classes (shared with the CDP harness) */
+  .okb-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .okb-tile{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .okb-tile-hot{border-color:var(--red);background:color-mix(in srgb,var(--red) 8%,transparent)}
+  .okb-tile-n{font:800 26px var(--f);color:var(--ink)}.okb-tile-l{font:600 11px var(--f);color:var(--mut);text-transform:uppercase;letter-spacing:.03em;margin-top:4px}
+  .okb-table{width:100%;border-collapse:collapse;font:500 12.5px var(--f)}
+  .okb-table th{text-align:left;font:700 10.5px var(--f);text-transform:uppercase;color:var(--mut);padding:8px 8px;border-bottom:1px solid var(--line)}
+  .okb-table td{padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  .okb-badge{font:700 10px var(--f);background:var(--tls);color:var(--tl);border-radius:6px;padding:2px 7px}
+  .okb-flag{font:700 10px var(--f);border-radius:6px;padding:2px 7px;color:var(--mut)}
+  .okb-flag-warn{background:color-mix(in srgb,var(--amb) 16%,transparent);color:var(--amb)}
+  .okb-flag-hot{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}
+  .okb-act{background:var(--panel);color:var(--tl);border:1px solid var(--line);border-radius:7px;padding:4px 8px;font:700 10.5px var(--f);margin:0 4px 4px 0}
+  .okb-hash{font-family:ui-monospace,Menlo,monospace;color:var(--mut)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>🧬 ONCQIS Knowledge Center</h1>
+    <span id="who" class="hint"></span>
+    <button class="ghost" id="signInBtn">Sign in with Google</button>
+    <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
+    <p>Guideline ingestion &rarr; AI analysis &rarr; PROPOSED artifacts only. The AI never writes an ACTIVE protocol, a plan or a dose, and never receives any patient data.</p>
+  </div>
+  <div class="wrap">
+    <div id="gate" class="card" style="display:none"><div class="msg err" id="gateMsg"></div></div>
+
+    <div class="card"><h2>Dashboard</h2><div id="tiles"></div></div>
+
+    <div class="card">
+      <h2>J4 · Upload a licensed guideline</h2>
+      <div class="row">
+        <div><label>Title *</label><input id="u_title" placeholder="e.g. NCCN Colon Cancer v3.2026"></div>
+        <div><label>Organisation</label><input id="u_org" placeholder="NCCN / ASCO / ESMO / ICMR"></div>
+      </div>
+      <div class="row">
+        <div><label>Version</label><input id="u_version" placeholder="3.2026"></div>
+        <div><label>Publication date</label><input id="u_pub" type="date"></div>
+        <div><label>Source type</label><input id="u_type" placeholder="guideline / label / trial"></div>
+      </div>
+      <label>Relevant diseases (comma-separated)</label><input id="u_diseases" placeholder="colorectal cancer, DLBCL">
+      <label>Guideline PDF (optional)</label><input id="u_pdf" type="file" accept="application/pdf">
+      <label>Or paste guideline TEXT (no PHI)</label><textarea id="u_text" placeholder="Paste the guideline text here if you have no PDF."></textarea>
+      <div class="chk"><input type="checkbox" id="u_lic"><label for="u_lic">I confirm this is a licensed source (no scraping).</label></div>
+      <div style="margin-top:12px"><button class="primary" id="u_go">Upload evidence</button></div>
+      <div class="msg" id="u_msg"></div>
+    </div>
+
+    <div class="card">
+      <h2>J3 · Evidence library</h2><div id="evidence"></div>
+      <div style="margin-top:12px" class="row">
+        <div><label>Analyze evidence id (J5)</label><input id="an_ev" placeholder="ev_..."></div>
+        <div style="flex:0 0 auto;align-self:flex-end"><button class="ghost" id="an_go">AI extract</button></div>
+      </div>
+      <div class="msg" id="an_msg"></div>
+    </div>
+
+    <div class="card">
+      <h2>J2 · Protocol library</h2><div id="protocols"></div>
+      <div style="margin-top:12px" class="row">
+        <div><label>Impact report from extraction id (J6)</label><input id="im_ex" placeholder="ex_..."></div>
+        <div style="flex:0 0 auto;align-self:flex-end"><button class="ghost" id="im_go">Run Update Impact Report</button></div>
+      </div>
+      <div class="msg" id="im_msg"></div>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/onco-kb-admin.js"></script>
+<script>
+(function(){
+  "use strict";
+  var UI = window.SMD_ONCOKBADMIN;
+  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
+  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+  function $(id){return document.getElementById(id);}
+  function tok(){ return auth&&auth.currentUser?auth.currentUser.getIdToken():Promise.resolve(null); }
+  function api(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t,"Content-Type":"application/json"},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); }
+  function msg(id,txt,ok){ var e=$(id); e.textContent=txt||""; e.className="msg "+(ok?"ok":(txt?"err":"")); }
+
+  var state={protocols:[],evidence:[],reports:[]};
+  function repaint(){
+    $("tiles").innerHTML=UI.renderTiles(UI.dashboardMetrics(state.protocols,state.evidence,state.reports));
+    $("protocols").innerHTML=UI.renderProtocolTable(state.protocols,state.reports);
+    $("evidence").innerHTML=UI.renderEvidenceTable(state.evidence);
+  }
+  function loadProtocols(){ return fetch("/kb/protocols/index.json").then(function(r){return r.json();}).then(function(j){ state.protocols=(j&&j.protocols)||[]; }).catch(function(){ state.protocols=[]; }); }
+  function refresh(){
+    return Promise.all([
+      loadProtocols(),
+      api("/api/onco/kb/evidence").then(function(x){ state.evidence=(x.d&&x.d.evidence)||[]; }).catch(function(){}),
+      api("/api/onco/kb/reports").then(function(x){ state.reports=(x.d&&x.d.reports)||[]; }).catch(function(){})
+    ]).then(repaint);
+  }
+
+  function fileToB64(f){ return new Promise(function(res,rej){ if(!f){res("");return;} var r=new FileReader(); r.onload=function(){ res(String(r.result).split(",")[1]||""); }; r.onerror=rej; r.readAsDataURL(f); }); }
+
+  $("u_go").onclick=function(){
+    var f=$("u_pdf").files[0];
+    if(!$("u_lic").checked){ msg("u_msg","Confirm the licensed-source attestation first."); return; }
+    if(!$("u_title").value.trim()){ msg("u_msg","Title is required."); return; }
+    msg("u_msg","Uploading...",true);
+    fileToB64(f).then(function(b64){
+      var body={ title:$("u_title").value.trim(), org:$("u_org").value.trim(), version:$("u_version").value.trim(),
+        publicationDate:$("u_pub").value, sourceType:$("u_type").value.trim(),
+        diseases:$("u_diseases").value.split(",").map(function(s){return s.trim();}).filter(Boolean),
+        licensed:true, fileName:f?f.name:"", pdfB64:b64, guidelineText:$("u_text").value.trim() };
+      return api("/api/onco/kb/evidence/upload",{method:"POST",body:JSON.stringify(body)});
+    }).then(function(x){ if(x.d&&x.d.ok){ msg("u_msg","Uploaded: "+x.d.evidence.id,true); return refresh(); } msg("u_msg","Error: "+((x.d&&x.d.error)||x.s)); })
+      .catch(function(e){ msg("u_msg","Error: "+(e&&e.message||e)); });
+  };
+  $("an_go").onclick=function(){
+    var id=$("an_ev").value.trim(); if(!id){ msg("an_msg","Evidence id required."); return; }
+    var text=$("u_text").value.trim();
+    msg("an_msg","Analyzing (AI)...",true);
+    api("/api/onco/kb/evidence/analyze",{method:"POST",body:JSON.stringify({evidenceId:id,guidelineText:text})})
+      .then(function(x){ if(x.d&&x.d.ok){ msg("an_msg","Extraction "+x.d.extraction.id+": "+x.d.extraction.changes.length+" change(s)",true); return refresh(); } msg("an_msg","Error: "+((x.d&&x.d.error)||x.s)); })
+      .catch(function(e){ msg("an_msg","Error: "+(e&&e.message||e)); });
+  };
+  $("im_go").onclick=function(){
+    var id=$("im_ex").value.trim(); if(!id){ msg("im_msg","Extraction id required."); return; }
+    var active=state.protocols.filter(function(p){ return String((p.status||p.lifecycleState||"")).toUpperCase()==="ACTIVE"; });
+    msg("im_msg","Running impact job...",true);
+    api("/api/onco/kb/evidence/impact",{method:"POST",body:JSON.stringify({extractionId:id,protocols:active})})
+      .then(function(x){ if(x.d&&x.d.ok){ var r=x.d.report; msg("im_msg","Report "+r.id+": "+r.protocolsCompared+" ACTIVE protocol(s) compared"+(r.clinicalReviewRequired?" — CLINICAL REVIEW REQUIRED":""),true); return refresh(); } msg("im_msg","Error: "+((x.d&&x.d.error)||x.s)); })
+      .catch(function(e){ msg("im_msg","Error: "+(e&&e.message||e)); });
+  };
+
+  $("signInBtn").onclick=function(){ if(auth) auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){alert("Sign-in failed: "+((e&&e.message)||e));}); };
+  $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
+  if(auth) auth.onAuthStateChanged(function(u){
+    $("signInBtn").style.display=u?"none":""; $("signOutBtn").style.display=u?"":"none";
+    $("who").textContent=u?("Signed in as "+u.email):"";
+    if(u) refresh(); else repaint();
+  }); else repaint();
+})();
+</script>
+</body>
+</html>

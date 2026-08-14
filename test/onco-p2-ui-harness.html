@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onco P2 harness (Phase 8 P2: CTCAE grading + irAE principles + RECIST 1.1 + Favorites/Recent)</title>
+<link rel="stylesheet" href="/onco-home.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+// All onco flags ON (every smd_onco_* flag). The engines fetch the REAL kb/onco/ctcae/catalog.json and
+// kb/onco/iotox/catalog.json from the served repo root. Favorites use the real localStorage.
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return String(k).indexOf("smd_onco_") === 0; } };
+try { window.localStorage.clear(); } catch (e) {}
+
+window.MEDCALC = { list: function () { return [{ id: "khorana", title: "Khorana Score", cat: "Oncology", desc: "VTE risk." }]; }, open: function () {}, openList: function () {} };
+window.KB_ENRICHMENT = { byId: { lung_cancer: { name: "Lung cancer", system: "Oncology / Pulmonary", aliases: ["nsclc"] } } };
+window.MEDDRUGS = { _list: [], searchIndex: function () { return []; }, openList: function () {}, openInteractions: function () {} };
+window.toast = function (m) { window.__toasts = (window.__toasts || []).concat([m]); };
+window.__ready = false;
+</script>
+<script src="/onco-dose.js"></script>
+<script src="/onco-evidence.js"></script>
+<script src="/onco-tallman.js"></script>
+<script src="/onco-staging.js"></script>
+<script src="/onco-ctcae.js"></script>
+<script src="/onco-iotox.js"></script>
+<script src="/onco-recist.js"></script>
+<script src="/onco-favorites.js"></script>
+<script src="/onco-home.js" onload="window.__ready = !!(window.SMD_ONCOHOME && window.SMD_ONCOCTCAE && window.SMD_ONCOIOTOX && window.SMD_ONCORECIST && window.SMD_ONCOFAV)"></script>
+</body></html>

@@ -1,0 +1,101 @@
+{
+  "id": "lv5fu2-de-gramont",
+  "name": "LV5FU2 (de Gramont)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": {},
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["palliative", "curative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV over 2 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123478: 'LV 200 mg/m2 over 2 hr days 1 and 2'."
+      },
+      {
+        "id": "fluorouracil-bolus",
+        "name": "Fluorouracil (bolus)",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV bolus",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123478-123479: 'followed by bolus 5-FU 400 mg/m2/day 1 and 2'. Given after leucovorin per NCCN Appendix F sequencing convention (LV followed by 5-FU)."
+      },
+      {
+        "id": "fluorouracil-infusion",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV over 22 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123479: 'followed by 5-FU 600 mg/m2 over 22 hr days 1 and 2; cycle repeated every 14 d'. Given after the 5-FU bolus per NCCN Appendix F sequencing convention."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "antiemetics: low emetic risk regimen (5-fluorouracil and leucovorin) per NCCN Appendix D - low-risk prophylaxis (e.g. single-agent 5-HT3 antagonist or dexamethasone) is typical; confirm against institutional antiemesis protocol",
+      "G-CSF: not called out as high/intermediate febrile-neutropenia risk in the source text; per NCCN Appendix C, low-risk regimens are not assigned routine prophylactic CSF - physician judgment for patient-specific risk factors"
+    ]
+  },
+  "monitoring": ["CBC before each cycle", "renal function periodically (5-FU dose adjustment for renal impairment)"],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 123474, 123478, 123479",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "histology",
+    "stage",
+    "biomarkers",
+    "treatmentSetting",
+    "lineOfTherapy",
+    "eligibilityCriteria"
+  ]
+}

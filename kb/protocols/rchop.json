@@ -1,0 +1,35 @@
+{
+  "id": "rchop",
+  "diseaseId": "dlbcl",
+  "name": "R-CHOP",
+  "version": "0.1-skeleton",
+  "lifecycleState": "draft",
+  "intentOptions": ["curative", "palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "NCCN Guidelines: B-cell Lymphomas (panel version pending verification)",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "NCCN reference regimen (canonical R-CHOP-21; doses pending Phase 2 source + R1 verification)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Rituximab premedication", "notes": "per protocol before rituximab infusion" }
+  ],
+  "supportiveCare": ["antiemetics per protocol", "consider G-CSF per protocol/risk"],
+  "monitoring": ["CBC before each cycle", "cardiac assessment (anthracycline)"],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    { "id": "rituximab", "name": "Rituximab", "basis": "bsa", "dosePerUnit": 375, "unit": "mg/m2", "route": "IV", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "" },
+    { "id": "cyclophosphamide", "name": "Cyclophosphamide", "basis": "bsa", "dosePerUnit": 750, "unit": "mg/m2", "route": "IV", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "" },
+    { "id": "doxorubicin", "name": "Doxorubicin", "basis": "bsa", "dosePerUnit": 50, "unit": "mg/m2", "route": "IV", "days": [1], "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } }, "roundingRule": { "increment": 5 }, "modificationRules": [], "notes": "anthracycline: track cumulative lifetime dose" },
+    { "id": "vincristine", "name": "Vincristine", "basis": "bsa", "dosePerUnit": 1.4, "unit": "mg/m2", "route": "IV", "days": [1], "caps": { "perDose": 2 }, "roundingRule": { "increment": 0.1 }, "modificationRules": [], "notes": "capped at 2 mg per dose" },
+    { "id": "prednisolone", "name": "Prednisolone", "basis": "flat", "dosePerUnit": 100, "unit": "mg", "route": "PO", "days": [1, 2, 3, 4, 5], "modificationRules": [], "notes": "PO days 1 to 5" }
+  ]
+}

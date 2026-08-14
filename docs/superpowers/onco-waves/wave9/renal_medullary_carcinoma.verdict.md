@@ -1,0 +1,15 @@
+# Adversarial verification verdict — renal_medullary_carcinoma
+
+1. DOSE LEAK: none. Grepped for `mg`, `mcg`, `AUC\d`, `/m2`, `m^2`, `q\d`, `cycle`, `IU`, and any digit at all in the sidecar body — the only digits present are "SMARCB1" / "INI1" (gene/protein names, not doses) and "12th ed" (citation edition). No numeric dose, AUC, mg/m2, or numbered schedule anywhere.
+
+2. UNGROUNDED CLAIMS: DeVita's RCC chapter contains exactly one hit for this entity (line 149069), a row in a summary classification table stating only: associated with sickle cell trait, aggressive and lethal within 12 months, mean age 19y, male>female. There is no dedicated DeVita management discussion for RMC. The sidecar correctly discloses this in its "Sourcing note" and inline-flags every management claim as "(general oncology standard, not from DeVita's section on this disease)" rather than attributing it to DeVita. Specific claims not found in DeVita for this disease (all are inline-flagged as such, so not misattributed, but flagging here per the audit request):
+   - Perioperative/adjuvant chemotherapy around nephrectomy for localized disease — not in DeVita for RMC.
+   - Platinum-based combination cytotoxic chemotherapy as first-line backbone — not in DeVita for RMC (platinum-based regimens for RMC are real-world literature-standard, e.g. MSKCC/consortium series, but not sourced to DeVita here).
+   - Anti-angiogenic/mTOR agents having "limited and inconsistent activity" in RMC — not in DeVita for RMC (accurate per NCCN/primary literature, but not DeVita-sourced).
+   - SMARCB1/INI1 loss as RMC's "defining molecular lesion" and target of investigational therapy — DeVita discusses SMARCB1/INI1 loss only for epithelioid sarcoma, malignant rhabdoid tumor, and poorly differentiated chordoma (lines ~213653–221294), never in connection with RMC. The biological fact is well-established in real-world oncology (this is textbook-accurate outside DeVita), but the sidecar is right not to claim DeVita as the source.
+   - All surgery/radiotherapy/monitoring/referral recommendations — general oncology standard, correctly flagged as not DeVita-sourced.
+   No claim is presented as DeVita-attributed when it isn't; the disclosure is honest and consistent throughout. No fabricated trial names, response-rate statistics, or survival figures beyond the DeVita table's own "lethal within 12 mo" figure, which is used correctly.
+
+3. CITATION: present — "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." at the end, name only, no page numbers. Correct.
+
+4. VERDICT: CLEAN (ready for R1), with one caveat carried forward from the draft agent: this entity has essentially no DeVita-specific grounding, so the entire management narrative rests on general-oncology-standard framing rather than textbook-verified specifics. R1 should treat this as a lower-confidence sidecar and consider a follow-up pass against NCCN Kidney Cancer guidelines / primary RMC literature if line-level regimen specificity is ever wanted. As written (deliberately non-specific, no drugs/doses/trials named), it is safe and non-fabricated.

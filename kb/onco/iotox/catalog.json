@@ -1,0 +1,77 @@
+{
+  "_note": "Immune-related adverse event (irAE) MANAGEMENT PRINCIPLES reference for the StewardMD onco-iotox engine (Phase 8 P2). This is NOT a dosing table. It carries only the general, grade-based management PRINCIPLE for each organ system (continue vs withhold vs permanently discontinue the checkpoint inhibitor; whether corticosteroids are indicated; when to escalate to second-line immunosuppression), grounded in the published ASCO, NCCN and SITC irAE guidance and cited by NAME only. Specific corticosteroid doses, tapers, time windows, second-line agent choices and laboratory thresholds are DELIBERATELY omitted and marked as a gap; they must be read from the current guideline and institutional protocol. Every organ entry is flagged requiresR1Verification. Do not add a drug dose, a mg/kg value, a taper duration or a numeric threshold to this file: the engine's fabrication audit fails closed on any such specific.",
+  "schemaVersion": "1.0",
+  "guidelines": ["ASCO", "NCCN", "SITC"],
+  "gapMessage": "Specific corticosteroid doses, tapers, time windows, second-line agents and lab thresholds are intentionally not reproduced here. Consult the current ASCO, NCCN or SITC irAE guideline and your institutional protocol.",
+  "generalPrinciples": [
+    "Grade the irAE and manage by grade and organ, per ASCO / NCCN / SITC guidance.",
+    "Grade 1 (most organs): generally continue the checkpoint inhibitor with close monitoring and supportive care.",
+    "Grade 2: generally withhold the checkpoint inhibitor; corticosteroids are often indicated; resume when the toxicity has improved toward baseline.",
+    "Grade 3: withhold or, for some organs, permanently discontinue; systemic corticosteroids are indicated; if there is no improvement within the guideline-specified window, add second-line immunosuppression.",
+    "Grade 4: permanently discontinue the checkpoint inhibitor for most organ toxicities; hospitalize; high-intensity systemic corticosteroids and early second-line immunosuppression per guideline.",
+    "Endocrinopathies are an exception: many are managed with hormone replacement and the checkpoint inhibitor is often continued, rather than with immunosuppression.",
+    "Exact doses, tapers, escalation time windows and second-line agent choices are guideline- and organ-specific and are not reproduced here."
+  ],
+  "organs": [
+    {
+      "id": "skin",
+      "organ": "Skin (rash, pruritus)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; topical supportive care and monitoring.",
+        "2": "Continue or withhold per guideline; topical corticosteroids and symptom control; consider systemic corticosteroids if persistent.",
+        "3": "Withhold the checkpoint inhibitor; systemic corticosteroids; dermatology input; escalate if no improvement.",
+        "4": "Permanently discontinue; hospitalize; systemic corticosteroids; urgent dermatology input and consideration of second-line immunosuppression for severe or bullous reactions."
+      }
+    },
+    {
+      "id": "colitis",
+      "organ": "Gastrointestinal (diarrhea, colitis)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor with close monitoring; supportive care and hydration.",
+        "2": "Withhold the checkpoint inhibitor; systemic corticosteroids are usually indicated; exclude infection; consider endoscopy per guideline.",
+        "3": "Withhold or permanently discontinue per guideline; systemic corticosteroids; if refractory within the guideline window, add a second-line immunosuppressant.",
+        "4": "Permanently discontinue; hospitalize; systemic corticosteroids and early second-line immunosuppression for steroid-refractory disease."
+      }
+    },
+    {
+      "id": "hepatitis",
+      "organ": "Hepatic (transaminitis, hepatitis)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor liver function tests more frequently.",
+        "2": "Withhold the checkpoint inhibitor; exclude other causes; consider corticosteroids if it persists or worsens.",
+        "3": "Withhold or permanently discontinue per guideline; systemic corticosteroids; if no improvement within the guideline window, add second-line immunosuppression.",
+        "4": "Permanently discontinue; hospitalize; systemic corticosteroids and second-line immunosuppression for steroid-refractory hepatitis; hepatology input."
+      }
+    },
+    {
+      "id": "pneumonitis",
+      "organ": "Pulmonary (pneumonitis)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Consider withholding and monitor closely; re-image per guideline; exclude infection.",
+        "2": "Withhold the checkpoint inhibitor; systemic corticosteroids; exclude infection; pulmonology input.",
+        "3": "Permanently discontinue; hospitalize; systemic corticosteroids; if no improvement within the guideline window, add second-line immunosuppression.",
+        "4": "Permanently discontinue; hospitalize (possible ICU); high-intensity corticosteroids and early second-line immunosuppression; respiratory support as needed."
+      }
+    },
+    {
+      "id": "endocrine",
+      "organ": "Endocrine (thyroid, hypophysitis, adrenal insufficiency, type 1 diabetes)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor the relevant endocrine axis.",
+        "2": "Often continue with hormone replacement (thyroid, adrenal, pituitary) rather than immunosuppression; endocrinology input.",
+        "3": "Withhold until acute symptoms are controlled; hormone replacement; corticosteroids mainly for acute hypophysitis or adrenal crisis (mass effect / stress cover), not routinely for the endocrinopathy itself.",
+        "4": "Withhold and stabilize (e.g. adrenal crisis, diabetic ketoacidosis); hormone replacement and acute inpatient management; endocrinology input."
+      }
+    }
+  ]
+}

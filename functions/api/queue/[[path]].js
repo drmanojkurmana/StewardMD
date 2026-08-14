@@ -29,6 +29,21 @@ import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
+import * as ONCO from "../../_onco_store.js";
+// Static protocol templates (Phase 2 ships ONE protocol; a registry/lookup-by-file only makes sense
+// once Phase 7 adds many - see kb/protocols/rchop.json + kb/schema/protocol.schema.json). Same JSON-
+// import shape esbuild already resolves for Cloudflare Pages Functions (matches the `import X from
+// "../../../kb/ai/maik-scope.js"` root-JS-import precedent in functions/api/ai/[[path]].js, just for
+// a .json leaf instead of a UMD .js leaf).
+import RCHOP_TEMPLATE from "../../../kb/protocols/rchop.json";
+const ONCO_PROTOCOLS = { rchop: RCHOP_TEMPLATE };
+function oncoProtocolTemplate(protocolId) { return ONCO_PROTOCOLS[String(protocolId || "").toLowerCase()] || null; }
+// ONCQIS Phase B: the PURE recommendation engine (onco-recommend.js, root JS, UMD default import -
+// same shape as `import Engine from "../followcare-engine.js"`). Standard Protocols are the new-schema
+// kb/schema/standard-protocol.schema.json objects; only status==="ACTIVE" are ever recommended, and
+// none are published ACTIVE yet, so activeStandardProtocols() is [] for now (honest, not fabricated).
+import ONCORECOMMEND from "../../../onco-recommend.js";
+function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -41,6 +56,9 @@ async function readBody(request) { try { return await request.json(); } catch (e
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
 const staffEnabled = (env) => env && env.QUEUE_STAFF_ENABLED === "1";
+// Oncology treatment-plan writes (Phase 2) - mirrors emrWriteEnabled in functions/api/ghis/[[path]].js:
+// inert (501, never touches Firestore) until the owner sets QUEUE_ONCO_WRITE=1 server-side.
+function oncoWriteEnabled(env) { return !!(env && env.QUEUE_ONCO_WRITE === "1"); }
 function isOwnerEmail(env, email) { try { return !!(email && ownerEmails(env).indexOf(email) > -1); } catch (e) { return false; } }
 // Resolve the employeeId behind a GHIS session token (staff identity). Reads GHIS_KV directly — a 3-line
 // mirror of the ghis proxy's getSession, avoiding a heavyweight cross-import.
@@ -325,6 +343,63 @@ export async function onRequest(context) {
       return json({ ok: true, analytics: await Q.analytics(env, s) }, 200, request);
     }
 
+    // ---- Oncology treatment plans (Phase 2, data layer; no UI wiring yet - flag smd_onco_protocols
+    // gates the client). Read is allowed even with QUEUE_ONCO_WRITE unset (nothing to disable on a
+    // GET); the doctor EMR_TREAT cap is authorized against the PLAN'S OWN hospitalId/orgId (fetched
+    // first, same fetch-then-authorize order as loadSessionFor), never a client-supplied one. ----
+    if (method === "GET" && seg === "onco" && sub === "plan") {
+      const plan = await ONCO.getPlan(env, url.searchParams.get("planId"));
+      if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+      return json({ ok: true, plan: plan }, 200, request);
+    }
+    // Cycle read (gap-fix, Phase 5): gated on CAPS.QUEUE_VIEW - the org-member READ cap every role
+    // holds (down to a bare "viewer") - NOT CAPS.EMR_TREAT like /onco/plan above. A nurse has no
+    // EMR_TREAT, so this is the ONLY way a nurse session can ever read a cycle's give-list +
+    // administration history. The plan is deliberately reduced (no lockedTemplate/dose formulas) -
+    // just enough to label the header (name/MRN/intent/cycle length); the clinically-actionable
+    // CONFIRMED doses travel on the cycle itself (cycle.confirmedDoses), same as the doctor matrix.
+    if (method === "GET" && seg === "onco" && sub === "cycle") {
+      const cyc = await ONCO.getCycle(env, url.searchParams.get("cycleId"));
+      if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+      const plan = await ONCO.getPlan(env, cyc.planId);
+      if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.QUEUE_VIEW);
+      const adminRecords = await ONCO.getAdminRecords(env, cyc.cycleId);
+      // Nurse-safe template: drug names / routes / days / premeds for the give-list, NO dose formulas.
+      const nurseTmpl = ONCO._nurseTemplate(plan.lockedTemplate);
+      return json({ ok: true, cycle: cyc, plan: {
+        protocolId: plan.protocolId,
+        name: nurseTmpl.name,
+        ghisPatientId: plan.ghisPatientId,
+        intent: plan.intent,
+        cycleLengthDays: nurseTmpl.cycleLengthDays,
+        lockedTemplate: nurseTmpl,
+      }, adminRecords: adminRecords }, 200, request);
+    }
+    // ONCQIS Phase B: read-only protocol RECOMMENDATION (flag smd_onco_recommend gates the client).
+    // Decision-SUPPORT only - suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype
+    // and never auto-selects/prescribes (always the full applicable list, reviewRequired:true). Gated
+    // on CAPS.QUEUE_VIEW (a pure read; nothing to disable on a GET). The phenotype is CLINICAL params
+    // ONLY (diseaseId/stage/biomarkers/setting/intent/line) - NEVER a name/MRN, and nothing here logs.
+    if (method === "GET" && seg === "onco" && sub === "recommend") {
+      requireCap(actor.role, CAPS.QUEUE_VIEW);   // any org-member read cap; PHI-free reference data
+      let biomarkers = null;
+      try { const raw = url.searchParams.get("biomarkers"); if (raw) biomarkers = JSON.parse(raw); } catch (e) { biomarkers = null; }
+      const phenotype = {
+        diseaseId: url.searchParams.get("diseaseId") || null,
+        stage: url.searchParams.get("stage") || null,
+        biomarkers: biomarkers,
+        setting: url.searchParams.get("setting") || null,
+        intent: url.searchParams.get("intent") || null,
+        line: url.searchParams.get("line") || null,
+      };
+      const active = activeStandardProtocols();
+      if (!active.length) return json({ ok: true, applicable: [], note: "no ACTIVE protocols published yet", reviewRequired: true }, 200, request);
+      const rec = ONCORECOMMEND.recommend(phenotype, active);
+      return json({ ok: true, applicable: rec.applicable, reviewRequired: rec.reviewRequired }, 200, request);
+    }
+
     if (method === "POST") {
       const body = await readBody(request);
       if (seg === "config") { requireCap(actor.role, CAPS.SESSION_MANAGE); return json({ ok: true, config: await Q.saveConfig(env, actor.id, body.config || body) }, 200, request); }
@@ -393,6 +468,102 @@ export async function onRequest(context) {
         try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: body.priority, reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
         catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
+      }
+      // ---- Oncology treatment plans (Phase 2 data layer + Phase 5 cycle/clearance/nurse execution;
+      // suggest-and-confirm, no auto-order). Every mutating route is inert (501) until
+      // QUEUE_ONCO_WRITE=1; then role-split via requireOrgOrGlobal, authorized against the underlying
+      // plan's OWN hospitalId - resource is fetched first (cycle -> its plan) so a caller can never
+      // borrow a hospitalId they belong to to reach a cycle/plan that belongs to a different org.
+      // DOCTOR cap (EMR_TREAT, same cap the timeline "extend"/assessment write path uses): create
+      // plan, confirm & activate plan, create cycle, resolve clearance, confirm cycle to ready.
+      // NURSE cap (EMR_VITALS, same cap the "record vitals" timeline path uses - the least-privilege
+      // clinical-write cap a nurse/intern/resident/doctor role actually holds, unlike QUEUE_VIEW which
+      // every role including a bare "viewer" has): start a cycle, record administration, complete a
+      // cycle. A nurse can never create/dose/override/confirm-to-ready (spec R11).
+      if (seg === "onco") {
+        if (!oncoWriteEnabled(env)) return json({ error: "onco_write_disabled" }, 501, request);
+        const sub2 = parts[2] || "";
+        if (sub === "plan" && !sub2) {   // create - DOCTOR
+          const tmpl = oncoProtocolTemplate(body.protocolId);
+          if (!tmpl) return json({ ok: false, error: "protocol_not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, body.hospitalId || body.orgId, CAPS.EMR_TREAT);
+          return json({ ok: true, plan: await ONCO.createPlan(env, body, tmpl) }, 200, request);
+        }
+        if (sub === "plan" && sub2 === "confirm") {   // confirm & activate - DOCTOR
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          // Options-form call -> Phase F pre-activation gate runs. physicianConfirmed must be an EXPLICIT
+          // client true (the doctor's CONFIRM & ACTIVATE tap); it is never inferred, so activation is
+          // gated and never automatic. The gate throws (400) with the blocker list on any failure.
+          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, { overrides: body.overrides || [], physicianConfirmed: body.physicianConfirmed === true }) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
+        }
+        if (sub === "plan" && sub2 === "emr") {   // ADD TO EMR (structured write) - DOCTOR, EXPLICIT action ONLY, only after activation
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          if (plan.status !== "active") return json({ ok: false, error: "plan_not_active" }, 400, request);   // never before CONFIRM & ACTIVATE
+          // GHIS auth: writing into the LIVE hospital EMR needs the doctor's GHIS session token (its own
+          // header, never a URL param, never the Firebase Authorization Bearer). No GHIS session -> no write.
+          const ghisToken = request.headers.get("X-Ghis-Token") || "";
+          if (!ghisToken) return json({ ok: false, error: "ghis_auth_required" }, 401, request);
+          // Which structured fields the EMR supports is owner-config (VERIFIED slots only); default none.
+          // The GHIS structured-write network call stays unwired here until a real oncology payload is
+          // captured (same discipline as prescribe() in functions/api/ghis), so with no emrWrite dep every
+          // field falls back to the attached Tata PDF - never a fabricated structured write.
+          // ponytail: supported-field config is the calibration knob for a real EMR; wire deps.emrWrite/
+          // emrAttachPdf here once the GHIS oncology payload is captured + verified.
+          let supported = []; try { supported = JSON.parse(env.QUEUE_ONCO_EMR_FIELDS || "[]"); } catch (e) { supported = []; }
+          try { return json({ ok: true, emr: await ONCO.writePlanToEmr(env, body.planId, { supportedFields: supported, diagnosis: body.diagnosis || "", patientName: body.patientName || "", by: actor.id }) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "emr_write_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && !sub2) {   // create - DOCTOR
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          return json({ ok: true, cycle: await ONCO.createCycle(env, body.planId, body.cycleNo) }, 200, request);
+        }
+        if (sub === "cycle" && sub2 === "clearance") {   // pre-chemo clearance attestation - DOCTOR
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          try { return json({ ok: true, cycle: await ONCO.resolveClearance(env, body.cycleId, { checks: body.checks || [], status: body.status, by: actor.id }) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "clearance_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && sub2 === "confirm") {   // planned -> ready, BLOCKED unless clearance is "cleared" - DOCTOR
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          try { return json({ ok: true, cycle: await ONCO.confirmCycle(env, body.cycleId) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && sub2 === "start") {   // ready -> administering ("nurse starts") - NURSE
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          try { return json({ ok: true, cycle: await ONCO.startCycle(env, body.cycleId) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "start_failed" }, 400, request); }
+        }
+        if (sub === "cycle" && sub2 === "complete") {   // administering -> done - NURSE
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          try { return json({ ok: true, cycle: await ONCO.completeCycle(env, body.cycleId) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "complete_failed" }, 400, request); }
+        }
+        if (sub === "admin" && !sub2) {   // record one administration row (append-only) - NURSE
+          const cyc = await ONCO.getCycle(env, body.cycleId);
+          if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
+          const plan = await ONCO.getPlan(env, cyc.planId);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          return json({ ok: true, admin: await ONCO.recordAdmin(env, Object.assign({}, body, { administeredBy: actor.id })) }, 200, request);
+        }
+        return json({ ok: false, error: "not_found" }, 404, request);
       }
       const { s, err } = await loadSessionFor(env, body.sessionId, actor); if (err) return err;
       if (seg === "ticket") { await requireSessionCap(env, actor, s, CAPS.QUEUE_ADD); const t = await Q.addTicket(env, s, body, actor.id); return json({ ok: true, ticket: (await ticketView(env, [t]))[0] }, 200, request); }

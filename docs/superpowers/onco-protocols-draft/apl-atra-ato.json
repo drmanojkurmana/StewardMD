@@ -1,0 +1,72 @@
+{
+  "id": "apl-atra-ato",
+  "diseaseId": "acute_myeloid_leukemia",
+  "name": "ATRA + ATO (acute promyelocytic leukemia, low-risk)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": null,
+  "cycles": null,
+  "intentOptions": ["curative"],
+  "source": {
+    "textbook": "Harrison's Principles of Internal Medicine, 22nd ed. (2025)",
+    "textbookLines": [118177],
+    "nccnAppendices": ["C", "D", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: Harrison does not print an emetogenicity tier for this regimen; per the general NCCN Antiemesis categories referenced in Appendix D, oral ATRA and IV ATO are conventionally low/minimal emetic-risk agents - use Oral Low/Minimal and IV Low tier prophylaxis per institutional antiemesis order set, escalate PRN.",
+    "G-CSF / myeloid growth factor: ATRA/ATO induction is a differentiation regimen, not a classically myelosuppressive cytotoxic backbone, so it is not assigned a High/Intermediate febrile-neutropenia tier under the Appendix C framework. Prophylactic G-CSF is not routinely indicated; manage cytopenias and infection risk per physician judgment and institutional guideline.",
+    "APL differentiation syndrome monitoring and management (fever, dyspnea, pulmonary infiltrates, effusions, hypoxemia): glucocorticoids, cytoreductive therapy, and/or temporary ATRA hold for severe cases per Harrison (lines ~118165-118176); this is the primary early toxicity, not febrile neutropenia."
+  ],
+  "monitoring": [
+    "CBC with differential before and during induction",
+    "APL differentiation-syndrome surveillance (fever, dyspnea, fluid retention, pulmonary infiltrates/effusions, hypoxemia) - Harrison lines ~118165-118176",
+    "Serial PCR for PML-RARA (t(15;17)) for response/relapse monitoring, per Harrison lines ~118189-118194",
+    "ECG/QTc and serum potassium/magnesium before and during ATO therapy (standard ATO safety monitoring; not itemized at the cited Harrison lines - verify against institutional protocol/NCCN template)",
+    "No anthracycline in this low-risk ATRA/ATO combination, so routine cardiac (LVEF) surveillance is not triggered by this drug list",
+    "No platinum agent in this regimen, so routine renal-clearance monitoring for platinum dosing is not triggered by this drug list"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "coagulation panel (DIC risk is elevated in APL)",
+    "liver function",
+    "electrolytes (potassium, magnesium) and ECG/QTc prior to ATO"
+  ],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides. Note: cytopenias are frequently disease-related in APL induction, so this generic default rule requires clinical judgment rather than automatic delay." },
+    { "condition": "Severe APL differentiation syndrome (e.g. renal failure or ICU-level respiratory distress)", "action": "hold ATRA", "text": "Temporary discontinuation of ATRA is necessary in cases of severe APL syndrome (Harrison lines ~118172-118173); physician decides on ATO continuation and cytoreductive/glucocorticoid therapy." }
+  ],
+  "drugs": [
+    {
+      "id": "tretinoin",
+      "name": "Tretinoin (all-trans-retinoic acid, ATRA)",
+      "basis": "bsa",
+      "dosePerUnit": 45,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": null,
+      "roundingRule": { "increment": 10 },
+      "modificationRules": [],
+      "notes": "Harrison, 22nd ed., line 118177: 'ATRA (45 mg/m2/d) plus ATO (0.15 mg/kg/d)'. Dosed daily (continuous, /d); Harrison does not print a total induction duration or cycle count, so cycleLengthDays/cycles and a numeric days[] list are left null - verify total duration against the pending NCCN per-disease template. Rounding increment of 10 mg reflects the standard 10 mg tretinoin capsule strength, not a value printed in Harrison - verify against institutional formulary."
+    },
+    {
+      "id": "arsenic-trioxide",
+      "name": "Arsenic trioxide (ATO)",
+      "basis": "weight",
+      "dosePerUnit": 0.15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": null,
+      "roundingRule": { "increment": 0.01 },
+      "modificationRules": [],
+      "notes": "Harrison, 22nd ed., line 118177: 'ATRA (45 mg/m2/d) plus ATO (0.15 mg/kg/d)'. Dosed daily (continuous, /d); Harrison does not print a total induction duration or cycle count, so cycleLengthDays/cycles and a numeric days[] list are left null - verify total duration against the pending NCCN per-disease template. Rounding increment is a standard IV weight-based convention, not printed in Harrison."
+    }
+  ]
+}

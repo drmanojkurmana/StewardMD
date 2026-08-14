@@ -720,6 +720,9 @@
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
+    // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
+    // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
+    oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("Onco Home loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
@@ -1357,6 +1360,8 @@
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") !== "0"; } catch (e) { return true; } } },
+    { act: "oncohome", ic: "oncology", tt: "Onco", sub: "Search, drugs & scores", defOn: false,
+      eligible: function () { try { return !!(window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool && SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },

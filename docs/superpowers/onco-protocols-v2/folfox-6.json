@@ -1,0 +1,116 @@
+{
+  "id": "folfox-6",
+  "name": "FOLFOX-6 (Tournigand)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {},
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "oxaliplatin",
+        "name": "OXALIplatin",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 2 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Cancer: Principles & Practice of Oncology, 12th ed., line 123719 (FOLFOX-6, Tournigand et al., 2004): oxaliplatin 100 mg/m2 over 2 hr, day 1 only, given concurrently with leucovorin. Cycle repeated every 14 d."
+      },
+      {
+        "id": "leucovorin",
+        "name": "LEVOleucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV, concurrently with oxaliplatin (same line via Y-connector)",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source line 123723: LV 400 mg/m2 concurrently with oxaliplatin, day 1 only."
+      },
+      {
+        "id": "fluorouracil-bolus",
+        "name": "Fluorouracil (bolus)",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV bolus",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source line 123724: 5-FU bolus 400 mg/m2, day 1, given after the oxaliplatin/LV infusion (appendix F 'followed by' sequence)."
+      },
+      {
+        "id": "fluorouracil-infusion",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 1200,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV continuous infusion over 46-48 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source line 123725: 5-FU 1,200 mg/m2/d times 2 d (2,400 mg/m2 total infusion over 46-48 hr), following the bolus dose. dosePerUnit is the printed per-day rate (1,200 mg/m2/d); total course dose is 2,400 mg/m2 over the 2-day infusion."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "give before oxaliplatin per moderate emetic risk tier (appendix D)" }
+    ],
+    "supportiveCare": [
+      "Antiemetics: moderate emetic risk tier (oxaliplatin is a moderate-emetic-risk IV agent, 5-FU is low risk; highest-risk-day-of-therapy rule per NCCN appendix D assigns the regimen to the moderate tier) - prophylaxis on day of treatment per NCCN Antiemesis guideline",
+      "G-CSF: not routinely indicated - FOLFOX-6 is not listed among NCCN high or intermediate febrile-neutropenia-risk regimens (appendix C); base use on patient-specific risk factors per physician-patient discussion"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "Renal function (creatinine clearance) before each cycle - platinum agent",
+    "Baseline and periodic neuropathy assessment (oxaliplatin peripheral neuropathy is cumulative)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status", "peripheral neuropathy grade"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed.",
+        "date": null,
+        "locator": "textbook lines 123719, 123723, 123724, 123725",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": ["histology", "stage", "biomarkers", "treatmentSetting", "lineOfTherapy", "eligibilityCriteria"]
+}
