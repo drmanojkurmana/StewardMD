@@ -109,7 +109,9 @@
   function sidebar(view, doctorName, dept) {
     return '<aside class="q-side">' +
       '<div class="q-side-hd"><div class="q-avatar">' + esc(initials(doctorName)) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
-      navItem("dashboard", "Dashboard", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") +
+      navItem("dashboard", "Dashboard", view === "dashboard") +
+      '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved)">' + ms("recent_actors") + "<span>Patients</span></button>" +
+      navItem("analytics", "Analytics", view === "analytics") +
       navItem("settings", "Settings", view === "settings") + navItem("notifications", "Notifications", false) + "</aside>";
   }
   function dashboardCanvas(state) {
@@ -144,7 +146,10 @@
         : '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div>") +
       "</div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
-    var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
+    // "Patients" opens the saved-patients list of the active clinic store (My Clinic device / Shared Clinic
+    // Drive) — every patient consulted till now, tap to reopen their consult. It's a launcher, not a view.
+    var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
+    var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
     return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
   }
@@ -424,6 +429,11 @@
     if (cmd === "storagemode") { try { localStorage.setItem("smd_opd_storage_mode", arg === "shared" ? "shared" : "device"); if (arg === "shared") localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (arg === "shared" && !(G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app()) && G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); paint(); return; }
     if (cmd === "sharedsetup") { try { localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
     if (cmd === "sharedsync") { var _sa = (G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app()); if (_sa && _sa.syncNow) { try { G.toast && G.toast("Syncing…"); } catch (e) {} Promise.resolve(_sa.syncNow()).then(function () { paint(); }); } return; }
+    if (cmd === "savedpatients") {   // open the active clinic's saved-patients list (My Clinic device / Shared Clinic Drive)
+      if (opdStorageMode() === "shared") { try { localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); else { try { G.toast && G.toast("Shared Clinic loading…"); } catch (e) {} } }
+      else { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); else { try { G.toast && G.toast("My Clinic loading…"); } catch (e) {} } }
+      return;
+    }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
