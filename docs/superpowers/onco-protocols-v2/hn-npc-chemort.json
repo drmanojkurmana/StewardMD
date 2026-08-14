@@ -1,0 +1,105 @@
+{
+  "id": "hn-npc-chemort",
+  "name": "NPC concurrent CISplatin plus radiation, then adjuvant CISplatin plus Fluorouracil (Intergroup 0099 type)",
+  "disease": "Nasopharyngeal carcinoma",
+  "diseaseId": "nasopharyngeal_carcinoma",
+  "histology": "squamous cell / nonkeratinizing carcinoma (EBV-associated)",
+  "stage": ["II", "III", "IVA"],
+  "biomarkers": {
+    "EBV": "associated",
+    "note": "Nasopharyngeal-carcinoma-specific (site #37). EBV association is characteristic of NPC. EBV DNA is prognostic and used in some de-escalation strategies; it is not a dose gate. INT-0099 established concurrent chemoradiation plus adjuvant chemotherapy over radiation alone in locoregionally advanced NPC."
+  },
+  "treatmentSetting": ["definitive-chemoRT", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "definitive concurrent cisplatin-radiation followed by adjuvant cisplatin/fluorouracil in locoregionally advanced NPC; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "locoregionally advanced nasopharyngeal carcinoma treated with definitive concurrent chemoradiation followed by adjuvant chemotherapy", "source": "DeVita 12th ed.", "locator": "Chapter 24, lines 59516 to 59519 (INT-0099: concurrent chemoradiation and adjuvant chemotherapy superior to RT alone in locoregionally advanced NPC)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin-concurrent",
+        "name": "CISplatin (concurrent phase)",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [1, 22, 43],
+        "route": "IV with hydration, concurrent with radiation",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "NPC concurrent high-dose cisplatin 100 mg/m2 every 21 days for 3 doses, equivalently days 1, 22, and 43 during RT (Discussion line 9816); Cisplatin + RT is the NPC concurrent and adjuvant pathway (algorithm line 2057, NPC-specific)", "evidenceStatus": "current" },
+        "notes": "Concurrent phase: CISplatin 100 mg/m2 IV every 21 days for 3 doses (days 1, 22, and 43) during radiation. Grounded to NCCN 2.2026 Discussion line 9816 (NPC concurrent cisplatin 100 mg/m2 every 21 days) and algorithm line 2057 (NPC-specific Cisplatin + RT pathway). The days 1, 22, 43 expression of the every-21-day schedule matches RTOG 91-11, a larynx-preservation trial (Discussion line 10085), which is not itself the NPC source. ISMP tall-man. No lifetime cumulative cap for cisplatin; monitor nephrotoxicity, ototoxicity, neuropathy; hydrate."
+      },
+      {
+        "id": "cisplatin-adjuvant",
+        "name": "CISplatin (adjuvant phase)",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 24, lines 59516 to 59519 (INT-0099: concurrent chemoradiation plus adjuvant chemotherapy superior to RT alone; supports the benefit of adjuvant chemotherapy, NOT the specific adjuvant per-drug doses or cycle count, which are not stated in the provided sources)", "evidenceStatus": "unknown" },
+        "notes": "Adjuvant phase: CISplatin part of the adjuvant cisplatin/infusional fluorouracil (PF) doublet given after chemoradiation. The adjuvant PF regimen identity is grounded to NCCN 2.2026 algorithm line 2057 (NPC-specific: Cisplatin + RT followed by Cisplatin/Infusional Fluorouracil); DeVita 12th ed. Chapter 24 lines 59516 to 59519 (INT-0099) supports the benefit of adjuvant chemotherapy but does not state the specific adjuvant doses or cycle count. The exact adjuvant numeric dose and schedule are NOT present in the provided grounding sources, so dosePerUnit is VERIFY and days is empty pending verification. ISMP tall-man. No lifetime cumulative cap; monitor nephrotoxicity/ototoxicity/neuropathy; hydrate."
+      },
+      {
+        "id": "fluorouracil-adjuvant",
+        "name": "Fluorouracil (adjuvant phase, continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV continuous infusion",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 24, lines 59516 to 59519 (INT-0099: concurrent chemoradiation plus adjuvant chemotherapy superior to RT alone; supports the benefit of adjuvant chemotherapy, NOT the specific adjuvant per-drug doses or cycle count, which are not stated in the provided sources)", "evidenceStatus": "unknown" },
+        "notes": "Adjuvant phase: infusional Fluorouracil part of the adjuvant PF doublet; the PF identity is grounded to NCCN 2.2026 algorithm line 2057 (NPC-specific), while DeVita 12th ed. Chapter 24 lines 59516 to 59519 (INT-0099) supports the benefit of adjuvant chemotherapy but not the specific doses or cycle count. The exact adjuvant numeric dose and schedule are NOT present in the provided grounding sources, so dosePerUnit is VERIFY and days is empty. DPYD deficiency substantially increases fluoropyrimidine toxicity; consider DPYD testing before treatment."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Antiemetic prophylaxis (high emetic risk)", "notes": "Cisplatin-containing; high-emetic-risk prophylaxis indicated in both phases." },
+      { "name": "Hydration", "notes": "IV pre- and post-hydration for cisplatin." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: high emetic risk (cisplatin). Confirm exact institutional/guideline tier.",
+      "Nephroprotection: IV hydration and electrolyte repletion with each cisplatin dose.",
+      "Fluoropyrimidine safety: consider DPYD genotyping before adjuvant fluorouracil.",
+      "Tolerability: adjuvant PF compliance is historically poor; assess fitness before each adjuvant cycle (DeVita 12th ed., Chapter 24 adjuvant discussion)."
+    ]
+  },
+  "monitoring": [
+    "Renal function and electrolytes (Mg, K, Na) before each cisplatin dose - both phases",
+    "Ototoxicity and peripheral neuropathy assessment - cisplatin",
+    "CBC with differential before each cycle",
+    "Mucositis and diarrhea assessment - infusional fluorouracil (adjuvant phase)"
+  ],
+  "clearanceChecks": ["renal function and electrolytes", "adequate hydration", "CBC/platelets", "DPYD status (adjuvant fluorouracil)", "prior-cycle/phase status"],
+  "doseModificationRules": [
+    { "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy", "drug": "cisplatin", "action": "hold/reduce/switch", "text": "Review required in either phase; consider reduction, delay, or switch. Physician decides." },
+    { "condition": "poor tolerance of adjuvant phase", "drug": "cisplatin/fluorouracil", "action": "hold/omit", "text": "Adjuvant compliance is historically limited; review required to continue, reduce, or omit adjuvant cycles. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 24, lines 59516 to 59519 (INT-0099: concurrent chemoradiation plus adjuvant chemotherapy superior to RT alone; supports the benefit of adjuvant chemotherapy). Exact adjuvant per-drug numeric doses and cycle count not stated in narrative", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "NPC concurrent cisplatin 100 mg/m2 every 21 days for 3 doses (Discussion line 9816); Cisplatin + RT followed by Cisplatin/Infusional Fluorouracil listed as the preferred NPC adjuvant pathway (algorithm line 2057, NPC-specific). The days 1, 22, 43 expression matches RTOG 91-11, a larynx-preservation trial (Discussion line 10085), not an NPC source. Adjuvant per-drug numeric doses not tabulated in the provided pages", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[1].dosePerUnit", "regimen.drugs[1].days", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].days", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the Intergroup 0099 type nasopharyngeal carcinoma regimen: definitive concurrent CISplatin plus radiation followed by adjuvant CISplatin plus infusional Fluorouracil. This regimen is nasopharyngeal-specific (site #37, EBV-associated) and does NOT serve the other head and neck subsites; salivary (#40) is not covered. The concurrent phase is fully grounded: CISplatin 100 mg/m2 IV every 21 days for 3 doses (equivalently days 1, 22, and 43) during radiation, per NCCN 2.2026 Discussion line 9816 and algorithm line 2057 (NPC-specific). The days 1, 22, 43 expression matches RTOG 91-11 (a larynx-preservation trial, Discussion line 10085), which is not an NPC source. The adjuvant phase regimen IDENTITY (cisplatin/infusional fluorouracil) is grounded to NCCN 2.2026 algorithm line 2057 (NPC-specific: Cisplatin + RT followed by Cisplatin/Infusional Fluorouracil); DeVita 12th ed. Chapter 24 lines 59516 to 59519 (INT-0099) supports only the benefit of adjuvant chemotherapy, not the specific PF doses or cycle count. The exact adjuvant per-drug doses, days, cycle length, and total cycle count are NOT present in the provided grounding sources; per the no-invention safety rule, the adjuvant cisplatin and fluorouracil dose fields and days, plus regimen.cycleLengthDays and regimen.cycles (which span two phases with different intervals), are set to VERIFY and enumerated in verifyFields. ISMP tall-man applied. Cisplatin has NO lifetime cumulative cap; nephrotoxicity/ototoxicity/neuropathy monitoring plus hydration are specified; adjuvant fluorouracil DPYD deficiency is flagged. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

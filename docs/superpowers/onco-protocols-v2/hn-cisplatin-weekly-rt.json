@@ -1,0 +1,75 @@
+{
+  "id": "hn-cisplatin-weekly-rt",
+  "name": "Weekly CISplatin plus concurrent radiation (alternative schedule)",
+  "disease": "Head and neck squamous cell carcinoma",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["III", "IVA", "IVB"],
+  "biomarkers": {
+    "HPV_p16": "prognostic only",
+    "note": "For p16-positive (HPV-associated) oropharyngeal cancer, p16/HPV status is prognostic but NOT a dose gate. Weekly cisplatin 40 mg/m2 concurrent with accelerated RT was the chemoradiation arm carried forward in HN002 for p16-positive oropharyngeal cancer (DeVita 12th ed., Chapter 23, line 62073)."
+  },
+  "treatmentSetting": ["definitive-chemoRT", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "alternative concurrent chemoradiation schedule where high-dose every-3-week cisplatin is not preferred; definitive or postoperative; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "locoregionally advanced SCCHN treated with concurrent radiation where a weekly low-dose cisplatin schedule is chosen as an alternative to high-dose every-3-week cisplatin", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "Discussion lines 8782, 8875, 8886, 9816 (weekly cisplatin 40 mg/m2 may be substituted); algorithm line 6171 (Weekly Cisplatin 40 mg/m2)" },
+    { "criterion": "doseFloor", "requirement": "weekly cisplatin doses below 40 mg/m2 should not be used in this setting", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "Discussion line 8783 (weekly doses of cisplatin of less than 40 mg/m2 should not be utilized)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin-weekly",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 40,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV weekly with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Algorithm line 6171 (Weekly Cisplatin 40 mg/m2); Discussion lines 8782 (40 mg/m2/week may be substituted), 9816 (40 mg/m2/week or 100 mg/m2 every 21 days)", "evidenceStatus": "current" },
+        "notes": "Source: cisplatin 40 mg/m2 IV weekly concurrent with radiation. Corroborated DeVita 12th ed., Chapter 23, lines 62066 to 62068 (NRG HN009) and 62073 (HN002): concurrent weekly cisplatin 40 mg per m2 every 1 week. Number of weekly doses runs with the radiation course and is not fixed by the cited source (see verifyFields). Doses below 40 mg/m2/week are not recommended (NCCN Discussion line 8783). ISMP tall-man. No lifetime cumulative cap for cisplatin; monitor nephrotoxicity, ototoxicity, neuropathy; hydrate with each dose."
+      }
+    ],
+    "cycleLengthDays": 7,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "Weekly cisplatin 40 mg/m2 (below the 50 mg/m2 high-emetic-risk threshold): moderate-to-high emetic risk; provide prophylaxis. Confirm exact institutional tier." },
+      { "name": "Hydration", "notes": "IV hydration with each weekly dose to reduce nephrotoxicity." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: cisplatin-containing; provide prophylaxis per emetogenicity. Confirm exact institutional/guideline tier.",
+      "Nephroprotection: IV hydration and electrolyte (Mg, K) repletion with each weekly dose."
+    ]
+  },
+  "monitoring": [
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each weekly dose - cisplatin nephrotoxicity",
+    "Ototoxicity assessment - cisplatin",
+    "Peripheral neuropathy assessment - cisplatin",
+    "CBC before each weekly dose"
+  ],
+  "clearanceChecks": ["renal function and electrolytes", "adequate hydration", "CBC/platelets", "otologic/neurologic status", "prior-dose tolerance"],
+  "doseModificationRules": [
+    { "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy", "drug": "cisplatin", "action": "hold/reduce", "text": "Review required. Weekly doses below 40 mg/m2 are not recommended (NCCN Discussion line 8783); consider hold or switch rather than reducing below the floor. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 23, lines 62066 to 62068 (NRG HN009) and 62073 (HN002): concurrent weekly cisplatin 40 mg per m2", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Algorithm line 6171; Discussion lines 8782, 8783 (dose floor), 8875, 8886, 9816", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for weekly CISplatin concurrent with radiation, the alternative low-dose schedule to high-dose every-3-week cisplatin. Setting: definitive or postoperative concurrent chemoradiation. Sites served (squamous histology): oral cavity (#32), tongue (#33), lip (#34), oropharyngeal (#35), HPV-positive oropharyngeal (#36, p16/HPV prognostic only, not a dose gate), hypopharyngeal (#38), laryngeal (#39), sinonasal (#41); nasopharyngeal (#37) is covered by the dedicated NPC protocols and salivary (#40) is not covered. Dose fully grounded: CISplatin 40 mg/m2 IV weekly (Standard Guidelines (NCCN) 2.2026 algorithm line 6171 and Discussion lines 8782/9816; DeVita 12th ed. Chapter 23 lines 62066 to 62068 (NRG HN009) and 62073 (HN002)). The number of weekly cycles runs with the radiation course and is not fixed by the cited source, so regimen.cycles is set to VERIFY. A dose floor is enforced: weekly doses below 40 mg/m2 are not recommended (NCCN Discussion line 8783). ISMP tall-man applied. Cisplatin has NO lifetime cumulative cap; nephrotoxicity, ototoxicity, and neuropathy monitoring plus hydration are specified. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

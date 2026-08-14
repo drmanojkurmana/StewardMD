@@ -1,0 +1,109 @@
+{
+  "id": "hn-extreme",
+  "name": "Cetuximab plus Platinum and Infusional Fluorouracil (EXTREME), First-Line Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma, then Cetuximab Maintenance",
+  "disease": "Head and neck squamous cell carcinoma (non-nasopharyngeal)",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": [],
+  "biomarkers": {
+    "PD_L1": "not required (chemotherapy plus cetuximab backbone; used regardless of PD-L1, including PD-L1 negative disease)",
+    "note": "Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026, SYST-A 4 of 7, the platinum plus infusional fluorouracil plus cetuximab (EXTREME) regimen is an Other Recommended first- and subsequent-line combination (category 1) and is not PD-L1 gated. The Discussion (MS-56) and Harrison 22nd ed. note that patients with no PD-L1 expression may still be treated with the prior EXTREME chemotherapy standard."
+  },
+  "treatmentSetting": ["recurrent", "metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (also an Other Recommended subsequent-line option if not previously used)",
+  "eligibilityCriteria": [
+    { "criterion": "disease", "requirement": "recurrent, unresectable, or metastatic head and neck squamous cell carcinoma with no surgical or radiotherapy option", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 header" },
+    { "criterion": "regimen", "requirement": "cisplatin or carboplatin plus infusional fluorouracil plus cetuximab (EXTREME)", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 (Other Recommended Combination Regimens: Carboplatin/Infusional Fluorouracil + Cetuximab and Cisplatin/Infusional Fluorouracil + Cetuximab, category 1)" },
+    { "criterion": "site", "requirement": "non-nasopharyngeal primary; nasopharynx follows a separate systemic-therapy pathway (NASO-B)", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 1 of 7 (Principles of Systemic Therapy for Non-Nasopharyngeal Cancers header)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 58325 (recurrent or metastatic Wayne State regimen: cisplatin 100 mg/m2 IV recycled every 3 weeks)", "evidenceStatus": "unknown" },
+        "notes": "CISplatin 100 mg/m2 IV on day 1 every 21 days. The 100 mg/m2 every 3 weeks cisplatin value is sourced to DeVita 12th ed. (line 58325), the recurrent or metastatic Wayne State cisplatin plus 5-fluorouracil regimen, which matches the platinum dose used in the recurrent/metastatic EXTREME regimen. The recurrent/metastatic setting is per Standard Guidelines (NCCN) v2.2026 SYST-A 4 of 7. Source-stated platinum alternative for cisplatin-ineligible patients: CARBOplatin dosed by target AUC (AUC value not established in the cited sources; requires verification). ISMP tall-man applied."
+      },
+      {
+        "id": "fluorouracil",
+        "name": "Fluorouracil (infusional)",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4],
+        "route": "IV continuous infusion",
+        "infusionDuration": "96 hour continuous infusion",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita 12e line 58326-58327 (recurrent/metastatic cisplatin + 5-FU)", "evidenceStatus": "unknown" },
+        "notes": "Infusional fluorouracil 1,000 mg/m2 per day by continuous IV infusion over 96 hours (days 1 to 4), recycled every 3 weeks, is grounded to DeVita 12th ed. line 58326 to 58327 (the recurrent or metastatic Wayne State cisplatin plus 5-fluorouracil regimen), which is the platinum/fluorouracil backbone of EXTREME. DPYD deficiency substantially increases fluoropyrimidine toxicity; consider DPYD testing before treatment."
+      },
+      {
+        "id": "cetuximab",
+        "name": "Cetuximab",
+        "basis": "bsa",
+        "dosePerUnit": 250,
+        "unit": "mg/m2",
+        "days": [1, 8, 15],
+        "route": "IV",
+        "infusionDuration": "loading over 2 hr, subsequent doses over 1 hr",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "recurrent or metastatic head and neck in-indication anchor line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer, 250 mg per m2); standard administration schedule line 124823 to 124824 (400 mg/m2 loading dose week 1 over 2 hr, then weekly 250 mg/m2 over 1 hr)", "evidenceStatus": "unknown" },
+        "notes": "Cetuximab 400 mg/m2 IV loading over 2 hr in week 1, then 250 mg/m2 IV over 1 hr weekly (days 1, 8, 15 of each 21-day cycle). The 250 mg/m2 recurrent or metastatic head and neck dose is anchored to DeVita 12th ed. line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer); the 400 mg/m2 loading then 250 mg/m2 weekly administration schedule is the standard cetuximab schedule (DeVita 12th ed. line 124823 to 124824). dosePerUnit records the recurring weekly 250 mg/m2 dose; the 400 mg/m2 week-1 loading dose is recorded in this note. Cetuximab continues as maintenance monotherapy after the platinum/fluorouracil phase ends."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Cetuximab premedication", "notes": "antihistamine (and per institutional practice a corticosteroid) before the cetuximab loading dose per cetuximab labeling; infusion-reaction precautions." }
+    ],
+    "supportiveCare": [
+      "Antiemetic prophylaxis for the cisplatin-containing cycles: high emetic risk (cisplatin); prophylaxis per emetogenicity tier.",
+      "Monitor for cetuximab infusion reactions and acneiform rash; hypomagnesemia surveillance (cetuximab plus cisplatin).",
+      "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil; reduce or avoid in DPYD deficiency.",
+      "G-CSF / febrile-neutropenia risk assessment per institutional practice (VERIFY: not established in the cited sources for this regimen)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cisplatin dose",
+    "serum magnesium and electrolytes (cisplatin and cetuximab)",
+    "cetuximab-related skin toxicity assessment",
+    "Mucositis and diarrhea assessment - infusional fluorouracil",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "magnesium/electrolytes", "DPYD status (fluorouracil)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher cetuximab infusion reaction or severe acneiform rash", "drug": "cetuximab", "action": "hold/reduce", "text": "Manage per cetuximab labeling; hold or reduce and obtain clinical review before rechallenge." },
+    { "condition": "renal impairment or cytopenia on day 1", "drug": "cisplatin", "action": "delay/reduce", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "recurrent or metastatic cisplatin 100 mg/m2 and 5-fluorouracil 1,000 mg/m2 per day over 96 hours recycled every 3 weeks (Wayne State regimen, lines 58325 to 58327); EXTREME platinum plus 5-FU with or without cetuximab for six cycles (line 58517); cetuximab recurrent or metastatic head and neck in-indication anchor (line 58216, Table 23.9) with the standard 400 mg/m2 loading then 250 mg/m2 weekly schedule (line 124823 to 124824)", "evidenceStatus": "unknown" },
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter (lines 88286 to 88301): prior standard chemotherapy for recurrent/metastatic disease was cisplatin, 5-FU, and cetuximab (EXTREME); patients with no PD-L1 expression may still be treated with the EXTREME standard", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, Other Recommended: Cisplatin or Carboplatin/Infusional Fluorouracil + Cetuximab, category 1); EXTREME Discussion MS-55 to MS-56", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the EXTREME regimen (cisplatin or carboplatin plus infusional fluorouracil plus cetuximab, then cetuximab maintenance) in first-line recurrent or metastatic non-nasopharyngeal head and neck squamous cell carcinoma. Serves the squamous-cell head and neck sites (reference sites #32 to 39 and #41), not nasopharynx (separate NASO-B pathway) and not salivary gland (#40, separate protocol). The regimen identity and category 1 first-line status are from Standard Guidelines (NCCN) v2.2026 SYST-A 4 of 7 (Other Recommended Combination Regimens). CISplatin 100 mg/m2 every 3 weeks is sourced to DeVita 12th ed. line 58325 (the recurrent or metastatic Wayne State cisplatin plus 5-fluorouracil regimen), matching the EXTREME platinum dose. Infusional Fluorouracil 1,000 mg/m2 per day by continuous infusion over 96 hours (days 1 to 4), recycled every 3 weeks, is grounded to DeVita 12th ed. lines 58326 to 58327 (same Wayne State recurrent or metastatic regimen). The EXTREME trial gave the platinum plus 5-FU with or without cetuximab for six cycles, so regimen.cycles is set to 6 (DeVita 12th ed. line 58517). Cetuximab 250 mg/m2 weekly (with a 400 mg/m2 week-1 loading dose) is anchored to the recurrent or metastatic head and neck in-indication data (DeVita 12th ed. line 58216, Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer); the 400 mg/m2 loading then 250 mg/m2 weekly administration schedule is the standard cetuximab schedule (DeVita 12th ed. line 124823 to 124824). The NCCN SYST-A pages do not print per-drug mg/m2 doses; the carboplatin target AUC for the cisplatin-ineligible alternative is not established in the cited sources and remains unverified (noted on the cisplatin entry). ISMP tall-man applied (CISplatin, CARBOplatin). Setting recurrent/metastatic, palliative intent, first-line. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

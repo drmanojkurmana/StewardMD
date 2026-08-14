@@ -1,0 +1,74 @@
+{
+  "id": "hn-cetuximab",
+  "name": "Cetuximab Monotherapy, Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma",
+  "disease": "Head and neck squamous cell carcinoma (non-nasopharyngeal)",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": [],
+  "biomarkers": {
+    "note": "No biomarker gate. Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026, SYST-A 4 of 7, single-agent cetuximab is listed among the Other Recommended Single Agents for recurrent, unresectable, or metastatic disease without a PD-L1 or molecular requirement."
+  },
+  "treatmentSetting": ["recurrent", "metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "single-agent option in the recurrent/metastatic setting (Other Recommended); commonly used after progression on prior systemic therapy",
+  "eligibilityCriteria": [
+    { "criterion": "disease", "requirement": "recurrent, unresectable, or metastatic head and neck squamous cell carcinoma with no surgical or radiotherapy option", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 header" },
+    { "criterion": "regimen", "requirement": "single-agent cetuximab", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 (Other Recommended, Single Agents: Cetuximab)" },
+    { "criterion": "site", "requirement": "non-nasopharyngeal primary; nasopharynx follows a separate systemic-therapy pathway (NASO-B)", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 1 of 7 (Principles of Systemic Therapy for Non-Nasopharyngeal Cancers header)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cetuximab",
+        "name": "Cetuximab",
+        "basis": "bsa",
+        "dosePerUnit": 250,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "loading over 2 hr, subsequent doses over 1 hr",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "recurrent or metastatic head and neck in-indication anchor line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer, 250 mg per m2); standard administration schedule line 124823 to 124824 (400 mg/m2 loading dose week 1 over 2 hr, then weekly 250 mg/m2 over 1 hr; this schedule locator is in the colorectal cancer chapter, but the 400-then-250 weekly schedule is the standard cetuximab administration schedule)", "evidenceStatus": "unknown" },
+        "notes": "Cetuximab 400 mg/m2 IV loading over 2 hr in week 1, then 250 mg/m2 IV over 1 hr weekly. dosePerUnit records the recurring weekly 250 mg/m2 dose (cycleLengthDays 7, day 1 of each weekly cycle); the 400 mg/m2 week-1 loading dose is recorded in this note. The 250 mg/m2 recurrent or metastatic head and neck dose is anchored to DeVita 12th ed. line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer); the 400 mg/m2 loading then 250 mg/m2 weekly administration schedule is sourced to DeVita 12th ed. line 124823 to 124824 (the cetuximab administration schedule printed in the colorectal cancer chapter; it is the standard cetuximab schedule)."
+      }
+    ],
+    "cycleLengthDays": 7,
+    "cycles": "weekly until disease progression or unacceptable toxicity",
+    "premedications": [
+      { "name": "Cetuximab premedication", "notes": "antihistamine (and per institutional practice a corticosteroid) before the cetuximab loading dose per cetuximab labeling; infusion-reaction precautions." }
+    ],
+    "supportiveCare": [
+      "Monitor for cetuximab infusion reactions (especially the loading dose) and acneiform rash.",
+      "Serum magnesium surveillance (cetuximab-associated hypomagnesemia)."
+    ]
+  },
+  "monitoring": [
+    "cetuximab-related skin toxicity assessment",
+    "serum magnesium and electrolytes",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": ["magnesium/electrolytes", "prior-cycle status", "infusion-reaction history"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher cetuximab infusion reaction or severe acneiform rash", "drug": "cetuximab", "action": "hold/reduce", "text": "Manage per cetuximab labeling; hold or reduce and obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "cetuximab recurrent or metastatic head and neck in-indication anchor (line 58216, Table 23.9); 400 mg/m2 loading then 250 mg/m2 weekly standard administration schedule (line 124823 to 124824, colorectal chapter)", "evidenceStatus": "unknown" },
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter (lines 88305 to 88307): EGFR-directed monoclonal antibody cetuximab has single-agent activity of approximately 10%", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, Other Recommended, Single Agents: Cetuximab)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent cetuximab in recurrent or metastatic non-nasopharyngeal head and neck squamous cell carcinoma. Serves the squamous-cell head and neck sites (reference sites #32 to 39 and #41), not nasopharynx (separate NASO-B pathway) and not salivary gland (#40, separate protocol). Single-agent cetuximab is an Other Recommended option per Standard Guidelines (NCCN) v2.2026 SYST-A 4 of 7. Cetuximab 400 mg/m2 IV loading then 250 mg/m2 IV weekly is sourced to DeVita 12th ed.: the 250 mg/m2 recurrent or metastatic head and neck dose is anchored to line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer), and the 400-then-250 weekly administration schedule is line 124823 to 124824 (printed in the colorectal cancer chapter; it is the standard cetuximab schedule). This single-agent, fully-dose-grounded protocol is provided in place of a paclitaxel plus cetuximab doublet, because the recurrent/metastatic paclitaxel dose is not stated in the cited sources (cetuximab is). Setting recurrent/metastatic, palliative intent. No numeric field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
