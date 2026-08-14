@@ -1,0 +1,80 @@
+{
+  "id": "gyn-vaginal-cisplatin-rt",
+  "name": "Single-agent Cisplatin Concurrent with Radiation (Vaginal SCC Chemoradiation)",
+  "disease": "Vaginal cancer (squamous cell carcinoma)",
+  "diseaseId": null,
+  "histology": "primary vaginal squamous cell carcinoma (SCC)",
+  "stage": ["II", "III", "IVA (locally advanced)"],
+  "biomarkers": {
+    "note": "Single-agent cisplatin as a radiosensitizer is not biomarker gated. PD-L1 and TMB-H/MSI-H are tested to guide later immunotherapy in advanced/recurrent disease, not this chemoradiation."
+  },
+  "treatmentSetting": "definitive concurrent chemoradiation",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "primary (definitive) treatment of locally advanced primary vaginal SCC; radiosensitizing chemotherapy concurrent with external-beam radiation plus brachytherapy",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "locally advanced primary vaginal squamous cell carcinoma treated with concurrent chemoradiation", "source": "Standard Guidelines (NCCN), Vaginal Cancer", "locator": "v2.2026, Systemic Therapy for Primary Vaginal Cancer (VAG-D 1 of 2), Chemoradiation: Cisplatin (Carboplatin if cisplatin intolerant); footnote (Concurrent platinum-containing chemotherapy with EBRT utilizes cisplatin as a single agent, or carboplatin if cisplatin intolerant)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Vaginal Cancer", "version": "2.2026", "date": "2025-12-04", "locator": "VAG-D 1 of 2, Chemoradiation: Cisplatin (Carboplatin if patient is cisplatin intolerant); regimen named but per-dose number not printed", "evidenceStatus": "current" },
+        "notes": "Single-agent CISplatin is the radiosensitizing chemotherapy given concurrently with EBRT plus brachytherapy for locally advanced primary vaginal SCC (NCCN Vaginal v2.2026, VAG-D). The cited source names the regimen (concurrent platinum-based chemoradiation improves outcomes and is often used in stage II to IV disease) but does NOT print the cisplatin dose, basis, unit, or schedule; all set to VERIFY. For clinical context only (not asserted here as the vaginal dose): the analogous cervical radiosensitizing schedule is weekly cisplatin 40 mg/m2 (DeVita line 170910). Requires hydration and nephro/oto/neuro monitoring; carboplatin substitutes if cisplatin intolerant. Tall man per ISMP."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Cisplatin hydration and antiemetics", "notes": "IV hydration before and after cisplatin; antiemetic prophylaxis for the platinum agent." }
+    ],
+    "supportiveCare": [
+      "cisplatin hydration protocol (pre- and post-infusion) to reduce nephrotoxicity.",
+      "antiemetics per platinum emetogenicity tier.",
+      "management of additive chemoradiation acute toxicity (vaginal, GU/GI mucosa)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cisplatin dose",
+    "renal function (creatinine, electrolytes/Mg) before each dose",
+    "audiometry/otologic and peripheral-neuropathy assessment for cisplatin",
+    "weekly review of concurrent radiation acute toxicity"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal (creatinine, electrolytes/Mg)", "audiologic/neurologic status", "prior-dose status"],
+  "doseModificationRules": [
+    { "condition": "rising creatinine, electrolyte derangement, or grade 2+ cisplatin toxicity", "drug": "cisplatin", "action": "hold/switch", "text": "Hold cisplatin or switch to carboplatin if cisplatin intolerant per NCCN; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Vaginal cancer management: definitive concurrent chemoradiation (platinum-based) plus brachytherapy for locally advanced disease (Chapter 49, vaginal carcinoma); the systemic chemotherapy dose is not tabulated", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Vaginal Cancer", "version": "2.2026", "date": "2025-12-04", "locator": "Systemic Therapy for Primary Vaginal Cancer (VAG-D 1 of 2), Chemoradiation: Cisplatin (Carboplatin if cisplatin intolerant); primary-treatment footnotes (concurrent platinum-based chemotherapy improves outcomes, often used in stage II to IV)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[cisplatin].basis",
+    "regimen.drugs[cisplatin].dosePerUnit",
+    "regimen.drugs[cisplatin].unit",
+    "regimen.drugs[cisplatin].days",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent cisplatin concurrent with radiation for locally advanced primary vaginal squamous cell carcinoma (StewardMD subtype #49; no dedicated vaginal_cancer reference disease exists, so diseaseId is null). The regimen identity and curative concurrent-chemoradiation setting are grounded to Standard Guidelines (NCCN) Vaginal Cancer v2.2026 (VAG-D 1 of 2, Chemoradiation: single-agent Cisplatin, or Carboplatin if cisplatin intolerant; concurrent platinum-based chemoradiation improves outcomes in stage II to IV). However, the cited source does NOT print the cisplatin dose, basis, unit, schedule, or cycle count; therefore cisplatin basis/dosePerUnit/unit/days plus cycleLengthDays and cycles are set to VERIFY and listed in verifyFields, pending a dosing source. No dose was invented or inferred (the weekly cisplatin 40 mg/m2 cervical radiosensitizing schedule is cited only as clinical context for the verifier). Cisplatin requires hydration with nephro-, oto-, and neurotoxicity monitoring. Tall man per ISMP. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

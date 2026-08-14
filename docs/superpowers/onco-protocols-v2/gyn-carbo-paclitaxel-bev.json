@@ -1,0 +1,103 @@
+{
+  "id": "gyn-carbo-paclitaxel-bev",
+  "name": "Carboplatin + Paclitaxel + Bevacizumab (with maintenance Bevacizumab) for Epithelial Ovarian/Fallopian Tube/Primary Peritoneal Cancer (GOG-218)",
+  "disease": "Epithelial ovarian, fallopian tube, and primary peritoneal cancer",
+  "diseaseId": "ovarian_cancer",
+  "histology": "epithelial ovarian carcinoma (histology-agnostic backbone; high-grade serous, endometrioid, clear cell, mucinous, carcinosarcoma). Fallopian tube and primary peritoneal carcinoma are staged and treated as ovarian carcinoma and share this regimen.",
+  "stage": ["II", "III", "IV"],
+  "biomarkers": {
+    "BRCA1_2": "tested",
+    "HRD": "tested",
+    "note": "The cytotoxic carboplatin/paclitaxel backbone is not biomarker restricted. Bevacizumab is an anti-VEGF antibody, not biomarker gated. BRCA1/2 and HRD status are tested to guide maintenance strategy (bevacizumab, a PARP inhibitor, or the olaparib plus bevacizumab combination) after this therapy. Per Standard Guidelines (NCCN), Ovarian Cancer, OV-5 and Principles of Maintenance PARP Inhibitor Therapy (OV-D)."
+  },
+  "treatmentSetting": ["adjuvant", "neoadjuvant", "maintenance"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line primary systemic therapy with concurrent and maintenance bevacizumab",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "epithelial ovarian, fallopian tube, or primary peritoneal carcinoma requiring primary systemic therapy with an anti-angiogenic add-on", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "locator": "v4.2026, OV-D 7 of 12, Carboplatin/Paclitaxel + Bevacizumab (GOG-218)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 175,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 3 hr",
+        "infusionDuration": "3 hr",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D 7 of 12, Carboplatin/Paclitaxel + Bevacizumab (GOG-218) (Paclitaxel 175 mg/m2 IV followed by Carboplatin AUC 6 IV Day 1)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12 (GOG-218). PACLitaxel 175 mg/m2 IV on day 1, before carboplatin, every 21 days for 6 cycles. 3 hr infusion cross referenced to DeVita 12th ed. line 178646. Corticosteroid plus H1/H2 antihistamine premedication per labeling. Tall man per ISMP."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": 6,
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D 7 of 12, Carboplatin/Paclitaxel + Bevacizumab (GOG-218) (Carboplatin AUC 6 IV Day 1)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12 (GOG-218). CARBOplatin target AUC 6 IV on day 1, every 21 days for 6 cycles. Dosed to target AUC (Calvert formula). Tall man per ISMP."
+      },
+      {
+        "id": "bevacizumab",
+        "name": "Bevacizumab",
+        "basis": "mgkg",
+        "dosePerUnit": 15,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D 7 of 12, Carboplatin/Paclitaxel + Bevacizumab (GOG-218) (Starting Day 1 of cycle 2, give Bevacizumab 15 mg/kg IV every 21 Days for up to 22 cycles)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12 (GOG-218). Bevacizumab 15 mg/kg IV, STARTING day 1 of cycle 2, every 21 days for up to 22 cycles (concurrent then maintenance). No dose cap. Source-stated alternative (ICON-7, OV-D 7 of 12): Paclitaxel 175 mg/m2 followed by Carboplatin AUC 5 to 6 IV and Bevacizumab 7.5 mg/kg IV day 1, repeat every 21 days x 5 to 6 cycles, then continue bevacizumab 7.5 mg/kg for up to 12 additional cycles."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "6 cycles of carboplatin/paclitaxel; bevacizumab 15 mg/kg starting cycle 2 day 1 and continued every 21 days for up to 22 cycles total (concurrent plus maintenance) per GOG-218",
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid plus H1 and H2 antihistamine premedication per paclitaxel labeling before each dose." }
+    ],
+    "supportiveCare": [
+      "antiemetics: carboplatin moderate emetic risk; prophylaxis per emetogenicity tier.",
+      "G-CSF: assess febrile neutropenia risk per institutional and NCCN growth factor guidance.",
+      "bevacizumab: manage per anti-VEGF safety - hypertension and proteinuria surveillance, wound-healing and GI-perforation/fistula precautions."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle for carboplatin AUC dosing",
+    "peripheral neuropathy assessment before each cycle for PACLitaxel",
+    "bevacizumab: blood pressure at each visit and urine protein monitoring (proteinuria); watch for bleeding, thromboembolism, and GI perforation or fistula (GOG-240 reported higher grade 2+ hypertension, grade 3+ VTE, and fistula with bevacizumab)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "blood pressure/proteinuria", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "uncontrolled hypertension, grade 3+ proteinuria, GI perforation/fistula, or serious bleeding", "drug": "bevacizumab", "action": "hold/discontinue", "text": "Hold or permanently discontinue bevacizumab per anti-VEGF safety guidance; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita establishes bevacizumab (anti-VEGF) added to platinum/taxane in ovarian cancer (line 179196, bevacizumab 15 mg/kg every 21 days with maintenance); per-cycle GOG-218 dosing taken from the guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "Principles of Systemic Therapy, Primary Systemic Therapy Recommended Dosing, Carboplatin/Paclitaxel + Bevacizumab (GOG-218) and (ICON-7) (OV-D 7 of 12)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for carboplatin/paclitaxel plus bevacizumab (GOG-218) with maintenance bevacizumab for epithelial ovarian carcinoma (StewardMD reference disease ovarian_cancer, subtype #44; shared by HGSOC #45, fallopian tube #46, primary peritoneal #47). All doses grounded to Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12: PACLitaxel 175 mg/m2 IV day 1 plus CARBOplatin target AUC 6 IV day 1 every 21 days for 6 cycles; Bevacizumab 15 mg/kg IV starting cycle 2 day 1, every 21 days for up to 22 cycles. The ICON-7 alternative (bevacizumab 7.5 mg/kg with carboplatin AUC 5 to 6 from day 1, then up to 12 maintenance cycles) is recorded in the bevacizumab notes. Bevacizumab has no dose cap; blood-pressure and proteinuria surveillance and GI-perforation/fistula and bleeding precautions apply. ISMP tall man applied (CARBOplatin, PACLitaxel). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,88 @@
+{
+  "id": "gyn-endometrial-pembro-lenvatinib",
+  "name": "Lenvatinib + Pembrolizumab for Advanced pMMR Endometrial Carcinoma (KEYNOTE-775)",
+  "disease": "Endometrial carcinoma",
+  "diseaseId": "endometrial_cancer",
+  "histology": "endometrial carcinoma, mismatch repair proficient (pMMR)",
+  "stage": ["advanced", "recurrent"],
+  "biomarkers": {
+    "MMR_MSI": "pMMR (mismatch repair proficient / not MSI-H)",
+    "note": "This combination is the biomarker directed option for mismatch repair PROFICIENT (pMMR) advanced or recurrent endometrial carcinoma after prior platinum based therapy (KEYNOTE-775). dMMR/MSI-H disease is instead treated with single agent checkpoint blockade (see gyn-endometrial-io-dmmr). Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, ENDO-D 2 of 6 and ENDO-D 3 of 6 (Lenvatinib + Pembrolizumab, pMMR tumors, category 1)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "biomarker directed therapy for pMMR advanced or recurrent endometrial carcinoma after prior platinum based therapy (including neoadjuvant and adjuvant); second line and subsequent",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "mismatch repair proficient (pMMR)", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "locator": "v3.2026, ENDO-D 2 of 6 (Biomarker-directed therapy, pMMR tumors: Lenvatinib + Pembrolizumab, category 1)" },
+    { "criterion": "priorTherapy", "requirement": "prior platinum based therapy (including neoadjuvant and adjuvant)", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "locator": "v3.2026, ENDO-D 2 of 6" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 233347 (pembrolizumab flat dose of 200 mg every 3 weeks or 400 mg every 6 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 233347. Pembrolizumab flat 200 mg IV every 3 weeks (source stated alternative 400 mg every 6 weeks). Manage immune related adverse events per checkpoint inhibitor toxicity guidance."
+      },
+      {
+        "id": "lenvatinib",
+        "name": "Lenvatinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1],
+        "route": "PO once daily (continuous)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "version": "3.2026", "date": "2026-06-16", "locator": "ENDO-D 2 of 6 and ENDO-D 3 of 6 (Lenvatinib + Pembrolizumab, category 1) - regimen identity only; per drug flat mg not printed on this page", "evidenceStatus": "current" },
+        "notes": "VERIFY: the flat oral daily lenvatinib dose (KEYNOTE-775) is not printed in the licensed core (DeVita 12th ed.) or guideline (NCCN Uterine v3.2026) text available for grounding. NCCN ENDO-D names Lenvatinib + Pembrolizumab as a category 1 pMMR option but does not print the mg. Dose must be verified against the drug label / study protocol before this protocol can leave DRAFT. Given once daily continuously (not cycle bound)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "continue until progression or unacceptable toxicity (pembrolizumab up to the source stated 2 year ceiling); lenvatinib dosed continuously once daily",
+    "premedications": [],
+    "supportiveCare": [
+      "immune related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary, colitis, endocrinopathies).",
+      "lenvatinib specific monitoring: blood pressure (antihypertensive management), proteinuria, thyroid function, and hepatic function."
+    ]
+  },
+  "monitoring": [
+    "blood pressure monitoring for lenvatinib (frequent, especially first cycles)",
+    "urine protein for lenvatinib",
+    "TSH/free T4 for both agents",
+    "LFTs for both agents",
+    "immune related toxicity screen during pembrolizumab"
+  ],
+  "clearanceChecks": ["blood pressure", "renal/proteinuria", "liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune related adverse event guidance; clinical review before rechallenge." },
+    { "condition": "uncontrolled hypertension, significant proteinuria, or other grade 3 or higher lenvatinib toxicity", "drug": "lenvatinib", "action": "hold/reduce", "text": "Hold or reduce lenvatinib per label; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 233347 (pembrolizumab flat 200 mg every 3 weeks); lenvatinib plus pembrolizumab in advanced endometrial cancer referenced at line 33967 (Makker et al.) without a printed mg", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "version": "3.2026", "date": "2026-06-16", "locator": "Systemic Therapy for Endometrial Carcinoma, Biomarker-directed therapy, pMMR tumors: Lenvatinib + Pembrolizumab (ENDO-D 2 of 6 and ENDO-D 3 of 6; category 1)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[1].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lenvatinib plus pembrolizumab (KEYNOTE-775) in mismatch repair proficient (pMMR) advanced or recurrent endometrial carcinoma (StewardMD reference disease endometrial cancer, subtype group #43). The pembrolizumab flat dose (200 mg IV every 3 weeks, source stated alternative 400 mg every 6 weeks) is grounded to DeVita 12th ed. line 233347. The lenvatinib once daily oral flat mg is set to VERIFY: it is not printed in the licensed core (DeVita) or guideline (NCCN Uterine v3.2026 ENDO-D, which names the category 1 pMMR regimen without printing the mg) text available, and must not be invented. Biomarker gate (pMMR) and category 1 status are per NCCN Uterine v3.2026 ENDO-D 2 of 6 and 3 of 6. verifyFields records the unresolved lenvatinib dose, which blocks status ACTIVE. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

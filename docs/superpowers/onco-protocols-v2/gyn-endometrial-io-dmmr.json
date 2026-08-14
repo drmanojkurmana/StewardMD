@@ -1,0 +1,83 @@
+{
+  "id": "gyn-endometrial-io-dmmr",
+  "name": "Single-Agent Checkpoint Inhibitor (Dostarlimab or Pembrolizumab) for dMMR/MSI-H Endometrial Carcinoma",
+  "disease": "Endometrial carcinoma",
+  "diseaseId": "endometrial_cancer",
+  "histology": "endometrial carcinoma, mismatch repair deficient (dMMR) or microsatellite instability high (MSI-H)",
+  "stage": ["advanced", "recurrent"],
+  "biomarkers": {
+    "MMR_MSI": "dMMR or MSI-H (required)",
+    "note": "Single agent PD-1 checkpoint blockade (dostarlimab or pembrolizumab) is the biomarker directed option for mismatch repair DEFICIENT (dMMR) or microsatellite instability high (MSI-H) advanced or recurrent endometrial carcinoma. pMMR disease is instead treated with lenvatinib plus pembrolizumab (see gyn-endometrial-pembro-lenvatinib). Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, ENDO-D 2 of 6 and ENDO-D 3 of 6 (MSI-H/dMMR tumors: Pembrolizumab; Dostarlimab-gxly). DeVita 12th ed. lines 175357 to 175375 establish that in MSI-H or dMMR advanced endometrial cancer the PD-1 inhibitors dostarlimab and pembrolizumab have activity."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "biomarker directed single agent immunotherapy for dMMR/MSI-H advanced or recurrent endometrial carcinoma; option after prior therapy",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "mismatch repair deficient (dMMR) or MSI-H", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "locator": "v3.2026, ENDO-D 2 of 6 and ENDO-D 3 of 6 (MSI-H/dMMR tumors: Pembrolizumab; Dostarlimab-gxly)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 233347 (pembrolizumab flat dose of 200 mg every 3 weeks or 400 mg every 6 weeks); dMMR/MSI-H endometrial activity lines 175357 to 175375", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 233347. Pembrolizumab flat 200 mg IV every 3 weeks (source stated alternative 400 mg every 6 weeks), given up to the source stated 2 year ceiling. Single agent option for dMMR/MSI-H disease. Manage immune related adverse events per checkpoint inhibitor toxicity guidance."
+      },
+      {
+        "id": "dostarlimab",
+        "name": "Dostarlimab-gxly",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "version": "3.2026", "date": "2026-06-16", "locator": "ENDO-D 2 of 6 and ENDO-D 3 of 6 (MSI-H/dMMR tumors: Dostarlimab-gxly) - regimen identity only; per drug flat mg and schedule not printed on this page", "evidenceStatus": "current" },
+        "notes": "VERIFY: dostarlimab is a category equivalent single agent option for dMMR/MSI-H disease per NCCN Uterine v3.2026 ENDO-D, and DeVita 12th ed. (lines 175357 to 175375) confirms its activity in dMMR/MSI-H endometrial cancer, but neither licensed source prints the per dose flat mg or the induction/maintenance schedule (commonly a fixed dose every 3 weeks then every 6 weeks). basis, dosePerUnit, and unit are VERIFY and must be resolved from the drug label / study protocol before this protocol leaves DRAFT. Do not invent."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "continue until progression or unacceptable toxicity; pembrolizumab up to the source stated 2 year ceiling. Pembrolizumab and dostarlimab are alternative single agents; only one is given per patient.",
+    "premedications": [],
+    "supportiveCare": [
+      "immune related adverse event monitoring for either checkpoint inhibitor (thyroid, hepatic, pulmonary, colitis, endocrinopathies)."
+    ]
+  },
+  "monitoring": [
+    "TSH/free T4 during therapy",
+    "LFTs during therapy",
+    "immune related toxicity screen (endocrine, GI, pulmonary) at each visit"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "checkpoint inhibitor", "action": "hold/steroids", "text": "Hold the checkpoint inhibitor and manage with corticosteroids per immune related adverse event guidance; clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 175357 to 175375 (PD-1 inhibitors dostarlimab and pembrolizumab active in MSI-H/dMMR advanced endometrial cancer); line 233347 (pembrolizumab flat 200 mg every 3 weeks)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "version": "3.2026", "date": "2026-06-16", "locator": "Systemic Therapy for Endometrial Carcinoma, Biomarker-directed therapy, MSI-H/dMMR tumors: Pembrolizumab; Dostarlimab-gxly (ENDO-D 2 of 6 and ENDO-D 3 of 6)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single agent PD-1 checkpoint blockade (dostarlimab or pembrolizumab) in mismatch repair deficient (dMMR) or MSI-H advanced or recurrent endometrial carcinoma (StewardMD reference disease endometrial cancer, subtype group #43). The pembrolizumab flat dose (200 mg IV every 3 weeks, source stated alternative 400 mg every 6 weeks) is grounded to DeVita 12th ed. line 233347; DeVita lines 175357 to 175375 establish PD-1 inhibitor activity in dMMR/MSI-H endometrial cancer. The dostarlimab per dose flat mg and schedule are set to VERIFY: neither the licensed core (DeVita) nor the guideline (NCCN Uterine v3.2026 ENDO-D, which names dostarlimab without printing the mg) establishes them, and they must not be invented. Biomarker gate (dMMR/MSI-H) is per NCCN Uterine v3.2026 ENDO-D 2 of 6 and 3 of 6. Pembrolizumab and dostarlimab are alternative single agents. verifyFields records the unresolved dostarlimab dose fields, which block status ACTIVE. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
