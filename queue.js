@@ -138,14 +138,33 @@
     var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
       (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
-      (state.ghisToken ? '<button class="q-iconbtn" data-q-act="logout" title="Sign out of GHIS">' + ms("logout") + "</button>" : "") +
-      '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div></div></div></header>";
+      // Avatar is the doctor-profile entry (sign-out lives inside it now, so the top bar stays uncluttered).
+      (state.ghisToken
+        ? '<button class="q-avatar q-avatar-btn" data-q-act="profile" title="Doctor profile" aria-label="Doctor profile">' + esc(initials(doctorName)) + "</button>"
+        : '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div>") +
+      "</div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
-    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + "</div>";
+    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
+  // Doctor profile sheet — opened from the header avatar. Identity + status + switch clinic + sign out.
+  function renderProfile(state, doctorName, dept) {
+    var s = state.session || {};
+    var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
+    return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop">' +
+      '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + esc(initials(doctorName)) + "</div>" +
+      '<div class="q-profile-id"><b>' + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
+      (state.ghisUser ? '<div class="q-profile-row">' + ms("badge") + "<span>GHIS ID</span><b>" + esc(state.ghisUser) + "</b></div>" : "") +
+      '<div class="q-profile-row">' + ms("stethoscope") + "<span>Status</span><b>" + esc(status) + "</b></div>" +
+      '<div class="q-profile-acts">' +
+        '<button class="q-pbtn" data-q-act="switch">' + ms("swap_horiz") + "Switch clinic / hospital</button>" +
+        (state.ghisToken ? '<button class="q-pbtn danger" data-q-act="logout">' + ms("logout") + "Sign out of GHIS</button>" : "") +
+      "</div>" +
+      '<button class="q-pbtn ghost" data-q-act="profile-close">Close</button>' +
+      "</div></div>";
+  }
 
   // ---- Analytics view (Stitch queue_analytics port) ---------------------------------------
   function peakChart(peak) {
@@ -346,7 +365,10 @@
     if (cmd === "close") { close(); return; }
     if (cmd === "clearsearch") { st.search = ""; paint(); return; }
     if (cmd === "chooser") { root().innerHTML = _chooseType(); return; }                // back to Hospital / Personal clinic
-    if (cmd === "switch") { clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace
+    if (cmd === "profile") { st.profileOpen = true; paint(); return; }
+    if (cmd === "profile-close") { st.profileOpen = false; paint(); return; }
+    if (cmd === "profile-stop") return;   // click inside the profile card: do nothing (don't close)
+    if (cmd === "switch") { clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
@@ -648,7 +670,7 @@
   function doLogout() {
     clearInterval(st.pollId);
     var tok = st.ghisToken;
-    st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = ""; st.demo = false; st.session = null; st.tickets = []; st.pollN = 0;
+    st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = ""; st.demo = false; st.session = null; st.tickets = []; st.pollN = 0; st.profileOpen = false;
     try { G.GHIS && G.GHIS.setToken && G.GHIS.setToken(""); } catch (e) {}   // universal session: signing out here signs out everywhere
     if (tok) { try { fetch("/api/ghis/logout", { method: "POST", headers: { "Authorization": "Bearer " + tok }, credentials: "include" }).catch(function () {}); } catch (e) {} }
     open(st.openOpts);   // ghisToken now null -> the GHIS login gate shows again

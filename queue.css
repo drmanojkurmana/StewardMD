@@ -42,10 +42,35 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-wordmark { color: var(--on-surface); }
 #smdQueue .q-wordmark span { color: var(--primary); }
 #smdQueue .q-top-r { display: flex; align-items: center; gap: 14px; }
-#smdQueue .q-online { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; background: var(--sc-high); border: 1px solid var(--outline-variant); border-radius: 999px; font: 700 12px var(--q-sans); color: var(--on-surface-variant); cursor: pointer; }
-#smdQueue .q-online .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
-#smdQueue .q-iconbtn { border: none; background: none; color: var(--secondary); padding: 8px; border-radius: 50%; cursor: pointer; }
-#smdQueue .q-iconbtn:hover { background: var(--sc-high); }
+#smdQueue .q-top-r { gap: 10px; }
+#smdQueue .q-online { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; background: var(--sc-high); border: 1px solid var(--outline-variant); border-radius: 999px; font: 700 13px var(--q-sans); color: var(--on-surface-variant); cursor: pointer; }
+#smdQueue .q-online .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--primary); }
+/* bigger, comfortable tap targets in the top bar (were 8px-padding minis) */
+#smdQueue .q-iconbtn { border: 1px solid var(--outline-variant); background: var(--sc-lowest); color: var(--secondary); width: 44px; height: 44px; padding: 0; border-radius: 50%; cursor: pointer; display: inline-grid; place-items: center; transition: background .15s var(--smd-ease, ease), color .15s ease; }
+#smdQueue .q-iconbtn .material-symbols-outlined { font-size: 24px; }
+#smdQueue .q-iconbtn:hover { background: var(--sc-high); color: var(--primary); }
+#smdQueue .q-iconbtn:active { transform: scale(.94); }
+/* avatar is now a tappable profile entry */
+#smdQueue .q-avatar-btn { border: 2px solid transparent; cursor: pointer; transition: border-color .15s ease, transform .1s ease; padding: 0; font: 700 14px var(--q-sans); }
+#smdQueue .q-avatar-btn:hover { border-color: var(--primary); }
+#smdQueue .q-avatar-btn:active { transform: scale(.94); }
+/* doctor profile sheet */
+#smdQueue .q-sheet { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(20,32,43,.45); backdrop-filter: blur(2px); animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+#smdQueue .q-profile { width: 100%; max-width: 380px; box-sizing: border-box; background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 22px; box-shadow: 0 20px 60px rgba(20,32,43,.25); animation: smdSheetUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-profile-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+#smdQueue .q-avatar-lg { width: 60px; height: 60px; font-size: 22px; }
+#smdQueue .q-profile-id b { display: block; font: 800 18px var(--q-sans); color: var(--on-surface); }
+#smdQueue .q-profile-id span { font: 600 13px var(--q-sans); color: var(--secondary); }
+#smdQueue .q-profile-row { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-top: 1px solid var(--sc-low); font: 500 14px var(--q-sans); color: var(--on-surface); }
+#smdQueue .q-profile-row .material-symbols-outlined { font-size: 20px; color: var(--secondary); }
+#smdQueue .q-profile-row span { color: var(--secondary); }
+#smdQueue .q-profile-row b { margin-left: auto; font-weight: 700; }
+#smdQueue .q-profile-acts { display: flex; flex-direction: column; gap: 9px; margin: 16px 0 9px; }
+#smdQueue .q-pbtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 13px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); color: var(--on-surface); font: 700 14px var(--q-sans); cursor: pointer; }
+#smdQueue .q-pbtn .material-symbols-outlined { font-size: 20px; }
+#smdQueue .q-pbtn.danger { border-color: color-mix(in srgb, var(--error) 40%, transparent); color: var(--error); }
+#smdQueue .q-pbtn.ghost { border: none; color: var(--secondary); }
+#smdQueue .q-pbtn:active { transform: scale(.98); }
 
 #smdQueue .q-canvas { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px; display: flex; flex-direction: column; gap: 24px; max-width: 1440px; margin: 0 auto; width: 100%; }
 

@@ -27,15 +27,29 @@
     if (pos && !neg) return true;
     return null;   // ambiguous -> LLM
   }
+  // Duration on-device: English digits/number-words (via SMD_VVITALS) + romanized Telugu/Hindi number +
+  // unit words. Returns "N days/weeks/months" or "" (-> LLM). Cheap; cuts the most common LLM turn.
+  var NUMWORD = { oka: 1, okati: 1, ek: 1, rendu: 2, do: 2, moodu: 3, mudu: 3, teen: 3, naalugu: 4, nalugu: 4, char: 4, chaar: 4,
+    aidu: 5, ayidu: 5, paanch: 5, panch: 5, aaru: 6, aru: 6, che: 6, chhe: 6, edu: 7, saat: 7, enimidi: 8, aath: 8, tommidi: 9, nau: 9, padi: 10, das: 10 };
+  var UNITWORD = [["day", /\b(days?|roju\w*|din\w*)\b/], ["week", /\b(weeks?|vaar\w*|var\w*|haft\w*)\b/], ["month", /\b(months?|nela\w*|mahin\w*)\b/], ["hour", /\b(hours?|gant\w*)\b/], ["year", /\b(years?|samvats\w*|saal\w*|sanvats\w*)\b/]];
+  function durationFromText(t) {
+    var num = (root && root.SMD_VVITALS && root.SMD_VVITALS.wordsToNumbers) ? root.SMD_VVITALS.wordsToNumbers(t) : t;
+    var low = " " + String(num).toLowerCase() + " ";
+    var n = null, m = low.match(/(\d+)/);
+    if (m) n = parseInt(m[1], 10);
+    else { for (var w in NUMWORD) { if (new RegExp("\\b" + w + "\\b").test(low)) { n = NUMWORD[w]; break; } } }
+    if (n == null) return "";
+    for (var i = 0; i < UNITWORD.length; i++) if (UNITWORD[i][1].test(low)) return n + " " + UNITWORD[i][0] + (n === 1 ? "" : "s");
+    return "";
+  }
   // Returns [{field,value,confidence}] for the common cases (duration, yes/no symptoms, cue words); [] -> LLM.
   function deterministicAnswer(transcript, target) {
     var t = String(transcript == null ? "" : transcript);
     if (!target || !t.trim()) return [];
-    // duration: "3 days" / "three days" (number-words via SMD_VVITALS) etc.
+    // duration: "3 days" / "three days" / Telugu "moodu rojulu" / Hindi "do din" — all on-device (no LLM).
     if (target.field === "duration" || /duration/i.test(target.emr || "")) {
-      var num = (root && root.SMD_VVITALS && root.SMD_VVITALS.wordsToNumbers) ? root.SMD_VVITALS.wordsToNumbers(t) : t;
-      var m = String(num).toLowerCase().match(/(\d+)\s*(hours?|days?|weeks?|months?|years?)/);
-      if (m) return [{ field: target.field, value: m[1] + " " + m[2], confidence: 0.85 }];
+      var d = durationFromText(t);
+      if (d) return [{ field: target.field, value: d, confidence: 0.85 }];
     }
     // yes/no nature: associated symptoms + red flags
     if (target.kind === "associated" || target.kind === "redflag") {
@@ -58,7 +72,9 @@
   // than to miss it because it didn't say the word "yes".
   function isNegated(value) {
     var v = " " + String(value == null ? "" : value).toLowerCase() + " ";
-    return /\b(absent|no|none|negative|denies|denied|nil|not|never|without|ledu|led|nahi|nahin|illa|kaadu|kadu)\b/.test(v);
+    // Unambiguous denials only. Deliberately NOT "normal"/"fine" — those can co-occur with a positive
+    // ("neck is fine but severe weakness") and must never suppress a red-flag alert (sensitivity wins).
+    return /\b(absent|no|nope|none|nothing|negative|denies|denied|nil|not|never|without|ledu|led|nahi|nahin|illa|kaadu|kadu)\b/.test(v);
   }
   function positiveRedFlag(target, findings) {
     if (!target || target.kind !== "redflag") return null;
@@ -95,7 +111,7 @@
     var onState = deps.onState || function () {};
     var allowed = allowedFieldNames(PW, pathway);
 
-    var running = true, paused = false, asked = 0, clarifies = 0;
+    var running = true, paused = false, asked = 0, clarifies = 0, attempts = {};
     var summary = { asked: 0, findings: [], stoppedReason: "" };
     var resolveOuter;
     var promise = new Promise(function (res) { resolveOuter = res; });
@@ -103,6 +119,23 @@
     function finish(reason) { if (!running) return; running = false; summary.stoppedReason = reason; onState("done", reason); resolveOuter(summary); }
     function waitIfPaused() { return new Promise(function (res) { (function tick() { if (!paused || !running) return res(); setTimeout(tick, 120); })(); }); }
 
+    // Prefetch: while the patient answers question N, generate question N+1 in the background so it is
+    // ready instantly. Keyed by field; an unused prefetch (if the answer changes the next target) is just
+    // a discarded promise. generateNextQuestion never rejects (validates + falls back), so a stored
+    // prefetch is always a safe, valid question — it can never surface a wrong or unvalidated question.
+    var prefetched = {};
+    function buildCtx(t) {
+      return { complaint: deps.complaint || pathway.label, pathwayLabel: pathway.label, targetField: t.field,
+        targetHint: t.ask, known: known, allowedFields: allowed, language: language, pathway: pathway };
+    }
+    function getQuestion(t) {
+      if (prefetched[t.field]) { var p = prefetched[t.field]; delete prefetched[t.field]; return p; }
+      return provider.generateNextQuestion(buildCtx(t));
+    }
+    function prefetchNext(assumedKnown) {
+      if (!running) return;
+      try { var t2 = PW.nextTarget(pathway, assumedKnown); if (t2 && !prefetched[t2.field]) prefetched[t2.field] = provider.generateNextQuestion(buildCtx(t2)); } catch (e) {}
+    }
     function step() {
       if (!running) return;
       waitIfPaused().then(function () {
@@ -111,11 +144,7 @@
         var target = PW.nextTarget(pathway, known);
         if (!target) return finish("complete");
 
-        var ctx = { complaint: deps.complaint || pathway.label, pathwayLabel: pathway.label,
-          targetField: target.field, targetHint: target.ask, known: known, allowedFields: allowed,
-          language: language, pathway: pathway };
-
-        provider.generateNextQuestion(ctx).then(function (q) {
+        getQuestion(target).then(function (q) {
           if (!running) return;
           if (q.action === "finish") return finish("provider-finish");
           if (q.action === "alert_doctor") { onRedFlag({ field: target.field, ask: target.ask, reason: q.reason }); return finish("alert-doctor"); }
@@ -124,6 +153,10 @@
           return speak(q.question, q.language || language).then(function () {
             if (!running) return;
             onState("listening", target.field);
+            // Overlap the next question's LLM round-trip with the patient's answer + ASR (assume the
+            // current target gets answered) so the next question is ready instantly.
+            var assumed = {}; for (var ak in known) assumed[ak] = known[ak]; assumed[target.field] = "__pending__";
+            prefetchNext(assumed);
             return listen();
           }).then(function (transcript) {
             if (!running) return;
@@ -144,10 +177,16 @@
               });
               var rf = positiveRedFlag(target, findings);
               if (rf) { onRedFlag(rf); return finish("red-flag"); }
+              // The patient answered but nothing resolved THIS target (irrelevant answer / extraction miss).
+              // Re-ask at most twice, then mark it unclear and MOVE ON — never loop forever on one field.
+              if (!(target.field in known)) {
+                attempts[target.field] = (attempts[target.field] || 0) + 1;
+                if (attempts[target.field] >= 2) { known[target.field] = "__unclear__"; onState("unclear", target.field); }
+              }
               return step();
             };
             if (det.length) return applyFindings(det);          // deterministic-first (no LLM call)
-            return provider.extractPatientAnswer({ complaint: ctx.complaint, targetField: target.field, targetHint: target.ask,
+            return provider.extractPatientAnswer({ complaint: deps.complaint || pathway.label, targetField: target.field, targetHint: target.ask,
               targetKind: target.kind, allowedFields: allowed, question: q.question, pathway: pathway }, transcript)
               .then(function (r) { return applyFindings((r && r.findings) || []); });
           });
@@ -312,6 +351,7 @@
     _deterministicAnswer: deterministicAnswer,
     _isPositive: isPositive,
     _positiveRedFlag: positiveRedFlag,
+    _durationFromText: durationFromText,
     _renderConfirm: renderConfirm,
     _renderCard: renderCard,
     _renderReview: renderReview,

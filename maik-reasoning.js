@@ -137,6 +137,24 @@
   // Call a provider method inside a promise so a SYNCHRONOUS throw becomes a catchable rejection.
   function call(fn) { return Promise.resolve().then(fn); }
 
+  // Question cache (localStorage): the wording of "ask about <field> in <language>" is stable, so cache
+  // validated ask/clarify questions per pathway+field+language. A hit returns INSTANTLY (0 LLM) — the
+  // main latency + cost win for a busy clinic (2nd+ patient with the same complaint/language). Bounded.
+  var QCACHE_KEY = "smd_maik_qcache", QCACHE_MAX = 120;
+  function qKey(ctx) { return ((ctx.pathway && ctx.pathway.id) || "") + "|" + (ctx.targetField || "") + "|" + (ctx.language || ""); }
+  function qCacheGet(ctx) {
+    try { var m = JSON.parse((root && root.localStorage && localStorage.getItem(QCACHE_KEY)) || "{}"); var v = m[qKey(ctx)]; return (v && v.question) ? v : null; } catch (e) { return null; }
+  }
+  function qCacheSet(ctx, q) {
+    if (!(q && (q.action === "ask" || q.action === "clarify") && q.question)) return;
+    try {
+      var m = JSON.parse((root.localStorage.getItem(QCACHE_KEY)) || "{}");
+      var keys = Object.keys(m); if (keys.length >= QCACHE_MAX) delete m[keys[0]];   // simple FIFO trim
+      m[qKey(ctx)] = { action: "ask", question: q.question, language: q.language, targetField: q.targetField, priority: q.priority, reason: "cached" };
+      root.localStorage.setItem(QCACHE_KEY, JSON.stringify(m));
+    } catch (e) {}
+  }
+
   var API = {
     _version: "phaseA",
     setProvider: function (p) { if (p && typeof p.next === "function" && typeof p.extract === "function") _provider = p; },
@@ -146,11 +164,14 @@
     // Validate -> retry once (constrained) -> fall back to the predefined pathway question. Never rejects.
     generateNextQuestion: function (ctx) {
       ctx = ctx || {};
+      var hit = qCacheGet(ctx); if (hit) return Promise.resolve(hit);   // instant, no LLM
       return call(function () { return _provider.next(ctx); }).then(function (raw) {
         var v = validateNextQuestion(raw, ctx.pathway);
-        if (v) return v;
+        if (v) { qCacheSet(ctx, v); return v; }
         return call(function () { return _provider.next(ctx, { constrained: true }); }).then(function (raw2) {
-          return validateNextQuestion(raw2, ctx.pathway) || fallbackQuestion(ctx);
+          var v2 = validateNextQuestion(raw2, ctx.pathway);
+          if (v2) { qCacheSet(ctx, v2); return v2; }
+          return fallbackQuestion(ctx);
         });
       }).catch(function () { return fallbackQuestion(ctx); });
     },
