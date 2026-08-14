@@ -22,7 +22,7 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["onco", "Oncology", "vaccines"]];
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -532,7 +532,17 @@
     var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
       '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
       saveBtn + "</div>";
-    return consultBar(st) + maikAskBtn(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+  }
+  // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
+  // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
+  // (Phase 4). Once a plan is staged (st.oncoDraft), this slot shows the review/override panel
+  // instead. Gated the same way the rest of the write UI is gated (flag + st.writeOn); delegates the
+  // actual markup to onco-protocols.js (window.SMD_ONCOUI) so opd-emr.js stays the shell.
+  function oncoApplyOrReviewPanel(st) {
+    if (!oncoFlagOn() || !st.writeOn) return "";
+    if (st.oncoDraft) return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildReviewPanel) ? G.SMD_ONCOUI._buildReviewPanel(st.oncoDraft) : "";
+    return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildApplyPanel) ? G.SMD_ONCOUI._buildApplyPanel(st.oncoProtocols || []) : "";
   }
   // "Let MaiK Ask" — optional AI-guided history taking (flag smd_maik_ask). Shown only when the feature
   // is on AND a complaint is documented (MaiK needs to know what to ask about). Delegates to SMD_MAIKASK.
@@ -550,6 +560,49 @@
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
+  // Oncology tab (flag smd_onco_protocols, default OFF): the Tata-style drug x cycle dose matrix
+  // (doctor view, READ-ONLY over st.oncoPlan) or, once toggled, the Phase 5 nurse execution view
+  // ("Today's Chemotherapy", READ-ONLY over st.oncoPlan + st.oncoCycle - it never calculates a dose).
+  // Delegates markup to onco-protocols.js / onco-nurse.js so opd-emr.js stays the shell; inert (not
+  // enabled / no plan) never crashes.
+  function oncoTab(st) {
+    if (!oncoFlagOn()) return section("vaccines", "Oncology", "", "", "Oncology protocols are not enabled for this account.");
+    var plan = st.oncoPlan;
+    if (!plan) return section("vaccines", "Oncology", "", "", "No active treatment plan for this patient yet.");
+    var toggle = oncoViewToggle(st);
+    var body;
+    if (st.oncoView === "nurse") {
+      var cycle = st.oncoCycle;
+      body = cycle
+        ? ((G.SMD_ONCONURSE && G.SMD_ONCONURSE.buildNurseView) ? G.SMD_ONCONURSE.buildNurseView(plan, cycle) : '<div class="oe-empty sm">Nurse view unavailable.</div>')
+        : '<div class="oe-empty sm">No cycle ready for administration yet.</div>';
+    } else {
+      body = (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : '<div class="oe-empty sm">Oncology module unavailable.</div>';
+      body += oncoCyclePanelHtml(st);   // doctor-only: create cycle / pre-chemo clearance / confirm to ready
+      body += oncoPrintButtonHtml();    // Phase 6: 2-page Protocol PDF, built from this same plan/cycle
+    }
+    return section("vaccines", "Oncology", (plan.protocolId || "").toUpperCase(), toggle + body, "");
+  }
+  // Doctor-only per-cycle control panel (create/clearance/confirm), gated the same way the rest of
+  // the write UI is gated (flag + smd_opd_emr_write) - a read-only doctor session sees only the
+  // matrix, never these actions. Delegates markup to onco-protocols.js so opd-emr.js stays the shell.
+  function oncoCyclePanelHtml(st) {
+    if (!oncoFlagOn() || !st.writeOn) return "";
+    return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildCyclePanel) ? G.SMD_ONCOUI._buildCyclePanel(st.oncoPlan, st.oncoCycle, st.oncoClearanceDraft) : "";
+  }
+  // Phase 6: Print/PDF action, doctor view only. Read-only (no fetch, no write) so it is gated by the
+  // module flag alone, not st.writeOn - a read-only doctor session can still print what is on screen.
+  function oncoPrintButtonHtml() {
+    return '<button class="oe-btn ghost oe-onco-print" data-oe-act="onco-print">' + ms("picture_as_pdf") + "Print / PDF</button>";
+  }
+  // Doctor/Nurse toggle for the Oncology tab (st.oncoView "doctor" | "nurse", default doctor). Purely
+  // a local view switch - no fetch, mirrors the other data-oe-act toggles in this file.
+  function oncoViewToggle(st) {
+    var nurse = st.oncoView === "nurse";
+    return '<div class="oe-onco-viewtoggle">' +
+      '<button class="oe-btn ghost' + (nurse ? "" : " on") + '" data-oe-act="onco-view:doctor">' + ms("person") + "Doctor</button>" +
+      '<button class="oe-btn ghost' + (nurse ? " on" : "") + '" data-oe-act="onco-view:nurse">' + ms("healing") + "Nurse</button></div>";
+  }
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
     if (st.loading) body = loadingBox();
@@ -559,19 +612,23 @@
       if (active === "inv") body = head + invTab(st);
       else if (active === "meds") body = head + medsTab(st);
       else if (active === "assess") body = head + assessTab(st);
+      else if (active === "onco") body = head + oncoTab(st);
       else body = head + profileTab(st);
     }
     var app = '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
-    return (st.report && st.report.open) ? app + reportView(st.report) : app;   // report drawer overlays the workspace
+    if (st.report && st.report.open) return app + reportView(st.report);   // report drawer overlays the workspace
+    if (st.doseDrawer) return app + ((G.SMD_ONCOUI && G.SMD_ONCOUI.doseDrawerView) ? G.SMD_ONCOUI.doseDrawerView(st.doseDrawer) : "");   // dose drawer, cloned from the report-drawer pattern
+    return app;
   }
 
   // ---- overlay + controller ----------------------------------------------------------------
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
   function writeFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr_write")); } catch (e) { return false; } }
+  function oncoFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protocols")); } catch (e) { return false; } }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "" }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
@@ -610,7 +667,20 @@
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
-    if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; }
+    if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; return; }
+    // Oncology override staging (Phase 4): silent, no repaint (mirrors the assess: fields above) so
+    // typing a dose/reason never loses focus. Nothing is recorded into st.oncoDraft.overrides until
+    // the doctor taps "Save override" (oncoSaveOverride), which requires the reason to be non-empty.
+    if (inp.indexOf("onco-ov-val:") === 0) { var dv = inp.slice(12); st.oncoOverrideDraft = st.oncoOverrideDraft || {}; st.oncoOverrideDraft[dv] = st.oncoOverrideDraft[dv] || {}; st.oncoOverrideDraft[dv].val = val; return; }
+    if (inp.indexOf("onco-ov-reason:") === 0) { var dr = inp.slice(15); st.oncoOverrideDraft = st.oncoOverrideDraft || {}; st.oncoOverrideDraft[dr] = st.oncoOverrideDraft[dr] || {}; st.oncoOverrideDraft[dr].reason = val; return; }
+    // Nurse administration staging (Phase 5): keyed by the SAME "<cycleId>:<drugId>" string the
+    // [Start] button's data-oe-act carries, so oncoStart() reads it back with zero re-parsing.
+    // Silent (no repaint) - same reason as the override inputs above.
+    if (inp.indexOf("onco-admin-dose:") === 0) { var adk = inp.slice(16); st.oncoAdminDraft = st.oncoAdminDraft || {}; st.oncoAdminDraft[adk] = st.oncoAdminDraft[adk] || {}; st.oncoAdminDraft[adk].dose = val; return; }
+    if (inp.indexOf("onco-admin-reaction:") === 0) { var ark = inp.slice(20); st.oncoAdminDraft = st.oncoAdminDraft || {}; st.oncoAdminDraft[ark] = st.oncoAdminDraft[ark] || {}; st.oncoAdminDraft[ark].reaction = val; return; }
+    // Doctor pre-chemo clearance staging (Phase 5 gap-fix): the overall status <select>; silent
+    // (no repaint) like every other draft field above - the [Resolve clearance] tap is what submits it.
+    if (inp === "onco-clr-status") { st.oncoClearanceDraft = st.oncoClearanceDraft || {}; st.oncoClearanceDraft.status = val; return; }
   }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
@@ -659,6 +729,19 @@
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "consult-er") return consultToER();
+    if (cmd === "onco-cell") return oncoCellClick(arg);
+    if (cmd === "onco-drawer-close") { st.doseDrawer = null; paint(); return; }
+    if (cmd === "onco-apply") return oncoApply(arg);
+    if (cmd === "onco-override") return oncoSaveOverride(arg);
+    if (cmd === "onco-create") return oncoCreateAndActivate();
+    if (cmd === "onco-view") { st.oncoView = arg; paint(); return; }
+    if (cmd === "onco-start") return oncoStart(arg);
+    if (cmd === "onco-complete") return oncoComplete(arg);
+    if (cmd === "onco-cycle-create") return oncoCreateCycle(+arg);
+    if (cmd === "onco-clr-toggle") { st.oncoClearanceDraft = st.oncoClearanceDraft || {}; st.oncoClearanceDraft.checks = st.oncoClearanceDraft.checks || {}; st.oncoClearanceDraft.checks[arg] = !st.oncoClearanceDraft.checks[arg]; paint(); return; }
+    if (cmd === "onco-clr-resolve") return oncoResolveClearance(arg);
+    if (cmd === "onco-cycle-confirm") return oncoConfirmCycleReady(arg);
+    if (cmd === "onco-print") return oncoPrintProtocol();
     if (cmd === "ivx") { var xi = +arg, xn = (st.dictatedInv || [])[xi]; if (xn != null) { st.dictatedInv.splice(xi, 1); stripPlanLine(xn); paint(); } return; }
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
     if (cmd === "notes-copy") return copyNotes();
@@ -697,7 +780,291 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess" && !st.assessLoaded) loadAssessment(); }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
+
+  // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
+  // write. drugId may itself contain ":" so re-join everything after the cycle number.
+  function oncoCellClick(arg) {
+    var parts = String(arg || "").split(":"), cycleNo = +parts[0], drugId = parts.slice(1).join(":");
+    var plan = st.oncoPlan || {}, tmpl = plan.lockedTemplate || {};
+    var drug = (tmpl.drugs || []).filter(function (d) { return d && d.id === drugId; })[0] || null;
+    var doses = (plan.confirmedDoses && plan.confirmedDoses.length) ? plan.confirmedDoses : (plan.calculatedDoses || []);
+    var lineage = doses.filter(function (d) { return d && d.drugId === drugId; })[0] || null;
+    st.doseDrawer = { cycleNo: cycleNo, drugId: drugId, drug: drug, lineage: lineage };
+    paint();
+  }
+
+  // ---- Phase 4: apply protocol, review + override, create & activate (suggest-and-confirm) --------
+  // Resilient manifest+template fetch, ONCE per profile open: offer nothing on any failure (never a
+  // half-loaded protocol list). Static repo JSON, same trust tier as kb/treatments - no auth header.
+  function maybeLoadOncoProtocols() {
+    if (!oncoFlagOn() || !st.writeOn || st.oncoProtocolsLoaded) return;
+    st.oncoProtocolsLoaded = true;
+    fetch("/kb/protocols/index.json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (manifest) {
+        var list = (manifest && (manifest.protocols || manifest)) || [];
+        var active = list.filter(function (p) { return p && p.lifecycleState === "active"; });
+        return Promise.all(active.map(function (p) {
+          return fetch("/kb/protocols/" + encodeURIComponent(p.id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+        }));
+      })
+      .then(function (templates) {
+        st.oncoProtocols = (templates || []).filter(function (t) { return t && t.lifecycleState === "active"; });   // re-filter defensively
+        paint();
+      })
+      .catch(function () { st.oncoProtocols = []; paint(); });
+  }
+  // Apply an ACTIVE protocol: snapshot params from the EMR already in state (Height/Weight -> BSA;
+  // age/creatinine not yet captured on this form - never-invent, the dose engine warns instead of
+  // guessing), compute the lineage, and STAGE it. Purely local - no fetch, no write.
+  function oncoApply(protocolId) {
+    var proto = (st.oncoProtocols || []).filter(function (p) { return p && p.id === protocolId && p.lifecycleState === "active"; })[0];
+    if (!proto) return;   // defensive - only active protocols are ever offered
+    var v = st.assessVals || {};
+    var height = parseFloat(v.Height), weight = parseFloat(v.Weight);
+    var params = {
+      height: (isFinite(height) && height > 0) ? height : null,
+      weight: (isFinite(weight) && weight > 0) ? weight : null,
+      age: null, sex: null, creatinine: null
+    };
+    if (G.SMD_ONCODOSE && params.height && params.weight) params.bsa = G.SMD_ONCODOSE.bsaMosteller(params.height, params.weight);
+    var calculatedDoses = (G.SMD_ONCODOSE && G.SMD_ONCODOSE.planDoses) ? G.SMD_ONCODOSE.planDoses(proto, params) : [];
+    st.oncoDraft = { protocolId: proto.id, template: proto, params: params, intent: (proto.intentOptions && proto.intentOptions[0]) || "", calculatedDoses: calculatedDoses, overrides: [] };
+    st.oncoOverrideDraft = {};
+    paint();
+  }
+  // Save a typed override for one drug line. Override-needs-reason is enforced by SMD_ONCOUI._stageOverride
+  // (mirrors the server's _recordOverride) - a reasonless save is rejected and toasted, never staged.
+  function oncoSaveOverride(drugId) {
+    var draft = st.oncoDraft; if (!draft) return;
+    var pending = (st.oncoOverrideDraft && st.oncoOverrideDraft[drugId]) || {};
+    var existing = (draft.overrides || []).filter(function (o) { return o && o.drugId === drugId; })[0];
+    var lin = (draft.calculatedDoses || []).filter(function (d) { return d && d.drugId === drugId; })[0] || {};
+    var was = existing ? existing.was : lin.final;
+    var nowVal = null;
+    if (pending.val != null && pending.val !== "") { var n = Number(pending.val); if (isFinite(n)) nowVal = n; }
+    var next = (G.SMD_ONCOUI && G.SMD_ONCOUI._stageOverride) ? G.SMD_ONCOUI._stageOverride(draft.overrides, { drugId: drugId, was: was, now: nowVal, reason: pending.reason }) : null;
+    if (!next) { toast("A reason is required to override this dose."); return; }
+    draft.overrides = next;
+    paint();
+  }
+  // Firebase-authed POST to the onco routes (functions/api/queue/[[path]].js resolveActor) - NOT the
+  // GHIS proxy postWrite() targets; the onco routes authenticate the doctor via their StewardMD
+  // Firebase session (same token addToTimeline() already uses), never GHIS.
+  function oncoPost(path, body) {
+    return fbTok().then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/onco" + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body) });
+    }).then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }, function () { return { status: r.status, ok: r.ok, d: {} }; }); });
+  }
+  // Firebase-authed GET to the onco routes (mirrors oncoPost's auth, no body). Read-side counterpart
+  // that lets a NURSE session (no EMR_TREAT) actually fetch a cycle - the gap this phase closes.
+  function oncoGet(path) {
+    return fbTok().then(function (t) {
+      var h = {}; if (t) h.Authorization = "Bearer " + t;
+      return fetch(qBase() + "/api/queue/onco" + path, { method: "GET", headers: h, credentials: "include" });
+    }).then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }, function () { return { status: r.status, ok: r.ok, d: {} }; }); });
+  }
+  // Real nurse/doctor read (GAP-1 fix): fetch one cycle + its append-only admin records over
+  // GET /onco/cycle. The test/Phase-5 injection seam (opts.oncoCycle in openProfile, below) stays
+  // untouched for existing tests; this is the path a session with NO local memory of the cycle (a
+  // fresh device/reload - the real-world nurse case) must use instead. adminRecords is folded onto
+  // administrationSequence so onco-nurse.js's giveList/adminTable (unchanged, still pure) read ground
+  // truth exactly like they already do for a locally-appended record.
+  function loadOncoCycle(cycleId) {
+    if (!cycleId) return;
+    oncoGet("/cycle?cycleId=" + encodeURIComponent(cycleId)).then(function (res) {
+      if (!res.ok || res.d.ok === false || !res.d.cycle) return;
+      var cyc = res.d.cycle;
+      cyc.administrationSequence = res.d.adminRecords || cyc.administrationSequence || [];
+      st.oncoCycle = cyc;
+      // Never clobber an already-loaded FULL plan (it carries lockedTemplate.drugs the give-list
+      // needs) - only seed a minimal stand-in when nothing else populated st.oncoPlan at all.
+      if (!st.oncoPlan && res.d.plan) {
+        st.oncoPlan = { protocolId: res.d.plan.protocolId, ghisPatientId: res.d.plan.ghisPatientId, intent: res.d.plan.intent,
+          confirmedDoses: cyc.confirmedDoses || [],
+          // the fetched nurse-safe template carries drug names/routes/days + premeds so the give-list
+          // renders on a fresh nurse device (it has NO dose formulas); fall back to the header only.
+          lockedTemplate: res.d.plan.lockedTemplate || { name: res.d.plan.name, cycleLengthDays: res.d.plan.cycleLengthDays } };
+      }
+      paint();
+    }).catch(function () {});
+  }
+  // The ONLY place that writes a treatment plan. One confirm() gate covers the whole create-then-
+  // activate sequence; nothing is posted before the tap, and on tap exactly these two calls fire, in
+  // order: create the plan (draft), then confirm it (draft -> active) with any staged overrides.
+  function oncoCreateAndActivate() {
+    var draft = st.oncoDraft; if (!draft) return;
+    if ((draft.overrides || []).some(function (o) { return !o || !String(o.reason || "").trim(); })) return;   // defensive; button is already disabled here
+    if (!confirmed("Create and activate this treatment plan for the patient?")) return;
+    var body = { hospitalId: st.hospitalId || "", ghisPatientId: st.patient.mrn || "", protocolId: draft.protocolId, intent: draft.intent || "", patientParams: draft.params || {} };
+    oncoPost("/plan", body).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.plan) { toast("Could not create the treatment plan. Please try again."); return; }
+      var planId = res.d.plan.planId;
+      return oncoPost("/plan/confirm", { planId: planId, overrides: draft.overrides || [] }).then(function (res2) {
+        if (!res2.ok || res2.d.ok === false) { toast("Plan created but could not confirm. Please retry the confirm."); return; }
+        st.oncoDraft = null; st.oncoOverrideDraft = {}; st.oncoPlan = res2.d.plan || res.d.plan;
+        toast("Treatment plan created and activated.");
+        paint();
+      });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase 5: nurse execution - start a drug (record administration), complete the cycle ---------
+  // Staged confirm: the actual-dose/reaction inputs are staged silently (setField, above) into
+  // st.oncoAdminDraft keyed by the SAME "<cycleId>:<drugId>" string the [Start] button carries; the
+  // tap itself is the ONE confirm() gate, then exactly one POST to /onco/admin fires. No dose is ever
+  // computed here - `actual` is whatever the nurse typed (or null), never derived from the plan.
+  function oncoStart(arg) {
+    var i = String(arg || "").indexOf(":"), cycleId = i < 0 ? arg : arg.slice(0, i), drugId = i < 0 ? "" : arg.slice(i + 1);
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    var draft = (st.oncoAdminDraft && st.oncoAdminDraft[arg]) || {};
+    var actual = null;
+    if (draft.dose != null && draft.dose !== "") { var n = Number(draft.dose); if (isFinite(n)) actual = n; }
+    if (!confirmed("Record this dose as given?")) return;
+    var now = Date.now();
+    oncoPost("/admin", { cycleId: cycleId, planId: st.oncoPlan && st.oncoPlan.planId, drugId: drugId,
+      actual: actual, administered: true, startTime: now, endTime: now, reaction: draft.reaction || "" })
+      .then(function (res) {
+        if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+        if (!res.ok || res.d.ok === false || !res.d.admin) { toast("Could not record the administration. Please try again."); return; }
+        cycle.administrationSequence = (cycle.administrationSequence || []).concat([res.d.admin]);
+        if (st.oncoAdminDraft) delete st.oncoAdminDraft[arg];
+        toast("Administration recorded.");
+        paint();
+      }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  // [Complete cycle]: one confirm() gate, then exactly one POST to /onco/cycle/complete
+  // (administering -> done, guarded server-side by _canTransition).
+  function oncoComplete(cycleId) {
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    if (!confirmed("Complete this chemotherapy cycle?")) return;
+    oncoPost("/cycle/complete", { cycleId: cycleId }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.cycle) { toast("Could not complete the cycle. Please try again."); return; }
+      st.oncoCycle = res.d.cycle;
+      toast("Cycle completed.");
+      paint();
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase 5 gap-fix: DOCTOR cycle management (create / pre-chemo clearance / confirm to ready).
+  // Every write here is one confirm() gate then exactly one POST, mirroring oncoCreateAndActivate/
+  // oncoStart/oncoComplete above. Doctor-only (server-gated CAPS.EMR_TREAT) - the nurse view never
+  // renders this panel (oncoCyclePanelHtml is only called from the doctor branch of oncoTab).
+  function oncoCreateCycle(cycleNo) {
+    var plan = st.oncoPlan; if (!plan || !cycleNo) return;
+    if (!confirmed("Create cycle " + cycleNo + " for this treatment plan?")) return;
+    oncoPost("/cycle", { planId: plan.planId, cycleNo: cycleNo }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.cycle) { toast("Could not create the cycle. Please try again."); return; }
+      st.oncoCycle = res.d.cycle;
+      st.oncoClearanceDraft = {};
+      toast("Cycle " + cycleNo + " created.");
+      paint();
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  // [Resolve clearance]: sends the doctor's per-check attestation (toggled "on" -> "ok", untouched ->
+  // "not_reviewed") + the chosen overall status. `by` is deliberately NOT sent - the server always
+  // derives it from the authenticated actor (functions/api/queue/[[path]].js), never a client value.
+  function oncoResolveClearance(cycleId) {
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    var draft = st.oncoClearanceDraft || {};
+    var status = draft.status || "";
+    if (!status) { toast("Select a clearance status first."); return; }
+    var tmpl = (st.oncoPlan && st.oncoPlan.lockedTemplate) || {};
+    var names = tmpl.clearanceChecks || [];
+    var checks = names.map(function (name) { return { name: name, status: (draft.checks && draft.checks[name]) ? "ok" : "not_reviewed" }; });
+    if (!confirmed('Resolve pre-chemo clearance as "' + status + '"?')) return;
+    oncoPost("/cycle/clearance", { cycleId: cycleId, checks: checks, status: status }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.cycle) { toast("Could not resolve clearance. Please try again."); return; }
+      st.oncoCycle = res.d.cycle;
+      toast("Clearance resolved: " + status + ".");
+      paint();
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+  // [Confirm cycle to ready]: belt-and-suspenders - the button itself is already disabled (see
+  // onco-protocols.js _buildCyclePanel) unless cycle.clearance.status === "cleared"; this guard is a
+  // second, independent check on the SAME state, never a way around the server's real gate
+  // (confirmCycle throws clearance_not_resolved regardless of what the client sends).
+  function oncoConfirmCycleReady(cycleId) {
+    var cycle = st.oncoCycle; if (!cycle || cycle.cycleId !== cycleId) return;
+    if (!cycle.clearance || cycle.clearance.status !== "cleared") return;
+    if (!confirmed("Confirm this cycle as ready for administration?")) return;
+    oncoPost("/cycle/confirm", { cycleId: cycleId }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.cycle) { toast("Could not confirm the cycle. Please try again."); return; }
+      st.oncoCycle = res.d.cycle;
+      toast("Cycle confirmed and ready for administration.");
+      paint();
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase 6: Protocol PDF (reuses the ThoreX print pipeline unchanged) --------------------------
+  // Built PURELY from what is already in state (st.oncoPlan / st.oncoCycle - the exact same objects
+  // the matrix and nurse view already read); no fetch, no write. onco-protocol-report.js reads every
+  // dose off the plan/cycle itself (single source of truth, never recomputed here).
+  function oncoPrintProtocol() {
+    var plan = st.oncoPlan; if (!plan) return;
+    var R = G.SMD_ONCOREPORT;
+    if (!R || !R.buildProtocolSheet) { toast("Print is not available on this build."); return; }
+    var html = R.buildProtocolSheet(plan, {
+      cycle: st.oncoCycle,
+      patientName: (st.patient && st.patient.name) || "",
+      diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "",
+    });
+    oncoExportHtmlDoc(html, "StewardMD-" + (plan.protocolId || "protocol") + "-" + (plan.planId || ""));
+  }
+  // Fallback: share the HTML document as a file (older builds without the native PDF renderer).
+  // Copied from thorex-screens.js's nativeShareHtml (same Filesystem/Share dance, oncology strings).
+  function oncoShareHtml(html, filename) {
+    try {
+      var P = G.Capacitor && G.Capacitor.Plugins;
+      if (P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+        var name = filename + ".html";
+        P.Filesystem.writeFile({ path: name, data: html, directory: "CACHE", encoding: "utf8" })
+          .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
+          .then(function (r) { return P.Share.share({ title: "StewardMD - Protocol sheet", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
+          .catch(function () { toast("Export unavailable on this device."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Export not available on this device.");
+  }
+  // Write the finished HTML document out. Native -> render a REAL PDF (VisionOcr.htmlToPdf) and share
+  // it; fall back to sharing the HTML file if the native renderer is not present. Web -> hidden-iframe
+  // print (the browser print dialog offers "Save as PDF"). Copied verbatim (~15 lines) from
+  // thorex-screens.js's exportHtmlDoc - the ~15-line dual-path pipeline the plan called for reusing.
+  // The native path is device-only (per the iOS build gotcha); this file only wires it, never tests it.
+  function oncoExportHtmlDoc(html, filename) {
+    var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
+    if (G.SMD_IS_NATIVE) {
+      var N = G.SMD_NATIVE;
+      if (N && N.sharePdfFromHtml) {
+        toast("Building PDF...");
+        N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        return;
+      }
+      oncoShareHtml(html, name);
+      return;
+    }
+    try {
+      var ifr = document.createElement("iframe");
+      ifr.setAttribute("aria-hidden", "true");
+      ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+      document.body.appendChild(ifr);
+      var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+      setTimeout(function () {
+        try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {}
+        setTimeout(function () { try { ifr.remove(); } catch (e) {} }, 1500);
+      }, 350);
+      return;
+    } catch (e) {}
+    toast("Export not available on this device.");
+  }
 
   // ---- report detail: tap a lab/radiology row -> fetch + show the actual result (GHIS lab-detail / radiology-report) ----
   function openReport(kind, arg) {
@@ -1474,11 +1841,18 @@
     _localStore = (st.source === "local") ? (opts.localStore || null) : null;
     st.emrLabel = opts.emrLabel || (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"));
     st.writeOn = (st.source === "local" || st.noStore) ? true : writeFlagOn();   // local save is always allowed (on-device, no server gate)
+    st.hospitalId = opts.hospitalId || opts.orgId || "";
+    if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
+    if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)
+    if (opts.oncoView) st.oncoView = opts.oncoView;            // test/Phase-5 seam: open directly on the nurse view
     if (opts.tab) st.tab = opts.tab;                          // open directly on a tab (e.g. "assess")
     if (st.noStore) { st.loading = false; st.tab = "assess"; st.assessLoaded = true; st.assessVals = {}; paint(); return; }   // blank form for Ask MaiK; skip GHIS/local load
     paint();
     loadProfile(opts);
-    if (opts.tab === "assess") loadAssessment();              // jump straight to the Initial Assessment
+    if (opts.tab === "assess") { loadAssessment(); maybeLoadOncoProtocols(); }   // jump straight to the GHIS Initial Assessment (+ offer active oncology protocols)
+    // Real nurse/doctor session (GAP-1 fix): no injected oncoCycle object - fetch it for real over
+    // GET /onco/cycle instead of leaving the Oncology tab permanently empty for anyone but a test.
+    if (!opts.oncoCycle && opts.oncoCycleId) loadOncoCycle(opts.oncoCycleId);
   }
   var _localStore = null;   // personal-clinic backend (getConsult/saveConsult), set when source === "local"
   // ---- per-field dictation (fill ONLY the tapped column) ---------------------------------------
@@ -1561,6 +1935,9 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  // Thin delegate so tests/callers can reach the matrix builder off OPDEMR without reaching into
+  // window.SMD_ONCOUI directly (onco-protocols.js owns the real, pure implementation).
+  function _buildOncoMatrixDelegate(plan) { return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : ""; }
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
 })();

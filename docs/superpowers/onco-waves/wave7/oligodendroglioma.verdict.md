@@ -1,0 +1,9 @@
+# Adversarial Re-verification: oligodendroglioma.md (wave7) — round 2
+
+1. DOSE LEAK: none. Independent re-grep for mg/m2/AUC/Gy/cycle counts found zero hits; only non-dose numerals (grades 2/3, 1p/19q, IDH1/2, "one year" seizure endpoint, "50-70%"/"roughly half to two-thirds" response paraphrase, "12th ed").
+
+2. UNGROUNDED / MISLABELLED CLAIMS: none remaining. The two "new nodular enhancement = marker of higher-grade transformation" statements (Monitoring line 32, When-to-refer line 37) now both carry the "(general oncology standard, not from DeVita's section on this disease)" tag. Independently re-grepped DeVita's oligodendroglioma chapter section (lines ~240073-240400) plus a whole-doc search for "nodular enhancement" — it does not appear there (only two unrelated hits elsewhere in the book, neither in the oligodendroglioma section), confirming the relabel is correct and not a cover for a still-live mis-attribution. All other specific claims (molecular definition, grade 2/3 with no grade 4, CDKN2A/B homozygous loss + incomplete resection + large size + midline crossing as adverse features, RTOG 9402-type "roughly twice as long" survival with chemoRT vs RT alone in codeleted disease, CODEL interim-analysis chemo-alone-worse signal, no level-1 support for chemo-alone, PFS doubling with adjuvant therapy, EORTC early-vs-deferred RT PFS-benefit/no-OS-difference + better 1-yr seizure control, no benefit from dose escalation beyond standard fractionation, 50-70%/44% recurrent chemo and TMZ response rates, no sequence-dependent efficacy + TMZ lower cumulative myelosuppression rationale, IDH1-inhibitor/vaccine work framed as investigational) trace cleanly to the DeVita passage and are not mis-attributed.
+
+3. CITATION: present (line 44) — "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." — name only, no page numbers.
+
+4. VERDICT: CLEAN (ready for R1 re-review).

@@ -1,0 +1,13 @@
+# Adversarial re-verification (round 3) — splenic_marginal_zone_lymphoma.md
+
+1. DOSE LEAK: none. Grepped every digit in the file — only list numbers (1.-5. "Lines of therapy," a care sequence not a schedule), "5-year" (no stat attached), antigen names ("CD20," "CD19"), "PI3K," and "12th ed." No mg / mg-m2 / mg-kg / AUC / cGy / Gy figures and no percentage response/survival statistics anywhere. The prior "150 cGy x3/week" RT schedule and the 85%/58%/77%/95%/92%/73% splenectomy/rituximab figures remain correctly stripped to qualitative language.
+
+2. UNGROUNDED / MISLABELLED CLAIMS: none remaining.
+   - Round-2 finding (backwards label on the renal-tolerance sentence) is fixed: the incorrect "(general oncology standard, not from DeVita's section on this disease...)" tag on the radiotherapy/renal-tolerance sentence has been removed. Re-checked against DeVita ch.67 SMZL Therapy paragraph — "The total dose must remain under renal tolerance because the left kidney is almost always in the field" is indeed DeVita's own disease-specific SMZL text (dose number correctly stripped), so removing the mislabel was the right fix; the sentence now rides under the end-of-document citation like the file's other grounded disease-specific content.
+   - Re-verified everything else against DeVita's SMZL Therapy paragraph directly: HCV association + HCV-treatment-induced regression, observation-vs-treatment triggers, splenectomy outcome characterization, single-agent rituximab response + induction/maintenance outcome, and relapse options (retreatment anti-CD20, alkylating agents, purine analogs + anti-CD20, ibrutinib) all match the source with numbers appropriately stripped to qualitative language.
+   - Broader-MZL paragraph (BTKi class activity, PI3K-pathway inhibition, CD19 CAR-T in later lines) remains correctly grounded in the same chapter's Nodal MZL Treatment subsection and correctly labelled as extrapolation, not SMZL-specific — no misattribution to the SMZL section.
+   - Transformation-monitoring red-flag triad and referral-trigger sentences remain correctly labelled "(general oncology standard, not from DeVita's section on this disease...)" since DeVita's SMZL passage does not spell these out — these two labels were never the issue and are still appropriately applied.
+
+3. CITATION: present — "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." Name + edition only, no page numbers.
+
+4. VERDICT: CLEAN — ready for R1 re-review. The single round-2 labeling-direction issue has been correctly resolved with a minimal, surgical edit (label removed, no content changed); no fabrication, no dose leak, no remaining mislabels found on this pass.

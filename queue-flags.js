@@ -20,7 +20,17 @@
     smd_opd_queue_patient: { type: "bool", def: true, query: "qpatient", desc: "Patient live tracking page" },
     smd_opd_queue_import: { type: "bool", def: true, query: "qimport", desc: "GHIS/EMR roster auto-import" },
     smd_opd_emr: { type: "bool", def: true, query: "qemr", desc: "Read-only OPD patient profile + reports (P1)" },
-    smd_opd_emr_write: { type: "bool", def: true, query: "qemrwrite", desc: "OPD write-back submit buttons (assessment + investigation orders live w/ QUEUE_EMR_WRITE; prescribe server-blocked). PUBLIC-RELEASE-GATE" }
+    smd_opd_emr_write: { type: "bool", def: true, query: "qemrwrite", desc: "OPD write-back submit buttons (assessment + investigation orders live w/ QUEUE_EMR_WRITE; prescribe server-blocked). PUBLIC-RELEASE-GATE" },
+    smd_onco_protocols: { type: "bool", def: false, query: "qonco", desc: "Oncology treatment-plan engine (Protocol/Plan/Cycle/Administration). Writes double-gated by server QUEUE_ONCO_WRITE. PUBLIC-RELEASE-GATE" },
+    smd_onco_home: { type: "bool", def: false, query: "qoncohome", desc: "Onco Home reference workbench (P0): global search + tool grid over MEDCALC/KB/drugs. Read-only, no writes." },
+    smd_onco_staging: { type: "bool", def: false, query: "qoncostaging", desc: "AJCC/TNM staging engine (P1): versioned schema + version toggle. Seeded sites carry only a flagged generic TNM scaffold (R1-pending); other sites show an honest content gap. No proprietary AJCC tables. Read-only." },
+    smd_onco_tallman: { type: "bool", def: false, query: "qoncotallman", desc: "Tall-man lettering (P1) for oncology drug names in the Onco drug view (ISMP List of Confused Drug Names). Display-only." },
+    smd_onco_drugview: { type: "bool", def: false, query: "qoncodrugs", desc: "Onco drug + interaction view (P1): oncology-filtered list over MEDDRUGS + interaction checker, tall-man applied. Read-only, reuses the existing drug DB." },
+    smd_onco_protoref: { type: "bool", def: false, query: "qoncoproto", desc: "Protocol reference library (P1): read-only browse of kb/protocols/index.json with lifecycle badges. Not for ordering/administration." },
+    smd_onco_ctcae: { type: "bool", def: false, query: "qoncoctcae", desc: "CTCAE grading engine (P2): versioned reader over kb/onco/ctcae/catalog.json. Curated NCI CTCAE v5.0 adverse-event grades, each R1-flagged; v4.03 + un-seeded AEs are honest gaps. Fail-closed fabrication auditor. Read-only." },
+    smd_onco_iotox: { type: "bool", def: false, query: "qoncoiotox", desc: "IO toxicity (irAE) reference (P2): grade-based management PRINCIPLES by organ, grounded in ASCO/NCCN/SITC (cited by name). No doses/thresholds (fail-closed on numerals). Read-only." },
+    smd_onco_recist: { type: "bool", def: false, query: "qoncorecist", desc: "RECIST 1.1 response calculator (P2): real target-lesion sum -> percent change -> CR/PR/SD/PD with nadir + new-lesion handling. Reference calculation only. Read-only." },
+    smd_onco_favorites: { type: "bool", def: false, query: "qoncofav", desc: "Onco Home Favorites + Recent (P2): localStorage-backed star/recent list across Onco Home. Pure UX, no clinical content, private-mode safe." }
   };
 
   function raw(key) {

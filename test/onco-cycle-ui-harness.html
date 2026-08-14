@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oncology cycle-management CDP harness (Phase 5 gap-fix: nurse read + doctor clearance/confirm)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };   // smd_onco_protocols + smd_opd_emr_write on
+window.confirm = function () { return true; };   // auto-confirm every confirm() dialog
+
+// The Node test script drives this stub by writing into window.__STUB.* between steps (mirrors the
+// GET-cycle-response indirection run-onco-nurse-ui.mjs already uses for window.__FIXTURE_CYCLE).
+window.__STUB = { createdCycle: null, getCycleResponse: null };
+
+// Record EVERY fetch call (method + url + parsed body) so the CDP test can assert exact request
+// counts/bodies - same shape the other onco CDP harnesses use.
+window.__fetchCalls = [];
+window.fetch = function (url, opts) {
+  opts = opts || {};
+  var method = opts.method || "GET";
+  var body = null; try { body = opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__fetchCalls.push({ method: method, url: String(url), body: body });
+  url = String(url);
+
+  if (url.indexOf("/profile") >= 0) {
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  }
+  // Nurse-read GET (checked before the generic POST .../onco/cycle branch below - different method).
+  if (method === "GET" && url.indexOf("/api/queue/onco/cycle?") >= 0) {
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(window.__STUB.getCycleResponse || { ok: false }); } });
+  }
+  // Order matters: check the longer /clearance and /confirm suffixes BEFORE the bare .../onco/cycle
+  // create route, since all three share the "/api/queue/onco/cycle" prefix.
+  if (method === "POST" && url.indexOf("/api/queue/onco/cycle/clearance") >= 0) {
+    var resolved = Object.assign({}, window.__STUB.createdCycle, { clearance: { status: body.status, checks: body.checks, resolvedBy: "dr-cdp", resolvedAt: Date.now() } });
+    window.__STUB.createdCycle = resolved;
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, cycle: resolved }); } });
+  }
+  if (method === "POST" && url.indexOf("/api/queue/onco/cycle/confirm") >= 0) {
+    var ready = Object.assign({}, window.__STUB.createdCycle, { state: "ready" });
+    window.__STUB.createdCycle = ready;
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, cycle: ready }); } });
+  }
+  if (method === "POST" && /\/api\/queue\/onco\/cycle$/.test(url)) {
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, cycle: window.__STUB.createdCycle }); } });
+  }
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-dose.js, onco-protocols.js, onco-nurse.js, then opd-emr.js. -->
+<script src="/onco-dose.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/onco-nurse.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_ONCOUI && window.SMD_ONCONURSE && window.SMD_ONCODOSE);"></script>
+</body></html>

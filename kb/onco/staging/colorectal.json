@@ -1,0 +1,121 @@
+{
+  "site": "colorectal",
+  "name": "Colon and rectum",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "AJCC 8th",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "provenance": "Generic UICC/AJCC TNM conceptual framework used as a scaffold only. Colon/rectum-specific T, N and M criteria (depth of invasion through bowel wall layers, regional node counts) and the full anatomic stage grouping are NOT included here and require the licensed AJCC 8th Edition manual plus R1 clinical verification before use.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Primary tumour, lowest size/extent category (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour with direct extension / highest local category (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node involvement, lowest category (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Increasing regional lymph node involvement (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Highest regional lymph node category (site-specific criteria pending licensed AJCC data)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis present",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Carcinoma in situ, node-negative, no metastasis is Stage 0 (universal TNM convention).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Small primary tumour, node-negative, no metastasis maps to Stage I in the conceptual TNM framework (exact site-specific boundary pending licensed AJCC data).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any",
+          "n": "any",
+          "m": "M1",
+          "basis": "Any distant metastasis (M1) is Stage IV (universal TNM convention).",
+          "requiresR1Verification": true
+        }
+      ],
+      "partial": true,
+      "gapNote": "Intermediate stage groups (II and III and their sub-stages) are site-specific and are NOT included. They require licensed AJCC 8th Edition data plus R1 sign-off."
+    },
+    {
+      "version": "AJCC 7th",
+      "seeded": false
+    }
+  ]
+}

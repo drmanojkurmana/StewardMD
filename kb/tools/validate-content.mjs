@@ -112,6 +112,7 @@ const S = {
   reference: loadJson(join(KB, 'schema/reference.schema.json')),
   treatment: loadJson(join(KB, 'schema/treatment.schema.json')),
   policy: loadJson(join(KB, 'schema/policy-overlay.schema.json')),
+  protocol: loadJson(join(KB, 'schema/protocol.schema.json')),
 };
 
 // ---- gather ids for referential-integrity checks ---------------------------
@@ -129,7 +130,10 @@ const DOSE_RE = /(\b\d+(\.\d+)?\s?(mg|mcg|µg|units?|iu)\/kg\b)|(\b\d+(\.\d+)?\s
 const report = { total: 0, files: 0, errors: 0, byDir: {} };
 
 function run(dir, schema, extra) {
-  const files = listJson(join(KB, dir));
+  // index.json (e.g. kb/protocols/index.json, Phase 4) is a MANIFEST listing entries, not an entry
+  // itself, so it never validates against the item schema — same reason listJson never re-validates
+  // this file's own directory listing.
+  const files = listJson(join(KB, dir)).filter((f) => f !== 'index.json');
   report.byDir[dir] = { files: files.length, errors: 0 };
   for (const f of files) {
     report.files++;
@@ -199,6 +203,9 @@ const FORMULARY_TABLE = {
 }
 
 run('policies', S.policy);
+
+// Oncology protocol templates (reusable regimens; snapshotted into treatment plans).
+run('protocols', S.protocol);
 
 // ---- summary ----------------------------------------------------------------
 if (!QUIET) {

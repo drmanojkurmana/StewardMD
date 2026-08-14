@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oncology matrix + dose-drawer harness (Phase 3, read-only)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };   // smd_onco_protocols (+ smd_opd_emr) on
+// Record EVERY fetch call so the CDP test can assert zero network on a cell click (read-only drawer).
+window.__fetchCalls = [];
+window.fetch = function (url) {
+  window.__fetchCalls.push(String(url));
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-protocols.js before opd-emr.js so window.SMD_ONCOUI is
+     present the first time the Oncology tab renders. -->
+<script src="/onco-protocols.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_ONCOUI && window.SMD_ONCOUI._buildOncoMatrix)"></script>
+</body></html>

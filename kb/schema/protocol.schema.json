@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stewardmd/kb/protocol.schema.json",
+  "title": "StewardMD Oncology Protocol Template (reusable regimen)",
+  "description": "A reusable chemotherapy protocol template. NOT patient-specific. A Patient Treatment Plan snapshots this whole object verbatim (version lock by snapshot). Doses are decision-support: every computed value is clinician-confirmed and no value is auto-ordered. Citations are by name only, no page numbers, original synthesis.",
+  "type": "object",
+  "additionalProperties": true,
+  "comment": "additionalProperties:true because a template carries an additive display layer (premedications, supportiveCare, monitoring, doseModificationRules NOTES). The invariant core below is enforced.",
+  "required": ["id", "name", "version", "lifecycleState", "cycleLengthDays", "cycles", "caps", "source", "drugs"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+    "diseaseId": { "type": "string", "description": "Back-pointer to the KB disease id this regimen treats (e.g. dlbcl)." },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "lifecycleState": { "type": "string", "enum": ["draft", "clinical_review", "approved", "active", "superseded", "retired"], "description": "Only 'active' templates may be selected for new treatment plans." },
+    "intentOptions": { "type": "array", "items": { "type": "string" } },
+    "cycleLengthDays": { "type": "integer", "minimum": 1 },
+    "cycles": { "type": "integer", "minimum": 1 },
+    "caps": { "type": "string", "enum": ["none", "protocol", "drug", "institutional"], "description": "Where dose caps come from. There is NO universal hidden cap; caps are read from drug/protocol data." },
+    "source": {
+      "type": "object", "additionalProperties": true, "required": ["nccn", "textbook"],
+      "properties": {
+        "nccn": { "type": "string", "description": "NCCN panel + version, name only." },
+        "textbook": { "type": "string", "description": "Licensed textbook title, name only, no page numbers." }
+      }
+    },
+    "institution": { "type": "object", "additionalProperties": true, "description": "Provenance chain: reference regimen -> institutional review -> approved variant. 'approval' null for reference regimens." },
+    "premedications": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "supportiveCare": { "type": "array", "items": { "type": "string" } },
+    "monitoring": { "type": "array", "items": { "type": "string" } },
+    "clearanceChecks": { "type": "array", "items": { "type": "string" } },
+    "doseModificationRules": {
+      "type": "array",
+      "description": "NOTES ONLY in v1: rendered verbatim in the dose/clearance drawer, never parsed or auto-applied. The engine flags, the clinician decides.",
+      "items": { "type": "object", "additionalProperties": true }
+    },
+    "drugs": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": true,
+        "required": ["id", "name", "basis", "dosePerUnit", "unit", "route", "days"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "basis": { "type": "string", "enum": ["bsa", "auc", "mgkg", "flat"], "description": "bsa=per m2 (Mosteller); auc=Calvert; mgkg=per kg; flat=absolute." },
+          "dosePerUnit": { "type": "number", "minimum": 0 },
+          "unit": { "type": "string" },
+          "route": { "type": "string" },
+          "days": { "type": "array", "items": { "type": "integer" } },
+          "caps": { "type": "object", "additionalProperties": true, "description": "perDose (absolute cap, e.g. vincristine 2 mg) and/or cumulativeLifetime (e.g. doxorubicin). Absent = no cap." },
+          "roundingRule": { "type": "object", "additionalProperties": true, "description": "{ increment: <mg> } or null." },
+          "modificationRules": { "type": "array" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

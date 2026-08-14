@@ -1,0 +1,14 @@
+{
+  "_note": "AJCC/TNM staging site index for the StewardMD onco-staging engine (Phase 8 P1). SCAFFOLD sites carry ONLY the generic UICC/AJCC TNM conceptual framework (T/N/M nomenclature + the three universally-true stage-group rows), every value flagged requiresR1Verification. NO proprietary AJCC staging tables are reproduced anywhere. GAP sites carry no file and render the honest content-gap placeholder. Do not flip requiresR1Verification off, and do not add site-specific size/node criteria, without R1 clinical sign-off + a licensed AJCC data source.",
+  "schemaVersion": "1.0",
+  "gapMessage": "Staging content pending licensed AJCC data + R1 sign-off",
+  "sites": [
+    { "id": "breast", "name": "Breast", "system": "Oncology / Breast", "file": "breast.json", "status": "scaffold" },
+    { "id": "colorectal", "name": "Colon and rectum", "system": "Oncology / Gastrointestinal", "file": "colorectal.json", "status": "scaffold" },
+    { "id": "lung", "name": "Lung", "system": "Oncology / Thoracic", "file": "lung.json", "status": "scaffold" },
+    { "id": "prostate", "name": "Prostate", "system": "Oncology / Genitourinary", "status": "gap" },
+    { "id": "melanoma", "name": "Melanoma of skin", "system": "Oncology / Cutaneous", "status": "gap" },
+    { "id": "gastric", "name": "Stomach", "system": "Oncology / Gastrointestinal", "status": "gap" },
+    { "id": "kidney", "name": "Kidney (renal cell)", "system": "Oncology / Genitourinary", "status": "gap" }
+  ]
+}
