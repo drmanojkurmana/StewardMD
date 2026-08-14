@@ -1,0 +1,143 @@
+{
+  "id": "gi-net-captem",
+  "diseaseId": "gastrointestinal_neuroendocrine_tumors",
+  "name": "CAPTEM (Capecitabine + Temozolomide) - pancreatic/GI NET",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "differentiation": "well-differentiated NET",
+    "primarySite": "capecitabine/temozolomide (and temozolomide) may have more activity in tumors arising in the pancreas than in GI NET",
+    "note": "Capecitabine plus temozolomide (CAPTEM) is a preferred cytotoxic option for advanced well-differentiated NET, with the strongest data in pancreatic NET (ECOG-ACRIN E2211 improved median PFS from 14.4 to 22.7 months versus temozolomide alone). Per Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors, and DeVita 12th ed. Table 57.4."
+  },
+  "stage": [
+    "locally advanced/unresectable",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "well-differentiated neuroendocrine tumor (predominantly pancreatic primary)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Temozolomide is moderately emetogenic; give antiemetic prophylaxis on temozolomide days."
+    }
+  ],
+  "supportiveCare": [
+    "Repeat every 28 days; continue until progression or intolerance.",
+    "Fluoropyrimidine (capecitabine) DPYD testing per FDA boxed warning before starting.",
+    "Consider Pneumocystis prophylaxis with prolonged temozolomide-associated lymphopenia."
+  ],
+  "monitoring": [
+    "CBC before each cycle (temozolomide thrombocytopenia/lymphopenia)",
+    "liver and renal function",
+    "hand-foot syndrome and diarrhea assessment (capecitabine)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "DPYD status (fluoropyrimidine)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 thrombocytopenia or neutropenia",
+      "drug": "temozolomide",
+      "action": "hold/reduce",
+      "text": "Hold and reduce temozolomide per labeling; obtain clinical review."
+    },
+    {
+      "condition": "known DPYD deficiency",
+      "drug": "capecitabine",
+      "action": "reduce/avoid",
+      "text": "Reduce dose or avoid capecitabine in DPYD-deficient patients per FDA boxed warning; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 750,
+      "unit": "mg/m2",
+      "route": "PO twice daily",
+      "notes": "Source: DeVita 12th ed. Table 57.4 (line 207935; ECOG-ACRIN E2211, Kunz et al). Capecitabine 750 mg/m2 PO twice daily on days 1 to 14 of a 28-day cycle. DPYD: FDA boxed warning recommends testing for DPYD genetic variants before starting a fluoropyrimidine (capecitabine); dose-reduce or avoid in DPYD-deficient patients. No ISMP tall-man form.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 207935 (Temozolomide and capecitabine 28-day cycle, ref 82 Kunz/E2211: Capecitabine 750 mg/m2 PO twice daily on days 1 to 14)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 150
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    },
+    {
+      "id": "temozolomide",
+      "name": "Temozolomide",
+      "basis": "bsa",
+      "dosePerUnit": 200,
+      "unit": "mg/m2",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. Table 57.4 (line 207936; ECOG-ACRIN E2211). Temozolomide 200 mg/m2 PO once daily on days 10 to 14 of a 28-day cycle (overlapping the last 5 days of capecitabine, the sequence tested in E2211). No ISMP tall-man form. Monitor CBC (myelosuppression, especially thrombocytopenia).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 207936 (Temozolomide 200 mg/m2 PO daily on days 10 to 14; 28-day cycle, ref 82 Kunz/E2211)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "gyn-olaparib-maint",
+  "diseaseId": "ovarian_cancer",
+  "name": "Olaparib Maintenance (BRCA-mutated Epithelial Ovarian/Fallopian Tube/Primary Peritoneal Cancer)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 1,
+  "cycles": 2,
+  "cyclesNote": "continuous twice-daily dosing; up to 2 years post-primary maintenance unless disease progression or unacceptable toxicity (may continue beyond 2 years if not in CR); until progression or unacceptable toxicity in the post-recurrence maintenance setting",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "BRCA1_2": "germline or somatic pathogenic/likely pathogenic (P/LP) variant required",
+    "note": "Biomarker gated: single-agent olaparib maintenance requires a germline or somatic BRCA1/2 P/LP variant. Per Standard Guidelines (NCCN) Ovarian OV-5, olaparib is a category 1 post-primary maintenance option for BRCA1/2-mutated disease; it is also listed for BRCA1/2 wild-type or unknown with HR deficiency, but FDA labeling restricts single-agent olaparib to germline or somatic BRCA-mutated disease. In the post-recurrence maintenance setting, PARP inhibitor maintenance is restricted to the BRCA1/2-mutated setting (OV-D footnote a) and requires no prior progression on a PARP inhibitor."
+  },
+  "stage": [
+    "II",
+    "III",
+    "IV",
+    "recurrent"
+  ],
+  "treatmentSetting": "maintenance",
+  "histology": "epithelial ovarian carcinoma (high-grade serous, grade 2/3 endometrioid, or BRCA1/2-mutated clear cell carcinoma or carcinosarcoma per the maintenance-eligible population). Fallopian tube and primary peritoneal carcinoma are treated as ovarian carcinoma.",
+  "premedications": [],
+  "supportiveCare": [
+    "monitor for cytopenias; olaparib can cause myelosuppression and carries a risk of myelodysplastic syndrome or acute myeloid leukemia with prolonged exposure.",
+    "antiemetic support as needed for nausea per package insert."
+  ],
+  "monitoring": [
+    "CBC: careful monitoring of blood counts is required (baseline and periodic; hold for prolonged cytopenia and evaluate for MDS/AML)",
+    "renal and hepatic function monitoring is recommended",
+    "blood pressure monitoring is recommended for olaparib (required for niraparib)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "BRCA1/2 status confirmed",
+    "response status (CR/PR)"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3+ or prolonged cytopenia",
+      "drug": "olaparib",
+      "action": "hold/reduce",
+      "text": "Interrupt and consider dose reduction per package insert; if cytopenia is prolonged, evaluate for MDS/AML before resuming. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "olaparib",
+      "name": "Olaparib",
+      "basis": "flat",
+      "dosePerUnit": 300,
+      "unit": "mg",
+      "route": "PO twice daily",
+      "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D Principles of Maintenance PARP Inhibitor Therapy. Olaparib 300 mg PO twice daily, taken continuously (cycleLengthDays 1 represents continuous daily dosing). Refer to the package insert for renal or hepatic dose adjustments and for tablet-versus-capsule bioequivalence (the 300 mg dose is the tablet formulation).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer",
+        "version": "4.2026",
+        "date": "2026-04-10",
+        "locator": "OV-D, Principles of Maintenance PARP Inhibitor Therapy, Olaparib monotherapy (Olaparib 300 mg PO twice daily)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

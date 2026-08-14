@@ -1,0 +1,140 @@
+{
+  "id": "sclc-atezolizumab",
+  "diseaseId": "sclc",
+  "name": "CARBOplatin + Etoposide + Atezolizumab (IMpower133) for extensive-stage SCLC",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Not biomarker-gated. Atezolizumab (anti-PD-L1) is added to the carboplatin plus etoposide backbone regardless of PD-L1 status in extensive-stage SCLC. Per Standard Guidelines (NCCN), Small Cell Lung Cancer v1.2027, SCL-E."
+  },
+  "stage": [
+    "extensive-stage"
+  ],
+  "treatmentSetting": "primary",
+  "histology": "small cell lung cancer (small cell carcinoma; high-grade neuroendocrine)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "carboplatin plus etoposide antiemetic prophylaxis per guideline tier."
+    }
+  ],
+  "supportiveCare": [
+    "Four induction cycles of carboplatin/etoposide/atezolizumab every 21 days, THEN maintenance atezolizumab 1200 mg every 21 days until progression or unacceptable toxicity. Source: SCLC v1.2027, SCL-E lines 964 to 965.",
+    "Monitor for immune-related adverse events (atezolizumab): thyroid, hepatic, pneumonitis, colitis, endocrinopathies.",
+    "Alternate maintenance schedule (source-stated): atezolizumab 1680 mg every 28 days (line 967)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each carboplatin cycle",
+    "immune-related adverse event surveillance (thyroid, liver, pneumonitis, colitis) for atezolizumab",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "irAE screen",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "immune-related adverse event (grade 2 or higher)",
+      "drug": "atezolizumab",
+      "action": "hold/steroids/discontinue",
+      "text": "Hold atezolizumab and manage per immunotherapy toxicity guidance (corticosteroids for grade 2 or higher); permanently discontinue for severe/recurrent irAEs. Chemotherapy dose modifications per marrow/renal status."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E line 964. CARBOplatin Calvert AUC target 5, day 1. basis auc.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, line 964 (Carboplatin AUC 5 Day 1 and Etoposide 100 mg/m2 Days 1, 2, 3 and Atezolizumab 1200 mg Day 1 every 21 days x 4 cycles)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E line 964. Etoposide 100 mg/m2 IV days 1, 2, 3.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, line 964 (Etoposide 100 mg/m2 Days 1, 2, 3)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "atezolizumab",
+      "name": "Atezolizumab",
+      "basis": "flat",
+      "dosePerUnit": 1200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E lines 964 to 965 (IMpower133). Atezolizumab 1200 mg IV day 1 every 21 days during the 4 induction cycles, THEN continue as maintenance atezolizumab 1200 mg IV day 1 every 21 days after chemotherapy stops (category 1 for all). A source-stated maintenance alternative is atezolizumab 1680 mg every 28 days (line 967).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, lines 964 to 965 (Atezolizumab 1200 mg Day 1 every 21 days x 4 cycles followed by maintenance Atezolizumab 1200 mg Day 1 every 21 days)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

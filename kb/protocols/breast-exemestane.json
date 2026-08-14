@@ -1,0 +1,96 @@
+{
+  "id": "breast-exemestane",
+  "diseaseId": "breast_cancer",
+  "name": "Exemestane (aromatase inhibitor endocrine therapy)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 1,
+  "cycles": 5,
+  "cyclesNote": "continuous once-daily dosing for 5 years (adjuvant), extended to 7.5 to 10 years total may be considered for node-positive disease; continued until progression or unacceptable toxicity in metastatic disease",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "ER": "positive",
+    "PR": "tested",
+    "HR": "positive required (ER and/or PR positive)",
+    "HER2": "tested",
+    "hormoneReceptorRestricted": true,
+    "note": "Endocrine therapy REQUIRES hormone-receptor-positive disease (ER and/or PR positive). Exemestane is a steroidal aromatase inhibitor (aromatase inactivator) and works only in a low-estrogen (postmenopausal) environment: it is used in postmenopausal patients, or in premenopausal patients ONLY with concurrent ovarian function suppression/ablation (exemestane plus ovarian suppression was a SOFT/TEXT arm). HER2 is tested to guide added HER2-directed therapy and does not change the endocrine indication. Per DeVita 12th ed. (Chapter 16) and Standard Guidelines (NCCN), Invasive Breast Cancer, Principles of Adjuvant Endocrine Therapy (BINV-K)."
+  },
+  "stage": [
+    "I",
+    "II",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "hormone-receptor-positive invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [],
+  "supportiveCare": [
+    "Not myelosuppressive; no G-CSF or routine antiemetics required (oral endocrine therapy).",
+    "Ovarian suppression (OFS) is MANDATORY when used in premenopausal patients: GnRH agonist (e.g., goserelin 3.6 mg SC every 4 weeks) or surgical/radiation ablation; exemestane plus OFS was a SOFT/TEXT regimen. Per NCCN v6.2026 BINV-K 2 of 4 and 3 of 4; DeVita lines 185051 to 185084.",
+    "Bone health: aromatase inhibitors increase fracture risk and cause bone loss; monitor bone mineral density and consider a bisphosphonate or denosumab plus calcium/vitamin D (NCCN v6.2026 BINV-K footnote q).",
+    "Arthralgia/myalgia and steroidal-type effects (weak androgenic properties at higher doses) may occur (DeVita lines 30196 to 30204)."
+  ],
+  "monitoring": [
+    "adherence to daily oral endocrine therapy (crucial to outcome)",
+    "bone mineral density (baseline and periodic) given fracture risk",
+    "arthralgia/myalgia",
+    "in premenopausal patients on OFS: confirm ongoing postmenopausal-range estradiol; vaginal bleeding on an AI warrants urgent review"
+  ],
+  "clearanceChecks": [
+    "hormone-receptor status confirmed positive",
+    "postmenopausal status confirmed (or OFS in place for premenopausal)",
+    "baseline bone mineral density"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "aromatase-inhibitor-associated musculoskeletal symptoms or intolerance",
+      "drug": "exemestane",
+      "action": "switch/support",
+      "text": "Options include switching to another aromatase inhibitor after a washout, or to tamoxifen; supportive measures include exercise, NSAIDs, or duloxetine (NCCN v6.2026 supportive-care discussion; DeVita lines 30196 to 30204). Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "exemestane",
+      "name": "Exemestane",
+      "basis": "flat",
+      "dosePerUnit": 25,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. lines 30205 and 30208. Exemestane 25 mg by mouth once daily, continuous (flat daily dosing; the days array marks once-daily administration within a nominal 1-day cycle). Steroidal aromatase inhibitor (irreversible aromatase inactivator). Adjuvant duration 5 years, with extended aromatase inhibitor duration (7.5 to 10 years total) considered for node-positive disease (NCCN v6.2026 BINV-K).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 30205 and 30208 (FDA-approved dose 25 mg per day; administered once daily by mouth, recommended daily dose 25 mg)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

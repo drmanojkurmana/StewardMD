@@ -1,0 +1,114 @@
+{
+  "id": "gu-rcc-nivo-ipi",
+  "diseaseId": "renal_cell_carcinoma",
+  "name": "Nivolumab + Ipilimumab, then Nivolumab maintenance (CheckMate-214)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "cyclesNote": "Induction: 4 cycles of nivolumab 3 mg/kg + ipilimumab 1 mg/kg IV every 3 weeks. Then MAINTENANCE: single-agent nivolumab (ipilimumab stopped) continued until progression or unacceptable toxicity (per DeVita 12th ed., line 33128). The exact maintenance flat schedule follows the nivolumab label (e.g., 240 mg every 2 weeks or 480 mg every 4 weeks).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "clear cell",
+    "IMDC_risk": "intermediate or poor",
+    "note": "Clear cell RCC (subtypes #55/#56). Dual checkpoint blockade (nivolumab anti-PD-1 + ipilimumab anti-CTLA-4). CheckMate-214 established the combination versus sunitinib; the OS/ORR benefit was in intermediate-/poor-risk (IMDC) disease. No positive companion biomarker is required to start (PD-L1 not required). Per Standard Guidelines (NCCN), Kidney Cancer v1.2027 (Ipilimumab + Nivolumab, category 1)."
+  },
+  "stage": [
+    "IV",
+    "relapsed/unresectable"
+  ],
+  "treatmentSetting": [
+    "metastatic",
+    "maintenance"
+  ],
+  "histology": "clear cell renal cell carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring across organ systems (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); dual checkpoint blockade carries a higher irAE rate than PD-1 monotherapy.",
+    "Baseline and periodic thyroid (TSH/free T4), liver function, glucose, and cortisol/ACTH as indicated.",
+    "Patient counseling on prompt reporting of irAE symptoms."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) before each cycle and as indicated",
+    "renal function (immune nephritis)",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "CBC",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab + ipilimumab",
+      "action": "hold/steroids",
+      "text": "Hold checkpoint inhibitor(s) and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3-4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "mgkg",
+      "dosePerUnit": 3,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 33128: nivolumab 3 mg/kg IV combined with ipilimumab 1 mg/kg IV every 3 weeks for up to 4 induction cycles, then single-agent nivolumab maintenance. Induction dose modeled here (day 1, q21). Maintenance is single-agent nivolumab per DeVita; the exact maintenance flat schedule (e.g., 240 mg every 2 weeks or 480 mg every 4 weeks per label) is described in regimen.cycles and is a labeling detail, not modeled as a separate numeric drug dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 33128 (ipilimumab 1 mg/kg with nivolumab 3 mg/kg in other indications; given every 3 weeks for up to 4 induction cycles, followed by single-agent nivolumab maintenance)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "ipilimumab",
+      "name": "Ipilimumab",
+      "basis": "mgkg",
+      "dosePerUnit": 1,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 33128: ipilimumab 1 mg/kg IV with nivolumab 3 mg/kg IV every 3 weeks for 4 induction cycles. Ipilimumab is given during induction only (4 doses); it is NOT continued in maintenance.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 33128 (ipilimumab 1 mg/kg with nivolumab 3 mg/kg in other indications; every 3 weeks x4 induction cycles)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -53,7 +53,9 @@
         "roundingRule": { "type": ["object", "null"], "properties": { "increment": { "type": "number" } } },
         "modificationRules": { "type": "array", "items": { "type": "object" } },
         "provenance": { "$ref": "#/$defs/provenance" },
-        "notes": { "type": "string" }
+        "notes": { "type": "string" },
+        "frequency": { "type": ["string", "null"], "description": "Intra-day frequency token (BID/TID/QID/QD); dosePerUnit stays the per-administration dose. The dose engine multiplies by it to surface the daily dose." },
+        "dosesPerDay": { "type": ["number", "null"], "description": "Explicit administrations per day; overrides frequency. Default 1 (once daily / per-administration = daily)." }
       }
     }
   },

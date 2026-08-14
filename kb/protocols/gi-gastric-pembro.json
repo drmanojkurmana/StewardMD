@@ -1,0 +1,153 @@
+{
+  "id": "gi-gastric-pembro",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "name": "Pembrolizumab + CAPOX (Capecitabine / OXALIplatin), PD-L1 CPS-positive",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Gastric Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "negative",
+    "PD_L1_CPS": "positive (CPS at least 1; category 1 for CPS at least 5)",
+    "MMR_MSI": "tested",
+    "CLDN18_2": "tested",
+    "note": "This pembrolizumab-plus-chemotherapy regimen (KEYNOTE-859 style) is for HER2-negative advanced disease with PD-L1 CPS at least 1 (category 1 recommendation for CPS at least 5). For HER2-positive disease the guideline instead adds trastuzumab plus pembrolizumab to chemotherapy for CPS at least 1 (KEYNOTE-811) - see gi-gastric-trastuzumab-chemo and note below. MMR or MSI (MSI-H/dMMR favors checkpoint therapy) and Claudin 18.2 are also tested. Per Standard Guidelines (NCCN), Gastric Cancer v3.2026, Systemic Therapy and Principles of Biomarker Testing."
+  },
+  "stage": [
+    "IV (metastatic or unresectable)"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Chemotherapy backbone modeled as CAPOX (q3w) to align with pembrolizumab every 3 weeks; the guideline permits a fluoropyrimidine (capecitabine or fluorouracil) plus oxaliplatin backbone.",
+    "DPYD: consider DPYD genotype or phenotype testing before the fluoropyrimidine; reduce or avoid on deficiency.",
+    "Immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary, colitis, endocrinopathies).",
+    "Antiemetics: oxaliplatin-based, moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Pembrolizumab continued up to 2 years; chemotherapy per tolerance (metastatic, cycle number not fixed)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during pembrolizumab",
+    "renal function and peripheral neuropathy assessment before each cycle (OXALIplatin)",
+    "hand-foot / diarrhea assessment (capecitabine)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "endocrine/immune status",
+    "neuropathy status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., lines 233347 to 233349 (agent-level flat dosing). Pembrolizumab 200 mg IV flat on day 1 every 3 weeks (alternative 400 mg every 6 weeks), continued up to 2 years. This is the general PK-based flat dose, not a gastric-specific locator; the gastric CPS gate is from the guideline. Monitor for immune-related adverse events.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 233347 to 233349 (pembrolizumab simplified to a flat dose of 200 mg every 3 weeks or 400 mg every 6 weeks, up to 2 years)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "oxaliplatin",
+      "name": "OXALIplatin",
+      "basis": "bsa",
+      "dosePerUnit": 130,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 99169. OXALIplatin 130 mg/m2 IV on day 1, every 3 weeks (CAPOX backbone). Tall-man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 99169 (oxaliplatin 130 mg/m2 on day 1 every 3 weeks, gastric or GEJ adenocarcinoma)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "PO twice daily",
+      "notes": "Source: DeVita 12th ed., line 98868. Capecitabine 1000 mg/m2 orally twice daily on days 1 to 14 (CAPOX backbone; this per-dose is the twice-daily dose). Fluorouracil is a source-stated fluoropyrimidine alternative. DPYD deficiency raises fluoropyrimidine toxicity risk; consider DPYD testing before first dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 98868 (capecitabine 1000 mg/m2 twice a day for 14 days)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

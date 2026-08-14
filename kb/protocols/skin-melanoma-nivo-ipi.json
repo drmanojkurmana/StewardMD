@@ -1,0 +1,109 @@
+{
+  "id": "skin-melanoma-nivo-ipi",
+  "diseaseId": "cutaneous_melanoma",
+  "name": "Nivolumab + Ipilimumab (melanoma 1 mg/kg nivo + 3 mg/kg ipi), then Nivolumab maintenance",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "cyclesNote": "Induction: 4 cycles of nivolumab 1 mg/kg + ipilimumab 3 mg/kg IV on the same day, every 3 weeks (Standard Guidelines (NCCN) v2.2026, Table 14, MS-56). Then MAINTENANCE: single-agent nivolumab (ipilimumab stopped), continued until disease progression or unacceptable toxicity. Maintenance flat schedule per the same table is nivolumab 240 mg Q2W or 480 mg Q4W (FDA prescribing information), or 3 mg/kg Q2W (CheckMate 067).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+    "textbook": ""
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "No positive companion biomarker is required to start dual checkpoint blockade (nivolumab anti-PD-1 + ipilimumab anti-CTLA-4). Applicable regardless of BRAF status. CRITICAL DOSE RATIO: in melanoma the combination is nivolumab 1 mg/kg PLUS ipilimumab 3 mg/kg (nivo1 + ipi3), which is the OPPOSITE ratio of the renal cell / hepatocellular combination (nivo 3 mg/kg + ipi 1 mg/kg). Confirmed against Standard Guidelines (NCCN), Melanoma: Cutaneous, Table 14 (Ipilimumab/Nivolumab Combination)."
+  },
+  "stage": [
+    "III (unresectable)",
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "cutaneous melanoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring across organ systems (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis, myocarditis); dual checkpoint blockade carries a higher irAE rate than PD-1 monotherapy (Standard Guidelines (NCCN) v2.2026, Table 15, MS-56 to MS-57).",
+    "Baseline and periodic thyroid (TSH/free T4), liver function, glucose, and cortisol/ACTH as indicated.",
+    "Patient counseling on prompt reporting of irAE symptoms; manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) before each cycle and as indicated",
+    "renal function (immune nephritis)",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy, myocarditis",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "CBC",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab + ipilimumab",
+      "action": "hold/steroids",
+      "text": "Hold checkpoint inhibitor(s) and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "mgkg",
+      "dosePerUnit": 1,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 14 (MS-56, CheckMate 067 / FDA prescribing information). MELANOMA combination dose is nivolumab 1 mg/kg IV given the SAME DAY as ipilimumab 3 mg/kg, every 3 weeks for 4 doses (induction), then single-agent nivolumab maintenance. This 1 mg/kg nivo dose is the melanoma-specific ratio; do NOT use the renal-cell/hepatocellular 3 mg/kg nivo value. Maintenance nivolumab flat schedule (240 mg Q2W or 480 mg Q4W per FDA prescribing information, or 3 mg/kg Q2W per CheckMate 067) is described in regimen.cycles and is not modeled as a separate numeric drug row.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Ipilimumab/Nivolumab Combination row, MS-56 (line 8173): 1 mg/kg nivo + 3 mg/kg ipi (same day), Q3W for 4 doses; then nivolumab maintenance",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "ipilimumab",
+      "name": "Ipilimumab",
+      "basis": "mgkg",
+      "dosePerUnit": 3,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 14 (MS-56) and line 2796. MELANOMA ipilimumab dose is 3 mg/kg IV given the same day as nivolumab 1 mg/kg, every 3 weeks for 4 doses (induction only). Ipilimumab is NOT continued in maintenance. This ipi 3 mg/kg dose is the melanoma-specific ratio; do NOT use the renal-cell/hepatocellular 1 mg/kg ipi value.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Ipilimumab/Nivolumab Combination row, MS-56 (line 8173): 1 mg/kg nivo + 3 mg/kg ipi (same day), Q3W for 4 doses; also line 2796 (ipi3 + nivo1 every 3 weeks for 4 doses is an FDA-approved regimen)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

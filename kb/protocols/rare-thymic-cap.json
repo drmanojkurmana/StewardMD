@@ -1,0 +1,155 @@
+{
+  "id": "rare-thymic-cap",
+  "diseaseId": "thymoma",
+  "name": "CAP (Cyclophosphamide/DOXOrubicin/CISplatin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "cyclesNote": "maximum of 8 cycles (DeVita 12th ed., line 77666: given for a maximum of eight 3-week cycles)",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "CAP is a cytotoxic anthracycline/platinum backbone and is not biomarker-restricted. Per Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas v2.2026, THYM-C Systemic Therapy Regimens, CAP (cyclophosphamide/doxorubicin/cisplatin) is listed as a first-line regimen for both thymoma and thymic carcinoma."
+  },
+  "stage": [
+    "III",
+    "IV",
+    "recurrent"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "thymic epithelial tumor (thymoma; also used in thymic carcinoma)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "CISplatin plus anthracycline is a high-emetic-risk regimen; give per high-emetogenicity antiemetic tier."
+    }
+  ],
+  "supportiveCare": [
+    "CISplatin: pre and post IV hydration; monitor nephrotoxicity, ototoxicity, and neurotoxicity.",
+    "DOXOrubicin: cumulative anthracycline dose tracking and LVEF assessment.",
+    "Antiemetics: high emetic risk (cisplatin plus anthracycline). G-CSF per febrile-neutropenia risk assessment (VERIFY against a cited source before asserting a tier)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle - CISplatin",
+    "LVEF and cumulative anthracycline dose tracking - DOXOrubicin",
+    "audiometry/neuropathy assessment as clinically indicated - CISplatin"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "cardiac (LVEF)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "declining LVEF or cumulative doxorubicin approaching 450 to 550 mg/m2",
+      "drug": "doxorubicin",
+      "action": "hold/review",
+      "text": "Reassess anthracycline continuation; clinical review required."
+    },
+    {
+      "condition": "rising creatinine / falling GFR",
+      "drug": "cisplatin",
+      "action": "hold/reduce",
+      "text": "Hold or reduce cisplatin and ensure hydration per nephrotoxicity guidance; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV with pre and post hydration",
+      "notes": "Source: DeVita 12th ed., lines 77665 to 77666 (Loehrer intergroup CAP for recurrent/metastatic thymoma). CISplatin 50 mg/m2 IV, given day 1 of each 3-week cycle (single-day administration; DeVita states the doses and 3-week cycling, day-of-cycle is the conventional CAP schedule). Requires pre and post IV hydration; monitor nephrotoxicity, ototoxicity, and neurotoxicity. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 77665 to 77666 (Loehrer CAP: cisplatin 50 mg/m2, doxorubicin 50 mg/m2, cyclophosphamide 500 mg/m2, maximum of eight 3-week cycles, recurrent/metastatic thymoma)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., lines 77665 to 77666. DOXOrubicin 50 mg/m2 IV, day 1 of each 3-week cycle. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2, conventional ceiling, not a dose from the source table); assess LVEF. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 77665 to 77666 (Loehrer CAP)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., lines 77665 to 77666. Cyclophosphamide 500 mg/m2 IV, day 1 of each 3-week cycle.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 77665 to 77666 (Loehrer CAP)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

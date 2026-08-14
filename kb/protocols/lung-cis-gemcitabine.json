@@ -1,0 +1,133 @@
+{
+  "id": "lung-cis-gemcitabine",
+  "diseaseId": "neoplasms_of_the_lung",
+  "name": "CISplatin + Gemcitabine (NSCLC, squamous)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "cyclesNote": "typically 4 cycles as a platinum doublet (metastatic first-line or perioperative); per clinical review",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous",
+    "EGFR": "wild-type (or not actionable)",
+    "ALK": "wild-type (or not actionable)",
+    "note": "Cytotoxic cisplatin/gemcitabine doublet, preferred for SQUAMOUS NSCLC (in a head-to-head RCT gemcitabine-containing therapy was more effective than pemetrexed in squamous histology; pemetrexed doublets are reserved for non-squamous). For NSCLC without an actionable oncogenic driver; driver-positive disease is directed to targeted therapy. Actionable drivers are much less common in squamous histology but molecular and PD-L1 testing are still recommended. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, NSCL-E (Preferred squamous: Cisplatin/Gemcitabine)."
+  },
+  "stage": [
+    "II",
+    "IIIA",
+    "IIIB",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "squamous cell carcinoma (cisplatin/gemcitabine is preferred for squamous histology; gemcitabine is a preferred non-pemetrexed partner for squamous NSCLC)",
+  "premedications": [
+    {
+      "name": "Cisplatin hydration",
+      "notes": "IV pre- and post-hydration with cisplatin to protect renal function."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "cisplatin is highly emetogenic; give high emetic-risk antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: cisplatin-based regimen is high emetic risk; prophylaxis required on day of treatment",
+    "cisplatin hydration to reduce nephrotoxicity; monitor renal function, hearing, and peripheral neuropathy",
+    "gemcitabine: monitor for myelosuppression (particularly thrombocytopenia)"
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1 and 8) - gemcitabine myelosuppression",
+    "renal function (creatinine/GFR) before each cycle - cisplatin nephrotoxicity",
+    "audiometry/hearing and peripheral neuropathy assessment - cisplatin ototoxicity and neurotoxicity"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "low ANC or platelets on day 8",
+      "drug": "gemcitabine",
+      "action": "reduce/omit",
+      "text": "Day 8 gemcitabine is commonly reduced or omitted for day-8 cytopenias per protocol; clinical review required."
+    },
+    {
+      "condition": "declining creatinine clearance",
+      "drug": "cisplatin",
+      "action": "reduce/switch",
+      "text": "Cisplatin is nephrotoxic; consider carboplatin substitution or dose modification if renal function declines. Clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV with pre- and post-hydration",
+      "notes": "Source: DeVita 12th ed. lines 68582 to 68585 (cisplatin 75 mg/m2 Day 1). ISMP tall-man (CISplatin). Cisplatin requires vigorous IV hydration and monitoring for nephrotoxicity, ototoxicity, and neurotoxicity. NCCN NSCL-E lists Cisplatin/Gemcitabine as a preferred squamous doublet but does not print the per-cycle dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 30, Non-small-cell Lung Cancer, ECOG 1505: cisplatin 75 mg/m2 on day 1 plus gemcitabine 1,200 mg/m2 on days 1 and 8 (lines 68582 to 68585)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. line 68584 (gemcitabine 1,200 mg/m2 Days 1 and 8). Given every 21 days with cisplatin Day 1. Monitor for myelosuppression.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 30, Non-small-cell Lung Cancer, ECOG 1505: gemcitabine 1,200 mg/m2 on days 1 and 8 (line 68584)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    }
+  ]
+}

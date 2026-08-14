@@ -1,0 +1,89 @@
+{
+  "id": "gu-uro-avelumab-maintenance",
+  "diseaseId": "bladder_cancer",
+  "name": "Avelumab first-line switch-maintenance (JAVELIN Bladder 100)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Avelumab is an anti-PD-L1 checkpoint inhibitor. First-line SWITCH-maintenance for locally advanced or metastatic urothelial carcinoma (bladder #57, upper-tract #58) in patients who have not progressed after 4-6 cycles of first-line platinum-based (cisplatin- or carboplatin-based) chemotherapy. No positive biomarker is required to start maintenance. Per Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G, Avelumab maintenance)."
+  },
+  "stage": [
+    "IV",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": "maintenance",
+  "histology": "urothelial carcinoma",
+  "premedications": [
+    {
+      "name": "Infusion-reaction premedication",
+      "notes": "antihistamine and acetaminophen premedication for the first avelumab infusions per labeling to reduce infusion-related reactions."
+    }
+  ],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring across organ systems (thyroid and other endocrinopathies, hepatitis, colitis, pneumonitis, dermatitis, nephritis).",
+    "Infusion-related reaction precautions (premedication for early cycles).",
+    "Baseline and periodic thyroid (TSH/free T4), liver function, glucose, and renal function."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) before each cycle and as indicated",
+    "renal function (immune nephritis)",
+    "infusion-related reaction monitoring",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "avelumab",
+      "action": "hold/steroids",
+      "text": "Hold avelumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3-4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "avelumab",
+      "name": "Avelumab",
+      "basis": "mgkg",
+      "dosePerUnit": 10,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 180259: avelumab 10 mg/kg IV every 2 weeks (JAVELIN Bladder 100 registrational dose; the current FDA label is a flat 800 mg every 2 weeks, approximately equivalent at about 80 kg). The urothelial first-line switch-maintenance indication (after platinum-based chemotherapy without progression, JAVELIN Bladder 100) is grounded to DeVita line 155467 and line 33032. Continue until progression or unacceptable toxicity. Premedicate to reduce infusion reactions per avelumab labeling. Immune-related adverse event monitoring applies.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 180259 (avelumab 10 mg/kg intravenously every 2 weeks); urothelial maintenance indication line 155467 / line 33032",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

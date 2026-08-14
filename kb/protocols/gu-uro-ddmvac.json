@@ -1,0 +1,187 @@
+{
+  "id": "gu-uro-ddmvac",
+  "diseaseId": "bladder_cancer",
+  "name": "Dose-dense MVAC (ddMVAC) with growth factor support",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 3,
+  "cyclesNote": "Neoadjuvant: 3 to 6 cycles (per DeVita); every 14 days with mandatory growth factor support. Metastatic: continued per response/tolerance.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic ddMVAC (methotrexate, vinblastine, doxorubicin, cisplatin) backbone is not biomarker-restricted. Applies to urothelial carcinoma of the bladder (#57) and, as the same systemic regimen, upper-tract urothelial carcinoma (#58). Cisplatin-based, so requires cisplatin eligibility. Per Standard Guidelines (NCCN), Bladder Cancer v3.2026, ddMVAC (DDMVAC) is preferred over standard MVAC based on category 1 evidence."
+  },
+  "stage": [
+    "II",
+    "III",
+    "IV",
+    "muscle-invasive",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "urothelial carcinoma",
+  "premedications": [
+    {
+      "name": "Cisplatin hydration and antiemetics",
+      "notes": "vigorous pre- and post-cisplatin IV hydration; high-emetic-risk antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF / myeloid growth factor support is MANDATORY on every 14-day cycle (dose-dense schedule) per DeVita 12th ed. (lines 154878-154890) and Standard Guidelines (NCCN) v3.2026 (DDMVAC with growth factor support).",
+    "Cisplatin: mandatory vigorous IV hydration; monitor and replace magnesium/potassium.",
+    "Antiemetics: high emetic risk (cisplatin) - use a high-emetic-risk prophylaxis regimen.",
+    "Track cumulative doxorubicin dose (anthracycline cardiotoxicity ceiling).",
+    "Monitor for cisplatin nephrotoxicity, ototoxicity, and peripheral neuropathy; mucositis (methotrexate)."
+  ],
+  "monitoring": [
+    "CBC before each 14-day cycle (dose-dense myelosuppression)",
+    "renal function (creatinine/GFR) - cisplatin",
+    "serum magnesium/potassium (cisplatin)",
+    "cumulative doxorubicin dose (cardiotoxicity)",
+    "peripheral neuropathy and ototoxicity assessment (cisplatin)",
+    "mucositis (methotrexate)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "electrolytes (Mg/K)",
+    "cumulative anthracycline",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "declining creatinine clearance / renal impairment",
+      "drug": "cisplatin",
+      "action": "hold/switch",
+      "text": "Reassess cisplatin eligibility if renal function declines; consider a carboplatin-based regimen. Do not substitute carboplatin for cisplatin in the perioperative setting (BL-G)."
+    },
+    {
+      "condition": "cumulative doxorubicin approaching 450 mg/m2",
+      "drug": "doxorubicin",
+      "action": "assess cardiac",
+      "text": "Assess cardiac function and review continuation as cumulative doxorubicin approaches the 450 mg/m2 warn / 550 mg/m2 hard ceiling."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "methotrexate",
+      "name": "Methotrexate",
+      "basis": "bsa",
+      "dosePerUnit": 30,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 44.5 (methotrexate 30 mg/m2) and line 154880: in dose-dense MVAC the methotrexate doses on days 15 and 22 are omitted, leaving methotrexate 30 mg/m2 IV on day 1 of a compressed 14-day cycle.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Table 44.5 (MVAC methotrexate 30 mg/m2 d1,15,22) with line 154880 (ddMVAC omits the day 15 and 22 methotrexate doses)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "vinblastine",
+      "name": "vinBLAStine",
+      "basis": "bsa",
+      "dosePerUnit": 3,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 44.5 (vinblastine 3 mg/m2) and line 154880: in dose-dense MVAC the vinblastine doses on days 15 and 22 are omitted, leaving vinBLAStine 3 mg/m2 IV on day 2 of the 14-day cycle. ISMP tall-man (vinBLAStine).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Table 44.5 (MVAC vinblastine 3 mg/m2 d2,15,22) with line 154880 (ddMVAC omits the day 15 and 22 vinblastine doses)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        2
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 30,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 44.5 (doxorubicin 30 mg/m2 day 2) and line 154880: doxorubicin dose is unchanged in dose-dense MVAC - DOXOrubicin 30 mg/m2 IV on day 2 of the 14-day cycle. ISMP tall-man (DOXOrubicin). Cumulative lifetime cap is the conventional anthracycline ceiling (warn 450, hard 550 mg/m2), not a dose from Table 44.5.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Table 44.5 (MVAC doxorubicin 30 mg/m2 d2) with line 154880 (doxorubicin dose remains the same in ddMVAC)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        2
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 70,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 44.5 (cisplatin 70 mg/m2 day 2) and line 154880: cisplatin dose is unchanged in dose-dense MVAC - CISplatin 70 mg/m2 IV on day 2 of the 14-day cycle. ISMP tall-man (CISplatin). Requires vigorous IV hydration; monitor nephrotoxicity, ototoxicity, and peripheral neuropathy.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Table 44.5 (MVAC cisplatin 70 mg/m2 d2) with line 154880 (cisplatin dose remains the same in ddMVAC)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        2
+      ],
+      "modificationRules": []
+    }
+  ]
+}

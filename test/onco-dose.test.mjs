@@ -86,3 +86,21 @@ test("R1 never-invent: malformed dosePerUnit (NaN) yields null final + warning, 
   assert.equal(lin.calculated, null);
   assert.ok(lin.warnings.length > 0);
 });
+
+test("intra-day frequency: dosesPerDay yields dailyDose; default keeps per-administration behavior", () => {
+  // BID flat oral (dabrafenib 150 mg BID): per-administration final stays 150; dailyDose = 300.
+  const bid = D.doseForDrug({ id: "dabrafenib", basis: "flat", dosePerUnit: 150, frequency: "BID" }, {});
+  assert.equal(bid.final, 150);       // per administration unchanged (the safe, single-dose number)
+  assert.equal(bid.dosesPerDay, 2);
+  assert.equal(bid.dailyDose, 300);   // 150 x 2
+
+  // explicit dosesPerDay overrides / works without a token (capecitabine 1000 mg/m2 BID).
+  const cape = D.doseForDrug({ id: "capecitabine", basis: "bsa", dosePerUnit: 1000, dosesPerDay: 2 }, { bsa: 1.6 });
+  assert.equal(cape.final, 1600);
+  assert.equal(cape.dailyDose, 3200);
+
+  // no frequency => once daily => dailyDose === final (legacy IV-chemo path is byte-identical).
+  const qd = D.doseForDrug({ id: "rituximab", basis: "bsa", dosePerUnit: 375, roundingRule: { increment: 50 } }, { bsa: 1.8 });
+  assert.equal(qd.dosesPerDay, 1);
+  assert.equal(qd.dailyDose, qd.final);
+});

@@ -1,0 +1,136 @@
+{
+  "id": "gi-gastric-folfox",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "name": "FOLFOX / FLO (Fluorouracil / Leucovorin / OXALIplatin), metastatic",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Gastric Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "tested",
+    "MMR_MSI": "tested",
+    "PD_L1_CPS": "tested",
+    "CLDN18_2": "tested",
+    "note": "The FOLFOX / FLO cytotoxic backbone (fluorouracil, leucovorin, oxaliplatin) is not biomarker-restricted. HER2, MMR or MSI, PD-L1 CPS, and Claudin 18.2 are tested to guide add-on therapy (trastuzumab for HER2-positive, checkpoint inhibitor by CPS or MSI-H/dMMR, zolbetuximab for Claudin 18.2-positive) layered onto this backbone. Per Standard Guidelines (NCCN), Gastric Cancer v3.2026, Principles of Biomarker Testing and Systemic Therapy for advanced disease."
+  },
+  "stage": [
+    "IV (metastatic or unresectable)"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "This is the FLO (fluorouracil / leucovorin / oxaliplatin) regimen, the gastroesophageal fluoropyrimidine-plus-oxaliplatin FOLFOX-equivalent (FLOT without docetaxel).",
+    "DPYD: consider DPYD genotype or phenotype testing before fluoropyrimidine; reduce or avoid on deficiency.",
+    "Antiemetics: oxaliplatin-based, moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Metastatic setting: continue until progression or unacceptable toxicity (cycle number not fixed)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each cycle (OXALIplatin)",
+    "peripheral neuropathy assessment before each cycle (OXALIplatin)",
+    "hand-foot / mucositis / diarrhea assessment (fluorouracil)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "neuropathy status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "oxaliplatin",
+      "action": "reduce/hold",
+      "text": "Reduce or hold OXALIplatin per neuropathy grade; obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "oxaliplatin",
+      "name": "OXALIplatin",
+      "basis": "bsa",
+      "dosePerUnit": 85,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 98464. OXALIplatin 85 mg/m2 IV on day 1, every 2 weeks. Tall-man per ISMP. Assess peripheral neuropathy each cycle.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 98464 (AIO: oxaliplatin 85 mg/m2, once every 2 weeks, metastatic gastroesophageal adenocarcinoma); backbone line 96615",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 96615 (FLO backbone, shared with FLOT). Leucovorin 200 mg/m2 IV on day 1, every 2 weeks.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 96615 (FLO/FLOT backbone: leucovorin 200 mg/m2, day 1, every 2 weeks); FLO regimen line 98464",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil (continuous infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 2600,
+      "unit": "mg/m2",
+      "route": "IV over 24 hr",
+      "notes": "Source: DeVita 12th ed., line 96615 (FLO backbone, shared with FLOT); the AIO metastatic FLO trial at line 98464 uses a 24 hour 5-FU infusion plus leucovorin with oxaliplatin 85 mg/m2 every 2 weeks. Fluorouracil 2600 mg/m2 IV as a 24 hr continuous infusion on day 1, every 2 weeks. DPYD deficiency raises fluoropyrimidine toxicity risk; consider DPYD testing before first dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 96614 to 96616 (FLO/FLOT backbone: 24 hour infusion of 5-FU 2600 mg/m2, day 1, every 2 weeks); AIO 24 hour 5-FU line 98464",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

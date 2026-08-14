@@ -1,0 +1,115 @@
+{
+  "id": "gu-rcc-sunitinib",
+  "diseaseId": "renal_cell_carcinoma",
+  "name": "Sunitinib (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 42,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). Sunitinib is a multitargeted VEGFR/PDGFR/KIT oral TKI; no companion biomarker is required to start. Listed as a first-line systemic option for relapsed or stage IV clear cell RCC per Standard Guidelines (NCCN), Kidney Cancer v1.2027 (regimen named on the systemic-therapy pages; mg dosing is not printed in the guideline)."
+  },
+  "stage": [
+    "IV",
+    "relapsed/unresectable"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "clear cell renal cell carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Blood pressure monitoring and management (VEGF TKI hypertension).",
+    "Monitor for hand-foot skin reaction, mucositis, and fatigue; dermatologic supportive care as needed.",
+    "Baseline and periodic thyroid function (TSH) - TKI-induced hypothyroidism.",
+    "CBC and liver function before and during treatment."
+  ],
+  "monitoring": [
+    "blood pressure (VEGF TKI hypertension)",
+    "liver function tests",
+    "thyroid function (TSH) - hypothyroidism",
+    "hand-foot skin reaction / dermatologic toxicity",
+    "CBC (cytopenias)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "blood pressure",
+    "liver",
+    "thyroid",
+    "CBC/platelets",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hypertension or symptomatic HFSR or transaminase elevation",
+      "drug": "sunitinib",
+      "action": "hold/reduce",
+      "text": "Hold and resume at a reduced dose per labeling for grade 3 or higher hypertension, hand-foot skin reaction, or hepatotoxicity; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "sunitinib",
+      "name": "Sunitinib",
+      "basis": "flat",
+      "dosePerUnit": 50,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., line 77734: sunitinib 50 mg PO daily for 4 weeks on, then 2 weeks off (6-week / 42-day cycle). This is the canonical sunitinib schedule; the same 50 mg 4/2 schedule is the standard used in metastatic clear cell RCC. Represented as days 1 to 28 (4 weeks on) of a 42-day cycle (2 weeks off). Standard Guidelines (NCCN) Kidney Cancer v1.2027 names sunitinib as a first-line RCC regimen but does not print the mg dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 77734 (oral sunitinib 50 mg daily for 4 weeks with 2 weeks off / 6-week cycles)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

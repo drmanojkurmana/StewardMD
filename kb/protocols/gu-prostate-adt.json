@@ -1,0 +1,186 @@
+{
+  "id": "gu-prostate-adt",
+  "diseaseId": "prostate_cancer",
+  "name": "Androgen Deprivation Therapy (ADT) Backbone (LHRH agonist or antagonist)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Prostate Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "ADT is not biomarker-restricted; it is the foundational castration backbone across settings. The therapeutic goal is a castrate serum testosterone level below 50 ng/dL. Per Standard Guidelines (NCCN), Prostate Cancer, Principles of Androgen Deprivation Therapy (PROS-G)."
+  },
+  "stage": [
+    "localized/regional (with radiation therapy)",
+    "M0 CSPC",
+    "advanced/metastatic (backbone)"
+  ],
+  "treatmentSetting": [
+    "localized/regional (neoadjuvant, concurrent, and/or adjuvant with radiation therapy)",
+    "M0 CSPC",
+    "advanced/metastatic castration-sensitive (backbone)"
+  ],
+  "histology": "prostate adenocarcinoma (acinar; histology-agnostic backbone)",
+  "premedications": [],
+  "supportiveCare": [
+    "cycleLengthDays 28 represents the standard monthly depot interval for the injectable agents (leuprolide, goserelin, degarelix maintenance); relugolix is continuous daily oral dosing; longer-acting depot formulations (every 3, 4, 6, and 12 months) exist per DeVita line 30363.",
+    "cycles null: ADT is continuous for the prescribed duration or until progression; duration is setting-specific (e.g., short-term 4 to 6 months, long-term 18 to 36 months with radiation therapy per PROS-G notes, prostate lines 2826 to 2830).",
+    "bone-health agent (denosumab or zoledronic acid) and calcium/vitamin D per bone-health principles when on long-term ADT.",
+    "for an LHRH agonist with weight-bearing bone metastases or a large prostate mass, add a first-generation antiandrogen for at least 7 days to prevent testosterone flare (PROS-G footnote f, prostate line ~2996)."
+  ],
+  "monitoring": [
+    "serum testosterone (confirm and maintain castrate level below 50 ng/dL) and PSA",
+    "bone mineral density and metabolic parameters on long-term ADT (glucose, lipids)",
+    "cardiovascular risk assessment (relugolix was associated with lower major adverse cardiovascular events than leuprolide, prostate lines 6686 to 6688)"
+  ],
+  "clearanceChecks": [
+    "baseline testosterone/PSA",
+    "cardiovascular and metabolic baseline",
+    "bone-health baseline"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "inadequate testosterone suppression (testosterone not below 50 ng/dL)",
+      "action": "review",
+      "text": "Confirm adherence (especially oral relugolix) and consider switching agent or to continuous dosing; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "leuprolide",
+      "name": "Leuprolide",
+      "basis": "flat",
+      "dosePerUnit": 7.5,
+      "unit": "mg",
+      "route": "IM depot",
+      "notes": "Source: DeVita 12th ed., line 30362. LHRH agonist, 7.5 mg IM depot at monthly intervals. Longer-acting depot formulations dosed every 3, 4, 6, and 12 months also exist (DeVita line 30363); those formulation-specific doses are not enumerated in the provided extract. LHRH agonists cause an initial testosterone flare (see flare-prevention eligibility criterion).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 30362 (the recommended monthly dose of leuprolide is 7.5 mg); line 30363 (longer-acting depot preparations every 3, 4, 6, and 12 months)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "goserelin",
+      "name": "Goserelin",
+      "basis": "flat",
+      "dosePerUnit": 3.6,
+      "unit": "mg",
+      "route": "SC depot",
+      "notes": "Source: DeVita 12th ed., line 30362. LHRH agonist, 3.6 mg SC depot at monthly intervals. A longer-acting formulation exists; that dose is not enumerated in the provided extract.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 30362 (the recommended monthly dose of goserelin is 3.6 mg)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "degarelix",
+      "name": "Degarelix",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "SC (loading: two 120 mg injections)",
+      "notes": "Source: DeVita 12th ed., lines 30415 to 30417. LHRH antagonist. LOADING dose 240 mg SC (two 120 mg injections); MAINTENANCE 80 mg SC every 28 days (monthly) started 28 days after the loading dose. dosePerUnit records the sourced 240 mg loading dose; the sourced 80 mg monthly maintenance dose is captured in this note. Degarelix does not cause tumor flare (no antiandrogen cover needed).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 30415 to 30417 (recommended loading dose of degarelix is 240 mg as two 120 mg SC injections; monthly maintenance doses of 80 mg started 28 days after the loading dose)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "relugolix",
+      "name": "Relugolix",
+      "basis": "flat",
+      "dosePerUnit": 120,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., lines 30420 to 30421, and Standard Guidelines (NCCN) Prostate v6.2026 Discussion (prostate line 6529, relugolix 120 mg orally once daily). Oral LHRH antagonist. LOADING 360 mg PO on day 1, then 120 mg PO once daily continuously (represented as days 1 to 28 of the cycle). Avoid co-administration with P-glycoprotein inhibitors. Adherence-dependent; monitor for sustained testosterone suppression (PROS-G note, prostate lines 485 to 486).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 30420 to 30421 (recommended loading dose of relugolix is 360 mg orally on the first day, with 120 mg once daily thereafter)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

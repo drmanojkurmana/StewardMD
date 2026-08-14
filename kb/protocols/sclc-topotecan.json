@@ -1,0 +1,90 @@
+{
+  "id": "sclc-topotecan",
+  "diseaseId": "sclc",
+  "name": "Topotecan (relapsed/subsequent SCLC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Not biomarker-gated. Single-agent topotecan is a preferred subsequent (second-line and beyond) therapy option after prior platinum-based SCLC treatment. Per Standard Guidelines (NCCN), Small Cell Lung Cancer v1.2027, SCLC Subsequent Systemic Therapy (SCL-E 3 of 6)."
+  },
+  "stage": [
+    "relapsed",
+    "extensive-stage"
+  ],
+  "treatmentSetting": "relapsed/subsequent",
+  "histology": "small cell lung cancer (small cell carcinoma; high-grade neuroendocrine)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "topotecan antiemetic prophylaxis per guideline tier."
+    }
+  ],
+  "supportiveCare": [
+    "Consider dose reduction or growth-factor support for PS 2 patients. Source: SCLC v1.2027, SCL-E 3 of 6, line 1031.",
+    "Fatigue and hematologic toxicities are substantial with topotecan, particularly at the recommended schedule (DeVita 12th ed. line 73900); monitor counts and reduce dose or add growth-factor support per clinical review.",
+    "Oral and IV topotecan are similar in activity and tolerability (DeVita 12th ed. lines 19448 to 19451), so either route may be used per the guideline (SCL-E 3 of 6); the encoded oral dose 2.3 mg/m2/day for 5 days is grounded, while the IV 1.5 mg/m2/day for 5 days every 21 days value is printed only in non-SCLC contexts in the corpus (DeVita lines 180065 and 175882)."
+  ],
+  "monitoring": [
+    "CBC before and during each cycle (topotecan is markedly myelosuppressive: neutropenia, thrombocytopenia, anemia)",
+    "renal function (topotecan is renally cleared; dose-adjust for renal impairment)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 myelosuppression (neutropenia/thrombocytopenia) or renal impairment",
+      "drug": "topotecan",
+      "action": "reduce/delay/growth-factor",
+      "text": "Reduce dose, delay, or add growth-factor support per clinical review; fatigue and hematologic toxicities are substantial with topotecan (DeVita 12th ed. line 73900). Renal dose adjustment required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "topotecan",
+      "name": "Topotecan",
+      "basis": "bsa",
+      "dosePerUnit": 2.3,
+      "unit": "mg/m2",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. lines 19448 to 19451 (Oral topotecan 2.3 mg/m2/day orally once daily for 5 consecutive days, repeated every 21 days; activity and tolerability similar to the IV formulation in small cell lung cancer patients). This is the SCLC-explicit grounded dose. Alternative route: IV topotecan 1.5 mg/m2/day for 5 days every 21 days is the conventional intravenous second-line SCLC dose; in the provided corpus that 1.5 mg/m2 for 5 days every 21 days value is printed only in non-SCLC contexts (DeVita line 180065, ovarian PLD registration trial; DeVita line 175882, regimen table), so its numeric value is grounded to those non-SCLC entries rather than an SCLC-specific line. Fatigue and hematologic toxicities are substantial with topotecan, particularly at the recommended schedule (DeVita line 73900); topotecan is markedly myelosuppressive and renally cleared, so monitor counts and renal function and dose-adjust accordingly.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 19448 to 19451 (Oral topotecan 2.3 mg/m2/day orally once daily for 5 consecutive days repeated every 21 days; activity and tolerability similar to the IV formulation in small cell lung cancer patients)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    }
+  ]
+}

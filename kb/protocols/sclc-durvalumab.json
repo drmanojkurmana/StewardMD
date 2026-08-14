@@ -1,0 +1,140 @@
+{
+  "id": "sclc-durvalumab",
+  "diseaseId": "sclc",
+  "name": "Platinum + Etoposide + Durvalumab (CASPIAN) for extensive-stage SCLC",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Not biomarker-gated. Durvalumab (anti-PD-L1) is added to a platinum plus etoposide backbone regardless of PD-L1 status in extensive-stage SCLC. Per Standard Guidelines (NCCN), Small Cell Lung Cancer v1.2027, SCL-E."
+  },
+  "stage": [
+    "extensive-stage"
+  ],
+  "treatmentSetting": "primary",
+  "histology": "small cell lung cancer (small cell carcinoma; high-grade neuroendocrine)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "platinum plus etoposide antiemetic prophylaxis per guideline tier (cisplatin variant is highly emetogenic)."
+    }
+  ],
+  "supportiveCare": [
+    "Four induction cycles of platinum/etoposide/durvalumab every 21 days, THEN maintenance durvalumab 1500 mg every 28 days until progression or unacceptable toxicity (note the maintenance interval changes from every 21 to every 28 days). Source: SCLC v1.2027, SCL-E lines 970 to 973.",
+    "Cisplatin variant (choose one platinum): cisplatin 75 to 80 mg/m2 day 1 with IV hydration and nephro-/oto-/neurotoxicity monitoring; etoposide 80 to 100 mg/m2 days 1 to 3 (line 972).",
+    "Monitor for immune-related adverse events (durvalumab): thyroid, hepatic, pneumonitis, colitis, endocrinopathies."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each platinum cycle",
+    "immune-related adverse event surveillance (thyroid, liver, pneumonitis, colitis) for durvalumab",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "irAE screen",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "immune-related adverse event (grade 2 or higher)",
+      "drug": "durvalumab",
+      "action": "hold/steroids/discontinue",
+      "text": "Hold durvalumab and manage per immunotherapy toxicity guidance (corticosteroids for grade 2 or higher); permanently discontinue for severe/recurrent irAEs. Chemotherapy dose modifications per marrow/renal status."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "PREFERRED PLATINUM (choose CARBOplatin OR CISplatin, not both). Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E line 970. CARBOplatin Calvert AUC target 5 to 6, day 1 (dosePerUnit = 5; source range AUC 5 to 6). Cisplatin alternative: 75 to 80 mg/m2 day 1 (line 972).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, line 970 (Carboplatin AUC 5 to 6 Day 1 and Etoposide 80 to 100 mg/m2 Days 1, 2, 3 and Durvalumab 1500 mg Day 1 every 21 days x 4 cycles)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E lines 970 and 972. Etoposide 80 to 100 mg/m2 IV days 1, 2, 3 (dosePerUnit = 100, top of the source range 80 to 100).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, lines 970 and 972 (Etoposide 80 to 100 mg/m2 Days 1, 2, 3)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "durvalumab",
+      "name": "Durvalumab",
+      "basis": "flat",
+      "dosePerUnit": 1500,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E lines 970 to 971 (CASPIAN). Durvalumab 1500 mg IV day 1 every 21 days during the 4 induction cycles, THEN maintenance durvalumab 1500 mg IV day 1 every 28 days after chemotherapy stops (category 1 for all).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, lines 970 to 971 (Durvalumab 1500 mg Day 1 every 21 days x 4 cycles followed by maintenance Durvalumab 1500 mg Day 1 every 28 days)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

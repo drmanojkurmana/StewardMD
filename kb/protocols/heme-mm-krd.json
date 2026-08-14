@@ -1,0 +1,160 @@
+{
+  "id": "heme-mm-krd",
+  "diseaseId": "plasma_cell_disorders",
+  "name": "Carfilzomib + Lenalidomide + Dexamethasone (KRd)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "KRd is a proteasome-inhibitor/IMiD triplet and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS), not access to KRd. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "stage": [],
+  "treatmentSetting": "primary therapy for newly diagnosed multiple myeloma (Other Recommended) and therapy for previously treated (relapsed) multiple myeloma",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [
+    {
+      "name": "Carfilzomib hydration",
+      "notes": "IV hydration before and after carfilzomib in early cycles to reduce tumor lysis/renal risk; dexamethasone premedication reduces infusion reactions."
+    }
+  ],
+  "supportiveCare": [
+    "Carfilzomib: baseline and on-treatment cardiovascular monitoring (heart failure, hypertension, ischemia); hydration; VZV antiviral prophylaxis (proteasome inhibitor).",
+    "Lenalidomide: VTE thromboprophylaxis and REMS-program dispensing (teratogen); adjust for renal impairment.",
+    "Antiemetics: low emetic risk; prophylaxis per emetogenicity tier."
+  ],
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide clearance; carfilzomib TLS risk)",
+    "blood pressure and cardiac symptoms (carfilzomib)",
+    "glucose and blood pressure (dexamethasone)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "cardiac status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "new or worsening cardiac failure, ischemia, or grade 3 to 4 hypertension",
+      "drug": "carfilzomib",
+      "action": "hold",
+      "text": "Hold carfilzomib and evaluate cardiac function; resume at a reduced dose only after recovery per labeling; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carfilzomib",
+      "name": "Carfilzomib",
+      "basis": "bsa",
+      "dosePerUnit": 27,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286325). Carfilzomib is given at a reduced starting dose of 20 mg/m2 IV on Cycle 1 days 1 and 2, then escalated to 27 mg/m2 IV for all subsequent doses, on days 1, 2, 8, 9, 15, and 16 of a 28-day cycle (twice weekly). dosePerUnit reflects the 27 mg/m2 steady-state dose; the 20 mg/m2 Cycle 1 day 1 to 2 ramp is taken exactly as printed. A once-weekly 56 mg/m2 schedule (days 1, 8, 15; Cycle 1 day 1 = 20 mg/m2) is a source-stated alternative (Table 74.6 footnote b, line 286436). Ensure hydration and baseline cardiac assessment (carfilzomib cardiac/hypertension risk).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, KRd entry, line 286325 (Carfilzomib 20 mg/m2 (Cycle 1, day 1 and 2) and 27 mg/m2 (subsequent doses) IV on days 1, 2, 8, 9, 15, and 16)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        8,
+        9,
+        15,
+        16
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "lenalidomide",
+      "name": "Lenalidomide",
+      "basis": "flat",
+      "dosePerUnit": 25,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286326). Lenalidomide 25 mg PO on days 1 to 21 of a 28-day cycle. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen); reduce for renal impairment per CrCl.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6, p.1520, KRd entry, line 286326 (Lenalidomide 25 mg PO on days 1-21)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286327). Dexamethasone 40 mg PO on days 1, 8, and 15 of a 28-day cycle. Dose taken exactly as the source prints it.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6, p.1520, KRd entry, line 286327 (Dexamethasone 40 mg orally on days 1, 8, and 15)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

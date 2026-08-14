@@ -1,0 +1,249 @@
+{
+  "id": "ped-hodgkin",
+  "diseaseId": "hodgkin_lymphoma",
+  "name": "Pediatric classic Hodgkin lymphoma: response-adapted ABVE-PC (AHOD0031); OEPA-COPDAC alternative",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+    "textbook": "Harrison 22nd ed"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Per Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma v1.2026. Pediatric classic Hodgkin lymphoma therapy is response-adapted (interim FDG-PET Deauville response after 2 cycles), not biomarker-gated; no per-drug dose here is gated by a molecular biomarker (ped_hodgkin.txt lines 244, 650 to 656)."
+  },
+  "stage": [
+    "I",
+    "II",
+    "III",
+    "IV (risk/response-adapted)"
+  ],
+  "treatmentSetting": "primary systemic therapy, response-adapted (interim FDG-PET after 2 cycles drives cycle number and involved-site radiotherapy)",
+  "histology": "classic Hodgkin lymphoma (children and adolescents)",
+  "premedications": [],
+  "supportiveCare": [
+    "bleomycin PULMONARY toxicity: PFTs before use (FEV1/FVC >60% generally acceptable), monitor for pneumonitis, hold for pulmonary toxicity (ped_hodgkin.txt lines 397 to 399, 471)",
+    "anthracycline cardioprotection: strongly consider dexrazoxane for children/adolescents expected to receive >=250 mg/m2 cumulative doxorubicin-equivalent (ped_hodgkin.txt lines 320 to 322)",
+    "response-adapted: interim FDG-PET Deauville after 2 cycles determines cycle number and involved-site radiotherapy (ped_hodgkin.txt lines 244, 650 to 656)",
+    "alternative regimen OEPA-COPDAC (GPOH-HD-2002 / EuroNet-PHL-C1): OEPA = Vincristine 1.5 mg/m2 Days 1/8/15 (2 mg/dose max), Etoposide 125 mg/m2 Days 1 to 5, Prednisone 60 mg/m2 Days 1 to 15, Doxorubicin 40 mg/m2 Days 1 and 15, every 28 days x2; COPDAC = Cyclophosphamide 500 mg/m2 Days 1 and 8, Vincristine 1.5 mg/m2 Days 1 and 8 (2 mg/dose max), Prednisone 40 mg/m2 Days 1 to 15 (80 mg/day max), Dacarbazine 250 mg/m2 Days 1 to 3, every 28 days x2 or x4 by stage (ped_hodgkin.txt lines 1901 to 1928)",
+    "antiemetic and growth-factor support per NCCN tiers"
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "pulmonary function tests before bleomycin and if pulmonary symptoms develop",
+    "cardiac assessment and cumulative doxorubicin-equivalent tracking",
+    "interim and end-of-therapy FDG-PET/CT (Deauville) for response adaptation",
+    "peripheral neuropathy assessment before each vincristine dose"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "pulmonary function (bleomycin)",
+    "cardiac (LVEF)",
+    "cumulative doxorubicin dose",
+    "interim response status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "declining DLCO/FEV1 or clinical pneumonitis",
+      "action": "hold bleomycin",
+      "text": "Hold bleomycin for pulmonary toxicity; physician decides on discontinuation."
+    },
+    {
+      "condition": "ANC < 1000 or platelets < 100k at cycle start",
+      "action": "delay",
+      "text": "Review required. AHOD0031 count-recovery criteria apply; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 25,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "ABVE-PC 'A'. Printed dose 25 mg/m2 IV Days 1 and 2 (ped_hodgkin.txt line 1853). ISMP tall-man DOXOrubicin. Strongly consider dexrazoxane for children/adolescents expected to receive >=250 mg/m2 cumulative doxorubicin-equivalent (line 322), carried as the warn threshold; 350 mg/m2 is the conservative pediatric hard ceiling (below the adult 550; dexrazoxane per COG), matching the pediatric guard used in ped-neuroblastoma.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1853 (ABVE-PC AHOD0031: Doxorubicin 25 mg/m2 IV Days 1 and 2); dexrazoxane/cumulative-doxorubicin guidance lines 320 to 322",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 250,
+          "hard": 350,
+          "unit": "mg/m2 doxorubicin-equivalent"
+        }
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "bleomycin-d1",
+      "name": "Bleomycin (Day 1)",
+      "basis": "bsa",
+      "dosePerUnit": 5,
+      "unit": "units",
+      "route": "IV",
+      "notes": "ABVE-PC 'B', Day 1 dose. Printed as 5 U/m2 IV on Day 1 (ped_hodgkin.txt line 1854); the Day 8 dose escalates to 10 U/m2 and is encoded as a separate Bleomycin (Day 8) entry so both days compute correctly. PULMONARY toxicity risk: obtain PFTs before use (FEV1/FVC >60% generally acceptable, line 471); monitor for pneumonitis and hold for pulmonary toxicity.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1854 (ABVE-PC AHOD0031: Bleomycin 5 U/m2 IV Day 1, 10 U/m2 IV Day 8)",
+        "evidenceStatus": "current"
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "bleomycin-d8",
+      "name": "Bleomycin (Day 8)",
+      "basis": "bsa",
+      "dosePerUnit": 10,
+      "unit": "units",
+      "route": "IV",
+      "notes": "ABVE-PC 'B', Day 8 dose. Printed as 10 U/m2 IV on Day 8 (ped_hodgkin.txt line 1854); split from the Day 1 (5 U/m2) entry so the Day 8 escalation is computed rather than left in prose. PULMONARY toxicity risk: obtain PFTs before use (FEV1/FVC >60% generally acceptable, line 471); monitor for pneumonitis and hold for pulmonary toxicity.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1854 (ABVE-PC AHOD0031: Bleomycin 5 U/m2 IV Day 1, 10 U/m2 IV Day 8)",
+        "evidenceStatus": "current"
+      },
+      "days": [
+        8
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 1.4,
+      "unit": "mg/m2",
+      "route": "IV push (IV only, NEVER intrathecal)",
+      "notes": "ABVE-PC 'V'. Printed dose 1.4 mg/m2 IV Days 1 and 8 (ped_hodgkin.txt line 1855). The source prints a 2.8 mg/dose pediatric maximum, but StewardMD carries the ISMP 2 mg per-dose cap as the safety default (see evidence.divergence). ISMP tall-man vinCRIStine; IV only and fatal if given intrathecally.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1855 (ABVE-PC AHOD0031: Vincristine 1.4 mg/m2 IV Days 1 and 8; 2.8 mg/dose maximum per dose)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": 2
+      },
+      "roundingRule": {
+        "increment": 0.1
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 125,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "ABVE-PC 'E'. Printed dose 125 mg/m2 IV daily on Days 1 to 3 (ped_hodgkin.txt line 1856).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1856 (ABVE-PC AHOD0031: Etoposide 125 mg/m2 IV daily on Days 1 to 3)",
+        "evidenceStatus": "current"
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "PO (divided into two daily doses)",
+      "notes": "ABVE-PC 'P'. Printed dose 40 mg/m2/day PO divided BID on Days 1 to 7 (ped_hodgkin.txt line 1858).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1858 (ABVE-PC AHOD0031: Prednisone 40 mg/m2 PO divided into two doses daily on Days 1 to 7)",
+        "evidenceStatus": "current"
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 800,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "ABVE-PC 'C'. Printed dose 800 mg/m2 IV Day 1 (ped_hodgkin.txt line 1859). Regimen repeated every 21 days for 4 cycles (line 1860); cycle number is response-adapted.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric Hodgkin Lymphoma",
+        "version": "1.2026",
+        "date": null,
+        "locator": "ped_hodgkin.txt line 1859 (ABVE-PC AHOD0031: Cyclophosphamide 800 mg/m2 IV Day 1)",
+        "evidenceStatus": "current"
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "id": "gi-gist-regorafenib",
+  "diseaseId": "gastrointestinal_stromal_tumour",
+  "name": "Regorafenib (GIST, third-line)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KIT": "regorafenib is a multikinase inhibitor with activity against KIT and PDGFRA, used after imatinib and sunitinib failure",
+    "note": "Regorafenib is the standard third-line TKI for advanced GIST after failure of imatinib and sunitinib (category 1). It also has activity in SDH-deficient GIST. Per Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors, GIST-D, and DeVita 12th ed. (lines 118434 to 118437)."
+  },
+  "stage": [
+    "unresectable",
+    "recurrent",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "gastrointestinal stromal tumor (KIT/CD117-expressing mesenchymal neoplasm)",
+  "premedications": [],
+  "supportiveCare": [
+    "160 mg daily for 3 weeks on / 1 week off (28-day cycle); continue until progression or intolerance.",
+    "Monitor blood pressure and liver function; assess hand-foot skin reaction each cycle.",
+    "Antiemetic/G-CSF prophylaxis not routinely required for oral regorafenib monotherapy."
+  ],
+  "monitoring": [
+    "liver function tests (regorafenib hepatotoxicity, boxed warning) - baseline and during first cycles",
+    "blood pressure (TKI-associated hypertension) at baseline and each cycle",
+    "hand-foot skin reaction assessment each cycle",
+    "CBC",
+    "clinical/radiographic response assessment (CT)"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "blood pressure",
+    "CBC/platelets",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 hand-foot skin reaction, hypertension, or hepatotoxicity",
+      "drug": "regorafenib",
+      "action": "hold/reduce",
+      "text": "Hold and resume at a reduced dose (e.g., 120 mg then 80 mg) per labeling; monitor LFTs closely; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "regorafenib",
+      "name": "Regorafenib",
+      "basis": "flat",
+      "dosePerUnit": 160,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. (lines 118434 to 118437, GRID trial). Regorafenib 160 mg PO once daily for 3 weeks (days 1 to 21) followed by a 1-week rest, in a 4-week (28-day) cycle. Days array encodes the 21 on-treatment days of the 28-day cycle. No ISMP tall-man form. Regorafenib-specific monitoring: hypertension (blood pressure), hand-foot skin reaction, hepatotoxicity (LFTs, including a boxed hepatotoxicity warning), fatigue, and diarrhea.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 118434 to 118437 (regorafenib given 160 mg by mouth daily for 3 weeks every 4 weeks, effective as third-line therapy in patients failing both imatinib and sunitinib, GRID trial)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": []
+    }
+  ]
+}

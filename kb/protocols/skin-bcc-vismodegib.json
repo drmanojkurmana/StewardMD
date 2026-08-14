@@ -1,0 +1,113 @@
+{
+  "id": "skin-bcc-vismodegib",
+  "diseaseId": "basal_cell_carcinoma",
+  "name": "Vismodegib (Hedgehog pathway inhibitor, advanced basal cell carcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Basal Cell Skin Cancer",
+    "textbook": ""
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Hedgehog pathway inhibitor (SMO inhibitor); basal cell carcinoma is driven by constitutive Hedgehog/PTCH1-SMO pathway activation, so no additional companion biomarker test is required. Indicated for locally advanced basal cell carcinoma (laBCC) that has recurred after surgery or radiotherapy or is not amenable to surgery/RT, and for metastatic basal cell carcinoma (mBCC). SAFETY: Hedgehog pathway inhibitors are potently TERATOGENIC (embryo-fetal death/severe defects); pregnancy must be excluded and effective contraception used during and after therapy. Muscle spasms are a characteristic class toxicity."
+  },
+  "stage": [
+    "III (locally advanced/unresectable)",
+    "IV (metastatic)"
+  ],
+  "treatmentSetting": [
+    "locally advanced",
+    "metastatic"
+  ],
+  "histology": "basal cell carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "TERATOGENICITY: confirm negative pregnancy test before starting; effective contraception during therapy and for the labeled interval after the last dose; counsel patients and avoid blood/semen donation per labeling.",
+    "Muscle-spasm management (a characteristic Hedgehog pathway inhibitor toxicity); supportive care and dose interruption per labeling.",
+    "SOURCE-STATED ALTERNATIVE Hedgehog pathway inhibitor: sonidegib 200 mg PO once daily (Standard Guidelines (NCCN) v2.2026, Basal Cell Skin Cancer, MS-12, BOLT trial, lines 1548 and 1551 (Soni 200 mg rows)), FDA-approved for laBCC; same teratogenicity and muscle-spasm cautions apply."
+  ],
+  "monitoring": [
+    "pregnancy status before initiation (teratogenicity); contraception counseling",
+    "muscle-spasm and creatine-kinase surveillance (Hedgehog pathway inhibitor toxicity)",
+    "weight, taste changes, alopecia; clinical/radiographic response assessment",
+    "dermatologic examination for response and new lesions"
+  ],
+  "clearanceChecks": [
+    "pregnancy excluded",
+    "prior surgery/RT status",
+    "creatine kinase",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "intolerable muscle spasms or other significant toxicity",
+      "drug": "vismodegib",
+      "action": "hold/resume",
+      "text": "Interrupt therapy for intolerable adverse events (e.g., severe muscle spasms) and resume per labeling; obtain clinical review. Planned drug holidays may improve tolerability."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "vismodegib",
+      "name": "Vismodegib",
+      "basis": "flat",
+      "dosePerUnit": 150,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Basal Cell Skin Cancer, MS-15 (line 1562): vismodegib 150 mg PO ONCE daily, taken orally, continuously. Represented as days 1 to 28 of a 28-day scheduling cycle. Continue until disease progression or unacceptable toxicity. Class toxicities: muscle spasms, dysgeusia, alopecia, weight loss, fatigue. TERATOGENIC: exclude pregnancy and use effective contraception.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Basal Cell Skin Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Hedgehog pathway inhibitor discussion, MS-15 (line 1562): 'Inhibitors were taken orally once daily. Vismodegib dose was 150 mg.'",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "gi-esophageal-nivolumab-adjuvant",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "name": "Nivolumab, adjuvant after neoadjuvant chemoradiation and surgery (CheckMate-577)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "cyclesNote": "Adjuvant, up to 1 year total (DeVita 12th ed., lines 97203 to 97205). Label schedule: 240 mg IV every 2 weeks for the first 16 weeks, then 480 mg IV every 4 weeks, to complete 1 year. The 16-week switch timing is not established by the cited source (see divergence).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "PD_L1_CPS": "tested",
+    "note": "In CheckMate-577 the disease-free survival benefit of adjuvant nivolumab was seen regardless of PD-L1 tumor status (benefit for both squamous and adenocarcinoma, node-positive and negative), with a greater benefit in PD-L1 CPS at least 5. PD-L1 is tested for prognostic stratification but does not gate eligibility. Per DeVita 12th ed. (CheckMate-577) and Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers v3.2026."
+  },
+  "stage": [
+    "resected, with residual pathologic disease (non-pCR) after neoadjuvant chemoradiation and R0 resection"
+  ],
+  "treatmentSetting": "adjuvant",
+  "histology": "adenocarcinoma or squamous cell carcinoma (both eligible)",
+  "premedications": [],
+  "supportiveCare": [
+    "Single-agent immunotherapy; no cytotoxic backbone.",
+    "Immune-related adverse event monitoring (thyroid, hepatic, pulmonary, colitis, endocrinopathies, dermatologic).",
+    "Duration up to 1 year (CheckMate-577)."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during nivolumab",
+    "clinical assessment for colitis, pneumonitis, hepatitis, endocrinopathy each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC",
+    "liver",
+    "endocrine/immune status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold/steroids",
+      "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. Nivolumab 240 mg IV flat every 2 weeks (line 293062, agent-level flat dosing). The CheckMate-577 label schedule is 240 mg IV every 2 weeks for the first 16 weeks then 480 mg IV every 4 weeks, for a total of up to 1 year (DeVita states 1 year of nivolumab, lines 97203 to 97205; the 480 mg every 4 weeks flat continuation dose is grounded to line 233698). The exact 16-week switch timing is NOT stated in the cited source - see divergence. Monitor for immune-related adverse events.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 293062 (nivolumab 240 mg IV every 2 weeks, flat dosing); adjuvant indication and 1-year duration lines 97202 to 97205; continuation flat dose 480 mg every 4 weeks line 233698",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

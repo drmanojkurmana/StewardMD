@@ -1,0 +1,92 @@
+{
+  "id": "skin-cscc-cemiplimab",
+  "diseaseId": "cutaneous_squamous_cell_carcinoma",
+  "name": "Cemiplimab (cutaneous squamous cell carcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 350,
+  "cyclesNote": "Advanced (locally advanced/recurrent or metastatic CSCC): cemiplimab 350 mg IV every 3 weeks until disease progression or unacceptable toxicity. Adjuvant (high-risk resected CSCC after postoperative RT, C-POST): cemiplimab 350 mg IV every 3 weeks for 12 weeks, followed by 700 mg IV every 6 weeks for up to 36 weeks (Standard Guidelines (NCCN) v2.2026, MS-19).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Squamous Cell Skin Cancer",
+    "textbook": ""
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Anti-PD-1 checkpoint inhibitor. No positive companion biomarker is required to start. Cemiplimab-rwlc is category 1 preferred systemic therapy for locally advanced, recurrent, or metastatic CSCC that is not curable by surgery or radiotherapy, and is also studied as adjuvant therapy for high-risk resected CSCC after postoperative radiotherapy (C-POST). Per Standard Guidelines (NCCN), Squamous Cell Skin Cancer."
+  },
+  "stage": [
+    "III (locally advanced/recurrent)",
+    "IV (metastatic)",
+    "III (resected high-risk, adjuvant)"
+  ],
+  "treatmentSetting": [
+    "locally advanced",
+    "metastatic",
+    "adjuvant"
+  ],
+  "histology": "cutaneous squamous cell carcinoma (CSCC)",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities.",
+    "Caution in solid-organ transplant recipients and chronic immunosuppression (allograft rejection / reduced efficacy); multidisciplinary review.",
+    "SOURCE-STATED ALTERNATIVE anti-PD-1: pembrolizumab is a recommended option for laCSCC, recurrent, and metastatic CSCC (Standard Guidelines (NCCN) v2.2026, lines 1533, 1565); its mg dose is NOT printed in this source, so if substituted the dose must be VERIFY-ed against a cited source."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose) before each cycle and as indicated",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment (advanced); recurrence surveillance (adjuvant)",
+    "transplant/immunosuppression status review"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "CBC",
+    "transplant/immunosuppression status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "cemiplimab",
+      "action": "hold/steroids",
+      "text": "Hold cemiplimab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cemiplimab",
+      "name": "Cemiplimab-rwlc",
+      "basis": "flat",
+      "dosePerUnit": 350,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Squamous Cell Skin Cancer, MS-19 (line 2832): cemiplimab 350 mg IV flat every 3 weeks. This 350 mg every-3-weeks flat dose is printed for the C-POST adjuvant regimen (350 mg Q3W for 12 weeks, then 700 mg Q6W for up to 36 weeks); the cited MS-19 line 2832 is the C-POST adjuvant context, and the same 350 mg every-3-weeks flat dose is label-consistent (FDA prescribing information) for advanced (locally advanced/recurrent or metastatic) CSCC, continued until progression or unacceptable toxicity. The adjuvant maintenance step (700 mg Q6W) is described narratively in regimen.cycles.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Squamous Cell Skin Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "MS-19 (line 2832): 'Patients received 350 mg of adjuvant cemiplimab or placebo, every 3 weeks for 12 weeks, followed by 700 mg every 6 weeks for up to 36 weeks' (C-POST adjuvant trial)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

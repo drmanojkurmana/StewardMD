@@ -1,0 +1,108 @@
+{
+  "id": "sarc-sts-doxorubicin",
+  "diseaseId": "soft_tissue_sarcoma",
+  "name": "Single-Agent Doxorubicin for Soft Tissue Sarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "six cycles were used in the referenced GeDDiS trial; continue per response and the cumulative anthracycline ceiling, physician determined",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Soft Tissue Sarcoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Single-agent doxorubicin is a cytotoxic anthracycline backbone for soft tissue sarcoma and is not biomarker-restricted. Histology (rather than a molecular biomarker) guides subtype-specific alternatives. Per Standard Guidelines (NCCN), Soft Tissue Sarcoma v5.2026, Systemic Therapy Agents and Regimens with Activity in Soft Tissue Sarcoma Subtypes."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "unresectable"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "soft tissue sarcoma (histology-agnostic anthracycline backbone across the common adult subtypes)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "doxorubicin 75 mg/m2 is highly-to-moderately emetogenic (regimen-dependent); give prophylaxis per emetogenicity tier on the day of treatment"
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: doxorubicin single-agent at 60 to 75 mg/m2 is on the moderate-to-high emetic-risk boundary; prophylaxis per emetogenicity tier.",
+    "cardiac surveillance: baseline LVEF and cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2).",
+    "G-CSF: assess febrile-neutropenia risk; add primary prophylaxis for higher-risk patients or dose-dense doxorubicin-based combinations.",
+    "SOURCED ALTERNATIVE (gemcitabine plus docetaxel): gemcitabine 900 mg/m2 IV over 90 minutes on days 1 and 8 plus docetaxel 100 mg/m2 IV on day 8 with G-CSF, every 21 days (DeVita 12th ed., line 176028, Hensley regimen, Table 50.6); a fully-sourced histology-directed alternative (for example for leiomyosarcoma) modeled here as a note, not as a separate combination in this single-agent protocol."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "cumulative anthracycline dose tracking (DOXOrubicin)",
+    "cardiac function (LVEF) at baseline and as clinically indicated",
+    "liver function before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "cardiac (LVEF)",
+    "cumulative anthracycline dose",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "cumulative doxorubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard)",
+      "drug": "doxorubicin",
+      "action": "review/stop",
+      "text": "Warn at 450 mg/m2 and stop at the 550 mg/m2 hard cap; reassess cardiac function; physician decides on continuation."
+    },
+    {
+      "condition": "decline in LVEF or clinical cardiotoxicity",
+      "drug": "doxorubicin",
+      "action": "hold",
+      "text": "Hold and obtain cardiology review before further anthracycline."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 175842. DOXOrubicin 75 mg/m2 IV on day 1 every 21 days (GeDDiS trial single-agent doxorubicin arm, the standard first-line comparator in advanced soft tissue sarcoma). Anthracycline cumulative lifetime cap: warn 450, hard 550 mg/m2 (conventional anthracycline ceiling, not a value from the source subtype table). ISMP tall-man applied (DOXOrubicin). Track cumulative dose; obtain baseline and periodic LVEF. Doxorubicin-based COMBINATIONS (for example AIM, doxorubicin plus ifosfamide/mesna) and the histology-directed alternative gemcitabine plus docetaxel are listed by the guideline; see supportiveCare/notes for the sourced gemcitabine/docetaxel dosing.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 175842 (GeDDiS trial: six cycles of single-agent doxorubicin at 75 mg/m2 every 3 weeks)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

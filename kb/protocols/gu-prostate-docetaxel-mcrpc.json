@@ -1,0 +1,139 @@
+{
+  "id": "gu-prostate-docetaxel-mcrpc",
+  "diseaseId": "prostate_cancer",
+  "name": "DOCEtaxel plus Prednisone (mCRPC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Prostate Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Cytotoxic taxane chemotherapy is not biomarker-restricted. Castrate testosterone (below 50 ng/dL) must be maintained with ongoing ADT. Per Standard Guidelines (NCCN), Prostate Cancer, Systemic Therapy for M1 CRPC (PROS-18) and Discussion."
+  },
+  "stage": [
+    "M1 CRPC (metastatic castration-resistant)"
+  ],
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "premedications": [
+    {
+      "name": "Corticosteroid premedication for docetaxel (fluid retention / hypersensitivity)",
+      "notes": "Give per docetaxel labeling (dexamethasone premedication); specific premedication schedule not enumerated in the provided prostate extract."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Provide per emetogenic-risk tier on the day of chemotherapy."
+    }
+  ],
+  "supportiveCare": [
+    "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+    "cycles null: source-stated standard is every 3 weeks; the total number of cycles is not fixed in the provided extract (TAX327 gave up to 10 cycles) and is individualized; treat to response/tolerance under clinical review.",
+    "companion prednisone 5 mg PO twice daily throughout.",
+    "G-CSF: assess febrile-neutropenia risk per taxane chemotherapy standards.",
+    "monitor for peripheral neuropathy, fluid retention, and hypersensitivity (docetaxel)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "hepatic function before each cycle (docetaxel)",
+    "peripheral neuropathy assessment before each cycle",
+    "PSA and serum testosterone (confirm castrate level)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "castrate testosterone maintained",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 neutropenia or febrile neutropenia",
+      "drug": "docetaxel",
+      "action": "hold/reduce",
+      "text": "Hold and dose-reduce docetaxel per labeling; consider G-CSF prophylaxis; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026 Discussion, prostate line 7419 (the standard regimen is 75 mg/m2 every 3 weeks). ISMP tall-man DOCEtaxel. 75 mg/m2 IV on day 1 of a 21-day cycle (TAX327). A biweekly alternative of 50 mg/m2 is source-stated (prostate line 7420) but not modeled here.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Prostate Cancer",
+        "version": "6.2026",
+        "date": "2026-07-28",
+        "locator": "Discussion, prostate line 7419 (the standard regimen is 75 mg/m2 every 3 weeks; a biweekly 50 mg/m2 alternative exists)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "flat",
+      "dosePerUnit": 5,
+      "unit": "mg",
+      "route": "PO (twice daily)",
+      "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026 Discussion, prostate line 7266 (prednisone 5 mg twice daily). Companion daily prednisone 5 mg PO twice daily continuously with docetaxel (TAX327). Represented as days 1 to 21 of the 21-day cycle (continuous).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Prostate Cancer",
+        "version": "6.2026",
+        "date": "2026-07-28",
+        "locator": "Discussion, prostate line 7266 (prednisone 5 mg twice daily companion steroid)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

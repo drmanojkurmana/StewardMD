@@ -1,0 +1,178 @@
+{
+  "id": "heme-alcl-bv-chp",
+  "diseaseId": "anaplastic_large_cell_lymphoma",
+  "name": "BV-CHP (Brentuximab vedotin + Cyclophosphamide + DOXOrubicin + Prednisone)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), T-cell Lymphomas",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "CD30": "positive (REQUIRED gate for brentuximab vedotin)",
+    "ALK": "ALK-positive or ALK-negative systemic ALCL (prognostic; not a dosing gate)",
+    "note": "Brentuximab vedotin is a CD30-directed antibody-drug conjugate; CD30 positivity is the biomarker gate for BV-CHP (Standard Guidelines (NCCN), T-cell Lymphomas v2.2026, lines 803 and 807: CHP + Brentuximab vedotin for CD30+ histologies). Systemic ALCL is uniformly CD30-positive. ALK status is prognostic and does not change dosing."
+  },
+  "stage": [],
+  "treatmentSetting": "primary therapy for previously untreated CD30-positive systemic anaplastic large cell lymphoma (and other CD30-positive PTCL)",
+  "histology": "systemic anaplastic large cell lymphoma (ALK-positive or ALK-negative), and other CD30-positive peripheral T-cell lymphomas",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "anthracycline-containing regimen; prophylaxis per emetogenicity tier."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF: consider primary prophylaxis per febrile-neutropenia risk of the CHP backbone.",
+    "Brentuximab vedotin: monitor for peripheral neuropathy; hold/reduce for grade 2 or higher. Vincristine is intentionally omitted (CHP, not CHOP) to avoid overlapping neurotoxicity with brentuximab.",
+    "Tumor lysis syndrome prophylaxis for high tumor burden."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "peripheral neuropathy assessment each visit (brentuximab vedotin)",
+    "cardiac assessment / LVEF (anthracycline) at baseline",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "hepatic function (brentuximab)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "cardiac (LVEF)",
+    "peripheral neuropathy status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "brentuximab-vedotin",
+      "action": "reduce/hold",
+      "text": "Reduce or hold brentuximab vedotin for grade 2 or higher peripheral neuropathy per labeling; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "brentuximab-vedotin",
+      "name": "Brentuximab vedotin",
+      "basis": "mgkg",
+      "dosePerUnit": 1.8,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., Table 10.1, lines 20811 to 20812: brentuximab vedotin 1.8 mg/kg IV every 3 weeks (day 1 of a 21-day cycle), with body-weight dosing capped at 100 kg. Table 10.1 lists this dose/schedule for refractory systemic ALCL; frontline BV-CHP (ECHELON-2) uses the identical 1.8 mg/kg every-3-week dose, and the frontline setting is grounded to the NCCN CHP + brentuximab entry. CD30-directed ADC (MMAE); monitor for peripheral neuropathy. Requires CD30 positivity.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Table 10.1 (antineoplastic drug reference), Brentuximab vedotin entry, lines 20811 to 20812: 1.8 mg/kg IV every 3 weeks, maximum dose per 100 kg, for (refractory) Hodgkin lymphoma and systemic anaplastic large cell lymphoma.",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null,
+        "bodyWeightCapKg": 100
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 750,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Cyclophosphamide 750 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP cyclophosphamide 750 mg/m2 bsa on day 1.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP cyclophosphamide 750 mg/m2 bsa IV on day 1.",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "DOXOrubicin 50 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP doxorubicin 50 mg/m2 bsa on day 1. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). ISMP tall-man DOXOrubicin.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP doxorubicin 50 mg/m2 bsa IV on day 1, with anthracycline cumulative cap warn 450 / hard 550 mg/m2.",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Prednisone 100 mg PO flat on days 1 to 5. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json); rchop names the steroid Prednisolone while this file uses Prednisone (same 100 mg flat days 1 to 5, interchangeable CHOP steroid).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP steroid 100 mg flat on days 1 to 5 (rchop names it Prednisolone; interchangeable CHOP steroid with Prednisone).",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    }
+  ]
+}

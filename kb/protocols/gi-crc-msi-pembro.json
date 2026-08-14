@@ -1,0 +1,81 @@
+{
+  "id": "gi-crc-msi-pembro",
+  "diseaseId": "colorectal_cancer",
+  "name": "Pembrolizumab (first-line dMMR/MSI-H metastatic colorectal, KEYNOTE-177)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Colon Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "MMR_MSI": "deficient mismatch repair (dMMR) / microsatellite instability-high (MSI-H)",
+    "POLE_POLD1": "also applicable to POLE/POLD1 pathogenic mutations with ultra-hypermutated phenotype",
+    "note": "Pembrolizumab is a category 1, preferred first-line option for dMMR/MSI-H metastatic colorectal cancer (KEYNOTE-177 improved PFS versus chemotherapy). BIOMARKER GATE: single-agent checkpoint-inhibitor immunotherapy applies ONLY to dMMR/MSI-H (or POLE/POLD1 ultra-hypermutated) tumors - it is NOT effective in proficient MMR / microsatellite-stable (pMMR/MSS) colorectal cancer. Per Standard Guidelines (NCCN), Colon Cancer, Principles of Systemic Therapy for Advanced or Metastatic Disease."
+  },
+  "stage": [
+    "IV (metastatic)"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Pembrolizumab 200 mg every 3 weeks (or 400 mg every 6 weeks); continue until progression, unacceptable toxicity, or the labeled maximum duration.",
+    "Immune-related adverse event surveillance and management (corticosteroids for grade 2+ irAE)."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) before cycles",
+    "symptom review for immune colitis, pneumonitis, hepatitis, dermatitis, endocrinopathies",
+    "clinical/radiographic response assessment (note potential pseudoprogression on immunotherapy)"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge; permanently discontinue for severe/recurrent grade 3-4 irAE per labeling."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Colon v2.2026, Principles of Systemic Therapy (colon lines 2668 to 2671). Pembrolizumab 200 mg IV every 3 weeks (day 1 of a 21-day cycle). SOURCE-STATED ALTERNATIVES: 2 mg/kg IV every 3 weeks; 400 mg IV every 6 weeks; or 4 mg/kg IV every 6 weeks. No ISMP tall-man form. Immune-related adverse event monitoring required (thyroid, hepatic, pulmonary, colitis, endocrinopathies, dermatologic).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Colon Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy for Advanced or Metastatic Disease - Regimens (colon lines 2668 to 2671: Pembrolizumab 200 mg IV every 3 weeks; or 2 mg/kg every 3 weeks; or 400 mg IV every 6 weeks; or 4 mg/kg every 6 weeks)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "hn-cetuximab",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "Cetuximab Monotherapy, Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 1,
+  "cyclesNote": "weekly until disease progression or unacceptable toxicity",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "No biomarker gate. Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026, SYST-A 4 of 7, single-agent cetuximab is listed among the Other Recommended Single Agents for recurrent, unresectable, or metastatic disease without a PD-L1 or molecular requirement."
+  },
+  "stage": [],
+  "treatmentSetting": [
+    "recurrent",
+    "metastatic"
+  ],
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "Cetuximab premedication",
+      "notes": "antihistamine (and per institutional practice a corticosteroid) before the cetuximab loading dose per cetuximab labeling; infusion-reaction precautions."
+    }
+  ],
+  "supportiveCare": [
+    "Monitor for cetuximab infusion reactions (especially the loading dose) and acneiform rash.",
+    "Serum magnesium surveillance (cetuximab-associated hypomagnesemia)."
+  ],
+  "monitoring": [
+    "cetuximab-related skin toxicity assessment",
+    "serum magnesium and electrolytes",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": [
+    "magnesium/electrolytes",
+    "prior-cycle status",
+    "infusion-reaction history"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher cetuximab infusion reaction or severe acneiform rash",
+      "drug": "cetuximab",
+      "action": "hold/reduce",
+      "text": "Manage per cetuximab labeling; hold or reduce and obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cetuximab",
+      "name": "Cetuximab",
+      "basis": "bsa",
+      "dosePerUnit": 250,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Cetuximab 400 mg/m2 IV loading over 2 hr in week 1, then 250 mg/m2 IV over 1 hr weekly. dosePerUnit records the recurring weekly 250 mg/m2 dose (cycleLengthDays 7, day 1 of each weekly cycle); the 400 mg/m2 week-1 loading dose is recorded in this note. The 250 mg/m2 recurrent or metastatic head and neck dose is anchored to DeVita 12th ed. line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer); the 400 mg/m2 loading then 250 mg/m2 weekly administration schedule is sourced to DeVita 12th ed. line 124823 to 124824 (the cetuximab administration schedule printed in the colorectal cancer chapter; it is the standard cetuximab schedule).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "recurrent or metastatic head and neck in-indication anchor line 58216 (Table 23.9, Cetuximab for Recurrent or Metastatic Head and Neck Cancer, 250 mg per m2); standard administration schedule line 124823 to 124824 (400 mg/m2 loading dose week 1 over 2 hr, then weekly 250 mg/m2 over 1 hr; this schedule locator is in the colorectal cancer chapter, but the 400-then-250 weekly schedule is the standard cetuximab administration schedule)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

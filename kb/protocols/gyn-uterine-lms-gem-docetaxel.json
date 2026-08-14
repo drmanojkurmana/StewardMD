@@ -1,0 +1,120 @@
+{
+  "id": "gyn-uterine-lms-gem-docetaxel",
+  "diseaseId": "leiomyosarcoma",
+  "name": "Gemcitabine + Docetaxel for Uterine Leiomyosarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "the Hensley gemcitabine/docetaxel regimen does not print a fixed cycle count; continue per response and tolerance, physician determined (the 6-cycle figure in the GeDDiS trial used a lower gemcitabine dose)",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Uterine Neoplasms",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "The gemcitabine plus docetaxel doublet is a cytotoxic backbone for uterine leiomyosarcoma and is not biomarker restricted. Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, Systemic Therapy for Uterine Sarcoma (UTSARC-C)."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "recurrent"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "uterine leiomyosarcoma (uLMS)",
+  "premedications": [
+    {
+      "name": "DOCEtaxel premedication",
+      "notes": "corticosteroid premedication per docetaxel labeling to reduce fluid retention and hypersensitivity."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF / myeloid growth factor support is required for this doublet per the source (DeVita line 176028, with G-CSF).",
+    "antiemetics per emetogenicity tier.",
+    "monitor for the occasional severe pulmonary toxicity noted with this combination (DeVita line 175823)."
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1 and 8)",
+    "liver function before each cycle",
+    "pulmonary symptom assessment (rare severe pulmonary toxicity)",
+    "fluid retention / edema assessment for DOCEtaxel"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "pulmonary status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "prior pelvic radiotherapy",
+      "drug": "gemcitabine and docetaxel",
+      "action": "reduce",
+      "text": "Dose reductions of both drugs for patients with prior pelvic radiotherapy per the source (DeVita line 175835)."
+    },
+    {
+      "condition": "ANC < 1500 or platelets < 100k on day 1 or day 8",
+      "action": "delay/hold",
+      "text": "Hold or delay per institutional protocol; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 900,
+      "unit": "mg/m2",
+      "route": "IV over 90 min",
+      "notes": "Source: DeVita 12th ed., line 176028 (Hensley regimen) and narrative line 175829. Gemcitabine 900 mg/m2 IV over 90 minutes on days 1 and 8, every 21 days, with growth factor support.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 176028 (Gemcitabine 900 mg/m2 over 90 min on days 1 and 8 + docetaxel 100 mg/m2 on day 8 with G-CSF q 21 d, Hensley et al.); narrative line 175829",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 176031 (Hensley regimen). DOCEtaxel 100 mg/m2 IV on day 8, every 21 days, with growth factor support. Source stated alternative: DOCEtaxel reduced to 75 mg/m2 (line 175835), with further reductions for patients with prior pelvic radiotherapy. Requires corticosteroid premedication per docetaxel labeling. Tall man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 176031 (docetaxel 100 mg/m2 on day 8 with G-CSF q 21 d, Hensley et al.); reduced dose alternative line 175835 (docetaxel 75 mg/m2)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        8
+      ],
+      "modificationRules": []
+    }
+  ]
+}

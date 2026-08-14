@@ -1,0 +1,189 @@
+{
+  "id": "rare-amyloidosis-dara-cybord",
+  "diseaseId": "amyloidosis_al",
+  "name": "Daratumumab + CyBorD (Daratumumab/Cyclophosphamide/Bortezomib/Dexamethasone, D-VCd)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Systemic Light Chain Amyloidosis",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "clonalPlasmaCell": "present",
+    "note": "AL amyloidosis is driven by a clonal plasma cell (or, less commonly, B-cell/lymphoplasmacytic) population; no predictive biomarker gates this regimen. Cardiac staging (Mayo) governs eligibility and dose modification rather than a molecular biomarker: stage IIIb was excluded at screening in the ANDROMEDA trial, and dose-modified daratumumab + CyBorD is used for stage IIIb per Standard Guidelines (NCCN), Systemic Light Chain Amyloidosis, v2.2026 (extract lines 508 to 515, 1342 to 1344). Patients with an IgM paraprotein or underlying lymphoplasmacytic clone may require different (Waldenstrom-directed) therapy per footnote c."
+  },
+  "stage": [
+    "I",
+    "II",
+    "IIIa"
+  ],
+  "treatmentSetting": "primary treatment (newly diagnosed)",
+  "histology": "clonal plasma cell dyscrasia producing amyloidogenic immunoglobulin light chains",
+  "premedications": [
+    {
+      "name": "Daratumumab pre/post-medication",
+      "notes": "corticosteroid, antihistamine, antipyretic per labeling to reduce infusion/injection reactions; montelukast may be considered for the first SC dose"
+    }
+  ],
+  "supportiveCare": [
+    "Herpes zoster (VZV) prophylaxis for patients on a proteasome inhibitor or daratumumab (NCCN SLCA v2.2026 general considerations, extract line 462).",
+    "Type and screen before first daratumumab dose; alert blood bank to anti-CD38 interference (NCCN extract lines 473 to 475).",
+    "Antiviral and PJP/infection vigilance; infection rates are higher in AL amyloidosis than in myeloma (NCCN discussion, extract line 1341).",
+    "Cardiac-staging caution: dose modification and adjustment are mandatory in patients with advanced end-organ (cardiac or other) damage (NCCN footnote e); dose-modified daratumumab + CyBorD for stage IIIb."
+  ],
+  "monitoring": [
+    "Serum free light chains and involved/uninvolved ratio (hematologic response) each cycle",
+    "Cardiac biomarkers (NT-proBNP/BNP, troponin) and cardiac status - AL amyloidosis staging and safety",
+    "Peripheral and autonomic neuropathy assessment before each cycle - bortezomib",
+    "CBC and renal/hepatic function before each cycle",
+    "Infusion/injection reaction monitoring - daratumumab"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "cardiac status",
+    "neuropathy grade",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant peripheral or autonomic neuropathy",
+      "drug": "bortezomib",
+      "action": "reduce/discontinue",
+      "text": "Dose reduce or discontinue bortezomib for significant neuropathy (NCCN SLCA footnote g). Clinical review required."
+    },
+    {
+      "condition": "advanced cardiac (stage IIIb) or other end-organ damage",
+      "action": "dose-modify",
+      "text": "Use the dose-modified daratumumab + CyBorD regimen; dose modification is mandatory in advanced end-organ damage (NCCN footnotes d and e). Clinical review required."
+    },
+    {
+      "condition": "elderly (>70), frail, or glucocorticoid-intolerant",
+      "drug": "dexamethasone",
+      "action": "reduce",
+      "text": "Consider dexamethasone 20 mg weekly (NCCN SLCA footnote f). Physician discretion."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "daratumumab",
+      "name": "Daratumumab (and Hyaluronidase-fihj for SC)",
+      "basis": "flat",
+      "dosePerUnit": 1800,
+      "unit": "mg",
+      "route": "SC",
+      "notes": "Source: DeVita 12th ed. line 286349; Standard Guidelines (NCCN) SLCA v2.2026 discussion (extract lines 1335 to 1336, daratumumab 1800 mg SC with hyaluronidase 30,000 units, or daratumumab 16 mg/kg IV). SCHEDULE (ANDROMEDA / de-escalating): weekly for cycles 1 to 2 (days 1, 8, 15, 22 shown here), then every 2 weeks for cycles 3 to 6, then once monthly as maintenance. SC daratumumab-hyaluronidase and IV daratumumab have different dosing/administration; SC 1800 mg is modeled here, IV alternative is 16 mg/kg. Infusion/injection reactions: monitor first administrations. Type and screen BEFORE first dose - daratumumab interferes with serologic crossmatch and can cause false-positive serum immunofixation (IgG kappa) per NCCN general considerations (extract lines 473 to 475, 483 to 485).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 286349 (Daratumumab 1,800 mg SC or 16 mg/kg IV weekly x 8 weeks, then every 2 weeks for 4 months, then once monthly)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 300,
+      "unit": "mg/m2",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. line 286310 (CyBorD table). Cyclophosphamide 300 mg/m2 PO on days 1, 8, 15, 22 of a 28-day cycle. Per Standard Guidelines (NCCN) SLCA v2.2026 footnote f (extract line 542), cyclophosphamide is CAPPED at a 500 mg maximum weekly dose - modeled as caps.perDose 500 mg.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 286310 (VCd/CyBorD: Cyclophosphamide 300 mg/m2 PO on days 1, 8, 15, and 22)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": 500
+      },
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "bortezomib",
+      "name": "Bortezomib",
+      "basis": "bsa",
+      "dosePerUnit": 1.3,
+      "unit": "mg/m2",
+      "route": "SC",
+      "notes": "Source: DeVita 12th ed. line 286309 (CyBorD table). Bortezomib 1.3 mg/m2 SC on days 1, 8, 15, 22 (weekly) of a 28-day cycle. Standard Guidelines (NCCN) SLCA v2.2026 general considerations state subcutaneous bortezomib is the preferred method of administration and weekly dosing schedules are recommended (extract lines 480 to 481). NEUROPATHY: bortezomib carries a higher risk of treatment-related peripheral and autonomic neuropathy; dose reduce or discontinue for significant neuropathy (NCCN extract line 465, footnote g line 526). Give herpes zoster (VZV) prophylaxis (NCCN extract line 462).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 286309 (VCd/CyBorD: Bortezomib 1.3 mg/m2 SC on days 1, 8, 15, and 22)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. line 286311 (CyBorD table). Dexamethasone 40 mg PO on days 1, 8, 15, 22 of a 28-day cycle. Standard Guidelines (NCCN) SLCA v2.2026 footnote f (extract lines 538 to 542) permits a REDUCED 20 mg weekly dose at physician discretion in patients >70 years, underweight (BMI <18.5), hypervolemic, with poorly controlled diabetes, or prior unacceptable glucocorticoid side effects. See divergence entry.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 286311 (VCd/CyBorD: Dexamethasone 40 mg PO on days 1, 8, 15, and 22)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "modificationRules": []
+    }
+  ]
+}

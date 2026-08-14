@@ -1,0 +1,129 @@
+{
+  "id": "gi-gist-imatinib",
+  "diseaseId": "gastrointestinal_stromal_tumour",
+  "name": "Imatinib (GIST, adjuvant and advanced)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KIT": "mutation predicts response (category 1 first-line for KIT-mutant GIST)",
+    "PDGFRA": "most PDGFRA mutations are imatinib-sensitive EXCEPT exon 18 D842V, which is imatinib-resistant",
+    "note": "Imatinib is the preferred first-line tyrosine kinase inhibitor for KIT-mutant or PDGFRA-mutant GIST (excluding PDGFRA exon 18 D842V). KIT exon 9 mutations respond less well at 400 mg/day and are the group for whom the source-stated 800 mg/day (400 mg twice daily) is selected. PDGFRA D842V responds to avapritinib and is unlikely to respond to imatinib or most other approved GIST TKIs. SDH-deficient and NF1-associated GIST that lack KIT/PDGFRA mutations are generally imatinib-insensitive. Per Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors, GIST-B (Principles of Mutation Testing) and GIST-D (Principles of Systemic Therapy), and DeVita 12th ed."
+  },
+  "stage": [
+    "resected intermediate-to-high-risk (adjuvant)",
+    "unresectable",
+    "recurrent",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "gastrointestinal stromal tumor (KIT/CD117-expressing mesenchymal neoplasm)",
+  "premedications": [],
+  "supportiveCare": [
+    "Continuous daily oral dosing; no defined cycle count in the advanced setting - continue until progression or intolerance.",
+    "Adjuvant setting: continue for 3 years after resection of intermediate-to-high-risk GIST per DeVita 12th ed. (line 118249) and Standard Guidelines (NCCN) GIST v1.2026.",
+    "Antiemetic/G-CSF prophylaxis not routinely required for oral imatinib monotherapy."
+  ],
+  "monitoring": [
+    "fluid retention / periorbital and peripheral edema assessment (imatinib class effect)",
+    "liver function tests (imatinib hepatotoxicity)",
+    "CBC (cytopenias)",
+    "clinical/radiographic response assessment (CT; Choi or RECIST criteria)"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "CBC/platelets",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "KIT exon 9 mutation",
+      "drug": "imatinib",
+      "action": "escalate",
+      "text": "Source supports imatinib 800 mg/day (400 mg twice daily) for KIT exon 9-mutant advanced GIST (DeVita line 118228; NCCN gist lines 1655-1667)."
+    },
+    {
+      "condition": "progression on imatinib 400 mg/day",
+      "drug": "imatinib",
+      "action": "escalate or switch",
+      "text": "Widely used option is dose escalation to 800 mg/day (DeVita line 118414); alternatively switch to second-line sunitinib. Obtain clinical review."
+    },
+    {
+      "condition": "significant hepatotoxicity, grade 3-4 edema/fluid retention, or grade 3-4 cytopenia",
+      "drug": "imatinib",
+      "action": "hold/reduce",
+      "text": "Hold and resume at a reduced dose per labeling; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "imatinib",
+      "name": "Imatinib",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. (line 118304) and Standard Guidelines (NCCN) GIST v1.2026 (gist lines 1442, 1487, 1646). Imatinib 400 mg PO once daily, given continuously (represented as days 1 to 28 of a 28-day cycle). DOSE ESCALATION: for KIT exon 9-mutant GIST the source states 800 mg/day given as 400 mg twice daily (DeVita line 118228; NCCN gist lines 1655, 1659, 1667); the same 800 mg/day escalation is a source-stated option on progression at 400 mg (DeVita line 118414). ADJUVANT DURATION: adjuvant imatinib is given for 3 years after resection of intermediate-to-high-risk GIST (DeVita line 118249; NCCN gist line 1487, 3-year adjuvant). No ISMP tall-man form. Monitor for periorbital/peripheral edema and fluid retention, hepatotoxicity (LFTs), and cytopenias.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 118304 (standard daily dose of imatinib is 400 mg); line 118228 (800 mg daily for advanced GIST with exon 9 KIT mutation); line 118414 (on progression at 400 mg, widely used option is to increase to 800 mg daily)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

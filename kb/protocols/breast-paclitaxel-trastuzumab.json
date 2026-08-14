@@ -1,0 +1,135 @@
+{
+  "id": "breast-paclitaxel-trastuzumab",
+  "diseaseId": "breast_cancer",
+  "name": "Paclitaxel + Trastuzumab (APT)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 12,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "positive",
+    "HR": "tested",
+    "note": "HER2-directed de-escalated adjuvant regimen: requires HER2-positive disease (IHC 3+ or ISH-amplified). Intended for low-risk small node-negative tumors (T1, N0, M0), particularly patients not eligible for other standard adjuvant regimens due to comorbidities. HR (ER/PR) status tested to guide endocrine therapy. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-M 4 of 10 footnote m and BINV-M 7 of 10 (APT / Tolaney)."
+  },
+  "stage": [
+    "I"
+  ],
+  "treatmentSetting": "adjuvant",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling to prevent hypersensitivity."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: weekly paclitaxel is low emetic risk; prophylaxis per emetogenicity tier.",
+    "Cardiac: evaluate LVEF before and during trastuzumab (every 3 months per FDA label / BINV-M 1 of 10). Trastuzumab continues to complete 1 year after the 12 weeks of paclitaxel."
+  ],
+  "monitoring": [
+    "LVEF at baseline and periodically during trastuzumab (every 3 months per FDA label / BINV-M 1 of 10)",
+    "CBC before treatment",
+    "peripheral neuropathy assessment (PACLitaxel)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "LVEF",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant decline in LVEF or symptomatic heart failure",
+      "drug": "trastuzumab",
+      "action": "hold/review",
+      "text": "Hold trastuzumab and obtain clinical review per LVEF monitoring guidance (BINV-M 1 of 10)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. PACLitaxel 80 mg/m2 IV weekly for 12 weeks (weekly, cycle length 7 days). Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, Paclitaxel + Trastuzumab",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "trastuzumab-loading",
+      "name": "Trastuzumab (loading dose)",
+      "basis": "mgkg",
+      "dosePerUnit": 4,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 4 mg/kg IV loading dose, given with the first dose of paclitaxel.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, Paclitaxel + Trastuzumab",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "trastuzumab-maintenance",
+      "name": "Trastuzumab (weekly maintenance)",
+      "basis": "mgkg",
+      "dosePerUnit": 2,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 2 mg/kg IV weekly to complete 1 year of treatment. Alternative (source-stated): trastuzumab 6 mg/kg IV every 21 days following completion of paclitaxel, to complete 1 year of trastuzumab therapy.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, Paclitaxel + Trastuzumab",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

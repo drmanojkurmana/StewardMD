@@ -1,0 +1,83 @@
+{
+  "id": "hn-nivolumab",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "Nivolumab Monotherapy (CheckMate-141), Platinum-Refractory Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 480,
+  "cyclesNote": "until disease progression or unacceptable toxicity; alternate schedule 480 mg every 28 days",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers",
+    "textbook": "Harrison's Principles of Internal Medicine, 22nd ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "PD_L1": "not required for eligibility; greater overall survival benefit observed when PD-L1 expression level is at least 1%",
+    "note": "Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026 Discussion MS-59, the OS benefit with nivolumab appeared confined to patients with PD-L1 expression at least 1% (8.7 vs 4.6 months), with no OS advantage demonstrated below 1%; nivolumab is listed as a subsequent-line option (SYST-A 4 of 7) without a mandatory PD-L1 threshold for use. PD-L1 testing informs expected benefit but is not an eligibility gate here."
+  },
+  "stage": [],
+  "treatmentSetting": [
+    "recurrent",
+    "metastatic"
+  ],
+  "histology": "squamous cell carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event surveillance for nivolumab (thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine).",
+    "Antiemetic prophylaxis not routinely required for single-agent checkpoint inhibitor (minimal emetic risk)."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during nivolumab",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "endocrine/immune status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold/steroids",
+      "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Discussion MS-59. Nivolumab 240 mg IV flat dose on day 1 every 14 days. Source-stated alternate schedule: 480 mg IV every 28 days. Flat milligram dosing (basis flat); source states flat mg, not mg/kg. Continue until disease progression or unacceptable toxicity. A nivolumab and hyaluronidase-nvhy subcutaneous formulation may be substituted with different dosing/administration (SYST-A 1 of 7); not encoded here.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "2.2026",
+        "date": "2026-05-12",
+        "locator": "Discussion MS-59 (two FDA-approved dosing regimens for nivolumab for SCCHN: 240 mg every 2 weeks or 480 mg every 4 weeks); indication SYST-A 4 of 7 (subsequent-line, post-platinum, category 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "gu-prostate-lu177-psma",
+  "diseaseId": "prostate_cancer",
+  "name": "Lutetium Lu 177 vipivotide tetraxetan (PSMA-617) - PSMA-positive mCRPC",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 42,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Prostate Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "PSMA": "PSMA-positive on PSMA-PET/CT (e.g., Ga-68 PSMA-11, F-18 piflufolastat PSMA, or F-18 PSMA); not recommended if dominant PSMA-negative lesions are present",
+    "note": "Lu-177-PSMA-617 targets prostate-specific membrane antigen and requires PSMA-positive disease on PSMA-PET. It is not recommended in patients with dominant PSMA-negative lesions (bone with soft-tissue components >= 1.0 cm, lymph nodes >= 2.5 cm short axis, or solid-organ metastases >= 1.0 cm that lack PSMA uptake). Per Standard Guidelines (NCCN), Prostate Cancer, PROS-J (Lu-177-PSMA-617) and Principles of Imaging (PROS-E)."
+  },
+  "stage": [
+    "M1 CRPC (metastatic castration-resistant, PSMA-positive)"
+  ],
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Provide per emetogenic-risk tier around each dose."
+    }
+  ],
+  "supportiveCare": [
+    "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+    "confirm PSMA-positive disease on PSMA-PET before treatment; an FDG PET/CT may help identify low-PSMA / non-PSMA-avid disease that derives less benefit (PROS-J, prostate line 3850).",
+    "administer by an appropriately licensed nuclear-medicine facility; treatment rooms monitored for contamination; provide written radiation-safety instructions (PROS-J, prostate lines 3853 to 3855).",
+    "cycles: up to 6 treatments (source-stated up to 6; some patients receive 4 to 6)."
+  ],
+  "monitoring": [
+    "CBC (myelosuppression) before each dose and on follow-up",
+    "renal and hepatic function",
+    "PSA and serum testosterone (confirm castrate level)",
+    "PSMA-PET / post-treatment SPECT response and PSMA expression"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "PSMA-PET positive confirmed",
+    "castrate testosterone maintained",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 hematologic, renal, or hepatic toxicity",
+      "drug": "lutetium-lu-177-vipivotide-tetraxetan",
+      "action": "hold/reduce/discontinue",
+      "text": "Hold, dose-reduce, or discontinue per labeling and radiation-safety protocol; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lutetium-lu-177-vipivotide-tetraxetan",
+      "name": "Lutetium Lu 177 vipivotide tetraxetan (PSMA-617)",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mCi",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026, PROS-J (prostate line 3851) and Discussion (prostate line 7813). DOSE: 200 mCi (7.4 GBq) IV every 6 weeks for up to 6 treatments (VISION). UNIT NOTE: the true unit is radioactivity; unit is recorded as mCi (200 mCi = 7.4 GBq), consistent with the schema enum; the dose is source-established, so no field is set to VERIFY. Radioligand: no ISMP tall-man form. Administer by an appropriately licensed facility with gamma-radiation-safety precautions; post-treatment SPECT/PET can be used to monitor PSMA expression for adaptive dosing (PROS-J, prostate line 3852).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Prostate Cancer",
+        "version": "6.2026",
+        "date": "2026-07-28",
+        "locator": "PROS-J, prostate line 3851 (Lu-177-PSMA-617 is typically administered IV 200 mCi (7.4 GBq) every 6 weeks for up to 6 treatments); Discussion, prostate line 7813 (7.4 GBq or 200 mCi every 6 weeks for 4 to 6)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

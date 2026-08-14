@@ -1,0 +1,96 @@
+{
+  "id": "gyn-uterine-lms-doxorubicin",
+  "diseaseId": "leiomyosarcoma",
+  "name": "Single-Agent Doxorubicin for Uterine Leiomyosarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "six cycles were used in the referenced GeDDiS trial; continue per response and cumulative anthracycline ceiling, physician determined",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Uterine Neoplasms",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Single agent doxorubicin is a cytotoxic backbone for uterine leiomyosarcoma and is not biomarker restricted. ER/PR expression may guide endocrine therapy in selected uLMS but does not gate this regimen. Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, Systemic Therapy for Uterine Sarcoma (UTSARC-C)."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "recurrent"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "uterine leiomyosarcoma (uLMS)",
+  "premedications": [],
+  "supportiveCare": [
+    "antiemetics: doxorubicin is moderate to high emetic risk (regimen dependent); prophylaxis per emetogenicity tier.",
+    "cardiac surveillance: baseline LVEF and cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "cumulative anthracycline dose tracking (DOXOrubicin)",
+    "cardiac function (LVEF) at baseline and as clinically indicated",
+    "liver function before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "cardiac (LVEF)",
+    "cumulative anthracycline dose",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "cumulative doxorubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard)",
+      "drug": "doxorubicin",
+      "action": "review/stop",
+      "text": "Warn at 450 mg/m2 and stop at the 550 mg/m2 hard cap; reassess cardiac function; physician decides on continuation."
+    },
+    {
+      "condition": "decline in LVEF or clinical cardiotoxicity",
+      "drug": "doxorubicin",
+      "action": "hold",
+      "text": "Hold and obtain cardiology review before further anthracycline."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 175842. DOXOrubicin 75 mg/m2 IV on day 1, every 21 days (GeDDiS trial single agent arm; the narrative at line 175956 states doxorubicin is an appropriate first line option). Anthracycline cumulative lifetime cap: warn 450, hard 550 mg/m2 (conventional anthracycline ceiling). Tall man per ISMP. Track cumulative dose; obtain baseline and periodic cardiac assessment.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 175842 (single-agent doxorubicin at 75 mg/m2 every 3 weeks, GeDDiS trial comparator)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

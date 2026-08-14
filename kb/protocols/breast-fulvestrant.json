@@ -1,0 +1,98 @@
+{
+  "id": "breast-fulvestrant",
+  "diseaseId": "breast_cancer",
+  "name": "Fulvestrant",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Selective estrogen-receptor degrader (SERD); endocrine therapy: requires HR-positive (ER and/or PR positive), HER2-negative disease. May be used as single-agent endocrine therapy or as the endocrine backbone with a CDK4/6 inhibitor or a targeted agent. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-Q, and DeVita 12th ed. (FALCON)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [],
+  "supportiveCare": [
+    "For premenopausal patients, give concurrent ovarian function suppression (GnRH analog) per BINV-N.",
+    "Administer as two 250 mg IM injections (one per buttock) per labeling."
+  ],
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "injection-site tolerance",
+    "liver function"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [],
+  "drugs": [
+    {
+      "id": "fulvestrant-loading",
+      "name": "Fulvestrant (loading, cycle 1)",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "IM",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Fulvestrant 500 mg IM on days 1 and 15 of the first 28-day cycle (loading). Dose corroborated by DeVita 12th ed. FALCON (fulvestrant 500 mg, line 30818).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-Q 14 of 15 (Fulvestrant 500 mg IM on Days 1 and 15, first cycle)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        15
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fulvestrant-maintenance",
+      "name": "Fulvestrant (maintenance)",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "IM",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Fulvestrant 500 mg IM on day 1 of each subsequent 28-day cycle (maintenance).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-Q 14 of 15 (Fulvestrant 500 mg IM on Day 1 of subsequent 28-day cycles)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

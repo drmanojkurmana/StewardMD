@@ -1,0 +1,118 @@
+{
+  "id": "gyn-carbo-paclitaxel",
+  "diseaseId": "ovarian_cancer",
+  "name": "Carboplatin + Paclitaxel every 3 Weeks (TC) for Epithelial Ovarian/Fallopian Tube/Primary Peritoneal Cancer",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "cyclesNote": "3 to 6 cycles; per OV-D footnote m, 6 cycles for stage II to IV disease (and stage I high-grade serous), 3 to 6 cycles for other stage I ovarian cancer types",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "BRCA1_2": "tested",
+    "HRD": "tested",
+    "note": "The cytotoxic carboplatin/paclitaxel (TC) backbone is not biomarker restricted. Germline or somatic BRCA1/2 and homologous-recombination-deficiency (HRD) status are tested to guide maintenance PARP inhibitor selection after this primary therapy, not the doublet itself. Per Standard Guidelines (NCCN), Ovarian Cancer, OV-5 and Principles of Maintenance PARP Inhibitor Therapy (OV-D)."
+  },
+  "stage": [
+    "I (high-grade serous)",
+    "II",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant"
+  ],
+  "histology": "epithelial ovarian carcinoma (histology-agnostic backbone; standard for high-grade serous, endometrioid, clear cell, mucinous, and carcinosarcoma). Fallopian tube and primary peritoneal carcinoma are staged and treated as ovarian carcinoma and share this doublet.",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid plus H1 and H2 antihistamine premedication per paclitaxel labeling before each dose."
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: carboplatin is moderate emetic risk; prophylaxis per emetogenicity tier on the day of treatment.",
+    "G-CSF: not routinely required for the every 21 day TC doublet; assess febrile neutropenia risk factors per institutional and NCCN growth factor guidance."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle for carboplatin AUC dosing",
+    "peripheral neuropathy assessment before each cycle for PACLitaxel",
+    "infusion reaction monitoring for carboplatin (rising risk with cumulative exposure) and PACLitaxel"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1500 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Hold or reduce per institutional protocol; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 175,
+      "unit": "mg/m2",
+      "route": "IV over 3 hr",
+      "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12. PACLitaxel 175 mg/m2 IV on day 1, given before carboplatin, every 21 days. The 3 hr infusion is cross referenced to DeVita 12th ed. line 178646 (paclitaxel 175 mg/m2 3-h infusion every 21 d). Requires corticosteroid and H1/H2 antihistamine premedication per paclitaxel labeling. Tall man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer",
+        "version": "4.2026",
+        "date": "2026-04-10",
+        "locator": "OV-D 7 of 12, Carboplatin/Paclitaxel every 3 Weeks (Paclitaxel 175 mg/m2 IV followed by Carboplatin AUC 5 to 6 IV Day 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 6,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 175767 (target AUC 6). Standard Guidelines (NCCN) v4.2026 OV-D 7 of 12 gives the range AUC 5 to 6 IV on day 1, given after paclitaxel. Carboplatin is dosed to target AUC (Calvert formula). Tall man per ISMP. Footnote n (line 2652): due to changes in creatinine methodology, carboplatin dosing may be adjusted per carboplatin dosing guidelines.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 175767 (Carboplatin (AUC 6) + paclitaxel 175 mg/m2 q 3 wk); NCCN OV-D 7 of 12 states Carboplatin AUC 5 to 6 IV Day 1",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

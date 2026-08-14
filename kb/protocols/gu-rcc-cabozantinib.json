@@ -1,0 +1,114 @@
+{
+  "id": "gu-rcc-cabozantinib",
+  "diseaseId": "renal_cell_carcinoma",
+  "name": "Cabozantinib (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). Cabozantinib is an oral multikinase inhibitor targeting VEGFR, MET, and AXL; no companion biomarker is required. In the landmark METEOR trial it improved OS, PFS, and ORR versus everolimus after prior VEGF-targeted therapy; also a listed first-line option. Per Standard Guidelines (NCCN), Kidney Cancer v1.2027."
+  },
+  "stage": [
+    "IV",
+    "relapsed/unresectable"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "clear cell renal cell carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Blood pressure monitoring and management (VEGF TKI hypertension).",
+    "Monitor for diarrhea, hand-foot skin reaction, and fatigue.",
+    "Baseline and periodic thyroid function (TSH) and liver function.",
+    "Assess for proteinuria."
+  ],
+  "monitoring": [
+    "blood pressure (VEGF TKI hypertension)",
+    "liver function tests",
+    "thyroid function (TSH)",
+    "hand-foot skin reaction / diarrhea",
+    "proteinuria",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "blood pressure",
+    "liver",
+    "thyroid",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hypertension, HFSR, diarrhea, or hepatotoxicity",
+      "drug": "cabozantinib",
+      "action": "hold/reduce",
+      "text": "Hold and resume at a reduced dose per labeling for grade 3 or higher hypertension, hand-foot skin reaction, diarrhea, or hepatotoxicity; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cabozantinib",
+      "name": "Cabozantinib",
+      "basis": "flat",
+      "dosePerUnit": 60,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., line 151812 (METEOR): cabozantinib starting dose 60 mg PO once daily continuously (represented as days 1 to 28 of a nominal 28-day cycle). This is the single-agent cabozantinib dose. NOTE: the cabozantinib dose used in the nivolumab + cabozantinib combination (CheckMate-9ER, protocol gu-rcc-nivo-cabozantinib) is different (40 mg) and is NOT this dose. Common grade 3/4 toxicities: hypertension, diarrhea, fatigue, hand-foot skin reaction.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 151812 (cabozantinib at starting dose of 60 mg daily, METEOR trial)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

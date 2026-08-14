@@ -1,0 +1,215 @@
+{
+  "id": "breast-tchp",
+  "diseaseId": "breast_cancer",
+  "name": "TCHP (DOCEtaxel / CARBOplatin / Trastuzumab / Pertuzumab)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "positive",
+    "HR": "tested",
+    "note": "HER2-directed dual-antibody regimen: requires HER2-positive disease (IHC 3+ or ISH-amplified). Adds pertuzumab to the TCH backbone. HR (ER/PR) status is tested to guide endocrine therapy, not the HER2 backbone. Anthracycline-free (no doxorubicin). Per Standard Guidelines (NCCN), Invasive Breast Cancer, Preoperative/Adjuvant Therapy (BINV-M)."
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant"
+  ],
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [
+    {
+      "name": "DOCEtaxel premedication",
+      "notes": "corticosteroid premedication per docetaxel labeling; confirm schedule against institutional order set."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF / myeloid growth factor support: all cycles given with myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n.",
+    "Antiemetics: DOCEtaxel plus CARBOplatin combination; prophylaxis per emetogenicity tier (verify exact NCCN antiemesis tier).",
+    "Cardiac: evaluate LVEF before and during trastuzumab/pertuzumab (LVEF prior to initiation and every 3 months per FDA label / BINV-M 1 of 10)."
+  ],
+  "monitoring": [
+    "LVEF at baseline and periodically during dual HER2 blockade (every 3 months per FDA label / BINV-M 1 of 10)",
+    "CBC before each cycle",
+    "renal function before each cycle (CARBOplatin)",
+    "peripheral neuropathy assessment (DOCEtaxel)",
+    "diarrhea assessment (pertuzumab)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "LVEF",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant decline in LVEF or symptomatic heart failure",
+      "drug": "trastuzumab/pertuzumab",
+      "action": "hold/review",
+      "text": "Hold HER2 antibodies and obtain clinical review per LVEF monitoring guidance (BINV-M 1 of 10). Physician decides on continuation."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. DOCEtaxel 75 mg/m2 IV day 1, every 21 days for 6 cycles. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP (DOCEtaxel/CARBOplatin + Trastuzumab + Pertuzumab)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 6,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. CARBOplatin AUC 6 IV day 1 (target AUC, not mg/m2), every 21 days for 6 cycles. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "trastuzumab-loading",
+      "name": "Trastuzumab (loading dose)",
+      "basis": "mgkg",
+      "dosePerUnit": 8,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 8 mg/kg IV day 1 (loading dose).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "trastuzumab-maintenance",
+      "name": "Trastuzumab (maintenance)",
+      "basis": "mgkg",
+      "dosePerUnit": 6,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 6 mg/kg IV on day 1 (maintenance), every 21 days to complete 1 year of therapy.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "pertuzumab-loading",
+      "name": "Pertuzumab (loading dose)",
+      "basis": "flat",
+      "dosePerUnit": 840,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Pertuzumab 840 mg IV day 1 (flat loading dose).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "pertuzumab-maintenance",
+      "name": "Pertuzumab (maintenance)",
+      "basis": "flat",
+      "dosePerUnit": 420,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Pertuzumab 420 mg IV day 1 (flat maintenance dose), every 21 days to complete 1 year of therapy.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 7 of 10, TCHP",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "heme-mm-pomalidomide-dex",
+  "diseaseId": "plasma_cell_disorders",
+  "name": "Pomalidomide + Dexamethasone (Pd)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Pomalidomide/dexamethasone is an IMiD-based doublet and is not biomarker-restricted. Pomalidomide retains activity in disease refractory to lenalidomide and/or bortezomib. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "stage": [],
+  "treatmentSetting": "therapy for previously treated (relapsed or refractory) multiple myeloma",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [],
+  "supportiveCare": [
+    "Pomalidomide: VTE thromboprophylaxis (aspirin for standard risk, anticoagulation for higher risk) and REMS-program dispensing (teratogen). Side effect profile similar to lenalidomide.",
+    "Herpes zoster (VZV) prophylaxis and infection surveillance per institutional practice.",
+    "Antiemetics: low emetic risk; prophylaxis per emetogenicity tier."
+  ],
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes",
+    "glucose and blood pressure (dexamethasone)",
+    "VTE symptom surveillance (IMiD)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 neutropenia",
+      "drug": "pomalidomide",
+      "action": "hold/reduce",
+      "text": "Hold and resume pomalidomide at a reduced dose per labeling for grade 3 to 4 neutropenia; consider G-CSF; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pomalidomide",
+      "name": "Pomalidomide",
+      "basis": "flat",
+      "dosePerUnit": 4,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286293). Pomalidomide 4 mg PO on days 1 to 21 of a 28-day cycle. The DeVita text notes the usual dosage is 2 to 4 mg daily on days 1 to 21 every 28 days. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, Pd entry, line 286293 (Pomalidomide 4 mg on days 1-21)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286294). Dexamethasone 40 mg PO on days 1, 8, 15, and 22 of a 28-day cycle. A lower weekly dose may be used for older or frail patients; dose taken exactly as the source prints it.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6, p.1520, Pd entry, line 286294 (Dexamethasone 40 mg PO on days 1, 8, 15, and 22)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "modificationRules": []
+    }
+  ]
+}
