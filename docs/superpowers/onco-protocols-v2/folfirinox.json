@@ -4,13 +4,22 @@
   "disease": "Pancreatic cancer",
   "diseaseId": "pancreatic_cancer",
   "histology": "adenocarcinoma",
-  "stage": ["IV"],
+  "stage": [
+    "IV"
+  ],
   "biomarkers": {},
   "treatmentSetting": "metastatic",
-  "treatmentIntent": ["palliative"],
+  "treatmentIntent": [
+    "palliative"
+  ],
   "lineOfTherapy": "first-line",
   "eligibilityCriteria": [
-    { "criterion": "performanceStatus", "requirement": "good performance status (ECOG 0-1)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 107087; lines 107108 to 107109" }
+    {
+      "criterion": "performanceStatus",
+      "requirement": "good performance status (ECOG 0-1)",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "line 107087; lines 107108 to 107109"
+    }
   ],
   "regimen": {
     "drugs": [
@@ -20,10 +29,16 @@
         "basis": "bsa",
         "dosePerUnit": 85,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: PRODIGE 4/ACCORD 11 - oxaliplatin 85 mg/m2 IV day 1. Tall man per NCCN appendix G."
       },
@@ -33,10 +48,16 @@
         "basis": "bsa",
         "dosePerUnit": 180,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: irinotecan 180 mg/m2 IV day 1."
       },
@@ -46,10 +67,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: leucovorin 400 mg/m2 IV day 1."
       },
@@ -59,10 +86,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV bolus",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 400 mg/m2 IV bolus day 1."
       },
@@ -72,10 +105,17 @@
         "basis": "bsa",
         "dosePerUnit": 2400,
         "unit": "mg/m2",
-        "days": [1, 2],
+        "days": [
+          1,
+          2
+        ],
         "route": "IV continuous infusion over 46 hours",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 2,400 mg/m2 as a 46-hour continuous infusion, starting day 1 and running into day 2. Cycle repeats every 2 weeks."
       }
@@ -83,18 +123,42 @@
     "cycleLengthDays": 14,
     "cycles": null,
     "premedications": [
-      { "name": "Antiemetic prophylaxis", "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below" }
+      {
+        "name": "Antiemetic prophylaxis",
+        "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below"
+      }
     ],
     "supportiveCare": [
       "Antiemetics: moderate-to-high emetic risk (oxaliplatin and irinotecan are each individually moderate emetic risk IV agents per NCCN Antiemesis categories in appendix D; combining two moderately emetogenic agents on the same day is conventionally managed as the higher tier). Exact per-regimen NCCN order-template tier not yet confirmed - verify against per-disease NCCN template.",
       "G-CSF: PRODIGE 4/ACCORD 11 reported febrile neutropenia 5.4% (vs 1.2% gemcitabine) and grade 3-4 neutropenia 45% (source lines 107088-107091). Appendix C risk tiering (High/Intermediate) for this specific regimen was not located in the provided source; use physician-patient discussion of prophylactic CSF support per appendix C intermediate-risk framework pending confirmation of the regimen's listed risk level on a per-disease NCCN template."
     ]
   },
-  "monitoring": ["CBC before each cycle", "renal function (platinum-containing regimen)", "peripheral neuropathy assessment (oxaliplatin)", "diarrhea/GI toxicity assessment (irinotecan)"],
-  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle toxicity/neuropathy status"],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (platinum-containing regimen)",
+    "peripheral neuropathy assessment (oxaliplatin)",
+    "diarrhea/GI toxicity assessment (irinotecan)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle toxicity/neuropathy status"
+  ],
   "doseModificationRules": [
-    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." },
-    { "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea", "drug": "irinotecan", "action": "reduce", "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). DeVita reports grade 3 to 4 diarrhea of 12.7% with FOLFIRINOX in PRODIGE 4/ACCORD 11 (line 107100).", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 19421 to 19433; 107100" }
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). DeVita reports grade 3 to 4 diarrhea of 12.7% with FOLFIRINOX in PRODIGE 4/ACCORD 11 (line 107100). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for routine dose modification on the basis of UGT1A1 polymorphism, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 107100; 121523 to 121531"
+    }
   ],
   "evidence": {
     "core": [

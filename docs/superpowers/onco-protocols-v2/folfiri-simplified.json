@@ -4,10 +4,14 @@
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
   "histology": "VERIFY",
-  "stage": ["IV"],
+  "stage": [
+    "IV"
+  ],
   "biomarkers": {},
   "treatmentSetting": "metastatic",
-  "treatmentIntent": ["palliative"],
+  "treatmentIntent": [
+    "palliative"
+  ],
   "lineOfTherapy": "VERIFY",
   "eligibilityCriteria": [],
   "regimen": {
@@ -18,10 +22,16 @@
         "basis": "bsa",
         "dosePerUnit": 180,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV over 90 min",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed., Cancer of the Colon, Table 40.12 (line 123595): FOLFIRI (simplified) per Andre et al. 1999 - Irinotecan 180 mg/m2 over 90 min, day 1 only."
       },
@@ -31,10 +41,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV concurrent with irinotecan (may run through same line via Y-connector)",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123596): LV 400 mg/m2 concurrently with irinotecan."
       },
@@ -44,10 +60,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV bolus",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123596-123597): followed by 5-FU bolus 400 mg/m2. Given as a separate line item from the infusional 5-FU dose below."
       },
@@ -57,10 +79,17 @@
         "basis": "bsa",
         "dosePerUnit": 1200,
         "unit": "mg/m2",
-        "days": [1, 2],
+        "days": [
+          1,
+          2
+        ],
         "route": "IV continuous infusion over 46-48 hr",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123597): 5-FU 1,200 mg/m2/d times 2 d (2,400 mg/m2 total infusion over 46-48 hr). dosePerUnit here is the per-day rate (1,200 mg/m2/day x 2 days = 2,400 mg/m2 total); days [1,2] reflects the 2-day infusion, not two separate bolus administrations."
       }
@@ -68,7 +97,10 @@
     "cycleLengthDays": 14,
     "cycles": null,
     "premedications": [
-      { "name": "Antiemetic prophylaxis", "notes": "per moderate emetic risk tier, see supportiveCare" }
+      {
+        "name": "Antiemetic prophylaxis",
+        "notes": "per moderate emetic risk tier, see supportiveCare"
+      }
     ],
     "supportiveCare": [
       "Antiemetics: moderate emetic risk tier (irinotecan is a moderate-emetic-risk IV agent per the NCCN 4-tier framework in Appendix D; 5-fluorouracil and leucovorin are low/minimal risk) - 5-HT3 antagonist +/- dexamethasone on treatment day per institutional antiemesis guideline",
@@ -81,9 +113,26 @@
     "Renal and hepatic function (irinotecan is hepatically cleared; UGT1A1 status affects toxicity)",
     "Diarrhea/dehydration monitoring (irinotecan-associated)"
   ],
-  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle GI toxicity status"],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle GI toxicity status"
+  ],
   "doseModificationRules": [
-    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for dose modification on the basis of UGT1A1 polymorphism in routine colorectal-cancer practice, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 121523 to 121531"
+    }
   ],
   "evidence": {
     "core": [
