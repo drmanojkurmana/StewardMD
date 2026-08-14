@@ -3,13 +3,16 @@
   "name": "Simplified LV5FU2",
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
-  "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "histology": "adenocarcinoma",
+  "stage": ["IV"],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
   "lineOfTherapy": "VERIFY",
-  "eligibilityCriteria": [],
+  "eligibilityCriteria": [
+    { "criterion": "performanceStatus", "requirement": "good performance status", "source": "DeVita, Cancer PPO 12th ed., Table 40.11 footnote", "locator": "line 123493" },
+    { "criterion": "organFunction", "requirement": "normal renal, hepatic, and bone marrow function", "source": "DeVita, Cancer PPO 12th ed., Table 40.11 footnote", "locator": "line 123493" }
+  ],
   "regimen": {
     "drugs": [
       {
@@ -72,7 +75,7 @@
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed",
         "locator": "lines 123481, 123486, 123487",
-        "evidenceStatus": "current"
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -91,11 +94,8 @@
     "reviewDue": false
   },
   "verifyFields": [
-    "histology",
-    "stage",
     "biomarkers",
-    "treatmentSetting",
-    "lineOfTherapy",
-    "eligibilityCriteria"
-  ]
+    "lineOfTherapy"
+  ],
+  "provenanceNote": "VERIFY-resolution (ONCQIS Wave-1 batch 1): DeVita 12th ed. lists Simplified LV5FU2 (Table 40.11) within the section MANAGEMENT OF UNRESECTABLE METASTATIC DISEASE (header line 123342; unresectable stage IV disease, lines 123351 and 123359), which is explicitly palliative. histology resolved to adenocarcinoma (Chapter 40, line 121516 colorectal adenocarcinoma; Histologic Type section line 121080). treatmentSetting resolved to metastatic and stage to IV from that section. eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per Table 40.11 footnote (line 123493) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). lineOfTherapy kept VERIFY because DeVita does not state a specific line of therapy for this 5-FU backbone regimen. biomarkers kept VERIFY because the regimen is not biomarker-gated in DeVita. evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation). No hospital or endorsement claim."
 }

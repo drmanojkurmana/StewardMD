@@ -3,13 +3,16 @@
   "name": "Modified FOLFOX-6",
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
-  "histology": "VERIFY",
+  "histology": "adenocarcinoma",
   "stage": [],
   "biomarkers": {},
   "treatmentSetting": "VERIFY",
   "treatmentIntent": ["curative", "palliative"],
   "lineOfTherapy": "VERIFY",
-  "eligibilityCriteria": [],
+  "eligibilityCriteria": [
+    { "criterion": "performanceStatus", "requirement": "good performance status", "source": "DeVita, Cancer PPO 12th ed., Table 40.13 footnote", "locator": "line 123747" },
+    { "criterion": "organFunction", "requirement": "normal renal, hepatic, and bone marrow function", "source": "DeVita, Cancer PPO 12th ed., Table 40.13 footnote", "locator": "line 123747" }
+  ],
   "regimen": {
     "drugs": [
       {
@@ -90,7 +93,7 @@
         "version": "12th ed.",
         "date": null,
         "locator": "textbook lines 123728, 123733, 123734, 123735",
-        "evidenceStatus": "current"
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -110,6 +113,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": ["histology", "stage", "biomarkers", "treatmentSetting", "lineOfTherapy", "eligibilityCriteria"],
-  "provenanceNote": "Textbook-grounded draft. NCCN per-disease Chemotherapy Order Template appendices C, D, F, G referenced only for supportive-care sourcing; per-disease NCCN treatment guideline and hospital/institutional approval pending. Source table (DeVita Table 40.13) lists mFOLFOX-6 in the metastatic colorectal cancer setting citing Wolmark et al. 2009; mFOLFOX-6 is also widely used as adjuvant therapy in clinical practice, so both intents are listed pending explicit per-disease NCCN template confirmation."
+  "verifyFields": ["stage", "biomarkers", "treatmentSetting", "lineOfTherapy"],
+  "provenanceNote": "Textbook-grounded draft. NCCN per-disease Chemotherapy Order Template appendices C, D, F, G referenced only for supportive-care sourcing; per-disease NCCN treatment guideline and hospital/institutional approval pending. Source table (DeVita Table 40.13) lists mFOLFOX-6 in the metastatic colorectal cancer setting citing Wolmark et al. 2009; mFOLFOX-6 is also widely used as adjuvant therapy in clinical practice, so both intents are listed pending explicit per-disease NCCN template confirmation. VERIFY-resolution (ONCQIS Wave-1 batch 1): histology resolved to adenocarcinoma per DeVita 12th ed. Chapter 40 (line 121516, colorectal adenocarcinoma; Histologic Type section line 121080). eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per DeVita Table 40.13 footnote (line 123747) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). treatmentSetting and stage kept VERIFY because DeVita establishes modified FOLFOX-6 as the basis for both adjuvant and metastatic FOLFOX trials (lines 122910 to 122911), so a single setting/stage is not source-determined. lineOfTherapy kept VERIFY (not stated for this regimen). biomarkers kept VERIFY because the FOLFOX cytotoxic backbone is not biomarker-gated in DeVita. evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation)."
 }

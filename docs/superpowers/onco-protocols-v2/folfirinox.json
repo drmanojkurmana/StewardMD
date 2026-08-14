@@ -3,13 +3,15 @@
   "name": "FOLFIRINOX (PRODIGE 4/ACCORD 11)",
   "disease": "Pancreatic cancer",
   "diseaseId": "pancreatic_cancer",
-  "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "histology": "adenocarcinoma",
+  "stage": ["IV"],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
-  "lineOfTherapy": "VERIFY",
-  "eligibilityCriteria": [],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "performanceStatus", "requirement": "good performance status (ECOG 0-1)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 107087; lines 107108 to 107109" }
+  ],
   "regimen": {
     "drugs": [
       {
@@ -91,7 +93,8 @@
   "monitoring": ["CBC before each cycle", "renal function (platinum-containing regimen)", "peripheral neuropathy assessment (oxaliplatin)", "diarrhea/GI toxicity assessment (irinotecan)"],
   "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle toxicity/neuropathy status"],
   "doseModificationRules": [
-    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." },
+    { "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea", "drug": "irinotecan", "action": "reduce", "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). DeVita reports grade 3 to 4 diarrhea of 12.7% with FOLFIRINOX in PRODIGE 4/ACCORD 11 (line 107100).", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 19421 to 19433; 107100" }
   ],
   "evidence": {
     "core": [
@@ -100,7 +103,7 @@
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed",
         "locator": "lines 107088-107091",
-        "evidenceStatus": "current"
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -119,11 +122,7 @@
     "reviewDue": false
   },
   "verifyFields": [
-    "histology",
-    "stage",
-    "biomarkers",
-    "treatmentSetting",
-    "lineOfTherapy",
-    "eligibilityCriteria"
-  ]
+    "biomarkers"
+  ],
+  "provenanceNote": "VERIFY-resolution (ONCQIS Wave-1 batch 1): DeVita 12th ed. (Chapter 35) describes FOLFIRINOX for pancreatic ductal adenocarcinoma (PDAC). histology resolved to adenocarcinoma (PDAC is pancreatic ductal adenocarcinoma; section header Second-Line Therapy for Metastatic Pancreatic Ductal Adenocarcinoma at line 107126). treatmentSetting resolved to metastatic and stage to IV: DeVita establishes FOLFIRINOX (with mFOLFIRINOX) as a preferred first-line treatment for patients with metastatic PDAC (line 107122). lineOfTherapy resolved to first-line (FOLFIRINOX is recommended as first-line treatment for patients with good performance status, lines 107108 to 107109). eligibilityCriteria resolved to good performance status: PRODIGE 4/ACCORD 11 randomized patients with ECOG 0 to 1 (line 107087) and DeVita recommends it for good-performance-status patients (lines 107108 to 107109). biomarkers kept VERIFY because the FOLFIRINOX cytotoxic backbone is not biomarker-gated in DeVita. An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) and the PRODIGE 4/ACCORD 11 diarrhea rate (line 107100). evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation). No hospital or endorsement claim."
 }
