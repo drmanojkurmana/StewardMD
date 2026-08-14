@@ -1,4 +1,8 @@
-# StewardMD Oncology - Standard Protocol -> Treatment Plan Architecture
+# ONCQIS - Adaptive Clinical Intelligence for Oncology
+
+*StewardMD Oncology module. Standard Protocol -> Hospital Implementation -> Treatment Plan architecture.*
+
+**Naming convention:** the product/display name of this module is **ONCQIS** (subtitle "Adaptive Clinical Intelligence for Oncology"). All user-facing surfaces (Onco Home hub, admin Knowledge Center, PDFs, headers) brand as ONCQIS. The internal code namespace stays `onco-*` / flags `smd_onco_*` (already on `main` from Phase 8; no churn, no rename) - ONCQIS is the display layer over the `onco` namespace.
 
 > Implementation plan. PLAN ONLY - no production clinical code is written until the owner approves this document. Everything ships behind OFF flags, reversible, R1-gated. Terminology: the operational object is a **StewardMD Standard Protocol** (never "NCCN/DeVita/Harrison Protocol"); no endorsement claims; no scraping/reproduction of copyrighted sources; VERIFY, never infer; StewardMD suggests, the physician decides; no silent select / reconcile / modify / activate / EMR-write.
 
