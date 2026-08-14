@@ -100,6 +100,34 @@ test("no em dash or en dash anywhere in the generated document", () => {
   assert.ok(html.indexOf("–") < 0, "no en dash");
 });
 
+// ---- Phase H: evidence/protocol-version block + nursing-administration section --------------------
+
+test("evidence and protocol-version block renders the snapshotted evidence + frozen version (read off the plan, never fabricated)", () => {
+  const plan = fixturePlan();
+  plan.evidenceSnapshot = { core: [{ layer: "core", source: "DeVita 12th ed", evidenceStatus: "current" }] };
+  const html = REPORT.buildProtocolSheet(plan, { cycle: fixtureCycle(plan) });
+  assert.ok(html.indexOf("Evidence and protocol version") >= 0, "the evidence block heading is present");
+  assert.ok(html.indexOf("DeVita 12th ed") >= 0, "the snapshotted evidence source is rendered");
+  assert.ok(html.indexOf(plan.lockedVersion) >= 0, "the frozen protocol version is rendered");
+});
+
+test("evidence block degrades gracefully with no evidence on file (says so, invents nothing)", () => {
+  const plan = fixturePlan();   // RCHOP fixture carries no evidence
+  const html = REPORT.buildProtocolSheet(plan, {});
+  assert.ok(html.indexOf("No source evidence recorded") >= 0, "an empty evidence snapshot is stated, never fabricated");
+});
+
+test("nursing-administration section lists premeds + each drug with its CONFIRMED dose + route, never a recomputed number, still exactly 2 pages", () => {
+  const plan = fixturePlan();
+  const cycle = fixtureCycle(plan);
+  const html = REPORT.buildProtocolSheet(plan, { cycle: cycle });
+  assert.ok(html.indexOf("Nursing administration") >= 0, "the nursing-administration section heading is present");
+  RCHOP.premedications.forEach((p) => assert.ok(html.indexOf(p.name) >= 0, "premedication " + p.name + " listed"));
+  plan.confirmedDoses.forEach((d) => { if (d.final != null) assert.ok(html.indexOf(d.final + " mg") >= 0, d.drugId + " confirmed dose in the nursing section, verbatim"); });
+  const pageMatches = html.match(/<div class="page/g) || [];
+  assert.equal(pageMatches.length, 2, "the new sections add no extra .page block");
+});
+
 test("no invented content: escapes a malicious drug name and never fabricates a dose when none is on file", () => {
   const plan = fixturePlan();
   plan.confirmedDoses = [];

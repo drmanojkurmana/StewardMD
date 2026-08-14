@@ -1,0 +1,40 @@
+{
+  "id": "roswell-park",
+  "diseaseId": "colorectal_cancer",
+  "name": "Roswell Park (weekly bolus 5-FU/LV)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": 56,
+  "cycles": null,
+  "intentOptions": ["curative", "palliative"],
+  "source": {
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+    "textbookLines": [123446, 123450, 123451],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: low emetic risk tier (NCCN appendix D: 10-30% frequency; bolus 5-FU is conventionally low risk); leucovorin is not emetogenic on its own",
+    "G-CSF: not indicated as routine prophylaxis; appendix C low-risk regimens are not given a specific FN risk designation on the NCCN Templates, physician discretion per patient factors"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "CBC weekly during the 6-week treatment block (weekly dosing)",
+    "renal function periodically (5-FU)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    { "id": "leucovorin", "name": "Leucovorin", "basis": "bsa", "dosePerUnit": 500, "unit": "mg/m2", "route": "IV", "days": [1, 8, 15, 22, 29, 36], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "DeVita Table 40.11 (Haller et al., 1998), line 123446/123450: LV 500 mg/m2 IV over 2 hr, given weekly for 6 consecutive wk, repeated every 8 wk. Not on NCCN tall man list (LEVOleucovorin, the levo isomer, is listed; plain leucovorin is not)." },
+    { "id": "5-fluorouracil", "name": "5-Fluorouracil", "basis": "bsa", "dosePerUnit": 500, "unit": "mg/m2", "route": "IV bolus", "days": [1, 8, 15, 22, 29, 36], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "DeVita Table 40.11 (Haller et al., 1998), line 123446/123450/123451: 5-FU 500 mg/m2 IV bolus, given 1 hr into the LV infusion; weekly for 6 consecutive wk, repeated every 8 wk. Not on NCCN tall man list." }
+  ]
+}

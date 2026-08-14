@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stewardmd/kb/hospital-implementation.schema.json",
+  "title": "StewardMD Hospital-Specific Protocol Implementation",
+  "description": "OPTIONAL per-hospital-tenant overlay of a global StewardMD Standard Protocol. One layer per hospital, keyed by hospitalId (GIMSR, AIIMS, APOLLO, CUSTOM, ...); NO hospital is the default or hard-coded. Mirrors the existing kb/policies/<HOSPITAL>.json + policy-overlay.schema.json tenant pattern. A hospital may configure formulary/availability/biosimilar/workflow/approval/supportive-care/dose-modification WITHOUT modifying the global Standard Protocol. It never changes clinical evidence; if the evidence itself differs, that is a different StewardMD core protocol version, not an implementation overlay. A new global core version NEVER silently overwrites a hospital implementation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hospitalId", "baseProtocolId", "baseProtocolVersion", "implementationVersion", "status"],
+  "properties": {
+    "hospitalId": { "type": "string", "description": "Tenant id, e.g. GIMSR, AIIMS, APOLLO, CUSTOM. One overlay file/object per hospital." },
+    "baseProtocolId": { "type": "string", "description": "id of the global StewardMD Standard Protocol this implements." },
+    "baseProtocolVersion": { "type": "string", "description": "The exact global protocolVersion this overlay was built against, e.g. '2.1'." },
+    "implementationVersion": { "type": "string", "description": "Tenant version string, '<baseProtocolVersion>-<HOSPITAL>', e.g. '2.1-GIMSR', '2.1-HOSPITAL-A'." },
+    "overlay": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Only the hospital-specific deltas; anything omitted inherits from the global protocol.",
+      "properties": {
+        "formulary": { "type": ["array", "null"], "description": "Locally available agents / restrictions." },
+        "preferredBiosimilar": { "type": ["object", "null"], "description": "Map generic -> locally preferred biosimilar/brand." },
+        "localAvailability": { "type": ["object", "null"] },
+        "administrationWorkflow": { "type": ["object", "null"] },
+        "localApprovalRequirements": { "type": ["array", "null"] },
+        "supportiveCarePolicy": { "type": ["array", "null"], "description": "Local antiemetic / G-CSF policy where institutionally approved." },
+        "doseModificationPolicy": { "type": ["array", "null"], "description": "Local dose-modification policy where institutionally approved. Never invents doses." }
+      }
+    },
+    "status": { "enum": ["DRAFT", "HOSPITAL_REVIEW", "ACTIVE", "SUPERSEDED", "RETIRED"] },
+    "hospitalApprovalStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Tenant-level HOSPITAL APPROVAL, distinct from StewardMD platform CLINICAL APPROVAL on the base protocol.",
+      "properties": {
+        "approved": { "type": "boolean", "default": false },
+        "approvedBy": { "type": ["string", "null"] },
+        "approvedAt": { "type": ["string", "null"] },
+        "role": { "const": "INSTITUTIONAL_APPROVER" }
+      }
+    },
+    "review": { "type": "object", "additionalProperties": true },
+    "audit": { "type": "array", "items": { "type": "object" } }
+  }
+}

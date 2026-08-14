@@ -1,0 +1,121 @@
+{
+  "id": "folfiri",
+  "name": "FOLFIRI (Douillard)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": {},
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "irinotecan",
+        "name": "Irinotecan",
+        "basis": "bsa",
+        "dosePerUnit": 180,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 2 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Douillard et al. 2000, DeVita 12th ed. line 123582/123587: 180 mg/m2 IV over 2 hr, day 1 only, concurrently with leucovorin (can be given in same line through Y connector)."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed. line 123587-123588: 200 mg/m2 IV, concurrently with irinotecan on day 1; days 1 and 2 per source (\"all other meds given days 1 and 2\")."
+      },
+      {
+        "id": "fluorouracil-bolus",
+        "name": "5-Fluorouracil (bolus)",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV bolus",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed. line 123588: 400 mg/m2 IV bolus, days 1 and 2, given after irinotecan/leucovorin."
+      },
+      {
+        "id": "fluorouracil-infusion",
+        "name": "5-Fluorouracil (infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV over 22 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed. line 123588: 600 mg/m2 IV infusion over 22 hr, days 1 and 2, given after the 5-FU bolus."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "give before irinotecan per moderate emetic risk tier (appendix D)" }
+    ],
+    "supportiveCare": [
+      "Antiemetics: moderate emetic risk tier (irinotecan IV, 30-90% frequency of emesis per NCCN appendix D categories); specific FOLFIRI per-day tier not printed in the provided appendix excerpt (no per-regimen table included) - verify against full NCCN Antiemesis guideline",
+      "G-CSF: febrile neutropenia risk level not printed for FOLFIRI in the provided appendix C excerpt (general risk-tier framework only, no per-regimen table) - commonly categorized intermediate risk in oncology practice; verify against NCCN Hematopoietic Growth Factors guideline before applying",
+      "Administration sequence per appendix F: irinotecan and leucovorin given concurrently (same line via Y-connector), followed by 5-FU bolus, followed by 5-FU 22-hr infusion, per source"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal and hepatic function (5-FU/irinotecan clearance)",
+    "assess for diarrhea (irinotecan-associated) before each cycle"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle GI toxicity/diarrhea status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 123582, 123586, 123587, 123588",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "histology",
+    "stage",
+    "biomarkers",
+    "treatmentSetting",
+    "lineOfTherapy",
+    "eligibilityCriteria"
+  ]
+}

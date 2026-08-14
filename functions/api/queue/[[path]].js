@@ -38,6 +38,12 @@ import * as ONCO from "../../_onco_store.js";
 import RCHOP_TEMPLATE from "../../../kb/protocols/rchop.json";
 const ONCO_PROTOCOLS = { rchop: RCHOP_TEMPLATE };
 function oncoProtocolTemplate(protocolId) { return ONCO_PROTOCOLS[String(protocolId || "").toLowerCase()] || null; }
+// ONCQIS Phase B: the PURE recommendation engine (onco-recommend.js, root JS, UMD default import -
+// same shape as `import Engine from "../followcare-engine.js"`). Standard Protocols are the new-schema
+// kb/schema/standard-protocol.schema.json objects; only status==="ACTIVE" are ever recommended, and
+// none are published ACTIVE yet, so activeStandardProtocols() is [] for now (honest, not fabricated).
+import ONCORECOMMEND from "../../../onco-recommend.js";
+function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -371,6 +377,28 @@ export async function onRequest(context) {
         lockedTemplate: nurseTmpl,
       }, adminRecords: adminRecords }, 200, request);
     }
+    // ONCQIS Phase B: read-only protocol RECOMMENDATION (flag smd_onco_recommend gates the client).
+    // Decision-SUPPORT only - suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype
+    // and never auto-selects/prescribes (always the full applicable list, reviewRequired:true). Gated
+    // on CAPS.QUEUE_VIEW (a pure read; nothing to disable on a GET). The phenotype is CLINICAL params
+    // ONLY (diseaseId/stage/biomarkers/setting/intent/line) - NEVER a name/MRN, and nothing here logs.
+    if (method === "GET" && seg === "onco" && sub === "recommend") {
+      requireCap(actor.role, CAPS.QUEUE_VIEW);   // any org-member read cap; PHI-free reference data
+      let biomarkers = null;
+      try { const raw = url.searchParams.get("biomarkers"); if (raw) biomarkers = JSON.parse(raw); } catch (e) { biomarkers = null; }
+      const phenotype = {
+        diseaseId: url.searchParams.get("diseaseId") || null,
+        stage: url.searchParams.get("stage") || null,
+        biomarkers: biomarkers,
+        setting: url.searchParams.get("setting") || null,
+        intent: url.searchParams.get("intent") || null,
+        line: url.searchParams.get("line") || null,
+      };
+      const active = activeStandardProtocols();
+      if (!active.length) return json({ ok: true, applicable: [], note: "no ACTIVE protocols published yet", reviewRequired: true }, 200, request);
+      const rec = ONCORECOMMEND.recommend(phenotype, active);
+      return json({ ok: true, applicable: rec.applicable, reviewRequired: rec.reviewRequired }, 200, request);
+    }
 
     if (method === "POST") {
       const body = await readBody(request);
@@ -465,8 +493,30 @@ export async function onRequest(context) {
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
           await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
-          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, body.overrides || []) }, 200, request); }
+          // Options-form call -> Phase F pre-activation gate runs. physicianConfirmed must be an EXPLICIT
+          // client true (the doctor's CONFIRM & ACTIVATE tap); it is never inferred, so activation is
+          // gated and never automatic. The gate throws (400) with the blocker list on any failure.
+          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, { overrides: body.overrides || [], physicianConfirmed: body.physicianConfirmed === true }) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
+        }
+        if (sub === "plan" && sub2 === "emr") {   // ADD TO EMR (structured write) - DOCTOR, EXPLICIT action ONLY, only after activation
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          if (plan.status !== "active") return json({ ok: false, error: "plan_not_active" }, 400, request);   // never before CONFIRM & ACTIVATE
+          // GHIS auth: writing into the LIVE hospital EMR needs the doctor's GHIS session token (its own
+          // header, never a URL param, never the Firebase Authorization Bearer). No GHIS session -> no write.
+          const ghisToken = request.headers.get("X-Ghis-Token") || "";
+          if (!ghisToken) return json({ ok: false, error: "ghis_auth_required" }, 401, request);
+          // Which structured fields the EMR supports is owner-config (VERIFIED slots only); default none.
+          // The GHIS structured-write network call stays unwired here until a real oncology payload is
+          // captured (same discipline as prescribe() in functions/api/ghis), so with no emrWrite dep every
+          // field falls back to the attached Tata PDF - never a fabricated structured write.
+          // ponytail: supported-field config is the calibration knob for a real EMR; wire deps.emrWrite/
+          // emrAttachPdf here once the GHIS oncology payload is captured + verified.
+          let supported = []; try { supported = JSON.parse(env.QUEUE_ONCO_EMR_FIELDS || "[]"); } catch (e) { supported = []; }
+          try { return json({ ok: true, emr: await ONCO.writePlanToEmr(env, body.planId, { supportedFields: supported, diagnosis: body.diagnosis || "", patientName: body.patientName || "", by: actor.id }) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "emr_write_failed" }, 400, request); }
         }
         if (sub === "cycle" && !sub2) {   // create - DOCTOR
           const plan = await ONCO.getPlan(env, body.planId);

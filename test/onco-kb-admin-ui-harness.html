@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONCQIS Knowledge Center admin harness (Phase J-a: dashboard tiles + protocol/evidence libraries)</title>
+<style>html,body{margin:0;height:100%;background:#f7f9fb;font-family:system-ui}</style>
+</head><body>
+<div id="tiles"></div>
+<div id="protocols"></div>
+<div id="evidence"></div>
+<script src="/onco-kb-admin.js" onload="window.__loaded=!!window.SMD_ONCOKBADMIN"></script>
+<script>
+// Fixtures: two protocols (one ACTIVE, one DRAFT), two uploaded evidence sources, and one impact report
+// that flags the ACTIVE protocol as CLINICAL REVIEW REQUIRED. The render module is PURE, so this proves
+// the exact HTML the admin page renders from the ingestion stores - no network, no auth.
+(function(){
+  var UI = window.SMD_ONCOKBADMIN;
+  var protocols = [
+    { id:"folfox-6", name:"FOLFOX-6", disease:"colorectal cancer", diseaseId:"colorectal-cancer", protocolVersion:"1.0",
+      status:"ACTIVE", evidence:{core:[{layer:"core"}],guideline:[{layer:"guideline"}]}, review:{lastReviewedAt:"2026-01-10",reviewDue:true} },
+    { id:"rchop", name:"R-CHOP", disease:"DLBCL", diseaseId:"dlbcl", version:"0.1-skeleton", lifecycleState:"draft" }
+  ];
+  var evidence = [
+    { id:"ev_1", title:"NCCN Colon v3.2026", org:"NCCN", version:"3.2026", publicationDate:"2026-02-01",
+      uploadDate:1770000000000, uploader:"owner@stewardmd.in", sourceType:"guideline", status:"analyzed",
+      checksum:"abcdef1234567890", diseases:["colorectal cancer"] },
+    { id:"ev_2", title:"ASCO Antiemetic 2026", org:"ASCO", version:"2026", uploadDate:1769000000000,
+      uploader:"owner@stewardmd.in", sourceType:"guideline", status:"uploaded", checksum:"deadbeef00", diseases:["supportive care"] }
+  ];
+  var reports = [
+    { id:"ir_1", kind:"onco-update-impact-report", generatedAt:1770001000000,
+      protocols:[ { protocolId:"folfox-6", name:"FOLFOX-6", status:"CLINICAL REVIEW REQUIRED", relevantChanges:[{category:"drug_withdrawal"}] } ],
+      statusCounts:{"CLINICAL REVIEW REQUIRED":1}, categoryCounts:{drug_withdrawal:1} }
+  ];
+  window.__metrics = UI.dashboardMetrics(protocols, evidence, reports);
+  document.getElementById("tiles").innerHTML = UI.renderTiles(window.__metrics);
+  document.getElementById("protocols").innerHTML = UI.renderProtocolTable(protocols, reports);
+  document.getElementById("evidence").innerHTML = UI.renderEvidenceTable(evidence);
+  window.__ready = true;
+})();
+</script>
+</body></html>

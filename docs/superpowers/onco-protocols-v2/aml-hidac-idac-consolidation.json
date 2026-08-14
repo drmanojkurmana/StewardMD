@@ -1,0 +1,91 @@
+{
+  "id": "aml-hidac-idac-consolidation",
+  "name": "High-dose / intermediate-dose cytarabine (AML postremission consolidation)",
+  "disease": "Acute Myeloid Leukemia",
+  "diseaseId": "acute_myeloid_leukemia",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": { "molecularProfile": "VERIFY" },
+  "treatmentSetting": "consolidation",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cytarabine-hidac",
+        "name": "Cytarabine",
+        "basis": "bsa",
+        "dosePerUnit": 3000,
+        "unit": "mg/m2",
+        "days": [1, 3, 5],
+        "route": "IV over 1-3 h, every 12 h",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "High-dose (HiDAC) option. Printed verbatim in Harrison's 22nd ed. as 3 g/m2 every 12 h on days 1, 3, and 5 (converted to 3000 mg/m2 here). Source states this longstanding practice may not improve survival over IDAC. Alternative to cytarabine-idac below; physician selects one dosing strategy per patient risk group, not both together."
+      },
+      {
+        "id": "cytarabine-idac",
+        "name": "Cytarabine",
+        "basis": "bsa",
+        "dosePerUnit": 1500,
+        "unit": "mg/m2",
+        "days": [1, 2, 3],
+        "route": "IV over 1-3 h, every 12 h",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Intermediate-dose (IDAC), ELN-preferred option for favorable/intermediate-risk younger patients, for two to four cycles. Source prints a range of 1-1.5 g/m2 every 12 h on days 1-3 (no single value distinguished as more-printed); this entry uses the 1.5 g/m2 upper bound of the printed range - confirm the intended dose within the 1-1.5 g/m2 range against the institutional order before use. Source notes younger, favorable-risk patients have worse outcomes at doses <1 g/m2. For favorable-risk OLDER patients, source separately prints an attenuated dose of 0.5-1 g/m2 every 12 h on days 1-3 (not encoded as a separate drug entry here; see notes only - dose not selected as a discrete printed value, verify)."
+      }
+    ],
+    "cycleLengthDays": null,
+    "cycles": "2-4",
+    "premedications": [
+      { "name": "Ocular prophylaxis (corticosteroid eye drops)", "notes": "standard supportive-care practice with high-dose cytarabine to reduce keratoconjunctivitis; dose not printed in source, per institutional protocol" }
+    ],
+    "supportiveCare": [
+      "Antiemetics: moderate emetic risk tier per NCCN Antiemesis framework (Appendix D) - cytosine arabinoside >1 g/m2 classified as moderately emetogenic (30-90% risk) in Harrison's, ed. 22, line 83757",
+      "G-CSF: consolidation regimens with HiDAC/IDAC are myelosuppressive; per NCCN Appendix C, high-risk regimens warrant prophylactic CSF support - regimen-specific NCCN Growth Factors algorithm entry not yet confirmed, verify before finalizing",
+      "Administration sequence: single-agent regimen, no NCCN Appendix F sequencing applicable (only one drug class given)"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "Neurologic exam before each dose of high-dose cytarabine (cerebellar toxicity risk with HiDAC)",
+    "Renal function (dose-dependent cerebellar/renal toxicity risk rises with impaired creatinine clearance)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status", "neurologic exam (baseline, before HiDAC)"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." },
+    { "condition": "Cerebellar toxicity (ataxia, dysarthria, nystagmus) on exam prior to a dose", "action": "hold", "text": "Hold remaining HiDAC doses for the cycle; physician decides on resumption/dose reduction." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "date": null,
+        "locator": "lines 117793, 117795, 117796, 117804",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": ["histology", "stage", "biomarkers.molecularProfile", "lineOfTherapy", "eligibilityCriteria"],
+  "provenanceNote": "Draft is textbook-grounded only (Harrison 22nd ed). NCCN per-disease chemotherapy order template, guideline overlay, and any institutional review are pending and not yet incorporated. No institutional approval has been sought or granted."
+}

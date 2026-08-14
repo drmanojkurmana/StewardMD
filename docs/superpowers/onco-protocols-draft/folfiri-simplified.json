@@ -1,0 +1,93 @@
+{
+  "id": "folfiri-simplified",
+  "diseaseId": "colorectal_cancer",
+  "name": "FOLFIRI (simplified, Andre)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": 14,
+  "cycles": null,
+  "intentOptions": ["palliative"],
+  "source": {
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+    "textbookLines": [123591, 123595, 123596, 123597],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "per moderate emetic risk tier, see supportiveCare" }
+  ],
+  "supportiveCare": [
+    "Antiemetics: moderate emetic risk tier (irinotecan is a moderate-emetic-risk IV agent per the NCCN 4-tier framework in Appendix D; 5-fluorouracil and leucovorin are low/minimal risk) - 5-HT3 antagonist +/- dexamethasone on treatment day per institutional antiemesis guideline",
+    "G-CSF: FOLFIRI is not a routinely-designated high-risk febrile-neutropenia regimen; per Appendix C, prophylactic CSF use for intermediate/unlisted-risk regimens is a physician-patient risk-benefit discussion, not a default order",
+    "Administration sequence per source: irinotecan given concurrently with leucovorin (same line via Y-connector), followed by 5-FU bolus, followed by 5-FU continuous infusion (Appendix F: order-of-administration language 'followed by' reflects the source-specified sequence)"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "Renal and hepatic function (irinotecan is hepatically cleared; UGT1A1 status affects toxicity)",
+    "Diarrhea/dehydration monitoring (irinotecan-associated)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle GI toxicity status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 180,
+      "unit": "mg/m2",
+      "route": "IV over 90 min",
+      "days": [1],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed., Cancer of the Colon, Table 40.12 (line 123595): FOLFIRI (simplified) per Andre et al. 1999 - Irinotecan 180 mg/m2 over 90 min, day 1 only."
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV concurrent with irinotecan (may run through same line via Y-connector)",
+      "days": [1],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed. (line 123596): LV 400 mg/m2 concurrently with irinotecan."
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "Fluorouracil",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "days": [1],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed. (line 123596-123597): followed by 5-FU bolus 400 mg/m2. Given as a separate line item from the infusional 5-FU dose below."
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion over 46-48 hr",
+      "days": [1, 2],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed. (line 123597): 5-FU 1,200 mg/m2/d times 2 d (2,400 mg/m2 total infusion over 46-48 hr). dosePerUnit here is the per-day rate (1,200 mg/m2/day x 2 days = 2,400 mg/m2 total); days [1,2] reflects the 2-day infusion, not two separate bolus administrations."
+    }
+  ]
+}

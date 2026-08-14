@@ -58,7 +58,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q8prof">
 <link rel="stylesheet" href="/opd-emr.css?v=oe29-scribe-onco">
-<link rel="stylesheet" href="/onco-home.css?v=oh3">
+<link rel="stylesheet" href="/onco-home.css?v=oh5">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1723,7 +1723,7 @@ window.openExternal = function (u) {
      global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
      their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the
      flag is on + SMD_ONCOHOME.open() is called (a home tile, or ?oncohome=1 for testing). -->
-<script src="/onco-evidence.js?v=oh1" defer></script>
+<script src="/onco-evidence.js?v=oh2" defer></script>
 <!-- Onco Home Phase 8 P1 (flags smd_onco_staging / smd_onco_tallman / smd_onco_drugview /
      smd_onco_protoref, all DEFAULT OFF): AJCC/TNM staging engine (versioned scaffold + honest gaps,
      no proprietary tables), ISMP tall-man drug names, onco drug+interaction view, and a read-only
@@ -1739,6 +1739,16 @@ window.openExternal = function (u) {
 <script src="/onco-iotox.js?v=oh3" defer></script>
 <script src="/onco-recist.js?v=oh3" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
+<!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
+     (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
+     for a phenotype and never auto-selects/prescribes. Loaded before onco-home.js. -->
+<script src="/onco-recommend.js?v=oh1" defer></script>
+<!-- ONCQIS Phase D (flags smd_onco_protocols AND smd_onco_recommend, BOTH DEFAULT OFF): the doctor
+     FIND -> COMPARE -> SELECT -> patient-specific Tata digital-protocol flow (window.SMD_ONCOFLOW).
+     Decision-support only; SELECT is always an explicit physician click (never auto-selected) and
+     every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
+     (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
+<script src="/onco-plan-flow.js?v=oh1" defer></script>
 <script src="/onco-home.js?v=oh3" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).

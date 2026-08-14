@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onco evidence overlay harness (ONCQIS Phase C: layers + UPDATE AVAILABLE + divergence)</title>
+<link rel="stylesheet" href="/onco-home.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}#root{padding:16px}</style>
+</head><body>
+<div id="root">
+  <div id="layers"></div>
+  <div id="update"></div>
+  <div id="divergence"></div>
+</div>
+<script>
+// Phase C evidence overlay flag ON (real onco-evidence.js loads below).
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return k === "smd_onco_evidence_overlay"; } };
+
+// A fixture Standard Protocol carrying core + guideline + institutional + divergence (schema-shaped).
+window.__protocol = {
+  id: "fx-folfox6", name: "FOLFOX-6", protocolVersion: "1.0",
+  regimen: { drugs: [{ name: "Oxaliplatin" }, { name: "Leucovorin" }, { name: "Fluorouracil" }], cycleLengthDays: 14, cycles: 12 },
+  evidence: {
+    core: [{ layer: "core", source: "DeVita 12th ed", version: "12", date: "2023", evidenceStatus: "current" }],
+    guideline: [{ layer: "guideline", source: "NCCN Colon", version: "3.2026", date: "2026-05", evidenceStatus: "current" }],
+    institutional: [{ hospitalId: "H1", source: "Tumour Board Policy", version: "2026.1", approvedBy: "Dr Rao", date: "2026-06" }],
+    divergence: [{ field: "cycleLengthDays", sources: [{ name: "DeVita 12th ed", version: "12", value: 14 }, { name: "NCCN Colon", version: "3.2026", value: 21 }], note: "Cycle length differs between sources.", resolution: "clinical-review-required" }]
+  }
+};
+window.__guidelineEntry = { source: "NCCN Colon", version: "3.2026", date: "2026-05", regimen: { name: "FOLFOXIRI", drugs: [{ name: "Oxaliplatin" }, { name: "Leucovorin" }, { name: "Fluorouracil" }, { name: "Irinotecan" }] } };
+
+// State the harness watches to PROVE no action path auto-applies / auto-reconciles.
+window.__standardName = window.__protocol.name;   // must never change on a click
+window.__lastChoice = null;                        // set only on an explicit UPDATE-AVAILABLE click
+window.__lastDivergence = null;                    // set only on an explicit divergence click
+
+window.__ready = false;
+window.addEventListener("DOMContentLoaded", function () {
+  var EV = window.SMD_ONCOEV;
+  document.getElementById("layers").innerHTML = EV.renderEvidenceLayers(window.__protocol);
+  document.getElementById("update").innerHTML = EV.renderUpdateAvailable(window.__protocol, window.__guidelineEntry);
+  document.getElementById("divergence").innerHTML = EV.renderDivergence(window.__protocol.evidence.divergence[0]);
+
+  // Wire clicks exactly as a real caller would: RECORD the choice, never mutate the protocol.
+  document.getElementById("root").addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-onco-ev]") : null;
+    if (!b) return;
+    var kind = b.getAttribute("data-onco-ev");
+    if (kind === "update-choice") {
+      window.__lastChoice = EV.recordChoice(b.getAttribute("data-choice"));
+    } else if (kind === "divergence-select") {
+      window.__lastDivergence = EV.recordDivergenceSelection(window.__protocol.evidence.divergence[0], b.getAttribute("data-src-index"));
+    }
+    // NB: window.__standardName / window.__protocol.name are intentionally never written here.
+  });
+  window.__ready = !!(EV && EV.renderEvidenceLayers && EV.renderUpdateAvailable && EV.renderDivergence);
+});
+</script>
+<script src="/onco-evidence.js"></script>
+</body></html>

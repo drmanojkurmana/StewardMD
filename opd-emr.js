@@ -580,6 +580,7 @@
       body = (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : '<div class="oe-empty sm">Oncology module unavailable.</div>';
       body += oncoCyclePanelHtml(st);   // doctor-only: create cycle / pre-chemo clearance / confirm to ready
       body += oncoPrintButtonHtml();    // Phase 6: 2-page Protocol PDF, built from this same plan/cycle
+      body += oncoEmrButtonHtml(st);    // Phase G: [Add to EMR], only after CONFIRM & ACTIVATE
     }
     return section("vaccines", "Oncology", (plan.protocolId || "").toUpperCase(), toggle + body, "");
   }
@@ -594,6 +595,13 @@
   // module flag alone, not st.writeOn - a read-only doctor session can still print what is on screen.
   function oncoPrintButtonHtml() {
     return '<button class="oe-btn ghost oe-onco-print" data-oe-act="onco-print">' + ms("picture_as_pdf") + "Print / PDF</button>";
+  }
+  // Phase G: [Add to EMR] - doctor, write UI (st.writeOn), and ONLY once the plan is ACTIVE (post
+  // CONFIRM & ACTIVATE). It is an explicit action, never fired automatically on activation.
+  function oncoEmrButtonHtml(st) {
+    var plan = st.oncoPlan || {};
+    if (!oncoFlagOn() || !st.writeOn || plan.status !== "active") return "";
+    return '<button class="oe-btn primary oe-onco-emr" data-oe-act="onco-add-emr">' + ms("save") + "Add to EMR</button>";
   }
   // Doctor/Nurse toggle for the Oncology tab (st.oncoView "doctor" | "nurse", default doctor). Purely
   // a local view switch - no fetch, mirrors the other data-oe-act toggles in this file.
@@ -734,6 +742,7 @@
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-override") return oncoSaveOverride(arg);
     if (cmd === "onco-create") return oncoCreateAndActivate();
+    if (cmd === "onco-add-emr") return oncoAddToEmr();
     if (cmd === "onco-view") { st.oncoView = arg; paint(); return; }
     if (cmd === "onco-start") return oncoStart(arg);
     if (cmd === "onco-complete") return oncoComplete(arg);
@@ -852,9 +861,10 @@
   // Firebase-authed POST to the onco routes (functions/api/queue/[[path]].js resolveActor) - NOT the
   // GHIS proxy postWrite() targets; the onco routes authenticate the doctor via their StewardMD
   // Firebase session (same token addToTimeline() already uses), never GHIS.
-  function oncoPost(path, body) {
+  function oncoPost(path, body, extraHeaders) {
     return fbTok().then(function (t) {
       var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      if (extraHeaders) Object.keys(extraHeaders).forEach(function (k) { if (extraHeaders[k]) h[k] = extraHeaders[k]; });
       return fetch(qBase() + "/api/queue/onco" + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body) });
     }).then(function (r) { return r.json().then(function (d) { return { status: r.status, ok: r.ok, d: d || {} }; }, function () { return { status: r.status, ok: r.ok, d: {} }; }); });
   }
@@ -903,12 +913,36 @@
       if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
       if (!res.ok || res.d.ok === false || !res.d.plan) { toast("Could not create the treatment plan. Please try again."); return; }
       var planId = res.d.plan.planId;
-      return oncoPost("/plan/confirm", { planId: planId, overrides: draft.overrides || [] }).then(function (res2) {
+      // physicianConfirmed:true is the doctor's explicit CONFIRM & ACTIVATE (this tap already passed the
+      // confirmed() gate above); the server pre-activation gate requires it, so activation is never automatic.
+      return oncoPost("/plan/confirm", { planId: planId, overrides: draft.overrides || [], physicianConfirmed: true }).then(function (res2) {
+        if (res2.d && typeof res2.d.error === "string" && res2.d.error.indexOf("activation_blocked") === 0) { toast("Cannot activate yet: complete doses, evidence, clearance info and resolve any VERIFY first."); return; }
         if (!res2.ok || res2.d.ok === false) { toast("Plan created but could not confirm. Please retry the confirm."); return; }
         st.oncoDraft = null; st.oncoOverrideDraft = {}; st.oncoPlan = res2.d.plan || res.d.plan;
         toast("Treatment plan created and activated.");
         paint();
       });
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
+  // ---- Phase G: [Add to EMR] - structured EMR write of the ACTIVATED plan --------------------------
+  // EXPLICIT physician action, one confirm() gate then exactly one POST. Never automatic: it can only be
+  // reached from the button, which only renders once plan.status === "active" (post CONFIRM & ACTIVATE).
+  // Sends the GHIS session token in its own header (X-Ghis-Token) - the route needs GHIS auth to write.
+  function oncoAddToEmr() {
+    var plan = st.oncoPlan; if (!plan || plan.status !== "active") return;
+    if (!confirmed("Add this activated treatment plan to the patient's EMR?")) return;
+    var g = ghisAuth();
+    oncoPost("/plan/emr", {
+      planId: plan.planId,
+      diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "",
+      patientName: (st.patient && st.patient.name) || "",
+    }, { "X-Ghis-Token": g.token }).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled" || res.d.error === "emr_write_disabled") { toast("This is being set up and is not live yet."); return; }
+      if (res.status === 401 || res.d.error === "ghis_auth_required") { toast("Connect to the hospital EMR (Ward Sync) first."); return; }
+      if (!res.ok || res.d.ok === false) { toast("Could not add to EMR. Please try again."); return; }
+      var emr = res.d.emr || {};
+      toast(emr.pdfAttached ? "Added to EMR (protocol sheet attached)." : (emr.pdf ? "Protocol sheet ready to attach to the EMR." : "Added to EMR."));
     }).catch(function () { toast("Could not complete the request. Please try again."); });
   }
 

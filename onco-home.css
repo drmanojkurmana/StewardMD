@@ -138,8 +138,104 @@ body.oh-lock { overflow: hidden; }
 .oh-favchip:active { border-color: var(--teal, #0a9396); }
 .oh-favchip-t { font: 700 13px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
 
+/* ===== ONCQIS Phase C: evidence layers + UPDATE AVAILABLE + divergence (onco-evidence.js) ===== */
+.oev-empty { font: 500 11.5px var(--sans, system-ui); color: var(--slate-soft, #888); padding: 6px 0; }
+.oev-layers { display: flex; flex-direction: column; gap: 12px; }
+.oev-layer { border: 1px solid var(--line, #e5e5e0); border-left-width: 5px; border-radius: 12px; padding: 11px 13px; background: var(--panel, #fff); }
+.oev-layer-core { border-left-color: var(--slate, #555); }
+.oev-layer-guide { border-left-color: #4338ca; }
+.oev-layer-inst { border-left-color: var(--teal, #0a9396); }
+.oev-layer-h { font: 800 12px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .04em; color: var(--ink, #1a1a1a); }
+.oev-layer-sub { font: 500 11px var(--sans, system-ui); color: var(--slate-soft, #888); margin: 3px 0 8px; line-height: 1.45; }
+.oev-prow { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 6px 0; border-top: 1px dashed var(--line, #e5e5e0); }
+.oev-psrc { font: 700 12.5px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.oev-pmeta { font: 600 11px var(--sans, system-ui); color: var(--slate, #555); }
+.oev-st-current { color: #047857; } .oev-st-superseded { color: #b45309; }
+
+.oev-ua { border: 1px solid var(--warn, #d97706); border-radius: 14px; padding: 14px; background: var(--panel, #fff); }
+.oev-ua-h { display: inline-block; font: 800 10px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .05em; background: var(--warn-soft, #fef3c7); color: #7c4a03; border-radius: 7px; padding: 3px 9px; }
+.oev-ua-lead { font: 500 12px var(--sans, system-ui); color: var(--slate, #555); margin: 9px 0 12px; line-height: 1.5; }
+.oev-ua-cols { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 560px) { .oev-ua-cols { grid-template-columns: 1fr 1fr; } }
+.oev-ua-col { border: 1px solid var(--line, #e5e5e0); border-radius: 11px; padding: 10px 12px; }
+.oev-ua-col-new { border-color: #4338ca; }
+.oev-ua-col-h { font: 800 11px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .03em; color: var(--slate-soft, #888); margin-bottom: 7px; }
+.oev-ua-row { display: flex; gap: 8px; padding: 3px 0; }
+.oev-ua-k { flex: 0 0 62px; font: 700 11px var(--sans, system-ui); color: var(--slate-soft, #888); }
+.oev-ua-v { font: 600 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.45; }
+.oev-ua-why { border: 1px dashed var(--line, #e5e5e0); border-radius: 11px; padding: 10px 12px; margin-top: 12px; }
+.oev-ua-why-h { font: 800 11px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .03em; color: var(--slate-soft, #888); margin-bottom: 6px; }
+.oev-ua-why-row { display: flex; flex-wrap: wrap; gap: 3px 10px; padding: 4px 0; }
+.oev-ua-why-f { font: 700 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); }
+.oev-ua-why-d { font: 500 11.5px var(--sans, system-ui); color: var(--slate, #555); }
+.oev-ua-why-sum { font: 600 11.5px var(--sans, system-ui); color: #7c4a03; margin-top: 6px; line-height: 1.5; }
+.oev-ua-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.oev-ua-btn { flex: 1 1 auto; background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 10px; padding: 11px 12px; font: 800 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); cursor: pointer; }
+.oev-ua-btn:active { transform: scale(.98); }
+.oev-ua-btn-alt { border-color: #4338ca; color: #4338ca; }
+.oev-ua-btn-ghost { background: transparent; color: var(--teal, #0a9396); border-style: dashed; }
+.oev-ua-note { font: 500 11px var(--sans, system-ui); color: var(--slate-soft, #888); margin-top: 10px; line-height: 1.5; }
+
+.oev-div { border: 1px solid var(--line, #e5e5e0); border-left: 5px solid var(--warn, #d97706); border-radius: 12px; padding: 13px; background: var(--panel, #fff); }
+.oev-div-h { display: inline-block; font: 800 10px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .05em; background: var(--warn-soft, #fef3c7); color: #7c4a03; border-radius: 7px; padding: 3px 9px; }
+.oev-div-field { font: 700 13px var(--sans, system-ui); color: var(--ink, #1a1a1a); margin: 9px 0 8px; }
+.oev-div-src { display: flex; gap: 8px; padding: 6px 0; border-top: 1px dashed var(--line, #e5e5e0); }
+.oev-div-src-k { flex: 0 0 66px; font: 800 11.5px var(--sans, system-ui); color: var(--teal, #0a9396); }
+.oev-div-src-v { font: 600 12px var(--sans, system-ui); color: var(--ink, #1a1a1a); line-height: 1.45; }
+.oev-div-diff { font: 500 12px var(--sans, system-ui); color: var(--slate, #555); margin: 9px 0; line-height: 1.5; }
+.oev-div-diff-k { font: 800 11px var(--sans, system-ui); text-transform: uppercase; color: var(--slate-soft, #888); }
+.oev-div-review { display: inline-block; font: 800 10px var(--sans, system-ui); text-transform: uppercase; letter-spacing: .04em; background: var(--warn-soft, #fef3c7); color: #7c4a03; border-radius: 6px; padding: 3px 8px; }
+.oev-div-select { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
+.oev-div-btn { background: var(--panel, #fff); border: 1px solid var(--teal, #0a9396); border-radius: 10px; padding: 9px 12px; font: 700 12px var(--sans, system-ui); color: var(--teal, #0a9396); cursor: pointer; }
+.oev-div-btn:active { transform: scale(.98); }
+.oev-div-note { font: 500 11px var(--sans, system-ui); color: var(--slate-soft, #888); margin-top: 10px; line-height: 1.5; }
+
 body.dark .oh-overlay, body.v3-dark .oh-overlay { background: var(--paper, #0f1a1a); }
 body.dark .oh-ctx, body.v3-dark .oh-ctx { background: #0c2b29; }
 body.dark .oev-guideline, body.v3-dark .oev-guideline { background: #1e2352; color: #a5b4fc; }
 body.dark .oev-calc, body.v3-dark .oev-calc { background: #052e22; color: #6ee7b7; }
 body.dark .oev-ai, body.v3-dark .oev-ai { background: #3a2a05; color: #f0c060; }
+
+/* ===== ONCQIS Phase D · doctor FIND -> COMPARE -> SELECT flow (onco-plan-flow.js, #smdOncoFlow).
+   Reuses the .oh-overlay/.oh-top/.oh-body chrome; below are the flow-specific pieces plus a scoped
+   copy of the Tata matrix + button styling (opd-emr.css scopes those to #smdOpdEmr, not here). ===== */
+#smdOncoFlow .of-sec-h { font: 800 14px var(--sans, system-ui); letter-spacing: .04em; color: var(--ink, #1a1a1a); margin: 14px 0 8px; }
+#smdOncoFlow .of-note { font: 12px var(--sans, system-ui); color: var(--muted, #6b7280); margin: 6px 0; }
+#smdOncoFlow .of-note.of-review { color: var(--teal, #0a9396); font-weight: 700; }
+#smdOncoFlow .of-empty { padding: 18px; text-align: center; color: var(--muted, #6b7280); background: var(--panel, #fff); border: 1px dashed var(--line, #e5e5e0); border-radius: 12px; }
+#smdOncoFlow .of-back { background: none; border: none; color: var(--teal, #0a9396); font: 700 14px var(--sans, system-ui); padding: 6px 0; cursor: pointer; }
+#smdOncoFlow .of-pheno { background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 12px; padding: 10px 12px; }
+#smdOncoFlow .of-pheno-h { font: 700 13px var(--sans, system-ui); margin-bottom: 6px; }
+#smdOncoFlow .of-tag { font: 10px var(--sans, system-ui); color: var(--teal, #0a9396); border: 1px solid currentColor; border-radius: 6px; padding: 1px 5px; margin-left: 6px; }
+#smdOncoFlow .of-chip { display: inline-block; font: 12px var(--sans, system-ui); background: var(--sc-low, #eef2f2); border-radius: 8px; padding: 3px 8px; margin: 2px 4px 2px 0; }
+#smdOncoFlow .of-entry { background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 12px; padding: 12px; margin: 10px 0; }
+#smdOncoFlow .of-entry-h { font: 800 15px var(--sans, system-ui); }
+#smdOncoFlow .of-ver { font: 11px var(--sans, system-ui); color: var(--muted, #6b7280); }
+#smdOncoFlow .of-entry-crit, #smdOncoFlow .of-entry-why, #smdOncoFlow .of-entry-ev { font: 12px var(--sans, system-ui); color: var(--ink, #333); margin-top: 4px; }
+#smdOncoFlow .of-entry-crit.of-need { color: #b45309; }
+#smdOncoFlow .of-entry-actions, #smdOncoFlow .of-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+#smdOncoFlow .of-cmpbar { margin: 8px 0; }
+#smdOncoFlow .of-cmp { display: flex; gap: 10px; overflow-x: auto; }
+#smdOncoFlow .of-cmp-col { flex: 0 0 220px; background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 12px; padding: 12px; }
+#smdOncoFlow .of-cmp-h { font: 800 14px var(--sans, system-ui); margin-bottom: 8px; }
+#smdOncoFlow .of-cmp-row, #smdOncoFlow .of-hrow { display: flex; justify-content: space-between; gap: 10px; font: 12px var(--sans, system-ui); padding: 4px 0; border-bottom: 1px solid var(--line, #eee); }
+#smdOncoFlow .of-cmp-k, #smdOncoFlow .of-hk { color: var(--muted, #6b7280); }
+#smdOncoFlow .of-dp-head { background: var(--panel, #fff); border: 1px solid var(--line, #e5e5e0); border-radius: 12px; padding: 12px; }
+#smdOncoFlow .of-lineage { margin-top: 12px; }
+#smdOncoFlow .of-lin { display: flex; gap: 10px; font: 12px var(--sans, system-ui); padding: 6px 8px; border-bottom: 1px solid var(--line, #eee); }
+#smdOncoFlow .of-lin-d { flex: 0 0 120px; font-weight: 700; }
+#smdOncoFlow .of-lin-c { flex: 1; color: var(--ink, #333); }
+#smdOncoFlow .of-sub { margin-top: 12px; }
+/* scoped Tata matrix + buttons (mirror opd-emr.css, which only styles #smdOpdEmr) */
+#smdOncoFlow .oe-onco-scroll { overflow-x: auto; margin: 8px 0; }
+#smdOncoFlow .oe-onco-tbl { width: 100%; border-collapse: collapse; }
+#smdOncoFlow .oe-onco-tbl th, #smdOncoFlow .oe-onco-tbl td { border: 1px solid var(--line, #e5e5e0); padding: 6px; font: 12px var(--sans, system-ui); text-align: center; vertical-align: middle; }
+#smdOncoFlow .oe-onco-th { background: var(--sc-low, #eef2f2); font-weight: 700; }
+#smdOncoFlow .oe-onco-drug { font-weight: 700; text-align: left; }
+#smdOncoFlow .oe-onco-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; min-width: 84px; border: 1px solid var(--line, #ccc); background: var(--surface, #fff); border-radius: 10px; padding: 8px 6px; cursor: pointer; color: inherit; }
+#smdOncoFlow .oe-onco-cell-ns { opacity: .5; cursor: default; }
+#smdOncoFlow .oe-onco-day { font-weight: 700; }
+#smdOncoFlow .oe-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--line, #ccc); border-radius: 10px; font: 700 13px var(--sans, system-ui); padding: 9px 12px; cursor: pointer; background: var(--surface, #fff); color: var(--ink, #1a1a1a); }
+#smdOncoFlow .oe-btn.primary { background: var(--teal, #0a9396); color: #fff; border-color: var(--teal, #0a9396); }
+#smdOncoFlow .oe-btn.on { background: var(--teal, #0a9396); color: #fff; border-color: var(--teal, #0a9396); }
+#smdOncoFlow .oe-btn[disabled] { opacity: .45; cursor: not-allowed; }

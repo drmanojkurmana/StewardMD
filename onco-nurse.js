@@ -87,6 +87,9 @@
       var lin = byDrug[drug.id];
       var doseTxt = (lin && lin.final != null) ? (esc(lin.final) + " mg" + (drug.route ? " " + esc(drug.route) : "")) : "verify";
       var did = esc(drug.id || "");
+      // Administration instructions from the (nurse-safe) template's own notes - informational only,
+      // never a dose (the nurse view holds no dose formulas and never calculates).
+      var instr = drug.notes ? '<span class="oe-onco-give-instr">' + esc(drug.notes) + "</span>" : "";
       var right = given[drug.id]
         ? '<span class="oe-tag">Given</span>'
         : '<div class="oe-onco-give-inputs">' +
@@ -96,7 +99,7 @@
           "</div>";
       return '<div class="oe-onco-giverow' + (given[drug.id] ? " done" : "") + '"><div class="oe-onco-give-main">' +
         '<span class="oe-onco-give-name">' + esc(drug.name || drug.id || "") + "</span>" +
-        '<span class="oe-onco-give-dose">' + doseTxt + "</span></div>" + right + "</div>";
+        '<span class="oe-onco-give-dose">' + doseTxt + "</span>" + instr + "</div>" + right + "</div>";
     }).join("");
 
     return '<div class="oe-onco-give">' + rows + "</div>";

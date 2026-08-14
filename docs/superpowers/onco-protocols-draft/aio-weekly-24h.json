@@ -1,0 +1,63 @@
+{
+  "id": "aio-weekly-24h",
+  "diseaseId": "colorectal_cancer",
+  "name": "AIO (weekly 24-hr infusion 5-FU/LV)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": 7,
+  "cycles": null,
+  "intentOptions": ["palliative"],
+  "source": {
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+    "textbookLines": [123467, 123472],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "per low emetic risk tier, see supportiveCare" }
+  ],
+  "supportiveCare": [
+    "Antiemetics: low emetic risk tier (5-FU/leucovorin, per NCCN Antiemesis guideline categories, Appendix D) - prophylaxis for 10-30% emesis frequency",
+    "G-CSF: not routinely indicated; AIO weekly 5-FU/LV is not a high or intermediate febrile-neutropenia-risk regimen per NCCN Appendix C categories - physician discretion if patient-specific risk factors present"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (dose adjustment context for 5-FU/LV regimens)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV over 2 hr",
+      "days": [1],
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "Source (DeVita 12th ed., line 123467, citing Kohne et al., 1998): 'LV 500 mg/m2 over 2 hr, followed by 5-FU 2,600 mg/m2 over 24 hr, repeated weekly.' Weekly regimen; day shown as 1 of each 7-day cycle."
+    },
+    {
+      "id": "5-fluorouracil",
+      "name": "5-Fluorouracil",
+      "basis": "bsa",
+      "dosePerUnit": 2600,
+      "unit": "mg/m2",
+      "route": "IV over 24 hr",
+      "days": [1],
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "Source (DeVita 12th ed., line 123472, citing Kohne et al., 1998): '5-FU 2,600 mg/m2 over 24 hr, repeated weekly', given immediately after the leucovorin infusion. Weekly regimen; day shown as 1 of each 7-day cycle."
+    }
+  ]
+}

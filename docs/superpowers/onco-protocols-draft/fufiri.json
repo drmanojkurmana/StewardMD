@@ -1,0 +1,80 @@
+{
+  "id": "fufiri",
+  "diseaseId": "colorectal_cancer",
+  "name": "FUFIRI (Douillard weekly)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": 49,
+  "cycles": null,
+  "intentOptions": ["palliative"],
+  "source": {
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+    "textbookLines": [123599, 123603],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "per moderate emetic risk tier (see supportiveCare); given before irinotecan on each weekly day" }
+  ],
+  "supportiveCare": [
+    "antiemetics: moderate emetic risk tier per NCCN Appendix D (irinotecan is the highest-risk component of this regimen; 5-fluorouracil and leucovorin are low/minimal emetic risk) - 5-HT3 antagonist +/- dexamethasone on treatment days",
+    "G-CSF: FUFIRI/irinotecan-fluoropyrimidine weekly regimens are not itemized by name in NCCN Appendix C (Appendix C gives only High/Intermediate/Low risk-level definitions, not a per-regimen table); treat as low-to-intermediate febrile neutropenia risk and apply the Appendix C risk-benefit discussion (patient risk factors, prior FN) rather than routine primary prophylactic G-CSF - physician judgment, verify against the NCCN Myeloid Growth Factors guideline"
+  ],
+  "monitoring": [
+    "CBC before each weekly dose",
+    "renal function (5-FU/irinotecan dosing depends on organ function per source footnote: doses are starting doses for good performance status with normal renal, hepatic, and bone marrow function)",
+    "liver function",
+    "diarrhea/GI toxicity assessment before each weekly dose (irinotecan)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "performance status", "prior-cycle/prior-week status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day of treatment", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 8, 15, 22, 29, 36],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed., line 123603: Irinotecan 80 mg/m2, then LV 500 mg/m2, followed by 5-FU 2,300 mg/m2; all drugs given weekly for 6 wk, repeated every 7 wk (Douillard et al., 2000). Not on NCCN Appendix G tall-man list."
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 8, 15, 22, 29, 36],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed., line 123603: LV 500 mg/m2, given weekly for 6 wk, repeated every 7 wk. Given concurrently with/after irinotecan, before 5-FU. Not on NCCN Appendix G tall-man list (list has LEVOleucovorin, a different agent, not plain leucovorin)."
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil",
+      "basis": "bsa",
+      "dosePerUnit": 2300,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 8, 15, 22, 29, 36],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "DeVita 12th ed., line 123603: 5-FU 2,300 mg/m2, given weekly for 6 wk, repeated every 7 wk. Source footnote 317: doses are recommended starting doses for good performance status patients with normal renal, hepatic, and bone marrow function; individual dose adjustments may be required. Not on NCCN Appendix G tall-man list."
+    }
+  ]
+}

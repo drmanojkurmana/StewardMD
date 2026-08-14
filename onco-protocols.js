@@ -56,6 +56,15 @@
       var cells = '<td class="oe-onco-drug">' + esc(drug.name || drug.id || "") + "</td>" +
         '<td class="oe-onco-admin">' + esc(doseAdminText(drug)) + "</td>";
       for (var cy = 1; cy <= cycles; cy++) {
+        // Optional per-cycle scheduling: when a drug carries a `cycles` list (a UI-only field the
+        // patient-specific digital protocol may set - the Standard Protocol schema forbids it), a
+        // cycle not in that list renders "X / Not scheduled". Absent `cycles` => present every cycle
+        // (byte-identical to the legacy path, so every existing plan/test is unchanged).
+        if (drug.cycles && drug.cycles.indexOf(cy) < 0) {
+          cells += '<td class="oe-onco-cellwrap"><div class="oe-onco-cell oe-onco-cell-ns" aria-disabled="true">' +
+            '<span class="oe-onco-day">X</span><span class="oe-onco-dose">Not scheduled</span></div></td>';
+          continue;
+        }
         cells += '<td class="oe-onco-cellwrap"><button class="oe-onco-cell" data-oe-act="onco-cell:' + cy + ":" + esc(drug.id) + '">' +
           '<span class="oe-onco-day">' + esc(dm) + "</span>" +
           '<span class="oe-onco-dose">' + esc(doseText(lin)) + "</span></button></td>";
