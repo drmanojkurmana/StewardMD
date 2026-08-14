@@ -15,7 +15,10 @@ const FREQ_MAP = {
   'breast-capecitabine::capecitabine': 2, 'gi-gastric-capox::capecitabine': 2,
   'gi-gastric-pembro::capecitabine': 2, 'gi-net-captem::capecitabine': 2,
   'gi-hcc-sorafenib::sorafenib': 2, 'gu-prostate-abiraterone::prednisone': 2,
-  'gu-prostate-adt-arpi::darolutamide': 2, 'gu-prostate-adt-arpi::prednisone-with-abiraterone': 2,
+  'gu-prostate-adt-arpi::darolutamide': 2,
+  // NOTE: gu-prostate-adt-arpi::prednisone-with-abiraterone is deliberately NOT BID. In this mCSPC
+  // ADT+abiraterone DOUBLET (no docetaxel) the source note is prednisone 5 mg ONCE daily; 5 mg BID is
+  // the mCRPC/triplet dose. The sibling mCRPC entries below ARE correctly BID. (R1 catch.)
   'gu-prostate-docetaxel-mcrpc::prednisone': 2, 'gu-prostate-olaparib::olaparib': 2,
   'gyn-olaparib-maint::olaparib': 2, 'lung-alectinib::alectinib': 2, 'lung-alk-tki-other::crizotinib': 2,
   'rare-histiocytic-braf-mek::dabrafenib': 2, 'rare-mastocytosis-midostaurin::midostaurin': 2,
