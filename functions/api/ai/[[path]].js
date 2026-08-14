@@ -139,7 +139,8 @@ async function aiAdminAuthed(request, env, url) {
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
 // MaiK Scribe voice kinds (assessment / opd-scribe / translate) can run on a cheaper model for cost —
 // set env.SCRIBE_MODEL (e.g. "gemini-2.5-flash-lite"); unset = the normal model. Only real, priced models honoured.
-function scribeModel(env) { const m = env && env.SCRIBE_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+const SCRIBE_MODEL_DEFAULT = "gemini-2.5-flash-lite";   // ~5x cheaper; extraction is whitelist-sanitized + doctor-reviewed, so it can't emit unsafe data. Override via env.SCRIBE_MODEL (e.g. gemini-2.5-flash) to revert.
+function scribeModel(env) { const m = env && env.SCRIBE_MODEL; if (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) return m; return ALLOWED_MODELS.indexOf(SCRIBE_MODEL_DEFAULT) > -1 ? SCRIBE_MODEL_DEFAULT : null; }
 // Router-intent normalisation: the parser occasionally emits a value outside its own enum ("interpretation",
 // "prevent") or a synonym; clamp to the canonical taxonomy so the client's intent->composer mapping is
 // deterministic. Generic — no disease specifics.
@@ -1336,7 +1337,7 @@ export async function onRequest(context) {
       // ---- MaiK Scribe policy: cheaper model (env.SCRIBE_MODEL) always; Pro-only + time caps when env.SCRIBE_CAPS="1".
       // SCRIBE_KINDS values = seconds of dictation charged per call when the client doesn't send body.sec
       // (the OPD scribe loop refines every refineEveryChunks*chunkMs = 60s; the field mic is a short one-shot).
-      const SCRIBE_KINDS = { assessment: 60, "opd-scribe": 60, translate: 15 };
+      const SCRIBE_KINDS = { assessment: 120, "opd-scribe": 120, translate: 15 };   // seconds charged per call (refine cadence = refineEveryChunks*chunkMs = 120s); field-mic translate is a short one-shot
       const _isScribe = Object.prototype.hasOwnProperty.call(SCRIBE_KINDS, body.kind);
       const _scribeOpts = (_isScribe && scribeModel(env)) ? { model: scribeModel(env) } : undefined;
       let _scribeStore = null, _scribeUid = null;
