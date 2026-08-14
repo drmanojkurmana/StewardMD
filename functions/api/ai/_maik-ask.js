@@ -23,9 +23,10 @@ export function maikNextPrompt(ctx) {
     "(targetField=\"" + String(ctx.targetField || "") + "\"). Ask ONE question only — never bundle several.\n" +
     "Complaint: " + String(ctx.complaint || ctx.pathwayLabel || "") + ".\n" +
     "Already known — do NOT ask these again: " + JSON.stringify(known).slice(0, 600) + ".\n" +
-    "LANGUAGE: phrase the question NATURALLY in the patient's language/style (" + lang + "), the way a real " +
-    "Indian clinician actually speaks to a patient. Support natural Telugu/Hindi/English code-switching. Do NOT " +
-    "translate word-for-word; use commonly understood everyday phrasing, not textbook language or jargon.\n" +
+    "LANGUAGE — MANDATORY: ask in \"" + lang + "\". If it is 'en' ask in plain English; 'te' or 'te-en' ask in " +
+    "Telugu / Telugu-English; 'hi' or 'hi-en' ask in Hindi / Hinglish. Do NOT switch to a different language than " +
+    "requested. Phrase it NATURALLY, the way a real Indian clinician speaks to a patient — commonly understood " +
+    "everyday phrasing with natural code-switching, never word-for-word translation, textbook language, or jargon.\n" +
     "Keep targetField = \"" + String(ctx.targetField || "") + "\". Set language to the code you used (e.g. te-en, hi-en, en). " +
     "priority = high | normal | low. reason = one short phrase. No prose outside the JSON.";
 }

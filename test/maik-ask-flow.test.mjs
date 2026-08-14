@@ -127,3 +127,29 @@ test("descriptive red-flag answer via the LLM path still stops + alerts", async 
   assert.equal(s.stoppedReason, "red-flag");
   assert.ok(alerted, "doctor alerted on a descriptive red-flag answer");
 });
+
+test("durationFromText: English + romanized Telugu/Hindi, singular/plural", () => {
+  assert.equal(A._durationFromText("three days"), "3 days");
+  assert.equal(A._durationFromText("moodu rojula nunchi"), "3 days");   // Telugu
+  assert.equal(A._durationFromText("do din se"), "2 days");             // Hindi
+  assert.equal(A._durationFromText("rendu vaaraalu"), "2 weeks");
+  assert.equal(A._durationFromText("ek mahina"), "1 month");            // singular
+  assert.equal(A._durationFromText("headache undi"), "");               // no duration -> LLM
+});
+
+test("question cache: a validated question is served instantly on the 2nd ask (0 LLM)", async () => {
+  // fresh localStorage shim
+  const store = {}; globalThis.localStorage = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => (store[k] = v) };
+  globalThis.window = globalThis;
+  delete require.cache[require.resolve("../maik-reasoning.js")];
+  const R2 = require("../maik-reasoning.js");
+  let calls = 0;
+  R2.setProvider({ next: () => { calls++; return { action: "ask", question: "Is it one side or both?", targetField: "location" }; }, extract: () => ({ findings: [] }) });
+  const ctx = { pathway: { id: "headache", fields: { location: {} } }, targetField: "location", language: "te-en" };
+  const a = await R2.generateNextQuestion(ctx);
+  const b = await R2.generateNextQuestion(ctx);
+  assert.equal(a.question, "Is it one side or both?");
+  assert.equal(b.question, "Is it one side or both?");
+  assert.equal(calls, 1, "2nd ask served from cache, provider called only once");
+  delete globalThis.localStorage; delete globalThis.window;
+});

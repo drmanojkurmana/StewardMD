@@ -27,15 +27,29 @@
     if (pos && !neg) return true;
     return null;   // ambiguous -> LLM
   }
+  // Duration on-device: English digits/number-words (via SMD_VVITALS) + romanized Telugu/Hindi number +
+  // unit words. Returns "N days/weeks/months" or "" (-> LLM). Cheap; cuts the most common LLM turn.
+  var NUMWORD = { oka: 1, okati: 1, ek: 1, rendu: 2, do: 2, moodu: 3, mudu: 3, teen: 3, naalugu: 4, nalugu: 4, char: 4, chaar: 4,
+    aidu: 5, ayidu: 5, paanch: 5, panch: 5, aaru: 6, aru: 6, che: 6, chhe: 6, edu: 7, saat: 7, enimidi: 8, aath: 8, tommidi: 9, nau: 9, padi: 10, das: 10 };
+  var UNITWORD = [["day", /\b(days?|roju\w*|din\w*)\b/], ["week", /\b(weeks?|vaar\w*|var\w*|haft\w*)\b/], ["month", /\b(months?|nela\w*|mahin\w*)\b/], ["hour", /\b(hours?|gant\w*)\b/], ["year", /\b(years?|samvats\w*|saal\w*|sanvats\w*)\b/]];
+  function durationFromText(t) {
+    var num = (root && root.SMD_VVITALS && root.SMD_VVITALS.wordsToNumbers) ? root.SMD_VVITALS.wordsToNumbers(t) : t;
+    var low = " " + String(num).toLowerCase() + " ";
+    var n = null, m = low.match(/(\d+)/);
+    if (m) n = parseInt(m[1], 10);
+    else { for (var w in NUMWORD) { if (new RegExp("\\b" + w + "\\b").test(low)) { n = NUMWORD[w]; break; } } }
+    if (n == null) return "";
+    for (var i = 0; i < UNITWORD.length; i++) if (UNITWORD[i][1].test(low)) return n + " " + UNITWORD[i][0] + (n === 1 ? "" : "s");
+    return "";
+  }
   // Returns [{field,value,confidence}] for the common cases (duration, yes/no symptoms, cue words); [] -> LLM.
   function deterministicAnswer(transcript, target) {
     var t = String(transcript == null ? "" : transcript);
     if (!target || !t.trim()) return [];
-    // duration: "3 days" / "three days" (number-words via SMD_VVITALS) etc.
+    // duration: "3 days" / "three days" / Telugu "moodu rojulu" / Hindi "do din" — all on-device (no LLM).
     if (target.field === "duration" || /duration/i.test(target.emr || "")) {
-      var num = (root && root.SMD_VVITALS && root.SMD_VVITALS.wordsToNumbers) ? root.SMD_VVITALS.wordsToNumbers(t) : t;
-      var m = String(num).toLowerCase().match(/(\d+)\s*(hours?|days?|weeks?|months?|years?)/);
-      if (m) return [{ field: target.field, value: m[1] + " " + m[2], confidence: 0.85 }];
+      var d = durationFromText(t);
+      if (d) return [{ field: target.field, value: d, confidence: 0.85 }];
     }
     // yes/no nature: associated symptoms + red flags
     if (target.kind === "associated" || target.kind === "redflag") {
@@ -314,6 +328,7 @@
     _deterministicAnswer: deterministicAnswer,
     _isPositive: isPositive,
     _positiveRedFlag: positiveRedFlag,
+    _durationFromText: durationFromText,
     _renderConfirm: renderConfirm,
     _renderCard: renderCard,
     _renderReview: renderReview,
