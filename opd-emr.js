@@ -100,6 +100,7 @@
     return ev;
   }
   function timelineSection(st) {
+    if (usesLocal(st.source)) return clinicTimelineSection(st);   // clinic footprint (local/shared), not the GHIS visit timeline
     if (st.timelineLoading && !(st.labs || []).length && !(st.medications || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading timeline…") + "</section>";
     var tl = buildTimeline(st);
     if (!tl.length) {
@@ -113,6 +114,7 @@
     return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + 'Timeline<span class="oe-sub">' + tl.length + " event" + (tl.length === 1 ? "" : "s") + '</span></div><div class="oe-tl">' + rows + "</div></section>";
   }
   function loadTimeline() {
+    if (usesLocal(st.source)) { loadClinicTimeline(); return; }   // clinic footprint from the on-device store
     if (!st.ticketId || !st.sessionId) return;
     st.timelineLoading = true;
     fbTok().then(function (t) {
@@ -728,6 +730,44 @@
     return p.length ? p.join("\n") : "Initial assessment completed.";
   }
 
+  // ---- Clinic timeline (source local/shared): the full chronological footprint (Homi-Bhabha-style),
+  // grouped by date, newest first — every consult the doctor saved, with time + who entered it. --------
+  function fmtClinicDate(ts) { var d = new Date(ts || 0); if (!ts || isNaN(d.getTime())) return "Undated"; function p(n) { return (n < 10 ? "0" : "") + n; } return p(d.getDate()) + "-" + p(d.getMonth() + 1) + "-" + d.getFullYear(); }
+  function fmtClinicTime(ts) { var d = new Date(ts || 0); if (!ts || isNaN(d.getTime())) return ""; function p(n) { return (n < 10 ? "0" : "") + n; } return p(d.getHours()) + ":" + p(d.getMinutes()); }
+  function clinicNoteText(e) {
+    var v = (e && e.vals) || {}, p = [];
+    if (v.Chief_complaints_duration) p.push(v.Chief_complaints_duration);
+    if (v.History_present_illness) p.push("HPI: " + v.History_present_illness);
+    if (v.provisional_diagnosis) p.push("Dx: " + v.provisional_diagnosis);
+    if (v.management_plan) p.push("Plan: " + v.management_plan);
+    if (!p.length) { for (var k in v) { if (Object.prototype.hasOwnProperty.call(v, k) && typeof v[k] === "string" && v[k].trim() && k.indexOf("_yesNo") < 0) { p.push(v[k].trim()); if (p.length >= 3) break; } } }
+    return p.join("\n") || "Assessment saved.";
+  }
+  function loadClinicTimeline() {
+    st.timeline = [];
+    try {
+      var tl = (_localStore && _localStore.timeline) ? _localStore.timeline(st.patient.mrn) : [];
+      st.timeline = (tl || []).map(function (e) { return { ts: e.ts || 0, kind: "note", by: e.author || "", text: clinicNoteText(e) }; });
+    } catch (x) {}
+    st.timelineLoading = false;
+    if (st.tab === "profile") paint();
+  }
+  function clinicTimelineSection(s) {
+    var tl = s.timeline || [];
+    var head = '<div class="oe-h3">' + ms("history") + 'Timeline<span class="oe-sub">' + tl.length + " consult" + (tl.length === 1 ? "" : "s") + "</span></div>";
+    if (!tl.length) return '<section class="oe-sec">' + head + '<div class="oe-ct-empty">No consults recorded yet. Save an assessment to start this patient\'s timeline.</div></section>';
+    var groups = [], byDate = {};
+    tl.forEach(function (e) { var d = fmtClinicDate(e.ts); if (!byDate[d]) { byDate[d] = []; groups.push(d); } byDate[d].push(e); });
+    var body = groups.map(function (d) {
+      var rows = byDate[d].map(function (e) {
+        var note = String(e.text || "—").split("\n").map(function (ln) { return esc(ln); }).join("<br>");
+        return '<div class="oe-ct-entry"><div class="oe-ct-meta">' + esc(fmtClinicTime(e.ts)) + (e.by ? ' · <b>' + esc(e.by) + "</b>" : "") + '</div><div class="oe-ct-note">' + note + "</div></div>";
+      }).join("");
+      return '<div class="oe-ct-day"><div class="oe-ct-date">' + esc(d) + "</div>" + rows + "</div>";
+    }).join("");
+    return '<section class="oe-sec">' + head + '<div class="oe-ct">' + body + "</div></section>";
+  }
+
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
@@ -1329,8 +1369,8 @@
   function submitAssessment() {
     if (usesLocal(st.source)) {   // personal/shared clinic: save the consult on-device (Shared syncs via the store)
       if (!confirmed("Save this consult to " + emrLabel() + " on this phone?")) return;
-      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}); } catch (e) {}
-      st.savedConsult = true; toast("Saved to " + emrLabel() + " on this device."); paint(); return;
+      try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}, { author: st.author || "" }); } catch (e) {}
+      st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
     postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
@@ -1968,6 +2008,8 @@
     st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
     _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    st.author = opts.author || "";                                          // who is documenting this consult (for the timeline footprint)
+    if (_localStore && _localStore.startConsult) { try { _localStore.startConsult(st.patient.mrn); } catch (e) {} }   // each open = a new dated entry
     st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
     st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
     st.hospitalId = opts.hospitalId || opts.orgId || "";

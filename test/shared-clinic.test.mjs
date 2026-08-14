@@ -56,15 +56,32 @@ test("localStore bridge: saveConsult stores vals; getConsult prefills them", () 
   assert.equal(clinic.currentEncounter(id).data.fields.Chief_complaints, "fever");
 });
 
-test("localStore bridge: repeated saves UPDATE the same encounter, not spawn new ones", () => {
+test("localStore bridge: saves within one consult-open UPDATE the same encounter", () => {
   const st = S.create({ deviceId: "devA", clinicId: "C1", clock: (() => { let t = 1000; return () => (t += 10); })() });
   const clinic = SC.create({ store: st });
   const id = clinic.addPatient({ name: "P" });
+  clinic.localStore.startConsult(id);
   clinic.localStore.saveConsult(id, {}, { cc: "a" });
   clinic.localStore.saveConsult(id, {}, { cc: "b" });
   assert.equal(st.list("encounter").length, 1, "one encounter, updated");
   assert.equal(clinic.localStore.getConsult(id).cc, "b");
   assert.ok(clinic.currentEncounter(id).version >= 2, "encounter versioned up on re-save");
+});
+
+test("timeline: a NEW dated encounter per consult-open; newest-first + author footprint", () => {
+  const st = S.create({ deviceId: "devA", clinicId: "C1", clock: (() => { let t = 1000; return () => (t += 10); })() });
+  const clinic = SC.create({ store: st });
+  const id = clinic.addPatient({ name: "P" });
+  const ls = clinic.localStore;
+  ls.startConsult(id); ls.saveConsult(id, {}, { cc: "a" }, { author: "Dr A" }); ls.saveConsult(id, {}, { cc: "a2" }, { author: "Dr A" });
+  assert.equal(st.list("encounter").length, 1, "one encounter for the first open");
+  ls.startConsult(id); ls.saveConsult(id, {}, { cc: "b" }, { author: "Dr B" });
+  assert.equal(st.list("encounter").length, 2, "second open appends a new encounter");
+  const tl = ls.timeline(id);
+  assert.equal(tl.length, 2);
+  assert.equal(tl[0].vals.cc, "b", "newest first");
+  assert.equal(tl[0].author, "Dr B", "author captured");
+  assert.equal(tl[1].vals.cc, "a2", "same-open save updated the earlier entry");
 });
 
 test("END-TO-END shared clinic: doctor A registers + assesses; nurse B sees it after sync", async () => {

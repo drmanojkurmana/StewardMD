@@ -122,7 +122,9 @@
         currentEncounter: orch.currentEncounter,
         localStore: {
           getConsult: orch.localStore.getConsult,
-          saveConsult: function (pid, fields, v) { orch.localStore.saveConsult(pid, fields, v); kick(); }
+          saveConsult: function (pid, fields, v, meta) { orch.localStore.saveConsult(pid, fields, v, meta); kick(); },
+          startConsult: orch.localStore.startConsult,
+          timeline: orch.localStore.timeline
         },
         // sync + persistence control
         syncNow: syncNow, kick: kick, start: start, stop: stop, destroy: destroy, saveNow: saveNow,

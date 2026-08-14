@@ -42,30 +42,45 @@
     function getPatient(id) { var r = store.get(id); return r ? assign({ id: r.id }, r.data) : null; }
     function deletePatient(id) { store.remove(id); }
 
-    // The patient's current encounter (newest, non-deleted). One per patient for now.
-    function currentEncounter(patientId) {
+    // All non-deleted encounters for a patient, newest first (the visit footprint).
+    function encountersFor(patientId) {
       var list = store.list("encounter", function (r) { return (r.patientId || (r.data && r.data.patientId)) === patientId; });
-      list.sort(function (a, b) { return (b.updatedAt || 0) - (a.updatedAt || 0); });
-      return list[0] || null;
+      list.sort(function (a, b) { return (b.createdAt || b.updatedAt || 0) - (a.createdAt || a.updatedAt || 0); });
+      return list;
     }
+    function currentEncounter(patientId) { return encountersFor(patientId)[0] || null; }
+
+    // Per-consult-open history: opening a patient starts a fresh visit; the first save of that visit
+    // creates a NEW dated encounter, later saves in the same open update it. Reopening = a new entry.
+    var _active = {};   // patientId -> active encounter id for the current open (null after startConsult)
+    function startConsult(patientId) { _active[patientId] = null; }
 
     // ---- the opd-emr localStore contract (source:"shared") ----
     var localStore = {
-      // prefill vals for the assessment form (matches personal-clinic's `latest`)
+      // prefill vals for the assessment form: carry forward the latest visit (continuity)
       getConsult: function (patientId) {
         var enc = currentEncounter(patientId);
         return (enc && enc.data && enc.data.vals) ? enc.data.vals : {};
       },
-      // save the current assessment: update the patient's current encounter (or create the first).
-      // `fields` = the GHIS-name payload; `vals` = the form state for prefill (same as personal-clinic).
-      saveConsult: function (patientId, fields, vals) {
-        var enc = currentEncounter(patientId);
-        var data = { patientId: patientId, vals: vals || {}, fields: fields || {} };
-        if (enc) store.update(enc.id, data);
-        else store.put("encounter", data, { patientId: patientId });
+      // save the current assessment. `fields` = the GHIS-name payload; `vals` = form state for prefill;
+      // `meta.author` = who wrote it. First save of a consult-open appends a new dated encounter.
+      saveConsult: function (patientId, fields, vals, meta) {
+        meta = meta || {};
+        var data = { patientId: patientId, vals: vals || {}, fields: fields || {}, author: meta.author || "" };
+        var activeId = _active[patientId], raw = activeId && store.raw(activeId);
+        if (raw && !raw.deleted) store.update(activeId, data);
+        else { var rec = store.put("encounter", data, { patientId: patientId }); _active[patientId] = rec.id; }
         // touch the patient so its list position + updatedAt reflect the new consult
         var pr = store.raw(patientId);
         if (pr && !pr.deleted) store.update(patientId, pr.data);
+      },
+      startConsult: startConsult,
+      // chronological footprint: every encounter (+ later Rx/investigations/documents) newest-first
+      timeline: function (patientId) {
+        return encountersFor(patientId).map(function (r) {
+          var d = r.data || {};
+          return { id: r.id, ts: r.createdAt || r.updatedAt || 0, kind: "note", author: d.author || "", vals: d.vals || {}, fields: d.fields || {} };
+        });
       }
     };
 

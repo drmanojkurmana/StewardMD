@@ -57,7 +57,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q8prof">
-<link rel="stylesheet" href="/opd-emr.css?v=oe36-merge">
+<link rel="stylesheet" href="/opd-emr.css?v=oe39-timeline">
 <link rel="stylesheet" href="/onco-home.css?v=oh5">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
@@ -1698,7 +1698,7 @@ window.openExternal = function (u) {
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 <script src="/queue-flags.js?v=q1" defer></script>
-<script src="/queue.js?v=q13patients" defer></script>
+<script src="/queue.js?v=q14timeline" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=onco1" defer></script>
@@ -1716,9 +1716,9 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe38-clinic" defer></script>
+<script src="/opd-emr.js?v=oe39-timeline" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
-<script src="/personal-clinic.js?v=gold2" defer></script>
+<script src="/personal-clinic.js?v=gold3" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
      smd_shared_clinic, default OFF; ?shared=1 to open). Google Drive = encrypted delta sync transport,
      NOT the live DB. Load order is dependency order: model+crypto -> store(needs model) -> sync -> drive
@@ -1728,9 +1728,9 @@ window.openExternal = function (u) {
 <script src="/clinic-store.js?v=sc1" defer></script>
 <script src="/clinic-sync.js?v=sc1" defer></script>
 <script src="/clinic-drive.js?v=sc1" defer></script>
-<script src="/shared-clinic.js?v=sc2" defer></script>
-<script src="/clinic-app.js?v=sc1" defer></script>
-<script src="/shared-clinic-ui.js?v=sc1" defer></script>
+<script src="/shared-clinic.js?v=sc3" defer></script>
+<script src="/clinic-app.js?v=sc2" defer></script>
+<script src="/shared-clinic-ui.js?v=sc2" defer></script>
 <!-- Onco Home Phase 8 P0 (flag smd_onco_home, default OFF): the reference/tool-library workbench —
      global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
      their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the

@@ -155,7 +155,8 @@
   function openConsult(id) {
     if (!_app) return; var p = _app.getPatient(id); if (!p) return;
     close();
-    if (G.OPDEMR && G.OPDEMR.openProfile) G.OPDEMR.openProfile({ source: "shared", localStore: _app.localStore, name: p.name, patientId: id, tab: "assess" });
+    var author = (function () { try { var u = G.SMD_AUTH && G.SMD_AUTH.currentUser; return (u && (u.displayName || u.email)) || ""; } catch (e) { return ""; } })();
+    if (G.OPDEMR && G.OPDEMR.openProfile) G.OPDEMR.openProfile({ source: "shared", localStore: _app.localStore, name: p.name, patientId: id, displayId: p.mrn || "", author: author, tab: "assess" });
     else toast("EMR module not available.");
   }
 

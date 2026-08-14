@@ -28,6 +28,22 @@ test("addPatient persists an mrn (the no-MRN SMD-XXX-nnn hospital id) on the rec
   assert.equal(CLINIC.listPatients()[0].mrn, "SMD-A7K-001", "mrn is in the patient index");
 });
 
+test("timeline: one dated entry per consult-open; same-open saves update it; author + newest-first", () => {
+  CLINIC.configure({ localStorage: fakeLS() });
+  const id = CLINIC.addPatient({ name: "Ravi" });
+  CLINIC.startConsult(id);
+  CLINIC.saveConsult(id, {}, { cc: "fever" }, { author: "Dr A" });
+  CLINIC.saveConsult(id, {}, { cc: "fever, cough" }, { author: "Dr A" });   // same open -> updates the entry
+  assert.equal(CLINIC.timeline(id).length, 1, "one entry for one open");
+  CLINIC.startConsult(id);
+  CLINIC.saveConsult(id, {}, { cc: "followup" }, { author: "Dr B" });       // new open -> new dated entry
+  const tl = CLINIC.timeline(id);
+  assert.equal(tl.length, 2, "two entries for two opens");
+  assert.equal(tl[0].vals.cc, "followup", "newest first");
+  assert.equal(tl[0].author, "Dr B", "author captured");
+  assert.equal(tl[1].vals.cc, "fever, cough", "same-open save updated the earlier entry");
+});
+
 test("export -> wipe -> import restores everything", () => {
   CLINIC.configure({ localStorage: fakeLS() });
   const id = CLINIC.addPatient({ name: "Sita", age: 30, sex: "Female" });

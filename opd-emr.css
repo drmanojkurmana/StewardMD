@@ -466,3 +466,13 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-tl-b { flex: 1; min-width: 0; padding-top: 4px; }
 #smdOpdEmr .oe-tl-t { font: 500 14px var(--q-sans); color: var(--on-surface); white-space: pre-wrap; word-break: break-word; }
 #smdOpdEmr .oe-tl-m { font: 500 11.5px var(--q-mono); color: var(--secondary); margin-top: 3px; }
+
+/* Clinic timeline (source local/shared) — date-grouped consult footprint (Homi-Bhabha style) */
+#smdOpdEmr .oe-ct { display: flex; flex-direction: column; padding: 2px 6px 8px; }
+#smdOpdEmr .oe-ct-empty { color: var(--secondary); font: 500 13px var(--q-sans); padding: 16px 12px; text-align: center; }
+#smdOpdEmr .oe-ct-date { font: 700 12.5px var(--q-sans); color: var(--primary); letter-spacing: .02em; padding: 8px 10px 6px; border-top: 1px solid var(--outline-variant); }
+#smdOpdEmr .oe-ct-day:first-child .oe-ct-date { border-top: none; }
+#smdOpdEmr .oe-ct-entry { border-left: 2px solid var(--sc-high); margin: 0 8px 8px; padding: 4px 0 4px 12px; }
+#smdOpdEmr .oe-ct-meta { font: 600 11.5px var(--q-sans); color: var(--secondary); margin-bottom: 3px; }
+#smdOpdEmr .oe-ct-meta b { color: var(--on-surface); font-weight: 700; }
+#smdOpdEmr .oe-ct-note { font: 500 13.5px/1.5 var(--q-sans); color: var(--on-surface); }

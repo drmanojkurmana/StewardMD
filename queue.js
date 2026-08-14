@@ -497,7 +497,8 @@
       if (store && store.addPatient && store.localStore) {
         var pid = localClinicId(t, store, oc.map);
         var rec = (store.getPatient && store.getPatient(pid)) || {};
-        G.OPDEMR.openProfile({ source: oc.source, localStore: store.localStore, name: t.name || "", patientId: pid, displayId: rec.mrn || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
+        var author = st.ghisDoctorName || (st.session && st.session.doctorName) || (st.me && st.me.name) || "Doctor";
+        G.OPDEMR.openProfile({ source: oc.source, localStore: store.localStore, name: t.name || "", patientId: pid, displayId: rec.mrn || "", author: author, tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
       } else {
         G.OPDEMR.openProfile({ name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id, noStore: true });
       }

@@ -40,18 +40,31 @@
     writeJSON(KEY_PTS, listPatients().filter(function (x) { return x.id !== id; }));
     try { LS && LS.removeItem(KEY_P(id)); } catch (e) {}
   }
-  // opd-emr backend: current assessment values for prefill.
+  // opd-emr backend: current assessment values for prefill (carry forward the latest visit).
   function getConsult(id) { var r = readJSON(KEY_P(id), null); return (r && r.latest) || {}; }
-  // opd-emr backend: persist a saved consult (fields = GHIS-name payload, vals = form state for prefill).
-  function saveConsult(id, fields, vals) {
+  // Per-consult-open history: opening a patient starts a fresh visit; the first save appends a NEW dated
+  // consult, later saves in the same open update it. Reopening = a new timeline entry.
+  var _active = {};
+  function startConsult(id) { _active[id] = false; }
+  // opd-emr backend: persist a saved consult (fields = GHIS payload, vals = form state, meta.author = who).
+  function saveConsult(id, fields, vals, meta) {
+    meta = meta || {};
     var r = readJSON(KEY_P(id), null) || { patient: getPatient(id), latest: {}, consults: [] };
-    r.latest = vals || {}; r.consults = r.consults || []; r.consults.unshift({ at: nowISO(), fields: fields || {} });
+    r.latest = vals || {}; r.consults = r.consults || [];
+    var entry = { at: nowISO(), fields: fields || {}, vals: vals || {}, author: meta.author || "" };
+    if (_active[id] && r.consults.length) r.consults[0] = entry;   // same open -> update the current entry
+    else { r.consults.unshift(entry); _active[id] = true; }        // first save of this open -> new dated entry
     writeJSON(KEY_P(id), r);
     var idx = listPatients(); for (var i = 0; i < idx.length; i++) if (idx[i].id === id) { idx[i].updatedAt = nowISO(); break; }
     writeJSON(KEY_PTS, idx);
     try { scheduleSync(); } catch (e) {}   // auto-encrypt + upload to Drive (debounced)
   }
-  var localStore = { getConsult: getConsult, saveConsult: saveConsult };
+  // chronological footprint (newest first) for the EMR timeline.
+  function timeline(id) {
+    var r = readJSON(KEY_P(id), null), c = (r && r.consults) || [];
+    return c.map(function (e) { var ts = 0; try { ts = e.at ? new Date(e.at).getTime() : 0; } catch (x) {} return { ts: ts, kind: "note", author: e.author || "", vals: e.vals || {}, fields: e.fields || {} }; });
+  }
+  var localStore = { getConsult: getConsult, saveConsult: saveConsult, startConsult: startConsult, timeline: timeline };
 
   /* ------------------------------ backup / Drive ------------------------------ */
   function exportJSON() {
@@ -290,7 +303,8 @@
   function openConsult(id) {
     var p = getPatient(id); if (!p) return;
     close();
-    if (window.OPDEMR && OPDEMR.openProfile) OPDEMR.openProfile({ source: "local", localStore: localStore, name: p.name, patientId: id, tab: "assess" });
+    var author = (function () { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return (u && (u.displayName || u.email)) || ""; } catch (e) { return ""; } })();
+    if (window.OPDEMR && OPDEMR.openProfile) OPDEMR.openProfile({ source: "local", localStore: localStore, name: p.name, patientId: id, displayId: p.mrn || "", author: author, tab: "assess" });
     else toast("EMR module not available.");
   }
 
@@ -354,7 +368,7 @@
 
   var API = { open: open, close: close, flagOn: flagOn, localStore: localStore,
     listPatients: listPatients, getPatient: getPatient, addPatient: addPatient, deletePatient: deletePatient,
-    getConsult: getConsult, saveConsult: saveConsult, exportJSON: exportJSON, importJSON: importJSON,
+    getConsult: getConsult, saveConsult: saveConsult, startConsult: startConsult, timeline: timeline, exportJSON: exportJSON, importJSON: importJSON,
     backup: backup, configure: configure,
     encryptBackup: encryptBackup, decryptBackup: decryptBackup, setPassword: setPassword, getPassword: getPassword, hasPassword: hasPassword,
     syncNow: syncNow, restoreFromEnvelope: restoreFromEnvelope, restoreFromDrive: restoreFromDrive, lastBackupAt: lastBackupAt };
