@@ -38,8 +38,7 @@
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
     spark: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     steth: '<path d="M4.5 3v6a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H3M13.5 3H12"/><path d="M9 13.5V16a5 5 0 0 0 10 0v-1.2"/><circle cx="19" cy="12.5" r="2.2"/>',
-    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
-    devices: '<rect x="3" y="4" width="12" height="9" rx="1.5"/><path d="M3 16h12"/><rect x="16" y="8" width="5" height="12" rx="1.5"/>'
+    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" class="sbr-ic"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + "</g></svg>";
@@ -77,7 +76,6 @@
     account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
     applewatch: function () { if (window.SMD_APPLE_WATCH && SMD_APPLE_WATCH.open) SMD_APPLE_WATCH.open(); else toast("Apple Watch settings loading…"); },
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
-    sharedclinic: function () { if (window.SMD_SHARED && SMD_SHARED.open) SMD_SHARED.open(); else toast("Shared Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
     // "settings" is handled specially (expands the Advanced block) — see wiring below.
@@ -238,7 +236,6 @@
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
-      (flag("smd_shared_clinic", false) ? row("sharedclinic", "devices", "Shared Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
       row("tour", "info", "How it works · App tour") +
