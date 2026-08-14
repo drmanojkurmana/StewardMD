@@ -1,0 +1,75 @@
+{
+  "id": "gu-uro-enfortumab-vedotin",
+  "name": "Enfortumab vedotin (single agent)",
+  "disease": "Urothelial carcinoma",
+  "diseaseId": "bladder_cancer",
+  "histology": "urothelial carcinoma",
+  "stage": ["IV", "locally advanced", "metastatic"],
+  "biomarkers": {
+    "target": "Nectin-4",
+    "note": "Enfortumab vedotin is a Nectin-4-directed antibody-drug conjugate delivering the microtubule inhibitor MMAE. Nectin-4 is broadly expressed in urothelial carcinoma and no companion biomarker test is required to treat. Applies to bladder (#57) and upper-tract (#58) urothelial carcinoma. Per Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "subsequent-line for locally advanced or metastatic urothelial carcinoma after prior platinum-based chemotherapy and a PD-1/PD-L1 inhibitor",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "prior platinum-based chemotherapy and prior PD-1/PD-L1 inhibitor", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G (Enfortumab vedotin after PD-1/PD-L1 inhibitor and platinum-containing chemotherapy; references 24, 30, 31)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "enfortumab-vedotin",
+        "name": "Enfortumab vedotin",
+        "basis": "mgkg",
+        "dosePerUnit": 1.25,
+        "unit": "mg/kg",
+        "days": [1, 8, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita 12e line 20821-20827 (enfortumab vedotin 1.25 mg/kg weekly x3 of a 4-week cycle, urothelial)", "evidenceStatus": "current" },
+        "notes": "Source: DeVita 12th ed., line 20821-20827: 1.25 mg/kg IV on days 1, 8, 15 of a 28-day cycle (cap at 100 kg body weight). Enfortumab vedotin specific safety (hyperglycemia/DKA, peripheral neuropathy, severe skin reactions including SJS/TEN, ocular toxicity) applies."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "HYPERGLYCEMIA: monitor blood glucose before each dose; hold for hyperglycemia (serious/fatal diabetic ketoacidosis reported, including in patients without pre-existing diabetes).",
+      "PERIPHERAL NEUROPATHY: assess before each dose; sensory and motor neuropathy can be dose-limiting - hold/reduce/discontinue per severity.",
+      "SKIN REACTIONS: monitor for severe cutaneous reactions including Stevens-Johnson syndrome / toxic epidermal necrolysis (SJS/TEN); discontinue for severe skin reactions.",
+      "OCULAR toxicity (dry eye/keratopathy): consider prophylactic artificial tears; ophthalmology referral for symptoms.",
+      "Infusion-site extravasation precautions."
+    ]
+  },
+  "monitoring": [
+    "blood glucose before each dose (hyperglycemia / DKA risk)",
+    "peripheral neuropathy assessment (sensory and motor) before each dose",
+    "skin assessment for severe cutaneous reactions (SJS/TEN)",
+    "ocular symptoms (dry eye/keratopathy)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["blood glucose", "neuropathy status", "skin/mucosal status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "blood glucose > 250 mg/dL or hyperglycemia", "drug": "enfortumab-vedotin", "action": "hold", "text": "Hold enfortumab vedotin for hyperglycemia (blood glucose > 250 mg/dL) until controlled; monitor for diabetic ketoacidosis." },
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "enfortumab-vedotin", "action": "hold/reduce/discontinue", "text": "Hold, reduce, or discontinue for grade 2 or higher peripheral neuropathy per labeling; obtain clinical review." },
+    { "condition": "severe cutaneous reaction (suspected SJS/TEN)", "drug": "enfortumab-vedotin", "action": "discontinue", "text": "Permanently discontinue enfortumab vedotin for grade 3-4 or suspected SJS/TEN skin reactions; urgent dermatology review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 21468-21490 (enfortumab vedotin, a Nectin-4-targeting ADC delivering MMAE; MMAE pharmacology) - dose not printed", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bladder Cancer", "version": "3.2026", "date": null, "locator": "Principles of Systemic Therapy (BL-G): Enfortumab vedotin after PD-1/PD-L1 inhibitor and platinum-containing chemotherapy (references 24, 30, 31). Dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent enfortumab vedotin in locally advanced or metastatic urothelial carcinoma after platinum chemotherapy and a PD-1/PD-L1 inhibitor (bladder #57, upper-tract #58). The dose (1.25 mg/kg IV on days 1, 8, 15 of a 28-day cycle, capped at 100 kg body weight) is sourced to DeVita 12th ed., line 20821-20827 (enfortumab vedotin 1.25 mg/kg weekly x3 of a 4-week cycle, urothelial). Enfortumab vedotin specific safety (hyperglycemia/diabetic ketoacidosis, peripheral neuropathy, severe skin reactions including SJS/TEN, ocular toxicity) is captured in supportiveCare/monitoring/doseModificationRules per the HARD RULES. Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G) establish the post-platinum/post-checkpoint setting. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

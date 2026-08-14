@@ -1,0 +1,94 @@
+{
+  "id": "gi-esophageal-nivolumab-adjuvant",
+  "name": "Nivolumab, adjuvant after neoadjuvant chemoradiation and surgery (CheckMate-577)",
+  "disease": "Esophageal and gastroesophageal junction (GEJ) cancer (adenocarcinoma or squamous cell carcinoma)",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "histology": "adenocarcinoma or squamous cell carcinoma (both eligible)",
+  "stage": ["resected, with residual pathologic disease (non-pCR) after neoadjuvant chemoradiation and R0 resection"],
+  "biomarkers": {
+    "PD_L1_CPS": "tested",
+    "note": "In CheckMate-577 the disease-free survival benefit of adjuvant nivolumab was seen regardless of PD-L1 tumor status (benefit for both squamous and adenocarcinoma, node-positive and negative), with a greater benefit in PD-L1 CPS at least 5. PD-L1 is tested for prognostic stratification but does not gate eligibility. Per DeVita 12th ed. (CheckMate-577) and Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers v3.2026."
+  },
+  "treatmentSetting": "adjuvant",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "adjuvant (postoperative) immunotherapy after neoadjuvant chemoradiation and R0 resection in patients with residual pathologic disease; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "priorTreatment", "requirement": "neoadjuvant chemoradiation followed by R0 resection completed", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 97201 to 97205 (CheckMate-577: after preoperative chemoradiotherapy followed by surgery)" },
+    { "criterion": "residualDisease", "requirement": "residual pathologic disease (non-pathologic-complete-response) found at surgery", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 97202 to 97203 and 97216 to 97218 (residual disease found at surgery / persistent disease resected at surgery)" },
+    { "criterion": "histology", "requirement": "esophageal or GEJ adenocarcinoma or squamous cell carcinoma", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 97216 to 97218 (esophageal or GEJ adenocarcinoma or squamous cancer)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "flat",
+        "dosePerUnit": 240,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 293062 (nivolumab 240 mg IV every 2 weeks, flat dosing); adjuvant indication and 1-year duration lines 97202 to 97205; continuation flat dose 480 mg every 4 weeks line 233698", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Nivolumab 240 mg IV flat every 2 weeks (line 293062, agent-level flat dosing). The CheckMate-577 label schedule is 240 mg IV every 2 weeks for the first 16 weeks then 480 mg IV every 4 weeks, for a total of up to 1 year (DeVita states 1 year of nivolumab, lines 97203 to 97205; the 480 mg every 4 weeks flat continuation dose is grounded to line 233698). The exact 16-week switch timing is NOT stated in the cited source - see divergence. Monitor for immune-related adverse events."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "Adjuvant, up to 1 year total (DeVita 12th ed., lines 97203 to 97205). Label schedule: 240 mg IV every 2 weeks for the first 16 weeks, then 480 mg IV every 4 weeks, to complete 1 year. The 16-week switch timing is not established by the cited source (see divergence).",
+    "premedications": [],
+    "supportiveCare": [
+      "Single-agent immunotherapy; no cytotoxic backbone.",
+      "Immune-related adverse event monitoring (thyroid, hepatic, pulmonary, colitis, endocrinopathies, dermatologic).",
+      "Duration up to 1 year (CheckMate-577)."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during nivolumab",
+    "clinical assessment for colitis, pneumonitis, hepatitis, endocrinopathy each cycle"
+  ],
+  "clearanceChecks": ["CBC", "liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "nivolumab", "action": "hold/steroids", "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 97201 to 97220 (CheckMate-577: adjuvant nivolumab for 1 year after preoperative chemoradiotherapy and surgery in esophageal or GEJ adenocarcinoma or squamous cancer with residual disease; disease-free survival 22.4 vs 11.0 months; greater benefit in PD-L1 CPS at least 5); flat dosing lines 293062 (240 mg every 2 weeks) and 233698 (480 mg every 4 weeks)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers",
+        "version": "3.2026",
+        "date": "2026-06-03",
+        "locator": "Postoperative therapy: nivolumab category 1 preferred for residual disease after preoperative chemoradiation and R0 resection (guidelines/esophageal.txt lines 5836 to 5838); Systemic Therapy nivolumab listing (line 809)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "nivolumabScheduleSwitch",
+        "sources": [
+          { "name": "DeVita 12th ed. (core), CheckMate-577 duration", "version": "12th ed", "value": "1 year of adjuvant nivolumab; per-dose schedule not tabulated (lines 97203 to 97205)" },
+          { "name": "Agent-level flat dosing (DeVita)", "version": "12th ed", "value": "nivolumab 240 mg every 2 weeks (line 293062) and 480 mg every 4 weeks (line 233698)" }
+        ],
+        "note": "DeVita establishes 1 year of adjuvant nivolumab and the two flat-dose options (240 mg every 2 weeks; 480 mg every 4 weeks) but does not print the CheckMate-577 phase-switch timing (240 mg every 2 weeks for the first 16 weeks then 480 mg every 4 weeks). The 16-week switch and exact total duration should be confirmed against the trial or label at clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for adjuvant nivolumab (CheckMate-577) in esophageal and GEJ adenocarcinoma or squamous cell carcinoma with residual pathologic disease after neoadjuvant chemoradiation and R0 resection. The indication, histology, residual-disease requirement, and 1-year duration are grounded to DeVita 12th ed. lines 97201 to 97220. Nivolumab flat dosing is grounded to DeVita: 240 mg IV every 2 weeks (line 293062) with a 480 mg IV every 4 weeks flat continuation (line 233698). A divergence is recorded because the cited source does not print the CheckMate-577 phase-switch timing (240 mg every 2 weeks for 16 weeks then 480 mg every 4 weeks); that timing should be confirmed at clinical review. The disease-free survival benefit was independent of PD-L1 status with greater benefit at PD-L1 CPS at least 5. Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers v3.2026 lists nivolumab as a category 1 preferred postoperative option in this setting. Immune-related adverse event monitoring flagged. No field is set to VERIFY (all doses grounded; the schedule-switch caveat is captured as a divergence). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

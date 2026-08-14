@@ -1,0 +1,100 @@
+{
+  "id": "gi-btc-gem-cis",
+  "name": "Gemcitabine + CISplatin (UK-ABC-02)",
+  "disease": "Biliary tract cancer (cholangiocarcinoma and gallbladder cancer)",
+  "diseaseId": "cholangiocarcinoma",
+  "histology": "adenocarcinoma of the biliary tract",
+  "stage": ["locally advanced/unresectable", "metastatic", "adjuvant (Other Recommended)"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The cisplatin/gemcitabine cytotoxic backbone is NOT biomarker-restricted. Biliary molecular targets - FGFR2 fusions/rearrangements, IDH1 mutation, HER2 (ERBB2), BRAF V600E, MSI-H/dMMR, and NTRK fusions - are tested to guide targeted or immunotherapy options (predominantly in the subsequent-line setting), not to select or gate the gemcitabine/cisplatin backbone. Per Standard Guidelines (NCCN), Biliary Tract Cancers v1.2026, Targeted therapy (BIL-C 3 of 5) and Principles of Molecular Testing; DeVita 12th ed. Ch. 37 (FGFR2 and IDH1 are the most advanced targets, more common in intrahepatic CCA)."
+  },
+  "treatmentSetting": ["metastatic", "adjuvant"],
+  "treatmentIntent": ["palliative", "curative"],
+  "lineOfTherapy": "first-line for locally advanced, unresectable, or metastatic biliary tract cancer (category 1); also an Other Recommended adjuvant option. Not line-scoped when used as adjuvant therapy.",
+  "eligibilityCriteria": [
+    { "criterion": "cisplatinEligibility", "requirement": "adequate renal function and fitness for cisplatin and hydration. If the patient is ineligible for cisplatin, carboplatin may be substituted.", "source": "Standard Guidelines (NCCN), Biliary Tract Cancers", "locator": "v1.2026, Principles of Systemic Therapy (BIL-C 1 of 5 and 2 of 5), footnote g (carboplatin substitution if cisplatin-ineligible)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37 Systemic Therapy for Cholangiocarcinoma: gemcitabine 1,000 mg/m2 with cisplatin 25 mg/m2, both IV on days 1 and 8 every 21 days, max 6 months; UK-ABC-02)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02). Gemcitabine 1,000 mg/m2 IV on days 1 and 8 of a 21-day cycle."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37: cisplatin 25 mg/m2 with gemcitabine 1,000 mg/m2, both IV on days 1 and 8 every 21 days; UK-ABC-02)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02). CISplatin 25 mg/m2 IV on days 1 and 8 of a 21-day cycle. ISMP tall-man (CISplatin). Requires pre- and post-hydration; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy. If cisplatin-ineligible, carboplatin may be substituted per NCCN BIL-C footnote g."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "up to 8 cycles (a maximum of 6 months of therapy per UK-ABC-02; DeVita lines 114828 to 114829)",
+    "premedications": [
+      { "name": "Cisplatin hydration", "notes": "pre- and post-cisplatin IV hydration to prevent nephrotoxicity." },
+      { "name": "Antiemetic prophylaxis", "notes": "cisplatin is highly emetogenic; give guideline-tier antiemetic prophylaxis before each cisplatin dose." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: cisplatin-based, high emetogenic risk on days 1 and 8; prophylaxis required.",
+      "Cisplatin hydration protocol; monitor renal function, magnesium, and electrolytes.",
+      "Audiometry/neuropathy assessment as clinically indicated (cisplatin oto- and neurotoxicity)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each dose (days 1 and 8) - myelosuppression",
+    "renal function (creatinine/GFR), magnesium, and electrolytes before each cisplatin dose",
+    "peripheral neuropathy and hearing assessment - cisplatin",
+    "liver function"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "myelosuppression or renal impairment on day 1 or day 8", "action": "hold/reduce", "text": "Review required; hold or reduce per protocol for cytopenias or rising creatinine. Consider carboplatin substitution if cisplatin-ineligible (NCCN BIL-C footnote g). Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 37 Cancer of the Biliary Tree, Systemic Therapy for Cholangiocarcinoma, lines 114827 to 114829 (UK-ABC-02: gemcitabine 1,000 mg/m2 + cisplatin 25 mg/m2 IV days 1 and 8 every 21 days, max 6 months)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Biliary Tract Cancers",
+        "version": "1.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (BIL-C): Cisplatin/Gemcitabine (category 1) as first-line for unresectable/metastatic disease (BIL-C 2 of 5) and as an Other Recommended adjuvant option (BIL-C 1 of 5); reference 4 (Valle, ABC-02); footnote g (carboplatin if cisplatin-ineligible). The guideline lists the regimen by name and prints no per-mg dose; the dose is grounded to the DeVita core layer.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for gemcitabine plus cisplatin (UK-ABC-02) as first-line therapy for biliary tract cancer. Serves intrahepatic cholangiocarcinoma (#23), extrahepatic cholangiocarcinoma (#24), and gallbladder cancer (#25); diseaseId anchored to cholangiocarcinoma. Every dose is grounded to DeVita 12th ed. Ch. 37 Systemic Therapy for Cholangiocarcinoma (lines 114827 to 114829): gemcitabine 1,000 mg/m2 and cisplatin 25 mg/m2, both IV on days 1 and 8 every 21 days, for a maximum of 6 months (modeled as up to 8 cycles). The Standard Guidelines (NCCN) Biliary Tract Cancers v1.2026 Principles of Systemic Therapy (BIL-C) supply the category 1 first-line status, the Other Recommended adjuvant use, and the carboplatin-if-cisplatin-ineligible option (footnote g); the guideline prints no per-mg dose. ISMP tall-man applied (CISplatin). Cisplatin hydration and nephro/oto/neurotoxicity monitoring are carried in premedications, supportiveCare, and monitoring. Biliary molecular targets (FGFR2 fusions, IDH1, HER2, BRAF V600E, MSI-H/dMMR, NTRK) are tested to guide targeted or immunotherapy options, chiefly subsequent-line, and do NOT gate this backbone. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

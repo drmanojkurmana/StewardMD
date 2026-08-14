@@ -1,0 +1,69 @@
+{
+  "id": "heme-mm-lenalidomide-maintenance",
+  "name": "Lenalidomide Maintenance (post-autologous transplant)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "Lenalidomide maintenance is not biomarker-restricted; it improves PFS across risk groups after autologous HCT. In high-risk cytogenetics a PFS (but not clearly OS) benefit was seen, and two-drug maintenance (e.g. adding a proteasome inhibitor) is often favored for high-risk disease. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "maintenance",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "maintenance therapy after autologous hematopoietic cell transplant (or after primary therapy) in multiple myeloma; Preferred, category 1",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "response to induction and (typically) autologous HCT; standard-risk disease is the classic single-agent lenalidomide maintenance population", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G (Maintenance Therapy): Lenalidomide, Preferred, category 1" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 15,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), myeloma regimen/trials table (lines 26314, 26347) (Maintenance lenalidomide 15 mg PO days 1-21 every 4 wks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., myeloma maintenance entry (lines 26314 and 26347): maintenance lenalidomide 15 mg PO on days 1 to 21 every 4 weeks (28-day cycle), continued until progression or unacceptable toxicity. A lower starting dose of 10 mg daily is commonly used in practice and titrated to tolerance, but the concretely printed maintenance dose in the provided source is 15 mg; the 10 mg value is noted for clinical context and is not asserted from a myeloma-specific source locator here. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Lenalidomide: VTE thromboprophylaxis (aspirin for standard risk) and REMS-program dispensing (teratogen); adjust for renal impairment.",
+      "Counsel on and monitor for second primary malignancy (increased risk reported with lenalidomide maintenance).",
+      "Monitor for cumulative cytopenias with prolonged maintenance."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets periodically (cumulative myelosuppression risk)",
+    "renal function and electrolytes (lenalidomide clearance)",
+    "second primary malignancy surveillance",
+    "myeloma response markers (SPEP/serum free light chains) per follow-up schedule"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "response status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia or thrombocytopenia", "drug": "lenalidomide", "action": "hold/reduce", "text": "Hold and resume lenalidomide at a reduced maintenance dose per labeling for grade 3 to 4 cytopenia; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), myeloma regimen/trials table, lines 26314 and 26347 (Maintenance lenalidomide 15 mg PO days 1-21 every 4 wks); IFM 2005-02 and meta-analysis narrative supporting post-ASCT lenalidomide maintenance", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G (Maintenance Therapy): Lenalidomide, Preferred, category 1; footnote noting increased risk of secondary cancers with lenalidomide maintenance", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent lenalidomide maintenance after autologous HCT in multiple myeloma (#82). The maintenance dose is sourced to DeVita 12th ed. (myeloma maintenance entry, lines 26314 and 26347): lenalidomide 15 mg PO days 1 to 21 every 4 weeks (28-day cycle), continued until progression. A lower 10 mg daily starting dose is common in practice and titrated to tolerance; the provided source concretely prints 15 mg, so the modeled dose is 15 mg and the 10 mg value is recorded as clinical context only (not asserted from a myeloma-specific locator). Preferred, category 1 status is sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G (Maintenance Therapy), which also flags an increased risk of second primary malignancy with lenalidomide maintenance. Lenalidomide requires VTE prophylaxis and REMS. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

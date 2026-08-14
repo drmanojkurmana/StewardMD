@@ -1,0 +1,91 @@
+{
+  "id": "thyroid-dtc-rai-tsh-suppression",
+  "name": "Radioactive Iodine (I-131) Ablation with Levothyroxine TSH Suppression for Differentiated Thyroid Carcinoma",
+  "disease": "Differentiated thyroid carcinoma (papillary/follicular/oncocytic)",
+  "diseaseId": "papillary_thyroid_carcinoma",
+  "histology": "differentiated thyroid carcinoma (DTC): papillary, follicular, and oncocytic carcinoma (histology-agnostic across the DTC group)",
+  "stage": ["postoperative adjuvant", "iodine-avid metastatic"],
+  "biomarkers": {
+    "note": "RAI eligibility depends on iodine avidity of residual or metastatic disease, not on a molecular biomarker. Somatic testing (ALK, NTRK, BRAF, RET fusions; dMMR; MSI; TMB) is used to identify actionable alterations for systemic therapy in RAI-refractory disease, not to gate RAI or TSH suppression. Per Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026."
+  },
+  "treatmentSetting": "adjuvant",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "postsurgical (post-thyroidectomy) radioactive iodine ablation or therapy for iodine-avid disease, with lifelong levothyroxine for hormone replacement and risk-stratified TSH suppression; a capture framework, activity individualized",
+  "eligibilityCriteria": [
+    { "criterion": "iodineAvidity", "requirement": "iodine-avid residual or metastatic differentiated thyroid carcinoma; RAI is not effective for non-iodine-avid disease", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, Discussion (Metastatic Disease: RAI for iodine-avid disease); THYR-C" },
+    { "criterion": "preparation", "requirement": "thyroid hormone withdrawal (TSH greater than 30 mU/L) or recombinant human thyrotropin alfa stimulation before RAI", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, THYR-C 1 of 5; Discussion (preparation, thyrotropin alfa or hormone withdrawal)" },
+    { "criterion": "iodineLoadAvoidance", "requirement": "avoid recent iodinated contrast; consider 24-hour urine iodine to confirm normal free iodine before dosing if contrast was given", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, THYR-C (RAI after iodine contrast agent)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "iodine-131",
+        "name": "Iodine-131 (radioactive iodine, RAI)",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mCi",
+        "days": [1],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 600, "unit": "mCi" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "THYR-C 2 of 5 and Discussion (activity is risk-stratified: 30 to 50 mCi ablation for low-risk T1b/T2 clinical N0, category 1; higher activities 75 to 150 mCi and 100 to 200 mCi for higher-risk/locoregional and distant metastatic disease; lung metastases treated with 150 mCi or less to avoid lung injury; cumulative greater than 600 mCi / 22.2 GBq monitored for myelosuppression and second malignancy)", "evidenceStatus": "current" },
+        "notes": "Administered activity is VERIFY because the source states risk-stratified RANGES rather than a single administered activity; selecting a number would be inventing. Source-stated ranges (Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, THYR-C and Discussion): low-risk ablation 30 to 50 mCi (category 1), also 30 mCi supported; higher-risk/locoregional 75 to 150 mCi; distant metastases 100 to 200 mCi (3700 to 7400 MBq). SAFETY: for diffuse pulmonary metastases limit so that no more than about 80 mCi is retained in the whole body at 48 hours and generally treat with 150 mCi or less to avoid radiation pneumonitis/pulmonary fibrosis. Cumulative lifetime activity greater than 600 mCi (22.2 GBq) warrants monitoring for myelosuppression and long-term toxicity; per the source this 600 mCi cumulative figure is a monitoring/review threshold, NOT an absolute ceiling, so no cumulativeLifetime hard stop is set (warn only, hard threshold omitted) to avoid blocking legitimately needed RAI in iodine-avid metastatic DTC. Actual activity must be individualized and VERIFY-ed against the treating nuclear medicine protocol."
+      },
+      {
+        "id": "levothyroxine",
+        "name": "Levothyroxine (TSH-suppressive)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "THYR-A Principles of TSH Suppression and Discussion (TSH target below 0.1 mU/L for structural residual disease or high recurrence risk; 0.1 to 0.5 mU/L for intermediate/biochemical-incomplete; reference range once disease-free and low-risk)", "evidenceStatus": "current" },
+        "notes": "Dose is VERIFY: levothyroxine is given continuously (lifelong, once daily) and titrated to a risk-stratified TSH TARGET rather than a fixed milligram dose, so basis, unit, and dose are individualized. Source-stated TSH targets (THYR-A / Discussion): maintain TSH below 0.1 mU/L for known structural residual carcinoma or high recurrence risk; 0.1 to 0.5 mU/L for intermediate risk or biochemical-incomplete response; keep within the reference range once the patient is disease-free at low risk. Patients on chronic TSH suppression should be counseled on adequate elemental calcium (1200 mg/day) and vitamin D (1000 IU/day) intake (THYR-A). Titrate to the target TSH and VERIFY against the treating protocol."
+      }
+    ],
+    "cycleLengthDays": "not cycle-based: a single (occasionally repeated) I-131 administration followed by continuous lifelong daily levothyroxine; repeat RAI is individualized, physician determined",
+    "cycles": "single RAI administration in the typical adjuvant setting; RAI may be repeated for iodine-avid persistent/metastatic disease per response and cumulative-activity limits; levothyroxine is continuous/lifelong",
+    "premedications": [],
+    "supportiveCare": [
+      "RAI preparation: thyroid hormone withdrawal (target TSH greater than 30 mU/L) or recombinant human thyrotropin alfa stimulation; low-iodine diet per protocol.",
+      "RAI adverse-effect counseling: salivary and lacrimal gland dysfunction (sialadenitis, xerostomia, nasolacrimal duct stenosis), transient marrow suppression, and small long-term second-malignancy risk with high cumulative activity.",
+      "TSH suppression counseling: adequate elemental calcium (1200 mg/day) and vitamin D (1000 IU/day) for chronically suppressed patients; monitor for iatrogenic thyrotoxicosis, atrial fibrillation, and bone loss (THYR-A).",
+      "radiation-safety precautions after I-131 administration per local nuclear medicine protocol."
+    ]
+  },
+  "monitoring": [
+    "serum TSH titrated to the risk-stratified target (below 0.1, or 0.1 to 0.5, or reference range)",
+    "serum thyroglobulin and antithyroglobulin antibodies for disease surveillance",
+    "post-therapy whole-body I-131 scan after ablation",
+    "CBC for cumulative high-activity RAI (myelosuppression)",
+    "cardiac rhythm and bone health during chronic TSH suppression"
+  ],
+  "clearanceChecks": ["iodine avidity / preparation TSH", "recent iodinated contrast excluded", "pregnancy excluded before RAI", "cumulative I-131 activity", "prior-therapy status"],
+  "doseModificationRules": [
+    { "condition": "diffuse pulmonary metastases", "drug": "iodine-131", "action": "limit activity", "text": "Limit administered activity (generally 150 mCi or less, and so that no more than about 80 mCi is retained at 48 hours) to avoid radiation pneumonitis and pulmonary fibrosis; individualize with nuclear medicine." },
+    { "condition": "high cumulative I-131 activity (greater than 600 mCi / 22.2 GBq)", "drug": "iodine-131", "action": "review", "text": "Monitor for myelosuppression and long-term toxicity; reassess benefit of further RAI." },
+    { "condition": "iatrogenic thyrotoxicosis, atrial fibrillation, or accelerated bone loss", "drug": "levothyroxine", "action": "relax target", "text": "Reassess the degree of TSH suppression against cardiac and skeletal risk; relax the target once disease-free at low risk." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Thyroid cancer chapter (RAI ablation for iodine-avid differentiated thyroid cancer; levothyroxine TSH suppression as standard postoperative management)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "THYR-A (Principles of TSH Suppression: below 0.1 mU/L high-risk; 0.1 to 0.5 mU/L intermediate; reference range low-risk; calcium 1200 mg/day + vitamin D 1000 IU counseling); THYR-C (RAI preparation and activity: ablation 30 to 50 mCi category 1; higher-risk 75 to 150 and 100 to 200 mCi; lung metastases 150 mCi or less; cumulative greater than 600 mCi / 22.2 GBq monitoring)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit"],
+  "provenanceNote": "ONCQIS Standard Protocol capture framework for radioactive iodine (I-131) ablation with levothyroxine TSH suppression in differentiated thyroid carcinoma (StewardMD reference disease papillary_thyroid_carcinoma, representing the DTC group papillary/follicular/oncocytic). This is deliberately a framework: the I-131 administered activity is set to VERIFY because Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026 state risk-stratified RANGES (low-risk ablation 30 to 50 mCi category 1; higher-risk 75 to 150 mCi; distant metastases 100 to 200 mCi; lung metastases 150 mCi or less to avoid lung injury; cumulative greater than 600 mCi / 22.2 GBq monitored) rather than a single administered activity, and selecting one number would be inventing. Levothyroxine basis, unit, and dose are VERIFY because it is titrated to a risk-stratified TSH target (below 0.1 mU/L for structural residual/high risk; 0.1 to 0.5 mU/L for intermediate; reference range for disease-free low risk per THYR-A) rather than a fixed milligram dose. Preparation (hormone withdrawal to TSH greater than 30 mU/L or thyrotropin alfa), pulmonary-metastasis activity limits, cumulative-activity monitoring, and calcium/vitamin D counseling are all source-grounded. Four fields remain VERIFY and are listed in verifyFields; status is DRAFT accordingly. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

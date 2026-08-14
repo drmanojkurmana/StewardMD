@@ -1,0 +1,80 @@
+{
+  "id": "gi-net-lu177-dotatate",
+  "name": "Lutetium Lu 177 Dotatate (PRRT) - GI/pancreatic NET",
+  "disease": "Gastrointestinal (and pancreatic) neuroendocrine tumor",
+  "diseaseId": "gastrointestinal_neuroendocrine_tumors",
+  "histology": "well-differentiated, somatostatin-receptor-positive neuroendocrine tumor",
+  "stage": ["locoregional unresectable", "metastatic"],
+  "biomarkers": {
+    "differentiation": "well-differentiated NET",
+    "SSTR": "somatostatin-receptor (SSTR) positive on SSTR-PET/CT or SSTR-PET/MRI (tumor uptake at least equal to normal liver background)",
+    "note": "Peptide receptor radionuclide therapy (PRRT) with lutetium Lu 177 dotatate requires well-differentiated, SSTR-positive disease (SSTR-PET uptake threshold). Randomized data (NETTER-1) suggest superior PFS and response versus small molecules. PRRT should generally be avoided if GFR is below 30 mL/min. Per Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors, Principles of PRRT (NE-J), and DeVita 12th ed."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "for advanced well-differentiated SSTR-positive NET, including after progression on somatostatin analogues; first-line PRRT may be considered in selected patients",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "well-differentiated NET with SSTR-positive imaging (tumor uptake at least equal to normal liver on SSTR-PET)", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, neuroendocrine line 662 (SSTR expression detected by SSTR-PET/CT or SSTR-PET/MRI; threshold for PRRT is tumor uptake)" },
+    { "criterion": "renalFunction", "requirement": "adequate renal function (avoid PRRT if GFR below 30; use with caution otherwise)", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, neuroendocrine line 664 (PRRT should generally be avoided in patients with GFR below 30)" }
+  ],
+  "exclusionCriteria": [
+    { "criterion": "renalFunction", "requirement": "GFR below 30 mL/min", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, neuroendocrine line 664" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lutetium-lu-177-dotatate",
+        "name": "Lutetium Lu 177 dotatate",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mCi",
+        "days": [1],
+        "route": "IV over 30 to 40 minutes (peripheral)",
+        "infusionDuration": "30 to 40 minutes",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "neuroendocrine line 696 (Lutetium Lu 177 dotatate administered via peripheral IV at a dose of 200 mCi over 30 to 40 minutes every 8 weeks for a total of 4)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) NET v1.2026 (neuroendocrine line 696) and DeVita 12th ed. (NETTER-1, four cycles every 8 weeks). DOSE: 200 mCi (7.4 GBq) IV over 30 to 40 minutes, every 8 weeks, for a total of 4 administrations. UNIT NOTE: the true unit is millicuries (mCi) of radioactivity; unit is recorded as mCi (the sourced activity is 200 mCi = 7.4 GBq); this is NOT a VERIFY (the dose is source-established). Radioligand: no ISMP tall-man form. Amino acid solution is co-administered for renal protection (30 minutes before, concurrently, and 3 hours after, NCCN line 699)."
+      }
+    ],
+    "cycleLengthDays": 56,
+    "cycles": 4,
+    "premedications": [
+      { "name": "Renal-protective amino acid infusion", "notes": "Administer amino acid solution 30 minutes before, concurrently with, and 3 hours after each lutetium Lu 177 dotatate dose (NCCN line 699); aggressive antiemetic prophylaxis when nonselective amino acid solutions are used (NCCN line 713)." },
+      { "name": "Antiemetic prophylaxis", "notes": "Provide before and during amino acid and lutetium Lu 177 dotatate infusion." }
+    ],
+    "supportiveCare": [
+      "Hold short-acting octreotide at least 24 hours before each lutetium Lu 177 dotatate dose; long-acting SSA (octreotide LAR or lanreotide) may be given 4 to 24 hours after each PRRT dose (NCCN lines 692, 731).",
+      "Renal protection with amino acid co-infusion is mandatory (NCCN line 699).",
+      "PRRT should generally be avoided if GFR is below 30 mL/min (NCCN line 664)."
+    ]
+  },
+  "monitoring": [
+    "renal function (creatinine/GFR) before each dose - nephrotoxicity risk despite amino acid protection",
+    "CBC (myelosuppression; risk of therapy-related myeloid neoplasm) before each dose and on follow-up",
+    "liver function",
+    "clinical/radiographic and SSTR-PET response assessment"
+  ],
+  "clearanceChecks": ["renal (GFR >= 30)", "CBC/platelets", "liver", "SSTR imaging positive", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 renal or hematologic toxicity", "drug": "lutetium-lu-177-dotatate", "action": "hold/reduce/discontinue", "text": "Hold, dose-reduce, or discontinue PRRT per labeling and radiation-safety protocol; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "NETTER-1: four cycles of Lu 177 dotatate given every 8 weeks followed by octreotide LAR, demonstrating a robust PFS benefit in midgut NET", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "Principles of PRRT with Lutetium Lu 177 Dotatate (NE-J); neuroendocrine lines 662 (SSTR threshold), 664 (avoid if GFR below 30), 696 (200 mCi over 30 to 40 minutes every 8 weeks for a total of 4), 699 (amino acid co-infusion), 692 and 731 (SSA timing)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lutetium Lu 177 dotatate PRRT in well-differentiated, SSTR-positive GI/pancreatic NET (disease #30). The radioligand dose - 200 mCi (7.4 GBq) IV over 30 to 40 minutes every 8 weeks for 4 total administrations - is dose-grounded to Standard Guidelines (NCCN) NET v1.2026 (neuroendocrine line 696) and DeVita 12th ed. (NETTER-1). The unit is recorded as mCi (200 mCi = 7.4 GBq); the dose is source-established, so no field is set to VERIFY. Biomarker gates: well-differentiated NET that is SSTR-positive on SSTR-PET (uptake at least equal to liver); PRRT avoided if GFR below 30 (exclusion). Mandatory renal-protective amino acid co-infusion and SSA timing rules are captured. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

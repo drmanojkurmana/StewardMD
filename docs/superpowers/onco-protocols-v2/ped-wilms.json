@@ -1,0 +1,122 @@
+{
+  "id": "ped-wilms",
+  "name": "PEDIATRIC Wilms Tumor (Nephroblastoma): Regimen DD4A (vinCRIStine + Dactinomycin + DOXOrubicin), with Regimen EE4A (vinCRIStine + Dactinomycin) for lower-risk disease",
+  "disease": "Wilms tumor (nephroblastoma)",
+  "diseaseId": "wilms_tumour",
+  "histology": "favorable-histology Wilms tumor (FHWT) is the DD4A/EE4A target; anaplastic histology (focal or diffuse) is unfavorable and is treated on distinct intensified regimens (M, I, UH-1, UH-2)",
+  "stage": ["EE4A: very-low/low-risk FHWT (e.g., stage I)", "DD4A: standard/higher-risk FHWT (e.g., stage III, or stage I-II with adverse molecular markers, or lung/extrapulmonary metastatic)"],
+  "biomarkers": {
+    "histology": "favorable (FHWT) vs anaplastic (focal/diffuse); anaplasia is unfavorable and reassigns therapy",
+    "LOH_1p_16q": "combined loss of heterozygosity at BOTH 1p and 16q is adverse and triggers intensification (switch/continue to DD4A, or to Regimen M)",
+    "gain_1q": "1q gain is associated with poorer outcome",
+    "LOH_LOI_11p15": "11p15 LOH or loss of imprinting may preclude therapy de-escalation",
+    "note": "PEDIATRIC. Chemotherapy assignment is by histology (favorable vs anaplastic), stage, tumor weight, age, lung-metastasis response, and molecular markers. Combined LOH at 1p AND 16q, 1q gain, and 11p15 LOH/LOI are the actionable adverse molecular markers. Per Standard Guidelines (NCCN), Wilms Tumor (Nephroblastoma) v1.2026, Initial/Final Risk Assessment for FHWT (WILMS-F, risk table lines 522 to 558) and updates on biomarker-directed intensification (lines 153, 184, 226 to 227). No endorsement implied."
+  },
+  "treatmentSetting": ["adjuvant (post-nephrectomy)", "neoadjuvant (unresectable tumor or when nephron-sparing surgery is indicated)"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line adjuvant or neoadjuvant chemotherapy for newly diagnosed Wilms tumor",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosisAndHistology", "requirement": "favorable-histology Wilms tumor requiring adjuvant/neoadjuvant chemotherapy per risk group", "source": "Standard Guidelines (NCCN), Wilms Tumor", "locator": "v1.2026, Initial/Final Risk Assessment for FHWT (WILMS-F, lines 522 to 558); Chemotherapy Regimens (WILMS-G, lines 2027 to 2037)" },
+    { "criterion": "timingWithSurgery", "requirement": "adjuvant chemotherapy started within 7 to 14 days of up-front nephrectomy, coordinated with radiation to avoid full-dose dactinomycin/doxorubicin during RT", "source": "Standard Guidelines (NCCN), Wilms Tumor", "locator": "v1.2026, Principles of Systemic Therapy (line 2019 to 2021)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Wilms Tumor", "version": "1.2026", "date": "2026-05-04", "locator": "Chemotherapy Regimens (WILMS-G): DD4A = 15 doses of vincristine over 24 weeks; EE4A = 13 doses of vincristine over 18 weeks (lines 2028 to 2029)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. DD4A specifies 15 doses of vincristine over 24 weeks (EE4A: 13 doses over 18 weeks). The source prints dose COUNTS and total duration but NOT the per-dose milligram value or the week-by-week schedule, so basis, dosePerUnit, and unit are the literal VERIFY (never invented). ISMP tall-man (vinCRIStine); 2 mg per-dose cap retained as a standard safety guard. Infant/low-BSA dosing uses body-weight (30-Rule) or BSA-banded tables (lines 2086 to 2089)."
+      },
+      {
+        "id": "dactinomycin",
+        "name": "Dactinomycin (actinomycin-D)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Wilms Tumor", "version": "1.2026", "date": "2026-05-04", "locator": "Chemotherapy Regimens (WILMS-G): DD4A = 5 doses of dactinomycin (alternating with doxorubicin) over 24 weeks; EE4A = 7 doses over 18 weeks (lines 2028 to 2030)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. DD4A specifies 5 doses of dactinomycin alternating with doxorubicin (EE4A: 7 doses). Per-dose milligram value and schedule are NOT printed, so basis, dosePerUnit, and unit are VERIFY. Reduce dactinomycin by 50% for 6 weeks after whole-lung/whole-abdomen irradiation to avoid radiation recall (line 2090); dactinomycin held if patient is undergoing RT overlap. Veno-occlusive/sinusoidal-obstruction hepatopathy occurs most often after vincristine/dactinomycin (line 2080 to 2083)."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 200, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Wilms Tumor", "version": "1.2026", "date": "2026-05-04", "locator": "Chemotherapy Regimens (WILMS-G): DD4A = 4 doses of doxorubicin, cumulative dose 150 mg/m2 over 24 weeks (line 2029); Principles of Chemotherapy toxicity/echocardiogram guidance (lines 2069 to 2073); dexrazoxane supportive care (lines 2093 to 2095)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. DD4A specifies 4 doses of doxorubicin with a PLANNED CUMULATIVE dose of 150 mg/m2 (line 2029); the per-dose milligram value is not printed, so basis, dosePerUnit, and unit are VERIFY. DOXOrubicin is only in DD4A (and M/I/UH regimens), NOT in EE4A. ISMP tall-man (DOXOrubicin). Pediatric anthracycline stakes are higher (younger children, especially those assigned female at birth, are more susceptible to cardiotoxicity): echocardiogram before the first dose, before exceeding cumulative 200 mg/m2 (the warn threshold set here), and at end of treatment (line 2072). Dexrazoxane should be given before each doxorubicin dose if planned cumulative will exceed 150 mg/m2, at a 10:1 dexrazoxane:doxorubicin ratio (lines 2093 to 2095). Reduce doxorubicin 50% for 6 weeks after WLI/WAI (line 2090)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "EE4A (very-low/low-risk FHWT): vinCRIStine + Dactinomycin only, 13 + 7 doses over 18 weeks (line 2028). DD4A (standard/higher-risk FHWT): adds DOXOrubicin, 15 + 5 + 4 doses over 24 weeks with alternating dactinomycin/doxorubicin (line 2029). Adverse molecular markers (combined LOH 1p/16q, 1q gain) or slow lung-metastasis response escalate therapy to Regimen M (adds cyclophosphamide/etoposide; lines 2034 to 2037).",
+      "cycleLengthDays and cycles are VERIFY: EE4A and DD4A are week-based dose schedules (18 and 24 weeks respectively) and the source prints dose counts and total duration but not a fixed cycle length or per-dose day schedule; these must be resolved from a cited COG dosing source before activation.",
+      "doxorubicin (DD4A): dexrazoxane if planned cumulative >150 mg/m2 (10:1 ratio); echocardiogram before first dose, before cumulative 200 mg/m2, and at end of treatment; lower pediatric cardiotoxicity threshold.",
+      "dactinomycin/doxorubicin: reduce by 50% for 6 weeks after whole-lung or whole-abdomen irradiation (radiation recall).",
+      "G-CSF (filgrastim/pegfilgrastim): not necessary after EE4A, DD4A, or VAD, but consider for cyclophosphamide/etoposide-containing cycles in Regimen M and above (lines 2096 to 2098).",
+      "hepatopathy/sinusoidal-obstruction syndrome surveillance (most often after vincristine/dactinomycin)."
+    ]
+  },
+  "monitoring": [
+    "echocardiogram before first doxorubicin dose, before cumulative 200 mg/m2, and at end of treatment (DD4A)",
+    "CBC before dosing",
+    "liver function and clinical signs of sinusoidal-obstruction syndrome (abdominal distension, ascites, hepatomegaly, transaminase/bilirubin rise, thrombocytopenia)",
+    "cumulative anthracycline dose tracking (DOXOrubicin)",
+    "coordination with radiation timing to avoid full-dose dactinomycin/doxorubicin during RT"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "cardiac (LVEF/echocardiogram for DD4A)", "cumulative anthracycline dose", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "combined LOH at 1p and 16q, 1q gain, or slow/incomplete lung-metastasis response", "action": "intensify", "text": "Escalate therapy (continue/switch to DD4A, or switch to Regimen M which adds cyclophosphamide/etoposide) per risk reassessment and clinical review (lines 2034 to 2037, 522 to 558)." },
+    { "condition": "cumulative doxorubicin approaching 200 mg/m2", "drug": "doxorubicin", "action": "assess-cardiac", "text": "Obtain echocardiogram before exceeding cumulative 200 mg/m2; give dexrazoxane if planned cumulative >150 mg/m2 (10:1 ratio); clinical review of cardiac function (lines 2072, 2093 to 2095)." },
+    { "condition": "within 6 weeks after whole-lung or whole-abdomen irradiation", "action": "reduce", "text": "Reduce dactinomycin and doxorubicin doses by 50% to ameliorate radiation recall (line 2090)." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Wilms tumor (nephroblastoma) is a pediatric tumor; per-drug pediatric milligram doses for EE4A/DD4A are not printed in the provided adult extract, so regimen identity and dose scaffolding are grounded to the NCCN Wilms Tumor guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Wilms Tumor", "version": "1.2026", "date": "2026-05-04", "locator": "Initial/Final Risk Assessment for FHWT (WILMS-F, lines 522 to 558); Chemotherapy Regimens (WILMS-G, lines 2027 to 2047); Principles of Chemotherapy toxicity/dose-modification/supportive-care (WILMS-G, lines 2063 to 2098); adjuvant timing (line 2019 to 2021)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[1].basis",
+    "regimen.drugs[1].dosePerUnit",
+    "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis",
+    "regimen.drugs[2].dosePerUnit",
+    "regimen.drugs[2].unit",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "PEDIATRIC ONCQIS Standard Protocol draft for Wilms tumor / nephroblastoma (StewardMD reference disease wilms_tumour). Regimen identity is grounded to Standard Guidelines (NCCN), Wilms Tumor (Nephroblastoma) v1.2026: Regimen EE4A = vinCRIStine + Dactinomycin (13 + 7 doses over 18 weeks) for very-low/low-risk favorable-histology WT, and Regimen DD4A = vinCRIStine + Dactinomycin + DOXOrubicin (15 + 5 + 4 doses over 24 weeks, doxorubicin cumulative 150 mg/m2) for standard/higher-risk favorable-histology WT (Chemotherapy Regimens WILMS-G, lines 2028 to 2029). Risk-directed assignment by histology (favorable vs anaplastic), stage, tumor weight, age, lung-metastasis response, and molecular markers - combined LOH at 1p and 16q, 1q gain, and 11p15 LOH/LOI - is grounded to the FHWT risk table (WILMS-F, lines 522 to 558) and biomarker-intensification updates (lines 153, 184, 226 to 227). The source prints dose COUNTS, total durations, and the doxorubicin planned cumulative (150 mg/m2), but does NOT print per-dose milligram values or a fixed cycle length, so every drug basis/dosePerUnit/unit plus cycleLengthDays and cycles are set to the literal VERIFY and listed in verifyFields rather than invented. Pediatric anthracycline safety is retained: echocardiogram before the first doxorubicin dose, before cumulative 200 mg/m2 (the warn threshold), and at end of treatment; dexrazoxane before each dose when planned cumulative exceeds 150 mg/m2 at a 10:1 ratio; 50% reduction of dactinomycin/doxorubicin for 6 weeks after whole-lung/whole-abdomen irradiation; and sinusoidal-obstruction hepatopathy surveillance (lines 2069 to 2095). ISMP tall-man applied (vinCRIStine 2 mg cap, DOXOrubicin). Status is DRAFT with unresolved VERIFY fields. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,120 @@
+{
+  "id": "heme-hodgkin-bv-avd",
+  "name": "BV-AVD (Brentuximab vedotin + Doxorubicin + Vinblastine + Dacarbazine)",
+  "disease": "Classical Hodgkin lymphoma",
+  "diseaseId": "hodgkin_lymphoma",
+  "histology": "classical Hodgkin lymphoma",
+  "stage": ["III", "IV"],
+  "biomarkers": {
+    "CD30": "expressed on Hodgkin/Reed-Sternberg cells (intrinsic to classical Hodgkin lymphoma; not a separate testing gate in this setting)",
+    "note": "Brentuximab vedotin is a CD30-directed antibody-drug conjugate. In classical Hodgkin lymphoma the Hodgkin/Reed-Sternberg cells are characteristically CD30 positive, so CD30 is intrinsic to the diagnosis rather than an added eligibility gate (unlike CD30-directed therapy in T-cell lymphomas, where CD30 positivity is the gate). Per Standard Guidelines (NCCN), Hodgkin Lymphoma, v2.2026."
+  },
+  "treatmentSetting": "primary therapy for classical Hodgkin lymphoma (advanced-stage III to IV; also studied in early-stage unfavorable disease per BREACH)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy; BV-AVD is a listed primary systemic therapy option (requires G-CSF primary prophylaxis)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "previously untreated classical Hodgkin lymphoma (advanced stage III to IV)", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "locator": "v2.2026, HODG-B (Principles of Systemic Therapy), line 1925: BV-AVD + G-CSF (Brentuximab-vedotin/Doxorubicin/Vinblastine/Dacarbazine); BREACH early-stage unfavorable reference (line 1233)" },
+    { "criterion": "gcsfSupport", "requirement": "primary G-CSF prophylaxis required with BV-AVD", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "locator": "v2.2026, HODG-B line 1925 (BV-AVD + G-CSF, footnote h)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "brentuximab-vedotin",
+        "name": "Brentuximab vedotin",
+        "basis": "mgkg",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/kg",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "bodyWeightCapKg": 100 },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: BV-AVD (ECHELON-1) brentuximab dose 1.2 mg/kg every 2 weeks is NOT printed in the provided extracts. DeVita Table 10.1 (line 20811) prints brentuximab vedotin 1.8 mg/kg IV every 3 weeks, maximum dose per 100 kg, for refractory Hodgkin lymphoma and refractory systemic ALCL, which is a DIFFERENT dose/schedule from the frontline BV-AVD regimen.", "evidenceStatus": "unknown" },
+        "notes": "Dose set to VERIFY. In the frontline A+AVD (BV-AVD, ECHELON-1) regimen brentuximab vedotin is given 1.2 mg/kg IV on days 1 and 15 of a 28-day cycle (every 2 weeks), but that dose/schedule is not in the provided DeVita/Harrison extracts. The only grounded brentuximab dose (DeVita Table 10.1, line 20811) is 1.8 mg/kg every 3 weeks for refractory disease, which must NOT be substituted here. Body-weight dosing is capped at 100 kg (line 20812). CD30-directed ADC. Verify the 1.2 mg/kg every-2-week frontline dose against the source before activation."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Hodgkin lymphoma chapter, line 330594 (ABVD x4 vs x2 adds 100 mg/m2 doxorubicin, i.e. 50 mg/m2 per 28-day cycle, 25 mg/m2 per dose on days 1 and 15); AVD is ABVD with bleomycin omitted, doxorubicin dose unchanged (ABVD or AVD referenced line 29416).", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 330594. Doxorubicin 25 mg/m2 IV on days 1 and 15 (the AVD/ABVD anthracycline dose; AVD omits bleomycin only). Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2)."
+      },
+      {
+        "id": "vinblastine",
+        "name": "vinBLAStine",
+        "basis": "bsa",
+        "dosePerUnit": 6,
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 0.5 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 (antineoplastic drug reference), Vinblastine entry, line 20773: 6 mg/m2 IV on days 1 and 15 as part of ABVD (same vinblastine component in AVD).", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 10.1, line 20773. vinBLAStine 6 mg/m2 IV on days 1 and 15. ISMP tall-man vinBLAStine."
+      },
+      {
+        "id": "dacarbazine",
+        "name": "Dacarbazine",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: dacarbazine AVD/ABVD dose not printed in the provided DeVita/Harrison extracts (dacarbazine doses found are melanoma-specific). Days 1 and 15 follow the shared AVD q28/q2wk schedule confirmed for vinblastine (line 20773).", "evidenceStatus": "unknown" },
+        "notes": "Dose set to VERIFY. Commonly cited AVD dacarbazine dose is 375 mg/m2 IV on days 1 and 15, but no source locator appears in the provided extracts. Verify numeric dose before activation."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "dacarbazine is highly emetogenic; give antiemetic prophylaxis before each cycle." }
+    ],
+    "supportiveCare": [
+      "G-CSF: primary prophylaxis is REQUIRED with BV-AVD (Standard Guidelines (NCCN), Hodgkin Lymphoma v2.2026, HODG-B line 1925, footnote h).",
+      "Brentuximab vedotin: monitor for peripheral neuropathy; hold/reduce for grade 2 or higher; avoid concurrent bleomycin (excess pulmonary toxicity with brentuximab, which is why AVD, not ABVD, is used with brentuximab).",
+      "Antiemetics: dacarbazine highly emetogenic; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each dose",
+    "peripheral neuropathy assessment each visit (brentuximab vedotin and vinblastine)",
+    "cardiac assessment / LVEF (anthracycline)",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "hepatic function (brentuximab)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "peripheral neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "brentuximab-vedotin", "action": "reduce/hold", "text": "Reduce or hold brentuximab vedotin for grade 2 or higher peripheral neuropathy per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 vinblastine (line 20773) and brentuximab vedotin (lines 20811 to 20812, refractory-disease dose/schedule); Hodgkin chapter doxorubicin cumulative-dose statement (line 330594); ABVD or AVD reference (line 29416)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "version": "2.2026", "date": "2026-07-01", "locator": "HODG-B Principles of Systemic Therapy, line 1925: BV-AVD + G-CSF (Brentuximab-vedotin/Doxorubicin/Vinblastine/Dacarbazine); BREACH early-stage unfavorable reference (line 1233)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[3].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for BV-AVD (brentuximab vedotin + AVD; ECHELON-1) in classical Hodgkin lymphoma (#75). Doxorubicin 25 mg/m2 days 1 and 15 is grounded via the DeVita statement that ABVD x4 adds 100 mg/m2 of doxorubicin over ABVD x2 (line 330594); vinBLAStine 6 mg/m2 days 1 and 15 to DeVita Table 10.1 (line 20773). Two doses are set to VERIFY: (1) brentuximab vedotin, because the frontline BV-AVD dose (1.2 mg/kg every 2 weeks) is not printed in the provided extracts and must not be confused with the grounded refractory-disease dose (1.8 mg/kg every 3 weeks, Table 10.1 line 20811); and (2) dacarbazine, because no AVD/ABVD dacarbazine dose locator appears in the extracts. Regimen identity and the mandatory G-CSF primary prophylaxis are grounded to Standard Guidelines (NCCN), Hodgkin Lymphoma v2.2026 (HODG-B, line 1925). Bleomycin is intentionally omitted (AVD) because concurrent brentuximab and bleomycin cause excess pulmonary toxicity. ISMP tall-man applied (DOXOrubicin, vinBLAStine); brentuximab body-weight dosing capped at 100 kg (line 20812); anthracycline cumulative cap 450/550 mg/m2. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

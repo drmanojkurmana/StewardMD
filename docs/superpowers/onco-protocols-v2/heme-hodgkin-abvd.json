@@ -1,0 +1,121 @@
+{
+  "id": "heme-hodgkin-abvd",
+  "name": "ABVD (Doxorubicin + Bleomycin + Vinblastine + Dacarbazine)",
+  "disease": "Classical Hodgkin lymphoma",
+  "diseaseId": "hodgkin_lymphoma",
+  "histology": "classical Hodgkin lymphoma",
+  "stage": [],
+  "biomarkers": {
+    "CD30": "typically expressed on Hodgkin/Reed-Sternberg cells but NOT a gate for ABVD",
+    "note": "ABVD is a cytotoxic four-drug backbone and is not biomarker-restricted for eligibility. CD30 is characteristically expressed by Hodgkin/Reed-Sternberg cells but does not gate access to ABVD (CD30 targeting is the rationale for brentuximab-vedotin-containing regimens, not ABVD). Per Standard Guidelines (NCCN), Hodgkin Lymphoma, v2.2026."
+  },
+  "treatmentSetting": "primary therapy for newly diagnosed classical Hodgkin lymphoma (early-stage favorable, early-stage unfavorable, and advanced-stage disease)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy for classical Hodgkin lymphoma; ABVD is a category 1 primary treatment option",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "newly diagnosed classical Hodgkin lymphoma", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "locator": "v2.2026, HODG-B (Principles of Systemic Therapy); ABVD listed as Doxorubicin/Bleomycin/Vinblastine/Dacarbazine (line 1922); ABVD category 1 (line 972, HODG-7D)" },
+    { "criterion": "pulmonaryFunction", "requirement": "adequate pulmonary reserve for bleomycin (DLCO generally acceptable at >=60%)", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "locator": "v2.2026, footnote h (line 407): in general a DLCO threshold of >=60% is acceptable for use of bleomycin; baseline DLCO if ABVD is used (line 365)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Hodgkin lymphoma chapter, line 330594: ABVD x4 vs ABVD x2 is associated with an additional 100 mg/m2 of doxorubicin. Two additional cycles = 100 mg/m2, i.e. 50 mg/m2 per cycle across days 1 and 15 = 25 mg/m2 per dose.", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 330594 (ABVD x4 adds 100 mg/m2 of doxorubicin over ABVD x2). 100 mg/m2 over two additional cycles is 50 mg/m2 per 28-day cycle, delivered as 25 mg/m2 IV on days 1 and 15. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). NCCN Hodgkin also notes CMT may be preferred where the doxorubicin dose would exceed 200 mg/m2 (line 580)."
+      },
+      {
+        "id": "bleomycin",
+        "name": "Bleomycin",
+        "basis": "bsa",
+        "dosePerUnit": 10,
+        "unit": "units",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 400, "hard": 400, "unit": "units" } },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Drug pharmacology table, Bleomycin (Blenoxane) monograph, lines 28406 to 28408: 10 U/m2 IV days 1 and 15 every 28 days for Hodgkin.", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., lines 28406 to 28408. Bleomycin 10 units/m2 IV on days 1 and 15 every 28 days for Hodgkin. Dosed in units/m2 (BSA). Cumulative-dose pulmonary toxicity: caution >400 total units and monitor DLCO; hold for pulmonary toxicity. NCCN Hodgkin: baseline DLCO if ABVD used (line 365); DLCO >=60% generally acceptable for bleomycin (line 407); consider PFTs after 4 cycles (line 587)."
+      },
+      {
+        "id": "vinblastine",
+        "name": "vinBLAStine",
+        "basis": "bsa",
+        "dosePerUnit": 6,
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 0.5 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 (antineoplastic drug reference), Vinblastine entry, line 20773: 6 mg/m2 IV on days 1 and 15 as part of ABVD.", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 10.1, line 20773. vinBLAStine 6 mg/m2 IV on days 1 and 15 as part of ABVD. ISMP tall-man vinBLAStine (distinct from vinCRIStine)."
+      },
+      {
+        "id": "dacarbazine",
+        "name": "Dacarbazine",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [1, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: dacarbazine ABVD dose not printed in the provided DeVita/Harrison extracts (dacarbazine doses found are melanoma-specific, 850 to 1000 mg/m2, lines 233416 and 235202). Days 1 and 15 follow the shared ABVD q28 schedule confirmed for bleomycin (line 28406) and vinblastine (line 20773).", "evidenceStatus": "unknown" },
+        "notes": "Dose set to VERIFY. The commonly cited ABVD dacarbazine dose is 375 mg/m2 IV on days 1 and 15, but no source locator for it appears in the provided DeVita/Harrison extracts, so the numeric dose must be verified against the source before activation. Basis (BSA/mg/m2) and the days 1 and 15 q28 schedule follow the shared ABVD schedule grounded for bleomycin and vinblastine."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "dacarbazine is highly emetogenic; give antiemetic prophylaxis before ABVD per emetogenicity tier." }
+    ],
+    "supportiveCare": [
+      "G-CSF: routine use of growth factors is not recommended with ABVD; neutropenia is not a factor for treatment delay or dose reduction with ABVD (Standard Guidelines (NCCN), Hodgkin Lymphoma v2.2026, HODG-B, lines 585 to 586).",
+      "Bleomycin pulmonary toxicity: baseline and periodic DLCO; consider PFTs after 4 cycles of ABVD (line 587); DLCO >=60% generally acceptable for continued bleomycin (line 407); discontinue bleomycin for pulmonary toxicity.",
+      "Antiemetics: dacarbazine highly emetogenic; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each dose",
+    "baseline and periodic DLCO / pulmonary function (bleomycin); consider PFTs after 4 cycles",
+    "cardiac assessment / LVEF (anthracycline)",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "cumulative bleomycin units tracking (caution >400 units)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "pulmonary (DLCO)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "new or worsening pulmonary symptoms or falling DLCO", "drug": "bleomycin", "action": "hold/discontinue", "text": "Hold or discontinue bleomycin for suspected pulmonary toxicity; clinical review." },
+    { "condition": "ANC or platelet nadir on day 1", "action": "review", "text": "Note: NCCN Hodgkin states neutropenia is not a factor for ABVD delay or dose reduction (HODG-B); clinical review for day 1 or day 15 counts per protocol." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 vinblastine (line 20773); Bleomycin/Blenoxane monograph (lines 28406 to 28408); Hodgkin chapter doxorubicin cumulative-dose statement (line 330594)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hodgkin Lymphoma", "version": "2.2026", "date": "2026-07-01", "locator": "HODG-B Principles of Systemic Therapy (ABVD = Doxorubicin/Bleomycin/Vinblastine/Dacarbazine, line 1922; G-CSF/neutropenia guidance lines 585 to 587; DLCO footnotes lines 365, 407); ABVD category 1 (line 972, HODG-7D)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[3].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for ABVD in classical Hodgkin lymphoma (#74). vinBLAStine 6 mg/m2 IV days 1 and 15 is grounded to DeVita 12th ed. Table 10.1 (line 20773); bleomycin 10 units/m2 IV days 1 and 15 every 28 days for Hodgkin to the DeVita Bleomycin/Blenoxane monograph (lines 28406 to 28408); doxorubicin 25 mg/m2 per dose derived from the DeVita statement that ABVD x4 adds 100 mg/m2 of doxorubicin over ABVD x2 (line 330594), i.e. 50 mg/m2 per 28-day cycle across days 1 and 15. The 28-day cycle length is grounded to the bleomycin monograph (line 28408). Dacarbazine numeric dose is set to VERIFY: no ABVD-specific dacarbazine dose locator appears in the provided DeVita/Harrison extracts (dacarbazine doses present are melanoma-specific). Regimen identity, category-1 status, G-CSF/neutropenia guidance and bleomycin DLCO monitoring are grounded to Standard Guidelines (NCCN), Hodgkin Lymphoma v2.2026. ISMP tall-man applied (DOXOrubicin, vinBLAStine); anthracycline cumulative cap 450/550 mg/m2; bleomycin dosed in units with a >400-unit cumulative caution and DLCO monitoring. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

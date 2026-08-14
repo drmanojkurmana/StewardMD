@@ -1,0 +1,69 @@
+{
+  "id": "heme-mpn-hydroxyurea",
+  "name": "Hydroxyurea (MPN cytoreduction, high-risk PV/ET)",
+  "disease": "Myeloproliferative neoplasms (polycythemia vera and essential thrombocythemia)",
+  "diseaseId": "myeloproliferative_neoplasms",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "JAK2_CALR_MPL": "driver mutation (diagnostic)",
+    "note": "MPN diagnosis uses driver-mutation testing (JAK2, then CALR and MPL if JAK2-negative). Polycythemia vera is almost always JAK2 V617F positive; essential thrombocythemia is JAK2, CALR or MPL mutated. Hydroxyurea is a first-line cytoreductive agent and is not restricted by driver-mutation type. Per Standard Guidelines (NCCN), Myeloproliferative Neoplasms v2.2026."
+  },
+  "treatmentSetting": "cytoreduction, first-line for high-risk polycythemia vera (PV-2) and high-risk essential thrombocythemia (ET-2)",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "first-line cytoreductive therapy for high-risk PV or ET",
+  "eligibilityCriteria": [
+    { "criterion": "risk", "requirement": "high-risk polycythemia vera or essential thrombocythemia requiring cytoreduction", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "locator": "v2.2026, PV-2 (treatment for high-risk PV) and ET-2 (treatment for high-risk ET)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "hydroxyurea",
+        "name": "Hydroxyurea",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "version": "2.2026", "date": null, "locator": "MS-24 hydroxyurea 500 mg/day is a symptomatic-MYELOFIBROSIS figure (subsequently adjusted to individual efficacy and tolerability), NOT a PV/ET starting dose; PV-2/ET-2 list hydroxyurea as first-line cytoreduction with no fixed printed mg dose, titrated to hematologic targets (PV hematocrit below 45%, ET count control; effective therapy benchmarked around 2 g/day per the resistance criteria, MPN approximately line 2090)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Myeloproliferative Neoplasms v2.2026. The treatment algorithms PV-2 and ET-2 list hydroxyurea as first-line cytoreduction but do not print a fixed mg dose because it is titrated to hematologic targets. The 500 mg/day figure appears only in the manuscript (MS-24) for symptomatic MYELOFIBROSIS hyperproliferative manifestations (a cross-indication, not PV/ET), subsequently adjusted to individual efficacy and tolerability. For PV/ET there is NO fixed printed starting dose: hydroxyurea is titrated to hematologic targets (PV hematocrit below 45%; ET platelet and WBC control), with effective therapy benchmarked around 2 g/day per the resistance criteria (MPN approximately line 2090). dosePerUnit is therefore set to VERIFY. Continuous daily oral dosing (days 1 to 28 = continuous); titrate to counts (for PV, target hematocrit below 45%; control platelet and WBC counts and symptoms)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "For polycythemia vera: therapeutic phlebotomy to a target hematocrit below 45% (CYTO-PV data; MPN footnote e), plus low-dose aspirin 81 to 100 mg/day unless contraindicated (PV-1). Hydroxyurea provides cytoreduction on top of these measures for high-risk PV.",
+      "For essential thrombocythemia: low-dose aspirin 81 to 100 mg/day for most patients (ET-1); hydroxyurea for cytoreduction in high-risk disease (ET-2).",
+      "Aspirin: use with caution in acquired von Willebrand syndrome; higher-dose or twice-daily aspirin only for specific refractory vasomotor symptoms per MPN footnotes.",
+      "Discontinue hydroxyurea in anticipation of or during pregnancy; peginterferon is the cytoreductive alternative in pregnancy."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential to titrate dose to hematologic targets (for PV, hematocrit below 45%)",
+    "assessment for hydroxyurea intolerance or resistance (cytopenias at the dose needed for control, leg ulcers or other mucocutaneous toxicity), which would prompt a switch (for example ruxolitinib or peginterferon)",
+    "thrombosis and bleeding symptom review"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "hematocrit target (PV)", "pregnancy status"],
+  "doseModificationRules": [
+    { "condition": "hydroxyurea intolerance or resistance", "drug": "hydroxyurea", "action": "switch", "text": "If cytopenias occur at the dose needed to control counts, or platelets remain above 400 x 10^9/L with WBC below 2.5 x 10^9/L or hemoglobin below 10 g/dL at any hydroxyurea dose, or leg ulcers or other unacceptable mucocutaneous toxicity occur, consider a switch to an alternative (for example ruxolitinib for PV, or peginterferon). Physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "version": "2.2026", "date": "2026-06-16", "locator": "PV-2 (hydroxyurea first-line cytoreduction for high-risk PV) and ET-2 (high-risk ET); PV-1/ET-1 (aspirin 81 to 100 mg/day; PV phlebotomy to hematocrit below 45%, footnote e, CYTO-PV); MS-24 (hydroxyurea 500 mg/day titrated); driver-mutation testing (JAK2, CALR, MPL) on MPN diagnostic pages", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent", "regimen.drugs[0].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for hydroxyurea cytoreduction in high-risk polycythemia vera and essential thrombocythemia. The treatment algorithms (PV-2, ET-2) list hydroxyurea as first-line cytoreduction but do not print a fixed mg dose because it is titrated to hematologic targets; the 500 mg/day figure appears only in the manuscript (MS-24) for symptomatic MYELOFIBROSIS hyperproliferative manifestations (a cross-indication, not PV/ET), so the PV/ET starting dose is set to VERIFY; PV/ET hydroxyurea is titrated to hematologic targets (PV hematocrit below 45%, ET platelet and WBC control), with effective therapy benchmarked around 2 g/day per the resistance criteria (MPN approximately line 2090). For PV, therapeutic phlebotomy to a hematocrit below 45% (CYTO-PV, footnote e) and low-dose aspirin 81 to 100 mg/day (PV-1) are companion measures captured in supportiveCare. Biomarker context: JAK2, CALR and MPL driver mutations are diagnostic (PV is almost always JAK2 V617F positive); hydroxyurea itself is not mutation-restricted. histology and treatmentIntent are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

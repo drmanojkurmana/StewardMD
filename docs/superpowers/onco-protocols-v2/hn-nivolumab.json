@@ -1,0 +1,71 @@
+{
+  "id": "hn-nivolumab",
+  "name": "Nivolumab Monotherapy (CheckMate-141), Platinum-Refractory Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma",
+  "disease": "Head and neck squamous cell carcinoma (non-nasopharyngeal)",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": [],
+  "biomarkers": {
+    "PD_L1": "not required for eligibility; greater overall survival benefit observed when PD-L1 expression level is at least 1%",
+    "note": "Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026 Discussion MS-59, the OS benefit with nivolumab appeared confined to patients with PD-L1 expression at least 1% (8.7 vs 4.6 months), with no OS advantage demonstrated below 1%; nivolumab is listed as a subsequent-line option (SYST-A 4 of 7) without a mandatory PD-L1 threshold for use. PD-L1 testing informs expected benefit but is not an eligibility gate here."
+  },
+  "treatmentSetting": ["recurrent", "metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "second-line or later (platinum-refractory: disease progression on or after platinum-based therapy)",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "disease progression on or after platinum-based therapy", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, Subsequent-Line: Nivolumab if disease progression on or after platinum therapy, category 1)" },
+    { "criterion": "disease", "requirement": "recurrent, unresectable, or metastatic head and neck squamous cell carcinoma with no surgical or radiotherapy option", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 header" },
+    { "criterion": "site", "requirement": "non-nasopharyngeal primary; nasopharynx follows a separate systemic-therapy pathway (NASO-B)", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 1 of 7 (Principles of Systemic Therapy for Non-Nasopharyngeal Cancers header)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "flat",
+        "dosePerUnit": 240,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "Discussion MS-59 (two FDA-approved dosing regimens for nivolumab for SCCHN: 240 mg every 2 weeks or 480 mg every 4 weeks); indication SYST-A 4 of 7 (subsequent-line, post-platinum, category 1)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, Discussion MS-59. Nivolumab 240 mg IV flat dose on day 1 every 14 days. Source-stated alternate schedule: 480 mg IV every 28 days. Flat milligram dosing (basis flat); source states flat mg, not mg/kg. Continue until disease progression or unacceptable toxicity. A nivolumab and hyaluronidase-nvhy subcutaneous formulation may be substituted with different dosing/administration (SYST-A 1 of 7); not encoded here."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "until disease progression or unacceptable toxicity; alternate schedule 480 mg every 28 days",
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event surveillance for nivolumab (thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine).",
+      "Antiemetic prophylaxis not routinely required for single-agent checkpoint inhibitor (minimal emetic risk)."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during nivolumab",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "renal", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "nivolumab", "action": "hold/steroids", "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter (lines 88276 to 88285): a randomized trial of the PD-1 inhibitor nivolumab versus chemotherapy in second-line recurrent or metastatic disease showed increased 1-year survival with fewer severe treatment-related toxicities", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, Subsequent-Line: Nivolumab if progression on or after platinum, category 1); dosing Discussion MS-59 (CheckMate-141 dosing narrative)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for nivolumab monotherapy (CheckMate-141) in platinum-refractory recurrent or metastatic non-nasopharyngeal head and neck squamous cell carcinoma. Serves the squamous-cell head and neck sites (reference sites #32 to 39 and #41), not nasopharynx (separate NASO-B pathway) and not salivary gland (#40, separate protocol). Nivolumab flat 240 mg IV every 14 days (alternate 480 mg every 28 days) is sourced to Standard Guidelines (NCCN) v2.2026 Discussion MS-59, which states the two FDA-approved SCCHN dosing regimens as flat milligram doses (basis flat), not mg/kg. The subsequent-line, post-platinum indication (category 1) is from SYST-A 4 of 7. PD-L1 is captured as a benefit modifier, not an eligibility gate, per the Discussion (MS-59). Setting recurrent/metastatic, palliative intent, second-line or later. No numeric field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,100 @@
+{
+  "id": "gu-uro-gem-cisplatin",
+  "name": "Gemcitabine + Cisplatin (GC)",
+  "disease": "Urothelial carcinoma",
+  "diseaseId": "bladder_cancer",
+  "histology": "urothelial carcinoma",
+  "stage": ["II", "III", "IV", "muscle-invasive", "locally advanced", "metastatic"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic gemcitabine/cisplatin backbone is not biomarker-restricted. Applies to urothelial carcinoma of the bladder (#57) and, as the same systemic regimen, upper-tract urothelial carcinoma of the ureter and renal pelvis (#58). Requires cisplatin eligibility (adequate renal function and performance status). Per Standard Guidelines (NCCN), Bladder Cancer v3.2026, Principles of Systemic Therapy (BL-G)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line for locally advanced or metastatic urothelial carcinoma; also a category 1 neoadjuvant option (4 cycles) for muscle-invasive bladder cancer and an adjuvant option",
+  "eligibilityCriteria": [
+    { "criterion": "cisplatinEligibility", "requirement": "adequate renal function and performance status (cisplatin-eligible)", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G (Principles of Systemic Therapy): estimate GFR to assess cisplatin eligibility; split-dose cisplatin option for borderline renal function" },
+    { "criterion": "setting", "requirement": "cisplatin-based neoadjuvant chemotherapy (3-4 cycles) for muscle-invasive bladder cancer shows a survival benefit", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G (neoadjuvant cisplatin-based chemotherapy for MIBC, category 1)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 8, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 17414 (Bladder cancer: gemcitabine 1,000 mg/m2 IV on days 1, 8, and 15 every 28 d); line 155247 (GC in 28-day cycles, gemcitabine 1000 mg/m2 days 1, 8, 15); Table 44.5 (line ~155202)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 17414 (gemcitabine dosing table, bladder cancer) and line 155247 / Table 44.5: gemcitabine 1000 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle. NOTE: Standard Guidelines (NCCN) Bladder Cancer v3.2026 (BL-G) prefer a 21-day GC schedule (gemcitabine days 1 and 8) for better dose adherence; that variant is recorded in evidence.divergence. The modeled doses are the DeVita 28-day schedule."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 70,
+        "unit": "mg/m2",
+        "days": [2],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 44.5 (GC: cisplatin 70 mg/m2 d2); line 155247 (cisplatin 70 mg/m2 day 2)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 44.5 and line 155247: CISplatin 70 mg/m2 IV on day 2 of the 28-day GC cycle (day 1 is an accepted alternative in 21-day schedules). ISMP tall-man (CISplatin). Requires vigorous IV hydration; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy. For borderline renal function, Standard Guidelines (NCCN) BL-G describe a split-dose option (35 mg/m2 on days 1 and 2, or days 1 and 8, category 2B)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "Neoadjuvant: 4 cycles (category 1 for MIBC). Metastatic: continued per response/tolerance.",
+    "premedications": [
+      { "name": "Cisplatin hydration and antiemetics", "notes": "vigorous pre- and post-cisplatin IV hydration with attention to urine output; high-emetic-risk antiemetic prophylaxis for cisplatin." }
+    ],
+    "supportiveCare": [
+      "Cisplatin: mandatory vigorous IV hydration (pre and post) to protect renal function; monitor magnesium/potassium and replace.",
+      "Antiemetics: cisplatin is highly emetogenic - use a high-emetic-risk prophylaxis regimen.",
+      "Monitor for cisplatin nephrotoxicity, ototoxicity (audiometry if symptomatic), and peripheral neuropathy.",
+      "CBC before each dose (gemcitabine day 15 is frequently held for cytopenias)."
+    ]
+  },
+  "monitoring": [
+    "renal function (creatinine/GFR) before each cycle - cisplatin nephrotoxicity",
+    "serum magnesium/potassium (cisplatin electrolyte wasting)",
+    "audiometry if auditory symptoms (cisplatin ototoxicity)",
+    "peripheral neuropathy assessment (cisplatin)",
+    "CBC before each dose (gemcitabine myelosuppression)"
+  ],
+  "clearanceChecks": ["renal", "CBC/platelets", "electrolytes (Mg/K)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "declining creatinine clearance / renal impairment", "drug": "cisplatin", "action": "hold/switch", "text": "Reassess cisplatin eligibility if renal function declines; consider split-dose cisplatin (BL-G) or switch to a carboplatin-based regimen. Do not substitute carboplatin for cisplatin in the perioperative setting (BL-G)." },
+    { "condition": "day 15 cytopenias", "drug": "gemcitabine", "action": "hold", "text": "Hold gemcitabine day 15 for significant neutropenia/thrombocytopenia per protocol; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 17414 (gemcitabine bladder dosing 1,000 mg/m2 d1,8,15 q28); Table 44.5 and line 155247 (GC: gemcitabine 1000 mg/m2 d1,8,15 + cisplatin 70 mg/m2 d2, 28-day cycles)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bladder Cancer", "version": "3.2026", "date": null, "locator": "Principles of Systemic Therapy (BL-G 2 of 8): cisplatin-based neoadjuvant chemotherapy (3-4 cycles) category 1 for MIBC; Cisplatin/Gemcitabine 21-day cycle preferred; split-dose cisplatin option; carboplatin must not be substituted perioperatively. First-line metastatic Cisplatin/Gemcitabine (category 1).", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "regimen.cycleLengthDays",
+        "sources": [
+          { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "28-day cycle: gemcitabine 1000 mg/m2 days 1, 8, 15 + cisplatin 70 mg/m2 day 2" },
+          { "name": "Standard Guidelines (NCCN), Bladder Cancer", "version": "3.2026", "value": "21-day cycle preferred (gemcitabine days 1 and 8) for better dose adherence with fewer delays" }
+        ],
+        "note": "Both sources describe GC as a standard first-line and neoadjuvant regimen; they differ on cycle length (DeVita 28-day with gemcitabine day 15 versus the NCCN-preferred 21-day with gemcitabine days 1 and 8). The modeled schedule uses the fully-dosed DeVita 28-day version. The 21-day gemcitabine day pattern is not printed with day numbers in the provided sources. Cycle-length/schedule selection left to clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for gemcitabine + cisplatin (GC) in urothelial carcinoma - bladder (#57) and upper-tract (#58). Every numeric dose is sourced to DeVita 12th ed.: gemcitabine 1000 mg/m2 IV days 1, 8, 15 (line 17414 dosing table and line 155247) and CISplatin 70 mg/m2 IV day 2 (Table 44.5 and line 155247), 28-day cycle. Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G) establish setting/eligibility (category 1 neoadjuvant for MIBC, first-line metastatic, cisplatin eligibility, split-dose option) and prefer a 21-day GC schedule; that cycle-length difference is recorded in evidence.divergence rather than overwriting the grounded DeVita schedule. ISMP tall-man applied (CISplatin). Cisplatin hydration and nephro/oto/neuro-toxicity monitoring emphasized. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

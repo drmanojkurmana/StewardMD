@@ -1,0 +1,86 @@
+{
+  "id": "rare-histiocytic-vinblastine-prednisone",
+  "name": "vinBLAStine + Prednisone (Langerhans Cell Histiocytosis)",
+  "disease": "Langerhans cell histiocytosis (LCH)",
+  "diseaseId": null,
+  "histology": "Langerhans cell histiocytosis (LCH), including multisystem and single-system disease; the vinblastine/prednisone backbone is the long-standing pediatric-derived LCH regimen",
+  "stage": ["multisystem", "single-system", "LCH mass lesion"],
+  "biomarkers": {
+    "note": "Non-targeted chemo-steroid backbone used irrespective of mutation status; may be used when BRAF/MEK targeted therapy is not indicated or available. Note: in a single-center adult retrospective series, vinblastine/prednisone was associated with worse outcomes than cytarabine in bone-involved LCH (higher first-year progression). Per Standard Guidelines (NCCN), Histiocytic Neoplasms, HIST-A (suggested regimens) and the Discussion (MS-9)."
+  },
+  "treatmentSetting": "systemic chemo-immunosuppressive therapy for LCH",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "long-standing first-line LCH backbone (preferred/other-recommended per NCCN HIST-A); efficacy in adults is less favorable than cytarabine in some series",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "Langerhans cell histiocytosis (multisystem or single-system, including LCH mass lesions)", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "locator": "v2.2026, HIST-A (Vinblastine/Prednisone as a suggested LCH regimen; Vinblastine/Prednisone +/- 6-mercaptopurine); Discussion MS-9 (vinblastine plus prednisone is the preferred pediatric chemotherapy-based treatment for LCH); histiocytic lines 2106, 2188, 2295, 3431, 3443" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vinblastine",
+        "name": "vinBLAStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (per prescribing information / institutional LCH protocol)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-A (Vinblastine/Prednisone suggested regimen); Discussion MS-9 (vinblastine plus prednisone is the preferred chemotherapy-based treatment for LCH in the pediatric setting); histiocytic lines 2106, 2188, 3431", "evidenceStatus": "current" },
+        "notes": "DOSE IS VERIFY. Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026 names Vinblastine/Prednisone as an LCH regimen (HIST-A) and describes it in the Discussion (MS-9) but does NOT print a vinblastine dose; DeVita 12th ed. and Harrison 22nd ed. do not print an LCH-specific vinblastine dose in the provided extracts. The commonly cited LCH-protocol dose (vinblastine ~6 mg/m2 IV weekly) is NOT asserted here and must be VERIFY-ed against a cited source before use - not invented. ISMP TALL-MAN: vinBLAStine (do not confuse with vinCRIStine); vinblastine has a maximum-per-dose consideration and must never be given intrathecally."
+      },
+      {
+        "id": "prednisone",
+        "name": "Prednisone",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-A (Vinblastine/Prednisone suggested regimen); Discussion MS-9 (high-dose prednisone 1 mg/kg/day for 1 month followed by a slow taper can be effective in pulmonary LCH - steroid monotherapy context, NOT the combination dose); histiocytic lines 2106, 3377", "evidenceStatus": "current" },
+        "notes": "DOSE IS VERIFY for the vinblastine/prednisone COMBINATION. The provided source prints high-dose prednisone 1 mg/kg/day for 1 month followed by a slow taper only for pulmonary-LCH STEROID MONOTHERAPY (MS-9, histiocytic line 3377), not as the prednisone component dose within the vinblastine/prednisone regimen; the combination prednisone dose (commonly ~40 mg/m2/day tapering, in the pediatric LCH protocols) is NOT printed in the provided sources and must be VERIFY-ed - not invented. PJP prophylaxis and steroid precautions apply during prolonged corticosteroid exposure."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Vinblastine and prednisone doses, schedule, and cycle count are NOT printed in the provided sources (VERIFY before use).",
+      "vinBLAStine is a vesicant given IV ONLY - never intrathecal (fatal); confirm tall-man labeling to avoid vinCRIStine confusion.",
+      "Prolonged corticosteroid exposure: PJP prophylaxis, glucose/BP monitoring, GI and bone protection; steroid taper per protocol.",
+      "Consider that adult LCH may respond less well to vinblastine/prednisone than to cytarabine (MS-9) - weigh alternatives."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential (vinblastine myelosuppression)",
+    "neurotoxicity assessment (vinca-alkaloid peripheral neuropathy)",
+    "corticosteroid effects (glucose, blood pressure, mood, infection - PJP risk)",
+    "disease response (imaging/FDG-PET; pulmonary function if lung LCH)"
+  ],
+  "clearanceChecks": ["CBC/differential", "neuro exam", "glucose/BP", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 neutropenia or significant vinca neurotoxicity", "drug": "vinblastine", "action": "hold/reduce", "text": "Hold/reduce vinblastine per prescribing information / institutional LCH protocol (specific dose is VERIFY). Obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Langerhans cell histiocytosis chemotherapy framework (vinblastine and corticosteroids as the classic LCH backbone); cited as textbook framework - no LCH-specific vinblastine/prednisone dose is printed in the provided extract, hence doses are VERIFY", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-A (Vinblastine/Prednisone; Vinblastine/Prednisone +/- 6-mercaptopurine suggested LCH regimens); Discussion MS-9 (vinblastine plus prednisone preferred pediatric LCH chemotherapy; high-dose prednisone 1 mg/kg/day x1 month then taper for pulmonary LCH; vinblastine/prednisone associated with worse outcomes than cytarabine in an adult bone-LCH series); histiocytic lines 2106, 2188, 2295, 3377, 3431, 3443", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[vinblastine].basis", "regimen.drugs[vinblastine].dosePerUnit", "regimen.drugs[vinblastine].unit", "regimen.drugs[vinblastine].days", "regimen.drugs[prednisone].basis", "regimen.drugs[prednisone].dosePerUnit", "regimen.drugs[prednisone].unit", "regimen.drugs[prednisone].days", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the vinBLAStine + prednisone backbone in Langerhans cell histiocytosis, a rare histiocytic disorder. The regimen is a source-named LCH option (Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026, HIST-A; described in Discussion MS-9), but the provided sources do NOT print the vinblastine or the combination prednisone dose/schedule - only a pulmonary-LCH steroid-monotherapy dose (prednisone 1 mg/kg/day x1 month then taper, MS-9) is printed, which is a different context and is NOT adopted as the combination dose. Therefore both drug doses/units/bases, day schedules, and cycle parameters are set to the literal VERIFY and listed in verifyFields, blocking status ACTIVE; the frequently cited vinblastine 6 mg/m2 weekly / prednisone 40 mg/m2/day protocol values are deliberately NOT invented here. ISMP tall-man (vinBLAStine vs vinCRIStine) and the IV-only / never-intrathecal safety rule are captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,94 @@
+{
+  "id": "rare-thymic-carbo-paclitaxel",
+  "name": "CARBOplatin + PACLitaxel (thymic carcinoma)",
+  "disease": "Thymic carcinoma",
+  "diseaseId": "thymic_carcinoma",
+  "histology": "thymic carcinoma (thymic epithelial tumor)",
+  "stage": ["III", "IV", "recurrent"],
+  "biomarkers": {
+    "note": "Cytotoxic platinum/taxane backbone, not biomarker-restricted. Per Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas v2.2026, THYM-C, Carboplatin/Paclitaxel is a listed first-line regimen for thymic carcinoma."
+  },
+  "treatmentSetting": ["neoadjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line for advanced (unresectable, metastatic, or recurrent) thymic carcinoma; also an option for thymoma",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "thymic carcinoma (also an option for thymoma)", "source": "Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas", "locator": "v2.2026 (04/10/26), THYM-C Systemic Therapy Regimens, line 635 (Carboplatin/Paclitaxel, thymic carcinoma column, references 2 and 3)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": "VERIFY",
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas", "version": "2.2026", "date": "2026-04-10", "locator": "THYM-C Systemic Therapy Regimens, line 635 (Carboplatin/Paclitaxel listed as a first-line regimen; NCCN does not print the target AUC)", "evidenceStatus": "current" },
+        "notes": "VERIFY: The regimen (carboplatin plus paclitaxel for thymic carcinoma) is established in Standard Guidelines (NCCN) THYM-C (line 635) and Harrison 22nd ed. (line 91257), but NONE of the provided sources print a carboplatin target AUC. Target AUC must be VERIFY-ed against a cited source before this field is set. Tall-man per ISMP."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas", "version": "2.2026", "date": "2026-04-10", "locator": "THYM-C Systemic Therapy Regimens, line 635 (Carboplatin/Paclitaxel; NCCN does not print the paclitaxel dose)", "evidenceStatus": "current" },
+        "notes": "VERIFY: Paclitaxel mg/m2 dose is not printed in any provided source (NCCN THYM-C lists the regimen name only; DeVita line 77676 and Harrison line 91257 describe the ECOG carboplatin/paclitaxel experience in thymic carcinoma without doses). Requires corticosteroid/antihistamine premedication once the dose is grounded. Tall-man per ISMP."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid plus H1 and H2 antihistamine per paclitaxel labeling (apply once the dose/schedule is grounded)." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: carboplatin/paclitaxel is moderate emetic risk (apply tier once schedule confirmed).",
+      "Peripheral neuropathy monitoring - PACLitaxel."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) - CARBOplatin",
+    "peripheral neuropathy assessment - PACLitaxel"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 77676 (ECOG prospective trial of carboplatin plus paclitaxel in thymoma and thymic carcinoma; ORR 33% thymoma, 24% thymic carcinoma; line 77678, Japanese study in thymic carcinoma ORR 36%); Harrison 22nd ed. line 91257 (carboplatin and paclitaxel often employed in thymic carcinoma). None of these state the doses.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Thymomas and Thymic Carcinomas",
+        "version": "2.2026",
+        "date": "2026-04-10",
+        "locator": "THYM-C Principles of Systemic Therapy, Systemic Therapy Regimens, line 635: Carboplatin/Paclitaxel listed as a first-line regimen for thymic carcinoma (references 2 and 3). NCCN lists the regimen but does not print doses.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].dosePerUnit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for CARBOplatin + PACLitaxel in thymic carcinoma. The regimen, setting, and first-line role are grounded in Standard Guidelines (NCCN) Thymomas and Thymic Carcinomas v2.2026 (THYM-C, line 635) and Harrison 22nd ed. (line 91257), and DeVita 12th ed. (lines 77676 to 77678) describes the ECOG and Japanese carboplatin/paclitaxel thymic-carcinoma experience. However, NONE of the provided sources print the carboplatin target AUC, the paclitaxel mg/m2 dose, the cycle length, or the number of cycles, so those four fields are the literal VERIFY (never invented) and are listed in verifyFields; per the schema this blocks status ACTIVE. ISMP tall-man applied (CARBOplatin, PACLitaxel). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

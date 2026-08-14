@@ -1,0 +1,72 @@
+{
+  "id": "skin-merkel-avelumab",
+  "name": "Avelumab (Merkel cell carcinoma)",
+  "disease": "Merkel cell carcinoma",
+  "diseaseId": "merkel_cell_carcinoma",
+  "histology": "Merkel cell carcinoma (cutaneous neuroendocrine carcinoma)",
+  "stage": ["III (locally advanced/unresectable)", "IV (M1)"],
+  "biomarkers": {
+    "note": "Anti-PD-L1 checkpoint inhibitor. No positive companion biomarker is required to start. Immunotherapy is the preferred systemic approach for advanced Merkel cell carcinoma; avelumab and pembrolizumab are preferred for primary locally advanced disease and avelumab is a recommended first-line option for disseminated (M1) disease. Per Standard Guidelines (NCCN), Merkel Cell Carcinoma."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line immunotherapy for advanced (locally advanced/unresectable or metastatic M1) Merkel cell carcinoma",
+  "eligibilityCriteria": [
+    { "criterion": "stage/setting", "requirement": "locally advanced/unresectable or metastatic (M1) Merkel cell carcinoma", "source": "Standard Guidelines (NCCN), Merkel Cell Carcinoma", "locator": "v2.2026, Treatment of M1 Disease (MCC-5); primary locally advanced options (line 933); avelumab preferred/first-line (lines 1995, 2140)" },
+    { "criterion": "biomarker", "requirement": "no companion biomarker required", "source": "Standard Guidelines (NCCN), Merkel Cell Carcinoma", "locator": "v2.2026, immunotherapy-preferred systemic options (line 2144)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "avelumab",
+        "name": "Avelumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Merkel Cell Carcinoma", "version": "2.2026", "date": null, "locator": "Avelumab named as preferred/first-line systemic therapy for advanced Merkel cell carcinoma (lines 933, 1995, 2140, 2144; MCC-5 M1 disease); mg/kg or flat mg dose NOT printed in the provided source", "evidenceStatus": "current" },
+        "notes": "DOSE = VERIFY. Avelumab is named as the preferred/first-line immunotherapy for advanced Merkel cell carcinoma in Standard Guidelines (NCCN) v2.2026 (JAVELIN Merkel 200), but the source does NOT print the dose, schedule, or dosing basis, and no DeVita/Harrison source was available. Per the fail-closed rule the dose, unit, and basis are all set to VERIFY rather than invented. The commonly cited label values (avelumab 10 mg/kg IV every 2 weeks, or the flat 800 mg IV every 2 weeks schedule) MUST be confirmed against a cited source before these fields are populated. Because avelumab is one of the few checkpoint inhibitors historically dosed by weight (mg/kg) as well as flat, the basis itself is left as VERIFY (not assumed flat)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "Continued until disease progression or unacceptable toxicity. Exact dose, dosing basis (mg/kg versus flat), and cycle length are set to VERIFY because the provided source names avelumab as preferred but does not print its dosing.",
+    "premedications": [
+      { "name": "Avelumab infusion-reaction premedication", "notes": "Avelumab labeling recommends premedication (antihistamine and acetaminophen) before at least the first 4 infusions to reduce infusion-related reactions; confirm current schedule against a cited source." }
+    ],
+    "supportiveCare": [
+      "Immune-related adverse event (irAE) monitoring (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities.",
+      "Infusion-related reaction precautions per avelumab labeling.",
+      "Baseline and periodic thyroid (TSH/free T4), liver function, glucose as indicated."
+    ]
+  },
+  "monitoring": [
+    "infusion-related reaction monitoring (avelumab)",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose) before each cycle and as indicated",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "renal", "CBC", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "avelumab", "action": "hold/steroids", "text": "Hold avelumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Standard Guidelines (NCCN), Merkel Cell Carcinoma", "version": "2.2026", "date": null, "locator": "Immunotherapy-preferred framework for advanced Merkel cell carcinoma (avelumab, pembrolizumab, retifanlimab); avelumab dose not printed in the provided source", "evidenceStatus": "current" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Merkel Cell Carcinoma", "version": "2.2026", "date": null, "locator": "Avelumab preferred/first-line for advanced MCC (lines 933, 1995, 2140, 2144); Treatment of M1 Disease MCC-5; mg dose NOT printed", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.cycleLengthDays"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for avelumab anti-PD-L1 immunotherapy in advanced (locally advanced/unresectable or metastatic M1) Merkel cell carcinoma, the immunotherapy-preferred systemic approach. Avelumab is named as a preferred and first-line option in Standard Guidelines (NCCN), Merkel Cell Carcinoma v2.2026 (JAVELIN Merkel 200), but the source does NOT print its dose, schedule, or dosing basis, and no DeVita or Harrison source was available for this task. Per the fail-closed rule, the dose, unit, dosing basis, and cycle length are all set to the literal VERIFY (recorded in verifyFields) rather than invented; the commonly cited label values (avelumab 10 mg/kg every 2 weeks, or flat 800 mg every 2 weeks) are noted in-drug only as values requiring confirmation against a cited source. Pembrolizumab and retifanlimab-dlwr are source-listed alternative immunotherapies for this setting. Immune-related adverse event and infusion-reaction monitoring apply. The unresolved VERIFY fields keep this protocol at DRAFT and block status ACTIVE until dosing is sourced. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

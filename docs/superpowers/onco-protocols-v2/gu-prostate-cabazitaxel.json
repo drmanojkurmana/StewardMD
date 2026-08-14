@@ -1,0 +1,76 @@
+{
+  "id": "gu-prostate-cabazitaxel",
+  "name": "Cabazitaxel plus a concurrent steroid (mCRPC, post-docetaxel)",
+  "disease": "Prostate cancer",
+  "diseaseId": "prostate_cancer",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "stage": ["M1 CRPC (metastatic castration-resistant)"],
+  "biomarkers": {
+    "note": "Cytotoxic taxane chemotherapy is not biomarker-restricted. Castrate testosterone (below 50 ng/dL) must be maintained with ongoing ADT. Per Standard Guidelines (NCCN), Prostate Cancer, Systemic Therapy for M1 CRPC (PROS-18) and Discussion."
+  },
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "category 1, preferred taxane option after exposure to docetaxel and an ARPI in metastatic castration-resistant prostate cancer (post-docetaxel)",
+  "eligibilityCriteria": [
+    { "criterion": "diseaseState", "requirement": "metastatic castration-resistant prostate cancer previously treated with a docetaxel-containing regimen (and typically a prior ARPI), on ongoing ADT", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, Discussion, prostate line 7451 to 7456 (CARD; cabazitaxel category 1 preferred after docetaxel and an ARPI); PROS-18 (Cabazitaxel category 1, Post-ARPI/Post-Docetaxel), prostate line 1779" },
+    { "criterion": "castrationBackbone", "requirement": "ongoing ADT (orchiectomy, LHRH agonist, or LHRH antagonist)", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-G, prostate line 3003" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cabazitaxel",
+        "name": "Cabazitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "Discussion, prostate line 7454 (CARD: cabazitaxel at 25 mg/m2 with concurrent steroid); prostate line 7463 (PROSELICA compared 20 mg/m2 with 25 mg/m2; panel recommends 20 mg/m2 every 3 weeks for fit patients, 25 mg/m2 for healthy patients opting for more aggressive treatment)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026 Discussion, prostate lines 7454 and 7463. Cabazitaxel 25 mg/m2 IV on day 1 of a 21-day cycle with a concurrent daily steroid (TROPIC/CARD approved dose). ALTERNATIVE lower dose: 20 mg/m2 every 3 weeks is source-recommended as the preferred starting dose for fit patients (PROSELICA noninferior for overall survival, less toxicity; prostate line 7463); both 20 and 25 mg/m2 are source-stated starting doses. A biweekly 16 mg/m2 regimen with prophylactic G-CSF is a source-stated option for patients 65 years or older (CABASTY, prostate line 547)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      { "name": "Premedication for cabazitaxel (hypersensitivity)", "notes": "Prophylactic antihistamine, H2 antagonist, and corticosteroid before infusion per labeling (prostate lines 7466 to 7468); specific doses not enumerated in the provided extract." },
+      { "name": "Antiemetic prophylaxis", "notes": "Provide per emetogenic-risk tier on the day of chemotherapy." }
+    ],
+    "supportiveCare": [
+      "concurrent steroid: cabazitaxel should be given with concurrent steroids (daily prednisone or dexamethasone on the day of chemotherapy) per prostate line 7466; the specific corticosteroid milligram dose is not enumerated in the provided extract, so the steroid is described here rather than modeled as a dosed drug (no invented dose).",
+      "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+      "cycles null: standard is every 3 weeks; total cycle count is individualized (not fixed in the provided extract).",
+      "G-CSF: prophylactic white-blood-cell growth factor per current guidelines, particularly in this heavily pretreated population (higher febrile-neutropenia risk); mandatory with the 16 mg/m2 biweekly option."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle (high neutropenia/febrile-neutropenia risk)",
+    "hepatic and renal function",
+    "PSA and serum testosterone (confirm castrate level)",
+    "diarrhea, fatigue, and hypersensitivity"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "renal", "castrate testosterone maintained", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia, febrile neutropenia, or grade 3 or higher diarrhea", "drug": "cabazitaxel", "action": "hold/reduce", "text": "Hold and dose-reduce cabazitaxel per labeling (e.g., 25 to 20 mg/m2); add or intensify G-CSF; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "cabazitaxel improves survival in mCRPC after docetaxel (TROPIC); PROSELICA established noninferiority of 20 mg/m2 versus 25 mg/m2", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "PROS-18 (Cabazitaxel category 1, Post-ARPI/Post-Docetaxel), prostate line 1779; Discussion (TROPIC/CARD cabazitaxel 25 mg/m2 with concurrent steroid, prostate lines 7454, 7422; PROSELICA 20 vs 25 mg/m2 and panel-recommended 20 mg/m2 for fit patients, prostate line 7463; concurrent steroid requirement, prostate line 7466; CABASTY 16 mg/m2 biweekly for age >= 65, prostate line 547)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for cabazitaxel plus a concurrent steroid in post-docetaxel metastatic castration-resistant prostate cancer (disease #54 mCRPC). The cabazitaxel dose (25 mg/m2 IV every 3 weeks, the TROPIC/CARD approved dose) is dose-grounded to Standard Guidelines (NCCN) Prostate v6.2026 Discussion (prostate lines 7454, 7422); the source-recommended lower starting dose of 20 mg/m2 every 3 weeks for fit patients (PROSELICA noninferior) and the 16 mg/m2 biweekly option for patients 65 or older (CABASTY) are captured in the drug note (prostate lines 7463, 547). The mandatory concurrent steroid (daily prednisone or dexamethasone) is source-stated (prostate line 7466) but its milligram dose is not enumerated in the provided extract, so it is described in supportiveCare rather than modeled as a dosed drug (no dose invented, no VERIFY). cycleLengthDays 21 is source-stated; cycles is null (individualized). Ongoing ADT to maintain castrate testosterone below 50 ng/dL is required. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

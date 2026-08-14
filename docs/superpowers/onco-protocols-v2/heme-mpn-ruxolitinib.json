@@ -1,0 +1,73 @@
+{
+  "id": "heme-mpn-ruxolitinib",
+  "name": "Ruxolitinib (myelofibrosis; and PV resistant to or intolerant of hydroxyurea)",
+  "disease": "Myelofibrosis (primary, post-polycythemia-vera, or post-essential-thrombocythemia); and polycythemia vera resistant to or intolerant of hydroxyurea",
+  "diseaseId": "myeloproliferative_neoplasms",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "JAK2_CALR_MPL": "driver mutation (diagnostic)",
+    "note": "MPN diagnosis uses driver-mutation testing (JAK2, then CALR and MPL if JAK2-negative). Ruxolitinib is a JAK1/JAK2 inhibitor and is effective regardless of JAK2 mutation status; driver mutations are used for diagnosis and prognosis, not as a treatment gate. Per Standard Guidelines (NCCN), Myeloproliferative Neoplasms v2.2026."
+  },
+  "treatmentSetting": "myelofibrosis with symptomatic splenomegaly or constitutional symptoms (intermediate- and high-risk); and polycythemia vera after inadequate response to or intolerance of hydroxyurea",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [
+    { "criterion": "clinical", "requirement": "myelofibrosis with symptomatic splenomegaly and/or disease-related symptoms", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "locator": "v2.2026, myelofibrosis treatment pages and MS-15 to MS-17 (ruxolitinib for MF)" },
+    { "criterion": "alternative indication", "requirement": "polycythemia vera with inadequate response to or intolerance of hydroxyurea", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "locator": "v2.2026, footnote n (ruxolitinib FDA-approved for PV after inadequate response/intolerance to hydroxyurea); MS-17 (PV starting dose 10 mg twice daily)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "ruxolitinib",
+        "name": "Ruxolitinib",
+        "basis": "flat",
+        "dosePerUnit": 20,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "version": "2.2026", "date": null, "locator": "MS-16 (myelofibrosis: starting dose based on baseline platelet count, 15 mg twice daily for platelets 100 to 200 x 10^9/L and 20 mg twice daily for platelets above 200 x 10^9/L); MS-17 (PV: maximum safe starting dose 10 mg twice daily)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Myeloproliferative Neoplasms v2.2026. Myelofibrosis starting dose is platelet-count based (COMFORT trials): 20 mg PO twice daily for platelet count above 200 x 10^9/L, and 15 mg PO twice daily for platelet count 100 to 200 x 10^9/L; a lower starting dose (for example 5 mg twice daily, or 10 mg/day for platelets 50 to 100 x 10^9/L) is used for lower platelet counts, with escalation. dosePerUnit 20 mg is the single-administration dose for the platelet-above-200 stratum given twice daily; see doseModificationRules for the platelet strata. For polycythemia vera resistant to or intolerant of hydroxyurea, the starting dose is 10 mg twice daily (MS-17). Days 1 to 28 represents continuous twice-daily dosing. Do not stop abruptly (withdrawal risk); taper if discontinuing."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Ruxolitinib-associated anemia and thrombocytopenia are common and dose-limiting; manage with dose modification and RBC transfusion rather than early discontinuation.",
+      "Do not discontinue abruptly; taper to avoid a symptom-rebound (withdrawal) reaction.",
+      "Screen for and monitor infections (including reactivation risks) given JAK inhibition."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential (platelet count guides both starting dose and dose adjustment; watch for anemia and thrombocytopenia)",
+    "spleen size and MPN symptom score (for example MPN-SAF TSS) to assess response",
+    "infection surveillance"
+  ],
+  "clearanceChecks": ["CBC/platelets (dose-determining)", "hepatic", "renal", "infection screen"],
+  "doseModificationRules": [
+    { "condition": "myelofibrosis, baseline platelet count 100 to 200 x 10^9/L", "drug": "ruxolitinib", "action": "set starting dose", "text": "Start ruxolitinib 15 mg twice daily (MS-16)." },
+    { "condition": "myelofibrosis, baseline platelet count above 200 x 10^9/L", "drug": "ruxolitinib", "action": "set starting dose", "text": "Start ruxolitinib 20 mg twice daily (MS-16)." },
+    { "condition": "myelofibrosis, lower baseline platelet count (for example 50 to 100 x 10^9/L)", "drug": "ruxolitinib", "action": "set starting dose", "text": "Use a lower starting dose (for example 5 mg twice daily, or a total of 10 mg/day) with cautious escalation (MS-16/MS-17). Physician decides." },
+    { "condition": "polycythemia vera resistant to or intolerant of hydroxyurea", "drug": "ruxolitinib", "action": "set starting dose", "text": "Start ruxolitinib 10 mg twice daily (MS-17)." },
+    { "condition": "grade 3 to 4 thrombocytopenia or anemia", "drug": "ruxolitinib", "action": "hold/reduce", "text": "Interrupt or reduce dose per prescribing information for significant cytopenias; support with transfusion. Physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myeloproliferative Neoplasms", "version": "2.2026", "date": "2026-06-16", "locator": "MS-15 to MS-16 (myelofibrosis platelet-based ruxolitinib starting dose: 15 mg twice daily for platelets 100 to 200 x 10^9/L, 20 mg twice daily for platelets above 200 x 10^9/L; COMFORT trials); MS-17 (PV maximum safe starting dose 10 mg twice daily); footnote n (ruxolitinib FDA-approved for PV after inadequate response/intolerance to hydroxyurea); driver-mutation testing (JAK2, CALR, MPL)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent", "lineOfTherapy"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for ruxolitinib (a JAK1/JAK2 inhibitor). Primary indication is myelofibrosis with symptomatic splenomegaly or constitutional symptoms; the starting dose is platelet-count based per Standard Guidelines (NCCN), Myeloproliferative Neoplasms v2.2026, MS-15 to MS-16: 20 mg twice daily for platelet count above 200 x 10^9/L and 15 mg twice daily for platelet count 100 to 200 x 10^9/L (from the COMFORT trials), with lower starting doses for lower platelet counts. dosePerUnit is set to 20 mg (platelet-above-200 stratum) with the full platelet strata captured in doseModificationRules. The secondary indication, polycythemia vera resistant to or intolerant of hydroxyurea, uses a 10 mg twice-daily start (MS-17, footnote n). Modeled as continuous twice-daily oral therapy (cycleLengthDays 28 for reporting, cycles null, days 1 to 28 = continuous). Biomarker context: JAK2, CALR and MPL are diagnostic; ruxolitinib works regardless of JAK2 status. histology, treatmentIntent and lineOfTherapy are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

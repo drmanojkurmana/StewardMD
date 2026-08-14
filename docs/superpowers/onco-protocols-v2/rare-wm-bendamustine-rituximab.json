@@ -1,0 +1,108 @@
+{
+  "id": "rare-wm-bendamustine-rituximab",
+  "name": "Bendamustine + Rituximab (BR) - Waldenstrom macroglobulinemia",
+  "disease": "Waldenstrom macroglobulinemia / lymphoplasmacytic lymphoma",
+  "diseaseId": "waldenstrom_macroglobulinemia",
+  "histology": "lymphoplasmacytic lymphoma with IgM monoclonal paraprotein; CD19+, CD20+, surface IgM+, usually CD5-/CD10-/CD23-",
+  "stage": [],
+  "biomarkers": {
+    "MYD88_L265P": "commonly present (not required for BR)",
+    "note": "MYD88 L265P is present in most WM/LPL and, together with CXCR4 mutation status, informs BTK-inhibitor selection - it does NOT gate the chemoimmunotherapy backbone. Bendamustine + rituximab is effective regardless of MYD88/CXCR4 status. Per Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL, v1.2027 and DeVita 12th ed. line 267648 (best ibrutinib responses in MYD88-mutated, CXCR4-wild-type)."
+  },
+  "treatmentSetting": ["primary therapy", "previously treated"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "a preferred chemoimmunotherapy option for both primary (treatment-naive) and previously treated symptomatic WM/LPL",
+  "eligibilityCriteria": [
+    { "criterion": "treatmentIndication", "requirement": "symptomatic disease (constitutional symptoms, cytopenias, symptomatic hyperviscosity, symptomatic lymphadenopathy/splenomegaly, or IgM-related complications); ~25% of patients have no initial indication for therapy", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 267625 to 267627" },
+    { "criterion": "hyperviscosity", "requirement": "for high IgM / hyperviscosity, use plasmapheresis before rituximab or initially withhold rituximab to avoid IgM-flare-driven hyperviscosity", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "locator": "line 126614" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "bendamustine",
+        "name": "Bendamustine",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV",
+        "infusionDuration": "IV infusion per labeling",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "version": "1.2027", "date": null, "locator": "Bendamustine + Rituximab as a preferred regimen for primary and previously treated WM/LPL (extract lines 481, 515); Rummel MJ, et al. (BR vs R-CHOP first-line, reference extract line 1824)", "evidenceStatus": "current" },
+        "notes": "DOSE NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY. Standard Guidelines (NCCN) WM v1.2027 name Bendamustine + Rituximab as a preferred regimen but print no mg/m2 dose in the extract, and DeVita/Harrison do not state a WM-specific bendamustine dose. Days 1 and 2 reflect the standard BR schedule (per-cycle), shown pending dose verification. The commonly used bendamustine 90 mg/m2 on days 1 and 2 every 4 weeks (Rummel BR) must be VERIFIED against a cited dosing source before use. Bendamustine + rituximab produces high, durable response rates in WM (DeVita line 267639, alkylator response rates >80%)."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "line 385777 (rituximab 375 mg/m2 once a week for 4 weeks - dose value)", "evidenceStatus": "unknown" },
+        "notes": "Rituximab dose VALUE 375 mg/m2 sourced to Harrison 22nd ed. line 385777; in BR it is given on day 1 of each cycle (standard scheduling). IgM FLARE CAUTION: rituximab can transiently raise serum IgM and precipitate/worsen hyperviscosity - use plasmapheresis before rituximab or withhold rituximab initially in high-IgM patients (Harrison line 126614; DeVita line 267632). Screen hepatitis B before rituximab (NCCN WM workup, extract line 215)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "acetaminophen and antihistamine per standard rituximab labeling" }
+    ],
+    "supportiveCare": [
+      "PJP (Pneumocystis jirovecii) prophylaxis should be considered for patients receiving bendamustine/rituximab (NCCN WM v1.2027, extract line 437).",
+      "Hepatitis B screening before rituximab - reactivation risk (NCCN WM workup, extract line 215).",
+      "Plasmapheresis before rituximab or initial rituximab withholding in high-IgM / hyperviscosity patients to avoid IgM flare (Harrison line 126614; DeVita line 267632)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle - bendamustine myelosuppression",
+    "Serum IgM / quantitative immunoglobulins and viscosity - IgM flare with rituximab",
+    "Hepatitis B viral status - reactivation with rituximab",
+    "Infection surveillance - bendamustine/rituximab immunosuppression"
+  ],
+  "clearanceChecks": ["CBC/platelets", "hepatitis B status", "serum IgM / viscosity", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "high IgM / hyperviscosity risk", "drug": "rituximab", "action": "withhold/plasmapherese", "text": "Use plasmapheresis before rituximab or withhold rituximab initially to prevent IgM-flare hyperviscosity (Harrison line 126614). Clinical review required." },
+    { "condition": "hepatitis B positive/at risk", "action": "prophylax/monitor", "text": "Antiviral prophylaxis and monitoring per hepatitis B status before rituximab. Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 267624 to 267639 (WM/LPL treatment; chemoimmunotherapy has replaced single agents; alkylators including bendamustine have response rates >80%); line 267632 (rituximab IgM flare)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "locator": "line 385777 (rituximab 375 mg/m2 weekly x 4 - dose value); line 126614 (rituximab IgM flare, use plasmapheresis before rituximab); lines 126602 to 126604 (alkylators bendamustine/cyclophosphamide plus rituximab as first-line for symptomatic WM)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Bendamustine + Rituximab preferred for primary therapy (extract line 481) and previously treated disease (extract line 515); PJP prophylaxis for bendamustine/rituximab (extract line 437); hepatitis B testing if rituximab planned (extract line 215); Rummel MJ, et al. BR vs R-CHOP first-line (reference, extract line 1824)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for bendamustine + rituximab (BR), a preferred chemoimmunotherapy regimen for primary and previously treated Waldenstrom macroglobulinemia/LPL. Regimen identity and preferred status are grounded in Standard Guidelines (NCCN) WM v1.2027 (extract lines 481, 515) and DeVita 12th ed. (lines 267624 to 267639). The rituximab dose value (375 mg/m2) is sourced to Harrison 22nd ed. line 385777. The bendamustine DOSE is set to VERIFY: neither the NCCN extract nor DeVita/Harrison state a WM-specific bendamustine mg/m2 dose, so the commonly used 90 mg/m2 days 1 and 2 (Rummel BR) is not asserted and must be verified; cycleLengthDays and cycles are likewise VERIFY. Safety captured: PJP prophylaxis for BR (NCCN extract line 437), hepatitis B screening before rituximab (extract line 215), and the rituximab IgM-flare/hyperviscosity caution with plasmapheresis (Harrison line 126614; DeVita line 267632). MYD88/CXCR4 does not gate this backbone. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

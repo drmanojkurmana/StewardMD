@@ -1,0 +1,84 @@
+{
+  "id": "rare-castleman-siltuximab",
+  "name": "Siltuximab (anti-IL-6, idiopathic multicentric Castleman disease)",
+  "disease": "Idiopathic multicentric Castleman disease (iMCD)",
+  "diseaseId": "castleman_disease_multicentric",
+  "histology": "multicentric Castleman disease, idiopathic (HHV8-negative, HIV-1-negative); plasmacytic or mixed variant",
+  "stage": [],
+  "biomarkers": {
+    "HHV8": "negative",
+    "HIV1": "negative",
+    "IL6": "elevated (driver cytokine)",
+    "note": "Siltuximab (a chimeric anti-IL-6 monoclonal antibody) is used for idiopathic multicentric Castleman disease that is HHV8-negative AND HIV-1-negative. iMCD is driven by excess interleukin-6 (IL-6) and related cytokines; elevated IL-6, sIL-2R, VEGF, IgA, IgE, LDH, and/or beta-2-microglobulin are supportive. Per Standard Guidelines (NCCN), Castleman Disease, v2.2026 (extract lines 170, 183, 729 to 730, 789 to 793) and Harrison 22nd ed. line 86016 (siltuximab, a chimeric anti-IL-6 monoclonal antibody)."
+  },
+  "treatmentSetting": "first-line (preferred) for iMCD",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line preferred treatment for HHV8-negative/HIV-1-negative idiopathic multicentric Castleman disease, particularly for inflammatory/cytokine-driven symptoms; early chemoimmunotherapy is recommended for progressive organ dysfunction",
+  "eligibilityCriteria": [
+    { "criterion": "virology", "requirement": "HHV8-negative and HIV-1-negative (idiopathic MCD)", "source": "Standard Guidelines (NCCN), Castleman Disease", "locator": "v2.2026, extract lines 170, 789 to 793" },
+    { "criterion": "diseasePhenotype", "requirement": "idiopathic MCD with primarily inflammatory symptoms (iMCD-NOS or iMCD-TAFRO); rule out mimics per exclusion criteria", "source": "Standard Guidelines (NCCN), Castleman Disease", "locator": "v2.2026, extract lines 597 to 603, exclusion criteria CD-B" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "siltuximab",
+        "name": "Siltuximab",
+        "basis": "mgkg",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV infusion; repeated on a fixed interval (see notes)",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Castleman Disease", "version": "2.2026", "date": null, "locator": "Siltuximab preferred for iMCD if HIV-1-negative/HHV8-negative (extract lines 170, 183, 729 to 730, 789 to 793); mechanism per van Rhee F, et al. Lancet Oncol 2014;15:966 (reference, extract line 839)", "evidenceStatus": "current" },
+        "notes": "Siltuximab is the PREFERRED anti-IL-6 agent for iMCD. DOSE NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY. Standard Guidelines (NCCN) Castleman Disease v2.2026 name siltuximab as preferred but print no mg/kg dose in the extract, and Harrison/DeVita reference siltuximab only by class (Harrison line 86016; DeVita line 281256) without a dose. The commonly used regimen (siltuximab 11 mg/kg IV over 1 hour every 3 weeks, per the van Rhee 2014 phase 3 trial) must be VERIFIED against a cited dosing source before use. Tocilizumab (anti-IL-6R) is a source-stated alternative if siltuximab is unavailable (NCCN footnote, extract line 809). Monitor organ function; if stable continue siltuximab, and escalate early to chemoimmunotherapy for progressive organ dysfunction (NCCN footnote b, extract lines 185, 755)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Monitor organ function on siltuximab; early intervention with chemoimmunotherapy for progressive organ dysfunction (NCCN footnote b, extract lines 185, 755).",
+      "Tocilizumab is an appropriate alternative if siltuximab is in shortage or unavailable (NCCN footnote, extract line 809)."
+    ]
+  },
+  "monitoring": [
+    "Inflammatory markers (CRP, ESR) and IL-6-associated labs (sIL-2R, VEGF, ferritin) - response",
+    "Organ function (renal, hepatic, hematologic) - progression to chemoimmunotherapy if worsening",
+    "Anemia and acute-phase response resolution"
+  ],
+  "clearanceChecks": ["HHV8-negative confirmed", "HIV-1-negative confirmed", "organ function", "infection status"],
+  "doseModificationRules": [
+    { "condition": "progressive organ dysfunction on siltuximab", "action": "escalate", "text": "Escalate early to chemoimmunotherapy for progressive organ dysfunction (NCCN Castleman footnote b). Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "locator": "line 86016 (siltuximab, a chimeric anti-IL-6 monoclonal antibody); line 62063 (Castleman's disease in the context of IL-6-driven disorders)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Castleman Disease",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Siltuximab preferred for iMCD if HIV-1-negative/HHV8-negative for primarily inflammatory symptoms (extract lines 170, 183, 729 to 730, 789 to 793, 516); monitor organ function / early chemoimmunotherapy if progressive (footnote b, extract lines 185, 755); tocilizumab alternative if siltuximab unavailable (extract line 809); van Rhee F, et al. Lancet Oncol 2014;15:966 (reference, extract line 839)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for siltuximab, the preferred anti-IL-6 therapy for idiopathic multicentric Castleman disease (HHV8-negative, HIV-1-negative). Regimen identity, preferred status, virologic eligibility, IL-6 driver biology, and the monitor-organ-function / early-chemoimmunotherapy escalation rule are grounded in Standard Guidelines (NCCN) Castleman Disease v2.2026 (extract lines 170, 183, 516, 729 to 730, 755, 789 to 793) and Harrison 22nd ed. (line 86016). The siltuximab DOSE is set to VERIFY: the provided sources name siltuximab but do not print a mg/kg dose or interval, and no invented value is used. The widely used 11 mg/kg IV every 3 weeks (van Rhee 2014 phase 3, referenced at extract line 839) must be verified against a cited dosing source before activation; cycleLengthDays and cycles are likewise VERIFY. Tocilizumab is a source-stated alternative. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

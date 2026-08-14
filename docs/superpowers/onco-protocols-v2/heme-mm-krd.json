@@ -1,0 +1,100 @@
+{
+  "id": "heme-mm-krd",
+  "name": "Carfilzomib + Lenalidomide + Dexamethasone (KRd)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "KRd is a proteasome-inhibitor/IMiD triplet and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS), not access to KRd. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "primary therapy for newly diagnosed multiple myeloma (Other Recommended) and therapy for previously treated (relapsed) multiple myeloma",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (Other Recommended) and a category 1 option for previously treated / relapsed multiple myeloma",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "multiple myeloma requiring systemic therapy (newly diagnosed or relapsed)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G (Carfilzomib/Lenalidomide/Dexamethasone; category 1 for previously treated disease)" },
+    { "criterion": "cardiac", "requirement": "baseline cardiovascular assessment; caution with carfilzomib in cardiac failure/ischemia", "source": "DeVita, Cancer PPO 12th ed.", "locator": "Chapter 74 (carfilzomib cardiac toxicity in a small proportion of patients)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carfilzomib",
+        "name": "Carfilzomib",
+        "basis": "bsa",
+        "dosePerUnit": 27,
+        "unit": "mg/m2",
+        "days": [1, 2, 8, 9, 15, 16],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, KRd entry, line 286325 (Carfilzomib 20 mg/m2 (Cycle 1, day 1 and 2) and 27 mg/m2 (subsequent doses) IV on days 1, 2, 8, 9, 15, and 16)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286325). Carfilzomib is given at a reduced starting dose of 20 mg/m2 IV on Cycle 1 days 1 and 2, then escalated to 27 mg/m2 IV for all subsequent doses, on days 1, 2, 8, 9, 15, and 16 of a 28-day cycle (twice weekly). dosePerUnit reflects the 27 mg/m2 steady-state dose; the 20 mg/m2 Cycle 1 day 1 to 2 ramp is taken exactly as printed. A once-weekly 56 mg/m2 schedule (days 1, 8, 15; Cycle 1 day 1 = 20 mg/m2) is a source-stated alternative (Table 74.6 footnote b, line 286436). Ensure hydration and baseline cardiac assessment (carfilzomib cardiac/hypertension risk)."
+      },
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 25,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, KRd entry, line 286326 (Lenalidomide 25 mg PO on days 1-21)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286326). Lenalidomide 25 mg PO on days 1 to 21 of a 28-day cycle. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen); reduce for renal impairment per CrCl."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": 40,
+        "unit": "mg",
+        "days": [1, 8, 15],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, KRd entry, line 286327 (Dexamethasone 40 mg orally on days 1, 8, and 15)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286327). Dexamethasone 40 mg PO on days 1, 8, and 15 of a 28-day cycle. Dose taken exactly as the source prints it."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "Carfilzomib hydration", "notes": "IV hydration before and after carfilzomib in early cycles to reduce tumor lysis/renal risk; dexamethasone premedication reduces infusion reactions." }
+    ],
+    "supportiveCare": [
+      "Carfilzomib: baseline and on-treatment cardiovascular monitoring (heart failure, hypertension, ischemia); hydration; VZV antiviral prophylaxis (proteasome inhibitor).",
+      "Lenalidomide: VTE thromboprophylaxis and REMS-program dispensing (teratogen); adjust for renal impairment.",
+      "Antiemetics: low emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide clearance; carfilzomib TLS risk)",
+    "blood pressure and cardiac symptoms (carfilzomib)",
+    "glucose and blood pressure (dexamethasone)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "cardiac status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "new or worsening cardiac failure, ischemia, or grade 3 to 4 hypertension", "drug": "carfilzomib", "action": "hold", "text": "Hold carfilzomib and evaluate cardiac function; resume at a reduced dose only after recovery per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6, p.1520, KRd entry (lines 286325 to 286328); once-weekly 56 mg/m2 alternative footnote b (line 286436)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G: Carfilzomib/Lenalidomide/Dexamethasone (Other Recommended primary therapy; category 1 for previously treated disease)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for KRd (carfilzomib + lenalidomide + dexamethasone) in multiple myeloma (#82). Every dose is sourced to DeVita 12th ed., Chapter 74, Table 74.6 (p.1520): carfilzomib 20 mg/m2 IV Cycle 1 days 1 to 2 then 27 mg/m2 for subsequent doses on days 1, 2, 8, 9, 15, 16 (line 286325); lenalidomide 25 mg PO days 1 to 21 (line 286326); dexamethasone 40 mg PO days 1, 8, 15 (line 286327); 28-day cycle. dosePerUnit for carfilzomib holds the 27 mg/m2 steady-state dose with the 20 mg/m2 Cycle 1 ramp captured in notes; a once-weekly 56 mg/m2 alternative is a source-stated option (footnote b, line 286436). Category status is sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G. Carfilzomib requires baseline and on-treatment cardiovascular monitoring; lenalidomide requires VTE prophylaxis and REMS. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

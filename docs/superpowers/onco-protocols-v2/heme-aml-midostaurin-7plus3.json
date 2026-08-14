@@ -1,0 +1,113 @@
+{
+  "id": "heme-aml-midostaurin-7plus3",
+  "name": "7+3 + Midostaurin (FLT3-mutated AML induction)",
+  "disease": "Acute myeloid leukemia (AML)",
+  "diseaseId": "acute_myeloid_leukemia",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "FLT3": "mutated (internal tandem duplication [ITD] or tyrosine kinase domain [TKD])",
+    "note": "Midostaurin is added to standard 7+3 for AML with a FLT3-ITD or FLT3-TKD mutation. FLT3 mutation testing is part of the diagnostic molecular workup. Per Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14 (regimen restricted to FLT3-ITD or TKD)."
+  },
+  "treatmentSetting": "induction (intensive)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line induction for newly diagnosed, intensive-induction-eligible AML with a FLT3-ITD or TKD mutation",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "FLT3-ITD or FLT3-TKD mutation present", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "locator": "v5.2026, AML-E 1 of 14 (Standard 7+3 + midostaurin, FLT3-ITD or TKD)" },
+    { "criterion": "fitness", "requirement": "eligible for intensive induction chemotherapy", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "locator": "v5.2026, AML-1/AML-2 (Intensive Induction Eligible)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cytarabine",
+        "name": "CYTARabine",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5, 6, 7],
+        "route": "continuous IV infusion",
+        "infusionDuration": "continuous over 24 hours per day",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 1 of 14 (Standard 7+3 + midostaurin regimen line)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14. Cytarabine 100 or 200 mg/m2 by continuous infusion for 7 days; 100 mg/m2/day used here as the lower stated value, 200 mg/m2/day is the alternative stated value. Confirm institutional standard."
+      },
+      {
+        "id": "daunorubicin",
+        "name": "DAUNOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [1, 2, 3],
+        "route": "IV",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 1 of 14 (Standard 7+3 + midostaurin regimen line)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14. Daunorubicin 60 mg/m2 IV on days 1 to 3. Alternative anthracycline is idarubicin 12 mg/m2 (either/or, not additive). Cumulative-lifetime cap values (450/550 mg/m2) are the conventional doxorubicin-equivalent anthracycline safety thresholds, not printed for daunorubicin in this source; verify institutional conversion before enforcing."
+      },
+      {
+        "id": "idarubicin",
+        "name": "IDArubicin",
+        "basis": "bsa",
+        "dosePerUnit": 12,
+        "unit": "mg/m2",
+        "days": [1, 2, 3],
+        "route": "IV",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 1 of 14 (Standard 7+3 + midostaurin regimen line)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14. Idarubicin 12 mg/m2 IV on days 1 to 3, as an alternative (either/or) to daunorubicin; only one anthracycline is given per cycle. Cumulative-lifetime cap values (450/550 mg/m2) are conventional doxorubicin-equivalent thresholds, not printed for idarubicin in this source; verify institutional conversion before enforcing."
+      },
+      {
+        "id": "midostaurin",
+        "name": "Midostaurin",
+        "basis": "flat",
+        "dosePerUnit": 50,
+        "unit": "mg",
+        "days": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 1 of 14 (Standard 7+3 + midostaurin regimen line: oral midostaurin 50 mg every 12 hours, days 8 to 21)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14. Midostaurin 50 mg PO every 12 hours (twice daily) on days 8 to 21, added to the 7+3 backbone. FLT3 inhibitor; take with food. dosePerUnit 50 mg is the single-administration dose given twice daily."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "High emetic risk regimen (anthracycline plus cytarabine): antiemetic prophylaxis per NCCN Antiemesis high-emetic-risk tier.",
+      "AML induction is conventionally high febrile-neutropenia risk: prophylactic support per NCCN Hematopoietic Growth Factors high-risk tier.",
+      "Patients with high blast counts are at risk for tumor lysis and leukostasis: TLS prophylaxis (hydration, allopurinol or uric-acid-lowering agent) and cytoreduction as indicated.",
+      "Midostaurin (an FLT3 inhibitor) can prolong the QT interval: baseline and on-treatment ECG/QTc and electrolyte monitoring are advised per drug labeling; review concurrent QT-prolonging drugs and strong CYP3A4 inhibitors."
+    ]
+  },
+  "monitoring": [
+    "CBC before induction and daily during induction (marrow aplasia expected)",
+    "cardiac assessment (anthracycline): baseline LVEF and as clinically indicated",
+    "ECG/QTc and electrolytes for midostaurin (QT prolongation risk)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "QTc/electrolytes", "FLT3 status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 non-hematologic toxicity or QT prolongation", "drug": "midostaurin", "action": "hold/reduce", "text": "Interrupt or reduce midostaurin per prescribing information for significant toxicity, including QT prolongation; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": "2026-07-15", "locator": "AML-E 1 of 14 (Principles of Systemic Therapy for AML, Intensive Induction Eligible: Standard 7+3 [daunorubicin or idarubicin] + midostaurin [FLT3-ITD or TKD]): cytarabine 100 or 200 mg/m2 continuous infusion x 7 days, daunorubicin 60 mg/m2 or idarubicin 12 mg/m2 x 3 days, oral midostaurin 50 mg every 12 hours days 8 to 21; FLT3 workup on AML-1", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for FLT3-mutated (ITD or TKD) AML: the standard 7+3 induction backbone plus midostaurin. Complements the existing aml-7-plus-3-induction protocol by adding the FLT3-inhibitor layer; the 7+3 backbone doses match that protocol. All four drug doses are grounded to a single locator, Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 1 of 14: cytarabine 100 or 200 mg/m2 continuous infusion for 7 days, daunorubicin 60 mg/m2 or idarubicin 12 mg/m2 for 3 days, and oral midostaurin 50 mg every 12 hours on days 8 to 21. daunorubicin and idarubicin are alternative anthracyclines (either/or, only one per cycle). histology is VERIFY (subtype beyond AML not established on the dosing page); cycleLengthDays and cycles are VERIFY because the induction page does not print a fixed cycle length or cycle count. QTc monitoring is added for midostaurin per drug-class safety. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

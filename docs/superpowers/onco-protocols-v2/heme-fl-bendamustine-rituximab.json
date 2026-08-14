@@ -1,0 +1,60 @@
+{
+  "id": "heme-fl-bendamustine-rituximab",
+  "name": "Bendamustine + Rituximab (BR) for follicular lymphoma",
+  "disease": "Follicular lymphoma",
+  "diseaseId": "follicular_lymphoma",
+  "histology": "follicular lymphoma (grade 1 to 3a)",
+  "stage": [],
+  "biomarkers": {
+    "CD20": "positive (required for rituximab)",
+    "note": "Bendamustine + rituximab is a chemoimmunotherapy backbone; rituximab requires CD20 positivity. Follicular lymphoma is typically CD10+, BCL2+, CD20+ (Standard Guidelines (NCCN), B-cell Lymphomas v4.2026, line 709 IHC panel; CD20 confirmation lines 253 to 254, 566)."
+  },
+  "treatmentSetting": "primary therapy for follicular lymphoma requiring systemic treatment (indications for treatment present)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (primary) therapy for follicular lymphoma with indications for treatment",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "CD20-positive follicular lymphoma with indications for treatment", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "locator": "v4.2026, Follicular Lymphoma FOLL-1 (line 92); treatment indication and anti-CD20 +/- chemotherapy (line 205)" }
+  ],
+  "regimen": {
+    "drugs": [
+      { "id": "bendamustine", "name": "Bendamustine", "basis": "bsa", "dosePerUnit": "VERIFY", "unit": "mg/m2", "days": [1, 2], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: bendamustine dose not printed in the provided DeVita/Harrison/NCCN extracts.", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. The BR bendamustine dose (conventionally 90 mg/m2 IV on days 1 and 2 of a 28-day cycle in indolent NHL) is not printed in the provided extracts. Verify dose before activation." },
+      { "id": "rituximab", "name": "Rituximab", "basis": "bsa", "dosePerUnit": 375, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "Harrison line 385777 (rituximab 375 mg/m2 once a week for 4 weeks) and line 120283 (usual dose 375 mg/m2 on day -1 before chemotherapy); DeVita line 323457.", "evidenceStatus": "unknown" }, "notes": "Source: Harrison lines 385777 and 120283; DeVita line 323457. Rituximab 375 mg/m2 IV on day 1 of each cycle. Requires CD20 positivity; infusion-reaction premedication and HBV screening before anti-CD20 therapy." }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Rituximab infusion premedication", "notes": "acetaminophen + antihistamine +/- corticosteroid before rituximab." }
+    ],
+    "supportiveCare": [
+      "First-line extended (maintenance) therapy: rituximab maintenance 375 mg/m2 one dose every 8 to 12 weeks for up to 2 years for patients treated with bendamustine + rituximab (Standard Guidelines (NCCN), B-cell Lymphomas v4.2026, line 278).",
+      "HBV screening and reactivation prophylaxis before anti-CD20 (rituximab).",
+      "PJP and antiviral (VZV) prophylaxis consideration (bendamustine causes prolonged lymphopenia).",
+      "Antiemetics: bendamustine moderate emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "lymphocyte count / infection surveillance (prolonged lymphopenia with bendamustine)",
+    "renal and hepatic function before each cycle",
+    "HBV serologies at baseline (anti-CD20)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "rituximab 375 mg/m2 lines 385777, 120283", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "version": "4.2026", "date": "2026-05-20", "locator": "Follicular Lymphoma FOLL-1 (line 92); treatment indication / anti-CD20 +/- chemotherapy (line 205); rituximab maintenance 375 mg/m2 q8-12wk up to 2y (line 278); CD20 lines 253 to 254, 566, 709", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for bendamustine + rituximab (BR) in follicular lymphoma (#76). Rituximab 375 mg/m2 (day 1) is dose-grounded (Harrison lines 385777 and 120283; DeVita line 323457) and the rituximab maintenance schedule (375 mg/m2 one dose every 8 to 12 weeks for up to 2 years after BR) is grounded to Standard Guidelines (NCCN), B-cell Lymphomas v4.2026 (line 278). Bendamustine dose is set to VERIFY: the BR bendamustine dose (conventionally 90 mg/m2 IV on days 1 and 2, 28-day cycle) is not printed in the provided DeVita/Harrison/NCCN extracts. Regimen role and CD20 requirement are grounded to NCCN v4.2026 (FOLL-1 line 92; CD20 lines 253 to 254, 566). Rituximab requires CD20 positivity, infusion premedication and HBV screening; bendamustine causes prolonged lymphopenia (consider PJP/VZV prophylaxis). Follicular lymphoma is generally not curable, so intent is palliative (disease control). This remains a StewardMD Standard Protocol; no endorsement implied." }

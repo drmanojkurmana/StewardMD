@@ -1,0 +1,103 @@
+{
+  "id": "breast-tc",
+  "name": "TC (DOCEtaxel / Cyclophosphamide)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC), invasive lobular carcinoma (ILC), and triple-negative breast cancer (TNBC))",
+  "stage": ["I", "II", "III"],
+  "biomarkers": {
+    "ER": "tested",
+    "PR": "tested",
+    "HER2": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "The non-anthracycline taxane/alkylator TC cytotoxic backbone is not biomarker-restricted; it is a preferred preoperative/adjuvant regimen across HR-positive/HER2-negative and HR-negative/HER2-negative (TNBC) early breast cancer and is often chosen to avoid anthracycline cardiotoxicity. ER, PR, and HER2 are tested to guide added endocrine therapy (HR-positive) and HER2-directed therapy (HER2-positive), not to select the TC backbone. Per Standard Guidelines (NCCN), Invasive Breast Cancer, Preoperative/Adjuvant Therapy Regimens (BINV-M 2 and 3 of 10; Preferred)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "adjuvant or neoadjuvant (preoperative) cytotoxic chemotherapy for early-stage/operable breast cancer; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "diseaseSetting", "requirement": "HER2-negative early breast cancer for which adjuvant or neoadjuvant chemotherapy is indicated; a preferred non-anthracycline backbone", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 2 and 3 of 10 (Preferred); BINV-N" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "docetaxel",
+        "name": "DOCEtaxel",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": "2026-07-29", "locator": "BINV-M 5 of 10, TC (DOCEtaxel/Cyclophosphamide) (dosing), references 2 (US Oncology 9735) and 3 (WSG PlanB)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. DOCEtaxel 75 mg/m2 IV day 1, cycled every 21 days for 4 to 6 cycles, with myeloid growth factor support (footnote n). ISMP tall-man."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": "2026-07-29", "locator": "BINV-M 5 of 10, TC (DOCEtaxel/Cyclophosphamide) (dosing), references 2 and 3", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. Cyclophosphamide 600 mg/m2 IV day 1, cycled every 21 days for 4 to 6 cycles, with myeloid growth factor support (footnote n)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "4 to 6",
+    "premedications": [
+      { "name": "DOCEtaxel premedication", "notes": "corticosteroid premedication per docetaxel labeling to reduce fluid retention and hypersensitivity; give before docetaxel. Confirm exact schedule against institutional order set." },
+      { "name": "Antiemetic prophylaxis", "notes": "select antiemetic prophylaxis per the NCCN emetic-risk framework (Appendix D). The exact per-regimen tier is designated in the NCCN Antiemesis guideline / order template (not established in the provided sources)." }
+    ],
+    "supportiveCare": [
+      "G-CSF / myeloid growth factor support: all cycles are given with myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n.",
+      "Antiemetics: DOCEtaxel plus cyclophosphamide; prophylaxis per NCCN emetic-risk framework (Appendix D). Specific tier per NCCN Antiemesis order template.",
+      "Peripheral neuropathy: monitor (DOCEtaxel); consider limb cooling per BINV-M 1 of 10."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "liver and renal function before each cycle",
+    "peripheral neuropathy assessment (DOCEtaxel)",
+    "fluid retention / edema assessment (DOCEtaxel)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Chapter 53 establishes docetaxel plus cyclophosphamide as an option superior to AC and a strategy to spare anthracycline exposure (lines 185216 to 185226); per-drug doses not tabulated.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": "2026-07-29",
+        "locator": "Dosing: Preoperative/Adjuvant Therapy Regimens, HER2-Negative, TC (DOCEtaxel/Cyclophosphamide) (BINV-M 5 of 10, references 2 US Oncology 9735 and 3 WSG PlanB); Preferred listing BINV-M 2 and 3 of 10; myeloid growth factor footnote n; setting/selection BINV-N",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the preferred non-anthracycline breast backbone TC (DOCEtaxel/cyclophosphamide). Histology-agnostic across invasive ductal (#1), invasive lobular (#2), and triple-negative (#3) breast cancer; not biomarker-restricted. DeVita 12th ed. establishes docetaxel plus cyclophosphamide as an option superior to AC (Chapter 53, lines 185216 to 185226) but does NOT tabulate per-drug doses; therefore every numeric dose here is sourced to Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 5 of 10 (TC), with locators per drug: DOCEtaxel 75 mg/m2 IV day 1 and cyclophosphamide 600 mg/m2 IV day 1, cycled every 21 days for 4 to 6 cycles (cycle count recorded as the source-stated range). Myeloid growth factor (G-CSF) support is given with all cycles (BINV-M footnote n). ISMP tall-man applied (DOCEtaxel). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

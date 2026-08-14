@@ -1,0 +1,102 @@
+{
+  "id": "gi-ampullary",
+  "name": "Gemcitabine + CISplatin (pancreatobiliary/mixed-type ampullary adenocarcinoma)",
+  "disease": "Ampullary (ampulla of Vater) adenocarcinoma",
+  "diseaseId": null,
+  "histology": "pancreatobiliary-type or mixed-type ampullary adenocarcinoma",
+  "stage": ["resected (adjuvant)", "locally advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "subtype": "pancreatobiliary or mixed",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Ampullary systemic therapy is stratified by histologic subtype (intestinal vs pancreatobiliary vs mixed). This protocol covers the PANCREATOBILIARY and MIXED subtypes, which per Standard Guidelines (NCCN) Ampullary Adenocarcinoma v2.2026 are treated with the same regimens as biliary tract cancer (cisplatin/gemcitabine among them). INTESTINAL-type ampullary cancer is treated per colon-cancer regimens (CAPEOX, FOLFOX, FOLFIRINOX/FOLFIRI) and is NOT modeled here - see the colorectal protocols. The cytotoxic backbone is not biomarker-restricted; NTRK gene fusion (entrectinib/larotrectinib/repotrectinib) and MSI-H/dMMR (nivolumab, intestinal type) are tested to identify targeted or immunotherapy options and do NOT gate this backbone. Per Standard Guidelines (NCCN), Ampullary Adenocarcinoma v2.2026, Principles of Systemic Therapy (AMP-E)."
+  },
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line for pancreatobiliary/mixed-type ampullary adenocarcinoma; treated per biliary tract cancer regimens. Also an adjuvant option (adjuvant therapy up to approximately 6 months).",
+  "eligibilityCriteria": [
+    { "criterion": "histologicSubtype", "requirement": "pancreatobiliary-type or mixed-type ampullary adenocarcinoma (report subtype as intestinal, pancreatobiliary, or mixed). Pancreatobiliary/mixed type is treated per the biliary tract cancer regimens.", "source": "Standard Guidelines (NCCN), Ampullary Adenocarcinoma", "locator": "v2.2026, Principles of Pathologic Review (report subtype); Principles of Systemic Therapy General Principles (AMP-E), lines 1387 to 1394 (pancreatobiliary/mixed type per Hepatobiliary/biliary guideline) and Cisplatin/Gemcitabine listed for pancreatobiliary/mixed type (AMP-E 1 of 11 line 1432; AMP-E 2 of 11 line 1479)" },
+    { "criterion": "cisplatinEligibility", "requirement": "adequate renal function and fitness for cisplatin and hydration. If cisplatin-ineligible, carboplatin may be substituted (per biliary tract cancer principles).", "source": "Standard Guidelines (NCCN), Biliary Tract Cancers", "locator": "v1.2026, Principles of Systemic Therapy (BIL-C), footnote g (carboplatin substitution if cisplatin-ineligible)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37: gemcitabine 1,000 mg/m2 + cisplatin 25 mg/m2 IV days 1 and 8 every 21 days; UK-ABC-02 biliary backbone applied to pancreatobiliary ampullary per NCCN AMP-E)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02 biliary gemcitabine/cisplatin). Applied to pancreatobiliary/mixed-type ampullary adenocarcinoma because NCCN Ampullary v2.2026 (AMP-E lines 1387 to 1394; Cisplatin/Gemcitabine at AMP-E line 1432 and 1479) directs pancreatobiliary/mixed ampullary to the biliary tract cancer regimens. Gemcitabine 1,000 mg/m2 IV on days 1 and 8 of a 21-day cycle."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37: cisplatin 25 mg/m2 IV days 1 and 8 every 21 days; UK-ABC-02)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02). CISplatin 25 mg/m2 IV on days 1 and 8 of a 21-day cycle. ISMP tall-man (CISplatin). Requires pre- and post-hydration; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy. If cisplatin-ineligible, carboplatin may be substituted per NCCN BIL-C footnote g."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "up to 8 cycles (a maximum of 6 months of therapy per UK-ABC-02, DeVita lines 114828 to 114829; adjuvant therapy for ampullary cancer is up to approximately 6 months per NCCN AMP-E)",
+    "premedications": [
+      { "name": "Cisplatin hydration", "notes": "pre- and post-cisplatin IV hydration to prevent nephrotoxicity." },
+      { "name": "Antiemetic prophylaxis", "notes": "cisplatin is highly emetogenic; give guideline-tier antiemetic prophylaxis before each cisplatin dose." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: cisplatin-based, high emetogenic risk on days 1 and 8; prophylaxis required.",
+      "Cisplatin hydration protocol; monitor renal function, magnesium, and electrolytes.",
+      "Audiometry/neuropathy assessment as clinically indicated (cisplatin oto- and neurotoxicity)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each dose (days 1 and 8) - myelosuppression",
+    "renal function, magnesium, and electrolytes before each cisplatin dose",
+    "peripheral neuropathy and hearing assessment - cisplatin",
+    "liver function"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "myelosuppression or renal impairment on day 1 or day 8", "action": "hold/reduce", "text": "Review required; hold or reduce per protocol for cytopenias or rising creatinine. Consider carboplatin substitution if cisplatin-ineligible. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 37 Cancer of the Biliary Tree, lines 114827 to 114829 (UK-ABC-02 gemcitabine 1,000 mg/m2 + cisplatin 25 mg/m2 IV days 1 and 8 every 21 days), applied to pancreatobiliary/mixed-type ampullary per the NCCN ampullary cross-reference to biliary regimens.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Ampullary Adenocarcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (AMP-E) General Principles (lines 1387 to 1394): systemic therapy depends on histologic subtype; pancreatobiliary/mixed type follows the NCCN Hepatobiliary (biliary tract cancer) regimens and intestinal type follows the NCCN Colon Cancer regimens. Cisplatin/Gemcitabine listed for pancreatobiliary/mixed type (AMP-E 1 of 11 line 1432; AMP-E 2 of 11 line 1479). Adjuvant therapy up to approximately 6 months. The guideline lists regimens by name and prints no per-mg dose; the dose is grounded to the DeVita/biliary core layer.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for pancreatobiliary/mixed-type ampullary (ampulla of Vater) adenocarcinoma (#26), modeled as gemcitabine plus cisplatin. Ampullary systemic therapy is stratified by histologic subtype: per Standard Guidelines (NCCN) Ampullary Adenocarcinoma v2.2026 Principles of Systemic Therapy (AMP-E, lines 1387 to 1394), pancreatobiliary/mixed-type ampullary cancer is treated with the biliary tract cancer regimens (Cisplatin/Gemcitabine is explicitly listed, AMP-E 1 of 11 line 1432 and 2 of 11 line 1479), while intestinal-type ampullary cancer is treated per colon-cancer regimens (CAPEOX, FOLFOX, FOLFIRINOX/FOLFIRI) and is NOT modeled here (see the colorectal protocols). The gemcitabine (1,000 mg/m2) and cisplatin (25 mg/m2) doses on days 1 and 8 of a 21-day cycle are grounded to DeVita 12th ed. Ch. 37 (lines 114827 to 114829, UK-ABC-02 biliary backbone). diseaseId is null because the kb/reference set contains ampullary_adenoma but no ampullary carcinoma id. ISMP tall-man applied (CISplatin), with cisplatin hydration and nephro/oto/neurotoxicity monitoring. NTRK fusion and MSI-H/dMMR are tested to identify targeted/immunotherapy options and do NOT gate this backbone. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

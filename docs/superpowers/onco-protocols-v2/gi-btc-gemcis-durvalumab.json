@@ -1,0 +1,121 @@
+{
+  "id": "gi-btc-gemcis-durvalumab",
+  "name": "Gemcitabine + CISplatin + Durvalumab (TOPAZ-1)",
+  "disease": "Biliary tract cancer (cholangiocarcinoma and gallbladder cancer)",
+  "diseaseId": "cholangiocarcinoma",
+  "histology": "adenocarcinoma of the biliary tract",
+  "stage": ["locally advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The cisplatin/gemcitabine plus durvalumab regimen is NOT biomarker-restricted (no PD-L1 threshold required for the first-line indication). Biliary molecular targets - FGFR2 fusions, IDH1, HER2 (ERBB2), BRAF V600E, MSI-H/dMMR, NTRK fusions - are tested to guide targeted or immunotherapy options, chiefly in the subsequent-line setting, and do NOT gate this backbone. Per Standard Guidelines (NCCN), Biliary Tract Cancers v1.2026, Principles of Systemic Therapy (BIL-C) and Targeted therapy (BIL-C 3 of 5)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for locally advanced, unresectable, or metastatic biliary tract cancer (category 1, Preferred)",
+  "eligibilityCriteria": [
+    { "criterion": "cisplatinEligibility", "requirement": "adequate renal function and fitness for cisplatin and hydration. If ineligible for cisplatin, carboplatin may be substituted.", "source": "Standard Guidelines (NCCN), Biliary Tract Cancers", "locator": "v1.2026, Principles of Systemic Therapy (BIL-C 2 of 5), footnote g (carboplatin substitution if cisplatin-ineligible)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37: gemcitabine 1,000 mg/m2 + cisplatin 25 mg/m2 IV days 1 and 8 every 21 days; the cytotoxic backbone shared with TOPAZ-1)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829. Gemcitabine 1,000 mg/m2 IV on days 1 and 8 of a 21-day cycle. This is the UK-ABC-02 cytotoxic backbone that TOPAZ-1 combined with durvalumab; the gemcitabine/cisplatin dose is grounded, the durvalumab dose is not (see durvalumab drug entry)."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 114827 to 114828 (Ch. 37: cisplatin 25 mg/m2 IV days 1 and 8 every 21 days)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829. CISplatin 25 mg/m2 IV on days 1 and 8 of a 21-day cycle. ISMP tall-man (CISplatin). Requires pre- and post-hydration; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy. If cisplatin-ineligible, carboplatin may be substituted per NCCN BIL-C footnote g."
+      },
+      {
+        "id": "durvalumab",
+        "name": "Durvalumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Biliary Tract Cancers", "version": "1.2026", "date": null, "locator": "Principles of Systemic Therapy (BIL-C 2 of 5): Cisplatin/Gemcitabine + Durvalumab (category 1) Preferred; reference 5 (Oh, TOPAZ-1). Durvalumab per-mg dose and interval not printed.", "evidenceStatus": "current" },
+        "notes": "VERIFY: Standard Guidelines (NCCN) Biliary Tract Cancers v1.2026 (BIL-C 2 of 5) establishes cisplatin/gemcitabine plus durvalumab (TOPAZ-1) as a category 1 preferred first-line regimen but does NOT print the durvalumab per-mg dose, unit, basis, or administration interval (given with chemotherapy and then as maintenance in TOPAZ-1). The provided sources (btc.txt; DeVita Ch. 37) do not print the durvalumab dose. It must be VERIFY-ed against a cited source; not inferred here."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "gemcitabine/cisplatin backbone up to 8 cycles (maximum of 6 months per UK-ABC-02, DeVita lines 114828 to 114829); durvalumab schedule (given with chemotherapy then as maintenance per TOPAZ-1) is VERIFY.",
+    "premedications": [
+      { "name": "Cisplatin hydration", "notes": "pre- and post-cisplatin IV hydration to prevent nephrotoxicity." },
+      { "name": "Antiemetic prophylaxis", "notes": "cisplatin is highly emetogenic; give guideline-tier antiemetic prophylaxis before each cisplatin dose." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: cisplatin-based, high emetogenic risk on days 1 and 8; prophylaxis required.",
+      "Cisplatin hydration protocol; monitor renal function, magnesium, and electrolytes.",
+      "Immune-related adverse event monitoring for durvalumab (thyroid, hepatic, pulmonary, colitis, endocrinopathies)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each dose (days 1 and 8) - myelosuppression",
+    "renal function, magnesium, and electrolytes before each cisplatin dose",
+    "peripheral neuropathy and hearing assessment - cisplatin",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during durvalumab",
+    "liver function"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "myelosuppression or renal impairment on day 1 or day 8", "action": "hold/reduce", "text": "Review required; hold or reduce chemotherapy per protocol for cytopenias or rising creatinine. Consider carboplatin substitution if cisplatin-ineligible. Physician decides." },
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "durvalumab", "action": "hold/steroids", "text": "Hold durvalumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 37 Cancer of the Biliary Tree, lines 114827 to 114829 (UK-ABC-02 gemcitabine/cisplatin backbone doses shared with TOPAZ-1). Durvalumab dose not printed in Ch. 37.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Biliary Tract Cancers",
+        "version": "1.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (BIL-C 2 of 5): Cisplatin/Gemcitabine + Durvalumab (category 1) first-line Preferred for unresectable/metastatic disease (reference 5 Oh, TOPAZ-1); footnote g (carboplatin if cisplatin-ineligible). The guideline lists the regimen by name and prints no per-mg dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs.durvalumab.basis",
+    "regimen.drugs.durvalumab.dosePerUnit",
+    "regimen.drugs.durvalumab.unit",
+    "regimen.drugs.durvalumab.days"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for gemcitabine plus cisplatin plus durvalumab (TOPAZ-1) as first-line therapy for locally advanced, unresectable, or metastatic biliary tract cancer. Serves intrahepatic cholangiocarcinoma (#23), extrahepatic cholangiocarcinoma (#24), and gallbladder cancer (#25); diseaseId anchored to cholangiocarcinoma. The gemcitabine (1,000 mg/m2) and cisplatin (25 mg/m2) backbone doses on days 1 and 8 of a 21-day cycle are grounded to DeVita 12th ed. Ch. 37 (lines 114827 to 114829, the UK-ABC-02 backbone TOPAZ-1 combined with durvalumab). The Standard Guidelines (NCCN) Biliary Tract Cancers v1.2026 (BIL-C 2 of 5) supply the category 1 preferred status but print no per-mg dose. The durvalumab per-mg dose, unit, basis, and schedule (given with chemotherapy then as maintenance in TOPAZ-1) are NOT established by the provided sources and are set to VERIFY; they must be VERIFY-ed against a cited source and were not inferred. ISMP tall-man applied (CISplatin), with cisplatin hydration and nephro/oto/neurotoxicity monitoring, plus durvalumab immune-related adverse event monitoring. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

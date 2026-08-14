@@ -1,0 +1,135 @@
+{
+  "id": "ped-rhabdomyosarcoma-vac",
+  "name": "PEDIATRIC Rhabdomyosarcoma: VAC (vinCRIStine + Actinomycin-D/Dactinomycin + Cyclophosphamide), with optional alternating VI (vinCRIStine + Irinotecan)",
+  "disease": "Rhabdomyosarcoma",
+  "diseaseId": "rhabdomyosarcoma",
+  "histology": "embryonal (typically FOXO1 fusion-negative) or alveolar (typically FOXO1 fusion-positive) rhabdomyosarcoma; FOXO1 fusion status is a stronger outcome predictor than histologic subtype",
+  "stage": ["risk-adapted: low-risk", "intermediate-risk", "high-risk (by Stage, Clinical Group, age, and FOXO1 fusion status)"],
+  "biomarkers": {
+    "FOXO1_fusion": "gene-fusion status (PAX3::FOXO1 or PAX7::FOXO1) drives risk stratification; fusion-positive disease has unfavorable outcome and intensifies therapy/nodal management",
+    "note": "PEDIATRIC. FOXO1 (PAX3::FOXO1 or PAX7::FOXO1) fusion status is the key prognostic molecular marker and is a stronger predictor than histology; alveolar RMS is typically fusion-positive and embryonal RMS typically fusion-negative. FISH for FOXO1 is sufficient. Risk group (low/intermediate/high) is assigned from Stage, Clinical Group, age, and FOXO1 fusion status. Per Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma (Rhabdomyosarcoma) v1.2026, Molecular Alterations Table 1 (lines 1133 to 1157), fusion-status prognostic significance (lines 1029 to 1035, 1063 to 1066), FISH sufficiency (line 1109), and risk-group assignment (lines 600 to 621). No endorsement implied."
+  },
+  "treatmentSetting": ["multimodal curative-intent systemic therapy (with surgery and radiation for local control), risk-adapted"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line systemic therapy for newly diagnosed rhabdomyosarcoma (risk-adapted)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosisAndRiskGroup", "requirement": "newly diagnosed rhabdomyosarcoma assigned to a risk group (low/intermediate/high) by Stage, Clinical Group, age, and FOXO1 fusion status", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "locator": "v1.2026, Risk-group assignment (lines 600 to 621); Principles of Systemic Therapy (PRMS-G, lines 1692 to 1767)" },
+    { "criterion": "nodalStaging", "requirement": "nodal sampling recommended for FOXO1 fusion-negative RMS with N1/metastatic disease and for all fusion-positive RMS", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "locator": "v1.2026, footnote h (line 163)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "version": "1.2026", "date": "2026-02-17", "locator": "Principles of Systemic Therapy (PRMS-G): VAC (Vincristine/Dactinomycin/Cyclophosphamide) per COG ARST0331/ARST0531/D9803/ARST2031 (lines 1698, 1723 to 1755)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. vinCRIStine is the V of VAC (and of the optional alternating VI). The source names the regimen and cites the COG protocols but does NOT print per-dose milligram values, so basis, dosePerUnit, and unit are the literal VERIFY (never invented). ISMP tall-man (vinCRIStine); 2 mg per-dose cap retained as a standard safety guard."
+      },
+      {
+        "id": "dactinomycin",
+        "name": "Actinomycin-D (Dactinomycin)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "version": "1.2026", "date": "2026-02-17", "locator": "Principles of Systemic Therapy (PRMS-G): VAC per COG ARST0531/D9803/ARST2031 (lines 1698, 1723 to 1755); dactinomycin held during RT (footnote b, line 1705)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. Actinomycin-D (dactinomycin) is the A of VAC. Per-dose milligram value is NOT printed, so basis, dosePerUnit, and unit are VERIFY. Dactinomycin should be held during overlapping radiation (footnote b, cycle 6/week 16, line 1705)."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "version": "1.2026", "date": "2026-02-17", "locator": "Principles of Systemic Therapy (PRMS-G): VAC backbone cyclophosphamide CUMULATIVE dose 16.8 g/m2 per ARST0531 (intermediate-risk, line 1725; high-risk ARST2031, line 1753); 30.8 g/m2 per D9803 Arm A (lines 1726, 1754); 8.4 g/m2 when VAC alternates with VI (lines 1727, 1755)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC. Cyclophosphamide is the C of VAC. The source prints CUMULATIVE doses by protocol (16.8 g/m2 VAC per ARST0531/ARST2031; 30.8 g/m2 per D9803 Arm A; 8.4 g/m2 when alternating with VI) but NOT the per-dose milligram value, so basis, dosePerUnit, and unit are VERIFY. Higher cumulative cyclophosphamide increases prolonged neutropenia/sepsis risk and gonadotoxicity; consider lower/intermediate cumulative dose (8.4 to 16.8 g/m2) in poor-performance patients with high Oberlin risk factors (footnote d, lines 1764 to 1767). Mesna may be used as clinically indicated (footnote a, line 1704)."
+      },
+      {
+        "id": "irinotecan-optional",
+        "name": "Irinotecan (optional, alternating VI)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "version": "1.2026", "date": "2026-02-17", "locator": "Principles of Systemic Therapy (PRMS-G): VAC alternating with VI (Vincristine/Irinotecan) per COG ARST0531/ARST1431 (lines 1727 to 1728, 1755)", "evidenceStatus": "current" },
+        "notes": "PEDIATRIC OPTIONAL. Irinotecan is the I of the alternating VI (vinCRIStine/Irinotecan) block used with a VAC backbone in intermediate- and high-risk COG regimens (ARST0531/ARST1431). Per-dose milligram value is NOT printed, so basis, dosePerUnit, and unit are VERIFY. Include only when the VAC-alternating-VI schedule is selected."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Mesna", "notes": "may be used with cyclophosphamide as clinically indicated (footnote a, line 1704)" }
+    ],
+    "supportiveCare": [
+      "Regimen family by risk group: low-risk = VAC per ARST0331 (or VA per D9602); very-low-risk may use VA alone for 22 weeks (EpSSG RMS 2005) (lines 1696 to 1699). Intermediate/high-risk = VAC backbone (ARST0531 cumulative cyclophosphamide 16.8 g/m2; D9803 Arm A 30.8 g/m2) or VAC alternating with VI (8.4 g/m2), plus optional oral cyclophosphamide/vinorelbine maintenance (ARST1431/ARST2031) (lines 1720 to 1767).",
+      "cycleLengthDays and cycles are VERIFY: the source names the COG protocols and prints cumulative cyclophosphamide but not a per-cycle length or cycle count; these must be resolved from a cited COG dosing source before activation.",
+      "cyclophosphamide: higher cumulative dose increases prolonged neutropenia/sepsis and gonadotoxicity; consider dose de-intensification (8.4 to 16.8 g/m2) with poor performance and high Oberlin risk factors; mesna as indicated.",
+      "multimodal: systemic therapy is integrated with surgery and radiation for local control; radiation begins around week 13 for most patients (dactinomycin held during overlapping RT) (footnote b, line 1705).",
+      "G-CSF: VAC is myelosuppressive; add per febrile-neutropenia risk."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle (prolonged neutropenia risk with higher cumulative cyclophosphamide)",
+    "renal/bladder toxicity surveillance with cyclophosphamide (mesna as indicated)",
+    "coordination of dactinomycin dosing with radiation timing",
+    "gonadotoxicity/fertility counseling with cumulative cyclophosphamide exposure"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "poor performance status with Oberlin risk factors greater than 2", "drug": "cyclophosphamide", "action": "de-intensify", "text": "Consider lower/intermediate cumulative cyclophosphamide (8.4 to 16.8 g/m2) regimens and outpatient support per clinical review (footnote d, lines 1764 to 1767)." },
+    { "condition": "radiation overlapping a dactinomycin dose", "drug": "dactinomycin", "action": "hold", "text": "Hold dactinomycin during overlapping radiation (footnote b, line 1705)." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Pediatric rhabdomyosarcoma VAC per-drug milligram doses are not printed in the provided adult extract (VAC in the adult text refers to M-VAC for bladder cancer, a different regimen), so identity and doses are grounded to the NCCN Pediatric Soft Tissue Sarcoma guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma", "version": "1.2026", "date": "2026-02-17", "locator": "Principles of Systemic Therapy (PRMS-G): very-low/low-risk (lines 1692 to 1699), intermediate-risk VAC backbones (lines 1720 to 1728), high-risk VAC backbones (lines 1748 to 1756); risk-group assignment (lines 600 to 621); FOXO1 molecular markers (Table 1, lines 1133 to 1157; prognostic significance lines 1029 to 1035, 1063 to 1066; FISH line 1109)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[1].basis",
+    "regimen.drugs[1].dosePerUnit",
+    "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis",
+    "regimen.drugs[2].dosePerUnit",
+    "regimen.drugs[2].unit",
+    "regimen.drugs[3].basis",
+    "regimen.drugs[3].dosePerUnit",
+    "regimen.drugs[3].unit",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "PEDIATRIC ONCQIS Standard Protocol draft for rhabdomyosarcoma (StewardMD reference disease rhabdomyosarcoma). Regimen identity is grounded to Standard Guidelines (NCCN), Pediatric Soft Tissue Sarcoma (Rhabdomyosarcoma) v1.2026: VAC = vinCRIStine + Actinomycin-D (Dactinomycin) + Cyclophosphamide per COG ARST0331 (low-risk), ARST0531/D9803 Arm A/ARST2031 (intermediate/high-risk), with the optional alternating VI (vinCRIStine + Irinotecan) block (Principles of Systemic Therapy PRMS-G, lines 1692 to 1767). Risk stratification and the FOXO1 (PAX3/PAX7::FOXO1) fusion biomarker - a stronger outcome predictor than histologic subtype, with alveolar RMS typically fusion-positive and embryonal fusion-negative - are grounded to the Molecular Alterations table (lines 1133 to 1157), fusion-status prognostic significance (lines 1029 to 1035, 1063 to 1066), FISH sufficiency (line 1109), and risk-group assignment (lines 600 to 621). The source prints the cyclophosphamide CUMULATIVE dose by protocol (16.8 g/m2 VAC per ARST0531/ARST2031; 30.8 g/m2 per D9803 Arm A; 8.4 g/m2 when alternating with VI) but does NOT print per-dose milligram values or a fixed cycle length, so every drug basis/dosePerUnit/unit plus cycleLengthDays and cycles are set to the literal VERIFY and listed in verifyFields rather than invented. Pediatric safety scaffolding is retained: cyclophosphamide dose de-intensification (8.4 to 16.8 g/m2) with poor performance and high Oberlin risk factors, mesna as indicated, gonadotoxicity/fertility counseling, and dactinomycin held during overlapping radiation. ISMP tall-man applied (vinCRIStine 2 mg cap). Status is DRAFT with unresolved VERIFY fields. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

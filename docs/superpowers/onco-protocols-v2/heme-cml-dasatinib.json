@@ -1,0 +1,68 @@
+{
+  "id": "heme-cml-dasatinib",
+  "name": "Dasatinib (CML, chronic phase, first-line)",
+  "disease": "Chronic myeloid leukemia (CML)",
+  "diseaseId": "chronic_myeloid_leukemia",
+  "histology": "VERIFY",
+  "stage": ["chronic phase (CP-CML)"],
+  "biomarkers": {
+    "BCR_ABL1": "positive",
+    "note": "CML is defined by the BCR::ABL1 fusion (Philadelphia chromosome); confirm Ph-positive or BCR::ABL1-positive by qPCR at diagnosis. A T315I kinase-domain mutation confers resistance to dasatinib (and to imatinib, nilotinib and bosutinib); ponatinib or asciminib is the treatment option for T315I. Per Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027."
+  },
+  "treatmentSetting": "chronic phase, first-line",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "first-line for newly diagnosed chronic-phase CML (a second-generation TKI)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BCR::ABL1-positive (Ph-positive) chronic-phase CML confirmed by qPCR", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "locator": "v2.2027, CML workup (Ph-positive or BCR::ABL1 positive by qPCR)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dasatinib",
+        "name": "Dasatinib",
+        "basis": "flat",
+        "dosePerUnit": 100,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "version": "2.2027", "date": null, "locator": "MS-27 (recommended starting dose of dasatinib is 100 mg once daily for CP-CML)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027, MS-27. Dasatinib 100 mg PO once daily, continuous. Days 1 to 28 represents continuous daily dosing. A reduced dose (for example 50 mg once daily) is described for clinically significant intolerance such as pleural effusion (MS-27). Continue until loss of response, progression or intolerance."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous daily oral therapy; adherence is critical to maintaining molecular response.",
+      "Dasatinib is associated with pleural effusion (higher risk with prior cardiac history, hypertension, or twice-daily dosing); assess respiratory symptoms and consider dose reduction.",
+      "Monitor BCR::ABL1 (IS) by qPCR at milestones; if resistance, test for kinase-domain mutations (T315I directs ponatinib or asciminib)."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential at baseline and periodically",
+    "BCR::ABL1 (IS) by qPCR at approximately 3, 6 and 12 months and periodically thereafter (CML-G)",
+    "assessment for pleural effusion (dyspnea, chest exam) and fluid retention"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "pleural/fluid status", "BCR::ABL1 status"],
+  "doseModificationRules": [
+    { "condition": "pleural effusion or grade 3 to 4 toxicity", "drug": "dasatinib", "action": "hold/reduce", "text": "Interrupt for significant toxicity; consider resuming at a reduced dose (for example 50 mg once daily) for clinically significant intolerance such as pleural effusion (MS-27). Physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "version": "2.2027", "date": "2026-07-10", "locator": "MS-27 (recommended starting dose of dasatinib is 100 mg once daily for CP-CML; reduced 50 mg option for intolerance/pleural effusion); T315I/ponatinib option (manuscript and CML footnote)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for first-line dasatinib (a second-generation TKI) in chronic-phase, BCR::ABL1-positive CML. Dose grounded to Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027, MS-27: dasatinib 100 mg PO once daily. Modeled as continuous daily oral therapy (cycleLengthDays 28 for reporting, cycles null, days 1 to 28 = continuous). BCR::ABL1 is the diagnostic and monitoring biomarker; a T315I mutation directs ponatinib or asciminib. histology and treatmentIntent are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

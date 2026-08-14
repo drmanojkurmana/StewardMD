@@ -1,0 +1,69 @@
+{
+  "id": "gi-appendiceal-adeno-folfox",
+  "name": "Appendiceal Adenocarcinoma - FOLFOX/CAPEOX backbone (coverage pointer)",
+  "disease": "Appendiceal adenocarcinoma",
+  "diseaseId": null,
+  "histology": "adenocarcinoma (mucinous, non-mucinous, or signet-ring-cell; graded low vs high per pathology review)",
+  "stage": ["metastatic / peritoneal", "as systemic component with cytoreductive surgery"],
+  "biomarkers": {
+    "grade": "histologic grade (low- vs high-grade) and mucinous/signet-ring status drive management",
+    "MMR_MSI": "biomarker testing (MMR/MSI, HER2, RAS, BRAF) recommended per pathology review",
+    "note": "Systemic FOLFOX or CAPEOX (the colorectal cytotoxic backbone) is the preferred palliative systemic therapy for high-grade appendiceal adenocarcinoma. IMPORTANT: low-grade appendiceal mucinous neoplasm (LAMN) and low-grade disease are managed primarily by cytoreductive surgery with or without HIPEC, NOT by systemic cytotoxic chemotherapy. Per Standard Guidelines (NCCN), Appendiceal Adenocarcinoma, APP-B (Pathology and Molecular Review) and APP-D (Principles of Palliative Systemic Therapy)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "preferred palliative systemic backbone (FOLFOX or CAPEOX) for high-grade/adenocarcinoma appendiceal disease; also used peri-operatively around cytoreductive surgery",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "appendiceal adenocarcinoma (high-grade or otherwise chemotherapy-appropriate); low-grade mucinous neoplasms are surgically managed", "source": "Standard Guidelines (NCCN), Appendiceal Adenocarcinoma", "locator": "v2.2026, APP-D (Principles of Palliative Systemic Therapy; FOLFOX or CAPEOX preferred; appendiceal lines 289, 434, 539, 571)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "folfox-capeox-backbone-ref",
+        "name": "FOLFOX or CAPEOX backbone (see referenced Standard Protocol - dose not duplicated)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "see referenced Standard Protocol",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Appendiceal Adenocarcinoma", "version": "2.2026", "date": null, "locator": "APP-D (Preferred: FOLFOX or CAPEOX; appendiceal lines 289, 434, 539, 571)", "evidenceStatus": "current" },
+        "notes": "COVERAGE POINTER - dose intentionally NOT duplicated. High-grade appendiceal adenocarcinoma uses the same FOLFOX (fluorouracil/leucovorin/oxaliplatin) or CAPEOX (capecitabine/oxaliplatin) cytotoxic backbone as colorectal adenocarcinoma at the same doses; NCCN Appendiceal v2.2026 (APP-D) names these regimens but does not print distinct mg/m2 dosing tables. FOLFOX dosing is already modeled in this folder as folfox-4.json, folfox-6.json, and modified-folfox-6.json. dosePerUnit/basis/unit are VERIFY here solely to signal 'resolve by referencing the existing backbone Standard Protocol', not because any dose is unknown. Low-grade appendiceal mucinous neoplasm (LAMN) is surgically managed (cytoreduction +/- HIPEC), not with this backbone. Fluoropyrimidine DPYD testing per FDA boxed warning (APP footnote a)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Systemic dosing and cycle length are defined by the referenced colorectal FOLFOX/CAPEOX Standard Protocols (folfox-4.json / modified-folfox-6.json in this folder); not duplicated here.",
+      "Low-grade appendiceal mucinous neoplasms are managed surgically (cytoreductive surgery +/- HIPEC), not with systemic cytotoxic chemotherapy.",
+      "Fluoropyrimidine DPYD testing per FDA boxed warning before starting capecitabine or fluorouracil."
+    ]
+  },
+  "monitoring": [
+    "see the referenced FOLFOX/CAPEOX Standard Protocol for backbone monitoring (CBC, renal, oxaliplatin neuropathy)",
+    "peritoneal disease burden assessment (imaging; mucinous tumors may be better characterized on MRI)"
+  ],
+  "clearanceChecks": ["see referenced backbone Standard Protocol"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Appendiceal adenocarcinoma (high-grade) is treated with colorectal-type fluoropyrimidine/oxaliplatin chemotherapy; concrete FOLFOX/CAPEOX dosing is covered by the colorectal backbone Standard Protocols", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Appendiceal Adenocarcinoma", "version": "2.2026", "date": null, "locator": "APP-D (Principles of Palliative Systemic Therapy; Preferred FOLFOX or CAPEOX; appendiceal lines 289, 434, 539, 571); APP-B (Principles of Pathology and Molecular Review; grade and mucinous/signet-ring classification, appendiceal lines 244 to 251)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol COVERAGE POINTER for appendiceal adenocarcinoma (disease #28). Per the task, the FOLFOX/CAPEOX backbone is NOT duplicated: NCCN Appendiceal v2.2026 (APP-D, Principles of Palliative Systemic Therapy) names FOLFOX or CAPEOX as the preferred systemic regimen (appendiceal lines 289, 434, 539, 571) but prints no distinct mg/m2 dosing - the doses are identical to the colorectal backbone already modeled in this folder as folfox-4.json, folfox-6.json, and modified-folfox-6.json (CAPEOX = capecitabine/oxaliplatin). The single regimen drug entry is a deliberate pointer whose dose fields, cycleLengthDays, and cycles are set to VERIFY and listed in verifyFields to signal 'resolve by referencing the existing colorectal FOLFOX/CAPEOX Standard Protocol', not because any dose is unknown or was inferred. Low-grade appendiceal mucinous neoplasms (LAMN) are surgically managed (cytoreduction +/- HIPEC), not with this backbone. Biomarker testing and fluoropyrimidine DPYD safety are noted. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

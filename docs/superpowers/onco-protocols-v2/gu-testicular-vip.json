@@ -1,0 +1,122 @@
+{
+  "id": "gu-testicular-vip",
+  "name": "VIP (Etoposide / Ifosfamide / CISplatin, with mesna)",
+  "disease": "Testicular germ cell tumor",
+  "diseaseId": "testicular_germ_cell_tumor",
+  "histology": "germ cell tumor (serves BOTH seminoma and nonseminomatous germ cell tumor / NSGCT)",
+  "stage": ["II", "III"],
+  "biomarkers": {
+    "AFP": "prognostic and risk-classifying",
+    "beta_hCG": "prognostic and risk-classifying",
+    "LDH": "prognostic and risk-classifying",
+    "note": "Bleomycin-free intensive regimen. Serum tumor markers (AFP, beta-hCG, LDH) define IGCCCG risk. VIP is the bleomycin-sparing alternative for intermediate/poor-risk disease (e.g., pulmonary compromise) or viable germ cell tumor at surgery. Per Standard Guidelines (NCCN), Testicular Cancer, TEST-E."
+  },
+  "treatmentSetting": ["metastatic"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line combination chemotherapy for IGCCCG intermediate- or poor-risk germ cell tumor, or viable germ cell tumor at post-chemotherapy surgery; the bleomycin-free option when bleomycin is contraindicated",
+  "eligibilityCriteria": [
+    { "criterion": "riskGroup", "requirement": "IGCCCG intermediate- or poor-risk disease, or viable germ cell tumor at surgery after first-line chemotherapy; bleomycin contraindicated or pulmonary risk", "source": "Standard Guidelines (NCCN), Testicular Cancer", "locator": "v2.2026, TEST-E VIP note (for intermediate/poor-risk disease or viable GCT at surgery [SEM-5 and NSEM-6]); footnote u (consider a bleomycin-free regimen)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "etoposide",
+        "name": "Etoposide",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Testicular Cancer", "version": "2.2026", "date": null, "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Etoposide 75 mg/m2 IV Days 1 to 5)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. Etoposide 75 mg/m2 IV Days 1 to 5. NOTE a divergence: DeVita 12th ed. VIP (line 167562) specifies etoposide 100 mg/m2 IV daily x5; see evidence.divergence. Etoposide dose modeled at the guideline value (75 mg/m2)."
+      },
+      {
+        "id": "ifosfamide",
+        "name": "ifosfamide",
+        "basis": "bsa",
+        "dosePerUnit": 1200,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Testicular Cancer", "version": "2.2026", "date": null, "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Ifosfamide 1200 mg/m2 on Days 1 to 5 with mesna protection)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. ifosfamide 1200 mg/m2 IV Days 1 to 5 WITH MESNA PROTECTION (mandatory uroprotection against hemorrhagic cystitis). Monitor for ifosfamide encephalopathy. ISMP tall-man. Corroborated by DeVita 12th ed. (line 167562 to 167564)."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 20,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Testicular Cancer", "version": "2.2026", "date": null, "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Cisplatin 20 mg/m2 IV Days 1 to 5)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. CISplatin 20 mg/m2 IV Days 1 to 5. ISMP tall-man. No lifetime cumulative cap; requires IV pre/post hydration; monitor nephrotoxicity, ototoxicity, peripheral neuropathy. Corroborated by DeVita 12th ed. (line 167564)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 4,
+    "premedications": [
+      { "name": "Mesna (uroprotection)", "notes": "Mandatory with ifosfamide to prevent hemorrhagic cystitis. DeVita 12th ed. VIP specifies mesna 400 mg/m2 IV every 8 hours on Days 1 to 5 (line 167563); confirm exact schedule against the institutional ifosfamide order set." },
+      { "name": "Antiemetic prophylaxis (high emetic risk)", "notes": "Multiday CISplatin plus ifosfamide; high-emetic-risk prophylaxis indicated." },
+      { "name": "Hydration", "notes": "IV pre- and post-hydration with each CISplatin dose; adequate hydration also supports mesna uroprotection." }
+    ],
+    "supportiveCare": [
+      "G-CSF: VIP is high risk for febrile neutropenia; granulocyte colony-stimulating factor support should be used (NCCN TEST-E footnote 3).",
+      "Uroprotection: mesna with every ifosfamide dose; monitor urine for hematuria (hemorrhagic cystitis).",
+      "Neurologic: monitor for ifosfamide encephalopathy (confusion, somnolence).",
+      "Antiemetics: high emetic risk (multiday CISplatin plus ifosfamide). Confirm exact institutional/guideline tier.",
+      "Nephroprotection: IV hydration and electrolyte repletion with each CISplatin dose."
+    ]
+  },
+  "monitoring": [
+    "Serum tumor markers (AFP, beta-hCG, LDH) before each cycle and at restaging",
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - CISplatin",
+    "Ototoxicity and peripheral neuropathy assessment - CISplatin",
+    "Urinalysis for hematuria - ifosfamide (hemorrhagic cystitis)",
+    "Neurologic status for encephalopathy - ifosfamide",
+    "CBC before each cycle - high febrile-neutropenia risk"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function and electrolytes", "adequate hydration", "mesna co-administered", "neurologic status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ifosfamide encephalopathy (confusion, somnolence)", "drug": "ifosfamide", "action": "hold/review", "text": "Hold ifosfamide and obtain clinical review; consider methylene blue per institutional protocol. Physician decides." },
+    { "condition": "hemorrhagic cystitis / hematuria", "drug": "ifosfamide", "action": "hold/review", "text": "Increase hydration and mesna, hold ifosfamide, review. Physician decides." },
+    { "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy", "drug": "cisplatin", "action": "hold/reduce/review", "text": "Review required; consider dose reduction or delay. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "lines 167560 to 167564 (VIP four cycles q21d: etoposide 100 mg/m2 IV daily x5, ifosfamide 1200 mg/m2 IV daily x5, cisplatin 20 mg/m2 IV daily x5, mesna 400 mg/m2 IV every 8 h x5)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Testicular Cancer", "version": "2.2026", "date": null, "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Etoposide 75 mg/m2, Ifosfamide 1200 mg/m2 with mesna, Cisplatin 20 mg/m2, Days 1 to 5, repeat every 21 days); footnote 3 (high febrile-neutropenia risk, use G-CSF); four cycles per SEM-4/NSEM-6", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "regimen.drugs.etoposide.dosePerUnit",
+        "sources": [
+          { "name": "Standard Guidelines (NCCN), Testicular Cancer", "version": "2.2026", "value": "Etoposide 75 mg/m2 IV Days 1 to 5 (TEST-E)" },
+          { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "Etoposide 100 mg/m2 IV daily x5 (line 167562)" }
+        ],
+        "note": "The two sources differ on the VIP etoposide dose: NCCN v2.2026 uses 75 mg/m2 while DeVita 12th ed. uses 100 mg/m2 (both over Days 1 to 5, q21d x4). The protocol models the guideline value (75 mg/m2). Selection left to clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for VIP (Etoposide / Ifosfamide / CISplatin, with mesna), the bleomycin-free intensive regimen for germ cell tumor. Serves BOTH histologies: seminoma (#60) and nonseminomatous germ cell tumor / NSGCT (#61), under testicular germ cell tumor (#59). Used for IGCCCG intermediate- or poor-risk disease, viable germ cell tumor at post-chemotherapy surgery, and when bleomycin is contraindicated (pulmonary risk). Doses from Standard Guidelines (NCCN), Testicular Cancer v2.2026, TEST-E: Etoposide 75 mg/m2, ifosfamide 1200 mg/m2 (with mesna protection), CISplatin 20 mg/m2, all Days 1 to 5, repeat every 21 days for 4 cycles. A divergence is recorded: DeVita 12th ed. (line 167562) specifies etoposide 100 mg/m2 for VIP; the guideline value (75 mg/m2) is modeled and selection is left to clinical review. Ifosfamide mandates mesna uroprotection (hemorrhagic cystitis); DeVita states mesna 400 mg/m2 IV every 8 hours on Days 1 to 5 (line 167563). ifosfamide encephalopathy is monitored. VIP is high risk for febrile neutropenia so G-CSF should be used (NCCN TEST-E footnote 3). CISplatin has no lifetime cumulative cap; hydration and nephro/oto/neuro monitoring are specified. ISMP tall-man applied (CISplatin, ifosfamide). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

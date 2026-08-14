@@ -1,0 +1,96 @@
+{
+  "id": "hn-carbo-5fu",
+  "name": "CARBOplatin plus infusional Fluorouracil, concurrent with radiation (cisplatin-ineligible)",
+  "disease": "Head and neck squamous cell carcinoma",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["II", "III", "IVA", "IVB"],
+  "biomarkers": {
+    "HPV_p16": "prognostic only",
+    "note": "p16/HPV status is prognostic in oropharyngeal disease but not a dose gate. This carboplatin/fluorouracil regimen is a radiosensitizing option for patients not eligible for cisplatin."
+  },
+  "treatmentSetting": ["definitive-chemoRT"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "concurrent chemoradiation for locoregionally advanced SCCHN when cisplatin is contraindicated; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "locoregionally advanced SCCHN treated with definitive radiation where cisplatin is contraindicated or not tolerated", "source": "DeVita 12th ed.", "locator": "Chapter 23, lines 58100 to 58103 (carboplatin and 5-FU established as a preferred radiosensitizing regimen, 94-01 French Head and Neck Oncology and Radiotherapy Group; qualitative, no numeric doses printed)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "bsa",
+        "dosePerUnit": 70,
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV, per day of each cycle",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 23, line 58132 (carboplatin 70 mg/m2/day plus 5-FU 600 mg/m2/day x 3 cycles, printed for a GORTEC randomized trial comparing cetuximab-RT with cetuximab-RT plus concurrent chemotherapy); narrative lines 58100 to 58103 (carboplatin/5-FU established as a preferred radiosensitizing regimen, 94-01 French, no numeric doses printed)", "evidenceStatus": "unknown" },
+        "notes": "Source: carboplatin 70 mg/m2 per day (DeVita 12th ed., Chapter 23, line 58132), 3 cycles during radiation. The concrete carboplatin 70 and 5-FU 600 mg/m2 per day for 3 cycles numbers are the regimen printed at line 58132 for a GORTEC randomized trial (cetuximab-RT versus cetuximab-RT plus concurrent chemotherapy); carboplatin/5-FU is separately established as a preferred radiosensitizing regimen by the 94-01 French trial (lines 58100 to 58103, which prints no numeric doses). IMPORTANT: this cited regimen doses carboplatin by body surface area (mg/m2 per day), NOT by target AUC; basis is bsa per the source. The specific infusion days within each cycle are not printed in the cited locator, so regimen.drugs[0].days is left empty and flagged in verifyFields. ISMP tall-man. Monitor CBC and renal function."
+      },
+      {
+        "id": "fluorouracil-ci",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV continuous infusion, per day of each cycle",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 23, line 58132 (5-FU 600 mg/m2/day x 3 cycles, printed for a GORTEC randomized trial comparing cetuximab-RT with cetuximab-RT plus concurrent chemotherapy); narrative lines 58100 to 58103 (94-01 French, carboplatin/5-FU as a preferred radiosensitizing regimen, no numeric doses printed)", "evidenceStatus": "unknown" },
+        "notes": "Source: fluorouracil 600 mg/m2 per day by continuous IV infusion (DeVita 12th ed., Chapter 23, line 58132), 3 cycles during radiation. The specific infusion days per cycle are not printed in the cited locator, so days is left empty and flagged in verifyFields. DPYD deficiency substantially increases fluoropyrimidine toxicity; consider DPYD testing before treatment."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": 3,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "Carboplatin-containing; provide prophylaxis per emetogenicity. Confirm exact institutional tier." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: carboplatin-based; confirm exact institutional/guideline tier.",
+      "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil; reduce or avoid in DPYD deficiency."
+    ]
+  },
+  "monitoring": [
+    "CBC (platelets in particular) before each cycle - carboplatin myelosuppression",
+    "Renal function before each cycle - carboplatin",
+    "Mucositis and diarrhea assessment - infusional fluorouracil"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function", "DPYD status (fluorouracil)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3+ thrombocytopenia or neutropenia", "drug": "carboplatin", "action": "delay/reduce", "text": "Review required; delay or reduce per counts. Physician decides." },
+    { "condition": "grade 3+ mucositis/diarrhea or known DPYD deficiency", "drug": "fluorouracil", "action": "hold/reduce", "text": "Review required; reduce or hold fluorouracil. In DPYD deficiency, substantially reduce or avoid. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 23, line 58132 (carboplatin 70 mg/m2/day + 5-FU 600 mg/m2/day x 3 cycles, printed for a GORTEC cetuximab-comparison randomized trial), narrative lines 58100 to 58103 (94-01 French: carboplatin/5-FU established as a preferred radiosensitizing regimen, no numeric doses printed)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Carboplatin/infusional fluorouracil is a listed concurrent option (algorithm line 6167); the guideline states when carboplatin and fluorouracil are used, the recommended regimen is standard fractionation plus 3 cycles (algorithm line 1282); exact numeric doses are not tabulated in the provided guideline pages, so numeric grounding is taken from DeVita core", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "carboplatinDosingBasis",
+        "sources": [
+          { "name": "DeVita 12th ed. (core), concurrent carboplatin/5-FU regimen printed at line 58132", "version": "12th ed", "value": "Carboplatin dosed by body surface area: 70 mg/m2 per day" }
+        ],
+        "note": "The concurrent head and neck carboplatin/fluorouracil regimen grounded here (printed at DeVita line 58132) doses carboplatin by mg/m2 per day, not by target AUC. basis is set to bsa to match the cited source. If an AUC-based carboplatin schedule is desired for this indication it must be separately sourced and verified.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].days", "regimen.drugs[1].days", "regimen.cycleLengthDays"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for CARBOplatin plus infusional Fluorouracil concurrent with radiation, the preferred radiosensitizing regimen for cisplatin-ineligible SCCHN, grounded to the concurrent carboplatin/5-FU regimen printed at DeVita 12th ed. Chapter 23 line 58132 (a GORTEC randomized trial comparing cetuximab-RT with cetuximab-RT plus concurrent chemotherapy); carboplatin/5-FU is separately established as a preferred radiosensitizing regimen by the 94-01 French trial (narrative lines 58100 to 58103, no numeric doses printed). Sites served (squamous histology): oral cavity (#32), tongue (#33), lip (#34), oropharyngeal (#35), HPV-positive oropharyngeal (#36, p16/HPV prognostic only), hypopharyngeal (#38), laryngeal (#39), sinonasal (#41); nasopharyngeal (#37) and salivary (#40) are not covered. Doses grounded: CARBOplatin 70 mg/m2 per day and Fluorouracil 600 mg/m2 per day, for 3 cycles (cycles grounded to 3 per DeVita line 58139 and NCCN algorithm line 1282). NOTE the task requested an AUC-based carboplatin, but the cited source doses carboplatin by body surface area (mg/m2 per day); per the no-invention rule, basis is set to bsa to match the source and a divergence is recorded. The specific infusion days within each cycle and the exact cycle length are not printed in the cited locator, so regimen.drugs[].days and regimen.cycleLengthDays are set to VERIFY. ISMP tall-man applied. Fluorouracil DPYD deficiency is flagged. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

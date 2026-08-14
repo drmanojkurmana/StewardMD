@@ -1,0 +1,77 @@
+{
+  "id": "gyn-niraparib-maint",
+  "name": "Niraparib Maintenance (Epithelial Ovarian/Fallopian Tube/Primary Peritoneal Cancer)",
+  "disease": "Epithelial ovarian, fallopian tube, and primary peritoneal cancer",
+  "diseaseId": "ovarian_cancer",
+  "histology": "epithelial ovarian carcinoma (high-grade serous, grade 2/3 endometrioid, or BRCA1/2-mutated clear cell carcinoma or carcinosarcoma per the maintenance-eligible population). Fallopian tube and primary peritoneal carcinoma are treated as ovarian carcinoma.",
+  "stage": ["II", "III", "IV", "recurrent"],
+  "biomarkers": {
+    "BRCA1_2": "tested",
+    "HRD": "tested",
+    "note": "Biomarker gated per Standard Guidelines (NCCN) Ovarian OV-5 v4.2026: niraparib post-primary maintenance is offered for germline or somatic BRCA1/2 P/LP variants (category 1) OR for BRCA1/2 wild-type or unknown WITH HR deficiency; it is NOT offered when disease is BRCA1/2 wild-type or unknown AND HR proficient or HR unknown (observation or bevacizumab is used instead). It is therefore HRD/BRCA-gated in this guideline version, not an all-comers indication. In the post-recurrence maintenance setting, PARP inhibitor maintenance is restricted to BRCA1/2-mutated disease (OV-D footnote a) with no prior PARP progression."
+  },
+  "treatmentSetting": "maintenance",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "maintenance after response (CR or PR) to platinum-based primary therapy (post-primary), or after response to platinum-based recurrence therapy (post-recurrence, BRCA-mutated only)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRCA1/2 P/LP variant, OR BRCA wild-type/unknown with HR deficiency (post-primary); not offered for HR-proficient/unknown", "source": "Standard Guidelines (NCCN), Ovarian Cancer", "locator": "v4.2026, OV-5 (Niraparib category 1 for BRCA1/2 P/LP; offered for HR Deficient; not listed for HR Proficient/unknown)" },
+    { "criterion": "response", "requirement": "complete or partial response after platinum-based therapy", "source": "Standard Guidelines (NCCN), Ovarian Cancer", "locator": "v4.2026, OV-D Principles of Maintenance PARP Inhibitor Therapy" },
+    { "criterion": "priorTherapy", "requirement": "post-recurrence use requires no prior progression on a PARP inhibitor and is restricted to BRCA1/2-mutated disease", "source": "Standard Guidelines (NCCN), Ovarian Cancer", "locator": "v4.2026, OV-D footnote a" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "niraparib",
+        "name": "Niraparib",
+        "basis": "flat",
+        "dosePerUnit": 300,
+        "unit": "mg",
+        "days": [1],
+        "route": "PO once daily",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [
+          { "condition": "baseline body weight < 77 kg and/or platelet count < 150,000/mm3", "action": "start at 200 mg", "text": "Source-stated individualized starting dose: 200 mg PO once daily for patients with a baseline body weight of < 77 kg and/or a platelet count of < 150,000/mm3 (Standard Guidelines (NCCN) v4.2026, OV-D)." }
+        ],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D, Principles of Maintenance PARP Inhibitor Therapy, Niraparib monotherapy (300 mg PO once daily, or an initial dose of 200 mg once daily for baseline body weight < 77 kg and/or platelet count < 150,000/mm3)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D Principles of Maintenance PARP Inhibitor Therapy. Niraparib 300 mg PO once daily, taken continuously (cycleLengthDays 1 represents continuous daily dosing); individualized starting dose 200 mg once daily for baseline body weight < 77 kg and/or platelet count < 150,000/mm3. Refer to the package insert."
+      }
+    ],
+    "cycleLengthDays": 1,
+    "cycles": "continuous once-daily dosing; up to 36 months post-primary maintenance unless disease progression or unacceptable toxicity; until progression or unacceptable toxicity in the post-recurrence (BRCA-mutated) setting",
+    "premedications": [],
+    "supportiveCare": [
+      "monitor for cytopenias, especially thrombocytopenia (dose-individualized by baseline platelets and weight); risk of MDS/AML with prolonged exposure.",
+      "blood pressure monitoring is required for niraparib.",
+      "antiemetic and antihypertensive support as needed per package insert."
+    ]
+  },
+  "monitoring": [
+    "CBC weekly for the first month then periodically per package insert (thrombocytopenia risk)",
+    "blood pressure monitoring is REQUIRED for niraparib (and heart rate)",
+    "renal and hepatic function monitoring is recommended",
+    "evaluate prolonged cytopenia for MDS/AML"
+  ],
+  "clearanceChecks": ["CBC/platelets (baseline weight and platelet count for starting dose)", "renal", "liver", "blood pressure", "BRCA1/2 and HRD status", "response status (CR/PR)"],
+  "doseModificationRules": [
+    { "condition": "grade 3+ thrombocytopenia or other prolonged cytopenia", "drug": "niraparib", "action": "hold/reduce", "text": "Interrupt and reduce per package insert weight/platelet-based schedule; evaluate for MDS/AML if prolonged. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 178687 (Niraparib 200 to 300 mg once daily); line 179725 (FDA-approved niraparib 200 mg daily for primary maintenance)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "Principles of Maintenance PARP Inhibitor Therapy, Niraparib monotherapy 300 mg PO once daily (or 200 mg for weight < 77 kg and/or platelets < 150,000/mm3), up to 36 months post-primary (OV-D); patient selection OV-5 (BRCA1/2 P/LP category 1; HR Deficient offered; HR Proficient/unknown not offered)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent niraparib maintenance in epithelial ovarian carcinoma (StewardMD reference disease ovarian_cancer, subtype #44; shared framework with HGSOC #45, fallopian tube #46, primary peritoneal #47). Dose grounded to Standard Guidelines (NCCN) v4.2026, OV-D Principles of Maintenance PARP Inhibitor Therapy: Niraparib 300 mg PO once daily, with an individualized 200 mg once-daily starting dose for baseline body weight < 77 kg and/or platelet count < 150,000/mm3; up to 36 months in the post-primary setting or until progression in the post-recurrence (BRCA-mutated) setting. Biomarker gate stated per OV-5 v4.2026: offered for BRCA1/2 P/LP (category 1) OR BRCA wild-type/unknown with HR deficiency; NOT offered for HR-proficient or HR-unknown disease (observation or bevacizumab instead) - i.e., HRD/BRCA-gated in this guideline version, not all-comers. Blood-pressure monitoring is required and thrombocytopenia is the key toxicity, with MDS/AML surveillance on prolonged exposure. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,83 @@
+{
+  "id": "heme-mm-pomalidomide-dex",
+  "name": "Pomalidomide + Dexamethasone (Pd)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "Pomalidomide/dexamethasone is an IMiD-based doublet and is not biomarker-restricted. Pomalidomide retains activity in disease refractory to lenalidomide and/or bortezomib. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "therapy for previously treated (relapsed or refractory) multiple myeloma",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "previously treated multiple myeloma, typically after prior lenalidomide and a proteasome inhibitor; also the backbone for pomalidomide-based triplets",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "relapsed or refractory multiple myeloma after at least one prior therapy (commonly after lenalidomide and a proteasome inhibitor)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G (Therapy for Previously Treated Multiple Myeloma; pomalidomide-based regimens after lenalidomide and a PI)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pomalidomide",
+        "name": "Pomalidomide",
+        "basis": "flat",
+        "dosePerUnit": 4,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, Pd entry, line 286293 (Pomalidomide 4 mg on days 1-21)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286293). Pomalidomide 4 mg PO on days 1 to 21 of a 28-day cycle. The DeVita text notes the usual dosage is 2 to 4 mg daily on days 1 to 21 every 28 days. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen)."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": 40,
+        "unit": "mg",
+        "days": [1, 8, 15, 22],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, Pd entry, line 286294 (Dexamethasone 40 mg PO on days 1, 8, 15, and 22)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286294). Dexamethasone 40 mg PO on days 1, 8, 15, and 22 of a 28-day cycle. A lower weekly dose may be used for older or frail patients; dose taken exactly as the source prints it."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Pomalidomide: VTE thromboprophylaxis (aspirin for standard risk, anticoagulation for higher risk) and REMS-program dispensing (teratogen). Side effect profile similar to lenalidomide.",
+      "Herpes zoster (VZV) prophylaxis and infection surveillance per institutional practice.",
+      "Antiemetics: low emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes",
+    "glucose and blood pressure (dexamethasone)",
+    "VTE symptom surveillance (IMiD)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia", "drug": "pomalidomide", "action": "hold/reduce", "text": "Hold and resume pomalidomide at a reduced dose per labeling for grade 3 to 4 neutropenia; consider G-CSF; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6, p.1520, Pd entry (lines 286293 to 286295); pomalidomide pharmacology text (usual dose 2 to 4 mg days 1 to 21 every 28 days)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G (Therapy for Previously Treated Multiple Myeloma; pomalidomide-based regimens for disease refractory to lenalidomide and a proteasome inhibitor)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for Pd (pomalidomide + dexamethasone) in relapsed or refractory multiple myeloma (#82). Every dose is sourced to DeVita 12th ed., Chapter 74, Table 74.6 (p.1520): pomalidomide 4 mg PO days 1 to 21 (line 286293); dexamethasone 40 mg PO days 1, 8, 15, 22 (line 286294); 28-day cycle. DeVita additionally states the usual pomalidomide dose is 2 to 4 mg daily days 1 to 21 every 28 days. Setting (previously treated disease, activity after lenalidomide/bortezomib refractoriness) is sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G. Pomalidomide requires VTE prophylaxis and REMS. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

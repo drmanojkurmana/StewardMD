@@ -1,0 +1,85 @@
+{
+  "id": "meso-nivo-ipi",
+  "name": "Nivolumab + Ipilimumab (CheckMate-743) for malignant pleural mesothelioma",
+  "disease": "Malignant pleural mesothelioma",
+  "diseaseId": "malignant_pleural_mesothelioma",
+  "histology": "malignant pleural mesothelioma (epithelioid, biphasic, or sarcomatoid; largest benefit in biphasic/sarcomatoid histology)",
+  "stage": ["unresectable", "advanced/metastatic"],
+  "biomarkers": {
+    "note": "Not biomarker-gated. Dual checkpoint blockade (nivolumab anti-PD-1 + ipilimumab anti-CTLA-4) is a first-line option for unresectable malignant pleural mesothelioma regardless of PD-L1 status; the greatest survival benefit was in nonepithelioid (biphasic/sarcomatoid) histology. Per Standard Guidelines (NCCN), Malignant Pleural Mesothelioma v3.2026, and DeVita 12th ed. (CheckMate 743)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for unresectable malignant pleural mesothelioma (preferred, especially biphasic/sarcomatoid histology)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "unresectable malignant pleural mesothelioma, treatment-naive (preferred for biphasic/sarcomatoid histology)", "source": "Standard Guidelines (NCCN), Malignant Pleural Mesothelioma", "locator": "v3.2026, Systemic Therapy, Preferred: Ipilimumab + Nivolumab (category 1), lines 781, 788, and 795 (biphasic/sarcomatoid)" },
+    { "criterion": "evidenceBasis", "requirement": "ipilimumab-nivolumab vs platinum-pemetrexed in treatment-naive mesothelioma (CheckMate 743)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 292972 (CheckMate 743 compared platinum-pemetrexed to ipilimumab-nivolumab in treatment-naive mesothelioma)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "mgkg",
+        "dosePerUnit": 3,
+        "unit": "mg/kg",
+        "days": [1, 15, 29],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 33121 to 33124 (in mesothelioma or NSCLC, nivolumab 360 mg every 3 weeks or 3 mg/kg every 2 weeks with ipilimumab 1 mg/kg every 6 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. lines 33121 to 33124, which state that in mesothelioma or NSCLC nivolumab is given at 3 mg/kg every 2 weeks OR 360 mg (flat) every 3 weeks, combined with ipilimumab 1 mg/kg every 6 weeks (CheckMate 743 regimen). Modeled here as nivolumab 3 mg/kg IV every 2 weeks (days 1, 15, 29 within a 42-day / 6-week cycle). SOURCE-STATED ALTERNATIVE: nivolumab 360 mg flat every 3 weeks (basis flat, days 1 and 22 of the 42-day cycle)."
+      },
+      {
+        "id": "ipilimumab",
+        "name": "Ipilimumab",
+        "basis": "mgkg",
+        "dosePerUnit": 1,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 33121 to 33124 (in mesothelioma or NSCLC, ipilimumab 1 mg/kg every 6 weeks with nivolumab)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. lines 33121 to 33124. Ipilimumab 1 mg/kg IV every 6 weeks (day 1 of the 42-day / 6-week cycle), combined with nivolumab, in mesothelioma (CheckMate 743)."
+      }
+    ],
+    "cycleLengthDays": 42,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "6-week (42-day) cycle: nivolumab 3 mg/kg every 2 weeks (or 360 mg flat every 3 weeks) plus ipilimumab 1 mg/kg every 6 weeks. CheckMate 743 treated up to 2 years; exact stopping rule (2-year cap) is not printed in the provided corpus and should be confirmed clinically. Source: DeVita 12th ed. lines 33121 to 33124, 292972.",
+      "Monitor for immune-related adverse events from dual checkpoint blockade (higher irAE rate than single-agent): thyroid/endocrine, hepatic, pneumonitis, colitis, dermatologic, hypophysitis.",
+      "Nivolumab and hyaluronidase-nvhy subcutaneous injection is NOT approved for concurrent use with IV ipilimumab (guideline footnote f, line 810)."
+    ]
+  },
+  "monitoring": [
+    "immune-related adverse event surveillance (thyroid/endocrine, liver, pneumonitis, colitis, skin, hypophysitis)",
+    "thyroid function and cortisol/ACTH (endocrinopathy screen)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["irAE screen", "thyroid/endocrine", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "immune-related adverse event (grade 2 or higher)", "action": "hold/steroids/discontinue", "text": "Hold the checkpoint inhibitor(s) and manage per immunotherapy toxicity guidance (corticosteroids for grade 2 or higher; endocrine replacement as needed); permanently discontinue for severe or recurrent irAEs. Dual blockade carries a higher severe-irAE rate." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "lines 33121 to 33124 (mesothelioma/NSCLC dosing: nivolumab 360 mg every 3 weeks or 3 mg/kg every 2 weeks with ipilimumab 1 mg/kg every 6 weeks); line 292972 (CheckMate 743 in treatment-naive mesothelioma; greatest benefit in biphasic/sarcomatoid histology)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Malignant Pleural Mesothelioma", "version": "3.2026", "date": null, "locator": "Systemic Therapy, Preferred: Ipilimumab + Nivolumab (category 1), lines 781, 788, 795; footnote f (nivolumab and hyaluronidase-nvhy not for concurrent use with IV ipilimumab), line 810; guideline prints no mg doses", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for malignant pleural mesothelioma (#13), first-line dual checkpoint blockade (CheckMate 743). The mesothelioma guideline (v3.2026) lists ipilimumab + nivolumab as a preferred category 1 first-line option but prints NO mg doses, so doses are grounded to the DeVita 12th ed. checkpoint-inhibitor chapter (lines 33121 to 33124), which explicitly states that in mesothelioma or NSCLC nivolumab is given at 3 mg/kg every 2 weeks (or 360 mg flat every 3 weeks) with ipilimumab 1 mg/kg every 6 weeks. Modeled on a 42-day (6-week) cycle: nivolumab 3 mg/kg every 2 weeks (days 1, 15, 29) plus ipilimumab 1 mg/kg every 6 weeks (day 1); the flat 360 mg every 3 weeks nivolumab alternative is source-stated and noted in-drug. Not biomarker-gated; greatest benefit in biphasic/sarcomatoid histology (DeVita line 292972). cycles null (CheckMate 743 treated up to 2 years; exact stopping rule not printed in the corpus, confirm clinically). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

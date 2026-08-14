@@ -1,0 +1,61 @@
+{
+  "id": "heme-ptcl-choep",
+  "name": "CHOEP (Cyclophosphamide + DOXOrubicin + vinCRIStine + Etoposide + Prednisone)",
+  "disease": "Peripheral T-cell lymphoma",
+  "diseaseId": "peripheral_t_cell_lymphoma",
+  "histology": "peripheral T-cell lymphoma (PTCL-NOS, AITL, and other nodal PTCL)",
+  "stage": [],
+  "biomarkers": {
+    "note": "CHOEP is a cytotoxic five-drug backbone and is not biomarker-restricted for eligibility. CD30 is assessed on the diagnostic IHC/flow panel (Standard Guidelines (NCCN), T-cell Lymphomas v2.2026, lines 346, 352) and, when positive, supports adding brentuximab vedotin (CHEP + brentuximab) or using CHP + brentuximab, but CD30 is not a gate for CHOEP itself."
+  },
+  "treatmentSetting": "primary therapy for previously untreated nodal peripheral T-cell lymphoma",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "previously untreated peripheral T-cell lymphoma (e.g., PTCL-NOS)", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "locator": "v2.2026, Peripheral T-Cell Lymphomas PTCL-1 (line 87); CHOEP (Cyclophosphamide/Doxorubicin/Vincristine/Etoposide/Prednisone) listed lines 797 and 801 (PTCL-NOS)" }
+  ],
+  "regimen": {
+    "drugs": [
+      { "id": "cyclophosphamide", "name": "Cyclophosphamide", "basis": "bsa", "dosePerUnit": 750, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP cyclophosphamide 750 mg/m2 bsa IV on day 1.", "evidenceStatus": "current" }, "notes": "Cyclophosphamide 750 mg/m2 IV on day 1. The CHOEP (CHOP + etoposide) backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP cyclophosphamide 750 mg/m2 bsa on day 1." },
+      { "id": "doxorubicin", "name": "DOXOrubicin", "basis": "bsa", "dosePerUnit": 50, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } }, "roundingRule": { "increment": 5 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP doxorubicin 50 mg/m2 bsa IV on day 1, with anthracycline cumulative cap warn 450 / hard 550 mg/m2.", "evidenceStatus": "current" }, "notes": "DOXOrubicin 50 mg/m2 IV on day 1. The CHOEP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP doxorubicin 50 mg/m2 bsa on day 1. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). ISMP tall-man DOXOrubicin." },
+      { "id": "vincristine", "name": "vinCRIStine", "basis": "bsa", "dosePerUnit": 1.4, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": 2 }, "roundingRule": { "increment": 0.1 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 (antineoplastic drug reference), Vincristine entry, lines 20759 to 20760: 0.5 to 1.4 mg/m2/wk IV (maximum 2 mg per dose).", "evidenceStatus": "unknown" }, "notes": "Source: DeVita 12th ed., Table 10.1, lines 20759 to 20760: vincristine up to 1.4 mg/m2 IV weekly (bolus), maximum 2 mg per dose. CHOEP uses the 1.4 mg/m2 day-1 bolus dose with the 2 mg cap. ISMP tall-man vinCRIStine; capped at 2 mg per dose." },
+      { "id": "etoposide", "name": "Etoposide", "basis": "bsa", "dosePerUnit": 100, "unit": "mg/m2", "days": [1, 2, 3], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "version": "2.2026", "date": "2026-02-13", "locator": "DERIVED from the T-cell Lymphomas footnote (approximately line 1059): oral etoposide 200 mg/m2 may substitute on days 2 to 3 and PO etoposide dosing is 2x the IV dose, so the IV dose is 200/2 = 100 mg/m2. This is a derivation from the oral-substitution footnote, not a directly-printed IV value.", "evidenceStatus": "current" }, "notes": "Etoposide 100 mg/m2 IV on days 1 to 3. DERIVED (not a directly-printed IV value): Standard Guidelines (NCCN), T-cell Lymphomas v2.2026 footnote (approximately line 1059) states oral etoposide 200 mg/m2 may substitute on days 2 to 3 and that PO etoposide dosing is 2x the IV dose, so the IV dose is 200/2 = 100 mg/m2." },
+      { "id": "prednisone", "name": "Prednisone", "basis": "flat", "dosePerUnit": 100, "unit": "mg", "days": [1, 2, 3, 4, 5], "route": "PO", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP steroid 100 mg flat on days 1 to 5 (rchop names it Prednisolone; interchangeable CHOP steroid with Prednisone).", "evidenceStatus": "current" }, "notes": "Prednisone 100 mg PO flat on days 1 to 5. The CHOEP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json); rchop names the steroid Prednisolone while this file uses Prednisone (same 100 mg flat days 1 to 5, interchangeable CHOP steroid)." }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "anthracycline-containing regimen; prophylaxis per emetogenicity tier." }
+    ],
+    "supportiveCare": [
+      "G-CSF: primary prophylaxis is commonly required (etoposide added to CHOP increases febrile-neutropenia risk).",
+      "Tumor lysis syndrome prophylaxis for high tumor burden.",
+      "Antiemetics: moderate to high emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "cardiac assessment / LVEF (anthracycline) at baseline",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "peripheral neuropathy assessment each visit (vincristine)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "peripheral neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "vincristine Table 10.1 lines 20759 to 20760; generic etoposide (line 14891) and doxorubicin (lines 19634 to 19635) ranges", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "version": "2.2026", "date": "2026-02-13", "locator": "Peripheral T-Cell Lymphomas PTCL-1 (line 87); CHOEP (Cyclophosphamide/Doxorubicin/Vincristine/Etoposide/Prednisone) lines 797, 801; CD30 on diagnostic panel lines 346, 352", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for CHOEP in peripheral T-cell lymphoma (#80). Only vincristine is dose-grounded: 1.4 mg/m2 IV on day 1, maximum 2 mg per dose (DeVita Table 10.1, lines 20759 to 20760, upper end of the cited 0.5 to 1.4 mg/m2/wk bolus range). The CHOP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json): cyclophosphamide 750 mg/m2 day 1, doxorubicin 50 mg/m2 day 1 (anthracycline cap warn 450 / hard 550 mg/m2), and the steroid 100 mg flat days 1 to 5 (rchop names it Prednisolone; this file uses Prednisone, the same interchangeable CHOP steroid at 100 mg flat days 1 to 5). Etoposide 100 mg/m2 IV days 1 to 3 is DERIVED (not directly printed) from the Standard Guidelines (NCCN), T-cell Lymphomas v2.2026 footnote (approximately line 1059: oral etoposide 200 mg/m2 is 2x the IV dose, so IV = 100 mg/m2). No dose now remains VERIFY (vincristine 1.4 mg/m2 is grounded to DeVita Table 10.1). Regimen identity is grounded to Standard Guidelines (NCCN), T-cell Lymphomas v2.2026 (PTCL-1 line 87; CHOEP lines 797, 801). CHOEP is CHOP plus etoposide; CD30, on the diagnostic panel, gates brentuximab-containing alternatives, not CHOEP. ISMP tall-man applied (DOXOrubicin, vinCRIStine [2 mg cap]); anthracycline cumulative cap 450/550 mg/m2. This remains a StewardMD Standard Protocol; no endorsement implied." }

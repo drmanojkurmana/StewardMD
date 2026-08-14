@@ -1,0 +1,142 @@
+{
+  "id": "breast-ac-th",
+  "name": "Dose-Dense AC followed by Paclitaxel + Trastuzumab (ddAC-TH)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["I (high-risk)", "II", "III"],
+  "biomarkers": {
+    "HER2": "positive",
+    "HR": "tested",
+    "note": "HER2-directed anthracycline-taxane regimen: requires HER2-positive disease (IHC 3+ or ISH-amplified). HR (ER/PR) status tested to guide endocrine therapy, not the HER2 backbone. Trastuzumab must not be given concurrently with the anthracycline (cardiac toxicity); it begins with paclitaxel. Per Standard Guidelines (NCCN), Invasive Breast Cancer, Preoperative/Adjuvant Therapy (BINV-M)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "adjuvant or neoadjuvant HER2-directed anthracycline-taxane chemotherapy for early-stage HER2-positive breast cancer; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HER2-positive (IHC 3+ or ISH-amplified)", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 3 of 10 (HER2-Positive preoperative/adjuvant therapy)" },
+    { "criterion": "cardiacFunction", "requirement": "adequate LVEF; anthracycline plus HER2 therapy carries cardiac risk; do not overlap trastuzumab with anthracycline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 4 of 10 footnote h; BINV-M 1 of 10" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 8 of 10, Dose-Dense AC followed by Paclitaxel + Trastuzumab", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 8 of 10. DOXOrubicin 60 mg/m2 IV day 1, every 14 days for 4 cycles (dose-dense, with growth factor support). Tall-man per ISMP. Cumulative lifetime cap is the conventional anthracycline ceiling (warn 450, hard 550 mg/m2), not a dose from the breast dosing table."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 8 of 10, Dose-Dense AC followed by Paclitaxel + Trastuzumab", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 8 of 10. Cyclophosphamide 600 mg/m2 IV day 1, every 14 days for 4 cycles (dose-dense phase)."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 175,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 8 of 10, Dose-Dense AC followed by Paclitaxel + Trastuzumab", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 8 of 10. PACLitaxel 175 mg/m2 IV day 1, every 14 days for 4 cycles, following completion of the AC phase. Tall-man per ISMP."
+      },
+      {
+        "id": "trastuzumab-loading",
+        "name": "Trastuzumab (loading dose)",
+        "basis": "mgkg",
+        "dosePerUnit": 4,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 8 of 10", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 8 of 10. Trastuzumab 4 mg/kg IV loading dose, given with the first dose of paclitaxel (NOT with the anthracycline)."
+      },
+      {
+        "id": "trastuzumab-maintenance",
+        "name": "Trastuzumab (weekly maintenance)",
+        "basis": "mgkg",
+        "dosePerUnit": 2,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 8 of 10", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 8 of 10. Trastuzumab 2 mg/kg IV weekly to complete 1 year of treatment. Alternative (source-stated): trastuzumab 6 mg/kg IV every 21 days following completion of paclitaxel, to complete 1 year of trastuzumab therapy."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": 8,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling to prevent hypersensitivity; give before paclitaxel." }
+    ],
+    "supportiveCare": [
+      "G-CSF / myeloid growth factor support: dose-dense (every-14-day) cycles require myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n.",
+      "Cardiac: do not overlap trastuzumab with the anthracycline (BINV-M 4 of 10 footnote h); evaluate LVEF before and during trastuzumab (every 3 months per FDA label / BINV-M 1 of 10)."
+    ]
+  },
+  "monitoring": [
+    "LVEF at baseline and periodically during trastuzumab (every 3 months per FDA label / BINV-M 1 of 10)",
+    "CBC before each cycle",
+    "cumulative anthracycline dose tracking (DOXOrubicin)",
+    "peripheral neuropathy assessment (PACLitaxel)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "LVEF", "cumulative anthracycline", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "significant decline in LVEF or symptomatic heart failure", "drug": "trastuzumab", "action": "hold/review", "text": "Hold trastuzumab and obtain clinical review per LVEF monitoring guidance (BINV-M 1 of 10)." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 22102 to 22107 (HER2/ERBB2-amplified breast cancer: trastuzumab + chemo among listed options)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "Dosing: Preoperative/Adjuvant Therapy Regimens, HER2-Positive, Dose-Dense AC followed by Paclitaxel + Trastuzumab, BINV-M 8 of 10; anthracycline/trastuzumab cardiac caution BINV-M 4 of 10 footnote h; setting BINV-M 3 of 10",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the breast HER2-directed sequential regimen dose-dense AC followed by paclitaxel plus trastuzumab (ddAC-TH). Serves subtype #4 (HER2-positive), histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. DeVita 12th ed. names the trastuzumab-plus-chemo framework (lines 22102 to 22107) but does not tabulate the per-drug doses; therefore every numeric dose is sourced to Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 8 of 10. DOXOrubicin 60 mg/m2 and cyclophosphamide 600 mg/m2 day 1 every 14 days for 4 cycles (dose-dense, with growth factor support), followed by paclitaxel 175 mg/m2 day 1 every 14 days for 4 cycles; trastuzumab 4 mg/kg loading with the first paclitaxel then 2 mg/kg weekly to complete 1 year (alternative 6 mg/kg every 21 days is source-stated). Trastuzumab is started with paclitaxel and never overlapped with the anthracycline. ISMP tall-man applied (DOXOrubicin, PACLitaxel). The DOXOrubicin cumulative lifetime cap (warn 450, hard 550 mg/m2) is the conventional anthracycline ceiling, not a dose from the breast table. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

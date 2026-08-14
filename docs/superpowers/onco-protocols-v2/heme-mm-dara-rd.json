@@ -1,0 +1,101 @@
+{
+  "id": "heme-mm-dara-rd",
+  "name": "Daratumumab + Lenalidomide + Dexamethasone (DRd)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "DRd is an antibody-based triplet and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS), not access to DRd. Type and screen must be performed before starting daratumumab because the antibody interferes with serologic (indirect antiglobulin) testing. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "primary therapy for newly diagnosed multiple myeloma when hematopoietic cell transplant (HCT) is deferred or not indicated (transplant-ineligible)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (primary) therapy for newly diagnosed transplant-ineligible / HCT-deferred multiple myeloma; Preferred, category 1 (MAIA)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "newly diagnosed symptomatic multiple myeloma with HCT deferred or not indicated (transplant-ineligible)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G (Primary Therapy if HCT-Deferred or HCT Not Indicated); Daratumumab/Lenalidomide/Dexamethasone, Preferred, category 1" },
+    { "criterion": "serology", "requirement": "type and screen before first daratumumab dose (daratumumab interferes with indirect antiglobulin testing)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MS (perform type and screen before using daratumumab or isatuximab-irfc)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "daratumumab",
+        "name": "Daratumumab",
+        "basis": "flat",
+        "dosePerUnit": 1800,
+        "unit": "mg",
+        "days": [1, 8, 15, 22],
+        "route": "SC",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, DRd entry, line 286349 (Daratumumab 1,800 mg SC (or 16 mg/kg IV) weekly x 8 weeks and then every 2 weeks for 4 months, and then once monthly)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286349). Daratumumab 1,800 mg SC (or 16 mg/kg IV) weekly for 8 weeks, then every 2 weeks for 4 months, then once monthly, continued until progression. On a 28-day cycle the weekly induction maps to days 1, 8, 15, 22 (cycles 1 to 2); the every-2-weeks phase to days 1 and 15 (approximately cycles 3 to 6); the monthly phase to day 1. Give infusion/injection-reaction premedication (corticosteroid, antihistamine, antipyretic). Perform type and screen before the first dose (interferes with indirect antiglobulin testing)."
+      },
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 25,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, DRd entry, line 286351 (Lenalidomide 25 mg PO on days 1-21)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286351). Lenalidomide 25 mg PO on days 1 to 21 of a 28-day cycle. Requires VTE thromboprophylaxis (aspirin or anticoagulation) and REMS-program dispensing (teratogen); reduce dose for renal impairment per CrCl."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": 40,
+        "unit": "mg",
+        "days": [1, 8, 15, 22],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, DRd entry, line 286352 (Dexamethasone 40 mg PO on days 1, 8, 15, and 22)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286352). Dexamethasone 40 mg PO on days 1, 8, 15, and 22 of a 28-day cycle. A lower dose may be used for older or frail patients; dose taken exactly as the source prints it."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "Daratumumab infusion/injection-reaction prophylaxis", "notes": "corticosteroid, antihistamine and antipyretic before daratumumab; montelukast may be added for reaction risk per institutional practice." }
+    ],
+    "supportiveCare": [
+      "Daratumumab: monitor for infusion/injection reactions (mainly with the first dose); perform type and screen before the first dose (serologic interference).",
+      "Lenalidomide: VTE thromboprophylaxis (aspirin for standard risk, therapeutic anticoagulation for higher risk) and REMS-program dispensing (teratogen); adjust for renal impairment.",
+      "Herpes zoster (VZV) and Pneumocystis prophylaxis per institutional practice (anti-CD38 antibody infection risk).",
+      "Antiemetics: low emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide renal clearance)",
+    "glucose and blood pressure (dexamethasone)",
+    "infection surveillance (anti-CD38 antibody)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "type and screen (daratumumab)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia or thrombocytopenia", "drug": "lenalidomide", "action": "hold/reduce", "text": "Hold and resume lenalidomide at a reduced dose per labeling for grade 3 to 4 cytopenia; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, DRd entry (lines 286349 to 286353)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G (Primary Therapy if HCT-Deferred or HCT Not Indicated): Daratumumab/Lenalidomide/Dexamethasone, Preferred, category 1 (MAIA)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for DRd (daratumumab + lenalidomide + dexamethasone) in newly diagnosed transplant-ineligible / HCT-deferred multiple myeloma (#82). Every dose is sourced to DeVita 12th ed., Chapter 74, Table 74.6 (p.1520): daratumumab 1,800 mg SC (or 16 mg/kg IV) weekly x 8 weeks then every 2 weeks for 4 months then monthly (line 286349); lenalidomide 25 mg PO days 1 to 21 (line 286351); dexamethasone 40 mg PO days 1, 8, 15, 22 (line 286352); 28-day cycle. Preferred, category 1 status for the HCT-deferred / not-indicated setting is sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G (MAIA). The daratumumab per-cycle day mapping reflects the printed weekly-then-tapering schedule on a 28-day cycle. Type and screen must precede the first daratumumab dose (serologic interference); lenalidomide requires VTE prophylaxis and REMS. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

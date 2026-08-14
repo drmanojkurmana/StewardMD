@@ -1,0 +1,168 @@
+{
+  "id": "cns-pcnsl-hd-mtx",
+  "name": "High-dose methotrexate-based induction with rituximab and leucovorin rescue (primary CNS lymphoma)",
+  "disease": "Primary CNS lymphoma",
+  "diseaseId": "primary_cns_lymphoma",
+  "histology": "primary CNS diffuse large B-cell lymphoma (CD20-positive)",
+  "stage": [],
+  "biomarkers": {
+    "CD20": "positive (gates the rituximab component; most PCNSL is CD20-positive diffuse large B-cell lymphoma)",
+    "note": "Rituximab is added for CD20-positive disease. High-dose intravenous methotrexate at 3.5 g/m2 or higher is required to cross the blood-brain barrier and reach therapeutic CSF levels. Per Standard Guidelines (NCCN), CNS Cancers, Primary CNS Lymphoma: Systemic Therapy (PCNS-A) and Discussion."
+  },
+  "treatmentSetting": "induction (newly diagnosed)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line induction",
+  "eligibilityCriteria": [
+    { "criterion": "organFunction", "requirement": "adequate renal function and ability to tolerate systemic methotrexate at 3.5 g/m2 or higher (GFR-based dose adjustment at 8 g/m2)", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "PCNS-A footnote n (GFR adjust at 8 g/m2; glucarpidase for prolonged clearance), cns.txt line 2616; Discussion cns.txt line 8644 (>=3.5 g/m2 to cross the BBB)" },
+    { "criterion": "biomarker", "requirement": "CD20-positive for the rituximab component", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "PCNS-A (High-Dose Methotrexate combined with Rituximab), cns.txt lines 2768 to 2769" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "methotrexate-hd",
+        "name": "Methotrexate (high-dose IV)",
+        "basis": "bsa",
+        "dosePerUnit": "3500 to 8000",
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "PCNS-A, cns.txt lines 2769 (High-Dose Methotrexate 8 g/m2 with rituximab), 2773 (High-Dose Methotrexate 3.5 g/m2, MPV backbone), 2779 to 2780 (maintenance 3.5 to 8 g/m2)",
+          "evidenceStatus": "current"
+        },
+        "notes": "High-dose methotrexate 3.5 to 8 g/m2 IV (that is 3500 to 8000 mg/m2; the unit enum has no g/m2, so the g/m2 value is multiplied by 1000). The 3.5 g/m2 level is the MPV (methotrexate/leucovorin/procarbazine/vincristine) backbone; the 8 g/m2 level is combined with rituximab. Dose is adjusted for GFR at 8 g/m2. Mandatory leucovorin rescue and methotrexate-level monitoring apply (see supportiveCare and the leucovorin component). Sources: cns.txt lines 2769, 2773, 2779 to 2780; DeVita 12th ed. devita.txt lines 273335 and 273504 (HD-MTX 3.5 to 8 g/m2)."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "PCNS-A (High-Dose Methotrexate combined with Rituximab), cns.txt lines 2768 to 2769; per-cycle rituximab dose and schedule not printed in the cited sources",
+          "evidenceStatus": "current"
+        },
+        "notes": "Rituximab (anti-CD20) is added for CD20-positive disease. The cited sources name rituximab as a component of the HD-MTX and MPV backbones but do not print a per-cycle dose or schedule for this regimen (PCNSL rituximab schedules vary, for example 375 mg/m2 or 500 mg/m2, sometimes twice weekly), so basis, dose, and unit are VERIFY and must be resolved from a dose-bearing source. Not borrowed from the different R2 (rituximab/lenalidomide) row."
+      },
+      {
+        "id": "leucovorin-rescue",
+        "name": "Leucovorin (folinic acid) rescue",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV or PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "PCNS-A (Methotrexate/Leucovorin throughout), cns.txt line 2769; footnote n, cns.txt line 2616 (glucarpidase for prolonged methotrexate clearance)",
+          "evidenceStatus": "current"
+        },
+        "notes": "Leucovorin rescue is MANDATORY after every high-dose methotrexate infusion and is titrated to timed serum methotrexate levels; it is started at a fixed interval after the methotrexate infusion and continued until methotrexate clears. The cited sources establish that leucovorin rescue accompanies HD-MTX but do not print the rescue dose or interval, so basis, dose, and unit are VERIFY. Consider glucarpidase for prolonged clearance from methotrexate-induced renal toxicity (cns.txt footnote n, line 2616)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "antihistamine, acetaminophen, and consider corticosteroid before rituximab to reduce infusion reactions (dose/schedule per rituximab component, which is VERIFY)." }
+    ],
+    "supportiveCare": [
+      "MANDATORY leucovorin rescue after every HD-MTX infusion, titrated to timed serum methotrexate levels",
+      "serial serum methotrexate level monitoring until clearance",
+      "aggressive intravenous hydration with urine alkalinization (target urine pH 7 or higher) to prevent methotrexate crystalluria and nephrotoxicity",
+      "GFR-based methotrexate dose adjustment at 8 g/m2; consider glucarpidase for prolonged methotrexate clearance due to methotrexate-induced renal toxicity (cns.txt footnote n, line 2616)",
+      "avoid drugs that impair methotrexate clearance (NSAIDs, penicillins, proton pump inhibitors, trimethoprim-sulfamethoxazole) around HD-MTX",
+      "rituximab: hepatitis B screening before therapy (reactivation risk)"
+    ]
+  },
+  "monitoring": [
+    "serum methotrexate level at 24, 48, 72 hours (or per institutional schedule) until clearance",
+    "renal function and urine pH during and after each HD-MTX infusion",
+    "CBC and mucositis assessment (methotrexate myelosuppression and mucositis)",
+    "MRI brain and, if involved, CSF cytology and ophthalmologic (slit-lamp) assessment"
+  ],
+  "clearanceChecks": ["renal function/GFR", "urine pH", "methotrexate level clearance from prior cycle", "CBC", "hepatitis B status"],
+  "doseModificationRules": [
+    { "condition": "delayed methotrexate clearance or rising creatinine", "action": "escalate rescue", "text": "Review required. Delayed clearance requires intensified and prolonged leucovorin rescue, continued hydration and alkalinization, and consideration of glucarpidase. GFR-adjust methotrexate at 8 g/m2. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Lymphomas chapter, PCNSL, devita.txt lines 273335 and 273504 (HD-MTX monotherapy 3.5 to 8 g/m2); line 273377 (R-MPV induction: rituximab, HD-MTX, procarbazine, vincristine)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "date": null,
+        "locator": "harrison.txt line 103063 (PCNSL treated with high-dose methotrexate-based regimens)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Primary CNS Lymphoma: Systemic Therapy (PCNS-A), cns.txt lines 2768 to 2780 (HD-MTX 8 g/m2 with rituximab; MPV with HD-MTX 3.5 g/m2; maintenance 3.5 to 8 g/m2); footnote n cns.txt line 2616; Discussion cns.txt line 8644 (>=3.5 g/m2 to cross the BBB)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.drugs[1].basis",
+    "regimen.drugs[1].dosePerUnit",
+    "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis",
+    "regimen.drugs[2].dosePerUnit",
+    "regimen.drugs[2].unit",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "High-dose methotrexate at 3.5 to 8 g/m2 IV is grounded in Standard Guidelines (NCCN), CNS Cancers, Primary CNS Lymphoma: Systemic Therapy (cns.txt lines 2769, 2773, 2779 to 2780) and DeVita 12th ed. (devita.txt lines 273335 and 273504); the g/m2 value is carried as 3500 to 8000 mg/m2 because the schema unit enum has no g/m2. The 3.5 g/m2 level is the MPV backbone and 8 g/m2 is the rituximab-combined level; both require >=3.5 g/m2 to cross the blood-brain barrier (cns.txt line 8644). Rituximab and leucovorin are named as mandatory components but the cited sources do not print their per-cycle dose or schedule for this regimen, so their basis, dose, and unit are the literal VERIFY (listed in verifyFields) and were NOT invented (the rituximab dose was deliberately not borrowed from the different R2 row). Mandatory HD-MTX safety (leucovorin rescue titrated to methotrexate levels, serial level monitoring, IV hydration with urine alkalinization, GFR-based adjustment at 8 g/m2, glucarpidase for delayed clearance) is captured per cns.txt footnote n (line 2616). cycleLengthDays and cycles are VERIFY. No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

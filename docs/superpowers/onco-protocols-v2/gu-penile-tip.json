@@ -1,0 +1,110 @@
+{
+  "id": "gu-penile-tip",
+  "name": "TIP (PACLitaxel / Ifosfamide / CISplatin, with mesna)",
+  "disease": "Penile cancer",
+  "diseaseId": "penile_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["III", "IV (N2 to N3, M0)"],
+  "biomarkers": {
+    "note": "The cytotoxic TIP backbone is not biomarker-restricted. HPV/p16 status is prognostic in penile squamous cell carcinoma but is not a dose gate. Per Standard Guidelines (NCCN), Penile Cancer, Principles of Systemic Therapy (PN-D)."
+  },
+  "treatmentSetting": "neoadjuvant",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "preferred neoadjuvant chemotherapy before inguinal (ILND) or pelvic (PLND) lymph node dissection in node-positive penile squamous cell carcinoma; also an adjuvant and first-line metastatic option per source",
+  "eligibilityCriteria": [
+    { "criterion": "nodalStatus", "requirement": "node-positive penile SCC: bulky/mobile inguinal nodes 4 cm or larger, or TX N2 to N3 M0 disease; fine-needle-aspiration or biopsy-confirmed", "source": "Standard Guidelines (NCCN), Penile Cancer", "locator": "v2.2026, Principles of Systemic Therapy (PN-D 1 of 5): neoadjuvant TIP preferred for 4 cm or larger inguinal nodes; TX N2 to N3 M0 can receive four courses of neoadjuvant TIP" },
+    { "criterion": "surgicalCandidate", "requirement": "eligible for consolidative surgery after chemotherapy", "source": "Standard Guidelines (NCCN), Penile Cancer", "locator": "v2.2026, PN-D 1 of 5 (stable or responding disease should undergo consolidative surgery with curative intent)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 175,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 3 hours",
+        "infusionDuration": "3 hours",
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), TIP: PACLitaxel 175 mg/m2 IV over 3 hours on Day 1", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, PN-D 4 of 5. PACLitaxel 175 mg/m2 IV over 3 hours, Day 1. Requires corticosteroid/antihistamine/H2 premedication (hypersensitivity). ISMP tall-man."
+      },
+      {
+        "id": "ifosfamide",
+        "name": "ifosfamide",
+        "basis": "bsa",
+        "dosePerUnit": 1200,
+        "unit": "mg/m2",
+        "days": [1, 2, 3],
+        "route": "IV over 2 hours",
+        "infusionDuration": "2 hours",
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), TIP: Ifosfamide 1200 mg/m2 IV over 2 hours on Days 1 to 3", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, PN-D 4 of 5. ifosfamide 1200 mg/m2 IV over 2 hours, Days 1 to 3, WITH MESNA PROTECTION (mandatory uroprotection against hemorrhagic cystitis). Monitor for ifosfamide encephalopathy. ISMP tall-man."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 25,
+        "unit": "mg/m2",
+        "days": [1, 2, 3],
+        "route": "IV over 2 hours with hydration",
+        "infusionDuration": "2 hours",
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), TIP: Cisplatin 25 mg/m2 IV over 2 hours on Days 1 to 3", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, PN-D 4 of 5. CISplatin 25 mg/m2 IV over 2 hours, Days 1 to 3. ISMP tall-man. No lifetime cumulative cap; requires IV pre/post hydration; monitor nephrotoxicity, ototoxicity, peripheral neuropathy."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 4,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "Corticosteroid, H1 and H2 antihistamine premedication before paclitaxel (hypersensitivity prophylaxis)." },
+      { "name": "Mesna (uroprotection)", "notes": "Mandatory with ifosfamide to prevent hemorrhagic cystitis; dose per institutional ifosfamide order set (source does not state a numeric mesna dose)." },
+      { "name": "Hydration", "notes": "IV pre- and post-hydration with CISplatin; supports mesna uroprotection." }
+    ],
+    "supportiveCare": [
+      "Uroprotection: mesna with every ifosfamide dose; monitor urine for hematuria (hemorrhagic cystitis).",
+      "Neurologic: monitor for ifosfamide encephalopathy (confusion, somnolence).",
+      "Nephroprotection: IV hydration and electrolyte repletion with each CISplatin dose.",
+      "Antiemetics: CISplatin-containing multiday regimen; prophylaxis per emetogenicity tier. Confirm exact institutional/guideline tier.",
+      "G-CSF: consider per febrile-neutropenia risk assessment for this three-drug regimen."
+    ]
+  },
+  "monitoring": [
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - CISplatin",
+    "Ototoxicity and peripheral neuropathy assessment - CISplatin / PACLitaxel",
+    "Urinalysis for hematuria - ifosfamide (hemorrhagic cystitis)",
+    "Neurologic status for encephalopathy - ifosfamide",
+    "CBC before each cycle",
+    "Restage inguinal/pelvic nodes to assess response before consolidative surgery"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function and electrolytes", "adequate hydration", "mesna co-administered", "neurologic status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ifosfamide encephalopathy (confusion, somnolence)", "drug": "ifosfamide", "action": "hold/review", "text": "Hold ifosfamide and obtain clinical review; consider methylene blue per institutional protocol. Physician decides." },
+    { "condition": "hemorrhagic cystitis / hematuria", "drug": "ifosfamide", "action": "hold/review", "text": "Increase hydration and mesna, hold ifosfamide, review. Physician decides." },
+    { "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy", "drug": "cisplatin", "action": "hold/reduce/review", "text": "Review required; consider dose reduction or delay. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "lines 165979 to 165985 (phase II TIP - cisplatin, paclitaxel, ifosfamide - in cN2/cN3 penile cancer; 23 of 30 patients completed four cycles; the regimen has popularized neoadjuvant multimodal therapy)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), TIP (preferred): PACLitaxel 175 mg/m2 IV over 3 h Day 1, Ifosfamide 1200 mg/m2 IV over 2 h Days 1 to 3, Cisplatin 25 mg/m2 IV over 2 h Days 1 to 3, repeat every 3 to 4 weeks; PN-D 1 of 5 (neoadjuvant TIP preferred, four courses for TX N2 to N3 M0)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for TIP (PACLitaxel / Ifosfamide / CISplatin, with mesna), the preferred neoadjuvant chemotherapy for node-positive penile squamous cell carcinoma (#62). Doses from Standard Guidelines (NCCN), Penile Cancer v2.2026, Principles of Systemic Therapy (PN-D 4 of 5): PACLitaxel 175 mg/m2 IV over 3 hours Day 1, ifosfamide 1200 mg/m2 IV over 2 hours Days 1 to 3 (with mesna protection), and CISplatin 25 mg/m2 IV over 2 hours Days 1 to 3. The source states repeat every 3 to 4 weeks; cycleLengthDays is modeled at the 21-day base of that stated range (not a fixed single value in the source). Four courses of neoadjuvant TIP are given before consolidative surgery in TX N2 to N3 M0 disease (PN-D 1 of 5). Corroborated by DeVita 12th ed. (lines 165979 to 165985, the phase II TIP experience in cN2/cN3 penile cancer, four cycles). Ifosfamide mandates mesna uroprotection (hemorrhagic cystitis); the source does not state a numeric mesna dose, so mesna dosing follows the institutional ifosfamide order set. ifosfamide encephalopathy is monitored. CISplatin has no lifetime cumulative cap; hydration and nephro/oto/neuro monitoring are specified. PACLitaxel requires hypersensitivity premedication. ISMP tall-man applied (PACLitaxel, CISplatin, ifosfamide). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

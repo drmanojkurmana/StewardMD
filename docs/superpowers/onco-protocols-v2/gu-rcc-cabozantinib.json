@@ -1,0 +1,73 @@
+{
+  "id": "gu-rcc-cabozantinib",
+  "name": "Cabozantinib (single agent)",
+  "disease": "Renal cell carcinoma",
+  "diseaseId": "renal_cell_carcinoma",
+  "histology": "clear cell renal cell carcinoma",
+  "stage": ["IV", "relapsed/unresectable"],
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). Cabozantinib is an oral multikinase inhibitor targeting VEGFR, MET, and AXL; no companion biomarker is required. In the landmark METEOR trial it improved OS, PFS, and ORR versus everolimus after prior VEGF-targeted therapy; also a listed first-line option. Per Standard Guidelines (NCCN), Kidney Cancer v1.2027."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "subsequent-line (after prior anti-angiogenic / IO-containing therapy) for advanced clear cell RCC; also a first-line option (single agent)",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "clear cell renal cell carcinoma", "source": "Standard Guidelines (NCCN), Kidney Cancer", "locator": "v1.2027, systemic therapy for clear cell RCC (Cabozantinib listed; category 2A preferred for poor/intermediate-risk, category 2B other recommended for favorable-risk)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cabozantinib",
+        "name": "Cabozantinib",
+        "basis": "flat",
+        "dosePerUnit": 60,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 151812 (cabozantinib at starting dose of 60 mg daily, METEOR trial)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 151812 (METEOR): cabozantinib starting dose 60 mg PO once daily continuously (represented as days 1 to 28 of a nominal 28-day cycle). This is the single-agent cabozantinib dose. NOTE: the cabozantinib dose used in the nivolumab + cabozantinib combination (CheckMate-9ER, protocol gu-rcc-nivo-cabozantinib) is different (40 mg) and is NOT this dose. Common grade 3/4 toxicities: hypertension, diarrhea, fatigue, hand-foot skin reaction."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Blood pressure monitoring and management (VEGF TKI hypertension).",
+      "Monitor for diarrhea, hand-foot skin reaction, and fatigue.",
+      "Baseline and periodic thyroid function (TSH) and liver function.",
+      "Assess for proteinuria."
+    ]
+  },
+  "monitoring": [
+    "blood pressure (VEGF TKI hypertension)",
+    "liver function tests",
+    "thyroid function (TSH)",
+    "hand-foot skin reaction / diarrhea",
+    "proteinuria",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["blood pressure", "liver", "thyroid", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 hypertension, HFSR, diarrhea, or hepatotoxicity", "drug": "cabozantinib", "action": "hold/reduce", "text": "Hold and resume at a reduced dose per labeling for grade 3 or higher hypertension, hand-foot skin reaction, diarrhea, or hepatotoxicity; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 151812-151813 (METEOR: cabozantinib 60 mg daily vs everolimus 10 mg daily)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kidney Cancer", "version": "1.2027", "date": null, "locator": "Systemic therapy for clear cell RCC (Cabozantinib: category 2A preferred for poor/intermediate-risk, category 2B other recommended for favorable-risk; footnote e, line ~1064). mg dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent cabozantinib in advanced clear cell renal cell carcinoma (serves clear cell subtypes #55 and #56). The dose (cabozantinib 60 mg PO once daily) is sourced to DeVita 12th ed., line 151812 (the METEOR trial starting dose). This is the MONOTHERAPY dose; the cabozantinib dose in the nivolumab + cabozantinib combination (CheckMate-9ER) is different (40 mg) and is handled separately. Standard Guidelines (NCCN), Kidney Cancer v1.2027 lists cabozantinib as a preferred/other-recommended clear cell RCC regimen but does not print a mg dose. VEGF/MET TKI class monitoring (blood pressure, liver, thyroid, hand-foot skin reaction, proteinuria) is included. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

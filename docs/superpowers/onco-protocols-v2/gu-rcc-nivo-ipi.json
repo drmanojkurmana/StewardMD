@@ -1,0 +1,86 @@
+{
+  "id": "gu-rcc-nivo-ipi",
+  "name": "Nivolumab + Ipilimumab, then Nivolumab maintenance (CheckMate-214)",
+  "disease": "Renal cell carcinoma",
+  "diseaseId": "renal_cell_carcinoma",
+  "histology": "clear cell renal cell carcinoma",
+  "stage": ["IV", "relapsed/unresectable"],
+  "biomarkers": {
+    "histology": "clear cell",
+    "IMDC_risk": "intermediate or poor",
+    "note": "Clear cell RCC (subtypes #55/#56). Dual checkpoint blockade (nivolumab anti-PD-1 + ipilimumab anti-CTLA-4). CheckMate-214 established the combination versus sunitinib; the OS/ORR benefit was in intermediate-/poor-risk (IMDC) disease. No positive companion biomarker is required to start (PD-L1 not required). Per Standard Guidelines (NCCN), Kidney Cancer v1.2027 (Ipilimumab + Nivolumab, category 1)."
+  },
+  "treatmentSetting": ["metastatic", "maintenance"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic clear cell RCC (intermediate-/poor-risk IMDC)",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "clear cell renal cell carcinoma", "source": "Standard Guidelines (NCCN), Kidney Cancer", "locator": "v1.2027, first-line clear cell RCC (Ipilimumab + Nivolumab, category 1; line ~1048/1105)" },
+    { "criterion": "IMDC risk", "requirement": "intermediate or poor risk (primary benefit population)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "CheckMate-214 intermediate-/poor-risk RCC (line ~2537-2550)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "mgkg",
+        "dosePerUnit": 3,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 33128 (ipilimumab 1 mg/kg with nivolumab 3 mg/kg in other indications; given every 3 weeks for up to 4 induction cycles, followed by single-agent nivolumab maintenance)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 33128: nivolumab 3 mg/kg IV combined with ipilimumab 1 mg/kg IV every 3 weeks for up to 4 induction cycles, then single-agent nivolumab maintenance. Induction dose modeled here (day 1, q21). Maintenance is single-agent nivolumab per DeVita; the exact maintenance flat schedule (e.g., 240 mg every 2 weeks or 480 mg every 4 weeks per label) is described in regimen.cycles and is a labeling detail, not modeled as a separate numeric drug dose."
+      },
+      {
+        "id": "ipilimumab",
+        "name": "Ipilimumab",
+        "basis": "mgkg",
+        "dosePerUnit": 1,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 33128 (ipilimumab 1 mg/kg with nivolumab 3 mg/kg in other indications; every 3 weeks x4 induction cycles)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 33128: ipilimumab 1 mg/kg IV with nivolumab 3 mg/kg IV every 3 weeks for 4 induction cycles. Ipilimumab is given during induction only (4 doses); it is NOT continued in maintenance."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "Induction: 4 cycles of nivolumab 3 mg/kg + ipilimumab 1 mg/kg IV every 3 weeks. Then MAINTENANCE: single-agent nivolumab (ipilimumab stopped) continued until progression or unacceptable toxicity (per DeVita 12th ed., line 33128). The exact maintenance flat schedule follows the nivolumab label (e.g., 240 mg every 2 weeks or 480 mg every 4 weeks).",
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event (irAE) monitoring across organ systems (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); dual checkpoint blockade carries a higher irAE rate than PD-1 monotherapy.",
+      "Baseline and periodic thyroid (TSH/free T4), liver function, glucose, and cortisol/ACTH as indicated.",
+      "Patient counseling on prompt reporting of irAE symptoms."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) before each cycle and as indicated",
+    "renal function (immune nephritis)",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "renal", "CBC", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "nivolumab + ipilimumab", "action": "hold/steroids", "text": "Hold checkpoint inhibitor(s) and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3-4 irAE. Obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 33128 (ipilimumab 1 mg/kg + nivolumab 3 mg/kg q3w x4 induction then single-agent nivolumab maintenance); CheckMate-214 intermediate-/poor-risk RCC, lines ~2537-2550", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kidney Cancer", "version": "1.2027", "date": null, "locator": "First-line clear cell RCC: Ipilimumab + Nivolumab (category 1), systemic-therapy pages (line ~1048/1105). mg dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for nivolumab + ipilimumab dual checkpoint blockade (CheckMate-214) in advanced clear cell renal cell carcinoma, intermediate-/poor-risk (serves clear cell subtypes #55 and #56). The induction doses (nivolumab 3 mg/kg + ipilimumab 1 mg/kg IV every 3 weeks for 4 cycles, then single-agent nivolumab maintenance) are sourced to DeVita 12th ed., line 33128, which states the approved combination dosing for indications other than melanoma/HCC. Standard Guidelines (NCCN), Kidney Cancer v1.2027 names Ipilimumab + Nivolumab as a category 1 first-line clear cell RCC regimen but does not print mg doses. The maintenance nivolumab flat schedule (240 mg q2w or 480 mg q4w per label) is described narratively in regimen.cycles and is not modeled as a separate numeric dose, so no field is set to VERIFY. Immune-related adverse event monitoring is emphasized given the higher irAE rate of dual checkpoint blockade. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

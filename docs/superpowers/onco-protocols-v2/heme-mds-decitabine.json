@@ -1,0 +1,67 @@
+{
+  "id": "heme-mds-decitabine",
+  "name": "Decitabine (MDS, hypomethylating agent)",
+  "disease": "Myelodysplastic syndromes (MDS)",
+  "diseaseId": "myelodysplastic_syndromes",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "note": "Not biomarker-restricted. Treatment is risk-stratified by IPSS-R: decitabine is a hypomethylating-agent option for higher-risk MDS (IPSS-R Intermediate, High, Very-High) and is also used in lower-risk MDS. Note that a phase III overall survival benefit is reported for azacitidine and not for decitabine. Per Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026."
+  },
+  "treatmentSetting": "risk-stratified by IPSS-R; option for higher-risk MDS, also used in lower-risk MDS",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [
+    { "criterion": "riskStratification", "requirement": "MDS risk-stratified by IPSS-R (higher-risk: Intermediate, High, Very-High; lower-risk: Very-Low, Low, Intermediate)", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "locator": "v3.2026, MDS-4 (lower-risk) and MDS-7 (higher-risk); IPSS-R on MDS-B" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "decitabine",
+        "name": "Decitabine",
+        "basis": "bsa",
+        "dosePerUnit": 20,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "version": "3.2026", "date": null, "locator": "Footnotes for MDS-7 (standard monthly dosing of decitabine is 20 mg/m2/day IV x 5 days)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026, Footnotes for MDS-7. Decitabine 20 mg/m2/day IV on days 1 to 5 of each 28-day cycle. Hypomethylating agent; response may not be evident before 3 to 4 cycles, so continue until progression if tolerated. Expect myelosuppression."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Antiemetic prophylaxis for a hypomethylating agent per institutional practice.",
+      "Continue treatment for at least 3 to 4 cycles before assessing response; continue until progression if tolerating therapy.",
+      "Transfusion support and infection monitoring for treatment-related cytopenias."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle and during cycles (myelosuppression)",
+    "renal and hepatic function",
+    "bone marrow assessment for response after several cycles"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "prolonged or severe cytopenias", "drug": "decitabine", "action": "delay/reduce", "text": "Delay the next cycle or reduce dose per prescribing information for prolonged severe cytopenias; physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "version": "3.2026", "date": "2026-01-12", "locator": "Footnotes for MDS-7 (standard monthly dosing of decitabine is 20 mg/m2/day IV x 5 days); MDS-4 (lower-risk) and MDS-7 (higher-risk) treatment pathways; IPSS-R on MDS-B", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent", "lineOfTherapy"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for decitabine in MDS, a hypomethylating agent used in risk-stratified (IPSS-R) treatment. Dose grounded to Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026, Footnotes for MDS-7: decitabine 20 mg/m2/day IV on days 1 to 5 of each 28-day cycle. cycles null because a hypomethylating agent is continued until progression (response may take 3 to 4 cycles). An alternative 3-day IV schedule exists in the literature but the modeled 5-day schedule is the guideline standard-dose statement. histology, treatmentIntent and lineOfTherapy are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

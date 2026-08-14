@@ -1,0 +1,99 @@
+{
+  "id": "hn-cetuximab-rt",
+  "name": "Cetuximab plus concurrent radiation (Bonner regimen)",
+  "disease": "Head and neck squamous cell carcinoma",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["III", "IVA", "IVB"],
+  "biomarkers": {
+    "HPV_p16": "prognostic only",
+    "note": "Cetuximab is an anti-EGFR antibody; EGFR is highly expressed in most head and neck squamous cell carcinomas. p16/HPV status is prognostic but not a dose gate. Note: in p16-positive (HPV-associated) oropharyngeal cancer, RTOG 1016 and De-ESCALATE showed cetuximab-RT was INFERIOR to cisplatin-RT; cetuximab-RT is used mainly for cisplatin-ineligible patients based on the Bonner trial (Standard Guidelines (NCCN) 2.2026; DeVita 12th ed., Chapter 23, lines 58117 to 58121 and 62062)."
+  },
+  "treatmentSetting": ["definitive-chemoRT"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "concurrent bioradiation for locoregionally advanced SCCHN, principally for patients who are not candidates for cisplatin; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "locoregionally advanced SCCHN treated with definitive radiation, typically in cisplatin-ineligible patients", "source": "DeVita 12th ed.", "locator": "Chapter 23, lines 58117 to 58121 (cetuximab concomitant with radiation improved locoregional control, PFS, OS versus radiation alone, Bonner); line 62079 (cetuximab option per Bonner for non-cisplatin candidates)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cetuximab-loading",
+        "name": "Cetuximab (loading dose)",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV, week 1 (loading), given approximately 1 week before starting radiation",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98801 (cetuximab 400 mg/m2 week 1 followed by 250 mg/m2 weekly); line 124823 (cetuximab 400 mg/m2 loading dose)", "evidenceStatus": "unknown" },
+        "notes": "Source: cetuximab 400 mg/m2 IV loading dose in week 1 (DeVita 12th ed., lines 98801 and 124823). Bonner regimen loading dose given about 1 week before radiation begins. Premedicate with an H1 antihistamine; monitor for infusion reaction."
+      },
+      {
+        "id": "cetuximab-weekly",
+        "name": "Cetuximab (weekly maintenance)",
+        "basis": "bsa",
+        "dosePerUnit": 250,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV weekly, concurrent with radiation",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98801 (400 mg/m2 week 1 followed by 250 mg/m2 weekly); Chapter 23 line 62062 (cetuximab 250 mg per m2)", "evidenceStatus": "unknown" },
+        "notes": "Source: cetuximab 250 mg/m2 IV weekly following the loading dose (DeVita 12th ed., line 98801; Chapter 23 line 62062). Weekly during the radiation course; number of weekly doses runs with the radiation schedule and is not fixed by the cited source (see verifyFields). Monitor for acneiform rash, hypomagnesemia, and infusion reactions."
+      }
+    ],
+    "cycleLengthDays": 7,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Antihistamine premedication", "notes": "H1 antihistamine before cetuximab, especially the loading dose, to reduce infusion-reaction risk." }
+    ],
+    "supportiveCare": [
+      "Infusion-reaction precautions with cetuximab (higher risk with the loading dose).",
+      "Skin care for acneiform rash; monitor and replete magnesium (cetuximab hypomagnesemia).",
+      "Cetuximab is minimally emetogenic; antiemetic prophylaxis is not routinely required for the antibody itself."
+    ]
+  },
+  "monitoring": [
+    "Infusion-reaction monitoring during and after each cetuximab dose",
+    "Serum magnesium periodically - cetuximab hypomagnesemia",
+    "Skin assessment for acneiform rash",
+    "Mucositis / radiation dermatitis during concurrent RT"
+  ],
+  "clearanceChecks": ["infusion-reaction readiness", "serum magnesium", "skin status", "prior-dose tolerance"],
+  "doseModificationRules": [
+    { "condition": "grade 3+ infusion reaction", "drug": "cetuximab", "action": "hold/discontinue", "text": "Stop infusion; manage reaction. Grade 3 to 4 reactions generally require permanent discontinuation. Physician decides." },
+    { "condition": "severe acneiform rash", "drug": "cetuximab", "action": "hold/reduce", "text": "Review required; interrupt and consider dose modification per labeling. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "line 98801 (cetuximab 400 mg/m2 week 1 then 250 mg/m2 weekly), line 124823 (400 mg/m2 loading), Chapter 23 lines 58117 to 58121 (Bonner cetuximab-RT phase III) and line 62062 (250 mg per m2; RTOG 1016 / De-ESCALATE context)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Cetuximab listed as a concurrent systemic therapy option (algorithm line 6175, category 2B); exact loading/weekly numeric doses are not tabulated in the provided guideline pages, so numeric grounding is taken from DeVita core", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "roleInP16PositiveOropharynx",
+        "sources": [
+          { "name": "Bonner trial (via DeVita 12th ed. core)", "version": "12th ed", "value": "Cetuximab-RT improves locoregional control, PFS, and OS versus RT alone" },
+          { "name": "RTOG 1016 / De-ESCALATE (via DeVita 12th ed. and Standard Guidelines (NCCN))", "version": "2.2026", "value": "Cetuximab-RT is inferior to cisplatin-RT in p16-positive oropharyngeal cancer" }
+        ],
+        "note": "Cetuximab-RT is a valid bioradiation option (Bonner) but is inferior to high-dose cisplatin-RT in p16-positive oropharyngeal cancer; it is used chiefly for cisplatin-ineligible patients. Patient selection left to clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for Cetuximab plus concurrent radiation (Bonner regimen), an anti-EGFR bioradiation option for locoregionally advanced SCCHN, principally for cisplatin-ineligible patients. Sites served (squamous histology): oral cavity (#32), tongue (#33), lip (#34), oropharyngeal (#35), HPV-positive oropharyngeal (#36, p16/HPV prognostic only, and note cetuximab-RT is inferior to cisplatin-RT here), hypopharyngeal (#38), laryngeal (#39), sinonasal (#41); nasopharyngeal (#37) and salivary (#40) are not covered by this protocol. Doses fully grounded: Cetuximab 400 mg/m2 IV loading in week 1 then 250 mg/m2 IV weekly (DeVita 12th ed. lines 98801 and 124823; Chapter 23 lines 58117 to 58121 and 62062). basis bsa (mg/m2), consistent with the source. The number of weekly maintenance doses runs with the radiation course and is not fixed by the cited source, so regimen.cycles is set to VERIFY. A divergence records that cetuximab-RT is inferior to cisplatin-RT in p16-positive oropharyngeal cancer. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

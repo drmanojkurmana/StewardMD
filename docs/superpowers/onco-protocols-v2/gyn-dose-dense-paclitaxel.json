@@ -1,0 +1,88 @@
+{
+  "id": "gyn-dose-dense-paclitaxel",
+  "name": "Dose-dense weekly Paclitaxel + Carboplatin every 3 Weeks for Epithelial Ovarian/Fallopian Tube/Primary Peritoneal Cancer",
+  "disease": "Epithelial ovarian, fallopian tube, and primary peritoneal cancer",
+  "diseaseId": "ovarian_cancer",
+  "histology": "epithelial ovarian carcinoma (histology-agnostic backbone; high-grade serous, endometrioid, clear cell, mucinous, carcinosarcoma). Fallopian tube and primary peritoneal carcinoma are staged and treated as ovarian carcinoma and share this doublet.",
+  "stage": ["II", "III", "IV"],
+  "biomarkers": {
+    "BRCA1_2": "tested",
+    "HRD": "tested",
+    "note": "The cytotoxic dose-dense carboplatin/paclitaxel backbone is not biomarker restricted. Germline or somatic BRCA1/2 and HRD status are tested to guide maintenance PARP inhibitor selection, not the doublet itself. Per Standard Guidelines (NCCN), Ovarian Cancer, OV-5 and Principles of Maintenance PARP Inhibitor Therapy (OV-D)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line primary systemic therapy; a dose-dense weekly-paclitaxel alternative to every 3 week carboplatin/paclitaxel",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "epithelial ovarian, fallopian tube, or primary peritoneal carcinoma requiring primary systemic therapy", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "locator": "v4.2026, OV-D 7 of 12, Carboplatin every 3 Weeks/Paclitaxel Weekly" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 80,
+        "unit": "mg/m2",
+        "days": [1, 8, 15],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D 7 of 12, Carboplatin every 3 Weeks/Paclitaxel Weekly (Dose-dense Paclitaxel 80 mg/m2 IV Days 1, 8, and 15)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12. Dose-dense PACLitaxel 80 mg/m2 IV on days 1, 8, and 15 (weekly). This is the weekly dose-dense paclitaxel schedule (JGOG-type) given with every 21 day carboplatin. Requires corticosteroid and H1/H2 antihistamine premedication per paclitaxel labeling. Tall man per ISMP."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": "5 to 6",
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "OV-D 7 of 12, Carboplatin every 3 Weeks/Paclitaxel Weekly (Carboplatin AUC 5 to 6 IV Day 1)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12. CARBOplatin target AUC 5 to 6 IV on day 1 (dosed to target AUC by Calvert formula), given after the day 1 paclitaxel dose. The source prints the range AUC 5 to 6; kept as the exact sourced range rather than a single value. Tall man per ISMP. Footnote n: carboplatin dosing may be adjusted for creatinine methodology per carboplatin dosing guidelines."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid plus H1 and H2 antihistamine premedication per paclitaxel labeling before each weekly dose." }
+    ],
+    "supportiveCare": [
+      "antiemetics: carboplatin is moderate emetic risk; prophylaxis per emetogenicity tier on the day 1 platinum dose.",
+      "G-CSF: assess febrile neutropenia risk with the weekly schedule; growth factor support per institutional and NCCN guidance."
+    ]
+  },
+  "monitoring": [
+    "CBC before each weekly paclitaxel dose and before each carboplatin dose",
+    "renal function (creatinine/GFR) before each cycle for carboplatin AUC dosing",
+    "peripheral neuropathy assessment before each dose for PACLitaxel",
+    "infusion reaction monitoring for carboplatin and PACLitaxel"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "day 8 or day 15 ANC or platelets below institutional threshold", "action": "hold weekly dose", "text": "Review required. Hold the weekly paclitaxel dose per institutional protocol for the dose-dense schedule; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita establishes carboplatin/paclitaxel as the first-line ovarian backbone; the dose-dense weekly paclitaxel per-cycle dosing is taken from the guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Ovarian Cancer/Fallopian Tube Cancer/Primary Peritoneal Cancer", "version": "4.2026", "date": "2026-04-10", "locator": "Principles of Systemic Therapy, Primary Systemic Therapy Recommended Dosing, Carboplatin every 3 Weeks/Paclitaxel Weekly (dose-dense) (OV-D 7 of 12); Repeat every 21 Days x 6 cycles", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the dose-dense weekly-paclitaxel plus every 21 day carboplatin schedule for epithelial ovarian carcinoma (StewardMD reference disease ovarian_cancer, subtype #44; shared by HGSOC #45, fallopian tube #46, and primary peritoneal #47). Every dose is grounded to Standard Guidelines (NCCN) v4.2026, OV-D 7 of 12, Carboplatin every 3 Weeks/Paclitaxel Weekly: dose-dense PACLitaxel 80 mg/m2 IV days 1, 8, and 15 followed by CARBOplatin target AUC 5 to 6 IV day 1, repeat every 21 days for 6 cycles. The carboplatin AUC is kept as the exact sourced range (5 to 6) rather than a single invented value. ISMP tall man applied (CARBOplatin, PACLitaxel). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

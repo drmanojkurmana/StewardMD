@@ -1,0 +1,107 @@
+{
+  "id": "lung-keynote407",
+  "name": "Pembrolizumab + CARBOplatin + PACLitaxel then Pembrolizumab Maintenance (KEYNOTE-407, NSCLC squamous)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "neoplasms_of_the_lung",
+  "histology": "squamous cell carcinoma",
+  "stage": ["IV"],
+  "biomarkers": {
+    "histology": "squamous",
+    "PD_L1": "any (benefit shown in both PD-L1 < 1% and PD-L1 >= 1%)",
+    "EGFR": "wild-type (no actionable EGFR alteration)",
+    "ALK": "wild-type (no actionable ALK rearrangement)",
+    "note": "Chemoimmunotherapy for metastatic SQUAMOUS NSCLC regardless of PD-L1 expression. Pembrolizumab plus carboplatin plus a taxane (paclitaxel or nab-paclitaxel). The panel does NOT recommend pembrolizumab plus cisplatin with a taxane (fewer data). Trial excluded sensitizing EGFR/ALK alterations; oncogene-driven NSCLC is directed to targeted therapy first-line (drivers are uncommon in squamous). PD-1/PD-L1 inhibitor contraindications must be excluded. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, Systemic Therapy for Metastatic Disease (KEYNOTE-407); DeVita 12th ed."
+  },
+  "treatmentSetting": ["metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for metastatic squamous NSCLC without an actionable driver, any PD-L1 level",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "metastatic squamous cell NSCLC", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, MS-56 (KEYNOTE-407: pembrolizumab plus carboplatin and either paclitaxel or albumin-bound paclitaxel, category 1 preferred, metastatic squamous)" },
+    { "criterion": "biomarker", "requirement": "any PD-L1 level; no EGFR sensitizing mutation or ALK rearrangement", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "locator": "Chapter 30, KEYNOTE-407 (lines 70920 to 70926); benefit in both PD-L1 < 1% and >= 1%" },
+    { "criterion": "platinumChoice", "requirement": "carboplatin (not cisplatin) with the taxane; cisplatin/taxane not recommended", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, MS-56 (panel does not recommend pembrolizumab plus cisplatin with paclitaxel or nab-paclitaxel)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 30: pembrolizumab 200 mg every 3 weeks (line 70724); flat dose 200 mg every 3 weeks or 400 mg every 6 weeks, for up to 2 years (line 233347)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 70724 (pembrolizumab 200 mg every 3 weeks) and line 233347 (flat 200 mg every 3 weeks or 400 mg every 6 weeks, up to 2 years). Given Day 1 with carboplatin/taxane induction (4 cycles) and continued as maintenance monotherapy. Alternative schedule: 400 mg IV every 6 weeks."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": 6,
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2, footnote g: paclitaxel 200 mg/m2 and carboplatin AUC 6 every 21 days (line 4838)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F footnote g line 4838 (carboplatin AUC 6 as the carboplatin/paclitaxel doublet dose). Platinum backbone of the induction (cycles 1 to 4). Target AUC via Calvert formula (basis auc, unit AUC). ISMP tall-man (CARBOplatin)."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2, footnote g: paclitaxel 200 mg/m2 and carboplatin AUC 6 every 21 days (line 4838)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F footnote g line 4838 (paclitaxel 200 mg/m2 every 21 days). Induction only (cycles 1 to 4). Requires corticosteroid + H1/H2 antihistamine premedication per paclitaxel labeling. ISMP tall-man (PACLitaxel). Source-recognized alternative taxane: albumin-bound (nab-)paclitaxel (named as the taxane option in KEYNOTE-407, DeVita lines 70920 to 70926); its per-cycle dose and schedule are NOT stated in the cited sources and are left to clinical review rather than encoded here."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "Induction: 4 cycles every 21 days of pembrolizumab 200 mg + carboplatin AUC 6 + paclitaxel 200 mg/m2 Day 1. Maintenance: pembrolizumab 200 mg every 21 days (up to 2 years / 35 cycles per pembrolizumab schedule, DeVita line 233347 to 233348). Alternative pembrolizumab schedule: 400 mg every 6 weeks. Alternative taxane: nab-paclitaxel (dose not established in cited sources).",
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling to prevent hypersensitivity." },
+      { "name": "Antiemetic prophylaxis", "notes": "carboplatin/paclitaxel is moderate emetic risk; give prophylaxis." }
+    ],
+    "supportiveCare": [
+      "immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary/pneumonitis, colitis, endocrinopathies, myocarditis)",
+      "paclitaxel hypersensitivity premedication (corticosteroid + antihistamines)",
+      "carboplatin dosed to target AUC (Calvert formula); moderate emetic-risk antiemetic prophylaxis"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during pembrolizumab",
+    "peripheral neuropathy assessment - paclitaxel",
+    "pneumonitis surveillance (symptoms, imaging) on pembrolizumab"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." },
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "paclitaxel", "action": "reduce/hold", "text": "Reduce or hold paclitaxel per neuropathy grade; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 30, Non-small-cell Lung Cancer: KEYNOTE-407 (carboplatin plus a taxane [paclitaxel or nab-paclitaxel] +/- pembrolizumab for 4 cycles then maintenance pembrolizumab, lines 70920 to 70926); pembrolizumab 200 mg every 3 weeks (line 70724); flat 200 mg q3w or 400 mg q6w up to 2 years (line 233347 to 233348)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "MS-56 (KEYNOTE-407: pembrolizumab plus carboplatin and either paclitaxel or albumin-bound paclitaxel, category 1 preferred, metastatic squamous; cisplatin/taxane not recommended); NSCL-F footnote g line 4838 (paclitaxel 200 mg/m2 + carboplatin AUC 6 every 21 days)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the KEYNOTE-407 chemoimmunotherapy regimen in metastatic squamous NSCLC. Doses are grounded: Pembrolizumab 200 mg Day 1 every 3 weeks (or 400 mg every 6 weeks, up to 2 years) per DeVita 12th ed. lines 70724 and 233347 to 233348; CARBOplatin AUC 6 Day 1 (basis auc, unit AUC) and PACLitaxel 200 mg/m2 Day 1 every 21 days for 4 cycles per Standard Guidelines (NCCN) v7.2026 NSCL-F footnote g line 4838. Induction is 4 cycles then maintenance pembrolizumab. Squamous histology only, any PD-L1, EGFR/ALK wild-type. The source-recognized alternative taxane albumin-bound (nab-)paclitaxel is documented but NOT encoded because its per-cycle dose and schedule are not stated in the cited sources; carboplatin (not cisplatin) is the required platinum per NCCN MS-56. ISMP tall-man applied (CARBOplatin, PACLitaxel). Immune-related adverse-event monitoring and paclitaxel hypersensitivity premedication are captured. No encoded field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

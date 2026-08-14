@@ -1,0 +1,121 @@
+{
+  "id": "ped-cns-lgg",
+  "name": "Pediatric low-grade glioma: carboplatin/vinCRIStine backbone, or BRAF-targeted dabrafenib + trametinib for BRAF V600E-altered tumors; per-drug doses VERIFY",
+  "disease": "Low-grade glioma (pediatric)",
+  "diseaseId": "low_grade_glioma",
+  "histology": "pediatric low-grade glioma; pilocytic astrocytoma (WHO grade 1) is the most common, arising in cerebellum, optic pathway, or brainstem, and frequently carries BRAF fusions or mutations",
+  "stage": [],
+  "biomarkers": {
+    "BRAF_V600E": "tested; if mutated, targetable with a BRAF inhibitor plus MEK inhibitor (dabrafenib + trametinib)",
+    "BRAF_fusion": "tested; KIAA1549::BRAF fusion is the characteristic pilocytic astrocytoma alteration (MAPK-pathway activating)",
+    "NTRK_fusion": "tested; NTRK1/2/3 fusion is targetable (TRK inhibitor) where present",
+    "note": "Per Standard Guidelines (NCCN), Pediatric CNS Cancers v1.2026 and Harrison 22nd ed. Pilocytic astrocytomas frequently harbor BRAF fusions or mutations (harrison.txt lines 102931 and 102937 to 102938: BRAF V600E targetable with BRAF inhibitors). BRAF V600E-mutated pediatric glioma is targetable with dabrafenib/trametinib (ped_cns.txt lines 1203, 1209 to 1211); BRAF V600E and BRAF fusion are listed molecular alterations of significance in pediatric gliomas (ped_cns.txt lines 906 to 907). BRAF is the actionable gate; the carboplatin/vinCRIStine cytotoxic backbone is not biomarker-restricted."
+  },
+  "treatmentSetting": "primary/adjuvant systemic therapy for progressive, unresectable, or symptomatic low-grade glioma (observation or resection for resectable disease); chemotherapy is preferred over radiotherapy in young children to avoid radiation late effects",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line for progressive/unresectable low-grade glioma; BRAF/MEK-targeted therapy is an option for BRAF-altered tumors",
+  "eligibilityCriteria": [
+    { "criterion": "resectability", "requirement": "well-demarcated pilocytic lesions may be cured by complete resection; observation with serial MRI for asymptomatic residual disease; systemic therapy for progressive, unresectable, or symptomatic disease", "source": "Harrison 22nd ed", "locator": "harrison.txt lines 102926 to 102938 (pilocytic astrocytoma WHO grade 1, potentially curable if completely resected; BRAF fusions/mutations; BRAF V600E targetable) and 103006 to 103008 (observe smaller lesions, resect larger symptomatic lesions)" },
+    { "criterion": "chemoOverRT", "requirement": "in young children, initial chemotherapy is preferred over radiotherapy; vinCRIStine plus carboplatin is the most common first-line regimen for progressive childhood low-grade glioma", "source": "DeVita, Hellman, and Rosenberg's Cancer 12th ed.", "locator": "devita.txt line 241008 (children who receive initial chemotherapy compared with radiotherapy; vincristine plus carboplatin remains the most common first-line regimen) and line 244896 (HIT-LGG carboplatin-vincristine in progressive low-grade gliomas of childhood)" },
+    { "criterion": "brafGate", "requirement": "BRAF V600E-mutated tumors are eligible for dabrafenib + trametinib targeted therapy", "source": "Standard Guidelines (NCCN), Pediatric CNS Cancers v1.2026", "locator": "ped_cns.txt lines 1203, 1209 to 1211 (If BRAF V600E mutated: Dabrafenib/Trametinib)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer 12th ed.", "version": "12th ed", "date": null, "locator": "devita.txt line 241008 (vincristine plus carboplatin most common first-line regimen for progressive childhood low-grade glioma); line 244896 (HIT-LGG carboplatin-vincristine); no per-drug dose printed", "evidenceStatus": "unknown" },
+        "notes": "Cytotoxic backbone with vinCRIStine (Packer-type carboplatin/vincristine regimen). No per-drug dose is printed in the cited sources, so basis, dose, unit, and days are VERIFY (carboplatin is commonly AUC- or BSA-dosed; the basis itself is not established here). ISMP tall-man CARBOplatin (do not confuse with CISplatin). Carboplatin hypersensitivity risk rises with cumulative exposure in this population."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV push (IV only, NEVER intrathecal)",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer 12th ed.", "version": "12th ed", "date": null, "locator": "devita.txt line 241008 (vincristine plus carboplatin most common first-line regimen); no per-drug dose printed", "evidenceStatus": "unknown" },
+        "notes": "Cytotoxic backbone with carboplatin. No per-drug dose printed, so basis, dose, unit, and days are VERIFY. ISMP tall-man vinCRIStine; 2 mg per-dose cap carried as a StewardMD safety rule; vinCRIStine is IV only and fatal if given intrathecally. Monitor for peripheral neuropathy and constipation."
+      },
+      {
+        "id": "dabrafenib",
+        "name": "Dabrafenib (BRAF V600E-mutated tumors only)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric CNS Cancers", "version": "1.2026", "date": null, "locator": "ped_cns.txt lines 1203, 1209 to 1211 (If BRAF V600E mutated: Dabrafenib/Trametinib); discussion of combined BRAF/MEK blockade with dabrafenib and trametinib lines 3030 to 3043; no pediatric dose printed", "evidenceStatus": "current" },
+        "notes": "Biomarker-gated: given ONLY for BRAF V600E-mutated tumors, in combination with the MEK inhibitor trametinib. No pediatric weight/BSA dose printed in the cited extract, so basis, dose, unit, and days are VERIFY. Monitor for pyrexia, cutaneous toxicity, and (with combination) LVEF/ocular effects."
+      },
+      {
+        "id": "trametinib",
+        "name": "Trametinib (MEK inhibitor; combined with dabrafenib for BRAF V600E)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric CNS Cancers", "version": "1.2026", "date": null, "locator": "ped_cns.txt lines 1203, 1210 (Dabrafenib/Trametinib for BRAF V600E mutated); combined BRAF/MEK blockade discussion lines 3030 to 3043; no pediatric dose printed", "evidenceStatus": "current" },
+        "notes": "MEK inhibitor combined with dabrafenib for BRAF V600E-mutated tumors; MEK inhibition is also the rational target for BRAF-fusion (KIAA1549::BRAF) MAPK-activated tumors. No pediatric dose printed, so basis, dose, unit, and days are VERIFY. Monitor for rash, LVEF reduction, and ocular toxicity; resistance can emerge via MAPK reactivation (ped_cns.txt lines 3028 to 3032)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "carboplatin hypersensitivity surveillance across repeated cycles in this population",
+      "vinCRIStine: IV only, never intrathecal; monitor peripheral neuropathy and constipation",
+      "targeted therapy: BRAF/MEK-inhibitor toxicity monitoring (pyrexia, rash, LVEF, ocular); MAPK-pathway reactivation can drive resistance after initial BRAF-inhibition response (ped_cns.txt lines 3028 to 3032)",
+      "radiation-avoiding intent in young children: prefer chemotherapy first line to spare neurocognitive/endocrine late effects (devita.txt line 241008)"
+    ]
+  },
+  "monitoring": [
+    "serial brain (and spine if indicated) MRI for response and progression",
+    "CBC with platelets before each carboplatin/vinCRIStine cycle",
+    "peripheral neuropathy assessment before each vinCRIStine dose",
+    "BRAF/MEK-inhibitor toxicity monitoring (skin, pyrexia, LVEF, ophthalmologic) when targeted therapy is used",
+    "visual/endocrine assessment for optic-pathway and hypothalamic tumors"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function (carboplatin)", "BRAF status (for targeted therapy eligibility)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "carboplatin hypersensitivity or cytopenia", "action": "delay/substitute", "text": "Review required. Manage carboplatin hypersensitivity and cytopenia per institution; physician decides. Per-drug pediatric doses are VERIFY." },
+    { "condition": "BRAF/MEK-inhibitor grade >=3 toxicity (pyrexia, LVEF drop, ocular)", "action": "hold/reduce", "text": "Hold and reduce targeted therapy per toxicity; physician decides. Doses are VERIFY." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt lines 102926 to 102938 (pilocytic astrocytoma WHO grade 1, most common childhood tumor; cerebellum/optic nerve/brainstem; frequent BRAF fusions or mutations; BRAF V600E targetable; curable if completely resected), 103006 to 103008 (observe versus resect); line 37573 (optic nerve glioma usually pilocytic astrocytoma). DeVita 12th ed. devita.txt line 241008 (vincristine plus carboplatin most common first-line regimen; chemotherapy preferred over radiotherapy in young children) and line 244896 (HIT-LGG carboplatin-vincristine)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric CNS Cancers", "version": "1.2026", "date": null, "locator": "ped_cns.txt: BRAF V600E targeted therapy Dabrafenib/Trametinib (lines 1203, 1209 to 1211), molecular alterations of significance in pediatric gliomas including BRAF V600E mutation and BRAF fusion (lines 906 to 907), NTRK/other MAPK targets (lines 507 to 508, 915), combined BRAF/MEK blockade discussion (lines 3028 to 3043). NOTE: this extract's dedicated regimen tables cover pediatric diffuse high-grade gliomas and medulloblastoma; the pediatric low-grade glioma carboplatin/vincristine backbone is grounded from the DeVita/Harrison core layer.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.drugs[0].days",
+    "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit", "regimen.drugs[1].days",
+    "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit", "regimen.drugs[2].days",
+    "regimen.drugs[3].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[3].unit", "regimen.drugs[3].days"
+  ],
+  "provenanceNote": "PEDIATRIC. StewardMD draft for pediatric low-grade glioma. Identity, histology, setting, and the BRAF gate are grounded: pilocytic astrocytoma (WHO grade 1) is the most common childhood tumor and frequently carries BRAF fusions or mutations, with BRAF V600E targetable (Harrison 22nd ed. harrison.txt lines 102926 to 102938); vinCRIStine plus carboplatin is the most common first-line regimen for progressive childhood low-grade glioma, with chemotherapy preferred over radiotherapy in young children (DeVita 12th ed. devita.txt line 241008, HIT-LGG line 244896); and BRAF V600E-mutated tumors are eligible for dabrafenib + trametinib (Standard Guidelines (NCCN) Pediatric CNS Cancers v1.2026, ped_cns.txt lines 1203, 1209 to 1211). No per-drug pediatric dose is printed in the cited sources for the carboplatin/vinCRIStine backbone or the BRAF/MEK-inhibitor option, so all basis, dose, unit, and day fields are the literal VERIFY (listed in verifyFields) and were NOT invented; cycleLengthDays and cycles are VERIFY. Only the ISMP vinCRIStine 2 mg per-dose cap is carried. The pediatric CNS extract's regimen tables cover high-grade gliomas and medulloblastoma, so the low-grade-glioma cytotoxic backbone is grounded from the DeVita/Harrison core layer, transparently noted in evidence. NCCN per-disease template alignment, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

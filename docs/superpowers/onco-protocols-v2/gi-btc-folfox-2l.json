@@ -1,0 +1,125 @@
+{
+  "id": "gi-btc-folfox-2l",
+  "name": "FOLFOX (second-line biliary tract cancer; ABC-06)",
+  "disease": "Biliary tract cancer (cholangiocarcinoma and gallbladder cancer)",
+  "diseaseId": "cholangiocarcinoma",
+  "histology": "adenocarcinoma of the biliary tract",
+  "stage": ["locally advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The FOLFOX cytotoxic backbone is NOT biomarker-restricted. In the subsequent-line setting, biliary molecular targets - FGFR2 fusions, IDH1, HER2 (ERBB2), BRAF V600E, MSI-H/dMMR, NTRK fusions - are tested to identify targeted or immunotherapy options that may be used instead of, or after, FOLFOX; they do NOT gate FOLFOX. Per Standard Guidelines (NCCN), Biliary Tract Cancers v1.2026, Subsequent-Line Therapy and Targeted therapy (BIL-C 3 of 5)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "second-line (subsequent-line) systemic therapy after disease progression on gemcitabine plus cisplatin (Preferred)",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "disease progression on first-line gemcitabine plus cisplatin", "source": "DeVita, Cancer PPO 12th ed., Ch. 37; Standard Guidelines (NCCN), Biliary Tract Cancers", "locator": "DeVita lines 114843 to 114848 (phase 3 ABC-06: 162 patients after progression on gemcitabine/cisplatin randomized to FOLFOX vs best supportive care; FOLFOX superior mOS 6.2 vs 5.3 months, new second-line SOC); NCCN v1.2026 BIL-C 2 of 5 (Subsequent-Line Therapy, FOLFOX Preferred, reference 8)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "oxaliplatin",
+        "name": "OXALIplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "Ch. 37, lines 114843 to 114848 (ABC-06 establishes FOLFOX as second-line SOC by name; per-mg doses not printed). ABC-06 reference at line 115273.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: OXALIplatin (ISMP tall-man). The provided biliary sources establish FOLFOX as the preferred second-line regimen but do NOT print the ABC-06 mFOLFOX per-mg doses or schedule. Do NOT import the colorectal FOLFOX-4 or modified FOLFOX-6 doses - the ABC-06 second-line biliary regimen dosing must be VERIFY-ed against a cited source before this field is populated."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "Ch. 37, lines 114843 to 114848 (FOLFOX named as second-line SOC; per-mg doses not printed)", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: leucovorin dose/unit/basis/schedule for the ABC-06 second-line biliary FOLFOX regimen is not printed in the provided sources; must be VERIFY-ed against a cited source, not inferred."
+      },
+      {
+        "id": "fluorouracil",
+        "name": "Fluorouracil",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "Ch. 37, lines 114843 to 114848 (FOLFOX named as second-line SOC; per-mg doses not printed)", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: fluorouracil bolus and infusional dose/unit/basis/schedule for the ABC-06 second-line biliary FOLFOX regimen is not printed in the provided sources; must be VERIFY-ed against a cited source, not inferred. (DPYD testing per NCCN BIL-C footnote b, see NCCN Guidelines for Colon Cancer.)"
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Antiemetics: oxaliplatin-based, moderate emetogenic risk tier once the schedule is confirmed.",
+      "Cold-sensitivity counseling and peripheral neuropathy monitoring (oxaliplatin).",
+      "Consider DPYD testing before fluoropyrimidine exposure (NCCN BIL-C footnote b)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle - myelosuppression",
+    "peripheral neuropathy assessment before each cycle - oxaliplatin",
+    "liver and renal function"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "cytopenias, neuropathy, or fluoropyrimidine toxicity", "action": "hold/reduce", "text": "Review required; hold or reduce per protocol once a concrete ABC-06 dose is VERIFY-ed. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 37 Cancer of the Biliary Tree, lines 114843 to 114848 (phase 3 ABC-06: FOLFOX vs best supportive care after progression on gemcitabine/cisplatin; FOLFOX superior mOS, new second-line SOC); ABC-06 reference line 115273. No per-mg FOLFOX dose printed.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Biliary Tract Cancers",
+        "version": "1.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (BIL-C 2 of 5): Subsequent-Line Therapy if Disease Progression - FOLFOX listed as Preferred (reference 8, ABC-06). The guideline lists the regimen by name and prints no per-mg dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs.oxaliplatin.basis",
+    "regimen.drugs.oxaliplatin.dosePerUnit",
+    "regimen.drugs.oxaliplatin.unit",
+    "regimen.drugs.oxaliplatin.days",
+    "regimen.drugs.leucovorin.basis",
+    "regimen.drugs.leucovorin.dosePerUnit",
+    "regimen.drugs.leucovorin.unit",
+    "regimen.drugs.leucovorin.days",
+    "regimen.drugs.fluorouracil.basis",
+    "regimen.drugs.fluorouracil.dosePerUnit",
+    "regimen.drugs.fluorouracil.unit",
+    "regimen.drugs.fluorouracil.days",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for FOLFOX as second-line therapy for biliary tract cancer after progression on gemcitabine plus cisplatin (ABC-06). Serves intrahepatic cholangiocarcinoma (#23), extrahepatic cholangiocarcinoma (#24), and gallbladder cancer (#25); diseaseId anchored to cholangiocarcinoma. The SETTING and LINE are grounded: DeVita 12th ed. Ch. 37 (lines 114843 to 114848) reports the phase 3 ABC-06 trial (FOLFOX superior to best supportive care after gemcitabine/cisplatin progression, new second-line SOC), and the Standard Guidelines (NCCN) Biliary Tract Cancers v1.2026 (BIL-C 2 of 5) list FOLFOX as the Preferred subsequent-line regimen. However, the provided biliary sources do NOT print the ABC-06 mFOLFOX per-mg doses or schedule. Accordingly ALL per-drug doses (oxaliplatin, leucovorin, fluorouracil - dose/unit/basis/days), the cycleLengthDays, and cycles are set to VERIFY; the colorectal FOLFOX-4 / modified FOLFOX-6 doses were deliberately NOT imported because the ABC-06 second-line biliary regimen dosing is not source-established here. ISMP tall-man applied (OXALIplatin). This remains a StewardMD Standard Protocol; no endorsement implied."
+}
