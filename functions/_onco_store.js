@@ -23,6 +23,10 @@ import { qAudit } from "./_queue_engine.js";
 // the identical way (`import Comms from "../followcare-comms.js"`). Re-using that proven interop path
 // instead of re-deriving the dose math here (never re-derive; onco-dose.js is R1-cleared).
 import ONCODOSE from "../onco-dose.js";
+// PHASE G: the Tata PDF builder (root UMD, default import - same interop path as onco-dose.js above).
+// Used ONLY as the fallback artifact when a structured EMR field is unsupported; it reads doses off the
+// SAME plan object (never recomputes), exactly as the report unit test enforces.
+import ONCOREPORT from "../onco-protocol-report.js";
 
 function sanitize(x) { return String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80); }
 function newId() { return crypto.randomUUID().replace(/-/g, ""); }
@@ -371,7 +375,81 @@ function _nurseTemplate(template) {
   };
 }
 
+// ---- PHASE G: structured EMR write ([ADD TO EMR]) ------------------------------------------------
+
+// Map an ACTIVATED Treatment Plan to STRUCTURED EMR fields. PURE (no I/O, no dose math): it only READS
+// plan.confirmedDoses and never recomputes a dose. opts.diagnosis is the doctor-entered clinical
+// diagnosis (the plan stores intent/protocol, not a free-text diagnosis). Which of these the target EMR
+// can actually accept is decided by partitionEmrFields, not here.
+function mapPlanToEmrFields(plan, opts) {
+  plan = plan || {}; opts = opts || {};
+  const tmpl = plan.lockedTemplate || {};
+  const drugs = tmpl.drugs || [];
+  const doses = (plan.confirmedDoses && plan.confirmedDoses.length) ? plan.confirmedDoses : (plan.calculatedDoses || []);
+  const confirmations = plan.confirmations || [];
+  const last = confirmations.length ? confirmations[confirmations.length - 1] : null;
+  return {
+    diagnosis: String(opts.diagnosis || ""),
+    treatmentPlan: (tmpl.name || plan.protocolId || "") + (plan.intent ? " (" + plan.intent + ")" : ""),
+    regimen: tmpl.name || plan.protocolId || "",
+    protocolVersion: String(plan.lockedVersion || plan.sourceProtocolVersion || tmpl.version || ""),
+    cycleSchedule: { plannedCycles: plan.plannedCycles != null ? plan.plannedCycles : null, cycleLengthDays: tmpl.cycleLengthDays != null ? tmpl.cycleLengthDays : null, plannedDates: plan.plannedDates || [] },
+    plannedMeds: drugs.map((dr) => ({ id: dr.id, name: dr.name || dr.id, route: dr.route || "", days: dr.days || [] })),
+    confirmedDoses: doses.map((d) => ({ drugId: d && d.drugId, final: d && d.final != null ? d.final : null })),   // READ-ONLY, never recomputed
+    dates: { createdAt: plan.createdAt || null, plannedDates: plan.plannedDates || [] },
+    physicianConfirmation: last ? { by: last.by || "", at: last.at || null, physicianConfirmed: !!last.physicianConfirmed } : null,
+    status: plan.status || "",
+  };
+}
+
+// Split mapped fields into what the EMR SUPPORTS (structured write) vs what it does not (fall back to the
+// attached Tata PDF). `supported` is the list of field keys the integration has a VERIFIED structured slot
+// for; everything else is returned as `unsupported` so the caller attaches the PDF instead.
+function partitionEmrFields(fields, supported) {
+  fields = fields || {}; supported = supported || [];
+  const set = {}; supported.forEach((k) => { set[k] = true; });
+  const structured = {}, unsupported = [];
+  Object.keys(fields).forEach((k) => { if (set[k]) structured[k] = fields[k]; else unsupported.push(k); });
+  return { structured: structured, unsupported: unsupported };
+}
+
+// The [ADD TO EMR] write. EXPLICIT physician action ONLY - this is NEVER called from createPlan/confirmPlan
+// (activation never writes to the EMR). Fail-closed: refuses unless the plan is already ACTIVE (post
+// CONFIRM & ACTIVATE). Structured fields the EMR supports are written via the injected deps.emrWrite (the
+// route builds it over the GHIS session); every field the EMR does NOT support falls back to the Tata PDF
+// (deps.buildPdf(plan) -> ONCOREPORT, the SAME plan object the report reads, never a recomputed dose),
+// attached via deps.emrAttachPdf when wired or returned to the client to attach. No PHI in the audit (MRN
+// scoping + counts only). With no deps.emrWrite wired (production default until a GHIS oncology payload is
+// captured), the supported set is treated as empty so EVERYTHING falls back to the PDF - never a
+// fabricated structured write.
+async function writePlanToEmr(env, planId, opts, deps) {
+  const io = Object.assign({}, REAL_DEPS, deps || {});
+  opts = opts || {};
+  const id = sanitize(planId);
+  const plan = await getPlan(env, id, io);
+  if (!plan) throw new Error("plan_not_found");
+  if (plan.status !== "active") throw new Error("plan_not_active");   // ONLY after CONFIRM & ACTIVATE
+  const fields = mapPlanToEmrFields(plan, opts);
+  const part = partitionEmrFields(fields, io.emrWrite ? (opts.supportedFields || []) : []);
+  let wrote = [];
+  if (io.emrWrite && Object.keys(part.structured).length) {
+    await io.emrWrite(part.structured, { ghisPatientId: plan.ghisPatientId, planId: id });
+    wrote = Object.keys(part.structured);
+  }
+  const unsupported = part.unsupported;
+  let pdfAttached = false, pdf = null;
+  if (unsupported.length) {
+    const buildPdf = io.buildPdf || (ONCOREPORT && ONCOREPORT.buildProtocolSheet);
+    pdf = buildPdf ? buildPdf(plan, { diagnosis: opts.diagnosis || "", patientName: opts.patientName || "", cycle: opts.cycle || null }) : null;
+    if (io.emrAttachPdf && pdf) { await io.emrAttachPdf(pdf, { ghisPatientId: plan.ghisPatientId, planId: id }); pdfAttached = true; }
+  }
+  await auditOnco(io, env, plan.hospitalId, opts.by || plan.doctorUid, "onco:plan:emr",
+    { mrn: plan.ghisPatientId, wrote: wrote.length, unsupported: unsupported.length, pdfAttached: pdfAttached });
+  return { planId: id, wrote: wrote, unsupported: unsupported, pdfAttached: pdfAttached, pdf: pdf };
+}
+
 export {
   sanitize, newId, _cycleId, _snapshot, _recordOverride, _auditEntry, _activationGate, _deepHasVerify, _canTransition, _nurseTemplate,
+  mapPlanToEmrFields, partitionEmrFields, writePlanToEmr,
   CYCLE_STATES, CYCLE_TRANSITIONS, CLEARANCE_STATUSES,
 };

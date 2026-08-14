@@ -165,6 +165,44 @@
       '"verify" means a dose could not be computed from the data on file and must be confirmed manually before use. ' +
       esc(cadence) + "</div>";
   }
+  // Evidence + protocol-version block (Tata layout): the exact evidence snapshot shown at selection +
+  // the frozen protocol version. Read verbatim off the plan (evidenceSnapshot / lockedTemplate), never
+  // fabricated - an empty snapshot says so rather than inventing a citation.
+  function buildEvidenceBlock(plan) {
+    var tmpl = plan.lockedTemplate || {};
+    var version = tmpl.version || plan.lockedVersion || plan.sourceProtocolVersion || "";
+    var ev = plan.evidenceSnapshot || tmpl.evidence || null;
+    var core = ev ? arr(ev.core) : [];
+    var rows = core.length
+      ? '<table class="otbl"><thead><tr><th>Layer</th><th>Source</th><th>Status</th></tr></thead><tbody>' +
+        core.map(function (e) { e = e || {}; return "<tr><td>" + esc(e.layer || "core") + "</td><td>" + esc(e.source || "") + "</td><td>" + esc(e.evidenceStatus || "") + "</td></tr>"; }).join("") +
+        "</tbody></table>"
+      : '<div class="legend">No source evidence recorded on this treatment plan.</div>';
+    return "<h2>Evidence and protocol version</h2>" +
+      '<div class="meta">' +
+      metaRow("Protocol version", version || "Not provided") +
+      metaRow("Source protocol", plan.sourceProtocolId || plan.protocolId || "Not provided") +
+      (plan.hospitalImplementationVersion ? metaRow("Hospital implementation", plan.hospitalImplementationVersion) : "") +
+      "</div>" + rows;
+  }
+  // Nursing administration section (Tata layout): the ordered give-list a nurse works from - premedications
+  // then each drug with its CONFIRMED dose + route + administration instructions, and a blank nurse/time
+  // column to sign. Doses come off the plan/cycle (cycleDoseMap, "verify" when absent); NEVER recomputed.
+  function buildNursingAdminSection(plan, cycle) {
+    var tmpl = plan.lockedTemplate || {};
+    var premeds = arr(tmpl.premedications), drugs = arr(tmpl.drugs);
+    var doses = cycleDoseMap(plan, cycle);
+    var pre = premeds.map(function (p) { p = p || {}; return "<tr><td>-</td><td>" + esc(p.name || "") + " (premedication)</td><td>-</td><td>-</td><td>" + esc(p.notes || "") + "</td><td></td></tr>"; }).join("");
+    var rows = drugs.map(function (drug) {
+      drug = drug || {}; var lin = doses[drug.id];
+      return "<tr><td>" + esc(dayMarker(drug.days) || "-") + "</td><td>" + esc(drug.name || drug.id || "") + "</td>" +
+        "<td>" + esc(doseText(lin)) + "</td><td>" + esc(drug.route || "-") + "</td>" +
+        "<td>" + esc(drug.notes || "-") + "</td><td></td></tr>";
+    }).join("");
+    return "<h2>Nursing administration</h2>" +
+      '<table class="otbl oadminplan"><thead><tr><th>Day</th><th>Drug</th><th>Confirmed dose</th><th>Route</th><th>Administration instructions</th><th>Nurse / time</th></tr></thead>' +
+      "<tbody>" + pre + rows + "</tbody></table>";
+  }
   function buildPage1(plan, opts) {
     return '<div class="page page-break"><div class="hdr">' +
       '<div class="hdr-txt"><div class="brand">StewardMD</div><div class="tag">Oncology Treatment Plan</div></div>' +
@@ -173,6 +211,7 @@
       buildHeaderMeta(plan, opts) +
       buildPatientParams(plan) +
       buildMatrixTable(plan) +
+      buildEvidenceBlock(plan) +
       buildLegend(plan) +
       '<div class="foot"><span>StewardMD - Oncology Treatment Plan</span><span>' + esc(plan.protocolId || "") + "</span></div>" +
       "</div>";
@@ -276,6 +315,7 @@
       buildCycleHeader(plan, cycle) +
       buildClearanceTable(cycle) +
       buildLineageTable(plan, cycle) +
+      buildNursingAdminSection(plan, cycle) +
       buildAdminTable(plan, cycle) +
       buildConfirmationBlock(plan) +
       '<div class="warn"><b>&#9888; Decision-support document.</b><span>' + esc(MANDATORY_DISCLAIMER) + "</span></div>" +

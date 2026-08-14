@@ -84,6 +84,16 @@ test("a drug already in cycle.administrationSequence shows a 'Given' tag instead
   assert.ok(html.indexOf('data-oe-act="onco-start:' + cycle.cycleId + ':cyclophosphamide"') >= 0, "cyclophosphamide not yet given - Start button present");
 });
 
+test("give-list renders each drug's administration instructions (drug.notes) alongside the confirmed dose, never a recomputed number", () => {
+  const plan = fixturePlan();
+  plan.lockedTemplate = Object.assign({}, RCHOP, {
+    drugs: [Object.assign({}, RCHOP.drugs[0], { notes: "infuse over 60 minutes, monitor for reaction" })],
+  });
+  const html = NURSE.buildNurseView(plan, fixtureCycle());
+  assert.ok(html.indexOf("infuse over 60 minutes, monitor for reaction") >= 0, "administration instructions are shown in the give-list");
+  assert.ok(html.indexOf("oe-onco-give-instr") >= 0, "instructions render in their own span");
+});
+
 test("clearance status maps to the banner colour: cleared/review/not_cleared -> green/amber/red", () => {
   assert.equal(NURSE._clearanceColor("cleared"), "green");
   assert.equal(NURSE._clearanceColor("review"), "amber");

@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oncology [Add to EMR] harness (Phase G, explicit structured EMR write)</title>
+<link rel="stylesheet" href="/opd-emr.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+window.SMD_QUEUE_FLAGS = { bool: function () { return true; } };   // smd_onco_protocols + smd_opd_emr(+_write) on
+window.confirm = function () { return true; };   // auto-confirm the "Add to EMR" dialog
+
+// Record EVERY fetch call (method + url + parsed body + headers) so the CDP test can assert exact POST
+// counts + a hard zero before the explicit tap. The GHIS network is never reached - all mocked here.
+window.__fetchCalls = [];
+window.fetch = function (url, opts) {
+  opts = opts || {};
+  var body = null; try { body = opts.body ? JSON.parse(opts.body) : null; } catch (e) {}
+  window.__fetchCalls.push({ method: opts.method || "GET", url: String(url), body: body, headers: (opts.headers || {}) });
+  url = String(url);
+  if (url.indexOf("/profile") >= 0) return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ labs: [], radiology: [], medications: [], phone: "" }); } });
+  if (url.indexOf("/api/queue/onco/plan/emr") >= 0) {
+    // MOCK the server's structured-write result: one supported field written, the rest fell back to the PDF.
+    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ ok: true, emr: { planId: (body && body.planId) || "", wrote: ["diagnosis"], unsupported: ["confirmedDoses", "regimen"], pdfAttached: false, pdf: "<!doctype html><html><body>mock</body></html>" } }); } });
+  }
+  return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({}); } });
+};
+window.__ready = false;
+</script>
+<!-- Load order mirrors index.html: onco-dose.js, onco-protocols.js, onco-protocol-report.js, then opd-emr.js. -->
+<script src="/onco-dose.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/onco-protocol-report.js"></script>
+<script src="/opd-emr.js" onload="window.__ready = !!(window.OPDEMR && window.SMD_ONCOUI && window.SMD_ONCOREPORT && window.SMD_ONCODOSE);"></script>
+</body></html>

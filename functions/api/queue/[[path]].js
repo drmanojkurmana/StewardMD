@@ -499,6 +499,25 @@ export async function onRequest(context) {
           try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, { overrides: body.overrides || [], physicianConfirmed: body.physicianConfirmed === true }) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
         }
+        if (sub === "plan" && sub2 === "emr") {   // ADD TO EMR (structured write) - DOCTOR, EXPLICIT action ONLY, only after activation
+          const plan = await ONCO.getPlan(env, body.planId);
+          if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          if (plan.status !== "active") return json({ ok: false, error: "plan_not_active" }, 400, request);   // never before CONFIRM & ACTIVATE
+          // GHIS auth: writing into the LIVE hospital EMR needs the doctor's GHIS session token (its own
+          // header, never a URL param, never the Firebase Authorization Bearer). No GHIS session -> no write.
+          const ghisToken = request.headers.get("X-Ghis-Token") || "";
+          if (!ghisToken) return json({ ok: false, error: "ghis_auth_required" }, 401, request);
+          // Which structured fields the EMR supports is owner-config (VERIFIED slots only); default none.
+          // The GHIS structured-write network call stays unwired here until a real oncology payload is
+          // captured (same discipline as prescribe() in functions/api/ghis), so with no emrWrite dep every
+          // field falls back to the attached Tata PDF - never a fabricated structured write.
+          // ponytail: supported-field config is the calibration knob for a real EMR; wire deps.emrWrite/
+          // emrAttachPdf here once the GHIS oncology payload is captured + verified.
+          let supported = []; try { supported = JSON.parse(env.QUEUE_ONCO_EMR_FIELDS || "[]"); } catch (e) { supported = []; }
+          try { return json({ ok: true, emr: await ONCO.writePlanToEmr(env, body.planId, { supportedFields: supported, diagnosis: body.diagnosis || "", patientName: body.patientName || "", by: actor.id }) }, 200, request); }
+          catch (e) { return json({ ok: false, error: (e && e.message) || "emr_write_failed" }, 400, request); }
+        }
         if (sub === "cycle" && !sub2) {   // create - DOCTOR
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
