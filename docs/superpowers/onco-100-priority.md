@@ -47,3 +47,8 @@ Pre-activation gates (R1 IMPORTANT, NOT staging blockers): v1 engine enforces th
 
 ## K. Sarcoma & rare-critical (97-100)
 97. Soft-tissue sarcoma · 98. Osteosarcoma · 99. Ewing sarcoma · 100. Kaposi sarcoma - pending
+
+## BEYOND-100 (owner: "do everything")
+- **Batch 9 - adult rare (22, STAGED b71aecd1):** Waldenstrom, hairy-cell, Castleman, AL-amyloidosis, MLNe, systemic mastocytosis, histiocytic (LCH/ECD), thymic, uveal melanoma, DFSP, peritoneal-meso, occult primary. 3 dose-verifiers + R1 = zero wrong doses; cross-indication traps avoided (SM/AML, histiocytic/melanoma, HIPEC).
+- **Batch 10 - pediatric (8, STAGED 852cc5cf):** neuroblastoma, Wilms, rhabdomyosarcoma, ALL, B-cell(COPADM), Hodgkin(ABVE-PC), medulloblastoma, LGG. Weight/BSA + COG-specific -> mostly VERIFY; neuroblastoma/COPADM/ABVE-PC grounded. dose-verify + R1 = zero wrong doses; pediatric anthracycline cap 350, ped-b-cell scoped Group B (Group-C needs HD-MTX 8g/m2 escalation), bleomycin d8 split.
+Total library: 230 Standard Protocol DRAFTs. Schema extended: mcg unit + liposomal-doxorubicin cap exemption. All flags OFF; nothing ACTIVE.
