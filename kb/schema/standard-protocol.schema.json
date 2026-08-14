@@ -8,8 +8,8 @@
   "required": ["id", "name", "disease", "diseaseId", "regimen", "evidence", "protocolVersion", "status"],
   "$defs": {
     "verifiable": {
-      "description": "A value that is either concretely sourced, or the literal VERIFY when a source does not establish it (never invented).",
-      "oneOf": [{ "type": ["string", "number", "boolean", "array", "object", "null"] }, { "const": "VERIFY" }]
+      "description": "A value that is either concretely sourced, or the literal VERIFY when a source does not establish it (never invented). anyOf (not oneOf): the string \"VERIFY\" legitimately matches both the generic-string branch and the const branch, which would make oneOf fail.",
+      "anyOf": [{ "type": ["string", "number", "boolean", "array", "object", "null"] }, { "const": "VERIFY" }]
     },
     "provenance": {
       "type": "object",
