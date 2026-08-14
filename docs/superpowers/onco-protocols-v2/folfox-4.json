@@ -1,0 +1,120 @@
+{
+  "id": "folfox-4",
+  "name": "FOLFOX-4 (de Gramont)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": {},
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "oxaliplatin",
+        "name": "OXALIplatin",
+        "basis": "bsa",
+        "dosePerUnit": 85,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 2 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "notes": "Source: DeVita 12th ed., line 123714. 85 mg/m2 IV over 2 hr, day 1 only."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV concurrent with oxaliplatin (Y-connector)",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source: DeVita 12th ed., line 123715. 200 mg/m2 IV, days 1 and 2."
+      },
+      {
+        "id": "fluorouracil-bolus",
+        "name": "Fluorouracil (bolus)",
+        "basis": "bsa",
+        "dosePerUnit": 400,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV bolus",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source: DeVita 12th ed., line 123716. 400 mg/m2 IV bolus, days 1 and 2, given after leucovorin/oxaliplatin."
+      },
+      {
+        "id": "fluorouracil-infusion",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV over 22 hr",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source: DeVita 12th ed., line 123716. 600 mg/m2 IV over 22 hr, days 1 and 2, given after the bolus."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "give before chemotherapy per NCCN Antiemesis appendix D moderate-emetic-risk tier (oxaliplatin-based regimen)" }
+    ],
+    "supportiveCare": [
+      "antiemetics: moderate emetogenic risk tier (NCCN appendix D) - prophylaxis required on day of treatment",
+      "G-CSF: not routinely indicated - FOLFOX-4 is not on the NCCN high-risk febrile-neutropenia list; assess intermediate-risk factors per appendix C, physician-patient discussion"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle - platinum agent",
+    "peripheral neuropathy assessment before each cycle - oxaliplatin"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 123710, 123714, 123715, 123716",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "histology",
+    "stage",
+    "biomarkers",
+    "treatmentSetting",
+    "lineOfTherapy",
+    "eligibilityCriteria"
+  ]
+}

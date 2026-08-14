@@ -1,0 +1,101 @@
+{
+  "id": "fufox",
+  "name": "FUFOX (Grothey weekly)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": {},
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "oxaliplatin",
+        "name": "OXALIplatin",
+        "basis": "bsa",
+        "dosePerUnit": 50,
+        "unit": "mg/m2",
+        "days": [1, 8, 15, 22, 29],
+        "route": "IV over 2 hr",
+        "caps": null,
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123742: 'Oxaliplatin 50 mg/m2 over 2 hr, followed by LV 500 mg/m2, followed by 5-FU 2,000 mg/m2 over 24 hr, weekly for 5 wk, repeated every 6 wk.' Given first in sequence. Tall man per NCCN Templates Appendix G."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 500,
+        "unit": "mg/m2",
+        "days": [1, 8, 15, 22, 29],
+        "route": "IV",
+        "caps": null,
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123742-123743: 'followed by LV 500 mg/m2'. No range printed. Given second, immediately after oxaliplatin."
+      },
+      {
+        "id": "5-fluorouracil",
+        "name": "5-Fluorouracil",
+        "basis": "bsa",
+        "dosePerUnit": 2000,
+        "unit": "mg/m2",
+        "days": [1, 8, 15, 22, 29],
+        "route": "IV over 24 hr",
+        "caps": null,
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "DeVita 12th ed., line 123743: 'followed by 5-FU 2,000 mg/m2 over 24 hr, weekly for 5 wk, repeated every 6 wk.' No range printed. Given last, as a 24-hr continuous infusion."
+      }
+    ],
+    "cycleLengthDays": 42,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "per moderate emetic risk tier (oxaliplatin), before chemotherapy administration; see supportiveCare" }
+    ],
+    "supportiveCare": [
+      "Antiemetics: moderate emetic risk tier (driven by oxaliplatin) per NCCN Templates Appendix D categories (5-FU/leucovorin alone are low/minimal risk; oxaliplatin sets the regimen tier); prophylaxis on day of treatment per NCCN Antiemesis guideline",
+      "G-CSF: not routinely indicated. Weekly oxaliplatin/5-FU/LV regimens are not called out as High or Intermediate febrile-neutropenia risk in NCCN Templates Appendix C; per Appendix C, regimens without a specific FN risk designation default to physician judgment on CSF support",
+      "Administration sequence per source: oxaliplatin over 2 hr, followed by leucovorin, followed by 5-FU infusion over 24 hr (NCCN Templates Appendix F: no single agreed evidence-based sequence exists, but this is the order printed in the source regimen)"
+    ]
+  },
+  "monitoring": [
+    "CBC before each weekly dose",
+    "Renal function (creatinine clearance) periodically - oxaliplatin",
+    "Peripheral neuropathy assessment - oxaliplatin (cumulative, dose-limiting)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "neuropathy grade (oxaliplatin)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed.",
+        "locator": "lines 123738, 123742, 123743",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": ["histology", "stage", "treatmentSetting", "lineOfTherapy", "eligibilityCriteria"]
+}

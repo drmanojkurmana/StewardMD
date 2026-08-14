@@ -1,0 +1,94 @@
+{
+  "id": "aio-weekly-24h",
+  "name": "AIO (weekly 24-hr infusion 5-FU/LV)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "VERIFY",
+  "stage": ["VERIFY"],
+  "biomarkers": { "VERIFY": "VERIFY" },
+  "treatmentSetting": "VERIFY",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [{ "VERIFY": "VERIFY" }],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 500,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 2 hr",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source (DeVita 12th ed., line 123467, citing Kohne et al., 1998): 'LV 500 mg/m2 over 2 hr, followed by 5-FU 2,600 mg/m2 over 24 hr, repeated weekly.' Weekly regimen; day shown as 1 of each 7-day cycle."
+      },
+      {
+        "id": "5-fluorouracil",
+        "name": "5-Fluorouracil",
+        "basis": "bsa",
+        "dosePerUnit": 2600,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 24 hr",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "notes": "Source (DeVita 12th ed., line 123472, citing Kohne et al., 1998): '5-FU 2,600 mg/m2 over 24 hr, repeated weekly', given immediately after the leucovorin infusion. Weekly regimen; day shown as 1 of each 7-day cycle."
+      }
+    ],
+    "cycleLengthDays": 7,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "per low emetic risk tier, see supportiveCare" }
+    ],
+    "supportiveCare": [
+      "Antiemetics: low emetic risk tier (5-FU/leucovorin, per NCCN Antiemesis guideline categories, Appendix D) - prophylaxis for 10-30% emesis frequency",
+      "G-CSF: not routinely indicated; AIO weekly 5-FU/LV is not a high or intermediate febrile-neutropenia-risk regimen per NCCN Appendix C categories - physician discretion if patient-specific risk factors present"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (dose adjustment context for 5-FU/LV regimens)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed.",
+        "date": null,
+        "locator": "lines 123467 (leucovorin), 123472 (5-fluorouracil)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "0.1-draft",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "histology",
+    "stage",
+    "biomarkers",
+    "treatmentSetting",
+    "treatmentIntent",
+    "lineOfTherapy",
+    "eligibilityCriteria"
+  ],
+  "provenanceNote": "Regimen dosing is sourced from DeVita 12th ed. Indication and eligibility fields are placeholders pending guideline-layer sourcing, no endorsement is implied."
+}
