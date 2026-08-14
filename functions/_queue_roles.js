@@ -25,16 +25,33 @@ export const CAPS = {
   EMR_VIEW: "emr.view",             // open the EMR patient profile (labs/meds/history)
   SESSION_MANAGE: "session.manage", // pause / emergency / session status
   ANALYTICS_VIEW: "analytics.view", // operational analytics
-  STAFF_ADMIN: "staff.admin"        // manage the staff->role mapping (owner/admin only)
+  STAFF_ADMIN: "staff.admin",       // manage the staff->role mapping (owner/admin only)
+  // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
+  // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
+  // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
+  // protocols, they do not author/approve them). System admin is technical-config only and is
+  // NOT granted any of the three (see ADMIN role below).
+  ONCQIS_PROTOCOL_AUTHOR: "oncqis.protocol.author",           // create/edit a DRAFT + upload evidence
+  ONCQIS_CLINICAL_REVIEWER: "oncqis.clinical.reviewer",       // R1 accept/reject + resolve VERIFY (platform CLINICAL APPROVAL)
+  ONCQIS_INSTITUTIONAL_APPROVER: "oncqis.institutional.approver" // hospital approve + activate (HOSPITAL APPROVAL)
 };
+
+// The ONCQIS governance caps. System admin (technical config only) is explicitly NOT granted any of
+// these - clinical/hospital approval is never a technical-admin power (spec role separation).
+export const ONCQIS_CAPS = [
+  CAPS.ONCQIS_PROTOCOL_AUTHOR, CAPS.ONCQIS_CLINICAL_REVIEWER, CAPS.ONCQIS_INSTITUTIONAL_APPROVER
+];
 
 // ---- roles -> the capabilities they hold (least privilege; extend, don't widen casually) -----
 // Order matters only for readability. A role absent from ROLE_CAPS resolves to [] (deny-all but view
 // is still withheld) — callers should map unknown roles to "viewer".
 const C = CAPS;
 export const ROLE_CAPS = {
-  // Owner / system admin: everything.
-  admin: Object.values(CAPS),
+  // Owner / system admin: every OPERATIONAL/technical cap, but explicitly NOT the ONCQIS clinical or
+  // hospital approval caps. Protocol authoring, clinical review, and institutional approval are clinical
+  // governance, never a technical-admin power - a system admin must not be able to approve/activate a
+  // protocol (spec role separation, non-negotiable).
+  admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0),
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW],
@@ -53,6 +70,16 @@ export const ROLE_CAPS = {
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
+  // ---- ONCQIS governance roles (oncology protocol lifecycle) --------------------------------
+  // Protocol Author: create/edit DRAFT protocols + upload evidence. NO review, NO approval, NO
+  // activation. Not a clinical or hospital approver.
+  oncqis_protocol_author: [C.ONCQIS_PROTOCOL_AUTHOR],
+  // Clinical Reviewer: platform R1 clinical review - accept/reject a submitted DRAFT and resolve
+  // VERIFY (CLINICAL APPROVAL). Cannot author drafts, cannot give hospital approval/activation.
+  oncqis_clinical_reviewer: [C.ONCQIS_CLINICAL_REVIEWER],
+  // Institutional Approver: HOSPITAL APPROVAL + activation of a hospital implementation. Cannot
+  // author or clinically review.
+  oncqis_institutional_approver: [C.ONCQIS_INSTITUTIONAL_APPROVER],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };
