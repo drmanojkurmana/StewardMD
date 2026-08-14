@@ -28,7 +28,7 @@
     }).join("") + "</nav>";
   }
   function patientHead(p, phone) {
-    var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + esc(p.mrn || "-") + "</b></span>";
+    var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + esc(p.displayId || p.mrn || "-") + "</b></span>";
     if (phone) line += '<span>' + ms("call") + ' <span class="mono">' + esc(phone) + "</span></span>";
     return '<section class="oe-phead"><div class="oe-avatar">' + esc(initials(p.name)) + "</div>" +
       '<div class="oe-pmeta"><h2>' + esc(p.name || "Patient") + "</h2><div class=\"oe-prow\">" + line + "</div></div></section>";
@@ -1961,7 +1961,7 @@
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     st = freshState();
-    st.patient = { name: opts.name || "", mrn: opts.patientId || "" };
+    st.patient = { name: opts.name || "", mrn: opts.patientId || "", displayId: opts.displayId || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary

@@ -200,6 +200,25 @@
   // No-MRN OPD patients save to My Clinic on this device (SMD_CLINIC) with encrypted Google Drive
   // backup. These controls flip localStorage immediately (independent of "Save changes").
   function storeAutoSyncOn() { try { return localStorage.getItem("smd_clinic_autosync") !== "0"; } catch (e) { return true; } }
+  // Storage MODE for no-MRN cases: ONE clinic, either "device" (My Clinic, this phone) or "shared"
+  // (multi-device, encrypted Google Drive sync). My Clinic + Shared Clinic unified behind this switch.
+  function opdStorageMode() { try { return localStorage.getItem("smd_opd_storage_mode") === "shared" ? "shared" : "device"; } catch (e) { return "device"; } }
+  // Clinic/doctor code — the XXX in a no-MRN patient's SMD-XXX-nnn hospital id. Shared: derived from the
+  // clinic id so every device agrees; device: a stable per-phone code.
+  function clinicCode() {
+    try { if (opdStorageMode() === "shared") { var cfg = JSON.parse(localStorage.getItem("smd_shared_config") || "{}"); if (cfg && cfg.clinicId) { var s = String(cfg.clinicId).replace(/[^a-z0-9]/gi, "").toUpperCase(); return s.slice(-3) || "CLN"; } } } catch (e) {}
+    try { var k = "smd_opd_clinic_code", v = localStorage.getItem(k); if (!v) { v = String(Math.random().toString(36).slice(2, 5)).toUpperCase(); localStorage.setItem(k, v); } return v; } catch (e) { return "CLN"; }
+  }
+  function padSeq(n) { n = String(n); while (n.length < 3) n = "0" + n; return n; }
+  // Resolve the active clinic store for no-MRN cases: { store, source, map, needUnlock }.
+  function opdClinic() {
+    if (opdStorageMode() === "shared") {
+      var app = (G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app()) || null;
+      if (app) return { store: app, source: "shared", map: "stewardmd.opd.sharedmap" };
+      return { store: null, source: "shared", needUnlock: true, map: "stewardmd.opd.sharedmap" };
+    }
+    return { store: G.SMD_CLINIC, source: "local", map: "stewardmd.opd.localmap" };
+  }
   // A toggle row wired to a local action (data-q-act) instead of a server config key. onclick:return false
   // stops the native checkbox flip so the visual is driven purely by `on` on the next paint().
   function localTog(label, on, hint, act) {
@@ -209,17 +228,32 @@
   }
   function storageCard() {
     if (!emrOn()) return "";   // storage is only meaningful when the EMR/assessment is on
-    var C = G.SMD_CLINIC;
-    var hasPw = !!(C && C.hasPassword && C.hasPassword());
-    var autoOn = storeAutoSyncOn();
-    return '<div class="q-card"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
-      '<div class="q-hint" style="margin:-4px 0 12px">Patients with a hospital MRN save to GHIS. Patients with no MRN save to My Clinic on this device' +
-        (hasPw ? ", backed up to Google Drive (encrypted)." : ". Set a Drive password below to enable backup.") + "</div>" +
-      localTog("Back up all cases to Google Drive", autoOn, autoOn ? "On · every case backs up ~15s after you save" : "Off · back up each case manually", "storagetoggle") +
-      (hasPw
-        ? '<button class="q-set-btn" data-q-act="storagesync">' + ms("cloud_upload") + " Back up to Drive now</button>"
-        : '<button class="q-set-btn" data-q-act="storagesetup">' + ms("lock") + " Set up Google Drive backup</button>") +
-      "</div>";
+    var shared = opdStorageMode() === "shared";
+    var head = '<div class="q-card"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
+      '<div class="q-hint" style="margin:-4px 0 12px">Patients with a hospital MRN save to GHIS. Patients with no MRN get a clinic ID (<b>SMD-' + esc(clinicCode()) + '-nnn</b>) and save to your clinic ' + (shared ? "(synced across your devices)." : "on this device.") + "</div>";
+    // ONE clinic, two modes — My Clinic (this device) or Shared Clinic (multi-device sync).
+    var sel = '<div class="q-hint" style="margin:2px 0 6px;font-weight:700;color:var(--ink,#0f172a)">Where no-MRN cases are saved</div>' +
+      localTog("This device only", !shared, "My Clinic — stays on this phone, encrypted Drive backup", "storagemode:device") +
+      localTog("Shared across my devices", shared, "Encrypted, synced to your clinic Google Drive — open on any of your devices", "storagemode:shared");
+    var ctrls;
+    if (shared) {
+      var app = (G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app());
+      var status = !app ? "Not unlocked on this device"
+        : (app.conflictCount && app.conflictCount() ? (app.conflictCount() + " to review")
+          : (app.pendingCount && app.pendingCount() ? (app.pendingCount() + " to sync") : "All synced"));
+      ctrls = '<div class="q-hint" style="margin:10px 0 4px">Shared clinic · ' + esc(status) + "</div>" +
+        '<button class="q-set-btn" data-q-act="sharedsetup">' + ms("group") + (app ? " Manage shared clinic" : " Set up / unlock shared clinic") + "</button>" +
+        (app ? '<button class="q-set-btn" data-q-act="sharedsync" style="margin-top:8px">' + ms("cloud_sync") + " Sync now</button>" : "");
+    } else {
+      var C = G.SMD_CLINIC;
+      var hasPw = !!(C && C.hasPassword && C.hasPassword());
+      var autoOn = storeAutoSyncOn();
+      ctrls = localTog("Back up all cases to Google Drive", autoOn, autoOn ? "On · every case backs up ~15s after you save" : "Off · back up each case manually", "storagetoggle") +
+        (hasPw
+          ? '<button class="q-set-btn" data-q-act="storagesync">' + ms("cloud_upload") + " Back up to Drive now</button>"
+          : '<button class="q-set-btn" data-q-act="storagesetup">' + ms("lock") + " Set up Google Drive backup</button>");
+    }
+    return head + sel + ctrls + "</div>";
   }
   // Push My Clinic data (encrypted) to Drive now. Reuses personal-clinic's syncNow (all-patients envelope).
   function storageSyncNow() {
@@ -387,6 +421,9 @@
     if (cmd === "storagetoggle") { try { localStorage.setItem("smd_clinic_autosync", storeAutoSyncOn() ? "0" : "1"); } catch (e) {} paint(); return; }
     if (cmd === "storagesync") { storageSyncNow(); return; }
     if (cmd === "storagesetup") { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); return; }
+    if (cmd === "storagemode") { try { localStorage.setItem("smd_opd_storage_mode", arg === "shared" ? "shared" : "device"); if (arg === "shared") localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (arg === "shared" && !(G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app()) && G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); paint(); return; }
+    if (cmd === "sharedsetup") { try { localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
+    if (cmd === "sharedsync") { var _sa = (G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app()); if (_sa && _sa.syncNow) { try { G.toast && G.toast("Syncing…"); } catch (e) {} Promise.resolve(_sa.syncNow()).then(function () { paint(); }); } return; }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
     if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
@@ -425,12 +462,15 @@
   }
   // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
   // the same patient reuses their record instead of creating a duplicate each time).
-  function localClinicId(t, C) {
-    var MAP = "stewardmd.opd.localmap", map = {};
+  function localClinicId(t, store, mapKey) {
+    var MAP = mapKey || "stewardmd.opd.localmap", map = {};
     try { map = JSON.parse(localStorage.getItem(MAP) || "{}") || {}; } catch (e) {}
     var id = map[t.id];
-    if (id && C.getPatient && C.getPatient(id)) return id;
-    id = C.addPatient({ name: t.name || "Patient" });
+    if (id && store.getPatient && store.getPatient(id)) return id;
+    // Assign a stable hospital-style id for this no-MRN patient: SMD-<clinic code>-<seq>.
+    var seq = padSeq((((store.listPatients && store.listPatients()) || []).length) + 1);
+    var mrn = "SMD-" + clinicCode() + "-" + seq;
+    id = store.addPatient({ name: t.name || "Patient", mrn: mrn });
     map[t.id] = id; try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {}
     return id;
   }
@@ -441,9 +481,13 @@
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
     if (!t.ghisPatientId) {
-      var C = G.SMD_CLINIC;
-      if (C && C.addPatient && C.localStore) {
-        G.OPDEMR.openProfile({ source: "local", localStore: C.localStore, name: t.name || "", patientId: localClinicId(t, C), tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
+      var oc = opdClinic();
+      if (oc.needUnlock) { try { G.toast && G.toast("Unlock your Shared Clinic to save this case."); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
+      var store = oc.store;
+      if (store && store.addPatient && store.localStore) {
+        var pid = localClinicId(t, store, oc.map);
+        var rec = (store.getPatient && store.getPatient(pid)) || {};
+        G.OPDEMR.openProfile({ source: oc.source, localStore: store.localStore, name: t.name || "", patientId: pid, displayId: rec.mrn || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
       } else {
         G.OPDEMR.openProfile({ name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id, noStore: true });
       }

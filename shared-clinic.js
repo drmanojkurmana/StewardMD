@@ -29,7 +29,8 @@
       p = p || {};
       var rec = store.put("patient", {
         name: String(p.name || "").trim() || "Unnamed",
-        age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim()
+        age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(),
+        mrn: String(p.mrn || "").trim()
       });
       return rec.id;
     }

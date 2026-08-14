@@ -31,7 +31,7 @@
   function getPatient(id) { var r = readJSON(KEY_P(id), null); return (r && r.patient) || null; }
   function addPatient(p) {
     p = p || {}; var id = uid();
-    var rec = { id: id, name: String(p.name || "").trim() || "Unnamed", age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(), at: nowISO(), updatedAt: nowISO() };
+    var rec = { id: id, name: String(p.name || "").trim() || "Unnamed", age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(), mrn: String(p.mrn || "").trim(), at: nowISO(), updatedAt: nowISO() };
     var idx = listPatients(); idx.unshift(rec); writeJSON(KEY_PTS, idx);
     writeJSON(KEY_P(id), { patient: rec, latest: {}, consults: [] });
     return id;

@@ -406,7 +406,6 @@
     save: '<path d="M5 4h11l3 3v13H5Z"/><path d="M8 4v5h7"/><rect x="8" y="13" width="8" height="5"/>',
     trash: '<path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/>',
     list: '<line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
-    devices: '<rect x="3" y="4" width="12" height="9" rx="1.5"/><path d="M3 16h12"/><rect x="16" y="8" width="5" height="12" rx="1.5"/>',
     warn: '<path d="M12 3 1.7 21h20.6L12 3Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.6" r=".6"/>',
     // ── Specialty line-icons (calculators / knowledge-library categories). Same 24×24,
     // currentColor, ~1.75 stroke. One per specialty; each calculator inherits its category icon.
@@ -724,7 +723,6 @@
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("Onco Home loading…"); },
-    sharedclinic: function () { try { localStorage.setItem("smd_shared_clinic", "1"); } catch (e) {} if (window.SMD_SHARED && SMD_SHARED.open) SMD_SHARED.open(); else toast("Shared Clinic loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
@@ -734,22 +732,17 @@
         return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
       }
-      // Shared Clinic (multi-device EMR for clinics with no hospital EMR) — shown once enabled in
-      // Settings (smd_shared_clinic) or ?shared=1; sibling of the hospital-EMR tools above.
-      var sharedTile = "";
-      try { if (/[?&]shared=1\b/.test(location.search || "") || localStorage.getItem("smd_shared_clinic") === "1") sharedTile = tile("devices", "Shared Clinic", "Multi-device EMR · no hospital EMR", "sharedclinic"); } catch (e) {}
       openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
         tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
-        sharedTile +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "fc" ? ACT.followcare : a === "sharedclinic" ? ACT.sharedclinic : ACT.connect)(); }, 70);
+          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
         });
       });
     },

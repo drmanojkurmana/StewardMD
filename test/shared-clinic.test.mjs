@@ -37,6 +37,15 @@ test("patients: add / list / get / delete via the orchestrator", () => {
   assert.equal(clinic.listPatients().length, 0);
 });
 
+test("addPatient persists an mrn (SMD-XXX-nnn) that syncs on the patient record", () => {
+  const st = S.create({ deviceId: "devA", clinicId: "C1", clock: (() => { let t = 1000; return () => (t += 10); })() });
+  const clinic = SC.create({ store: st });
+  const id = clinic.addPatient({ name: "Asha", mrn: "SMD-C1X-007" });
+  assert.equal(clinic.getPatient(id).mrn, "SMD-C1X-007", "mrn round-trips through getPatient");
+  assert.equal(clinic.listPatients()[0].mrn, "SMD-C1X-007", "mrn is on the listed patient");
+  assert.equal(st.get(id).data.mrn, "SMD-C1X-007", "mrn stored in record data (so it syncs across devices)");
+});
+
 test("localStore bridge: saveConsult stores vals; getConsult prefills them", () => {
   const st = S.create({ deviceId: "devA", clinicId: "C1", clock: (() => { let t = 1000; return () => (t += 10); })() });
   const clinic = SC.create({ store: st });

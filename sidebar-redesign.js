@@ -91,7 +91,6 @@
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "clinic", title: "My Clinic (on-device EMR)", sub: "Personal clinic: local patients + consults, back up to Drive", def: false, key: "smd_personal_clinic" },
-    { id: "sharedclinic", title: "Shared Clinic (multi-device EMR)", sub: "Clinic shared across devices · encrypted Google Drive sync · reload to apply", def: false, key: "smd_shared_clinic" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
     // AI imaging modules — all gated OFF by default; turned on ONLY here (Experimental section). Home tile appears on reload.
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
