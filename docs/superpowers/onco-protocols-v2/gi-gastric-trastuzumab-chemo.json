@@ -1,0 +1,132 @@
+{
+  "id": "gi-gastric-trastuzumab-chemo",
+  "name": "Trastuzumab + CISplatin + Capecitabine (or Fluorouracil), HER2-positive (ToGA)",
+  "disease": "Gastric and gastroesophageal junction (GEJ) adenocarcinoma",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "histology": "adenocarcinoma",
+  "stage": ["IV (metastatic or unresectable)"],
+  "biomarkers": {
+    "HER2": "positive",
+    "note": "HER2-directed therapy requires HER2-positive (HER2-overexpressing) disease by IHC 3+ or ISH or FISH amplification. In ToGA, 22.1% of screened gastric or GEJ adenocarcinomas tested HER2-positive. HER2 status gates this regimen. Per DeVita 12th ed. (ToGA) and Standard Guidelines (NCCN), Gastric Cancer v3.2026."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for HER2-positive metastatic or unresectable gastric or GEJ adenocarcinoma",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HER2-positive (IHC 3+ or ISH/FISH-amplified)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 98862 to 98871 (ToGA: HER2 overexpression by FISH and IHC required)" },
+    { "criterion": "histology", "requirement": "gastric or GEJ adenocarcinoma", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 98866 (gastric or GEJ adenocarcinoma)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "trastuzumab-loading",
+        "name": "Trastuzumab (loading dose)",
+        "basis": "mgkg",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98871 states the 6 mg/kg every-3-week trastuzumab dose only; a loading dose is NOT stated in the cited source", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: DeVita 12th ed. (line 98871) states trastuzumab 6 mg/kg once every 3 weeks (maintenance) and does not print a loading dose. The conventional first-cycle trastuzumab loading dose is 8 mg/kg but is not established by the cited source; dosePerUnit left as VERIFY for clinical review. Cardiac (LVEF) monitoring required."
+      },
+      {
+        "id": "trastuzumab-maintenance",
+        "name": "Trastuzumab (maintenance)",
+        "basis": "mgkg",
+        "dosePerUnit": 6,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98871 (trastuzumab 6 mg/kg once every 3 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 98871. Trastuzumab 6 mg/kg IV on day 1, every 3 weeks (maintenance). Cardiac (LVEF) monitoring required; continued with and beyond chemotherapy."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 80,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98870 (cisplatin 80 mg/m2 on day 1, cycled every 3 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 98870. CISplatin 80 mg/m2 IV on day 1, every 3 weeks. Tall-man per ISMP. Requires pre- and post-hydration; monitor for nephrotoxicity, ototoxicity, and neurotoxicity."
+      },
+      {
+        "id": "capecitabine",
+        "name": "Capecitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        "route": "PO twice daily",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 98868 (capecitabine 1000 mg/m2 twice a day for 14 days)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 98868. Capecitabine 1000 mg/m2 orally twice daily on days 1 to 14 (this per-dose is the twice-daily dose). Source-stated alternative to capecitabine: infusional fluorouracil 800 mg/m2 per day for 5 days (line 98869). Most ToGA patients received capecitabine plus cisplatin. DPYD deficiency raises fluoropyrimidine toxicity risk; consider DPYD testing before first dose."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "CISplatin hydration", "notes": "pre- and post-hydration with magnesium and potassium replacement per cisplatin order set; antiemetic prophylaxis (high emetic risk)." }
+    ],
+    "supportiveCare": [
+      "DPYD: consider DPYD genotype or phenotype testing before capecitabine or fluorouracil; reduce or avoid on deficiency.",
+      "CISplatin: mandatory hydration; monitor renal function, electrolytes (Mg, K), hearing, and neuropathy.",
+      "Cardiac: evaluate LVEF at baseline and periodically during trastuzumab.",
+      "Cycle count VERIFY: DeVita states cisplatin plus fluoropyrimidine cycled every 3 weeks with trastuzumab 6 mg/kg every 3 weeks; the number of chemotherapy cycles and the trastuzumab continuation duration (typically chemotherapy for a fixed number of cycles then trastuzumab until progression) are not stated in the cited source."
+    ]
+  },
+  "monitoring": [
+    "LVEF at baseline and periodically during trastuzumab",
+    "CBC before each cycle",
+    "renal function and electrolytes (Mg, K) before and after each CISplatin dose",
+    "audiometry / hearing assessment and neuropathy assessment (CISplatin)",
+    "hand-foot / diarrhea assessment (capecitabine)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "LVEF", "electrolytes", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "significant decline in LVEF or symptomatic heart failure", "drug": "trastuzumab", "action": "hold/review", "text": "Hold trastuzumab and obtain cardiology and oncology review per LVEF guidance. Physician decides on continuation." },
+    { "condition": "rising creatinine or falling GFR", "drug": "cisplatin", "action": "hold/reduce/switch", "text": "Hold or reduce CISplatin, or consider a less nephrotoxic platinum, per renal function. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 98862 to 98872 (ToGA trial: capecitabine 1000 mg/m2 twice daily x14 days or infusional 5-FU 800 mg/m2/day x5 days, with cisplatin 80 mg/m2 day 1 every 3 weeks, plus trastuzumab 6 mg/kg every 3 weeks; HER2 overexpression required)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Gastric Cancer",
+        "version": "3.2026",
+        "date": "2026-06-03",
+        "locator": "Systemic Therapy, HER2-positive advanced disease, fluoropyrimidine plus platinum plus trastuzumab (guidelines/gastric.txt lines 2007 to 2016); HER2 testing under Principles of Biomarker Testing",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the ToGA regimen (trastuzumab plus a fluoropyrimidine plus cisplatin) in HER2-positive metastatic gastric and GEJ adenocarcinoma. Doses grounded to DeVita 12th ed. lines 98868 to 98871: capecitabine 1000 mg/m2 orally twice daily on days 1 to 14 (or infusional fluorouracil 800 mg/m2 per day for 5 days), cisplatin 80 mg/m2 on day 1 every 3 weeks, and trastuzumab 6 mg/kg every 3 weeks (maintenance). The cited source states only the 6 mg/kg maintenance trastuzumab dose and does not print a loading dose, so the trastuzumab loading dosePerUnit is left as VERIFY (conventionally 8 mg/kg but not source-established). The number of cycles and trastuzumab continuation duration are not stated in the cited source, so regimen.cycles is VERIFY. HER2-positive status gates the regimen. ISMP tall-man applied (CISplatin). Cisplatin hydration and nephro/oto/neurotoxicity monitoring, DPYD screening for the fluoropyrimidine, and LVEF monitoring for trastuzumab are flagged. Two fields remain VERIFY (trastuzumab loading dose, cycle count). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,71 @@
+{
+  "id": "gi-small-bowel-adeno-folfox",
+  "name": "Small Bowel Adenocarcinoma - FOLFOX/CAPEOX backbone (coverage pointer)",
+  "disease": "Small intestinal (small bowel) adenocarcinoma",
+  "diseaseId": null,
+  "histology": "adenocarcinoma",
+  "stage": ["resected high-risk (adjuvant)", "locally advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "MMR_MSI": "tested (dMMR/MSI-H directs checkpoint-inhibitor immunotherapy)",
+    "HER2_ERBB2": "tested (overexpression/amplification)",
+    "KRAS": "tested",
+    "BRAF_V600E": "tested (BRAF V600E may be treated with FOLFOX/encorafenib plus cetuximab or panitumumab)",
+    "note": "The cytotoxic FOLFOX or CAPEOX (capecitabine/oxaliplatin) backbone is not biomarker-restricted; NGS/MMR testing (MMR/MSI, HER2/ERBB2, KRAS, BRAF V600E, NTRK, POLE/POLD1, TMB) guides immunotherapy or targeted add-ons (dMMR/MSI-H -> checkpoint inhibitor; BRAF V600E -> FOLFOX/encorafenib + anti-EGFR). Per Standard Guidelines (NCCN), Small Bowel Adenocarcinoma, SBA-B and SBA-D."
+  },
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line preferred systemic backbone (FOLFOX or CAPEOX) for locally advanced/unresectable or metastatic small bowel adenocarcinoma; adjuvant FOLFOX/CAPEOX for resected high-risk (e.g., T3/T4, node-positive) disease",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "small bowel (duodenal/jejunal/ileal) adenocarcinoma", "source": "Standard Guidelines (NCCN), Small Bowel Adenocarcinoma", "locator": "v2.2026, SBA-D (Principles of Systemic Therapy; FOLFOX or CAPEOX preferred)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "folfox-capeox-backbone-ref",
+        "name": "FOLFOX or CAPEOX backbone (see referenced Standard Protocol - dose not duplicated)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "see referenced Standard Protocol",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Small Bowel Adenocarcinoma", "version": "2.2026", "date": null, "locator": "SBA-D (FOLFOX or CAPEOX preferred); small_bowel lines 357, 418, 477, 537 (locally advanced/metastatic), 590, 595 (adjuvant FOLFOX or CAPEOX 3 to 6 months)", "evidenceStatus": "current" },
+        "notes": "COVERAGE POINTER - dose intentionally NOT duplicated. Small bowel adenocarcinoma uses the same FOLFOX (fluorouracil/leucovorin/oxaliplatin) or CAPEOX (capecitabine/oxaliplatin) cytotoxic backbone as colorectal adenocarcinoma at the same doses; NCCN SBA v2.2026 (SBA-D) names these regimens but does not print distinct mg/m2 dosing tables. FOLFOX dosing is already modeled in this folder as folfox-4.json, folfox-6.json, and modified-folfox-6.json. dosePerUnit/basis/unit are VERIFY here solely to signal 'resolve by referencing the existing backbone Standard Protocol', not because any dose is unknown. Duodenal high-risk adjuvant FOLFOX/CAPEOX duration is 3 to 6 months (small_bowel lines 590, 595). Fluoropyrimidine DPYD testing per FDA boxed warning (SBA footnote b)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Systemic dosing and cycle length are defined by the referenced colorectal FOLFOX/CAPEOX Standard Protocols (folfox-4.json / modified-folfox-6.json in this folder); not duplicated here.",
+      "Fluoropyrimidine DPYD testing per FDA boxed warning before starting capecitabine or fluorouracil.",
+      "dMMR/MSI-H disease: prefer checkpoint-inhibitor immunotherapy (see the dMMR/MSI-H immunotherapy Standard Protocol) over cytotoxic chemotherapy."
+    ]
+  },
+  "monitoring": [
+    "see the referenced FOLFOX/CAPEOX Standard Protocol for backbone monitoring (CBC, renal, oxaliplatin neuropathy)",
+    "biomarker-directed monitoring per any immunotherapy/targeted add-on"
+  ],
+  "clearanceChecks": ["see referenced backbone Standard Protocol"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Small bowel adenocarcinoma is treated with colorectal-type fluoropyrimidine/oxaliplatin chemotherapy; concrete FOLFOX/CAPEOX dosing is covered by the colorectal backbone Standard Protocols", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Small Bowel Adenocarcinoma", "version": "2.2026", "date": null, "locator": "SBA-D (Principles of Systemic Therapy; FOLFOX or CAPEOX preferred for locally advanced/metastatic; small_bowel lines 357, 418, 477, 537); adjuvant FOLFOX/CAPEOX 3 to 6 months (small_bowel lines 590, 595); SBA-B (Principles of Pathologic Review, biomarkers; small_bowel lines 199 to 201)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol COVERAGE POINTER for small bowel adenocarcinoma (disease #27). Per the task, the FOLFOX/CAPEOX backbone is NOT duplicated: NCCN Small Bowel Adenocarcinoma v2.2026 (SBA-D) names FOLFOX or CAPEOX as the preferred systemic regimen (small_bowel lines 357, 418, 477, 537 for locally advanced/metastatic; lines 590, 595 for adjuvant, 3 to 6 months) but prints no distinct mg/m2 dosing - the doses are identical to the colorectal backbone already modeled in this folder as folfox-4.json, folfox-6.json, and modified-folfox-6.json (CAPEOX = capecitabine/oxaliplatin). The single regimen drug entry is a deliberate pointer whose dose fields, cycleLengthDays, and cycles are set to VERIFY and listed in verifyFields to signal 'resolve by referencing the existing colorectal FOLFOX/CAPEOX Standard Protocol', not because any dose is unknown or was inferred. Biomarker testing (MMR/MSI, HER2/ERBB2, KRAS, BRAF V600E) directs immunotherapy/targeted add-ons; fluoropyrimidine DPYD safety noted. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

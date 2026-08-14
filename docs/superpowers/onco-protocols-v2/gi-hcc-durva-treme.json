@@ -1,0 +1,102 @@
+{
+  "id": "gi-hcc-durva-treme",
+  "name": "Durvalumab + Tremelimumab (STRIDE; HIMALAYA)",
+  "disease": "Hepatocellular carcinoma",
+  "diseaseId": "hepatocellular_carcinoma",
+  "histology": "hepatocellular carcinoma",
+  "stage": ["advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "note": "No predictive biomarker gates the durvalumab plus tremelimumab combination in HCC. Per Standard Guidelines (NCCN), Hepatocellular Carcinoma v2.2026, Principles of Biomarker Testing (HCC-J), molecular testing (MSI/dMMR, RET fusion, NTRK fusion) identifies subsequent-line targeted or immunotherapy options and does not select this first-line immunotherapy doublet."
+  },
+  "treatmentSetting": "advanced/unresectable or metastatic (systemic-therapy setting)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for advanced or unresectable HCC (category 1, Preferred). For anti-CTLA4-based combinations used as subsequent-line therapy, restricted to patients not previously treated with an anti-CTLA4-based combination.",
+  "eligibilityCriteria": [
+    { "criterion": "liverFunction", "requirement": "Child-Pugh class A. The HIMALAYA trial required BCLC stage B or C disease, Child-Pugh class A status, and no prior systemic therapy.", "source": "DeVita, Cancer PPO 12th ed., Ch. 36 Cancer of the Liver", "locator": "lines 111644 to 111648 (HIMALAYA eligibility: BCLC stage B or C, CTP class A, no prior systemic therapy)" },
+    { "criterion": "liverFunction", "requirement": "therapies may have limited safety data for Child-Pugh class B or C; use with extreme caution in patients with elevated bilirubin.", "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma", "locator": "v2.2026, Principles of Systemic Therapy (HCC-I 1 of 2), footnotes c and d; Principles of Liver Functional Assessment (HCC-E)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "tremelimumab",
+        "name": "Tremelimumab",
+        "basis": "flat",
+        "dosePerUnit": 300,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 111641 (durvalumab plus high-dose tremelimumab 300 mg compared to 75 mg); HIMALAYA context lines 111644 to 111652", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Ch. 36, line 111641. High-dose tremelimumab 300 mg is the STRIDE (Single Tremelimumab Regular Interval Durvalumab) priming dose, given as a SINGLE dose on day 1 (represented as days [1]); DeVita grounds the 300 mg high dose versus the 75 mg low dose. The number of tremelimumab administrations (single priming dose) is described in the HIMALAYA/STRIDE narrative (lines 111644 to 111652) but the per-cycle interval is not printed as a discrete dosing table in the provided sources."
+      },
+      {
+        "id": "durvalumab",
+        "name": "Durvalumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 111636 to 111652 (MEDI4736/durvalumab plus tremelimumab; HIMALAYA). Durvalumab per-mg dose and interval are NOT printed in the provided sources.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: DeVita (lines 111636 to 111652) and Standard Guidelines (NCCN) HCC v2.2026 (HCC-I 1 of 2) establish durvalumab plus tremelimumab (STRIDE) as a category 1 preferred first-line regimen but do NOT print the durvalumab per-mg dose, unit, basis, or administration interval. The published STRIDE durvalumab dose and schedule must be VERIFY-ed against a cited source before this field is populated; not inferred here."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event monitoring for both agents (thyroid, hepatic, pulmonary, colitis, endocrinopathies); anti-CTLA4 (tremelimumab) increases irAE frequency and severity versus PD-L1 monotherapy.",
+      "Manage immune-mediated toxicity per the NCCN Guidelines for Management of Immune Checkpoint Inhibitor-Related Toxicities (HCC-I footnote f)."
+    ]
+  },
+  "monitoring": [
+    "Immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during therapy",
+    "Liver function (baseline hepatic reserve; Child-Pugh class)",
+    "Clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "durvalumab and tremelimumab", "action": "hold/steroids", "text": "Hold immunotherapy and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 36 Cancer of the Liver, line 111641 (high-dose tremelimumab 300 mg vs 75 mg); HIMALAYA eligibility and design lines 111644 to 111652",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Durvalumab + Tremelimumab-actl listed as a category 1 first-line Preferred regimen (footnotes f, i; reference 3 Abou-Alfa, HIMALAYA). The guideline lists the regimen by name and does not print per-mg doses.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs.durvalumab.basis",
+    "regimen.drugs.durvalumab.dosePerUnit",
+    "regimen.drugs.durvalumab.unit",
+    "regimen.drugs.durvalumab.days",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for durvalumab plus tremelimumab (STRIDE regimen; HIMALAYA trial) as first-line systemic therapy for advanced or unresectable hepatocellular carcinoma (#22). The tremelimumab high-dose priming dose (300 mg IV, single dose on day 1) is grounded to DeVita 12th ed. Ch. 36 (line 111641, high-dose 300 mg vs 75 mg). The Standard Guidelines (NCCN) HCC v2.2026 Principles of Systemic Therapy (HCC-I 1 of 2) supply the category 1 preferred first-line status but print no per-mg doses. The durvalumab per-mg dose, unit, basis, and administration interval are NOT established by the provided sources and are set to VERIFY (durvalumab.dosePerUnit/basis/unit/days), as are the overall regimen cycleLengthDays and cycles; these must be VERIFY-ed against a cited source and were not inferred. Eligibility captures Child-Pugh class A per the HIMALAYA criteria (DeVita lines 111644 to 111648) and the HCC-I caution footnotes for Child-Pugh B/C. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

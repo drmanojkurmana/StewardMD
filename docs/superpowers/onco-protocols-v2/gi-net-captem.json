@@ -1,0 +1,91 @@
+{
+  "id": "gi-net-captem",
+  "name": "CAPTEM (Capecitabine + Temozolomide) - pancreatic/GI NET",
+  "disease": "Pancreatic (and gastrointestinal) neuroendocrine tumor",
+  "diseaseId": "gastrointestinal_neuroendocrine_tumors",
+  "histology": "well-differentiated neuroendocrine tumor (predominantly pancreatic primary)",
+  "stage": ["locally advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "differentiation": "well-differentiated NET",
+    "primarySite": "capecitabine/temozolomide (and temozolomide) may have more activity in tumors arising in the pancreas than in GI NET",
+    "note": "Capecitabine plus temozolomide (CAPTEM) is a preferred cytotoxic option for advanced well-differentiated NET, with the strongest data in pancreatic NET (ECOG-ACRIN E2211 improved median PFS from 14.4 to 22.7 months versus temozolomide alone). Per Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors, and DeVita 12th ed. Table 57.4."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "cytotoxic systemic option for advanced well-differentiated NET (preferred when tumor response is desired); not strictly line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "well-differentiated NET; preferentially pancreatic primary", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, neuroendocrine line 4964 (Capecitabine/Temozolomide preferred when tumor response is desired); line 5039 (more activity in pancreatic than GI NET)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "capecitabine",
+        "name": "Capecitabine",
+        "basis": "bsa",
+        "dosePerUnit": 750,
+        "unit": "mg/m2",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+        "route": "PO twice daily",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 150 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 207935 (Temozolomide and capecitabine 28-day cycle, ref 82 Kunz/E2211: Capecitabine 750 mg/m2 PO twice daily on days 1 to 14)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Table 57.4 (line 207935; ECOG-ACRIN E2211, Kunz et al). Capecitabine 750 mg/m2 PO twice daily on days 1 to 14 of a 28-day cycle. DPYD: FDA boxed warning recommends testing for DPYD genetic variants before starting a fluoropyrimidine (capecitabine); dose-reduce or avoid in DPYD-deficient patients. No ISMP tall-man form."
+      },
+      {
+        "id": "temozolomide",
+        "name": "Temozolomide",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [10,11,12,13,14],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 207936 (Temozolomide 200 mg/m2 PO daily on days 10 to 14; 28-day cycle, ref 82 Kunz/E2211)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. Table 57.4 (line 207936; ECOG-ACRIN E2211). Temozolomide 200 mg/m2 PO once daily on days 10 to 14 of a 28-day cycle (overlapping the last 5 days of capecitabine, the sequence tested in E2211). No ISMP tall-man form. Monitor CBC (myelosuppression, especially thrombocytopenia)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "Temozolomide is moderately emetogenic; give antiemetic prophylaxis on temozolomide days." }
+    ],
+    "supportiveCare": [
+      "Repeat every 28 days; continue until progression or intolerance.",
+      "Fluoropyrimidine (capecitabine) DPYD testing per FDA boxed warning before starting.",
+      "Consider Pneumocystis prophylaxis with prolonged temozolomide-associated lymphopenia."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle (temozolomide thrombocytopenia/lymphopenia)",
+    "liver and renal function",
+    "hand-foot syndrome and diarrhea assessment (capecitabine)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "renal", "DPYD status (fluoropyrimidine)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 thrombocytopenia or neutropenia", "drug": "temozolomide", "action": "hold/reduce", "text": "Hold and reduce temozolomide per labeling; obtain clinical review." },
+    { "condition": "known DPYD deficiency", "drug": "capecitabine", "action": "reduce/avoid", "text": "Reduce dose or avoid capecitabine in DPYD-deficient patients per FDA boxed warning; clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 57.4, lines 207934 to 207936 (Temozolomide and capecitabine, 28-day cycle: capecitabine 750 mg/m2 PO twice daily days 1 to 14; temozolomide 200 mg/m2 PO daily days 10 to 14; ref 82, ECOG-ACRIN E2211); line 207895 (E2211 PFS benefit)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "neuroendocrine lines 4964 (Capecitabine/Temozolomide preferred when tumor response is desired), 5015, 5039 (more activity in pancreatic than GI NET); listed regimen options lines 1407, 1419, 4910", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for CAPTEM (capecitabine + temozolomide) in advanced well-differentiated NET, predominantly pancreatic (disease #30). Both doses are dose-grounded to DeVita 12th ed. Table 57.4 (lines 207934 to 207936, ECOG-ACRIN E2211 / Kunz): capecitabine 750 mg/m2 PO twice daily on days 1 to 14, and temozolomide 200 mg/m2 PO daily on days 10 to 14, of a 28-day cycle. NCCN NET v1.2026 lists CAPTEM as a preferred regimen (neuroendocrine lines 4964, 5039) but does not print explicit mg/m2 doses, so the concrete dosing is carried from the DeVita core layer. Fluoropyrimidine DPYD safety and temozolomide myelosuppression are captured. No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

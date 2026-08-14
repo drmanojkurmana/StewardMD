@@ -1,0 +1,100 @@
+{
+  "id": "gi-esophageal-crt-cross",
+  "name": "CARBOplatin + PACLitaxel with concurrent radiotherapy, neoadjuvant (CROSS)",
+  "disease": "Esophageal and gastroesophageal junction (GEJ) cancer (squamous cell carcinoma or adenocarcinoma)",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "histology": "squamous cell carcinoma or adenocarcinoma (both eligible)",
+  "stage": ["locally advanced, resectable (node-positive or T2 or higher)"],
+  "biomarkers": {
+    "note": "The CROSS chemoradiation backbone (carboplatin plus paclitaxel with radiotherapy) is not biomarker-restricted and applies to both squamous cell carcinoma and adenocarcinoma of the esophagus or GEJ. HER2, PD-L1, and MMR or MSI may be tested to plan post-resection or later-line therapy but do not gate this neoadjuvant regimen. Per Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers v3.2026."
+  },
+  "treatmentSetting": "neoadjuvant",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "preoperative (neoadjuvant) concurrent chemoradiation before esophagectomy; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "squamous cell carcinoma or adenocarcinoma of the esophagus or GEJ", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 97081 to 97082 (CROSS: squamous cell carcinoma or adenocarcinoma of the esophagus or GEJ)" },
+    { "criterion": "resectability", "requirement": "locally advanced, resectable disease (staged by EUS and CT; node-positive or T2 or higher)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 97089 to 97092 (staged by endoscopic ultrasound and CT; node-positive requirement)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": 2,
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 97081 to 97083 (CROSS: carboplatin at an area under the curve of 2 mg/mL/minute once weekly for 5 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., lines 97081 to 97083. CARBOplatin target AUC 2 mg/mL/minute IV once weekly for 5 weeks, concurrent with radiotherapy. Tall-man per ISMP. dosePerUnit is the target AUC, not mg/m2."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 50,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 97082 to 97083 (CROSS: paclitaxel 50 mg/m2 once weekly for 5 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., lines 97082 to 97083. PACLitaxel 50 mg/m2 IV once weekly for 5 weeks, concurrent with radiotherapy. Tall-man per ISMP. Standard paclitaxel premedication (corticosteroid, H1 and H2 antihistamine)."
+      }
+    ],
+    "cycleLengthDays": 7,
+    "cycles": 5,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling." }
+    ],
+    "supportiveCare": [
+      "Concurrent radiotherapy: 41.4 Gy in 23 fractions (1.8 Gy daily), given with the 5 weekly chemotherapy doses, followed by transthoracic or transhiatal esophagectomy (DeVita 12th ed., lines 97087 to 97089).",
+      "Antiemetics: carboplatin plus paclitaxel weekly; prophylaxis per emetogenicity tier.",
+      "Esophagitis and nutrition support during concurrent chemoradiation."
+    ]
+  },
+  "monitoring": [
+    "CBC weekly during concurrent chemoradiation",
+    "renal function (CARBOplatin AUC dosing)",
+    "peripheral neuropathy assessment (PACLitaxel)",
+    "swallowing / nutritional status and radiation esophagitis"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-dose status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher hematologic toxicity during chemoradiation", "action": "hold/reduce", "text": "Hold or reduce the weekly chemotherapy per hematologic recovery; radiotherapy continuation per radiation oncology. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 97078 to 97092 (CROSS trial: carboplatin AUC 2 and paclitaxel 50 mg/m2 once weekly for 5 weeks with concurrent radiotherapy 1.8 Gy daily to 41.4 Gy in 23 fractions, then esophagectomy; squamous cell carcinoma or adenocarcinoma of the esophagus or GEJ)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers",
+        "version": "3.2026",
+        "date": "2026-06-03",
+        "locator": "Preoperative Chemoradiation, carboplatin plus paclitaxel with radiotherapy as a preferred neoadjuvant option (guidelines/esophageal.txt Principles of Systemic Therapy and Combined Modality sections)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the CROSS neoadjuvant chemoradiation regimen in resectable esophageal and GEJ cancer, applicable to both squamous cell carcinoma and adenocarcinoma. Doses grounded to DeVita 12th ed. lines 97081 to 97083: carboplatin target AUC 2 mg/mL/minute and paclitaxel 50 mg/m2, each once weekly for 5 weeks, given concurrently with radiotherapy of 1.8 Gy daily to 41.4 Gy in 23 fractions, followed by esophagectomy (lines 97087 to 97089). Radiotherapy is captured in supportiveCare and provenance rather than as a drug entry (it is not a systemic drug). Standard Guidelines (NCCN), Esophageal and Esophagogastric Junction Cancers v3.2026 corroborates carboplatin plus paclitaxel with radiotherapy as a preferred preoperative option. ISMP tall-man applied (CARBOplatin, PACLitaxel). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

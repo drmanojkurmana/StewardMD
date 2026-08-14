@@ -1,0 +1,75 @@
+{
+  "id": "gi-crc-msi-pembro",
+  "name": "Pembrolizumab (first-line dMMR/MSI-H metastatic colorectal, KEYNOTE-177)",
+  "disease": "Colorectal cancer",
+  "diseaseId": "colorectal_cancer",
+  "histology": "adenocarcinoma",
+  "stage": ["IV (metastatic)"],
+  "biomarkers": {
+    "MMR_MSI": "deficient mismatch repair (dMMR) / microsatellite instability-high (MSI-H)",
+    "POLE_POLD1": "also applicable to POLE/POLD1 pathogenic mutations with ultra-hypermutated phenotype",
+    "note": "Pembrolizumab is a category 1, preferred first-line option for dMMR/MSI-H metastatic colorectal cancer (KEYNOTE-177 improved PFS versus chemotherapy). BIOMARKER GATE: single-agent checkpoint-inhibitor immunotherapy applies ONLY to dMMR/MSI-H (or POLE/POLD1 ultra-hypermutated) tumors - it is NOT effective in proficient MMR / microsatellite-stable (pMMR/MSS) colorectal cancer. Per Standard Guidelines (NCCN), Colon Cancer, Principles of Systemic Therapy for Advanced or Metastatic Disease."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for dMMR/MSI-H metastatic colorectal cancer (KEYNOTE-177); also a subsequent-line option in checkpoint-inhibitor-naive dMMR/MSI-H disease",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "deficient mismatch repair (dMMR) or microsatellite instability-high (MSI-H) (or POLE/POLD1 mutation with ultra-hypermutated phenotype)", "source": "Standard Guidelines (NCCN), Colon Cancer", "locator": "v2.2026, Principles of Systemic Therapy for Advanced or Metastatic Disease (colon lines 2666, 2668 to 2671); First-Line dMMR/MSI-H (colon line 6049)" },
+    { "criterion": "trialBasis", "requirement": "first-line metastatic setting per KEYNOTE-177", "source": "Standard Guidelines (NCCN), Colon Cancer", "locator": "v2.2026, colon lines 6829 to 6854 (KEYNOTE-177, first-line pembrolizumab for MSI-H mCRC)" }
+  ],
+  "exclusionCriteria": [
+    { "criterion": "biomarker", "requirement": "proficient MMR / microsatellite-stable (pMMR/MSS) disease (single-agent pembrolizumab not indicated)", "source": "Standard Guidelines (NCCN), Colon Cancer", "locator": "v2.2026, Principles of Systemic Therapy (checkpoint inhibitor restricted to dMMR/MSI-H or POLE/POLD1)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Colon Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy for Advanced or Metastatic Disease - Regimens (colon lines 2668 to 2671: Pembrolizumab 200 mg IV every 3 weeks; or 2 mg/kg every 3 weeks; or 400 mg IV every 6 weeks; or 4 mg/kg every 6 weeks)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Colon v2.2026, Principles of Systemic Therapy (colon lines 2668 to 2671). Pembrolizumab 200 mg IV every 3 weeks (day 1 of a 21-day cycle). SOURCE-STATED ALTERNATIVES: 2 mg/kg IV every 3 weeks; 400 mg IV every 6 weeks; or 4 mg/kg IV every 6 weeks. No ISMP tall-man form. Immune-related adverse event monitoring required (thyroid, hepatic, pulmonary, colitis, endocrinopathies, dermatologic)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Pembrolizumab 200 mg every 3 weeks (or 400 mg every 6 weeks); continue until progression, unacceptable toxicity, or the labeled maximum duration.",
+      "Immune-related adverse event surveillance and management (corticosteroids for grade 2+ irAE)."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) before cycles",
+    "symptom review for immune colitis, pneumonitis, hepatitis, dermatitis, endocrinopathies",
+    "clinical/radiographic response assessment (note potential pseudoprogression on immunotherapy)"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge; permanently discontinue for severe/recurrent grade 3-4 irAE per labeling." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita establishes pembrolizumab as a PD-1 checkpoint inhibitor and dMMR/MSI-H as the predictive biomarker for immunotherapy benefit in colorectal cancer; per-cycle dosing carried from the guideline layer (KEYNOTE-177)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Colon Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy for Advanced or Metastatic Disease - Regimens (colon lines 2666, 2668 to 2671, Pembrolizumab dosing for dMMR/MSI-H or POLE/POLD1); Discussion, First-Line dMMR/MSI-H (colon lines 6049, 6829 to 6854, KEYNOTE-177)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for first-line pembrolizumab in dMMR/MSI-H metastatic colorectal cancer (disease #31, KEYNOTE-177). Pembrolizumab 200 mg IV every 3 weeks is dose-grounded to Standard Guidelines (NCCN) Colon v2.2026, Principles of Systemic Therapy (colon lines 2668 to 2671); the source-stated alternatives (2 mg/kg q3wk; 400 mg q6wk; 4 mg/kg q6wk) are carried in notes. First-line positioning for MSI-H mCRC per KEYNOTE-177 is source-stated (colon lines 6049, 6829 to 6854). BIOMARKER GATE (in biomarkers, eligibilityCriteria, and exclusionCriteria): dMMR/MSI-H (or POLE/POLD1 ultra-hypermutated) required; NOT indicated for pMMR/MSS disease. No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
