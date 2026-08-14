@@ -24,11 +24,11 @@ Pre-activation gates (R1 IMPORTANT, NOT staging blockers): v1 engine enforces th
 ## C. GI (14-31)
 14. Colon [have: FOLFOX/FOLFIRI family, DRAFT] · 15. Rectal · 16. Anal · 17. Gastric adenoca · 18. GEJ · 19. Esophageal SCC · 20. Esophageal adenoca · 21. Pancreatic [have: FOLFIRINOX, DRAFT] · 22. HCC · 23. Intrahepatic cholangio · 24. Extrahepatic cholangio · 25. Gallbladder · 26. Ampullary · 27. Small-intestinal adenoca · 28. Appendiceal adenoca · 29. GIST · 30. GI-NET · 31. CRC MSI-H/dMMR - mostly pending
 
-## D. Head & neck (32-41)  [India priority - oral cavity #2]
-32. Oral cavity SCC · 33. Tongue · 34. Lip · 35. Oropharyngeal · 36. HPV+ oropharyngeal · 37. Nasopharyngeal · 38. Hypopharyngeal · 39. Laryngeal · 40. Salivary gland · 41. Sinonasal - pending
+## D. Head & neck (32-41)  [India priority - oral cavity #2]  [batch 2 - STAGED (R1-approved DRAFT) 5063a555]
+14 regimens (hn-*), serve sites #32-41 via site/HPV/setting tags. 2 dose-verifiers + R1 = zero wrong doses. Fully grounded: cisplatin-rt, cisplatin-weekly-rt, pf, cetuximab-rt, extreme, pembro-mono, nivolumab, cetuximab. VERIFY-bearing (NCCN H&N prints no dose tables): tpf-induction, npc-gem-cisplatin, npc-chemort(adjuvant), carbo-5fu(days), pembro-chemo(cycles), salivary(all doses).
 
-## E. Gynecologic (42-51)  [India priority - cervical #3]
-42. Cervical · 43. Endometrial · 44. Ovarian epithelial · 45. HGSOC · 46. Fallopian tube · 47. Primary peritoneal · 48. Vulvar · 49. Vaginal · 50. GTN · 51. Uterine sarcoma - pending
+## E. Gynecologic (42-51)  [India priority - cervical #3]  [batch 3 - STAGED (R1-approved DRAFT) 8cc168c3]
+17 regimens (gyn-*), serve #42-51. 2 dose-verifiers + R1 = zero wrong doses. Fully grounded (10): carbo-paclitaxel, dose-dense-paclitaxel, carbo-paclitaxel-bev, olaparib-maint, niraparib-maint, endometrial-carbo-paclitaxel, uterine-lms-doxorubicin, uterine-lms-gem-docetaxel, gtn-methotrexate, gtn-emaco (GTN fully per-day dosed, vinCRIStine 2mg cap). VERIFY-bearing (7): cervical-cisplatin-rt(cycles), cervical-pac-cis-bev(GOG-240 doses), cervical-pembro-chemo(backbone), vulvar/vaginal-cisplatin-rt(cisplatin dose), endometrial-pembro-lenvatinib(lenvatinib), endometrial-io-dmmr(dostarlimab).
 
 ## F. Genitourinary (52-62)
 52. Prostate · 53. mCSPC · 54. mCRPC · 55. RCC · 56. ccRCC · 57. Urothelial bladder · 58. Upper-tract urothelial · 59. Testicular GCT · 60. Seminoma · 61. NSGCT · 62. Penile - pending
