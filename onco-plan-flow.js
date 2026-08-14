@@ -20,6 +20,10 @@
   function flagOn() { return flag("smd_onco_protocols") && flag("smd_onco_recommend"); }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
 
+  // PHASE E: dose edits are STRUCTURED, never free text. The reason is a fixed enum (+ an optional free-
+  // text detail); the client mirror of the server's override-needs-reason rule (functions/_onco_store.js).
+  var OVERRIDE_REASONS = ["protocol-defined", "organ-function", "toxicity", "previous-cycle-adjustment", "clinical-judgment", "other"];
+
   /* ---- pure derivation ---------------------------------------------------------------------- */
   // Phenotype keys mirror what SMD_ONCORECOMMEND.recommend() reads (diseaseId/stage/setting/intent/
   // line/biomarkers). Never invents: an absent field stays null (recommend surfaces it as unconfirmed).
@@ -197,11 +201,96 @@
     catch (e) { return '<div class="of-empty">Matrix builder unavailable.</div>'; }
   }
   function actionBtn(act, label, primary) { return '<button class="oe-btn ' + (primary ? "primary" : "ghost") + '" data-of-act="' + act + '">' + label + "</button>"; }
-  function actionsRow() {
+  // Once CREATE has fired, the primary action becomes CONFIRM & ACTIVATE (never both at once, and
+  // never auto-shown before an explicit CREATE click).
+  function actionsRow(created) {
     return '<div class="of-actions">' +
       actionBtn("edit", "EDIT") + actionBtn("viewcalc", "VIEW CALCULATION") + actionBtn("viewev", "VIEW EVIDENCE") +
-      actionBtn("compareguide", "COMPARE GUIDELINE") + actionBtn("print", "PRINT/PDF") + actionBtn("create", "CREATE TREATMENT PLAN", true) +
+      actionBtn("compareguide", "COMPARE GUIDELINE") + actionBtn("print", "PRINT/PDF") +
+      (created ? actionBtn("activate", "CONFIRM & ACTIVATE TREATMENT PLAN", true) : actionBtn("create", "CREATE TREATMENT PLAN", true)) +
       "</div>";
+  }
+
+  /* ---- PHASE E: structured dose edit + staged overrides -------------------------------------- */
+  function reasonOptions(sel) {
+    return ['<option value="">Reason for change (required)</option>'].concat(OVERRIDE_REASONS.map(function (r) {
+      return '<option value="' + esc(r) + '"' + (sel === r ? " selected" : "") + ">" + esc(r) + "</option>";
+    })).join("");
+  }
+  function editRow(drug, lin, ov) {
+    drug = drug || {}; lin = lin || {};
+    var orig = lin.final;
+    var origTxt = orig == null ? "verify" : orig + " mg";
+    var note = ov ? '<div class="of-note of-edit-note">Staged: original ' + esc(origTxt) + " &rarr; " + esc(ov.modifiedDose) + " mg &middot; " + esc(ov.reason) + (ov.reasonDetail ? " - " + esc(ov.reasonDetail) : "") + "</div>" : "";
+    return '<div class="of-edit-row"><div class="of-edit-h"><b>' + esc(drug.name || drug.id || "") + "</b>" +
+      '<span class="of-edit-orig">Calculated (original): ' + esc(origTxt) + "</span></div>" + note +
+      '<div class="of-edit-ctrl">' +
+        '<input class="oe-inp" type="number" step="any" data-of-inp="edit-dose:' + esc(drug.id) + '" placeholder="' + (orig != null ? esc(orig) : "mg") + '" value="' + (ov ? esc(ov.modifiedDose) : "") + '">' +
+        '<select class="oe-inp" data-of-inp="edit-reason:' + esc(drug.id) + '">' + reasonOptions(ov && ov.reason) + "</select>" +
+        '<input class="oe-inp" type="text" data-of-inp="edit-detail:' + esc(drug.id) + '" placeholder="Detail (optional)" value="' + (ov && ov.reasonDetail ? esc(ov.reasonDetail) : "") + '">' +
+        '<button class="oe-btn ghost" data-of-act="ov-save:' + esc(drug.id) + '">Save edit</button>' +
+      "</div></div>";
+  }
+  function editPanel(d) {
+    var drugs = (d.plan && d.plan.lockedTemplate && d.plan.lockedTemplate.drugs) || [];
+    var linById = {}; (d.lineages || []).forEach(function (l) { if (l && l.drugId) linById[l.drugId] = l; });
+    var ovById = {}; (st.overrides || []).forEach(function (o) { if (o && o.drugId) ovById[o.drugId] = o; });
+    var rows = drugs.map(function (drug) { return editRow(drug, linById[drug.id], ovById[drug.id]); }).join("");
+    return '<section class="of-edit"><div class="of-sec-h">STRUCTURED DOSE EDIT</div>' +
+      '<div class="of-note">The original calculated dose is preserved. Every change records the modified dose, a reason, the physician and a timestamp.</div>' +
+      rows + "</section>";
+  }
+  // Apply staged overrides onto a DISPLAY-ONLY confirmedDoses[] (the matrix prefers it). d.lineages /
+  // d.plan.calculatedDoses (the ORIGINAL calculated lineage) are never mutated - each confirmed entry is
+  // a fresh clone, so the original dose is never destroyed (HARD RULE).
+  function applyOverrides(d) {
+    if (!d || !d.plan) return;
+    if (!(st.overrides && st.overrides.length)) { d.plan.confirmedDoses = []; return; }
+    var ovById = {}; st.overrides.forEach(function (o) { if (o && o.drugId) ovById[o.drugId] = o; });
+    d.plan.confirmedDoses = (d.lineages || []).map(function (lin) {
+      var o = lin && ovById[lin.drugId];
+      return o ? Object.assign({}, lin, { modified: o.modifiedDose, modifiedReason: o.reason + (o.reasonDetail ? ": " + o.reasonDetail : ""), final: o.modifiedDose }) : lin;
+    });
+  }
+  function inpVal(name) { try { var el = (G.document || document).querySelector('#smdOncoFlow [data-of-inp="' + name + '"]'); return el ? el.value : ""; } catch (e) { return ""; } }
+  // Stage one structured edit: { drugId, field, originalCalculatedDose, modifiedDose, reason(enum),
+  // reasonDetail?, physicianId, timestamp }. Rejects (toast, no stage) a non-numeric dose or a missing
+  // reason - reason is a required enum, never free text.
+  function stageEdit(drugId) {
+    if (!st.digital) return;
+    var lin = null; (st.digital.lineages || []).forEach(function (l) { if (l && l.drugId === drugId) lin = l; });
+    var doseRaw = inpVal("edit-dose:" + drugId), reason = inpVal("edit-reason:" + drugId), detail = inpVal("edit-detail:" + drugId);
+    var mod = Number(doseRaw);
+    if (!(doseRaw !== "" && isFinite(mod))) { toast("Enter a valid modified dose."); return; }
+    if (!reason) { toast("Select a reason for the change."); return; }
+    var entry = { drugId: drugId, field: "dose:" + drugId, originalCalculatedDose: lin ? lin.final : null, modifiedDose: mod,
+      reason: reason, reasonDetail: detail || "", physicianId: (st.ctx && (st.ctx.physicianId || st.ctx.doctorUid)) || "", timestamp: Date.now() };
+    st.overrides = (st.overrides || []).filter(function (o) { return o && o.drugId !== drugId; }).concat([entry]);
+    render();
+  }
+  // Structured client override -> server override shape ({drugId,was,now,reason,by}). The enum reason
+  // (+ optional detail) collapses into the server's required non-empty `reason` string.
+  function toServerOverride(o) {
+    return { drugId: o.drugId, was: o.originalCalculatedDose, now: o.modifiedDose, reason: o.reason + (o.reasonDetail ? ": " + o.reasonDetail : ""), by: o.physicianId || "" };
+  }
+  // PHASE F: the exact body POST onco/plan (createPlan) persists. Multi-tenant: hospitalId /
+  // hospitalImplementationVersion are null when no hospital overlay applies (never hard-coded).
+  function createPayload(d) {
+    d = d || {}; var ctx = st.ctx || {};
+    return {
+      protocolId: d.protocolId, sourceProtocolId: d.protocolId, sourceProtocolVersion: d.protocolVersion,
+      hospitalId: ctx.hospitalId || null, orgId: ctx.orgId || ctx.hospitalId || null,
+      hospitalImplementationVersion: ctx.hospitalImplementationVersion || null,
+      ghisPatientId: d.mrn || "", doctorUid: ctx.doctorUid || "", intent: d.intent || "",
+      patientParams: st.params || {}, patientParameters: st.params || {}, patientPhenotype: st.pheno || {},
+      evidenceSnapshot: (d.protocol && d.protocol.evidence) || null, doseLineage: d.lineages || [],
+      overrides: (st.overrides || []).map(toServerOverride)
+    };
+  }
+  // POST onco/plan/confirm body. physicianConfirmed:true is set ONLY here, on the explicit CONFIRM &
+  // ACTIVATE click - never inferred - so the server gate can never activate automatically.
+  function confirmPayload() {
+    return { planId: st.planId || "", overrides: (st.overrides || []).map(toServerOverride), physicianConfirmed: true };
   }
   function subPanel(d, sub) {
     if (!sub) return "";
@@ -212,9 +301,12 @@
     return "";
   }
 
-  // renderDigitalProtocol(d, sub): header + Tata matrix + always-visible lineage + the 6 actions.
+  // renderDigitalProtocol(d, sub): header + Tata matrix + always-visible lineage + actions. The matrix
+  // reflects any staged edits (applyOverrides); the always-visible lineage keeps showing the ORIGINAL
+  // calculated dose, so an edit never hides what was originally computed.
   function renderDigitalProtocol(d, sub) {
     d = d || {};
+    applyOverrides(d);
     var header = '<section class="of-dp-head"><div class="of-sec-h">PATIENT-SPECIFIC DIGITAL PROTOCOL</div>' +
       hrow("Patient", d.patientName) + hrow("MRN", d.mrn) + hrow("Diagnosis", d.diagnosis) +
       hrow("Stage", d.stage) + hrow("Biomarkers", biomarkerText(d.biomarkers)) +
@@ -222,11 +314,11 @@
       hrow("Standard Protocol", d.protocolName) + hrow("Protocol version", d.protocolVersion) +
       hrow("Number of cycles", d.cycles ? String(d.cycles) : "") + "</section>";
     return header + '<section class="of-dp-matrix">' + matrix(d) + "</section>" +
-      lineageBlock(d) + actionsRow() + subPanel(d, sub);
+      lineageBlock(d) + actionsRow(st.created) + (sub === "edit" ? editPanel(d) : subPanel(d, sub));
   }
 
   /* ---- overlay driver (mirrors onco-home.js) ------------------------------------------------ */
-  var st = { ctx: null, pheno: null, params: null, protocols: [], compareIds: [], digital: null, mode: "find", sub: null, drawer: null, detailsId: null };
+  var st = { ctx: null, pheno: null, params: null, protocols: [], compareIds: [], digital: null, mode: "find", sub: null, drawer: null, detailsId: null, overrides: [], created: false, planId: "" };
 
   function rootEl() { var el = document.getElementById("smdOncoFlow"); if (!el) { el = document.createElement("div"); el.id = "smdOncoFlow"; el.className = "oh-overlay"; document.body.appendChild(el); } return el; }
   function backBar(act, label) { return '<button class="of-back" data-of-act="' + act + '">&lsaquo; ' + esc(label) + "</button>"; }
@@ -265,7 +357,7 @@
   // direct API call). Never called during a render or on open. NEVER auto-selects.
   function select(protocol, params, ctx) {
     st.digital = buildDigitalProtocol(protocol, st.pheno || derivePhenotype(ctx || st.ctx), params || st.params, ctx || st.ctx);
-    st.mode = "select"; st.sub = null; st.drawer = null; render();
+    st.mode = "select"; st.sub = null; st.drawer = null; st.overrides = []; st.created = false; st.planId = ""; render();
     return st.digital;
   }
   function doSelect(id) { var p = findActive(id); if (!p) { toast("Protocol not available."); return; } select(p, st.params, st.ctx); }
@@ -279,7 +371,17 @@
     st.drawer = { cycleNo: cy, drugId: drugId, drug: drug || {}, lineage: lin };
     render();
   }
-  function emit(action) { try { var e = new CustomEvent("smd-onco-flow", { detail: { action: action, digitalProtocol: st.digital } }); (G.document || document).dispatchEvent(e); } catch (x) {} }
+  // Emit the DOM event the caller (opd-emr) POSTs from. CREATE/ACTIVATE carry the exact server body so
+  // the caller only forwards it via its authed oncoPost - the flow itself never fetches.
+  function emit(action) {
+    try {
+      var detail = { action: action, digitalProtocol: st.digital };
+      if (action === "create") detail.payload = createPayload(st.digital);
+      if (action === "activate") detail.payload = confirmPayload();
+      var e = new CustomEvent("smd-onco-flow", { detail: detail });
+      (G.document || document).dispatchEvent(e);
+    } catch (x) {}
+  }
 
   function onClick(e) {
     var t = e.target;
@@ -302,9 +404,11 @@
     if (verb === "viewcalc") { var d0 = (st.digital.plan.lockedTemplate.drugs || [])[0]; if (d0) openDrawer(1, d0.id); return; }
     if (verb === "viewev") { st.sub = st.sub === "ev" ? null : "ev"; render(); return; }
     if (verb === "compareguide") { st.sub = st.sub === "guide" ? null : "guide"; render(); return; }
-    if (verb === "edit") { emit("edit"); toast("Edit is a later phase - changes are not persisted yet."); return; }
+    if (verb === "edit") { st.sub = st.sub === "edit" ? null : "edit"; render(); return; }         // PHASE E: structured edit panel
+    if (verb === "ov-save") { stageEdit(arg); return; }                                            // stage one structured override
     if (verb === "print") { emit("print"); try { G.print && G.print(); } catch (x) {} return; }
-    if (verb === "create") { emit("create"); toast("Create Treatment Plan is a later phase - not persisted yet."); return; }
+    if (verb === "create") { st.created = true; st.sub = null; emit("create"); render(); return; } // PHASE F: emit createPlan payload, reveal CONFIRM & ACTIVATE
+    if (verb === "activate") { emit("activate"); toast("Confirm & activate sent - the physician confirmation is required server-side."); return; }   // NEVER auto: explicit click only
   }
 
   // openFind(ctx, protocols): the entry point. Derives the phenotype, runs recommend(), renders the
@@ -317,7 +421,7 @@
     st.protocols = (protocols || (ctx && ctx.protocols) || []).filter(Boolean);
     st.pheno = derivePhenotype(ctx);
     st.params = deriveParams(ctx);
-    st.compareIds = []; st.digital = null; st.mode = "find"; st.sub = null; st.drawer = null; st.detailsId = null;
+    st.compareIds = []; st.digital = null; st.mode = "find"; st.sub = null; st.drawer = null; st.detailsId = null; st.overrides = []; st.created = false; st.planId = "";
     var el = rootEl();
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     render();
@@ -332,7 +436,7 @@
     derivePhenotype: derivePhenotype, deriveParams: deriveParams,
     buildDigitalProtocol: buildDigitalProtocol,
     renderFind: renderFind, renderCompare: renderCompare, renderDigitalProtocol: renderDigitalProtocol,
-    _st: st, _version: "1.0"
+    OVERRIDE_REASONS: OVERRIDE_REASONS, _st: st, _version: "1.1"
   };
   G.SMD_ONCOFLOW = API;
   if (typeof module !== "undefined" && module.exports) module.exports = {

@@ -47,6 +47,49 @@ function _recordOverride(o) {
   return { drugId: o.drugId != null ? String(o.drugId) : "", was: o.was, now: o.now, reason: reason, by: o.by || "", at: o.at != null ? o.at : Date.now() };
 }
 
+// PHASE E: one immutable audit-history row per override, appended to plan.auditHistory in confirmPlan.
+// `original` is the SERVER'S OWN calculated dose (plan.calculatedDoses) - never the client-supplied
+// `was` - so the true pre-override calculation is what is recorded and can never be overwritten. The
+// modified value + typed reason + physician + server timestamp complete the {field,original,modified,
+// reason,physicianId,timestampServer} shape. This APPENDS; the original lineage is left fully intact.
+function _auditEntry(mod, calc, at) {
+  mod = mod || {};
+  const original = (calc && calc.final != null) ? calc.final : (mod.was != null ? mod.was : null);
+  return { field: "dose:" + (mod.drugId || ""), original: original, modified: mod.now, reason: mod.reason, physicianId: mod.by || "", timestampServer: at != null ? at : Date.now() };
+}
+
+// Any field still carrying the literal "VERIFY" sentinel (schema: an unresolved VERIFY blocks ACTIVE).
+// Deep-scans a snapshot so a nested VERIFY (e.g. a drug dose) can never slip through the activation gate.
+function _deepHasVerify(v) {
+  if (v === "VERIFY") return true;
+  if (Array.isArray(v)) return v.some(_deepHasVerify);
+  if (v && typeof v === "object") return Object.keys(v).some((k) => _deepHasVerify(v[k]));
+  return false;
+}
+
+// PHASE F pre-activation gate (fail-closed): a Treatment Plan may only be activated when ALL hold -
+// (1) required dose calculations complete (every drug resolves to a non-null final dose), (2) required
+// source evidence present (>=1 core evidence entry), (3) required clearance information available (the
+// snapshotted protocol declares its clearance checks), (4) NO unresolved mandatory VERIFY on the
+// snapshotted protocol, (5) physician confirmation explicitly recorded. Returns every blocker (not just
+// the first) so the UI can show the whole checklist. NEVER auto-passes - a missing physicianConfirmed
+// alone blocks, so activation can never be automatic. Pure + exported for direct unit testing.
+function _activationGate(plan, opts) {
+  plan = plan || {}; opts = opts || {};
+  const blockers = [];
+  const tmpl = plan.lockedTemplate || {};
+  const drugs = tmpl.drugs || (tmpl.regimen && tmpl.regimen.drugs) || [];
+  const doses = (plan.confirmedDoses && plan.confirmedDoses.length) ? plan.confirmedDoses : (plan.calculatedDoses || []);
+  const byDrug = {}; doses.forEach((d) => { if (d && d.drugId) byDrug[d.drugId] = d; });
+  if (!(drugs.length > 0 && drugs.every((dr) => { const d = byDrug[dr.id]; return !!(d && d.final != null); }))) blockers.push("dose_calculations_incomplete");
+  const ev = plan.evidenceSnapshot || tmpl.evidence || null;
+  if (!(ev && ev.core && ev.core.length)) blockers.push("source_evidence_missing");
+  if (!((tmpl.clearanceChecks || []).length)) blockers.push("clearance_info_missing");
+  if ((tmpl.verifyFields || []).length || _deepHasVerify(tmpl)) blockers.push("unresolved_verify");
+  if (!opts.physicianConfirmed) blockers.push("physician_confirmation_missing");
+  return { ok: blockers.length === 0, blockers: blockers };
+}
+
 // Lean v1 cycle state machine (spec R5): DUE/CLEARANCE/PHYSICIAN-CONFIRMED/READY/ADMINISTRATION/
 // COMPLETED collapse into these 5 states. `held` is reachable from any live state (hold/delay/cancel
 // + reason) but is terminal in v1 - resuming a held cycle is a future workflow gap, not modelled yet.
@@ -94,10 +137,23 @@ export async function createPlan(env, body, template, deps) {
     confirmedDoses: [],
     plannedCycles: Number((template && template.cycles) || 0),
     plannedDates: [],
-    status: "draft",
+    status: "draft",   // "planned" in the plan lifecycle; kept as "draft" (draft -> active on CONFIRM & ACTIVATE)
     confirmations: [],
     createdAt: now,
     updatedAt: now,
+    // PHASE F persistence: source protocol + IMMUTABLE version snapshot (lockedTemplate is the frozen
+    // copy; sourceProtocolId/Version name it explicitly), patient phenotype, the exact evidence shown at
+    // selection, patient parameters + full dose lineage, and the multi-tenant hospital binding. hospitalId
+    // / hospitalImplementationVersion are null when no hospital overlay applies (global protocol); NO
+    // hospital is ever hard-coded. auditHistory accumulates every override (see confirmPlan).
+    sourceProtocolId: String(body.protocolId || (template && template.id) || ""),
+    sourceProtocolVersion: String((template && template.version) || ""),
+    patientPhenotype: body.patientPhenotype || {},
+    evidenceSnapshot: body.evidenceSnapshot || (snap && snap.evidence) || null,
+    patientParameters: patientParams,
+    doseLineage: calculatedDoses,
+    hospitalImplementationVersion: body.hospitalImplementationVersion != null ? String(body.hospitalImplementationVersion) : null,
+    auditHistory: [],
   };
   await io.fsCommit(env, [io.wCreate(env, "q_onco_plans/" + id, f)]);
   await auditOnco(io, env, f.hospitalId, f.doctorUid, "onco:plan:create",
@@ -113,29 +169,48 @@ export async function getPlan(env, planId, deps) {
   return d ? Object.assign({ planId: id }, d.fields) : null;
 }
 
-// Each override must carry a reason or the WHOLE confirm is rejected before any write happens
-// (override-needs-reason at the data layer). status draft -> active ("physician CONFIRM & ACTIVATE").
-export async function confirmPlan(env, planId, overrides, deps) {
+// CONFIRM & ACTIVATE (status draft -> active). Each override must carry a reason or the WHOLE confirm
+// is rejected before any write (override-needs-reason at the data layer).
+//
+// The 3rd arg is EITHER the legacy overrides[] (data-layer callers/tests: overrides only, NO strict
+// activation gate - pre-Phase-F behaviour, byte-identical) OR an options object
+// { overrides, physicianConfirmed } from the PRODUCTION route, which ALWAYS runs the Phase F
+// pre-activation gate (_activationGate). So in production activation is gated + never automatic: a
+// missing physicianConfirmed alone blocks. Fail-closed: the gate throws BEFORE any Firestore write.
+export async function confirmPlan(env, planId, arg, deps) {
   const io = deps || REAL_DEPS;
   const id = sanitize(planId);
   const plan = await getPlan(env, id, io);
   if (!plan) throw new Error("plan_not_found");
+  const gated = !Array.isArray(arg) && arg != null && typeof arg === "object";
+  const opts = gated ? arg : {};
+  const overrides = (gated ? arg.overrides : arg) || [];
   const now = Date.now();
-  const mods = (overrides || []).map((o) => _recordOverride(Object.assign({ at: now }, o)));
+  const mods = overrides.map((o) => _recordOverride(Object.assign({ at: now }, o)));
   // Dose lineage modified -> confirmed: apply each override's `now` onto the matching drug's calculated
   // lineage so the CONFIRMED dose (what the nurse view, the admin record's `planned`, and the PDF read)
-  // is the physician's value, not the pre-override calculation. Without this a dose reduction would be
-  // recorded in physicianModifications but never operative - a real safety gap.
+  // is the physician's value, not the pre-override calculation. The ORIGINAL calculatedDoses array is
+  // NEVER mutated (plan.calculatedDoses stays untouched in the doc) and each confirmed entry is a NEW
+  // object spread from the calculated lineage, so protocolDose/inputs/calculated/rounded (the full
+  // original lineage) are preserved alongside the modified final - original dose never destroyed.
   const byDrug = {}; mods.forEach((m) => { if (m.drugId) byDrug[m.drugId] = m; });
   const confirmedDoses = (plan.calculatedDoses || []).map((d) => {
     const m = d && byDrug[d.drugId];
     return m ? Object.assign({}, d, { modified: m.now, modifiedReason: m.reason, final: m.now }) : d;
   });
+  const calcByDrug = {}; (plan.calculatedDoses || []).forEach((d) => { if (d && d.drugId) calcByDrug[d.drugId] = d; });
+  const auditAdds = mods.map((m) => _auditEntry(m, calcByDrug[m.drugId], now));
+  if (gated) {
+    if (plan.status !== "draft") throw new Error("plan_not_activatable:" + plan.status);   // never re-activate
+    const gate = _activationGate(Object.assign({}, plan, { confirmedDoses: confirmedDoses }), opts);
+    if (!gate.ok) throw new Error("activation_blocked:" + gate.blockers.join(","));
+  }
   const patch = {
     physicianModifications: (plan.physicianModifications || []).concat(mods),
+    auditHistory: (plan.auditHistory || []).concat(auditAdds),
     confirmedDoses: confirmedDoses,
     status: "active",
-    confirmations: (plan.confirmations || []).concat([{ by: plan.doctorUid || "", at: now }]),
+    confirmations: (plan.confirmations || []).concat([{ by: plan.doctorUid || "", at: now, physicianConfirmed: !!opts.physicianConfirmed }]),
     updatedAt: now,
   };
   await io.fsCommit(env, [io.wUpdate(env, "q_onco_plans/" + id, patch)]);
@@ -297,6 +372,6 @@ function _nurseTemplate(template) {
 }
 
 export {
-  sanitize, newId, _cycleId, _snapshot, _recordOverride, _canTransition, _nurseTemplate,
+  sanitize, newId, _cycleId, _snapshot, _recordOverride, _auditEntry, _activationGate, _deepHasVerify, _canTransition, _nurseTemplate,
   CYCLE_STATES, CYCLE_TRANSITIONS, CLEARANCE_STATUSES,
 };

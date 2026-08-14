@@ -317,3 +317,132 @@ test("_nurseTemplate keeps names/routes/days/premeds but strips every dose formu
   assert.equal(nt.drugs[0].roundingRule, undefined);
   assert.equal(nt.drugs[0].caps, undefined);
 });
+
+// ---- Phase E: structured edit + audit history --------------------------------------------------
+
+// A fully-activatable template: computable doses + core evidence + clearance checks + no VERIFY.
+const FULL_TEMPLATE = {
+  id: "fx-full", version: "2.1", cycles: 3,
+  clearanceChecks: ["CBC/platelets", "renal"],
+  evidence: { core: [{ layer: "core", source: "DeVita 12th ed", evidenceStatus: "current" }] },
+  verifyFields: [],
+  drugs: [{ id: "drugA", basis: "flat", dosePerUnit: 100 }],
+};
+
+test("Phase E: an override APPENDS an audit row and NEVER destroys the original calculated dose/lineage", async () => {
+  const { io } = makeFakeIO();
+  const plan = await ONCO.createPlan({}, { hospitalId: "h", doctorUid: "dr1", ghisPatientId: "MRN-E1", protocolId: "fx-full", patientParams: {} }, FULL_TEMPLATE, io);
+  assert.equal(plan.calculatedDoses[0].final, 100);
+  assert.deepEqual(plan.auditHistory, [], "a fresh plan starts with an empty auditHistory");
+
+  const confirmed = await ONCO.confirmPlan({}, plan.planId, { overrides: [{ drugId: "drugA", was: 100, now: 80, reason: "toxicity", by: "dr1" }], physicianConfirmed: true }, io);
+  // audit APPENDED with the required shape
+  assert.equal(confirmed.auditHistory.length, 1);
+  const a = confirmed.auditHistory[0];
+  assert.equal(a.field, "dose:drugA");
+  assert.equal(a.original, 100, "audit records the SERVER's own original calculated dose, not a client value");
+  assert.equal(a.modified, 80);
+  assert.equal(a.reason, "toxicity");
+  assert.equal(a.physicianId, "dr1");
+  assert.ok(a.timestampServer > 0);
+
+  // ORIGINAL never destroyed: calculatedDoses untouched; the confirmed lineage still carries the original calc
+  const reloaded = await ONCO.getPlan({}, plan.planId, io);
+  assert.equal(reloaded.calculatedDoses[0].final, 100, "original calculatedDoses is preserved after an override");
+  assert.equal(reloaded.confirmedDoses[0].final, 80, "the override is the operative confirmed dose");
+  assert.equal(reloaded.confirmedDoses[0].calculated, 100, "the original calculated value survives on the confirmed lineage");
+  assert.equal(reloaded.confirmedDoses[0].protocolDose, 100, "the protocol dose survives on the confirmed lineage");
+  assert.equal(reloaded.confirmedDoses[0].modifiedReason, "toxicity");
+});
+
+test("Phase E: an override with no reason is rejected before any write (options form too)", async () => {
+  const { io } = makeFakeIO();
+  const plan = await ONCO.createPlan({}, { protocolId: "fx-full", patientParams: {} }, FULL_TEMPLATE, io);
+  await assert.rejects(
+    () => ONCO.confirmPlan({}, plan.planId, { overrides: [{ drugId: "drugA", was: 100, now: 80, reason: "   " }], physicianConfirmed: true }, io),
+    /override_reason_required/
+  );
+});
+
+// ---- Phase F: pre-activation gate + immutable snapshot -----------------------------------------
+
+test("Phase F: _activationGate PASSES only with doses complete + evidence + clearance + no VERIFY + physician confirmation", () => {
+  const base = {
+    lockedTemplate: { drugs: [{ id: "drugA" }], clearanceChecks: ["CBC"], evidence: { core: [{ source: "x" }] }, verifyFields: [] },
+    calculatedDoses: [{ drugId: "drugA", final: 100 }],
+  };
+  const clone = (patch) => Object.assign({}, base, { lockedTemplate: Object.assign({}, base.lockedTemplate, patch.lockedTemplate || {}) }, patch.top || {});
+  assert.equal(ONCO._activationGate(base, { physicianConfirmed: true }).ok, true, "all present + confirmed -> ok");
+
+  let g = ONCO._activationGate(base, {});
+  assert.equal(g.ok, false); assert.ok(g.blockers.indexOf("physician_confirmation_missing") >= 0, "no physician confirmation -> blocked (never auto)");
+
+  g = ONCO._activationGate(clone({ lockedTemplate: { evidence: { core: [] } } }), { physicianConfirmed: true });
+  assert.ok(g.blockers.indexOf("source_evidence_missing") >= 0);
+
+  g = ONCO._activationGate(clone({ lockedTemplate: { clearanceChecks: [] } }), { physicianConfirmed: true });
+  assert.ok(g.blockers.indexOf("clearance_info_missing") >= 0);
+
+  g = ONCO._activationGate(clone({ lockedTemplate: { drugs: [{ id: "drugA", dosePerUnit: "VERIFY" }] } }), { physicianConfirmed: true });
+  assert.ok(g.blockers.indexOf("unresolved_verify") >= 0, "a nested VERIFY sentinel blocks activation");
+
+  g = ONCO._activationGate(clone({ top: { calculatedDoses: [{ drugId: "drugA", final: null }] } }), { physicianConfirmed: true });
+  assert.ok(g.blockers.indexOf("dose_calculations_incomplete") >= 0);
+});
+
+test("Phase F: confirmPlan gate BLOCKS without physician confirmation and NEVER auto-activates", async () => {
+  const { io } = makeFakeIO();
+  const plan = await ONCO.createPlan({}, { protocolId: "fx-full", doctorUid: "dr1", patientParams: {} }, FULL_TEMPLATE, io);
+  await assert.rejects(() => ONCO.confirmPlan({}, plan.planId, { overrides: [] }, io), /activation_blocked:.*physician_confirmation_missing/);
+  const still = await ONCO.getPlan({}, plan.planId, io);
+  assert.equal(still.status, "draft", "a blocked activation leaves the plan un-activated (never automatic)");
+  const active = await ONCO.confirmPlan({}, plan.planId, { overrides: [], physicianConfirmed: true }, io);
+  assert.equal(active.status, "active", "an explicit physician confirmation activates");
+  // and a second activate is refused (never re-activate a live plan)
+  await assert.rejects(() => ONCO.confirmPlan({}, plan.planId, { overrides: [], physicianConfirmed: true }, io), /plan_not_activatable/);
+});
+
+test("Phase F: confirmPlan gate BLOCKS on missing evidence/clearance and on an unresolved VERIFY snapshot", async () => {
+  const { io } = makeFakeIO();
+  const bad = { id: "fx-bad", version: "1.0", cycles: 1, drugs: [{ id: "drugA", basis: "flat", dosePerUnit: 100 }] };
+  const p1 = await ONCO.createPlan({}, { protocolId: "fx-bad", patientParams: {} }, bad, io);
+  await assert.rejects(() => ONCO.confirmPlan({}, p1.planId, { overrides: [], physicianConfirmed: true }, io), /activation_blocked/);
+
+  const verifyTmpl = { id: "fx-v", version: "1.0", cycles: 1, clearanceChecks: ["CBC"], evidence: { core: [{ source: "x" }] }, drugs: [{ id: "drugA", basis: "flat", dosePerUnit: "VERIFY" }] };
+  const p2 = await ONCO.createPlan({}, { protocolId: "fx-v", patientParams: {} }, verifyTmpl, io);
+  await assert.rejects(() => ONCO.confirmPlan({}, p2.planId, { overrides: [], physicianConfirmed: true }, io), /activation_blocked:.*unresolved_verify/);
+});
+
+test("Phase F: legacy array-form confirmPlan stays un-gated (back-compat for the data-layer), so existing flows are unchanged", async () => {
+  const { io } = makeFakeIO();
+  // The thin FIXTURE_TEMPLATE has no evidence/clearance, yet the ARRAY form must still activate it
+  // (the strict gate is the OPTIONS-form/production path only).
+  const plan = await ONCO.createPlan({}, { protocolId: "test-protocol", patientParams: {} }, FIXTURE_TEMPLATE, io);
+  const active = await ONCO.confirmPlan({}, plan.planId, [], io);
+  assert.equal(active.status, "active");
+});
+
+test("Phase F: sourceProtocolVersion + lockedTemplate are an IMMUTABLE snapshot (mutating the source never changes the plan)", async () => {
+  const { io } = makeFakeIO();
+  const tmpl = { id: "fx-full", version: "2.1", cycles: 3, clearanceChecks: ["CBC"], evidence: { core: [{ source: "x" }] }, drugs: [{ id: "drugA", basis: "flat", dosePerUnit: 100 }] };
+  const plan = await ONCO.createPlan({}, { protocolId: "fx-full", patientParams: {}, patientPhenotype: { diseaseId: "dlbcl", stage: "III" }, hospitalId: "hosp-A", hospitalImplementationVersion: "2.1-hosp-A" }, tmpl, io);
+  assert.equal(plan.sourceProtocolId, "fx-full");
+  assert.equal(plan.sourceProtocolVersion, "2.1");
+  assert.deepEqual(plan.patientPhenotype, { diseaseId: "dlbcl", stage: "III" });
+  assert.ok(plan.evidenceSnapshot && plan.evidenceSnapshot.core.length, "the exact evidence shown at selection is snapshotted");
+  assert.equal(plan.hospitalImplementationVersion, "2.1-hosp-A", "multi-tenant hospital implementation version is persisted (not hard-coded)");
+
+  tmpl.version = "9.9"; tmpl.drugs[0].dosePerUnit = 5;   // publish a newer template
+  const reloaded = await ONCO.getPlan({}, plan.planId, io);
+  assert.equal(reloaded.sourceProtocolVersion, "2.1", "the snapshot version is frozen at creation");
+  assert.equal(reloaded.lockedVersion, "2.1");
+  assert.equal(reloaded.lockedTemplate.drugs[0].dosePerUnit, 100, "the snapshot template is frozen");
+  assert.equal(reloaded.calculatedDoses[0].final, 100);
+});
+
+test("Phase F: a global (no-hospital) plan persists null hospital binding - never a hard-coded hospital", async () => {
+  const { io } = makeFakeIO();
+  const plan = await ONCO.createPlan({}, { protocolId: "fx-full", patientParams: {} }, FULL_TEMPLATE, io);
+  assert.equal(plan.hospitalId, "", "no hospital -> empty scope");
+  assert.equal(plan.hospitalImplementationVersion, null, "no hospital overlay -> null implementation version");
+});

@@ -9,7 +9,12 @@
 window.SMD_QUEUE_FLAGS = { bool: function (k) { return String(k).indexOf("smd_onco_") === 0; } };
 window.toast = function (m) { window.__toasts = (window.__toasts || []).concat([m]); };
 window.__flowEvents = [];
-document.addEventListener("smd-onco-flow", function (e) { window.__flowEvents.push(e.detail && e.detail.action); });
+window.__flowPayloads = {};
+document.addEventListener("smd-onco-flow", function (e) {
+  var d = e.detail || {};
+  window.__flowEvents.push(d.action);
+  if (d.action) window.__flowPayloads[d.action] = d.payload || null;
+});
 
 // ---- FIXTURE ACTIVE Standard Protocols (kb/schema/standard-protocol.schema.json shape) ----
 // Two DLBCL protocols match the phenotype (enables COMPARE); one NSCLC protocol is contradicted and

@@ -493,7 +493,10 @@ export async function onRequest(context) {
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
           await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
-          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, body.overrides || []) }, 200, request); }
+          // Options-form call -> Phase F pre-activation gate runs. physicianConfirmed must be an EXPLICIT
+          // client true (the doctor's CONFIRM & ACTIVATE tap); it is never inferred, so activation is
+          // gated and never automatic. The gate throws (400) with the blocker list on any failure.
+          try { return json({ ok: true, plan: await ONCO.confirmPlan(env, body.planId, { overrides: body.overrides || [], physicianConfirmed: body.physicianConfirmed === true }) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
         }
         if (sub === "cycle" && !sub2) {   // create - DOCTOR

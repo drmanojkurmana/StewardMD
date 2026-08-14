@@ -107,10 +107,47 @@ try {
   ok(/Protocol dose/i.test((await ev(`return document.getElementById("smdOncoFlow").textContent||"";`)) || ""), "VIEW CALCULATION opens the detailed dose-lineage drawer");
   await ev(`var b=document.querySelector('#smdOncoFlow [data-oe-act="onco-drawer-close"]'); if(b)b.click(); return 1;`); await sleep(120);
 
-  // CREATE TREATMENT PLAN emits an event and does NOT persist (Phase F)
-  await ev(`document.querySelector('#smdOncoFlow [data-of-act="create"]').click(); return 1;`); await sleep(120);
-  ok((await ev(`return (window.__flowEvents||[]).indexOf("create")>=0;`)) === true, "CREATE TREATMENT PLAN emits a smd-onco-flow event (no persistence in Phase D)");
+  // ============ PHASE E: STRUCTURED edit (enum reason, not free text) + audit-ready staging ============
+  await ev(`document.querySelector('#smdOncoFlow [data-of-act="edit"]').click(); return 1;`); await sleep(150);
+  ok(await ev(`return !!document.querySelector('#smdOncoFlow .of-edit');`) === true, "EDIT opens the STRUCTURED dose-edit panel");
+  ok(await ev(`return !!document.querySelector('#smdOncoFlow [data-of-inp="edit-reason:rituximab"]') && document.querySelector('#smdOncoFlow [data-of-inp="edit-reason:rituximab"]').tagName === "SELECT";`) === true, "the reason control is a <select> (enum), NOT a free-text field");
+  ok(await ev(`var o=[].slice.call(document.querySelectorAll('#smdOncoFlow [data-of-inp="edit-reason:rituximab"] option')).map(function(x){return x.value}); return o.indexOf("toxicity")>=0 && o.indexOf("organ-function")>=0 && o.indexOf("clinical-judgment")>=0;`) === true, "the enum offers the defined reasons (toxicity / organ-function / clinical-judgment / ...)");
+  ok(await ev(`return /Calculated \\(original\\): 600 mg/.test(document.getElementById("smdOncoFlow").textContent||"");`) === true, "the edit row shows the ORIGINAL calculated dose (600 mg) it is being changed from");
 
-  console.log(fails ? `\n${fails} check(s) failed` : "\nAll Onco Phase D flow checks passed");
+  // reasonless save is refused (structured reason is required)
+  await ev(`document.querySelector('#smdOncoFlow [data-of-inp="edit-dose:rituximab"]').value="500"; document.querySelector('#smdOncoFlow [data-of-act="ov-save:rituximab"]').click(); return 1;`); await sleep(120);
+  ok(await ev(`return (window.SMD_ONCOFLOW._st.overrides||[]).length === 0;`) === true, "an edit with no reason is NOT staged (reason required)");
+
+  // valid structured edit: 600 -> 500 mg, reason "toxicity"
+  await ev(`document.querySelector('#smdOncoFlow [data-of-inp="edit-dose:rituximab"]').value="500"; document.querySelector('#smdOncoFlow [data-of-inp="edit-reason:rituximab"]').value="toxicity"; document.querySelector('#smdOncoFlow [data-of-act="ov-save:rituximab"]').click(); return 1;`); await sleep(150);
+  const ov = await ev(`var o=(window.SMD_ONCOFLOW._st.overrides||[])[0]; return o? JSON.stringify({drugId:o.drugId,orig:o.originalCalculatedDose,mod:o.modifiedDose,reason:o.reason,hasTs:o.timestamp>0}) : "";`);
+  ok(/"drugId":"rituximab"/.test(ov) && /"orig":600/.test(ov) && /"mod":500/.test(ov) && /"reason":"toxicity"/.test(ov) && /"hasTs":true/.test(ov), `the structured override captures {originalCalculatedDose:600, modifiedDose:500, reason, timestamp} (${ov})`);
+
+  // HARD RULE: matrix reflects the edit (500 mg) but the ORIGINAL calculated dose is never destroyed
+  const edited = (await ev(`return document.getElementById("smdOncoFlow").textContent||"";`)) || "";
+  ok(/500 mg/.test(edited), "the matrix reflects the edited dose (rituximab 500 mg)");
+  ok(/proposed 600 mg/.test(edited), "the always-visible lineage STILL shows the original calculated dose (600 mg) - original never destroyed");
+  ok(await ev(`return (window.SMD_ONCOFLOW._st.digital.lineages||[]).filter(function(l){return l.drugId==="rituximab"})[0].final === 600;`) === true, "the underlying calculated lineage is untouched (final still 600)");
+
+  // ============ PHASE F: CREATE -> CONFIRM & ACTIVATE (explicit clicks only; never automatic) ============
+  await ev(`document.querySelector('#smdOncoFlow [data-of-act="create"]').click(); return 1;`); await sleep(150);
+  ok((await ev(`return (window.__flowEvents||[]).indexOf("create")>=0;`)) === true, "CREATE TREATMENT PLAN emits a smd-onco-flow 'create' event");
+  const cp = (await ev(`return JSON.stringify(window.__flowPayloads.create||{});`)) || "{}";
+  ok(/"protocolId":"fx-dlbcl-rchopd"/.test(cp) && /"sourceProtocolVersion":"1.0"/.test(cp), "the create payload carries protocolId + the IMMUTABLE sourceProtocolVersion");
+  ok(/"patientPhenotype"/.test(cp) && /"dlbcl"/.test(cp) && /"evidenceSnapshot"/.test(cp), "the create payload carries the patient phenotype + the evidence snapshot shown at selection");
+  ok(/"overrides":\[\{/.test(cp) && /"now":500/.test(cp) && /"reason":"toxicity"/.test(cp), "the create payload forwards the structured override in the server {was,now,reason} shape");
+  ok(await ev(`return window.SMD_ONCOFLOW._st.created === true;`) === true, "after CREATE the flow enters the created state");
+  ok(await ev(`return !document.querySelector('#smdOncoFlow [data-of-act="create"]') && !!document.querySelector('#smdOncoFlow [data-of-act="activate"]');`) === true, "the primary action becomes CONFIRM & ACTIVATE (create button replaced)");
+
+  // HARD RULE: nothing has activated yet (no 'activate' event before the explicit click)
+  ok((await ev(`return (window.__flowEvents||[]).indexOf("activate")<0;`)) === true, "no activation happens automatically on CREATE (never auto-activate)");
+
+  await ev(`document.querySelector('#smdOncoFlow [data-of-act="activate"]').click(); return 1;`); await sleep(150);
+  ok((await ev(`return (window.__flowEvents||[]).indexOf("activate")>=0;`)) === true, "CONFIRM & ACTIVATE emits a smd-onco-flow 'activate' event on the EXPLICIT click");
+  const ap = (await ev(`return JSON.stringify(window.__flowPayloads.activate||{});`)) || "{}";
+  ok(/"physicianConfirmed":true/.test(ap), "the activate payload records physicianConfirmed:true (the server gate requires it; activation is never automatic)");
+  ok(/"overrides":\[\{/.test(ap) && /"now":500/.test(ap), "the activate payload forwards the confirmed override");
+
+  console.log(fails ? `\n${fails} check(s) failed` : "\nAll Onco Phase D+E+F flow checks passed");
 } catch (x) { console.error(x); fails++; }
 finally { try { ws && ws.close(); } catch {} try { chrome.kill("SIGKILL"); } catch {} try { serveProc.kill("SIGKILL"); } catch {} if (fails) process.exitCode = 1; }

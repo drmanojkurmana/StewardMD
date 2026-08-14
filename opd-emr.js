@@ -903,7 +903,10 @@
       if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("This is being set up and is not live yet."); return; }
       if (!res.ok || res.d.ok === false || !res.d.plan) { toast("Could not create the treatment plan. Please try again."); return; }
       var planId = res.d.plan.planId;
-      return oncoPost("/plan/confirm", { planId: planId, overrides: draft.overrides || [] }).then(function (res2) {
+      // physicianConfirmed:true is the doctor's explicit CONFIRM & ACTIVATE (this tap already passed the
+      // confirmed() gate above); the server pre-activation gate requires it, so activation is never automatic.
+      return oncoPost("/plan/confirm", { planId: planId, overrides: draft.overrides || [], physicianConfirmed: true }).then(function (res2) {
+        if (res2.d && typeof res2.d.error === "string" && res2.d.error.indexOf("activation_blocked") === 0) { toast("Cannot activate yet: complete doses, evidence, clearance info and resolve any VERIFY first."); return; }
         if (!res2.ok || res2.d.ok === false) { toast("Plan created but could not confirm. Please retry the confirm."); return; }
         st.oncoDraft = null; st.oncoOverrideDraft = {}; st.oncoPlan = res2.d.plan || res.d.plan;
         toast("Treatment plan created and activated.");
