@@ -12,7 +12,7 @@
     "HER2_ERBB2": "tested",
     "MMR_MSI": "tested",
     "cytotoxicBackboneRestricted": false,
-    "note": "Cytotoxic fluorouracil/leucovorin backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN, licensed), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+    "note": "Cytotoxic fluorouracil/leucovorin backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
   },
   "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
@@ -89,7 +89,7 @@
     "guideline": [
       {
         "layer": "guideline",
-        "source": "Standard Guidelines (NCCN, licensed)",
+        "source": "Standard Guidelines (NCCN)",
         "version": "2.2026",
         "date": null,
         "locator": "Colon Cancer, Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D; Fluorouracil/Leucovorin as a less intensive option for any line of therapy, if not previously given); Principles of Adjuvant Therapy and Chemotherapy Regimens (COL-G; Simplified biweekly infusional Fluorouracil/Leucovorin, sLV5FU2); Principles of Pathologic and Molecular Review (COL-B)",
@@ -102,7 +102,7 @@
         "field": "treatmentSetting",
         "sources": [
           { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "metastatic" },
-          { "name": "Standard Guidelines (NCCN, licensed) Colon Cancer", "version": "2.2026", "value": ["adjuvant", "metastatic"] }
+          { "name": "Standard Guidelines (NCCN) Colon Cancer", "version": "2.2026", "value": ["adjuvant", "metastatic"] }
         ],
         "note": "DeVita lists Simplified LV5FU2 (Table 40.11) under management of unresectable metastatic disease. The guideline additionally lists Simplified biweekly infusional Fluorouracil/Leucovorin (sLV5FU2) as an adjuvant chemotherapy regimen (COL-G) and Fluorouracil/Leucovorin as a less intensive option for any line in metastatic disease (COL-D). Physician-facing treatmentSetting kept conservative (metastatic); adjuvant use left to clinical review.",
         "resolution": "clinical-review-required"
@@ -121,5 +121,5 @@
     "reviewDue": false
   },
   "verifyFields": [],
-  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): DeVita 12th ed. lists Simplified LV5FU2 (Table 40.11) within the section on management of unresectable metastatic disease (header line 123342; unresectable stage IV disease, lines 123351 and 123359), which is explicitly palliative. histology resolved to adenocarcinoma (Chapter 40, line 121516 colorectal adenocarcinoma; Histologic Type section line 121080). treatmentSetting resolved to metastatic and stage to IV from that section. eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per Table 40.11 footnote (line 123493) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines, NCCN licensed, Colon Cancer v2.2026): lineOfTherapy resolved to any line of therapy in metastatic disease as a less intensive fluorouracil/leucovorin option, if not previously given (COL-D less intensive therapy). biomarkers resolved: the cytotoxic fluorouracil/leucovorin backbone is not biomarker-restricted, while RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested to guide targeted or immunotherapy add-ons (COL-B and COL-D). A divergence is recorded on treatmentSetting: the guideline additionally lists sLV5FU2 as an adjuvant chemotherapy regimen (COL-G), whereas the DeVita core places it in the metastatic setting; the physician-facing value is kept conservative (metastatic). No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
+  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): DeVita 12th ed. lists Simplified LV5FU2 (Table 40.11) within the section on management of unresectable metastatic disease (header line 123342; unresectable stage IV disease, lines 123351 and 123359), which is explicitly palliative. histology resolved to adenocarcinoma (Chapter 40, line 121516 colorectal adenocarcinoma; Histologic Type section line 121080). treatmentSetting resolved to metastatic and stage to IV from that section. eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per Table 40.11 footnote (line 123493) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines (NCCN), Colon Cancer v2.2026): lineOfTherapy resolved to any line of therapy in metastatic disease as a less intensive fluorouracil/leucovorin option, if not previously given (COL-D less intensive therapy). biomarkers resolved: the cytotoxic fluorouracil/leucovorin backbone is not biomarker-restricted, while RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested to guide targeted or immunotherapy add-ons (COL-B and COL-D). A divergence is recorded on treatmentSetting: the guideline additionally lists sLV5FU2 as an adjuvant chemotherapy regimen (COL-G), whereas the DeVita core places it in the metastatic setting; the physician-facing value is kept conservative (metastatic). No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
 }

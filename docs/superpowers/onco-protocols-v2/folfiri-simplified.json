@@ -16,7 +16,7 @@
     "first-line",
     "subsequent-line (after prior oxaliplatin, if not previously given)"
   ],
-  "eligibilityCriteria": [],
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
   "regimen": {
     "drugs": [
       {
@@ -150,10 +150,10 @@
     "guideline": [
       {
         "layer": "guideline",
-        "source": "Standard Guidelines (NCCN, licensed)",
+        "source": "Standard Guidelines (NCCN)",
         "version": "2.2026",
         "date": null,
-        "locator": "NCCN Colon Cancer v2.2026: COL-D 2 of 17 (metastatic Initial and Subsequent Therapy; FOLFIRI recurs across pages 2 to 4 of 17), COL-D 9 of 17 (FOLFIRI regimen), COL-B (Principles of Pathologic and Molecular Review: adenocarcinoma; KRAS/NRAS/BRAF and MMR/MSI testing), COL-2A (metastatic adenocarcinoma workup)",
+        "locator": "NCCN Colon Cancer v2.2026: COL-D 2 of 17 (metastatic Initial and Subsequent Therapy; FOLFIRI recurs across pages 2 to 4 of 17), COL-D 8 of 17 (FOLFIRI regimen), COL-B (Principles of Pathologic and Molecular Review: adenocarcinoma; KRAS/NRAS/BRAF and MMR/MSI testing), COL-2A (metastatic adenocarcinoma workup)",
         "evidenceStatus": "current"
       }
     ],
@@ -174,5 +174,5 @@
   "verifyFields": [
     "eligibilityCriteria"
   ],
-  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.12 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347, 'Given the palliative nature of such treatments'). DeVita states there are no specific dose-modification guidelines based on UGT1A1 polymorphism (lines 121525 to 121528), so no UGT1A1 dose rule is added. Guideline layer (Standard Guidelines (NCCN, licensed), Colon Cancer v2.2026) resolves: histology=colorectal adenocarcinoma (COL-B; COL-2A metastatic adenocarcinoma workup); lineOfTherapy=first-line and subsequent-line after prior oxaliplatin (COL-D 2 of 17, FOLFIRI backbone); biomarkers=not eligibility-restricted for this cytotoxic backbone (COL-D 2 to 4 of 17 list FOLFIRI across KRAS/NRAS/BRAF-WT, RAS-mutant, and BRAF V600E pages), with KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B. eligibilityCriteria stays VERIFY: the guideline states no structured, machine-matchable eligibility criteria for this backbone. Core and guideline layers agree on the metastatic setting (no divergence). No endorsement is implied; this remains a StewardMD Standard Protocol."
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.12 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347, 'Given the palliative nature of such treatments'). DeVita states there are no specific dose-modification guidelines based on UGT1A1 polymorphism (lines 121525 to 121528), so no UGT1A1 dose rule is added. Guideline layer (Standard Guidelines (NCCN), Colon Cancer v2.2026) resolves: histology=colorectal adenocarcinoma (COL-B; COL-2A metastatic adenocarcinoma workup); lineOfTherapy=first-line and subsequent-line after prior oxaliplatin (COL-D 2 of 17, FOLFIRI backbone); biomarkers=not eligibility-restricted for this cytotoxic backbone (COL-D 2 to 4 of 17 list FOLFIRI across KRAS/NRAS/BRAF-WT, RAS-mutant, and BRAF V600E pages), with KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B. eligibilityCriteria stays VERIFY: the guideline states no structured, machine-matchable eligibility criteria for this backbone. Core and guideline layers agree on the metastatic setting (no divergence). No endorsement is implied; this remains a StewardMD Standard Protocol."
 }

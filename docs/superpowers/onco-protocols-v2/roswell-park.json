@@ -9,7 +9,7 @@
   "treatmentSetting": ["adjuvant", "metastatic"],
   "treatmentIntent": ["curative", "palliative"],
   "lineOfTherapy": ["adjuvant therapy (resected disease)", "metastatic: any line of therapy, if not previously given"],
-  "eligibilityCriteria": [],
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
   "regimen": {
     "drugs": [
       {
@@ -69,7 +69,7 @@
     "guideline": [
       {
         "layer": "guideline",
-        "source": "Standard Guidelines (NCCN, licensed)",
+        "source": "Standard Guidelines (NCCN)",
         "version": "2.2026",
         "date": null,
         "locator": "NCCN Colon Cancer v2.2026: COL-G 1 of 3 and 2 of 3 (Principles of Adjuvant Therapy; bolus fluorouracil/leucovorin Roswell Park regimen; stage III colon adenocarcinoma), COL-D 9 of 17 (Roswell Park regimen) and COL-D 2 of 17 (metastatic; fluorouracil/leucovorin as any line of therapy if not previously given), COL-B (adenocarcinoma; KRAS/NRAS/BRAF and MMR/MSI testing; MMR/MSI on all stage II to III tumors), COL-2A",
@@ -93,5 +93,5 @@
   "verifyFields": [
     "eligibilityCriteria"
   ],
-  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. treatmentSetting and stage are kept VERIFY on purpose: DeVita 12th ed. cites the weekly bolus 5-FU/LV (Roswell Park) schedule both in the adjuvant treatment of stage III colon cancer (bolus 5-FU/leucovorin, around line 122340) and, via Table 40.11, within the 'Management of Unresectable Metastatic Disease' section (stage IV, lines 123342 to 123352); Haller et al. 1998 is an adjuvant trial. Because the regimen spans both curative-adjuvant and palliative-metastatic use (matching the existing treatmentIntent), the single-valued treatmentSetting and the stage list cannot be pinned to one value from DeVita. Guideline layer (Standard Guidelines (NCCN, licensed), Colon Cancer v2.2026) resolves the setting/stage ambiguity: the Roswell Park bolus fluorouracil/leucovorin regimen is supported in BOTH the adjuvant setting (COL-G 1 of 3 and 2 of 3; stage III colon adenocarcinoma) and the metastatic setting (COL-D 9 of 17 regimen; COL-D 2 of 17 lists fluorouracil/leucovorin as any line of therapy if not previously given). Resolved: histology=colorectal adenocarcinoma (COL-B; COL-2A); treatmentSetting=[adjuvant, metastatic]; stage=[III adjuvant, IV metastatic]; lineOfTherapy=adjuvant therapy in resected disease and any metastatic line if not previously given; biomarkers=not eligibility-restricted for this cytotoxic backbone, with KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B (MMR/MSI on all stage II to III tumors). eligibilityCriteria stays VERIFY: no structured eligibility criteria stated by the guideline for this backbone. Core and guideline layers agree (no divergence). No endorsement is implied; this remains a StewardMD Standard Protocol."
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. treatmentSetting and stage are kept VERIFY on purpose: DeVita 12th ed. cites the weekly bolus 5-FU/LV (Roswell Park) schedule both in the adjuvant treatment of stage III colon cancer (bolus 5-FU/leucovorin, around line 122340) and, via Table 40.11, within the 'Management of Unresectable Metastatic Disease' section (stage IV, lines 123342 to 123352); Haller et al. 1998 is an adjuvant trial. Because the regimen spans both curative-adjuvant and palliative-metastatic use (matching the existing treatmentIntent), the single-valued treatmentSetting and the stage list cannot be pinned to one value from DeVita. Guideline layer (Standard Guidelines (NCCN), Colon Cancer v2.2026) resolves the setting/stage ambiguity: the Roswell Park bolus fluorouracil/leucovorin regimen is supported in BOTH the adjuvant setting (COL-G 1 of 3 and 2 of 3; stage III colon adenocarcinoma) and the metastatic setting (COL-D 9 of 17 regimen; COL-D 2 of 17 lists fluorouracil/leucovorin as any line of therapy if not previously given). Resolved: histology=colorectal adenocarcinoma (COL-B; COL-2A); treatmentSetting=[adjuvant, metastatic]; stage=[III adjuvant, IV metastatic]; lineOfTherapy=adjuvant therapy in resected disease and any metastatic line if not previously given; biomarkers=not eligibility-restricted for this cytotoxic backbone, with KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B (MMR/MSI on all stage II to III tumors). eligibilityCriteria stays VERIFY: no structured eligibility criteria stated by the guideline for this backbone. Core and guideline layers agree (no divergence). No endorsement is implied; this remains a StewardMD Standard Protocol."
 }
