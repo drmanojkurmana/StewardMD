@@ -1,0 +1,84 @@
+{
+  "id": "breast-capecitabine",
+  "name": "Capecitabine",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["I", "II", "III", "IV"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Single-agent oral fluoropyrimidine; the cytotoxic backbone is NOT biomarker-restricted. Two grounded uses: (1) adjuvant for residual triple-negative disease after preoperative taxane/alkylator/anthracycline chemotherapy (subtype #3, TNBC; CREATE-X/Masuda), and (2) palliative single-agent therapy for HR-positive/HER2-negative (subtype #5) or HER2-negative recurrent/metastatic disease. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-M 5 of 10 and BINV-Q 9 of 15."
+  },
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "adjuvant (residual TNBC after preoperative chemotherapy) or a single-agent option across lines for HER2-negative recurrent/metastatic disease; not strictly line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "adjuvantIndication", "requirement": "residual invasive disease after preoperative taxane-, alkylator-, and anthracycline-based chemotherapy (triple-negative subtype)", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 2 of 10 (HR-Negative/HER2-Negative, adjuvant capecitabine for residual disease); dosing BINV-M 5 of 10 reference 6 (Masuda, CREATE-X)" },
+    { "criterion": "metastaticIndication", "requirement": "HER2-negative recurrent or metastatic breast cancer (HR-positive/HER2-negative or triple-negative), single-agent option across lines", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-Q 9 of 15 (Cytotoxic Regimens for Recurrent or Stage IV Disease: capecitabine single agent)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "capecitabine",
+        "name": "Capecitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-Q 9 of 15 (Capecitabine 1000 to 1250 mg/m2 PO twice daily on Days 1 to 14; cycled every 21 days); adjuvant BINV-M 5 of 10 (1000 to 1250 mg/m2 PO twice daily Days 1 to 14, every 21 days for 6 to 8 cycles)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026. The guideline states a dose RANGE of 1000 to 1250 mg/m2 PO twice daily on days 1 to 14 of a 21-day cycle (metastatic monotherapy BINV-Q 9 of 15; adjuvant residual-disease BINV-M 5 of 10). dosePerUnit is set to the lower bound (1000 mg/m2); the full sourced range is 1000 to 1250 mg/m2 twice daily. Adjuvant use is 6 to 8 cycles; metastatic use continues until progression."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Antiemetics: capecitabine is low-to-moderate emetic risk; prophylaxis per emetogenicity tier.",
+      "Counsel on hand-foot syndrome, diarrhea, and stomatitis; hold/reduce per labeling for grade 2 or higher toxicity.",
+      "Assess DPYD status per institutional policy before fluoropyrimidine therapy (risk of severe toxicity in DPD deficiency)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "hepatic and renal function before each cycle",
+    "hand-foot syndrome and diarrhea assessment each cycle"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle toxicity status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher hand-foot syndrome, diarrhea, or stomatitis", "drug": "capecitabine", "action": "hold/reduce", "text": "Interrupt capecitabine until resolution to grade 0 to 1, then resume at a reduced dose per labeling; obtain clinical review." },
+    { "condition": "known DPYD deficiency (DPD)", "drug": "capecitabine", "action": "reduce/avoid", "text": "Reduce starting dose or avoid in DPD deficiency due to risk of severe or fatal fluoropyrimidine toxicity; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "capecitabine is an established oral fluoropyrimidine in DeVita; the breast-specific per-cycle dose is not tabulated in the breast chapter, so the numeric dose here is taken from the guideline layer",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "Dosing: Cytotoxic Regimens for Recurrent/Stage IV Disease, Capecitabine 1000 to 1250 mg/m2 PO twice daily on Days 1 to 14, every 21 days, BINV-Q 9 of 15; adjuvant residual-disease dosing (6 to 8 cycles) BINV-M 5 of 10 reference 6 (Masuda, CREATE-X)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent capecitabine. Histology-agnostic (invasive ductal #1 and invasive lobular #2); serves triple-negative subtype #3 in the adjuvant residual-disease setting (CREATE-X/Masuda) and HR-positive/HER2-negative subtype #5 (and HER2-negative disease generally) in the metastatic setting. DeVita establishes capecitabine as an oral fluoropyrimidine but does not tabulate the breast per-cycle dose; the dose is therefore sourced to Standard Guidelines (NCCN) v6.2026: 1000 to 1250 mg/m2 PO twice daily on days 1 to 14 of a 21-day cycle (metastatic BINV-Q 9 of 15; adjuvant residual-disease 6 to 8 cycles BINV-M 5 of 10). dosePerUnit is set to the lower bound of the sourced range (1000 mg/m2), with the full 1000 to 1250 mg/m2 twice-daily range recorded in the drug notes. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

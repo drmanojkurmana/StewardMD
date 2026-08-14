@@ -32,7 +32,7 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string", "description": "Apply ISMP tall-man where applicable (DOXOrubicin, vinCRIStine, CARBOplatin, CISplatin)." },
-        "basis": { "enum": ["bsa", "weight", "flat", "auc", "VERIFY"] },
+        "basis": { "enum": ["bsa", "mgkg", "flat", "auc", "VERIFY"] },
         "dosePerUnit": { "$ref": "#/$defs/verifiable", "description": "Exact sourced dose (number), or the target AUC when basis=auc, or VERIFY / null when the source omits it." },
         "unit": { "enum": ["mg/m2", "mg/kg", "mg", "AUC", "units", "VERIFY"] },
         "days": { "type": "array", "items": { "type": "number" } },

@@ -1,0 +1,97 @@
+{
+  "id": "breast-cdk46-ai",
+  "name": "CDK4/6 Inhibitor (Palbociclib) + Aromatase Inhibitor (Anastrozole)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["IV"],
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Endocrine-based regimen: requires HR-positive (ER and/or PR positive) and HER2-negative disease. A CDK4/6 inhibitor combined with an aromatase inhibitor is a category 1, preferred first-line option for HR-positive/HER2-negative recurrent or metastatic disease. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-Q."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for HR-positive/HER2-negative recurrent or metastatic breast cancer (aromatase inhibitor plus CDK4/6 inhibitor, category 1)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HR-positive (ER and/or PR positive) and HER2-negative", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-Q 5 of 15 (HR-Positive/HER2-Negative recurrent/metastatic, Aromatase inhibitor + CDK4/6 inhibitor, category 1)" },
+    { "criterion": "menopausalStatus", "requirement": "for premenopausal patients, an aromatase inhibitor requires concurrent ovarian function suppression (GnRH analog)", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, Principles of Endocrine Therapy BINV-N" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "palbociclib",
+        "name": "Palbociclib",
+        "basis": "flat",
+        "dosePerUnit": 125,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-Q 14 of 15 (Palbociclib 125 mg PO daily on Days 1 to 21)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Palbociclib 125 mg PO once daily on days 1 to 21 of a 28-day cycle (7-day break). Dose value as stated in the guideline dosing page. ALTERNATIVE CDK4/6 inhibitors: abemaciclib 150 mg PO twice daily continuously on days 1 to 28 is source-stated (BINV-Q 14 of 15 / BINV-M 5 of 10). Ribociclib is also a listed CDK4/6-inhibitor partner, but the metastatic ribociclib dose (600 mg) is NOT present in the provided source extract; if ribociclib is substituted its dose must be VERIFY-ed against a cited source."
+      },
+      {
+        "id": "anastrozole",
+        "name": "Anastrozole",
+        "basis": "flat",
+        "dosePerUnit": 1,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 30818 (Fulvestrant 500 mg versus anastrozole 1 mg for hormone-receptor-positive advanced breast cancer, FALCON); line 30165 (anastrozole 1 mg)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., anastrozole 1 mg (lines 30165, 30818, FALCON first-line advanced breast cancer). Aromatase inhibitor given PO once daily continuously (represented as days 1 to 28 of the 28-day cycle). The three aromatase inhibitors (anastrozole, exemestane, letrozole) have similar efficacy per the guideline (BINV-N); anastrozole 1 mg is the concretely sourced example. If letrozole 2.5 mg or exemestane 25 mg is substituted, that dose is not in the provided source extract and must be VERIFY-ed."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "CBC before starting, at day 15 of the first 2 cycles, then before each cycle (palbociclib neutropenia).",
+      "For premenopausal patients on an aromatase inhibitor, give concurrent ovarian function suppression (GnRH analog) per BINV-N."
+    ]
+  },
+  "monitoring": [
+    "CBC (neutropenia) per palbociclib schedule",
+    "liver function",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia", "drug": "palbociclib", "action": "hold/reduce", "text": "Hold palbociclib and resume at a reduced dose per labeling for grade 3 to 4 neutropenia; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 30818 (anastrozole 1 mg, FALCON, HR-positive advanced breast cancer); line 30165 (anastrozole 1 mg pharmacology)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "HR-Positive/HER2-Negative recurrent/metastatic first-line, Aromatase inhibitor + CDK4/6 inhibitor (category 1), BINV-Q 5 of 15; CDK4/6-inhibitor dosing (palbociclib 125 mg days 1 to 21; abemaciclib 150 mg twice daily) BINV-Q 14 of 15; endocrine therapy principles BINV-N",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the HR-positive/HER2-negative metastatic endocrine-based regimen: a CDK4/6 inhibitor plus an aromatase inhibitor. Serves subtype #5 (HR-positive/HER2-negative), histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. The CDK4/6-inhibitor dose (palbociclib 125 mg PO daily days 1 to 21 of a 28-day cycle) is sourced to Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15; the aromatase inhibitor dose (anastrozole 1 mg PO daily) is sourced to DeVita 12th ed. (FALCON, lines 30818 and 30165). Abemaciclib 150 mg twice daily is a source-stated alternative CDK4/6 inhibitor; ribociclib is a listed partner but its metastatic 600 mg dose is not in the provided sources and would require VERIFY if substituted (this is noted in-drug, and the modeled regimen uses only fully sourced doses so no field is set to VERIFY). Continue until progression (cycles null). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

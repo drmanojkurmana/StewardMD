@@ -1,0 +1,84 @@
+{
+  "id": "breast-tdm1",
+  "name": "Ado-Trastuzumab Emtansine (T-DM1)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["IV"],
+  "biomarkers": {
+    "HER2": "positive",
+    "note": "HER2-directed antibody-drug conjugate (trastuzumab linked to emtansine, a microtubule inhibitor): requires HER2-positive disease (IHC 3+ or ISH-amplified). Per DeVita 12th ed. and Standard Guidelines (NCCN), Invasive Breast Cancer."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "second-line and beyond for HER2-positive metastatic breast cancer (previously treated with trastuzumab and a taxane); may be considered in the second line if not a candidate for fam-trastuzumab deruxtecan; optimal third-line-and-beyond sequence not established",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HER2-positive (IHC 3+ or ISH-amplified)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 20796 to 20802; 21432 to 21433" },
+    { "criterion": "priorTherapy", "requirement": "prior trastuzumab and taxane chemotherapy (metastatic use)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 21432 to 21433" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "ado-trastuzumab-emtansine",
+        "name": "Ado-trastuzumab emtansine (T-DM1)",
+        "basis": "mgkg",
+        "dosePerUnit": 3.6,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "lines 20796 to 20802 (drug table: ado-trastuzumab emtansine 3.6 mg/kg IV every 3 wk, HER2-positive metastatic breast cancer); line 21438 (dosed at 3.6 mg/kg IV every 21 days)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., ado-trastuzumab emtansine 3.6 mg/kg IV every 3 weeks (every 21 days) for HER2-positive metastatic breast cancer (lines 20796 to 20802; 21438). Concordant with Standard Guidelines (NCCN) v6.2026 metastatic dosing (T-DM1 3.6 mg/kg IV day 1, every 21 days, BINV-Q 10 of 15). Do not confuse with fam-trastuzumab deruxtecan; do not substitute trastuzumab and hyaluronidase-oysk for this agent."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Antiemetics: low-to-moderate emetic risk; prophylaxis per emetogenicity tier.",
+      "Cardiac: evaluate LVEF before and during HER2-targeted therapy (BINV-M 1 of 10).",
+      "Monitor platelets (thrombocytopenia) and hepatic transaminases (transaminitis) each cycle per DeVita adverse-event profile (line 21439)."
+    ]
+  },
+  "monitoring": [
+    "platelet count before each cycle (thrombocytopenia)",
+    "hepatic transaminases before each cycle (transaminitis)",
+    "LVEF at baseline and periodically",
+    "peripheral neuropathy assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "LVEF", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 thrombocytopenia or significant transaminase elevation", "drug": "ado-trastuzumab emtansine", "action": "hold/reduce", "text": "Hold or dose-reduce per labeling for thrombocytopenia or hepatotoxicity; obtain clinical review. DeVita reports thrombocytopenia 12.8% and transient transaminitis 4.3% (line 21439)." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 20796 to 20802 (drug table dose 3.6 mg/kg IV every 3 wk, HER2-positive metastatic breast cancer); lines 21432 to 21439 (EMILIA-context approval, dosed 3.6 mg/kg IV every 21 days, toxicity profile)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "Dosing: Cytotoxic Regimens for Recurrent/Stage IV Disease, HER2-Positive, T-DM1 3.6 mg/kg IV day 1 every 21 days, BINV-Q 10 of 15; line placement (second/third line and beyond) BINV-Q 3 of 15 and footnote r; adjuvant use for residual disease 3.6 mg/kg every 21 days for 14 cycles BINV-M 7 of 10",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the HER2-directed antibody-drug conjugate ado-trastuzumab emtansine (T-DM1). Serves subtype #4 (HER2-positive) metastatic breast cancer, histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. The dose is grounded in DeVita 12th ed. (core): 3.6 mg/kg IV every 3 weeks / every 21 days for HER2-positive metastatic breast cancer (lines 20796 to 20802 and 21438), concordant with Standard Guidelines (NCCN) v6.2026 metastatic dosing (BINV-Q 10 of 15). Modeled as the metastatic use (cycles null, continue until progression); the same 3.6 mg/kg every-21-day dose is used adjuvantly for 14 cycles in residual HER2-positive disease per the guideline (noted, not the modeled setting). CAUTION recorded in provenance: DeVita states 6.4 mg/m2 for trastuzumab deruxtecan in the gastric setting (line 99219); that is a different drug and a different setting and must never be applied to T-DM1 or to breast dosing. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

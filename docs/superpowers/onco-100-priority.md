@@ -10,13 +10,13 @@ Sources on hand: `devita.txt` (16MB), `harrison.txt` (29MB), 69 NCCN PDFs (job t
 ## Status legend
 `pending` -> `drafting` -> `verify` -> `R1` -> `staged` (R1-approved DRAFT) -> `promoted` (owner+hospital+human gate; not autonomous)
 
-## A. Breast (1-6)  [batch 1 - IN PROGRESS]
-1. Invasive ductal carcinoma - pending
-2. Invasive lobular carcinoma - pending
-3. Triple-negative breast cancer - pending
-4. HER2-positive breast cancer - pending
-5. HR-positive / HER2-negative breast cancer - pending
-6. Male breast cancer - pending
+## A. Breast (1-6)  [batch 1 - STAGED (R1-approved DRAFT), 2026-08-14]
+20 regimens staged, biomarker/stage-tagged to serve all 6 subtypes. Doses grounded to Standard Guidelines (NCCN Breast v6.2026) for chemo/antibody + DeVita 12th ed for endocrine/T-DM1; zero VERIFY. Two adversarial dose-verifiers = zero wrong / zero unsourced (incl. the T-DXd gastric-6.4 vs breast-5.4 trap, correctly excluded). R1 clinical = APPROVE all 20.
+- Curative/adjuvant chemo (IDC/ILC #1/#2 + TNBC #3, not biomarker-restricted): breast-ac, breast-ddac-t, breast-tc, breast-tac, breast-cmf
+- Endocrine (HR+ #5): breast-tamoxifen, breast-anastrozole, breast-letrozole, breast-exemestane, breast-fulvestrant
+- HER2-directed (#4): breast-tch, breast-tchp, breast-ac-th, breast-paclitaxel-trastuzumab, breast-tdm1, breast-tdxd
+- HR+/HER2- + metastatic/targeted (TNBC #3): breast-cdk46-ai, breast-capecitabine, breast-carbo-paclitaxel, breast-pembro-chemo-tnbc
+Pre-activation gates (R1 IMPORTANT, NOT staging blockers): v1 engine enforces the anthracycline cumulative cap as warning-only; BID (capecitabine/abemaciclib) + multi-phase sequencing (ddac-t/ac-th/pembro-tnbc, "trastuzumab never with anthracycline") live in drug notes, not structured frequency/phase fields - any administration/scheduling layer must honor them before activation.
 
 ## B. Lung & thoracic (7-13)
 7. NSCLC adenocarcinoma · 8. NSCLC squamous · 9. NSCLC large-cell/other · 10. EGFR-mutated NSCLC · 11. ALK-positive NSCLC · 12. Small-cell lung cancer · 13. Malignant pleural mesothelioma - pending
