@@ -28,6 +28,17 @@ test("populated even with NO recorded actions (uses GHIS history) — the report
   assert.match(h, /Lab: Complete blood count/);        // was empty before; now shows history
 });
 
+test("never throws on messy/partial GHIS shapes (null fields, object dosage, missing dates)", () => {
+  const messy = Object.assign({}, base, {
+    labs: [{ status: "Reported" }, { serviceName: null, orderDate: null }, {}],
+    radiology: [{ description: null }, {}],
+    medications: [{ drug: "X", dosage: { value: 5, unit: "mg" }, dateTime: null }, {}, { drugText: null }],
+    timeline: [{ ts: null, kind: null, text: null, by: null }],
+  });
+  const h = load()._render(messy);           // must not throw — a throw here aborts paint() and freezes the tab
+  assert.match(h, /Timeline/);
+});
+
 test("genuinely-empty (no data, no ticket) -> hidden; has ticket -> placeholder", () => {
   const empty = { patient: { name: "A", mrn: "1" }, tab: "profile", loading: false, labs: [], radiology: [], medications: [] };
   assert.ok(!/Timeline/.test(load()._render(empty)), "no data + no ticket -> hidden");
