@@ -723,6 +723,7 @@
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("Onco Home loading…"); },
+    sharedclinic: function () { if (window.SMD_SHARED && SMD_SHARED.open) SMD_SHARED.open(); else toast("Shared Clinic loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
     hospital: function () {
@@ -1362,6 +1363,8 @@
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") !== "0"; } catch (e) { return true; } } },
     { act: "oncohome", ic: "oncology", tt: "Onco", sub: "Search, drugs & scores", defOn: false,
       eligible: function () { try { return !!(window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool && SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } } },
+    { act: "sharedclinic", ic: "devices", tt: "Shared Clinic", sub: "Multi-device EMR",
+      eligible: function () { try { if (/[?&]shared=1\b/.test(location.search || "")) return true; return localStorage.getItem("smd_shared_clinic") === "1"; } catch (e) { return false; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
