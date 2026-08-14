@@ -94,7 +94,7 @@
         action + "</div>";
     }
     var existing = section("history", "Existing orders", "Investigations on record", (st.labs || []).map(labRow).join(""), "No investigations on record.");
-    return searchBox("inv", st.invQuery, "Search investigation services…") + resultList("inv", st.invResults) + draft + existing;
+    return searchBox("inv", st.invQuery, "Search investigation services…") + resultList("inv", st.invResults) + searchStatus(st, "inv") + draft + existing;
   }
   function medsTab(st) {
     var d = st.medDraft || {}, draft = "";
@@ -113,7 +113,7 @@
         action + "</div>";
     }
     var current = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return searchBox("med", st.medQuery, "Search medications…") + resultList("med", st.medResults) + draft + current;
+    return searchBox("med", st.medQuery, "Search medications…") + resultList("med", st.medResults) + searchStatus(st, "med") + draft + current;
   }
   // ---- GHIS Initial Assessment schema (field names VERBATIM from a live CreateinitialAssessmentnew capture,
   // 2026-08-07). `val.*` names keep their prefix; bare names get `assessment.` server-side. kind: text|number|
@@ -622,13 +622,31 @@
   var searchTimer = null;
   function scheduleSearch(kind) { if (searchTimer) clearTimeout(searchTimer); searchTimer = setTimeout(function () { runSearch(kind); }, 250); }
   function runSearch(kind) {
-    var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults";
-    if (!q || q.length < 2) { st[key] = []; paintKeepFocus(kind); return; }
+    var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
+    if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; paintKeepFocus(kind); return; }
+    // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
+    if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; paintKeepFocus(kind); return; }
+    st[key] = []; st[mkey] = "searching"; paintKeepFocus(kind);
     var a = ghisAuth(), path = kind === "inv" ? "/inv-search" : "/drug-search";
     fetch(a.base + path + "?q=" + encodeURIComponent(q), { headers: authHeaders(), credentials: "include" })
-      .then(function (r) { return r.ok ? r.json() : { rows: [] }; })
-      .then(function (d) { st[key] = (d && d.rows) || []; paintKeepFocus(kind); })
-      .catch(function () { paintKeepFocus(kind); });
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d || {} }; }, function () { return { ok: r.ok, status: r.status, d: {} }; }); })
+      .then(function (res) {
+        if (res.status === 401 || (res.d && res.d.error === "login_required")) { st[key] = []; st[mkey] = "login"; }
+        else if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
+        else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
+        paintKeepFocus(kind);
+      })
+      .catch(function () { st[key] = []; st[mkey] = "error"; paintKeepFocus(kind); });
+  }
+  // Visible search feedback (was silent: a dead GHIS session / parse-miss looked like a broken search).
+  function searchStatus(st, kind) {
+    var m = kind === "inv" ? st.invSearchMsg : st.medSearchMsg;
+    if (!m) return "";
+    if (m === "searching") return '<div class="oe-search-note">' + ms("hourglass_top") + "Searching GHIS…</div>";
+    if (m === "none") return '<div class="oe-search-note">' + ms("search_off") + "No matches. Try a different term or spelling.</div>";
+    if (m === "offghis") return '<div class="oe-search-note">' + ms("info") + "Search looks up hospital (GHIS) services — not available for this record.</div>";
+    if (m === "login") return '<div class="oe-search-note err">' + ms("lock") + "Ward Sync (GHIS) session is not active. <button class=\"oe-linkbtn\" data-oe-act=\"ghis-reconnect\">Reconnect</button> to search.</div>";
+    return '<div class="oe-search-note err">' + ms("error") + "Search failed. Check your connection and try again.</div>";
   }
 
   function onClick(e) {
@@ -645,6 +663,12 @@
     if (cmd === "med-pick") { var m = st.medResults[+arg]; if (m) { st.medDraft = { drug: m, route: "", form: "", qty: "", frequency: "", duration: "", remarks: "" }; st.medResults = []; st.medQuery = ""; paint(); } return; }
     if (cmd === "med-clear") { st.medDraft = {}; paint(); return; }
     if (cmd === "med-rx") return submitPrescribe();
+    if (cmd === "ghis-reconnect") {
+      var kind = st.tab === "meds" ? "med" : "inv";
+      if (G.GHIS && G.GHIS.ensureSession) { G.GHIS.ensureSession().then(function (ok) { if (ok) runSearch(kind); }); }
+      else if (G.openGHIS) { try { G.openGHIS(); } catch (e) {} }
+      return;
+    }
     if (cmd === "assess-save") return submitAssessment();
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "maik-ask") return maikAsk();

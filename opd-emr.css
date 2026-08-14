@@ -386,3 +386,10 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 /* tab underline + AI suggestions glide */
 #smdOpdEmr .oe-tab { transition: color .2s var(--smd-ease, ease), border-color .2s var(--smd-ease, ease); }
 #smdOpdEmr .oe-ai-card, #smdOpdEmr .oe-draft { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+
+/* GHIS search feedback (investigations / medications) — was silent on empty/error */
+#smdOpdEmr .oe-search-note { display: flex; align-items: center; gap: 8px; padding: 11px 14px; margin-top: 8px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); color: var(--secondary); font: 500 13px var(--q-sans); }
+#smdOpdEmr .oe-search-note .material-symbols-outlined { font-size: 18px; color: var(--secondary); }
+#smdOpdEmr .oe-search-note.err { border-color: color-mix(in srgb, var(--error) 35%, transparent); background: var(--error-container); color: var(--on-error-container); }
+#smdOpdEmr .oe-search-note.err .material-symbols-outlined { color: var(--error); }
+#smdOpdEmr .oe-linkbtn { border: none; background: none; color: var(--primary); font: 700 13px var(--q-sans); text-decoration: underline; cursor: pointer; padding: 0 2px; }
