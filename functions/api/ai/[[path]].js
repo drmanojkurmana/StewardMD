@@ -94,7 +94,8 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime } from "../../_ai_usage.js";
+import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -136,6 +137,9 @@ async function aiAdminAuthed(request, env, url) {
 // Per-call model override (opts.model) so a lightweight parse-only call (the semantic router) can pin a
 // FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
+// MaiK Scribe voice kinds (assessment / opd-scribe / translate) can run on a cheaper model for cost —
+// set env.SCRIBE_MODEL (e.g. "gemini-2.5-flash-lite"); unset = the normal model. Only real, priced models honoured.
+function scribeModel(env) { const m = env && env.SCRIBE_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
 // Router-intent normalisation: the parser occasionally emits a value outside its own enum ("interpretation",
 // "prevent") or a synonym; clamp to the canonical taxonomy so the client's intent->composer mapping is
 // deterministic. Generic — no disease specifics.
@@ -1329,6 +1333,26 @@ export async function onRequest(context) {
       if (!transcript && body.kind !== "maik-ask-next") return json({ error: "no transcript" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      // ---- MaiK Scribe policy: cheaper model (env.SCRIBE_MODEL) always; Pro-only + time caps when env.SCRIBE_CAPS="1".
+      // SCRIBE_KINDS values = seconds of dictation charged per call when the client doesn't send body.sec
+      // (the OPD scribe loop refines every refineEveryChunks*chunkMs = 60s; the field mic is a short one-shot).
+      const SCRIBE_KINDS = { assessment: 60, "opd-scribe": 60, translate: 15 };
+      const _isScribe = Object.prototype.hasOwnProperty.call(SCRIBE_KINDS, body.kind);
+      const _scribeOpts = (_isScribe && scribeModel(env)) ? { model: scribeModel(env) } : undefined;
+      let _scribeStore = null, _scribeUid = null;
+      if (_isScribe && String(env && env.SCRIBE_CAPS) === "1") {
+        let pro = false, uid = null;
+        try { const pr = await proFromRequest(env, request); pro = !!pr.pro; uid = pr.uid || null; } catch (e) { pro = true; } // fail-open on entitlement error
+        if (!pro) return json({ error: "quota", reason: "needs-pro", needsPro: true, message: "MaiK Scribe is a StewardMD Pro feature." }, 402);
+        _scribeStore = usageKv(env); _scribeUid = uid;
+        if (_scribeStore && uid) {
+          const tb = await checkScribeTime(_scribeStore, uid, Date.now(), scribeCaps(env));
+          if (!tb.ok) return json({ error: "quota", reason: tb.reason, used: tb.used, cap: tb.cap,
+            message: tb.reason === "scribe-weekly" ? "You've reached this week's MaiK Scribe limit (1 hour/week)." : "You've reached today's MaiK Scribe limit (30 minutes/day)." }, 429);
+        }
+      }
+      // charge this call's dictation seconds (body.sec if the client sends real elapsed, else the per-kind estimate)
+      const _chargeScribe = () => addScribeTime(_scribeStore, _scribeUid, Number(body.sec) > 0 ? Math.min(Number(body.sec), 300) : SCRIBE_KINDS[body.kind], Date.now());
       if (body.kind === "reasoning") {
         const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
         const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
@@ -1356,9 +1380,10 @@ export async function onRequest(context) {
         // fields so no invented finding/vital/dx can reach the app.
         const prompt = assessmentExtractPrompt(transcript);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await _chargeScribe();
         return json({ kind: "assessment", fields: sanitizeAssessmentFields(parseJsonLoose(text)), mode: "assessment" });
       }
       if (body.kind === "opd-scribe") {
@@ -1368,9 +1393,10 @@ export async function onRequest(context) {
         // symptom, finding, dose, vital or investigation can reach the app.
         const prompt = scribeExtractPrompt(transcript);
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await _chargeScribe();
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
       }
@@ -1414,9 +1440,10 @@ export async function onRequest(context) {
           "numbers and standard abbreviations (BP, IV, BD, OD) exactly. If it is already English, return it unchanged. " +
           "Output ONLY the translation — no preamble, labels or quotes.\n\n=== TEXT ===\n" + transcript;
         let text;
-        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        await _chargeScribe();
         return json({ text: String(text || "").replace(/^["']+|["']+$/g, "").trim(), mode: "translate" });
       }
       const k = VISION_SYS[body.kind] ? body.kind : "monitor";

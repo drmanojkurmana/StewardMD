@@ -29,6 +29,7 @@ export const AI_MODULES = {
   kb:          { id: "kb",          label: "Knowledge Base",     group: "Knowledge Base", daily: 0,  provider: "local"  }, // semantic search — unlimited
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
+  scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
 };
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
@@ -139,7 +140,46 @@ export function buildUsageRecord(f) {
 //       ai:model:override (string) — the admin-selected model.
 // ============================================================================================
 function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
+// ISO-8601 week ("2026-W33") so the weekly budget rolls over on Monday, matching how clinicians think of a week.
+function _isoWeek(now) {
+  const d = new Date(now || Date.now());
+  const dt = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dow = dt.getUTCDay() || 7;                       // Mon=1..Sun=7
+  dt.setUTCDate(dt.getUTCDate() + 4 - dow);              // nearest Thursday = the week's ISO year anchor
+  const yStart = new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
+  const wk = Math.ceil(((dt - yStart) / 86400000 + 1) / 7);
+  return dt.getUTCFullYear() + "-W" + (wk < 10 ? "0" + wk : wk);
+}
 const AIU_TTL = 60 * 60 * 24 * 40; // ~40-day retention for the dashboards
+
+// ---- MaiK Scribe TIME budget (Pro-only voice EMR fill) ----------------------------------------
+// Scribe is capped by seconds of dictation, not call-count, so a doctor gets a real "30 min/day,
+// 1 h/week" allowance regardless of chunk cadence. Both env-tunable; 0 = that dimension unlimited.
+export function scribeCaps(env) {
+  const d = Number(env && env.SCRIBE_SEC_DAY), w = Number(env && env.SCRIBE_SEC_WEEK);
+  return { day: Number.isFinite(d) && d >= 0 ? d : 1800, week: Number.isFinite(w) && w >= 0 ? w : 3600 };
+}
+// Pre-call: has this doctor blown the day or ISO-week dictation-seconds budget? Fail-OPEN on any
+// store error (never block a paying clinician mid-consult because KV hiccuped).
+export async function checkScribeTime(store, uid, now, caps) {
+  if (!store || !uid) return { ok: true };
+  const dk = "aiu:sec:" + uid + ":scribe:" + _day(now), wkk = "aiu:sec:" + uid + ":scribe:w" + _isoWeek(now);
+  let ds = 0, ws = 0;
+  try { ds = Number(await store.get(dk)) || 0; ws = Number(await store.get(wkk)) || 0; } catch (e) { return { ok: true }; }
+  if (caps.day && ds >= caps.day) return { ok: false, reason: "scribe-daily", used: ds, cap: caps.day };
+  if (caps.week && ws >= caps.week) return { ok: false, reason: "scribe-weekly", used: ws, cap: caps.week };
+  return { ok: true, daySec: ds, weekSec: ws };
+}
+// Post-call: add this window's dictation seconds to the day + ISO-week rollups (metadata only, never PHI).
+export async function addScribeTime(store, uid, sec, now) {
+  if (!store || !uid || !(sec > 0)) return;
+  const dk = "aiu:sec:" + uid + ":scribe:" + _day(now), wkk = "aiu:sec:" + uid + ":scribe:w" + _isoWeek(now);
+  try {
+    const ds = (Number(await store.get(dk)) || 0) + sec, ws = (Number(await store.get(wkk)) || 0) + sec;
+    await store.put(dk, String(ds), { expirationTtl: 60 * 60 * 24 * 2 });    // 2 days
+    await store.put(wkk, String(ws), { expirationTtl: 60 * 60 * 24 * 14 });  // 14 days
+  } catch (e) { /* best-effort meter; a lost increment must never break the call */ }
+}
 
 // Pre-call: is this doctor under the per-module daily cap? Fail-open (allow) on any error / no store.
 export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
