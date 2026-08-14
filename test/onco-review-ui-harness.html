@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONCQIS Knowledge Center REVIEW harness (Phase J-b: diff UI + review→approve→activate + UPDATE AVAILABLE)</title>
+<style>
+  html,body{margin:0;background:#f7f9fb;font-family:system-ui;color:#0f172a}
+  .orv-table{width:100%;border-collapse:collapse;font:500 12.5px system-ui;margin:8px 0}
+  .orv-table th{text-align:left;font:700 10.5px system-ui;text-transform:uppercase;color:#64748b;padding:6px;border-bottom:1px solid #e2e8f0}
+  .orv-table td{padding:6px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+  .orv-diff-h{font:800 13px system-ui;margin:6px 0}
+  .orv-act{border:1px solid #e2e8f0;background:#fff;color:#0f766e;border-radius:7px;padding:3px 7px;font:700 10px system-ui;margin:0 3px 3px 0;cursor:pointer}
+  .orv-row.orv-verify{background:#fff7ed}
+  .orv-badge{font:700 10px system-ui;background:#ccfbf1;color:#0f766e;border-radius:6px;padding:2px 6px}
+  .orv-flag{font:700 10px system-ui;border-radius:6px;padding:2px 6px;color:#64748b}
+  .orv-flag-due{background:#fee2e2;color:#dc2626}
+  .orv-note{font:500 11px system-ui;color:#64748b;margin:6px 0}
+  .oev-ua-h{font:800 13px system-ui}
+</style>
+</head><body>
+<div id="diff"></div>
+<div id="audit"></div>
+<div id="reviewdue"></div>
+<div id="update"></div>
+<script src="/onco-protocol-lifecycle.js"></script>
+<script src="/onco-evidence.js"></script>
+<script src="/onco-protocol-review.js"></script>
+<script>
+(function(){
+  var R = window.SMD_ONCOREVIEW;
+  var active = {
+    id:"folfox-6", name:"FOLFOX-6", disease:"colorectal cancer", diseaseId:"colorectal-cancer",
+    protocolVersion:"1.0", status:"ACTIVE", clinicalApprovalStatus:"approved", verifyFields:[], supersededBy:null,
+    regimen:{ drugs:[{id:"oxaliplatin",name:"oxaliplatin",dosePerUnit:85,unit:"mg/m2"}], cycleLengthDays:14, cycles:12 },
+    evidence:{ core:[{layer:"core",source:"DeVita 12e"}] },
+    review:{ lastReviewedAt:"2026-01-10", nextReviewAt:"2026-06-10", reviewDue:false }
+  };
+  var report = { kind:"onco-update-impact-report", guideline:{title:"NCCN Colon v3.2026",org:"NCCN",version:"3.2026"},
+    protocols:[{ protocolId:"folfox-6", name:"FOLFOX-6", status:"EVIDENCE DIVERGENCE", relevantChanges:[
+      { category:"dose_change", drug:"oxaliplatin", from:"85 mg/m2", to:"100 mg/m2", sourceLocation:"p.42, Table 3" },
+      { category:"new_treatment_option", drug:"bevacizumab", to:"add 5 mg/kg", sourceLocation:"VERIFY" }
+    ]}]};
+
+  // J8: build the proposed DRAFT (never mutates ACTIVE).
+  var activeSnapshot = JSON.stringify(active);
+  var draft = R.proposedVersion(active, report, null, { actor:{ id:"author1", role:"oncqis_protocol_author" } });
+  window.__activeUnchanged = (JSON.stringify(active) === activeSnapshot);
+
+  // J7: render the diff UI.
+  document.getElementById("diff").innerHTML = R.renderDiff(active, draft);
+
+  // J9->J11 happy path: submit, resolve both changes, clinical approve, institutional approve, activate.
+  draft = R.submitForReview(draft, { email:"author@x" });
+  draft = R.decideChange(draft, "chg_0", "accept", { email:"rev@x", role:"oncqis_clinical_reviewer" }).draft;
+  draft = R.decideChange(draft, "chg_1", "edit", { email:"rev@x" }, { value:"5 mg/kg (p.9)" }).draft;
+  window.__unresolved = R.unresolvedVerify(draft).length;
+  draft = R.clinicalApprove(draft, { email:"rev@x", role:"oncqis_clinical_reviewer" });
+  window.__afterClinicalCanActivate = R.canActivateVersion(draft);   // must be FALSE (needs gate 2)
+  draft = R.institutionalApprove(draft, { email:"inst@x", role:"oncqis_institutional_approver" });
+  window.__afterBothCanActivate = R.canActivateVersion(draft);       // must be TRUE
+  var act = R.activate(draft, active, { email:"inst@x", role:"oncqis_institutional_approver" });
+  window.__activatedStatus = act.activated.status;
+  window.__supersededStatus = act.superseded.status;
+  var newActive = act.activated;
+
+  // J14: audit trail for the whole chain.
+  document.getElementById("audit").innerHTML = R.renderAudit(newActive.audit);
+
+  // J13: review-due dashboard.
+  var overdue = JSON.parse(JSON.stringify(active)); overdue.id="p-old"; overdue.name="OLD-PROTOCOL"; overdue.review={lastReviewedAt:"2024-01-01",nextReviewAt:"2025-01-01"};
+  document.getElementById("reviewdue").innerHTML = R.renderReviewDue([active, overdue], Date.parse("2026-08-14"));
+
+  // J12: an existing plan on v1.0 gets UPDATE AVAILABLE only (never auto-modified).
+  var plan = { planId:"p1", sourceProtocolId:"folfox-6", lockedVersion:"1.0",
+    lockedTemplate:{ name:"FOLFOX-6", protocolVersion:"1.0", regimen:{drugs:[{name:"oxaliplatin"}]} } };
+  var planSnapshot = JSON.stringify(plan);
+  document.getElementById("update").innerHTML = R.renderPlanUpdateAvailable(plan, newActive);
+  window.__planUnchanged = (JSON.stringify(plan) === planSnapshot);
+
+  window.__ready = true;
+})();
+</script>
+</body></html>

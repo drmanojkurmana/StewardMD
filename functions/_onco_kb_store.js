@@ -16,6 +16,7 @@ export const KEY_PREFIX = "onco:kb:";
 const K_EV = KEY_PREFIX + "ev:";     // evidence source (metadata + optional pdf)
 const K_EX = KEY_PREFIX + "ex:";     // AI extraction
 const K_IR = KEY_PREFIX + "ir:";     // Update Impact Report
+const K_PV = KEY_PREFIX + "pv:";     // J-b Proposed Protocol Version (a DRAFT under review + its audit)
 const TTL = 60 * 60 * 24 * 400;      // ~400d retention
 
 // Resolve the KV binding (same precedence as _ai_usage callers / the Updates module).
@@ -105,4 +106,22 @@ export async function getImpactReport(store, id) { return store ? (await store.g
 export async function listImpactReports(store) {
   var arr = store ? await _list(store, K_IR) : [];
   return arr.sort(function (a, b) { return (b.generatedAt || 0) - (a.generatedAt || 0); });
+}
+
+// ---- J-b: Proposed Protocol Version (a DRAFT + its immutable audit chain) --------------------------
+// A proposal is NEVER an ACTIVE protocol: it is a DRAFT clone under review. Even an "ACTIVE"-status
+// version produced by the activate() step is stored HERE as a proposal record (its publication to the
+// live protocol library is a separate, governed step) - so this store still never writes an ACTIVE
+// protocol into the protocol library, and every key stays inside the onco:kb: namespace.
+export async function saveProposedVersion(store, pv) {
+  if (!store) return null;
+  var id = (pv && pv.pvId) || newId("pv");
+  var rec = Object.assign({ kind: "onco-proposed-version", pvId: id }, pv, { pvId: id });
+  await _put(store, K_PV + id, rec);
+  return rec;
+}
+export async function getProposedVersion(store, id) { return store ? (await store.get(K_PV + String(id), "json")) : null; }
+export async function listProposedVersions(store) {
+  var arr = store ? await _list(store, K_PV) : [];
+  return arr.sort(function (a, b) { return (b.updatedAt || 0) - (a.updatedAt || 0); });
 }
