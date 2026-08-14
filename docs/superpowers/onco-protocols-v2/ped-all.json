@@ -1,0 +1,207 @@
+{
+  "id": "ped-all",
+  "name": "Pediatric ALL: risk-stratified COG multiphase therapy (induction, consolidation, interim maintenance, delayed intensification, maintenance) with intrathecal CNS prophylaxis; per-drug doses VERIFY",
+  "disease": "Acute lymphoblastic leukemia (pediatric)",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage or T-lineage acute lymphoblastic leukemia of childhood, including infant ALL; B-ALL is further split into BCR::ABL1-negative, BCR::ABL1-like (Ph-like), and BCR::ABL1-positive subsets",
+  "stage": [],
+  "biomarkers": {
+    "BCR_ABL1": "tested by RT-PCR; if positive (Philadelphia chromosome, t(9;22)) a tyrosine kinase inhibitor is added and the patient is routed to the BCR::ABL1-positive arm",
+    "BCR_ABL1_like": "tested when BCR::ABL1 negative; kinase-activating fusions/mutations (Ph-like) may support TKI consideration",
+    "KMT2A_rearrangement": "tested; t(v;11q23.3); KMT2A-rearranged infant ALL is high risk",
+    "ETV6_RUNX1": "tested; t(12;21), a favorable-risk fusion",
+    "hyperdiploidy": "tested; favorable ploidy (high hyperdiploidy) versus hypodiploidy/iAMP21",
+    "MRD": "minimal residual disease after induction (and after consolidation if positive) drives post-induction risk stratification",
+    "note": "Per Standard Guidelines (NCCN), Pediatric Acute Lymphoblastic Leukemia v1.2026. BCR::ABL1 is tested by RT-PCR at diagnosis (ped_all.txt line 478); if positive, therapy adds a TKI (BCR::ABL1-positive Induction/Consolidation PEDALL-5; ped_all.txt lines 803 to 814, footnote line 1098). If BCR::ABL1 negative, testing for BCR::ABL1-like/Ph-like fusions is encouraged (lines 482 to 483, 635). Recurring genetic abnormalities include KMT2A rearrangement, ETV6::RUNX1, high hyperdiploidy, hypodiploidy, iAMP21, and TCF3::PBX1 (lines 516 to 518, 524). MRD after induction defines post-induction risk (lines 108, 469, 892). MRD, BCR::ABL1, KMT2A, hyperdiploidy, and ETV6::RUNX1 are grounded as identity/gates; no per-drug pediatric dose is established from these."
+  },
+  "treatmentSetting": "multiphase curative-intent therapy: induction, consolidation, interim maintenance (high-dose methotrexate or Capizzi methotrexate), delayed intensification, and maintenance (continuation), with intrathecal CNS-directed therapy throughout",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "age", "requirement": "pediatric ALL; NCI standard-risk versus high-risk stratification uses age and presenting WBC", "source": "Standard Guidelines (NCCN), Pediatric ALL v1.2026", "locator": "ped_all.txt lines 160 (standard risk: WBC <50,000/mm3 and >=1 to <10 years) and 162 (high risk: WBC >=50,000/mm3 or <1 or >=10 years)" },
+    { "criterion": "biomarkerGate", "requirement": "RT-PCR for BCR::ABL1 at diagnosis; BCR::ABL1-positive disease adds a tyrosine kinase inhibitor", "source": "Standard Guidelines (NCCN), Pediatric ALL v1.2026", "locator": "ped_all.txt line 478 (RT-PCR for BCR::ABL1) and lines 803 to 814 (TKI added, PEDALL-5)" },
+    { "criterion": "cnsAssessment", "requirement": "lumbar puncture with intrathecal chemotherapy performed with initial IT therapy; CNS status (CNS-1/2/3) assessed", "source": "Standard Guidelines (NCCN), Pediatric ALL v1.2026", "locator": "ped_all.txt lines 579, 624, 2321 to 2329" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV push (IV only, NEVER intrathecal)",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt line 120175 (induction centered on vincristine, glucocorticoids, anthracyclines); NCCN Pediatric ALL vincristine management ped_all.txt lines 237, 1830 to 1846", "evidenceStatus": "current" },
+        "notes": "Induction backbone drug. COG pediatric mg/m2 dose and days are protocol-specific (AALL/DFCI/Total Therapy) and NOT printed in the cited extracts, so basis, dose, unit, and days are VERIFY. ISMP tall-man vinCRIStine; per-dose cap 2 mg carried as a StewardMD safety rule; vinCRIStine is IV only and is fatal if given intrathecally (contrast with the intrathecal-cns-prophylaxis entry)."
+      },
+      {
+        "id": "glucocorticoid",
+        "name": "Glucocorticoid (dexamethasone or prednisone)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO or IV",
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt lines 120175 to 120179 (glucocorticoids in induction; dexamethasone often preferred, blood-brain-barrier penetration); NCCN Pediatric ALL ped_all.txt lines 4644 to 4646 (dexamethasone reduced isolated CNS relapse and improved EFS versus prednisone)", "evidenceStatus": "current" },
+        "notes": "Induction backbone glucocorticoid; dexamethasone often preferred for CNS penetration. Pediatric mg/m2 dose and schedule not printed in the cited extracts, so basis, dose, unit, and days are VERIFY. Osteonecrosis, hyperglycemia, and behavioral toxicity require monitoring."
+      },
+      {
+        "id": "asparaginase",
+        "name": "Asparaginase (pegaspargase or calaspargase; Erwinia chrysanthemi substitute after hypersensitivity)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IM or IV",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric ALL", "version": "1.2026", "date": null, "locator": "ped_all.txt lines 1973 to 1989 (three formulations: pegaspargase, calaspargase, Erwinia chrysanthemi (recombinant)-rywn; Erwinia IM 25 mg/m2 Monday/Wednesday and 50 mg/m2 Friday, or 25 mg/m2 every 48 hours, line 1988)", "evidenceStatus": "current" },
+        "notes": "Signature ALL drug. The primary asparaginase (pegaspargase/calaspargase) per-course dose is protocol-specific and NOT printed in the cited extract, so basis, dose, unit, and days are VERIFY. A printed FDA-approved Erwinia (ERW-rywn) SUBSTITUTE dose exists for hypersensitivity (IM 25 mg/m2 Mon/Wed and 50 mg/m2 Fri; ped_all.txt line 1988) and is recorded in notes only; it is not adopted as the primary drug dose. Surveillance for thrombosis (consider antithrombin/anticoagulation), pancreatitis, hepatotoxicity, hyperglycemia, and hypersensitivity."
+      },
+      {
+        "id": "anthracycline",
+        "name": "Anthracycline (DAUNOrubicin or DOXOrubicin)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 250, "hard": 350, "unit": "mg/m2 doxorubicin-equivalent" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric ALL", "version": "1.2026", "date": null, "locator": "ped_all.txt lines 1738 to 1745 (anticipated cumulative anthracycline >=250 mg/m2 doxorubicin-equivalent; doxorubicin x1, daunorubicin x0.5, mitoxantrone x4 to 10 conversion; dexrazoxane 10x the doxorubicin dose)", "evidenceStatus": "current" },
+        "notes": "Induction/delayed-intensification anthracycline. Pediatric mg/m2 dose and days not printed, so basis, dose, unit, and days are VERIFY. Cumulative cardiotoxicity: NCCN prints a >=250 mg/m2 doxorubicin-equivalent threshold at which dexrazoxane is strongly considered (line 1738), carried here as the warn level (lower than the adult 450 mg/m2 because children are more vulnerable); 350 mg/m2 is the conservative pediatric hard ceiling (below the adult 550; dexrazoxane per COG), matching the pediatric guard used in ped-neuroblastoma. Use the printed doxorubicin/daunorubicin/mitoxantrone doxorubicin-equivalent conversion (line 1740) when totaling cumulative dose."
+      },
+      {
+        "id": "tki-ph-positive",
+        "name": "Tyrosine kinase inhibitor (imatinib or dasatinib) - BCR::ABL1-positive arm only",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric ALL", "version": "1.2026", "date": null, "locator": "ped_all.txt lines 803 to 814 (chemotherapy + TKI for BCR::ABL1-positive), line 1098 (add TKI for BCR::ABL1+ ALL), lines 2628 to 2634 (COG AALL1131 + dasatinib; Total Therapy XVII + dasatinib)", "evidenceStatus": "current" },
+        "notes": "Biomarker-gated: added ONLY when BCR::ABL1 is positive. Pediatric TKI dose not printed in the cited extract, so basis, dose, unit, and days are VERIFY. PPIs/H2 blockers/antacids reduce dasatinib bioavailability (line 1778 to 1779)."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt line 120175 (induction with or without cyclophosphamide or cytarabine); NCCN Pediatric ALL consolidation phases PEDALL-3/5/6", "evidenceStatus": "current" },
+        "notes": "Consolidation/delayed-intensification alkylator. Pediatric dose and days not printed, so basis, dose, unit, and days are VERIFY."
+      },
+      {
+        "id": "cytarabine",
+        "name": "cytarabine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV or SC",
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt line 120175 (induction/consolidation cytarabine); NCCN Pediatric ALL consolidation PEDALL-3/6", "evidenceStatus": "current" },
+        "notes": "Consolidation antimetabolite (systemic). Pediatric dose and days not printed, so basis, dose, unit, and days are VERIFY. ISMP tall-man cytarabine; do NOT confuse systemic cytarabine with the intrathecal-cns-prophylaxis cytarabine entry."
+      },
+      {
+        "id": "methotrexate-systemic",
+        "name": "methotrexate (interim maintenance: high-dose or Capizzi/escalating)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric ALL", "version": "1.2026", "date": null, "locator": "ped_all.txt line 2398 (an intermediate dose of MTX (eg, 500 mg/m2) can be used instead of high-dose MTX); interim-maintenance identity PEDALL-3/6; leucovorin rescue lines 1691 to 1694", "evidenceStatus": "current" },
+        "notes": "Interim-maintenance methotrexate: either high-dose methotrexate (with mandatory leucovorin rescue and methotrexate-level monitoring) or a Capizzi/escalating-dose approach. The exact pediatric high-dose per protocol is NOT printed, so basis, dose, unit, and days are VERIFY. NCCN prints an intermediate-dose option of ~500 mg/m2 in place of high-dose MTX (line 2398), recorded in notes only. ISMP tall-man methotrexate; HD-MTX mandates leucovorin rescue."
+      },
+      {
+        "id": "mercaptopurine",
+        "name": "6-mercaptopurine (maintenance/continuation)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt lines 120044 to 120047 (maintenance from childhood ALL: 6-mercaptopurine and methotrexate plus intrathecal therapy, 2 to 2.5 years); NCCN Pediatric ALL thiopurine dosing by TPMT/NUDT15 ped_all.txt lines 3424, 3460 to 3471", "evidenceStatus": "current" },
+        "notes": "Maintenance backbone with oral methotrexate over approximately 2 to 2.5 years. Standard mg/m2/day not printed as a protocol dose, so basis, dose, unit, and days are VERIFY. Reduce starting dose per TPMT/NUDT15 genotype (poor metabolizer start ~10 mg/m2/day or 25% of full dose; ped_all.txt line 3460); allopurinol 50 mg/m2 with 50 to 75% 6-MP dose reduction is a printed adjustment option (line 1881), recorded in notes only."
+      },
+      {
+        "id": "intrathecal-cns-prophylaxis",
+        "name": "Intrathecal CNS-directed therapy (methotrexate, with or without cytarabine and hydrocortisone)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "intrathecal (lumbar puncture)",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric ALL", "version": "1.2026", "date": null, "locator": "ped_all.txt lines 334 to 335 (IT chemotherapy MTX, cytarabine, corticosteroids), 579 (LP with IT chemotherapy), 2321 to 2329 (CNS prophylaxis aim; cranial RT 18 Gy for CNS-3/high-risk, lines 2323, 2339)", "evidenceStatus": "current" },
+        "notes": "MANDATORY CNS-directed therapy. Age-based IT dosing is used but exact numeric doses are not printed in the extract, so basis, dose, unit, and days are VERIFY. Intrathecal agents are methotrexate and cytarabine (with or without hydrocortisone) ONLY; vinCRIStine must NEVER be given intrathecally. Cranial radiation (18 Gy) is reserved for CNS-3 and selected high-risk patients and is a radiotherapy field, not a systemic drug dose."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "tumor lysis syndrome prophylaxis: hyperhydration 1.5 to 2x maintenance IV fluids without potassium, urine alkalinization NO LONGER recommended, allopurinol for low tumor burden, rasburicase (single dose 0.1 to 0.2 mg/kg, max 6 mg) for high WBC/LDH/renal dysfunction and contraindicated in G6PD deficiency (ped_all.txt lines 1595 to 1632)",
+      "asparaginase toxicity surveillance: thrombosis, pancreatitis, hepatotoxicity, hyperglycemia, hypersensitivity (ped_all.txt lines 235, 1973 to 1978)",
+      "high-dose methotrexate phases: mandatory leucovorin rescue plus methotrexate-level monitoring; IT-MTX neurotoxicity managed with leucovorin 5 mg/m2 PO/IV at 24 and 30 hours (ped_all.txt lines 1691 to 1694)",
+      "anthracycline cumulative tracking with doxorubicin-equivalent conversion; strongly consider dexrazoxane at >=250 mg/m2 cumulative doxorubicin-equivalent (ped_all.txt lines 1738 to 1745)",
+      "Pneumocystis jirovecii prophylaxis throughout (TMP/SMX 5 mg/kg/day TMP 2 to 3 days/week; ped_all.txt lines 1441, 1443); consider antifungal prophylaxis during induction and high-intensity phases (line 210)",
+      "maintenance/continuation is 6-mercaptopurine plus methotrexate plus intrathecal therapy for approximately 2 to 2.5 years (ped_all.txt maintenance identity; Harrison harrison.txt lines 120044 to 120047)"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each phase and during aplasia",
+    "coagulation/fibrinogen and thrombosis surveillance during asparaginase; amylase/lipase and glucose during asparaginase",
+    "hepatic and renal function; methotrexate levels during high-dose methotrexate phases",
+    "cardiac assessment and cumulative anthracycline tracking (echocardiogram/LVEF at baseline for BCR::ABL1 arms per ped_all.txt line 582)",
+    "tumor lysis labs during induction (LDH, uric acid, potassium, calcium, phosphorus, creatinine)",
+    "MRD after induction (and after consolidation if positive) to confirm/adjust risk group",
+    "TPMT/NUDT15 genotype to guide thiopurine dosing in maintenance"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "coagulation", "cardiac (LVEF)", "MRD status", "prior-phase status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k at phase start", "action": "delay", "text": "Review required. COG protocol-specific delay/reduce criteria apply per phase; physician decides. Per-drug pediatric doses are VERIFY." },
+    { "condition": "TPMT or NUDT15 poor/intermediate metabolizer", "action": "reduce", "text": "Reduce 6-mercaptopurine starting dose per genotype (ped_all.txt lines 3424, 3460 to 3471); physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt Chapter 111 Acute Lymphoid Leukemia: lines 120044 to 120050 (maintenance from childhood ALL: 6-MP + methotrexate + intrathecal, 2 to 2.5 years; Ph+ ALL requires TKI maintenance), 120170 to 120179 (induction identity: vincristine, glucocorticoids, anthracyclines +/- cyclophosphamide/cytarabine; L-asparaginase; pegylated asparaginase; dexamethasone preferred)", "evidenceStatus": "current" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Acute Lymphoblastic Leukemia", "version": "1.2026", "date": null, "locator": "ped_all.txt: multiphase structure PEDALL-3/5/6/7 (lines 89 to 92), risk stratification (lines 160, 162, 662, 679), BCR::ABL1 testing and TKI arm (lines 478, 803 to 814, 1098), IT/CNS-directed therapy (lines 334 to 335, 579, 2321 to 2329), TLS supportive care (lines 1576 to 1632), asparaginase management (lines 1973 to 1989), anthracycline/dexrazoxane (lines 1738 to 1745)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.drugs[0].days",
+    "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit", "regimen.drugs[1].days",
+    "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit", "regimen.drugs[2].days",
+    "regimen.drugs[3].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[3].unit", "regimen.drugs[3].days",
+    "regimen.drugs[4].basis", "regimen.drugs[4].dosePerUnit", "regimen.drugs[4].unit", "regimen.drugs[4].days",
+    "regimen.drugs[5].basis", "regimen.drugs[5].dosePerUnit", "regimen.drugs[5].unit", "regimen.drugs[5].days",
+    "regimen.drugs[6].basis", "regimen.drugs[6].dosePerUnit", "regimen.drugs[6].unit", "regimen.drugs[6].days",
+    "regimen.drugs[7].basis", "regimen.drugs[7].dosePerUnit", "regimen.drugs[7].unit", "regimen.drugs[7].days",
+    "regimen.drugs[8].basis", "regimen.drugs[8].dosePerUnit", "regimen.drugs[8].unit", "regimen.drugs[8].days",
+    "regimen.drugs[9].basis", "regimen.drugs[9].dosePerUnit", "regimen.drugs[9].unit", "regimen.drugs[9].days"
+  ],
+  "provenanceNote": "PEDIATRIC. StewardMD draft grounding the identity, phase structure, setting, and biomarker/risk gates of risk-stratified pediatric ALL therapy. The multiphase COG framework (induction with vincristine/glucocorticoid/asparaginase/anthracycline, consolidation, interim maintenance with high-dose or Capizzi methotrexate, delayed intensification, and 6-mercaptopurine/methotrexate maintenance with intrathecal CNS-directed therapy) is grounded in Harrison 22nd ed. Chapter 111 (harrison.txt lines 120044 to 120050 and 120170 to 120179) and Standard Guidelines (NCCN) Pediatric ALL v1.2026 (ped_all.txt). Biomarker/risk gates are grounded: BCR::ABL1 by RT-PCR routes to a TKI-containing arm (lines 478, 803 to 814, 1098); KMT2A rearrangement, ETV6::RUNX1, hyperdiploidy, and post-induction MRD drive risk (lines 108, 469, 516 to 518, 892). COG protocol-specific, weight/BSA-dosed per-drug values are NOT printed in the cited extracts and are the literal VERIFY (listed in verifyFields); no pediatric dose was invented. Only the ISMP vinCRIStine 2 mg per-dose cap, the anthracycline cumulative caps (warn 250 mg/m2 doxorubicin-equivalent, grounded; hard 350 mg/m2, the conservative pediatric ceiling below the adult 550, matching ped-neuroblastoma), and printed supportive/substitute doses recorded in notes (rasburicase 0.1 to 0.2 mg/kg, Erwinia asparaginase 25/50 mg/m2, intermediate-dose MTX ~500 mg/m2, leucovorin rescue) are carried. Mandatory TLS prophylaxis and intrathecal CNS prophylaxis are included; vinCRIStine is IV only and never intrathecal. NCCN per-disease template alignment, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,137 @@
+{
+  "id": "ped-cns-medulloblastoma",
+  "name": "Pediatric medulloblastoma: risk-adapted craniospinal radiotherapy with weekly vinCRIStine, then COG maintenance (cisplatin/lomustine/vinCRIStine and cyclophosphamide/vinCRIStine); per-drug doses VERIFY",
+  "disease": "Medulloblastoma (pediatric)",
+  "diseaseId": "medulloblastoma",
+  "histology": "medulloblastoma (embryonal CNS tumor); molecular groups WNT, SHH, Group 3, and Group 4 (Groups 3 and 4 combined as Non-WNT/non-SHH)",
+  "stage": [],
+  "biomarkers": {
+    "molecularGroup": "WNT, SHH, Group 3, Group 4 (Non-WNT/non-SHH) - informs risk stratification, not a per-drug gate here",
+    "SHH_pathway": "tested; SHH-pathway status informs risk and recurrence-directed options",
+    "note": "Per Standard Guidelines (NCCN), Pediatric Medulloblastoma: Children and Adolescents v1.2026. Molecular grouping (WNT, SHH, Group 3, Group 4; Groups 3/4 combined as Non-WNT/non-SHH, ped_cns.txt line 1374) drives risk stratification (Low/Average versus High/Very High risk) rather than gating a specific chemotherapy dose. No biomarker gates the primary vincristine/cisplatin/lomustine/cyclophosphamide combination."
+  },
+  "treatmentSetting": "adjuvant, risk-adapted: weekly vinCRIStine concurrent with craniospinal radiotherapy after maximal safe resection, then COG (or St. Jude) maintenance chemotherapy",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line adjuvant, following maximal safe resection and craniospinal radiotherapy",
+  "eligibilityCriteria": [
+    { "criterion": "age", "requirement": "children and adolescents >=3 and <=21 years; craniospinal radiation is not recommended for patients <3 years (radiation-avoiding strategies used instead)", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma v1.2026", "locator": "ped_cns.txt lines 1343 (age range) and 198, 1403 (no craniospinal RT <3 years)" },
+    { "criterion": "riskGroup", "requirement": "Low/Average risk versus High/Very High risk assignment directs radiotherapy dose and chemotherapy intensity", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma v1.2026", "locator": "ped_cns.txt lines 2329 (Low/Average vs High/Very High Risk) and 1643 (low/average vs high/very high risk medulloblastoma)" },
+    { "criterion": "radiotherapy", "requirement": "average-risk uses 23.4 Gy craniospinal irradiation with involved-field/tumor-bed boost; high-risk uses high-dose 36 Gy craniospinal irradiation with involved-field boost (radiotherapy fields, not systemic drug doses)", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma v1.2026", "locator": "ped_cns.txt lines 1503, 1519, 1592 (23.4 Gy CSI) and 1510, 1531, 1601 (36 Gy high-dose CSI)" },
+    { "criterion": "protocolConsistency", "requirement": "COG and St. Jude maintenance protocols must not be interchanged once started", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma v1.2026", "locator": "ped_cns.txt line 2348" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV push (IV only, NEVER intrathecal)",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma", "version": "1.2026", "date": null, "locator": "ped_cns.txt line 2331 (Weekly Vincristine with RT, COG) and lines 2334 to 2335 (Cycle A Cisplatin/Lomustine/Vincristine; Cycle B Cyclophosphamide/Vincristine); no per-drug mg/m2 dose printed", "evidenceStatus": "current" },
+        "notes": "Given WEEKLY during craniospinal radiotherapy and as a component of both maintenance cycles (Cycle A and Cycle B). No per-drug mg/m2 dose is printed in the cited extract, so basis, dose, unit, and days are VERIFY. ISMP tall-man vinCRIStine; 2 mg per-dose cap carried as a StewardMD safety rule; vinCRIStine is IV only and fatal if given intrathecally. Monitor for motor neuropathy (ped_cns.txt line 2347)."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma", "version": "1.2026", "date": null, "locator": "ped_cns.txt line 2334 (COG maintenance Cycle A: Cisplatin/Lomustine/Vincristine); St. Jude Cisplatin/Cyclophosphamide/Vincristine lines 2338 to 2339; no per-drug mg/m2 dose printed", "evidenceStatus": "current" },
+        "notes": "COG maintenance Cycle A component (and the St. Jude maintenance triplet). No per-drug mg/m2 dose printed, so basis, dose, and unit are VERIFY. ISMP tall-man CISplatin (do not confuse with CARBOplatin). Requires renal function, serum magnesium, and audiometry monitoring; ototoxicity noted in ped_cns.txt line 2347."
+      },
+      {
+        "id": "lomustine",
+        "name": "Lomustine (CCNU)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 1000, "hard": 1100, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma", "version": "1.2026", "date": null, "locator": "ped_cns.txt line 2334 (COG maintenance Cycle A: Cisplatin/Lomustine/Vincristine); no per-drug mg/m2 dose printed", "evidenceStatus": "current" },
+        "notes": "COG maintenance Cycle A nitrosourea. No per-drug mg/m2 dose printed, so basis, dose, and unit are VERIFY. Delayed and cumulative nitrosourea myelosuppression; the cumulative caps (warn 1000 / hard 1100 mg/m2) are carried as StewardMD nitrosourea safety thresholds, not printed pediatric values."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma", "version": "1.2026", "date": null, "locator": "ped_cns.txt line 2335 (COG maintenance Cycle B: Cyclophosphamide/Vincristine); St. Jude triplet lines 2338 to 2339; no per-drug mg/m2 dose printed", "evidenceStatus": "current" },
+        "notes": "COG maintenance Cycle B alkylator (and a St. Jude triplet component). No per-drug mg/m2 dose printed, so basis, dose, and unit are VERIFY. Mesna/hydration per institution."
+      },
+      {
+        "id": "carboplatin-radiosensitizer",
+        "name": "CARBOplatin (high-risk Group 3, radiosensitizer during RT only)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma", "version": "1.2026", "date": null, "locator": "ped_cns.txt line 2334 (High/Very High Risk: + Carboplatin prior to each RT fraction for Group 3 tumors only); 6 cycles per ACNS0332 line 2337; no per-drug dose printed", "evidenceStatus": "current" },
+        "notes": "Group-gated: added as a radiosensitizer prior to each RT fraction ONLY for high/very-high-risk Group 3 tumors (ped_cns.txt line 2334). No per-drug dose printed, so basis, dose, and unit are VERIFY. ISMP tall-man CARBOplatin (do not confuse with CISplatin)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "CISplatin hydration and antiemesis", "notes": "CISplatin requires pre- and post-hydration and highly emetogenic antiemetic prophylaxis when dosed; specific regimen VERIFY (no CISplatin dose established here)." }
+    ],
+    "supportiveCare": [
+      "COG maintenance cadence is AABAABAAB (Cycle A = cisplatin/lomustine/vincristine; Cycle B = cyclophosphamide/vincristine) for low/average risk; high/very-high risk uses 6 cycles per ACNS0332 (ped_cns.txt lines 2336 to 2337)",
+      "vinCRIStine motor neuropathy and cisplatin ototoxicity surveillance (ped_cns.txt line 2347)",
+      "cumulative nitrosourea (lomustine) myelosuppression monitoring across cycles",
+      "COG and St. Jude protocols must not be interchanged once started (ped_cns.txt line 2348)",
+      "vinCRIStine: IV only, never intrathecal"
+    ]
+  },
+  "monitoring": [
+    "CBC with platelets before each cycle and at the delayed nitrosourea nadir",
+    "renal function, serum magnesium, and audiometry when CISplatin is dosed",
+    "motor neuropathy assessment before each vinCRIStine dose",
+    "craniospinal MRI surveillance",
+    "neurocognitive and endocrine late-effect surveillance after craniospinal irradiation"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function", "audiometry", "cumulative lomustine dose", "resection and craniospinal RT completion"],
+  "doseModificationRules": [
+    { "condition": "renal impairment, ototoxicity, or delayed nitrosourea cytopenia", "action": "delay/reduce", "text": "Review required. CISplatin renal/ototoxicity and delayed nitrosourea nadir require confirmed recovery and adjustment; physician decides. Per-drug pediatric doses are VERIFY." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "devita.txt medulloblastoma (index pp. 1304 to 1308); reduced-dose craniospinal irradiation followed by cisplatin/lomustine/vincristine maintenance framework; no per-drug pediatric mg/m2 dose adopted from this source", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Medulloblastoma: Children and Adolescents", "version": "1.2026", "date": null, "locator": "ped_cns.txt: risk-adapted systemic therapy PMB-E (lines 2329 to 2348: weekly vincristine with RT; COG Cycle A cisplatin/lomustine/vincristine, Cycle B cyclophosphamide/vincristine, cadence AABAABAAB; high-risk carboplatin radiosensitizer Group 3 only and 6 cycles per ACNS0332; St. Jude cisplatin/cyclophosphamide/vincristine); RT doses lines 1503 to 1531 and 1592 to 1601; molecular groups line 1374; age/CSI limits lines 1343, 198, 1403", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit", "regimen.drugs[0].days",
+    "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit", "regimen.drugs[1].days",
+    "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit", "regimen.drugs[2].days",
+    "regimen.drugs[3].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[3].unit", "regimen.drugs[3].days",
+    "regimen.drugs[4].basis", "regimen.drugs[4].dosePerUnit", "regimen.drugs[4].unit", "regimen.drugs[4].days"
+  ],
+  "provenanceNote": "PEDIATRIC. StewardMD draft for pediatric medulloblastoma. The risk-adapted framework is grounded: weekly vinCRIStine concurrent with craniospinal radiotherapy, then COG maintenance (Cycle A cisplatin/lomustine/vinCRIStine, Cycle B cyclophosphamide/vinCRIStine, cadence AABAABAAB) or the St. Jude cisplatin/cyclophosphamide/vinCRIStine triplet, per Standard Guidelines (NCCN) Pediatric Medulloblastoma v1.2026 (ped_cns.txt lines 2329 to 2348), with average-risk 23.4 Gy and high-risk 36 Gy craniospinal irradiation (lines 1503 to 1531, 1592 to 1601) and a Group-3-only carboplatin radiosensitizer for high/very-high risk (line 2334). No per-drug mg/m2 chemotherapy dose is printed in the cited sources, so the vinCRIStine, CISplatin, Lomustine, Cyclophosphamide, and CARBOplatin basis, dose, unit, and days are the literal VERIFY (listed in verifyFields) and were NOT invented. Only the ISMP vinCRIStine 2 mg per-dose cap and the lomustine nitrosourea cumulative caps (institutional) are carried; cycleLengthDays and cycles are VERIFY. Radiotherapy doses are captured as eligibility fields, not as systemic drug doses. NCCN per-disease template alignment, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
