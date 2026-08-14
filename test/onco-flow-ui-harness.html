@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onco Flow harness (ONCQIS Phase D: doctor FIND -> COMPARE -> SELECT -> Tata digital protocol)</title>
+<link rel="stylesheet" href="/onco-home.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+// BOTH Phase D flags ON (smd_onco_protocols + smd_onco_recommend) - the flow is gated behind both.
+window.SMD_QUEUE_FLAGS = { bool: function (k) { return String(k).indexOf("smd_onco_") === 0; } };
+window.toast = function (m) { window.__toasts = (window.__toasts || []).concat([m]); };
+window.__flowEvents = [];
+document.addEventListener("smd-onco-flow", function (e) { window.__flowEvents.push(e.detail && e.detail.action); });
+
+// ---- FIXTURE ACTIVE Standard Protocols (kb/schema/standard-protocol.schema.json shape) ----
+// Two DLBCL protocols match the phenotype (enables COMPARE); one NSCLC protocol is contradicted and
+// must be excluded by the recommend engine. Prednisolone is scheduled cycle 1 only (Not scheduled 2/3).
+window.__protocols = [
+  {
+    id: "fx-dlbcl-rchopd", name: "FX R-CHOP-D", protocolVersion: "1.0", status: "ACTIVE",
+    disease: "Diffuse large B-cell lymphoma", diseaseId: "dlbcl", stage: ["III", "IV"],
+    biomarkers: { CD20: "positive" }, treatmentSetting: "curative-intent", treatmentIntent: ["curative"], lineOfTherapy: "first",
+    regimen: { cycleLengthDays: 21, cycles: 3, drugs: [
+      { id: "rituximab", name: "Rituximab", basis: "bsa", dosePerUnit: 375, unit: "mg/m2", route: "IV", days: [1], roundingRule: { increment: 50 } },
+      { id: "doxorubicin", name: "DOXOrubicin", basis: "bsa", dosePerUnit: 50, unit: "mg/m2", route: "IV", days: [1], roundingRule: { increment: 5 } },
+      { id: "prednisolone", name: "Prednisolone", basis: "flat", dosePerUnit: 100, unit: "mg", route: "PO", days: [1, 2, 3, 4, 5], cycles: [1] }
+    ] },
+    evidence: { core: [{ layer: "core", source: "DeVita 12th ed", version: "12", evidenceStatus: "current" }],
+      guideline: [{ layer: "guideline", source: "NCCN B-cell Lymphomas", evidenceStatus: "current" }] }
+  },
+  {
+    id: "fx-dlbcl-alt", name: "FX DLBCL Alt", protocolVersion: "0.9", status: "ACTIVE",
+    disease: "Diffuse large B-cell lymphoma", diseaseId: "dlbcl", stage: ["III", "IV"],
+    treatmentIntent: ["curative"],
+    regimen: { cycleLengthDays: 21, cycles: 3, drugs: [
+      { id: "cyclophosphamide", name: "Cyclophosphamide", basis: "bsa", dosePerUnit: 750, unit: "mg/m2", route: "IV", days: [1], roundingRule: { increment: 50 } }
+    ] },
+    evidence: { core: [{ layer: "core", source: "ESMO", evidenceStatus: "unknown" }] }
+  },
+  {
+    id: "fx-nsclc", name: "FX NSCLC regimen", protocolVersion: "1.0", status: "ACTIVE",
+    disease: "Non small cell lung cancer", diseaseId: "nsclc", stage: ["IV"], treatmentIntent: ["palliative"],
+    regimen: { cycleLengthDays: 21, cycles: 4, drugs: [{ id: "carbo", name: "CARBOplatin", basis: "auc", dosePerUnit: 5, unit: "AUC", route: "IV", days: [1] }] },
+    evidence: { core: [{ layer: "core", source: "Harrison 22nd ed", evidenceStatus: "current" }] }
+  }
+];
+
+// ---- Patient / assessment context ----
+window.__ctx = {
+  patient: { name: "Test Patient", mrn: "MR-1001" },
+  age: 55, sex: "female", heightCm: 165, weightKg: 60, creatinine: 0.9,
+  diagnosis: "Diffuse large B-cell lymphoma",
+  diseaseId: "dlbcl", stage: "III", biomarkers: { CD20: "positive" },
+  treatmentSetting: "curative-intent", treatmentIntent: "curative", lineOfTherapy: "first"
+};
+
+window.__ready = false;
+</script>
+<script src="/onco-dose.js"></script>
+<script src="/onco-evidence.js"></script>
+<script src="/onco-recommend.js"></script>
+<script src="/onco-protocols.js"></script>
+<script src="/onco-plan-flow.js" onload="window.__ready = !!(window.SMD_ONCOFLOW && window.SMD_ONCORECOMMEND && window.SMD_ONCOUI && window.SMD_ONCODOSE && window.SMD_ONCOEV)"></script>
+</body></html>
