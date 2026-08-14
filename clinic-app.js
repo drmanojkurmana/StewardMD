@@ -124,7 +124,11 @@
           getConsult: orch.localStore.getConsult,
           saveConsult: function (pid, fields, v, meta) { orch.localStore.saveConsult(pid, fields, v, meta); kick(); },
           startConsult: orch.localStore.startConsult,
-          timeline: orch.localStore.timeline
+          timeline: orch.localStore.timeline,
+          addInvestigation: function (pid, data, meta) { orch.localStore.addInvestigation(pid, data, meta); kick(); },
+          addPrescription: function (pid, data, meta) { orch.localStore.addPrescription(pid, data, meta); kick(); },
+          listInvestigations: orch.localStore.listInvestigations,
+          listPrescriptions: orch.localStore.listPrescriptions
         },
         // sync + persistence control
         syncNow: syncNow, kick: kick, start: start, stop: stop, destroy: destroy, saveNow: saveNow,

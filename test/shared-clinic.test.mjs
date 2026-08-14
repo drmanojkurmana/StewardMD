@@ -84,6 +84,23 @@ test("timeline: a NEW dated encounter per consult-open; newest-first + author fo
   assert.equal(tl[1].vals.cc, "a2", "same-open save updated the earlier entry");
 });
 
+test("investigations + prescriptions record and merge into the timeline (newest-first)", () => {
+  const st = S.create({ deviceId: "devA", clinicId: "C1", clock: (() => { let t = 1000; return () => (t += 10); })() });
+  const clinic = SC.create({ store: st }); const ls = clinic.localStore;
+  const id = clinic.addPatient({ name: "P" });
+  ls.startConsult(id); ls.saveConsult(id, {}, { cc: "fever" }, { author: "Dr A" });
+  ls.addInvestigation(id, { name: "CBC", note: "anemia?" }, { author: "Dr A" });
+  ls.addPrescription(id, { drug: "Tab PCM", dose: "650", freq: "TDS", duration: "3d" }, { author: "Dr A" });
+  assert.equal(ls.listInvestigations(id).length, 1);
+  assert.equal(ls.listInvestigations(id)[0].name, "CBC");
+  assert.equal(ls.listPrescriptions(id)[0].drug, "Tab PCM");
+  const tl = ls.timeline(id), kinds = tl.map(function (e) { return e.kind; });
+  assert.equal(tl.length, 3, "note + investigation + prescription all in the timeline");
+  assert.ok(kinds.indexOf("investigation") >= 0 && kinds.indexOf("prescription") >= 0 && kinds.indexOf("note") >= 0);
+  assert.equal(tl[0].kind, "prescription", "newest (last added) first");
+  assert.ok(tl[0].text.indexOf("Tab PCM") >= 0);
+});
+
 test("END-TO-END shared clinic: doctor A registers + assesses; nurse B sees it after sync", async () => {
   const tx = mkTransport();
   const A = mkNode("devA", tx, 1000);   // doctor

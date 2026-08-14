@@ -44,6 +44,19 @@ test("timeline: one dated entry per consult-open; same-open saves update it; aut
   assert.equal(tl[1].vals.cc, "fever, cough", "same-open save updated the earlier entry");
 });
 
+test("investigations + prescriptions record and merge into the timeline", () => {
+  CLINIC.configure({ localStorage: fakeLS() });
+  const id = CLINIC.addPatient({ name: "P" });
+  CLINIC.startConsult(id); CLINIC.saveConsult(id, {}, { cc: "fever" }, { author: "Dr A" });
+  CLINIC.localStore.addInvestigation(id, { name: "LFT" }, { author: "Dr A" });
+  CLINIC.localStore.addPrescription(id, { drug: "Tab Azithro", freq: "OD", duration: "3d" }, { author: "Dr A" });
+  assert.equal(CLINIC.localStore.listInvestigations(id)[0].name, "LFT");
+  assert.equal(CLINIC.localStore.listPrescriptions(id)[0].drug, "Tab Azithro");
+  const tl = CLINIC.localStore.timeline(id);
+  assert.equal(tl.length, 3, "note + investigation + prescription");
+  assert.ok(tl.some(function (e) { return e.kind === "investigation"; }) && tl.some(function (e) { return e.kind === "prescription"; }));
+});
+
 test("export -> wipe -> import restores everything", () => {
   CLINIC.configure({ localStorage: fakeLS() });
   const id = CLINIC.addPatient({ name: "Sita", age: 30, sex: "Female" });

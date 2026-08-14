@@ -64,12 +64,25 @@
     writeJSON(KEY_PTS, idx);
     try { scheduleSync(); } catch (e) {}   // auto-encrypt + upload to Drive (debounced)
   }
-  // chronological footprint (newest first) for the EMR timeline.
+  function toMs(at) { var ts = 0; try { ts = at ? new Date(at).getTime() : 0; } catch (x) {} return ts; }
+  function touchIdx(id) { var idx = listPatients(); for (var i = 0; i < idx.length; i++) if (idx[i].id === id) { idx[i].updatedAt = nowISO(); break; } writeJSON(KEY_PTS, idx); }
+  function withTs(e) { var o = { ts: toMs(e.at) }; for (var k in e) if (Object.prototype.hasOwnProperty.call(e, k)) o[k] = e[k]; return o; }
+  // ---- standalone Investigations + Prescriptions (My Clinic; no GHIS) ----
+  function addInvestigation(id, data, meta) { data = data || {}; meta = meta || {}; var r = readJSON(KEY_P(id), null) || { patient: getPatient(id), latest: {}, consults: [] }; r.investigations = r.investigations || []; r.investigations.unshift({ at: nowISO(), name: String(data.name || "").trim(), note: String(data.note || "").trim(), status: data.status || "ordered", author: meta.author || "" }); writeJSON(KEY_P(id), r); touchIdx(id); try { scheduleSync(); } catch (e) {} }
+  function addPrescription(id, data, meta) { data = data || {}; meta = meta || {}; var r = readJSON(KEY_P(id), null) || { patient: getPatient(id), latest: {}, consults: [] }; r.prescriptions = r.prescriptions || []; r.prescriptions.unshift({ at: nowISO(), drug: String(data.drug || "").trim(), dose: String(data.dose || "").trim(), freq: String(data.freq || "").trim(), duration: String(data.duration || "").trim(), remarks: String(data.remarks || "").trim(), author: meta.author || "" }); writeJSON(KEY_P(id), r); touchIdx(id); try { scheduleSync(); } catch (e) {} }
+  function listInvestigations(id) { var r = readJSON(KEY_P(id), null); return ((r && r.investigations) || []).map(withTs); }
+  function listPrescriptions(id) { var r = readJSON(KEY_P(id), null); return ((r && r.prescriptions) || []).map(withTs); }
+  // chronological footprint (newest first): consults + investigations + prescriptions.
   function timeline(id) {
-    var r = readJSON(KEY_P(id), null), c = (r && r.consults) || [];
-    return c.map(function (e) { var ts = 0; try { ts = e.at ? new Date(e.at).getTime() : 0; } catch (x) {} return { ts: ts, kind: "note", author: e.author || "", vals: e.vals || {}, fields: e.fields || {} }; });
+    var r = readJSON(KEY_P(id), null); if (!r) return [];
+    var out = [];
+    (r.consults || []).forEach(function (e) { out.push({ ts: toMs(e.at), kind: "note", author: e.author || "", vals: e.vals || {}, fields: e.fields || {} }); });
+    (r.investigations || []).forEach(function (e) { out.push({ ts: toMs(e.at), kind: "investigation", author: e.author || "", text: "Investigation ordered: " + (e.name || "") + (e.note ? " - " + e.note : "") }); });
+    (r.prescriptions || []).forEach(function (e) { out.push({ ts: toMs(e.at), kind: "prescription", author: e.author || "", text: "Rx: " + [e.drug, e.dose, e.freq, e.duration].filter(Boolean).join(" ") + (e.remarks ? " - " + e.remarks : "") }); });
+    out.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    return out;
   }
-  var localStore = { getConsult: getConsult, saveConsult: saveConsult, startConsult: startConsult, timeline: timeline };
+  var localStore = { getConsult: getConsult, saveConsult: saveConsult, startConsult: startConsult, timeline: timeline, addInvestigation: addInvestigation, addPrescription: addPrescription, listInvestigations: listInvestigations, listPrescriptions: listPrescriptions };
 
   /* ------------------------------ backup / Drive ------------------------------ */
   function exportJSON() {

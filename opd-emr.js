@@ -136,7 +136,33 @@
     var meds = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
     return timelineSection(st) + reports + meds;
   }
+  // Standalone Investigations for a clinic patient (local/shared) — record onto the clinic store, no GHIS.
+  function clinicInvTab(st) {
+    var d = st.invDraft || {};
+    var form = '<div class="oe-draft"><div class="oe-draft-h">' + ms("science") + "<b>Record an investigation</b></div>" +
+      fieldRow("Investigation", textInp("cinv-name", d.name, "e.g. CBC, LFT, X-ray chest")) +
+      fieldRow("Note", textInp("cinv-note", d.note, "Optional (indication / instructions)")) +
+      '<button class="oe-btn primary" data-oe-act="clinic-inv-add">' + ms("add") + "Add to record</button></div>";
+    var list = (_localStore && _localStore.listInvestigations) ? _localStore.listInvestigations(st.patient.mrn) : [];
+    var rows = list.map(function (x) { return '<div class="oe-row"><span class="oe-row-ic">' + ms("science") + '</span><span class="oe-row-b"><span class="oe-row-t">' + esc(x.name || "") + '</span><span class="oe-row-s">' + esc([fmtClinicDate(x.ts), x.author, x.note].filter(Boolean).join(" · ")) + "</span></span></div>"; }).join("");
+    return form + section("history", "Investigations ordered", list.length + " on record", rows, "No investigations recorded yet.");
+  }
+  // Standalone Medications for a clinic patient (local/shared) — prescribe onto the clinic store, no GHIS.
+  function clinicMedsTab(st) {
+    var d = st.medDraft || {};
+    var form = '<div class="oe-draft"><div class="oe-draft-h">' + ms("medication") + "<b>Prescribe a medication</b></div>" +
+      fieldRow("Drug", textInp("crx-drug", typeof d.drug === "string" ? d.drug : "", "e.g. Tab Paracetamol 650")) +
+      fieldRow("Dose", textInp("crx-dose", d.dose, "e.g. 1 tab")) +
+      fieldRow("Frequency", textInp("crx-freq", d.frequency, "e.g. TDS")) +
+      fieldRow("Duration", textInp("crx-dur", d.duration, "e.g. 5 days")) +
+      fieldRow("Remarks", textInp("crx-rem", d.remarks, "Optional")) +
+      '<button class="oe-btn primary" data-oe-act="clinic-rx-add">' + ms("add") + "Add to record</button></div>";
+    var list = (_localStore && _localStore.listPrescriptions) ? _localStore.listPrescriptions(st.patient.mrn) : [];
+    var rows = list.map(function (x) { return '<div class="oe-row"><span class="oe-row-ic">' + ms("medication") + '</span><span class="oe-row-b"><span class="oe-row-t">' + esc([x.drug, x.dose].filter(Boolean).join(" ")) + '</span><span class="oe-row-s">' + esc([x.freq, x.duration, fmtClinicDate(x.ts), x.author].filter(Boolean).join(" · ")) + "</span></span></div>"; }).join("");
+    return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.");
+  }
   function invTab(st) {
+    if (usesLocal(st.source)) return clinicInvTab(st);
     var d = st.invDraft || {}, draft = "";
     if (d.service) {
       var action = st.writeOn
@@ -152,6 +178,7 @@
     return searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
   }
   function medsTab(st) {
+    if (usesLocal(st.source)) return clinicMedsTab(st);
     var d = st.medDraft || {}, draft = "";
     if (d.drug) {
       var action = st.writeOn
@@ -752,7 +779,7 @@
     st.timeline = [];
     try {
       var tl = (_localStore && _localStore.timeline) ? _localStore.timeline(st.patient.mrn) : [];
-      st.timeline = (tl || []).map(function (e) { return { ts: e.ts || 0, kind: "note", by: e.author || "", text: clinicNoteText(e) }; });
+      st.timeline = (tl || []).map(function (e) { return { ts: e.ts || 0, kind: e.kind || "note", by: e.author || "", text: (e.text != null && e.text !== "") ? e.text : clinicNoteText(e) }; });
     } catch (x) {}
     st.timelineLoading = false;
     if (st.tab === "profile") paint();
@@ -830,7 +857,8 @@
 
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
-    var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"] };
+    var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"],
+      "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
     if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; return; }
     // Oncology override staging (Phase 4): silent, no repaint (mirrors the assess: fields above) so
@@ -916,6 +944,16 @@
     if (cmd === "assess-save") return submitAssessment();
     if (cmd === "summarise") return summariseClinic();
     if (cmd === "summarise-close") { st.clinicSummary = null; paint(); return; }
+    if (cmd === "clinic-inv-add") {
+      var iv = st.invDraft || {}; if (!String(iv.name || "").trim()) return;
+      try { if (_localStore && _localStore.addInvestigation) _localStore.addInvestigation(st.patient.mrn, { name: iv.name, note: iv.note }, { author: st.author || "" }); } catch (e) {}
+      st.invDraft = {}; loadTimeline(); toast("Investigation added to the record."); paint(); return;
+    }
+    if (cmd === "clinic-rx-add") {
+      var rx = st.medDraft || {}; if (!String(rx.drug || "").trim()) return;
+      try { if (_localStore && _localStore.addPrescription) _localStore.addPrescription(st.patient.mrn, { drug: rx.drug, dose: rx.dose, freq: rx.frequency, duration: rx.duration, remarks: rx.remarks }, { author: st.author || "" }); } catch (e) {}
+      st.medDraft = {}; loadTimeline(); toast("Medication added to the record."); paint(); return;
+    }
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "maik-ask") return maikAsk();
     if (cmd === "assess-maik-pro") return askMaikPro();

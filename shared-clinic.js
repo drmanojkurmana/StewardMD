@@ -47,13 +47,15 @@
     function getPatient(id) { var r = store.get(id); return r ? assign({ id: r.id }, r.data) : null; }
     function deletePatient(id) { store.remove(id); }
 
-    // All non-deleted encounters for a patient, newest first (the visit footprint).
-    function encountersFor(patientId) {
-      var list = store.list("encounter", function (r) { return (r.patientId || (r.data && r.data.patientId)) === patientId; });
+    // All non-deleted records of a type for a patient, newest first.
+    function recordsFor(entityType, patientId) {
+      var list = store.list(entityType, function (r) { return (r.patientId || (r.data && r.data.patientId)) === patientId; });
       list.sort(function (a, b) { return (b.createdAt || b.updatedAt || 0) - (a.createdAt || a.updatedAt || 0); });
       return list;
     }
+    function encountersFor(patientId) { return recordsFor("encounter", patientId); }
     function currentEncounter(patientId) { return encountersFor(patientId)[0] || null; }
+    function touchPatient(patientId) { var pr = store.raw(patientId); if (pr && !pr.deleted) store.update(patientId, pr.data); }
 
     // Per-consult-open history: opening a patient starts a fresh visit; the first save of that visit
     // creates a NEW dated encounter, later saves in the same open update it. Reopening = a new entry.
@@ -80,12 +82,27 @@
         if (pr && !pr.deleted) store.update(patientId, pr.data);
       },
       startConsult: startConsult,
-      // chronological footprint: every encounter (+ later Rx/investigations/documents) newest-first
+      // ---- standalone Investigations + Prescriptions (local/shared clinic; no GHIS) ----
+      addInvestigation: function (patientId, data, meta) {
+        data = data || {}; meta = meta || {};
+        store.put("investigation", { patientId: patientId, name: String(data.name || "").trim(), note: String(data.note || "").trim(), status: data.status || "ordered", author: meta.author || "" }, { patientId: patientId });
+        touchPatient(patientId);
+      },
+      addPrescription: function (patientId, data, meta) {
+        data = data || {}; meta = meta || {};
+        store.put("prescription", { patientId: patientId, drug: String(data.drug || "").trim(), dose: String(data.dose || "").trim(), freq: String(data.freq || "").trim(), duration: String(data.duration || "").trim(), remarks: String(data.remarks || "").trim(), author: meta.author || "" }, { patientId: patientId });
+        touchPatient(patientId);
+      },
+      listInvestigations: function (patientId) { return recordsFor("investigation", patientId).map(function (r) { return assign({ id: r.id, ts: r.createdAt || 0 }, r.data); }); },
+      listPrescriptions: function (patientId) { return recordsFor("prescription", patientId).map(function (r) { return assign({ id: r.id, ts: r.createdAt || 0 }, r.data); }); },
+      // chronological footprint: every encounter + investigation + prescription, newest-first
       timeline: function (patientId) {
-        return encountersFor(patientId).map(function (r) {
-          var d = r.data || {};
-          return { id: r.id, ts: r.createdAt || r.updatedAt || 0, kind: "note", author: d.author || "", vals: d.vals || {}, fields: d.fields || {} };
-        });
+        var out = [];
+        encountersFor(patientId).forEach(function (r) { var d = r.data || {}; out.push({ id: r.id, ts: r.createdAt || r.updatedAt || 0, kind: "note", author: d.author || "", vals: d.vals || {}, fields: d.fields || {} }); });
+        recordsFor("investigation", patientId).forEach(function (r) { var d = r.data || {}; out.push({ id: r.id, ts: r.createdAt || 0, kind: "investigation", author: d.author || "", text: "Investigation ordered: " + (d.name || "") + (d.note ? " - " + d.note : "") }); });
+        recordsFor("prescription", patientId).forEach(function (r) { var d = r.data || {}; out.push({ id: r.id, ts: r.createdAt || 0, kind: "prescription", author: d.author || "", text: "Rx: " + [d.drug, d.dose, d.freq, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") }); });
+        out.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+        return out;
       }
     };
 
