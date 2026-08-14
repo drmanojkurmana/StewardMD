@@ -1,0 +1,160 @@
+{
+  "id": "meso-cis-pemetrexed",
+  "diseaseId": "malignant_pleural_mesothelioma",
+  "name": "CISplatin + Pemetrexed (+/- Bevacizumab) for malignant pleural mesothelioma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Malignant Pleural Mesothelioma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "The cytotoxic cisplatin plus pemetrexed backbone is NOT biomarker-gated. Per Standard Guidelines (NCCN), Malignant Pleural Mesothelioma v3.2026, Principles of Systemic Therapy (cisplatin or carboplatin / pemetrexed +/- bevacizumab)."
+  },
+  "stage": [
+    "unresectable",
+    "advanced/metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "malignant pleural mesothelioma (epithelioid, biphasic, or sarcomatoid)",
+  "premedications": [
+    {
+      "name": "Folic acid",
+      "notes": "low-dose folic acid supplementation started before and continued through pemetrexed therapy (Harrison line 82142)."
+    },
+    {
+      "name": "Vitamin B12",
+      "notes": "vitamin B12 supplementation with pemetrexed to reduce toxicity (Harrison line 82142)."
+    },
+    {
+      "name": "Dexamethasone",
+      "notes": "corticosteroid premedication for pemetrexed skin-rash prophylaxis (standard supportive care)."
+    },
+    {
+      "name": "Antiemetic prophylaxis (highly emetogenic)",
+      "notes": "cisplatin-based doublet is highly emetogenic; give guideline-tier antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "Pemetrexed requires folic acid + vitamin B12 supplementation (Harrison line 82142) and dexamethasone rash prophylaxis.",
+    "cisplatin: IV hydration and nephro-/oto-/neurotoxicity monitoring (magnesium repletion).",
+    "Bevacizumab (if used): monitor blood pressure, proteinuria, and bleeding/thrombosis risk.",
+    "Carboplatin (AUC-dosed) is a source-listed alternative platinum for patients unfit for cisplatin (guideline line 774)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) and magnesium before each cisplatin cycle",
+    "blood pressure and urine protein (if bevacizumab)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "blood pressure/proteinuria (bevacizumab)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "renal impairment or grade 3 to 4 myelosuppression",
+      "action": "delay/reduce/switch",
+      "text": "Delay or reduce per clinical review; consider carboplatin substitution for renal impairment or cisplatin intolerance."
+    },
+    {
+      "condition": "bevacizumab-related hypertension, proteinuria, bleeding, or thromboembolism",
+      "drug": "bevacizumab",
+      "action": "hold/discontinue",
+      "text": "Hold or discontinue bevacizumab per labeling and clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV (with hydration)",
+      "notes": "PLATINUM (cisplatin modeled; carboplatin is a source-listed alternative platinum per the guideline, line 774). Dose value grounded to DeVita 12th ed. line 68904 (cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks). CISplatin 75 mg/m2 IV day 1 with IV hydration and nephro-/oto-/neurotoxicity precautions (DeVita line 132304 hydration; line 16606 irreversible nephro-, neuro-, ototoxicities). Mesothelioma indication for the cisplatin/pemetrexed doublet is grounded to Harrison line 82143 to 82144 and the MAPS mesothelioma trial (DeVita line 292733).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 68904 (cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "pemetrexed",
+      "name": "Pemetrexed",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. line 68904 (pemetrexed 500 mg/m2 every 3 weeks). Pemetrexed 500 mg/m2 IV day 1. REQUIRES folic acid and vitamin B12 supplementation to reduce toxicity (Harrison line 82142) plus dexamethasone premedication for rash prophylaxis (standard supportive care).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 68904 (pemetrexed 500 mg/m2 every 3 weeks, with cisplatin 75 mg/m2)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 10
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "bevacizumab",
+      "name": "Bevacizumab",
+      "basis": "mgkg",
+      "dosePerUnit": 15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "OPTIONAL add-on (the +/- in the regimen name). Source: bevacizumab 15 mg/kg every 21 days dose grounded to DeVita 12th ed. line 68586; the mesothelioma bevacizumab-plus-cisplatin/pemetrexed combination (MAPS) is grounded to DeVita line 292733 and the guideline (line 776 to 777, (Carboplatin or Cisplatin)/Pemetrexed + Bevacizumab, category 1). Bevacizumab 15 mg/kg IV day 1 every 21 days. Anti-VEGF: check for contraindications (bleeding, uncontrolled hypertension, recent surgery).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 68586 (bevacizumab 15 mg/kg every 21 days); MAPS mesothelioma trial line 292733 (bevacizumab added to cisplatin/pemetrexed)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

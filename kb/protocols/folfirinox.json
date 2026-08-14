@@ -1,0 +1,174 @@
+{
+  "id": "folfirinox",
+  "diseaseId": "pancreatic_cancer",
+  "name": "FOLFIRINOX (PRODIGE 4/ACCORD 11)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "BRCA1_2": "tested (germline and somatic)",
+    "PALB2": "tested",
+    "KRAS": "tested",
+    "BRAF": "tested",
+    "HER2_ERBB2": "tested",
+    "MSI_dMMR": "tested",
+    "TMB": "tested",
+    "NTRK_fusion": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "FOLFIRINOX cytotoxic backbone is not biomarker-restricted; it is a preferred category 1 first-line option for good performance status (ECOG 0 to 1) regardless of biomarker status. Tumor/somatic and germline molecular profiling (NGS) is recommended for all anti-cancer-therapy candidates to guide targeted therapy and maintenance choices: BRCA1/2 (and PALB2) support platinum-based therapy, and germline BRCA1/2 supports olaparib maintenance; BRAF V600E (dabrafenib plus trametinib); NTRK, RET, and other fusions; HER2 amplification; and MSI-H, dMMR, or TMB-high (pembrolizumab). Per Standard Guidelines (NCCN), Pancreatic Adenocarcinoma Principles of Molecular Profiling (footnote j; PANC-1A, PANC-2A) and Principles of Systemic Therapy, Metastatic Disease First-Line (PANC-G)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below"
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: moderate-to-high emetic risk (oxaliplatin and irinotecan are each individually moderate emetic risk IV agents per NCCN Antiemesis categories in appendix D; combining two moderately emetogenic agents on the same day is conventionally managed as the higher tier). Exact per-regimen NCCN order-template tier not yet confirmed - verify against per-disease NCCN template.",
+    "G-CSF: PRODIGE 4/ACCORD 11 reported febrile neutropenia 5.4% (vs 1.2% gemcitabine) and grade 3-4 neutropenia 45% (source lines 107088-107091). Appendix C risk tiering (High/Intermediate) for this specific regimen was not located in the provided source; use physician-patient discussion of prophylactic CSF support per appendix C intermediate-risk framework pending confirmation of the regimen's listed risk level on a per-disease NCCN template."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (platinum-containing regimen)",
+    "peripheral neuropathy assessment (oxaliplatin)",
+    "diarrhea/GI toxicity assessment (irinotecan)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle toxicity/neuropathy status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). DeVita reports grade 3 to 4 diarrhea of 12.7% with FOLFIRINOX in PRODIGE 4/ACCORD 11 (line 107100). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for routine dose modification on the basis of UGT1A1 polymorphism, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 107100; 121523 to 121531"
+    }
+  ],
+  "drugs": [
+    {
+      "id": "oxaliplatin",
+      "name": "OXALIplatin",
+      "basis": "bsa",
+      "dosePerUnit": 85,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Cancer PPO 12th ed., line 107088-107091: PRODIGE 4/ACCORD 11 - oxaliplatin 85 mg/m2 IV day 1. Tall man per NCCN appendix G.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 180,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Cancer PPO 12th ed., line 107088-107091: irinotecan 180 mg/m2 IV day 1.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Cancer PPO 12th ed., line 107088-107091: leucovorin 400 mg/m2 IV day 1.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "Fluorouracil (bolus)",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 400 mg/m2 IV bolus day 1.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil (continuous infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 2400,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion over 46 hours",
+      "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 2,400 mg/m2 as a 46-hour continuous infusion, starting day 1 and running into day 2. Cycle repeats every 2 weeks.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    }
+  ]
+}

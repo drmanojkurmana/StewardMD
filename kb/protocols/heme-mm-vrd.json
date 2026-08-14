@@ -1,0 +1,150 @@
+{
+  "id": "heme-mm-vrd",
+  "diseaseId": "plasma_cell_disorders",
+  "name": "Bortezomib + Lenalidomide + Dexamethasone (VRd)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "VRd is a cytotoxic/targeted triplet backbone and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS) and whether two-drug maintenance is favored, not access to VRd itself. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "stage": [],
+  "treatmentSetting": "primary therapy for newly diagnosed multiple myeloma (both transplant-eligible/HCT candidate and transplant-ineligible/HCT-deferred settings)",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [
+    {
+      "name": "Herpes zoster (VZV) antiviral prophylaxis",
+      "notes": "proteasome-inhibitor-associated VZV reactivation prophylaxis (e.g., acyclovir/valacyclovir) per institutional practice."
+    }
+  ],
+  "supportiveCare": [
+    "Bortezomib: monitor for peripheral neuropathy at each visit; consider dose reduction/schedule change for grade 2 or higher; VZV antiviral prophylaxis.",
+    "Lenalidomide: VTE thromboprophylaxis (aspirin for standard risk, therapeutic anticoagulation for higher risk) and REMS-program dispensing (teratogen); adjust for renal impairment.",
+    "Antiemetics: low to moderate emetic risk; prophylaxis per emetogenicity tier."
+  ],
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide renal clearance)",
+    "peripheral neuropathy assessment each visit (bortezomib)",
+    "glucose and blood pressure (dexamethasone)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "peripheral neuropathy status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "bortezomib",
+      "action": "reduce/hold",
+      "text": "Reduce dose or change schedule for grade 2 or higher bortezomib peripheral neuropathy per labeling; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "bortezomib",
+      "name": "Bortezomib",
+      "basis": "bsa",
+      "dosePerUnit": 1.3,
+      "unit": "mg/m2",
+      "route": "SC",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286317). Bortezomib 1.3 mg/m2 SC on days 1, 8, and 15 of a 21-day cycle (weekly SC dosing). SC route reduces peripheral neuropathy versus IV. Schedule taken exactly as printed; not inferred. Give VZV (herpes zoster) antiviral prophylaxis and monitor for peripheral neuropathy.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, line 286317 (VRd: Bortezomib 1.3 mg/m2 SC on days 1, 8, and 15)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "lenalidomide",
+      "name": "Lenalidomide",
+      "basis": "flat",
+      "dosePerUnit": 25,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286318). Lenalidomide 25 mg PO on days 1 to 14 of a 21-day cycle. Requires VTE thromboprophylaxis (aspirin or anticoagulation) and REMS-program dispensing (teratogen); renal dose adjustment per CrCl.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6, p.1520, line 286318 (VRd: Lenalidomide 25 mg PO on days 1-14)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286319). The table gives two source-stated dexamethasone options: 20 mg PO on the day of and the day after bortezomib, OR 40 mg on days 1, 8, 15, and 22. This protocol models the 40 mg weekly option on the in-cycle bortezomib days (1, 8, 15) of the 21-day cycle; day 22 in the source phrase falls on day 1 of the following cycle. Dexamethasone dose is taken exactly as the source prints it, not inferred.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 74, Table 74.6, p.1520, line 286319 (VRd: Dexamethasone 20 mg on day of and day after bortezomib, or 40 mg on days 1, 8, 15, and 22)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

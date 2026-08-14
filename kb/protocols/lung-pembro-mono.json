@@ -1,0 +1,86 @@
+{
+  "id": "lung-pembro-mono",
+  "diseaseId": "neoplasms_of_the_lung",
+  "name": "Pembrolizumab Monotherapy, PD-L1 TPS >= 50% (KEYNOTE-024, NSCLC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 200,
+  "cyclesNote": "Pembrolizumab 200 mg every 21 days, continued until disease progression or unacceptable toxicity, up to 2 years (DeVita line 233348). Alternative schedule: 400 mg every 6 weeks.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "any",
+    "PD_L1": "TPS >= 50% (tumor proportion score at least 50%) - required",
+    "EGFR": "wild-type (no sensitizing EGFR mutation)",
+    "ALK": "wild-type (no ALK rearrangement)",
+    "note": "First-line single-agent pembrolizumab requires PD-L1 tumor proportion score (TPS) >= 50% and absence of a sensitizing EGFR mutation or ALK rearrangement (and no other actionable driver directing targeted therapy). PD-L1 IHC testing (category 1) is recommended before first-line treatment in all metastatic NSCLC. PD-1/PD-L1 inhibitor contraindications must be excluded. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, First-Line Monotherapy (KEYNOTE-024); DeVita 12th ed."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "any NSCLC histology (nonsquamous or squamous)",
+  "premedications": [],
+  "supportiveCare": [
+    "immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary/pneumonitis, colitis, endocrinopathies, myocarditis)",
+    "no cytotoxic premedication required for single-agent pembrolizumab"
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) before each cycle",
+    "pneumonitis surveillance (symptoms, imaging) during therapy",
+    "clinical response and toxicity assessment each cycle"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; discontinue for severe or life-threatening pneumonitis or myocarditis; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. line 70724 (KEYNOTE-024: pembrolizumab 200 mg every 3 weeks) and line 233347 to 233348 (flat 200 mg every 3 weeks or 400 mg every 6 weeks, up to 2 years). Single agent, Day 1 of a 21-day cycle. Alternative schedule: 400 mg IV every 6 weeks.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "Chapter 30: pembrolizumab 200 mg every 3 weeks (KEYNOTE-024, line 70724); flat dose 200 mg every 3 weeks or 400 mg every 6 weeks, given for up to 2 years (line 233347 to 233348)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

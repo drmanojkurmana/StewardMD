@@ -1,0 +1,103 @@
+{
+  "id": "breast-tamoxifen",
+  "diseaseId": "breast_cancer",
+  "name": "Tamoxifen (adjuvant / metastatic endocrine therapy)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 1,
+  "cycles": 5,
+  "cyclesNote": "continuous once-daily dosing for 5 to 10 years (adjuvant); continued until progression or unacceptable toxicity in metastatic disease",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "ER": "positive",
+    "PR": "tested",
+    "HR": "positive required (ER and/or PR positive)",
+    "HER2": "tested",
+    "hormoneReceptorRestricted": true,
+    "note": "Endocrine therapy REQUIRES hormone-receptor-positive disease (ER and/or PR positive). Tamoxifen is a selective estrogen receptor modulator (SERM) effective at any menopausal status, so it does not require postmenopausal status or ovarian suppression (unlike aromatase inhibitors). HER2 is tested to guide the addition of HER2-directed therapy, which does not change the endocrine indication. Per DeVita 12th ed. (Chapter 16) and Standard Guidelines (NCCN), Invasive Breast Cancer, Principles of Adjuvant Endocrine Therapy (BINV-K)."
+  },
+  "stage": [
+    "DCIS (0)",
+    "I",
+    "II",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "hormone-receptor-positive invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC)); also ER-positive ductal carcinoma in situ (DCIS)",
+  "premedications": [],
+  "supportiveCare": [
+    "Not myelosuppressive; no G-CSF or routine antiemetics required (oral endocrine therapy).",
+    "Ovarian suppression (OFS): for premenopausal patients at higher risk, tamoxifen plus ovarian suppression/ablation may be used; OFS is commonly a GnRH agonist (e.g., goserelin 3.6 mg SC every 4 weeks) or surgical/radiation ablation. Per NCCN v6.2026 BINV-K 2 of 4 (OFS methods) and DeVita lines 185051 to 185084 (SOFT/TEXT).",
+    "Thromboembolism and endometrial monitoring: tamoxifen predisposes to venous thromboembolism and (in postmenopausal patients) endometrial cancer (DeVita lines 29646 to 29649).",
+    "Avoid strong CYP2D6 inhibitors (e.g., paroxetine) which lower active endoxifen (DeVita lines 29644 to 29690)."
+  ],
+  "monitoring": [
+    "adherence to daily oral endocrine therapy (crucial to outcome)",
+    "gynecologic symptoms / abnormal vaginal bleeding (endometrial cancer risk in postmenopausal patients)",
+    "signs/symptoms of venous thromboembolism",
+    "bone density (tamoxifen may reduce bone density in premenopausal patients)"
+  ],
+  "clearanceChecks": [
+    "hormone-receptor status confirmed positive",
+    "pregnancy status (avoid in pregnancy)",
+    "CYP2D6-inhibitor drug interactions"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "intolerance at 20 mg per day",
+      "drug": "tamoxifen",
+      "action": "reduce",
+      "text": "Source-stated low-dose option (NCCN v6.2026 BINV-K footnote r): tamoxifen 5 mg per day or 10 mg every other day for 3 to 5 years if symptomatic on the 20 mg dose. Physician decides."
+    },
+    {
+      "condition": "reduced/absent CYP2D6 activity (genotype or potent inhibitor coadministration)",
+      "drug": "tamoxifen",
+      "action": "review",
+      "text": "CPIC recommends alternative endocrine therapy for reduced CYP2D6 activity, or (if tamoxifen must continue) dose escalation from 20 to 40 mg per day (DeVita lines 29682 to 29685). Note: NCCN v6.2026 (BINV-K DCIS-2 footnote) states routine CYP2D6 genotype testing is not recommended. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "tamoxifen",
+      "name": "Tamoxifen",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. line 29631. Tamoxifen 20 mg by mouth once daily, continuous (flat daily dosing; the days array marks once-daily administration within a nominal 1-day cycle). Adjuvant duration 5 to 10 years (DeVita 29631 to 29634; NCCN v6.2026 BINV-K premenopausal tamoxifen 5 years, consider extending to 10 years). Source-stated low-dose option for intolerance (NCCN v6.2026 BINV-K footnote r): tamoxifen 5 mg per day or 10 mg every other day for 3 to 5 years.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 29631 (standard daily dose of tamoxifen is 20 mg); duration line 29631 to 29634 (5 years, and 10 years improves breast cancer mortality/overall survival in the adjuvant setting)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

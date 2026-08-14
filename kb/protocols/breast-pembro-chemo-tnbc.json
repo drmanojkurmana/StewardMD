@@ -1,0 +1,199 @@
+{
+  "id": "breast-pembro-chemo-tnbc",
+  "diseaseId": "breast_cancer",
+  "name": "Pembrolizumab + Carboplatin/Paclitaxel then Pembrolizumab + AC (KEYNOTE-522), then Adjuvant Pembrolizumab",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "cyclesNote": "Neoadjuvant: 8 cycles every 21 days - cycles 1 to 4 = pembrolizumab + carboplatin + paclitaxel; cycles 5 to 8 = pembrolizumab + doxorubicin (or epirubicin) + cyclophosphamide. Followed by surgery, then adjuvant pembrolizumab 200 mg every 21 days for 9 cycles (KEYNOTE-522). All chemotherapy cycles are with myeloid growth factor support.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "ER": "negative",
+    "PR": "negative",
+    "HER2": "negative",
+    "note": "Triple-negative breast cancer (TNBC): ER-negative, PR-negative, HER2-negative (subtype #3). Per the guideline, this preoperative-plus-adjuvant KEYNOTE-522 regimen applies to stage II to III TNBC regardless of PD-L1 status (PD-L1 is NOT required, unlike the metastatic pembrolizumab-plus-chemotherapy indication which requires PD-L1 CPS at least 10). Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-M."
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant"
+  ],
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling (phase 1)."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF / myeloid growth factor support: all chemotherapy cycles are given with myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n.",
+    "Immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary, colitis, endocrinopathies).",
+    "Antiemetics: anthracycline/cyclophosphamide phase is high emetic risk; carboplatin/paclitaxel phase moderate; prophylaxis per emetogenicity tier."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during pembrolizumab",
+    "cumulative anthracycline dose tracking (DOXOrubicin, phase 2)",
+    "peripheral neuropathy assessment (PACLitaxel, phase 1)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "endocrine/immune status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10 (KEYNOTE-522). Pembrolizumab 200 mg IV (or 2 mg/kg) on day 1, every 21 days, given in BOTH neoadjuvant phases (cycles 1 to 4 with carboplatin/paclitaxel, then cycles 5 to 8 with doxorubicin/cyclophosphamide) AND adjuvantly for 9 cycles after surgery. Alternative (footnote o): pembrolizumab 400 mg IV or 4 mg/kg every 42 days.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 5 of 10 (Pembrolizumab 200 mg IV or 2 mg/kg Day 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. PACLitaxel 80 mg/m2 IV on days 1, 8, and 15. Neoadjuvant phase 1 only (cycles 1 to 4). Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 5 of 10 (Paclitaxel 80 mg/m2 IV Days 1, 8, and 15)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. CARBOplatin AUC 5 IV on day 1 (target AUC). Neoadjuvant phase 1 only (cycles 1 to 4). Source-stated alternative: CARBOplatin AUC 1.5 IV on days 1, 8, and 15. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 5 of 10 (Carboplatin AUC 5 IV Day 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. DOXOrubicin 60 mg/m2 IV on day 1 (or Epirubicin 90 mg/m2 IV day 1). Neoadjuvant phase 2 only (cycles 5 to 8). Tall-man per ISMP. Cumulative lifetime cap is the conventional anthracycline ceiling (warn 450, hard 550 mg/m2), not a dose from the breast table.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 5 of 10 (Doxorubicin 60 mg/m2 IV Day 1 or Epirubicin 90 mg/m2 IV Day 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 600,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. Cyclophosphamide 600 mg/m2 IV on day 1. Neoadjuvant phase 2 only (cycles 5 to 8).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-M 5 of 10 (Cyclophosphamide 600 mg/m2 IV Day 1)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "gi-hcc-sorafenib",
+  "diseaseId": "hepatocellular_carcinoma",
+  "name": "Sorafenib (single-agent oral multikinase inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "No predictive biomarker gates sorafenib in HCC. Per Standard Guidelines (NCCN), Hepatocellular Carcinoma v2.2026, Principles of Biomarker Testing (HCC-J), molecular testing (MSI/dMMR, RET fusion, NTRK fusion) is used to identify subsequent-line targeted or immunotherapy options, not to select the first-line multikinase inhibitor backbone."
+  },
+  "stage": [
+    "advanced/unresectable",
+    "metastatic"
+  ],
+  "treatmentSetting": "advanced/unresectable or metastatic (systemic-therapy setting)",
+  "histology": "hepatocellular carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Hand-foot skin reaction: monitor and manage; dose-modify per labeling (TKI class effect).",
+    "Blood pressure monitoring (VEGF-pathway inhibitor).",
+    "Liver function monitoring; hepatic-impairment dose adjustment per DeVita line 111732."
+  ],
+  "monitoring": [
+    "Blood pressure at baseline and during therapy (VEGF-pathway TKI)",
+    "Liver function tests (bilirubin-based dose adjustment applies)",
+    "Hand-foot skin reaction assessment",
+    "Clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "blood pressure",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "serum bilirubin 1.6 to 3x ULN",
+      "drug": "sorafenib",
+      "action": "reduce",
+      "text": "Consider half the full dose per DeVita line 111732; obtain clinical review."
+    },
+    {
+      "condition": "albumin < 2.5 g/dL",
+      "drug": "sorafenib",
+      "action": "reduce",
+      "text": "No more than 200 mg once daily per DeVita line 111732; obtain clinical review."
+    },
+    {
+      "condition": "serum bilirubin > 3x ULN",
+      "drug": "sorafenib",
+      "action": "hold",
+      "text": "No safe dose established per DeVita line 111732; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "sorafenib",
+      "name": "Sorafenib",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. Ch. 36, line 111732. Sorafenib 400 mg PO TWICE DAILY (BID), total 800 mg/day, taken continuously (represented as days 1 to 28 of a 28-day continuous-dosing accounting cycle; there is no discrete drug-free interval). The Standard Guidelines (NCCN) HCC v2.2026 adjuvant STORM description also cites sorafenib 800 mg daily (hcc.txt line 2314). Hepatic-impairment dose adjustment per DeVita line 111732: for bilirubin 1.6 to 3x ULN consider half dose; for albumin <2.5 g/dL no more than 200 mg once daily (source DeVita prints mg/dL in error; albumin is measured in g/dL); no safe dose established for bilirubin >3x ULN.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 111732 (Ch. 36 Cancer of the Liver: sorafenib at the full dose of 400 mg twice daily for bilirubin <=1.5x ULN)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

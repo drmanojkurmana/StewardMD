@@ -1,0 +1,117 @@
+{
+  "id": "simplified-lv5fu2",
+  "diseaseId": "colorectal_cancer",
+  "name": "Simplified LV5FU2",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KRAS": "tested",
+    "NRAS": "tested",
+    "BRAF_V600E": "tested",
+    "HER2_ERBB2": "tested",
+    "MMR_MSI": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic fluorouracil/leucovorin backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: low emetic risk tier per NCCN Antiemesis / appendix D framework (IV 5-fluorouracil bolus and infusion regimens fall in the low, 10-30 percent, emetic-risk category); PRN antiemetic per NCCN Antiemesis guideline",
+    "G-CSF: not a high or intermediate febrile-neutropenia risk regimen per appendix C framework; prophylactic CSF not routinely indicated, physician discretion based on patient-specific risk factors"
+  ],
+  "monitoring": [
+    "CBC before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV over 2 hr",
+      "notes": "DeVita 12th ed., line 123486-123487: LV 400 mg/m2 over 2 hr. Not on the NCCN tall man lettering list (appendix G).",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "Fluorouracil (bolus)",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "notes": "DeVita 12th ed., line 123486-123487: followed by bolus 5-FU 400 mg/m2. Not on the NCCN tall man lettering list (appendix G).",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil (infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV over 46-48 hr",
+      "notes": "DeVita 12th ed., line 123486-123487: followed by 5-FU 1,200 mg/m2/d times 2 d (2,400 mg/m2 over 46-48 hr). Printed as a per-day rate given continuously across days 1-2; not a range, no alternate value to note.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    }
+  ]
+}

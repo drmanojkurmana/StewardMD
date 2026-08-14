@@ -1,0 +1,180 @@
+{
+  "id": "gu-testicular-bep",
+  "diseaseId": "testicular_germ_cell_tumor",
+  "name": "BEP (Bleomycin / Etoposide / CISplatin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "cyclesNote": "3 (IGCCCG good risk) or 4 (IGCCCG intermediate or poor risk); 1 cycle in the high-risk stage I NSGCT adjuvant setting",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Testicular Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "AFP": "prognostic and risk-classifying",
+    "beta_hCG": "prognostic and risk-classifying",
+    "LDH": "prognostic and risk-classifying",
+    "note": "The cytotoxic BEP backbone is not biomarker-restricted. Serum tumor markers (AFP, beta-hCG, LDH) classify IGCCCG good, intermediate, and poor risk, which sets the number of cycles. A pure seminoma histology never elevates AFP (a rising AFP implies nonseminomatous elements). Per Standard Guidelines (NCCN), Testicular Cancer, Risk Classification for Advanced Disease (TEST-D)."
+  },
+  "stage": [
+    "IB to IS (NSGCT, 1 cycle adjuvant BEP option)",
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "metastatic",
+    "adjuvant"
+  ],
+  "histology": "germ cell tumor (serves BOTH seminoma and nonseminomatous germ cell tumor / NSGCT)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis (high emetic risk)",
+      "notes": "CISplatin-containing multiday regimen is highly emetogenic; high-emetic-risk prophylaxis indicated."
+    },
+    {
+      "name": "Hydration",
+      "notes": "IV pre- and post-hydration with each CISplatin dose."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: high emetic risk (multiday CISplatin). Confirm exact institutional/guideline tier.",
+    "Nephroprotection: IV hydration and electrolyte repletion with each CISplatin dose.",
+    "Pulmonary: bleomycin cumulative-dose tracking (warn greater than 400 units lifetime) plus baseline and pre-cycle PFTs (DeVita 12th ed. line 27799 to 27808).",
+    "G-CSF: not routinely mandated for standard BEP; use per febrile-neutropenia risk assessment."
+  ],
+  "monitoring": [
+    "Serum tumor markers (AFP, beta-hCG, LDH) before each cycle and at restaging",
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - CISplatin",
+    "Ototoxicity and peripheral neuropathy assessment - CISplatin",
+    "Pulmonary function tests at baseline and before each cycle; assess for cough/dyspnea - bleomycin (DeVita line 27805 to 27808)",
+    "CBC before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal function and electrolytes",
+    "adequate hydration",
+    "cumulative bleomycin dose",
+    "pulmonary function",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "greater than 15% decline in DLCO or vital capacity, or clinical pneumonitis",
+      "drug": "bleomycin",
+      "action": "discontinue",
+      "text": "Discontinue bleomycin; consider switching to a bleomycin-free regimen (EP or VIP). Physician decides (DeVita line 27805 to 27808)."
+    },
+    {
+      "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy",
+      "drug": "cisplatin",
+      "action": "hold/reduce/review",
+      "text": "Review required; consider dose reduction or delay. Physician decides."
+    },
+    {
+      "condition": "cumulative bleomycin approaching 400 units",
+      "drug": "bleomycin",
+      "action": "review",
+      "text": "Cumulative pulmonary-risk threshold; review continuation and pulmonary status. Physician decides (DeVita line 27799)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. Etoposide 100 mg/m2 IV Days 1 to 5. Corroborated by DeVita 12th ed. good-risk BEP (line 167554).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), BEP (Etoposide 100 mg/m2 IV Days 1 to 5)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 20,
+      "unit": "mg/m2",
+      "route": "IV with hydration",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. CISplatin 20 mg/m2 IV Days 1 to 5. ISMP tall-man. No lifetime cumulative cap; requires IV pre/post hydration; monitor nephrotoxicity, ototoxicity, peripheral neuropathy. Corroborated by DeVita 12th ed. (line 167555).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), BEP (Cisplatin 20 mg/m2 IV Days 1 to 5)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "bleomycin",
+      "name": "Bleomycin",
+      "basis": "flat",
+      "dosePerUnit": 30,
+      "unit": "units",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. Bleomycin 30 UNITS IV weekly on Days 1, 8, and 15 (or Days 2, 9, and 16). Dosed in UNITS, not mg/m2. CUMULATIVE PULMONARY CAP: risk of bleomycin pneumonitis (the dose-limiting toxicity) rises with cumulative dose greater than 400 units (DeVita 12th ed. line 27799). Obtain PFTs at baseline and before each cycle; a greater than 15% fall in DLCO or vital capacity mandates discontinuation (DeVita line 27805 to 27808). Consider a bleomycin-free regimen (EP or VIP) in patients at increased pulmonary risk (NCCN footnote u).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), BEP (Bleomycin 30 units IV weekly on Days 1, 8, and 15 or Days 2, 9, and 16)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 400,
+          "unit": "units"
+        }
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

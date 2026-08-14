@@ -1,0 +1,118 @@
+{
+  "id": "gyn-endometrial-carbo-paclitaxel",
+  "diseaseId": "endometrial_cancer",
+  "name": "Carboplatin + Paclitaxel (TC) for Endometrial Carcinoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "typically 6 cycles in the adjuvant and advanced settings per the referenced trials; physician determined",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Uterine Neoplasms",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "MMR_MSI": "tested",
+    "HER2_ERBB2": "tested",
+    "note": "The cytotoxic carboplatin/paclitaxel (TC) backbone is not biomarker restricted. MMR or MSI and HER2 (ERBB2) status are tested to guide add on immunotherapy or HER2 directed therapy (checkpoint inhibitor add on for advanced disease, trastuzumab for HER2 positive uterine serous carcinoma or carcinosarcoma), not the doublet itself. Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, Systemic Therapy for Endometrial Carcinoma (ENDO-D) and Principles of Molecular Analysis (ENDO-A)."
+  },
+  "stage": [
+    "III",
+    "IV",
+    "recurrent"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "endometrial carcinoma (histology-agnostic backbone; the printed source dose was reported in the uterine carcinosarcoma trials table and is the same standard TC doublet used for endometrial adenocarcinoma, serous, and clear cell carcinoma)",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid plus H1 and H2 antihistamine premedication per paclitaxel labeling before each dose."
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: carboplatin is moderate emetic risk; prophylaxis per emetogenicity tier on the day of treatment.",
+    "G-CSF: not routinely required for the every 21 day TC doublet; assess febrile neutropenia risk factors per institutional and NCCN growth factor guidance."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle for carboplatin AUC dosing",
+    "peripheral neuropathy assessment before each cycle for PACLitaxel",
+    "infusion reaction monitoring for carboplatin and PACLitaxel"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1500 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Hold or reduce per institutional protocol; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 6,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 175767. CARBOplatin AUC 6 IV on day 1, every 21 days (target AUC). The narrative establishes carboplatin/paclitaxel (TC) as the standard for advanced or recurrent endometrial carcinoma from the GOG 209 comparison of TC to TAP (line 175095). Tall man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 175767 (Carboplatin (AUC 6) + paclitaxel 175 mg/m2 q 3 wk)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 175,
+      "unit": "mg/m2",
+      "route": "IV over 3 hr",
+      "notes": "Source: DeVita 12th ed., line 175767. PACLitaxel 175 mg/m2 IV on day 1, every 21 days. Standard 3 hr infusion per the platinum/taxane doublet schedule (line 178646). Requires corticosteroid and H1/H2 antihistamine premedication per paclitaxel labeling. Tall man per ISMP.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 175767 (Carboplatin (AUC 6) + paclitaxel 175 mg/m2 q 3 wk); infusion duration per line 178646 (paclitaxel 175 mg/m2 3-h infusion every 21 d)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -713,6 +713,11 @@
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
   function writeFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr_write")); } catch (e) { return false; } }
   function oncoFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protocols")); } catch (e) { return false; } }
+  // EXPERIMENTAL test flag (default OFF): when ON, the workbench ALSO accepts experimental grounded
+  // protocols (lifecycleState:draft + experimental:true). "active" is never set by promotion, so real
+  // clinical activation stays a separate human decision - this only opens the owner/device test path.
+  function oncoProtoLibOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protolib")); } catch (e) { return false; } }
+  function oncoUsable(p) { return !!(p && (p.lifecycleState === "active" || (oncoProtoLibOn() && p.experimental))); }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
@@ -1068,13 +1073,13 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (manifest) {
         var list = (manifest && (manifest.protocols || manifest)) || [];
-        var active = list.filter(function (p) { return p && p.lifecycleState === "active"; });
+        var active = list.filter(oncoUsable);
         return Promise.all(active.map(function (p) {
           return fetch("/kb/protocols/" + encodeURIComponent(p.id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
         }));
       })
       .then(function (templates) {
-        st.oncoProtocols = (templates || []).filter(function (t) { return t && t.lifecycleState === "active"; });   // re-filter defensively
+        st.oncoProtocols = (templates || []).filter(oncoUsable);   // re-filter defensively
         paint();
       })
       .catch(function () { st.oncoProtocols = []; paint(); });
@@ -1083,8 +1088,8 @@
   // age/creatinine not yet captured on this form - never-invent, the dose engine warns instead of
   // guessing), compute the lineage, and STAGE it. Purely local - no fetch, no write.
   function oncoApply(protocolId) {
-    var proto = (st.oncoProtocols || []).filter(function (p) { return p && p.id === protocolId && p.lifecycleState === "active"; })[0];
-    if (!proto) return;   // defensive - only active protocols are ever offered
+    var proto = (st.oncoProtocols || []).filter(function (p) { return p && p.id === protocolId && oncoUsable(p); })[0];
+    if (!proto) return;   // defensive - only active (or experimental-when-flagged) protocols are ever offered
     var v = st.assessVals || {};
     var height = parseFloat(v.Height), weight = parseFloat(v.Weight);
     var params = {

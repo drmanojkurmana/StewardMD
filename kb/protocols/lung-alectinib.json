@@ -1,0 +1,113 @@
+{
+  "id": "lung-alectinib",
+  "diseaseId": "nsclc",
+  "name": "Alectinib (ALK-rearranged NSCLC, first-line)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), NSCLC",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "ALK": "rearrangement (gene fusion)",
+    "note": "ALK-TKI gate: requires an ALK rearrangement (ALK gene fusion). Alectinib (second-generation ALK TKI) is a preferred first-line option for advanced/metastatic ALK-positive NSCLC. Per Standard Guidelines (NCCN), NSCLC v7.2026, Therapy for Actionable Molecular Markers (ALK Gene Fusion)."
+  },
+  "stage": [
+    "III",
+    "IV",
+    "recurrent/metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "non-small cell lung cancer (predominantly adenocarcinoma; ALK rearrangements are most common in nonsquamous histology)",
+  "premedications": [],
+  "supportiveCare": [
+    "Continuous oral dosing twice daily until disease progression or unacceptable toxicity.",
+    "Monitor for hepatotoxicity, myalgia/CK elevation, bradycardia, and interstitial lung disease per labeling."
+  ],
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "liver function (alectinib)",
+    "creatine kinase and myalgia",
+    "heart rate (bradycardia)",
+    "pulmonary assessment for pneumonitis/ILD"
+  ],
+  "clearanceChecks": [
+    "prior-cycle status",
+    "liver",
+    "CK"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 or higher hepatotoxicity, CK elevation with myalgia, symptomatic bradycardia, or ILD/pneumonitis",
+      "drug": "alectinib",
+      "action": "hold/reduce/discontinue",
+      "text": "Hold, reduce, or discontinue per labeling and clinical review; permanently discontinue for confirmed ILD/pneumonitis."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "alectinib",
+      "name": "Alectinib",
+      "basis": "flat",
+      "dosePerUnit": 600,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed. line 70544 (ALEX, alectinib 600 mg twice daily). Alectinib 600 mg PO TWICE DAILY (BID), continuous, until progression (represented as days 1 to 28 of a 28-day cycle, cycles null). dosePerUnit is the per-dose amount (600 mg); administered twice daily (total 1200 mg/day).",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 70544 (ALEX: alectinib 600 mg twice daily, first-line ALK-positive NSCLC)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

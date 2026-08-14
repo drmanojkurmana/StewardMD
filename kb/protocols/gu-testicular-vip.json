@@ -1,0 +1,182 @@
+{
+  "id": "gu-testicular-vip",
+  "diseaseId": "testicular_germ_cell_tumor",
+  "name": "VIP (Etoposide / Ifosfamide / CISplatin, with mesna)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Testicular Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "AFP": "prognostic and risk-classifying",
+    "beta_hCG": "prognostic and risk-classifying",
+    "LDH": "prognostic and risk-classifying",
+    "note": "Bleomycin-free intensive regimen. Serum tumor markers (AFP, beta-hCG, LDH) define IGCCCG risk. VIP is the bleomycin-sparing alternative for intermediate/poor-risk disease (e.g., pulmonary compromise) or viable germ cell tumor at surgery. Per Standard Guidelines (NCCN), Testicular Cancer, TEST-E."
+  },
+  "stage": [
+    "II",
+    "III"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "germ cell tumor (serves BOTH seminoma and nonseminomatous germ cell tumor / NSGCT)",
+  "premedications": [
+    {
+      "name": "Mesna (uroprotection)",
+      "notes": "Mandatory with ifosfamide to prevent hemorrhagic cystitis. DeVita 12th ed. VIP specifies mesna 400 mg/m2 IV every 8 hours on Days 1 to 5 (line 167563); confirm exact schedule against the institutional ifosfamide order set."
+    },
+    {
+      "name": "Antiemetic prophylaxis (high emetic risk)",
+      "notes": "Multiday CISplatin plus ifosfamide; high-emetic-risk prophylaxis indicated."
+    },
+    {
+      "name": "Hydration",
+      "notes": "IV pre- and post-hydration with each CISplatin dose; adequate hydration also supports mesna uroprotection."
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF: VIP is high risk for febrile neutropenia; granulocyte colony-stimulating factor support should be used (NCCN TEST-E footnote 3).",
+    "Uroprotection: mesna with every ifosfamide dose; monitor urine for hematuria (hemorrhagic cystitis).",
+    "Neurologic: monitor for ifosfamide encephalopathy (confusion, somnolence).",
+    "Antiemetics: high emetic risk (multiday CISplatin plus ifosfamide). Confirm exact institutional/guideline tier.",
+    "Nephroprotection: IV hydration and electrolyte repletion with each CISplatin dose."
+  ],
+  "monitoring": [
+    "Serum tumor markers (AFP, beta-hCG, LDH) before each cycle and at restaging",
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - CISplatin",
+    "Ototoxicity and peripheral neuropathy assessment - CISplatin",
+    "Urinalysis for hematuria - ifosfamide (hemorrhagic cystitis)",
+    "Neurologic status for encephalopathy - ifosfamide",
+    "CBC before each cycle - high febrile-neutropenia risk"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal function and electrolytes",
+    "adequate hydration",
+    "mesna co-administered",
+    "neurologic status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ifosfamide encephalopathy (confusion, somnolence)",
+      "drug": "ifosfamide",
+      "action": "hold/review",
+      "text": "Hold ifosfamide and obtain clinical review; consider methylene blue per institutional protocol. Physician decides."
+    },
+    {
+      "condition": "hemorrhagic cystitis / hematuria",
+      "drug": "ifosfamide",
+      "action": "hold/review",
+      "text": "Increase hydration and mesna, hold ifosfamide, review. Physician decides."
+    },
+    {
+      "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy",
+      "drug": "cisplatin",
+      "action": "hold/reduce/review",
+      "text": "Review required; consider dose reduction or delay. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. Etoposide 75 mg/m2 IV Days 1 to 5. NOTE a divergence: DeVita 12th ed. VIP (line 167562) specifies etoposide 100 mg/m2 IV daily x5; see evidence.divergence. Etoposide dose modeled at the guideline value (75 mg/m2).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Etoposide 75 mg/m2 IV Days 1 to 5)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "ifosfamide",
+      "name": "ifosfamide",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. ifosfamide 1200 mg/m2 IV Days 1 to 5 WITH MESNA PROTECTION (mandatory uroprotection against hemorrhagic cystitis). Monitor for ifosfamide encephalopathy. ISMP tall-man. Corroborated by DeVita 12th ed. (line 167562 to 167564).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Ifosfamide 1200 mg/m2 on Days 1 to 5 with mesna protection)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 20,
+      "unit": "mg/m2",
+      "route": "IV with hydration",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, TEST-E. CISplatin 20 mg/m2 IV Days 1 to 5. ISMP tall-man. No lifetime cumulative cap; requires IV pre/post hydration; monitor nephrotoxicity, ototoxicity, peripheral neuropathy. Corroborated by DeVita 12th ed. (line 167564).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer",
+        "version": "2.2026",
+        "date": null,
+        "locator": "First-Line Chemotherapy Regimens for Germ Cell Tumors (TEST-E), VIP (Cisplatin 20 mg/m2 IV Days 1 to 5)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "modificationRules": []
+    }
+  ]
+}

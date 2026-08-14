@@ -1,0 +1,89 @@
+{
+  "id": "gu-seminoma-carboplatin",
+  "diseaseId": "seminoma",
+  "name": "Single-agent CARBOplatin (AUC 7), stage I seminoma adjuvant",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "1 (single-dose adjuvant) or 2 cycles, each at AUC 7",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Testicular Cancer - Pure Seminoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "AFP": "must be normal (a rising AFP excludes pure seminoma)",
+    "note": "Pure seminoma does not produce AFP; an elevated/rising AFP implies nonseminomatous elements and this adjuvant option would not apply. Per Standard Guidelines (NCCN), Testicular Cancer - Pure Seminoma."
+  },
+  "stage": [
+    "IA",
+    "IB"
+  ],
+  "treatmentSetting": "adjuvant",
+  "histology": "pure seminoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "CARBOplatin AUC 7 is moderately-to-highly emetogenic; prophylaxis per emetogenicity tier. Confirm exact institutional/guideline tier."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: prophylaxis per CARBOplatin emetogenicity tier.",
+    "AUC dosing: compute CARBOplatin dose by the Calvert formula from measured/estimated GFR; verify renal function before dosing.",
+    "G-CSF: not indicated for single-agent adjuvant carboplatin."
+  ],
+  "monitoring": [
+    "Renal function (creatinine/GFR) before dosing - required for AUC (Calvert) calculation",
+    "CBC (nadir counts) after treatment",
+    "Serum tumor markers and imaging surveillance per follow-up schedule"
+  ],
+  "clearanceChecks": [
+    "renal function / GFR for AUC dosing",
+    "CBC/platelets",
+    "pure seminoma histology confirmed (AFP normal)"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "impaired renal function",
+      "drug": "carboplatin",
+      "action": "recalculate",
+      "text": "Recalculate the AUC-based dose from current GFR (Calvert). Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 7,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Pure Seminoma SEM-1. CARBOplatin dosed to target AUC 7 (Calvert formula, not mg/m2), day 1 of each cycle. Given as 1 cycle (single-dose) or 2 cycles. Discussion corroborates AUC x 7 (per the formula 7 x [GFR + 25]). Tall-man per ISMP. Limited long-term toxicity/efficacy follow-up for carboplatin in this setting (NCCN footnote l).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Testicular Cancer - Pure Seminoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Pure Seminoma stage IA/IB Primary Treatment page (SEM-1): Single-agent Carboplatin (area under the curve [AUC] = 7 x 1 cycle or AUC = 7 x 2 cycles)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

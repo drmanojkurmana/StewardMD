@@ -1,0 +1,102 @@
+{
+  "id": "gu-uro-enfortumab-vedotin",
+  "diseaseId": "bladder_cancer",
+  "name": "Enfortumab vedotin (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "Nectin-4",
+    "note": "Enfortumab vedotin is a Nectin-4-directed antibody-drug conjugate delivering the microtubule inhibitor MMAE. Nectin-4 is broadly expressed in urothelial carcinoma and no companion biomarker test is required to treat. Applies to bladder (#57) and upper-tract (#58) urothelial carcinoma. Per Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G)."
+  },
+  "stage": [
+    "IV",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "urothelial carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "HYPERGLYCEMIA: monitor blood glucose before each dose; hold for hyperglycemia (serious/fatal diabetic ketoacidosis reported, including in patients without pre-existing diabetes).",
+    "PERIPHERAL NEUROPATHY: assess before each dose; sensory and motor neuropathy can be dose-limiting - hold/reduce/discontinue per severity.",
+    "SKIN REACTIONS: monitor for severe cutaneous reactions including Stevens-Johnson syndrome / toxic epidermal necrolysis (SJS/TEN); discontinue for severe skin reactions.",
+    "OCULAR toxicity (dry eye/keratopathy): consider prophylactic artificial tears; ophthalmology referral for symptoms.",
+    "Infusion-site extravasation precautions."
+  ],
+  "monitoring": [
+    "blood glucose before each dose (hyperglycemia / DKA risk)",
+    "peripheral neuropathy assessment (sensory and motor) before each dose",
+    "skin assessment for severe cutaneous reactions (SJS/TEN)",
+    "ocular symptoms (dry eye/keratopathy)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "blood glucose",
+    "neuropathy status",
+    "skin/mucosal status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "blood glucose > 250 mg/dL or hyperglycemia",
+      "drug": "enfortumab-vedotin",
+      "action": "hold",
+      "text": "Hold enfortumab vedotin for hyperglycemia (blood glucose > 250 mg/dL) until controlled; monitor for diabetic ketoacidosis."
+    },
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "enfortumab-vedotin",
+      "action": "hold/reduce/discontinue",
+      "text": "Hold, reduce, or discontinue for grade 2 or higher peripheral neuropathy per labeling; obtain clinical review."
+    },
+    {
+      "condition": "severe cutaneous reaction (suspected SJS/TEN)",
+      "drug": "enfortumab-vedotin",
+      "action": "discontinue",
+      "text": "Permanently discontinue enfortumab vedotin for grade 3-4 or suspected SJS/TEN skin reactions; urgent dermatology review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "enfortumab-vedotin",
+      "name": "Enfortumab vedotin",
+      "basis": "mgkg",
+      "dosePerUnit": 1.25,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 20821-20827: 1.25 mg/kg IV on days 1, 8, 15 of a 28-day cycle (cap at 100 kg body weight). Enfortumab vedotin specific safety (hyperglycemia/DKA, peripheral neuropathy, severe skin reactions including SJS/TEN, ocular toxicity) applies.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "DeVita 12e line 20821-20827 (enfortumab vedotin 1.25 mg/kg weekly x3 of a 4-week cycle, urothelial)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -24,6 +24,8 @@
     var parts = [];
     if (drug.dosePerUnit != null) parts.push(drug.dosePerUnit + (drug.unit ? " " + drug.unit : ""));
     if (drug.route) parts.push(drug.route);
+    var freq = drug.frequency || (drug.dosesPerDay > 1 ? ({ 2: "BID", 3: "TID", 4: "QID" }[drug.dosesPerDay] || drug.dosesPerDay + "x/day") : "");
+    if (freq) parts.push(freq);
     var head = parts.join(" "), dm = dayMarker(drug.days);
     return head + (dm ? (head ? ", " : "") + dm : "");
   }
@@ -32,6 +34,7 @@
   // never-invent: no lineage or no final -> "verify", never a guessed number.
   function doseText(lin) {
     if (!lin || lin.final == null) return "verify";
+    if (lin.dosesPerDay > 1 && lin.dailyDose != null) return lin.final + " mg x" + lin.dosesPerDay + "/day = " + lin.dailyDose + " mg/day";
     return lin.final + " mg";
   }
 

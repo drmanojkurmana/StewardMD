@@ -1,0 +1,115 @@
+{
+  "id": "rare-mastocytosis-avapritinib",
+  "name": "Avapritinib (Advanced Systemic Mastocytosis, KIT D816V)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Systemic Mastocytosis",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KIT": "D816V mutation - the driver of the vast majority of SM and the target of avapritinib (a potent selective KIT D816V inhibitor)",
+    "imatinibGuard": "imatinib is INEFFECTIVE against KIT D816V; imatinib is reserved for KIT D816V-mutation-negative or unknown SM (or FIP1L1::PDGFRA-associated disease). False-negative guard: do not substitute imatinib for a D816V-positive patient.",
+    "note": "Avapritinib is FDA-approved for indolent SM and for advanced SM (ASM, SM-AHN, MCL). It is a KIT D816V-selective inhibitor. Per Standard Guidelines (NCCN), Systemic Mastocytosis, SM-6 (ASM), SM-7/SM-8 (SM-AHN), SM-9 (MCL), and the Discussion (PATHFINDER trial)."
+  },
+  "stage": [
+    "advanced (ASM / SM-AHN / MCL)"
+  ],
+  "treatmentSetting": "advanced systemic mastocytosis",
+  "histology": "advanced systemic mastocytosis: aggressive SM (ASM), SM with an associated hematologic neoplasm (SM-AHN), or mast cell leukemia (MCL)",
+  "premedications": [],
+  "supportiveCare": [
+    "Verify platelet count >= 50 x 10^9/L before and during therapy; hold/reduce and reassess for intracranial-bleeding risk if severe thrombocytopenia develops (SM-6 footnote t).",
+    "Continuous daily oral dosing with no defined cycle count; continue until progression, intolerance, or loss of response; consider evaluation for allogeneic HCT on adequate response in eligible SM-AHN/MCL.",
+    "Cognitive-effect and intracranial-hemorrhage counseling per prescribing information."
+  ],
+  "monitoring": [
+    "CBC/platelets (thrombocytopenia; intracranial-bleeding risk if platelets < 50 x 10^9/L)",
+    "serum tryptase, bone marrow mast cell burden, and KIT D816V variant allele fraction (disease-burden response)",
+    "spleen volume / organomegaly and SM-related organ damage (C-findings)",
+    "neurocognitive assessment and signs of intracranial hemorrhage"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets (>= 50 x 10^9/L gate)",
+    "tryptase",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "platelets < 50 x 10^9/L or severe thrombocytopenia",
+      "drug": "avapritinib",
+      "action": "hold/reduce",
+      "text": "Avapritinib is not recommended for platelets < 50 x 10^9/L (SM-6 footnote t); hold/reduce per prescribing information and reassess intracranial-bleeding risk. Obtain clinical review."
+    },
+    {
+      "condition": "intracranial hemorrhage or new neurocognitive changes",
+      "drug": "avapritinib",
+      "action": "hold",
+      "text": "Hold and evaluate; manage per prescribing information (SM-6 footnote u)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "avapritinib",
+      "name": "Avapritinib",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) Systemic Mastocytosis v3.2026, Discussion MS-18 (PATHFINDER, avapritinib 200 mg once daily starting dose for ADVANCED SM) and SM-6/SM-7/SM-9 (Preferred). Given continuously PO once daily (represented as days 1 to 28). NOTE - the INDOLENT SM dose is different: 25 mg once daily (PIONEER trial, MS-17, masto line 2817); the 200 mg dose modeled here is specific to ADVANCED SM. Platelet-count gate: not recommended if platelets < 50 x 10^9/L (SM-6 footnote t) because of intracranial-bleeding risk. Refer to prescribing information for dose modifications (SM-6 footnote u). No ISMP tall-man form for avapritinib.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Systemic Mastocytosis",
+        "version": "3.2026",
+        "date": "2026-07-10",
+        "locator": "Discussion MS-18 (PATHFINDER: advanced SM treated with avapritinib at a starting dose of 200 mg once daily); SM-6 (Preferred: Avapritinib if platelets >= 50 x 10^9/L); masto line 2839",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

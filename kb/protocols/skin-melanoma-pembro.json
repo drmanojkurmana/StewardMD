@@ -1,0 +1,88 @@
+{
+  "id": "skin-melanoma-pembro",
+  "diseaseId": "cutaneous_melanoma",
+  "name": "Pembrolizumab (cutaneous melanoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 200,
+  "cyclesNote": "Adjuvant (resected stage III): pembrolizumab 200 mg IV every 3 weeks for up to 1 year (approximately 17 cycles). Advanced (unresectable stage III / stage IV): pembrolizumab 200 mg IV every 3 weeks until disease progression or unacceptable toxicity (Standard Guidelines (NCCN) v2.2026, Table 14, MS-56). A 400 mg every-6-weeks flat schedule is an accepted labeling alternative but is not printed in the melanoma table and is not modeled.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+    "textbook": ""
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Anti-PD-1 monotherapy. No positive companion biomarker is required to start; applicable regardless of BRAF status. Used in the adjuvant setting for resected high-risk stage III (KEYNOTE-054) and in the unresectable/metastatic setting (KEYNOTE-002, KEYNOTE-006). Per Standard Guidelines (NCCN), Melanoma: Cutaneous, Table 14."
+  },
+  "stage": [
+    "III (resected, adjuvant)",
+    "III (unresectable)",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "cutaneous melanoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities.",
+    "Baseline and periodic thyroid (TSH/free T4), liver function, glucose as indicated."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose) before each cycle and as indicated",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment (advanced disease); recurrence surveillance (adjuvant)"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "CBC",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 14 (MS-56). Pembrolizumab 200 mg IV flat every 3 weeks (FDA prescribing information), until disease progression or unacceptable toxicity. Source-stated weight-based alternative: 2 mg/kg Q3W (KEYNOTE-002, line 8164); the higher 10 mg/kg Q3W/Q2W trial arms (KEYNOTE-002/006) showed no benefit over the standard dose and are not modeled. In the adjuvant setting pembrolizumab 200 mg Q3W is given for up to 1 year; in advanced disease it is continued until progression or unacceptable toxicity (see regimen.cycles).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Pembrolizumab row, MS-56 (line 8170): FDA Prescribing information 200 mg Q3W; KEYNOTE-002 (line 8164) 2 mg/kg Q3W",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

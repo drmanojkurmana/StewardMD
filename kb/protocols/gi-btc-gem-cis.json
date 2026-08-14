@@ -1,0 +1,124 @@
+{
+  "id": "gi-btc-gem-cis",
+  "diseaseId": "cholangiocarcinoma",
+  "name": "Gemcitabine + CISplatin (UK-ABC-02)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "cyclesNote": "up to 8 cycles (a maximum of 6 months of therapy per UK-ABC-02; DeVita lines 114828 to 114829)",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Biliary Tract Cancers",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The cisplatin/gemcitabine cytotoxic backbone is NOT biomarker-restricted. Biliary molecular targets - FGFR2 fusions/rearrangements, IDH1 mutation, HER2 (ERBB2), BRAF V600E, MSI-H/dMMR, and NTRK fusions - are tested to guide targeted or immunotherapy options (predominantly in the subsequent-line setting), not to select or gate the gemcitabine/cisplatin backbone. Per Standard Guidelines (NCCN), Biliary Tract Cancers v1.2026, Targeted therapy (BIL-C 3 of 5) and Principles of Molecular Testing; DeVita 12th ed. Ch. 37 (FGFR2 and IDH1 are the most advanced targets, more common in intrahepatic CCA)."
+  },
+  "stage": [
+    "locally advanced/unresectable",
+    "metastatic",
+    "adjuvant (Other Recommended)"
+  ],
+  "treatmentSetting": [
+    "metastatic",
+    "adjuvant"
+  ],
+  "histology": "adenocarcinoma of the biliary tract",
+  "premedications": [
+    {
+      "name": "Cisplatin hydration",
+      "notes": "pre- and post-cisplatin IV hydration to prevent nephrotoxicity."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "cisplatin is highly emetogenic; give guideline-tier antiemetic prophylaxis before each cisplatin dose."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: cisplatin-based, high emetogenic risk on days 1 and 8; prophylaxis required.",
+    "Cisplatin hydration protocol; monitor renal function, magnesium, and electrolytes.",
+    "Audiometry/neuropathy assessment as clinically indicated (cisplatin oto- and neurotoxicity)."
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1 and 8) - myelosuppression",
+    "renal function (creatinine/GFR), magnesium, and electrolytes before each cisplatin dose",
+    "peripheral neuropathy and hearing assessment - cisplatin",
+    "liver function"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "myelosuppression or renal impairment on day 1 or day 8",
+      "action": "hold/reduce",
+      "text": "Review required; hold or reduce per protocol for cytopenias or rising creatinine. Consider carboplatin substitution if cisplatin-ineligible (NCCN BIL-C footnote g). Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02). Gemcitabine 1,000 mg/m2 IV on days 1 and 8 of a 21-day cycle.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 114827 to 114828 (Ch. 37 Systemic Therapy for Cholangiocarcinoma: gemcitabine 1,000 mg/m2 with cisplatin 25 mg/m2, both IV on days 1 and 8 every 21 days, max 6 months; UK-ABC-02)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 25,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed. Ch. 37, lines 114827 to 114829 (UK-ABC-02). CISplatin 25 mg/m2 IV on days 1 and 8 of a 21-day cycle. ISMP tall-man (CISplatin). Requires pre- and post-hydration; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy. If cisplatin-ineligible, carboplatin may be substituted per NCCN BIL-C footnote g.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 114827 to 114828 (Ch. 37: cisplatin 25 mg/m2 with gemcitabine 1,000 mg/m2, both IV on days 1 and 8 every 21 days; UK-ABC-02)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8
+      ],
+      "modificationRules": []
+    }
+  ]
+}

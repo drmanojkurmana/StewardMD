@@ -1,0 +1,118 @@
+{
+  "id": "gi-anal-carbo-paclitaxel",
+  "diseaseId": "anal_cancer",
+  "name": "CARBOplatin + PACLitaxel (metastatic anal SCC, InterAAct)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Anal Carcinoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "Carboplatin plus paclitaxel is a preferred first-line systemic regimen for metastatic/inoperable anal squamous cell carcinoma, established by the InterAAct trial versus cisplatin/fluorouracil. There is no routine molecular biomarker gate for regimen selection. Per Standard Guidelines (NCCN), Anal Carcinoma, ANAL-B (Principles of Systemic Therapy - Metastatic Cancer)."
+  },
+  "stage": [
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "Corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling (hypersensitivity prophylaxis)."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Carboplatin/paclitaxel is moderately emetogenic; give prophylaxis on day 1."
+    }
+  ],
+  "supportiveCare": [
+    "Weekly paclitaxel (days 1, 8, 15) with carboplatin AUC 5 day 1, repeat every 28 days (InterAAct schedule); or paclitaxel 175 mg/m2 day 1 with carboplatin AUC 5, repeat every 21 days.",
+    "Continue until progression or intolerance.",
+    "Assess peripheral neuropathy each cycle (paclitaxel)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) - carboplatin AUC dosing",
+    "peripheral neuropathy assessment each cycle (paclitaxel)",
+    "hypersensitivity monitoring during paclitaxel and carboplatin infusion",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 neutropenia or grade 2+ peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "hold/reduce",
+      "text": "Hold and reduce paclitaxel per labeling; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Anal v2.2026, ANAL-B (anal lines 631, 635). CARBOplatin target AUC 5 IV on day 1 of a 28-day cycle (Calvert formula). ISMP tall-man: CARBOplatin (distinguish from CISplatin).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Anal Carcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "ANAL-B (Carboplatin AUC 5 IV Day 1; anal lines 631, 635)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Anal v2.2026, ANAL-B (anal line 636). PACLitaxel 80 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle (the weekly-paclitaxel InterAAct schedule paired with carboplatin AUC 5). ALTERNATIVE source-stated schedule: PACLitaxel 175 mg/m2 IV on day 1 with carboplatin AUC 5, repeat every 21 days (anal lines 631 to 632). ISMP tall-man: PACLitaxel. Requires corticosteroid + H1/H2 antihistamine premedication (hypersensitivity prophylaxis).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Anal Carcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "ANAL-B (Paclitaxel 80 mg/m2 IV Days 1, 8, 15; Repeat every 28 Days; anal line 636)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

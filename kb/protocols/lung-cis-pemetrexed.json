@@ -1,0 +1,136 @@
+{
+  "id": "lung-cis-pemetrexed",
+  "diseaseId": "neoplasms_of_the_lung",
+  "name": "CISplatin + Pemetrexed (NSCLC, non-squamous)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 75,
+  "cyclesNote": "Cycle count is not asserted here: the encoded cisplatin 75 / pemetrexed 500 doses are grounded to the NSCL-F concurrent-chemoradiation entry, which specifies 3 cycles at these doses (NSCL-F line 4810). PROCLAIM likewise used 3 cycles during concurrent radiation (DeVita line 68903 to 68904); JIPANG used these doses in the adjuvant setting without a cycle count printed in the corpus (lines 68600 to 68601). The number of cycles for this doublet as systemic therapy is setting-dependent (metastatic first-line, neoadjuvant, or adjuvant) and is left to clinical review; pemetrexed continuation maintenance may follow in the metastatic setting per clinical review.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "non-squamous",
+    "EGFR": "wild-type (or not actionable)",
+    "ALK": "wild-type (or not actionable)",
+    "note": "Cytotoxic platinum/pemetrexed doublet. Pemetrexed is restricted to NON-squamous NSCLC. This regimen is for NSCLC without an actionable oncogenic driver: patients with EGFR exon 19 deletion or L858R, ALK, ROS1, RET, or other targetable driver alterations are directed to targeted therapy first-line, not a cytotoxic doublet. Broad molecular profiling and PD-L1 testing are recommended before first-line therapy. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, Principles of Perioperative Systemic Therapy (NSCL-E) and Principles of Molecular and Biomarker Analysis."
+  },
+  "stage": [
+    "II",
+    "IIIA",
+    "IIIB",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "non-squamous (adenocarcinoma, large cell carcinoma, or NSCLC not otherwise specified); NOT for squamous cell carcinoma (pemetrexed is restricted to non-squamous histology)",
+  "premedications": [
+    {
+      "name": "Pemetrexed supplementation",
+      "notes": "folic acid and vitamin B12 supplementation started before pemetrexed; dexamethasone premedication to reduce rash, per pemetrexed labeling."
+    },
+    {
+      "name": "Cisplatin hydration",
+      "notes": "IV pre- and post-hydration with cisplatin to protect renal function."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "cisplatin is highly emetogenic; give high emetic-risk antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: cisplatin-based regimen is high emetic risk; prophylaxis required on day of treatment",
+    "cisplatin hydration to reduce nephrotoxicity; monitor renal function, hearing, and peripheral neuropathy",
+    "pemetrexed: folic acid + vitamin B12 + dexamethasone premedication"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle - cisplatin nephrotoxicity",
+    "audiometry/hearing and peripheral neuropathy assessment - cisplatin ototoxicity and neurotoxicity",
+    "adequate folic acid / B12 supplementation for pemetrexed"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1500 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Hold or reduce per protocol-specific hematologic criteria; physician decides."
+    },
+    {
+      "condition": "declining creatinine clearance",
+      "drug": "cisplatin",
+      "action": "reduce/switch",
+      "text": "Cisplatin is nephrotoxic; consider carboplatin substitution or dose modification if renal function declines. Clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV with pre- and post-hydration",
+      "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F line 4810 (Cisplatin 75 mg/m2 Day 1). Corroborated in DeVita 12th ed.: PROCLAIM used cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 every 3 weeks (line 68904); JIPANG adjuvant arm cisplatin 75 mg/m2 plus pemetrexed 500 mg/m2 Day 1 every 21 days (lines 68600 to 68601). ISMP tall-man (CISplatin). Cisplatin requires vigorous IV hydration and monitoring for nephrotoxicity, ototoxicity, and neurotoxicity.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+        "version": "7.2026",
+        "date": null,
+        "locator": "NSCL-F 1 of 2 (Concurrent Chemoradiation Regimens, nonsquamous): Cisplatin 75 mg/m2 on Day 1, Pemetrexed 500 mg/m2 on Day 1 every 21 days (line 4810)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "pemetrexed",
+      "name": "Pemetrexed",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F line 4810 (Pemetrexed 500 mg/m2 Day 1). Non-squamous histology only. Requires folic acid and vitamin B12 supplementation plus dexamethasone premedication per pemetrexed labeling. Corroborated in DeVita 12th ed. line 68904 (PROCLAIM).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+        "version": "7.2026",
+        "date": null,
+        "locator": "NSCL-F 1 of 2 (nonsquamous): Pemetrexed 500 mg/m2 on Day 1 every 21 days (line 4810)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

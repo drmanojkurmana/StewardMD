@@ -1,0 +1,98 @@
+{
+  "id": "hn-cisplatin-rt",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "High-dose CISplatin plus concurrent radiation (definitive or postoperative)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HPV_p16": "prognostic only",
+    "note": "For p16-positive (HPV-associated) oropharyngeal cancer, p16/HPV status is strongly prognostic but is NOT a dose gate for this regimen; the concurrent high-dose cisplatin schedule is unchanged. RTOG 1016 and De-ESCALATE established that concurrent high-dose cisplatin was superior to cetuximab in p16-positive oropharyngeal cancer (Standard Guidelines (NCCN), Head and Neck Cancers, algorithm HN region; DeVita 12th ed., Chapter 23, line 62062)."
+  },
+  "stage": [
+    "III",
+    "IVA",
+    "IVB"
+  ],
+  "treatmentSetting": [
+    "definitive-chemoRT",
+    "adjuvant"
+  ],
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis (high emetic risk)",
+      "notes": "Cisplatin 100 mg/m2 is highly emetogenic; high-emetic-risk prophylaxis indicated. Confirm exact institutional antiemetic tier."
+    },
+    {
+      "name": "Hydration",
+      "notes": "Aggressive IV pre- and post-hydration to reduce nephrotoxicity, per cisplatin standard of care (DeVita 12th ed., Chapter 23, lines 58194 to 58200)."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: high emetic risk (cisplatin-containing); prophylaxis required. Confirm exact institutional/guideline tier.",
+    "Nephroprotection: mandatory IV hydration and electrolyte (Mg, K) repletion with each dose."
+  ],
+  "monitoring": [
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - cisplatin nephrotoxicity",
+    "Audiometry / ototoxicity assessment (high-frequency hearing loss, tinnitus) - cisplatin",
+    "Peripheral neuropathy assessment before each cycle - cisplatin",
+    "CBC before each cycle"
+  ],
+  "clearanceChecks": [
+    "renal function and electrolytes",
+    "adequate hydration",
+    "CBC/platelets",
+    "otologic/neurologic baseline",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "rising creatinine / falling GFR or significant ototoxicity or grade 2+ neuropathy",
+      "drug": "cisplatin",
+      "action": "hold/reduce/switch",
+      "text": "Review required. Consider dose reduction, delay, or switch to carboplatin-based or weekly schedule per clinical judgement. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV with pre- and post-hydration",
+      "notes": "Source: cisplatin 100 mg/m2 IV every 21 days concurrent with radiation, for a total of 3 cycles (2 to 3 depending on fractionation). Corroborated DeVita 12th ed., Chapter 23, lines 58086 to 58088 (100 mg per m2 every 3 weeks for a total of 3 cycles) and formulary line 14827 (Head and neck cancer: 100 mg/m2 IV). ISMP tall-man. No lifetime cumulative cap for cisplatin; monitor for nephrotoxicity, ototoxicity, and peripheral neuropathy and ensure pre- and post-hydration.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Definitive concurrent schedule: single-agent cisplatin every 3 weeks at 100 mg/m2, 2 to 3 cycles depending on fractionation (algorithm HN region, lines 1281, 3976, 4332); Discussion, high-dose cisplatin 100 mg/m2 every 3 weeks for up to three cycles (line 8778); postoperative concurrent, cisplatin 100 mg/m2 every 3 weeks for three doses (line 8287)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "id": "folfiri",
+  "diseaseId": "colorectal_cancer",
+  "name": "FOLFIRI (Douillard)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KRAS": "tested",
+    "NRAS": "tested",
+    "BRAF_V600E": "tested",
+    "HER2_ERBB2": "tested",
+    "MMR_MSI": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic FOLFIRI (leucovorin/fluorouracil/irinotecan) backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "give before irinotecan per moderate emetic risk tier (appendix D)"
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: moderate emetic risk tier (irinotecan IV, 30-90% frequency of emesis per NCCN appendix D categories); specific FOLFIRI per-day tier not printed in the provided appendix excerpt (no per-regimen table included) - verify against full NCCN Antiemesis guideline",
+    "G-CSF: febrile neutropenia risk level not printed for FOLFIRI in the provided appendix C excerpt (general risk-tier framework only, no per-regimen table) - commonly categorized intermediate risk in oncology practice; verify against NCCN Hematopoietic Growth Factors guideline before applying",
+    "Administration sequence per appendix F: irinotecan and leucovorin given concurrently (same line via Y-connector), followed by 5-FU bolus, followed by 5-FU 22-hr infusion, per source"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal and hepatic function (5-FU/irinotecan clearance)",
+    "assess for diarrhea (irinotecan-associated) before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle GI toxicity/diarrhea status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for dose modification on the basis of UGT1A1 polymorphism in routine colorectal-cancer practice, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 121523 to 121531"
+    }
+  ],
+  "drugs": [
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 180,
+      "unit": "mg/m2",
+      "route": "IV over 2 hr",
+      "notes": "Douillard et al. 2000, DeVita 12th ed. line 123582/123587: 180 mg/m2 IV over 2 hr, day 1 only, concurrently with leucovorin (can be given in same line through Y connector).",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "DeVita 12th ed. line 123587-123588: 200 mg/m2 IV, concurrently with irinotecan on day 1; days 1 and 2 per source (\"all other meds given days 1 and 2\").",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "5-Fluorouracil (bolus)",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "notes": "DeVita 12th ed. line 123588: 400 mg/m2 IV bolus, days 1 and 2, given after irinotecan/leucovorin.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "5-Fluorouracil (infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 600,
+      "unit": "mg/m2",
+      "route": "IV over 22 hr",
+      "notes": "DeVita 12th ed. line 123588: 600 mg/m2 IV infusion over 22 hr, days 1 and 2, given after the 5-FU bolus.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    }
+  ]
+}

@@ -150,6 +150,13 @@
     // history, Phase 5). Surface it so the absence of enforcement is never silent (R1 requirement).
     var cl = drug.caps && drug.caps.cumulativeLifetime;
     if (cl) lin.warnings.push("Cumulative lifetime dose (warn " + cl.warn + " / hard " + cl.hard + " " + (cl.unit || "mg/m2") + ") is NOT auto-enforced in v1 - verify prior exposure manually.");
+    // Intra-day frequency: `final` stays a per-ADMINISTRATION dose. dosesPerDay (or a frequency token)
+    // yields the DAILY dose the workbench surfaces, so a BID/TID oral drug is not shown at a single
+    // administration's mg as if it were the whole day. Default 1 => dailyDose === final, so every
+    // existing drug and golden test is byte-identical (legacy IV-chemo path unchanged).
+    var FREQ = { QD: 1, OD: 1, DAILY: 1, HS: 1, BID: 2, BD: 2, TID: 3, TDS: 3, QID: 4, QDS: 4 };
+    lin.dosesPerDay = drug.dosesPerDay || FREQ[String(drug.frequency || "").toUpperCase()] || 1;
+    lin.dailyDose = (lin.final == null) ? null : round2(lin.final * lin.dosesPerDay);
     return lin;
   }
 

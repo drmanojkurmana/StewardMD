@@ -1,0 +1,109 @@
+{
+  "id": "breast-carbo-paclitaxel",
+  "diseaseId": "breast_cancer",
+  "name": "CARBOplatin / PACLitaxel (metastatic)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "negative",
+    "note": "Cytotoxic platinum/taxane doublet; the backbone is not biomarker-restricted, listed under HER2-negative recurrent/metastatic regimens. Particularly relevant for triple-negative disease (subtype #3) and germline BRCA1/2 carriers (platinum sensitivity). Germline BRCA1/2 status is tested to identify PARP-inhibitor candidates. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-Q 9 of 15."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling to prevent hypersensitivity."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetics: carboplatin/paclitaxel is moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Assess germline BRCA1/2 status in all patients with recurrent/metastatic breast cancer to identify PARP-inhibitor candidates (BINV-Q)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each cycle (CARBOplatin)",
+    "peripheral neuropathy assessment (PACLitaxel)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 6,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 9 of 15. CARBOplatin AUC 6 IV on day 1 (target AUC), every 21 days. Tall-man per ISMP. For germline-BRCA/TNBC single-agent use, carboplatin AUC 6 IV day 1 every 21 to 28 days is also source-stated (same page).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-Q 9 of 15 (Carboplatin/Paclitaxel: Carboplatin AUC 6 IV Day 1, cycled every 21 days)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 175,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 9 of 15. The guideline states PACLitaxel 175 to 200 mg/m2 IV on day 1 every 21 days; dosePerUnit is set to the lower bound (175 mg/m2), full sourced range 175 to 200 mg/m2. Tall-man per ISMP.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-Q 9 of 15 (Paclitaxel 175 to 200 mg/m2 IV Day 1, cycled every 21 days)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

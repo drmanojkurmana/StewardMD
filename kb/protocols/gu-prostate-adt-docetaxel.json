@@ -1,0 +1,92 @@
+{
+  "id": "gu-prostate-adt-docetaxel",
+  "diseaseId": "prostate_cancer",
+  "name": "ADT plus DOCEtaxel (metastatic castration-sensitive prostate cancer)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Prostate Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Cytotoxic intensification is not biomarker-restricted; ADT is the required castration backbone. Docetaxel intensification is most established for high-volume synchronous metastatic castration-sensitive disease. Per Standard Guidelines (NCCN), Prostate Cancer, Principles of ADT for mCSPC (PROS-G) and Discussion."
+  },
+  "stage": [
+    "M1 CSPC (metastatic castration-sensitive)"
+  ],
+  "treatmentSetting": "mCSPC (metastatic castration-sensitive)",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "premedications": [
+    {
+      "name": "Corticosteroid premedication for docetaxel (fluid retention / hypersensitivity)",
+      "notes": "Give per docetaxel labeling (dexamethasone premedication); specific premedication schedule not enumerated in the provided prostate extract."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Provide per emetogenic-risk tier on the day of chemotherapy."
+    }
+  ],
+  "supportiveCare": [
+    "continue ADT (LHRH agonist/antagonist or orchiectomy) throughout to maintain castrate testosterone below 50 ng/dL (PROS-G footnote h).",
+    "an androgen-receptor pathway inhibitor (abiraterone, apalutamide, darolutamide, or enzalutamide) is added as triplet therapy in fit patients per PROS-G (prostate lines 2957 to 2961); see gu-prostate-adt-arpi for ARPI dosing.",
+    "G-CSF: assess febrile-neutropenia risk per taxane chemotherapy standards.",
+    "monitor for peripheral neuropathy, fluid retention, and hypersensitivity (docetaxel)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "hepatic function before each cycle (docetaxel)",
+    "peripheral neuropathy assessment before each cycle",
+    "PSA and serum testosterone (confirm castrate level)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "castrate testosterone maintained",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 neutropenia or febrile neutropenia",
+      "drug": "docetaxel",
+      "action": "hold/reduce",
+      "text": "Hold and dose-reduce docetaxel per labeling; consider G-CSF prophylaxis; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026 Discussion, prostate line 6889 (docetaxel 75 mg/m2 IV every 3 weeks x 6 doses plus ADT). ISMP tall-man DOCEtaxel. 75 mg/m2 IV on day 1 of a 21-day cycle, for 6 cycles. In the mCSPC (castration-sensitive) doublet setting docetaxel is given WITHOUT prednisone.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Prostate Cancer",
+        "version": "6.2026",
+        "date": "2026-07-28",
+        "locator": "Discussion, prostate line 6889 (docetaxel 75 mg/m2 IV every 3 weeks x 6 doses plus ADT); prostate line 6901 (confirmed survival advantage of adding docetaxel 75 mg/m2 IV every 3 weeks)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

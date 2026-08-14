@@ -1,0 +1,110 @@
+{
+  "id": "breast-capecitabine",
+  "diseaseId": "breast_cancer",
+  "name": "Capecitabine",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Single-agent oral fluoropyrimidine; the cytotoxic backbone is NOT biomarker-restricted. Two grounded uses: (1) adjuvant for residual triple-negative disease after preoperative taxane/alkylator/anthracycline chemotherapy (subtype #3, TNBC; CREATE-X/Masuda), and (2) palliative single-agent therapy for HR-positive/HER2-negative (subtype #5) or HER2-negative recurrent/metastatic disease. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-M 5 of 10 and BINV-Q 9 of 15."
+  },
+  "stage": [
+    "I",
+    "II",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: capecitabine is low-to-moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Counsel on hand-foot syndrome, diarrhea, and stomatitis; hold/reduce per labeling for grade 2 or higher toxicity.",
+    "Assess DPYD status per institutional policy before fluoropyrimidine therapy (risk of severe toxicity in DPD deficiency)."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "hepatic and renal function before each cycle",
+    "hand-foot syndrome and diarrhea assessment each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle toxicity status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher hand-foot syndrome, diarrhea, or stomatitis",
+      "drug": "capecitabine",
+      "action": "hold/reduce",
+      "text": "Interrupt capecitabine until resolution to grade 0 to 1, then resume at a reduced dose per labeling; obtain clinical review."
+    },
+    {
+      "condition": "known DPYD deficiency (DPD)",
+      "drug": "capecitabine",
+      "action": "reduce/avoid",
+      "text": "Reduce starting dose or avoid in DPD deficiency due to risk of severe or fatal fluoropyrimidine toxicity; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) v6.2026. The guideline states a dose RANGE of 1000 to 1250 mg/m2 PO twice daily on days 1 to 14 of a 21-day cycle (metastatic monotherapy BINV-Q 9 of 15; adjuvant residual-disease BINV-M 5 of 10). dosePerUnit is set to the lower bound (1000 mg/m2); the full sourced range is 1000 to 1250 mg/m2 twice daily. Adjuvant use is 6 to 8 cycles; metastatic use continues until progression.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "BINV-Q 9 of 15 (Capecitabine 1000 to 1250 mg/m2 PO twice daily on Days 1 to 14; cycled every 21 days); adjuvant BINV-M 5 of 10 (1000 to 1250 mg/m2 PO twice daily Days 1 to 14, every 21 days for 6 to 8 cycles)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

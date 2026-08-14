@@ -1,0 +1,83 @@
+{
+  "id": "breast-tdm1",
+  "diseaseId": "breast_cancer",
+  "name": "Ado-Trastuzumab Emtansine (T-DM1)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "positive",
+    "note": "HER2-directed antibody-drug conjugate (trastuzumab linked to emtansine, a microtubule inhibitor): requires HER2-positive disease (IHC 3+ or ISH-amplified). Per DeVita 12th ed. and Standard Guidelines (NCCN), Invasive Breast Cancer."
+  },
+  "stage": [
+    "IV"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: low-to-moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Cardiac: evaluate LVEF before and during HER2-targeted therapy (BINV-M 1 of 10).",
+    "Monitor platelets (thrombocytopenia) and hepatic transaminases (transaminitis) each cycle per DeVita adverse-event profile (line 21439)."
+  ],
+  "monitoring": [
+    "platelet count before each cycle (thrombocytopenia)",
+    "hepatic transaminases before each cycle (transaminitis)",
+    "LVEF at baseline and periodically",
+    "peripheral neuropathy assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "LVEF",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 thrombocytopenia or significant transaminase elevation",
+      "drug": "ado-trastuzumab emtansine",
+      "action": "hold/reduce",
+      "text": "Hold or dose-reduce per labeling for thrombocytopenia or hepatotoxicity; obtain clinical review. DeVita reports thrombocytopenia 12.8% and transient transaminitis 4.3% (line 21439)."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "ado-trastuzumab-emtansine",
+      "name": "Ado-trastuzumab emtansine (T-DM1)",
+      "basis": "mgkg",
+      "dosePerUnit": 3.6,
+      "unit": "mg/kg",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., ado-trastuzumab emtansine 3.6 mg/kg IV every 3 weeks (every 21 days) for HER2-positive metastatic breast cancer (lines 20796 to 20802; 21438). Concordant with Standard Guidelines (NCCN) v6.2026 metastatic dosing (T-DM1 3.6 mg/kg IV day 1, every 21 days, BINV-Q 10 of 15). Do not confuse with fam-trastuzumab deruxtecan; do not substitute trastuzumab and hyaluronidase-oysk for this agent.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Cancer PPO 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 20796 to 20802 (drug table: ado-trastuzumab emtansine 3.6 mg/kg IV every 3 wk, HER2-positive metastatic breast cancer); line 21438 (dosed at 3.6 mg/kg IV every 21 days)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

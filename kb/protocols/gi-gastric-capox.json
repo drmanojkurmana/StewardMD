@@ -1,0 +1,129 @@
+{
+  "id": "gi-gastric-capox",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "name": "CAPOX (Capecitabine / OXALIplatin), adjuvant or perioperative",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Gastric Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "tested",
+    "MMR_MSI": "tested",
+    "note": "CAPOX (capecitabine plus oxaliplatin) is a cytotoxic doublet and is not biomarker-restricted. HER2 and MMR or MSI status are tested to guide add-on or alternative therapy, not the doublet itself. Per Standard Guidelines (NCCN), Gastric Cancer v3.2026, Postoperative Chemotherapy and Principles of Biomarker Testing."
+  },
+  "stage": [
+    "II",
+    "III (resected, after D2 lymph node dissection)"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "perioperative"
+  ],
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Cycle count: 8 cycles over approximately 6 months in the adjuvant CLASSIC setting (DeVita 12th ed., line 102749).",
+    "DPYD: consider DPYD genotype or phenotype testing before capecitabine; reduce or avoid on deficiency.",
+    "Antiemetics: oxaliplatin-based, moderate emetic risk; prophylaxis per emetogenicity tier.",
+    "Hand-foot syndrome counseling for capecitabine."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each cycle (OXALIplatin)",
+    "peripheral neuropathy assessment before each cycle (OXALIplatin)",
+    "hand-foot syndrome / diarrhea assessment (capecitabine)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "neuropathy status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher hand-foot syndrome or diarrhea",
+      "drug": "capecitabine",
+      "action": "hold/reduce",
+      "text": "Hold capecitabine until recovery then reduce per grade; obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "oxaliplatin",
+      "name": "OXALIplatin",
+      "basis": "bsa",
+      "dosePerUnit": 130,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: DeVita 12th ed., line 99169. OXALIplatin 130 mg/m2 IV on day 1, every 3 weeks. Tall-man per ISMP. See divergence note: DeVita prints this 130 mg/m2 q3w oxaliplatin dose paired with capecitabine 850 mg/m2 twice daily in the LOGiC trial context; the CLASSIC adjuvant CAPOX pairing (capecitabine 1000 mg/m2 twice daily) is recorded on the capecitabine entry.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 99169 (oxaliplatin 130 mg/m2 on day 1 every 3 weeks, HER2-positive GEJ or gastric adenocarcinoma)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "PO twice daily",
+      "notes": "Source: DeVita 12th ed., line 98868. Capecitabine 1000 mg/m2 orally twice daily on days 1 to 14 (this per-dose is the twice-daily dose). DPYD deficiency raises fluoropyrimidine toxicity risk; consider DPYD testing before first dose.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 98868 (capecitabine 1000 mg/m2 twice a day for 14 days, gastric or GEJ adenocarcinoma)",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "id": "rare-mlne-imatinib",
+  "name": "Imatinib (Myeloid/Lymphoid Neoplasm with Eosinophilia, PDGFRA- or PDGFRB-rearranged)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Myeloid/Lymphoid Neoplasms with Eosinophilia and Tyrosine Kinase Gene Fusions",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "PDGFRA": "rearrangement (eg FIP1L1::PDGFRA) - dramatically imatinib-sensitive; this is the biomarker gate for imatinib",
+    "PDGFRB": "rearrangement - imatinib-sensitive; this is the biomarker gate for imatinib",
+    "FGFR1": "rearrangement is NOT imatinib-responsive (treated with an FGFR1-active agent eg pemigatinib or midostaurin, per MLNE-7) - do not use imatinib",
+    "JAK2": "rearrangement is NOT imatinib-responsive (treated with a JAK2-active agent eg ruxolitinib, per MLNE-8) - do not use imatinib",
+    "resistanceMutations": "PDGFRA T674I and D842V are imatinib-resistant kinase-domain mutations (false-negative guard: a PDGFRA-rearranged case that fails imatinib should be evaluated for these)",
+    "note": "Imatinib is the recommended first-line tyrosine kinase inhibitor ONLY for MLNe driven by a PDGFRA or PDGFRB rearrangement. FGFR1- and JAK2-rearranged MLNe are NOT imatinib-responsive and are directed to other targeted agents (pemigatinib/midostaurin for FGFR1; ruxolitinib for JAK2). Per Standard Guidelines (NCCN), Myeloid/Lymphoid Neoplasms with Eosinophilia and Tyrosine Kinase Gene Fusions, MLNE-5 (PDGFRA), MLNE-6 (PDGFRB), MLNE-7 (FGFR1), MLNE-8 (JAK2), and DeVita 12th ed. / Harrison 22nd ed."
+  },
+  "stage": [
+    "chronic phase",
+    "blast phase"
+  ],
+  "treatmentSetting": "chronic phase (also used in blast phase, with or as an adjunct to acute-leukemia induction chemotherapy)",
+  "histology": "myeloid/lymphoid neoplasm with eosinophilia harboring a PDGFRA (eg FIP1L1::PDGFRA) or PDGFRB rearrangement; may present in chronic phase or as blast phase (AML, ALL, mixed-phenotype acute leukemia, or extramedullary myeloid sarcoma / lymphoblastic lymphoma)",
+  "premedications": [],
+  "supportiveCare": [
+    "Concurrent corticosteroids for 7 to 10 days when initiating imatinib in patients with symptoms/signs of cardiac involvement (troponinemia and/or abnormal ECHO); cardiology consultation recommended (eosinophil-mediated cardiac damage / heart failure risk). Source: NCCN MLNe v2.2026, MLNE-5/MLNE-6.",
+    "Continuous daily oral dosing with no defined cycle count; continue for durable response and monitor for cytogenetic/molecular clonal evolution (including imatinib-resistance mutations PDGFRA T674I/D842V).",
+    "Tumor lysis / high eosinophil-burden precautions and cardiac monitoring at initiation given the eosinophilic disease context."
+  ],
+  "monitoring": [
+    "CBC and absolute eosinophil count (hematologic response; CHR typically by 1 month)",
+    "cytogenetic response by FISH (typically by 3 months) and, if available, molecular response by RT-PCR, every 3 to 6 months",
+    "cardiac assessment (troponin, ECHO) at initiation for eosinophil-mediated cardiac injury",
+    "imaging to document target-organ / extramedullary disease response if clinically indicated",
+    "evaluate adherence and screen for resistance mutations (PDGFRA T674I/D842V) on loss of response"
+  ],
+  "clearanceChecks": [
+    "CBC/eosinophils",
+    "cardiac (troponin/ECHO) at initiation",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "PDGFRB-rearranged disease",
+      "drug": "imatinib",
+      "action": "dose selection",
+      "text": "Imatinib 100 to 400 mg daily, with 400 mg daily generally used as the induction dose (NCCN MLNe v2.2026, MLNE-6; mlne lines 529, 546)."
+    },
+    {
+      "condition": "blast phase",
+      "drug": "imatinib",
+      "action": "dose selection",
+      "text": "Imatinib 100 to 400 mg daily; may be added to AML- or ALL-type induction chemotherapy or given as monotherapy (NCCN MLNe v2.2026, MLNE-5/MLNE-6; mlne lines 485, 546)."
+    },
+    {
+      "condition": "sustained complete hematologic + cytogenetic (FISH) response",
+      "drug": "imatinib",
+      "action": "maintenance de-escalation",
+      "text": "Maintenance doses as low as 100-200 mg weekly have been used with sustained responses (MLNE-5 footnote t); reduction to 100 mg daily may be considered for PDGFRB after CHR/CCyR (MLNE-6 footnote x)."
+    },
+    {
+      "condition": "loss of response / resistance",
+      "drug": "imatinib",
+      "action": "evaluate",
+      "text": "Evaluate adherence and for clonal evolution / imatinib-resistance mutations (PDGFRA T674I, D842V); if a resistance mutation is found consider a TKI with potential activity (eg avapritinib for D842V) or refer for clinical trial, and consider HCT evaluation. Obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "imatinib",
+      "name": "Imatinib",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: Standard Guidelines (NCCN) MLNe v2.2026, MLNE-5 and MLNE-6; DeVita 12th ed. (FIP1L1-PDGFRA imatinib, line 22660) and Harrison 22nd ed. (line 124607, excellent response to imatinib). Imatinib is given continuously PO once daily (represented as days 1 to 28). DOSE VARIES BY FUSION: PDGFRA-rearranged (eg FIP1L1::PDGFRA) - 100 mg daily (modeled value); PDGFRB-rearranged - 100 to 400 mg daily, with 400 mg daily generally used as the induction dose (MLNE-6); blast-phase disease - 100 to 400 mg daily, may be added to AML- or ALL-type induction chemotherapy or given as monotherapy (MLNE-5/MLNE-6). MAINTENANCE: after sustained complete hematologic and complete cytogenetic (FISH) response, doses as low as 100-200 mg weekly have been used (MLNE-5 footnote t); reduction to 100 mg daily may be considered for PDGFRB after CHR/CCyR (MLNE-6 footnote x). No ISMP tall-man form for imatinib.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Myeloid/Lymphoid Neoplasms with Eosinophilia and Tyrosine Kinase Gene Fusions",
+        "version": "2.2026",
+        "date": "2026-08-05",
+        "locator": "MLNE-5 (PDGFRA rearrangement: Imatinib 100 mg daily; footnote t maintenance as low as 100-200 mg weekly after sustained CHR/CCyR); MLNE-6 (PDGFRB rearrangement: Imatinib 100-400 mg daily, 400 mg generally used as induction); mlne lines 470, 474, 485, 529, 546, 574, 1758-1772",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": []
+    }
+  ]
+}

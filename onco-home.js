@@ -99,7 +99,7 @@
     if (!G.fetch) return;
     try {
       G.fetch("/kb/protocols/index.json").then(function (r) { return (r && r.ok) ? r.json() : null; })
-        .then(function (j) { _protocols = (j && (j.protocols || j)) || []; if (!(_protocols instanceof Array)) _protocols = []; })
+        .then(function (j) { var all = (j && (j.protocols || j)) || []; if (!(all instanceof Array)) all = []; _protocols = flag("smd_onco_protolib") ? all : all.filter(function (p) { return !(p && p.experimental); }); })
         .catch(function () {});
     } catch (e) {}
   }

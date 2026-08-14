@@ -1,0 +1,143 @@
+{
+  "id": "sclc-platinum-etoposide",
+  "diseaseId": "sclc",
+  "name": "Platinum + Etoposide (CISplatin or CARBOplatin) for SCLC",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "The cytotoxic platinum plus etoposide backbone is NOT biomarker-gated. No predictive biomarker selects this regimen in SCLC. Per Standard Guidelines (NCCN), Small Cell Lung Cancer v1.2027, Principles of Systemic Therapy (SCL-E)."
+  },
+  "stage": [
+    "limited-stage",
+    "extensive-stage"
+  ],
+  "treatmentSetting": "primary",
+  "histology": "small cell lung cancer (small cell carcinoma; high-grade neuroendocrine)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis (highly emetogenic)",
+      "notes": "cisplatin-based platinum plus etoposide is highly emetogenic; give guideline-tier antiemetic prophylaxis before chemotherapy."
+    }
+  ],
+  "supportiveCare": [
+    "Four cycles of cytotoxic chemotherapy are recommended (up to 6 cycles in selected extensive-stage patients based on response/tolerability). Source: SCLC v1.2027, SCL-E lines 947 and 962.",
+    "cisplatin: IV hydration and nephro-/oto-/neurotoxicity monitoring (magnesium repletion).",
+    "Limited-stage with concurrent thoracic RT: planned cycle length every 21 to 28 days; myeloid growth factors are not recommended during concurrent chemoradiation. Source: SCLC v1.2027, SCL-E line 948.",
+    "For IO-eligible EXTENSIVE-stage disease, standard of care adds immunotherapy to this platinum plus etoposide backbone (see sclc-atezolizumab or sclc-durvalumab); the platinum plus etoposide backbone alone remains appropriate for limited-stage disease and for IO-ineligible patients."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) and magnesium before each cisplatin cycle",
+    "audiometry/neuropathy assessment (cisplatin)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC or platelet nadir, or worsening renal function",
+      "action": "delay/reduce",
+      "text": "Delay or reduce per clinical review; consider switching cisplatin to carboplatin for renal impairment or intolerance."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV (with hydration)",
+      "notes": "PREFERRED PLATINUM (choose CISplatin OR CARBOplatin, not both). Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E line 951. CISplatin 75 mg/m2 IV day 1. Requires IV hydration and nephro-/oto-/neurotoxicity precautions (cisplatin; DeVita 12th ed. line 132304 hydration, line 16606 irreversible nephro-, neuro-, ototoxicities). Alternative cisplatin schedules are source-stated: 60 mg/m2 day 1 with etoposide 120 mg/m2 days 1 to 3 (line 952), or 25 mg/m2 days 1 to 3 with etoposide 100 mg/m2 days 1 to 3 (line 959).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, line 951 (Cisplatin 75 mg/m2 Day 1 and Etoposide 100 mg/m2 Days 1, 2, 3)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "ALTERNATIVE PLATINUM (choose CARBOplatin OR CISplatin, not both). Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E line 953. CARBOplatin dosed by Calvert AUC target 5 to 6, day 1 (dosePerUnit is the target AUC = 5; source range is AUC 5 to 6). basis auc per ISMP/Calvert.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, line 953 (Carboplatin AUC 5 to 6 Day 1 and Etoposide 100 mg/m2 Days 1, 2, 3)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) SCLC v1.2027, SCL-E lines 951 and 953. Etoposide 100 mg/m2 IV days 1, 2, 3. With the cisplatin 60 mg/m2 variant, etoposide is 120 mg/m2 days 1 to 3 (line 952).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Small Cell Lung Cancer",
+        "version": "1.2027",
+        "date": null,
+        "locator": "SCL-E 1 of 6, lines 951 and 953 (Etoposide 100 mg/m2 Days 1, 2, 3)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 5
+      },
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "modificationRules": []
+    }
+  ]
+}

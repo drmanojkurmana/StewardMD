@@ -1,0 +1,131 @@
+{
+  "id": "lung-carbo-paclitaxel",
+  "diseaseId": "neoplasms_of_the_lung",
+  "name": "CARBOplatin + PACLitaxel (NSCLC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "cyclesNote": "typically 4 cycles as a platinum doublet in the metastatic and perioperative settings; per clinical review",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "any",
+    "EGFR": "wild-type (or not actionable)",
+    "ALK": "wild-type (or not actionable)",
+    "note": "Cytotoxic carboplatin/paclitaxel doublet is not biomarker-restricted and is used across NSCLC histologies. For first-line use it is for NSCLC without an actionable oncogenic driver: driver-positive disease (EGFR/ALK/ROS1/etc.) is directed to targeted therapy. Broad molecular profiling and PD-L1 testing recommended before first-line therapy. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, NSCL-E and NSCL-F."
+  },
+  "stage": [
+    "II",
+    "IIIA",
+    "IIIB",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "metastatic",
+    "adjuvant",
+    "neoadjuvant"
+  ],
+  "histology": "any NSCLC histology (squamous and non-squamous); carboplatin/paclitaxel is a histology-agnostic platinum doublet",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling to prevent hypersensitivity."
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "carboplatin/paclitaxel is moderate emetic risk; give prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "antiemetics: moderate emetic risk; prophylaxis on day of treatment",
+    "paclitaxel hypersensitivity premedication (corticosteroid + antihistamines)",
+    "carboplatin dosed to target AUC (Calvert formula) using measured or estimated GFR"
+  ],
+  "monitoring": [
+    "CBC before each cycle - carboplatin thrombocytopenia and neutropenia",
+    "peripheral neuropathy assessment before each cycle - paclitaxel",
+    "renal function (GFR) before each cycle (drives AUC dosing)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1500 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Hold or reduce per protocol-specific hematologic criteria; physician decides."
+    },
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "reduce/hold",
+      "text": "Reduce or hold paclitaxel per neuropathy grade; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 6,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F footnote g line 4838 (carboplatin AUC 6 every 21 days as the carboplatin/paclitaxel doublet dose). Target AUC dosed by Calvert formula (basis auc, unit AUC, dosePerUnit is the target AUC). ISMP tall-man (CARBOplatin).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+        "version": "7.2026",
+        "date": null,
+        "locator": "NSCL-F 1 of 2, footnote g: paclitaxel 200 mg/m2 and carboplatin AUC 6 every 21 days (line 4838)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F footnote g line 4838 (paclitaxel 200 mg/m2 every 21 days). Requires corticosteroid + H1/H2 antihistamine premedication per paclitaxel labeling. ISMP tall-man (PACLitaxel). Note: with concurrent thoracic radiation a lower weekly schedule (carboplatin AUC 2 + paclitaxel 45 to 50 mg/m2 weekly) is used instead (NSCL-F lines 4811, 4814).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer",
+        "version": "7.2026",
+        "date": null,
+        "locator": "NSCL-F 1 of 2, footnote g: paclitaxel 200 mg/m2 and carboplatin AUC 6 every 21 days (line 4838)",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

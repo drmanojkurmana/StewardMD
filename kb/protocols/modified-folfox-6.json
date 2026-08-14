@@ -1,0 +1,146 @@
+{
+  "id": "modified-folfox-6",
+  "diseaseId": "colorectal_cancer",
+  "name": "Modified FOLFOX-6",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "KRAS": "tested",
+    "NRAS": "tested",
+    "BRAF_V600E": "tested",
+    "HER2_ERBB2": "tested",
+    "MMR_MSI": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic FOLFOX (fluorouracil/leucovorin/oxaliplatin) backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+  },
+  "stage": [
+    "II (high-risk)",
+    "III",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Antiemetics: moderate emetogenic risk tier (oxaliplatin) per NCCN Chemotherapy Order Template Appendix D - Antiemesis guideline prophylaxis for moderate emetic risk IV agents",
+    "G-CSF: FOLFOX-based regimens are generally low febrile-neutropenia risk; per NCCN Appendix C, low-risk regimens are not assigned a specific FN risk designation on the Template - prophylactic CSF not routinely recommended, consider per patient-specific factors"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle - platinum agent",
+    "neurologic assessment for oxaliplatin-related peripheral neuropathy"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status",
+    "neuropathy grade"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "oxaliplatin",
+      "name": "OXALIplatin",
+      "basis": "bsa",
+      "dosePerUnit": 85,
+      "unit": "mg/m2",
+      "route": "IV over 2 hr",
+      "notes": "DeVita 12th ed., Table 40.13 (line 123733): Oxaliplatin 85 mg/m2 over 2 hr, day 1 only.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "leucovorin",
+      "name": "Leucovorin",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV, concurrently with oxaliplatin (may be given via Y-connector)",
+      "notes": "DeVita 12th ed., Table 40.13 (line 123733): LV 400 mg/m2 concurrently with oxaliplatin, day 1.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-bolus",
+      "name": "Fluorouracil (bolus)",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "notes": "DeVita 12th ed., Table 40.13 (line 123734): 5-FU bolus 400 mg/m2, day 1, following oxaliplatin/LV.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil-infusion",
+      "name": "Fluorouracil (continuous infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion over 46-48 hr",
+      "notes": "DeVita 12th ed., Table 40.13 (line 123735): 5-FU 1,200 mg/m2/d x 2 d (2,400 mg/m2 total infusion over 46-48 hr) beginning day 1.",
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "days": [
+        1,
+        2
+      ],
+      "modificationRules": []
+    }
+  ]
+}

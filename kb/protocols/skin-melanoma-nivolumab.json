@@ -1,0 +1,88 @@
+{
+  "id": "skin-melanoma-nivolumab",
+  "diseaseId": "cutaneous_melanoma",
+  "name": "Nivolumab (cutaneous melanoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 240,
+  "cyclesNote": "Adjuvant (resected stage III/IV): nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) for up to 1 year. Advanced (unresectable stage III / stage IV): nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) until disease progression or unacceptable toxicity (Standard Guidelines (NCCN) v2.2026, Table 14, MS-55 to MS-56). The 480 mg Q4W schedule uses a 28-day cycle.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+    "textbook": ""
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Anti-PD-1 monotherapy. No positive companion biomarker is required to start; applicable regardless of BRAF status. Used in the adjuvant setting for resected high-risk stage III/IV (CheckMate 238) and in the unresectable/metastatic setting (CheckMate 066/067). Per Standard Guidelines (NCCN), Melanoma: Cutaneous, Table 14."
+  },
+  "stage": [
+    "III (resected, adjuvant)",
+    "III (unresectable)",
+    "IV"
+  ],
+  "treatmentSetting": [
+    "adjuvant",
+    "metastatic"
+  ],
+  "histology": "cutaneous melanoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event (irAE) monitoring (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities.",
+    "Baseline and periodic thyroid (TSH/free T4), liver function, glucose as indicated."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose) before each cycle and as indicated",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment (advanced disease); recurrence surveillance (adjuvant)"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "CBC",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold/steroids",
+      "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 14 (MS-55 to MS-56). Nivolumab 240 mg IV flat every 2 weeks (FDA prescribing information), until disease progression or unacceptable toxicity. Source-stated equivalent: 480 mg Q4W flat (FDA prescribing information); and 3 mg/kg Q2W (CheckMate 066/067). The 480 mg every-4-weeks schedule is modeled here as an accepted alternative in regimen.cycles rather than as a second drug row. In the adjuvant setting nivolumab is given for up to 1 year; in advanced disease continued until progression or unacceptable toxicity.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Nivolumab row, MS-55 to MS-56 (lines 8159 to 8161): FDA Prescribing information 240 mg Q2W or 480 mg Q4W; CheckMate 067 (line 8157) 3 mg/kg Q2W",
+        "evidenceStatus": "current"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "modificationRules": []
+    }
+  ]
+}

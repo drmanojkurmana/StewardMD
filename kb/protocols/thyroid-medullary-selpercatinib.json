@@ -1,0 +1,118 @@
+{
+  "id": "thyroid-medullary-selpercatinib",
+  "diseaseId": "medullary_thyroid_carcinoma",
+  "name": "Selpercatinib for RET-Mutant Medullary Thyroid Carcinoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous until disease progression or unacceptable toxicity; not a fixed cycle count",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma",
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "RET": "pathogenic variant present (germline or somatic RET mutation)",
+    "note": "This regimen is biomarker-gated to a RET pathogenic variant (germline RET in hereditary MTC/MEN2, or somatic RET in sporadic MTC). Selpercatinib is a selective RET inhibitor and is a category 1 preferred option specifically for RET-mutant disease; RET-independent multikinase inhibitors (cabozantinib, vandetanib) are the category 1 options when RET status does not direct a selective inhibitor. Per Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, Medullary Carcinoma (MEDU)."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "recurrent"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "medullary thyroid carcinoma (calcitonin-producing parafollicular C-cell carcinoma)",
+  "premedications": [],
+  "supportiveCare": [
+    "blood-pressure control: hypertension is common with selpercatinib; monitor and treat.",
+    "monitor for hepatotoxicity (ALT/AST), QT prolongation, hemorrhage, and hypersensitivity per labeling.",
+    "monitor calcitonin and carcinoembryonic antigen (CEA) as MTC tumor markers for response.",
+    "avoid abrupt discontinuation without taper per labeling if on prolonged therapy."
+  ],
+  "monitoring": [
+    "blood pressure",
+    "liver function (ALT/AST)",
+    "ECG for QT prolongation and electrolytes (potassium, magnesium)",
+    "calcitonin and CEA trend",
+    "cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": [
+    "biomarker RET pathogenic variant confirmed",
+    "liver",
+    "QT/electrolytes",
+    "blood pressure controlled",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 hepatotoxicity, QT prolongation, or hypertension",
+      "drug": "selpercatinib",
+      "action": "hold/reduce",
+      "text": "Interrupt for grade 3 to 4 or intolerable toxicity; resume at a reduced dose per labeling once recovered; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "selpercatinib",
+      "name": "Selpercatinib",
+      "basis": "flat",
+      "dosePerUnit": 160,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Source: DeVita 12th ed., line 70618. Selpercatinib 160 mg PO TWICE DAILY (represented here as continuous daily dosing; twice-daily frequency is source-stated) for patients at or above 50 kg. DeVita line 70618 states selpercatinib's uniform registered recommended dose (160 mg twice per day) in the NSCLC RET chapter; this is the drug's single, tumor-type-agnostic registered dose, not an MTC-specific citation. The medullary thyroid indication and the same 160 mg twice-daily dose are grounded for MTC by Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026: Medullary Carcinoma selpercatinib category 1 for RET PV positive (MEDU-4, thyroid.txt line 3123) and the phase 3 LIBRETTO-531 first-line RET-mutant MTC trial (thyroid.txt line 3288 reference; Discussion line 5515 to 5517). The 160 mg twice-daily dose is clinically correct for RET-mutant MTC and is retained (not VERIFY). Given continuously until progression or unacceptable toxicity.",
+      "provenance": {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "line 70618 (selpercatinib, LIBRETTO-001: 'The recommended dose is 160 mg twice per day')",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}
