@@ -1,0 +1,101 @@
+{
+  "id": "rare-hcl-cladribine",
+  "name": "Cladribine (2-CdA) +/- Rituximab",
+  "disease": "Hairy cell leukemia (classic)",
+  "diseaseId": "hairy_cell_leukemia",
+  "histology": "classic hairy cell leukemia (cHCL); CD11c+, CD25+, CD103+, CD123+, CD19/20/22+, CD5-, CD23-; usually BRAF V600E mutated",
+  "stage": [],
+  "biomarkers": {
+    "BRAF_V600E": "typically present in classic HCL",
+    "note": "Classic HCL characteristically harbors the BRAF V600E mutation; variant HCL (vHCL) lacks BRAF V600E and CD25/CD123 and tends to be more aggressive. BRAF status does not gate purine-analog therapy (cladribine is first-line regardless) but distinguishes cHCL from vHCL and later enables BRAF-inhibitor salvage. Per DeVita 12th ed. (lines 281710 to 281725) and Standard Guidelines (NCCN), Hairy Cell Leukemia, v1.2027 (extract line 190, IHC/molecular BRAF V600E testing)."
+  },
+  "treatmentSetting": "first-line (initial therapy for treatment-requiring cHCL)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for classic HCL requiring treatment (progressive cytopenias); a preferred initial regimen. May be re-used at relapse if the prior remission was durable (>5 years) per DeVita.",
+  "eligibilityCriteria": [
+    { "criterion": "treatmentIndication", "requirement": "indication for treatment present (progressive cytopenias, symptomatic splenomegaly, or systemic symptoms); asymptomatic patients may be observed", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 281728 to 281729" },
+    { "criterion": "infectionStatus", "requirement": "active uncontrolled infection should be controlled first; consider low-dose pentostatin before standard-dose purine analog if infection cannot be controlled", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "locator": "v1.2027, footnote, extract line 341" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cladribine",
+        "name": "Cladribine (2-CdA)",
+        "basis": "mgkg",
+        "dosePerUnit": 0.1,
+        "unit": "mg/kg",
+        "days": [1, 2, 3, 4, 5, 6, 7],
+        "route": "IV continuous infusion",
+        "infusionDuration": "continuous IV infusion over 24 hr each day x 7 days",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 281734 (cladribine 0.1 mg/kg/day as a continuous intravenous infusion for 7 days)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 281734. Cladribine 0.1 mg/kg/day as a continuous IV infusion for 7 days, given as a SINGLE course. ALTERNATIVE schedule (source-stated, same total dose): 2-hour IV infusion over 5 days (DeVita line 281735). A weekly schedule is also described in the HCL literature. Cladribine causes prolonged CD4 lymphopenia and immunosuppression; grade 3 to 4 neutropenia occurs in ~65 to 85% of patients with frequent febrile neutropenia (DeVita line 281751). Give PJP (Pneumocystis jirovecii) and herpes/VZV prophylaxis and monitor for opportunistic infection."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "version": "1.2027", "date": null, "locator": "extract lines 132 to 135, 347 to 350 (concurrent rituximab in 8 weekly doses starting Cycle 1 Day 1 with cladribine [CDAR], or 4 weeks after standard 5-day cladribine); dose value 375 mg/m2 weekly x 4 per Harrison 22nd ed. line 385777", "evidenceStatus": "current" },
+        "notes": "OPTIONAL add-on (Cladribine +/- Rituximab). Concurrent rituximab improves undetectable-MRD complete remission rates (NCCN footnote h, extract lines 132 to 135, 347 to 350): given as 8 weekly doses starting Cycle 1 Day 1 with cladribine (CDAR regimen), OR beginning 4 weeks after a standard 5-day cladribine infusion. Rituximab dose VALUE 375 mg/m2 is sourced to Harrison 22nd ed. line 385777 (375 mg/m2 once a week for 4 weeks); the day here represents the weekly per-dose. Screen hepatitis B before rituximab (reactivation risk)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "acetaminophen and antihistamine per standard rituximab labeling when rituximab is added" }
+    ],
+    "supportiveCare": [
+      "PJP (Pneumocystis jirovecii) prophylaxis and herpes/VZV prophylaxis during and after cladribine (prolonged CD4 lymphopenia).",
+      "G-CSF and antimicrobial support for expected grade 3 to 4 neutropenia and febrile neutropenia (DeVita line 281751).",
+      "Screen hepatitis B before rituximab if rituximab is added (NCCN HCL diagnostic workup, extract line 211).",
+      "Bone marrow response assessment should not be performed before 4 months after cladribine (NCCN footnote, extract line 433)."
+    ]
+  },
+  "monitoring": [
+    "CBC/differential - deep, prolonged neutropenia and lymphopenia",
+    "CD4 count / opportunistic infection surveillance",
+    "Bone marrow at >= 4 months to assess response (cladribine)",
+    "Fever/infection assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "infection status", "renal", "liver"],
+  "doseModificationRules": [
+    { "condition": "active uncontrolled infection", "action": "delay/modify", "text": "Control infection first; consider low-dose pentostatin before standard-dose purine analog if infection cannot be controlled (NCCN HCL footnote). Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 281734 (cladribine 0.1 mg/kg/day CIV x 7 days; pentostatin 4 mg/m2 q2wk); line 281735 (alternative 2-hr infusion over 5 days); lines 281731 to 281745 (nucleoside analogs are the mainstay of HCL therapy); line 281751 (grade 3 to 4 neutropenia 65 to 85%, febrile neutropenia)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Cladribine +/- Rituximab as a preferred initial regimen (extract line 288); concurrent rituximab schedule CDAR / delayed (footnote h, extract lines 132 to 135, 347 to 350); cladribine and pentostatin comparable activity (footnote e, extract line 343); infection/low-dose pentostatin caveat (extract line 341); bone marrow response timing >= 4 months (extract line 433); BRAF V600E testing (extract line 190)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for cladribine +/- rituximab, a preferred first-line regimen for classic hairy cell leukemia. The cladribine dose (0.1 mg/kg/day continuous IV infusion for 7 days, single course) is concretely sourced to DeVita 12th ed. line 281734, with the 5-day 2-hour-infusion alternative at line 281735. The optional rituximab add-on schedule (concurrent 8 weekly doses / CDAR, or 4 weeks after cladribine) is sourced to Standard Guidelines (NCCN) HCL v1.2027 footnote h (extract lines 132 to 135, 347 to 350); the rituximab dose value 375 mg/m2 weekly is sourced to Harrison 22nd ed. line 385777. Cladribine immunosuppression with PJP and VZV prophylaxis, and expected prolonged neutropenia/febrile neutropenia, are captured. cycleLengthDays and cycles are set to VERIFY: cladribine is a single course rather than a repeating cycle, and the provided sources do not state a cycle-length/number-of-cycles construct. BRAF V600E note distinguishes classic from variant HCL. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

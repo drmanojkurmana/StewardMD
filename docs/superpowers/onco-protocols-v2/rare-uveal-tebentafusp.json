@@ -1,0 +1,87 @@
+{
+  "id": "rare-uveal-tebentafusp",
+  "name": "Tebentafusp (gp100 x CD3 bispecific) for HLA-A*02:01-positive metastatic uveal melanoma",
+  "disease": "Uveal melanoma (metastatic)",
+  "diseaseId": null,
+  "histology": "uveal (choroidal/ciliary body/iris) melanoma",
+  "stage": ["IV", "metastatic"],
+  "biomarkers": {
+    "HLA-A*02:01": "positive",
+    "note": "GATE: Tebentafusp is a gp100-HLA-A*02:01-directed T-cell-receptor bispecific and is indicated ONLY for HLA-A*02:01-positive patients. HLA-A*02:01 testing is required. Per Standard Guidelines (NCCN), Uveal Melanoma v2.2026, tebentafusp-tebn is a category 1 first-line option for HLA-A*02:01-positive metastatic disease; HLA-A*02:01-negative patients are treated with agents effective for cutaneous melanoma instead."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for previously untreated HLA-A*02:01-positive metastatic uveal melanoma (category 1)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HLA-A*02:01-positive (blood test)", "source": "Standard Guidelines (NCCN), Uveal Melanoma", "locator": "v2.2026 (03/18/26), lines 685 to 686 (Tebentafusp-tebn in patients who are HLA-A*02:01-positive, category 1) and footnote c (lines 697 to 700)" },
+    { "criterion": "disease", "requirement": "distant metastatic uveal melanoma, previously untreated", "source": "Standard Guidelines (NCCN), Uveal Melanoma", "locator": "v2.2026, footnote c line 697 (previously untreated HLA-A*02:01-positive metastatic uveal melanoma)" }
+  ],
+  "exclusionCriteria": [
+    { "criterion": "biomarker", "requirement": "HLA-A*02:01-negative", "action": "not eligible for tebentafusp; use agents effective for cutaneous melanoma as first-line instead", "source": "Standard Guidelines (NCCN), Uveal Melanoma", "locator": "v2.2026, footnote c lines 649 to 650 / 699 to 700" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "tebentafusp",
+        "name": "Tebentafusp-tebn",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mcg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uveal Melanoma", "version": "2.2026", "date": "2026-03-18", "locator": "lines 685 to 686 and footnote c (tebentafusp-tebn category 1 for HLA-A*02:01-positive metastatic uveal melanoma); NCCN does not print the dose or the stepped schedule", "evidenceStatus": "current" },
+        "notes": "VERIFY: Tebentafusp uses a mandatory stepped (weekly-escalating) IV dose to mitigate cytokine release syndrome, but NONE of the provided sources print the microgram values or the weekly schedule (NCCN Uveal Melanoma lines 685 to 686 give only category-1 indication; DeVita 12th ed. lines 296642 to 296671 and Harrison 22nd ed. lines 77993 to 77997 / 87264 describe the mechanism and phase III OS benefit without doses). The stepped dose (values and days) and cycle length must be VERIFY-ed against a cited source (e.g., FDA label) before these fields are set. Administer in a setting able to monitor and treat CRS, especially with the first 3 doses."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Cytokine release syndrome (CRS): tebentafusp is associated with CRS (89% of patients, mostly within the first 3 to 4 cycles per DeVita 12th ed. lines 296664 to 296665). Administer the first doses in a monitored setting with capacity to treat CRS (hypotension, pyrexia); ensure adequate hydration and post-dose observation per label.",
+      "Skin toxicity: rash (83%) and pruritus (69%) are common (DeVita line 296663).",
+      "Regional liver-directed therapy may be considered for liver-confined disease (NCCN footnote c, lines 650 to 651)."
+    ]
+  },
+  "monitoring": [
+    "Cytokine release syndrome monitoring during and after infusion, especially first 3 doses",
+    "vital signs (temperature, blood pressure) with each infusion",
+    "skin assessment (rash/pruritus)",
+    "liver function and disease response assessment"
+  ],
+  "clearanceChecks": ["HLA-A*02:01 status (required)", "CRS readiness", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "cytokine release syndrome", "drug": "tebentafusp", "action": "manage/hold", "text": "Manage CRS with standard interventions (fluids, antipyretics, vasopressors and tocilizumab as indicated); withhold or adjust per label. Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 296642 to 296671 (tebentafusp, gp100 x CD3 bispecific; phase III in HLA-A*02:01-expressing metastatic uveal melanoma improved OS 22 vs 16 months, HR 0.51; CRS in 89% within first 3 to 4 cycles; FDA approved 2022); Harrison 22nd ed. lines 77993 to 77997 and 87264 to 87268 (tebentafusp binds gp100 on melanoma and CD3 on T cells; FDA-approved for metastatic uveal melanoma). Doses not stated.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Uveal Melanoma",
+        "version": "2.2026",
+        "date": "2026-03-18",
+        "locator": "Systemic Therapy for metastatic disease, lines 685 to 686 (Tebentafusp-tebn for HLA-A*02:01-positive patients, category 1) with footnote c (lines 697 to 701); HLA-A*02:01 testing recommended for distant metastatic disease (lines 2316 to 2317). NCCN does not print the dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for tebentafusp-tebn in HLA-A*02:01-positive metastatic uveal melanoma. The indication, the HLA-A*02:01 gate, the category-1 first-line role, and cytokine release syndrome are grounded in Standard Guidelines (NCCN) Uveal Melanoma v2.2026 (lines 685 to 686 and footnote c) and DeVita 12th ed. (lines 296642 to 296671, CRS in 89% within the first 3 to 4 cycles) with Harrison 22nd ed. support. Tebentafusp requires a stepped weekly-escalating IV dose to mitigate CRS, but NONE of the provided sources print the microgram values, the weekly schedule, the cycle length, or the number of cycles, so those fields are the literal VERIFY (never invented) and are listed in verifyFields; per the schema this blocks status ACTIVE. The HLA-A*02:01 biomarker gate and CRS first-dose monitoring are enforced. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

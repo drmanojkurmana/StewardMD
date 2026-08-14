@@ -1,0 +1,92 @@
+{
+  "id": "rare-histiocytic-cytarabine",
+  "name": "Cytarabine + Methotrexate (Langerhans Cell Histiocytosis / Erdheim-Chester Disease)",
+  "disease": "Histiocytic neoplasm (Langerhans cell histiocytosis / Erdheim-Chester disease)",
+  "diseaseId": null,
+  "histology": "histiocytic neoplasm - adult Langerhans cell histiocytosis (LCH), multisystem or single-system multifocal, including CNS-involved disease; cytarabine is also an option in Erdheim-Chester disease (ECD)",
+  "stage": ["multisystem", "single-system multifocal", "CNS-involved"],
+  "biomarkers": {
+    "note": "Cytotoxic chemotherapy option that is used irrespective of mutation status (an alternative or complement to BRAF/MEK-targeted therapy). Both cytarabine and methotrexate cross the blood-brain barrier, making the combination suitable for CNS-involved LCH. Per Standard Guidelines (NCCN), Histiocytic Neoplasms, HIST-A (suggested regimens) and the Discussion (MS-9)."
+  },
+  "treatmentSetting": "systemic chemotherapy for LCH (multisystem / single-system multifocal / CNS) or ECD",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "other recommended (non-targeted) regimen for multisystem or single-system LCH and for CNS lesions; in one adult retrospective series cytarabine had lower grade 3-4 toxicity than cladribine",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "Langerhans cell histiocytosis (multisystem or single-system multifocal, or CNS-involved), irrespective of mutation; also applicable to ECD", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "locator": "v2.2026, HIST-A (Cytarabine; Cytarabine/Methotrexate as suggested regimens); Discussion MS-9 (methotrexate plus cytarabine for multisystem/single-system lung LCH or CNS lesions); histiocytic lines 2091, 2107, 2157, 3416, 3431" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cytarabine",
+        "name": "Cytarabine",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV (higher doses for CNS lesions)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "Discussion MS-9 (prospective single-center phase II trial from China: combination of cytarabine 100 mg/m2 and methotrexate 1 g/m2 for adults with multisystem or single-system multifocal LCH); histiocytic line 3418", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026, Discussion MS-9 (China phase II trial): cytarabine 100 mg/m2 combined with methotrexate 1 g/m2. This is a LOW-DOSE cytarabine regimen (better tolerated in adults); HIGHER cytarabine doses should be used for patients with CNS lesions (MS-9), and high-dose cytarabine carries cerebellar/neurologic and ocular (conjunctivitis/keratitis) toxicity requiring corticosteroid eye drops and cerebellar checks. The DAY schedule, cycle length, and number of cycles are NOT printed in the provided source and are set to VERIFY. ISMP tall-man / look-alike-sound-alike awareness for cytarabine (confused with other antimetabolites); confirm it is cytarabine, not another agent."
+      },
+      {
+        "id": "methotrexate",
+        "name": "Methotrexate",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "Discussion MS-9 (China phase II trial: cytarabine 100 mg/m2 and methotrexate 1 g/m2); histiocytic line 3419", "evidenceStatus": "current" },
+        "notes": "DOSE UNIT CAUTION: the source states methotrexate 1 g/m2. Because the unit enum has no g/m2, it is expressed exactly and unambiguously as dosePerUnit 1000 mg/m2 (1 g/m2 = 1000 mg/m2) - this is HIGH-DOSE methotrexate, NOT 1 mg/m2 (a 1000-fold difference). High-dose methotrexate mandates leucovorin rescue, urinary alkalinization/hydration, and serial MTX-level monitoring. Both cytarabine and methotrexate cross the blood-brain barrier, favoring this combination for CNS-involved LCH (MS-9). Day schedule/cycle length/cycles are VERIFY (not printed in the source)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "leucovorin rescue + hydration/urinary alkalinization", "note": "Mandatory with high-dose methotrexate (1 g/m2); give leucovorin rescue with MTX-level-guided dosing and IV hydration with urinary alkalinization per institutional high-dose-MTX protocol." },
+      { "name": "corticosteroid ophthalmic drops", "note": "With higher-dose cytarabine (used for CNS lesions), give prophylactic corticosteroid eye drops for cytarabine conjunctivitis/keratitis." }
+    ],
+    "supportiveCare": [
+      "Day schedule, cycle length, and cycle count are NOT printed in the provided source (VERIFY before use).",
+      "High-dose methotrexate (1 g/m2) requires leucovorin rescue, hydration, urinary alkalinization, and serial MTX levels; avoid nephrotoxins and drugs that delay MTX clearance.",
+      "High-dose cytarabine (for CNS lesions) requires cerebellar neurologic checks before each dose and prophylactic corticosteroid eye drops (ocular toxicity).",
+      "G-CSF/antiemetic support and infection precautions per institutional protocol."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential (neutropenia, thrombocytopenia - the most common grade 3-4 toxicities)",
+    "renal function and serial methotrexate levels (high-dose MTX clearance)",
+    "cerebellar/neurologic exam before each higher-dose cytarabine administration (HD-cytarabine neurotoxicity)",
+    "ocular symptoms (cytarabine conjunctivitis/keratitis; steroid eye drops)",
+    "LFTs (methotrexate hepatotoxicity)",
+    "disease response (imaging/FDG-PET; pulmonary function if lung LCH)"
+  ],
+  "clearanceChecks": ["CBC/differential", "renal + MTX level", "cerebellar/neuro (HD-cytarabine)", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "cerebellar or other neurologic toxicity (higher-dose cytarabine)", "drug": "cytarabine", "action": "hold", "text": "Hold cytarabine for cerebellar/neurologic toxicity (HD-cytarabine); do not re-escalate until resolved. Obtain clinical review." },
+    { "condition": "delayed methotrexate clearance / rising MTX level or nephrotoxicity", "drug": "methotrexate", "action": "escalate rescue", "text": "Intensify leucovorin rescue and hydration/alkalinization per high-dose-MTX protocol; consider glucarpidase for markedly elevated levels with renal impairment. Obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "chemotherapy of Langerhans cell histiocytosis (cytarabine and methotrexate as active agents in adult LCH); cited as the textbook framework - the concrete 100 mg/m2 / 1 g/m2 doses are sourced to the NCCN Discussion below", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-A (suggested regimens: Cytarabine; Cytarabine/Methotrexate); Discussion MS-9 (China phase II trial cytarabine 100 mg/m2 + methotrexate 1 g/m2 for multisystem/single-system multifocal LCH; high-dose methotrexate or methotrexate+cytarabine for CNS lesions; low-dose cytarabine better tolerated in adults, higher doses for CNS); histiocytic lines 2091, 2107, 2157, 3416-3431", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[cytarabine].days", "regimen.drugs[methotrexate].days", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for cytarabine-based chemotherapy (cytarabine + methotrexate) in Langerhans cell histiocytosis / Erdheim-Chester disease, a rare histiocytic disorder. The drug DOSES are dose-grounded to Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026 Discussion MS-9 (China phase II trial): cytarabine 100 mg/m2 and methotrexate 1 g/m2. The regimen SCHEDULE (day pattern, cycle length, number of cycles) is NOT printed in the provided sources and is set to the literal VERIFY (listed in verifyFields, blocking status ACTIVE); no schedule is invented. The source methotrexate 1 g/m2 is expressed exactly as 1000 mg/m2 (high-dose MTX) to avoid the 1000-fold error of mislabeling it 1 mg/m2. HD-cytarabine neurologic/ocular toxicity and high-dose-methotrexate leucovorin-rescue/level-monitoring safeguards are captured in premedications, monitoring, and dose-modification rules. ISMP tall-man/LASA awareness noted for cytarabine. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

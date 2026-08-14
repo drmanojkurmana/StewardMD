@@ -1,0 +1,88 @@
+{
+  "id": "rare-castleman-rituximab",
+  "name": "Rituximab (HHV8-associated multicentric Castleman disease)",
+  "disease": "HHV8-associated multicentric Castleman disease",
+  "diseaseId": "castleman_disease_multicentric",
+  "histology": "multicentric Castleman disease, HHV8-positive (plasmablastic/plasmacytic); occurs in HIV-1-positive or HIV-1-negative patients",
+  "stage": [],
+  "biomarkers": {
+    "HHV8": "positive",
+    "note": "Rituximab (anti-CD20) is the backbone for HHV8-positive multicentric Castleman disease (in HIV-1-positive or HIV-1-negative patients). Occult Kaposi sarcoma (KS) is prevalent in HIV/HHV8+ MCD and may flare after rituximab or prednisone. Per Standard Guidelines (NCCN), Castleman Disease, v2.2026 (extract lines 178 to 181, 300 to 302; KS caution footnote c, extract lines 187 to 189)."
+  },
+  "treatmentSetting": "first-line for HHV8-positive MCD",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for HHV8-positive multicentric Castleman disease; rituximab-based, time-limited therapy with observation and retreatment at progression",
+  "eligibilityCriteria": [
+    { "criterion": "virology", "requirement": "HHV8-positive multicentric Castleman disease (HIV-1-positive or HIV-1-negative)", "source": "Standard Guidelines (NCCN), Castleman Disease", "locator": "v2.2026, extract lines 178, 199, 300 to 302" },
+    { "criterion": "kaposiScreen", "requirement": "screen for occult Kaposi sarcoma (baseline imaging / direct visualization) given KS flare risk with rituximab", "source": "Standard Guidelines (NCCN), Castleman Disease", "locator": "v2.2026, footnote c, extract lines 187 to 189" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1, 8, 15, 22],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "line 385777 (rituximab 375 mg/m2 once a week for 4 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source (dose value + schedule): Harrison 22nd ed. line 385777 (rituximab 375 mg/m2 once a week for 4 weeks). Represented as days 1, 8, 15, 22 of a 28-day course (4 weekly doses). Rituximab-based time-limited therapy: observe and retreat at progression (NCCN Castleman v2.2026, extract line 137). +/- prednisone may be used for compressive symptoms (NCCN extract line 169). KS CAUTION: occult KS may flare after rituximab; continue KS-directed therapy for ~3 months after the last rituximab dose given rituximab's long action (NCCN footnote c, extract lines 187 to 189). Screen hepatitis B before rituximab (reactivation risk, NCCN extract line 295)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": 1,
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "acetaminophen and antihistamine per standard rituximab labeling" }
+    ],
+    "supportiveCare": [
+      "Screen and monitor for occult/flaring Kaposi sarcoma; continue KS-directed therapy ~3 months post last rituximab (NCCN footnote c, extract lines 187 to 189).",
+      "Hepatitis B screening before rituximab - reactivation risk with immunotherapy (NCCN extract line 295).",
+      "For HIV-1-positive patients, continue/optimize antiretroviral therapy.",
+      "Rituximab-based therapy is time-limited: observe after response and retreat at progression (NCCN extract line 137)."
+    ]
+  },
+  "monitoring": [
+    "Inflammatory markers and disease response - MCD flare",
+    "Kaposi sarcoma surveillance (skin, pulmonary, GI) - flare after rituximab",
+    "Hepatitis B viral status - reactivation",
+    "CBC and organ function"
+  ],
+  "clearanceChecks": ["HHV8-positive confirmed", "hepatitis B status", "Kaposi sarcoma baseline screen", "CBC/platelets"],
+  "doseModificationRules": [
+    { "condition": "Kaposi sarcoma flare", "action": "manage", "text": "Continue/initiate KS-directed therapy; KS may flare after rituximab (NCCN Castleman footnote c). Clinical review required." },
+    { "condition": "hepatitis B reactivation risk", "action": "prophylax/monitor", "text": "Antiviral prophylaxis and monitoring per hepatitis B status before and during rituximab. Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "locator": "line 385777 (rituximab 375 mg/m2 once a week for 4 weeks); line 62063 (Castleman's disease among IL-6-driven disorders)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Castleman Disease",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Rituximab-based therapy for HHV8-positive MCD (extract lines 178 to 181, 199, 300 to 302); rituximab +/- prednisone for compressive symptoms (extract line 169); time-limited therapy - observe and retreat at progression (extract line 137); occult KS flare caution and continue KS-directed therapy ~3 months post rituximab (footnote c, extract lines 187 to 189); hepatitis B testing before immunotherapy (extract line 295)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for rituximab in HHV8-positive multicentric Castleman disease (HIV-1-positive or HIV-1-negative). The rituximab dose and schedule (375 mg/m2 IV once weekly for 4 weeks, modeled as days 1, 8, 15, 22) are concretely sourced to Harrison 22nd ed. line 385777, which states this dose and cadence verbatim. Regimen identity, HHV8-positive eligibility, time-limited observe-and-retreat approach, rituximab +/- prednisone for compressive symptoms, the occult-Kaposi-sarcoma flare caution (continue KS-directed therapy ~3 months post last dose), and hepatitis B screening before rituximab are grounded in Standard Guidelines (NCCN) Castleman Disease v2.2026 (extract lines 137, 169, 178 to 181, 187 to 189, 199, 295, 300 to 302). No field remains VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

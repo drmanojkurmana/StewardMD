@@ -1,0 +1,107 @@
+{
+  "id": "rare-wm-btki",
+  "name": "Covalent BTK Inhibitor (Zanubrutinib or Ibrutinib) - Waldenstrom macroglobulinemia",
+  "disease": "Waldenstrom macroglobulinemia / lymphoplasmacytic lymphoma",
+  "diseaseId": "waldenstrom_macroglobulinemia",
+  "histology": "lymphoplasmacytic lymphoma with IgM monoclonal paraprotein; CD19+, CD20+, surface IgM+",
+  "stage": [],
+  "biomarkers": {
+    "MYD88_L265P": "predictive (best BTKi response when present)",
+    "CXCR4": "predictive (mutation blunts/delays ibrutinib response)",
+    "note": "MYD88 and CXCR4 genotype guide BTK-inhibitor use. Best responses to ibrutinib occur in MYD88-mutated / CXCR4-wild-type disease; MYD88-mutated / CXCR4-mutated patients have delayed and lower response rates, and MYD88-wild-type patients respond poorly - gene testing for CXCR4 may be useful before a BTKi. Per DeVita 12th ed. line 267648, Harrison 22nd ed. lines 126607 to 126609, and Standard Guidelines (NCCN), WM/LPL, v1.2027 (extract lines 126, 1049)."
+  },
+  "treatmentSetting": ["primary therapy", "previously treated"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "category 1 preferred option for both treatment-naive (primary) and previously treated WM/LPL; given continuously until progression or unacceptable toxicity",
+  "eligibilityCriteria": [
+    { "criterion": "treatmentIndication", "requirement": "symptomatic WM/LPL requiring therapy", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 267625 to 267627" },
+    { "criterion": "genotype", "requirement": "MYD88/CXCR4 genotype informs expected BTKi benefit (best in MYD88-mut/CXCR4-wild-type)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 267648" },
+    { "criterion": "cardiac/bleeding", "requirement": "assess atrial fibrillation, bleeding, and hypertension risk (BTKi class effects; zanubrutinib has lower atrial fibrillation incidence than ibrutinib)", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "locator": "v1.2027, discussion, extract lines 1180 to 1183" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "zanubrutinib",
+        "name": "Zanubrutinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "version": "1.2027", "date": null, "locator": "Zanubrutinib category 1 preferred for primary therapy (extract lines 480, 524) and previously treated WM/LPL (extract lines 1443 to 1444)", "evidenceStatus": "current" },
+        "notes": "DOSE NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY. Zanubrutinib is a category 1 preferred BTKi (ASPEN trial: equivalent efficacy to ibrutinib with an improved safety profile - lower atrial fibrillation, DeVita line 267658 to 267664; NCCN extract lines 1174 to 1189). Standard Guidelines (NCCN) WM v1.2027 and DeVita/Harrison do not print a zanubrutinib mg dose in the extract; the commonly used 160 mg twice daily (or 320 mg once daily) must be VERIFIED against a cited dosing source. Given continuously (represented as days 1 to 28 of a nominal 28-day cycle) until progression."
+      },
+      {
+        "id": "ibrutinib",
+        "name": "Ibrutinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "version": "1.2027", "date": null, "locator": "Ibrutinib category 1 (extract lines 484, 525); Ibrutinib + Rituximab category 1 (extract lines 485, 526, iNNOVATE trial)", "evidenceStatus": "current" },
+        "notes": "ALTERNATIVE BTKi (patient receives ONE covalent BTKi, not both). DOSE NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY. Ibrutinib is category 1, alone or with rituximab (iNNOVATE: ibrutinib/rituximab superior to rituximab alone, DeVita lines 267653 to 267657; NCCN extract lines 1206 to 1217). Best responses in MYD88-mutated/CXCR4-wild-type disease (DeVita line 267648; Harrison lines 126607 to 126609). The commonly used ibrutinib 420 mg once daily must be VERIFIED against a cited dosing source. If combined with rituximab, apply the rituximab IgM-flare and hepatitis B precautions."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Monitor for atrial fibrillation, bleeding, and hypertension (BTKi class effects); zanubrutinib has a lower atrial fibrillation incidence than ibrutinib (NCCN WM discussion, extract lines 1180 to 1183).",
+      "If a BTKi is combined with rituximab, use plasmapheresis before rituximab or withhold rituximab in high-IgM patients (IgM flare), and screen hepatitis B (Harrison line 126614; NCCN extract line 215).",
+      "Continue until progression or unacceptable toxicity."
+    ]
+  },
+  "monitoring": [
+    "Cardiac rhythm (atrial fibrillation) and blood pressure - BTKi class effect",
+    "Bleeding/bruising assessment - BTKi antiplatelet effect",
+    "Serum IgM / quantitative immunoglobulins - response",
+    "CBC (neutropenia, more common with zanubrutinib)"
+  ],
+  "clearanceChecks": ["cardiac rhythm baseline", "bleeding risk / anticoagulation", "MYD88/CXCR4 genotype", "CBC/platelets"],
+  "doseModificationRules": [
+    { "condition": "new atrial fibrillation or significant bleeding", "action": "hold/reduce/switch", "text": "Hold, dose-reduce, or reconsider BTKi choice for new atrial fibrillation or significant bleeding per labeling; manage anticoagulation carefully. Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 267644 to 267664 (ibrutinib active in relapsed LPL, ORR 91%; best responses MYD88-mut/CXCR4-wild-type, line 267648; INNOVATE ibrutinib+rituximab superior; zanubrutinib equivalent efficacy with improved safety, ASPEN)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "locator": "lines 126605 to 126618 (ibrutinib targets constitutively activated BTK; best responses in MYD88-mutated, CXCR4-wild-type; delayed/lower response with mutated CXCR4; novel BTKis acalabrutinib/zanubrutinib/tirabrutinib)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Zanubrutinib category 1 preferred primary and previously treated (extract lines 480, 524, 1443 to 1444); Ibrutinib category 1 and Ibrutinib + Rituximab category 1 (extract lines 484 to 485, 525 to 526); ASPEN safety - lower atrial fibrillation with zanubrutinib (extract lines 1180 to 1183); CXCR4 testing may be useful before BTKi (extract lines 126, 1049)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for a covalent BTK inhibitor (zanubrutinib or ibrutinib) in Waldenstrom macroglobulinemia/LPL, a category 1 preferred option for primary and previously treated disease. The patient receives ONE BTKi; zanubrutinib is modeled as the primary drug (category 1 preferred, ASPEN: equivalent efficacy with lower atrial fibrillation), ibrutinib as the source-stated alternative (category 1, alone or with rituximab per iNNOVATE). Regimen identity, category, and the MYD88/CXCR4 predictive biomarker (best BTKi response in MYD88-mutated/CXCR4-wild-type; delayed/lower with mutated CXCR4) are grounded in Standard Guidelines (NCCN) WM v1.2027 (extract lines 480 to 485, 524 to 526, 1174 to 1189, 1443 to 1444), DeVita 12th ed. (lines 267644 to 267664), and Harrison 22nd ed. (lines 126605 to 126618). BOTH BTKi DOSES are set to VERIFY: the provided sources name the drugs but print no mg dose in the extract, so ibrutinib 420 mg daily and zanubrutinib 160 mg twice daily are not asserted and must be verified against a cited dosing source. Atrial fibrillation, bleeding, and (if combined with rituximab) IgM-flare/hepatitis B cautions are captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

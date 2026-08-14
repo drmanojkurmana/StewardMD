@@ -1,0 +1,99 @@
+{
+  "id": "rare-occult-carbo-paclitaxel",
+  "name": "Empiric CARBOplatin + PACLitaxel (unfavorable cancer of unknown primary)",
+  "disease": "Cancer of unknown primary (occult primary)",
+  "diseaseId": "carcinoma_of_unknown_primary",
+  "histology": "adenocarcinoma or carcinoma not otherwise specified, not site specific (unfavorable CUP)",
+  "stage": ["metastatic"],
+  "biomarkers": {
+    "note": "PRIORITY CAVEAT: This is EMPIRIC chemotherapy for unfavorable adenocarcinoma/carcinoma CUP that is NOT site specific. IHC/ISH and molecular (NGS) profiling to identify a tissue of origin or an actionable biomarker takes priority: site-specific therapy for a favorable/identified primary, and biomarker-driven therapy (BRAF V600E dabrafenib/trametinib; dMMR/MSI-H or TMB-high pembrolizumab/dostarlimab; NTRK-fusion entrectinib/larotrectinib/repotrectinib; RET-fusion selpercatinib; HER2 IHC 3+ fam-trastuzumab deruxtecan) should be used when applicable. Per Standard Guidelines (NCCN), Occult Primary (CUP) v2.2026, Principles of Systemic Therapy (Adenocarcinoma) and the Biomarker-Driven Therapy column."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line empiric chemotherapy for unfavorable adenocarcinoma/carcinoma CUP (not site specific) when no favorable subset, directable primary, or actionable biomarker is identified",
+  "eligibilityCriteria": [
+    { "criterion": "workup", "requirement": "IHC/ISH and molecular (NGS) profiling completed; no favorable subset, tissue of origin, or actionable biomarker directing site-specific or biomarker-driven therapy", "source": "Standard Guidelines (NCCN), Occult Primary (CUP)", "locator": "v2.2026 (05/04/26), OCC Principles of Systemic Therapy (Adenocarcinoma, lines 1332 to 1358); tissue of origin studies and biomarker testing (lines 309 to 310, footnote g line 148)" },
+    { "criterion": "histology", "requirement": "adenocarcinoma or carcinoma not otherwise specified, not site specific", "source": "Standard Guidelines (NCCN), Occult Primary (CUP)", "locator": "v2.2026, Selected Systemic Therapy for Occult Primaries: Adenocarcinoma, Preferred: Carboplatin/Paclitaxel (line 1336)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": "5 to 6",
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Occult Primary (CUP)", "version": "2.2026", "date": "2026-05-04", "locator": "OCC Principles of Systemic Therapy, Carboplatin/Paclitaxel dosing, line 1397 (Carboplatin AUC 5 to 6 IV Day 1; repeat every 3 weeks)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, line 1397. CARBOplatin target AUC 5 to 6 IV on day 1, repeat every 3 weeks (printed range retained). Source-stated weekly alternative (line 1401): CARBOplatin AUC 2 IV on days 1, 8, and 15, repeat every 4 weeks. Tall-man per ISMP."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": "175 to 200",
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Occult Primary (CUP)", "version": "2.2026", "date": "2026-05-04", "locator": "OCC Principles of Systemic Therapy, Carboplatin/Paclitaxel dosing, line 1398 (Paclitaxel 175 to 200 mg/m2 IV Day 1; repeat every 3 weeks)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, line 1398. PACLitaxel 175 to 200 mg/m2 IV on day 1, repeat every 3 weeks (printed range retained). Requires corticosteroid plus H1 and H2 antihistamine premedication per labeling. Source-stated weekly alternative (line 1402): PACLitaxel 80 mg/m2 IV on days 1, 8, and 15, repeat every 4 weeks. Tall-man per ISMP."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid plus H1 and H2 antihistamine per paclitaxel labeling." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: carboplatin/paclitaxel is moderate emetic risk; prophylaxis per moderate-emetogenicity tier.",
+      "Peripheral neuropathy monitoring - PACLitaxel.",
+      "Renal function monitoring - CARBOplatin (AUC-based dosing via Calvert formula)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) for AUC dosing - CARBOplatin",
+    "peripheral neuropathy assessment - PACLitaxel",
+    "response assessment; re-evaluate for a directable primary or actionable biomarker if profiling was incomplete"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "molecular/IHC profiling reviewed", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia or significant neuropathy", "action": "hold/reduce", "text": "Hold or reduce per labeling for grade 3 to 4 myelosuppression or significant peripheral neuropathy; clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "DeVita establishes empiric platinum/taxane chemotherapy for unfavorable CUP and the primacy of tissue-of-origin/biomarker-directed therapy for favorable and molecularly defined subsets; the per-cycle carboplatin/paclitaxel doses are taken from the guideline layer.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Occult Primary (CUP)",
+        "version": "2.2026",
+        "date": "2026-05-04",
+        "locator": "Principles of Systemic Therapy, Selected Systemic Therapy for Occult Primaries: Adenocarcinoma, Preferred: Carboplatin/Paclitaxel (line 1336); dosing lines 1396 to 1403 (Carboplatin AUC 5 to 6 + Paclitaxel 175 to 200 mg/m2, day 1, every 3 weeks; weekly alternative Carboplatin AUC 2 + Paclitaxel 80 mg/m2 days 1, 8, 15 every 4 weeks). Biomarker-driven therapy priority (BRAF/dMMR-MSI-H/NTRK/RET/TMB-H/HER2) lines 1336 to 1358; molecular profiling footnote g line 148; tissue of origin studies line 310.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for empiric CARBOplatin + PACLitaxel in unfavorable cancer of unknown primary (adenocarcinoma/carcinoma, not site specific). Every dose is grounded in Standard Guidelines (NCCN) Occult Primary (CUP) v2.2026, OCC Principles of Systemic Therapy: CARBOplatin target AUC 5 to 6 IV day 1 (line 1397) and PACLitaxel 175 to 200 mg/m2 IV day 1 (line 1398), repeat every 3 weeks; the printed dose ranges are retained as authored. A source-stated weekly alternative (carboplatin AUC 2 plus paclitaxel 80 mg/m2 on days 1, 8, 15 every 4 weeks, lines 1401 to 1402) is recorded in the drug notes. IMPORTANT: this is empiric therapy for the not-site-specific unfavorable subset; IHC/ISH and molecular (NGS) profiling to identify a tissue of origin or actionable biomarker takes priority, and site-specific or biomarker-driven therapy (BRAF, dMMR/MSI-H, TMB-H, NTRK, RET, HER2) should be used when applicable (lines 1336 to 1358) - this is stated in biomarkers.note, eligibility, and monitoring. ISMP tall-man applied (CARBOplatin, PACLitaxel); paclitaxel corticosteroid/antihistamine premedication enforced. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

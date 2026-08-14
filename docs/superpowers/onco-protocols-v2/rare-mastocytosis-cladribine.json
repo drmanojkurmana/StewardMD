@@ -1,0 +1,72 @@
+{
+  "id": "rare-mastocytosis-cladribine",
+  "name": "Cladribine (Advanced Systemic Mastocytosis)",
+  "disease": "Advanced systemic mastocytosis (ASM, SM-AHN, mast cell leukemia)",
+  "diseaseId": null,
+  "histology": "advanced systemic mastocytosis: aggressive SM (ASM), SM with an associated hematologic neoplasm (SM-AHN), or mast cell leukemia (MCL), including disease requiring rapid cytoreduction/debulking",
+  "stage": ["advanced (ASM / SM-AHN / MCL)"],
+  "biomarkers": {
+    "KIT": "cladribine (a purine nucleoside analog) has cytotoxic activity across SM subtypes irrespective of KIT mutation status (used off-label; not FDA-approved for SM)",
+    "note": "Cladribine is an 'Other Recommended' option for advanced SM, useful when rapid debulking of disease is required. It is not a KIT-targeted agent, so imatinib-resistance mutations (KIT D816V) do not preclude it. Per Standard Guidelines (NCCN), Systemic Mastocytosis, SM-6 (ASM) / SM-7 (SM-AHN) and the Discussion."
+  },
+  "treatmentSetting": "advanced systemic mastocytosis (rapid cytoreduction / debulking)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "'Other Recommended' cytoreductive option for advanced SM; particularly when rapid debulking is required, or as a subsequent-line option",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "advanced systemic mastocytosis (ASM, SM-AHN, or MCL), especially when rapid debulking of disease is required", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "locator": "v3.2026, SM-6/SM-7 (Other Recommended: Cladribine) footnote aa (for patients with advanced SM, cladribine may be useful when rapid debulking of disease is required); masto lines 518, 638, 659" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cladribine",
+        "name": "Cladribine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV or SC (per prescribing information / institutional protocol)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "version": "3.2026", "date": "2026-07-10", "locator": "SM-6/SM-7 (Other Recommended: Cladribine); footnote u (refer to package insert for full prescribing information, dose modifications, and monitoring); footnote aa (useful when rapid debulking required); Discussion MS-18 (masto line 2883, cladribine used off-label)", "evidenceStatus": "current" },
+        "notes": "DOSE IS VERIFY. Standard Guidelines (NCCN) Systemic Mastocytosis v3.2026 names cladribine as an Other Recommended option for advanced SM (SM-6/SM-7) and directs to the package insert for dosing (footnote u); it does NOT print an SM-specific cladribine dose, and the Discussion (MS-18) confirms off-label use without a stated dose. DeVita 12th ed. gives cladribine 0.1 mg/kg/day as a 7-day continuous IV infusion (or the same total dose over 5 days as a 2-hour infusion) - but that dose is stated for HAIRY CELL LEUKEMIA (line 281734), NOT for SM, so it is NOT adopted here. The SM basis/dose/unit/schedule must be VERIFY-ed against a cited SM source or the prescribing information before use; not invented. ISMP tall-man for the co-listed antimetabolite is cytarabine / vinBLAStine where those drugs are used - cladribine itself has no tall-man form."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Cladribine SM dosing, schedule, and cycle count are not printed in the provided sources (NCCN directs to the package insert, SM-6 footnote u) - resolve/VERIFY before use.",
+      "Purine-analog immunosuppression: expect lymphopenia and prolonged CD4 suppression - PJP and antiviral prophylaxis and infection monitoring per institutional protocol.",
+      "Tumor lysis / rapid mast cell debulking precautions given the cytoreductive indication (hydration, monitoring); mast cell mediator-release precautions."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential (lymphopenia, neutropenia, thrombocytopenia)",
+    "infection surveillance (opportunistic infections from prolonged lymphocyte suppression)",
+    "serum tryptase and mast cell disease burden (response)",
+    "tumor lysis labs during rapid debulking"
+  ],
+  "clearanceChecks": ["CBC/differential", "renal", "infection screen", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 myelosuppression or serious infection", "drug": "cladribine", "action": "hold/reduce", "text": "Hold and manage per prescribing information (SM-6 footnote u); the specific SM dose/schedule is VERIFY. Obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 281734 (cladribine 0.1 mg/kg/day continuous IV for 7 days, or the same total dose as a 2-hour infusion over 5 days) - stated for HAIRY CELL LEUKEMIA, not SM; cited only to document that no SM-specific cladribine dose is established in the provided sources", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "version": "3.2026", "date": "2026-07-10", "locator": "SM-6 (ASM Other Recommended: Cladribine or Peginterferon alfa-2a +/- Prednisone); SM-7 (SM-AHN); footnote u (refer to package insert for dosing); footnote aa (rapid debulking); Discussion MS-18 (cladribine off-label, ORR data); masto lines 518, 638, 659, 2883", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[cladribine].basis", "regimen.drugs[cladribine].dosePerUnit", "regimen.drugs[cladribine].unit", "regimen.drugs[cladribine].days", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for cladribine in advanced systemic mastocytosis (ASM/SM-AHN/MCL), a rare mast-cell disorder, used when rapid cytoreduction/debulking is required. Cladribine is a source-named 'Other Recommended' option (Standard Guidelines (NCCN) Systemic Mastocytosis v3.2026, SM-6/SM-7), but the guideline directs to the package insert for dosing (footnote u) and the provided sources do NOT print an SM-specific dose or schedule; the DeVita hairy-cell-leukemia dose (0.1 mg/kg/day) is deliberately NOT adopted for SM. Therefore basis/dose/unit/schedule/cycles are set to the literal VERIFY and listed in verifyFields, which blocks status ACTIVE until an SM-specific dose is sourced - no dose is invented. BIOMARKER NOTE: cladribine is a non-targeted purine analog effective across SM subtypes irrespective of KIT status. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

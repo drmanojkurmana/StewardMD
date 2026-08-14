@@ -1,0 +1,84 @@
+{
+  "id": "rare-dfsp-imatinib",
+  "name": "Imatinib for dermatofibrosarcoma protuberans (DFSP)",
+  "disease": "Dermatofibrosarcoma protuberans",
+  "diseaseId": "dermatofibrosarcoma_protuberans",
+  "histology": "dermatofibrosarcoma protuberans (including fibrosarcomatous transformation, FS-DFSP)",
+  "stage": ["unresectable", "recurrent", "metastatic"],
+  "biomarkers": {
+    "COL1A1-PDGFB": "positive",
+    "note": "GATE: DFSP is driven by the t(17;22)(q22;q13) COL1A1::PDGFB fusion, which produces a PDGFB autocrine loop that imatinib (a PDGFR tyrosine kinase inhibitor) targets. Per Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans v2.2026, confirm the COL1A1::PDGFB translocation by FISH before imatinib (footnote i). DeVita 12th ed. describes DFSP as a sarcoma characterized by COL1A1-to-PDGFB fusion for which imatinib is active."
+  },
+  "treatmentSetting": ["neoadjuvant", "unresectable", "recurrent", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "systemic therapy for unresectable, recurrent, or metastatic DFSP; also neoadjuvant to enable resection with acceptable functional/cosmetic outcome",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "COL1A1::PDGFB translocation confirmed by FISH", "source": "Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans", "locator": "v2.2026 (10/24/2025), footnote i line 335 (Confirm COL1A1::PDGFB translocation by FISH); Discussion lines 686 to 687 (NCCN Panel recommends the COL1A1::PDGFB translocation be confirmed by FISH)" },
+    { "criterion": "disease", "requirement": "unresectable following multiple resections, recurrent, or metastatic; or neoadjuvant where resection with negative margins would cause unacceptable functional/cosmetic outcome", "source": "Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans", "locator": "v2.2026, line 315 (Consider Imatinib where disease is unresectable), footnote f line 289 (neoadjuvant imatinib), Discussion lines 682 to 685" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "imatinib",
+        "name": "Imatinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans", "version": "2.2026", "date": "2025-10-24", "locator": "line 315 (Consider Imatinib where disease is unresectable/recurrent/metastatic) and footnote f line 289 (neoadjuvant Imatinib); NCCN does not print the imatinib dose", "evidenceStatus": "current" },
+        "notes": "VERIFY: Imatinib is FDA-approved for unresectable, recurrent, and/or metastatic DFSP (DeVita 12th ed. lines 664 to 667), but NONE of the provided sources print a DFSP-specific imatinib dose. The only imatinib dose in the sources (DeVita line 278172, 400 mg/day) is stated for CHRONIC MYELOID LEUKEMIA and must NOT be cross-applied to DFSP. The DFSP dose (per label typically 400 mg/day PO, escalating toward 800 mg/day for progression) must be VERIFY-ed against a cited source before this field is set. Continuous daily oral dosing (represented here as days 1 to 28 of a 28-day cycle). Monitor for edema/fluid retention and hepatotoxicity (LFTs)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Imatinib: monitor for fluid retention/edema (periorbital, peripheral) and weight gain.",
+      "Imatinib: monitor liver function (hepatotoxicity); check CBC (cytopenias) periodically.",
+      "Continue until progression, unacceptable toxicity, or (neoadjuvant) until resectable."
+    ]
+  },
+  "monitoring": [
+    "liver function tests (hepatotoxicity) - imatinib",
+    "CBC (cytopenias) - imatinib",
+    "edema/fluid retention and weight assessment - imatinib",
+    "tumor response assessment to determine resectability (neoadjuvant) or disease control (advanced)"
+  ],
+  "clearanceChecks": ["COL1A1::PDGFB FISH status (required)", "liver", "CBC/platelets", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 hepatotoxicity or significant fluid retention", "drug": "imatinib", "action": "hold/reduce", "text": "Hold or reduce imatinib per labeling for significant hepatotoxicity or fluid retention; clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 22653 (DFSP is a sarcoma characterized by fusion of COL1A1 to PDGFB; imatinib active); Discussion lines 664 to 667 (imatinib mesylate FDA-approved for unresectable, recurrent, and/or metastatic DFSP) and lines 680 to 686 (imatinib as monotherapy/adjuvant/neoadjuvant response rates; confirm COL1A1::PDGFB by FISH); Harrison 22nd ed. line 104074 (imatinib targets KIT and PDGF and is standard therapy for DFSP). None state a DFSP-specific dose.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Dermatofibrosarcoma Protuberans",
+        "version": "2.2026",
+        "date": "2025-10-24",
+        "locator": "Treatment: Consider Imatinib where disease is unresectable/recurrent/metastatic (line 315); neoadjuvant Imatinib (footnote f, line 289); confirm COL1A1::PDGFB translocation by FISH (footnote i, line 335; hallmark t(17;22)(q22;q13), lines 184 to 185 and 363 to 364). NCCN does not print the dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for imatinib in dermatofibrosarcoma protuberans (DFSP). The indication (unresectable, recurrent, metastatic; and neoadjuvant to enable resection) and the mandatory COL1A1::PDGFB FISH gate are grounded in Standard Guidelines (NCCN) Dermatofibrosarcoma Protuberans v2.2026 (line 315, footnote f line 289, footnote i line 335, hallmark t(17;22) lines 184 to 185) and DeVita 12th ed. (lines 22653 and 664 to 686) with Harrison 22nd ed. support (line 104074). However, NONE of the provided sources print a DFSP-specific imatinib dose; the only imatinib dose present (DeVita line 278172, 400 mg/day) is stated for chronic myeloid leukemia and was deliberately NOT cross-applied. The imatinib dose is therefore the literal VERIFY (never invented) and is listed in verifyFields; per the schema this blocks status ACTIVE. Continuous daily oral dosing is represented as a 28-day cycle. Imatinib edema/fluid-retention and LFT monitoring are enforced. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
