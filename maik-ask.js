@@ -58,7 +58,9 @@
   // than to miss it because it didn't say the word "yes".
   function isNegated(value) {
     var v = " " + String(value == null ? "" : value).toLowerCase() + " ";
-    return /\b(absent|no|none|negative|denies|denied|nil|not|never|without|ledu|led|nahi|nahin|illa|kaadu|kadu)\b/.test(v);
+    // Unambiguous denials only. Deliberately NOT "normal"/"fine" — those can co-occur with a positive
+    // ("neck is fine but severe weakness") and must never suppress a red-flag alert (sensitivity wins).
+    return /\b(absent|no|nope|none|nothing|negative|denies|denied|nil|not|never|without|ledu|led|nahi|nahin|illa|kaadu|kadu)\b/.test(v);
   }
   function positiveRedFlag(target, findings) {
     if (!target || target.kind !== "redflag") return null;
