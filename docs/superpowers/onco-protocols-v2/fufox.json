@@ -4,9 +4,9 @@
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
   "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "stage": ["IV"],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
   "lineOfTherapy": "VERIFY",
   "eligibilityCriteria": [{ "criterion": "VERIFY" }],
@@ -78,8 +78,8 @@
         "layer": "core",
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed.",
-        "locator": "lines 123738, 123742, 123743",
-        "evidenceStatus": "current"
+        "locator": "Cancer of the Colon, Table 40.13; lines 123738, 123742, 123743. Setting/stage/intent from the same chapter's 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123347, 123352), which contains Table 40.13.",
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -97,5 +97,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": ["histology", "stage", "treatmentSetting", "lineOfTherapy", "eligibilityCriteria"]
+  "verifyFields": ["histology", "lineOfTherapy", "eligibilityCriteria"],
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.13 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347). histology, lineOfTherapy, and eligibilityCriteria stay VERIFY (not established for this regimen in DeVita); biomarkers left empty (no regimen-eligibility biomarker stated for this cytotoxic regimen); pending NCCN sourcing. No endorsement is implied."
 }

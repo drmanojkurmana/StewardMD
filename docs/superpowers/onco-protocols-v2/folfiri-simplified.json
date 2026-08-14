@@ -4,9 +4,9 @@
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
   "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "stage": ["IV"],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
   "lineOfTherapy": "VERIFY",
   "eligibilityCriteria": [],
@@ -91,8 +91,8 @@
         "layer": "core",
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed",
-        "locator": "Cancer of the Colon, Table 40.12; lines 123591, 123595, 123596, 123597",
-        "evidenceStatus": "current"
+        "locator": "Cancer of the Colon, Table 40.12; lines 123591, 123595, 123596, 123597. Setting/stage/intent from the same chapter's 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123347, 123352), which contains Table 40.12.",
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -112,11 +112,9 @@
   },
   "verifyFields": [
     "histology",
-    "stage",
     "biomarkers",
-    "treatmentSetting",
     "lineOfTherapy",
     "eligibilityCriteria"
   ],
-  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending."
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.12 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347, 'Given the palliative nature of such treatments'). DeVita states there are no specific dose-modification guidelines based on UGT1A1 polymorphism (lines 121525 to 121528), so no UGT1A1 dose rule is added. histology, biomarkers, lineOfTherapy, and eligibilityCriteria stay VERIFY (not established for this regimen in DeVita), pending NCCN sourcing."
 }

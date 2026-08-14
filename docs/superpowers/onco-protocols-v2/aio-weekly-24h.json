@@ -4,10 +4,10 @@
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
   "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "stage": ["IV"],
   "biomarkers": { "VERIFY": "VERIFY" },
-  "treatmentSetting": "VERIFY",
-  "treatmentIntent": ["VERIFY"],
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
   "lineOfTherapy": "VERIFY",
   "eligibilityCriteria": [{ "VERIFY": "VERIFY" }],
   "regimen": {
@@ -62,8 +62,8 @@
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed.",
         "date": null,
-        "locator": "lines 123467 (leucovorin), 123472 (5-fluorouracil)",
-        "evidenceStatus": "current"
+        "locator": "Cancer of the Colon, Table 40.11; lines 123467 (leucovorin), 123472 (5-fluorouracil). Setting/stage/intent from the same chapter's 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123347, 123352), which contains Table 40.11.",
+        "evidenceStatus": "unknown"
       }
     ],
     "guideline": [],
@@ -83,12 +83,9 @@
   },
   "verifyFields": [
     "histology",
-    "stage",
     "biomarkers",
-    "treatmentSetting",
-    "treatmentIntent",
     "lineOfTherapy",
     "eligibilityCriteria"
   ],
-  "provenanceNote": "Regimen dosing is sourced from DeVita 12th ed. Indication and eligibility fields are placeholders pending guideline-layer sourcing, no endorsement is implied."
+  "provenanceNote": "Regimen dosing is sourced from DeVita 12th ed. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.11 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347). histology, biomarkers, lineOfTherapy, and eligibilityCriteria stay VERIFY (not established for this regimen in DeVita), pending guideline-layer (NCCN) sourcing. No endorsement is implied."
 }
