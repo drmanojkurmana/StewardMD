@@ -1,0 +1,73 @@
+{
+  "id": "lung-pembro-mono",
+  "name": "Pembrolizumab Monotherapy, PD-L1 TPS >= 50% (KEYNOTE-024, NSCLC)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "neoplasms_of_the_lung",
+  "histology": "any NSCLC histology (nonsquamous or squamous)",
+  "stage": ["IV"],
+  "biomarkers": {
+    "histology": "any",
+    "PD_L1": "TPS >= 50% (tumor proportion score at least 50%) - required",
+    "EGFR": "wild-type (no sensitizing EGFR mutation)",
+    "ALK": "wild-type (no ALK rearrangement)",
+    "note": "First-line single-agent pembrolizumab requires PD-L1 tumor proportion score (TPS) >= 50% and absence of a sensitizing EGFR mutation or ALK rearrangement (and no other actionable driver directing targeted therapy). PD-L1 IHC testing (category 1) is recommended before first-line treatment in all metastatic NSCLC. PD-1/PD-L1 inhibitor contraindications must be excluded. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, First-Line Monotherapy (KEYNOTE-024); DeVita 12th ed."
+  },
+  "treatmentSetting": ["metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for metastatic NSCLC with PD-L1 TPS >= 50%, EGFR/ALK wild-type",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "PD-L1 TPS >= 50%", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "locator": "Chapter 30, KEYNOTE-024 (line 70724 to 70726): PD-L1 tumor expression >= 50%, no EGFR sensitizing mutation or ALK translocation" },
+    { "criterion": "driverMutation", "requirement": "no sensitizing EGFR mutation or ALK rearrangement (no actionable driver)", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, MS-54 to MS-55 (single-agent pembrolizumab category 1 preferred, PD-L1 >= 50%, negative for actionable driver mutations)" },
+    { "criterion": "immunotherapyEligibility", "requirement": "no contraindication to PD-1/PD-L1 inhibitor therapy", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, MS-55 (no contraindications to PD-1 or PD-L1 inhibitors)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 30: pembrolizumab 200 mg every 3 weeks (KEYNOTE-024, line 70724); flat dose 200 mg every 3 weeks or 400 mg every 6 weeks, given for up to 2 years (line 233347 to 233348)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 70724 (KEYNOTE-024: pembrolizumab 200 mg every 3 weeks) and line 233347 to 233348 (flat 200 mg every 3 weeks or 400 mg every 6 weeks, up to 2 years). Single agent, Day 1 of a 21-day cycle. Alternative schedule: 400 mg IV every 6 weeks."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "Pembrolizumab 200 mg every 21 days, continued until disease progression or unacceptable toxicity, up to 2 years (DeVita line 233348). Alternative schedule: 400 mg every 6 weeks.",
+    "premedications": [],
+    "supportiveCare": [
+      "immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary/pneumonitis, colitis, endocrinopathies, myocarditis)",
+      "no cytotoxic premedication required for single-agent pembrolizumab"
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) before each cycle",
+    "pneumonitis surveillance (symptoms, imaging) during therapy",
+    "clinical response and toxicity assessment each cycle"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; discontinue for severe or life-threatening pneumonitis or myocarditis; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 30, Non-small-cell Lung Cancer: KEYNOTE-024 pembrolizumab 200 mg every 3 weeks, PD-L1 >= 50%, EGFR/ALK wild-type (lines 70724 to 70734); flat 200 mg q3w or 400 mg q6w up to 2 years (lines 233347 to 233348)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "MS-54 to MS-55 (First-Line Monotherapy: single-agent pembrolizumab category 1 preferred for PD-L1 expression >= 50%, no contraindications to PD-1/PD-L1 inhibitors, negative for actionable driver mutations); Principles of Molecular and Biomarker Analysis (PD-L1 IHC category 1 before first-line treatment)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for first-line single-agent pembrolizumab in metastatic NSCLC with PD-L1 TPS >= 50% (KEYNOTE-024). Dose is grounded: Pembrolizumab 200 mg Day 1 every 3 weeks (or 400 mg every 6 weeks), continued up to 2 years, per DeVita 12th ed. lines 70724 and 233347 to 233348. Requires PD-L1 TPS >= 50% and EGFR/ALK wild-type (no actionable driver); Standard Guidelines (NCCN) v7.2026 MS-54 to MS-55 make single-agent pembrolizumab a category 1 preferred first-line option in this population and recommend PD-L1 IHC (category 1) before first-line therapy. Immune-related adverse-event monitoring, including discontinuation for severe pneumonitis or myocarditis, is captured. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

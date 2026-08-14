@@ -1,0 +1,76 @@
+{
+  "id": "lung-durvalumab-consolidation",
+  "name": "Durvalumab Consolidation after Concurrent Chemoradiation, Unresectable Stage III NSCLC (PACIFIC)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "neoplasms_of_the_lung",
+  "histology": "any NSCLC histology (nonsquamous or squamous)",
+  "stage": ["II (unresectable)", "III (unresectable)"],
+  "biomarkers": {
+    "histology": "any",
+    "PD_L1": "any (NCCN does not require a PD-L1 threshold; the EU label restricts to PD-L1 >= 1%)",
+    "EGFR": "wild-type - excludes tumors positive for EGFR exon 19 deletion or L858R mutation (those receive osimertinib consolidation instead)",
+    "ALK": "not specified as excluding; EGFR exon 19 deletion / L858R is the stated exclusion",
+    "note": "Consolidation immunotherapy after definitive concurrent chemoradiation for unresectable stage III (category 1) or stage II (category 2A) NSCLC, in patients with performance status 0 to 1 and no disease progression after chemoRT. Excluded: tumors positive for EGFR exon 19 deletion or L858R mutation (osimertinib is recommended instead; there is risk of toxicity when a TKI is given in temporal proximity to immunotherapy). Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, Concurrent Chemoradiation Regimens (NSCL-F): Consolidation Therapy."
+  },
+  "treatmentSetting": "consolidation (maintenance immunotherapy after definitive concurrent chemoradiation)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "consolidation after definitive concurrent chemoradiation; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "no disease progression after definitive concurrent chemoradiation", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, NSCL-F 1 of 2 (Consolidation Therapy for Patients with Unresectable Stage II/III NSCLC, PS 0-1, and No Disease Progression After Definitive Concurrent Chemoradiation)" },
+    { "criterion": "performanceStatus", "requirement": "ECOG performance status 0 to 1", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, NSCL-F 1 of 2 (Consolidation Therapy heading, PS 0-1)" },
+    { "criterion": "biomarker", "requirement": "no EGFR exon 19 deletion or L858R mutation (those receive osimertinib instead)", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, NSCL-F 1 of 2 line 4823 (except tumors positive for EGFR exon 19 deletion or L858R mutation)" },
+    { "criterion": "bodyWeight", "requirement": "body weight >= 30 kg for the fixed-dose (1500 mg) schedule", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, NSCL-F 1 of 2 line 4822 (patients with a body weight of >= 30 kg)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "durvalumab",
+        "name": "Durvalumab",
+        "basis": "flat",
+        "dosePerUnit": 1500,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2 line 4822: Durvalumab 10 mg/kg IV every 2 weeks or 1500 mg every 4 weeks for up to 12 months (patients with a body weight of >= 30 kg)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F line 4822. Primary encoded schedule: fixed dose 1500 mg IV every 4 weeks (basis flat, unit mg) for up to 12 months, for patients with body weight >= 30 kg. Source-stated alternative: 10 mg/kg IV every 2 weeks (weight-based; would be basis mgkg, unit mg/kg, cycle length 14 days). Category 1 for stage III, category 2A for stage II. Excludes EGFR exon 19 deletion / L858R (osimertinib instead)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "Durvalumab 1500 mg IV every 4 weeks for up to 12 months (approximately 13 cycles). Source-stated alternative: 10 mg/kg IV every 2 weeks for up to 12 months (14-day cycle). Per NSCL-F line 4822.",
+    "premedications": [],
+    "supportiveCare": [
+      "immune-related adverse event monitoring for durvalumab (thyroid, hepatic, pulmonary/pneumonitis, colitis, endocrinopathies, myocarditis)",
+      "heightened pneumonitis vigilance given prior thoracic radiation",
+      "no cytotoxic premedication required for single-agent durvalumab"
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) before each cycle",
+    "pneumonitis surveillance (symptoms, imaging) - additive risk with prior thoracic radiation",
+    "clinical response and toxicity assessment each cycle"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "pulmonary/pneumonitis status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "durvalumab", "action": "hold/steroids", "text": "Hold durvalumab and manage with corticosteroids per immune-related adverse event guidance; discontinue for severe or life-threatening pneumonitis or myocarditis; obtain clinical review before rechallenge." },
+    { "condition": "radiation pneumonitis versus immune pneumonitis", "drug": "durvalumab", "action": "evaluate/hold", "text": "New or worsening dyspnea/cough after chemoRT requires prompt evaluation and holding durvalumab pending workup; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 30, Non-small-cell Lung Cancer: standard therapy for unresectable disease is concurrent platinum-based chemotherapy plus thoracic radiation followed by consolidation durvalumab (lines 68899 to 68901); PACIFIC established durvalumab consolidation", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2 (Consolidation Therapy for Patients with Unresectable Stage II/III NSCLC, PS 0-1, and No Disease Progression After Definitive Concurrent Chemoradiation: Durvalumab 10 mg/kg IV every 2 weeks or 1500 mg every 4 weeks for up to 12 months, body weight >= 30 kg, line 4822; category 1 stage III / category 2A stage II; excludes EGFR exon 19 del or L858R, line 4823); reference 8 (Spigel/Faivre-Finn, PACIFIC 5-year survival)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for durvalumab consolidation after definitive concurrent chemoradiation in unresectable stage III (category 1) or stage II (category 2A) NSCLC (PACIFIC). Dose is grounded: Durvalumab 1500 mg IV every 4 weeks for up to 12 months (patients with body weight >= 30 kg), with the source-stated alternative of 10 mg/kg IV every 2 weeks, per Standard Guidelines (NCCN) v7.2026, NSCL-F line 4822. DeVita 12th ed. (lines 68899 to 68901) corroborates concurrent platinum chemoRT followed by consolidation durvalumab as the standard for unresectable disease. Eligibility requires PS 0 to 1 and no progression after chemoRT; tumors positive for EGFR exon 19 deletion or L858R are excluded (osimertinib is recommended instead, NSCL-F line 4823). The fixed 1500 mg every-4-week schedule is encoded (basis flat, unit mg); the 10 mg/kg every-2-week weight-based alternative is documented (would be basis mgkg). Immune-related adverse-event monitoring with heightened post-radiation pneumonitis vigilance is captured. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

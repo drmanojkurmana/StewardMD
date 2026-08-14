@@ -1,0 +1,73 @@
+{
+  "id": "lung-alectinib",
+  "name": "Alectinib (ALK-rearranged NSCLC, first-line)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "nsclc",
+  "histology": "non-small cell lung cancer (predominantly adenocarcinoma; ALK rearrangements are most common in nonsquamous histology)",
+  "stage": ["III", "IV", "recurrent/metastatic"],
+  "biomarkers": {
+    "ALK": "rearrangement (gene fusion)",
+    "note": "ALK-TKI gate: requires an ALK rearrangement (ALK gene fusion). Alectinib (second-generation ALK TKI) is a preferred first-line option for advanced/metastatic ALK-positive NSCLC. Per Standard Guidelines (NCCN), NSCLC v7.2026, Therapy for Actionable Molecular Markers (ALK Gene Fusion)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic ALK-rearranged NSCLC",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "ALK rearrangement (gene fusion)", "source": "Standard Guidelines (NCCN), NSCLC", "locator": "v7.2026, Therapy for Actionable Molecular Markers, ALK Gene Fusion (Alectinib listed); lines 5490 to 5525" },
+    { "criterion": "evidenceBasis", "requirement": "first-line alectinib vs crizotinib in ALK-positive NSCLC (ALEX)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 70542 to 70546 (ALEX: alectinib 600 mg twice daily vs crizotinib 250 mg twice daily)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "alectinib",
+        "name": "Alectinib",
+        "basis": "flat",
+        "dosePerUnit": 600,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70544 (ALEX: alectinib 600 mg twice daily, first-line ALK-positive NSCLC)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 70544 (ALEX, alectinib 600 mg twice daily). Alectinib 600 mg PO TWICE DAILY (BID), continuous, until progression (represented as days 1 to 28 of a 28-day cycle, cycles null). dosePerUnit is the per-dose amount (600 mg); administered twice daily (total 1200 mg/day)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous oral dosing twice daily until disease progression or unacceptable toxicity.",
+      "Monitor for hepatotoxicity, myalgia/CK elevation, bradycardia, and interstitial lung disease per labeling."
+    ]
+  },
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "liver function (alectinib)",
+    "creatine kinase and myalgia",
+    "heart rate (bradycardia)",
+    "pulmonary assessment for pneumonitis/ILD"
+  ],
+  "clearanceChecks": ["prior-cycle status", "liver", "CK"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher hepatotoxicity, CK elevation with myalgia, symptomatic bradycardia, or ILD/pneumonitis", "drug": "alectinib", "action": "hold/reduce/discontinue", "text": "Hold, reduce, or discontinue per labeling and clinical review; permanently discontinue for confirmed ILD/pneumonitis." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "line 70542 to 70546 (ALEX; alectinib 600 mg twice daily first-line for ALK-positive NSCLC)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), NSCLC", "version": "7.2026", "date": null, "locator": "Therapy for Actionable Molecular Markers, ALK Gene Fusion (Alectinib listed), lines 5490 to 5525", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for NSCLC subtype #11 (ALK oncogene-targeted, first-line). Alectinib 600 mg PO twice daily is dose-grounded to DeVita 12th ed. line 70544 (ALEX). Biomarker gate (ALK rearrangement) is grounded to the NSCLC v7.2026 Therapy for Actionable Molecular Markers (ALK Gene Fusion) table. Continuous BID dosing until progression (cycles null). No dose field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

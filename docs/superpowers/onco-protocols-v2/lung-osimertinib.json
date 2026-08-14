@@ -1,0 +1,71 @@
+{
+  "id": "lung-osimertinib",
+  "name": "Osimertinib (EGFR-mutant NSCLC, first-line)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "nsclc",
+  "histology": "non-small cell lung cancer (predominantly adenocarcinoma; EGFR activating mutations are most common in nonsquamous histology)",
+  "stage": ["IV", "recurrent/metastatic"],
+  "biomarkers": {
+    "EGFR": "activating mutation (exon 19 deletion or L858R)",
+    "note": "EGFR-TKI gate: requires a sensitizing/activating EGFR mutation (exon 19 deletion or L858R). Osimertinib (third-generation EGFR TKI) is the preferred first-line option for advanced/metastatic EGFR exon 19 deletion or L858R NSCLC. Per Standard Guidelines (NCCN), NSCLC v7.2026, Therapy for Actionable Molecular Markers (EGFR Exon 19 Deletion or L858R Mutation)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic NSCLC with an EGFR exon 19 deletion or L858R activating mutation",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "EGFR activating mutation (exon 19 deletion or L858R)", "source": "Standard Guidelines (NCCN), NSCLC", "locator": "v7.2026, Therapy for Actionable Molecular Markers, EGFR Exon 19 Deletion or L858R Mutation (Osimertinib preferred); line 782" },
+    { "criterion": "evidenceBasis", "requirement": "first-line osimertinib vs first-generation EGFR TKI in sensitizing EGFR-mutant advanced NSCLC (FLAURA)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 70476 to 70484 (FLAURA: osimertinib 80 mg per day vs erlotinib 150 mg per day or gefitinib 250 mg per day)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "osimertinib",
+        "name": "Osimertinib",
+        "basis": "flat",
+        "dosePerUnit": 80,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70484 (FLAURA: osimertinib 80 mg per day, first-line sensitizing EGFR-mutant advanced NSCLC)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 70484 (FLAURA, osimertinib 80 mg per day). Osimertinib 80 mg PO once daily, continuous, until disease progression (represented here as days 1 to 28 of a 28-day cycle, cycles null). The 80 mg once-daily dose is corroborated in Standard Guidelines (NCCN) NSCLC v7.2026 (line 4824, osimertinib 80 mg once daily)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous daily oral dosing until disease progression or unacceptable toxicity.",
+      "Monitor for QTc prolongation, interstitial lung disease/pneumonitis, and cardiomyopathy per labeling."
+    ]
+  },
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "ECG/QTc and cardiac function (osimertinib)",
+    "pulmonary assessment for pneumonitis/ILD"
+  ],
+  "clearanceChecks": ["prior-cycle status", "cardiac/QTc", "pulmonary"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher toxicity, ILD/pneumonitis, or QTc prolongation", "drug": "osimertinib", "action": "hold/reduce/discontinue", "text": "Hold, reduce, or discontinue per labeling and clinical review; permanently discontinue for confirmed ILD/pneumonitis." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "line 70476 to 70484 (FLAURA; osimertinib 80 mg per day first-line for sensitizing EGFR-mutant advanced NSCLC)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), NSCLC", "version": "7.2026", "date": null, "locator": "Therapy for Actionable Molecular Markers, EGFR Exon 19 Deletion or L858R Mutation (Osimertinib preferred), line 782 and lines 5490 to 5525; osimertinib 80 mg once daily dosing stated at line 4824", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for NSCLC subtype #10 (EGFR oncogene-targeted, first-line). Osimertinib 80 mg PO once daily is dose-grounded to DeVita 12th ed. line 70484 (FLAURA) and corroborated by Standard Guidelines (NCCN) NSCLC v7.2026 (line 4824). Biomarker gate (EGFR exon 19 deletion or L858R) is grounded to the NSCLC v7.2026 Therapy for Actionable Molecular Markers table. Continuous daily dosing until progression (cycles null). No dose field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
