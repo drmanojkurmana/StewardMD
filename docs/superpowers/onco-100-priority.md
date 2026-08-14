@@ -30,14 +30,14 @@ Pre-activation gates (R1 IMPORTANT, NOT staging blockers): v1 engine enforces th
 ## E. Gynecologic (42-51)  [India priority - cervical #3]  [batch 3 - STAGED (R1-approved DRAFT) 8cc168c3]
 17 regimens (gyn-*), serve #42-51. 2 dose-verifiers + R1 = zero wrong doses. Fully grounded (10): carbo-paclitaxel, dose-dense-paclitaxel, carbo-paclitaxel-bev, olaparib-maint, niraparib-maint, endometrial-carbo-paclitaxel, uterine-lms-doxorubicin, uterine-lms-gem-docetaxel, gtn-methotrexate, gtn-emaco (GTN fully per-day dosed, vinCRIStine 2mg cap). VERIFY-bearing (7): cervical-cisplatin-rt(cycles), cervical-pac-cis-bev(GOG-240 doses), cervical-pembro-chemo(backbone), vulvar/vaginal-cisplatin-rt(cisplatin dose), endometrial-pembro-lenvatinib(lenvatinib), endometrial-io-dmmr(dostarlimab).
 
-## F. Genitourinary (52-62)
-52. Prostate · 53. mCSPC · 54. mCRPC · 55. RCC · 56. ccRCC · 57. Urothelial bladder · 58. Upper-tract urothelial · 59. Testicular GCT · 60. Seminoma · 61. NSGCT · 62. Penile - pending
+## F. Genitourinary (52-62)  [batch 6 - STAGED (R1-approved DRAFT) b093e9ab]
+30 gu-* regimens, serve #52-62. 3 dose-verifiers + R1 = zero wrong doses (the 3 lethal-trap doses - nivo/ipi ratio, cabo & lenvatinib mono-vs-combo - all correct). 22 fully-grounded, 8 VERIFY-bearing (axitinib/CLEAR-lenvatinib/9ER-cabo/erdafitinib/carbo-AUC combo-specific; radium schema-gap kBq/kg; penile 5FU cycles). Prostate (ADT/mCSPC/mCRPC incl radium-223 + Lu-177-PSMA + olaparib), RCC clear-cell TKI+IO, urothelial (gem-cis/ddMVAC/avelumab/EV/erdafitinib), testicular BEP/EP/VIP + seminoma, penile TIP.
 
 ## G. CNS (63-69)
 63. Glioblastoma · 64. Diffuse astrocytic glioma · 65. Oligodendroglioma · 66. Ependymoma · 67. Medulloblastoma · 68. Primary CNS lymphoma · 69. Brain metastases - pending
 
-## H. Hematologic (70-88)
-70. AML [have: 7+3 induction, HiDAC/IDAC consolidation, DRAFT] · 71. ALL · 72. CML · 73. CLL · 74. Hodgkin · 75. DLBCL [have: R-CHOP] · 76. Follicular · 77. Mantle-cell · 78. Marginal-zone · 79. Burkitt · 80. PTCL · 81. ALCL · 82. Multiple myeloma · 83. Smoldering myeloma · 84. MDS · 85. MPN · 86. Polycythemia vera · 87. Essential thrombocythemia · 88. Primary myelofibrosis - mostly pending
+## H. Hematologic (70-88)  [batch 7 - STAGED (R1-approved DRAFT) c06c6e92; + existing 7+3/HiDAC/ATRA-ATO/R-CHOP]
+31 heme-* regimens, serve #70,72-88. 3 dose-verifiers + R1 = zero wrong doses; 7 fully-grounded, 24 VERIFY-bearing. Key safety catch: venetoclax flat-400 would be fatal-TLS if promoted -> dose VERIFY-gated (ramp not yet structurally encodable). CHOP backbone closed via rchop.json for Pola-R-CHP/CHOEP/BV-CHP. #71 ALL was missed in the fan-out (no adult-ALL NCCN PDF; grounds from DeVita/Harrison) - being added separately (hyper-CVAD / Ph+ TKI / blinatumomab / inotuzumab).
 
 ## I. Melanoma & skin (89-92)
 89. Cutaneous melanoma · 90. Merkel cell · 91. Basal-cell · 92. Cutaneous SCC - pending
