@@ -75,11 +75,43 @@
   function fieldRow(label, inp, req, reqEmpty) { return '<label class="oe-field' + (reqEmpty ? " req-empty" : "") + '"><span>' + esc(label) + (req ? ' <b class="oe-req">*</b>' : "") + "</span>" + inp + "</label>"; }
   function textInp(name, value, ph) { return '<input class="oe-inp" data-oe-inp="' + esc(name) + '" value="' + esc(value || "") + '" placeholder="' + esc(ph || "") + '">'; }
 
+  // ---- visit timeline (the encounter timeline addToTimeline() already records: assessment saved, inv
+  // ordered, meds prescribed, notes, ER referral) — shown in the patient Profile, newest first. --------
+  var TL_ICON = { note: "clinical_notes", medication: "medication", med: "medication", assessment: "assignment",
+    investigation: "science", inv: "science", order: "science", vitals: "monitor_heart", checkout: "check_circle",
+    referral: "emergency", er: "emergency" };
+  function relTime(ts) {
+    var d = now() - ts; if (!(d >= 0)) return "";
+    var m = Math.floor(d / 60000); if (m < 1) return "just now"; if (m < 60) return m + "m ago";
+    var h = Math.floor(m / 60); if (h < 24) return h + "h ago"; return Math.floor(h / 24) + "d ago";
+  }
+  function timelineSection(st) {
+    if (!st.ticketId || !st.sessionId) return "";   // only queue-ticket encounters have a timeline
+    if (st.timelineLoading) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Visit timeline</div>" + loadingBox("Loading timeline…") + "</section>";
+    var tl = (st.timeline || []).slice().sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    if (!tl.length) return section("history", "Visit timeline", "", "", "No entries yet — documenting the visit (assessment, orders, prescriptions) adds them here.");
+    var rows = tl.map(function (e) {
+      var ico = TL_ICON[String(e.kind || "").toLowerCase()] || "history";
+      return '<div class="oe-tl-row"><div class="oe-tl-ic">' + ms(ico) + '</div><div class="oe-tl-b"><div class="oe-tl-t">' + esc(e.text || "") + '</div><div class="oe-tl-m">' + esc(relTime(e.ts)) + (e.by ? " · " + esc(e.by) : "") + "</div></div></div>";
+    }).join("");
+    return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + 'Visit timeline<span class="oe-sub">' + tl.length + " event" + (tl.length === 1 ? "" : "s") + '</span></div><div class="oe-tl">' + rows + "</div></section>";
+  }
+  function loadTimeline() {
+    if (!st.ticketId || !st.sessionId) return;
+    st.timelineLoading = true;
+    fbTok().then(function (t) {
+      if (!t) { st.timelineLoading = false; return; }
+      fetch(qBase() + "/api/queue/timeline?sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId), { headers: { Authorization: "Bearer " + t } })
+        .then(function (r) { return r.ok ? r.json() : { timeline: [] }; })
+        .then(function (d) { st.timeline = (d && d.timeline) || []; st.timelineLoading = false; if (st.tab === "profile") paint(); })
+        .catch(function () { st.timelineLoading = false; });
+    }).catch(function () { st.timelineLoading = false; });
+  }
   function profileTab(st) {
     var labs = (st.labs || []).map(labRow).join(""), rad = (st.radiology || []).map(radRow).join("");
     var reports = section("history", "Reports", "Investigations we ordered", (labs + rad) || "", "No labs or imaging on record.");
     var meds = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return reports + meds;
+    return timelineSection(st) + reports + meds;
   }
   function invTab(st) {
     var d = st.invDraft || {}, draft = "";
@@ -852,7 +884,7 @@
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
         if (!res.ok || d.ok === false) { toast(d.resp ? ("GHIS: " + String(d.resp).slice(0, 90)) : "Could not complete the request. Please try again."); return; }
         toast(okMsg);
-        if (tl && tl.text) addToTimeline(tl.kind, tl.text);   // mirror this action into the patient's visit summary
+        if (tl && tl.text) { addToTimeline(tl.kind, tl.text); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
         if (onOk) try { onOk(); } catch (e) {}
         loadProfile({ patientId: st.patient.mrn || "", recordNo: st.recordNo || "" });
@@ -1520,6 +1552,7 @@
     if (st.noStore) { st.loading = false; st.tab = "assess"; st.assessLoaded = true; st.assessVals = {}; paint(); return; }   // blank form for Ask MaiK; skip GHIS/local load
     paint();
     loadProfile(opts);
+    loadTimeline();                                           // visit timeline (queue-ticket encounters only)
     if (opts.tab === "assess") loadAssessment();              // jump straight to the Initial Assessment
   }
   var _localStore = null;   // personal-clinic backend (getConsult/saveConsult), set when source === "local"

@@ -393,3 +393,13 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-search-note.err { border-color: color-mix(in srgb, var(--error) 35%, transparent); background: var(--error-container); color: var(--on-error-container); }
 #smdOpdEmr .oe-search-note.err .material-symbols-outlined { color: var(--error); }
 #smdOpdEmr .oe-linkbtn { border: none; background: none; color: var(--primary); font: 700 13px var(--q-sans); text-decoration: underline; cursor: pointer; padding: 0 2px; }
+
+/* patient visit timeline (Profile tab) */
+#smdOpdEmr .oe-tl { display: flex; flex-direction: column; padding: 2px 4px 6px; }
+#smdOpdEmr .oe-tl-row { display: flex; gap: 12px; padding: 8px 10px; position: relative; }
+#smdOpdEmr .oe-tl-row:not(:last-child)::before { content: ""; position: absolute; left: 25px; top: 40px; bottom: -4px; width: 2px; background: var(--sc-high); }
+#smdOpdEmr .oe-tl-ic { width: 32px; height: 32px; flex: 0 0 auto; border-radius: 50%; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; z-index: 1; }
+#smdOpdEmr .oe-tl-ic .material-symbols-outlined { font-size: 18px; }
+#smdOpdEmr .oe-tl-b { flex: 1; min-width: 0; padding-top: 4px; }
+#smdOpdEmr .oe-tl-t { font: 500 14px var(--q-sans); color: var(--on-surface); white-space: pre-wrap; word-break: break-word; }
+#smdOpdEmr .oe-tl-m { font: 500 11.5px var(--q-mono); color: var(--secondary); margin-top: 3px; }
