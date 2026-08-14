@@ -1,0 +1,197 @@
+{
+  "id": "heme-all-hypercvad",
+  "name": "Hyper-CVAD (alternating Course A / Course B) for adult ALL",
+  "disease": "Acute lymphoblastic leukemia (adult)",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage or T-lineage acute lymphoblastic leukemia",
+  "stage": [],
+  "biomarkers": {
+    "BCR_ABL1": "tested",
+    "CD20": "tested",
+    "note": "Hyper-CVAD is a cytotoxic backbone and is not itself biomarker-restricted. BCR::ABL1 (Ph) status is tested because a TKI is added for Ph-positive disease (see heme-all-ph-positive-tki); CD20 is tested because rituximab is added to the backbone (R-hyper-CVAD) in CD20-positive disease. Harrison 22nd ed. line 120184 names Hyper-CVAD as the alternating eight-cycle intensive regimen; NCCN B-cell (guidelines/b-cell.txt) lines 5132/15692 describe HyperCVAD with alternating high-dose methotrexate/cytarabine and integrated intrathecal CNS prophylaxis, and R-hyperCVAD adding rituximab."
+  },
+  "treatmentSetting": "induction and consolidation",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (fractionated, Course A)",
+        "modificationRules": [],
+        "notes": "Course A component (hyperfractionated cyclophosphamide). Harrison 22nd ed. Fig 111-1 (lines 119994 to 120016) and line 120184, and NCCN B-cell (guidelines/b-cell.txt) line 5125, name cyclophosphamide as a Course A drug but do not print the mg/m2 dose, schedule, or number of fractions in these extracts. Dose, unit, basis, and days are VERIFY (not inferred). Mesna uroprotection is customary with fractionated cyclophosphamide - confirm against the institutional template."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (Course A)",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "notes": "Course A component. Per-dose cap of 2 mg is the standard ISMP/StewardMD vincristine safety ceiling (a per-dose maximum that can only reduce dose), corroborated in NCCN B-cell (guidelines/b-cell.txt line 15695); ISMP tall-man vinCRIStine, IV-only (fatal if intrathecal). The mg/m2 dose and days are not printed in the ALL extracts (Harrison Fig 111-1 line 120016 lists Vincristine as a Course A drug without a dose) - dose, unit, basis, and days are VERIFY."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (Course A)",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "notes": "Course A anthracycline (DOXOrubicin). Harrison Fig 111-1 line 120016 lists Doxo as a Course A drug but prints no dose in this extract - dose, unit, basis, and days are VERIFY. Cumulative-lifetime cap (warn 450 / hard 550 mg/m2) is the conventional doxorubicin cardiotoxicity safety threshold applied by StewardMD, not printed in this source - track cumulative anthracycline exposure."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO or IV (Course A)",
+        "modificationRules": [],
+        "notes": "Course A glucocorticoid. Harrison Fig 111-1 line 120016 lists Dexa as a Course A drug; Harrison line 120175 notes dexamethasone is often preferred to prednisone in ALL because it penetrates the blood-brain barrier. No mg dose or schedule is printed for the Course A dexamethasone in this extract - dose, unit, basis, and days are VERIFY."
+      },
+      {
+        "id": "methotrexate-hd",
+        "name": "Methotrexate (high-dose, Course B)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (Course B)",
+        "modificationRules": [],
+        "notes": "Course B high-dose methotrexate. Harrison line 120040 gives a general ALL-consolidation range for HD methotrexate of 1 to 1.5 g/m2 (up to 3 to 5 g/m2), not the Hyper-CVAD Course B dose specifically - dose, unit, basis, and days are VERIFY. MANDATORY leucovorin (folinic acid) rescue plus serial methotrexate-level monitoring and urine alkalinization/hydration; hold folate antagonists and nephrotoxins."
+      },
+      {
+        "id": "cytarabine-hd",
+        "name": "CYTARabine (high-dose, Course B)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV (Course B)",
+        "modificationRules": [],
+        "notes": "Course B high-dose cytarabine. Harrison line 120040 gives a general ALL-consolidation range for HD cytarabine of 4 to 12 doses at 1 to 3 g/m2, not the Hyper-CVAD Course B dose specifically - dose, unit, basis, and days are VERIFY. High-dose cytarabine requires cerebellar/neurologic checks before each dose and corticosteroid eye drops for conjunctivitis/keratitis prophylaxis; reduce for renal impairment and age."
+      },
+      {
+        "id": "intrathecal-cns-prophylaxis",
+        "name": "Intrathecal CNS prophylaxis (methotrexate +/- cytarabine)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "intrathecal (lumbar puncture)",
+        "modificationRules": [],
+        "notes": "MANDATORY CNS prophylaxis. Harrison lines 120134 to 120138 describe intrathecal therapy for ALL as methotrexate alone or combined with cytarabine, with or without a glucocorticoid, given by lumbar puncture; NCCN B-cell (guidelines/b-cell.txt) line 5132 notes the HyperCVAD regimen includes intrathecal therapy. Intrathecal doses are fixed (not BSA-based) and are not printed here - dose, unit, basis, and days are VERIFY. Intrathecal agents are cytarabine and methotrexate ONLY; vinCRIStine must NEVER be given intrathecally (fatal)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": 8,
+    "premedications": [],
+    "supportiveCare": [
+      "tumor lysis syndrome prophylaxis (hydration, allopurinol or rasburicase, electrolyte monitoring) - ALL carries high TLS risk; Harrison line 120030 notes ALL pre-phase therapy allows safe tumor reduction to avoid tumor lysis syndrome",
+      "high emetic-risk multi-agent regimen - antiemetic prophylaxis per NCCN Antiemesis high-risk tier (agent/dose pending per-disease template)",
+      "conventionally high febrile-neutropenia risk - growth-factor support per NCCN Hematopoietic Growth Factors guideline (timing/dose pending per-disease template)",
+      "high-dose methotrexate (Course B): mandatory leucovorin rescue plus methotrexate-level monitoring, hydration, and urine alkalinization",
+      "high-dose cytarabine (Course B): neurologic (cerebellar) checks and prophylactic corticosteroid eye drops",
+      "mesna uroprotection with fractionated cyclophosphamide (Course A) - confirm against institutional template"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each course and during marrow aplasia",
+    "renal function before high-dose methotrexate; serial methotrexate levels with leucovorin rescue",
+    "hepatic function",
+    "cardiac assessment (anthracycline) and cumulative doxorubicin tracking",
+    "neurologic (cerebellar) assessment before each high-dose cytarabine dose",
+    "tumor lysis labs (K, phosphate, calcium, uric acid, creatinine) during induction"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "locator": "lines 119994, 120016, 120030, 120040, 120134, 120138, 120175, 120184 (Chapter 111 Acute Lymphoid Leukemia; Fig 111-1 Hyper-CVAD components, alternating eight-cycle identity, consolidation HD-MTX/HD-AraC ranges, intrathecal CNS prophylaxis, TLS pre-phase)",
+        "evidenceStatus": "current"
+      },
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 277142 (hyper-CVAD dose-intensive regimen in adult ALL), 281449 (hyper-CVAD as an intensive CIT regimen)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), B-cell Lymphomas extract (used here only for the HyperCVAD regimen structure and the 2 mg vincristine cap)",
+        "version": null,
+        "date": null,
+        "locator": "guidelines/b-cell.txt lines 5125, 5132, 15692, 15695 (HyperCVAD alternating with high-dose methotrexate/cytarabine, integrated intrathecal CNS prophylaxis, R-hyperCVAD, vincristine capped at 2 mg)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "eligibilityCriteria",
+    "regimen.cycleLengthDays",
+    "regimen.drugs.cyclophosphamide.basis",
+    "regimen.drugs.cyclophosphamide.dosePerUnit",
+    "regimen.drugs.cyclophosphamide.unit",
+    "regimen.drugs.cyclophosphamide.days",
+    "regimen.drugs.vincristine.basis",
+    "regimen.drugs.vincristine.dosePerUnit",
+    "regimen.drugs.vincristine.unit",
+    "regimen.drugs.vincristine.days",
+    "regimen.drugs.doxorubicin.basis",
+    "regimen.drugs.doxorubicin.dosePerUnit",
+    "regimen.drugs.doxorubicin.unit",
+    "regimen.drugs.doxorubicin.days",
+    "regimen.drugs.dexamethasone.basis",
+    "regimen.drugs.dexamethasone.dosePerUnit",
+    "regimen.drugs.dexamethasone.unit",
+    "regimen.drugs.dexamethasone.days",
+    "regimen.drugs.methotrexate-hd.basis",
+    "regimen.drugs.methotrexate-hd.dosePerUnit",
+    "regimen.drugs.methotrexate-hd.unit",
+    "regimen.drugs.methotrexate-hd.days",
+    "regimen.drugs.cytarabine-hd.basis",
+    "regimen.drugs.cytarabine-hd.dosePerUnit",
+    "regimen.drugs.cytarabine-hd.unit",
+    "regimen.drugs.cytarabine-hd.days",
+    "regimen.drugs.intrathecal-cns-prophylaxis.basis",
+    "regimen.drugs.intrathecal-cns-prophylaxis.dosePerUnit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.unit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.days"
+  ],
+  "provenanceNote": "Textbook-grounded StewardMD draft for adult ALL. Regimen identity (alternating Course A cyclophosphamide/vinCRIStine/DOXOrubicin/dexamethasone with Course B high-dose methotrexate/cytarabine, integrated intrathecal CNS prophylaxis, eight cycles) is grounded in Harrison 22nd ed. Chapter 111 (Fig 111-1 and line 120184) and the NCCN B-cell extract. The alternating Course A/B per-drug mg/m2 doses, fractionation schedules, and cycle length are NOT printed in the available adult ALL extracts and are therefore left as VERIFY rather than inferred; the vincristine 2 mg per-dose cap and the anthracycline cumulative cap are applied as StewardMD safety rules. Cycles resolved to 8 per Harrison line 120184. NCCN per-disease template, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

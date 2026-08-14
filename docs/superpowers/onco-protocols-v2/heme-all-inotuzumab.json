@@ -1,0 +1,99 @@
+{
+  "id": "heme-all-inotuzumab",
+  "name": "Inotuzumab ozogamicin (anti-CD22 ADC) for relapsed/refractory CD22-positive B-ALL",
+  "disease": "Acute lymphoblastic leukemia (adult), B-lineage",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage (B-cell) acute lymphoblastic leukemia, CD22-positive",
+  "stage": [],
+  "biomarkers": {
+    "CD22": "positive",
+    "note": "BIOMARKER GATE: inotuzumab ozogamicin is an anti-CD22 antibody-drug conjugate (calicheamicin payload) and requires CD22-positive B-lineage ALL. DeVita 12th ed. line 32240 describes inotuzumab ozogamicin as a humanized IgG4 CD22-directed conjugate; line 276584 states it is an anti-CD22 antibody conjugated to calicheamicin. Approved in the relapsed ALL setting (DeVita line 276588, 2017)."
+  },
+  "treatmentSetting": "relapsed/refractory",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "relapsed/refractory (salvage); frequently used to bridge to allogeneic stem-cell transplant",
+  "eligibilityCriteria": [
+    { "criterion": "CD22", "requirement": "CD22-positive B-lineage ALL", "source": "DeVita 12th ed", "locator": "lines 32240, 276584" },
+    { "criterion": "disease-state", "requirement": "relapsed or refractory B-ALL", "source": "DeVita 12th ed", "locator": "lines 276584 to 276588" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "inotuzumab-ozogamicin",
+        "name": "Inotuzumab ozogamicin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV infusion",
+        "modificationRules": [],
+        "notes": "Anti-CD22 antibody-drug conjugate. DeVita line 276584 establishes the identity (anti-CD22 conjugated to calicheamicin) and lines 276587 to 276588 establish relapsed/refractory B-ALL efficacy and 2017 approval, but no mg/m2-per-dose, fractionated weekly schedule, or number of cycles is printed in the adult ALL extracts - dose, unit, basis, and days are VERIFY (not inferred). Given in fractionated weekly doses per cycle with dose reduction once complete remission is achieved (DeVita line 37538 notes the usual course number is about 2) - confirm the exact schedule against the current label."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Infusion premedication", "notes": "corticosteroid, antipyretic, and antihistamine before each infusion to reduce infusion reactions - confirm against the current label" }
+    ],
+    "supportiveCare": [
+      "HEPATIC VENO-OCCLUSIVE DISEASE / SINUSOIDAL OBSTRUCTION SYNDROME (VOD/SOS) is the key serious toxicity of inotuzumab (recognized calicheamicin-conjugate / label boxed-warning risk): monitor liver function tests and for signs of VOD before, during, and after therapy, and especially around and after allogeneic stem-cell transplant; minimize peri-transplant hepatotoxins and dual-alkylator conditioning where possible - confirm management against the current label",
+      "tumor lysis syndrome prophylaxis (hydration, allopurinol or rasburicase) with high tumor burden",
+      "infusion-reaction monitoring; premedicate per label",
+      "QTc monitoring per label",
+      "CNS prophylaxis / intrathecal therapy remains required because antibodies do not enter the CNS (Harrison line 120148)",
+      "combination context: DeVita line 276593 to 276595 reports inotuzumab combined with reduced-intensity mini-Hyper-CVD (cyclophosphamide and dexamethasone at 50% dose reduction, no anthracycline, methotrexate at 75% dose reduction, and cytarabine at 0.5 g/m2 for four doses), with or without blinatumomab, as a salvage regimen - the cytarabine 0.5 g/m2 x 4 is the only printed absolute dose in that combination"
+    ]
+  },
+  "monitoring": [
+    "liver function tests (bilirubin, ALT/AST, ALP) before and during therapy and after transplant - VOD/SOS surveillance",
+    "CBC with differential",
+    "QTc / electrolytes per label",
+    "tumor lysis labs with high tumor burden",
+    "infusion-reaction monitoring during each infusion"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver (VOD risk)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "signs of hepatic VOD/SOS or significant transaminitis/hyperbilirubinemia", "action": "hold", "text": "Interrupt and evaluate for VOD/SOS; manage per label. Physician decides on discontinuation or resumption." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 32240 to 32254 (CD22 IgG4 conjugate, randomized relapsed-ALL benefit), 37538 (restricted dose/cycle number, usually 2), 276584 to 276588 (anti-CD22 calicheamicin conjugate, relapsed/refractory activity, 2017 approval), 276593 to 276595 (mini-Hyper-CVD combination with cytarabine 0.5 g/m2 x 4)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "locator": "line 120148 (intrathecal CNS prophylaxis required with immunotherapies because most antibodies do not enter the CNS)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs.inotuzumab-ozogamicin.basis",
+    "regimen.drugs.inotuzumab-ozogamicin.dosePerUnit",
+    "regimen.drugs.inotuzumab-ozogamicin.unit",
+    "regimen.drugs.inotuzumab-ozogamicin.days"
+  ],
+  "provenanceNote": "Textbook-grounded StewardMD draft for relapsed/refractory CD22-positive B-ALL. The anti-CD22 calicheamicin ADC identity, the CD22-positive biomarker gate, the relapsed/refractory setting, and the hepatic VOD/SOS safety concern are grounded in DeVita 12th ed. (lines 32240 to 32254, 276584 to 276588), with the VOD/SOS boxed-warning surveillance recorded as a recognized calicheamicin-conjugate/label risk, and the intrathecal-CNS-prophylaxis requirement from Harrison line 120148. The per-dose amount, fractionated weekly schedule, and number of cycles are NOT printed in the adult ALL extracts and are left VERIFY; only the mini-Hyper-CVD combination cytarabine 0.5 g/m2 x 4 carries a printed absolute dose and is recorded as combination context, not as the inotuzumab dose. NCCN per-disease template, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

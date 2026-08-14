@@ -1,0 +1,108 @@
+{
+  "id": "heme-all-blinatumomab",
+  "name": "Blinatumomab (CD19/CD3 BiTE) for relapsed/refractory or MRD-positive B-ALL",
+  "disease": "Acute lymphoblastic leukemia (adult), B-lineage",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage (B-cell) acute lymphoblastic leukemia, CD19-positive",
+  "stage": [],
+  "biomarkers": {
+    "CD19": "positive",
+    "note": "BIOMARKER GATE: blinatumomab is a CD19/CD3 bispecific T-cell engager (BiTE) and requires CD19-positive B-lineage ALL. DeVita 12th ed. line 32198 describes blinatumomab as a bispecific T-cell engager consisting of anti-CD3/anti-CD19; line 31889 names the anti-CD3/anti-CD19 molecule blinatumomab. Initial approval was in Philadelphia-negative relapsed/refractory B-ALL (DeVita lines 276510 to 276520); also used for MRD-positive disease."
+  },
+  "treatmentSetting": "relapsed/refractory or measurable residual disease (MRD)-positive",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "relapsed/refractory (salvage) or MRD-directed; frequently used to bridge to allogeneic stem-cell transplant",
+  "eligibilityCriteria": [
+    { "criterion": "CD19", "requirement": "CD19-positive B-lineage ALL", "source": "DeVita 12th ed", "locator": "lines 32198, 276510" },
+    { "criterion": "disease-state", "requirement": "relapsed or refractory B-ALL, or MRD-positive B-ALL", "source": "DeVita 12th ed", "locator": "lines 276510 to 276520" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "blinatumomab",
+        "name": "Blinatumomab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "continuous IV infusion",
+        "infusionDuration": "continuous (multi-week per cycle)",
+        "modificationRules": [],
+        "notes": "Blinatumomab is given as a continuous IV infusion over each treatment cycle (DeVita line 32198 describes the BiTE mechanism; the route is grounded, the dose is not). No adult mg/mcg-per-day dose or cycle schedule is printed in the adult ALL extracts - dose, unit, basis, and days are VERIFY (not inferred). The pediatric NCCN guideline (guidelines/ped_all.txt line 5328) prints a pediatric BSA-based step of 5 micrograms/m2/day for the first 7 days then 15 micrograms/m2/day; this is reference-only and is NOT adopted as the adult dose, which is weight-tiered fixed dosing per current label. A step-up (lead-in) dose to mitigate cytokine release syndrome is standard - confirm against the current label."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Corticosteroid pre-phase / premedication", "notes": "cytoreduction and dexamethasone premedication before and at infusion start/step-up are used to reduce cytokine release syndrome risk - confirm dose against the current label" }
+    ],
+    "supportiveCare": [
+      "cytokine release syndrome (CRS) monitoring and management - a recognized class toxicity of T-cell-engaging therapy (DeVita lines 276613 to 276639 discuss CRS grading for immune effector cell therapies); confirm blinatumomab-specific mitigation (step-up dosing, corticosteroid, tocilizumab availability) against the current label",
+      "neurologic toxicity monitoring (encephalopathy, seizures, tremor, aphasia) - a recognized blinatumomab class toxicity; institute the label neurologic-event management and holding rules",
+      "tumor lysis syndrome prophylaxis (hydration, allopurinol or rasburicase) especially with high tumor burden",
+      "CNS prophylaxis / intrathecal therapy remains required because antibodies do not enter the CNS (Harrison line 120148)",
+      "inpatient monitoring for cycle 1 / step-up per label; infusion-pump continuity is essential (continuous infusion)"
+    ]
+  },
+  "monitoring": [
+    "CRS surveillance (fever, hypotension, hypoxia) - especially during cycle 1 and each step-up",
+    "neurologic assessment at baseline and during infusion",
+    "CBC with differential",
+    "hepatic function",
+    "tumor lysis labs early in cycle 1"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "neurologic baseline", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher CRS or neurologic event", "action": "hold", "text": "Interrupt/hold infusion and manage per label; physician decides on resumption and step-up." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 31889 (anti-CD3/anti-CD19 blinatumomab), 32198 (BiTE mechanism), 32272 to 32276 (randomized trial versus chemotherapy), 276510 to 276520 (Ph-negative relapsed/refractory B-ALL activity and 2016 approval), 276613 to 276639 (CRS and neurotoxicity grading for immune effector cell therapies)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "locator": "line 120148 (intrathecal CNS prophylaxis required with immunotherapies because most antibodies do not enter the CNS)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric ALL extract (reference only; pediatric dosing not adopted for adults)",
+        "version": null,
+        "date": null,
+        "locator": "guidelines/ped_all.txt line 5328 (pediatric blinatumomab 5 then 15 micrograms/m2/day - reference only)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs.blinatumomab.basis",
+    "regimen.drugs.blinatumomab.dosePerUnit",
+    "regimen.drugs.blinatumomab.unit",
+    "regimen.drugs.blinatumomab.days"
+  ],
+  "provenanceNote": "Textbook-grounded StewardMD draft for relapsed/refractory or MRD-positive CD19-positive B-ALL. The CD19/CD3 BiTE identity, the CD19-positive biomarker gate, the continuous IV infusion route, the relapsed/refractory and MRD-positive setting, and the CRS/neurotoxicity safety profile are grounded in DeVita 12th ed. (lines 32198, 276510 to 276520, 276613 to 276639) with the intrathecal-CNS-prophylaxis requirement from Harrison line 120148. The adult per-day dose, step-up schedule, and cycle length are NOT printed in the adult extracts and are left VERIFY; the pediatric microgram/m2/day values are recorded as reference-only and are not adopted as the adult dose. NCCN per-disease template, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
