@@ -139,8 +139,10 @@ async function aiAdminAuthed(request, env, url) {
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
 // MaiK Scribe voice kinds (assessment / opd-scribe / translate) can run on a cheaper model for cost —
 // set env.SCRIBE_MODEL (e.g. "gemini-2.5-flash-lite"); unset = the normal model. Only real, priced models honoured.
-const SCRIBE_MODEL_DEFAULT = "gemini-2.5-flash-lite";   // ~5x cheaper; extraction is whitelist-sanitized + doctor-reviewed, so it can't emit unsafe data. Override via env.SCRIBE_MODEL (e.g. gemini-2.5-flash) to revert.
-function scribeModel(env) { const m = env && env.SCRIBE_MODEL; if (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) return m; return ALLOWED_MODELS.indexOf(SCRIBE_MODEL_DEFAULT) > -1 ? SCRIBE_MODEL_DEFAULT : null; }
+// Default = the accurate model (null -> the normal modelId). flash-lite was measured to mistranslate
+// clinical terms (Telugu "prameham"/diabetes -> "premeal"; "2 days" -> "yesterday"), so it is NOT the
+// default — enable it per-deploy only via env.SCRIBE_MODEL if you accept that accuracy tradeoff for cost.
+function scribeModel(env) { const m = env && env.SCRIBE_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
 // Router-intent normalisation: the parser occasionally emits a value outside its own enum ("interpretation",
 // "prevent") or a synonym; clamp to the canonical taxonomy so the client's intent->composer mapping is
 // deterministic. Generic — no disease specifics.
