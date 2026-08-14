@@ -1,0 +1,74 @@
+{
+  "id": "gi-gist-sunitinib",
+  "name": "Sunitinib (GIST, second-line)",
+  "disease": "Gastrointestinal stromal tumor (GIST)",
+  "diseaseId": "gastrointestinal_stromal_tumour",
+  "histology": "gastrointestinal stromal tumor (KIT/CD117-expressing mesenchymal neoplasm)",
+  "stage": ["unresectable", "recurrent", "metastatic"],
+  "biomarkers": {
+    "KIT": "acquired imatinib resistance is usually driven by secondary KIT (or PDGFRA) mutations; sunitinib has activity against KIT exon 9 and some ATP-binding-pocket secondary mutations",
+    "note": "Sunitinib is the standard second-line TKI for advanced GIST after failure of or intolerance to imatinib (category 1). It also has activity in SDH-deficient GIST. Per Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors, GIST-D, and DeVita 12th ed. (lines 118425 to 118432)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "second-line for unresectable/recurrent/metastatic GIST after imatinib failure or intolerance (category 1)",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "disease progression on, or intolerance to, imatinib", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 118425 (standard second-line therapy is sunitinib in patients failing or intolerant to imatinib); Standard Guidelines (NCCN) GIST v1.2026, GIST-D (Sunitinib, category 1, second-line)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "sunitinib",
+        "name": "Sunitinib",
+        "basis": "flat",
+        "dosePerUnit": 50,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 118431 to 118432 (sunitinib 50 mg daily for 4 weeks with a 2-week rest; a continuous regimen with a daily dose of 37.5 mg can be used as well)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. (lines 118431 to 118432). Sunitinib 50 mg PO once daily for 4 weeks (days 1 to 28) followed by a 2-week rest, in a 6-week (42-day) cycle - this is the schedule the pivotal GIST trial evaluated. ALTERNATIVE source-stated schedule: continuous daily sunitinib 37.5 mg with no planned break (DeVita line 118432; Standard Guidelines (NCCN) GIST v1.2026 gist lines 1535, 1539). Days array encodes the 28 on-treatment days of the 42-day cycle. No ISMP tall-man form. Sunitinib-specific monitoring: hypertension (blood pressure at baseline and each cycle), hand-foot skin reaction, fatigue, thyroid function, and cardiac function."
+      }
+    ],
+    "cycleLengthDays": 42,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "50 mg daily 4-weeks-on / 2-weeks-off (6-week cycle) or continuous 37.5 mg daily; continue until progression or intolerance.",
+      "Monitor blood pressure for TKI-associated hypertension; assess hand-foot skin reaction each cycle.",
+      "Antiemetic/G-CSF prophylaxis not routinely required for oral sunitinib monotherapy."
+    ]
+  },
+  "monitoring": [
+    "blood pressure (TKI-associated hypertension) at baseline and each cycle",
+    "hand-foot skin reaction assessment each cycle",
+    "thyroid function (TSH) - sunitinib-induced hypothyroidism",
+    "left ventricular function / cardiac assessment as indicated",
+    "CBC and liver function",
+    "clinical/radiographic response assessment (CT)"
+  ],
+  "clearanceChecks": ["blood pressure", "CBC/platelets", "liver", "thyroid", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 hypertension or hand-foot skin reaction", "drug": "sunitinib", "action": "hold/reduce", "text": "Hold and resume at a reduced dose (e.g., 37.5 mg) per labeling; manage blood pressure; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 118425, 118431 to 118432 (sunitinib standard second-line; 50 mg daily 4 weeks on / 2 weeks off; 37.5 mg continuous alternative)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors", "version": "1.2026", "date": null, "locator": "GIST-D (Sunitinib, category 1, second-line for imatinib-resistant/intolerant GIST); gist lines 1535, 1539 (continuous daily sunitinib 37.5 mg)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for sunitinib in GIST (disease #29), second-line after imatinib. Both source-stated schedules are dose-grounded to DeVita 12th ed. (lines 118431 to 118432): sunitinib 50 mg PO daily 4-weeks-on / 2-weeks-off (6-week cycle) as modeled, and continuous 37.5 mg daily as the alternative (also NCCN GIST v1.2026 gist lines 1535, 1539). Second-line positioning after imatinib failure/intolerance is source-stated (DeVita line 118425; NCCN GIST-D). No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

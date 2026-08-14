@@ -1,0 +1,92 @@
+{
+  "id": "gi-anal-5fu-mmc-rt",
+  "name": "Fluorouracil + Mitomycin with concurrent radiation (definitive anal SCC)",
+  "disease": "Anal cancer (squamous cell carcinoma of the anal canal)",
+  "diseaseId": "anal_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["localized (T1-T4, N0-N+, M0)"],
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "Definitive concurrent chemoradiation with fluorouracil plus mitomycin (the Nigro-type regimen) is organ-preserving standard of care for localized anal squamous cell carcinoma. There is no routine molecular biomarker gate for regimen selection; DPYD testing is advised before fluoropyrimidine exposure. Per Standard Guidelines (NCCN), Anal Carcinoma, ANAL-B (Systemic Therapy Regimens and Dosing - Localized Cancer)."
+  },
+  "treatmentSetting": "definitive chemoradiation",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line definitive (organ-preserving) treatment for localized anal squamous cell carcinoma; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "squamous cell carcinoma of the anal canal/margin", "source": "Standard Guidelines (NCCN), Anal Carcinoma", "locator": "v2.2026, ANAL-B (Fluorouracil/Mitomycin + RT)" },
+    { "criterion": "stage", "requirement": "localized (non-metastatic) disease treated with definitive concurrent radiation", "source": "Standard Guidelines (NCCN), Anal Carcinoma", "locator": "v2.2026, ANAL-3 (Fluorouracil/mitomycin + radiation therapy)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "fluorouracil",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1,2,3,4,29,30,31,32],
+        "route": "IV continuous infusion (per day)",
+        "infusionDuration": "24 hours/day",
+        "caps": { "perDose": null },
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Anal Carcinoma", "version": "2.2026", "date": null, "locator": "ANAL-B (Continuous infusion Fluorouracil 1000 mg/m2/day IV Days 1 to 4 and 29 to 32); anal line 531", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Anal v2.2026, ANAL-B (anal line 531). Fluorouracil 1000 mg/m2/day by continuous IV infusion on days 1 to 4 and 29 to 32, concurrent with radiation. DPYD: FDA boxed warning recommends testing for DPYD genetic variants before starting a fluoropyrimidine; dose-reduce or avoid in DPYD-deficient patients (ANAL footnote a). No ISMP tall-man form."
+      },
+      {
+        "id": "mitomycin",
+        "name": "mitomycin",
+        "basis": "bsa",
+        "dosePerUnit": 10,
+        "unit": "mg/m2",
+        "days": [1, 29],
+        "route": "IV bolus",
+        "infusionDuration": null,
+        "caps": { "perDose": 20 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Anal Carcinoma", "version": "2.2026", "date": null, "locator": "ANAL-B (Mitomycin 10 mg/m2 IV bolus Days 1 and 29, capped at 20 mg, with RT); anal line 532", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Anal v2.2026, ANAL-B (anal line 532). mitomycin 10 mg/m2 IV bolus on days 1 and 29, each dose capped at 20 mg, concurrent with radiation. ALTERNATIVE source-stated schedule: mitomycin 12 mg/m2 IV bolus on day 1 only, capped at 20 mg (anal line 535). ISMP: 'mitomycin' is on the ISMP list of confused drug names (distinguish from mitoXANTRONE). CUMULATIVE TOXICITY: mitomycin carries risk of cumulative and delayed myelosuppression and of hemolytic-uremic syndrome / thrombotic microangiopathy and pulmonary toxicity; the per-dose cap (20 mg) and limited number of doses in this regimen mitigate cumulative exposure."
+      }
+    ],
+    "cycleLengthDays": 42,
+    "cycles": 1,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "Give per emetogenicity on chemotherapy days concurrent with radiation." }
+    ],
+    "supportiveCare": [
+      "Single definitive concurrent chemoradiation course (NOT a repeating cycle): chemotherapy is delivered on days 1 to 4 / 29 to 32 within one radiation course; cycleLengthDays (42) encodes the approximately 6-week concurrent course and cycles is 1.",
+      "Fluoropyrimidine DPYD testing per FDA boxed warning before starting (ANAL footnote a).",
+      "Monitor for radiation dermatitis/proctitis and mitomycin myelosuppression during the concurrent course."
+    ]
+  },
+  "monitoring": [
+    "CBC before each chemotherapy administration and during nadir (mitomycin/5-FU myelosuppression)",
+    "renal function and signs of hemolytic-uremic syndrome / thrombotic microangiopathy (mitomycin)",
+    "pulmonary symptoms (mitomycin pneumonitis)",
+    "radiation-related toxicity (dermatitis, proctitis, mucositis)",
+    "response assessment (clinical exam; imaging) after chemoradiation"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "DPYD status (fluoropyrimidine)"],
+  "doseModificationRules": [
+    { "condition": "significant myelosuppression during concurrent chemoradiation", "drug": "mitomycin/fluorouracil", "action": "hold/reduce", "text": "Adjust the second chemotherapy administration (days 29 to 32 / day 29) for cytopenias per protocol; obtain clinical review." },
+    { "condition": "known DPYD deficiency", "drug": "fluorouracil", "action": "reduce/avoid", "text": "Reduce dose or avoid fluorouracil in DPYD-deficient patients per FDA boxed warning; clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DeVita establishes fluorouracil plus mitomycin with concurrent radiation (Nigro regimen) as organ-preserving definitive treatment for anal squamous cell carcinoma; per-cycle dosing carried from the guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Anal Carcinoma", "version": "2.2026", "date": null, "locator": "ANAL-B (Systemic Therapy Regimens and Dosing - Localized Cancer; Fluorouracil/Mitomycin + RT; anal lines 530 to 535); ANAL-3 (treatment algorithm); footnote a (DPYD testing)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for definitive concurrent chemoradiation of localized anal squamous cell carcinoma with fluorouracil plus mitomycin (Nigro-type) (disease #16). Doses are dose-grounded to Standard Guidelines (NCCN) Anal v2.2026, ANAL-B (anal lines 531 to 532): fluorouracil 1000 mg/m2/day continuous infusion on days 1 to 4 and 29 to 32, and mitomycin 10 mg/m2 IV bolus on days 1 and 29 capped at 20 mg, with concurrent radiation; the mitomycin 12 mg/m2 day-1-only variant (anal line 535) is carried as a source-stated alternative in notes. This is a single definitive concurrent chemoradiation course (cycles = 1); cycleLengthDays (42) encodes the approximately 6-week concurrent course spanned by the day 1 to 32 chemotherapy schedule, not a repeating cycle. ISMP tall-man/confusable-name handling applied to mitomycin; mitomycin cumulative-toxicity (myelosuppression, HUS/TMA, pulmonary) and fluoropyrimidine DPYD safety are captured. No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

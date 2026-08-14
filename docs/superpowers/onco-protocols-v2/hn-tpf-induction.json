@@ -1,0 +1,106 @@
+{
+  "id": "hn-tpf-induction",
+  "name": "TPF induction (DOCEtaxel / CISplatin / Fluorouracil)",
+  "disease": "Head and neck squamous cell carcinoma",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["III", "IVA", "IVB"],
+  "biomarkers": {
+    "HPV_p16": "prognostic only",
+    "note": "p16/HPV status is prognostic but not a dose gate for induction TPF."
+  },
+  "treatmentSetting": ["neoadjuvant-induction"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "induction (neoadjuvant) triplet before definitive chemoradiation or definitive locoregional therapy; not routinely incorporated but used to palliate symptoms, relieve airway compromise, or enable organ preservation; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "locoregionally advanced SCCHN selected for induction chemotherapy before definitive therapy", "source": "DeVita 12th ed.", "locator": "Chapter 23, lines 57880 to 57887 (TPF established as the standard-of-care induction regimen); lines 58030 to 58060 (induction not routine; specific applications: symptom palliation, airway, organ preservation)" },
+    { "criterion": "fitness", "requirement": "adequate fitness for a triplet regimen; higher rate of neutropenic fever in induction arms", "source": "DeVita 12th ed.", "locator": "Chapter 23, lines 58047 to 58049 (higher rate of neutropenic fever in the induction chemotherapy arms)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "docetaxel",
+        "name": "DOCEtaxel",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Cisplatin/Docetaxel/Infusional Fluorouracil listed as an induction regimen, category 1 if induction is chosen (algorithm lines 6166, 6183); standard TAX 323/324 per-drug numeric doses are NOT tabulated in the provided guideline pages", "evidenceStatus": "current" },
+        "notes": "DOCEtaxel is part of the standard TPF induction triplet (identity grounded: NCCN algorithm lines 6166/6183; DeVita 12th ed. Chapter 23 lines 57880 to 57887). The standard TAX 323/324 numeric dose and schedule are NOT present in the provided grounding sources, so dosePerUnit is VERIFY and days is empty pending verification. The ONLY docetaxel dose printed in the corpus is a DOSE-MODIFIED TPF variant used in an NPC de-escalation trial (docetaxel 60 mg/m2; NCCN Discussion lines 9806 to 9807), which is NOT the standard induction dose and must not be used as the default. ISMP tall-man. Requires corticosteroid premedication and monitoring for neutropenia and fluid retention."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Cisplatin/Docetaxel/Infusional Fluorouracil induction regimen (algorithm lines 6166, 6183); standard TAX 323/324 per-drug numeric doses are NOT tabulated in the provided guideline pages", "evidenceStatus": "current" },
+        "notes": "CISplatin is part of the standard TPF induction triplet (identity grounded). Standard TAX 323/324 numeric dose/schedule NOT in the provided sources, so dosePerUnit is VERIFY and days empty. Dose-modified TPF variant in the corpus used cisplatin 60 mg/m2 (NCCN Discussion lines 9806 to 9807), which is NOT the standard induction dose. ISMP tall-man. No lifetime cumulative cap for cisplatin; monitor nephrotoxicity, ototoxicity, neuropathy; hydrate."
+      },
+      {
+        "id": "fluorouracil-ci",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg/m2",
+        "days": [],
+        "route": "IV continuous infusion",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Cisplatin/Docetaxel/Infusional Fluorouracil induction regimen (algorithm lines 6166, 6183); standard TAX 323/324 per-drug numeric doses are NOT tabulated in the provided guideline pages", "evidenceStatus": "current" },
+        "notes": "Infusional Fluorouracil is part of the standard TPF induction triplet (identity grounded). Standard TAX 323/324 numeric dose/schedule NOT in the provided sources, so dosePerUnit is VERIFY and days empty. Dose-modified TPF variant in the corpus used fluorouracil 3000 mg/m2 over the infusion (NCCN Discussion lines 9806 to 9807), which is NOT the standard induction dose. DPYD deficiency substantially increases fluoropyrimidine toxicity; consider DPYD testing before treatment."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "DOCEtaxel corticosteroid premedication", "notes": "Corticosteroid premedication per docetaxel labeling. Confirm exact schedule against institutional order set." },
+      { "name": "Antiemetic prophylaxis (high emetic risk)", "notes": "Cisplatin-containing triplet is highly emetogenic; high-emetic-risk prophylaxis indicated." },
+      { "name": "Hydration", "notes": "IV pre- and post-hydration for cisplatin." }
+    ],
+    "supportiveCare": [
+      "G-CSF: induction TPF carries a high febrile-neutropenia risk (higher neutropenic fever rate in induction arms per DeVita 12th ed., Chapter 23, lines 58047 to 58049); primary G-CSF prophylaxis is commonly used. Confirm exact institutional policy.",
+      "Antiemetics: high emetic risk (cisplatin). Confirm exact institutional/guideline tier.",
+      "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle - high febrile-neutropenia risk",
+    "Renal function and electrolytes before each cycle - cisplatin",
+    "Ototoxicity and peripheral neuropathy assessment - cisplatin",
+    "Mucositis and diarrhea assessment - infusional fluorouracil",
+    "Fluid-retention assessment - docetaxel"
+  ],
+  "clearanceChecks": ["CBC/differential", "renal function and electrolytes", "adequate hydration", "DPYD status (fluorouracil)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "febrile neutropenia or grade 4 neutropenia", "drug": "TPF", "action": "reduce/add-GCSF", "text": "Review required; add or intensify G-CSF and consider dose reduction. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 23, lines 57880 to 57887 (TPF standard-of-care induction identity), lines 58030 to 58060 (applications of induction), lines 58047 to 58049 (higher neutropenic-fever rate). Per-drug numeric doses for standard TAX 323/324 are not stated in the H&N chapter narrative", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": null, "locator": "Induction regimen identity Cisplatin/Docetaxel/Infusional Fluorouracil (algorithm lines 6166, 6183); only a dose-modified TPF variant (docetaxel 60, cisplatin 60, fluorouracil 3000 mg/m2) is printed, in an NPC de-escalation trial context (Discussion lines 9806 to 9807), which is not the standard induction dose", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[0].days", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].days", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].days", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for TPF induction (DOCEtaxel / CISplatin / Fluorouracil), the standard neoadjuvant induction triplet before definitive locoregional therapy in locoregionally advanced SCCHN. Sites served (squamous histology): oral cavity (#32), tongue (#33), lip (#34), oropharyngeal (#35), HPV-positive oropharyngeal (#36, p16/HPV prognostic only), hypopharyngeal (#38), laryngeal (#39), sinonasal (#41); nasopharyngeal (#37) and salivary (#40) are not covered by this protocol. The regimen IDENTITY (docetaxel + cisplatin + infusional fluorouracil as standard induction) is grounded (NCCN 2.2026 algorithm lines 6166/6183; DeVita 12th ed. Chapter 23 lines 57880 to 57887). However, the exact standard TAX 323/324 per-drug doses, days, cycle length, and number of cycles are NOT present in the provided grounding sources; the only TPF numbers printed are a DOSE-MODIFIED variant from an NPC de-escalation trial (docetaxel 60, cisplatin 60, fluorouracil 3000 mg/m2; NCCN Discussion lines 9806 to 9807), which is not the standard induction dose. Per the no-invention safety rule, all numeric dose fields, days, cycleLengthDays, and cycles are set to VERIFY and enumerated in verifyFields; the dosing basis (bsa, mg/m2) is retained because the source expresses TPF in mg/m2. ISMP tall-man applied. Cisplatin has NO lifetime cumulative cap; nephrotoxicity/ototoxicity/neuropathy monitoring plus hydration are specified; fluorouracil DPYD deficiency is flagged; high febrile-neutropenia risk noted. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

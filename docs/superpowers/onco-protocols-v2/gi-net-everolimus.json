@@ -1,0 +1,73 @@
+{
+  "id": "gi-net-everolimus",
+  "name": "Everolimus (GI/pancreatic NET)",
+  "disease": "Gastrointestinal (and pancreatic) neuroendocrine tumor",
+  "diseaseId": "gastrointestinal_neuroendocrine_tumors",
+  "histology": "well-differentiated neuroendocrine tumor (low or intermediate grade)",
+  "stage": ["locoregional unresectable", "metastatic"],
+  "biomarkers": {
+    "differentiation": "well-differentiated (low/intermediate grade) NET",
+    "note": "Everolimus (mTOR inhibitor) is a category 1 option for progressive well-differentiated advanced NET (gastrointestinal, pancreatic, and lung primaries in the RADIANT program). Unlike somatostatin analogues and PRRT, everolimus activity is not SSTR-dependent. Per Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors, and DeVita 12th ed."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "option for progressive well-differentiated advanced NET (category 1 for progressive disease); not strictly line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "well-differentiated NET with disease progression", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, neuroendocrine line 4962 (Everolimus, category 1 for progressive disease, 10 mg by mouth daily)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "everolimus",
+        "name": "Everolimus",
+        "basis": "flat",
+        "dosePerUnit": 10,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "neuroendocrine line 4962 (Everolimus, category 1 for progressive disease, 10 mg by mouth, daily); line 7992 (everolimus administered orally at a dose of 10 mg once daily)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) NET v1.2026 (neuroendocrine lines 4962, 7992). Everolimus 10 mg PO once daily, given continuously (days 1 to 28 of a 28-day cycle). No ISMP tall-man form. Everolimus-specific monitoring: stomatitis/oral ulcers, non-infectious pneumonitis, hyperglycemia and hyperlipidemia, infections, and myelosuppression."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous daily oral dosing; continue until progression or intolerance.",
+      "Prophylactic/therapeutic management of stomatitis (e.g., corticosteroid mouthwash) reduces everolimus-associated oral ulceration.",
+      "Monitor fasting glucose and lipids; screen for and manage non-infectious pneumonitis."
+    ]
+  },
+  "monitoring": [
+    "oral cavity (stomatitis) assessment each visit",
+    "pulmonary symptoms / non-infectious pneumonitis (imaging if symptomatic)",
+    "fasting glucose and lipid panel",
+    "CBC, renal and liver function",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "glucose", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2-3 stomatitis, non-infectious pneumonitis, or metabolic toxicity", "drug": "everolimus", "action": "hold/reduce", "text": "Hold and resume at a reduced dose (e.g., 5 mg daily) per labeling; for grade 3-4 pneumonitis discontinue and obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "everolimus established as an mTOR inhibitor with activity in progressive well-differentiated NET (RADIANT program); per-cycle dose carried from the guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "neuroendocrine lines 4962 (Everolimus category 1 for progressive disease, 10 mg by mouth daily), 7992 (10 mg once daily)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for everolimus in well-differentiated GI/pancreatic NET (disease #30). Everolimus 10 mg PO once daily continuously is dose-grounded to Standard Guidelines (NCCN) NET v1.2026 (neuroendocrine lines 4962 and 7992; category 1 for progressive disease). Biomarker gate: well-differentiated NET with progression (everolimus is not SSTR-dependent, unlike SSA and PRRT). No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

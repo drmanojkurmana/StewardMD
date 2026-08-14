@@ -1,0 +1,123 @@
+{
+  "id": "breast-ddac-t",
+  "name": "Dose-Dense AC followed by PACLitaxel (ddAC-T)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC), invasive lobular carcinoma (ILC), and triple-negative breast cancer (TNBC))",
+  "stage": ["I", "II", "III"],
+  "biomarkers": {
+    "ER": "tested",
+    "PR": "tested",
+    "HER2": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "The sequential dose-dense anthracycline/alkylator-then-taxane cytotoxic backbone is not biomarker-restricted; it is a preferred preoperative/adjuvant regimen across HR-positive/HER2-negative and HR-negative/HER2-negative (TNBC) early breast cancer, and the same ddAC then paclitaxel backbone underlies HER2-positive regimens combined with HER2-targeted therapy (a separate protocol). ER, PR, and HER2 are tested to guide added endocrine therapy (HR-positive) and HER2-directed therapy (HER2-positive), not to select the backbone. Per Standard Guidelines (NCCN), Invasive Breast Cancer, Preoperative/Adjuvant Therapy Regimens (BINV-M 2 and 3 of 10; Preferred)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "adjuvant or neoadjuvant (preoperative) cytotoxic chemotherapy for early-stage/operable breast cancer; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "diseaseSetting", "requirement": "HER2-negative early breast cancer for which adjuvant or neoadjuvant chemotherapy is indicated; a preferred backbone (including for higher-risk and node-positive disease)", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 2 and 3 of 10 (Preferred); BINV-N" },
+    { "criterion": "cardiacFunction", "requirement": "adequate baseline LVEF; cardiac monitoring on anthracyclines", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 1 of 10, General Considerations" },
+    { "criterion": "growthFactorSupport", "requirement": "candidate for myeloid growth factor (G-CSF) support, which is integral to dose-dense (every-14-day) scheduling", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M dosing footnote n" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": {
+          "perDose": null,
+          "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" }
+        },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": "2026-07-29", "locator": "BINV-M 5 of 10, Dose-Dense AC followed by Paclitaxel (dosing), reference 1 (CALGB/intergroup C9741)", "evidenceStatus": "current" },
+        "notes": "AC phase (cycles 1 to 4). Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. DOXOrubicin 60 mg/m2 IV day 1, cycled every 14 days for 4 cycles, with myeloid growth factor support (footnote n). ISMP tall-man. Anthracycline cumulative lifetime cardiotoxicity cap applied (warn 450 / hard 550 mg/m2); DeVita 12th ed. lines 19908 to 19919."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": "2026-07-29", "locator": "BINV-M 5 of 10, Dose-Dense AC followed by Paclitaxel (dosing), reference 1", "evidenceStatus": "current" },
+        "notes": "AC phase (cycles 1 to 4). Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. Cyclophosphamide 600 mg/m2 IV day 1, cycled every 14 days for 4 cycles, with myeloid growth factor support (footnote n)."
+      },
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "bsa",
+        "dosePerUnit": 175,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": "2026-07-29", "locator": "BINV-M 5 of 10, Dose-Dense AC followed by Paclitaxel (dosing), reference 1", "evidenceStatus": "current" },
+        "notes": "Taxane phase (cycles 5 to 8), given after completion of the AC phase. Source: Standard Guidelines (NCCN) v6.2026, BINV-M 5 of 10. PACLitaxel 175 mg/m2 IV day 1, cycled every 14 days for 4 cycles, with myeloid growth factor support (footnote n). ISMP tall-man. Source-stated alternative taxane schedule: PACLitaxel 80 mg/m2 IV weekly for 12 weeks (Dose-Dense AC followed by weekly Paclitaxel, BINV-M 5 of 10, reference 23 Sparano). It is acceptable to change the sequence to taxane followed by AC (BINV-M footnote c)."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": 8,
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling before each paclitaxel dose to prevent hypersensitivity; confirm exact schedule against institutional order set." },
+      { "name": "Antiemetic prophylaxis", "notes": "give before chemotherapy. AC phase is an anthracycline/alkylator combination; select antiemetic prophylaxis per the NCCN emetic-risk framework (Appendix D). The exact per-regimen tier is designated in the NCCN Antiemesis guideline / order template (not established in the provided sources)." }
+    ],
+    "supportiveCare": [
+      "G-CSF / myeloid growth factor support: REQUIRED. All cycles are given with myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n; this is integral to the every-14-day (dose-dense) schedule.",
+      "Antiemetics: AC phase anthracycline plus cyclophosphamide; prophylaxis per NCCN emetic-risk framework (Appendix D). Specific tier per NCCN Antiemesis order template.",
+      "Peripheral neuropathy: monitor during the taxane phase; consider cryotherapy / limb cooling to reduce taxane-induced peripheral neuropathy (BINV-M 1 of 10)."
+    ]
+  },
+  "monitoring": [
+    "LVEF at baseline and cardiac monitoring during anthracycline phase (BINV-M 1 of 10)",
+    "CBC before each cycle",
+    "liver and renal function before each cycle",
+    "peripheral neuropathy assessment during the taxane phase (PACLitaxel)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "LVEF", "cumulative anthracycline dose", "neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "cumulative DOXOrubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard cap)", "drug": "doxorubicin", "action": "review/stop", "text": "Track cumulative lifetime anthracycline exposure; 450 mg/m2 warrants review, 550 mg/m2 is the conventional hard cap due to cumulative cardiotoxicity (DeVita 12th ed. lines 19908 to 19919). Physician decides." },
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Dose-dense scheduling depends on adequate count recovery with growth factor support; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Chapter 53 describes sequential dose-dense AC followed by paclitaxel and the every-2-week (dose-dense) schedule as at least as effective and better tolerated (lines 185195 to 185213); anthracycline cumulative-dose cardiotoxicity (Chapter 9, lines 19908 to 19919). Per-drug doses not tabulated.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": "2026-07-29",
+        "locator": "Dosing: Preoperative/Adjuvant Therapy Regimens, HER2-Negative, Dose-Dense AC followed by Paclitaxel (BINV-M 5 of 10, reference 1 CALGB/intergroup C9741; weekly-paclitaxel variant reference 23 Sparano); Preferred listing BINV-M 2 and 3 of 10; myeloid growth factor footnote n; setting/selection BINV-N",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the preferred sequential breast backbone dose-dense AC followed by PACLitaxel (ddAC-T). Two sequential phases in one 14-day cycle structure: AC phase (cycles 1 to 4) then PACLitaxel phase (cycles 5 to 8), 8 cycles total at every-14-day (dose-dense) intervals. Histology-agnostic across invasive ductal (#1), invasive lobular (#2), and triple-negative (#3) breast cancer; not biomarker-restricted. DeVita 12th ed. describes dose-dense AC then paclitaxel (Chapter 53, lines 185195 to 185213) but does NOT tabulate per-drug doses; therefore every numeric dose here is sourced to Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 5 of 10, with locators per drug: DOXOrubicin 60 mg/m2 IV day 1, cyclophosphamide 600 mg/m2 IV day 1 (each every 14 days for 4 cycles), then PACLitaxel 175 mg/m2 IV day 1 every 14 days for 4 cycles. Source-stated alternative: PACLitaxel 80 mg/m2 IV weekly for 12 weeks. Myeloid growth factor (G-CSF) support is REQUIRED for the every-14-day schedule (BINV-M footnote n). ISMP tall-man applied (DOXOrubicin, PACLitaxel). Anthracycline cumulative lifetime cap applied on DOXOrubicin (warn 450 / hard 550 mg/m2; DeVita lines 19908 to 19919). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

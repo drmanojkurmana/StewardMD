@@ -1,0 +1,144 @@
+{
+  "id": "sarc-ewing-vdc-ie",
+  "name": "VDC/IE (vinCRIStine, DOXOrubicin, Cyclophosphamide alternating with Ifosfamide, Etoposide) for Ewing Sarcoma",
+  "disease": "Ewing sarcoma",
+  "diseaseId": "ewing_sarcoma",
+  "histology": "Ewing sarcoma (EWSR1 gene rearrangement)",
+  "stage": ["localized (primary/neoadjuvant/adjuvant)", "metastatic at presentation"],
+  "biomarkers": {
+    "note": "EWSR1 (or variant FET-family) gene rearrangement is diagnostic of Ewing sarcoma but does not gate this cytotoxic regimen; VDC/IE is not molecular-biomarker-restricted. Per Standard Guidelines (NCCN), Bone Cancer v1.2027, Ewing Sarcoma Systemic Therapy (category 1)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line (primary neoadjuvant/adjuvant) multiagent therapy for Ewing sarcoma; category 1, delivered as interval-compressed alternating cycles",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "Ewing sarcoma requiring first-line multiagent chemotherapy", "source": "Standard Guidelines (NCCN), Bone Cancer", "locator": "v1.2027, Ewing Sarcoma Systemic Therapy (EW): VDC-IE category 1, line 1324 to 1327" },
+    { "criterion": "organFunction", "requirement": "adequate cardiac function (anthracycline), renal function and adequate urothelial protection (ifosfamide/cyclophosphamide), and marrow reserve for interval-compressed dosing", "source": "DeVita, Cancer PPO 12th ed.", "locator": "Ewing sarcoma chapter (interval-compressed VDC/IE), line 221819 to 221823" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE = Vincristine/Doxorubicin/Cyclophosphamide/Mesna alternating with Ifosfamide/Mesna/Etoposide, category 1 (line 1324 to 1327)", "evidenceStatus": "current" },
+        "notes": "vinCRIStine is the V of the VDC arm; the milligram dose is NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. A conventional per-dose cap of 2 mg is applied (caps.perDose = 2; standard ISMP-aligned vincristine ceiling, not a value from the source table). ISMP tall-man applied (vinCRIStine). NEVER give intrathecally (fatal); IV only."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE includes Doxorubicin, category 1 (line 1324 to 1327)", "evidenceStatus": "current" },
+        "notes": "DOXOrubicin is the D of the VDC arm; the milligram dose is NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. The anthracycline cumulative lifetime cap (warn 450, hard 550 mg/m2) is the conventional anthracycline ceiling and is retained as a safety guard; dexrazoxane cardioprotection may be considered per protocol as the ceiling is approached. ISMP tall-man applied (DOXOrubicin)."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE includes Cyclophosphamide/Mesna, category 1 (line 1324 to 1327)", "evidenceStatus": "current" },
+        "notes": "Cyclophosphamide is the C of the VDC arm; the milligram dose is NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. Mesna uroprotection is mandatory with cyclophosphamide at these doses (see supportiveCare)."
+      },
+      {
+        "id": "ifosfamide",
+        "name": "Ifosfamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE includes the alternating Ifosfamide/Mesna/Etoposide (IE) arm, category 1 (line 1324 to 1327)", "evidenceStatus": "current" },
+        "notes": "Ifosfamide is the I of the alternating IE arm (given on the cycles that alternate with VDC); the milligram dose and multi-day schedule are NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. Mesna uroprotection is MANDATORY with ifosfamide (hemorrhagic cystitis) and ifosfamide encephalopathy must be monitored (see supportiveCare)."
+      },
+      {
+        "id": "etoposide",
+        "name": "Etoposide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE includes Etoposide in the alternating IE arm, category 1 (line 1324 to 1327)", "evidenceStatus": "current" },
+        "notes": "Etoposide is the E of the alternating IE arm; the milligram dose and multi-day schedule are NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Mesna uroprotection", "notes": "give with cyclophosphamide (VDC arm) and with ifosfamide (IE arm) for urothelial protection" },
+      { "name": "Antiemetic prophylaxis", "notes": "VDC/IE is highly emetogenic; give guideline-tier prophylaxis" }
+    ],
+    "supportiveCare": [
+      "interval compression: VDC and IE cycles alternate every 2 weeks (interval-compressed) as the standard approach; mandatory G-CSF support between cycles (DeVita 12th ed., line 221819 to 221823).",
+      "mesna uroprotection with both the cyclophosphamide (VDC) and ifosfamide (IE) cycles; monitor for hemorrhagic cystitis.",
+      "ifosfamide neurotoxicity: monitor for encephalopathy; methylene blue per protocol if it occurs.",
+      "anthracycline: cumulative DOXOrubicin tracking (warn 450, hard 550 mg/m2) and baseline/periodic LVEF.",
+      "vinCRIStine 2 mg per-dose cap; IV only, NEVER intrathecal.",
+      "the per-drug milligram doses, multi-day schedules, and total cycle count are VERIFY (not printed in the provided sources) and must be resolved from a cited dosing source before activation."
+    ]
+  },
+  "monitoring": [
+    "CBC before each interval-compressed cycle (with G-CSF support)",
+    "renal function and urinalysis for hematuria (ifosfamide/cyclophosphamide with mesna)",
+    "cumulative anthracycline dose tracking (DOXOrubicin) and LVEF",
+    "neurologic assessment (vincristine neuropathy; ifosfamide encephalopathy)"
+  ],
+  "clearanceChecks": ["CBC/platelets (interval-compressed)", "renal", "cardiac (LVEF)", "cumulative anthracycline dose", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ifosfamide encephalopathy", "drug": "ifosfamide", "action": "hold", "text": "Hold ifosfamide and manage supportively (consider methylene blue per protocol); obtain clinical review before rechallenge." },
+    { "condition": "hemorrhagic cystitis", "drug": "cyclophosphamide and ifosfamide", "action": "hold/intensify mesna", "text": "Hold and intensify mesna and hydration; obtain clinical review." },
+    { "condition": "cumulative doxorubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard)", "drug": "doxorubicin", "action": "review/stop", "text": "Warn at 450 mg/m2 and stop at the 550 mg/m2 hard cap; reassess cardiac function." },
+    { "condition": "vincristine neuropathy", "drug": "vincristine", "action": "reduce/hold", "text": "Reduce or hold per severity and clinical review; respect the 2 mg per-dose cap." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Ewing sarcoma chapter (VDC alternating with IE; addition of IE to VDC improved outcomes in localized disease; interval-compressed VDC/IE every 2 weeks established as standard), line 221792 to 221823; per-drug milligram doses not printed in the provided extract", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Ewing Sarcoma Systemic Therapy (EW): VDC-IE (Vincristine/Doxorubicin/Cyclophosphamide/Mesna alternating with Ifosfamide/Mesna/Etoposide), category 1 (line 1324 to 1327)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit",
+    "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit",
+    "regimen.drugs[3].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[3].unit",
+    "regimen.drugs[4].basis", "regimen.drugs[4].dosePerUnit", "regimen.drugs[4].unit",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for VDC/IE (vinCRIStine, DOXOrubicin, cyclophosphamide with mesna, alternating with ifosfamide, mesna, and etoposide) in Ewing sarcoma (StewardMD reference disease ewing_sarcoma). The regimen identity, five-drug alternating composition, and category 1 status are grounded to Standard Guidelines (NCCN), Bone Cancer v1.2027, Ewing Sarcoma Systemic Therapy (line 1324 to 1327). The interval-compressed schedule (VDC and IE cycles alternating every 2 weeks, cycleLengthDays 14) is grounded to DeVita 12th ed. line 221819 to 221823, which established interval-compressed VDC/IE as the standard approach. The provided sources name the regimen but do NOT print the per-drug milligram doses, multi-day schedules, or the total cycle count, so every dose field plus cycles are set to the literal VERIFY and listed in verifyFields rather than invented. Safety scaffolding is retained around the unresolved doses: vinCRIStine 2 mg per-dose cap (IV only, never intrathecal); mandatory mesna uroprotection with both the cyclophosphamide and ifosfamide cycles; ifosfamide encephalopathy monitoring; and the conventional anthracycline cumulative cap (warn 450, hard 550 mg/m2). ISMP tall-man applied (vinCRIStine, DOXOrubicin). Status is DRAFT with unresolved VERIFY fields. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

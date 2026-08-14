@@ -1,0 +1,129 @@
+{
+  "id": "sarc-osteosarcoma-map",
+  "name": "MAP (High-Dose Methotrexate, DOXOrubicin, CISplatin) for Osteosarcoma",
+  "disease": "Osteosarcoma",
+  "diseaseId": "osteosarcoma",
+  "histology": "high-grade osteosarcoma",
+  "stage": ["localized (neoadjuvant/adjuvant)", "metastatic"],
+  "biomarkers": {
+    "note": "MAP is a cytotoxic multiagent backbone for high-grade osteosarcoma and is not biomarker-restricted. MAP is preferred in patients under 40 years with excellent performance status. Per Standard Guidelines (NCCN), Bone Cancer v1.2027, Osteosarcoma Systemic Therapy (category 1)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line (primary neoadjuvant/adjuvant or metastatic) therapy for high-grade osteosarcoma; category 1, preferred in patients under 40 years with excellent performance status",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "high-grade osteosarcoma requiring first-line multiagent chemotherapy", "source": "Standard Guidelines (NCCN), Bone Cancer", "locator": "v1.2027, Osteosarcoma Systemic Therapy (OSTEO): MAP category 1, line 1374 to 1377" },
+    { "criterion": "ageAndPerformance", "requirement": "MAP preferred in patients under 40 years with excellent performance status", "source": "Standard Guidelines (NCCN), Bone Cancer", "locator": "v1.2027, Discussion (MAP preferred in patients <40 years with excellent PS), line 3578 to 3579" },
+    { "criterion": "organFunction", "requirement": "adequate renal function (high-dose methotrexate clearance and cisplatin) and adequate cardiac function (anthracycline)", "source": "Standard Guidelines (NCCN), Bone Cancer", "locator": "v1.2027, Osteosarcoma Systemic Therapy footnote m (glucarpidase for delayed high-dose methotrexate elimination), line 1397" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "high-dose-methotrexate",
+        "name": "High-Dose Methotrexate",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Osteosarcoma Systemic Therapy (OSTEO): MAP = High-Dose Methotrexate/Leucovorin/Doxorubicin/Cisplatin, category 1 (line 1374 to 1377); glucarpidase footnote m (line 1397)", "evidenceStatus": "current" },
+        "notes": "High-dose methotrexate is a MAP component (category 1), but the milligram dose and administration schedule are NOT printed in the provided Bone Cancer, DeVita, or Harrison sources, so basis, dosePerUnit, and unit are set to the literal VERIFY (never invented). MANDATORY safety scaffolding when the dose is verified: leucovorin (folinic acid) rescue timed to serum methotrexate levels; serial serum methotrexate level monitoring; aggressive hydration and urinary alkalinization; and renal-function surveillance. Glucarpidase is strongly recommended for delayed methotrexate elimination due to renal impairment (NCCN Bone Cancer v1.2027 footnote m, line 1397)."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin (folinic acid) rescue",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Osteosarcoma Systemic Therapy (OSTEO): MAP includes Leucovorin rescue, category 1 (line 1374 to 1377)", "evidenceStatus": "current" },
+        "notes": "Leucovorin rescue is an explicit MAP component, but its dose and timing are level-driven and not printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. Rescue must be started at the labeled interval after high-dose methotrexate and continued and up-titrated according to serial serum methotrexate levels until the level falls below the safe threshold."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Osteosarcoma Systemic Therapy (OSTEO): MAP includes Doxorubicin, category 1 (line 1374 to 1377)", "evidenceStatus": "current" },
+        "notes": "DOXOrubicin is a MAP component (category 1); the milligram dose is NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. The anthracycline cumulative lifetime cap (warn 450, hard 550 mg/m2) is the conventional anthracycline ceiling and is retained as a safety guard even though the per-cycle dose is unresolved. ISMP tall-man applied (DOXOrubicin). Track cumulative dose and monitor LVEF."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Osteosarcoma Systemic Therapy (OSTEO): MAP includes Cisplatin, category 1 (line 1374 to 1377)", "evidenceStatus": "current" },
+        "notes": "CISplatin is a MAP component (category 1); the milligram dose is NOT printed in the provided sources, so basis, dosePerUnit, and unit are VERIFY. MANDATORY safety scaffolding when the dose is verified: pre- and post-cisplatin intravenous hydration (with or without mannitol/forced diuresis), electrolyte (magnesium/potassium) repletion, audiometry, and renal-function surveillance. ISMP tall-man applied (CISplatin)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Cisplatin hydration", "notes": "intravenous pre- and post-hydration and electrolyte repletion before cisplatin" },
+      { "name": "Antiemetic prophylaxis", "notes": "cisplatin- and doxorubicin-containing MAP is highly emetogenic; give guideline-tier prophylaxis" }
+    ],
+    "supportiveCare": [
+      "high-dose methotrexate: leucovorin rescue timed to serum methotrexate levels; hydration and urinary alkalinization; glucarpidase for delayed elimination (NCCN Bone Cancer footnote m, line 1397).",
+      "cisplatin: pre/post hydration, magnesium and potassium repletion, audiometry.",
+      "doxorubicin: cumulative anthracycline tracking (warn 450, hard 550 mg/m2) and baseline/periodic LVEF.",
+      "G-CSF: MAP is myelosuppressive; add per febrile-neutropenia risk.",
+      "the per-drug milligram doses, cycle length, and cycle count are VERIFY (not printed in the provided sources) and must be resolved from a cited dosing source before activation."
+    ]
+  },
+  "monitoring": [
+    "serum methotrexate levels (serial) after each high-dose methotrexate infusion",
+    "renal function (creatinine/GFR) before methotrexate and cisplatin",
+    "CBC before each cycle",
+    "cumulative anthracycline dose tracking (DOXOrubicin) and LVEF",
+    "audiometry and electrolytes (cisplatin)"
+  ],
+  "clearanceChecks": ["renal (methotrexate clearance and cisplatin)", "CBC/platelets", "cardiac (LVEF)", "cumulative anthracycline dose", "serum methotrexate level cleared", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "delayed high-dose methotrexate elimination with renal impairment", "drug": "high-dose-methotrexate", "action": "rescue/reverse", "text": "Intensify leucovorin rescue by serum methotrexate level, maintain hydration and alkalinization, and give glucarpidase; obtain clinical review (NCCN Bone Cancer footnote m, line 1397)." },
+    { "condition": "cumulative doxorubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard)", "drug": "doxorubicin", "action": "review/stop", "text": "Warn at 450 mg/m2 and stop at the 550 mg/m2 hard cap; reassess cardiac function." },
+    { "condition": "cisplatin nephrotoxicity, ototoxicity, or neuropathy", "drug": "cisplatin", "action": "hold/reduce", "text": "Hold or reduce per labeling and clinical review; ensure hydration and electrolyte repletion." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Osteosarcoma chapter (cisplatin/doxorubicin with or without high-dose methotrexate/ifosfamide as standard multiagent osteosarcoma therapy); per-drug milligram doses not printed in the provided extract", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bone Cancer", "version": "1.2027", "date": "2026-07-21", "locator": "Osteosarcoma Systemic Therapy (OSTEO): MAP = High-Dose Methotrexate/Leucovorin/Doxorubicin/Cisplatin, category 1, and Cisplatin/Doxorubicin category 1 (line 1372 to 1377); glucarpidase footnote m (line 1397); Discussion MAP preferred in patients <40 years with excellent PS (line 3578 to 3579)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[0].basis", "regimen.drugs[0].dosePerUnit", "regimen.drugs[0].unit",
+    "regimen.drugs[1].basis", "regimen.drugs[1].dosePerUnit", "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit",
+    "regimen.drugs[3].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[3].unit",
+    "regimen.cycleLengthDays", "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for MAP (high-dose methotrexate with leucovorin rescue, DOXOrubicin, and CISplatin) in high-grade osteosarcoma (StewardMD reference disease osteosarcoma). The regimen identity, four-drug composition, and category 1 status are grounded to Standard Guidelines (NCCN), Bone Cancer v1.2027, Osteosarcoma Systemic Therapy (line 1374 to 1377), with MAP preferred in patients under 40 years with excellent performance status (Discussion, line 3578 to 3579). The provided sources (Bone Cancer, DeVita, Harrison) name the regimen but do NOT print the per-drug milligram doses, cycle length, or cycle count, so every dose field plus cycleLengthDays and cycles are set to the literal VERIFY and listed in verifyFields rather than invented. Safety scaffolding is retained around the unresolved doses: high-dose methotrexate leucovorin rescue with serum-level monitoring and glucarpidase for delayed elimination (footnote m, line 1397); cisplatin hydration, electrolyte repletion, and audiometry; and the conventional anthracycline cumulative cap (warn 450, hard 550 mg/m2). ISMP tall-man applied (DOXOrubicin, CISplatin). Status is DRAFT with unresolved VERIFY fields. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

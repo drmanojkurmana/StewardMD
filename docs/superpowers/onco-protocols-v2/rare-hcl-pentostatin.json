@@ -1,0 +1,101 @@
+{
+  "id": "rare-hcl-pentostatin",
+  "name": "Pentostatin (2'-deoxycoformycin) +/- Rituximab",
+  "disease": "Hairy cell leukemia (classic)",
+  "diseaseId": "hairy_cell_leukemia",
+  "histology": "classic hairy cell leukemia (cHCL); CD11c+, CD25+, CD103+, CD123+, CD5-, CD23-; usually BRAF V600E mutated",
+  "stage": [],
+  "biomarkers": {
+    "BRAF_V600E": "typically present in classic HCL",
+    "note": "Classic HCL characteristically harbors BRAF V600E; variant HCL lacks it. BRAF status does not gate purine-analog therapy but distinguishes cHCL from vHCL and enables later BRAF-inhibitor salvage. Per DeVita 12th ed. (lines 281710 to 281725) and Standard Guidelines (NCCN), Hairy Cell Leukemia, v1.2027 (extract line 190)."
+  },
+  "treatmentSetting": "first-line (initial therapy for treatment-requiring cHCL)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for classic HCL requiring treatment; a preferred initial purine-analog option with comparable activity to cladribine. Also used at relapse (re-treat with prior agent if remission was durable).",
+  "eligibilityCriteria": [
+    { "criterion": "treatmentIndication", "requirement": "indication for treatment present (progressive cytopenias, symptomatic splenomegaly, or systemic symptoms)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 281728 to 281729" },
+    { "criterion": "infectionStatus", "requirement": "in patients with active infection who cannot be controlled, consider low-dose pentostatin before standard-dose purine analog", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "locator": "v1.2027, footnote, extract line 341" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pentostatin",
+        "name": "Pentostatin",
+        "basis": "bsa",
+        "dosePerUnit": 4,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV; repeated every 2 weeks until maximum response",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 281734 (pentostatin administered at 4 mg/m2 every 2 weeks until maximum response)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 281734. Pentostatin 4 mg/m2 IV every 2 weeks until maximum response (day 1 of a 14-day cycle, repeated). Pentostatin causes immunosuppression and prolonged lymphopenia; give PJP and herpes/VZV prophylaxis and monitor for opportunistic infection. In patients with active infection, low-dose pentostatin may be used to secure a durable response before standard-dose purine analogs (NCCN footnote, extract lines 341, 763). Bone marrow response can be evaluated after blood counts recover (NCCN footnote, extract line 434)."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "version": "1.2027", "date": null, "locator": "Rituximab with pentostatin as combination therapy (extract line 413, Else et al.); dose value 375 mg/m2 weekly per Harrison 22nd ed. line 385777", "evidenceStatus": "current" },
+        "notes": "OPTIONAL add-on (Pentostatin +/- Rituximab). Rituximab combined with pentostatin is an effective purine-analog + CD20 mAb approach, particularly at relapse (NCCN extract lines 410, 413). Rituximab dose VALUE 375 mg/m2 weekly is sourced to Harrison 22nd ed. line 385777; the exact per-cycle scheduling with pentostatin follows standard practice. Screen hepatitis B before rituximab (reactivation risk)."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Hydration", "notes": "adequate hydration with pentostatin; adjust dose for renal impairment per labeling" }
+    ],
+    "supportiveCare": [
+      "PJP (Pneumocystis jirovecii) and herpes/VZV prophylaxis - pentostatin immunosuppression and prolonged lymphopenia.",
+      "Screen hepatitis B before rituximab if rituximab is added (NCCN HCL workup, extract line 211).",
+      "Renal function monitoring - pentostatin is renally cleared."
+    ]
+  },
+  "monitoring": [
+    "CBC/differential - cytopenias and lymphopenia",
+    "Renal function (creatinine/GFR) before dosing - pentostatin",
+    "CD4 count / opportunistic infection surveillance",
+    "Bone marrow after count recovery to assess response (pentostatin)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "infection status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "renal impairment", "drug": "pentostatin", "action": "reduce/hold", "text": "Reduce or hold pentostatin for renal impairment per labeling; pentostatin is renally cleared. Clinical review required." },
+    { "condition": "active uncontrolled infection", "action": "modify", "text": "Consider low-dose pentostatin before standard-dose purine analog to secure response (NCCN HCL footnote). Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 281734 (pentostatin 4 mg/m2 every 2 weeks until maximum response); lines 281731 to 281745 (nucleoside analogs mainstay of HCL therapy)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Pentostatin as an initial regimen (extract line 289); cladribine and pentostatin have comparable therapeutic activity (footnote e, extract line 343); low-dose pentostatin before standard-dose purine analog in active infection (extract lines 341, 763); rituximab with pentostatin combination (extract lines 410, 413); response-assessment timing after count recovery (footnote, extract line 434)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for pentostatin +/- rituximab, a preferred first-line purine-analog option for classic hairy cell leukemia with activity comparable to cladribine. The pentostatin dose (4 mg/m2 IV every 2 weeks until maximum response) is concretely sourced to DeVita 12th ed. line 281734. The optional rituximab add-on is supported by Standard Guidelines (NCCN) HCL v1.2027 (extract lines 410, 413); the rituximab dose value 375 mg/m2 weekly is sourced to Harrison 22nd ed. line 385777. cycleLengthDays 14 reflects the every-2-weeks pentostatin schedule; cycles is VERIFY because dosing continues to maximum response rather than a fixed number. Pentostatin immunosuppression with PJP and VZV prophylaxis, renal dosing, and the low-dose-pentostatin-in-active-infection caveat are captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

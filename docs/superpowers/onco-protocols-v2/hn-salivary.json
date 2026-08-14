@@ -1,0 +1,76 @@
+{
+  "id": "hn-salivary",
+  "name": "Salivary Gland Carcinoma, Systemic Therapy for Recurrent or Metastatic Disease (biomarker-directed and cytotoxic options; doses require verification)",
+  "disease": "Salivary gland carcinoma",
+  "diseaseId": "salivary_gland_tumor",
+  "histology": "salivary gland carcinoma, heterogeneous group (includes adenoid cystic carcinoma, salivary duct carcinoma, mucoepidermoid carcinoma, adenocarcinoma not otherwise specified). Adenoid cystic carcinoma has a tendency to recur along nerve tracks and can produce distant metastases 10 to 20 years after diagnosis (Harrison 22nd ed., lines 88330 to 88332).",
+  "stage": [],
+  "biomarkers": {
+    "AR": "VERIFY",
+    "HER2": "VERIFY",
+    "note": "Salivary gland carcinoma is biologically heterogeneous and systemic therapy is subtype- and biomarker-directed. AR-positive disease: DeVita 12th ed. (lines 66234 to 66240) grounds an androgen-deprivation regimen identity such as leuprolide (LHRH analogue) plus bicalutamide as first-line therapy (no doses printed). HER2-positive disease: DeVita 12th ed. (lines 66228 to 66232) grounds trastuzumab with or without pertuzumab plus a taxane, then ado-trastuzumab emtansine (T-DM1) or trastuzumab deruxtecan at progression (no doses printed). These are regimen identities only; the cited sources print no dose, basis, unit, route, or schedule, so AR and HER2 (and every dose field) remain VERIFY rather than being assigned a concrete dosing mapping here. The provided NCCN Head and Neck extract covers non-nasopharyngeal squamous cell sites and does not include salivary gland dosing (NCCN maintains separate salivary gland guidance not present in the extract)."
+  },
+  "treatmentSetting": ["recurrent", "metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "systemic therapy for recurrent or metastatic disease, given with palliative intent (Harrison 22nd ed., line 88333)",
+  "eligibilityCriteria": [
+    { "criterion": "disease", "requirement": "recurrent or metastatic salivary gland carcinoma not amenable to curative surgery or radiotherapy", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "locator": "Head and Neck Cancer chapter, Salivary Gland Tumors (lines 88327 to 88338)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "salivary-systemic-therapy",
+        "name": "Systemic therapy (cytotoxic and/or biomarker-directed) - specific agents and doses VERIFY",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "VERIFY",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter, Salivary Gland Tumors (lines 88333 to 88336): for metastatic disease, therapy is palliative, usually chemotherapy with doxorubicin and/or a platinum agent by itself or in combination with a taxane", "evidenceStatus": "unknown" },
+        "notes": "Harrison 22nd ed. names, for metastatic salivary gland carcinoma, palliative chemotherapy with doxorubicin and/or a platinum agent, alone or in combination with a taxane, but states no doses or schedule. DeVita 12th ed. grounds the following regimen identities (no doses printed): cytotoxic CAP (cyclophosphamide, DOXOrubicin, and cisplatin) or vinorelbine with or without cisplatin (lines 66175 to 66178); HER2-positive disease trastuzumab with or without pertuzumab plus a taxane, then ado-trastuzumab emtansine (T-DM1) or trastuzumab deruxtecan at progression (lines 66228 to 66232); AR-positive disease androgen-deprivation therapy such as leuprolide (LHRH analogue) plus bicalutamide as first-line (lines 66234 to 66240). No agent dose, basis, unit, route, or schedule is established by the cited sources; all such fields are set to VERIFY. Do not administer until a concrete regimen and dose are verified against a cited source."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Palliative and supportive care appropriate to a metastatic setting.",
+      "If an anthracycline (doxorubicin) is selected, cumulative anthracycline dose tracking applies (VERIFY regimen)."
+    ]
+  },
+  "monitoring": [
+    "response assessment by imaging appropriate to the selected (VERIFY) regimen",
+    "regimen-specific organ-function monitoring once agents are verified"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter, Salivary Gland Tumors (lines 88327 to 88338): surgery plus radiotherapy for invasive disease; for metastatic disease palliative chemotherapy with doxorubicin and/or a platinum agent alone or with a taxane", "evidenceStatus": "unknown" },
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Salivary gland malignancies discussion, lines 66175 to 66178 (cytotoxic: CAP = cyclophosphamide, DOXOrubicin, and cisplatin; or vinorelbine with or without cisplatin), lines 66228 to 66232 (HER2-positive: trastuzumab with or without pertuzumab plus a taxane, then ado-trastuzumab emtansine [T-DM1] or trastuzumab deruxtecan at progression), lines 66234 to 66240 (AR-positive: androgen-deprivation therapy such as leuprolide [LHRH analogue] plus bicalutamide as first-line). Regimen identities only; no doses, basis, units, route, or schedule are printed and all remain VERIFY", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "biomarkers.AR",
+    "biomarkers.HER2",
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[0].route",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for systemic therapy of recurrent or metastatic salivary gland carcinoma (reference site #40, distinct from the squamous-cell head and neck sites #32 to 39 and #41). Salivary gland carcinoma is a heterogeneous group and systemic therapy is subtype- and biomarker-directed, so this protocol deliberately captures the systemic-therapy dose fields as VERIFY rather than inventing a regimen. The regimen IDENTITIES are source-grounded (no doses are printed in the cited sources): DeVita 12th ed. grounds cytotoxic CAP (cyclophosphamide, DOXOrubicin, and cisplatin) or vinorelbine with or without cisplatin (lines 66175 to 66178), HER2-positive trastuzumab with or without pertuzumab plus a taxane then ado-trastuzumab emtansine (T-DM1) or trastuzumab deruxtecan at progression (lines 66228 to 66232), and AR-positive androgen-deprivation therapy such as leuprolide (LHRH analogue) plus bicalutamide as first-line (lines 66234 to 66240). Harrison 22nd ed. (lines 88327 to 88338) grounds the qualitative approach for metastatic disease (palliative chemotherapy with doxorubicin and/or a platinum agent alone or with a taxane), with no doses stated. Because no dose, basis, unit, route, or schedule is printed for any of these regimens, biomarkers.AR, biomarkers.HER2, and the drug basis/dose/unit/route plus cycle length and cycle count all remain VERIFY. The provided NCCN Head and Neck extract covers Principles of Systemic Therapy for Non-Nasopharyngeal squamous cell sites and does not include salivary gland dosing (NCCN maintains separate salivary gland guidance not present in the extract). Setting recurrent/metastatic, palliative intent. Every systemic-therapy dose field is VERIFY; status remains DRAFT and cannot become ACTIVE until the VERIFY fields are resolved. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

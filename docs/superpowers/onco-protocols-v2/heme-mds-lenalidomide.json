@@ -1,0 +1,69 @@
+{
+  "id": "heme-mds-lenalidomide",
+  "name": "Lenalidomide (lower-risk MDS with del(5q))",
+  "disease": "Myelodysplastic syndromes (MDS)",
+  "diseaseId": "myelodysplastic_syndromes",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "del5q": "present",
+    "note": "Lenalidomide is used for symptomatic anemia in lower-risk MDS with the del(5q) chromosomal abnormality, with or without additional cytogenetic abnormalities. A TP53 mutation may predict resistance or relapse to lenalidomide. Per Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026."
+  },
+  "treatmentSetting": "lower-risk MDS (IPSS-R Very-Low, Low, Intermediate) with symptomatic anemia and del(5q)",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "VERIFY",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "del(5q) cytogenetic abnormality present", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "locator": "v3.2026, MDS-5 (del(5q) pathway for lower-risk MDS with symptomatic anemia)" },
+    { "criterion": "clinical", "requirement": "symptomatic anemia in lower-risk (IPSS-R) MDS", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "locator": "v3.2026, MDS-4/MDS-5 (management of lower-risk disease)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 10,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "version": "3.2026", "date": null, "locator": "Footnote jj on MDS-6A (recommended lenalidomide initial dose is 10 mg/day for 21 out of 28 days, or 28 days, monthly for 2 to 4 months to assess response)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026, footnote jj (MDS-6A). Lenalidomide 10 mg PO once daily for 21 of 28 days (an alternative is 10 mg/day for all 28 days), given monthly for 2 to 4 months to assess response. Days 1 to 21 models the 21-of-28-day schedule. Use caution in patients with low platelet and neutrophil counts and consider dose modification. Reduce dose in renal impairment (renal excretion)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Assess response after 2 to 4 months (footnote jj); if no response, treatment is considered a failure and alternatives are considered.",
+      "Use caution with low platelet and neutrophil counts; consider modifying lenalidomide dose or schedule.",
+      "Lenalidomide requires venous thromboembolism risk assessment and thromboprophylaxis consideration, and pregnancy prevention per the risk-management program."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential frequently (neutropenia and thrombocytopenia are common early, especially with del(5q))",
+    "renal function (dose depends on renal clearance)",
+    "response assessment (transfusion independence) at about 2 to 4 months and at 24 weeks"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 to 4 neutropenia or thrombocytopenia", "drug": "lenalidomide", "action": "hold/reduce", "text": "Interrupt for significant cytopenias and resume at a reduced dose or schedule per prescribing information; cytopenias are frequent in the first weeks in del(5q) MDS. Physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Myelodysplastic Syndromes", "version": "3.2026", "date": "2026-01-12", "locator": "Footnote jj on MDS-6A (lenalidomide initial dose 10 mg/day for 21 of 28 days or 28 days, monthly for 2 to 4 months to assess response; caution with low platelet/neutrophil counts); MDS-5 (del(5q) pathway); del(5q) efficacy discussion in manuscript; TP53 as predictor of resistance", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent", "lineOfTherapy"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lenalidomide in lower-risk (IPSS-R) MDS with symptomatic anemia and the del(5q) abnormality. Dose grounded to Standard Guidelines (NCCN), Myelodysplastic Syndromes v3.2026, footnote jj (MDS-6A): lenalidomide 10 mg/day for 21 of 28 days (or 28 days) monthly for 2 to 4 months to assess response; the 21-of-28-day schedule is modeled (days 1 to 21). del(5q) is the biomarker gate; a TP53 mutation predicts resistance. histology, treatmentIntent and lineOfTherapy are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

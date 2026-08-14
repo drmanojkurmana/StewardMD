@@ -1,0 +1,191 @@
+{
+  "id": "rare-meso-peritoneal-cis-pemetrexed",
+  "name": "CISplatin + Pemetrexed (peritoneal mesothelioma)",
+  "disease": "Malignant peritoneal mesothelioma",
+  "diseaseId": "mesothelioma",
+  "histology": "malignant peritoneal mesothelioma (epithelioid, biphasic, or sarcomatoid)",
+  "stage": [
+    "unresectable",
+    "metastatic",
+    "medically inoperable"
+  ],
+  "biomarkers": {
+    "note": "Cytotoxic antifolate/platinum doublet; not biomarker-restricted. BAP1 loss and other markers are diagnostic/prognostic, not therapeutic selectors here. Per Standard Guidelines (NCCN), Mesothelioma: Peritoneal v2.2026, PEM-D, (Carboplatin or Cisplatin)/Pemetrexed is a listed systemic-therapy regimen."
+  },
+  "treatmentSetting": [
+    "adjuvant",
+    "unresectable",
+    "metastatic"
+  ],
+  "treatmentIntent": [
+    "curative",
+    "palliative"
+  ],
+  "lineOfTherapy": "first-line systemic doublet for peritoneal mesothelioma that is medically inoperable, unresectable, or progressing; may be combined with cytoreductive surgery (CRS) and hyperthermic intraperitoneal chemotherapy (HIPEC)",
+  "eligibilityCriteria": [
+    {
+      "criterion": "disease",
+      "requirement": "peritoneal mesothelioma; medically inoperable/unresectable, or at progression, or perioperative with CRS/HIPEC",
+      "source": "Standard Guidelines (NCCN), Mesothelioma: Peritoneal",
+      "locator": "v2.2026 (10/03/25), PEM-2 (Systemic therapy for medically inoperable and at progression, lines 206, 225, 229) with Principles of Systemic Therapy PEM-D (lines 868 to 882, (Carboplatin or Cisplatin)/Pemetrexed)"
+    },
+    {
+      "criterion": "organFunction",
+      "requirement": "adequate renal function for cisplatin; adequate performance status (best supportive care if PS 3 to 4)",
+      "source": "Standard Guidelines (NCCN), Mesothelioma: Peritoneal",
+      "locator": "v2.2026, footnote d line 236 (best supportive care for PS 3 to 4)"
+    }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pemetrexed",
+        "name": "Pemetrexed",
+        "basis": "bsa",
+        "dosePerUnit": 500,
+        "unit": "mg/m2",
+        "days": [
+          1
+        ],
+        "route": "IV, given before cisplatin",
+        "infusionDuration": null,
+        "caps": {
+          "perDose": null
+        },
+        "modificationRules": [],
+        "provenance": {
+          "layer": "core",
+          "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+          "version": "12th ed",
+          "date": null,
+          "locator": "lines 292543 to 292544 (pemetrexed 500 mg/m2 IV followed by cisplatin 75 mg/m2 on day 1 of a 21-day cycle) with folic acid and vitamin B12 supplementation (lines 292552 to 292553); pivotal EMPHACIS regimen. NOTE: DeVita states this dose for malignant PLEURAL mesothelioma; NCCN Peritoneal PEM-D lists the same cisplatin/pemetrexed systemic doublet without printing doses.",
+          "evidenceStatus": "unknown"
+        },
+        "notes": "Source: DeVita 12th ed., lines 292543 to 292544. Pemetrexed 500 mg/m2 IV on day 1 of a 21-day cycle, given BEFORE cisplatin. Mandatory folic acid and vitamin B12 supplementation reduces toxicity (DeVita lines 292552 to 292553); dexamethasone premedication (rash prophylaxis) per pemetrexed labeling. The dose is the standard mesothelioma antifolate/platinum doublet; DeVita's numeric locator is the pleural (MPM) chapter and NCCN Peritoneal PEM-D endorses cisplatin/pemetrexed as systemic therapy without printing doses (see provenanceNote)."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [
+          1
+        ],
+        "route": "IV with pre and post hydration, given after pemetrexed",
+        "infusionDuration": null,
+        "caps": {
+          "perDose": null
+        },
+        "modificationRules": [],
+        "provenance": {
+          "layer": "core",
+          "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+          "version": "12th ed",
+          "date": null,
+          "locator": "lines 292543 to 292544 (cisplatin 75 mg/m2 on day 1 of a 21-day cycle, following pemetrexed)",
+          "evidenceStatus": "unknown"
+        },
+        "notes": "Source: DeVita 12th ed., lines 292543 to 292544. CISplatin 75 mg/m2 IV on day 1 of a 21-day cycle, given AFTER pemetrexed. Requires pre and post IV hydration; monitor nephrotoxicity, ototoxicity, and neurotoxicity. Carboplatin is a source-stated alternative for patients unable to tolerate cisplatin (DeVita line 292566), but no carboplatin AUC is printed in the provided sources and would require VERIFY if substituted. Tall-man per ISMP."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      {
+        "name": "Pemetrexed premedication",
+        "notes": "folic acid and vitamin B12 supplementation (started before and continued through therapy, per label; DeVita lines 292552 to 292553) and dexamethasone (rash prophylaxis) per pemetrexed labeling. Specific supplement doses per label (not restated here to avoid inventing values)."
+      },
+      {
+        "name": "Antiemetic prophylaxis",
+        "notes": "cisplatin-based, high emetic risk; give per high-emetogenicity antiemetic tier."
+      }
+    ],
+    "supportiveCare": [
+      "Pemetrexed: mandatory folic acid and vitamin B12 supplementation to reduce toxicity (DeVita lines 292552 to 292553); dexamethasone premedication per label.",
+      "CISplatin: pre and post IV hydration; monitor nephrotoxicity, ototoxicity, and neurotoxicity.",
+      "Antiemetics: high emetic risk (cisplatin). May be delivered with or around cytoreductive surgery (CRS) and HIPEC per surgical plan."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each cycle - CISplatin and pemetrexed (renally cleared)",
+    "pemetrexed toxicity screen (mucositis, myelosuppression); ensure folic acid/B12 supplementation",
+    "audiometry/neuropathy assessment as clinically indicated - CISplatin"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "folic acid/B12 supplementation confirmed",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "reduced creatinine clearance",
+      "drug": "pemetrexed",
+      "action": "hold/review",
+      "text": "Pemetrexed is renally cleared and contraindicated at low creatinine clearance per label; hold and obtain clinical review."
+    },
+    {
+      "condition": "rising creatinine / falling GFR",
+      "drug": "cisplatin",
+      "action": "hold/reduce",
+      "text": "Hold or reduce cisplatin and ensure hydration per nephrotoxicity guidance; consider carboplatin substitution (dose to be VERIFY-ed); clinical review."
+    }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 292539 to 292556 (pivotal phase III EMPHACIS: pemetrexed 500 mg/m2 IV followed by cisplatin 75 mg/m2 on day 1 of a 21-day cycle established pemetrexed/cisplatin as standard first-line chemotherapy for malignant mesothelioma; folic acid and vitamin B12 supplementation reduce toxicity, lines 292552 to 292553); line 830 (adjuvant bidirectional chemotherapy with intraperitoneal pemetrexed plus intravenous cisplatin for diffuse malignant peritoneal mesothelioma)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Mesothelioma: Peritoneal",
+        "version": "2.2026",
+        "date": "2025-10-03",
+        "locator": "Principles of Systemic Therapy PEM-D (lines 868 to 882): (Carboplatin or Cisplatin)/Pemetrexed listed as a systemic-therapy regimen; PEM-2 treatment algorithm (systemic therapy for medically inoperable disease and at progression, lines 206, 225, 229); Principles of Surgery PEM-C (CRS + HIPEC, lines 723 to 743). NCCN lists the regimen but does not print systemic doses; per-drug systemic doses are taken from the core (DeVita) layer.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "regimen.drugs (pemetrexed/cisplatin systemic dose)",
+        "sources": [
+          {
+            "name": "DeVita 12th ed (EMPHACIS, malignant PLEURAL mesothelioma)",
+            "version": "12th ed",
+            "value": "pemetrexed 500 + cisplatin 75 mg/m2 q21d"
+          },
+          {
+            "name": "Standard Guidelines (NCCN) Peritoneal Mesothelioma PEM-D",
+            "version": "2.2026",
+            "value": "cisplatin or carboplatin + pemetrexed (regimen named, no doses printed)"
+          }
+        ],
+        "note": "The pemetrexed 500 / cisplatin 75 q21d doses are printed by DeVita for PLEURAL mesothelioma; the identical standard antifolate/platinum doublet is applied to peritoneal disease (site-independent systemic doublet), listed in NCCN Peritoneal PEM-D and DeVita line 830 (IP-pemetrexed/IV-cisplatin for peritoneal). NOT the HIPEC intracavitary doses.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the CISplatin + Pemetrexed systemic doublet in malignant peritoneal mesothelioma (with or without cytoreductive surgery and HIPEC). Standard Guidelines (NCCN) Mesothelioma: Peritoneal v2.2026 lists (Carboplatin or Cisplatin)/Pemetrexed as a systemic-therapy regimen (PEM-D) and CRS + HIPEC as surgery (PEM-C) but does not print systemic doses. The per-drug systemic doses are grounded in the core layer, DeVita 12th ed. lines 292543 to 292544 (the pivotal EMPHACIS regimen: pemetrexed 500 mg/m2 IV followed by cisplatin 75 mg/m2 on day 1 of a 21-day cycle) with mandatory folic acid and vitamin B12 supplementation (lines 292552 to 292553). IMPORTANT PROVENANCE NOTE: DeVita states this dose in the malignant PLEURAL mesothelioma section; it is the standard mesothelioma antifolate/platinum doublet and NCCN Peritoneal PEM-D endorses the same cisplatin/pemetrexed regimen for peritoneal disease without printing doses, so the numeric dose is grounded but its locator is the pleural chapter. DeVita line 830 additionally documents IP pemetrexed plus IV cisplatin bidirectional therapy specifically for diffuse malignant peritoneal mesothelioma. ISMP tall-man applied (CISplatin). Cisplatin hydration/nephro-oto-neuro monitoring and pemetrexed folate/B12/dexamethasone premedication are enforced; specific supplement doses are left to label rather than invented. Carboplatin is a source-stated cisplatin alternative but its AUC is not printed and would require VERIFY. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,76 @@
+{
+  "id": "sarc-kaposi-liposomal-doxorubicin",
+  "name": "Pegylated Liposomal DOXOrubicin for Kaposi Sarcoma",
+  "disease": "Kaposi sarcoma",
+  "diseaseId": "kaposi_sarcoma",
+  "histology": "Kaposi sarcoma (HHV-8/human herpesvirus-8 driven vascular neoplasm)",
+  "stage": ["advanced/symptomatic cutaneous", "visceral", "AIDS-related", "classic/endemic/iatrogenic"],
+  "biomarkers": {
+    "note": "Kaposi sarcoma is HHV-8 (human herpesvirus-8) driven; this cytotoxic regimen is not molecular-biomarker-restricted. In AIDS-related (HIV-associated) Kaposi sarcoma, optimizing antiretroviral therapy (ART) is foundational and is given alongside systemic chemotherapy. Per Standard Guidelines (NCCN), Kaposi Sarcoma v2.2026, Systemic Therapy Dosing (KS-A)."
+  },
+  "treatmentSetting": ["metastatic", "advanced"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "preferred first-line systemic therapy for advanced or symptomatic Kaposi sarcoma (AIDS-related, classic, endemic, or iatrogenic), given with optimized ART in HIV-associated disease",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "advanced, symptomatic, or visceral Kaposi sarcoma requiring systemic therapy", "source": "Standard Guidelines (NCCN), Kaposi Sarcoma", "locator": "v2.2026, First-Line Systemic Therapy Dosing (KS-A), line 921 to 922" },
+    { "criterion": "concurrentTherapy", "requirement": "optimize antiretroviral therapy (ART) in HIV-associated Kaposi sarcoma", "source": "Standard Guidelines (NCCN), Kaposi Sarcoma", "locator": "v2.2026, Discussion First-Line Systemic Therapy, line 1712 to 1730" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pegylated-liposomal-doxorubicin",
+        "name": "Pegylated liposomal DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 20,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kaposi Sarcoma", "version": "2.2026", "date": "2025-09-16", "locator": "First-Line Systemic Therapy Dosing (KS-A): Liposomal Doxorubicin 20 mg/m2 IV every 2 to 3 weeks (line 921 to 922); cardiotoxicity footnote d (echocardiogram before initial course and periodically; consider limiting lifetime dose) (line 980)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Kaposi Sarcoma v2.2026, First-Line Systemic Therapy Dosing (KS-A), line 921 to 922. Pegylated liposomal DOXOrubicin 20 mg/m2 IV every 2 to 3 weeks (cycleLengthDays modeled as 21 with a 14 to 21 day source-stated interval). DISTINCT ANTHRACYCLINE PROFILE: pegylated liposomal doxorubicin has different pharmacokinetics and a lower per-cycle cardiotoxicity profile than conventional doxorubicin, so the conventional free-doxorubicin cumulative 450/550 mg/m2 ceiling does NOT translate directly; caps.perDose and cumulativeLifetime are left null. Instead, per NCCN footnote d (line 980), perform echocardiography before the initial course and periodically and consider limiting the lifetime dose. ISMP tall-man applied (DOXOrubicin). AIDS context: give with optimized ART; low-grade neutropenia is the common toxicity in HIV-associated disease. ALTERNATIVE first-line option: Paclitaxel, dose-schedule options 60 mg/m2 IV weekly, 100 mg/m2 IV every 2 weeks, 100 mg/m2 IV every 3 weeks, or 135 mg/m2 IV every 3 weeks (line 923 to 926), modeled here as a sourced note rather than a separate drug."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "continue per response and tolerance; not a fixed cycle count (source states every 2 to 3 weeks)",
+    "premedications": [],
+    "supportiveCare": [
+      "optimize antiretroviral therapy (ART) in HIV-associated Kaposi sarcoma; involve infectious disease as needed.",
+      "cardiac surveillance: echocardiogram before the initial course of liposomal doxorubicin and periodically; consider limiting lifetime dose (NCCN Kaposi footnote d, line 980).",
+      "monitor for infusion reactions and palmar-plantar erythrodysesthesia characteristic of pegylated liposomal doxorubicin.",
+      "monitor for neutropenia; G-CSF per febrile-neutropenia risk, especially in AIDS-related disease.",
+      "SOURCED ALTERNATIVE first-line agent: Paclitaxel 60 mg/m2 weekly, 100 mg/m2 every 2 weeks, 100 mg/m2 every 3 weeks, or 135 mg/m2 every 3 weeks (NCCN Kaposi v2.2026, line 923 to 926)."
+    ]
+  },
+  "monitoring": [
+    "cardiac function (echocardiogram before initial course and periodically)",
+    "CBC before each cycle (neutropenia)",
+    "skin/mucosal assessment (palmar-plantar erythrodysesthesia; infusion reactions)",
+    "HIV viral load and CD4 count and ART adherence in AIDS-related disease",
+    "clinical Kaposi lesion response assessment"
+  ],
+  "clearanceChecks": ["cardiac (echocardiogram baseline)", "CBC/platelets", "ART optimization (HIV-associated disease)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "declining LVEF or cardiotoxicity", "drug": "pegylated-liposomal-doxorubicin", "action": "hold/limit", "text": "Hold and obtain cardiology review; consider limiting lifetime cumulative dose per NCCN footnote d (line 980)." },
+    { "condition": "grade 3 to 4 palmar-plantar erythrodysesthesia or neutropenia", "drug": "pegylated-liposomal-doxorubicin", "action": "hold/reduce", "text": "Hold and resume at a reduced dose or lengthened interval per labeling and clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Kaposi sarcoma / AIDS-related malignancy chapter (pegylated liposomal doxorubicin as preferred first-line systemic therapy; ART optimization foundational in HIV-associated disease)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kaposi Sarcoma", "version": "2.2026", "date": "2025-09-16", "locator": "First-Line Systemic Therapy Dosing (KS-A): Liposomal Doxorubicin 20 mg/m2 IV every 2 to 3 weeks (line 921 to 922); Paclitaxel dose-schedule options 60/100/135 mg/m2 (line 923 to 926); cardiotoxicity footnote d (line 980); Discussion First-Line Systemic Therapy (line 1712 to 1730)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for pegylated liposomal DOXOrubicin in Kaposi sarcoma (StewardMD reference disease kaposi_sarcoma). The dose (pegylated liposomal DOXOrubicin 20 mg/m2 IV every 2 to 3 weeks; cycleLengthDays modeled as 21 across the source-stated 14 to 21 day interval) is grounded to Standard Guidelines (NCCN), Kaposi Sarcoma v2.2026, First-Line Systemic Therapy Dosing (KS-A, line 921 to 922). Pegylated liposomal doxorubicin has a distinct anthracycline profile: its pharmacokinetics and lower per-cycle cardiotoxicity mean the conventional free-doxorubicin 450/550 mg/m2 cumulative ceiling does not translate directly, so the cumulative cap is left null and the sourced cardiac guidance is used instead (echocardiogram before the initial course and periodically; consider limiting lifetime dose, NCCN footnote d, line 980). AIDS/HIV context is captured: optimize antiretroviral therapy alongside chemotherapy in HIV-associated disease (Discussion, line 1712 to 1730). A fully-sourced first-line alternative (paclitaxel 60 mg/m2 weekly, or 100 mg/m2 every 2 or 3 weeks, or 135 mg/m2 every 3 weeks; line 923 to 926) is documented as a note rather than modeled as a separate drug. ISMP tall-man applied (DOXOrubicin). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

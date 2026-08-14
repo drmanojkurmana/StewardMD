@@ -1,0 +1,90 @@
+{
+  "id": "rare-histiocytic-braf-mek",
+  "name": "BRAF Inhibitor +/- MEK Inhibitor (Histiocytic Neoplasm, BRAF V600E: dabrafenib/vemurafenib +/- trametinib/cobimetinib)",
+  "disease": "Histiocytic neoplasm (Langerhans cell histiocytosis / Erdheim-Chester disease)",
+  "diseaseId": null,
+  "histology": "histiocytic neoplasm - Langerhans cell histiocytosis (LCH) or Erdheim-Chester disease (ECD), including multisystem, single-system lung, and CNS-involved disease",
+  "stage": ["multisystem", "single-system (lung/CNS)", "relapsed/refractory"],
+  "biomarkers": {
+    "BRAF": "V600E mutation - the biomarker gate for BRAF-inhibitor therapy (present in ~50% of LCH and >80% of ECD histiocytoses)",
+    "MAPK": "for MAP-kinase-pathway (non-BRAF-V600E) mutations, or no actionable/detectable mutation, a MEK inhibitor (trametinib, binimetinib, or selumetinib) is the targeted option instead of a BRAF inhibitor",
+    "note": "BRAF inhibitors (dabrafenib, vemurafenib) are used for BRAF V600E-mutated LCH and ECD, alone or combined with a MEK inhibitor (trametinib or cobimetinib). MEK inhibitors are used for MAP-kinase-pathway mutations or no detectable actionable mutation. Per Standard Guidelines (NCCN), Histiocytic Neoplasms, HIST-F (Principles of Targeted Therapy) and the Discussion (MS-9, treatment of LCH/ECD)."
+  },
+  "treatmentSetting": "targeted therapy for BRAF V600E-mutated histiocytic neoplasm (LCH/ECD)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "targeted option for BRAF V600E-mutated LCH or ECD (systemic therapy); continued long-term as disease control (relapse is common on discontinuation)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRAF V600E mutation confirmed (required for BRAF-inhibitor therapy)", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "locator": "v2.2026, Discussion MS-9 (dabrafenib/vemurafenib for BRAF V600E-mutated LCH; vemurafenib/dabrafenib for BRAF V600E-mutated ECD); histiocytic lines 3428, 3623, 3627, 3631" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dabrafenib",
+        "name": "Dabrafenib",
+        "basis": "flat",
+        "dosePerUnit": 50,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-F (Principles of Targeted Therapy - Recommended Starting Doses for Select Targeted Agents): Dabrafenib 50 mg PO twice daily; histiocytic line 2730", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026, HIST-F table (line 2730): Dabrafenib 50 mg PO TWICE daily as the recommended STARTING dose (adjust/increase based on response). dosePerUnit 50 mg is the single per-administration dose given BID; represented as days 1 to 28 continuously. This is a reduced histiocytic starting dose (below the melanoma label dose); it is generally reasonable to start with one or two dose reductions and titrate to response (HIST-F, Considerations for Targeted Therapies). ALTERNATIVE BRAF INHIBITOR: vemurafenib 480 mg PO twice daily (HIST-F, line 2736). No ISMP tall-man form."
+      },
+      {
+        "id": "trametinib",
+        "name": "Trametinib",
+        "basis": "flat",
+        "dosePerUnit": 1,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-F (Principles of Targeted Therapy): Trametinib 0.5-1 mg PO daily; histiocytic line 2734", "evidenceStatus": "current" },
+        "notes": "OPTIONAL MEK-INHIBITOR PARTNER (the '+/- MEKi'). Source: Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026, HIST-F (line 2734): Trametinib recommended STARTING dose 0.5 to 1 mg PO once daily (adjust/increase based on response). Modeled at the 1 mg upper end of the starting range; the source range is 0.5-1 mg and it is titrated to response. Trametinib may also be used as single-agent MEK-inhibitor therapy for MAP-kinase-pathway mutations or no detectable actionable mutation. ALTERNATIVE MEK INHIBITOR: cobimetinib 20-40 mg PO daily on days 1-21 of each 28-day cycle (HIST-F, line 2732); binimetinib or selumetinib if cobimetinib/trametinib not tolerated. If a BRAF inhibitor is given WITHOUT a MEK inhibitor, this drug is omitted. No ISMP tall-man form."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous oral dosing (no defined cycle count); targeted therapy is continued long-term because histiocytic disease commonly relapses on discontinuation. Start at reduced doses and titrate to response per HIST-F.",
+      "BRAF inhibitor: dabrafenib 50 mg PO twice daily OR vemurafenib 480 mg PO twice daily. Optional MEK inhibitor: trametinib 0.5-1 mg PO daily OR cobimetinib 20-40 mg PO daily on days 1-21 of a 28-day cycle.",
+      "MEK inhibitor: serious retinopathy can occur - baseline and periodic retinal exam with optical coherence tomography (OCT); acneiform rash managed with topical benzoyl peroxide +/- oral doxycycline/minocycline.",
+      "BRAF inhibitor after prior immune checkpoint blockade: drug-induced hypersensitivity syndrome can occur - prompt dermatology consultation."
+    ]
+  },
+  "monitoring": [
+    "MEK-inhibitor retinopathy: retinal exam with OCT (baseline and periodic)",
+    "cutaneous toxicity (BRAFi: keratoacanthoma/squamous proliferations, hypersensitivity; MEKi: acneiform rash)",
+    "cardiac (MEK-inhibitor LVEF), hypertension (higher rate in histiocytic neoplasms than melanoma), pyrexia (BRAFi)",
+    "LFTs, CBC",
+    "radiographic/FDG-PET response assessment"
+  ],
+  "clearanceChecks": ["ophthalmologic (OCT) for MEKi", "cardiac/LVEF for MEKi", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "not tolerating full targeted-therapy dose", "drug": "dabrafenib/trametinib", "action": "reduce/titrate", "text": "It is generally reasonable to start with one or two dose reductions and then adjust based on response (HIST-F, Considerations for Targeted Therapies). Manage CYP drug-drug interactions." },
+    { "condition": "MEK-inhibitor retinopathy or significant LVEF decline", "drug": "trametinib", "action": "hold/reduce", "text": "Hold/reduce the MEK inhibitor per prescribing information; ophthalmology/cardiology evaluation. Obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 23127, 23213 (BRAF V600E present in ~39-50% of Langerhans cell histiocytosis and >80% of BRAF V600E histiocytosis; BRAF-inhibitor response in histiocytosis)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Histiocytic Neoplasms", "version": "2.2026", "date": "2026-07-15", "locator": "HIST-F (Principles of Targeted Therapy, Recommended Starting Doses): Dabrafenib 50 mg PO BID (line 2730), Cobimetinib 20-40 mg PO daily days 1-21 q28d (line 2732), Trametinib 0.5-1 mg PO daily (line 2734), Vemurafenib 480 mg PO BID (line 2736); Discussion MS-9 (BRAF/MEK inhibitors for LCH and ECD; V600E gate; MEKi for MAPK-pathway mutation); histiocytic lines 3358, 3428, 3623, 3627, 3631", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for BRAF inhibitor +/- MEK inhibitor targeted therapy in BRAF V600E-mutated histiocytic neoplasm (LCH / Erdheim-Chester disease), a rare histiocytic disorder. All doses are dose-grounded to Standard Guidelines (NCCN) Histiocytic Neoplasms v2.2026, HIST-F 'Recommended Starting Doses for Select Targeted Agents': dabrafenib 50 mg PO BID (line 2730), vemurafenib 480 mg PO BID (line 2736, alternative BRAFi), trametinib 0.5-1 mg PO daily (line 2734), cobimetinib 20-40 mg PO daily days 1-21 q28d (line 2732, alternative MEKi). The modeled combination is dabrafenib + trametinib; the alternative BRAFi (vemurafenib) and MEKi (cobimetinib), and BRAFi-monotherapy (omit MEKi), are carried in notes/supportive care - no dose is invented (trametinib modeled at the 1 mg upper end of the source 0.5-1 mg starting range, range noted). BIOMARKER GATE: BRAF V600E is required for BRAF-inhibitor therapy; MEK inhibitors serve MAP-kinase-pathway mutations or no detectable actionable mutation. MEK-inhibitor retinopathy (OCT monitoring) is captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

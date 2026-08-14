@@ -1,0 +1,68 @@
+{
+  "id": "skin-melanoma-nivolumab",
+  "name": "Nivolumab (cutaneous melanoma)",
+  "disease": "Cutaneous melanoma",
+  "diseaseId": "cutaneous_melanoma",
+  "histology": "cutaneous melanoma",
+  "stage": ["III (resected, adjuvant)", "III (unresectable)", "IV"],
+  "biomarkers": {
+    "note": "Anti-PD-1 monotherapy. No positive companion biomarker is required to start; applicable regardless of BRAF status. Used in the adjuvant setting for resected high-risk stage III/IV (CheckMate 238) and in the unresectable/metastatic setting (CheckMate 066/067). Per Standard Guidelines (NCCN), Melanoma: Cutaneous, Table 14."
+  },
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "adjuvant anti-PD-1 for resected high-risk stage III/IV melanoma, and single-agent anti-PD-1 for unresectable stage III or stage IV melanoma; not BRAF-restricted",
+  "eligibilityCriteria": [
+    { "criterion": "stage/setting", "requirement": "resected high-risk stage III/IV (adjuvant) OR unresectable stage III / stage IV (advanced)", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, Nivolumab as adjuvant and advanced-disease anti-PD-1 option; Table 14, MS-55 to MS-56" },
+    { "criterion": "biomarker", "requirement": "no companion biomarker required (BRAF-agnostic)", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, Systemic Therapy (anti-PD-1 monotherapy)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "flat",
+        "dosePerUnit": 240,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Nivolumab row, MS-55 to MS-56 (lines 8159 to 8161): FDA Prescribing information 240 mg Q2W or 480 mg Q4W; CheckMate 067 (line 8157) 3 mg/kg Q2W", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 14 (MS-55 to MS-56). Nivolumab 240 mg IV flat every 2 weeks (FDA prescribing information), until disease progression or unacceptable toxicity. Source-stated equivalent: 480 mg Q4W flat (FDA prescribing information); and 3 mg/kg Q2W (CheckMate 066/067). The 480 mg every-4-weeks schedule is modeled here as an accepted alternative in regimen.cycles rather than as a second drug row. In the adjuvant setting nivolumab is given for up to 1 year; in advanced disease continued until progression or unacceptable toxicity."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "Adjuvant (resected stage III/IV): nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) for up to 1 year. Advanced (unresectable stage III / stage IV): nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) until disease progression or unacceptable toxicity (Standard Guidelines (NCCN) v2.2026, Table 14, MS-55 to MS-56). The 480 mg Q4W schedule uses a 28-day cycle.",
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event (irAE) monitoring (thyroid and other endocrinopathies, hepatitis, colitis/diarrhea, pneumonitis, dermatitis, nephritis); manage per NCCN Guidelines for Management of Immunotherapy-Related Toxicities.",
+      "Baseline and periodic thyroid (TSH/free T4), liver function, glucose as indicated."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose) before each cycle and as indicated",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "clinical/radiographic response assessment (advanced disease); recurrence surveillance (adjuvant)"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "renal", "CBC", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "nivolumab", "action": "hold/steroids", "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe/grade 3 to 4 irAE. Obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Anti-PD-1 monotherapy framework for melanoma; dosing taken from the guideline layer (Table 14, MS-55 to MS-56)", "evidenceStatus": "current" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 14 Immune Checkpoint Inhibitor Treatment Regimens, Nivolumab (FDA prescribing information 240 mg Q2W or 480 mg Q4W; CheckMate 067 3 mg/kg Q2W), MS-55 to MS-56 (lines 8155 to 8161)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for nivolumab anti-PD-1 monotherapy in cutaneous melanoma, covering both adjuvant therapy for resected high-risk stage III/IV disease and treatment of unresectable stage III or stage IV disease. The dose is sourced to Standard Guidelines (NCCN), Melanoma: Cutaneous v2.2026, Table 14 (MS-55 to MS-56): nivolumab 240 mg IV flat every 2 weeks or 480 mg every 4 weeks (FDA prescribing information), with a source-stated weight-based equivalent of 3 mg/kg every 2 weeks (CheckMate 066/067). Adjuvant duration is up to 1 year; advanced-disease treatment continues until progression or unacceptable toxicity. Immune-related adverse event monitoring applies. Every modeled numeric dose is sourced and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

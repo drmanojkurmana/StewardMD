@@ -1,0 +1,86 @@
+{
+  "id": "gu-prostate-abiraterone",
+  "name": "Abiraterone acetate plus Prednisone (mCRPC)",
+  "disease": "Prostate cancer",
+  "diseaseId": "prostate_cancer",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "stage": ["M1 CRPC (metastatic castration-resistant)"],
+  "biomarkers": {
+    "note": "Abiraterone is a CYP17 inhibitor and is not biomarker-restricted. Castrate testosterone (below 50 ng/dL) must be maintained with ongoing ADT. Per Standard Guidelines (NCCN), Prostate Cancer, Systemic Therapy for M1 CRPC (PROS-18) and PROS-G."
+  },
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "androgen-receptor pathway inhibitor option for metastatic castration-resistant prostate cancer; category 1 in the pre-taxane (pre-docetaxel) setting when no prior ARPI has been given",
+  "eligibilityCriteria": [
+    { "criterion": "diseaseState", "requirement": "metastatic castration-resistant prostate cancer (M1 CRPC) with castrate testosterone below 50 ng/dL maintained on ADT", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-G (Secondary Hormone Therapy for M0/M1 CRPC), prostate line 3003 (castrate levels of testosterone maintained); PROS-18 (systemic therapy for M1 CRPC), prostate line 1779 (Abiraterone category 1)" },
+    { "criterion": "castrationBackbone", "requirement": "ongoing ADT (orchiectomy, LHRH agonist, or LHRH antagonist)", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-G, prostate line 3003" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "abiraterone",
+        "name": "Abiraterone acetate",
+        "basis": "flat",
+        "dosePerUnit": 1000,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO (once daily after an overnight fast)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "PROS-G footnote b, prostate lines 2846 to 2849 (standard formulation 1000 mg/day after an overnight fast); Discussion, prostate line 7230 (abiraterone 1000 mg orally once daily)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026, PROS-G footnote b (prostate lines 2846 to 2849) and Discussion (prostate line 7230). Standard abiraterone acetate 1000 mg PO once daily on an empty stomach (after an overnight fast). MUST be given with concurrent prednisone (see prednisone entry). Fine-particle formulation and a low-fat 250 mg/day option exist per the same footnote; not modeled here."
+      },
+      {
+        "id": "prednisone",
+        "name": "Prednisone",
+        "basis": "flat",
+        "dosePerUnit": 5,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO (twice daily)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "PROS-G footnote b, prostate line 2847 (prednisone twice daily in the CRPC setting with the standard abiraterone formulation)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026, PROS-G footnote b (prostate line 2847). Prednisone 5 mg PO TWICE daily in the CRPC setting with the standard abiraterone formulation. Mandatory companion steroid (with the fine-particle formulation, methylprednisolone 4 mg PO twice daily is used instead)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+      "cycles null: continue until progression or unacceptable toxicity.",
+      "mandatory concurrent prednisone 5 mg PO twice daily with the standard abiraterone formulation.",
+      "after progression on abiraterone, adding dexamethasone 0.5 mg/day to abiraterone is a source-listed secondary hormone option (PROS-G, prostate line ~3007)."
+    ]
+  },
+  "monitoring": [
+    "PSA and serum testosterone (confirm castrate level)",
+    "liver function (hepatotoxicity), blood pressure, and serum potassium (mineralocorticoid excess)",
+    "fluid retention / edema"
+  ],
+  "clearanceChecks": ["liver", "blood pressure/potassium", "castrate testosterone maintained", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher hepatotoxicity (transaminase elevation)", "drug": "abiraterone", "action": "hold/reduce", "text": "Hold abiraterone and prednisone per labeling; resume at a reduced dose after recovery; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "abiraterone acetate (CYP17 inhibitor) with prednisone improves survival in metastatic castration-resistant prostate cancer (COU-AA-301/302)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "PROS-18 (systemic therapy for M1 CRPC, Abiraterone category 1), prostate line 1779; PROS-G footnote b (abiraterone 1000 mg/day + prednisone twice daily in CRPC), prostate lines 2846 to 2849; Discussion (abiraterone 1000 mg orally once daily), prostate line 7230", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for abiraterone acetate plus prednisone in metastatic castration-resistant prostate cancer (disease #54 mCRPC). The abiraterone dose (1000 mg PO once daily after an overnight fast) and the mandatory companion prednisone dose (5 mg PO twice daily in the CRPC setting) are dose-grounded to Standard Guidelines (NCCN) Prostate v6.2026, PROS-G footnote b (prostate lines 2846 to 2849) and Discussion (prostate line 7230). Ongoing ADT to maintain castrate testosterone below 50 ng/dL is required (PROS-G). cycleLengthDays 28 with cycles null (continuous until progression). No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

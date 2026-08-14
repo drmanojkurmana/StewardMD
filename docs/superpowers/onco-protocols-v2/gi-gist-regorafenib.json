@@ -1,0 +1,73 @@
+{
+  "id": "gi-gist-regorafenib",
+  "name": "Regorafenib (GIST, third-line)",
+  "disease": "Gastrointestinal stromal tumor (GIST)",
+  "diseaseId": "gastrointestinal_stromal_tumour",
+  "histology": "gastrointestinal stromal tumor (KIT/CD117-expressing mesenchymal neoplasm)",
+  "stage": ["unresectable", "recurrent", "metastatic"],
+  "biomarkers": {
+    "KIT": "regorafenib is a multikinase inhibitor with activity against KIT and PDGFRA, used after imatinib and sunitinib failure",
+    "note": "Regorafenib is the standard third-line TKI for advanced GIST after failure of imatinib and sunitinib (category 1). It also has activity in SDH-deficient GIST. Per Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors, GIST-D, and DeVita 12th ed. (lines 118434 to 118437)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "third-line for unresectable/recurrent/metastatic GIST after failure of imatinib and sunitinib (category 1)",
+  "eligibilityCriteria": [
+    { "criterion": "priorTherapy", "requirement": "disease progression after both imatinib and sunitinib", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 118434 to 118437 (regorafenib is standard third-line therapy for advanced GIST, effective in patients failing both imatinib and sunitinib); Standard Guidelines (NCCN) GIST v1.2026, GIST-D (Regorafenib, category 1)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "regorafenib",
+        "name": "Regorafenib",
+        "basis": "flat",
+        "dosePerUnit": 160,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 118434 to 118437 (regorafenib given 160 mg by mouth daily for 3 weeks every 4 weeks, effective as third-line therapy in patients failing both imatinib and sunitinib, GRID trial)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. (lines 118434 to 118437, GRID trial). Regorafenib 160 mg PO once daily for 3 weeks (days 1 to 21) followed by a 1-week rest, in a 4-week (28-day) cycle. Days array encodes the 21 on-treatment days of the 28-day cycle. No ISMP tall-man form. Regorafenib-specific monitoring: hypertension (blood pressure), hand-foot skin reaction, hepatotoxicity (LFTs, including a boxed hepatotoxicity warning), fatigue, and diarrhea."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "160 mg daily for 3 weeks on / 1 week off (28-day cycle); continue until progression or intolerance.",
+      "Monitor blood pressure and liver function; assess hand-foot skin reaction each cycle.",
+      "Antiemetic/G-CSF prophylaxis not routinely required for oral regorafenib monotherapy."
+    ]
+  },
+  "monitoring": [
+    "liver function tests (regorafenib hepatotoxicity, boxed warning) - baseline and during first cycles",
+    "blood pressure (TKI-associated hypertension) at baseline and each cycle",
+    "hand-foot skin reaction assessment each cycle",
+    "CBC",
+    "clinical/radiographic response assessment (CT)"
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "CBC/platelets", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 hand-foot skin reaction, hypertension, or hepatotoxicity", "drug": "regorafenib", "action": "hold/reduce", "text": "Hold and resume at a reduced dose (e.g., 120 mg then 80 mg) per labeling; monitor LFTs closely; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 118434 to 118437 (regorafenib 160 mg by mouth daily for 3 weeks every 4 weeks, third-line GIST, GRID)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gastrointestinal Stromal Tumors", "version": "1.2026", "date": null, "locator": "GIST-D 1 of 2 (Regorafenib, category 1, third-line after imatinib and sunitinib); gist lines 1777, 1801", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for regorafenib in GIST (disease #29), third-line after imatinib and sunitinib. Regorafenib 160 mg PO once daily for 3 weeks every 4 weeks is dose-grounded to DeVita 12th ed. (lines 118434 to 118437, GRID trial). Third-line positioning after both imatinib and sunitinib is source-stated (DeVita line 118434; NCCN GIST v1.2026 GIST-D). The GIST NCCN extract confirms regorafenib as a category 1 third-line option but does not print an explicit mg dose, so the concrete 160 mg 3-weeks-on/1-week-off schedule is carried from the DeVita core layer. No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

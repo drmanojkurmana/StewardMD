@@ -1,0 +1,90 @@
+{
+  "id": "breast-anastrozole",
+  "name": "Anastrozole (aromatase inhibitor endocrine therapy)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "hormone-receptor-positive invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["I", "II", "III", "IV"],
+  "biomarkers": {
+    "ER": "positive",
+    "PR": "tested",
+    "HR": "positive required (ER and/or PR positive)",
+    "HER2": "tested",
+    "hormoneReceptorRestricted": true,
+    "note": "Endocrine therapy REQUIRES hormone-receptor-positive disease (ER and/or PR positive). Anastrozole is a nonsteroidal aromatase inhibitor and works only in a low-estrogen (postmenopausal) environment: it is used in postmenopausal patients, or in premenopausal patients ONLY with concurrent ovarian function suppression/ablation. HER2 is tested to guide added HER2-directed therapy and does not change the endocrine indication. Per DeVita 12th ed. (Chapter 16) and Standard Guidelines (NCCN), Invasive Breast Cancer, Principles of Adjuvant Endocrine Therapy (BINV-K)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "adjuvant endocrine therapy (curative-intent early breast cancer) and endocrine therapy for ER- and/or PR-positive metastatic disease; not cytotoxic-line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "hormone-receptor-positive (ER and/or PR positive) breast cancer", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer / DeVita 12th ed.", "locator": "NCCN v6.2026 BINV-K; DeVita lines 30132 to 30136 (metastatic and adjuvant settings)" },
+    { "criterion": "menopausalStatus", "requirement": "postmenopausal (natural or induced); in premenopausal patients only with concurrent ovarian function suppression/ablation", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer / DeVita 12th ed.", "locator": "NCCN v6.2026 BINV-K 3 of 4 (Premenopausal: aromatase inhibitor + ovarian suppression/ablation) and BINV-K 4 of 4 (Postmenopausal: aromatase inhibitor 5 y); DeVita lines 30135, 186178 to 186180" },
+    { "criterion": "sex", "requirement": "not recommended as monotherapy in male breast cancer (tamoxifen is the male endocrine standard; if an aromatase inhibitor is used in men it requires concurrent GnRH agonist)", "source": "DeVita 12th ed.", "locator": "lines 185885 to 185890 (AI associated with 1.5-fold higher mortality vs tamoxifen in male breast cancer)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "anastrozole",
+        "name": "Anastrozole",
+        "basis": "flat",
+        "dosePerUnit": 1,
+        "unit": "mg",
+        "days": [1],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 30160 to 30169 (anastrozole 1 mg daily achieves near-maximal aromatase inhibition and estrogen suppression; once-daily oral dosing)", "evidenceStatus": "current" },
+        "notes": "Source: DeVita 12th ed. lines 30160 to 30169. Anastrozole 1 mg by mouth once daily, continuous (flat daily dosing; the days array marks once-daily administration within a nominal 1-day cycle). Nonsteroidal aromatase inhibitor. Adjuvant duration 5 years, with extended aromatase inhibitor duration (7.5 to 10 years total) considered for node-positive disease (NCCN v6.2026 BINV-K)."
+      }
+    ],
+    "cycleLengthDays": 1,
+    "cycles": "continuous once-daily dosing for 5 years (adjuvant), extended to 7.5 to 10 years total may be considered for node-positive disease; continued until progression or unacceptable toxicity in metastatic disease",
+    "premedications": [],
+    "supportiveCare": [
+      "Not myelosuppressive; no G-CSF or routine antiemetics required (oral endocrine therapy).",
+      "Ovarian suppression (OFS) is MANDATORY when used in premenopausal patients: GnRH agonist (e.g., goserelin 3.6 mg SC every 4 weeks) or surgical/radiation ablation. Per NCCN v6.2026 BINV-K 2 of 4 and 3 of 4; DeVita lines 186178 to 186180.",
+      "Bone health: aromatase inhibitors increase fracture risk and cause bone loss; monitor bone mineral density and consider a bisphosphonate or denosumab plus calcium/vitamin D (DeVita lines 30140 to 30145; NCCN v6.2026 BINV-K footnote q).",
+      "Arthralgia/myalgia occur in up to half of patients (DeVita line 30140)."
+    ]
+  },
+  "monitoring": [
+    "adherence to daily oral endocrine therapy (crucial to outcome)",
+    "bone mineral density (baseline and periodic) given fracture risk",
+    "arthralgia/myalgia and lipid profile",
+    "in premenopausal patients on OFS: confirm ongoing postmenopausal-range estradiol; vaginal bleeding on an AI warrants urgent review (AI can stimulate ovarian function)"
+  ],
+  "clearanceChecks": ["hormone-receptor status confirmed positive", "postmenopausal status confirmed (or OFS in place for premenopausal)", "baseline bone mineral density"],
+  "doseModificationRules": [
+    { "condition": "aromatase-inhibitor-associated musculoskeletal symptoms or intolerance", "drug": "anastrozole", "action": "switch/support", "text": "Options include switching to another aromatase inhibitor after a washout, or to tamoxifen; supportive measures include exercise, NSAIDs, or duloxetine (NCCN v6.2026 supportive-care discussion; DeVita lines 30138 to 30145). Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Chapter 16 (aromatase inhibitors): dose and pharmacology lines 30160 to 30169; settings lines 30132 to 30136; toxicity/bone lines 30138 to 30149; premenopausal OFS-plus-AI and metastatic endocrine therapy lines 186178 to 186209; male breast cancer lines 185885 to 185890",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": "2026-07-29",
+        "locator": "Principles of Adjuvant Endocrine Therapy (BINV-K 4 of 4: Postmenopausal aromatase inhibitor 5 y, category 1; BINV-K 3 of 4: Premenopausal aromatase inhibitor + ovarian suppression/ablation, category 1; footnote g: anastrozole/exemestane/letrozole similar efficacy and extended AI 7.5 to 10 y for node involvement; footnote q: bone-density support)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for anastrozole (nonsteroidal aromatase inhibitor) endocrine therapy. Restricted to hormone-receptor-positive (ER and/or PR positive) breast cancer; histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. Dose is flat daily oral: anastrozole 1 mg by mouth once daily, sourced to DeVita 12th ed. lines 30160 to 30169 (1 mg daily achieves near-maximal aromatase inhibition; once-daily dosing). Used in postmenopausal patients, or in premenopausal patients ONLY with concurrent ovarian function suppression/ablation (NCCN v6.2026 BINV-K; DeVita 186178 to 186180). Adjuvant duration 5 years, extended to 7.5 to 10 years total considered for node-positive disease (NCCN v6.2026 BINV-K footnote g). Not recommended as monotherapy in male breast cancer (tamoxifen is the male standard; DeVita 185885 to 185890). Bone-health monitoring and support advised. No ISMP tall-man agent. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

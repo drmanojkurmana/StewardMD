@@ -1,0 +1,110 @@
+{
+  "id": "gi-hcc-atezo-bev",
+  "name": "Atezolizumab + Bevacizumab (IMbrave150)",
+  "disease": "Hepatocellular carcinoma",
+  "diseaseId": "hepatocellular_carcinoma",
+  "histology": "hepatocellular carcinoma",
+  "stage": ["advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "note": "No predictive biomarker gates the atezolizumab plus bevacizumab combination in HCC. Per Standard Guidelines (NCCN), Hepatocellular Carcinoma v2.2026, Principles of Biomarker Testing (HCC-J), molecular testing (MSI/dMMR, RET fusion, NTRK fusion) identifies subsequent-line targeted or immunotherapy options and does not select this first-line regimen."
+  },
+  "treatmentSetting": "advanced/unresectable or metastatic (systemic-therapy setting)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for advanced or unresectable HCC (category 1, Preferred); also an option in subsequent-line if not previously used",
+  "eligibilityCriteria": [
+    { "criterion": "liverFunction", "requirement": "preserved liver function (Child-Pugh A). The pivotal HCC systemic-therapy trials were limited to patients with preserved liver function; therapies may have limited safety data for Child-Pugh class B or C.", "source": "DeVita, Cancer PPO 12th ed., Ch. 36; Standard Guidelines (NCCN), Hepatocellular Carcinoma", "locator": "DeVita lines 111720 to 111721 (preserved liver function); NCCN v2.2026 Principles of Systemic Therapy (HCC-I 1 of 2) footnotes c and d; Principles of Liver Functional Assessment (HCC-E)" },
+    { "criterion": "bleedingRisk", "requirement": "adequate endoscopic evaluation and management for esophageal varices within approximately 6 months prior to treatment (or per institutional practice), based on assessment of bleeding risk (bevacizumab bleeding risk).", "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma", "locator": "v2.2026, Principles of Systemic Therapy (HCC-I 1 of 2), footnote g; Discussion (hcc.txt lines 1290, 3093 to 3095)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "atezolizumab",
+        "name": "Atezolizumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Atezolizumab + Bevacizumab category 1 Preferred; reference 1 (Cheng, IMbrave150). Per-mg dose not printed.", "evidenceStatus": "current" },
+        "notes": "VERIFY: DeVita (Ch. 36, lines 111657 to 111667, IMbrave150 efficacy) and Standard Guidelines (NCCN) HCC v2.2026 (HCC-I 1 of 2) establish atezolizumab plus bevacizumab as the category 1 preferred first-line regimen but do NOT print the atezolizumab per-mg dose, unit, basis, or interval (IMbrave150 flat IV dosing). The published dose and schedule must be VERIFY-ed against a cited source; not inferred here. Note (HCC-I footnote e): atezolizumab and hyaluronidase-tqjs subcutaneous injection may be substituted for IV atezolizumab and has different dosing and administration."
+      },
+      {
+        "id": "bevacizumab",
+        "name": "Bevacizumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Atezolizumab + Bevacizumab category 1 Preferred; reference 1 (Cheng, IMbrave150). Per-kg dose not printed.", "evidenceStatus": "current" },
+        "notes": "VERIFY: bevacizumab is a VEGF inhibitor dosed on a mg/kg basis in IMbrave150, but the per-kg dose, unit, basis, and interval are NOT printed in the provided sources (DeVita Ch. 36 lines 111389 to 111416 and 111657 to 111667 give narrative/efficacy only). The published dose and schedule must be VERIFY-ed against a cited source; not inferred here. If populated on a mg/kg basis, use basis mgkg per the platform convention."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Esophageal-varices screen: adequate endoscopic evaluation and management within approximately 6 months before starting bevacizumab (HCC-I footnote g).",
+      "Blood pressure and urine protein (proteinuria) monitoring; bleeding-risk assessment (bevacizumab).",
+      "Immune-related adverse event monitoring for atezolizumab (thyroid, hepatic, pulmonary, colitis, endocrinopathies)."
+    ]
+  },
+  "monitoring": [
+    "Blood pressure and urine protein/proteinuria during bevacizumab",
+    "Bleeding-risk and variceal assessment",
+    "Immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during atezolizumab",
+    "Liver function (Child-Pugh class)",
+    "Clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "proteinuria/renal", "endocrine/immune status", "variceal/bleeding risk", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "atezolizumab", "action": "hold/steroids", "text": "Hold atezolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." },
+    { "condition": "uncontrolled hypertension, significant proteinuria, or bleeding", "drug": "bevacizumab", "action": "hold", "text": "Hold bevacizumab for uncontrolled hypertension, nephrotic-range proteinuria, or clinically significant bleeding; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 36 Cancer of the Liver, lines 111657 to 111667 (IMbrave150: atezolizumab plus bevacizumab vs sorafenib, OS/PFS benefit, new first-line SOC); bevacizumab narrative lines 111389 to 111416. No per-mg dose printed.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Atezolizumab + Bevacizumab (category 1) first-line Preferred (footnotes e, f, g, h; references 1, 2 Cheng/D'Alessio, IMbrave150). Varices screen footnote g. The guideline lists the regimen by name and prints no per-mg dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs.atezolizumab.basis",
+    "regimen.drugs.atezolizumab.dosePerUnit",
+    "regimen.drugs.atezolizumab.unit",
+    "regimen.drugs.atezolizumab.days",
+    "regimen.drugs.bevacizumab.basis",
+    "regimen.drugs.bevacizumab.dosePerUnit",
+    "regimen.drugs.bevacizumab.unit",
+    "regimen.drugs.bevacizumab.days",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for atezolizumab plus bevacizumab (IMbrave150) as first-line systemic therapy for advanced or unresectable hepatocellular carcinoma (#22). The Standard Guidelines (NCCN) HCC v2.2026 Principles of Systemic Therapy (HCC-I 1 of 2) and DeVita 12th ed. Ch. 36 (lines 111657 to 111667) establish this as the category 1 preferred first-line regimen but print NO per-mg or per-kg doses. Accordingly the atezolizumab dose/unit/basis/days and bevacizumab dose/unit/basis/days, and the regimen cycleLengthDays and cycles, are all set to VERIFY and must be VERIFY-ed against a cited source; none were inferred. Safety-critical eligibility is grounded: preserved liver function (Child-Pugh A) per DeVita lines 111720 to 111721 and HCC-I caution footnotes c and d, and the mandatory esophageal-varices endoscopic evaluation within approximately 6 months before bevacizumab per HCC-I footnote g (Discussion hcc.txt lines 1290, 3093 to 3095). Bevacizumab hypertension/proteinuria/bleeding monitoring and atezolizumab immune-related adverse event monitoring are carried in monitoring and doseModificationRules. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,160 @@
+{
+  "id": "heme-all-pediatric-inspired",
+  "name": "Pediatric-inspired multi-agent regimen for AYA adult ALL (CALGB 10403-type)",
+  "disease": "Acute lymphoblastic leukemia, adolescent and young adult (AYA)",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage or T-lineage acute lymphoblastic leukemia",
+  "stage": [],
+  "biomarkers": {
+    "BCR_ABL1": "negative",
+    "note": "Pediatric-inspired regimens are the preferred approach for Philadelphia chromosome-negative AYA ALL; BCR::ABL1-positive disease is routed to a TKI-containing protocol (see heme-all-ph-positive-tki). BCR::ABL1 is tested to establish the gate. Harrison 22nd ed. Table 111-4 (line 120095) lists a pediatric-inspired approach with few/no stem-cell transplant for B-lineage Ph-negative AYA (15 to 35/45 years)."
+  },
+  "treatmentSetting": "induction, consolidation, interim maintenance, delayed intensification, and maintenance",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "age", "requirement": "adolescent / young adult (AYA), approximately 15 to 39 years", "source": "Harrison 22nd ed", "locator": "line 120095 (Table 111-4, AYA 15 to 35/45 years)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "notes": "Induction backbone drug. Harrison line 120175 states ALL induction regimens are centered around vincristine, glucocorticoids, and anthracyclines. Adult AYA CALGB 10403-type mg/m2 doses and days are not printed in the adult ALL extracts - dose, unit, basis, and days are VERIFY (pediatric-guideline values are reference-only and not adopted as the adult dose). Per-dose cap 2 mg applied as a StewardMD safety rule; ISMP tall-man vinCRIStine, IV-only, fatal if intrathecal."
+      },
+      {
+        "id": "glucocorticoid",
+        "name": "Glucocorticoid (prednisone or dexamethasone)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO or IV",
+        "modificationRules": [],
+        "notes": "Induction backbone glucocorticoid (Harrison line 120175). Dexamethasone penetrates the blood-brain barrier and is often preferred (Harrison line 120175). Adult AYA mg dose and schedule not printed in the adult ALL extracts - dose, unit, basis, and days are VERIFY."
+      },
+      {
+        "id": "anthracycline",
+        "name": "Anthracycline (DAUNOrubicin or DOXOrubicin)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "notes": "Induction backbone anthracycline (Harrison line 120175 names anthracyclines; Fig 111-1 abbreviations list daunorubicin/doxorubicin). Adult AYA mg/m2 dose and days not printed - dose, unit, basis, and days are VERIFY. Cumulative-lifetime cap (warn 450 / hard 550 mg/m2 doxorubicin-equivalent) applied as a StewardMD safety rule; verify institutional daunorubicin-to-doxorubicin conversion."
+      },
+      {
+        "id": "asparaginase",
+        "name": "Asparaginase (pegaspargase / L-asparaginase)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IM or IV",
+        "modificationRules": [],
+        "notes": "The pediatric-inspired signature drug. Harrison line 120177 states L-asparaginase is the only ALL-specific drug and is now more intensively used in adults, with pegylated asparaginase giving longer asparagine depletion. Adult AYA dose (units or units/m2) and schedule not printed in the adult ALL extracts - dose, unit, basis, and days are VERIFY. Monitor for thrombosis (consider antithrombin/anticoagulation), pancreatitis, hepatotoxicity, hyperglycemia, and hypersensitivity; Erwinia asparaginase is the substitute after hypersensitivity."
+      },
+      {
+        "id": "intrathecal-cns-prophylaxis",
+        "name": "Intrathecal CNS prophylaxis (methotrexate +/- cytarabine)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "intrathecal (lumbar puncture)",
+        "modificationRules": [],
+        "notes": "MANDATORY CNS prophylaxis (Harrison lines 120134 to 120138: intrathecal methotrexate alone or with cytarabine, with or without a glucocorticoid). Intrathecal agents are cytarabine and methotrexate ONLY; vinCRIStine must NEVER be given intrathecally. Fixed doses not printed - VERIFY."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "tumor lysis syndrome prophylaxis (hydration, allopurinol or rasburicase, electrolyte monitoring) - Harrison line 120030",
+      "asparaginase toxicity surveillance: thrombosis, pancreatitis, hepatotoxicity, hyperglycemia, hypersensitivity",
+      "high-dose methotrexate phases (if used): mandatory leucovorin rescue plus methotrexate-level monitoring",
+      "maintenance phase is 6-mercaptopurine plus methotrexate plus intrathecal therapy, approximately 2 to 2.5 years (Harrison lines 120044 to 120047)",
+      "antiemetic and growth-factor support per NCCN tiers (pending per-disease template)"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each phase and during aplasia",
+    "coagulation / fibrinogen and thrombosis surveillance during asparaginase",
+    "amylase/lipase (pancreatitis) and glucose during asparaginase",
+    "hepatic and renal function; methotrexate levels during high-dose methotrexate phases",
+    "cardiac assessment and cumulative anthracycline tracking",
+    "tumor lysis labs during induction"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "coagulation", "cardiac (LVEF)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "locator": "lines 120044 to 120047 (maintenance 6-MP + MTX + intrathecal), 120095 (Table 111-4 pediatric-inspired AYA), 120175 to 120177 (induction identity: vincristine, glucocorticoids, anthracyclines, L-asparaginase), 120134 to 120138 (intrathecal CNS prophylaxis)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pediatric ALL extract (reference only; pediatric-inspired identity, not adopted as adult doses)",
+        "version": null,
+        "date": null,
+        "locator": "guidelines/ped_all.txt (pediatric COG-type induction with vincristine, glucocorticoid, anthracycline, and pegaspargase; adult AYA regimens such as CALGB 10403 are patterned on this pediatric backbone)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs.vincristine.basis",
+    "regimen.drugs.vincristine.dosePerUnit",
+    "regimen.drugs.vincristine.unit",
+    "regimen.drugs.vincristine.days",
+    "regimen.drugs.glucocorticoid.basis",
+    "regimen.drugs.glucocorticoid.dosePerUnit",
+    "regimen.drugs.glucocorticoid.unit",
+    "regimen.drugs.glucocorticoid.days",
+    "regimen.drugs.anthracycline.basis",
+    "regimen.drugs.anthracycline.dosePerUnit",
+    "regimen.drugs.anthracycline.unit",
+    "regimen.drugs.anthracycline.days",
+    "regimen.drugs.asparaginase.basis",
+    "regimen.drugs.asparaginase.dosePerUnit",
+    "regimen.drugs.asparaginase.unit",
+    "regimen.drugs.asparaginase.days",
+    "regimen.drugs.intrathecal-cns-prophylaxis.basis",
+    "regimen.drugs.intrathecal-cns-prophylaxis.dosePerUnit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.unit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.days"
+  ],
+  "provenanceNote": "Textbook-grounded StewardMD draft for AYA adult ALL. The pediatric-inspired identity (vincristine/glucocorticoid/anthracycline/asparaginase induction backbone with intrathecal CNS prophylaxis and prolonged 6-MP/methotrexate maintenance), its AYA setting, and its Philadelphia-negative gate are grounded in Harrison 22nd ed. Chapter 111 (Table 111-4 line 120095 and the induction/maintenance text). Adult AYA CALGB 10403-type per-drug doses and phase/cycle structure are NOT printed in the available adult ALL extracts and are left VERIFY rather than borrowed from the pediatric guideline; the vincristine 2 mg per-dose cap and anthracycline cumulative cap are applied as StewardMD safety rules. NCCN per-disease template, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

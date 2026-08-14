@@ -1,0 +1,103 @@
+{
+  "id": "lung-egfr-tki-earlygen",
+  "name": "Earlier-generation EGFR TKIs (erlotinib / gefitinib / afatinib) for EGFR-mutant NSCLC",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "nsclc",
+  "histology": "non-small cell lung cancer (predominantly adenocarcinoma; EGFR activating mutations are most common in nonsquamous histology)",
+  "stage": ["IV", "recurrent/metastatic"],
+  "biomarkers": {
+    "EGFR": "activating mutation (exon 19 deletion or L858R)",
+    "note": "EGFR-TKI gate: requires a sensitizing/activating EGFR mutation (exon 19 deletion or L858R). Osimertinib is the preferred first-line EGFR TKI (see lung-osimertinib); the drugs modeled here are the earlier-generation alternatives (first-generation erlotinib and gefitinib; second-generation afatinib and dacomitinib) listed as options for the same EGFR-mutation gate. Per Standard Guidelines (NCCN), NSCLC v7.2026, Therapy for Actionable Molecular Markers (EGFR Exon 19 Deletion or L858R Mutation)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line alternative EGFR TKI options for advanced or metastatic NSCLC with an EGFR exon 19 deletion or L858R activating mutation (osimertinib preferred over these earlier-generation agents)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "EGFR activating mutation (exon 19 deletion or L858R)", "source": "Standard Guidelines (NCCN), NSCLC", "locator": "v7.2026, Therapy for Actionable Molecular Markers, EGFR Exon 19 Deletion or L858R Mutation (Erlotinib, Gefitinib, Afatinib, Dacomitinib listed as options); lines 5490 to 5525" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "erlotinib",
+        "name": "Erlotinib",
+        "basis": "flat",
+        "dosePerUnit": 150,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70484 (FLAURA comparator: erlotinib 150 mg per day)", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE first-generation EGFR TKI monotherapy: choose ONE agent in this file, not a combination. Source: DeVita 12th ed. line 70484 (erlotinib 150 mg per day). Erlotinib 150 mg PO once daily continuous (days 1 to 28, cycles null)."
+      },
+      {
+        "id": "gefitinib",
+        "name": "Gefitinib",
+        "basis": "flat",
+        "dosePerUnit": 250,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70484 (FLAURA comparator: gefitinib 250 mg per day)", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE first-generation EGFR TKI monotherapy: choose ONE agent in this file, not a combination. Source: DeVita 12th ed. line 70484 (gefitinib 250 mg per day). Gefitinib 250 mg PO once daily continuous (days 1 to 28, cycles null)."
+      },
+      {
+        "id": "afatinib",
+        "name": "Afatinib",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "afatinib named as a second-generation EGFR TKI (lines 69376, 69386) but no mg dose is printed in the provided corpus", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE second-generation EGFR TKI monotherapy. Afatinib is named as an EGFR-mutation option in DeVita (lines 69376, 69386) and Standard Guidelines (NCCN) NSCLC v7.2026 (Therapy for Actionable Molecular Markers), but NO afatinib mg dose is printed in the provided sources. Dose, unit, and basis set to the literal VERIFY; days left as an empty array (the schema constrains days to a numeric array, so it cannot hold the VERIFY string) and is likewise unestablished. Must be resolved against a cited source before use. Dacomitinib is also a listed second-generation option (DeVita line 70494, ARCHER-1050) with no printed mg dose in the corpus and would likewise require VERIFY if used."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous daily oral dosing until disease progression or unacceptable toxicity.",
+      "Manage EGFR-TKI dermatologic (acneiform rash) and diarrhea toxicities; a comedogenic-avoiding moisturizer is recommended per NSCLC v7.2026 supportive-care footnotes."
+    ]
+  },
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "dermatologic toxicity (acneiform rash) and diarrhea",
+    "liver function (erlotinib/gefitinib)",
+    "pulmonary assessment for pneumonitis/ILD"
+  ],
+  "clearanceChecks": ["prior-cycle status", "liver", "skin/GI toxicity"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher rash/diarrhea, hepatotoxicity, or ILD/pneumonitis", "action": "hold/reduce/discontinue", "text": "Hold, reduce, or discontinue per labeling and clinical review; permanently discontinue for confirmed ILD/pneumonitis." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "line 70484 (erlotinib 150 mg per day; gefitinib 250 mg per day, FLAURA comparators); lines 69376, 69386 (afatinib and dacomitinib named as second-generation EGFR TKIs, no printed mg dose)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), NSCLC", "version": "7.2026", "date": null, "locator": "Therapy for Actionable Molecular Markers, EGFR Exon 19 Deletion or L858R Mutation (Erlotinib, Gefitinib, Afatinib, Dacomitinib listed as options), lines 5490 to 5525; osimertinib is the preferred first-line agent", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[2].basis",
+    "regimen.drugs[2].dosePerUnit",
+    "regimen.drugs[2].unit"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for NSCLC subtype #10 (EGFR oncogene-targeted, earlier-generation TKI alternatives). The three modeled agents are MUTUALLY EXCLUSIVE monotherapy options for the same EGFR exon 19 deletion or L858R gate (choose one), not a combination. Erlotinib 150 mg PO daily and gefitinib 250 mg PO daily are dose-grounded to DeVita 12th ed. line 70484 (FLAURA comparators). Afatinib is a source-named second-generation option but NO mg dose is printed in the provided corpus, so its dose, unit, and basis are set to the literal VERIFY (see verifyFields) and its days array is left empty; dacomitinib is likewise named without a printed dose and would require VERIFY if substituted. Any unresolved VERIFY blocks status ACTIVE. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

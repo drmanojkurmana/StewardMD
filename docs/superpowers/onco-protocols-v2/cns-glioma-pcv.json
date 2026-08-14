@@ -1,0 +1,151 @@
+{
+  "id": "cns-glioma-pcv",
+  "name": "PCV (procarbazine, lomustine, vinCRIStine)",
+  "disease": "Diffuse astrocytic glioma (IDH-mutant astrocytoma)",
+  "diseaseId": "diffuse_astrocytic_glioma",
+  "histology": "IDH-mutant astrocytoma, 1p/19q non-codeleted (WHO CNS grade 2 or 3)",
+  "stage": [],
+  "biomarkers": {
+    "IDH": "mutant (defines astrocytoma versus glioblastoma)",
+    "1p_19q": "non-codeleted (codeletion would reclassify as oligodendroglioma; see cns-oligodendroglioma-pcv)",
+    "MGMT_promoter_methylation": "tested (prognostic)",
+    "note": "PCV is given after radiotherapy for IDH-mutant astrocytoma; temozolomide is the alternative systemic option. 1p/19q non-codeletion distinguishes astrocytoma from oligodendroglioma. Per Standard Guidelines (NCCN), CNS Cancers, Principles of Brain Tumor Pathology (BRAIN-E) and the astrocytoma pathway."
+  },
+  "treatmentSetting": "adjuvant (after radiotherapy)",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line adjuvant systemic therapy after radiotherapy",
+  "eligibilityCriteria": [
+    { "criterion": "sequencing", "requirement": "PCV administered after radiotherapy (adjuvant), not before", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "GLIO footnote (PCV after RT, per EORTC 26951), cns.txt line 721 to 722" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lomustine",
+        "name": "Lomustine (CCNU)",
+        "basis": "bsa",
+        "dosePerUnit": 110,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": {
+          "perDose": null,
+          "cumulativeLifetime": { "warn": 1000, "hard": 1100, "unit": "mg/m2" }
+        },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "core",
+          "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+          "version": "12th ed",
+          "date": null,
+          "locator": "devita.txt line 237647 (CCNU 110 mg/m2, day 1)",
+          "evidenceStatus": "unknown"
+        },
+        "notes": "110 mg/m2 by mouth on day 1. Nitrosourea myelosuppression (thrombocytopenia earlier and more severe than leukopenia) is cumulative and delayed; hematopoietic recovery may be incomplete even at 6-week intervals, and cumulative doses above 1,000 mg/m2 add pulmonary and marrow toxicity. Sources: DeVita 12th ed., devita.txt line 237647 (dose), lines 15373 and 15407 (cumulative myelosuppression)."
+      },
+      {
+        "id": "procarbazine",
+        "name": "Procarbazine",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        "route": "PO daily",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "core",
+          "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+          "version": "12th ed",
+          "date": null,
+          "locator": "devita.txt line 237646 (procarbazine 60 mg/m2 x 14 days, days 8 to 21)",
+          "evidenceStatus": "unknown"
+        },
+        "notes": "60 mg/m2 by mouth daily on days 8 to 21 (14 days). Procarbazine is a weak MAO inhibitor with a disulfiram-like reaction to alcohol; counsel on tyramine and alcohol. Source: DeVita 12th ed., devita.txt line 237646."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "bsa",
+        "dosePerUnit": 1.4,
+        "unit": "mg/m2",
+        "days": [8, 29],
+        "route": "IV push",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "core",
+          "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+          "version": "12th ed",
+          "date": null,
+          "locator": "devita.txt line 237648 (vincristine 1.4 mg/m2, maximum total 2 mg, day 8 and day 29)",
+          "evidenceStatus": "unknown"
+        },
+        "notes": "1.4 mg/m2 IV on days 8 and 29, capped at a maximum total of 2 mg per dose (ISMP tall-man vinCRIStine; fatal if given intrathecally, IV only). In current adult practice vincristine is often omitted from PCV because of overlapping myelosuppression, cumulative peripheral neuropathy, and poor blood-brain-barrier penetration (physician decision). Source: DeVita 12th ed., devita.txt line 237648 (dose and 2 mg cap) and following paragraph (omission in practice)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": 6,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "lomustine and procarbazine are moderately to highly emetogenic on dosing days; give 5-HT3 antagonist prophylaxis." }
+    ],
+    "supportiveCare": [
+      "monitor for cumulative and delayed nitrosourea myelosuppression across cycles (nadir platelets can be late; track cumulative lomustine dose)",
+      "procarbazine: avoid alcohol (disulfiram-like reaction) and tyramine-rich foods (weak MAO inhibition)",
+      "vinCRIStine: IV only, never intrathecal; monitor peripheral neuropathy and constipation"
+    ]
+  },
+  "monitoring": [
+    "CBC with platelets before each cycle and at the delayed nitrosourea nadir",
+    "peripheral neuropathy assessment before each vinCRIStine dose",
+    "cumulative lomustine dose tracking (pulmonary and marrow toxicity)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "cumulative lomustine dose", "neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "delayed thrombocytopenia or neutropenia at cycle start", "action": "delay/reduce", "text": "Review required. Nitrosourea nadir is delayed; confirm count recovery before the next cycle and reduce lomustine for cumulative myelosuppression. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "CNS chapter, devita.txt lines 237646 to 237648 (PCV component doses); lines 15373 and 15407 (nitrosourea cumulative myelosuppression)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Astrocytoma pathway (RT then adjuvant PCV or temozolomide); GLIO footnote (PCV after RT per EORTC 26951, cns.txt lines 721 to 722); carmustine may substitute for lomustine (footnote c, cns.txt line 1395)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": ["regimen.cycleLengthDays"],
+  "provenanceNote": "PCV component doses are grounded in DeVita 12th ed. (devita.txt lines 237646 to 237648): procarbazine 60 mg/m2 by mouth days 8 to 21, lomustine (CCNU) 110 mg/m2 by mouth day 1, and vinCRIStine 1.4 mg/m2 IV days 8 and 29 with a maximum total of 2 mg per dose (ISMP tall-man cap enforced). Six cycles reflect the guideline PCV x 6 schedule (cns.txt line 654) and PCV is given after radiotherapy (cns.txt lines 721 to 722). cycleLengthDays is left VERIFY because the cited sources give the per-drug day schedule (vinCRIStine on day 29 implies a cycle of at least 29 days, historically a 6-week cycle) but do not print an explicit cycle interval; this must be resolved before ACTIVE. The lomustine warn threshold (1000 mg/m2 cumulative) is source-grounded in the nitrosourea cumulative-toxicity discussion (devita.txt lines 15373 and 15407, added pulmonary and marrow toxicity above 1,000 mg/m2); the 1100 mg/m2 hard stop is a StewardMD institutional safety margin above that threshold and is not printed in the source. No dose value was invented. No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

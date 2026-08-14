@@ -1,0 +1,166 @@
+{
+  "id": "gyn-gtn-emaco",
+  "name": "EMA-CO (Etoposide/Methotrexate/Dactinomycin - Cyclophosphamide/Vincristine) for High-Risk GTN",
+  "disease": "Gestational trophoblastic neoplasia (high-risk)",
+  "diseaseId": "gestational_trophoblastic_neoplasia",
+  "histology": "gestational trophoblastic neoplasia",
+  "stage": ["I", "II", "III", "IV"],
+  "biomarkers": {
+    "note": "High risk GTN is a clinical/staging category (prognostic score 7 or higher, or FIGO stage IV, or stage I to III with score greater than 6), not a molecular biomarker gate. EMA-CO is the preferred primary multiagent regimen for high risk disease. Per Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia v2.2026, High-Risk GTN Primary Therapy Options (GTN-D)."
+  },
+  "treatmentSetting": "curative-intent primary therapy for high-risk GTN",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first line multiagent chemotherapy for high risk (prognostic score 7 or higher, or stage IV, or low-risk disease that became resistant to sequential monotherapy) gestational trophoblastic neoplasia",
+  "eligibilityCriteria": [
+    { "criterion": "riskCategory", "requirement": "high risk GTN (prognostic score 7 or higher, or FIGO stage IV)", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "locator": "v2.2026, High-Risk GTN Primary Therapy Options (GTN-D 2 of 7); DeVita 12th ed. lines 177046 to 177060 (scores > 6 and all stage IV)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "etoposide",
+        "name": "Etoposide",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [1, 2],
+        "route": "IV over 60 min",
+        "infusionDuration": "60 min",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Etoposide 100 mg/m2/day IV over 60 minutes on Days 1 and 2", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. Etoposide 100 mg/m2/day IV over 60 minutes on days 1 and 2 (the EMA component). DeVita 12th ed. Table 51.3 prints etoposide 100 mg/m2 over 30 minutes on days 1 and 2 (same dose, shorter infusion)."
+      },
+      {
+        "id": "dactinomycin",
+        "name": "Dactinomycin (actinomycin-D)",
+        "basis": "flat",
+        "dosePerUnit": 0.5,
+        "unit": "mg",
+        "days": [1, 2],
+        "route": "IV push",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Dactinomycin 0.5 mg IV Push on Days 1 and 2", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. Dactinomycin (actinomycin-D) 0.5 mg fixed dose IV push on days 1 and 2. DeVita 12th ed. Table 51.3 prints the identical 0.5 mg IV push on days 1 and 2."
+      },
+      {
+        "id": "methotrexate",
+        "name": "Methotrexate",
+        "basis": "bsa",
+        "dosePerUnit": 300,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV infusion over 12 hr",
+        "infusionDuration": "12 hr",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Methotrexate 300 mg/m2 IV infusion over 12 hours on Day 1", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. Methotrexate 300 mg/m2 IV infusion over 12 hours on day 1, with leucovorin rescue. DIVERGENCE: DeVita 12th ed. Table 51.3 delivers the same total as a 100 mg/m2 IV push plus 200 mg/m2 over 12 hours (see evidence.divergence). For brain metastases the source increases the methotrexate infusion to 1000 mg/m2 over 24 hours (NCCN GTN-D 2 of 7). Requires adequate renal function and mandatory leucovorin rescue."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin (folinic acid)",
+        "basis": "flat",
+        "dosePerUnit": 15,
+        "unit": "mg",
+        "days": [2],
+        "route": "PO (preferred) or IM",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Leucovorin 15 mg PO (preferred) or IM every 12 hours for 4 doses starting 24 hours after the start of the methotrexate infusion", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. Leucovorin rescue 15 mg PO (preferred) or IM every 12 hours for 4 doses, starting 24 hours after the start of the methotrexate infusion (begins on day 2). Mandatory rescue for the methotrexate component. DeVita 12th ed. Table 51.3 prints the identical 15 mg every 12 hours x 4 doses IM or PO beginning 24 hours after starting methotrexate. For brain metastases, leucovorin is intensified to 15 mg every 6 hours for 12 doses starting 32 hours after the methotrexate infusion (NCCN)."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "bsa",
+        "dosePerUnit": 600,
+        "unit": "mg/m2",
+        "days": [8],
+        "route": "IV over 30 min",
+        "infusionDuration": "30 min",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Cyclophosphamide 600 mg/m2 IV over 30 minutes on Day 8", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. Cyclophosphamide 600 mg/m2 IV over 30 minutes on day 8 (the CO component). DeVita 12th ed. Table 51.3 prints the identical 600 mg/m2 over 30 minutes on day 8."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "bsa",
+        "dosePerUnit": 0.8,
+        "unit": "mg/m2",
+        "days": [8],
+        "route": "IV over 5 to 10 min",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "GTN-D 2 of 7, EMA-CO: Vincristine 0.8 mg/m2 (maximum of 2 mg) IV over 5 to 10 minutes on Day 8", "evidenceStatus": "current" },
+        "notes": "Source: NCCN GTN v2.2026, GTN-D 2 of 7. vinCRIStine 0.8 mg/m2 IV over 5 to 10 minutes on day 8, with a hard per-dose cap of 2 mg (source stated maximum). DIVERGENCE: DeVita 12th ed. Table 51.3 prints vincristine 1.0 mg/m2 on day 8 (no cap printed); the authored value uses the more current NCCN 0.8 mg/m2 with the explicit 2 mg cap (see evidence.divergence). Tall man per ISMP. Vesicant, IV only, never intrathecal."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": "repeat every 2 weeks (EMA on days 1 to 2, CO on day 8) until hCG normalizes, then continue for an additional 6 to 8 weeks (consolidation); physician determined",
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "multiagent regimen; give antiemetic prophylaxis per emetogenicity tier." }
+    ],
+    "supportiveCare": [
+      "leucovorin (folinic acid) rescue is part of the regimen for the methotrexate component.",
+      "G-CSF (filgrastim 5 mcg/kg on days 4 to 6(7) and 10 to 12(13) of each cycle) for secondary prophylaxis of neutropenic fever or treatment delay, to maintain dose intensity (NCCN GTN-D 2 of 7).",
+      "verify adequate renal function before the methotrexate dose.",
+      "for brain metastases: intensify methotrexate to 1000 mg/m2 over 24 hours and extend leucovorin rescue (NCCN)."
+    ]
+  },
+  "monitoring": [
+    "serum hCG each cycle (response and remission tracking)",
+    "CBC before each treatment day (day 1 and day 8)",
+    "renal function before the methotrexate dose",
+    "liver function each cycle",
+    "neurotoxicity assessment for vinCRIStine"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "hCG trend", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "vinCRIStine dose", "drug": "vincristine", "action": "cap", "text": "Hard per-dose cap of 2 mg (source stated maximum). Never exceed; never administer intrathecally." },
+    { "condition": "neutropenia or treatment delay", "action": "G-CSF/delay", "text": "Use filgrastim per NCCN to maintain the every 2 week dose intensity; delay per institutional protocol if counts inadequate." },
+    { "condition": "resistance to EMA-CO (plateau or re-elevation of hCG)", "action": "switch", "text": "Switch to a platinum containing salvage regimen (EMA-EP / EP-EMA) per source; clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 51.3 Protocols for EMACO and EMAEP Regimens (lines 177082 to 177121): Day 1 etoposide 100 mg/m2 over 30 min, ACTD 0.5 mg IV push, MTX 100 mg/m2 IV push + 200 mg/m2 over 12 h; Day 2 etoposide 100 mg/m2, ACTD 0.5 mg, folinic acid 15 mg q12h x 4 doses beginning 24 h after MTX; Day 8 cyclophosphamide 600 mg/m2 over 30 min, vincristine 1.0 mg/m2 IV push. Treatment every 2 to 3 weeks with G-CSF (lines 177119 to 177128)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Gestational Trophoblastic Neoplasia", "version": "2.2026", "date": "2025-11-21", "locator": "Systemic Therapy for GTN, High-Risk GTN Primary Therapy Options, Preferred EMA-CO (GTN-D 2 of 7): Etoposide 100 mg/m2/day IV over 60 min Days 1 and 2; Dactinomycin 0.5 mg IV push Days 1 and 2; Methotrexate 300 mg/m2 IV infusion over 12 h Day 1 with Leucovorin 15 mg PO/IM every 12 h x 4 doses starting 24 h after; Cyclophosphamide 600 mg/m2 IV over 30 min Day 8; Vincristine 0.8 mg/m2 (max 2 mg) IV Day 8; repeat every 2 weeks", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "methotrexateDelivery",
+        "sources": [
+          { "name": "Standard Guidelines (NCCN) GTN", "version": "2.2026", "value": "Methotrexate 300 mg/m2 IV infusion over 12 hours on Day 1 (GTN-D 2 of 7)" },
+          { "name": "DeVita 12th ed. (core), Table 51.3", "version": "12th ed", "value": "Methotrexate 100 mg/m2 IV push plus 200 mg/m2 by infusion over 12 hours on Day 1 (line 177099 to 177100)" }
+        ],
+        "note": "The two sources deliver the same total day 1 methotrexate (300 mg/m2) but describe it differently: NCCN v2.2026 as a single 300 mg/m2 12-hour infusion, DeVita as a 100 mg/m2 IV push followed by a 200 mg/m2 12-hour infusion. Authored value follows the current NCCN single 12-hour infusion.",
+        "resolution": "clinical-review-required"
+      },
+      {
+        "field": "vincristineDose",
+        "sources": [
+          { "name": "Standard Guidelines (NCCN) GTN", "version": "2.2026", "value": "Vincristine 0.8 mg/m2 (maximum of 2 mg) IV on Day 8 (GTN-D 2 of 7)" },
+          { "name": "DeVita 12th ed. (core), Table 51.3", "version": "12th ed", "value": "Vincristine 1.0 mg/m2 IV push on Day 8 (line 177111), no per-dose cap printed" }
+        ],
+        "note": "The sources diverge on the EMA-CO vincristine dose: NCCN v2.2026 uses 0.8 mg/m2 with an explicit 2 mg cap, whereas DeVita Table 51.3 prints 1.0 mg/m2 without a printed cap. Authored value uses the more current NCCN 0.8 mg/m2 and applies the 2 mg per-dose hard cap for safety.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for EMA-CO in high risk gestational trophoblastic neoplasia (StewardMD reference disease gestational trophoblastic neoplasia, subtype group #50). Every per drug per day dose is explicitly source stated (no value inferred). The authored per drug dosing follows Standard Guidelines (NCCN) Gestational Trophoblastic Neoplasia v2.2026, GTN-D 2 of 7: Etoposide 100 mg/m2/day IV over 60 minutes on days 1 and 2; Dactinomycin 0.5 mg IV push on days 1 and 2; Methotrexate 300 mg/m2 IV infusion over 12 hours on day 1 with Leucovorin 15 mg PO (preferred) or IM every 12 hours for 4 doses starting 24 hours after the methotrexate infusion; Cyclophosphamide 600 mg/m2 IV over 30 minutes on day 8; vinCRIStine 0.8 mg/m2 (maximum 2 mg) IV on day 8; repeat every 2 weeks. DeVita 12th ed. Table 51.3 (lines 177082 to 177121) is the core cross reference and prints the same regimen with two differences recorded as divergences: methotrexate delivered as 100 mg/m2 push plus 200 mg/m2 12-hour infusion (same 300 mg/m2 total), and vincristine 1.0 mg/m2 (no printed cap). The vinCRIStine 2 mg per-dose hard cap is applied per the NCCN source and ISMP safety. ISMP tall man applied (vinCRIStine). Leucovorin rescue and renal function checks are mandatory for the methotrexate component. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

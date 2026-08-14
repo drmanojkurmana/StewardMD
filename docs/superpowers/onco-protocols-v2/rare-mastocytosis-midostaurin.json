@@ -1,0 +1,75 @@
+{
+  "id": "rare-mastocytosis-midostaurin",
+  "name": "Midostaurin (Advanced Systemic Mastocytosis)",
+  "disease": "Advanced systemic mastocytosis (ASM, SM-AHN, mast cell leukemia)",
+  "diseaseId": null,
+  "histology": "advanced systemic mastocytosis: aggressive SM (ASM), SM with an associated hematologic neoplasm (SM-AHN), or mast cell leukemia (MCL)",
+  "stage": ["advanced (ASM / SM-AHN / MCL)"],
+  "biomarkers": {
+    "KIT": "midostaurin is an oral multikinase inhibitor with activity against D816V-mutated KIT; responses were seen in both KIT D816V-positive and D816V-negative/unknown patients",
+    "imatinibGuard": "imatinib is INEFFECTIVE against KIT D816V; midostaurin (like avapritinib) retains activity against D816V. False-negative guard: imatinib is reserved for D816V-negative/unknown SM, not D816V-positive disease.",
+    "note": "Midostaurin is FDA-approved for ASM, SM-AHN, and MCL. Per Standard Guidelines (NCCN), Systemic Mastocytosis, SM-6 (ASM), SM-7 (SM-AHN), SM-9 (MCL), and the Discussion."
+  },
+  "treatmentSetting": "advanced systemic mastocytosis",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "preferred systemic therapy for advanced SM (ASM, SM-AHN, MCL); alternative to avapritinib (eg when platelets < 50 x 10^9/L preclude avapritinib)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "advanced systemic mastocytosis (ASM, SM-AHN with SM component requiring prioritization, or MCL)", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "locator": "v3.2026, SM-6 (Preferred - Midostaurin); SM-7 (SM-AHN); SM-9 (MCL); masto lines 518, 638" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "midostaurin",
+        "name": "Midostaurin",
+        "basis": "flat",
+        "dosePerUnit": 100,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "version": "3.2026", "date": "2026-07-10", "locator": "Discussion MS-18 (open-label study of 116 patients with advanced SM: treatment with midostaurin 100 mg twice daily; ORR 60%); SM-6 (Preferred: Midostaurin); masto line 2883", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Systemic Mastocytosis v3.2026, Discussion MS-18 (midostaurin 100 mg twice daily for advanced SM) and SM-6 (Preferred). dosePerUnit 100 mg is the single (per-administration) dose given PO TWICE DAILY (BID) continuously; represented as days 1 to 28 of a 28-day cycle for scheduling. Total daily dose is therefore 200 mg (100 mg BID). Refer to prescribing information for dose modifications (SM-6 footnote u). Low-grade nausea/vomiting/diarrhea are the most frequent adverse events; take with food to mitigate GI toxicity per label. No ISMP tall-man form for midostaurin."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [
+      { "name": "antiemetic prophylaxis", "note": "Midostaurin is associated with frequent low-grade nausea/vomiting/diarrhea; give antiemetic prophylaxis and take with food per prescribing information (NCCN Systemic Mastocytosis v3.2026, Discussion MS-18)." }
+    ],
+    "supportiveCare": [
+      "Continuous oral dosing at 100 mg twice daily; no defined cycle count - continue until progression, intolerance, or loss of response; consider allogeneic HCT evaluation on adequate response in eligible SM-AHN/MCL.",
+      "Antiemetic support and administration with food for GI tolerability.",
+      "Monitor for new/worsening cytopenias (neutropenia, anemia, thrombocytopenia)."
+    ]
+  },
+  "monitoring": [
+    "CBC (grade 3-4 neutropenia, anemia, thrombocytopenia occurred in ~24%/41%/29%)",
+    "serum tryptase and bone marrow mast cell burden (disease response)",
+    "SM-related organ damage (C-findings) and organomegaly",
+    "GI tolerability (nausea/vomiting/diarrhea)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 cytopenia or intolerable GI toxicity", "drug": "midostaurin", "action": "hold/reduce", "text": "Hold and resume at a reduced dose per prescribing information (SM-6 footnote u); optimize antiemetics. Obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 22631 (KIT D816V is imatinib-resistant - rationale for a D816V-active agent rather than imatinib in D816V-positive advanced SM)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Systemic Mastocytosis", "version": "3.2026", "date": "2026-07-10", "locator": "SM-6 (ASM Preferred: Avapritinib or Midostaurin); SM-7 (SM-AHN); SM-9 (MCL); Discussion MS-18 (midostaurin 100 mg twice daily, advanced-SM open-label study, ORR 60%); masto line 2883", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for midostaurin in advanced systemic mastocytosis (ASM/SM-AHN/MCL), a rare mast-cell disorder. The dose (midostaurin 100 mg PO twice daily, continuously) is dose-grounded to Standard Guidelines (NCCN) Systemic Mastocytosis v3.2026 Discussion MS-18 (advanced-SM open-label study) and the SM-6 Preferred recommendation; dosePerUnit is modeled as the 100 mg per-administration dose with BID captured in notes (total 200 mg/day). BIOMARKER / FALSE-NEGATIVE GUARD: midostaurin has activity against KIT D816V, unlike imatinib (DeVita line 22631); imatinib is reserved for D816V-negative/unknown SM - noted so imatinib is not mistakenly substituted for D816V-positive disease. Midostaurin is a common alternative when thrombocytopenia (< 50 x 10^9/L) precludes avapritinib. No dose is invented and no field is VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

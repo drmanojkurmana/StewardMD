@@ -1,0 +1,94 @@
+{
+  "id": "breast-fulvestrant",
+  "name": "Fulvestrant",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["IV"],
+  "biomarkers": {
+    "HR": "positive",
+    "HER2": "negative",
+    "note": "Selective estrogen-receptor degrader (SERD); endocrine therapy: requires HR-positive (ER and/or PR positive), HER2-negative disease. May be used as single-agent endocrine therapy or as the endocrine backbone with a CDK4/6 inhibitor or a targeted agent. Per Standard Guidelines (NCCN), Invasive Breast Cancer, BINV-Q, and DeVita 12th ed. (FALCON)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line or later endocrine therapy for HR-positive/HER2-negative recurrent or metastatic breast cancer; frequently combined with a CDK4/6 inhibitor or a targeted agent",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HR-positive (ER and/or PR positive) and HER2-negative", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-Q 5 of 15 (HR-Positive/HER2-Negative recurrent/metastatic)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "fulvestrant-loading",
+        "name": "Fulvestrant (loading, cycle 1)",
+        "basis": "flat",
+        "dosePerUnit": 500,
+        "unit": "mg",
+        "days": [1, 15],
+        "route": "IM",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-Q 14 of 15 (Fulvestrant 500 mg IM on Days 1 and 15, first cycle)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Fulvestrant 500 mg IM on days 1 and 15 of the first 28-day cycle (loading). Dose corroborated by DeVita 12th ed. FALCON (fulvestrant 500 mg, line 30818)."
+      },
+      {
+        "id": "fulvestrant-maintenance",
+        "name": "Fulvestrant (maintenance)",
+        "basis": "flat",
+        "dosePerUnit": 500,
+        "unit": "mg",
+        "days": [1],
+        "route": "IM",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-Q 14 of 15 (Fulvestrant 500 mg IM on Day 1 of subsequent 28-day cycles)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15. Fulvestrant 500 mg IM on day 1 of each subsequent 28-day cycle (maintenance)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "For premenopausal patients, give concurrent ovarian function suppression (GnRH analog) per BINV-N.",
+      "Administer as two 250 mg IM injections (one per buttock) per labeling."
+    ]
+  },
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "injection-site tolerance",
+    "liver function"
+  ],
+  "clearanceChecks": ["liver", "prior-cycle status"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 30818 (Fulvestrant 500 mg versus anastrozole 1 mg for hormone-receptor-positive advanced breast cancer, FALCON); line 188069",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "Dosing: Targeted Therapies for Recurrent/Stage IV Disease, Fulvestrant 500 mg IM on Days 1 and 15 then Day 1 of subsequent cycles, BINV-Q 14 of 15; HR-Positive/HER2-Negative setting BINV-Q 5 of 15",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent fulvestrant. Serves subtype #5 (HR-positive/HER2-negative), histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. Dose grounded in both layers: DeVita 12th ed. FALCON (fulvestrant 500 mg, line 30818) and Standard Guidelines (NCCN) v6.2026, BINV-Q 14 of 15 (500 mg IM on days 1 and 15 of the first cycle, then 500 mg IM on day 1 of each subsequent 28-day cycle). Continue until progression (cycles null). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,164 @@
+{
+  "id": "heme-all-ph-positive-tki",
+  "name": "Philadelphia-positive (BCR::ABL1+) adult ALL: TKI plus chemotherapy or steroids",
+  "disease": "Acute lymphoblastic leukemia (adult), Philadelphia chromosome-positive",
+  "diseaseId": "acute_lymphoid_leukemia",
+  "histology": "B-lineage acute lymphoblastic leukemia, BCR::ABL1 (Philadelphia chromosome) positive",
+  "stage": [],
+  "biomarkers": {
+    "BCR_ABL1": "positive",
+    "note": "BIOMARKER GATE: this protocol applies only to BCR::ABL1 (Philadelphia chromosome)-positive ALL. Harrison 22nd ed. line 120049 states Ph+ ALL maintenance should include a tyrosine kinase inhibitor; Table 111-4 (lines 120112 to 120114) lists intensive chemotherapy plus a TKI (with or without stem cell transplant), or chemotherapy plus dasatinib, as the Ph+ strategy. DeVita 12th ed. describes frontline TKI-plus-chemotherapy and TKI-plus-steroid approaches for Ph+ ALL."
+  },
+  "treatmentSetting": "induction, consolidation, and maintenance",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "BCR_ABL1", "requirement": "BCR::ABL1 / Philadelphia chromosome positive", "source": "Harrison 22nd ed", "locator": "lines 120049, 120112" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dasatinib",
+        "name": "Dasatinib",
+        "basis": "flat",
+        "dosePerUnit": 140,
+        "unit": "mg",
+        "days": [1],
+        "route": "PO once daily (continuous)",
+        "modificationRules": [],
+        "notes": "Dasatinib 140 mg daily is grounded: DeVita 12th ed. line 276516 reports the EWALL Ph+ ALL regimen of dasatinib 140 mg daily with vincristine, dexamethasone, and intrathecal chemotherapy. days:[1] denotes continuous daily dosing (given every day, not day 1 only). Dasatinib crosses the blood-brain barrier (Harrison line 120148), an advantage for CNS control. A second-generation TKI - confirm cardiopulmonary/pleural-effusion monitoring and QTc per label."
+      },
+      {
+        "id": "imatinib",
+        "name": "Imatinib",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "PO once daily (continuous)",
+        "modificationRules": [],
+        "notes": "Alternative first-generation TKI (either/or, not additive with dasatinib/ponatinib). DeVita line 277220 names imatinib combined with hyper-CVAD for Ph+ ALL and line 276510 notes imatinib or dasatinib produce high hematologic response rates in induction, but no imatinib mg/day for ALL is printed in the ALL extract - dose, unit, and basis are VERIFY (the CML imatinib doses in Harrison Chapter 110 are CML-context and are not carried over). Imatinib does not cross the blood-brain barrier as well as dasatinib (Harrison line 120148)."
+      },
+      {
+        "id": "ponatinib",
+        "name": "Ponatinib",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "PO once daily (continuous)",
+        "modificationRules": [],
+        "notes": "Alternative third-generation TKI (either/or), active against the T315I mutation. DeVita line 276490 reports ponatinib combined with the hyper-CVAD regimen for Ph+ ALL, but no ponatinib mg/day for ALL is printed in the ALL extract - dose, unit, and basis are VERIFY (the CML ponatinib 45 mg/day in Harrison Chapter 110 is CML-context and is not carried over). Ponatinib carries arterial-thrombosis and hepatotoxicity risk - confirm cardiovascular monitoring per label."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "caps": { "perDose": 2 },
+        "modificationRules": [],
+        "notes": "Chemotherapy-backbone component in the TKI-plus-chemotherapy approach (DeVita line 276516, EWALL: dasatinib plus vincristine, dexamethasone, intrathecal chemotherapy). Per-dose cap 2 mg applied as a StewardMD safety rule (ISMP tall-man vinCRIStine, IV-only, fatal if intrathecal). mg/m2 dose and days not printed - VERIFY. In lower-intensity/steroid-only TKI induction, vincristine may be omitted."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO or IV",
+        "modificationRules": [],
+        "notes": "Glucocorticoid backbone; TKI-plus-steroid induction (dasatinib or imatinib plus glucocorticoids) is an established lower-intensity approach for older/infirm Ph+ ALL patients (DeVita lines 276505 to 276512). mg dose and schedule not printed - VERIFY."
+      },
+      {
+        "id": "intrathecal-cns-prophylaxis",
+        "name": "Intrathecal CNS prophylaxis (methotrexate +/- cytarabine)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "intrathecal (lumbar puncture)",
+        "modificationRules": [],
+        "notes": "MANDATORY CNS prophylaxis (DeVita line 276516 includes intrathecal chemotherapy; Harrison lines 120134 to 120138 describe intrathecal methotrexate alone or with cytarabine). Especially important with TKIs that cross the blood-brain barrier poorly (imatinib, nilotinib) versus dasatinib/ponatinib (Harrison line 120148). Intrathecal agents are cytarabine and methotrexate ONLY; vinCRIStine must NEVER be given intrathecally. Fixed doses not printed - VERIFY."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "tumor lysis syndrome prophylaxis (hydration, allopurinol or rasburicase, electrolyte monitoring) - Harrison line 120030 notes ALL pre-phase therapy allows safe tumor reduction to avoid tumor lysis syndrome",
+      "TKI-specific monitoring: pleural effusion / cytopenias / QTc for dasatinib; arterial thrombosis / hepatotoxicity for ponatinib (per label)",
+      "BCR::ABL1 transcript (MRD) monitoring to guide therapy and transplant decisions (Harrison lines 120052 to 120060)",
+      "antiemetic and growth-factor support per NCCN tiers when combined with intensive chemotherapy (pending per-disease template)"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle and during aplasia",
+    "BCR::ABL1 quantitative transcript (molecular MRD) serially",
+    "hepatic and renal function",
+    "cardiac / QTc and pleural-effusion assessment for dasatinib; cardiovascular assessment for ponatinib",
+    "tumor lysis labs during induction"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF/QTc)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 276490 (ponatinib + hyper-CVAD), 276505 to 276512 (imatinib/dasatinib + steroids induction), 276516 (EWALL dasatinib 140 mg daily + vincristine/dexamethasone/intrathecal), 277220 (imatinib + hyper-CVAD)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison 22nd ed",
+        "version": "2025",
+        "locator": "lines 120049 (TKI in Ph+ maintenance), 120112 to 120114 (Table 111-4 Ph+ strategy: chemotherapy + TKI +/- SCT), 120148 (dasatinib/ponatinib cross the blood-brain barrier; imatinib/nilotinib less so)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs.imatinib.basis",
+    "regimen.drugs.imatinib.dosePerUnit",
+    "regimen.drugs.imatinib.unit",
+    "regimen.drugs.ponatinib.basis",
+    "regimen.drugs.ponatinib.dosePerUnit",
+    "regimen.drugs.ponatinib.unit",
+    "regimen.drugs.vincristine.basis",
+    "regimen.drugs.vincristine.dosePerUnit",
+    "regimen.drugs.vincristine.unit",
+    "regimen.drugs.vincristine.days",
+    "regimen.drugs.dexamethasone.basis",
+    "regimen.drugs.dexamethasone.dosePerUnit",
+    "regimen.drugs.dexamethasone.unit",
+    "regimen.drugs.dexamethasone.days",
+    "regimen.drugs.intrathecal-cns-prophylaxis.basis",
+    "regimen.drugs.intrathecal-cns-prophylaxis.dosePerUnit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.unit",
+    "regimen.drugs.intrathecal-cns-prophylaxis.days"
+  ],
+  "provenanceNote": "Textbook-grounded StewardMD draft for Philadelphia-positive (BCR::ABL1+) adult ALL. The BCR::ABL1-positive biomarker gate and the TKI-plus-chemotherapy / TKI-plus-steroid strategy are grounded in Harrison 22nd ed. Chapter 111 (Table 111-4, lines 120049/120112) and DeVita 12th ed. Only dasatinib 140 mg daily carries a printed dose in the adult ALL extracts (DeVita line 276516, EWALL); imatinib and ponatinib ALL doses are NOT printed and are left VERIFY rather than borrowed from the CML dosing, and the chemotherapy-backbone doses and cycle structure are VERIFY. The vincristine 2 mg per-dose cap is applied as a StewardMD safety rule. NCCN per-disease template, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

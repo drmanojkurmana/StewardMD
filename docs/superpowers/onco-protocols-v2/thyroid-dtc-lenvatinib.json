@@ -1,0 +1,74 @@
+{
+  "id": "thyroid-dtc-lenvatinib",
+  "name": "Lenvatinib for RAI-Refractory Differentiated Thyroid Carcinoma",
+  "disease": "Differentiated thyroid carcinoma (papillary/follicular/oncocytic), RAI-refractory",
+  "diseaseId": "papillary_thyroid_carcinoma",
+  "histology": "differentiated thyroid carcinoma (DTC): papillary, follicular, and oncocytic carcinoma",
+  "stage": ["metastatic", "locally advanced/unresectable"],
+  "biomarkers": {
+    "note": "Lenvatinib is a multitargeted (VEGFR, FGFR, PDGFR, RET, KIT) kinase inhibitor and is NOT restricted to a single molecular biomarker. Before starting, somatic testing (ALK, NTRK, BRAF, RET fusions; dMMR; MSI; TMB) is recommended to identify actionable alterations for which a targeted or immunotherapy option (e.g., a RET, NTRK, or BRAF-directed agent, or a checkpoint inhibitor) may be preferable. Per Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "preferred first-line systemic option (category 1) for clinically progressive or symptomatic RAI-refractory metastatic differentiated thyroid carcinoma; sorafenib is the alternative category 1 option",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "RAI-refractory (non-iodine-avid or progressing despite RAI) metastatic or locally advanced differentiated thyroid carcinoma that is clinically progressive or symptomatic", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, Discussion MS-26 (systemic therapy for progressive/symptomatic RAI-refractory DTC: lenvatinib (preferred) or sorafenib, category 1)" },
+    { "criterion": "molecularTesting", "requirement": "somatic testing performed to identify actionable mutations/fusions (ALK, NTRK, BRAF, RET; dMMR; MSI; TMB)", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, Discussion (somatic testing for actionable alterations in RAI-refractory DTC)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lenvatinib",
+        "name": "Lenvatinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "Discussion MS-26 (lenvatinib is the preferred category 1 agent for RAI-refractory DTC based on the SELECT phase 3 trial, PFS 18.3 vs 3.6 months vs placebo; response rate 65%). NCCN states doses are provided in the algorithm, but the milligram dose was NOT present in the provided source extract.", "evidenceStatus": "current" },
+        "notes": "Dose is VERIFY: Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026 establishes lenvatinib as the preferred category 1 agent for RAI-refractory DTC (SELECT trial) but the milligram/day value did not appear in the provided source extract, and DeVita mentions lenvatinib 24 mg/day only in non-thyroid contexts (thymic carcinoma line 77738 and renal cell carcinoma line 151944), so grounding the thyroid dose here would be inventing. The widely used labeled starting dose is 24 mg orally once daily continuously; this must be VERIFY-ed against a cited dosing source before activation. Given once daily until progression or unacceptable toxicity."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "continuous until disease progression or unacceptable toxicity; not a fixed cycle count",
+    "premedications": [],
+    "supportiveCare": [
+      "blood-pressure control: hypertension is the most common lenvatinib toxicity; monitor and treat before and during therapy.",
+      "monitor for proteinuria, arterial and venous thromboembolic events, hemorrhage, QT prolongation, hypocalcemia, and fistula/GI perforation per labeling.",
+      "consider hepatitis B screening prior to systemic therapy (THYR-B footnote a).",
+      "continue levothyroxine for TSH suppression during systemic therapy (see thyroid-dtc-rai-tsh-suppression)."
+    ]
+  },
+  "monitoring": [
+    "blood pressure (frequent, especially first weeks)",
+    "urine protein",
+    "cross-sectional imaging response assessment",
+    "TSH (kinase inhibitors can increase levothyroxine requirement)",
+    "electrolytes including calcium, and ECG if QT risk"
+  ],
+  "clearanceChecks": ["blood pressure controlled", "renal/proteinuria", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "uncontrolled hypertension or grade 3 to 4 toxicity", "drug": "lenvatinib", "action": "hold/reduce", "text": "Interrupt for grade 3 to 4 or intolerable grade 2 toxicity; resume at a reduced dose per labeling once recovered; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Molecularly targeted therapy chapter (lenvatinib as a multitargeted VEGFR/FGFR/PDGFR/RET/KIT inhibitor); thyroid dose not stated in provided extract (lenvatinib 24 mg/day appears only in cross-disease contexts: thymic carcinoma (line 77738, REMORA) and renal cell carcinoma (line 151944))", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "THYR-B (Principles of Systemic Therapy, RAI-refractory DTC options); Discussion MS-26 (lenvatinib preferred, or sorafenib, category 1 for progressive/symptomatic RAI-refractory DTC; SELECT trial)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lenvatinib in RAI-refractory differentiated thyroid carcinoma (StewardMD reference disease papillary_thyroid_carcinoma, DTC group). Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026 (Discussion MS-26) establishes lenvatinib as the preferred category 1 systemic option (SELECT phase 3 trial: PFS 18.3 vs 3.6 months) for clinically progressive or symptomatic RAI-refractory DTC, with sorafenib as the alternative category 1 option. The lenvatinib milligram dose is set to VERIFY: it was NOT present in the provided source extract, and DeVita states lenvatinib 24 mg/day only in cross-disease contexts (thymic carcinoma line 77738 and renal cell carcinoma line 151944), so grounding the thyroid dose would be inventing; the labeled starting dose (24 mg once daily) is noted for the verifier but not asserted as sourced. Sorafenib (the alternative category 1 agent, labeled 400 mg twice daily) is likewise not dose-grounded in the provided thyroid source and would require VERIFY if selected. One field remains VERIFY (listed in verifyFields); status is DRAFT accordingly. ISMP tall-man not applicable to these agent names. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

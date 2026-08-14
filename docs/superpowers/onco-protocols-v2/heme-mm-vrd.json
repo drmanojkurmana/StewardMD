@@ -1,0 +1,99 @@
+{
+  "id": "heme-mm-vrd",
+  "name": "Bortezomib + Lenalidomide + Dexamethasone (VRd)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "VRd is a cytotoxic/targeted triplet backbone and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS) and whether two-drug maintenance is favored, not access to VRd itself. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "primary therapy for newly diagnosed multiple myeloma (both transplant-eligible/HCT candidate and transplant-ineligible/HCT-deferred settings)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (primary) therapy for newly diagnosed multiple myeloma; category 1, listed as Other Recommended for both HCT candidates and HCT-deferred/not-indicated patients",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "newly diagnosed multiple myeloma (symptomatic)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G 1 of 5 (Primary Therapy for HCT Candidates) and MYEL-G 2 of 5 (Primary Therapy if HCT-Deferred or HCT Not Indicated); Bortezomib/Lenalidomide/Dexamethasone category 1" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "bortezomib",
+        "name": "Bortezomib",
+        "basis": "bsa",
+        "dosePerUnit": 1.3,
+        "unit": "mg/m2",
+        "days": [1, 8, 15],
+        "route": "SC",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, line 286317 (VRd: Bortezomib 1.3 mg/m2 SC on days 1, 8, and 15)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286317). Bortezomib 1.3 mg/m2 SC on days 1, 8, and 15 of a 21-day cycle (weekly SC dosing). SC route reduces peripheral neuropathy versus IV. Schedule taken exactly as printed; not inferred. Give VZV (herpes zoster) antiviral prophylaxis and monitor for peripheral neuropathy."
+      },
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 25,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, line 286318 (VRd: Lenalidomide 25 mg PO on days 1-14)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286318). Lenalidomide 25 mg PO on days 1 to 14 of a 21-day cycle. Requires VTE thromboprophylaxis (aspirin or anticoagulation) and REMS-program dispensing (teratogen); renal dose adjustment per CrCl."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": 40,
+        "unit": "mg",
+        "days": [1, 8, 15],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, line 286319 (VRd: Dexamethasone 20 mg on day of and day after bortezomib, or 40 mg on days 1, 8, 15, and 22)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., Table 74.6, p.1520 (line 286319). The table gives two source-stated dexamethasone options: 20 mg PO on the day of and the day after bortezomib, OR 40 mg on days 1, 8, 15, and 22. This protocol models the 40 mg weekly option on the in-cycle bortezomib days (1, 8, 15) of the 21-day cycle; day 22 in the source phrase falls on day 1 of the following cycle. Dexamethasone dose is taken exactly as the source prints it, not inferred."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      { "name": "Herpes zoster (VZV) antiviral prophylaxis", "notes": "proteasome-inhibitor-associated VZV reactivation prophylaxis (e.g., acyclovir/valacyclovir) per institutional practice." }
+    ],
+    "supportiveCare": [
+      "Bortezomib: monitor for peripheral neuropathy at each visit; consider dose reduction/schedule change for grade 2 or higher; VZV antiviral prophylaxis.",
+      "Lenalidomide: VTE thromboprophylaxis (aspirin for standard risk, therapeutic anticoagulation for higher risk) and REMS-program dispensing (teratogen); adjust for renal impairment.",
+      "Antiemetics: low to moderate emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide renal clearance)",
+    "peripheral neuropathy assessment each visit (bortezomib)",
+    "glucose and blood pressure (dexamethasone)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "peripheral neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "bortezomib", "action": "reduce/hold", "text": "Reduce dose or change schedule for grade 2 or higher bortezomib peripheral neuropathy per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, VRd entry (lines 286314 to 286320)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G 1 of 5 (Primary Therapy for HCT Candidates, Bortezomib/Lenalidomide/Dexamethasone category 1) and MYEL-G 2 of 5 (Primary Therapy if HCT-Deferred or HCT Not Indicated, Bortezomib/Lenalidomide/Dexamethasone category 1)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for VRd (bortezomib + lenalidomide + dexamethasone) in newly diagnosed multiple myeloma (#82). Every dose is sourced to DeVita 12th ed., Chapter 74, Table 74.6 (p.1520): bortezomib 1.3 mg/m2 SC on days 1, 8, 15; lenalidomide 25 mg PO on days 1 to 14; dexamethasone 40 mg weekly (source also lists 20 mg on the day of and day after bortezomib); repeated every 3 weeks (21-day cycle). Setting and category-1 status are sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G (Other Recommended primary therapy for both HCT candidates and HCT-deferred/not-indicated patients). The bortezomib SC weekly schedule is taken exactly as the source prints it and not inferred. Bortezomib carries peripheral-neuropathy and VZV-reactivation risk (antiviral prophylaxis); lenalidomide requires VTE prophylaxis and REMS. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

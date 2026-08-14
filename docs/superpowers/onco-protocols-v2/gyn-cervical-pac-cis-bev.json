@@ -1,0 +1,116 @@
+{
+  "id": "gyn-cervical-pac-cis-bev",
+  "name": "Paclitaxel + Cisplatin (or Carboplatin) + Bevacizumab for Recurrent/Metastatic Cervical Cancer (GOG-240)",
+  "disease": "Cervical cancer",
+  "diseaseId": "cervical_cancer",
+  "histology": "cervical squamous cell carcinoma, adenocarcinoma, or adenosquamous carcinoma",
+  "stage": ["IVB (metastatic)", "recurrent", "persistent"],
+  "biomarkers": {
+    "note": "The paclitaxel/platinum/bevacizumab regimen is not biomarker gated. PD-L1 (combined positive score) is tested to guide addition of pembrolizumab (a separate protocol). Bevacizumab is an anti-VEGF antibody, not biomarker selected."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for persistent, recurrent, or metastatic (FIGO stage IVB) cervical cancer",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "persistent, recurrent, or metastatic (stage IVB) cervical carcinoma", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "locator": "lines 171368 to 171381 (GOG-240: paclitaxel-cisplatin or paclitaxel-topotecan, with or without bevacizumab, in primary stage IVB or recurrent/persistent disease)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "paclitaxel",
+        "name": "PACLitaxel",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 171368 to 171381 (GOG-240 paclitaxel-cisplatin plus bevacizumab); per-drug doses not printed in the cited source", "evidenceStatus": "unknown" },
+        "notes": "PACLitaxel is a component of the GOG-240 regimen (DeVita 12th ed. lines 171368 to 171381; regimen also cross-referenced at line 173802). The cited sources name the regimen but do NOT print the paclitaxel dose, schedule, basis, or unit; all are set to VERIFY pending a dosing source. Corticosteroid plus H1/H2 antihistamine premedication per labeling. Tall man per ISMP."
+      },
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 171360 to 171381 (GOG-240: cisplatin doublet; cisplatin remains the key drug for platinum-naive patients); per-drug dose not printed", "evidenceStatus": "unknown" },
+        "notes": "CISplatin (carboplatin is an accepted substitute per NCCN CERV-F Carboplatin/Paclitaxel + Bevacizumab) is the platinum component of the GOG-240 doublet. The cited sources do NOT print the cisplatin dose/schedule; basis, dosePerUnit, unit, and days are VERIFY. Requires hydration and nephro/oto/neuro monitoring. Tall man per ISMP."
+      },
+      {
+        "id": "bevacizumab",
+        "name": "Bevacizumab",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 171364 to 171381 (GOG-240: addition of bevacizumab significantly prolonged median OS 16.8 vs 13.3 months); per-drug dose not printed", "evidenceStatus": "unknown" },
+        "notes": "Bevacizumab is added to the doublet per GOG-240 (DeVita 12th ed. lines 171364 to 171381). The cited cervical sources do NOT print the bevacizumab dose/schedule; basis, dosePerUnit, unit, and days are VERIFY. No dose cap. Blood-pressure and proteinuria surveillance; GOG-240 reported higher grade 2+ hypertension, grade 3+ VTE, and grade 2+ fistula with bevacizumab (line 171377 to 171381)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "PACLitaxel premedication", "notes": "corticosteroid plus H1 and H2 antihistamine premedication per paclitaxel labeling." },
+      { "name": "Cisplatin hydration", "notes": "IV hydration before and after cisplatin." }
+    ],
+    "supportiveCare": [
+      "antiemetics per platinum emetogenicity tier.",
+      "bevacizumab: hypertension and proteinuria surveillance; bleeding, thromboembolism, and GI-perforation/fistula precautions."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine, electrolytes/Mg) for cisplatin",
+    "peripheral neuropathy assessment for PACLitaxel and cisplatin",
+    "bevacizumab: blood pressure and urine protein at each visit; monitor for fistula, VTE, and bleeding"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "blood pressure/proteinuria", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "uncontrolled hypertension, grade 3+ proteinuria, fistula, GI perforation, or serious bleeding", "drug": "bevacizumab", "action": "hold/discontinue", "text": "Hold or permanently discontinue bevacizumab per anti-VEGF safety guidance; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 171364 to 171381 (GOG-240 phase III 2x2 factorial: paclitaxel-cisplatin or paclitaxel-topotecan +/- bevacizumab; bevacizumab prolonged OS); line 173802 (cisplatin/paclitaxel/bevacizumab per GOG-240)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Cervical Cancer", "version": "2.2026", "date": "2025-11-10", "locator": "Systemic Therapy for Cervical Cancer, Recurrent or Metastatic, First-Line: Cisplatin/Paclitaxel + Bevacizumab (category 1) and Carboplatin/Paclitaxel + Bevacizumab (CERV-F 1 of 4); NCCN names the regimen but does not print per-drug doses", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs[paclitaxel].basis",
+    "regimen.drugs[paclitaxel].dosePerUnit",
+    "regimen.drugs[paclitaxel].unit",
+    "regimen.drugs[paclitaxel].days",
+    "regimen.drugs[cisplatin].basis",
+    "regimen.drugs[cisplatin].dosePerUnit",
+    "regimen.drugs[cisplatin].unit",
+    "regimen.drugs[cisplatin].days",
+    "regimen.drugs[bevacizumab].basis",
+    "regimen.drugs[bevacizumab].dosePerUnit",
+    "regimen.drugs[bevacizumab].unit",
+    "regimen.drugs[bevacizumab].days",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the GOG-240 paclitaxel + cisplatin (or carboplatin) + bevacizumab regimen for persistent, recurrent, or metastatic (stage IVB) cervical cancer (StewardMD reference disease cervical_cancer, subtype #42). DeVita 12th ed. lines 171364 to 171381 establish the GOG-240 phase III trial (paclitaxel-cisplatin or paclitaxel-topotecan, with or without bevacizumab; bevacizumab prolonged median OS from 13.3 to 16.8 months) and Standard Guidelines (NCCN) Cervical Cancer v2.2026 (CERV-F) lists Cisplatin/Paclitaxel + Bevacizumab (category 1) and Carboplatin/Paclitaxel + Bevacizumab as first-line recurrent/metastatic options. However, NEITHER cited source prints per-drug doses, schedules, or cycle length for this regimen; therefore every dose field (paclitaxel, cisplatin, bevacizumab basis/dosePerUnit/unit/days) plus cycleLengthDays and cycles are set to VERIFY and listed in verifyFields, pending a dosing source. No dose was invented or inferred. Bevacizumab has no dose cap and requires blood-pressure and proteinuria surveillance; cisplatin requires hydration and nephro/oto/neuro monitoring. ISMP tall man applied (CISplatin, PACLitaxel). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

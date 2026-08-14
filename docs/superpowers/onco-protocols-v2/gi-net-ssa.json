@@ -1,0 +1,86 @@
+{
+  "id": "gi-net-ssa",
+  "name": "Somatostatin Analogue (Octreotide LAR or Lanreotide) - GI/pancreatic NET",
+  "disease": "Gastrointestinal (and pancreatic) neuroendocrine tumor",
+  "diseaseId": "gastrointestinal_neuroendocrine_tumors",
+  "histology": "well-differentiated neuroendocrine tumor (low or intermediate grade)",
+  "stage": ["locoregional unresectable", "metastatic"],
+  "biomarkers": {
+    "differentiation": "well-differentiated (low/intermediate grade) NET",
+    "SSTR": "somatostatin-receptor (SSTR) positive",
+    "note": "Somatostatin analogues are used for symptom control (carcinoid/hormonal syndromes) and for antiproliferative tumor control in well-differentiated, SSTR-positive NET. The PROMID trial showed an antiproliferative effect of octreotide LAR in advanced midgut NET. For insulinoma, SSAs should be used only if SSTR-based imaging is positive. Per Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors, footnote gg and NE algorithm pages, and DeVita 12th ed."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for symptom and/or tumor control in well-differentiated, SSTR-positive advanced NET; not strictly line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "well-differentiated NET that is somatostatin-receptor (SSTR) positive", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "locator": "v1.2026, footnote gg (octreotide acetate LAR 20 to 30 mg IM or lanreotide 120 mg SC every 4 weeks for symptom and/or tumor control); PROMID (footnote g)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "octreotide-lar",
+        "name": "Octreotide acetate LAR (depot)",
+        "basis": "flat",
+        "dosePerUnit": 30,
+        "unit": "mg",
+        "days": [1],
+        "route": "IM (deep intramuscular)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "footnote gg (octreotide acetate LAR 20 to 30 mg IM every 4 weeks); neuroendocrine lines 1353, 1498, 1532, 1592, 1771; above-label up to 60 mg once a month, line 606", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) NET v1.2026, footnote gg. Octreotide acetate LAR 20 to 30 mg IM every 4 weeks (day 1 of a 28-day cycle). Modeled dose 30 mg (the NETTER-1 control/maintenance dose per DeVita line 207944). Above-label dosing up to 60 mg once a month is a source-stated option on progression (NCCN line 606). SOMATOSTATIN ANALOGUE MONOTHERAPY: octreotide LAR and lanreotide are interchangeable alternatives - administer ONE agent, not both. For breakthrough symptoms, short-acting octreotide 100 to 250 mcg SC three times daily can be added (NCCN line 1355)."
+      },
+      {
+        "id": "lanreotide",
+        "name": "Lanreotide (depot / autogel)",
+        "basis": "flat",
+        "dosePerUnit": 120,
+        "unit": "mg",
+        "days": [1],
+        "route": "SC (deep subcutaneous)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "footnote gg / neuroendocrine lines 1440, 1592, 2118 (lanreotide 120 mg SC every 4 weeks); above-label up to 120 mg every 14 days, line 606", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) NET v1.2026, footnote gg (neuroendocrine lines 1440, 1592, 2118). Lanreotide 120 mg SC every 4 weeks (day 1 of a 28-day cycle). ALTERNATIVE to octreotide LAR (not concurrent) - administer ONE agent. Above-label dosing up to 120 mg every 14 days is a source-stated option in select cases (NCCN line 606)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Somatostatin analogue MONOTHERAPY: give octreotide LAR OR lanreotide (interchangeable, not both), every 4 weeks, continued until progression or intolerance.",
+      "For breakthrough carcinoid-syndrome symptoms, add short-acting octreotide 100 to 250 mcg SC three times daily (NCCN line 1355).",
+      "Discontinue SSA in non-functional tumors on clinically significant progression; continue for functional tumors for symptom control (NCCN line 1387)."
+    ]
+  },
+  "monitoring": [
+    "symptom/hormonal syndrome control (flushing, diarrhea; chromogranin A / 5-HIAA as indicated)",
+    "clinical/radiographic response assessment (SSTR-PET/CT and cross-sectional imaging)",
+    "glucose (SSAs can affect glucose homeostasis), gallbladder (cholelithiasis risk with chronic SSA)"
+  ],
+  "clearanceChecks": ["SSTR imaging positive", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "clinically significant progression in a non-functional tumor", "drug": "octreotide-lar/lanreotide", "action": "discontinue/switch", "text": "Discontinue SSA for non-functional tumors on progression; consider above-label dosing, PRRT, everolimus, or other systemic therapy per clinical review (NCCN lines 1387, 606)." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 207944 (NETTER-1: octreotide LAR 30 mg IM monthly as control/maintenance somatostatin analogue)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Neuroendocrine and Adrenal Tumors", "version": "1.2026", "date": null, "locator": "footnote gg (octreotide acetate LAR 20 to 30 mg IM or lanreotide 120 mg SC every 4 weeks; neuroendocrine lines 1353, 1440, 1498, 1532, 1592, 1771, 2118); PROMID antiproliferative effect (footnote g, line 588); above-label dosing line 606", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for somatostatin-analogue therapy in well-differentiated, SSTR-positive GI/pancreatic NET (disease #30). Octreotide acetate LAR 20 to 30 mg IM every 4 weeks (modeled at 30 mg) and lanreotide 120 mg SC every 4 weeks are dose-grounded to Standard Guidelines (NCCN) NET v1.2026 footnote gg (neuroendocrine lines 1353, 1440, 1592, 2118) and DeVita 12th ed. (line 207944, NETTER-1 control arm). The two SSAs are interchangeable alternatives modeled as separate drug entries with explicit MONOTHERAPY notes (administer one, not both). Biomarker gate: well-differentiated NET that is SSTR-positive, in eligibilityCriteria and biomarkers. Above-label dosing (octreotide LAR up to 60 mg/month; lanreotide up to 120 mg every 14 days) is a source-stated option carried in notes/dose-modification. No dose was invented or inferred and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,176 @@
+{
+  "id": "ped-b-cell-lymphoma",
+  "name": "Pediatric mature B-cell lymphoma (Burkitt-type): LMB-Modified Group B (FAB/LMB96 / COG ANHL1131) COPADM induction + Rituximab with intrathecal CNS prophylaxis",
+  "disease": "Pediatric aggressive mature B-cell lymphoma (Burkitt lymphoma / diffuse large B-cell lymphoma)",
+  "diseaseId": "burkitt_lymphoma",
+  "histology": "mature (surface-immunoglobulin-positive) aggressive B-cell lymphoma: Burkitt lymphoma or diffuse large B-cell lymphoma; TdT/CD34 negative to exclude lymphoblastic lymphoma",
+  "stage": ["III with high LDH", "IV (CNS-negative, bone marrow <25% lymphoma cells) (Group B)"],
+  "biomarkers": {
+    "MYC_rearrangement": "tested by FISH (MYC break-apart or MYC::IGH probe); the recommended test for MYC rearrangement in Burkitt lymphoma",
+    "note": "Per Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas v1.2026. MYC rearrangement is detected by FISH using a MYC break-apart or MYC::IGH probe (ped_b-cell.txt lines 147, 201 to 202, 303). TdT and/or CD34 by IHC/flow help exclude lymphoblastic lymphoma (line 142). MYC grounds tumor identity; it does not gate a specific per-drug dose here (the cytotoxic FAB/LMB backbone is not biomarker-restricted)."
+  },
+  "treatmentSetting": "multiphase curative-intent immunochemotherapy: optional COP pre-phase, then risk-group-adapted induction (2 cycles COPADM) and CYVE consolidation, with intrathecal CNS-directed therapy",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "riskGroup", "requirement": "FAB/LMB risk-group GROUP B only (CNS-negative: stage III with high LDH, or CNS-negative stage IV with bone marrow <25% lymphoma cells). Group C (any CNS involvement) is OUT OF SCOPE for this Group-B protocol: Group C requires high-dose methotrexate escalation to 8 g/m2 during COPADM-2 plus additional intrathecal therapy (ped_b-cell.txt line 1347), so a CNS-positive child must use a separate Group-C protocol (VERIFY) rather than this 3 g/m2 Group-B regimen", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas v1.2026", "locator": "ped_b-cell.txt lines 462 to 471 (Group Classification; Group B CNS-negative vs Group C = any CNS involvement), 500 to 576 (FAB/LMB96 / COG ANHL1131 regimen A/B pathways), line 1347 (Group C HD-MTX 8 g/m2 during COPADM 2)" },
+    { "criterion": "regimenIdentity", "requirement": "LMB-Modified Group B Chemotherapy + Rituximab based on FAB/LMB96 (COG ANHL1131), delivered as response-adapted courses starting with COPADM and continuing to CYVE", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas v1.2026", "locator": "ped_b-cell.txt line 1550 (LMB-Modified B/C + Rituximab based on FAB/LMB96; this protocol scopes the Group B arm), lines 555 to 576 (COG ANHL1131 regimen B starting with COPADM 1 + rituximab; CYVE 1 + rituximab)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1563 (COPADM: Rituximab 375 mg/m2/day on Day 1); rituximab dosing 375 mg/m2 line 224", "evidenceStatus": "current" },
+        "notes": "Anti-CD20 backbone of the COPADM immunochemotherapy course. Printed dose 375 mg/m2 IV Day 1 (ped_b-cell.txt line 1563). Rituximab premedication and infusion-reaction monitoring required."
+      },
+      {
+        "id": "cyclophosphamide-copadm",
+        "name": "Cyclophosphamide (COPADM fractionated)",
+        "basis": "bsa",
+        "dosePerUnit": 250,
+        "unit": "mg/m2",
+        "days": [2, 3, 4],
+        "route": "IV",
+        "infusionDuration": "every 12 hours",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1566 (COPADM: Cyclophosphamide 250 mg/m2 every 12 Hours on Days 2 to 4); COP pre-phase Cyclophosphamide 300 mg/m2 Day 1 line 1556", "evidenceStatus": "current" },
+        "notes": "COPADM fractionated alkylator: printed 250 mg/m2 every 12 hours on Days 2 to 4 (ped_b-cell.txt line 1566). In the optional COP pre-phase the printed cyclophosphamide dose is 300 mg/m2 on Day 1 (line 1556). Mesna and hydration per institution."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "bsa",
+        "dosePerUnit": 2,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV push (IV only, NEVER intrathecal)",
+        "caps": { "perDose": 2 },
+        "roundingRule": { "increment": 0.1 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1564 (COPADM: Vincristine 2 mg/m2/day on Day 1); COP pre-phase Vincristine 2 mg/m2 Day 1 line 1557", "evidenceStatus": "current" },
+        "notes": "Printed dose 2 mg/m2 IV on Day 1 (ped_b-cell.txt line 1564). ISMP tall-man vinCRIStine; StewardMD 2 mg per-dose cap applied (the FAB/LMB regimen conventionally caps vincristine at 2 mg per dose, consistent with this cap). vinCRIStine is IV only and fatal if given intrathecally."
+      },
+      {
+        "id": "methotrexate-hd",
+        "name": "methotrexate (high-dose)",
+        "basis": "bsa",
+        "dosePerUnit": 3000,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "roundingRule": { "increment": 50 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1565 (COPADM: Methotrexate 3 g/m2/day on Day 1); leucovorin rescue line 1570", "evidenceStatus": "current" },
+        "notes": "High-dose methotrexate, printed as 3 g/m2 (recorded here as 3000 mg/m2 to fit the unit enum) IV on Day 1 (ped_b-cell.txt line 1565). This 3 g/m2 is the GROUP B (CNS-negative) dose. SAFETY: Group C / CNS-positive disease requires HD-MTX escalation to 8 g/m2 during COPADM-2 plus additional intrathecal therapy (ped_b-cell.txt line 1347) and is OUT OF SCOPE for this Group-B protocol; a CNS-positive child must use a separate Group-C protocol (VERIFY) and must NOT be run on 3 g/m2 (sub-therapeutic). ISMP tall-man methotrexate. MANDATORY leucovorin rescue (see leucovorin entry) with methotrexate-level monitoring and hydration/alkalinization per protocol."
+      },
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [2],
+        "route": "IV",
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 250, "hard": 350, "unit": "mg/m2 doxorubicin-equivalent" } },
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1567 (COPADM: Doxorubicin 60 mg/m2/day on Day 2), line 1568 (may administer dexrazoxane at a 10:1 dexrazoxane:doxorubicin ratio)", "evidenceStatus": "current" },
+        "notes": "Printed dose 60 mg/m2 IV on Day 2 (ped_b-cell.txt line 1567). ISMP tall-man DOXOrubicin. Dexrazoxane cardioprotection at a 10:1 ratio may be administered (line 1568). Cumulative-lifetime warn 250 mg/m2 (pediatric doxorubicin-equivalent threshold) is grounded in the ped anthracycline/dexrazoxane guidance; 350 mg/m2 is the conservative pediatric hard ceiling (below the adult 550; dexrazoxane per COG), matching the pediatric guard used in ped-neuroblastoma."
+      },
+      {
+        "id": "prednisone",
+        "name": "Prednisone",
+        "basis": "bsa",
+        "dosePerUnit": 60,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "PO (divided BID)",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1569 (COPADM: Prednisone 60 mg/m2/day divided BID on Days 1 to 5); COP pre-phase Prednisone 60 mg/m2 BID Days 1 to 7 line 1558", "evidenceStatus": "current" },
+        "notes": "Printed dose 60 mg/m2/day divided BID on Days 1 to 5 (ped_b-cell.txt line 1569). In the optional COP pre-phase, prednisone 60 mg/m2/day BID runs Days 1 to 7 (line 1558)."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin (methotrexate rescue)",
+        "basis": "bsa",
+        "dosePerUnit": 15,
+        "unit": "mg/m2",
+        "days": [2, 3, 4],
+        "route": "PO or IV",
+        "infusionDuration": "every 6 hours",
+        "roundingRule": { "increment": 5 },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1570 (Leucovorin 15 mg/m2/dose every 6 Hours, starting 24 Hours after start of Methotrexate, until cleared)", "evidenceStatus": "current" },
+        "notes": "MANDATORY high-dose-methotrexate rescue. Printed dose 15 mg/m2/dose every 6 hours, beginning 24 hours after the start of methotrexate, continued until methotrexate is cleared (ped_b-cell.txt line 1570). Days shown are indicative of the post-methotrexate window; continue per measured methotrexate levels."
+      },
+      {
+        "id": "intrathecal-cns-therapy",
+        "name": "Intrathecal methotrexate / hydrocortisone (age-based)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [2],
+        "route": "intrathecal (lumbar puncture)",
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt line 1571 (COPADM: IT Methotrexate/Hydrocortisone age based dosing on Day 2, prior to start of Leucovorin); COP pre-phase IT MTX/Hydrocortisone age-based Day 1 line 1559", "evidenceStatus": "current" },
+        "notes": "MANDATORY CNS-directed therapy. Dosing is AGE-BASED (footnote reference), and the numeric age bands are not printed in the extract, so basis, dose, and unit are VERIFY. Intrathecal agents are methotrexate and hydrocortisone; vinCRIStine must NEVER be given intrathecally. Additional intrathecal doses are given if a COP pre-phase is used (line 1553)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "per protocol before each rituximab infusion" },
+      { "name": "High-dose methotrexate support", "notes": "hyperhydration, urine alkalinization, and methotrexate-level monitoring per protocol before/after the 3 g/m2 methotrexate; leucovorin rescue mandatory" }
+    ],
+    "supportiveCare": [
+      "tumor lysis syndrome (HIGH risk in Burkitt lymphoma): rasburicase 0.1 to 0.2 mg/kg single dose for high tumor burden, contraindicated in G6PD deficiency; hydration; monitor potassium/phosphate/calcium/uric acid (ped_b-cell.txt lines 1844 to 1857)",
+      "mandatory leucovorin rescue and methotrexate-level monitoring after the 3 g/m2 high-dose methotrexate (ped_b-cell.txt line 1570)",
+      "anthracycline cardioprotection: dexrazoxane at a 10:1 dexrazoxane:doxorubicin ratio may be administered (ped_b-cell.txt line 1568); track cumulative doxorubicin-equivalent dose",
+      "the induction phase is 2 cycles of COPADM followed by CYVE consolidation (ped_b-cell.txt line 1561; COG ANHL1131 CYVE lines 555 to 576)",
+      "antiemetic and growth-factor support per NCCN tiers"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each course and during aplasia",
+    "renal/hepatic function and methotrexate levels during and after high-dose methotrexate",
+    "tumor lysis labs (LDH, uric acid, potassium, calcium, phosphorus, creatinine) intensively during the first course",
+    "cardiac assessment and cumulative doxorubicin-equivalent tracking",
+    "response assessment (FDG-PET/CT with Deauville) to drive response-adapted continuation"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "methotrexate clearance", "prior-course status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k at course start", "action": "delay", "text": "Review required. COG ANHL1131 / FAB-LMB96 count-recovery criteria apply per course; physician decides." },
+    { "condition": "delayed methotrexate clearance / rising creatinine after high-dose methotrexate", "action": "intensify rescue", "text": "Escalate leucovorin per measured methotrexate levels and consider glucarpidase; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison 22nd ed", "version": "2025", "date": null, "locator": "harrison.txt Chapter 111 (childhood ALL/Burkitt maintenance framework, lines 120044 to 120047 note Burkitt leukemia maintenance shortened to 0.5 to 1 year), supporting the short-intensive nature of mature B-NHL therapy; primary regimen grounding is the NCCN pediatric guideline layer", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Pediatric Aggressive Mature B-Cell Lymphomas", "version": "1.2026", "date": null, "locator": "ped_b-cell.txt: LMB-Modified B/C + Rituximab based on FAB/LMB96 (line 1550), COP pre-phase (lines 1555 to 1560), COPADM printed doses (lines 1561 to 1572), COG ANHL1131 regimen B / CYVE pathways (lines 555 to 576), risk-group classification and CNS definition (lines 462 to 480), MYC rearrangement FISH (lines 147, 201 to 202, 303), TLS supportive care (lines 1844 to 1857)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.cycleLengthDays",
+    "regimen.cycles",
+    "regimen.drugs[7].basis", "regimen.drugs[7].dosePerUnit", "regimen.drugs[7].unit"
+  ],
+  "provenanceNote": "PEDIATRIC. StewardMD draft for pediatric aggressive mature B-cell (Burkitt-type) lymphoma. Unusually for a pediatric protocol, the COPADM induction per-drug doses ARE printed in Standard Guidelines (NCCN) Pediatric Aggressive Mature B-Cell Lymphomas v1.2026 for the LMB-Modified Group B + Rituximab regimen (based on FAB/LMB96 / COG ANHL1131), and are used verbatim as sourced with locators: Rituximab 375 mg/m2 Day 1 (ped_b-cell.txt line 1563), Vincristine 2 mg/m2 Day 1 (line 1564), Methotrexate 3 g/m2 Day 1 recorded as 3000 mg/m2 (line 1565), Cyclophosphamide 250 mg/m2 every 12 hours Days 2 to 4 (line 1566), Doxorubicin 60 mg/m2 Day 2 (line 1567), Prednisone 60 mg/m2/day BID Days 1 to 5 (line 1569), Leucovorin 15 mg/m2 every 6 hours from 24 hours after methotrexate until cleared (line 1570). Only the intrathecal methotrexate/hydrocortisone dose is AGE-BASED and not numerically printed, so it remains the literal VERIFY (listed in verifyFields); cycleLengthDays and cycles are VERIFY because the multiphase count-recovery schedule is not fully printed. No pediatric dose was invented. SCOPE: this protocol covers GROUP B (CNS-negative) only, so the modeled methotrexate is the Group B 3 g/m2 (3000 mg/m2) dose. Group C / CNS-positive disease is OUT OF SCOPE because it requires high-dose methotrexate escalation to 8 g/m2 during COPADM-2 plus additional intrathecal therapy (ped_b-cell.txt line 1347); a CNS-positive child must be routed to a separate Group-C protocol (VERIFY) and must not be run on 3 g/m2. The ISMP vinCRIStine 2 mg per-dose cap and DOXOrubicin/methotrexate tall-man conventions are carried; mandatory TLS prophylaxis (high risk in Burkitt) and high-dose-methotrexate leucovorin rescue are included; vinCRIStine is IV only and never intrathecal. NCCN per-disease template alignment, StewardMD clinical (R1) review, and any hospital-implementation overlay approval are pending. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

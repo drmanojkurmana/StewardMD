@@ -1,0 +1,71 @@
+{
+  "id": "hn-pembro-mono",
+  "name": "Pembrolizumab Monotherapy (KEYNOTE-048), First-Line Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma, PD-L1 CPS at least 1",
+  "disease": "Head and neck squamous cell carcinoma (non-nasopharyngeal)",
+  "diseaseId": "head_and_neck_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": [],
+  "biomarkers": {
+    "PD_L1_CPS": "at least 1 (CPS >= 1 required for first-line pembrolizumab monotherapy)",
+    "note": "Per Standard Guidelines (NCCN), Head and Neck Cancers v2.2026, SYST-A 4 of 7, first-line pembrolizumab monotherapy is limited to tumors that express PD-L1 with a combined positive score (CPS) at least 1 (category 1). The Discussion (MS-56) confirms pembrolizumab alone is a first-line option for PD-L1 positive (CPS >= 1) disease based on KEYNOTE-048; the OS benefit for monotherapy was seen in the CPS >= 20 and CPS >= 1 populations. Combined positive score is assessed by PD-L1 IHC."
+  },
+  "treatmentSetting": ["recurrent", "metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "PD-L1 positive, combined positive score (CPS) at least 1", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, First-Line Preferred: Pembrolizumab for tumors that express PD-L1 with CPS >= 1, category 1)" },
+    { "criterion": "disease", "requirement": "recurrent, unresectable, or metastatic head and neck squamous cell carcinoma with no surgical or radiotherapy option", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 4 of 7 header (Recurrent, Unresectable, or Metastatic Disease with no surgery or RT option)" },
+    { "criterion": "site", "requirement": "non-nasopharyngeal primary (oral cavity, oropharynx, hypopharynx, glottic or supraglottic larynx, ethmoid or maxillary sinus, occult primary); nasopharynx follows a separate systemic-therapy pathway (NASO-B)", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "locator": "v2.2026, SYST-A 1 of 7 (Principles of Systemic Therapy for Non-Nasopharyngeal Cancers header)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "Discussion MS-59 (pembrolizumab 200 mg every 3 weeks; FDA-approved alternate 400 mg every 6 weeks); indication SYST-A 4 of 7 (first-line, CPS >= 1, category 1)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, Discussion MS-59. Pembrolizumab 200 mg IV flat dose on day 1 every 21 days. Source-stated alternate schedule: 400 mg IV every 42 days (approved across adult indications). Flat milligram dosing (basis flat), not mg/kg. Continue until disease progression or unacceptable toxicity."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "until disease progression or unacceptable toxicity; alternate schedule 400 mg every 42 days",
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event surveillance for pembrolizumab (thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine).",
+      "Antiemetic prophylaxis not routinely required for single-agent checkpoint inhibitor (minimal emetic risk)."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during pembrolizumab",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting (Standard Guidelines (NCCN) v2.2026, SYST-A 1 of 7 general principles)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "renal", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "Head and Neck Cancer chapter, Recurrent/Metastatic disease (lines 88276 to 88304): PD-1 inhibitors pembrolizumab and nivolumab established in recurrent or metastatic disease; benefit correlates with PD-L1 expression", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Head and Neck Cancers", "version": "2.2026", "date": "2026-05-12", "locator": "SYST-A 4 of 7 (Recurrent, Unresectable, or Metastatic Disease, First-Line Preferred: Pembrolizumab for PD-L1 CPS >= 1, category 1); dosing Discussion MS-59; KEYNOTE-048 Discussion MS-55 to MS-56", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for first-line pembrolizumab monotherapy (KEYNOTE-048) in recurrent, unresectable, or metastatic non-nasopharyngeal head and neck squamous cell carcinoma. Serves the squamous-cell head and neck sites (oral cavity, oropharynx, hypopharynx, glottic and supraglottic larynx, ethmoid and maxillary sinus, occult primary; reference sites #32 to 39 and #41), not nasopharynx (separate NASO-B pathway) and not salivary gland (#40, separate protocol). Pembrolizumab flat 200 mg IV every 21 days (alternate 400 mg every 42 days) is sourced to Standard Guidelines (NCCN) v2.2026 Discussion MS-59; the first-line indication and the PD-L1 CPS at least 1 gate (category 1) are from SYST-A 4 of 7 and Discussion MS-55 to MS-56. Setting recurrent/metastatic, palliative intent, first-line. Flat milligram dosing recorded (basis flat), not mg/kg. No numeric field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

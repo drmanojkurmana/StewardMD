@@ -1,0 +1,111 @@
+{
+  "id": "rare-hcl-vemurafenib",
+  "name": "Vemurafenib +/- Rituximab (BRAF V600E-directed)",
+  "disease": "Hairy cell leukemia (classic, relapsed/refractory)",
+  "diseaseId": "hairy_cell_leukemia",
+  "histology": "classic hairy cell leukemia (cHCL) with BRAF V600E mutation; NOT applicable to variant HCL (BRAF V600E absent)",
+  "stage": [],
+  "biomarkers": {
+    "BRAF_V600E": "required (positive)",
+    "note": "BRAF V600E is a REQUIRED biomarker for vemurafenib. The BRAF V600E gain-of-function mutation is present in classic HCL and drives constitutive RAF-MEK-ERK signaling; it is ABSENT in variant HCL, so BRAF inhibitors have no rationale in vHCL. Per DeVita 12th ed. (lines 281719 to 281725, 281754 to 281756) and Standard Guidelines (NCCN), Hairy Cell Leukemia, v1.2027 (BRAF-inhibitor pathway, extract lines 289, 297, 312 to 314)."
+  },
+  "treatmentSetting": "relapsed/refractory (salvage)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "relapsed/refractory classic HCL with BRAF V600E, typically after purine-analog therapy (especially when first remission was <2 years or purine analogs are not suitable); given as a BRAF inhibitor +/- anti-CD20 mAb",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRAF V600E mutation confirmed by IHC or molecular testing; excludes variant HCL", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 281719 to 281725, 281754 to 281756" },
+    { "criterion": "line", "requirement": "relapsed/refractory disease, or a candidate for BRAF-directed therapy who is not suited to (re)treatment with purine analogs", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "locator": "v1.2027, relapse pathway, extract lines 295 to 312" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "vemurafenib",
+        "name": "Vemurafenib",
+        "basis": "flat",
+        "dosePerUnit": 960,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 23171 (vemurafenib recommended phase II dose 960 mg twice daily)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 23171. Vemurafenib 960 mg PO TWICE DAILY - this is the drug's recommended phase II dose (RP2D), established in BRAF V600E-mutant melanoma per the cited locator. BRAF-inhibitor use in HCL is for relapsed/refractory BRAF V600E-positive classic HCL per Standard Guidelines (NCCN) HCL v1.2027 (extract lines 289, 297, 312 to 314). Modeled as continuous daily oral dosing (represented as days 1 to 28 of a nominal 28-day cycle), 960 mg per dose given twice daily. Monitor for cutaneous squamous-cell carcinoma/keratoacanthoma, photosensitivity, arthralgia, and QT prolongation per labeling."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia", "version": "1.2027", "date": null, "locator": "Vemurafenib +/- Rituximab in the relapse pathway (extract lines 297, 300, 312); dose value 375 mg/m2 weekly per Harrison 22nd ed. line 385777", "evidenceStatus": "current" },
+        "notes": "OPTIONAL add-on (Vemurafenib +/- anti-CD20 mAb/Rituximab). Adding an anti-CD20 mAb to a BRAF inhibitor improves outcomes in relapsed cHCL (DeVita lines 281754 to 281755; NCCN extract lines 297, 300, 312). Rituximab dose VALUE 375 mg/m2 weekly is sourced to Harrison 22nd ed. line 385777; exact scheduling with vemurafenib follows standard practice. Screen hepatitis B before rituximab."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "acetaminophen and antihistamine per standard rituximab labeling when rituximab is added" }
+    ],
+    "supportiveCare": [
+      "Dermatologic surveillance for cutaneous squamous-cell carcinoma / keratoacanthoma and photosensitivity - BRAF inhibitor.",
+      "Screen hepatitis B before rituximab if rituximab is added (NCCN HCL workup, extract line 211).",
+      "ECG/QT and electrolyte monitoring per vemurafenib labeling."
+    ]
+  },
+  "monitoring": [
+    "Dermatologic exam for secondary cutaneous malignancy - vemurafenib",
+    "ECG/QT interval and electrolytes - vemurafenib",
+    "LFTs and CBC",
+    "Disease response assessment"
+  ],
+  "clearanceChecks": ["BRAF V600E confirmed", "liver", "ECG/QT", "CBC/platelets"],
+  "doseModificationRules": [
+    { "condition": "grade >= 2 cutaneous, QT prolongation, or hepatotoxicity", "drug": "vemurafenib", "action": "hold/reduce", "text": "Hold and dose-reduce vemurafenib per labeling for significant cutaneous, cardiac (QT), or hepatic toxicity. Clinical review required." },
+    { "condition": "variant HCL (BRAF V600E absent)", "action": "do-not-use", "text": "Do not use a BRAF inhibitor in variant HCL - BRAF V600E is absent and there is no rationale (DeVita lines 281755 to 281756)." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "line 23171 (vemurafenib recommended phase II dose 960 mg twice daily); lines 281719 to 281725 (BRAF V600E in cHCL, absent in vHCL; vemurafenib/dabrafenib BRAF inhibitors); lines 281754 to 281756 (BRAF inhibitors as monotherapy or with CD20 mAb for relapsed cHCL; no rationale in vHCL)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hairy Cell Leukemia",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Vemurafenib +/- Rituximab (BRAF inhibitor) in the relapse/incomplete-recovery pathway (extract lines 289, 295 to 297, 300, 312 to 314); BRAF V600E testing by IHC or molecular analysis (extract line 190)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "regimen.drugs.vemurafenib.provenanceContext",
+        "sources": [
+          { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "Vemurafenib 960 mg twice daily is the recommended phase II dose, cited in the BRAF V600E-mutant melanoma context (line 23171)" },
+          { "name": "Standard Guidelines (NCCN) Hairy Cell Leukemia", "version": "1.2027", "value": "Vemurafenib +/- rituximab is a listed BRAF-inhibitor option for relapsed/refractory BRAF V600E-positive cHCL, without a printed mg dose in the extract" }
+        ],
+        "note": "The vemurafenib dose VALUE (960 mg twice daily) is concretely sourced but from a melanoma RP2D locator; the HCL indication and BRAF V600E requirement are sourced from the NCCN HCL guideline and DeVita HCL chapter. The dose is the same drug-level RP2D used in HCL BRAF-inhibitor studies; final dosing is a clinical decision.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for vemurafenib +/- rituximab, a BRAF V600E-directed option for relapsed/refractory classic hairy cell leukemia. BRAF V600E is a REQUIRED biomarker (present in cHCL, absent in variant HCL where BRAF inhibitors have no rationale). The vemurafenib dose value (960 mg twice daily) is concretely sourced to DeVita 12th ed. line 23171 as the drug's recommended phase II dose (established in BRAF V600E melanoma), with the HCL indication and BRAF V600E requirement sourced to Standard Guidelines (NCCN) HCL v1.2027 and DeVita HCL chapter (lines 281719 to 281756); this provenance context is recorded as a divergence for transparency. The optional anti-CD20 (rituximab) add-on dose value 375 mg/m2 weekly is sourced to Harrison 22nd ed. line 385777. cycles is VERIFY (BRAF inhibitor is given continuously to progression/toxicity, not a fixed count). Dermatologic (secondary cutaneous SCC) and QT cautions are captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

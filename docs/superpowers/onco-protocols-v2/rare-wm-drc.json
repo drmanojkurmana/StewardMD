@@ -1,0 +1,122 @@
+{
+  "id": "rare-wm-drc",
+  "name": "DRC (Dexamethasone / Rituximab / Cyclophosphamide) - Waldenstrom macroglobulinemia",
+  "disease": "Waldenstrom macroglobulinemia / lymphoplasmacytic lymphoma",
+  "diseaseId": "waldenstrom_macroglobulinemia",
+  "histology": "lymphoplasmacytic lymphoma with IgM monoclonal paraprotein; CD19+, CD20+, surface IgM+",
+  "stage": [],
+  "biomarkers": {
+    "MYD88_L265P": "commonly present (not required for DRC)",
+    "note": "DRC is a fixed-duration chemoimmunotherapy backbone that does not depend on MYD88/CXCR4 genotype (genotype guides BTK-inhibitor selection instead). Per DeVita 12th ed. lines 267635 to 267639 and Standard Guidelines (NCCN), WM/LPL, v1.2027."
+  },
+  "treatmentSetting": ["primary therapy", "previously treated"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "an other-recommended chemoimmunotherapy option for primary and previously treated WM/LPL; a non-neuropathic, non-BTKi alternative (overall response ~83%)",
+  "eligibilityCriteria": [
+    { "criterion": "treatmentIndication", "requirement": "symptomatic WM/LPL requiring therapy", "source": "DeVita, Cancer PPO 12th ed.", "locator": "lines 267625 to 267627" },
+    { "criterion": "hyperviscosity", "requirement": "for high IgM / hyperviscosity, plasmapheresis before rituximab or initial rituximab withholding to avoid IgM flare", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "locator": "line 126614" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "version": "1.2027", "date": null, "locator": "Cyclophosphamide/Dexamethasone + Rituximab as a recommended regimen (extract lines 485, 517)", "evidenceStatus": "current" },
+        "notes": "DOSE NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY. Dexamethasone is the corticosteroid component of DRC; the provided NCCN extract and DeVita/Harrison do not print a dexamethasone mg dose for WM DRC. The commonly used 20 mg IV on day 1 (Dimopoulos DRC) must be VERIFIED against a cited dosing source."
+      },
+      {
+        "id": "rituximab",
+        "name": "Rituximab",
+        "basis": "bsa",
+        "dosePerUnit": 375,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": "IV per standard rituximab titration",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "version": "22nd ed", "date": null, "locator": "line 385777 (rituximab 375 mg/m2 - dose value)", "evidenceStatus": "unknown" },
+        "notes": "Rituximab dose VALUE 375 mg/m2 sourced to Harrison 22nd ed. line 385777; in DRC it is given on day 1 of each cycle (standard scheduling). IgM FLARE CAUTION: rituximab can transiently raise serum IgM and worsen hyperviscosity - plasmapheresis before rituximab or withhold rituximab initially in high-IgM patients (Harrison line 126614; DeVita line 267632). Screen hepatitis B before rituximab (NCCN WM workup, extract line 215)."
+      },
+      {
+        "id": "cyclophosphamide",
+        "name": "Cyclophosphamide",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1, 2, 3, 4, 5],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL", "version": "1.2027", "date": null, "locator": "Cyclophosphamide/Dexamethasone + Rituximab recommended regimen (extract lines 485, 517)", "evidenceStatus": "current" },
+        "notes": "DOSE AND BASIS NOT ESTABLISHED IN THE PROVIDED SOURCES -> VERIFY (basis, dosePerUnit, and unit all VERIFY). Days 1 to 5 reflect the standard oral DRC schedule pending verification. The commonly used cyclophosphamide 100 mg/m2 PO twice daily on days 1 to 5 (Dimopoulos DRC) must be VERIFIED against a cited dosing source before use. DeVita reports DRC overall response ~83%, complete response ~7%, 2-year OS 81% and PFS 67% (line 267637 to 267638) but does not state the component doses."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Rituximab premedication", "notes": "acetaminophen and antihistamine per standard rituximab labeling" }
+    ],
+    "supportiveCare": [
+      "Hepatitis B screening before rituximab - reactivation risk (NCCN WM workup, extract line 215).",
+      "Plasmapheresis before rituximab or initial rituximab withholding in high-IgM / hyperviscosity patients to avoid IgM flare (Harrison line 126614; DeVita line 267632).",
+      "Consider PJP/antimicrobial prophylaxis per institutional practice for cyclophosphamide/rituximab immunosuppression."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle - cyclophosphamide myelosuppression",
+    "Serum IgM / quantitative immunoglobulins and viscosity - IgM flare with rituximab",
+    "Hepatitis B viral status - reactivation with rituximab",
+    "Glucose / steroid effects - dexamethasone"
+  ],
+  "clearanceChecks": ["CBC/platelets", "hepatitis B status", "serum IgM / viscosity", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "high IgM / hyperviscosity risk", "drug": "rituximab", "action": "withhold/plasmapherese", "text": "Plasmapheresis before rituximab or withhold rituximab initially to prevent IgM-flare hyperviscosity (Harrison line 126614). Clinical review required." },
+    { "condition": "hepatitis B positive/at risk", "action": "prophylax/monitor", "text": "Antiviral prophylaxis and monitoring per hepatitis B status before rituximab. Clinical review required." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 267635 to 267639 (DRC = dexamethasone, rituximab, cyclophosphamide; overall response ~83%, CR ~7%, 2-yr OS 81% and PFS 67%; avoids bortezomib/thalidomide neuropathy); line 267632 (rituximab IgM flare)",
+        "evidenceStatus": "unknown"
+      },
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "locator": "line 385777 (rituximab 375 mg/m2 - dose value); line 126614 (rituximab IgM flare, plasmapheresis before rituximab); lines 126602 to 126604 (alkylators incl. cyclophosphamide plus rituximab first-line for symptomatic WM)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Waldenstrom Macroglobulinemia/LPL",
+        "version": "1.2027",
+        "date": null,
+        "locator": "Cyclophosphamide/Dexamethasone + Rituximab as a recommended regimen for primary (extract line 485) and previously treated disease (extract line 517); hepatitis B testing if rituximab planned (extract line 215)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[2].basis", "regimen.drugs[2].dosePerUnit", "regimen.drugs[2].unit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for DRC (dexamethasone/rituximab/cyclophosphamide), a recommended non-neuropathic chemoimmunotherapy option for primary and previously treated Waldenstrom macroglobulinemia/LPL (DeVita: overall response ~83%). Regimen identity is grounded in Standard Guidelines (NCCN) WM v1.2027 (Cyclophosphamide/Dexamethasone + Rituximab, extract lines 485, 517) and DeVita 12th ed. (lines 267635 to 267639). The rituximab dose value (375 mg/m2) is sourced to Harrison 22nd ed. line 385777. The dexamethasone and cyclophosphamide DOSES are set to VERIFY (and cyclophosphamide basis and unit VERIFY): the provided sources describe the regimen and its efficacy but do not print the component doses, so dexamethasone 20 mg and cyclophosphamide 100 mg/m2 PO twice daily x5 (Dimopoulos DRC) are not asserted and must be verified; cycleLengthDays and cycles are likewise VERIFY. Hepatitis B screening before rituximab and the rituximab IgM-flare/hyperviscosity caution (plasmapheresis before rituximab) are captured. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,102 @@
+{
+  "id": "lung-alk-tki-other",
+  "name": "Other ALK TKIs (brigatinib / lorlatinib / crizotinib) for ALK-rearranged NSCLC",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "nsclc",
+  "histology": "non-small cell lung cancer (predominantly adenocarcinoma; ALK rearrangements are most common in nonsquamous histology)",
+  "stage": ["III", "IV", "recurrent/metastatic"],
+  "biomarkers": {
+    "ALK": "rearrangement (gene fusion)",
+    "note": "ALK-TKI gate: requires an ALK rearrangement (ALK gene fusion). The agents modeled here are additional ALK-TKI options for the same gate: brigatinib and lorlatinib (later-generation, first-line options) and crizotinib (first-generation; largely superseded by alectinib/brigatinib/lorlatinib but still a listed option). Per Standard Guidelines (NCCN), NSCLC v7.2026, Therapy for Actionable Molecular Markers (ALK Gene Fusion)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line ALK-TKI options for advanced or metastatic ALK-rearranged NSCLC (brigatinib and lorlatinib are first-line; crizotinib is an earlier-generation option now generally superseded by later-generation ALK TKIs)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "ALK rearrangement (gene fusion)", "source": "Standard Guidelines (NCCN), NSCLC", "locator": "v7.2026, Therapy for Actionable Molecular Markers, ALK Gene Fusion (Brigatinib, Lorlatinib, Crizotinib listed); lines 5490 to 5525" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "brigatinib",
+        "name": "Brigatinib",
+        "basis": "flat",
+        "dosePerUnit": 180,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70557 to 70559 (ALTA-1L: brigatinib 180 mg per day with a 7-day lead-in of 90 mg per day)", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE ALK-TKI monotherapy: choose ONE agent in this file, not a combination. Source: DeVita 12th ed. line 70559 (ALTA-1L, brigatinib 180 mg per day). Brigatinib 180 mg PO once daily continuous, WITH A 7-DAY LEAD-IN at 90 mg per day (source-stated). dosePerUnit reflects the maintenance dose (180 mg); the 90 mg lead-in for days 1 to 7 is described in notes/dose-modification, not separately modeled. cycles null (until progression)."
+      },
+      {
+        "id": "lorlatinib",
+        "name": "Lorlatinib",
+        "basis": "flat",
+        "dosePerUnit": 100,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70564 (CROWN: lorlatinib 100 mg per day, first-line ALK-positive NSCLC)", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE ALK-TKI monotherapy: choose ONE agent in this file, not a combination. Source: DeVita 12th ed. line 70564 (CROWN, lorlatinib 100 mg per day). Lorlatinib 100 mg PO once daily continuous (days 1 to 28, cycles null)."
+      },
+      {
+        "id": "crizotinib",
+        "name": "Crizotinib",
+        "basis": "flat",
+        "dosePerUnit": 250,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Cancer PPO 12th ed.", "version": "12th ed", "date": null, "locator": "line 70544 to 70545 (ALEX: crizotinib 250 mg twice daily, comparator arm)", "evidenceStatus": "unknown" },
+        "notes": "ALTERNATIVE, MUTUALLY EXCLUSIVE ALK-TKI monotherapy: choose ONE agent in this file, not a combination. Source: DeVita 12th ed. line 70544 to 70545 (ALEX comparator, crizotinib 250 mg twice daily). Crizotinib 250 mg PO TWICE DAILY (BID); dosePerUnit is the per-dose amount (250 mg), given twice daily (total 500 mg/day). Earlier-generation ALK TKI, generally superseded by alectinib/brigatinib/lorlatinib. cycles null (until progression). Ceritinib is also a listed ALK-fusion option in the corpus (DeVita lines 70565 to 70567) but NO ceritinib mg dose is printed and would require VERIFY if substituted."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Continuous oral dosing until disease progression or unacceptable toxicity.",
+      "Brigatinib: 7-day lead-in at 90 mg/day before escalating to 180 mg/day; monitor for early-onset pulmonary events.",
+      "Lorlatinib: monitor lipids (hypercholesterolemia/hypertriglyceridemia), CNS/mood effects, and weight per labeling.",
+      "Crizotinib: monitor for hepatotoxicity, QTc prolongation, visual disturbance, and pneumonitis."
+    ]
+  },
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "liver function",
+    "pulmonary assessment for pneumonitis/ILD",
+    "lipids and CNS/mood (lorlatinib)",
+    "ECG/QTc (crizotinib)"
+  ],
+  "clearanceChecks": ["prior-cycle status", "liver", "pulmonary"],
+  "doseModificationRules": [
+    { "condition": "brigatinib early pulmonary event, or grade 3 or higher toxicity / ILD on any agent", "action": "hold/reduce/discontinue", "text": "Hold, reduce, or discontinue per labeling and clinical review; for brigatinib use the 90 mg/day 7-day lead-in and evaluate any early pulmonary symptoms; permanently discontinue for confirmed ILD/pneumonitis." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "line 70544 to 70545 (crizotinib 250 mg twice daily, ALEX); line 70557 to 70559 (brigatinib 180 mg per day with 90 mg 7-day lead-in, ALTA-1L); line 70564 (lorlatinib 100 mg per day, CROWN); ceritinib named without printed mg dose (lines 70565 to 70567)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), NSCLC", "version": "7.2026", "date": null, "locator": "Therapy for Actionable Molecular Markers, ALK Gene Fusion (Brigatinib, Lorlatinib, Crizotinib, Ceritinib, Ensartinib listed), lines 5490 to 5525", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for NSCLC subtype #11 (ALK oncogene-targeted, additional ALK-TKI options). The three modeled agents are MUTUALLY EXCLUSIVE monotherapy options for the same ALK-rearrangement gate (choose one), not a combination. Brigatinib 180 mg PO daily with a 7-day 90 mg lead-in (DeVita line 70559, ALTA-1L), lorlatinib 100 mg PO daily (DeVita line 70564, CROWN), and crizotinib 250 mg PO twice daily (DeVita lines 70544 to 70545, ALEX comparator) are all dose-grounded. Ceritinib is a listed option but no mg dose is printed in the corpus and would require VERIFY if substituted (noted in-drug; not modeled). No modeled dose field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

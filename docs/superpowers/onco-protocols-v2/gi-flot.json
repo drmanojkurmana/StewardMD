@@ -1,0 +1,133 @@
+{
+  "id": "gi-flot",
+  "name": "FLOT (Fluorouracil / Leucovorin / OXALIplatin / DOCEtaxel), perioperative",
+  "disease": "Gastric and gastroesophageal junction (GEJ) adenocarcinoma",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "histology": "adenocarcinoma",
+  "stage": ["resectable (cT2 or higher, or node-positive), localized"],
+  "biomarkers": {
+    "HER2": "tested",
+    "MMR_MSI": "tested",
+    "PD_L1_CPS": "tested",
+    "note": "The cytotoxic FLOT backbone (fluorouracil, leucovorin, oxaliplatin, docetaxel) is not biomarker-restricted. HER2, MMR or MSI, and PD-L1 CPS are tested to guide the addition of, or alternative use of, targeted or checkpoint therapy per the guideline; they do not gate the FLOT backbone itself. Per Standard Guidelines (NCCN), Gastric Cancer v3.2026, Principles of Biomarker Testing and Perioperative Systemic Therapy."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "perioperative (preoperative plus postoperative) chemotherapy for resectable gastric or GEJ adenocarcinoma; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "gastric or GEJ adenocarcinoma", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 96620 (FLOT4: GEJ or gastric adenocarcinoma)" },
+    { "criterion": "resectability", "requirement": "localized, resectable disease", "source": "Standard Guidelines (NCCN), Gastric Cancer", "locator": "v3.2026, GAST-F Perioperative Systemic Therapy; Discussion, Combined Modality Therapy (guidelines/gastric.txt lines 1954, 4147)" },
+    { "criterion": "performanceStatus", "requirement": "good performance status (patient fit for a docetaxel-containing triplet)", "source": "Standard Guidelines (NCCN), Gastric Cancer", "locator": "v3.2026, Discussion (guidelines/gastric.txt line 4159, FLOT recommended in select patients with good performance status)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "docetaxel",
+        "name": "DOCEtaxel",
+        "basis": "bsa",
+        "dosePerUnit": 50,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 96615 (FLOT: docetaxel 50 mg/m2, day 1, once every 2 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 96615. DOCEtaxel 50 mg/m2 IV on day 1, every 2 weeks. Tall-man per ISMP."
+      },
+      {
+        "id": "oxaliplatin",
+        "name": "OXALIplatin",
+        "basis": "bsa",
+        "dosePerUnit": 85,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 96615 (FLOT: oxaliplatin 85 mg/m2, day 1, once every 2 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 96615. OXALIplatin 85 mg/m2 IV on day 1, every 2 weeks. Tall-man per ISMP. Assess peripheral neuropathy each cycle."
+      },
+      {
+        "id": "leucovorin",
+        "name": "Leucovorin",
+        "basis": "bsa",
+        "dosePerUnit": 200,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 96615 (FLOT: leucovorin 200 mg/m2, day 1, once every 2 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 96615. Leucovorin 200 mg/m2 IV on day 1, every 2 weeks."
+      },
+      {
+        "id": "fluorouracil-infusion",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": 2600,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV over 24 hr",
+        "infusionDuration": "24 hr",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 96614 to 96616 (FLOT: 24 hour infusion of 5-FU 2600 mg/m2, day 1, once every 2 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 96615. Fluorouracil 2600 mg/m2 IV as a 24 hr continuous infusion on day 1, every 2 weeks. DPYD deficiency raises fluoropyrimidine toxicity risk; consider DPYD testing before first dose."
+      }
+    ],
+    "cycleLengthDays": 14,
+    "cycles": 8,
+    "premedications": [
+      { "name": "DOCEtaxel premedication", "notes": "corticosteroid premedication per docetaxel labeling; confirm schedule against institutional order set." }
+    ],
+    "supportiveCare": [
+      "Cycle structure: 4 preoperative cycles then surgery then 4 postoperative cycles = 8 cycles total, every 2 weeks (DeVita 12th ed., line 96616).",
+      "DPYD: consider DPYD genotype or phenotype testing before fluoropyrimidine; reduce or avoid on deficiency.",
+      "G-CSF / myeloid growth factor support: docetaxel-containing triplet carries febrile-neutropenia risk; assess per NCCN growth factor guidance.",
+      "Antiemetics: oxaliplatin plus docetaxel; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function before each cycle (OXALIplatin)",
+    "peripheral neuropathy assessment before each cycle (OXALIplatin)",
+    "hand-foot / mucositis / diarrhea assessment (fluorouracil)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "oxaliplatin", "action": "reduce/hold", "text": "Reduce or hold OXALIplatin per neuropathy grade; obtain clinical review. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "lines 96612 to 96625 (FLOT4 perioperative regimen: 5-FU 2600 mg/m2 24 hr infusion, leucovorin 200 mg/m2, oxaliplatin 85 mg/m2, docetaxel 50 mg/m2, day 1, every 2 weeks, 4 preoperative and 4 postoperative cycles, GEJ or gastric adenocarcinoma)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Gastric Cancer",
+        "version": "3.2026",
+        "date": "2026-06-03",
+        "locator": "Perioperative Systemic Therapy, FLOT preferred (guidelines/gastric.txt line 1954); Discussion, Combined Modality Therapy and FLOT4 (guidelines/gastric.txt lines 4138 to 4204)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for FLOT perioperative therapy in resectable gastric and GEJ adenocarcinoma. Every numeric dose is grounded to DeVita 12th ed. line 96615 (the FLOT4 description): 5-FU 2600 mg/m2 as a 24 hr continuous infusion, leucovorin 200 mg/m2, oxaliplatin 85 mg/m2, and docetaxel 50 mg/m2, all on day 1 every 2 weeks, for 4 preoperative and 4 postoperative cycles (8 total). Setting and eligibility are corroborated by Standard Guidelines (NCCN), Gastric Cancer v3.2026 (FLOT as a preferred perioperative regimen). ISMP tall-man applied (DOCEtaxel, OXALIplatin). DPYD screening flagged for the fluoropyrimidine. The FLOT backbone is not biomarker-restricted; HER2, MMR or MSI, and PD-L1 CPS are tested to guide add-on therapy. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

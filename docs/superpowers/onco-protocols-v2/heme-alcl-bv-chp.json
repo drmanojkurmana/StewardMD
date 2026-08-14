@@ -1,0 +1,64 @@
+{
+  "id": "heme-alcl-bv-chp",
+  "name": "BV-CHP (Brentuximab vedotin + Cyclophosphamide + DOXOrubicin + Prednisone)",
+  "disease": "Anaplastic large cell lymphoma",
+  "diseaseId": "anaplastic_large_cell_lymphoma",
+  "histology": "systemic anaplastic large cell lymphoma (ALK-positive or ALK-negative), and other CD30-positive peripheral T-cell lymphomas",
+  "stage": [],
+  "biomarkers": {
+    "CD30": "positive (REQUIRED gate for brentuximab vedotin)",
+    "ALK": "ALK-positive or ALK-negative systemic ALCL (prognostic; not a dosing gate)",
+    "note": "Brentuximab vedotin is a CD30-directed antibody-drug conjugate; CD30 positivity is the biomarker gate for BV-CHP (Standard Guidelines (NCCN), T-cell Lymphomas v2.2026, lines 803 and 807: CHP + Brentuximab vedotin for CD30+ histologies). Systemic ALCL is uniformly CD30-positive. ALK status is prognostic and does not change dosing."
+  },
+  "treatmentSetting": "primary therapy for previously untreated CD30-positive systemic anaplastic large cell lymphoma (and other CD30-positive PTCL)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "previously untreated systemic anaplastic large cell lymphoma", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "locator": "v2.2026, ALCL pathways ALK-positive/ALK-negative (lines 162 to 163); CHP + Brentuximab vedotin (lines 1096, 5400)" },
+    { "criterion": "biomarker", "requirement": "CD30-positive histology", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "locator": "v2.2026, lines 803 and 807 (CHP + Brentuximab vedotin for CD30+ histologies)" }
+  ],
+  "regimen": {
+    "drugs": [
+      { "id": "brentuximab-vedotin", "name": "Brentuximab vedotin", "basis": "mgkg", "dosePerUnit": 1.8, "unit": "mg/kg", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null, "bodyWeightCapKg": 100 }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 (antineoplastic drug reference), Brentuximab vedotin entry, lines 20811 to 20812: 1.8 mg/kg IV every 3 weeks, maximum dose per 100 kg, for (refractory) Hodgkin lymphoma and systemic anaplastic large cell lymphoma.", "evidenceStatus": "unknown" }, "notes": "Source: DeVita 12th ed., Table 10.1, lines 20811 to 20812: brentuximab vedotin 1.8 mg/kg IV every 3 weeks (day 1 of a 21-day cycle), with body-weight dosing capped at 100 kg. Table 10.1 lists this dose/schedule for refractory systemic ALCL; frontline BV-CHP (ECHELON-2) uses the identical 1.8 mg/kg every-3-week dose, and the frontline setting is grounded to the NCCN CHP + brentuximab entry. CD30-directed ADC (MMAE); monitor for peripheral neuropathy. Requires CD30 positivity." },
+      { "id": "cyclophosphamide", "name": "Cyclophosphamide", "basis": "bsa", "dosePerUnit": 750, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP cyclophosphamide 750 mg/m2 bsa IV on day 1.", "evidenceStatus": "current" }, "notes": "Cyclophosphamide 750 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP cyclophosphamide 750 mg/m2 bsa on day 1." },
+      { "id": "doxorubicin", "name": "DOXOrubicin", "basis": "bsa", "dosePerUnit": 50, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } }, "roundingRule": { "increment": 5 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP doxorubicin 50 mg/m2 bsa IV on day 1, with anthracycline cumulative cap warn 450 / hard 550 mg/m2.", "evidenceStatus": "current" }, "notes": "DOXOrubicin 50 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP doxorubicin 50 mg/m2 bsa on day 1. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). ISMP tall-man DOXOrubicin." },
+      { "id": "prednisone", "name": "Prednisone", "basis": "flat", "dosePerUnit": 100, "unit": "mg", "days": [1, 2, 3, 4, 5], "route": "PO", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP steroid 100 mg flat on days 1 to 5 (rchop names it Prednisolone; interchangeable CHOP steroid with Prednisone).", "evidenceStatus": "current" }, "notes": "Prednisone 100 mg PO flat on days 1 to 5. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json); rchop names the steroid Prednisolone while this file uses Prednisone (same 100 mg flat days 1 to 5, interchangeable CHOP steroid)." }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "anthracycline-containing regimen; prophylaxis per emetogenicity tier." }
+    ],
+    "supportiveCare": [
+      "G-CSF: consider primary prophylaxis per febrile-neutropenia risk of the CHP backbone.",
+      "Brentuximab vedotin: monitor for peripheral neuropathy; hold/reduce for grade 2 or higher. Vincristine is intentionally omitted (CHP, not CHOP) to avoid overlapping neurotoxicity with brentuximab.",
+      "Tumor lysis syndrome prophylaxis for high tumor burden."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "peripheral neuropathy assessment each visit (brentuximab vedotin)",
+    "cardiac assessment / LVEF (anthracycline) at baseline",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "hepatic function (brentuximab)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "peripheral neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "brentuximab-vedotin", "action": "reduce/hold", "text": "Reduce or hold brentuximab vedotin for grade 2 or higher peripheral neuropathy per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "brentuximab vedotin Table 10.1 lines 20811 to 20812 (1.8 mg/kg q3wk, max per 100 kg); generic doxorubicin range lines 19634 to 19635", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), T-cell Lymphomas", "version": "2.2026", "date": "2026-02-13", "locator": "ALCL ALK-positive/ALK-negative pathways lines 162 to 163; CHP (cyclophosphamide, doxorubicin, prednisone) + Brentuximab vedotin lines 1096, 5400; CD30+ gate lines 803, 807", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for BV-CHP (brentuximab vedotin + CHP; ECHELON-2) in CD30-positive systemic anaplastic large cell lymphoma (#81). Brentuximab vedotin 1.8 mg/kg IV every 3 weeks (day 1), body-weight dosing capped at 100 kg, is dose-grounded to DeVita Table 10.1 (lines 20811 to 20812); Table 10.1 states this dose/schedule for refractory systemic ALCL, and frontline BV-CHP uses the identical 1.8 mg/kg every-3-week dose with the frontline setting grounded to the NCCN CHP + brentuximab entry. The three CHP-backbone doses are grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json): cyclophosphamide 750 mg/m2 day 1, doxorubicin 50 mg/m2 day 1 (anthracycline cap warn 450 / hard 550 mg/m2), and the steroid 100 mg flat days 1 to 5 (rchop names it Prednisolone; this file uses Prednisone, the same interchangeable CHOP steroid at 100 mg flat days 1 to 5). No dose remains VERIFY (brentuximab vedotin 1.8 mg/kg is grounded to DeVita Table 10.1). Regimen identity and the CD30-positive gate are grounded to Standard Guidelines (NCCN), T-cell Lymphomas v2.2026 (ALCL pathways lines 162 to 163; CHP + brentuximab lines 1096, 5400; CD30+ lines 803, 807). Vincristine is intentionally omitted (CHP, not CHOP) to avoid overlapping neurotoxicity with brentuximab. ISMP tall-man applied (DOXOrubicin); brentuximab body-weight dosing capped at 100 kg; anthracycline cumulative cap 450/550 mg/m2. This remains a StewardMD Standard Protocol; no endorsement implied." }

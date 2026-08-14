@@ -1,0 +1,107 @@
+{
+  "id": "lung-keynote189",
+  "name": "Pembrolizumab + Platinum + Pemetrexed then Pemetrexed/Pembrolizumab Maintenance (KEYNOTE-189, NSCLC non-squamous)",
+  "disease": "Non-small cell lung cancer",
+  "diseaseId": "neoplasms_of_the_lung",
+  "histology": "non-squamous (adenocarcinoma, large cell carcinoma, or NSCLC not otherwise specified); NOT for squamous (pemetrexed is restricted to non-squamous histology)",
+  "stage": ["IV"],
+  "biomarkers": {
+    "histology": "non-squamous",
+    "PD_L1": "any (benefit shown across all PD-L1 levels, including PD-L1 < 1%)",
+    "EGFR": "wild-type (no actionable EGFR alteration)",
+    "ALK": "wild-type (no actionable ALK rearrangement)",
+    "note": "Chemoimmunotherapy for metastatic NON-squamous NSCLC regardless of PD-L1 expression. Pembrolizumab plus pemetrexed plus carboplatin or cisplatin. Trial excluded patients with sensitizing EGFR mutations or ALK rearrangements; oncogene-driven NSCLC is directed to targeted therapy first-line. PD-1/PD-L1 inhibitor contraindications (e.g., active autoimmune disease, significant immunosuppression) must be excluded. Per Standard Guidelines (NCCN), Non-Small Cell Lung Cancer, Systemic Therapy for Metastatic Disease (KEYNOTE-189); DeVita 12th ed."
+  },
+  "treatmentSetting": ["metastatic"],
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for metastatic non-squamous NSCLC without an actionable driver, any PD-L1 level",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "metastatic non-squamous NSCLC", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, MS-55 (KEYNOTE-189: pembrolizumab plus pemetrexed and either carboplatin or cisplatin, category 1 preferred, metastatic nonsquamous)" },
+    { "criterion": "biomarker", "requirement": "any PD-L1 level; no EGFR sensitizing mutation or ALK rearrangement", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "locator": "Chapter 30, KEYNOTE-189 (lines 70764 to 70919); benefit across all PD-L1 including < 1%" },
+    { "criterion": "immunotherapyEligibility", "requirement": "no contraindication to PD-1/PD-L1 inhibitor therapy", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "locator": "v7.2026, Systemic Therapy for Metastatic Disease" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 30: pembrolizumab 200 mg every 3 weeks (KEYNOTE-024, line 70724); flat dose 200 mg every 3 weeks or 400 mg every 6 weeks (line 233347)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed. line 70724 (pembrolizumab 200 mg every 3 weeks) and line 233347 (flat 200 mg every 3 weeks or 400 mg every 6 weeks). Given Day 1 with the platinum/pemetrexed induction (4 cycles) and continued as maintenance with pemetrexed for up to 35 total cycles (line 70914). Alternative schedule: 400 mg IV every 6 weeks."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": 5,
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2 (nonsquamous): Carboplatin AUC 5 on Day 1 with Pemetrexed 500 mg/m2 every 21 days for 4 cycles (line 4809)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F line 4809 (Carboplatin AUC 5 Day 1). Platinum backbone of the induction (cycles 1 to 4). Alternative platinum per KEYNOTE-189: CISplatin 75 mg/m2 Day 1 (NSCL-F line 4810); carboplatin was used in 72% of KEYNOTE-189 patients per NCCN MS-55. Target AUC via Calvert formula (basis auc, unit AUC). ISMP tall-man (CARBOplatin)."
+      },
+      {
+        "id": "pemetrexed",
+        "name": "Pemetrexed",
+        "basis": "bsa",
+        "dosePerUnit": 500,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "NSCL-F 1 of 2 (nonsquamous): Pemetrexed 500 mg/m2 on Day 1 every 21 days for 4 cycles (line 4809)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v7.2026, NSCL-F line 4809 (Pemetrexed 500 mg/m2 Day 1). Non-squamous only. Given Day 1 in the 4-cycle induction and continued as maintenance with pembrolizumab. Requires folic acid + vitamin B12 supplementation and dexamethasone premedication per pemetrexed labeling."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "Induction: 4 cycles every 21 days of pembrolizumab 200 mg + platinum (carboplatin AUC 5 or cisplatin 75 mg/m2) + pemetrexed 500 mg/m2 Day 1. Maintenance: pemetrexed 500 mg/m2 + pembrolizumab 200 mg every 21 days, to a maximum of 35 total pembrolizumab cycles (DeVita line 70914). Alternative pembrolizumab schedule: 400 mg every 6 weeks.",
+    "premedications": [
+      { "name": "Pemetrexed supplementation", "notes": "folic acid and vitamin B12 supplementation plus dexamethasone premedication per pemetrexed labeling." },
+      { "name": "Antiemetic prophylaxis", "notes": "carboplatin backbone is moderate emetic risk (cisplatin alternative is high risk); give tier-appropriate prophylaxis." }
+    ],
+    "supportiveCare": [
+      "immune-related adverse event monitoring for pembrolizumab (thyroid, hepatic, pulmonary/pneumonitis, colitis, endocrinopathies, myocarditis)",
+      "pemetrexed: folic acid + vitamin B12 + dexamethasone premedication",
+      "carboplatin dosed to target AUC (Calvert formula); antiemetic prophylaxis by platinum emetogenicity"
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during pembrolizumab",
+    "renal function before each cycle (drives carboplatin AUC / cisplatin eligibility)",
+    "pneumonitis surveillance (symptoms, imaging) on pembrolizumab"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." },
+    { "condition": "ANC < 1500 or platelets < 100k on day 1", "action": "delay", "text": "Review required; hold or reduce chemotherapy per protocol-specific hematologic criteria." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "Chapter 30, Non-small-cell Lung Cancer: KEYNOTE-189 (platinum + pemetrexed +/- pembrolizumab, then pemetrexed + pembrolizumab maintenance for a maximum of 35 cycles, lines 70764 and 70914); pembrolizumab 200 mg every 3 weeks (line 70724); flat 200 mg q3w or 400 mg q6w (line 233347)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Non-Small Cell Lung Cancer", "version": "7.2026", "date": null, "locator": "MS-55 (KEYNOTE-189: pembrolizumab plus pemetrexed and either carboplatin or cisplatin, category 1 preferred first-line, metastatic nonsquamous; maintenance pembrolizumab plus pemetrexed category 1); NSCL-F line 4809 (Carboplatin AUC 5 + Pemetrexed 500 mg/m2 Day 1 every 21 days) and line 4810 (Cisplatin 75 mg/m2 alternative)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the KEYNOTE-189 chemoimmunotherapy regimen in metastatic non-squamous NSCLC. Doses are grounded: Pembrolizumab 200 mg Day 1 every 3 weeks (or 400 mg every 6 weeks) per DeVita 12th ed. lines 70724 and 233347; CARBOplatin AUC 5 Day 1 (basis auc, unit AUC) and Pemetrexed 500 mg/m2 Day 1 every 21 days for 4 cycles per Standard Guidelines (NCCN) v7.2026 NSCL-F line 4809, with CISplatin 75 mg/m2 Day 1 as the alternative platinum (NSCL-F line 4810; carboplatin used in 72% of KEYNOTE-189 patients per NCCN MS-55). Induction is 4 cycles then pemetrexed plus pembrolizumab maintenance to a maximum of 35 total pembrolizumab cycles (DeVita line 70914). Non-squamous histology only, any PD-L1, EGFR/ALK wild-type; oncogene-driven NSCLC goes to targeted therapy. ISMP tall-man applied (CARBOplatin, and CISplatin for the alternative). Immune-related adverse-event monitoring and pemetrexed folic acid + B12 + dexamethasone premedication are captured. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

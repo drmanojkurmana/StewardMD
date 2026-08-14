@@ -1,0 +1,86 @@
+{
+  "id": "gu-rcc-lenvatinib-pembro",
+  "name": "Lenvatinib + Pembrolizumab (CLEAR)",
+  "disease": "Renal cell carcinoma",
+  "diseaseId": "renal_cell_carcinoma",
+  "histology": "clear cell renal cell carcinoma",
+  "stage": ["IV", "relapsed/unresectable"],
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). IO + VEGFR-TKI doublet (lenvatinib + pembrolizumab anti-PD-1). The CLEAR study showed significantly longer PFS and higher ORR versus sunitinib. No positive companion biomarker is required (PD-L1 not required). Per Standard Guidelines (NCCN), Kidney Cancer v1.2027 (Lenvatinib + Pembrolizumab, category 1)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic clear cell RCC (all risk groups)",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "clear cell renal cell carcinoma", "source": "Standard Guidelines (NCCN), Kidney Cancer", "locator": "v1.2027, first-line clear cell RCC (Pembrolizumab/Lenvatinib, CLEAR; category 1)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pembrolizumab",
+        "name": "Pembrolizumab",
+        "basis": "flat",
+        "dosePerUnit": 200,
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 58568 (pembrolizumab 200 mg flat dose)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 58568: pembrolizumab 200 mg flat dose IV, day 1 every 3 weeks (standard flat dose; alternative 400 mg every 6 weeks per label). Immune-related adverse event monitoring applies."
+      },
+      {
+        "id": "lenvatinib",
+        "name": "Lenvatinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "VERIFY", "version": null, "date": null, "locator": "VERIFY - the lenvatinib dose used WITH pembrolizumab (CLEAR; intended 20 mg PO once daily) is NOT printed in the provided licensed sources. DeVita 12th ed. prints lenvatinib 24 mg/day as monotherapy and 18 mg/day in the lenvatinib+everolimus combination (line 151944-151945), which are DIFFERENT regimens and DIFFERENT doses; those must not be substituted here. Do not infer.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: lenvatinib is an oral multitargeted VEGFR TKI given once daily. The CLEAR combination dose with pembrolizumab (intended 20 mg PO once daily) is NOT dose-grounded in the provided sources. DeVita line 151944-151945 gives lenvatinib 24 mg/day (monotherapy) and 18 mg/day (with everolimus 5 mg/day) - these belong to the second-line lenvatinib/everolimus regimen, NOT this IO combination, and their doses differ, so they cannot be reused. dosePerUnit is set to VERIFY (never invented) and must be resolved against a cited source before use."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event (irAE) monitoring for pembrolizumab (thyroid and other endocrinopathies, hepatitis, colitis, pneumonitis, dermatitis, nephritis).",
+      "Blood pressure monitoring and management (lenvatinib VEGFR TKI hypertension - can be marked).",
+      "Monitor for proteinuria, diarrhea, hand-foot skin reaction, thyroid dysfunction, and weight loss (lenvatinib).",
+      "Attributing toxicity between the IO and TKI components may require holding one agent to identify the cause."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) during pembrolizumab",
+    "blood pressure (lenvatinib hypertension)",
+    "proteinuria, thyroid function, hand-foot skin reaction (lenvatinib)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "blood pressure", "renal/proteinuria", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "pembrolizumab", "action": "hold/steroids", "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." },
+    { "condition": "grade 3 hypertension, proteinuria, HFSR, or hepatotoxicity", "drug": "lenvatinib", "action": "hold/reduce", "text": "Hold and resume lenvatinib at a reduced dose per labeling for grade 3 or higher toxicity; obtain clinical review. Lenvatinib dose modification cannot be finalized until the starting dose (VERIFY) is resolved." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 58568 (pembrolizumab 200 mg flat dose); line 151850 (CLEAR, Pembrolizumab/Lenvatinib named); lines 151944-151945 (lenvatinib 24 mg mono and 18 mg with everolimus - a DIFFERENT regimen, not this combination)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kidney Cancer", "version": "1.2027", "date": null, "locator": "First-line clear cell RCC: Pembrolizumab/Lenvatinib (CLEAR, category 1), systemic-therapy pages. mg dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[lenvatinib].dosePerUnit", "regimen.drugs[lenvatinib].provenance.source", "regimen.drugs[lenvatinib].provenance.locator"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lenvatinib + pembrolizumab (CLEAR) in advanced clear cell renal cell carcinoma (serves clear cell subtypes #55 and #56). Pembrolizumab 200 mg IV every 3 weeks is sourced to DeVita 12th ed., line 58568. The lenvatinib dose used WITH pembrolizumab (intended 20 mg PO once daily per CLEAR) is NOT printed in the provided licensed sources; DeVita prints lenvatinib 24 mg (monotherapy) and 18 mg (with everolimus, a different second-line regimen) - those must not be substituted for the CLEAR combination. Lenvatinib dosePerUnit is therefore set to VERIFY and never inferred; verifyFields records the unresolved paths. Standard Guidelines (NCCN), Kidney Cancer v1.2027 lists this as a category 1 first-line regimen. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

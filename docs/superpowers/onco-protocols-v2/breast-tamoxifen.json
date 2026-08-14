@@ -1,0 +1,91 @@
+{
+  "id": "breast-tamoxifen",
+  "name": "Tamoxifen (adjuvant / metastatic endocrine therapy)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "hormone-receptor-positive invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC)); also ER-positive ductal carcinoma in situ (DCIS)",
+  "stage": ["DCIS (0)", "I", "II", "III", "IV"],
+  "biomarkers": {
+    "ER": "positive",
+    "PR": "tested",
+    "HR": "positive required (ER and/or PR positive)",
+    "HER2": "tested",
+    "hormoneReceptorRestricted": true,
+    "note": "Endocrine therapy REQUIRES hormone-receptor-positive disease (ER and/or PR positive). Tamoxifen is a selective estrogen receptor modulator (SERM) effective at any menopausal status, so it does not require postmenopausal status or ovarian suppression (unlike aromatase inhibitors). HER2 is tested to guide the addition of HER2-directed therapy, which does not change the endocrine indication. Per DeVita 12th ed. (Chapter 16) and Standard Guidelines (NCCN), Invasive Breast Cancer, Principles of Adjuvant Endocrine Therapy (BINV-K)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "adjuvant endocrine therapy (curative-intent early breast cancer) and endocrine therapy for ER- and/or PR-positive metastatic disease; also ER-positive DCIS and risk reduction; not cytotoxic-line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "hormone-receptor-positive (ER and/or PR positive) breast cancer", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer / DeVita 12th ed.", "locator": "NCCN v6.2026 BINV-K; DeVita line 29628 to 29630 (adjuvant ER-positive and ER-positive metastatic breast cancer)" },
+    { "criterion": "menopausalStatus", "requirement": "any menopausal status (premenopausal or postmenopausal); tamoxifen is the endocrine agent of choice for premenopausal patients", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-K 3 of 4 (Premenopausal: Tamoxifen 5 y +/- ovarian suppression); BINV-K DCIS-2 (Tamoxifen for premenopausal patients)" },
+    { "criterion": "sex", "requirement": "male breast cancer: tamoxifen is the endocrine standard (aromatase inhibitors are not recommended as monotherapy in men)", "source": "DeVita 12th ed.", "locator": "lines 185885 to 185890 (AI associated with 1.5-fold higher mortality vs tamoxifen in male breast cancer)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "tamoxifen",
+        "name": "Tamoxifen",
+        "basis": "flat",
+        "dosePerUnit": 20,
+        "unit": "mg",
+        "days": [1],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 29631 (standard daily dose of tamoxifen is 20 mg); duration line 29631 to 29634 (5 years, and 10 years improves breast cancer mortality/overall survival in the adjuvant setting)", "evidenceStatus": "current" },
+        "notes": "Source: DeVita 12th ed. line 29631. Tamoxifen 20 mg by mouth once daily, continuous (flat daily dosing; the days array marks once-daily administration within a nominal 1-day cycle). Adjuvant duration 5 to 10 years (DeVita 29631 to 29634; NCCN v6.2026 BINV-K premenopausal tamoxifen 5 years, consider extending to 10 years). Source-stated low-dose option for intolerance (NCCN v6.2026 BINV-K footnote r): tamoxifen 5 mg per day or 10 mg every other day for 3 to 5 years."
+      }
+    ],
+    "cycleLengthDays": 1,
+    "cycles": "continuous once-daily dosing for 5 to 10 years (adjuvant); continued until progression or unacceptable toxicity in metastatic disease",
+    "premedications": [],
+    "supportiveCare": [
+      "Not myelosuppressive; no G-CSF or routine antiemetics required (oral endocrine therapy).",
+      "Ovarian suppression (OFS): for premenopausal patients at higher risk, tamoxifen plus ovarian suppression/ablation may be used; OFS is commonly a GnRH agonist (e.g., goserelin 3.6 mg SC every 4 weeks) or surgical/radiation ablation. Per NCCN v6.2026 BINV-K 2 of 4 (OFS methods) and DeVita lines 185051 to 185084 (SOFT/TEXT).",
+      "Thromboembolism and endometrial monitoring: tamoxifen predisposes to venous thromboembolism and (in postmenopausal patients) endometrial cancer (DeVita lines 29646 to 29649).",
+      "Avoid strong CYP2D6 inhibitors (e.g., paroxetine) which lower active endoxifen (DeVita lines 29644 to 29690)."
+    ]
+  },
+  "monitoring": [
+    "adherence to daily oral endocrine therapy (crucial to outcome)",
+    "gynecologic symptoms / abnormal vaginal bleeding (endometrial cancer risk in postmenopausal patients)",
+    "signs/symptoms of venous thromboembolism",
+    "bone density (tamoxifen may reduce bone density in premenopausal patients)"
+  ],
+  "clearanceChecks": ["hormone-receptor status confirmed positive", "pregnancy status (avoid in pregnancy)", "CYP2D6-inhibitor drug interactions"],
+  "doseModificationRules": [
+    { "condition": "intolerance at 20 mg per day", "drug": "tamoxifen", "action": "reduce", "text": "Source-stated low-dose option (NCCN v6.2026 BINV-K footnote r): tamoxifen 5 mg per day or 10 mg every other day for 3 to 5 years if symptomatic on the 20 mg dose. Physician decides." },
+    { "condition": "reduced/absent CYP2D6 activity (genotype or potent inhibitor coadministration)", "drug": "tamoxifen", "action": "review", "text": "CPIC recommends alternative endocrine therapy for reduced CYP2D6 activity, or (if tamoxifen must continue) dose escalation from 20 to 40 mg per day (DeVita lines 29682 to 29685). Note: NCCN v6.2026 (BINV-K DCIS-2 footnote) states routine CYP2D6 genotype testing is not recommended. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Chapter 16 (Selective Estrogen Receptor Modulators): dose line 29631; indications lines 29623 to 29634; CYP2D6 lines 29682 to 29690; toxicity lines 29646 to 29651. Male breast cancer lines 185885 to 185890. Ovarian suppression / SOFT-TEXT lines 185051 to 185084. Metastatic endocrine therapy lines 186178 to 186209.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": "2026-07-29",
+        "locator": "Principles of Adjuvant Endocrine Therapy (BINV-K 3 of 4: Premenopausal, Tamoxifen 5 y +/- ovarian suppression; BINV-K 4 of 4: Postmenopausal, tamoxifen where AI contraindicated/declined/intolerant; BINV-K 2 of 4: OFS methods; footnote r low-dose tamoxifen); DCIS endocrine therapy (DCIS-2)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for tamoxifen endocrine therapy. Restricted to hormone-receptor-positive (ER and/or PR positive) breast cancer; histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma, and also ER-positive DCIS. Dose is flat daily oral: tamoxifen 20 mg by mouth once daily, sourced to DeVita 12th ed. line 29631 (standard daily dose 20 mg), with adjuvant duration 5 to 10 years (DeVita lines 29631 to 29634). Effective at any menopausal status (the endocrine agent of choice for premenopausal patients per NCCN v6.2026 BINV-K); for higher-risk premenopausal patients it may be combined with ovarian suppression/ablation (SOFT/TEXT; DeVita 185051 to 185084). In male breast cancer, tamoxifen is the endocrine standard and aromatase inhibitors are not recommended as monotherapy (DeVita lines 185885 to 185890). Source-stated low-dose option (5 mg/day or 10 mg every other day) for intolerance per NCCN v6.2026 BINV-K footnote r. No ISMP tall-man agent. No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,126 @@
+{
+  "id": "cns-gbm-stupp",
+  "name": "Temozolomide with concurrent and adjuvant radiotherapy (Stupp regimen)",
+  "disease": "Glioblastoma",
+  "diseaseId": "glioblastoma",
+  "histology": "glioblastoma, IDH-wildtype (WHO CNS grade 4)",
+  "stage": [],
+  "biomarkers": {
+    "IDH": "wild-type (glioblastoma is IDH-wildtype under the WHO 2021 CNS classification)",
+    "MGMT_promoter_methylation": "tested (prognostic and predictive of temozolomide benefit; not required to give the regimen)",
+    "note": "MGMT promoter methylation status is tested because it is prognostic and predictive of temozolomide benefit, but the regimen is not biomarker-restricted. Per Standard Guidelines (NCCN), CNS Cancers, Adult Glioma Systemic Therapy Options and Discussion; MGMT-methylated tumors derive greater temozolomide benefit."
+  },
+  "treatmentSetting": "adjuvant (postoperative chemoradiation after maximal safe resection or biopsy)",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line (newly diagnosed glioblastoma)",
+  "eligibilityCriteria": [
+    { "criterion": "performanceStatus", "requirement": "KPS 60 or higher preferred; RT plus temozolomide is preferred even at KPS <60 when the deficit is from the tumor", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "GLIO footnote p, cns.txt line 668" },
+    { "criterion": "histology", "requirement": "newly diagnosed glioblastoma after maximal safe resection or biopsy", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "GLIO pathway (RT with concurrent and adjuvant temozolomide), cns.txt line 932" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "temozolomide-concurrent",
+        "name": "Temozolomide (concurrent phase)",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [],
+        "route": "PO daily",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Discussion, cns.txt line 8161 (75 mg/m2 daily concurrent with RT)",
+          "evidenceStatus": "current"
+        },
+        "notes": "75 mg/m2 by mouth every day, given continuously throughout the radiotherapy course (approximately 42 consecutive days including weekends). This concurrent phase is separate from the 28-day adjuvant cycles counted below. Source: Standard Guidelines (NCCN), CNS Cancers, Discussion (cns.txt line 8161); the continuous 75 mg/m2 schedule is also described in DeVita 12th ed. (devita.txt line 237631)."
+      },
+      {
+        "id": "temozolomide-adjuvant",
+        "name": "Temozolomide (adjuvant phase)",
+        "basis": "bsa",
+        "dosePerUnit": "150 to 200",
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5],
+        "route": "PO daily days 1 to 5",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Discussion, cns.txt lines 8162 to 8163 (150 to 200 mg/m2 post-irradiation, 5-day schedule every 28 days)",
+          "evidenceStatus": "current"
+        },
+        "notes": "150 to 200 mg/m2 by mouth on days 1 to 5 of a 28-day cycle, beginning about 4 weeks after chemoradiation. Common practice starts cycle 1 at 150 mg/m2 and escalates to 200 mg/m2 from cycle 2 if tolerated; the source prints the 150 to 200 mg/m2 range (cns.txt lines 8162 to 8163; DeVita 12th ed. devita.txt line 237650 cites the same 150 to 200 mg/m2 x 5 day schedule)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "temozolomide is low to moderate emetogenic risk; oral 5-HT3 antagonist before each dose. The continuous concurrent schedule is less emetogenic and metoclopramide may suffice (DeVita 12th ed., devita.txt line 237639)." }
+    ],
+    "supportiveCare": [
+      "Pneumocystis (PCP) prophylaxis during the concurrent daily temozolomide phase: continuous low-dose temozolomide causes profound lymphopenia (CD4 may fall below 200); give trimethoprim-sulfamethoxazole three times weekly or monthly inhaled pentamidine, indicated once the lymphocyte count drops below 500/mm3. Source: DeVita 12th ed., devita.txt lines 237632 to 237637.",
+      "antiemetics: low to moderate emetogenic risk tier",
+      "G-CSF: not routinely indicated; monitor for temozolomide myelosuppression (thrombocytopenia, lymphopenia)"
+    ]
+  },
+  "monitoring": [
+    "CBC weekly during the concurrent phase and before each adjuvant cycle (temozolomide thrombocytopenia and lymphopenia)",
+    "absolute lymphocyte count during concurrent phase (PCP-prophylaxis trigger below 500/mm3)",
+    "MRI brain per surveillance schedule; within the first 3 months after chemoradiation, new enhancement may be pseudoprogression rather than true progression (Standard Guidelines (NCCN), CNS Cancers, GLIO footnote q, cns.txt line 961)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "absolute lymphocyte count", "liver function", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 4 lymphopenia or ANC/platelet toxicity", "action": "hold/reduce", "text": "Review required. Hold or reduce temozolomide per myelosuppression; start PCP prophylaxis when lymphocytes fall below 500/mm3. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "CNS chapter, devita.txt lines 237631 (continuous 75 mg/m2), 237632 to 237639 (PCP prophylaxis and antiemesis), 237650 (150 to 200 mg/m2 x 5 days)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "GLIO (RT with concurrent and adjuvant temozolomide, cns.txt line 932); Adult Glioma Systemic Therapy Options (GLIO-A); Discussion, cns.txt lines 8161 to 8163 (EORTC-NCIC/Stupp dosing) and footnote ii cns.txt line 1177 (no clear benefit beyond 6 months)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [],
+  "provenanceNote": "Temozolomide concurrent 75 mg/m2 daily with radiotherapy and adjuvant 150 to 200 mg/m2 on days 1 to 5 every 28 days for 6 cycles are grounded in Standard Guidelines (NCCN), CNS Cancers Discussion (cns.txt lines 8161 to 8163) and DeVita 12th ed. (devita.txt lines 237631 and 237650). Six adjuvant cycles reflect the pooled-analysis finding that treatment beyond six cycles does not improve overall survival (cns.txt Discussion near line 8161 and footnote ii cns.txt line 1177). PCP prophylaxis during the concurrent lymphopenic phase is grounded in DeVita 12th ed. (devita.txt lines 237632 to 237637). MGMT promoter methylation is captured as prognostic and predictive, not restrictive; IDH-wildtype is per the WHO 2021 CNS classification of glioblastoma. No dose field remains VERIFY. No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

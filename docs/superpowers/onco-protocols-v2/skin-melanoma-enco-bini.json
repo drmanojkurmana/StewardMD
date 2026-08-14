@@ -1,0 +1,84 @@
+{
+  "id": "skin-melanoma-enco-bini",
+  "name": "Encorafenib + Binimetinib (BRAF/MEK inhibitor, BRAF V600 melanoma)",
+  "disease": "Cutaneous melanoma",
+  "diseaseId": "cutaneous_melanoma",
+  "histology": "cutaneous melanoma",
+  "stage": ["III (unresectable)", "IV"],
+  "biomarkers": {
+    "BRAF": "V600 mutation positive",
+    "note": "BRAF/MEK inhibitor combination REQUIRES a BRAF V600 activating mutation. Studied in unresectable or metastatic BRAF V600-mutant melanoma (COLUMBUS: treatment-naive or progressed on/after first-line immunotherapy). Do NOT use in BRAF wild-type disease. Per Standard Guidelines (NCCN), Melanoma: Cutaneous."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "BRAF/MEK-targeted therapy for unresectable or metastatic BRAF V600-mutant melanoma (COLUMBUS: first-line, or after prior first-line immunotherapy)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRAF V600 activating mutation present", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, Encorafenib/Binimetinib if BRAF V600 (lines 2530, 2655, 2693); Table 19 COLUMBUS (line 8566)" },
+    { "criterion": "stage/setting", "requirement": "unresectable stage III or stage IV (metastatic) disease", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma (COLUMBUS, unresectable AJCC 7th ed stage IIIB-IV), MS-63 to MS-64" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "encorafenib",
+        "name": "Encorafenib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma, COLUMBUS row (line 8566): treatment arm named 'Encor + bini'; mg dose NOT printed in the provided source", "evidenceStatus": "current" },
+        "notes": "DOSE = VERIFY. The COLUMBUS regimen (encorafenib + binimetinib) is named in Standard Guidelines (NCCN) v2.2026, Table 19 (MS-64, line 8566), but the encorafenib mg dose is NOT printed in the provided source extract and no DeVita/Harrison source was available. The regimen was NOT dose-grounded; per fail-closed rules the dose is left as VERIFY rather than invented. The commonly cited COLUMBUS/label value (encorafenib 450 mg PO once daily) MUST be confirmed against a cited source before this field is populated and before status can advance beyond DRAFT. Continuous oral dosing represented as days 1 to 28 of a 28-day scheduling cycle."
+      },
+      {
+        "id": "binimetinib",
+        "name": "Binimetinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma, COLUMBUS row (line 8566): treatment arm named 'Encor + bini'; mg dose NOT printed in the provided source", "evidenceStatus": "current" },
+        "notes": "DOSE = VERIFY. The COLUMBUS regimen (encorafenib + binimetinib) is named in Standard Guidelines (NCCN) v2.2026, Table 19 (MS-64, line 8566), but the binimetinib mg dose is NOT printed in the provided source extract and no DeVita/Harrison source was available. The regimen was NOT dose-grounded; per fail-closed rules the dose is left as VERIFY rather than invented. The commonly cited COLUMBUS/label value (binimetinib 45 mg PO twice daily) MUST be confirmed against a cited source before this field is populated and before status can advance beyond DRAFT. Continuous oral dosing represented as days 1 to 28 of a 28-day scheduling cycle."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Baseline and periodic LVEF (echocardiogram) for MEK-inhibitor cardiomyopathy; ophthalmologic assessment for serous retinopathy/retinal vein occlusion; dermatologic surveillance for secondary cutaneous malignancy.",
+      "Monitor for MEK/BRAF-inhibitor toxicities (rash, elevated CK/myopathy, hepatotoxicity, venous thromboembolism) per Standard Guidelines (NCCN) v2.2026, Table 21 (MS-66 onward). Encorafenib/binimetinib is generally associated with a lower rate of pyrexia than dabrafenib/trametinib."
+    ]
+  },
+  "monitoring": [
+    "LVEF (echocardiogram) at baseline and periodically",
+    "ophthalmologic assessment (serous retinopathy, retinal vein occlusion)",
+    "dermatologic skin examination (secondary cutaneous malignancy)",
+    "LFTs, creatine kinase, CBC; clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["cardiac (LVEF)", "liver", "creatine kinase", "ophthalmologic", "BRAF V600 mutation confirmed", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "decline in LVEF, serous retinopathy, or grade 3 to 4 toxicity", "drug": "encorafenib + binimetinib", "action": "hold/reduce", "text": "Hold or reduce per labeling for symptomatic/significant LVEF decline, retinal events, elevated CK/myopathy, or grade 3 to 4 toxicity; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "BRAF/MEK-targeted therapy framework for BRAF V600-mutant melanoma (encorafenib/binimetinib, COLUMBUS); mg doses not printed in the provided source", "evidenceStatus": "current" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma, COLUMBUS (Encor + bini named, mg doses NOT printed), MS-63 to MS-64 (line 8566); biomarker/setting lines 2530, 2655, 2693", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for encorafenib plus binimetinib BRAF/MEK-inhibitor combination therapy in BRAF V600 mutation-positive unresectable or metastatic cutaneous melanoma (COLUMBUS). The regimen is named in Standard Guidelines (NCCN), Melanoma: Cutaneous v2.2026, Table 19 (MS-64), but the specific mg doses for encorafenib and binimetinib are NOT printed in the provided source extract, and no DeVita or Harrison source was available for this task. Per the fail-closed rule, both drug doses are set to the literal VERIFY (recorded in verifyFields) rather than invented; the commonly cited COLUMBUS/label values (encorafenib 450 mg once daily, binimetinib 45 mg twice daily) are noted in-drug only as values requiring confirmation against a cited source. This combination requires a confirmed BRAF V600 mutation and must not be used in BRAF wild-type disease. The unresolved VERIFY fields keep this protocol at DRAFT and block status ACTIVE until doses are sourced. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

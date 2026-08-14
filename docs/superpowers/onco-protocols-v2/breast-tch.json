@@ -1,0 +1,143 @@
+{
+  "id": "breast-tch",
+  "name": "TCH (DOCEtaxel / CARBOplatin / Trastuzumab)",
+  "disease": "Breast cancer",
+  "diseaseId": "breast_cancer",
+  "histology": "invasive breast carcinoma (histology-agnostic; includes invasive ductal carcinoma (IDC) and invasive lobular carcinoma (ILC))",
+  "stage": ["I (high-risk)", "II", "III"],
+  "biomarkers": {
+    "HER2": "positive",
+    "HR": "tested",
+    "note": "HER2-directed regimen: requires HER2-positive disease (IHC 3+ or ISH-amplified). HR (ER/PR) status is tested to guide the addition of endocrine therapy, not the HER2 backbone. Anthracycline-free HER2 regimen (no doxorubicin), historically preferred where cardiac risk is a concern (BCIRG-006). Per Standard Guidelines (NCCN), Invasive Breast Cancer, Preoperative/Adjuvant Therapy (BINV-M)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant"],
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "adjuvant or neoadjuvant HER2-directed chemotherapy for early-stage HER2-positive breast cancer; not line-scoped",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "HER2-positive (IHC 3+ or ISH-amplified)", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 3 of 10 (HER2-Positive preoperative/adjuvant therapy)" },
+    { "criterion": "cardiacFunction", "requirement": "adequate left ventricular ejection fraction (LVEF); evaluate LVEF before and during HER2-targeted therapy", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "locator": "v6.2026, BINV-M 1 of 10, For Those Receiving HER2-Targeted Therapy" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "docetaxel",
+        "name": "DOCEtaxel",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 7 of 10, TCH (DOCEtaxel/CARBOplatin + Trastuzumab)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. DOCEtaxel 75 mg/m2 IV day 1, cycled every 21 days for 6 cycles. Tall-man per ISMP."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": 6,
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 7 of 10, TCH (DOCEtaxel/CARBOplatin + Trastuzumab)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. CARBOplatin AUC 6 IV day 1 (Calvert-formula target AUC, not mg/m2), cycled every 21 days for 6 cycles. Tall-man per ISMP."
+      },
+      {
+        "id": "trastuzumab-loading-weekly",
+        "name": "Trastuzumab (loading, weekly schedule)",
+        "basis": "mgkg",
+        "dosePerUnit": 4,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 7 of 10, TCH", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 4 mg/kg IV week 1 (loading dose, weekly schedule)."
+      },
+      {
+        "id": "trastuzumab-weekly-maintenance",
+        "name": "Trastuzumab (weekly maintenance)",
+        "basis": "mgkg",
+        "dosePerUnit": 2,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 7 of 10, TCH", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 2 mg/kg IV weekly for 17 weeks, following the loading dose."
+      },
+      {
+        "id": "trastuzumab-q3wk-maintenance",
+        "name": "Trastuzumab (every-3-week maintenance)",
+        "basis": "mgkg",
+        "dosePerUnit": 6,
+        "unit": "mg/kg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Invasive Breast Cancer", "version": "6.2026", "date": null, "locator": "BINV-M 7 of 10, TCH", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v6.2026, BINV-M 7 of 10. Trastuzumab 6 mg/kg IV cycled every 21 days to complete 1 year of therapy. Alternative all-every-3-week schedule (source-stated): Trastuzumab 8 mg/kg IV week 1 (loading) followed by 6 mg/kg IV every 21 days to complete 1 year."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "DOCEtaxel premedication", "notes": "corticosteroid premedication per docetaxel labeling; give before docetaxel. Confirm exact schedule against institutional order set." }
+    ],
+    "supportiveCare": [
+      "G-CSF / myeloid growth factor support: all cycles are given with myeloid growth factor support per Standard Guidelines (NCCN) v6.2026, BINV-M dosing footnote n.",
+      "Antiemetics: DOCEtaxel plus CARBOplatin combination; provide prophylaxis per emetogenicity tier (verify exact NCCN antiemesis tier).",
+      "Cardiac: evaluate LVEF before and during trastuzumab (FDA label recommends LVEF prior to initiation and every 3 months during therapy) per BINV-M 1 of 10."
+    ]
+  },
+  "monitoring": [
+    "LVEF at baseline and periodically during trastuzumab (every 3 months per FDA label / BINV-M 1 of 10)",
+    "CBC before each cycle",
+    "renal function before each cycle (CARBOplatin)",
+    "peripheral neuropathy assessment (DOCEtaxel)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "LVEF", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "significant decline in LVEF or symptomatic heart failure", "drug": "trastuzumab", "action": "hold/review", "text": "Hold trastuzumab and obtain clinical review per LVEF monitoring guidance (BINV-M 1 of 10). Physician decides on continuation." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "lines 22102 to 22107 (HER2/ERBB2-amplified breast cancer therapy options: trastuzumab, trastuzumab + chemo, trastuzumab + pertuzumab + chemo, T-DM1, T-DXd)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Invasive Breast Cancer",
+        "version": "6.2026",
+        "date": null,
+        "locator": "Dosing: Preoperative/Adjuvant Therapy Regimens, HER2-Positive, TCH (DOCEtaxel/CARBOplatin + Trastuzumab), BINV-M 7 of 10; setting/eligibility BINV-M 3 of 10 and BINV-M 1 of 10",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the breast HER2-directed regimen TCH. Serves subtype #4 (HER2-positive), histology-agnostic across invasive ductal (#1) and invasive lobular (#2) carcinoma. DeVita 12th ed. names the HER2-positive breast regimen framework (lines 22102 to 22107) but does not tabulate per-drug doses for TCH; therefore every numeric dose here is sourced to Standard Guidelines (NCCN), Invasive Breast Cancer v6.2026, BINV-M 7 of 10, with locators recorded per drug. DOCEtaxel 75 mg/m2 and CARBOplatin AUC 6 on day 1, every 21 days for 6 cycles; trastuzumab 4 mg/kg loading then 2 mg/kg weekly for 17 weeks then 6 mg/kg every 21 days to complete 1 year (alternative all-every-3-week schedule 8 mg/kg loading then 6 mg/kg every 21 days is source-stated). ISMP tall-man applied (DOCEtaxel, CARBOplatin). CARBOplatin dosed by target AUC (basis auc, unit AUC). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

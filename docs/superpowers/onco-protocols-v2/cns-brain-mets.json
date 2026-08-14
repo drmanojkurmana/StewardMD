@@ -1,0 +1,106 @@
+{
+  "id": "cns-brain-mets",
+  "name": "Brain metastases: local therapy (SRS or surgery) with primary-directed systemic therapy (systemic dose VERIFY)",
+  "disease": "Brain metastases",
+  "diseaseId": "brain_metastases",
+  "histology": "metastatic carcinoma to the brain (most commonly from lung and breast cancer and melanoma)",
+  "stage": [],
+  "biomarkers": {
+    "targetableAlterations": "tested (systemic therapy is directed by the primary tumor and its targetable alterations, for example EGFR, ALK, ROS1, BRAF, HER2, or immunotherapy eligibility)",
+    "note": "This protocol is a framework: local control is by stereotactic radiosurgery (SRS) or surgery, and systemic therapy is chosen by the primary tumor histology and its targetable alterations rather than by a single fixed regimen. Per Standard Guidelines (NCCN), CNS Cancers, Limited Brain Metastases and Brain Metastases: Systemic Therapy; and Harrison 22nd ed."
+  },
+  "treatmentSetting": "metastatic (local CNS control plus primary-directed systemic therapy)",
+  "treatmentIntent": ["palliative", "curative"],
+  "lineOfTherapy": "directed by the primary tumor and prior therapy; not line-scoped at the CNS level",
+  "eligibilityCriteria": [
+    { "criterion": "localTherapy", "requirement": "SRS is preferred for a limited number of metastases (approximately one to four) with stable or treatable systemic disease; a single metastasis with controlled extracranial disease may have surgical resection followed by SRS to the cavity", "source": "Harrison's Principles of Internal Medicine, 22nd ed.", "locator": "harrison.txt lines 85541 to 85552 (surgery then SRS for single met; SRS for one to four mets)" },
+    { "criterion": "systemicTherapy", "requirement": "systemic therapy directed by the primary tumor and its targetable alterations", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "Brain Metastases: Systemic Therapy (BRAIN METS-A), cns.txt lines 118 and 313; targeted agents and checkpoint inhibitors are active in brain metastases (harrison.txt line 85560)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "systemic-therapy",
+        "name": "Primary-directed systemic therapy (not dose-established here)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "VERIFY",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Brain Metastases: Systemic Therapy (BRAIN METS-A), cns.txt lines 118 and 313; no single systemic regimen or dose is printed at the CNS level (it is directed by the primary tumor)",
+          "evidenceStatus": "current"
+        },
+        "notes": "Systemic therapy is selected by the primary tumor and its targetable alterations (for example EGFR/ALK/ROS1/BRAF-directed agents, HER2-directed therapy, or checkpoint inhibitors), so no single CNS-level dose exists. basis, dose, unit, and route are VERIFY and must be resolved from the primary-tumor protocol. This entry captures the framework only."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "dexamethasone is the best initial treatment for symptomatic brain metastases (Harrison 22nd ed., harrison.txt line 85544); minimize glucocorticoids when a checkpoint inhibitor is planned, as steroids may blunt the antitumor response",
+      "bevacizumab may be considered for symptomatic edema in patients who cannot wean off steroids or who are on immunotherapy (harrison.txt line 85547)",
+      "seizure prophylaxis only if seizures have occurred (no routine primary prophylaxis)"
+    ]
+  },
+  "monitoring": [
+    "gadolinium-enhanced MRI of brain for local control and new lesions (more sensitive than CT for small and posterior-fossa lesions)",
+    "neurologic status and signs of increased intracranial pressure",
+    "systemic restaging and toxicity monitoring per the primary-tumor systemic regimen (VERIFY)"
+  ],
+  "clearanceChecks": ["local therapy plan (SRS versus surgery)", "extracranial disease control", "primary-tumor systemic regimen selection"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "Harrison's Principles of Internal Medicine, 22nd ed.",
+        "version": "22nd ed",
+        "date": null,
+        "locator": "harrison.txt lines 85514 to 85560 (epidemiology, SRS versus WBRT, surgery then SRS for single met, dexamethasone, targeted/checkpoint activity in brain metastases)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Limited Brain Metastases (LTD-1), SRS preferred (cns.txt lines 3319 and 3387); Brain Metastases: Systemic Therapy (BRAIN METS-A), cns.txt lines 118 and 313; SRS plus tumor-treating fields for NSCLC without targetable alterations (cns.txt line 311)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[0].route",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "This is a framework protocol for brain metastases: local control by stereotactic radiosurgery (SRS, preferred for a limited number of lesions) or surgery followed by cavity SRS, plus systemic therapy directed by the primary tumor and its targetable alterations. The framework is grounded in Harrison 22nd ed. (harrison.txt lines 85514 to 85560) and Standard Guidelines (NCCN), CNS Cancers, Limited Brain Metastases and Brain Metastases: Systemic Therapy (cns.txt lines 3319, 3387, 118, 313). Because systemic therapy is chosen by the primary tumor rather than a single CNS-level regimen, the systemic-therapy basis, dose, unit, route, cycle length, and cycle count are the literal VERIFY (listed in verifyFields) and were NOT invented. Dexamethasone for symptomatic edema is captured as supportive care per Harrison (harrison.txt line 85544). No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

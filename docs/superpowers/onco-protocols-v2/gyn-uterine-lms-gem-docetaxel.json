@@ -1,0 +1,98 @@
+{
+  "id": "gyn-uterine-lms-gem-docetaxel",
+  "name": "Gemcitabine + Docetaxel for Uterine Leiomyosarcoma",
+  "disease": "Uterine leiomyosarcoma (uterine sarcoma)",
+  "diseaseId": "leiomyosarcoma",
+  "histology": "uterine leiomyosarcoma (uLMS)",
+  "stage": ["advanced", "metastatic", "recurrent"],
+  "biomarkers": {
+    "note": "The gemcitabine plus docetaxel doublet is a cytotoxic backbone for uterine leiomyosarcoma and is not biomarker restricted. Per Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, Systemic Therapy for Uterine Sarcoma (UTSARC-C)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "traditional first line combination for advanced, metastatic, or recurrent uterine leiomyosarcoma",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "advanced, metastatic, or recurrent uterine leiomyosarcoma", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "locator": "v3.2026, Systemic Therapy for Uterine Sarcoma, Docetaxel/Gemcitabine (UTSARC-C)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 900,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV over 90 min",
+        "infusionDuration": "90 min",
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 176028 (Gemcitabine 900 mg/m2 over 90 min on days 1 and 8 + docetaxel 100 mg/m2 on day 8 with G-CSF q 21 d, Hensley et al.); narrative line 175829", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 176028 (Hensley regimen) and narrative line 175829. Gemcitabine 900 mg/m2 IV over 90 minutes on days 1 and 8, every 21 days, with growth factor support."
+      },
+      {
+        "id": "docetaxel",
+        "name": "DOCEtaxel",
+        "basis": "bsa",
+        "dosePerUnit": 100,
+        "unit": "mg/m2",
+        "days": [8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 176031 (docetaxel 100 mg/m2 on day 8 with G-CSF q 21 d, Hensley et al.); reduced dose alternative line 175835 (docetaxel 75 mg/m2)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 176031 (Hensley regimen). DOCEtaxel 100 mg/m2 IV on day 8, every 21 days, with growth factor support. Source stated alternative: DOCEtaxel reduced to 75 mg/m2 (line 175835), with further reductions for patients with prior pelvic radiotherapy. Requires corticosteroid premedication per docetaxel labeling. Tall man per ISMP."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "the Hensley gemcitabine/docetaxel regimen does not print a fixed cycle count; continue per response and tolerance, physician determined (the 6-cycle figure in the GeDDiS trial used a lower gemcitabine dose)",
+    "premedications": [
+      { "name": "DOCEtaxel premedication", "notes": "corticosteroid premedication per docetaxel labeling to reduce fluid retention and hypersensitivity." }
+    ],
+    "supportiveCare": [
+      "G-CSF / myeloid growth factor support is required for this doublet per the source (DeVita line 176028, with G-CSF).",
+      "antiemetics per emetogenicity tier.",
+      "monitor for the occasional severe pulmonary toxicity noted with this combination (DeVita line 175823)."
+    ]
+  },
+  "monitoring": [
+    "CBC before each dose (days 1 and 8)",
+    "liver function before each cycle",
+    "pulmonary symptom assessment (rare severe pulmonary toxicity)",
+    "fluid retention / edema assessment for DOCEtaxel"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "pulmonary status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "prior pelvic radiotherapy", "drug": "gemcitabine and docetaxel", "action": "reduce", "text": "Dose reductions of both drugs for patients with prior pelvic radiotherapy per the source (DeVita line 175835)." },
+    { "condition": "ANC < 1500 or platelets < 100k on day 1 or day 8", "action": "delay/hold", "text": "Hold or delay per institutional protocol; physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 176028 to 176031 (Gemcitabine 900 mg/m2 over 90 min days 1 and 8 + docetaxel 100 mg/m2 day 8 with G-CSF q 21 d, Hensley et al.); narrative lines 175823 to 175842 (traditional front line regimen; reduced docetaxel 75 mg/m2 alternative at 175835)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Uterine Neoplasms", "version": "3.2026", "date": "2026-06-16", "locator": "Systemic Therapy for Uterine Sarcoma, Docetaxel/Gemcitabine (UTSARC-C 1 of 3)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "docetaxelDose",
+        "sources": [
+          { "name": "DeVita 12th ed. (core), Hensley original", "version": "12th ed", "value": "docetaxel 100 mg/m2 day 8 (line 176031)" },
+          { "name": "DeVita 12th ed. (core), later trials", "version": "12th ed", "value": "docetaxel reduced to 75 mg/m2 (line 175835)" }
+        ],
+        "note": "The same DeVita source reports the original Hensley docetaxel dose of 100 mg/m2 on day 8 and a later reduced dose of 75 mg/m2 used in subsequent trials, with further reductions for prior pelvic radiotherapy. Authored value kept at 100 mg/m2 (original); 75 mg/m2 is a documented alternative. Selection left to clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for gemcitabine plus docetaxel in uterine leiomyosarcoma (StewardMD reference disease leiomyosarcoma, uterine sarcoma subtype group #51). Doses are grounded to DeVita 12th ed. lines 176028 to 176031 (Hensley regimen: Gemcitabine 900 mg/m2 IV over 90 minutes on days 1 and 8 plus DOCEtaxel 100 mg/m2 on day 8, with G-CSF, every 21 days); the narrative at lines 175823 to 175842 identifies this as the traditional front line uLMS regimen and records a reduced docetaxel dose of 75 mg/m2 in later trials (line 175835), captured as a divergence. Regimen identity is cross referenced to Standard Guidelines (NCCN), Uterine Neoplasms v3.2026, Systemic Therapy for Uterine Sarcoma (UTSARC-C), which lists Docetaxel/Gemcitabine without printing the mg. G-CSF support is source required. ISMP tall man applied (DOCEtaxel). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

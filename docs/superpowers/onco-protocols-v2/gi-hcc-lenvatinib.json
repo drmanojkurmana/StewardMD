@@ -1,0 +1,87 @@
+{
+  "id": "gi-hcc-lenvatinib",
+  "name": "Lenvatinib (single-agent oral multikinase inhibitor; REFLECT)",
+  "disease": "Hepatocellular carcinoma",
+  "diseaseId": "hepatocellular_carcinoma",
+  "histology": "hepatocellular carcinoma",
+  "stage": ["advanced/unresectable", "metastatic"],
+  "biomarkers": {
+    "note": "No predictive biomarker gates lenvatinib in HCC. Per Standard Guidelines (NCCN), Hepatocellular Carcinoma v2.2026, Principles of Biomarker Testing (HCC-J), molecular testing (MSI/dMMR, RET fusion, NTRK fusion) identifies subsequent-line targeted or immunotherapy options and does not select the first-line multikinase inhibitor."
+  },
+  "treatmentSetting": "advanced/unresectable or metastatic (systemic-therapy setting)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line systemic therapy for advanced or unresectable HCC (category 1, Other Recommended); also usable in subsequent-line if not previously used",
+  "eligibilityCriteria": [
+    { "criterion": "liverFunction", "requirement": "preserved liver function (Child-Pugh A). The REFLECT first-line trial (lenvatinib vs sorafenib) enrolled patients with preserved liver function; therapies may have limited safety data for Child-Pugh class B or C.", "source": "DeVita, Cancer PPO 12th ed., Ch. 36; Standard Guidelines (NCCN), Hepatocellular Carcinoma", "locator": "DeVita lines 111396 to 111410 (lenvatinib first-line, REFLECT, non-inferior OS to sorafenib) and lines 111720 to 111721 (preserved liver function); NCCN v2.2026 Principles of Systemic Therapy (HCC-I 1 of 2) footnotes c and d" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lenvatinib",
+        "name": "Lenvatinib",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Lenvatinib category 1 first-line Other Recommended; references 4, 5 (Kudo/Alsina, REFLECT). Per-mg dose not printed.", "evidenceStatus": "current" },
+        "notes": "VERIFY: lenvatinib is a continuous once-daily oral multikinase inhibitor (represented as days 1 to 28 continuous). The provided sources establish first-line lenvatinib in HCC (DeVita lines 111396 to 111410; NCCN HCC-I 1 of 2) but do NOT print the per-mg dose. The REFLECT weight-band dose (commonly 8 mg once daily for body weight <60 kg vs 12 mg once daily for >=60 kg) is NOT present in the provided source extract and must NOT be inferred; dosePerUnit, unit, and basis are set to VERIFY pending a cited source. If populated as a flat weight-band oral dose, use basis flat."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Hand-foot skin reaction: monitor and manage; dose-modify per labeling (TKI class effect).",
+      "Blood pressure monitoring (VEGF-pathway inhibitor).",
+      "Liver function monitoring."
+    ]
+  },
+  "monitoring": [
+    "Blood pressure at baseline and during therapy (VEGF-pathway TKI)",
+    "Liver function tests",
+    "Hand-foot skin reaction assessment",
+    "Urine protein/proteinuria",
+    "Clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "proteinuria/renal", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "hypertension, proteinuria, or hand-foot skin reaction", "drug": "lenvatinib", "action": "hold/reduce", "text": "Hold or reduce per labeling once a concrete starting dose is VERIFY-ed; obtain clinical review. Weight-band starting dose must be confirmed against a cited source before use." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "locator": "Ch. 36 Cancer of the Liver, lines 111396 to 111410 (lenvatinib first-line, targets VEGFR1-3/FGFR1-4/PDGFR/RET/c-KIT, REFLECT non-inferior OS vs sorafenib). No per-mg HCC dose printed.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Principles of Systemic Therapy (HCC-I 1 of 2): Lenvatinib (category 1) first-line Other Recommended (references 4, 5 Kudo/Alsina, REFLECT). The guideline lists the regimen by name and prints no per-mg dose.",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [
+    "regimen.drugs.lenvatinib.basis",
+    "regimen.drugs.lenvatinib.dosePerUnit",
+    "regimen.drugs.lenvatinib.unit"
+  ],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent lenvatinib in advanced or unresectable hepatocellular carcinoma (#22). DeVita 12th ed. Ch. 36 (lines 111396 to 111410) and Standard Guidelines (NCCN) HCC v2.2026 Principles of Systemic Therapy (HCC-I 1 of 2) establish first-line lenvatinib (category 1, Other Recommended, REFLECT) but print NO per-mg dose. Because lenvatinib is weight-band dosed and the specific HCC starting dose (commonly cited as 8 mg once daily for body weight <60 kg vs 12 mg once daily for >=60 kg) is not present in the provided source extract, lenvatinib.dosePerUnit, unit, and basis are set to VERIFY and must NOT be inferred; the weight-band split must be confirmed against a cited source before populating. The continuous once-daily oral schedule is modeled as days 1 to 28 of a 28-day accounting cycle with cycles null (until progression). Eligibility captures preserved liver function (Child-Pugh A) per DeVita lines 111720 to 111721 and HCC-I caution footnotes c and d. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

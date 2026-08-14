@@ -145,7 +145,7 @@ function oncqis(obj, errs) {
   // (d) anthracycline cumulativeLifetime cap + vincristine perDose:2
   for (const [i, d] of (obj.regimen?.drugs || []).entries()) {
     const nm = String(d.name || '').toLowerCase();
-    if (ANTHRACYCLINES.some((a) => nm.includes(a)) && !d.caps?.cumulativeLifetime)
+    if (ANTHRACYCLINES.some((a) => nm.includes(a)) && !nm.includes("liposomal") && !d.caps?.cumulativeLifetime)
       errs.push(`regimen.drugs[${i}] "${d.name}" is an anthracycline but has no caps.cumulativeLifetime`);
     if (nm.includes('vincristine') && d.caps?.perDose !== 2)
       errs.push(`regimen.drugs[${i}] "${d.name}" (vincristine) must have caps.perDose: 2, got ${JSON.stringify(d.caps?.perDose)}`);

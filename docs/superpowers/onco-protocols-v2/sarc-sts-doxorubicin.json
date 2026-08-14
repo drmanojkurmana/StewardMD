@@ -1,0 +1,76 @@
+{
+  "id": "sarc-sts-doxorubicin",
+  "name": "Single-Agent Doxorubicin for Soft Tissue Sarcoma",
+  "disease": "Soft tissue sarcoma",
+  "diseaseId": "soft_tissue_sarcoma",
+  "histology": "soft tissue sarcoma (histology-agnostic anthracycline backbone across the common adult subtypes)",
+  "stage": ["advanced", "metastatic", "unresectable"],
+  "biomarkers": {
+    "note": "Single-agent doxorubicin is a cytotoxic anthracycline backbone for soft tissue sarcoma and is not biomarker-restricted. Histology (rather than a molecular biomarker) guides subtype-specific alternatives. Per Standard Guidelines (NCCN), Soft Tissue Sarcoma v5.2026, Systemic Therapy Agents and Regimens with Activity in Soft Tissue Sarcoma Subtypes."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "first-line systemic option (single-agent or as the backbone of doxorubicin-based combinations) for advanced, metastatic, or unresectable soft tissue sarcoma, and used in the neoadjuvant/adjuvant setting for high-risk resectable disease",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "advanced, metastatic, or unresectable soft tissue sarcoma of a doxorubicin-responsive histology", "source": "Standard Guidelines (NCCN), Soft Tissue Sarcoma", "locator": "v5.2026, Systemic Therapy Agents and Regimens (Doxorubicin, SARC-F)" },
+    { "criterion": "cardiac", "requirement": "adequate baseline cardiac function (LVEF) before anthracycline exposure", "source": "DeVita, Cancer PPO 12th ed.", "locator": "anthracycline cardiotoxicity and cumulative-dose monitoring" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "doxorubicin",
+        "name": "DOXOrubicin",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 175842 (GeDDiS trial: six cycles of single-agent doxorubicin at 75 mg/m2 every 3 weeks)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 175842. DOXOrubicin 75 mg/m2 IV on day 1 every 21 days (GeDDiS trial single-agent doxorubicin arm, the standard first-line comparator in advanced soft tissue sarcoma). Anthracycline cumulative lifetime cap: warn 450, hard 550 mg/m2 (conventional anthracycline ceiling, not a value from the source subtype table). ISMP tall-man applied (DOXOrubicin). Track cumulative dose; obtain baseline and periodic LVEF. Doxorubicin-based COMBINATIONS (for example AIM, doxorubicin plus ifosfamide/mesna) and the histology-directed alternative gemcitabine plus docetaxel are listed by the guideline; see supportiveCare/notes for the sourced gemcitabine/docetaxel dosing."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "six cycles were used in the referenced GeDDiS trial; continue per response and the cumulative anthracycline ceiling, physician determined",
+    "premedications": [
+      { "name": "Antiemetic prophylaxis", "notes": "doxorubicin 75 mg/m2 is highly-to-moderately emetogenic (regimen-dependent); give prophylaxis per emetogenicity tier on the day of treatment" }
+    ],
+    "supportiveCare": [
+      "antiemetics: doxorubicin single-agent at 60 to 75 mg/m2 is on the moderate-to-high emetic-risk boundary; prophylaxis per emetogenicity tier.",
+      "cardiac surveillance: baseline LVEF and cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2).",
+      "G-CSF: assess febrile-neutropenia risk; add primary prophylaxis for higher-risk patients or dose-dense doxorubicin-based combinations.",
+      "SOURCED ALTERNATIVE (gemcitabine plus docetaxel): gemcitabine 900 mg/m2 IV over 90 minutes on days 1 and 8 plus docetaxel 100 mg/m2 IV on day 8 with G-CSF, every 21 days (DeVita 12th ed., line 176028, Hensley regimen, Table 50.6); a fully-sourced histology-directed alternative (for example for leiomyosarcoma) modeled here as a note, not as a separate combination in this single-agent protocol."
+    ]
+  },
+  "monitoring": [
+    "CBC before each cycle",
+    "cumulative anthracycline dose tracking (DOXOrubicin)",
+    "cardiac function (LVEF) at baseline and as clinically indicated",
+    "liver function before each cycle"
+  ],
+  "clearanceChecks": ["CBC/platelets", "cardiac (LVEF)", "cumulative anthracycline dose", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "cumulative doxorubicin approaching 450 mg/m2 (warn) or 550 mg/m2 (hard)", "drug": "doxorubicin", "action": "review/stop", "text": "Warn at 450 mg/m2 and stop at the 550 mg/m2 hard cap; reassess cardiac function; physician decides on continuation." },
+    { "condition": "decline in LVEF or clinical cardiotoxicity", "drug": "doxorubicin", "action": "hold", "text": "Hold and obtain cardiology review before further anthracycline." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 175842 (GeDDiS: single-agent doxorubicin 75 mg/m2 every 3 weeks); line 176028 (gemcitabine 900 mg/m2 days 1 and 8 + docetaxel 100 mg/m2 day 8 with G-CSF q21d, Hensley, Table 50.6)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Soft Tissue Sarcoma", "version": "5.2026", "date": "2026-07-23", "locator": "Systemic Therapy Agents and Regimens with Activity in Soft Tissue Sarcoma Subtypes (Doxorubicin single-agent and doxorubicin-based combinations such as AIM; gemcitabine/docetaxel as a histology-directed option), SARC-F", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent doxorubicin in soft tissue sarcoma (StewardMD reference disease soft_tissue_sarcoma; histology-agnostic anthracycline backbone). The dose (DOXOrubicin 75 mg/m2 IV every 21 days) is grounded to DeVita 12th ed. line 175842 (GeDDiS trial single-agent doxorubicin arm, the standard first-line comparator in advanced soft tissue sarcoma). Regimen identity is cross-referenced to Standard Guidelines (NCCN), Soft Tissue Sarcoma v5.2026, Systemic Therapy Agents and Regimens (SARC-F), which lists doxorubicin and doxorubicin-based combinations but does not print the milligram dose. The anthracycline cumulative lifetime cap (warn 450, hard 550 mg/m2) is the conventional anthracycline ceiling, not a value from the subtype table. A fully-sourced histology-directed alternative (gemcitabine 900 mg/m2 days 1 and 8 plus docetaxel 100 mg/m2 day 8 with G-CSF, q21d; DeVita 12th ed. line 176028, Hensley) is documented as a note rather than modeled as a separate combination in this single-agent protocol. ISMP tall-man applied (DOXOrubicin). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

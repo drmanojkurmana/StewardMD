@@ -1,0 +1,86 @@
+{
+  "id": "gu-uro-gem-carboplatin",
+  "name": "Gemcitabine + Carboplatin (cisplatin-ineligible)",
+  "disease": "Urothelial carcinoma",
+  "diseaseId": "bladder_cancer",
+  "histology": "urothelial carcinoma",
+  "stage": ["IV", "locally advanced", "metastatic"],
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic gemcitabine/carboplatin backbone is not biomarker-restricted. First-line option for cisplatin-INELIGIBLE patients with locally advanced or metastatic urothelial carcinoma (bladder #57 and upper-tract #58). Carboplatin must NOT be substituted for cisplatin in the perioperative (curative) setting per Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G). Often followed by avelumab switch-maintenance."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for locally advanced or metastatic urothelial carcinoma in cisplatin-ineligible patients",
+  "eligibilityCriteria": [
+    { "criterion": "cisplatinIneligibility", "requirement": "cisplatin-ineligible (e.g., impaired renal function or comorbidity)", "source": "DeVita, Cancer PPO 12th ed.", "locator": "line 155270 (EORTC gemcitabine/carboplatin recommended as standard of care for patients unfit for cisplatin-based therapy)" },
+    { "criterion": "settingRestriction", "requirement": "not for perioperative (curative) use - carboplatin must not be substituted for cisplatin perioperatively", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G (Carboplatin should not be substituted for Cisplatin in the perioperative bladder cancer setting)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "gemcitabine",
+        "name": "Gemcitabine",
+        "basis": "bsa",
+        "dosePerUnit": 1000,
+        "unit": "mg/m2",
+        "days": [1, 8],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 17414 (gemcitabine bladder cancer 1,000 mg/m2 IV)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 17414: gemcitabine 1000 mg/m2 IV in bladder cancer (the printed bladder gemcitabine dose is days 1, 8, 15 for the cisplatin doublet). In the carboplatin doublet gemcitabine is conventionally given on days 1 and 8 of a 21-day cycle; the day-1-and-8 pattern for the carboplatin doublet is not separately printed in the provided sources, so the dose (1000 mg/m2) is grounded but the exact carbo-doublet day schedule should be confirmed against a cited source at review."
+      },
+      {
+        "id": "carboplatin",
+        "name": "CARBOplatin",
+        "basis": "auc",
+        "dosePerUnit": "VERIFY",
+        "unit": "AUC",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "VERIFY", "version": null, "date": null, "locator": "VERIFY - the carboplatin target AUC used with gemcitabine (intended AUC 4.5 per EORTC 30986, or AUC 5) is NOT printed in the provided licensed sources. DeVita line 155270 recommends gemcitabine/carboplatin for cisplatin-unfit patients but does not print the AUC. Do not infer.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: carboplatin dosed to a target AUC via the Calvert formula. The target AUC used with gemcitabine (intended AUC 4.5 in EORTC 30986, or AUC 5) is NOT dose-grounded in the provided sources, so dosePerUnit is set to VERIFY (never invented). ISMP tall-man (CARBOplatin)."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      { "name": "Antiemetics", "notes": "carboplatin is moderately emetogenic - moderate-emetic-risk antiemetic prophylaxis." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: moderate emetic risk (carboplatin-based).",
+      "CBC before each dose (carboplatin thrombocytopenia and gemcitabine myelosuppression are the dominant toxicities).",
+      "Renal function used to compute the carboplatin AUC dose (Calvert formula)."
+    ]
+  },
+  "monitoring": [
+    "CBC/platelets before each dose (carboplatin thrombocytopenia, gemcitabine myelosuppression)",
+    "renal function (used for AUC dosing)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3-4 thrombocytopenia", "drug": "carboplatin", "action": "hold/reduce", "text": "Hold and reduce carboplatin per protocol for grade 3-4 thrombocytopenia; obtain clinical review. Dose modification cannot be finalized until the target AUC (VERIFY) is resolved." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 17414 (gemcitabine bladder 1,000 mg/m2); line 155270 (EORTC De Santis: gemcitabine/carboplatin recommended for cisplatin-unfit patients - no AUC printed)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bladder Cancer", "version": "3.2026", "date": null, "locator": "Principles of Systemic Therapy (BL-G): first-line cisplatin-ineligible Carboplatin/Gemcitabine followed by Avelumab maintenance (line ~2168); carboplatin must not be substituted for cisplatin perioperatively. mg/AUC dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[carboplatin].dosePerUnit", "regimen.drugs[carboplatin].provenance.source", "regimen.drugs[carboplatin].provenance.locator"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for gemcitabine + carboplatin (cisplatin-ineligible) in locally advanced or metastatic urothelial carcinoma (bladder #57, upper-tract #58). Gemcitabine 1000 mg/m2 IV is sourced to DeVita 12th ed., line 17414 (bladder gemcitabine dose); the carboplatin target AUC (intended AUC 4.5 per EORTC 30986, or AUC 5) is NOT printed in the provided licensed sources, so carboplatin dosePerUnit is set to VERIFY and never inferred (verifyFields records the paths). The gemcitabine day schedule in the carboplatin doublet (conventionally days 1 and 8) is likewise not separately printed and should be confirmed at review. Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G) establish this as a first-line cisplatin-ineligible regimen (often followed by avelumab maintenance) and state carboplatin must not be substituted for cisplatin perioperatively. ISMP tall-man applied (CARBOplatin). This remains a StewardMD Standard Protocol; no endorsement implied."
+}
