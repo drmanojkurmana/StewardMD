@@ -468,7 +468,7 @@
   function openEmrProfile(ticketId) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
   }
   // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
   // the same patient reuses their record instead of creating a duplicate each time).
@@ -504,7 +504,7 @@
       }
       return;
     }
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
+    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
   }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;

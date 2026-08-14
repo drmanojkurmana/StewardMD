@@ -101,6 +101,10 @@
   }
   function timelineSection(st) {
     if (usesLocal(st.source)) return clinicTimelineSection(st);   // clinic footprint (local/shared), not the GHIS visit timeline
+    if (st.source === "ghis") {                                   // hospital: crawled Opcard history footprint
+      if (st.timelineLoading && !(st.timeline || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading history…") + "</section>";
+      return clinicTimelineSection(st);
+    }
     if (st.timelineLoading && !(st.labs || []).length && !(st.medications || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading timeline…") + "</section>";
     var tl = buildTimeline(st);
     if (!tl.length) {
@@ -115,6 +119,7 @@
   }
   function loadTimeline() {
     if (usesLocal(st.source)) { loadClinicTimeline(); return; }   // clinic footprint from the on-device store
+    if (st.source === "ghis") { loadGhisHistory(); return; }      // hospital: crawl the GHIS Opcard history footprint
     if (!st.ticketId || !st.sessionId) return;
     st.timelineLoading = true;
     fbTok().then(function (t) {
@@ -751,6 +756,22 @@
     } catch (x) {}
     st.timelineLoading = false;
     if (st.tab === "profile") paint();
+  }
+  // GHIS/hospital: crawl the patient's Opcard history (past OPD visits' clinical notes) from GHIS itself,
+  // render in the SAME footprint UI. Read-only, live from GHIS — nothing is stored by StewardMD.
+  function loadGhisHistory() {
+    st.timeline = []; st.timelineLoading = true; if (st.tab === "profile") paint();
+    var a = ghisAuth();
+    var q = "?patientId=" + encodeURIComponent((st.patient && st.patient.mrn) || "") + "&visitId=" + encodeURIComponent(st.visitId || "") + "&episodeId=" + encodeURIComponent(st.episodeId || "");
+    fetch(a.base + "/history" + q, { headers: authHeaders(), credentials: "include" })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: false, d: {} }; }); })
+      .then(function (res) {
+        st.timelineLoading = false;
+        var ents = (res.d && res.d.entries) || [], nowTs = now();
+        st.timeline = ents.map(function (e, i) { return { ts: e.ts || (nowTs - i * 60000), by: e.by || "", kind: "note", text: e.text || "" }; });
+        if (st.tab === "profile") paint();
+      })
+      .catch(function () { st.timelineLoading = false; if (st.tab === "profile") paint(); });
   }
   function clinicTimelineSection(s) {
     var tl = s.timeline || [];
@@ -2004,6 +2025,7 @@
     st.patient = { name: opts.name || "", mrn: opts.patientId || "", displayId: opts.displayId || "" };   // displayId = human hospital id (SMD-XXX-nnn) for no-MRN clinic patients; mrn stays the storage key
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
+    st.visitId = opts.visitId || opts.episodeId || "";        // GHIS OPMR visit number — the Getopcard id for the history timeline
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
     st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
     st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
