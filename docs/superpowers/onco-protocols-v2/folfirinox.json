@@ -3,13 +3,35 @@
   "name": "FOLFIRINOX (PRODIGE 4/ACCORD 11)",
   "disease": "Pancreatic cancer",
   "diseaseId": "pancreatic_cancer",
-  "histology": "VERIFY",
-  "stage": ["VERIFY"],
-  "biomarkers": {},
-  "treatmentSetting": "VERIFY",
-  "treatmentIntent": ["palliative"],
-  "lineOfTherapy": "VERIFY",
-  "eligibilityCriteria": [],
+  "histology": "adenocarcinoma",
+  "stage": [
+    "IV"
+  ],
+  "biomarkers": {
+    "BRCA1_2": "tested (germline and somatic)",
+    "PALB2": "tested",
+    "KRAS": "tested",
+    "BRAF": "tested",
+    "HER2_ERBB2": "tested",
+    "MSI_dMMR": "tested",
+    "TMB": "tested",
+    "NTRK_fusion": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "FOLFIRINOX cytotoxic backbone is not biomarker-restricted; it is a preferred category 1 first-line option for good performance status (ECOG 0 to 1) regardless of biomarker status. Tumor/somatic and germline molecular profiling (NGS) is recommended for all anti-cancer-therapy candidates to guide targeted therapy and maintenance choices: BRCA1/2 (and PALB2) support platinum-based therapy, and germline BRCA1/2 supports olaparib maintenance; BRAF V600E (dabrafenib plus trametinib); NTRK, RET, and other fusions; HER2 amplification; and MSI-H, dMMR, or TMB-high (pembrolizumab). Per Standard Guidelines (NCCN), Pancreatic Adenocarcinoma Principles of Molecular Profiling (footnote j; PANC-1A, PANC-2A) and Principles of Systemic Therapy, Metastatic Disease First-Line (PANC-G)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": [
+    "palliative"
+  ],
+  "lineOfTherapy": "first-line",
+  "eligibilityCriteria": [
+    {
+      "criterion": "performanceStatus",
+      "requirement": "good performance status (ECOG 0-1)",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "line 107087; lines 107108 to 107109"
+    }
+  ],
   "regimen": {
     "drugs": [
       {
@@ -18,10 +40,16 @@
         "basis": "bsa",
         "dosePerUnit": 85,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: PRODIGE 4/ACCORD 11 - oxaliplatin 85 mg/m2 IV day 1. Tall man per NCCN appendix G."
       },
@@ -31,10 +59,16 @@
         "basis": "bsa",
         "dosePerUnit": 180,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: irinotecan 180 mg/m2 IV day 1."
       },
@@ -44,10 +78,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: leucovorin 400 mg/m2 IV day 1."
       },
@@ -57,10 +97,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV bolus",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 400 mg/m2 IV bolus day 1."
       },
@@ -70,10 +116,17 @@
         "basis": "bsa",
         "dosePerUnit": 2400,
         "unit": "mg/m2",
-        "days": [1, 2],
+        "days": [
+          1,
+          2
+        ],
         "route": "IV continuous infusion over 46 hours",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 2,400 mg/m2 as a 46-hour continuous infusion, starting day 1 and running into day 2. Cycle repeats every 2 weeks."
       }
@@ -81,17 +134,42 @@
     "cycleLengthDays": 14,
     "cycles": null,
     "premedications": [
-      { "name": "Antiemetic prophylaxis", "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below" }
+      {
+        "name": "Antiemetic prophylaxis",
+        "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below"
+      }
     ],
     "supportiveCare": [
       "Antiemetics: moderate-to-high emetic risk (oxaliplatin and irinotecan are each individually moderate emetic risk IV agents per NCCN Antiemesis categories in appendix D; combining two moderately emetogenic agents on the same day is conventionally managed as the higher tier). Exact per-regimen NCCN order-template tier not yet confirmed - verify against per-disease NCCN template.",
       "G-CSF: PRODIGE 4/ACCORD 11 reported febrile neutropenia 5.4% (vs 1.2% gemcitabine) and grade 3-4 neutropenia 45% (source lines 107088-107091). Appendix C risk tiering (High/Intermediate) for this specific regimen was not located in the provided source; use physician-patient discussion of prophylactic CSF support per appendix C intermediate-risk framework pending confirmation of the regimen's listed risk level on a per-disease NCCN template."
     ]
   },
-  "monitoring": ["CBC before each cycle", "renal function (platinum-containing regimen)", "peripheral neuropathy assessment (oxaliplatin)", "diarrhea/GI toxicity assessment (irinotecan)"],
-  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle toxicity/neuropathy status"],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (platinum-containing regimen)",
+    "peripheral neuropathy assessment (oxaliplatin)",
+    "diarrhea/GI toxicity assessment (irinotecan)"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle toxicity/neuropathy status"
+  ],
   "doseModificationRules": [
-    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). DeVita reports grade 3 to 4 diarrhea of 12.7% with FOLFIRINOX in PRODIGE 4/ACCORD 11 (line 107100). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for routine dose modification on the basis of UGT1A1 polymorphism, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 107100; 121523 to 121531"
+    }
   ],
   "evidence": {
     "core": [
@@ -100,10 +178,19 @@
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed",
         "locator": "lines 107088-107091",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN)",
+        "version": "3.2026",
+        "date": null,
+        "locator": "Pancreatic Adenocarcinoma, Principles of Systemic Therapy, Metastatic Disease First-Line Therapy (PANC-G 5 to 6 of 13; FOLFIRINOX category 1, preferred for good PS ECOG 0 to 1); Principles of Molecular Profiling (footnote j; PANC-1A, PANC-2A)",
         "evidenceStatus": "current"
       }
     ],
-    "guideline": [],
     "institutional": [],
     "divergence": []
   },
@@ -118,12 +205,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": [
-    "histology",
-    "stage",
-    "biomarkers",
-    "treatmentSetting",
-    "lineOfTherapy",
-    "eligibilityCriteria"
-  ]
+  "verifyFields": [],
+  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): DeVita 12th ed. (Chapter 35) describes FOLFIRINOX for pancreatic ductal adenocarcinoma (PDAC). histology resolved to adenocarcinoma (PDAC is pancreatic ductal adenocarcinoma; section header on second-line therapy for metastatic PDAC at line 107126). treatmentSetting resolved to metastatic and stage to IV: DeVita establishes FOLFIRINOX (with mFOLFIRINOX) as a preferred first-line treatment for patients with metastatic PDAC (line 107122). lineOfTherapy resolved to first-line (FOLFIRINOX is recommended as first-line treatment for patients with good performance status, lines 107108 to 107109). eligibilityCriteria resolved to good performance status: PRODIGE 4/ACCORD 11 randomized patients with ECOG 0 to 1 (line 107087) and DeVita recommends it for good-performance-status patients (lines 107108 to 107109). An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) and the PRODIGE 4/ACCORD 11 diarrhea rate (line 107100). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines (NCCN), Pancreatic Adenocarcinoma v3.2026): biomarkers resolved: the cytotoxic FOLFIRINOX backbone is not biomarker-restricted (preferred category 1 first-line for good PS regardless of biomarker), while tumor/somatic and germline molecular profiling is tested (BRCA1/2, PALB2, KRAS, BRAF, HER2, NTRK and other fusions, MSI, dMMR, TMB) to guide targeted therapy and maintenance choices (PANC molecular profiling footnote j and PANC-G). The guideline concurs with the core metastatic first-line placement and good-PS ECOG 0 to 1 eligibility, so no divergence is recorded. No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
 }

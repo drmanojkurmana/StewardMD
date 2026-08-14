@@ -3,12 +3,12 @@
   "name": "FUFOX (Grothey weekly)",
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
-  "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "histology": "Colorectal adenocarcinoma",
+  "stage": ["IV"],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
-  "lineOfTherapy": "VERIFY",
+  "lineOfTherapy": ["first-line", "subsequent-line (after prior irinotecan, if not previously given)"],
   "eligibilityCriteria": [{ "criterion": "VERIFY" }],
   "regimen": {
     "drugs": [
@@ -78,11 +78,20 @@
         "layer": "core",
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed.",
-        "locator": "lines 123738, 123742, 123743",
+        "locator": "Cancer of the Colon, Table 40.13; lines 123738, 123742, 123743. Setting/stage/intent from the same chapter's 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123347, 123352), which contains Table 40.13.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN)",
+        "version": "2.2026",
+        "date": null,
+        "locator": "NCCN Colon Cancer v2.2026: COL-D 2 of 17 (metastatic Initial Therapy first-line and Subsequent Therapy after prior irinotecan; the oxaliplatin-plus-fluoropyrimidine FOLFOX backbone recurs across pages 2 to 4 of 17, so it is not RAS/BRAF eligibility-restricted), COL-B (Principles of Pathologic and Molecular Review: adenocarcinoma; KRAS/NRAS/BRAF and MMR/MSI testing), COL-2A (metastatic adenocarcinoma workup)",
         "evidenceStatus": "current"
       }
     ],
-    "guideline": [],
     "institutional": [],
     "divergence": []
   },
@@ -97,5 +106,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": ["histology", "stage", "treatmentSetting", "lineOfTherapy", "eligibilityCriteria"]
+  "verifyFields": ["eligibilityCriteria"],
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.13 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347). Guideline layer (Standard Guidelines (NCCN), Colon Cancer v2.2026) resolves: histology=colorectal adenocarcinoma (COL-B; COL-2A); lineOfTherapy=first-line and subsequent-line after prior irinotecan (COL-D 2 of 17). FUFOX (weekly oxaliplatin plus 24-hour infusional fluorouracil/leucovorin) is a schedule variant of the guideline oxaliplatin-plus-fluoropyrimidine (FOLFOX) backbone, which appears across COL-D 2 to 4 of 17 (KRAS/NRAS/BRAF-WT, RAS-mutant, BRAF V600E), so biomarkers are not eligibility-restricted; KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B. The weekly FUFOX schedule maps to metastatic use, so adjuvant is not asserted. eligibilityCriteria stays VERIFY (no structured eligibility criteria stated by the guideline for this backbone). No divergence with the core layer. No endorsement is implied; this remains a StewardMD Standard Protocol."
 }

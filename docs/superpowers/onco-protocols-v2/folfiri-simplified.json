@@ -3,13 +3,20 @@
   "name": "FOLFIRI (simplified, Andre)",
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
-  "histology": "VERIFY",
-  "stage": ["VERIFY"],
+  "histology": "Colorectal adenocarcinoma",
+  "stage": [
+    "IV"
+  ],
   "biomarkers": {},
-  "treatmentSetting": "VERIFY",
-  "treatmentIntent": ["palliative"],
-  "lineOfTherapy": "VERIFY",
-  "eligibilityCriteria": [],
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": [
+    "palliative"
+  ],
+  "lineOfTherapy": [
+    "first-line",
+    "subsequent-line (after prior oxaliplatin, if not previously given)"
+  ],
+  "eligibilityCriteria": [{ "criterion": "VERIFY" }],
   "regimen": {
     "drugs": [
       {
@@ -18,10 +25,16 @@
         "basis": "bsa",
         "dosePerUnit": 180,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV over 90 min",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed., Cancer of the Colon, Table 40.12 (line 123595): FOLFIRI (simplified) per Andre et al. 1999 - Irinotecan 180 mg/m2 over 90 min, day 1 only."
       },
@@ -31,10 +44,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV concurrent with irinotecan (may run through same line via Y-connector)",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123596): LV 400 mg/m2 concurrently with irinotecan."
       },
@@ -44,10 +63,16 @@
         "basis": "bsa",
         "dosePerUnit": 400,
         "unit": "mg/m2",
-        "days": [1],
+        "days": [
+          1
+        ],
         "route": "IV bolus",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123596-123597): followed by 5-FU bolus 400 mg/m2. Given as a separate line item from the infusional 5-FU dose below."
       },
@@ -57,10 +82,17 @@
         "basis": "bsa",
         "dosePerUnit": 1200,
         "unit": "mg/m2",
-        "days": [1, 2],
+        "days": [
+          1,
+          2
+        ],
         "route": "IV continuous infusion over 46-48 hr",
-        "caps": { "perDose": null },
-        "roundingRule": { "increment": 50 },
+        "caps": {
+          "perDose": null
+        },
+        "roundingRule": {
+          "increment": 50
+        },
         "modificationRules": [],
         "notes": "DeVita 12th ed. (line 123597): 5-FU 1,200 mg/m2/d times 2 d (2,400 mg/m2 total infusion over 46-48 hr). dosePerUnit here is the per-day rate (1,200 mg/m2/day x 2 days = 2,400 mg/m2 total); days [1,2] reflects the 2-day infusion, not two separate bolus administrations."
       }
@@ -68,7 +100,10 @@
     "cycleLengthDays": 14,
     "cycles": null,
     "premedications": [
-      { "name": "Antiemetic prophylaxis", "notes": "per moderate emetic risk tier, see supportiveCare" }
+      {
+        "name": "Antiemetic prophylaxis",
+        "notes": "per moderate emetic risk tier, see supportiveCare"
+      }
     ],
     "supportiveCare": [
       "Antiemetics: moderate emetic risk tier (irinotecan is a moderate-emetic-risk IV agent per the NCCN 4-tier framework in Appendix D; 5-fluorouracil and leucovorin are low/minimal risk) - 5-HT3 antagonist +/- dexamethasone on treatment day per institutional antiemesis guideline",
@@ -81,9 +116,26 @@
     "Renal and hepatic function (irinotecan is hepatically cleared; UGT1A1 status affects toxicity)",
     "Diarrhea/dehydration monitoring (irinotecan-associated)"
   ],
-  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle GI toxicity status"],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle GI toxicity status"
+  ],
   "doseModificationRules": [
-    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+    {
+      "condition": "ANC < 1000 or platelets < 100k on day 1",
+      "action": "delay",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "UGT1A1*28 homozygous, hepatic dysfunction, or clinically significant irinotecan-related diarrhea",
+      "drug": "irinotecan",
+      "action": "reduce",
+      "text": "DeVita 12th ed. (Chapter 9, irinotecan pharmacology, lines 19427 to 19433): SN-38 is glucuronidated by UGT1A1; deficiency in this pathway increases the risk of diarrhea and myelosuppression, and dose reductions are recommended for patients homozygous for the UGT1A1*28 allele (a genotyping test is available) and for hepatic dysfunction with bilirubin greater than 1.5 (DeVita line 19433). Late diarrhea (onset beyond 24 hr after irinotecan) is managed with loperamide, escalating to diphenoxylate/atropine and opium tincture if severe (lines 19421 to 19426). Note: DeVita Chapter 40 (lines 121523 to 121531) states there are currently no specific guidelines for dose modification on the basis of UGT1A1 polymorphism in routine colorectal-cancer practice, so apply per physician judgement.",
+      "source": "DeVita, Cancer PPO 12th ed.",
+      "locator": "lines 19421 to 19433; 121523 to 121531"
+    }
   ],
   "evidence": {
     "core": [
@@ -91,11 +143,20 @@
         "layer": "core",
         "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
         "version": "12th ed",
-        "locator": "Cancer of the Colon, Table 40.12; lines 123591, 123595, 123596, 123597",
+        "locator": "Cancer of the Colon, Table 40.12; lines 123591, 123595, 123596, 123597. Setting/stage/intent from the same chapter's 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123347, 123352), which contains Table 40.12.",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN)",
+        "version": "2.2026",
+        "date": null,
+        "locator": "NCCN Colon Cancer v2.2026: COL-D 2 of 17 (metastatic Initial and Subsequent Therapy; FOLFIRI recurs across pages 2 to 4 of 17), COL-D 8 of 17 (FOLFIRI regimen), COL-B (Principles of Pathologic and Molecular Review: adenocarcinoma; KRAS/NRAS/BRAF and MMR/MSI testing), COL-2A (metastatic adenocarcinoma workup)",
         "evidenceStatus": "current"
       }
     ],
-    "guideline": [],
     "institutional": [],
     "divergence": []
   },
@@ -111,12 +172,7 @@
     "reviewDue": false
   },
   "verifyFields": [
-    "histology",
-    "stage",
-    "biomarkers",
-    "treatmentSetting",
-    "lineOfTherapy",
     "eligibilityCriteria"
   ],
-  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending."
+  "provenanceNote": "Textbook-grounded draft; NCCN per-disease template, clinical (StewardMD) review, and hospital/institutional approval pending. Resolved from DeVita 12th ed.: treatmentSetting=metastatic and stage IV from the 'Management of Unresectable Metastatic Disease' section (lines 123342 to 123343 heading; 'unresectable stage IV disease' line 123352) that contains Table 40.12 where this regimen appears; treatmentIntent=palliative from the same section (lines 123344 to 123347, 'Given the palliative nature of such treatments'). DeVita states there are no specific dose-modification guidelines based on UGT1A1 polymorphism (lines 121525 to 121528), so no UGT1A1 dose rule is added. Guideline layer (Standard Guidelines (NCCN), Colon Cancer v2.2026) resolves: histology=colorectal adenocarcinoma (COL-B; COL-2A metastatic adenocarcinoma workup); lineOfTherapy=first-line and subsequent-line after prior oxaliplatin (COL-D 2 of 17, FOLFIRI backbone); biomarkers=not eligibility-restricted for this cytotoxic backbone (COL-D 2 to 4 of 17 list FOLFIRI across KRAS/NRAS/BRAF-WT, RAS-mutant, and BRAF V600E pages), with KRAS/NRAS/BRAF and MMR/MSI testing recommended per COL-B. eligibilityCriteria stays VERIFY: the guideline states no structured, machine-matchable eligibility criteria for this backbone. Core and guideline layers agree on the metastatic setting (no divergence). No endorsement is implied; this remains a StewardMD Standard Protocol."
 }
