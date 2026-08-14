@@ -62,7 +62,7 @@
 
       var transport = cfg.transport || DRIVE.create(clinicId, { fetch: cfg.driveFetch, getToken: cfg.getToken });
       var sync = SYNC.create({ store: store, transport: transport, crypto: crypto, deviceId: deviceId, clinicId: clinicId, state: syncState, onState: function () { scheduleSave(); } });
-      var orch = ORCH.create({ store: store, sync: sync });
+      var orch = ORCH.create({ store: store, sync: sync, clinicId: clinicId });
 
       // ---- persistence: debounced full-snapshot save (every store/sync mutation schedules it) ----
       var saveTimer = null, saving = null;

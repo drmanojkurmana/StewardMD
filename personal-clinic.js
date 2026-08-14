@@ -29,9 +29,14 @@
   /* ------------------------------ store ------------------------------ */
   function listPatients() { var a = readJSON(KEY_PTS, []); return Array.isArray(a) ? a : []; }
   function getPatient(id) { var r = readJSON(KEY_P(id), null); return (r && r.patient) || null; }
+  // Stable hospital-style id (SMD-<clinic code>-<seq>) for every clinic patient, assigned at creation.
+  // The clinic code shares the queue's localStorage key so queue- and list-created patients match.
+  function pad3(n) { n = String(n); while (n.length < 3) n = "0" + n; return n; }
+  function clinicCode() { try { var k = "smd_opd_clinic_code", v = LS && LS.getItem(k); if (!v) { v = String(Math.random().toString(36).slice(2, 5)).toUpperCase(); LS && LS.setItem(k, v); } return v; } catch (e) { return "CLN"; } }
   function addPatient(p) {
     p = p || {}; var id = uid();
-    var rec = { id: id, name: String(p.name || "").trim() || "Unnamed", age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(), mrn: String(p.mrn || "").trim(), at: nowISO(), updatedAt: nowISO() };
+    var mrn = String(p.mrn || "").trim(); if (!mrn) mrn = "SMD-" + clinicCode() + "-" + pad3(listPatients().length + 1);
+    var rec = { id: id, name: String(p.name || "").trim() || "Unnamed", age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(), mrn: mrn, at: nowISO(), updatedAt: nowISO() };
     var idx = listPatients(); idx.unshift(rec); writeJSON(KEY_PTS, idx);
     writeJSON(KEY_P(id), { patient: rec, latest: {}, consults: [] });
     return id;

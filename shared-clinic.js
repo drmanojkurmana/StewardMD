@@ -25,12 +25,17 @@
     var sync = opts.sync || null;   // clinic-sync instance (optional until Drive wired)
 
     // ---- patients ----
+    // SMD-<clinic code>-<seq> for every patient at creation. Code = last-3 of the clinic id so all devices
+    // agree; queue-created patients pass the same-derived mrn, so ids are consistent across entry points.
+    function clinicCode() { var s = String(opts.clinicId || "").replace(/[^a-z0-9]/gi, "").toUpperCase(); return s.slice(-3) || "CLN"; }
+    function pad3(n) { n = String(n); while (n.length < 3) n = "0" + n; return n; }
     function addPatient(p) {
       p = p || {};
+      var mrn = String(p.mrn || "").trim(); if (!mrn) mrn = "SMD-" + clinicCode() + "-" + pad3(store.list("patient").length + 1);
       var rec = store.put("patient", {
         name: String(p.name || "").trim() || "Unnamed",
         age: String(p.age || "").trim(), sex: p.sex || "", phone: String(p.phone || "").trim(),
-        mrn: String(p.mrn || "").trim()
+        mrn: mrn
       });
       return rec.id;
     }

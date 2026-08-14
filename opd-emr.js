@@ -775,7 +775,8 @@
   }
   function clinicTimelineSection(s) {
     var tl = s.timeline || [];
-    var head = '<div class="oe-h3">' + ms("history") + 'Timeline<span class="oe-sub">' + tl.length + " consult" + (tl.length === 1 ? "" : "s") + "</span></div>";
+    var head = '<div class="oe-h3">' + ms("history") + 'Timeline<span class="oe-sub">' + tl.length + " consult" + (tl.length === 1 ? "" : "s") + "</span>" +
+      (tl.length ? '<button class="oe-sum-btn" data-oe-act="summarise" title="Summarise this patient\'s whole record">' + ms("auto_awesome") + "Summarise</button>" : "") + "</div>";
     if (!tl.length) return '<section class="oe-sec">' + head + '<div class="oe-ct-empty">No consults recorded yet. Save an assessment to start this patient\'s timeline.</div></section>';
     var groups = [], byDate = {};
     tl.forEach(function (e) { var d = fmtClinicDate(e.ts); if (!byDate[d]) { byDate[d] = []; groups.push(d); } byDate[d].push(e); });
@@ -786,8 +787,46 @@
       }).join("");
       return '<div class="oe-ct-day"><div class="oe-ct-date">' + esc(d) + "</div>" + rows + "</div>";
     }).join("");
-    return '<section class="oe-sec">' + head + '<div class="oe-ct">' + body + "</div></section>";
+    return (s.clinicSummary ? summaryCard(s.clinicSummary) : "") + '<section class="oe-sec">' + head + '<div class="oe-ct">' + body + "</div></section>";
   }
+  // On-device patient summary (free tier): a deterministic overview of the whole timeline — problems, meds,
+  // latest plan, pending follow-ups — for a patient with many consults. (Deeper AI summary = Pro/MaiK, later.)
+  function buildClinicSummary(tl) {
+    tl = tl || []; if (!tl.length) return null;
+    var dates = tl.map(function (e) { return e.ts; }).filter(Boolean).sort(function (a, b) { return a - b; });
+    var range = dates.length ? (fmtClinicDate(dates[0]) + (dates.length > 1 && fmtClinicDate(dates[0]) !== fmtClinicDate(dates[dates.length - 1]) ? " to " + fmtClinicDate(dates[dates.length - 1]) : "")) : "";
+    var problems = {}, meds = {}, followups = [];
+    var medRe = /\b(?:tab|cap|syp|syr|inj|oint|t|c)\.?\s+([A-Za-z][A-Za-z0-9\-]{2,})/gi;
+    tl.forEach(function (e) {
+      var txt = String(e.text || "");
+      txt.split("\n").forEach(function (ln) {
+        ln = ln.trim();
+        var m = /^(?:dx|diagnosis|impression|provisional[ _]diagnosis)\s*[:\-]\s*(.+)/i.exec(ln);
+        if (m && m[1].trim()) problems[m[1].trim().toLowerCase()] = m[1].trim();
+        if (/\b(review|r\/w|follow[\s-]?up|f\/u)\b/i.test(ln)) followups.push(ln);
+      });
+      var MED_STOP = { cough: 1, cold: 1, pain: 1, fever: 1, rest: 1, sos: 1, bd: 1, tds: 1, od: 1, hs: 1, syp: 1, susp: 1, drops: 1, review: 1 };
+      var mm; medRe.lastIndex = 0; while ((mm = medRe.exec(txt))) { var dr = mm[1]; if (dr && !MED_STOP[dr.toLowerCase()]) meds[dr.toLowerCase()] = dr; }
+    });
+    function vals(o) { var a = []; for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) a.push(o[k]); return a; }
+    var latest = tl[0], planM = /plan\s*[:\-]\s*(.+)/i.exec(String((latest && latest.text) || ""));
+    return { consults: tl.length, range: range, problems: vals(problems).slice(0, 8), meds: vals(meds).slice(0, 12),
+      latestPlan: planM ? planM[1].trim() : "", latestBy: (latest && latest.by) || "", followups: followups.slice(0, 4) };
+  }
+  function summaryCard(s) {
+    if (!s) return "";
+    function chips(arr) { return arr.length ? '<div class="oe-sum-chips">' + arr.map(function (x) { return '<span class="oe-sum-chip">' + esc(x) + "</span>"; }).join("") + "</div>" : '<div class="oe-sum-none">Not documented</div>'; }
+    return '<section class="oe-sec oe-sum-card"><div class="oe-h3">' + ms("auto_awesome") + "Patient overview<span class=\"oe-sub\">" + s.consults + " consult" + (s.consults === 1 ? "" : "s") + (s.range ? " &middot; " + esc(s.range) : "") + "</span>" +
+      '<button class="oe-sum-x" data-oe-act="summarise-close" title="Close">' + ms("close") + "</button></div>" +
+      '<div class="oe-sum-b">' +
+        '<div class="oe-sum-lbl">Active problems</div>' + chips(s.problems) +
+        '<div class="oe-sum-lbl">Medications</div>' + chips(s.meds) +
+        (s.latestPlan ? '<div class="oe-sum-lbl">Latest plan</div><div class="oe-sum-txt">' + esc(s.latestPlan) + "</div>" : "") +
+        (s.followups.length ? '<div class="oe-sum-lbl">Follow-up</div><div class="oe-sum-txt">' + s.followups.map(esc).join("<br>") + "</div>" : "") +
+        '<div class="oe-sum-note">On-device overview from this patient\'s record. A deeper AI summary (MaiK) is a Pro feature.</div>' +
+      "</div></section>";
+  }
+  function summariseClinic() { st.clinicSummary = buildClinicSummary(st.timeline || []); if (!st.clinicSummary) { toast("No consults to summarise yet."); return; } paint(); }
 
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
@@ -875,6 +914,8 @@
       return;
     }
     if (cmd === "assess-save") return submitAssessment();
+    if (cmd === "summarise") return summariseClinic();
+    if (cmd === "summarise-close") { st.clinicSummary = null; paint(); return; }
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "maik-ask") return maikAsk();
     if (cmd === "assess-maik-pro") return askMaikPro();
