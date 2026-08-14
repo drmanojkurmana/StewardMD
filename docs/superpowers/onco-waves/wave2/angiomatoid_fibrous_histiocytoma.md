@@ -1,4 +1,4 @@
-# Angiomatoid fibrous histiocytoma (AFH) — Management
+# Angiomatoid fibrous histiocytoma (AFH): Management
 
 ## Classification and why it drives management
 AFH sits in the WHO soft tissue tumour classification as an "intermediate, rarely metastasising" entity, in the same tier as plexiform fibrohistiocytic tumour. This tier is locally aggressive (it can recur locally) but its risk of distant spread is low, quoted as typically under 2 percent and, when it does occur, usually to lymph nodes or lung. This is the key fact that shapes the whole treatment approach: AFH is treated as a local-control problem first, not as a tumour that routinely needs systemic therapy.
@@ -7,8 +7,8 @@ AFH sits in the WHO soft tissue tumour classification as an "intermediate, rarel
 
 ### Localized disease (the great majority of cases)
 - Complete surgical excision with clear margins is the mainstay and is curative in most patients.
-- Because AFH behaves as a locally aggressive, intermediate-grade lesion rather than a conventional sarcoma, the surgical goal mirrors that of other intermediate, locally aggressive soft-tissue tumours: excision with an adequate margin of normal tissue for durable local control, rather than an emphasis on adjuvant systemic treatment.
-- Preoperative or diagnostic biopsy should secure molecular confirmation of an EWSR1 (or FUS) rearrangement, since the immunophenotype alone can be nonspecific; this also helps exclude mimics such as Ewing sarcoma or clear cell sarcoma, which are managed very differently.
+- Because AFH behaves as a locally aggressive, intermediate-grade lesion rather than a conventional sarcoma, the surgical goal mirrors that of other intermediate, locally aggressive soft-tissue tumours (a different WHO tier from AFH's own "rarely metastasising" tier, so this is an inference from DeVita's general principle for that neighbouring tier, not an AFH-specific statement): excision with an adequate margin of normal tissue for durable local control, rather than an emphasis on adjuvant systemic treatment.
+- Preoperative or diagnostic biopsy should secure molecular confirmation of an EWSR1 (or FUS) rearrangement, since the immunophenotype alone can be nonspecific; this also helps exclude mimics such as Ewing sarcoma or clear cell sarcoma, which are managed very differently (general oncology standard, not from DeVita's section on this disease).
 - Adjuvant radiotherapy is not routine but should be considered when margins are incomplete or infiltrative, or when the tumour is deep or truncal, since these features carry the greatest risk of local recurrence.
 
 ### Incompletely excised or recurrent disease
@@ -25,21 +25,21 @@ AFH sits in the WHO soft tissue tumour classification as an "intermediate, rarel
 - Radiotherapy: selective adjunct, reserved for infiltrative or incomplete margins, or deep/truncal location, not routine.
 - Systemic therapy: no defined role in localized or completely resected disease; only individualized consideration in the rare metastatic case.
 
-## Systemic symptoms as a management marker
+## Systemic symptoms as a management marker (general oncology literature, not from DeVita's section on this disease)
 AFH can produce cytokine-mediated systemic symptoms, fever, anaemia, weight loss, and raised inflammatory markers. These typically resolve after complete resection. Persistence of these symptoms after surgery should prompt a search for residual or incompletely excised tumour rather than being treated as an unrelated finding.
 
 ## Monitoring
 - Long-term surveillance is directed at local recurrence, which affects a minority of patients, and the small residual risk of distant metastasis, which is highest in deep or infiltrative lesions.
 - Clinical follow-up with attention to the resection site, supplemented by imaging when there is clinical suspicion of recurrence, is appropriate; DeVita does not specify an AFH-specific imaging interval or duration, so surveillance intensity should follow standard soft-tissue-tumour follow-up practice and multidisciplinary team judgement.
-- Resolution (or non-resolution) of any preoperative systemic symptoms is itself a useful monitoring signal, as above.
+- Resolution (or non-resolution) of any preoperative systemic symptoms is itself a useful monitoring signal, as above (general oncology literature, not from DeVita's section on this disease).
 
 ## When to refer
 - Refer to a specialist soft-tissue sarcoma multidisciplinary team for definitive surgical planning, whenever the tumour is deep, large, truncal, or the initial excision is incomplete.
 - Refer for radiation oncology input when margins are compromised and re-excision is not feasible or would be excessively morbid.
 - Refer to a sarcoma medical oncology team if metastatic disease is confirmed, since no standard systemic protocol exists and management must be individualized.
-- Refer for molecular/genetic pathology confirmation (EWSR1/FUS rearrangement testing) whenever the diagnosis is morphologically or immunophenotypically uncertain, to exclude more aggressive EWSR1-rearranged mimics before finalizing a treatment plan.
+- Refer for molecular/genetic pathology confirmation (EWSR1/FUS rearrangement testing) whenever the diagnosis is morphologically or immunophenotypically uncertain, to exclude more aggressive EWSR1-rearranged mimics before finalizing a treatment plan (general oncology standard, not from DeVita's section on this disease).
 
 ## What is deliberately not stated here
-DeVita's soft tissue sarcoma chapter discusses AFH only in the context of WHO tumour classification (as an intermediate, rarely metastasising entity with low, largely nodal/pulmonary metastatic potential) and does not lay out an AFH-specific staged treatment algorithm, specific systemic regimen, or a defined surveillance interval. Where this note describes surgery, radiotherapy selection, and follow-up principles, it applies the general principles DeVita gives for intermediate, locally aggressive soft-tissue tumours as a class; it does not assert an AFH-specific trial-based protocol, because none is described in the source.
+DeVita's soft tissue sarcoma chapter discusses AFH only in the context of WHO tumour classification (as an intermediate, rarely metastasising entity with low, largely nodal/pulmonary metastatic potential) and does not lay out an AFH-specific staged treatment algorithm, specific systemic regimen, or a defined surveillance interval. Where this note describes surgery, radiotherapy selection, and follow-up principles, it applies the general principles DeVita gives for intermediate, locally aggressive soft-tissue tumours as a class (a neighbouring but distinct WHO tier from AFH's own); it does not assert an AFH-specific trial-based protocol, because none is described in the source. The molecular confirmation/mimic-exclusion guidance and the systemic-symptom (cytokine-mediated paraneoplastic) content are likewise not from DeVita's AFH text; they are included as general oncology/pathology standard and are labelled inline as such.
 
 Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.

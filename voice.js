@@ -52,19 +52,62 @@
   function isAndroidNative() {
     try { var C = window.Capacitor; return !!(C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform) === "android"); } catch (e) { return false; }
   }
-  // English uses the per-platform accuracy pick; any NON-English (Telugu / auto / code-switch) needs
-  // the MULTILINGUAL base model on BOTH platforms — small.en cannot decode Telugu at all.
+  // Steward Voice tiers — smd_voice_tiers gates the multilingual upgrade. OFF (default) keeps the
+  // original hosted small.en/base models byte-for-byte; flip ON only AFTER host-whisper-models.sh
+  // publishes the tier files (small-q8_0 / large-v3-turbo-q5_0 / telugu-small-q8_0) + a native rebuild.
+  //   BASE     : Whisper Small INT8 (multilingual) for every language
+  //   PRO      : Small INT8 (en/hi/auto) + verified Telugu Small INT8 (te)
+  //   ULTIMATE : Large-v3-Turbo Q5 (en/hi/auto) + verified Telugu Small INT8 (te)
+  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") === "1"; } catch (e) { return false; } }
+  function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
-    if (lang && lang !== "en") return "base-q5_1";            // multilingual: Telugu, auto-detect, code-switch
-    return isAndroidNative() ? "base-q5_1" : "small.en-q5_1";  // English-only accuracy pick
+    if (!tiersFlagOn()) {
+      // base-q5_1 RETIRED (owner: "remove base") — it hallucinated on hard audio (owner-tested
+      // 2026-08-14). Multilingual default is now small-q8_0 (StewardVoice Multilingual, ~252MB INT8) on
+      // BOTH platforms — far more accurate + EN/HI/TE code-switch. iOS keeps small.en for pure English
+      // (Metal-fast, best en accuracy); Android uses small-q8_0 for everything (one model, CPU-only).
+      if (lang && lang !== "en") return "small-q8_0";           // multilingual: Telugu, auto-detect, code-switch
+      return isAndroidNative() ? "small-q8_0" : "small.en-q5_1"; // en: Android multilingual small, iOS English small
+    }
+    var tier = voiceTier();
+    // Telugu ALWAYS routes to the Telugu specialist (every tier) — never the en/hi Whisper. This is the
+    // "route through BOTH models" the clinic wants: Telugu speech to the Telugu model, en/hi to Whisper.
+    if (lang === "te") return "telugu-small-q8_0";
+    // Unknown language (Auto, before the first chunk is detected): open on the Telugu specialist on EVERY
+    // tier. MEASURED (real Telugu consult audio): the multilingual small hallucinates repeated-syllable
+    // garbage on Telugu, while the specialist transcribes it near-perfectly AND still auto-detects/decodes
+    // English. So a Telugu opening is captured immediately; detection then routes the NEXT chunk below.
+    if (!lang || lang === "auto") return "telugu-small-q8_0";
+    // English / Hindi:
+    // large-v3-turbo (~547MB) is Metal-fast on iOS but too slow on the Android CPU-only build, so
+    // Android's Ultimate tier decodes en/hi on small-q8_0 too (still multilingual, ~252MB).
+    if (tier === "ultimate" && !isAndroidNative()) return "large-v3-turbo-q5_0";
+    return "small-q8_0";     // base + pro (+ Android ultimate): multilingual Whisper Small INT8
   }
+  // Which model keys each tier needs (for the Settings download dashboard).
+  var TIER_MODELS = {
+    base: ["small-q8_0", "telugu-small-q8_0"],   // BASE now carries the Telugu specialist too, so Telugu routes to it (dual-model)
+    pro: ["small-q8_0", "telugu-small-q8_0"],
+    ultimate: ["large-v3-turbo-q5_0", "telugu-small-q8_0"]
+  };
+  // User-facing branding ONLY — never expose the underlying engine/quant names.
+  var MODEL_META = {
+    "small-q8_0":          { label: "StewardVoice · Multilingual", tag: "EN · HI · TE", mb: 252 },
+    "telugu-small-q8_0":   { label: "StewardVoice · Telugu", tag: "తెలుగు specialist", mb: 252 },
+    "large-v3-turbo-q5_0": { label: "StewardVoice · Ultra", tag: "EN · HI, highest accuracy", mb: 547 }
+  };
+  // Short branded code for the diagnostic line (still hides the real engine).
+  var MODEL_CODE = { "small-q8_0": "SV-Multi", "telugu-small-q8_0": "SV-Telugu", "large-v3-turbo-q5_0": "SV-Ultra", "small.en-q5_1": "SV-EN", "tiny-q5_1": "SV-Tiny" };
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
   // (antibiotics/vasopressors/organisms/labs/units that are frequently misheard) plus the app's own
   // drug names from window.MEDDRUGS._list. Capped well under Whisper's ~224-token prompt budget so it
   // biases without truncation. Pure hint — the doctor still edits the transcript before import.
-  function buildInitialPrompt() {
+  // LANGUAGE-AWARE: only for English. An English primer forced onto Telugu/Hindi/auto decoding
+  // suppresses the target language (Telugu came out empty/garbled) — so return "" for non-English.
+  function buildInitialPrompt(lang) {
+    if (lang && lang !== "en") return "";
     var seed = [
       "piperacillin-tazobactam", "meropenem", "cefoperazone-sulbactam", "ceftriaxone", "cefepime",
       "amikacin", "gentamicin", "vancomycin", "teicoplanin", "colistin", "polymyxin B", "linezolid",
@@ -105,7 +148,7 @@
       if (whisperAvailable()) {
         try {
           var wstop = window.SMD_NATIVE.transcribeWhisper({
-            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(),
+            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(opts.language || WHISPER_LANG),
             onPartial: opts.onPartial, onFinal: opts.onFinal,
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
@@ -209,7 +252,16 @@
       ? '<div class="smdv-langs" role="group" aria-label="Dictation language">' +
           '<button class="smdv-lang on" data-lang="en">English</button>' +
           '<button class="smdv-lang" data-lang="auto">Auto</button>' +
+          '<button class="smdv-lang" data-lang="hi">हिंदी</button>' +
           '<button class="smdv-lang" data-lang="te">తెలుగు</button>' +
+        '</div>'
+      : "";
+    // Steward Voice tier selector — only when the tier models are enabled (smd_voice_tiers).
+    var tierSel = (whisperAvailable() && tiersFlagOn())
+      ? '<div class="smdv-tiers" role="group" aria-label="Voice model tier">' +
+          '<button class="smdv-tier' + (voiceTier() === "base" ? " on" : "") + '" data-tier="base">Base</button>' +
+          '<button class="smdv-tier' + (voiceTier() === "pro" ? " on" : "") + '" data-tier="pro">Pro</button>' +
+          '<button class="smdv-tier' + (voiceTier() === "ultimate" ? " on" : "") + '" data-tier="ultimate">Ultimate</button>' +
         '</div>'
       : "";
     root.innerHTML =
@@ -218,10 +270,12 @@
         '<div class="smdv-hd"><span class="smdv-ttl">' + vcIco("mic") + ' MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">' + vcIco("close") + '</button></div>' +
         '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
         modeSel +
+        tierSel +
         langSel +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
+        '<div class="smdv-diag" id="smdvDiag"></div>' +
         '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
         '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
         '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? vcIco("check") + " Use this text" : "Extract &amp; fill") + '</button>' +
@@ -247,14 +301,29 @@
     var reviewEl = root.querySelector("#smdvReview");
     var kind = target === "icu" ? "monitor" : "reasoning";
     var engineMode = "fast";                 // Fast is always the default; only changes if the user picks Clinical
-    var dictLang = "en";                     // Clinical dictation language: en | auto | te (Telugu)
+    var dictLang = "en";                     // Clinical dictation language: en | auto | hi | te
     var recording = false, base = "";
+    // Diagnostic line — shows exactly which engine/tier/model/language will run, so device
+    // logs & screenshots pin down any remaining native issue at a glance.
+    var diagEl = root.querySelector("#smdvDiag");
+    function diagText() {
+      if (engineMode === "clinical" && whisperPluginPresent()) {
+        var mk = whisperModel(dictLang);
+        return "StewardVoice · " + (tiersFlagOn() ? voiceTier() : "lite") + " · " + (MODEL_CODE[mk] || mk) + " · " + dictLang;
+      }
+      if (window.SMD_NATIVE && window.SMD_NATIVE.transcribe) return "Fast · on-device STT · " + dictLang;
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SR && !isIOS()) return "Fast · browser STT";
+      return "AI · server (Gemini)";
+    }
+    function updateDiag() { if (diagEl) diagEl.textContent = diagText(); }
+    updateDiag();
 
     function refreshExtract() { extractBtn.disabled = !ta.value.trim(); }
     ta.addEventListener("input", function () { base = ta.value; refreshExtract(); });
 
     root.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-act],[data-kind],[data-mode],[data-lang]"); if (!b) return;
+      var b = e.target.closest("[data-act],[data-kind],[data-mode],[data-lang],[data-tier]"); if (!b) return;
       if (b.getAttribute("data-act") === "close") return close();
       if (b.getAttribute("data-act") === "delmodel") {
         if (!window.confirm("Remove the downloaded Clinical Dictation model? It will re-download next time you use Clinical.")) return;
@@ -268,66 +337,144 @@
         return;
       }
       var kk = b.getAttribute("data-kind");
-      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); }); return; }
+      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); }); return; }
       var mm = b.getAttribute("data-mode");
       if (mm) {
         if (recording) { stop(); recording = false; setState("idle"); }   // switching engine mid-session stops the current one
         engineMode = mm;
-        [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
+        [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
         var hint = root.querySelector("#smdvModeHint");
-        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Telugu / Auto use the ~57 MB multilingual model." : "";
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Hindi / Telugu / Auto use the on-device multilingual model." : "";
       }
       var lg = b.getAttribute("data-lang");
       if (lg) {
         if (recording) { stop(); recording = false; setState("idle"); }
         dictLang = lg;
-        [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); });
-        // Telugu / Auto can only be decoded by the on-device multilingual model → force Clinical.
+        [].forEach.call(root.querySelectorAll(".smdv-lang"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+        // Telugu / Hindi / Auto can only be decoded by the on-device multilingual model → force Clinical.
         if (lg !== "en" && engineMode !== "clinical") {
           engineMode = "clinical";
           [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "clinical"); });
         }
       }
+      var tr = b.getAttribute("data-tier");
+      if (tr) {
+        if (recording) { stop(); recording = false; setState("idle"); }
+        try { localStorage.setItem("smd_voice_tier", tr); } catch (e) {}
+        [].forEach.call(root.querySelectorAll(".smdv-tier"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+      }
+      if (mm || lg || tr) updateDiag();   // reflect the new engine/language/tier in the diagnostic line
     });
 
-    function setState(state, engine) {
-      if (state === "listening") { recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live"); engEl.textContent = engine ? engine + " · speak now" : ""; }
-      else if (state === "recording") { recBtn.innerHTML = vcIco("stop") + " Recording… tap to stop"; recBtn.classList.add("live"); engEl.textContent = "AI · recording (transcribes when you stop)"; }
-      else if (state === "transcribing") { recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "AI") + " · transcribing"; }
-      else if (state === "downloading") { recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live"); }
-      else if (state === "preparing") { recBtn.innerHTML = vcIco("hourglass") + " Preparing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "") + " · preparing"; }
-      else { recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live"); recording = false; }
+    // ── Honest record→transcribe state machine. Record-mode engines (Clinical Whisper / AI) capture
+    // until the user taps Done, THEN transcribe on-device (seconds) — so we must (a) confirm listening
+    // with a live timer, (b) hard-cap the duration, (c) show a clear "Transcribing… please wait" after
+    // Done instead of snapping to idle, and (d) tell the user when nothing was heard. ──
+    var activeMode = null, elapsed = 0, timerId = null, autoStopId = null, fallbackId = null, txGuardId = null, lastState = "";
+    var MAX_REC_MS = 90000;   // record-mode can never run forever
+    function clearTimers() {
+      if (timerId) clearInterval(timerId); if (autoStopId) clearTimeout(autoStopId);
+      if (fallbackId) clearTimeout(fallbackId); if (txGuardId) clearTimeout(txGuardId);
+      timerId = autoStopId = fallbackId = txGuardId = null;
+    }
+    function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+    function paint(state, engine, note) {
+      lastState = state;
+      if (state === "recording") {
+        recBtn.innerHTML = vcIco("stop") + " Done — tap to transcribe"; recBtn.classList.add("live");
+        engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + " — speak, then tap Done";
+      } else if (state === "listening") {   // stream engines (Fast): text appears live as you speak
+        recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live");
+        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || "On-device") + " · speak now";
+      } else if (state === "transcribing") {
+        recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live");
+        engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device — a few seconds. Please wait…';
+      } else if (state === "downloading") {
+        recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live");
+        engEl.textContent = note || "Downloading the voice model (first use)…";
+      } else if (state === "preparing") {
+        recBtn.innerHTML = vcIco("hourglass") + " Preparing…"; recBtn.classList.remove("live");
+        engEl.textContent = "Getting the on-device model ready…";
+      } else if (state === "empty") {
+        recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
+        engEl.textContent = note || "Didn't catch any speech — tap the mic and try again.";
+      } else {   // idle
+        recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
+        engEl.textContent = (note != null) ? note : "";
+      }
+    }
+    var setState = paint;   // listen()'s onState + other handlers call setState(...)
+    function startRecTimer() {
+      if (timerId || !recording) return;
+      paint("recording");
+      timerId = setInterval(function () { if (!recording) return; elapsed++; paint("recording"); }, 1000);
+      if (!autoStopId) autoStopId = setTimeout(function () { if (recording) finishRecording(); }, MAX_REC_MS);
+    }
+    function stopRecTimer() { if (timerId) { clearInterval(timerId); timerId = null; } if (autoStopId) { clearTimeout(autoStopId); autoStopId = null; } }
+    // Map whatever the native engine reports into our display + timer.
+    function onEngineState(s, engine) {
+      s = String(s || "").toLowerCase();
+      if (/download/.test(s)) { stopRecTimer(); paint("downloading", engine); }
+      else if (/prepar|load|init/.test(s)) { stopRecTimer(); paint("preparing", engine); }
+      else if (/transcrib|process|decod/.test(s)) { stopRecTimer(); paint("transcribing", engine); }
+      else if (/record|listen|captur|speak/.test(s)) { startRecTimer(); }
+    }
+    function finishRecording() {   // user tapped Done, or hit the max-duration cap
+      if (!recording) return;
+      recording = false; stopRecTimer(); if (fallbackId) { clearTimeout(fallbackId); fallbackId = null; }
+      stop();
+      if (activeMode === "record") {
+        paint("transcribing");
+        // safety: if the native transcription never calls back, don't leave the user hanging
+        txGuardId = setTimeout(function () { paint("idle", null, "Transcription took too long — tap the mic to try again."); }, 45000);
+      } else { paint("idle"); }   // stream engines already delivered text live
     }
 
     recBtn.addEventListener("click", function () {
-      if (recording) { recording = false; stop(); setState("idle"); return; }
-      recording = true; base = ta.value ? ta.value.trim() : "";
-      listen({
-        engine: engineMode,                    // "fast" (default, unchanged) | "clinical" (Whisper)
-        language: dictLang,                    // en | auto | te — Clinical uses the multilingual model for non-en
+      if (recording) { finishRecording(); return; }
+      base = ta.value ? ta.value.trim() : "";
+      recording = true; activeMode = null; elapsed = 0; clearTimers();
+      paint(engineMode === "clinical" ? "preparing" : "listening", engineMode === "clinical" ? "Clinical (on-device)" : "");
+      var handle = listen({
+        engine: engineMode,                    // "fast" (stream) | "clinical" (Whisper, record→transcribe)
+        language: dictLang,                    // en | auto | hi | te
         onPartial: function (t) { ta.value = (base ? base + " " : "") + t; refreshExtract(); },
-        onFinal: function (t) { if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; } refreshExtract(); recording = false; setState("idle"); },
-        onDownloadProgress: function (p) { engEl.textContent = "Downloading model… " + Math.round((p || 0) * 100) + "%"; },
+        onFinal: function (t) {
+          clearTimers(); recording = false;
+          t = t ? String(t).trim() : "";
+          if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; refreshExtract(); paint("idle", null, ""); }
+          else { refreshExtract(); paint("empty"); }
+        },
+        onDownloadProgress: function (p) { paint("downloading", null, "Downloading voice model… " + Math.round((p || 0) * 100) + "%"); },
         onError: function (err) {
-          recording = false; setState("idle");
+          clearTimers(); recording = false;
           if (err === "clinical-unavailable") {
-            engEl.textContent = "Clinical Dictation unavailable — switched to Fast. Tap to speak.";
             engineMode = "fast";
             [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "fast"); });
-            return;
+            paint("idle", null, "On-device Clinical model isn't ready — switched to Fast. Tap to speak."); return;
           }
-          engEl.textContent =
-            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone, then tap to speak." :
-            // BUG-12: give the AVAudioSession/engine failure an actionable message instead of the raw code.
-            (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check microphone access in Settings, close other apps using the mic, then tap to try again." :
-            err === "model-download-failed" ? "Model download failed — check your connection and tap to retry." :
-            (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable — tap to re-download." :
-            (err === "insufficient-storage" || err === "low-memory") ? "Not enough free space/memory for the voice model. Free up some space and try again, or use Fast mode." :
+          paint("idle", null,
+            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone." :
+            (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check mic access, close other mic apps, then tap to try again." :
+            err === "model-download-failed" ? "Model download failed — retry, or download it in Settings ▸ Voice models." :
+            (err === "model-corrupted" || err === "model-missing") ? "Voice model not on device — download it in Settings ▸ Voice models, then try again." :
+            (err === "insufficient-storage" || err === "low-memory") ? "Not enough space/memory for the voice model. Free space, or use Fast mode." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
-            "Couldn't capture audio — tap to try again.";
+            "Couldn't capture audio — tap to try again.");
         },
-        onState: setState
+        onState: onEngineState
       });
+      activeMode = handle && handle.mode;   // 'record' (Clinical/AI) | 'stream' (Fast)
+      if (!handle) { recording = false; return; }
+      if (activeMode === "stream") paint("listening", handle.engine);
+      else if (activeMode === "record") {
+        // Record mode: if the model is already installed the native side begins capturing immediately.
+        // A short fallback guarantees a visible "Recording" + timer even if the engine emits no state
+        // (unless a download/prepare state has taken over).
+        fallbackId = setTimeout(function () {
+          if (recording && !timerId && lastState !== "downloading" && lastState !== "transcribing") startRecTimer();
+        }, 2000);
+      }
     });
 
     extractBtn.addEventListener("click", function () {
@@ -413,6 +560,9 @@
       ".smdv-langs{display:flex;gap:6px;margin-bottom:8px}",
       ".smdv-lang{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 12.5px var(--sans);padding:8px;border-radius:10px;cursor:pointer}",
       ".smdv-lang.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-tiers{display:flex;gap:6px;margin-bottom:8px}",
+      ".smdv-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 12.5px var(--sans);padding:8px;border-radius:10px;cursor:pointer}",
+      ".smdv-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
       ".smdv-mode-hint{font:600 11px/1.4 var(--sans);color:var(--slate-soft,#64748b);margin:-2px 0 10px;min-height:0}",
       ".smdv-model-mgr{margin:-2px 0 10px;min-height:0}",
       ".smdv-model-del{border:1px solid var(--line,#e2e8f0);background:transparent;color:var(--slate-soft,#64748b);font:700 11.5px var(--sans);padding:7px 11px;border-radius:10px;cursor:pointer}",
@@ -421,7 +571,13 @@
       ".smdv-rec{width:100%;border:none;border-radius:14px;background:var(--teal,#0f766e);color:#fff;font:800 15px var(--sans);padding:15px;cursor:pointer;margin-bottom:8px}",
       ".smdv-rec.live{background:#b91c1c;animation:smdvpulse 1.3s infinite}",
       "@keyframes smdvpulse{0%,100%{box-shadow:0 0 0 0 rgba(185,28,28,.5)}50%{box-shadow:0 0 0 8px rgba(185,28,28,0)}}",
-      ".smdv-eng{font:600 11.5px var(--sans);color:var(--slate-soft,#64748b);text-align:center;min-height:15px;margin-bottom:8px}",
+      ".smdv-eng{font:600 11.5px var(--sans);color:var(--slate-soft,#64748b);text-align:center;min-height:15px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}",
+      ".smdv-dot{width:9px;height:9px;border-radius:999px;background:#e5484d;display:inline-block;animation:smdvdot 1.1s ease-in-out infinite}",
+      "@keyframes smdvdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}",
+      ".smdv-spin{width:12px;height:12px;border-radius:999px;border:2px solid var(--line,#cbd5e1);border-top-color:var(--teal,#0f766e);display:inline-block;animation:smdvspin .8s linear infinite}",
+      "@keyframes smdvspin{to{transform:rotate(360deg)}}",
+      "@media (prefers-reduced-motion:reduce){.smdv-rec.live,.smdv-dot,.smdv-spin{animation:none!important}}",
+      ".smdv-diag{font:700 10.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;color:var(--slate-soft,#64748b);text-align:center;margin:-2px 0 8px}",
       ".smdv-ta{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e2e8f0);border-radius:12px;padding:11px 13px;font:500 14px/1.5 var(--sans);background:var(--panel,#fff);color:var(--ink,#0f172a);resize:vertical;margin-bottom:8px}",
       ".smdv-disc{font:500 11px/1.5 var(--sans);color:var(--slate-soft,#64748b);margin-bottom:12px}",
       ".smdv-extract{width:100%;border:1.5px solid var(--teal,#0f766e);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0f766e);font:800 14px var(--sans);padding:13px;border-radius:12px;cursor:pointer}",
@@ -435,14 +591,133 @@
       ".smdv-chip-x{border:none;background:rgba(15,118,110,.18);color:var(--teal,#0f766e);width:18px;height:18px;border-radius:999px;font:700 11px var(--sans);cursor:pointer;line-height:1}",
       ".smdv-unm{display:flex;flex-wrap:wrap;gap:6px}",
       ".smdv-unmatched{background:var(--bg,#f1f5f9);border:1px dashed var(--line,#cbd5e1);color:var(--slate,#334155);border-radius:8px;padding:4px 9px;font:600 12px var(--sans)}",
-      ".smdv-muted{color:var(--slate-soft,#94a3b8);font:600 12.5px var(--sans)}",
+      ".smdv-muted{color:var(--slate-soft,#64748b);font:600 12.5px var(--sans)}",
       ".smdv-apply{width:100%;margin-top:12px;border:none;border-radius:12px;background:var(--teal,#0f766e);color:#fff;font:800 14px var(--sans);padding:13px;cursor:pointer}",
       ".smdv-apply:disabled{opacity:.5;cursor:default}",
       "body.dark .smdv-sheet{--panel:#132030;--ink:#e8edf2}",
-      "body.dark .smdv-unmatched{background:#0d1b26}"
+      "body.dark .smdv-unmatched{background:#0d1b26}",
+      // Settings dashboard (sidebar) — glass-card, StewardVoice-branded
+      ".smdv-ms{font:600 12.5px var(--sans)}",
+      ".smdv-ms-note{font:600 12px var(--sans);color:var(--slate-soft,#64748b);padding:10px 12px;border:1px dashed var(--line,#cbd5e1);border-radius:12px;text-align:center}",
+      ".smdv-ms-sub{font:600 12px var(--sans);color:var(--slate-soft,#64748b);margin-bottom:10px}.smdv-ms-sub em{font-style:italic;color:var(--slate-soft,#94a3b8)}",
+      ".smdv-ms-tiers{display:flex;gap:6px;margin-bottom:12px}",
+      ".smdv-ms-tier{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--slate,#475569);font:800 11.5px var(--sans);letter-spacing:.03em;padding:7px 6px;border-radius:999px;cursor:pointer;transition:all .15s}",
+      ".smdv-ms-tier.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e);box-shadow:0 4px 16px -4px var(--teal,#0f766e)}",
+      ".smdv-ms-models{display:flex;flex-direction:column;gap:10px}",
+      ".smdv-card{border:1px solid var(--line,#e2e8f0);border-radius:14px;padding:13px;background:linear-gradient(180deg,var(--bg,#f8fafc) 0%,var(--panel,#fff) 100%)}",
+      ".smdv-card.installed{border-color:var(--teal,#0f766e)}",
+      ".smdv-card-top{display:flex;align-items:flex-start;gap:10px}",
+      ".smdv-card-info{flex:1;min-width:0}",
+      ".smdv-card-t{font:700 13.5px var(--sans);color:var(--ink,#0f172a)}",
+      ".smdv-card-s{font:600 11px var(--sans);color:var(--slate-soft,#64748b);margin-top:3px}",
+      ".smdv-card-tag{color:var(--teal,#0f766e);font-weight:700}",
+      ".smdv-st.off{color:#c2410c}.smdv-st.ok{color:var(--teal,#0f766e)}.smdv-st.dl{color:var(--slate,#475569)}",
+      ".smdv-card-btn{flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--teal,#0f766e);cursor:pointer}",
+      ".smdv-card-btn svg{width:18px;height:18px}",
+      ".smdv-card-btn.del{color:#c2410c;border-color:#f0c9b4}",
+      ".smdv-prog{display:flex;align-items:center;gap:9px;margin-top:11px}",
+      ".smdv-pct{font:700 10.5px ui-monospace,Menlo,monospace;color:var(--slate,#475569);background:var(--bg,#f1f5f9);padding:2px 6px;border-radius:6px;min-width:38px;text-align:center}",
+      ".smdv-prog-track{flex:1;height:5px;background:var(--line,#e2e8f0);border-radius:999px;overflow:hidden}",
+      ".smdv-prog-track>i{display:block;height:100%;width:0;background:var(--teal,#0f766e);border-radius:999px;box-shadow:0 0 10px var(--teal,#0f766e);transition:width .25s}",
+      ".smdv-ms-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}",
+      ".smdv-ms-hint{font:600 11px/1.5 var(--sans);color:var(--slate-soft,#64748b)}",
+      ".smdv-ms-off{border:none;background:none;color:var(--slate-soft,#94a3b8);font:700 11px var(--sans);text-decoration:underline;text-underline-offset:2px;cursor:pointer;flex:none}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }
 
-  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
+  // ── MaiK Scribe · Voice-model dashboard (rendered in the sidebar Settings ▸ Advanced block).
+  // Lets the clinician enable tiers, pick Base/Pro/Ultimate, and DOWNLOAD/DELETE each on-device model
+  // with a progress %, so first use doesn't depend on dictating (and never needs a dev console). ──
+  function modelSettingsHTML() {
+    injectCSS();   // the dashboard lives in the sidebar (dialog never opened) — ensure its styles exist
+    if (!whisperPluginPresent()) return '<div class="smdv-ms-note">On-device StewardVoice models are available in the iOS app only.</div>';
+    var on = tiersFlagOn(), tier = voiceTier();
+    return '<div class="smdv-ms" data-smdv-ms>' +
+      '<div class="smdv-ms-sub">Multilingual voice <em>· English · Hindi · Telugu</em></div>' +
+      '<div class="smdv-ms-tiers">' +
+        ["base", "pro", "ultimate"].map(function (t) {
+          return '<button class="smdv-ms-tier' + (on && tier === t ? " on" : "") + '" data-smdv-ms-tier="' + t + '">' + t.charAt(0).toUpperCase() + t.slice(1) + "</button>";
+        }).join("") +
+      '</div>' +
+      '<div class="smdv-ms-models" data-smdv-ms-models></div>' +
+      '<div class="smdv-ms-foot" data-smdv-ms-foot></div>' +
+    '</div>';
+  }
+  function wireModelSettings(container) {
+    if (!container) return;
+    injectCSS();
+    var box = container.querySelector("[data-smdv-ms]"); if (!box) return;
+    var modelsEl = box.querySelector("[data-smdv-ms-models]");
+    var footEl = box.querySelector("[data-smdv-ms-foot]");
+    var N = window.SMD_NATIVE;
+    function card(key) {
+      var m = MODEL_META[key] || { label: key, tag: "", mb: "?" };
+      return '<div class="smdv-card" data-key="' + key + '">' +
+        '<div class="smdv-card-top">' +
+          '<div class="smdv-card-info"><div class="smdv-card-t">' + m.label + '</div>' +
+            '<div class="smdv-card-s">' + (m.tag ? '<span class="smdv-card-tag">' + m.tag + '</span> · ' : "") + '~' + m.mb + ' MB · <b data-st class="smdv-st">checking…</b></div></div>' +
+          '<button class="smdv-card-btn dl" data-dl aria-label="Download">' + vcIco("download") + '</button>' +
+          '<button class="smdv-card-btn del" data-del aria-label="Delete" style="display:none">' + vcIco("trash") + '</button>' +
+        '</div>' +
+        '<div class="smdv-prog" data-prog style="display:none"><span class="smdv-pct" data-pct>0%</span><div class="smdv-prog-track"><i data-fill></i></div></div>' +
+      '</div>';
+    }
+    function refreshStatus(key) {
+      var el = modelsEl.querySelector('.smdv-card[data-key="' + key + '"]'); if (!el) return;
+      var st = el.querySelector("[data-st]"), dl = el.querySelector("[data-dl]"), del = el.querySelector("[data-del]"), prog = el.querySelector("[data-prog]");
+      if (!(N && N.whisperModelInstalled)) { st.textContent = "iOS app only"; st.className = "smdv-st"; dl.style.display = "none"; return; }
+      N.whisperModelInstalled(key).then(function (r) {
+        var ok = r && r.installed;
+        st.textContent = ok ? "Installed" : "Not installed"; st.className = "smdv-st " + (ok ? "ok" : "off");
+        dl.style.display = ok ? "none" : ""; del.style.display = ok ? "" : "none";
+        prog.style.display = "none"; el.classList.toggle("installed", !!ok);
+      }).catch(function () { st.textContent = "—"; });
+    }
+    function renderModels() {
+      if (!tiersFlagOn()) {
+        modelsEl.innerHTML = '<div class="smdv-ms-note">Pick a tier above to turn on multilingual voice.</div>';
+        footEl.innerHTML = ""; return;
+      }
+      var keys = TIER_MODELS[voiceTier()] || [];
+      modelsEl.innerHTML = keys.map(card).join("");
+      footEl.innerHTML = '<span class="smdv-ms-hint">Downloads once over Wi-Fi.</span><button class="smdv-ms-off" data-smdv-ms-off>Turn off</button>';
+      keys.forEach(refreshStatus);
+    }
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-smdv-ms-tier],[data-smdv-ms-off],[data-dl],[data-del]"); if (!b) return;
+      var t = b.getAttribute("data-smdv-ms-tier");
+      if (t) {   // picking a tier turns tiers ON and selects it
+        try { localStorage.setItem("smd_voice_tiers", "1"); localStorage.setItem("smd_voice_tier", t); } catch (e2) {}
+        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+        renderModels(); return;
+      }
+      if (b.hasAttribute("data-smdv-ms-off")) {
+        try { localStorage.setItem("smd_voice_tiers", "0"); } catch (e2) {}
+        [].forEach.call(box.querySelectorAll(".smdv-ms-tier"), function (x) { x.classList.remove("on"); });
+        renderModels(); return;
+      }
+      var el = b.closest(".smdv-card"); if (!el) return; var key = el.getAttribute("data-key");
+      if (b.hasAttribute("data-dl")) {
+        if (!(N && N.downloadWhisperModel)) { (window.toast || function () {})("Available in the app."); return; }
+        var prog = el.querySelector("[data-prog]"), pct = el.querySelector("[data-pct]"), fill = el.querySelector("[data-fill]"), st = el.querySelector("[data-st]");
+        b.style.display = "none"; prog.style.display = ""; st.textContent = "Downloading…"; st.className = "smdv-st dl";
+        N.downloadWhisperModel(key, { onProgress: function (p) { var v = Math.round((p || 0) * 100); pct.textContent = v + "%"; fill.style.width = v + "%"; } })
+          .then(function () { (window.toast || function () {})("StewardVoice model ready."); refreshStatus(key); })
+          .catch(function () { prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed — tap to retry"; st.className = "smdv-st off"; });
+        return;
+      }
+      if (b.hasAttribute("data-del")) {
+        if (!window.confirm("Delete this StewardVoice model? It will re-download when needed.")) return;
+        if (N && N.deleteWhisperModel) N.deleteWhisperModel(key).then(function () { refreshStatus(key); (window.toast || function () {})("Model removed."); }).catch(function () {});
+        return;
+      }
+    });
+    renderModels();
+  }
+
+  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings,
+    pickModel: function (lang) { return whisperModel(lang); },                      // which on-device model a language routes to (tier-aware)
+    modelCode: function (k) { return MODEL_CODE[k] || k; },                          // branded short code (SV-Telugu / SV-Ultra / …)
+    available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

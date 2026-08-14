@@ -1,46 +1,34 @@
-# Verdict: hereditary_diffuse_gastric_cancer.md
+# Verdict: hereditary_diffuse_gastric_cancer.md (re-verification after revision)
 
-1. DOSE LEAK: none. Scanned for mg/AUC/Gy/mcg/units-per-kg/m2 patterns — zero hits. All numerals
-   present are ages/percentages/intervals (37, 30-50%, 18-40, 6-12 months, <50, <70), each matched
-   to a DeVita line below. No drug dose, radiation dose, or numbered chemo schedule anywhere.
+1. DOSE LEAK: none. Grepped for mg/mg-m2/AUC/dose/cycle/q-week patterns — zero hits. All numerals
+   are ages/percentages/intervals (37, 30-50%, 18-40, 6-12 months, <50, <70), each matched to a
+   DeVita line below. No drug dose, radiation dose, or numbered chemo schedule anywhere.
 
-2. UNGROUNDED CLAIMS (checked against DeVita 12th ed, "Cancer of the Stomach" ch. lines
-   101190-101275, and CDH1/lobular breast lines 181126, 181644-181659):
+2. UNGROUNDED / MISLABELLED CLAIMS: none remaining.
    - Age of onset 37, CDH1/E-cadherin, 30-50% mutation rate, prophylactic gastrectomy age 18-40,
-     6-12 month endoscopy/random-biopsy interval, and the 5-criteria genetic-counselling checklist
-     (2 cancers w/ 1 diffuse; dx <50; diffuse+lobular breast one <70; Maori/cleft lip-palate;
-     bilateral lobular breast <70) — all VERBATIM-MATCHED to DeVita lines 101217-101227/101263-101264.
-     Not fabricated.
-   - CTNNA1 minority contributor, CDH1-negative multigene panel testing — explicitly self-flagged
-     inline as "general oncology standard, not from DeVita's section on this disease." Correct
-     flagging; DeVita's HDGC passage does not mention CTNNA1 or panel testing for CDH1-negative
-     cases (confirmed absent by grep).
-   - CDH1-lobular breast cancer link — grounded (DeVita line 181126: "mutations in CDH1 are
-     associated with an autosomal-dominant predisposition to diffuse gastric cancer and lobular
-     breast cancer").
-   - "Annual breast MRI and clinical breast exam... risk-reducing mastectomy as an option" for
-     female CDH1 carriers — NOT explicitly stated in DeVita's HDGC passage (confirmed absent) and,
-     unlike the CTNNA1/panel-testing claims, NOT flagged inline as general-standard/non-DeVita. This
-     is uncontroversial NCCN-guideline-standard management for CDH1 carriers, so not fabrication,
-     but it is an inconsistent citation-labeling gap versus the rest of the doc.
-   - Postoperative nutrition (B12/iron/calcium/fat-soluble vitamin supplementation after total
-     gastrectomy) — general gastrectomy-sequelae management, loosely supported by DeVita line 102240
-     ("...need for vitamin B12 supplementation" post-gastrectomy) but not HDGC-specific and not
-     flagged as general-standard either. Uncontroversial, minor labeling gap only.
-   - "When a diffuse gastric cancer is already present" section (surgical resection, perioperative/
-     adjuvant chemo, platinum-based doublet +/- targeted/immune agents for metastatic disease) —
-     explicitly and clearly flagged inline as "general oncology standard, not from DeVita's section
-     on this disease" with an honest statement that DeVita is silent on HDGC-specific systemic
-     therapy. Correctly labeled, no numeric regimen given.
+     6-12 month endoscopy/random-biopsy interval, and the 5-criteria genetic-counselling checklist —
+     verbatim-matched to DeVita lines 101217-101227/101263-101264. Not fabricated, not mislabelled.
+   - CTNNA1 minority contributor + CDH1-negative multigene panel testing — flagged inline as
+     "(general oncology standard, not from DeVita's section on this disease)"; confirmed CTNNA1 does
+     not appear anywhere in devita.txt. Correct.
+   - Breast MRI + clinical exam + risk-reducing mastectomy option for female CDH1 carriers — this was
+     the R1 gap (previously unflagged). Now relabelled "(NCCN CDH1-carrier standard, not from
+     DeVita's section on this disease)". Confirmed present verbatim in the current file (line 44).
+     Fixed.
+   - Postoperative nutritional supplementation (B12/iron/calcium/fat-soluble vitamins) — the second
+     R1 gap. Now relabelled "(general post-gastrectomy standard, not HDGC-specific in DeVita)".
+     Confirmed present verbatim (line 55). Fixed.
+   - "When a diffuse gastric cancer is already present" section (resection, perioperative/adjuvant
+     chemo, platinum-based doublet +/- targeted/immune agents for metastatic disease) — flagged
+     inline as "(general oncology standard, not from DeVita's section on this disease)", with an
+     explicit statement that DeVita is silent on HDGC-specific systemic therapy. No numeric regimen
+     given. Correct.
+   No claim is mis-attributed to DeVita; every claim not directly traceable to the DeVita HDGC
+   passage now carries an inline non-DeVita flag.
 
 3. CITATION: present — "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology,
-   12th ed." plus an added NCCN guidelines line, name only, no page numbers. Compliant.
+   12th ed." plus NCCN Guidelines line. Name only, no page numbers. Compliant.
 
-4. VERDICT: CLEAN (ready for R1), with two minor labeling-consistency notes (not fabrication, no
-   dose leak):
-   - The breast-MRI/risk-reducing-mastectomy surveillance sentence and the postoperative
-     nutrition-supplementation sentence make claims not verbatim-present in DeVita's HDGC passage
-     without the same "general oncology standard, not from DeVita" flag applied elsewhere in the
-     same document. Both are uncontroversial guideline-standard care (NCCN CDH1 breast surveillance;
-     standard post-gastrectomy nutrition), so this is a consistency nit for R1 to optionally tighten,
-     not a blocker.
+4. VERDICT: CLEAN (ready for R1 re-review). Both previously-flagged labelling gaps are fixed exactly
+   as specified, with no other content changed (confirmed: rest of file is identical to the prior
+   REVISE draft). No new dose leaks or ungrounded claims introduced.

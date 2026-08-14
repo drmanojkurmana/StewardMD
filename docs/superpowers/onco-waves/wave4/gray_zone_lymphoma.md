@@ -8,22 +8,22 @@ Because grey zone lymphoma sits on a biological continuum between primary medias
 
 There are no large prospective trials specific to this entity, so treatment recommendations are based on retrospective series and consensus rather than randomized evidence. Consensus has favoured treating grey zone lymphoma as an aggressive non-Hodgkin B-cell lymphoma rather than with a classical Hodgkin lymphoma regimen, reflecting its generally poorer prognosis and more resistant behaviour compared with either parent entity treated on its own terms.
 
-By intent, treatment is curative in essentially all newly diagnosed, non-metastatic presentations, since this is typically a localized bulky anterior mediastinal disease in a young patient population, similarly to PMBL.
+By intent, treatment is delivered with curative intent in newly diagnosed, non-metastatic disease, since this is typically a localized bulky anterior mediastinal presentation, similarly to PMBL.
 
 ### First-line systemic therapy
 
 - An anthracycline-based, rituximab-containing chemoimmunotherapy regimen is the backbone of first-line treatment, mirroring the approach used in PMBL and other aggressive B-cell lymphomas.
-- Single-arm experience supports an R-CHOP-type regimen as an acceptable first-line option, based on data showing activity of CHOP-based therapy in Hodgkin lymphoma.
+- An R-CHOP-type regimen is an acceptable first-line option, consistent with the aggressive-B-cell-lymphoma treatment paradigm favoured by consensus; single-arm experience showing activity of CHOP-based therapy in classical Hodgkin lymphoma has also been cited in support of this choice.
 - A dose-adjusted, infusional etoposide-prednisone-vincristine-cyclophosphamide-doxorubicin regimen with rituximab has also been used; in a small reported series of grey zone lymphoma with intermediate cHL/DLBCL features, outcomes with this intensified regimen were less favourable than when the same regimen is used in PMBL, suggesting this entity is more resistant to therapy generally and that intensification alone does not resolve the poorer prognosis.
 - There is no established evidence that either regimen is clearly superior for this entity specifically, and enrollment onto a clinical trial should be considered where available given the paucity of direct data.
 
 ### Role of radiotherapy
 
-Radiotherapy is used within an aggressive-lymphoma treatment paradigm in the same way it is applied to bulky mediastinal DLBCL/PMBL, most often as consolidation to a residual or incompletely resolved mediastinal mass after chemoimmunotherapy, or to salvage a localized relapse. It does not substitute for adequate systemic chemoimmunotherapy given the diffuse, often extranodal-prone biology shared with the DLBCL/PMBL side of this entity.
+DeVita's grey zone lymphoma section does not discuss radiotherapy. By extrapolation from the closely related PMBL/bulky mediastinal DLBCL paradigm, radiotherapy is most often used as consolidation to a residual or incompletely resolved mediastinal mass after chemoimmunotherapy, or to salvage a localized relapse (general oncology standard, not from DeVita's section on this disease). It does not substitute for adequate systemic chemoimmunotherapy given the diffuse, often extranodal-prone biology shared with the DLBCL/PMBL side of this entity.
 
 ### Role of surgery
 
-Surgery has no defined therapeutic role in grey zone lymphoma. Its role is limited to obtaining adequate diagnostic tissue, given how often mediastinal fibrosis makes needle biopsies difficult to interpret and an excisional or generous core biopsy with full immunohistochemistry is needed to secure the diagnosis.
+Surgery has no defined therapeutic role in grey zone lymphoma. Its role is limited to obtaining adequate diagnostic tissue, given how often mediastinal fibrosis makes needle biopsies difficult to interpret and an excisional or generous core biopsy with full immunohistochemistry is needed to secure the diagnosis (general oncology standard, not from DeVita's section on this disease).
 
 ### Relapsed or refractory disease
 
@@ -31,8 +31,8 @@ DeVita does not describe a dedicated relapsed/refractory pathway specific to gre
 
 ## Monitoring
 
-- Interim and end-of-treatment PET-CT to assess response of the mediastinal mass, as used across aggressive mediastinal B-cell lymphomas.
-- Baseline and on-treatment blood counts, lactate dehydrogenase and organ function given the intensity of chemoimmunotherapy.
+- Interim and end-of-treatment PET-CT to assess response of the mediastinal mass, as used across aggressive mediastinal B-cell lymphomas (general oncology standard, not from DeVita's section on this disease).
+- Baseline and on-treatment blood counts, lactate dehydrogenase and organ function given the intensity of chemoimmunotherapy (general oncology standard, not from DeVita's section on this disease).
 - Close clinical monitoring for superior vena cava obstruction, airway compromise, or effusion-related haemodynamic compromise at presentation and with any suspected relapse.
 - Long-term surveillance for relapse, recognising the intermediate/more resistant behaviour of this entity relative to PMBL or cHL alone.
 

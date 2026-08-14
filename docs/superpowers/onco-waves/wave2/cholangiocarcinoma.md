@@ -61,9 +61,11 @@ alongside standard adjuvant therapy where available.
   control in selected unresectable intrahepatic or perihilar disease, but data are limited to small
   series without randomized comparison, and treatment is constrained by the proximity of radiosensitive
   organs (stomach, duodenum, small bowel, liver, kidneys, spinal cord).
-- Photodynamic therapy combined with biliary stenting has shown improved survival and quality of
-  life over stenting alone for unresectable perihilar disease in randomized and pooled data, and is a
-  reasonable option where available.
+- Photodynamic therapy combined with biliary stenting has shown a survival and quality-of-life
+  benefit over stenting alone for unresectable perihilar disease in some randomized data, but a later
+  randomized trial was stopped early after showing shorter survival in the photodynamic-therapy arm.
+  The evidence is therefore conflicting, and its role remains uncertain and centre-dependent; it may
+  be considered at experienced centres but should not be presented as an established survival benefit.
 - Systemic therapy (below) is appropriate for disease that is unresectable but confined locally, in
   parallel with local measures, and is the mainstay once disease is metastatic.
 

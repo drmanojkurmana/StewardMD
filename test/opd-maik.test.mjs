@@ -15,7 +15,7 @@ const OPD = require(join(HERE, "..", "opd-emr.js"));
 // Browser-IIFE load with stubbed globals so we can exercise the PURE _render (button + panel).
 const SRC = readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8");
 function loadRender(extraWin) {
-  const win = Object.assign({ DX: {} }, extraWin || {});   // DX present -> Ask MaiK button eligible
+  const win = Object.assign({ DX: {}, SMD_AI: { extract: () => Promise.resolve({}) } }, extraWin || {});   // DX -> Ask MaiK; SMD_AI -> Pro offer
   const doc = { getElementById: () => null, createElement: () => ({ classList: { add() {}, remove() {} } }), body: { appendChild() {} } };
   const loc = { search: "" };
   const ls = { getItem: () => null, setItem: () => {} };
@@ -120,6 +120,57 @@ test("rankDifferential: ranks by score so a higher non-infective dx isn't buried
   assert.deepEqual(OPD._rankDifferential([]), []);
 });
 
+test("clinicalRerank: textbook discriminators re-rank the differential, fields preserved", () => {
+  // fever + neck stiffness: meningitis must beat afebrile mimics (SAH); score chip/fields kept
+  const list = [
+    { id: "sah", dx: "Subarachnoid hemorrhage", score: 54, inv: ["CT head"], reason: "why-sah" },
+    { id: "meningitis", dx: "Acute Bacterial Meningitis", score: 40, inv: ["LP"], reason: "why-men" }
+  ];
+  const out = OPD._clinicalRerank(list, ["fever", "neckStiffness", "headache"]);
+  assert.equal(out[0].dx, "Acute Bacterial Meningitis", "meningitis leads over SAH when fever + meningism present");
+  assert.equal(out[0].inv[0], "LP", "entry fields (inv/reason) preserved through re-rank");
+  assert.equal(out[0].reason, "why-men");
+  // no findings that trigger a rule -> pure score order, unchanged
+  const plain = OPD._clinicalRerank([{ dx: "A", score: 10 }, { dx: "B", score: 20 }], ["chestPain"]);
+  assert.equal(plain[0].dx, "B");
+  // thyroid storm without any thyroid sign is demoted
+  const th = OPD._clinicalRerank([{ dx: "Thyroid storm", score: 58 }, { dx: "Septic shock", score: 40 }], ["fever", "hypotension", "lactate"]);
+  assert.equal(th[0].dx, "Septic shock", "no thyroid storm without thyroid signs; sepsis leads on shock+lactate");
+});
+
+test("assessProText: builds a de-identified clinical summary (no name / MR ever)", () => {
+  const t = OPD._assessProText({
+    Chief_complaints_duration: "chest pain 2h", History_present_illness: "radiating to arm",
+    Diabetes_yesNo: "Y", Hypertension_yesNo: "N", Temp: "101", BP_SYS: "150", BP_dia: "90",
+    provisional_diagnosis: "ACS"
+  });
+  assert.match(t, /Chief complaint: chest pain 2h/);
+  assert.match(t, /diabetes/);
+  assert.ok(!/hypertension/.test(t), "N comorbid excluded");
+  assert.match(t, /Temp 101/);
+  assert.match(t, /BP 150\/90/);
+  assert.match(t, /Provisional diagnosis \(doctor\): ACS/);
+  // identifiers must never appear even if present on the object
+  const t2 = OPD._assessProText({ Chief_complaints_duration: "fever", name: "Asha Rao", mrn: "MR10234" });
+  assert.ok(!/Asha Rao/.test(t2) && !/MR10234/.test(t2), "name/MR are never included in the text sent to AI");
+});
+
+test("_render: Pro offer shows when AI available; 'MaiK Pro' badge shows for a pro result", () => {
+  const base = loadRender()._render({
+    loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {},
+    scribeSuggestions: { provisionalDx: "ACS", ddx: [], investigations: [], treatment: [], redFlags: [], corrections: [], acceptedDx: false, source: "maik" }
+  });
+  assert.match(base, /data-oe-act="assess-maik-pro"/, "Deepen with MaiK Pro offered on a base result");
+  assert.match(base, /Deepen with MaiK Pro/);
+  assert.ok(!/oe-tag oe-pro/.test(base), "no Pro badge on a base result");
+  const pro = loadRender()._render({
+    loading: false, tab: "assess", writeOn: true, patient: { name: "A B", mrn: "MR1" }, assessVals: {},
+    scribeSuggestions: { provisionalDx: "ACS", ddx: [], investigations: [{ label: "ECG", source: "ai" }], treatment: [], redFlags: [], corrections: [], acceptedDx: false, source: "pro" }
+  });
+  assert.match(pro, /oe-tag oe-pro/, "Pro result shows the MaiK Pro badge");
+  assert.ok(!/data-oe-act="assess-maik-pro"/.test(pro), "no Deepen offer once already a pro result");
+});
+
 test("buildMaikSuggestions: empty differential -> empty model", () => {
   const sg = OPD._buildMaikSuggestions([], {});
   assert.equal(sg.provisionalDx, "");
@@ -219,4 +270,24 @@ test("_render: treatment group + per-row rx accept render, review-first", () => 
   assert.match(html, /aspirin · 325 mg PO stat/);
   assert.match(html, /data-oe-act="scribe-accept:rx:0"/);
   assert.match(html, /Review/);                          // advisory: every row tagged Review before use
+});
+
+test("_render: no-MRN (local) case -> My Clinic save label, no storage strip", () => {
+  const html = loadRender()._render({
+    loading: false, tab: "assess", writeOn: true, source: "local",
+    patient: { name: "Dr MK", mrn: "loc_1" }, emrLabel: "My Clinic", assessVals: {}
+  });
+  assert.match(html, /Save to My Clinic/, "save button targets My Clinic, not GHIS");
+  assert.ok(!/Save to GHIS/.test(html), "no GHIS save for a local patient");
+  assert.ok(!/Saving to My Clinic|oe-store/.test(html), "no storage strip — destination is shown by the save label; controls live in Queue Settings");
+});
+
+test("_render: no store available -> decision-support-only, nothing saved", () => {
+  const html = loadRender()._render({
+    loading: false, tab: "assess", writeOn: true, noStore: true,
+    patient: { name: "Dr MK", mrn: "" }, assessVals: {}
+  });
+  assert.match(html, /Not saved/, "no-store shows a 'Not saved' indicator instead of a save button");
+  assert.match(html, /data-oe-act="storage-info"/, "save slot is a passive note");
+  assert.ok(!/Save to /.test(html), "no Save-to-anything button when nothing is stored");
 });

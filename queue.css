@@ -12,7 +12,7 @@
   --bg: #f7f9fb; --surface: #f7f9fb; --on-surface: #191c1e; --on-surface-variant: #3d4947;
   --sc-lowest: #fff; --sc-low: #f2f4f6; --sc: #eceef0; --sc-high: #e6e8ea; --sc-highest: #e0e3e5;
   --outline: #6d7a77; --outline-variant: #bcc9c6; --surface-bright: #f7f9fb;
-  --q-sans: Inter, var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --q-sans: 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
   --q-mono: var(--mono, ui-monospace, "SF Mono", Menlo, monospace);
   position: fixed; inset: 0; z-index: 12000; display: none; background: var(--bg); color: var(--on-surface); font-family: var(--q-sans);
 }
@@ -171,6 +171,10 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-fld input { width: 100%; height: 44px; border: 1px solid var(--outline-variant); border-radius: 10px; padding: 0 12px; font: 600 15px var(--q-sans); color: var(--on-surface); background: var(--surface); }
 #smdQueue .q-hint { display: block; font: 400 11.5px var(--q-sans); color: var(--secondary); margin-top: 4px; }
 #smdQueue .q-togrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--sc-low); }
+#smdQueue .q-togrow[data-q-act] { cursor: pointer; }
+#smdQueue .q-set-btn { display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center; margin-top: 14px; padding: 12px 14px; border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--surface); color: var(--on-surface); font: 600 14px var(--q-sans); cursor: pointer; }
+#smdQueue .q-set-btn:hover { border-color: var(--primary); }
+#smdQueue .q-set-btn .material-symbols-outlined { font-size: 20px; color: var(--primary); }
 #smdQueue .q-togl { font: 600 13px var(--q-sans); color: var(--on-surface); }
 #smdQueue .q-tog { position: relative; display: inline-block; width: 46px; height: 26px; flex: 0 0 auto; cursor: pointer; }
 #smdQueue .q-tog input { opacity: 0; width: 0; height: 0; position: absolute; }
@@ -191,6 +195,8 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-gate-sub { margin: 0 0 18px; text-align: center; font: 500 13px var(--q-sans); color: var(--on-surface-variant); line-height: 1.4; }
 #smdQueue .q-gate-in { width: 100%; box-sizing: border-box; background: var(--bg); border: 1px solid var(--outline-variant); border-radius: 10px; color: var(--on-surface); font: 500 15px var(--q-sans); padding: 13px 14px; margin-bottom: 10px; }
 #smdQueue .q-gate-in:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,104,95,.12); }
+#smdQueue .q-gate-remember { display: flex; align-items: center; gap: 8px; margin: 2px 2px 12px; color: var(--secondary); font: 500 13px var(--q-sans); cursor: pointer; user-select: none; }
+#smdQueue .q-gate-remember input { width: 17px; height: 17px; accent-color: var(--primary); flex: 0 0 auto; }
 #smdQueue .q-gate-err { min-height: 18px; color: #dc2626; font: 600 12px var(--q-sans); margin: 0 2px 8px; }
 #smdQueue .q-gate-btn { width: 100%; background: var(--primary); color: var(--on-primary); border: none; border-radius: 12px; padding: 14px; font: 700 15px var(--q-sans); cursor: pointer; }
 #smdQueue .q-gate-btn:disabled { opacity: .6; }
@@ -215,3 +221,27 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
   #smdQueue .q-bottomnav .q-nav { flex: 1; flex-direction: column; gap: 3px; align-items: center; justify-content: center; padding: 6px; font-size: 10px; letter-spacing: 0; }
   #smdQueue .q-bottomnav .q-nav.on { background: none; color: var(--primary); }
 }
+
+/* ── motion (tokens + keyframes from motion.css) — GPU-composited transform/opacity only ───────── */
+#smdQueue.on { animation: smdFadeIn var(--smd-dur-sm, .2s) ease both; }
+#smdQueue .q-gate-card { animation: smdSheetUp var(--smd-dur-lg, .42s) var(--smd-ease, ease) both; }
+#smdQueue .q-cta { animation: smdPopIn var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-card { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-card:nth-of-type(2) { animation-delay: .05s; }
+#smdQueue .q-card:nth-of-type(3) { animation-delay: .1s; }
+#smdQueue .q-card:nth-of-type(n+4) { animation-delay: .14s; }
+/* ticket list rows glide in, lightly staggered (capped so long lists don't wave for seconds) */
+#smdQueue .q-tl-row { animation: smdFadeUp var(--smd-dur-sm, .22s) var(--smd-ease, ease) both; }
+#smdQueue .q-tl-row:nth-child(2) { animation-delay: .03s; }
+#smdQueue .q-tl-row:nth-child(3) { animation-delay: .06s; }
+#smdQueue .q-tl-row:nth-child(4) { animation-delay: .09s; }
+#smdQueue .q-tl-row:nth-child(5) { animation-delay: .12s; }
+#smdQueue .q-tl-row:nth-child(n+6) { animation-delay: .15s; }
+#smdQueue .q-empty { animation: smdFadeIn var(--smd-dur, .3s) ease both; }
+#smdQueue .q-cta-btn, #smdQueue .q-gate-btn, #smdQueue .q-tog { transition: transform .12s var(--smd-ease, ease), background .2s ease, color .2s ease; }
+#smdQueue .q-cta-btn:active, #smdQueue .q-gate-btn:active { transform: scale(.97); }
+#smdQueue .q-consult { animation: smdPopIn var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-kpi { animation: smdFadeUp var(--smd-dur, .3s) var(--smd-ease, ease) both; }
+#smdQueue .q-kpi:nth-child(2) { animation-delay: .05s; }
+#smdQueue .q-kpi:nth-child(3) { animation-delay: .1s; }
+#smdQueue .q-kpi:nth-child(4) { animation-delay: .15s; }

@@ -1,4 +1,4 @@
-# Lymphomatoid Papulosis (LyP) — Management
+# Lymphomatoid Papulosis (LyP): Management
 
 ## Overview and intent of treatment
 Lymphomatoid papulosis is a clonal but nonmalignant member of the primary cutaneous CD30-positive
@@ -24,8 +24,9 @@ even though the clinical behaviour remains benign and self-regressing.
   with roughly two-thirds of patients responding and about a third achieving complete remission in
   a phase II trial that combined LyP, C-ALCL, and CD30+ mycosis fungoides. Response did not
   correlate with the level of CD30 expression. Oral retinoids (e.g. bexarotene) are a further
-  option for refractory disease. Aggressive multiagent chemotherapy is not appropriate for this
-  indolent condition and should be avoided.
+  option for refractory disease (general oncology standard, not from DeVita's section on this
+  disease). Aggressive multiagent chemotherapy is not appropriate for this indolent condition and
+  should be avoided.
 
 ## Role of surgery and radiotherapy
 DeVita's section on LyP does not describe a role for surgical excision or radiotherapy in LyP
@@ -39,8 +40,9 @@ managed and staged as that entity rather than as LyP.
 2. Low-dose methotrexate or PUVA phototherapy for extensive or symptomatic eruptions.
 3. Topical corticosteroids or retinoids for individual lesions (general oncology standard, not
    from DeVita's section on this disease).
-4. Brentuximab vedotin, or oral retinoids, reserved for refractory or highly symptomatic disease,
-   explicitly avoiding aggressive chemotherapy.
+4. Brentuximab vedotin, or oral retinoids (general oncology standard, not from DeVita's section
+   on this disease), reserved for refractory or highly symptomatic disease, explicitly avoiding
+   aggressive chemotherapy.
 
 ## Monitoring
 Long-term follow-up is warranted because a clonal T-cell population can, in a minority of

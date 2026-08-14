@@ -28,6 +28,11 @@ FILES=(
   "ggml-small.en-q5_1.bin:bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30"
   "ggml-base-q5_1.bin:422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898"
   "ggml-tiny-q5_1.bin:818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7"
+  # Steward Voice tiers (multilingual). Off-the-shelf ggerganov ggml weights — SHA-256 pinned to
+  # native-bridge.js. (The Telugu specialist ggml-telugu-small-q8_0.bin is NOT here — it is built +
+  # uploaded by scripts/convert-telugu-whisper-ggml.sh, which pins its own SHA.)
+  "ggml-small-q8_0.bin:49c8fb02b65e6049d5fa6c04f81f53b867b5ec9540406812c643f177317f779f"
+  "ggml-large-v3-turbo-q5_0.bin:394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
 )
 HF_BASE="https://huggingface.co/ggerganov/whisper.cpp/resolve/main"
 

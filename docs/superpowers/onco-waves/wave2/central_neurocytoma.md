@@ -84,4 +84,9 @@ most solid tumors. The practical sequence is:
   the differential with oligodendroglioma or another glial tumor is not already resolved, since
   management differs substantially between these entities.
 
-Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.
+Sources: general neuro-oncology standard of care and WHO CNS tumor classification principles
+(general oncology standard, not from DeVita's section on this disease). DeVita, Hellman, and
+Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed. was searched but contains no
+dedicated clinical management text for central neurocytoma (only a single passing list mention in
+the chapter on raised intracranial pressure); no clinical claims in this document are attributed
+to DeVita.

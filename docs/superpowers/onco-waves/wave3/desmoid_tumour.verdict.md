@@ -1,51 +1,56 @@
-# Adversarial verification — desmoid_tumour.md
+# Adversarial re-verification — desmoid_tumour.md (post-revision)
 
-1. DOSE LEAK: none. Only numeric tokens in the file are "5 cm" (line 33, a
-   tumour-size risk-stratification threshold — matches DeVita's ">5 cm"
-   recurrence-risk cutoff verbatim, not a drug dose/mg/AUC/schedule) and
-   "12th ed" in the citation line. No mg, mg/m2, AUC, Gy, %, or numbered
-   schedule anywhere.
+1. DOSE LEAK: none. Only numeric tokens in the file are "5 cm" (line 33,
+   tumour-size recurrence-risk threshold — matches DeVita's ">5 cm" cutoff
+   verbatim, not a dose) and "12th ed" in the citation line. Grepped for
+   mg, mg/m2, AUC, Gy, %, and numbered-schedule patterns: zero hits.
+   Sidecar consistently generalizes away DeVita's numeric data (drops the
+   50% vs 59% 5-yr PFS wait-and-see figures, the >90%/20-30%/>50%
+   recurrence-rate figures, the 56%/69% local-control figures, the 50-60 Gy
+   radiation doses, and the 81% vs 36% 2-yr PFS trial result) into
+   qualitative language ("similar longer-term outcomes," "cure rates are
+   high," "meaningful proportion," "achieved meaningful rates of local
+   control").
 
-2. UNGROUNDED CLAIMS:
-   - "A gamma-secretase inhibitor ... has shown activity in trials and
-     represents a mechanistically targeted option in refractory disease"
-     (lines 77-80). Overstated relative to the source. DeVita's visible
-     Management-of-Specific-Histologic-Subtypes text (pp.1125-1126)
-     discusses only imatinib, sorafenib (incl. the phase III placebo trial),
-     and pazopanib as the targeted-agent evidence for desmoid — it never
-     reaches the gamma-secretase inhibitor despite promising to ("results
-     discussed in 'Management of Specific Histologic Subtypes and Sites'",
-     p.1089). The only in-text mention of the gamma-secretase inhibitor
-     (PF-03084014) is the p.1089 biology passage, which says it provided
-     *mechanistic rationale* for a phase I dose-finding trial in "advanced
-     solid malignancies" (ref. 70) — not that it showed activity/response in
-     desmoid tumours specifically. "Has shown activity in trials" is not
-     supported by the excerpted text as written; it reads as pulled from
-     real-world knowledge of nirogacestat/DeFi (post-12th-ed data) rather
-     than from this book. Everything else in the systemic-therapy section
-     (NSAIDs/sulindac, hormonal agents, anthracycline/liposomal or
-     combination chemo, TKI class incl. the sorafenib phase III PFS trial)
-     traces cleanly to specific sentences in the pp.1125-1126 excerpt.
-   - No other unsupported drug/regimen/trial/statistic found. Surgery
-     recurrence-risk claims (small abdominal wall vs. large extremity/chest
-     wall vs. intra-abdominal/mesenteric), the wait-and-see vs.
-     immediate-treatment PFS parity, the positive-margin/local-control
-     claim, and the radiation-controversy/definitive-radiation claims all
-     match specific DeVita sentences (generalized away from the underlying
-     numbers, as instructed).
+2. UNGROUNDED / MISLABELLED CLAIMS: none remaining.
+   - Gamma-secretase inhibitor claim (lines 77-80, the R1-blocking issue):
+     now reads "is under investigation on this mechanistic basis as a
+     targeted option in refractory disease." Confirmed against DeVita
+     p.1089: "Cross-talk between the Wnt and Notch signaling pathways
+     provided rationale for a phase I trial of the oral gamma-secretase
+     inhibitor PF-03084014, which disrupts Notch signaling." The revised
+     wording keeps only the mechanistic-rationale/investigational framing
+     and drops the unsupported "has shown activity in trials" efficacy
+     claim. No longer implies proven benefit; no longer misattributes
+     post-12th-ed nirogacestat/DeFi efficacy data to DeVita. Resolved.
+   - NSAID vs. hormonal-agent evidence parity (line 64): "produced reported
+     responses" (was "well-documented responses") now sits at parity with
+     "anecdotal response data" for hormonal agents, matching DeVita's
+     actual relative framing (p.1125: "well-documented responses" for
+     NSAIDs vs. "anecdotal accounts" for hormonal agents — the sidecar now
+     undersells NSAID evidence slightly for safety margin rather than
+     overselling it, acceptable per R1's requested direction). Resolved.
+   - TKI paragraph (lines 72-76): "a placebo-controlled randomised trial
+     confirmed improved progression-free survival with a multitargeted
+     tyrosine kinase inhibitor compared with placebo" — correct,
+     unattributed (no drug name, no numbers) paraphrase of DeVita's
+     sorafenib phase III result (p.1126, ref. 69). No fabrication.
+   - Surgery/recurrence-risk factors (>5cm size, chest wall/extremity site,
+     younger age, margin status not predictive), regional/ablative
+     therapies (HIFU, cryoablation, chemoembolization), radiation
+     controversy/definitive-radiation role, and the FAP screening trigger
+     all trace cleanly to the DeVita pp.1125-1126 management passage.
+   - No claim is mis-attributed to DeVita. Nothing requires the "(general
+     oncology standard...)" label because no remaining claim is both
+     specific (regimen/drug/trial/statistic) and ungrounded — the generic
+     MDT-referral and urgent-referral guidance in "When to refer" is
+     process guidance, not a specific regimen/drug/trial/stat claim.
 
 3. CITATION: present — "Sources: DeVita, Hellman, and Rosenberg's Cancer:
-   Principles & Practice of Oncology, 12th ed." Name only, no page numbers.
-   Correct.
+   Principles & Practice of Oncology, 12th ed." Name only, no page
+   numbers. Compliant.
 
-4. VERDICT: ISSUES (minor, one item)
-   - Soften or cut the gamma-secretase-inhibitor "has shown activity in
-     trials" claim (lines 77-80) — as written it's not backed by the
-     excerpted DeVita management text, only by a mechanistic-rationale
-     sentence elsewhere in the chapter. Either drop the efficacy framing
-     ("has shown activity in trials") down to "under investigation based on
-     the Notch/Wnt mechanistic rationale" (which IS grounded), or have R1
-     confirm/re-source it against fuller DeVita text or a second source
-     before shipping. Nothing else needs a rewrite — no dose leak, citation
-     format is correct, and the rest of the narrative is traceable to the
-     two cited passages (pp.1089, 1125-1126).
+4. VERDICT: CLEAN — ready for R1 re-review. Both items from the prior
+   ISSUES verdict (gamma-secretase efficacy overstatement; NSAID/hormonal
+   evidence-parity wording) are fixed exactly as flagged, with no new
+   drift introduced elsewhere in the file.

@@ -20,6 +20,12 @@ export function scribeExtractPrompt(transcript) {
     "The transcript may be Telugu, Hindi, or code-switched Indian English; TRANSLATE the clinical meaning to English. " +
     "Never output Telugu or Devanagari script in any field. Keep drug names, doses, units, numbers and standard " +
     "abbreviations (BP, IV, BD, OD) exactly as stated. Translate faithfully — do not add or drop clinical content.\n" +
+    "ASR NOISE — IMPORTANT: this transcript is on-device speech recognition of possibly code-switched " +
+    "Telugu/Hindi/English speech, so it may contain mis-hearings, transliteration, repeated or garbled words. " +
+    "Reconstruct the intended CLINICAL meaning: de-duplicate repeats, drop filler/noise, and normalize ONLY " +
+    "UNAMBIGUOUS mis-recognitions (a clear phonetic match to exactly one common clinical term). If a garbled " +
+    "word could plausibly be more than one drug/finding, keep it verbatim or omit it — NEVER substitute a " +
+    "different clinical entity and NEVER guess a dose. This is interpreting what was said, not inventing.\n" +
     "emrFields keys allowed: cc, presentHx, pastHx, comorbidsNote (+ dm/htn/cardiac/asthma/tb/thyroid/epilepsy as 'Yes'/'No' only if clearly stated).\n" +
     "PERSONAL HISTORY / HABITS: if the patient states a habit, set the matching emrFields key to 'Yes' " +
     "(only when explicitly affirmed): alcohol, smoking, recDrug (recreational drug use), tobacco (chewing " +

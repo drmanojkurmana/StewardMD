@@ -1,4 +1,4 @@
-# Osteoblastoma — Management Narrative
+# Osteoblastoma - Management Narrative
 
 ## Sourcing note
 
@@ -90,4 +90,8 @@ oncology standard, not from DeVita's section on this disease).
   mistaking an osteoblastoma-like osteosarcoma for benign disease (general oncology standard, not
   from DeVita's section on this disease).
 
-Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.
+Sources: general orthopedic/musculoskeletal oncology standard of care; NOT sourced from DeVita,
+Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed. (that text has no
+dedicated osteoblastoma management section, only two passing mentions - needs manual sourcing
+against a dedicated bone-tumor reference, e.g. WHO Classification of Tumours, Soft Tissue and
+Bone, or an orthopedic oncology text).

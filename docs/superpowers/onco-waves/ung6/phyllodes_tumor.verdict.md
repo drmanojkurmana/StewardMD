@@ -1,0 +1,16 @@
+# Adversarial verification verdict — phyllodes_tumor.md
+
+**1. DOSE LEAK:** none. Scanned for mg/mg-m2/AUC/Gy/numbered-cycle patterns — every number in the file is a patient-count, percentage, year range, or margin-width figure (800/821 patients, 89% survival, 2007-2017, 550 patients, 2 mm margin, <5% axillary mets), not a drug dose or schedule.
+
+**2. UNGROUNDED CLAIMS:**
+- Self-contradiction: the "Systemic therapy" section names "anthracycline-based ... regimens" as an example of sarcoma-directed treatment, then the "Deliberately omitted" section at the bottom claims "No specific chemotherapy regimen names, agents ... were found grounded ... so none are asserted here." DeVita's phyllodes section (line 185928-185929) only says treatment "is based on the guidelines for treating sarcomas" — it does not name anthracyclines. Anthracycline-based therapy is uncontroversial as general STS first-line, but (a) it is not grounded in the cited DeVita passage for this disease, and (b) its presence contradicts the file's own claim of omission. Recommend either removing "anthracycline-based" from the systemic-therapy paragraph or removing/adjusting the "no agents named" claim in Deliberately Omitted so the two sections don't contradict each other.
+- "add staging/surveillance chest imaging" as a surveillance recommendation is a reasonable inference from DeVita's "lung as the most common site" of mets, but DeVita does not explicitly prescribe chest imaging surveillance in this passage — it's the sidecar author's extrapolation, not directly stated. Minor, not flagged as an inference in the text (unlike the other general-standard callouts, which are explicitly labeled as such).
+- All other specific claims (SEER series of ~800/821 patients, 52%/"roughly half" mastectomy, 89% 10-year cause-specific survival, no mastectomy survival benefit, 2007-2017 cohort of 550 patients, ≥2mm vs <2mm margin finding, <5% axillary mets, hematogenous spread with lung as dominant site, RT not used for benign lesions, systemic therapy per sarcoma guidelines) are directly supported by DeVita lines 185893-185929 and are faithfully paraphrased without inventing precision (e.g. correctly omits the OR 0.39 statistic and the exact 55.3%/38.5% breakdown, rounds to "roughly half").
+- Items explicitly labeled "general oncology standard, not from DeVita's section on this disease" (RT for margin-positive re-excision, core-biopsy-vs-fibroadenoma referral trigger, MDT/sarcoma-service referral) are honestly disclosed as non-DeVita-grounded rather than passed off as textbook claims — correct practice, no issue.
+
+**3. CITATION:** Present — "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." No page numbers. Correct format.
+
+**4. VERDICT: ISSUES**
+- Fix the anthracycline/"no agents named" self-contradiction (delete the specific drug-class example, or soften the omission claim to match).
+- Optionally caveat the chest-imaging surveillance line as an inference rather than a direct DeVita statement.
+Otherwise the draft is well-grounded, appropriately conservative on dosing/regimen specificity, and matches the source passage closely — small fix and it's ready for R1.

@@ -1,40 +1,28 @@
-# Adversarial verification — nodal_marginal_zone_lymphoma.md
+# Adversarial verification (re-check after REVISE) — nodal_marginal_zone_lymphoma.md
 
-Checked against: `/Users/diwakarkumar/.claude/jobs/142278a7/tmp/devita.txt`, "Nodal Marginal Zone Lymphomas" section (DeVita 12th ed., Ch. 67, ~lines 267671-267746, pp. 1383-1384), plus the adjoining "Splenic Marginal Zone Lymphoma" section for the hepatitis-C claim.
+Checked against: `/Users/diwakarkumar/.claude/jobs/142278a7/tmp/devita.txt`, "Nodal Marginal Zone Lymphomas" section (DeVita 12th ed., ~lines 267671-267746, pp. 1383-1384), plus the adjoining "Splenic Marginal Zone Lymphoma" section for the hepatitis-C claim.
 
 ## 1. DOSE LEAK
-None. Grepped for `mg|AUC|m2|m^2|day N|qN|cycle` and for any bare numeric pattern (`%`, `month`, `year`) — the file contains only:
-- "under 1% of all NHL" (incidence, matches DeVita's "<1% of all NHLs")
+None. Grepped for `mg|mg/m2|AUC|cycle N|day N|qN` and scanned every numeric token in the file. The only occurrences are epidemiologic/response-rate statistics, not doses/schedules:
+- "under 1% of all NHL" (matches DeVita's "<1% of all NHLs")
 - "response rates in excess of 80%" (matches DeVita verbatim: "RRs in excess of 80%")
-- "5-year survival ... 55% to 79%" (matches DeVita verbatim: "5-year survival for patients with nodal MZL is 55% to 79%")
+- "5-year survival ... 55% to 79%" (matches DeVita verbatim)
+The "Deliberately omitted" section names the word "doses" with no number attached. No mg/m2, AUC, or numbered regimen/schedule anywhere.
 
-None of these are a dose, mg/m2, AUC, or a numbered schedule (no cycle counts, no day-1/8/15 patterning, no drug quantities). Clean.
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+None found. All three prior REVISE items are now correctly resolved:
 
-## 2. UNGROUNDED CLAIMS
-None found that are both (a) unsupported by the DeVita section and (b) not flagged/uncontroversial.
-
-Spot-checked and confirmed present in DeVita's Nodal MZL text:
-- <1% of NHL, nodal-only by definition — matches.
-- Majority stage III/IV, majority asymptomatic, BM involvement ~45% ("under half," less common than other indolent lymphomas) — matches DeVita's "Over 70% ... stage III/IV," "majority asymptomatic," "45%."
-- Limited-stage RT mirroring limited-stage FL — matches DeVita verbatim.
-- Chemoimmunotherapy (alkylator or purine analog + rituximab), RR >80% — matches.
-- R-CHOP vs. BR phase III, no significant PFS difference — matches DeVita's RCHOP-vs-BR comparison (P<.32; sidecar correctly omits the patient count and the specific PFS months, generalizing to "no significant difference").
-- Ibrutinib in relapsed MZL, ~half ORR, ~1-year PFS, FDA-approved for relapsed disease — matches DeVita's 48% ORR / 14-month PFS, correctly rounded to qualitative language per the draft's stated omission policy.
-- Zanubrutinib phase II, majority responding, ~quarter CR, approved for R/R — matches DeVita's MAGNOLIA data (68% ORR / 26% CR), trial name and exact numbers correctly stripped.
-- Umbralisib (PI3K inhibitor) approved in R/R MZL based on phase II — matches.
-- CD19 CAR-T explored 3L+ in R/R MZL, encouraging but immature follow-up — matches DeVita's ZUMA-5 axi-cel description (85%/60% ORR/CR, immature follow-up), correctly rounded and drug/trial name dropped.
-- 5-year survival 55-79%, risk of histologic transformation — matches DeVita verbatim.
-
-Claims explicitly and honestly flagged in-line as NOT DeVita-sourced (general-oncology-standard, uncontroversial):
-- Watch-and-wait for asymptomatic/low-burden disease.
-- Hepatitis-C-driven MZL — treating the underlying infection (this is actually DeVita content, but from the adjoining Splenic MZL paragraph, not the Nodal MZL section — correctly caveated as such rather than misattributed).
-- Surveillance-schedule rationale, referral criteria, urgent re-biopsy on transformation trigger.
-
-Two minor unflagged-but-uncontroversial statements (would not block sign-off): "Surgery has no defined role... diagnosis by lymph node biopsy rather than resection" (para. under "Role of surgery") and "should prompt re-biopsy of any rapidly enlarging or discordant node" — neither is stated verbatim in DeVita's nodal MZL paragraph, but both are standard, non-controversial oncology practice consistent with how indolent lymphomas are generally managed elsewhere in the same DeVita chapter (transformation/re-biopsy is explicitly discussed for HT in this exact section: "Similar to other indolent lymphomas, HT can occur with nodal MZL").
+- **Umbralisib (Critical #1 — was stated as an approved option):** now reads "previously held accelerated approval ... but this was voluntarily withdrawn from the market in 2022 after an overall-survival detriment signal ... it is no longer an available treatment option," inline-labelled "(regulatory status current as of this writing, not from DeVita's section on this disease)" — repeated consistently in the systemic-therapy bullet and the Lines-of-therapy/referral bullets. Matches the known Ukoniq/UNITY-CLL 2022 withdrawal.
+- **Ibrutinib (Critical #2 — was stated as an approved option):** ORR/PFS description ("roughly half" / "about a year") still correctly traces to DeVita's 48% ORR / 14-month PFS, but the approval claim is now reframed: "its US accelerated approval for this indication was voluntarily withdrawn in 2023, so it is now a historical/off-label option," labelled non-DeVita/regulatory-current. Consistent with the actual 2023 AbbVie/Janssen voluntary withdrawal of ibrutinib's MCL/MZL accelerated approvals.
+- **R-CHOP vs. BR trial (Important #3 — was mis-attributed as an MZL-dedicated trial):** softened to "a randomised phase III comparison of rituximab-CHOP against bendamustine-rituximab in indolent lymphoma, including a subset of marginal zone lymphoma" — accurate to DeVita's own description ("included 67 patients with MZL NOS," no PFS difference, P<.32), left correctly unlabelled since it is DeVita-sourced.
+- **Zanubrutinib:** left as "it remains an approved option for relapsed or refractory disease" — matches DeVita verbatim ("also an FDA-approved option for patients with relapsed/refractory disease"); correctly distinguished from the withdrawn drugs, and correctly still unlabelled (genuinely DeVita-grounded, still current).
+- **CD19 CAR-T, hepatitis-C/autoimmune adjunct, watch-and-wait, surveillance rationale, referral criteria:** each still appropriately labelled "(general oncology standard, not from DeVita's section on this disease)" where the fact is external or from an adjoining (splenic MZL) section, and left unlabelled where genuinely DeVita-sourced for nodal MZL (epidemiology, staging, RT, chemoimmunotherapy RR, 5-year survival).
+- No remaining claim presents a withdrawn/non-current regimen as a live approved option, and no claim is mis-attributed to DeVita's nodal-MZL section that isn't actually there.
 
 ## 3. CITATION
-Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." — name only, no page numbers. Correct format.
+Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." — name only, no page numbers.
 
-## 4. VERDICT: CLEAN (ready for R1)
+## 4. Other hard-rule check
+No em dash or en dash anywhere in the file (byte-grepped for both); title now uses a colon ("Nodal marginal zone lymphoma (NMZL): management").
 
-No dose/regimen-number leakage, no fabricated trial names/statistics, DeVita-vs-general-standard provenance is honestly and explicitly distinguished throughout, and the citation line meets the no-page-numbers rule.
+## VERDICT: CLEAN — ready for R1 re-review.

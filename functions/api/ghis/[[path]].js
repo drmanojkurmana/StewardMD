@@ -444,9 +444,12 @@ async function getAssessmentForm(env, token, patientId, episodeId) {
   const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (r.unauth) return r;
   const html = r.body || '';
-  // Full field map keyed by BARE name (strip assessment./val.) so the client prefills by schema field name.
+  // Key by the schema's field name: strip ONLY the assessment. prefix. The val.* fields KEEP their
+  // prefix (that's their real GHIS name + how ASSESS_SCHEMA/buildAssessVals look them up). Stripping
+  // val. too made the whole "Pre-admission investigation/treatment" section miss on prefill and get
+  // blanked+overwritten on every Save.
   const all = extractAssessmentForm(html), fields = [];
-  Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^(assessment|val)\./, ''), value: all[k] }); });
+  Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^assessment\./, ''), value: all[k] }); });
   return { fields: fields, raw: htmlToText(html).slice(0, 8000) };
 }
 // WRITE helper: after a service is picked, GHIS needs its pack-rate id + price, which FilterServices does NOT
@@ -564,6 +567,21 @@ export async function saveAssessment(env, token, body) {
   const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
   if (gr.unauth) return gr;
   const all = extractAssessmentForm(gr.body || '');
+  // SAFETY (GHIS keys the assessment form by DOCTOR token, not patient — a stale/interleaved request
+  // can return a DIFFERENT patient's form, and a failed visit-activation returns a blank doc_id 0 form):
+  //  (a) if the form carries a patient_id, it MUST match the one we're saving — else abort (never overlay
+  //      one patient's edits onto another's chart);
+  //  (b) refuse to POST a blank/unactivated record (doc_id 0 + no client fallback) — that silently
+  //      creates a duplicate/blank instead of updating the real one, while the app shows "Saved".
+  const formPid = all['assessment.patient_id'];
+  if (formPid && mr && String(formPid) !== String(mr)) {
+    return { ok: false, status: 409, resp: 'patient_mismatch: loaded form for ' + formPid + ', expected ' + mr + ' — save aborted' };
+  }
+  const formDoc = all['assessment.Initial_Assessment_doc_id'];
+  const clientDoc = (body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '';
+  if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc) {
+    return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate' };
+  }
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);

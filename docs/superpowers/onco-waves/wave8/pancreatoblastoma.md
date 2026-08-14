@@ -1,11 +1,13 @@
 # Pancreatoblastoma - Management
 
-Pancreatoblastoma is the most common pancreatic malignancy of childhood, typically presenting in
-the first decade of life, and is linked to Beckwith-Wiedemann syndrome and familial adenomatous
-polyposis. It is characterised by acinar differentiation with squamoid nests, frequently produces
-alpha-fetoprotein, and molecularly shows SMAD4 and CTNNB1 alterations without the KRAS mutations
-that typify conventional pancreatic ductal adenocarcinoma. About one third of children present
-with metastatic disease at diagnosis.
+Pancreatoblastoma is the most common pancreatic malignancy of childhood, usually occurring in the
+first eight years of life, and is linked to Beckwith-Wiedemann syndrome and familial adenomatous
+polyposis. Microscopically these tumours contain acinar cells, though other cell types
+(neuroendocrine, ductal) are often present; (general oncology standard, not from DeVita's section on
+this disease) squamoid nests/corpuscles are a recognised WHO-classification histologic feature.
+Elevated serum alpha-fetoprotein and hormone levels have been described, and molecularly the tumour
+shows SMAD4 and CTNNB1 alterations without the KRAS mutations that typify conventional pancreatic
+ductal adenocarcinoma. About one third of children present with metastatic disease at diagnosis.
 
 ## Treatment approach by stage and intent
 
@@ -27,8 +29,11 @@ with metastatic disease at diagnosis.
 - Response can be tracked with serial imaging and, when initially elevated, alpha-fetoprotein.
 
 **Metastatic disease**
-- DeVita notes that survival is poorer once disease is metastatic, though resection-based cure
-  remains achievable in a meaningful proportion of children even with metastatic presentation.
+- DeVita notes that about one third of children present with metastatic disease, and that
+  resection-based cure remains achievable in a meaningful proportion of children even with
+  metastatic presentation. (general oncology standard, not from DeVita's section on this disease)
+  Metastatic disease is generally understood to carry a less favourable outlook than localised,
+  fully resectable disease, though DeVita's section does not itself state a survival comparison.
 - (general oncology standard, not from DeVita's section on this disease) Management combines
   systemic chemotherapy with an assessment of whether metastasectomy (for example resection of
   isolated liver or lung deposits) is feasible after response to chemotherapy; this is individualised

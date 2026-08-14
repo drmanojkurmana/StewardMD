@@ -103,6 +103,15 @@
   }
 
   function now() { try { return Date.now(); } catch (e) { return 0; } }
+  // Lightweight tracing for on-device debugging (visible in Safari Web Inspector). Prefix [SV-amb].
+  function dbg() { try { if (root && root.console && console.info) console.info.apply(console, ["[SV-amb]"].concat([].slice.call(arguments))); } catch (e) {} }
+  // Detect the chunk's language from its script so Auto mode can route the NEXT chunk to the right
+  // model (Telugu → specialist, Devanagari → Hindi, else English). Telugu block U+0C00–0C7F, Devanagari U+0900–097F.
+  function detectScript(t) { t = String(t || ""); if (/[ఀ-౿]/.test(t)) return "te"; if (/[ऀ-ॿ]/.test(t)) return "hi"; if (/[a-z]/i.test(t)) return "en"; return ""; }
+  // A benign "the speaker just paused" endpoint, not a real failure — iOS SFSpeech reports these on
+  // every silence gap ("No speech detected"/"No match"/"Retry"). Kept separate from hard errors
+  // (recording-failure, transcription-failed, mic-denied) which SHOULD count toward the breaker.
+  function isSilence(e) { var s = String(e || "").toLowerCase(); return s.indexOf("no speech") >= 0 || s.indexOf("no match") >= 0 || s.indexOf("nomatch") >= 0 || s.indexOf("retry") >= 0 || s.indexOf("1110") >= 0 || s.indexOf("203") >= 0; }
 
   function start(opts) {
     opts = opts || {};
@@ -114,11 +123,15 @@
     var refineEveryChunks = opts.refineEveryChunks;
     var onRefine = opts.onRefine;
     // rolling-capture state (Task 5) — see armChunk() below
-    var fullTranscript = "", chunkN = 0, chunkTimer = null, curSession = null, stopping = false;
+    var fullTranscript = "", chunkN = 0, chunkTimer = null, fbTimer = null, curSession = null, stopping = false;
+    var chunkStarted = false, sawDownload = false;   // per-chunk: gate the window timer on real recording
     // Rolling capture starts on clinical (on-device Whisper). If Whisper is unavailable on this
     // device/build (Android ships no Whisper build; iOS model download can fail), fall back ONCE to
     // the phone's built-in on-device STT so autofill still works. Telugu accuracy still wants Whisper.
-    var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null;
+    var engine = opts.engine || "clinical", clinicalErrs = 0, errStreak = 0, rearmTimer = null, silenceStreak = 0;
+    // Auto-mode adaptive routing: the language observed in the last chunk picks the model for the next
+    // one (Telugu → specialist, en/hi → the multilingual/turbo). null until the first chunk lands.
+    var detectedLang = null;
 
     function apply(transcript) {
       lastTranscript = transcript;
@@ -160,19 +173,62 @@
     // transcript exactly as before; onRefine additionally fires per needsRefine(state).
     function armChunk() {
       if (!running || paused || !root || !root.SMD_VOICE) return;
+      chunkStarted = false; sawDownload = false;   // reset per-window recording gate
+      // In Auto, once we've seen a chunk's language, route the next chunk to that language's model.
+      var reqLang = opts.language || "auto";
+      var effLang = (reqLang === "auto" && detectedLang) ? detectedLang : reqLang;
+      // MODEL = best weights for the (detected) language — Telugu routes to the Telugu specialist.
+      // DECODE language = "auto" in Auto mode so ONE person speaking a mixed Telugu+English+Hindi
+      // utterance is transcribed in whichever language actually dominates that window (Whisper
+      // auto-detects) instead of being force-decoded as a single language. Forced EN/TE keep their hint.
+      var routedModel = opts.model || (root.SMD_VOICE.pickModel ? root.SMD_VOICE.pickModel(effLang) : undefined);
+      var decodeLang = (reqLang === "auto") ? "auto" : reqLang;
+      // Tell the caller which on-device model this chunk will use (for the "which model" chip).
+      try {
+        if (opts.onModel && engine === "clinical" && root.SMD_VOICE.pickModel) {
+          var mk = root.SMD_VOICE.pickModel(effLang);
+          opts.onModel(root.SMD_VOICE.modelCode ? root.SMD_VOICE.modelCode(mk) : mk, effLang);
+        } else if (opts.onModel && engine === "fast") { opts.onModel("Device STT", effLang); }
+      } catch (e) {}
+      dbg("arm", "engine=" + engine, "reqLang=" + reqLang, "effLang=" + effLang, "model=" + (opts.model || "(tier-routed)"));
       curSession = root.SMD_VOICE.listen({
         engine: engine,
-        model: opts.model || "base-q5_1",                // multilingual base — Telugu + code-switch
-        language: opts.language || "auto",               // NOT forced "en": ambient may be Telugu/mixed
+        model: routedModel,                               // Telugu-containing / undetected chunks -> Telugu specialist weights
+        language: decodeLang,                             // "auto" in Auto mode -> Whisper detects the window's language (code-switch friendly)
         noCloud: true,                                    // consultation audio never leaves the device: the fallback STT is native/Web only, never the cloud recorder
         onPartial: function (t) { tick(accumulate(fullTranscript, t), false); }, // clinical: no-op (record-mode); the fast fallback streams live partials here
         onFinal: onChunkFinal,
         onError: onChunkError,
-        onState: opts.onState
+        onState: function (s) {
+          dbg("state", s); if (opts.onState) opts.onState(s);
+          // BUGFIX: only start the 15s window timer once the engine is actually RECORDING. Starting it
+          // immediately (as before) let a first-use model download (252-547MB, >15s) get killed by
+          // closeChunk mid-download → orphaned session that never re-arms ("nothing transcribed").
+          var ss = String(s || "").toLowerCase();
+          if (/download/.test(ss)) sawDownload = true;
+          else if (/record|listen|captur|speak/.test(ss)) startChunkTimer();
+        }
       });
-      if (curSession) chunkTimer = setTimeout(closeChunk, chunkMs);
+      dbg("armed", "session=" + (curSession ? "yes" : "NULL"));
+      if (!curSession) return;
+      // Fallback: if the engine never announces a recording state (and isn't downloading), start the
+      // timer anyway so the chunk still closes. While a download is in flight, defer and re-check.
+      function scheduleFallback(delay) {
+        fbTimer = setTimeout(function () {
+          fbTimer = null; if (chunkStarted || !running || paused) return;
+          if (sawDownload) { sawDownload = false; scheduleFallback(20000); } else startChunkTimer();
+        }, delay);
+      }
+      scheduleFallback(2500);
     }
-    function closeChunk() { chunkTimer = null; if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
+    function startChunkTimer() {
+      if (chunkStarted || !running || paused) return;
+      chunkStarted = true;
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      if (chunkTimer) clearTimeout(chunkTimer);
+      chunkTimer = setTimeout(closeChunk, chunkMs);
+    }
+    function closeChunk() { chunkTimer = null; if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; } if (curSession && curSession.stop) try { curSession.stop(); } catch (e) {} }
     // A transient native error (recording-failure/transcription-failure) on one window must not
     // permanently kill the rolling loop: re-arm the next window (mirrors what onFinal does) instead
     // of leaving curSession/chunkTimer dangling with nothing left to call armChunk() again.
@@ -182,9 +238,20 @@
     // without Whisper" bug). A timer breaks the cycle.
     function reArm() { if (rearmTimer) return; rearmTimer = setTimeout(function () { rearmTimer = null; if (running && !paused && !curSession) armChunk(); }, 300); }
     function onChunkError(err) {
+      dbg("chunkError", err, "engine=" + engine);
       curSession = null;
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
-      if (stopping) { running = false; if (opts.onError) opts.onError(err); return; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      // BUGFIX: on Stop, if the flushed chunk ERRORS (vs finalizes), still run the promised final refine
+      // over whatever transcript we have — else teardown()'s willRefine=true leaves the note un-drafted.
+      if (stopping) { running = false; if (onRefine && !paused) { try { onRefine(fullTranscript); } catch (e) {} } if (opts.onError) opts.onError(err); return; }
+      // Benign silence endpoint: iOS SFSpeech (the fast fallback) ends a window with "No speech
+      // detected"/"no match" on EVERY natural pause in a consultation. That is NOT a failure —
+      // re-arm and keep listening, without counting it toward the 3-strike breaker or surfacing a
+      // scary error. Otherwise a few pauses trip errStreak>3 and kill the whole loop mid-consult
+      // ("worked first time then suddenly stopped"). A high cap (reset by any good chunk) still
+      // stops a truly dead mic that only ever endpoints on silence.
+      if (isSilence(err)) { if (++silenceStreak <= 40 && running && !paused) reArm(); else running = false; return; }
       // Whisper missing/failing → fall back ONCE to the device's built-in on-device STT so autofill
       // still works (immediately on "clinical-unavailable"; after 2 clinical errors if it fails mid-run).
       if (engine === "clinical" && (err === "clinical-unavailable" || ++clinicalErrs >= 2)) {
@@ -204,8 +271,13 @@
     // ring-buffer / continuous-record-with-flush plugin that never stops the mic (documented in
     // local-plugins/capacitor-whisper/README.md + README-ANDROID.md, "continuous capture upgrade").
     function onChunkFinal(chunkText) {
+      dbg("chunkFinal", "len=" + String(chunkText || "").length, JSON.stringify(String(chunkText || "").slice(0, 100)));
       curSession = null;
-      errStreak = 0; clinicalErrs = 0;                   // a good window means the current engine works
+      if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+      errStreak = 0; clinicalErrs = 0; silenceStreak = 0;   // a good window means the current engine works
+      // Auto mode: adapt the model for the next chunk to THIS chunk's detected language.
+      if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
       tick(fullTranscript, stopping);
@@ -226,6 +298,7 @@
       stopping = true;
       if (tmr) { clearTimeout(tmr); tmr = null; }
       if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+      if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
       if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
       var willRefine = !!(curSession && curSession.stop && onRefine && !paused);
       // flushes the in-flight window (if any) -> onChunkFinal(final) sets running=false and,
@@ -236,13 +309,19 @@
     }
     return {
       stop: teardown,
-      pause: function () { paused = true; if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; } },
+      pause: function () {   // BUGFIX: actually stop the mic on pause (was recording up to a full chunk after)
+        paused = true;
+        if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
+        if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
+        if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
+        if (curSession && curSession.stop) { try { curSession.stop(); } catch (e) {} }
+      },
       resume: function () { paused = false; if (running && !stopping && !curSession) armChunk(); },
       _tick: tick                                       // exposed for the controller test
     };
   }
 
-  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, _version: "1.0" };
+  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, _version: "1.0" };
   if (root) root.SMD_AMBIENT = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

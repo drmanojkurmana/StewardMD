@@ -3992,6 +3992,25 @@
         .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
+    // MaiK Ask reasoning — POST {kind, ctx, transcript} to /extract. kind ∈ {maik-ask-next,
+    // maik-ask-extract}. ctx carries complaint/targetField/known/allowedFields/language (minimum
+    // needed for the next question; never the whole consult, never audio). Server sanitizes; the
+    // client (maik-reasoning.js) validates again against the pathway. Returns the server JSON.
+    maik: function (kind, ctx, transcript) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var body = { kind: kind, ctx: (ctx && typeof ctx === "object") ? ctx : {}, transcript: String(transcript == null ? "" : transcript).slice(0, 4000) };
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 30000, { error: "timeout" });
+    },
+    // Translate a short clinical text (e.g. a Telugu/Hindi dictated field) → clinical English { text }.
+    translate: function (text) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify({ transcript: t, kind: "translate" }) }); })
+        .then(function (r) { if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; }), 20000, { error: "timeout" });
+    },
     // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
     transcribe: function (audioDataUrl) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });

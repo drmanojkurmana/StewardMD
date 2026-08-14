@@ -29,12 +29,12 @@ Oligodendrogliomas are notably sensitive to both radiotherapy and chemotherapy, 
 
 ## Monitoring
 
-Surveillance relies on periodic contrast-enhanced MRI of the brain to detect progression or transformation to a higher grade, since oligodendrogliomas can progress in tempo over a long natural history and new nodular enhancement is a marker of higher-grade transformation. Seizure control with antiseizure medication is an ongoing management need, since seizures are the most common presenting feature and can persist or recur independent of tumour status (general oncology standard, not from DeVita's section on this disease). Formal neurocognitive assessment over time is reasonable given the long survival window and the cognitive burden that can come from both the tumour itself and from treatment, in particular radiotherapy.
+Surveillance relies on periodic contrast-enhanced MRI of the brain to detect progression or transformation to a higher grade, since oligodendrogliomas can progress in tempo over a long natural history and new nodular enhancement is a marker of higher-grade transformation (general oncology standard, not from DeVita's section on this disease). Seizure control with antiseizure medication is an ongoing management need, since seizures are the most common presenting feature and can persist or recur independent of tumour status (general oncology standard, not from DeVita's section on this disease). Formal neurocognitive assessment over time is reasonable given the long survival window and the cognitive burden that can come from both the tumour itself and from treatment, in particular radiotherapy.
 
 ## When to refer
 
 - Any new or progressive focal neurological deficit, escalating seizure frequency or status epilepticus, or signs of raised intracranial pressure warrants urgent neuro-oncology or neurosurgical referral (general oncology standard, not from DeVita's section on this disease).
-- New nodular enhancement on surveillance imaging, suggesting higher-grade transformation, should prompt re-referral for consideration of re-resection, further chemotherapy, or re-irradiation.
+- New nodular enhancement on surveillance imaging, suggesting higher-grade transformation, should prompt re-referral for consideration of re-resection, further chemotherapy, or re-irradiation (general oncology standard, not from DeVita's section on this disease).
 - All patients with a possible oligodendroglioma should be managed within a multidisciplinary neuro-oncology framework, given the specialised molecular diagnostics and combined-modality treatment decisions involved, and with supportive and palliative input introduced over time since the disease remains eventually progressive and incurable despite its relatively favourable course.
 
 ## What was deliberately omitted

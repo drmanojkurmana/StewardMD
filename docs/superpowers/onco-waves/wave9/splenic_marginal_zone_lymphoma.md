@@ -15,11 +15,11 @@ A distinctive, disease-specific point is that SMZL has been associated with vira
 
 ## Role of surgery (splenectomy)
 
-Splenectomy is a reasonable option for selected patients who require treatment and can provide excellent relief of symptoms and cytopenias. In the source data, splenectomy was associated with an overall response rate of 85%, with estimated progression-free and overall survival at 5 years of 58% and 77%, respectively.
+Splenectomy is a reasonable option for selected patients who require treatment and can provide excellent relief of symptoms and cytopenias. In the source data, splenectomy was associated with high response rates and favourable 5-year progression-free and overall survival.
 
 ## Role of radiotherapy
 
-For patients who are not surgical candidates, splenic radiation has some utility. The entire spleen is irradiated, and the total dose must be kept under renal tolerance because the left kidney is almost always in the treatment field (general oncology standard, not from DeVita's section on this disease, for the renal-tolerance dose-planning principle beyond the basic statement above).
+For patients who are not surgical candidates, splenic radiation has some utility. The entire spleen is irradiated, and the total dose must be kept under renal tolerance because the left kidney is almost always in the treatment field.
 
 ## Systemic therapy
 

@@ -13,14 +13,14 @@ Because the great majority of patients present with limited-stage (I/II) but bul
 - While a prospective randomized comparison between these approaches is lacking, the dose-adjusted EPOCH-based, radiotherapy-sparing approach has become a de facto standard of care for this disease.
 
 ### Role of radiotherapy
-Radiotherapy is not required for patients who receive the dose-adjusted EPOCH-based regimen and achieve a complete response, since that approach was studied without radiotherapy and produced excellent outcomes. Radiotherapy remains an option, and outcomes with a CHOP-based regimen plus radiotherapy have been reported as similar to the radiotherapy-sparing regimen. In the relapsed or refractory setting, radiation can be used to salvage incomplete responses or localized relapses.
+The dose-adjusted EPOCH-based regimen was studied without radiotherapy and produced excellent outcomes. In practice, omitting radiotherapy after this regimen is generally guided by a response-adapted, PET-based assessment showing complete metabolic response, rather than treated as an automatic rule (general clinical inference, not from DeVita's section on this disease). Radiotherapy remains an option, and outcomes with a CHOP-based regimen plus radiotherapy have been reported as similar to the radiotherapy-sparing regimen. In the relapsed or refractory setting, radiation can be used to salvage incomplete responses or localized relapses.
 
 ### Relapsed or refractory disease
 - Chemotherapy-refractory or relapsed PMBL generally carries a poor prognosis. Second-line chemotherapy often fails to bridge patients to autologous stem cell transplant, and relapse rates remain high even among those who do reach transplant.
 - CD19-directed CAR T-cell therapy (axicabtagene ciloleucel and lisocabtagene maraleucel) is approved for relapsed or refractory PMBL, based on favorable responses seen in this subgroup within the pivotal CAR T-cell trials for aggressive B-cell lymphoma.
 - The anti-PD-1 antibody pembrolizumab has been tested in this disease and is associated with a meaningful overall response rate, though complete responses are few; responses that do occur tend to be durable.
 - The anti-CD30 antibody-drug conjugate brentuximab has been tested but produced a low response rate as a single agent.
-- Combined PD-1 inhibition with CD30-directed therapy (nivolumab plus brentuximab) has shown notably better efficacy than either agent alone in relapsed or refractory PMBL.
+- Combined PD-1 inhibition with CD30-directed therapy (nivolumab plus brentuximab) has been reported to produce higher response rates in single-arm data than those reported for either agent alone, in relapsed or refractory PMBL (cross-study observation, not a head-to-head comparison).
 - Because PMBL shares biological overlap with classic Hodgkin lymphoma, including amplification of the 9p24 region driving JAK-STAT signalling and PD-L1/PD-L2 expression, checkpoint blockade has a rational and clinically demonstrated role in the relapsed setting.
 
 ## Monitoring

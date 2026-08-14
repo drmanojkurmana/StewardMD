@@ -61,8 +61,8 @@ surgery, for unresectable disease, or as an alternative to morbid resection.
 Options, in roughly increasing order of intended anti-tumour effect, include:
 
 - Anti-inflammatory agents such as sulindac or other NSAIDs, which have
-  produced well-documented responses and are typically used for less
-  aggressive or lower-risk disease given their favourable toxicity profile
+  produced reported responses and are typically used for less aggressive or
+  lower-risk disease given their favourable toxicity profile
 - Hormonal manipulation (for example tamoxifen, gonadotropin-releasing hormone
   agonists, or aromatase inhibitors), supported mainly by anecdotal response
   data
@@ -75,8 +75,8 @@ Options, in roughly increasing order of intended anti-tumour effect, include:
   compared with placebo, and this class is a reasonable systemic option when a
   more predictable response is needed
 - A gamma-secretase inhibitor (targeting Notch signalling, which cross-talks
-  with the Wnt/beta-catenin pathway driving desmoid biology) has shown activity
-  in trials and represents a mechanistically targeted option in refractory
+  with the Wnt/beta-catenin pathway driving desmoid biology) is under
+  investigation on this mechanistic basis as a targeted option in refractory
   disease
 
 A key counselling point for all systemic options: responses are typically

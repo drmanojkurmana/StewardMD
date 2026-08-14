@@ -1,52 +1,50 @@
-# Adversarial verification — central_neurocytoma.md
+# Adversarial re-verification — central_neurocytoma.md (post-revision)
 
 ## 1. DOSE LEAK
-None. Grepped all digits in the file: "WHO CNS grade 2" (tumor grade, not a dose),
-numbered list items 1–4 under "Lines of therapy" (a treatment-sequence list, not a
-dosing/fractionation schedule), "Ki-67/MIB-1" and "1p/19q" (biomarker/genetic-marker
-names), "12th ed" (citation edition). No mg, mg/m2, AUC, Gy, or fractionation numbers
-anywhere.
+None. Grepped for mg/mg-m2/AUC/Gy/cycle/q-schedule/day-1/every-N-days patterns: no real
+hits. (`grep -i "gy\b"` false-positived on word endings like "oncology"/"histology"/
+"radiology" — no actual radiation-dose unit "Gy" appears.) The only numbers in the file
+are "WHO CNS grade 2", the 1–4 treatment-sequence list under "Lines of therapy" (not a
+dosing schedule), and "12th ed." in the citation. No mg, mg/m2, AUC, Gy, or fractionation
+numbers anywhere.
 
-## 2. UNGROUNDED CLAIMS
-Grepped DeVita (`devita.txt`) for "neurocytoma" — exactly one hit, confirming the
-draft agent's report: a passing list-mention in the raised-ICP/CSF-obstruction chapter
-("...meningioma, central neurocytoma, chordoid glioma of the third ventricle...") with
-no dedicated management discussion. So none of the sidecar's management content is
-DeVita-grounded, and the file says so explicitly (front-matter flag "needs manual
-sourcing").
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+Re-grepped DeVita (`devita.txt`) for "neurocytoma": exactly one hit, at the raised-ICP/
+CSF-obstruction chapter — "...meningioma, central neurocytoma, chordoid glioma of the
+third ventricle..." — a passing list-mention, no dedicated management discussion.
+Confirmed accurate.
 
-Checked the substantive claims against general neuro-oncology consensus (WHO CNS
-classification, standard neurosurgical oncology teaching) since DeVita gives nothing
-to check against:
-- GTR as primary/curative treatment, STR/atypical histology → adjuvant RT, SRS for
-  small residual/recurrent disease, no established systemic therapy role, MRI
-  surveillance, synaptophysin + Ki-67/MIB-1 for diagnosis/risk-stratification,
-  differential-diagnosis workup (IDH/1p19q/ATRX) vs oligodendroglioma — all of this is
-  uncontroversial, textbook-standard neuro-oncology for central neurocytoma, not a
-  specific regimen, trial, or statistic. Nothing here rises to a fabricated
-  drug/trial/number.
-- No specific drug name, trial name, or statistic (%, survival number, dose) appears
-  anywhere in the file. The file explicitly states no systemic-therapy claim is made
-  ("No cytotoxic, targeted, or other drug-class recommendation can be grounded... so
-  none is given here").
-
-Net: no ungrounded specific claims found. The document's honesty about its own
-grounding (flagging that DeVita has no dedicated passage, and omitting anything it
-couldn't support) is the correct behavior, not a red flag.
+Body content (GTR as primary/curative treatment; EVD/ETV/shunt for acute hydrocephalus;
+transcortical/transcallosal surgical approach; adjuvant RT for incomplete resection,
+atypical histology, or recurrence; SRS for small residual/recurrent disease; no
+established systemic-therapy role; MRI surveillance; synaptophysin + Ki-67/MIB-1 for
+diagnosis/risk-stratification; IDH/1p19q/ATRX workup vs oligodendroglioma) is generic,
+uncontroversial neuro-oncology/WHO-classification teaching — no specific drug name,
+regimen, trial name, or statistic (%, survival number, dose) appears anywhere in the
+file, and none of it is attributed to DeVita in the body text. DeVita is named only in
+the intro disclaimer and the closing Sources line, both purely to disclose the gap, not
+to cite content. No mis-attribution found.
 
 ## 3. CITATION
-Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of
-Oncology, 12th ed." — name only, no page numbers. Correct format, though note the
-citation is honest-but-thin here since the underlying DeVita support for the *content*
-is a single passing mention, not a management section — this is disclosed in the
-front-matter flag, so it's not misleading.
+Fixed since prior review. Previously the Sources line read simply "DeVita, Hellman, and
+Rosenberg's Cancer... 12th ed." crediting the whole narrative to DeVita despite DeVita
+having no dedicated management passage for this entity — that was the R1-blocking
+mis-attribution. Now reads: "Sources: general neuro-oncology standard of care and WHO
+CNS tumor classification principles (general oncology standard, not from DeVita's
+section on this disease). DeVita, Hellman, and Rosenberg's Cancer: Principles &
+Practice of Oncology, 12th ed. was searched but contains no dedicated clinical
+management text for central neurocytoma (only a single passing list mention in the
+chapter on raised intracranial pressure); no clinical claims in this document are
+attributed to DeVita." Name only, no page numbers, correctly labelled per house
+convention (matches `chondroblastoma.md`'s handling of the same DeVita-thin situation).
+Mis-attribution resolved.
 
-## 4. VERDICT: CLEAN (ready for R1)
+## 4. VERDICT: CLEAN — ready for R1 re-review.
 
 Rationale: zero dose/numeric leakage, zero fabricated regimens/trials/statistics, the
-one real gap (DeVita has no dedicated management passage for this entity) is
-transparently flagged in-file rather than papered over, and the substituted
-generic-guideline content stays within uncontroversial, well-established neuro-oncology
-teaching. R1 should independently confirm the clinical content is consistent with the
-existing reference JSON mentioned in the sidecar's own flag, but that's a
-cross-reference check, not a fabrication issue.
+DeVita-thin gap is now correctly disclosed rather than papered over with a misleading
+citation, and all substituted content is uncontroversial, well-established
+neuro-oncology teaching that stays within the file's own disclaimed scope. R1 should
+still independently cross-check the clinical content against the existing reference
+JSON mentioned in the sidecar's own flag, but that is a cross-reference check, not a
+fabrication issue.

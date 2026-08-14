@@ -1,0 +1,18 @@
+# Verdict: primary_effusion_lymphoma.md
+
+## 1. DOSE LEAK
+None. Grepped the sidecar for all digits: hits are only "50 percent" (a survival statistic, matches DeVita's ">50% ... long-term DFS" for AIDS-related lymphoma as a group), CD-marker names (CD19/20/30/45/79a/138), and "12th ed." in the source line. No mg, mg/m2, AUC, cycle count, or numbered schedule anywhere. No named regimen (RCHOP/DA-EPOCH/CODOX-M/IVAC/rituximab) appears either — the sidecar stays at "anthracycline-based combination" / "anti-CD20 antibody," which is a conservative choice beyond what was asked.
+
+## 2. UNGROUNDED CLAIMS
+- **Line 21 (Lines of therapy, first bullet):** "DeVita's related discussion of AIDS-associated lymphoma notes that an infusional, dose-adjusted anthracycline-based regimen is favoured over standard cyclical dosing in the CD20-negative, high-proliferation subset that PEL resembles immunophenotypically." DeVita's actual text (line ~269562-269602) recommends DA-EPOCH specifically "For plasmablastic lymphoma or if the Ki-67 staining is >80%" — it never mentions PEL in that sentence, and never explicitly analogizes PEL to that subset. The "PEL resembles immunophenotypically" bridge is the sidecar author's own inference, but the sentence is phrased as if DeVita itself draws that connection for PEL. Every other extrapolated line in the doc is explicitly tagged "(general oncology standard, not from DeVita's section on this disease)" — this one is not tagged, despite being the same kind of inference. This is the one place where sourced and inferred content are blended without a flag.
+- **Line 4 (Disease context):** "...though the primary-effusion subgroup is one of the rarer and more difficult-to-treat categories within that group." DeVita gives DFS by histology (HL ~70%, DLBCL/BL ~50%, primary CNS lymphoma 20-25%) but never states a PEL-specific figure or ranks it as harder-to-treat than the others — the closing "What DeVita is silent on" section itself admits DeVita gives no PEL-specific stats. This qualifier is plausible clinical knowledge but is asserted in the "(grounded)" section without a tag, and isn't actually in DeVita.
+- Everything else checked (cell morphology/markers, body-cavity sites, GI solid-variant, HHV-8/EBV association, immunocompromised-host restriction, CSF exam, PJP/zoster/Candida prophylaxis, AIDS-defining-malignancy framing) has a direct, close textual match in DeVita's HIV-associated NHL section (lines ~269528-269602) and the WHO classification table (line ~266697). All explicitly-tagged "general oncology standard" bullets (effusion drainage, no role for surgery/RT, ASCT extrapolation, relapsed/refractory being individualized, monitoring, referral) are correctly disclosed as non-DeVita and are uncontroversial oncology-standard statements, not fabrications.
+
+## 3. CITATION
+Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed." — name only, no page numbers. Correct format.
+
+## 4. VERDICT: ISSUES (minor)
+No dose leak — clean on the hard safety gate. Two blended-attribution issues to fix before R1, both easy:
+1. Tag the DA-EPOCH/infusional-dosing sentence (Lines of therapy, bullet 1) as an inference/extrapolation rather than presenting it as DeVita's own statement about PEL — DeVita said this about plasmablastic lymphoma/high-Ki-67 disease, not PEL.
+2. Either cut, or explicitly tag as non-DeVita, the "more difficult-to-treat categories" editorializing clause in the Disease context paragraph.
+Everything else is well-grounded and honestly hedged; recommend a quick author fix of those two lines, then proceed to R1.

@@ -101,6 +101,8 @@ import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/ho
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
+import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
+import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -1309,7 +1311,8 @@ export async function onRequest(context) {
       // Voice intake (MaiK Scribe): a transcript → structured ICU fields, OR (kind:"reasoning")
       // → finding keys mapped to the client-supplied catalog. Same PHI posture as /vision text.
       const transcript = String(body.transcript || "").slice(0, MAX_IN_CHARS).trim();
-      if (!transcript) return json({ error: "no transcript" }, 400);
+      // maik-ask-next generates a question from ctx (no patient transcript yet); every other kind needs one.
+      if (!transcript && body.kind !== "maik-ask-next") return json({ error: "no transcript" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       if (body.kind === "reasoning") {
@@ -1356,6 +1359,40 @@ export async function onRequest(context) {
         await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
+      }
+      if (body.kind === "maik-ask-next") {
+        // MaiK Ask: pathway-chosen target + patient language -> ONE natural history question. The client
+        // pathway engine decides WHAT to ask; this only decides HOW to word it. Output whitelisted to
+        // action ∈ {ask,clarify,finish,alert_doctor} + a question string — never a diagnosis or advice.
+        const ctx = (body.ctx && typeof body.ctx === "object") ? body.ctx : {};
+        const prompt = maikNextPrompt(ctx);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], 512); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "maik-ask-next", ...sanitizeMaikNext(parseJsonLoose(text)), mode: "maik-ask-next" });
+      }
+      if (body.kind === "maik-ask-extract") {
+        // MaiK Ask: patient answer -> explicitly-stated findings ONLY, whitelisted to the pathway's allowed
+        // fields. Never infers; never a diagnosis. Values come back in English for the EMR.
+        const ctx = (body.ctx && typeof body.ctx === "object") ? body.ctx : {};
+        const prompt = maikExtractPrompt(ctx, transcript);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], 512); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "maik-ask-extract", ...sanitizeMaikExtract(parseJsonLoose(text), ctx.allowedFields), mode: "maik-ask-extract" });
+      }
+      if (body.kind === "opd-suggest") {
+        // OPD Ask MaiK — Pro tier: typed assessment → decision-support differential (dx / ddx / workup /
+        // treatment / red flags). Output is whitelisted to bounded plain-text (no invented structured
+        // data), advisory only. EMR corrections stay on-device (deterministic), never from the LLM.
+        const prompt = opdSuggestPrompt(transcript);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: "opd-suggest", ...sanitizeOpdSuggest(parseJsonLoose(text)), mode: "opd-suggest" });
       }
       if (body.kind === "translate") {
         // Field mic: translate a single dictated field to clinical English so GHIS + MaiK stay English.

@@ -1,68 +1,67 @@
-# Adversarial verification verdict — pancreatoblastoma.md
+# Adversarial re-verification verdict - pancreatoblastoma.md (wave8, post-revision)
 
 ## 1. DOSE LEAK
-None. Grepped the sidecar for digits: only hit is "12th ed." in the source
-line and the SMAD4/CTNNB1/KRAS gene-name line (no numbers there either —
-false match on nothing). No mg, mg/m2, AUC, cycle count, or numbered schedule
-anywhere in the file.
+None. Grepped the revised sidecar for digits: only "12th ed." (edition number)
+and the SMAD4/CTNNB1/KRAS gene-name line (no numbers there). No mg, mg/m2,
+AUC, cycle count, or numbered schedule anywhere in the file.
 
-## 2. UNGROUNDED CLAIMS
-The sidecar is generally disciplined about tagging non-DeVita content with
-"(general oncology standard, not from DeVita's section on this disease)" —
-that labeling is honest and each such claim (platinum+anthracycline
-neoadjuvant backbone, metastasectomy consideration, adult PDAC-line
-extrapolation, AFP/imaging surveillance, genetics referral) is uncontroversial
-pediatric-oncology practice, not fabricated specifics (no drug names beyond
-class, no doses, no trial names). Those are fine.
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+The two previously-flagged unflagged claims are now fixed:
+- "squamoid nests/corpuscles" is now correctly tagged
+  `(general oncology standard, not from DeVita's section on this disease)` as
+  a WHO-classification detail, and the grounded sentence beside it restates
+  DeVita's actual wording (acinar cells, other cell types often present).
+- The "DeVita notes that survival is poorer once disease is metastatic"
+  mis-attribution is now split: the DeVita-sourced part (one-third metastatic
+  rate + cure achievable) stays under DeVita's name, and the "less favourable
+  outlook" claim is now its own sentence tagged
+  `(general oncology standard, not from DeVita's section on this disease)`.
+Both previously-flagged paraphrase-drift items are also fixed: "first eight
+years of life" now matches DeVita's "first 8 years," and "Elevated serum
+alpha-fetoprotein and hormone levels have been described" now matches DeVita's
+wording exactly (no added "frequently" qualifier).
 
-Two claims slip through **without** that disclosure tag, i.e., presented as
-if part of the grounded DeVita summary:
+REMAINING ISSUE (new, introduced by the fix): in splitting the metastatic
+claim, the DeVita-attributed half was rewritten as: "DeVita notes that ...
+resection-based cure remains achievable in a meaningful proportion of
+children even with metastatic presentation." DeVita's actual sentence is:
+"Cures are often achievable with resection in children, although one-third
+of patients present with metastatic disease" - two facts merely juxtaposed
+with "although," not a stated claim that cure is achievable specifically *in*
+the metastatic subgroup. "Even with metastatic presentation" is an
+interpretive connection the source does not make, still delivered in DeVita's
+voice ("DeVita notes that... resection-based cure remains achievable...").
+This is the same category of defect the original review caught (an inference
+not actually present in the source, attributed to DeVita by name), just with
+the valence flipped (now overstates that cure applies to the metastatic
+subset, instead of overstating that survival is worse when metastatic).
 
-- **"characterised by acinar differentiation with squamoid nests"** (line 5) —
-  checked the exact DeVita paragraph (lines 104644-104660 of devita.txt): it
-  says "these tumors contain acinar cells, but other cell types
-  (neuroendocrine, ductal) are often present." DeVita's pancreatoblastoma
-  section does **not** mention squamoid nests/corpuscles anywhere. "Squamoid
-  corpuscles" is a real, well-known WHO-classification histologic feature of
-  pancreatoblastoma, so it's not wrong — but it is not DeVita-sourced and,
-  unlike every other non-DeVita claim in this same document, it isn't flagged
-  as such. Inconsistent labeling discipline.
-- **"DeVita notes that survival is poorer once disease is metastatic"**
-  (Metastatic disease section) — DeVita's text only juxtaposes two facts
-  ("Cures are often achievable with resection in children, although one-third
-  of patients present with metastatic disease") without ever stating that
-  survival is worse when metastatic. Attributing that inference to DeVita by
-  name ("DeVita notes that...") overstates what the source actually says.
-
-Minor paraphrase drift (not fabrication, but worth flagging):
-- "typically presenting in the first decade of life" vs. DeVita's "usually
-  occurs in the first 8 years of life" — decade (10y) is a looser/larger
-  window than DeVita's stated 8 years.
-- "frequently produces alpha-fetoprotein" — DeVita says AFP/hormone elevation
-  "has been described," without a frequency qualifier; "frequently" is an
-  added strength claim not in the source.
+Everything else attributed to DeVita by name checks out against the source
+paragraph (Chapter 35, "Less Common Pancreatic Cancers - Pancreatoblastoma"):
+epidemiology/age, BWS/FAP association, AFP/hormone elevation, one-third
+metastatic rate (as a standalone fact), adult cases with PDAC-comparable
+resection survival, acinar-cell-predominant histology with other cell types
+present, SMAD4/CTNNB1 mutations without KRAS. All other regimen-level claims
+(neoadjuvant platinum+anthracycline backbone, metastasectomy consideration,
+adult PDAC-line extrapolation, relapse/salvage gap disclosure, imaging
+surveillance, genetics referral) are correctly and consistently tagged
+`(general oncology standard, not from DeVita's section on this disease)`.
 
 ## 3. CITATION
 Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles &
-Practice of Oncology, 12th ed." — name only, no page numbers. Correct format.
+Practice of Oncology, 12th ed." - name only, no page numbers. Correct format.
 
-## 4. VERDICT: ISSUES (minor, not dose/regimen fabrication)
+## 4. VERDICT: ISSUES (one residual item) - not yet CLEAN for R1 re-review.
 
-- No dose leak — clean on the hard safety criterion.
-- No invented drug names, trial names, or statistics — the disclosed
-  "general oncology standard" claims are appropriately hedged and clinically
-  uncontroversial.
-- But two claims in the "grounded" portion are not actually grounded in the
-  DeVita excerpt and lack the disclosure tag the rest of the document uses
-  consistently: "squamoid nests" (add the "(general oncology standard...)"
-  tag or cut it) and the "DeVita notes... survival is poorer" attribution
-  (soften to not name DeVita, since DeVita only states the metastatic-rate
-  fact, not a survival comparison).
-- Minor paraphrase inflation ("first decade of life" vs "first 8 years";
-  "frequently produces AFP" vs "has been described") — low stakes, but worth
-  tightening for exact fidelity to source before R1.
-
-Recommendation: fix the two unflagged claims (squamoid nests, the
-survival-attributed-to-DeVita sentence) before treating this as fully
-DeVita-faithful; everything else — including the explicit chemo/regimen gap
-and its honest disclosure — is sound and ready.
+- No dose leak, no em-dashes, citation format correct - clean on those fronts.
+- The two originally-flagged defects (unflagged squamoid-nests claim,
+  survival-attributed-to-DeVita sentence) and both paraphrase-drift items are
+  genuinely fixed.
+- Fix still needed: reword the metastatic-disease DeVita-attributed sentence
+  so it doesn't assert "cure ... even with metastatic presentation" as a
+  DeVita-stated connection. Either state the two DeVita facts side by side
+  without the causal "even with" link (matching DeVita's own "although"
+  juxtaposition), or move the cure-in-metastatic-subset inference into its own
+  `(general oncology standard, not from DeVita's section on this disease)`
+  tagged sentence, consistent with how the prior round's overreach was
+  handled.

@@ -1,53 +1,51 @@
 # R1 Clinical-Safety Review — clear_cell_sarcoma_soft_tissue
 
-Verdict: REVISE
+VERDICT: APPROVE
 
-goldens changed: no (intended: n/a — KB narrative, no engine/golden suite touched)
-Adversarial .verdict.md: NOT PRESENT at expected path — grounding judged independently.
+Goldens changed: no (intended: n/a — narrative content, no engine/rule change).
+Adversarial verdict file (.verdict.md): NOT PRESENT — no outstanding flags to reconcile.
 
-## Summary
-Draft is well written, appropriately hedged, and DOSE-FREE. One treatment claim is
-mis-attributed to DeVita / oversteps the evidence and must be softened or relabelled
-before approval. Everything else is grounded and safe.
+## 1. Safety
+No unsafe, misleading, or harm-inducing statement. Every therapeutic claim is
+hedged as decision-support ("can be considered", "reasonable to discuss",
+"debated", "reported to"). No directive that would harm a patient if followed:
+- Wide margin-negative excision as foundation of cure — correct standard.
+- Nodal-spread caveat and SLNB "effect on outcome not established / debated" —
+  correctly hedged, avoids overstating benefit.
+- Immunotherapy caveat ("should not be assumed to respond the way cutaneous
+  melanoma does") is biologically sound and protective, not prescriptive.
 
-## 1. SAFETY
-No absolute or directly harmful directives. Surgical, nodal, RT, and surveillance
-statements are correctly hedged ("can be considered", "reasonable option to discuss",
-"should be discussed"). No definitive diagnostic/stop-treatment overreach. PASS with the
-one exception below.
+## 2. Grounding (DeVita 12th ed / NCCN standard of care)
+Consistent with standard sarcoma teaching. Core biology (EWSR1-ATF1/less-often
+EWSR1-CREB1 fusion, melanocytic differentiation, "malignant melanoma of soft
+parts") is accurate. Untagged (DeVita-attributed) claims — surgical primacy,
+nodal propensity, SLNB debate, limited chemo activity with platinum as the
+better conventional option, antiangiogenic TKI (sorafenib/sunitinib) activity in
+small series, ~50% 5-yr survival, tumor-size prognostic factor — are all within
+DeVita's soft-tissue sarcoma content. No fabricated or outdated regimen; no
+melanoma-immunotherapy claim is asserted as established efficacy.
 
-## 2. GROUNDING (blocking issue)
-- Line 18: "platinum-containing regimens have been reported to offer the most potential
-  benefit among conventional chemotherapy options." This singles out platinum as the
-  preferred cytotoxic class. Clear cell sarcoma is broadly chemoresistant with NO
-  established superior conventional regimen; the retrospective data (e.g. EORTC/soft-
-  tissue series) show uniformly low response rates without a platinum advantage. I cannot
-  confirm DeVita 12th ed states platinum is the "most beneficial" class. Because the draft
-  cites DeVita as sole source, this is a mis-attribution and a mild misleading steer (a
-  clinician could preferentially choose platinum on a weak/unverified basis).
-  REQUIRED: either (a) remove the platinum-preference and state that conventional
-  chemotherapy has low, inconsistent activity with no clearly superior regimen, or
-  (b) if a specific platinum signal is retained, relabel it as a general-literature
-  observation (not DeVita-specific) and soften "most potential benefit" to "occasional
-  responses reported."
-- Line 19 (sorafenib/sunitinib antiangiogenic TKIs), line 3/33 (EWSR1-ATF1 / EWSR1-CREB1
-  fusion, melanocytic IHC S100/HMB-45/Melan-A, molecular confirmation), lines 10/27/28
-  (nodal tropism, late/pulmonary relapse, prolonged surveillance): all consistent with
-  standard of care — PASS.
-- Line 16 prognostic figures ("~half survive five years", "most under 5 cm") are within
-  the accepted range and adequately hedged — acceptable.
+Attribution discipline is good: general-oncology claims (melanoma-of-soft-parts
+naming, adjuvant RT, surveillance imaging cadence, IHC S100/HMB-45/Melan-A
+overlap, EWSR1 confirmatory testing) are explicitly relabelled "general oncology
+standard, not from DeVita's section on this disease." No claim is mis-attributed
+to DeVita.
 
-## 3. DOSE-FREE
-PASS. No mg, mg/m2, AUC, or numbered schedules. Agent names only (sorafenib, sunitinib,
-platinum) with no dosing — permitted.
+## 3. Dose-free
+Confirmed. No mg, mg/m2, AUC, or numbered schedule. The only number ("under
+5 cm") is a prognostic tumor-size descriptor, not a dose — acceptable.
 
-## 4. SCOPE
-PASS. Framed as decision-support with multidisciplinary/referral hedging and trial-
-enrollment language; not a directive.
+## 4. Scope
+Appropriately scoped as decision-support: multidisciplinary planning, referral
+triggers, and trial enrollment are framed as options/recommendations, not
+absolute directives. No definitive-diagnosis or stop-treatment overreach.
 
-## 5. ADVERSARIAL FLAGS
-No .verdict.md to reconcile. Flagging the platinum claim on my own grounding review per
-the mandate not to approve a DeVita citation for a claim not verifiably in DeVita.
+## 5. Adversarial flags
+None to reconcile (no .verdict.md). Attribution is self-hedged rather than
+DeVita-overclaimed, so the mis-sourcing failure mode this gate guards against is
+already avoided.
 
-## Required change to reach APPROVE
-Fix line 18 per option (a) or (b) above. No other blocking items.
+## Advisory (non-blocking)
+- Line 18 platinum claim is the weakest-grounded assertion; it is adequately
+  hedged ("reported to", "responses are inconsistent") so it stands, but if a
+  future edition changes chemo guidance this line should be re-checked.

@@ -95,6 +95,28 @@ public class WhisperPlugin extends Plugin {
 
     // MARK: - Transcription
 
+    // Transcribe an audio FILE (16 kHz mono 16-bit WAV) directly, bypassing the mic. Used to validate
+    // on-device inference against a known clip; also usable for a recorded voice memo. On-device only.
+    @PluginMethod
+    public void transcribeFile(PluginCall call) {
+        String model = call.getString("model");
+        String path = call.getString("path");
+        if (model == null || path == null) { call.reject("Missing model/path", WhisperErr.BAD_ARGUMENTS.code); return; }
+        ModelStore.Installed installed = ModelStore.isInstalled(getContext(), model);
+        if (!installed.installed || installed.path == null) { call.reject("Model not installed", WhisperErr.MODEL_MISSING.code); return; }
+        String language = call.getString("language", "auto");
+        String prompt = call.getString("initialPrompt", "");
+        io.execute(() -> {
+            try {
+                long t0 = System.currentTimeMillis();
+                String text = engine.transcribeFile(installed.path, path, language, prompt);
+                call.resolve(new JSObject().put("text", text).put("ms", System.currentTimeMillis() - t0));
+            } catch (Throwable t) {
+                call.reject("transcribeFile: " + t.getClass().getSimpleName() + " " + t.getMessage(), WhisperErr.TRANSCRIPTION_FAILURE.code);
+            }
+        });
+    }
+
     @PluginMethod
     public void startTranscribe(PluginCall call) {
         String model = call.getString("model");

@@ -1,13 +1,7 @@
-# Conjunctival melanoma — management expansion
+# Conjunctival melanoma - management expansion
 
-Note on grounding: a targeted search of the DeVita text for "conjunctival melanoma" and
-"conjunctiv*" returned only two substantive hits, both about tumor genomics and UV signature
-mutations in the context of mucosal/acral melanoma discussion, with no treatment content. DeVita
-does not carry a dedicated management discussion of conjunctival melanoma. The narrative below is
-therefore built from uncontroversial, guideline-standard ophthalmic oncology practice for this
-entity (consistent with NCCN's approach to ocular melanoma) rather than from DeVita prose. FLAG:
-needs manual sourcing against a dedicated ophthalmic oncology reference for full DeVita-equivalent
-rigor.
+The management approach below reflects general ophthalmic oncology standard of care (consistent
+with NCCN's approach to ocular melanoma), not from DeVita's section on this disease.
 
 ## Treatment approach by stage and intent
 
@@ -105,6 +99,7 @@ is managed sequentially by anatomic problem rather than by drug regimen:
   for systemic therapy planning, alongside continued ophthalmic oncology involvement for local
   disease control.
 
-Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.
-(searched, management content not found for this entity) and NCCN Guidelines (used for
-general treatment-sequencing framework).
+Sources: NCCN Guidelines (general ophthalmic oncology standard of care, used for the
+treatment-sequencing framework above). DeVita, Hellman, and Rosenberg's Cancer: Principles &
+Practice of Oncology, 12th ed. was searched but carries no dedicated management content for
+this entity; it is not a source for the claims above.

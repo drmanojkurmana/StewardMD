@@ -1,69 +1,55 @@
-# Adversarial verification — angiomatoid_fibrous_histiocytoma.md
+# Adversarial RE-verification — angiomatoid_fibrous_histiocytoma.md (rewrite)
 
 ## 1. DOSE LEAK
-None. No mg, mg/m2, AUC, or numbered schedule anywhere in the sidecar. The only
-numeric values are the "<2%" / "typically under 2 percent" metastatic-risk
-statistic (matches DeVita verbatim) and the summary risk-range language, which
-are epidemiology, not dosing.
+None. Grepped for mg/mg-m2/AUC/numbered schedules: zero hits. Only numeric
+value in the file is the "<2%"/"typically under 2 percent" metastatic-risk
+statistic, which is epidemiology and matches DeVita verbatim (line ~211830:
+"typically <2%, ... usually to lymph nodes or lung").
 
-## 2. UNGROUNDED CLAIMS
-DeVita's *only* two AFH mentions (grep-verified, lines ~211832 and ~212058 of
-devita.txt) are: (a) AFH listed as a WHO "intermediate, rarely metastasizing"
-example tumor with metastatic risk "typically <2%, usually to lymph nodes or
-lung," and (b) AFH's bare name in the WHO histologic classification table.
-Nothing else about AFH appears in the source. Against that:
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+Re-grepped devita.txt for "angiomatoid" and "AFH" — DeVita's AFH content is
+still confirmed to be exactly two mentions: the WHO "intermediate, rarely
+metastasizing" tier listing (with plexiform fibrohistiocytic tumour, <2% met
+risk, nodal/pulmonary) and the bare name in the classification table. No
+dedicated AFH management section exists in the source — this matches the
+sidecar's own closing disclosure.
 
-- **EWSR1/FUS molecular confirmation + Ewing sarcoma/clear cell sarcoma
-  mimics** ("Preoperative or diagnostic biopsy should secure molecular
-  confirmation of an EWSR1 (or FUS) rearrangement... exclude mimics such as
-  Ewing sarcoma or clear cell sarcoma"): NOT supported by either DeVita AFH
-  passage. This is real pathology (AFH is characteristically EWSR1-CREB1/
-  EWSR1-ATF1 fusion-positive) but it is not in the source DeVita gives, and
-  it is presented as a flat recommendation, not flagged as an extrapolation
-  in the closing "what is deliberately not stated" section. This is the
-  clearest gap.
-- **Systemic/paraneoplastic symptom section** ("cytokine-mediated systemic
-  symptoms, fever, anaemia, weight loss, and raised inflammatory markers...
-  typically resolve after complete resection... persistence... should
-  prompt a search for residual tumour"): NOT found anywhere in DeVita
-  (checked "paraneoplastic," "systemic symptoms," "fever," "CREB1" near the
-  AFH passages — no hits). This is a real, published clinical feature of AFH
-  (the "AFH pseudocapsule + systemic inflammatory syndrome" literature) but
-  it is entirely un-sourced to DeVita and, unlike the regimen/algorithm gaps,
-  is not disclosed anywhere in the file as an extra-DeVita addition. It is
-  also promoted to its own top-level section and reused as a "monitoring
-  signal," i.e., treated as established fact rather than flagged.
-- **"Wide excision... mirrors that of other intermediate, locally aggressive
-  soft-tissue tumours"**: DeVita's "wide excision with a margin of normal
-  tissue for good local control" statement is explicitly attached to the
-  *intermediate, locally aggressive* WHO tier (desmoid-type example), which
-  is a *different* WHO tier from AFH's own tier (*intermediate, rarely
-  metastasizing*). The sidecar borrows that surgical principle across tiers
-  and says so ("mirrors"), which is a disclosed inference rather than a
-  fabricated DeVita quote — flagged here as borderline, not a hard failure.
-- Radiotherapy-for-deep/truncal-location, re-excision-preferred-for-positive-
-  margins, and MDT-referral triggers are general sarcoma-management
-  boilerplate, not DeVita AFH-specific statements, but they are uncontroversial
-  guideline-standard practice for intermediate-grade soft-tissue lesions, so
-  not flagged as fabrication.
+All three items R1 required are now fixed:
+- **EWSR1/FUS + Ewing/clear-cell-sarcoma mimic-exclusion claim** (line 11):
+  now tagged inline "(general oncology standard, not from DeVita's section on
+  this disease)". No longer attributed to DeVita. The parallel referral bullet
+  (line 40) carries the same tag.
+- **Systemic-symptom ("cytokine-mediated") section** (line 28) and its reuse
+  as a monitoring signal (line 34): both now carry "(general oncology
+  literature, not from DeVita's section on this disease)". No longer presented
+  as DeVita-grounded fact.
+- **Cross-tier "wide excision... mirrors" inference** (line 10, minor item):
+  now named explicitly in the sentence itself and repeated in the closing
+  "What is deliberately not stated here" caveat, which now also explicitly
+  discloses the molecular-confirmation and systemic-symptom content as
+  non-DeVita additions.
+
+Spot-checked the rest of the file against the source: the WHO-tier framing,
+the <2% statistic, and the "no established systemic regimen for AFH" /
+"DeVita does not describe a chemotherapy or targeted-therapy pathway for AFH"
+statements all match what DeVita actually says (or explicitly says it does
+NOT say). The anthracycline-based-regimen mention (line 21) is used only as a
+negative example ("do not extrapolate... onto AFH") — it does not assert
+AFH is treated this way, so no tag is needed there. No new fabrications were
+introduced by the rewrite; no specific drug names, trial names, or regimens
+are asserted as AFH-specific anywhere in the file.
 
 ## 3. CITATION
-Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles &
-Practice of Oncology, 12th ed." — name only, no page numbers. Correct format.
+Present, unchanged: "Sources: DeVita, Hellman, and Rosenberg's Cancer:
+Principles & Practice of Oncology, 12th ed." — name only, no page numbers.
+Correct format.
 
-## 4. VERDICT: ISSUES
-- Move/disclose the EWSR1/FUS molecular-confirmation-and-mimics claim into the
-  "what is deliberately not stated" (or an equivalent disclosed-extrapolation)
-  section, since it is not in DeVita's AFH text.
-- Either cut the "Systemic symptoms as a management marker" section or
-  explicitly flag it as not DeVita-sourced pathology-literature content before
-  R1 review — as written it reads as a DeVita-grounded clinical fact and is
-  not.
-- The cross-tier "wide excision" extrapolation is acceptable as currently
-  hedged ("mirrors") but should ideally also be named in the closing caveat
-  section for consistency with how the file treats its other extrapolations.
+## Other hard-rule check
+Em dash in title: fixed. Title now reads "Angiomatoid fibrous histiocytoma
+(AFH): Management" (colon, not em dash). Grepped whole file for em/en dashes —
+zero hits.
 
-Draft agent's own disclosure (systemic regimen, surveillance interval) is
-accurate and matches what's in DeVita — no issue there. The problems are the
-two additions (molecular workup detail, systemic-symptom syndrome) that were
-not disclosed as beyond-DeVita.
+## 4. VERDICT: CLEAN (ready for R1 re-review)
+All three R1-required changes (2 required + 1 minor) are correctly applied,
+grounded content still checks out against devita.txt, no dose numerics, no
+new fabrications, citation intact, em-dash rule satisfied.

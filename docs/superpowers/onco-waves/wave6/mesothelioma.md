@@ -96,8 +96,10 @@ on what was used first line.
 - Single-agent CTLA-4 blockade alone has not shown a survival benefit in mesothelioma and should not be
   used as monotherapy.
 - Because a reliable predictive biomarker for immunotherapy benefit in mesothelioma has not been
-  established, essentially all mesothelioma patients should receive an immune checkpoint inhibitor
-  regimen at some point during their treatment course.
+  established, essentially all mesothelioma patients without a contraindication to immunotherapy
+  (e.g., active significant autoimmune disease, poor performance status, or prior severe
+  immune-related toxicity) should be considered for an immune checkpoint inhibitor regimen at some
+  point during their treatment course.
 - Targeted therapy has a very limited role: rare case reports of ALK-fusion-positive mesothelioma have
   responded to ALK inhibition, and BAP1-deficient tumors have shown some activity with a PARP
   inhibitor in early trial data, but neither is applicable to the majority of patients and both remain
@@ -113,9 +115,11 @@ Radiotherapy for mesothelioma is rarely curative because delivering a curative d
 irregular pleural surface risks unacceptable normal-tissue toxicity. Its role is better established as
 an adjunct to surgery than as sole treatment:
 
-- Definitive radiotherapy alone (without surgery) has produced conflicting results across large
-  database studies; some show a survival benefit over no treatment, others show no added benefit when
-  combined with surgery versus surgery alone.
+- Database evidence on radiotherapy's role is a mix of different comparisons rather than a single
+  consistent answer: a large registry analysis of surgery with adjuvant radiotherapy versus surgery
+  alone did not show an added survival benefit from the radiotherapy, while a separate large registry
+  analysis of definitive radiotherapy (without surgery) versus no definitive treatment suggested a
+  significant survival benefit for the group that received radiotherapy.
 - Adjuvant radiotherapy following surgical resection has been associated with improved survival in
   stage I/II disease in some analyses, but this benefit was not seen in stage III/IV disease.
 - Postoperative radiotherapy following EPP, delivered to the entire hemithorax, has produced favorable
@@ -123,8 +127,12 @@ an adjunct to surgery than as sole treatment:
   pneumonitis in some series) is a recognized and serious risk.
 - As lung-sparing P/D has become more common, techniques delivering intensity-modulated radiation to
   the pleura and chest wall while sparing the intact ipsilateral lung (sometimes called hemithoracic
-  pleural IMRT) have been developed specifically to reduce this toxicity, though outcomes compared with
-  older techniques have not shown a clear survival difference in database comparisons.
+  pleural IMRT) have been developed specifically to reduce this toxicity. Evidence on whether this
+  improves survival compared with older RT techniques is mixed: broad database comparisons have not
+  shown a clear difference, but at least one single-center retrospective series in patients treated
+  with P/D reported significantly better survival with the newer IMRT-based technique than with
+  conventional postoperative radiotherapy. This remains an area of active technique development rather
+  than a settled comparison.
 - Combining chemotherapy with definitive (non-postoperative) radiotherapy should be considered
   experimental and is not established practice for mesothelioma.
 

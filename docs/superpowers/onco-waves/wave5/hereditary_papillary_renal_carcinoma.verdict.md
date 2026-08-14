@@ -1,69 +1,55 @@
-# Adversarial verification verdict - hereditary_papillary_renal_carcinoma.md
+# Adversarial re-verification verdict - hereditary_papillary_renal_carcinoma.md
 
 ## 1. DOSE LEAK
-None. Grepped for `[0-9]+ ?mg`, `mg/m2`, `AUC ?[0-9]`, `q[0-9]+[wd]`, `every N days/weeks`, `mg/kg` -
-zero hits. All numerals present in the sidecar are non-dose descriptive stats that match DeVita's
-disease/general-RCC text: type "1" papillary histology (repeated), penetrance "by age 80" (DeVita:
-"nearly complete penetrance by 80 years of age"), "fewer than 35 kindreds" (DeVita: "less than 35
-kindreds worldwide"), chromosome "7" (trisomy 7 / MET locus), cancer-specific survival "above 90%"
-for T1 (DeVita: >98% T1a / 90% T1b / 86% T2 - a fair rollup, slightly loose for T1b which is exactly
-90% not "above"), "30%" renal-remnant-preservation threshold (DeVita: "at least 30% of a
-well-functioning remnant kidney"), thermal-ablation size cutoff "<3 cm" (DeVita: same), and "12th
-ed." (edition number, not a dose). No drug doses, no AUC, no schedule numbers anywhere. Confirms
-draft agent's claim.
+None. Grepped for `[0-9]+ ?mg`, `mg/m2`, `AUC ?[0-9]`, `q[0-9]+[wd]`, `every N days/weeks`, cycle/day
+tokens - zero hits. All numerals present are non-dose descriptive stats matching DeVita: "fewer than
+35 kindreds" (DeVita: "less than 35 kindreds worldwide"), "near-complete penetrance by age 80"
+(DeVita: "nearly complete penetrance by 80 years of age"), trisomy of "chromosome 7", ">90%"
+cancer-specific survival for T1 (DeVita: >98% T1a/90% T1b/86% T2), "30%" renal-remnant threshold
+(DeVita: "at least 30% of a well-functioning remnant kidney"), thermal-ablation "<3 cm" cutoff
+(DeVita: same), "12th ed." (edition number). No drug doses, no AUC, no schedule numbers anywhere.
 
-## 2. UNGROUNDED CLAIMS
-No fabricated regimen/drug/trial/statistic was found - every specific claim traced to a DeVita
-passage (ASSURE/SORCE/S-TRAC/PROTECT/ATLAS/ARISER trial table at ~151080-151300; KEYNOTE-564
-pembrolizumab adjuvant result at ~151095-151112; everolimus histology-agnostic-efficacy /
-third-line-positioning passage at ~28029-28040; localized-RCC treatment section at ~150244-150650;
-IVC-thrombus/papillary-histology-as-poor-prognostic-factor passage at ~150800-150820; HPRC
-genetics passage at ~149782-149854).
-
-However, one significant **inverse** problem: the sidecar's own grounding claim is factually wrong.
-It repeatedly asserts DeVita has no disease-specific systemic-therapy data for HPRC -
-- "DeVita's section on this disease is genetics- and pathology-focused; it does not lay out a
-  disease-specific systemic-therapy algorithm for HPRC" (Overview grounding)
-- "DeVita's disease-specific section does not itself specify a regimen" (Advanced disease bullet)
-- "No specific drug names, doses, or regimens are given for MET-targeted or VEGF-targeted therapy
-  in HPRC because DeVita's disease-specific section does not name or validate a specific agent for
-  this syndrome" (Deliberately omitted)
-
-This is incorrect. DeVita's HPRC/Type-1-PRCC section (line ~149982-149996 in the source text)
-explicitly states: "foretinib (formerly known as XL880), a multikinase inhibitor that targets MET
-among other tyrosine kinases, was evaluated in a phase II clinical trial in patients with
-bilateral, multifocal, or metastatic papillary RCC or **HPRC with a germline MET mutation**.
-Foretinib demonstrated activity in patients with advanced papillary RCC (ORR 13.5%; PFS 9.3 months)
-with highest response in patients with germline MET mutations." That is disease-specific
-(HPRC-population), named-agent, outcome-statistic evidence that DeVita does provide - and none of
-it is a dose (no dose/schedule given in that DeVita passage either, so citing it would not have
-created a dose leak). The sidecar's "silent"/"does not specify"/"does not name" framing is a
-mischaracterization of the source, not a fabrication of new content - but it means R1 will be
-working from an inaccurate premise that DeVita offers zero HPRC-specific systemic-therapy signal,
-when in fact it offers a named MET inhibitor with a phase II efficacy readout in exactly this
-population.
-
-Everything else claimed as "general oncology standard, not from DeVita's HPRC section" (surveillance-
-and-treat size-threshold strategy, NCCN referral, MET-inhibitor rationale by extrapolation) is
-correctly and conservatively labelled as such and is uncontroversial.
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+None found. The single blocking finding from the prior verdict (the false claim that DeVita's
+HPRC section "does not name or validate a specific agent" / "does not lay out a disease-specific
+systemic-therapy algorithm") has been corrected throughout the file. Spot-checked every specific
+claim against devita.txt:
+- Foretinib phase II trial in bilateral/multifocal/metastatic papillary RCC and HPRC with germline
+  MET mutation, activity in advanced papillary RCC with highest response in germline-MET patients -
+  confirmed verbatim (lines ~149988-149996). Sidecar now correctly states DeVita reports this
+  HPRC-specific data point, omits DeVita's ORR 13.5%/PFS 9.3-month figures (not required, no dose
+  leak either way), and correctly notes no dose/schedule is given for foretinib in DeVita.
+- "Multifocal or familial RCC" as an indication favoring partial over radical nephrectomy -
+  confirmed (line ~150487).
+- "At least 30% of a well-functioning remnant kidney" avoiding permanent dialysis - confirmed
+  verbatim (line ~150505).
+- Pre-surgical TKI downstaging enabling nephron-sparing surgery - confirmed (lines ~150507-509).
+- Thermal ablation <3cm, higher local recurrence (10-20%) vs PN/RN, Mayo series comparable cT1a
+  outcomes to PN - confirmed (lines ~150547-150610).
+- Lymphadenectomy limited/controversial benefit outside high-risk/node-positive - confirmed
+  (lines ~150390-150396).
+- SBRT as palliative-only option for unresectable disease with major IVC/venous involvement -
+  confirmed (lines ~150838-150845).
+- Everolimus efficacy maintained across histologies, first-line use not trial-supported, pushed to
+  third-line behind cabozantinib/nivolumab - confirmed near-verbatim (line ~28031).
+- Adjuvant trial roster ASSURE, SORCE, ATLAS, PROTECT, ARISER - all five confirmed as named trials
+  in DeVita's Table 43.7 (~151106-151244) / text (~150865-150920).
+- Adjuvant pembrolizumab vs placebo post-nephrectomy phase III trial improving RFS - confirmed
+  (line ~32972-32976), correctly flagged as clear-cell-centered evidence not established for
+  HPRC/papillary histology.
+- General-oncology-standard-labelled claims (surveillance-and-treat size-threshold strategy, MET
+  mechanistic rationale, NCCN-guided systemic-agent choice) remain correctly labelled "(general
+  oncology standard, not from DeVita's section on this disease)" and are not attributed to DeVita.
+No claim remains mis-attributed to DeVita; no ungrounded specific regimen/statistic lacks a label.
 
 ## 3. CITATION
 Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th
-ed. NCCN Guidelines where noted as general oncology standard." Name only, no page numbers. Correct
-format.
+ed. NCCN Guidelines where noted as general oncology standard." Name only, no page numbers.
 
-No em-dashes found (grepped "—", zero hits) - confirms draft agent's claim.
+No em-dashes found (grepped "—", zero hits).
 
-## 4. VERDICT: ISSUES
-
-- Fix before R1: the sidecar's claim that "DeVita's disease-specific section does not name or
-  validate a specific agent for this syndrome" / "does not lay out a disease-specific
-  systemic-therapy algorithm for HPRC" is false. DeVita names foretinib and reports a phase II
-  ORR/PFS readout specifically in HPRC/germline-MET-mutation patients (source line ~149982-149996,
-  Chapter 43). This passage should be added to the "Advanced, unresectable, or metastatic disease"
-  section (as descriptive trial evidence, not as a dosing instruction - no dose is given in DeVita
-  for foretinib anyway) and the "Deliberately omitted" section's framing should be corrected to
-  reflect that DeVita does name and report data on an HPRC-specific agent, even though it does not
-  give a dose/schedule for it.
-- No dose leak, no fabricated drugs/trials/stats, citation format correct, no em-dashes: all other
-  aspects are clean.
+## 4. VERDICT: CLEAN - ready for R1 re-review.
+The prior blocking finding (mischaracterizing DeVita as silent on HPRC-specific systemic therapy)
+is fixed accurately and consistently across all five locations the reviser identified (Overview,
+Advanced-disease section, Lines-of-therapy, Role-of-surgery/systemic-therapy section, Deliberately
+omitted). No new dose leak, fabrication, or mis-attribution was introduced in the rewrite.

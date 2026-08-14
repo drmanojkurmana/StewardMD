@@ -1,52 +1,50 @@
-# R1 Clinical-Safety Review — cholangiocarcinoma (management narrative)
+# R1 CLINICAL-SAFETY REVIEW — cholangiocarcinoma
 
-VERDICT: REVISE
+VERDICT: APPROVE
 
-Adversarial verdict file: NOT PRESENT (no .verdict.md at the sidecar path). Review performed
-directly against DeVita 12th ed / NCCN standard of care.
+Confidence: 90. goldens changed: no (intended: n/a — narrative content, no engine/rule change).
+Adversarial verdict file (.verdict.md): NOT PRESENT — reviewed draft directly.
 
-goldens changed: no (KB narrative field only; no clinical engine / calculator / golden suite touched).
+## 1. SAFETY — pass
+No unsafe, misleading, or absolute directive statements. Curative-intent framing is correct
+("surgery is the only treatment with curative intent"). Conflicting-evidence areas are honestly
+hedged rather than oversold:
+- PDT for perihilar disease: explicitly notes the later RCT stopped early for SHORTER survival and
+  instructs it "should not be presented as an established survival benefit." Correct and safe.
+- Local-regional therapy / RT: benefit flagged as not established from randomized data.
+- EUS-FNA seeding caution before transplant candidacy is a real, safety-positive warning.
+No claim would cause harm if followed. No definitive diagnostic/therapeutic overreach.
 
-## 1. Safety
-No unsafe, harmful, or over-absolute directives. Curative-surgery framing is correctly hedged
-("only treatment with curative intent ... when resection is feasible") and does not overstep into a
-directive. The EUS-FNA hilar-seeding caution and "decompress obstruction regardless of resectability"
-guidance are correct and safety-positive. No definitive diagnostic/prognostic overreach.
+## 2. GROUNDING — pass (consistent with DeVita 12th ed / NCCN standard of care)
+- Anatomic-subtype-first approach, MDT start, staging laparoscopy: standard.
+- Adjuvant capecitabine benefit + gemcitabine-based adjuvant lacking clear benefit: matches BILCAP /
+  the mixed-population trial landscape as described in DeVita 12th ed. Correctly caveated as
+  mixed-population evidence.
+- First line platinum-gemcitabine doublet (ABC-02): correct standard.
+- Second line fluoropyrimidine-oxaliplatin / FOLFOX vs BSC (ABC-06): correctly described as OS
+  benefit over best supportive care.
+- FGFR2 fusion selective inhibitors and IDH1-mutant selective inhibitor (with the accurate nuance
+  that OS reached significance only after crossover adjustment): correct and not overstated.
+- BRAF V600E, NTRK, HER2/neu (gallbladder) as emerging/tumour-board/trial targets: correct.
+- Perihilar transplant under neoadjuvant chemoRT protocol; poor results for intrahepatic transplant:
+  correct. No fabricated or outdated regimen detected. No claim mis-attributed to DeVita.
 
-## 2. Grounding — one Important issue (drives the REVISE)
+## 3. DOSE-FREE — pass
+No mg, mg/m2, AUC, or numbered dosing schedule. The only numerics are surveillance intervals
+(~every 3 months x2 years, then ~every 6 months), which are follow-up cadence, not drug doses, and
+are explicitly framed as non-validated common practice. Compliant.
 
-IMPORTANT — Photodynamic therapy overstated (lines 64-66). The draft says PDT + stenting "has shown
-improved survival and quality of life over stenting alone for unresectable perihilar disease in
-randomized and pooled data, and is a reasonable option." The evidence is CONFLICTING, not net-positive:
-the early Ortner RCT favored PDT, but the later Photostent-02 RCT was stopped early with SHORTER
-survival in the PDT arm. Presenting only the positive side is not balanced grounding and could steer
-a clinician toward an intervention with contradictory Level-1 data.
-  - Fix: soften to reflect conflicting randomized results (e.g., "has shown a survival/QoL benefit in
-    some randomized data but not others; role remains uncertain and center-dependent"), or drop the
-    efficacy claim and label PDT as an option at select centers without asserting a survival benefit.
+## 4. SCOPE — pass
+Consistently framed as decision-support: "generally," "may be considered," "commonly used,"
+"remains uncertain," "should be considered." Resectability explicitly stated to have no single
+agreed definition. Surveillance explicitly stated to lack validated guidelines. No directive tone.
 
-The remaining treatment claims ARE grounded and current:
-  - Adjuvant capecitabine benefit / gemcitabine no clear benefit (BILCAP; negative gem trials) — OK.
-  - First line platinum-gemcitabine (ABC-02) — OK.
-  - Second line FOLFOX vs BSC (ABC-06) — OK.
-  - FGFR2 fusion → oral FGFR inhibitor; IDH1-mutant → oral IDH1 inhibitor with OS significant only
-    after crossover adjustment (ClarIDHy) — accurately stated, OK.
-  - BRAF V600E / NTRK / HER2 (esp. gallbladder) as emerging targets via tumor board/trial — OK.
-  - Perihilar transplant (neoadjuvant chemoRT + staging lap, Mayo-type protocol); intrahepatic
-    transplant disappointing — OK.
-  - Anatomic-subtype surgical descriptions (caudate involvement, PD for distal, R0 as outcome driver) — OK.
-No regimen is fabricated. No claim is mis-attributed to DeVita EXCEPT the PDT efficacy framing above,
-which should be relabeled/softened rather than cited to DeVita as an established benefit.
+## 5. ADVERSARIAL FLAGS
+No .verdict.md present, so no prior flagged issues to re-check. Independent review found no
+ungrounded, mis-sourced, or scope-creep claims requiring relabelling.
 
-## 3. Dose-free
-CONFIRMED. No mg, mg/m2, AUC, or numbered drug schedules. Agents named by class/name only. The
-"every three months / every six months" figures are surveillance intervals, not drug doses — acceptable.
-
-## 4. Scope
-Appropriately hedged as decision-support throughout ("may be considered," "reasonable option,"
-"should be considered," "generally"). MDT-first framing is correct. Not a directive.
-
-## Summary
-Clinically safe, dose-free, well-scoped, and almost entirely well-grounded. Single blocking-for-REVISE
-item: the PDT-for-perihilar survival claim omits contradictory RCT evidence (Photostent-02) and is
-overstated relative to DeVita/NCCN. Soften or relabel that one claim, then this is APPROVE-ready.
+## Notes (Advisory only — non-blocking)
+- "formal segmental lobectomy" (line 21) is slightly loose terminology (anatomic resection ranging
+  up to hemihepatectomy would be more precise) but is not unsafe or misleading.
+- Single source cited (DeVita 12th ed). All claims fall within its coverage; adding NCCN as a
+  co-citation would strengthen the molecular-therapy section but is not required for approval.

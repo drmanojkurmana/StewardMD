@@ -150,6 +150,31 @@
           } catch (e) { resolve(null); }
         });
       }
+      // Device-stored GHIS credential from the queue's "Remember me" (Keychain/Keystore, NEVER our
+      // server). SCOPED PER APP-ACCOUNT (same key the queue writes: 'smd_ghis_rememcred:' + uid) so a
+      // remembered login can't leak to a different doctor on a shared device.
+      function storedCredLogin() {
+        try {
+          if (!(window.SMD_SECURE && window.SMD_SECURE.get)) return Promise.resolve(false);
+          return window.SMD_SECURE.get('smd_ghis_rememcred:' + ghisOwner()).then(function (raw) {
+            var c = null; try { c = raw ? JSON.parse(raw) : null; } catch (e) {}
+            if (!c || !c.u || !c.p || !window.GHIS || !window.GHIS.loginWith) return false;
+            return window.GHIS.loginWith(c.u, c.p);   // resolves true on success (sets the token)
+          }).catch(function () { return false; });
+        } catch (e) { return Promise.resolve(false); }
+      }
+      // NON-UI: resolve true if a live session is ready (silently refreshed, or re-logged-in from a
+      // remembered device credential), false otherwise. Opens no panel — the caller owns the UI.
+      function checkSession() {
+        if (!getToken()) return storedCredLogin();
+        return fetch(PROXY + '/status', { headers: { 'Authorization': 'Bearer ' + getToken() } })
+          .then(function (r) { return r.json(); })
+          .then(function (s) {
+            if (s && s.connected) { _connected = true; try { dot(true); } catch (e) {} return true; }
+            return ghisSilentRefresh().then(function (nt) { return nt ? true : storedCredLogin(); });
+          })
+          .catch(function () { return true; });   // network hiccup: don't force a prompt
+      }
       // fetch wrapper that attaches the bearer token; on 401 it tries a SILENT refresh ONCE and
       // retries, only falling back to the login screen if that fails.
       function authFetch(path, opts, _retried) {
@@ -421,6 +446,16 @@
             .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, d: d }; }); })
             .then(function(res) { if (res.ok && res.d && res.d.token) { setToken(res.d.token); _connected = true; try { dot(true); } catch (e) {} return true; } return false; })
             .catch(function() { return false; });
+        },
+        // NON-UI session check: resolves true if a live session is ready (silently refreshed, or
+        // re-logged-in from a remembered device credential), false otherwise. Opens NO panel — the
+        // caller decides the UI (the OPD queue shows its own gate; ensureSession opens Ward Sync).
+        checkSession: checkSession,
+        // Proactively verify the persisted GHIS session BEFORE a workflow needs it (e.g. the app was
+        // reopened straight into OPD). Same as checkSession but opens the Ward Sync login on failure so
+        // the doctor re-signs in UP FRONT instead of hitting a wall mid-load.
+        ensureSession: function() {
+          return checkSession().then(function(ok) { if (!ok) { try { window.openGHIS && window.openGHIS(); } catch (e) {} } return ok; });
         },
         // Proxy base so GHISMEDS uses the SAME endpoint origin as the ward panel.
         getProxyBase: function() { return PROXY; },

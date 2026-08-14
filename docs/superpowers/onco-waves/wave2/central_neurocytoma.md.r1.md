@@ -1,62 +1,51 @@
-# R1 Clinical-Safety Review — central_neurocytoma.md
+# R1 Clinical-Safety Review — central_neurocytoma
 
-VERDICT: REVISE
+VERDICT: APPROVE
 
-Single blocking reason: citation mis-attribution. Everything else passes.
+goldens changed: no (intended: n/a)
 
-## 1. SAFETY — PASS
-No unsafe, misleading, or absolute directive. Claims are hedged appropriately:
-"frequently curative" (not "curative"), "reasonable option," "considered,"
-"individualized by the MDT." Urgent-hydrocephalus / raised-ICP escalation is
-correctly flagged. No statement would cause harm if followed. No overstep of
-decision-support.
+## 1. SAFETY — pass
+No unsafe, misleading, or harmful directive. Every claim is appropriately hedged ("usually",
+"reasonable option", "considered", "individualized by the MDT"). Acute obstructive hydrocephalus
+is correctly flagged for urgent CSF diversion/neurosurgical referral — the one genuine emergency
+for this entity is not buried. No absolute/curative overreach: GTR is called "frequently curative,"
+not always. Systemic therapy is correctly stated to have no established role, which prevents the
+real harm here (a clinician chasing a non-existent chemo regimen).
 
-## 2. GROUNDING — PASS on clinical content, FAIL on attribution
-The management content (GTR as primary/usually-definitive treatment; adjuvant RT
-or SRS for incomplete/atypical/recurrent disease; no established systemic-therapy
-role; MRI surveillance; synaptophysin + Ki-67/MIB-1 risk stratification; IDH /
-1p19q / ATRX workup vs oligodendroglioma) is uncontroversial, textbook-standard
-neuro-oncology / WHO CNS classification. No fabricated regimen, trial, drug, or
-statistic. Consistent with the adversarial verdict (CLEAN).
+## 2. GROUNDING — pass
+All content matches standard neuro-oncology / WHO CNS classification standard of care:
+- Central neurocytoma = intraventricular neuronal tumor, WHO CNS grade 2, septum pellucidum /
+  foramen of Monro, young-to-middle-aged adults — correct.
+- Maximal safe resection as primary/definitive therapy, extent of resection as dominant outcome
+  driver — correct.
+- Adjuvant RT / SRS reserved for incomplete resection, atypical histology (elevated Ki-67/MIB-1),
+  or recurrence — correct and standard.
+- Synaptophysin for neuronal differentiation, Ki-67/MIB-1 for atypical stratification, IDH/1p19q/
+  ATRX to separate from oligodendroglioma — correct.
+No fabricated regimen, trial, drug name, or statistic. Adversarial .verdict.md (VERDICT: CLEAN)
+confirms zero fabricated regimens/statistics.
 
-BUT: the closing line "Sources: DeVita, Hellman, and Rosenberg's Cancer... 12th ed."
-attributes this content to DeVita, while the file's own front-matter flag states
-DeVita has NO dedicated management passage for this entity (single passing list
-mention in the raised-ICP chapter). That is exactly the pattern R1 must not
-approve: a DeVita citation on claims not in DeVita. The front-matter flag
-discloses it, but the flag is a working note ("needs manual sourcing") likely
-stripped when the narrative lands in the reference JSON management field — the
-Sources line is what ships, so a downstream reader sees DeVita credited for
-non-DeVita content.
+## 3. DOSE-FREE — pass
+No mg, mg/m2, AUC, Gy, fractionation, or numbered dosing schedule. The only numerals are "WHO CNS
+grade 2", the 1-4 sequence list (therapy ordering, not a schedule), and "12th ed." in the citation.
+Confirmed independently and consistent with the .verdict.md dose grep.
 
-Per the R1 rule, the claims ARE clinically uncontroversial, so this is relabel-not-
-reject: change the Sources line to attribute to general standard-of-care / WHO CNS
-tumour classification and standard neuro-oncology teaching, NOT DeVita-specific.
-That single edit clears the block.
+## 4. SCOPE — pass
+Framed as decision-support, not directive: MDT/neurosurgery/radiation-oncology referral is
+repeatedly deferred to; surgical approach "chosen by the neurosurgical team"; surveillance
+"individualized." Stays within reference-KB management scope.
 
-Required fix (trivial):
-  Replace the closing "Sources: DeVita..." line with an attribution to general
-  standard-of-care (WHO CNS classification + standard neuro-oncology teaching),
-  optionally noting DeVita 12th ed. carries only a passing mention, not a
-  management passage. Keep the front-matter flag.
+## 5. ADVERSARIAL FLAGS — resolved
+The prior R1-blocking issue was a DeVita mis-attribution (whole narrative credited to DeVita despite
+DeVita having no dedicated management passage). The .verdict.md confirms this is FIXED: the intro
+flag and Sources line now explicitly relabel the content as "general neuro-oncology standard of care
+and WHO CNS tumor classification principles ... not from DeVita's section on this disease," and state
+no clinical claim is attributed to DeVita. No claim is mis-sourced to DeVita in the body. This meets
+the "relabelled as general-standard, not DeVita-specific" bar, so the previously-flagged issue is not
+still present. APPROVE is warranted.
 
-## 3. DOSE-FREE — PASS
-No mg, mg/m2, AUC, Gy, or fractionation. Numerics present are grade ("WHO CNS
-grade 2"), biomarkers (Ki-67/MIB-1, 1p/19q), the therapy-sequence list (1-4, not
-a dosing schedule), and edition ("12th ed"). Confirmed against the adversarial
-grep.
-
-## 4. SCOPE — PASS
-Framed as decision-support: repeatedly defers to the neurosurgical / neuro-oncology
-MDT and radiation oncology, uses conditional language, and explicitly declines to
-give a systemic-therapy recommendation it cannot ground. Not directive.
-
-## 5. ADVERSARIAL FLAGS
-The .verdict.md returned CLEAN (no still-present ungrounded/fabricated claim). I
-concur on dose leak and fabrication. The verdict itself noted the citation is
-"honest-but-thin" — I escalate that from a note to a blocking relabel because the
-Sources line as written credits DeVita for content DeVita does not contain.
-
-goldens changed: no (intended: n/a — reference narrative, not engine logic)
-
-Confidence: 90.
+## Note (advisory, non-blocking)
+The sidecar's own flag says content is "also reflected in the existing reference JSON in this KB."
+That cross-reference was not independently re-diffed here; recommend the merge step confirm the JSON
+overview/histology fields do not contradict this narrative. This is a consistency check, not a
+fabrication or safety concern.

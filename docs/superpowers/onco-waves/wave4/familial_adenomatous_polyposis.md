@@ -6,17 +6,17 @@ FAP is a hereditary polyposis syndrome caused by a germline APC mutation, inheri
 
 ## Role of surgery
 
-Risk-reducing colectomy or restorative proctocolectomy is the definitive intervention and the central pillar of management once polyp burden becomes significant; it is planned rather than reactive, aiming to remove the colon before malignant transformation occurs. After colectomy, the retained rectum (if a subtotal colectomy is performed) or the ileal pouch requires lifelong endoscopic surveillance with removal of any significant polyps that develop. Abdominal surgery itself is recognized as a factor that can provoke desmoid tumor formation, so the decision on timing and extent of surgery has to weigh this risk. Desmoid tumors, once established, are managed with cross-sectional imaging surveillance, and are a major driver of morbidity and mortality after colectomy.
+Risk-reducing colectomy or restorative proctocolectomy is the definitive intervention and the central pillar of management once polyp burden becomes significant; it is planned rather than reactive, aiming to remove the colon before malignant transformation occurs. After colectomy, the retained rectum (if a subtotal colectomy is performed) or the ileal pouch requires lifelong endoscopic surveillance with removal of any significant polyps that develop. Abdominal surgery itself is recognized as a factor that can provoke desmoid tumor formation, so the decision on timing and extent of surgery has to weigh this risk (general oncology standard, not from DeVita's section on this disease). Desmoid tumors, once established, are managed with cross-sectional imaging surveillance and can be a significant source of morbidity after colectomy (general oncology standard, not from DeVita's section on this disease).
 
 ## Chemoprevention
 
-Chemoprevention with a non-steroidal anti-inflammatory agent, such as sulindac, or a COX-2 inhibitor, can reduce adenoma burden. This is used as an adjunct to surgery and surveillance, not as a substitute for risk-reducing colectomy.
+Chemoprevention with a non-steroidal anti-inflammatory agent, such as sulindac, or a COX-2 inhibitor, can reduce adenoma burden (general oncology standard, not from DeVita's section on this disease). This is used as an adjunct to surgery and surveillance, not as a substitute for risk-reducing colectomy.
 
 ## Extracolonic surveillance and management
 
 - Upper gastrointestinal tract: side-viewing duodenoscopy surveillance for duodenal and periampullary adenomas, with endoscopic or surgical treatment of lesions showing advanced histology (there is a recognized risk of duodenal or ampullary adenocarcinoma in this population).
-- Desmoid tumors: cross-sectional imaging surveillance, particularly after abdominal surgery.
-- Thyroid: ultrasound surveillance for papillary thyroid carcinoma.
+- Desmoid tumors: cross-sectional imaging surveillance, particularly after abdominal surgery (general oncology standard, not from DeVita's section on this disease).
+- Thyroid: surveillance for thyroid tumors associated with the syndrome, most commonly papillary thyroid carcinoma; ultrasound is the surveillance modality used in practice (general oncology standard, not from DeVita's section on this disease).
 - Eyes: ophthalmological examination for congenital hypertrophy of the retinal pigment epithelium, which can also serve as a clinical clue to the diagnosis.
 - Brain tumors (glioblastoma or medulloblastoma) occur in the Turcot syndrome variant of FAP; neurological features in a patient with colonic polyposis should prompt evaluation for this association.
 

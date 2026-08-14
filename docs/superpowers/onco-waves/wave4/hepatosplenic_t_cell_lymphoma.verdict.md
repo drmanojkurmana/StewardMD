@@ -1,74 +1,64 @@
-# Adversarial verification verdict — hepatosplenic_t_cell_lymphoma
+# Adversarial re-verification verdict — hepatosplenic_t_cell_lymphoma (re-pass 2, post-transplant-timing-fix)
 
 ## 1. DOSE LEAK
-None. `grep -n '[0-9]'` over the sidecar returns only the "12th ed." in the
-Sources line — no mg, mg/m2, AUC, or numbered-schedule content anywhere.
+None. Only numeral in the file is "12th ed." in the Sources line. No mg, mg/m2,
+AUC, Gy, or numbered-schedule content anywhere.
 
-## 2. UNGROUNDED CLAIMS
+## 2. UNGROUNDED / MISLABELLED CLAIMS
 
-- **Autologous SCT as consolidation ("Autologous stem-cell transplantation
-  has also been used as consolidation...")** — MISATTRIBUTED, not just
-  unsupported. The draft agent's cited line range (~269169-269220) contains a
-  paragraph ("...median survival of 10 months. Surgery for limited-stage
-  disease cures a small number of patients. Intensive induction with
-  combination chemotherapy, including high-dose methotrexate, and ASCT in the
-  first remission...") that sits, via a PDF-extraction column-jumble,
-  immediately after the "Hepatosplenic T-cell Lymphoma" heading and before its
-  real Pathology section — but its footnote (354) resolves to Sieniawski et
-  al., "Evaluation of enteropathy-associated T-cell lymphoma comparing
-  standard therapies with a novel regimen including autologous stem cell
-  transplantation" (Blood 2010). That paragraph is about **EATL**, not HSTL.
-  The real HSTL clinical/treatment section (confirmed via refs 364-366,
-  Falchook/Kotlyar/Voss) only supports alloSCT ("rare patients being
-  long-term survivors after alloSCT") — it says nothing about autologous SCT
-  for HSTL. The sidecar's ASCT sentence should be removed; it borrows a
-  neighboring disease's data.
+The specific item this pass was asked to check (transplant-timing) is fixed:
 
-- **HLH association with HSTL** — the "Haemophagocytic lymphohistiocytosis
-  (HLH)" special-situation bullet is not supported by the cited HSTL passage.
-  In this DeVita excerpt, hemophagocytic/HLH language appears only under
-  PTCL-NOS ("eosinophilia and hemophagocytic syndrome, are features of
-  PTCL-NOS") and under Subcutaneous Panniculitis-like T-cell Lymphoma
-  ("Hemophagocytic lymphohistiocytosis is reported in 17% of patients"), never
-  under the Hepatosplenic T-cell Lymphoma section itself. The HSTL-HLH link is
-  real and well established in the broader literature, but it is not grounded
-  in the source text the draft agent searched, contradicting the draft
-  agent's grounding claim ("~2 DeVita passages... roughly 25-30 lines of
-  direct source text used").
+- **Transplant-timing split** — the sentence is now two clauses: (1) "Allogeneic
+  stem-cell transplantation is associated with the rare long-term survivors
+  reported for this disease" — matches DeVita's HSTL paragraph verbatim
+  ("...rare patients being long-term survivors after alloSCT"), no timing
+  attached; (2) "Transplant is generally pursued in first remission in
+  eligible, responding patients `(general oncology standard for chemosensitive
+  aggressive T-cell lymphoma; DeVita's section on this disease does not
+  specify transplant timing)`" — correctly hedged and labelled. Fixed.
 
-- **"No localized or surgically curable stage of this disease as classically
-  described"** and the splenectomy-for-hypersplenism sentence — DeVita's HSTL
-  section is simply silent on surgery (no statement either way); these are
-  reasonable inferences from the sinusoidal/systemic pathology description,
-  not stated facts, but are presented as narrative fact rather than flagged as
-  inference. Lower severity than the two items above (no misattribution, just
-  unstated extrapolation).
+All earlier-fixed items re-confirmed still fixed on this pass:
+- ASCT-for-other-PTCLs vs. allogeneic-only-for-HSTL split, correctly labelled.
+- Both HLH bullets carry the "(general oncology standard... not from DeVita's
+  section on this disease)" tag; DeVita's HSTL paragraph never mentions HLH.
+- "No localized/surgically curable stage" + splenectomy are explicit,
+  correctly-labelled clinical inference. Re-confirmed the nearby "surgery for
+  limited-stage disease..." sentence in the raw DeVita text is a two-column
+  PDF-reflow artifact belonging to enteropathy-associated T-cell lymphoma
+  (footnote 354 → Sieniawski et al. on EATL), not HSTL — so the label
+  ("DeVita's section on this disease does not address surgery") is accurate.
+- Induction (ICE/IVAC superior to CHOP +/- etoposide) matches DeVita's HSTL
+  paragraph near-verbatim, correctly grounded, no invented regimens.
+- "Content deliberately omitted" paragraph's scoping is accurate and no longer
+  mischaracterizes source silence on survival.
 
-Confirmed grounded and accurate: induction regimens (ICE/IVAC-type infusional
-ifosfamide platforms superior to CHOP ± etoposide), immunosuppression
-association (solid-organ transplant recipients, Crohn disease on thiopurines),
-and alloSCT-in-first-remission as the modality linked to the disease's rare
-long-term survivors — all directly traceable to the real HSTL "Clinical
-Features and Treatment" paragraph (refs 364-366).
+**NEW finding on this pass (not previously flagged) — unlabelled claim:**
+"Special situations → Underlying immunosuppression" bullet: "In these
+patients, withdrawal or reduction of the causative immunosuppressive agent
+should be addressed alongside oncologic therapy, in coordination with the
+team managing the underlying condition (transplant medicine or
+gastroenterology)." DeVita's HSTL paragraph states only the epidemiologic
+association (immunosuppressed solid-organ recipients / Crohn's on
+thiopurines) — it contains no recommendation to withdraw or reduce
+immunosuppression. This is a real, defensible general-oncology practice
+(analogous to PTLD management) but, unlike the adjacent HLH bullet two
+sections below (which correctly carries the "general oncology standard, not
+from DeVita's section on this disease" tag), this sentence is stated
+unhedged as though grounded. Same category as the transplant-timing item just
+fixed; needs the same treatment (label or remove).
 
 ## 3. CITATION
-Present and correctly formatted: "Sources: DeVita, Hellman, and Rosenberg's
-Cancer: Principles & Practice of Oncology, 12th ed." — name only, no page
-numbers.
+Present, name-only, no page numbers: "Sources: DeVita, Hellman, and
+Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed."
 
-## 4. VERDICT: ISSUES
-
-- Remove the autologous-SCT-as-consolidation sentence — its apparent source
-  is a misattributed EATL passage (footnote 354 = Sieniawski et al., EATL),
-  not HSTL. This is the more serious of the two findings since it reads as
-  disease-specific grounded content and is not.
-- Remove or explicitly caveat the HLH special-situation bullet as
-  general-knowledge / not found in the cited DeVita HSTL passage (the HLH
-  language in this DeVita excerpt belongs to PTCL-NOS and SPTCL, not HSTL).
-- Minor: soften "no localized or surgically curable stage... as classically
-  described" and the splenectomy sentence to read as clinical inference
-  rather than sourced fact, since DeVita's HSTL section doesn't address
-  surgery at all.
-- No dose leak; citation format is correct; the induction-regimen,
-  immunosuppression-association, and alloSCT-survivor claims are solidly
-  grounded.
+## 4. VERDICT: ISSUES (one item, not yet ready for R1)
+- The transplant-timing fix the reviser was asked to make is genuinely
+  resolved — verified against DeVita's actual HSTL text.
+- New, not-previously-caught gap found this pass: the immunosuppression-
+  withdrawal/reduction sentence in "Special situations" is an unhedged
+  treatment recommendation not present in DeVita's HSTL section and not
+  labelled as a general-oncology-standard inference (unlike the HLH bullet
+  right below it, which uses the correct pattern). Fix: add the same inline
+  label, or delete the recommendation and keep only the grounded epidemiologic
+  association.
+- No dose/numeral leak. No other unlabelled or misattributed claims found.

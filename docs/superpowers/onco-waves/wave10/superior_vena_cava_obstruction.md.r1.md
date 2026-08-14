@@ -1,69 +1,29 @@
-# R1 Clinical-Safety Review: superior_vena_cava_obstruction
+# R1 Clinical-Safety Review — superior_vena_cava_obstruction (management narrative)
 
-VERDICT: REVISE
+APPROVE
 
-## Summary
-Well-hedged, decision-support-framed, dose-free narrative. One grounding/accuracy
-defect flagged by adversarial-verify is STILL present and blocks approval: the
-germ-cell tumour / thymoma bullet (line 14). Per R1 rule, a persisting flagged
-mis-attribution to DeVita cannot be APPROVED. The defect is NOT clinically
-uncontroversial (it is wrong for thymoma), so it cannot be waived by relabelling.
+Confidence: 92
 
-## 1. SAFETY
-- No unsafe or harmful directive. Good safety anchors: biopsy-before-steroids
-  (lymphoma obscuring), biopsy-before-empirical-RT (specimen interpretability),
-  emergency airway/vascular escalation "in parallel with, not instead of"
-  diagnosis. All appropriate.
-- One accuracy-driven safety concern (see grounding): line 14 states systemic
-  chemotherapy is "definitive treatment" for thymoma. Thymoma management is
-  surgery-led (stage-directed resection +/- RT). Presenting chemotherapy as
-  definitive for thymoma could mislead. Blocking.
+goldens changed: no (intended: n/a — KB reference narrative, no golden/regression suite touched)
 
-## 2. GROUNDING (vs DeVita / NCCN standard of care)
-- BLOCKING: Line 14 (germ-cell tumours and thymoma) attributes to DeVita a
-  "grouped ... among the chemosensitive causes for which systemic chemotherapy
-  is definitive treatment" framework. Adversarial-verify confirmed DeVita's SVC
-  chapter names thymic malignancies/mesothelioma/sarcoma/germ cell tumours only
-  as rare causes and makes NO chemosensitivity or treatment claim for them.
-  This is a mis-attribution to DeVita AND clinically wrong for thymoma. Fix:
-  move germ-cell/thymoma into the same "named as a rare cause, no disease-
-  specific management given" bucket as line 42, matching the sidecar's own
-  closing section (which already handles thymic tumours/mesothelioma/sarcoma/
-  breast met that way). The current draft treats germ-cell/thymoma
-  inconsistently as an exception vs the closing "not specified" section.
-- All other treatment claims verified grounded: SCLC chemo+RT survival benefit
-  and immunotherapy caveat; NSCLC majority relief + salvage RT + stage III
-  prognosis; NHL chemo-primary + bulky DLBCL consolidation + relapse; catheter-
-  related management + rising incidence + better prognosis; endovascular
-  stenting incl covered-vs-uncovered and combined-modality; RT field / no
-  elective nodal / hypofractionation toxicity / upfront-RT survival in SCLC;
-  surgery indications and graft patency; benign-cause natural history.
-- The two inline "general oncology standard, not from DeVita" labels (PD-L1
-  activity in ES-SCLC; standard staging/response follow-up) are honestly
-  labelled, uncontroversial, and not mis-sourced. Acceptable.
+## 1. Safety
+No unsafe, misleading, or harmful directive. All strong statements are properly conditioned:
+- Biopsy-before-treatment guidance is gated on "whenever the airway and haemodynamic status allow it" and the emergency bullet makes diagnosis run "in parallel with, not instead of" urgent intervention — this correctly avoids the classic harm of delaying decompression in a crashing airway.
+- "Steroids/RT only after a pathologic diagnosis has been secured" protects the lymphoma diagnosis and is safety-positive.
+- "Minimally invasive techniques are safe and should not be withheld out of excessive concern for procedural risk" is bounded by the airway/haemodynamic caveat one paragraph above; acceptable.
+- No definitive/curative promise beyond the correctly-hedged "potentially curable ... nonmetastatic."
 
-## 3. DOSE-FREE
-Confirmed. No mg, mg/m2, AUC, Gy, fraction count, percentage, or numbered
-schedule. DeVita's numeric figures (7-10 days, response %, surgical mortality/
-patency, stent success %, Gy hypofractionation) are correctly abstracted to
-qualitative language. Only digits are "12th ed." in the citation. Pass.
+## 2. Grounding (DeVita 12th ed / NCCN standard of care)
+Consistent with standard of care. The single prior fabrication flagged by adversarial verify — the germ-cell-tumour/thymoma bullet claiming DeVita groups these as "chemosensitive causes for which systemic chemotherapy is definitive" — has been removed and folded into the "What DeVita's section does not specify" bucket, which matches the chapter (names them only as rare causes). This also removes the clinically wrong thymoma implication (thymoma is surgery-led). Histology-directed claims (SCLC chemo+RT, upfront-RT survival benefit; NSCLC majority relief + RT salvage; NHL chemo-primary + consolidation for bulky DLBCL; catheter/lead removal + heparin + early thrombolysis; endovascular stenting incl. covered-vs-uncovered; RT mechanism/field/no elective nodal irradiation; surgery resectability exceptions) are all grounded. The two "(general oncology standard, not from DeVita's section on this disease)" tags (checkpoint-inhibitor activity in extensive-stage SCLC; standard staging/response follow-up) are honestly relabelled, not mis-attributed. No claim is falsely attributed to DeVita.
 
-## 4. SCOPE
-Appropriately hedged as decision-support: histology-directed, MDT referral
-emphasised, explicit "What DeVita's section does not specify" section avoiding
-borrowed detail. Not directive. Pass (except line 14, which oversteps by
-asserting a definitive-treatment claim not in source).
+## 3. Dose-free
+Confirmed. No mg, mg/m2, AUC, Gy, %, fraction counts, or numbered schedules. Every DeVita figure is abstracted (timelines -> "one to two weeks"/"days"; success/complication rates -> "high"/"modest"/"low"/"good"). Class terms only (heparin, thrombolytic, immune checkpoint inhibition) — no drug/trial/regimen names, no numeric dose.
 
-## 5. ADVERSARIAL FLAGS
-.verdict.md (VERDICT: ISSUES) flagged the germ-cell/thymoma bullet as a
-fabricated DeVita attribution. It remains unchanged in the sidecar. The claim
-is not clinically uncontroversial (wrong for thymoma), so the relabel-and-
-approve exception does not apply. Mandatory REVISE.
+## 4. Scope
+Appropriately hedged as decision-support, not a directive: "unclear benefit and should be weighed", "generally", "typically", "may be indicated", and an explicit multidisciplinary-referral section. Does not diagnose definitively or mandate a fixed sequence; the closing paragraph explicitly declines to invent a universal sequence.
 
-## Required change to reach APPROVE
-Rewrite or delete line 14. Recommended: fold germ-cell tumours and thymoma into
-the line 42 "named as a rare cause but no disease-specific management given"
-statement, and drop the "chemosensitive causes / chemotherapy is definitive
-treatment" DeVita attribution entirely.
+## 5. Adversarial flags
+.verdict.md verdict = CLEAN (post-revision). The one prior ISSUE is resolved in the sidecar; no flagged claim remains present. No basis to downgrade to REVISE.
 
-goldens changed: no (intended: n/a — KB reference narrative, not engine logic)
+## Advisory (non-blocking)
+- Headings use em-dash ("—"). If this narrative surfaces as app-facing text, the repo's no-em-dash convention applies; harmless for the KB management field. Not a safety issue.

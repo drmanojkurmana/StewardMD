@@ -47,11 +47,14 @@ disease with its own dedicated treatment algorithm.
     happen at, or in direct consultation with, a centre with multidisciplinary bone tumour expertise.
 
 ### Maffucci syndrome specifically
-- Because Maffucci syndrome carries a greater risk of malignant transformation than Ollier disease,
-  and also predisposes to non-skeletal tumours, surveillance needs to extend beyond the skeleton.
+- DeVita groups Maffucci syndrome with Ollier disease as a recognised chondrosarcoma
+  predisposition syndrome. Maffucci syndrome carrying a greater risk of malignant transformation
+  than Ollier disease, and also predisposing to non-skeletal tumours, is general oncology standard,
+  not from DeVita's section on this disease; on that basis, surveillance in Maffucci syndrome
+  needs to extend beyond the skeleton.
 - New neurological symptoms should prompt evaluation for an intracranial process, and monitoring
   should include attention to the described association with visceral tumours, in addition to
-  skeletal surveillance.
+  skeletal surveillance (general oncology standard, not from DeVita's section on this disease).
 
 ## Monitoring / surveillance
 
@@ -66,7 +69,8 @@ recognised orthopaedic-oncology conditions for which practical surveillance guid
   deserve particular vigilance because tumours there can grow substantially before becoming
   symptomatic.
 - In Maffucci syndrome, surveillance is broadened to include the described risk of intracranial and
-  visceral tumours, not skeletal imaging alone.
+  visceral tumours, not skeletal imaging alone (general oncology standard, not from DeVita's
+  section on this disease).
 
 ## When to refer
 

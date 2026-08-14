@@ -1,0 +1,27 @@
+/* motion.css — shared motion system for StewardMD (CSS-only, GPU-composited).
+ * ---------------------------------------------------------------------------
+ * One easing/duration vocabulary + a few reusable entrance keyframes so every surface animates the
+ * same way: transform + opacity only (cheap, smooth in the iOS WKWebView — no JS animation loop).
+ * Surfaces reference smdFadeUp / smdPopIn / smdFadeIn and the --smd-ease* / --smd-dur* tokens.
+ * Fully disabled under prefers-reduced-motion. Additive: no existing rule is overridden. */
+:root {
+  --smd-ease: cubic-bezier(.22, 1, .36, 1);       /* gentle spring-out — the house easing */
+  --smd-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --smd-dur: .30s;
+  --smd-dur-sm: .20s;
+  --smd-dur-lg: .42s;
+}
+@keyframes smdFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes smdFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes smdFadeDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes smdPopIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes smdSheetUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+/* opt-in utilities anything in the app can use */
+.smd-in { animation: smdFadeUp var(--smd-dur) var(--smd-ease) both; }
+.smd-in-fast { animation: smdFadeUp var(--smd-dur-sm) var(--smd-ease) both; }
+.smd-pop { animation: smdPopIn var(--smd-dur) var(--smd-ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; }
+}

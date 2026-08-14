@@ -18,7 +18,8 @@ grounded below.
 ## Work-up before committing to a management path
 
 - Characterise the mass with pre- and post-contrast CT or MRI; a central stellate scar is sometimes
-  described on imaging but this is neither sensitive nor specific for oncocytoma.
+  described on imaging but this is neither sensitive nor specific for oncocytoma (general
+  radiology/pathology standard, not from DeVita's section on this disease).
 - Consider renal mass biopsy when the result would change management. DeVita cites a published
   risk-stratification algorithm (Kutikov et al.) for selecting which renal masses warrant biopsy,
   built around questions such as whether lymphoma/abscess/metastasis is suspected, whether the
@@ -26,9 +27,10 @@ grounded below.
   plan. Conventional renal mass biopsy gives a definitive histologic diagnosis in most cases, but
   grading concordance is only moderate, and biopsy is not universally recommended, it should be
   used judiciously because it does not always change management and can add uncertainty.
-- Immunohistochemistry can help separate oncocytoma from chromophobe RCC when biopsy is done, but
-  sampling limitations and the existence of hybrid oncocytic-chromophobe tumours mean biopsy
-  supports rather than guarantees the diagnosis.
+- Immunohistochemistry can help separate oncocytoma from chromophobe RCC when biopsy is done
+  (general pathology standard, not from DeVita's section on this disease), but sampling
+  limitations and the existence of hybrid oncocytic-chromophobe tumours mean biopsy supports
+  rather than guarantees the diagnosis.
 - 99mTc-sestamibi SPECT/CT has been studied as an adjunct for detecting mitochondria-rich tumours
   (chromophobe RCC and oncocytoma) with reasonable sensitivity and specificity in a cited series,
   but this is a research/adjunct tool rather than a standard step, and DeVita frames it as a
@@ -86,7 +88,7 @@ kind, and there is no grounded indication for it here.
   name).
 - After nephron-sparing surgery, monitor renal function and confirm the final histology, since
   resected "oncocytoma" specimens can occasionally reveal chromophobe RCC or a hybrid tumour on full
-  pathologic review.
+  pathologic review (general pathology standard, not from DeVita's section on this disease).
 
 ## When to refer
 

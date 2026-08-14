@@ -1,0 +1,79 @@
+{
+  "id": "cough",
+  "version": "1.0",
+  "label": "Cough",
+  "reviewed": false,
+  "match": [
+    "cough",
+    "దగ్గు",
+    "daggu",
+    "khaansi",
+    "khansi"
+  ],
+  "maxQuestions": 6,
+  "askThreshold": 4,
+  "fields": {
+    "duration": {
+      "priority": 2,
+      "emr": "Chief_complaints_duration",
+      "ask": "how many days the cough has been present"
+    },
+    "type": {
+      "priority": 3,
+      "emr": "History_present_illness",
+      "ask": "whether it is a dry cough or with sputum",
+      "cues": [
+        "dry",
+        "sputum",
+        "phlegm",
+        "productive",
+        "wet"
+      ]
+    },
+    "sputum_color": {
+      "priority": 4,
+      "emr": "History_present_illness",
+      "ask": "the colour of the sputum, if any",
+      "cues": [
+        "yellow",
+        "green",
+        "white",
+        "clear",
+        "colour"
+      ]
+    }
+  },
+  "associated": {
+    "fever": {
+      "priority": 4,
+      "emr": "History_present_illness",
+      "cues": [
+        "fever"
+      ],
+      "ask": "any fever along with the cough"
+    },
+    "breathlessness": {
+      "priority": 4,
+      "emr": "History_present_illness",
+      "cues": [
+        "breathless",
+        "breathing"
+      ],
+      "ask": "any difficulty breathing"
+    }
+  },
+  "redFlags": {
+    "hemoptysis": {
+      "priority": 1,
+      "ask": "any blood in the sputum"
+    },
+    "chest_pain": {
+      "priority": 2,
+      "ask": "any chest pain with the cough"
+    },
+    "weight_loss": {
+      "priority": 2,
+      "ask": "any weight loss or night sweats"
+    }
+  }
+}

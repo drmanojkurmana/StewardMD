@@ -95,5 +95,7 @@ with cytokeratin immunohistochemistry is warranted whenever the epithelial
 question is unresolved on initial biopsy (general oncology standard, not
 from DeVita's section on this disease).
 
-Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of
-Oncology, 12th ed.
+Sources: DeVita 12th ed. (bibliographic/anatomic mention only; no OFD or
+adamantinoma management section found). Management content reflects general
+orthopedic-oncology standard of care; confirm against WHO Classification of
+Tumours: Soft Tissue and Bone or Enzinger and Weiss.

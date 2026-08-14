@@ -1,57 +1,51 @@
-# Adversarial verification verdict: dysgerminoma.md
+# Adversarial re-verification verdict: dysgerminoma.md (rewrite pass)
 
 ## 1. DOSE LEAK
-None. No mg, mg/m2, AUC, or numbered cycle/schedule anywhere in the sidecar. Stage labels
-("stage IA") and percentages are not dosing and are fine.
+None. Grepped for mg / mg-m2 / AUC / cycle-numbers / schedule tokens (`mg`, `AUC`, `cycle 1/2`,
+`q3w`, `q21`, `dose`) — zero hits. Stage labels ("stage IA") are not dosing.
 
-## 2. UNGROUNDED CLAIMS
-Two claims are presented as dysgerminoma-specific DeVita content but are not supported by
-DeVita's actual dysgerminoma passage (ovarian chapter, ~line 178374-178381: "the radiosensitive
-dysgerminoma (bilateral in 10% of cases, elaborates lactate dehydrogenase and alkaline
-phosphatase, and is characterized by lymphocytic infiltration)"). That passage names LDH +
-alkaline phosphatase as the dysgerminoma markers and says nothing about hCG, gonadoblastoma,
-or karyotype.
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+Verified all three reviser-claimed fixes directly against DeVita ovarian germ-cell passage
+(Ch. 52, ~line 178368-178383) and the testicular cross-reference sections (Ch. 47):
 
-- **Beta-hCG marker claim** ("dysgerminoma can show modest beta-hCG elevation from
-  syncytiotrophoblast-like giant cells") is lifted almost verbatim from DeVita's TESTICULAR
-  seminoma section (Ch. 47, ~line 166494: "the presence of syncytiotrophoblastic giant cells in
-  a minority of cases accounts for modest elevations of serum human chorionic gonadotropin
-  (hCG)"), not from the ovarian dysgerminoma passage. Worse, the sidecar substitutes this
-  borrowed hCG claim for DeVita's actual stated dysgerminoma marker, alkaline phosphatase, which
-  the sidecar omits entirely. The underlying biology (dysgerminoma with syncytiotrophoblastic
-  giant cells secreting hCG) is real, uncontroversial gynecologic-oncology teaching, but it is not
-  what this DeVita passage says about dysgerminoma, and the draft agent's own grounding report
-  claimed this came from the 178374-178381 passage, which is false.
-- **Gonadoblastoma / Y-chromosome karyotype / bilateral gonadectomy** claims are drawn from
-  DeVita's TESTICULAR gonadoblastoma entry (Ch. 47, Table 47.6 area, ~line 168204-168210:
-  "Gonadoblastoma contains both germ cell and sex cord stromal elements... associated with
-  testicular dysgenesis and karyotypic anomalies"), not from the ovarian dysgerminoma passage,
-  which never mentions gonadoblastoma or karyotype. Again, this is real, uncontroversial
-  gynecologic teaching (dysgenetic gonads / Swyer syndrome and gonadoblastoma risk), but the
-  draft agent's grounding report explicitly claimed these points came from the 178374-178381
-  dysgerminoma passage, which they do not.
+- **Beta-hCG / syncytiotrophoblast-like giant cells** — now correctly labelled
+  `(general oncology standard, not from DeVita's section on this disease)`. Confirmed the raw claim
+  is lifted from Ch. 47's TESTICULAR seminoma passage (~line 166494), not the ovarian dysgerminoma
+  passage. Fix verified correct.
+- **Alkaline phosphatase marker** — restored alongside LDH in "Monitoring." Confirmed this matches
+  DeVita's actual dysgerminoma sentence verbatim ("elaborates lactate dehydrogenase and alkaline
+  phosphatase"). Fix verified correct.
+- **Gonadoblastoma / Y-chromosome karyotype / bilateral gonadectomy** — now labelled in both
+  locations (Treatment approach bullet, When-to-refer bullet). Confirmed the specific
+  karyotype/gonadectomy elaboration is not in DeVita's ovarian dysgerminoma passage; the nearest
+  DeVita gonadoblastoma content is the TESTICULAR entry (Ch. 47, Table 47.6, ~line 168204) plus a
+  one-line mention in the ovarian sex-cord-stromal-tumor paragraph (~line 178416) that names
+  gonadoblastoma but never elaborates karyotype/gonadectomy. Label is appropriate either way. Fix
+  verified correct.
 
-Net: both claims are clinically defensible, guideline-standard facts, so they are not dangerous
-fabrications, but they are cross-contaminated from a different tumor's DeVita section (testicular,
-Ch. 47) rather than grounded in the cited dysgerminoma passage, and the draft agent's grounding
-report misrepresents this. Everything else (fertility-sparing surgery, stage IA observe vs.
-adjuvant BEP-family chemo beyond IA, chemosensitivity/radiosensitivity, AFP-normal-in-pure-
-dysgerminoma-implying-mixed-GCT-if-rising, high-volume gynecologic-oncology-surgeon referral,
-prognosis/fertility outcomes, explicit "DeVita is silent on second-line/cycle-count/surveillance
-schedule" disclosure) checks out against the cited passage and the surrounding ovarian-cancer
-chapter text.
+No new dangerous fabrications introduced by the rewrite. Two pre-existing, non-blocking items
+noted for completeness (not new to this pass, not flagged by the prior R1 verdict, and not
+therapeutic/regimen claims):
+- Opening sentence "the most common malignant ovarian germ-cell tumour" is a true but
+  DeVita-unstated ranking; DeVita's passage lists dysgerminoma first among subtypes but never ranks
+  by frequency. Cosmetic, not a regimen/drug/trial/statistic claim — optional polish only.
+- "When to refer" high-volume-surgeon/guideline-adherence sentence is grounded in DeVita's ovarian
+  chapter (Bristow et al. SEER data, epithelial-ovarian-cancer staging section, same chapter) rather
+  than the germ-cell passage specifically — same disposition as R1's prior verdict, which already
+  accepted this as "checks out against ... the surrounding ovarian-cancer chapter text." Not
+  cross-organ contamination like the testicular items, so not re-flagged as a blocker.
+
+Everything else (unilateral/bilateral-in-a-minority phrasing, chemosensitivity/radiosensitivity,
+fertility-sparing surgery even with metastases, FIGO stage IA exception, adjuvant
+bleomycin-etoposide-cisplatin extrapolated from testicular experience, menstrual-function/pregnancy
+prognosis, explicit "DeVita is silent on second-line/cycle-count/surveillance schedule" disclosure)
+re-checks out against the cited passage.
 
 ## 3. CITATION
 Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology,
 12th ed." Name only, no page numbers. Correct.
 
-## 4. VERDICT: ISSUES
-- Fix the monitoring-marker line: either drop the beta-hCG claim or clearly caveat it as general
-  pathology knowledge (syncytiotrophoblastic giant cells) rather than implying it is DeVita's
-  stated dysgerminoma marker, and consider restoring DeVita's actual stated marker (alkaline
-  phosphatase), which the current draft omits.
-- Fix or caveat the gonadoblastoma/karyotype paragraph similarly — it is sound clinical guidance
-  but is sourced from DeVita's testicular-cancer chapter, not the cited ovarian dysgerminoma
-  passage; either cite that more precisely or soften the "grounded in DeVita" framing.
-- No dose leak, no invented regimens/cycles/schedules, citation format correct — those parts are
-  clean.
+## 4. VERDICT: CLEAN (ready for R1 re-review)
+All three previously-held issues are correctly resolved and correctly labelled; no dose leak, no
+new fabrication, no mis-attribution to DeVita, citation format correct. Two pre-existing cosmetic
+items noted above are optional polish, not blockers.

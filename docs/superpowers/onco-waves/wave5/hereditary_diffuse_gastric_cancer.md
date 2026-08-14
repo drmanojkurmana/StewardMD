@@ -41,8 +41,9 @@ uncertain significance) should be interpreted cautiously.
   this surveillance has limited sensitivity for diffuse-type disease and is not an equivalent
   substitute for gastrectomy.
 - Because CDH1 also confers an autosomal-dominant predisposition to lobular breast cancer, female
-  carriers need enhanced breast surveillance; annual breast MRI and clinical breast examination are
-  the standard approach, with risk-reducing mastectomy discussed as an option given this risk.
+  carriers need enhanced breast surveillance (NCCN CDH1-carrier standard, not from DeVita's section
+  on this disease): annual breast MRI and clinical breast examination are the standard approach,
+  with risk-reducing mastectomy discussed as an option given this risk.
 - Decision-making about the timing and acceptance of prophylactic gastrectomy should occur in a
   multidisciplinary setting (upper gastrointestinal surgery, clinical genetics, dietetics, and
   psychology), given the major, permanent nutritional and lifestyle consequences of total
@@ -50,9 +51,9 @@ uncertain significance) should be interpreted cautiously.
 
 ## Postoperative and ongoing care
 
-- After total gastrectomy, patients need structured nutritional follow-up: dietitian support, and
-  supplementation for vitamin B12, iron, calcium, and fat-soluble vitamins, with adaptation to small,
-  frequent meals.
+- After total gastrectomy, patients need structured nutritional follow-up (general post-gastrectomy
+  standard, not HDGC-specific in DeVita): dietitian support, and supplementation for vitamin B12,
+  iron, calcium, and fat-soluble vitamins, with adaptation to small, frequent meals.
 - Ongoing surveillance in carriers who have not yet undergone gastrectomy, and breast surveillance
   in female carriers, continues indefinitely as part of long-term follow-up.
 - Family members should remain engaged with genetic counselling for cascade testing as the family

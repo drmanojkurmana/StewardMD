@@ -43,8 +43,18 @@
     // Default: small English-only q5_1 (~181 MB) — best accuracy for accented (Indian) English +
     // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
     "small.en-q5_1": { file: "ggml-small.en-q5_1.bin", sha256: "bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30", bytes: 190098681 },
-    "base-q5_1": { file: "ggml-base-q5_1.bin", sha256: "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898", bytes: 59707625 },
-    "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 }
+    // base-q5_1 RETIRED 2026-08-14 (owner: "remove base") — hallucinated on hard audio; small-q8_0 replaces it everywhere.
+    "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 },
+    // ── Steward Voice tiers (MULTILINGUAL). Gated behind smd_voice_tiers (voice.js). Each file must be
+    //    published by scripts/host-whisper-models.sh + a native rebuild BEFORE the flag is flipped ON. ──
+    // BASE + PRO(non-Telugu): multilingual Whisper Small INT8 (q8_0, ~252 MB) — English/Hindi/Telugu/code-switch.
+    "small-q8_0": { file: "ggml-small-q8_0.bin", sha256: "49c8fb02b65e6049d5fa6c04f81f53b867b5ec9540406812c643f177317f779f", bytes: 264464607 },
+    // ULTIMATE(non-Telugu): Large-v3-Turbo Q5_0 (~547 MB) — best on-device English/Hindi (measured en 6.2% WER).
+    "large-v3-turbo-q5_0": { file: "ggml-large-v3-turbo-q5_0.bin", sha256: "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2", bytes: 574041195 },
+    // PRO + ULTIMATE Telugu route: vasista22 Telugu-small → ggml → INT8 (q8_0). Benchmark-best Telugu
+    // (te WER 14.7%). NOT an off-the-shelf HF file — built by scripts/convert-telugu-whisper-ggml.sh;
+    // sha256/bytes stay PENDING (feature flag-gated OFF) until that conversion + upload is done.
+    "telugu-small-q8_0": { file: "ggml-telugu-small-q8_0.bin", sha256: "355cef20a0d433ca6ffae35d414c817e0aeecfce21b934d68203efee1e72dcba", bytes: 264464607 }
   };
 
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
@@ -291,7 +301,7 @@
       var P = plugins(); var W = P && P.Whisper;
       if (!(W && W.startTranscribe)) throw new Error("whisper-unavailable");
       var self = this;
-      var modelKey = opts.model || "base-q5_1";
+      var modelKey = opts.model || "small-q8_0";
       var m = WHISPER_MODELS[modelKey]; if (!m) throw new Error("whisper-unknown-model");
       // Session token: a new session supersedes stale event handlers/callbacks from a prior one.
       var token = (self._wToken = (self._wToken || 0) + 1);
@@ -312,18 +322,22 @@
       var lang = opts.language || "en";   // default English (Indian-English handled by initial_prompt + model); not the device locale
       function begin() {
         if (!current()) return;
+        try { console.info("[SV-native] startTranscribe model=" + modelKey + " lang=" + lang); } catch (e) {}
         W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "" })
-          .catch(function (e) { fail((e && e.code) || "recording-failure"); });
+          .catch(function (e) { try { console.info("[SV-native] startTranscribe FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "recording-failure"); });
       }
       // Ensure the model is installed (download only if missing), then start recording.
+      try { console.info("[SV-native] transcribeWhisper model=" + modelKey + " lang=" + lang); } catch (e) {}
       W.isModelInstalled({ model: modelKey }).then(function (r) {
         if (!current()) return;
+        try { console.info("[SV-native] installed=" + !!(r && r.installed) + " model=" + modelKey); } catch (e) {}
         if (r && r.installed) { begin(); return; }
         if (opts.onStateChange) opts.onStateChange("downloading");
+        try { console.info("[SV-native] downloading " + modelKey + " <- " + WHISPER_MODEL_HOST + "/" + m.file); } catch (e) {}
         W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
-          .then(function () { begin(); })
-          .catch(function (e) { fail((e && e.code) || "model-download-failed"); });
-      }).catch(function (e) { fail((e && e.code) || "transcription-failure"); });
+          .then(function () { try { console.info("[SV-native] download done " + modelKey); } catch (e) {} begin(); })
+          .catch(function (e) { try { console.info("[SV-native] download FAIL " + modelKey + " " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "model-download-failed"); });
+      }).catch(function (e) { try { console.info("[SV-native] isModelInstalled FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "transcription-failure"); });
 
       return function () { self.stopWhisper(); };
     },
@@ -347,6 +361,22 @@
       if (!(W && W.deleteModel)) return Promise.reject(new Error("whisper-unavailable"));
       var keys = model ? [model] : Object.keys(WHISPER_MODELS);
       return Promise.all(keys.map(function (k) { return W.deleteModel({ model: k }).catch(function () {}); }));
+    },
+    // Pre-download a Clinical model ON DEMAND (Settings dashboard), independent of dictation. Lets the
+    // user fetch a tier's weights over Wi-Fi before first use. opts:{onProgress?(0..1)} → Promise.
+    downloadWhisperModel: function (model, opts) {
+      opts = opts || {};
+      var P = plugins(); var W = P && P.Whisper;
+      if (!(W && W.downloadModel)) return Promise.reject(new Error("whisper-unavailable"));
+      var m = WHISPER_MODELS[model]; if (!m) return Promise.reject(new Error("whisper-unknown-model"));
+      var sub = null;
+      if (opts.onProgress) { try { sub = W.addListener("whisperDownloadProgress", function (d) { opts.onProgress(Number(d && d.progress) || 0); }); } catch (e) {} }
+      function cleanup() { try { if (sub) { if (sub.remove) sub.remove(); else if (sub.then) sub.then(function (h) { try { h && h.remove && h.remove(); } catch (e) {} }); } } catch (e) {} }
+      return W.isModelInstalled({ model: model }).then(function (r) {
+        if (r && r.installed) { cleanup(); return { installed: true, bytes: r.bytes || 0 }; }
+        return W.downloadModel({ model: model, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
+          .then(function () { cleanup(); return { installed: true }; });
+      }).catch(function (e) { cleanup(); throw new Error((e && e.code) || "model-download-failed"); });
     },
     _wToken: 0,
     _wSubs: null,

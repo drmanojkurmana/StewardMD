@@ -75,6 +75,7 @@
     },
     account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
     applewatch: function () { if (window.SMD_APPLE_WATCH && SMD_APPLE_WATCH.open) SMD_APPLE_WATCH.open(); else toast("Apple Watch settings loading…"); },
+    clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
     // "settings" is handled specially (expands the Advanced block) — see wiring below.
@@ -89,6 +90,7 @@
     { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: true, key: "smd_ai" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
+    { id: "clinic", title: "My Clinic (on-device EMR)", sub: "Personal clinic: local patients + consults, back up to Drive", def: false, key: "smd_personal_clinic" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
     // AI imaging modules — all gated OFF by default; turned on ONLY here (Experimental section). Home tile appears on reload.
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
@@ -183,6 +185,12 @@
         html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + "</div>";
       }
     } catch (e) {}
+    // MaiK Scribe voice-model dashboard (enable tiers + download/delete on-device models).
+    try {
+      if (window.SMD_VOICE && SMD_VOICE.modelSettingsHTML) {
+        html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">MaiK Scribe · Voice models</div>' + SMD_VOICE.modelSettingsHTML() + "</div>";
+      }
+    } catch (e) {}
     // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
     // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
     try {
@@ -226,6 +234,7 @@
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
+      (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
       row("tour", "info", "How it works · App tour") +
@@ -245,6 +254,7 @@
 
     // Let the Image Engine wire up its own controls inside the freshly-built block.
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
+    try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
 
     if (menu.__sbrClick) return;   // delegate once per element (survives innerHTML rebuilds)
     menu.__sbrClick = true;

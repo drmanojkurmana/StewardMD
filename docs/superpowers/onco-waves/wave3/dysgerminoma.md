@@ -22,7 +22,7 @@ strategy toward fertility preservation even when disease has spread.
   of gonadal dysgenesis or a Y-chromosome-bearing karyotype, the contralateral ovary needs
   careful assessment; a dysgenetic gonad harbouring a gonadoblastoma precursor may warrant
   bilateral gonadectomy because of the malignancy risk, and karyotyping should be considered in
-  this population.
+  this population (general oncology standard, not from DeVita's section on this disease).
 
 ## Lines of therapy
 
@@ -50,9 +50,10 @@ strategy toward fertility preservation even when disease has spread.
 
 ## Monitoring
 
-- Serial tumour markers, specifically lactate dehydrogenase and beta-hCG (dysgerminoma can show
-  modest beta-hCG elevation from syncytiotrophoblast-like giant cells, while AFP is characteristically
-  normal in pure dysgerminoma), are used to track treatment response and to detect relapse.
+- Serial tumour markers, specifically lactate dehydrogenase and alkaline phosphatase, are used to
+  track treatment response and to detect relapse; AFP is characteristically normal in pure
+  dysgerminoma. Dysgerminoma can also show modest beta-hCG elevation from syncytiotrophoblast-like
+  giant cells (general oncology standard, not from DeVita's section on this disease).
 - Surveillance imaging complements marker follow-up.
 - Return of normal menstrual function is the expected course after fertility-sparing treatment,
   and successful pregnancies are well documented in survivors, supporting ongoing reproductive
@@ -68,7 +69,8 @@ strategy toward fertility preservation even when disease has spread.
   delivered by high-volume gynaecologic oncology surgeons.
 - Any patient with features suggesting gonadal dysgenesis (for example a Y-chromosome-bearing
   karyotype) should be referred for karyotyping and specialist discussion of gonadectomy risk versus
-  fertility, given the association with gonadoblastoma.
+  fertility, given the association with gonadoblastoma (general oncology standard, not from
+  DeVita's section on this disease).
 - Young patients wishing to preserve fertility should be counselled and referred for fertility
   preservation discussion before treatment starts.
 - Relapse, chemoresistance, or an atypical marker pattern (for example a rising AFP) should prompt

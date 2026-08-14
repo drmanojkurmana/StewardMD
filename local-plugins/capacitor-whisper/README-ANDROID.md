@@ -4,7 +4,16 @@ On-device Whisper "Clinical Dictation" for MaiK Scribe, Android side. Mirrors th
 (`ios/Sources/WhisperPlugin`) contract 1:1, so `native-bridge.js` / `voice.js` route Clinical
 Dictation to Android with **no** JS changes.
 
-## Status: IMPLEMENTED + ACTIVATED
+## Status: RE-ACTIVATED + VERIFIED ON HARDWARE (2026-08-14)
+
+Was implemented, then the `"android"` capacitor entry was removed from `package.json` (APK-size /
+build-time savings) — so `Capacitor.Plugins.Whisper` was absent and Android silently fell back to
+device STT. Re-activated 2026-08-14 (owner: on-device Whisper is the Android production ASR target).
+**Verified end-to-end on a real Pixel 9 (arm64-v8a):** plugin registered (`available().whisper===true`),
+native libs load (`libwhisper_jni.so`+`libwhisper.so`+`libggml*.so`), BASE model (`base-q5_1`, 57 MB)
+downloads+SHA-verifies+stores, and native inference RUNS (record → `stopTranscribe` → `whisperFinal`;
+a silent clip correctly returns `[BLANK_AUDIO]`, ~6 s inference, start latency ~222 ms). Multilingual
+accuracy (English / Telugu / Hindi / code-switch) is the owner's live acceptance test.
 
 - **Java** plugin (`src/main/java/in/stewardmd/whisper/`) — Java, not Kotlin, because the package is
   `in.stewardmd.whisper` and `in` is a reserved word in Kotlin (needs backticks, which Capacitor's

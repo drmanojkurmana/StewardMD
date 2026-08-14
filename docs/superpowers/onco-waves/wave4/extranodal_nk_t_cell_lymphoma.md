@@ -1,4 +1,4 @@
-# Extranodal NK/T-cell lymphoma, nasal type — Management
+# Extranodal NK/T-cell lymphoma, nasal type: Management
 
 ## Overview and staging context
 Extranodal NK/T-cell lymphoma, nasal type, is a rare EBV-driven lymphoma of NK cells (occasionally
@@ -11,10 +11,11 @@ disease outside parts of Asia and South America, management should be anchored t
 lymphoma center whenever feasible.
 
 A validated prognostic index incorporates B symptoms, advanced stage, elevated LDH, and lymph node
-involvement; patients accumulating several of these factors have a materially higher risk of central
-nervous system involvement and should be evaluated for CNS-directed staging and, where relevant,
-prophylaxis strategies as part of the treatment plan. EBV viral load at diagnosis and after therapy
-tracks with progression-free and overall survival and is useful for monitoring.
+involvement and is used to predict progression-free and overall survival. Separately, patients who
+present with several of these same risk factors (three or four, versus one or two) have a higher risk
+of central nervous system involvement and should be evaluated for CNS-directed staging and, where
+relevant, prophylaxis strategies as part of the treatment plan. EBV viral load at diagnosis and after
+therapy tracks with progression-free and overall survival and is useful for monitoring.
 
 ## Treatment by stage and risk
 
@@ -22,14 +23,14 @@ tracks with progression-free and overall survival and is useful for monitoring.
 invasion, normal LDH, good performance status):
 - Radiation therapy alone to the involved nasal/upper aerodigestive field is an accepted primary
   approach and has produced favorable long-term survival in this favorable-risk subgroup.
-- Early, adequately dosed radiotherapy is a consistent theme across the localized-disease literature;
-  delaying radiation in favor of chemotherapy alone is associated with worse outcomes.
 
 **Localized disease with risk factors** (any of: older age, primary tumor invasion, elevated LDH,
 poorer performance status):
 - Combined-modality treatment, sequencing radiation therapy with systemic chemotherapy, has produced
   better outcomes than either radiotherapy alone or chemotherapy given first and followed by
-  radiotherapy in this risk group.
+  radiotherapy in this risk group; early use of radiotherapy in the treatment sequence appears
+  important to outcomes in this subgroup, and delaying radiotherapy in favor of induction chemotherapy
+  alone has performed worse in this comparison.
 - Concurrent chemoradiation approaches (radiation given alongside a platinum-based radiosensitizing
   agent, followed by additional non-anthracycline-based combination chemotherapy) have reported high
   response rates and favorable progression-free and overall survival in phase II experience, and are a
@@ -48,12 +49,13 @@ poorer performance status):
   L-asparaginase, and etoposide) have produced substantial overall response and complete response
   rates with meaningful one-year progression-free and overall survival, and represent the preferred
   systemic backbone for disseminated disease over anthracycline-based regimens.
-- Intermediate-dose methotrexate as part of the regimen has been associated with a lower risk of CNS
-  relapse and can be considered where CNS risk factors are present.
+- Intermediate-dose methotrexate as part of the regimen has been associated with a decreased risk of
+  CNS relapse and may be considered where CNS risk factors are present.
 - Consolidative autologous or allogeneic stem cell transplantation should be considered in eligible
-  responders with high-risk or relapsed/refractory disease, per general lymphoma consolidation
-  principles; the disease-specific transplant evidence base for this entity is limited, so this
-  decision should be individualized with a transplant-capable lymphoma service.
+  responders with high-risk or relapsed/refractory disease (general oncology standard, not from
+  DeVita's section on this disease, which does not address transplant for this entity); the
+  disease-specific transplant evidence base is limited, so this decision should be individualized
+  with a transplant-capable lymphoma service.
 
 **Relapsed/refractory disease:**
 - Asparaginase-containing regimens have shown activity in relapsed disease and are a reasonable option
@@ -62,10 +64,11 @@ poorer performance status):
   limited size of the evidence base for later lines of therapy.
 
 ## Role of surgery
-Surgery has no established curative role in extranodal NK/T-cell lymphoma, nasal type. Its role is
-limited to diagnostic biopsy of the nasal/sinus mass and to management of local complications (for
-example, debridement of necrotic tissue or management of structural damage from the destructive
-process), not to disease-directed resection.
+Surgery has no established curative role in extranodal NK/T-cell lymphoma, nasal type (general
+oncology standard, not from DeVita's section on this disease). Its role is limited to diagnostic
+biopsy of the nasal/sinus mass and to management of local complications (for example, debridement of
+necrotic tissue or management of structural damage from the destructive process), not to
+disease-directed resection.
 
 ## Monitoring
 - Response and surveillance should track EBV viral load alongside conventional imaging, since viral
@@ -73,7 +76,9 @@ process), not to disease-directed resection.
   and can flag early relapse.
 - LDH and clinical B symptoms should be followed as part of routine surveillance given their role in
   the prognostic index for this disease.
-- Patients with multiple prognostic risk factors warrant closer surveillance for CNS involvement.
+- Patients presenting with several of the same risk factors (B symptoms, advanced stage, elevated LDH,
+  lymph node involvement) warrant closer surveillance for CNS involvement, independent of the
+  survival-focused prognostic index score itself.
 
 ## When to refer
 - Refer at diagnosis to a lymphoma or hematologic malignancy specialist experienced with NK/T-cell
@@ -81,7 +86,8 @@ process), not to disease-directed resection.
   multi-institutional cohorts, not routine community practice.
 - Refer for radiation oncology input early in any localized case, given the central role of adequately
   dosed radiotherapy in stage I/II disease.
-- Refer for transplant evaluation in high-risk, relapsed, or refractory disease.
+- Refer for transplant evaluation in high-risk, relapsed, or refractory disease (general oncology
+  standard, not from DeVita's section on this disease).
 - Refer to clinical trials for relapsed/refractory or disseminated disease given the limited standard
   options and poor outcomes with conventional anthracycline-based chemotherapy.
 

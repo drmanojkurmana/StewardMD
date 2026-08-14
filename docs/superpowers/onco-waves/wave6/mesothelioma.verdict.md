@@ -1,92 +1,72 @@
-# Adversarial verification verdict: mesothelioma.md
+# Adversarial re-verification verdict: mesothelioma.md (round 2)
 
-Reviewer: independent verification pass (not the drafting agent).
+Reviewer: independent re-verification pass (not the drafting/revising agent).
 Grounded against: /Users/diwakarkumar/.claude/jobs/142278a7/tmp/devita.txt,
-DeVita Ch. 76 "Benign and Malignant Mesothelioma" (Treatment section onward,
-approx. lines 292025-293345: Controversy Regarding Surgical Management,
-Multimodality Therapy and MPM, Induction Therapy, Novel Surgical Multimodality
-Therapies, Induction Checkpoint Inhibition Trials, Unresectable Systemic
-Therapy, Antiangiogenic Therapies, Frontline Trial FDA Approvals, Frontline
-Immunotherapy Trials, Salvage Systemic Therapy, Novel and Cellular Therapies,
-The Role of Radiotherapy).
+DeVita Ch. 76 "Benign and Malignant Mesothelioma," Treatment section
+(approx. lines 292025-293345).
 
 ## 1. DOSE LEAK
-Grepped every digit in the sidecar (`grep -nE '[0-9]'`). Hits are only:
-"EPD" (line 22, not a dose), "MARS 2" (line 37, trial name), "PD-1"/"CTLA-4"
-(multiple lines, receptor names), "R0" (line 22, resection grade), "12th ed"
-(line 150, citation edition number).
-**None** are a dose, mg, mg/m2, AUC, Gy, cycle count, or a numbered schedule.
-Verdict: **no dose leak.**
+Scanned for mg, mg/m2, mg/kg, AUC, Gy, cycle counts, numbered q-schedules
+(`grep 'mg\|AUC\|cycle\|q[0-9]'` and manual read). **None.** Only numerals
+present are non-dose labels: "R0", "MARS 2", "PD-1"/"CTLA-4", "BAP1",
+"12th ed". Verdict: no dose leak, confirmed on re-check.
 
-Also confirmed: no em dash anywhere in the file (`grep -n '—'` = no matches).
+Also confirmed: no em dash anywhere in the file.
 
-## 2. UNGROUNDED / QUESTIONABLE CLAIMS
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+None found on this pass. The single prior blocking issue is now fixed
+correctly:
 
-- **CONFIRMED grounding problem (radiotherapy section, bullet 4):** the
-  sidecar states hemithoracic pleural IMRT/IMPRINT "outcomes compared with
-  older techniques have not shown a clear survival difference in database
-  comparisons." DeVita's own text contains two different comparisons here:
-  (a) an NCDB study of 3D-CRT vs. IMRT broadly, which found no outcome
-  difference (supports the sidecar); but (b) a separate MSKCC retrospective
-  of 209 P/D patients comparing IMPRINT vs. conventional postoperative RT
-  technique, which found "OS was significantly higher with IMPRINT versus
-  conventional techniques," with trimodal P/D+chemo+IMPRINT reaching 42% OS
-  at 2 years. The sidecar's blanket "no clear survival difference" claim is
-  directly contradicted by this second, disease/technique-matched study in
-  the same chapter. This reads as selective citation (picked the null result,
-  omitted the positive one) rather than fabrication of a new fact, but it is
-  not accurately grounded as written. Recommend either dropping the "no
-  clear difference" framing or noting the mixed/conflicting database evidence
-  explicitly (as the sidecar correctly does elsewhere, e.g. the earlier
-  "definitive RT alone... conflicting results" bullet).
+- **Role of radiotherapy, bullet 1 (SEER vs. NCDB direction) — FIXED,
+  verified correct.** Sidecar now reads: "a large registry analysis of
+  surgery with adjuvant radiotherapy versus surgery alone did not show an
+  added survival benefit from the radiotherapy, while a separate large
+  registry analysis of definitive radiotherapy (without surgery) versus no
+  definitive treatment suggested a significant survival benefit." This
+  matches DeVita exactly: the SEER analysis found "no difference when
+  combined surgery and radiation was compared to surgery alone," and the
+  separate NCDB analysis of definitive RT found a 2-yr OS improvement from
+  20% to 34% (adjusted HR 0.87), "suggesting a significant benefit with the
+  use of RT" (devita.txt lines ~293200-293214). Direction is now correct on
+  both clauses.
 
-- **Minor compression, not fabrication:** the "Definitive radiotherapy alone
-  ... conflicting results" bullet blends a SEER analysis that was actually
-  about surgery-alone vs. no-treatment vs. surgery+RT (not RT-alone vs.
-  no-treatment) with an NCDB analysis that was genuinely about definitive RT.
-  The net claim (conflicting database evidence on RT's role) is directionally
-  supported by DeVita, but the specific attribution is loosely paraphrased.
-  Low severity; flagging for awareness, not blocking.
-
-- Everything else spot-checked (MARS/MARS 2, EPP vs. P/D/EPD mortality and
-  registry subgroup benefit, multimodality/induction chemo sequencing,
-  intracavitary approaches as investigational, neoadjuvant checkpoint
-  inhibition as trial-only, histology-driven frontline split (CheckMate 743,
-  non-epithelioid benefit), antifolate-platinum doublet as SOC with
-  carboplatin/single-agent substitutions, bevacizumab/MAPS trial framing
-  (OS benefit, no regulatory approval, limited adoption), TTFields/STELLAR
-  device approval via single-arm trial, maintenance pemetrexed/CALGB 20901
-  null result, salvage sequencing by prior therapy (PD-1 +/- CTLA-4 after
-  chemo; platinum-antifolate +/- anti-VEGF after frontline IO), gemcitabine/
-  vinorelbine + ramucirumab RAMES trial framed as unconfirmed, single-agent
-  CTLA-4/DETERMINE null result, "give everyone a checkpoint inhibitor
-  eventually" statement (near-verbatim to DeVita's own conclusion), rare
-  ALK-fusion and BAP1/PARP targeted-therapy caveats, CAR-T/mesothelin
-  cellular-therapy limitations, RT rarely curative due to dose/toxicity
-  tradeoff, EPP+adjuvant hemithoracic RT toxicity including fatal
-  pneumonitis, chemo+definitive RT as experimental) all found clear,
-  faithful support in the DeVita text at the cited location. No invented
-  trial names, drug names, or statistics detected.
+- Re-spot-checked and still grounded: MARS trial (no added benefit, worse
+  EPP survival, small-sample/high-perioperative-mortality criticism) and
+  MARS 2 (extended P/D after induction chemo vs. chemo alone); IMRT/IMPRINT
+  mixed-evidence framing (NCDB null vs. single-center positive finding,
+  framed as unsettled); CheckMate 743 (dual-ICI OS benefit, larger
+  magnitude in non-epithelioid/biphasic-sarcomatoid histology; epithelioid
+  sequencing left individualized); antifolate-platinum doublet as SOC with
+  carboplatin/single-agent substitutions; bevacizumab/MAPS (OS benefit, no
+  formal regulatory approval, limited adoption); TTFields/STELLAR
+  (single-arm trial, device-specific HDE approval, not RCT-tested) —
+  correctly labelled "(general oncology standard, not from DeVita's section
+  on this disease)"; CALGB 20901 maintenance pemetrexed (no PFS benefit,
+  closed early for poor accrual); RAMES gemcitabine+anti-VEGFR
+  (ramucirumab) salvage OS benefit needing confirmation; single-agent
+  CTLA-4/DETERMINE null result; rare ALK-fusion case-report response and
+  BAP1/PARP (MiST, rucaparib) early/mixed-activity data, both scoped as
+  non-standard; mesothelin CAR-T/antibody-construct limitations (poor
+  penetration, short persistence, toxicity); "essentially all patients...
+  should be considered for ICI" hedge (matches DeVita's own conclusion,
+  with a reasonable added contraindication carve-out, not an overreach);
+  Monitoring section's honest "schedule not found in the section reviewed"
+  admission, correctly tagged general-oncology-standard rather than
+  attributed to DeVita.
 
 ## 3. CITATION
 Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles &
-Practice of Oncology, 12th ed." (line 150). Name-only, no page numbers. Meets
-requirement.
+Practice of Oncology, 12th ed." (last line). Name-only, no page numbers.
+Meets requirement.
 
 ## 4. VERDICT
-**ISSUES (minor) — not a clean pass, but not fabrication either.**
+**CLEAN — ready for R1 re-review.**
 
-- Dose-leak check: clean (no numbers of concern).
+- Dose-leak check: clean.
 - Em-dash check: clean.
-- One radiotherapy bullet overstates a "no clear survival difference"
-  finding that is contradicted by a same-chapter, technique-matched MSKCC
-  study showing a significant IMPRINT survival benefit — needs a wording
-  fix (acknowledge the conflicting/mixed evidence, don't flatten to "no
-  difference") before this goes to R1 as-is.
-- One other bullet (definitive RT alone) loosely conflates two different
-  DeVita studies; low severity, optional cleanup.
-- No other ungrounded regimens/trials/statistics found; citation line
-  present and correctly page-number-free.
-
-Recommendation: send back for a one-line wording fix on the IMPRINT/older-
-technique bullet, then it is ready for R1. Everything else clears.
+- Citation: clean.
+- The one previously-confirmed issue (SEER/NCDB radiotherapy direction
+  swap) is now correctly stated and verified word-for-word against
+  DeVita's actual database-comparison language.
+- No new fabrications, mislabelling, or attribution errors introduced by
+  the rewrite.

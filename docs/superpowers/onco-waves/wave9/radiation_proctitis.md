@@ -9,7 +9,7 @@ Acute injury occurs within about six weeks of starting radiotherapy and typicall
 - First-line management is conservative and supportive: dietary manipulation (reducing dietary fiber/residue and lactose during active symptoms) is the initial step for whole-pelvic irradiation-related bowel symptoms.
 - If symptoms are more than mild and transient, antidiarrheal agents (loperamide or diphenoxylate/atropine class agents) are appropriate.
 - Inflamed internal or external hemorrhoids occurring during treatment are managed with sitz baths and topical hydrocortisone.
-- Radiotherapy itself is generally continued through mild-to-moderate acute proctitis; treatment breaks are reserved for more severe symptoms, decided jointly with the treating radiation oncologist.
+- Radiotherapy itself is generally continued through mild-to-moderate acute proctitis; treatment breaks are reserved for more severe symptoms, decided jointly with the treating radiation oncologist (general oncology standard, not from DeVita's section on this disease).
 - Acute symptoms do not usually require endoscopy or biopsy; these are reserved for atypical presentations or when chronic changes/bleeding develop.
 
 ## Late (chronic) radiation proctitis / proctopathy

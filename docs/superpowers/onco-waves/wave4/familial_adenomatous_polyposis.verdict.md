@@ -1,57 +1,54 @@
-# Verdict: familial_adenomatous_polyposis.md
+# Verdict: familial_adenomatous_polyposis.md (re-verification, 2nd pass)
 
 ## 1. DOSE LEAK
-None. No mg / mg-m2 / AUC / numbered drug-cycle schedule anywhere in the sidecar.
-The only numbers present are ages/screening intervals ("ages 10 to 12 years", "every 1 to 3
-years", "fifties or sixties"), which match DeVita Table 40.6 verbatim ("Flexible sigmoidoscopy
-to start at ages 10 to 12 y"; "upper endoscopy with side-viewing scope ... every 1 to 3 y") and
-are surveillance intervals, not dosing/regimen numbers — acceptable.
+None. Only numerics present: "10 to 12" and "1 to 3" (screening ages/intervals) and "12th"
+(edition number). No mg / mg-m2 / AUC / numbered drug-cycle schedule anywhere. Screening
+intervals match DeVita's own table verbatim (~line 120487-120490: "Flexible sigmoidoscopy to
+start at ages 10 to 12 y ... upper endoscopy with side-viewing scope ... should be done every
+1 to 3 y"). Acceptable.
 
-## 2. UNGROUNDED CLAIMS
-Spot-checked against DeVita 12th ed, Ch. 40 "Cancer of the Colon" (Table 40.3, Table 40.5,
-Table 40.6, FAP narrative ~line 120056-120220) and the Soft Tissue Sarcoma chapter (desmoid
-section, ~line 211100-218025).
+## 2. UNGROUNDED / MISLABELLED CLAIMS
+Both residual gaps from the prior verdict are now fixed, via option (a) — consistent labelling:
+- "Abdominal surgery itself is recognized as a factor that can provoke desmoid tumor formation
+  ..." (Role of surgery section) now carries the inline tag "(general oncology standard, not
+  from DeVita's section on this disease)". Confirmed: not in DeVita's FAP passage; only a
+  hedged, "controversial" surgery/trauma association appears in DeVita's separate soft-tissue-
+  sarcoma chapter (~line 211102-211155: "Whether trauma is a predisposing factor is
+  controversial. Abdominal desmoid tumors ... may be located in the bed of a prior surgery").
+  Tag is accurate and appropriately hedges a claim DeVita itself calls controversial.
+- "Desmoid tumors: cross-sectional imaging surveillance, particularly after abdominal surgery."
+  (Extracolonic surveillance bullet, second occurrence of the same underlying claim) now carries
+  the identical tag. Consistent with the first occurrence; DeVita's FAP passage never specifies
+  an imaging modality for desmoid surveillance.
 
-- **Sulindac named specifically as FAP adenoma chemoprevention** — `grep -i sulindac` on the
-  full DeVita text returns exactly ONE hit, and it is in the Soft Tissue Sarcoma chapter as a
-  systemic therapy for established **desmoid tumors**, not colonic-adenoma chemoprevention in
-  FAP. DeVita's FAP/colon-chapter narrative does not mention sulindac at all. The claim is
-  clinically true and guideline-standard (Giardiello et al., long-standing FAP chemoprevention
-  literature) but is not supported by the DeVita passage the draft agent says it grounded from.
-- **COX-2 inhibitor for FAP adenoma burden** — DeVita's NSAID/COX-2 chemoprevention discussion
-  (CAPP2 aspirin trial, rofecoxib) is about Lynch syndrome and sporadic CRC, not FAP specifically.
-  Real-world uncontroversial (celecoxib had an historical FDA FAP indication) but not tied to
-  the FAP passage in this text.
-- **"Papillary thyroid carcinoma" as the specific subtype + "ultrasound surveillance"** — DeVita's
-  FAP extracolonic-manifestations list says only "thyroid tumors"; it does not specify the
-  papillary histology or prescribe ultrasound as the surveillance modality. Medically correct and
-  uncontroversial, but an added specificity beyond the source text.
-- **Desmoids as "a major driver of morbidity and mortality after colectomy"** — not stated in the
-  excerpted DeVita text. DeVita does say desmoids can cause obstruction/complications and that
-  abdominal desmoids may be located "in the bed of a prior surgery" (Ch. 60), which supports the
-  surgery-provokes-desmoid link, but the mortality-driver framing is an addition not found in the
-  grounding text (it is a well-known real-world fact from the polyposis literature, just not from
-  this source).
-- **"Restorative proctocolectomy" / "ileal pouch"** — reasonably close paraphrase of DeVita's own
-  wording ("total proctocolectomy," "continent pull-through procedures," ileorectal anastomosis
-  with rectal surveillance via proctoscopy for the FAP/UC surgical section). Not flagging as
-  fabricated, just noting it's a terminology substitution rather than a verbatim match.
-
-None of the above are statistics, trial names, or drug doses invented out of nothing — they are
-real, standard, uncontroversial FAP-management facts — but they are not actually traceable to the
-~90 DeVita lines the draft agent cited as the grounding source, and one of them (sulindac) is
-lifted from a different chapter's different context (desmoid treatment, not adenoma
-chemoprevention). Worth a light-touch fix before R1 rather than a rewrite.
+No new gaps found on this pass. Re-checked all previously-clean items directly against the
+DeVita text:
+- Genetic-testing preference (APC protein truncation testing preferred; gene sequencing/linkage
+  as less-desirable alternatives) — matches DeVita's Table verbatim (~line 120480-120486).
+- Screening intervals (10-12y sigmoidoscopy start; 1-3y upper endoscopy) — verbatim match
+  (~line 120487-120490).
+- Turcot brain tumor types (glioblastoma multiforme, medulloblastoma) — matches (~line
+  120159-120165).
+- Duodenal/ampullary adenocarcinoma risk — matches (DeVita states 5%-10% risk at ~line
+  120153-120158; sidecar correctly states "recognized risk" without inventing a different
+  figure or dropping DeVita's number in favor of a wrong one).
+- CHRPE as diagnostic clue, autosomal dominant with de novo minority, attenuated FAP (up to 100
+  polyps, onset in 50s/60s) — all match (~line 120056-120180).
+- Sulindac/COX-2 chemoprevention and papillary-thyroid-carcinoma/ultrasound detail — remain
+  correctly tagged as general-oncology-standard. Confirmed sulindac does not appear anywhere in
+  DeVita's FAP/colon-cancer chapter (only in the unrelated soft-tissue-sarcoma chapter, ~line
+  218010); DeVita's FAP passage lists only "thyroid tumors," no histologic subtype or imaging
+  modality.
+- Surgery/colectomy content (total abdominal colectomy, ileorectal anastomosis with rectal
+  proctoscopy surveillance, total proctocolectomy, continent pull-through procedures) — matches
+  DeVita's colon-cancer-surgery section, which explicitly discusses "familial polyposis
+  syndrome" throughout (~line 121776-121797); correctly left unlabeled since this is DeVita
+  content.
 
 ## 3. CITATION
 Present: "Sources: DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology,
-12th ed." — name only, no page numbers. Correct format.
+12th ed." — name only, no page numbers. Unchanged, correct format.
 
-## 4. VERDICT: ISSUES (minor, non-blocking)
-No dose leak, no invented trials/statistics, no fabricated regimens. The flagged items above are
-real/uncontroversial clinical facts that are either (a) sourced from a different DeVita chapter
-than claimed (sulindac — desmoid chapter, not adenoma chemoprevention) or (b) more specific than
-what DeVita's FAP passage actually says (papillary subtype, ultrasound modality, mortality-driver
-framing for desmoids). Recommend R1 either soften these four claims to match DeVita's actual
-wording or accept them as well-established outside-DeVita general knowledge explicitly (rather
-than implying colon-chapter grounding). Nothing here rises to the level of blocking fabrication.
+## 4. VERDICT: CLEAN — ready for R1 re-review.
+No dose leak. No ungrounded or mislabelled claims remain; the two residual gaps from the prior
+pass are now consistently tagged. Citation format correct.

@@ -2,9 +2,9 @@
 
 ## Overview and diagnostic prerequisite
 
-IVLBCL is a rare subtype in which lymphoma cells proliferate within small blood vessels without forming a tumor mass or producing detectable circulating tumor cells. Diagnosis is often difficult because imaging is typically unrevealing; a blind biopsy of normal-appearing skin can be diagnostic, and if that is not informative, biopsy of other sites of suspected involvement (or bone marrow, particularly in the haemophagocytic variant) may be necessary. Management cannot proceed rationally without first securing tissue confirmation, so an early, sometimes empiric, biopsy strategy is itself part of the treatment pathway.
+IVLBCL is a rare subtype in which lymphoma cells proliferate within small blood vessels without forming a tumor mass or producing detectable circulating tumor cells. Diagnosis is often difficult because imaging is typically unrevealing; a blind biopsy of normal-appearing skin can be diagnostic, and if that is not informative, biopsy of other sites of suspected involvement may be necessary (bone marrow biopsy is particularly relevant when a haemophagocytic variant is suspected; general oncology standard, not from DeVita's section on this disease). Management cannot proceed rationally without first securing tissue confirmation, so an early, sometimes empiric, biopsy strategy is itself part of the treatment pathway.
 
-Two clinical patterns are recognized: a Western pattern with more prominent neurologic and cutaneous involvement, and an Asian pattern associated with haemophagocytic syndrome, marrow involvement, hepatosplenomegaly, and cytopenias. A French Canadian series reported more neurologic than cutaneous presentation, so the two patterns are not absolute and should not be used to exclude the diagnosis.
+Two clinical patterns are recognized: a Western pattern with less frequent CNS and skin involvement, and an Asian pattern with more frequent CNS and skin involvement; the Asian pattern is also associated with haemophagocytic syndrome, marrow involvement, hepatosplenomegaly, and cytopenias (general oncology standard, not from DeVita's section on this disease). A French Canadian case report described more neurologic than cutaneous presentation, so the two patterns are not absolute and should not be used to exclude the diagnosis.
 
 ## Treatment approach
 
@@ -18,7 +18,7 @@ Two clinical patterns are recognized: a Western pattern with more prominent neur
 
 ## Associated haemophagocytic syndrome (Asian-type variant)
 
-When the Asian-type variant is present with an accompanying haemophagocytic lymphohistiocytosis picture, this complication needs to be identified and managed alongside the lymphoma itself, since haemophagocytic activation can independently drive cytopenias, organ dysfunction, and early mortality.
+When the Asian-type variant is present with an accompanying haemophagocytic lymphohistiocytosis picture, this complication needs to be identified and managed alongside the lymphoma itself, since haemophagocytic activation can independently drive cytopenias, organ dysfunction, and early mortality. (general oncology standard, not from DeVita's section on this disease)
 
 ## Supportive care during treatment
 
