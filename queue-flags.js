@@ -30,7 +30,8 @@
     smd_onco_ctcae: { type: "bool", def: false, query: "qoncoctcae", desc: "CTCAE grading engine (P2): versioned reader over kb/onco/ctcae/catalog.json. Curated NCI CTCAE v5.0 adverse-event grades, each R1-flagged; v4.03 + un-seeded AEs are honest gaps. Fail-closed fabrication auditor. Read-only." },
     smd_onco_iotox: { type: "bool", def: false, query: "qoncoiotox", desc: "IO toxicity (irAE) reference (P2): grade-based management PRINCIPLES by organ, grounded in ASCO/NCCN/SITC (cited by name). No doses/thresholds (fail-closed on numerals). Read-only." },
     smd_onco_recist: { type: "bool", def: false, query: "qoncorecist", desc: "RECIST 1.1 response calculator (P2): real target-lesion sum -> percent change -> CR/PR/SD/PD with nadir + new-lesion handling. Reference calculation only. Read-only." },
-    smd_onco_favorites: { type: "bool", def: false, query: "qoncofav", desc: "Onco Home Favorites + Recent (P2): localStorage-backed star/recent list across Onco Home. Pure UX, no clinical content, private-mode safe." }
+    smd_onco_favorites: { type: "bool", def: false, query: "qoncofav", desc: "Onco Home Favorites + Recent (P2): localStorage-backed star/recent list across Onco Home. Pure UX, no clinical content, private-mode safe." },
+    smd_onco_recommend: { type: "bool", def: false, query: "qoncorecommend", desc: "ONCQIS Phase B protocol recommendation engine (onco-recommend.js): suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype and why. Decision-support only, never auto-selects/prescribes; always the full list w/ reviewRequired. Read-only (GET onco/recommend, QUEUE_VIEW). Default OFF." }
   };
 
   function raw(key) {

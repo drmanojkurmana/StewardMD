@@ -1739,6 +1739,10 @@ window.openExternal = function (u) {
 <script src="/onco-iotox.js?v=oh3" defer></script>
 <script src="/onco-recist.js?v=oh3" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
+<!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
+     (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
+     for a phenotype and never auto-selects/prescribes. Loaded before onco-home.js. -->
+<script src="/onco-recommend.js?v=oh1" defer></script>
 <script src="/onco-home.js?v=oh3" defer></script>
 <!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
      flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).

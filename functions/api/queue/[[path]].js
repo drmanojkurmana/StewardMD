@@ -38,6 +38,12 @@ import * as ONCO from "../../_onco_store.js";
 import RCHOP_TEMPLATE from "../../../kb/protocols/rchop.json";
 const ONCO_PROTOCOLS = { rchop: RCHOP_TEMPLATE };
 function oncoProtocolTemplate(protocolId) { return ONCO_PROTOCOLS[String(protocolId || "").toLowerCase()] || null; }
+// ONCQIS Phase B: the PURE recommendation engine (onco-recommend.js, root JS, UMD default import -
+// same shape as `import Engine from "../followcare-engine.js"`). Standard Protocols are the new-schema
+// kb/schema/standard-protocol.schema.json objects; only status==="ACTIVE" are ever recommended, and
+// none are published ACTIVE yet, so activeStandardProtocols() is [] for now (honest, not fabricated).
+import ONCORECOMMEND from "../../../onco-recommend.js";
+function activeStandardProtocols() { return Object.keys(ONCO_PROTOCOLS).map(function (k) { return ONCO_PROTOCOLS[k]; }).filter(function (p) { return p && p.status === "ACTIVE"; }); }
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -370,6 +376,28 @@ export async function onRequest(context) {
         cycleLengthDays: nurseTmpl.cycleLengthDays,
         lockedTemplate: nurseTmpl,
       }, adminRecords: adminRecords }, 200, request);
+    }
+    // ONCQIS Phase B: read-only protocol RECOMMENDATION (flag smd_onco_recommend gates the client).
+    // Decision-SUPPORT only - suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype
+    // and never auto-selects/prescribes (always the full applicable list, reviewRequired:true). Gated
+    // on CAPS.QUEUE_VIEW (a pure read; nothing to disable on a GET). The phenotype is CLINICAL params
+    // ONLY (diseaseId/stage/biomarkers/setting/intent/line) - NEVER a name/MRN, and nothing here logs.
+    if (method === "GET" && seg === "onco" && sub === "recommend") {
+      requireCap(actor.role, CAPS.QUEUE_VIEW);   // any org-member read cap; PHI-free reference data
+      let biomarkers = null;
+      try { const raw = url.searchParams.get("biomarkers"); if (raw) biomarkers = JSON.parse(raw); } catch (e) { biomarkers = null; }
+      const phenotype = {
+        diseaseId: url.searchParams.get("diseaseId") || null,
+        stage: url.searchParams.get("stage") || null,
+        biomarkers: biomarkers,
+        setting: url.searchParams.get("setting") || null,
+        intent: url.searchParams.get("intent") || null,
+        line: url.searchParams.get("line") || null,
+      };
+      const active = activeStandardProtocols();
+      if (!active.length) return json({ ok: true, applicable: [], note: "no ACTIVE protocols published yet", reviewRequired: true }, 200, request);
+      const rec = ONCORECOMMEND.recommend(phenotype, active);
+      return json({ ok: true, applicable: rec.applicable, reviewRequired: rec.reviewRequired }, 200, request);
     }
 
     if (method === "POST") {
