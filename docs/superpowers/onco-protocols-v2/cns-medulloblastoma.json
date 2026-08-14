@@ -1,0 +1,162 @@
+{
+  "id": "cns-medulloblastoma",
+  "name": "Medulloblastoma: cisplatin, lomustine (CCNU), vinCRIStine after craniospinal radiotherapy (Packer-type; per-drug doses VERIFY)",
+  "disease": "Medulloblastoma (adult)",
+  "diseaseId": "medulloblastoma",
+  "histology": "medulloblastoma (embryonal tumor; molecular groups WNT, SHH, group 3, group 4)",
+  "stage": [],
+  "biomarkers": {
+    "SHH_pathway": "tested (vismodegib is an option for SHH-pathway mutations at recurrence)",
+    "note": "Molecular group informs risk stratification and recurrence options (for example vismodegib for SHH-pathway mutations). No biomarker gates the primary combination here. Per Standard Guidelines (NCCN), CNS Cancers, Adult Medulloblastoma: Systemic Therapy."
+  },
+  "treatmentSetting": "adjuvant (concurrent weekly vinCRIStine during craniospinal radiotherapy, then multi-agent maintenance)",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line adjuvant, following maximal safe resection and craniospinal radiotherapy",
+  "eligibilityCriteria": [
+    { "criterion": "sequencing", "requirement": "weekly vinCRIStine given concurrently with craniospinal radiotherapy, then maintenance cisplatin/lomustine/vinCRIStine", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "Adult Medulloblastoma: Systemic Therapy (regimens following weekly vincristine with concurrent RT during craniospinal RT), cns.txt lines 2431 to 2433" },
+    { "criterion": "radiotherapy", "requirement": "standard-risk regimens follow reduced-dose craniospinal irradiation (23.4 Gy) plus a posterior fossa boost", "source": "DeVita, Hellman, and Rosenberg's Cancer 12th ed.", "locator": "devita.txt lines 242361 to 242367 (lomustine, vincristine, cisplatin for eight cycles following 23.4 Gy CSI)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Adult Medulloblastoma: Systemic Therapy (Cisplatin/Lomustine/Vincristine preferred), cns.txt line 2433; regimen named in DeVita 12th ed. devita.txt line 242361; no per-drug mg/m2 dose is printed in either source",
+          "evidenceStatus": "current"
+        },
+        "notes": "CISplatin is a named component of the preferred Cisplatin/Lomustine/vinCRIStine maintenance regimen (Packer-type), but neither cited source prints a per-drug mg/m2 dose. basis, dose, and unit are VERIFY (ISMP tall-man CISplatin; do not confuse with CARBOplatin). Requires renal function, magnesium, and audiometry monitoring when dosed."
+      },
+      {
+        "id": "lomustine",
+        "name": "Lomustine (CCNU)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": {
+          "perDose": null,
+          "cumulativeLifetime": { "warn": 1000, "hard": 1100, "unit": "mg/m2" }
+        },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Adult Medulloblastoma: Systemic Therapy (Cisplatin/Lomustine/Vincristine preferred), cns.txt line 2433; DeVita 12th ed. devita.txt line 242361; no per-drug dose printed",
+          "evidenceStatus": "current"
+        },
+        "notes": "Lomustine is a named component; no per-drug dose printed in the cited sources, so basis, dose, and unit are VERIFY. Delayed and cumulative nitrosourea myelosuppression applies; the 1000 mg/m2 cumulative warn threshold is source-grounded in the nitrosourea cumulative-toxicity discussion (devita.txt lines 15373 and 15407), while the 1100 mg/m2 hard stop is a StewardMD institutional safety margin above it and is not printed in the source. Cyclophosphamide may substitute for lomustine in an alternative preferred triplet (cns.txt line 2432)."
+      },
+      {
+        "id": "vincristine",
+        "name": "vinCRIStine",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "IV push",
+        "infusionDuration": null,
+        "caps": { "perDose": 2 },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Adult Medulloblastoma: Systemic Therapy (weekly vincristine with concurrent RT; component of the preferred triplet), cns.txt lines 2431 to 2433; DeVita 12th ed. devita.txt line 242361; no per-drug dose printed",
+          "evidenceStatus": "current"
+        },
+        "notes": "vinCRIStine is given weekly during concurrent craniospinal radiotherapy and as a component of the maintenance triplet, but neither cited source prints a per-drug mg/m2 dose, so basis, dose, and unit are VERIFY. The ISMP tall-man 2 mg per-dose cap is carried regardless (vinCRIStine is IV only, fatal if given intrathecally)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": 8,
+    "premedications": [
+      { "name": "CISplatin hydration and antiemesis", "notes": "CISplatin requires pre- and post-hydration and highly emetogenic antiemetic prophylaxis when dosed; specific regimen VERIFY." }
+    ],
+    "supportiveCare": [
+      "highly emetogenic antiemetic prophylaxis on CISplatin days (regimen VERIFY, no CISplatin dose established here)",
+      "cumulative nitrosourea myelosuppression monitoring across cycles",
+      "vinCRIStine: IV only, never intrathecal; monitor neuropathy and constipation"
+    ]
+  },
+  "monitoring": [
+    "CBC with platelets before each cycle and at the delayed nitrosourea nadir",
+    "renal function, serum magnesium, and audiometry when CISplatin is dosed",
+    "peripheral neuropathy assessment before each vinCRIStine dose",
+    "craniospinal MRI surveillance"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal function", "audiometry", "cumulative lomustine dose", "resection and CSI completion"],
+  "doseModificationRules": [
+    { "condition": "renal impairment, ototoxicity, or delayed cytopenia", "action": "delay/reduce", "text": "Review required. CISplatin renal/ototoxicity and delayed nitrosourea nadir require confirmation of recovery and dose adjustment; physician decides. Per-drug doses are VERIFY." }
+  ],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "CNS chapter, devita.txt lines 242361 to 242367 (lomustine, vincristine, cisplatin for eight cycles following 23.4 Gy CSI; component-named, no printed per-drug dose)",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Adult Medulloblastoma: Systemic Therapy, cns.txt lines 2431 to 2433 (weekly vincristine with concurrent RT; preferred Cisplatin/Cyclophosphamide/Vincristine and Cisplatin/Lomustine/Vincristine; Packer reference cns.txt line 2454)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[1].basis",
+    "regimen.drugs[1].dosePerUnit",
+    "regimen.drugs[1].unit",
+    "regimen.drugs[2].basis",
+    "regimen.drugs[2].dosePerUnit",
+    "regimen.drugs[2].unit",
+    "regimen.cycleLengthDays"
+  ],
+  "provenanceNote": "The Packer-type framework is grounded: weekly vinCRIStine concurrent with craniospinal radiotherapy, then a preferred maintenance triplet of CISplatin/Lomustine/vinCRIStine (or CISplatin/Cyclophosphamide/vinCRIStine) per Standard Guidelines (NCCN), CNS Cancers (cns.txt lines 2431 to 2433, Packer reference cns.txt line 2454), delivered as eight cycles after reduced-dose 23.4 Gy craniospinal irradiation per DeVita 12th ed. (devita.txt lines 242361 to 242367). Neither cited source prints a per-drug mg/m2 dose, so the CISplatin, Lomustine, and vinCRIStine basis, dose, and unit are the literal VERIFY (listed in verifyFields) and were NOT invented; only the eight-cycle count and the ISMP vinCRIStine 2 mg cap and lomustine cumulative caps are carried. cycleLengthDays is VERIFY. No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

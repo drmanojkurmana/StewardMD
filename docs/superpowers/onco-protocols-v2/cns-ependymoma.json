@@ -1,0 +1,101 @@
+{
+  "id": "cns-ependymoma",
+  "name": "Ependymoma: maximal safe resection and radiotherapy (systemic therapy VERIFY)",
+  "disease": "Ependymoma (intracranial or spinal, excluding subependymoma)",
+  "diseaseId": "ependymoma",
+  "histology": "ependymoma, WHO CNS grade 2 or 3 (molecular subgroups include posterior fossa PFA)",
+  "stage": [],
+  "biomarkers": {
+    "note": "Molecular subgroup informs radiotherapy decisions (for example standard RT for posterior fossa ependymoma type A, PFA). No biomarker gates a printed systemic regimen in the cited sources. Per Standard Guidelines (NCCN), CNS Cancers, Adult Intracranial and Spinal Ependymoma."
+  },
+  "treatmentSetting": "primary local therapy (surgery and radiotherapy); systemic therapy reserved for recurrence",
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "primary (local); systemic therapy is not first-line and is used at recurrence",
+  "eligibilityCriteria": [
+    { "criterion": "primaryTherapy", "requirement": "maximal safe resection (gross total resection preferred), then radiotherapy per residual disease and location", "source": "Standard Guidelines (NCCN), CNS Cancers", "locator": "EPEN pathway (gross total resection / subtotal resection then Standard RT), cns.txt lines 1866 to 1925" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "systemic-therapy",
+        "name": "Systemic chemotherapy (not dose-established in cited sources)",
+        "basis": "VERIFY",
+        "dosePerUnit": "VERIFY",
+        "unit": "VERIFY",
+        "days": [],
+        "route": "VERIFY",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": {
+          "layer": "guideline",
+          "source": "Standard Guidelines (NCCN), CNS Cancers",
+          "version": "2.2026",
+          "date": null,
+          "locator": "Adult Intracranial and Spinal Ependymoma (EPEN), cns.txt lines 1857 to 1966; no per-drug systemic dose is printed",
+          "evidenceStatus": "current"
+        },
+        "notes": "Ependymoma is managed primarily by maximal safe resection and radiotherapy. The cited sources establish the surgery-and-RT framework but do not print a per-drug systemic chemotherapy dose (systemic therapy is reserved for recurrence and is regimen- and patient-specific). Basis, dose, unit, and route are VERIFY and must be resolved from a dose-bearing source before any systemic therapy is enabled."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "primary treatment is surgery and radiotherapy; supportive care for any recurrence-setting systemic therapy is regimen-specific and VERIFY"
+    ]
+  },
+  "monitoring": [
+    "postoperative and post-radiotherapy MRI of brain and full spine (leptomeningeal dissemination, though less common than in medulloblastoma)",
+    "systemic-therapy monitoring is VERIFY (no regimen dosed here)"
+  ],
+  "clearanceChecks": ["resection status", "radiotherapy completion", "spine MRI staging"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      {
+        "layer": "core",
+        "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+        "version": "12th ed",
+        "date": null,
+        "locator": "CNS chapter, ependymoma section (leptomeningeal dissemination pattern), devita.txt line 241394",
+        "evidenceStatus": "unknown"
+      }
+    ],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), CNS Cancers",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Adult Intracranial and Spinal Ependymoma (EPEN-1), cns.txt lines 1857 to 1966 (resection then Standard RT; standard RT for posterior fossa type A per cns.txt line 221)",
+        "evidenceStatus": "current"
+      }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": {
+    "lastReviewedAt": null,
+    "nextReviewAt": null,
+    "reviewInterval": null,
+    "reviewedBy": null,
+    "evidenceVersion": null,
+    "reviewDue": false
+  },
+  "verifyFields": [
+    "regimen.drugs[0].basis",
+    "regimen.drugs[0].dosePerUnit",
+    "regimen.drugs[0].unit",
+    "regimen.drugs[0].route",
+    "regimen.cycleLengthDays",
+    "regimen.cycles"
+  ],
+  "provenanceNote": "Ependymoma primary management is maximal safe resection followed by radiotherapy, grounded in Standard Guidelines (NCCN), CNS Cancers, Adult Intracranial and Spinal Ependymoma (cns.txt lines 1857 to 1966). The cited sources do not print a per-drug systemic chemotherapy dose (systemic therapy is reserved for recurrence and is regimen-specific), so the systemic-therapy basis, dose, unit, route, cycle length, and cycle count are the literal VERIFY and are listed in verifyFields; nothing was invented. This protocol captures the surgery-and-RT framework only. No hospital or endorsement claim. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

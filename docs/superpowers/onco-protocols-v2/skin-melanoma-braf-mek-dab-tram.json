@@ -1,0 +1,87 @@
+{
+  "id": "skin-melanoma-braf-mek-dab-tram",
+  "name": "Dabrafenib + Trametinib (BRAF/MEK inhibitor, BRAF V600E/K melanoma)",
+  "disease": "Cutaneous melanoma",
+  "diseaseId": "cutaneous_melanoma",
+  "histology": "cutaneous melanoma",
+  "stage": ["III (resected, adjuvant)", "III (unresectable)", "IV"],
+  "biomarkers": {
+    "BRAF": "V600E or V600K mutation positive",
+    "note": "BRAF/MEK inhibitor combination REQUIRES a BRAF V600 activating mutation. This regimen is indicated for BRAF V600E or V600K mutation-positive disease: adjuvant (resected stage III, COMBI-AD) and unresectable/metastatic (COMBI-d, COMBI-v). Per Standard Guidelines (NCCN), Melanoma: Cutaneous, melanomas with BRAF V600E may derive higher adjuvant benefit than V600K (line 2629). Do NOT use in BRAF wild-type disease."
+  },
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "treatmentIntent": ["curative", "palliative"],
+  "lineOfTherapy": "BRAF/MEK-targeted therapy for BRAF V600E/K mutation-positive melanoma: adjuvant for resected stage III, and for unresectable stage III or stage IV disease",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRAF V600E or V600K activating mutation present", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, Dabrafenib/Trametinib if BRAF V600 (lines 2198, 2519); adjuvant V600E vs V600K benefit line 2629" },
+    { "criterion": "stage/setting", "requirement": "resected stage III (adjuvant) OR unresectable stage III / stage IV (advanced)", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "locator": "v2.2026, adjuvant Dabrafenib/Trametinib (line 2543, tested in AJCC 7th ed stage IIIA SLN >=1 mm or IIIB/C); advanced BRAF/MEK combination Table 19, MS-63 to MS-64" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dabrafenib",
+        "name": "Dabrafenib",
+        "basis": "flat",
+        "dosePerUnit": 150,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma, NCT01072175 Part C row, MS-63 to MS-64 (lines 8538 to 8541): Dab (150 mg BID) + tram (2 mg QD)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 19 (MS-63 to MS-64), treatment arm 'Dab (150 mg BID) + tram (2 mg QD)'. Dabrafenib 150 mg PO TWICE daily (BID) continuously; represented as days 1 to 28 of a 28-day cycle for scheduling. Taken orally; continuous dosing until progression or unacceptable toxicity (advanced) or for up to 1 year (adjuvant)."
+      },
+      {
+        "id": "trametinib",
+        "name": "Trametinib",
+        "basis": "flat",
+        "dosePerUnit": 2,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma, NCT01072175 Part C row, MS-63 to MS-64 (lines 8538 to 8541): Dab (150 mg BID) + tram (2 mg QD)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, Table 19 (MS-63 to MS-64), treatment arm 'Dab (150 mg BID) + tram (2 mg QD)'. Trametinib 2 mg PO ONCE daily (QD) continuously; represented as days 1 to 28 of a 28-day cycle for scheduling. Taken orally; continuous dosing until progression or unacceptable toxicity (advanced) or for up to 1 year (adjuvant)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "Continuous oral dosing: dabrafenib 150 mg twice daily plus trametinib 2 mg once daily (Standard Guidelines (NCCN) v2.2026, Table 19, MS-63 to MS-64). Adjuvant (resected stage III BRAF V600E/K): given for up to 1 year (COMBI-AD). Advanced (unresectable stage III / stage IV): continued until disease progression or unacceptable toxicity (COMBI-d, COMBI-v). The 28-day cycle is a scheduling container for continuous daily dosing.",
+    "premedications": [],
+    "supportiveCare": [
+      "Pyrexia management: dabrafenib/trametinib commonly cause recurrent fever; hold both drugs for fever and resume per labeling.",
+      "Baseline and periodic LVEF (echocardiogram) for trametinib-related cardiomyopathy; ophthalmologic assessment for retinal events; dermatologic surveillance for cutaneous squamous-cell carcinoma/keratoacanthoma.",
+      "Monitor for MEK-inhibitor toxicities (rash, diarrhea, venous thromboembolism, retinal vein occlusion) per Standard Guidelines (NCCN) v2.2026, Table 21 (MS-66 onward)."
+    ]
+  },
+  "monitoring": [
+    "temperature/pyrexia surveillance (dabrafenib/trametinib fever)",
+    "LVEF (echocardiogram) at baseline and periodically",
+    "ophthalmologic assessment (retinal events)",
+    "dermatologic skin examination (secondary cutaneous malignancy)",
+    "LFTs, CBC, glucose; clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["cardiac (LVEF)", "liver", "CBC", "ophthalmologic", "BRAF V600 mutation confirmed", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "pyrexia", "drug": "dabrafenib + trametinib", "action": "hold/resume", "text": "For fever, interrupt dabrafenib (and trametinib per labeling) and resume once resolved; prophylaxis/antipyretics per guidance." },
+    { "condition": "decline in LVEF or grade 3 to 4 non-cardiac toxicity", "drug": "trametinib", "action": "hold/reduce", "text": "Hold or reduce trametinib for symptomatic or significant asymptomatic LVEF decline, or grade 3 to 4 toxicity, per labeling; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "BRAF/MEK-targeted therapy framework for BRAF V600-mutant melanoma; dosing taken from the guideline layer (Table 19, MS-63 to MS-64)", "evidenceStatus": "current" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Melanoma: Cutaneous", "version": "2.2026", "date": null, "locator": "Table 19 BRAF/MEK Inhibitor Combination in Advanced Melanoma (Dab 150 mg BID + tram 2 mg QD, NCT01072175 Part C; also COMBI-d, COMBI-v), MS-63 to MS-64 (lines 8538 to 8556); biomarker/setting lines 2198, 2519, 2543, 2629", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for dabrafenib plus trametinib BRAF/MEK-inhibitor combination therapy in BRAF V600E or V600K mutation-positive cutaneous melanoma, covering adjuvant therapy for resected stage III disease and treatment of unresectable stage III or stage IV disease. Both doses are sourced to Standard Guidelines (NCCN), Melanoma: Cutaneous v2.2026, Table 19 (MS-63 to MS-64), treatment arm dabrafenib 150 mg twice daily plus trametinib 2 mg once daily, given as continuous oral therapy. This combination requires a confirmed BRAF V600 activating mutation and must not be used in BRAF wild-type disease. Class-specific monitoring is emphasized: pyrexia, LVEF decline, ocular events, and secondary cutaneous malignancy. Every modeled numeric dose is sourced and no field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

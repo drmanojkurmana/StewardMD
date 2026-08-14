@@ -1,0 +1,89 @@
+{
+  "id": "thyroid-anaplastic-dab-tram",
+  "name": "Dabrafenib + Trametinib for BRAF V600E Anaplastic Thyroid Carcinoma",
+  "disease": "Anaplastic thyroid carcinoma (ATC)",
+  "diseaseId": "anaplastic_thyroid_carcinoma",
+  "histology": "anaplastic (undifferentiated) thyroid carcinoma",
+  "stage": ["IVB (unresectable)", "IVC (metastatic)"],
+  "biomarkers": {
+    "BRAF_V600E": "positive",
+    "note": "This BRAF-directed doublet is gated to BRAF V600E-mutated anaplastic thyroid carcinoma. NCCN recommends molecular testing (including BRAF, with BRAF IHC for faster turnaround) to inform systemic therapy. Per Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, Anaplastic Carcinoma (ANAP) and Discussion MS-39."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "targeted systemic therapy option for BRAF V600E-mutated unresectable or metastatic anaplastic thyroid carcinoma",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BRAF V600E mutation present", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, Discussion MS-39 (phase 2 trial of dabrafenib plus trametinib in BRAF V600E-mutated ATC); molecular testing footnote b (BRAF, NTRK1/2/3, ALK, RET, MSI, dMMR, TMB; BRAF IHC recommended)" },
+    { "criterion": "diagnosis", "requirement": "unresectable or metastatic anaplastic thyroid carcinoma", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "locator": "v2.2026, Anaplastic Carcinoma pathway (ANAP)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "dabrafenib",
+        "name": "Dabrafenib",
+        "basis": "flat",
+        "dosePerUnit": 150,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "Discussion MS-39 (dabrafenib 150 mg, twice daily, in combination with trametinib 2 mg once daily, in BRAF V600E-mutated ATC)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, Discussion MS-39. Dabrafenib 150 mg PO TWICE DAILY (represented as continuous daily dosing; twice-daily frequency is source-stated). BRAF V600E gate required. Given continuously until progression or unacceptable toxicity."
+      },
+      {
+        "id": "trametinib",
+        "name": "Trametinib",
+        "basis": "flat",
+        "dosePerUnit": 2,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "Discussion MS-39 (trametinib 2 mg once daily in combination with dabrafenib 150 mg twice daily, BRAF V600E-mutated ATC)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, Discussion MS-39. Trametinib 2 mg PO ONCE DAILY, combined with dabrafenib. MEK inhibitor added to the BRAF inhibitor. Given continuously until progression or unacceptable toxicity."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": "continuous until disease progression or unacceptable toxicity; not a fixed cycle count",
+    "premedications": [],
+    "supportiveCare": [
+      "monitor for pyrexia (common with dabrafenib/trametinib), cutaneous toxicity and secondary skin neoplasms, ocular events, LVEF decline, and hyperglycemia per labeling.",
+      "consider hepatitis B screening prior to systemic therapy per the thyroid systemic therapy principles (THYR-B footnote a)."
+    ]
+  },
+  "monitoring": [
+    "clinical and cross-sectional imaging (CT or MRI with contrast) response assessment",
+    "LVEF at baseline and periodically (trametinib)",
+    "ophthalmologic assessment for visual symptoms",
+    "temperature/pyrexia monitoring",
+    "dermatologic surveillance for secondary cutaneous neoplasms",
+    "blood glucose"
+  ],
+  "clearanceChecks": ["biomarker BRAF V600E confirmed", "cardiac (LVEF)", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "recurrent or high-grade pyrexia", "drug": "dabrafenib and trametinib", "action": "hold/reduce", "text": "Interrupt and manage per labeling; resume at a reduced dose if indicated; obtain clinical review." },
+    { "condition": "symptomatic LVEF decline", "drug": "trametinib", "action": "hold", "text": "Hold and obtain cardiology review before continuation." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Thyroid cancer chapter (BRAF V600E as an actionable target in thyroid carcinoma; targeted kinase inhibitor framework)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Thyroid Carcinoma", "version": "2.2026", "date": "2026-06-02", "locator": "Anaplastic Carcinoma (ANAP) pathway; Discussion MS-39 (dabrafenib 150 mg twice daily + trametinib 2 mg once daily, phase 2 in BRAF V600E-mutated ATC, ORR 69% then 56% on extension); molecular testing footnote b (BRAF, NTRK, ALK, RET, MSI, dMMR, TMB; BRAF IHC)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for the BRAF-directed doublet (dabrafenib plus trametinib) in BRAF V600E-mutated anaplastic thyroid carcinoma (StewardMD reference disease anaplastic_thyroid_carcinoma). Both doses are grounded to Standard Guidelines (NCCN), Thyroid Carcinoma v2.2026, Discussion MS-39: dabrafenib 150 mg PO twice daily plus trametinib 2 mg PO once daily, evaluated in a phase 2 open-label trial of BRAF V600E-mutated ATC. The regimen is biomarker-gated to BRAF V600E, consistent with the guideline recommendation for molecular testing (BRAF, NTRK, ALK, RET, MSI, dMMR, TMB; BRAF IHC for faster turnaround). No dose is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
