@@ -1,0 +1,76 @@
+{
+  "id": "gu-prostate-olaparib",
+  "name": "Olaparib (mCRPC with HRR/BRCA mutation)",
+  "disease": "Prostate cancer",
+  "diseaseId": "prostate_cancer",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "stage": ["M1 CRPC (metastatic castration-resistant)"],
+  "biomarkers": {
+    "HRR": "deleterious or suspected-deleterious germline or somatic homologous-recombination-repair (HRR) gene mutation required",
+    "BRCA": "category 1 recommendation for BRCA-mutated (BRCA1/BRCA2) disease; preferred if docetaxel not yet received",
+    "note": "Olaparib is a PARP inhibitor active in HRR-mutated disease via synthetic lethality; it is not effective without an HRR mutation. HRR genes considered for olaparib per the source: BRCA1, BRCA2, ATM, BARD1, BRIP1, CDK12, CHEK1, CHEK2, FANCL, PALB2, RAD51B, RAD51C, RAD51D, RAD54L. Somatic tumor and germline assays (or plasma ctDNA if biopsy not feasible) identify eligible patients. Per Standard Guidelines (NCCN), Prostate Cancer, Discussion (Olaparib, PROfound)."
+  },
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "molecular-biomarker-directed PARP inhibitor for mCRPC with an HRR mutation after prior ARPI, regardless of prior docetaxel; category 1 and preferred for BRCA-mutated disease not yet treated with docetaxel",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "deleterious or suspected-deleterious germline or somatic HRR gene mutation (e.g., BRCA1, BRCA2, ATM, BARD1, BRIP1, CDK12, CHEK1, CHEK2, FANCL, PALB2, RAD51B, RAD51C, RAD51D, RAD54L)", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, Discussion (Olaparib/PROfound), prostate lines 7657 to 7662 (HRR genes considered; category 1 for BRCAm mCRPC)" },
+    { "criterion": "priorTherapy", "requirement": "prior ARPI (abiraterone or enzalutamide); permitted before or after docetaxel", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, Discussion, prostate lines 7658 to 7660 (olaparib option for mCRPC with previous ARPI and an HRRm regardless of prior docetaxel)" },
+    { "criterion": "castrationBackbone", "requirement": "ongoing ADT to maintain castrate testosterone below 50 ng/dL", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-G, prostate line 3003" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "olaparib",
+        "name": "Olaparib",
+        "basis": "flat",
+        "dosePerUnit": 300,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO (twice daily)",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "Discussion, prostate line 7611 (PROfound: olaparib 300 mg twice daily); prostate line 7657 (FDA approved olaparib 300 mg twice daily, May 2020)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) Prostate v6.2026 Discussion, prostate lines 7611 and 7657. Olaparib 300 mg PO TWICE daily (two 150 mg tablets twice daily) continuously (represented as days 1 to 28 of a 28-day cycle). Requires an HRR/BRCA mutation (biomarker gate)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "biomarker gate: confirm an HRR (including BRCA1/BRCA2) mutation by a validated germline/somatic assay, or plasma ctDNA if a metastatic biopsy is not feasible, before starting (Discussion, prostate line ~7663).",
+      "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+      "cycles null: continue until progression or unacceptable toxicity.",
+      "monitor complete blood counts and hepatic/renal function; transfusion support and dose reductions may be needed for anemia (Discussion, prostate line ~7665)."
+    ]
+  },
+  "monitoring": [
+    "CBC monthly (anemia, thrombocytopenia; rare risk of MDS/AML)",
+    "hepatic and renal function (creatinine elevation)",
+    "PSA and serum testosterone (confirm castrate level)",
+    "thromboembolic events and pneumonitis (rare but serious)"
+  ],
+  "clearanceChecks": ["HRR/BRCA mutation confirmed", "CBC/platelets", "renal", "liver", "castrate testosterone maintained", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 3 or higher anemia or other hematologic toxicity", "drug": "olaparib", "action": "hold/reduce", "text": "Hold olaparib per labeling; transfuse as needed; resume at a reduced dose after recovery; obtain clinical review. Discontinue if MDS/AML is confirmed." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "PARP inhibition (olaparib) exploits synthetic lethality in HRR/BRCA-mutated prostate cancer; PROfound improved outcomes versus abiraterone/enzalutamide", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "Discussion (Olaparib/PROfound): olaparib 300 mg twice daily (prostate lines 7611, 7657); HRR gene list and category 1 for BRCAm, preferred if docetaxel not yet received (prostate lines 7657 to 7662); prior ARPI required, regardless of prior docetaxel (prostate lines 7658 to 7660); PROS-18 Molecular Biomarker-Directed Therapy (BRCA mutation), prostate line 1783", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for olaparib in HRR/BRCA-mutated metastatic castration-resistant prostate cancer (disease #54 mCRPC; PROfound). The olaparib dose (300 mg PO twice daily) is dose-grounded to Standard Guidelines (NCCN) Prostate v6.2026 Discussion (prostate lines 7611 and 7657). Biomarker gate: a deleterious or suspected-deleterious germline or somatic HRR mutation (BRCA1, BRCA2, ATM, BARD1, BRIP1, CDK12, CHEK1, CHEK2, FANCL, PALB2, RAD51B, RAD51C, RAD51D, RAD54L) is required, with category 1 status for BRCA-mutated disease; prior ARPI is required regardless of prior docetaxel. cycleLengthDays 28 with cycles null (continuous until progression). Ongoing ADT to maintain castrate testosterone below 50 ng/dL is required. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

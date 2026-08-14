@@ -1,0 +1,86 @@
+{
+  "id": "gu-rcc-nivo-cabozantinib",
+  "name": "Nivolumab + Cabozantinib (CheckMate-9ER)",
+  "disease": "Renal cell carcinoma",
+  "diseaseId": "renal_cell_carcinoma",
+  "histology": "clear cell renal cell carcinoma",
+  "stage": ["IV", "relapsed/unresectable"],
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). IO + VEGFR/MET-TKI doublet (nivolumab anti-PD-1 + cabozantinib). CheckMate-9ER showed higher ORR and longer PFS/OS versus sunitinib. No positive companion biomarker is required (PD-L1 not required). Per Standard Guidelines (NCCN), Kidney Cancer v1.2027 (Cabozantinib + Nivolumab, category 1)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic clear cell RCC (all risk groups)",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "clear cell renal cell carcinoma", "source": "Standard Guidelines (NCCN), Kidney Cancer", "locator": "v1.2027, first-line clear cell RCC (Cabozantinib + Nivolumab, category 1; line ~1047)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nivolumab",
+        "name": "Nivolumab",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "VERIFY", "version": null, "date": null, "locator": "VERIFY - the nivolumab dose/schedule used in CheckMate-9ER (intended flat 240 mg every 2 weeks or 480 mg every 4 weeks) is NOT printed in the provided licensed sources. DeVita line 33128 gives nivolumab dosing only for the ipilimumab combination and single-agent maintenance, not the 9ER cabozantinib combination. Do not infer.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: nivolumab anti-PD-1 given as a flat dose IV (intended CheckMate-9ER schedule 240 mg every 2 weeks or 480 mg every 4 weeks). That specific flat dose/schedule is NOT dose-grounded in the provided sources, so dosePerUnit is set to VERIFY and never inferred. Immune-related adverse event monitoring applies."
+      },
+      {
+        "id": "cabozantinib",
+        "name": "Cabozantinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "VERIFY", "version": null, "date": null, "locator": "VERIFY - the cabozantinib dose used WITH nivolumab (CheckMate-9ER; intended 40 mg PO once daily) is NOT printed in the provided licensed sources. DeVita line 151812 prints cabozantinib 60 mg daily for MONOTHERAPY (METEOR), which is a DIFFERENT, higher dose and must NOT be substituted for the combination. Do not infer.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: cabozantinib is an oral VEGFR/MET/AXL TKI given once daily. The dose WITH nivolumab (intended 40 mg PO once daily in CheckMate-9ER) is NOT dose-grounded in the provided sources and differs from the 60 mg monotherapy dose (DeVita line 151812), which must not be reused here. dosePerUnit is set to VERIFY (never invented) and must be resolved against a cited source before use."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Immune-related adverse event (irAE) monitoring for nivolumab (thyroid and other endocrinopathies, hepatitis, colitis, pneumonitis, dermatitis, nephritis).",
+      "Blood pressure monitoring and management (cabozantinib VEGFR TKI hypertension).",
+      "Monitor for diarrhea, hand-foot skin reaction, proteinuria, thyroid dysfunction, and hepatotoxicity (cabozantinib).",
+      "Attributing toxicity between the IO and TKI components may require holding one agent to identify the cause."
+    ]
+  },
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol) during nivolumab",
+    "blood pressure (cabozantinib hypertension)",
+    "liver function, thyroid, hand-foot skin reaction, proteinuria (cabozantinib)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "blood pressure", "liver", "renal/proteinuria", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher immune-related adverse event", "drug": "nivolumab", "action": "hold/steroids", "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge." },
+    { "condition": "grade 3 hypertension, HFSR, diarrhea, or hepatotoxicity", "drug": "cabozantinib", "action": "hold/reduce", "text": "Hold and resume cabozantinib at a reduced dose per labeling for grade 3 or higher toxicity; obtain clinical review. Dose modification cannot be finalized until the combination starting dose (VERIFY) is resolved." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "lines 151844-151845 (CheckMate 9ER, Nivolumab/Cabozantinib named in the front-line RCC regimen table 43.9); reference 103 (Choueiri, NEJM 2021). No combination mg doses printed.", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kidney Cancer", "version": "1.2027", "date": null, "locator": "First-line clear cell RCC: Cabozantinib + Nivolumab (category 1), systemic-therapy pages (line ~1047). mg dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[nivolumab].dosePerUnit", "regimen.drugs[nivolumab].provenance.source", "regimen.drugs[nivolumab].provenance.locator", "regimen.drugs[cabozantinib].dosePerUnit", "regimen.drugs[cabozantinib].provenance.source", "regimen.drugs[cabozantinib].provenance.locator"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for nivolumab + cabozantinib (CheckMate-9ER) in advanced clear cell renal cell carcinoma (serves clear cell subtypes #55 and #56). Neither combination dose is printed in the provided licensed sources: the CheckMate-9ER cabozantinib dose (intended 40 mg PO once daily) differs from and must not reuse the 60 mg monotherapy dose (DeVita line 151812), and the 9ER nivolumab flat dose/schedule (intended 240 mg q2w or 480 mg q4w) is not printed either. Both dosePerUnit values are therefore set to VERIFY and never inferred; verifyFields records every unresolved path. Regimen identity, histology, and setting are grounded to DeVita Table 43.9 (lines 151844-151845) and Standard Guidelines (NCCN), Kidney Cancer v1.2027 (category 1 first-line). This regimen is NOT dose-groundable from the current sources and must not be used until the doses are resolved. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

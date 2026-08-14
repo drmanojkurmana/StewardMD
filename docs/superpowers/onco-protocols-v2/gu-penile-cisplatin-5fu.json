@@ -1,0 +1,89 @@
+{
+  "id": "gu-penile-cisplatin-5fu",
+  "name": "Cisplatin / Fluorouracil (penile SCC)",
+  "disease": "Penile cancer",
+  "diseaseId": "penile_cancer",
+  "histology": "squamous cell carcinoma",
+  "stage": ["IV", "recurrent or metastatic"],
+  "biomarkers": {
+    "note": "Cytotoxic CISplatin/fluoropyrimidine doublet; not biomarker-restricted. HPV/p16 is prognostic only. Per Standard Guidelines (NCCN), Penile Cancer, Principles of Systemic Therapy (PN-D)."
+  },
+  "treatmentSetting": ["recurrent-metastatic", "adjuvant"],
+  "treatmentIntent": ["palliative", "curative"],
+  "lineOfTherapy": "historical first-line systemic option for metastatic or recurrent penile squamous cell carcinoma (alternative to TIP), and an adjuvant alternative to TIP; explicitly NOT recommended in the neoadjuvant setting per source",
+  "eligibilityCriteria": [
+    { "criterion": "setting", "requirement": "metastatic or recurrent penile SCC (first-line, alternative to TIP), or adjuvant alternative to TIP with high-risk pathology; not neoadjuvant", "source": "Standard Guidelines (NCCN), Penile Cancer", "locator": "v2.2026, Principles of Systemic Therapy (PN-D 3 of 5, First-Line Systemic Therapy for Metastatic/Recurrent Disease) and PN-D 2 of 5 (adjuvant alternative); PN-D 4 of 5 marks Cisplatin/Fluorouracil not recommended for the neoadjuvant setting" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "cisplatin",
+        "name": "CISplatin",
+        "basis": "bsa",
+        "dosePerUnit": "70 to 80",
+        "unit": "mg/m2",
+        "days": [1],
+        "route": "IV with hydration",
+        "infusionDuration": null,
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), Cisplatin/Fluorouracil: Cisplatin 70 to 80 mg/m2 IV on Day 1", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, PN-D 4 of 5. CISplatin 70 to 80 mg/m2 IV Day 1 (source states a range; not a single value). ISMP tall-man. No lifetime cumulative cap; requires IV pre/post hydration; monitor nephrotoxicity, ototoxicity, peripheral neuropathy."
+      },
+      {
+        "id": "fluorouracil-ci",
+        "name": "Fluorouracil (continuous infusion)",
+        "basis": "bsa",
+        "dosePerUnit": "800 to 1000",
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4],
+        "route": "IV continuous infusion",
+        "infusionDuration": "per day on Days 1 to 4 (or Days 2 to 5)",
+        "caps": { "perDose": null, "cumulativeLifetime": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), Cisplatin/Fluorouracil: continuous infusion Fluorouracil 800 to 1000 mg/m2/day IV on Days 1 to 4 or Days 2 to 5", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN) v2.2026, PN-D 4 of 5. Fluorouracil 800 to 1000 mg/m2 per day by continuous IV infusion on Days 1 to 4 (or Days 2 to 5); source states a range, not a single value. DPYD deficiency substantially increases fluoropyrimidine toxicity; consider DPYD testing before treatment."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": "VERIFY",
+    "premedications": [
+      { "name": "Antiemetic prophylaxis (high emetic risk)", "notes": "CISplatin 70 to 80 mg/m2 is highly emetogenic; high-emetic-risk prophylaxis indicated." },
+      { "name": "Hydration", "notes": "IV pre- and post-hydration for CISplatin." }
+    ],
+    "supportiveCare": [
+      "Antiemetics: high emetic risk (CISplatin 70 to 80 mg/m2). Confirm exact institutional/guideline tier.",
+      "Nephroprotection: IV hydration and electrolyte repletion with each CISplatin dose.",
+      "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil; reduce or avoid in DPYD deficiency."
+    ]
+  },
+  "monitoring": [
+    "Renal function (creatinine/GFR) and electrolytes (Mg, K, Na) before each cycle - CISplatin",
+    "Ototoxicity and peripheral neuropathy assessment - CISplatin",
+    "CBC before each cycle",
+    "Mucositis and diarrhea assessment - infusional fluorouracil"
+  ],
+  "clearanceChecks": ["renal function and electrolytes", "adequate hydration", "CBC/platelets", "DPYD status (fluorouracil)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "rising creatinine / falling GFR, ototoxicity, or grade 2+ neuropathy", "drug": "cisplatin", "action": "hold/reduce/switch", "text": "Review required; consider dose reduction, delay, or switch to a carboplatin-based regimen. Physician decides." },
+    { "condition": "grade 3+ mucositis/diarrhea or known DPYD deficiency", "drug": "fluorouracil", "action": "hold/reduce", "text": "Review required; reduce or hold fluorouracil. In DPYD deficiency, substantially reduce or avoid. Physician decides." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "locator": "lines 165986 to 165989 (adjuvant chemotherapy improves survival vs surgery alone in penile cancer; cisplatin/paclitaxel/5-fluorouracil noted as an alternative systemic approach); cisplatin plus 5-fluorouracil is the historical penile-SCC doublet", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Penile Cancer", "version": "2.2026", "date": null, "locator": "Principles of Systemic Therapy (PN-D 4 of 5), Cisplatin/Fluorouracil: continuous infusion Fluorouracil 800 to 1000 mg/m2/day IV Days 1 to 4 or Days 2 to 5, Cisplatin 70 to 80 mg/m2 IV Day 1, repeat every 3 to 4 weeks; listed first-line for metastatic/recurrent disease (PN-D 3 of 5) and adjuvant alternative (PN-D 2 of 5); not recommended neoadjuvant (PN-D 4 of 5)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for CISplatin / Fluorouracil in penile squamous cell carcinoma (#62), the historical platinum/fluoropyrimidine doublet used first-line for metastatic or recurrent disease (alternative to TIP) and as an adjuvant alternative; explicitly NOT recommended neoadjuvant per source. Doses from Standard Guidelines (NCCN), Penile Cancer v2.2026, Principles of Systemic Therapy (PN-D 4 of 5): continuous-infusion Fluorouracil 800 to 1000 mg/m2 per day on Days 1 to 4 (or Days 2 to 5) and CISplatin 70 to 80 mg/m2 IV Day 1, repeat every 3 to 4 weeks. The source states dose RANGES (Fluorouracil 800 to 1000; CISplatin 70 to 80) rather than single values, so dosePerUnit is recorded as the exact stated range. cycleLengthDays is modeled at the 21-day base of the stated every-3-to-4-week range. The number of cycles is not fixed for this setting by the cited source, so regimen.cycles is set to VERIFY. Corroborated by DeVita 12th ed. (lines 165986 to 165989). CISplatin has no lifetime cumulative cap; hydration and nephro/oto/neuro monitoring are specified. Fluorouracil DPYD deficiency is flagged in monitoring and clearanceChecks. ISMP tall-man applied (CISplatin). This remains a StewardMD Standard Protocol; no endorsement implied."
+}

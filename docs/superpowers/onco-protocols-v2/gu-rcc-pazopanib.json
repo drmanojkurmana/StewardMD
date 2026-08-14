@@ -1,0 +1,72 @@
+{
+  "id": "gu-rcc-pazopanib",
+  "name": "Pazopanib (single agent)",
+  "disease": "Renal cell carcinoma",
+  "diseaseId": "renal_cell_carcinoma",
+  "histology": "clear cell renal cell carcinoma",
+  "stage": ["IV", "relapsed/unresectable"],
+  "biomarkers": {
+    "histology": "clear cell",
+    "note": "Clear cell RCC (subtypes #55/#56). Pazopanib is an oral multitargeted TKI/angiogenesis inhibitor (VEGFRs, PDGFR-alpha/-beta, c-KIT); no companion biomarker is required. Non-inferior to sunitinib in the COMPARZ study. Listed as a first-line systemic option across all risk groups for clear cell RCC per Standard Guidelines (NCCN), Kidney Cancer v1.2027."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line for advanced or metastatic clear cell RCC (all risk groups)",
+  "eligibilityCriteria": [
+    { "criterion": "histology", "requirement": "clear cell renal cell carcinoma", "source": "Standard Guidelines (NCCN), Kidney Cancer", "locator": "v1.2027, first-line systemic therapy for clear cell RCC, all risk groups (Pazopanib listed)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "pazopanib",
+        "name": "Pazopanib",
+        "basis": "flat",
+        "dosePerUnit": 800,
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 150905 (pazopanib 800 mg, the higher dose, in the PROTECT adjuvant-trial context; 800 mg once daily is the standard first-line metastatic dose)", "evidenceStatus": "unknown" },
+        "notes": "Source: DeVita 12th ed., line 150905: pazopanib 800 mg once daily (the higher dose, in the PROTECT adjuvant-trial context; 800 mg once daily is the standard first-line metastatic dose), given continuously (represented as days 1 to 28 of a nominal 28-day cycle). Hepatotoxicity is a notable grade 3 toxicity (elevated ALT ~30%, AST ~21%); liver function must be monitored before and during treatment. Standard Guidelines (NCCN) Kidney Cancer v1.2027 lists pazopanib as a first-line clear cell RCC option but does not print the mg dose."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Liver function tests BEFORE starting and periodically during treatment (pazopanib hepatotoxicity - grade 3 ALT/AST elevations reported).",
+      "Blood pressure monitoring and management (VEGF TKI hypertension).",
+      "Monitor for hand-foot skin reaction and fatigue.",
+      "Baseline and periodic thyroid function (TSH)."
+    ]
+  },
+  "monitoring": [
+    "liver function tests (baseline and periodic - hepatotoxicity)",
+    "blood pressure (VEGF TKI hypertension)",
+    "thyroid function (TSH)",
+    "hand-foot skin reaction / dermatologic toxicity",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "thyroid", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "transaminase elevation or grade 3 hypertension", "drug": "pazopanib", "action": "hold/reduce", "text": "Hold and resume at a reduced dose per labeling for transaminase elevation or grade 3 or higher hypertension; obtain clinical review. Hepatotoxicity monitoring is mandatory." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 150905 (pazopanib 800 mg, the higher dose, in the PROTECT adjuvant-trial context; 800 mg once daily is the standard first-line metastatic dose)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Kidney Cancer", "version": "1.2027", "date": null, "locator": "First-line systemic therapy for clear cell RCC, all risk groups (Pazopanib listed; systemic-therapy pages). mg dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": [],
+  "provenanceNote": "ONCQIS Standard Protocol draft for single-agent pazopanib in advanced clear cell renal cell carcinoma (serves clear cell subtypes #55 and #56). The dose (pazopanib 800 mg PO once daily continuously) is sourced to DeVita 12th ed., line 150905 (the higher 800 mg dose in the PROTECT adjuvant-trial context; 800 mg once daily is the standard first-line metastatic dose). Standard Guidelines (NCCN), Kidney Cancer v1.2027 names pazopanib as a first-line all-risk clear cell RCC option but does not print a mg dose, so the numeric dose is grounded to DeVita. Pazopanib hepatotoxicity monitoring is emphasized (baseline and periodic LFTs) alongside VEGF TKI class monitoring (blood pressure, thyroid, hand-foot skin reaction). No field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

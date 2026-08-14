@@ -1,0 +1,73 @@
+{
+  "id": "gu-uro-erdafitinib",
+  "name": "Erdafitinib (FGFR2/3-altered)",
+  "disease": "Urothelial carcinoma",
+  "diseaseId": "bladder_cancer",
+  "histology": "urothelial carcinoma",
+  "stage": ["IV", "locally advanced", "metastatic"],
+  "biomarkers": {
+    "FGFR": "susceptible FGFR2 or FGFR3 genetic/genomic alteration (REQUIRED)",
+    "note": "BIOMARKER-GATED: erdafitinib is an oral pan-FGFR (FGFR1-4) tyrosine kinase inhibitor indicated ONLY for urothelial carcinoma harboring a susceptible FGFR3 (and per label FGFR2/3) genomic alteration. FGFR testing is mandatory before use. Applies to bladder (#57) and upper-tract (#58) urothelial carcinoma. Per Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G 5 of 8, biomarker-directed therapy, category 1 after platinum and a checkpoint inhibitor); DeVita 12th ed. line 23438 (erdafitinib for FGFR2/3-altered bladder cancer)."
+  },
+  "treatmentSetting": "metastatic",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "subsequent-line for locally advanced or metastatic urothelial carcinoma with a susceptible FGFR2/3 alteration, after prior platinum-based chemotherapy and a PD-1/PD-L1 inhibitor",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "susceptible FGFR2 or FGFR3 genomic alteration confirmed by a validated assay (REQUIRED)", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G 5 of 8 (Erdafitinib for susceptible FGFR3 genetic/genomic alterations; category 1 after platinum and a checkpoint inhibitor); DeVita 12th ed. line 23438 (FGFR2/3-altered bladder cancer)" },
+    { "criterion": "priorTherapy", "requirement": "prior platinum-based chemotherapy and a PD-1/PD-L1 inhibitor (for the category 1 recommendation)", "source": "Standard Guidelines (NCCN), Bladder Cancer", "locator": "v3.2026, BL-G 5 of 8 (line 309)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "erdafitinib",
+        "name": "Erdafitinib",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "VERIFY", "version": null, "date": null, "locator": "VERIFY - the erdafitinib dose (intended 8 mg PO once daily, with up-titration to 9 mg based on day 14-21 serum phosphate per BLC2001/THOR) is NOT printed in the provided licensed sources. DeVita 12th ed. line 23438 and Harrison identify erdafitinib for FGFR2/3-altered bladder cancer but do not print the mg dose. Do not infer.", "evidenceStatus": "unknown" },
+        "notes": "VERIFY: erdafitinib is given orally once daily continuously (intended 8 mg PO daily, with pharmacodynamic up-titration to 9 mg based on serum phosphate at day 14-21 per BLC2001/THOR). The mg dose and phosphate-driven up-titration are NOT dose-grounded in the provided sources, so dosePerUnit is set to VERIFY (never invented) and must be resolved against a cited source before use."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "HYPERPHOSPHATEMIA: serum phosphate is an on-target pharmacodynamic effect and drives dose up-titration; monitor phosphate, restrict dietary phosphate and use phosphate binders as needed.",
+      "OCULAR: central serous retinopathy / retinal pigment epithelial detachment can occur; baseline and periodic ophthalmologic exams (including OCT); counsel on visual symptoms.",
+      "Monitor for nail toxicity, stomatitis, dry mouth/skin, and hand-foot syndrome.",
+      "FGFR testing must be confirmed before initiation."
+    ]
+  },
+  "monitoring": [
+    "serum phosphate (on-target hyperphosphatemia; guides up-titration)",
+    "ophthalmologic exam / OCT (central serous retinopathy) at baseline and periodically",
+    "nail and mucocutaneous toxicity (stomatitis, nail changes, hand-foot syndrome)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["FGFR alteration confirmed", "serum phosphate", "ophthalmologic status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "hyperphosphatemia above threshold", "drug": "erdafitinib", "action": "hold/reduce/binders", "text": "Manage hyperphosphatemia with dietary phosphate restriction and phosphate binders; hold and reduce erdafitinib per labeling if phosphate remains elevated. Up-titration and reduction thresholds cannot be finalized until the starting dose (VERIFY) is resolved." },
+    { "condition": "central serous retinopathy / visual symptoms", "drug": "erdafitinib", "action": "hold/discontinue", "text": "Hold erdafitinib and obtain urgent ophthalmologic evaluation for new visual symptoms or central serous retinopathy; resume or discontinue per severity." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 23438 (erdafitinib, a pan-FGFR inhibitor for FGFR2/3-altered bladder cancer); lines 22149-22158 (erdafitinib) - dose not printed", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Bladder Cancer", "version": "3.2026", "date": null, "locator": "Principles of Systemic Therapy, biomarker-directed therapy (BL-G 5 of 8, line 309): Erdafitinib for susceptible FGFR3 genetic/genomic alterations, category 1 for patients who have already received platinum and a checkpoint inhibitor. Dosing not printed in the guideline.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[erdafitinib].dosePerUnit", "regimen.drugs[erdafitinib].provenance.source", "regimen.drugs[erdafitinib].provenance.locator"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for erdafitinib in FGFR2/3-altered locally advanced or metastatic urothelial carcinoma (bladder #57, upper-tract #58). This is a BIOMARKER-GATED regimen: a susceptible FGFR2/3 genomic alteration is REQUIRED and recorded in both biomarkers and eligibilityCriteria, grounded to Standard Guidelines (NCCN), Bladder Cancer v3.2026 (BL-G 5 of 8, category 1 after platinum and a checkpoint inhibitor) and DeVita 12th ed. line 23438. The dose (intended 8 mg PO daily with up-titration to 9 mg by serum phosphate per BLC2001/THOR) is NOT printed in the provided licensed sources, so dosePerUnit is set to VERIFY and never inferred (verifyFields records the paths). Erdafitinib-specific safety (on-target hyperphosphatemia driving up-titration, central serous retinopathy, nail/mucocutaneous toxicity) is captured. This regimen is NOT dose-groundable from the current sources and must not be used until the dose is resolved. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

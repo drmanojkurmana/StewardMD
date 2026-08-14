@@ -1,0 +1,76 @@
+{
+  "id": "gu-prostate-radium223",
+  "name": "Radium-223 dichloride (bone-metastatic mCRPC, no visceral metastases)",
+  "disease": "Prostate cancer",
+  "diseaseId": "prostate_cancer",
+  "histology": "prostate adenocarcinoma (acinar)",
+  "stage": ["M1 CRPC (metastatic castration-resistant, symptomatic bone metastases, no visceral metastases)"],
+  "biomarkers": {
+    "note": "Radium-223 is an alpha-emitting bone-targeting radiopharmaceutical for symptomatic bone-metastatic disease; it is not molecularly biomarker-gated. It has not been shown to extend survival in patients with visceral metastases or bulky (>3 to 4 cm) nodal disease and must not be used with visceral metastases. Per Standard Guidelines (NCCN), Prostate Cancer, PROS-J (Radiopharmaceutical Therapy) and DeVita 12th ed. (ALSYMPCA)."
+  },
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "category 1 option for symptomatic bone metastases in metastatic castration-resistant prostate cancer without visceral metastases; may be combined with enzalutamide and a bone-health agent",
+  "eligibilityCriteria": [
+    { "criterion": "diseaseState", "requirement": "castration-resistant prostate cancer with symptomatic bone metastases and no visceral metastases", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-J (Radiopharmaceutical Therapy, Radium-223), prostate lines 3828 to 3830" },
+    { "criterion": "castrationBackbone", "requirement": "ongoing ADT to maintain castrate testosterone below 50 ng/dL", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-G, prostate line 3003" }
+  ],
+  "exclusionCriteria": [
+    { "criterion": "visceralMetastases", "requirement": "presence of visceral metastases", "source": "Standard Guidelines (NCCN), Prostate Cancer", "locator": "v6.2026, PROS-18 footnote ooo, prostate line 1829 (Radium-223 should not be used in patients with visceral metastases); PROS-J, prostate line 3830" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "radium-223-dichloride",
+        "name": "Radium-223 dichloride",
+        "basis": "VERIFY",
+        "dosePerUnit": 50,
+        "unit": "VERIFY",
+        "days": [1],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 162484 (ALSYMPCA: six injections of radium-223 at a dose of 50 kBq per kilogram of body weight intravenously, one injection administered every 4 weeks)", "evidenceStatus": "unknown" },
+        "notes": "SOURCE-STATED DOSE: 50 kBq/kg IV once every 4 weeks for 6 injections (ALSYMPCA phase III; DeVita 12th ed. line 162484). The numeric value 50 is source-established and recorded in dosePerUnit. HOWEVER basis and unit are set to the literal VERIFY because the current standard-protocol schema cannot represent this dose: the basis enum [bsa, mgkg, flat, auc] has no kilobecquerel-per-kilogram-body-weight (kBq/kg) radioactivity basis, and the unit enum [mg/m2, mg/kg, mg, AUC, units, mCi, GBq] has no kBq/kg token. These two fields are VERIFY pending a schema extension for radioactivity-per-body-weight units, NOT because the dose is unknown. Note: the current product label activity is commonly cited as 55 kBq/kg after a 2015 recalibration, but that value is not in the provided sources, so it was not used (no invention). The SCHEDULE (every 4 weeks, 6 injections) is fully source-grounded and encoded in days/cycleLengthDays/cycles. Radioligand: no ISMP tall-man form."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": 6,
+    "premedications": [],
+    "supportiveCare": [
+      "continue ADT to maintain castrate testosterone below 50 ng/dL (PROS-G).",
+      "bone-health agent: concomitant denosumab or zoledronic acid is recommended, because radium-223 may increase fracture risk when given with an ARPI without a bone-health agent (PROS-J, prostate line 3836).",
+      "concurrent enzalutamide plus a bone-health agent may be considered given the overall-survival benefit over enzalutamide alone (PROS-J, prostate line 3833); combination with abiraterone increased fractures (avoid).",
+      "no concurrent cytotoxic chemotherapy: combining radium-223 with chemotherapy (e.g. docetaxel) is not established and increases myelosuppression; sequence rather than combine, per radium-223 labeling.",
+      "administer by an appropriately licensed nuclear-medicine/radiation-oncology facility with radiation-safety precautions."
+    ]
+  },
+  "monitoring": [
+    "CBC before treatment initiation and before each subsequent dose (myelosuppression; PROS-J, prostate line 7916)",
+    "PSA and serum testosterone (confirm castrate level)",
+    "fracture risk / bone health, especially if combined with an ARPI"
+  ],
+  "clearanceChecks": ["CBC/platelets (adequate marrow before each dose)", "no visceral metastases confirmed", "bone-health agent in place", "castrate testosterone maintained", "prior-dose status"],
+  "doseModificationRules": [
+    { "condition": "hematologic toxicity (inadequate counts before a dose)", "drug": "radium-223-dichloride", "action": "hold/discontinue", "text": "Hold or discontinue radium-223 per labeling and radiation-safety protocol for inadequate marrow recovery; obtain clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "line 162484 (ALSYMPCA: 922 patients; six injections of radium-223 at 50 kBq/kg IV every 4 weeks; improved median overall survival 14 vs 11.2 months)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Prostate Cancer", "version": "6.2026", "date": "2026-07-28", "locator": "PROS-J (Radiopharmaceutical Therapy, Radium-223): administered IV once a month for 6 months (prostate line 3832); symptomatic bone metastases without visceral disease (prostate lines 3828 to 3830); bone-health agent recommendation (prostate line 3836); PROS-18 footnote ooo (no visceral metastases), prostate line 1829; Discussion CBC before each dose (prostate line 7916). Activity dose (kBq/kg) is not stated on PROS-J.", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "supersedes": null,
+  "supersededBy": null,
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].basis", "regimen.drugs[0].unit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for radium-223 dichloride in symptomatic bone-metastatic mCRPC without visceral metastases (disease #54 mCRPC). The source-stated activity dose is 50 kBq/kg IV every 4 weeks for 6 injections (ALSYMPCA phase III; DeVita 12th ed. line 162484); the schedule (cycleLengthDays 28, cycles 6) is fully grounded to DeVita line 162484 and Standard Guidelines (NCCN) Prostate v6.2026 PROS-J (prostate line 3832, once a month for 6 months). The numeric activity value 50 is recorded in dosePerUnit, but drug basis and unit are set to VERIFY because the current schema enums cannot represent a kilobecquerel-per-kilogram-body-weight (kBq/kg) radioactivity dose (basis enum lacks a per-body-weight radioactivity basis; unit enum has only mCi/GBq, not kBq/kg). These two VERIFY fields reflect a schema representation gap, not missing evidence, and are listed in verifyFields (status remains DRAFT). The commonly cited 55 kBq/kg label activity (post-2015 recalibration) is not in the provided sources and was deliberately not substituted (no invention). Visceral metastases are an exclusion (PROS-J, PROS-18 footnote ooo). A concomitant bone-health agent is recommended. No dose was invented or inferred. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
