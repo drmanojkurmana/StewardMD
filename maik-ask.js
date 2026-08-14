@@ -111,7 +111,7 @@
     var onState = deps.onState || function () {};
     var allowed = allowedFieldNames(PW, pathway);
 
-    var running = true, paused = false, asked = 0, clarifies = 0;
+    var running = true, paused = false, asked = 0, clarifies = 0, attempts = {};
     var summary = { asked: 0, findings: [], stoppedReason: "" };
     var resolveOuter;
     var promise = new Promise(function (res) { resolveOuter = res; });
@@ -119,6 +119,23 @@
     function finish(reason) { if (!running) return; running = false; summary.stoppedReason = reason; onState("done", reason); resolveOuter(summary); }
     function waitIfPaused() { return new Promise(function (res) { (function tick() { if (!paused || !running) return res(); setTimeout(tick, 120); })(); }); }
 
+    // Prefetch: while the patient answers question N, generate question N+1 in the background so it is
+    // ready instantly. Keyed by field; an unused prefetch (if the answer changes the next target) is just
+    // a discarded promise. generateNextQuestion never rejects (validates + falls back), so a stored
+    // prefetch is always a safe, valid question — it can never surface a wrong or unvalidated question.
+    var prefetched = {};
+    function buildCtx(t) {
+      return { complaint: deps.complaint || pathway.label, pathwayLabel: pathway.label, targetField: t.field,
+        targetHint: t.ask, known: known, allowedFields: allowed, language: language, pathway: pathway };
+    }
+    function getQuestion(t) {
+      if (prefetched[t.field]) { var p = prefetched[t.field]; delete prefetched[t.field]; return p; }
+      return provider.generateNextQuestion(buildCtx(t));
+    }
+    function prefetchNext(assumedKnown) {
+      if (!running) return;
+      try { var t2 = PW.nextTarget(pathway, assumedKnown); if (t2 && !prefetched[t2.field]) prefetched[t2.field] = provider.generateNextQuestion(buildCtx(t2)); } catch (e) {}
+    }
     function step() {
       if (!running) return;
       waitIfPaused().then(function () {
@@ -127,11 +144,7 @@
         var target = PW.nextTarget(pathway, known);
         if (!target) return finish("complete");
 
-        var ctx = { complaint: deps.complaint || pathway.label, pathwayLabel: pathway.label,
-          targetField: target.field, targetHint: target.ask, known: known, allowedFields: allowed,
-          language: language, pathway: pathway };
-
-        provider.generateNextQuestion(ctx).then(function (q) {
+        getQuestion(target).then(function (q) {
           if (!running) return;
           if (q.action === "finish") return finish("provider-finish");
           if (q.action === "alert_doctor") { onRedFlag({ field: target.field, ask: target.ask, reason: q.reason }); return finish("alert-doctor"); }
@@ -140,6 +153,10 @@
           return speak(q.question, q.language || language).then(function () {
             if (!running) return;
             onState("listening", target.field);
+            // Overlap the next question's LLM round-trip with the patient's answer + ASR (assume the
+            // current target gets answered) so the next question is ready instantly.
+            var assumed = {}; for (var ak in known) assumed[ak] = known[ak]; assumed[target.field] = "__pending__";
+            prefetchNext(assumed);
             return listen();
           }).then(function (transcript) {
             if (!running) return;
@@ -160,10 +177,16 @@
               });
               var rf = positiveRedFlag(target, findings);
               if (rf) { onRedFlag(rf); return finish("red-flag"); }
+              // The patient answered but nothing resolved THIS target (irrelevant answer / extraction miss).
+              // Re-ask at most twice, then mark it unclear and MOVE ON — never loop forever on one field.
+              if (!(target.field in known)) {
+                attempts[target.field] = (attempts[target.field] || 0) + 1;
+                if (attempts[target.field] >= 2) { known[target.field] = "__unclear__"; onState("unclear", target.field); }
+              }
               return step();
             };
             if (det.length) return applyFindings(det);          // deterministic-first (no LLM call)
-            return provider.extractPatientAnswer({ complaint: ctx.complaint, targetField: target.field, targetHint: target.ask,
+            return provider.extractPatientAnswer({ complaint: deps.complaint || pathway.label, targetField: target.field, targetHint: target.ask,
               targetKind: target.kind, allowedFields: allowed, question: q.question, pathway: pathway }, transcript)
               .then(function (r) { return applyFindings((r && r.findings) || []); });
           });

@@ -153,3 +153,53 @@ test("question cache: a validated question is served instantly on the 2nd ask (0
   assert.equal(calls, 1, "2nd ask served from cache, provider called only once");
   delete globalThis.localStorage; delete globalThis.window;
 });
+
+test("prefetch: the next question is requested WHILE the patient is still answering", async () => {
+  const headache = PW.get("headache");
+  const genOrder = [];
+  const provider = {
+    generateNextQuestion: (ctx) => { genOrder.push(ctx.targetField); return Promise.resolve({ action: "ask", question: "Q:" + ctx.targetField, targetField: ctx.targetField }); },
+    extractPatientAnswer: () => Promise.resolve({ findings: [] })
+  };
+  const ctl = A._runInterview({
+    pathway: headache, pathways: PW, provider,
+    listen: () => new Promise(() => {})   // hold the first answer open forever
+  });
+  await new Promise((r) => setTimeout(r, 30));
+  // While answer 1 is still pending: question 1 generated AND question 2 prefetched.
+  assert.ok(genOrder.length >= 2, "prefetch fired during the answer (gen calls: " + genOrder.length + ")");
+  assert.notEqual(genOrder[0], genOrder[1], "prefetch is for a DIFFERENT (next) target, not a re-ask");
+  ctl.stop();
+});
+
+test("prefetched question is consumed, not regenerated (no double-gen per asked field)", async () => {
+  const headache = PW.get("headache");
+  const genCount = {};
+  const answers = ["ledu", "ledu", "ledu", "gradual", "three days", "right side", "throbbing"];
+  let i = 0;
+  const provider = {
+    generateNextQuestion: (ctx) => { genCount[ctx.targetField] = (genCount[ctx.targetField] || 0) + 1; return Promise.resolve({ action: "ask", question: "Q", targetField: ctx.targetField }); },
+    extractPatientAnswer: () => Promise.resolve({ findings: [] })
+  };
+  const ctl = A._runInterview({ pathway: headache, pathways: PW, provider, listen: () => Promise.resolve(answers[i++] || "ledu") });
+  await ctl.promise;
+  // every field's question was generated AT MOST once (prefetch popped, never regenerated for a used field)
+  Object.keys(genCount).forEach((f) => assert.ok(genCount[f] <= 1, f + " generated " + genCount[f] + " times (should be <=1)"));
+});
+
+test("re-ask cap: an unresolvable answer is asked at most twice, then moves on (no infinite loop)", async () => {
+  const headache = PW.get("headache");
+  const askedFields = [];
+  const provider = {
+    generateNextQuestion: (ctx) => { askedFields.push(ctx.targetField); return Promise.resolve({ action: "ask", question: "Q", targetField: ctx.targetField }); },
+    extractPatientAnswer: () => Promise.resolve({ findings: [] })   // LLM never resolves anything
+  };
+  // non-empty but useless answers that resolve NOTHING deterministically or via LLM
+  const ctl = A._runInterview({ pathway: headache, pathways: PW, provider, listen: () => Promise.resolve("hmm i dont know") });
+  const s = await ctl.promise;
+  // the first target must not be asked more than twice, and the interview must have advanced past it
+  const firstField = askedFields[0];
+  const firstCount = askedFields.filter((f) => f === firstField).length;
+  assert.ok(firstCount <= 2, firstField + " re-asked " + firstCount + " times (cap is 2)");
+  assert.ok(new Set(askedFields).size >= 2, "advanced past the unresolvable field to other targets");
+});
