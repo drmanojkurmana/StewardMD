@@ -1,0 +1,68 @@
+{
+  "id": "heme-dlbcl-pola-r-chp",
+  "name": "Pola-R-CHP (Polatuzumab vedotin + Rituximab + Cyclophosphamide + Doxorubicin + Prednisone)",
+  "disease": "Diffuse large B-cell lymphoma",
+  "diseaseId": "dlbcl",
+  "histology": "diffuse large B-cell lymphoma, NOS",
+  "stage": [],
+  "biomarkers": {
+    "CD20": "positive (required for the anti-CD20 antibody rituximab)",
+    "CD79b": "target of polatuzumab vedotin (expressed on B cells; not a separate testing gate)",
+    "note": "Rituximab requires CD20 positivity; CD20-negative disease should be re-biopsied to confirm antigen expression before anti-CD20 therapy (Standard Guidelines (NCCN), B-cell Lymphomas v4.2026, lines 253 to 254, 566). Polatuzumab vedotin is a CD79b-directed antibody-drug conjugate; CD79b is broadly expressed on B cells and is not a separate eligibility gate. Pola-R-CHP is a category 1 option for IPI >=2 (line 4158)."
+  },
+  "treatmentSetting": "primary therapy for previously untreated diffuse large B-cell lymphoma",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy; Pola-R-CHP is a category 1 option for IPI >=2",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "previously untreated DLBCL", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "locator": "v4.2026, line 4158: Pola-R-CHP (IPI >=2) category 1; DeVita 12th ed. line 268332 to 268334 (R-CHP + polatuzumab PFS benefit over R-CHOP, POLARIX)" },
+    { "criterion": "biomarker", "requirement": "CD20-positive B-cell lymphoma", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "locator": "v4.2026, lines 253 to 254 and 566 (confirm CD20 positivity before anti-CD20 therapy)" }
+  ],
+  "regimen": {
+    "drugs": [
+      { "id": "polatuzumab-vedotin", "name": "Polatuzumab vedotin", "basis": "mgkg", "dosePerUnit": "VERIFY", "unit": "mg/kg", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: polatuzumab vedotin dose not printed in the provided extracts. DeVita lists polatuzumab vedotin (Polivy, CD79b MMAE ADC) in the antibody-drug-conjugate table (line 31453) without a dose, and references R-CHP + polatuzumab (POLARIX) at lines 268332 to 268334 without dosing.", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. POLARIX Pola-R-CHP uses polatuzumab vedotin 1.8 mg/kg IV on day 1 of a 21-day cycle, but that dose is not printed in the provided DeVita/Harrison extracts. CD79b-directed ADC (MMAE payload); monitor for peripheral neuropathy. Verify dose before activation." },
+      { "id": "rituximab", "name": "Rituximab", "basis": "bsa", "dosePerUnit": 375, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "Harrison line 385777 (rituximab 375 mg/m2 once a week for 4 weeks) and line 120283 (usual dose 375 mg/m2 on day -1 before chemotherapy); DeVita line 323457 (rituximab 375 mg/m2 weekly).", "evidenceStatus": "unknown" }, "notes": "Source: Harrison lines 385777 and 120283; DeVita line 323457. Rituximab 375 mg/m2 IV on day 1. Requires CD20 positivity and infusion-reaction premedication (acetaminophen + antihistamine +/- steroid); screen for HBV reactivation before anti-CD20 therapy." },
+      { "id": "cyclophosphamide", "name": "Cyclophosphamide", "basis": "bsa", "dosePerUnit": 750, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP cyclophosphamide 750 mg/m2 bsa IV on day 1.", "evidenceStatus": "current" }, "notes": "Cyclophosphamide 750 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP cyclophosphamide 750 mg/m2 bsa on day 1." },
+      { "id": "doxorubicin", "name": "DOXOrubicin", "basis": "bsa", "dosePerUnit": 50, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } }, "roundingRule": { "increment": 5 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP doxorubicin 50 mg/m2 bsa IV on day 1, with anthracycline cumulative cap warn 450 / hard 550 mg/m2.", "evidenceStatus": "current" }, "notes": "DOXOrubicin 50 mg/m2 IV on day 1. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json), which encodes the canonical CHOP doxorubicin 50 mg/m2 bsa on day 1. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). ISMP tall-man DOXOrubicin." },
+      { "id": "prednisone", "name": "Prednisone", "basis": "flat", "dosePerUnit": 100, "unit": "mg", "days": [1, 2, 3, 4, 5], "route": "PO", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Grounded to the StewardMD R1-approved R-CHOP backbone (kb/protocols/rchop.json): canonical CHOP steroid 100 mg flat on days 1 to 5 (rchop names it Prednisolone; interchangeable CHOP steroid with Prednisone).", "evidenceStatus": "current" }, "notes": "Prednisone 100 mg PO flat on days 1 to 5. The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json); rchop names the steroid Prednisolone while this file uses Prednisone (same 100 mg flat days 1 to 5, interchangeable CHOP steroid)." }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Rituximab infusion premedication", "notes": "acetaminophen + antihistamine +/- corticosteroid before rituximab per labeling." },
+      { "name": "Antiemetic prophylaxis", "notes": "anthracycline-containing regimen; prophylaxis per emetogenicity tier." }
+    ],
+    "supportiveCare": [
+      "HBV screening and reactivation prophylaxis before anti-CD20 (rituximab) therapy.",
+      "G-CSF: consider primary prophylaxis per febrile-neutropenia risk of the CHOP backbone.",
+      "Polatuzumab and vincristine-sparing: Pola-R-CHP omits vincristine; monitor for polatuzumab-related peripheral neuropathy.",
+      "Tumor lysis syndrome prophylaxis for high tumor burden."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "cardiac assessment / LVEF (anthracycline) at baseline",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "peripheral neuropathy assessment each visit (polatuzumab)",
+    "HBV serologies at baseline (anti-CD20)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "peripheral neuropathy status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "polatuzumab-vedotin", "action": "reduce/hold", "text": "Reduce or hold polatuzumab vedotin for grade 2 or higher peripheral neuropathy per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "R-CHP + polatuzumab (POLARIX) references lines 268332 to 268334; polatuzumab ADC table line 31453; generic doxorubicin range lines 19634 to 19635; rituximab 375 mg/m2 line 323457", "evidenceStatus": "unknown" },
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "rituximab 375 mg/m2 lines 385777 and 120283; R-CHOP without vincristine = R-CHP + polatuzumab lines 122457 to 122460", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "version": "4.2026", "date": "2026-05-20", "locator": "line 4158 (Pola-R-CHP (IPI >=2) category 1); CD20 confirmation lines 253 to 254, 566", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for Pola-R-CHP (POLARIX) in previously untreated DLBCL (#75). Rituximab 375 mg/m2 (day 1) is dose-grounded (Harrison lines 385777 and 120283; DeVita line 323457). The CHP backbone is grounded to the StewardMD R1-approved R-CHOP (kb/protocols/rchop.json): cyclophosphamide 750 mg/m2 day 1, doxorubicin 50 mg/m2 day 1 (anthracycline cap warn 450 / hard 550 mg/m2), and the steroid 100 mg flat days 1 to 5 (rchop names it Prednisolone; this file uses Prednisone, the same interchangeable CHOP steroid at 100 mg flat days 1 to 5). Only polatuzumab vedotin remains VERIFY (conventionally 1.8 mg/kg day 1), not printed in the provided DeVita/Harrison extracts. Regimen identity and the category-1 status for IPI >=2 are grounded to Standard Guidelines (NCCN), B-cell Lymphomas v4.2026 (line 4158); the R-CHP + polatuzumab benefit over R-CHOP is noted in DeVita (lines 268332 to 268334). Pola-R-CHP replaces vincristine (of R-CHOP) with polatuzumab. ISMP tall-man applied (DOXOrubicin); anthracycline cumulative cap 450/550 mg/m2; rituximab premedication and HBV screening required. This remains a StewardMD Standard Protocol; no endorsement implied." }

@@ -1,0 +1,69 @@
+{
+  "id": "heme-mm-smoldering",
+  "name": "Smoldering (Asymptomatic) Myeloma: Active Surveillance (with high-risk systemic-therapy options)",
+  "disease": "Smoldering multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "smoldering (asymptomatic) plasma cell myeloma",
+  "stage": [],
+  "biomarkers": {
+    "note": "Risk is stratified by the Mayo 2018 / IMWG 20/2/20 criteria (serum M-protein >2 g/dL, involved:uninvolved serum free light-chain ratio >20, bone marrow plasma cells >20 percent). High-risk features (and rising parameters over time) drive the decision to consider early therapy versus observation; there is no biomarker that mandates cytotoxic therapy in smoldering disease. Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026, MYEL-3 and MS."
+  },
+  "treatmentSetting": "active surveillance (observation) is the primary management for smoldering myeloma; systemic therapy is reserved for select high-risk patients, ideally on a clinical trial",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "primary management of smoldering (asymptomatic) myeloma; no cytotoxic therapy for standard-risk disease. Progression to symptomatic myeloma redirects to active-myeloma protocols",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "smoldering (asymptomatic) myeloma without myeloma-defining events (no CRAB features, no SLiM biomarkers)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-A (Definitions of Myeloma and Related Plasma-Cell Disorders); MYEL-3 (Smoldering Myeloma)" },
+    { "criterion": "riskStratification", "requirement": "stratify by Mayo 2018 / IMWG 20/2/20 criteria; low risk observe, high risk consider trial or select systemic therapy", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-3 and MS-9" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "lenalidomide-high-risk-option",
+        "name": "Lenalidomide (high-risk select-patient option only)",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-3 (Smoldering Myeloma, High risk, Select patients: Lenalidomide (category 2B)); MS-9 (single-agent lenalidomide improved PFS in high-risk smoldering myeloma)", "evidenceStatus": "current" },
+        "notes": "SURVEILLANCE IS PRIMARY. This drug entry represents the high-risk, select-patient systemic-therapy option only; it is NOT recommended for standard-risk smoldering myeloma. The guideline lists single-agent Lenalidomide as a category 2B option for high-risk smoldering myeloma (MYEL-3), supported by a randomized trial showing improved PFS (MS-9). Daratumumab is a category 1 select-patient option (AQUILA). NO smoldering-specific dose or schedule is printed in the provided source, so dosePerUnit is VERIFY and days is left empty pending a cited dose; do NOT infer a cytotoxic dose for smoldering disease. If used, lenalidomide requires VTE thromboprophylaxis and REMS-program dispensing (teratogen)."
+      }
+    ],
+    "cycleLengthDays": "VERIFY",
+    "cycles": "VERIFY",
+    "premedications": [],
+    "supportiveCare": [
+      "Primary management is active surveillance (observation): low-risk observe at 3- to 6-month intervals (category 1); high-risk prefer enrollment in a clinical trial (strongly recommended) or observe at 3-month intervals.",
+      "Select high-risk patients only: Daratumumab (category 1; AQUILA) or Lenalidomide (category 2B) may be considered; doses are not established in the provided source (VERIFY).",
+      "Follow-up labs: CBC with differential and platelets; creatinine, albumin, corrected calcium, serum quantitative immunoglobulins, SPEP, SIFE; serum free light-chain assay; 24-hour urine (UPEP, UIFE) as needed.",
+      "Imaging: whole-body MRI without contrast, whole-body low-dose CT, and/or FDG-PET/CT annually or as clinically indicated, ideally with the same modality used at diagnosis."
+    ]
+  },
+  "monitoring": [
+    "Serial monoclonal-protein and serum free light-chain trends (rising parameters indicate higher risk and closer monitoring)",
+    "CBC, renal function, corrected calcium (surveillance for evolution to symptomatic myeloma / CRAB features)",
+    "annual or as-indicated whole-body imaging",
+    "reassess risk over time (patients can evolve from low to high risk)"
+  ],
+  "clearanceChecks": ["M-protein/free light-chain trend", "CRAB features", "risk-category reassessment"],
+  "doseModificationRules": [],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms): smoldering (asymptomatic) myeloma defined by disease burden below symptomatic myeloma with no related organ/tissue impairment; historic management is observation", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-3 (Smoldering Myeloma: low risk observe 3-6 months category 1; high risk clinical trial preferred or observe, select patients Daratumumab category 1 / Lenalidomide category 2B); MS-9 (Primary Therapy for Smoldering Myeloma; AQUILA daratumumab; single-agent lenalidomide PFS benefit)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["treatmentIntent", "regimen.drugs[0].dosePerUnit", "regimen.cycleLengthDays", "regimen.cycles"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for smoldering (asymptomatic) myeloma (#83). Active surveillance (observation) is the primary management: low-risk patients observe at 3- to 6-month intervals (category 1); high-risk patients prefer enrollment in a clinical trial (strongly recommended) or observation at 3-month intervals, with Daratumumab (category 1; AQUILA) or single-agent Lenalidomide (category 2B) as select-patient systemic-therapy options. Risk is stratified by the Mayo 2018 / IMWG 20/2/20 criteria. Sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026 (MYEL-3, MS-9) and DeVita 12th ed., Chapter 74. NO cytotoxic dose was invented for smoldering disease: the single drug entry represents the high-risk lenalidomide option, and because the provided source prints no smoldering-specific dose or schedule, dosePerUnit, regimen.cycleLengthDays and regimen.cycles are set to VERIFY (and treatmentIntent VERIFY, since the intent of early intervention is delay of progression rather than a clean curative/palliative label). These VERIFY fields are listed in verifyFields and keep the protocol at DRAFT. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

@@ -1,0 +1,68 @@
+{
+  "id": "heme-burkitt-da-epoch-r",
+  "name": "DA-EPOCH-R for Burkitt lymphoma (with CNS prophylaxis and tumor lysis prophylaxis)",
+  "disease": "Burkitt lymphoma",
+  "diseaseId": "burkitt_lymphoma",
+  "histology": "Burkitt lymphoma (MYC-rearranged, high proliferation index)",
+  "stage": [],
+  "biomarkers": {
+    "CD20": "positive (required for rituximab)",
+    "MYC": "MYC rearrangement (t(8;14) or variant) is the diagnostic hallmark of Burkitt lymphoma (diagnostic, not a dosing gate)",
+    "note": "Rituximab requires CD20 positivity; rituximab is added to DA-EPOCH if the tumor is CD20-positive (DeVita line 269569). MYC rearrangement defines Burkitt lymphoma but is not a dosing gate (Standard Guidelines (NCCN), B-cell Lymphomas v4.2026, CD20 confirmation lines 253 to 254, 566)."
+  },
+  "treatmentSetting": "primary therapy for previously untreated Burkitt lymphoma",
+  "treatmentIntent": ["curative"],
+  "lineOfTherapy": "first-line (primary) therapy",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "previously untreated CD20-positive Burkitt lymphoma", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "locator": "v4.2026, Burkitt Lymphoma BURK-1 (lines 99, 552); DA-EPOCH + Rituximab for 6 cycles + intensive IT methotrexate (line 562); DeVita lines 268861 to 268864 and 269569" }
+  ],
+  "regimen": {
+    "drugs": [
+      { "id": "etoposide", "name": "Etoposide", "basis": "bsa", "dosePerUnit": "VERIFY", "unit": "mg/m2", "days": [1, 2, 3, 4], "route": "IV continuous infusion", "infusionDuration": "continuous infusion over 96 hr (days 1 to 4)", "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY for EPOCH-specific value: DeVita gives only a generic etoposide range of 50 to 100 mg/m2/day (line 14891).", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. DA-EPOCH etoposide (conventionally 50 mg/m2/day continuous infusion, days 1 to 4) is not printed as an EPOCH-specific value in the extracts. Verify before activation." },
+      { "id": "prednisone", "name": "Prednisone", "basis": "bsa", "dosePerUnit": "VERIFY", "unit": "mg/m2", "days": [1, 2, 3, 4, 5], "route": "PO", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: EPOCH prednisone dose not printed in the provided extracts.", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. DA-EPOCH prednisone (conventionally 60 mg/m2 PO twice daily, days 1 to 5) is not printed in the extracts. Verify before activation." },
+      { "id": "vincristine", "name": "vinCRIStine", "basis": "flat", "dosePerUnit": 0.4, "unit": "mg", "days": [1, 2, 3, 4], "route": "IV continuous infusion", "infusionDuration": "continuous infusion over 96 hr (days 1 to 4)", "caps": { "perDose": 2 }, "roundingRule": null, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Table 10.1 (antineoplastic drug reference), Vincristine entry, lines 20760 to 20761: 0.4 mg/d continuous infusion for 4 d.", "evidenceStatus": "unknown" }, "notes": "Source: DeVita 12th ed., Table 10.1, lines 20760 to 20761: vincristine 0.4 mg/day by continuous infusion for 4 days (EPOCH schedule). The table prints 0.4 mg/day WITHOUT /m2, so basis is encoded flat per the literal source; the widely cited DA-EPOCH value is 0.4 mg/m2/day, so the BSA-vs-flat basis should be verified. A 2 mg per-dose ceiling is recorded per the ONCQIS vincristine safety invariant and is non-binding at this 0.4 mg/day continuous-infusion dose (the classic 2 mg cap targets the weekly IV bolus schedule). ISMP tall-man vinCRIStine." },
+      { "id": "cyclophosphamide", "name": "Cyclophosphamide", "basis": "bsa", "dosePerUnit": "VERIFY", "unit": "mg/m2", "days": [5], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY: EPOCH cyclophosphamide dose not printed in the provided extracts.", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. DA-EPOCH cyclophosphamide (conventionally 750 mg/m2 IV on day 5, dose-adjusted) is not printed in the extracts. Verify before activation." },
+      { "id": "doxorubicin", "name": "DOXOrubicin", "basis": "bsa", "dosePerUnit": "VERIFY", "unit": "mg/m2", "days": [1, 2, 3, 4], "route": "IV continuous infusion", "infusionDuration": "continuous infusion over 96 hr (days 1 to 4)", "caps": { "perDose": null, "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" } }, "roundingRule": { "increment": 5 }, "modificationRules": [], "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "VERIFY for EPOCH-specific value: DeVita gives only a generic doxorubicin range of 30 to 75 mg/m2 q3wk (lines 19634 to 19635).", "evidenceStatus": "unknown" }, "notes": "Dose set to VERIFY. DA-EPOCH doxorubicin (conventionally 10 mg/m2/day continuous infusion, days 1 to 4) is not printed in the extracts. Anthracycline: track cumulative lifetime dose (warn 450, hard 550 mg/m2). ISMP tall-man DOXOrubicin. Verify before activation." },
+      { "id": "rituximab", "name": "Rituximab", "basis": "bsa", "dosePerUnit": 375, "unit": "mg/m2", "days": [1], "route": "IV", "infusionDuration": null, "caps": { "perDose": null }, "roundingRule": { "increment": 50 }, "modificationRules": [], "provenance": { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "Harrison line 385777 (rituximab 375 mg/m2 once a week for 4 weeks) and line 120283 (usual dose 375 mg/m2 on day -1 before chemotherapy); DeVita line 323457; DA-EPOCH + rituximab if CD20+ line 269569.", "evidenceStatus": "unknown" }, "notes": "Source: Harrison lines 385777 and 120283; DeVita lines 323457 and 269569. Rituximab 375 mg/m2 IV on day 1; added to DA-EPOCH if the tumor is CD20-positive. Infusion premedication and HBV screening required." }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": 6,
+    "premedications": [
+      { "name": "Rituximab infusion premedication", "notes": "acetaminophen + antihistamine +/- corticosteroid before rituximab." },
+      { "name": "Tumor lysis syndrome prophylaxis", "notes": "aggressive IV hydration plus allopurinol or rasburicase before cycle 1 (Burkitt is high TLS risk)." }
+    ],
+    "supportiveCare": [
+      "CNS prophylaxis is mandatory: intrathecal methotrexate (and/or cytarabine), commonly 4 to 8 doses during or after treatment; intensive IT methotrexate for symptomatic/active CNS disease (Standard Guidelines (NCCN), B-cell Lymphomas v4.2026, lines 556, 562, 4030).",
+      "Tumor lysis syndrome prophylaxis: consider TLS prophylaxis (NHODG-B) with hydration and allopurinol or rasburicase; Burkitt is among the highest TLS-risk lymphomas (line 1149).",
+      "G-CSF: required as part of dose-adjusted EPOCH.",
+      "HBV screening and reactivation prophylaxis before anti-CD20 (rituximab)."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before each cycle and to guide dose adjustment",
+    "tumor lysis labs (potassium, phosphate, calcium, uric acid, creatinine) frequently during cycle 1",
+    "cardiac assessment / LVEF (anthracycline) at baseline",
+    "cumulative anthracycline dose tracking (warn 450, hard 550 mg/m2)",
+    "CSF cytology/flow at baseline and with each intrathecal dose"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "tumor lysis labs", "prior-cycle nadir"],
+  "doseModificationRules": [
+    { "condition": "prior-cycle neutrophil/platelet nadir", "action": "dose-adjust", "text": "Adjust doses of etoposide, doxorubicin and cyclophosphamide up or down each cycle per the DA-EPOCH nadir-based algorithm; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "DA-EPOCH-R for Burkitt lines 268861 to 268864, 269569; vincristine continuous-infusion Table 10.1 lines 20760 to 20761; generic etoposide (line 14891) and doxorubicin (lines 19634 to 19635) ranges; rituximab 375 (line 323457)", "evidenceStatus": "unknown" },
+      { "layer": "core", "source": "Harrison's Principles of Internal Medicine", "version": "21st ed", "date": null, "locator": "Burkitt DA-EPOCH-R line 122390; rituximab 375 mg/m2 lines 385777, 120283", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), B-cell Lymphomas", "version": "4.2026", "date": "2026-05-20", "locator": "Burkitt Lymphoma BURK-1 (lines 99, 552); DA-EPOCH + Rituximab 6 cycles + intensive IT methotrexate (line 562); IT methotrexate for CSF involvement (line 556); CNS prophylaxis options IT MTX/cytarabine 4 to 8 doses (line 4030); tumor lysis prophylaxis NHODG-B (line 1149)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].dosePerUnit", "regimen.drugs[2].basis", "regimen.drugs[3].dosePerUnit", "regimen.drugs[4].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for DA-EPOCH-R in Burkitt lymphoma with mandatory CNS and tumor lysis prophylaxis (#79). Two chemotherapy components are dose-grounded: vincristine 0.4 mg/day by continuous infusion for 4 days (DeVita Table 10.1, lines 20760 to 20761; the table omits /m2 so basis is encoded flat and should be verified; a non-binding 2 mg per-dose ceiling recorded per the ONCQIS safety invariant) and rituximab 375 mg/m2 day 1, added if CD20-positive (Harrison lines 385777 and 120283; DeVita lines 323457, 269569). Four doses are set to VERIFY because the DA-EPOCH-R starting-dose table is not printed in the provided extracts: etoposide (conventionally 50 mg/m2/day CIV), prednisone (conventionally 60 mg/m2 twice daily), cyclophosphamide (conventionally 750 mg/m2 day 5) and doxorubicin (conventionally 10 mg/m2/day CIV); DeVita gives only generic etoposide (line 14891) and doxorubicin (lines 19634 to 19635) ranges. Regimen role, the mandatory intrathecal methotrexate CNS prophylaxis and tumor lysis prophylaxis are grounded to Standard Guidelines (NCCN), B-cell Lymphomas v4.2026 (BURK-1 lines 99/552; lines 556, 562, 1149, 4030). Burkitt lymphoma carries the highest tumor-lysis risk; hydration plus allopurinol or rasburicase is required. ISMP tall-man applied (vinCRIStine, DOXOrubicin); anthracycline cumulative cap 450/550 mg/m2; mandatory G-CSF. This remains a StewardMD Standard Protocol; no endorsement implied." }

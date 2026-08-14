@@ -1,0 +1,126 @@
+{
+  "id": "heme-mm-dara-vrd",
+  "name": "Daratumumab + Bortezomib + Lenalidomide + Dexamethasone (Dara-VRd)",
+  "disease": "Multiple myeloma",
+  "diseaseId": "plasma_cell_disorders",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "stage": [],
+  "biomarkers": {
+    "note": "Dara-VRd is a four-drug antibody/proteasome-inhibitor/IMiD regimen and is not biomarker-restricted for eligibility. Cytogenetic risk (FISH for t(4;14), t(14;16), t(14;20), del(17p)/TP53, gain/amp 1q) informs risk stratification (R-ISS/R2-ISS), not access to the regimen. Type and screen before starting daratumumab (serologic interference). Per Standard Guidelines (NCCN), Multiple Myeloma, v5.2026."
+  },
+  "treatmentSetting": "primary induction (and consolidation) therapy for newly diagnosed, transplant-eligible (HCT-candidate) multiple myeloma",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line (primary) therapy for newly diagnosed transplant-eligible multiple myeloma (patients <80 years who are not frail); Preferred, category 1 (PERSEUS, GRIFFIN)",
+  "eligibilityCriteria": [
+    { "criterion": "diagnosis", "requirement": "newly diagnosed symptomatic multiple myeloma, transplant-eligible / HCT candidate, generally <80 years and not frail", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MYEL-G (Primary Therapy for HCT Candidates): Daratumumab/Bortezomib/Lenalidomide/Dexamethasone, Preferred, category 1" },
+    { "criterion": "serology", "requirement": "type and screen before first daratumumab dose (interferes with indirect antiglobulin testing)", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "locator": "v5.2026, MS (perform type and screen before using daratumumab or isatuximab-irfc)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "daratumumab",
+        "name": "Daratumumab",
+        "basis": "flat",
+        "dosePerUnit": 1800,
+        "unit": "mg",
+        "days": [1, 8, 15],
+        "route": "SC",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6 (Common Treatment Regimens in Multiple Myeloma), p.1520, daratumumab dosing line 286349 (Daratumumab 1,800 mg SC (or 16 mg/kg IV) weekly x 8 weeks, then every 2 weeks for 4 months, then once monthly)", "evidenceStatus": "unknown" },
+        "notes": "DOSE sourced: DeVita 12th ed., Table 74.6, p.1520 (line 286349): daratumumab 1,800 mg SC (or 16 mg/kg IV). The daratumumab administration cadence (weekly induction, then every 2 weeks, then monthly) is the printed anti-CD38 schedule; days [1, 8, 15] represent weekly dosing on the modeled cycle. SCHEDULE CAVEAT: DeVita Table 74.6 does not print Dara-VRd as a single regimen row, so the precise per-cycle mapping of daratumumab within the pivotal Dara-VRd studies (PERSEUS, GRIFFIN) is captured in evidence.divergence for clinical verification; the DOSE itself is sourced. Give infusion/injection-reaction premedication; perform type and screen before the first dose."
+      },
+      {
+        "id": "bortezomib",
+        "name": "Bortezomib",
+        "basis": "bsa",
+        "dosePerUnit": 1.3,
+        "unit": "mg/m2",
+        "days": [1, 8, 15],
+        "route": "SC",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, VRd entry, line 286317 (Bortezomib 1.3 mg/m2 SC on days 1, 8, and 15)", "evidenceStatus": "unknown" },
+        "notes": "DOSE sourced: DeVita 12th ed., Table 74.6, p.1520 (line 286317), VRd backbone: bortezomib 1.3 mg/m2 SC once weekly on days 1, 8, 15. SCHEDULE CAVEAT: the pivotal Dara-VRd studies used a bortezomib cadence tied to a 28-day induction cycle that is not reproduced as a single printed Dara-VRd row; recorded in evidence.divergence for verification. SC route reduces peripheral neuropathy; give VZV antiviral prophylaxis."
+      },
+      {
+        "id": "lenalidomide",
+        "name": "Lenalidomide",
+        "basis": "flat",
+        "dosePerUnit": 25,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, VRd entry, line 286318 (Lenalidomide 25 mg PO on days 1-14)", "evidenceStatus": "unknown" },
+        "notes": "DOSE sourced: DeVita 12th ed., Table 74.6, p.1520 (line 286318), VRd backbone: lenalidomide 25 mg PO days 1 to 14. SCHEDULE CAVEAT (days 1 to 14 vs days 1 to 21 in a 28-day Dara-VRd cycle) recorded in evidence.divergence. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen)."
+      },
+      {
+        "id": "dexamethasone",
+        "name": "Dexamethasone",
+        "basis": "flat",
+        "dosePerUnit": 40,
+        "unit": "mg",
+        "days": [1, 8, 15],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "modificationRules": [],
+        "provenance": { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74, Table 74.6, p.1520, VRd entry, line 286319 (Dexamethasone 20 mg on day of and day after bortezomib, or 40 mg on days 1, 8, 15, and 22)", "evidenceStatus": "unknown" },
+        "notes": "DOSE sourced: DeVita 12th ed., Table 74.6, p.1520 (line 286319), VRd backbone: dexamethasone 40 mg weekly (source also lists 20 mg on the day of and the day after bortezomib). Modeled as 40 mg on the in-cycle bortezomib days; also serves as daratumumab infusion premedication. Dose taken exactly as the source prints it."
+      }
+    ],
+    "cycleLengthDays": 21,
+    "cycles": null,
+    "premedications": [
+      { "name": "Daratumumab infusion/injection-reaction prophylaxis", "notes": "corticosteroid (the regimen dexamethasone serves this role), antihistamine and antipyretic before daratumumab." },
+      { "name": "Herpes zoster (VZV) antiviral prophylaxis", "notes": "proteasome-inhibitor-associated VZV reactivation prophylaxis (e.g., acyclovir/valacyclovir)." }
+    ],
+    "supportiveCare": [
+      "Daratumumab: infusion/injection-reaction monitoring; type and screen before first dose; VZV and Pneumocystis prophylaxis per practice.",
+      "Bortezomib: peripheral neuropathy assessment each visit (reduce/hold for grade 2 or higher); VZV antiviral prophylaxis.",
+      "Lenalidomide: VTE thromboprophylaxis and REMS-program dispensing (teratogen); adjust for renal impairment.",
+      "Antiemetics: low to moderate emetic risk; prophylaxis per emetogenicity tier."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes (lenalidomide clearance)",
+    "peripheral neuropathy assessment each visit (bortezomib)",
+    "glucose and blood pressure (dexamethasone); infection surveillance (anti-CD38 antibody)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "peripheral neuropathy status", "type and screen (daratumumab)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "grade 2 or higher peripheral neuropathy", "drug": "bortezomib", "action": "reduce/hold", "text": "Reduce dose or change schedule for grade 2 or higher bortezomib peripheral neuropathy per labeling; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "Chapter 74 (Plasma Cell Neoplasms), Table 74.6, p.1520: VRd backbone (lines 286317 to 286319) and daratumumab dosing (line 286349)", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Multiple Myeloma", "version": "5.2026", "date": null, "locator": "MYEL-G (Primary Therapy for HCT Candidates): Daratumumab/Bortezomib/Lenalidomide/Dexamethasone, Preferred, category 1; MS narrative supporting Dara-VRd (PERSEUS, GRIFFIN)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": [
+      {
+        "field": "regimen.schedule",
+        "sources": [
+          { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "No single Dara-VRd row; doses assembled from the VRd row (bortezomib 1.3 mg/m2 SC days 1,8,15; lenalidomide 25 mg days 1-14; dexamethasone 40 mg weekly; 21-day cycle) plus the Table 74.6 daratumumab dosing (1,800 mg SC or 16 mg/kg IV, weekly then q2wk then monthly)" },
+          { "name": "Standard Guidelines (NCCN) Multiple Myeloma", "version": "5.2026", "value": "Dara-VRd Preferred category 1 for HCT candidates; pivotal PERSEUS/GRIFFIN studies used a 28-day induction cycle with a distinct bortezomib cadence and lenalidomide days 1-21, followed by autologous HCT, consolidation and daratumumab/lenalidomide maintenance" }
+        ],
+        "note": "Every DOSE is sourced to DeVita Table 74.6, but the integrated Dara-VRd per-cycle schedule and cycle length (28-day induction, bortezomib cadence, lenalidomide days 1-21, induction/consolidation/maintenance phasing) are NOT printed as a single source row. The exact schedule must be verified against the pivotal-trial protocol before this draft can advance beyond DRAFT.",
+        "resolution": "clinical-review-required"
+      }
+    ]
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.cycleLengthDays"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for Dara-VRd (daratumumab + bortezomib + lenalidomide + dexamethasone) in newly diagnosed transplant-eligible multiple myeloma (#82). Every DOSE is sourced to DeVita 12th ed., Chapter 74, Table 74.6 (p.1520): the VRd backbone (bortezomib 1.3 mg/m2 SC days 1,8,15 line 286317; lenalidomide 25 mg PO days 1-14 line 286318; dexamethasone 40 mg weekly line 286319) plus daratumumab 1,800 mg SC or 16 mg/kg IV (line 286349). Preferred, category 1 status for HCT candidates is sourced to Standard Guidelines (NCCN), Multiple Myeloma v5.2026, MYEL-G (PERSEUS, GRIFFIN). Because Table 74.6 does not print Dara-VRd as a single regimen row, the integrated per-cycle schedule and cycle length (the pivotal trials used a 28-day induction cycle with a distinct bortezomib cadence and lenalidomide days 1-21, then autologous HCT, consolidation and daratumumab/lenalidomide maintenance) are recorded in evidence.divergence (clinical-review-required) rather than invented; the modeled cycle uses the sourced VRd backbone schedule. No dose field is set to VERIFY. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

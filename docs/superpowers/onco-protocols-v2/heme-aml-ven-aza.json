@@ -1,0 +1,84 @@
+{
+  "id": "heme-aml-ven-aza",
+  "name": "Azacitidine + Venetoclax (AML, lower-intensity)",
+  "disease": "Acute myeloid leukemia (AML)",
+  "diseaseId": "acute_myeloid_leukemia",
+  "histology": "VERIFY",
+  "stage": [],
+  "biomarkers": {
+    "note": "Not biomarker-restricted. Azacitidine plus venetoclax is the category 1 lower-intensity option for newly diagnosed AML in patients ineligible for or declining intensive induction. IDH1, IDH2 and FLT3 status guide alternative lower-intensity options (ivosidenib, enasidenib, gilteritinib) but are not required for this regimen. Per Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-4 and AML-E 4 of 14."
+  },
+  "treatmentSetting": "lower-intensity therapy for AML (intensive induction ineligible or declines)",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "first-line for newly diagnosed AML in patients not eligible for intensive induction (category 1)",
+  "eligibilityCriteria": [
+    { "criterion": "fitness", "requirement": "not a candidate for intensive induction chemotherapy, or declines it (typically older or unfit patients)", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "locator": "v5.2026, AML-4 (Lower Intensity Therapy) and AML-E 4 of 14" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "azacitidine",
+        "name": "Azacitidine",
+        "basis": "bsa",
+        "dosePerUnit": 75,
+        "unit": "mg/m2",
+        "days": [1, 2, 3, 4, 5, 6, 7],
+        "route": "SC or IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 4 of 14 (Lower Intensity Therapy, Azacitidine + venetoclax), regimen line", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 4 of 14. Azacitidine 75 mg/m2 SC or IV on days 1 to 7 of each 28-day cycle. Hypomethylating agent; expect myelosuppression."
+      },
+      {
+        "id": "venetoclax",
+        "name": "Venetoclax",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": null, "locator": "AML-E 4 of 14 (Azacitidine + venetoclax regimen line); ramp-up and TLS measures on AML-J 2 of 4 (Principles of Venetoclax Use With HMA or LDAC)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026, AML-E 4 of 14 and AML-J 2 of 4. Venetoclax PO once daily with a mandatory cycle 1 intrapatient dose ramp: 100 mg on day 1, 200 mg on day 2, then 400 mg on day 3 and beyond (steady-state daily dose 400 mg; dosePerUnit is set to VERIFY until the 3-day ramp is structurally encoded, because a flat 400 mg day-1 dose would be a fatal TLS risk). The ramp and tumor lysis syndrome (TLS) measures are specified on AML-J 2 of 4. Days 1 to 28 represents continuous once-daily dosing across the 28-day cycle; venetoclax duration may be shortened in later cycles for recurrent cytopenias (AML-J). Dose adjustment is required with strong or moderate CYP3A4 inhibitors (AML-J)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "TLS prophylaxis for venetoclax ramp-up (AML-J 2 of 4): reduce WBC to below 25 x 10^9/L with hydroxyurea or leukapheresis before starting; hydration; allopurinol or another uric-acid-lowering agent until TLS risk has passed; inpatient monitoring is strongly recommended during the first cycle through dose escalation; monitor blood chemistries every 6 to 8 hours after each dose increase.",
+      "Azacitidine and venetoclax are both myelosuppressive: monitor CBC and support with transfusion and infection prophylaxis per institutional practice.",
+      "Venetoclax has clinically important interactions with strong or moderate CYP3A4 inhibitors and may require dose adjustment (AML-J).",
+      "Continue therapy while the disease shows clinical improvement (CR or CR with incomplete count recovery); cycles are not fixed (cycles null)."
+    ]
+  },
+  "monitoring": [
+    "CBC with differential before and during each cycle",
+    "blood chemistries (electrolytes, uric acid, phosphate, creatinine) every 6 to 8 hours during cycle 1 venetoclax ramp-up for TLS, then at least daily until TLS risk passes",
+    "bone marrow assessment for response (response may not be evident before 3 to 4 cycles of a hypomethylating agent)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "electrolytes/uric acid (TLS)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "recurrent grade 3 to 4 cytopenias in remission", "drug": "venetoclax", "action": "shorten duration", "text": "Consider reducing venetoclax duration in subsequent cycles (for example 21, 14, 7 or 5 days) and take breaks between cycles for cytopenias with disease in remission (AML-J). Physician decides." },
+    { "condition": "concurrent strong or moderate CYP3A4 inhibitor", "drug": "venetoclax", "action": "reduce dose", "text": "Reduce venetoclax dose per venetoclax prescribing information and AML-J when a strong or moderate CYP3A4 inhibitor is co-administered." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Acute Myeloid Leukemia", "version": "5.2026", "date": "2026-07-15", "locator": "AML-4 (Lower Intensity Therapy, intensive induction ineligible or declines); AML-E 4 of 14 (Azacitidine + venetoclax: azacitidine 75 mg/m2 SC or IV days 1 to 7 of each 28-day cycle; venetoclax PO once daily 100 mg day 1, 200 mg day 2, 400 mg day 3 and beyond); AML-J 2 of 4 (Principles of Venetoclax Use With HMA or LDAC: ramp-up and TLS measures); category 1 designation on AML-4", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent", "regimen.drugs[1].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for lower-intensity AML in patients ineligible for or declining intensive induction (unfit or elderly). Complements the existing intensive-induction protocols (aml-7-plus-3-induction, aml-hidac-idac-consolidation, apl-atra-ato) rather than replacing them. Both doses are grounded to Standard Guidelines (NCCN), Acute Myeloid Leukemia v5.2026: azacitidine 75 mg/m2 SC or IV days 1 to 7 of each 28-day cycle and venetoclax PO once daily with the cycle 1 ramp (100 mg day 1, 200 mg day 2, 400 mg day 3 and beyond) on AML-E 4 of 14; the ramp and TLS prophylaxis are on AML-J 2 of 4. Because a flat 400 mg day-1 dose would misrepresent the mandatory 3-day ramp (a fatal TLS risk), the venetoclax dosePerUnit is set to VERIFY and listed in verifyFields until the ramp is structurally encoded; azacitidine 75 mg/m2 stays grounded. histology is set to VERIFY (the dosing page does not establish a specific morphologic subtype beyond AML) and treatmentIntent is VERIFY (the guideline does not label curative versus palliative intent for lower-intensity therapy). Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

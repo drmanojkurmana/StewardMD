@@ -1,0 +1,69 @@
+{
+  "id": "heme-cml-nilotinib",
+  "name": "Nilotinib (CML, chronic phase, first-line)",
+  "disease": "Chronic myeloid leukemia (CML)",
+  "diseaseId": "chronic_myeloid_leukemia",
+  "histology": "VERIFY",
+  "stage": ["chronic phase (CP-CML)"],
+  "biomarkers": {
+    "BCR_ABL1": "positive",
+    "note": "CML is defined by the BCR::ABL1 fusion (Philadelphia chromosome); confirm Ph-positive or BCR::ABL1-positive by qPCR at diagnosis. A T315I kinase-domain mutation confers resistance to nilotinib (and to imatinib, dasatinib and bosutinib); ponatinib or asciminib is the treatment option for T315I. Per Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027."
+  },
+  "treatmentSetting": "chronic phase, first-line",
+  "treatmentIntent": ["VERIFY"],
+  "lineOfTherapy": "first-line for newly diagnosed chronic-phase CML (a second-generation TKI)",
+  "eligibilityCriteria": [
+    { "criterion": "biomarker", "requirement": "BCR::ABL1-positive (Ph-positive) chronic-phase CML confirmed by qPCR", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "locator": "v2.2027, CML workup (Ph-positive or BCR::ABL1 positive by qPCR)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "nilotinib",
+        "name": "Nilotinib",
+        "basis": "flat",
+        "dosePerUnit": 300,
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "version": "2.2027", "date": null, "locator": "MS-27 (recommended starting dose of nilotinib is 300 mg twice daily for newly diagnosed CP-CML)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027, MS-27. Nilotinib 300 mg PO twice daily for newly diagnosed CP-CML (dosePerUnit 300 mg is the single-administration dose given twice daily; total 600 mg/day). Days 1 to 28 represents continuous daily dosing. Take on an empty stomach (no food 2 hours before and 1 hour after). Avoid coadministration with proton-pump inhibitors and H2 blockers. Continue until loss of response, progression or intolerance."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": null,
+    "premedications": [],
+    "supportiveCare": [
+      "Nilotinib prolongs the QT interval and carries a boxed warning for sudden death: obtain a baseline ECG, correct hypokalemia and hypomagnesemia before starting, repeat ECG about 7 days after initiation and periodically, and avoid concurrent QT-prolonging drugs and strong CYP3A4 inhibitors.",
+      "Administer on an empty stomach; avoid proton-pump inhibitors and H2 blockers (reduced absorption).",
+      "Monitor BCR::ABL1 (IS) by qPCR at milestones; if resistance, test for kinase-domain mutations (T315I directs ponatinib or asciminib)."
+    ]
+  },
+  "monitoring": [
+    "ECG/QTc at baseline, about 7 days after starting, and periodically; serum potassium and magnesium",
+    "CBC with differential at baseline and periodically",
+    "BCR::ABL1 (IS) by qPCR at approximately 3, 6 and 12 months and periodically thereafter (CML-G)",
+    "fasting glucose/lipids and vascular risk (nilotinib is associated with arterial occlusive events)"
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "QTc/electrolytes (K, Mg)", "BCR::ABL1 status"],
+  "doseModificationRules": [
+    { "condition": "QTc prolongation or grade 3 to 4 toxicity", "drug": "nilotinib", "action": "hold/reduce", "text": "Interrupt for QT prolongation or significant toxicity, correct electrolytes, and resume at a reduced dose per prescribing information. Physician decides." }
+  ],
+  "evidence": {
+    "core": [],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), Chronic Myeloid Leukemia", "version": "2.2027", "date": "2026-07-10", "locator": "MS-27 (recommended starting dose of nilotinib is 300 mg twice daily for newly diagnosed CP-CML; 400 mg twice daily in later-line/resistant setting); PPI/H2 blocker avoidance (CML-D drug interactions); T315I/ponatinib option (manuscript and CML footnote)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["histology", "treatmentIntent"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for first-line nilotinib (a second-generation TKI) in chronic-phase, BCR::ABL1-positive CML. Dose grounded to Standard Guidelines (NCCN), Chronic Myeloid Leukemia v2.2027, MS-27: nilotinib 300 mg PO twice daily for newly diagnosed CP-CML. Modeled as continuous twice-daily oral therapy (cycleLengthDays 28 for reporting, cycles null, days 1 to 28 = continuous; dosePerUnit 300 mg per administration). QTc, electrolyte and vascular monitoring are emphasized because nilotinib prolongs QT (boxed warning) and is associated with arterial occlusive events. BCR::ABL1 is the diagnostic and monitoring biomarker; a T315I mutation directs ponatinib or asciminib. histology and treatmentIntent are VERIFY. Core textbook cross-reference is pending; grounding is guideline-layer only. This remains a StewardMD Standard Protocol; no endorsement implied."
+}

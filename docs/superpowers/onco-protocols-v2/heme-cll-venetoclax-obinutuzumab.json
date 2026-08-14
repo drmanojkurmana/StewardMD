@@ -1,0 +1,93 @@
+{
+  "id": "heme-cll-venetoclax-obinutuzumab",
+  "name": "Venetoclax + Obinutuzumab (VenO, fixed duration, CLL/SLL)",
+  "disease": "Chronic lymphocytic leukemia / small lymphocytic lymphoma (CLL/SLL)",
+  "diseaseId": "chronic_lymphocytic_leukemia",
+  "histology": "chronic lymphocytic leukemia / small lymphocytic lymphoma",
+  "stage": [],
+  "biomarkers": {
+    "TP53": "test at each line of therapy",
+    "del17p": "test at each line of therapy",
+    "IGHV": "tested",
+    "note": "Test for del(17p) and TP53 mutation (and IGHV mutation status) before each line of therapy. Fixed-duration Venetoclax + Obinutuzumab (VenO) is a Preferred, category 1 first-line option for CLL/SLL WITHOUT del(17p)/TP53 mutation and a Preferred option for CLL/SLL WITH del(17p)/TP53 mutation; chemoimmunotherapy is inferior and should be avoided in del(17p)/TP53-aberrant disease. Per Standard Guidelines (NCCN), CLL/SLL, v2.2026, CSLL-4 (VenO based on the CLL14 study)."
+  },
+  "treatmentSetting": "first-line (fixed-duration) and second-line or subsequent therapy for CLL/SLL requiring treatment",
+  "treatmentIntent": ["palliative"],
+  "lineOfTherapy": "first-line, fixed-duration (Preferred, category 1 for CLL/SLL without del(17p)/TP53; Preferred for del(17p)/TP53-aberrant disease); also Preferred in the second-line or subsequent setting",
+  "eligibilityCriteria": [
+    { "criterion": "indication", "requirement": "CLL/SLL meeting iwCLL indications for treatment (not asymptomatic early-stage disease)", "source": "Standard Guidelines (NCCN), CLL/SLL", "locator": "v2.2026, CSLL-3 (indications for treatment) and CSLL-4 (First-Line Therapy)" },
+    { "criterion": "tumorLysisRisk", "requirement": "assess tumor lysis syndrome (TLS) risk (tumor burden, renal function) before venetoclax ramp-up; TLS prophylaxis and the 5-week dose ramp are mandatory", "source": "Standard Guidelines (NCCN), CLL/SLL", "locator": "v2.2026, MS (venetoclax initiation at 20 mg for 1 week and step-wise ramp-up over 5 weeks to 400 mg daily with TLS prophylaxis)" }
+  ],
+  "regimen": {
+    "drugs": [
+      {
+        "id": "venetoclax",
+        "name": "Venetoclax",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+        "route": "PO",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), CLL/SLL", "version": "2.2026", "date": "2025-12-22", "locator": "MS (Initiation at lower dose (20 mg for 1 week) and gradual step-wise ramp-up over 5 weeks to target dose (400 mg daily) along with TLS prophylaxis)", "evidenceStatus": "current" },
+        "notes": "Source: Standard Guidelines (NCCN), CLL/SLL v2.2026, MS narrative. Venetoclax is initiated at 20 mg once daily for 1 week, then ramped step-wise over 5 weeks to the target dose of 400 mg PO once daily, WITH tumor lysis syndrome (TLS) prophylaxis (hydration, uric-acid-lowering therapy, lab monitoring). the 400 mg target/maintenance dose is SOURCED, but dosePerUnit is set to VERIFY because a flat 400 cannot encode the mandatory 5-week ramp (20/50/100/200/400); the 20 mg starting dose and 5-week ramp are SOURCED. The intermediate weekly steps (commonly 50, 100, 200 mg) are NOT printed in the provided source and must be VERIFY-confirmed against the ramp-up schedule/label. Days 1 to 28 represent continuous daily dosing at target; the ramp occurs at initiation."
+      },
+      {
+        "id": "obinutuzumab",
+        "name": "Obinutuzumab",
+        "basis": "flat",
+        "dosePerUnit": "VERIFY",
+        "unit": "mg",
+        "days": [],
+        "route": "IV",
+        "infusionDuration": null,
+        "caps": { "perDose": null },
+        "roundingRule": null,
+        "modificationRules": [],
+        "provenance": { "layer": "guideline", "source": "Standard Guidelines (NCCN), CLL/SLL", "version": "2.2026", "date": "2025-12-22", "locator": "CSLL-4 (First-Line Therapy, Preferred: Venetoclax + Obinutuzumab (fixed duration); CLL14)", "evidenceStatus": "current" },
+        "notes": "Obinutuzumab is the anti-CD20 antibody partner in the fixed-duration VenO regimen (CLL14). DOSE AND SCHEDULE ARE VERIFY: the provided source names the regimen but does not print the obinutuzumab dose or per-cycle schedule. The commonly cited CLL14 schedule (100 mg IV day 1, 900 mg day 2 (or 1,000 mg split), 1,000 mg days 8 and 15 of cycle 1, then 1,000 mg day 1 of cycles 2 to 6, on 28-day cycles) must be VERIFY-confirmed against a cited source before use and is not asserted here. Give high-dose glucocorticoid and antihistamine/antipyretic premedication for infusion-related reactions (obinutuzumab first-infusion reactions are common)."
+      }
+    ],
+    "cycleLengthDays": 28,
+    "cycles": 12,
+    "premedications": [
+      { "name": "Obinutuzumab infusion-reaction prophylaxis", "notes": "glucocorticoid, antihistamine and antipyretic before obinutuzumab (high-dose methylprednisolone, e.g. 1,000 mg, has been used to reduce first-infusion reactions per NCCN)." },
+      { "name": "Tumor lysis syndrome prophylaxis", "notes": "hydration and uric-acid-lowering therapy (allopurinol or rasburicase for high risk) with laboratory monitoring during the venetoclax ramp-up." }
+    ],
+    "supportiveCare": [
+      "Venetoclax: mandatory TLS risk stratification, 5-week dose ramp-up starting at 20 mg, TLS prophylaxis (hydration, uric-acid-lowering therapy) and intensive lab monitoring during ramp.",
+      "Obinutuzumab: premedicate for infusion-related reactions (especially first infusion); monitor for hepatitis B reactivation (screen before starting) and neutropenia.",
+      "VenO is a FIXED-DURATION regimen: venetoclax is 1 year (12 cycles) with obinutuzumab given for the first 6 of the 12 cycles (DeVita approximately line 281145). The obinutuzumab per-drug dose and per-cycle schedule are not printed in the provided source (VERIFY).",
+      "Infection prophylaxis per institutional practice."
+    ]
+  },
+  "monitoring": [
+    "TLS labs (potassium, phosphate, calcium, uric acid, creatinine) intensively during venetoclax ramp-up",
+    "CBC with differential and platelets (neutropenia)",
+    "hepatitis B serology before obinutuzumab; reactivation surveillance",
+    "response and MRD assessment per iwCLL criteria"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal/TLS labs", "hepatitis B status", "del(17p)/TP53 status", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "laboratory or clinical tumor lysis syndrome during ramp-up", "drug": "venetoclax", "action": "hold", "text": "Hold venetoclax, treat TLS, and resume the ramp at the same or a lower step per labeling after resolution; clinical review." }
+  ],
+  "evidence": {
+    "core": [
+      { "layer": "core", "source": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.", "version": "12th ed", "date": null, "locator": "venetoclax is a BCL2 inhibitor and obinutuzumab a type II anti-CD20 antibody (CLL chapters); CLL-specific VenO doses not printed in the provided extract", "evidenceStatus": "unknown" }
+    ],
+    "guideline": [
+      { "layer": "guideline", "source": "Standard Guidelines (NCCN), CLL/SLL", "version": "2.2026", "date": "2025-12-22", "locator": "CSLL-4 (First-Line Therapy, Preferred: Venetoclax + Obinutuzumab (fixed duration); category 1 for CLL/SLL without del(17p)/TP53, Preferred for del(17p)/TP53 mutation; CLL14); CSLL-D 2 of 5 (Second-Line or Subsequent, Preferred: Venetoclax + Obinutuzumab); MS (venetoclax 20 mg initiation, 5-week ramp to 400 mg daily with TLS prophylaxis)", "evidenceStatus": "current" }
+    ],
+    "institutional": [],
+    "divergence": []
+  },
+  "protocolVersion": "1.0",
+  "status": "DRAFT",
+  "clinicalApprovalStatus": null,
+  "review": { "lastReviewedAt": null, "nextReviewAt": null, "reviewInterval": null, "reviewedBy": null, "evidenceVersion": null, "reviewDue": false },
+  "verifyFields": ["regimen.drugs[0].dosePerUnit", "regimen.drugs[1].dosePerUnit"],
+  "provenanceNote": "ONCQIS Standard Protocol draft for fixed-duration Venetoclax + Obinutuzumab (VenO, CLL14) in CLL/SLL (#73). VenO is a Preferred, category 1 first-line option for CLL/SLL without del(17p)/TP53 mutation and a Preferred option for del(17p)/TP53-aberrant disease per Standard Guidelines (NCCN), CLL/SLL v2.2026, CSLL-4; chemoimmunotherapy is avoided in del(17p)/TP53 disease. The venetoclax dosing is grounded to the v2.2026 MS narrative: initiation at 20 mg once daily for 1 week, step-wise ramp over 5 weeks to the target dose of 400 mg PO once daily, with mandatory TLS prophylaxis; the intermediate weekly ramp steps (commonly 50, 100, 200 mg) are NOT printed. Because a flat 400 cannot encode the mandatory 5-week ramp (20/50/100/200/400), the venetoclax dosePerUnit is set to the literal VERIFY. The obinutuzumab dose and per-cycle schedule are NOT printed in the provided source, so obinutuzumab dosePerUnit is set to the literal VERIFY (days left empty) and the commonly cited CLL14 schedule is recorded as clinical context only, not asserted. DeVita (approximately line 281145) states fixed-duration VenO is 1 year (12 cycles) of venetoclax with 6 cycles of obinutuzumab, so regimen.cycles is closed to 12 with obinutuzumab given for the first 6 of the 12 cycles. verifyFields lists the VERIFY venetoclax and obinutuzumab doses and the protocol stays at DRAFT. This remains a StewardMD Standard Protocol; no endorsement implied."
+}
