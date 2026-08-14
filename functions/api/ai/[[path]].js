@@ -121,7 +121,7 @@ function visionModel(env) { const m = env && env.VISION_MODEL; return (typeof m 
 // in the gate block below so its prior behaviour is unchanged.
 const MODULE_FOR = {
   explain: "maik", refine: "maik", route: "maik", research: "research", verify: "maik",
-  imaging: "maik_case", correlate: "maik_case", evidence: "maik_case",
+  imaging: "maik_case", correlate: "maik_case", evidence: "maik_case", summary: "summary",
   vision: "ocr", extract: "ocr", transcribe: "stt",
 };
 function moduleLimitMsg(mod, limit) {
@@ -1306,6 +1306,20 @@ export async function onRequest(context) {
       }
       await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: mode, sources: sources });
+    }
+    if (seg === "summary") {
+      // Whole-patient timeline summary (Pro, module "summary" = 15/day). Factual overview ONLY from the
+      // notes supplied; never invents findings/dx/doses. The free tier summarises on-device (no call here).
+      const src = String(body.text || "").slice(0, 16000).trim();
+      if (!src) return json({ error: "no text" }, 400);
+      const gate = await checkQuota(env, request, "summary");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const prompt = "You are MaiK, a clinical assistant. Summarise this patient's longitudinal record for the treating doctor, using ONLY the entries below. Do NOT invent any finding, diagnosis, drug, dose or date. Be concise. Structure with short headed lines: Active problems; Course; Current medications; Pending investigations / follow-ups.\n\nRECORD (newest first):\n" + src;
+      let out;
+      try { out = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); return json({ error: "summary-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((out || "").length), status: "success" });
+      return json({ text: out, mode: "summary" });
     }
     if (seg === "extract") {
       // Voice intake (MaiK Scribe): a transcript → structured ICU fields, OR (kind:"reasoning")

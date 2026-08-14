@@ -101,11 +101,9 @@
   }
   function timelineSection(st) {
     if (usesLocal(st.source)) return clinicTimelineSection(st);   // clinic footprint (local/shared), not the GHIS visit timeline
-    if (st.source === "ghis") {                                   // hospital: crawled Opcard history footprint
-      if (st.timelineLoading && !(st.timeline || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading history…") + "</section>";
-      return clinicTimelineSection(st);
-    }
-    if (st.timelineLoading && !(st.labs || []).length && !(st.medications || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading timeline…") + "</section>";
+    // GHIS: merge the crawled Opcard consults (st.timeline) with labs + meds + imaging below, newest-first,
+    // so the timeline is never empty for a patient who has records but no prior OPD consult.
+    if (st.timelineLoading && !(st.timeline || []).length && !(st.labs || []).length && !(st.medications || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox(st.source === "ghis" ? "Loading history…" : "Loading timeline…") + "</section>";
     var tl = buildTimeline(st);
     if (!tl.length) {
       if (!st.ticketId) return "";   // nothing recorded + no history + not a queue visit -> hide
@@ -842,18 +840,45 @@
   }
   function summaryCard(s) {
     if (!s) return "";
+    var closeBtn = '<button class="oe-sum-x" data-oe-act="summarise-close" title="Close">' + ms("close") + "</button>";
+    if (s.loading) return '<section class="oe-sec oe-sum-card"><div class="oe-h3">' + ms("auto_awesome") + 'Patient overview<span class="oe-sub">Summarising…</span>' + closeBtn + '</div><div class="oe-sum-b"><div class="oe-sum-none">MaiK is summarising this patient\'s record…</div></div></section>';
+    if (s.ai) return '<section class="oe-sec oe-sum-card"><div class="oe-h3">' + ms("auto_awesome") + 'Patient overview<span class="oe-sub">by MaiK</span>' + closeBtn + '</div><div class="oe-sum-b"><div class="oe-sum-txt">' + esc(s.text).replace(/\n/g, "<br>") + '</div><div class="oe-sum-note">Summarised by MaiK (Pro). Verify against the record.</div></div></section>';
     function chips(arr) { return arr.length ? '<div class="oe-sum-chips">' + arr.map(function (x) { return '<span class="oe-sum-chip">' + esc(x) + "</span>"; }).join("") + "</div>" : '<div class="oe-sum-none">Not documented</div>'; }
-    return '<section class="oe-sec oe-sum-card"><div class="oe-h3">' + ms("auto_awesome") + "Patient overview<span class=\"oe-sub\">" + s.consults + " consult" + (s.consults === 1 ? "" : "s") + (s.range ? " &middot; " + esc(s.range) : "") + "</span>" +
-      '<button class="oe-sum-x" data-oe-act="summarise-close" title="Close">' + ms("close") + "</button></div>" +
+    return '<section class="oe-sec oe-sum-card"><div class="oe-h3">' + ms("auto_awesome") + "Patient overview<span class=\"oe-sub\">" + s.consults + " consult" + (s.consults === 1 ? "" : "s") + (s.range ? " &middot; " + esc(s.range) : "") + "</span>" + closeBtn + "</div>" +
       '<div class="oe-sum-b">' +
         '<div class="oe-sum-lbl">Active problems</div>' + chips(s.problems) +
         '<div class="oe-sum-lbl">Medications</div>' + chips(s.meds) +
         (s.latestPlan ? '<div class="oe-sum-lbl">Latest plan</div><div class="oe-sum-txt">' + esc(s.latestPlan) + "</div>" : "") +
         (s.followups.length ? '<div class="oe-sum-lbl">Follow-up</div><div class="oe-sum-txt">' + s.followups.map(esc).join("<br>") + "</div>" : "") +
-        '<div class="oe-sum-note">On-device overview from this patient\'s record. A deeper AI summary (MaiK) is a Pro feature.</div>' +
+        (s.capNote ? '<div class="oe-sum-note">' + esc(s.capNote) + "</div>" : "") +
+        '<div class="oe-sum-note">On-device overview from this patient\'s record.</div>' +
       "</div></section>";
   }
-  function summariseClinic() { st.clinicSummary = buildClinicSummary(st.timeline || []); if (!st.clinicSummary) { toast("No consults to summarise yet."); return; } paint(); }
+  // Pro: send the whole timeline to MaiK for a deeper AI summary (module "summary", 15/day cap server-side).
+  function maikSummarise(tl) {
+    var text = tl.map(function (e) { return fmtClinicDate(e.ts) + (e.by ? " (" + e.by + ")" : "") + ": " + String(e.text || "").replace(/\s*\n\s*/g, "; "); }).join("\n").slice(0, 14000);
+    var base = (typeof window !== "undefined" && window.AI_PROXY) || "/api/ai";
+    var tokP; try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    return tokP.then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t;
+      return fetch(base + "/summary", { method: "POST", headers: h, credentials: "same-origin", body: JSON.stringify({ text: text }) });
+    }).then(function (r) { return r ? r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: false, d: {} }; }) : { ok: false, d: {} }; })
+      .then(function (res) { return (res.ok && res.d.text) ? { text: res.d.text } : (res.d && res.d.reason === "module-daily" ? { over: true } : null); });
+  }
+  function summariseClinic() {
+    var tl = st.timeline || []; if (!tl.length) { toast("No consults to summarise yet."); return; }
+    var pro = false; try { pro = !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) {}
+    if (pro) {
+      st.clinicSummary = { loading: true }; paint();
+      maikSummarise(tl).then(function (r) {
+        if (r && r.text) st.clinicSummary = { ai: true, text: r.text, consults: tl.length };
+        else { st.clinicSummary = buildClinicSummary(tl); if (st.clinicSummary && r && r.over) st.clinicSummary.capNote = "Daily MaiK summary limit reached (15/day) — showing the on-device overview."; }
+        paint();
+      }, function () { st.clinicSummary = buildClinicSummary(tl); paint(); });
+      return;
+    }
+    st.clinicSummary = buildClinicSummary(tl); paint();
+  }
 
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
