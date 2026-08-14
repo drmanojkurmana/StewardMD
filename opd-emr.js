@@ -85,16 +85,32 @@
     var m = Math.floor(d / 60000); if (m < 1) return "just now"; if (m < 60) return m + "m ago";
     var h = Math.floor(m / 60); if (h < 24) return h + "h ago"; return Math.floor(h / 24) + "d ago";
   }
+  // "01-Aug-2026 10:00" / "01-Aug-2026" -> ms (best-effort; 0 if unparseable). Dashes -> spaces so Date can read it.
+  function parseTs(s) { if (!s) return 0; var t = Date.parse(String(s).replace(/-/g, " ")); return isNaN(t) ? 0 : t; }
+  // Merge THIS visit's recorded actions (encounter timeline) with the patient's existing GHIS history
+  // (labs, imaging, current meds — which have dates), newest first, so the timeline is populated even
+  // before any new action is taken.
+  function buildTimeline(st) {
+    var ev = [];
+    (st.timeline || []).forEach(function (e) { ev.push({ ts: e.ts || 0, kind: e.kind, text: e.text, when: relTime(e.ts) + (e.by ? " · " + e.by : "") }); });
+    (st.labs || []).forEach(function (l) { var d = l.reported || l.orderDate || ""; ev.push({ ts: parseTs(d), kind: "investigation", text: "Lab: " + (l.serviceName || l.testName || "") + (l.status ? " (" + l.status + ")" : ""), when: d }); });
+    (st.radiology || []).forEach(function (r) { ev.push({ ts: parseTs(r.date), kind: "investigation", text: "Imaging: " + (r.description || ""), when: r.date || "" }); });
+    (st.medications || []).forEach(function (m) { ev.push({ ts: parseTs(m.dateTime), kind: "medication", text: (m.drugText || m.drug || "") + [m.dosage, m.frequency, m.duration].filter(Boolean).map(function (x) { return " " + x; }).join(""), when: m.dateTime || "" }); });
+    ev.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    return ev;
+  }
   function timelineSection(st) {
-    if (!st.ticketId || !st.sessionId) return "";   // only queue-ticket encounters have a timeline
-    if (st.timelineLoading) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Visit timeline</div>" + loadingBox("Loading timeline…") + "</section>";
-    var tl = (st.timeline || []).slice().sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
-    if (!tl.length) return section("history", "Visit timeline", "", "", "No entries yet — documenting the visit (assessment, orders, prescriptions) adds them here.");
+    if (st.timelineLoading && !(st.labs || []).length && !(st.medications || []).length) return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + "Timeline</div>" + loadingBox("Loading timeline…") + "</section>";
+    var tl = buildTimeline(st);
+    if (!tl.length) {
+      if (!st.ticketId) return "";   // nothing recorded + no history + not a queue visit -> hide
+      return section("history", "Timeline", "", "", "No entries yet — the visit's history (labs, prescriptions, assessment) will appear here as it is documented.");
+    }
     var rows = tl.map(function (e) {
       var ico = TL_ICON[String(e.kind || "").toLowerCase()] || "history";
-      return '<div class="oe-tl-row"><div class="oe-tl-ic">' + ms(ico) + '</div><div class="oe-tl-b"><div class="oe-tl-t">' + esc(e.text || "") + '</div><div class="oe-tl-m">' + esc(relTime(e.ts)) + (e.by ? " · " + esc(e.by) : "") + "</div></div></div>";
+      return '<div class="oe-tl-row"><div class="oe-tl-ic">' + ms(ico) + '</div><div class="oe-tl-b"><div class="oe-tl-t">' + esc(e.text || "") + '</div><div class="oe-tl-m">' + esc(e.when || "") + "</div></div></div>";
     }).join("");
-    return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + 'Visit timeline<span class="oe-sub">' + tl.length + " event" + (tl.length === 1 ? "" : "s") + '</span></div><div class="oe-tl">' + rows + "</div></section>";
+    return '<section class="oe-sec"><div class="oe-h3">' + ms("history") + 'Timeline<span class="oe-sub">' + tl.length + " event" + (tl.length === 1 ? "" : "s") + '</span></div><div class="oe-tl">' + rows + "</div></section>";
   }
   function loadTimeline() {
     if (!st.ticketId || !st.sessionId) return;
