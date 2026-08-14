@@ -452,6 +452,23 @@ async function getAssessmentForm(env, token, patientId, episodeId) {
   Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^assessment\./, ''), value: all[k] }); });
   return { fields: fields, raw: htmlToText(html).slice(0, 8000) };
 }
+// READ a patient's OP visit "opcard" — the clinical note the GHIS History tab shows (the doctor's
+// footprint for that visit). Activates the visit first (Searchnew, same as the assessment read — without
+// it Getopcard returns []), then reads Getopcard (note) + Getconsultant (doctor). One entry per visit;
+// the client passes the visit(s) it knows (visitId = the OPMR number, episodeId for activation). Read-only
+// — no GHIS write, so it needs no write gate. Powers the GHIS patient Timeline (crawl, not stored).
+async function getOpdHistory(env, token, patientId, visitId, episodeId) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const mr = String(patientId || ''), vid = String(visitId || ''), epi = String(episodeId || '');
+  if (!mr || !vid) return { entries: [] };
+  if (epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
+  const card = await ghisReq(env, token, 'GET', '/Doctor/Home/Getopcard?id=' + encodeURIComponent(vid) + '&patid=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (card.unauth) return card;
+  let by = '';
+  try { const c = await ghisReq(env, token, 'GET', '/Doctor/Home/Getconsultant?id=' + encodeURIComponent(vid) + '&patid=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' }); by = htmlToText(c.body || '').replace(/\s+/g, ' ').trim().slice(0, 80); } catch (e) {}
+  const text = htmlToText(card.body || '').replace(/\n{3,}/g, '\n\n').trim();
+  return { entries: text ? [{ visitId: vid, by: by, text: text.slice(0, 6000) }] : [] };
+}
 // WRITE helper: after a service is picked, GHIS needs its pack-rate id + price, which FilterServices does NOT
 // return. The `addservices?Id=<id>` GET carries them. Its response shape is UNVERIFIED (not captured) — parsed
 // tolerantly; the client can also pass packRateId/price through to skip this lookup.
@@ -701,6 +718,7 @@ export async function onRequest(context) {
     if (seg === 'inv-search')      { const r = await getInvSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'drug-search')     { const r = await getDrugSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'history')         { const r = await getOpdHistory(env, token, q.get('patientId') || '', q.get('visitId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
 
     // ---- OPD write-back: WRITES (P2/P3/P4). Gate FIRST: inert (501, nothing hits GHIS) until QUEUE_EMR_WRITE=1 ----
     const writeGate = () => json({ error: 'emr_write_disabled', detail: 'Set QUEUE_EMR_WRITE=1 server-side only after the payload is verified against a real captured request' }, 501);
