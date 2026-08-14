@@ -5,7 +5,15 @@
   "diseaseId": "colorectal_cancer",
   "histology": "adenocarcinoma",
   "stage": ["IV"],
-  "biomarkers": {},
+  "biomarkers": {
+    "KRAS": "tested",
+    "NRAS": "tested",
+    "BRAF_V600E": "tested",
+    "HER2_ERBB2": "tested",
+    "MMR_MSI": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic FOLFIRI (leucovorin/fluorouracil/irinotecan) backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN, licensed), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+  },
   "treatmentSetting": "metastatic",
   "treatmentIntent": ["palliative"],
   "lineOfTherapy": "first-line",
@@ -99,7 +107,16 @@
         "evidenceStatus": "unknown"
       }
     ],
-    "guideline": [],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN, licensed)",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Colon Cancer, Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D; FOLFIRI plus/minus bevacizumab as initial/first-line therapy and as subsequent therapy after prior oxaliplatin); Principles of Pathologic and Molecular Review (COL-B)",
+        "evidenceStatus": "current"
+      }
+    ],
     "institutional": [],
     "divergence": []
   },
@@ -114,8 +131,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": [
-    "biomarkers"
-  ],
-  "provenanceNote": "VERIFY-resolution (ONCQIS Wave-1 batch 1): DeVita 12th ed. places FOLFIRI (Table 40.12) in the section MANAGEMENT OF UNRESECTABLE METASTATIC DISEASE (header line 123342; unresectable stage IV disease, lines 123351 and 123359) with palliative intent. histology resolved to adenocarcinoma (Chapter 40, line 121516 colorectal adenocarcinoma; Histologic Type section line 121080). treatmentSetting resolved to metastatic and stage to IV from that section. lineOfTherapy resolved to first-line: DeVita states FOLFIRI was initially studied as a salvage regimen but has gained widespread acceptance as a first-line treatment option (lines 123668 to 123670). eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per Table 40.12 footnote (line 123608) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). biomarkers kept VERIFY because the FOLFIRI cytotoxic backbone is not biomarker-gated in DeVita. An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) with the Chapter 40 routine-practice caveat (lines 121523 to 121531). evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation). No hospital or endorsement claim."
+  "verifyFields": [],
+  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): DeVita 12th ed. places FOLFIRI (Table 40.12) in the section on management of unresectable metastatic disease (header line 123342; unresectable stage IV disease, lines 123351 and 123359) with palliative intent. histology resolved to adenocarcinoma (Chapter 40, line 121516 colorectal adenocarcinoma; Histologic Type section line 121080). treatmentSetting resolved to metastatic and stage to IV from that section. lineOfTherapy resolved to first-line: DeVita states FOLFIRI was initially studied as a salvage regimen but has gained widespread acceptance as a first-line treatment option (lines 123668 to 123670). eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per Table 40.12 footnote (line 123608) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) with the Chapter 40 routine-practice caveat (lines 121523 to 121531). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines, NCCN licensed, Colon Cancer v2.2026): biomarkers resolved: the cytotoxic FOLFIRI backbone is not biomarker-restricted, while RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested to guide targeted or immunotherapy add-ons (COL-B and COL-D). The guideline concurs with the core metastatic first-line placement and additionally lists FOLFIRI as a subsequent-therapy option after prior oxaliplatin (COL-D); the physician-facing lineOfTherapy is kept as first-line, so no divergence is recorded. No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
 }

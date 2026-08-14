@@ -7,7 +7,18 @@
   "stage": [
     "IV"
   ],
-  "biomarkers": {},
+  "biomarkers": {
+    "BRCA1_2": "tested (germline and somatic)",
+    "PALB2": "tested",
+    "KRAS": "tested",
+    "BRAF": "tested",
+    "HER2_ERBB2": "tested",
+    "MSI_dMMR": "tested",
+    "TMB": "tested",
+    "NTRK_fusion": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "FOLFIRINOX cytotoxic backbone is not biomarker-restricted; it is a preferred category 1 first-line option for good performance status (ECOG 0 to 1) regardless of biomarker status. Tumor/somatic and germline molecular profiling (NGS) is recommended for all anti-cancer-therapy candidates to guide targeted therapy and maintenance choices: BRCA1/2 or PALB2 status supports platinum-based therapy and PARP-inhibitor maintenance; BRAF V600E (dabrafenib plus trametinib); NTRK, RET, and other fusions; HER2 amplification; and MSI-H, dMMR, or TMB-high (pembrolizumab). Per Standard Guidelines (NCCN, licensed), Pancreatic Adenocarcinoma Principles of Molecular Profiling (footnote j; PANC-1A, PANC-2A) and Principles of Systemic Therapy, Metastatic Disease First-Line (PANC-G)."
+  },
   "treatmentSetting": "metastatic",
   "treatmentIntent": [
     "palliative"
@@ -170,7 +181,16 @@
         "evidenceStatus": "unknown"
       }
     ],
-    "guideline": [],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN, licensed)",
+        "version": "3.2026",
+        "date": null,
+        "locator": "Pancreatic Adenocarcinoma, Principles of Systemic Therapy, Metastatic Disease First-Line Therapy (PANC-G; FOLFIRINOX category 1, preferred for good PS ECOG 0 to 1); Principles of Molecular Profiling (footnote j; PANC-1A, PANC-2A)",
+        "evidenceStatus": "current"
+      }
+    ],
     "institutional": [],
     "divergence": []
   },
@@ -185,8 +205,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": [
-    "biomarkers"
-  ],
-  "provenanceNote": "VERIFY-resolution (ONCQIS Wave-1 batch 1): DeVita 12th ed. (Chapter 35) describes FOLFIRINOX for pancreatic ductal adenocarcinoma (PDAC). histology resolved to adenocarcinoma (PDAC is pancreatic ductal adenocarcinoma; section header Second-Line Therapy for Metastatic Pancreatic Ductal Adenocarcinoma at line 107126). treatmentSetting resolved to metastatic and stage to IV: DeVita establishes FOLFIRINOX (with mFOLFIRINOX) as a preferred first-line treatment for patients with metastatic PDAC (line 107122). lineOfTherapy resolved to first-line (FOLFIRINOX is recommended as first-line treatment for patients with good performance status, lines 107108 to 107109). eligibilityCriteria resolved to good performance status: PRODIGE 4/ACCORD 11 randomized patients with ECOG 0 to 1 (line 107087) and DeVita recommends it for good-performance-status patients (lines 107108 to 107109). biomarkers kept VERIFY because the FOLFIRINOX cytotoxic backbone is not biomarker-gated in DeVita. An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) and the PRODIGE 4/ACCORD 11 diarrhea rate (line 107100). evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation). No hospital or endorsement claim."
+  "verifyFields": [],
+  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): DeVita 12th ed. (Chapter 35) describes FOLFIRINOX for pancreatic ductal adenocarcinoma (PDAC). histology resolved to adenocarcinoma (PDAC is pancreatic ductal adenocarcinoma; section header on second-line therapy for metastatic PDAC at line 107126). treatmentSetting resolved to metastatic and stage to IV: DeVita establishes FOLFIRINOX (with mFOLFIRINOX) as a preferred first-line treatment for patients with metastatic PDAC (line 107122). lineOfTherapy resolved to first-line (FOLFIRINOX is recommended as first-line treatment for patients with good performance status, lines 107108 to 107109). eligibilityCriteria resolved to good performance status: PRODIGE 4/ACCORD 11 randomized patients with ECOG 0 to 1 (line 107087) and DeVita recommends it for good-performance-status patients (lines 107108 to 107109). An irinotecan UGT1A1 and diarrhea dose-consideration was added to doseModificationRules, sourced to DeVita Chapter 9 (lines 19421 to 19433) and the PRODIGE 4/ACCORD 11 diarrhea rate (line 107100). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines, NCCN licensed, Pancreatic Adenocarcinoma v3.2026): biomarkers resolved: the cytotoxic FOLFIRINOX backbone is not biomarker-restricted (preferred category 1 first-line for good PS regardless of biomarker), while tumor/somatic and germline molecular profiling is tested (BRCA1/2, PALB2, KRAS, BRAF, HER2, NTRK and other fusions, MSI, dMMR, TMB) to guide targeted therapy and maintenance choices (PANC molecular profiling footnote j and PANC-G). The guideline concurs with the core metastatic first-line placement and good-PS ECOG 0 to 1 eligibility, so no divergence is recorded. No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
 }

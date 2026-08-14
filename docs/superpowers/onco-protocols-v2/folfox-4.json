@@ -4,11 +4,19 @@
   "disease": "Colorectal cancer",
   "diseaseId": "colorectal_cancer",
   "histology": "adenocarcinoma",
-  "stage": ["VERIFY"],
-  "biomarkers": {},
-  "treatmentSetting": "VERIFY",
+  "stage": ["II (high-risk)", "III", "IV"],
+  "biomarkers": {
+    "KRAS": "tested",
+    "NRAS": "tested",
+    "BRAF_V600E": "tested",
+    "HER2_ERBB2": "tested",
+    "MMR_MSI": "tested",
+    "cytotoxicBackboneRestricted": false,
+    "note": "Cytotoxic FOLFOX (fluorouracil/leucovorin/oxaliplatin) backbone is not biomarker-restricted. RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested (broad multigene NGS panel also picks up POLE/POLD1, RET, NTRK) to guide targeted or immunotherapy add-ons, not the backbone itself: anti-EGFR (cetuximab or panitumumab) requires KRAS/NRAS/BRAF wild-type with a left-sided primary; HER2-directed therapy for HER2 amplified; checkpoint inhibitors for dMMR/MSI-H; encorafenib for BRAF V600E. Per Standard Guidelines (NCCN, licensed), Colon Cancer Principles of Pathologic and Molecular Review (COL-B) and Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D)."
+  },
+  "treatmentSetting": ["neoadjuvant", "adjuvant", "metastatic"],
   "treatmentIntent": ["curative", "palliative"],
-  "lineOfTherapy": "VERIFY",
+  "lineOfTherapy": "first-line, and an option in subsequent lines for metastatic disease (e.g., after prior irinotecan); not line-scoped when used as adjuvant or neoadjuvant therapy",
   "eligibilityCriteria": [
     { "criterion": "performanceStatus", "requirement": "good performance status", "source": "DeVita, Cancer PPO 12th ed., Table 40.13 footnote", "locator": "line 123747" },
     { "criterion": "organFunction", "requirement": "normal renal, hepatic, and bone marrow function", "source": "DeVita, Cancer PPO 12th ed., Table 40.13 footnote", "locator": "line 123747" }
@@ -97,9 +105,28 @@
         "evidenceStatus": "unknown"
       }
     ],
-    "guideline": [],
+    "guideline": [
+      {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN, licensed)",
+        "version": "2.2026",
+        "date": null,
+        "locator": "Colon Cancer, Principles of Adjuvant Therapy and Chemotherapy Regimens (COL-G; Modified FOLFOX6 is the printed adjuvant FOLFOX template); Principles of Systemic Therapy for Advanced or Metastatic Disease (COL-D; FOLFOX initial and subsequent therapy); Principles of Risk Assessment for Stage II Disease (COL-F); Principles of Pathologic and Molecular Review (COL-B)",
+        "evidenceStatus": "current"
+      }
+    ],
     "institutional": [],
-    "divergence": []
+    "divergence": [
+      {
+        "field": "regimenIdentityForAdjuvantUse",
+        "sources": [
+          { "name": "DeVita 12th ed. (core)", "version": "12th ed", "value": "FOLFOX-4 (de Gramont) was the pivotal MOSAIC adjuvant regimen" },
+          { "name": "Standard Guidelines (NCCN, licensed) Colon Cancer", "version": "2.2026", "value": "Modified FOLFOX6 is the printed adjuvant chemotherapy regimen; treatment algorithms cite FOLFOX generically" }
+        ],
+        "note": "Both sources place FOLFOX in the adjuvant and metastatic settings, so treatmentSetting is not in conflict. They differ on the specific adjuvant FOLFOX variant printed as the template (FOLFOX-4 historically per DeVita/MOSAIC versus Modified FOLFOX6 in the current guideline). Physician-facing regimen identity kept as authored (FOLFOX-4); adjuvant variant selection left to clinical review.",
+        "resolution": "clinical-review-required"
+      }
+    ]
   },
   "protocolVersion": "0.1-draft",
   "status": "DRAFT",
@@ -112,11 +139,6 @@
     "evidenceVersion": null,
     "reviewDue": false
   },
-  "verifyFields": [
-    "stage",
-    "biomarkers",
-    "treatmentSetting",
-    "lineOfTherapy"
-  ],
-  "provenanceNote": "VERIFY-resolution (ONCQIS Wave-1 batch 1): histology resolved to adenocarcinoma per DeVita 12th ed. Chapter 40 (line 121516, colorectal adenocarcinoma; Histologic Type section line 121080). eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per DeVita Table 40.13 footnote (line 123747) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). treatmentSetting and stage kept VERIFY because DeVita establishes FOLFOX-4 in both the adjuvant setting (the pivotal adjuvant study was done with FOLFOX-4, line 122908) and the metastatic regimen table (Table 40.13), so a single setting/stage is not source-determined. lineOfTherapy kept VERIFY (not stated for this regimen). biomarkers kept VERIFY because the FOLFOX cytotoxic backbone is not biomarker-gated in DeVita. evidence.core evidenceStatus set to unknown (long-lived textbook framework, no current-guideline currency confirmation). No hospital or endorsement claim."
+  "verifyFields": [],
+  "provenanceNote": "Earlier VERIFY-resolution (DeVita core): histology resolved to adenocarcinoma per DeVita 12th ed. Chapter 40 (line 121516, colorectal adenocarcinoma; Histologic Type section line 121080); eligibilityCriteria resolved to good performance status with normal renal, hepatic, and bone marrow function per DeVita Table 40.13 footnote (line 123747) and the metastatic-disease entry-criteria preamble (lines 123415 to 123420). DeVita establishes FOLFOX-4 in both the adjuvant setting (the pivotal MOSAIC adjuvant study used FOLFOX-4, line 122908) and the metastatic regimen table (Table 40.13). ONCQIS Wave-1 batch 1 guideline resolution (Standard Guidelines, NCCN licensed, Colon Cancer v2.2026): treatmentSetting resolved to neoadjuvant, adjuvant, and metastatic (FOLFOX is a printed adjuvant chemotherapy regimen on COL-G, initial and subsequent systemic therapy for advanced/metastatic disease on COL-D, and a preferred neoadjuvant option for bulky/locally advanced and resectable synchronous metastatic disease). stage resolved to high-risk II, III, and IV (adjuvant FOLFOX is superior to fluorouracil/leucovorin for stage III and reasonable for high-risk stage II per COL-G and COL-F; stage IV is the advanced/metastatic setting per COL-D). lineOfTherapy resolved to first-line with a subsequent-line option in metastatic disease (COL-D). biomarkers resolved: the cytotoxic FOLFOX backbone is not biomarker-restricted, while RAS (KRAS, NRAS), BRAF V600E, HER2 (ERBB2), and MMR or MSI status are tested to guide targeted or immunotherapy add-ons (COL-B and COL-D). A divergence is recorded because the guideline prints Modified FOLFOX6 (not FOLFOX-4) as the adjuvant FOLFOX template; the settings themselves do not conflict. No field remains VERIFY. evidence.core evidenceStatus left unknown. No hospital or endorsement claim."
 }
