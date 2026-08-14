@@ -97,15 +97,40 @@
       }).then(function (r) { if (!r.ok) throw new Error("drive_" + r.status); return { ok: true }; });
     }
 
+    // Non-secret clinic config (clinicId, salt, name) — one plaintext file per clinic so a SECOND device
+    // signing into the same clinic Google account can discover the clinic + its (public) salt and, with
+    // the passphrase, derive the same key. No PHI + no secret here (the salt is public by design).
+    function putConfig(obj) { return put(clinicId + "/clinic.config", JSON.stringify(obj)); }
+    function getConfig() { return get(clinicId + "/clinic.config").then(function (t) { try { return t ? JSON.parse(t) : null; } catch (e) { return null; } }); }
+
     function available() {
       try { return !!g.SMD_getDriveToken; } catch (e) { return false; }
     }
 
-    return { list: list, get: get, put: put, available: available, clinicId: clinicId };
+    return { list: list, get: get, put: put, putConfig: putConfig, getConfig: getConfig, available: available, clinicId: clinicId };
+  }
+
+  // Discover the clinic(s) already set up in the signed-in Drive account (for device join). Returns the
+  // parsed non-secret config objects. drive.file only returns THIS app's files, so this is the clinic's own.
+  function discover(deps) {
+    deps = deps || {};
+    var fetchFn = deps.fetch || g.fetch, token = deps.getToken || getToken;
+    var url = BASE + "/drive/v3/files?q=" + encodeURIComponent("name contains '~clinic.config' and trashed = false") +
+      "&spaces=drive&fields=" + encodeURIComponent("files(id,name)");
+    return token().then(function (t) { if (!t) throw new Error("no_token"); return fetchFn(url, { headers: { Authorization: "Bearer " + t } }); })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var files = (j && j.files) || [];
+        return Promise.all(files.map(function (f) {
+          return token().then(function (t) { return fetchFn(BASE + "/drive/v3/files/" + f.id + "?alt=media", { headers: { Authorization: "Bearer " + t } }); })
+            .then(function (r) { return r.ok ? r.text() : null; })
+            .then(function (txt) { try { return txt ? JSON.parse(txt) : null; } catch (e) { return null; } });
+        })).then(function (cs) { return cs.filter(Boolean); });
+      });
   }
 
   var API = {
-    create: create,
+    create: create, discover: discover,
     // pure helpers exported for tests
     _driveName: driveName, _engineName: engineName, _listQuery: listQuery, _clinicPrefix: clinicPrefix
   };

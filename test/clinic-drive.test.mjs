@@ -89,6 +89,22 @@ test("list is clinic-scoped: another clinic's deltas are not returned", async ()
   assert.deepEqual(await c2.list(), ["C2/devB.1.smddelta"]);
 });
 
+test("clinic config: put a non-secret {clinicId,salt,name}, read it back; discover finds it for a 2nd device", async () => {
+  const drive = fakeDrive();
+  const c1 = D.create("C1", { fetch: drive.fetch, getToken: () => Promise.resolve("t") });
+  await c1.putConfig({ clinicId: "C1", salt: "S4LT", name: "Sunrise Clinic" });
+  const cfg = await c1.getConfig();
+  assert.equal(cfg.name, "Sunrise Clinic");
+  assert.equal(cfg.salt, "S4LT");
+  // config is NOT a delta -> never returned by the delta list()
+  assert.deepEqual(await c1.list(), []);
+  // a fresh device (no clinicId yet) discovers the clinic in the signed-in account
+  const found = await D.discover({ fetch: drive.fetch, getToken: () => Promise.resolve("t") });
+  assert.equal(found.length, 1);
+  assert.equal(found[0].clinicId, "C1");
+  assert.equal(found[0].salt, "S4LT");
+});
+
 test("INTEGRATION: real sync engine + real crypto over the Drive adapter — two devices converge", async () => {
   const drive = fakeDrive();
   const secret = "clinic-XYZ", salt = C.newSalt();

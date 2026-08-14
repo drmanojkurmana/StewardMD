@@ -449,7 +449,7 @@
     // (also strips its line from the Management plan); tap the order glyph to place it in GHIS.
     function invChips() {
       var list = st.dictatedInv || []; if (!list.length) return "";
-      var canOrder = st.source !== "local" && !st.noStore;   // GHIS ordering only; local/decision-support have no server to order against
+      var canOrder = !usesLocal(st.source) && !st.noStore;   // GHIS ordering only; local/shared/decision-support have no server to order against
       return '<div class="oe-vc-orders"><div class="oe-vc-orders-h">' + ms("science") + "<span>Investigations advised</span></div><div class=\"oe-vc-chips\">" +
         list.map(function (nm, i) {
           return '<span class="oe-vc-chip2">' + esc(nm) +
@@ -1257,8 +1257,13 @@
       '<button class="oe-close" data-oe-act="report-close" title="Close" aria-label="Close">' + ms("close") + "</button></header>" +
       '<div class="oe-canvas">' + body + "</div></div>";
   }
+  // Sources backed by the on-device localStore contract ({getConsult,saveConsult}): "local" = personal
+  // My Clinic (single device), "shared" = Shared Clinic (multi-device, encrypted Drive sync). Both skip
+  // GHIS profile/labs/assessment fetch and read/write through _localStore. The sync (for "shared") lives
+  // behind saveConsult in the injected store, so the EMR overlay stays storage-agnostic.
+  function usesLocal(s) { return s === "local" || s === "shared"; }
   function loadProfile(opts) {
-    if (st.source === "local") { st.loading = false; paint(); return; }   // personal clinic: no hospital profile/labs to fetch
+    if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
     fetch(a.base + "/profile" + q, { headers: authHeaders(), credentials: "include" })
@@ -1272,7 +1277,7 @@
       .catch(function () { st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
-    if (st.source === "local") {   // personal clinic: prefill from the on-device store (no GHIS fetch)
+    if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
       st.assessLoaded = true; st.assessLoading = false; st.assessErr = "";
       st.assessVals = (_localStore && _localStore.getConsult) ? (_localStore.getConsult(st.patient.mrn) || {}) : {};
       paint(); return;
@@ -1322,7 +1327,7 @@
       { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
   }
   function submitAssessment() {
-    if (st.source === "local") {   // personal clinic: save the consult on-device (no GHIS)
+    if (usesLocal(st.source)) {   // personal/shared clinic: save the consult on-device (Shared syncs via the store)
       if (!confirmed("Save this consult to " + emrLabel() + " on this phone?")) return;
       try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}); } catch (e) {}
       st.savedConsult = true; toast("Saved to " + emrLabel() + " on this device."); paint(); return;
@@ -1337,7 +1342,7 @@
     if (!confirmed(q)) return;
     st.assessVals = {}; st.assessTouched = {};
     if (st.noStore) { paint(); return; }                                   // nothing is stored — just clear the form
-    if (st.source === "local") {                                           // clear the on-device consult (auto Drive backup), no GHIS
+    if (usesLocal(st.source)) {                                            // clear the on-device consult (Shared syncs the clear), no GHIS
       try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload({}), {}); } catch (e) {}
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
@@ -1960,11 +1965,11 @@
     st.recordNo = opts.recordNo || "";
     st.episodeId = opts.episodeId || "";                      // GHIS visit/episode id — an Initial Assessment attaches to a visit
     st.ticketId = opts.ticketId || ""; st.sessionId = opts.sessionId || "";   // queue context -> mirror actions into the visit summary
-    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic, on-device)
-    st.noStore = !!opts.noStore && st.source !== "local";    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
-    _localStore = (st.source === "local") ? (opts.localStore || null) : null;
-    st.emrLabel = opts.emrLabel || (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS"));
-    st.writeOn = (st.source === "local" || st.noStore) ? true : writeFlagOn();   // local save is always allowed (on-device, no server gate)
+    st.source = opts.source || "ghis";                       // "ghis" (hospital) | "local" (personal clinic) | "shared" (shared clinic), on-device
+    st.noStore = !!opts.noStore && !usesLocal(st.source);    // no hospital MRN + no local store: Ask MaiK decision-support only, nothing is saved
+    _localStore = usesLocal(st.source) ? (opts.localStore || null) : null;
+    st.emrLabel = opts.emrLabel || (st.source === "shared" ? "Shared Clinic" : (st.source === "local" ? "My Clinic" : (opts.source && opts.source !== "ghis" ? "EMR" : "GHIS")));
+    st.writeOn = (usesLocal(st.source) || st.noStore) ? true : writeFlagOn();   // local/shared save is always allowed (on-device, no server gate)
     st.hospitalId = opts.hospitalId || opts.orgId || "";
     if (opts.oncoPlan) st.oncoPlan = opts.oncoPlan;            // test/Phase-4 seam: inject a treatment plan already in state
     if (opts.oncoCycle) st.oncoCycle = opts.oncoCycle;         // test/Phase-5 seam: inject a cycle already in state (nurse view)

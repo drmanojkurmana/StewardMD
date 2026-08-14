@@ -1716,9 +1716,21 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=oe36-merge" defer></script>
+<script src="/opd-emr.js?v=oe37-shared" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold1" defer></script>
+<!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
+     smd_shared_clinic, default OFF; ?shared=1 to open). Google Drive = encrypted delta sync transport,
+     NOT the live DB. Load order is dependency order: model+crypto -> store(needs model) -> sync -> drive
+     -> orchestrator -> app(assembles all) -> ui launcher. Reuses opd-emr via source:"shared". -->
+<script src="/clinic-model.js?v=sc1" defer></script>
+<script src="/clinic-crypto.js?v=sc1" defer></script>
+<script src="/clinic-store.js?v=sc1" defer></script>
+<script src="/clinic-sync.js?v=sc1" defer></script>
+<script src="/clinic-drive.js?v=sc1" defer></script>
+<script src="/shared-clinic.js?v=sc1" defer></script>
+<script src="/clinic-app.js?v=sc1" defer></script>
+<script src="/shared-clinic-ui.js?v=sc1" defer></script>
 <!-- Onco Home Phase 8 P0 (flag smd_onco_home, default OFF): the reference/tool-library workbench —
      global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
      their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the

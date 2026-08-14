@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shared Clinic UI harness (Phase 6/7 — create/join/list/open, source:"shared")</title>
+<style>html,body{margin:0;height:100%;background:#f7f9fb;font-family:system-ui}</style>
+</head><body>
+<script>
+// Off-device: no native Drive token (SMD_getDriveToken absent) -> create still boots locally; Drive
+// publish/discover fail gracefully. The EMR overlay is mocked so we assert the source:"shared" handoff
+// without pulling opd-emr's whole dependency graph. localStorage/sessionStorage are the real browser ones.
+window.confirm = function () { return true; };
+window.__opened = null;
+window.OPDEMR = { openProfile: function (opts) { window.__opened = opts; } };   // record the handoff
+</script>
+<!-- dependency order, mirrors index.html -->
+<script src="/clinic-model.js"></script>
+<script src="/clinic-crypto.js"></script>
+<script src="/clinic-store.js"></script>
+<script src="/clinic-sync.js"></script>
+<script src="/clinic-drive.js"></script>
+<script src="/shared-clinic.js"></script>
+<script src="/clinic-app.js"></script>
+<script src="/shared-clinic-ui.js"></script>
+</body></html>
