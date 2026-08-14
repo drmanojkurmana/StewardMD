@@ -1,0 +1,41 @@
+{
+  "id": "folfirinox",
+  "diseaseId": "pancreatic_cancer",
+  "name": "FOLFIRINOX (PRODIGE 4/ACCORD 11)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "caps": "protocol",
+  "cycleLengthDays": 14,
+  "cycles": null,
+  "intentOptions": ["palliative"],
+  "source": {
+    "textbook": "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, 12th ed.",
+    "textbookLines": [107088, 107089, 107090, 107091],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "give before oxaliplatin/irinotecan per appendix D emetic-risk tier below" }
+  ],
+  "supportiveCare": [
+    "Antiemetics: moderate-to-high emetic risk (oxaliplatin and irinotecan are each individually moderate emetic risk IV agents per NCCN Antiemesis categories in appendix D; combining two moderately emetogenic agents on the same day is conventionally managed as the higher tier). Exact per-regimen NCCN order-template tier not yet confirmed - verify against per-disease NCCN template.",
+    "G-CSF: PRODIGE 4/ACCORD 11 reported febrile neutropenia 5.4% (vs 1.2% gemcitabine) and grade 3-4 neutropenia 45% (source lines 107088-107091). Appendix C risk tiering (High/Intermediate) for this specific regimen was not located in the provided source; use physician-patient discussion of prophylactic CSF support per appendix C intermediate-risk framework pending confirmation of the regimen's listed risk level on a per-disease NCCN template."
+  ],
+  "monitoring": ["CBC before each cycle", "renal function (platinum-containing regimen)", "peripheral neuropathy assessment (oxaliplatin)", "diarrhea/GI toxicity assessment (irinotecan)"],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle toxicity/neuropathy status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    { "id": "oxaliplatin", "name": "OXALIplatin", "basis": "bsa", "dosePerUnit": 85, "unit": "mg/m2", "route": "IV", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "Cancer PPO 12th ed., line 107088-107091: PRODIGE 4/ACCORD 11 - oxaliplatin 85 mg/m2 IV day 1. Tall man per NCCN appendix G." },
+    { "id": "irinotecan", "name": "Irinotecan", "basis": "bsa", "dosePerUnit": 180, "unit": "mg/m2", "route": "IV", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "Cancer PPO 12th ed., line 107088-107091: irinotecan 180 mg/m2 IV day 1." },
+    { "id": "leucovorin", "name": "Leucovorin", "basis": "bsa", "dosePerUnit": 400, "unit": "mg/m2", "route": "IV", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "Cancer PPO 12th ed., line 107088-107091: leucovorin 400 mg/m2 IV day 1." },
+    { "id": "fluorouracil-bolus", "name": "Fluorouracil (bolus)", "basis": "bsa", "dosePerUnit": 400, "unit": "mg/m2", "route": "IV bolus", "days": [1], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 400 mg/m2 IV bolus day 1." },
+    { "id": "fluorouracil-infusion", "name": "Fluorouracil (continuous infusion)", "basis": "bsa", "dosePerUnit": 2400, "unit": "mg/m2", "route": "IV continuous infusion over 46 hours", "days": [1, 2], "roundingRule": { "increment": 50 }, "modificationRules": [], "notes": "Cancer PPO 12th ed., line 107088-107091: 5-FU 2,400 mg/m2 as a 46-hour continuous infusion, starting day 1 and running into day 2. Cycle repeats every 2 weeks." }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "aml-7-plus-3-induction",
+  "diseaseId": "acute_myeloid_leukemia",
+  "name": "7+3 (AML induction: cytarabine + anthracycline)",
+  "version": "0.1-draft",
+  "lifecycleState": "draft",
+  "intentOptions": ["curative"],
+  "cycleLengthDays": null,
+  "cycles": null,
+  "caps": "protocol",
+  "source": {
+    "textbook": "Harrison's Principles of Internal Medicine, 22nd ed. (2025)",
+    "textbookLines": [117633, 117635, 117636, 117649, 117650, 117784],
+    "nccnAppendices": ["C", "D", "F", "G"],
+    "nccnTemplate": "pending - per-disease NCCN Chemotherapy Order Template not yet provided",
+    "nccnGuideline": "pending"
+  },
+  "institution": {
+    "provenance": "textbook-grounded draft; NCCN per-disease template + clinical (StewardMD) + hospital/institutional approval pending",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "high emetic risk regimen (anthracycline + cytarabine combination) - antiemetic prophylaxis per NCCN Antiemesis guideline high-emetic-risk tier (appendix D framework); specific agent/dose pending per-disease NCCN template",
+    "AML induction is conventionally high febrile-neutropenia risk - prophylactic G-CSF per NCCN Hematopoietic Growth Factors guideline (appendix C high-risk tier); timing/dose pending per-disease NCCN template"
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "daily CBC with differential during induction (marrow aplasia expected)",
+    "cardiac assessment (anthracycline) - baseline and as clinically indicated"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "cardiac (LVEF)", "prior-cycle status"],
+  "doseModificationRules": [
+    { "condition": "ANC < 1000 or platelets < 100k on day 1", "action": "delay", "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides." }
+  ],
+  "drugs": [
+    {
+      "id": "cytarabine",
+      "name": "CYTARabine",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "continuous IV infusion",
+      "days": [1, 2, 3, 4, 5, 6, 7],
+      "roundingRule": { "increment": 50 },
+      "modificationRules": [],
+      "notes": "Harrison's 22nd ed. lines 117633/117784: 'cytarabine used at standard dose (100-200 mg/m2)... administered as a continuous intravenous infusion for 7 days.' Source prints a range (100-200 mg/m2/d); 100 mg/m2/d used here as the standard/most-referenced value, 200 mg/m2/d is the upper end of the printed range - confirm institutional standard."
+    },
+    {
+      "id": "daunorubicin",
+      "name": "DAUNOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" }
+      },
+      "roundingRule": { "increment": 5 },
+      "modificationRules": [],
+      "notes": "Harrison's 22nd ed. lines 117636/117649/117650/117784: 'daunorubicin (60-90 mg/m2)... on days 1, 2, and 3 (the 7+3 regimen)'; older/fit patients get 'idarubicin (12 mg/m2) or daunorubicin (60 mg/m2)'. Source prints a range (60-90 mg/m2/d); 60 mg/m2/d used here as the standard/most-referenced value. Line 117650: high-dose daunorubicin (90 mg/m2) not recommended for patients >65 yr. Cumulative-lifetime cap values (450/550 mg/m2) are the conventional doxorubicin-equivalent anthracycline safety thresholds, not printed in this source for daunorubicin specifically - verify institutional doxorubicin-equivalent conversion before enforcing."
+    },
+    {
+      "id": "idarubicin",
+      "name": "IDArubicin",
+      "basis": "bsa",
+      "dosePerUnit": 12,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": { "warn": 450, "hard": 550, "unit": "mg/m2" }
+      },
+      "roundingRule": { "increment": 5 },
+      "modificationRules": [],
+      "notes": "Harrison's 22nd ed. lines 117636/117784: 'idarubicin (12 mg/m2)... on days 1, 2, and 3 (the 7+3 regimen)'. Alternative (either/or) substitute for daunorubicin per source, not additive - only one of daunorubicin or idarubicin is given per cycle. Cumulative-lifetime cap values (450/550 mg/m2) are the conventional doxorubicin-equivalent anthracycline safety thresholds, not printed in this source for idarubicin specifically - verify institutional doxorubicin-equivalent conversion before enforcing."
+    }
+  ]
+}

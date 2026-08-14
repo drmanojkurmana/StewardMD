@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stewardmd/kb/standard-protocol.schema.json",
+  "title": "StewardMD Standard Protocol",
+  "description": "Platform-owned, hospital-AGNOSTIC, evidence-informed oncology treatment protocol - StewardMD's own structured clinical object. NOT an NCCN/DeVita/Harrison/ASCO/ESMO protocol and never claims endorsement. Hospital-specific configuration lives in a SEPARATE hospital-implementation overlay (see hospital-implementation.schema.json), keyed by hospitalId; no hospital is hard-coded here. A patient-specific instance is a Treatment Plan (separate object). Required fields the source does not support MUST be the literal string \"VERIFY\" (never invented/inferred); any unresolved VERIFY blocks status ACTIVE.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "disease", "diseaseId", "regimen", "evidence", "protocolVersion", "status"],
+  "$defs": {
+    "verifiable": {
+      "description": "A value that is either concretely sourced, or the literal VERIFY when a source does not establish it (never invented).",
+      "oneOf": [{ "type": ["string", "number", "boolean", "array", "object", "null"] }, { "const": "VERIFY" }]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Machine-readable provenance for a clinical rule. layer: which evidence layer this came from.",
+      "required": ["layer", "source"],
+      "properties": {
+        "layer": { "enum": ["core", "guideline", "institutional"] },
+        "source": { "type": "string", "description": "e.g. 'DeVita 12th ed', 'Harrison 22nd ed', 'NCCN <panel>', 'ASCO', 'ESMO', or a hospital implementation label. NEVER an endorsement claim." },
+        "version": { "type": ["string", "null"] },
+        "date": { "type": ["string", "null"] },
+        "locator": { "type": ["string", "null"], "description": "Exact internal source location (page/section/line). No verbatim reproduction of copyrighted text." },
+        "evidenceStatus": { "enum": ["current", "superseded", "unknown"], "default": "unknown" }
+      }
+    },
+    "drug": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "basis", "dosePerUnit", "unit", "days", "route"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "description": "Apply ISMP tall-man where applicable (DOXOrubicin, vinCRIStine, CARBOplatin, CISplatin)." },
+        "basis": { "enum": ["bsa", "weight", "flat", "auc", "VERIFY"] },
+        "dosePerUnit": { "$ref": "#/$defs/verifiable", "description": "Exact sourced dose (number), or the target AUC when basis=auc, or VERIFY / null when the source omits it." },
+        "unit": { "enum": ["mg/m2", "mg/kg", "mg", "AUC", "units", "VERIFY"] },
+        "days": { "type": "array", "items": { "type": "number" } },
+        "route": { "type": "string" },
+        "infusionDuration": { "type": ["string", "null"] },
+        "caps": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "properties": {
+            "perDose": { "type": ["number", "null"], "description": "e.g. vincristine 2 mg." },
+            "cumulativeLifetime": {
+              "type": ["object", "null"],
+              "properties": { "warn": { "type": "number" }, "hard": { "type": "number" }, "unit": { "type": "string" } },
+              "description": "e.g. anthracycline 450/550 mg/m2."
+            }
+          }
+        },
+        "roundingRule": { "type": ["object", "null"], "properties": { "increment": { "type": "number" } } },
+        "modificationRules": { "type": "array", "items": { "type": "object" } },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "id": { "type": "string", "description": "kebab-case stable id." },
+
+    "name": { "type": "string", "description": "StewardMD Standard Protocol display name, e.g. 'FOLFOX-6'." },
+    "disease": { "type": "string" },
+    "diseaseId": { "type": ["string", "null"], "description": "Maps to a kb/reference/<id>.json disease id, or null." },
+    "histology": { "$ref": "#/$defs/verifiable" },
+    "stage": { "type": "array", "items": { "type": "string" }, "description": "Applicable stages; [] if not stage-scoped." },
+    "biomarkers": { "type": "object", "additionalProperties": { "$ref": "#/$defs/verifiable" }, "description": "e.g. {HER2:'positive', ER:'negative'}." },
+    "treatmentSetting": { "$ref": "#/$defs/verifiable", "description": "neoadjuvant | adjuvant | metastatic | maintenance | ... or VERIFY." },
+    "treatmentIntent": { "type": "array", "items": { "enum": ["curative", "palliative", "VERIFY"] } },
+    "lineOfTherapy": { "$ref": "#/$defs/verifiable" },
+
+    "eligibilityCriteria": { "type": "array", "items": { "type": "object", "additionalProperties": true }, "description": "Structured, machine-matchable criteria for the recommendation engine." },
+    "exclusionCriteria": { "type": "array", "items": { "type": "object", "additionalProperties": true }, "description": "Only where source-supported; omit rather than invent." },
+
+    "regimen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drugs", "cycleLengthDays", "cycles"],
+      "properties": {
+        "drugs": { "type": "array", "items": { "$ref": "#/$defs/drug" }, "minItems": 1 },
+        "cycleLengthDays": { "$ref": "#/$defs/verifiable" },
+        "cycles": { "$ref": "#/$defs/verifiable" },
+        "premedications": { "type": "array", "items": { "type": "object" } },
+        "supportiveCare": { "type": "array", "items": { "type": ["string", "object"] }, "description": "Antiemetic tier (emetogenicity) + G-CSF (FN risk); sourced, else VERIFY." }
+      }
+    },
+    "monitoring": { "type": "array", "items": { "type": ["string", "object"] } },
+    "clearanceChecks": { "type": "array", "items": { "type": ["string", "object"] } },
+    "doseModificationRules": { "type": "array", "items": { "type": "object" } },
+
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Three layers, never flattened. Core = long-lived textbook framework; guideline = currentness overlay (NCCN/ASCO/ESMO/peer-reviewed where legitimately available); institutional = per-hospital-tenant overlays. divergence surfaces conflicts, never auto-reconciled.",
+      "required": ["core"],
+      "properties": {
+        "core": { "type": "array", "items": { "$ref": "#/$defs/provenance" } },
+        "guideline": { "type": "array", "items": { "$ref": "#/$defs/provenance" } },
+        "institutional": {
+          "type": "array",
+          "description": "Per-tenant, keyed by hospitalId; never a hard-coded hospital. Actual overlay lives in hospital-implementation.schema.json.",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["hospitalId"],
+            "properties": { "hospitalId": { "type": "string" }, "source": { "type": "string" }, "version": { "type": ["string", "null"] }, "approvedBy": { "type": ["string", "null"] }, "date": { "type": ["string", "null"] } }
+          }
+        },
+        "divergence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "field": { "type": "string" },
+              "sources": { "type": "array", "items": { "type": "object", "properties": { "name": { "type": "string" }, "version": { "type": ["string", "null"] }, "value": {} } } },
+              "note": { "type": "string" },
+              "resolution": { "const": "clinical-review-required" }
+            }
+          }
+        }
+      }
+    },
+
+    "protocolVersion": { "type": "string", "description": "semver of the GLOBAL StewardMD core protocol, e.g. '1.0'. Hospital implementations version as '<protocolVersion>-<HOSPITAL>' in the overlay, not here." },
+    "supersedes": { "type": ["string", "null"] },
+    "supersededBy": { "type": ["string", "null"] },
+
+    "status": { "enum": ["DRAFT", "R1_REVIEW", "INSTITUTIONAL_APPROVAL", "ACTIVE", "SUPERSEDED", "RETIRED"] },
+    "clinicalApprovalStatus": { "type": ["string", "null"], "description": "StewardMD platform-level clinical (R1) governance state of THIS global version. Distinct from any hospital approval, which lives on the hospital-implementation overlay." },
+
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lastReviewedAt": { "type": ["string", "null"] },
+        "nextReviewAt": { "type": ["string", "null"] },
+        "reviewInterval": { "type": ["string", "null"] },
+        "reviewedBy": { "type": ["string", "null"] },
+        "evidenceVersion": { "type": ["string", "null"] },
+        "reviewDue": { "type": "boolean", "default": false }
+      }
+    },
+
+    "verifyFields": { "type": "array", "items": { "type": "string" }, "description": "Dotted paths of every field currently set to VERIFY. Must be empty before status can become ACTIVE." },
+    "audit": { "type": "array", "items": { "type": "object" }, "description": "Immutable event log: create/review/approve/supersede/retire, with user + timestamp." },
+    "provenanceNote": { "type": "string", "description": "Human note. No endorsement claims ('NCCN-approved' etc.) permitted." }
+  }
+}
