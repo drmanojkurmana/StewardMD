@@ -18,11 +18,11 @@ Sources on hand: `devita.txt` (16MB), `harrison.txt` (29MB), 69 NCCN PDFs (job t
 - HR+/HER2- + metastatic/targeted (TNBC #3): breast-cdk46-ai, breast-capecitabine, breast-carbo-paclitaxel, breast-pembro-chemo-tnbc
 Pre-activation gates (R1 IMPORTANT, NOT staging blockers): v1 engine enforces the anthracycline cumulative cap as warning-only; BID (capecitabine/abemaciclib) + multi-phase sequencing (ddac-t/ac-th/pembro-tnbc, "trastuzumab never with anthracycline") live in drug notes, not structured frequency/phase fields - any administration/scheduling layer must honor them before activation.
 
-## B. Lung & thoracic (7-13)
-7. NSCLC adenocarcinoma · 8. NSCLC squamous · 9. NSCLC large-cell/other · 10. EGFR-mutated NSCLC · 11. ALK-positive NSCLC · 12. Small-cell lung cancer · 13. Malignant pleural mesothelioma - pending
+## B. Lung & thoracic (7-13)  [batch 4 - STAGED (R1-approved DRAFT) b2e3c08b]
+18 regimens (lung-*/sclc-*/meso-*), serve #7-13 via histology/biomarker tags. 2 dose-verifiers + R1 = zero wrong doses; the verify layer caught + fixed a fabricated topotecan narrative. 17 fully-grounded; VERIFY-bearing: lung-egfr-tki-earlygen (afatinib dose not in corpus). Covers NSCLC platinum doublets + KEYNOTE-189/407 + pembro-mono + durvalumab-PACIFIC, EGFR TKIs (osimertinib/erlotinib/gefitinib), ALK TKIs (alectinib/brigatinib/lorlatinib/crizotinib), SCLC platinum/etoposide + atezo/durva + topotecan, meso cis/pemetrexed + nivo/ipi.
 
-## C. GI (14-31)
-14. Colon [have: FOLFOX/FOLFIRI family, DRAFT] · 15. Rectal · 16. Anal · 17. Gastric adenoca · 18. GEJ · 19. Esophageal SCC · 20. Esophageal adenoca · 21. Pancreatic [have: FOLFIRINOX, DRAFT] · 22. HCC · 23. Intrahepatic cholangio · 24. Extrahepatic cholangio · 25. Gallbladder · 26. Ampullary · 27. Small-intestinal adenoca · 28. Appendiceal adenoca · 29. GIST · 30. GI-NET · 31. CRC MSI-H/dMMR - mostly pending
+## C. GI (14-31)  [batch 5 - STAGED (R1-approved DRAFT) d6b4af1c; colon/rectal/pancreatic backbones from Wave-1]
+27 gi-* regimens, serve #14-31. 3 dose-verifiers + R1 = zero wrong doses. 17 fully-grounded, 10 VERIFY-bearing (NCCN HCC/biliary print no dose tables; IO/TKI doses honest VERIFY, refused to cross-import cytotoxic doses). Covers gastric/GEJ/eso (FLOT/CAPOX/FOLFOX/ToGA/KEYNOTE-859/CROSS/adj-nivo), hepatobiliary (sorafenib/tremelimumab/gem-cis/ampullary), GIST TKIs, NET (SSA/everolimus/Lu-177/CAPTEM), anal (Nigro/carbo-pac), CRC-MSI pembro. Safety fixes: sorafenib albumin guard mg/dL->g/dL; Lu-177 mCi unit (schema enum extended). Pre-ACTIVE: gi-net-ssa either/or, hepatobiliary IO cross-source closures.
 
 ## D. Head & neck (32-41)  [India priority - oral cavity #2]  [batch 2 - STAGED (R1-approved DRAFT) 5063a555]
 14 regimens (hn-*), serve sites #32-41 via site/HPV/setting tags. 2 dose-verifiers + R1 = zero wrong doses. Fully grounded: cisplatin-rt, cisplatin-weekly-rt, pf, cetuximab-rt, extreme, pembro-mono, nivolumab, cetuximab. VERIFY-bearing (NCCN H&N prints no dose tables): tpf-induction, npc-gem-cisplatin, npc-chemort(adjuvant), carbo-5fu(days), pembro-chemo(cycles), salivary(all doses).
