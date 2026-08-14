@@ -94,7 +94,7 @@
         action + "</div>";
     }
     var existing = section("history", "Existing orders", "Investigations on record", (st.labs || []).map(labRow).join(""), "No investigations on record.");
-    return searchBox("inv", st.invQuery, "Search investigation services…") + resultList("inv", st.invResults) + searchStatus(st, "inv") + draft + existing;
+    return searchBox("inv", st.invQuery, "Search investigation services…") + '<div class="oe-searchout" id="oe-out-inv">' + resultList("inv", st.invResults) + searchStatus(st, "inv") + "</div>" + draft + existing;
   }
   function medsTab(st) {
     var d = st.medDraft || {}, draft = "";
@@ -113,7 +113,7 @@
         action + "</div>";
     }
     var current = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return searchBox("med", st.medQuery, "Search medications…") + resultList("med", st.medResults) + searchStatus(st, "med") + draft + current;
+    return searchBox("med", st.medQuery, "Search medications…") + '<div class="oe-searchout" id="oe-out-med">' + resultList("med", st.medResults) + searchStatus(st, "med") + "</div>" + draft + current;
   }
   // ---- GHIS Initial Assessment schema (field names VERBATIM from a live CreateinitialAssessmentnew capture,
   // 2026-08-07). `val.*` names keep their prefix; bare names get `assessment.` server-side. kind: text|number|
@@ -577,6 +577,15 @@
     paint();
     try { var el = document.querySelector('#smdOpdEmr [data-oe-inp="' + kind + '-q"]'); if (el) { el.focus(); var v = el.value; el.value = ""; el.value = v; } } catch (e) {}
   }
+  // Update ONLY the search-results container — never repaints the whole tab, so the search input keeps
+  // focus and the soft keyboard stays open while typing (a full paint() closed the Android keyboard).
+  function renderSearchOut(kind) {
+    try {
+      var el = document.getElementById("oe-out-" + kind);
+      if (!el) return;   // container not in the DOM (tab not shown) -> nothing to do
+      el.innerHTML = resultList(kind, kind === "inv" ? st.invResults : st.medResults) + searchStatus(st, kind);
+    } catch (e) {}
+  }
 
   function ghisAuth() {
     var t = ""; try { t = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; } catch (e) {}
@@ -621,22 +630,31 @@
   }
   var searchTimer = null;
   function scheduleSearch(kind) { if (searchTimer) clearTimeout(searchTimer); searchTimer = setTimeout(function () { runSearch(kind); }, 250); }
+  // GHIS's search matches full service names, not abbreviations (measured: "cbc" -> 0 rows, "complete
+  // blood count" -> 1). Expand the common ones a clinician types so the search actually finds them.
+  var INV_ABBREV = { cbc: "complete blood count", cbp: "complete blood", hemogram: "complete blood count",
+    lft: "liver function", rft: "renal function", kft: "kidney function", rbs: "random blood sugar",
+    fbs: "fasting blood sugar", ppbs: "postprandial blood sugar", grbs: "random blood sugar", hba1c: "glycosylated",
+    tsh: "thyroid stimulating", esr: "erythrocyte sedimentation", crp: "c reactive protein", ecg: "electrocardiogram",
+    ekg: "electrocardiogram", cxr: "chest x ray", usg: "ultrasound", lipid: "lipid profile", "pt inr": "prothrombin",
+    inr: "prothrombin", bun: "blood urea", "urine r/e": "urine routine", "2d echo": "echocardiogram" };
+  function expandQuery(kind, q) { if (kind !== "inv") return q; var k = String(q || "").toLowerCase().trim(); return INV_ABBREV[k] || q; }
   function runSearch(kind) {
     var q = kind === "inv" ? st.invQuery : st.medQuery, key = kind === "inv" ? "invResults" : "medResults", mkey = kind + "SearchMsg";
-    if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; paintKeepFocus(kind); return; }
+    if (!q || q.length < 2) { st[key] = []; st[mkey] = ""; renderSearchOut(kind); return; }
     // Search is a GHIS (hospital) lookup — needs a live Ward Sync session + is meaningless off-hospital.
-    if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; paintKeepFocus(kind); return; }
-    st[key] = []; st[mkey] = "searching"; paintKeepFocus(kind);
-    var a = ghisAuth(), path = kind === "inv" ? "/inv-search" : "/drug-search";
-    fetch(a.base + path + "?q=" + encodeURIComponent(q), { headers: authHeaders(), credentials: "include" })
+    if (st.source && st.source !== "ghis") { st[key] = []; st[mkey] = "offghis"; renderSearchOut(kind); return; }
+    st[key] = []; st[mkey] = "searching"; renderSearchOut(kind);
+    var a = ghisAuth(), path = kind === "inv" ? "/inv-search" : "/drug-search", qsend = expandQuery(kind, q);
+    fetch(a.base + path + "?q=" + encodeURIComponent(qsend), { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d || {} }; }, function () { return { ok: r.ok, status: r.status, d: {} }; }); })
       .then(function (res) {
         if (res.status === 401 || (res.d && res.d.error === "login_required")) { st[key] = []; st[mkey] = "login"; }
         else if (!res.ok || (res.d && res.d.error)) { st[key] = []; st[mkey] = "error"; }
         else { st[key] = (res.d && res.d.rows) || []; st[mkey] = st[key].length ? "" : "none"; }
-        paintKeepFocus(kind);
+        renderSearchOut(kind);
       })
-      .catch(function () { st[key] = []; st[mkey] = "error"; paintKeepFocus(kind); });
+      .catch(function () { st[key] = []; st[mkey] = "error"; renderSearchOut(kind); });
   }
   // Visible search feedback (was silent: a dead GHIS session / parse-miss looked like a broken search).
   function searchStatus(st, kind) {
@@ -1585,6 +1603,6 @@
 
   function close() { stopVoice(); stopFieldMic(); var el = document.getElementById("smdOpdEmr"); if (el) el.classList.remove("on"); }
 
-  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
-  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory };
+  if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory };
 })();

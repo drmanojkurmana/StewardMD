@@ -22,3 +22,13 @@ test("no matches -> visible note", () => { assert.match(r("none"), /No matches/i
 test("searching -> spinner note", () => { assert.match(r("searching"), /Searching GHIS/i); });
 test("error -> visible failure note", () => { assert.match(r("error"), /Search failed/i); });
 test("no message -> no note (clean)", () => { assert.ok(!/oe-search-note/.test(load()._render(base))); });
+
+test("abbreviation expansion: inv abbreviations -> full GHIS-searchable term; meds unchanged", () => {
+  const E = load()._expandQuery;
+  assert.equal(E("inv", "cbc"), "complete blood count");   // GHIS returns 0 for "cbc", 1 for the full term
+  assert.equal(E("inv", "lft"), "liver function");
+  assert.equal(E("inv", "rft"), "renal function");
+  assert.equal(E("inv", "ecg"), "electrocardiogram");
+  assert.equal(E("inv", "complete blood count"), "complete blood count");  // non-abbrev unchanged
+  assert.equal(E("med", "paracetamol"), "paracetamol");    // meds never expanded
+});
