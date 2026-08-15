@@ -59,6 +59,10 @@
   .brand{ font-weight:800; font-size:16px; letter-spacing:-.01em; }
   .brand span{ color:var(--teal); }
   .sub{ margin-left:auto; font-size:12px; color:var(--slate); }
+  /* White-label: a Pro clinic's logo becomes the primary brand with a discreet "powered by StewardMD". */
+  .pw{ font-size:10px; font-weight:600; letter-spacing:.3px; text-transform:uppercase; color:var(--slate); display:inline-flex; align-items:center; gap:4px; margin-left:8px; }
+  .pw .pwm{ width:12px; height:12px; background:var(--slate); -webkit-mask:url(/mark-white.png) center/contain no-repeat; mask:url(/mark-white.png) center/contain no-repeat; }
+  .top .logo img{ width:100%; height:100%; object-fit:contain; }
   .theme-btn{ margin-left:10px; width:38px; height:38px; border-radius:11px; border:1.5px solid var(--line); background:var(--panel); color:var(--slate); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:0 0 auto; transition:border-color .15s, color .15s, transform .12s; }
   .theme-btn:hover{ border-color:var(--teal); color:var(--teal); }
   .theme-btn:active{ transform:scale(.94); }
@@ -247,6 +251,20 @@
   function tap(elx) { anim(elx, { transform: ["scale(1)", "scale(0.95)", "scale(1)"] }, { duration: 0.22 }); }
   var token = new URLSearchParams(location.search).get("t") || "";
   var ctx = null;                 // portal context from the server
+  // White-label: when the clinic is Pro-branded, its logo + name lead and StewardMD becomes "powered by".
+  // Dormant until the server sends clinicLogo (Pro-gated); the default StewardMD header is unchanged otherwise.
+  function setBrand(c){
+    if(!c || !c.clinicLogo) return;
+    try{
+      var img = document.querySelector(".top .logo img"); if(img){ img.onerror = null; img.src = c.clinicLogo; }
+      var br = document.querySelector(".top .brand"); if(br){ br.textContent = c.clinicName || "Clinic"; }
+      if(br && !document.getElementById("fcPw")){
+        var pw = document.createElement("span"); pw.id = "fcPw"; pw.className = "pw";
+        pw.innerHTML = 'powered by <span class="pwm" aria-hidden="true"></span>StewardMD';
+        br.insertAdjacentElement("afterend", pw);
+      }
+    }catch(e){}
+  }
   var answers = {};               // id -> value
   var LANG = "en";                // resolved from the episode (server) in load()
 
@@ -411,6 +429,7 @@
           return screenMessage("🔗",t("linkBad_t"),t("linkBad_b"),"");
         }
         ctx = b;
+        setBrand(b);
         // First-run language confirmation: only when we auto-detected a non-English language that the patient
         // hasn't confirmed yet. Shown once; the choice is stored server-side so it's never asked again.
         if(b.lang && b.lang !== "en" && !b.langConfirmed && FCI && FCI.isSupported(b.lang)){
