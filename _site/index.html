@@ -1351,10 +1351,10 @@
         <div style="flex:1 1 360px;min-width:0;max-width:520px">
           <div data-rise="1" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.02em;color:#fff">Lab Watch</div>
           <h3 data-rise="1" style="margin:9px 0 0;font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(22px,2.6vw,32px);line-height:1.1;letter-spacing:-.02em;color:#fff">The alert reaches you <span style="font-style:italic;color:#2DD4BF">before the chart does.</span></h3>
-          <p data-rise="1" style="margin:16px 0 0;max-width:470px;font-size:15.5px;line-height:1.62;color:#8597AD">When a watched lab crosses its line or a vital drifts, the patient and the reason arrive on your wrist. A glance tells you which bed and what changed; a tap opens the record on your phone. No dashboard to go hunting for.</p>
+          <p data-rise="1" style="margin:16px 0 0;max-width:470px;font-size:15.5px;line-height:1.62;color:#8597AD">Lab Watch keeps an eye on the results for every patient you are following, so a critical value never sits unseen in a queue. The moment one crosses its line, the patient and the reason reach you - on your phone, and on your wrist. A glance tells you which bed and what changed; a tap opens the record.</p>
           <div data-rise="1" style="margin-top:22px;border-top:1px solid #1E2B43">
             <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #1E2B43"><span style="flex:0 0 116px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#2DD4BF">Glanceable</span><span style="flex:1 1 auto;min-width:0;font-size:14.5px;line-height:1.6;color:#C7D3E3">The bed, the value and its trend arrow, sized to read at arm's length.</span></div>
-            <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #1E2B43"><span style="flex:0 0 116px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#2DD4BF">Same rules</span><span style="flex:1 1 auto;min-width:0;font-size:14.5px;line-height:1.6;color:#C7D3E3">The same watched labs and alert rules as the ICU workspace, pushed the moment they fire.</span></div>
+            <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #1E2B43"><span style="flex:0 0 116px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#2DD4BF">Watches for you</span><span style="flex:1 1 auto;min-width:0;font-size:14.5px;line-height:1.6;color:#C7D3E3">Choose the patients and the labs that matter. Lab Watch checks every new result in the app and flags the critical ones, whether you are at the bedside or not.</span></div>
             <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #1E2B43"><span style="flex:0 0 116px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#2DD4BF">Both platforms</span><span style="flex:1 1 auto;min-width:0;font-size:14.5px;line-height:1.6;color:#C7D3E3">Apple Watch on iPhone, Wear OS on Android. The wearable follows the phone it is paired with.</span></div>
           </div>
         </div>
@@ -1651,7 +1651,7 @@
           <img src="/_site/assets/s/logo.png" alt="" width="23" height="23" style="width:23px;height:23px;object-fit:contain">
           <span style="font-family:'Nunito',sans-serif;font-weight:800;font-size:17.5px;letter-spacing:-.02em">Steward<span style="color:#2DD4BF;font-weight:600">MD</span></span>
         </div>
-        <p style="margin:16px 0 0;max-width:300px;font-size:13px;line-height:1.65">Clinical decision support for qualified clinicians. Not for use by patients, and not a substitute for clinical judgment.</p>
+        <p style="margin:16px 0 0;max-width:320px;font-size:13px;line-height:1.65">Clinical decision support for qualified clinicians. Not for use by patients, and not a substitute for clinical judgment. Product screens and device images on this page are illustrative; the actual interface may differ.</p>
         <div style="margin-top:26px;display:flex;flex-direction:column;gap:10px;align-items:flex-start">
           <a href="https://maiknowledge.in" style="display:inline-block"><img src="/_site/assets/s/maik-wordmark-white.png" alt="MaiKnowledge" style="height:30px;width:auto;object-fit:contain;opacity:.9"></a>
           <span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#64748B">Developed by <a href="https://maiknowledge.in" style="color:#2DD4BF">MaiKnowledge</a></span>
@@ -1866,12 +1866,15 @@
       _mobileFlow();
     }
 
-    _wireExpanders();
     // Pinned ScrollTriggers MUST be created top-to-bottom in DOM order so each one's pin-spacer is
     // already in place when the next is measured. Out of order, a later story's spacer is inserted
     // above an earlier-created pin whose start never recomputes, and the stories overlap.
     if (bigEnough){ _reasonAuto(); _abxAuto(); _maikAuto(); _numbersAuto(); _oncoAuto(); _fcAuto(); }
     else { _mobileReveals(); }
+
+    // Card expanders are created AFTER the pins so their scroll positions account for the pin-spacers;
+    // created before, they open/close at the wrong scroll offset (or never).
+    _wireExpanders();
 
     // Section-level reveals are created AFTER the pins so the pin-spacers already exist in the layout.
     // Created before, a [data-rise] below the stories is measured at its pre-pin position and reveals
@@ -2019,28 +2022,25 @@
         open = stateOn;
         card.style.flexBasis = stateOn ? '100%' : basis;
         card.style.zIndex = stateOn ? '2' : '';
-        panel.style.height = stateOn ? panel.scrollHeight + 'px' : '0px';
         panel.style.opacity = stateOn ? '1' : '0';
-        if (stateOn) setTimeout(function(){ if (open) panel.style.height = 'auto'; }, 520);
+        if (stateOn){ panel.style.height = panel.scrollHeight + 'px'; setTimeout(function(){ if (open) panel.style.height = 'auto'; }, 520); }
         else panel.style.height = '0px';
+        // The open/close changes page height, which moves the pinned sections below. Recompute pin
+        // positions once the toggle settles so their start offsets always match the current layout.
         if (window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 560);
       };
-      card.style.cursor = 'pointer';
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      var canHover = window.matchMedia('(hover: hover)').matches;
-      if (canHover){
-        card.addEventListener('mouseenter', function(){ set(true); });
-        card.addEventListener('mouseleave', function(){ set(false); });
-      }
-      card.addEventListener('click', function(){ set(!open); });
-      card.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); set(!open); } });
-      card.addEventListener('focus', function(){ set(true); });
-      card.addEventListener('blur', function(){ set(false); });
       var hint = document.createElement('div');
-      hint.textContent = canHover ? 'Hover to see how it works' : 'Tap to see how it works';
-      hint.style.cssText = 'margin-top:14px;font-size:11.5px;font-weight:500;letter-spacing:.02em;color:#0F766E';
+      hint.textContent = 'How it works';
+      hint.style.cssText = 'margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#0F766E';
       card.insertBefore(hint, panel);
+      // Open automatically as the card scrolls into the middle of the viewport and collapse as it
+      // leaves - no hover or tap. It always re-collapses before the pinned sections below it, so their
+      // pin spacing stays correct without a refresh.
+      if (window.ScrollTrigger){
+        _triggers.push(ScrollTrigger.create({ trigger: card, start: 'top 68%', end: 'bottom 32%', onToggle: function(self){ set(self.isActive); } }));
+      } else {
+        set(true);
+      }
     });
   }
 
