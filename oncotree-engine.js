@@ -134,8 +134,11 @@
     });
 
     var phenotype = buildPhenotype(graph, byId, st, answers);
+    // Only ACTIVE, unanswered required nodes are "missing" - including under rebase, where the rebase
+    // node is a start (active) and downstream required nodes become active as they are answered. (A
+    // blanket rebase clause would wrongly flag required nodes on branches the rebase target never needs.)
     var missingRequired = nodes.filter(function (n) {
-      return n.required && (st[n.id].status === ACTIVE || opts.rebaseId) && !st[n.id].isAnswered;
+      return n.required && st[n.id].status === ACTIVE && !st[n.id].isAnswered;
     }).map(function (n) { return { id: n.id, name: n.name || n.title, phenotypeKey: n.phenotypeKey }; });
 
     var activePathIds = order.filter(function (id) { return st[id].status === ACTIVE; });

@@ -55,7 +55,7 @@ test("mid-pathway renders the progress rail + the current question", () => {
 });
 
 test("HER2 positive: outcome shows applicable HER2 protocol cards with unmistakable DRAFT badges", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   const html = UI._bodyHtml();
   assert.ok(/applicable protocol/.test(html));
   assert.ok(/Dabrafenib|Docetaxel|Pertuzumab|TCHP|Trastuzumab|breast-tchp/i.test(html) || /breast-tch/.test(html), "a HER2 protocol card appears");
@@ -65,7 +65,7 @@ test("HER2 positive: outcome shows applicable HER2 protocol cards with unmistaka
 });
 
 test("excluded-pathways panel explains WHY via disabledBy when expanded", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.showExcluded = true;
   UI._st.whyOpen = { n_hrpos: true, n_tnbc: true };
   const html = UI._bodyHtml();
@@ -76,7 +76,7 @@ test("excluded-pathways panel explains WHY via disabledBy when expanded", () => 
 });
 
 test("protocol detail view renders the regimen table + a DRAFT warning, never a bare approval", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.openedProtocol = "breast-tchp";
   const html = UI._bodyHtml();
   assert.ok(/Regimen/.test(html));
@@ -86,7 +86,7 @@ test("protocol detail view renders the regimen table + a DRAFT warning, never a 
 });
 
 test("selecting a protocol shows the handoff confirmation, not an activation", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s4"], n_setting: ["metastatic"], n_her2: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s4"], n_setting: ["metastatic"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._select("breast-tdm1");
   const html = UI._bodyHtml();
   assert.ok(/Protocol selected/.test(html));
@@ -97,7 +97,7 @@ test("selecting a protocol shows the handoff confirmation, not an activation", (
 });
 
 test("map view renders every node with a state class (active/disabled/unresolved)", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.view = "map";
   const html = UI._bodyHtml();
   assert.ok(/ot-map-row active/.test(html));
@@ -106,8 +106,8 @@ test("map view renders every node with a state class (active/disabled/unresolved
 });
 
 test("answering prunes now-unreachable downstream answers (no stale deep answer)", () => {
-  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["neg"], n_hr: ["pos"] });
+  reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["neg"], n_hr2n: ["pos"] });
   UI._answer("n_her2", "pos");                       // flip HER2 to positive
-  // n_hr is now disabled, so its stale answer must have been pruned
-  assert.equal(UI._st.answers.n_hr, undefined);
+  // n_hr2n is now disabled, so its stale answer must have been pruned
+  assert.equal(UI._st.answers.n_hr2n, undefined);
 });

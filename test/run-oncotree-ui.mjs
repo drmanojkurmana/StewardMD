@@ -57,8 +57,10 @@ try {
   // progress rail shows prior answers
   ok(Number(await ev(`return document.querySelectorAll(".ot-rail-chip").length;`)) >= 3, "progress rail shows answered steps");
 
-  // HER2 positive -> outcome
+  // HER2 positive -> HR question (HR is captured for HER2+ too) -> HR negative -> outcome
   await clickAct(`[data-ot-act="answer"][data-ot-opt="pos"]`);
+  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("Hormone receptor") >= 0, "HER2+ routes through the hormone-receptor question");
+  await clickAct(`[data-ot-act="answer"][data-ot-opt="neg"]`);
   ok(Number(await ev(`return document.querySelectorAll(".ot-card").length;`)) > 0, "HER2-positive outcome shows applicable protocol cards");
   ok(await ev(`return !!document.querySelector(".ot-badge.exp");`) === true, "protocol cards carry an unmistakable EXPERIMENTAL badge");
   ok((await ev(`return document.querySelector(".ot-outcome").textContent||"";`) || "").toLowerCase().indexOf("her2-positive") >= 0, "outcome is the HER2-positive branch");

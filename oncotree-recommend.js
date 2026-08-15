@@ -78,8 +78,10 @@
 
   function lifecycleBadge(p) {
     var ls = norm(p.lifecycleState) || (p.status ? norm(p.status) : null);
-    if (ls === "active") return { badge: "ACTIVE", approved: true };
+    // experimental is checked FIRST: a record flagged experimental is NEVER "approved", even if some
+    // tool also set lifecycleState:"active" (defensive - a draft must never render as approved).
     if (p.experimental) return { badge: "EXPERIMENTAL DRAFT", approved: false };
+    if (ls === "active") return { badge: "ACTIVE", approved: true };
     if (ls === "draft" || ls === null) return { badge: "DRAFT", approved: false };
     if (ls === "superseded") return { badge: "SUPERSEDED", approved: false };
     return { badge: String(ls).toUpperCase(), approved: false };
