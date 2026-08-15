@@ -1554,6 +1554,9 @@ window.openExternal = function (u) {
 <script src="/clinical-vocab.js?v=gold363" defer></script>
 <script src="/icu.js?v=gold998-tl" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
+<!-- ICU at-rest encryption helper (window.SMD_ICU_CRYPTO). Flag smd_icu_encrypt (default OFF);
+     icu-collab.js checks for this global + the flag before using it, so load order is safe. -->
+<script src="/icu-crypto.js?v=gold454" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
