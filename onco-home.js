@@ -385,6 +385,13 @@
     var i = act.indexOf(":"), verb = i >= 0 ? act.slice(0, i) : act, arg = i >= 0 ? act.slice(i + 1) : "";
     // Recent: record navigational cards/rows/chips (never close/back/toggles). No-op unless favorites on.
     if (b.classList && (b.classList.contains("oh-card") || b.classList.contains("oh-row") || b.classList.contains("oh-favchip"))) recordRecent(b, act);
+    // These verbs open a SEPARATE full-screen overlay. Onco Home is z-index 875; the calculators (870),
+    // drugs (872) and onco sub-view (staging/CTCAE/irAE/RECIST, all 875) overlays sit at/below it, so a
+    // sub-view opened while Onco Home is still ON renders BEHIND it and looks like "nothing happened".
+    // Hide Onco Home first so the sub-view is always visible. In-place modes (kb-browse / protoref /
+    // drugonco / home-dash) are intentionally excluded - they repaint inside this overlay.
+    var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1 };
+    if (OPENS_OVERLAY[verb]) close();
     if (verb === "close") { close(); return; }
     if (verb === "calc-cat") { try { G.MEDCALC && G.MEDCALC.openList && G.MEDCALC.openList("Oncology"); } catch (e2) {} return; }
     if (verb === "calc") { try { G.MEDCALC && G.MEDCALC.open && G.MEDCALC.open(arg); } catch (e2) {} return; }
