@@ -40,7 +40,9 @@
   }
 
   /* ------------------------------ UI ------------------------------ */
-  function flagOn() { try { if (/[?&]shared=1\b/.test(location.search || "")) return true; return localStorage.getItem("smd_shared_clinic") === "1"; } catch (e) { return false; } }
+  // PUBLIC-RELEASE-GATE: default ON for dev/testing (reachable without opt-in). Set back to === "1" before
+  // any App-Store/Play/public release — the live 2-device Drive sync is not yet clinician/owner-verified.
+  function flagOn() { try { if (/[?&]shared=0\b/.test(location.search || "")) return false; if (/[?&]shared=1\b/.test(location.search || "")) return true; return localStorage.getItem("smd_shared_clinic") !== "0"; } catch (e) { return true; } }
   function root() { var el = document.getElementById("smdShared"); if (!el) { el = document.createElement("div"); el.id = "smdShared"; document.body.appendChild(el); injectCSS(); } el.onclick = onClick; return el; }
   function close() { var el = document.getElementById("smdShared"); if (el) el.classList.remove("on"); }
 

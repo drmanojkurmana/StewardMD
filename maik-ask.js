@@ -16,7 +16,9 @@
 (function (root) {
   "use strict";
 
-  function flagOn() { try { return root && root.localStorage && localStorage.getItem("smd_maik_ask") === "1"; } catch (e) { return false; } }
+  // PUBLIC-RELEASE-GATE: default ON for dev/testing (owner enable 2026-08-15). The clinical pathways are
+  // reviewed:false — SET back to === "1" before any store/public release, pending clinician sign-off. Opt-out: smd_maik_ask="0".
+  function flagOn() { try { return !!(root && root.localStorage) && localStorage.getItem("smd_maik_ask") !== "0"; } catch (e) { return true; } }
 
   // ---- multilingual yes/no + deterministic answer extraction (cost control: LLM only when needed) ----
   function isPositive(text) {

@@ -99,6 +99,17 @@
       return localStorage.getItem("smd_icu_groups") === "1";
     } catch (e) { return false; }
   }
+  // At-rest encryption of the shared patient doc (name/dx/bed/state). ?icuenc=1/0 →
+  // localStorage['smd_icu_encrypt'] → default OFF. Requires window.SMD_ICU_CRYPTO + the server
+  // secret; when OFF the read/write paths are byte-for-byte the original cleartext behaviour.
+  function icuEncOn() {
+    try {
+      if (!window.SMD_ICU_CRYPTO) return false;
+      var q = (location.search.match(/[?&]icuenc=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_icu_encrypt") === "1";
+    } catch (e) { return false; }
+  }
 
   /* --------------------------------------------------- firebase / firestore */
   var _db = null, _persistTried = false;
@@ -275,6 +286,28 @@
       lastUpdate: mapLastUpdate(data.lastUpdate),
       assignedTo: data.assignedTo || null
     };
+  }
+  // Async read for encrypted docs: decrypt the PHI envelope (name/dx/bed/state), then reuse
+  // mapPatientDoc so the view-model shape is identical. A cleartext doc (no .enc) passes straight
+  // through (back-compat). A decrypt failure (no key / not a member / tamper) renders a locked
+  // placeholder — operational fields (severity/timestamps) stay visible, PHI never leaks.
+  function mapPatientDocDec(id, data, gid) {
+    data = data || {};
+    if (!data.enc) return Promise.resolve(mapPatientDoc(id, data));
+    return window.SMD_ICU_CRYPTO.decObj(gid, data.enc).then(function (pii) {
+      pii = pii || {};
+      var merged = {}; for (var k in data) merged[k] = data[k];
+      merged.name = pii.name; merged.dx = pii.dx; merged.bed = pii.bed; merged.state = pii.state;
+      delete merged.enc;
+      return mapPatientDoc(id, merged);
+    }, function () {
+      return mapPatientDoc(id, {
+        name: "🔒 Locked", dx: "", bed: "",
+        severity: data.severity || null, savedAt: data.savedAt, updatedAt: data.updatedAt,
+        reviewedAt: data.reviewedAt, reviewedBy: data.reviewedBy, reviewedByName: data.reviewedByName,
+        lastUpdate: data.lastUpdate, assignedTo: data.assignedTo || null
+      });
+    });
   }
   function mapLastUpdate(lu) {
     if (!lu) return null;
@@ -833,9 +866,10 @@
     return makeSub(function (db) {
       return grpRef(db, gid).collection("patients")
         .onSnapshot(function (snap) {
-          var out = [];
-          snap.forEach(function (d) { out.push(mapPatientDoc(d.id, d.data())); });
-          cb && cb(out);
+          var docs = []; snap.forEach(function (d) { docs.push({ id: d.id, data: d.data() }); });
+          if (!icuEncOn()) { cb && cb(docs.map(function (x) { return mapPatientDoc(x.id, x.data); })); return; }
+          Promise.all(docs.map(function (x) { return mapPatientDocDec(x.id, x.data, gid); }))
+            .then(function (out) { cb && cb(out); }, function () { cb && cb(docs.map(function (x) { return mapPatientDoc(x.id, x.data); })); });
         }, function (e) { if (onErr) onErr(e); else cb && cb([]); });
     });
   }
@@ -848,7 +882,9 @@
       var base = ptRef(db, gid, pid);
       var offs = [];
       offs.push(base.onSnapshot(function (d) {
-        vm.patient = (d && d.exists) ? mapPatientDoc(d.id, d.data()) : null; emit();
+        if (!(d && d.exists)) { vm.patient = null; emit(); return; }
+        if (!icuEncOn()) { vm.patient = mapPatientDoc(d.id, d.data()); emit(); return; }
+        mapPatientDocDec(d.id, d.data(), gid).then(function (p) { vm.patient = p; emit(); }, function () { vm.patient = mapPatientDoc(d.id, d.data()); emit(); });
       }, function () { emit(); }));
       offs.push(base.collection("timeline").orderBy("ts", "desc").onSnapshot(function (snap) {
         var a = []; snap.forEach(function (x) { a.push(mapTimeline(x.id, x.data())); }); vm.timeline = a; emit();
@@ -878,7 +914,18 @@
           lastUpdate: { by: uid, byName: currentName(), text: String(lastUpdateText || "Updated patient"), at: fieldValue().serverTimestamp() }
         };
         var sev = severityOf(clean); if (sev) doc.severity = sev;
-        track(ptRef(db, gid, pid).set(doc, { merge: true })).then(function () { resolve(pid); }, reject);
+        function writeDoc() { track(ptRef(db, gid, pid).set(doc, { merge: true })).then(function () { resolve(pid); }, reject); }
+        if (!icuEncOn()) { writeDoc(); return; }
+        // Encrypt the PHI fields on-device (name/dx/bed/state); keep operational fields cleartext
+        // (severity/timestamps/lastUpdate) so the board still sorts. Fail-CLOSED: if the key can't
+        // be obtained, do NOT fall back to writing cleartext PHI.
+        window.SMD_ICU_CRYPTO.encObj(gid, { name: doc.name, dx: doc.dx, bed: doc.bed, state: doc.state }).then(function (blob) {
+          doc.enc = blob;
+          var FV = fieldValue();
+          if (FV && FV.delete) { doc.name = FV.delete(); doc.dx = FV.delete(); doc.bed = FV.delete(); doc.state = FV.delete(); }
+          else { delete doc.name; delete doc.dx; delete doc.bed; delete doc.state; }
+          writeDoc();
+        }, function (e) { reject(e || new Error("icu-encrypt-failed")); });
       });
     });
   }
