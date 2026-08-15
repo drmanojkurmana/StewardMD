@@ -345,6 +345,7 @@
 
   var ICON = {
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
+    help: '<circle cx="12" cy="12" r="10"/><path d="M9.5 9.2a2.5 2.5 0 0 1 4.5 1.4c0 1.6-2 2-2 3.4"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
     shieldPlus: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/>',
     stcase: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/>',
@@ -1793,6 +1794,7 @@
         (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
         '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
@@ -1821,6 +1823,7 @@
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
         if (a === "notifprefs") return openNotifPrefs();
+        if (a === "help") { closeSheet(); return openHelp(); }
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }
@@ -1961,6 +1964,7 @@
       if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
       host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || [], (res[6] && res[6].config) || {}, res[7] || {});
       wireAiControl(host);
+      mountSupportAdmin(host);
     });
   }
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
@@ -5146,6 +5150,213 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     });
   }
   try { window.SMD_openNotifPrefs = openNotifPrefs; } catch (e) {}
+
+  // ---- Help & support (in-app tickets) ----------------------------------------------------------
+  // Doctor opens More -> Help & support, files a request (unique complaint id SMD-XXXXXX), and sees
+  // the owner's replies in the same thread. Owner side is a panel in the AI Control Center.
+  function injectSupportCSS() {
+    if (document.getElementById("sup-css")) return;
+    var st = document.createElement("style"); st.id = "sup-css";
+    st.textContent =
+      ".sup{padding:2px 2px 12px}" +
+      ".sup-h{font:800 12px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:0 2px 9px}" +
+      ".sup-in,.sup-ta{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;border:1px solid var(--line,#e2e8f0);background:var(--bg,#fff);color:var(--ink,#0f172a);font:600 14px var(--hfont,system-ui);margin-bottom:9px}" +
+      ".sup-ta{resize:vertical;line-height:1.5}" +
+      ".sup-warn{font:600 11.5px var(--hfont,system-ui);color:#b45309;background:#fff7ed;border:1px solid #fed7aa;border-radius:9px;padding:8px 10px;margin-bottom:10px;line-height:1.45}" +
+      "body.dark .sup-warn{background:#3a2a12;border-color:#7c4d12;color:#fbbf24}" +
+      ".sup-btn{width:100%;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:12px;padding:12px;font:700 14px var(--hfont,system-ui);cursor:pointer}" +
+      ".sup-btn:disabled{opacity:.6}" +
+      ".sup-out{font:600 12.5px var(--hfont,system-ui);color:var(--ink,#0f172a);margin-top:8px;line-height:1.5}" +
+      ".sup-note{font:600 13px var(--hfont,system-ui);color:var(--hmut,#889);padding:14px 4px;line-height:1.5}" +
+      ".sup-list{display:flex;flex-direction:column}" +
+      ".sup-item{padding:11px 4px;border-top:1px solid var(--line,#e2e8f0);cursor:pointer}" +
+      ".sup-item:first-child{border-top:none}" +
+      ".sup-item-top{display:flex;align-items:center;gap:8px;margin-bottom:3px}" +
+      ".sup-id{font:700 11px var(--hfont,monospace);color:var(--hmut,#889);letter-spacing:.04em}" +
+      ".sup-subj{font:700 14px var(--hfont,system-ui);color:var(--ink,#0f172a)}" +
+      ".sup-snip{font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+      ".sup-badge{font:800 10px var(--hfont,system-ui);border-radius:6px;padding:2px 7px;text-transform:uppercase;letter-spacing:.03em}" +
+      ".sup-open{background:#dcfce7;color:#166534}.sup-res{background:#e2e8f0;color:#475569}" +
+      "body.dark .sup-open{background:#14532d;color:#bbf7d0}body.dark .sup-res{background:#1e293b;color:#94a3b8}" +
+      ".sup-back{background:none;border:none;color:var(--teal,#0e6e63);font:700 13px var(--hfont,system-ui);cursor:pointer;padding:4px 0;margin-bottom:6px}" +
+      ".sup-thread{display:flex;flex-direction:column;gap:8px;margin:6px 0 12px}" +
+      ".sup-msg{max-width:88%;padding:9px 12px;border-radius:12px}" +
+      ".sup-from-u{align-self:flex-end;background:var(--teal,#0e6e63);color:#fff}" +
+      ".sup-from-s{align-self:flex-start;background:var(--card,#f1f5f9);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0)}" +
+      "body.dark .sup-from-s{background:#0f172a;border-color:#1e293b;color:#e6edf3}" +
+      ".sup-msg-who{font:800 10px var(--hfont,system-ui);opacity:.75;margin-bottom:2px}" +
+      ".sup-msg-tx{font:600 13.5px var(--hfont,system-ui);line-height:1.5;white-space:pre-wrap;word-break:break-word}" +
+      ".sup-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#dc2626;vertical-align:middle;margin-left:4px}" +
+      ".sup-load{padding:20px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+    document.head.appendChild(st);
+  }
+  function supportFetch(query, opts) {
+    var tokP;
+    try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    return tokP.then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t;
+      return fetch("/api/support" + (query || ""), { method: (opts && opts.method) || "GET", headers: h, credentials: "same-origin", body: (opts && opts.body) ? JSON.stringify(opts.body) : undefined });
+    }).then(function (r) { return r ? r.json().catch(function () { return null; }) : null; }).catch(function () { return null; });
+  }
+  function supSignedIn() { try { return !!(window.SMD_AUTH && SMD_AUTH.currentUser); } catch (e) { return false; } }
+  function supPlatform() { try { var C = window.Capacitor; return (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) || "web"; } catch (e) { return "web"; } }
+  function supBuild() { try { var s = document.querySelector('script[src*="app.js"]'); return (s && (s.getAttribute("src") || "").replace(/^.*\?v=/, "")) || ""; } catch (e) { return ""; } }
+  function supBadge(st) { return '<span class="sup-badge ' + (st === "resolved" ? "sup-res" : "sup-open") + '">' + (st === "resolved" ? "Resolved" : "Open") + '</span>'; }
+  function supThreadHtml(t) {
+    return (t.messages || []).map(function (m) {
+      return '<div class="sup-msg sup-' + (m.from === "support" ? "from-s" : "from-u") + '"><div class="sup-msg-who">' + (m.from === "support" ? "StewardMD support" : "You") + '</div><div class="sup-msg-tx">' + nEsc(m.text) + '</div></div>';
+    }).join("");
+  }
+  function openHelp() {
+    injectSupportCSS();
+    openSheet('<div class="hv-sh-t">Help &amp; support</div><div id="supBody" class="sup"><div class="sup-load">Loading…</div></div>');
+    renderHelp();
+  }
+  function renderHelp() {
+    var host = document.getElementById("supBody"); if (!host) return;
+    if (!supSignedIn()) { host.innerHTML = '<div class="sup-note">Please sign in (More &rarr; Account &amp; sign-in) to contact support and track your requests.</div>'; return; }
+    host.innerHTML =
+      '<div class="sup-h">New request</div>' +
+      '<input id="supSubj" class="sup-in" placeholder="Subject (e.g. Voice not working)" maxlength="200" autocomplete="off">' +
+      '<textarea id="supMsg" class="sup-ta" rows="4" maxlength="4000" placeholder="Describe the problem or question in detail."></textarea>' +
+      '<div class="sup-warn">Please do not include patient-identifying details (names, IDs, phone numbers).</div>' +
+      '<button id="supSend" class="sup-btn">Send request</button>' +
+      '<div id="supOut" class="sup-out"></div>' +
+      '<div class="sup-h" style="margin-top:20px">Your requests</div>' +
+      '<div id="supList" class="sup-list"><div class="sup-load">Loading…</div></div>';
+    var send = host.querySelector("#supSend");
+    send.addEventListener("click", function () {
+      var subj = (host.querySelector("#supSubj").value || "").trim(), msg = (host.querySelector("#supMsg").value || "").trim();
+      var out = host.querySelector("#supOut");
+      if (!subj && !msg) { out.textContent = "Please enter a subject or a message."; return; }
+      send.disabled = true; out.textContent = "Sending…";
+      supportFetch("", { method: "POST", body: { action: "create", subject: subj, text: msg, platform: supPlatform(), build: supBuild() } }).then(function (r) {
+        send.disabled = false;
+        if (r && r.ok && r.ticket) {
+          out.innerHTML = 'Request sent. Your complaint id is <b>' + nEsc(r.ticket.id) + '</b>. We will reply here.';
+          host.querySelector("#supSubj").value = ""; host.querySelector("#supMsg").value = "";
+          try { if (window.SMD_track) SMD_track("support_ticket"); } catch (e) {}
+          loadMyTickets();
+        } else { out.textContent = (r && r.error === "sign-in-required") ? "Please sign in to contact support." : "Could not send. Please check your connection and try again."; }
+      });
+    });
+    loadMyTickets();
+  }
+  function loadMyTickets() {
+    var list = document.getElementById("supList"); if (!list) return;
+    supportFetch("", {}).then(function (r) {
+      if (!list) return;
+      var ts = (r && r.tickets) || [];
+      if (!ts.length) { list.innerHTML = '<div class="sup-note">No requests yet.</div>'; return; }
+      list.innerHTML = ts.map(function (t) {
+        var last = (t.messages || [])[t.messages.length - 1] || {};
+        return '<div class="sup-item" data-sup-id="' + nEsc(t.id) + '">' +
+          '<div class="sup-item-top">' + supBadge(t.status) + '<span class="sup-id">' + nEsc(t.id) + '</span></div>' +
+          '<div class="sup-subj">' + nEsc(t.subject) + '</div>' +
+          '<div class="sup-snip">' + (last.from === "support" ? "Support: " : "") + nEsc((last.text || "").slice(0, 90)) + '</div>' +
+        '</div>';
+      }).join("");
+      list.querySelectorAll("[data-sup-id]").forEach(function (el) {
+        el.addEventListener("click", function () { openMyTicket(el.getAttribute("data-sup-id"), ts); });
+      });
+    });
+  }
+  function openMyTicket(id, ts) {
+    var t = null; for (var i = 0; i < ts.length; i++) { if (ts[i].id === id) { t = ts[i]; break; } }
+    if (!t) return;
+    var host = document.getElementById("supBody"); if (!host) return;
+    host.innerHTML =
+      '<button class="sup-back" id="supBack">&larr; All requests</button>' +
+      '<div class="sup-item-top">' + supBadge(t.status) + '<span class="sup-id">' + nEsc(t.id) + '</span></div>' +
+      '<div class="sup-subj" style="margin:4px 0 10px">' + nEsc(t.subject) + '</div>' +
+      '<div class="sup-thread">' + supThreadHtml(t) + '</div>' +
+      (t.status === "resolved" ? '<div class="sup-note" style="padding:6px 4px">This request is resolved. Reply to reopen it.</div>' : '') +
+      '<textarea id="supReply" class="sup-ta" rows="3" maxlength="4000" placeholder="Add a reply…"></textarea>' +
+      '<button id="supReplyBtn" class="sup-btn">Send reply</button>' +
+      '<div id="supReplyOut" class="sup-out"></div>';
+    host.querySelector("#supBack").addEventListener("click", renderHelp);
+    host.querySelector("#supReplyBtn").addEventListener("click", function () {
+      var txt = (host.querySelector("#supReply").value || "").trim(), out = host.querySelector("#supReplyOut");
+      if (!txt) { out.textContent = "Please enter a reply."; return; }
+      out.textContent = "Sending…";
+      supportFetch("", { method: "POST", body: { action: "reply", id: id, text: txt } }).then(function (r) {
+        if (r && r.ok) { try { toast("Reply sent"); } catch (e) {} supportFetch("", {}).then(function (rr) { openMyTicket(id, (rr && rr.tickets) || []); }); }
+        else out.textContent = "Could not send your reply.";
+      });
+    });
+  }
+  try { window.SMD_openHelp = openHelp; } catch (e) {}
+
+  // ---- Owner support console (mounted into the AI Control Center) --------------------------------
+  function mountSupportAdmin(host) {
+    if (!host || host.querySelector("#aicSupport")) return;
+    injectSupportCSS();
+    var sec = document.createElement("div"); sec.className = "aic-sec"; sec.id = "aicSupport";
+    sec.innerHTML = '<div class="aic-h">Support tickets</div>' +
+      '<div class="aic-btns" style="gap:6px;margin-bottom:8px"><button class="aic-chip on" data-sup-f="open">Open</button><button class="aic-chip" data-sup-f="">All</button><button class="aic-chip" data-sup-f="resolved">Resolved</button></div>' +
+      '<div id="aicSupList" class="aic-users"><div class="aic-load">Loading…</div></div>';
+    host.insertBefore(sec, host.children[1] || null);   // near the top so incoming tickets are prominent
+    sec.querySelectorAll("[data-sup-f]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        sec.querySelectorAll("[data-sup-f]").forEach(function (x) { x.classList.remove("on"); });
+        b.classList.add("on"); loadSupportAdmin(b.getAttribute("data-sup-f"));
+      });
+    });
+    loadSupportAdmin("open");
+  }
+  function loadSupportAdmin(status) {
+    var list = document.getElementById("aicSupList"); if (!list) return;
+    list.innerHTML = '<div class="aic-load">Loading…</div>';
+    aiAdminFetch("/admin/support" + (status ? ("?status=" + status) : "")).then(function (r) {
+      if (!list) return;
+      var ts = (r && r.tickets) || [];
+      if (!ts.length) { list.innerHTML = '<div class="aic-mut" style="padding:8px 2px">No tickets.</div>'; return; }
+      list.innerHTML = ts.map(function (t) {
+        return '<div class="aic-user" data-sup-open="' + aiCtlEsc(t.id) + '">' +
+          '<div class="aic-user-em">' + aiCtlEsc(t.subject) + (t.unread ? ' <span class="sup-dot"></span>' : '') + '</div>' +
+          '<div class="aic-user-meta">' + aiCtlEsc(t.id) + ' &middot; ' + aiCtlEsc(t.email || t.owner) + ' &middot; ' + (t.status === "resolved" ? "resolved" : "open") + '</div>' +
+        '</div>';
+      }).join("");
+      list.querySelectorAll("[data-sup-open]").forEach(function (el) {
+        el.addEventListener("click", function () { openSupportAdmin(el.getAttribute("data-sup-open"), status); });
+      });
+    });
+  }
+  function openSupportAdmin(id, backStatus) {
+    var list = document.getElementById("aicSupList"); if (!list) return;
+    list.innerHTML = '<div class="aic-load">Loading…</div>';
+    aiAdminFetch("/admin/support?id=" + encodeURIComponent(id)).then(function (r) {
+      var t = r && r.ticket; if (!t) { list.innerHTML = '<div class="aic-mut">Ticket not found.</div>'; return; }
+      var thread = (t.messages || []).map(function (m) {
+        return '<div class="sup-msg sup-' + (m.from === "support" ? "from-s" : "from-u") + '"><div class="sup-msg-who">' + (m.from === "support" ? "You (support)" : "Doctor") + '</div><div class="sup-msg-tx">' + aiCtlEsc(m.text) + '</div></div>';
+      }).join("");
+      list.innerHTML =
+        '<button class="sup-back" data-sup-back="1">&larr; Back to tickets</button>' +
+        '<div class="aic-user-meta">' + aiCtlEsc(t.id) + ' &middot; ' + aiCtlEsc(t.email || t.owner) + ' &middot; ' + aiCtlEsc((t.platform || "") + " " + (t.build || "")) + '</div>' +
+        '<div class="aic-user-em" style="margin:6px 0 8px">' + aiCtlEsc(t.subject) + '</div>' +
+        '<div class="sup-thread">' + thread + '</div>' +
+        '<textarea id="aicSupReply" class="aic-input" rows="3" placeholder="Reply to the doctor…"></textarea>' +
+        '<div class="aic-btns" style="gap:6px"><button class="aic-btn" style="flex:1;margin-top:0" data-sup-send="reply">Reply</button><button class="aic-btn" style="flex:1;margin-top:0" data-sup-send="resolve">Reply &amp; Resolve</button></div>' +
+        (t.status === "resolved" ? '<button class="aic-chip" data-sup-send="reopen" style="margin-top:8px">Reopen ticket</button>' : '') +
+        '<div id="aicSupOut" class="aic-note"></div>';
+      list.querySelector("[data-sup-back]").addEventListener("click", function () { loadSupportAdmin(backStatus); });
+      list.querySelectorAll("[data-sup-send]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var mode = b.getAttribute("data-sup-send");
+          var txt = (list.querySelector("#aicSupReply").value || "").trim(), out = list.querySelector("#aicSupOut");
+          var body = { id: id };
+          if (mode === "reply") { if (!txt) { out.textContent = "Enter a reply."; return; } body.text = txt; }
+          else if (mode === "resolve") { body.text = txt; body.resolve = true; }
+          else if (mode === "reopen") { body.status = "open"; }
+          out.textContent = "Sending…";
+          aiAdminFetch("/admin/support-reply", { method: "POST", body: body }).then(function (rr) {
+            if (rr && rr.ok) { try { toast("Sent"); } catch (e) {} openSupportAdmin(id, backStatus); }
+            else out.textContent = "Failed" + (rr && rr.error ? ": " + rr.error : "");
+          });
+        });
+      });
+    });
+  }
 
   // Deep link from a push notification → open the Medical Updates bell on that guideline's
   // card (NOT the external source URL). Used by the SW + native tap handlers via /?u=<id>.

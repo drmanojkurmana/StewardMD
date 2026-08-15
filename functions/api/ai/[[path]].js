@@ -102,6 +102,7 @@ import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
+import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -805,7 +806,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -820,6 +821,27 @@ export async function onRequest(context) {
     }
 
     if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));
+
+    // Support tickets: GET list (?status=open|resolved) or a single thread (?id=); POST reply/resolve/reopen.
+    if (seg === "admin/support") {
+      const u2 = new URL(request.url), tid = u2.searchParams.get("id");
+      if (tid) return json({ ticket: await getSupportTicket(store, tid) });
+      return json({ tickets: await listSupportTickets(store, u2.searchParams.get("status") || "") });
+    }
+    if (seg === "admin/support-reply") {
+      if (request.method !== "POST") return json({ error: "method" }, 405);
+      let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+      const id = String(b.id || ""); const hasText = !!String(b.text || "").trim();
+      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open";
+      let t = null;
+      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : undefined));
+      else if (resolve) t = await setSupportStatus(store, id, "resolved", Date.now());
+      else if (reopen) t = await setSupportStatus(store, id, "open", Date.now());
+      else return json({ ok: false, error: "nothing-to-do" }, 400);
+      if (!t) return json({ ok: false, error: "not-found" }, 404);
+      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : ""), actorId, Date.now());
+      return json({ ok: true, ticket: t });
+    }
 
     if (seg === "admin/config") {
       if (request.method === "POST") {
