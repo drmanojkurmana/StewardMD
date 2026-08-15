@@ -622,7 +622,14 @@
   function oncoApplyOrReviewPanel(st) {
     if (!oncoFlagOn() || !st.writeOn) return "";
     if (st.oncoDraft) return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildReviewPanel) ? G.SMD_ONCOUI._buildReviewPanel(st.oncoDraft) : "";
-    return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildApplyPanel) ? G.SMD_ONCOUI._buildApplyPanel(st.oncoProtocols || []) : "";
+    return oncoTreeLaunchBtn() + ((G.SMD_ONCOUI && G.SMD_ONCOUI._buildApplyPanel) ? G.SMD_ONCOUI._buildApplyPanel(st.oncoProtocols || []) : "");
+  }
+  // Launch the OncoTree pathway navigator FOR THIS PATIENT (carries patient ctx so its "Continue in
+  // treatment workflow" hands the chosen protocol straight back here to compute doses). Nav-flag gated.
+  function oncoNavOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) { return false; } }
+  function oncoTreeLaunchBtn() {
+    if (!oncoNavOn() || !(G.SMD_ONCOTREE && G.SMD_ONCOTREE.open)) return "";
+    return '<button class="oe-btn ghost oe-onco-tree" data-oe-act="onco-tree-open">' + ms("account_tree") + "Find protocol via OncoTree pathway</button>";
   }
   // "Let MaiK Ask" — optional AI-guided history taking (flag smd_maik_ask). Shown only when the feature
   // is on AND a complaint is documented (MaiK needs to know what to ask about). Delegates to SMD_MAIKASK.
@@ -1000,6 +1007,7 @@
     if (cmd === "onco-cell") return oncoCellClick(arg);
     if (cmd === "onco-drawer-close") { st.doseDrawer = null; paint(); return; }
     if (cmd === "onco-apply") return oncoApply(arg);
+    if (cmd === "onco-tree-open") return openOncoTree();
     if (cmd === "onco-override") return oncoSaveOverride(arg);
     if (cmd === "onco-create") return oncoCreateAndActivate();
     if (cmd === "onco-add-emr") return oncoAddToEmr();
@@ -1083,6 +1091,33 @@
         paint();
       })
       .catch(function () { st.oncoProtocols = []; paint(); });
+  }
+  // Open the OncoTree navigator WITH this patient's context; its "Continue in treatment workflow"
+  // returns the chosen protocol here via the smd-oncotree-select CustomEvent (receiveOncoTreeProtocol).
+  function openOncoTree() {
+    if (!(G.SMD_ONCOTREE && G.SMD_ONCOTREE.open)) { toast("OncoTree is not available."); return; }
+    var v = st.assessVals || {};
+    G.SMD_ONCOTREE.open({
+      fromEmr: true,
+      patientId: (st.patient && st.patient.mrn) || null,
+      name: (st.patient && st.patient.name) || null,
+      heightCm: v.Height || null,
+      weightKg: v.Weight || null,
+      diagnosis: v.Diagnosis || ""
+    });
+  }
+  // Receive a protocol chosen in OncoTree and stage its dose PREVIEW for the open patient. No activation:
+  // oncoApply only computes + stages a draft; the create/confirm gate + server QUEUE_ONCO_WRITE still own
+  // activation. Guarded so a stray event with no patient profile open (e.g. OncoTree from Home) is ignored.
+  function receiveOncoTreeProtocol(detail) {
+    if (!detail || !detail.protocolId) return;
+    if (!oncoFlagOn() || !st.writeOn) return;                                // engine off / read-only session
+    if (!st.patient || !(st.patient.mrn || st.patient.name)) return;         // no patient profile open
+    var id = detail.protocolId;
+    var have = (st.oncoProtocols || []).some(function (p) { return p && p.id === id; });
+    if (!have && detail.template && oncoUsable(detail.template)) st.oncoProtocols = (st.oncoProtocols || []).concat([detail.template]);
+    st.tab = "assess";
+    oncoApply(id);   // paints the review panel with computed doses (or no-ops if the protocol isn't usable)
   }
   // Apply an ACTIVE protocol: snapshot params from the EMR already in state (Height/Weight -> BSA;
   // age/creatinine not yet captured on this form - never-invent, the dose engine warns instead of
@@ -2242,6 +2277,10 @@
   // Thin delegate so tests/callers can reach the matrix builder off OPDEMR without reaching into
   // window.SMD_ONCOUI directly (onco-protocols.js owns the real, pure implementation).
   function _buildOncoMatrixDelegate(plan) { return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildOncoMatrix) ? G.SMD_ONCOUI._buildOncoMatrix(plan) : ""; }
+  // OncoTree handoff: when the navigator's "Continue in treatment workflow" fires, stage the dose
+  // preview for the open patient. Registered once; guarded (no-op unless a patient profile is open).
+  try { if (typeof document !== "undefined") document.addEventListener("smd-oncotree-select", function (e) { try { receiveOncoTreeProtocol(e && e.detail); } catch (err) {} }); } catch (e) {}
+
   G.OPDEMR = { openProfile: openProfile, close: close, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
   if (typeof module !== "undefined" && module.exports) module.exports = { _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab };
 })();

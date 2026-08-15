@@ -434,21 +434,31 @@
   // listen for; never activates a plan or computes a dose here (existing gates stay in control).
   function doHandoff() {
     var payload = st.selection || {};
-    // Always emit the selection so any host listener (e.g. an OPD-EMR patient context) can pick it up.
+    var ctx = st.ctx || {};
+    var proto = st.protocols[payload.protocolId] || null;
+    var dx = (payload.phenotype && (payload.phenotype.diagnosis || payload.phenotype.histology)) || st.guideline || null;
+    // Carry the loaded protocol object + (when launched from a chart) the patient so the OPD-EMR
+    // listener can stage the dose draft for THIS patient. Dosing/activation stay in OPD-EMR's gates.
+    payload.template = proto;
+    var fromPatient = !!(ctx.patientId || ctx.fromEmr);
+    if (fromPatient) payload.patient = { patientId: ctx.patientId || null, name: ctx.name || null, heightCm: ctx.heightCm || null, weightKg: ctx.weightKg || null };
+    // Always emit the selection so a host listener (the OPD-EMR patient context) can pick it up.
     try {
       if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: payload }));
     } catch (e) {}
-    var proto = st.protocols[payload.protocolId] || null;
-    var dx = (payload.phenotype && (payload.phenotype.diagnosis || payload.phenotype.histology)) || st.guideline || null;
-    // 1) Per-patient dose/treatment flow, when the onco treatment engine is enabled (needs BSA/patient
-    //    for real dosing; the flow + existing gates own that). Preferred destination when available.
+    // 1) Launched from a patient's chart -> the OPD-EMR listener stages the dose preview there; just close.
+    if (fromPatient) {
+      close();
+      try { if (G.toast) G.toast("Protocol sent to the patient's Oncology plan - review the computed doses there."); } catch (e1) {}
+      return;
+    }
+    // 2) Standalone with the dose flow available -> open it with the protocol.
     try {
       if (G.SMD_ONCOFLOW && G.SMD_ONCOFLOW.openFind && proto) {
         close(); G.SMD_ONCOFLOW.openFind({ diagnosis: dx }, [proto]); return;
       }
     } catch (e2) {}
-    // 2) Otherwise open the Onco workbench (reference: search, calculators, drugs, protocol library) with
-    //    the disease context, so "Continue" lands somewhere real instead of a dead end.
+    // 3) Otherwise open the Onco workbench (reference) with the disease context, so it lands somewhere real.
     try {
       if (G.SMD_ONCOHOME && G.SMD_ONCOHOME.open) {
         close(); G.SMD_ONCOHOME.open({ diagnosis: dx });
@@ -456,7 +466,7 @@
         return;
       }
     } catch (e3) {}
-    // 3) Nothing reachable (all onco surfaces off): keep the honest guidance.
+    // 4) Nothing reachable: keep the honest guidance.
     try { if (G.toast) G.toast("Selection recorded. Continue in the patient's Assessment > Oncology for dose planning."); } catch (e4) {}
   }
 
