@@ -1935,6 +1935,7 @@
     if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
+      if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
       if (!r || r.error) return;
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
@@ -1982,7 +1983,7 @@
     _amb = G.SMD_AMBIENT.start({
       speaker: "doctor",
       language: st.voiceLang || "auto",                     // en | auto | te — multilingual Whisper decodes Telugu + code-switch
-      chunkMs: 15000, refineEveryChunks: 4,                  // forward-compat with the native continuous-capture cadence (Task 5)
+      chunkMs: 15000, refineEveryChunks: 8,                  // refine every 2 min (cost): the full authoritative extraction still runs on Stop, so the final EMR is identical — this only trims mid-dictation live-preview calls
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
       onUpdate: applyVoice,

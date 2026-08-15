@@ -22,7 +22,11 @@
 
   /* Team bypass during rollout (mirrors account.js TEST_PRO_EMAILS). Leave BETA_VERIFY_ALL
    * false; trim the allowlist before public launch and rely on the claim. */
-  var BETA_VERIFY_ALL = true;   // beta: no email is gated (mirrors the free-for-all entitlement roll-out)
+  // Gate ON: unverified signed-in doctors must verify their NMC registration (or take the one-time
+  // 7-day "Skip for now" trial). Reversible without a rebuild — set localStorage smd_verify_bypass=1
+  // on a device to restore the old beta free-for-all there (team testing escape hatch).
+  var BETA_VERIFY_ALL = false;
+  try { if (window.localStorage && localStorage.getItem("smd_verify_bypass") === "1") BETA_VERIFY_ALL = true; } catch (e) {}
   var VERIFY_ALLOWLIST = [];    // removed the hardcoded 3-email allowlist
 
   function auth() { try { return window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth()); } catch (e) { return null; } }
