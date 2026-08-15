@@ -1,62 +1,46 @@
 # ONCOTREE — Morning Report
 
-**Branch:** `claude/oncotree` (off `main` @ #653)  ·  **Flag:** `smd_onco_navigator`, default **OFF**  ·  **Nothing clinically activated.**
+**Merged to `main` · Flag `smd_onco_navigator` default OFF · Nothing clinically activated.**
 
-ONCOTREE is the new **navigation layer** over the existing StewardMD oncology foundation. It references existing protocol IDs/versions, never a second protocol DB, never computes a dose, never activates a plan. **Two disease verticals are complete and work end-to-end - Breast and Lung** - behind a disease picker, proving the engine generalizes.
+ONCOTREE is the new **navigation layer** over the existing StewardMD oncology foundation. It references existing protocol IDs/versions - never a second protocol DB, never computes a dose, never activates a plan. It is now a **5-cancer navigator** behind a disease picker.
 
-> **Update:** After the initial Breast slice (merged as PR #654), ONCOTREE was extended to **multi-disease**: a disease-picker landing + a second grounded vertical, **Lung (NSCLC / SCLC / mesothelioma)**. The Lung vertical adds histology matching to the recommender so **pemetrexed is never surfaced for squamous NSCLC** and KEYNOTE-189/-407 split correctly. The Breast slice is unchanged. This addition is on branch `claude/oncotree` (commit 70751dae), R1-reviewed, pending its own merge.
+## What's delivered (all on main, flag OFF)
 
----
+**Five disease verticals**, each: pick cancer → answer phenotype → applicable **existing** Standard Protocols → protocol detail → **Select** (records the choice + emits a handoff event; never activates or doses).
 
-## What was completed
+| Cancer | Pathway |
+|---|---|
+| **Breast** | invasive → stage → setting/intent → HER2 (incl. HER2-low) → HR; DCIS → ER gate |
+| **Lung** | histology → scenario → EGFR/ALK → PD-L1; SCLC (LS/ES/relapsed); mesothelioma |
+| **Colorectal** | setting/stage → MMR/MSI (dMMR→immunotherapy, MSS→chemo backbones) |
+| **Prostate** | state (localized / mCSPC / mCRPC) → mCRPC option (standard / HRR-PARP / PSMA-radioligand) |
+| **Melanoma** | setting → BRAF (targeted only if mutant; immunotherapy for both) |
 
-**End-to-end breast pathway (works on mobile):**
-Diagnosis → invasive → stage → setting/intent → HER2 → HR → **applicable existing protocols** → protocol detail → **Select** → hand-off to the existing workflow.
+**PRs merged:** #654 (breast), #655 (multi-disease picker + lung), #656 (fix-all + colorectal/prostate/melanoma).
 
-- **`oncotree-engine.js`** — pure, deterministic pathway evaluator. ONE evaluated state drives every view. Active / disabled / unresolved status; first-class **`disabledBy`** provenance (traces the exact decision that excluded a branch); phenotype collection that **never invents** (an "unknown" answer sets nothing); **rebase** (Start Here); client search. No DOM/fetch/Date/Math.random — identical in Node and the WebView.
-- **`oncotree-recommend.js`** — phenotype → **applicable existing Standard Protocols**, each **lifecycle-badged**; a DRAFT/experimental protocol is never marked approved and never ranked above ACTIVE; never auto-selects (full list + `reviewRequired`). Reuses `onco-recommend` semantics, corrected for the flat runtime protocol shape.
-- **`kb/oncotree/breast.json`** — breast navigator graph: structural phenotype questions only (no invented dose/regimen/criterion); treatment nodes reference existing `breast-*` protocol IDs.
-- **`oncotree.js` + `oncotree.css`** — mobile-first overlay UI: step-by-step flow with a progress rail, excluded-branch **"Why?"** explainer, **Map** overview, applicable **protocol cards** (unmistakable DRAFT/EXPERIMENTAL badge, cycles, version, context), **protocol detail** (regimen table + DRAFT warning), and a **Select** handoff that records the choice + emits a `smd-oncotree-select` CustomEvent — it never activates or doses.
-- **Wiring:** `queue-flags.js` (+`smd_onco_navigator`), `home.js` (OncoTree tile + handler, flag-gated), `index.html` (scripts + css `?v=ot1`), `scripts/build-www.sh` (ships `kb/oncotree/`).
-- **`docs/ONCOTREE-INTEGRATION-AUDIT.md`** — REUSE/EXTEND/NEW map + the stack reconciliation (built natively in the existing buildless-ES5 stack; **zero new runtime dependencies** — no reactflow/elkjs/fhirpath/zustand).
+## Fix-all (every R1 advisory closed)
+- Breast: HER2-low option; DCIS captures ER (ER− → no systemic therapy, tamoxifen correctly excluded); capecitabine removed from HR+/HER2− node.
+- Lung: single-agent pembrolizumab noted preferred at PD-L1-high; squamous EGFR/ALK now surface driver TKIs; stage-III doublets restored.
+- Every biomarker node has an **"unknown/pending" escape** that leaves treatment pending rather than forcing a guess.
+- **Clinical-safety invariants net** (`test/oncotree-safety.test.mjs`): asserts safety-critical protocols only appear in their correct node AND walks every answer-path across all 5 graphs checking no protocol contradicts the phenotype.
 
-## Files changed
+## Reviews (3 R1 clinical passes, all GO)
+- **No blocking issues across all 5 verticals.** Verified: HER2−/wild-type/MSS/non-driver never get the wrong-branch agent; **pemetrexed never surfaced for squamous NSCLC**; BRAF-targeted never for wild-type; immunotherapy dMMR-only in colorectal; no cross-state prostate ref; never auto-selects; drafts never shown as approved; never invents.
+- Code review: no ≥80-confidence bugs (safety gate holds, XSS-safe, no PHI).
 
-- **New:** `oncotree-engine.js`, `oncotree-recommend.js`, `oncotree.js`, `oncotree.css`, `kb/oncotree/breast.json`, `test/oncotree-engine.test.mjs`, `test/oncotree-recommend.test.mjs`, `test/oncotree-ui.test.mjs`, `test/run-oncotree-ui.mjs`, `test/oncotree-ui-harness.html`, `docs/ONCOTREE-INTEGRATION-AUDIT.md`, `docs/ONCOTREE-MORNING-REPORT.md`.
-- **Modified (additive):** `queue-flags.js`, `home.js`, `index.html`, `scripts/build-www.sh`.
+## Tests / build
+- **178/178** unit + graph + safety + verticals tests; **20/20** headless-Chrome UI drive at 390px (no console errors, no overflow); existing onco suite unaffected.
+- Android debug APK builds clean and **bundles all 5 navigators**.
 
-## Reviews
+## How to test (you, this morning)
+1. Install the APK (`adb install -r <path>`), or rebuild from `main`.
+2. Enable `?qoncotree=1` (or `localStorage.setItem('smd_onco_navigator','1')`). The **OncoTree** tile appears on the home grid.
+3. **Choose a cancer** → walk the pathway → tap **Why?** on an excluded branch → open a protocol → **Select**.
 
-- **R1 clinical (stewardmd-clinical-reviewer): no blocking issues.** Verified empirically: HER2- never surfaces a HER2-directed regimen; HR- never surfaces an endocrine agent; never auto-selects; never presents a draft as approved; never invents (an "unknown" answer sets nothing). **One Important finding, FIXED:** HER2+/HR+ (triple-positive) previously bypassed the HR question and never surfaced the mandated adjuvant endocrine therapy. Graph restructured to v1.1 — HER2 now routes through an HR question in both branches; HER2+/HR+ surfaces HER2-directed **and** endocrine. Advisories (HER2-low, DCIS ER capture) noted for the next phase.
-- **Code review (feature-dev:code-reviewer): no ≥80-confidence bugs.** Safety gate holds (Select only records + emits a CustomEvent; nothing sets `active`; a draft can't render approved), XSS-safe (all interpolation through `esc()`), no PHI, integration + mobile CSS correct. Two defensive fixes applied: badge guard (experimental → never approved) and rebase `missingRequired` scoping.
-
-## Tests passed
-
-- **41 unit + graph tests** (engine, recommend, UI-render, graph-integrity) over the REAL graph + REAL protocols.
-- **20/20 headless-Chrome UI drive checks** at 390px: full pathway walk (incl. the new HER2→HR step), protocol cards, DRAFT badges, `disabledBy` "Why?", protocol detail, Select handoff + CustomEvent, **no console errors, no horizontal overflow.**
-- **116/116 across the full onco + oncotree suite** — existing oncology tests unaffected. (The only repo-wide red is the pre-existing `smd_sknx_realvision` flag test, unrelated to this work.)
-- Clinical routing spot-checks: HER2+ → HER2 regimens (+ endocrine if HR+); HER2- → no HER2-directed; HR- → no endocrine; TNBC → no endocrine leak; stage narrows metastatic-only vs early options; DCIS → distinct in-situ branch.
-
-## Build status
-
-- `npm run build:www` OK; all oncotree assets ship into `www/`.
-- Android debug APK builds clean (Android Studio JBR; whisper submodule populated; google-services copied).
-
-## Mobile testing status
-
-- Verified on headless Chrome at 390px (mobile emulation): pathway, outcome, protocol detail, and Map views all render cleanly in dark + light themes; 44px tap targets; safe-area insets; no horizontal overflow.
-- On-device (Pixel) install pending — the device was disconnected during the night; the APK is built and ready to install.
-
-## How to test (you, in the morning)
-
-1. Install the built APK, or rebuild from `main` after merge.
-2. Enable the flag: `?qoncotree=1` (or `localStorage.setItem('smd_onco_navigator','1')`). The **OncoTree** tile appears on the home grid.
-3. Walk the breast pathway: invasive → Stage II → Neoadjuvant → HER2 positive → see applicable protocols; tap **Why?** on an excluded branch; open a protocol; **Select** to see the handoff.
+**APK:** `.../onco-merge/android/app/build/outputs/apk/debug/app-debug.apk` (128 MB). *(Pixel disconnected overnight, so auto-install didn't run.)*
 
 ## Known limitations / next phase
-
-- **One disease (breast).** Other verticals = author more `kb/oncotree/*.json` (same engine).
-- Treatment **hand-off** currently records the selection + emits a CustomEvent; deeper wiring into the OPD onco apply flow (open the workbench pre-loaded with the selected protocol + patient BSA) is the next integration step.
-- **EMR prepopulation** is best-effort (`ctx`); richer auto-fill needs structured stage/biomarker fields in `ASSESS_SCHEMA` (today it has only free-text diagnosis + height/weight).
-- A JSON-schema validator + build-fail for navigator graphs (orphan nodes, bad refs) is a good next guardrail.
-- **Still owner/clinical-gated:** R2 AI-safety pass and hospital sign-off before any protocol is set ACTIVE. The navigator + library remain DRAFT/experimental behind the flag.
+- 5 verticals today; adding a disease = author one `kb/oncotree/<id>.json` + one picker entry (same engine).
+- The recommender enforces histology + HER2/HR; EGFR/ALK/PD-L1/BRAF/MMR/HRR/PSMA routing relies on graph structure + curated refs (safe as built, backstopped by the safety net).
+- Deeper Select→treatment handoff into the OPD onco-apply flow; EMR prepopulation needs structured stage/biomarker fields.
+- **Owner-gated before any real use:** R2 AI-safety + hospital sign-off; before the flag is flipped ON, each referenced regimen's dose/setting/biomarker gate should get the Onco module's standard source-verification. Navigator + library stay DRAFT/experimental behind the flag.
