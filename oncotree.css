@@ -1,0 +1,209 @@
+/* StewardMD ONCOTREE navigator - mobile-first clinical UI. Calm, high-density, evidence-first.
+   Color is used primarily for state (category accent --ot-c; lifecycle badges). Self-contained. */
+
+.ot-overlay {
+  /* light-mode defaults (complete set); the dark media query overrides all of them together */
+  --ot-bg: #f4f5f7; --ot-ink: #16181d; --ot-card: #ffffff; --ot-line: #e5e7eb; --ot-sub: #6b7280; --ot-accent: #0a84ff;
+  position: fixed; inset: 0; z-index: 4000; display: none;
+  background: var(--ot-bg);
+  -webkit-tap-highlight-color: transparent;
+  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  color: var(--ot-ink);
+}
+@media (prefers-color-scheme: dark) {
+  .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; --ot-accent: #4aa3ff; }
+}
+body.ot-open { overflow: hidden; }
+
+.ot-shell { display: flex; flex-direction: column; height: 100%; height: 100dvh; }
+
+/* header */
+.ot-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px;
+  background: var(--ot-card); border-bottom: 1px solid var(--ot-line);
+  position: sticky; top: 0; z-index: 5;
+}
+.ot-hbtn {
+  flex: 0 0 auto; width: 40px; height: 40px; border: none; border-radius: 12px;
+  background: transparent; color: var(--ot-ink); display: grid; place-items: center; cursor: pointer;
+}
+.ot-hbtn:active { background: color-mix(in srgb, var(--ot-ink) 8%, transparent); }
+.ot-htitle { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+.ot-hkicker { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ot-sub); font-weight: 700; }
+.ot-hname { font-size: 16px; font-weight: 700; }
+
+.ot-hkicker-btn { border: none; background: transparent; color: var(--ot-accent); font-weight: 700; display: inline-flex; align-items: center; gap: 3px; cursor: pointer; padding: 0; }
+.ot-hkicker-btn .material-symbols-outlined { font-size: 13px; }
+
+/* disease picker */
+.ot-picker { display: flex; flex-direction: column; gap: 10px; padding-top: 6px; }
+.ot-picker-h { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.ot-picker-sub { color: var(--ot-sub); font-size: 13px; margin-bottom: 8px; }
+.ot-disease { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; min-height: 64px; padding: 14px; border: 1px solid var(--ot-line); border-radius: 16px; background: var(--ot-card); color: var(--ot-ink); cursor: pointer; transition: transform .05s, border-color .15s; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.ot-disease:active { transform: scale(.99); }
+.ot-disease[disabled] { opacity: .5; cursor: default; }
+.ot-disease-ic { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--ot-accent) 12%, transparent); color: var(--ot-accent); }
+.ot-disease-ic .material-symbols-outlined { font-size: 24px; }
+.ot-disease-t { flex: 1; display: flex; flex-direction: column; }
+.ot-disease-t b { font-size: 16px; font-weight: 700; }
+.ot-disease-t span { color: var(--ot-sub); font-size: 12.5px; }
+.ot-disease > .material-symbols-outlined { color: var(--ot-sub); }
+.ot-soon { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--ot-sub); border: 1px solid var(--ot-line); border-radius: 6px; padding: 2px 6px; }
+
+/* view toggle */
+.ot-viewtoggle { display: flex; gap: 4px; padding: 8px 12px; background: var(--ot-card); border-bottom: 1px solid var(--ot-line); }
+.ot-vt {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 34px; border: none; border-radius: 9px; background: transparent; color: var(--ot-sub);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ot-vt .material-symbols-outlined { font-size: 18px; }
+.ot-vt.on { background: color-mix(in srgb, var(--ot-accent) 14%, transparent); color: var(--ot-accent); }
+
+/* scroll body */
+.ot-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px 12px 24px; }
+.ot-body-main { animation: ot-fade .22s ease; }
+@keyframes ot-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* progress rail */
+.ot-rail { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+.ot-rail-chip {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
+  padding: 6px 10px; border: 1px solid var(--ot-line); border-radius: 999px;
+  background: var(--ot-card); color: var(--ot-ink); font-size: 12px; cursor: pointer;
+}
+.ot-rail-chip .material-symbols-outlined { font-size: 14px; color: var(--ot-sub); }
+.ot-rail-k { color: var(--ot-sub); }
+.ot-rail-v { font-weight: 700; }
+.ot-rail-arrow { color: var(--ot-sub); display: inline-flex; }
+.ot-rail-arrow .material-symbols-outlined { font-size: 16px; }
+
+/* step card */
+.ot-step { background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 18px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.ot-step-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.ot-step-sec { margin-left: auto; font-size: 11px; color: var(--ot-sub); text-transform: uppercase; letter-spacing: .08em; }
+.ot-cat { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ot-c, #785EF0); }
+.ot-cat .material-symbols-outlined { font-size: 15px; }
+.ot-step-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin: 2px 0 6px; }
+.ot-step-desc { color: var(--ot-sub); font-size: 13.5px; margin: 0 0 14px; }
+
+.ot-opts { display: flex; flex-direction: column; gap: 8px; }
+.ot-opt {
+  display: flex; align-items: flex-start; gap: 10px; text-align: left; width: 100%;
+  min-height: 52px; padding: 12px 14px; border: 1.5px solid var(--ot-line); border-radius: 14px;
+  background: var(--ot-card); color: var(--ot-ink); font-size: 15px; cursor: pointer;
+  transition: border-color .15s, background .15s, transform .05s;
+}
+.ot-opt:active { transform: scale(.99); }
+.ot-opt.on { border-color: var(--ot-c, var(--ot-accent)); background: color-mix(in srgb, var(--ot-c, var(--ot-accent)) 8%, var(--ot-card)); }
+.ot-opt-radio { color: var(--ot-sub); display: inline-flex; padding-top: 1px; }
+.ot-opt.on .ot-opt-radio { color: var(--ot-c, var(--ot-accent)); }
+.ot-opt-l { flex: 1; font-weight: 600; }
+
+.ot-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.ot-pill { font-size: 10.5px; font-weight: 700; color: var(--ot-sub); background: color-mix(in srgb, var(--ot-ink) 6%, transparent); border-radius: 6px; padding: 2px 6px; text-transform: uppercase; letter-spacing: .04em; }
+
+/* outcome + protocol cards */
+.ot-outcome-head { margin-bottom: 8px; }
+.ot-outcome-count { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+.ot-outcome-note { display: block; font-weight: 500; color: var(--ot-sub); font-size: 12px; margin-top: 2px; }
+.ot-card { background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+.ot-card-top { display: flex; align-items: flex-start; gap: 8px; }
+.ot-card-name { flex: 1; font-size: 15.5px; font-weight: 700; letter-spacing: -.01em; }
+.ot-card-ctx { color: var(--ot-sub); font-size: 12.5px; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; }
+.ot-card-cyc { font-weight: 700; color: var(--ot-ink); }
+.ot-card-ver { color: var(--ot-sub); font-size: 11px; margin-top: 3px; font-variant-numeric: tabular-nums; }
+.ot-card-verify { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #b45309; background: #fef3c7; border-radius: 9px; padding: 7px 10px; margin-top: 8px; }
+.ot-card-verify .material-symbols-outlined { font-size: 16px; }
+.ot-card-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+/* lifecycle badge - unmistakable */
+.ot-badge { flex: 0 0 auto; font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 4px 8px; border-radius: 7px; white-space: nowrap; }
+.ot-badge.ok { color: #065f46; background: #d1fae5; }
+.ot-badge.draft { color: #92400e; background: #fde68a; }
+.ot-badge.exp { color: #fff; background: #ea580c; }
+
+/* buttons */
+.ot-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; flex: 1; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1.5px solid transparent; transition: transform .05s; }
+.ot-btn:active { transform: scale(.98); }
+.ot-btn .material-symbols-outlined { font-size: 18px; }
+.ot-btn.primary { background: var(--ot-accent); color: #fff; }
+.ot-btn.ghost { background: transparent; border-color: var(--ot-line); color: var(--ot-ink); }
+.ot-btn.lg { min-height: 50px; font-size: 15px; }
+
+/* excluded protocols within an outcome */
+.ot-excl-proto { margin-top: 6px; border-top: 1px dashed var(--ot-line); padding-top: 8px; }
+.ot-excl-proto summary { font-size: 12.5px; color: var(--ot-sub); cursor: pointer; }
+.ot-excl-row { font-size: 12.5px; color: var(--ot-sub); padding: 4px 0 4px 16px; }
+
+/* excluded pathways panel */
+.ot-excluded { margin-top: 16px; }
+.ot-excluded-toggle { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; color: var(--ot-sub); font-size: 13px; font-weight: 600; cursor: pointer; padding: 6px 0; }
+.ot-excluded-body { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.ot-excl { border: 1px solid var(--ot-line); border-radius: 12px; padding: 10px 12px; background: var(--ot-card); opacity: .92; }
+.ot-excl-h { display: flex; align-items: center; gap: 8px; }
+.ot-excl-name { font-weight: 600; color: var(--ot-sub); text-decoration: line-through; }
+.ot-na { font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: #9ca3af; background: color-mix(in srgb, var(--ot-ink) 7%, transparent); border-radius: 6px; padding: 2px 6px; }
+.ot-why { margin-left: auto; background: transparent; border: 1px solid var(--ot-line); border-radius: 8px; color: var(--ot-accent); font-size: 12px; font-weight: 700; padding: 4px 10px; cursor: pointer; }
+.ot-excl-why { display: flex; align-items: flex-start; gap: 6px; margin-top: 8px; font-size: 12.5px; color: var(--ot-ink); }
+.ot-excl-why .material-symbols-outlined { font-size: 16px; color: #ef4444; }
+
+/* notes */
+.ot-missing, .ot-info { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #92400e; background: #fef3c7; border-radius: 10px; padding: 9px 12px; margin-bottom: 12px; }
+.ot-missing .material-symbols-outlined { font-size: 17px; }
+
+/* map view */
+.ot-map { display: flex; flex-direction: column; gap: 6px; }
+.ot-map-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1px solid var(--ot-line); border-radius: 12px; background: var(--ot-card); border-left: 4px solid var(--ot-c, var(--ot-line)); }
+.ot-map-row.disabled, .ot-map-row.unreachable { opacity: .5; }
+.ot-map-row.disabled .ot-map-name { text-decoration: line-through; }
+.ot-map-row.active { box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.ot-map-row.unresolved { border-style: dashed; }
+.ot-map-mark { display: inline-flex; color: var(--ot-c, var(--ot-sub)); }
+.ot-map-mark .material-symbols-outlined { font-size: 20px; }
+.ot-map-row.disabled .ot-map-mark { color: #ef4444; }
+.ot-map-name { flex: 1; font-size: 14px; }
+.ot-map-cat { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); }
+
+/* protocol detail */
+.ot-back { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; color: var(--ot-accent); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px 0 12px; }
+.ot-detail-head { display: flex; align-items: flex-start; gap: 10px; }
+.ot-detail-head h2 { flex: 1; font-size: 20px; font-weight: 700; margin: 0; }
+.ot-detail-warn { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #92400e; background: #fef3c7; border-radius: 10px; padding: 10px 12px; margin: 12px 0; }
+.ot-detail-warn .material-symbols-outlined { font-size: 17px; }
+.ot-detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.ot-detail-meta > div { background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+.ot-detail-meta b { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ot-sub); font-weight: 700; margin-bottom: 2px; }
+.ot-detail-sec { font-size: 12px; font-weight: 700; color: var(--ot-sub); text-transform: uppercase; letter-spacing: .05em; margin: 16px 0 8px; }
+.ot-drugs { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 12px; overflow: hidden; }
+.ot-drugs th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); padding: 8px 10px; border-bottom: 1px solid var(--ot-line); }
+.ot-drugs td { padding: 9px 10px; border-bottom: 1px solid var(--ot-line); }
+.ot-drugs tr:last-child td { border-bottom: none; }
+.ot-detail-src { font-size: 12px; color: var(--ot-sub); margin-top: 12px; }
+.ot-detail-src b { color: var(--ot-ink); }
+.ot-detail-actions { margin-top: 18px; }
+
+/* selection handoff */
+.ot-selection { text-align: center; padding: 24px 8px; }
+.ot-sel-icon { color: #10b981; display: grid; place-items: center; margin-bottom: 6px; }
+.ot-sel-icon .material-symbols-outlined { font-size: 56px; }
+.ot-selection h2 { font-size: 20px; margin: 0 0 4px; }
+.ot-sel-name { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.ot-sel-note { display: flex; align-items: flex-start; gap: 8px; text-align: left; font-size: 12.5px; color: var(--ot-sub); background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 12px; padding: 12px; margin: 14px 0; }
+.ot-sel-payload { text-align: left; font-size: 12.5px; background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 12px; padding: 12px; margin-bottom: 16px; }
+.ot-sel-payload b { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ot-sub); margin-bottom: 6px; }
+.ot-sel-payload > div { padding: 2px 0; font-variant-numeric: tabular-nums; }
+.ot-sel-actions { display: flex; gap: 8px; }
+
+/* states */
+.ot-loading, .ot-error, .ot-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 48px 16px; color: var(--ot-sub); text-align: center; }
+.ot-loading .material-symbols-outlined { font-size: 32px; animation: ot-spin 1s linear infinite; }
+.ot-error .material-symbols-outlined { font-size: 32px; color: #ef4444; }
+@keyframes ot-spin { to { transform: rotate(360deg); } }
+
+/* disclaimer */
+.ot-disclaimer { flex: 0 0 auto; padding: 8px 14px calc(env(safe-area-inset-bottom, 0px) + 8px); font-size: 10.5px; color: var(--ot-sub); text-align: center; border-top: 1px solid var(--ot-line); background: var(--ot-card); }
+
+/* prevent horizontal overflow anywhere */
+.ot-overlay * { max-width: 100%; box-sizing: border-box; }

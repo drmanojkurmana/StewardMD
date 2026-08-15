@@ -1,0 +1,85 @@
+{
+  "guideline": "melanoma",
+  "title": "Melanoma (cutaneous)",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "cutaneous_melanoma",
+  "status": "draft",
+  "provenanceNote": "ONCOTREE navigator DRAFT for cutaneous melanoma. Captures setting/intent and BRAF V600 status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference (BRAF/MEK-targeted therapy requires a BRAF V600 mutation; immunotherapy applies regardless of BRAF). Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Cutaneous Melanoma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Cutaneous Melanoma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_mel_setting"],
+  "nodes": [
+    {
+      "id": "n_mel_setting",
+      "linkId": "mel_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Setting and intent",
+      "title": "Setting and intent",
+      "description": "Adjuvant therapy for resected stage III disease is curative-intent; unresectable stage III or stage IV disease is treated with palliative intent.",
+      "path": "Melanoma / Setting",
+      "section": "Staging",
+      "pills": ["setting", "intent"],
+      "required": true,
+      "options": [
+        { "id": "adjuvant", "label": "Adjuvant (resected stage III)", "sets": { "setting": "adjuvant", "intent": "curative" } },
+        { "id": "metastatic", "label": "Unresectable stage III / stage IV (advanced)", "sets": { "setting": "metastatic", "intent": "palliative" } }
+      ]
+    },
+    {
+      "id": "n_mel_braf",
+      "linkId": "mel_braf",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "BRAF status",
+      "title": "BRAF V600 mutation status",
+      "description": "A BRAF V600 activating mutation (V600E/K) enables BRAF/MEK-targeted therapy in addition to immunotherapy. BRAF wild-type disease is treated with immunotherapy.",
+      "path": "Melanoma / Biomarkers / BRAF",
+      "section": "Biomarkers",
+      "pills": ["biomarker", "BRAF"],
+      "required": true,
+      "options": [
+        { "id": "mut", "label": "BRAF V600E / V600K mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
+        { "id": "wt", "label": "BRAF wild-type", "sets": { "biomarkers.BRAF": "negative" }, "pills": ["BRAF WT"] },
+        { "id": "unk", "label": "Unknown / pending", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_tx_mel_braf",
+      "linkId": "tx_mel_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BRAF-mutant melanoma",
+      "title": "BRAF V600-mutant: targeted therapy or immunotherapy",
+      "description": "BRAF V600-mutant melanoma - BRAF/MEK-targeted therapy and immunotherapy are both options (immunotherapy is often preferred first-line in advanced disease). Narrowed by setting. Physician selects.",
+      "path": "Melanoma / Treatment / BRAF-mutant",
+      "section": "Treatment",
+      "pills": ["BRAF+", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram", "skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_tx_mel_io",
+      "linkId": "tx_mel_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BRAF wild-type melanoma",
+      "title": "BRAF wild-type: immunotherapy",
+      "description": "BRAF wild-type melanoma - immune checkpoint inhibition is the systemic backbone, narrowed by setting. Physician selects.",
+      "path": "Melanoma / Treatment / BRAF wild-type",
+      "section": "Treatment",
+      "pills": ["BRAF WT", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    }
+  ],
+  "links": [
+    { "id": "l_mel_setting_braf", "from": "n_mel_setting", "to": "n_mel_braf", "fromOptions": ["adjuvant", "metastatic"], "enableBehavior": "any", "linkCategory": "conditional" },
+    { "id": "l_mel_braf_mut", "from": "n_mel_braf", "to": "n_tx_mel_braf", "fromOptions": ["mut"], "linkCategory": "conditional" },
+    { "id": "l_mel_braf_wt", "from": "n_mel_braf", "to": "n_tx_mel_io", "fromOptions": ["wt"], "linkCategory": "conditional" }
+  ]
+}

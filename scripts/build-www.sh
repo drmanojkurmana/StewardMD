@@ -80,6 +80,8 @@ done
 # Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).
 [ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
+# ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
+[ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # MaiK Ask clinical pathways (fetched at runtime by pathways.js SMD_PATHWAYS.loadAll)
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 
