@@ -23,12 +23,17 @@ Diagnosis → invasive → stage → setting/intent → HER2 → HR → **applic
 - **New:** `oncotree-engine.js`, `oncotree-recommend.js`, `oncotree.js`, `oncotree.css`, `kb/oncotree/breast.json`, `test/oncotree-engine.test.mjs`, `test/oncotree-recommend.test.mjs`, `test/oncotree-ui.test.mjs`, `test/run-oncotree-ui.mjs`, `test/oncotree-ui-harness.html`, `docs/ONCOTREE-INTEGRATION-AUDIT.md`, `docs/ONCOTREE-MORNING-REPORT.md`.
 - **Modified (additive):** `queue-flags.js`, `home.js`, `index.html`, `scripts/build-www.sh`.
 
+## Reviews
+
+- **R1 clinical (stewardmd-clinical-reviewer): no blocking issues.** Verified empirically: HER2- never surfaces a HER2-directed regimen; HR- never surfaces an endocrine agent; never auto-selects; never presents a draft as approved; never invents (an "unknown" answer sets nothing). **One Important finding, FIXED:** HER2+/HR+ (triple-positive) previously bypassed the HR question and never surfaced the mandated adjuvant endocrine therapy. Graph restructured to v1.1 — HER2 now routes through an HR question in both branches; HER2+/HR+ surfaces HER2-directed **and** endocrine. Advisories (HER2-low, DCIS ER capture) noted for the next phase.
+- **Code review (feature-dev:code-reviewer): no ≥80-confidence bugs.** Safety gate holds (Select only records + emits a CustomEvent; nothing sets `active`; a draft can't render approved), XSS-safe (all interpolation through `esc()`), no PHI, integration + mobile CSS correct. Two defensive fixes applied: badge guard (experimental → never approved) and rebase `missingRequired` scoping.
+
 ## Tests passed
 
-- **30 unit tests** (engine + recommend + UI-render) over the REAL graph + REAL protocols.
-- **20/20 headless-Chrome UI drive checks** at 390px: full pathway walk, protocol cards, DRAFT badges, `disabledBy` "Why?", protocol detail, Select handoff + CustomEvent, **no console errors, no horizontal overflow.**
-- **Existing oncology tests unaffected** (102/102 across onco + oncotree; the only repo-wide red is the pre-existing `smd_sknx_realvision` flag test, unrelated).
-- Clinical routing spot-checks: HER2+ → HER2 regimens only; HER2- → no HER2-directed; HR- → no endocrine; stage narrows metastatic-only vs early options.
+- **41 unit + graph tests** (engine, recommend, UI-render, graph-integrity) over the REAL graph + REAL protocols.
+- **20/20 headless-Chrome UI drive checks** at 390px: full pathway walk (incl. the new HER2→HR step), protocol cards, DRAFT badges, `disabledBy` "Why?", protocol detail, Select handoff + CustomEvent, **no console errors, no horizontal overflow.**
+- **116/116 across the full onco + oncotree suite** — existing oncology tests unaffected. (The only repo-wide red is the pre-existing `smd_sknx_realvision` flag test, unrelated to this work.)
+- Clinical routing spot-checks: HER2+ → HER2 regimens (+ endocrine if HR+); HER2- → no HER2-directed; HR- → no endocrine; TNBC → no endocrine leak; stage narrows metastatic-only vs early options; DCIS → distinct in-situ branch.
 
 ## Build status
 
