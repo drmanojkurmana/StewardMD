@@ -412,6 +412,13 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   letter-spacing: -.02em; color: var(--ins-primary); font-variant-numeric: tabular-nums; }
 .ins-dose .unit { font-size: 15px; font-weight: 600; color: var(--ins-muted); }
 .ins-fromraw { font-size: 12px; color: var(--ins-muted); margin-bottom: 14px; }
+/* First-dose provenance: each resolved value + its source (estimate vs known) */
+.ins-prov { margin: -6px 0 14px; border: 1px solid var(--ins-line, rgba(120,130,150,.2)); border-radius: 10px; overflow: hidden; }
+.ins-prov-row { display: grid; grid-template-columns: auto auto 1fr; gap: 8px; align-items: baseline; padding: 7px 10px; font-size: 12px; }
+.ins-prov-row + .ins-prov-row { border-top: 1px solid var(--ins-line, rgba(120,130,150,.15)); }
+.ins-prov-row .k { font-weight: 600; }
+.ins-prov-row .v { font-variant-numeric: tabular-nums; }
+.ins-prov-row .s { color: var(--ins-muted); text-align: right; }
 .ins-formula { font-family: var(--ins-mono); font-size: 12px; color: var(--ins-muted);
   background: var(--ins-surface-2); border: 1px solid var(--ins-line); border-radius: 8px;
   padding: 8px 10px; margin-bottom: 12px; overflow-x: auto; }
