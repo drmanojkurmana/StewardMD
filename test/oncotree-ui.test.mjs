@@ -96,12 +96,16 @@ test("selecting a protocol shows the handoff confirmation, not an activation", (
   noPlaceholders(html);
 });
 
-test("map view renders every node with a state class (active/disabled/unresolved)", () => {
+test("interactive map: node-graph with positioned nodes, curved edges + state classes", () => {
   reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.view = "map";
   const html = UI._bodyHtml();
-  assert.ok(/ot-map-row active/.test(html));
-  assert.ok(/ot-map-row disabled/.test(html));
+  assert.ok(/ot-graph-canvas/.test(html));                 // pan/zoom canvas
+  assert.ok(/ot-gnode active/.test(html));                 // an active node
+  assert.ok(/ot-gnode[^"]*disabled/.test(html));           // an excluded branch node
+  assert.ok(/<path class="ot-edge/.test(html));            // SVG edges between nodes
+  assert.ok(/left:\d+px;top:\d+px/.test(html));            // nodes are absolutely positioned (layout ran)
+  assert.ok(/data-ot-act="graph-fit"/.test(html));         // zoom/fit controls present
   noPlaceholders(html);
 });
 
