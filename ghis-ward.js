@@ -129,7 +129,11 @@
         } catch (e) {}
       })();
       function getToken() { try { return localStorage.getItem(tokenKey()) || ''; } catch (e) { return ''; } }
-      function setToken(t) { try { t ? localStorage.setItem(tokenKey(), t) : localStorage.removeItem(tokenKey()); } catch (e) {} }
+      function setToken(t) {
+        try { t ? localStorage.setItem(tokenKey(), t) : localStorage.removeItem(tokenKey()); } catch (e) {}
+        // Relay the ward session to a paired Wear OS watch (Labs screen). No-op off-native / unpaired.
+        try { window.SMD_WEAR && window.SMD_WEAR.setGhisToken(t || ''); } catch (e) {}
+      }
       // Firebase ID token (for the Pro gate on /login) — resolves '' when signed-out or unavailable.
       function fbToken() { try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; if (u && u.getIdToken) return u.getIdToken().catch(function(){ return ''; }); } catch (e) {} return Promise.resolve(''); }
       // Silent GHIS session refresh: when the short-lived GHIS session times out, re-mint one from

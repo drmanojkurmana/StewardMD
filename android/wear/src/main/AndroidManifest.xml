@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+    <!-- Android 14 requires the health FGS to also hold one of ACTIVITY_RECOGNITION / BODY_SENSORS /
+         HIGH_SAMPLING_RATE_SENSORS. The last is a NORMAL (install-time) permission — no runtime prompt —
+         and fits the accelerometer-based compression detector. -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:label="StewardMD"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SMD.Starting">
+
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Code Blue CPR-assist keep-alive: health foreground service so compression sensing survives
+             the wrist dropping / screen-off for a whole code. -->
+        <service
+            android:name=".codeblue.CodeBlueService"
+            android:exported="false"
+            android:foregroundServiceType="health" />
+
+        <!-- Receives the GHIS ward token bridged from the phone over the Data Layer. -->
+        <service
+            android:name=".data.SmdWearListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/smd" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

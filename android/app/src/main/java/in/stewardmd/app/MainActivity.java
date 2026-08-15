@@ -17,6 +17,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SpeechRecognition.class);
         registerPlugin(AppOrientationPlugin.class);
         registerPlugin(FundxDepthPlugin.class);
+        registerPlugin(WearBridgePlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
     }
