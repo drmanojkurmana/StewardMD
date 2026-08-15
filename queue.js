@@ -411,7 +411,7 @@
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
-    if (cmd === "pickghis") { _setWp("ghis"); root().innerHTML = _gate(); prefillGate(); return; }  // GITAM / GHIS (prefill remembered userId + tick Remember me)
+    if (cmd === "pickghis") { _setWp("ghis"); _enterGhis(); return; }  // GITAM / GHIS: reuse a live token if present (no needless re-login), else the prefilled gate
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS)
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); startClinic(arg); return; }     // a personal clinic (remembered so re-opening the app returns here, not GHIS)
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
@@ -677,7 +677,7 @@
     el.innerHTML = '<div class="q-empty" style="padding:80px">Loading your queue…</div>';
     var q = "?hospitalId=" + encodeURIComponent(opts.hospitalId || "manual") + "&department=" + encodeURIComponent(opts.department || "") + "&source=" + encodeURIComponent(opts.source || "manual");
     apiGet("/session" + q).then(function (r) {
-      if (!r || !r.ok) { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not start the queue (' + esc((r && r.error) || "error") + ').<br><button class="q-pause" style="max-width:220px;margin:16px auto 0" data-q-act="close">Close</button></div>'; return; }
+      if (!r || !r.ok) { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not start the queue (' + esc((r && r.error) || "error") + ').<br><button class="q-pause" style="max-width:220px;margin:16px auto 0" data-q-act="chooser">Switch workplace</button><button class="q-pause" style="max-width:220px;margin:8px auto 0" data-q-act="close">Close</button></div>'; return; }
       st.session = r.session; st.tickets = r.tickets || []; st.me = { name: r.session.doctorName, dept: r.session.department }; paint();
       clearInterval(st.pollId); st.pollId = setInterval(refresh, POLL_MS);
       // Primary data source: auto-pull today's GHIS Out-patients list into the queue right after a GHIS sign-in
@@ -685,7 +685,7 @@
       if (st.ghisToken && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(); } catch (e) {} }
       // Connected EMR (Connect) hospital: auto-pull today's worklist from the linked FHIR EMR — same model as GHIS.
       if (opts.source === "connect") { try { importFromSource(); } catch (e) {} }
-    }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not reach the server. Check your connection.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="retry">Retry</button></div>'; });
+    }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not reach the server. Check your connection.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="retry">Retry</button><button class="q-pause" style="max-width:200px;margin:8px auto 0" data-q-act="chooser">Switch workplace</button></div>'; });
   }
   // Pull today's worklist from the org's connected EMR (Connect FHIR) into this session. Auto on entry + poll.
   function importFromSource(silent) {
@@ -722,10 +722,12 @@
     // Universal GHIS session: reuse the token Ward Sync (window.GHIS) already holds so a HOSPITAL doctor
     // never signs in twice. Empty when not signed in anywhere.
     if (!st.ghisToken) { try { var shared = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; if (shared) st.ghisToken = shared; } catch (e) {} }
-    // Route to the doctor's REMEMBERED workplace. A personal-clinic doctor is no longer forced onto GHIS
-    // just because a Ward Sync token is cached: with no remembered workplace we show the chooser, so
-    // Hospital vs Personal clinic is always reachable and, once picked, sticks across opens.
-    var wp = _wpRouterOn() ? _wp() : (st.ghisToken ? "ghis" : "");
+    // Route to the doctor's REMEMBERED workplace. A remembered choice always wins, so once a personal-clinic
+    // doctor picks their clinic (via the chooser reachable from the gate "Back" or dashboard "Switch") it sticks
+    // and they never land on GHIS again. With NO remembered choice we keep the old behaviour: reuse a live GHIS
+    // session (hospital doctors never see a chooser or sign in twice), else show the Hospital/Personal chooser.
+    var wp = _wpRouterOn() ? _wp() : "";              // remembered workplace; flag off (smd_opd_wp="0") ignores it
+    if (!wp) wp = st.ghisToken ? "ghis" : "";         // no explicit choice yet -> old routing
     if (wp === "ghis") { _enterGhis(); return; }
     if (wp.indexOf("clinic:") === 0) { startClinic(wp.slice(7)); return; }
     if (wp.indexOf("connect:") === 0) { st.openOpts = { hospitalId: wp.slice(8), source: "connect" }; loadSession(); return; }
