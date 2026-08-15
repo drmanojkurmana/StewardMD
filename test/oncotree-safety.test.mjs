@@ -20,6 +20,8 @@ readdirSync(join(ROOT, "kb/protocols")).filter(f => f.endsWith(".json") && f !==
   .forEach(f => { const p = JSON.parse(readFileSync(join(ROOT, "kb/protocols", f), "utf8")); P[p.id] = p; });
 const breast = JSON.parse(readFileSync(join(ROOT, "kb/oncotree/breast.json"), "utf8"));
 const lung = JSON.parse(readFileSync(join(ROOT, "kb/oncotree/lung.json"), "utf8"));
+const ALL_GRAPHS = readdirSync(join(ROOT, "kb/oncotree")).filter(f => f.endsWith(".json"))
+  .map(f => [f.replace(".json", ""), JSON.parse(readFileSync(join(ROOT, "kb/oncotree", f), "utf8"))]);
 
 // Assert a protocol id appears in a node's protocolRefs ONLY within the allowed node-id set.
 function refOnlyIn(graph, protoId, allowed) {
@@ -85,7 +87,7 @@ function walkPaths(graph) {
   return results;
 }
 
-for (const [name, graph] of [["breast", breast], ["lung", lung]]) {
+for (const [name, graph] of ALL_GRAPHS) {
   test(`${name}: no answer-path surfaces a protocol that contradicts the phenotype`, () => {
     for (const r of walkPaths(graph)) {
       for (const id of r.ids) {

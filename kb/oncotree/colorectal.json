@@ -1,0 +1,100 @@
+{
+  "guideline": "colorectal",
+  "title": "Colorectal Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "colorectal_cancer",
+  "status": "draft",
+  "provenanceNote": "ONCOTREE navigator DRAFT for colorectal adenocarcinoma. Captures setting/stage and, for metastatic disease, mismatch-repair (MMR/MSI) status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference (fluoropyrimidine-oxaliplatin/irinotecan backbones; pembrolizumab for deficient-MMR/MSI-high metastatic disease). Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Colon/Rectal Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Colon/Rectal Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_crc_setting"],
+  "nodes": [
+    {
+      "id": "n_crc_setting",
+      "linkId": "crc_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Setting and stage",
+      "title": "Setting and stage",
+      "description": "Adjuvant chemotherapy for resected high-risk stage II / stage III disease is curative-intent; stage IV (metastatic) disease is treated with palliative intent and guided by molecular testing.",
+      "path": "Colorectal / Setting",
+      "section": "Staging",
+      "pills": ["setting", "stage"],
+      "required": true,
+      "options": [
+        { "id": "adjuvant", "label": "Adjuvant - resected high-risk stage II / III", "sets": { "setting": "adjuvant", "intent": "curative", "stage": "III" } },
+        { "id": "metastatic", "label": "Metastatic (stage IV)", "sets": { "setting": "metastatic", "intent": "palliative", "stage": "IV" } }
+      ]
+    },
+    {
+      "id": "n_crc_msi",
+      "linkId": "crc_msi",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MMR / MSI status",
+      "title": "Mismatch-repair (MMR / MSI) status",
+      "description": "Deficient mismatch repair (dMMR) / microsatellite-instability-high (MSI-H) metastatic colorectal cancer is an indication for first-line immunotherapy; proficient MMR (pMMR / MSS) disease is treated with chemotherapy.",
+      "path": "Colorectal / Biomarkers / MMR",
+      "section": "Biomarkers",
+      "pills": ["biomarker", "MMR", "MSI"],
+      "required": true,
+      "options": [
+        { "id": "dmmr", "label": "dMMR / MSI-high", "sets": { "biomarkers.MMR": "deficient" }, "pills": ["dMMR/MSI-H"] },
+        { "id": "pmmr", "label": "pMMR / MSS (proficient)", "sets": { "biomarkers.MMR": "proficient" }, "pills": ["pMMR/MSS"] }
+      ]
+    },
+    {
+      "id": "n_tx_crc_adjuvant",
+      "linkId": "tx_crc_adjuvant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant colorectal chemotherapy",
+      "title": "Adjuvant: fluoropyrimidine-oxaliplatin",
+      "description": "Adjuvant fluoropyrimidine-oxaliplatin chemotherapy (FOLFOX) for resected high-risk stage II / stage III colon cancer. Physician selects; the existing dose engine computes doses.",
+      "path": "Colorectal / Treatment / Adjuvant",
+      "section": "Treatment",
+      "pills": ["curative", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["modified-folfox-6", "folfox-4"]
+    },
+    {
+      "id": "n_tx_crc_msi",
+      "linkId": "tx_crc_msi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "dMMR/MSI-H metastatic colorectal",
+      "title": "dMMR / MSI-high metastatic: immunotherapy",
+      "description": "Deficient-MMR / MSI-high metastatic colorectal cancer - first-line immunotherapy (pembrolizumab). Physician selects.",
+      "path": "Colorectal / Treatment / dMMR",
+      "section": "Treatment",
+      "pills": ["dMMR/MSI-H", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gi-crc-msi-pembro"]
+    },
+    {
+      "id": "n_tx_crc_mss",
+      "linkId": "tx_crc_mss",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "pMMR/MSS metastatic colorectal",
+      "title": "pMMR / MSS metastatic: chemotherapy backbones",
+      "description": "Proficient-MMR / MSS metastatic colorectal cancer - fluoropyrimidine-based chemotherapy backbones (oxaliplatin or irinotecan). Physician selects; targeted agents by RAS/BRAF/HER2 status are considered separately.",
+      "path": "Colorectal / Treatment / MSS",
+      "section": "Treatment",
+      "pills": ["pMMR/MSS", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["modified-folfox-6", "folfox-4", "folfiri", "simplified-lv5fu2"]
+    }
+  ],
+  "links": [
+    { "id": "l_crc_adj", "from": "n_crc_setting", "to": "n_tx_crc_adjuvant", "fromOptions": ["adjuvant"], "linkCategory": "conditional" },
+    { "id": "l_crc_mets", "from": "n_crc_setting", "to": "n_crc_msi", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_crc_dmmr", "from": "n_crc_msi", "to": "n_tx_crc_msi", "fromOptions": ["dmmr"], "linkCategory": "conditional" },
+    { "id": "l_crc_pmmr", "from": "n_crc_msi", "to": "n_tx_crc_mss", "fromOptions": ["pmmr"], "linkCategory": "conditional" }
+  ]
+}
