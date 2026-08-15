@@ -26,8 +26,23 @@ test("start node is active, downstream unresolved before any answer", () => {
 test("invasive -> stage spine activates; dcis branch disabled with provenance", () => {
   const s = E.evaluate(GRAPH, { n_histology: ["invasive"] });
   assert.equal(s.nodes.n_stage.status, "active");
-  assert.equal(s.nodes.n_dcis.status, "disabled");
-  assert.deepEqual(s.nodes.n_dcis.disabledBy.map(d => d.nodeId), ["n_histology"]);
+  assert.equal(s.nodes.n_dcis_er.status, "disabled");   // DCIS ER-status branch excluded for invasive
+  assert.deepEqual(s.nodes.n_dcis_er.disabledBy.map(d => d.nodeId), ["n_histology"]);
+});
+
+test("DCIS ER-positive surfaces endocrine; ER-negative surfaces no systemic protocol", () => {
+  const erpos = E.evaluate(GRAPH, { n_histology: ["dcis"], n_dcis_er: ["erpos"] });
+  assert.equal(erpos.nodes.n_tx_dcis.status, "active");
+  assert.equal(erpos.phenotype.biomarkers.HR, "positive");
+  const erneg = E.evaluate(GRAPH, { n_histology: ["dcis"], n_dcis_er: ["erneg"] });
+  assert.equal(erneg.nodes.n_tx_dcis.status, "active");
+  assert.equal(erneg.phenotype.biomarkers.HR, "negative");   // ER- => tamoxifen will be excluded by recommend
+});
+
+test("HER2-low routes as HER2-negative (into the HR pathway), labeled distinctly", () => {
+  const s = E.evaluate(GRAPH, { n_histology: ["invasive"], n_stage: ["s4"], n_setting: ["metastatic"], n_her2: ["low"] });
+  assert.equal(s.nodes.n_hr2n.status, "active");        // HER2-low uses the HER2-negative HR question
+  assert.equal(s.phenotype.biomarkers.HER2, "negative");
 });
 
 test("HER2 positive routes to the HER2+ HR question; the HER2-negative HR subtree is DISABLED", () => {

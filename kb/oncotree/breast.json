@@ -85,7 +85,8 @@
       "phenotypeKey": "biomarkers.HER2",
       "options": [
         { "id": "pos", "label": "HER2 positive (IHC 3+ / ISH amplified)", "setsValue": "positive", "pills": ["HER2+"] },
-        { "id": "neg", "label": "HER2 negative", "setsValue": "negative", "pills": ["HER2-"] },
+        { "id": "low", "label": "HER2-low (IHC 1+ or 2+/ISH-negative)", "setsValue": "negative", "pills": ["HER2-low"] },
+        { "id": "neg", "label": "HER2 negative (IHC 0)", "setsValue": "negative", "pills": ["HER2-"] },
         { "id": "unk", "label": "Unknown / pending", "setsValue": null }
       ]
     },
@@ -172,7 +173,7 @@
       "section": "Treatment",
       "pills": ["HR+", "HER2-", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["breast-cdk46-ai", "breast-fulvestrant", "breast-letrozole", "breast-anastrozole", "breast-exemestane", "breast-tamoxifen", "breast-ac", "breast-ddac-t", "breast-tac", "breast-tc", "breast-cmf", "breast-capecitabine"]
+      "protocolRefs": ["breast-cdk46-ai", "breast-fulvestrant", "breast-letrozole", "breast-anastrozole", "breast-exemestane", "breast-tamoxifen", "breast-ac", "breast-ddac-t", "breast-tac", "breast-tc", "breast-cmf"]
     },
     {
       "id": "n_tnbc",
@@ -190,15 +191,35 @@
       "protocolRefs": ["breast-pembro-chemo-tnbc", "breast-carbo-paclitaxel", "breast-ac", "breast-ddac-t", "breast-tac", "breast-tc", "breast-cmf", "breast-capecitabine"]
     },
     {
-      "id": "n_dcis",
+      "id": "n_dcis_er",
+      "linkId": "dcis_er",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "alternative-path",
+      "name": "DCIS - ER status",
+      "title": "DCIS: estrogen-receptor status",
+      "description": "Ductal carcinoma in situ is managed distinctly from invasive disease (local therapy). Risk-reducing endocrine therapy applies only to ER-positive DCIS. The invasive systemic-therapy pathways do not apply.",
+      "path": "Breast / Diagnosis / In situ / ER",
+      "section": "Diagnosis",
+      "pills": ["DCIS", "in situ", "ER"],
+      "required": true,
+      "phenotypeKey": "biomarkers.HR",
+      "options": [
+        { "id": "erpos", "label": "ER positive", "setsValue": "positive", "pills": ["ER+"] },
+        { "id": "erneg", "label": "ER negative", "setsValue": "negative", "pills": ["ER-"] },
+        { "id": "erunk", "label": "Unknown / pending", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_tx_dcis",
       "linkId": "tx_dcis",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "alternative-path",
-      "name": "In-situ (DCIS) pathway",
-      "title": "DCIS: distinct in-situ pathway",
-      "description": "Ductal carcinoma in situ is managed distinctly from invasive disease (local therapy; endocrine therapy for ER-positive DCIS). The invasive systemic-therapy pathways below do not apply.",
-      "path": "Breast / Diagnosis / In situ",
+      "name": "DCIS management",
+      "title": "DCIS: management",
+      "description": "ER-positive DCIS: risk-reducing endocrine therapy after local therapy. ER-negative DCIS: local therapy only - no systemic therapy is indicated, so no applicable systemic protocol is expected.",
+      "path": "Breast / Diagnosis / In situ / Management",
       "section": "Diagnosis",
       "pills": ["DCIS", "in situ"],
       "showsRecommendation": true,
@@ -207,11 +228,12 @@
   ],
   "links": [
     { "id": "l_hist_stage", "from": "n_histology", "to": "n_stage", "fromOptions": ["invasive"], "linkCategory": "conditional" },
-    { "id": "l_hist_dcis", "from": "n_histology", "to": "n_dcis", "fromOptions": ["dcis"], "linkCategory": "conditional" },
+    { "id": "l_hist_dcis", "from": "n_histology", "to": "n_dcis_er", "fromOptions": ["dcis"], "linkCategory": "conditional" },
+    { "id": "l_dcis_tx", "from": "n_dcis_er", "to": "n_tx_dcis", "fromOptions": ["erpos", "erneg"], "enableBehavior": "any", "linkCategory": "conditional" },
     { "id": "l_stage_setting", "from": "n_stage", "to": "n_setting", "fromOptions": ["s1", "s2", "s3", "s4"], "enableBehavior": "any", "linkCategory": "conditional" },
     { "id": "l_setting_her2", "from": "n_setting", "to": "n_her2", "fromOptions": ["neoadjuvant", "adjuvant", "metastatic"], "enableBehavior": "any", "linkCategory": "conditional" },
     { "id": "l_her2_pos", "from": "n_her2", "to": "n_hr2p", "fromOptions": ["pos"], "linkCategory": "conditional" },
-    { "id": "l_her2_neg", "from": "n_her2", "to": "n_hr2n", "fromOptions": ["neg"], "linkCategory": "conditional" },
+    { "id": "l_her2_neg", "from": "n_her2", "to": "n_hr2n", "fromOptions": ["neg", "low"], "enableBehavior": "any", "linkCategory": "conditional" },
     { "id": "l_h2p_hrpos", "from": "n_hr2p", "to": "n_tx_her2_hrpos", "fromOptions": ["pos"], "linkCategory": "conditional" },
     { "id": "l_h2p_hrneg", "from": "n_hr2p", "to": "n_tx_her2_hrneg", "fromOptions": ["neg"], "linkCategory": "conditional" },
     { "id": "l_h2n_hrpos", "from": "n_hr2n", "to": "n_hrpos", "fromOptions": ["pos"], "linkCategory": "conditional" },

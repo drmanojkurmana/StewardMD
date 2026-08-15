@@ -26,7 +26,10 @@
   // disease-agnostic; adding a disease = author its graph JSON + one entry here.
   var DISEASES = [
     { id: "breast", title: "Breast Cancer", sub: "Invasive - HER2 / HR pathways", icon: "female", ready: true },
-    { id: "lung", title: "Lung Cancer", sub: "NSCLC drivers / immunotherapy, SCLC, mesothelioma", icon: "pulmonology", ready: true }
+    { id: "lung", title: "Lung Cancer", sub: "NSCLC drivers / immunotherapy, SCLC, mesothelioma", icon: "pulmonology", ready: true },
+    { id: "colorectal", title: "Colorectal Cancer", sub: "Adjuvant / metastatic; MMR-MSI directed", icon: "gastroenterology", ready: true },
+    { id: "prostate", title: "Prostate Cancer", sub: "Localized / mCSPC / mCRPC; HRR + PSMA directed", icon: "man", ready: true },
+    { id: "melanoma", title: "Melanoma (cutaneous)", sub: "BRAF-targeted vs immunotherapy", icon: "dermatology", ready: true }
   ];
 
   var st = {
