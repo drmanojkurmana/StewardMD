@@ -200,19 +200,81 @@
     return '<div class="ot-missing">' + ms("info") + "More information required: " + rest.map(function (m) { return esc(m.name); }).join(", ") + "</div>";
   }
 
+  // ---- interactive MAP: layered node-graph layout (pure, deterministic) --------------------------
+  // Longest-path layering over the DAG (from -> to), nodes centered per layer. Fixed node box so the
+  // math needs no DOM measurement. ponytail: sibling order = topo order (no barycentre crossing-min);
+  // fine for these tree-ish pathways - revisit only if a disease graph looks tangled.
+  var NW = 168, NH = 62, HGAP = 28, VGAP = 66;
+  var graphMoved = false;   // set during a pan/pinch so the trailing tap doesn't also select a node
+  function graphLayout(state) {
+    var ids = state.order.slice(), links = state.links;
+    var layer = {}, out = {};
+    ids.forEach(function (id) { layer[id] = 0; });
+    Object.keys(links).forEach(function (lid) { var l = links[lid]; (out[l.from] = out[l.from] || []).push(l.to); });
+    ids.forEach(function (id) { (out[id] || []).forEach(function (to) { if (layer[to] < layer[id] + 1) layer[to] = layer[id] + 1; }); });
+    var layers = {}, maxL = 0;
+    ids.forEach(function (id) { (layers[layer[id]] = layers[layer[id]] || []).push(id); if (layer[id] > maxL) maxL = layer[id]; });
+    var maxRow = 0, L; for (L = 0; L <= maxL; L++) maxRow = Math.max(maxRow, (layers[L] || []).length);
+    var canvasW = Math.max(maxRow * (NW + HGAP) - HGAP, NW), pos = {};
+    for (L = 0; L <= maxL; L++) {
+      var row = layers[L] || [], rowW = row.length * (NW + HGAP) - HGAP, x0 = (canvasW - rowW) / 2;
+      row.forEach(function (id, i) { pos[id] = { x: x0 + i * (NW + HGAP), y: L * (NH + VGAP) }; });
+    }
+    var edges = Object.keys(links).map(function (lid) {
+      var l = links[lid], a = pos[l.from], b = pos[l.to]; if (!a || !b) return null;
+      var x1 = a.x + NW / 2, y1 = a.y + NH, x2 = b.x + NW / 2, y2 = b.y, my = (y1 + y2) / 2;
+      return { d: "M" + x1 + "," + y1 + " C" + x1 + "," + my + " " + x2 + "," + my + " " + x2 + "," + y2, active: l.isActive, disabled: l.isDisabled };
+    }).filter(Boolean);
+    return { pos: pos, edges: edges, width: canvasW, height: (maxL + 1) * (NH + VGAP) - VGAP, ids: ids };
+  }
+
   function mapHtml(state) {
-    var rows = state.order.map(function (id) {
-      var ns = state.nodes[id], node = st.byId[id];
-      var cls = ns.status;
-      var mark = ns.status === "active" ? (ns.isAnswered ? "task_alt" : "radio_button_unchecked")
-        : ns.status === "disabled" ? "block" : "more_horiz";
-      var sel = ns.options.filter(function (o) { return o.isSelected; });
-      return '<div class="ot-map-row ' + cls + '" style="--ot-c:' + (CAT[node.nodeCategory] || CAT.other).color + '">' +
-        '<span class="ot-map-mark">' + ms(mark) + "</span>" +
-        '<span class="ot-map-name">' + esc(node.name) + (sel.length ? ' <b>' + esc(shortLabel(sel[0].label)) + "</b>" : "") + "</span>" +
-        '<span class="ot-map-cat">' + esc((CAT[node.nodeCategory] || CAT.other).name) + "</span></div>";
+    var g = graphLayout(state);
+    st._graphSize = { w: g.width, h: g.height };
+    var paths = g.edges.map(function (e) {
+      return '<path class="ot-edge' + (e.active ? " active" : "") + (e.disabled ? " disabled" : "") + '" d="' + e.d + '"/>';
     }).join("");
-    return '<div class="ot-map">' + rows + "</div>";
+    var svg = '<svg class="ot-graph-svg" width="' + g.width + '" height="' + g.height + '" viewBox="0 0 ' + g.width + " " + g.height + '" fill="none">' + paths + "</svg>";
+    var nodes = g.ids.map(function (id) {
+      var ns = state.nodes[id], raw = st.byId[id] || {}, p = g.pos[id], cat = CAT[raw.nodeCategory] || CAT.other;
+      var sel = ns.options.filter(function (o) { return o.isSelected; });
+      var frontier = ns.status === "active" && !ns.isAnswered;
+      var cls = "ot-gnode " + ns.status + (raw.nodeType === "end" ? " end" : "") + (ns.isResolved ? " resolved" : "") + (frontier ? " frontier" : "") + (st.mapSel === id ? " sel" : "");
+      var mark = ns.status === "active" ? (ns.isAnswered ? "task_alt" : "radio_button_unchecked") : ns.status === "disabled" ? "block" : "more_horiz";
+      return '<button class="' + cls + '" data-ot-act="mapnode" data-ot-node="' + esc(id) + '" style="left:' + p.x + "px;top:" + p.y + "px;width:" + NW + "px;height:" + NH + "px;--ot-c:" + cat.color + '">' +
+        '<span class="ot-gn-top">' + ms(cat.icon) + '<span class="ot-gn-cat">' + esc(cat.name) + "</span>" + '<span class="ot-gn-mark">' + ms(mark) + "</span></span>" +
+        '<span class="ot-gn-name">' + esc(raw.name || raw.title || id) + "</span>" +
+        (sel.length ? '<span class="ot-gn-sel">' + esc(shortLabel(sel[0].label)) + "</span>" : "") +
+        "</button>";
+    }).join("");
+    return '<div class="ot-graph" id="otGraph">' +
+      '<div class="ot-graph-vp" id="otGraphVp"><div class="ot-graph-canvas" id="otGraphCanvas" style="width:' + g.width + "px;height:" + g.height + 'px">' + svg + nodes + "</div></div>" +
+      '<div class="ot-graph-ctl">' +
+        '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="out" aria-label="Zoom out">' + ms("remove") + "</button>" +
+        '<button class="ot-gctl" data-ot-act="graph-fit" aria-label="Fit">' + ms("fit_screen") + "</button>" +
+        '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="in" aria-label="Zoom in">' + ms("add") + "</button></div>" +
+      '<div class="ot-graph-hint">' + ms("drag_pan") + "Drag to pan &middot; pinch to zoom &middot; tap a node</div>" +
+      (st.mapSel ? mapPopHtml(st.mapSel, state) : "") +
+      "</div>";
+  }
+
+  // Bottom-sheet detail for a tapped map node - keeps the physician IN the map (interactive), shows the
+  // node's category/answer/why, and offers the same jump the pathway rail's Edit does.
+  function mapPopHtml(id, state) {
+    var ns = state.nodes[id]; if (!ns) return "";
+    var raw = st.byId[id] || {}, cat = CAT[raw.nodeCategory] || CAT.other;
+    var sel = ns.options.filter(function (o) { return o.isSelected; });
+    var why = (ns.disabledBy || []).map(function (e) { return esc(e.nodeName || e.nodeId) + (e.optionLabel ? " = " + esc(e.optionLabel) : ""); });
+    var statusTxt = ns.status === "active" ? (ns.isAnswered ? "Answered" : "Current step") : ns.status === "disabled" ? "Excluded branch" : "Not yet reached";
+    return '<div class="ot-mappop" id="otMapPop" style="--ot-c:' + cat.color + '">' +
+      '<button class="ot-mappop-x" data-ot-act="mappop-close" aria-label="Close">' + ms("close") + "</button>" +
+      '<div class="ot-mappop-cat">' + ms(cat.icon) + esc(cat.name) + " &middot; " + esc(statusTxt) + "</div>" +
+      '<div class="ot-mappop-name">' + esc(raw.name || raw.title || id) + "</div>" +
+      (raw.description ? '<div class="ot-mappop-desc">' + esc(raw.description) + "</div>" : "") +
+      (sel.length ? '<div class="ot-mappop-sel">' + ms("check_circle") + esc(sel[0].label) + "</div>" : "") +
+      (why.length ? '<div class="ot-mappop-why">' + ms("block") + "Excluded because " + why.join("; ") + "</div>" : "") +
+      (ns.status === "active" ? '<button class="ot-btn primary sm" data-ot-act="map-goto" data-ot-node="' + esc(id) + '">' + ms("my_location") + "Go to this step</button>" : "") +
+      "</div>";
   }
 
   function protocolDetailHtml(ref) {
@@ -348,8 +410,12 @@
       if (disease.length) M.animate(disease, { opacity: [0, 1], transform: ["translateY(12px)", "translateY(0)"] }, { duration: 0.45, delay: M.stagger ? M.stagger(0.05) : 0, easing: spring });
       var selIcon = root.querySelector(".ot-sel-icon");
       if (selIcon) M.animate(selIcon, { transform: ["scale(0.4)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, easing: spring });
-      var mapRows = root.querySelectorAll(".ot-map-row");
-      if (mapRows.length) M.animate(mapRows, { opacity: [0, 1], transform: ["translateX(-8px)", "translateX(0)"] }, { duration: 0.3, delay: M.stagger ? M.stagger(0.02) : 0, easing: "ease-out" });
+      var gnodes = root.querySelectorAll(".ot-gnode");
+      if (gnodes.length) M.animate(gnodes, { opacity: [0, 1], transform: ["scale(0.82)", "scale(1)"] }, { duration: 0.34, delay: M.stagger ? M.stagger(0.014) : 0, easing: spring });
+      var gedges = root.querySelectorAll(".ot-edge");
+      if (gedges.length) M.animate(gedges, { opacity: [0, 1] }, { duration: 0.55, easing: "ease-out" });
+      var pop = root.querySelector(".ot-mappop");
+      if (pop) M.animate(pop, { opacity: [0, 1], transform: ["translateY(16px)", "translateY(0)"] }, { duration: 0.32, easing: spring });
     } catch (e) {}
   }
 
@@ -358,10 +424,62 @@
     if (!el) return;
     el.innerHTML = shellHtml();
     motionRender();
+    setupGraph();
   }
   function repaintBody() {
     var b = D && D.getElementById("otBody");
-    if (b) { b.innerHTML = bodyHtml(); motionRender(); } else paint();
+    if (b) { b.innerHTML = bodyHtml(); motionRender(); setupGraph(); } else paint();
+  }
+
+  // ---- interactive MAP: pan / zoom / fit (transform kept in st.graphT so it survives repaints) ------
+  function applyGraphT() {
+    var c = D && D.getElementById("otGraphCanvas"); if (!c) return;
+    var t = st.graphT || { x: 0, y: 0, s: 1 };
+    c.style.transform = "translate(" + t.x + "px," + t.y + "px) scale(" + t.s + ")";
+    c.style.transformOrigin = "0 0";
+  }
+  function graphFit() {
+    var vp = D && D.getElementById("otGraphVp"), sz = st._graphSize; if (!vp || !sz) return;
+    var pad = 20, s = Math.min((vp.clientWidth - pad * 2) / sz.w, (vp.clientHeight - pad * 2) / sz.h, 1);
+    if (!isFinite(s) || s <= 0) s = 1;
+    st.graphT = { x: Math.max(pad, (vp.clientWidth - sz.w * s) / 2), y: pad, s: s }; applyGraphT();
+  }
+  function graphZoom(dir) {
+    var vp = D && D.getElementById("otGraphVp"); var t = st.graphT || { x: 0, y: 0, s: 1 };
+    var ns = Math.max(0.3, Math.min(2.5, dir === "in" ? t.s * 1.25 : t.s / 1.25));
+    if (vp) { var cx = vp.clientWidth / 2, cy = vp.clientHeight / 2, k = ns / t.s; st.graphT = { x: cx - (cx - t.x) * k, y: cy - (cy - t.y) * k, s: ns }; }
+    else st.graphT = { x: t.x, y: t.y, s: ns };
+    applyGraphT();
+  }
+  function setupGraph() {
+    if (st.view !== "map") return;
+    var vp = D && D.getElementById("otGraphVp"); if (!vp) return;
+    if (!st.graphT) graphFit(); else applyGraphT();
+    if (vp._otWired) return; vp._otWired = true;
+    var pts = {}, base = null, baseMid = null, baseDist = 0;
+    function ids() { return Object.keys(pts); }
+    function mid() { var a = ids(); return { x: (pts[a[0]].x + pts[a[1]].x) / 2, y: (pts[a[0]].y + pts[a[1]].y) / 2 }; }
+    function dist() { var a = ids(), dx = pts[a[0]].x - pts[a[1]].x, dy = pts[a[0]].y - pts[a[1]].y; return Math.sqrt(dx * dx + dy * dy) || 1; }
+    vp.addEventListener("pointerdown", function (e) {
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { vp.setPointerCapture(e.pointerId); } catch (_) {}
+      var t = st.graphT || { x: 0, y: 0, s: 1 }; graphMoved = false;
+      if (ids().length === 1) base = { px: e.clientX, py: e.clientY, tx: t.x, ty: t.y };
+      else if (ids().length === 2) { base = { tx: t.x, ty: t.y, s: t.s }; baseMid = mid(); baseDist = dist(); }
+    });
+    vp.addEventListener("pointermove", function (e) {
+      if (!pts[e.pointerId]) return; pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var n = ids().length, t = st.graphT || { x: 0, y: 0, s: 1 };
+      if (n === 1 && base) {
+        var dx = e.clientX - base.px, dy = e.clientY - base.py;
+        if (Math.abs(dx) + Math.abs(dy) > 6) graphMoved = true;
+        st.graphT = { x: base.tx + dx, y: base.ty + dy, s: t.s }; applyGraphT();
+      } else if (n === 2 && base) {
+        graphMoved = true; var s2 = Math.max(0.3, Math.min(2.5, base.s * (dist() / baseDist))), k = s2 / base.s;
+        st.graphT = { x: baseMid.x - (baseMid.x - base.tx) * k, y: baseMid.y - (baseMid.y - base.ty) * k, s: s2 }; applyGraphT();
+      }
+    });
+    function up(e) { if (pts[e.pointerId]) delete pts[e.pointerId]; if (ids().length < 2) base = null; }
+    vp.addEventListener("pointerup", up); vp.addEventListener("pointercancel", up);
   }
 
   // ---- events ------------------------------------------------------------------------------------
@@ -377,6 +495,11 @@
     if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "pathway"; repaintBody(); return; }
     if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
     if (act === "view-map") { st.view = "map"; paint(); return; }
+    if (act === "graph-zoom") { graphZoom(t.getAttribute("data-ot-arg")); return; }
+    if (act === "graph-fit") { graphFit(); return; }
+    if (act === "mapnode") { if (graphMoved) { graphMoved = false; return; } st.mapSel = (st.mapSel === node ? null : node); repaintBody(); return; }
+    if (act === "mappop-close") { st.mapSel = null; repaintBody(); return; }
+    if (act === "map-goto") { st.mapSel = null; st.view = "pathway"; editStep(node); return; }
     if (act === "answer") { answer(node, opt); return; }
     if (act === "edit") { editStep(node); return; }
     if (act === "why") { st.whyOpen[node] = !st.whyOpen[node]; repaintBody(); return; }

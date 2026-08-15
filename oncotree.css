@@ -170,18 +170,69 @@ body.ot-open { overflow: hidden; }
 .ot-missing, .ot-info { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #92400e; background: #fef3c7; border-radius: 10px; padding: 9px 12px; margin-bottom: 12px; }
 .ot-missing .material-symbols-outlined { font-size: 17px; }
 
-/* map view */
-.ot-map { display: flex; flex-direction: column; gap: 6px; }
-.ot-map-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1px solid var(--ot-line); border-radius: 12px; background: var(--ot-card); border-left: 4px solid var(--ot-c, var(--ot-line)); }
-.ot-map-row.disabled, .ot-map-row.unreachable { opacity: .5; }
-.ot-map-row.disabled .ot-map-name { text-decoration: line-through; }
-.ot-map-row.active { box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.ot-map-row.unresolved { border-style: dashed; }
-.ot-map-mark { display: inline-flex; color: var(--ot-c, var(--ot-sub)); }
-.ot-map-mark .material-symbols-outlined { font-size: 20px; }
-.ot-map-row.disabled .ot-map-mark { color: #ef4444; }
-.ot-map-name { flex: 1; font-size: 14px; }
-.ot-map-cat { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); }
+/* ---- interactive MAP: pan/zoom node-graph ------------------------------------------------------ */
+.ot-graph { position: relative; height: calc(100dvh - 172px); min-height: 340px; margin: -6px -4px 0; border-radius: 16px;
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ot-sub) 26%, transparent) 1px, transparent 0) 0 0 / 22px 22px,
+    var(--ot-bg);
+  border: 1px solid var(--ot-line); overflow: hidden; }
+.ot-graph-vp { position: absolute; inset: 0; overflow: hidden; touch-action: none; cursor: grab; }
+.ot-graph-vp:active { cursor: grabbing; }
+.ot-graph-canvas { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform; }
+.ot-graph-svg { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
+.ot-edge { fill: none; stroke: color-mix(in srgb, var(--ot-sub) 45%, transparent); stroke-width: 2; }
+.ot-edge.active { stroke: #10b981; stroke-width: 2.6; filter: drop-shadow(0 0 3px color-mix(in srgb, #10b981 45%, transparent)); }
+.ot-edge.disabled { stroke: #ef4444; stroke-width: 1.6; stroke-dasharray: 3 5; opacity: .38; }
+
+.ot-gnode { position: absolute; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 7px 9px;
+  text-align: left; border: 1px solid var(--ot-line); border-top: 3px solid var(--ot-c, var(--ot-line));
+  border-radius: 12px; background: var(--ot-card); color: var(--ot-ink); cursor: pointer; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.04); transition: box-shadow .18s ease, transform .12s ease; -webkit-tap-highlight-color: transparent; }
+.ot-gnode:active { transform: scale(.97); }
+.ot-gn-top { display: flex; align-items: center; gap: 5px; }
+.ot-gn-top .material-symbols-outlined { font-size: 15px; color: var(--ot-c, var(--ot-sub)); }
+.ot-gn-cat { flex: 1; font: 800 8.5px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ot-gn-mark { font-size: 15px !important; color: var(--ot-sub); }
+.ot-gn-name { font: 700 12.5px/1.15 system-ui; color: var(--ot-ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ot-gn-sel { font: 600 10.5px system-ui; color: var(--ot-c, var(--ot-accent)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* status states */
+.ot-gnode.active { border-color: color-mix(in srgb, var(--ot-c) 55%, var(--ot-line)); }
+.ot-gnode.resolved .ot-gn-mark { color: #10b981; }
+.ot-gnode.frontier { box-shadow: 0 0 0 2px var(--ot-accent), 0 6px 18px color-mix(in srgb, var(--ot-accent) 30%, transparent); animation: otNodePulse 2s ease-in-out infinite; }
+.ot-gnode.frontier .ot-gn-mark { color: var(--ot-accent); }
+.ot-gnode.disabled, .ot-gnode.unreachable { opacity: .48; border-top-color: #ef4444; }
+.ot-gnode.disabled .ot-gn-name, .ot-gnode.unreachable .ot-gn-name { text-decoration: line-through; text-decoration-color: color-mix(in srgb, #ef4444 60%, transparent); }
+.ot-gnode.disabled .ot-gn-mark, .ot-gnode.unreachable .ot-gn-mark { color: #ef4444; }
+.ot-gnode.unresolved { border-style: dashed; }
+.ot-gnode.end { border-radius: 16px; }
+.ot-gnode.sel { box-shadow: 0 0 0 2.5px var(--ot-c, var(--ot-accent)), 0 8px 22px color-mix(in srgb, var(--ot-c) 34%, transparent); transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) { .ot-gnode.frontier { animation: none; } }
+@keyframes otNodePulse { 0%,100% { box-shadow: 0 0 0 2px var(--ot-accent), 0 6px 18px color-mix(in srgb, var(--ot-accent) 26%, transparent); } 50% { box-shadow: 0 0 0 3px var(--ot-accent), 0 6px 22px color-mix(in srgb, var(--ot-accent) 46%, transparent); } }
+
+.ot-graph-ctl { position: absolute; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 6px; z-index: 4; }
+.ot-gctl { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--ot-line); border-radius: 11px;
+  background: color-mix(in srgb, var(--ot-card) 92%, transparent); color: var(--ot-ink); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12); cursor: pointer; }
+.ot-gctl:active { transform: scale(.94); }
+.ot-gctl .material-symbols-outlined { font-size: 22px; }
+.ot-graph-hint { position: absolute; left: 12px; bottom: 14px; display: flex; align-items: center; gap: 5px; z-index: 4;
+  font: 600 11px system-ui; color: var(--ot-sub); background: color-mix(in srgb, var(--ot-card) 80%, transparent);
+  padding: 5px 9px; border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); pointer-events: none; max-width: 62%; }
+.ot-graph-hint .material-symbols-outlined { font-size: 14px; }
+
+.ot-mappop { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; padding: 13px 15px 15px;
+  border: 1px solid var(--ot-line); border-left: 4px solid var(--ot-c, var(--ot-accent)); border-radius: 16px;
+  background: color-mix(in srgb, var(--ot-card) 96%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 -4px 24px rgba(0,0,0,.18); }
+.ot-mappop-x { position: absolute; top: 9px; right: 9px; width: 30px; height: 30px; display: grid; place-items: center; border: none; background: transparent; color: var(--ot-sub); cursor: pointer; }
+.ot-mappop-cat { display: flex; align-items: center; gap: 6px; font: 800 10px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-c, var(--ot-sub)); }
+.ot-mappop-cat .material-symbols-outlined { font-size: 15px; }
+.ot-mappop-name { font: 800 16px system-ui; color: var(--ot-ink); margin: 3px 40px 0 0; }
+.ot-mappop-desc { font: 500 12.5px/1.4 system-ui; color: var(--ot-sub); margin-top: 5px; }
+.ot-mappop-sel { display: flex; align-items: center; gap: 6px; font: 700 13px system-ui; color: #10b981; margin-top: 8px; }
+.ot-mappop-sel .material-symbols-outlined, .ot-mappop-why .material-symbols-outlined { font-size: 17px; }
+.ot-mappop-why { display: flex; align-items: flex-start; gap: 6px; font: 600 12px/1.35 system-ui; color: #ef4444; margin-top: 8px; }
+.ot-btn.sm { min-height: 38px; padding: 0 14px; font-size: 13px; margin-top: 11px; }
 
 /* protocol detail */
 .ot-back { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; color: var(--ot-accent); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px 0 12px; }
