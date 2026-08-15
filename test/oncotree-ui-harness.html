@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONCOTREE UI harness</title>
+<link rel="stylesheet" href="/oncotree.css">
+<style>
+  /* material-symbols text fallback so icons don't 404 in the harness (renders the ligature name) */
+  body { margin: 0; }
+</style>
+</head>
+<body>
+<script>
+  // Minimal stubs: only what oncotree.js reads from the host. Flag ON so open() renders.
+  window.SMD_QUEUE_FLAGS = { bool: function (k) { return k === "smd_onco_navigator"; }, set: function () {} };
+  window.__toasts = [];
+  window.toast = function (m) { window.__toasts.push(m); };
+  window.__selectEvents = [];
+  document.addEventListener("smd-oncotree-select", function (e) { window.__selectEvents.push(e.detail); });
+</script>
+<!-- real modules, in the same order as index.html -->
+<script src="/oncotree-engine.js"></script>
+<script src="/oncotree-recommend.js"></script>
+<script src="/oncotree.js" onload="window.__ready = !!(window.SMD_ONCOTREE && window.SMD_ONCOTREE.open)"></script>
+</body>
+</html>
