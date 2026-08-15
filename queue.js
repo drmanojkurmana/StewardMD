@@ -1,7 +1,7 @@
-/* queue.js — Smart OPD Queue doctor dashboard controller (window.QUEUE).
+/* queue.js - Smart OPD Queue doctor dashboard controller (window.QUEUE).
  * Buildless ES5 IIFE, flag-gated (smd_opd_queue). FAITHFUL to the Google Stitch "Clinical Precision"
  * dashboard: _render(state) emits Stitch's exact markup (classes in queue.css) using the app's bundled
- * Material Symbols icon font — no emoji. _render is PURE (state -> HTML) so the demo renders identically.
+ * Material Symbols icon font - no emoji. _render is PURE (state -> HTML) so the demo renders identically.
  * Talks to /api/queue/* (server-authoritative). Realtime = poll (onSnapshot is a later upgrade). */
 (function () {
   "use strict";
@@ -36,7 +36,7 @@
   function insightFor(tickets) {
     var worst = null, worstWait = 0;
     tickets.forEach(function (t) { if (isQueued(t.status)) { var w = now() - (t.registeredAt || now()); if (w > worstWait) { worstWait = w; worst = t; } } });
-    if (worst && worstWait > 30 * 60000) return { t: worst, msg: (worst.name || "A patient") + " (#" + (worst.mrnLast4 || "—") + ") has waited " + mins(worstWait) + " minutes. Consider notifying the next few patients of the delay." };
+    if (worst && worstWait > 30 * 60000) return { t: worst, msg: (worst.name || "A patient") + " (#" + (worst.mrnLast4 || "-") + ") has waited " + mins(worstWait) + " minutes. Consider notifying the next few patients of the delay." };
     return null;
   }
 
@@ -55,7 +55,7 @@
     var etaMin = t.etaStart ? mins(t.etaStart - now()) : null;
     var line = late
       ? '<span class="q-tl-eta late">' + ms("error") + " Waiting: " + mins(waitMs) + "m</span>"
-      : '<span class="q-tl-eta">' + ms(isNext ? "check_circle" : "pending", false) + (isNext ? '' : '') + " ETA: " + (etaMin == null ? "—" : etaMin + "m") + "</span>";
+      : '<span class="q-tl-eta">' + ms(isNext ? "check_circle" : "pending", false) + (isNext ? '' : '') + " ETA: " + (etaMin == null ? "-" : etaMin + "m") + "</span>";
     return '<div class="q-tl-row' + (isNext ? " next" : "") + (late ? " late" : "") + '" data-q-tid="' + esc(t.id) + '">' +
         '<div class="q-pos">' + (idx + 1) + "</div>" +
         '<div class="q-tl-info"><div class="q-tl-nm">' + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
@@ -91,7 +91,7 @@
     var vt = cur.visitType === "followup" ? "Follow-up" : "New";
     return '<div class="q-consult"><div class="q-consult-b">' +
       '<div class="q-cn"><div><h3>' + esc(cur.name || "Patient") + "</h3>" +
-        '<div class="q-cn-meta"><span>' + ms("badge") + " MRN: <span class=\"mono\">" + esc(cur.mrnLast4 || "—") + "</span></span></div></div>" +
+        '<div class="q-cn-meta"><span>' + ms("badge") + " MRN: <span class=\"mono\">" + esc(cur.mrnLast4 || "-") + "</span></span></div></div>" +
         '<div class="q-vt">' + vt + "</div></div>" +
       '<div class="q-cta">' +
         '<div class="q-swipe" id="qSwipe" role="button" aria-label="Swipe to end consultation">' +
@@ -129,7 +129,7 @@
     var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div>" +
       '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + ordered.length + ")</a></div></div>";
-    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : "";
+    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
       '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
       '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div></section>";
@@ -147,14 +147,14 @@
       "</div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     // "Patients" opens the saved-patients list of the active clinic store (My Clinic device / Shared Clinic
-    // Drive) — every patient consulted till now, tap to reopen their consult. It's a launcher, not a view.
+    // Drive) - every patient consulted till now, tap to reopen their consult. It's a launcher, not a view.
     var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main">' + header + '<div class="q-canvas">' + canvas + "</div>" + bottom + "</div>";
     return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
-  // Doctor profile sheet — opened from the header avatar. Identity + status + switch clinic + sign out.
+  // Doctor profile sheet - opened from the header avatar. Identity + status + switch clinic + sign out.
   function renderProfile(state, doctorName, dept) {
     var s = state.session || {};
     var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
@@ -185,8 +185,8 @@
   }
   function analyticsCanvas(state) {
     var a = state.analytics;
-    if (!a) return '<h2 class="q-h2">' + ms("analytics") + 'Performance analytics</h2><div class="q-empty" style="padding:60px">Loading analytics…</div>';
-    var acc = a.etaAccuracyPct == null ? "—" : a.etaAccuracyPct + "%";
+    if (!a) return '<h2 class="q-h2">' + ms("analytics") + 'Performance analytics</h2><div class="q-grid2"><div class="q-card"><div class="q-skel" style="height:44px;width:55%;margin-bottom:12px"></div><div class="q-skel" style="height:13px;width:38%"></div></div><div class="q-card"><div class="q-skel" style="height:120px"></div></div></div>';
+    var acc = a.etaAccuracyPct == null ? "-" : a.etaAccuracyPct + "%";
     var kpis = '<section class="q-kpis">' +
       kpi("Completed", "task_alt", String(a.completed), "") + kpi("Avg. Wait", "schedule", a.avgWaitMin + "<u>m</u>", "") +
       kpi("Avg. Consult", "timer", a.avgConsultMin + "<u>m</u>", "") + kpi("No-shows", "person_off", String(a.noShow), "") + "</section>";
@@ -208,7 +208,7 @@
   // Storage MODE for no-MRN cases: ONE clinic, either "device" (My Clinic, this phone) or "shared"
   // (multi-device, encrypted Google Drive sync). My Clinic + Shared Clinic unified behind this switch.
   function opdStorageMode() { try { return localStorage.getItem("smd_opd_storage_mode") === "shared" ? "shared" : "device"; } catch (e) { return "device"; } }
-  // Clinic/doctor code — the XXX in a no-MRN patient's SMD-XXX-nnn hospital id. Shared: derived from the
+  // Clinic/doctor code - the XXX in a no-MRN patient's SMD-XXX-nnn hospital id. Shared: derived from the
   // clinic id so every device agrees; device: a stable per-phone code.
   function clinicCode() {
     try { if (opdStorageMode() === "shared") { var cfg = JSON.parse(localStorage.getItem("smd_shared_config") || "{}"); if (cfg && cfg.clinicId) { var s = String(cfg.clinicId).replace(/[^a-z0-9]/gi, "").toUpperCase(); return s.slice(-3) || "CLN"; } } } catch (e) {}
@@ -236,10 +236,10 @@
     var shared = opdStorageMode() === "shared";
     var head = '<div class="q-card"><div class="q-card-h">' + ms("cloud_done") + "Case storage</div>" +
       '<div class="q-hint" style="margin:-4px 0 12px">Patients with a hospital MRN save to GHIS. Patients with no MRN get a clinic ID (<b>SMD-' + esc(clinicCode()) + '-nnn</b>) and save to your clinic ' + (shared ? "(synced across your devices)." : "on this device.") + "</div>";
-    // ONE clinic, two modes — My Clinic (this device) or Shared Clinic (multi-device sync).
+    // ONE clinic, two modes - My Clinic (this device) or Shared Clinic (multi-device sync).
     var sel = '<div class="q-hint" style="margin:2px 0 6px;font-weight:700;color:var(--ink,#0f172a)">Where no-MRN cases are saved</div>' +
-      localTog("This device only", !shared, "My Clinic — stays on this phone, encrypted Drive backup", "storagemode:device") +
-      localTog("Shared across my devices", shared, "Encrypted, synced to your clinic Google Drive — open on any of your devices", "storagemode:shared");
+      localTog("This device only", !shared, "My Clinic - stays on this phone, encrypted Drive backup", "storagemode:device") +
+      localTog("Shared across my devices", shared, "Encrypted, synced to your clinic Google Drive - open on any of your devices", "storagemode:shared");
     var ctrls;
     if (shared) {
       var app = (G.SMD_SHARED && G.SMD_SHARED.app && G.SMD_SHARED.app());
@@ -281,7 +281,7 @@
     var cfgCards = c
       ? '<div class="q-card"><div class="q-card-h">' + ms("notifications_active") + "Notification triggers</div>" +
           num("early", "Early warning (patients ahead)", c.early, "SMS/WhatsApp when this many are ahead") +
-          num("prep", "Preparation alert (patients ahead)", c.prep, "'Please head over' — kept ≤ early") +
+          num("prep", "Preparation alert (patients ahead)", c.prep, "'Please head over' - kept ≤ early") +
           '<div class="q-out"><span>Next-in-line</span><b>Always at position 1</b></div>' +
           tog("smsEnabled", "SMS channel", c.smsEnabled) + tog("waEnabled", "WhatsApp channel", c.waEnabled, "needs a configured provider") +
         "</div>" +
@@ -290,7 +290,7 @@
           num("defaultConsultMin", "Default consult (min)", c.defaultConsultMin, "used before ETA learning kicks in") +
           tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
         "</div>"
-      : '<div class="q-card"><div class="q-empty" style="padding:40px">Loading queue settings…</div></div>';
+      : '<div class="q-card"><div class="q-skel" style="height:16px;width:50%;margin-bottom:16px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px"></div></div>';
     return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>";
   }
 
@@ -310,7 +310,7 @@
   function authHeaders() { return fbToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t; return h; }); }
   // Retry transient network/DNS failures (e.g. a momentary "Unable to resolve host" right after app launch or a
   // WiFi/data switch) so the app self-heals and users NEVER touch WiFi/DNS settings. Only retries a REJECTED
-  // fetch (network error) — never an HTTP error status. 3 tries with ~0.7s backoff.
+  // fetch (network error) - never an HTTP error status. 3 tries with ~0.7s backoff.
   function fetchRetry(url, opts, tries) {
     tries = tries || 3;
     return fetch(url, opts).catch(function (e) {
@@ -360,7 +360,7 @@
   }
   function paint() {
     var r = root();
-    // While the user is typing in search, DON'T rebuild the DOM — a full innerHTML swap blurs
+    // While the user is typing in search, DON'T rebuild the DOM - a full innerHTML swap blurs
     // the input and closes the Android soft keyboard. Refresh only the filtered rows in place.
     var ae = document.activeElement;
     if (ae && ae.classList && ae.classList.contains("q-tl-search")) {
@@ -422,7 +422,7 @@
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
     if (cmd === "retry") { loadSession(); return; }
-    // Case-storage prefs are LOCAL (device) — work with no session and in demo, and never touch the server.
+    // Case-storage prefs are LOCAL (device) - work with no session and in demo, and never touch the server.
     if (cmd === "storagetoggle") { try { localStorage.setItem("smd_clinic_autosync", storeAutoSyncOn() ? "0" : "1"); } catch (e) {} paint(); return; }
     if (cmd === "storagesync") { storageSyncNow(); return; }
     if (cmd === "storagesetup") { try { localStorage.setItem("smd_personal_clinic", "1"); } catch (e) {} if (G.SMD_CLINIC && G.SMD_CLINIC.open) G.SMD_CLINIC.open(); return; }
@@ -435,7 +435,7 @@
       return;
     }
     var sid = st.session && st.session.id; if (!sid && cmd !== "nav" && cmd !== "dismiss" && cmd !== "savecfg") return;
-    if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode — sign in to GHIS to manage a real queue."); } catch (e) {} return; }
+    if (st.demo && cmd !== "nav" && cmd !== "dismiss") { try { G.toast && G.toast("Demo mode - sign in to GHIS to manage a real queue."); } catch (e) {} return; }
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
     if (cmd === "finish") act(sid, "/advance");
@@ -533,7 +533,7 @@
   function _listHospitals() {
     var el = root(); el.innerHTML = _wrap('<div class="q-empty" style="padding:40px 8px">Loading hospitals…</div>');
     apiGet("/orgs").then(function (r) {
-      var rows = '<button class="q-gate-btn" style="text-align:left" data-q-act="pickghis">' + ms("local_hospital") + " GITAM — GHIS<br><small style=\"opacity:.85;font-weight:400\">Hospital EMR · Ward Sync</small></button>";
+      var rows = '<button class="q-gate-btn" style="text-align:left" data-q-act="pickghis">' + ms("local_hospital") + " GITAM - GHIS<br><small style=\"opacity:.85;font-weight:400\">Hospital EMR · Ward Sync</small></button>";
       ((r && r.orgs) || []).filter(function (o) { return o.mode === "connect" && o.connectorId; }).forEach(function (o) {   // only real EMR-connected hospitals (a connect org with no connector is malformed, never shown)
         rows += '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickhosp:' + esc(o.id) + '">' + ms("local_hospital") + " " + esc(o.name || "Hospital") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + " · EMR-connected</small></button>";
       });
@@ -548,16 +548,16 @@
       var mine = ((r && r.orgs) || []).filter(function (o) { return o.mode !== "connect"; });
       var rows = mine.length ? mine.map(function (o) {
         return '<button class="q-gate-btn" style="text-align:left;margin-top:10px" data-q-act="pickclinic:' + esc(o.id) + '">' + ms("home_health") + " " + esc(o.name || "Clinic") + "<br><small style=\"opacity:.85;font-weight:400\">" + esc(o.code || "") + "</small></button>";
-      }).join("") : '<p class="q-gate-sub">No personal clinic yet — set one up in the console.</p>';
+      }).join("") : '<p class="q-gate-sub">No personal clinic yet - set one up in the console.</p>';
       el.innerHTML = _wrap('<p class="q-gate-sub">Choose your clinic.</p>' + rows + '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("add") + " New clinic (in console)</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>");
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
   }
   function _staffNote() {
-    return _wrap('<p class="q-gate-sub">Front-desk staff use the OPD web console — no app install needed.</p>' +
+    return _wrap('<p class="q-gate-sub">Front-desk staff use the OPD web console - no app install needed.</p>' +
       '<button class="q-gate-btn" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
       '<button class="q-gate-close" data-q-act="chooser">Back</button>');
   }
-  // Doctor at a CHOSEN StewardMD org (clinic or Connect hospital). Loads the doctor's ROOM session — the
+  // Doctor at a CHOSEN StewardMD org (clinic or Connect hospital). Loads the doctor's ROOM session - the
   // SAME queue the sister routes into on the console (server resolves the room by identity). No GHIS.
   function startClinic(orgId) { if (!orgId) { _listClinics(); return; } loadRoom(orgId, ""); }
   function loadRoom(orgId, roomId) {
@@ -603,7 +603,7 @@
       (who ? '<div class="q-gate-foot">App account: ' + esc(who) + "</div>" : "") +
       "</div></div>";
   }
-  // ── "Remember me" — GHIS credential stored ONLY on this device, never our server ────────────────
+  // ── "Remember me" - GHIS credential stored ONLY on this device, never our server ────────────────
   // Reuses autofetch's device secure store (iOS Keychain / Android Keystore via SMD_SECURE) + the SAME
   // key, so one remembered login also powers silent auto-reconnect. userId (non-sensitive) is kept in
   // localStorage for prefill + as the "remembered" flag; the password lives only in the OS secure store.
@@ -617,7 +617,7 @@
   function remUser() { try { return localStorage.getItem(remUserKey()) || ""; } catch (e) { return ""; } }
   function remRead() { if (!(window.SMD_SECURE && window.SMD_SECURE.get)) return Promise.resolve(null); return window.SMD_SECURE.get(remCredKey()).then(function (raw) { try { return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }).catch(function () { return null; }); }
   // Session died mid-use: try a SILENT re-login from the remembered device credential; only if that
-  // fails show the login gate (prefilled) — never force the doctor to sign out first.
+  // fails show the login gate (prefilled) - never force the doctor to sign out first.
   function ghisReauth(reason) {
     clearInterval(st.pollId);
     st.ghisToken = null; st.ghisDoctorName = ""; st.ghisUser = "";
@@ -683,7 +683,7 @@
       // Primary data source: auto-pull today's GHIS Out-patients list into the queue right after a GHIS sign-in
       // (dedupes server-side by episode id, so it is safe to run on every entry). Manual "Import" button remains.
       if (st.ghisToken && (!G.SMD_QUEUE_FLAGS || !G.SMD_QUEUE_FLAGS.bool || G.SMD_QUEUE_FLAGS.bool("smd_opd_queue_import"))) { try { importOpd(); } catch (e) {} }
-      // Connected EMR (Connect) hospital: auto-pull today's worklist from the linked FHIR EMR — same model as GHIS.
+      // Connected EMR (Connect) hospital: auto-pull today's worklist from the linked FHIR EMR - same model as GHIS.
       if (opts.source === "connect") { try { importFromSource(); } catch (e) {} }
     }).catch(function () { el.innerHTML = '<div class="q-empty" style="padding:80px">Could not reach the server. Check your connection.<br><button class="q-pause" style="max-width:200px;margin:16px auto 0" data-q-act="retry">Retry</button><button class="q-pause" style="max-width:200px;margin:8px auto 0" data-q-act="chooser">Switch workplace</button></div>'; });
   }
@@ -762,7 +762,7 @@
   } catch (e) {}
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st,
-    // Live filter of the queue timeline — updates ONLY the rows container so the search input
+    // Live filter of the queue timeline - updates ONLY the rows container so the search input
     // keeps focus while typing (no full repaint).
     _search: function (v) {
       st.search = v;
