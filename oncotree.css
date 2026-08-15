@@ -2,7 +2,7 @@
    Color is used primarily for state (category accent --ot-c; lifecycle badges). Self-contained. */
 
 .ot-overlay {
-  /* light-mode defaults (complete set); the dark media query overrides all of them together */
+  /* LIGHT is the default palette; the body.dark rule below overrides all of them together. */
   --ot-bg: #f4f5f7; --ot-ink: #16181d; --ot-card: #ffffff; --ot-line: #e5e7eb; --ot-sub: #6b7280; --ot-accent: #0a84ff;
   position: fixed; inset: 0; z-index: 4000; display: none;
   background: var(--ot-bg);
@@ -10,9 +10,11 @@
   font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
   color: var(--ot-ink);
 }
-@media (prefers-color-scheme: dark) {
-  .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; --ot-accent: #4aa3ff; }
-}
+/* Dark palette follows the APP's light/dark toggle (body.dark, managed by theme-sync.js) - the same
+   signal every other module uses - NOT the OS directly (@media prefers-color-scheme), so OncoTree
+   matches the rest of the app when you flip the in-app theme instead of staying dark on a dark OS.
+   Light is the default (no body.dark). */
+body.dark .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; --ot-accent: #4aa3ff; }
 body.ot-open { overflow: hidden; }
 
 /* Icon font binding. The app self-hosts 'Material Symbols Rounded' (redesign-system.css @font-face,
