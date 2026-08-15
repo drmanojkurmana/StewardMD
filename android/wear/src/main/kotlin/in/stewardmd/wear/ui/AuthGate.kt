@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AuthGate(onBack: () -> Unit, content: @Composable () -> Unit) {
     var signedIn by remember { mutableStateOf(Session.signedIn()) }
-    if (signedIn) {
+    if (Demo.enabled || signedIn) {   // Demo.enabled is debug-only (see Demo.kt) — never true in release
         content()
         return
     }
