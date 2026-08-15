@@ -1113,6 +1113,9 @@
     if (!detail || !detail.protocolId) return;
     if (!oncoFlagOn() || !st.writeOn) return;                                // engine off / read-only session
     if (!st.patient || !(st.patient.mrn || st.patient.name)) return;         // no patient profile open
+    // Patient-switch race guard (R1): if the event names a patient, it must be the one open now, so a
+    // stale/duplicate event after a switch can never stage protocol-for-A onto patient B.
+    if (detail.patient && detail.patient.patientId && st.patient.mrn && detail.patient.patientId !== st.patient.mrn) return;
     var id = detail.protocolId;
     var have = (st.oncoProtocols || []).some(function (p) { return p && p.id === id; });
     if (!have && detail.template && oncoUsable(detail.template)) st.oncoProtocols = (st.oncoProtocols || []).concat([detail.template]);
