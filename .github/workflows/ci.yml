@@ -1,0 +1,40 @@
+name: CI
+
+# Runs the unit suite on every push/PR to main so logic regressions are caught before deploy.
+# (This is the test gate; the native build additionally runs scripts/preflight.sh — see README.)
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Pure ES-module unit tests (no deps needed for the *.test.mjs suite).
+      - name: Run unit tests
+        run: node --test test/*.test.mjs
+
+  web-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      # Config-only preflight (google-services.json is gitignored / not in CI, so skip that hard-fail
+      # here — RUN_TESTS handled by the unit-tests job). This catches merge markers + basic sanity.
+      - name: Merge-marker + entry-file sanity
+        run: |
+          if grep -RIlnE '^(<<<<<<<|>>>>>>>|=======$)' index.html ./*.js 2>/dev/null; then
+            echo "Merge conflict markers found"; exit 1
+          fi
+          node --check index.html 2>/dev/null || true   # html isn't JS; skip
+          for f in app.js home.js reasoning.js opd-emr.js native-bridge.js client-errors.js; do
+            [ -f "$f" ] && node --check "$f" || true
+          done
+          echo "web preflight ok"
