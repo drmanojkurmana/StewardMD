@@ -328,15 +328,34 @@
       }
       // Ensure the model is installed (download only if missing), then start recording.
       try { console.info("[SV-native] transcribeWhisper model=" + modelKey + " lang=" + lang); } catch (e) {}
-      W.isModelInstalled({ model: modelKey }).then(function (r) {
+      function startDownload() {
         if (!current()) return;
-        try { console.info("[SV-native] installed=" + !!(r && r.installed) + " model=" + modelKey); } catch (e) {}
-        if (r && r.installed) { begin(); return; }
         if (opts.onStateChange) opts.onStateChange("downloading");
         try { console.info("[SV-native] downloading " + modelKey + " <- " + WHISPER_MODEL_HOST + "/" + m.file); } catch (e) {}
         W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
           .then(function () { try { console.info("[SV-native] download done " + modelKey); } catch (e) {} begin(); })
           .catch(function (e) { try { console.info("[SV-native] download FAIL " + modelKey + " " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "model-download-failed"); });
+      }
+      W.isModelInstalled({ model: modelKey }).then(function (r) {
+        if (!current()) return;
+        try { console.info("[SV-native] installed=" + !!(r && r.installed) + " model=" + modelKey); } catch (e) {}
+        if (r && r.installed) { begin(); return; }
+        // Requested model isn't on the device. Rather than block dictation on a fresh ~264MB download
+        // (which fails on a weak connection), fall back to an ALREADY-INSTALLED multilingual model:
+        // small-q8_0 handles Telugu/Hindi/English + code-switch (the Telugu specialist is only MORE
+        // accurate, not required). Only download when no usable model is installed at all.
+        var FB = "small-q8_0";
+        if (modelKey !== FB && WHISPER_MODELS[FB]) {
+          W.isModelInstalled({ model: FB }).then(function (fr) {
+            if (!current()) return;
+            if (fr && fr.installed) {
+              try { console.info("[SV-native] " + modelKey + " missing -> using installed " + FB); } catch (e) {}
+              modelKey = FB; m = WHISPER_MODELS[FB]; begin();
+            } else { startDownload(); }
+          }).catch(function () { startDownload(); });
+          return;
+        }
+        startDownload();
       }).catch(function (e) { try { console.info("[SV-native] isModelInstalled FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "transcription-failure"); });
 
       return function () { self.stopWhisper(); };
