@@ -1,12 +1,16 @@
 package in.stewardmd.app;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
+import com.getcapacitor.BridgeWebViewClient;
 import com.getcapacitor.community.speechrecognition.SpeechRecognition;
 
 public class MainActivity extends BridgeActivity {
@@ -17,9 +21,36 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SpeechRecognition.class);
         registerPlugin(AppOrientationPlugin.class);
         registerPlugin(FundxDepthPlugin.class);
-        registerPlugin(WearBridgePlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
+        setupRenderProcessRecovery();
+    }
+
+    // Android reclaims the WebView RENDER process under memory pressure or after a long background.
+    // If onRenderProcessGone is not overridden (or returns false), the framework CRASHES THE APP -
+    // which shows up as the app "crashing"/going blank when reopened. We return true (we handled it)
+    // and recreate the activity so the WebView + home reload cleanly instead of dying. Delegates all
+    // normal navigation to Capacitor's BridgeWebViewClient. No effect on iOS/web.
+    private void setupRenderProcessRecovery() {
+        if (getBridge() == null) return;
+        final WebView webView = getBridge().getWebView();
+        if (webView == null) return;
+        final Bridge bridge = getBridge();
+        webView.setWebViewClient(new BridgeWebViewClient(bridge) {
+            @Override
+            public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
+                boolean didCrash = detail != null && detail.didCrash();
+                Log.w("StewardMD", "WebView render process gone (didCrash=" + didCrash + "); recovering by recreating the activity");
+                try {
+                    if (!isFinishing() && !isDestroyed()) {
+                        runOnUiThread(() -> { try { recreate(); } catch (Exception e) { Log.e("StewardMD", "recreate failed", e); } });
+                    }
+                } catch (Exception e) {
+                    Log.e("StewardMD", "render recovery failed", e);
+                }
+                return true;   // handled - prevents the framework from crashing the app
+            }
+        });
     }
 
     // Android 15+ (targetSdk 35+) forces edge-to-edge: the app draws BEHIND the status /
