@@ -152,7 +152,9 @@
   // Collect the clinical phenotype from ACTIVE, answered question nodes. phenotypeKey "biomarkers.HER2"
   // nests under biomarkers. Never infers a value the physician did not answer (never invents).
   function buildPhenotype(graph, byId, st, answers) {
-    var ph = { diseaseId: graph.diseaseId || null, biomarkers: {}, _sources: {} };
+    // matchDisease:false opts a graph out of diseaseId matching (e.g. a disease whose protocols carry
+    // drifted diseaseId tags); the per-node protocolRefs then scope, and disease is not a match/exclude.
+    var ph = { diseaseId: (graph.matchDisease === false) ? null : (graph.diseaseId || null), biomarkers: {}, _sources: {} };
     Object.keys(st).forEach(function (id) {
       var node = byId[id], s = st[id];
       if (!node || s.status !== ACTIVE || !s.isAnswered) return;   // only active, answered nodes contribute

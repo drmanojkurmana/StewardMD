@@ -34,7 +34,7 @@
     if (arr == null) return "unconfirmed";
     if (!arr.length) return "nc";
     if (arr.indexOf("VERIFY") >= 0) return "unconfirmed";
-    if (phenoVal == null) return "unconfirmed";
+    if (phenoVal == null) return "nc";   // navigator did not capture this dimension -> no constraint (not noise)
     var t = tokenizer || norm;
     var want = t(phenoVal), have = arr.map(t);
     return have.indexOf(want) >= 0 ? "match" : "exclude";
@@ -49,6 +49,23 @@
     if (/\bii\b/.test(n)) return "ii";
     if (/\bi\b/.test(n)) return "i";
     return n;
+  }
+
+  // Histology constraint -> "squamous" | "non-squamous" | null(no constraint: "any", or a histology that
+  // is not a squamous/non-squamous split, e.g. breast "invasive carcinoma" or a histology-agnostic TKI).
+  // "any" is checked first so "any NSCLC histology (nonsquamous or squamous)" is a non-constraint.
+  function histoNorm(h) {
+    var s = norm(h); if (!s) return null;
+    if (/\bany\b/.test(s)) return null;
+    if (/non-?squamous/.test(s)) return "non-squamous";
+    if (/squamous/.test(s)) return "squamous";
+    return null;
+  }
+  function histoDim(protoHist, phenoHist) {
+    var pn = histoNorm(protoHist);
+    if (pn == null) return "nc";
+    if (phenoHist == null) return "unconfirmed";
+    return pn === norm(phenoHist) ? "match" : "exclude";
   }
 
   // Biomarker value -> "positive" | "negative" | null(no clean constraint). Conservative: prose that is
@@ -97,7 +114,10 @@
       else if (verdict === "match") { matched[name] = true; count++; }
       return false;
     }
-    if (apply("disease", scalarDim(proto.diseaseId, ph.diseaseId))) return null;
+    // disease is a criterion only when the phenotype supplies it (a matchDisease:false navigator relies
+    // on curated per-node protocolRefs instead, so a drifted diseaseId tag never wrongly excludes).
+    if (ph.diseaseId != null && apply("disease", scalarDim(proto.diseaseId, ph.diseaseId))) return null;
+    if (ph.histology != null && apply("histology", histoDim(proto.histology, ph.histology))) return null;
     if (apply("stage", listDim(proto.stage, ph.stage, stageToken))) return null;
     if (apply("setting", listDim(proto.treatmentSetting, ph.setting))) return null;   // scalar-or-array via asArr
     if (apply("intent", listDim(proto.intentOptions || proto.treatmentIntent, ph.intent))) return null;

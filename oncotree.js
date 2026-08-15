@@ -22,8 +22,15 @@
     other: { color: "#870F54", icon: "more_horiz", name: "Other" }
   };
 
+  // Diseases with an authored + reviewed navigator graph (kb/oncotree/<id>.json). The engine + UI are
+  // disease-agnostic; adding a disease = author its graph JSON + one entry here.
+  var DISEASES = [
+    { id: "breast", title: "Breast Cancer", sub: "Invasive - HER2 / HR pathways", icon: "female", ready: true },
+    { id: "lung", title: "Lung Cancer", sub: "NSCLC drivers / immunotherapy, SCLC, mesothelioma", icon: "pulmonology", ready: true }
+  ];
+
   var st = {
-    guideline: "breast", graph: null, protocols: {}, answers: {}, rebaseId: null,
+    guideline: null, graph: null, protocols: {}, answers: {}, rebaseId: null,
     view: "pathway", openedProtocol: null, selection: null, whyOpen: {}, showExcluded: false,
     loaded: false, loading: false, error: null, ctx: null
   };
@@ -251,9 +258,23 @@
     return parts.join(", ") || "not specified";
   }
 
+  // Disease-picker landing (multi-disease entry). Only diseases with a reviewed graph are selectable.
+  function pickerHtml() {
+    var cards = DISEASES.map(function (d) {
+      return '<button class="ot-disease" data-ot-act="pick" data-ot-guideline="' + esc(d.id) + '"' + (d.ready ? "" : " disabled") + '>' +
+        '<span class="ot-disease-ic">' + ms(d.icon) + "</span>" +
+        '<span class="ot-disease-t"><b>' + esc(d.title) + "</b><span>" + esc(d.sub) + "</span></span>" +
+        (d.ready ? ms("chevron_right") : '<span class="ot-soon">soon</span>') + "</button>";
+    }).join("");
+    return '<div class="ot-picker"><div class="ot-picker-h">Choose a cancer</div>' +
+      '<div class="ot-picker-sub">Navigate the disease pathway to applicable StewardMD Standard Protocols. Decision support only; the physician decides and the existing dose engine computes doses.</div>' +
+      cards + "</div>";
+  }
+
   function bodyHtml() {
     if (st.loading) return '<div class="ot-loading">' + ms("progress_activity") + "Loading navigator...</div>";
     if (st.error) return '<div class="ot-error">' + ms("error") + esc(st.error) + '<button class="ot-btn ghost" data-ot-act="retry">Retry</button></div>';
+    if (!st.graph) return pickerHtml();
     var state = evalState();
     if (!state) return '<div class="ot-loading">Preparing...</div>';
     if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol);
@@ -273,15 +294,22 @@
 
   // ---- shell + paint -----------------------------------------------------------------------------
   function shellHtml() {
-    var title = (st.graph && st.graph.title) || "ONCOTREE";
-    var viewToggle = '<div class="ot-viewtoggle">' +
+    var hasGraph = !!st.graph;
+    var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology navigator";
+    var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
       '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("account_tree") + "Pathway</button>" +
-      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Map</button></div>";
+      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Map</button></div>") : "";
+    var kicker = hasGraph
+      ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
+      : '<span class="ot-hkicker">ONCOTREE navigator</span>';
+    var rightBtn = hasGraph
+      ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + "</button>"
+      : '<span class="ot-hbtn" aria-hidden="true"></span>';
     return '<div class="ot-shell">' +
       '<header class="ot-header">' +
         '<button class="ot-hbtn" data-ot-act="close" aria-label="Close">' + ms("close") + "</button>" +
-        '<div class="ot-htitle"><span class="ot-hkicker">ONCOTREE navigator</span><span class="ot-hname">' + esc(title) + "</span></div>" +
-        '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + "</button>" +
+        '<div class="ot-htitle">' + kicker + '<span class="ot-hname">' + esc(title) + "</span></div>" +
+        rightBtn +
       "</header>" +
       viewToggle +
       '<div class="ot-scroll" id="otBody">' + bodyHtml() + "</div>" +
@@ -306,7 +334,9 @@
     var act = t.getAttribute("data-ot-act");
     var node = t.getAttribute("data-ot-node"), opt = t.getAttribute("data-ot-opt"), proto = t.getAttribute("data-ot-proto");
     if (act === "close") return close();
-    if (act === "retry") { st.error = null; load(); return; }
+    if (act === "pick") { loadGuideline(t.getAttribute("data-ot-guideline")); return; }
+    if (act === "change-disease") { st.graph = null; st.guideline = null; st.byId = {}; st.answers = {}; st.protocols = {}; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "pathway"; paint(); return; }
+    if (act === "retry") { st.error = null; if (st.guideline) loadGuideline(st.guideline); else paint(); return; }
     if (act === "reset") { st.answers = {}; st.rebaseId = null; st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.view = "pathway"; repaintBody(); return; }
     if (act === "view-pathway") { st.view = "pathway"; paint(); return; }
     if (act === "view-map") { st.view = "map"; paint(); return; }
@@ -375,10 +405,13 @@
   }
 
   // ---- load + open -------------------------------------------------------------------------------
-  function load() {
+  function loadGuideline(id) {
     if (!G.fetch) { st.error = "Navigator unavailable in this environment."; paint(); return; }
+    // fresh disease: clear all per-disease state so nothing from a prior disease leaks
+    st.guideline = id; st.graph = null; st.byId = {}; st.answers = {}; st.protocols = {};
+    st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null;
     st.loading = true; st.error = null; paint();
-    G.fetch("/kb/oncotree/" + st.guideline + ".json").then(function (r) { return r.ok ? r.json() : null; })
+    G.fetch("/kb/oncotree/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (graph) {
         if (!graph) throw new Error("navigator graph not found");
         st.graph = graph; st.byId = {}; asArr(graph.nodes).forEach(function (n) { st.byId[n.id] = n; });
@@ -417,7 +450,8 @@
     }
     el.style.display = "block";
     if (D.body) D.body.classList.add("ot-open");
-    if (!st.loaded) load(); else { prepopulate(); paint(); }
+    if (ctx && ctx.guideline) loadGuideline(ctx.guideline);   // deep-link straight to a disease
+    else paint();                                             // show the disease picker (or the loaded disease on re-open)
   }
   function close() {
     var el = D && D.getElementById("smdOncoTree");
