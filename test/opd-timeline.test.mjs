@@ -28,6 +28,15 @@ test("populated even with NO recorded actions (uses GHIS history) — the report
   assert.match(h, /Lab: Complete blood count/);        // was empty before; now shows history
 });
 
+test("GHIS patient: merges Opcard consults + labs + meds (not consults-only) so it is never empty", () => {
+  const ghis = Object.assign({}, base, { source: "ghis" });   // source ghis must still merge labs/meds, not short-circuit to consults-only
+  const h = load()._render(ghis);
+  assert.match(h, /Timeline/);
+  assert.match(h, /Lab: Complete blood count/);        // 6-labs-but-0-consults case: labs still show
+  assert.match(h, /Paracetamol 650mg TID/);
+  assert.doesNotMatch(h, /No consults recorded yet/);  // the old consults-only empty state must be gone
+});
+
 test("never throws on messy/partial GHIS shapes (null fields, object dosage, missing dates)", () => {
   const messy = Object.assign({}, base, {
     labs: [{ status: "Reported" }, { serviceName: null, orderDate: null }, {}],

@@ -3989,7 +3989,7 @@
       var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
-        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 45000, { error: "timeout" });
     },
     // MaiK Ask reasoning — POST {kind, ctx, transcript} to /extract. kind ∈ {maik-ask-next,
@@ -4008,7 +4008,7 @@
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       return raceTimeout(aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify({ transcript: t, kind: "translate" }) }); })
-        .then(function (r) { if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402 || r.status === 429) return r.json().then(function (j) { return { error: "quota", needsPro: r.status === 402, message: (j && j.message) || "" }; }, function () { return { error: "quota", needsPro: r.status === 402 }; }); if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 20000, { error: "timeout" });
     },
     // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
