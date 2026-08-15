@@ -34,6 +34,11 @@
   .hd .mark{ width:26px; height:26px; background:var(--primary); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
   .hd h1{ font:800 20px 'Inter Variable',Inter; color:var(--on-surface); margin:0; letter-spacing:-.01em; }
   .hd h1 span{ color:var(--primary); }
+  /* White-label: a Pro clinic's own logo + name, with a discreet "powered by StewardMD". */
+  .hd .clogo{ height:28px; width:auto; max-width:150px; object-fit:contain; }
+  .hd .cname{ font:800 18px 'Inter Variable',Inter; color:var(--on-surface); letter-spacing:-.01em; }
+  .hd .pw{ margin-left:auto; display:inline-flex; align-items:center; gap:5px; font:600 10px 'Inter Variable',Inter; letter-spacing:.03em; text-transform:uppercase; color:var(--secondary); }
+  .hd .pw .m{ width:14px; height:14px; background:var(--secondary); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
 
   main{ max-width:480px; margin:0 auto; padding:20px 20px 130px; display:flex; flex-direction:column; gap:18px; }
   .top{ text-align:center; }
@@ -146,6 +151,19 @@
   function clock(msv){ try{ return new Date(msv).toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"}); }catch(e){ return ""; } }
 
   function hideActions(){ actions.className = "actions"; }
+  // White-label branding: a Pro clinic's uploaded logo (served by us) replaces the StewardMD mark as the
+  // primary brand, with a discreet "powered by StewardMD". Falls back to the StewardMD mark when unbranded.
+  var headerEl = document.querySelector("header");
+  function setBrand(d){
+    var logo = d && d.clinicLogo, name = (d && d.clinicName) || "";
+    if(logo){
+      headerEl.innerHTML = '<div class="hd"><img class="clogo" src="'+esc(logo)+'" alt="'+esc(name||"Clinic")+'"/>'+
+        (name? '<span class="cname">'+esc(name)+'</span>':'')+
+        '<span class="pw">powered by <span class="m" aria-hidden="true"></span>StewardMD</span></div>';
+    } else {
+      headerEl.innerHTML = '<div class="hd"><span class="mark" aria-hidden="true"></span><h1>Steward<span>MD</span></h1></div>';
+    }
+  }
   function msgView(icon, title, sub, retry){
     hideActions();
     app.innerHTML = '<div class="msg rv">'+ms(icon)+'<h2>'+esc(title)+'</h2><p>'+esc(sub||"")+'</p>'+
@@ -169,6 +187,7 @@
   }
 
   function render(d){
+    setBrand(d);
     if(!d || !d.ok){
       if(d && d.error==="link_expired") return msgView("event_busy","This tracking link has expired","Your visit is complete. Thank you for visiting.");
       if(d && d.error==="not_configured") return msgView("hourglass_top","Queue is being set up","Please check back shortly.", true);
@@ -195,7 +214,7 @@
     var j = d.journey||{};
     var inRoom = !inConsult, consulting = inConsult;
     var steps =
-      '<div class="step"><div class="node done">'+ms("check")+'</div><div class="t">Registered</div><div class="m">'+(j.registeredAt?clock(j.registeredAt):"—")+'</div></div>'+
+      '<div class="step"><div class="node done">'+ms("check")+'</div><div class="t">Registered</div><div class="m">'+(j.registeredAt?clock(j.registeredAt):"·")+'</div></div>'+
       '<div class="step'+(inRoom?' cur':'')+'"><div class="node '+(inRoom?'cur':'done')+'">'+(inRoom?'<i></i>':ms("check"))+'</div><div class="t">In waiting room</div><div class="m">'+(inRoom?"Currently":(j.calledAt?clock(j.calledAt):"Done"))+'</div></div>'+
       '<div class="step'+(consulting?' cur':'')+'"><div class="node '+(consulting?'cur':'todo')+'">'+(consulting?'<i></i>':'')+'</div><div class="t">Consultation</div><div class="m">'+(consulting?"Now":"Upcoming")+'</div></div>';
     var docStatus = inConsult ? "In consultation" : (d.doctorStatus==="break"?"On a short break": d.doctorStatus==="emergency"?"Handling an emergency": d.doctorStatus==="procedure"?"In a procedure":"Seeing patients");
@@ -245,6 +264,7 @@
   var TL_ICON={note:"description",assessment:"assignment",medication:"medication",vitals:"monitor_heart",checkout:"task_alt"};
   function renderTimeline(d){
     hideActions();
+    setBrand(d);
     if(!d || !d.ok){
       if(d && d.error==="expired") return msgView("event_busy","This visit link has expired","Ask your doctor to re-share it if you still need it.");
       if(d && d.error==="not_ready") return msgView("hourglass_top","Visit not finished yet","Your summary will be here once your visit is complete.", true);
@@ -270,7 +290,7 @@
         .then(function(r){ return r.json(); }).then(renderTimeline)
         .catch(function(){ msgView("wifi_off","Can’t load your summary","Check your connection and try again.", true); });
     }
-    if(P.get("mock")==="1"){ var now=Date.now(); return render({ ok:true, department:"StewardMD Cardiology", doctorName:"Dr. Sarah Richardson", doctorStatus:"consulting", status:"waiting", position:4, ahead:3, etaStart:now+18*60000, etaEnd:now+25*60000, confidence:96, journey:{ registeredAt:now-90*60000, calledAt:0, consultStartAt:0, done:false } }); }
+    if(P.get("mock")==="1"){ var now=Date.now(); return render({ ok:true, department:"StewardMD Cardiology", doctorName:"Dr. Sarah Richardson", doctorStatus:"consulting", status:"waiting", position:4, ahead:3, etaStart:now+18*60000, etaEnd:now+25*60000, confidence:96, clinicLogo:P.get("logo")||"", clinicName:P.get("name")||"", journey:{ registeredAt:now-90*60000, calledAt:0, consultStartAt:0, done:false } }); }
     if(!token) return msgView("link_off","No tracking link","Open the link from your SMS or WhatsApp message.");
     fetch("/api/queue/portal?t="+encodeURIComponent(token), {headers:{"Accept":"application/json"}})
       .then(function(r){ return r.json(); }).then(render)
