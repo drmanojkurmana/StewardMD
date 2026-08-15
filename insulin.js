@@ -779,6 +779,9 @@
     var ctx = { age: st.ctx.age, weightKg: st.ctx.weightKg, pregnancy: st.ctx.pregnancy, renal: st.ctx.renal, hepatic: st.ctx.hepatic,
       exercise: st.ctx.exercise, steroids: st.ctx.steroids, egfr: st.ctx.egfr, dialysis: st.ctx.dialysis, trimester: st.ctx.trimester };
     if (boluses) { ctx.maxBolus = SET.maxBolus; ctx.maxDaily = SET.maxDaily; if (res && res.rounded != null) res.dailyTotal = todayTotal() + res.rounded; }
+    // Weight-based initiation computes a whole-day TDD — check it against the daily cap so a weight typo
+    // (e.g. 700 kg -> 280 u/day) trips the critical interrupt instead of returning a dangerous number.
+    if (m === "basal" || m === "pediatric") { ctx.maxDaily = SET.maxDaily; if (res && num(res.tdd)) res.dailyTotal = res.tdd; }
     return S.evaluate(ctx, input, res);
   }
 
