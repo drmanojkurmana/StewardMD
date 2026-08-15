@@ -1,13 +1,13 @@
 /*
- * Site-wide access gate — TEMPORARY "coming soon" mode via a SECRET URL.
+ * Site-wide access gate — PUBLIC MARKETING SITE + native-only clinical app.
  *
- * Why this exists: the StewardMD web app is being taken PRIVATE for now while the
- * native apps go through App Store / Play Store review, after a wave of scraping /
- * data-theft attempts against the public web app. This Cloudflare Pages middleware
- * runs on every request to stewardmd.in but only ever HIDES THE PUBLIC WEB UI: the
- * single thing it can replace is a top-level HTML page view by an anonymous browser,
- * which gets a self-contained "coming soon" page. Everything that carries functionality
- * passes straight through untouched, so no API, endpoint, or app feature is affected:
+ * Why this exists: the StewardMD clinical web app is native-only (its JS bundle is
+ * 404'd for browsers) after a wave of scraping / data-theft against the public web app.
+ * This Cloudflare Pages middleware runs on every request to stewardmd.in. The ONE thing
+ * it replaces is a top-level HTML page view by an anonymous browser: instead of the app,
+ * that visitor (and every search-engine crawler) gets the public marketing home page,
+ * served from /_site/index.html. Everything that carries functionality passes straight
+ * through untouched, so no API, endpoint, or app feature is affected:
  *   • /api/* — in-app AI (/api/ai/*), Resend email sends, cron, the native app, and the
  *     emailed verification approve/reject links (/api/verifications/action) all keep
  *     working exactly as before the gate. Each endpoint enforces its own auth.
@@ -114,6 +114,30 @@ export async function onRequest(context) {
     }
   }
 
+  // Google Search Console HTML verification — served inline so it returns 200 at the EXACT ".html"
+  // URL. Pages would otherwise 308-redirect it to the clean URL, and the old coming-soon gate replaced
+  // it with a placeholder page; either one breaks verification. A Google verification file's content is
+  // always "google-site-verification: <filename>", so it is reconstructed from the path.
+  const gsc = url.pathname.match(/^\/(google[0-9a-z]+\.html)$/i);
+  if (gsc) {
+    return new Response("google-site-verification: " + gsc[1], {
+      headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
+
+  // Other SEO + search-console infrastructure — MUST resolve as their real static files, never the
+  // marketing page and never the asset-404 below (a .txt/.xml would otherwise be 404'd by the asset
+  // rule). Without these, Google/Bing cannot read robots or the sitemap, so nothing gets indexed.
+  if (/^\/(robots\.txt|sitemap[\w.-]*\.xml|BingSiteAuth\.xml|yandex_[0-9a-z]+\.html)$/i.test(url.pathname)) {
+    return next();
+  }
+
+  // Public marketing site + its brand assets (the StewardMD home page). Fully public, non-sensitive
+  // content — served as real static files so the page renders and search engines can crawl it.
+  if (url.pathname === "/_site" || url.pathname.startsWith("/_site/")) {
+    return next();
+  }
+
   // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
   // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual
   // QA) without the /realapp cookie. ONLY the production custom domain (stewardmd.in) stays gated;
@@ -204,6 +228,18 @@ export async function onRequest(context) {
   if (isAsset) {
     return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });
   }
+  // Public marketing home page. Anonymous browsers and search-engine crawlers get the real StewardMD
+  // site (served from /_site/index.html). The clinical app itself stays native-only — its JS bundle is
+  // still 404'd above, so this only ever replaces the top-level page view, never any app functionality.
+  const marketing = await next(new Request(new URL("/_site/", url.origin).toString(), request));
+  if (marketing && marketing.ok) {
+    const h = new Headers(marketing.headers);
+    h.set("content-type", "text/html; charset=utf-8");
+    h.set("cache-control", "public, max-age=300");
+    h.set("x-robots-tag", "index, follow, max-image-preview:large");
+    return new Response(marketing.body, { status: 200, headers: h });
+  }
+  // Fallback only if the marketing page is somehow unavailable.
   return new Response(COMING_SOON_HTML, {
     status: 200,
     headers: {
