@@ -78,6 +78,47 @@ export async function getUserClaims(env, uid) {
 }
 
 // Resolve a Firebase uid from an email (for the admin "grant Pro by email" control). null if none.
+// Pure: map a raw identitytoolkit user record to the fields the admin console shows (claims live in the
+// customAttributes JSON string). Exported so the status mapping is unit-testable without the network.
+export function summarizeUser(u) {
+  if (!u) return null;
+  var claims = {}; try { claims = u.customAttributes ? (JSON.parse(u.customAttributes) || {}) : {}; } catch (e) {}
+  return {
+    uid: u.localId || "",
+    email: (u.email || "").toLowerCase(),
+    name: u.displayName || "",
+    disabled: !!u.disabled,
+    pro: claims.pro === true,
+    verified: claims.verified === true,
+    lastLoginAt: Number(u.lastLoginAt) || null,
+    createdAt: Number(u.createdAt) || null,
+  };
+}
+
+// Full user record (status + claims) by uid, for the admin user-management console.
+export async function getUserRecord(env, uid) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
+    method: "POST", headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: [String(uid || "").trim()] }),
+  });
+  if (!res.ok) return null;
+  const d = await res.json();
+  return summarizeUser((d.users || [])[0]);
+}
+
+// Enable/disable a user's sign-in (Firebase Admin accounts:update disableUser). Returns true on success.
+export async function setUserDisabled(env, uid, disabled) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:update`, {
+    method: "POST", headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: String(uid || "").trim(), disableUser: !!disabled }),
+  });
+  return res.ok;
+}
+
 export async function lookupUidByEmail(env, email) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
   const saToken = await serviceAccountToken(env);

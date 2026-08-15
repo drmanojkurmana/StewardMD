@@ -2058,6 +2058,11 @@
       audit.slice(0, 8).forEach(function (a) { h += '<div class="aic-audit">' + aiCtlEsc(a.action) + ' &middot; ' + aiCtlEsc(a.detail) + '</div>'; });
       h += '</div>';
     }
+    // 7b) User access control — Firebase account actions by email (verify / Pro / disable sign-in)
+    h += '<div class="aic-sec"><div class="aic-h">User access control</div>' +
+      '<div class="aic-note">Look up a doctor by email to grant/revoke Pro, approve NMC verification, or disable sign-in.</div>' +
+      '<div class="aic-btns" style="gap:6px"><input id="aicUAEmail" type="email" placeholder="doctor@email" class="aic-input" style="flex:1;min-width:180px" autocomplete="off"><button class="aic-chip" data-aic-user-find="1">Look up</button></div>' +
+      '<div id="aicUAResult"></div></div>';
     // 8) Per-user usage + limits (owner search + edit; lazy-loaded by aicUsersInit)
     h += '<div class="aic-sec"><div class="aic-h">Users</div><input id="aicUserSearch" class="aic-input" placeholder="Search by email…"><div id="aicUserList" class="aic-users"><div class="aic-load">Loading…</div></div></div>';
     return h;
@@ -2085,6 +2090,33 @@
         if (r && r.ok) { if (window.toast) toast("Remote config saved"); loadAiControl(); }
         else if (msg) msg.textContent = "Save failed" + (r && r.error ? ": " + r.error : "");
       });
+    });
+    // User access control: email lookup + per-user account actions
+    function renderUA(u, found) {
+      var box = host.querySelector("#aicUAResult"); if (!box) return;
+      if (found === false || !u) { box.innerHTML = '<div class="aic-note">No account with that email.</div>'; return; }
+      var badges = (u.pro ? '<span class="aic-badge">Pro</span> ' : '') + (u.verified ? '<span class="aic-badge">Verified</span> ' : '') + (u.disabled ? '<span class="aic-badge" style="background:#dc2626">Disabled</span>' : '');
+      box.innerHTML = '<div class="aic-row"><div class="h"><span>' + aiCtlEsc(u.email || u.uid) + '</span><span class="u">' + (badges || 'basic') + '</span></div>' +
+        '<div class="aic-note">last sign-in: ' + (u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString() : '—') + '</div></div>' +
+        '<div class="aic-btns">' +
+        '<button class="aic-chip" data-aic-ua="' + (u.pro ? 'revoke-pro' : 'grant-pro') + '">' + (u.pro ? 'Revoke Pro' : 'Grant Pro') + '</button>' +
+        '<button class="aic-chip" data-aic-ua="' + (u.verified ? 'unverify' : 'verify') + '">' + (u.verified ? 'Unverify' : 'Verify') + '</button>' +
+        '<button class="aic-chip aic-danger" data-aic-ua="' + (u.disabled ? 'enable' : 'disable') + '">' + (u.disabled ? 'Enable' : 'Disable') + '</button></div>';
+      box.querySelectorAll("[data-aic-ua]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var em = ((host.querySelector("#aicUAEmail") || {}).value || "").trim(); if (!em) return;
+          var act = btn.getAttribute("data-aic-ua");
+          if (act === "disable" && !window.confirm("Disable sign-in for " + em + "?")) return;
+          box.innerHTML = '<div class="aic-load">Applying…</div>';
+          aiAdminFetch("/admin/user-action", { method: "POST", body: { email: em, action: act } }).then(function (r) { if (window.toast) toast("Updated"); renderUA(r && r.user, true); });
+        });
+      });
+    }
+    var uFind = host.querySelector("[data-aic-user-find]");
+    if (uFind) uFind.addEventListener("click", function () {
+      var em = ((host.querySelector("#aicUAEmail") || {}).value || "").trim(); if (!em) return;
+      var box = host.querySelector("#aicUAResult"); if (box) box.innerHTML = '<div class="aic-load">Looking up…</div>';
+      aiAdminFetch("/admin/user-find?email=" + encodeURIComponent(em)).then(function (r) { renderUA(r && r.user, r && r.found); });
     });
     var bud = host.querySelector("[data-aic-budget]");
     if (bud) {

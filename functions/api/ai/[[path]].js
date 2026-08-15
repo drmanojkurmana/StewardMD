@@ -100,6 +100,7 @@ import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, rese
 import { ownerOK } from "../../_adminauth.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
+import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -897,6 +898,41 @@ export async function onRequest(context) {
     let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
     try { await auditRecord(store, "user-limit", email + ":" + module + "=" + (limit == null ? "default" : limit), actorId, Date.now()); } catch (e) {}
     return json({ ok: true, email: email, limits: map || {} });
+  }
+
+  // User-management: look up a doctor by email -> status (verified / pro / disabled / last sign-in).
+  if (seg === "admin/user-find") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    const email = String(url.searchParams.get("email") || "").toLowerCase().trim();
+    if (!email) return json({ error: "no-email" }, 400);
+    const uid = await lookupUidByEmail(env, email);
+    if (!uid) return json({ ok: true, found: false, email: email });
+    return json({ ok: true, found: true, user: (await getUserRecord(env, uid)) || { uid, email } });
+  }
+  // Per-user actions: grant/revoke Pro, approve/revoke NMC verification, enable/disable sign-in.
+  if (seg === "admin/user-action" && request.method === "POST") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+    const email = String(b.email || "").toLowerCase().trim();
+    const action = String(b.action || "");
+    if (!email || !action) return json({ error: "bad-request" }, 400);
+    const uid = await lookupUidByEmail(env, email);
+    if (!uid) return json({ ok: false, error: "not-found" }, 404);
+    let ok = false;
+    try {
+      if (action === "grant-pro") { await mergeUserClaims(env, uid, { pro: true }); ok = true; }
+      else if (action === "revoke-pro") { await mergeUserClaims(env, uid, { pro: false }); ok = true; }
+      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true }); ok = true; }
+      else if (action === "unverify") { await mergeUserClaims(env, uid, { verified: false }); ok = true; }
+      else if (action === "disable") { ok = await setUserDisabled(env, uid, true); }
+      else if (action === "enable") { ok = await setUserDisabled(env, uid, false); }
+      else return json({ error: "bad-action" }, 400);
+    } catch (e) { ok = false; }
+    let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
+    try { await auditRecord(usageKv(env), "user-action", email + ":" + action + "=" + ok, actorId, Date.now()); } catch (e) {}
+    return json({ ok: ok, user: (await getUserRecord(env, uid)) || { uid, email } });
   }
 
   // A doctor's OWN AI usage for today (never another doctor's). Powers the in-app AI Usage page.
