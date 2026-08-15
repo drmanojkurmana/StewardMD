@@ -40,14 +40,17 @@
     return have.indexOf(want) >= 0 ? "match" : "exclude";
   }
 
-  // Coarse stage token so "I" is not falsely excluded by a protocol listing "I (high-risk)".
+  // Coarse stage token so granular labels collapse to the group: "I (high-risk)"->i, "IIIA"/"IIIB"->iii,
+  // "Stage IV (metastatic)"->iv. Substring (longest-first) so "IIIA" is not read as "i". Non-roman labels
+  // (SCLC "limited-stage", "relapsed") pass through unchanged so they still match by equality.
   function stageToken(s) {
     var n = norm(s); if (!n) return null;
-    if (n.indexOf("dcis") >= 0 || /\b0\b/.test(n)) return "0";
-    if (/\biv\b/.test(n) || n.indexOf("stage iv") >= 0) return "iv";
-    if (/\biii\b/.test(n)) return "iii";
-    if (/\bii\b/.test(n)) return "ii";
-    if (/\bi\b/.test(n)) return "i";
+    if (n.indexOf("dcis") >= 0) return "0";
+    if (n.indexOf("iv") >= 0) return "iv";
+    if (n.indexOf("iii") >= 0) return "iii";
+    if (n.indexOf("ii") >= 0) return "ii";
+    if (/\bi\b/.test(n) || /\bi[abc]\b/.test(n) || /stage i/.test(n)) return "i";
+    if (/\b0\b/.test(n)) return "0";
     return n;
   }
 
@@ -57,8 +60,11 @@
   function histoNorm(h) {
     var s = norm(h); if (!s) return null;
     if (/\bany\b/.test(s)) return null;
-    if (/non-?squamous/.test(s)) return "non-squamous";
-    if (/squamous/.test(s)) return "squamous";
+    // A squamous/non-squamous CONSTRAINT is stated as the LEADING descriptor. Anchoring prevents an
+    // epidemiology aside from mis-classifying: "non-small cell lung cancer (... most common in
+    // nonsquamous histology)" (a biomarker-gated TKI) is NOT a non-squamous constraint (R1 C1).
+    if (/^non-?squamous/.test(s)) return "non-squamous";
+    if (/^squamous/.test(s)) return "squamous";
     return null;
   }
   function histoDim(protoHist, phenoHist) {

@@ -91,6 +91,33 @@ test("mesothelioma routes directly to its systemic options", () => {
   assert.ok(r.ids.indexOf("meso-cis-pemetrexed") >= 0);   // pemetrexed IS standard in mesothelioma (histology nc)
 });
 
+test("R1 C1: SQUAMOUS + EGFR+ still surfaces osimertinib (a driver TKI is histology-agnostic)", () => {
+  const r = atNode("n_tx_nsclc_egfr", { n_lh: ["sq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["egfr"] });
+  assert.ok(r.active);
+  assert.deepEqual(r.ids, ["lung-osimertinib"], "osimertinib must NOT be excluded for squamous");
+});
+
+test("R1 C1: SQUAMOUS + ALK+ still surfaces ALK TKIs", () => {
+  const r = atNode("n_tx_nsclc_alk", { n_lh: ["sq"], n_lnsclc_scenario: ["metastatic"], n_ldriver: ["alk"] });
+  assert.ok(r.ids.indexOf("lung-alectinib") >= 0, "alectinib must NOT be excluded for squamous");
+});
+
+test("R1 I1: unresectable stage III surfaces the chemo doublets AND durvalumab consolidation", () => {
+  const r = atNode("n_tx_nsclc_stage3", { n_lh: ["sq"], n_lnsclc_scenario: ["unresectable3"] });
+  assert.ok(r.ids.indexOf("lung-durvalumab-consolidation") >= 0, "durvalumab consolidation");
+  assert.ok(r.ids.indexOf("lung-cis-gemcitabine") >= 0, "squamous concurrent-chemoRT doublet (IIIA/IIIB) not dropped");
+  assert.ok(r.ids.every(id => id.indexOf("pemetrexed") < 0), "still no pemetrexed for squamous");
+});
+
+test("stageToken collapses granular labels (IIIA/IIIB -> iii, IV -> iv, I -> i)", () => {
+  assert.equal(R._stageToken("IIIA"), "iii");
+  assert.equal(R._stageToken("IIIB"), "iii");
+  assert.equal(R._stageToken("II"), "ii");
+  assert.equal(R._stageToken("Stage IV (metastatic)"), "iv");
+  assert.equal(R._stageToken("I (high-risk)"), "i");
+  assert.equal(R._stageToken("limited-stage"), "limited-stage");
+});
+
 test("histology captured; matchDisease:false means diseaseId is not a matching criterion", () => {
   const s = E.evaluate(G, { n_lh: ["nsq"] });
   assert.equal(s.phenotype.histology, "non-squamous");

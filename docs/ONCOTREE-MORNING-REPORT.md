@@ -2,7 +2,9 @@
 
 **Branch:** `claude/oncotree` (off `main` @ #653)  ·  **Flag:** `smd_onco_navigator`, default **OFF**  ·  **Nothing clinically activated.**
 
-ONCOTREE is the new **navigation layer** over the existing StewardMD oncology foundation. It references existing protocol IDs/versions, never a second protocol DB, never computes a dose, never activates a plan. The **Breast Cancer vertical slice is complete and works end-to-end.**
+ONCOTREE is the new **navigation layer** over the existing StewardMD oncology foundation. It references existing protocol IDs/versions, never a second protocol DB, never computes a dose, never activates a plan. **Two disease verticals are complete and work end-to-end - Breast and Lung** - behind a disease picker, proving the engine generalizes.
+
+> **Update:** After the initial Breast slice (merged as PR #654), ONCOTREE was extended to **multi-disease**: a disease-picker landing + a second grounded vertical, **Lung (NSCLC / SCLC / mesothelioma)**. The Lung vertical adds histology matching to the recommender so **pemetrexed is never surfaced for squamous NSCLC** and KEYNOTE-189/-407 split correctly. The Breast slice is unchanged. This addition is on branch `claude/oncotree` (commit 70751dae), R1-reviewed, pending its own merge.
 
 ---
 
