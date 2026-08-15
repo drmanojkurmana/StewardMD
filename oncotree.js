@@ -433,12 +433,31 @@
   // Hand off to the EXISTING oncology workflow. Emits a CustomEvent the host (opd-emr / onco home) can
   // listen for; never activates a plan or computes a dose here (existing gates stay in control).
   function doHandoff() {
-    var payload = st.selection;
+    var payload = st.selection || {};
+    // Always emit the selection so any host listener (e.g. an OPD-EMR patient context) can pick it up.
     try {
       if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: payload }));
     } catch (e) {}
-    try { if (G.SMD_ONCOHOME && G.SMD_ONCOHOME.open) { /* future: open workbench with this protocol */ } } catch (e2) {}
-    try { if (G.toast) G.toast("Selection recorded. Continue in the treatment workflow (dose engine + physician confirmation)."); } catch (e3) {}
+    var proto = st.protocols[payload.protocolId] || null;
+    var dx = (payload.phenotype && (payload.phenotype.diagnosis || payload.phenotype.histology)) || st.guideline || null;
+    // 1) Per-patient dose/treatment flow, when the onco treatment engine is enabled (needs BSA/patient
+    //    for real dosing; the flow + existing gates own that). Preferred destination when available.
+    try {
+      if (G.SMD_ONCOFLOW && G.SMD_ONCOFLOW.openFind && proto) {
+        close(); G.SMD_ONCOFLOW.openFind({ diagnosis: dx }, [proto]); return;
+      }
+    } catch (e2) {}
+    // 2) Otherwise open the Onco workbench (reference: search, calculators, drugs, protocol library) with
+    //    the disease context, so "Continue" lands somewhere real instead of a dead end.
+    try {
+      if (G.SMD_ONCOHOME && G.SMD_ONCOHOME.open) {
+        close(); G.SMD_ONCOHOME.open({ diagnosis: dx });
+        if (G.toast) G.toast("Selection recorded - opened the Onco workbench. Plan patient doses in the patient's Assessment > Oncology.");
+        return;
+      }
+    } catch (e3) {}
+    // 3) Nothing reachable (all onco surfaces off): keep the honest guidance.
+    try { if (G.toast) G.toast("Selection recorded. Continue in the patient's Assessment > Oncology for dose planning."); } catch (e4) {}
   }
 
   // ---- load + open -------------------------------------------------------------------------------
