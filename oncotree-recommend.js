@@ -19,9 +19,12 @@
   function asArr(v) { return v == null ? [] : (v instanceof Array ? v : [v]); }
   function norm(v) { return v == null ? null : String(v).trim().toLowerCase(); }
 
-  // Scalar dimension: match / exclude / unconfirmed (VERIFY, absent, or phenotype-missing) / nc.
+  // Scalar dimension. A protocol that simply does NOT model this field (null/absent) places no
+  // constraint => "nc" (not "needs verification" - there is nothing to verify). Only an explicit
+  // VERIFY, or a real constraint the phenotype hasn't supplied, is "unconfirmed".
   function scalarDim(protoVal, phenoVal) {
-    if (protoVal === "VERIFY" || protoVal == null) return "unconfirmed";
+    if (protoVal === "VERIFY") return "unconfirmed";
+    if (protoVal == null) return "nc";
     if (phenoVal == null) return "unconfirmed";
     return norm(protoVal) === norm(phenoVal) ? "match" : "exclude";
   }

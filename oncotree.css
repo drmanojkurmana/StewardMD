@@ -2,16 +2,17 @@
    Color is used primarily for state (category accent --ot-c; lifecycle badges). Self-contained. */
 
 .ot-overlay {
+  /* light-mode defaults (complete set); the dark media query overrides all of them together */
+  --ot-bg: #f4f5f7; --ot-ink: #16181d; --ot-card: #ffffff; --ot-line: #e5e7eb; --ot-sub: #6b7280; --ot-accent: #0a84ff;
   position: fixed; inset: 0; z-index: 4000; display: none;
-  background: var(--ot-bg, #f4f5f7);
+  background: var(--ot-bg);
   -webkit-tap-highlight-color: transparent;
   font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
-  color: var(--ot-ink, #16181d);
+  color: var(--ot-ink);
 }
 @media (prefers-color-scheme: dark) {
-  .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; }
+  .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; --ot-accent: #4aa3ff; }
 }
-.ot-overlay { --ot-card: #ffffff; --ot-line: #e5e7eb; --ot-sub: #6b7280; --ot-accent: #0a84ff; }
 body.ot-open { overflow: hidden; }
 
 .ot-shell { display: flex; flex-direction: column; height: 100%; height: 100dvh; }

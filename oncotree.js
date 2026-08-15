@@ -116,8 +116,8 @@
     return '<div class="ot-card">' +
       '<div class="ot-card-top"><div class="ot-card-name">' + esc(p.name || ref) + "</div>" +
         '<span class="' + cls + '">' + esc(badge) + "</span></div>" +
-      '<div class="ot-card-ctx">' + esc(ctx.join(" &middot; ")) + (cyc ? '<span class="ot-card-cyc">' + esc(cyc) + "</span>" : "") + "</div>" +
-      (p.version ? '<div class="ot-card-ver">Protocol v' + esc(p.version) + " &middot; " + esc(ref) + "</div>" : "") +
+      '<div class="ot-card-ctx">' + esc(ctx.join(" · ")) + (cyc ? '<span class="ot-card-cyc">' + esc(cyc) + "</span>" : "") + "</div>" +
+      (p.version ? '<div class="ot-card-ver">Protocol v' + esc(p.version) + " · " + esc(ref) + "</div>" : "") +
       unconf +
       '<div class="ot-card-actions">' +
         '<button class="ot-btn ghost" data-ot-act="view-proto" data-ot-proto="' + esc(ref) + '">' + ms("visibility") + "View protocol</button>" +
@@ -206,11 +206,11 @@
       var dm = asArr(d.days).length ? "D" + (d.days.length === 1 ? d.days[0] : d.days[0] + "-" + d.days[d.days.length - 1]) : "";
       return '<tr><td>' + esc(d.name || d.id) + "</td><td>" + esc((d.dosePerUnit != null ? d.dosePerUnit + " " + (d.unit || "") : "VERIFY") + (freq ? " " + freq : "")) + "</td><td>" + esc((d.route || "") + (dm ? " " + dm : "")) + "</td></tr>";
     }).join("");
-    var src = p.source ? [p.source.nccn, p.source.textbook].filter(Boolean).join(" &middot; ") : "";
+    var src = p.source ? [p.source.nccn, p.source.textbook].filter(Boolean).join(" · ") : "";
     return '<div class="ot-detail">' +
       '<button class="ot-back" data-ot-act="close-proto">' + ms("arrow_back") + "Back to options</button>" +
       '<div class="ot-detail-head"><h2>' + esc(p.name || ref) + '</h2><span class="ot-badge ' + (p.experimental ? "exp" : "draft") + '">' + esc(badge) + "</span></div>" +
-      '<div class="ot-detail-warn">' + ms("info") + "This is a " + esc(badge) + " protocol - decision support only, not an approved clinical order. The physician and the existing dose engine own dosing and activation.</div>" +
+      '<div class="ot-detail-warn">' + ms("info") + "This protocol is " + esc(badge) + " - decision support only, not an approved clinical order. The physician and the existing dose engine own dosing and activation.</div>" +
       '<div class="ot-detail-meta">' +
         (p.diseaseId ? '<div><b>Disease</b>' + esc(p.diseaseId) + "</div>" : "") +
         (p.stage ? '<div><b>Stage</b>' + esc(asArr(p.stage).join(", ")) + "</div>" : "") +
