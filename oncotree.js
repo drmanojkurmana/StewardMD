@@ -121,7 +121,7 @@
   function protocolCardHtml(ref, match) {
     var p = st.protocols[ref];
     if (!p) return '<div class="ot-card ot-card-missing">' + esc(ref) + ' - protocol not loaded</div>';
-    var badge = (match && match.badge) || (p.experimental ? "EXPERIMENTAL DRAFT" : (p.lifecycleState || "draft").toUpperCase());
+    var badge = (match && match.badge) || (p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase());
     var approved = match ? match.approved : (p.lifecycleState === "active");
     var cls = "ot-badge " + (approved ? "ok" : (p.experimental ? "exp" : "draft"));
     var ctx = [];
@@ -280,7 +280,7 @@
   function protocolDetailHtml(ref) {
     var p = st.protocols[ref];
     if (!p) return '<div class="ot-empty">Protocol not loaded.</div>';
-    var badge = p.experimental ? "EXPERIMENTAL DRAFT" : (p.lifecycleState || "draft").toUpperCase();
+    var badge = p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase();
     var drugs = asArr(p.drugs).map(function (d) {
       var freq = d.frequency || (d.dosesPerDay > 1 ? ({ 2: "BID", 3: "TID", 4: "QID" }[d.dosesPerDay] || d.dosesPerDay + "x/day") : "");
       var dm = asArr(d.days).length ? "D" + (d.days.length === 1 ? d.days[0] : d.days[0] + "-" + d.days[d.days.length - 1]) : "";
@@ -290,7 +290,7 @@
     return '<div class="ot-detail">' +
       '<button class="ot-back" data-ot-act="close-proto">' + ms("arrow_back") + "Back to options</button>" +
       '<div class="ot-detail-head"><h2>' + esc(p.name || ref) + '</h2><span class="ot-badge ' + (p.experimental ? "exp" : "draft") + '">' + esc(badge) + "</span></div>" +
-      '<div class="ot-detail-warn">' + ms("info") + "This protocol is " + esc(badge) + " - decision support only, not an approved clinical order. The physician and the existing dose engine own dosing and activation.</div>" +
+      '<div class="ot-detail-warn">' + ms("info") + "AI-drafted (Beta). Decision support only. Verify against your institutional protocol; the physician and dose engine own dosing.</div>" +
       '<div class="ot-detail-meta">' +
         (p.diseaseId ? '<div><b>Disease</b>' + esc(p.diseaseId) + "</div>" : "") +
         (p.stage ? '<div><b>Stage</b>' + esc(asArr(p.stage).join(", ")) + "</div>" : "") +
@@ -544,7 +544,7 @@
     st.selection = {
       protocolId: ref, protocolVersion: p.version || p.protocolVersion || null,
       guideline: st.guideline, navigatorVersion: (st.graph && st.graph.navigatorVersion) || null,
-      badge: p.experimental ? "EXPERIMENTAL DRAFT" : ((p.lifecycleState || "draft").toUpperCase()),
+      badge: p.experimental ? "BETA · AI-DRAFTED" : ((p.lifecycleState || "draft").toUpperCase()),
       phenotype: state ? state.phenotype : {}, answers: JSON.parse(JSON.stringify(st.answers)),
       pathway: state ? state.activePathIds.slice() : []
     };
