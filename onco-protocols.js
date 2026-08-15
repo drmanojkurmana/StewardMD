@@ -172,7 +172,7 @@
     // must never look like an approved order that can be transcribed. Mirrors the OncoTree banner text.
     var isDraft = !!(tmpl.experimental || (tmpl.lifecycleState && tmpl.lifecycleState !== "active"));
     var draftBanner = isDraft
-      ? '<div class="oe-onco-draftwarn">' + ms("warning") + "EXPERIMENTAL DRAFT - decision support only, NOT an approved clinical order. Do not transcribe these doses. The physician and the dose engine own dosing; activation is separately gated.</div>"
+      ? '<div class="oe-onco-draftnote">' + ms("info") + "Beta - AI-drafted regimen. Verify against your institutional protocol before prescribing." + "</div>"
       : "";
     return '<section class="oe-ai-panel oe-onco-review"><h3 class="oe-h3">Review treatment plan &middot; ' + esc(tmpl.name || draft.protocolId || "") + "</h3>" +
       draftBanner +

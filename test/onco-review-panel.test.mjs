@@ -17,18 +17,22 @@ const draftOf = (over) => ({
   calculatedDoses: [{ drugId: "doxorubicin", final: 100 }], overrides: []
 });
 
-test("experimental draft -> review panel shows the DRAFT banner + do-not-transcribe", () => {
+// Calm styling (Beta / AI-drafted), but the safety line MUST persist on the dose-review screen: the
+// physician still has to see the dose is AI-drafted + needs verification before prescribing (R1).
+test("draft (experimental) -> review panel shows the AI-drafted / verify note", () => {
   const html = UI._buildReviewPanel(draftOf({ experimental: true }));
-  assert.match(html, /EXPERIMENTAL DRAFT/);
-  assert.match(html, /transcribe/i);
+  assert.match(html, /AI-drafted/i);
+  assert.match(html, /Beta/i);
+  assert.match(html, /verify/i);
 });
 
-test("lifecycleState draft (not experimental) -> also banners", () => {
+test("lifecycleState draft (not experimental) -> also shows the note", () => {
   const html = UI._buildReviewPanel(draftOf({ lifecycleState: "draft" }));
-  assert.match(html, /EXPERIMENTAL DRAFT/);
+  assert.match(html, /AI-drafted/i);
+  assert.match(html, /verify/i);
 });
 
-test("active protocol -> NO draft banner", () => {
+test("active protocol -> NO draft note", () => {
   const html = UI._buildReviewPanel(draftOf({ lifecycleState: "active" }));
-  assert.doesNotMatch(html, /EXPERIMENTAL DRAFT/);
+  assert.doesNotMatch(html, /AI-drafted/i);
 });
