@@ -98,6 +98,7 @@ import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, 
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
+import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -801,7 +802,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -809,6 +810,11 @@ export async function onRequest(context) {
 
     if (seg === "admin/ai-usage") return json(await globalUsageReport(env, store, Date.now()));
     if (seg === "admin/audit") return json({ audit: await getAudit(store) });
+
+    if (seg === "admin/clientlog") {
+      if (request.method === "POST") { await clearClientErrors(store); await auditRecord(store, "clientlog", "cleared", actorId, Date.now()); }
+      return json({ errors: await getClientErrors(store) });
+    }
 
     if (seg === "admin/abuse") {
       if (request.method === "POST") {

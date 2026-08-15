@@ -1956,15 +1956,15 @@
   }
   function loadAiControl() {
     var host = document.getElementById("aicBody"); if (!host) return;
-    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health")]).then(function (res) {
+    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health"), aiAdminFetch("/admin/clientlog")]).then(function (res) {
       if (!host) return;
       if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
-      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {});
+      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || []);
       wireAiControl(host);
     });
   }
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
-  function renderAiControl(model, usage, limits, audit, health) {
+  function renderAiControl(model, usage, limits, audit, health, clientErrors) {
     var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
     // 0) EMERGENCY kill switch (top, most prominent)
     var emg = (usage.emergency && usage.emergency.mode) || "off";
@@ -2001,6 +2001,18 @@
     h += (rows || '<div class="aic-note">No AI activity yet today.</div>');
     var mk = Object.keys(byMod); if (mk.length) { h += '<div class="aic-note">By model: ' + mk.map(function (m) { return aiCtlEsc(m) + " " + byMod[m]; }).join(" &middot; ") + '</div>'; }
     var td = usage.topDoctors || []; if (td.length) { h += '<div class="aic-note">Top doctors: ' + td.slice(0, 5).map(function (d) { return aiCtlEsc(d.email || (String(d.doctor).slice(0, 10) + "…")) + " (" + d.req + ")"; }).join(" &middot; ") + '</div>'; }
+    h += '</div>';
+    // 2b) Client crashes / errors (fleet telemetry from /api/clientlog)
+    var ce = clientErrors || [];
+    h += '<div class="aic-sec"><div class="aic-h">Client errors (crashes)' +
+      (ce.length ? ' <button class="aic-chip" data-aic-clientlog-clear="1" style="float:right">Clear</button>' : '') + '</div>';
+    if (!ce.length) h += '<div class="aic-note">No client errors reported. (Fleet crash telemetry is live.)</div>';
+    else h += ce.slice(0, 25).map(function (e) {
+      var first = (e.stack || "").split("\n")[0] || "";
+      return '<div class="aic-row"><div class="h"><span>' + aiCtlEsc((e.message || "").slice(0, 90)) + '</span><span class="u">&times;' + (e.count || 1) + '</span></div>' +
+        '<div class="aic-note">' + aiCtlEsc(e.level || "error") + ' &middot; ' + aiCtlEsc(e.platform || "?") + ' &middot; ' + aiCtlEsc(e.build || "?") + ' &middot; ' + aiCtlEsc(e.url || "") +
+        (first ? ' &middot; ' + aiCtlEsc(first.slice(0, 90)) : "") + '</div></div>';
+    }).join("");
     h += '</div>';
     // 3) Quota editor
     var mods = limits.modules || [];
@@ -2050,6 +2062,11 @@
         host.innerHTML = '<div class="aic-load">Updating…</div>';
         aiAdminFetch("/admin/emergency", { method: "POST", body: { mode: mode } }).then(function () { if (window.toast) toast("Emergency mode: " + mode); loadAiControl(); });
       });
+    });
+    var clClear = host.querySelector("[data-aic-clientlog-clear]");
+    if (clClear) clClear.addEventListener("click", function () {
+      if (!window.confirm("Clear the client error log?")) return;
+      aiAdminFetch("/admin/clientlog", { method: "POST", body: {} }).then(function () { if (window.toast) toast("Client errors cleared"); loadAiControl(); });
     });
     var bud = host.querySelector("[data-aic-budget]");
     if (bud) {
