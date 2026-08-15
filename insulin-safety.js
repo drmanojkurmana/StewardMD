@@ -23,7 +23,10 @@
       out.push(W("hypoglycemia", "critical", "Hypoglycemia",
         "Glucose " + input.glucose + " mg/dL is low. Do not give a correction dose; treat the low first."));
 
-    if (num(input.glucose) && input.glucose > 300)
+    if (num(input.glucose) && input.glucose > 400)
+      out.push(W("critical_hyper", "critical", "Very high glucose - rule out DKA/HHS",
+        "Glucose " + input.glucose + " mg/dL. Check ketones, venous pH/bicarbonate and osmolality BEFORE a routine subcutaneous correction. If ketoacidosis or a hyperosmolar state is present, use the DKA/HHS protocol - not a correction bolus."));
+    else if (num(input.glucose) && input.glucose > 300)
       out.push(W("severe_hyper", "warning", "Severe hyperglycemia",
         "Glucose " + input.glucose + " mg/dL. Check ketones and consider DKA before routine correction."));
 
