@@ -1956,15 +1956,15 @@
   }
   function loadAiControl() {
     var host = document.getElementById("aicBody"); if (!host) return;
-    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health"), aiAdminFetch("/admin/clientlog")]).then(function (res) {
+    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health"), aiAdminFetch("/admin/clientlog"), aiAdminFetch("/admin/config")]).then(function (res) {
       if (!host) return;
       if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
-      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || []);
+      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || [], (res[6] && res[6].config) || {});
       wireAiControl(host);
     });
   }
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
-  function renderAiControl(model, usage, limits, audit, health, clientErrors) {
+  function renderAiControl(model, usage, limits, audit, health, clientErrors, remoteConfig) {
     var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
     // 0) EMERGENCY kill switch (top, most prominent)
     var emg = (usage.emergency && usage.emergency.mode) || "off";
@@ -2014,6 +2014,14 @@
         (first ? ' &middot; ' + aiCtlEsc(first.slice(0, 90)) : "") + '</div></div>';
     }).join("");
     h += '</div>';
+    // 2c) Remote config — fleet controls (force-upgrade floor, maintenance, banners, server flags)
+    var rc = remoteConfig || {};
+    var rcJson = JSON.stringify({ minBuild: rc.minBuild == null ? null : rc.minBuild, upgradeUrl: rc.upgradeUrl || "", upgradeMessage: rc.upgradeMessage || "", maintenance: rc.maintenance || { on: false, message: "" }, banners: rc.banners || [], flags: rc.flags || {} }, null, 2);
+    h += '<div class="aic-sec"><div class="aic-h">Remote config (fleet controls)</div>' +
+      '<div class="aic-note">Force-upgrade floor (minBuild = native versionCode), maintenance mode, banners, and server flags. Applies to all devices within ~1 min &mdash; no app-store release.</div>' +
+      '<textarea id="aicRcJson" spellcheck="false" style="width:100%;min-height:150px;font:12px/1.45 monospace;background:#0b1220;color:#cfe6ff;border:1px solid rgba(120,130,150,.3);border-radius:8px;padding:8px;box-sizing:border-box">' + aiCtlEsc(rcJson) + '</textarea>' +
+      '<div class="aic-btns"><button class="aic-chip" data-aic-rc-save="1">Save remote config</button></div>' +
+      '<div class="aic-note" id="aicRcMsg"></div></div>';
     // 3) Quota editor
     var mods = limits.modules || [];
     h += '<div class="aic-sec"><div class="aic-h">Daily caps (per doctor)</div>';
@@ -2067,6 +2075,16 @@
     if (clClear) clClear.addEventListener("click", function () {
       if (!window.confirm("Clear the client error log?")) return;
       aiAdminFetch("/admin/clientlog", { method: "POST", body: {} }).then(function () { if (window.toast) toast("Client errors cleared"); loadAiControl(); });
+    });
+    var rcSave = host.querySelector("[data-aic-rc-save]");
+    if (rcSave) rcSave.addEventListener("click", function () {
+      var ta = host.querySelector("#aicRcJson"), msg = host.querySelector("#aicRcMsg"); if (!ta) return;
+      var body; try { body = JSON.parse(ta.value); } catch (e) { if (msg) msg.textContent = "Invalid JSON: " + e.message; return; }
+      if (msg) msg.textContent = "Saving…";
+      aiAdminFetch("/admin/config", { method: "POST", body: body }).then(function (r) {
+        if (r && r.ok) { if (window.toast) toast("Remote config saved"); loadAiControl(); }
+        else if (msg) msg.textContent = "Save failed" + (r && r.error ? ": " + r.error : "");
+      });
     });
     var bud = host.querySelector("[data-aic-budget]");
     if (bud) {
