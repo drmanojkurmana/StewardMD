@@ -1966,9 +1966,20 @@
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
   function renderAiControl(model, usage, limits, audit, health, clientErrors, remoteConfig) {
     var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
+    // 0a) SYSTEM HEALTH (top, at-a-glance): AI failures + error rate + client crashes + active doctors,
+    // computed from data already fetched (globalUsageReport + the client-error telemetry).
+    var ceList = clientErrors || [];
+    var ceTotal = ceList.reduce(function (n, e) { return n + (e.count || 1); }, 0);
+    var fails = usage.fail | 0, reqs = usage.req | 0, errRate = reqs ? Math.round(fails / reqs * 100) : 0;
+    var h = '<div class="aic-sec"><div class="aic-h">System health</div><div class="aic-stats">' +
+      '<div class="c"><div class="n" style="color:' + (fails ? "#dc2626" : "#16a34a") + '">' + fails + '</div><div class="l">AI failures</div></div>' +
+      '<div class="c"><div class="n" style="color:' + (errRate >= 10 ? "#d97706" : "inherit") + '">' + errRate + '%</div><div class="l">AI error rate</div></div>' +
+      '<div class="c"><div class="n" style="color:' + (ceList.length ? "#d97706" : "#16a34a") + '">' + ceList.length + '</div><div class="l">Client errors (' + ceTotal + ')</div></div>' +
+      '<div class="c"><div class="n">' + (usage.activeDoctors | 0) + '</div><div class="l">Active doctors</div></div></div>' +
+      ((fails === 0 && ceList.length === 0) ? '<div class="aic-note" style="color:#16a34a">All systems nominal.</div>' : '') + '</div>';
     // 0) EMERGENCY kill switch (top, most prominent)
     var emg = (usage.emergency && usage.emergency.mode) || "off";
-    var h = '<div class="aic-sec"><div class="aic-h">Emergency control</div><div class="aic-btns">' +
+    h += '<div class="aic-sec"><div class="aic-h">Emergency control</div><div class="aic-btns">' +
       '<button class="aic-chip' + (emg === "off" ? " on" : "") + '" data-aic-emg="off">Normal</button>' +
       '<button class="aic-chip aic-warn' + (emg === "cheap" ? " on" : "") + '" data-aic-emg="cheap">Cheap model</button>' +
       '<button class="aic-chip aic-danger' + (emg === "pause" ? " on" : "") + '" data-aic-emg="pause">Pause all AI</button></div>';
