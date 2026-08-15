@@ -75,7 +75,7 @@
     },
     account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
     applewatch: function () { if (window.SMD_APPLE_WATCH && SMD_APPLE_WATCH.open) SMD_APPLE_WATCH.open(); else toast("Apple Watch settings loading…"); },
-    wearos: function () { if (window.SMD_WEAROS && SMD_WEAROS.open) SMD_WEAROS.open(); else toast("Wear OS companion is coming in a future update."); },
+    wearos: function () { if (window.SMD_WEAROS && SMD_WEAROS.open) return SMD_WEAROS.open(); toast("StewardMD runs on your paired Wear OS watch. Open the app on the watch and sign in there. Your ward session syncs from this phone automatically."); },
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }

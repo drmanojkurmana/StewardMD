@@ -17,7 +17,9 @@ import `in`.stewardmd.wear.net.TimelineReq
  *  which the caller maps to "not permitted"; a 402 (needs-pro) likewise via HttpError(402). */
 class WatchApi(private val api: ApiClient) {
 
-    suspend fun status(): WatchStatus = api.get(Endpoints.WATCH_STATUS, needsAuth = true)
+    suspend fun status(): WatchStatus =
+        if (`in`.stewardmd.wear.ui.Demo.enabled) `in`.stewardmd.wear.ui.Demo.watchStatus   // debug-only sample data
+        else api.get(Endpoints.WATCH_STATUS, needsAuth = true)
 
     suspend fun add(patient: Patient): WatchStatus =
         api.post(Endpoints.WATCH_ADD, AddReq(patient), needsAuth = true)

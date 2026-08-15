@@ -417,8 +417,75 @@
     };
   }
 
+  /* First-dose / no-prior-data CORRECTION.
+   * A patient may need a correction before any insulin history exists. This resolves the two inputs the
+   * plain correctionDose assumes are known — ISF and IOB — three ways, each carrying its PROVENANCE so an
+   * estimate is never shown as a measured value, then defers the arithmetic to correctionDose (single
+   * source of truth; no duplicated math). Safety-routes DKA/HHS and paediatric away from a routine bolus.
+   *   ISF:  v.isf (known)  >  v.tdd (ISF = rule/TDD)  >  v.weightKg x v.tddFactor -> TDD -> ISF (estimate)
+   *   IOB:  v.priorDose {units,minutesAgo}+v.dia (activeInsulin)  >  0 (first dose / naive)  >  0 (assumed) */
+  function firstDoseCorrection(v) {
+    v = v || {};
+    var ctx = v.ctx || {};
+    var formula = "correction = (glucose - target) / ISF - IOB   (ISF resolved from known ISF / TDD / weight)";
+    // 1) Exclusion routing — these need a different protocol, not a routine subcutaneous correction.
+    var route = v.route || (ctx.dka ? "dka" : (ctx.pediatric || v.pediatric) ? "pediatric" : null);
+    if (route === "dka") return { result: null, rounded: null, unit: "units", route: "dka", formula: formula,
+      routing: "DKA/HHS selected. Use the DKA/HHS protocol (fixed-rate IV insulin after fluid resuscitation and a potassium check) - a routine correction bolus is not appropriate here.",
+      clinicalNotes: ["Switch to the DKA infusion pathway."], refs: ["ADA/JBDS-IP DKA; do not give a routine SC correction in DKA/HHS."] };
+    if (route === "pediatric") return { result: null, rounded: null, unit: "units", route: "pediatric", formula: formula,
+      routing: "Paediatric patient. Use the weight-based paediatric insulin pathway (specialist-guided); a first-dose adult correction estimate is not appropriate.",
+      clinicalNotes: ["Switch to the Pediatric pathway."], refs: ["ISPAD paediatric insulin guidance."] };
+
+    var rule = v.rule || 1800;
+    // 2) Resolve ISF with provenance.
+    var isf, isfSource, tddEst = null, tddSource = null;
+    if (ok(v.isf) && v.isf > 0) {
+      isf = v.isf; isfSource = (ok(v.tdd) || ok(v.weightKg)) ? "entered (overrides the estimate)" : "known (entered)";
+    } else if (ok(v.tdd) && v.tdd > 0) {
+      isf = isfFromTdd({ tdd: v.tdd, rule: rule }).result; tddEst = v.tdd;
+      tddSource = "entered (known usual TDD)"; isfSource = "estimated from TDD " + v.tdd + " u/day (" + rule + " rule)";
+    } else if (ok(v.weightKg) && v.weightKg > 0) {
+      var factor = ok(v.tddFactor) ? v.tddFactor : 0.3;   // conservative insulin-naive default — shown as an ASSUMPTION, editable
+      tddEst = Math.round(v.weightKg * factor);
+      tddSource = "estimated: " + v.weightKg + " kg x " + factor + " u/kg/day (assumption, NOT a measured value)";
+      isf = isfFromTdd({ tdd: tddEst, rule: rule }).result;
+      isfSource = "estimated from the estimated TDD (" + rule + " rule)";
+    } else {
+      return { result: null, rounded: null, unit: "units", formula: formula,
+        assumptions: ["Provide a known ISF, a known TDD, or a weight to estimate the ISF."] };
+    }
+
+    // 3) Resolve IOB with provenance — never fabricate.
+    var iob = 0, iobSource;
+    if (v.priorDose && ok(v.priorDose.units) && v.priorDose.units > 0 && ok(v.priorDose.minutesAgo) && ok(v.dia) && v.dia > 0) {
+      iob = activeInsulin({ dia: v.dia, doses: [{ units: v.priorDose.units, minutesAgo: v.priorDose.minutesAgo }] }).result;
+      iobSource = iob + " u active from a prior " + v.priorDose.units + " u rapid-acting dose " + v.priorDose.minutesAgo + " min ago (linear model, DIA " + v.dia + " h)";
+    } else if (v.insulinNaive || v.firstDose) {
+      iob = 0; iobSource = "0 u - no previous rapid-acting insulin reported";
+    } else {
+      iob = 0; iobSource = "0 u assumed - no prior rapid-acting dose/timing entered; if one was given within its duration of action, enter it or this may stack";
+    }
+
+    // 4) Defer the arithmetic to correctionDose (also applies the renal/hepatic/exercise context factor + floors at 0).
+    var cd = correctionDose({ glucose: v.glucose, target: v.target, isf: isf, iob: iob, increment: v.increment, ctx: ctx });
+    if (cd.result == null) return cd;   // propagate the guard (missing glucose/target)
+
+    // 5) Augment with first-dose provenance so nothing estimated reads as measured.
+    cd.isf = isf; cd.isfSource = isfSource; cd.iobSource = iobSource;
+    cd.tddEstimated = tddEst; cd.tddSource = tddSource; cd.firstDose = true;
+    cd.provenance = [{ label: "ISF", value: isf + " mg/dL/u", source: isfSource }, { label: "IOB", value: iob + " u", source: iobSource }]
+      .concat(tddEst != null ? [{ label: "TDD", value: tddEst + " u/day", source: tddSource }] : []);
+    cd.assumptions = ["ISF " + isf + " mg/dL/u - " + isfSource, "IOB " + iob + " u - " + iobSource]
+      .concat(tddEst != null ? ["TDD " + tddEst + " u/day - " + tddSource] : []).concat(cd.assumptions || []);
+    cd.clinicalNotes = (cd.clinicalNotes || []).concat(
+      ["This derives a CORRECTION dose only - it does NOT set the patient's full basal-bolus regimen."]
+        .concat((v.insulinNaive && tddEst != null) ? ["Insulin-naive: the estimated TDD is used ONLY to derive an ISF for this correction, not as a starting daily dose."] : []));
+    return cd;
+  }
+
   var API = {
-    roundDose: roundDose, mmol: mmol,
+    roundDose: roundDose, mmol: mmol, firstDoseCorrection: firstDoseCorrection,
     correctionDose: correctionDose, mealBolus: mealBolus, activeInsulin: activeInsulin,
     combinedDose: combinedDose, isfFromTdd: isfFromTdd, icrFromTdd: icrFromTdd,
     contextAdjust: contextAdjust, bolusContextAdvice: bolusContextAdvice, bolusContextFactor: bolusContextFactor,

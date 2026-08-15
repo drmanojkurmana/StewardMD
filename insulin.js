@@ -111,6 +111,15 @@
     st.bolus = SET.bolusInsulin || "aspart"; st.iobNote = "";
     st.tdd = 40; st.isfRule = 1800; st.icrRule = 500; st.tddFactor = 0.4; st.basalFraction = 0.5;
     st.dkaRate = 0.1; st.dkaMax = ""; st.pedStage = "prepubertal"; st.dkaPaeds = false; st.advAck = false;
+    // First-dose / no-prior-data correction pathway (correction mode only). Default "isf" keeps the
+    // existing manual behaviour untouched.
+    st.corrSource = "isf";           // isf | tdd | estimate
+    st.fdNaive = true;               // insulin-naive vs already-using
+    st.fdFactor = 0.3;               // insulin-naive TDD assumption (u/kg/day) — editable, shown as an assumption
+    st.fdTdd = 30;                   // known usual TDD (u/day)
+    st.fdPriorUnits = 0; st.fdPriorMins = 0;   // a prior rapid-acting dose (for IOB when NOT naive)
+    st.isfOverride = "";             // optional manual ISF override in tdd/estimate sub-modes
+    st.fdRoute = "";                 // "" | dka | pediatric — routes away from a routine correction
     st.ctx = { age: 40, weightKg: 70, pregnancy: false, renal: false, hepatic: false, exercise: false, steroids: false, egfr: null, dialysis: false, trimester: null };
     st.acked = false; st.confirmed = false;
     st.patientId = null; st.patientName = ""; st.editP = null; st.patQ = "";
@@ -679,6 +688,50 @@
   }
 
   function pedChip(v, label) { return '<button class="ins-chip" data-ins="pedstage" data-v="' + v + '" aria-pressed="' + (st.pedStage === v ? "true" : "false") + '">' + label + '</button>'; }
+
+  // ---- First-dose / no-prior-data correction inputs (correction mode only) ----
+  function iobEstBtn() {
+    var nd = recentBolusDoses().length;
+    return '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
+      (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
+      (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
+  }
+  function fdSrcBtn(v, label) { return '<button class="ins-chip" data-ins="corr-source" data-v="' + v + '" aria-pressed="' + (st.corrSource === v ? "true" : "false") + '">' + label + '</button>'; }
+  function firstDoseInputs() {
+    var h = '<div class="ins-field"><div class="ins-lab">No previous insulin data?</div><div class="ins-chips">' +
+      fdSrcBtn("isf", "Known ISF") + fdSrcBtn("tdd", "Known TDD") + fdSrcBtn("estimate", "First dose / Estimate") + '</div></div>';
+    if (st.corrSource === "isf") {
+      h += '<div class="ins-field"><div class="ins-grid2">' + mini("isf", "ISF " + isfUnit(), st.isf) + mini("iob", "Active insulin (IOB) u", st.iob) + '</div></div>' + iobEstBtn();
+      return h;
+    }
+    if (st.corrSource === "tdd") {
+      h += '<div class="ins-field"><div class="ins-lab">Known usual total daily dose <span class="u">u/day</span></div>' + stepper("fdTdd", st.fdTdd, 1) +
+        '<div class="ins-tgt-note">Estimated ISF = 1800 / TDD (shown in the result). Enter a known ISF below to override.</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("isfOverride", "Override ISF " + isfUnit() + " (optional)", st.isfOverride) + mini("iob", "Active insulin (IOB) u", st.iob) + '</div></div>' + iobEstBtn();
+      return h;
+    }
+    // estimate
+    h += '<div class="ins-field"><div class="ins-lab">Patient weight <span class="u">kg</span></div>' + stepper("ctx.weightKg", st.ctx.weightKg, 1) + '</div>' +
+      '<div class="ins-field"><div class="ins-lab">Insulin status</div><div class="ins-chips">' +
+        '<button class="ins-chip" data-ins="fd-naive" data-v="1" aria-pressed="' + (st.fdNaive ? "true" : "false") + '">Insulin-naive</button>' +
+        '<button class="ins-chip" data-ins="fd-naive" data-v="0" aria-pressed="' + (!st.fdNaive ? "true" : "false") + '">Already using insulin</button></div></div>';
+    if (st.fdNaive) {
+      h += '<div class="ins-field"><div class="ins-lab">Initial TDD assumption <span class="u">u/kg/day</span></div>' + mini("fdFactor", "u/kg/day", st.fdFactor) +
+        '<div class="ins-tgt-note">An ASSUMPTION, not a known value. Estimated TDD + ISF and IOB 0 u are shown with their sources in the result.</div></div>' +
+        '<div class="ins-field"><div class="ins-grid2">' + mini("isfOverride", "Override ISF " + isfUnit() + " (optional)", st.isfOverride) + '</div></div>';
+    } else {
+      h += '<div class="ins-field"><div class="ins-grid2">' + mini("fdTdd", "Known usual TDD u/day (optional)", st.fdTdd) + mini("isfOverride", "Override ISF " + isfUnit() + " (optional)", st.isfOverride) + '</div>' +
+        '<div class="ins-tgt-note">A known TDD (or ISF) overrides the weight estimate.</div></div>' +
+        '<div class="ins-field"><div class="ins-lab">Recent rapid-acting dose (for IOB)</div><div class="ins-grid2">' + mini("fdPriorUnits", "Units", st.fdPriorUnits) + mini("fdPriorMins", "Minutes ago", st.fdPriorMins) + '</div>' +
+        '<div class="ins-tgt-note">Leave units at 0 if none or unknown - IOB is never fabricated.</div></div>';
+    }
+    h += '<div class="ins-field"><div class="ins-lab">Clinical context</div><div class="ins-chips">' +
+      '<button class="ins-chip" data-ins="fd-route" data-v="" aria-pressed="' + (!st.fdRoute ? "true" : "false") + '">Stable / ward</button>' +
+      '<button class="ins-chip" data-ins="fd-route" data-v="dka" aria-pressed="' + (st.fdRoute === "dka" ? "true" : "false") + '">DKA / HHS</button>' +
+      '<button class="ins-chip" data-ins="fd-route" data-v="pediatric" aria-pressed="' + (st.fdRoute === "pediatric" ? "true" : "false") + '">Pediatric</button></div>' +
+      '<div class="ins-tgt-note">DKA/HHS and pediatric route to the correct protocol, not a routine correction. Renal, hepatic, pregnancy and steroid context are set with the chips below.</div></div>';
+    return h;
+  }
   function renderInputs() {
     var m = st.mode, h = "", presets = targetPresets(), i;
     if (clinMode(m)) h += clinBanner(m);
@@ -694,7 +747,10 @@
     }
     if (m === "combined" || m === "meal") h += '<div class="ins-field"><div class="ins-lab">Carbohydrates <span class="u">g</span></div>' + stepper("carbs", st.carbs, 5) + '</div>';
 
-    if (glucoseMode(m) || m === "meal") {
+    if (m === "correction") {
+      // Correction gets the first-dose / no-prior-data pathway (Known ISF | Known TDD | First dose).
+      h += firstDoseInputs();
+    } else if (glucoseMode(m) || m === "meal") {   // combined + meal keep the plain ISF/ICR/IOB inputs
       h += '<div class="ins-field"><div class="ins-grid2">';
       if (glucoseMode(m)) h += mini("isf", "ISF " + isfUnit(), st.isf);
       if (m === "combined" || m === "meal") h += mini("icr", "ICR g/u", st.icr);
@@ -702,12 +758,7 @@
       // for a combined bolus, so it is collected in both.
       if (glucoseMode(m)) h += mini("iob", "Active insulin (IOB) u", st.iob);
       h += '</div></div>';
-      if (glucoseMode(m)) {
-        var nd = recentBolusDoses().length;
-        h += '<div class="ins-field"><button class="ins-iob-est" data-ins="iob-est"' + (nd ? "" : " disabled") + '>' +
-          (nd ? 'Estimate IOB from ' + nd + ' recent dose' + (nd > 1 ? 's' : '') : 'No recent doses to estimate IOB') + '</button>' +
-          (st.iobNote ? '<div class="ins-iob-note">' + st.iobNote + '</div>' : '') + '</div>';
-      }
+      if (glucoseMode(m)) h += iobEstBtn();
     }
 
     if (m === "isf")
@@ -759,7 +810,22 @@
   function compute() {
     var E = window.INSULIN_ENGINE, m = st.mode, G = toMgdl(st.glucose), T = toMgdl(st.target), ISF = toMgdl(st.isf);
     if (m === "meal") return E.mealBolus({ carbs: st.carbs, icr: st.icr, increment: st.increment, ctx: st.ctx });
-    if (m === "correction") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment, ctx: st.ctx });
+    if (m === "correction") {
+      if (st.corrSource === "isf") return E.correctionDose({ glucose: G, target: T, isf: ISF, iob: st.iob, increment: st.increment, ctx: st.ctx });
+      // Known-TDD / first-dose-estimate pathway — resolve ISF+IOB with provenance in the engine.
+      var fd = { glucose: G, target: T, increment: st.increment, ctx: st.ctx, rule: st.isfRule || 1800, dia: bolusDia(), route: st.fdRoute || null };
+      if (num(st.isfOverride) && Number(st.isfOverride) > 0) fd.isf = toMgdl(Number(st.isfOverride));
+      if (st.corrSource === "tdd") { if (num(st.fdTdd)) fd.tdd = Number(st.fdTdd); }
+      else {   // estimate
+        if (st.fdNaive) { fd.insulinNaive = true; fd.weightKg = Number(st.ctx.weightKg); fd.tddFactor = Number(st.fdFactor); }
+        else {
+          if (num(st.fdTdd) && Number(st.fdTdd) > 0) fd.tdd = Number(st.fdTdd);
+          else { fd.weightKg = Number(st.ctx.weightKg); fd.tddFactor = Number(st.fdFactor); }
+          if (num(st.fdPriorUnits) && Number(st.fdPriorUnits) > 0) fd.priorDose = { units: Number(st.fdPriorUnits), minutesAgo: Number(st.fdPriorMins) || 0 };
+        }
+      }
+      return E.firstDoseCorrection(fd);
+    }
     if (m === "basal") return E.basalInitiation({ weightKg: st.ctx.weightKg, tddFactor: st.tddFactor, basalFraction: st.basalFraction, increment: st.increment, ctx: st.ctx });
     if (m === "isf") return E.isfFromTdd({ tdd: st.tdd, rule: st.isfRule });
     if (m === "icr") return E.icrFromTdd({ tdd: st.tdd, rule: st.icrRule });
@@ -797,8 +863,10 @@
     if (!out) return;
 
     if (res.error || res.rounded == null) {
-      out.innerHTML = '<div class="ins-card ins-result"><div class="ins-card-t">Recommendation</div>' +
-        '<p style="color:var(--ins-muted);font-size:13px;margin:0">' + res.error + '</p></div>';
+      // First-dose pathway: show the routing message (DKA/HHS/pediatric) or the "provide ISF/TDD/weight" hint.
+      var msg = res.routing || res.error || (res.assumptions && res.assumptions[0]) || "Enter the required inputs to calculate.";
+      out.innerHTML = '<div class="ins-card ins-result"><div class="ins-card-t">' + (res.route ? "Use a different protocol" : "Recommendation") + '</div>' +
+        '<p style="color:var(--ins-muted);font-size:13px;margin:0">' + msg + '</p></div>';
       return;
     }
 
@@ -822,6 +890,10 @@
       : (m === "correction" && res.iobSubtracted) ? 'correction ' + res.grossCorrection + 'u - IOB ' + res.iobSubtracted + 'u' : "";
     var unitNote = mmolMode() ? ' &middot; working shown in mg/dL (canonical); entries converted from mmol/L' : '';
     var fromraw = 'Computed ' + res.result + ' ' + res.unit + (doseUnitMode(m) ? ', rounded to ' + st.increment + ' unit' : '') + (extraRaw ? ' &middot; ' + extraRaw : '') + unitNote;
+    // First-dose provenance: show every resolved value (ISF/TDD/IOB) WITH its source so an estimate never reads as measured.
+    var provHTML = (res.provenance && res.provenance.length) ? '<div class="ins-prov">' + res.provenance.map(function (p) {
+      return '<div class="ins-prov-row"><span class="k">' + p.label + '</span><span class="v">' + p.value + '</span><span class="s">' + p.source + '</span></div>';
+    }).join("") + '</div>' : "";
     var monitoringHTML = (res.monitoring && res.monitoring.length) ? '<div class="ins-conv-sec"><h4>Monitoring</h4><ul>' + res.monitoring.map(function (x) { return '<li>' + x + '</li>'; }).join("") + '</ul></div>' : "";
     // Patient-context effect on a BOLUS: concrete adjusted figures, shown rather than
     // silently applied (ICR/ISF may already account for the context — see engine note).
@@ -837,7 +909,7 @@
     out.innerHTML =
       '<div class="ins-card ins-result ins-bf"><div class="ins-card-t">' + cardTitle + '</div>' +
         '<div class="ins-dose"><span class="n" id="insDoseN">0</span><span class="unit">' + res.unit + '</span></div>' +
-        '<div class="ins-fromraw">' + fromraw + '</div>' +
+        '<div class="ins-fromraw">' + fromraw + '</div>' + provHTML +
         '<div class="ins-formula">' + res.formula + '</div>' +
         '<ul class="ins-steps">' + stepsHTML + '</ul>' + ctxAdvHTML + monitoringHTML +
         '<button class="ins-how" data-ins="how" aria-expanded="false">' + ICON_BOOK + '<span>How it works</span>' + ICON_CHEV + '</button>' +
@@ -923,6 +995,9 @@
     if (a === "target-chip") { st.target = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "rule") { st[t.getAttribute("data-g")] = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "pedstage") { st.pedStage = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "corr-source") { st.corrSource = t.getAttribute("data-v"); renderInputs(); render(); return; }
+    if (a === "fd-naive") { st.fdNaive = t.getAttribute("data-v") === "1"; renderInputs(); render(); return; }
+    if (a === "fd-route") { st.fdRoute = t.getAttribute("data-v"); renderInputs(); render(); return; }
     if (a === "dkarate") { st.dkaRate = parseFloat(t.getAttribute("data-v")); renderInputs(); render(); return; }
     if (a === "dkapaeds") { st.dkaPaeds = !st.dkaPaeds; renderInputs(); render(); return; }
     if (a === "ctx") {
