@@ -75,6 +75,7 @@
     },
     account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
     applewatch: function () { if (window.SMD_APPLE_WATCH && SMD_APPLE_WATCH.open) SMD_APPLE_WATCH.open(); else toast("Apple Watch settings loading…"); },
+    wearos: function () { if (window.SMD_WEAROS && SMD_WEAROS.open) SMD_WEAROS.open(); else toast("Wear OS companion is coming in a future update."); },
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
@@ -166,6 +167,15 @@
     (document.head || document.documentElement).appendChild(st);
   }
 
+  // Wearable companion is platform-specific: Apple Watch on iOS, Wear OS on Android, none on web.
+  // Showing "Apple Watch" on Android was wrong (that bridge is iOS-only).
+  function watchPlat() { try { var C = window.Capacitor; return (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) || "web"; } catch (e) { return "web"; } }
+  function watchRow() {
+    var p = watchPlat();
+    if (p === "ios") return row("applewatch", "watch", "Apple Watch");
+    if (p === "android") return row("wearos", "watch", "Wear OS");
+    return "";   // web build has no paired wearable
+  }
   function row(act, icon, label, badge) {
     return '<button class="sbr-row" data-sbr-act="' + act + '">' + svg(icon) +
       '<span class="sbr-lbl">' + label + "</span>" +
@@ -246,7 +256,7 @@
       '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
       row("notifications", "bell", "Notifications") +
       row("appearance", "sun", "Appearance &amp; Theme") +
-      row("applewatch", "watch", "Apple Watch") +
+      watchRow() +
       '<button class="sbr-row" data-sbr-adv="1">' + svg("spark") +
         '<span class="sbr-lbl">Advanced &amp; Experimental</span><span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-adv" data-sbr-advbody>' + advBody() + "</div>" +

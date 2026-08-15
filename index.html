@@ -1526,7 +1526,7 @@ window.openExternal = function (u) {
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=gold1085-clinic"></script>
+<script defer src="/sidebar-redesign.js?v=gold1086-watchplat"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->
@@ -1566,7 +1566,7 @@ window.openExternal = function (u) {
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on
      web and until the native plugin is present; never affects existing flows. -->
-<script src="/native-watch.js?v=gold476" defer></script>
+<script src="/native-watch.js?v=watch-ios1" defer></script>
 <!-- Copy/Print augmentation for the frozen app.js infusion calc (WebView-safe copy + branded print). -->
 <script src="/infusion-actions.js?v=gold363" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.

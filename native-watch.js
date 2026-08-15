@@ -18,7 +18,10 @@
   var native = !!(C && (typeof C.isNativePlatform === "function"
     ? C.isNativePlatform()
     : (C.platform && C.platform !== "web")));
-  if (!native) return;
+  // Apple Watch bridge is iOS-ONLY. On Android the WatchBridge plugin is absent so this was already a
+  // no-op, but gate explicitly so the Apple-Watch machinery never runs on Android (Wear OS is separate).
+  var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
+  if (!native || !isIOS) return;
 
   function plugin() { return (C.Plugins && C.Plugins.WatchBridge) || null; }
 
