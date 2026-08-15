@@ -42,9 +42,12 @@ try {
   ok(ready === true, "real oncotree engine + recommend + UI loaded (window.SMD_ONCOTREE.open present)");
 
   await ev(`window.SMD_ONCOTREE.open(); return 1;`);
-  for (let i = 0; i < 40; i++) { await sleep(150); if (await ev(`return !!document.querySelector(".ot-step-title");`)) break; }
+  for (let i = 0; i < 40; i++) { await sleep(150); if (await ev(`return !!document.querySelector(".ot-disease");`)) break; }
   ok(await ev(`return document.getElementById("smdOncoTree").style.display;`) === "block", "open() shows the overlay");
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("histology") >= 0, "first step is the histology question");
+  ok(Number(await ev(`return document.querySelectorAll(".ot-disease").length;`)) >= 2, "disease picker lists multiple cancers (breast + lung)");
+  await clickAct(`[data-ot-act="pick"][data-ot-guideline="breast"]`);
+  for (let i = 0; i < 40; i++) { await sleep(150); if (await ev(`return !!document.querySelector(".ot-step-title");`)) break; }
+  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("histology") >= 0, "picking Breast opens the histology question");
 
   // walk the pathway
   ok(await clickAct(`[data-ot-act="answer"][data-ot-opt="invasive"]`), "answer histology = invasive");
