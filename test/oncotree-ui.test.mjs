@@ -80,7 +80,10 @@ test("protocol detail view renders the regimen table + a DRAFT warning, never a 
   UI._st.openedProtocol = "breast-tchp";
   const html = UI._bodyHtml();
   assert.ok(/Regimen/.test(html));
-  assert.ok(/decision support only, not an approved clinical order/.test(html));
+  // R1 safety semantics (calm wording): the draft must still read as AI-drafted + decision-support + verify.
+  assert.ok(/AI-drafted/i.test(html));
+  assert.ok(/decision support/i.test(html));
+  assert.ok(/verify/i.test(html));
   assert.ok(/Back to options/.test(html));
   noPlaceholders(html);
 });
