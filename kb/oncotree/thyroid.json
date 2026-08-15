@@ -8,7 +8,9 @@
   "status": "draft",
   "provenanceNote": "ONCOTREE navigator DRAFT spanning anaplastic and medullary thyroid carcinoma (which carry different protocol diseaseId tags, hence matchDisease:false and per-node reference scoping). Captures subtype and, for anaplastic disease, BRAF V600E status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Differentiated (papillary/follicular) thyroid cancer is managed distinctly and is not covered here. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Thyroid Carcinoma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Thyroid Carcinoma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_thy_type"],
+  "startNodeIds": [
+    "n_thy_type"
+  ],
   "nodes": [
     {
       "id": "n_thy_type",
@@ -21,11 +23,31 @@
       "description": "Anaplastic and medullary thyroid carcinoma follow distinct, biomarker-directed systemic pathways.",
       "path": "Thyroid / Subtype",
       "section": "Diagnosis",
-      "pills": ["subtype"],
+      "pills": [
+        "subtype"
+      ],
       "required": true,
       "options": [
-        { "id": "anaplastic", "label": "Anaplastic thyroid carcinoma", "sets": { "scenario": "anaplastic" }, "pills": ["anaplastic"] },
-        { "id": "medullary", "label": "Medullary thyroid carcinoma", "sets": { "scenario": "medullary" }, "pills": ["medullary"] }
+        {
+          "id": "anaplastic",
+          "label": "Anaplastic thyroid carcinoma",
+          "sets": {
+            "scenario": "anaplastic"
+          },
+          "pills": [
+            "anaplastic"
+          ]
+        },
+        {
+          "id": "medullary",
+          "label": "Medullary thyroid carcinoma",
+          "sets": {
+            "scenario": "medullary"
+          },
+          "pills": [
+            "medullary"
+          ]
+        }
       ]
     },
     {
@@ -39,11 +61,30 @@
       "description": "A BRAF V600E mutation enables BRAF/MEK-targeted therapy in anaplastic thyroid carcinoma. BRAF wild-type anaplastic disease is managed with clinical-trial / multidisciplinary options not modeled here.",
       "path": "Thyroid / Anaplastic / BRAF",
       "section": "Biomarkers",
-      "pills": ["biomarker", "BRAF"],
+      "pills": [
+        "biomarker",
+        "BRAF"
+      ],
       "required": true,
       "options": [
-        { "id": "brafmut", "label": "BRAF V600E mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
-        { "id": "brafwt", "label": "BRAF wild-type", "setsValue": null, "pills": ["BRAF WT"] }
+        {
+          "id": "brafmut",
+          "label": "BRAF V600E mutation positive",
+          "sets": {
+            "biomarkers.BRAF": "positive"
+          },
+          "pills": [
+            "BRAF+"
+          ]
+        },
+        {
+          "id": "brafwt",
+          "label": "BRAF wild-type",
+          "setsValue": null,
+          "pills": [
+            "BRAF WT"
+          ]
+        }
       ]
     },
     {
@@ -57,9 +98,51 @@
       "description": "BRAF V600E-mutant anaplastic thyroid carcinoma - dabrafenib plus trametinib. Physician selects; the existing dose engine computes doses.",
       "path": "Thyroid / Anaplastic / BRAF-mutant",
       "section": "Treatment",
-      "pills": ["BRAF+", "treatment"],
+      "pills": [
+        "BRAF+",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["thyroid-anaplastic-dab-tram"]
+      "protocolRefs": [
+        "thyroid-anaplastic-dab-tram"
+      ]
+    },
+    {
+      "id": "n_thy_medullary_ret",
+      "linkId": "thy_medullary_ret",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Medullary - RET status",
+      "title": "Medullary: RET alteration status",
+      "description": "Selpercatinib is a selective RET inhibitor indicated for RET-altered medullary thyroid carcinoma. RET wild-type medullary disease is managed with multikinase inhibitors / clinical-trial options not modeled here.",
+      "path": "Thyroid / Medullary / RET",
+      "section": "Biomarkers",
+      "pills": [
+        "biomarker",
+        "RET"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "retpos",
+          "label": "RET pathogenic variant / fusion positive",
+          "sets": {
+            "biomarkers.RET": "positive"
+          },
+          "pills": [
+            "RET+"
+          ]
+        },
+        {
+          "id": "retwt",
+          "label": "RET wild-type / not identified",
+          "setsValue": null,
+          "pills": [
+            "RET WT"
+          ]
+        }
+      ]
     },
     {
       "id": "n_tx_thy_medullary",
@@ -72,14 +155,52 @@
       "description": "Advanced medullary thyroid carcinoma - a selective RET inhibitor (selpercatinib) for RET-altered disease. Physician selects.",
       "path": "Thyroid / Medullary",
       "section": "Treatment",
-      "pills": ["medullary", "treatment"],
+      "pills": [
+        "medullary",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["thyroid-medullary-selpercatinib"]
+      "protocolRefs": [
+        "thyroid-medullary-selpercatinib"
+      ]
     }
   ],
   "links": [
-    { "id": "l_thy_anaplastic", "from": "n_thy_type", "to": "n_thy_anaplastic_braf", "fromOptions": ["anaplastic"], "linkCategory": "conditional" },
-    { "id": "l_thy_medullary", "from": "n_thy_type", "to": "n_tx_thy_medullary", "fromOptions": ["medullary"], "linkCategory": "conditional" },
-    { "id": "l_thy_braf_mut", "from": "n_thy_anaplastic_braf", "to": "n_tx_thy_anaplastic", "fromOptions": ["brafmut"], "linkCategory": "conditional" }
+    {
+      "id": "l_thy_anaplastic",
+      "from": "n_thy_type",
+      "to": "n_thy_anaplastic_braf",
+      "fromOptions": [
+        "anaplastic"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_thy_medullary",
+      "from": "n_thy_type",
+      "to": "n_thy_medullary_ret",
+      "fromOptions": [
+        "medullary"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_thy_braf_mut",
+      "from": "n_thy_anaplastic_braf",
+      "to": "n_tx_thy_anaplastic",
+      "fromOptions": [
+        "brafmut"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_thy_ret_pos",
+      "from": "n_thy_medullary_ret",
+      "to": "n_tx_thy_medullary",
+      "fromOptions": [
+        "retpos"
+      ],
+      "linkCategory": "conditional"
+    }
   ]
 }

@@ -55,7 +55,10 @@ test("MYELOMA: newly-diagnosed induction; relapsed pomalidomide", () => {
 });
 test("THYROID: anaplastic BRAF+ -> dab-tram; medullary -> selpercatinib; BRAF-wt anaplastic pending", () => {
   assert.ok(has(at("thyroid", "n_tx_thy_anaplastic", { n_thy_type: ["anaplastic"], n_thy_anaplastic_braf: ["brafmut"] }), "thyroid-anaplastic-dab-tram"));
-  assert.ok(has(at("thyroid", "n_tx_thy_medullary", { n_thy_type: ["medullary"] }), "thyroid-medullary-selpercatinib"));
+  assert.ok(has(at("thyroid", "n_tx_thy_medullary", { n_thy_type: ["medullary"], n_thy_medullary_ret: ["retpos"] }), "thyroid-medullary-selpercatinib"));
+  // RET wild-type medullary: no route (honest gap), like BRAF-wt anaplastic
+  const retwt = E.evaluate(JSON.parse(readFileSync(join(ROOT, "kb/oncotree/thyroid.json"), "utf8")), { n_thy_type: ["medullary"], n_thy_medullary_ret: ["retwt"] });
+  assert.notEqual(retwt.nodes.n_tx_thy_medullary.status, "active");
   const wt = E.evaluate(JSON.parse(readFileSync(join(ROOT, "kb/oncotree/thyroid.json"), "utf8")), { n_thy_type: ["anaplastic"], n_thy_anaplastic_braf: ["brafwt"] });
   assert.notEqual(wt.nodes.n_tx_thy_anaplastic.status, "active");   // BRAF-wt anaplastic: no route (honest gap)
 });

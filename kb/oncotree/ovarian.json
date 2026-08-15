@@ -8,7 +8,9 @@
   "matchDisease": false,
   "provenanceNote": "ONCOTREE navigator DRAFT for ovarian cancer. Captures treatment phase (primary chemotherapy vs maintenance after response to platinum) and, for maintenance, BRCA/HRD status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Ovarian Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Ovarian Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_ov_phase"],
+  "startNodeIds": [
+    "n_ov_phase"
+  ],
   "nodes": [
     {
       "id": "n_ov_phase",
@@ -21,11 +23,25 @@
       "description": "Newly diagnosed disease is treated with primary platinum-based chemotherapy; patients who respond to platinum-based chemotherapy are then evaluated for maintenance therapy selected by BRCA/HRD status.",
       "path": "Ovarian / Treatment phase",
       "section": "Staging",
-      "pills": ["setting"],
+      "pills": [
+        "setting"
+      ],
       "required": true,
       "options": [
-        { "id": "primary", "label": "Newly diagnosed - primary chemotherapy", "sets": { "scenario": "primary" } },
-        { "id": "maintenance", "label": "Maintenance (after response to platinum)", "sets": { "scenario": "maintenance" } }
+        {
+          "id": "primary",
+          "label": "Newly diagnosed - primary chemotherapy",
+          "sets": {
+            "scenario": "primary"
+          }
+        },
+        {
+          "id": "maintenance",
+          "label": "Maintenance (after response to platinum)",
+          "sets": {
+            "scenario": "maintenance"
+          }
+        }
       ]
     },
     {
@@ -39,11 +55,26 @@
       "description": "BRCA-mutant or homologous recombination deficient (HRD)-positive tumors have the greatest benefit from PARP inhibitor maintenance; HR-proficient/BRCA wild-type tumors are directed to alternative maintenance options.",
       "path": "Ovarian / Biomarkers / BRCA-HRD",
       "section": "Biomarkers",
-      "pills": ["biomarker", "HRD"],
+      "pills": [
+        "biomarker",
+        "HRD"
+      ],
       "required": true,
       "options": [
-        { "id": "hrd", "label": "BRCA-mutant or HRD-positive", "sets": { "biomarkers.HRD": "positive" } },
-        { "id": "hrp", "label": "HR-proficient / BRCA wild-type", "sets": { "biomarkers.HRD": "negative" } }
+        {
+          "id": "hrd",
+          "label": "BRCA-mutant or HRD-positive",
+          "sets": {
+            "biomarkers.HRD": "positive"
+          }
+        },
+        {
+          "id": "hrp",
+          "label": "HR-proficient / BRCA wild-type",
+          "sets": {
+            "biomarkers.HRD": "negative"
+          }
+        }
       ]
     },
     {
@@ -57,9 +88,14 @@
       "description": "Newly diagnosed ovarian cancer - platinum-taxane chemotherapy, with or without bevacizumab, is the primary systemic backbone. Physician selects.",
       "path": "Ovarian / Treatment / Primary",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": [
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev"]
+      "protocolRefs": [
+        "gyn-carbo-paclitaxel",
+        "gyn-carbo-paclitaxel-bev"
+      ]
     },
     {
       "id": "n_tx_ov_hrd",
@@ -72,9 +108,16 @@
       "description": "Maintenance in BRCA-mutant or HRD-positive ovarian cancer after response to platinum-based chemotherapy - PARP inhibitor-based maintenance regimens are systemic options. Physician selects.",
       "path": "Ovarian / Treatment / Maintenance / HRD positive",
       "section": "Treatment",
-      "pills": ["HRD+", "treatment"],
+      "pills": [
+        "HRD+",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["gyn-olaparib-maint", "gyn-niraparib-maint", "gyn-carbo-paclitaxel-bev"]
+      "protocolRefs": [
+        "gyn-olaparib-maint",
+        "gyn-niraparib-maint",
+        "gyn-carbo-paclitaxel-bev"
+      ]
     },
     {
       "id": "n_tx_ov_hrp",
@@ -83,19 +126,56 @@
       "nodeType": "end",
       "template": "end",
       "name": "HR-proficient maintenance treatment",
-      "title": "Maintenance, HR-proficient: niraparib or bevacizumab",
-      "description": "Maintenance in HR-proficient/BRCA wild-type ovarian cancer after response to platinum-based chemotherapy - niraparib or bevacizumab-based maintenance are systemic options. Physician selects.",
+      "title": "Maintenance, HR-proficient: bevacizumab or observation",
+      "description": "Maintenance in HR-proficient / BRCA wild-type ovarian cancer after response to platinum-based chemotherapy - bevacizumab maintenance or observation. A PARP inhibitor is NOT indicated for BRCA-wild-type / HR-proficient disease in this guideline version; it is reserved for BRCA/HRD-positive disease. Physician selects.",
       "path": "Ovarian / Treatment / Maintenance / HR proficient",
       "section": "Treatment",
-      "pills": ["HRD-", "treatment"],
+      "pills": [
+        "HRD-",
+        "treatment"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["gyn-niraparib-maint", "gyn-carbo-paclitaxel-bev"]
+      "protocolRefs": [
+        "gyn-carbo-paclitaxel-bev"
+      ]
     }
   ],
   "links": [
-    { "id": "l_ov_phase_primary", "from": "n_ov_phase", "to": "n_tx_ov_primary", "fromOptions": ["primary"], "linkCategory": "conditional" },
-    { "id": "l_ov_phase_maintenance", "from": "n_ov_phase", "to": "n_ov_hrd", "fromOptions": ["maintenance"], "linkCategory": "conditional" },
-    { "id": "l_ov_hrd_pos", "from": "n_ov_hrd", "to": "n_tx_ov_hrd", "fromOptions": ["hrd"], "linkCategory": "conditional" },
-    { "id": "l_ov_hrd_hrp", "from": "n_ov_hrd", "to": "n_tx_ov_hrp", "fromOptions": ["hrp"], "linkCategory": "conditional" }
+    {
+      "id": "l_ov_phase_primary",
+      "from": "n_ov_phase",
+      "to": "n_tx_ov_primary",
+      "fromOptions": [
+        "primary"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ov_phase_maintenance",
+      "from": "n_ov_phase",
+      "to": "n_ov_hrd",
+      "fromOptions": [
+        "maintenance"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ov_hrd_pos",
+      "from": "n_ov_hrd",
+      "to": "n_tx_ov_hrd",
+      "fromOptions": [
+        "hrd"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ov_hrd_hrp",
+      "from": "n_ov_hrd",
+      "to": "n_tx_ov_hrp",
+      "fromOptions": [
+        "hrp"
+      ],
+      "linkCategory": "conditional"
+    }
   ]
 }
