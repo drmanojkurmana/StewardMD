@@ -1,0 +1,101 @@
+{
+  "guideline": "headneck",
+  "title": "Head & Neck Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "head_and_neck_cancer",
+  "status": "draft",
+  "matchDisease": false,
+  "provenanceNote": "ONCOTREE navigator DRAFT for head and neck cancer. Captures clinical setting (locoregional vs recurrent/metastatic) and, for recurrent/metastatic disease, PD-L1 CPS status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Head and Neck Cancers; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Head and Neck Cancers. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_hn_setting"],
+  "nodes": [
+    {
+      "id": "n_hn_setting",
+      "linkId": "hn_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Clinical setting",
+      "title": "Clinical setting",
+      "description": "Locoregionally advanced disease (stage III-IVB) is typically treated with definitive or adjuvant concurrent chemoradiation; recurrent or metastatic disease is treated with systemic therapy selected by PD-L1 status.",
+      "path": "Head & Neck / Setting",
+      "section": "Staging",
+      "pills": ["setting"],
+      "required": true,
+      "options": [
+        { "id": "locoregional", "label": "Locoregional (stage III-IVB, definitive/adjuvant)", "sets": { "scenario": "locoregional" } },
+        { "id": "rm", "label": "Recurrent / metastatic", "sets": { "scenario": "recurrent-metastatic" } }
+      ]
+    },
+    {
+      "id": "n_hn_pdl1",
+      "linkId": "hn_pdl1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "PD-L1 CPS status",
+      "title": "PD-L1 CPS (recurrent/metastatic)",
+      "description": "PD-L1 Combined Positive Score (CPS) determines eligibility for immunotherapy-based regimens in recurrent/metastatic head and neck cancer; CPS below threshold is directed to chemotherapy/cetuximab-based regimens.",
+      "path": "Head & Neck / Biomarkers / PD-L1",
+      "section": "Biomarkers",
+      "pills": ["biomarker", "PD-L1"],
+      "required": true,
+      "options": [
+        { "id": "cpspos", "label": "PD-L1 CPS >= 1", "sets": { "biomarkers.PD_L1": "positive" } },
+        { "id": "cpsneg", "label": "PD-L1 CPS < 1 / negative", "sets": { "biomarkers.PD_L1": "negative" } }
+      ]
+    },
+    {
+      "id": "n_tx_hn_locoregional",
+      "linkId": "tx_hn_locoregional",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Locoregional treatment",
+      "title": "Locoregional: concurrent chemoradiation",
+      "description": "Locoregionally advanced head and neck cancer - concurrent chemoradiation is the systemic-radiation backbone for definitive or adjuvant treatment. Physician selects.",
+      "path": "Head & Neck / Treatment / Locoregional",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["hn-cisplatin-rt"]
+    },
+    {
+      "id": "n_tx_hn_io",
+      "linkId": "tx_hn_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PD-L1 CPS-positive recurrent/metastatic treatment",
+      "title": "Recurrent/metastatic, PD-L1 CPS>=1: immunotherapy options",
+      "description": "Recurrent/metastatic head and neck cancer with PD-L1 CPS >= 1 - immune checkpoint inhibitor-based regimens are systemic options. Physician selects.",
+      "path": "Head & Neck / Treatment / Recurrent-metastatic / PD-L1 positive",
+      "section": "Treatment",
+      "pills": ["PD-L1+", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["hn-pembro-mono", "hn-extreme", "hn-nivolumab"]
+    },
+    {
+      "id": "n_tx_hn_chemo",
+      "linkId": "tx_hn_chemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "PD-L1 CPS-negative recurrent/metastatic treatment",
+      "title": "Recurrent/metastatic, CPS<1: chemotherapy/cetuximab",
+      "description": "Recurrent/metastatic head and neck cancer with PD-L1 CPS < 1 - chemotherapy and cetuximab-based regimens are systemic options. Physician selects.",
+      "path": "Head & Neck / Treatment / Recurrent-metastatic / PD-L1 negative",
+      "section": "Treatment",
+      "pills": ["PD-L1-", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["hn-extreme", "hn-cetuximab", "hn-nivolumab"]
+    }
+  ],
+  "links": [
+    { "id": "l_hn_setting_locoregional", "from": "n_hn_setting", "to": "n_tx_hn_locoregional", "fromOptions": ["locoregional"], "linkCategory": "conditional" },
+    { "id": "l_hn_setting_rm", "from": "n_hn_setting", "to": "n_hn_pdl1", "fromOptions": ["rm"], "linkCategory": "conditional" },
+    { "id": "l_hn_pdl1_pos", "from": "n_hn_pdl1", "to": "n_tx_hn_io", "fromOptions": ["cpspos"], "linkCategory": "conditional" },
+    { "id": "l_hn_pdl1_neg", "from": "n_hn_pdl1", "to": "n_tx_hn_chemo", "fromOptions": ["cpsneg"], "linkCategory": "conditional" }
+  ]
+}

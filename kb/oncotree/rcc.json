@@ -1,0 +1,66 @@
+{
+  "guideline": "rcc",
+  "title": "Renal Cell Carcinoma",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "renal_cell_carcinoma",
+  "status": "draft",
+  "matchDisease": false,
+  "provenanceNote": "ONCOTREE navigator DRAFT for advanced/metastatic clear-cell renal cell carcinoma. Captures the first-line systemic approach (immunotherapy combination for intermediate/poor-risk disease vs tyrosine-kinase inhibitor monotherapy) and routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Kidney Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Kidney Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_rcc_approach"],
+  "nodes": [
+    {
+      "id": "n_rcc_approach",
+      "linkId": "rcc_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line approach",
+      "title": "First-line approach",
+      "description": "Advanced/metastatic clear-cell renal cell carcinoma is treated with an immune-checkpoint-inhibitor-based combination, generally favored in intermediate/poor-risk disease by IMDC criteria, or with tyrosine-kinase inhibitor monotherapy. Physician selects based on risk category and comorbidities.",
+      "path": "Renal Cell Carcinoma / Approach",
+      "section": "Treatment",
+      "pills": ["approach", "first-line"],
+      "required": true,
+      "options": [
+        { "id": "iocombo", "label": "Immunotherapy combination (intermediate/poor risk)", "sets": { "scenario": "io-combo" } },
+        { "id": "tki", "label": "Tyrosine-kinase inhibitor monotherapy", "sets": { "scenario": "tki" } }
+      ]
+    },
+    {
+      "id": "n_tx_rcc_io",
+      "linkId": "tx_rcc_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Advanced clear-cell RCC: immunotherapy combination",
+      "title": "Advanced clear-cell RCC: immunotherapy combination",
+      "description": "Advanced/metastatic clear-cell renal cell carcinoma, first-line - immune-checkpoint-inhibitor combination therapy. Physician selects the specific combination regimen.",
+      "path": "Renal Cell Carcinoma / Treatment / Immunotherapy combination",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-rcc-nivo-ipi"]
+    },
+    {
+      "id": "n_tx_rcc_tki",
+      "linkId": "tx_rcc_tki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Advanced clear-cell RCC: TKI monotherapy",
+      "title": "Advanced clear-cell RCC: TKI monotherapy",
+      "description": "Advanced/metastatic clear-cell renal cell carcinoma, first-line - tyrosine-kinase inhibitor monotherapy. Physician selects the specific agent.",
+      "path": "Renal Cell Carcinoma / Treatment / TKI monotherapy",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-rcc-cabozantinib", "gu-rcc-pazopanib", "gu-rcc-sunitinib"]
+    }
+  ],
+  "links": [
+    { "id": "l_rcc_approach_io", "from": "n_rcc_approach", "to": "n_tx_rcc_io", "fromOptions": ["iocombo"], "linkCategory": "conditional" },
+    { "id": "l_rcc_approach_tki", "from": "n_rcc_approach", "to": "n_tx_rcc_tki", "fromOptions": ["tki"], "linkCategory": "conditional" }
+  ]
+}

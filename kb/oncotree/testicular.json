@@ -1,0 +1,136 @@
+{
+  "guideline": "testicular",
+  "title": "Testicular Cancer (germ cell)",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "testicular_germ_cell_tumor",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "ONCOTREE navigator DRAFT for testicular germ cell tumour. Captures histology, seminoma stage, and NSGCT risk group (IGCCCG) as scenario tags, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Testicular Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Testicular Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_test_hist"],
+  "nodes": [
+    {
+      "id": "n_test_hist",
+      "linkId": "test_hist",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Histology",
+      "title": "Histology",
+      "description": "Testicular germ cell tumours are divided into seminoma and non-seminomatous germ cell tumour (NSGCT) based on histology; this distinction determines staging workup and treatment pathway.",
+      "path": "Testicular / Histology",
+      "section": "Histology",
+      "pills": ["histology"],
+      "required": true,
+      "options": [
+        { "id": "seminoma", "label": "Seminoma", "sets": { "scenario": "seminoma" } },
+        { "id": "nsgct", "label": "Non-seminomatous germ cell tumour (NSGCT)", "sets": { "scenario": "nsgct" } }
+      ]
+    },
+    {
+      "id": "n_test_sem_stage",
+      "linkId": "test_sem_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Seminoma stage",
+      "title": "Seminoma stage",
+      "description": "Stage I seminoma is confined to the testis with no nodal or distant spread and is typically managed with adjuvant therapy after orchiectomy. Stage II-III seminoma involves retroperitoneal nodal or distant disease and is treated as advanced disease.",
+      "path": "Testicular / Seminoma / Stage",
+      "section": "Staging",
+      "pills": ["staging", "seminoma"],
+      "required": true,
+      "options": [
+        { "id": "early", "label": "Stage I (adjuvant)", "sets": { "scenario": "seminoma-I" } },
+        { "id": "advanced", "label": "Stage II-III (advanced)", "sets": { "scenario": "seminoma-adv" } }
+      ]
+    },
+    {
+      "id": "n_test_nsgct_risk",
+      "linkId": "test_nsgct_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "NSGCT risk group (IGCCCG)",
+      "title": "NSGCT risk group (IGCCCG)",
+      "description": "The IGCCCG risk classification stratifies metastatic NSGCT into good, intermediate, and poor risk groups based on primary tumour site, presence of non-pulmonary visceral metastases, and serum tumour marker levels (AFP, hCG, LDH), guiding chemotherapy intensity.",
+      "path": "Testicular / NSGCT / Risk",
+      "section": "Risk stratification",
+      "pills": ["risk", "IGCCCG", "NSGCT"],
+      "required": true,
+      "options": [
+        { "id": "good", "label": "Good risk", "sets": { "scenario": "nsgct-good" } },
+        { "id": "poor", "label": "Intermediate / poor risk", "sets": { "scenario": "nsgct-poor" } }
+      ]
+    },
+    {
+      "id": "n_tx_test_sem_early",
+      "linkId": "tx_test_sem_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Stage I seminoma: adjuvant carboplatin",
+      "title": "Stage I seminoma: adjuvant carboplatin",
+      "description": "Stage I seminoma after orchiectomy - adjuvant carboplatin is an option to reduce relapse risk (surveillance and radiotherapy are alternatives). Physician selects.",
+      "path": "Testicular / Treatment / Seminoma stage I",
+      "section": "Treatment",
+      "pills": ["seminoma", "adjuvant", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-seminoma-carboplatin"]
+    },
+    {
+      "id": "n_tx_test_sem_adv",
+      "linkId": "tx_test_sem_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Advanced seminoma: cisplatin-based chemotherapy",
+      "title": "Advanced seminoma: cisplatin-based chemotherapy",
+      "description": "Stage II-III (advanced) seminoma - cisplatin-based combination chemotherapy is the systemic treatment backbone. Physician selects.",
+      "path": "Testicular / Treatment / Seminoma advanced",
+      "section": "Treatment",
+      "pills": ["seminoma", "advanced", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
+    },
+    {
+      "id": "n_tx_test_nsgct_good",
+      "linkId": "tx_test_nsgct_good",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Good-risk NSGCT: BEP / EP",
+      "title": "Good-risk NSGCT: BEP / EP",
+      "description": "Good-risk NSGCT by IGCCCG criteria - cisplatin-based combination chemotherapy (BEP or EP) is standard first-line treatment. Physician selects.",
+      "path": "Testicular / Treatment / NSGCT good risk",
+      "section": "Treatment",
+      "pills": ["NSGCT", "good-risk", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
+    },
+    {
+      "id": "n_tx_test_nsgct_poor",
+      "linkId": "tx_test_nsgct_poor",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Intermediate/poor-risk NSGCT: BEP / VIP",
+      "title": "Intermediate/poor-risk NSGCT: BEP / VIP",
+      "description": "Intermediate or poor-risk NSGCT by IGCCCG criteria - cisplatin-based combination chemotherapy (BEP or VIP) is standard first-line treatment, with regimen intensity guided by risk group. Physician selects.",
+      "path": "Testicular / Treatment / NSGCT intermediate-poor risk",
+      "section": "Treatment",
+      "pills": ["NSGCT", "poor-risk", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-testicular-bep", "gu-testicular-vip"]
+    }
+  ],
+  "links": [
+    { "id": "l_test_hist_seminoma", "from": "n_test_hist", "to": "n_test_sem_stage", "fromOptions": ["seminoma"], "linkCategory": "conditional" },
+    { "id": "l_test_hist_nsgct", "from": "n_test_hist", "to": "n_test_nsgct_risk", "fromOptions": ["nsgct"], "linkCategory": "conditional" },
+    { "id": "l_test_sem_stage_early", "from": "n_test_sem_stage", "to": "n_tx_test_sem_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_test_sem_stage_advanced", "from": "n_test_sem_stage", "to": "n_tx_test_sem_adv", "fromOptions": ["advanced"], "linkCategory": "conditional" },
+    { "id": "l_test_nsgct_risk_good", "from": "n_test_nsgct_risk", "to": "n_tx_test_nsgct_good", "fromOptions": ["good"], "linkCategory": "conditional" },
+    { "id": "l_test_nsgct_risk_poor", "from": "n_test_nsgct_risk", "to": "n_tx_test_nsgct_poor", "fromOptions": ["poor"], "linkCategory": "conditional" }
+  ]
+}
