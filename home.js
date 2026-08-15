@@ -733,7 +733,7 @@
         return '<button class="hv-tile' + (pri ? ' pri' : '') + '" data-mi="' + act + '">' + svg(icon) +
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
       }
-      var oncoOn = false; try { oncoOn = !!(window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool && SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) {}
+      var oncoOn = false; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") === "1"); } catch (e) {}
       openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
         tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
@@ -1366,7 +1366,7 @@
     { act: "oncohome", ic: "oncology", tt: "Onco", sub: "Search, drugs & scores", defOn: false,
       eligible: function () { try { return !!(window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool && SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } } },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
-      eligible: function () { try { return !!(window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool && SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) { return false; } } },
+      eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") === "1"; } catch (e) { return false; } } },
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
