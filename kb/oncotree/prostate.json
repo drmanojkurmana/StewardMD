@@ -45,7 +45,8 @@
       "options": [
         { "id": "standard", "label": "Standard ARPI / taxane", "setsValue": null, "pills": ["ARPI/taxane"] },
         { "id": "hrr", "label": "HRR / BRCA mutation (PARP inhibitor)", "sets": { "biomarkers.HRR": "positive" }, "pills": ["HRR+"] },
-        { "id": "psma", "label": "PSMA-positive (radioligand therapy)", "sets": { "biomarkers.PSMA": "positive" }, "pills": ["PSMA+"] }
+        { "id": "psma", "label": "PSMA-positive (radioligand therapy)", "sets": { "biomarkers.PSMA": "positive" }, "pills": ["PSMA+"] },
+        { "id": "unk", "label": "Not yet determined", "setsValue": null }
       ]
     },
     {
@@ -56,7 +57,7 @@
       "template": "end",
       "name": "Localized prostate",
       "title": "Localized / regional: androgen-deprivation therapy",
-      "description": "Androgen-deprivation therapy combined with radiation for localized/regional disease. Physician selects.",
+      "description": "For intermediate- / high-risk localized or regional disease, androgen-deprivation therapy combined with radiation. Low-risk localized disease often warrants active surveillance and may not require systemic therapy - clinical judgement applies. Physician selects.",
       "path": "Prostate / Treatment / Localized",
       "section": "Treatment",
       "pills": ["localized", "treatment"],
