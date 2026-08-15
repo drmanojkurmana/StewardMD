@@ -57,6 +57,33 @@ test("LUNG: SCLC + mesothelioma protocols isolated to their pathway", () => {
   ["meso-cis-pemetrexed", "meso-nivo-ipi"].forEach(id => refOnlyIn(lung, id, ["n_tx_meso"]));
 });
 
+// Biomarker-gated agents (PARP / RET / single-agent IO / radioligand) must live ONLY in the node whose
+// upstream answer establishes the gate - the recommender does NOT enforce HRD/RET/PD-L1/EGFR, so this
+// ref-placement net is the backstop (R1 lung A3 + ovarian A1: a future mis-route fails HERE, not in-app).
+const G = {}; ["ovarian", "prostate", "thyroid", "headneck", "colorectal", "melanoma", "lung"].forEach(g => {
+  G[g] = JSON.parse(readFileSync(join(ROOT, "kb/oncotree", g + ".json"), "utf8"));
+});
+test("BIOMARKER-GATED: PARP / RET / radioligand / single-agent IO only in their gated node", () => {
+  // ovarian: PARP inhibitors only in the BRCA/HRD-positive maintenance node (never HR-proficient)
+  refOnlyIn(G.ovarian, "gyn-olaparib-maint", ["n_tx_ov_hrd"]);
+  refOnlyIn(G.ovarian, "gyn-niraparib-maint", ["n_tx_ov_hrd"]);
+  // prostate: PARP + PSMA radioligand only in their mCRPC biomarker branches
+  refOnlyIn(G.prostate, "gu-prostate-olaparib", ["n_tx_prostate_parp"]);
+  refOnlyIn(G.prostate, "gu-prostate-lu177-psma", ["n_tx_prostate_lu177"]);
+  // thyroid: BRAF/MEK only in anaplastic, RET inhibitor only in medullary
+  refOnlyIn(G.thyroid, "thyroid-anaplastic-dab-tram", ["n_tx_thy_anaplastic"]);
+  refOnlyIn(G.thyroid, "thyroid-medullary-selpercatinib", ["n_tx_thy_medullary"]);
+  // head & neck: single-agent pembrolizumab only in the PD-L1 CPS>=1 node
+  refOnlyIn(G.headneck, "hn-pembro-mono", ["n_tx_hn_io"]);
+  // colorectal: immunotherapy only in the dMMR/MSI-high node
+  refOnlyIn(G.colorectal, "gi-crc-msi-pembro", ["n_tx_crc_msi"]);
+  // melanoma: BRAF-targeted only in the BRAF-mutant node
+  refOnlyIn(G.melanoma, "skin-melanoma-braf-mek-dab-tram", ["n_tx_mel_braf"]);
+  // lung: driver TKIs only in their driver nodes
+  refOnlyIn(G.lung, "lung-osimertinib", ["n_tx_nsclc_egfr"]);
+  refOnlyIn(G.lung, "lung-alectinib", ["n_tx_nsclc_alk"]);
+});
+
 // Walk EVERY answer-path from start; at each reached treatment node, the recommend output must never
 // contradict the captured phenotype (no HER2-directed for HER2-neg; no endocrine for HR-neg; no
 // pemetrexed for squamous). This is the generic net that catches wrong-branch refs on any graph.

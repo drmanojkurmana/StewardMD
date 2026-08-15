@@ -1,0 +1,83 @@
+{
+  "guideline": "myeloma",
+  "title": "Multiple Myeloma",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "plasma_cell_disorders",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "ONCOTREE navigator DRAFT for multiple myeloma. Captures treatment phase (newly diagnosed, maintenance, relapsed/refractory) as a scenario tag, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Multiple Myeloma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Multiple Myeloma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_mm_phase"],
+  "nodes": [
+    {
+      "id": "n_mm_phase",
+      "linkId": "mm_phase",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Treatment phase",
+      "title": "Treatment phase",
+      "description": "Multiple myeloma management differs by treatment phase - newly diagnosed disease requiring induction therapy, post-induction maintenance therapy, or relapsed/refractory disease after prior treatment.",
+      "path": "Myeloma / Treatment phase",
+      "section": "Treatment planning",
+      "pills": ["phase", "treatment-planning"],
+      "required": true,
+      "options": [
+        { "id": "nd", "label": "Newly diagnosed", "sets": { "scenario": "newly-diagnosed" } },
+        { "id": "maint", "label": "Maintenance", "sets": { "scenario": "maintenance" } },
+        { "id": "relapsed", "label": "Relapsed / refractory", "sets": { "scenario": "relapsed" } }
+      ]
+    },
+    {
+      "id": "n_tx_mm_nd",
+      "linkId": "tx_mm_nd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Newly diagnosed: triplet / quadruplet induction",
+      "title": "Newly diagnosed: triplet / quadruplet induction",
+      "description": "Newly diagnosed multiple myeloma - triplet or quadruplet induction combining a proteasome inhibitor, immunomodulatory agent, and/or anti-CD38 antibody with dexamethasone is standard first-line therapy, with eligibility for autologous stem cell transplant guiding regimen choice. Physician selects.",
+      "path": "Myeloma / Treatment / Newly diagnosed",
+      "section": "Treatment",
+      "pills": ["newly-diagnosed", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["heme-mm-vrd", "heme-mm-krd", "heme-mm-dara-rd"]
+    },
+    {
+      "id": "n_tx_mm_maint",
+      "linkId": "tx_mm_maint",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Maintenance: lenalidomide",
+      "title": "Maintenance: lenalidomide",
+      "description": "Post-induction (including post-transplant) maintenance therapy - lenalidomide maintenance is standard to prolong disease control. Physician selects.",
+      "path": "Myeloma / Treatment / Maintenance",
+      "section": "Treatment",
+      "pills": ["maintenance", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["heme-mm-lenalidomide-maintenance"]
+    },
+    {
+      "id": "n_tx_mm_relapsed",
+      "linkId": "tx_mm_relapsed",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Relapsed/refractory: pomalidomide-dexamethasone",
+      "title": "Relapsed/refractory: pomalidomide-dexamethasone",
+      "description": "Relapsed or refractory multiple myeloma - pomalidomide with dexamethasone is an option for disease progressing after prior immunomodulatory- and proteasome inhibitor-based therapy. Physician selects.",
+      "path": "Myeloma / Treatment / Relapsed-refractory",
+      "section": "Treatment",
+      "pills": ["relapsed", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["heme-mm-pomalidomide-dex"]
+    }
+  ],
+  "links": [
+    { "id": "l_mm_phase_nd", "from": "n_mm_phase", "to": "n_tx_mm_nd", "fromOptions": ["nd"], "linkCategory": "conditional" },
+    { "id": "l_mm_phase_maint", "from": "n_mm_phase", "to": "n_tx_mm_maint", "fromOptions": ["maint"], "linkCategory": "conditional" },
+    { "id": "l_mm_phase_relapsed", "from": "n_mm_phase", "to": "n_tx_mm_relapsed", "fromOptions": ["relapsed"], "linkCategory": "conditional" }
+  ]
+}

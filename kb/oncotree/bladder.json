@@ -1,0 +1,118 @@
+{
+  "guideline": "bladder",
+  "title": "Bladder / Urothelial Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "bladder_cancer",
+  "status": "draft",
+  "matchDisease": false,
+  "provenanceNote": "ONCOTREE navigator DRAFT for urothelial bladder cancer. Captures clinical setting (muscle-invasive peri-operative vs metastatic/locally advanced) and, for metastatic disease, line of therapy, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Bladder Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Bladder Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_bl_setting"],
+  "nodes": [
+    {
+      "id": "n_bl_setting",
+      "linkId": "bl_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Setting",
+      "title": "Setting",
+      "description": "Muscle-invasive urothelial bladder cancer is treated with peri-operative (neoadjuvant or adjuvant) platinum-based chemotherapy around definitive local therapy; metastatic or locally advanced disease is treated with systemic therapy alone, sequenced by line.",
+      "path": "Bladder Cancer / Setting",
+      "section": "Staging",
+      "pills": ["setting"],
+      "required": true,
+      "options": [
+        { "id": "mibc", "label": "Muscle-invasive (peri-operative)", "sets": { "scenario": "mibc" } },
+        { "id": "metastatic", "label": "Metastatic / locally advanced", "sets": { "scenario": "metastatic" } }
+      ]
+    },
+    {
+      "id": "n_bl_line",
+      "linkId": "bl_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Metastatic line of therapy",
+      "title": "Metastatic line of therapy",
+      "description": "Metastatic/locally advanced urothelial cancer is sequenced by line: first-line platinum-based chemotherapy, switch-maintenance therapy after response to first-line platinum, or later-line therapy after progression.",
+      "path": "Bladder Cancer / Metastatic / Line of therapy",
+      "section": "Treatment",
+      "pills": ["line of therapy"],
+      "required": true,
+      "options": [
+        { "id": "firstline", "label": "First-line platinum", "sets": { "scenario": "1L" } },
+        { "id": "maint", "label": "Switch maintenance (after platinum response)", "sets": { "scenario": "maintenance" } },
+        { "id": "later", "label": "Later-line", "sets": { "scenario": "later" } }
+      ]
+    },
+    {
+      "id": "n_tx_bl_mibc",
+      "linkId": "tx_bl_mibc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Muscle-invasive: neoadjuvant / adjuvant platinum chemotherapy",
+      "title": "Muscle-invasive: neoadjuvant / adjuvant platinum chemotherapy",
+      "description": "Muscle-invasive urothelial bladder cancer - peri-operative platinum-based combination chemotherapy given neoadjuvantly or adjuvantly around definitive local therapy. Physician selects the specific regimen.",
+      "path": "Bladder Cancer / Treatment / Peri-operative chemotherapy",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-uro-gem-cisplatin", "gu-uro-ddmvac"]
+    },
+    {
+      "id": "n_tx_bl_1l",
+      "linkId": "tx_bl_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic first-line: platinum chemotherapy",
+      "title": "Metastatic first-line: platinum chemotherapy",
+      "description": "Metastatic/locally advanced urothelial cancer, first-line - platinum-based combination chemotherapy. Physician selects the specific regimen.",
+      "path": "Bladder Cancer / Treatment / First-line chemotherapy",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-uro-gem-cisplatin", "gu-uro-ddmvac"]
+    },
+    {
+      "id": "n_tx_bl_maint",
+      "linkId": "tx_bl_maint",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic switch-maintenance: avelumab",
+      "title": "Metastatic switch-maintenance: avelumab",
+      "description": "Metastatic/locally advanced urothelial cancer with response or stable disease after first-line platinum-based chemotherapy - switch-maintenance immunotherapy.",
+      "path": "Bladder Cancer / Treatment / Switch maintenance",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-uro-avelumab-maintenance"]
+    },
+    {
+      "id": "n_tx_bl_later",
+      "linkId": "tx_bl_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic later-line: enfortumab vedotin",
+      "title": "Metastatic later-line: enfortumab vedotin",
+      "description": "Metastatic/locally advanced urothelial cancer after progression on prior platinum-based chemotherapy (and/or immunotherapy) - later-line antibody-drug conjugate.",
+      "path": "Bladder Cancer / Treatment / Later-line",
+      "section": "Treatment",
+      "pills": ["treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gu-uro-enfortumab-vedotin"]
+    }
+  ],
+  "links": [
+    { "id": "l_bl_setting_mibc", "from": "n_bl_setting", "to": "n_tx_bl_mibc", "fromOptions": ["mibc"], "linkCategory": "conditional" },
+    { "id": "l_bl_setting_metastatic", "from": "n_bl_setting", "to": "n_bl_line", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_bl_line_firstline", "from": "n_bl_line", "to": "n_tx_bl_1l", "fromOptions": ["firstline"], "linkCategory": "conditional" },
+    { "id": "l_bl_line_maint", "from": "n_bl_line", "to": "n_tx_bl_maint", "fromOptions": ["maint"], "linkCategory": "conditional" },
+    { "id": "l_bl_line_later", "from": "n_bl_line", "to": "n_tx_bl_later", "fromOptions": ["later"], "linkCategory": "conditional" }
+  ]
+}

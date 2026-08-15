@@ -1,0 +1,101 @@
+{
+  "guideline": "uppergi",
+  "title": "Gastric / Esophageal Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "upper_gastrointestinal_tract_cancers",
+  "matchDisease": false,
+  "status": "draft",
+  "provenanceNote": "ONCOTREE navigator DRAFT for upper gastrointestinal (gastric/gastroesophageal-junction and esophageal) cancer. Captures primary site and, for gastric disease, resectable vs metastatic setting, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. HER2 / MSI / PD-L1 testing further individualise metastatic therapy and are considered separately. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Gastric / Esophageal and Esophagogastric Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Gastric / Esophageal cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_ugi_site"],
+  "nodes": [
+    {
+      "id": "n_ugi_site",
+      "linkId": "ugi_site",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Primary site",
+      "title": "Primary site",
+      "description": "Gastric / gastroesophageal-junction and esophageal cancers follow related but distinct pathways.",
+      "path": "Upper GI / Site",
+      "section": "Diagnosis",
+      "pills": ["site"],
+      "required": true,
+      "options": [
+        { "id": "gastric", "label": "Gastric / gastroesophageal junction", "sets": { "scenario": "gastric" }, "pills": ["gastric/GEJ"] },
+        { "id": "esophageal", "label": "Esophageal", "sets": { "scenario": "esophageal" }, "pills": ["esophageal"] }
+      ]
+    },
+    {
+      "id": "n_ugi_gastric_setting",
+      "linkId": "ugi_gastric_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Gastric setting",
+      "title": "Gastric setting",
+      "description": "Resectable gastric/GEJ disease is treated with peri-operative or adjuvant chemotherapy (curative intent); metastatic/unresectable disease is treated with palliative intent, individualised by HER2/MSI/PD-L1.",
+      "path": "Upper GI / Gastric / Setting",
+      "section": "Staging",
+      "pills": ["setting"],
+      "required": true,
+      "options": [
+        { "id": "resectable", "label": "Resectable (peri-operative / adjuvant)", "sets": { "scenario": "gastric-resectable" }, "pills": ["resectable"] },
+        { "id": "metastatic", "label": "Metastatic / unresectable", "sets": { "scenario": "gastric-metastatic" }, "pills": ["metastatic"] }
+      ]
+    },
+    {
+      "id": "n_tx_ugi_gastric_resect",
+      "linkId": "tx_ugi_gastric_resect",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Resectable gastric",
+      "title": "Resectable gastric/GEJ: peri-operative or adjuvant chemotherapy",
+      "description": "Peri-operative FLOT or adjuvant capecitabine-oxaliplatin (after D2 resection). Physician selects; the existing dose engine computes doses.",
+      "path": "Upper GI / Gastric / Resectable",
+      "section": "Treatment",
+      "pills": ["curative", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gi-flot", "gi-gastric-capox"]
+    },
+    {
+      "id": "n_tx_ugi_gastric_mets",
+      "linkId": "tx_ugi_gastric_mets",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Metastatic gastric",
+      "title": "Metastatic gastric/GEJ: chemotherapy (+ immunotherapy if eligible)",
+      "description": "Fluoropyrimidine-platinum chemotherapy; add pembrolizumab for PD-L1-CPS-positive (HER2-negative) or MSI-high disease. HER2-positive disease adds trastuzumab (considered separately). Physician selects.",
+      "path": "Upper GI / Gastric / Metastatic",
+      "section": "Treatment",
+      "pills": ["metastatic", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gi-gastric-folfox", "gi-gastric-pembro"]
+    },
+    {
+      "id": "n_tx_ugi_esophageal",
+      "linkId": "tx_ugi_esophageal",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Esophageal",
+      "title": "Esophageal: chemoradiation / adjuvant immunotherapy",
+      "description": "Neoadjuvant chemoradiation (CROSS) for locally-advanced resectable esophageal cancer; adjuvant nivolumab for residual pathologic disease after neoadjuvant chemoradiation and resection. Physician selects.",
+      "path": "Upper GI / Esophageal",
+      "section": "Treatment",
+      "pills": ["esophageal", "treatment"],
+      "showsRecommendation": true,
+      "protocolRefs": ["gi-esophageal-crt-cross", "gi-esophageal-nivolumab-adjuvant"]
+    }
+  ],
+  "links": [
+    { "id": "l_ugi_gastric", "from": "n_ugi_site", "to": "n_ugi_gastric_setting", "fromOptions": ["gastric"], "linkCategory": "conditional" },
+    { "id": "l_ugi_esoph", "from": "n_ugi_site", "to": "n_tx_ugi_esophageal", "fromOptions": ["esophageal"], "linkCategory": "conditional" },
+    { "id": "l_ugi_resect", "from": "n_ugi_gastric_setting", "to": "n_tx_ugi_gastric_resect", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_ugi_mets", "from": "n_ugi_gastric_setting", "to": "n_tx_ugi_gastric_mets", "fromOptions": ["metastatic"], "linkCategory": "conditional" }
+  ]
+}

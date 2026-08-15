@@ -28,8 +28,16 @@
     { id: "breast", title: "Breast Cancer", sub: "Invasive - HER2 / HR pathways", icon: "female", ready: true },
     { id: "lung", title: "Lung Cancer", sub: "NSCLC drivers / immunotherapy, SCLC, mesothelioma", icon: "pulmonology", ready: true },
     { id: "colorectal", title: "Colorectal Cancer", sub: "Adjuvant / metastatic; MMR-MSI directed", icon: "gastroenterology", ready: true },
-    { id: "prostate", title: "Prostate Cancer", sub: "Localized / mCSPC / mCRPC; HRR + PSMA directed", icon: "man", ready: true },
-    { id: "melanoma", title: "Melanoma (cutaneous)", sub: "BRAF-targeted vs immunotherapy", icon: "dermatology", ready: true }
+    { id: "uppergi", title: "Gastric / Esophageal Cancer", sub: "Resectable / metastatic; HER2-MSI-PD-L1", icon: "gastroenterology", ready: true },
+    { id: "prostate", title: "Prostate Cancer", sub: "Localized / mCSPC / mCRPC; HRR + PSMA", icon: "man", ready: true },
+    { id: "bladder", title: "Bladder / Urothelial", sub: "Muscle-invasive / metastatic by line", icon: "water_drop", ready: true },
+    { id: "rcc", title: "Renal Cell Carcinoma", sub: "Advanced clear-cell; IO-combo vs TKI", icon: "nephrology", ready: true },
+    { id: "testicular", title: "Testicular (germ cell)", sub: "Seminoma / NSGCT by risk", icon: "man", ready: true },
+    { id: "melanoma", title: "Melanoma (cutaneous)", sub: "BRAF-targeted vs immunotherapy", icon: "dermatology", ready: true },
+    { id: "headneck", title: "Head & Neck Cancer", sub: "Locoregional / recurrent-metastatic; PD-L1", icon: "face", ready: true },
+    { id: "ovarian", title: "Ovarian Cancer", sub: "Primary chemo; PARP maintenance by HRD", icon: "female", ready: true },
+    { id: "myeloma", title: "Multiple Myeloma", sub: "Newly diagnosed / maintenance / relapsed", icon: "bloodtype", ready: true },
+    { id: "thyroid", title: "Thyroid Cancer", sub: "Anaplastic (BRAF) / medullary (RET)", icon: "biotech", ready: true }
   ];
 
   var st = {
