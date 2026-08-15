@@ -467,7 +467,7 @@
       var tog = tx ? '<span class="oe-vc-vtog">' +
         '<button class="oe-vc-vt' + (qa ? "" : " on") + '" data-oe-act="notes-view:raw">Raw</button>' +
         '<button class="oe-vc-vt' + (qa ? " on" : "") + '" data-oe-act="notes-view:qa">Q&amp;A</button></span>' : "";
-      var acts = (edit && !qa && tx) ? '<span class="oe-vc-notes-acts">' +
+      var acts = (edit && tx) ? '<span class="oe-vc-notes-acts">' +
         '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy notes">' + ms("content_copy") + "Copy</button>" +
         '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button></span>" : "";
       var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>Clinical notes</span>" + tog + acts + "</div>";
@@ -1033,8 +1033,28 @@
   }
   function copyNotes() {
     var t = st.voiceTranscript || ""; if (!t) { toast("Nothing to copy"); return; }
-    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { toast("Notes copied"); }, function () { toast("Copy failed"); }); return; } } catch (e) {}
-    toast("Copy not available on this device");
+    // The native Android WebView denies the async Clipboard API ("Write permission denied"), so fall back
+    // to the legacy textarea + execCommand path — it works here because copyNotes runs inside the Copy
+    // tap (a user gesture), which is exactly what execCommand("copy") requires.
+    function legacyCopy() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = t; ta.setAttribute("readonly", "");
+        ta.style.position = "fixed"; ta.style.top = "0"; ta.style.left = "0"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        try { ta.setSelectionRange(0, t.length); } catch (e) {}
+        var ok = false; try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        toast(ok ? "Notes copied" : "Copy not available on this device");
+      } catch (e) { toast("Copy not available on this device"); }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function () { toast("Notes copied"); }, legacyCopy);
+        return;
+      }
+    } catch (e) {}
+    legacyCopy();
   }
   // Fold the whole consult transcript into the assessment's Present history (append, never overwrite),
   // then jump to the Assessment tab so the doctor sees it landed.
