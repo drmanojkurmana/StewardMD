@@ -59,4 +59,12 @@
 
   // Manual hook the app can call for handled-but-notable failures: window.SMD_logError(message, stack?)
   window.SMD_logError = function (message, stack) { post({ level: "warn", message: String(message || ""), stack: String(stack || ""), url: (location && location.pathname) || "" }); };
+
+  // Privacy-safe product analytics: window.SMD_track("event") counts an ALLOW-LISTED event server-side
+  // (server drops anything not on the list). Never pass PHI/free-text. Fire-and-forget.
+  window.SMD_track = function (event) {
+    try { fetch("/api/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ event: String(event || "") }), keepalive: true }).catch(function () {}); } catch (e) {}
+  };
+  // auto app_open once per launch, after deferred scripts (native-bridge routes /api on native by then)
+  try { window.addEventListener("load", function () { window.SMD_track("app_open"); }); } catch (e) {}
 })();

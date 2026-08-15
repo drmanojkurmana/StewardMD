@@ -1956,15 +1956,15 @@
   }
   function loadAiControl() {
     var host = document.getElementById("aicBody"); if (!host) return;
-    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health"), aiAdminFetch("/admin/clientlog"), aiAdminFetch("/admin/config")]).then(function (res) {
+    Promise.all([aiAdminFetch("/admin/model"), aiAdminFetch("/admin/ai-usage"), aiAdminFetch("/admin/limits"), aiAdminFetch("/admin/audit"), aiAdminFetch("/health"), aiAdminFetch("/admin/clientlog"), aiAdminFetch("/admin/config"), aiAdminFetch("/admin/analytics")]).then(function (res) {
       if (!host) return;
       if (!res[0] && !res[1] && !res[2]) { host.innerHTML = '<div class="aic-err">Admin data unavailable. Owner sign-in required.</div>'; return; }
-      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || [], (res[6] && res[6].config) || {});
+      host.innerHTML = renderAiControl(res[0] || {}, res[1] || {}, res[2] || {}, (res[3] && res[3].audit) || [], res[4] || {}, (res[5] && res[5].errors) || [], (res[6] && res[6].config) || {}, res[7] || {});
       wireAiControl(host);
     });
   }
   var AIC_LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", ecg: "ECG (KardiQ X)", thorex: "Chest X-ray", ocr: "Photo scans (Vision)", stt: "Voice", tts: "Text-to-speech", fundx: "FundX", followcare: "FollowCare", kb: "Knowledge Base" };
-  function renderAiControl(model, usage, limits, audit, health, clientErrors, remoteConfig) {
+  function renderAiControl(model, usage, limits, audit, health, clientErrors, remoteConfig, analytics) {
     var eff = model.effective || "—", allowed = model.allowed || [], rates = model.rates || {};
     // 0a) SYSTEM HEALTH (top, at-a-glance): AI failures + error rate + client crashes + active doctors,
     // computed from data already fetched (globalUsageReport + the client-error telemetry).
@@ -2024,6 +2024,13 @@
         '<div class="aic-note">' + aiCtlEsc(e.level || "error") + ' &middot; ' + aiCtlEsc(e.platform || "?") + ' &middot; ' + aiCtlEsc(e.build || "?") + ' &middot; ' + aiCtlEsc(e.url || "") +
         (first ? ' &middot; ' + aiCtlEsc(first.slice(0, 90)) : "") + '</div></div>';
     }).join("");
+    h += '</div>';
+    // 2d) Usage analytics — privacy-safe allow-listed event counts (last 14 days)
+    var an = analytics || {}, ant = an.totals || {};
+    var akeys = Object.keys(ant).sort(function (a, b) { return ant[b] - ant[a]; });
+    h += '<div class="aic-sec"><div class="aic-h">Usage analytics (14 days)</div>';
+    if (!akeys.length) h += '<div class="aic-note">No events yet. (window.SMD_track fires allow-listed events; app_open auto-fires on launch.)</div>';
+    else { h += '<div class="aic-note">' + (an.grandTotal || 0) + ' events total</div>' + akeys.map(function (k) { return '<div class="aic-row"><div class="h"><span>' + aiCtlEsc(k) + '</span><span class="u">' + ant[k] + '</span></div></div>'; }).join(""); }
     h += '</div>';
     // 2c) Remote config — fleet controls (force-upgrade floor, maintenance, banners, server flags)
     var rc = remoteConfig || {};

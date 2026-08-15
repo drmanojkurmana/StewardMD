@@ -101,6 +101,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
+import { getAnalytics } from "../../_analytics.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -804,7 +805,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -817,6 +818,8 @@ export async function onRequest(context) {
       if (request.method === "POST") { await clearClientErrors(store); await auditRecord(store, "clientlog", "cleared", actorId, Date.now()); }
       return json({ errors: await getClientErrors(store) });
     }
+
+    if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));
 
     if (seg === "admin/config") {
       if (request.method === "POST") {
