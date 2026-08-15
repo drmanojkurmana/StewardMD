@@ -1555,9 +1555,6 @@ window.openExternal = function (u) {
 <script src="/clinical-vocab.js?v=gold363" defer></script>
 <script src="/icu.js?v=gold998-tl" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
-<!-- ICU at-rest encryption helper (window.SMD_ICU_CRYPTO). Flag smd_icu_encrypt (default OFF);
-     icu-collab.js checks for this global + the flag before using it, so load order is safe. -->
-<script src="/icu-crypto.js?v=gold454" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
@@ -1586,7 +1583,7 @@ window.openExternal = function (u) {
 <script src="/voice-diarize.js?v=gold1" defer></script>
 <script src="/maik-reasoning.js?v=maik3" defer></script>
 <script src="/maik-pathways.js?v=maik1" defer></script>
-<script src="/maik-ask.js?v=maikask-devon" defer></script>
+<script src="/maik-ask.js?v=maikpf" defer></script>
 <script src="/voice-scribe-ground.js?v=gold1" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
@@ -1614,7 +1611,7 @@ window.openExternal = function (u) {
 <!-- KardioX AI · ECG interpretation + learning module (additive, flag-gated smd_kardiox, DEFAULT OFF;
      enable with ?kardiox=1 or Settings). Sibling of FundX: scoped #kardioxRoot + .kx-* + SMD_KARDIOX_*
      globals + SMD_KARDIOX_PROVIDERS seam. When the flag is off, kardiox.js is a complete no-op. -->
-<script src="/kardiox-flags.js?v=kx12-devon" defer></script>
+<script src="/kardiox-flags.js?v=kx11" defer></script>
 <script src="/kardiox-signal.js?v=kx1" defer></script>
 <script src="/kardiox-models.js?v=kx2" defer></script>
 <script src="/kardiox-content.js?v=kx6-realimg" defer></script>
@@ -1660,7 +1657,7 @@ window.openExternal = function (u) {
      later native vision plugin swaps SMD_SKNX_VISION.analyze in without touching this load order.
      LOAD ORDER IS LOAD-BEARING: sknx-engines MUST load before sknx-providers (the provider resolves
      window.SMD_SKNX_ENGINES at call time; wrong order -> null engines in a pure browser). -->
-<script src="/sknx-flags.js?v=sknx-devon" defer></script>
+<script src="/sknx-flags.js?v=gold1085-realvision" defer></script>
 <script src="/sknx-entitlement.js?v=sx13" defer></script>
 <script src="/sknx-engines.js?v=sx13" defer></script>
 <script src="/sknx-features.js?v=sx13" defer></script>
@@ -1734,7 +1731,7 @@ window.openExternal = function (u) {
 <script src="/clinic-drive.js?v=sc1" defer></script>
 <script src="/shared-clinic.js?v=sc5" defer></script>
 <script src="/clinic-app.js?v=sc4" defer></script>
-<script src="/shared-clinic-ui.js?v=sc3-devon" defer></script>
+<script src="/shared-clinic-ui.js?v=sc2" defer></script>
 <!-- Onco Home Phase 8 P0 (flag smd_onco_home, default OFF): the reference/tool-library workbench —
      global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
      their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the
@@ -1769,6 +1766,8 @@ window.openExternal = function (u) {
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
+<!-- Motion (motion.dev vanilla API, vendored/offline) - premium spring/stagger for the OncoTree navigator; progressive enhancement (CSS transitions remain the baseline if absent). -->
+<script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
 <script src="/oncotree.js?v=ot5" defer></script>

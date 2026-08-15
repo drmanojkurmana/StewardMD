@@ -328,14 +328,40 @@
       "</div>";
   }
 
+  // ---- motion (motion.dev vanilla API, vendored /assets/vendor/motion.min.js) -------------------
+  // Premium spring/stagger entrance. Progressive enhancement: if Motion is absent, or the user prefers
+  // reduced motion, the CSS transitions in oncotree.css remain the baseline and this is a no-op.
+  function reduceMotion() { try { return D && D.defaultView && D.defaultView.matchMedia && D.defaultView.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
+  function motionRender() {
+    var M = G.Motion;
+    if (!M || !M.animate || reduceMotion()) return;
+    try {
+      var root = D.getElementById("otBody"); if (!root) return;
+      var spring = M.spring ? M.spring({ stiffness: 320, damping: 30 }) : "ease-out";
+      var cards = root.querySelectorAll(".ot-card");
+      if (cards.length) M.animate(cards, { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0)"] }, { duration: 0.5, delay: M.stagger ? M.stagger(0.06) : 0, easing: spring });
+      var step = root.querySelector(".ot-step");
+      if (step) M.animate(step, { opacity: [0, 1], transform: ["translateY(10px) scale(0.99)", "translateY(0) scale(1)"] }, { duration: 0.42, easing: spring });
+      var opts = root.querySelectorAll(".ot-step .ot-opt");
+      if (opts.length) M.animate(opts, { opacity: [0, 1], transform: ["translateX(-6px)", "translateX(0)"] }, { duration: 0.35, delay: M.stagger ? M.stagger(0.04, { start: 0.08 }) : 0, easing: "ease-out" });
+      var disease = root.querySelectorAll(".ot-disease");
+      if (disease.length) M.animate(disease, { opacity: [0, 1], transform: ["translateY(12px)", "translateY(0)"] }, { duration: 0.45, delay: M.stagger ? M.stagger(0.05) : 0, easing: spring });
+      var selIcon = root.querySelector(".ot-sel-icon");
+      if (selIcon) M.animate(selIcon, { transform: ["scale(0.4)", "scale(1)"], opacity: [0, 1] }, { duration: 0.5, easing: spring });
+      var mapRows = root.querySelectorAll(".ot-map-row");
+      if (mapRows.length) M.animate(mapRows, { opacity: [0, 1], transform: ["translateX(-8px)", "translateX(0)"] }, { duration: 0.3, delay: M.stagger ? M.stagger(0.02) : 0, easing: "ease-out" });
+    } catch (e) {}
+  }
+
   function paint() {
     var el = D && D.getElementById("smdOncoTree");
     if (!el) return;
     el.innerHTML = shellHtml();
+    motionRender();
   }
   function repaintBody() {
     var b = D && D.getElementById("otBody");
-    if (b) b.innerHTML = bodyHtml(); else paint();
+    if (b) { b.innerHTML = bodyHtml(); motionRender(); } else paint();
   }
 
   // ---- events ------------------------------------------------------------------------------------
