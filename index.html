@@ -1251,6 +1251,9 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <div class="smd-modal-section">AI-summarised drug &amp; medicine information</div>
       <p>The drug, dosage, interaction, and monograph content in StewardMD's drug database is <strong>AI-summarised and structured from official sources</strong> (openFDA / FDA, EMA, SmPC, BNF, WHO). Doses are reproduced from the source labels but may contain transcription or summarisation errors. <strong>Always verify every dose, indication, contraindication, and interaction against the primary source</strong> before prescribing. Do not rely on it as the sole basis for any prescribing decision.</p>
 
+      <div class="smd-modal-section">AI, imaging &amp; oncology features</div>
+      <p>AI output (MaiK, image and ECG analysis, oncology pathways) can be incomplete or wrong ("hallucinated") and is decision support only. Image and signal analysis is <strong>not</strong> a radiology, pathology, or cardiology report and <strong>may miss findings, including malignancy</strong>. Oncology protocols are <strong>Beta and AI-drafted</strong> and must be confirmed by a qualified oncologist. Any prescription you generate is authored and issued by you, on your own responsibility. Verify everything against primary sources before acting. See the <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/disclaimer')"><strong>full Disclaimer</strong></a>.</p>
+
       <div class="smd-modal-section">Educational purpose only</div>
       <p>StewardMD is an <strong>educational clinical reasoning aid</strong> built from published guideline references for self-study and teaching discussion. It has <strong>not been clinically validated</strong> or peer-reviewed as a direct patient care tool.</p>
 
@@ -1258,7 +1261,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <p>StewardMD does <strong>not replace</strong> clinical judgment, local antibiograms, institutional antibiotic policies, or specialist input. Always verify any recommendation independently before applying it to any patient. If a result conflicts with your clinical assessment, trust your assessment.</p>
 
       <div class="smd-modal-section">Limitation of liability</div>
-      <p>Dr. Manoj Kumar Kurmana, MaiKnowledge, and any contributors to StewardMD accept <strong>no liability</strong> for clinical decisions made using this tool. Use of StewardMD constitutes acceptance of this disclaimer in full.</p>
+      <p>MAIKNOWLEDGE LLP and any contributors to StewardMD accept <strong>no liability</strong> for clinical decisions made using this tool. Use of StewardMD constitutes acceptance of this disclaimer in full.</p>
 
       <div class="smd-modal-section">Intended users</div>
       <p>StewardMD is intended for use by <strong>qualified medical professionals only</strong> — doctors, residents, and clinical pharmacists with the ability to independently evaluate antibiotic recommendations in context.</p>
@@ -1292,7 +1295,7 @@ window.openExternal = function (u) {
       <button class="smd-modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="smd-modal-body">
-      <p class="smd-modal-effective">Version 2.0 · Effective 5 July 2026 · Operated by Dr. Manoj Kumar Kurmana</p>
+      <p class="smd-modal-effective">Version 3.1 · Effective 16 August 2026 · Operated by MAIKNOWLEDGE LLP</p>
 
       <p>StewardMD is a clinical decision-support tool for qualified healthcare professionals — not a consumer app. This is a summary; please read the <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/privacy')"><strong>full Privacy Policy</strong></a>.</p>
 
@@ -1302,14 +1305,14 @@ window.openExternal = function (u) {
       <div class="smd-modal-section">What we do NOT do</div>
       <p>We do <strong>not</strong> use advertising, analytics, or crash-reporting trackers/SDKs; we do <strong>not</strong> sell or rent your data or build ad profiles; and we do <strong>not</strong> use your clinical inputs or patient data to train AI models.</p>
 
-      <div class="smd-modal-section">AI features (optional, off by default)</div>
-      <p>"Explain" sends the content you submit to Google Cloud Vertex AI (Gemini) only to generate the response; it is not stored by us and not used to train models. "AI Vision" (app only) reads the photo <strong>entirely on your device</strong> — the image never leaves it — and only the recognised text, after obvious identifiers are automatically redacted, is sent to structure the values. You review every value.</p>
+      <div class="smd-modal-section">AI features (optional)</div>
+      <p>MaiK explanations send the content you submit to a language-model provider (by default Google Vertex AI / Gemini; some requests use Groq or another configured provider) only to generate the response; it is not stored by us and not used to train models. "AI Vision" (ICU) reads the photo <strong>entirely on your device</strong> — the image never leaves it — and only the recognised text, after obvious identifiers are automatically redacted, is sent to structure the values. Optional imaging modules (skin, chest X-ray, ECG, off by default) may send the image or trace to our hosted models (Google Cloud Run, Mumbai) with your consent. Professional verification reads your submitted certificate or ID with AI only to extract your name; the document is not stored. You review every value.</p>
 
       <div class="smd-modal-section">Ward Sync (institutional)</div>
       <p>Where offered (GITAM/GIMSR users), Ward Sync relays clinical data from your institution's system using your own institutional login. The institution is the data controller; StewardMD is a secure conduit that does not store that patient data or your institution password.</p>
 
       <div class="smd-modal-section">Providers, storage &amp; retention</div>
-      <p>We use Google (Firebase Authentication, Cloud Firestore, Vertex AI) and Cloudflare (hosting/delivery). Cloud data is stored in India (asia-south1, Mumbai). We keep your account and saved cases until you delete them; on-device data stays until you erase it; AI request content is not retained by us.</p>
+      <p>We use Google (Firebase Authentication, Cloud Firestore, Vertex AI / Gemini, Cloud Run), Groq, and Cloudflare (hosting/delivery); some AI requests may use other configured model providers (see the full policy). Cloud data is stored in India (asia-south1, Mumbai). We keep your account and saved cases until you delete them; on-device data stays until you erase it; AI request content is not retained by us.</p>
 
       <div class="smd-modal-section">Your rights</div>
       <p>Delete everything in-app (Account → <strong>Delete account &amp; data</strong>). You may request access, correction, or erasure, withdraw consent (turn off AI/notifications), and — under India's DPDP Act, 2023 — nominate another person to exercise your rights. Grievance Officer: <strong>Dr. Manoj Kumar Kurmana</strong>; you may escalate to the Data Protection Board of India.</p>
@@ -1331,7 +1334,7 @@ window.openExternal = function (u) {
       <button class="smd-modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="smd-modal-body">
-      <p class="smd-modal-effective">Version 2.0 · Effective 5 July 2026 · Operated by Dr. Manoj Kumar Kurmana</p>
+      <p class="smd-modal-effective">Version 3.1 · Effective 16 August 2026 · Operated by MAIKNOWLEDGE LLP</p>
 
       <div class="smd-modal-section">Medical disclaimer — read first</div>
       <p>StewardMD is a <strong>decision-support and educational</strong> tool. It does not practise medicine, diagnose, prescribe, or replace your clinical judgment, and creates no doctor–patient relationship. Every output — differentials, empiric guidance, doses, drug-interaction findings, antibiogram coverage, calculators, AI text — is <strong>provisional and may be wrong or out of date</strong>, and must be independently verified against the current product label, guidelines and your judgment (including dose, contraindications, allergies, and renal/hepatic/pregnancy/paediatric adjustments) before you act. <strong>Absence of a warning (e.g. no interaction alert) does not mean a combination is safe.</strong> You remain solely responsible for all clinical decisions. This is a summary — read the <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/terms')"><strong>full Terms of Use</strong></a>.</p>
@@ -1349,10 +1352,10 @@ window.openExternal = function (u) {
       <p>Verify every output against primary sources; act within your competence and the law. You are the data fiduciary for any patient information you enter — minimise identifiers and ensure lawful authority/consent.</p>
 
       <div class="smd-modal-section">Intellectual property &amp; prohibited use</div>
-      <p>StewardMD, its name, interface, and compiled knowledge base are owned by Dr. Manoj Kumar Kurmana and protected by law. Do not copy, resell, redistribute, scrape, reverse-engineer, use for direct-to-patient advice, or automate treatment without clinician review.</p>
+      <p>StewardMD, its name, interface, and compiled knowledge base are owned by MAIKNOWLEDGE LLP and protected by law. Do not copy, resell, redistribute, scrape, reverse-engineer, use for direct-to-patient advice, or automate treatment without clinician review.</p>
 
       <div class="smd-modal-section">Warranty &amp; liability</div>
-      <p>The service is provided "as is" and "as available", without warranties of any kind. To the maximum extent permitted by law, StewardMD and Dr. Manoj Kumar Kurmana are not liable for any clinical decision, patient outcome, or indirect or consequential loss arising from use of the service. You use it at your own professional discretion and risk.</p>
+      <p>The service is provided "as is" and "as available", without warranties of any kind. To the maximum extent permitted by law, StewardMD and MAIKNOWLEDGE LLP are not liable for any clinical decision, patient outcome, or indirect or consequential loss arising from use of the service. You use it at your own professional discretion and risk.</p>
 
       <div class="smd-modal-section">Governing law &amp; contact</div>
       <p>Governed by the laws of India; jurisdiction: courts at Visakhapatnam, Andhra Pradesh, India. Report inaccurate/unsafe content or ask questions: <a href="mailto:privacy@stewardmd.in">privacy@stewardmd.in</a> · Full terms: <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/terms')">stewardmd.in/terms</a></p>
