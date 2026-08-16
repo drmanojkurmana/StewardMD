@@ -7,10 +7,10 @@ google-generativeai>=0.8
 # --- GPU models (installed on the RunPod box; large) ---
 torch>=2.3
 torchaudio>=2.3
-transformers>=4.44
+transformers>=4.44,<5
 parler-tts @ git+https://github.com/huggingface/parler-tts.git
 sentencepiece>=0.2
 soundfile>=0.12
 # IndicConformer's remote code (trust_remote_code) runs ONNX inference — exact pins from its model card.
 onnx>=1.16
-onnxruntime-gpu==1.20.1
+onnxruntime-gpu==1.20.2
