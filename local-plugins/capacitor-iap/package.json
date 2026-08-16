@@ -1,0 +1,10 @@
+{
+  "name": "@stewardmd/capacitor-iap",
+  "version": "1.0.0",
+  "description": "Minimal StoreKit 2 in-app-purchase bridge for StewardMD Pro (iOS 15+). Fetches products, runs a purchase and returns the verified transaction id; the server (functions/_iap.js) re-validates it via the App Store Server API and grants the Pro entitlement. iOS-only for now; Android Play Billing added later.",
+  "capacitor": { "ios": { "src": "ios" } },
+  "files": ["ios/Sources", "Package.swift", "package.json"],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_note": "iOS-only StoreKit 2. Requires the App Store Connect Paid Applications agreement to be active and the subscription products (in.stewardmd.pro.monthly / in.stewardmd.pro.annual) to exist before purchases work. Device-test in the StoreKit sandbox before shipping."
+}

@@ -68,12 +68,59 @@
   function ctaBlock() {
     if (!fbUser()) return '<button data-pp="signin" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button>';
     if (plat() === "ios") {
-      // Native StoreKit IAP not wired yet — Apple requires it for in-app digital goods, so no PhonePe here.
+      // Native StoreKit IAP via the capacitor-iap plugin. The purchase runs in-app; the SERVER
+      // re-validates the transaction (functions/_iap.js, App Store Server API) and grants Pro. If the
+      // plugin is not in the build yet, fall back to the "coming soon" state (never PhonePe on iOS).
+      if (window.SMD_IAP && SMD_IAP.available()) {
+        return '<button data-pp="buyios" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Subscribe</button>' +
+          '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Billed through the App Store · manage or cancel anytime in Settings</div>' +
+          '<div style="text-align:center;margin-top:9px"><a data-pp="restoreios" role="button" tabindex="0" style="font:600 12px var(--sans);color:var(--teal,#0e6e63);cursor:pointer;text-decoration:underline">Restore purchases</a></div>';
+      }
       return '<button disabled style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 15px var(--sans);cursor:default">Subscriptions coming soon on iOS</button>' +
         '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">In-app purchase is being set up. Everything is free during the launch period.</div>';
     }
     return '<button data-pp="buy" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Subscribe with PhonePe</button>' +
       '<div style="font:500 11px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Secure payment via PhonePe · UPI / cards / netbanking · cancel anytime</div>';
+  }
+
+  // iOS StoreKit: buy the selected plan's product, then let the SERVER validate + grant Pro.
+  function buyIOS() {
+    var pid = (window.SMD_IAP && SMD_IAP.PRODUCTS && SMD_IAP.PRODUCTS[_plan]) || null;
+    if (!pid) { toast("Choose a plan first."); return; }
+    var btn = _root && _root.querySelector('[data-pp="buyios"]');
+    function reset() { if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; } }
+    if (btn) { btn.disabled = true; btn.textContent = "Contacting the App Store…"; }
+    SMD_IAP.purchase(pid).then(function (res) {
+      if (!res || res.cancelled) { reset(); return; }
+      if (res.pending) { toast("Purchase is pending approval."); reset(); return; }
+      if (!res.transactionId) { toast("Could not complete the purchase."); reset(); return; }
+      if (btn) btn.textContent = "Activating Pro…";
+      return api("/api/billing/iap/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ platform: "apple", productId: pid, purchaseToken: res.transactionId }) })
+        .then(function (x) {
+          if (x.s === 200 && x.d && x.d.ok && x.d.valid) {
+            toast("Pro is now active."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {}
+            refresh();
+          } else if (x.s === 501 || (x.d && x.d.error === "iap-not-configured")) {
+            toast("Purchases are not switched on yet."); reset();
+          } else {
+            toast("Could not verify the purchase. If you were charged, tap Restore or contact support."); reset();
+          }
+        });
+    }).catch(function () { toast("Purchase failed. Please try again."); reset(); });
+  }
+
+  // iOS StoreKit: restore an existing subscription (Apple requires this for auto-renewable IAP).
+  function restoreIOS() {
+    toast("Restoring…");
+    SMD_IAP.restore().then(function (ents) {
+      var e = (ents && ents[0]) || null;
+      if (!e) { toast("No purchases to restore on this Apple ID."); return; }
+      return api("/api/billing/iap/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ platform: "apple", productId: e.productId, purchaseToken: e.transactionId }) })
+        .then(function (x) {
+          if (x.s === 200 && x.d && x.d.ok && x.d.valid) { toast("Pro restored."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e2) {} refresh(); }
+          else { toast("Could not restore. Contact support if you were charged."); }
+        });
+    }).catch(function () { toast("Restore failed. Please try again."); });
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
@@ -137,6 +184,8 @@
         if (k === "plan") { _plan = b.getAttribute("data-plan"); return paint(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return buy();
+        if (k === "buyios") return buyIOS();
+        if (k === "restoreios") return restoreIOS();
         if (k === "redeem") return redeem();
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
