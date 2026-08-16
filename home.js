@@ -3021,6 +3021,10 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-tool::after{content:"›";font:800 14px/1 'Inter';margin-left:1px;opacity:.6}
 .maik-tool:hover::after{opacity:1}
 /* Phase 3 — grounding advisory (flag-gated; appears only on flagged claims) */
+.maik-fb{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
+.maik-fb-q{font:600 12px/1.3 'Inter';color:var(--mk-mut,#5a7184)}
+.maik-fb-b{font:700 12px/1 'Inter';color:var(--mk-teal,#0e6e63);background:none;border:1px solid var(--mk-bd);border-radius:999px;padding:6px 14px;cursor:pointer}
+.maik-fb-b:hover{background:var(--mk-teal,#0e6e63);color:#fff;border-color:var(--mk-teal,#0e6e63)}
 .maik-verify{margin-top:10px;font:600 11.5px/1.45 'Inter';color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:9px;padding:8px 11px}
 body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color:rgba(252,211,77,.25)}
 
@@ -3972,6 +3976,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             var _h = _live();
             maikRenderAnswer(_h, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
             try { _brainAugment(_h, pkgForKb); } catch (e) {}
+            try { _answerFeedback(_h); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
             _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
             try { scroll(); } catch (e) {}
@@ -4025,6 +4030,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               try { scroll(); } catch (e) {}
             } catch (e) {}
           }
+          // Answer feedback (👍/👎 without emoji per the icon convention) — one tap sends an anonymous
+          // allow-listed analytics event (maik_feedback_up/down); a "No" also files a gap signal so the
+          // owner sees which questions MaiK answers poorly. No PHI, no answer text leaves the device.
+          function _answerFeedback(host) {
+            try {
+              if (!host || host.querySelector(".maik-fb")) return;
+              var w = document.createElement("div"); w.className = "maik-fb";
+              var q = document.createElement("span"); q.className = "maik-fb-q"; q.textContent = "Was this helpful?"; w.appendChild(q);
+              function mk(label, kind) {
+                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + " — was this answer helpful?");
+                b.addEventListener("click", function () {
+                  try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
+                  if (kind === "down") { try { if (window.MaiKCopilot && MaiKCopilot.gapLog) MaiKCopilot.gapLog("thumbsdown", question); } catch (e) {} }
+                  q.textContent = "Thanks — noted.";
+                  try { if (up.parentNode) up.parentNode.removeChild(up); } catch (e) {}
+                  try { if (dn.parentNode) dn.parentNode.removeChild(dn); } catch (e) {}
+                });
+                return b;
+              }
+              var up = mk("Yes", "up"), dn = mk("No", "down");
+              w.appendChild(up); w.appendChild(dn); host.appendChild(w);
+            } catch (e) {}
+          }
           function _gemini() {
             try { _brainEnrichPkg(pkg); } catch (e) {}
             var _tier = maikLazyOn() ? 1 : undefined;   // lazy: first call fetches ONLY the bottom line
@@ -4035,6 +4063,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               var _h = _live();
               maikRenderAnswer(_h, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
               try { _brainAugment(_h, pkg); } catch (e) {}
+              try { _answerFeedback(_h); } catch (e) {}
               try {
                 if (maikPerfOn()) {
                   var total = ((maikNow() - _perfT0) / 1000).toFixed(1);

@@ -11,6 +11,7 @@ export const ALLOWED_EVENTS = [
   "insulin_calc", "opd_patient_open", "opd_assess_save",
   "followcare_sent", "kardiox_used", "fundx_used", "connect_pull",
   "support_ticket",
+  "maik_feedback_up", "maik_feedback_down",
 ];
 const ALLOWED = new Set(ALLOWED_EVENTS);
 function day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
