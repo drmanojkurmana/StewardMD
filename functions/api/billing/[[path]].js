@@ -21,6 +21,8 @@ import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
+import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn } from "../../_credits.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -84,7 +86,13 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);
-      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env) }, state));
+      // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
+      let credits = 0, costCap = 0;
+      try {
+        const who = await usageIdentify(request, env);
+        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); costCap = await dailyCostCap(env, kv, who.email, state && state.role); }
+      } catch (e) {}
+      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env) }, state));
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
@@ -260,6 +268,24 @@ export async function onRequest(context) {
       if (method === "POST" && sub === "create") return json({ ok: true, coupon: await createCoupon(env, body) });
       if (method === "POST" && sub === "revoke") return json(await revokeCoupon(env, body.code));
       return json({ error: "bad-coupon-request", sub, method }, 400);
+    }
+
+    // ---- AI credits + per-user daily cost cap (owner-managed). Metering key = em:<email>. ----
+    // The paid "buy credits" flow (₹50 -> ₹25 allowance) is granted by the payment webhook calling
+    // addCredits once the credits product + payment creds exist; owner can also grant/adjust here.
+    if (seg === "credits" || seg === "costcap") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email) return json({ error: "email-required" }, 400);
+      const kv = usageKv(env), key = "em:" + email;
+      if (seg === "credits") {
+        if (method === "POST" && sub === "add") return json(Object.assign({ email }, await addCredits(env, kv, key, body.purchaseInr)));   // simulate a ₹purchaseInr top-up
+        if (method === "POST" && (sub === "set" || !sub)) return json(Object.assign({ email }, await adminSetCredits(kv, key, body.inr)));  // set absolute balance (revoke = 0)
+        if (method === "GET") return json({ email, credits: await getCredits(kv, key) });
+      }
+      if (seg === "costcap" && method === "POST") return json({ email, ok: await setUserCostCap(kv, email, body.inr) });   // inr null/"" clears → env/role default
+      return json({ error: "bad-request", seg, sub, method }, 400);
     }
 
     return json({ error: "bad-request", seg, sub, method }, 400);

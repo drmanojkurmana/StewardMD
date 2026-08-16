@@ -31,6 +31,7 @@ export const AI_MODULES = {
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
 };
+import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
@@ -340,7 +341,13 @@ export async function getAudit(store) {
 // detail is layered on separately by the endpoint's own precise metering.
 export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
-  if (!q.ok) return q;                                     // at the daily cap → block
+  if (!q.ok) return q;                                     // at the per-module daily cap → block
+  // Per-user daily AI-COST cap (rupees), then prepaid credits. Inert unless AI_COST_CAP_ON=1.
+  if (costCapOn(env)) {
+    const cap = await dailyCostCap(env, store, email, null);   // role-based cap wired in Phase 4
+    const cc = await checkCostCap(env, store, doctorId, cap, now);
+    if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
+  }
   try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now); } catch (e) {}
   return q;                                                // allowed; carries used/limit/remaining
 }

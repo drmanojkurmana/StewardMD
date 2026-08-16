@@ -1099,7 +1099,10 @@ export async function onRequest(context) {
         const _who = await identify(request, env);
         const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
-        if (!_mq.ok) return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
+        if (!_mq.ok) {
+          if (_mq.reason === "ai-cost-cap") return json({ error: "quota", reason: "ai-cost-cap", resetAt: _mq.resetAt, cap: _mq.cap, dayCost: _mq.dayCost, credits: _mq.credits, message: "You've reached today's AI limit. It resets at midnight. Add credits or upgrade to keep going." }, 429);
+          return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
+        }
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
     }
   }
