@@ -25,6 +25,8 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
+import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
+import { proFromRequest } from "../../_entitlement.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
@@ -198,7 +200,21 @@ export async function onRequest(context) {
       if (!orgId) return json({ ok: false, error: "invalid" }, 200, request);
       const org = await ORG.getOrg(env, orgId);
       if (!org) return json({ ok: false, error: "not_found" }, 200, request);
-      return json(displayBoard(org, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+      const board = displayBoard(org, await boardForOrg(env, org, url.searchParams.get("date") || ""));
+      try { const b = await brandingFor(env, org.id); if (b && board.org) { board.org.logo = b.clinicLogo; if (b.clinicName) board.org.name = b.clinicName; } } catch (e) {}
+      return json(board, 200, request);
+    }
+    // White-label logo (Pro clinic): served SAME-ORIGIN, public (a logo, no PHI). GET .../branding/logo?orgId=
+    if (method === "GET" && seg === "branding") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const b = await brandingFor(env, orgId), bkt = brandBucket(env);
+      if (!b || !bkt) return json({ ok: false, error: "no_logo" }, 404, request);
+      try {
+        const obj = await bkt.get(logoKey(orgId, b.ext));
+        if (!obj) return json({ ok: false, error: "no_logo" }, 404, request);
+        const ctype = b.ext === "png" ? "image/png" : b.ext === "webp" ? "image/webp" : "image/jpeg";
+        return new Response(obj.body, { status: 200, headers: Object.assign({ "Content-Type": ctype, "Cache-Control": "public, max-age=300" }, corsHeaders(request)) });
+      } catch (e) { return json({ ok: false, error: "no_logo" }, 404, request); }
     }
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
@@ -206,6 +222,25 @@ export async function onRequest(context) {
     if (!actor) return json({ ok: false, error: "unauthorized" }, 401, request);
     if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
     const who = actor;   // compat alias: a plain doctor's actor.id === their Firebase uid
+
+    // Upload/replace a Pro clinic's white-label logo (owner/admin of the org, and must be Pro).
+    // Body = raw image bytes; query ?orgId=&name=. Stored in R2, recorded in q_org_branding.
+    if (method === "POST" && seg === "branding") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      let pro = false; try { pro = (await proFromRequest(env, request)).pro; } catch (e) {}
+      if (!pro) return json({ ok: false, error: "pro_required" }, 402, request);
+      const bkt = brandBucket(env);
+      if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
+      const ct = request.headers.get("Content-Type") || "";
+      const bytes = await request.arrayBuffer();
+      const v = validateLogo(ct, bytes.byteLength);
+      if (!v.ok) return json({ ok: false, error: v.error }, 400, request);
+      await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
+      const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
+      return json(Object.assign({ ok: true }, res), 200, request);
+    }
 
     // Role + capabilities, so the client can adapt its UI (server still re-checks every mutation).
     if (method === "GET" && seg === "whoami") {

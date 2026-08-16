@@ -7,6 +7,7 @@
  * unit-tested _queue_eta.js, so the untested surface here is thin CRUD.
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { brandingFor } from "./_clinic_branding.js";
 import { encPHI, decPHI, mintTicketToken, verifyTicketToken, ticketIdFromToken } from "./_queue.js";
 import { orderQueue, reorderSeq, isQueued, computeEtas, canTransition, isTerminal, updateStats, meanFor, mergeConfig, aggregate, DEFAULT_CONSULT_MIN } from "./_queue_eta.js";
 import { runQueueNotifications, notifyTicket } from "./_queue_notify.js";
@@ -350,8 +351,10 @@ export async function portalContext(env, token) {
   const idx = ordered.findIndex((x) => x.id === id);
   const ahead = idx < 0 ? 0 : idx;                     // people ahead (0 = you're next / being seen)
   await qAudit(env, { hospitalId: t.hospitalId, ticketId: id, actor: "patient", action: "portal_view", meta: "" });
+  const brand = (await brandingFor(env, t.hospitalId)) || {};   // Pro white-label; empty -> StewardMD default on the client
   return {
     ok: true,
+    clinicLogo: brand.clinicLogo || "", clinicName: brand.clinicName || "",
     department: session ? session.department : "", doctorName: session ? session.doctorName : "", doctorStatus: session ? session.doctorStatus : "consulting",
     status: t.status, position: idx < 0 ? 0 : idx + 1, ahead: ahead,
     etaStart: t.etaStart || 0, etaEnd: t.etaEnd || 0, confidence: t.etaConfidence || 0,

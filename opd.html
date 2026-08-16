@@ -301,6 +301,7 @@
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="staff">Staff</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="rooms">Rooms</button>':'')+
         (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="disp">Display</button>':'')+
+        (st.ownsOrg||can("staff.admin")?'<button class="ghost" id="brand">Branding</button>':'')+
         (can("queue.add")?'<button class="ghost" id="walk">+ Walk-in</button>':'')+
         '<button class="ghost" id="ref">Refresh</button>'+
       '</div>'+inner+'</div>';
@@ -311,6 +312,7 @@
     var nc=document.getElementById("clinics"); if(nc) nc.onclick=openClinics;
     var rms=document.getElementById("rooms"); if(rms) rms.onclick=openRoomsAdmin;
     var dsp=document.getElementById("disp"); if(dsp) dsp.onclick=openDisplayLink;
+    var brd=document.getElementById("brand"); if(brd) brd.onclick=openBranding;
   }
   function refresh(){ st.opd?loadDash():loadBoard(); }
   // Owner/admin: mint the login-free waiting-room display link for a wall TV/tablet.
@@ -321,6 +323,38 @@
       sheet.querySelector("#cx").onclick=close;
       sheet.querySelector("#ok").onclick=function(){ window.open(r.url,"_blank"); };
     });
+  }
+  // Pro white-label: upload the clinic's own logo (shown on the patient page, wall board + FollowCare).
+  function openBranding(){
+    var url="/api/queue/branding/logo?orgId="+encodeURIComponent(st.orgId)+"&_="+Date.now();
+    open('<h3>Clinic branding</h3>'+
+      '<p class="t" style="margin:0 0 12px">Pro clinics can show their own logo on the patient wait page, the waiting-room display and FollowCare messages, with a small "powered by StewardMD". PNG, WebP or JPG, up to 256 KB.</p>'+
+      '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><img src="'+esc(url)+'" alt="" style="height:44px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--card)" onerror="this.style.display=\'none\'"></div>'+
+      '<label>Clinic name (shown next to the logo)</label><input id="bname" placeholder="e.g. Sunrise Clinic">'+
+      '<label style="margin-top:12px">Logo image</label><input id="bfile" type="file" accept="image/png,image/webp,image/jpeg">'+
+      '<div class="err" id="berr"></div>'+
+      '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Save branding</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){
+      var f=sheet.querySelector("#bfile").files[0], nm=sheet.querySelector("#bname").value.trim(), er=sheet.querySelector("#berr");
+      if(!f){ er.textContent="Choose a logo image first."; return; }
+      if(f.size>256*1024){ er.textContent="That image is over 256 KB. Please use a smaller file."; return; }
+      var btn=sheet.querySelector("#ok"); btn.disabled=true; btn.textContent="Uploading…";
+      uploadLogo(f,nm).then(function(r){
+        if(!r||!r.ok){ var e=(r&&r.error)||"Upload failed";
+          er.textContent = e==="pro_required" ? "Custom branding is a StewardMD Pro feature." : e==="too_large" ? "That image is over 256 KB." : e==="unsupported_type" ? "Please use a PNG, WebP or JPG image." : friendly(e);
+          btn.disabled=false; btn.textContent="Save branding"; return; }
+        toast("Branding saved"); close();
+      });
+    };
+  }
+  function uploadLogo(file,name){
+    var h={ "Content-Type": file.type||"application/octet-stream" };
+    var path="branding?orgId="+encodeURIComponent(st.orgId)+"&name="+encodeURIComponent(name||"");
+    var doPost=function(){ return fetch("/api/queue/"+path,{method:"POST",headers:h,body:file}).then(function(r){return r.json().catch(function(){return {ok:false,error:"bad_response"};});}); };
+    if(st.tokType==="firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return doPost(); });
+    if(st.tok) h["X-Staff-Token"]=st.tok;
+    return doPost();
   }
   function renderBoard(){
     if(!st.board.length){ renderShell('<div class="empty">No OPD queues yet for today.<br>Patients auto-import from GHIS once doctors sign in, or add a walk-in.</div>'); return; }
