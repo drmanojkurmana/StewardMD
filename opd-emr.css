@@ -368,6 +368,13 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-vc-nbtn .material-symbols-outlined { font-size:14px; }
 #smdOpdEmr .oe-vc-nbtn.primary { border-color:rgba(0,220,229,.5); background:rgba(0,220,229,.14); color:#aef3f6; }
 #smdOpdEmr .oe-vc-nbtn:active { transform:scale(.96); }
+#smdOpdEmr .oe-vc-nbtn.danger { border-color:rgba(255,120,120,.45); background:rgba(255,80,80,.12); color:#ffb3b3; }
+/* Bilingual VoiceNote: English translation on top, original spoken script (e.g. Telugu) below. */
+#smdOpdEmr .oe-vc-tx-en { padding:0 0 2px; white-space:pre-wrap; word-break:break-word; }
+#smdOpdEmr .oe-vc-tx-orig { margin-top:9px; padding-top:9px; border-top:1px dashed var(--vc-line); opacity:.62; white-space:pre-wrap; word-break:break-word; }
+#smdOpdEmr .oe-vc-orig-lbl { display:flex; align-items:center; gap:4px; font:700 10px/1 var(--q-sans); text-transform:uppercase; letter-spacing:.05em; margin-bottom:5px; opacity:.9; }
+#smdOpdEmr .oe-vc-orig-lbl .material-symbols-outlined { font-size:13px; }
+#smdOpdEmr .oe-vc-tx-en.ro { border:1px solid var(--vc-line); border-radius:12px; background:rgba(255,255,255,.03); padding:12px 14px; margin-bottom:8px; font:500 14px/1.7 var(--q-sans); color:var(--vc-ink); white-space:pre-wrap; word-break:break-word; }
 #smdOpdEmr .oe-vc-edit { width:100%; box-sizing:border-box; min-height:120px; max-height:260px; resize:vertical; padding:12px 14px; border:1px solid var(--vc-line); border-radius:13px; background:rgba(255,255,255,.03); color:var(--vc-ink); font:500 14px/1.7 var(--q-sans); white-space:pre-wrap; }
 #smdOpdEmr .oe-vc-edit:focus { outline:none; border-color:rgba(0,220,229,.4); }
 /* Dictated-investigation chips */

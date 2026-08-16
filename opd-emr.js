@@ -462,19 +462,30 @@
         return '<div class="oe-vc-turn ' + (t.speaker === "doctor" ? "dr" : "pt") + '"><span class="oe-vc-who">' + (t.speaker === "doctor" ? "Doctor" : "Patient") + "</span>" + esc(t.text) + "</div>";
       }).join("") + '<div class="oe-vc-qa-note">' + ms("info") + "Auto-labelled from the conversation - may be imperfect. Never changes an EMR field.</div></div>";
     }
+    // Bilingual view: the LLM's English translation on top, the ORIGINAL spoken script (e.g. Telugu)
+    // below it. Shown once refine has produced voiceTranscriptEn; during live dictation only the raw
+    // original exists, so it shows that. The EMR complaint is still extracted in English by the LLM.
+    var txEn = (st.voiceTranscriptEn || "").trim();
+    function bilingualTx() {
+      if (txEn && txEn !== tx.trim()) return '<div class="oe-vc-tx-en">' + esc(txEn) + "</div>" +
+        '<div class="oe-vc-tx-orig"><span class="oe-vc-orig-lbl">' + ms("translate") + "Spoken (original)</span>" + esc(tx) + "</div>";
+      return esc(tx);
+    }
     function notesBox(live, edit) {
       var qa = st.notesView === "qa";
       var tog = tx ? '<span class="oe-vc-vtog">' +
         '<button class="oe-vc-vt' + (qa ? "" : " on") + '" data-oe-act="notes-view:raw">Raw</button>' +
         '<button class="oe-vc-vt' + (qa ? " on" : "") + '" data-oe-act="notes-view:qa">Q&amp;A</button></span>' : "";
-      var acts = (edit && tx) ? '<span class="oe-vc-notes-acts">' +
-        '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy notes">' + ms("content_copy") + "Copy</button>" +
-        '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button></span>" : "";
-      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>Clinical notes</span>" + tog + acts + "</div>";
+      var acts = tx ? '<span class="oe-vc-notes-acts">' +
+        (edit ? '<button class="oe-vc-nbtn" data-oe-act="notes-copy" aria-label="Copy VoiceNote">' + ms("content_copy") + "Copy</button>" +
+                '<button class="oe-vc-nbtn primary" data-oe-act="notes-save" aria-label="Save to Present history">' + ms("save") + "Save</button>" : "") +
+        '<button class="oe-vc-nbtn danger" data-oe-act="notes-clear" aria-label="Clear VoiceNote">' + ms("delete") + "Clear</button></span>" : "";
+      var head = '<div class="oe-vc-notes-h">' + ms("clinical_notes") + "<span>VoiceNote</span>" + tog + acts + "</div>";
       var body = qa ? qaHtml()
-        : edit ? '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>"
+        : edit ? ((txEn && txEn !== tx.trim() ? '<div class="oe-vc-tx-en ro">' + esc(txEn) + "</div>" : "") +
+                  '<textarea class="oe-vc-edit" id="oeNotesEdit" data-oe-inp="notes" placeholder="Your words will appear here as you speak…">' + esc(tx) + "</textarea>")
         : '<div class="oe-vc-box' + (live ? " live" : "") + '"><div class="oe-vc-tx" id="oeTranscript">' +
-          (tx ? esc(tx) : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
+          (tx ? bilingualTx() : '<span class="oe-vc-ph">Your words will appear here as you speak…</span>') + "</div></div>";
       return '<div class="oe-vc-notes">' + head + body + "</div>";
     }
     // Dictated investigations as removable chips (source of truth = st.dictatedInv). Tap x to drop it
@@ -1075,6 +1086,7 @@
     if (cmd === "ivorder") { var on = (st.dictatedInv || [])[+arg]; if (on != null) { st.tab = "inv"; st.invQuery = on; paint(); runSearch("inv"); } return; }
     if (cmd === "notes-copy") return copyNotes();
     if (cmd === "notes-save") return saveNotesToHistory();
+    if (cmd === "notes-clear") return clearNotes();
     if (cmd === "notes-view") { st.notesView = (arg === "qa") ? "qa" : "raw"; paint(); return; }
   }
   // Drop one dictated-investigation's line from the Management plan (paired with removing its chip).
@@ -1082,6 +1094,17 @@
     if (!(st.assessVals && st.assessVals.management_plan)) return;
     var kept = st.assessVals.management_plan.split("\n").filter(function (l) { return l.trim() !== ("Ix: " + name); });
     st.assessVals.management_plan = kept.join("\n"); putVoiceDom("management_plan");
+  }
+  // Clear the VoiceNote (transcript + English translation + voice-derived suggestions/investigations)
+  // so the next dictation starts clean. Keeps EMR fields the doctor already accepted.
+  function clearNotes() {
+    if (!(st.voiceTranscript || st.voiceTranscriptEn || (st.dictatedInv || []).length)) { paint(); return; }
+    if (!confirmed("Clear this VoiceNote (transcript + translation)? EMR fields you've already accepted are kept.")) return;
+    st.voiceTranscript = ""; st.voiceTranscriptEn = ""; st.scribeSuggestions = null; st.scribeStats = null; st.dictatedInv = []; st._notesSavedText = "";
+    try { _lastFullTranscript = ""; _priorTranscript = ""; _lastRefinedTranscript = ""; } catch (e) {}
+    st.notesView = "raw";
+    paint();
+    try { toast("VoiceNote cleared"); } catch (e) {}
   }
   function copyNotes() {
     var t = st.voiceTranscript || ""; if (!t) { toast("Nothing to copy"); return; }
