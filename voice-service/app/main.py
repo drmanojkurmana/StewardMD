@@ -88,6 +88,27 @@ async def drain():
     return out
 
 
+@app.get("/selftest")
+async def selftest():
+    """Diagnose the silent-agent bug: does TTS actually emit audio bytes, in both languages? Returns the byte
+    counts + a sample of the first outbound frame so we can tell TTS-broken from Plivo-send-broken."""
+    def _run():
+        try:
+            en = tts.synth("Hello, this is a test call.", "en")
+        except Exception as e:
+            en = ("ERR:" + str(e)).encode()
+        try:
+            te = tts.synth("నమస్తే, ఇది ఒక పరీక్ష కాల్.", "te")
+        except Exception as e:
+            te = ("ERR:" + str(e)).encode()
+        return en, te
+    en, te = await asyncio.get_event_loop().run_in_executor(None, _run)
+    return {"ready": STATE["ready"], "load_error": STATE.get("load_error"),
+            "audio_format": cfg.audio_format, "sample_rate": cfg.sample_rate,
+            "tts_provider": cfg.tts_provider, "stt_provider": cfg.stt_provider,
+            "tts_en_bytes": len(en), "tts_te_bytes": len(te)}
+
+
 @app.post("/ingest")
 async def ingest(request: Request):
     """Dial a call payload PUSHED from outside. Cloudflare bot-protection 403s this pod's datacenter IP on

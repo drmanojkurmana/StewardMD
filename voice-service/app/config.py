@@ -32,7 +32,7 @@ class Config:
         self.amd = e.get("VOICE_AMD", "hangup")
         # NLU (Gemini 2.5 Flash) — slot extraction ONLY, never a clinical decision.
         self.gemini_api_key = e.get("GEMINI_API_KEY", "")
-        self.gemini_model = e.get("SCRIBE_MODEL", "") or "gemini-2.5-flash"
+        self.gemini_model = e.get("VOICE_GEMINI_MODEL", "") or "gemini-flash-latest"  # 2.5-flash is 404 for new keys
         # Models on this GPU. Provider "whisper"/"gtts" = fast, small, ungated (fast testing); "indicconformer"/
         # "parler" = best Indic quality (slower, gated). Select with STT_PROVIDER / TTS_PROVIDER.
         self.stt_provider = e.get("STT_PROVIDER", "indicconformer")
