@@ -15,7 +15,11 @@ REPO="${VOICE_REPO:-github.com/drmanojkurmana/StewardMD.git}"
 GPU_TYPE="${RUNPOD_GPU_TYPE:-NVIDIA GeForce RTX 3090}"
 IMAGE="${RUNPOD_IMAGE:-runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04}"
 
-: "${RUNPOD_API_KEY:?set RUNPOD_API_KEY in your shell (do NOT paste it into chat)}"
+# Keys may come from the shell OR from ENV_FILE (so `bash runpod.sh up` works after the wizard, no exports).
+_envfile_get() { [ -f "$ENV_FILE" ] && sed -n "s/^$1=//p" "$ENV_FILE" | head -1 || true; }
+RUNPOD_API_KEY="${RUNPOD_API_KEY:-$(_envfile_get RUNPOD_API_KEY)}"
+RUNPOD_POD_ID="${RUNPOD_POD_ID:-$(_envfile_get RUNPOD_POD_ID)}"
+: "${RUNPOD_API_KEY:?set RUNPOD_API_KEY (shell or $ENV_FILE)}"
 command -v jq >/dev/null || { echo "This script needs jq (brew install jq)."; exit 1; }
 GQL="https://api.runpod.io/graphql?api_key=${RUNPOD_API_KEY}"
 gql() { curl -sS -X POST "$GQL" -H "Content-Type: application/json" -d "$1"; }
@@ -24,19 +28,23 @@ cmd="${1:-up}"
 case "$cmd" in
   up)
     [ -f "$ENV_FILE" ] || { echo "Missing $ENV_FILE — copy deploy/.env.example to deploy/.env and fill it in."; exit 1; }
+    GITHUB_TOKEN="${GITHUB_TOKEN:-$(_envfile_get GITHUB_TOKEN)}"
     : "${GITHUB_TOKEN:?set GITHUB_TOKEN (a read-only GitHub PAT) so the pod can clone the private repo}"
     # env array from .env: split each line on the FIRST '=' (values may contain '='); append GITHUB_TOKEN.
     # Exclude keys the pod must NOT get from here: RunPod injects RUNPOD_POD_ID itself; VOICE_PUBLIC_BASE is
     # derived from it at runtime; GITHUB_TOKEN is appended once below (avoid a duplicate key).
-    ENVJSON=$(grep -vE '^[[:space:]]*(#|$)' "$ENV_FILE" \
+    # env as an INLINE GraphQL object list (unquoted keys, jq-escaped string values) — avoids depending on the
+    # exact RunPod input type name. Excludes keys the pod must not get from here; appends GITHUB_TOKEN once.
+    ENVGQL=$(grep -vE '^[[:space:]]*(#|$)' "$ENV_FILE" \
       | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN|GEMINI_API_KEY)=' \
-      | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$") | {key:.k, value:.v}' \
-      | jq -s --arg t "$GITHUB_TOKEN" '. + [{key:"GITHUB_TOKEN", value:$t}]')
+      | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$")' \
+      | jq -sr --arg t "$GITHUB_TOKEN" '(. + [{k:"GITHUB_TOKEN", v:$t}]) | map("{key:\"\(.k)\",value:\(.v|tojson)}") | join(",")')
     # Pod start command: clone + install + run. $GITHUB_TOKEN is kept literal here and expands in the pod.
     START="bash -lc 'cd /workspace && (test -d StewardMD || git clone -b ${BRANCH} https://\$GITHUB_TOKEN@${REPO} StewardMD) && cd StewardMD/voice-service && pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8080'"
-    Q='mutation($env:[EnvironmentInput!], $args:String, $g:String!, $img:String!){ podFindAndDeployOnDemand(input:{ cloudType: SECURE, gpuCount: 1, gpuTypeId: $g, name: "stewardmd-followcare-voice", imageName: $img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: "/models", ports: "8080/http", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: $args, env: $env }){ id machineId } }'
-    BODY=$(jq -n --argjson env "$ENVJSON" --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
-      '{query:$q, variables:{env:$env, args:$args, g:$g, img:$img}}')
+    # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
+    Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: SECURE, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
+    BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
+      '{query:$q, variables:{args:$args, g:$g, img:$img}}')
     RESP=$(gql "$BODY"); echo "$RESP" | jq .
     PID=$(echo "$RESP" | jq -r '.data.podFindAndDeployOnDemand.id // empty')
     if [ -n "$PID" ]; then
