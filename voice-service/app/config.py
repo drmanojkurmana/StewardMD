@@ -33,7 +33,11 @@ class Config:
         # NLU (Gemini 2.5 Flash) — slot extraction ONLY, never a clinical decision.
         self.gemini_api_key = e.get("GEMINI_API_KEY", "")
         self.gemini_model = e.get("SCRIBE_MODEL", "") or "gemini-2.5-flash"
-        # Models on this GPU.
+        # Models on this GPU. Provider "whisper"/"gtts" = fast, small, ungated (fast testing); "indicconformer"/
+        # "parler" = best Indic quality (slower, gated). Select with STT_PROVIDER / TTS_PROVIDER.
+        self.stt_provider = e.get("STT_PROVIDER", "indicconformer")
+        self.tts_provider = e.get("TTS_PROVIDER", "parler")
+        self.whisper_size = e.get("WHISPER_SIZE", "base")
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")

@@ -19,7 +19,9 @@ from .config import Config
 from .followcare.client import FollowCareClient
 from .nlu.gemini import SlotExtractor
 from .stt.indicconformer import IndicConformerSTT
+from .stt.whisper import WhisperSTT
 from .tts.parler import ParlerTTS
+from .tts.gtts_provider import GttsTTS
 from .telephony.plivo_provider import PlivoController, PlivoStreamTelephony
 from .call.session import CallSession
 from .gpu import RunPodController
@@ -31,8 +33,8 @@ client = FollowCareClient(cfg)
 # Slot extraction runs on the SHARED Cloudflare Gemini transport (Vertex AI primary, AI Studio GEMINI_API_KEY
 # fallback) — one integration, no Google creds on this box. Set VOICE_NLU_DIRECT=1 to use a local Gemini key.
 nlu = SlotExtractor(cfg) if os.environ.get("VOICE_NLU_DIRECT") == "1" else SlotExtractor(cfg, model_call=client.nlu)
-stt = IndicConformerSTT(cfg)
-tts = ParlerTTS(cfg)
+stt = WhisperSTT(cfg) if cfg.stt_provider == "whisper" else IndicConformerSTT(cfg)
+tts = GttsTTS(cfg) if cfg.tts_provider == "gtts" else ParlerTTS(cfg)
 plivo = PlivoController(cfg)
 runpod = RunPodController(cfg)
 

@@ -15,6 +15,7 @@ REPO="${VOICE_REPO:-github.com/drmanojkurmana/StewardMD.git}"
 GPU_TYPE="${RUNPOD_GPU_TYPE:-NVIDIA GeForce RTX 3090}"
 CLOUD_TYPE="${RUNPOD_CLOUD_TYPE:-COMMUNITY}"   # COMMUNITY = more availability + cheaper; SECURE for stricter isolation
 IMAGE="${RUNPOD_IMAGE:-runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04}"
+REQ_FILE="${VOICE_REQUIREMENTS:-requirements.txt}"   # full Indic stack (IndicConformer + Parler) for Telugu quality
 
 # Keys may come from the shell OR from ENV_FILE (so `bash runpod.sh up` works after the wizard, no exports).
 _envfile_get() { [ -f "$ENV_FILE" ] && sed -n "s/^$1=//p" "$ENV_FILE" | head -1 || true; }
@@ -43,7 +44,7 @@ case "$cmd" in
     # Pod start command: clone + install + run. Notes: x-access-token: form works for fine-grained PATs;
     # `set -x` traces each step into the container log; a trailing `sleep infinity` keeps the container ALIVE on
     # any failure (no crash loop) so the error is inspectable instead of vanishing. $GITHUB_TOKEN expands in-pod.
-    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD || { echo CLONE_FAILED__token_needs_Contents_Read_on_the_repo; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r requirements.txt && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
+    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD || { echo CLONE_FAILED__token_needs_Contents_Read_on_the_repo; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r ${REQ_FILE} && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
     # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
     Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: ${CLOUD_TYPE}, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
     BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
@@ -88,5 +89,17 @@ case "$cmd" in
     BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
     curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK"; echo
     ;;
-  *) echo "usage: runpod.sh {up|status|down|restart|testcall|queue}"; exit 1;;
+  plivocall)
+    # Fast telephony smoke test: dial [phone] directly via Plivo, speaking a test line (no GPU). Args: [phone-E164].
+    AID="$(_envfile_get PLIVO_AUTH_ID)"; ATOK="$(_envfile_get PLIVO_AUTH_TOKEN)"; FROM="$(_envfile_get PLIVO_FROM)"
+    TO="${2:-918897298117}"
+    ANS="https://followcare-voice-proxy.drmanojkurmana.workers.dev/plivo-test-answer"
+    curl -sS -X POST "https://api.plivo.com/v1/Account/$AID/Call/" -u "$AID:$ATOK" -H "Content-Type: application/json" \
+      -d "{\"from\":\"$FROM\",\"to\":\"$TO\",\"answer_url\":\"$ANS\",\"answer_method\":\"GET\"}"; echo
+    ;;
+  podinfo)
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    curl -sS -H "Authorization: Bearer $RUNPOD_API_KEY" "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID"; echo
+    ;;
+  *) echo "usage: runpod.sh {up|status|down|restart|testcall|queue|plivocall|podinfo}"; exit 1;;
 esac
