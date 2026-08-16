@@ -3021,6 +3021,14 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-tool::after{content:"›";font:800 14px/1 'Inter';margin-left:1px;opacity:.6}
 .maik-tool:hover::after{opacity:1}
 /* Phase 3 — grounding advisory (flag-gated; appears only on flagged claims) */
+.maik-conf{margin-top:9px;font:700 10.5px/1.3 'Inter';letter-spacing:.02em;display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px}
+.maik-conf::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.9}
+.maik-conf-high{color:#15803d;background:rgba(21,128,61,.10)}
+.maik-conf-moderate{color:#b45309;background:rgba(180,83,9,.10)}
+.maik-conf-lower{color:#b91c1c;background:rgba(185,28,28,.10)}
+body.dark .maik-conf-high{color:#4dd68c;background:rgba(77,214,140,.12)}
+body.dark .maik-conf-moderate{color:#f0c060;background:rgba(240,192,96,.12)}
+body.dark .maik-conf-lower{color:#f4bcbc;background:rgba(232,90,90,.14)}
 .maik-fb{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--mk-bd)}
 .maik-fb-q{font:600 12px/1.3 'Inter';color:var(--mk-mut,#5a7184)}
 .maik-fb-b{font:700 12px/1 'Inter';color:var(--mk-teal,#0e6e63);background:none;border:1px solid var(--mk-bd);border-radius:999px;padding:6px 14px;cursor:pointer}
@@ -3975,6 +3983,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             _streamStarted = true; _clearStages();
             var _h = _live();
             maikRenderAnswer(_h, { text: kb.text, mode: "kb", kb: true, confidence: kb.confidence, intent: kb.intent }, pkgForKb, active, cacheKey, topicLabel, question, depth, assume);
+            // Trust signal: a qualitative KB-match confidence chip. "Lower → verify" is the honest,
+            // cite-or-abstain client cue (a doctor should know when the match is only moderate).
+            try {
+              if (typeof kb.confidence === "number") {
+                var _lvl = kb.confidence >= 0.85 ? "High" : (kb.confidence >= 0.6 ? "Moderate" : "Lower");
+                var _cf = document.createElement("div"); _cf.className = "maik-conf maik-conf-" + _lvl.toLowerCase();
+                _cf.textContent = _lvl + " knowledge-base match" + (kb.confidence >= 0.85 ? "" : " · verify against local protocol");
+                _h.appendChild(_cf);
+              }
+            } catch (e) {}
             try { _brainAugment(_h, pkgForKb); } catch (e) {}
             try { _answerFeedback(_h); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
