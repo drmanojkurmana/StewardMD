@@ -44,7 +44,9 @@ case "$cmd" in
     # Pod start command: clone + install + run. Notes: x-access-token: form works for fine-grained PATs;
     # `set -x` traces each step into the container log; a trailing `sleep infinity` keeps the container ALIVE on
     # any failure (no crash loop) so the error is inspectable instead of vanishing. $GITHUB_TOKEN expands in-pod.
-    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD || { echo CLONE_FAILED__token_needs_Contents_Read_on_the_repo; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r ${REQ_FILE} && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
+    # Sparse/shallow/blobless clone of ONLY voice-service/ — the full repo is 472MB and GitHub throttles it;
+    # the pod needs ~1MB. This turns a multi-minute (throttled) clone into a few seconds.
+    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone --depth 1 --filter=blob:none --sparse -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD && (cd StewardMD && git sparse-checkout set voice-service) || { echo CLONE_FAILED__token_or_sparse; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r ${REQ_FILE} && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
     # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
     Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: ${CLOUD_TYPE}, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
     BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
@@ -96,6 +98,26 @@ case "$cmd" in
     ANS="https://followcare-voice-proxy.drmanojkurmana.workers.dev/plivo-test-answer"
     curl -sS -X POST "https://api.plivo.com/v1/Account/$AID/Call/" -u "$AID:$ATOK" -H "Content-Type: application/json" \
       -d "{\"from\":\"$FROM\",\"to\":\"$TO\",\"answer_url\":\"$ANS\",\"answer_method\":\"GET\"}"; echo
+    ;;
+  ingest)
+    # Relay the queued call to the pod's /ingest. The pod's datacenter IP is 403'd pulling the queue itself,
+    # so THIS host (allowed IP) pulls it, attaches the Gemini key for direct slot-extraction, and pushes it.
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    GK="$(_envfile_get GEMINI_API_KEY)"
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    Q=$(curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK")
+    [ "$(printf '%s' "$Q" | jq -r '.count // 0')" = "0" ] && { echo "queue empty — run: runpod.sh testcall"; exit 1; }
+    # Fresh callId each run (so a re-dial isn't dropped as a duplicate); amd:"" disables machine-detection.
+    CID="retry-$(date +%s)"
+    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" '{call:(.calls[0] + {callId:$cid}), geminiKey:$k, amd:""}')
+    curl -sS -m 45 -X POST "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/ingest" \
+      -H "Content-Type: application/json" -d "$BODY"; echo
+    ;;
+  plivostatus)
+    # What happened to the recent call(s): ring/answer/hangup cause. Shows why a placed call didn't connect.
+    AID="$(_envfile_get PLIVO_AUTH_ID)"; ATOK="$(_envfile_get PLIVO_AUTH_TOKEN)"
+    curl -sS -u "$AID:$ATOK" "https://api.plivo.com/v1/Account/$AID/Call/?limit=5" \
+      | jq '.objects[] | {to:.to_number, status:.call_state, hangup:.hangup_cause_name, dur:.bill_duration, end:.end_time}'
     ;;
   podinfo)
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"

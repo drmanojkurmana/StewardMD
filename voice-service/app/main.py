@@ -102,6 +102,8 @@ async def ingest(request: Request):
     if gkey:
         cfg.gemini_api_key = gkey
         nlu = SlotExtractor(cfg)  # direct-to-Google slot extraction, no Cloudflare hop
+    if "amd" in body:
+        cfg.amd = body["amd"]     # ""/none disables machine-detection (avoids AMD false-positive hangups on live answers)
     cid = call.get("callId") or ("ingest-" + str(int(time.time())))
     call["callId"] = cid
     if cid in STATE["calls"]:
