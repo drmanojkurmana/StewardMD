@@ -256,6 +256,60 @@ export async function notifyAmbulance(env, ep, settings, info) {
   return { ok: !!res.ok, delivered: res.ok ? "sent" : (res.skipped ? "skipped" : "failed") };
 }
 
+// ---- Phase 3: dial queue + live in-call classify + status (consumed by the RunPod voice service) ----
+// The scheduled calls the voice service should dial NOW, each with its dial context + the ordered question
+// script (from Assessment.buildAssessment — the SAME script the portal renders). Re-checks eligibility at
+// dial time and CANCELS any call whose patient has since responded / opted out (spec §4). Returns decrypted
+// phones — this is a PHI egress path, gated by the service token on the route.
+export async function voiceQueueForDialing(env, nowMs) {
+  const now = nowMs || Date.now();
+  const rows = await fsQuery(env, "fc_voice_calls", { where: { field: "status", value: "scheduled" }, limit: 200 });
+  const calls = [], cancels = [];
+  const cancel = (id, why) => cancels.push(wUpdate(env, "fc_voice_calls/" + id, { status: "cancelled", endedMs: now, summary: why }, { exists: true }));
+  for (const d of rows) {
+    const f = d.fields || {};
+    if ((f.scheduledMs || 0) > now) continue;                                  // its window hasn't opened yet
+    const ep = await getEpisode(env, f.episodeId);
+    if (!ep) { cancel(f.id, "episode gone"); continue; }
+    if (ep.voiceOptOut) { cancel(f.id, "patient opted out"); continue; }
+    const day = currentDueDayLite(ep, now);
+    if (day == null) { cancel(f.id, "patient already responded"); continue; }  // digital response wins — never call
+    let phone = "";
+    try { phone = await decPHI(env, ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc); } catch (e) {}
+    if (!phone) { cancel(f.id, "no phone"); continue; }
+    let firstName = "";
+    if (!ep.isMinor) { try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {} }
+    const qn = Assessment.buildAssessment(ep.pathwayId, day, { pathways: Pathways });
+    calls.push({
+      callId: f.id, episodeId: ep.episodeId, hospitalId: ep.hospitalId, phone, lang: ep.lang || "en",
+      firstName, isMinor: !!ep.isMinor, disease: ep.disease, dayOffset: day,
+      greeting: (qn && qn.greeting) || "", questions: (qn && qn.questions) || [],
+    });
+  }
+  if (cancels.length) { try { await fsCommit(env, cancels); } catch (e) {} }
+  return { count: calls.length, calls };
+}
+
+// In-call escalation signal: run the SAME deterministic engine on the answers gathered so far (read-only, no
+// writes) so the voice state machine can branch (ask about ambulance on a red flag) WITHOUT a second brain.
+export async function classifyLive(env, episodeId, answers) {
+  const ep = await getEpisode(env, episodeId);
+  if (!ep) return { ok: false, error: "not_found" };
+  const merged = Object.assign({}, ep.lastAnswers || {}, answers || {});
+  const r = Engine.assess(ep.pathwayId, merged, { pathways: Pathways, previousScore: (ep.lastScore != null && ep.lastScore >= 0) ? ep.lastScore : undefined, previousAnswers: ep.lastAnswers || undefined, answers: merged });
+  const redFlag = !!(r.redFlags && r.redFlags.length);
+  return { ok: true, escalation: r.escalation, redFlag, needsReview: !!r.needsReview, askAmbulance: r.escalation === "red", reasons: (r.reasons || []).slice(0, 3) };
+}
+
+// Lightweight call-status transitions (ringing / in_progress / no_answer / technical_failure) from the service.
+export async function markVoiceStatus(env, callId, patch) {
+  if (!callId) return { ok: false, error: "missing_callId" };
+  const clean = {}; ["status", "startedMs", "endedMs", "durationMs"].forEach(function (k) { if (patch && patch[k] != null) clean[k] = patch[k]; });
+  if (!Object.keys(clean).length) return { ok: true };
+  await fsCommit(env, [wUpdate(env, "fc_voice_calls/" + String(callId), clean, { exists: true })]);
+  return { ok: true };
+}
+
 // ---- small local helpers ------------------------------------------------------------------
 async function sendToNumber(env, toE164, body, method) {
   const payload = { toE164, body, vars: { text: body, name: "", link: "" } };

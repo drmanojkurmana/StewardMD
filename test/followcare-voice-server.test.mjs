@@ -150,3 +150,52 @@ test("runVoiceScheduler: enqueues eligible non-responders inside the window and 
   assert.ok(store.get("fc_episodes/s1").fields.lastVoiceDate);
   assert.ok(!store.get("fc_episodes/s2").fields.lastVoiceDate);
 });
+
+// ---- Phase 3: dialer queue + live classify + status ----
+test("voiceQueueForDialing: returns scheduled calls with the ordered script + decrypted phone", async () => {
+  store.clear();
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true } }, "test");
+  await seedEpisode("d1");
+  const s = await V.getHospitalSettings(ENV, "H1");
+  const q = await V.queueVoiceCall(ENV, await getEpisode(ENV, "d1"), s, NOW, {});
+  assert.equal(q.ok, true);
+  const dq = await V.voiceQueueForDialing(ENV, NOW);
+  assert.equal(dq.count, 1);
+  const c = dq.calls[0];
+  assert.equal(c.episodeId, "d1");
+  assert.equal(c.phone, "919876543210");             // decrypted for the dialer
+  assert.equal(c.firstName, "Ravi");
+  assert.ok(Array.isArray(c.questions) && c.questions.length > 0);   // the same portal script
+  assert.equal(c.dayOffset, 1);
+});
+
+test("voiceQueueForDialing: cancels a scheduled call whose patient has since responded (spec §4)", async () => {
+  store.clear();
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true } }, "test");
+  await seedEpisode("d2");
+  const s = await V.getHospitalSettings(ENV, "H1");
+  const q = await V.queueVoiceCall(ENV, await getEpisode(ENV, "d2"), s, NOW, {});
+  // patient answers digitally before the dialer picks it up
+  store.get("fc_episodes/d2").fields.lastDayDone = 1;
+  const dq = await V.voiceQueueForDialing(ENV, NOW);
+  assert.equal(dq.count, 0);
+  assert.equal(store.get("fc_voice_calls/" + q.callId).fields.status, "cancelled");
+});
+
+test("classifyLive: engine-backed in-call signal (no second brain, read-only)", async () => {
+  store.clear();
+  await seedEpisode("c1");
+  const r = await V.classifyLive(ENV, "c1", { overall: "worse" });
+  assert.equal(r.ok, true);
+  assert.ok(["green", "yellow", "orange", "red"].includes(r.escalation));
+  assert.equal(typeof r.askAmbulance, "boolean");
+  assert.equal((await V.classifyLive(ENV, "nope", {})).ok, false);
+});
+
+test("markVoiceStatus: patches a call record's status/timestamps", async () => {
+  store.clear();
+  store.set("fc_voice_calls/m1", { fields: { id: "m1", status: "scheduled" }, updateTime: "t0" });
+  await V.markVoiceStatus(ENV, "m1", { status: "in_progress", startedMs: NOW });
+  assert.equal(store.get("fc_voice_calls/m1").fields.status, "in_progress");
+  assert.equal(store.get("fc_voice_calls/m1").fields.startedMs, NOW);
+});

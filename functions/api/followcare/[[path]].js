@@ -42,6 +42,7 @@ import * as FCC from "../../_followcare_comms.js";
 import Comms from "../../../followcare-comms.js";
 // AI Voice Fallback (flag smd_followcare_voice): eligibility/scheduling/records + engine-reuse on call result.
 import * as FCV from "../../_followcare_voice.js";
+import * as GPU from "../../_followcare_gpu.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -134,6 +135,9 @@ export async function onRequest(context) {
       // does not place calls (the RunPod voice service does) — it is inert until a hospital enables voice.
       if (request.method === "POST" && seg === "run-voice") {
         const summary = await FCV.runVoiceScheduler(env, Date.now(), {});
+        // Spec §12/§15: only spin the GPU up when there are calls to place. The RunPod voice service then
+        // pulls its queue (/voice/queue), dials, and self-stops when drained. Fail-safe if RunPod unconfigured.
+        if (summary.gpuWouldStart) { try { summary.gpu = await GPU.startPod(env); } catch (e) { summary.gpu = { ok: false, error: "gpu_start_failed" }; } }
         return json({ ok: true, summary }, 200, request);
       }
       // Phase 3 — hospital command-center analytics (owner-gated; NON-PHI aggregates only).
@@ -240,6 +244,25 @@ export async function onRequest(context) {
       const b = await readBody(request);
       const res = await FCV.submitVoiceResult(env, b.episodeId || "", b, { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
       return json(res, res.ok ? 200 : (res.error === "not_found" ? 404 : 400), request);
+    }
+    // The RunPod voice service pulls the calls to dial NOW (each with the ordered question script + decrypted
+    // phone). Already-responded/opted-out scheduled calls are cancelled here (spec §4).
+    if (isVoice && seg === "queue" && request.method === "GET") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      return json(await FCV.voiceQueueForDialing(env, Date.now()), 200, request);
+    }
+    // In-call escalation signal (engine-backed, read-only) so the state machine can branch mid-call.
+    if (isVoice && seg === "classify" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const res = await FCV.classifyLive(env, b.episodeId || "", b.answers || {});
+      return json(res, res.ok ? 200 : 404, request);
+    }
+    // Call-status transitions from the service (ringing / in_progress / no_answer / technical_failure).
+    if (isVoice && seg === "status" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      return json(await FCV.markVoiceStatus(env, b.callId || "", b), 200, request);
     }
     // Patient opts out of (or back into) AI voice calls from their portal link — token-gated, no login.
     if (isVoice && seg === "optout" && request.method === "POST") {

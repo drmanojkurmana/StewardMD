@@ -1,0 +1,74 @@
+"""One outbound call, end to end.
+
+Wires the pieces of the agreed loop:
+  telephony.dial -> greeting (TTS->telephony) -> [ listen (telephony) -> STT -> NLU slot-extract ->
+  FollowCare engine classify -> state machine -> short response (TTS->telephony) ]* -> POST /voice/result.
+
+Everything clinical is delegated (classify + result = the Cloudflare engine). Providers are injected so the
+whole loop runs offline in tests with fakes (no GPU, no Plivo, no network).
+"""
+import time
+
+from .state_machine import Conversation, ASK
+
+
+class CallSession:
+    def __init__(self, call, stt, tts, telephony, nlu, client, config, clock=None):
+        self.call = call or {}
+        self.stt = stt
+        self.tts = tts
+        self.telephony = telephony
+        self.nlu = nlu
+        self.client = client
+        self.cfg = config
+        self.clock = clock or time.monotonic
+
+    async def _say(self, turn):
+        if turn and turn.say:
+            pcm = self.tts.synth(turn.say, self.call.get("lang", "en"))
+            await self.telephony.play(pcm)
+
+    async def run(self):
+        call_id = self.call.get("callId")
+        episode_id = self.call.get("episodeId")
+        started = self.clock()
+
+        answered = await self.telephony.dial(self.call)
+        if not answered:
+            self.client.post_status(call_id, {"status": "no_answer", "endedMs": _ms(self.clock())})
+            # Record it so the doctor sees a no-answer and we don't retry today (spec §29).
+            self.client.post_result({"episodeId": episode_id, "callId": call_id, "answers": {},
+                                     "status": "no_answer", "durationMs": 0})
+            return "no_answer"
+
+        self.client.post_status(call_id, {"status": "in_progress", "startedMs": _ms(self.clock())})
+        conv = Conversation(self.call, max_reasks=self.cfg.max_reasks)
+
+        turn = conv.start()
+        await self._say(turn)
+        while turn.expect_reply and not turn.done:
+            pcm = await self.telephony.listen(self.cfg.turn_timeout_s)
+            if pcm is None:                       # silence / hangup
+                if not conv.answers:
+                    conv.status = "no_answer"
+                break
+            transcript = self.stt.transcribe(pcm, conv.lang)
+            cur_q = conv.questions[conv.q_index] if (conv.phase == ASK and conv.q_index < len(conv.questions)) else None
+            nlu = self.nlu.interpret(cur_q, transcript, conv.lang)
+            engine = None
+            if conv.phase == ASK and cur_q is not None and nlu.get("intent") != "unclear":
+                merged = dict(conv.answers)
+                merged[cur_q.get("id")] = nlu.get("value", "")
+                engine = self.client.classify(episode_id, merged)
+            turn = conv.on_reply(nlu, engine)
+            await self._say(turn)
+
+        duration_ms = _ms(self.clock()) - _ms(started)
+        result = conv.result(duration_ms)
+        self.client.post_result(result)
+        await self.telephony.hangup()
+        return result["status"]
+
+
+def _ms(t):
+    return int(t * 1000)

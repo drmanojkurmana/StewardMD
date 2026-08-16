@@ -1,0 +1,13 @@
+# RunPod voice service (Phase 2). The tested CORE (app.call.*, app.audio.*, app.followcare.client,
+# app.nlu.gemini with an injected model) needs NONE of these — only stdlib. These are for the live service.
+fastapi>=0.111
+uvicorn[standard]>=0.30
+plivo>=4.47
+google-generativeai>=0.8
+# --- GPU models (installed on the RunPod box; large) ---
+torch>=2.3
+torchaudio>=2.3
+transformers>=4.44
+parler-tts @ git+https://github.com/huggingface/parler-tts.git
+sentencepiece>=0.2
+soundfile>=0.12
