@@ -30,6 +30,18 @@ import { usageKv, estTokens, meterTokens } from "../../_usage.js";
 import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { requireFeature } from "../../_features.js";
+import { checkActive } from "../../_experimental.js";
+import { ownerOK } from "../../_adminauth.js";
+
+// Experimental Access enforcement (opt-in via EXPERIMENTAL_ENFORCE_THOREX="1"). Default off = ungated
+// (as today). When on, POST compute requires an owner or a valid X-XA-Token bound to a live "thorex"
+// activation - the same server-authoritative gate the UI shows. Fails closed only when enforced.
+async function betaGate(request, env) {
+  if (env.EXPERIMENTAL_ENFORCE_THOREX !== "1") return { ok: true };
+  try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  try { const acc = await checkActive(env, "thorex", request.headers.get("X-XA-Token") || ""); if (acc && acc.active) return { ok: true }; } catch (e) {}
+  return { ok: false };
+}
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -204,6 +216,7 @@ export async function onRequest(context) {
   const seg = url.pathname.replace(/\/+$/, "").split("/").pop();
 
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
+  if (request.method === "POST") { const bg = await betaGate(request, env); if (!bg.ok) return json({ ok: false, error: "beta_locked", feature: "thorex" }, 403, request); }
 
   try {
     // POST /api/thorex/v1/cxr/analyze — authenticated proxy to the PRIVATE ThoreX CXR pipeline (security
