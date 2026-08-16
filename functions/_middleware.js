@@ -211,7 +211,7 @@ export async function onRequest(context) {
   // "opd-display" is the login-free OPD waiting-room WALL screen: opened on a TV/monitor from a signed
   // …/opd-display?t=<org token> link, no app/account/cookie. Safe to expose — /api/queue/display self-
   // authorises via the signed token and returns a PHI-minimal board (first name + last initial, no MRN).
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "followcare", "queue", "opd", "opd-display"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }
