@@ -229,7 +229,7 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 ## 12. CRO add-ons (launch, referral, tax) — see `GROWTH_STRATEGY.md` §1
 
 - **Free trial takes no card**; auto-drops to Free at end (never locks out).
-- **Founding-Doctor offer:** first 🔧 5,000 verified doctors get **Pro ₹399/mo locked 12 months** (Ultimate ₹999). Runs on the coupon engine; public countdown for urgency.
+- **Founding-Doctor offer:** first **500** verified doctors get **Pro for ₹399 for the whole year** (~₹33/mo; not per month). AI is a **fixed annual budget — ₹120 at signup + ONE ₹120 refill when spent = ₹240/yr hard ceiling, no daily reset**; beyond that, standard credits (₹50→₹25). Imaging 5/day draws from the same budget (imaging is what depletes it → renewal nudge). **Profit even at full AI burn: ₹399 − ~₹8 fees − ₹240 AI = ₹151/yr (~38% margin);** light users net more. Runs on the coupon + credits engine (set the founding role's daily free cap to ~₹0 so all AI draws from the granted annual pool; grant ₹120, auto-refill ₹120 once). Public countdown for urgency (land-grab for the first 500).
 - **Referral:** refer a doctor → **both get ₹150 credits** (or 1 free Pro month) on the referee's activation. Runs on the credits engine.
 - **Annual framing:** show monthly-equivalent + "2 months free" (e.g. Pro ₹4,999/yr = ₹416/mo).
 - **GST:** B2C prices shown **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at hospital checkout). Register for GST before the first paid rupee (SaaS = 18%).
