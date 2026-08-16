@@ -26,7 +26,10 @@ case "$cmd" in
     [ -f "$ENV_FILE" ] || { echo "Missing $ENV_FILE — copy deploy/.env.example to deploy/.env and fill it in."; exit 1; }
     : "${GITHUB_TOKEN:?set GITHUB_TOKEN (a read-only GitHub PAT) so the pod can clone the private repo}"
     # env array from .env: split each line on the FIRST '=' (values may contain '='); append GITHUB_TOKEN.
+    # Exclude keys the pod must NOT get from here: RunPod injects RUNPOD_POD_ID itself; VOICE_PUBLIC_BASE is
+    # derived from it at runtime; GITHUB_TOKEN is appended once below (avoid a duplicate key).
     ENVJSON=$(grep -vE '^[[:space:]]*(#|$)' "$ENV_FILE" \
+      | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN)=' \
       | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$") | {key:.k, value:.v}' \
       | jq -s --arg t "$GITHUB_TOKEN" '. + [{key:"GITHUB_TOKEN", value:$t}]')
     # Pod start command: clone + install + run. $GITHUB_TOKEN is kept literal here and expands in the pod.

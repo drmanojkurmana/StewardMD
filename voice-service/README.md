@@ -44,9 +44,21 @@ python3 run_local_sim.py                       # prints 4 full simulated calls (
 The core (`app/call`, `app/audio`, `app/followcare/client`, `app/nlu` with an injected model) has **zero
 third-party dependencies** — only the live service needs `requirements.txt`.
 
-## One-command provisioning (`deploy/`)
+## Easiest: the guided wizard
 
-Secrets stay in your shell / `deploy/.env` — never in git, never in chat.
+One command, then answer the prompts (it opens each website for you, generates the secrets, starts the
+server, and wires Cloudflare):
+
+```
+bash voice-service/deploy/setup.sh
+```
+
+You'll paste 4 things from the browser (RunPod key, a GitHub token, Plivo Auth ID/Token, Gemini key); the
+wizard does the rest. Stop with Ctrl-C and re-run any time — it remembers what you already entered.
+
+## Manual provisioning (`deploy/`)
+
+If you prefer to run the pieces yourself. Secrets stay in your shell / `deploy/.env` — never in git, never in chat.
 
 ```
 cp voice-service/deploy/.env.example voice-service/deploy/.env    # fill in Plivo/Gemini/token values

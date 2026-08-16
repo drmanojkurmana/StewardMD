@@ -38,7 +38,12 @@ class Config:
         self.idle_shutdown_s = _int("VOICE_IDLE_SHUTDOWN_S", 180)  # self-stop the GPU after this idle gap
         # RunPod self-stop (spec §12/§15). The service stops its own pod when the queue drains.
         self.runpod_api_key = e.get("RUNPOD_API_KEY", "")
+        # RunPod injects RUNPOD_POD_ID into every pod, so we don't need it set by hand.
         self.runpod_pod_id = e.get("RUNPOD_POD_ID", "")
+        # If the public URL wasn't given, derive RunPod's proxy URL from the pod id — this is the address
+        # Plivo reaches us at. Saves a manual "paste the URL back in and restart" step during setup.
+        if not self.public_base and self.runpod_pod_id:
+            self.public_base = "https://" + self.runpod_pod_id + "-8080.proxy.runpod.net"
 
     def followcare_configured(self):
         return bool(self.followcare_base and self.voice_service_token)
