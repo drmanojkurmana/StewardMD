@@ -67,6 +67,14 @@ QUEUE_STAFF_ENABLED = "1"
 # Phase 5: admin is the clinic OWNER's StewardMD account (+ org membership). No GHIS-id bootstrap.
 # Patient messaging channel for the queue (timeline link etc.). "whatsapp" for now; switch to "sms" (2Factor) later.
 FOLLOWCARE_MSG_CHANNEL = "whatsapp"
+# MaiK semantic answer cache: "1" serves common GENERIC questions from KV (zero-token, instant).
+# Never caches case/PHI answers. Bump MAIK_CACHE_VERSION to invalidate the whole cache after a
+# prompt/model/KB change. Set "0" to disable instantly.
+MAIK_ANSWER_CACHE = "1"
+MAIK_CACHE_VERSION = "1"
+# MaiK cite-or-abstain: "1" makes the model ground+cite and say "verify / not certain" instead of
+# confidently guessing. Set "0" to revert to the prior prompt exactly.
+MAIK_ABSTAIN = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -79,6 +87,9 @@ QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testin
 QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation orders (prescribe stays blocked). PUBLIC-RELEASE-GATE
 QUEUE_STAFF_ENABLED = "1"   # OPD staff platform on for dev/testing. PUBLIC-RELEASE-GATE: set "0" before release
 FOLLOWCARE_MSG_CHANNEL = "whatsapp"   # queue patient messages via WhatsApp for now; switch to "sms" (2Factor) later
+MAIK_ANSWER_CACHE = "1"   # semantic answer cache ON (generic Qs only, never case/PHI); MAIK_CACHE_VERSION bump = invalidate
+MAIK_CACHE_VERSION = "1"
+MAIK_ABSTAIN = "1"   # cite-or-abstain prompt directive ON (ground+cite, say 'verify' vs guess)
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
