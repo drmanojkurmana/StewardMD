@@ -176,6 +176,13 @@ export async function findMemberByEmail(env, email) {
 // ---- THE isolation gate (I/O wrapper over the pure authorizeOrgAccess) --------------------------
 // Fetches the org + the actor's membership, then lets the pure layer decide. Returns { ok, role, ... }.
 export async function authorizeOrg(env, actor, orgId, cap, target) {
+  // Staff PIN sessions are minted org-bound (the signed token carries orgId). Pin them: a "reception"
+  // session for org A must never authorize against org B - identity strings ("reception", "nurse1")
+  // are not globally unique, so without this a colliding username could inherit another clinic's role.
+  // GHIS/employee actors carry no token orgId; their q_members membership legitimately spans orgs.
+  if (actor && actor.kind === "staff" && actor.orgId && String(actor.orgId) !== String(orgId)) {
+    return { ok: false, reason: "org_mismatch" };
+  }
   const orgDoc = await getOrg(env, orgId);
   if (!orgDoc) return { ok: false, reason: "org_not_found" };
   const actorId = actor && actor.id ? actor.id : "";

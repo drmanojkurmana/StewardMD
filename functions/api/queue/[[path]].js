@@ -126,8 +126,17 @@ async function requireSessionCap(env, actor, s, cap) {
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
 // Capability for an org-level op named by a raw orgId/hospitalId (board, session create).
-async function requireOrgOrGlobal(env, actor, orgId, cap) {
-  if (actor.kind === "firebase") { requireCap(actor.role, cap); return; }
+async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
+  if (actor.kind === "firebase") {
+    // A global "doctor" role is NOT tenant membership. When the resource is owned by a specific doctor
+    // (onco plans carry doctorUid), a non-owner Firebase doctor may only touch their OWN resource -
+    // otherwise any signed-in doctor could read/write another clinic's plan by id. When no owner uid is
+    // passed (org-level ops like a board), behaviour is unchanged: cap-only.
+    if (resourceOwnerUid !== undefined && resourceOwnerUid !== null && resourceOwnerUid !== "" && !actor.isOwner && String(resourceOwnerUid) !== String(actor.id)) {
+      throw Object.assign(new Error("forbidden"), { status: 403 });
+    }
+    requireCap(actor.role, cap); return;
+  }
   const az = await ORG.authorizeOrg(env, actor, orgId, cap);
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
 }
@@ -426,7 +435,7 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "onco" && sub === "plan") {
       const plan = await ONCO.getPlan(env, url.searchParams.get("planId"));
       if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
-      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT, plan.doctorUid);
       return json({ ok: true, plan: plan }, 200, request);
     }
     // Cycle read (gap-fix, Phase 5): gated on CAPS.QUEUE_VIEW - the org-member READ cap every role
@@ -440,7 +449,7 @@ export async function onRequest(context) {
       if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
       const plan = await ONCO.getPlan(env, cyc.planId);
       if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
-      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.QUEUE_VIEW);
+      await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.QUEUE_VIEW, plan.doctorUid);
       const adminRecords = await ONCO.getAdminRecords(env, cyc.cycleId);
       // Nurse-safe template: drug names / routes / days / premeds for the give-list, NO dose formulas.
       const nurseTmpl = ONCO._nurseTemplate(plan.lockedTemplate);
@@ -568,7 +577,7 @@ export async function onRequest(context) {
         if (sub === "plan" && sub2 === "confirm") {   // confirm & activate - DOCTOR
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
-          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT, plan.doctorUid);
           // Options-form call -> Phase F pre-activation gate runs. physicianConfirmed must be an EXPLICIT
           // client true (the doctor's CONFIRM & ACTIVATE tap); it is never inferred, so activation is
           // gated and never automatic. The gate throws (400) with the blocker list on any failure.
@@ -578,7 +587,7 @@ export async function onRequest(context) {
         if (sub === "plan" && sub2 === "emr") {   // ADD TO EMR (structured write) - DOCTOR, EXPLICIT action ONLY, only after activation
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
-          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT, plan.doctorUid);
           if (plan.status !== "active") return json({ ok: false, error: "plan_not_active" }, 400, request);   // never before CONFIRM & ACTIVATE
           // GHIS auth: writing into the LIVE hospital EMR needs the doctor's GHIS session token (its own
           // header, never a URL param, never the Firebase Authorization Bearer). No GHIS session -> no write.
@@ -597,14 +606,14 @@ export async function onRequest(context) {
         if (sub === "cycle" && !sub2) {   // create - DOCTOR
           const plan = await ONCO.getPlan(env, body.planId);
           if (!plan) return json({ ok: false, error: "not_found" }, 404, request);
-          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT);
+          await requireOrgOrGlobal(env, actor, plan.hospitalId || plan.orgId, CAPS.EMR_TREAT, plan.doctorUid);
           return json({ ok: true, cycle: await ONCO.createCycle(env, body.planId, body.cycleNo) }, 200, request);
         }
         if (sub === "cycle" && sub2 === "clearance") {   // pre-chemo clearance attestation - DOCTOR
           const cyc = await ONCO.getCycle(env, body.cycleId);
           if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
           const plan = await ONCO.getPlan(env, cyc.planId);
-          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT, plan && plan.doctorUid);
           try { return json({ ok: true, cycle: await ONCO.resolveClearance(env, body.cycleId, { checks: body.checks || [], status: body.status, by: actor.id }) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "clearance_failed" }, 400, request); }
         }
@@ -612,7 +621,7 @@ export async function onRequest(context) {
           const cyc = await ONCO.getCycle(env, body.cycleId);
           if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
           const plan = await ONCO.getPlan(env, cyc.planId);
-          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_TREAT, plan && plan.doctorUid);
           try { return json({ ok: true, cycle: await ONCO.confirmCycle(env, body.cycleId) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "confirm_failed" }, 400, request); }
         }
@@ -620,7 +629,7 @@ export async function onRequest(context) {
           const cyc = await ONCO.getCycle(env, body.cycleId);
           if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
           const plan = await ONCO.getPlan(env, cyc.planId);
-          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS, plan && plan.doctorUid);
           try { return json({ ok: true, cycle: await ONCO.startCycle(env, body.cycleId) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "start_failed" }, 400, request); }
         }
@@ -628,7 +637,7 @@ export async function onRequest(context) {
           const cyc = await ONCO.getCycle(env, body.cycleId);
           if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
           const plan = await ONCO.getPlan(env, cyc.planId);
-          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS, plan && plan.doctorUid);
           try { return json({ ok: true, cycle: await ONCO.completeCycle(env, body.cycleId) }, 200, request); }
           catch (e) { return json({ ok: false, error: (e && e.message) || "complete_failed" }, 400, request); }
         }
@@ -636,7 +645,7 @@ export async function onRequest(context) {
           const cyc = await ONCO.getCycle(env, body.cycleId);
           if (!cyc) return json({ ok: false, error: "not_found" }, 404, request);
           const plan = await ONCO.getPlan(env, cyc.planId);
-          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS);
+          await requireOrgOrGlobal(env, actor, plan && (plan.hospitalId || plan.orgId), CAPS.EMR_VITALS, plan && plan.doctorUid);
           return json({ ok: true, admin: await ONCO.recordAdmin(env, Object.assign({}, body, { administeredBy: actor.id })) }, 200, request);
         }
         return json({ ok: false, error: "not_found" }, 404, request);
