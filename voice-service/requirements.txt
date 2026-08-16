@@ -11,6 +11,6 @@ transformers>=4.44
 parler-tts @ git+https://github.com/huggingface/parler-tts.git
 sentencepiece>=0.2
 soundfile>=0.12
-# IndicConformer's remote code (trust_remote_code) runs ONNX inference + audio feature extraction.
-onnxruntime-gpu>=1.17
-librosa>=0.10
+# IndicConformer's remote code (trust_remote_code) runs ONNX inference — exact pins from its model card.
+onnx>=1.16
+onnxruntime-gpu==1.20.1
