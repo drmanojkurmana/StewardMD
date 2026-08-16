@@ -379,13 +379,24 @@ function streamGeminiToSSE(upstream, onText) {
   });
   return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
 }
+// Azure circuit breaker: once Azure errors (credit exhausted / quota / auth), skip it until a cooldown
+// so MaiK stops wasting a failed attempt on every call and serves Gemini directly. Self-recovers with a
+// single probe after the cooldown if the credit is topped up. Per-isolate + zero-storage.
+let _azureOffUntil = 0;
+function azureBreakerOpen() { return Date.now() < _azureOffUntil; }
+function tripAzureBreaker(env, e) {
+  const m = String((e && e.message) || e).toLowerCase();
+  // Credit/quota/auth exhaustion won't recover without a top-up -> long cooldown; transient error -> short.
+  const hard = /quota|insufficient|exceed|billing|credit|invalid|expired|\b401\b|\b402\b|\b403\b|\b429\b|access denied/.test(m);
+  _azureOffUntil = Date.now() + (hard ? (Number(env && env.AZURE_BREAKER_HARD_MS) || 21600000) : (Number(env && env.AZURE_BREAKER_SOFT_MS) || 300000));
+}
 function providerOrder(env) {
   // Vertex is primary and fails over to Developer. AI_PROVIDER=azure puts Azure/Foundry FIRST (to burn
   // the credit) with Vertex->Developer (Gemini) as automatic fallback. AI_PROVIDER=developer uses it directly.
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
-  if (sel === "azure") return ["azure", "vertex", "developer"];
-  if (sel === "developer") return ["developer"];
-  return ["vertex", "developer"];
+  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "developer" ? ["developer"] : ["vertex", "developer"];
+  if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });   // auto-skip Azure while tripped
+  return order.length ? order : ["vertex", "developer"];
 }
 function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
 
@@ -411,6 +422,7 @@ export async function callGemini(env, parts, maxTokens, opts) {
       try { return await p.generate(env, parts, maxTokens, opts); }
       catch (e) {
         lastErr = e;
+        if (name === "azure") tripAzureBreaker(env, e);   // credit done / Azure error -> auto-stop using Azure
         const nextProvider = order[i + 1];
         if (a + 1 >= attempts && nextProvider && PROVIDERS[nextProvider] && PROVIDERS[nextProvider].available(env)) {
           _lastFailover = { from: name, to: nextProvider, reason: failReason(e), timestamp: new Date().toISOString(), model: modelId(env) };
