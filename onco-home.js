@@ -414,7 +414,7 @@
     var el = rootEl();
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">ONCO</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title">ONCqis<span style="display:block;font-size:10px;font-weight:600;opacity:.6;letter-spacing:.05em;text-transform:uppercase;margin-top:2px">The Cancer Library</span></div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
       '<div id="ohResults"></div></div>';
     var si = el.querySelector("#ohSearch");
@@ -426,7 +426,7 @@
   // creatinine, renal, diagnosis }. Falls back to a best-effort Ward Sync identity read; hides the
   // strip entirely if nothing is available.
   function open(ctx) {
-    if (!flagOn()) { toast("Onco Home is off"); return; }
+    if (!flagOn()) { toast("ONCqis is off"); return; }
     st.q = ""; st.mode = null; st.ctx = ctx || livePatientContext();
     loadProtocols();
     var el = rootEl();
