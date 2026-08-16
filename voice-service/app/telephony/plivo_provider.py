@@ -41,10 +41,14 @@ class PlivoController:
         """Place the outbound call via Plivo REST. answer_url carries the call_id so the WS can correlate."""
         url = f"https://api.plivo.com/v1/Account/{self.cfg.plivo_auth_id}/Call/"
         answer_url = self.cfg.public_base.rstrip("/") + "/plivo/answer?callId=" + call_id
-        body = json.dumps({
+        payload = {
             "from": self.cfg.plivo_from, "to": to_number, "answer_url": answer_url,
             "answer_method": "POST", "hangup_url": self.cfg.public_base.rstrip("/") + "/plivo/hangup?callId=" + call_id,
-        }).encode()
+        }
+        # FREE Automatic Machine Detection: hang up if a voicemail/machine answers (never talk to a machine).
+        if self.cfg.amd:
+            payload["machine_detection"] = self.cfg.amd
+        body = json.dumps(payload).encode()
         auth = base64.b64encode(f"{self.cfg.plivo_auth_id}:{self.cfg.plivo_auth_token}".encode()).decode()
         req = urllib.request.Request(url, data=body, method="POST",
                                      headers={"Content-Type": "application/json", "Authorization": "Basic " + auth})

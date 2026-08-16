@@ -94,14 +94,12 @@ async def plivo_stream(ws: WebSocket, call_id: str):
 
 
 async def _campaign():
-    """Pull the queue, originate calls (bounded concurrency), wait for drain, then self-stop the GPU."""
+    """POLL the queue while warm: originate any new calls (bounded concurrency), and self-stop the GPU only
+    after it's been idle (no active calls, none queued) for idle_shutdown_s. Polling means it doesn't matter
+    whether a call is queued before or shortly after the pod boots — it picks it up either way."""
     while not STATE["ready"]:
         await asyncio.sleep(1)
     if not cfg.followcare_configured():
-        return
-    queue = client.get_queue()
-    if not queue:
-        runpod.stop_self()      # nothing to do — don't burn GPU (spec §12)
         return
 
     sem = asyncio.Semaphore(cfg.max_concurrent)
@@ -117,19 +115,28 @@ async def _campaign():
                 client.post_result({"episodeId": call.get("episodeId"), "callId": cid, "answers": {}, "status": "technical_failure", "durationMs": 0})
             STATE["last_activity"] = time.time()
 
-    await asyncio.gather(*[_launch(c) for c in queue])
-
-    # Wait for every originated call to connect + finish (or time out), then idle-stop the GPU.
+    last_work = time.time()
     connect_timeout = cfg.no_answer_timeout_s
     while True:
+        try:
+            queue = client.get_queue()
+        except Exception:
+            queue = []
+        fresh = [c for c in queue if c.get("callId") not in STATE["calls"]]  # dedup: don't redial an in-flight call
+        for c in fresh:
+            last_work = time.time()
+            asyncio.create_task(_launch(c))
+
         now = time.time()
         for cid, rec in STATE["calls"].items():
             if rec["state"] == "originated" and (now - rec["ts"]) > connect_timeout:
                 rec["state"] = "done"    # never connected → no answer
                 client.post_result({"episodeId": rec["call"].get("episodeId"), "callId": cid, "answers": {}, "status": "no_answer", "durationMs": 0})
         active = any(r["state"] in ("originated", "active") for r in STATE["calls"].values())
-        if not active and (now - STATE["last_activity"]) > cfg.idle_shutdown_s:
+        if active:
+            last_work = now
+        if not active and (now - last_work) > cfg.idle_shutdown_s:
             break
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
 
     runpod.stop_self()

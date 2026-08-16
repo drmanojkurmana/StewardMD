@@ -267,6 +267,28 @@ export async function onRequest(context) {
       const b = await readBody(request);
       return json(await FCV.markVoiceStatus(env, b.callId || "", b), 200, request);
     }
+    // TEST HARNESS (service-token gated): does the whole doctor flow server-side — enable voice for a test
+    // hospital, enroll a test episode discharged 3 days ago, queue a manual AI call — so a real call can be
+    // tested WITHOUT the app UI. FOR CONTROLLED TESTING to a verified number only; remove before public launch.
+    if (isVoice && seg === "test" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      let phone = String(b.phone || "").replace(/[^\d]/g, "");
+      if (phone.length === 10) phone = "91" + phone;          // India: add country code for Plivo dialing
+      if (phone.length < 11) return json({ error: "bad_phone" }, 400, request);
+      const hospitalId = b.hospitalId || "VOICE_TEST";
+      const pathwayId = b.pathwayId || "heart_failure";
+      await FCV.setHospitalSettings(env, hospitalId, {
+        voice: { enabled: true, morningStart: 0, morningEnd: 23, eveningStart: 0, eveningEnd: 23, maxConcurrent: 2, fallbackHours: 0 },
+        ambulance: { enabled: true, contactName: "Test", phone: phone, method: "sms" },
+      }, "voice-test");
+      const enr = await FC.enrollEpisode(env, { hospitalId, doctorUid: "voice-test", pathwayId, phone, name: b.name || "Test Patient", dischargeMs: Date.now() - 3 * 86400000, lang: b.lang || "en", consentAttested: true });
+      if (!enr.ok) return json({ error: enr.error }, 400, request);
+      const ep = await FC.getEpisode(env, enr.episodeId);
+      const settings = await FCV.getHospitalSettings(env, hospitalId);
+      const q = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "voice-test" });
+      return json({ ok: !!q.ok, episodeId: enr.episodeId, callId: q.callId, scheduledMs: q.scheduledMs, error: q.error }, q.ok ? 200 : 400, request);
+    }
     // Slot extraction for the voice service: reuse the shared Gemini transport (Vertex primary, AI Studio
     // GEMINI_API_KEY fallback). Speech-understanding only — NOT a clinical decision. Fails soft (the state
     // machine treats a missing/garbled reply as "unclear" and re-asks once).
