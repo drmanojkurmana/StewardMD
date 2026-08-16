@@ -2794,6 +2794,7 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -3826,10 +3827,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // OFF). When a query is genuinely ambiguous (an ambiguous 2-letter acronym like "MS"/"DM",
       // or an under-specified broad concept), ASK instead of fuzzy-matching one condition — BEFORE
       // grounding/router/Gemini, so it costs nothing. Answer/overview fall through unchanged.
-      if (!active && brainOn() && window.MaiKBrain && MaiKBrain.resolve) {
+      var _skipAsk = _maikDisambigResolved; _maikDisambigResolved = false;   // consume the one-shot flag (this send is a disambiguation ANSWER, not a new query)
+      if (!active && !_skipAsk && brainOn() && window.MaiKBrain && MaiKBrain.resolve) {
         var _br = null;
         try { _br = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, intent: (_maikTopic && _maikTopic.intent) || null }); } catch (e) {}
-        if (_br && _br.decision === "ask" && _br.ambiguity && _br.ambiguity.options && _br.ambiguity.options.length) {
+        // Block for a genuine LEXICAL acronym only (e.g. "MS" = multiple sclerosis vs mitral stenosis —
+        // truly unanswerable without asking). Do NOT block on broad CLINICAL terms: clinicalDialogue
+        // grouped any word shared by ≥2 KB entries into a "which did you mean", so common queries
+        // ("treatment of hypertension/pneumonia/stroke") were dead-ended into rare subtypes (portal HTN,
+        // pneumocystis, HEAT stroke). Those now fall through and answer the common/default meaning.
+        if (_br && _br.decision === "ask" && _br.ambiguity && _br.ambiguity.kind === "lexical" && _br.ambiguity.options && _br.ambiguity.options.length) {
           try { console.debug("[MaiK brain] never-guess: disambiguating (" + _br.ambiguity.kind + ")"); } catch (e) {}
           try { if (window.MaiKCopilot) MaiKCopilot.gapLog("clarify", question); } catch (e) {}   // Stage-9 gap signal (anonymous)
           _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
@@ -3838,7 +3845,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           _br.ambiguity.options.slice(0, 5).forEach(function (o) {
             var lbl = (typeof o === "string") ? o : (o.label || o.name || o.value);
             var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl;
-            b.addEventListener("click", function () { try { qEl.value = lbl; } catch (e) {} send(); });
+            b.addEventListener("click", function () {
+              // Resubmit the DISAMBIGUATION as an answer, not a new query: fold the chosen option
+              // back into the ORIGINAL question (else "Treatment of Tuberculosis" → tap "Pulmonary"
+              // sent just "Pulmonary" and re-disambiguated into pulmonary-anatomy). Skip the re-ask.
+              try {
+                var q0 = String(question || "").trim();
+                qEl.value = (!q0 || q0.toLowerCase().indexOf(lbl.toLowerCase()) >= 0) ? (q0 || lbl) : (lbl + " " + q0);
+              } catch (e) { try { qEl.value = lbl; } catch (e2) {} }
+              _maikDisambigResolved = true;
+              send();
+            });
             _w.appendChild(b);
           });
           think.appendChild(_w); try { scroll(); } catch (e) {}
