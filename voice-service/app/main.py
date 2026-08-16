@@ -88,6 +88,31 @@ async def drain():
     return out
 
 
+@app.post("/ingest")
+async def ingest(request: Request):
+    """Dial a call payload PUSHED from outside. Cloudflare bot-protection 403s this pod's datacenter IP on
+    every path (direct, pages.dev, and through a Worker — the IP is preserved), so the pod cannot pull its own
+    queue. Instead a caller on an allowed IP pulls the queue from Cloudflare and relays the payload here.
+    An optional geminiKey flips slot-extraction to talk DIRECTLY to Google (also unreachable via Cloudflare),
+    so the whole call runs with zero pod->Cloudflare hops (STT/TTS/Parler are already local)."""
+    global nlu
+    body = await request.json()
+    call = body.get("call") or body
+    gkey = body.get("geminiKey")
+    if gkey:
+        cfg.gemini_api_key = gkey
+        nlu = SlotExtractor(cfg)  # direct-to-Google slot extraction, no Cloudflare hop
+    cid = call.get("callId") or ("ingest-" + str(int(time.time())))
+    call["callId"] = cid
+    if cid in STATE["calls"]:
+        return {"callId": cid, "duplicate": True}
+    STATE["calls"][cid] = {"call": call, "state": "originated", "ts": time.time()}
+    ok = await asyncio.get_event_loop().run_in_executor(None, plivo.originate, call.get("phone"), cid)
+    if not ok:
+        STATE["calls"][cid]["state"] = "done"
+    return {"callId": cid, "phone": call.get("phone"), "plivo_ok": ok, "nlu_direct": bool(gkey), "ready": STATE["ready"]}
+
+
 @app.post("/plivo/answer")
 async def plivo_answer(request: Request):
     call_id = request.query_params.get("callId", "")
