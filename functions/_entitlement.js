@@ -20,22 +20,43 @@ export function promoUntil(env) {
 }
 export function promoActive(env, now) { return (now || Date.now()) < promoUntil(env); }
 
-// Decide Pro from a caller's token claims. LAUNCH DECISION (2026-07-26): every feature is free for
-// everyone, permanently — so this always returns true (no promo cliff, no claim needed). The claims
-// logic is kept below (dead) so gating can be restored by returning it. `claims`/`now` unused now.
+// ── Per-user free trial ────────────────────────────────────────────────────────────────────────
+// Each account gets a trial clock (claim `trialStart`, ms) stamped on first sign-in (see entitlementFor).
+// Length: 14 days for trials STARTED on/before the cutover (env TRIAL14_UNTIL, default 15 Sep 2026),
+// 7 days after. So early adopters get 14, later signups get 7 — matching the launch promo window.
+const DAY_MS = 86400000;
+export function trialCutover(env) {
+  const v = env && env.TRIAL14_UNTIL;
+  if (v) { const t = /^\d+$/.test(String(v)) ? +v : Date.parse(v); if (t) return t; }
+  return Date.parse("2026-09-15T23:59:59+05:30");
+}
+export function trialDaysFor(env, trialStartMs) { return (trialStartMs && +trialStartMs <= trialCutover(env)) ? 14 : 7; }
+export function trialState(env, claims, now) {
+  now = now || Date.now();
+  const ts = claims && claims.trialStart ? +claims.trialStart : 0;
+  if (!ts) return { active: false, started: false, endsAt: null, daysLeft: 0 };
+  const endsAt = ts + trialDaysFor(env, ts) * DAY_MS;
+  return { active: now < endsAt, started: true, endsAt, daysLeft: Math.max(0, Math.ceil((endsAt - now) / DAY_MS)) };
+}
+
+// Decide Pro from a caller's token claims. Order: launch promo (master switch, everyone free until
+// PRO_FREE_UNTIL) → paid subscription claim → active per-user trial. Restored 2026-08-16 from the
+// launch free-for-all; still a no-op change WHILE the promo is active (returns true for all).
 export function isPro(env, claims, now) {
-  return true;
-  // eslint-disable-next-line no-unreachable
   now = now || Date.now();
   if (promoActive(env, now)) return true;
   if (claims && claims.pro === true && (!claims.proExp || +claims.proExp > now)) return true;
+  if (trialState(env, claims, now).active) return true;
   return false;
 }
 export function entitlementState(env, claims, now) {
   now = now || Date.now();
-  if (promoActive(env, now)) return { pro: true, source: "launch-promo", until: promoUntil(env), promo: true };
+  const tr = trialState(env, claims, now);
+  if (promoActive(env, now)) return { pro: true, source: "launch-promo", until: promoUntil(env), promo: true, trial: !!tr.active, trialEndsAt: tr.endsAt, daysLeft: tr.daysLeft };
   const paid = !!(claims && claims.pro === true && (!claims.proExp || +claims.proExp > now));
-  return { pro: paid, source: paid ? (claims.source || "subscription") : "none", until: paid ? (claims.proExp || null) : null, promo: false };
+  if (paid) return { pro: true, source: (claims.source || "subscription"), until: (claims.proExp || null), promo: false, trial: false, trialEndsAt: tr.endsAt };
+  if (tr.active) return { pro: true, source: "trial", until: tr.endsAt, promo: false, trial: true, trialEndsAt: tr.endsAt, daysLeft: tr.daysLeft };
+  return { pro: false, source: "none", until: null, promo: false, trial: false, trialEndsAt: tr.endsAt, reason: tr.started ? "trial-expired" : "none" };
 }
 
 // Authoritative (fresh) entitlement for a uid — does a server-side claims lookup, so it reflects a
@@ -44,6 +65,9 @@ export async function entitlementFor(env, uid) {
   if (!uid) return entitlementState(env, null);
   let claims = {};
   try { claims = await getUserClaims(env, uid); } catch (e) {}
+  // Start the per-user trial clock on first status check (no pro, no trial yet). One write per new
+  // account; done here (not on the hot proFromRequest gate) so gates stay read-only.
+  try { if (!claims.pro && !claims.trialStart) { const ts = Date.now(); await mergeUserClaims(env, uid, { trialStart: ts }); claims.trialStart = ts; } } catch (e) {}
   return entitlementState(env, claims);
 }
 
@@ -88,14 +112,15 @@ function decodeJwtPayload(tok) {
 // token) is still Pro DURING the promo; once the promo ends a guest is never Pro. The pro claim is
 // read from the token payload, trustworthy only because the signature is verified just above.
 export async function proFromRequest(env, request) {
-  // Free-for-everyone (2026-07-26): pro is always true. We still verify the token to resolve uid/claims
-  // so per-user metering & rate limits in _usage.js keep working; a guest (no token) is Pro too.
+  // Read-only hot gate: verify the token, decide Pro from its claims (promo → paid → trial). A guest
+  // (no/invalid token) is Pro ONLY during the launch promo. The trial clock is stamped in
+  // entitlementFor (the /billing/status path), not here, so this gate never writes.
   const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!tok) return { pro: true, uid: null, claims: null };
+  if (!tok) return { pro: promoActive(env), uid: null, claims: null };
   const uid = await verifyFirebaseToken(tok, env);   // verifies RS256 signature + aud/iss/exp
-  if (!uid) return { pro: true, uid: null, claims: null };
+  if (!uid) return { pro: promoActive(env), uid: null, claims: null };
   const claims = decodeJwtPayload(tok) || {};
-  return { pro: true, uid, claims };
+  return { pro: isPro(env, claims), uid, claims };
 }
 
 // Hard gate for Pro-only server features (Ward Sync sign-in, Lab Watch, cross-device case sync).
