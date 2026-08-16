@@ -145,7 +145,16 @@ export async function onRequest(context) {
   // still gated. Anti-scraping on the public site is unaffected — preview URLs are unlisted hashes.
   const host = url.hostname.toLowerCase();
   if (/\.stewardmd\.pages\.dev$/.test(host) && host !== "stewardmd.pages.dev") {
-    return next();
+    // Preview/branch deploys serve the real app for QA. Stamp noindex/nofollow so a (guessable) preview
+    // URL can never be indexed or surfaced by a search engine - the main real-world exposure of this
+    // convenience. A full lock (Cloudflare Access) is an owner dashboard toggle; this keeps QA
+    // friction-free while removing the discoverability that makes the bypass dangerous.
+    const pr = await next();
+    try {
+      const h = new Headers(pr.headers);
+      h.set("X-Robots-Tag", "noindex, nofollow");
+      return new Response(pr.body, { status: pr.status, statusText: pr.statusText, headers: h });
+    } catch (e) { return pr; }
   }
 
   const secretPath = ((env && env.SITE_ACCESS_PATH) || DEFAULT_SECRET_PATH).replace(/^\/+|\/+$/g, "");
