@@ -68,5 +68,14 @@ case "$cmd" in
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
     gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podStop(input:{podId:$id}){ id desiredStatus } }", variables:{id:$id}}')" | jq .
     ;;
-  *) echo "usage: runpod.sh {up|status|down}"; exit 1;;
+  restart)
+    # Stop + resume the SAME pod: re-runs the boot (re-clone latest + pip install) but KEEPS the persistent
+    # /models volume, so downloaded models are reused (no 10-min re-download). Use to iterate quickly.
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podStop(input:{podId:$id}){ id desiredStatus } }", variables:{id:$id}}')" >/dev/null
+    sleep 6
+    gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podResume(input:{podId:$id, gpuCount:1}){ id desiredStatus } }", variables:{id:$id}}')" | jq .
+    echo "restarted $RUNPOD_POD_ID → https://${RUNPOD_POD_ID}-8080.proxy.runpod.net"
+    ;;
+  *) echo "usage: runpod.sh {up|status|down|restart}"; exit 1;;
 esac
