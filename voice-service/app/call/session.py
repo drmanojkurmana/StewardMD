@@ -7,6 +7,7 @@ Wires the pieces of the agreed loop:
 Everything clinical is delegated (classify + result = the Cloudflare engine). Providers are injected so the
 whole loop runs offline in tests with fakes (no GPU, no Plivo, no network).
 """
+import asyncio
 import time
 
 from .state_machine import Conversation, ASK
@@ -25,7 +26,10 @@ class CallSession:
 
     async def _say(self, turn):
         if turn and turn.say:
-            pcm = self.tts.synth(turn.say, self.call.get("lang", "en"))
+            # TTS is a heavy blocking call (GPU generate); run OFF the event loop so it doesn't freeze the
+            # WebSocket (missed keepalives / audio stalls). Same for STT/NLU below.
+            pcm = await asyncio.get_event_loop().run_in_executor(
+                None, self.tts.synth, turn.say, self.call.get("lang", "en"))
             await self.telephony.play(pcm)
 
     async def run(self):
@@ -52,14 +56,15 @@ class CallSession:
                 if not conv.answers:
                     conv.status = "no_answer"
                 break
-            transcript = self.stt.transcribe(pcm, conv.lang)
+            loop = asyncio.get_event_loop()
+            transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, conv.lang)
             cur_q = conv.questions[conv.q_index] if (conv.phase == ASK and conv.q_index < len(conv.questions)) else None
-            nlu = self.nlu.interpret(cur_q, transcript, conv.lang)
+            nlu = await loop.run_in_executor(None, self.nlu.interpret, cur_q, transcript, conv.lang)
             engine = None
             if conv.phase == ASK and cur_q is not None and nlu.get("intent") != "unclear":
                 merged = dict(conv.answers)
                 merged[cur_q.get("id")] = nlu.get("value", "")
-                engine = self.client.classify(episode_id, merged)
+                engine = await loop.run_in_executor(None, self.client.classify, episode_id, merged)
             turn = conv.on_reply(nlu, engine)
             await self._say(turn)
 
