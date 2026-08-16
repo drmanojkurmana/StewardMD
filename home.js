@@ -735,8 +735,10 @@
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
       }
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
+      // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
+      var queueOn = false; try { var qq = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (qq != null) queueOn = (qq === "1" || qq === "on" || qq === "true"); else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) queueOn = SMD_QUEUE_FLAGS.on(); else queueOn = (localStorage.getItem("smd_opd_queue") === "1"); } catch (e) {}
       openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
-        tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
+        (queueOn ? tile("list", "OPD Queue", "Smart out-patient queue", "opd") : "") +
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +

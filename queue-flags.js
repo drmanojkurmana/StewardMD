@@ -1,9 +1,9 @@
-/* Smart OPD Queue — feature flags (mirrors followcare-flags.js). Resolution: ?query → localStorage → default.
- * Master flag smd_opd_queue DEFAULT ON (go-live 2026-08-10: server QUEUE_ENABLED=1, secrets configured,
- * Firestore TTL set; ready:{enabled,configured}=true). Still fails SAFE: with the
- * flag on but server secrets unprovisioned, the module shows a clean "being set up" state and does nothing
- * (isQueueConfigured() guard) — no PHI processed, no message sent. Set ?q=1 (or localStorage) to preview.
- * Exposes window.SMD_QUEUE_FLAGS. No PHI, no network. */
+/* Smart OPD Queue + Oncology — feature flags (mirrors followcare-flags.js). Resolution: ?query -> localStorage -> default.
+ * PUBLIC-RELEASE POSTURE (App Store v2.1): the OPD Queue/EMR + onco write/admin/experimental flags ship
+ * def:false (see the DEFS block); the OncoTree navigator + read-only onco reference ship def:true. The queue
+ * module also fails SAFE server-side: even with a flag on but server secrets unprovisioned it shows a clean
+ * "being set up" state and does nothing (isQueueConfigured() guard), no PHI processed, no message sent.
+ * Set ?q=1 (or localStorage) to preview. Exposes window.SMD_QUEUE_FLAGS. No PHI, no network. */
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
