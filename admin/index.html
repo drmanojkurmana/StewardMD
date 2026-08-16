@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>StewardMD — App Manager</title>
 <style>
-  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0e6e63;--tls:#d8efeb;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
   @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
   *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
   .app{display:flex;min-height:100vh}
@@ -84,6 +84,13 @@
       <div class="grp">Home</div>
       <nav class="nav" id="nav">
         <a class="on" data-p="overview">📊 Overview</a>
+        <div class="grp">Control center</div>
+        <a data-p="support">💬 Support tickets <span class="b" id="navSupport">0</span></a>
+        <a data-p="userctl">👤 User control</a>
+        <a data-p="aictl">🧠 AI control</a>
+        <a data-p="config">🎛️ Remote config</a>
+        <a data-p="crashes">🐞 Crashes <span class="b" id="navCrash">0</span></a>
+        <a data-p="analytics">📈 Analytics</a>
         <div class="grp">Content</div>
         <a data-p="notif">🔔 Publish &amp; notify</a>
         <a data-p="sources">📚 Medical sources</a>
@@ -367,6 +374,82 @@
           <div id="kxRows" style="margin-top:12px"></div>
         </div>
       </div>
+      <!-- SUPPORT TICKETS -->
+      <div class="pane" id="pane-support" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Support tickets</b>
+            <div class="filters" id="supFilters"><button class="pill on" data-sf="open">Open</button><button class="pill" data-sf="">All</button><button class="pill" data-sf="resolved">Resolved</button></div>
+            <button class="ghost" id="supReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 4px">Doctors file requests from the app (Help &amp; support). Each has a unique complaint id. Reply here and they see it in-app.</div>
+          <div class="msg" id="supMsg"></div><div id="supBox" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- USER CONTROL -->
+      <div class="pane" id="pane-userctl" data-need-auth>
+        <div class="card">
+          <b>User access control</b>
+          <div class="hint" style="margin:4px 0 8px">Look up a doctor by email to grant/revoke Pro, approve/withdraw NMC verification, or disable/enable sign-in. Changes take effect on the doctor's next token refresh.</div>
+          <div class="row"><div style="flex:2"><label for="ucEmail">Doctor email</label><input id="ucEmail" type="email" placeholder="doctor@email" autocomplete="off"></div><div style="align-self:flex-end"><button class="primary" id="ucFind">Look up</button></div></div>
+          <div class="msg" id="ucMsg"></div><div id="ucBox" style="margin-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- AI CONTROL -->
+      <div class="pane" id="pane-aictl" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Emergency kill switch</b><button class="ghost" id="aicReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:4px 0 8px">Pause AI fleet-wide instantly. Clinical reasoning, calculators and reference tools stay available.</div>
+          <div class="filters" id="aicEmg"></div>
+          <div class="msg" id="aicEmgMsg"></div>
+        </div>
+        <div class="card">
+          <b>Model override</b>
+          <div class="hint" style="margin:4px 0 8px">Force a specific model for all AI, or leave default. Applies immediately.</div>
+          <div id="aicModel"></div><div class="msg" id="aicModelMsg"></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Daily budget cap (INR)</b></div>
+          <div class="hint" style="margin:4px 0 8px">Hard spend ceiling per day across all AI. Blank = default.</div>
+          <div class="row"><div><input id="aicBudget" type="number" placeholder="e.g. 2000"></div><div style="align-self:flex-end"><button class="primary" id="aicBudgetSave">Save</button></div></div>
+          <div class="msg" id="aicBudgetMsg"></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Per-module daily limits</b><button class="ghost" id="aicLimReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:4px 0 8px">Per-doctor daily request caps by module. Blank = module default.</div>
+          <div id="aicLimits"></div><div class="msg" id="aicLimMsg"></div>
+        </div>
+      </div>
+
+      <!-- REMOTE CONFIG -->
+      <div class="pane" id="pane-config" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Remote config (fleet controls)</b><button class="ghost" id="cfgReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:4px 0 8px">Force-upgrade (minimum native build), maintenance mode, and in-app banners. Applies to all devices within ~60s.</div>
+          <label for="cfgJson">Config JSON</label>
+          <textarea id="cfgJson" style="min-height:220px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px" spellcheck="false"></textarea>
+          <div style="margin-top:12px;display:flex;gap:8px"><button class="primary" id="cfgSave">Save config</button></div>
+          <div class="msg" id="cfgMsg"></div>
+        </div>
+      </div>
+
+      <!-- CRASHES -->
+      <div class="pane" id="pane-crashes" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Client errors / crashes</b><button class="ghost" id="crReload" style="padding:7px 11px">Reload</button><button class="ghost" id="crClear" style="padding:7px 11px;color:var(--red);border-color:var(--red)">Clear log</button></div>
+          <div class="hint" style="margin:4px 0 4px">Uncaught errors across the fleet, deduped with counts. Metadata only, no patient data.</div>
+          <div class="msg" id="crMsg"></div><div id="crBox" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div class="pane" id="pane-analytics" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Usage analytics (14 days)</b><button class="ghost" id="anReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:4px 0 4px">Allow-listed feature events. Counts only, no per-doctor or patient detail.</div>
+          <div class="msg" id="anMsg"></div><div id="anBox" style="margin-top:12px"></div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -378,8 +461,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai","kardiox","xa"];
-  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
+  var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","push","watch","ai","kardiox","xa"];
+  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -435,6 +518,8 @@
     api("/api/ai/admin").then(function(x){ if(x.s===200&&x.d&&x.d.enabled!==false){var day=x.d.daily||{}; setN("ovAiReq",day.requests||0); setN("ovAiCost","₹"+(day.estCostInr||0));} }).catch(function(){});
     api("/api/verifications?status=pending").then(function(x){ if(x.s===200){var n=((x.d&&x.d.doctors)||[]).length; setN("ovVerif",n); var b=$("navVerif"); if(b){b.textContent=n;b.classList.toggle("on",n>0);}} }).catch(function(){});
     fetch("/api/updates?limit=100").then(function(r){return r.json();}).then(function(j){ setN("ovNotif",((j&&j.items)||[]).length); }).catch(function(){});
+    api("/api/ai/admin/support?status=open").then(function(x){ if(x.s===200){ var n=((x.d&&x.d.tickets)||[]).length; var b=$("navSupport"); if(b){b.textContent=n;b.classList.toggle("on",n>0);} } }).catch(function(){});
+    api("/api/ai/admin/clientlog").then(function(x){ if(x.s===200){ var n=((x.d&&x.d.errors)||[]).length; var b=$("navCrash"); if(b){b.textContent=n;b.classList.toggle("on",n>0);} } }).catch(function(){});
   }
   document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ var p=b.getAttribute("data-go"); if(p==="sources"){goPane("sources");setTimeout(function(){var s=$("sSync");if(s)s.click();},200);} else goPane(p); }; });
 
@@ -595,7 +680,137 @@
     $("xaCodeFilters").addEventListener("click",function(e){var b=e.target.closest("[data-cf]");if(!b)return;xaCF=b.getAttribute("data-cf");Array.prototype.forEach.call($("xaCodeFilters").children,function(p){p.classList.toggle("on",p===b);});xaLoadCodes();});
   } catch(e){}
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
+  // ================= Control center (support, users, AI, config, crashes, analytics) =================
+  var AI="/api/ai/admin";
+  function forbid(x,msg){ return x.s===403?"Not an owner.":("Failed: "+(msg&&x.d&&x.d.error||x.s)); }
+
+  // ---- Support tickets ----
+  var supFilter="open";
+  function supPill(st){ return '<span class="pill'+(st==="resolved"?"":" on")+'" style="pointer-events:none">'+(st==="resolved"?"Resolved":"Open")+'</span>'; }
+  function supLoad(){
+    say("supMsg","","Loading…");
+    api(AI+"/support"+(supFilter?("?status="+supFilter):"")).then(function(x){
+      if(x.s!==200){ say("supMsg","err",forbid(x)); return; }
+      say("supMsg","","");
+      var ts=(x.d&&x.d.tickets)||[]; var nb=$("navSupport");
+      if(nb && supFilter==="open"){ nb.textContent=ts.length; nb.classList.toggle("on",ts.length>0); }
+      if(!ts.length){ $("supBox").innerHTML='<div class="hint">No tickets.</div>'; return; }
+      $("supBox").innerHTML=ts.map(function(t){
+        return '<div data-sup="'+esc(t.id)+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer">'+
+          '<div style="flex:1;min-width:0"><b>'+esc(t.subject)+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
+          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+'</div></div>'+supPill(t.status)+'</div>';
+      }).join("");
+      Array.prototype.forEach.call($("supBox").querySelectorAll("[data-sup]"),function(el){ el.onclick=function(){ supOpen(el.getAttribute("data-sup")); }; });
+    }).catch(function(){ say("supMsg","err","Failed to load."); });
+  }
+  function supOpen(id){
+    say("supMsg","","Loading…");
+    api(AI+"/support?id="+encodeURIComponent(id)).then(function(x){
+      var t=x.d&&x.d.ticket; if(x.s!==200||!t){ say("supMsg","err","Not found."); return; }
+      say("supMsg","","");
+      var thread=(t.messages||[]).map(function(m){ var mine=m.from==="support";
+        return '<div style="margin:6px 0;padding:9px 12px;border-radius:12px;max-width:85%;'+(mine?"margin-left:auto;background:var(--tl);color:#fff":"background:var(--bg);border:1px solid var(--line)")+'"><div style="font:800 10px var(--f);opacity:.75;margin-bottom:2px">'+(mine?"You (support)":"Doctor")+'</div><div style="white-space:pre-wrap;font:600 13px var(--f)">'+esc(m.text)+'</div></div>';
+      }).join("");
+      $("supBox").innerHTML=
+        '<button class="ghost" id="supBack" style="padding:6px 10px;margin-bottom:8px">← Back</button>'+
+        '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(((t.platform||"")+" "+(t.build||"")).trim())+'</div>'+
+        '<b style="display:block;margin:4px 0 8px">'+esc(t.subject)+'</b><div>'+thread+'</div>'+
+        '<textarea id="supTx" placeholder="Reply to the doctor…" style="min-height:80px"></textarea>'+
+        '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="supReplyBtn">Reply</button><button class="primary" id="supResolveBtn">Reply &amp; Resolve</button>'+
+        (t.status==="resolved"?'<button class="ghost" id="supReopenBtn">Reopen</button>':'')+'</div><div class="msg" id="supTMsg"></div>';
+      $("supBack").onclick=supLoad;
+      function send(mode){ var txt=($("supTx").value||"").trim(), body={id:id};
+        if(mode==="reply"){ if(!txt){say("supTMsg","err","Enter a reply.");return;} body.text=txt; }
+        else if(mode==="resolve"){ body.text=txt; body.resolve=true; } else if(mode==="reopen"){ body.status="open"; }
+        say("supTMsg","","Sending…");
+        api(AI+"/support-reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ supOpen(id); } else say("supTMsg","err","Failed: "+(r.d&&r.d.error||r.s)); });
+      }
+      $("supReplyBtn").onclick=function(){send("reply");}; $("supResolveBtn").onclick=function(){send("resolve");};
+      var ro=$("supReopenBtn"); if(ro) ro.onclick=function(){send("reopen");};
+    }).catch(function(){ say("supMsg","err","Failed."); });
+  }
+  $("supFilters").addEventListener("click",function(e){var b=e.target.closest("[data-sf]");if(!b)return;supFilter=b.getAttribute("data-sf");Array.prototype.forEach.call($("supFilters").children,function(p){p.classList.toggle("on",p===b);});supLoad();});
+  $("supReload").onclick=supLoad;
+
+  // ---- User control ----
+  function ucFind(){
+    var email=($("ucEmail").value||"").trim().toLowerCase(); if(!email){ say("ucMsg","err","Enter an email."); return; }
+    say("ucMsg","","Looking up…"); $("ucBox").innerHTML="";
+    api(AI+"/user-find?email="+encodeURIComponent(email)).then(function(x){
+      if(x.s!==200){ say("ucMsg","err",forbid(x)); return; } say("ucMsg","","");
+      if(!x.d.found){ $("ucBox").innerHTML='<div class="hint">No account for '+esc(email)+'.</div>'; return; }
+      ucRender(x.d.user||{email:email});
+    }).catch(function(){ say("ucMsg","err","Failed."); });
+  }
+  function ucRender(u){
+    var pro=!!u.pro, ver=!!u.verified, dis=!!u.disabled;
+    $("ucBox").innerHTML='<div class="card" style="margin:0"><b>'+esc(u.email||u.uid||"")+'</b>'+
+      '<div class="hint" style="margin:4px 0 10px">uid '+esc(String(u.uid||"").slice(0,14))+'… · Pro: '+(pro?"yes":"no")+' · Verified: '+(ver?"yes":"no")+' · Sign-in: '+(dis?"DISABLED":"enabled")+'</div>'+
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
+      '<button class="'+(pro?"ghost":"primary")+'" data-uc="'+(pro?"revoke-pro":"grant-pro")+'">'+(pro?"Revoke Pro":"Grant Pro")+'</button>'+
+      '<button class="'+(ver?"ghost":"primary")+'" data-uc="'+(ver?"unverify":"verify")+'">'+(ver?"Withdraw verification":"Approve verification")+'</button>'+
+      '<button class="ghost" data-uc="'+(dis?"enable":"disable")+'" style="color:var(--red);border-color:var(--red)">'+(dis?"Enable sign-in":"Disable sign-in")+'</button>'+
+      '</div><div class="msg" id="ucActMsg"></div></div>';
+    Array.prototype.forEach.call($("ucBox").querySelectorAll("[data-uc]"),function(b){ b.onclick=function(){ ucAct(u.email, b.getAttribute("data-uc")); }; });
+  }
+  function ucAct(email, action){
+    if((action==="disable"||action==="revoke-pro")&&!confirm(action.replace("-"," ")+" for "+email+"?")) return;
+    var m=$("ucActMsg"); if(m){m.className="msg";m.textContent="Applying…";}
+    api(AI+"/user-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,action:action})}).then(function(x){
+      if(x.s===200&&x.d.ok){ ucRender(x.d.user||{email:email}); } else { var e=$("ucActMsg"); if(e){e.className="msg err";e.textContent="Failed: "+(x.d&&x.d.error||x.s);} }
+    }).catch(function(){});
+  }
+  $("ucFind").onclick=ucFind;
+  $("ucEmail").addEventListener("keydown",function(e){ if(e.key==="Enter") ucFind(); });
+
+  // ---- AI control ----
+  function aicLoad(){
+    api(AI+"/emergency").then(function(x){
+      if(x.s!==200){ say("aicEmgMsg","err",forbid(x)); return; }
+      var cur=String((x.d.emergency&&x.d.emergency.mode)||x.d.emergency||"off"); var modes=x.d.modes||["off","pause"];
+      $("aicEmg").innerHTML=modes.map(function(m){ return '<button class="pill'+(cur===m?" on":"")+'" data-emg="'+esc(m)+'">'+esc(m)+'</button>'; }).join("");
+      Array.prototype.forEach.call($("aicEmg").querySelectorAll("[data-emg]"),function(b){ b.onclick=function(){ var m=b.getAttribute("data-emg"); if(m!=="off"&&!confirm("Set emergency mode to \""+m+"\" for the whole fleet?"))return; say("aicEmgMsg","","Applying…"); api(AI+"/emergency",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:m})}).then(function(){say("aicEmgMsg","ok","✅ "+m);aicLoad();}); }; });
+    });
+    api(AI+"/model").then(function(x){ if(x.s!==200)return; var cur=x.d.model||"", allowed=x.d.allowed||[];
+      $("aicModel").innerHTML='<div class="row"><div style="flex:2"><select id="aicModelSel"><option value="">— default ('+esc(x.d.effective||"")+') —</option>'+allowed.map(function(m){return '<option value="'+esc(m)+'"'+(m===cur?" selected":"")+'>'+esc(m)+'</option>';}).join("")+'</select></div><div style="align-self:flex-end"><button class="primary" id="aicModelSave">Apply</button></div></div>';
+      $("aicModelSave").onclick=function(){ say("aicModelMsg","","Saving…"); api(AI+"/model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:$("aicModelSel").value})}).then(function(r){ if(r.s===200)say("aicModelMsg","ok","✅ "+(r.d.model||"default")); else say("aicModelMsg","err","Failed"); }); };
+    });
+    api(AI+"/budget").then(function(x){ if(x.s===200){ var b=x.d.budget, v=(b&&typeof b==="object")?(b.inr!=null?b.inr:""):(b!=null?b:""); try{$("aicBudget").value=(v||v===0)?v:"";}catch(e){} } });
+    aicLimLoad();
+  }
+  function aicLimLoad(){
+    api(AI+"/limits").then(function(x){ if(x.s!==200){ $("aicLimits").innerHTML='<div class="hint">Unavailable.</div>'; return; }
+      var mods=x.d.modules||[];
+      $("aicLimits").innerHTML=mods.map(function(m){ return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)"><span style="flex:1">'+esc(m.label||m.id)+' <span class="hint">(default '+esc(String(m.defaultLimit))+')</span></span><input type="number" data-lim="'+esc(m.id)+'" value="'+(m.overridden?esc(String(m.effective)):"")+'" placeholder="'+esc(String(m.defaultLimit))+'" style="width:90px"></div>'; }).join("")+'<div style="margin-top:10px"><button class="primary" id="aicLimSaveAll">Save limits</button></div>';
+      $("aicLimSaveAll").onclick=function(){ var inputs=$("aicLimits").querySelectorAll("[data-lim]"), i=0; say("aicLimMsg","","Saving…");
+        (function next(){ if(i>=inputs.length){ say("aicLimMsg","ok","✅ Saved"); return; } var inp=inputs[i++], mod=inp.getAttribute("data-lim"), val=inp.value.trim(); api(AI+"/limits",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({module:mod,limit:val===""?null:Number(val)})}).then(next,next); })();
+      };
+    });
+  }
+  $("aicReload").onclick=aicLoad; $("aicLimReload").onclick=aicLimLoad;
+  $("aicBudgetSave").onclick=function(){ say("aicBudgetMsg","","Saving…"); api(AI+"/budget",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({inr:$("aicBudget").value})}).then(function(r){ if(r.s===200)say("aicBudgetMsg","ok","✅ Saved"); else say("aicBudgetMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); };
+
+  // ---- Remote config ----
+  function cfgLoad(){ say("cfgMsg","","Loading…"); api(AI+"/config").then(function(x){ if(x.s!==200){ say("cfgMsg","err",forbid(x)); return; } say("cfgMsg","",""); $("cfgJson").value=JSON.stringify(x.d.config||{},null,2); }).catch(function(){ say("cfgMsg","err","Failed."); }); }
+  $("cfgReload").onclick=cfgLoad;
+  $("cfgSave").onclick=function(){ var body; try{ body=JSON.parse($("cfgJson").value); }catch(e){ say("cfgMsg","err","Invalid JSON: "+e.message); return; } say("cfgMsg","","Saving…"); api(AI+"/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ say("cfgMsg","ok","✅ Saved"); $("cfgJson").value=JSON.stringify(r.d.config||{},null,2); } else say("cfgMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); };
+
+  // ---- Crashes ----
+  function crLoad(){ say("crMsg","","Loading…"); api(AI+"/clientlog").then(function(x){ if(x.s!==200){ say("crMsg","err",forbid(x)); return; } say("crMsg","",""); var errs=(x.d&&x.d.errors)||[]; var nb=$("navCrash"); if(nb){ nb.textContent=errs.length; nb.classList.toggle("on",errs.length>0); }
+    if(!errs.length){ $("crBox").innerHTML='<div class="hint">No client errors logged. 🎉</div>'; return; }
+    $("crBox").innerHTML=errs.map(function(e){ return '<div style="padding:9px 0;border-bottom:1px solid var(--line)"><div style="display:flex;gap:8px"><b style="flex:1;word-break:break-word">'+esc(e.message||"error")+'</b><span class="pill on" style="pointer-events:none">×'+esc(String(e.count||1))+'</span></div><div class="hint" style="word-break:break-word">'+esc([e.level,e.build,e.platform,e.url].filter(Boolean).join(" · "))+'</div>'+(e.stack?'<div class="hint" style="font-family:ui-monospace,monospace;white-space:pre-wrap;margin-top:3px">'+esc(String(e.stack).slice(0,300))+'</div>':'')+'</div>'; }).join("");
+  }).catch(function(){ say("crMsg","err","Failed."); }); }
+  $("crReload").onclick=crLoad;
+  $("crClear").onclick=function(){ if(!confirm("Clear the client error log?"))return; api(AI+"/clientlog",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ crLoad(); }); };
+
+  // ---- Analytics ----
+  function anLoad(){ say("anMsg","","Loading…"); api(AI+"/analytics").then(function(x){ if(x.s!==200){ say("anMsg","err",forbid(x)); return; } say("anMsg","",""); var d=x.d||{}, totals=d.totals||{}, keys=Object.keys(totals).sort(function(a,b){return totals[b]-totals[a];});
+    if(!keys.length){ $("anBox").innerHTML='<div class="hint">No events yet.</div>'; return; }
+    $("anBox").innerHTML='<div class="hint" style="margin-bottom:6px">Total: '+esc(String(d.grandTotal||0))+' events over '+esc(String((d.days&&d.days.length)||14))+' days</div>'+keys.map(function(k){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(totals[k]))+'</b></div>'; }).join("");
+  }).catch(function(){ say("anMsg","err","Failed."); }); }
+  $("anReload").onclick=anLoad;
+
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
