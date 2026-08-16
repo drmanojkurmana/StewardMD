@@ -26,16 +26,18 @@
   // under Monitor). If web enforcement is ever wanted, register the web app + a reCAPTCHA provider.
   if (!isNative()) return;
 
-  // DISABLED (2026-07-30): this iOS build's app is NOT registered in the Firebase App Check console,
-  // so the DeviceCheck token exchange fails ("App not registered", HTTP 400 FAILED_PRECONDITION) and
-  // the SDK retry-storms ("Too many attempts"), dragging Firebase/Firestore traffic into a loop that
-  // saturates the WebView bridge and STARVES the /api/ai (MaiK/scan) calls — the exact account-agnostic
-  // slowness confirmed on-device (pausing Firestore made a stuck scan finish in 8.4s). App Check is
-  // UNENFORCED (Monitor; nothing server-side checks it — verified), so it gives ZERO benefit today
-  // while causing the storm. Re-enable (APPCHECK_ON=true) only AFTER registering this app in the
-  // App Check console and confirming verified tokens on the dashboard.
-  var APPCHECK_ON = false;
-  if (!APPCHECK_ON) { try { console.log("[app-check] disabled — unregistered app was retry-storming; unenforced, so skipped"); } catch (e) {} return; }
+  // RE-ENABLED (2026-08-16): the app is now registered in the Firebase App Check console (owner). It was
+  // DISABLED 2026-07-30 because an UNREGISTERED app's DeviceCheck/Play-Integrity exchange failed and the
+  // SDK retry-STORMED ("Too many attempts"), saturating the WebView bridge and starving /api/ai (the
+  // on-device slowness). Two guards keep that from recurring: (1) auto-refresh is OFF below, so there is
+  // no background refresh loop to storm even if a given build's attestation fails (on-demand + fail-open
+  // only); (2) a localStorage kill-switch (smd_appcheck_off=1) disables it instantly on any device, no
+  // rebuild. ROLLOUT: keep Firestore/Auth on MONITOR in the console until the App Check dashboard shows
+  // THIS shipped RELEASE build producing verified tokens; only THEN switch to Enforce. A DEBUG build may
+  // fail attestation (debug cert not registered) - set smd_appcheck_off=1 on that device if it slows.
+  var APPCHECK_ON = true;
+  if (!APPCHECK_ON) { try { console.log("[app-check] disabled by flag"); } catch (e) {} return; }
+  try { if (window.localStorage && window.localStorage.getItem("smd_appcheck_off") === "1") { console.log("[app-check] disabled via smd_appcheck_off kill-switch"); return; } } catch (e) {}
 
   function plugin() {
     try { return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FirebaseAppCheck) || null; }
@@ -57,7 +59,10 @@
     // (App Attest / DeviceCheck / Play Integrity). initialize() is async; activate AFTER it resolves
     // so the first getToken() the JS SDK triggers has a live native provider behind it.
     Promise.resolve()
-      .then(function () { return P.initialize({ isTokenAutoRefreshEnabled: true }); })
+      // auto-refresh OFF on purpose: a background refresh loop is what retry-stormed when attestation
+      // failed (2026-07-30). On-demand fetch + fail-open is storm-safe; a registered release build still
+      // gets a fresh token whenever a Firestore/Auth call needs one.
+      .then(function () { return P.initialize({ isTokenAutoRefreshEnabled: false }); })
       .then(function () {
         var provider = new window.firebase.appCheck.CustomProvider({
           getToken: function () {
