@@ -162,7 +162,37 @@
       "#sbMenu[data-sbr] .sbr-note{color:#5a7184}",
       "#sbMenu[data-sbr] .sbr-adv button{color:#14202b}",
       "#sbMenu[data-sbr] .sbr-status{margin:16px 4px 6px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;gap:9px;color:#0b5a50;font:600 12.5px/1 var(--sans,system-ui)}",
-      "#sbMenu[data-sbr] .sbr-status b{width:9px;height:9px;border-radius:50%;background:#12b886;display:inline-block;box-shadow:0 0 0 3px rgba(18,184,134,.2)}"
+      "#sbMenu[data-sbr] .sbr-status b{width:9px;height:9px;border-radius:50%;background:#12b886;display:inline-block;box-shadow:0 0 0 3px rgba(18,184,134,.2)}",
+      /* ── Settings page (dedicated full-screen module) ── */
+      ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
+      "@keyframes sbrSetIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}",
+      "body.dark .sbr-set-ov,body.v3-dark .sbr-set-ov{background:#0d1b26;color:#e8edf2}",
+      ".sbr-set-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:inherit;border-bottom:1px solid var(--line,#d7dee3)}",
+      ".sbr-set-head h2{margin:0;font:800 19px/1.2 var(--sans,system-ui)}",
+      ".sbr-set-back{display:inline-flex;align-items:center;gap:2px;border:none;background:none;color:var(--teal,#0e6e63);font:700 15px/1 var(--sans,system-ui);cursor:pointer;padding:6px 8px 6px 0}",
+      ".sbr-set-chev{font-size:24px;line-height:1}",
+      ".sbr-set-body{padding:6px 12px calc(28px + env(safe-area-inset-bottom))}",
+      ".sbr-set-ov .sbr-sec{padding:16px 4px 6px;font:700 11px/1.2 var(--sans,system-ui);letter-spacing:.075em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
+      ".sbr-set-ov .sbr-row{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:13px 12px;margin-top:2px;border:none;border-radius:12px;background:var(--panel,#fff);cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 15px/1.3 var(--sans,system-ui)}",
+      "body.dark .sbr-set-ov .sbr-row{background:#132030}",
+      ".sbr-set-ov .sbr-row:active{opacity:.7}",
+      ".sbr-set-ov .sbr-ic{width:20px;height:20px;flex:0 0 auto;color:var(--teal,#0e6e63)}",
+      ".sbr-set-ov .sbr-lbl{flex:1;min-width:0}",
+      ".sbr-set-ov .sbr-chev{flex:0 0 auto;font-size:12px;color:var(--slate-soft,#5a7184)}",
+      ".sbr-set-ov .sbr-badge{flex:0 0 auto;font:700 9px/1 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:5px;padding:3px 6px}",
+      ".sbr-set-ov .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin:2px 0 8px}",
+      ".sbr-set-ov .sbr-tg,.sbr-set-ov .smd-nav-row{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel,#fff);border-radius:12px;margin-top:2px}",
+      "body.dark .sbr-set-ov .sbr-tg,body.dark .sbr-set-ov .smd-nav-row,body.dark .sbr-set-ov .sbr-card{background:#132030;border-color:#233242}",
+      ".sbr-set-ov .sbr-card .sbr-tg{border-top:1px solid var(--line,#d7dee3);border-radius:0;margin:0}",
+      ".sbr-set-ov .sbr-card .sbr-tg:first-child{border-top:0}",
+      ".sbr-set-ov .sbr-tg-l{flex:1;min-width:0}",
+      ".sbr-set-ov .sbr-tg-t{display:block;font:600 14px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)}",
+      ".sbr-set-ov .sbr-tg-s{display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px}",
+      ".sbr-set-ov .sbr-sw{position:relative;flex:0 0 auto;width:40px;height:24px;border:none;border-radius:999px;background:#c4cec9;cursor:pointer;transition:background .15s}",
+      ".sbr-set-ov .sbr-sw.on{background:var(--teal,#0e6e63)}",
+      ".sbr-set-ov .sbr-sw>span{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s}",
+      ".sbr-set-ov .sbr-sw.on>span{left:19px}",
+      ".sbr-set-ov .sbr-note{font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:6px 4px}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
   }
@@ -251,20 +281,10 @@
       row("feedback", "edit", "Send Feedback") +
       row("ack", "award", "About &amp; Acknowledgements") +
       '<div class="sbr-sec">Settings</div>' +
-      // Carries verify.js's own [data-smd-verify] marker so its legacy base-styled injector
-      // bails (its guard checks for that marker) — we render this row consistently instead.
-      '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
-      row("notifications", "bell", "Notifications") +
-      row("appearance", "sun", "Appearance &amp; Theme") +
-      watchRow() +
-      '<button class="sbr-row" data-sbr-adv="1">' + svg("spark") +
-        '<span class="sbr-lbl">Advanced &amp; Experimental</span><span class="sbr-chev">▸</span></button>' +
-      '<div class="sbr-adv" data-sbr-advbody>' + advBody() + "</div>" +
+      // One entry → the full Settings page (account, notifications, appearance, watch, advanced +
+      // experimental). Replaces the old inline "Advanced & Experimental" expand-in-sidebar.
+      '<button class="sbr-row" data-sbr-act="settings">' + svg("sliders") + '<span class="sbr-lbl">Settings</span><span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-status"><b></b>System Online</div>';
-
-    // Let the Image Engine wire up its own controls inside the freshly-built block.
-    try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
-    try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(menu.querySelector("[data-sbr-advbody]")); } catch (e) {}
 
     if (menu.__sbrClick) return;   // delegate once per element (survives innerHTML rebuilds)
     menu.__sbrClick = true;
@@ -282,20 +302,61 @@
         sw.classList.toggle("on", on); sw.setAttribute("aria-checked", on);
         return;
       }
-      // Everything else → its action global
+      // Everything else → its action global (settings → the dedicated Settings page)
       var r = t.closest("[data-sbr-act]");
-      if (r) { var a = r.getAttribute("data-sbr-act"); closeSB(); setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60); }
+      if (r) {
+        var a = r.getAttribute("data-sbr-act");
+        if (a === "settings") { closeSB(); setTimeout(openSettingsPage, 60); return; }
+        closeSB(); setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60);
+      }
     }, false);
   }
 
-  // Toggle the Advanced & Experimental block open/closed.
+  // Toggle the Advanced & Experimental block open/closed. (Legacy; the Settings page replaces the
+  // inline expand, but kept harmless in case another caller references it.)
   function openAdvanced(menu) {
-    var b = menu.querySelector("[data-sbr-advbody]"); if (!b) return;
+    var b = menu && menu.querySelector("[data-sbr-advbody]"); if (!b) return;
     var chev = menu.querySelector('[data-sbr-adv] .sbr-chev');
     var open = !b.classList.contains("open");
     b.classList.toggle("open", open);
     if (chev) chev.textContent = open ? "▾" : "▸";
   }
+
+  // ---- Settings page (dedicated full-screen module) ------------------------------------------------
+  // All app settings live here now (not inline toggles in the sidebar): account/verification,
+  // notifications, appearance, wearable, and the advanced + experimental controls (engine, image
+  // engine, voice models, offline DB, owner tools). Opened from the sidebar's single "Settings" row.
+  function closeSettingsPage() { var ov = document.getElementById("sbrSettings"); if (ov && ov.parentNode) ov.parentNode.removeChild(ov); document.body.classList.remove("sbr-set-open"); }
+  function openSettingsPage() {
+    injectCSS();
+    closeSettingsPage();
+    var ov = document.createElement("div"); ov.id = "sbrSettings"; ov.className = "sbr-set-ov"; document.body.appendChild(ov);
+    ov.innerHTML =
+      '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
+      '<div class="sbr-set-body">' +
+        '<div class="sbr-sec">Account</div>' +
+        '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
+        '<div class="sbr-sec">Preferences</div>' +
+        row("notifications", "bell", "Notifications") +
+        row("appearance", "sun", "Appearance &amp; Theme") +
+        watchRow() +
+        '<div class="sbr-sec">Advanced &amp; Experimental</div>' +
+        advBody() +
+      "</div>";
+    document.body.classList.add("sbr-set-open");
+    // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
+    try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
+    try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
+    ov.addEventListener("click", function (e) {
+      var t = e.target; if (!t || !t.closest) return;
+      if (t.closest("[data-sset=close]")) { closeSettingsPage(); return; }
+      var sw = t.closest("[data-sbr-tg]");
+      if (sw) { var id = sw.getAttribute("data-sbr-tg"), key = sw.getAttribute("data-sbr-key"), on = !sw.classList.contains("on"); setToggle(id, key, on); sw.classList.toggle("on", on); sw.setAttribute("aria-checked", on); return; }
+      var r = t.closest("[data-sbr-act]");
+      if (r) { var a = r.getAttribute("data-sbr-act"); if (a === "settings") return; closeSettingsPage(); setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60); }
+    }, false);
+  }
+  try { if (typeof window !== "undefined") window.SMD_openSettings = openSettingsPage; } catch (e) {}
 
   function reorganize() {
     try {
