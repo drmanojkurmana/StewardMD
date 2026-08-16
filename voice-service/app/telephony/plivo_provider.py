@@ -72,7 +72,21 @@ class PlivoStreamTelephony(TelephonyProvider):
         self._barge = False
 
     async def dial(self, call):
-        return self._answered              # origination happened before the WS; connection == answered
+        # Plivo DROPS any audio sent before it emits the "start" event. Wait for it (bounded) so the greeting
+        # isn't lost into a not-yet-ready stream — the classic "call connects but caller hears dead air".
+        try:
+            while True:
+                raw = await asyncio.wait_for(self.ws.receive_text(), timeout=self._max_ms / 1000.0)
+                m = json.loads(raw)
+                ev = m.get("event")
+                if ev == "start":
+                    self.stream_id = (m.get("start") or {}).get("streamId") or m.get("streamId")
+                    return True
+                if ev in ("stop", "closed"):
+                    return False
+                # ignore early media/other events until "start"
+        except asyncio.TimeoutError:
+            return self._answered           # no explicit start seen — proceed rather than hang
 
     async def _recv_media(self):
         """Yield inbound PCM16 chunks from Plivo media frames; track the stream id."""
