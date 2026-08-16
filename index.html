@@ -767,6 +767,30 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   .verify-badge.pending  { background:rgba(240,193,90,0.18); color:#f3dfa8; }
   .verify-badge.unverified,.verify-badge.rejected { background:rgba(232,90,90,0.16); color:#f4bcbc; }
 </style>
+<style>
+  /* Verify-gate role chooser + UI polish (StewardMD teal accent on the dark gate) */
+  #verifyGate{ --vg-accent:#34d6bf; }
+  .verify-rolewrap{ width:100%; margin:2px 0 16px; }
+  .verify-rolelbl{ font:700 11px/1 var(--sans,system-ui); letter-spacing:.06em; text-transform:uppercase; color:rgba(246,247,245,.5); margin:0 2px 8px; }
+  .verify-roles{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .verify-role{ display:flex; flex-direction:column; align-items:center; gap:7px; padding:13px 8px; border-radius:14px;
+    border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04); color:rgba(246,247,245,.72);
+    font:700 12px/1.2 var(--sans,system-ui); text-align:center; cursor:pointer; transition:border-color .15s, background .15s, color .15s, transform .1s; }
+  .verify-role:hover{ border-color:rgba(52,214,191,.5); }
+  .verify-role:active{ transform:scale(.97); }
+  .verify-role.is-on{ border-color:var(--vg-accent); background:rgba(52,214,191,.14); color:#eafaf7; box-shadow:0 0 0 3px rgba(52,214,191,.14); }
+  .verify-role .vr-ic{ width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
+  .verify-role .vr-ic svg{ width:24px; height:24px; }
+  .verify-role.is-on .vr-ic{ color:var(--vg-accent); }
+  .verify-role .vr-l{ display:block; }
+  /* polish: drop zone + submit accent → teal (was cyan #34b7e8) */
+  #verifyGate .verify-drop:hover{ border-color:var(--vg-accent); background:rgba(52,214,191,.06); }
+  #verifyGate .verify-drop.has-file{ border-color:var(--vg-accent); }
+  #verifyGate .verify-reginput:focus{ border-color:var(--vg-accent); }
+  #verifyGate #verifySubmit{ background:var(--vg-accent); color:#062b26; font-weight:800; border:none; }
+  #verifyGate #verifySubmit:hover{ filter:brightness(1.05); }
+  @media (max-width:360px){ .verify-role{ padding:11px 5px; font-size:11px; } .verify-role .vr-ic svg{ width:21px; height:21px; } }
+</style>
 <div id="verifyGate" class="hidden">
   <button id="verifyClose" aria-label="Close" title="Close"
     style="display:none;position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:5;width:44px;height:44px;text-align:center;background:none;border:none;color:#f6f7f5;font-size:28px;line-height:44px;cursor:pointer;opacity:.85;">×</button>
@@ -778,6 +802,12 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <b>NMC / State Medical Council registration certificate</b> — or enter your
       <b>registration number</b> and upload <b>Aadhaar / any government photo ID</b>
       (we read only your name to match the register; the ID is never stored).
+    </div>
+
+    <!-- "I am a…" role chooser — populated + wired by verify.js (SVG icons, no emoji) -->
+    <div class="verify-rolewrap" id="verifyRoleWrap">
+      <div class="verify-rolelbl">I am a</div>
+      <div class="verify-roles" id="verifyRoles" role="tablist" aria-label="Choose your role"></div>
     </div>
 
     <!-- Account + verification status summary (populated by verify.js) -->
@@ -794,7 +824,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <span id="verifyFileLabel">📄 Choose your registration certificate</span>
         <span class="verify-drop-sub" id="verifyDropSub">JPG, PNG or PDF · from NMC / State Medical Council</span>
       </label>
-      <div class="verify-regrow">
+      <div class="verify-regrow" id="verifyRegRow">
         <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="Registration number (optional)" autocomplete="off" spellcheck="false">
         <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload your <b>Aadhaar or any government photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
       </div>
@@ -1464,7 +1494,7 @@ window.openExternal = function (u) {
 <script src="/pro-badge.js?v=gold692" defer></script>
 <script src="/signout-fix.js?v=gold339" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
-<script src="/verify.js?v=gold1025-gate" defer></script>
+<script src="/verify.js?v=gold1026-roles" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before

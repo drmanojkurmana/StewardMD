@@ -275,6 +275,7 @@ export async function onRequest(context) {
   const mime     = body.mime || "image/jpeg";
   const typedReg = String(body.regNo || "").trim();   // present ⇒ ID mode
   const idMode   = !!typedReg;
+  const role     = String(body.role || "doctor").toLowerCase();   // doctor | intern | student
   if (!idToken)  return json({ error: "missing_id_token" }, 401);
 
   // "Skip for now" — grant one 7-day provisional trial per account (no certificate, no
@@ -318,7 +319,7 @@ export async function onRequest(context) {
     console.log("[verify] uid", uid, "→ MANUAL:", reason);
     const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
-      uid, email, status: "pending", reason,
+      uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name,
       provisionalUntil, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
@@ -326,6 +327,11 @@ export async function onRequest(context) {
     try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
     return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
   };
+
+  // Interns/residents & students aren't on the NMC register — an institute/college ID can't be
+  // auto-verified, so route straight to manual review (provisional access, prescription locked).
+  // The owner approves from the admin console (User control → Approve verification).
+  if (role === "intern" || role === "student") return toManual(role === "student" ? "medical_student_id" : "intern_resident_id");
 
   // 3. decide — the register (live NMC, D1 fallback) is authoritative. In ID mode we match the
   // name read off the ID against NMC's registered name for the reg number the doctor typed.

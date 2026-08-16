@@ -73,6 +73,44 @@
   function provisionalActive(iso) { if (!iso) return false; var t = Date.parse(iso); return !isNaN(t) && Date.now() < t; }
   function daysLeft(iso) { var t = Date.parse(iso); return isNaN(t) ? 0 : Math.max(0, Math.ceil((t - Date.now()) / 86400000)); }
 
+  // ---- Role chooser: who is verifying → what proof they upload -----------------------------
+  // Registered doctors auto-verify against the NMC register (cert, or reg-no + govt photo ID).
+  // Interns/residents & students aren't on the register → they upload an institute/college ID
+  // which goes to manual review (provisional access, prescription generator stays locked).
+  var ROLES = {
+    doctor:  { icon: "shield", label: "Registered doctor",
+      sub: "StewardMD is for registered doctors. Verify instantly by uploading your <b>NMC / State Medical Council certificate</b> — or enter your <b>registration number</b> and upload a <b>government photo ID</b> (we read only your name to match the register; the ID is never stored).",
+      fileLabel: "Choose your registration certificate", dropSub: "JPG, PNG or PDF · NMC / State Medical Council",
+      idFileLabel: "Choose a government photo ID", idDropSub: "Any government photo ID · we read only your name · never stored", reg: true },
+    intern:  { icon: "idcard", label: "Intern / Resident",
+      sub: "Upload your <b>hospital or college ID card</b>. Our team reviews it and unlocks StewardMD — the prescription generator stays locked until your medical registration is verified.",
+      fileLabel: "Choose your hospital / Institute ID", dropSub: "JPG, PNG or PDF · hospital or college ID card", reg: false },
+    student: { icon: "note", label: "Medical student",
+      sub: "Upload your <b>medical college ID card</b>. Our team reviews it and unlocks StewardMD's learning tools — prescription and clinical-action features stay locked for students.",
+      fileLabel: "Choose your College ID", dropSub: "JPG, PNG or PDF · medical college ID card", reg: false }
+  };
+  var _role = "doctor";
+  var _vstatus = null;   // last-rendered verification status (verify.js has no _state; that's email-auth.js)
+  function curRoleCfg() { return ROLES[_role] || ROLES.doctor; }
+  function ensureRoles() {
+    var host = $("verifyRoles"); if (!host || host.childNodes.length) return;
+    host.innerHTML = Object.keys(ROLES).map(function (k) {
+      return '<button type="button" class="verify-role' + (k === _role ? " is-on" : "") + '" data-role="' + k + '" role="tab" aria-selected="' + (k === _role) + '"><span class="vr-ic">' + vfIco(ROLES[k].icon) + '</span><span class="vr-l">' + ROLES[k].label + '</span></button>';
+    }).join("");
+    host.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-role]"); if (b) applyRole(b.getAttribute("data-role")); });
+  }
+  function applyRole(r) {
+    if (!ROLES[r]) r = "doctor";
+    _role = r;
+    var host = $("verifyRoles");
+    if (host) Array.prototype.forEach.call(host.querySelectorAll("[data-role]"), function (b) { var on = b.getAttribute("data-role") === r; b.classList.toggle("is-on", on); b.setAttribute("aria-selected", on); });
+    var rr = $("verifyRegRow"); if (rr) rr.style.display = curRoleCfg().reg ? "" : "none";   // reg-no is doctors-only
+    if (!curRoleCfg().reg) { var reg = $("verifyRegNo"); if (reg) reg.value = ""; }             // clear so ID-mode never fires for students/interns
+    // Only retitle the forced/unverified gate; leave the pending/trial/verified copy render() set.
+    if (_vstatus === "unverified" || _vstatus == null) { var sub = $("verifySubtitle"); if (sub) sub.innerHTML = curRoleCfg().sub; }
+    syncMode();
+  }
+
   // Render the overlay for a given mode. forced=true → hard block (no close).
   function render(mode, data) {
     var g = gate(); if (!g) return;
@@ -83,6 +121,7 @@
     var trial    = data && data.status === "trial";
     var pending  = data && (data.status === "pending" || trial);   // both = provisional, upload still offered
     var st = (data && data.status) || "unverified";
+    _vstatus = st;
 
     var acc = $("verifyAccount");
     if (acc && st !== "loading") {
@@ -110,8 +149,10 @@
     // re-submit a clearer certificate and get instant verification without being stuck.
     var up = $("verifyUploadBlock");
     if (up) up.style.display = verified ? "none" : "";
+    var rw = $("verifyRoleWrap"); if (rw) rw.style.display = verified ? "none" : "";   // role chooser only while not fully verified
     if (!verified) {
       var sub2 = $("verifySubmit"); if (sub2) sub2.disabled = false;
+      ensureRoles(); applyRole(_role);   // build/refresh the role chooser + role-specific labels
       syncMode();   // sets labels/button for cert-vs-ID mode + file state
       if (pending) { setStatusMsg("pending", "Under review — we'll email you. Uploading a clearer photo/scan (or reg number + a photo ID) often verifies instantly."); }
       else { clearStatusMsg(); }
@@ -174,7 +215,7 @@
       : "Reading your certificate and checking the National Medical Register…"));
     try {
       var parts = await Promise.all([fileToB64(file), u.getIdToken()]);
-      var payloadBody = { idToken: parts[1], image: parts[0].b64, mime: parts[0].mime };
+      var payloadBody = { idToken: parts[1], image: parts[0].b64, mime: parts[0].mime, role: _role };
       if (typedReg) payloadBody.regNo = typedReg;   // ID-mode: name-match against this reg no
       var res = await fetch("/api/verify-doctor", {
         method: "POST", headers: { "Content-Type": "application/json" },
@@ -265,11 +306,14 @@
   function syncMode() {
     var reg = $("verifyRegNo"), label = $("verifyFileLabel"), sub = $("verifyDropSub"),
         btn = $("verifySubmit"), input = $("verifyFile"), drop = $("verifyDrop");
-    var idMode = !!(reg && reg.value.trim());
+    var R = curRoleCfg();
+    var idMode = R.reg && !!(reg && reg.value.trim());          // ID-mode (reg-no + photo ID) is doctors-only
     var hasFile = !!(input && input.files && input.files[0]);
-    if (label && !hasFile) label.innerHTML = idMode ? vfIco("idcard") + " Choose a photo ID" : vfIco("note") + " Choose your registration certificate";
-    if (sub) sub.textContent = idMode ? "Any government photo ID · we read only your name · never stored" : "JPG, PNG or PDF · from NMC / State Medical Council";
-    if (btn && !btn.disabled) btn.textContent = hasFile ? (idMode ? "Verify with ID" : "Verify & continue") : (idMode ? "Choose photo ID" : "Choose certificate");
+    if (label && !hasFile) label.innerHTML = idMode ? (vfIco("idcard") + " " + (R.idFileLabel || "Choose a photo ID")) : (vfIco("note") + " " + R.fileLabel);
+    if (sub) sub.textContent = idMode ? (R.idDropSub || "Any government photo ID · we read only your name · never stored") : R.dropSub;
+    if (btn && !btn.disabled) btn.textContent = hasFile
+      ? (idMode ? "Verify with ID" : (R.reg ? "Verify & continue" : "Submit for review"))
+      : (idMode ? "Choose photo ID" : ("Choose " + (R.reg ? "certificate" : "ID")));
     if (drop) drop.classList.toggle("has-file", hasFile);
   }
 
