@@ -149,6 +149,7 @@ function toEpisode(doc) {
     lastConfidence: f.lastConfidence || "", lastRisk: f.lastRisk || "", lastTrend: f.lastTrend || "", needsReview: !!f.needsReview, lastAnswers: jparse(f.lastAnswersJson, null), recoveredMs: f.recoveredMs || 0, ackMs: f.ackMs || 0, patientKeyHash: f.patientKeyHash || "",
     lastSentDay: (f.lastSentDay == null ? -1 : f.lastSentDay), lastSentMs: f.lastSentMs || 0, lastMissedEscalated: (f.lastMissedEscalated == null ? -1 : f.lastMissedEscalated),
     isMinor: !!f.isMinor, consentVersion: f.consentVersion || "",
+    voiceOptOut: !!f.voiceOptOut, lastVoiceDate: f.lastVoiceDate || "", lastVoiceMs: f.lastVoiceMs || 0,
     _phi: { phoneEnc: f.phoneEnc || "", nameEnc: f.nameEnc || "", guardianEnc: f.guardianEnc || "" },
   };
 }

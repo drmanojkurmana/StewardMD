@@ -37,9 +37,12 @@
   //   lifetime (POSTs /api/connect/admin/sweep, flag-gated + no-op-safe on the Pages side).
   //   // VERIFY interval: hourly is the fail-safe default (tightly bounds sealed eph-key lifetime past TTL);
   //   the owner may relax to daily if the extra hourly no-op hits (404 while Connect is flag-OFF) are unwanted.
+  // FollowCare AI voice-fallback scheduler at the IST call windows: 03:30 UTC = 09:00 IST (shares the
+  //   recovery-dispatcher cron) and 11:30 UTC = 17:00 IST. Per-hospital window/tz + enable are re-checked
+  //   server-side, so this is a no-op until a hospital turns voice ON.
   // scheduled() branches on event.cron. Requires the secret UPDATES_ADMIN_TOKEN
   // (wrangler secret put UPDATES_ADMIN_TOKEN), matching the Pages project.
-  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *", "0 * * * *"] },
+  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *", "30 11 * * *", "0 * * * *"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
   "r2_buckets": [

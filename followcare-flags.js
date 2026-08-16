@@ -18,7 +18,8 @@
     smd_followcare_ui2: { type: "bool", def: true, query: "fcui", desc: "FollowCare premium UI redesign (v2)" },
     smd_followcare_sms: { type: "bool", def: false, query: "fcsms", desc: "SMS channel (needs provider config)" },
     smd_followcare_ai_summary: { type: "bool", def: false, query: "fcai", desc: "AI doctor summary (Phase 2)" },
-    smd_followcare_adaptive: { type: "bool", def: false, query: "fcadapt", desc: "Adaptive AI conversation (Phase 2)" }
+    smd_followcare_adaptive: { type: "bool", def: false, query: "fcadapt", desc: "Adaptive AI conversation (Phase 2)" },
+    smd_followcare_voice: { type: "bool", def: false, query: "fcvoice", desc: "AI voice fallback call (needs per-hospital enable + voice service)" }
   };
 
   function raw(key) {
