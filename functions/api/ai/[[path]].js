@@ -312,8 +312,17 @@ const azureProvider = {
     const base = String(env.AZURE_OPENAI_ENDPOINT).replace(/\/+$/, "");
     const ver = env.AZURE_OPENAI_API_VERSION || "preview";
     const url = base + "/chat/completions?api-version=" + encodeURIComponent(ver);
-    const temp = (typeof o.temperature === "number") ? o.temperature : 0.2;
-    const body = { model: env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini", messages: azureMessages(parts), temperature: temp, max_tokens: maxTokens || 1024 };
+    const model = env.AZURE_OPENAI_DEPLOYMENT || "gpt-5-mini";
+    const body = { model: model, messages: azureMessages(parts) };
+    if (/^(gpt-5|gpt-6|o[0-9])/i.test(model)) {
+      // GPT-5 / o-series reasoning models: max_completion_tokens (NOT max_tokens), default temperature only,
+      // and reasoning_effort so the budget yields the ANSWER, not internal reasoning tokens.
+      body.max_completion_tokens = Math.max(256, maxTokens || 1024);
+      body.reasoning_effort = env.AZURE_OPENAI_REASONING_EFFORT || "minimal";
+    } else {
+      body.max_tokens = maxTokens || 1024;
+      body.temperature = (typeof o.temperature === "number") ? o.temperature : 0.2;
+    }
     const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + env.AZURE_OPENAI_API_KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) }, aiTimeoutMs(env));
     return parseChatCompletion(jr.data, jr.status);
   }
