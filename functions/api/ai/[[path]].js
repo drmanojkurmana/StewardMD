@@ -103,6 +103,7 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
+import { answerCacheOn, answerCacheKey, getCachedAnswer, putCachedAnswer } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -1160,6 +1161,25 @@ export async function onRequest(context) {
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
+        // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
+        // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
+        // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
+        const _cacheEligible = answerCacheOn(env) && !hasDx && !(body && body.tier) && !maikWiringOn(env);
+        let _ckey = null;
+        if (_cacheEligible) {
+          try {
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env) });
+            if (_ckey) {
+              const _hit = await getCachedAnswer(usageKv(env), _ckey);
+              if (_hit && _hit.text) {
+                try { await recordUsage(gate, { inTok: 0, outTok: 0, status: "cache" }); } catch (e) {}
+                const _cc = []; (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && _cc.indexOf(p) < 0) _cc.push(p); }));
+                if (wantStream) return withCors(request, streamTextAsSSE(_hit.text));
+                return json({ text: _hit.text, mode: "grounded", citations: _cc, cached: true });
+              }
+            }
+          } catch (e) { _ckey = null; }
+        }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
         // output budget as the streaming path, so the UpToDate-style structure (assumption lead,
@@ -1175,6 +1195,7 @@ export async function onRequest(context) {
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
+        if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
         if (wantStream) return withCors(request, streamTextAsSSE(text));
