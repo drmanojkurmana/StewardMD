@@ -10,7 +10,8 @@ whole loop runs offline in tests with fakes (no GPU, no Plivo, no network).
 import asyncio
 import time
 
-from .state_machine import Conversation, ASK
+from . import responder
+from .state_machine import Conversation, ASK, Turn
 
 
 class CallSession:
@@ -50,12 +51,21 @@ class CallSession:
 
         turn = conv.start()
         await self._say(turn)
+        silence_reasks = 0
         while turn.expect_reply and not turn.done:
             pcm = await self.telephony.listen(self.cfg.turn_timeout_s)
             if pcm is None:                       # silence / hangup
+                # A pause isn't a hangup — re-prompt once and repeat the question before giving up, so a
+                # patient who's just thinking (or a slightly-slow line) doesn't get cut off.
+                if silence_reasks < 1:
+                    silence_reasks += 1
+                    await self._say(Turn(responder.say("still_there", conv.lang), expect_reply=True))
+                    await self._say(turn)         # repeat the same question
+                    continue
                 if not conv.answers:
                     conv.status = "no_answer"
                 break
+            silence_reasks = 0
             loop = asyncio.get_event_loop()
             transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, conv.lang)
             cur_q = conv.questions[conv.q_index] if (conv.phase == ASK and conv.q_index < len(conv.questions)) else None

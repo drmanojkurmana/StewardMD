@@ -43,7 +43,7 @@ class Config:
         self.device = e.get("VOICE_DEVICE", "cuda")
         # Call behaviour.
         self.max_concurrent = _int("VOICE_MAX_CONCURRENT", 5)
-        self.turn_timeout_s = _int("VOICE_TURN_TIMEOUT_S", 8)     # silence window before we treat a turn as done
+        self.turn_timeout_s = _int("VOICE_TURN_TIMEOUT_S", 10)    # silence window before we treat a turn as done
         self.no_answer_timeout_s = _int("VOICE_NO_ANSWER_TIMEOUT_S", 30)
         self.max_reasks = _int("VOICE_MAX_REASKS", 1)
         self.idle_shutdown_s = _int("VOICE_IDLE_SHUTDOWN_S", 180)  # self-stop the GPU after this idle gap
