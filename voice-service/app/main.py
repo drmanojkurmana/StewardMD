@@ -130,6 +130,8 @@ async def ingest(request: Request):
     if cid in STATE["calls"]:
         return {"callId": cid, "duplicate": True}
     STATE["calls"][cid] = {"call": call, "state": "originated", "ts": time.time()}
+    if body.get("dryDial"):   # register only — a local harness opens the WS itself (offline audio-loop test, no phone)
+        return {"callId": cid, "dryDial": True, "wsPath": "/plivo/stream/" + cid, "ready": STATE["ready"]}
     ok = await asyncio.get_event_loop().run_in_executor(None, plivo.originate, call.get("phone"), cid)
     if not ok:
         STATE["calls"][cid]["state"] = "done"
