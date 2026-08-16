@@ -315,7 +315,9 @@ export default {
   //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients AND sweep overdue ICU round tasks
   //                     (push the whole unit) — covers units where no member's app is open.
   //   "30 3 * * *"    → FollowCare daily recovery dispatcher (09:00 IST): send due check-in links +
-  //                     reminders, escalate missed check-ins, run the retention sweep.
+  //                     reminders, escalate missed check-ins, run the retention sweep — plus the AI
+  //                     voice-fallback morning window (run-voice; no-op until a hospital enables voice).
+  //   "30 11 * * *"   → FollowCare AI voice-fallback evening window (17:00 IST) (run-voice).
   //   "0 * * * *"     → Connect ABDM reconciliation GC sweep (hourly): erase expired/terminal ephemeral
   //                     keys + push-buffers. Flag-gated + no-op-safe + fail-safe on the Pages side, so it
   //                     is a cheap 404 while Connect is unprovisioned/flag-OFF.
@@ -337,8 +339,13 @@ export default {
       ctx.waitUntil(post("/api/lifecycle/run"));           // daily: Pro-upsell email for day-3 non-converters
       return;
     }
-    if (event.cron === "30 3 * * *") {                     // FollowCare: daily recovery dispatcher
+    if (event.cron === "30 3 * * *") {                     // FollowCare: daily recovery dispatcher (09:00 IST)
       ctx.waitUntil(post("/api/followcare/admin/run-scheduler")); // due check-ins + reminders + missed escalation + retention sweep
+      ctx.waitUntil(post("/api/followcare/admin/run-voice"));     // AI voice fallback — morning window (no-op until a hospital enables voice)
+      return;
+    }
+    if (event.cron === "30 11 * * *") {                    // FollowCare: AI voice fallback — evening window (17:00 IST)
+      ctx.waitUntil(post("/api/followcare/admin/run-voice"));
       return;
     }
     const path = event.cron === "0 6 * * 1" ? "/api/updates/digest" : "/api/updates/sync";

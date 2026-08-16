@@ -113,11 +113,21 @@
     // Doctor Action Center
     action: function (payload) { return req("POST", "/action", payload); },
     comms: function (episodeId) { return req("GET", "/comms?id=" + encodeURIComponent(episodeId)); },
-    draft: function (episodeId, kind) { return req("POST", "/draft", { episodeId: episodeId, kind: kind }); }
+    draft: function (episodeId, kind) { return req("POST", "/draft", { episodeId: episodeId, kind: kind }); },
+    // AI Voice Fallback (flag smd_followcare_voice)
+    queueCall: function (episodeId) { return req("POST", "/voice/call", { episodeId: episodeId }); },
+    voiceSettingsGet: function () { return req("GET", "/voice/settings"); },
+    voiceSettingsSet: function (payload) { return req("POST", "/voice/settings", payload); }
   };
   var CM = (function () { try { return G.FollowCareComms || null; } catch (e) { return null; } })();
   function actionsEnabled() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_actions")); } catch (e) { return true; } }
   function ui2() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_ui2")); } catch (e) { return false; } }
+  function voiceEnabled() { try { return !!(G.SMD_FOLLOWCARE_FLAGS && G.SMD_FOLLOWCARE_FLAGS.bool("smd_followcare_voice")); } catch (e) { return false; } }
+  // Human text for a voice-eligibility reason code (returned by /episode → episode.voice.reason).
+  function voiceReasonText(code) {
+    var M = { auto: "Eligible for a fallback call", manual: "Eligible for a fallback call", within_fallback: "Waiting for the digital check-in first", nothing_due: "No pending check-in", opted_out: "Patient opted out of calls", voice_disabled: "Voice calling is off for this hospital", recovered: "Patient has recovered", closed: "Episode closed" };
+    return M[code] || "Not eligible right now";
+  }
   // motion.dev helpers — enhancement-only (no-op if Motion missing / prefers-reduced-motion). spring() is
   // computed inside try/catch so it can never escape (the portal-crash lesson).
   var _M = (function () { try { return G.Motion || null; } catch (e) { return null; } })();
@@ -281,6 +291,7 @@
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
       body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
       var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
       if (ui2()) mStagger(rows);
@@ -452,6 +463,84 @@
     toast("Copy this link: " + link);
   }
 
+  // ---- AI Voice Fallback: per-hospital settings screen (flag smd_followcare_voice) ---------
+  function renderVoiceSettings(body) {
+    body.innerHTML = "";
+    body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
+    body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+    API.voiceSettingsGet().then(function (res) {
+      body.innerHTML = "";
+      body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
+      if (res.status === 400 || !(res.body && res.body.settings)) { body.appendChild(h("div", { "class": "fc-empty", text: "Set your hospital first (enroll a patient), then configure voice." })); return; }
+      var s = res.body.settings, v = s.voice, a = s.ambulance;
+      body.appendChild(h("div", { style: "margin:10px 0;font-weight:800;font-size:15px;color:#0e6e63", text: "AI Voice Follow-up" }));
+      body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If a discharged patient ignores the check-in link, place at most one short AI wellbeing call per day, only inside the windows below." }));
+      var vEnable = h("input", { type: "checkbox" }); vEnable.checked = !!v.enabled;
+      body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [vEnable, document.createTextNode("Enable AI voice follow-up calls")]));
+      function numIn(val, min, max) { return h("input", { type: "number", min: String(min), max: String(max), value: String(val), inputmode: "numeric", style: "width:80px" }); }
+      var mS = numIn(v.morningStart, 0, 23), mE = numIn(v.morningEnd, 1, 24), eS = numIn(v.eveningStart, 0, 23), eE = numIn(v.eveningEnd, 1, 24);
+      body.appendChild(field("Morning window (start / end hour, 24h)", h("div", { style: "display:flex;gap:8px;align-items:center" }, [mS, document.createTextNode("to"), mE])));
+      body.appendChild(field("Evening window (start / end hour, 24h)", h("div", { style: "display:flex;gap:8px;align-items:center" }, [eS, document.createTextNode("to"), eE])));
+      var tz = h("input", { type: "text", value: v.tz || "Asia/Kolkata", placeholder: "Asia/Kolkata" });
+      body.appendChild(field("Timezone (IANA, e.g. Asia/Kolkata)", tz));
+      var conc = numIn(v.maxConcurrent, 1, 50);
+      body.appendChild(field("Max simultaneous calls", conc));
+      body.appendChild(h("div", { style: "margin:2px 0 14px;color:var(--slate,#5a7184);font-size:12px", text: "Maximum 1 call per patient per day (fixed for safety)." }));
+
+      body.appendChild(h("div", { style: "margin:12px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Emergency / Ambulance" }));
+      body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If a patient explicitly asks for an ambulance on a call, notify this contact. The AI never dispatches — it only notifies." }));
+      var aEnable = h("input", { type: "checkbox" }); aEnable.checked = !!a.enabled;
+      body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [aEnable, document.createTextNode("Enable ambulance notifications")]));
+      var aName = h("input", { type: "text", value: a.contactName || "", placeholder: "Contact name (e.g. ER desk)" });
+      var aPhone = h("input", { type: "tel", inputmode: "numeric", value: a.phone || "", placeholder: "Ambulance contact number" });
+      var aMethod = h("select", {}, [h("option", { value: "sms", text: "SMS" }), h("option", { value: "whatsapp", text: "WhatsApp" })]); aMethod.value = a.method || "sms";
+      body.appendChild(field("Ambulance contact name", aName));
+      body.appendChild(field("Ambulance contact number", aPhone));
+      body.appendChild(field("Notification method", aMethod));
+
+      var err = h("div", { role: "alert", tabindex: "-1" });
+      var save = h("button", { "class": "fc-btn", style: "margin-top:6px", text: "Save settings" });
+      save.addEventListener("click", function () {
+        err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
+        var payload = {
+          voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value },
+          ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value }
+        };
+        API.voiceSettingsSet(payload).then(function (r) {
+          save.disabled = false; save.textContent = "Save settings";
+          if (r.body && r.body.ok) toast("Voice settings saved"); else err.appendChild(h("div", { "class": "fc-err", text: "Could not save settings." }));
+        }).catch(function () { save.disabled = false; save.textContent = "Save settings"; err.appendChild(h("div", { "class": "fc-err", text: "Connection problem." })); });
+      });
+      body.appendChild(err); body.appendChild(save);
+    }).catch(function () { body.innerHTML = ""; body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" })); body.appendChild(h("div", { "class": "fc-empty", text: "Could not load voice settings." })); });
+  }
+
+  // The "AI Follow-up Call" card in the patient detail view: status + the manual call button (1/day enforced).
+  function voiceCard(episodeId, voice) {
+    var lines = [h("div", { style: "font-weight:800;font-size:13px;color:#0e6e63;margin-bottom:6px", text: "AI Follow-up Call" })];
+    if (!voice.voiceEnabled) {
+      lines.push(h("div", { style: "font-size:13px;color:var(--slate,#5a7184)", text: "Voice calling is off for this hospital. Enable it in Voice & ambulance settings." }));
+      return h("div", { "class": "fc-voice-card", style: "margin:12px 0;padding:12px 14px;border:1px solid var(--line,#dbe4e2);border-radius:12px;background:var(--panel,#fff)" }, lines);
+    }
+    lines.push(h("div", { style: "font-size:13px;margin-bottom:3px", text: voiceReasonText(voice.reason) }));
+    if (voice.lastCallMs) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Last call " + fmtWhen(voice.lastCallMs) + (voice.lastOutcome ? "  ·  " + voice.lastOutcome : "") + (voice.lastStatus ? "  ·  " + voice.lastStatus : "") }));
+    else lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "No calls placed yet." }));
+    if (voice.ambulanceRequested) lines.push(h("div", { style: "font-size:12.5px;font-weight:700;color:#b3261e;margin-top:3px", text: "⚠ Ambulance was requested" }));
+    if (voice.optedOut) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);margin-top:3px", text: "Patient opted out of calls." }));
+    var blocked = voice.calledToday || voice.optedOut;
+    var btn = h("button", { "class": "fc-btn" + (blocked ? " sec" : ""), style: "margin-top:10px;width:100%", text: voice.calledToday ? "Already called today" : "AI Call Patient" });
+    if (blocked) btn.disabled = true;
+    else btn.addEventListener("click", function () {
+      btn.disabled = true; btn.textContent = "Queuing…";
+      API.queueCall(episodeId).then(function (r) {
+        if (r.body && r.body.ok) { toast(r.body.within ? "Calling now…" : "Call scheduled for the next window"); renderDetail(episodeId); }
+        else { var e = r.body && r.body.error; toast(e === "already_called_today" ? "Already called today" : e === "opted_out" ? "Patient opted out" : e === "nothing_due" ? "No pending check-in to call about" : "Could not queue the call"); btn.disabled = false; btn.textContent = "AI Call Patient"; }
+      }).catch(function () { toast("Connection problem"); btn.disabled = false; btn.textContent = "AI Call Patient"; });
+    });
+    lines.push(btn);
+    return h("div", { "class": "fc-voice-card", style: "margin:12px 0;padding:12px 14px;border:1px solid var(--line,#dbe4e2);border-radius:12px;background:var(--panel,#fff)" }, lines);
+  }
+
   function renderDetail(episodeId) {
     var body = shell();
     body.innerHTML = "";
@@ -510,6 +599,8 @@
         hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
         body.appendChild(hist);
       }
+      // AI voice fallback card (flag smd_followcare_voice): status + manual "AI Call Patient" (1-call/day enforced).
+      if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
       // Acknowledge clears the "needs review" flag (an escalated episode leaves the list only by clinician action).
       if (ep.escalation === "red" || ep.escalation === "orange") {
         var ack = h("button", { "class": "fc-btn", style: "margin-top:14px", text: "Mark reviewed" });

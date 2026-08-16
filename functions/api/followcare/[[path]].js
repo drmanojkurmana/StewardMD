@@ -40,6 +40,12 @@ import "../../../followcare-diagnosis.js";
 // Doctor Action Center (flag smd_followcare_actions): doctor↔patient communication. Pure model + server layer.
 import * as FCC from "../../_followcare_comms.js";
 import Comms from "../../../followcare-comms.js";
+// AI Voice Fallback (flag smd_followcare_voice): eligibility/scheduling/records + engine-reuse on call result.
+import * as FCV from "../../_followcare_voice.js";
+import * as GPU from "../../_followcare_gpu.js";
+// Reuse the EXISTING Gemini transport (Vertex AI primary -> AI Studio developer-key failover) for the voice
+// slot-extraction — one AI integration, no Google creds on the RunPod box. Same import other server code uses.
+import { callGemini } from "../ai/[[path]].js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -83,6 +89,15 @@ async function rateLimit(env, request, key) {
 // Fire a de-identified "review needed" push to the enrolling clinician. Best-effort; never blocks the reply,
 // never carries PHI (no name/phone — just disease + episode id). Reuses the native-push layer; push tokens
 // are keyed under the namespaced id "fb:"+uid, while the episode stores the raw Firebase uid.
+// Constant-time string compare (secret tokens are high-entropy; still avoid an early-return timing oracle).
+function ctEq(a, b) { a = String(a || ""); b = String(b || ""); if (a.length !== b.length) return false; let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0; }
+// The RunPod voice service's credential for posting call results (Phase 2). Owner login also works (for testing).
+async function voiceServiceOK(request, env) {
+  const t = request.headers.get("X-Voice-Token") || "";
+  if (env.FOLLOWCARE_VOICE_SERVICE_TOKEN && ctEq(t, env.FOLLOWCARE_VOICE_SERVICE_TOKEN)) return true;
+  return await ownerOK(request, env);
+}
+
 async function notifyClinician(env, ep, escalation) {
   try {
     if (!ep || !ep.doctorUid || !nativePushEnabled(env)) return;
@@ -99,6 +114,7 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "");
   const isAdmin = /\/admin(\/|$)/.test(path);
+  const isVoice = /\/voice\//.test(path);
   const seg = path.split("/").pop();
 
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -115,6 +131,16 @@ export async function onRequest(context) {
       // Cron/owner-triggered daily dispatch: send due check-in links + reminders, escalate missed check-ins.
       if (request.method === "POST" && seg === "run-scheduler") {
         const summary = await runScheduler(env, Date.now(), { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
+        return json({ ok: true, summary }, 200, request);
+      }
+      // AI voice fallback scheduler (flag smd_followcare_voice; per-hospital enable). Fires at the IST window
+      // crons. Enqueues eligible non-responders inside their window + reports the GPU-start decision. Phase 1
+      // does not place calls (the RunPod voice service does) — it is inert until a hospital enables voice.
+      if (request.method === "POST" && seg === "run-voice") {
+        const summary = await FCV.runVoiceScheduler(env, Date.now(), {});
+        // Spec §12/§15: only spin the GPU up when there are calls to place. The RunPod voice service then
+        // pulls its queue (/voice/queue), dials, and self-stops when drained. Fail-safe if RunPod unconfigured.
+        if (summary.gpuWouldStart) { try { summary.gpu = await GPU.startPod(env); } catch (e) { summary.gpu = { ok: false, error: "gpu_start_failed" }; } }
         return json({ ok: true, summary }, 200, request);
       }
       // Phase 3 — hospital command-center analytics (owner-gated; NON-PHI aggregates only).
@@ -213,6 +239,59 @@ export async function onRequest(context) {
       return json(res, res.ok ? 200 : (res.error === "link_expired" ? 410 : (res.error === "media_not_configured" ? 503 : 400)), request);
     }
 
+    // ---------------- VOICE FALLBACK: result ingest + patient opt-out ----------------
+    // The RunPod voice service posts a completed call's result here (its own service token). Runs the SAME
+    // engine as the portal submit → escalation/notify/records converge on one source of truth.
+    if (isVoice && seg === "result" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const res = await FCV.submitVoiceResult(env, b.episodeId || "", b, { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
+      return json(res, res.ok ? 200 : (res.error === "not_found" ? 404 : 400), request);
+    }
+    // The RunPod voice service pulls the calls to dial NOW (each with the ordered question script + decrypted
+    // phone). Already-responded/opted-out scheduled calls are cancelled here (spec §4).
+    if (isVoice && seg === "queue" && request.method === "GET") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      return json(await FCV.voiceQueueForDialing(env, Date.now()), 200, request);
+    }
+    // In-call escalation signal (engine-backed, read-only) so the state machine can branch mid-call.
+    if (isVoice && seg === "classify" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const res = await FCV.classifyLive(env, b.episodeId || "", b.answers || {});
+      return json(res, res.ok ? 200 : 404, request);
+    }
+    // Call-status transitions from the service (ringing / in_progress / no_answer / technical_failure).
+    if (isVoice && seg === "status" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      return json(await FCV.markVoiceStatus(env, b.callId || "", b), 200, request);
+    }
+    // Slot extraction for the voice service: reuse the shared Gemini transport (Vertex primary, AI Studio
+    // GEMINI_API_KEY fallback). Speech-understanding only — NOT a clinical decision. Fails soft (the state
+    // machine treats a missing/garbled reply as "unclear" and re-asks once).
+    if (isVoice && seg === "nlu" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const prompt = String(b.prompt || "").slice(0, 8000);
+      if (!prompt) return json({ ok: false, error: "missing_prompt" }, 400, request);
+      try {
+        const text = await callGemini(env, [{ text: prompt }], Number(b.maxTokens) || 256, { temperature: 0 });
+        return json({ ok: true, text: text || "" }, 200, request);
+      } catch (e) {
+        return json({ ok: false, error: "ai_unavailable" }, 200, request);
+      }
+    }
+    // Patient opts out of (or back into) AI voice calls from their portal link — token-gated, no login.
+    if (isVoice && seg === "optout" && request.method === "POST") {
+      const b = await readBody(request);
+      const rl = await rateLimit(env, request, "voice_optout");
+      if (!rl.ok) return json({ error: "rate_limited" }, 429, request);
+      const v = await FC.verifyEpisodeToken(env, b.t);
+      if (!v.ok) return json({ ok: false, error: v.error }, v.error === "link_expired" ? 410 : 400, request);
+      return json(await FCV.setVoiceOptOut(env, v.ep.episodeId, b.optOut !== false), 200, request);
+    }
+
     // ---------------- CLINICIAN (app-gated + Firebase uid) ----------------
     if (!authorise(request, env)) return json({ error: "unauthorized" }, 401, request);
     if (request.method === "GET" && seg === "ready") {
@@ -233,6 +312,35 @@ export async function onRequest(context) {
     if (seg === "hospital" && request.method === "POST") {
       const b = await readBody(request);
       return json(await FC.setDoctorHospital(env, uid, { hospitalId: b.hospitalId, hospitalName: b.hospitalName }), 200, request);
+    }
+
+    // ---------------- VOICE FALLBACK: clinician settings + manual call ----------------
+    // Per-hospital voice + ambulance settings (resolved from the doctor's binding; owner may target any hospital).
+    if (isVoice && seg === "settings") {
+      const bind = await FC.resolveDoctorHospital(env, uid);
+      const isOwner = await ownerOK(request, env);
+      let hospitalId = bind && bind.hospitalId;
+      if (request.method === "GET") {
+        if (isOwner && url.searchParams.get("hospitalId")) hospitalId = url.searchParams.get("hospitalId");
+        if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
+        return json({ ok: true, hospitalId, settings: await FCV.getHospitalSettings(env, hospitalId) }, 200, request);
+      }
+      if (request.method === "POST") {
+        const b = await readBody(request);
+        if (isOwner && b.hospitalId) hospitalId = b.hospitalId;
+        if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
+        return json(await FCV.setHospitalSettings(env, hospitalId, { voice: b.voice, ambulance: b.ambulance }, "doctor:" + uid), 200, request);
+      }
+    }
+    // Doctor-initiated AI call. Same 1-call/day + not-responded + window guards as the scheduler (no bypass).
+    if (isVoice && seg === "call" && request.method === "POST") {
+      const b = await readBody(request);
+      const ep = await FC.getEpisode(env, b.episodeId || "");
+      if (!ep) return json({ error: "not_found" }, 404, request);
+      if (ep.doctorUid !== uid && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const settings = await FCV.getHospitalSettings(env, ep.hospitalId);
+      const r = await FCV.queueVoiceCall(env, ep, settings, Date.now(), { manual: true, actor: "doctor:" + uid });
+      return json(r, r.ok ? 200 : 400, request);
     }
 
     if (request.method === "POST" && seg === "enroll") {
@@ -288,7 +396,10 @@ export async function onRequest(context) {
         prediction: Intel.predictDeterioration(timeline.map(function (t) { return { dayOffset: t.dayOffset, score: t.score, escalation: t.escalation }; }), latest, pw),
         prevention: Intel.preventionPlan(latest, ep.pathwayId),
       };
-      return json({ episode: summary, timeline: timeline, intel: intel }, 200, request);
+      // AI voice fallback status for this episode (eligibility / last call / 1-per-day) — UI shows a card + button.
+      let voice = null;
+      try { const vs = await FCV.getHospitalSettings(env, ep.hospitalId); voice = await FCV.voiceStatusForEpisode(env, ep, vs, Date.now()); } catch (e) {}
+      return json({ episode: summary, timeline: timeline, intel: intel, voice: voice }, 200, request);
     }
 
     // ---------------- Doctor Action Center (clinician, tenant-scoped) ----------------
