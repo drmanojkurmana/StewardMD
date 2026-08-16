@@ -286,6 +286,14 @@ service cloud.firestore {
     match /q_rooms/{roomId}          { allow read, write: if false; }
     match /q_members/{memberId}      { allow read, write: if false; }
     match /q_users/{uid}             { allow read, write: if false; }   // StewardMD-ID per account
+    // Clinic operations: billing MVP (flag smd_opd_billing) + Pro white-label branding. Server-only;
+    // org isolation + capability checks enforced at the API layer. q_patients holds encrypted PHI.
+    match /q_patients/{patientId}    { allow read, write: if false; }   // portable patient registry (encrypted name/mobile)
+    match /q_patient_seq/{orgId}     { allow read, write: if false; }   // per-org MRN sequence counter
+    match /q_orders/{orderId}        { allow read, write: if false; }   // first-class investigation/med orders
+    match /q_tariff/{tariffId}       { allow read, write: if false; }   // price catalog (integer paise)
+    match /q_invoices/{invoiceId}    { allow read, write: if false; }   // invoices + payment record
+    match /q_org_branding/{orgId}    { allow read, write: if false; }   // Pro white-label logo/name
 
     // Everything else is denied.
     match /{document=**} {

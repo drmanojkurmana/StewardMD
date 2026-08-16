@@ -26,6 +26,11 @@ export const CAPS = {
   SESSION_MANAGE: "session.manage", // pause / emergency / session status
   ANALYTICS_VIEW: "analytics.view", // operational analytics
   STAFF_ADMIN: "staff.admin",       // manage the staff->role mapping (owner/admin only)
+  // ---- clinic operations: orders + billing station (flag smd_opd_billing) -------------------
+  ORDER_CREATE: "order.create",     // create a first-class investigation/medication order (doctor)
+  ORDER_READ: "order.read",         // read a patient's orders (cashier / later pharmacy / lab)
+  BILLING_VIEW: "billing.view",     // see the billing station queue + tariff catalog
+  BILLING_CHARGE: "billing.charge", // generate an invoice + record payment (cashier)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -54,7 +59,7 @@ export const ROLE_CAPS = {
   admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0),
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
-           C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW],
+           C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE, C.ORDER_READ],
   // OPD supervisor: full queue control + analytics + READ clinical notes/history. NO EMR treatment.
   supervisor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY,
                C.QUEUE_ASSIGN, C.QUEUE_REMOVE, C.ANALYTICS_VIEW, C.EMR_VIEW],
@@ -70,6 +75,9 @@ export const ROLE_CAPS = {
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
+  // Cashier / billing desk: see the billing queue + tariff, read a patient's orders, and generate +
+  // settle invoices. No queue reorder, no vitals, no treatment. (Pharmacy/lab roles extend this pattern.)
+  cashier: [C.QUEUE_VIEW, C.ORDER_READ, C.BILLING_VIEW, C.BILLING_CHARGE],
   // ---- ONCQIS governance roles (oncology protocol lifecycle) --------------------------------
   // Protocol Author: create/edit DRAFT protocols + upload evidence. NO review, NO approval, NO
   // activation. Not a clinical or hospital approver.
