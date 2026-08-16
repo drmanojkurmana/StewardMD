@@ -14,6 +14,10 @@ class Config:
         e = env if env is not None else os.environ
         # FollowCare (Cloudflare) — the source of truth for eligibility, script, classify, results.
         self.followcare_base = e.get("FOLLOWCARE_BASE", "https://stewardmd.in/api/followcare")
+        # stewardmd.in blocks hosting/datacenter IPs (bot/scraping protection) with a 403 before the token
+        # check — so from the RunPod GPU, use the pages.dev production hostname (same code + secrets, no such
+        # block). Both point at the same Cloudflare Pages production deployment.
+        self.followcare_base = self.followcare_base.replace("//stewardmd.in/", "//stewardmd.pages.dev/")
         self.voice_service_token = e.get("FOLLOWCARE_VOICE_SERVICE_TOKEN", "")
         self.app_token = e.get("FOLLOWCARE_APP_TOKEN", "")  # X-App-Token for the app gate, if required
         # Telephony (Plivo) — India account with the required KYC/DID.
