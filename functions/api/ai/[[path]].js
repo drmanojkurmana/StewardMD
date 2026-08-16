@@ -335,7 +335,7 @@ const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure:
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
 // any gap). streamGeminiToSSE transforms Gemini's SSE into our compact {delta}/{done} event stream.
 async function geminiStreamUpstream(env, parts, maxTokens, opts) {
-  const order = providerOrder(env);
+  const order = providerOrder(env, opts);
   let lastErr = null;
   for (const name of order) {
     const p = PROVIDERS[name];
@@ -391,12 +391,16 @@ function tripAzureBreaker(env, e) {
   const hard = /quota|insufficient|exceed|billing|credit|invalid|expired|\b401\b|\b402\b|\b403\b|\b429\b|access denied/.test(m);
   _azureOffUntil = Date.now() + (hard ? (Number(env && env.AZURE_BREAKER_HARD_MS) || 21600000) : (Number(env && env.AZURE_BREAKER_SOFT_MS) || 300000));
 }
-function providerOrder(env) {
-  // Vertex is primary and fails over to Developer. AI_PROVIDER=azure puts Azure/Foundry FIRST (to burn
-  // the credit) with Vertex->Developer (Gemini) as automatic fallback. AI_PROVIDER=developer uses it directly.
+function providerOrder(env, opts) {
+  // Vertex is primary and fails over to Developer. AZURE IS MaiK-ASSISTANT ONLY: AI_PROVIDER=azure puts
+  // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
+  // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
+  // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
+  const forMaik = !!(opts && opts.maik);
   let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "developer" ? ["developer"] : ["vertex", "developer"];
-  if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });   // auto-skip Azure while tripped
+  if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
+  if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
   return order.length ? order : ["vertex", "developer"];
 }
 function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
@@ -413,7 +417,7 @@ function failReason(e) {
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
 export async function callGemini(env, parts, maxTokens, opts) {
-  const order = providerOrder(env);
+  const order = providerOrder(env, opts);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
     const name = order[i], p = PROVIDERS[name];
@@ -1177,7 +1181,7 @@ export async function onRequest(context) {
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
@@ -1211,7 +1215,7 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45 }); }
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
@@ -1228,7 +1232,7 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "case");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
-      const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
+      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true });   // MaiK explain (legacy path)
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
     }
