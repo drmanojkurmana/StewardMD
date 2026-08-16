@@ -43,7 +43,7 @@ case "$cmd" in
     # Pod start command: clone + install + run. Notes: x-access-token: form works for fine-grained PATs;
     # `set -x` traces each step into the container log; a trailing `sleep infinity` keeps the container ALIVE on
     # any failure (no crash loop) so the error is inspectable instead of vanishing. $GITHUB_TOKEN expands in-pod.
-    START="bash -c 'set -x; cd /workspace && rm -rf StewardMD && git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD && cd StewardMD/voice-service && pip install -r requirements.txt && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
+    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD || { echo CLONE_FAILED__token_needs_Contents_Read_on_the_repo; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r requirements.txt && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
     # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
     Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: ${CLOUD_TYPE}, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
     BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
