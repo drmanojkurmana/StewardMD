@@ -283,7 +283,43 @@ const vertexProvider = {
   }
 };
 
-const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
+/* ---- Azure OpenAI (Foundry) — OPTIONAL primary when AI_PROVIDER=azure. OpenAI v1-compatible
+ *      chat/completions against the Foundry deployment (Bearer auth). Model = the DEPLOYMENT name
+ *      (env.AZURE_OPENAI_DEPLOYMENT, default gpt-4o-mini). Fails over to Vertex/Developer on ANY error,
+ *      so when the credit runs out or the key is unset, MaiK seamlessly returns to Gemini. Text-first
+ *      (MaiK); images map to OpenAI image_url parts for vision-capable deployments. No streamFetch —
+ *      streaming requests skip Azure and use Vertex (geminiStreamUpstream requires p.streamFetch);
+ *      MaiK's reliable path is the non-stream generate() below. ---- */
+function azureMessages(parts) {
+  const items = (parts || []).map(function (p) {
+    if (p && p.text != null) return { type: "text", text: String(p.text) };
+    if (p && p.inlineData && p.inlineData.data) return { type: "image_url", image_url: { url: "data:" + (p.inlineData.mimeType || "image/jpeg") + ";base64," + p.inlineData.data } };
+    return null;
+  }).filter(Boolean);
+  const textOnly = items.length && items.every(function (c) { return c.type === "text"; });
+  return [{ role: "user", content: textOnly ? items.map(function (c) { return c.text; }).join("\n") : items }];
+}
+function parseChatCompletion(data, status) {
+  if (status >= 400 || !data || data.error) throw new Error("Azure HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
+  const ch = data.choices && data.choices[0];
+  return (ch && ch.message && ch.message.content) ? String(ch.message.content) : "";
+}
+const azureProvider = {
+  name: "azure",
+  available: function (env) { return !!(env.AZURE_OPENAI_ENDPOINT && env.AZURE_OPENAI_API_KEY); },
+  generate: async function (env, parts, maxTokens, opts) {
+    const o = opts || {};
+    const base = String(env.AZURE_OPENAI_ENDPOINT).replace(/\/+$/, "");
+    const ver = env.AZURE_OPENAI_API_VERSION || "preview";
+    const url = base + "/chat/completions?api-version=" + encodeURIComponent(ver);
+    const temp = (typeof o.temperature === "number") ? o.temperature : 0.2;
+    const body = { model: env.AZURE_OPENAI_DEPLOYMENT || "gpt-4o-mini", messages: azureMessages(parts), temperature: temp, max_tokens: maxTokens || 1024 };
+    const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + env.AZURE_OPENAI_API_KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) }, aiTimeoutMs(env));
+    return parseChatCompletion(jr.data, jr.status);
+  }
+};
+
+const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure: azureProvider };
 
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
@@ -335,8 +371,12 @@ function streamGeminiToSSE(upstream, onText) {
   return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
 }
 function providerOrder(env) {
-  // Vertex is primary and fails over to Developer. If AI_PROVIDER=developer, use it directly.
-  return String(env.AI_PROVIDER || "vertex").toLowerCase() === "developer" ? ["developer"] : ["vertex", "developer"];
+  // Vertex is primary and fails over to Developer. AI_PROVIDER=azure puts Azure/Foundry FIRST (to burn
+  // the credit) with Vertex->Developer (Gemini) as automatic fallback. AI_PROVIDER=developer uses it directly.
+  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
+  if (sel === "azure") return ["azure", "vertex", "developer"];
+  if (sel === "developer") return ["developer"];
+  return ["vertex", "developer"];
 }
 function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
 
