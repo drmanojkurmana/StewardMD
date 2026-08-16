@@ -47,8 +47,16 @@ class ParlerTTS(TTSProvider):
             prompt_ids = self._tok(text, return_tensors="pt").input_ids.to(dev)
             with self._torch.no_grad():
                 audio = self._model.generate(input_ids=desc_ids, prompt_input_ids=prompt_ids)
-            wav = audio.cpu().numpy().squeeze().tolist()
-            wav8k = resample_linear(wav, self._sr, self.cfg.sample_rate)
-            return float_to_pcm16(wav8k)
+            wav = audio.to("cpu", dtype=self._torch.float32).squeeze()
+            # Downsampling 44.1kHz -> 8kHz (5.5x) MUST be anti-aliased; naive linear interpolation aliases into
+            # "underwater/robotic" garble. torchaudio.resample applies the low-pass filter. Fall back to linear
+            # only if torchaudio is unavailable (upsampling paths don't alias, so the fallback is fine there).
+            try:
+                import torchaudio
+                wav8k = torchaudio.functional.resample(wav, int(self._sr), int(self.cfg.sample_rate))
+                pcm = (wav8k.clamp(-1.0, 1.0) * 32767.0).to(self._torch.int16).cpu().numpy().tobytes()
+                return pcm
+            except Exception:
+                return float_to_pcm16(resample_linear(wav.numpy().tolist(), self._sr, self.cfg.sample_rate))
         except Exception:
             return b""
