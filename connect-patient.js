@@ -23,7 +23,7 @@
     } catch (e) { return true; }
   }
   function C() { return window.SMD_CONNECT; }
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function tt(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
   function loadLast() { try { return JSON.parse(localStorage.getItem("smd_connect_last") || "null"); } catch (e) { return null; } }
   function saveLast(tid, ref) { try { localStorage.setItem("smd_connect_last", JSON.stringify({ tenantId: tid, patientRef: ref })); } catch (e) {} }

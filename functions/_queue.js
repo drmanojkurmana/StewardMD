@@ -26,8 +26,16 @@ export async function signToken(payload, secret) {
 // Structural id parse WITHOUT verifying — used only to load the ticket (and its current ver) before the
 // authoritative signed verify. Never grants access by itself.
 export function idFromToken(token) {
-  try { const body = dec.decode(unb64u(String(token).split(".")[0])); const i = body.lastIndexOf("."); return i > 0 ? body.slice(0, i) : ""; }
-  catch (e) { return ""; }
+  try {
+    const body = dec.decode(unb64u(String(token).split(".")[0]));
+    const i = body.lastIndexOf(".");
+    const id = i > 0 ? body.slice(0, i) : "";
+    // Guard the trust boundary: the id is later concatenated into a Firestore doc path on a
+    // service-account request (which bypasses security rules), so a crafted "../" id would be a
+    // path-traversal. Legit ids are UUIDs, "orgId~identity" staff ids, or usernames (may contain a
+    // single "."). Allow those chars, block the traversal primitives ("/", "\", "..").
+    return (/^[A-Za-z0-9_.~:-]{1,128}$/.test(id) && id.indexOf("..") === -1) ? id : "";
+  } catch (e) { return ""; }
 }
 // Verify + parse against the CURRENT ver + expiry. Returns { ok, id, reason }. Never throws.
 export async function verifyToken(token, secret, curVer, nowMs) {

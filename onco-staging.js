@@ -24,7 +24,7 @@
   // seeded file is treated as fabricated (auditFabricationSafe fails), so a bad edit can't ship silent.
   var ALLOWED_STAGES = { "0": 1, "I": 1, "IV": 1 };
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 
   /* ===================== PURE ENGINE (testable in Node, no DOM/fetch) ===================== */
 

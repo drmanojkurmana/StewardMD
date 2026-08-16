@@ -87,7 +87,7 @@
   // ── consent gate UI ─────────────────────────────────────────────────────
   var _gateOpen = false, _pending = [];   // callbacks awaiting a resolution (bool)
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 
   function resolveAll(v) { var cbs = _pending.slice(); _pending = []; cbs.forEach(function (cb) { try { cb(v); } catch (e) {} }); }
 

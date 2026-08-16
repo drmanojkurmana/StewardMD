@@ -281,7 +281,7 @@
       }
     
       function esc(s) {
-        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
       }
       // Ward-Sync lab/culture reports arrive from GHIS as raw HTML (styled <div>/<span>,
       // &nbsp; runs, &quot;/&ldquo; entities). We NEVER render that HTML — we flatten it to

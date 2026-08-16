@@ -9,7 +9,8 @@
  * uploadToDrive(accessToken) is the direct Drive REST path for when an OAuth client is wired.
  *
  * Store is headless-testable (localStorage injected via configure). window.SMD_CLINIC + module.exports.
- * Flag: smd_personal_clinic (default OFF). No PHI leaves the device unless the doctor shares a backup.
+ * Flag: smd_personal_clinic (default ON for dev/testing; PUBLIC-RELEASE-GATE). No PHI leaves the device
+ * unless the doctor shares a backup (which is AES-256-GCM encrypted with the doctor's backup password).
  */
 (function () {
   "use strict";
@@ -307,7 +308,7 @@
         '<div class="pc-foot">Backups are encrypted with your clinic password (AES-256). Data lives on THIS phone for instant access; Drive is only a daily encrypted backup. Only StewardMD with that password can open a backup — keep the password safe, it cannot be recovered without it.</div>' +
       '</div>';
     var f = document.getElementById("pcPw");
-    if (f) f.addEventListener("submit", function (e) { e.preventDefault(); var v = f.elements.pw && f.elements.pw.value; if (!v || v.length < 4) { toast("Use at least 4 characters."); return; } setPassword(v).then(function () { toast("Backup password saved."); f.elements.pw.value = ""; refreshBackupStatus(); }); });
+    if (f) f.addEventListener("submit", function (e) { e.preventDefault(); var v = f.elements.pw && f.elements.pw.value; if (!v || v.length < 12) { toast("Use at least 12 characters (this password encrypts your patient backup)."); return; } setPassword(v).then(function () { toast("Backup password saved."); f.elements.pw.value = ""; refreshBackupStatus(); }); });
     refreshBackupStatus();
   }
   function refreshBackupStatus() {

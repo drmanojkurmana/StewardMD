@@ -16,7 +16,7 @@
   var KIND_LABEL = { patient: "Patient data", guideline: "Guideline knowledge", calc: "Clinical calculation", ai: "AI explanation" };
   var KIND_ORDER = ["patient", "guideline", "calc", "ai"];
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function kindLabel(k) { return KIND_LABEL[k] || "Reference"; }
 
   function badge(kind) { return '<span class="oev-badge oev-' + esc(kind || "guideline") + '">' + esc(kindLabel(kind)) + "</span>"; }

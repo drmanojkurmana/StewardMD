@@ -4229,7 +4229,7 @@
   // Safe Markdown → HTML for MaiK answers (headings, bold/italic, bullet + numbered
   // lists, paragraphs). HTML is escaped first, so raw ### / * / JSON never surface.
   function maikMarkdown(md) {
-    function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
     function inline(t) {
       t = esc(t);
       t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");

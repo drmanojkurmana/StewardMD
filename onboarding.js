@@ -59,7 +59,7 @@
     return true;
   }
   function emit(phase, extra) { try { window.dispatchEvent(new CustomEvent("smd:tour", { detail: Object.assign({ phase: phase, version: TOUR_VERSION }, extra || {}) })); } catch (e) {} }
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function reduceMotion() { try { return window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches; } catch (e) { return false; } }
 
   // ---- tour content (mirrors StewardMD Tour.dc.html) --------------------------------------

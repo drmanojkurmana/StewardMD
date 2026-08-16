@@ -10,7 +10,7 @@
   var POLL_MS = 8000;
   var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "DR"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }

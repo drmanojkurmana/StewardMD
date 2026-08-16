@@ -312,7 +312,7 @@
   }
 
   /* ============================ Manager UI ============================ */
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function fmtMB(b) { return (b / 1048576).toFixed(0) + " MB"; }
   function fmtN(n) { return (n || 0).toLocaleString(); }
   function toast(m) { try { (window.toast || function () {})(m); } catch (e) {} }
