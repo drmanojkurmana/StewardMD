@@ -301,7 +301,12 @@ var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
 function ready(){try{
   var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
-  if(!returning){ if(vis("introPoster")||vis("splash")||vis("accountGate"))return true; }
+  // Unverified/relaunched users land on the verify gate (or the account gate on any launch) — those
+  // are real "boot finished" states, so lift the white splash immediately instead of sitting on it
+  // until the 15s cap. Without this an unverified email/Google user saw a long blank splash → looked
+  // stuck and "never reached anything".
+  if(vis("verifyGate")||vis("accountGate"))return true;
+  if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
 function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
