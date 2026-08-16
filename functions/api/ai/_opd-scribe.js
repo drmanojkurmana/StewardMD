@@ -45,11 +45,21 @@ export function sanitizeScribeOutput(parsed) {
   if (!parsed || typeof parsed !== "object") return out;
   if (typeof parsed.en === "string" && parsed.en.trim()) out.en = parsed.en.replace(/\s+/g, " ").trim().slice(0, 6000);
   if (typeof parsed.alcoholDetail === "string" && parsed.alcoholDetail.trim()) out.alcoholDetail = parsed.alcoholDetail.replace(/\s+/g, " ").trim().slice(0, 200);
+  // Language guard: an EMR field / suggestion must be clinical ENGLISH — never native script in the
+  // chart. If the model slips and returns Indic script (Devanagari/Telugu/Bengali/Gurmukhi/Gujarati/
+  // Odia/Tamil/Kannada/Malayalam), STRIP the native-script glyphs (keeping any English), tidy leftover
+  // empty parens/punctuation, and drop the field only if nothing English remains. So "fever x3 days
+  // (జ్వరం …)" → "fever x3 days", while a fully-Telugu complaint → dropped. `out.en` keeps the full
+  // faithful English translation for the VoiceNote display.
+  const stripIndic = (s) => String(s || "")
+    .replace(/[ऀ-ॿঀ-৿਀-੿઀-૿଀-୿஀-௿ఀ-౿ಀ-೿ഀ-ൿ]/g, "")
+    .replace(/\(\s*\)|\[\s*\]/g, "").replace(/\s{2,}/g, " ").replace(/\s+([.,;:)\]])/g, "$1")
+    .replace(/[\s,;:•–—-]+$/,"").replace(/^[\s,;:•–—-]+/,"").trim();
   const ef = parsed.emrFields || {};
-  EMR_FIELD_KEYS.forEach(k => { const v = ef[k]; if (typeof v==="string"||typeof v==="number"){ const s=String(v).replace(/\s+/g," ").trim().slice(0,2000); if(s) out.emrFields[k]=s; } });
+  EMR_FIELD_KEYS.forEach(k => { const v = ef[k]; if (typeof v==="string"||typeof v==="number"){ const s=stripIndic(String(v).replace(/\s+/g," ").trim()).slice(0,2000); if(s) out.emrFields[k]=s; } });
   const sg = parsed.suggestions || {};
-  if (typeof sg.provisionalDx==="string" && sg.provisionalDx.trim()) out.suggestions.provisionalDx = sg.provisionalDx.trim().slice(0,300);
-  const clean = a => (Array.isArray(a)?a:[]).map(x=>String(x||"").replace(/\s+/g," ").trim()).filter(Boolean).slice(0,12);
+  if (typeof sg.provisionalDx==="string" && stripIndic(sg.provisionalDx)) out.suggestions.provisionalDx = stripIndic(sg.provisionalDx).slice(0,300);
+  const clean = a => (Array.isArray(a)?a:[]).map(x=>stripIndic(String(x||"").replace(/\s+/g," ").trim())).filter(Boolean).slice(0,12);
   out.suggestions.ddx = clean(sg.ddx); out.suggestions.investigations = clean(sg.investigations);
   return out;
 }

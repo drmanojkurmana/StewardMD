@@ -31,6 +31,7 @@ export const AI_MODULES = {
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
 };
+import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
@@ -332,6 +333,14 @@ export async function getAudit(store) {
   try { return store ? ((await store.get("ai:audit", "json")) || []) : []; } catch (e) { return []; }
 }
 
+// Co-resident shared AI pool: an admin-linked account meters under its pool owner's key
+// (KV ai:pool:<doctorId> -> <ownerDoctorId>), so both accounts of the ₹299 pair draw from one AI
+// bucket (module counts, cost cap + credits all keyed by the resolved owner). Fail-open to self.
+export async function poolKeyFor(store, doctorId) {
+  if (!store || !doctorId) return doctorId;
+  try { const m = await store.get("ai:pool:" + doctorId); return m || doctorId; } catch (e) { return doctorId; }
+}
+
 // ---- endpoint convenience: enforce the per-module daily cap AND count the call in one step. ----
 // Returns { ok:true, used, limit, remaining } when allowed (and increments the counters), or
 // { ok:false, reason:"module-daily", module, used, limit } when the doctor is at the cap. FAIL-OPEN:
@@ -339,8 +348,15 @@ export async function getAudit(store) {
 // (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
 export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
+  doctorId = await poolKeyFor(store, doctorId);            // co-resident pair shares ONE AI bucket
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
-  if (!q.ok) return q;                                     // at the daily cap → block
+  if (!q.ok) return q;                                     // at the per-module daily cap → block
+  // Per-user daily AI-COST cap (rupees), then prepaid credits. Inert unless AI_COST_CAP_ON=1.
+  if (costCapOn(env)) {
+    const cap = await dailyCostCap(env, store, email, null);   // role-based cap wired in Phase 4
+    const cc = await checkCostCap(env, store, doctorId, cap, now);
+    if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
+  }
   try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now); } catch (e) {}
   return q;                                                // allowed; carries used/limit/remaining
 }

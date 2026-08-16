@@ -20,6 +20,9 @@ import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlem
 import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
+import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
+import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn } from "../../_credits.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -83,7 +86,13 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);
-      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env) }, state));
+      // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
+      let credits = 0, costCap = 0;
+      try {
+        const who = await usageIdentify(request, env);
+        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); costCap = await dailyCostCap(env, kv, who.email, state && state.role); }
+      } catch (e) {}
+      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env) }, state));
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
@@ -241,6 +250,59 @@ export async function onRequest(context) {
       if (!env.PLAY_IAP_ENABLED) return json({ error: "play-not-configured" }, 501);
       // TODO: decode Pub/Sub message, call Play Developer API to verify the subscription, grant/revoke.
       return json({ ok: true, todo: "verify via Play Developer API + map to uid" });
+    }
+
+    // ---- institution coupons: owner issues/lists/revokes; any signed-in doctor redeems ----
+    if (seg === "coupon") {
+      if (method === "POST" && sub === "redeem") {
+        const uid = rawUid(await identify(request, env));
+        if (!uid) return json({ error: "signin-required" }, 401);
+        let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+        const r = await redeemCoupon(env, body.code, uid);
+        return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));
+      }
+      // owner-only management
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      if (method === "GET" && (sub === "list" || !sub)) return json({ coupons: await listCoupons(env) });
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      if (method === "POST" && sub === "create") return json({ ok: true, coupon: await createCoupon(env, body) });
+      if (method === "POST" && sub === "revoke") return json(await revokeCoupon(env, body.code));
+      return json({ error: "bad-coupon-request", sub, method }, 400);
+    }
+
+    // ---- AI credits + per-user daily cost cap (owner-managed). Metering key = em:<email>. ----
+    // The paid "buy credits" flow (₹50 -> ₹25 allowance) is granted by the payment webhook calling
+    // addCredits once the credits product + payment creds exist; owner can also grant/adjust here.
+    if (seg === "credits" || seg === "costcap") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      let body = {}; if (method === "POST") { try { body = (await request.json()) || {}; } catch (e) {} }
+      const email = String(body.email || url.searchParams.get("email") || "").trim().toLowerCase();
+      if (!email) return json({ error: "email-required" }, 400);
+      const kv = usageKv(env), key = "em:" + email;
+      if (seg === "credits") {
+        if (method === "POST" && sub === "add") return json(Object.assign({ email }, await addCredits(env, kv, key, body.purchaseInr)));   // simulate a ₹purchaseInr top-up
+        if (method === "POST" && (sub === "set" || !sub)) return json(Object.assign({ email }, await adminSetCredits(kv, key, body.inr)));  // set absolute balance (revoke = 0)
+        if (method === "GET") return json({ email, credits: await getCredits(kv, key) });
+      }
+      if (seg === "costcap" && method === "POST") return json({ email, ok: await setUserCostCap(kv, email, body.inr) });   // inr null/"" clears → env/role default
+      return json({ error: "bad-request", seg, sub, method }, 400);
+    }
+
+    // ---- co-resident shared AI pool (owner-linked): both accounts of the ₹299 pair meter as one. ----
+    if (seg === "pool") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email) return json({ error: "email-required" }, 400);
+      const kv = usageKv(env);
+      if (method === "POST" && sub === "link") {
+        const owner = String(body.poolEmail || "").trim().toLowerCase();
+        if (!owner || owner === email) return json({ error: "poolEmail-required" }, 400);
+        try { await kv.put("ai:pool:em:" + email, "em:" + owner); } catch (e) { return json({ error: "kv" }, 502); }
+        return json({ ok: true, email, pooledTo: owner });
+      }
+      if (method === "POST" && sub === "unlink") { try { await kv.delete("ai:pool:em:" + email); } catch (e) {} return json({ ok: true, email }); }
+      return json({ error: "bad-request", seg, sub, method }, 400);
     }
 
     return json({ error: "bad-request", seg, sub, method }, 400);

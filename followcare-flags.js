@@ -17,8 +17,8 @@
     smd_followcare_actions: { type: "bool", def: true, query: "fcactions", desc: "Doctor Action Center (doctor↔patient messaging)" },
     smd_followcare_ui2: { type: "bool", def: true, query: "fcui", desc: "FollowCare premium UI redesign (v2)" },
     smd_followcare_sms: { type: "bool", def: false, query: "fcsms", desc: "SMS channel (needs provider config)" },
-    smd_followcare_ai_summary: { type: "bool", def: false, query: "fcai", desc: "AI doctor summary (Phase 2)" },
-    smd_followcare_adaptive: { type: "bool", def: false, query: "fcadapt", desc: "Adaptive AI conversation (Phase 2)" },
+    smd_followcare_ai_summary: { type: "bool", def: true, query: "fcai", desc: "AI doctor summary (Phase 2). PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16)" },
+    smd_followcare_adaptive: { type: "bool", def: true, query: "fcadapt", desc: "Adaptive AI conversation (Phase 2). PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16)" },
     smd_followcare_voice: { type: "bool", def: false, query: "fcvoice", desc: "AI voice fallback call (needs per-hospital enable + voice service)" }
   };
 

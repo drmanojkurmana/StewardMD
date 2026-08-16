@@ -24,7 +24,7 @@
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 
   /* ==========================================================================================
    * Deterministic query expansion — a small oncology abbreviation/synonym map. Most KB entries

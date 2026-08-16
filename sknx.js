@@ -1,7 +1,9 @@
 /* sknx.js — SknX AI · module UI entry (sibling of thorex.js / window.THOREX).
  *
- * Flag-gated by smd_sknx AND a non-free entitlement (isOn() below — the ONE unit-tested function in
- * this file). When off, open() is a complete no-op and the module never touches the DOM, exactly like
+ * Flag-gated by smd_sknx AND (an Experimental Access code OR a non-free entitlement) (isOn() below —
+ * the ONE unit-tested function in this file). Access mirrors FundX/KardioX/ThoreX: an SMD_XACCESS code
+ * unlocks SknX per-device; the Pro (non-free entitlement) path is preserved as an alternative unlock.
+ * When off, open() is a complete no-op and the module never touches the DOM, exactly like
  * ThoreX/KardioX. Mounts a single scoped overlay root #sknxRoot; every SknX node lives under it with
  * .sknx-* classes (zero global leakage).
  *
@@ -21,10 +23,16 @@
   // ── Gating (isOn) — the ONE unit-tested function; deps are injectable for test/sknx-entry.test.mjs.
   function dFlag() { try { return !!(window.SMD_SKNX_FLAGS && SMD_SKNX_FLAGS.bool("smd_sknx")); } catch (e) { return false; } }
   function dEnt() { try { return (window.SMD_SKNX_ENTITLEMENT && SMD_SKNX_ENTITLEMENT.resolve()) || "free"; } catch (e) { return "free"; } }
+  // Experimental Access code activation for "sknx" (SMD_XACCESS, one-code/one-device, server-verified).
+  // isActiveCached() already folds in the native debug bypass, so a debug build opens without a code.
+  function dXa() { try { return !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) { return false; } }
+  // Access = flag AND (an active access-code OR a non-free entitlement). Additive: a code unlocks SknX
+  // exactly like FundX/KardioX/ThoreX, while the existing Pro (non-free) path is left untouched. The
+  // entitlement still resolves the TIER (v1/v2beta) inside the module — it is no longer the sole gate.
   function isOn(deps) {
     deps = deps || {};
-    var f = deps.flag || dFlag, e = deps.entitlement || dEnt;
-    return !!f() && e() !== "free";
+    var f = deps.flag || dFlag, e = deps.entitlement || dEnt, x = deps.xaccess || dXa;
+    return !!f() && (x() || e() !== "free");
   }
 
   function haptic(kind) { try { if (window.SMD_SKNX_FLAGS && SMD_SKNX_FLAGS.bool("smd_sknx_haptics") && window.SMD_HAPTICS) SMD_HAPTICS[kind || "light"] && SMD_HAPTICS[kind || "light"](); } catch (e) {} }

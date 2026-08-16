@@ -15,7 +15,7 @@
 (function (root) {
   "use strict";
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name) { return '<span class="material-symbols-outlined">' + name + "</span>"; }
   // HH:MM in UTC, deterministic (no Intl/locale/timezone variance) - good enough for a v1 admin log.
   function fmtTime(t) { t = Number(t); return t ? new Date(t).toISOString().slice(11, 16) : "-"; }

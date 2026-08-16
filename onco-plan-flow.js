@@ -15,7 +15,7 @@
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function flag(name) { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool(name)); } catch (e) { return false; } }
   function flagOn() { return flag("smd_onco_protocols") && flag("smd_onco_recommend"); }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }

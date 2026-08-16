@@ -62,8 +62,15 @@ export async function signToken(payload, secret) {
 // Structural parse of the episode id from a token WITHOUT verifying the signature. Used only to load the
 // episode (and its current tokenVer) before the authoritative signed verify. Never grants access by itself.
 export function episodeIdFromToken(token) {
-  try { const body = dec.decode(bytesFromB64url(String(token).split(".")[0])); const i = body.lastIndexOf("."); return i > 0 ? body.slice(0, i) : ""; }
-  catch (e) { return ""; }
+  try {
+    const body = dec.decode(bytesFromB64url(String(token).split(".")[0]));
+    const i = body.lastIndexOf(".");
+    const id = i > 0 ? body.slice(0, i) : "";
+    // Guard the trust boundary: this id is later concatenated into a Firestore doc path on a
+    // service-account request (bypasses rules), so a crafted "../" id would traverse. Allow UUID /
+    // base64url / "." chars, block the traversal primitives ("/", "\", "..").
+    return (/^[A-Za-z0-9_.~:-]{1,128}$/.test(id) && id.indexOf("..") === -1) ? id : "";
+  } catch (e) { return ""; }
 }
 // Verify + parse a link token against the current tokenVer + expiry. Returns { ok, episodeId, reason }.
 export async function verifyToken(token, secret, curVer, nowMs) {

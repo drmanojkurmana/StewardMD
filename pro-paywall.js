@@ -76,6 +76,38 @@
       '<div style="font:500 11px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Secure payment via PhonePe · UPI / cards / netbanking · cancel anytime</div>';
   }
 
+  // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
+  function redeemBlock() {
+    return '<div style="padding:2px 18px 22px"><div style="border-top:1px solid var(--line,#d7dee3);padding-top:12px">' +
+      '<div style="font:700 12.5px var(--sans);color:var(--slate,#2d4356);margin-bottom:7px">Have an institution code?</div>' +
+      '<div style="display:flex;gap:8px"><input id="pp-code" placeholder="Enter code" autocapitalize="characters" spellcheck="false" style="flex:1;padding:11px 12px;border:1.5px solid var(--line,#d7dee3);border-radius:11px;font:600 14px var(--sans);letter-spacing:.06em;text-transform:uppercase;background:var(--panel,#fff);color:var(--ink)">' +
+      '<button data-pp="redeem" style="flex:none;padding:11px 16px;border:none;border-radius:11px;background:var(--slate,#2d4356);color:#fff;font:800 13px var(--sans);cursor:pointer">Redeem</button></div>' +
+      '<div id="pp-code-msg" style="font:600 11.5px var(--sans);margin-top:6px;min-height:14px"></div></div></div>';
+  }
+  function redeem() {
+    var inp = _root && _root.querySelector("#pp-code"), msg = _root && _root.querySelector("#pp-code-msg");
+    var code = inp ? String(inp.value || "").trim().toUpperCase() : "";
+    if (!code) { if (msg) { msg.style.color = "var(--slate-soft)"; msg.textContent = "Enter your code first."; } return; }
+    if (!fbUser()) { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
+    var btn = _root && _root.querySelector('[data-pp="redeem"]');
+    if (btn) { btn.disabled = true; btn.textContent = "…"; }
+    if (msg) { msg.style.color = "var(--slate-soft)"; msg.textContent = "Checking…"; }
+    api("/api/billing/coupon/redeem", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: code }) })
+      .then(function (x) {
+        if (btn) { btn.disabled = false; btn.textContent = "Redeem"; }
+        if (x.s === 200 && x.d && x.d.ok) {
+          if (msg) { msg.style.color = "var(--green,#1c7a4a)"; msg.textContent = x.d.already ? "Already redeemed on this account." : "Code accepted. Pro unlocked."; }
+          toast("Pro unlocked"); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {}
+          refresh();
+        } else {
+          var why = (x.d && x.d.reason) || "";
+          var m = why === "revoked" ? "This code has been revoked." : why === "expired" ? "This code has expired." : why === "exhausted" ? "This code has reached its limit." : why === "not-found" ? "Code not recognised." : "Could not redeem this code.";
+          if (msg) { msg.style.color = "var(--danger,#b3261e)"; msg.textContent = m; }
+        }
+      })
+      .catch(function () { if (btn) { btn.disabled = false; btn.textContent = "Redeem"; } if (msg) { msg.style.color = "var(--danger,#b3261e)"; msg.textContent = "Network error. Try again."; } });
+  }
+
   function paint() {
     var promoOn = _status && _status.promo;
     var isPaid = _status && _status.pro && !promoOn;
@@ -92,7 +124,7 @@
       plansHtml = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
     }
     var sub = promoOn ? "Everything unlocked — free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Unlock the full clinical intelligence layer");
-    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + featureList() + plansHtml;
+    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + featureList() + plansHtml + redeemBlock();
     wire();
   }
 
@@ -105,6 +137,8 @@
         if (k === "plan") { _plan = b.getAttribute("data-plan"); return paint(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return buy();
+        if (k === "redeem") return redeem();
+        if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
     });
     r.addEventListener("click", function (e) { if (e.target === r.firstChild) close(); }, { once: true });
@@ -145,11 +179,54 @@
     loadAndPaint();
   }
 
+  // "AI limit hit" sheet — shown when an AI call returns 429 { reason:"ai-cost-cap" }. Offers the
+  // daily-reset time, current credit balance, and a route to upgrade / add credits.
+  function openAiLimit(info) {
+    info = info || {}; close();
+    var reset = info.resetAt ? new Date(+info.resetAt) : null;
+    var resetTxt = reset ? reset.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }) : "midnight";
+    var credits = (typeof info.credits === "number") ? info.credits : null;
+    var msg = info.message || "You've reached today's AI limit.";
+    var inner = header("Today's AI limit reached") +
+      '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--sans);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +
+      '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--sans);color:var(--slate-soft)">Your AI usage resets at <b>' + esc(resetTxt) + '</b>.' + (credits != null ? ' Credit balance: <b>₹' + esc(String(credits)) + '</b>.' : '') + '</div>' +
+      '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Upgrade or add credits</button>' +
+      '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Or wait for the daily reset. No charge.</div></div>';
+    var div = document.createElement("div");
+    div.innerHTML = shell(inner);
+    _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
+    wire();
+  }
+
   // Force a token refresh so isPro() picks up a just-granted `pro` claim, then re-check status.
   function refresh() { return token(true).then(function () { return api("/api/billing/status").then(function (x) { _status = x.d || {}; if (_root) paint(); return _status; }); }); }
 
-  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.refresh = refresh; }
+  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.openAiLimit = openAiLimit; window.SMD_PRO.refresh = refresh; }
   attach();
+
+  // One central interceptor for the "AI limit hit" sheet: watch AI responses and, on a 429
+  // ai-cost-cap, pop the sheet — so no individual AI caller needs to know about the cap. Scoped to
+  // /api/ai/ + status 429; everything else passes through byte-for-byte (we read a CLONE).
+  try {
+    var _origFetch = window.fetch;
+    if (_origFetch && !_origFetch._smdPaywrap) {
+      var wrapped = function (input, init) {
+        var p = _origFetch.apply(this, arguments);
+        try {
+          var url = (typeof input === "string" ? input : (input && input.url)) || "";
+          if (url.indexOf("/api/ai/") > -1) {
+            return p.then(function (r) {
+              if (r && r.status === 429) { try { r.clone().json().then(function (d) { if (d && d.reason === "ai-cost-cap") openAiLimit(d); }, function () {}); } catch (e) {} }
+              return r;
+            });
+          }
+        } catch (e) {}
+        return p;
+      };
+      wrapped._smdPaywrap = true;
+      window.fetch = wrapped;
+    }
+  } catch (e) {}
 
   // Deep-link: ?pro=1 / ?pro=open / #pro opens the paywall directly (shareable URL).
   if (/[?&]pro=(1|open|upgrade)\b/.test(location.search) || location.hash === "#pro") {

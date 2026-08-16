@@ -24,7 +24,7 @@
   var GRADES = ["1", "2", "3", "4", "5"];
   var SOURCE_RE = /CTCAE v5\.0/i;
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 
   /* ===================== PURE ENGINE (testable in Node, no DOM/fetch) ===================== */
 

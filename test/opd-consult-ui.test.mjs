@@ -22,13 +22,14 @@ const base = {
   voiceTranscript: "fever three days, let's do CBC and LFT", dictatedInv: ["CBC", "LFT"]
 };
 
-test("idle-after-stop: editable Clinical notes box with Copy + Save", () => {
+test("idle-after-stop: editable VoiceNote box with Copy + Save + Clear", () => {
   const html = load()._render(base);
-  assert.match(html, /Clinical notes/);
+  assert.match(html, /VoiceNote/);                    // renamed from "Clinical notes"
   assert.match(html, /oe-vc-edit/);
   assert.match(html, /data-oe-inp="notes"/);
   assert.match(html, /data-oe-act="notes-save"/);
   assert.match(html, /data-oe-act="notes-copy"/);
+  assert.match(html, /data-oe-act="notes-clear"/);    // Clear button
 });
 
 test("dictated investigations render as removable/orderable chips", () => {

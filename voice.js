@@ -58,15 +58,18 @@
   //   BASE     : Whisper Small INT8 (multilingual) for every language
   //   PRO      : Small INT8 (en/hi/auto) + verified Telugu Small INT8 (te)
   //   ULTIMATE : Large-v3-Turbo Q5 (en/hi/auto) + verified Telugu Small INT8 (te)
-  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") === "1"; } catch (e) { return false; } }
+  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") !== "0"; } catch (e) { return true; } }
   function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
     if (!tiersFlagOn()) {
-      // base-q5_1 RETIRED (owner: "remove base") — it hallucinated on hard audio (owner-tested
-      // 2026-08-14). Multilingual default is now small-q8_0 (StewardVoice Multilingual, ~252MB INT8) on
-      // BOTH platforms — far more accurate + EN/HI/TE code-switch. iOS keeps small.en for pure English
-      // (Metal-fast, best en accuracy); Android uses small-q8_0 for everything (one model, CPU-only).
-      if (lang && lang !== "en") return "small-q8_0";           // multilingual: Telugu, auto-detect, code-switch
+      // Telugu / Auto → the Telugu SPECIALIST even without the tiers flag. MEASURED: the multilingual
+      // small hallucinates repeated-syllable garbage on Telugu, while the specialist transcribes Telugu
+      // correctly AND still decodes English — so a Telugu (or auto/unknown) opening is captured cleanly
+      // instead of producing garbage that then corrupts the EMR extract. (Was: te/auto → small-q8_0,
+      // which broke Telugu whenever smd_voice_tiers was off — e.g. after an app-data reset.) Falls back
+      // to small-q8_0 natively if the specialist isn't installed. en/hi → English/multilingual small.
+      if (lang === "te" || !lang || lang === "auto") return "telugu-small-q8_0";
+      if (lang !== "en") return "small-q8_0";                    // other non-English → multilingual small
       return isAndroidNative() ? "small-q8_0" : "small.en-q5_1"; // en: Android multilingual small, iOS English small
     }
     var tier = voiceTier();

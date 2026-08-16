@@ -20,7 +20,7 @@
     smd_fundx_sensors:           { type: "bool", def: false,      query: null,         desc: "IMU sensor fusion" },
     smd_fundx_flash:             { type: "bool", def: true,       query: null,         desc: "Auto torch during capture" },
     smd_fundx_cloud:             { type: "tri",  def: null,       query: null,         desc: "Cloud AI consent (null = ask once)" },
-    smd_fundx_clinical:          { type: "bool", def: false,      query: null,         desc: "Clinical advisory engine (post-acquisition)" },
+    smd_fundx_clinical:          { type: "bool", def: true,       query: null,         desc: "Clinical advisory engine (post-acquisition). PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16)" },
     smd_fundx_telemetry:         { type: "bool", def: false,      query: null,         desc: "Acquisition telemetry (no PHI)" },
     smd_fundx_lens_confirm:      { type: "bool", def: false,      query: null,         desc: "Optional operator lens-confirm fallback" },
     smd_fundx_capture_threshold: { type: "int",  def: 60,         query: null,         desc: "Manual capture-best-frame readiness %" },
@@ -32,7 +32,7 @@
     smd_fundx_autocapture:       { type: "bool", def: true,        query: null,         desc: "Auto-capture when diagnostic quality is held (off = manual shutter only)" },
     smd_fundx_ar_guidance:       { type: "bool", def: true,        query: null,         desc: "AR overlays (arrows / ring / chips); off = camera + text coach only" },
     smd_fundx_upload:            { type: "bool", def: true,        query: null,         desc: "Workflow 2: analyze an existing/uploaded fundus image (same downstream as live capture)" },
-    smd_fundx_corridor:          { type: "bool", def: false,       query: "fundxcorridor", desc: "Optical Corridor HUD (SVG spatial-AR acquisition overlay). Off = the legacy flat ring." },
+    smd_fundx_corridor:          { type: "bool", def: true,        query: "fundxcorridor", desc: "Optical Corridor HUD (SVG spatial-AR acquisition overlay). Off = the legacy flat ring. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16)." },
     smd_fundx_spatial_ar:        { type: "bool", def: false,       query: "fundxspatial",  desc: "TRUE 3D AR corridor: native SceneKit guide world-anchored to the eye via ARKit (iOS + ARKit only). Off = the 2D SVG corridor / flat ring." },
     smd_fundx_require_alignment: { type: "bool", def: true,        query: "fundxreqalign", desc: "Phase 4 fusion: require native ARKit spatial alignment (on the optical axis) before auto-capture. Only tightens FSM capture timing; no-op unless spatial AR is active." }
   };

@@ -19,7 +19,7 @@
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function num(x) { var n = (typeof x === "number") ? x : parseFloat(x); return isFinite(n) ? n : NaN; }
   function round1(n) { return Math.round(n * 10) / 10; }
 

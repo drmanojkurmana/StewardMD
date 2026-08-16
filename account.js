@@ -51,14 +51,29 @@
   window.SMD_OWNER_KEY = function () { return uid(); };
 
   /* -------- Pro entitlement (single source of truth) --------
-   * LAUNCH DECISION (2026-07-26): every feature is free for everyone. The old
-   * BETA_PRO_ALL flag and the 3-email TEST_PRO_EMAILS allowlist are removed so no
-   * email is ever gated (the frozen iOS bundle had the allowlist active, which
-   * blocked all but 3 accounts). Billing / the Firebase `pro` claim remain in the
-   * tree but no longer gate anything — restore gating by reinstating a claim check. */
-  function isProSync() { return true; }
-  function isPro() { return Promise.resolve(true); }
-  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, TEST_PRO_EMAILS: [] };
+   * The SERVER decides (Firebase pro claim + launch promo + per-user trial); the client only
+   * caches the last /api/billing/status verdict. FAIL-OPEN: default true and keep the last known
+   * value on any fetch error, so a network blip never locks a clinician out. It only turns false
+   * when the server EXPLICITLY returns { pro:false } — which today never happens (launch promo
+   * active until 2026-09-15), so this is a no-op until the promo ends + enforcement flips. */
+  var _pro = true, _proState = null;
+  function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
+  function idToken() { var u = fbUser(); try { return u && u.getIdToken ? u.getIdToken(false) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
+  function syncStatus() {
+    return Promise.resolve(idToken()).then(function (t) {
+      var h = t ? { "Authorization": "Bearer " + t } : {};
+      return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
+    }).then(function (d) {
+      _proState = d || null;
+      if (d && typeof d.pro === "boolean") _pro = d.pro;   // only an explicit boolean flips the cache
+      return _proState;
+    }, function () { return _proState; });                 // error → keep last known (fail-open)
+  }
+  function isProSync() { return _pro; }
+  function isPro() { return syncStatus().then(function () { return _pro; }); }
+  function proState() { return _proState; }
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, TEST_PRO_EMAILS: [] };
+  onChange(function () { try { syncStatus(); } catch (e) {} });   // refresh on sign-in / provider change
 
   // Enrich the legacy account object with the real provider + uid (keeps app.js as writer).
   function wrapApply() {

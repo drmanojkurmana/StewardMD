@@ -55,9 +55,18 @@ function authorise(request, env) {
   // via CapacitorHttp, no Origin) — allow those so the iOS/Android apps reach AI.
   // (Cost is bounded server-side by per-IP/per-user quota + the circuit breaker in
   // _usage.js, which is the real abuse control — the Origin check is not auth.)
+  // Native-app gate: the native app sends its shipped marker as X-SMD-App on every /api/* call
+  // (native-bridge.js). When APP_GATE_KEY is configured, that header is a valid app credential.
+  if (env.APP_GATE_KEY && request.headers.get("X-SMD-App") === env.APP_GATE_KEY) return true;
   const o = request.headers.get("Origin") || "";
-  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in"
-    || o === "https://localhost" || o === "capacitor://localhost" || o === "";
+  if (o === "https://stewardmd.in" || o === "https://www.stewardmd.in"
+    || o === "https://localhost" || o === "capacitor://localhost") return true;
+  // Empty Origin (a non-browser client that sends none, incl. CapacitorHttp) is accepted ONLY while
+  // APP_GATE_KEY is unconfigured — a migration-safe default so the native app keeps working before the
+  // secret is set. Once APP_GATE_KEY is set, an anonymous client (no X-SMD-App, no Origin) is rejected,
+  // closing the empty-Origin paid-AI-budget abuse. (Origin/X-SMD-App are app-possession signals, not
+  // per-user auth; per-user Firebase-token auth is the stronger follow-up.)
+  return !env.APP_GATE_KEY && o === "";
 }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
@@ -1099,7 +1108,10 @@ export async function onRequest(context) {
         const _who = await identify(request, env);
         const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
-        if (!_mq.ok) return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
+        if (!_mq.ok) {
+          if (_mq.reason === "ai-cost-cap") return json({ error: "quota", reason: "ai-cost-cap", resetAt: _mq.resetAt, cap: _mq.cap, dayCost: _mq.dayCost, credits: _mq.credits, message: "You've reached today's AI limit. It resets at midnight. Add credits or upgrade to keep going." }, 429);
+          return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
+        }
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
     }
   }

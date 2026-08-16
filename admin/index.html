@@ -256,6 +256,40 @@
           <div class="msg" id="entlMsg"></div>
           <div id="entlResult" class="hint" style="margin-top:8px">—</div>
         </div>
+        <div class="card">
+          <b>Institution coupons</b>
+          <div class="hint" style="margin:2px 0 8px">Issue a code to an institution that pays for its doctors. Each doctor redeems it in-app to unlock Pro. Revoke anytime (pulls Pro from redeemers who haven't since paid).</div>
+          <div class="row">
+            <div><label for="cpnDur">Grant</label><select id="cpnDur"><option value="months:12">1 year</option><option value="months:6">6 months</option><option value="months:3">3 months</option><option value="months:1">1 month</option><option value="forever">Forever</option></select></div>
+            <div><label for="cpnMax">Max redemptions</label><input id="cpnMax" type="number" min="0" placeholder="0 = unlimited"></div>
+          </div>
+          <label for="cpnNote">Note (institution name)</label>
+          <input id="cpnNote" maxlength="120" placeholder="e.g. GIMSR, Visakhapatnam">
+          <label for="cpnCode">Custom code (optional)</label>
+          <input id="cpnCode" maxlength="16" placeholder="auto-generated if blank" autocapitalize="characters" spellcheck="false">
+          <div class="qa" style="margin-top:12px"><button class="primary" id="cpnCreate">Create code</button><button class="ghost" id="cpnReload">Reload list</button></div>
+          <div class="msg" id="cpnMsg"></div>
+          <div id="cpnList" style="margin-top:10px"></div>
+        </div>
+        <div class="card">
+          <b>AI credits · daily cost cap · co-resident pool</b>
+          <div class="hint" style="margin:2px 0 8px">All keyed by the doctor's account email. Daily cost cap is rupees of AI/day (blank = clear to default). Credits are prepaid AI rupees spent above the cap. Co-resident pool links a second account to a pool owner so both share one AI bucket.</div>
+          <label for="acEmail">Doctor email</label>
+          <input id="acEmail" type="email" placeholder="doctor@email" autocapitalize="off" spellcheck="false">
+          <div class="row" style="margin-top:8px">
+            <div><label for="acCap">Daily cost cap (₹)</label><input id="acCap" type="number" min="0" placeholder="blank = default"></div>
+            <div style="align-self:flex-end"><button class="ghost" id="acCapSet">Set cap</button></div>
+          </div>
+          <div class="row" style="margin-top:8px">
+            <div><label for="acCredits">Credits balance (₹)</label><input id="acCredits" type="number" min="0" placeholder="set absolute"></div>
+            <div style="align-self:flex-end"><button class="ghost" id="acCreditsSet">Set credits</button><button class="ghost" id="acCreditsGet">Check</button></div>
+          </div>
+          <div class="row" style="margin-top:8px">
+            <div><label for="acPool">Co-resident pool owner email</label><input id="acPool" type="email" placeholder="owner@email" autocapitalize="off" spellcheck="false"></div>
+            <div style="align-self:flex-end"><button class="ghost" id="acPoolLink">Link</button><button class="ghost" id="acPoolUnlink">Unlink</button></div>
+          </div>
+          <div class="msg" id="acMsg"></div>
+        </div>
       </div>
 
       <!-- PUSH -->
@@ -618,6 +652,55 @@
   }
   document.querySelectorAll("[data-pro]").forEach(function(b){ b.onclick=function(){ proAct(b.getAttribute("data-pro")); }; });
 
+  // ---- Institution coupons ----
+  function cpnLoad(){
+    api("/api/billing/coupon/list").then(function(x){
+      if(x.s!==200){ $("cpnList").innerHTML='<div class="hint">'+(x.s===401?"Not an owner.":"Could not load.")+'</div>'; return; }
+      var cs=(x.d&&x.d.coupons)||[];
+      if(!cs.length){ $("cpnList").innerHTML='<div class="hint">No codes yet.</div>'; return; }
+      $("cpnList").innerHTML=cs.map(function(c){
+        var grant=c.forever?"forever":(c.months?c.months+"mo":(c.days?c.days+"d":"")); var used=(c.redeemedBy||[]).length, cap=c.maxRedemptions||0;
+        return '<div class="hint" style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)"><code style="font-weight:800;letter-spacing:.05em">'+esc(c.code)+'</code>'+
+          '<span>'+grant+' · '+used+'/'+(cap||"∞")+" used"+(c.note?" · "+esc(c.note):"")+(c.revoked?" · REVOKED":"")+'</span><span style="flex:1"></span>'+
+          (c.revoked?"":'<button class="ghost" data-cpn-rev="'+esc(c.code)+'" style="padding:5px 9px;color:var(--red);border-color:var(--red)">Revoke</button>')+'</div>';
+      }).join("");
+      $("cpnList").querySelectorAll("[data-cpn-rev]").forEach(function(b){ b.onclick=function(){ cpnRevoke(b.getAttribute("data-cpn-rev")); }; });
+    }).catch(function(){ $("cpnList").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  function cpnCreate(){
+    var body={ note:$("cpnNote").value.trim(), maxRedemptions:parseInt($("cpnMax").value,10)||0 };
+    var code=$("cpnCode").value.trim(); if(code) body.code=code;
+    var dur=$("cpnDur").value; if(dur==="forever") body.forever=true; else if(dur.indexOf("months:")===0) body.months=parseInt(dur.split(":")[1],10)||12;
+    say("cpnMsg","","Creating…");
+    api("/api/billing/coupon/create",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(x){
+      if(x.s!==200||!x.d.ok){ say("cpnMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); return; }
+      say("cpnMsg","ok","✅ Code created: "+(x.d.coupon&&x.d.coupon.code)); $("cpnCode").value=""; cpnLoad();
+    }).catch(function(){ say("cpnMsg","err","Sign in first."); });
+  }
+  function cpnRevoke(code){
+    if(!confirm("Revoke code "+code+"? Redeemers who haven't since paid lose Pro.")) return;
+    api("/api/billing/coupon/revoke",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:code})}).then(function(x){
+      if(x.s!==200||!x.d.ok){ say("cpnMsg","err","Revoke failed: "+(x.d.error||x.s)); return; }
+      say("cpnMsg","ok","✅ Revoked "+code+" · pulled Pro from "+(x.d.pulledPro||0)); cpnLoad();
+    }).catch(function(){ say("cpnMsg","err","Sign in first."); });
+  }
+  $("cpnCreate").onclick=cpnCreate; $("cpnReload").onclick=cpnLoad;
+
+  // ---- AI credits · daily cost cap · co-resident pool ----
+  function acEmail(){ var v=$("acEmail").value.trim().toLowerCase(); if(!v){ say("acMsg","err","Enter the doctor's email."); } return v; }
+  function acPost(path,body,okMsg){
+    say("acMsg","","Working…");
+    api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(x){
+      if(x.s!==200||x.d.error||x.d.ok===false){ say("acMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); return; }
+      say("acMsg","ok",okMsg(x.d));
+    }).catch(function(){ say("acMsg","err","Sign in first."); });
+  }
+  $("acCapSet").onclick=function(){ var e=acEmail(); if(!e)return; acPost("/api/billing/costcap/set",{email:e,inr:$("acCap").value},function(){ return "✅ Daily cost cap "+($("acCap").value===""?"cleared":"set to ₹"+$("acCap").value)+" · "+e; }); };
+  $("acCreditsSet").onclick=function(){ var e=acEmail(); if(!e)return; acPost("/api/billing/credits/set",{email:e,inr:$("acCredits").value},function(d){ return "✅ Credits set to ₹"+d.balance+" · "+e; }); };
+  $("acCreditsGet").onclick=function(){ var e=acEmail(); if(!e)return; say("acMsg","","Checking…"); api("/api/billing/credits?email="+encodeURIComponent(e),{method:"GET"}).then(function(x){ if(x.s!==200){say("acMsg","err","Failed");return;} say("acMsg","ok","Credit balance: ₹"+(x.d.credits||0)+" · "+e); }).catch(function(){ say("acMsg","err","Sign in first."); }); };
+  $("acPoolLink").onclick=function(){ var e=acEmail(); if(!e)return; var o=$("acPool").value.trim().toLowerCase(); if(!o){say("acMsg","err","Enter the pool owner email.");return;} acPost("/api/billing/pool/link",{email:e,poolEmail:o},function(d){ return "✅ "+e+" now shares "+d.pooledTo+"'s AI pool"; }); };
+  $("acPoolUnlink").onclick=function(){ var e=acEmail(); if(!e)return; acPost("/api/billing/pool/unlink",{email:e},function(){ return "✅ Unlinked "+e+" from any pool"; }); };
+
   // ---- Send a test onboarding email ----
   function etSend(kind){
     var v=$("etEmail").value.trim(); if(!v){say("etMsg","err","Enter an email.");return;}
@@ -844,7 +927,7 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
