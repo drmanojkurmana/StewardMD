@@ -109,7 +109,7 @@ case "$cmd" in
     [ "$(printf '%s' "$Q" | jq -r '.count // 0')" = "0" ] && { echo "queue empty — run: runpod.sh testcall"; exit 1; }
     # Fresh callId each run (so a re-dial isn't dropped as a duplicate); amd:"" disables machine-detection.
     CID="retry-$(date +%s)"
-    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" '{call:(.calls[0] + {callId:$cid}), geminiKey:$k, amd:""}')
+    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" '{call:(.calls[0] + {callId:$cid, lang:"te"}), geminiKey:$k, amd:""}')
     curl -sS -m 45 -X POST "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/ingest" \
       -H "Content-Type: application/json" -d "$BODY"; echo
     ;;

@@ -52,8 +52,9 @@ class TestResponder(unittest.TestCase):
         self.assertIn("Ravi", responder.say("greeting", "en", name="Ravi"))
         self.assertTrue(responder.say("ambulance_yes", "en"))
         self.assertNotEqual(responder.say("notify_doctor", "hi"), responder.say("notify_doctor", "en"))  # hi is translated
-        # a line missing in te falls back to English, never empty
-        self.assertEqual(responder.say("close_ok", "te"), responder.say("close_ok", "en"))
+        self.assertNotEqual(responder.say("close_ok", "te"), responder.say("close_ok", "en"))  # te is now complete
+        # a line missing in hi falls back to English, never empty
+        self.assertEqual(responder.say("close_ok", "hi"), responder.say("close_ok", "en"))
 
 
 # ---- state machine ----
