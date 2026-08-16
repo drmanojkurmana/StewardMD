@@ -171,6 +171,8 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-tl-acts .q-ic { flex: 1 1 0; min-width: 44px; max-width: 64px; }
 #smdQueue .q-ic { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--outline-variant); background: var(--sc-lowest); color: var(--secondary); display: grid; place-items: center; cursor: pointer; transition: background .12s, border-color .12s; }
 #smdQueue .q-ic:hover { background: var(--sc-high); color: var(--primary); border-color: var(--primary); }
+#smdQueue .q-ic.q-rm { color: var(--error, #b3261e); }
+#smdQueue .q-ic.q-rm:hover { background: var(--error, #b3261e); color: #fff; border-color: var(--error, #b3261e); }
 #smdQueue .q-ic .material-symbols-outlined { font-size: 18px; }
 #smdQueue .q-tl-foot { padding: 10px; text-align: center; background: var(--surface); border-top: 1px solid var(--outline-variant); }
 #smdQueue .q-tl-foot a { font: 600 12px var(--q-sans); color: var(--primary); cursor: pointer; text-decoration: none; }
