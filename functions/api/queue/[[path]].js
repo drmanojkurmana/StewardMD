@@ -41,6 +41,17 @@ import * as ONCO from "../../_onco_store.js";
 import RCHOP_TEMPLATE from "../../../kb/protocols/rchop.json";
 const ONCO_PROTOCOLS = { rchop: RCHOP_TEMPLATE };
 function oncoProtocolTemplate(protocolId) { return ONCO_PROTOCOLS[String(protocolId || "").toLowerCase()] || null; }
+// The OPD Protocol picker loads the 124 static /kb/protocols/*.json client-side; the server registry
+// doesn't inline them. Accept a client-supplied REFERENCE template when the server doesn't know the id.
+// It's a dose FORMULA (no PHI) and createPlan snapshots/freezes it. Minimally validated + force-marked
+// reference/experimental so it can never be silently treated as a hospital-APPROVED active protocol
+// (the activation gate in _onco_store.js still blocks confirm→active for it — assign stays a draft plan).
+function clientProtocolTemplate(t) {
+  if (!t || typeof t !== "object") return null;
+  var r = t.regimen;
+  if (!t.id || !r || !Array.isArray(r.drugs) || !r.drugs.length) return null;
+  return Object.assign({}, t, { lifecycleState: "reference", experimental: true, _clientSupplied: true });
+}
 // ONCQIS Phase B: the PURE recommendation engine (onco-recommend.js, root JS, UMD default import -
 // same shape as `import Engine from "../followcare-engine.js"`). Standard Protocols are the new-schema
 // kb/schema/standard-protocol.schema.json objects; only status==="ACTIVE" are ever recommended, and
@@ -549,7 +560,7 @@ export async function onRequest(context) {
         if (!oncoWriteEnabled(env)) return json({ error: "onco_write_disabled" }, 501, request);
         const sub2 = parts[2] || "";
         if (sub === "plan" && !sub2) {   // create - DOCTOR
-          const tmpl = oncoProtocolTemplate(body.protocolId);
+          const tmpl = oncoProtocolTemplate(body.protocolId) || clientProtocolTemplate(body.template);
           if (!tmpl) return json({ ok: false, error: "protocol_not_found" }, 404, request);
           await requireOrgOrGlobal(env, actor, body.hospitalId || body.orgId, CAPS.EMR_TREAT);
           return json({ ok: true, plan: await ONCO.createPlan(env, body, tmpl) }, 200, request);

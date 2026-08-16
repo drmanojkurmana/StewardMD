@@ -22,7 +22,7 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["onco", "ONCqis", "vaccines"]];
+    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCqis", "vaccines"]];
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -698,6 +698,55 @@
       '<button class="oe-btn ghost' + (nurse ? "" : " on") + '" data-oe-act="onco-view:doctor">' + ms("person") + "Doctor</button>" +
       '<button class="oe-btn ghost' + (nurse ? " on" : "") + '" data-oe-act="onco-view:nurse">' + ms("healing") + "Nurse</button></div>";
   }
+  // ---- Protocol tab: search the reference protocol library + Assign to this patient --------------
+  // Search is a LOCAL filter over st.oncoProtocols (the 124 /kb/protocols/*.json already loaded);
+  // Assign creates a DRAFT plan (server accepts the client template) + a timeline entry, then returns
+  // to the OPD profile. No auto-activation — the ONCqis tab still owns dose-lock + administration.
+  function protocolTab(st) {
+    if (!oncoFlagOn()) return section("account_tree", "Protocol", "", "", "Oncology protocols are not enabled for this account.");
+    if (!st.oncoProtocolsLoaded) { try { maybeLoadOncoProtocols(); } catch (e) {} return section("account_tree", "Protocol", "Loading the protocol library…", "", "Loading…"); }
+    var disc = '<div class="oe-search-note" style="margin:0 0 8px">' + ms("info") + "Reference regimens — verify doses, BSA/AUC/carboplatin target, eligibility &amp; local protocol before administering. Assign attaches it to this patient (draft) and records it in the timeline.</div>";
+    return section("account_tree", "Protocol", "Search &amp; assign a treatment protocol",
+      disc + searchBox("proto", st.protoQuery, "Search by protocol name or cancer type…") +
+      '<div class="oe-searchout" id="oe-out-proto">' + protoResults(st) + "</div>", "");
+  }
+  function protoResults(st) {
+    var all = st.oncoProtocols || [];
+    if (!all.length) return '<div class="oe-search-note">' + ms("search_off") + "No protocols in the library.</div>";
+    var q = String(st.protoQuery || "").toLowerCase().trim();
+    var list = !q ? all.slice(0, 50) : all.filter(function (p) {
+      return ((p.name || "") + " " + (p.disease || "") + " " + (p.diseaseId || "")).toLowerCase().indexOf(q) >= 0;
+    }).slice(0, 50);
+    if (!list.length) return '<div class="oe-search-note">' + ms("search_off") + "No protocol matches “" + esc(st.protoQuery) + "”.</div>";
+    return list.map(function (p) {
+      var intent = p.treatmentIntent && p.treatmentIntent.length ? " · " + esc([].concat(p.treatmentIntent).join("/")) : "";
+      var right = st.writeOn
+        ? '<button class="oe-btn primary" data-oe-act="proto-assign:' + esc(p.id) + '" style="flex:0 0 auto">' + ms("assignment_turned_in") + "Assign</button>"
+        : '<span class="oe-search-note" style="margin:0">view only</span>';
+      return '<div style="display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--oe-line,#e2e8f0)">' +
+        '<div style="flex:1;min-width:0"><div style="font:700 14px/1.3 var(--oe-font,system-ui);color:var(--oe-ink,#0f172a)">' + esc(p.name || p.id) + "</div>" +
+        '<div style="font:600 12px/1.4 var(--oe-font,system-ui);color:var(--oe-mut,#64748b)">' + esc(p.disease || "—") + intent + "</div></div>" + right + "</div>";
+    }).join("");
+  }
+  function renderProtoOut() { try { var el = document.querySelector("#smdOpdEmr #oe-out-proto"); if (el) el.innerHTML = protoResults(st); } catch (e) {} }
+  function assignProtocol(id) {
+    var p = (st.oncoProtocols || []).filter(function (x) { return String(x.id) === String(id); })[0];
+    if (!p) { toast("Protocol not found."); return; }
+    if (!st.writeOn) { toast("Open the patient in write mode to assign a protocol."); return; }
+    if (!confirmed('Assign "' + (p.name || p.id) + '" to this patient? It attaches as a draft plan and is recorded in the timeline. Verify doses before administering.')) return;
+    var body = { hospitalId: st.hospitalId || "", ghisPatientId: (st.patient && st.patient.mrn) || "", protocolId: p.id,
+      intent: (p.treatmentIntent && [].concat(p.treatmentIntent)[0]) || "", patientParams: {}, template: p };
+    toast("Assigning protocol…");
+    oncoPost("/plan", body).then(function (res) {
+      if (res.status === 501 || res.d.error === "onco_write_disabled") { toast("Oncology writes are not enabled yet."); return; }
+      if (!res.ok || res.d.ok === false || !res.d.plan) { toast("Could not assign the protocol. Please try again."); return; }
+      st.oncoPlan = res.d.plan;
+      try { addToTimeline("medication", "Oncology protocol assigned: " + (p.name || p.id)); } catch (e) {}
+      toast("Protocol assigned — recorded in the timeline.");
+      st.tab = "profile"; paint();   // back to OPD profile / timeline
+    }).catch(function () { toast("Could not complete the request. Please try again."); });
+  }
+
   function _render(state) {
     var st = state || {}, active = st.tab || "profile", body;
     if (st.loading) body = loadingBox();
@@ -707,6 +756,7 @@
       if (active === "inv") body = head + invTab(st);
       else if (active === "meds") body = head + medsTab(st);
       else if (active === "assess") body = head + assessTab(st);
+      else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
       else body = head + profileTab(st);
     }
@@ -728,7 +778,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, protoQuery: "", oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   function paint() { root().innerHTML = _render(st); try { initCloseSwipe(); } catch (e) {} }
   function paintKeepFocus(kind) {
     paint();
@@ -914,6 +964,7 @@
   }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
+    if (inp === "proto-q") { st.protoQuery = el.value; renderProtoOut(); return; }   // local filter — no network, keep focus
     if (inp === "inv-q") { st.invQuery = el.value; scheduleSearch("inv"); return; }
     if (inp === "med-q") { st.medQuery = el.value; scheduleSearch("med"); return; }
     if (inp === "notes") { st.voiceTranscript = el.value; _lastFullTranscript = el.value; return; }   // doctor edits the clinical-notes transcript after Stop
@@ -1006,6 +1057,7 @@
     if (cmd === "consult-er") return consultToER();
     if (cmd === "onco-cell") return oncoCellClick(arg);
     if (cmd === "onco-drawer-close") { st.doseDrawer = null; paint(); return; }
+    if (cmd === "proto-assign") return assignProtocol(arg);
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-tree-open") return openOncoTree();
     if (cmd === "onco-override") return oncoSaveOverride(arg);

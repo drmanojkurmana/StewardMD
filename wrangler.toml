@@ -75,6 +75,10 @@ MAIK_CACHE_VERSION = "1"
 # MaiK cite-or-abstain: "1" makes the model ground+cite and say "verify / not certain" instead of
 # confidently guessing. Set "0" to revert to the prior prompt exactly.
 MAIK_ABSTAIN = "1"
+# Oncology treatment-plan writes (OPD Protocol assign, cycles, administration). "1" un-gates the
+# role-split onco endpoints; every write is still cap-gated (EMR_TREAT doctor / EMR_VITALS nurse) +
+# suggest-and-confirm. PUBLIC-RELEASE-GATE: review before public release.
+QUEUE_ONCO_WRITE = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -90,6 +94,7 @@ FOLLOWCARE_MSG_CHANNEL = "whatsapp"   # queue patient messages via WhatsApp for 
 MAIK_ANSWER_CACHE = "1"   # semantic answer cache ON (generic Qs only, never case/PHI); MAIK_CACHE_VERSION bump = invalidate
 MAIK_CACHE_VERSION = "1"
 MAIK_ABSTAIN = "1"   # cite-or-abstain prompt directive ON (ground+cite, say 'verify' vs guess)
+QUEUE_ONCO_WRITE = "1"   # onco treatment-plan writes on (cap-gated EMR_TREAT/EMR_VITALS + confirm). PUBLIC-RELEASE-GATE
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

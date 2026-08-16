@@ -742,13 +742,14 @@
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
+        tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
+          setTimeout(function () { ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
         });
       });
     },
