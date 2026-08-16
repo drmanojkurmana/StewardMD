@@ -406,6 +406,11 @@
           <div class="msg" id="aicEmgMsg"></div>
         </div>
         <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">MaiK answer engine</b><button class="ghost" id="aicMkReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:4px 0 8px">Live toggles (no redeploy). <b>Answer cache</b> serves common questions instantly at zero token cost (never patient data). <b>Cite-or-abstain</b> makes MaiK say “verify / not certain” instead of guessing.</div>
+          <div id="aicMkBox"></div><div class="msg" id="aicMkMsg"></div>
+        </div>
+        <div class="card">
           <b>Model override</b>
           <div class="hint" style="margin:4px 0 8px">Force a specific model for all AI, or leave default. Applies immediately.</div>
           <div id="aicModel"></div><div class="msg" id="aicModelMsg"></div>
@@ -788,6 +793,7 @@
       $("aicModelSave").onclick=function(){ say("aicModelMsg","","Saving…"); api(AI+"/model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:$("aicModelSel").value})}).then(function(r){ if(r.s===200)say("aicModelMsg","ok","✅ "+(r.d.model||"default")); else say("aicModelMsg","err","Failed"); }); };
     });
     api(AI+"/budget").then(function(x){ if(x.s===200){ var b=x.d.budget, v=(b&&typeof b==="object")?(b.inr!=null?b.inr:""):(b!=null?b:""); try{$("aicBudget").value=(v||v===0)?v:"";}catch(e){} } });
+    aicMkLoad();
     aicLimLoad();
   }
   function aicLimLoad(){
@@ -799,6 +805,22 @@
       };
     });
   }
+  function aicMkLoad(){
+    api(AI+"/maik-config").then(function(x){ if(x.s!==200){ say("aicMkMsg","err",forbid(x)); return; }
+      var c=(x.d&&x.d.config)||{};
+      function tog(label,keyOn,keyOff,on){ return '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span style="flex:1;font:600 13px var(--f)">'+label+'</span><button class="pill'+(on?" on":"")+'" data-mk="'+keyOn+'">On</button><button class="pill'+(!on?" on":"")+'" data-mk="'+keyOff+'">Off</button></div>'; }
+      $("aicMkBox").innerHTML = tog("Answer cache","cache-on","cache-off",!!c.answerCache) + tog("Cite-or-abstain","abstain-on","abstain-off",!!c.abstain) +
+        '<button class="ghost" data-mk="clear" style="margin-top:2px">Clear answer cache</button>'+
+        '<div class="hint" style="margin-top:8px">cache version '+esc(String(c.cacheVersion||"1"))+' · config source: '+esc(c.source||"env")+'</div>';
+      $("aicMkBox").querySelectorAll("[data-mk]").forEach(function(b){ b.onclick=function(){ var a=b.getAttribute("data-mk"),body={};
+        if(a==="cache-on")body.answerCache=true; else if(a==="cache-off")body.answerCache=false;
+        else if(a==="abstain-on")body.abstain=true; else if(a==="abstain-off")body.abstain=false;
+        else if(a==="clear"){ if(!confirm("Clear the MaiK answer cache? The next ask for each question regenerates."))return; body.clearCache=true; }
+        say("aicMkMsg","","Saving…");
+        api(AI+"/maik-config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){say("aicMkMsg","ok","✅ Saved");aicMkLoad();} else say("aicMkMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); }; });
+    }).catch(function(){ say("aicMkMsg","err","Failed to load."); });
+  }
+  $("aicMkReload").onclick=aicMkLoad;
   $("aicReload").onclick=aicLoad; $("aicLimReload").onclick=aicLimLoad;
   $("aicBudgetSave").onclick=function(){ say("aicBudgetMsg","","Saving…"); api(AI+"/budget",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({inr:$("aicBudget").value})}).then(function(r){ if(r.s===200)say("aicBudgetMsg","ok","✅ Saved"); else say("aicBudgetMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); };
 

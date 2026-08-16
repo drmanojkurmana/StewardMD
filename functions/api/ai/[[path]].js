@@ -103,7 +103,7 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
-import { answerCacheOn, answerCacheKey, getCachedAnswer, putCachedAnswer } from "../../_maik_cache.js";
+import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
 import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment-extract.js";
@@ -868,7 +868,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -883,6 +883,17 @@ export async function onRequest(context) {
     }
 
     if (seg === "admin/analytics") return json(await getAnalytics(store, 14, Date.now()));
+
+    // MaiK runtime controls (answer cache on/off, cite-or-abstain on/off, clear cache) — live, no redeploy.
+    if (seg === "admin/maik-config") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        const cfg = await setMaikCfg(store, { answerCache: b.answerCache, abstain: b.abstain, clearCache: b.clearCache === true, cacheVersion: b.cacheVersion }, Date.now());
+        await auditRecord(store, "maik-config", "cache=" + cfg.answerCache + " abstain=" + cfg.abstain + (b.clearCache ? " cache-cleared" : ""), actorId, Date.now());
+        return json({ ok: true, config: await getMaikCfg(store, env) });
+      }
+      return json({ config: await getMaikCfg(store, env) });
+    }
 
     // Support tickets: GET list (?status=open|resolved) or a single thread (?id=); POST reply/resolve/reopen.
     if (seg === "admin/support") {
@@ -1146,10 +1157,11 @@ export async function onRequest(context) {
           if (body && body.tier === 1) sysA = sysA + "\n\nOUTPUT MODE — BOTTOM LINE ONLY: give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
           else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for this question — rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance. Do NOT repeat the bottom line and do NOT write @@MORE@@.";
         } catch (e) {}
-        // Cite-or-abstain safety directive (flag MAIK_ABSTAIN, default OFF → zero change until the owner
-        // validates with the live answer eval, then flips it on). Never fabricate; verify beats guessing.
+        // Effective MaiK config = owner runtime overrides (AI Control Center, KV) layered over env.
+        const _mcfg = await getMaikCfg(usageKv(env), env);
+        // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.
         try {
-          if (["1", "true", "on", "yes"].indexOf(String(env.MAIK_ABSTAIN || "").toLowerCase()) >= 0) {
+          if (_mcfg.abstain) {
             sysA += "\n\nCITE-OR-ABSTAIN: ground every clinical claim in the supplied StewardMD knowledge and cite it. If the knowledge base does not cover this, or you are not confident, SAY SO plainly and tell the clinician to verify against local protocol — never invent a dose, figure, drug, or guideline. A clear 'not certain — verify X' beats a confident guess.";
           }
         } catch (e) {}
@@ -1171,11 +1183,11 @@ export async function onRequest(context) {
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
         // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
-        const _cacheEligible = answerCacheOn(env) && !hasDx && !(body && body.tier) && !maikWiringOn(env);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && !(body && body.tier) && !maikWiringOn(env);
         let _ckey = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env) });
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion });
             if (_ckey) {
               const _hit = await getCachedAnswer(usageKv(env), _ckey);
               if (_hit && _hit.text) {

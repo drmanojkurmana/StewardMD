@@ -11,8 +11,37 @@
  */
 const PREFIX = "maik:ans:";
 
-export function answerCacheOn(env) {
-  return ["1", "true", "on", "yes"].indexOf(String((env && env.MAIK_ANSWER_CACHE) || "").toLowerCase()) >= 0;
+const truthy = (v) => ["1", "true", "on", "yes"].indexOf(String(v || "").toLowerCase()) >= 0;
+export function answerCacheOn(env) { return truthy(env && env.MAIK_ANSWER_CACHE); }
+export function abstainOn(env) { return truthy(env && env.MAIK_ABSTAIN); }
+
+const CFG_KEY = "maik:cfg";   // owner runtime overrides (AI Control Center) — win over env; no redeploy
+
+/* Effective MaiK config = KV overrides layered over the env defaults. One cheap KV read per answer.
+ * Returns { answerCache, abstain, cacheVersion, source } — source flags whether an override is set. */
+export async function getRuntimeCfg(store, env) {
+  const base = { answerCache: answerCacheOn(env), abstain: abstainOn(env), cacheVersion: String((env && env.MAIK_CACHE_VERSION) || "1") };
+  let ov = null;
+  try { const v = store && (await store.get(CFG_KEY)); if (v) ov = JSON.parse(v); } catch (e) { ov = null; }
+  if (!ov || typeof ov !== "object") return { ...base, source: "env" };
+  return {
+    answerCache: typeof ov.answerCache === "boolean" ? ov.answerCache : base.answerCache,
+    abstain: typeof ov.abstain === "boolean" ? ov.abstain : base.abstain,
+    cacheVersion: ov.cacheVersion != null ? String(ov.cacheVersion) : base.cacheVersion,
+    source: "override",
+  };
+}
+/* Merge a partial patch into the KV override. patch.clearCache=true bumps cacheVersion (wipes cache).
+ * `now` passed in for determinism. Returns the stored override object. */
+export async function setRuntimeCfg(store, patch, now) {
+  if (!store) return null;
+  let cur = {}; try { const v = await store.get(CFG_KEY); if (v) cur = JSON.parse(v) || {}; } catch (e) { cur = {}; }
+  patch = patch || {};
+  if (typeof patch.answerCache === "boolean") cur.answerCache = patch.answerCache;
+  if (typeof patch.abstain === "boolean") cur.abstain = patch.abstain;
+  if (patch.clearCache === true || patch.cacheVersion != null) cur.cacheVersion = patch.cacheVersion != null ? String(patch.cacheVersion) : ("v" + (now || Date.now()));
+  await store.put(CFG_KEY, JSON.stringify(cur));
+  return cur;
 }
 export function cacheTtl(env) {
   const d = Number(env && env.MAIK_CACHE_TTL_DAYS) || 14;
@@ -28,7 +57,7 @@ export async function answerCacheKey(sha256hex, env, o) {
   o = o || {};
   const q = normQ(o.question);
   if (q.length < 12 || q.split(" ").length < 2) return null;   // too vague to be a stable, safe key
-  const ver = String((env && env.MAIK_CACHE_VERSION) || "1");
+  const ver = String(o.version != null ? o.version : ((env && env.MAIK_CACHE_VERSION) || "1"));   // runtime override wins
   const parts = [ver, q, String(o.depth || "std"), String(o.audience || "any"), String(o.model || "def")].join("|");
   return PREFIX + (await sha256hex(parts));
 }
