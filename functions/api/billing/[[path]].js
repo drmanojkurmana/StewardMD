@@ -288,6 +288,23 @@ export async function onRequest(context) {
       return json({ error: "bad-request", seg, sub, method }, 400);
     }
 
+    // ---- co-resident shared AI pool (owner-linked): both accounts of the ₹299 pair meter as one. ----
+    if (seg === "pool") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email) return json({ error: "email-required" }, 400);
+      const kv = usageKv(env);
+      if (method === "POST" && sub === "link") {
+        const owner = String(body.poolEmail || "").trim().toLowerCase();
+        if (!owner || owner === email) return json({ error: "poolEmail-required" }, 400);
+        try { await kv.put("ai:pool:em:" + email, "em:" + owner); } catch (e) { return json({ error: "kv" }, 502); }
+        return json({ ok: true, email, pooledTo: owner });
+      }
+      if (method === "POST" && sub === "unlink") { try { await kv.delete("ai:pool:em:" + email); } catch (e) {} return json({ ok: true, email }); }
+      return json({ error: "bad-request", seg, sub, method }, 400);
+    }
+
     return json({ error: "bad-request", seg, sub, method }, 400);
   } catch (e) {
     { try { console.warn("[api] server error", String((e && e.message) || e).slice(0, 200)); } catch (_e) {} return json({ error: "server_error" }, 500); }

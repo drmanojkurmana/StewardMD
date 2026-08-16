@@ -10,17 +10,20 @@ import { usageKv } from "./_usage.js";
 // bindings are only dereferenced inside function bodies below, never at module-eval time.
 import { featureKeys, featureAllowed, FEATURE_REGISTRY } from "./_features.js";
 
-export const ROLES = ["physician", "resident", "student"];
+// Pricing/billing roles. intern & resident & student = trainees (educational V2 Beta content on);
+// physician / physician_pro = attending (clinical V1); co_resident = the ₹299 two-account plan whose
+// pair shares ONE AI pool (see aiPoolUid / the ai:pool KV mapping the AI meter resolves).
+export const ROLES = ["physician", "physician_pro", "resident", "co_resident", "intern", "student"];
 const COLL = "entitlements";
 
 export function normalizeRole(r) {
   const v = String(r || "").trim().toLowerCase();
   return ROLES.indexOf(v) >= 0 ? v : null;
 }
-// physician -> clinical-only V1; resident/student -> clinical+educational V2 Beta; unset -> V1.
+// trainees (resident/co_resident/intern/student) -> clinical+educational V2 Beta; attendings -> V1; unset -> V1.
 export function roleToTier(role) {
   const r = normalizeRole(role);
-  return (r === "resident" || r === "student") ? "v2beta" : "v1";
+  return (r === "resident" || r === "co_resident" || r === "intern" || r === "student") ? "v2beta" : "v1";
 }
 // override_<feature> wins iff exactly v1|v2beta; else role-derived; else v1.
 export function effectiveTier(feature, record) {
