@@ -72,10 +72,21 @@ case "$cmd" in
     # Stop + resume the SAME pod: re-runs the boot (re-clone latest + pip install) but KEEPS the persistent
     # /models volume, so downloaded models are reused (no 10-min re-download). Use to iterate quickly.
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
-    gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podStop(input:{podId:$id}){ id desiredStatus } }", variables:{id:$id}}')" >/dev/null
-    sleep 6
-    gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podResume(input:{podId:$id, gpuCount:1}){ id desiredStatus } }", variables:{id:$id}}')" | jq .
+    gql "$(jq -n --arg q "mutation { podStop(input:{podId:\"$RUNPOD_POD_ID\"}){ id desiredStatus } }" '{query:$q}')" >/dev/null
+    sleep 8
+    gql "$(jq -n --arg q "mutation { podResume(input:{podId:\"$RUNPOD_POD_ID\", gpuCount:1}){ id desiredStatus } }" '{query:$q}')" | jq .
     echo "restarted $RUNPOD_POD_ID → https://${RUNPOD_POD_ID}-8080.proxy.runpod.net"
     ;;
-  *) echo "usage: runpod.sh {up|status|down|restart}"; exit 1;;
+  testcall)
+    # Fire the owner test call via Cloudflare /voice/test (service-token gated). Args: [phone] [pathwayId].
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    PHONE="${2:-8897298117}"; PW="${3:-heart_failure}"
+    curl -sS -X POST "$BASE/voice/test" -H "X-Voice-Token: $TOK" -H "Content-Type: application/json" \
+      -d "{\"phone\":\"$PHONE\",\"pathwayId\":\"$PW\",\"name\":\"Test\"}"; echo
+    ;;
+  queue)
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK"; echo
+    ;;
+  *) echo "usage: runpod.sh {up|status|down|restart|testcall|queue}"; exit 1;;
 esac

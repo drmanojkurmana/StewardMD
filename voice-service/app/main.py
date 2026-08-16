@@ -63,6 +63,28 @@ async def healthz():
             "followcare": cfg.followcare_configured(), "telephony": cfg.telephony_configured()}
 
 
+# Debug/force: show what THIS pod sees from the queue, and manually originate any fresh calls (bypasses the
+# auto-poll loop). Lets us confirm the pod can reach + auth Cloudflare, and force a dial on demand.
+@app.post("/drain")
+async def drain():
+    try:
+        q = client.get_queue()
+    except Exception as e:
+        return {"error": "get_queue_failed", "detail": str(e), "base": cfg.followcare_base}
+    out = {"ready": STATE["ready"], "queue_count": len(q), "originated": []}
+    for c in q:
+        cid = c.get("callId")
+        if cid in STATE["calls"]:
+            continue
+        STATE["calls"][cid] = {"call": c, "state": "originated", "ts": time.time()}
+        client.post_status(cid, {"status": "ringing"})
+        ok = await asyncio.get_event_loop().run_in_executor(None, plivo.originate, c.get("phone"), cid)
+        out["originated"].append({"callId": cid, "phone": c.get("phone"), "plivo_ok": ok})
+        if not ok:
+            STATE["calls"][cid]["state"] = "done"
+    return out
+
+
 @app.post("/plivo/answer")
 async def plivo_answer(request: Request):
     call_id = request.query_params.get("callId", "")
