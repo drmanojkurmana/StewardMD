@@ -67,11 +67,12 @@ async def healthz():
 # auto-poll loop). Lets us confirm the pod can reach + auth Cloudflare, and force a dial on demand.
 @app.post("/drain")
 async def drain():
-    try:
-        q = client.get_queue()
-    except Exception as e:
-        return {"error": "get_queue_failed", "detail": str(e), "base": cfg.followcare_base}
-    out = {"ready": STATE["ready"], "queue_count": len(q), "originated": []}
+    # Raw fetch so we can see the exact HTTP status the POD gets from Cloudflare (vs. my working curl).
+    status, obj = client.transport("GET", client._url("/voice/queue"), client._headers(), None)
+    q = obj.get("calls", []) if status == 200 else []
+    tok = cfg.voice_service_token or ""
+    out = {"ready": STATE["ready"], "queue_http_status": status, "queue_count": len(q),
+           "base": cfg.followcare_base, "token_len": len(tok), "token_tail": tok[-4:], "originated": []}
     for c in q:
         cid = c.get("callId")
         if cid in STATE["calls"]:

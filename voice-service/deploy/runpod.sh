@@ -74,7 +74,7 @@ case "$cmd" in
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
     gql "$(jq -n --arg q "mutation { podStop(input:{podId:\"$RUNPOD_POD_ID\"}){ id desiredStatus } }" '{query:$q}')" >/dev/null
     sleep 8
-    gql "$(jq -n --arg q "mutation { podResume(input:{podId:\"$RUNPOD_POD_ID\", gpuCount:1}){ id desiredStatus } }" '{query:$q}')" | jq .
+    gql "$(jq -n --arg q "mutation { podResume(input:{podId:\"$RUNPOD_POD_ID\"}){ id desiredStatus } }" '{query:$q}')" | jq .
     echo "restarted $RUNPOD_POD_ID → https://${RUNPOD_POD_ID}-8080.proxy.runpod.net"
     ;;
   testcall)
