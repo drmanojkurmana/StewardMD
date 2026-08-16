@@ -84,6 +84,12 @@ QUEUE_ONCO_WRITE = "1"
 # Set "0" to revert instantly. (Caps today: MaiK 50, cases 25, Vision 50, STT 50, ECG 10, research 2,
 # + 60 req/day, 200k tok/day, 3M/month, 3s min-interval — tune in _ai_usage.js/_usage.js if too tight.)
 MAIK_ENFORCE_CAPS = "1"
+# Experimental Access code-gate ENFORCEMENT for the imaging AI cloud-compute endpoints. "1" = the
+# server requires an owner OR a valid access code (X-XA-Token) to hit /api/{sknx,thorex,kardiox}
+# compute. On-device imaging is unaffected; owner accounts always pass (ownerOK). Set "0" to revert.
+EXPERIMENTAL_ENFORCE_SKNX = "1"
+EXPERIMENTAL_ENFORCE_THOREX = "1"
+EXPERIMENTAL_ENFORCE_KARDIOX = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -100,6 +106,10 @@ MAIK_ANSWER_CACHE = "1"   # semantic answer cache ON (generic Qs only, never cas
 MAIK_CACHE_VERSION = "1"
 MAIK_ABSTAIN = "1"   # cite-or-abstain prompt directive ON (ground+cite, say 'verify' vs guess)
 QUEUE_ONCO_WRITE = "1"   # onco treatment-plan writes on (cap-gated EMR_TREAT/EMR_VITALS + confirm). PUBLIC-RELEASE-GATE
+MAIK_ENFORCE_CAPS = "1"   # enforce per-user/per-module AI daily+rate caps (owner exempt); set "0" to revert
+EXPERIMENTAL_ENFORCE_SKNX = "1"   # imaging code-gate enforced server-side (owner + code-holders only); "0" reverts
+EXPERIMENTAL_ENFORCE_THOREX = "1"
+EXPERIMENTAL_ENFORCE_KARDIOX = "1"
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

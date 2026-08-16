@@ -24,6 +24,10 @@ ok(!/\bif \(!admin\b/.test(src) && !/&& !admin\b/.test(src), "no per-user thrott
 ok((src.match(/!exempt/g) || []).length >= 4, "rate limit + daily tokens + monthly + per-category caps all use !exempt");
 
 // the project-wide COST circuit breaker must STILL apply (it is NOT a per-user restriction)
-ok(/g\.cost >= hardStop/.test(src), "global daily-cost circuit breaker retained (wallet safety)");
+ok(/breakerCost >= hardStop/.test(src), "global daily-cost circuit breaker retained (wallet safety)");
+// ...and it now reads an ATOMIC D1 counter (exact under concurrency) so it can't be defeated by the
+// KV read-modify-write race that undercounts a burst (fail-safe: falls back to KV when D1 absent).
+ok(/ai_cost_daily/.test(src) && /ON CONFLICT\(day\)/.test(src) && /readDailyCostInr/.test(src),
+  "global cost breaker backed by an atomic D1 counter (no KV race/undercount)");
 
 console.log(`\nALL ${pass} PASS — AI unlimited per-user (owner-parity for all accounts); only the global cost breaker remains`);
