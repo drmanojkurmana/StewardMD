@@ -69,14 +69,14 @@ Ladder: **Free → Student ₹199 → Pro ₹599 → Ultimate ₹1,499.**
 | Scribe (voice→EMR) | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Patient Summary | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Research / evidence | taste | educational | 10/day | 10/day | unlimited* |
-| **Imaging AI reads/day** | ❌ | ❌ (Learn atlas only) | ❌ | **5/day** | **20/day / fair-use** |
+| **Imaging AI reads/day** | ❌ | ❌ (Learn atlas only) | **4/day each** | **5/day** | **20/day / fair-use** |
 | Priority reasoning model (2.5-pro) | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Cross-device sync + Lab Watch + wearable | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Earliest access (FundX/KardioX/ThoreX/SknX) | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 \*subject to the daily rupee cap. Over any cap → **buy credits** (₹50→₹25, built), upgrade, or wait for midnight reset. No hard lockout, ever.
 
-**Who:** Student = verified trainee (NMC-trainee/college proof required, so attendings can't take the cheap tier). Co-Resident = two trainees, one shared AI pool (built) — "split StewardMD with your co-resident."
+**Who:** Student = verified trainee (NMC-trainee/college proof required, so attendings can't take the cheap tier). Co-Resident = two trainees, one shared AI pool (built) — "split StewardMD with your co-resident." Each account gets **4 imaging reads/day**; total cost is still governed by the shared ₹6/day pool (heavy imaging days consume the pool and can be topped up with credits), so cost stays capped.
 
 **Trial:** 🔧 14 days (started ≤ cutover) / 7 days after. Built; `TRIAL14_UNTIL` default 15 Sep 2026 — *confirm the Sep 15 vs Sep 25 gap.*
 
@@ -164,7 +164,7 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 | Voice dictation (Whisper) | **S/P/U** | on-device = free |
 | MaiK Scribe (voice→EMR) | **S/P/U** | time-capped |
 | Voice consult / ambient / TTS | **P/U** 💰 | |
-| Imaging AI — FundX / ThoreX / SknX | **P** 5/day · **U** 20/day · **H** 💰 | Free ❌ |
+| Imaging AI — FundX / ThoreX / SknX | **Co-Res** 4/day each · **P** 5/day · **U** 20/day · **H** 💰 | Free ❌ |
 | KardioX ECG AI | **U/H** 💰 | Learn atlas **F/S** |
 | ICU workstation + collaboration | **H** | |
 | Lab Watch 24/7 | **P/U** (solo) / **H** | |
