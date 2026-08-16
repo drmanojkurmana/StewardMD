@@ -62,7 +62,7 @@
   var SAFETY = "StewardMD is clinical decision support — it supports, but does not replace, your clinical judgment. Nothing it shows is a confirmed diagnosis. Verify every dose, drug and recommendation against your patient and local policy. Medical content is pending clinician sign-off.";
 
   var root = null;
-  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
 
   function build() {
     if (root) return root;

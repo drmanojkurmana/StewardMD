@@ -6,7 +6,7 @@
 (function (root) {
   "use strict";
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name) { return '<span class="material-symbols-outlined">' + name + "</span>"; }
 
   // drug.days (e.g. [1] or [1,2,3,4,5]) -> "D1" / "D1-5" / "D1,3,5" for a non-contiguous set.

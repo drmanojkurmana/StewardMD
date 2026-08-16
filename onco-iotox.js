@@ -22,7 +22,7 @@
   var ALLOWED_GUIDELINES = { ASCO: 1, NCCN: 1, SITC: 1 };
   var NUMERAL_RE = /\d/;   // a digit in a principle string is treated as a fabricated dose/threshold
 
-  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 
   /* ===================== PURE ENGINE (testable in Node, no DOM/fetch) ===================== */
 

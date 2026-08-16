@@ -436,7 +436,7 @@
   
     // Material Symbols glyph (same helper contract as the rest of the module).
     function ic(name) { return '<span class="material-symbols-rounded" aria-hidden="true">' + name + '</span>'; }
-    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
   
     // Confidence: accept 0..1 (canonical ECGAnalysis.confidence) or 0..100 → integer percent.
     var rawConf = typeof A.confidence === 'number' ? A.confidence : 0.94;

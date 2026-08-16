@@ -24,7 +24,7 @@
   // captured Submit shows Save replaces the whole body (then we must supply it ourselves).
   var BOILERPLATE = "Report Immediately to the hospital in case of Fever / Diarrhea / Excessive Vomiting / Breathlessness. In case of Emergency contact Ph: 0891 2780333/444. Emergency Room (Ext - 3398).";
 
-  function esc(s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   // Plain text (our fields use "\n" and "- "/"• " bullet lines) -> safe inline HTML for the editor:
   // bullet runs become <ul><li>…</li></ul>, other lines join with <br>.
