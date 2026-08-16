@@ -41,6 +41,8 @@
   .pill.on{background:var(--tl);color:#fff;border-color:var(--tl)}
   .item{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg)}
   .item .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .vph{display:none;max-width:100%;max-height:300px;object-fit:contain;border-radius:12px;border:1px solid var(--line);margin:10px 0;cursor:zoom-in;background:var(--panel)}
+  .vph.on{display:block}
   .st{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
   .st.pending{background:var(--amb)}.st.verified{background:var(--grn)}.st.rejected{background:var(--red)}.st.unverified{background:var(--mut)}
   .cat{font:700 10px var(--f);text-transform:uppercase;color:var(--tl);background:var(--tls);border-radius:6px;padding:2px 8px}
@@ -570,11 +572,21 @@
   // ---- Verifications ----
   $("vFilters").addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(!b)return;vFilter=b.getAttribute("data-f");Array.prototype.forEach.call($("vFilters").children,function(p){p.classList.toggle("on",p===b);});vLoad();});
   function vAct(path,uid,extra){ api("/api/verifications/"+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({uid:uid},extra||{}))}).then(function(x){ if(x.s===200&&x.d.ok){say("vMsg","ok","✅ "+path+" · "+uid);vLoad();ovLoad();} else say("vMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }); }
+  // Owner-gated fetch of an uploaded proof photo → object URL (img src can't carry a bearer token).
+  function vPhoto(uid){ return tok().then(function(t){ if(!t) return null; return fetch("/api/verifications/photo?uid="+encodeURIComponent(uid),{headers:{Authorization:"Bearer "+t}}).then(function(r){ return r.ok?r.blob():null; }); }).then(function(b){ return b?URL.createObjectURL(b):null; }).catch(function(){ return null; }); }
   function vLoad(){ var el=$("vList"); el.innerHTML='<div class="hint">Loading…</div>'; say("vMsg","","");
     api("/api/verifications?status="+encodeURIComponent(vFilter)).then(function(x){ if(x.s===401){el.innerHTML='<div class="hint">Your account isn\'t an approved owner.</div>';return;} var docs=(x.d&&x.d.doctors)||[]; if(!docs.length){el.innerHTML='<div class="hint">No '+esc(vFilter)+' verifications.</div>';return;}
-      el.innerHTML=docs.map(function(d){var st=d.status||"unverified",reg=d.regNo||d.extractedRegNo||"—",nm=d.name||d.extractedName||"(name not read)"; return '<div class="item"><div class="h"><span class="st '+esc(st)+'">'+esc(st)+'</span>'+(d.reason?'<span class="hint">'+esc(d.reason)+'</span>':'')+(d.source?'<span class="hint">via '+esc(d.source)+'</span>':'')+'<span class="t">'+esc(when(d.verifiedAt||d.updatedAt))+'</span></div><div class="title">'+esc(nm)+'</div><div class="meta"><b>Reg:</b> '+esc(reg)+(d.council?' · '+esc(d.council):'')+'<br><b>Account:</b> '+esc(d.email||"—")+' · <code>'+esc(d.uid||"")+'</code></div><div class="foot">'+(st!=="verified"?'<button class="approve" data-ap="'+esc(d.uid)+'" data-reg="'+esc(reg)+'">✓ Approve</button>':'')+(st!=="rejected"?'<button class="reject" data-rj="'+esc(d.uid)+'">Reject</button>':'')+'</div></div>';}).join("");
+      var ROLE_LBL={doctor:"Registered doctor",intern:"Intern / Resident",student:"Medical student"};
+      el.innerHTML=docs.map(function(d){
+        var st=d.status||"unverified",reg=d.regNo||d.extractedRegNo||"—",nm=d.name||d.extractedName||"(name not read)";
+        var conf=(d.confidence!=null&&d.confidence!=="")?Math.round(d.confidence*100):null;
+        var roleLbl=ROLE_LBL[d.role]||"";
+        var photo=(st==="pending")?'<img class="vph" data-vphoto="'+esc(d.uid)+'" alt="Uploaded document" title="Tap to open full size">':'';
+        return '<div class="item"><div class="h"><span class="st '+esc(st)+'">'+esc(st)+'</span>'+(roleLbl?'<span class="hint">'+esc(roleLbl)+'</span>':'')+(conf!=null?'<span class="hint">AI '+conf+'%</span>':'')+(d.reason?'<span class="hint">'+esc(d.reason)+'</span>':'')+(d.source?'<span class="hint">via '+esc(d.source)+'</span>':'')+'<span class="t">'+esc(when(d.verifiedAt||d.updatedAt))+'</span></div><div class="title">'+esc(nm)+'</div>'+photo+'<div class="meta"><b>Reg / ID:</b> '+esc(reg)+(d.council?' · '+esc(d.council):'')+(d.via?' · '+esc(d.via==="id"?"photo-ID":"certificate"):'')+'<br><b>Account:</b> '+esc(d.email||"—")+' · <code>'+esc(d.uid||"")+'</code></div><div class="foot">'+(st!=="verified"?'<button class="approve" data-ap="'+esc(d.uid)+'" data-reg="'+esc(reg)+'">✓ Verify &amp; accept</button>':'')+(st!=="rejected"?'<button class="reject" data-rj="'+esc(d.uid)+'">Reject</button>':'')+'</div></div>';
+      }).join("");
       el.querySelectorAll("[data-ap]").forEach(function(b){b.onclick=function(){vAct("approve",b.getAttribute("data-ap"),{regNo:b.getAttribute("data-reg")});};});
       el.querySelectorAll("[data-rj]").forEach(function(b){b.onclick=function(){if(confirm("Reject? Blocks until they re-verify."))vAct("reject",b.getAttribute("data-rj"));};});
+      el.querySelectorAll("[data-vphoto]").forEach(function(img){ vPhoto(img.getAttribute("data-vphoto")).then(function(u){ if(u){img.src=u;img.classList.add("on");img.onclick=function(){window.open(u,"_blank");};} else { img.remove(); } }); });
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';});
   }
   $("vReload").onclick=vLoad;

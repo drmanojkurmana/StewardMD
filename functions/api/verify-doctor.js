@@ -318,12 +318,25 @@ export async function onRequest(context) {
   const toManual = async (reason) => {
     console.log("[verify] uid", uid, "→ MANUAL:", reason);
     const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
+    // Store the uploaded proof to R2 so the owner's review dashboard can display it. Retained ONLY
+    // until the owner approves/rejects (verifications endpoint deletes it then) — bounds sensitive-ID
+    // (incl. Aadhaar) retention to the review window.
+    let photoKey = "";
+    try {
+      if (env.FOLLOWCARE_R2 && imageB64) {
+        photoKey = "verify/" + uid;
+        const bin = atob(imageB64); const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        await env.FOLLOWCARE_R2.put(photoKey, bytes, { httpMetadata: { contentType: mime } });
+      }
+    } catch (e) { photoKey = ""; }
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
-      extractedRegNo: effReg, extractedName: ex.name,
+      extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
+      confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
+      via: idMode ? "id" : "cert", photoKey, photoMime: mime,
       provisionalUntil, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
-    // ID-mode: ephemeral — do NOT attach/store the identity document.
     try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
     return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
   };
@@ -357,6 +370,11 @@ export async function onRequest(context) {
   );
   console.log("[verify] uid", uid, "source:", source, "records:", records.length, "match:", match ? "yes" : "NONE");
   if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
+
+  // AI confidence gate: auto-verify ONLY when the register matched AND Gemini read the document with
+  // ≥85% confidence. A low-confidence read (even on a register match) goes to the owner's dashboard
+  // for personal review, so a blurry/ambiguous scan is never rubber-stamped.
+  if (typeof ex.confidence === "number" && ex.confidence < 0.85) return toManual("low_confidence_review");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
   if (store) {

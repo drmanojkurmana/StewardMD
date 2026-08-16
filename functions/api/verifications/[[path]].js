@@ -84,7 +84,8 @@ async function doApprove(store, env, uid, regNo) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
   await mergeUserClaims(env, uid, { verified: true, regNo: reg });   // merge: keep any existing pro claim
-  const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, approvedBy: "admin", verifiedAt: new Date().toISOString() };
+  try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
+  const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
   if (reg) { try { await store.put(regKey(reg), uid); } catch (e) {} }
   try { await emailVerified(env, { email: rec.email, name: rec.name || rec.firstName, regNo: reg, council: rec.council }); } catch (e) {}
@@ -94,8 +95,9 @@ async function doApprove(store, env, uid, regNo) {
 async function doReject(store, env, uid, reason) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   try { await mergeUserClaims(env, uid, { verified: false }); } catch (e) {}   // merge: revoke verified only, keep pro
+  try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   // Clear provisional so the client gate forces a fresh upload.
-  const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
+  const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", photoKey: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
   try { await emailFailed(env, { email: rec.email, name: rec.name || rec.firstName, reason: updated.reason }); } catch (e) {}
   return updated;
@@ -155,6 +157,22 @@ export async function onRequest(context) {
   if (!store) return json({ error: "no-store", detail: "CASES_KV/GHIS_KV not bound" }, 501);
 
   try {
+    // Owner-gated: stream the uploaded proof photo for the review dashboard (no-store).
+    if (method === "GET" && seg === "photo") {
+      const url = new URL(request.url);
+      const uid = String(url.searchParams.get("uid") || "").trim();
+      if (!uid) return json({ error: "uid-required" }, 400);
+      const rec = (await store.get(doctorKey(uid), "json")) || {};
+      const key = rec.photoKey || ("verify/" + uid);
+      if (!env.FOLLOWCARE_R2) return json({ error: "no-bucket" }, 501);
+      const obj = await env.FOLLOWCARE_R2.get(key);
+      if (!obj) return json({ error: "not-found" }, 404);
+      return new Response(obj.body, { headers: {
+        "Content-Type": (obj.httpMetadata && obj.httpMetadata.contentType) || rec.photoMime || "image/jpeg",
+        "Cache-Control": "no-store",
+      } });
+    }
+
     if (method === "GET") {
       const url = new URL(request.url);
       const status = url.searchParams.get("status") || "pending";
