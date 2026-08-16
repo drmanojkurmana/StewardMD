@@ -6,6 +6,8 @@
   "scripts": {
     "postinstall": "patch-package",
     "test": "for f in test/*.test.mjs test/connect/*.test.mjs test/connect/*/*.test.mjs rx-build.test.mjs; do echo \"→ $f\"; node --experimental-test-module-mocks \"$f\" || exit 1; done",
+    "eval:maik": "node --max-old-space-size=4096 scripts/maik-eval.mjs",
+    "eval:maik:answers": "node scripts/maik-answer-eval.mjs",
     "build:www": "bash scripts/build-www.sh",
     "sync": "npm run build:www && npx cap sync",
     "ios": "npm run sync && npx cap open ios",
