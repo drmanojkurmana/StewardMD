@@ -58,7 +58,7 @@
   //   BASE     : Whisper Small INT8 (multilingual) for every language
   //   PRO      : Small INT8 (en/hi/auto) + verified Telugu Small INT8 (te)
   //   ULTIMATE : Large-v3-Turbo Q5 (en/hi/auto) + verified Telugu Small INT8 (te)
-  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") === "1"; } catch (e) { return false; } }
+  function tiersFlagOn() { try { return localStorage.getItem("smd_voice_tiers") !== "0"; } catch (e) { return true; } }
   function voiceTier() { try { var t = localStorage.getItem("smd_voice_tier"); return (t === "pro" || t === "ultimate") ? t : "base"; } catch (e) { return "base"; } }
   function whisperModel(lang) {
     if (!tiersFlagOn()) {
