@@ -41,19 +41,25 @@ STATE = {"ready": False, "calls": {}, "last_activity": time.time()}
 
 @app.on_event("startup")
 async def _startup():
-    def _load():
-        try:
-            stt.load(); tts.load(); STATE["ready"] = True
-        except Exception as e:  # a model failing to load must not wedge the box; health reports not-ready
-            STATE["ready"] = False
-            STATE["load_error"] = str(e)
-    await asyncio.get_event_loop().run_in_executor(None, _load)
-    asyncio.create_task(_campaign())
+    # Load models as a BACKGROUND task so uvicorn serves /healthz immediately (ready:false while loading),
+    # instead of blocking startup for the multi-GB model download — otherwise the box looks dead while it's fine.
+    async def _boot():
+        def _load():
+            try:
+                stt.load(); tts.load(); STATE["ready"] = True
+            except Exception as e:  # a model failing to load must not wedge the box; health surfaces the error
+                STATE["ready"] = False
+                STATE["load_error"] = str(e)
+        await asyncio.get_event_loop().run_in_executor(None, _load)
+        asyncio.create_task(_campaign())
+    asyncio.create_task(_boot())
 
 
 @app.get("/healthz")
 async def healthz():
-    return {"ok": True, "ready": STATE["ready"], "active": sum(1 for c in STATE["calls"].values() if c["state"] == "active"),
+    return {"ok": True, "ready": STATE["ready"], "loading": (not STATE["ready"] and "load_error" not in STATE),
+            "load_error": STATE.get("load_error"),
+            "active": sum(1 for c in STATE["calls"].values() if c["state"] == "active"),
             "followcare": cfg.followcare_configured(), "telephony": cfg.telephony_configured()}
 
 
