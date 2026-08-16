@@ -1,0 +1,165 @@
+<!doctype html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="robots" content="noindex"/>
+<title>Billing · StewardMD OPD</title>
+<!-- Cashier / billing station (lean MVP). Reuses the staff session from the OPD console (sign in at
+     /opd first). Look up a patient by their SMD id, review unbilled orders, generate an invoice, mark
+     paid. Inert unless CLINIC_BILLING_ENABLED=1 server-side. ?mock=1 for a no-auth demo. -->
+<style>
+  @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
+  @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
+  :root{ --teal:#0e6e63; --teal-d:#0b5c56; --teal-soft:#e3f1ee; --ink:#14202b; --mut:#5a7184; --line:#d7dee3;
+    --bg:#f6f7f5; --card:#fff; --btn:#eef1f4; --ok:#1c7a4a; --ok-soft:#e2f2ea; --red:#ab1c2c;
+    --ease:cubic-bezier(.2,.7,.2,1); --sh:0 1px 3px rgba(20,32,43,.06); --sh-lg:0 12px 34px rgba(20,32,43,.16); }
+  @media (prefers-color-scheme:dark){ :root{ --teal:#3fc7b3; --teal-d:#2fb3a0; --teal-soft:#0d2e2a; --ink:#eaf0f2; --mut:#a9bcc3;
+    --line:#31424a; --bg:#0f1a1e; --card:#18242a; --btn:#223038; --ok:#5bd08f; --ok-soft:#12261b; --red:#f0868f; } }
+  *{ box-sizing:border-box } html,body{ margin:0 }
+  body{ background:var(--bg); color:var(--ink); font-family:'Inter Variable',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; min-height:100dvh; -webkit-font-smoothing:antialiased; }
+  .ms{ font-family:'Material Symbols Rounded'; font-weight:400; line-height:1; vertical-align:middle; -webkit-font-feature-settings:'liga'; user-select:none; }
+  header{ position:sticky; top:0; z-index:5; background:color-mix(in srgb,var(--card) 90%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .hd{ max-width:640px; margin:0 auto; display:flex; align-items:center; gap:9px; padding:calc(13px + env(safe-area-inset-top)) 20px 13px; }
+  .hd .mk{ width:24px; height:24px; background:var(--teal); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
+  .hd h1{ font:800 19px 'Inter Variable',Inter; margin:0; letter-spacing:-.01em; } .hd h1 span{ color:var(--teal); }
+  .hd .tag{ margin-left:auto; font:700 11px 'Inter Variable',Inter; text-transform:uppercase; letter-spacing:.04em; color:var(--mut); background:var(--teal-soft); padding:5px 10px; border-radius:999px; }
+  main{ max-width:640px; margin:0 auto; padding:20px; display:flex; flex-direction:column; gap:16px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--sh); padding:18px; animation:rise .4s var(--ease) both; }
+  h2{ font:700 15px 'Inter Variable',Inter; margin:0 0 12px; display:flex; align-items:center; gap:8px; } h2 .ms{ color:var(--teal); font-size:20px; }
+  label{ display:block; font:600 12px 'Inter Variable',Inter; color:var(--mut); margin:0 0 6px; }
+  input{ width:100%; font:600 16px 'Inter Variable',Inter; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:11px; padding:13px 14px; }
+  input:focus{ outline:0; border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); }
+  .btn{ width:100%; margin-top:12px; background:var(--teal); color:#fff; border:none; border-radius:12px; padding:14px; font:700 15px 'Inter Variable',Inter; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:transform .12s var(--ease); }
+  .btn:active{ transform:scale(.98) } .btn:hover{ background:var(--teal-d) } .btn.ghost{ background:var(--btn); color:var(--ink); } .btn:disabled{ opacity:.6; }
+  .pt{ display:flex; align-items:center; gap:12px; padding-bottom:14px; margin-bottom:14px; border-bottom:1px solid var(--line); }
+  .pt .av{ width:44px; height:44px; border-radius:50%; background:var(--teal-soft); color:var(--teal-d); display:grid; place-items:center; font:800 15px 'Inter Variable',Inter; flex:none; }
+  .pt b{ display:block; font:800 17px 'Inter Variable',Inter; } .pt span{ font:600 12px 'Inter Variable',Inter; color:var(--mut); }
+  .line{ display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
+  .line:last-of-type{ border-bottom:none; }
+  .line .k{ font:700 9.5px 'Inter Variable',Inter; text-transform:uppercase; letter-spacing:.04em; padding:2px 7px; border-radius:6px; background:var(--btn); color:var(--mut); flex:none; }
+  .line .k.med{ background:var(--teal-soft); color:var(--teal-d); }
+  .line .nm{ flex:1; min-width:0; font:600 14px 'Inter Variable',Inter; } .line .nm small{ color:var(--mut); font-weight:600; }
+  .line .amt{ font:700 14px 'Inter Variable',Inter; font-variant-numeric:tabular-nums; }
+  .tot{ display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:14px; border-top:2px solid var(--line); font:800 20px 'Inter Variable',Inter; }
+  .tot .ms{ }
+  .pays{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px; }
+  .pays button{ background:var(--btn); color:var(--ink); border:1px solid var(--line); border-radius:12px; padding:13px 8px; font:700 13px 'Inter Variable',Inter; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .pays button:active{ transform:scale(.97) } .pays button .ms{ font-size:22px; color:var(--teal); }
+  .msg{ text-align:center; color:var(--mut); padding:34px 10px; } .msg .ms{ font-size:44px; color:var(--line); display:block; margin:0 auto 12px; }
+  .paid{ text-align:center; padding:28px 10px; } .paid .ms{ font-size:56px; color:var(--ok); display:block; margin:0 auto 10px; animation:pop .5s var(--ease); } .paid b{ font:800 20px 'Inter Variable',Inter; }
+  .err{ color:var(--red); font:600 13px 'Inter Variable',Inter; min-height:16px; margin-top:8px; }
+  @keyframes rise{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+  @keyframes pop{ 0%{transform:scale(.4);opacity:0} 60%{transform:scale(1.12)} 100%{transform:scale(1);opacity:1} }
+  @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
+</style>
+</head>
+<body>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> Billing</h1><span class="tag">Cashier</span></div></header>
+<main id="app"></main>
+<script>
+(function(){
+  "use strict";
+  var P = new URLSearchParams(location.search);
+  var app = document.getElementById("app");
+  var MOCK = P.get("mock") === "1";
+  var tok = "", tt = "";
+  try { tok = localStorage.getItem("smd_opd_staff_tok") || ""; tt = localStorage.getItem("smd_opd_toktype") || ""; } catch (e) {}
+  var orgId = ""; try { orgId = localStorage.getItem("smd_opd_hospital") || ""; } catch (e) {}
+  var cur = null;   // { patient, orders } | { invoice }
+
+  function ms(n){ return '<span class="ms">'+n+'</span>'; }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];}); }
+  function rupees(p){ return "₹" + (Math.round(p||0)/100).toFixed(2); }
+  function initials(n){ return String(n||"?").trim().split(/\s+/).slice(0,2).map(function(w){return w[0]||"";}).join("").toUpperCase() || "?"; }
+
+  function api(path, opts){
+    opts = opts || {};
+    var h = { "Content-Type": "application/json" };
+    if (tt !== "firebase" && tok) h["X-Staff-Token"] = tok;
+    return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+      .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); });
+  }
+
+  function lookupView(prefill){
+    cur = null;
+    app.innerHTML = '<section class="card"><h2>'+ms("badge")+'Find patient</h2>'+
+      '<label>Patient ID</label><input id="mrn" placeholder="SMD-XXXXXX-0000" autocomplete="off" value="'+esc(prefill||"")+'">'+
+      '<div class="err" id="err"></div>'+
+      '<button class="btn" id="go">'+ms("search")+'Look up orders</button></section>';
+    var go = document.getElementById("go"), inp = document.getElementById("mrn");
+    inp.focus();
+    go.onclick = function(){ var id = inp.value.trim(); if(!id){ document.getElementById("err").textContent = "Enter the patient's ID."; return; } loadPatient(id); };
+    inp.addEventListener("keydown", function(e){ if(e.key==="Enter") go.click(); });
+  }
+
+  function loadPatient(id){
+    document.getElementById("err").textContent = "";
+    Promise.all([ api("patient?orgId="+encodeURIComponent(orgId)+"&id="+encodeURIComponent(id)),
+                  api("orders?orgId="+encodeURIComponent(orgId)+"&patientId="+encodeURIComponent(id)+"&status=ordered") ])
+      .then(function(res){
+        var p = res[0], o = res[1];
+        if (!p || !p.ok) { document.getElementById("err").textContent = p && p.error === "billing_disabled" ? "Billing is not enabled for this clinic yet." : "No patient found with that ID."; return; }
+        review({ patient: p, orders: (o && o.orders) || [] });
+      });
+  }
+
+  function orderLine(o){
+    return '<div class="line"><span class="k'+(o.kind==="medication"?" med":"")+'">'+(o.kind==="medication"?"Rx":"Lab")+'</span>'+
+      '<span class="nm">'+esc(o.name)+(o.qty>1?' <small>x'+o.qty+'</small>':'')+'</span>'+
+      '<span class="amt">'+rupees((o.unitPrice||0)*(o.qty||1))+'</span></div>';
+  }
+  function review(data){
+    cur = data;
+    var p = data.patient, orders = data.orders;
+    var total = orders.reduce(function(s,o){ return s + (o.unitPrice||0)*(o.qty||1); }, 0);
+    var body = orders.length
+      ? orders.map(orderLine).join("") + '<div class="tot"><span>Total</span><span>'+rupees(total)+'</span></div>' +
+        '<button class="btn" id="inv">'+ms("receipt_long")+'Generate invoice</button>'
+      : '<div class="msg">'+ms("inventory_2")+'No unbilled orders for this patient.</div><button class="btn ghost" id="back">'+ms("arrow_back")+'Look up another</button>';
+    app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p.name))+'</div><div><b>'+esc(p.name||"Patient")+'</b><span>'+esc(p.id||"")+(p.ageYears?" · "+p.ageYears+"y":"")+(p.sex?" · "+esc(p.sex):"")+'</span></div></div>'+
+      '<h2>'+ms("assignment")+'Unbilled orders</h2>'+body+'<div class="err" id="err"></div></section>';
+    var inv = document.getElementById("inv"); if(inv) inv.onclick = function(){ inv.disabled=true; inv.innerHTML = ms("hourglass_top")+"Creating…"; makeInvoice(p.id); };
+    var back = document.getElementById("back"); if(back) back.onclick = function(){ lookupView(); };
+  }
+
+  function makeInvoice(patientId){
+    api("invoice", { method:"POST", body:{ orgId:orgId, patientId:patientId } }).then(function(r){
+      if(!r || !r.ok){ document.getElementById("err").textContent = r && r.error==="no_billable_orders" ? "Those orders were already billed." : "Could not create the invoice."; return; }
+      invoiceView(r.invoice, cur.patient);
+    });
+  }
+  function invoiceView(invoice, p){
+    cur = { invoice: invoice, patient: p };
+    var lines = (invoice.lines||[]).map(function(l){ return '<div class="line"><span class="nm">'+esc(l.name)+(l.qty>1?' <small>x'+l.qty+'</small>':'')+'</span><span class="amt">'+rupees(l.amount)+'</span></div>'; }).join("");
+    app.innerHTML = '<section class="card"><div class="pt"><div class="av">'+esc(initials(p&&p.name))+'</div><div><b>'+esc((p&&p.name)||"Patient")+'</b><span>Invoice '+esc((invoice.id||"").slice(-6).toUpperCase())+'</span></div></div>'+
+      '<h2>'+ms("receipt_long")+'Invoice</h2>'+lines+'<div class="tot"><span>Amount due</span><span>'+rupees(invoice.total)+'</span></div>'+
+      '<div class="pays"><button data-m="cash">'+ms("payments")+'Cash</button><button data-m="upi">'+ms("qr_code_2")+'UPI</button><button data-m="card">'+ms("credit_card")+'Card</button></div>'+
+      '<div class="err" id="err"></div></section>';
+    Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.onclick = function(){ pay(invoice.id, b.getAttribute("data-m")); }; });
+  }
+  function pay(invoiceId, method){
+    Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = true; });
+    api("pay", { method:"POST", body:{ orgId:orgId, invoiceId:invoiceId, method:method } }).then(function(r){
+      if(!r || !r.ok){ document.getElementById("err").textContent = "Payment could not be recorded."; Array.prototype.forEach.call(app.querySelectorAll(".pays button"), function(b){ b.disabled = false; }); return; }
+      app.innerHTML = '<section class="card"><div class="paid">'+ms("check_circle")+'<b>Payment recorded</b><div style="color:var(--mut);margin-top:6px">'+method.toUpperCase()+' · patient is cleared to proceed.</div></div>'+
+        '<button class="btn" id="next">'+ms("person_add")+'Next patient</button></section>';
+      document.getElementById("next").onclick = function(){ lookupView(); };
+    });
+  }
+
+  // ---- boot ----
+  if (MOCK) {
+    review({ patient: { id:"SMD-AB12CD-0007", name:"Asha Kumar", ageYears:34, sex:"F" },
+      orders: [ { id:"o1", kind:"investigation", name:"Complete Blood Count", qty:1, unitPrice:15050 },
+                { id:"o2", kind:"investigation", name:"Random Blood Sugar", qty:1, unitPrice:8000 },
+                { id:"o3", kind:"medication", name:"Amoxicillin 500mg", qty:15, unitPrice:400 } ] });
+  } else if (!tok && tt !== "firebase") {
+    app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
+  } else {
+    lookupView();
+  }
+})();
+</script>
+</body>
+</html>

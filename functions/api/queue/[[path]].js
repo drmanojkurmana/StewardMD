@@ -25,6 +25,9 @@ import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
+import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
+import { proFromRequest } from "../../_entitlement.js";
+import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
@@ -198,7 +201,21 @@ export async function onRequest(context) {
       if (!orgId) return json({ ok: false, error: "invalid" }, 200, request);
       const org = await ORG.getOrg(env, orgId);
       if (!org) return json({ ok: false, error: "not_found" }, 200, request);
-      return json(displayBoard(org, await boardForOrg(env, org, url.searchParams.get("date") || "")), 200, request);
+      const board = displayBoard(org, await boardForOrg(env, org, url.searchParams.get("date") || ""));
+      try { const b = await brandingFor(env, org.id); if (b && board.org) { board.org.logo = b.clinicLogo; if (b.clinicName) board.org.name = b.clinicName; } } catch (e) {}
+      return json(board, 200, request);
+    }
+    // White-label logo (Pro clinic): served SAME-ORIGIN, public (a logo, no PHI). GET .../branding/logo?orgId=
+    if (method === "GET" && seg === "branding") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const b = await brandingFor(env, orgId), bkt = brandBucket(env);
+      if (!b || !bkt) return json({ ok: false, error: "no_logo" }, 404, request);
+      try {
+        const obj = await bkt.get(logoKey(orgId, b.ext));
+        if (!obj) return json({ ok: false, error: "no_logo" }, 404, request);
+        const ctype = b.ext === "png" ? "image/png" : b.ext === "webp" ? "image/webp" : "image/jpeg";
+        return new Response(obj.body, { status: 200, headers: Object.assign({ "Content-Type": ctype, "Cache-Control": "public, max-age=300" }, corsHeaders(request)) });
+      } catch (e) { return json({ ok: false, error: "no_logo" }, 404, request); }
     }
 
     // ---- authenticated: doctor (Firebase) OR staff (GHIS token, when QUEUE_STAFF_ENABLED) ----
@@ -206,6 +223,54 @@ export async function onRequest(context) {
     if (!actor) return json({ ok: false, error: "unauthorized" }, 401, request);
     if (!isQueueConfigured(env)) return json({ ok: false, error: "not_configured" }, 200, request);
     const who = actor;   // compat alias: a plain doctor's actor.id === their Firebase uid
+
+    // Upload/replace a Pro clinic's white-label logo (owner/admin of the org, and must be Pro).
+    // Body = raw image bytes; query ?orgId=&name=. Stored in R2, recorded in q_org_branding.
+    if (method === "POST" && seg === "branding") {
+      const orgId = url.searchParams.get("orgId") || "";
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      let pro = false; try { pro = (await proFromRequest(env, request)).pro; } catch (e) {}
+      if (!pro) return json({ ok: false, error: "pro_required" }, 402, request);
+      const bkt = brandBucket(env);
+      if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
+      const ct = request.headers.get("Content-Type") || "";
+      const bytes = await request.arrayBuffer();
+      const v = validateLogo(ct, bytes.byteLength);
+      if (!v.ok) return json({ ok: false, error: v.error }, 400, request);
+      await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
+      const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
+      return json(Object.assign({ ok: true }, res), 200, request);
+    }
+
+    // ---- Clinic operations: BILLING station (lean MVP). /api/queue/bill/<action>. Inert unless
+    // CLINIC_BILLING_ENABLED=1. Every action is org-scoped + capability-gated + audited server-side. ----
+    if (seg === "bill") {
+      if (!BILL.billingEnabled(env)) return json({ ok: false, error: "billing_disabled" }, 200, request);
+      const body = method === "POST" ? await readBody(request) : {};
+      const bOrg = url.searchParams.get("orgId") || body.orgId || "";
+      const capFor = {
+        patient: method === "POST" ? CAPS.QUEUE_ADD : CAPS.ORDER_READ,
+        order: CAPS.ORDER_CREATE, orders: CAPS.ORDER_READ, queue: CAPS.BILLING_VIEW,
+        tariff: method === "POST" ? CAPS.STAFF_ADMIN : CAPS.BILLING_VIEW,
+        invoice: method === "POST" ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW, pay: CAPS.BILLING_CHARGE
+      };
+      const need = capFor[sub]; if (!need) return json({ ok: false, error: "not_found" }, 404, request);
+      const bAz = await ORG.authorizeOrg(env, actor, bOrg, need);
+      if (!bAz.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+      const aid = actor.id || "";
+      if (sub === "patient" && method === "POST") { const org = await ORG.getOrg(env, bOrg); return json(await BILL.registerPatient(env, bOrg, (org && org.code) || bOrg, { name: body.name, mobile: body.mobile, sex: body.sex, ageYears: body.ageYears, actor: aid }), 200, request); }
+      if (sub === "patient" && method === "GET") { const p = await BILL.getPatient(env, bOrg, url.searchParams.get("id") || ""); return json(p ? Object.assign({ ok: true }, p) : { ok: false, error: "not_found" }, 200, request); }
+      if (sub === "order" && method === "POST") return json(await BILL.createOrder(env, bOrg, body, aid), 200, request);
+      if (sub === "orders" && method === "GET") return json({ ok: true, orders: await BILL.ordersForPatient(env, bOrg, url.searchParams.get("patientId") || "", url.searchParams.get("status") || "") }, 200, request);
+      if (sub === "queue" && method === "GET") return json({ ok: true, orders: await BILL.billingQueue(env, bOrg) }, 200, request);
+      if (sub === "tariff" && method === "GET") return json({ ok: true, items: await BILL.listTariff(env, bOrg) }, 200, request);
+      if (sub === "tariff" && method === "POST") return json(await BILL.upsertTariff(env, bOrg, body, aid), 200, request);
+      if (sub === "invoice" && method === "POST") return json(await BILL.createInvoice(env, bOrg, body.patientId || "", aid), 200, request);
+      if (sub === "invoice" && method === "GET") { const inv = await BILL.getInvoice(env, bOrg, url.searchParams.get("id") || ""); return json(inv ? Object.assign({ ok: true }, inv) : { ok: false, error: "not_found" }, 200, request); }
+      if (sub === "pay" && method === "POST") return json(await BILL.payInvoice(env, bOrg, body.invoiceId || "", body.method || "cash", aid), 200, request);
+      return json({ ok: false, error: "not_found" }, 404, request);
+    }
 
     // Role + capabilities, so the client can adapt its UI (server still re-checks every mutation).
     if (method === "GET" && seg === "whoami") {
