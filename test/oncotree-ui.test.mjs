@@ -118,3 +118,33 @@ test("answering prunes now-unreachable downstream answers (no stale deep answer)
   // n_hr2n is now disabled, so its stale answer must have been pruned
   assert.equal(UI._st.answers.n_hr2n, undefined);
 });
+
+// Handoff routing: the dose flow (onco-plan-flow) self-gates on its own flags. When it is OFF (public
+// release: smd_onco_protocols/_recommend def:false), the navigator must fall through to the read-only Onco
+// workbench rather than close into a dead "flow is off" toast (the regression this guard prevents).
+function handoffSetup() {
+  reset({ n_histology: ["invasive"], n_stage: ["s4"], n_setting: ["metastatic"], n_her2: ["pos"], n_hr2p: ["neg"] });
+  UI._select("breast-tdm1");   // sets st.selection.protocolId + keeps st.ctx standalone (no patientId)
+}
+test("handoff with the dose flow OFF opens the read-only Onco workbench (no dead-end)", () => {
+  handoffSetup();
+  let flowOpened = false, homeOpened = false, homeArg = null;
+  global.SMD_ONCOFLOW = { isOn: () => false, openFind: () => { flowOpened = true; } };
+  global.SMD_ONCOHOME = { open: (a) => { homeOpened = true; homeArg = a; } };
+  UI._doHandoff();
+  assert.equal(flowOpened, false, "flow must NOT open when its flags are off");
+  assert.equal(homeOpened, true, "falls through to the Onco workbench");
+  assert.ok(homeArg && "diagnosis" in homeArg, "carries the disease context");
+  delete global.SMD_ONCOFLOW; delete global.SMD_ONCOHOME;
+});
+test("handoff with the dose flow ON opens the flow with the selected protocol", () => {
+  handoffSetup();
+  let flowOpened = false, flowProtos = null, homeOpened = false;
+  global.SMD_ONCOFLOW = { isOn: () => true, openFind: (ctx, protos) => { flowOpened = true; flowProtos = protos; } };
+  global.SMD_ONCOHOME = { open: () => { homeOpened = true; } };
+  UI._doHandoff();
+  assert.equal(flowOpened, true, "flow opens when enabled");
+  assert.equal(homeOpened, false, "does not also open the workbench");
+  assert.ok(Array.isArray(flowProtos) && flowProtos[0] && flowProtos[0].id === "breast-tdm1", "passes the selected protocol");
+  delete global.SMD_ONCOFLOW; delete global.SMD_ONCOHOME;
+});

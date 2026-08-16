@@ -96,6 +96,10 @@
   .acts button.pri{background:var(--tl);color:#fff}
   .acts button.pri:hover{background:var(--tl-d)}
   .acts button.warn{background:var(--red-soft);color:var(--red)}
+  .acts button.rm{background:var(--red-soft);color:var(--red)}
+  .acts button.rm:hover{background:var(--red);color:#fff}
+  .btn.danger{background:var(--red)}
+  .btn.danger:hover{box-shadow:0 4px 14px rgba(171,28,44,.35)}
   /* modal (animated bottom sheet) */
   .scrim{position:fixed;inset:0;background:rgba(6,20,28,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20;opacity:0;visibility:hidden;transition:opacity .28s var(--ease),visibility .28s}
   .scrim.on{opacity:1;visibility:visible}
@@ -385,8 +389,10 @@
     if(can("queue.reorder")&&i<n-1) b.push('<button data-a="down" data-s="'+s.id+'" data-t="'+t.id+'" data-i="'+i+'">▼</button>');
     if(can("queue.reorder")&&i>0) b.push('<button data-a="top" data-s="'+s.id+'" data-t="'+t.id+'">To #1</button>');
     if(can("queue.priority")) b.push('<button data-a="prio" data-s="'+s.id+'" data-t="'+t.id+'" data-p="'+(t.priority>=2?0:2)+'">'+(t.priority>=2?"Clear urgent":"Urgent")+'</button>');
-    if(can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Assign</button>');
+    if(can("queue.assign")) b.push('<button data-a="assign" data-s="'+s.id+'" data-t="'+t.id+'">Move to doctor</button>');
     if(consult&&can("queue.status")) b.push('<button class="pri" data-a="checkout" data-s="'+s.id+'" data-t="'+t.id+'">Checkout <span class="ms sm">chevron_right</span></button>');
+    // Remove a mistaken / duplicate / wrongly-routed patient (soft cancel → off the board, audit kept).
+    if(can("queue.status")) b.push('<button class="rm" data-a="remove" data-s="'+s.id+'" data-t="'+t.id+'" data-n="'+esc(t.name||"")+'">Remove</button>');
     return '<div class="row '+cls+'"><div class="top"><div class="pos'+(consult?" consult":"")+'">'+(consult?'<span class="ms sm">play_arrow</span>':(i+1))+'</div>'+
       '<div><div class="nm">'+esc(t.name||"Patient")+'<span class="mrn">#'+esc(t.mrnLast4||"")+'</span></div>'+
       '<div class="meta">'+(t.visitType==="followup"?"Follow-up":"New")+(eta!=null?" · ETA "+eta+"m":"")+'</div></div>'+
@@ -405,6 +411,7 @@
         else if(a==="top") openMove(sid,tid,0);
         else if(a==="assign") openAssign(sid,tid);
         else if(a==="checkout") doCheckout(sid,tid);
+        else if(a==="remove") openRemove(sid,tid,btn.getAttribute("data-n"));
         else if(a==="notes") openNotes(sid,tid,btn.getAttribute("data-n"));
       };
     });
@@ -428,6 +435,13 @@
       if(!chosen&&!reason){toast("Pick a reason category");return;}
       close(); post("move",{sessionId:sid,ticketId:tid,toIndex:toIndex,category:chosen,reason:reason});
     };
+  }
+  // ---- remove-patient modal (mistaken / duplicate / wrongly-routed entry) ----
+  function openRemove(sid,tid,name){
+    open('<h3>Remove patient</h3><p style="color:var(--mut);margin:0 0 10px">Remove <b>'+esc(name||"this patient")+'</b> from the queue? Use this for a mistaken, duplicate, or wrongly-routed entry — it is recorded in the audit trail. To send them to another doctor instead, use <b>Move to doctor</b>.</p>'+
+      '<div class="row2"><button class="cancel" id="cx">Keep in queue</button><button class="btn danger" id="ok" style="margin:0">Remove patient</button></div>');
+    sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#ok").onclick=function(){ close(); post("status",{sessionId:sid,ticketId:tid,status:"cancelled"}); };
   }
   // ---- assign-to-doctor modal ----
   function openAssign(sid,tid){

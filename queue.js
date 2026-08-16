@@ -63,6 +63,7 @@
           '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
+          '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
           (emrOn() ? '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
         "</div></div>";
@@ -442,6 +443,7 @@
     else if (cmd === "start") { act(sid, "/status", { ticketId: arg, status: "in_consultation" }); openAssessment(arg); }   // Start consult -> straight into the Initial Assessment (the consult record)
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });
     else if (cmd === "prio") act(sid, "/priority", { ticketId: arg, priority: 2 });
+    else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
     else if (cmd === "importopd") importOpd();

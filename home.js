@@ -742,18 +742,21 @@
           '<div class="tl">' + title + '</div><div class="tc">' + cap + '</div></button>';
       }
       var oncoOn = true; try { var qot = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; oncoOn = (qot != null) ? (qot === "1" || qot === "on" || qot === "true") : (localStorage.getItem("smd_onco_navigator") !== "0"); } catch (e) {}
+      // OPD Queue is PUBLIC-RELEASE-GATE def:false; gate the hub tile too (fail-closed) so it is not a dead tile for reviewers.
+      var queueOn = false; try { var qq = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (qq != null) queueOn = (qq === "1" || qq === "on" || qq === "true"); else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) queueOn = SMD_QUEUE_FLAGS.on(); else queueOn = (localStorage.getItem("smd_opd_queue") === "1"); } catch (e) {}
       openSheet('<div class="hv-sh-t">Hospital</div><div class="hv-tiles">' +
-        tile("list", "OPD Queue", "Smart out-patient queue", "opd") +
+        (queueOn ? tile("list", "OPD Queue", "Smart out-patient queue", "opd") : "") +
         tile("icu", "ICU &amp; Ward", "Critical care + inpatient", "icu", true) +
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
+        tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { (a === "opd" ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
+          setTimeout(function () { ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
         });
       });
     },
@@ -1260,12 +1263,12 @@
           tileV4("drugmenu", "pills", "Drugs &amp; Interactions", "Database · interaction checker") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
-          (function () {   // Smart OPD Queue tile (flag smd_opd_queue, DEFAULT ON dev/testing; PUBLIC-RELEASE-GATE)
-            try {
-              var qon, q = (location.search.match(/[?&]q=([^&]+)/) || [])[1];
+          (function () {   // Smart OPD Queue tile (flag smd_opd_queue, PUBLIC-RELEASE-GATE def:false). Fallback
+            try {          // matches the flag default (OFF) so the tile stays hidden even if queue-flags.js
+              var qon, q = (location.search.match(/[?&]q=([^&]+)/) || [])[1];   // has not loaded when the grid builds.
               if (q != null) qon = (q === "1" || q === "on" || q === "true");
               else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
-              else qon = (localStorage.getItem("smd_opd_queue") !== "0");
+              else qon = (localStorage.getItem("smd_opd_queue") === "1");
               return qon ? tileV4("queue", "ward", "OPD Queue", "Smart patient queue") : "";
             } catch (e) { return ""; }
           })() +
@@ -1370,7 +1373,7 @@
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
-      eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") !== "0"; } catch (e) { return true; } } },
+      eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
     { act: "oncohome", ic: "oncology", tt: "ONCqis", sub: "The Cancer Library",
       eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
