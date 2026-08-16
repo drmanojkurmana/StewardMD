@@ -44,10 +44,11 @@
     ra: ["Rheumatoid Arthritis", "Right Atrium"],
     pe: ["Pulmonary Embolism", "Pleural Effusion"],
     as: ["Aortic Stenosis", "Ankylosing Spondylitis"],
-    mi: ["Myocardial Infarction", "Mitral Incompetence"],
+    mi: null,   // dominant meaning = Myocardial Infarction; don't stall a clinician on the rare "mitral incompetence"
     af: ["Atrial Fibrillation", "Atrial Flutter"],
     pa: ["Pernicious Anaemia", "Pulmonary Artery", "Primary Aldosteronism"],
-    dm: ["Diabetes Mellitus", "Dermatomyositis"],
+    dm: null,   // dominant meaning = Diabetes Mellitus (dermatomyositis is written out in full)
+    ra: null,   // dominant meaning = Rheumatoid Arthritis (overrides the data-driven "right atrium" ambiguity)
     mr: ["Mitral Regurgitation", "Measles-Rubella"],
     ar: ["Aortic Regurgitation", "Allergic Rhinitis"],
     cp: ["Chest Pain", "Cerebral Palsy"],

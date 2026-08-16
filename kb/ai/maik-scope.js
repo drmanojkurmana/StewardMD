@@ -140,7 +140,28 @@
     "\\bkcl\\b", "\\bnac\\b", "naloxone", "flumazenil", "labetalol", "nitroglycerin", "nitrate"
   ];
 
-  var MEDICAL_GROUPS = [MORPH, SYMPTOM, CONDITION, INVESTIGATION, SYSTEM, CLINICAL_ACTION, DRUG_COMMON];
+  // Common diseases whose names carry NO morphology giveaway (…itis/…osis already covered). Heavy on
+  // the India/tropical everyday load so a bare "dengue" / "typhoid warning signs" is never refused.
+  var COMMON_DISEASE = [
+    "dengue", "malaria", "typhoid", "enteric fever", "cholera", "chikungunya", "leptospir",
+    "\\bkala.?azar\\b", "leishman", "filaria", "brucellos", "\\brabies\\b", "tetanus", "\\bmeasles\\b",
+    "\\bmumps\\b", "chickenpox", "varicella", "\\bshingles\\b", "pertussis", "whooping cough",
+    "diphtheria", "\\bpolio", "scabies", "\\bleprosy\\b", "\\bplague\\b", "anthrax", "dysentery",
+    "giardia", "amoeb", "\\bworms?\\b", "helminth", "\\bcovid", "influenza", "\\bflu\\b", "\\bzika\\b",
+    "\\bebola\\b", "nipah", "\\bh1n1\\b", "\\bmigraine", "\\bgout\\b", "goitre", "goiter", "\\beczema\\b",
+    "vitiligo", "urticaria", "gastroenter", "hypothyroid", "hyperthyroid", "\\bpud\\b", "\\bgord\\b"
+  ];
+
+  // Vitals, fluids, and "what is normal …" reference queries — core bedside terms the allow-list missed.
+  var VITALS_FLUIDS = [
+    "blood pressure", "\\bbp\\b", "heart rate", "pulse rate", "\\bpulse\\b", "respiratory rate",
+    "oxygen saturation", "\\bspo2\\b", "\\bsats\\b", "\\bsaturation\\b", "\\btemperature\\b",
+    "vital sign", "\\bvitals\\b", "oral rehydration", "\\bors\\b", "\\bivf\\b", "\\biv fluid",
+    "intravenous fluid", "normal saline", "ringer", "\\bdextrose\\b", "\\bfluid\\b",
+    "normal range", "normal value", "reference range", "normal (bp|hr|pulse|temperature|value|range)"
+  ];
+
+  var MEDICAL_GROUPS = [MORPH, SYMPTOM, CONDITION, INVESTIGATION, SYSTEM, CLINICAL_ACTION, DRUG_COMMON, COMMON_DISEASE, VITALS_FLUIDS];
   var MEDICAL = rx([].concat.apply([], MEDICAL_GROUPS));
 
   // ── Explicit NON-medical categories (only used to LABEL the block; the allow-list already rejects
