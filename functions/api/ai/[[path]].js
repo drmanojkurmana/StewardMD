@@ -44,6 +44,8 @@ function firewallBlock(q) {
   try { const c = MaiKScope && MaiKScope.classify && MaiKScope.classify(String(q || "")); return !!(c && c.medical === false && c.category !== "non_medical"); } catch (e) { return false; }
 }
 
+// APP_GATE_KEY secret provisioned in prod 2026-08-16 -> the empty-Origin block below is now ACTIVE
+// (anonymous non-app clients rejected; native X-SMD-App + owner/Cf-Access + named Origins still pass).
 function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
   if (env.GHIS_APP_TOKEN && request.headers.get("X-App-Token") === env.GHIS_APP_TOKEN) return true;
