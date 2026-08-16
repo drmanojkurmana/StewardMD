@@ -41,7 +41,7 @@
       { name: "Google Vertex AI / Gemini", role: "AI features you request: MaiK explanations, structuring text read from a photo, and reading a submitted registration credential to confirm eligibility" },
       { name: "Groq", role: "large-language-model processing for certain AI features you request" },
       { name: "Google Cloud Run (Mumbai)", role: "hosted image-analysis models for the optional imaging modules (ECG / chest X-ray / skin), only when you enable and use them" },
-      { name: "Additional AI model providers (as configured)", role: "some AI requests may be routed to other reputable model providers (for example Microsoft Azure OpenAI); the current list is available at privacy@stewardmd.in" }
+      { name: "Additional AI model providers (future)", role: "we may in future use other reputable model providers, chosen on quality, reliability and price (for example Microsoft Azure OpenAI); the current list is available at privacy@stewardmd.in" }
     ]
   };
 
