@@ -5,8 +5,8 @@
   // type: bool. def: default when unset. query: ?alias (or null). All default OFF.
   var DEFS = {
     smd_insulin:      { type: "bool", def: true,  query: "insulin",     desc: "Insulin module master flag (home tile + module). DEFAULT ON (owner enabled). Hide with ?insulin=0." },
-    smd_insulin_dka:  { type: "bool", def: false, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. DEFAULT OFF." },
-    smd_insulin_peds: { type: "bool", def: false, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. DEFAULT OFF." }
+    smd_insulin_dka:  { type: "bool", def: true, query: "insulin_dka", desc: "Clinician DKA insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_dka=0." },
+    smd_insulin_peds: { type: "bool", def: true, query: "insulin_peds", desc: "Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0." }
   };
   function store()  { try { return localStorage; } catch (e) { return null; } }
   function search() { try { return (location && location.search) || ""; } catch (e) { return ""; } }

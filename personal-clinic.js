@@ -236,7 +236,7 @@
   }
 
   /* ------------------------------ UI ------------------------------ */
-  function flagOn() { try { return localStorage.getItem("smd_personal_clinic") === "1"; } catch (e) { return false; } }
+  function flagOn() { try { return localStorage.getItem("smd_personal_clinic") !== "0"; } catch (e) { return true; } }
   function toast(m) { try { (window.toast || function () {})(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdClinic"); if (!el) { el = document.createElement("div"); el.id = "smdClinic"; document.body.appendChild(el); injectCSS(); } return el; }
 

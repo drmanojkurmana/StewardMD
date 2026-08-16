@@ -207,6 +207,7 @@
         var xaActive = false; try { xaActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("fundx")); } catch (e) {}
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
         var txActive = false; try { txActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("thorex")); } catch (e) {}
+        var sxActive = false; try { sxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
         var otaBlk = "";
         try {
@@ -221,7 +222,8 @@
         var xaBody = '<div class="smd-nav-note">Private beta — unlock with an access code from the StewardMD team. One code activates one device.</div>' +
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' + otaBlk;
+          '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' +
+          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' + otaBlk;
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
@@ -281,6 +283,11 @@
                 if (feat === "thorex") {
                   try { localStorage.setItem("smd_thorex", "1"); } catch (e) {}
                   if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…");
+                  return;
+                }
+                if (feat === "sknx") {
+                  try { localStorage.setItem("smd_sknx", "1"); } catch (e) {}
+                  if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
                   return;
                 }
                 try { localStorage.setItem("smd_fundx", "1"); } catch (e) {}

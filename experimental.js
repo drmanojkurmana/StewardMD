@@ -22,7 +22,7 @@
 (function () {
   "use strict";
   var BASE = "/api/experimental";
-  var TITLES = { fundx: "FundX AI", kardiox: "KardioX AI", thorex: "ThoreX AI" };
+  var TITLES = { fundx: "FundX AI", kardiox: "KardioX AI", thorex: "ThoreX AI", sknx: "SknX AI" };
   var listeners = [];
 
   function C() { try { return window.Capacitor; } catch (e) { return null; } }
@@ -177,7 +177,7 @@
         '<div class="xa-ic">🔒</div>' +
         '<h3>' + esc(t) + '</h3>' +
         '<p class="xa-sub">This feature is available only to approved beta testers. Enter your access code to unlock it on this device.</p>' +
-        '<input id="xaCodeInput" inputmode="latin" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="' + esc((feature === "fundx" ? "FUNDX" : t.toUpperCase().slice(0, 5)) + "-XXXX-XXXX") + '">' +
+        '<input id="xaCodeInput" inputmode="latin" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="' + esc((feature === "fundx" ? "FUNDX" : feature === "sknx" ? "SKNX" : t.toUpperCase().slice(0, 5)) + "-XXXX-XXXX") + '">' +
         '<div class="xa-err" id="xaErr"></div>' +
         '<div class="xa-btns"><button class="xa-primary" data-xa="activate" id="xaGo">Activate</button><button class="xa-ghost xa-close" data-xa="close">Not now</button></div>' +
       '</div>';
