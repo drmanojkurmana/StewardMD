@@ -13,6 +13,7 @@ ENV_FILE="${ENV_FILE:-$HERE/.env}"
 BRANCH="${VOICE_BRANCH:-feat/followcare-voice}"
 REPO="${VOICE_REPO:-github.com/drmanojkurmana/StewardMD.git}"
 GPU_TYPE="${RUNPOD_GPU_TYPE:-NVIDIA GeForce RTX 3090}"
+CLOUD_TYPE="${RUNPOD_CLOUD_TYPE:-COMMUNITY}"   # COMMUNITY = more availability + cheaper; SECURE for stricter isolation
 IMAGE="${RUNPOD_IMAGE:-runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04}"
 
 # Keys may come from the shell OR from ENV_FILE (so `bash runpod.sh up` works after the wizard, no exports).
@@ -39,10 +40,12 @@ case "$cmd" in
       | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN|GEMINI_API_KEY)=' \
       | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$")' \
       | jq -sr --arg t "$GITHUB_TOKEN" '(. + [{k:"GITHUB_TOKEN", v:$t}]) | map("{key:\"\(.k)\",value:\(.v|tojson)}") | join(",")')
-    # Pod start command: clone + install + run. $GITHUB_TOKEN is kept literal here and expands in the pod.
-    START="bash -lc 'cd /workspace && (test -d StewardMD || git clone -b ${BRANCH} https://\$GITHUB_TOKEN@${REPO} StewardMD) && cd StewardMD/voice-service && pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8080'"
+    # Pod start command: clone + install + run. Notes: x-access-token: form works for fine-grained PATs;
+    # `set -x` traces each step into the container log; a trailing `sleep infinity` keeps the container ALIVE on
+    # any failure (no crash loop) so the error is inspectable instead of vanishing. $GITHUB_TOKEN expands in-pod.
+    START="bash -c 'set -x; cd /workspace && rm -rf StewardMD && git clone -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD && cd StewardMD/voice-service && pip install -r requirements.txt && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
     # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
-    Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: SECURE, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
+    Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: ${CLOUD_TYPE}, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
     BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
       '{query:$q, variables:{args:$args, g:$g, img:$img}}')
     RESP=$(gql "$BODY"); echo "$RESP" | jq .
