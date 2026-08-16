@@ -44,6 +44,22 @@ python3 run_local_sim.py                       # prints 4 full simulated calls (
 The core (`app/call`, `app/audio`, `app/followcare/client`, `app/nlu` with an injected model) has **zero
 third-party dependencies** — only the live service needs `requirements.txt`.
 
+## One-command provisioning (`deploy/`)
+
+Secrets stay in your shell / `deploy/.env` — never in git, never in chat.
+
+```
+cp voice-service/deploy/.env.example voice-service/deploy/.env    # fill in Plivo/Gemini/token values
+RUNPOD_API_KEY=xxx GITHUB_TOKEN=xxx bash voice-service/deploy/runpod.sh up      # create the 24GB pod
+# → prints POD_ID + the public URL; put both into deploy/.env
+CF_PAGES_PROJECT=<pages-project> bash voice-service/deploy/cloudflare.sh         # push the 3 shared secrets
+RUNPOD_API_KEY=xxx RUNPOD_POD_ID=yyy bash voice-service/deploy/runpod.sh status  # / down to stop
+```
+
+`GITHUB_TOKEN` is a read-only GitHub PAT so the pod can clone the (private) repo. The pod boots, installs,
+downloads the models to `/models` (persistent), and serves on `:8080`. Then set the pod's `VOICE_PUBLIC_BASE`
+to the printed URL and restart. If RunPod rejects the deploy, adjust `RUNPOD_GPU_TYPE` (availability/region).
+
 ## Deploy to RunPod
 1. Build + push the image (`Dockerfile`) to a registry; create an **on-demand GPU pod** (24 GB: A5000 / RTX 3090)
    exposing port 8080 with a public HTTPS endpoint.
