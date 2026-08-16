@@ -331,10 +331,15 @@
       '<p class="t" style="margin:0 0 12px">Pro clinics can show their own logo on the patient wait page, the waiting-room display and FollowCare messages, with a small "powered by StewardMD". PNG, WebP or JPG, up to 256 KB.</p>'+
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><img src="'+esc(url)+'" alt="" style="height:44px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--card)" onerror="this.style.display=\'none\'"></div>'+
       '<label>Clinic name (shown next to the logo)</label><input id="bname" placeholder="e.g. Sunrise Clinic">'+
-      '<label style="margin-top:12px">Logo image</label><input id="bfile" type="file" accept="image/*">'+
+      '<label style="margin-top:12px">Logo image</label>'+
+      '<input id="bfile" type="file" accept="image/*" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'+
+      '<button type="button" id="bpick" style="width:100%;margin-top:0;padding:13px;border:1px dashed var(--line);border-radius:10px;background:var(--card);color:var(--tl);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer"><span class="ms">add_photo_alternate</span>Choose logo image</button>'+
+      '<div id="bfilename" style="font-size:12px;color:var(--mut);margin-top:8px;min-height:14px"></div>'+
       '<div class="err" id="berr"></div>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Save branding</button></div>');
     sheet.querySelector("#cx").onclick=close;
+    sheet.querySelector("#bpick").onclick=function(){ sheet.querySelector("#bfile").click(); };
+    sheet.querySelector("#bfile").onchange=function(){ var sf=this.files[0]; sheet.querySelector("#bfilename").textContent=sf?("Selected: "+sf.name):""; };
     sheet.querySelector("#ok").onclick=function(){
       var f=sheet.querySelector("#bfile").files[0], nm=sheet.querySelector("#bname").value.trim(), er=sheet.querySelector("#berr");
       if(!f){ er.textContent="Choose a logo image first."; return; }
