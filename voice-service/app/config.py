@@ -23,6 +23,9 @@ class Config:
         self.public_base = e.get("VOICE_PUBLIC_BASE", "")    # https URL Plivo reaches this service at
         self.audio_format = e.get("VOICE_AUDIO_FORMAT", "mulaw")  # plivo stream: "mulaw" | "l16"
         self.sample_rate = _int("VOICE_SAMPLE_RATE", 8000)
+        # Automatic Machine Detection (Plivo add-on, FREE): "hangup" drops the call if a machine/voicemail
+        # answers, so we never read the wellbeing script to an answering machine. "" disables it.
+        self.amd = e.get("VOICE_AMD", "hangup")
         # NLU (Gemini 2.5 Flash) — slot extraction ONLY, never a clinical decision.
         self.gemini_api_key = e.get("GEMINI_API_KEY", "")
         self.gemini_model = e.get("SCRIBE_MODEL", "") or "gemini-2.5-flash"
