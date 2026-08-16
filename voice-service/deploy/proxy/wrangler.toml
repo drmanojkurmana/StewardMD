@@ -1,0 +1,7 @@
+# Tiny reverse-proxy Worker so the RunPod GPU can reach the FollowCare API. stewardmd.in bot-protection 403s
+# datacenter IPs; this Worker (on *.workers.dev, not behind that protection) forwards the pod's calls to the
+# Pages production API from Cloudflare's own network. Deploy: cd voice-service/deploy/proxy && npx wrangler deploy
+name = "followcare-voice-proxy"
+main = "index.js"
+compatibility_date = "2026-06-27"
+workers_dev = true
