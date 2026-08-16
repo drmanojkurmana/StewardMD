@@ -331,7 +331,7 @@
       '<p class="t" style="margin:0 0 12px">Pro clinics can show their own logo on the patient wait page, the waiting-room display and FollowCare messages, with a small "powered by StewardMD". PNG, WebP or JPG, up to 256 KB.</p>'+
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><img src="'+esc(url)+'" alt="" style="height:44px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--card)" onerror="this.style.display=\'none\'"></div>'+
       '<label>Clinic name (shown next to the logo)</label><input id="bname" placeholder="e.g. Sunrise Clinic">'+
-      '<label style="margin-top:12px">Logo image</label><input id="bfile" type="file" accept="image/png,image/webp,image/jpeg">'+
+      '<label style="margin-top:12px">Logo image</label><input id="bfile" type="file" accept="image/*">'+
       '<div class="err" id="berr"></div>'+
       '<div class="row2"><button class="cancel" id="cx">Close</button><button class="btn" id="ok" style="margin:0">Save branding</button></div>');
     sheet.querySelector("#cx").onclick=close;
