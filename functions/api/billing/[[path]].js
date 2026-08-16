@@ -20,6 +20,7 @@ import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlem
 import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
+import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -241,6 +242,24 @@ export async function onRequest(context) {
       if (!env.PLAY_IAP_ENABLED) return json({ error: "play-not-configured" }, 501);
       // TODO: decode Pub/Sub message, call Play Developer API to verify the subscription, grant/revoke.
       return json({ ok: true, todo: "verify via Play Developer API + map to uid" });
+    }
+
+    // ---- institution coupons: owner issues/lists/revokes; any signed-in doctor redeems ----
+    if (seg === "coupon") {
+      if (method === "POST" && sub === "redeem") {
+        const uid = rawUid(await identify(request, env));
+        if (!uid) return json({ error: "signin-required" }, 401);
+        let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+        const r = await redeemCoupon(env, body.code, uid);
+        return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));
+      }
+      // owner-only management
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      if (method === "GET" && (sub === "list" || !sub)) return json({ coupons: await listCoupons(env) });
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      if (method === "POST" && sub === "create") return json({ ok: true, coupon: await createCoupon(env, body) });
+      if (method === "POST" && sub === "revoke") return json(await revokeCoupon(env, body.code));
+      return json({ error: "bad-coupon-request", sub, method }, 400);
     }
 
     return json({ error: "bad-request", seg, sub, method }, 400);
