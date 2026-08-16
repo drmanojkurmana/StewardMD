@@ -30,8 +30,11 @@ function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
   const tok = request.headers.get("X-App-Token");
   if (tok && (tok === env.FUNDX_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.GHIS_APP_TOKEN)) return true;
+  if (env.APP_GATE_KEY && request.headers.get("X-SMD-App") === env.APP_GATE_KEY) return true;
   const o = request.headers.get("Origin") || "";
-  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
+  if (o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost") return true;
+  // Empty Origin accepted ONLY until APP_GATE_KEY is set; then an anonymous non-app client is rejected.
+  return !env.APP_GATE_KEY && o === "";
 }
 
 // Experimental Access enforcement for the beta AI compute. OPT-IN: the compute is gated ONLY when

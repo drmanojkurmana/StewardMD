@@ -17,6 +17,18 @@
  */
 import { identify, usageKv, usageKeyFor } from "../../_usage.js";
 import { gateAndCount } from "../../_ai_usage.js"; // AI Control Center per-module daily cap (module "ecg")
+import { checkActive } from "../../_experimental.js";
+import { ownerOK } from "../../_adminauth.js";
+
+// Experimental Access enforcement (opt-in via EXPERIMENTAL_ENFORCE_KARDIOX="1"). Default off = ungated
+// (as today). When on, the ECG analyze routes require an owner or a valid X-XA-Token bound to a live
+// "kardiox" activation. Fails closed only when enforced.
+async function betaGate(request, env) {
+  if (env.EXPERIMENTAL_ENFORCE_KARDIOX !== "1") return { ok: true };
+  try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  try { const acc = await checkActive(env, "kardiox", request.headers.get("X-XA-Token") || ""); if (acc && acc.active) return { ok: true }; } catch (e) {}
+  return { ok: false };
+}
 
 const MEDIA = "application/vnd.kardiox.v1+json";
 const MAX_BYTES = 12 * 1024 * 1024;                          // 12 MiB hard cap on an ECG image
@@ -187,6 +199,10 @@ export async function onRequest(context) {
   const parts = Array.isArray(params.path) ? params.path : (params.path ? [params.path] : []);
   const path = "/" + parts.join("/");   // e.g. "/v1/ecg/analyze" or "/v1/health"
 
+  if (path === "/v1/ecg/analyze" || path === "/v1/ecg/analyze-image") {
+    const bg = await betaGate(request, env);
+    if (!bg.ok) return err(403, "beta_locked", "Beta access required for KardioX", "upload");
+  }
   if (path === "/v1/ecg/analyze") return handleAnalyze(request, env);
   if (path === "/v1/ecg/analyze-image") return handleAnalyzeImage(request, env);
   if (path === "/v1/health") return handleHealth(env);

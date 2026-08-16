@@ -79,6 +79,11 @@ MAIK_ABSTAIN = "1"
 # role-split onco endpoints; every write is still cap-gated (EMR_TREAT doctor / EMR_VITALS nurse) +
 # suggest-and-confirm. PUBLIC-RELEASE-GATE: review before public release.
 QUEUE_ONCO_WRITE = "1"
+# AI abuse controls: enforce per-user + per-module daily/rate caps. Was default-off (every account
+# behaved like the owner); "1" turns on the _ai_usage caps. Owner accounts stay exempt (admin).
+# Set "0" to revert instantly. (Caps today: MaiK 50, cases 25, Vision 50, STT 50, ECG 10, research 2,
+# + 60 req/day, 200k tok/day, 3M/month, 3s min-interval — tune in _ai_usage.js/_usage.js if too tight.)
+MAIK_ENFORCE_CAPS = "1"
 
 [env.production]
 compatibility_date = "2026-06-28"
