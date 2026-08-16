@@ -13,7 +13,9 @@ CF_PAGES_PROJECT="${CF_PAGES_PROJECT:-stewardmd}"
 
 get() { grep -E "^$1=" "$ENV_FILE" | head -1 | cut -d= -f2-; }
 
-for key in FOLLOWCARE_VOICE_SERVICE_TOKEN RUNPOD_API_KEY RUNPOD_POD_ID; do
+# GEMINI_API_KEY is the AI Studio *fallback* for the shared Gemini transport (Vertex AI stays primary via the
+# existing GCP_* config). Voice slot-extraction reuses it — so it lives on Cloudflare, not the GPU box.
+for key in FOLLOWCARE_VOICE_SERVICE_TOKEN RUNPOD_API_KEY RUNPOD_POD_ID GEMINI_API_KEY; do
   val="$(get "$key")"
   if [ -z "$val" ] || [[ "$val" == CHANGE_ME* ]] || [[ "$val" == SET_AUTOMATICALLY* ]]; then
     echo "Skipping $key — not set in $ENV_FILE"; continue

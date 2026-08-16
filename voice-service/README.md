@@ -10,7 +10,8 @@ no Google Cloud GPU. No Plivo AI Agent.
 ```
 Plivo Audio Streaming (WS)
    → IndicConformer 600M STT            (app/stt/indicconformer.py)
-   → Gemini 2.5 Flash slot extraction   (app/nlu/gemini.py)   -- speech→structured value ONLY
+   → Gemini 2.5 Flash slot extraction   (app/nlu/gemini.py → Cloudflare /voice/nlu → shared callGemini:
+                                          Vertex AI primary, AI Studio key fallback)  -- speech→structured value ONLY
    → FollowCare deterministic engine     (app/followcare/client.py → Cloudflare /voice/classify, /voice/result)
    → short response formatter            (app/call/responder.py, 1 short sentence)
    → Indic Parler-TTS                    (app/tts/parler.py)
@@ -88,7 +89,7 @@ to the printed URL and restart. If RunPod rejects the deploy, adjust `RUNPOD_GPU
 | `PLIVO_AUTH_ID` / `PLIVO_AUTH_TOKEN` / `PLIVO_FROM` | Plivo India account + caller-ID DID |
 | `VOICE_PUBLIC_BASE` | public `https://` URL Plivo reaches this service at |
 | `VOICE_AUDIO_FORMAT` | `mulaw` (default) or `l16` |
-| `GEMINI_API_KEY` | Gemini 2.5 Flash for slot extraction |
+| `GEMINI_API_KEY` | **On Cloudflare, not the pod** — AI Studio *fallback* for slot extraction (Vertex AI is primary via the existing GCP_* config). The pod calls Cloudflare `/voice/nlu`; set `VOICE_NLU_DIRECT=1` only if you want the pod to call Gemini directly. |
 | `STT_MODEL` / `TTS_MODEL` | default AI4Bharat IndicConformer 600M / Indic Parler-TTS |
 | `VOICE_MAX_CONCURRENT` | default 5 |
 | `RUNPOD_API_KEY` / `RUNPOD_POD_ID` | self-stop when the queue drains |

@@ -29,7 +29,7 @@ case "$cmd" in
     # Exclude keys the pod must NOT get from here: RunPod injects RUNPOD_POD_ID itself; VOICE_PUBLIC_BASE is
     # derived from it at runtime; GITHUB_TOKEN is appended once below (avoid a duplicate key).
     ENVJSON=$(grep -vE '^[[:space:]]*(#|$)' "$ENV_FILE" \
-      | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN)=' \
+      | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN|GEMINI_API_KEY)=' \
       | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$") | {key:.k, value:.v}' \
       | jq -s --arg t "$GITHUB_TOKEN" '. + [{key:"GITHUB_TOKEN", value:$t}]')
     # Pod start command: clone + install + run. $GITHUB_TOKEN is kept literal here and expands in the pod.

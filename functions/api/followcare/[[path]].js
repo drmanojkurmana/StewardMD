@@ -43,6 +43,9 @@ import Comms from "../../../followcare-comms.js";
 // AI Voice Fallback (flag smd_followcare_voice): eligibility/scheduling/records + engine-reuse on call result.
 import * as FCV from "../../_followcare_voice.js";
 import * as GPU from "../../_followcare_gpu.js";
+// Reuse the EXISTING Gemini transport (Vertex AI primary -> AI Studio developer-key failover) for the voice
+// slot-extraction — one AI integration, no Google creds on the RunPod box. Same import other server code uses.
+import { callGemini } from "../ai/[[path]].js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function corsHeaders(request) {
@@ -263,6 +266,21 @@ export async function onRequest(context) {
       if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
       const b = await readBody(request);
       return json(await FCV.markVoiceStatus(env, b.callId || "", b), 200, request);
+    }
+    // Slot extraction for the voice service: reuse the shared Gemini transport (Vertex primary, AI Studio
+    // GEMINI_API_KEY fallback). Speech-understanding only — NOT a clinical decision. Fails soft (the state
+    // machine treats a missing/garbled reply as "unclear" and re-asks once).
+    if (isVoice && seg === "nlu" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const prompt = String(b.prompt || "").slice(0, 8000);
+      if (!prompt) return json({ ok: false, error: "missing_prompt" }, 400, request);
+      try {
+        const text = await callGemini(env, [{ text: prompt }], Number(b.maxTokens) || 256, { temperature: 0 });
+        return json({ ok: true, text: text || "" }, 200, request);
+      } catch (e) {
+        return json({ ok: false, error: "ai_unavailable" }, 200, request);
+      }
     }
     // Patient opts out of (or back into) AI voice calls from their portal link — token-gated, no login.
     if (isVoice && seg === "optout" && request.method === "POST") {

@@ -71,3 +71,11 @@ class FollowCareClient:
     def post_result(self, payload):
         status, obj = self.transport("POST", self._url("/voice/result"), self._headers(), payload)
         return obj if status == 200 else {"ok": False, "status_code": status}
+
+    # POST /voice/nlu {prompt} -> text. Cloudflare runs it on the shared Gemini transport (Vertex primary,
+    # AI Studio GEMINI_API_KEY fallback). Returns "" on any failure so the extractor degrades to "unclear".
+    def nlu(self, prompt):
+        status, obj = self.transport("POST", self._url("/voice/nlu"), self._headers(), {"prompt": prompt})
+        if status != 200 or not obj.get("ok"):
+            return ""
+        return obj.get("text", "")

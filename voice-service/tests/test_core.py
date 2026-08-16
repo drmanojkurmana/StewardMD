@@ -127,6 +127,8 @@ class TestFollowCareClient(unittest.TestCase):
                 return 200, {"count": 1, "calls": [{"callId": "c1"}]}
             if url.endswith("/voice/classify"):
                 return 200, {"ok": True, "escalation": "orange", "askAmbulance": False}
+            if url.endswith("/voice/nlu"):
+                return 200, {"ok": True, "text": '{"intent":"affirm","value":"yes"}'}
             return 200, {"ok": True}
         return FollowCareClient(cfg, transport=transport)
 
@@ -135,6 +137,7 @@ class TestFollowCareClient(unittest.TestCase):
         c = self._client(rec)
         self.assertEqual(c.get_queue(), [{"callId": "c1"}])
         self.assertEqual(c.classify("e1", {"overall": "worse"})["escalation"], "orange")
+        self.assertIn("affirm", c.nlu("some prompt"))   # slot extraction via Cloudflare (Vertex/fallback)
         c.post_status("c1", {"status": "in_progress"})
         self.assertEqual(c.post_result({"episodeId": "e1"})["ok"], True)
         # every call carried the service token

@@ -249,11 +249,12 @@ write_env PLIVO_AUTH_TOKEN "$PLIVO_AUTH_TOKEN"
 write_env PLIVO_FROM "$PLIVO_FROM"
 
 # ── Stage 5: Gemini key (understands what the patient says) ───────────────
-stage "Gemini — API key"
-say "Gemini turns the patient's spoken reply into a clear answer (it makes NO medical decision)."
+stage "Gemini — backup API key"
+say "Understanding the patient's reply uses your existing Vertex AI first; this key is just a backup."
+say "(It makes NO medical decision — it only turns speech into a clear answer.)"
 open_url "https://aistudio.google.com/apikey"
 step "Click 'Create API key' → copy it."
-ask_secret GEMINI_API_KEY "Paste your Gemini API key:"
+ask_secret GEMINI_API_KEY "Paste your Gemini API key (backup):"
 write_env GEMINI_API_KEY "$GEMINI_API_KEY"
 
 # ── Stage 6: generate the shared service token (no input) ─────────────────
@@ -299,7 +300,7 @@ if [[ -n "$POD_ID" ]] || [[ -n "$(_existing RUNPOD_POD_ID || true)" ]]; then
   warn "A browser window may open to log in to Cloudflare — approve it."
   if confirm "Set the Cloudflare secrets now?"; then
     if RUNPOD_API_KEY="$RUNPOD_API_KEY" ENV_FILE="$ENV_FILE" bash "$HERE/cloudflare.sh"; then
-      WRITTEN_SECRET+=("FOLLOWCARE_VOICE_SERVICE_TOKEN" "RUNPOD_API_KEY" "RUNPOD_POD_ID")
+      WRITTEN_SECRET+=("FOLLOWCARE_VOICE_SERVICE_TOKEN" "RUNPOD_API_KEY" "RUNPOD_POD_ID" "GEMINI_API_KEY")
     else
       warn "Cloudflare step failed (login/permissions?). Re-run: bash deploy/cloudflare.sh"
       SKIPPED+=("Set Cloudflare secrets (deploy/cloudflare.sh)")

@@ -9,6 +9,7 @@ Heavy deps (fastapi, plivo audio, torch, parler, gemini) are imported lazily / u
 core (app.call.*, app.audio.*, app.followcare.client) never depends on them.
 """
 import asyncio
+import os
 import time
 
 from fastapi import FastAPI, Request, WebSocket
@@ -27,7 +28,9 @@ cfg = Config()
 app = FastAPI(title="StewardMD FollowCare Voice", version="0.2.0")
 
 client = FollowCareClient(cfg)
-nlu = SlotExtractor(cfg)
+# Slot extraction runs on the SHARED Cloudflare Gemini transport (Vertex AI primary, AI Studio GEMINI_API_KEY
+# fallback) — one integration, no Google creds on this box. Set VOICE_NLU_DIRECT=1 to use a local Gemini key.
+nlu = SlotExtractor(cfg) if os.environ.get("VOICE_NLU_DIRECT") == "1" else SlotExtractor(cfg, model_call=client.nlu)
 stt = IndicConformerSTT(cfg)
 tts = ParlerTTS(cfg)
 plivo = PlivoController(cfg)
