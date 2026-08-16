@@ -52,7 +52,7 @@ Secrets stay in your shell / `deploy/.env` — never in git, never in chat.
 cp voice-service/deploy/.env.example voice-service/deploy/.env    # fill in Plivo/Gemini/token values
 RUNPOD_API_KEY=xxx GITHUB_TOKEN=xxx bash voice-service/deploy/runpod.sh up      # create the 24GB pod
 # → prints POD_ID + the public URL; put both into deploy/.env
-CF_PAGES_PROJECT=<pages-project> bash voice-service/deploy/cloudflare.sh         # push the 3 shared secrets
+bash voice-service/deploy/cloudflare.sh                                          # push the 3 shared secrets (Pages project "stewardmd")
 RUNPOD_API_KEY=xxx RUNPOD_POD_ID=yyy bash voice-service/deploy/runpod.sh status  # / down to stop
 ```
 
