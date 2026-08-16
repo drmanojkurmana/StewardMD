@@ -99,6 +99,21 @@ case "$cmd" in
     curl -sS -X POST "https://api.plivo.com/v1/Account/$AID/Call/" -u "$AID:$ATOK" -H "Content-Type: application/json" \
       -d "{\"from\":\"$FROM\",\"to\":\"$TO\",\"answer_url\":\"$ANS\",\"answer_method\":\"GET\"}"; echo
     ;;
+  call)
+    # ONE command for a live test: resume the pod if it self-stopped, wait until models are ready, then dial.
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    ST=$(gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"query($id:String!){pod(input:{podId:$id}){desiredStatus}}",variables:{id:$id}}')" | jq -r '.data.pod.desiredStatus // empty')
+    if [ "$ST" != "RUNNING" ]; then
+      echo "resuming pod $RUNPOD_POD_ID ..."
+      gql "$(jq -n --arg q "mutation{podResume(input:{podId:\"$RUNPOD_POD_ID\"}){id}}" '{query:$q}')" >/dev/null
+    fi
+    echo "waiting for models to load (~2-3 min) ..."
+    for i in $(seq 1 90); do
+      curl -sS -m 8 "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/healthz" 2>/dev/null | grep -q '"ready":true' && { echo "ready"; break; }
+      sleep 10
+    done
+    exec bash "$0" ingest
+    ;;
   ingest)
     # Relay the queued call to the pod's /ingest. The pod's datacenter IP is 403'd pulling the queue itself,
     # so THIS host (allowed IP) pulls it, attaches the Gemini key for direct slot-extraction, and pushes it.
@@ -123,5 +138,5 @@ case "$cmd" in
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
     curl -sS -H "Authorization: Bearer $RUNPOD_API_KEY" "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID"; echo
     ;;
-  *) echo "usage: runpod.sh {up|status|down|restart|testcall|queue|plivocall|podinfo}"; exit 1;;
+  *) echo "usage: runpod.sh {up|status|down|restart|call|ingest|queue|testcall|plivocall|plivostatus|podinfo}"; exit 1;;
 esac
