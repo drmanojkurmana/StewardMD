@@ -275,8 +275,8 @@ export async function onRequest(context) {
     // addCredits once the credits product + payment creds exist; owner can also grant/adjust here.
     if (seg === "credits" || seg === "costcap") {
       if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
-      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
-      const email = String(body.email || "").trim().toLowerCase();
+      let body = {}; if (method === "POST") { try { body = (await request.json()) || {}; } catch (e) {} }
+      const email = String(body.email || url.searchParams.get("email") || "").trim().toLowerCase();
       if (!email) return json({ error: "email-required" }, 400);
       const kv = usageKv(env), key = "em:" + email;
       if (seg === "credits") {
