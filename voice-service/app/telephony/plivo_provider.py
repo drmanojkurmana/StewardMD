@@ -136,7 +136,9 @@ class PlivoStreamTelephony(TelephonyProvider):
             await self.ws.send_text(json.dumps({
                 "event": "playAudio",
                 "media": {"contentType": "audio/x-mulaw" if self.cfg.audio_format == "mulaw" else "audio/x-l16",
-                          "sampleRate": self.cfg.sample_rate, "payload": codec.encode_frame(frame, self.cfg.audio_format)},
+                          # Plivo REQUIRES sampleRate as a STRING here; a numeric value makes Plivo drop the frame
+                          # silently (agent audio never reaches the caller = dead air).
+                          "sampleRate": str(self.cfg.sample_rate), "payload": codec.encode_frame(frame, self.cfg.audio_format)},
             }))
             await asyncio.sleep(0.02)
         self._playing = False
