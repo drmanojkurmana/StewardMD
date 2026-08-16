@@ -223,3 +223,14 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 **Individual:** Free ₹0 · Student ₹199 · Co-Resident ₹299 · Pro ₹599 · Ultimate ₹1,499 · **+ Physician Onco ₹89.**
 **AI caps/day:** ₹0.5 / ₹6 / ₹10 / ₹25. **Imaging/day:** 0 / 5 / 20.
 **Hospital (per-seat/mo, min seats by beds, volume-discounted, sales-led):** Credits ₹399 · Pro ₹799 · Ultimate ₹1,499.
+
+---
+
+## 12. CRO add-ons (launch, referral, tax) — see `GROWTH_STRATEGY.md` §1
+
+- **Free trial takes no card**; auto-drops to Free at end (never locks out).
+- **Founding-Doctor offer:** first 🔧 5,000 verified doctors get **Pro ₹399/mo locked 12 months** (Ultimate ₹999). Runs on the coupon engine; public countdown for urgency.
+- **Referral:** refer a doctor → **both get ₹150 credits** (or 1 free Pro month) on the referee's activation. Runs on the credits engine.
+- **Annual framing:** show monthly-equivalent + "2 months free" (e.g. Pro ₹4,999/yr = ₹416/mo).
+- **GST:** B2C prices shown **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at hospital checkout). Register for GST before the first paid rupee (SaaS = 18%).
+- **In-app cap nudge** is the primary upsell surface (the built `429 ai-cost-cap` sheet).
