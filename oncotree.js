@@ -575,9 +575,12 @@
       try { if (G.toast) G.toast("Protocol sent to the patient's Oncology plan - review the computed doses there."); } catch (e1) {}
       return;
     }
-    // 2) Standalone with the dose flow available -> open it with the protocol.
+    // 2) Standalone with the dose flow available -> open it with the protocol. The flow self-gates on its
+    // flags (smd_onco_protocols + smd_onco_recommend); when OFF (e.g. public release) skip this branch so we
+    // fall through to the read-only Onco workbench instead of closing into a dead "flow is off" toast.
     try {
-      if (G.SMD_ONCOFLOW && G.SMD_ONCOFLOW.openFind && proto) {
+      var flowOn = G.SMD_ONCOFLOW && (!G.SMD_ONCOFLOW.isOn || G.SMD_ONCOFLOW.isOn());
+      if (flowOn && G.SMD_ONCOFLOW.openFind && proto) {
         close(); G.SMD_ONCOFLOW.openFind({ diagnosis: dx }, [proto]); return;
       }
     } catch (e2) {}
@@ -650,7 +653,7 @@
 
   var API = {
     open: open, close: close, _evalState: evalState, _bodyHtml: bodyHtml, _st: st,
-    _answer: answer, _select: selectProtocol, _version: "1.0"
+    _answer: answer, _select: selectProtocol, _doHandoff: doHandoff, _version: "1.0"
   };
   if (root) root.SMD_ONCOTREE = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;

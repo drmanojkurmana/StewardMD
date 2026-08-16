@@ -432,7 +432,7 @@
   try { document.addEventListener("keydown", function (e) { var el = document.getElementById("smdOncoFlow"); if (e.key === "Escape" && el && el.classList.contains("on")) close(); }); } catch (e) {}
 
   var API = {
-    openFind: openFind, open: openFind, close: close, select: select, compare: renderCompare,
+    openFind: openFind, open: openFind, close: close, select: select, compare: renderCompare, isOn: flagOn,
     derivePhenotype: derivePhenotype, deriveParams: deriveParams,
     buildDigitalProtocol: buildDigitalProtocol,
     renderFind: renderFind, renderCompare: renderCompare, renderDigitalProtocol: renderDigitalProtocol,
