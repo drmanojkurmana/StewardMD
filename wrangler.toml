@@ -90,6 +90,32 @@ MAIK_ENFORCE_CAPS = "1"
 EXPERIMENTAL_ENFORCE_SKNX = "1"
 EXPERIMENTAL_ENFORCE_THOREX = "1"
 EXPERIMENTAL_ENFORCE_KARDIOX = "1"
+# ── Pro pricing (paise; ₹1 = 100). Read by functions/api/billing/[[path]].js plans(). INERT while the
+# launch promo (PRO_FREE_UNTIL, default 15 Sep 2026) is active. See docs/PRICING_PACKAGING.md.
+PRO_PRICE_MONTHLY = "59900"          # Pro ₹599/mo
+PRO_PRICE_ANNUAL = "499900"          # Pro ₹4,999/yr (~2 months free)
+STUDENT_PRICE_MONTHLY = "19900"      # Student ₹199/mo (verified trainee)
+STUDENT_PRICE_ANNUAL = "199900"      # Student ₹1,999/yr
+CORESIDENT_PRICE_MONTHLY = "29900"   # Co-Resident ₹299/mo (2 accounts, shared AI pool)
+ULTIMATE_PRICE_MONTHLY = "149900"    # Ultimate ₹1,499/mo
+ULTIMATE_PRICE_ANNUAL = "1499900"    # Ultimate ₹14,999/yr
+ONCO_ADDON_MONTHLY = "8900"          # Physician Onco add-on +₹89/mo
+FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399 for the whole year (first 500)
+# ── Per-user daily AI COST cap (₹/day) by role. Read by functions/_credits.js. INERT unless AI_COST_CAP_ON="1".
+AI_DAILY_COST_CAP_INR = "0.5"        # Free default
+AI_COST_CAP_STUDENT = "6"
+AI_COST_CAP_RESIDENT = "6"
+AI_COST_CAP_CO_RESIDENT = "6"
+AI_COST_CAP_INTERN = "6"
+AI_COST_CAP_PHYSICIAN = "10"         # Pro
+AI_COST_CAP_PHYSICIAN_PRO = "25"     # Ultimate
+CREDIT_CONVERSION = "0.5"            # buy ₹50 credits → ₹25 of AI allowance
+# ── Founding-Doctor fixed annual AI pool (₹): ₹120 grant + one ₹120 auto-refill = ₹240/yr ceiling.
+FOUNDING_AI_GRANT_INR = "120"
+FOUNDING_AI_REFILL_INR = "120"
+FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily allowance → founding AI draws the annual pool
+FOUNDING_SEATS = "500"
+# AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
 [env.production]
 compatibility_date = "2026-06-28"
@@ -110,6 +136,29 @@ MAIK_ENFORCE_CAPS = "1"   # enforce per-user/per-module AI daily+rate caps (owne
 EXPERIMENTAL_ENFORCE_SKNX = "1"   # imaging code-gate enforced server-side (owner + code-holders only); "0" reverts
 EXPERIMENTAL_ENFORCE_THOREX = "1"
 EXPERIMENTAL_ENFORCE_KARDIOX = "1"
+# ── Pro pricing (paise) + AI cost caps + Founding-Doctor pool. INERT while the launch promo is active
+# (and the cost cap needs AI_COST_CAP_ON="1"). See docs/PRICING_PACKAGING.md.
+PRO_PRICE_MONTHLY = "59900"          # Pro ₹599/mo
+PRO_PRICE_ANNUAL = "499900"          # Pro ₹4,999/yr
+STUDENT_PRICE_MONTHLY = "19900"      # Student ₹199/mo
+STUDENT_PRICE_ANNUAL = "199900"      # Student ₹1,999/yr
+CORESIDENT_PRICE_MONTHLY = "29900"   # Co-Resident ₹299/mo (2 accounts, shared pool)
+ULTIMATE_PRICE_MONTHLY = "149900"    # Ultimate ₹1,499/mo
+ULTIMATE_PRICE_ANNUAL = "1499900"    # Ultimate ₹14,999/yr
+ONCO_ADDON_MONTHLY = "8900"          # Physician Onco +₹89/mo
+FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399/year (first 500)
+AI_DAILY_COST_CAP_INR = "0.5"        # Free default (₹/day)
+AI_COST_CAP_STUDENT = "6"
+AI_COST_CAP_RESIDENT = "6"
+AI_COST_CAP_CO_RESIDENT = "6"
+AI_COST_CAP_INTERN = "6"
+AI_COST_CAP_PHYSICIAN = "10"         # Pro
+AI_COST_CAP_PHYSICIAN_PRO = "25"     # Ultimate
+CREDIT_CONVERSION = "0.5"            # ₹50 → ₹25 of AI
+FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120 refill = ₹240/yr ceiling
+FOUNDING_AI_REFILL_INR = "120"
+FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
+FOUNDING_SEATS = "500"
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

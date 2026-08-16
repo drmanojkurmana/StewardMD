@@ -21,6 +21,19 @@ function r2(n) { return Math.round(n * 100) / 100; }
 export function costCapOn(env) { return String(env && env.AI_COST_CAP_ON) === "1"; }
 export function creditConversion(env) { const v = Number(env && env.CREDIT_CONVERSION); return Number.isFinite(v) && v > 0 && v <= 1 ? v : 0.5; }
 
+// ---- Founding-Doctor annual AI pool (fixed ceiling, one auto-refill) ----
+export function foundingGrant(env) { const v = Number(env && env.FOUNDING_AI_GRANT_INR); return Number.isFinite(v) && v >= 0 ? v : 120; }
+export function foundingRefill(env) { const v = Number(env && env.FOUNDING_AI_REFILL_INR); return Number.isFinite(v) && v >= 0 ? v : 120; }
+export function foundingDailyCap(env) { const v = Number(env && env.FOUNDING_DAILY_CAP_INR); return Number.isFinite(v) && v > 0 ? v : 0.01; }
+// On founding redeem: load the fixed annual pool + mark the record so it auto-refills exactly ONCE.
+export async function grantFoundingPool(env, store, id) {
+  const rec = await getCreditRecord(store, id);
+  rec.balance = r2((rec.balance || 0) + foundingGrant(env));
+  rec.plan = "founding"; if (rec.refillsUsed == null) rec.refillsUsed = 0;
+  await putCreditRecord(store, id, rec);
+  return { balance: rec.balance, plan: "founding" };
+}
+
 // Resolve a user's daily rupee cap: per-user KV override > env per-role > env global > 0 (unlimited).
 export async function dailyCostCap(env, store, email, role) {
   if (store && email) {
@@ -73,14 +86,19 @@ export async function checkCostCap(env, store, doctorId, cap, now) {
   let dayCost = 0;
   try { const d = await store.get("aiu:doc:" + doctorId + ":" + day, "json"); dayCost = (d && +d.cost) || 0; } catch (e) { return { ok: true }; }
   const rec = await getCreditRecord(store, doctorId);
-  if (rec.day !== day) { rec.day = day; rec.chargedToday = 0; }        // new day → reset the day's charge tally
+  let dirty = false;
+  if (rec.day !== day) { rec.day = day; rec.chargedToday = 0; dirty = true; }   // new day → reset the day's charge tally
   const overage = Math.max(0, dayCost - cap);
   const newCharge = overage - (rec.chargedToday || 0);
   if (newCharge > 0 && rec.balance > 0) {                              // lazily debit credits for over-cap spend
     const charge = Math.min(newCharge, rec.balance);
-    rec.balance = r2(rec.balance - charge); rec.chargedToday = r2((rec.chargedToday || 0) + charge);
+    rec.balance = r2(rec.balance - charge); rec.chargedToday = r2((rec.chargedToday || 0) + charge); dirty = true;
   }
-  if (newCharge > 0 || rec.day === day) await putCreditRecord(store, doctorId, rec);
+  // Founding plan: one automatic refill of the fixed annual pool when it first runs dry.
+  if (rec.plan === "founding" && rec.balance <= 0 && (rec.refillsUsed || 0) < 1) {
+    rec.balance = r2(rec.balance + foundingRefill(env)); rec.refillsUsed = 1; dirty = true;
+  }
+  if (dirty) await putCreditRecord(store, doctorId, rec);
   const resetAt = _nextMidnightMs(now);
   if (dayCost < cap) return { ok: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), resetAt };
   if (rec.balance > 0) return { ok: true, onCredits: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), resetAt };

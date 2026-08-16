@@ -22,18 +22,28 @@ import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
-import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn } from "../../_credits.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool } from "../../_credits.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
 });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
 
-// Plans — amounts in PAISE (₹1 = 100). Placeholders; override via env before launch.
+// Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
+// stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
 function plans(env) {
+  const P = (k, d) => +(env[k] || d);
   return {
-    monthly: { months: 1, amount: +(env.PRO_PRICE_MONTHLY || 49900), label: "Monthly" },
-    annual: { months: 12, amount: +(env.PRO_PRICE_ANNUAL || 399900), label: "Annual" },
+    monthly: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), label: "Pro Monthly" },
+    annual: { months: 12, amount: P("PRO_PRICE_ANNUAL", 499900), label: "Pro Annual" },
+    tiers: {
+      student: { months: 1, amount: P("STUDENT_PRICE_MONTHLY", 19900), annual: P("STUDENT_PRICE_ANNUAL", 199900), label: "Student", requiresVerify: true },
+      coresident: { months: 1, amount: P("CORESIDENT_PRICE_MONTHLY", 29900), seats: 2, label: "Co-Resident" },
+      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 499900), label: "Pro" },
+      ultimate: { months: 1, amount: P("ULTIMATE_PRICE_MONTHLY", 149900), annual: P("ULTIMATE_PRICE_ANNUAL", 1499900), label: "Ultimate" },
+    },
+    addons: { onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" } },
+    founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
   };
 }
 
@@ -259,6 +269,13 @@ export async function onRequest(context) {
         if (!uid) return json({ error: "signin-required" }, 401);
         let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
         const r = await redeemCoupon(env, body.code, uid);
+        // Founding-Doctor SKU: apply the fixed annual AI pool + ~0 daily cap (keyed by email, like the meter).
+        if (r.ok && r.founding && !r.already) {
+          try {
+            const who = await usageIdentify(request, env);
+            if (who && who.email) { const kv = usageKv(env); await setUserCostCap(kv, who.email, foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
+          } catch (e) {}
+        }
         return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));
       }
       // owner-only management

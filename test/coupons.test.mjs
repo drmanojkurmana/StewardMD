@@ -77,6 +77,17 @@ test("revoke pulls Pro from coupon redeemers but NOT from a doctor who since pai
   assert.equal(JSON.parse(h.deps.kv.m.get("coupon:ORG")).revoked, true);
 });
 
+test("founding SKU: type founding, defaults 12mo + 500 seats, redeem flags founding", async () => {
+  const h = harness();
+  const c = await createCoupon({ FOUNDING_SEATS: "500" }, { type: "founding", code: "FOUND25" }, h.deps);
+  assert.equal(c.type, "founding");
+  assert.equal(c.months, 12);
+  assert.equal(c.maxRedemptions, 500);
+  const r = await redeemCoupon({}, "FOUND25", "docF", h.deps);
+  assert.equal(r.ok, true); assert.equal(r.founding, true);
+  assert.equal(h.grants[0].opts.months, 12);
+});
+
 test("listCoupons returns created coupons", async () => {
   const h = harness();
   await createCoupon({}, { code: "A1" }, h.deps);

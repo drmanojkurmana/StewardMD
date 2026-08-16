@@ -34,8 +34,11 @@ export function couponVerdict(c, uid, now) {
 export async function createCoupon(env, opts, deps) {
   const kv = kvOf(env, deps); opts = opts || {};
   const code = normCode(opts.code) || genCode(Math.min(16, Math.max(6, +opts.length || 10)));
+  // type "founding" = the Founding-Doctor SKU: 1 year of Pro + a fixed annual AI pool applied on redeem
+  // (see the billing redeem handler + _credits.grantFoundingPool). Otherwise a plain "pro" grant.
+  const type = opts.type === "founding" ? "founding" : "pro";
   const rec = {
-    code, type: "pro",
+    code, type,
     forever: !!opts.forever,
     months: opts.months ? Math.max(1, +opts.months) : 0,
     days: opts.days ? Math.max(1, +opts.days) : 0,
@@ -45,6 +48,7 @@ export async function createCoupon(env, opts, deps) {
     note: String(opts.note || "").slice(0, 200), createdAt: Date.now(),
   };
   if (!rec.forever && !rec.months && !rec.days) rec.months = 12;   // default grant: 1 year of Pro
+  if (type === "founding" && !rec.maxRedemptions) rec.maxRedemptions = Math.max(1, +(env && env.FOUNDING_SEATS) || 500);
   await kv.put(PFX + code, JSON.stringify(rec));
   return rec;
 }
@@ -79,7 +83,8 @@ export async function redeemCoupon(env, code, uid, deps) {
       : { months: c.months || 12, source: "coupon:" + c.code };
   const g = await grant(env, uid, opts);
   if (!v.already) { c.redeemedBy = (c.redeemedBy || []).concat([uid]); await kv.put(PFX + c.code, JSON.stringify(c)); }
-  return { ok: true, code: c.code, already: !!v.already, grant: g };
+  // founding flag → the billing route applies the fixed annual AI pool + ~0 daily cap (needs the email).
+  return { ok: true, code: c.code, already: !!v.already, grant: g, founding: c.type === "founding" };
 }
 
 export async function revokeCoupon(env, code, deps) {

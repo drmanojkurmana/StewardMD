@@ -1,7 +1,7 @@
 /* test/credits.test.mjs — daily AI-cost cap + prepaid credits (₹50 → ₹25). Fake KV, no network. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { dailyCostCap, setUserCostCap, addCredits, adminSetCredits, getCredits, checkCostCap, creditConversion } from "../functions/_credits.js";
+import { dailyCostCap, setUserCostCap, addCredits, adminSetCredits, getCredits, checkCostCap, creditConversion, grantFoundingPool, foundingDailyCap } from "../functions/_credits.js";
 
 function fakeKv(seed = {}) {
   const m = new Map(Object.entries(seed));
@@ -59,6 +59,24 @@ test("at cap WITH credits → ok on credits, and lazily debits the over-cap spen
   withCost(kv, 15);
   const r2 = await checkCostCap({}, kv, DOC, 10, now);
   assert.equal(r2.credits, 15);                           // 17 - 2, not double-charged
+});
+
+test("Founding-Doctor: fixed pool + exactly ONE auto-refill, then block", async () => {
+  const env = { FOUNDING_AI_GRANT_INR: "120", FOUNDING_AI_REFILL_INR: "120" };
+  const kv = fakeKv();
+  const g = await grantFoundingPool(env, kv, DOC);
+  assert.equal(g.balance, 120); assert.equal(g.plan, "founding");
+  assert.equal(foundingDailyCap({}), 0.01);                     // ~0 free daily → all AI draws the pool
+  // burn the first ₹120 → auto-refills to ₹120 once
+  withCost(kv, 120.01);
+  const r1 = await checkCostCap(env, kv, DOC, 0.01, now);
+  assert.equal(r1.ok, true); assert.equal(r1.onCredits, true);
+  assert.equal(r1.credits, 120);                                // refilled
+  // burn the refill too → no second refill → blocked (annual ceiling = ₹240 reached)
+  withCost(kv, 240.01);
+  const r2 = await checkCostCap(env, kv, DOC, 0.01, now);
+  assert.equal(r2.ok, false); assert.equal(r2.reason, "ai-cost-cap");
+  assert.equal(JSON.parse(kv.m.get("maik:credit:" + DOC)).refillsUsed, 1);
 });
 
 test("credits exhausted → block", async () => {
