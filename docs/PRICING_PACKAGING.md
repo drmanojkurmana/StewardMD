@@ -44,7 +44,7 @@ Every individual tier below now clears the margin test in Principle 4.
 - **All calculators** + electrolytes + renal dosing + basic insulin dosing.
 - **Knowledge Base** + guidelines + offline clinical + Medical Updates.
 - **Specialty workspaces** (ENT, Ophtho, Peds, Surgery, Uro, Ob-Gyn, Dental).
-- **Oncology: disease/KB reference + AJCC/TNM staging ONLY** (the rest is the Physician Onco add-on, §5).
+- **Oncology reference & safety tools** — disease/KB reference, AJCC/TNM staging, CTCAE toxicity grading, IO toxicity (irAE), RECIST 1.1, onco drug info + interactions (the treatment-planning workflow is the Physician Onco add-on, §5).
 - **My Cases** (save, 🔧 cap 10) + de-identified case share.
 - **Personal Clinic EMR** — on-device, encrypted, 🔧 1 device (sync is Pro).
 - Steward ID / NMC verification / onboarding / support.
@@ -87,8 +87,8 @@ Ladder: **Free → Student ₹199 → Pro ₹599 → Ultimate ₹1,499.**
 Oncology is monetized: **only disease reference + AJCC/TNM staging are free** (the hook). Everything clinical-decision in onco is the **Physician Onco** pack.
 
 - **Physician Onco — +₹89/month** (add-on to Pro or Ultimate). Ultimate + Onco = **₹1,588/mo**. 🔧 annual +₹899/yr.
-- **Unlocks:** Treatment-Plan Protocols, Protocol Library + Reference, CTCAE toxicity grading, IO toxicity (irAE), RECIST 1.1, onco drug info + interactions, recommend engine, OncoTree navigator, evidence overlay, favorites, TallMan.
-- **Stays free:** Onco Diseases / KB reference + staging.
+- **Unlocks (the treatment-planning workflow):** Treatment-Plan Protocols, Protocol Library + Reference, OncoTree navigator, recommend engine, evidence overlay, favorites, TallMan.
+- **Stays free:** Onco disease/KB reference, AJCC/TNM staging, **CTCAE toxicity grading, IO toxicity (irAE), RECIST 1.1, onco drug info + interactions** (reference & safety tools — cheap, deterministic, safety-relevant).
 - **Hospital:** onco **treatment-plan execution** (role-split doctor/nurse: protocol assign, cycles, administration) is part of the Hospital team platform (§6), not the individual add-on.
 
 Maps cleanly to the built system: a `featureFlags` gate keyed to an `onco` entitlement + a ₹89 add-on SKU alongside the credits product.
@@ -169,8 +169,8 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 | ICU workstation + collaboration | **H** | |
 | Lab Watch 24/7 | **P/U** (solo) / **H** | |
 | OPD Queue + EMR + display + billing | **H** | billing add-on |
-| **Onco: disease ref + staging** | **F** | free crumbs |
-| **Onco: protocols/CTCAE/RECIST/IO-tox/OncoTree/recommend** | **O** (+₹89) | Pro/Ultimate add-on |
+| **Onco: disease ref + staging + CTCAE + IO-tox + RECIST + drug interactions** | **F** | reference & safety |
+| **Onco: protocols / library / OncoTree / recommend / evidence overlay** | **O** (+₹89) | treatment-planning workflow |
 | **Onco: treatment-plan execution (role-split)** | **H** | team |
 | Connect — Ward Sync (basic) | **H** | |
 | Connect — full interop + AI mapping | **H**-Ultimate / **+** 💰 | |
