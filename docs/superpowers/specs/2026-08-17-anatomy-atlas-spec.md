@@ -320,11 +320,25 @@ swipe-back.
 
 ## 9. Content licence constraint
 
-**Hard rule: no attribution is rendered in the UI.** Therefore only sources that
-are public domain, CC0, or otherwise attribution-free *and* commercial-use-permitted
-may enter the pipeline. StewardMD is a commercial product; distributing the atlas
-free of charge to students does not create a licence, and "educational use" is not
-a substitute for one.
+**DECIDED 2026-08-17 by the product owner — attribution tier B+ ("notices + one
+credit line"):**
+
+1. **Nothing names a source anywhere in the slice viewer or the catalog.** No credit
+   on or beside an image, ever. The existing tests assert this and must keep passing.
+2. **One credit line is permitted on a dedicated atlas info screen**, reached from an
+   `i` control in the atlas header — not in `catalogHtml()` or `viewerHtml()`. Exact
+   string: `Courtesy of the U.S. National Library of Medicine`.
+3. **Third-party licence text ships in the app's existing Settings → Legal page**
+   (Apache-2.0 §4 notice retention), not in the atlas.
+
+StewardMD is a commercial product; distributing the atlas free of charge to students
+does not create a licence, and "educational use" is not a substitute for one. The
+tier above is what makes the chosen sources lawful — it is not cosmetic.
+
+Consequent flips in the register: **Visible Human CT + MRI → CLEAR** (base images),
+**SPL/NAC Brain Atlas → CLEAR** (300+ hand-labelled structures), **TotalSegmentator
+`total`/`total_mr`, FastSurfer `--seg_only`, SynthSeg v1.0 → CLEAR** (notice retention
+satisfied by the Settings → Legal page).
 
 Consequences already known:
 
@@ -341,12 +355,69 @@ its data is committed. Register columns: source · licence + version ·
 commercial? · attribution required? · share-alike? · derived-data
 redistribution? · verified-from URL · verdict.
 
-### 9.1 Clearance Register
+### 9.1 Three kinds of "attribution"
 
-> **Pending.** Being verified from primary licence sources. No pipeline task may
-> execute against a source until its row exists here with verdict `CLEAR`.
-> The pipeline plan's Task 1 is the register itself, and it is a hard gate on
-> every later task in that plan.
+Verification showed the constraint is not binary. Sources split three ways, and
+the middle bucket is a decision for the product owner, not a technical finding:
+
+- **(A) Content attribution** — CC BY / BY-SA, or a contractual credit clause.
+  Requires a visible credit near the content. **Fails the constraint.**
+- **(B) Notice retention** — Apache-2.0 §4, BSD, FreeSurfer/Slicer Part B.
+  Requires licence text in the distributed software *and its user documentation* —
+  normally satisfied by a bundled third-party-notices screen, which most apps
+  already ship. Not a credit caption on the image. **Owner's call.**
+- **(C) No obligation** — public domain / CC0.
+
+### 9.2 Clearance Register
+
+Verified 2026-08-17 from primary licence sources. **No pipeline task may run
+against a source whose row is not `CLEAR`.**
+
+| Source | Licence | Comm. | Attrib. | Verdict |
+|---|---|---|---|---|
+| **TotalSegmentator code + `total` / `total_mr` weights** | Apache-2.0 | yes | notice only (B) | **CLEAR** |
+| **FastSurfer `--seg_only` (`asegdkt`, `cereb`)** | Apache-2.0 | yes | notice only (B) | **CLEAR** — needs no FreeSurfer licence |
+| **SynthSeg v1.0 weights (in-repo)** | Apache-2.0 | yes | notice only (B) | **CLEAR** |
+| **Terminologia Anatomica — individual terms** | explicitly PD | yes | no | **CLEAR** |
+| **Gray's Anatomy 1918 — text + figures** | PD-US (pre-1931) | yes | no | **CLEAR (US)** |
+| **Wikimedia Commons — CC0/PD filtered only** | CC0 / PD | yes | no | **CLEAR** with per-file audit record |
+| NLM Visible Human | US Gov, no copyright | yes | **YES (contractual)** | **CONDITIONAL** — download T&C demands "Courtesy of the U.S. National Library of Medicine" |
+| SPL/NAC Brain Atlas (Open Anatomy) | 3D Slicer Part B | yes | notice (B) | **CONDITIONAL** — 300+ hand-labelled structures; best single source if (B) is acceptable |
+| PMC OA — CC0 subset only | mixed | varies | varies | **CONDITIONAL** — programmatic per-article filter |
+| TotalSegmentator training dataset | CC BY 4.0 | yes | YES | **CONDITIONAL** — never run models *on* it |
+| TCIA (all collections) | CC BY 3.0/4.0, some NC | varies | **YES + DOI cite** | **BLOCKED** — no CC0 collection found |
+| Wikipedia prose | CC BY-SA 4.0 | yes | YES + share-alike | **BLOCKED** |
+| FMA | CC BY 3.0 | yes | YES | **BLOCKED** |
+| UBERON | CC BY 3.0 | yes | YES | **BLOCKED** |
+| TA2 document / its hierarchy | CC BY-**ND** 4.0 | yes | YES + no derivatives | **BLOCKED** (terms alone are fine) |
+| **FSL** | FSL Licence | **NO** | — | **BLOCKED** — and §(2)/(3) reach the *dev process*: using FSL to generate coordinates for a commercial app is caught even if no FSL code ships |
+| **JHU ICBM-DTI-81** (via FSL) | FSL | **NO** | — | **BLOCKED** |
+| FreeSurfer + DK / DKT / Destrieux atlas **files** | FreeSurfer v1.0 | yes | **YES** (Part B §1(b), into user docs) | **BLOCKED** under a strict rule. Also: "CLINICAL APPLICATIONS ARE NEITHER RECOMMENDED NOR ADVISED" |
+| DK / DKT / Destrieux **label names** | nomenclature, unprotectable | yes | no | **CLEAR** — names usable, geometry not |
+| Mindboggle-101 | CC BY-NC-SA 3.0 (paper) vs CC BY 4.0 (site) — conflicting | no | YES | **BLOCKED** |
+| TotalSegmentator `brain_structures` | proprietary, paid commercial | **NO** | — | **BLOCKED** |
+| TotalSegmentator `brain_aneurysm` | CC BY-NC 4.0 | **NO** | — | **BLOCKED** |
+| TractSeg | Apache-2.0 code; weights UNVERIFIED; needs MRtrix3 | ? | ? | **CONDITIONAL** — weakest link |
+
+**The one genuine dead end: named white matter.** Every named WM atlas is FSL-encumbered
+(JHU, XTRACT, HCP1065, FMRIB58) or non-commercial. There is no attribution-free path.
+**Resolution: hand-author it** — ~12–20 pins placed once on our own PD base image
+(corpus callosum genu/body/splenium, internal capsule limbs, external capsule, corona
+radiata, forceps major/minor, fornix, cingulum, SLF, optic radiation), named with PD
+TA terms and described from Gray's. The result is our own copyright with no upstream.
+Cheaper than negotiating an FSL commercial licence, and it removes the layer permanently.
+
+**Flagged UNVERIFIED — must not be treated as cleared:** FMA's licence *version*
+(licensor's page offline) · Open-i site-level terms · JHU's independent non-FSL terms ·
+FastSurfer and TractSeg *weights* licences as distinct from their code · SynthSeg
+2.0/robust/parc weights · HCP data-use terms behind TractSeg · MRtrix3's licence ·
+whether W. H. Lewis is the 1918 editor of record · the argument that model *output*
+escapes Apache-2.0 notice conditions.
+
+**Correction to an earlier draft:** Project Gutenberg #33513 is *not* Gray's Anatomy
+(it is an unrelated novel); Gray's does not appear to be on Project Gutenberg. Source
+the 1918 text from an original scan — not Gutenberg (trademark notice + 20% commercial
+royalty clause) and not Wikisource wikitext (editor annotations are BY-SA).
 
 ## 10. Success criteria
 

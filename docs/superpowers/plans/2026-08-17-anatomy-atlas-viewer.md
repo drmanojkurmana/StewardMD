@@ -15,7 +15,8 @@
 - **Zero new npm/JS dependencies.** No React, no Canvas renderer, no Cornerstone.js, no Vaul, no DICOM library.
 - **ES5-style syntax** to match the codebase: `var`, `function`, no arrow functions, no `const`/`let`, no template literals, no optional chaining. (Test files are `.mjs` and may use modern syntax.)
 - **No emoji anywhere in UI strings.** `test/no-ui-emoji.test.mjs` blocks `☆ ✕ 🔒 🧠` and the whole `\u{1F300}-\u{1FAFF}` range. Use `window.ICONS.get(name)`, always guarded: `(window.ICONS && ICONS.get) ? ICONS.get(n) : ""`. The characters `‹ › ← → ▸ ▾ —` **are** permitted.
-- **No attribution, source, licence or credit string rendered in the UI**, ever. `provenance` in the JSON is an audit trail only.
+- **No attribution, source, licence or credit string in `catalogHtml()` or `viewerHtml()`**, ever — the tests assert this. Per the owner decision (spec §9), exactly one credit line — `Courtesy of the U.S. National Library of Medicine` — is permitted on a **separate atlas info screen** reached from an `i` control in the atlas header, and third-party licence text lives in the app's existing Settings → Legal page. Nothing appears on or beside a slice. `provenance` in the JSON remains an audit trail only.
+  - *Plan delta from that decision:* Task 4 adds an `i` button to the catalog header and an `infoHtml()` view (`data-atlas-act="info"`, rendered like the grid overlay); Task 9 asserts the credit string appears in `infoHtml()` and in neither `catalogHtml()` nor `viewerHtml()`. `provenance.images` in the fixture becomes the source of that line rather than a hardcoded string.
 - **Every module root is created in JS**, never added as static markup to `index.html`. `grep '<section id=' index.html` returns zero hits; keep it that way.
 - **All data fetches use absolute `/`-prefixed paths with no version query param.**
 - **Coordinates in JSON are percentages of the image box** (0–100), never pixels, never viewport-relative.
