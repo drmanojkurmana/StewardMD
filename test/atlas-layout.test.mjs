@@ -177,5 +177,20 @@ ok("a structure with a missing category still renders",
      { categories: {}, structures: { q: { name: "Q" } } }, B, 400, 800, { sel: null, hidden: {} })
      .indexOf("<svg") === 0);
 
+// --- scrub track thumbnails ---
+const { trackThumbs } = mod.exports;
+ok("trackThumbs is exported", typeof trackThumbs === "function");
+const mkA = (n) => ({ slices: Array.from({ length: n }, (_, i) => ({ i: i + 1, img: "/a/" + String(i + 1).padStart(3, "0") + ".webp" })) });
+ok("samples 5 thumbs from 24 slices", trackThumbs(mkA(24), 5).length === 5);
+ok("first thumb is the first slice", trackThumbs(mkA(24), 5)[0].includes("001"));
+ok("last thumb is the last slice", trackThumbs(mkA(24), 5)[4].includes("024"));
+ok("thumbs come from the t/ directory", trackThumbs(mkA(24), 5)[0].includes("/t/"));
+ok("thumbs are evenly spaced", trackThumbs(mkA(24), 5).join(",") === "/a/t/001.webp,/a/t/007.webp,/a/t/013.webp,/a/t/018.webp,/a/t/024.webp");
+ok("thumbs strictly ascend", (() => { const n = trackThumbs(mkA(24), 5).map(u => +u.match(/(\d+)\.webp/)[1]); return n.every((v, k) => k === 0 || v > n[k - 1]); })());
+ok("fewer slices than samples degrades gracefully", trackThumbs(mkA(3), 5).length === 3);
+ok("single slice is safe", trackThumbs(mkA(1), 5).length === 1);
+ok("empty atlas is safe", trackThumbs({ slices: [] }, 5).length === 0);
+ok("null atlas is safe", trackThumbs(null, 5).length === 0);
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

@@ -92,6 +92,43 @@ body.atlas-lock { overflow: hidden; }
   font-weight: 700;
 }
 
+/* ---------- scrub bar ---------- */
+/* The track is a SLIDER whose background happens to be 5 thumbnails, with a moving
+   playhead — not a scrolling filmstrip. A real <input type=range> sits transparent on
+   top so drag, keyboard arrows and VoiceOver all work with no code. */
+
+.atlas-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; }
+.atlas-gridbtn, .atlas-step {
+  width: 38px; height: 38px; flex: 0 0 auto;
+  border: 0; border-radius: 10px; background: transparent; color: #eee;
+  font-size: 18px; cursor: pointer;
+}
+.atlas-gridbtn svg, .atlas-step svg { width: 20px; height: 20px; vertical-align: middle; }
+.atlas-track { position: relative; flex: 1 1 auto; height: 46px; display: flex; gap: 2px; border-radius: 6px; overflow: hidden; }
+.atlas-tth { flex: 1 1 0; min-width: 0; background: #0b0b0b center/cover no-repeat; }
+.atlas-play {
+  position: absolute; top: 0; bottom: 0; width: 3px;
+  background: #3b9dff; pointer-events: none; transform: translateX(-1.5px);
+}
+.atlas-range {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  opacity: 0; cursor: pointer; -webkit-appearance: none; appearance: none; background: transparent;
+}
+.atlas-range:focus-visible { opacity: 1; outline: 2px solid #3b9dff; }
+.atlas-count { flex: 0 0 auto; font-size: 13px; opacity: .8; min-width: 48px; text-align: center; }
+
+/* ---------- all-slices grid ---------- */
+
+.atlas-grid { position: absolute; inset: 0; z-index: 5; background: #000; display: flex; flex-direction: column; }
+.atlas-grid-in { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.atlas-gth {
+  position: relative; aspect-ratio: 1; padding: 0;
+  border: 2px solid transparent; border-radius: 8px;
+  background: #0b0b0b center/cover no-repeat; cursor: pointer;
+}
+.atlas-gth.on { border-color: #3b9dff; }
+.atlas-gth span { position: absolute; bottom: 2px; right: 4px; font-size: 10px; color: #ddd; }
+
 /* ---------- info screen ---------- */
 
 .atlas-info-screen {

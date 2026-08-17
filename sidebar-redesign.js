@@ -53,7 +53,7 @@
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
-    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("Atlas loading…"); },
+    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
@@ -249,7 +249,7 @@
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
-        row("atlas", "atlas", "Anatomy Atlas") +
+        row("atlas", "atlas", "RadioAnatome") +
       row("tour", "info", "How it works · App tour") +
       row("feedback", "edit", "Send Feedback") +
       row("ack", "award", "About &amp; Acknowledgements") +

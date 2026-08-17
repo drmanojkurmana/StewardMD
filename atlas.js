@@ -1,4 +1,4 @@
-/* StewardMD — Anatomy Atlas.
+/* StewardMD — RadioAnatome.
    Educational cross-sectional atlas. Pure helpers first (exported for tests),
    DOM below. ES5 style to match the rest of the app.
    Spec:  docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md
@@ -215,6 +215,20 @@
       '" width="' + stageW + '" height="' + stageH + '">' + parts.join("") + "</svg>";
   }
 
+  // n evenly-spaced thumbnails across the stack, used as the scrub track background.
+  // The reference shows 5 fixed thumbs with a moving playhead, not a scrolling
+  // filmstrip — so this is a slider track, not a list.
+  function trackThumbs(atlas, n) {
+    var sl = (atlas && atlas.slices) || [];
+    if (!sl.length) return [];
+    var k = Math.min(n, sl.length), out = [], i;
+    for (i = 0; i < k; i++) {
+      var idx = k === 1 ? 0 : Math.round((i / (k - 1)) * (sl.length - 1));
+      out.push(String(sl[idx].img || "").replace(/\/([^/]+)$/, "/t/$1"));
+    }
+    return out;
+  }
+
   /* ---------- layout constants ---------- */
   // Declared once, in the pure block, so the Node tests see them too.
   var GAP_PCT = 6.5, PAD_PCT = 2, LABEL_CHARS = 13, LABEL_LINES = 2, GUTTER_PX = 90;
@@ -252,8 +266,14 @@
   }
 
   // Guarded because home.js (which owns the icon catalog) loads after this file.
+  // ICONS.get returns a truthy EMPTY <svg> for an unknown name, so callers using
+  // `ico(x) || "fallback"` would render an invisible button. Check has() first.
   function ico(n, c) {
-    try { return (G.ICONS && G.ICONS.get) ? G.ICONS.get(n, c) : ""; } catch (e) { return ""; }
+    try {
+      if (!G.ICONS || !G.ICONS.get) return "";
+      if (G.ICONS.has && !G.ICONS.has(n)) return "";
+      return G.ICONS.get(n, c);
+    } catch (e) { return ""; }
   }
 
   function rootEl() {
@@ -344,11 +364,11 @@
           return '<div class="atlas-grp"><div class="atlas-grp-h">' + esc(g.region) + "</div>" +
             g.modules.map(moduleRow).join("") + "</div>";
         }).join("")
-      : '<div class="atlas-empty">' + (mods.length ? "No modules match these filters." : "Atlas loading…") + "</div>";
+      : '<div class="atlas-empty">' + (mods.length ? "No modules match these filters." : "RadioAnatome loading…") + "</div>";
 
     return '<div class="atlas-top">' +
         '<button class="atlas-back" data-atlas-act="close" aria-label="Close">‹</button>' +
-        '<span class="atlas-hd"><span class="atlas-ttl">Anatomy Atlas</span></span>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">RadioAnatome</span></span>' +
         '<button class="atlas-info" data-atlas-act="info" aria-label="About this atlas">' + (ico("info") || "i") + "</button></div>" +
       '<div class="atlas-scroll">' + chipRow() + body + "</div>" +
       '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
@@ -362,10 +382,10 @@
     return '<div class="atlas-info-screen" id="atlasInfo">' +
       '<div class="atlas-top">' +
         '<button class="atlas-back" data-atlas-act="infoclose" aria-label="Close">‹</button>' +
-        '<span class="atlas-hd"><span class="atlas-ttl">About the Atlas</span></span></div>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">About RadioAnatome</span></span></div>' +
       '<div class="atlas-scroll"><p class="atlas-prose">' +
-        "This atlas is an educational anatomy reference. It is not a diagnostic tool " +
-        "and must not be used to interpret a patient's imaging." +
+        "RadioAnatome is an educational cross-sectional anatomy reference. It is not a " +
+        "diagnostic tool and must not be used to interpret a patient's imaging." +
       "</p>" +
       (credits.length
         ? '<p class="atlas-prose atlas-credit">' + credits.map(esc).join("<br>") + "</p>"
@@ -419,7 +439,102 @@
         (s ? '<img class="atlas-img" id="atlasImg" alt="" src="' + esc(imgUrl(s.img)) + '">' : "") +
         '<div class="atlas-ov" id="atlasOv"></div>' +
       "</div>" +
+      scrubHtml() +
       '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
+  }
+
+  function total() { return (((st.atlas && st.atlas.slices) || []).length) || 0; }
+
+  function scrubHtml() {
+    var n = total();
+    if (!n) return "";
+    return '<div class="atlas-bar">' +
+        '<button class="atlas-gridbtn" data-atlas-act="grid" aria-label="All slices">' + (ico("grid") || "▦") + "</button>" +
+        '<div class="atlas-track" id="atlasTrack">' +
+          trackThumbs(st.atlas, 5).map(function (u) {
+            return '<span class="atlas-tth" style="background-image:url(' + cssUrl(imgUrl(u)) + ')"></span>';
+          }).join("") +
+          '<span class="atlas-play" id="atlasPlay" style="left:' + playheadPct(st.slice, n).toFixed(2) + '%"></span>' +
+          '<input class="atlas-range" id="atlasRange" type="range" min="1" step="1" max="' + n +
+            '" value="' + st.slice + '" aria-label="Slice">' +
+        "</div>" +
+        '<button class="atlas-step" data-atlas-act="prev" aria-label="Previous slice">←</button>' +
+        '<span class="atlas-count" id="atlasCount" aria-live="polite" aria-atomic="true">' + st.slice + "/" + n + "</span>" +
+        '<button class="atlas-step" data-atlas-act="next" aria-label="Next slice">→</button>' +
+      "</div>";
+  }
+
+  function setSlice(i) {
+    var n = total();
+    if (!n) return;
+    i = Math.min(Math.max(Math.round(i), 1), n);
+    if (i === st.slice) return;
+    st.slice = i;
+    st.sel = null;                      // selection is per-slice; Lock survives instead
+    var s = curSlice();
+    var img = G.document.getElementById("atlasImg");
+    if (img && s) img.src = imgUrl(s.img);
+    var c = G.document.getElementById("atlasCount");
+    if (c) c.textContent = i + "/" + n;
+    var r = G.document.getElementById("atlasRange");
+    if (r && +r.value !== i) r.value = i;
+    var p = G.document.getElementById("atlasPlay");
+    if (p) p.style.left = playheadPct(i, n).toFixed(2) + "%";
+    drawOverlay();
+    closeSheet();
+    preloadAround(i);
+  }
+
+  // Keep i±1 and i±2 warm so dragging never shows a white frame.
+  var _pre = {};
+  function preloadAround(i) {
+    var sl = (st.atlas && st.atlas.slices) || [];
+    [i - 2, i - 1, i + 1, i + 2].forEach(function (k) {
+      var s = sl[k - 1];
+      if (!s || _pre[s.img]) return;
+      _pre[s.img] = 1;
+      try { var im = new G.Image(); im.src = imgUrl(s.img); } catch (e) {}
+    });
+  }
+
+  function gridHtml() {
+    var sl = (st.atlas && st.atlas.slices) || [];
+    return '<div class="atlas-grid" id="atlasGrid">' +
+      '<div class="atlas-top"><button class="atlas-back" data-atlas-act="gridclose" aria-label="Close">‹</button>' +
+      '<span class="atlas-hd"><span class="atlas-ttl">All slices</span></span></div>' +
+      '<div class="atlas-scroll"><div class="atlas-grid-in">' + sl.map(function (s) {
+        return '<button class="atlas-gth' + (s.i === st.slice ? " on" : "") + '" data-atlas-act="goto" data-i="' + s.i +
+          '" style="background-image:url(' + cssUrl(imgUrl(String(s.img).replace(/\/([^/]+)$/, "/t/$1"))) +
+          ')" aria-label="Slice ' + s.i + '"><span>' + s.i + "</span></button>";
+      }).join("") + "</div></div></div>";
+  }
+
+  function closeSheet() {}                     // Task 8
+
+  // One 8px threshold does two jobs: it decides scrub-vs-tap, and it sets the dead
+  // zone so tapping a pin never nudges the slice.
+  var SCRUB_MIN_PX = 8, SCRUB_PX_PER_SLICE = 14;
+  function bindStageScrub(stage) {
+    if (stage._atlasBound) return;
+    stage._atlasBound = true;
+    var x0 = 0, base = 0, moved = false, down = false;
+    stage.addEventListener("pointerdown", function (e) {
+      down = true; moved = false; x0 = e.clientX; base = st.slice;
+    });
+    stage.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      var dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < SCRUB_MIN_PX) return;
+      moved = true;
+      setSlice(base + Math.round(dx / SCRUB_PX_PER_SLICE));
+    });
+    function up() { down = false; }
+    stage.addEventListener("pointerup", up);
+    stage.addEventListener("pointercancel", up);
+    // A completed scrub must not also select a pin.
+    stage.addEventListener("click", function (e) {
+      if (moved) { e.stopPropagation(); moved = false; }
+    }, true);
   }
 
   var _ro = null;
@@ -427,6 +542,14 @@
     var stage = G.document.getElementById("atlasStage");
     if (!stage) return;
     drawOverlay();
+
+    var r = G.document.getElementById("atlasRange");
+    if (r && !r._atlasBound) {
+      r._atlasBound = true;
+      r.addEventListener("input", function () { setSlice(+r.value); });
+    }
+    bindStageScrub(stage);
+    preloadAround(st.slice);
     // The SVG is in stage pixels, so it must be rebuilt whenever the stage resizes
     // (rotation, split view, desktop window drag). One observer, reattached per paint.
     if (G.ResizeObserver) {
@@ -463,6 +586,11 @@
     if (a === "mod") return openModule(b.getAttribute("data-atlas-mod"));
     if (a === "info") { dropOverlay("atlasInfo"); return void pushOverlay(infoHtml()); }
     if (a === "infoclose") return dropOverlay("atlasInfo");
+    if (a === "prev") return setSlice(st.slice - 1);
+    if (a === "next") return setSlice(st.slice + 1);
+    if (a === "grid") { dropOverlay("atlasGrid"); return void pushOverlay(gridHtml()); }
+    if (a === "gridclose") return dropOverlay("atlasGrid");
+    if (a === "goto") { setSlice(+b.getAttribute("data-i")); return dropOverlay("atlasGrid"); }
     if (a === "filter") {
       var kind = b.getAttribute("data-kind");
       st[kind === "region" ? "region" : "modality"] = b.getAttribute("data-val") || "";
@@ -516,6 +644,7 @@
   function back() {
     if (!isOpen()) return false;
     if (G.document.getElementById("atlasInfo")) { dropOverlay("atlasInfo"); return true; }
+    if (G.document.getElementById("atlasGrid")) { dropOverlay("atlasGrid"); return true; }
     if (st.view === "viewer") { st.view = "catalog"; st.atlas = null; paint(); return true; }
     close();
     return true;
@@ -540,10 +669,12 @@
   G.ATLAS._state = st;
   G.ATLAS._catalogHtml = catalogHtml;
   G.ATLAS._infoHtml = infoHtml;
+  G.ATLAS._viewerHtml = viewerHtml;
+  G.ATLAS._setSlice = setSlice;
   G.ATLAS._pure = {
     layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
     validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
-    imageBox: imageBox, overlaySvg: overlaySvg
+    imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs
   };
   G.ATLAS._version = "1.0";
 
@@ -551,6 +682,6 @@
     module.exports = {
       layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
       validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
-      imageBox: imageBox, overlaySvg: overlaySvg
+      imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs
     };
 })(typeof window !== "undefined" ? window : this);
