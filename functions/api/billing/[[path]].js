@@ -25,6 +25,7 @@ import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool } from "../../_credits.js";
 import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
 import { deviceLockOn } from "../../_devices.js";
+import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -34,7 +35,7 @@ const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.s
 // Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
 // stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
 function plans(env) {
-  const P = (k, d) => +(env[k] || d);
+  const P = (k, d) => cfgPrice(env, k, d);   // live KV price override > env > default
   return {
     monthly: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), label: "Pro Monthly" },
     annual: { months: 12, amount: P("PRO_PRICE_ANNUAL", 499900), label: "Pro Annual" },
@@ -119,6 +120,19 @@ export async function onRequest(context) {
   const method = request.method;
 
   try {
+    try { await warmBillingCfg(usageKv(env)); } catch (e) {}   // load live price/flag overrides (cached 30s)
+
+    // ---- owner: read / write the live price + flag overrides (KV; no redeploy) ----
+    if (seg === "admin" && sub === "config") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      if (method === "GET") return json({ cfg: await getBillingCfg(usageKv(env)), effective: plans(env), promoUntil: promoUntil(env) });
+      if (method === "POST") {
+        let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+        const next = await setBillingCfg(usageKv(env), { prices: body.prices || {}, flags: body.flags || {} });
+        return json({ ok: true, cfg: next, effective: plans(env), promoUntil: promoUntil(env) });
+      }
+    }
+
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);

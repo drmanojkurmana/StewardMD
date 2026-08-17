@@ -227,6 +227,13 @@
           <div id="pbOverview" class="hint">Loading…</div>
         </div>
         <div class="card">
+          <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Edit prices &amp; flags (live, no redeploy)</b><button class="ghost" id="bcReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:2px 0 8px">Overrides apply across the app within ~30s. Blank a price to revert it to the wrangler.toml default. Flags: On / Off / Default (Default = use env).</div>
+          <div id="bcEditor">Loading…</div>
+          <div class="qa" style="margin-top:10px"><button class="primary" id="bcSave">Save changes</button><button class="ghost" id="bcClear" style="color:var(--red);border-color:var(--red)">Clear ALL overrides</button></div>
+          <div class="msg" id="bcMsg"></div>
+        </div>
+        <div class="card">
           <b>Grant / manage Pro</b>
           <div class="hint" style="margin:2px 0 8px">Enter the doctor's <b>email</b> (or their uid). Granting persists as a Firebase claim and sends them a confirmation email. During the launch promo everyone already has Pro free — these grants take over when the promo ends.</div>
           <label for="proEmail">User email or uid</label>
@@ -663,6 +670,52 @@
   }
   $("pbReload").onclick=pbLoad;
 
+  // ---- Edit prices & flags (live KV overrides) ----
+  var BC_PRICE=[["PRO_PRICE_MONTHLY","Pro /mo"],["PRO_PRICE_ANNUAL","Pro /yr"],["PHYSICIAN_PRICE_MONTHLY","Physician /mo"],["PHYSICIAN_PRICE_ANNUAL","Physician /yr"],["PHYSICIANPRO_PRICE_MONTHLY","Physician Pro /mo"],["PHYSICIANPRO_PRICE_ANNUAL","Physician Pro /yr"],["STUDENT_PRICE_MONTHLY","Trainee /mo"],["STUDENT_PRICE_ANNUAL","Trainee /yr"],["CORESIDENT_PRICE_MONTHLY","Co-Resident /mo"],["ONCO_ADDON_MONTHLY","Onco add-on /mo"],["CLINIC_ADDON_MONTHLY","Extra clinic /mo"],["FOUNDING_PRICE_YEAR","Founding /yr"],["TOKENS_BOOST","Tokens Boost"],["TOKENS_PLUS","Tokens Plus"],["TOKENS_POWER","Tokens Power"]];
+  var BC_FLAG=[["AI_COST_CAP_ON","AI rupee cost cap"],["DEVICE_LOCK_ON","Device-share lock"],["MAIK_ENFORCE_CAPS","AI per-module caps"],["FEATURES_ON","Feature gating"]];
+  var _bcEff={};
+  function bcFlat(pl){ pl=pl||{}; var t=pl.tiers||{},a=pl.addons||{},tk=pl.tokens||{}; return {
+    PRO_PRICE_MONTHLY:t.pro&&t.pro.amount, PRO_PRICE_ANNUAL:t.pro&&t.pro.annual,
+    PHYSICIAN_PRICE_MONTHLY:t.physician&&t.physician.amount, PHYSICIAN_PRICE_ANNUAL:t.physician&&t.physician.annual,
+    PHYSICIANPRO_PRICE_MONTHLY:t.physicianpro&&t.physicianpro.amount, PHYSICIANPRO_PRICE_ANNUAL:t.physicianpro&&t.physicianpro.annual,
+    STUDENT_PRICE_MONTHLY:t.student&&t.student.amount, STUDENT_PRICE_ANNUAL:t.student&&t.student.annual,
+    CORESIDENT_PRICE_MONTHLY:t.coresident&&t.coresident.amount,
+    ONCO_ADDON_MONTHLY:a.onco&&a.onco.amount, CLINIC_ADDON_MONTHLY:a.clinic&&a.clinic.amount,
+    FOUNDING_PRICE_YEAR:pl.founding&&pl.founding.amount,
+    TOKENS_BOOST:tk.boost&&tk.boost.amount, TOKENS_PLUS:tk.plus&&tk.plus.amount, TOKENS_POWER:tk.power&&tk.power.amount }; }
+  function bcLoad(){
+    api("/api/billing/admin/config").then(function(x){
+      if(x.s!==200){ $("bcEditor").innerHTML='<div class="hint">'+(x.s===401?"Not an owner.":"Could not load.")+'</div>'; return; }
+      var cfg=(x.d&&x.d.cfg)||{flags:{},prices:{}}; _bcEff=bcFlat(x.d&&x.d.effective);
+      var flH=BC_FLAG.map(function(f){ var cur=cfg.flags&&cfg.flags[f[0]]; function opt(v,l){ return '<option value="'+v+'"'+(String(cur==null?"":cur)===v?" selected":"")+'>'+l+'</option>'; }
+        return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="flex:1;font-size:12.5px">'+f[1]+'</span><select data-fkey="'+f[0]+'" style="padding:6px">'+opt("","Default")+opt("1","On")+opt("0","Off")+'</select></div>'; }).join("");
+      var promoCur=(cfg.flags&&cfg.flags.PRO_FREE_UNTIL)||"";
+      flH+='<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><span style="flex:1;font-size:12.5px">Launch promo until (blank = env; past date = end promo now)</span><input id="bcPromo" value="'+esc(promoCur)+'" placeholder="env default" style="width:150px;padding:6px"></div>';
+      var prH='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 14px">'+BC_PRICE.map(function(p){ var eff=_bcEff[p[0]], val=(eff!=null?Math.round(eff/100):""); return '<div style="display:flex;align-items:center;gap:6px"><span style="flex:1;font-size:12px">'+p[1]+'</span>₹<input data-pkey="'+p[0]+'" value="'+val+'" inputmode="numeric" style="width:74px;padding:5px"></div>'; }).join("")+'</div>';
+      $("bcEditor").innerHTML='<b style="font-size:13px">Enforcement flags</b>'+flH+'<b style="font-size:13px;display:block;margin-top:10px">Prices (₹, GST-inclusive B2C)</b>'+prH;
+    }).catch(function(){ $("bcEditor").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  function bcSave(){
+    var ed=$("bcEditor"), prices={}, flags={};
+    ed.querySelectorAll("[data-pkey]").forEach(function(inp){ var k=inp.getAttribute("data-pkey"), v=inp.value.trim(); var paise=(v==="")?null:Math.round(parseFloat(v)*100);
+      if(v==="" || !isFinite(paise) || paise===_bcEff[k]) prices[k]=""; else prices[k]=String(paise); });   // unchanged/blank → clear override
+    ed.querySelectorAll("[data-fkey]").forEach(function(sel){ flags[sel.getAttribute("data-fkey")]=sel.value; });
+    flags.PRO_FREE_UNTIL=($("bcPromo").value||"").trim();
+    say("bcMsg","","Saving…");
+    api("/api/billing/admin/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prices:prices,flags:flags})}).then(function(x){
+      if(x.s!==200||!x.d.ok){ say("bcMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); return; }
+      say("bcMsg","ok","✅ Saved. Live across the app within ~30s."); bcLoad(); pbLoad();
+    }).catch(function(){ say("bcMsg","err","Sign in first."); });
+  }
+  function bcClearAll(){
+    if(!confirm("Clear ALL price + flag overrides and revert to the deployed env defaults?")) return;
+    var prices={},flags={}; BC_PRICE.forEach(function(p){prices[p[0]]="";}); BC_FLAG.forEach(function(f){flags[f[0]]="";}); flags.PRO_FREE_UNTIL="";
+    api("/api/billing/admin/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prices:prices,flags:flags})}).then(function(x){
+      if(x.s!==200){ say("bcMsg","err","Failed"); return; } say("bcMsg","ok","✅ All overrides cleared."); bcLoad(); pbLoad();
+    }).catch(function(){ say("bcMsg","err","Sign in first."); });
+  }
+  $("bcReload").onclick=bcLoad; $("bcSave").onclick=bcSave; $("bcClear").onclick=bcClearAll;
+
   // ---- Pro subscriptions ----
   function proAct(spec){
     var v=$("proEmail").value.trim(); if(!v){say("proMsg","err","Enter an email or uid.");return;}
@@ -960,7 +1013,7 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }

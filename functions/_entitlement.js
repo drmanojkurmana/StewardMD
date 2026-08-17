@@ -10,11 +10,12 @@
  */
 import { mergeUserClaims, getUserClaims } from "./_fbadmin.js";
 import { verifyFirebaseToken } from "./_fbauth.js";
+import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 
 const PROMO_UNTIL_DEFAULT = Date.parse("2026-09-15T23:59:59+05:30");   // 15 Sep 2026, 23:59 IST
 
 export function promoUntil(env) {
-  const v = env && env.PRO_FREE_UNTIL;
+  const v = cfgFlag(env, "PRO_FREE_UNTIL");   // live KV override wins over env (lets the owner end the promo now)
   if (v) { const t = /^\d+$/.test(String(v)) ? +v : Date.parse(v); if (t) return t; }
   return PROMO_UNTIL_DEFAULT;
 }
@@ -62,6 +63,7 @@ export function entitlementState(env, claims, now) {
 // Authoritative (fresh) entitlement for a uid — does a server-side claims lookup, so it reflects a
 // grant immediately even before the client's ID token refreshes. Use for /billing/status, not hot gates.
 export async function entitlementFor(env, uid) {
+  try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}
   if (!uid) return entitlementState(env, null);
   let claims = {};
   try { claims = await getUserClaims(env, uid); } catch (e) {}
@@ -112,6 +114,7 @@ function decodeJwtPayload(tok) {
 // token) is still Pro DURING the promo; once the promo ends a guest is never Pro. The pro claim is
 // read from the token payload, trustworthy only because the signature is verified just above.
 export async function proFromRequest(env, request) {
+  try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}   // refresh live promo/flags (cached 30s)
   // Read-only hot gate: verify the token, decide Pro from its claims (promo → paid → trial). A guest
   // (no/invalid token) is Pro ONLY during the launch promo. The trial clock is stamped in
   // entitlementFor (the /billing/status path), not here, so this gate never writes.

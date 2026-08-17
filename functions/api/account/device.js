@@ -9,6 +9,7 @@ import { identify } from "../../_fbauth.js";
 import { getEntitlement, deviceLimit } from "../../_entitlements.js";
 import { registerDevice, listDevices, removeDevice, deviceLockOn } from "../../_devices.js";
 import { usageKv } from "../../_usage.js";
+import { warmBillingCfg } from "../../_billingcfg.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
@@ -18,6 +19,7 @@ export async function onRequest(context) {
   const uid = rawUid(await identify(request, env));
   if (!uid) return json({ error: "signin-required" }, 401);
   const store = usageKv(env);
+  try { await warmBillingCfg(store); } catch (e) {}   // live DEVICE_LOCK_ON override
   let role = null;
   try { const e = await getEntitlement(env, uid); role = e && e.role; } catch (e) {}
   const enforced = deviceLockOn(env);

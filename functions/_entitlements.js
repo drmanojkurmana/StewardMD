@@ -9,6 +9,7 @@ import { usageKv } from "./_usage.js";
 // Call-time-only cycle: _features.js imports getEntitlement from here; safe because these
 // bindings are only dereferenced inside function bodies below, never at module-eval time.
 import { featureKeys, featureAllowed, FEATURE_REGISTRY } from "./_features.js";
+import { cfgFlag } from "./_billingcfg.js";
 
 // Pricing/billing roles. intern & resident & student = trainees (educational V2 Beta content on);
 // physician / physician_pro = attending (clinical V1); co_resident = the ₹299 two-account plan whose
@@ -20,7 +21,7 @@ const COLL = "entitlements";
 // plan) and physician_pro (cloud multi-device) = 2. Env override DEVICE_LIMIT_<ROLE>. See _devices.js.
 export function deviceLimit(env, role) {
   const r = normalizeRole(role);
-  const ov = env && Number(env["DEVICE_LIMIT_" + String(r || "").toUpperCase()]);
+  const ov = Number(cfgFlag(env, "DEVICE_LIMIT_" + String(r || "").toUpperCase()));
   if (Number.isFinite(ov) && ov >= 1) return Math.floor(ov);
   return (r === "co_resident" || r === "physician_pro") ? 2 : 1;
 }
@@ -28,7 +29,7 @@ export function deviceLimit(env, role) {
 // Env override CLINIC_LIMIT_<ROLE>. Beyond the limit = the ₹100/clinic/mo add-on (billed separately).
 export function clinicLimit(env, role) {
   const r = normalizeRole(role);
-  const ov = env && Number(env["CLINIC_LIMIT_" + String(r || "").toUpperCase()]);
+  const ov = Number(cfgFlag(env, "CLINIC_LIMIT_" + String(r || "").toUpperCase()));
   if (Number.isFinite(ov) && ov >= 0) return Math.floor(ov);
   if (r === "physician_pro") return 6;
   if (r === "physician") return 4;

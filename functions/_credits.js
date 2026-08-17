@@ -14,12 +14,13 @@
  * so this changes nothing until the owner flips it (after payment works). Deps-injectable store for tests.
  */
 
+import { cfgFlag } from "./_billingcfg.js";
 function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
 function _nextMidnightMs(now) { const d = new Date(now || Date.now()); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1); }
 function r2(n) { return Math.round(n * 100) / 100; }
 
-export function costCapOn(env) { return String(env && env.AI_COST_CAP_ON) === "1"; }
-export function creditConversion(env) { const v = Number(env && env.CREDIT_CONVERSION); return Number.isFinite(v) && v > 0 && v <= 1 ? v : 0.5; }
+export function costCapOn(env) { return String(cfgFlag(env, "AI_COST_CAP_ON")) === "1"; }
+export function creditConversion(env) { const v = Number(cfgFlag(env, "CREDIT_CONVERSION")); return Number.isFinite(v) && v > 0 && v <= 1 ? v : 0.5; }
 
 // ---- Founding-Doctor annual AI pool (fixed ceiling, one auto-refill) ----
 export function foundingGrant(env) { const v = Number(env && env.FOUNDING_AI_GRANT_INR); return Number.isFinite(v) && v >= 0 ? v : 120; }
@@ -39,8 +40,8 @@ export async function dailyCostCap(env, store, email, role) {
   if (store && email) {
     try { const raw = await store.get("ai:costcap:" + String(email).toLowerCase()); if (raw != null && raw !== "") { const v = Number(raw); if (Number.isFinite(v) && v >= 0) return v; } } catch (e) {}
   }
-  if (role) { const rv = Number(env && env["AI_COST_CAP_" + String(role).toUpperCase()]); if (Number.isFinite(rv) && rv >= 0) return rv; }
-  const gv = Number(env && env.AI_DAILY_COST_CAP_INR);
+  if (role) { const rv = Number(cfgFlag(env, "AI_COST_CAP_" + String(role).toUpperCase())); if (Number.isFinite(rv) && rv >= 0) return rv; }
+  const gv = Number(cfgFlag(env, "AI_DAILY_COST_CAP_INR"));
   return Number.isFinite(gv) && gv >= 0 ? gv : 0;   // 0 = unlimited
 }
 export async function setUserCostCap(store, email, inr) {

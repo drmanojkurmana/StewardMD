@@ -7,11 +7,12 @@
  * ever evicted until the owner flips it. Deps-injectable store; fail-open (never block a real sign-in).
  */
 import { deviceLimit } from "./_entitlements.js";
+import { cfgFlag } from "./_billingcfg.js";
 
 const PFX = "dev:";
 const TTL = 60 * 60 * 24 * 400;   // ~400 days
 
-export function deviceLockOn(env) { return String(env && env.DEVICE_LOCK_ON) === "1"; }
+export function deviceLockOn(env) { return String(cfgFlag(env, "DEVICE_LOCK_ON")) === "1"; }
 
 export async function listDevices(store, uid) {
   if (!store || !uid) return [];
