@@ -115,6 +115,10 @@ FOUNDING_AI_GRANT_INR = "120"
 FOUNDING_AI_REFILL_INR = "120"
 FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily allowance → founding AI draws the annual pool
 FOUNDING_SEATS = "500"
+# Anti-sharing device lock: "1" enforces the signed-in-device limit (1/tier, Co-Resident + Physician Pro 2;
+# override per role via DEVICE_LIMIT_<ROLE>). "0"/unset = record-only, no eviction. Clinic limits per role
+# are code defaults (Pro 2, Physician 4, Physician Pro 6; override via CLINIC_LIMIT_<ROLE>).
+DEVICE_LOCK_ON = "0"
 # AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
 [env.production]
@@ -159,6 +163,7 @@ FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120
 FOUNDING_AI_REFILL_INR = "120"
 FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
 FOUNDING_SEATS = "500"
+DEVICE_LOCK_ON = "0"                  # "1" enforces the anti-sharing device limit (1/tier; Co-Res + Physician Pro 2)
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

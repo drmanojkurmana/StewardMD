@@ -23,6 +23,8 @@ import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
 import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool } from "../../_credits.js";
+import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
+import { deviceLockOn } from "../../_devices.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
@@ -97,12 +99,17 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);
       // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
-      let credits = 0, costCap = 0;
+      let credits = 0, costCap = 0, role = null;
       try {
         const who = await usageIdentify(request, env);
-        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); costCap = await dailyCostCap(env, kv, who.email, state && state.role); }
+        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
-      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env) }, state));
+      try { const ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
+      try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      return json(Object.assign({
+        signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
+        role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
+      }, state));
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.

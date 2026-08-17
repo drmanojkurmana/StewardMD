@@ -75,6 +75,27 @@
   window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, TEST_PRO_EMAILS: [] };
   onChange(function () { try { syncStatus(); } catch (e) {} });   // refresh on sign-in / provider change
 
+  /* -------- Anti-sharing device lock --------
+   * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer
+   * an authorized device (evicted by a newer login beyond the tier's device limit), sign out. INERT
+   * while the flag is off (enforced=false), so this is a no-op today. */
+  function deviceId() {
+    try { var k = "smd_device_id", v = localStorage.getItem(k); if (!v) { v = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + Math.random().toString(36).slice(2)); localStorage.setItem(k, v); } return v; } catch (e) { return "dev0"; }
+  }
+  function checkDevice() {
+    if (!fbUser()) return;
+    Promise.resolve(idToken()).then(function (t) {
+      if (!t) return null;
+      return fetch(apiUrl("/api/account/device"), { method: "POST", headers: { "Authorization": "Bearer " + t, "Content-Type": "application/json" }, body: JSON.stringify({ deviceId: deviceId() }) }).then(function (r) { return r.json(); });
+    }).then(function (d) {
+      if (!d || !d.enforced) return;                       // lock off → never sign out
+      var mine = deviceId(), ok = (d.devices || []).some(function (x) { return x.id === mine; });
+      if (!ok) { try { (window.toast || function () {})("Signed out: this account is active on another device."); } catch (e) {} try { var a = auth(); if (a && a.signOut) a.signOut(); } catch (e) {} }
+    }, function () {});
+  }
+  onChange(function () { try { checkDevice(); } catch (e) {} });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") { try { checkDevice(); } catch (e) {} } });
+
   // Enrich the legacy account object with the real provider + uid (keeps app.js as writer).
   function wrapApply() {
     if (window.SMD_applyGoogleUser && window.SMD_applyGoogleUser._smdWrapped) return true;

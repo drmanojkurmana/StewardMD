@@ -13,8 +13,28 @@ import { featureKeys, featureAllowed, FEATURE_REGISTRY } from "./_features.js";
 // Pricing/billing roles. intern & resident & student = trainees (educational V2 Beta content on);
 // physician / physician_pro = attending (clinical V1); co_resident = the ₹299 two-account plan whose
 // pair shares ONE AI pool (see aiPoolUid / the ai:pool KV mapping the AI meter resolves).
-export const ROLES = ["physician", "physician_pro", "resident", "co_resident", "intern", "student"];
+export const ROLES = ["pro", "physician", "physician_pro", "resident", "co_resident", "intern", "student"];
 const COLL = "entitlements";
+
+// Signed-in device limit per role (anti-sharing lock). 1 for everyone except co_resident (2-account
+// plan) and physician_pro (cloud multi-device) = 2. Env override DEVICE_LIMIT_<ROLE>. See _devices.js.
+export function deviceLimit(env, role) {
+  const r = normalizeRole(role);
+  const ov = env && Number(env["DEVICE_LIMIT_" + String(r || "").toUpperCase()]);
+  if (Number.isFinite(ov) && ov >= 1) return Math.floor(ov);
+  return (r === "co_resident" || r === "physician_pro") ? 2 : 1;
+}
+// Personal-clinic limit per role. None for Free/trainees; Pro 2, Physician 4, Physician Pro 6.
+// Env override CLINIC_LIMIT_<ROLE>. Beyond the limit = the ₹100/clinic/mo add-on (billed separately).
+export function clinicLimit(env, role) {
+  const r = normalizeRole(role);
+  const ov = env && Number(env["CLINIC_LIMIT_" + String(r || "").toUpperCase()]);
+  if (Number.isFinite(ov) && ov >= 0) return Math.floor(ov);
+  if (r === "physician_pro") return 6;
+  if (r === "physician") return 4;
+  if (r === "pro") return 2;
+  return 0;
+}
 
 export function normalizeRole(r) {
   const v = String(r || "").trim().toLowerCase();
