@@ -51,7 +51,14 @@ async def _startup():
     async def _boot():
         def _load():
             try:
-                stt.load(); tts.load(); STATE["ready"] = True
+                stt.load(); tts.load()
+                if cfg.conversational:      # pre-synthesize the greeting/filler so the FIRST call has no warm-up
+                    try:
+                        from .call.conversational import warm
+                        warm(tts, cfg, "te")
+                    except Exception:
+                        pass
+                STATE["ready"] = True
             except Exception as e:  # a model failing to load must not wedge the box; health surfaces the error
                 STATE["ready"] = False
                 STATE["load_error"] = str(e)

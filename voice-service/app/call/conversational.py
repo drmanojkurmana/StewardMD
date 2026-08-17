@@ -25,10 +25,12 @@ HOW TO SPEAK:
   numbers-as-options ("on a scale of 0 to 3" is FORBIDDEN). Ask things the way a family member would.
 - Be very warm, calm, slow and patient. One small, simple question at a time. Keep every reply to ONE short
   sentence.
-- If they seem confused, don't answer, or say "what?" - do NOT move on and do NOT hang up. Gently reassure them,
-  say who you are again in simple words, and ask the SAME thing again even more simply (e.g. instead of
-  "breathlessness" ask "పీల్చుకోవడం కష్టంగా ఉందా?"). Repeat kindly as many times as needed.
-- Never rush them. Silence is fine - wait, then gently encourage them.
+- Introduce yourself ONLY in your very first line. After that, NEVER repeat your name or introduction again -
+  it confuses and annoys them. Always keep the conversation MOVING FORWARD.
+- If they seem confused, only say "hello", or say "what?" - do NOT re-introduce yourself and do NOT hang up.
+  Warmly go straight to asking (or gently re-asking) about their health in the simplest words (e.g. instead of
+  "breathlessness" ask "పీల్చుకోవడం కష్టంగా ఉందా?"). Move to the next thing kindly.
+- Never rush them. Silence is fine - wait, then gently encourage them and continue.
 
 WHAT TO ASK (ask about EVERY item below, one at a time, in plain words - do NOT skip any and do NOT stop early,
 even if they keep saying "I'm fine". Keep a mental note of what you have already asked):
@@ -59,6 +61,33 @@ Reply with STRICT JSON ONLY, nothing else:
   "concern":<true if the patient's latest answer was a worrying/bad one for a heart patient>,
   "emergency":<true only if a danger sign was reported>,
   "complete":<true ONLY after you have asked ALL 6 health checks AND the danger-sign screen, and just said goodbye>}}"""
+
+
+# Fixed, warm opening line per language - pre-synthesized so the patient hears a voice INSTANTLY on answering
+# (no LLM/TTS wait = no dead air = they don't hang up). The LLM takes over from the next line.
+_GREETING = {
+    "te": "నమస్కారం అండీ. నేను మీ ఆసుపత్రి నుంచి నర్స్ మైత్రిని. ఇంటికి వెళ్ళాక మీరు ఎలా ఉన్నారో కనుక్కోవడానికి ఫోన్ చేశాను.",
+    "hi": "नमस्ते जी। मैं आपके अस्पताल से नर्स मैत्री बोल रही हूँ। घर जाने के बाद आप कैसे हैं, यह जानने के लिए फ़ोन किया।",
+    "en": "Hello. I am a nurse from your hospital, calling to see how you are doing since you went home.",
+}
+# A tiny acknowledgement played the instant the patient stops speaking, to mask the STT+LLM+TTS gap.
+_FILLER = {"te": "అలాగా అండీ...", "hi": "अच्छा जी...", "en": "I see..."}
+
+_greeting_cache = {}
+_filler_cache = {}
+
+
+def greeting_text(lang):
+    return _GREETING.get(lang, _GREETING["en"])
+
+
+def warm(tts, cfg, lang="te"):
+    """Pre-synthesize the greeting + filler for a language so the first call has zero warm-up delay."""
+    if lang not in _greeting_cache:
+        _greeting_cache[lang] = tts.synth(greeting_text(lang), lang)
+    if lang not in _filler_cache:
+        _filler_cache[lang] = tts.synth(_FILLER.get(lang, _FILLER["en"]), lang)
+    return _greeting_cache[lang]
 
 
 def _json(text):
@@ -141,10 +170,19 @@ class ConversationalSession:
             return "no_answer"
         self.client.post_status(call_id, {"status": "in_progress"})
 
-        turn = await loop.run_in_executor(None, self.brain.step, None)   # opening greeting
+        lang = self.call.get("lang", "te")
+        # INSTANT greeting: play the pre-synthesized opening immediately (no LLM/TTS wait = no dead air on
+        # answer, so patients don't hang up). Seed it into history so the LLM continues instead of greeting
+        # again, and compute the first question WHILE the greeting audio plays (pipelined - hides LLM latency).
+        greet_pcm = _greeting_cache.get(lang) or await loop.run_in_executor(None, warm, self.tts, self.cfg, lang)
+        self.brain.turns.append(("YOU", greeting_text(lang)))
         self.call["_convo"] = self.brain.turns   # live refs -> /lastcall always shows the current dialogue+facts
         self.call["_facts"] = self.brain.facts
+        think = asyncio.create_task(loop.run_in_executor(None, self.brain.step, None))
+        await self.telephony.play(greet_pcm)
+        turn = await think
         await self._say(turn["reply"])
+
         emergency = False
         silence = 0
         for _ in range(self.cfg.max_convo_turns):
@@ -161,14 +199,19 @@ class ConversationalSession:
                 if silence <= self.cfg.max_silence_nudges:
                     turn = await loop.run_in_executor(
                         None, self.brain.step,
-                        "(the patient has been silent - they may be elderly or confused; gently reassure them, "
-                        "say who you are again simply, and kindly ask the same thing once more in even simpler "
-                        "words. Do NOT hang up.)")
+                        "(the patient has been silent - they may be elderly; gently, warmly encourage them and "
+                        "kindly ask the same thing once more in even simpler words. Do NOT re-introduce yourself, "
+                        "do NOT hang up.)")
                     await self._say(turn["reply"])
                     continue
                 break
             silence = 0
-            transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, self.call.get("lang", "te"))
+            # Respond INSTANTLY with a short "listening" filler while STT runs, so there's no dead gap.
+            filler = _filler_cache.get(lang)
+            transcribe = loop.run_in_executor(None, self.stt.transcribe, pcm, lang)
+            if filler:
+                await self.telephony.play(filler)
+            transcript = await transcribe
             self.call.setdefault("_turns", []).append(
                 {"sec": round(len(pcm) / 2 / 8000, 1), "heard": transcript})
             turn = await loop.run_in_executor(None, self.brain.step, transcript or "(unclear)")
