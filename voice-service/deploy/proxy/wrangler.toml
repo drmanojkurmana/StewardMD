@@ -1,0 +1,11 @@
+# Reverse-proxy Worker so the RunPod GPU can reach the FollowCare API. It calls the Pages project via a
+# SERVICE BINDING (internal, bypasses the edge bot-protection that 403s datacenter IPs), not over HTTP.
+name = "followcare-voice-proxy"
+main = "index.js"
+compatibility_date = "2026-06-27"
+workers_dev = true
+
+# Internal binding to the FollowCare Pages Functions — no edge, no bot check.
+[[services]]
+binding = "PAGES"
+service = "stewardmd"
