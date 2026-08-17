@@ -6,6 +6,10 @@ export { VoiceCall };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json" } });
 const PAGES_BASE = "https://stewardmd.pages.dev/api/followcare";
 
+// The DO must run NEAR Sarvam + the caller (India) or every STT/TTS/LLM hop crosses an ocean = lag.
+const doStub = (env, callId) =>
+  env.VOICE.get(env.VOICE.idFromName(callId), { locationHint: env.VOICE_DO_LOCATION || "apac" });
+
 function answerXml(wssUrl, fmt, rate) {
   const ct = fmt === "mulaw" ? `audio/x-mulaw;rate=${rate}` : `audio/x-l16;rate=${rate}`;
   return `<?xml version="1.0" encoding="UTF-8"?><Response>`
@@ -44,7 +48,7 @@ export default {
     // The bidirectional audio WebSocket -> route to the DO instance for this call.
     if (path.startsWith("/plivo/stream/")) {
       const callId = decodeURIComponent(path.split("/").pop() || "");
-      return env.VOICE.get(env.VOICE.idFromName(callId)).fetch(request);
+      return doStub(env, callId).fetch(request);
     }
     if (path === "/plivo/hangup") return json({ ok: true });
 
@@ -65,7 +69,7 @@ export default {
         if (body.lang) call.lang = body.lang;
         if (body.phone) call.phone = body.phone;
         if (!call.callId) call.callId = "call-" + Date.now();
-        await env.VOICE.get(env.VOICE.idFromName(call.callId)).fetch("https://do/prepare",
+        await doStub(env, call.callId).fetch("https://do/prepare",
           { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ call }) });
         if (body.dryDial) { out.push({ callId: call.callId, prepared: true }); continue; }  // offline WS test - no phone
         out.push({ callId: call.callId, phone: call.phone, plivo_ok: await plivoOriginate(env, call.phone, call.callId, base) });
@@ -78,7 +82,7 @@ export default {
       if ((request.headers.get("X-Voice-Token") || "") !== (env.FOLLOWCARE_VOICE_SERVICE_TOKEN || ""))
         return json({ error: "unauthorized" }, 401);
       const callId = decodeURIComponent(path.split("/").pop() || "");
-      return env.VOICE.get(env.VOICE.idFromName(callId)).fetch("https://do/debug");
+      return doStub(env, callId).fetch("https://do/debug");
     }
 
     if (path === "/health") return json({ ok: true });

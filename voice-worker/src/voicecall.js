@@ -125,7 +125,8 @@ export class VoiceCall {
       mode = "done";
       await this.pages("/voice/result", { episodeId: this.call?.episodeId, callId: this.call?.callId,
         answers: brain.facts, status: status || "completed", durationMs: Date.now() - started,
-        ambulanceRequested: false, emergency });
+        ambulanceRequested: false, emergency, patientStatement: brain.doctorNote || "",
+        transcript: this.log, conversational: true });
       try { ws.close(); } catch {}
     };
 

@@ -4,9 +4,9 @@ const LANGNAME = { te: "Telugu", hi: "Hindi", en: "English", ta: "Tamil", kn: "K
   mr: "Marathi", gu: "Gujarati", bn: "Bengali", pa: "Punjabi", od: "Odia" };
 
 const GREETING = {
-  te: "నమస్కారం అండీ. నేను మీ ఆసుపత్రి నుంచి నర్స్ మైత్రిని. ఇంటికి వెళ్ళాక మీరు ఎలా ఉన్నారో కనుక్కోవడానికి ఫోన్ చేశాను.",
-  hi: "नमस्ते जी। मैं आपके अस्पताल से नर्स मैत्री बोल रही हूँ। घर जाने के बाद आप कैसे हैं, यह जानने के लिए फ़ोन किया।",
-  en: "Hello. I am a nurse from your hospital, calling to see how you are doing since you went home.",
+  te: "నమస్కారం అండీ. నేను మీ ఆసుపత్రి నుంచి నర్స్ మైత్రిని.",
+  hi: "नमस्ते जी। मैं आपके अस्पताल से नर्स मैत्री बोल रही हूँ।",
+  en: "Hello, I am a nurse calling from your hospital.",
 };
 export const greetingText = (lang) => GREETING[lang] || GREETING.en;
 
@@ -32,13 +32,20 @@ REACT CLINICALLY: once CONFIRMED, weight up, swelling, breathless, cannot lie fl
 BAD - give a short CONCERNED line ("అయ్యో... జాగ్రత్త") and say you will tell the doctor. NEVER say "good/nice"
 to a truly bad answer. Reassure warmly when it is fine.
 
-CLOSE decisively as soon as the points are covered:
-- All fine: warmly say "త్వరగా కోలుకోండి, జాగ్రత్తగా ఉండండి" and finish.
+NEVER repeat a question you already asked and got ANY answer to - always move forward to the next point. If you
+truly cannot understand after ONE try, gently move on to the next thing anyway.
+
+BEFORE your final goodbye, ask ONCE (in ${language}): "Is there anything else you want me to tell your doctor?"
+Put whatever they say (or nothing) in "doctor_note" - this message is delivered to their doctor.
+
+CLOSE decisively right after that:
+- All fine: warmly say "త్వరగా కోలుకోండి, జాగ్రత్తగా ఉండండి" (in ${language}) and finish.
 - Something worrying: say you will inform their doctor now, then finish.
 - A danger sign: comfort them, say you will alert the doctor at once and send an ambulance.
 
 Reply STRICT JSON only:
 {"reply":"<one short simple sentence in ${language}>","facts":{...plain facts gathered so far...},
+  "doctor_note":"<any free message the patient wants passed to their doctor, else empty>",
   "emergency":<true only for a danger sign>,"complete":<true only when you just gave a closing/goodbye line>}`;
 }
 
@@ -55,6 +62,7 @@ export class Brain {
     this.cfg = cfg;
     this.turns = [];   // [["PATIENT"|"YOU", text]]
     this.facts = {};
+    this.doctorNote = "";   // free "anything else for the doctor?" message -> delivered to the doctor
     this.system = buildSys(cfg.agentName, LANGNAME[call.lang] || "Telugu",
       call.disease || "their condition", call.dayOffset || 1);
   }
@@ -76,6 +84,7 @@ export class Brain {
     if (!reply) reply = this.cfg.convoFallback;
     this.turns.push(["YOU", reply]);
     if (data.facts && typeof data.facts === "object") Object.assign(this.facts, data.facts);
+    if (data.doctor_note) this.doctorNote = String(data.doctor_note);
     return { reply, emergency: !!data.emergency, complete: !!data.complete, facts: this.facts };
   }
 }
