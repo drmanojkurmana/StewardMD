@@ -8,6 +8,11 @@
 <!-- Cashier / billing station (lean MVP). Reuses the staff session from the OPD console (sign in at
      /opd first). Look up a patient by their SMD id, review unbilled orders, generate an invoice, mark
      paid. Inert unless CLINIC_BILLING_ENABLED=1 server-side. ?mock=1 for a no-auth demo. -->
+<!-- Firebase (same app as /opd): a clinic OWNER signs in with Google there; that session persists to this
+     same-origin page, so we can mint a Bearer id-token here. Staff cashiers use the X-Staff-Token path instead. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>try{ firebase.initializeApp({ apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain:"stewardmd-498ec.firebaseapp.com", projectId:"stewardmd-498ec", appId:"1:911280405587:web:d09038e15e98d69dc79aa6" }); }catch(e){}</script>
 <style>
   @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
   @font-face{ font-family:'Material Symbols Rounded'; font-style:normal; font-weight:300 700; font-display:block; src:url(/assets/fonts/material-symbols-rounded.woff2) format('woff2'); }
@@ -73,12 +78,15 @@
   function rupees(p){ return "₹" + (Math.round(p||0)/100).toFixed(2); }
   function initials(n){ return String(n||"?").trim().split(/\s+/).slice(0,2).map(function(w){return w[0]||"";}).join("").toUpperCase() || "?"; }
 
+  function fbToken(){ try { var a=firebase&&firebase.auth&&firebase.auth(); var u=a&&a.currentUser; return (u&&u.getIdToken)?u.getIdToken().catch(function(){return "";}):Promise.resolve(""); } catch(e){ return Promise.resolve(""); } }
   function api(path, opts){
     opts = opts || {};
     var h = { "Content-Type": "application/json" };
-    if (tt !== "firebase" && tok) h["X-Staff-Token"] = tok;
-    return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
-      .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); });
+    var send = function(){ return fetch("/api/queue/bill/" + path, { method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+      .then(function(r){ return r.json().catch(function(){ return { ok:false, error:"bad_response" }; }); }); };
+    if (tt === "firebase") return fbToken().then(function(t){ if(t) h["Authorization"]="Bearer "+t; return send(); });   // clinic owner: mint an id-token like /opd does
+    if (tok) h["X-Staff-Token"] = tok;   // staff cashier session
+    return send();
   }
 
   function lookupView(prefill){
@@ -154,7 +162,12 @@
       orders: [ { id:"o1", kind:"investigation", name:"Complete Blood Count", qty:1, unitPrice:15050 },
                 { id:"o2", kind:"investigation", name:"Random Blood Sugar", qty:1, unitPrice:8000 },
                 { id:"o3", kind:"medication", name:"Amoxicillin 500mg", qty:15, unitPrice:400 } ] });
-  } else if (!tok && tt !== "firebase") {
+  } else if (tt === "firebase") {
+    // Clinic owner: the Google session restores asynchronously - wait for it before the first authed call.
+    app.innerHTML = '<section class="card"><div class="msg">'+ms("hourglass_empty")+'Loading…</div></section>';
+    var signInPrompt = function(){ app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>'; };
+    try { firebase.auth().onAuthStateChanged(function(u){ if(u) lookupView(); else signInPrompt(); }); } catch(e){ lookupView(); }
+  } else if (!tok) {
     app.innerHTML = '<section class="card"><div class="msg">'+ms("lock")+'Please sign in at the OPD console first, then reopen this page.</div><a class="btn" href="/opd" style="text-decoration:none">'+ms("open_in_new")+'Open OPD console</a></section>';
   } else {
     lookupView();
