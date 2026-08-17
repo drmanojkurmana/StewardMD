@@ -90,5 +90,85 @@ for (const m of cat.modules) {
   ok("shipped atlas " + m.id + " renders no attribution", !a.provenance || typeof a.provenance === "object");
 }
 
+// --- overlay lifecycle (DOM-stubbed, mirroring test/dialog-motion.test.mjs) ---
+function fakeDom() {
+  const mk = (tag) => {
+    const cl = new Set();
+    const el = {
+      tagName: tag, id: "", className: "", innerHTML: "", style: {}, children: [],
+      classList: {
+        add: (...c) => c.forEach((x) => cl.add(x)),
+        remove: (...c) => c.forEach((x) => cl.delete(x)),
+        contains: (c) => cl.has(c),
+        toggle: (c, on) => (on ? cl.add(c) : cl.delete(c))
+      },
+      appendChild(c) { this.children.push(c); if (c.id) byId[c.id] = c; return c; },
+      removeChild(c) { this.children = this.children.filter((x) => x !== c); return c; },
+      addEventListener() {}, removeEventListener() {},
+      querySelector: () => null, querySelectorAll: () => [],
+      closest: () => null, setAttribute() {}, getAttribute: () => null, focus() {}
+    };
+    return el;
+  };
+  const byId = {};
+  const body = mk("body");
+  return {
+    body,
+    activeElement: null,
+    createElement: mk,
+    getElementById: (id) => byId[id] || null,
+    addEventListener() {}, querySelector: () => null, querySelectorAll: () => []
+  };
+}
+
+const doc2 = fakeDom();
+const win = {
+  document: doc2,                       // atlas.js reaches the DOM via G.document
+  addEventListener() {},
+  ResizeObserver: class { observe() {} disconnect() {} },
+  SMD_hideHome() { win._hidHome = true; win._homeVisible = false; },
+  SMD_showHome() { win._shownHome = true; win._homeVisible = true; }
+};
+const mod2 = { exports: {} };
+new Function("window", "document", "module", SRC)(win, doc2, mod2);
+const A = win.ATLAS;
+
+ok("exposes open/close/isOpen/back", A && ["open", "close", "isOpen", "back"].every((k) => typeof A[k] === "function"));
+ok("starts closed", A.isOpen() === false);
+ok("back() on a closed atlas declines", A.back() === false);
+A.open();
+ok("open() creates the root", !!doc2.getElementById("smdAtlas"));
+ok("open() turns the root on", doc2.getElementById("smdAtlas").classList.contains("on"));
+ok("open() reports open", A.isOpen() === true);
+ok("open() hides the home layer", win._hidHome === true);
+ok("open() locks the body", doc2.body.classList.contains("atlas-lock"));
+ok("open() with no id shows the catalog", A._state.view === "catalog");
+ok("root carries the overlay class", doc2.getElementById("smdAtlas").className.indexOf("atlas-overlay") >= 0);
+
+A.open("brain-mri-axial-t1");
+ok("open(id) switches to the viewer", A._state.view === "viewer");
+ok("open(id) records the module", A._state.moduleId === "brain-mri-axial-t1");
+ok("open(id) starts at slice 1", A._state.slice === 1);
+ok("open(id) clears any prior selection", A._state.sel === null && A._state.locked === null);
+ok("back() from the viewer returns to the catalog", A.back() === true && A._state.view === "catalog");
+ok("back() from the catalog closes", A.back() === true && A.isOpen() === false);
+
+A.open();
+A.close();
+ok("close() turns the root off", doc2.getElementById("smdAtlas").classList.contains("on") === false);
+ok("close() reports closed", A.isOpen() === false);
+ok("close() unlocks the body", doc2.body.classList.contains("atlas-lock") === false);
+// open() hides the home layer; close() MUST restore it or the user is stranded on a
+// blank page (the exact bug home.js documents on SMD_showHome for Ward Sync).
+ok("close() restores the home layer", win._shownHome === true);
+ok("home is visible again after a full open/close cycle",
+   (A.open(), A.close(), win._homeVisible === true));
+ok("back() to close also restores home",
+   (win._homeVisible = false, A.open(), A.back(), win._homeVisible === true));
+ok("open() is idempotent", (A.open(), A.open(), A.isOpen() === true));
+ok("close() is idempotent", (A.close(), A.close(), A.isOpen() === false));
+ok("reopening reuses the same root", (A.open(), doc2.body.children.filter((c) => c.id === "smdAtlas").length === 1));
+A.close();
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

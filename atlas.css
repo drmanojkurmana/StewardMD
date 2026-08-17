@@ -1,0 +1,32 @@
+/* Anatomy Atlas — educational cross-sectional viewer.
+   Mirrors the .oh-overlay contract from onco-home.css. `display:none` when closed is
+   load-bearing: swipe-back.js walks ancestors and correctly skips back controls
+   inside a hidden overlay, so a visibility-only hide would steal the gesture. */
+.atlas-overlay {
+  position: fixed; inset: 0; z-index: 880;
+  background: #000; color: #f2f2f2;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.atlas-overlay.on { display: flex; animation: atlasIn .25s ease; }
+@keyframes atlasIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+body.atlas-lock { overflow: hidden; }
+
+.atlas-top { display: flex; align-items: center; gap: 10px; padding: 10px 12px; flex: 0 0 auto; }
+.atlas-back {
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 50%; border: 0;
+  background: #1e1e1e; color: #f2f2f2;
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.atlas-hd { display: flex; flex-direction: column; min-width: 0; }
+.atlas-ttl { font-weight: 700; font-size: 17px; }
+.atlas-sub { font-size: 12px; opacity: .65; }
+
+.atlas-foot {
+  flex: 0 0 auto; padding: 6px 12px 10px; text-align: center;
+  font-size: 11px; opacity: .5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-overlay.on { animation: none; }
+}

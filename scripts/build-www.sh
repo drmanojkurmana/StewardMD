@@ -81,6 +81,14 @@ done
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).
 [ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
 # MaiK Ask clinical pathways (fetched at runtime by pathways.js SMD_PATHWAYS.loadAll)
+# Anatomy Atlas: ship the JSON (small) but NOT the .webp slices (~2 MB/module) --
+# those stay on Pages and atlas.js rewrites their URLs when running natively,
+# mirroring kardiox-screens.js kxImg(). To bundle them for offline, add a cp here.
+if [ -d atlas ]; then
+  mkdir -p "$WWW/atlas"
+  cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
+  for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
+fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,

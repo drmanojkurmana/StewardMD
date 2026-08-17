@@ -472,7 +472,8 @@
   function goHome() {
     // 1) Close every module via its own API (resets internal state + restores body scroll).
     var apis = [
-      window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
+      window.ATLAS && window.ATLAS.close,
+    window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
       window.MEDCALC && window.MEDCALC.close, window.INF && window.INF.close,
       window.MEDDB && window.MEDDB.close, window.SB && window.SB.closeRef,
       window.SB && window.SB.close, window.ABG && window.ABG.close,
@@ -722,6 +723,7 @@
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
+    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("Atlas loading…"); },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("Onco Home loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
     // launch the existing module (OPD queue, ICU, Ward Sync, FollowCare).
@@ -1365,6 +1367,7 @@
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
+    { act: "atlas", ic: "body_system", tt: "Atlas", sub: "Anatomy" },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

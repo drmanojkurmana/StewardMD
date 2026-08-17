@@ -136,9 +136,144 @@
     return order.map(function (r) { return { region: r, modules: by[r] }; });
   }
 
+  /* ---------- layout constants ---------- */
+  // Declared once, in the pure block, so the Node tests see them too.
+  var GAP_PCT = 6.5, PAD_PCT = 2, LABEL_CHARS = 13, LABEL_LINES = 2, GUTTER_PX = 90;
+
+  /* ---------- state ---------- */
+
+  var st = {
+    view: "catalog",   // "catalog" | "viewer"
+    moduleId: null,
+    slice: 1,
+    sel: null,         // selected structure id
+    locked: null,      // structure id kept highlighted across slices
+    hidden: {},        // { structureId: true }
+    catalog: null,     // modules.json
+    atlas: null,       // current module's atlas.json
+    region: "",
+    modality: ""
+  };
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Guarded because home.js (which owns the icon catalog) loads after this file.
+  function ico(n, c) {
+    try { return (G.ICONS && G.ICONS.get) ? G.ICONS.get(n, c) : ""; } catch (e) { return ""; }
+  }
+
+  function rootEl() {
+    if (!G.document) return null;
+    var el = G.document.getElementById("smdAtlas");
+    if (!el) {
+      el = G.document.createElement("div");
+      el.id = "smdAtlas";
+      el.className = "atlas-overlay";
+      G.document.body.appendChild(el);
+    }
+    return el;
+  }
+
+  /* ---------- data ---------- */
+
+  function loadCatalog() {
+    if (st.catalog) return Promise.resolve(st.catalog);
+    if (!G.fetch) return Promise.resolve({ modules: [] });
+    return G.fetch("/atlas/modules.json")
+      .then(function (r) { return (r && r.ok) ? r.json() : null; })
+      .then(function (j) { st.catalog = j || { modules: [] }; return st.catalog; })
+      .catch(function () { st.catalog = { modules: [] }; return st.catalog; });
+  }
+
+  // Unlike the house fire-and-forget idiom, the viewer must not paint before its
+  // module JSON resolves, or the first slice renders with no labels.
+  function loadModule(id) {
+    if (!G.fetch) return Promise.resolve(null);
+    return G.fetch("/atlas/" + id + "/atlas.json")
+      .then(function (r) { return (r && r.ok) ? r.json() : null; })
+      .then(function (j) { st.atlas = j; return j; })
+      .catch(function () { st.atlas = null; return null; });
+  }
+
+  /* ---------- render ---------- */
+
+  function paint() {
+    var el = rootEl();
+    if (!el) return;
+    el.innerHTML = st.view === "viewer" ? viewerHtml() : catalogHtml();
+    if (st.view === "viewer") afterViewerPaint();
+  }
+
+  function catalogHtml() { return ""; }        // Task 4
+  function viewerHtml() { return ""; }         // Task 5
+  function afterViewerPaint() {}               // Task 5
+
+  // Extended by later tasks. Present now so the overlay is never a dead end.
+  function onClick(e) {
+    var b = e.target && e.target.closest && e.target.closest("[data-atlas-act]");
+    if (!b) return;
+    var a = b.getAttribute("data-atlas-act");
+    if (a === "close") return back();
+  }
+
+  /* ---------- lifecycle ---------- */
+
+  function open(moduleId) {
+    var el = rootEl();
+    if (!el) return;
+    st.sel = null; st.locked = null; st.hidden = {};
+    try { if (G.SMD_hideHome) G.SMD_hideHome(); } catch (e) {}
+    el.removeEventListener("click", onClick);
+    el.addEventListener("click", onClick);
+    el.classList.add("on");
+    G.document.body.classList.add("atlas-lock");
+    if (moduleId) {
+      st.view = "viewer"; st.moduleId = moduleId; st.slice = 1; st.atlas = null;
+      paint();
+      loadModule(moduleId).then(paint);
+    } else {
+      st.view = "catalog";
+      paint();
+      loadCatalog().then(paint);
+    }
+  }
+
+  function close() {
+    var el = G.document && G.document.getElementById("smdAtlas");
+    if (el) el.classList.remove("on");
+    if (G.document) G.document.body.classList.remove("atlas-lock");
+    // open() hid the home layer, so close() MUST bring it back or the user is
+    // stranded on a blank page (same reason Ward Sync calls this on its back
+    // button — see the SMD_showHome comment in home.js). showV2 only re-adds the
+    // home layer underneath, so anything legitimately on top is unaffected.
+    try { if (G.SMD_showHome) G.SMD_showHome(); } catch (e) {}
+    st.view = "catalog"; st.sel = null;
+  }
+
+  function isOpen() {
+    var el = G.document && G.document.getElementById("smdAtlas");
+    return !!(el && el.classList.contains("on"));
+  }
+
+  // Two-level back: viewer -> catalog -> decline. swipe-back.js consults this.
+  function back() {
+    if (!isOpen()) return false;
+    if (st.view === "viewer") { st.view = "catalog"; st.atlas = null; paint(); return true; }
+    close();
+    return true;
+  }
+
   /* ---------- exports ---------- */
 
   G.ATLAS = G.ATLAS || {};
+  G.ATLAS.open = open;
+  G.ATLAS.close = close;
+  G.ATLAS.isOpen = isOpen;
+  G.ATLAS.back = back;
+  G.ATLAS._state = st;
   G.ATLAS._pure = {
     layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
     validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion
