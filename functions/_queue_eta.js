@@ -16,7 +16,7 @@ const NEXT = {
   registered:      ["waiting", "called", "in_consultation", "cancelled", "no_show"],
   waiting:         ["called", "in_consultation", "cancelled", "no_show"],
   called:          ["in_consultation", "waiting", "no_show", "cancelled"],
-  in_consultation: ["completed", "investigation", "followup", "cancelled"],
+  in_consultation: ["completed", "investigation", "followup", "cancelled", "waiting"],
   investigation:   ["waiting", "called", "in_consultation", "completed", "followup", "cancelled"],
   followup:        ["completed", "cancelled"],
   completed:       [],
