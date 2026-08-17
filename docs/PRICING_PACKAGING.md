@@ -22,6 +22,7 @@ Date: 2026-08-17 · Applies to: mobile app (iOS/Android) + web · 🔧 = still t
 
 `functions/_ai_usage.js`, ₹ per 1,000 tokens:
 
+**Cheap — text AI (under the daily rupee cap):**
 | Action | Approx cost to us |
 |---|---|
 | MaiK quick answer | ₹0.03 |
@@ -29,10 +30,18 @@ Date: 2026-08-17 · Applies to: mobile app (iOS/Android) + web · 🔧 = still t
 | Research / evidence | ₹0.10–0.15 |
 | Patient summary | ₹0.09 |
 | **Imaging read** (FundX/KardioX/ThoreX/SknX/OCR) | **₹0.35–0.50 each** |
-| Voice / Scribe (on-device Whisper) | **₹0.00** |
+| Voice **dictation** (on-device Whisper, plain STT) | **₹0.00** |
 | KB search, calculators, drug DB, reasoning | ₹0.00 |
 
-Every individual tier below now clears the margin test in Principle 4.
+**Expensive — per-patient AI (metered SEPARATELY: monthly quota + credits, NOT under the daily text cap):**
+| Action | Approx cost to us |
+|---|---|
+| **AI OPD voice consult / MaiK Scribe** (ambient + diarization + LLM structuring) | **₹3–5 per patient** |
+| **FollowCare** — one voice call | **₹4 per patient / call** |
+| **FollowCare** — SMS | **₹1 per SMS** (7-day follow-up ≈ 7 SMS ≈ ₹7/patient) |
+| → FollowCare episode (1 call + 7-day SMS) | **≈ ₹11 per patient** |
+
+Why the split matters: a busy OPD doctor scribing 30 patients/day at ₹4 each = ₹120/day = ₹3,600/mo — that can never sit under a flat cap. So voice consult and FollowCare each get their own **monthly included quota + credit overage**; only text AI runs off the daily rupee cap.
 
 ---
 
@@ -56,27 +65,35 @@ Every individual tier below now clears the margin test in Principle 4.
 
 ## 4. INDIVIDUAL plans (B2C — web + app) — FINAL
 
-Ladder: **Free → Student ₹199 → Pro ₹599 → Ultimate ₹1,499.**
+Ladder: **Free → Student ₹199 → Pro ₹599 → Physician Pro ₹1,499.** (Physician Pro = the former "Ultimate", role `physician_pro`.)
 
-| | **Free** | **Student** | **Co-Resident** | **Pro** ⭐ | **Ultimate** |
+| | **Free** | **Student** | **Co-Resident** | **Pro** ⭐ | **Physician Pro** |
 |---|---|---|---|---|---|
 | **Monthly** | ₹0 | **₹199** | **₹299** (2 accts) | **₹599** | **₹1,499** |
 | **Annual** 🔧 | — | ₹1,999 | ₹2,999 | ₹4,999 | ₹14,999 |
-| **AI cost cap/day** | ₹0.50 | ₹5 | ₹6 pooled | **₹10** | **₹25** |
-| **Max AI exposure/mo** | ₹15 | ₹150 | ₹180 | ₹300 | ₹750 |
-| **Gross contribution** | — | ~₹45 | ~₹119 | **~₹299** | **~₹749** |
+| **Text AI cost cap/day** | ₹0.50 | ₹5 | ₹6 pooled | **₹10** | **₹25** |
 | MaiK (all text modes) | taste | ✅ | ✅ pooled | ✅ | ✅ |
-| Scribe (voice→EMR) | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Voice **dictation** (on-device) | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Patient Summary | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Research / evidence | taste | educational | 10/day | 10/day | unlimited* |
 | **Imaging AI reads/day** | ❌ | ❌ (Learn atlas only) | **4/day each** | **5/day** | **20/day / fair-use** |
 | Priority reasoning model (2.5-pro) | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Cross-device sync + Lab Watch + wearable | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Personal Clinic — on-device + own **Google Drive** backup | ❌ | ❌ | ❌ | ✅ | ✅ |
+| **Personal Clinic — Cloud Sync (we store PHI, multi-device)** | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **MaiK Ask** (AI-guided patient history) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **MaiK Scribe in OPD / AI voice consult** | ❌ | ❌ | ❌ | ❌ | ✅ 60/mo incl† |
+| **FollowCare** (post-discharge) | ❌ | ❌ | ❌ | ❌ | ✅ 20 pts/mo incl† |
+| **Clinic Billing** (invoices) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Lab Watch + wearable | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Earliest access (FundX/KardioX/ThoreX/SknX) | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 \*subject to the daily rupee cap. Over any cap → **buy credits** (₹50→₹25, built), upgrade, or wait for midnight reset. No hard lockout, ever.
 
-**Who:** Student = verified trainee (NMC-trainee/college proof required, so attendings can't take the cheap tier). Co-Resident = two trainees, one shared AI pool (built) — "split StewardMD with your co-resident." Each account gets **4 imaging reads/day**; total cost is still governed by the shared ₹6/day pool (heavy imaging days consume the pool and can be topped up with credits), so cost stays capped.
+†**Per-patient AI is metered separately from the daily text cap** (it costs ₹3–5/voice-consult and ~₹11/FollowCare-patient). Physician Pro includes 🔧 **60 voice consults/mo** and 🔧 **20 FollowCare patients/mo**; beyond that, pay-per-use from credits (~₹5/consult, ~₹15/FollowCare patient). This keeps Physician Pro profitable even for a high-volume OPD (the quotas cap our per-patient exposure; heavy users pay for the overage). *Build note: the text cost-cap + credits are shipped; these two **monthly per-patient quotas + credit-overage need wiring** before go-live (new meters `scribe:consults:<uid>:<month>` and `followcare:pts:<uid>:<month>`, same pattern as the built daily meter).*
+
+**Physician Pro margin check:** net ~₹1,270 after GST. Included cost ceiling ≈ 60×₹4 (voice ₹240) + 20×₹11 (FollowCare ₹220) + text (typ. ₹100) ≈ ₹560 → **~₹710 contribution (~56%)**; the two quotas guarantee it can't invert.
+
+**Who:** Student = verified trainee (NMC-trainee/college proof required). Co-Resident = two trainees, one shared AI pool — "split StewardMD with your co-resident." Each account gets **4 imaging reads/day**; total cost is still governed by the shared ₹6/day pool.
 
 **Trial:** 🔧 14 days (started ≤ cutover) / 7 days after. Built; `TRIAL14_UNTIL` default 15 Sep 2026 — *confirm the Sep 15 vs Sep 25 gap.*
 
@@ -86,8 +103,8 @@ Ladder: **Free → Student ₹199 → Pro ₹599 → Ultimate ₹1,499.**
 
 Oncology is monetized: **only disease reference + AJCC/TNM staging are free** (the hook). Everything clinical-decision in onco is the **Physician Onco** pack.
 
-- **Physician Onco — +₹89/month** (add-on to Pro or Ultimate). Ultimate + Onco = **₹1,588/mo**. 🔧 annual +₹899/yr.
-- **Unlocks (the treatment-planning workflow):** Treatment-Plan Protocols, Protocol Library + Reference, OncoTree navigator, recommend engine, evidence overlay, favorites, TallMan.
+- **Physician Onco — +₹89/month, on Physician Pro.** Physician Pro + Onco = **₹1,588/mo**. 🔧 annual +₹899/yr.
+- **Unlocks: OncoTree navigator + ONCQIS** (the oncology treatment-planning workflow): Treatment-Plan Protocols, Protocol Library + Reference, OncoTree navigator, recommend engine, evidence overlay, favorites, TallMan.
 - **Stays free:** Onco disease/KB reference, AJCC/TNM staging, **CTCAE toxicity grading, IO toxicity (irAE), RECIST 1.1, onco drug info + interactions** (reference & safety tools — cheap, deterministic, safety-relevant).
 - **Hospital:** onco **treatment-plan execution** (role-split doctor/nurse: protocol assign, cycles, administration) is part of the Hospital team platform (§6), not the individual add-on.
 
@@ -145,7 +162,7 @@ Illustrative (🔧):
 
 ## 7. Feature → tier matrix (A–Z, updated)
 
-Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Physician Onco add-on · **H**=Hospital · **+**=paid add-on · 💰=AI-metered.
+Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Physician Pro · **O**=Physician Onco add-on · **H**=Hospital · **+**=paid add-on · 💰=AI-metered.
 
 | Feature | Tier | Note |
 |---|---|---|
@@ -168,15 +185,19 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 | KardioX ECG AI | **U/H** 💰 | Learn atlas **F/S** |
 | ICU workstation + collaboration | **H** | |
 | Lab Watch 24/7 | **P/U** (solo) / **H** | |
-| **Personal OPD / My Clinic** (on-device: patient list, queue, consult EMR) | **F** 1 device → backup/sync **P/U** | solo doctor; local = ₹0 to serve |
-| OPD Ask MaiK (AI Dx/Mx/Rx suggestions in the consult) | **P/U** 💰 | AI = metered |
+| **Personal OPD / My Clinic** (on-device: patient list, queue, consult EMR) | **F** 1 device | local = ₹0 to serve |
+| Personal Clinic — own **Google Drive** backup (user's Drive, no PHI on us) | **P** | cheap |
+| Personal Clinic — **Cloud Sync (we store PHI, multi-device)** | **U** | our storage + DPDP liability |
+| OPD Ask MaiK (AI Dx/Mx/Rx suggestions in the consult) | **U** 💰 | AI = metered |
 | Hospital OPD Queue (multi-staff + GHIS/Connect + display + billing) | **H** | billing add-on; team product |
 | **Onco: disease ref + staging + CTCAE + IO-tox + RECIST + drug interactions** | **F** | reference & safety |
 | **Onco: protocols / library / OncoTree / recommend / evidence overlay** | **O** (+₹89) | treatment-planning workflow |
 | **Onco: treatment-plan execution (role-split)** | **H** | team |
 | Connect — Ward Sync (basic) | **H** | |
 | Connect — full interop + AI mapping | **H**-Ultimate / **+** 💰 | |
-| FollowCare (post-discharge) | **H** (Ultimate incl / **+**) | |
+| FollowCare (post-discharge) | **U** 20 pts/mo incl → credits · **H** (Ultimate incl / **+**) | ₹11/patient episode |
+| MaiK Scribe in OPD / AI voice consult | **U** 60/mo incl → credits · **H** 💰 | ₹3–5/patient |
+| MaiK Ask (AI-guided history) · Clinic Billing | **U** · **H** | |
 | KB + guidelines + offline + updates | **F** | |
 | Knowledge Units / streaks | **F** | |
 | Specialty workspaces (7) | **F** | |
@@ -191,7 +212,8 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 
 ## 8. AI economics (anti-bankruptcy)
 
-- **Daily rupee caps** (`AI_DAILY_COST_CAP_<ROLE>`): Free ₹0.5 · Student/Resident/Intern ₹5 · Co-Resident ₹6 pooled · Pro ₹10 · Ultimate ₹25 · Hospital-Pro ₹15/seat pooled · Hospital-Ultimate ₹25/seat or fair-use. Set so <5% of paying users ever hit them and worst-case margin stays ≥ ~25% after GST; tune live from the AI Control Center hit-rate.
+- **Daily TEXT-AI rupee caps** (`AI_DAILY_COST_CAP_<ROLE>`): Free ₹0.5 · Student/Resident/Intern ₹5 · Co-Resident ₹6 pooled · Pro ₹10 · Physician Pro ₹25 · Hospital-Pro ₹15/seat pooled · Hospital-Ultimate ₹25/seat or fair-use. Set so <5% of paying users ever hit them and worst-case margin stays ≥ ~25% after GST; tune live from the AI Control Center hit-rate.
+- **Per-patient AI (voice consult ₹3–5, FollowCare ~₹11) is metered SEPARATELY** — monthly included quota per tier + credits overage — so a high-volume OPD can never invert the tier. Never counted in the daily text cap.
 - **Credits** (`CREDIT_CONVERSION=0.5`): ₹50 → ₹25 of AI, spent only above the cap. Overflow valve + power-user revenue; hospital Credits-base runs the whole org off one wallet.
 - **On-device voice = ₹0 to serve** → Scribe/dictation "unlimited" with no cost risk (a genuine edge vs per-minute scribe products).
 - **Answer cache** already drops repeat generic questions to ₹0.
@@ -202,11 +224,11 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 
 Headline: **"Choose how deeply StewardMD works with you."**
 
-| Free | Student | Pro | Ultimate | Hospital |
+| Free | Student | Pro | Physician Pro | Hospital |
 |---|---|---|---|---|
 | Think with StewardMD | Learn with StewardMD | Practice with StewardMD | Practice without limits | Run care with StewardMD |
 
-Public pricing page shows **Free · Student · Pro ⭐ · Ultimate**, plus **"Hospitals & Institutions → Talk to us."** Co-Resident appears after clicking Student. Physician Onco appears as a +₹89 toggle on Pro/Ultimate. Hospital numbers stay sales-led.
+Public pricing page shows **Free · Student · Pro ⭐ · Physician Pro**, plus **"Hospitals & Institutions → Talk to us."** Co-Resident appears after clicking Student. Physician Onco (OncoTree + ONCQIS) appears as a +₹89 toggle on Physician Pro. Hospital numbers stay sales-led.
 
 ---
 
@@ -222,7 +244,8 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 
 ## 11. Final numbers at a glance
 
-**Individual:** Free ₹0 · Student ₹199 · Co-Resident ₹299 · Pro ₹599 · Ultimate ₹1,499 · **+ Physician Onco ₹89.**
+**Individual:** Free ₹0 · Student ₹199 · Co-Resident ₹299 · Pro ₹599 · Physician Pro ₹1,499 · **+ Physician Onco (OncoTree + ONCQIS) ₹89 on Physician Pro.**
+**Physician Pro adds** over Pro: Personal Clinic Cloud Sync (we store PHI), FollowCare (20 pts/mo incl), MaiK Ask, MaiK Scribe/AI voice consult in OPD (60/mo incl), Clinic Billing. Per-patient AI metered separately (voice ₹3–5/pt, FollowCare ~₹11/pt) + credits overage.
 **AI caps/day:** ₹0.5 / ₹6 / ₹10 / ₹25. **Imaging/day:** 0 / 5 / 20.
 **Hospital (per-seat/mo, min seats by beds, volume-discounted, sales-led):** Credits ₹399 · Pro ₹799 · Ultimate ₹1,499.
 
