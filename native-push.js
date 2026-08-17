@@ -131,6 +131,10 @@
       try {
         var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
+        // FollowCare push → deep-link straight to that patient's recovery detail in-app (covers cold-launch).
+        if (data && data.type === "followcare" && data.episodeId && window.FollowCare && window.FollowCare.openDetail) {
+          try { window.FollowCare.openDetail(data.episodeId); return; } catch (e) {}
+        }
         // Code Blue push → open the native Command Center (also handles cold-launch
         // when the app was force-quit and relaunched by the tap).
         if (url === "codeblue") {

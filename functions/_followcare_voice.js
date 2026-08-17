@@ -40,11 +40,12 @@ export async function setHospitalSettings(env, hospitalId, patch, actor) {
   // Normalise BEFORE persisting so the hard caps (1 call/day, window/tz validity) can never be stored around.
   const cur = await getHospitalSettings(env, hospitalId);
   const merged = Voice.normalizeSettings({
+    name: (patch && patch.name != null) ? patch.name : cur.name,
     voice: Object.assign({}, cur.voice, (patch && patch.voice) || {}),
     ambulance: Object.assign({}, cur.ambulance, (patch && patch.ambulance) || {}),
   });
   await fsCommit(env, [wUpdate(env, "fc_hospitals/" + String(hospitalId), {
-    voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), updatedMs: Date.now(),
+    name: merged.name, voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), updatedMs: Date.now(),
   })]);
   await audit(env, { hospitalId, actor: actor || "system", action: "voice_settings" });
   return { ok: true, settings: merged };
@@ -57,7 +58,7 @@ function parseSettingsFields(f) {
   let voice = f.voice, ambulance = f.ambulance;
   try { if (f.voiceJson) voice = JSON.parse(f.voiceJson); } catch (e) {}
   try { if (f.ambulanceJson) ambulance = JSON.parse(f.ambulanceJson); } catch (e) {}
-  return { voice, ambulance };
+  return { name: f.name, voice, ambulance };
 }
 
 // ---- voice status for one episode (UI + /episode) ----------------------------------------
@@ -75,6 +76,8 @@ export async function voiceStatusForEpisode(env, ep, settings, nowMs) {
     lastOutcome: (last && last.outcome) || "",
     lastStatus: (last && last.status) || "",
     ambulanceRequested: !!(last && last.ambulanceRequested),
+    emergency: !!(last && last.emergency),
+    lastStatement: (last && last.patientStatement) || "",
     nextWindowMs: Voice.nextCallWindow(now, settings).startMs,
   };
 }
@@ -199,6 +202,7 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
   const adaptiveNextMs = (r.escalation === "red") ? 0 : (ai.deltaHours ? now + ai.deltaHours * 3600000 : (ai.dayOffset != null ? nextDueMsFor(ep, ai.dayOffset) : (scored.nextDay != null ? nextDueMsFor(ep, scored.nextDay) : 0)));
   const outcome = outcomeFrom(r);
   const ambulance = !!payload.ambulanceRequested;
+  const emergency = !!payload.emergency;   // voice bot confirmed a danger sign (chest pain, fainting, etc.)
 
   const aId = "fc_assessments/" + episodeId + "_" + day;
   const writes = [
@@ -217,7 +221,7 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
       id: callId, episodeId, hospitalId: ep.hospitalId, dayOffset: day, status: "completed", endedMs: now,
       durationMs: Number(payload.durationMs) || 0, outcome,
       redFlag: !!(r.redFlags && r.redFlags.length), doctorReview: !!r.needsReview || r.escalation === "red" || r.escalation === "orange",
-      ambulanceRequested: ambulance, patientStatement: String(payload.patientStatement || "").slice(0, 500),
+      ambulanceRequested: ambulance, emergency, patientStatement: String(payload.patientStatement || "").slice(0, 500),
       summary: (r.reasons || []).slice(0, 4).join("; ").slice(0, 500), createdMs: now,
     }),
   ];
@@ -227,11 +231,15 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
   await audit(env, { hospitalId: ep.hospitalId, episodeId, actor: "voice", action: "voice_assessment", meta: { day, escalation: r.escalation, score: r.recoveryScore, outcome } });
 
   const route = Schedule.escalationToNotify(r.escalation);
-  if (route.notify && typeof meta.notify === "function") { try { await meta.notify(ep, r.escalation); } catch (e) {} }
+  let notified = false;
+  if (route.notify && typeof meta.notify === "function") { try { await meta.notify(ep, r.escalation); notified = true; } catch (e) {} }
   let ambulanceSent = null;
-  if (ambulance) { ambulanceSent = await notifyAmbulance(env, ep, settings, { problem: payload.patientStatement || "worsening reported on call", nowMs: now }); if (typeof meta.notify === "function") { try { await meta.notify(ep, "red"); } catch (e) {} } }
+  if (ambulance) { ambulanceSent = await notifyAmbulance(env, ep, settings, { problem: payload.patientStatement || "worsening reported on call", nowMs: now }); }
+  // A voice-detected danger sign or an ambulance request is ALWAYS urgent — push the doctor even if the
+  // questionnaire score alone would not have escalated (previously payload.emergency was ignored entirely).
+  if ((emergency || ambulance) && !notified && typeof meta.notify === "function") { try { await meta.notify(ep, "red"); notified = true; } catch (e) {} }
 
-  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify, notifyPlan: route, ambulance: ambulanceSent };
+  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify || emergency || ambulance, notifyPlan: route, ambulance: ambulanceSent, emergency };
 }
 
 // ---- ambulance notification (spec §21) — NOTIFY only, NEVER dispatch -----------------------
@@ -265,6 +273,11 @@ export async function voiceQueueForDialing(env, nowMs) {
   const now = nowMs || Date.now();
   const rows = await fsQuery(env, "fc_voice_calls", { where: { field: "status", value: "scheduled" }, limit: 200 });
   const calls = [], cancels = [];
+  const nameCache = {};   // hospital display name the bot speaks in its greeting (cached per hospital)
+  const hospName = async (hid) => {
+    if (!(hid in nameCache)) { try { nameCache[hid] = (await getHospitalSettings(env, hid)).name || ""; } catch (e) { nameCache[hid] = ""; } }
+    return nameCache[hid];
+  };
   const cancel = (id, why) => cancels.push(wUpdate(env, "fc_voice_calls/" + id, { status: "cancelled", endedMs: now, summary: why }, { exists: true }));
   for (const d of rows) {
     const f = d.fields || {};
@@ -281,7 +294,8 @@ export async function voiceQueueForDialing(env, nowMs) {
     if (!ep.isMinor) { try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {} }
     const qn = Assessment.buildAssessment(ep.pathwayId, day, { pathways: Pathways });
     calls.push({
-      callId: f.id, episodeId: ep.episodeId, hospitalId: ep.hospitalId, phone, lang: ep.lang || "en",
+      callId: f.id, episodeId: ep.episodeId, hospitalId: ep.hospitalId, hospitalName: await hospName(ep.hospitalId),
+      phone, lang: ep.lang || "en",
       firstName, isMinor: !!ep.isMinor, disease: ep.disease, dayOffset: day,
       greeting: (qn && qn.greeting) || "", questions: (qn && qn.questions) || [],
     });

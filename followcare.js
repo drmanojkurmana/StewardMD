@@ -475,6 +475,8 @@
       var s = res.body.settings, v = s.voice, a = s.ambulance;
       body.appendChild(h("div", { style: "margin:10px 0;font-weight:800;font-size:15px;color:#0e6e63", text: "AI Voice Follow-up" }));
       body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If a discharged patient ignores the check-in link, place at most one short AI wellbeing call per day, only inside the windows below." }));
+      var hName = h("input", { type: "text", value: s.name || "", placeholder: "e.g. City General Hospital", maxlength: "160" });
+      body.appendChild(field("Hospital / clinic name (the AI says this to the patient on the call)", hName));
       var vEnable = h("input", { type: "checkbox" }); vEnable.checked = !!v.enabled;
       body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [vEnable, document.createTextNode("Enable AI voice follow-up calls")]));
       function numIn(val, min, max) { return h("input", { type: "number", min: String(min), max: String(max), value: String(val), inputmode: "numeric", style: "width:80px" }); }
@@ -503,6 +505,7 @@
       save.addEventListener("click", function () {
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
+          name: hName.value,
           voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value },
           ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value }
         };
@@ -525,7 +528,15 @@
     lines.push(h("div", { style: "font-size:13px;margin-bottom:3px", text: voiceReasonText(voice.reason) }));
     if (voice.lastCallMs) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Last call " + fmtWhen(voice.lastCallMs) + (voice.lastOutcome ? "  ·  " + voice.lastOutcome : "") + (voice.lastStatus ? "  ·  " + voice.lastStatus : "") }));
     else lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "No calls placed yet." }));
-    if (voice.ambulanceRequested) lines.push(h("div", { style: "font-size:12.5px;font-weight:700;color:#b3261e;margin-top:3px", text: "⚠ Ambulance was requested" }));
+    if (voice.emergency || voice.ambulanceRequested) {
+      var alHead = voice.ambulanceRequested ? "AMBULANCE REQUESTED" : "URGENT: DANGER SIGN REPORTED";
+      var alSub = voice.ambulanceRequested ? "The patient asked for an ambulance on the call." : "The patient reported a danger sign on the call.";
+      lines.push(h("div", { style: "margin-top:8px;padding:10px 12px;border-radius:10px;background:#fdecea;border:1px solid #f3b4ad;color:#8f1d14" }, [
+        h("div", { style: "font-weight:800;font-size:12.5px;display:flex;align-items:center;gap:6px", html: '<span class="fc-bi" style="color:#b3261e;display:inline-flex;width:16px;height:16px">' + actIcon("emergency") + '</span>' + alHead }),
+        h("div", { style: "font-size:12.5px;margin-top:3px", text: alSub }),
+        voice.lastStatement ? h("div", { style: "font-size:12.5px;margin-top:3px;font-style:italic", text: "“" + voice.lastStatement + "”" }) : null
+      ]));
+    }
     if (voice.optedOut) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);margin-top:3px", text: "Patient opted out of calls." }));
     var blocked = voice.calledToday || voice.optedOut;
     var btn = h("button", { "class": "fc-btn" + (blocked ? " sec" : ""), style: "margin-top:10px;width:100%", text: voice.calledToday ? "Already called today" : "AI Call Patient" });
@@ -598,6 +609,9 @@
         var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", html: '<span class="fc-bi">' + actIcon("history") + '</span>Communication history' });
         hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
         body.appendChild(hist);
+        var chatBtn = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", html: '<span class="fc-bi">' + actIcon("question") + '</span>Chat with patient' });
+        chatBtn.addEventListener("click", function () { renderChat(episodeId, ep); });
+        body.appendChild(chatBtn);
       }
       // AI voice fallback card (flag smd_followcare_voice): status + manual "AI Call Patient" (1-call/day enforced).
       if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
@@ -802,6 +816,45 @@
       });
     }).catch(function () { list.innerHTML = ""; list.appendChild(h("div", { "class": "fc-empty", text: "Could not load history." })); });
   }
+  // Free-form doctor to patient chat. Reuses the existing thread (GET /comms) + the "question" action
+  // (POST /action), so the patient can reply from their secure portal link. Bodies stay encrypted server-side.
+  function renderChat(episodeId, ep) {
+    var body = actionSheet(episodeId, ep, function () { renderDetail(episodeId); });
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 10px", text: "Chat with patient" }));
+    var thread = h("div", { style: "display:flex;flex-direction:column;gap:8px;margin-bottom:12px;max-height:52vh;overflow:auto" });
+    body.appendChild(thread);
+    function load() {
+      thread.innerHTML = ""; thread.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+      API.comms(episodeId).then(function (res) {
+        thread.innerHTML = "";
+        var items = ((res.body && res.body.items) || []).filter(function (c) { return (c.body && String(c.body).trim()) || c.dir === "in"; });
+        if (!items.length) { thread.appendChild(h("div", { "class": "fc-empty", text: "No messages yet. Send the first one below." })); return; }
+        items.forEach(function (c) {
+          var inbound = c.dir === "in";
+          thread.appendChild(h("div", { style: "max-width:82%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.35;" + (inbound ? "align-self:flex-start;background:var(--panel,#f1f5f4);color:var(--ink,#14202b);border:1px solid var(--line,#dbe4e2)" : "align-self:flex-end;background:#0e6e63;color:#fff") }, [
+            h("div", { text: c.body || "(message)" }),
+            h("div", { style: "font-size:10.5px;opacity:.75;margin-top:3px", text: fmtCommTime(c.createdMs) })
+          ]));
+        });
+        try { thread.scrollTop = thread.scrollHeight; } catch (e) {}
+      }).catch(function () { thread.innerHTML = ""; thread.appendChild(h("div", { "class": "fc-empty", text: "Could not load the chat." })); });
+    }
+    load();
+    var input = h("textarea", { rows: "2", placeholder: "Type a message to your patient…", style: "width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line,#dbe4e2);border-radius:10px;font-size:14px;resize:vertical;font-family:inherit" });
+    var send = h("button", { "class": "fc-btn", style: "margin-top:8px;width:100%", text: "Send message" });
+    send.addEventListener("click", function () {
+      var text = String(input.value || "").trim();
+      if (!text) { toast("Type a message first"); return; }
+      send.disabled = true; send.textContent = "Sending…";
+      API.action({ episodeId: episodeId, type: "question", body: text, doctorName: (G.SMD_DOCTOR_NAME || "") }).then(function (r) {
+        if (r.body && r.body.ok) { input.value = ""; toast("Message sent to patient"); load(); }
+        else { toast((r.body && r.body.error) === "not_configured" ? "FollowCare not configured" : "Could not send"); }
+        send.disabled = false; send.textContent = "Send message";
+      }).catch(function () { toast("Connection problem"); send.disabled = false; send.textContent = "Send message"; });
+    });
+    body.appendChild(input); body.appendChild(send);
+    body.appendChild(h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184);margin-top:8px", text: "Your patient gets a secure link by message and can reply from it. Message text stays private in FollowCare." }));
+  }
   // Render the structured payload of a comm entry (vitals values, requested fields, photos, review date, etc.).
   function commPayloadEl(c) {
     var p = c.payload || {};
@@ -822,6 +875,8 @@
   var PUB = {
     open: open, openEnroll: openEnroll, close: close, enabled: enabled,
     openActions: openActions, actionsEnabled: actionsEnabled,
+    // Deep link (from a FollowCare push tap) straight to one patient's recovery detail.
+    openDetail: function (id) { try { open(); } catch (e) {} try { renderDetail(id); } catch (e) {} },
     // pure, testable:
     validateEnroll: validateEnroll, escalationMeta: escalationMeta, statusMeta: statusMeta,
     sortEpisodes: sortEpisodes, fmtWhen: fmtWhen, counts: counts, enrollError: enrollError,
