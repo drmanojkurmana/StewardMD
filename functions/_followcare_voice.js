@@ -75,6 +75,8 @@ export async function voiceStatusForEpisode(env, ep, settings, nowMs) {
     lastOutcome: (last && last.outcome) || "",
     lastStatus: (last && last.status) || "",
     ambulanceRequested: !!(last && last.ambulanceRequested),
+    emergency: !!(last && last.emergency),
+    lastStatement: (last && last.patientStatement) || "",
     nextWindowMs: Voice.nextCallWindow(now, settings).startMs,
   };
 }
@@ -199,6 +201,7 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
   const adaptiveNextMs = (r.escalation === "red") ? 0 : (ai.deltaHours ? now + ai.deltaHours * 3600000 : (ai.dayOffset != null ? nextDueMsFor(ep, ai.dayOffset) : (scored.nextDay != null ? nextDueMsFor(ep, scored.nextDay) : 0)));
   const outcome = outcomeFrom(r);
   const ambulance = !!payload.ambulanceRequested;
+  const emergency = !!payload.emergency;   // voice bot confirmed a danger sign (chest pain, fainting, etc.)
 
   const aId = "fc_assessments/" + episodeId + "_" + day;
   const writes = [
@@ -217,7 +220,7 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
       id: callId, episodeId, hospitalId: ep.hospitalId, dayOffset: day, status: "completed", endedMs: now,
       durationMs: Number(payload.durationMs) || 0, outcome,
       redFlag: !!(r.redFlags && r.redFlags.length), doctorReview: !!r.needsReview || r.escalation === "red" || r.escalation === "orange",
-      ambulanceRequested: ambulance, patientStatement: String(payload.patientStatement || "").slice(0, 500),
+      ambulanceRequested: ambulance, emergency, patientStatement: String(payload.patientStatement || "").slice(0, 500),
       summary: (r.reasons || []).slice(0, 4).join("; ").slice(0, 500), createdMs: now,
     }),
   ];
@@ -227,11 +230,15 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
   await audit(env, { hospitalId: ep.hospitalId, episodeId, actor: "voice", action: "voice_assessment", meta: { day, escalation: r.escalation, score: r.recoveryScore, outcome } });
 
   const route = Schedule.escalationToNotify(r.escalation);
-  if (route.notify && typeof meta.notify === "function") { try { await meta.notify(ep, r.escalation); } catch (e) {} }
+  let notified = false;
+  if (route.notify && typeof meta.notify === "function") { try { await meta.notify(ep, r.escalation); notified = true; } catch (e) {} }
   let ambulanceSent = null;
-  if (ambulance) { ambulanceSent = await notifyAmbulance(env, ep, settings, { problem: payload.patientStatement || "worsening reported on call", nowMs: now }); if (typeof meta.notify === "function") { try { await meta.notify(ep, "red"); } catch (e) {} } }
+  if (ambulance) { ambulanceSent = await notifyAmbulance(env, ep, settings, { problem: payload.patientStatement || "worsening reported on call", nowMs: now }); }
+  // A voice-detected danger sign or an ambulance request is ALWAYS urgent — push the doctor even if the
+  // questionnaire score alone would not have escalated (previously payload.emergency was ignored entirely).
+  if ((emergency || ambulance) && !notified && typeof meta.notify === "function") { try { await meta.notify(ep, "red"); notified = true; } catch (e) {} }
 
-  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify, notifyPlan: route, ambulance: ambulanceSent };
+  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify || emergency || ambulance, notifyPlan: route, ambulance: ambulanceSent, emergency };
 }
 
 // ---- ambulance notification (spec §21) — NOTIFY only, NEVER dispatch -----------------------

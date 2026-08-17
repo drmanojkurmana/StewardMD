@@ -237,6 +237,7 @@ export class VoiceCall {
       if (mode === "done") return;
       mode = "done"; clearIdle();
       try { sttWs && sttWs.close(); } catch {}
+      try { await this.env.VOICE_KV.put("log:" + (this.call?.callId || "x"), JSON.stringify(this.log), { expirationTtl: 1800 }); } catch {}
       await this.pages("/voice/result", { episodeId: this.call?.episodeId, callId: this.call?.callId,
         answers: brain.facts, status: status || "completed", durationMs: Date.now() - started,
         ambulanceRequested: false, emergency, patientStatement: brain.doctorNote || "",
@@ -254,10 +255,17 @@ export class VoiceCall {
     const handleTurn = async (text) => {
       if (mode !== "listening") return;
       mode = "processing"; clearIdle();
+      const t0 = Date.now();
       this.log.push(["PATIENT", text]);
       const turn = await brain.step(text || "(unclear)", (p) => this.modelCall(p));
+      const tLlm = Date.now() - t0;
       mode = "speaking";
-      await say(turn);
+      const t1 = Date.now();
+      const pcm = await sarvamTTS(cfg, turn.reply, lang);
+      this.log.push(["TIMING", `llm=${tLlm}ms tts=${Date.now() - t1}ms`]);
+      this.log.push(["YOU", turn.reply]);
+      emergency = emergency || turn.emergency;
+      await this._play(pcm);
       turns++;
       if (turn.complete || turns >= cfg.maxConvoTurns || Date.now() - started > cfg.convoMaxMs)
         return finalize("completed");

@@ -129,6 +129,10 @@ export default {
     }
 
     if (path === "/test/timing") return doStub(env, "timing-fixed").fetch("https://do/timing");
+    if (path.startsWith("/voice/kvlog/")) {
+      if ((request.headers.get("X-Voice-Token") || "") !== (env.FOLLOWCARE_VOICE_SERVICE_TOKEN || "")) return json({ error: "unauthorized" }, 401);
+      return json(JSON.parse(await env.VOICE_KV.get("log:" + decodeURIComponent(path.split("/").pop())) || "null"));
+    }
 
     if (path === "/health") return json({ ok: true });
     return new Response("stewardmd-voice", { status: 200 });
