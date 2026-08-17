@@ -62,9 +62,9 @@ Ladder: **Free → Student ₹199 → Pro ₹599 → Ultimate ₹1,499.**
 |---|---|---|---|---|---|
 | **Monthly** | ₹0 | **₹199** | **₹299** (2 accts) | **₹599** | **₹1,499** |
 | **Annual** 🔧 | — | ₹1,999 | ₹2,999 | ₹4,999 | ₹14,999 |
-| **AI cost cap/day** | ₹0.50 | ₹6 | ₹6 pooled | **₹10** | **₹25** |
-| **Max AI exposure/mo** | ₹15 | ₹180 | ₹180 | ₹300 | ₹750 |
-| **Gross contribution** | — | ~₹19 | ~₹119 | **~₹299** | **~₹749** |
+| **AI cost cap/day** | ₹0.50 | ₹5 | ₹6 pooled | **₹10** | **₹25** |
+| **Max AI exposure/mo** | ₹15 | ₹150 | ₹180 | ₹300 | ₹750 |
+| **Gross contribution** | — | ~₹45 | ~₹119 | **~₹299** | **~₹749** |
 | MaiK (all text modes) | taste | ✅ | ✅ pooled | ✅ | ✅ |
 | Scribe (voice→EMR) | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Patient Summary | ❌ | ❌ | ❌ | ✅ | ✅ |
@@ -189,7 +189,7 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 
 ## 8. AI economics (anti-bankruptcy)
 
-- **Daily rupee caps** (`AI_DAILY_COST_CAP_<ROLE>`): Free ₹0.5 · Student ₹6 · Pro ₹10 · Ultimate ₹25 · Hospital-Pro ₹15/seat pooled · Hospital-Ultimate ₹25/seat or fair-use. Every one sits well under the tier price.
+- **Daily rupee caps** (`AI_DAILY_COST_CAP_<ROLE>`): Free ₹0.5 · Student/Resident/Intern ₹5 · Co-Resident ₹6 pooled · Pro ₹10 · Ultimate ₹25 · Hospital-Pro ₹15/seat pooled · Hospital-Ultimate ₹25/seat or fair-use. Set so <5% of paying users ever hit them and worst-case margin stays ≥ ~25% after GST; tune live from the AI Control Center hit-rate.
 - **Credits** (`CREDIT_CONVERSION=0.5`): ₹50 → ₹25 of AI, spent only above the cap. Overflow valve + power-user revenue; hospital Credits-base runs the whole org off one wallet.
 - **On-device voice = ₹0 to serve** → Scribe/dictation "unlimited" with no cost risk (a genuine edge vs per-minute scribe products).
 - **Answer cache** already drops repeat generic questions to ₹0.
