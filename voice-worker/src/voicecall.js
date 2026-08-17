@@ -30,6 +30,8 @@ function cfgFrom(env) {
     voiceToken: env.FOLLOWCARE_VOICE_SERVICE_TOKEN || "",
     geminiKey: env.GEMINI_API_KEY || "",
     geminiModel: env.VOICE_GEMINI_MODEL || "gemini-flash-latest",
+    sarvamLlm: env.SARVAM_LLM || "sarvam-105b",          // India-hosted LLM (fast, consistent) for the brain
+    vadSilenceMs: +(env.VOICE_VAD_SILENCE_MS || 300),   // Sarvam realtime end-of-turn silence (lower = snappier)
   };
 }
 
@@ -53,17 +55,24 @@ export class VoiceCall {
     this.log = [];   // dialogue for /debug
   }
 
-  // Brain LLM — call Gemini directly (fast, one hop, no Pages reachability needed).
+  // Brain LLM — Sarvam's India-hosted LLM (fast + consistent, same region as STT/TTS). Falls back to Vertex
+  // (via Pages /voice/nlu) if Sarvam is unavailable.
   async modelCall(prompt) {
     try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${this.cfg.geminiModel}:generateContent?key=${this.cfg.geminiKey}`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }],
-          // thinkingBudget:0 disables the model's slow "thinking" pass — the big latency win for a voice loop.
-          generationConfig: { temperature: 0.3, response_mime_type: "application/json", thinkingConfig: { thinkingBudget: 0 } } }),
-      });
+      const r = await fetch("https://api.sarvam.ai/v1/chat/completions", {
+        method: "POST", headers: { "Content-Type": "application/json", "api-subscription-key": this.cfg.sarvamKey },
+        body: JSON.stringify({ model: this.cfg.sarvamLlm, temperature: 0.3, max_tokens: 400,
+          messages: [{ role: "user", content: prompt }] }) });
       const j = await r.json();
-      return j.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      const t = j?.choices?.[0]?.message?.content;
+      if (t) return t;
+    } catch { /* fall through */ }
+    try {
+      const r = await fetch(PAGES_BASE + "/voice/nlu", {
+        method: "POST", headers: { "Content-Type": "application/json", "X-Voice-Token": this.cfg.voiceToken },
+        body: JSON.stringify({ prompt, maxTokens: 400 }) });
+      const j = await r.json();
+      return (j && j.text) || "";
     } catch { return ""; }
   }
 
@@ -107,7 +116,29 @@ export class VoiceCall {
       t = Date.now();
       try { const b = new Brain({ lang: "te", disease: "Heart Failure", dayOffset: 3 }, this.cfg); b.turns.push(["YOU", "hi"], ["PATIENT", "బానే ఉంది"]); await b.step(null, (p) => this.modelCall(p)); out.gemini_real_ms = Date.now() - t; } catch (e) { out.gemini_real_err = String(e); }
       t = Date.now();
+      try {
+        const r = await fetch("https://api.sarvam.ai/v1/chat/completions", { method: "POST",
+          headers: { "Content-Type": "application/json", "api-subscription-key": this.cfg.sarvamKey },
+          body: JSON.stringify({ model: "sarvam-m", messages: [{ role: "user", content: 'reply STRICT JSON {"reply":"hi"}' }], max_tokens: 100 }) });
+        const j = await r.json(); out.sarvamm_ms = Date.now() - t; out.sarvamm_ok = !!(j.choices && j.choices.length); out.sarvamm_body = j.choices ? "" : JSON.stringify(j).slice(0, 120);
+      } catch (e) { out.sarvamm_err = String(e); }
+      for (const mdl of ["gemini-flash-lite-latest", "gemini-2.0-flash"]) {
+        t = Date.now();
+        try {
+          const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + mdl + ":generateContent?key=" + this.cfg.geminiKey,
+            { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: 'reply STRICT JSON {"reply":"hi"}' }] }], generationConfig: { response_mime_type: "application/json", thinkingConfig: { thinkingBudget: 0 } } }) });
+          const j = await r.json(); out[mdl] = r.status === 200 ? (Date.now() - t) : ("err" + r.status);
+        } catch (e) { out[mdl] = "ex"; }
+      }
+      t = Date.now();
       try { const pcm = await sarvamTTS(this.cfg, "మంచిదండి, మీ బరువు ఏమైనా పెరిగిందా అండి?", "te"); out.batch_tts_ms = Date.now() - t; out.batch_tts_bytes = pcm.length; } catch (e) { out.batch_tts_err = String(e); }
+      t = Date.now();
+      try {
+        const r = await fetch(PAGES_BASE + "/voice/nlu", { method: "POST",
+          headers: { "Content-Type": "application/json", "X-Voice-Token": this.cfg.voiceToken },
+          body: JSON.stringify({ prompt: 'reply STRICT JSON {"reply":"hi"}' }) });
+        const j = await r.json(); out.nlu_ms = Date.now() - t; out.nlu_ok = j.ok; out.nlu_len = (j.text || "").length;
+      } catch (e) { out.nlu_err = String(e); }
       t = Date.now();
       try {
         const r = await fetch("https://api.sarvam.ai/text-to-speech/ws?model=bulbul:v2&send_completion_event=true",
@@ -241,7 +272,8 @@ export class VoiceCall {
     const openStt = async () => {
       try {
         const u = "https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw"
-          + "&sample_rate=8000&endpointing=vad&language_code=" + (LC[lang] || "te-IN");
+          + "&sample_rate=8000&endpointing=vad&stream_type=fast&silence_duration_ms=" + (this.cfg.vadSilenceMs || 300)
+          + "&language_code=" + (LC[lang] || "te-IN");
         const resp = await fetch(u, { headers: { Upgrade: "websocket", "API-SUBSCRIPTION-KEY": cfg.sarvamKey } });
         sttWs = resp.webSocket;
         if (!sttWs) return;

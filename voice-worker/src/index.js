@@ -127,7 +127,7 @@ export default {
       } catch (e) { return json({ ok: false, error: String(e) }); }
     }
 
-    if (path === "/test/timing") return doStub(env, "timing-" + Date.now()).fetch("https://do/timing");
+    if (path === "/test/timing") return doStub(env, "timing-fixed").fetch("https://do/timing");
 
     if (path === "/health") return json({ ok: true });
     return new Response("stewardmd-voice", { status: 200 });
