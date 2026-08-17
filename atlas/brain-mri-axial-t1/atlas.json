@@ -1,0 +1,62 @@
+{
+ "id": "brain-mri-axial-t1",
+ "provenance": {
+  "images": "PLACEHOLDER - locally generated shapes, NOT a cleared source. Replace via atlas-pipeline/build.py before shipping.",
+  "licence": "PLACEHOLDER",
+  "definitions": "Gray's Anatomy (1918)",
+  "clearedOn": null
+ },
+ "categories": {
+  "grey-matter": { "label": "Grey matter", "color": "#7ee081" },
+  "white-matter": { "label": "White matter", "color": "#ffffff" },
+  "csf": { "label": "CSF space", "color": "#7fd9e8" }
+ },
+ "structures": {
+  "telencephalon": { "name": "Telencephalon", "category": "grey-matter" },
+  "frontal-lobe": { "name": "Frontal lobe", "category": "grey-matter", "parent": "telencephalon" },
+  "superior-frontal-gyrus": { "name": "Superior frontal gyrus", "category": "grey-matter", "parent": "frontal-lobe", "definition": "The superior frontal gyrus forms the upper border of the frontal lobe, running parallel to the interhemispheric fissure." },
+  "precentral-gyrus": { "name": "Precentral gyrus", "category": "grey-matter", "parent": "frontal-lobe", "definition": "The precentral gyrus lies immediately anterior to the central sulcus and contains the primary motor cortex." },
+  "thalamus": { "name": "Thalamus", "category": "grey-matter", "parent": "telencephalon", "definition": "The thalamus is a large ovoid mass of grey matter forming the lateral wall of the third ventricle." },
+  "putamen": { "name": "Putamen", "category": "grey-matter", "parent": "telencephalon", "definition": "The putamen is the outer, larger part of the striatum, separated from the globus pallidus by a lamina of white matter." },
+  "fornix": { "name": "Fornix", "category": "white-matter", "definition": "The fornix is a longitudinal, arch-shaped lamella of white substance situated below the corpus callosum, forming the major output tract of the hippocampus. It consists of two symmetrical bands, one for either hemisphere." },
+  "external-capsule": { "name": "External capsule", "category": "white-matter", "definition": "The external capsule is a thin lamina of white matter lying between the putamen and the claustrum." },
+  "third-ventricle": { "name": "Third ventricle", "category": "csf", "definition": "The third ventricle is a narrow median cleft between the two thalami, communicating with the lateral ventricles through the interventricular foramina." },
+  "subarachnoid-space": { "name": "Subarachnoid space", "category": "csf", "definition": "The subarachnoid space lies between the arachnoid mater and the pia mater and contains cerebrospinal fluid." }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/brain-mri-axial-t1/001.webp",
+   "aspect": 0.86,
+   "pins": [
+    { "s": "superior-frontal-gyrus", "x": 44.0, "y": 27.0 },
+    { "s": "precentral-gyrus", "x": 33.5, "y": 44.0 },
+    { "s": "subarachnoid-space", "x": 74.0, "y": 40.0 }
+   ]
+  },
+  {
+   "i": 2,
+   "img": "/atlas/brain-mri-axial-t1/002.webp",
+   "aspect": 0.9,
+   "pins": [
+    { "s": "superior-frontal-gyrus", "x": 45.0, "y": 18.0 },
+    { "s": "precentral-gyrus", "x": 31.0, "y": 38.0 },
+    { "s": "putamen", "x": 39.5, "y": 48.0 },
+    { "s": "external-capsule", "x": 36.5, "y": 49.5 },
+    { "s": "thalamus", "x": 55.0, "y": 52.0 },
+    { "s": "fornix", "x": 48.6, "y": 55.5 },
+    { "s": "fornix", "x": 52.4, "y": 55.2 },
+    { "s": "third-ventricle", "x": 50.5, "y": 50.0 },
+    { "s": "subarachnoid-space", "x": 78.0, "y": 46.0 }
+   ]
+  },
+  {
+   "i": 3,
+   "img": "/atlas/brain-mri-axial-t1/003.webp",
+   "aspect": 1.02,
+   "pins": [
+    { "s": "subarachnoid-space", "x": 62.0, "y": 58.0 }
+   ]
+  }
+ ]
+}

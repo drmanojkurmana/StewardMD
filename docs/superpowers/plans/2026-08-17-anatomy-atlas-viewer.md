@@ -607,7 +607,10 @@ If `PIL` is missing: `python3 -m pip install --user Pillow`.
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 ```
 
-Expected: `ALL 42 PASS`. Any `shipped atlas ... is valid` failure prints the first five concrete errors — fix the JSON, not the validator.
+Expected: `ALL 32 PASS`. Any `shipped atlas ... is valid` failure prints the first five concrete errors — fix the JSON, not the validator.
+
+> Verified tripwire: changing one pin's `s` from `fornix` to `fornixx` in the
+> shipped fixture yields `slice 2 pin 5: unknown structure fornixx` and exit 1.
 
 - [ ] **Step 6: Commit**
 

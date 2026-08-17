@@ -69,12 +69,85 @@
     return ((i - 1) / (total - 1)) * 100;
   }
 
+  // Returns [] when valid, else one human-readable string per problem.
+  // Every rule here exists because breaking it renders something invisible or wrong.
+  // This is the ONLY schema authority: the offline pipeline validates its output by
+  // calling this function through node, so the two cannot drift apart.
+  function validateAtlas(a) {
+    var errs = [];
+    function bad(m) { errs.push(m); }
+    if (!a || typeof a !== "object") { bad("atlas is not an object"); return errs; }
+    if (!a.id || !/^[a-z0-9-]+$/.test(String(a.id))) bad("id missing or not kebab-case");
+
+    var cats = a.categories || {}, strs = a.structures || {}, k;
+    if (!Object.keys(cats).length) bad("no categories defined");
+
+    for (k in strs) {
+      if (!Object.prototype.hasOwnProperty.call(strs, k)) continue;
+      var s = strs[k] || {};
+      if (!s.name) bad("structure " + k + ": missing name");
+      if (!s.category || !cats[s.category]) bad("structure " + k + ": unknown category " + s.category);
+      if (s.parent && !strs[s.parent]) bad("structure " + k + ": unknown parent " + s.parent);
+    }
+    // Parent cycles would hang the hierarchy tab.
+    for (k in strs) {
+      if (!Object.prototype.hasOwnProperty.call(strs, k)) continue;
+      var seen = {}, cur = k, hops = 0;
+      while (cur && strs[cur] && strs[cur].parent) {
+        if (seen[cur] || ++hops > 64) { bad("structure " + k + ": parent cycle"); break; }
+        seen[cur] = 1; cur = strs[cur].parent;
+      }
+    }
+
+    var sl = a.slices;
+    if (!sl || !sl.length) { bad("no slices"); return errs; }
+    for (var n = 0; n < sl.length; n++) {
+      var q = sl[n] || {};
+      if (q.i !== n + 1) bad("slice " + n + ": i should be " + (n + 1) + ", got " + q.i);
+      if (!q.img) bad("slice " + (n + 1) + ": missing img");
+      if (!(q.aspect > 0)) bad("slice " + (n + 1) + ": aspect must be a positive number");
+      var pins = q.pins || [];
+      for (var j = 0; j < pins.length; j++) {
+        var p = pins[j] || {};
+        if (!strs[p.s]) bad("slice " + (n + 1) + " pin " + j + ": unknown structure " + p.s);
+        if (!(p.x >= 0 && p.x <= 100)) bad("slice " + (n + 1) + " pin " + j + ": x out of 0-100");
+        if (!(p.y >= 0 && p.y <= 100)) bad("slice " + (n + 1) + " pin " + j + ": y out of 0-100");
+      }
+    }
+    return errs;
+  }
+
+  function filterModules(mods, region, modality) {
+    return (mods || []).filter(function (m) {
+      if (region && m.region !== region) return false;
+      if (modality && m.modality !== modality) return false;
+      return true;
+    });
+  }
+
+  // First-appearance order, so the catalog's section order is controlled by
+  // modules.json alone — no second registry to keep in sync.
+  function groupByRegion(mods) {
+    var order = [], by = {};
+    (mods || []).forEach(function (m) {
+      if (!by[m.region]) { by[m.region] = []; order.push(m.region); }
+      by[m.region].push(m);
+    });
+    return order.map(function (r) { return { region: r, modules: by[r] }; });
+  }
+
   /* ---------- exports ---------- */
 
   G.ATLAS = G.ATLAS || {};
-  G.ATLAS._pure = { layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct };
+  G.ATLAS._pure = {
+    layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
+    validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion
+  };
   G.ATLAS._version = "1.0";
 
   if (typeof module !== "undefined" && module.exports)
-    module.exports = { layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct };
+    module.exports = {
+      layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
+      validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion
+    };
 })(typeof window !== "undefined" ? window : this);
