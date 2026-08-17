@@ -351,7 +351,7 @@ export async function onRequest(context) {
         const b = await readBody(request);
         if (isOwner && b.hospitalId) hospitalId = b.hospitalId;
         if (!hospitalId) return json({ error: "hospital_not_set" }, 400, request);
-        return json(await FCV.setHospitalSettings(env, hospitalId, { voice: b.voice, ambulance: b.ambulance }, "doctor:" + uid), 200, request);
+        return json(await FCV.setHospitalSettings(env, hospitalId, { name: b.name, voice: b.voice, ambulance: b.ambulance }, "doctor:" + uid), 200, request);
       }
     }
     // Doctor-initiated AI call. Same 1-call/day + not-responded + window guards as the scheduler (no bypass).

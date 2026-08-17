@@ -40,11 +40,12 @@ export async function setHospitalSettings(env, hospitalId, patch, actor) {
   // Normalise BEFORE persisting so the hard caps (1 call/day, window/tz validity) can never be stored around.
   const cur = await getHospitalSettings(env, hospitalId);
   const merged = Voice.normalizeSettings({
+    name: (patch && patch.name != null) ? patch.name : cur.name,
     voice: Object.assign({}, cur.voice, (patch && patch.voice) || {}),
     ambulance: Object.assign({}, cur.ambulance, (patch && patch.ambulance) || {}),
   });
   await fsCommit(env, [wUpdate(env, "fc_hospitals/" + String(hospitalId), {
-    voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), updatedMs: Date.now(),
+    name: merged.name, voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), updatedMs: Date.now(),
   })]);
   await audit(env, { hospitalId, actor: actor || "system", action: "voice_settings" });
   return { ok: true, settings: merged };
@@ -57,7 +58,7 @@ function parseSettingsFields(f) {
   let voice = f.voice, ambulance = f.ambulance;
   try { if (f.voiceJson) voice = JSON.parse(f.voiceJson); } catch (e) {}
   try { if (f.ambulanceJson) ambulance = JSON.parse(f.ambulanceJson); } catch (e) {}
-  return { voice, ambulance };
+  return { name: f.name, voice, ambulance };
 }
 
 // ---- voice status for one episode (UI + /episode) ----------------------------------------
@@ -272,6 +273,11 @@ export async function voiceQueueForDialing(env, nowMs) {
   const now = nowMs || Date.now();
   const rows = await fsQuery(env, "fc_voice_calls", { where: { field: "status", value: "scheduled" }, limit: 200 });
   const calls = [], cancels = [];
+  const nameCache = {};   // hospital display name the bot speaks in its greeting (cached per hospital)
+  const hospName = async (hid) => {
+    if (!(hid in nameCache)) { try { nameCache[hid] = (await getHospitalSettings(env, hid)).name || ""; } catch (e) { nameCache[hid] = ""; } }
+    return nameCache[hid];
+  };
   const cancel = (id, why) => cancels.push(wUpdate(env, "fc_voice_calls/" + id, { status: "cancelled", endedMs: now, summary: why }, { exists: true }));
   for (const d of rows) {
     const f = d.fields || {};
@@ -288,7 +294,8 @@ export async function voiceQueueForDialing(env, nowMs) {
     if (!ep.isMinor) { try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {} }
     const qn = Assessment.buildAssessment(ep.pathwayId, day, { pathways: Pathways });
     calls.push({
-      callId: f.id, episodeId: ep.episodeId, hospitalId: ep.hospitalId, phone, lang: ep.lang || "en",
+      callId: f.id, episodeId: ep.episodeId, hospitalId: ep.hospitalId, hospitalName: await hospName(ep.hospitalId),
+      phone, lang: ep.lang || "en",
       firstName, isMinor: !!ep.isMinor, disease: ep.disease, dayOffset: day,
       greeting: (qn && qn.greeting) || "", questions: (qn && qn.questions) || [],
     });

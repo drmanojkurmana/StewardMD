@@ -13,20 +13,26 @@ LANG = {"te": "Telugu", "hi": "Hindi", "en": "English", "ta": "Tamil", "kn": "Ka
         "mr": "Marathi", "gu": "Gujarati", "bn": "Bengali", "pa": "Punjabi", "od": "Odia"}
 
 # Fixed warm opener per language so the patient hears a human voice INSTANTLY on answering (no LLM/TTS wait).
+# {h} = the hospital/clinic display name (editable in FollowCare Voice settings, sent in the call payload);
+# falls back to a generic "your hospital" when the hospital has not set a name.
 GREETING = {
-    "te": "నమస్కారం అండీ. నేను మీ ఆసుపత్రి నుంచి నర్స్ మైత్రిని. ఇంటికి వెళ్ళాక మీరు ఎలా ఉన్నారో కనుక్కోవడానికి ఫోన్ చేశాను.",
-    "hi": "नमस्ते जी। मैं आपके अस्पताल से नर्स मैत्री बोल रही हूँ। घर जाने के बाद आप कैसे हैं, यह जानने के लिए फ़ोन किया।",
-    "en": "Hello. I am a nurse from your hospital, calling to see how you are doing since you went home.",
+    "te": "నమస్కారం అండీ. నేను {h} నుంచి నర్స్ మైత్రిని. ఇంటికి వెళ్ళాక మీరు ఎలా ఉన్నారో కనుక్కోవడానికి ఫోన్ చేశాను.",
+    "hi": "नमस्ते जी। मैं {h} से नर्स मैत्री बोल रही हूँ। घर जाने के बाद आप कैसे हैं, यह जानने के लिए फ़ोन किया।",
+    "en": "Hello. I am a nurse from {h}, calling to see how you are doing since you went home.",
 }
+DEFAULT_HOSP = {"te": "మీ ఆసుపత్రి", "hi": "आपके अस्पताल", "en": "your hospital"}
 
 
-def greeting_text(lang):
-    return GREETING.get(lang, GREETING["en"])
+def greeting_text(lang, hospital=None):
+    tmpl = GREETING.get(lang, GREETING["en"])
+    name = (hospital or "").strip() or DEFAULT_HOSP.get(lang, DEFAULT_HOSP["en"])
+    return tmpl.replace("{h}", name)
 
 
-def system_prompt(nurse, lang, disease, day):
+def system_prompt(nurse, lang, disease, day, hospital=None):
     language = LANG.get(lang, "Telugu")
-    return f"""You are {nurse}, a hospital nurse making a QUICK follow-up phone call in {language} to a patient
+    hosp = (hospital or "").strip() or "the hospital"
+    return f"""You are {nurse}, a nurse from {hosp}, making a QUICK follow-up phone call in {language} to a patient
 treated for {disease} (day {day} after discharge). They are likely elderly and may not read: speak in VERY SIMPLE,
 warm, everyday {language} - short kind sentences, no medical or English words, never "scale of 0 to 3".
 

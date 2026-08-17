@@ -113,11 +113,12 @@ async def run_bot(websocket, call):
         stop=[SpeechTimeoutUserTurnStopStrategy(user_speech_timeout=_f("VOICE_RESUME_SECS", 0.35))])
 
     disease = call.get("disease") or "their condition"
-    greet = greeting_text(lang)
+    hospital = call.get("hospitalName") or call.get("hospital") or ""   # spoken in the greeting; from FollowCare settings
+    greet = greeting_text(lang, hospital)
     # Only the system prompt is pre-seeded. The spoken greeting (TTSSpeakFrame below) is recorded by the
     # assistant aggregator itself, so the LLM sees it and won't re-greet - no need to pre-seed it twice.
     context = LLMContext(messages=[
-        {"role": "system", "content": system_prompt(cfg.agent_name, lang, disease, call.get("dayOffset", 1))}])
+        {"role": "system", "content": system_prompt(cfg.agent_name, lang, disease, call.get("dayOffset", 1), hospital)}])
     aggregators = LLMContextAggregatorPair(
         context, user_params=LLMUserAggregatorParams(vad_analyzer=vad, user_turn_strategies=turn))
 

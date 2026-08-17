@@ -475,6 +475,8 @@
       var s = res.body.settings, v = s.voice, a = s.ambulance;
       body.appendChild(h("div", { style: "margin:10px 0;font-weight:800;font-size:15px;color:#0e6e63", text: "AI Voice Follow-up" }));
       body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If a discharged patient ignores the check-in link, place at most one short AI wellbeing call per day, only inside the windows below." }));
+      var hName = h("input", { type: "text", value: s.name || "", placeholder: "e.g. City General Hospital", maxlength: "160" });
+      body.appendChild(field("Hospital / clinic name (the AI says this to the patient on the call)", hName));
       var vEnable = h("input", { type: "checkbox" }); vEnable.checked = !!v.enabled;
       body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [vEnable, document.createTextNode("Enable AI voice follow-up calls")]));
       function numIn(val, min, max) { return h("input", { type: "number", min: String(min), max: String(max), value: String(val), inputmode: "numeric", style: "width:80px" }); }
@@ -503,6 +505,7 @@
       save.addEventListener("click", function () {
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
+          name: hName.value,
           voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value },
           ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value }
         };

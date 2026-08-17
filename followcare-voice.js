@@ -19,6 +19,7 @@
 
   function defaultSettings() {
     return {
+      name: "",
       voice: { enabled: false, morningStart: 9, morningEnd: 10, eveningStart: 17, eveningEnd: 18, tz: "Asia/Kolkata", maxConcurrent: 5, fallbackHours: 24, maxCallsPerDay: 1 },
       ambulance: { enabled: false, contactName: "", phone: "", method: "sms" }
     };
@@ -46,7 +47,7 @@
       phone: String(ra.phone || "").slice(0, 24),
       method: (ra.method === "whatsapp") ? "whatsapp" : "sms"
     };
-    return { voice: v, ambulance: a };
+    return { name: String(raw.name || "").slice(0, 160), voice: v, ambulance: a };
   }
 
   // ---- timezone helpers (Intl-only; no dependency) -----------------------------------------

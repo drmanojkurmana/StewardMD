@@ -66,7 +66,7 @@ async def originate(request: Request):
         "callId": body.get("callId") or ("call-" + base64.urlsafe_b64encode(os.urandom(6)).decode().rstrip("=")),
         "phone": body.get("phone"), "lang": body.get("lang", "te"),
         "disease": body.get("disease"), "dayOffset": body.get("dayOffset", 1),
-        "episodeId": body.get("episodeId"),
+        "episodeId": body.get("episodeId"), "hospitalName": body.get("hospitalName") or body.get("hospital") or "",
     }
     CALLS[call["callId"]] = call
     if body.get("dryDial"):                        # skip real dialing (offline WS test)
