@@ -1,6 +1,6 @@
 # StewardMD — Pricing & Packaging (v7)
 
-*v7 changes: Personal Clinic is now **Pro-and-above only** (none for Free/Trainee/Co-Resident); clinic limits **Pro 2 · Physician 4 · Physician Pro 6** (extra ₹100/clinic/mo); **signed-in devices locked to 1** for anti-sharing, except Co-Resident 2 and Physician Pro 2. v6: personal-clinics-per-doctor limits (superseded); **app-store cut** guidance (15% startup programs, steer to web ~2%, §12); tax stance recorded (B2C GST-inclusive, register near ₹20L, Regular 18% + ITC, §12). v5: AI usage shown to users only in **MaiK Tokens**, never rupees (§8a — peg 2,000 MT = ₹1, ₹10 usage = 20,000 MT; packs 50k/250k/750k MT); GST guidance corrected (no startup waiver, but ₹20L threshold + 6% composition, §12). v4 set: FollowCare ₹4/min × 3–5 min ≈ ₹20/patient (quotas trimmed); **Device Voice "Ultra"** Pro-and-above perk; strike-through/anchor pricing (genuine only); coupons Android/Web only (Apple forbids IAP codes).*
+*v7 changes: Personal Clinic is now **Pro-and-above only** (none for Free/Trainee/Co-Resident); clinic limits **Pro 2 · Physician 4 · Physician Pro 6** (extra ₹139/clinic/mo); **signed-in devices locked to 1** for anti-sharing, except Co-Resident 2 and Physician Pro 2. v6: personal-clinics-per-doctor limits (superseded); **app-store cut** guidance (15% startup programs, steer to web ~2%, §12); tax stance recorded (B2C GST-inclusive, register near ₹20L, Regular 18% + ITC, §12). v5: AI usage shown to users only in **MaiK Tokens**, never rupees (§8a — peg 2,000 MT = ₹1, ₹10 usage = 20,000 MT; packs 50k/250k/750k MT); GST guidance corrected (no startup waiver, but ₹20L threshold + 6% composition, §12). v4 set: FollowCare ₹4/min × 3–5 min ≈ ₹20/patient (quotas trimmed); **Device Voice "Ultra"** Pro-and-above perk; strike-through/anchor pricing (genuine only); coupons Android/Web only (Apple forbids IAP codes).*
 
 *Signed-off commercial model. v3 splits the top of the ladder into **three attending tiers** — Pro ₹599 (clinical AI), **Physician ₹1,499** (run your clinic: Google-Drive Personal Clinic + capped FollowCare/Scribe/MaiK-Ask + unlimited Billing + optional Onco), and **Physician Pro ₹2,499** (we host PHI + higher AI/credits + OncoTree/ONCQIS included). Trainee tiers (Student/Intern/Resident ₹199, Co-Resident ₹299) and Pro are kept as-is. Per-patient AI (voice consult ₹3–5, FollowCare ~₹11) is metered by monthly quota + credits, separate from the daily text cap. Ladder: Free → ₹199 → ₹299 → ₹599 → ₹1,499 → ₹2,499.*
 
@@ -79,7 +79,7 @@ Trainee = Student / Intern / Resident (all one price band, kept as-is). "Physici
 | MaiK (text) · voice dictation (on-device) | taste | ✅ | ✅ pooled | ✅ |
 | Patient Summary · Research | ❌ · taste | ❌ · educational | ❌ · 10/day | ✅ · 10/day |
 | Imaging AI reads/day | ❌ | ❌ (Learn atlas) | 4/day each | 5/day |
-| **Personal clinics / locations** | ❌ | ❌ | ❌ | up to **2** (extra ₹100/mo each) |
+| **Personal clinics / locations** | ❌ | ❌ | ❌ | up to **2** (extra ₹139/mo each) |
 | **Signed-in devices** (anti-sharing) | 1 | 1 | **2** | 1 |
 | **Device Voice "Ultra"** (premium on-device model) | ❌ | ❌ | ❌ | ✅ |
 | Lab Watch + wearable | ❌ | ❌ | ❌ | ✅ |
@@ -97,7 +97,7 @@ Both are for a doctor running their own practice. **Physician** = solo clinic on
 | Priority reasoning model | ✅ | ✅ |
 | **Device Voice "Ultra"** (premium on-device dictation model) | ✅ | ✅ |
 | **Personal Clinic storage** | **own Google Drive** (we store no PHI) | **Cloud Sync — we host PHI**, multi-device realtime |
-| **Personal clinics / locations** | **4** (extra ₹100/mo each) | **6** (extra ₹100/mo each) |
+| **Personal clinics / locations** | **4** (extra ₹139/mo each) | **6** (extra ₹139/mo each) |
 | **Signed-in devices** (anti-sharing) | 1 | **2** |
 | **Clinic Billing** (invoices) | **unlimited** | **unlimited** |
 | **FollowCare** (₹≈20/patient to us) | **10 patients/mo** incl → tokens | **25 patients/mo** incl → tokens |
@@ -110,7 +110,7 @@ Over any daily cap or monthly quota → **top up tokens** (§7) or upgrade; neve
 **Device Voice "Ultra"** (a larger, higher-accuracy on-device speech model) is a **Pro-and-above** perk — it costs us ₹0 to run (on-device) so it's a pure differentiator that makes Pro worth buying.
 
 **Margins (net of 18% GST):**
-- **Physician ₹1,499** → net ~₹1,270; worst-case included cost ≈ FollowCare 10×₹20 (₹200) + Scribe 40×₹4 (₹160) + text (~₹100) ≈ ₹460 → **~₹810 contribution (64%)**; +₹89 Onco is near-pure margin.
+- **Physician ₹1,499** → net ~₹1,270; worst-case included cost ≈ FollowCare 10×₹20 (₹200) + Scribe 40×₹4 (₹160) + text (~₹139) ≈ ₹460 → **~₹810 contribution (64%)**; +₹89 Onco is near-pure margin.
 - **Physician Pro ₹2,499** → net ~₹2,118; included cost ≈ FollowCare 25×₹20 (₹500) + Scribe 120×₹4 (₹480) + text (~₹150) ≈ ₹1,130 → **~₹988 contribution (47%)**; overage billed via tokens, so it only improves.
 
 *Build note: the text cost-cap + credits are shipped; the three **monthly per-patient quota meters** (FollowCare, voice consult, MaiK Ask) + credit-overage still need wiring before go-live — same pattern as the built daily meter, keyed `<feature>:<uid>:<month>`.*
@@ -208,7 +208,7 @@ Legend: **F**=Free · **S**=Trainee (Student/Intern/Resident) · **P**=Pro · **
 | KardioX ECG AI | **Ph/U/H** 💰 | Learn atlas **F/S** |
 | ICU workstation + collaboration | **H** | |
 | Lab Watch 24/7 | **P/Ph/U** (solo) / **H** | |
-| **Personal Clinic / My Clinic** (patient list, queue, consult EMR) | **P** 2 · **Ph** 4 · **U** 6 (extra ₹100/mo) | Pro+ only; not Free/Trainee/Co-Res |
+| **Personal Clinic / My Clinic** (patient list, queue, consult EMR) | **P** 2 · **Ph** 4 · **U** 6 (extra ₹139/mo) | Pro+ only; not Free/Trainee/Co-Res |
 | Personal Clinic — own **Google Drive** backup (no PHI on us) | **Ph** | cheap |
 | Personal Clinic — **Cloud Sync (we host PHI)** | **U** | our storage + DPDP liability |
 | **Clinic Billing** (invoices) | **Ph/U** unlimited | deterministic |
@@ -305,6 +305,6 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 - **GST (no startup waiver exists):** DPIIT-recognised startups get income-tax relief (80-IAC holiday) and angel-tax exemption, but **there is no GST exemption for startups**. What actually helps early on: (a) **no GST registration or charge required below ₹20 lakh** annual turnover (₹10L in special-category states), so early revenue is GST-free and margins are higher; (b) the **composition scheme for services (6%)** is available up to ₹50L turnover instead of the full 18%; (c) once regular-registered, SaaS is **18%**. Plan pricing so it works at 18%, enjoy the sub-threshold headroom while it lasts, and register the moment you approach ₹20L. Caveat: selling through an e-commerce operator / marketplace or making inter-state B2B supply can force registration earlier. *Confirm the exact position with a CA — this is guidance, not tax advice.* Display: B2C prices **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at checkout) once registered.
 - **Coupons = Android + Web only.** Apple forbids external discount codes inside IAP, so the coupon-redeem field is **shown on Android/Web (Razorpay/PhonePe/Play) and hidden on iOS**; iOS discounts use **Apple Offer Codes** or a "redeem on stewardmd.in" link (purchase on web, entitlement syncs to the account). The built coupon engine already grants server-side, so a web redeem unlocks the iOS app automatically.
 - **App-store cuts (material — steer to web):** Apple and Google take **15%** of IAP under their startup programs (Apple **Small Business Program** ≤ $1M/yr, and Google Play's first-$1M / all-subscriptions rate), rising to **30%** only above ~$1M/yr. **Web checkout (Razorpay/PhonePe) has NO store cut — only ~2% gateway.** So: (1) enroll in Apple SBP + Play's reduced-rate programme day one; (2) **route purchases to web wherever the platform allows** (PWA/site and Android user-choice billing) to keep the ~13% delta; (3) iOS digital subscriptions **must** use Apple IAP — budget the 15% there. Every tier stays profitable at 15% (Pro ₹599 net after 15% store ≈ ₹509 before GST); web is simply better, so it's the default we push. Token top-ups and the extra-clinic add-on are cheapest bought on web.
-- **Personal clinics per doctor:** none for Free/Trainee/Co-Resident (Personal Clinic is Pro+); **Pro 2 · Physician 4 · Physician Pro 6** · beyond that **₹100/clinic/month** (a plan add-on shown in ₹, not MaiK Tokens). Near-pure margin (mostly storage); a fair charge for multi-location practices.
+- **Personal clinics per doctor:** none for Free/Trainee/Co-Resident (Personal Clinic is Pro+); **Pro 2 · Physician 4 · Physician Pro 6** · beyond that **₹139/clinic/month** (a plan add-on shown in ₹, not MaiK Tokens). Near-pure margin (mostly storage); a fair charge for multi-location practices.
 - **Signed-in devices (anti-sharing licensing control):** **1 device for every tier**, except **Co-Resident 2** (it's a 2-account plan) and **Physician Pro 2** (its cloud-hosted clinic is multi-device). Stops one paid login being shared across a whole unit; enforced server-side on sign-in.
 - **In-app cap nudge** is the primary upsell surface (the built `429 ai-cost-cap` sheet).
