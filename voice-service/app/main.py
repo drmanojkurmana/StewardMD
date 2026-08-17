@@ -26,6 +26,7 @@ from .tts.gtts_provider import GttsTTS
 from .tts.sarvam import SarvamTTS
 from .telephony.plivo_provider import PlivoController, PlivoStreamTelephony
 from .call.session import CallSession
+from .call.conversational import ConversationalBrain, ConversationalSession
 from .gpu import RunPodController
 
 cfg = Config()
@@ -178,7 +179,11 @@ async def plivo_stream(ws: WebSocket, call_id: str):
     rec["state"] = "active"
     STATE["last_activity"] = time.time()
     telephony = PlivoStreamTelephony(ws, cfg)
-    session = CallSession(rec["call"], stt, tts, telephony, nlu, client, cfg)
+    if cfg.conversational:      # LLM-driven natural conversation (reacts to the patient, not a form)
+        brain = ConversationalBrain(rec["call"], cfg, nlu.model_call)
+        session = ConversationalSession(rec["call"], stt, tts, telephony, brain, client, cfg)
+    else:                       # deterministic form-reader (fallback)
+        session = CallSession(rec["call"], stt, tts, telephony, nlu, client, cfg)
     try:
         await session.run()
     except Exception:

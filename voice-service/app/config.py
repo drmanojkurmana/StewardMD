@@ -48,6 +48,11 @@ class Config:
         self.energy_threshold = _int("VOICE_ENERGY_THRESHOLD", 350)
         self.silence_ms = _int("VOICE_SILENCE_MS", 1000)
         self.max_utterance_ms = _int("VOICE_MAX_UTTERANCE_MS", 15000)
+        # Conversational mode: an LLM drives a natural chat (default ON) vs. the deterministic form-reader.
+        self.conversational = e.get("VOICE_CONVERSATIONAL", "1") == "1"
+        self.agent_name = e.get("VOICE_AGENT_NAME", "Maithri")
+        self.max_convo_turns = _int("VOICE_MAX_CONVO_TURNS", 16)
+        self.convo_fallback = e.get("VOICE_CONVO_FALLBACK", "క్షమించండి, దయచేసి మళ్ళీ చెప్పగలరా?")
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")
