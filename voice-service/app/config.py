@@ -51,8 +51,16 @@ class Config:
         # Conversational mode: an LLM drives a natural chat (default ON) vs. the deterministic form-reader.
         self.conversational = e.get("VOICE_CONVERSATIONAL", "1") == "1"
         self.agent_name = e.get("VOICE_AGENT_NAME", "Maithri")
-        self.max_convo_turns = _int("VOICE_MAX_CONVO_TURNS", 16)
         self.convo_fallback = e.get("VOICE_CONVO_FALLBACK", "క్షమించండి, దయచేసి మళ్ళీ చెప్పగలరా?")
+        # Patient enough for elderly, but BOUNDED for cost: wait longer per turn, allow a couple of gentle
+        # silence nudges, cap turns + a hard wall-clock ceiling so a call can never run for many minutes.
+        self.convo_turn_timeout = _int("VOICE_CONVO_TURN_TIMEOUT", 12)
+        self.max_silence_nudges = _int("VOICE_MAX_SILENCE_NUDGES", 2)
+        self.max_convo_turns = _int("VOICE_MAX_CONVO_TURNS", 18)
+        self.convo_max_seconds = _int("VOICE_CONVO_MAX_SECONDS", 300)
+        # Sarvam voice tuning for elderly ears: slower + a bit louder.
+        self.sarvam_pace = e.get("SARVAM_PACE", "0.9")
+        self.sarvam_loudness = e.get("SARVAM_LOUDNESS", "1.3")
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")

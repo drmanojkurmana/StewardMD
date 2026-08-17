@@ -29,6 +29,11 @@ class SarvamTTS(TTSProvider):
                 payload["model"] = self.cfg.sarvam_tts_model
             if self.cfg.sarvam_speaker:
                 payload["speaker"] = self.cfg.sarvam_speaker
+            try:                                  # slower + louder for elderly ears (ignore if not accepted)
+                payload["pace"] = float(self.cfg.sarvam_pace)
+                payload["loudness"] = float(self.cfg.sarvam_loudness)
+            except Exception:
+                pass
             r = requests.post(
                 "https://api.sarvam.ai/text-to-speech",
                 headers={"api-subscription-key": self.cfg.sarvam_api_key, "Content-Type": "application/json"},

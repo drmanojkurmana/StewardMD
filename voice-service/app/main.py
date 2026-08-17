@@ -120,8 +120,8 @@ async def lastcall():
     cid = max(STATE["calls"], key=lambda c: STATE["calls"][c]["ts"])
     rec = STATE["calls"][cid]
     call = rec["call"]
-    return {"callId": cid, "phone": call.get("phone"), "state": rec["state"],
-            "lang": call.get("lang"), "turns": call.get("_turns", [])}
+    return {"callId": cid, "phone": call.get("phone"), "state": rec["state"], "lang": call.get("lang"),
+            "turns": call.get("_turns", []), "convo": call.get("_convo", []), "facts": call.get("_facts", {})}
 
 
 @app.post("/ingest")
