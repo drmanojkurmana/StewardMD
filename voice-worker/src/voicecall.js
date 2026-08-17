@@ -59,7 +59,8 @@ export class VoiceCall {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${this.cfg.geminiModel}:generateContent?key=${this.cfg.geminiKey}`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.3, response_mime_type: "application/json" } }),
+          // thinkingBudget:0 disables the model's slow "thinking" pass — the big latency win for a voice loop.
+          generationConfig: { temperature: 0.3, response_mime_type: "application/json", thinkingConfig: { thinkingBudget: 0 } } }),
       });
       const j = await r.json();
       return j.candidates?.[0]?.content?.parts?.[0]?.text || "";
@@ -90,6 +91,35 @@ export class VoiceCall {
     if (url.pathname.endsWith("/debug")) {
       return new Response(JSON.stringify({ call: this.call?.callId, log: this.log, facts: this._facts || {} }),
         { headers: { "Content-Type": "application/json" } });
+    }
+    if (url.pathname.endsWith("/timing")) {   // measure this DO's round-trips to Sarvam + Gemini
+      const out = {};
+      let t = Date.now();
+      try {
+        const r = await fetch("https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw&sample_rate=8000&endpointing=vad&language_code=te-IN",
+          { headers: { Upgrade: "websocket", "api-subscription-key": this.cfg.sarvamKey } });
+        const w = r.webSocket; w.accept();
+        await new Promise((res) => { w.addEventListener("message", () => res()); setTimeout(res, 5000); });
+        out.stt_connect_ms = Date.now() - t; try { w.close(); } catch {}
+      } catch (e) { out.stt_err = String(e); }
+      t = Date.now();
+      try { await this.modelCall('reply STRICT JSON {"reply":"hi"}'); out.gemini_tiny_ms = Date.now() - t; } catch (e) { out.gemini_err = String(e); }
+      t = Date.now();
+      try { const b = new Brain({ lang: "te", disease: "Heart Failure", dayOffset: 3 }, this.cfg); b.turns.push(["YOU", "hi"], ["PATIENT", "బానే ఉంది"]); await b.step(null, (p) => this.modelCall(p)); out.gemini_real_ms = Date.now() - t; } catch (e) { out.gemini_real_err = String(e); }
+      t = Date.now();
+      try { const pcm = await sarvamTTS(this.cfg, "మంచిదండి, మీ బరువు ఏమైనా పెరిగిందా అండి?", "te"); out.batch_tts_ms = Date.now() - t; out.batch_tts_bytes = pcm.length; } catch (e) { out.batch_tts_err = String(e); }
+      t = Date.now();
+      try {
+        const r = await fetch("https://api.sarvam.ai/text-to-speech/ws?model=bulbul:v2&send_completion_event=true",
+          { headers: { Upgrade: "websocket", "api-subscription-key": this.cfg.sarvamKey } });
+        const w = r.webSocket; w.accept();
+        const done = new Promise((res) => { w.addEventListener("message", (e) => { let m; try { m = JSON.parse(e.data); } catch { return; } if (m.type === "audio") res(); }); setTimeout(res, 6000); });
+        w.send(JSON.stringify({ type: "config", data: { language_code: "te-IN", speaker: "anushka", model: "bulbul:v2", speech_sample_rate: "8000", output_audio_codec: "mulaw" } }));
+        w.send(JSON.stringify({ type: "text", data: { text: "నమస్కారం" } }));
+        w.send(JSON.stringify({ type: "flush" }));
+        await done; out.tts_firstaudio_ms = Date.now() - t; try { w.close(); } catch {}
+      } catch (e) { out.tts_err = String(e); }
+      return new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json" } });
     }
     if (request.headers.get("Upgrade") === "websocket") {
       const [client, server] = Object.values(new WebSocketPair());
@@ -179,7 +209,7 @@ export class VoiceCall {
     const say = async (turn) => {
       this.log.push(["YOU", turn.reply]);
       emergency = emergency || turn.emergency;
-      await this.streamTts(turn.reply, lang);   // stream so the agent starts speaking sooner
+      await this._play(await sarvamTTS(cfg, turn.reply, lang));   // batch TTS is faster to first sound than the ws stream
     };
 
     // A finished patient utterance (from Sarvam VAD) -> brain -> speak.
