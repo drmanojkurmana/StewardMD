@@ -61,6 +61,37 @@ body.atlas-lock { overflow: hidden; }
 .atlas-row-n { flex: 0 0 auto; padding-right: 14px; font-size: 12px; opacity: .45; }
 .atlas-empty { padding: 32px 4px; opacity: .6; font-size: 14px; }
 
+/* ---------- slice stage ---------- */
+
+.atlas-stage { position: relative; flex: 1 1 auto; overflow: hidden; }
+/* Explicit width/height come from imageBox(), so fill is correct here — the box
+   already has the file's aspect ratio and will not distort. */
+.atlas-img { position: absolute; object-fit: fill; }
+.atlas-ov { position: absolute; inset: 0; pointer-events: none; }
+.atlas-ov svg { position: absolute; inset: 0; overflow: visible; }
+
+.atlas-lead { stroke-width: 1; opacity: .85; }
+.atlas-tick { stroke-width: 1.5; opacity: .85; }
+.atlas-dot { stroke: #000; stroke-width: .5; pointer-events: auto; cursor: pointer; }
+.atlas-lab {
+  font: 500 11px/1.15 system-ui, -apple-system, "Segoe UI", sans-serif;
+  pointer-events: auto; cursor: pointer;
+}
+.atlas-lab:focus-visible, .atlas-dot:focus-visible { outline: 2px solid #3b9dff; outline-offset: 2px; }
+
+.atlas-lead.dim, .atlas-tick.dim, .atlas-lab.dim, .atlas-dot.dim { opacity: .38; }
+.atlas-lead.on, .atlas-tick.on { stroke: #fff; stroke-width: 2; opacity: 1; }
+.atlas-dot.on { opacity: 1; }
+/* The white "pill" on a selected label is a thick white stroke painted UNDER the
+   glyphs (paint-order), not a separate rect — one property instead of a second
+   element per label, and it hugs the text at any length. */
+.atlas-lab.on {
+  fill: #111 !important;
+  paint-order: stroke;
+  stroke: #fff; stroke-width: 9px; stroke-linejoin: round;
+  font-weight: 700;
+}
+
 /* ---------- info screen ---------- */
 
 .atlas-info-screen {

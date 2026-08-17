@@ -136,6 +136,85 @@
     return order.map(function (r) { return { region: r, modules: by[r] }; });
   }
 
+  // Letterbox the slice inside the stage, reserving gutterPx each side for labels.
+  function imageBox(stageW, stageH, aspect, gutterPx) {
+    var a = aspect > 0 ? aspect : 1;
+    var avail = Math.max(0, stageW - 2 * gutterPx);
+    var w = avail, h = w / a;
+    if (h > stageH) { h = stageH; w = h * a; }
+    if (!isFinite(w) || w < 0) w = 0;
+    if (!isFinite(h) || h < 0) h = 0;
+    return { x: (stageW - w) / 2, y: (stageH - h) / 2, w: w, h: h };
+  }
+
+  // One SVG in stage PIXEL coordinates holding every dot, leader line, tick and label.
+  // Pixels rather than a percentage viewBox so circles stay circular and text stays
+  // upright at any stage aspect; the caller repaints on resize.
+  function overlaySvg(slice, atlas, box, stageW, stageH, opts) {
+    opts = opts || {};
+    var sel = opts.sel, hidden = opts.hidden || {};
+    var cats = (atlas && atlas.categories) || {}, strs = (atlas && atlas.structures) || {};
+    var pins = ((slice && slice.pins) || []).filter(function (p) {
+      return strs[p.s] && !hidden[p.s];
+    });
+
+    // Pin coordinates are percentages of the IMAGE box, but labels are placed down the
+    // full-height STAGE gutter. Convert to stage space BEFORE laying out, or every
+    // label drifts away from its structure by the letterbox offset and the leader
+    // lines fan out diagonally instead of running almost straight across.
+    function stageY(p) { return stageH ? ((box.y + (p.y / 100) * box.h) / stageH) * 100 : p.y; }
+
+    var L = [], R = [];
+    pins.forEach(function (p) {
+      var w = { s: p.s, x: p.x, y: stageY(p), px: p.x, py: p.y };
+      (p.x < 50 ? L : R).push(w);
+    });
+
+    var anySel = !!sel && pins.some(function (p) { return p.s === sel; });
+    var parts = [];
+
+    function emit(side, laid) {
+      laid.forEach(function (o) {
+        var p = o.pin, s = strs[p.s];
+        var col = (cats[s.category] && cats[s.category].color) || "#ffffff";
+        var on = sel === p.s, dim = anySel && !on;
+        var cls = on ? " on" : (dim ? " dim" : "");
+
+        var dx = box.x + (p.px / 100) * box.w;         // dot, in stage px
+        var dy = box.y + (p.py / 100) * box.h;
+        var tx = side === "l" ? GUTTER_PX - 6 : stageW - GUTTER_PX + 6;   // label tick
+        var ty = (o.labelY / 100) * stageH;
+
+        parts.push('<line class="atlas-lead' + cls + '" x1="' + tx.toFixed(1) + '" y1="' + ty.toFixed(1) +
+          '" x2="' + dx.toFixed(1) + '" y2="' + dy.toFixed(1) + '" stroke="' + esc(col) + '"/>');
+        parts.push('<line class="atlas-tick' + cls + '" x1="' + tx.toFixed(1) + '" y1="' + (ty - 11).toFixed(1) +
+          '" x2="' + tx.toFixed(1) + '" y2="' + (ty + 11).toFixed(1) + '" stroke="' + esc(col) + '"/>');
+
+        var lines = wrapLabel(s.name, LABEL_CHARS, LABEL_LINES);
+        var anchor = side === "l" ? "end" : "start";
+        var lx = side === "l" ? tx - 7 : tx + 7;
+        var y0 = ty - (lines.length - 1) * 6.5;
+        parts.push('<text class="atlas-lab ' + side + cls + '" x="' + lx.toFixed(1) + '" y="' + y0.toFixed(1) +
+          '" text-anchor="' + anchor + '" fill="' + esc(col) + '" data-atlas-act="pin" data-atlas-s="' + esc(p.s) +
+          '" role="button" tabindex="0" aria-label="' + esc(s.name) + '">' +
+          lines.map(function (t, k) {
+            return '<tspan x="' + lx.toFixed(1) + '" dy="' + (k ? 13 : 0) + '">' + esc(t) + "</tspan>";
+          }).join("") + "</text>");
+
+        parts.push('<circle class="atlas-dot' + cls + '" cx="' + dx.toFixed(1) + '" cy="' + dy.toFixed(1) +
+          '" r="' + (on ? 5 : 3.2) + '" fill="' + (on ? "#ffffff" : esc(col)) +
+          '" data-atlas-act="pin" data-atlas-s="' + esc(p.s) +
+          '" role="button" tabindex="0" aria-label="' + esc(s.name) + '"/>');
+      });
+    }
+
+    emit("l", layoutGutter(L, GAP_PCT, PAD_PCT));
+    emit("r", layoutGutter(R, GAP_PCT, PAD_PCT));
+
+    return '<svg class="atlas-svg" viewBox="0 0 ' + stageW + " " + stageH +
+      '" width="' + stageW + '" height="' + stageH + '">' + parts.join("") + "</svg>";
+  }
+
   /* ---------- layout constants ---------- */
   // Declared once, in the pure block, so the Node tests see them too.
   var GAP_PCT = 6.5, PAD_PCT = 2, LABEL_CHARS = 13, LABEL_LINES = 2, GUTTER_PX = 90;
@@ -316,8 +395,64 @@
     if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
-  function viewerHtml() { return ""; }         // Task 5
-  function afterViewerPaint() {}               // Task 5
+  function curSlice() {
+    var sl = (st.atlas && st.atlas.slices) || [];
+    if (!sl.length) return null;
+    return sl[Math.min(Math.max(st.slice, 1), sl.length) - 1] || null;
+  }
+
+  function moduleMeta() {
+    var mods = (st.catalog && st.catalog.modules) || [];
+    for (var i = 0; i < mods.length; i++) if (mods[i].id === st.moduleId) return mods[i];
+    return {};
+  }
+
+  function viewerHtml() {
+    var m = moduleMeta();
+    var s = curSlice();
+    return '<div class="atlas-top">' +
+        '<button class="atlas-back" data-atlas-act="close" aria-label="Back">‹</button>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">' + esc(m.title || "") + "</span>" +
+        '<span class="atlas-sub">' + esc(m.subtitle || "") + "</span></span>" +
+        '<button class="atlas-info" data-atlas-act="info" aria-label="About this atlas">' + (ico("info") || "i") + "</button></div>" +
+      '<div class="atlas-stage" id="atlasStage">' +
+        (s ? '<img class="atlas-img" id="atlasImg" alt="" src="' + esc(imgUrl(s.img)) + '">' : "") +
+        '<div class="atlas-ov" id="atlasOv"></div>' +
+      "</div>" +
+      '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
+  }
+
+  var _ro = null;
+  function afterViewerPaint() {
+    var stage = G.document.getElementById("atlasStage");
+    if (!stage) return;
+    drawOverlay();
+    // The SVG is in stage pixels, so it must be rebuilt whenever the stage resizes
+    // (rotation, split view, desktop window drag). One observer, reattached per paint.
+    if (G.ResizeObserver) {
+      if (_ro) { try { _ro.disconnect(); } catch (e) {} }
+      _ro = new G.ResizeObserver(function () { drawOverlay(); });
+      _ro.observe(stage);
+    }
+  }
+
+  function drawOverlay() {
+    var stage = G.document.getElementById("atlasStage");
+    var ov = G.document.getElementById("atlasOv");
+    var s = curSlice();
+    if (!stage || !ov || !s) return;
+    var w = stage.clientWidth, h = stage.clientHeight;
+    if (!w || !h) return;
+    var box = imageBox(w, h, s.aspect, GUTTER_PX);
+    var img = G.document.getElementById("atlasImg");
+    if (img) {
+      img.style.left = box.x + "px"; img.style.top = box.y + "px";
+      img.style.width = box.w + "px"; img.style.height = box.h + "px";
+    }
+    ov.innerHTML = overlaySvg(s, st.atlas, box, w, h, {
+      sel: st.sel || st.locked, hidden: st.hidden
+    });
+  }
 
   // One delegated handler for the whole overlay. Extended by later tasks.
   function onClick(e) {
@@ -349,7 +484,9 @@
     if (moduleId) {
       st.view = "viewer"; st.moduleId = moduleId; st.slice = 1; st.atlas = null;
       paint();
-      loadModule(moduleId).then(paint);
+      // Deep links land here without a catalog, and the viewer header needs the
+      // module's title/subtitle from it — so load both.
+      loadCatalog().then(function () { return loadModule(moduleId); }).then(paint);
     } else {
       st.view = "catalog";
       paint();
@@ -384,6 +521,15 @@
     return true;
   }
 
+  // Two repaint triggers, deliberately. ResizeObserver catches element-level changes
+  // (iPad split view, desktop window drag) but does not fire at all in headless/CDP
+  // panes, so it cannot be verified in CI; a window resize listener catches rotation
+  // and viewport changes and is verifiable everywhere. Both funnel into one repaint.
+  if (G.addEventListener)
+    G.addEventListener("resize", function () {
+      if (isOpen() && st.view === "viewer") drawOverlay();
+    });
+
   /* ---------- exports ---------- */
 
   G.ATLAS = G.ATLAS || {};
@@ -396,13 +542,15 @@
   G.ATLAS._infoHtml = infoHtml;
   G.ATLAS._pure = {
     layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
-    validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion
+    validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
+    imageBox: imageBox, overlaySvg: overlaySvg
   };
   G.ATLAS._version = "1.0";
 
   if (typeof module !== "undefined" && module.exports)
     module.exports = {
       layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
-      validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion
+      validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
+      imageBox: imageBox, overlaySvg: overlaySvg
     };
 })(typeof window !== "undefined" ? window : this);
