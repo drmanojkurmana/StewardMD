@@ -46,7 +46,7 @@ class Config:
         # Endpointing (how we capture a patient turn) — tunable from real calls. Lower energy = catch quieter
         # speech; longer silence = don't cut off someone who pauses. These are the "can't understand me" knobs.
         self.energy_threshold = _int("VOICE_ENERGY_THRESHOLD", 350)
-        self.silence_ms = _int("VOICE_SILENCE_MS", 800)
+        self.silence_ms = _int("VOICE_SILENCE_MS", 500)
         self.max_utterance_ms = _int("VOICE_MAX_UTTERANCE_MS", 15000)
         # Conversational mode: an LLM drives a natural chat (default ON) vs. the deterministic form-reader.
         self.conversational = e.get("VOICE_CONVERSATIONAL", "1") == "1"
