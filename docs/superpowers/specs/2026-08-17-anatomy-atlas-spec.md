@@ -59,6 +59,7 @@ both plans.
 ```json
 {
   "version": 1,
+  "credits": ["Courtesy of the U.S. National Library of Medicine"],
   "modules": [
     {
       "id": "brain-mri-axial-t1",
@@ -73,6 +74,10 @@ both plans.
 }
 ```
 
+- `credits` — the **only** strings the UI may render as attribution, shown solely on
+  the atlas info screen. Curated and render-safe by construction. Deliberately *not*
+  `provenance`, which carries licence notes and internal tooling paths that must
+  never reach a user. Empty array = no credit block rendered.
 - `region` is a free string; the catalog groups by it in first-appearance order.
   No separate region registry — one less thing to keep in sync.
 - `modality` is display-only text (`MRI`, `CT`, `Illustration`, `Photograph`).

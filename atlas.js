@@ -155,9 +155,21 @@
     modality: ""
   };
 
+  // Hardened beyond the house esc(): quotes are escaped too, because this output goes
+  // into attribute values as well as text. Without that, a hostile thumb path escapes
+  // its style="..." attribute. Harmless in text context — browsers render &quot; as ".
   function esc(s) {
     return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  // CSS url() has its own escaping rules — a bare ")" closes the function regardless
+  // of HTML escaping — so percent-encode the characters that can break out.
+  function cssUrl(u) {
+    return esc(String(u == null ? "" : u).replace(/[()"'\s\\]/g, function (ch) {
+      return "%" + ch.charCodeAt(0).toString(16).toUpperCase();
+    }));
   }
 
   // Guarded because home.js (which owns the icon catalog) loads after this file.
@@ -207,16 +219,120 @@
     if (st.view === "viewer") afterViewerPaint();
   }
 
-  function catalogHtml() { return ""; }        // Task 4
+  // Native builds do not bundle the .webp slices (~2 MB/module), so point them at
+  // the live origin — mirroring kardiox-screens.js kxImg() for kardiox-learn.
+  function imgUrl(u) {
+    try {
+      if (u && u.charAt(0) === "/" && u.indexOf("/atlas/") === 0 && G.SMD_IS_NATIVE)
+        return "https://stewardmd.in" + u;
+    } catch (e) {}
+    return u;
+  }
+
+  function chipRow() {
+    var mods = (st.catalog && st.catalog.modules) || [];
+    var regions = [], modalities = [], seenR = {}, seenM = {};
+    mods.forEach(function (m) {
+      if (m.region && !seenR[m.region]) { seenR[m.region] = 1; regions.push(m.region); }
+      if (m.modality && !seenM[m.modality]) { seenM[m.modality] = 1; modalities.push(m.modality); }
+    });
+    function chips(kind, vals, active) {
+      if (vals.length < 2) return "";        // a single value is not a filter
+      return '<div class="atlas-chips">' +
+        '<button class="atlas-chip' + (active ? "" : " on") + '" data-atlas-act="filter" data-kind="' + kind + '" data-val="">All</button>' +
+        vals.map(function (v) {
+          return '<button class="atlas-chip' + (active === v ? " on" : "") + '" data-atlas-act="filter" data-kind="' +
+            kind + '" data-val="' + esc(v) + '">' + esc(v) + "</button>";
+        }).join("") + "</div>";
+    }
+    return chips("region", regions, st.region) + chips("modality", modalities, st.modality);
+  }
+
+  function moduleRow(m) {
+    return '<button class="atlas-row" data-atlas-act="mod" data-atlas-mod="' + esc(m.id) + '">' +
+      '<span class="atlas-row-th"' + (m.thumb ? ' style="background-image:url(' + cssUrl(imgUrl(m.thumb)) + ')"' : "") + "></span>" +
+      '<span class="atlas-row-txt"><span class="atlas-row-ttl">' + esc(m.title) + "</span>" +
+      '<span class="atlas-row-sub">' + esc(m.subtitle || m.modality) + "</span></span>" +
+      '<span class="atlas-row-n">' + (m.slices || 0) + "</span></button>";
+  }
+
+  function catalogHtml() {
+    var mods = (st.catalog && st.catalog.modules) || [];
+    var shown = filterModules(mods, st.region, st.modality);
+    var groups = groupByRegion(shown);
+    var body = groups.length
+      ? groups.map(function (g) {
+          return '<div class="atlas-grp"><div class="atlas-grp-h">' + esc(g.region) + "</div>" +
+            g.modules.map(moduleRow).join("") + "</div>";
+        }).join("")
+      : '<div class="atlas-empty">' + (mods.length ? "No modules match these filters." : "Atlas loading…") + "</div>";
+
+    return '<div class="atlas-top">' +
+        '<button class="atlas-back" data-atlas-act="close" aria-label="Close">‹</button>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">Anatomy Atlas</span></span>' +
+        '<button class="atlas-info" data-atlas-act="info" aria-label="About this atlas">' + (ico("info") || "i") + "</button></div>" +
+      '<div class="atlas-scroll">' + chipRow() + body + "</div>" +
+      '<div class="atlas-foot">Educational reference only — not for diagnosis.</div>';
+  }
+
+  // The ONE place a source credit may appear (product decision, spec section 9).
+  // It renders catalog.credits — a curated, render-safe list — and deliberately NOT
+  // atlas.provenance, which holds licence notes and internal tooling paths.
+  function infoHtml() {
+    var credits = (st.catalog && st.catalog.credits) || [];
+    return '<div class="atlas-info-screen" id="atlasInfo">' +
+      '<div class="atlas-top">' +
+        '<button class="atlas-back" data-atlas-act="infoclose" aria-label="Close">‹</button>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">About the Atlas</span></span></div>' +
+      '<div class="atlas-scroll"><p class="atlas-prose">' +
+        "This atlas is an educational anatomy reference. It is not a diagnostic tool " +
+        "and must not be used to interpret a patient's imaging." +
+      "</p>" +
+      (credits.length
+        ? '<p class="atlas-prose atlas-credit">' + credits.map(esc).join("<br>") + "</p>"
+        : "") +
+      "</div></div>";
+  }
+
+  function openModule(id) {
+    st.view = "viewer"; st.moduleId = id; st.slice = 1;
+    st.sel = null; st.locked = null; st.hidden = {}; st.atlas = null;
+    paint();
+    loadModule(id).then(paint);
+  }
+
+  // Overlays (info, and later the slice grid) are appended on top of the current
+  // view rather than replacing it, so dismissing them needs no repaint.
+  function pushOverlay(html) {
+    var host = G.document.createElement("div");
+    host.innerHTML = html;
+    var node = host.firstChild;
+    if (node) rootEl().appendChild(node);
+    return node;
+  }
+
+  function dropOverlay(id) {
+    var el = G.document.getElementById(id);
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+  }
+
   function viewerHtml() { return ""; }         // Task 5
   function afterViewerPaint() {}               // Task 5
 
-  // Extended by later tasks. Present now so the overlay is never a dead end.
+  // One delegated handler for the whole overlay. Extended by later tasks.
   function onClick(e) {
     var b = e.target && e.target.closest && e.target.closest("[data-atlas-act]");
     if (!b) return;
     var a = b.getAttribute("data-atlas-act");
     if (a === "close") return back();
+    if (a === "mod") return openModule(b.getAttribute("data-atlas-mod"));
+    if (a === "info") { dropOverlay("atlasInfo"); return void pushOverlay(infoHtml()); }
+    if (a === "infoclose") return dropOverlay("atlasInfo");
+    if (a === "filter") {
+      var kind = b.getAttribute("data-kind");
+      st[kind === "region" ? "region" : "modality"] = b.getAttribute("data-val") || "";
+      return paint();
+    }
   }
 
   /* ---------- lifecycle ---------- */
@@ -258,9 +374,11 @@
     return !!(el && el.classList.contains("on"));
   }
 
-  // Two-level back: viewer -> catalog -> decline. swipe-back.js consults this.
+  // Layered back: info overlay -> viewer -> catalog -> close. swipe-back.js consults
+  // this, so each swipe steps one level in instead of dumping the user to Home.
   function back() {
     if (!isOpen()) return false;
+    if (G.document.getElementById("atlasInfo")) { dropOverlay("atlasInfo"); return true; }
     if (st.view === "viewer") { st.view = "catalog"; st.atlas = null; paint(); return true; }
     close();
     return true;
@@ -274,6 +392,8 @@
   G.ATLAS.isOpen = isOpen;
   G.ATLAS.back = back;
   G.ATLAS._state = st;
+  G.ATLAS._catalogHtml = catalogHtml;
+  G.ATLAS._infoHtml = infoHtml;
   G.ATLAS._pure = {
     layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
     validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion

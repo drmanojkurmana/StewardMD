@@ -22,10 +22,54 @@ body.atlas-lock { overflow: hidden; }
 .atlas-ttl { font-weight: 700; font-size: 17px; }
 .atlas-sub { font-size: 12px; opacity: .65; }
 
+.atlas-info {
+  width: 34px; height: 34px; flex: 0 0 auto; margin-left: auto;
+  border-radius: 50%; border: 1px solid #333;
+  background: #141414; color: #ccc;
+  font-size: 14px; line-height: 1; cursor: pointer;
+}
+.atlas-info svg { width: 18px; height: 18px; vertical-align: middle; }
+
 .atlas-foot {
   flex: 0 0 auto; padding: 6px 12px 10px; text-align: center;
   font-size: 11px; opacity: .5;
 }
+
+/* ---------- catalog ---------- */
+
+.atlas-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 12px 16px; }
+.atlas-chips { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0; scrollbar-width: none; }
+.atlas-chips::-webkit-scrollbar { display: none; }
+.atlas-chip {
+  flex: 0 0 auto; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid #333; background: #141414; color: #ddd;
+  font-size: 13px; cursor: pointer; white-space: nowrap;
+}
+.atlas-chip.on { background: #f2f2f2; color: #111; border-color: #f2f2f2; }
+
+.atlas-grp-h { font-size: 20px; font-weight: 700; margin: 16px 0 8px; }
+.atlas-row {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; margin-bottom: 8px; padding: 0;
+  border: 0; border-radius: 12px; background: #161616; color: inherit;
+  text-align: left; cursor: pointer; overflow: hidden;
+}
+.atlas-row-th { flex: 0 0 76px; width: 76px; height: 76px; background: #0b0b0b center/cover no-repeat; }
+.atlas-row-txt { flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; padding: 8px 0; min-width: 0; }
+.atlas-row-ttl { font-size: 16px; font-weight: 600; }
+.atlas-row-sub { font-size: 12px; opacity: .6; }
+.atlas-row-n { flex: 0 0 auto; padding-right: 14px; font-size: 12px; opacity: .45; }
+.atlas-empty { padding: 32px 4px; opacity: .6; font-size: 14px; }
+
+/* ---------- info screen ---------- */
+
+.atlas-info-screen {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+  background: #000;
+}
+.atlas-prose { margin: 12px 0; font-size: 15px; line-height: 1.55; opacity: .85; }
+.atlas-credit { font-size: 13px; opacity: .6; }
 
 @media (prefers-reduced-motion: reduce) {
   .atlas-overlay.on { animation: none; }

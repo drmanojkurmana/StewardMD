@@ -170,5 +170,70 @@ ok("close() is idempotent", (A.close(), A.close(), A.isOpen() === false));
 ok("reopening reuses the same root", (A.open(), doc2.body.children.filter((c) => c.id === "smdAtlas").length === 1));
 A.close();
 
+// --- catalog markup ---
+A.open();
+A._state.catalog = { modules: [
+  { id: "a", title: "Brain - MRI", subtitle: "Axial - T1", region: "Brain", modality: "MRI", slices: 3, thumb: "/t/a.webp" },
+  { id: "b", title: "CT brain", subtitle: "Axial", region: "Brain", modality: "CT", slices: 5, thumb: "/t/b.webp" },
+  { id: "c", title: "MRI cervical spine", subtitle: "Sagittal", region: "Spine", modality: "MRI", slices: 8, thumb: "/t/c.webp" }
+] };
+A._state.region = ""; A._state.modality = "";
+let html = A._catalogHtml();
+ok("catalog lists every module title", ["Brain - MRI", "CT brain", "MRI cervical spine"].every((t) => html.includes(t)));
+ok("catalog renders a region header per region", html.includes("Brain") && html.includes("Spine"));
+ok("catalog rows carry the module id", html.includes('data-atlas-mod="a"'));
+ok("catalog shows NO tier badge (everything is free)", !/PREMIUM|FREE/i.test(html));
+ok("catalog carries the disclaimer", html.includes("Educational reference only"));
+ok("catalog has a back control matching swipe-back BACK_SEL",
+   html.includes('class="atlas-back"') && /aria-label="(Back|Close)"/.test(html));
+ok("catalog has an info control", html.includes('data-atlas-act="info"'));
+
+A._state.region = "Spine";
+ok("region filter narrows the catalog", !A._catalogHtml().includes("Brain - MRI"));
+ok("region filter keeps its own section", A._catalogHtml().includes("MRI cervical spine"));
+A._state.modality = "CT";
+ok("contradictory filters yield an empty state", /No modules match/.test(A._catalogHtml()));
+A._state.region = ""; A._state.modality = "";
+ok("clearing filters restores the catalog", A._catalogHtml().includes("Brain - MRI"));
+
+A._state.catalog = { modules: [{ id: "x", title: '<img src=x onerror=alert(1)>', region: "R<script>", modality: "MRI", slices: 1, thumb: '" onload="alert(2)' }] };
+html = A._catalogHtml();
+ok("catalog escapes hostile titles", !html.includes("<img src=x"));
+ok("catalog escapes hostile regions", !html.includes("<script>"));
+ok("catalog escapes hostile thumb urls", !html.includes('onload="alert'));
+ok("catalog does not let a thumb break out of its style attribute", !/style="[^"]*"\s+\w+=/.test(html));
+A._state.catalog = { modules: [{ id: "y", title: "T", region: "R", modality: "MRI", slices: 1, thumb: '/a.webp);background:red;x:(' }] };
+// The payload text may survive INSIDE url(...) harmlessly; what must not survive is a
+// raw paren, which would close url() early and start a new CSS declaration.
+const styleAttr = (A._catalogHtml().match(/style="[^"]*"/) || [""])[0];
+ok("catalog neutralises a CSS url() breakout",
+   (styleAttr.match(/\(/g) || []).length === 1 && (styleAttr.match(/\)/g) || []).length === 1);
+ok("catalog percent-encodes injected parens", styleAttr.includes("%29") && styleAttr.includes("%28"));
+
+// --- info screen: the ONE permitted credit line lives here, nowhere else ---
+A._state.catalog = { credits: ["Courtesy of the U.S. National Library of Medicine"], modules: [
+  { id: "a", title: "Brain - MRI", region: "Brain", modality: "MRI", slices: 3, thumb: "/t/a.webp" }
+] };
+const info = A._infoHtml();
+ok("info screen renders each credit line", info.includes("Courtesy of the U.S. National Library of Medicine"));
+ok("info screen has a close control", /data-atlas-act="(infoclose|close)"/.test(info));
+ok("info screen states it is educational", /educational/i.test(info));
+ok("catalog does NOT render the credit even when credits are set",
+   !A._catalogHtml().includes("Courtesy of the U.S. National Library of Medicine"));
+A._state.catalog.credits = [];
+ok("no credits configured renders no credit block", !/Courtesy/.test(A._infoHtml()));
+A._state.catalog.credits = ['<script>alert(1)</script>'];
+ok("info screen escapes hostile credit strings", !A._infoHtml().includes("<script>"));
+
+// provenance stays an audit trail: it must never reach the UI, because it holds
+// internal notes and tooling paths.
+A._state.catalog.credits = [];
+A._state.atlas = { provenance: { images: "PLACEHOLDER - replace via atlas-pipeline/build.py", licence: "PLACEHOLDER" },
+                   categories: {}, structures: {}, slices: [] };
+ok("provenance never leaks into the info screen", !/atlas-pipeline|PLACEHOLDER/.test(A._infoHtml()));
+ok("provenance never leaks into the catalog", !/atlas-pipeline|PLACEHOLDER/.test(A._catalogHtml()));
+A._state.atlas = null;
+A.close();
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);
