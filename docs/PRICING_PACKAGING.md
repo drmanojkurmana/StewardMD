@@ -168,7 +168,9 @@ Legend: **F**=Free · **S**=Student · **P**=Pro · **U**=Ultimate · **O**=Phys
 | KardioX ECG AI | **U/H** 💰 | Learn atlas **F/S** |
 | ICU workstation + collaboration | **H** | |
 | Lab Watch 24/7 | **P/U** (solo) / **H** | |
-| OPD Queue + EMR + display + billing | **H** | billing add-on |
+| **Personal OPD / My Clinic** (on-device: patient list, queue, consult EMR) | **F** 1 device → backup/sync **P/U** | solo doctor; local = ₹0 to serve |
+| OPD Ask MaiK (AI Dx/Mx/Rx suggestions in the consult) | **P/U** 💰 | AI = metered |
+| Hospital OPD Queue (multi-staff + GHIS/Connect + display + billing) | **H** | billing add-on; team product |
 | **Onco: disease ref + staging + CTCAE + IO-tox + RECIST + drug interactions** | **F** | reference & safety |
 | **Onco: protocols / library / OncoTree / recommend / evidence overlay** | **O** (+₹89) | treatment-planning workflow |
 | **Onco: treatment-plan execution (role-split)** | **H** | team |
