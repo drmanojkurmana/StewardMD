@@ -15,7 +15,7 @@ REPO="${VOICE_REPO:-github.com/drmanojkurmana/StewardMD.git}"
 GPU_TYPE="${RUNPOD_GPU_TYPE:-NVIDIA GeForce RTX 3090}"
 CLOUD_TYPE="${RUNPOD_CLOUD_TYPE:-COMMUNITY}"   # COMMUNITY = more availability + cheaper; SECURE for stricter isolation
 IMAGE="${RUNPOD_IMAGE:-runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04}"
-REQ_FILE="${VOICE_REQUIREMENTS:-requirements.txt}"   # full Indic stack (IndicConformer + Parler) for Telugu quality
+REQ_FILE="${VOICE_REQUIREMENTS:-requirements-sarvam.txt}"   # Sarvam API mode (no GPU models); requirements.txt = self-hosted Indic
 
 # Keys may come from the shell OR from ENV_FILE (so `bash runpod.sh up` works after the wizard, no exports).
 _envfile_get() { [ -f "$ENV_FILE" ] && sed -n "s/^$1=//p" "$ENV_FILE" | head -1 || true; }
@@ -112,7 +112,7 @@ case "$cmd" in
       curl -sS -m 8 "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/healthz" 2>/dev/null | grep -q '"ready":true' && { echo "ready"; break; }
       sleep 10
     done
-    exec bash "$0" ingest
+    exec bash "$0" ingest "${2:-}"
     ;;
   ingest)
     # Relay the queued call to the pod's /ingest. The pod's datacenter IP is 403'd pulling the queue itself,
@@ -123,8 +123,10 @@ case "$cmd" in
     Q=$(curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK")
     [ "$(printf '%s' "$Q" | jq -r '.count // 0')" = "0" ] && { echo "queue empty — run: runpod.sh testcall"; exit 1; }
     # Fresh callId each run (so a re-dial isn't dropped as a duplicate); amd:"" disables machine-detection.
-    CID="retry-$(date +%s)"
-    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" '{call:(.calls[0] + {callId:$cid, lang:"te"}), geminiKey:$k, amd:""}')
+    # Optional $2 = phone override (E.164 no +, e.g. 919392376206) to dial a number other than the queued one.
+    CID="retry-$(date +%s)"; PHONE="${2:-}"
+    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" --arg ph "$PHONE" \
+      '{call:(.calls[0] + {callId:$cid, lang:"te"} + (if $ph=="" then {} else {phone:$ph} end)), geminiKey:$k, amd:""}')
     curl -sS -m 45 -X POST "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/ingest" \
       -H "Content-Type: application/json" -d "$BODY"; echo
     ;;

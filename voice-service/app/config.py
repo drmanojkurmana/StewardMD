@@ -38,6 +38,11 @@ class Config:
         self.stt_provider = e.get("STT_PROVIDER", "indicconformer")
         self.tts_provider = e.get("TTS_PROVIDER", "parler")
         self.whisper_size = e.get("WHISPER_SIZE", "base")
+        # Sarvam API (no GPU): STT_PROVIDER=sarvam / TTS_PROVIDER=sarvam. Empty model/speaker => Sarvam defaults.
+        self.sarvam_api_key = e.get("SARVAM_API_KEY", "")
+        self.sarvam_speaker = e.get("SARVAM_SPEAKER", "")
+        self.sarvam_tts_model = e.get("SARVAM_TTS_MODEL", "bulbul:v2")
+        self.sarvam_stt_model = e.get("SARVAM_STT_MODEL", "")
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")

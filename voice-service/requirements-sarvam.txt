@@ -1,0 +1,7 @@
+# Sarvam API mode: STT + TTS are HTTP calls, so NO GPU/model deps (no torch/parler/onnxruntime). Installs in
+# seconds and boots in ~1 min — no 5GB model download. NLU still goes direct to Google via google-generativeai.
+fastapi>=0.111
+uvicorn[standard]>=0.30
+plivo>=4.47
+google-generativeai>=0.8
+requests>=2.31
