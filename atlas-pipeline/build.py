@@ -188,6 +188,15 @@ def main(argv=None):
         print("--volume is required unless --dry-run", file=sys.stderr)
         return 2
 
+    if a.seg and not (mapping.get("model_values") or {}):
+        print("ERROR: labels/%s.json has an empty model_values LUT.\n"
+              "  Without it every integer label falls back to its own number, matches\n"
+              "  nothing, and you get a silently EMPTY module that looks like success.\n"
+              "  Populate it with:  build.py --print-seg-values %s"
+              % (a.module, a.seg), file=sys.stderr)
+        return 2
+
+
     import nibabel as nib
     zooms = nib.load(a.volume).header.get_zooms()[:3]
     spacing_disp = (zooms[1], zooms[0])

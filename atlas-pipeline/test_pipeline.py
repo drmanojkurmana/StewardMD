@@ -261,6 +261,42 @@ ok("upsert replaces rather than duplicates", len(cat["modules"]) == 1 and cat["m
 cat["credits"] = ["keep me"]
 ok("upsert preserves credits", upsert_module(cat, dict(META, slices=7, thumb="/t.webp"))["credits"] == ["keep me"])
 
+# ---------- every shipped label mapping must be self-consistent ----------
+import glob
+_maps = sorted(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), "labels", "*.json")))
+ok("at least three label mappings ship", len(_maps) >= 3)
+for _mp in _maps:
+    _name = os.path.basename(_mp)[:-5]
+    _M = load_mapping(_name)
+    _c, _s = categories_block(_M), structures_block(_M)
+    ok("%s: has categories" % _name, len(_c) > 0)
+    ok("%s: has structures" % _name, len(_s) > 0)
+    ok("%s: every structure is named" % _name, all(v.get("name") for v in _s.values()))
+    ok("%s: every category resolves" % _name, all(v.get("category") in _c for v in _s.values()))
+    ok("%s: every parent resolves" % _name, all(v["parent"] in _s for v in _s.values() if v.get("parent")))
+    def _acyclic(structs):
+        for start in structs:
+            seen, cur, hops = set(), start, 0
+            while cur and structs.get(cur, {}).get("parent"):
+                if cur in seen or hops > 64:
+                    return False
+                seen.add(cur)
+                cur = structs[cur]["parent"]
+                hops += 1
+        return True
+    ok("%s: no parent cycles" % _name, _acyclic(_s))
+    ok("%s: ids are kebab-case" % _name, all(re.match(r"^[a-z0-9-]+$", k) for k in _s))
+    ok("%s: every category has a hex colour" % _name,
+       all(str(v.get("color", "")).startswith("#") for v in _c.values()))
+    ok("%s: every mapped model label resolves to a real structure" % _name,
+       all(v in _s for v in (_M.get("model_labels") or {}).values() if v))
+    ok("%s: records where its geometry comes from" % _name, bool(_M.get("_geometry")))
+    ok("%s: cites no blocked source" % _name,
+       not re.search(r"(?i)freesurfer licen|fsl licen|jhu|mindboggle|radiopaedia|tcia", json.dumps(_M)))
+    # An empty model_values LUT is allowed (it is filled from a real segmentation), but
+    # build.py must refuse to run with --seg until it is populated.
+    ok("%s: model_values is a dict" % _name, isinstance(_M.get("model_values", {}), dict))
+
 # ---------- end-to-end: synthetic volume -> webp -> pins -> validated atlas.json ----------
 # Proves the whole chain without fabricating anatomy: the geometry here is deliberately
 # obvious test shapes (two bilateral blobs + one C shape), written to a temp dir and

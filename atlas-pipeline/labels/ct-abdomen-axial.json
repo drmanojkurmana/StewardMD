@@ -1,0 +1,105 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US)",
+  "_geometry": "TotalSegmentator `total` (Apache-2.0 code and weights), run on our own public-domain CT",
+  "_model_values_note": "REQUIRED before building. Integer -> label LUT for the segmentation you actually run; values differ between TotalSegmentator versions. Populate with: build.py --print-seg-values <seg.nii.gz>. An unmapped integer is skipped, so a partial LUT is safe — the structure simply does not appear.",
+  "_clinical_note": "Source-of-sepsis anatomy: the organs named here are the ones an intensivist is hunting on a septic-screen CT.",
+
+  "categories": {
+    "viscus": { "label": "Viscus", "color": "#ffd479" },
+    "gi-tract": { "label": "GI tract", "color": "#c9a06a" },
+    "vessel-artery": { "label": "Artery", "color": "#ff8080" },
+    "vessel-vein": { "label": "Vein", "color": "#8fb8ff" },
+    "urinary": { "label": "Urinary", "color": "#7fd9e8" },
+    "bone": { "label": "Bone", "color": "#ffffff" },
+    "muscle": { "label": "Muscle", "color": "#e0a0c0" }
+  },
+
+  "structures": {
+    "abdomen": { "name": "Abdomen", "category": "viscus" },
+    "liver": { "name": "Liver", "category": "viscus", "parent": "abdomen", "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium." },
+    "gallbladder": { "name": "Gallbladder", "category": "viscus", "parent": "abdomen", "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver." },
+    "spleen": { "name": "Spleen", "category": "viscus", "parent": "abdomen", "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm." },
+    "pancreas": { "name": "Pancreas", "category": "viscus", "parent": "abdomen", "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach." },
+    "adrenal-gland": { "name": "Suprarenal gland", "category": "viscus", "parent": "abdomen", "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys." },
+
+    "stomach": { "name": "Stomach", "category": "gi-tract", "parent": "abdomen", "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum." },
+    "duodenum": { "name": "Duodenum", "category": "gi-tract", "parent": "abdomen", "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas." },
+    "small-bowel": { "name": "Small intestine", "category": "gi-tract", "parent": "abdomen", "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery." },
+    "colon": { "name": "Colon", "category": "gi-tract", "parent": "abdomen", "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli." },
+
+    "kidney": { "name": "Kidney", "category": "urinary", "parent": "abdomen", "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum." },
+    "urinary-bladder": { "name": "Urinary bladder", "category": "urinary", "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis." },
+    "prostate": { "name": "Prostate", "category": "urinary", "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra." },
+
+    "aorta": { "name": "Abdominal aorta", "category": "vessel-artery", "parent": "abdomen", "definition": "The abdominal aorta begins at the aortic hiatus of the diaphragm and divides into the common iliac arteries." },
+    "inferior-vena-cava": { "name": "Inferior vena cava", "category": "vessel-vein", "parent": "abdomen", "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium." },
+    "portal-vein": { "name": "Portal vein", "category": "vessel-vein", "parent": "abdomen", "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver." },
+    "iliac-artery": { "name": "Iliac artery", "category": "vessel-artery", "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries." },
+    "iliac-vein": { "name": "Iliac vein", "category": "vessel-vein", "definition": "The common iliac veins unite to form the inferior vena cava." },
+
+    "vertebral-column": { "name": "Vertebral column", "category": "bone" },
+    "lumbar-vertebra": { "name": "Lumbar vertebra", "category": "bone", "parent": "vertebral-column", "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column." },
+    "sacrum": { "name": "Sacrum", "category": "bone", "parent": "vertebral-column", "definition": "The sacrum is a large triangular bone formed by the union of five vertebrae, wedged between the two hip bones." },
+    "hip-bone": { "name": "Hip bone", "category": "bone", "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis." },
+    "femur": { "name": "Femur", "category": "bone", "definition": "The femur is the longest and strongest bone in the skeleton." },
+    "iliopsoas": { "name": "Iliopsoas", "category": "muscle", "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip." },
+    "gluteal-muscle": { "name": "Gluteal muscles", "category": "muscle", "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint." },
+    "autochthonous-back-muscle": { "name": "Deep back muscles", "category": "muscle", "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column." }
+  },
+
+  "model_labels": {
+    "liver": "liver",
+    "gallbladder": "gallbladder",
+    "spleen": "spleen",
+    "pancreas": "pancreas",
+    "adrenal_gland_left": "adrenal-gland",
+    "adrenal_gland_right": "adrenal-gland",
+
+    "stomach": "stomach",
+    "duodenum": "duodenum",
+    "small_bowel": "small-bowel",
+    "colon": "colon",
+
+    "kidney_left": "kidney",
+    "kidney_right": "kidney",
+    "urinary_bladder": "urinary-bladder",
+    "prostate": "prostate",
+
+    "aorta": "aorta",
+    "inferior_vena_cava": "inferior-vena-cava",
+    "portal_vein_and_splenic_vein": "portal-vein",
+    "iliac_artery_left": "iliac-artery",
+    "iliac_artery_right": "iliac-artery",
+    "iliac_vena_left": "iliac-vein",
+    "iliac_vena_right": "iliac-vein",
+
+    "sacrum": "sacrum",
+    "hip_left": "hip-bone",
+    "hip_right": "hip-bone",
+    "femur_left": "femur",
+    "femur_right": "femur",
+    "iliopsoas_left": "iliopsoas",
+    "iliopsoas_right": "iliopsoas",
+    "gluteus_maximus_left": "gluteal-muscle",
+    "gluteus_maximus_right": "gluteal-muscle",
+    "gluteus_medius_left": "gluteal-muscle",
+    "gluteus_medius_right": "gluteal-muscle",
+    "gluteus_minimus_left": "gluteal-muscle",
+    "gluteus_minimus_right": "gluteal-muscle",
+    "autochthon_left": "autochthonous-back-muscle",
+    "autochthon_right": "autochthonous-back-muscle",
+
+    "vertebrae_L1": "lumbar-vertebra",
+    "vertebrae_L2": "lumbar-vertebra",
+    "vertebrae_L3": "lumbar-vertebra",
+    "vertebrae_L4": "lumbar-vertebra",
+    "vertebrae_L5": "lumbar-vertebra",
+    "vertebrae_S1": "sacrum",
+
+    "kidney_cyst_left": null,
+    "kidney_cyst_right": null
+  },
+
+  "model_values": {}
+}
