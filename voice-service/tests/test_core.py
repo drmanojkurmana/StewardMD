@@ -90,12 +90,15 @@ class TestStateMachine(unittest.TestCase):
         self.assertTrue(t.done)
         self.assertEqual(c.result()["status"], "wrong_person")
 
-    def test_unclear_verify_reasks_then_ends(self):
+    def test_unclear_verify_proceeds(self):
+        # Lenient verify: they picked up and said something unclear ("hello") -> proceed to the questions,
+        # don't loop on verification. Only an explicit "deny" stops the call.
         c = Conversation(make_call(), max_reasks=1)
         c.start()
-        t = c.on_reply({"intent": "unclear"}); self.assertTrue(t.expect_reply)   # reask once
-        t = c.on_reply({"intent": "unclear"}); self.assertTrue(t.done)           # then give up
-        self.assertEqual(c.result()["status"], "no_answer")
+        t = c.on_reply({"intent": "unclear"})
+        self.assertTrue(t.expect_reply)          # now asking the first question, not re-verifying
+        self.assertFalse(t.done)
+        self.assertEqual(c.phase, ASK)
 
 
 # ---- NLU (fake model) ----

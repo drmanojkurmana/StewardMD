@@ -107,23 +107,16 @@ class Conversation:
 
     # ---- phases ----
     def _verify(self, nlu):
-        intent = nlu.get("intent")
-        if intent == "affirm":
-            self.phase = ASK
-            self._reasks = 0
-            return self._ask_current()
-        if intent == "deny":
+        # Only an explicit "no / wrong number" stops the call. Being strict here made real patients loop on the
+        # verification step (they say "hello" / "yes tell me" and it kept re-asking) — a soft confirm is enough:
+        # they picked up and spoke, so proceed straight to the questions.
+        if nlu.get("intent") == "deny":
             self.phase = DONE
             self.status = "wrong_person"
             return Turn(responder.say("wrong_person", self.lang), expect_reply=False, done=True)
-        # unclear / off-topic
-        if self._reasks < self.max_reasks:
-            self._reasks += 1
-            name = (self.call.get("firstName") or "").strip()
-            return Turn(responder.say("reask_verify", self.lang, name=name), expect_reply=True)
-        self.phase = DONE
-        self.status = "no_answer"
-        return Turn(responder.say("wrong_person", self.lang), expect_reply=False, done=True)
+        self.phase = ASK
+        self._reasks = 0
+        return self._ask_current()
 
     def _ask_current(self):
         q = self.questions[self.q_index]
