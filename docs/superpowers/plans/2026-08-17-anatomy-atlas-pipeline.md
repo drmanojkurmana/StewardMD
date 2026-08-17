@@ -2,6 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **STATUS 2026-08-17: ALL 7 TASKS COMPLETE** on branch `feat/anatomy-atlas`
+> (branched off `feat/voice-tiers`, unmerged, unpushed). Every step verified.
+> Deviations from this plan, and the bugs found while executing it, are recorded
+> in the commit messages and in `vault/modules/RadioAnatome.md`.
+
 **Goal:** Turn a public-domain anatomical volume into a validated `atlas/<id>/atlas.json` plus its `.webp` slice stack, deriving pin coordinates automatically where a cleared model exists and by hand where none does.
 
 **Architecture:** Offline Python 3 in `atlas-pipeline/`, never shipped to users. A volume goes in as NIfTI; slices and label masks pass through **one shared orientation function** so pins cannot mis-register against images; per-slice connected components each yield one pin placed at the mask's distance-transform maximum (guaranteed inside the structure, unlike a centroid); label names are joined to curated Terminologia Anatomica terms and Gray's 1918 definitions; the assembled JSON is validated by **the viewer's own `validateAtlas`**, invoked through `node`, so the schema cannot drift between the two subsystems.
@@ -71,7 +76,7 @@ Nothing else may run until this refuses to let an uncleared source through.
   - `require_clear(*source_ids) -> None` — raises `SourceNotCleared` unless every id exists with `"verdict": "CLEAR"`. **Every entry point calls this before touching data.**
   - `SourceNotCleared(Exception)`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `atlas-pipeline/test_pipeline.py`:
 
@@ -122,7 +127,7 @@ except SourceNotCleared: ok("require_clear rejects a mixed list", True)
 print("ALL %d PASS" % PASS[0])
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && python3 atlas-pipeline/test_pipeline.py
@@ -130,7 +135,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && python3 atlas-pipeline/test_pipeli
 
 Expected: `ModuleNotFoundError: No module named 'check_sources'`.
 
-- [ ] **Step 3: Write the register**
+- [x] **Step 3: Write the register**
 
 `atlas-pipeline/sources.json` — the machine-readable form of spec §9.2. Verdicts reflect owner attribution tier B+:
 
@@ -338,7 +343,7 @@ a `.webp` slice stack. Nothing here ships to users.
 cd /Users/diwakarkumar/Developer/StewardMD && printf '\n# Anatomy Atlas pipeline: volumes, masks and venv are regenerated, never committed\natlas-pipeline/work/\natlas-pipeline/.venv/\n*.nii\n*.nii.gz\n' >> .gitignore && tail -6 .gitignore
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && python3 atlas-pipeline/test_pipeline.py
@@ -346,7 +351,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && python3 atlas-pipeline/test_pipeli
 
 Expected: `ALL 36 PASS`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ .gitignore && git commit -m "feat(atlas-pipeline): machine-enforced licence clearance gate"
@@ -371,7 +376,7 @@ test that proves they agree.
   - `physical_aspect(shape_disp, spacing_disp) -> float` — display width/height in physical units.
   - `resize_to_square_pixels(arr2d, spacing_disp, target_h) -> np.ndarray` — resample so one output pixel is square in physical space.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test_pipeline.py` before the final print:
 
@@ -416,7 +421,7 @@ ok("resize of a mask stays boolean-safe",
    resize_to_square_pixels(np.ones((10, 10), dtype=bool), (1.0, 1.0), 20).dtype == bool)
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -424,7 +429,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ModuleNotFoundError: No module named 'orient'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 `atlas-pipeline/orient.py`:
 
@@ -472,7 +477,7 @@ def resize_to_square_pixels(arr2d, spacing_disp, target_h):
     return a[np.ix_(rows, cols)]
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -480,7 +485,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ALL 50 PASS`. If the radiological-convention assertions fail, fix `to_display` — do not relax them; they encode the anatomy.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git commit -m "feat(atlas-pipeline): single orientation authority with physical aspect"
@@ -510,7 +515,7 @@ The algorithmic core. Two non-obvious requirements drive it:
   - `pins_for_mask(mask2d, min_area_px) -> [(row, col)]` — one per qualifying component.
   - `to_percent(row, col, shape) -> (x, y)` — 0–100 floats, one decimal, x from cols.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test_pipeline.py`:
 
@@ -570,7 +575,7 @@ ok("percentages carry one decimal", to_percent(1, 1, (3, 3)) == (50.0, 50.0))
 ok("single-pixel axis does not divide by zero", to_percent(0, 0, (1, 1)) == (0.0, 0.0))
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -578,7 +583,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ModuleNotFoundError: No module named 'pins'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 `atlas-pipeline/pins.py`:
 
@@ -641,7 +646,7 @@ def to_percent(row, col, shape):
     return (round(min(max(x, 0.0), 100.0), 1), round(min(max(y, 0.0), 100.0), 1))
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -649,7 +654,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ALL 72 PASS`. The C-shape and annulus assertions are the ones that matter; if they fail, the pins will be visibly wrong in the app.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git commit -m "feat(atlas-pipeline): pin derivation via components and interior distance maxima"
@@ -670,7 +675,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git com
   - `pick_slice_indices(n_available, n_wanted) -> [int]` — evenly spaced, inclusive of both ends.
   - `extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id) -> [dict]` — writes `NNN.webp` + `t/NNN.webp`, returns slice stubs `{i, img, aspect, _z, _shape}`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test_pipeline.py`:
 
@@ -697,7 +702,7 @@ ok("single slice is safe", pick_slice_indices(1, 24) == [0])
 ok("zero available yields nothing", pick_slice_indices(0, 24) == [])
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -705,7 +710,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ModuleNotFoundError: No module named 'slices'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 `atlas-pipeline/slices.py`:
 
@@ -805,7 +810,7 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id):
     return out
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -813,7 +818,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ALL 86 PASS`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git commit -m "feat(atlas-pipeline): windowed slice extraction to webp with physical aspect"
@@ -835,7 +840,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git com
   - `structures_block(mapping) -> dict` — the schema's `structures` object.
   - `categories_block(mapping) -> dict` — the schema's `categories` object.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test_pipeline.py`:
 
@@ -870,7 +875,7 @@ ok("white matter structures are marked hand-authored",
    any(s.get("hand_authored") for s in strs.values()))
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -878,7 +883,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ModuleNotFoundError: No module named 'labels'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 `atlas-pipeline/labels.py`:
 
@@ -983,7 +988,7 @@ the structures with no cleared geometry source, which the author tool must suppl
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -991,7 +996,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ALL 103 PASS`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git commit -m "feat(atlas-pipeline): TA/Gray label mapping with bilateral collapse"
@@ -1013,7 +1018,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git com
   - `upsert_module(catalog_path, module_meta) -> dict` — adds/updates the `modules.json` row.
   - CLI: `python build.py --module <id> --volume <nii> --seg <nii> [--slices 24] [--window brain] [--dry-run]`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test_pipeline.py`:
 
@@ -1056,7 +1061,7 @@ cat = upsert_module(cat, dict(META, slices=7, thumb="/atlas/x/t/001.webp"))
 ok("upsert replaces rather than duplicates", len(cat["modules"]) == 1 and cat["modules"][0]["slices"] == 7)
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+- [x] **Step 2: Run it to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -1064,7 +1069,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: `ModuleNotFoundError: No module named 'build'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 `atlas-pipeline/build.py`:
 
@@ -1276,7 +1281,7 @@ import sys, numpy as np, nibabel as nib
 print(sorted(int(v) for v in np.unique(np.asanyarray(nib.load(sys.argv[1]).dataobj)) if v))" atlas-pipeline/work/seg.nii.gz
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/test_pipeline.py
@@ -1285,7 +1290,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 Expected: `ALL 117 PASS`. The `passes the VIEWER's validator` assertion requires
 `atlas.js` to export `validateAtlas` — i.e. viewer Task 2 must be done first.
 
-- [ ] **Step 5: Verify the gate and the dry run**
+- [x] **Step 5: Verify the gate and the dry run**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python atlas-pipeline/build.py --module brain-mri-axial-t1 --dry-run --source visible-human && atlas-pipeline/.venv/bin/python atlas-pipeline/build.py --module brain-mri-axial-t1 --dry-run --source fsl; echo "exit=$? (expect non-zero: fsl is BLOCKED)"
@@ -1293,7 +1298,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && atlas-pipeline/.venv/bin/python at
 
 Expected: the first prints `gate ok`; the second raises `SourceNotCleared` naming the non-commercial clause.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/ && git commit -m "feat(atlas-pipeline): assemble atlas.json, validated by the viewer's own schema"
@@ -1314,7 +1319,7 @@ mistakes.
 - Consumes: `atlas/<id>/atlas.json` and its `.webp` slices, served by the dev server.
 - Produces: a corrected `atlas.json` via download. No server, no build step.
 
-- [ ] **Step 1: Write the tool**
+- [x] **Step 1: Write the tool**
 
 Single self-contained file — it is dev tooling, so it may use modern syntax and is
 exempt from the app's ES5 and no-emoji rules. Load it from the dev server so the
@@ -1426,7 +1431,7 @@ load();
 </script>
 ```
 
-- [ ] **Step 2: Verify it round-trips**
+- [x] **Step 2: Verify it round-trips**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/serve.mjs . 8903
@@ -1437,7 +1442,7 @@ loads, pins render in category colours, dragging a pin updates its numbers,
 shift-click deletes, clicking the image adds a pin of the selected structure, and
 **Download JSON** produces a file with no `hand_authored` keys.
 
-- [ ] **Step 3: Verify the corrected file still validates**
+- [x] **Step 3: Verify the corrected file still validates**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && cp ~/Downloads/atlas.json atlas/brain-mri-axial-t1/atlas.json && node test/atlas-data.test.mjs
@@ -1446,7 +1451,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && cp ~/Downloads/atlas.json atlas/br
 Expected: `ALL n PASS`. This is the loop that keeps hand edits honest — the viewer's
 validator is the same gate the pipeline uses.
 
-- [ ] **Step 4: Do the QA pass and author the white matter**
+- [x] **Step 4: Do the QA pass and author the white matter**
 
 For the first real module: step through every slice and confirm each auto-derived
 pin sits inside its structure and is correctly named. Then place the white-matter
@@ -1456,7 +1461,7 @@ visible. Names come from the mapping (TA terms); definitions are already in it
 (Gray's). Delete every pin you cannot personally vouch for; a missing label is a
 gap, a wrong label is a defect.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas-pipeline/atlas-author.html atlas/ && git commit -m "feat(atlas-pipeline): QA and hand-author tool for pin verification"

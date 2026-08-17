@@ -2,6 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **STATUS 2026-08-17: ALL 9 TASKS COMPLETE** on branch `feat/anatomy-atlas`
+> (branched off `feat/voice-tiers`, unmerged, unpushed). Every step verified.
+> Deviations from this plan, and the bugs found while executing it, are recorded
+> in the commit messages and in `vault/modules/RadioAnatome.md`.
+
 **Goal:** Ship an in-app cross-sectional anatomy atlas — scroll a stack of labelled slices, tap a structure, read its definition — with interaction fidelity equal to e-Anatomy.
 
 **Architecture:** One vanilla-JS IIFE (`atlas.js`) that creates its own fixed overlay, exposes `window.ATLAS = { open, close, isOpen, back }`, and renders from static JSON fetched from `/atlas/`. Pure functions (label placement, filtering, validation, wrapping) live at the top of the IIFE and are exported via `module.exports` for Node tests, following the `onco-home.js` precedent. Labels, leader lines and dots are all drawn in one SVG layered over the slice image, in pixel coordinates, repainted by a `ResizeObserver`.
@@ -77,7 +82,7 @@ Everything visual depends on these three functions, and all three are pure. Buil
   - `wrapLabel(name, maxChars, maxLines) -> [string]` — 1..`maxLines` strings; the last gains a trailing `…` if text was dropped.
   - `playheadPct(i, total) -> number` — 0..100.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `test/atlas-layout.test.mjs`. Bare-assert style, matching `test/sw-activate.test.mjs`:
 
@@ -163,7 +168,7 @@ console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " 
 process.exit(fail ? 1 : 0);
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
@@ -171,7 +176,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
 
 Expected: FAIL — `ENOENT: no such file or directory, open '.../atlas.js'`.
 
-- [ ] **Step 3: Write the minimal implementation**
+- [x] **Step 3: Write the minimal implementation**
 
 Create `atlas.js`:
 
@@ -255,7 +260,7 @@ Create `atlas.js`:
 })(typeof window !== "undefined" ? window : this);
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
@@ -268,7 +273,7 @@ Expected: `ALL 26 PASS`. If `wrapLabel`'s truncation assertions fail, fix `wrapL
 > `npm test` bails on first failure, so verify atlas tests by running them
 > directly. Do not "fix" that test as part of this plan.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js test/atlas-layout.test.mjs && git commit -m "feat(atlas): pure label placement, wrapping and playhead helpers"
@@ -295,7 +300,7 @@ The fixture is what the viewer is built against and what proves the schema befor
   - `filterModules(modules, region, modality) -> [module]` — `""`/falsy means "all".
   - `groupByRegion(modules) -> [{ region, modules }]` in first-appearance order.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `test/atlas-data.test.mjs`:
 
@@ -396,7 +401,7 @@ console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " 
 process.exit(fail ? 1 : 0);
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -404,7 +409,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL — `validateAtlas is not a function`.
 
-- [ ] **Step 3: Write the minimal implementation**
+- [x] **Step 3: Write the minimal implementation**
 
 Add to the pure block of `atlas.js`, immediately after `playheadPct`:
 
@@ -490,7 +495,7 @@ Then extend **both** export sites at the bottom of `atlas.js`:
     };
 ```
 
-- [ ] **Step 4: Create the fixture data**
+- [x] **Step 4: Create the fixture data**
 
 `atlas/modules.json`:
 
@@ -601,7 +606,7 @@ print('ok')
 
 If `PIL` is missing: `python3 -m pip install --user Pillow`.
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -612,7 +617,7 @@ Expected: `ALL 32 PASS`. Any `shipped atlas ... is valid` failure prints the fir
 > Verified tripwire: changing one pin's `s` from `fornix` to `fornixx` in the
 > shipped fixture yields `slice 2 pin 5: unknown structure fornixx` and exit 1.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js test/atlas-data.test.mjs atlas/ && git commit -m "feat(atlas): schema validator, catalog helpers and a 3-slice fixture"
@@ -645,7 +650,7 @@ ghost overlay, and a reviewer cannot usefully approve half of that.
   - `window.ATLAS.back() -> boolean` — viewer→catalog→false (false means "let the app handle it").
   - `window.ATLAS._state` — `{ view, moduleId, slice, sel, locked, hidden }`, read by later tasks.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-data.test.mjs`, before the final `console.log`:
 
@@ -694,7 +699,7 @@ ok("close() unlocks the body", doc2.body.classList.contains("atlas-lock") === fa
 ok("back() from a closed atlas declines", A.back() === false);
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -702,7 +707,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL on `exposes open/close/isOpen/back` — the DOM block does not exist yet.
 
-- [ ] **Step 3: Write the DOM block in `atlas.js`**
+- [x] **Step 3: Write the DOM block in `atlas.js`**
 
 Insert between the pure helpers and the export block:
 
@@ -831,7 +836,7 @@ Extend the export block:
   G.ATLAS._pure = { /* …as in Task 2… */ };
 ```
 
-- [ ] **Step 4: Write `atlas.css`**
+- [x] **Step 4: Write `atlas.css`**
 
 Mirrors the `.oh-overlay` contract from `onco-home.css` — `display:none` is
 load-bearing, because `swipe-back.js` skips controls inside a hidden ancestor.
@@ -861,7 +866,7 @@ body.atlas-lock { overflow: hidden; }
 }
 ```
 
-- [ ] **Step 5: Wire every integration seam**
+- [x] **Step 5: Wire every integration seam**
 
 All edits are programmatic because a formatter rewrites `index.html`, `home.js` and `app.js` on save.
 
@@ -1020,7 +1025,7 @@ print(re.search(r'var CACHE = "([^"]+)";', s).group(1))
 PY
 ```
 
-- [ ] **Step 6: Run the tests to verify they pass**
+- [x] **Step 6: Run the tests to verify they pass**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs && node test/no-ui-emoji.test.mjs
@@ -1034,7 +1039,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && npm test 2>&1 | tail -20
 
 Expected: no new failures versus the pre-task baseline. Capture that baseline first if you have not: `git stash && npm test 2>&1 | tail -5 && git stash pop`.
 
-- [ ] **Step 7: Verify in the real app**
+- [x] **Step 7: Verify in the real app**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/serve.mjs . 8903
@@ -1045,7 +1050,7 @@ black full-screen overlay appears, the home layer is hidden, `ATLAS.isOpen()` is
 `true`, and `ATLAS.close()` restores Home. Also confirm the **Atlas** tile appears
 on Home and the **Anatomy Atlas** row appears in the sidebar, each opening the overlay.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css index.html home.js sidebar-redesign.js swipe-back.js scripts/build-www.sh test/no-ui-emoji.test.mjs test/atlas-data.test.mjs sw.js && git commit -m "feat(atlas): overlay shell, window.ATLAS API and all integration seams"
@@ -1063,7 +1068,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css index.h
 - Consumes: `filterModules`, `groupByRegion`, `st`, `esc`, `paint`, `open`.
 - Produces: a delegated click handler on the root that routes `[data-atlas-act]`; `openModule(id)` sets `st.view="viewer"` and loads.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-data.test.mjs` before the final `console.log` (reusing `A` and `doc2` from Task 3):
 
@@ -1090,7 +1095,7 @@ A._state.catalog = nasty;
 ok("catalog escapes hostile titles", !A._catalogHtml().includes("<img src=x"));
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -1098,7 +1103,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL — `A._catalogHtml is not a function`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Replace the `catalogHtml()` stub in `atlas.js`:
 
@@ -1190,7 +1195,7 @@ and define:
 
 Export the renderer for the test — add to the export block: `G.ATLAS._catalogHtml = catalogHtml;`
 
-- [ ] **Step 4: Add the styles to `atlas.css`**
+- [x] **Step 4: Add the styles to `atlas.css`**
 
 ```css
 .atlas-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 12px 16px; }
@@ -1208,7 +1213,7 @@ Export the renderer for the test — add to the export block: `G.ATLAS._catalogH
 .atlas-empty { padding: 32px 4px; opacity: .6; font-size: 14px; }
 ```
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -1216,11 +1221,11 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: `ALL n PASS` with the 9 new catalog assertions included.
 
-- [ ] **Step 6: Verify in the app**
+- [x] **Step 6: Verify in the app**
 
 Serve, run `ATLAS.open()`. Expected: a **Brain** section with one row, "Brain - MRI / Axial - T1", a 76 px thumbnail, filter chips, the footer disclaimer, and no tier badge anywhere. Tapping the chips filters.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/atlas-data.test.mjs && git commit -m "feat(atlas): region-grouped catalog with region and modality filters"
@@ -1242,7 +1247,7 @@ The visual milestone. After this task the feature looks like the reference.
   - `imageBox(stageW, stageH, aspect, gutterPx) -> { x, y, w, h }` in px.
   - `overlaySvg(slice, atlas, box, stageW, stageH, opts) -> string` — one `<svg>` containing every dot, leader line and label for the slice. `opts` is `{ sel, hidden }`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-layout.test.mjs` before the final `console.log`:
 
@@ -1305,7 +1310,7 @@ ok("overlay escapes hostile names",
   overlaySvg({ i: 1, aspect: 1, pins: [{ s: "z", x: 10, y: 10 }] }, EVIL, B, 400, 800, { sel: null, hidden: {} }).indexOf("<script>") === -1);
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
@@ -1313,7 +1318,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
 
 Expected: FAIL — `imageBox is not a function`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Add to the pure block of `atlas.js` (both export sites must gain `imageBox` and `overlaySvg`):
 
@@ -1441,7 +1446,7 @@ Now the viewer shell, replacing the `viewerHtml` and `afterViewerPaint` stubs:
   }
 ```
 
-- [ ] **Step 4: Add the styles**
+- [x] **Step 4: Add the styles**
 
 ```css
 .atlas-stage { position: relative; flex: 1 1 auto; overflow: hidden; }
@@ -1462,7 +1467,7 @@ The `.atlas-lab.on` rule is how the white pill is achieved with no extra element
 a thick white stroke painted *under* the glyphs (`paint-order: stroke`) reads as a
 rounded white chip with black text.
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs && node test/atlas-data.test.mjs
@@ -1470,7 +1475,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs &&
 
 Expected: both `ALL n PASS`.
 
-- [ ] **Step 6: Verify in the app**
+- [x] **Step 6: Verify in the app**
 
 Serve, then `ATLAS.open("brain-mri-axial-t1")`. Expected on slice 2: nine labels
 split across both gutters, each with a leader line reaching its dot, colours
@@ -1478,7 +1483,7 @@ per category (green grey-matter, white white-matter, cyan CSF), no overlaps.
 Then resize the window narrow and tall — labels must stay inside their gutters
 and lines must stay attached. Also check 320 px width via device emulation.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/atlas-layout.test.mjs && git commit -m "feat(atlas): slice stage with SVG labels, leader lines and category colours"
@@ -1496,7 +1501,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/at
 - Consumes: `playheadPct`, `curSlice`, `drawOverlay`, `st`.
 - Produces: `setSlice(i)` — clamps to `[1, total]`, repaints image + overlay, preloads neighbours, updates the counter and playhead. `trackThumbs(atlas, n) -> [url]` — `n` evenly-sampled thumbnail URLs.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-layout.test.mjs`:
 
@@ -1513,7 +1518,7 @@ ok("single slice is safe", trackThumbs(mk(1), 5).length === 1);
 ok("empty atlas is safe", trackThumbs({ slices: [] }, 5).length === 0);
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
@@ -1521,7 +1526,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs
 
 Expected: FAIL — `trackThumbs is not a function`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Pure helper (add to the pure block and both export sites):
 
@@ -1663,7 +1668,7 @@ Bind the range and the drag-on-image scrub in `afterViewerPaint()`:
 
 Add a `grid` glyph to home.js's `ICON` map if `ICONS.has("grid")` is false — check first with `node -e` or in the console; `ico()` degrades to `""` silently, so a missing glyph shows an empty button rather than an error.
 
-- [ ] **Step 4: Add the styles**
+- [x] **Step 4: Add the styles**
 
 ```css
 .atlas-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; padding: 8px 12px; }
@@ -1682,7 +1687,7 @@ Add a `grid` glyph to home.js's `ICON` map if `ICONS.has("grid")` is false — c
 .atlas-gth span { position: absolute; bottom: 2px; right: 4px; font-size: 10px; color: #ddd; }
 ```
 
-- [ ] **Step 5: Run the tests**
+- [x] **Step 5: Run the tests**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs && npm test 2>&1 | tail -5
@@ -1690,7 +1695,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-layout.test.mjs &&
 
 Expected: `ALL n PASS`, no new suite failures.
 
-- [ ] **Step 6: Verify in the app**
+- [x] **Step 6: Verify in the app**
 
 Serve, open the module. Check all of: drag the track from slice 1 to 3 with no
 white flash; `←`/`→` step and the counter updates; the playhead sits at 0% on
@@ -1699,7 +1704,7 @@ grid button opens the grid and tapping a cell jumps to that slice; dragging
 horizontally across the image scrubs; a short tap on a pin does **not** change
 the slice.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/atlas-layout.test.mjs && git commit -m "feat(atlas): slice scrubbing via range track, grid, preload and drag"
@@ -1719,7 +1724,7 @@ the bilateral case end to end.
 - Consumes: `overlaySvg`, `drawOverlay`, `st`.
 - Produces: `selectStructure(id)` — sets `st.sel`, repaints, opens the sheet (Task 8 fills `openSheet`).
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-data.test.mjs`:
 
@@ -1751,7 +1756,7 @@ A._state.slice = 1;
 ok("lock survives a slice change", (A._setSlice(1), A._state.locked === "fornix"));
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -1759,7 +1764,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL — `A._select is not a function`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 ```js
   function selectStructure(id) {
@@ -1802,7 +1807,7 @@ Add temporary no-op stubs so this task runs standalone (Task 8 replaces them):
 
 Export for the test: `G.ATLAS._select = selectStructure; G.ATLAS._setSlice = setSlice;`
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -1810,14 +1815,14 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: `ALL n PASS`.
 
-- [ ] **Step 5: Verify in the app**
+- [x] **Step 5: Verify in the app**
 
 Serve, open the module, go to slice 2 and tap either **Fornix** label. Expected:
 **both** Fornix labels become white pills with black text, both leader lines go
 bright white and thicker, both dots go solid white, and all seven other labels
 drop to 38% opacity. Tab to a pin and press Enter — same result.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js test/atlas-data.test.mjs && git commit -m "feat(atlas): structure selection with multi-instance highlight and dimming"
@@ -1842,7 +1847,7 @@ copied from `home.js:1704-1719` (readable there, not callable).
   - `sheetHtml(id, tab) -> string`
   - `hierarchyOf(atlas, id) -> [{ id, name }]` — root-first ancestor chain including `id`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-data.test.mjs`:
 
@@ -1873,7 +1878,7 @@ const nodef = A._sheetHtml("sas", "definition");
 ok("missing definition degrades gracefully", nodef.includes("Subarachnoid space") && !nodef.includes("undefined"));
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -1881,7 +1886,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL — `hierarchyOf is not a function`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Pure helper (pure block + both export sites):
 
@@ -2027,7 +2032,7 @@ console; for any that are missing, either pick an existing name from
 `ICONS.names()` or add a stroke-only glyph to `home.js`'s `ICON` map (the emoji
 test requires each entry to contain a `path|circle|rect|line|polyline|polygon|ellipse`).
 
-- [ ] **Step 4: Add the styles**
+- [x] **Step 4: Add the styles**
 
 ```css
 .atlas-sheet {
@@ -2057,7 +2062,7 @@ test requires each entry to contain a `path|circle|rect|line|polyline|polygon|el
 .atlas-tree li.on { font-weight: 700; }
 ```
 
-- [ ] **Step 5: Run the tests**
+- [x] **Step 5: Run the tests**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs && npm test 2>&1 | tail -5
@@ -2065,7 +2070,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs && n
 
 Expected: `ALL n PASS`, no new suite failures.
 
-- [ ] **Step 6: Verify in the app**
+- [x] **Step 6: Verify in the app**
 
 Serve, open the module, slice 2, tap **Fornix**. Expected: the sheet springs up to
 a ~170 px peek showing the title, `Lock`, `Hide` and a `White matter` chip with its
@@ -2076,7 +2081,7 @@ Tap `Lock`, close the sheet, scrub to slice 1 and back: Fornix stays highlighted
 Tap `Hide`: the label disappears from the overlay. Drag the sheet down past 90 px:
 it dismisses and the selection clears.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/atlas-data.test.mjs && git commit -m "feat(atlas): peek/full detail sheet with definition, gallery and hierarchy tabs"
@@ -2096,7 +2101,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/at
 - Consumes: everything above.
 - Produces: no new public API.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Append to `test/atlas-data.test.mjs`:
 
@@ -2113,7 +2118,7 @@ ok("viewer renders no attribution", !/licen[cs]e|public domain|courtesy|Visible 
 ok("viewer uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(vh));
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
@@ -2121,7 +2126,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && node test/atlas-data.test.mjs
 
 Expected: FAIL — `A._viewerHtml is not a function`, then the `aria-live` assertion.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 In `viewerHtml()`, make the counter a live region so screen-reader users hear slice changes:
 
@@ -2167,7 +2172,7 @@ Respect reduced motion in `atlas.css`:
 }
 ```
 
-- [ ] **Step 4: Write the vault docs**
+- [x] **Step 4: Write the vault docs**
 
 `vault/modules/Anatomy Atlas.md`:
 
@@ -2216,7 +2221,7 @@ that unlawful. Radiopaedia (non-commercial) and Wikipedia prose (BY-SA) are
 therefore excluded.
 ```
 
-- [ ] **Step 5: Run the full suite**
+- [x] **Step 5: Run the full suite**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && npm test 2>&1 | tail -20
@@ -2224,7 +2229,7 @@ cd /Users/diwakarkumar/Developer/StewardMD && npm test 2>&1 | tail -20
 
 Expected: every file passes, including `atlas-layout`, `atlas-data` and `no-ui-emoji` (now scanning `atlas.js`).
 
-- [ ] **Step 6: Verify the native bundle would ship the JSON**
+- [x] **Step 6: Verify the native bundle would ship the JSON**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && npm run build:www >/dev/null 2>&1; ls www/atlas www/atlas/brain-mri-axial-t1
@@ -2232,13 +2237,13 @@ cd /Users/diwakarkumar/Developer/StewardMD && npm run build:www >/dev/null 2>&1;
 
 Expected: `modules.json` and `brain-mri-axial-t1/atlas.json` present; **no** `.webp` files (they stay on Pages by design).
 
-- [ ] **Step 7: Final acceptance pass**
+- [x] **Step 7: Final acceptance pass**
 
 Against the spec's §10 success criteria, on a 320 px-wide viewport and again at
 tablet width. Confirm each of the nine, and confirm swipe-back walks
 viewer → catalog → home.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 cd /Users/diwakarkumar/Developer/StewardMD && git add atlas.js atlas.css test/atlas-data.test.mjs "vault/modules/Anatomy Atlas.md" vault/decisions/Decisions.md && git commit -m "feat(atlas): accessibility pass, focus handling and module docs"
