@@ -25,16 +25,24 @@
   function toast(m) { try { if (window.SMD_toast) return SMD_toast(m); if (window.toast) return toast(m); } catch (e) {} }
 
   function ppIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
-  var FEATURES = [
-    ["ai", "MaiK AI assistant", "Deep review, imaging, scribe, evidence — unlimited"],
-    ["hospital", "Ward Sync", "Pull a patient’s labs, imaging & meds from the hospital"],
-    ["bell", "Lab Watch 24/7", "Background alerts when a critical result lands"],
-    ["user", "Team collaboration", "Shared ICU/Ward units, round tasks & handover"],
-    ["cloud", "Sync & share", "Cases across devices + shareable case links"],
-    ["pills", "Full drug database", "Unlimited brand / price / monograph lookups"],
-  ];
 
-  var _root = null, _plan = "annual", _status = null, _plans = null;
+  var _root = null, _tier = "pro", _cycle = "monthly", _status = null, _plans = null;
+  var TIER_ORDER = ["student", "coresident", "pro", "physician", "physicianpro"];
+  var TIER_BLURB = {
+    student: "Full MaiK AI · voice dictation · learn atlases",
+    coresident: "2 accounts · shared AI pool · 4 imaging/day each",
+    pro: "Imaging AI · Patient Summary · Research · Lab Watch · Ultra voice",
+    physician: "Your clinic (own Drive) · FollowCare · Scribe · unlimited billing",
+    physicianpro: "Cloud clinic (we host) · more AI · OncoTree + ONCQIS included",
+  };
+  var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };
+  function iosNativeIap() { return plat() === "ios" && window.SMD_IAP && typeof SMD_IAP.purchase === "function"; }
+  function productIdFor(body) {
+    if (body.tier) return "in.stewardmd." + (TIER_IAP[body.tier] || body.tier) + "." + (body.cycle === "annual" ? "annual" : "monthly");
+    if (body.addon === "onco") return "in.stewardmd.onco.monthly";
+    if (body.pack) return "in.stewardmd.tokens." + body.pack;
+    return null;
+  }
 
   function close() { if (_root) { try { _root.remove(); } catch (e) {} _root = null; document.body.style.overflow = ""; } }
 
@@ -48,66 +56,54 @@
       (sub ? '<div style="font:500 12.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
       '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIco("close") + '</button></div>';
   }
-  function featureList() {
-    return '<div style="padding:4px 18px 8px">' + FEATURES.map(function (f) {
-      return '<div style="display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line,#d7dee3)">' +
-        '<span style="font-size:19px;flex:none;color:var(--teal,#0e6e63)">' + ppIco(f[0]) + '</span><div><div style="font:700 14px var(--sans);color:var(--ink)">' + esc(f[1]) + '</div>' +
-        '<div style="font:500 12.5px/1.45 var(--sans);color:var(--slate-soft,#5a7184)">' + esc(f[2]) + '</div></div></div>';
-    }).join("") + '</div>';
+  function tierPrice(t) { return (_cycle === "annual" && t.annual) ? t.annual : t.amount; }
+  function tierPer(t) { return (_cycle === "annual" && t.annual) ? "/yr" : "/mo"; }
+  function tierStrike(t) {
+    if (_cycle === "annual" && t.annual) { var m12 = (t.amount || 0) * 12; return m12 > t.annual ? m12 : 0; }
+    return (t.regular && t.regular > t.amount) ? t.regular : 0;
   }
-  function planCard(id, p, best) {
-    var on = _plan === id;
-    var per = id === "annual" ? "/year" : "/month";
-    var save = (id === "annual" && _plans && _plans.monthly) ? Math.round((1 - (p.amount / 12) / _plans.monthly.amount) * 100) : 0;
-    return '<button data-pp="plan" data-plan="' + id + '" style="flex:1;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:13px 14px;cursor:pointer;position:relative">' +
-      (best ? '<span style="position:absolute;top:-9px;right:12px;font:800 9px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--teal,#0e6e63);border-radius:999px;padding:3px 9px">Best value</span>' : '') +
-      '<div style="font:700 13px var(--sans);color:var(--slate,#2d4356)">' + esc(p.label) + '</div>' +
-      '<div style="font:800 22px var(--serif,Georgia,serif);color:var(--ink);margin-top:2px">' + inr(p.amount) + '<span style="font:600 12px var(--sans);color:var(--slate-soft)"> ' + per + '</span></div>' +
-      (save > 0 ? '<div style="font:700 11px var(--sans);color:var(--green,#1c7a4a);margin-top:2px">Save ~' + save + '%</div>' : '') + '</div>';
+  function cycleToggle() {
+    function seg(id, label) { var on = _cycle === id; return '<button data-pp="cycle" data-cycle="' + id + '" style="flex:1;padding:8px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12px var(--sans);cursor:pointer">' + label + '</button>'; }
+    return '<div style="margin:8px 18px 4px;display:flex;gap:2px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual · 2 months free") + '</div>';
+  }
+  function tierCard(id, t) {
+    var on = _tier === id, strike = tierStrike(t), badge = t.popular ? "Most popular" : (t.premium ? "Premium" : "");
+    return '<button data-pp="tier" data-tier="' + id + '" style="width:100%;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:12px 13px;cursor:pointer;position:relative;margin-bottom:8px">' +
+      (badge ? '<span style="position:absolute;top:-9px;right:12px;font:800 9px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + badge + '</span>' : '') +
+      '<div style="display:flex;align-items:baseline;gap:8px"><div style="font:800 15px var(--sans);color:var(--ink);flex:1">' + esc(t.label) + '</div>' +
+      (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
+      '<div style="font:800 18px var(--serif,Georgia,serif);color:var(--ink)">' + inr(tierPrice(t)) + '<span style="font:600 11px var(--sans);color:var(--slate-soft)">' + tierPer(t) + '</span></div></div>' +
+      '<div style="font:500 11.5px/1.4 var(--sans);color:var(--slate-soft);margin-top:3px">' + esc(TIER_BLURB[id] || "") + (t.requiresVerify ? " · verified trainee" : "") + '</div></button>';
+  }
+  function addonRow() {
+    // Onco add-on only for Trainee/Pro/Physician (Physician Pro includes it).
+    if (_tier === "physicianpro" || _tier === "student" || _tier === "coresident") return "";
+    var a = _plans && _plans.addons && _plans.addons.onco; if (!a) return "";
+    return '<div style="display:flex;align-items:center;gap:9px;margin:0 18px 6px;padding:10px 12px;border:1px solid var(--line,#d7dee3);border-radius:11px;background:var(--panel,#fff);font:600 12.5px var(--sans);color:var(--ink)">' +
+      ppIco("plus") + ' OncoTree + ONCQIS <span style="flex:1"></span><span style="color:var(--slate-soft);margin-right:8px">+' + inr(a.amount) + '/mo</span>' +
+      '<button data-pp="buy-addon" data-addon="onco" style="border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:9px;padding:6px 12px;font:800 12px var(--sans);cursor:pointer">Add</button></div>';
+  }
+  function tokenStore() {
+    var tk = _plans && _plans.tokens; if (!tk) return "";
+    var packs = ["boost", "plus", "power"].filter(function (k) { return tk[k]; });
+    if (!packs.length) return "";
+    return '<div style="padding:8px 18px 4px"><div style="font:800 13px var(--serif,Georgia,serif);color:var(--ink)">MaiK Token top-ups</div>' +
+      '<div style="font:500 11px var(--sans);color:var(--slate-soft);margin:2px 0 8px">One wallet for all AI. Buy once, spend on anything.</div>' +
+      '<div style="display:flex;gap:8px">' + packs.map(function (k) {
+        var p = tk[k], strike = (p.regular && p.regular > p.amount) ? p.regular : 0;
+        return '<button data-pp="token" data-pack="' + k + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:10px;background:var(--panel,#fff);cursor:pointer">' +
+          '<div style="font:800 15px var(--sans);color:var(--ink)">' + (p.mt >= 1000000 ? (p.mt / 1000000) + "M" : Math.round(p.mt / 1000) + "k") + '</div><div style="font:500 9px var(--sans);color:var(--slate-soft)">MaiK Tokens</div>' +
+          '<div style="margin-top:5px">' + (strike ? '<span style="font:600 10px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span> ' : '') + '<span style="font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</span></div></button>';
+      }).join("") + '</div></div>';
   }
   function ctaBlock() {
-    if (!fbUser()) return '<button data-pp="signin" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button>';
-    if (plat() === "ios") {
-      // Native StoreKit IAP via the capacitor-iap plugin. The purchase runs in-app; the SERVER
-      // re-validates the transaction (functions/_iap.js, App Store Server API) and grants Pro. If the
-      // plugin is not in the build yet, fall back to the "coming soon" state (never PhonePe on iOS).
-      if (window.SMD_IAP && SMD_IAP.available()) {
-        return '<button data-pp="buyios" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Subscribe</button>' +
-          '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Billed through the App Store · manage or cancel anytime in Settings</div>' +
-          '<div style="text-align:center;margin-top:9px"><a data-pp="restoreios" role="button" tabindex="0" style="font:600 12px var(--sans);color:var(--teal,#0e6e63);cursor:pointer;text-decoration:underline">Restore purchases</a></div>';
-      }
-      return '<button disabled style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 15px var(--sans);cursor:default">Subscriptions coming soon on iOS</button>' +
-        '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">In-app purchase is being set up. Everything is free during the launch period.</div>';
-    }
-    return '<button data-pp="buy" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Subscribe with PhonePe</button>' +
-      '<div style="font:500 11px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Secure payment via PhonePe · UPI / cards / netbanking · cancel anytime</div>';
-  }
-
-  // iOS StoreKit: buy the selected plan (SMD_IAP.buy does purchase + server verify + grant).
-  function buyIOS() {
-    var pid = (window.SMD_IAP && SMD_IAP.PRODUCTS && SMD_IAP.PRODUCTS[_plan]) || null;
-    if (!pid || !window.SMD_IAP) { toast("Choose a plan first."); return; }
-    var btn = _root && _root.querySelector('[data-pp="buyios"]');
-    function reset() { if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; } }
-    if (btn) { btn.disabled = true; btn.textContent = "Contacting the App Store…"; }
-    SMD_IAP.buy(pid).then(function (r) {
-      if (r.ok) { toast("Pro is now active."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {} refresh(); return; }
-      if (r.cancelled) { reset(); return; }
-      if (r.pending) { toast("Purchase is pending approval."); reset(); return; }
-      if (r.error === "not-configured") { toast("Purchases are not switched on yet."); reset(); return; }
-      toast("Could not verify the purchase. If you were charged, tap Restore or contact support."); reset();
-    }).catch(function () { toast("Purchase failed. Please try again."); reset(); });
-  }
-
-  // iOS StoreKit: restore an existing subscription (Apple requires this for auto-renewable IAP).
-  function restoreIOS() {
-    if (!window.SMD_IAP) return;
-    toast("Restoring…");
-    SMD_IAP.restoreAndVerify().then(function (r) {
-      if (r.ok) { toast("Pro restored."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {} refresh(); }
-      else if (r.none) { toast("No purchases to restore on this Apple ID."); }
-      else { toast("Could not restore. Contact support if you were charged."); }
-    }).catch(function () { toast("Restore failed. Please try again."); });
+    if (!fbUser()) return '<div style="padding:8px 18px 4px"><button data-pp="signin" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button></div>';
+    var t = _plans && _plans.tiers && _plans.tiers[_tier];
+    if (plat() === "ios" && !iosNativeIap()) return '<div style="padding:8px 18px 4px"><button disabled style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--sans)">Subscriptions coming soon on iOS</button></div>';
+    var label = t ? ("Subscribe to " + t.label + " · " + inr(tierPrice(t)) + tierPer(t)) : "Subscribe";
+    var via = plat() === "ios" ? "the App Store" : "PhonePe · UPI / cards / netbanking";
+    return '<div style="padding:8px 18px 4px"><button data-pp="buy" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans);cursor:pointer">' + esc(label) + '</button>' +
+      '<div style="font:500 10.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:7px">Secure payment via ' + via + ' · cancel anytime</div></div>';
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
@@ -149,16 +145,15 @@
     if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period — Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
     else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--sans);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
-    var plansHtml = "";
-    if (_plans) {
-      plansHtml = '<div style="padding:10px 18px 6px"><div style="display:flex;gap:10px">' +
-        planCard("monthly", _plans.monthly, false) + planCard("annual", _plans.annual, true) + '</div></div>' +
-        '<div style="padding:6px 18px 20px calc(18px)">' + ctaBlock() + '</div>';
+    var ios = plat() === "ios", body;
+    if (_plans && _plans.tiers) {
+      var tiers = TIER_ORDER.filter(function (id) { return _plans.tiers[id]; }).map(function (id) { return tierCard(id, _plans.tiers[id]); }).join("");
+      body = cycleToggle() + '<div style="padding:2px 18px 4px">' + tiers + '</div>' + addonRow() + ctaBlock() + tokenStore();
     } else {
-      plansHtml = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
+      body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
     }
-    var sub = promoOn ? "Everything unlocked — free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Unlock the full clinical intelligence layer");
-    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + featureList() + plansHtml + redeemBlock();
+    var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Choose your plan");
+    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + body + (ios ? "" : redeemBlock());   // coupon hidden on iOS
     wire();
   }
 
@@ -168,11 +163,12 @@
       b.onclick = function () {
         var k = b.getAttribute("data-pp");
         if (k === "close") return close();
-        if (k === "plan") { _plan = b.getAttribute("data-plan"); return paint(); }
+        if (k === "tier") { _tier = b.getAttribute("data-tier"); return paint(); }
+        if (k === "cycle") { _cycle = b.getAttribute("data-cycle"); return paint(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
-        if (k === "buy") return buy();
-        if (k === "buyios") return buyIOS();
-        if (k === "restoreios") return restoreIOS();
+        if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
+        if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
+        if (k === "token") return doBuy({ pack: b.getAttribute("data-pack") }, b);
         if (k === "redeem") return redeem();
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
@@ -180,23 +176,29 @@
     r.addEventListener("click", function (e) { if (e.target === r.firstChild) close(); }, { once: true });
   }
 
-  function buy() {
-    var btn = _root && _root.querySelector('[data-pp="buy"]');
-    if (btn) { btn.disabled = true; btn.textContent = "Opening PhonePe…"; }
-    api("/api/billing/phonepe/pay", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan: _plan }) })
+  function openUrl(url) {
+    try { if (isNative() && window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Browser) { Capacitor.Plugins.Browser.open({ url: url }); } else { window.location.href = url; } }
+    catch (e) { window.location.href = url; }
+  }
+  // Route a purchase: iOS -> StoreKit via SMD_IAP (Session A's plugin); web/Android -> PhonePe.
+  function doBuy(body, btn) {
+    if (!fbUser()) { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
+    if (plat() === "ios") {
+      if (!iosNativeIap()) { toast("Purchases are coming soon on iOS."); return; }
+      var pid = productIdFor(body); if (!pid) return;
+      if (btn) btn.disabled = true;
+      Promise.resolve(SMD_IAP.purchase(pid)).then(
+        function () { toast("Purchase complete."); try { if (window.SMD_PRO && SMD_PRO.sync) SMD_PRO.sync(); } catch (e) {} refresh(); },
+        function () { if (btn) btn.disabled = false; toast("Purchase cancelled."); });
+      return;
+    }
+    if (btn) btn.disabled = true;
+    api("/api/billing/phonepe/pay", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       .then(function (x) {
-        if (x.s === 200 && x.d && x.d.redirectUrl) {
-          // Web: navigate to PhonePe. Native: open in the system browser so the return URL works.
-          try {
-            if (isNative() && window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Browser) { Capacitor.Plugins.Browser.open({ url: x.d.redirectUrl }); }
-            else window.location.href = x.d.redirectUrl;
-          } catch (e) { window.location.href = x.d.redirectUrl; }
-        } else {
-          if (btn) { btn.disabled = false; btn.textContent = "Subscribe with PhonePe"; }
-          toast(x.d && x.d.error === "phonepe-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again."));
-        }
+        if (x.s === 200 && x.d && x.d.redirectUrl) { openUrl(x.d.redirectUrl); }
+        else { if (btn) btn.disabled = false; toast(x.d && x.d.error === "phonepe-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again.")); }
       })
-      .catch(function () { if (btn) { btn.disabled = false; btn.textContent = "Subscribe with PhonePe"; } toast("Network error — try again."); });
+      .catch(function () { if (btn) btn.disabled = false; toast("Network error — try again."); });
   }
 
   function loadAndPaint() {
@@ -221,12 +223,12 @@
     info = info || {}; close();
     var reset = info.resetAt ? new Date(+info.resetAt) : null;
     var resetTxt = reset ? reset.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }) : "midnight";
-    var credits = (typeof info.credits === "number") ? info.credits : null;
-    var msg = info.message || "You've reached today's AI limit.";
-    var inner = header("Today's AI limit reached") +
+    var mt = (typeof info.credits === "number") ? Math.round(info.credits * 2000) : null;   // ₹ credit → MaiK Tokens
+    var msg = info.message || "You've used today's MaiK Tokens.";
+    var inner = header("Today's MaiK Tokens are used up") +
       '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--sans);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +
-      '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--sans);color:var(--slate-soft)">Your AI usage resets at <b>' + esc(resetTxt) + '</b>.' + (credits != null ? ' Credit balance: <b>₹' + esc(String(credits)) + '</b>.' : '') + '</div>' +
-      '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Upgrade or add credits</button>' +
+      '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--sans);color:var(--slate-soft)">Your allowance resets at <b>' + esc(resetTxt) + '</b>.' + (mt != null ? ' MaiK Token balance: <b>' + esc(mt.toLocaleString("en-IN")) + '</b>.' : '') + '</div>' +
+      '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Add MaiK Tokens or upgrade</button>' +
       '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Or wait for the daily reset. No charge.</div></div>';
     var div = document.createElement("div");
     div.innerHTML = shell(inner);
