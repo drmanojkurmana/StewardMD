@@ -235,5 +235,91 @@ ok("provenance never leaks into the catalog", !/atlas-pipeline|PLACEHOLDER/.test
 A._state.atlas = null;
 A.close();
 
+// --- selection, lock and hide ---
+A.open("brain-mri-axial-t1");
+A._state.catalog = { credits: [], modules: [{ id: "brain-mri-axial-t1", title: "Brain - MRI", region: "Brain", modality: "MRI", slices: 2, thumb: "" }] };
+A._state.atlas = {
+  categories: { wm: { label: "White matter", color: "#ffffff" }, csf: { label: "CSF", color: "#7fd9e8" } },
+  structures: {
+    fornix: { name: "Fornix", category: "wm", definition: "A tract." },
+    sas: { name: "Subarachnoid space", category: "csf" }
+  },
+  slices: [
+    { i: 1, img: "/a/001.webp", aspect: 0.9, pins: [{ s: "fornix", x: 48, y: 55 }, { s: "fornix", x: 52, y: 55 }, { s: "sas", x: 80, y: 40 }] },
+    { i: 2, img: "/a/002.webp", aspect: 0.9, pins: [{ s: "fornix", x: 49, y: 57 }] }
+  ]
+};
+A._state.slice = 1; A._state.sel = null; A._state.locked = null; A._state.hidden = {};
+
+ok("nothing selected initially", A._state.sel === null);
+A._select("fornix");
+ok("select sets the structure id", A._state.sel === "fornix");
+A._select("fornix");
+ok("selecting the same structure again keeps it", A._state.sel === "fornix");
+A._select(null);
+ok("select(null) clears", A._state.sel === null);
+A._select("ghost");
+ok("selecting an unknown id is ignored, not rendered blank", A._state.sel === null);
+
+// Selection is per-slice; Lock is what survives a slice change.
+A._select("fornix");
+A._setSlice(2);
+ok("changing slice clears the selection", A._state.sel === null);
+A._state.slice = 1;
+A._select("fornix");
+A._lock();
+ok("lock records the structure", A._state.locked === "fornix");
+A._setSlice(2);
+ok("lock survives a slice change", A._state.locked === "fornix");
+A._lock();
+ok("lock toggles off", A._state.locked === null || A._state.locked === undefined);
+
+// Hide removes a label for the session.
+A._state.slice = 1; A._select("sas");
+A._hide();
+ok("hide records the structure", A._state.hidden.sas === true);
+ok("hide clears the selection", A._state.sel === null);
+const svgAfterHide = A._pure.overlaySvg(A._state.atlas.slices[0], A._state.atlas,
+  A._pure.imageBox(400, 800, 0.9, 90), 400, 800, { sel: null, hidden: A._state.hidden });
+ok("a hidden structure is not drawn", !svgAfterHide.includes("Subarachnoid"));
+ok("hiding one structure leaves the others", (svgAfterHide.match(/class="atlas-dot/g) || []).length === 2);
+A._state.hidden = {};
+
+// --- detail sheet ---
+const { hierarchyOf } = mod2.exports;
+ok("hierarchyOf is exported", typeof hierarchyOf === "function");
+const H = { structures: { a: { name: "A" }, b: { name: "B", parent: "a" }, c: { name: "C", parent: "b" } } };
+ok("hierarchy is root-first", hierarchyOf(H, "c").map((x) => x.id).join(">") === "a>b>c");
+ok("hierarchy of a root is just itself", hierarchyOf(H, "a").length === 1);
+ok("unknown id yields an empty chain", hierarchyOf(H, "zzz").length === 0);
+ok("a parent cycle does not hang", hierarchyOf({ structures: { x: { name: "X", parent: "y" }, y: { name: "Y", parent: "x" } } }, "x").length <= 64);
+
+A._state.atlas.structures.fornix.parent = "wmroot";
+A._state.atlas.structures.wmroot = { name: "White matter tracts", category: "wm" };
+A._state.slice = 1;
+const sh = A._sheetHtml("fornix", "definition");
+ok("sheet shows the FULL name, untruncated", sh.includes("Fornix") && !sh.includes("Forni…"));
+ok("sheet shows the category label", sh.includes("White matter"));
+ok("sheet renders the definition", sh.includes("A tract."));
+ok("sheet has all three tabs", ["definition", "gallery", "hierarchy"].every((t) => sh.includes('data-tab="' + t + '"')));
+ok("sheet has a grab handle", sh.includes("atlas-grab"));
+ok("sheet has lock and hide", sh.includes('data-atlas-act="lock"') && sh.includes('data-atlas-act="hide"'));
+ok("sheet uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(sh));
+ok("sheet renders no attribution", !/licen[cs]e|public domain|courtesy|Gray/i.test(sh));
+
+const shh = A._sheetHtml("fornix", "hierarchy");
+ok("hierarchy tab lists the ancestor chain", shh.includes("White matter tracts") && shh.includes("Fornix"));
+const shg = A._sheetHtml("fornix", "gallery");
+ok("gallery lists the slices where the structure appears", (shg.match(/data-atlas-act="goto"/g) || []).length === 2);
+ok("gallery of a single-slice structure still renders", A._sheetHtml("sas", "gallery").includes("goto") || A._sheetHtml("sas", "gallery").includes("Not labelled"));
+const nodef = A._sheetHtml("sas", "definition");
+ok("a missing definition degrades gracefully", nodef.includes("Subarachnoid space") && !/undefined/.test(nodef));
+ok("an unknown structure yields an empty sheet", A._sheetHtml("ghost", "definition") === "");
+A._state.atlas.structures.fornix.name = '<script>alert(1)</script>';
+ok("sheet escapes hostile names", !A._sheetHtml("fornix", "definition").includes("<script>"));
+A._state.atlas.structures.fornix.name = "Fornix";
+delete A._state.atlas.structures.fornix.parent;
+delete A._state.atlas.structures.wmroot;
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

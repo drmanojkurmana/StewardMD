@@ -229,6 +229,21 @@
     return out;
   }
 
+  // Root-first ancestor chain including id. Hop-capped so a bad parent cycle degrades
+  // instead of hanging — validateAtlas rejects cycles, but data can be hand-edited in
+  // atlas-author.html between validations.
+  function hierarchyOf(atlas, id) {
+    var strs = (atlas && atlas.structures) || {};
+    if (!strs[id]) return [];
+    var chain = [], cur = id, hops = 0, seen = {};
+    while (cur && strs[cur] && hops++ < 64 && !seen[cur]) {
+      seen[cur] = 1;
+      chain.unshift({ id: cur, name: strs[cur].name });
+      cur = strs[cur].parent;
+    }
+    return chain;
+  }
+
   /* ---------- layout constants ---------- */
   // Declared once, in the pure block, so the Node tests see them too.
   var GAP_PCT = 6.5, PAD_PCT = 2, LABEL_CHARS = 13, LABEL_LINES = 2, GUTTER_PX = 90;
@@ -509,7 +524,143 @@
       }).join("") + "</div></div></div>";
   }
 
-  function closeSheet() {}                     // Task 8
+  function selectStructure(id) {
+    var strs = (st.atlas && st.atlas.structures) || {};
+    if (id && !strs[id]) return;      // unknown id: ignore rather than render a blank sheet
+    st.sel = id || null;
+    drawOverlay();
+    if (st.sel) openSheet(st.sel); else closeSheet();
+  }
+
+  function toggleLock() {
+    if (!st.sel && !st.locked) return;
+    st.locked = (st.locked && st.locked === st.sel) ? null : st.sel;
+    drawOverlay();
+    if (st.sel) openSheet(st.sel);
+  }
+
+  function hideSelected() {
+    if (!st.sel) return;
+    st.hidden[st.sel] = true;
+    if (st.locked === st.sel) st.locked = null;
+    st.sel = null;
+    closeSheet();
+    drawOverlay();
+  }
+
+  var SHEET_PEEK = 170, _tab = "definition";
+
+  function sheetHtml(id, tab) {
+    var strs = (st.atlas && st.atlas.structures) || {}, cats = (st.atlas && st.atlas.categories) || {};
+    var s = strs[id];
+    if (!s) return "";
+    var cat = cats[s.category] || {};
+
+    function tb(k, label) {
+      return '<button class="atlas-tab' + (tab === k ? " on" : "") +
+        '" data-atlas-act="tab" data-tab="' + k + '">' + esc(label) + "</button>";
+    }
+
+    var body;
+    if (tab === "hierarchy") {
+      var chain = hierarchyOf(st.atlas, id);
+      body = '<ul class="atlas-tree">' + chain.map(function (n, i) {
+        return '<li style="padding-left:' + (i * 14) + 'px"' + (n.id === id ? ' class="on"' : "") +
+          ">" + esc(n.name) + "</li>";
+      }).join("") + "</ul>";
+    } else if (tab === "gallery") {
+      var sl = (st.atlas && st.atlas.slices) || [];
+      var hits = sl.filter(function (q) {
+        return (q.pins || []).some(function (p) { return p.s === id; });
+      });
+      body = hits.length
+        ? '<div class="atlas-grid-in">' + hits.map(function (q) {
+            return '<button class="atlas-gth' + (q.i === st.slice ? " on" : "") +
+              '" data-atlas-act="goto" data-i="' + q.i + '" style="background-image:url(' +
+              cssUrl(imgUrl(String(q.img).replace(/\/([^/]+)$/, "/t/$1"))) +
+              ')" aria-label="Slice ' + q.i + '"><span>' + q.i + "</span></button>";
+          }).join("") + "</div>"
+        : '<div class="atlas-empty">Not labelled on any slice in this module.</div>';
+    } else {
+      body = '<p class="atlas-def">' +
+        (s.definition ? esc(s.definition) : "No definition available for this structure.") + "</p>";
+    }
+
+    return '<div class="atlas-grab"></div>' +
+      '<div class="atlas-sheet-hd">' +
+        '<button class="atlas-sheet-x" data-atlas-act="sheetclose" aria-label="Close">' + (ico("close") || "\u00d7") + "</button>" +
+      "</div>" +
+      '<h2 class="atlas-sheet-ttl">' + esc(s.name) + "</h2>" +
+      '<div class="atlas-pills">' +
+        '<button class="atlas-pill' + (st.locked === id ? " on" : "") + '" data-atlas-act="lock" aria-pressed="' +
+          (st.locked === id ? "true" : "false") + '">' + (ico("lock") || "") + " Lock</button>" +
+        '<button class="atlas-pill" data-atlas-act="hide">' + (ico("eye_off") || ico("visibility") || "") + " Hide</button>" +
+        '<span class="atlas-pill cat"><i style="background:' + esc(cat.color || "#fff") + '"></i>' +
+          esc(cat.label || "") + "</span>" +
+      "</div>" +
+      '<div class="atlas-tabs">' + tb("definition", "Definition") + tb("gallery", "Gallery") +
+        tb("hierarchy", "Anatomical hierarchy") + "</div>" +
+      '<div class="atlas-sheet-body">' + body + "</div>";
+  }
+
+  function sheetEl() {
+    var el = G.document.getElementById("atlasSheet");
+    if (el) return el;
+    el = G.document.createElement("div");
+    el.id = "atlasSheet";
+    // The literal class "sheet" opts this element into dialog-motion.js's spring for
+    // free; that file is a passive MutationObserver with no open API of its own.
+    el.className = "atlas-sheet sheet";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "false");
+    rootEl().appendChild(el);
+    bindSheetDrag(el);
+    return el;
+  }
+
+  function openSheet(id) {
+    var el = sheetEl();
+    el.innerHTML = sheetHtml(id, _tab);
+    el.classList.remove("full");
+    el.classList.add("on");
+  }
+
+  function closeSheet() {
+    var el = G.document && G.document.getElementById("atlasSheet");
+    if (el) el.classList.remove("on", "full");
+  }
+
+  // Peek <-> full snapping plus swipe-to-dismiss. No multi-height sheet exists
+  // anywhere in the repo, so this is net-new; the drag maths follows the pattern at
+  // home.js:1704 (readable there, not exported).
+  function bindSheetDrag(el) {
+    var y0 = 0, dy = 0, drag = false, wasFull = false;
+    el.addEventListener("touchstart", function (e) {
+      if (!e.touches || !e.touches.length) { drag = false; return; }
+      var body = el.querySelector(".atlas-sheet-body");
+      if (el.classList.contains("full") && body && body.scrollTop > 0) { drag = false; return; }
+      y0 = e.touches[0].clientY; dy = 0; drag = true;
+      wasFull = el.classList.contains("full");
+      el.style.transition = "none";
+    }, { passive: true });
+    el.addEventListener("touchmove", function (e) {
+      if (!drag || !e.touches || !e.touches.length) return;
+      dy = e.touches[0].clientY - y0;
+      var lim = -(G.innerHeight - SHEET_PEEK);
+      if (!wasFull && dy < 0) el.style.transform = "translateY(" + Math.max(dy, lim) + "px)";
+      else if (dy > 0) el.style.transform = "translateY(" + dy + "px)";
+    }, { passive: true });
+    function end() {
+      if (!drag) return;
+      drag = false;
+      el.style.transition = ""; el.style.transform = "";
+      if (!wasFull && dy < -60) el.classList.add("full");
+      else if (wasFull && dy > 60) el.classList.remove("full");
+      else if (dy > 90) { closeSheet(); selectStructure(null); }
+    }
+    el.addEventListener("touchend", end);
+    el.addEventListener("touchcancel", end);
+  }
 
   // One 8px threshold does two jobs: it decides scrub-vs-tap, and it sets the dead
   // zone so tapping a pin never nudges the slice.
@@ -550,6 +701,20 @@
     }
     bindStageScrub(stage);
     preloadAround(st.slice);
+
+    // SVG elements get no native Enter/Space activation, so wire it explicitly —
+    // otherwise the pins are focusable but unusable by keyboard.
+    var ovEl = G.document.getElementById("atlasOv");
+    if (ovEl && !ovEl._atlasKeys) {
+      ovEl._atlasKeys = true;
+      ovEl.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        var t = e.target && e.target.closest && e.target.closest('[data-atlas-act="pin"]');
+        if (!t) return;
+        e.preventDefault();
+        selectStructure(t.getAttribute("data-atlas-s"));
+      });
+    }
     // The SVG is in stage pixels, so it must be rebuilt whenever the stage resizes
     // (rotation, split view, desktop window drag). One observer, reattached per paint.
     if (G.ResizeObserver) {
@@ -591,6 +756,11 @@
     if (a === "grid") { dropOverlay("atlasGrid"); return void pushOverlay(gridHtml()); }
     if (a === "gridclose") return dropOverlay("atlasGrid");
     if (a === "goto") { setSlice(+b.getAttribute("data-i")); return dropOverlay("atlasGrid"); }
+    if (a === "pin") return selectStructure(b.getAttribute("data-atlas-s"));
+    if (a === "lock") return toggleLock();
+    if (a === "hide") return hideSelected();
+    if (a === "sheetclose") return selectStructure(null);
+    if (a === "tab") { _tab = b.getAttribute("data-tab"); return st.sel ? openSheet(st.sel) : void 0; }
     if (a === "filter") {
       var kind = b.getAttribute("data-kind");
       st[kind === "region" ? "region" : "modality"] = b.getAttribute("data-val") || "";
@@ -645,6 +815,8 @@
     if (!isOpen()) return false;
     if (G.document.getElementById("atlasInfo")) { dropOverlay("atlasInfo"); return true; }
     if (G.document.getElementById("atlasGrid")) { dropOverlay("atlasGrid"); return true; }
+    var sh = G.document.getElementById("atlasSheet");
+    if (sh && sh.classList.contains("on")) { selectStructure(null); return true; }
     if (st.view === "viewer") { st.view = "catalog"; st.atlas = null; paint(); return true; }
     close();
     return true;
@@ -671,10 +843,15 @@
   G.ATLAS._infoHtml = infoHtml;
   G.ATLAS._viewerHtml = viewerHtml;
   G.ATLAS._setSlice = setSlice;
+  G.ATLAS._select = selectStructure;
+  G.ATLAS._lock = toggleLock;
+  G.ATLAS._hide = hideSelected;
+  G.ATLAS._sheetHtml = sheetHtml;
   G.ATLAS._pure = {
     layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
     validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
-    imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs
+    imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs,
+    hierarchyOf: hierarchyOf
   };
   G.ATLAS._version = "1.0";
 
@@ -682,6 +859,7 @@
     module.exports = {
       layoutGutter: layoutGutter, wrapLabel: wrapLabel, playheadPct: playheadPct,
       validateAtlas: validateAtlas, filterModules: filterModules, groupByRegion: groupByRegion,
-      imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs
+      imageBox: imageBox, overlaySvg: overlaySvg, trackThumbs: trackThumbs,
+      hierarchyOf: hierarchyOf
     };
 })(typeof window !== "undefined" ? window : this);
