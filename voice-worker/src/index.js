@@ -103,6 +103,30 @@ export default {
       } catch (e) { return json({ ok: false, error: String(e) }); }
     }
 
+    // Diagnostic: open Sarvam streaming TTS, send config+text+flush, report the event types that come back.
+    if (path === "/test/tts") {
+      const u = "https://api.sarvam.ai/text-to-speech/ws?model=" + (env.SARVAM_TTS_MODEL || "bulbul:v2") + "&send_completion_event=true";
+      try {
+        const resp = await fetch(u, { headers: { Upgrade: "websocket", "api-subscription-key": env.SARVAM_API_KEY } });
+        const w = resp.webSocket;
+        if (!w) return json({ ok: false, status: resp.status, body: (await resp.text()).slice(0, 300) });
+        w.accept();
+        const events = [];
+        w.addEventListener("message", (e) => {
+          let m; try { m = JSON.parse(e.data); } catch { events.push("nonjson"); return; }
+          events.push(m.type === "audio" ? "audio:" + ((m.data?.audio || "").length) + "b" : m.type + ":" + JSON.stringify(m.data || {}).slice(0, 90));
+        });
+        const cfg = { language_code: "te-IN", speaker: env.SARVAM_SPEAKER || "anushka",
+          model: env.SARVAM_TTS_MODEL || "bulbul:v2", speech_sample_rate: "8000", output_audio_codec: "mulaw", pace: 0.9 };
+        w.send(JSON.stringify({ type: "config", data: cfg }));
+        w.send(JSON.stringify({ type: "text", data: { text: "నమస్కారం, మీరు ఎలా ఉన్నారు?" } }));
+        w.send(JSON.stringify({ type: "flush" }));
+        await new Promise((res) => setTimeout(res, 5000));
+        try { w.close(); } catch {}
+        return json({ ok: true, events });
+      } catch (e) { return json({ ok: false, error: String(e) }); }
+    }
+
     if (path === "/health") return json({ ok: true });
     return new Response("stewardmd-voice", { status: 200 });
   },

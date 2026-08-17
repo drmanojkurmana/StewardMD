@@ -112,6 +112,47 @@ export class VoiceCall {
     }
   }
 
+  // Streaming TTS: forward Sarvam's mu-law audio chunks to Plivo AS they generate, so the agent starts
+  // speaking ~0.3s after the reply is decided instead of waiting for the whole clip. Falls back to batch.
+  async streamTts(text, lang) {
+    if (!text) return;
+    let ws2 = null, totalBytes = 0, startPlay = 0;
+    try {
+      const u = "https://api.sarvam.ai/text-to-speech/ws?model=" + this.cfg.sarvamTtsModel + "&send_completion_event=true";
+      const resp = await fetch(u, { headers: { Upgrade: "websocket", "api-subscription-key": this.cfg.sarvamKey } });
+      ws2 = resp.webSocket;
+      if (!ws2) return this._play(await sarvamTTS(this.cfg, text, lang));
+      ws2.accept();
+      const done = new Promise((resolve) => {
+        ws2.addEventListener("message", (e) => {
+          let m; try { m = JSON.parse(e.data); } catch { return; }
+          if (m.type === "audio" && m.data?.audio) {
+            if (!startPlay) startPlay = Date.now();
+            totalBytes += Math.floor(m.data.audio.length * 3 / 4);   // base64 -> raw mu-law bytes (8000/s)
+            this._send({ event: "playAudio", media: { contentType: "audio/x-mulaw", sampleRate: "8000", payload: m.data.audio } });
+          } else if (m.type === "event" && m.data?.event_type === "final") resolve();
+        });
+        ws2.addEventListener("close", () => resolve());
+        ws2.addEventListener("error", () => resolve());
+        setTimeout(resolve, 15000);
+      });
+      ws2.send(JSON.stringify({ type: "config", data: {
+        language_code: LC[lang] || "te-IN", speaker: this.cfg.sarvamSpeaker || "anushka",
+        model: this.cfg.sarvamTtsModel, speech_sample_rate: "8000", output_audio_codec: "mulaw",
+        pace: Number(this.cfg.sarvamPace), loudness: Number(this.cfg.sarvamLoudness) } }));
+      ws2.send(JSON.stringify({ type: "text", data: { text } }));
+      ws2.send(JSON.stringify({ type: "flush" }));
+      await done;
+      // Let the buffered audio finish playing before we listen again (avoid hearing our own voice).
+      const remainMs = (totalBytes / 8000) * 1000 - (startPlay ? Date.now() - startPlay : 0);
+      if (remainMs > 0) await sleep(remainMs);
+    } catch {
+      try { await this._play(await sarvamTTS(this.cfg, text, lang)); } catch {}
+    } finally {
+      try { ws2 && ws2.close(); } catch {}
+    }
+  }
+
   _run(ws) {
     this.ws = ws;
     const cfg = this.cfg, lang = (this.call && this.call.lang) || "te";
@@ -138,7 +179,7 @@ export class VoiceCall {
     const say = async (turn) => {
       this.log.push(["YOU", turn.reply]);
       emergency = emergency || turn.emergency;
-      await this._play(await sarvamTTS(cfg, turn.reply, lang));
+      await this.streamTts(turn.reply, lang);   // stream so the agent starts speaking sooner
     };
 
     // A finished patient utterance (from Sarvam VAD) -> brain -> speak.
