@@ -134,6 +134,24 @@ case "$cmd" in
     curl -sS -u "$AID:$ATOK" "https://api.plivo.com/v1/Account/$AID/Call/?limit=5" \
       | jq '.objects[] | {to:.to_number, status:.call_state, hangup:.hangup_cause_name, dur:.bill_duration, end:.end_time}'
     ;;
+  list)
+    gql '{"query":"query{myself{pods{id name desiredStatus costPerHr}}}"}' \
+      | jq -r '.data.myself.pods[] | .id + "  " + .desiredStatus + "  $" + (.costPerHr|tostring) + "/hr  " + .name'
+    ;;
+  terminate)
+    # terminate ONE pod by id: runpod.sh terminate <podId>
+    : "${2:?usage: runpod.sh terminate <podId>}"
+    gql "$(jq -n --arg q "mutation{podTerminate(input:{podId:\"$2\"})}" '{query:$q}')"; echo " -> terminated $2"
+    ;;
+  terminate-others)
+    # terminate every pod EXCEPT the working one (RUNPOD_POD_ID from .env).
+    KEEP="${RUNPOD_POD_ID}"
+    : "${KEEP:?set RUNPOD_POD_ID = the pod to KEEP}"
+    for id in $(gql '{"query":"query{myself{pods{id}}}"}' | jq -r '.data.myself.pods[].id'); do
+      if [ "$id" = "$KEEP" ]; then echo "KEEP  $id"; continue; fi
+      gql "$(jq -n --arg q "mutation{podTerminate(input:{podId:\"$id\"})}" '{query:$q}')" >/dev/null && echo "TERM  $id"
+    done
+    ;;
   podinfo)
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
     curl -sS -H "Authorization: Bearer $RUNPOD_API_KEY" "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID"; echo
