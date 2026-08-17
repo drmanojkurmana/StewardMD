@@ -30,12 +30,55 @@
     return p.restore().then(function (r) { return (r && r.entitlements) || []; });
   }
 
+  // --- server-verified helpers (what the paywall should call) --------------------------------------
+  function apiUrl(p) { return (G.SMD_API_BASE || "") + p; }
+  function authHeader() {
+    try { var u = G.SMD_AUTH && G.SMD_AUTH.currentUser; if (!u) return Promise.resolve({}); return u.getIdToken().then(function (t) { return t ? { "Authorization": "Bearer " + t } : {}; }); }
+    catch (e) { return Promise.resolve({}); }
+  }
+  // POST the transaction to the server, which re-validates it (App Store Server API) and grants Pro.
+  function verify(productId, transactionId) {
+    return authHeader().then(function (h) {
+      return fetch(apiUrl("/api/billing/iap/verify"), { method: "POST", headers: Object.assign({ "Content-Type": "application/json" }, h), body: JSON.stringify({ platform: "apple", productId: productId, purchaseToken: transactionId }) })
+        .then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); });
+    });
+  }
+  // One-call purchase: StoreKit purchase -> server verify -> normalized result.
+  // -> { ok:true, expiresAt } | { cancelled:true } | { pending:true } | { error:"not-configured"|... } | { ok:false, reason }
+  function buy(productId) {
+    return purchase(productId).then(function (res) {
+      if (!res || res.cancelled) return { cancelled: true };
+      if (res.pending) return { pending: true };
+      if (!res.transactionId) return { error: "no-transaction" };
+      return verify(productId, res.transactionId).then(function (x) {
+        if (x.s === 200 && x.d && x.d.ok && x.d.valid) return { ok: true, expiresAt: x.d.expiresAt || null };
+        if (x.s === 501 || (x.d && x.d.error === "iap-not-configured")) return { error: "not-configured" };
+        return { ok: false, reason: (x.d && (x.d.reason || x.d.error)) || "verify-failed" };
+      });
+    });
+  }
+  // Restore: sync StoreKit entitlements -> verify the active one server-side.
+  // -> { ok:true } | { none:true } | { ok:false, reason }
+  function restoreAndVerify() {
+    return restore().then(function (ents) {
+      var e = (ents && ents[0]) || null;
+      if (!e) return { none: true };
+      return verify(e.productId, e.transactionId).then(function (x) {
+        if (x.s === 200 && x.d && x.d.ok && x.d.valid) return { ok: true };
+        return { ok: false, reason: (x.d && (x.d.reason || x.d.error)) || "verify-failed" };
+      });
+    });
+  }
+
   G.SMD_IAP = {
     available: available,
     isIOS: isIOS,
     getProducts: getProducts,
     purchase: purchase,
     restore: restore,
+    buy: buy,                       // purchase + server verify (paywall should call this)
+    restoreAndVerify: restoreAndVerify,
+    verify: verify,
     // Product IDs per the signed-off pricing plan (docs/PRICING_PACKAGING.md v7); the full ASC catalog
     // + prices is in docs/IOS-IAP-PRODUCTS.md. Must match App Store Connect exactly.
     // Auto-renewable subscription tiers (monthly / annual):

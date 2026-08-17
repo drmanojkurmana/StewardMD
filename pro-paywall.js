@@ -83,43 +83,30 @@
       '<div style="font:500 11px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Secure payment via PhonePe · UPI / cards / netbanking · cancel anytime</div>';
   }
 
-  // iOS StoreKit: buy the selected plan's product, then let the SERVER validate + grant Pro.
+  // iOS StoreKit: buy the selected plan (SMD_IAP.buy does purchase + server verify + grant).
   function buyIOS() {
     var pid = (window.SMD_IAP && SMD_IAP.PRODUCTS && SMD_IAP.PRODUCTS[_plan]) || null;
-    if (!pid) { toast("Choose a plan first."); return; }
+    if (!pid || !window.SMD_IAP) { toast("Choose a plan first."); return; }
     var btn = _root && _root.querySelector('[data-pp="buyios"]');
     function reset() { if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; } }
     if (btn) { btn.disabled = true; btn.textContent = "Contacting the App Store…"; }
-    SMD_IAP.purchase(pid).then(function (res) {
-      if (!res || res.cancelled) { reset(); return; }
-      if (res.pending) { toast("Purchase is pending approval."); reset(); return; }
-      if (!res.transactionId) { toast("Could not complete the purchase."); reset(); return; }
-      if (btn) btn.textContent = "Activating Pro…";
-      return api("/api/billing/iap/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ platform: "apple", productId: pid, purchaseToken: res.transactionId }) })
-        .then(function (x) {
-          if (x.s === 200 && x.d && x.d.ok && x.d.valid) {
-            toast("Pro is now active."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {}
-            refresh();
-          } else if (x.s === 501 || (x.d && x.d.error === "iap-not-configured")) {
-            toast("Purchases are not switched on yet."); reset();
-          } else {
-            toast("Could not verify the purchase. If you were charged, tap Restore or contact support."); reset();
-          }
-        });
+    SMD_IAP.buy(pid).then(function (r) {
+      if (r.ok) { toast("Pro is now active."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {} refresh(); return; }
+      if (r.cancelled) { reset(); return; }
+      if (r.pending) { toast("Purchase is pending approval."); reset(); return; }
+      if (r.error === "not-configured") { toast("Purchases are not switched on yet."); reset(); return; }
+      toast("Could not verify the purchase. If you were charged, tap Restore or contact support."); reset();
     }).catch(function () { toast("Purchase failed. Please try again."); reset(); });
   }
 
   // iOS StoreKit: restore an existing subscription (Apple requires this for auto-renewable IAP).
   function restoreIOS() {
+    if (!window.SMD_IAP) return;
     toast("Restoring…");
-    SMD_IAP.restore().then(function (ents) {
-      var e = (ents && ents[0]) || null;
-      if (!e) { toast("No purchases to restore on this Apple ID."); return; }
-      return api("/api/billing/iap/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ platform: "apple", productId: e.productId, purchaseToken: e.transactionId }) })
-        .then(function (x) {
-          if (x.s === 200 && x.d && x.d.ok && x.d.valid) { toast("Pro restored."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e2) {} refresh(); }
-          else { toast("Could not restore. Contact support if you were charged."); }
-        });
+    SMD_IAP.restoreAndVerify().then(function (r) {
+      if (r.ok) { toast("Pro restored."); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {} refresh(); }
+      else if (r.none) { toast("No purchases to restore on this Apple ID."); }
+      else { toast("Could not restore. Contact support if you were charged."); }
     }).catch(function () { toast("Restore failed. Please try again."); });
   }
 

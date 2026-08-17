@@ -8,6 +8,14 @@ price point per territory (India base).
 Coordination: the **pricing session** owns tiers/prices/promo + the multi-tier paywall UI; **this session**
 owns the native StoreKit mechanism + creating these ASC products to match.
 
+## Session B decisions (2026-08-17, authoritative)
+- **iOS IAP set (create + sell on iOS, accept Apple ~15%):** Trainee, Co-Resident, Pro, Physician, Physician Pro (monthly + annual) + Onco add-on + the 3 token packs. These are the only way iOS users can pay, so they must exist.
+- **WEB / ANDROID ONLY — do NOT create on iOS:** Founding-Doctor ₹399/yr offer, coupon/redeem codes, the ₹139/clinic/mo extra-clinic add-on, and all Hospital B2B. iOS inherits these via account sign-in (entitlements are account-based on the Firebase/Google uid, so a web purchase unlocks iOS). Keep these UIs **hidden on iOS** (Guideline 3.1.1: never advertise/link the external offer inside the iOS app).
+- **Onco add-on:** offer only to **Trainee / Pro / Physician** subscribers. **Never to Physician Pro** (it already includes OncoTree + ONCQIS) — avoid a double charge.
+- **Co-Resident:** keep `.monthly` (₹299); `.annual` low-priority. 2-account plan — StoreKit sub sits on account #1; the server links account #2 to the same `aiPoolUid` (`ai:pool`) on activation.
+- **Free trial:** set an ASC introductory **free trial** on the base subs (Trainee, Pro, Physician, Physician Pro; monthly primarily, annual optional). **Not** on token packs (consumables can't) and **not** on the Onco add-on. Length: **14 days at launch, edit to 7 days after the cutover** (ASC intro offers are not date-conditional; Apple applies the change to new subscribers going forward). One free trial per user per subscription group.
+- **Paywall UI + platform routing:** owned by Session B (iOS → `SMD_IAP`, web/Android → Razorpay/PhonePe).
+
 ## Auto-renewable subscriptions — group "StewardMD Pro"
 | Product ID | Tier | Monthly (INR) | Annual (INR) |
 |---|---|---|---|
