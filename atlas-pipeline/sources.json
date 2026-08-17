@@ -1,0 +1,151 @@
+{
+  "_note": "Clearance register. verdict must be CLEAR before any pipeline stage may use a source. Verified 2026-08-17 against primary licence text. See docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md section 9.",
+  "_tier": "B+ : nothing named in the slice viewer or catalog; one credit line on the RadioAnatome info screen; third-party notices in Settings > Legal.",
+
+  "visible-human": {
+    "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+    "commercial": true,
+    "attribution": "one credit line required",
+    "credit": "Courtesy of the U.S. National Library of Medicine",
+    "note": "Licence agreement requirement was dropped in 2019. The credit obligation is contractual (from the download T&C), not copyright.",
+    "verified_from": "https://www.nlm.nih.gov/databases/download/terms_and_conditions.html",
+    "verdict": "CLEAR"
+  },
+  "wikimedia-cc0": {
+    "licence": "CC0 / Public Domain (hard-filtered)",
+    "commercial": true,
+    "attribution": "none",
+    "note": "Only files whose extmetadata License is pd or cc0. Keep the extmetadata blob per file as an audit record; Commons tags are user-asserted and sometimes wrong.",
+    "verified_from": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+    "verdict": "CLEAR"
+  },
+  "totalsegmentator-total": {
+    "licence": "Apache-2.0 (code and the total / total_mr weights)",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "Run on our own PD images ONLY. Never run on the CC BY 4.0 training dataset, so nothing shipped is an adaptation of it.",
+    "verified_from": "https://github.com/wasserth/TotalSegmentator",
+    "verdict": "CLEAR"
+  },
+  "fastsurfer-segonly": {
+    "licence": "Apache-2.0",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "--seg_only (asegdkt, cereb) needs NO FreeSurfer licence. The SURFACE pipeline does; never invoke it. Weights licence as distinct from code is UNVERIFIED, and its training labels are FreeSurfer-derived.",
+    "verified_from": "https://github.com/Deep-MI/FastSurfer",
+    "verdict": "CLEAR"
+  },
+  "synthseg-v1": {
+    "licence": "Apache-2.0 (v1.0 weights are in-repo)",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "v1.0 ONLY. The 2.0 / robust / parc weights come from a separate link with no licence statement: UNVERIFIED, do not use. Take from GitHub, never from a FreeSurfer bundle.",
+    "verified_from": "https://github.com/BBillot/SynthSeg",
+    "verdict": "CLEAR"
+  },
+  "grays-1918": {
+    "licence": "Public domain in the US (published before 1931)",
+    "commercial": true,
+    "attribution": "none",
+    "note": "Source from an ORIGINAL 1918 scan. NOT Project Gutenberg (trademark notice + 20% commercial royalty clause). NOT Wikisource wikitext (editor annotations are BY-SA). EU/UK status unclear until 2035 if W. H. Lewis is editor of record.",
+    "verified_from": "https://en.wikisource.org/wiki/Anatomy_of_the_Human_Body",
+    "verdict": "CLEAR"
+  },
+  "terminologia-anatomica-terms": {
+    "licence": "Individual terms are explicitly public domain",
+    "commercial": true,
+    "attribution": "none",
+    "note": "TERMS ONLY. The TA2 document is CC BY-ND: never redistribute the PDF or a wholesale copy of its hierarchy.",
+    "verified_from": "https://libraries.dal.ca/Fipat/ta2.html",
+    "verdict": "CLEAR"
+  },
+  "spl-nac-brain-atlas": {
+    "licence": "3D Slicer License Part B",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "300+ hand-labelled structures; highest-quality single source. Part B 1(b) notice goes in Settings > Legal.",
+    "verified_from": "https://github.com/Slicer/Slicer/blob/main/License.txt",
+    "verdict": "CLEAR"
+  },
+
+  "fsl": {
+    "licence": "FSL Licence",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "Non-commercial. Clauses (2)/(3) reach the DEVELOPMENT PROCESS: using FSL to generate coordinates for a commercial product is caught even if no FSL code ships.",
+    "verified_from": "https://fsl.fmrib.ox.ac.uk/fsl/docs/license.html",
+    "verdict": "BLOCKED"
+  },
+  "jhu-icbm-dti-81": {
+    "licence": "FSL (as distributed)",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "Distributed under the FSL licence; independent non-FSL terms UNVERIFIED. This is why named white matter is hand-authored.",
+    "verified_from": "http://neuro.debian.net/debian/extracts/fsldata/copyright",
+    "verdict": "BLOCKED"
+  },
+  "freesurfer": {
+    "licence": "FreeSurfer Software License v1.0",
+    "commercial": true,
+    "attribution": "required in user documentation",
+    "blocking_clause": "Part B 1(b) forces MGH-prefaced licence text into user documentation. Also states clinical applications are neither recommended nor advised. Use fastsurfer-segonly instead.",
+    "verified_from": "https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSoftwareLicense",
+    "verdict": "BLOCKED"
+  },
+  "tcia": {
+    "licence": "Per-collection CC BY 3.0/4.0, some NC",
+    "commercial": true,
+    "attribution": "required plus DOI citation",
+    "blocking_clause": "No CC0 collection found. CC BY 4.0 s3(a) attribution plus a mandatory DOI citation.",
+    "verified_from": "https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/",
+    "verdict": "BLOCKED"
+  },
+  "fma": {
+    "licence": "CC BY 3.0 Unported",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "CC BY attribution. Licensor's own page is offline; version taken from OBO Foundry, so PARTIALLY UNVERIFIED.",
+    "verified_from": "https://obofoundry.org/ontology/fma.html",
+    "verdict": "BLOCKED"
+  },
+  "uberon": {
+    "licence": "CC BY 3.0 Unported",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "CC BY attribution. The LICENSE file is unambiguous even though GitHub's detector reports NOASSERTION.",
+    "verified_from": "https://github.com/obophenotype/uberon/blob/master/LICENSE",
+    "verdict": "BLOCKED"
+  },
+  "wikipedia": {
+    "licence": "CC BY-SA 4.0",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "Attribution plus share-alike, which would force our derived text under BY-SA.",
+    "verified_from": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "verdict": "BLOCKED"
+  },
+  "mindboggle-101": {
+    "licence": "CC BY-NC-SA 3.0 (paper) vs CC BY 4.0 (site) - conflicting",
+    "commercial": false,
+    "attribution": "required",
+    "blocking_clause": "Unresolved conflicting licence claims; under the paper's version it is non-commercial AND share-alike. Encumbers the DKT40 classifier.",
+    "verified_from": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2012.00171/full",
+    "verdict": "BLOCKED"
+  },
+  "totalsegmentator-brain-structures": {
+    "licence": "Proprietary; free for non-commercial, paid commercial licence required",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "Not covered by the Apache-2.0 grant. Commercial use requires purchase. Use fastsurfer-segonly or synthseg-v1 for brain structures.",
+    "verified_from": "https://github.com/wasserth/TotalSegmentator",
+    "verdict": "BLOCKED"
+  },
+  "radiopaedia": {
+    "licence": "Non-commercial educational use",
+    "commercial": false,
+    "attribution": "required",
+    "blocking_clause": "Non-commercial only. Free-to-students distribution inside a commercial app does not qualify.",
+    "verified_from": "https://radiopaedia.org/licence",
+    "verdict": "BLOCKED"
+  }
+}
