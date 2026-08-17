@@ -153,6 +153,13 @@ export class VoiceCall {
       return new Response(JSON.stringify(out), { headers: { "Content-Type": "application/json" } });
     }
     if (request.headers.get("Upgrade") === "websocket") {
+      if (!this.call) {   // first WS access (near India) creates the DO here; load the payload from KV
+        try {
+          const callId = url.pathname.split("/").pop();
+          const raw = await this.env.VOICE_KV.get("call:" + callId);
+          if (raw) this.call = JSON.parse(raw);
+        } catch { /* the loop still runs with defaults */ }
+      }
       const [client, server] = Object.values(new WebSocketPair());
       server.accept();
       this._run(server);
@@ -291,8 +298,11 @@ export class VoiceCall {
       mode = "speaking";
       brain.turns.push(["YOU", greetingText(lang)]);
       this.log.push(["YOU", greetingText(lang)]);
-      const firstP = brain.step(null, (p) => this.modelCall(p));
-      if (this.greetPcm && this.greetPcm.length) await this._play(this.greetPcm);
+      const firstP = brain.step(null, (p) => this.modelCall(p));   // compute first question...
+      const greetP = (this.greetPcm && this.greetPcm.length)       // ...while synthesizing the greeting (in India, fast)
+        ? Promise.resolve(this.greetPcm) : sarvamTTS(cfg, greetingText(lang), lang).catch(() => null);
+      const gp = await greetP;
+      if (gp && gp.length) await this._play(gp);
       const turn = await firstP;
       await say(turn);
       if (turn.complete) return finalize("completed");

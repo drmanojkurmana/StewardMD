@@ -9,6 +9,7 @@
     "bindings": [{ "name": "VOICE", "class_name": "VoiceCall" }]
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VoiceCall"] }],
+  "kv_namespaces": [{ "binding": "VOICE_KV", "id": "8d9686ae83304d489d1305b886c3214d" }],
   "vars": {
     "VOICE_AUDIO_FORMAT": "mulaw",
     "VOICE_SAMPLE_RATE": "8000",

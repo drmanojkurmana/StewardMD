@@ -69,9 +69,10 @@ export default {
         if (body.lang) call.lang = body.lang;
         if (body.phone) call.phone = body.phone;
         if (!call.callId) call.callId = "call-" + Date.now();
-        await doStub(env, call.callId).fetch("https://do/prepare",
-          { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ call }) });
-        if (body.dryDial) { out.push({ callId: call.callId, prepared: true }); continue; }  // offline WS test - no phone
+        // Stash the payload in KV and do NOT touch the DO here — the DO is then created near INDIA when Plivo
+        // connects the WebSocket (India edge), instead of near this originate call. Fixes trans-ocean lag.
+        await env.VOICE_KV.put("call:" + call.callId, JSON.stringify(call), { expirationTtl: 900 });
+        if (body.dryDial) { out.push({ callId: call.callId, prepared: true }); continue; }  // offline WS test
         out.push({ callId: call.callId, phone: call.phone, plivo_ok: await plivoOriginate(env, call.phone, call.callId, base) });
       }
       return json({ originated: out });
