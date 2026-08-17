@@ -185,7 +185,7 @@ class ConversationalSession:
             greet_pcm = _greeting_cache.get(lang) or await loop.run_in_executor(None, warm, self.tts, self.cfg, lang)
             if greet_pcm:
                 self.brain.turns.append(("YOU", greeting_text(lang)))
-                think = asyncio.create_task(loop.run_in_executor(None, self.brain.step, None))
+                think = loop.run_in_executor(None, self.brain.step, None)  # a Future, already running concurrently
                 await self.telephony.play(greet_pcm)
                 turn = await think
             else:
@@ -221,12 +221,7 @@ class ConversationalSession:
                 break
             silence = 0
             try:
-                # Respond INSTANTLY with a short "listening" filler while STT runs, so there's no dead gap.
-                filler = _filler_cache.get(lang)
-                transcribe = loop.run_in_executor(None, self.stt.transcribe, pcm, lang)
-                if filler:
-                    await self.telephony.play(filler)
-                transcript = await transcribe
+                transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, lang)
                 self.call.setdefault("_turns", []).append(
                     {"sec": round(len(pcm) / 2 / 8000, 1), "heard": transcript})
                 turn = await loop.run_in_executor(None, self.brain.step, transcript or "(unclear)")
