@@ -6,6 +6,8 @@ import { Brain, greetingText } from "./brain.js";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const PAGES_BASE = "https://stewardmd.pages.dev/api/followcare";
+const LC = { te: "te-IN", en: "en-IN", hi: "hi-IN", ta: "ta-IN", kn: "kn-IN", ml: "ml-IN",
+  mr: "mr-IN", gu: "gu-IN", bn: "bn-IN", pa: "pa-IN", od: "od-IN" };
 
 function cfgFrom(env) {
   return {
@@ -117,12 +119,15 @@ export class VoiceCall {
     this._facts = brain.facts;
     const started = Date.now();
     let mode = "await_start";   // await_start | speaking | listening | processing | done
-    let buf = [], spoke = false, silenceMs = 0, elapsedMs = 0, noSpeechMs = 0, nudges = 0, turns = 0, emergency = false;
-    const resetTurn = () => { buf = []; spoke = false; silenceMs = 0; elapsedMs = 0; noSpeechMs = 0; };
+    let turns = 0, nudges = 0, emergency = false, sttWs = null, idleTimer = null;
+
+    const clearIdle = () => { if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; } };
+    const armIdle = () => { clearIdle(); idleTimer = setTimeout(() => { if (mode === "listening") noSpeech(); }, cfg.turnTimeoutMs); };
 
     const finalize = async (status) => {
       if (mode === "done") return;
-      mode = "done";
+      mode = "done"; clearIdle();
+      try { sttWs && sttWs.close(); } catch {}
       await this.pages("/voice/result", { episodeId: this.call?.episodeId, callId: this.call?.callId,
         answers: brain.facts, status: status || "completed", durationMs: Date.now() - started,
         ambulanceRequested: false, emergency, patientStatement: brain.doctorNote || "",
@@ -136,64 +141,72 @@ export class VoiceCall {
       await this._play(await sarvamTTS(cfg, turn.reply, lang));
     };
 
-    const speakFirst = async () => {
-      mode = "speaking";
-      brain.turns.push(["YOU", greetingText(lang)]);
-      this.log.push(["YOU", greetingText(lang)]);
-      const firstP = brain.step(null, (p) => this.modelCall(p));  // first question computed while greeting plays
-      if (this.greetPcm && this.greetPcm.length) await this._play(this.greetPcm);
-      const turn = await firstP;
-      await say(turn);
-      if (turn.complete) return finalize("completed");
-      resetTurn(); mode = "listening";
-    };
-
-    const endTurn = async () => {
-      mode = "processing";
-      const pcm = concatPcm(buf);
-      resetTurn();
-      const transcript = await sarvamSTT(cfg, pcm, lang);
-      this.log.push(["PATIENT", transcript]);
-      const turn = await brain.step(transcript || "(unclear)", (p) => this.modelCall(p));
+    // A finished patient utterance (from Sarvam VAD) -> brain -> speak.
+    const handleTurn = async (text) => {
+      if (mode !== "listening") return;
+      mode = "processing"; clearIdle();
+      this.log.push(["PATIENT", text]);
+      const turn = await brain.step(text || "(unclear)", (p) => this.modelCall(p));
       mode = "speaking";
       await say(turn);
       turns++;
       if (turn.complete || turns >= cfg.maxConvoTurns || Date.now() - started > cfg.convoMaxMs)
         return finalize("completed");
-      resetTurn(); mode = "listening";
+      mode = "listening"; armIdle();
     };
 
     const noSpeech = async () => {
+      if (mode !== "listening") return;
       nudges++;
-      if (nudges > cfg.maxSilenceNudges) return finalize(brain.facts && Object.keys(brain.facts).length ? "completed" : "no_answer");
-      mode = "speaking";
+      if (nudges > cfg.maxSilenceNudges) return finalize(Object.keys(brain.facts).length ? "completed" : "no_answer");
+      mode = "speaking"; clearIdle();
       const turn = await brain.step("(the patient has been silent - gently, warmly encourage them and kindly "
         + "re-ask the same thing in simpler words. Do NOT re-introduce yourself, do NOT hang up.)", (p) => this.modelCall(p));
       await say(turn);
-      resetTurn(); mode = "listening";
+      mode = "listening"; armIdle();
+    };
+
+    // Open Sarvam realtime STT — forward Plivo mu-law straight in; its VAD returns final transcripts instantly.
+    const openStt = async () => {
+      try {
+        const u = "https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw"
+          + "&sample_rate=8000&endpointing=vad&language_code=" + (LC[lang] || "te-IN");
+        const resp = await fetch(u, { headers: { Upgrade: "websocket", "API-SUBSCRIPTION-KEY": cfg.sarvamKey } });
+        sttWs = resp.webSocket;
+        if (!sttWs) return;
+        sttWs.accept();
+        sttWs.addEventListener("message", (e) => {
+          let m; try { m = JSON.parse(e.data); } catch { return; }
+          if (m.event === "transcript.final" && (m.text || "").trim()) handleTurn(m.text.trim());
+        });
+        sttWs.addEventListener("close", () => { sttWs = null; });
+        sttWs.addEventListener("error", () => { sttWs = null; });
+      } catch { sttWs = null; }
+    };
+
+    const speakFirst = async () => {
+      mode = "speaking";
+      brain.turns.push(["YOU", greetingText(lang)]);
+      this.log.push(["YOU", greetingText(lang)]);
+      const firstP = brain.step(null, (p) => this.modelCall(p));
+      if (this.greetPcm && this.greetPcm.length) await this._play(this.greetPcm);
+      const turn = await firstP;
+      await say(turn);
+      if (turn.complete) return finalize("completed");
+      mode = "listening"; armIdle();
     };
 
     ws.addEventListener("message", async (e) => {
-      let m;
-      try { m = JSON.parse(e.data); } catch { return; }
+      let m; try { m = JSON.parse(e.data); } catch { return; }
       const ev = m.event;
-      if (ev === "start") { if (mode === "await_start") await speakFirst(); return; }
-      if (ev === "stop" || ev === "closed") { await finalize("completed"); return; }
-      if (ev !== "media" || mode !== "listening") return;   // ignore audio while speaking/processing
-      const frame = decodeFrame(m.media?.payload || "", cfg.fmt);
-      elapsedMs += 20;
-      if (rms(frame) >= cfg.energyThreshold) { spoke = true; silenceMs = 0; noSpeechMs = 0; buf.push(frame); }
-      else if (spoke) {
-        silenceMs += 20; buf.push(frame);
-        if (silenceMs >= cfg.silenceMs) return void endTurn();
-      } else {
-        noSpeechMs += 20;
-        if (noSpeechMs >= cfg.turnTimeoutMs) return void noSpeech();
-      }
-      if (buf.length && elapsedMs >= cfg.maxUtteranceMs) return void endTurn();
+      if (ev === "start") { if (mode === "await_start") { await openStt(); await speakFirst(); } return; }
+      if (ev === "stop" || ev === "closed") return void finalize("completed");
+      if (ev !== "media") return;
+      // Forward the caller's mu-law audio to Sarvam realtime STT (no transcode) while we're listening.
+      if (mode === "listening" && sttWs) { try { sttWs.send(JSON.stringify({ event: "audio_input", audio: m.media?.payload || "" })); } catch {} }
     });
 
-    ws.addEventListener("close", () => { finalize("completed"); });
-    ws.addEventListener("error", () => { finalize("completed"); });
+    ws.addEventListener("close", () => finalize("completed"));
+    ws.addEventListener("error", () => finalize("completed"));
   }
 }

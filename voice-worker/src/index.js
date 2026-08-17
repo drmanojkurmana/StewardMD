@@ -85,6 +85,24 @@ export default {
       return doStub(env, callId).fetch("https://do/debug");
     }
 
+    // Diagnostic: can we open an outbound WebSocket from the edge? ?u=echo tests a known echo server.
+    if (path === "/test/stt") {
+      const which = url.searchParams.get("u");
+      const u = which === "echo" ? "https://ws.postman-echo.com/raw"
+        : "https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw"
+        + "&sample_rate=8000&endpointing=vad&language_code=te-IN";
+      try {
+        const resp = await fetch(u, { headers: { Upgrade: "websocket", "API-SUBSCRIPTION-KEY": env.SARVAM_API_KEY } });
+        const w = resp.webSocket;
+        if (!w) return json({ ok: false, status: resp.status, webSocket: false, body: (await resp.text()).slice(0, 300) });
+        w.accept();
+        const msgs = [];
+        await new Promise((res) => { w.addEventListener("message", (e) => { msgs.push(String(e.data).slice(0, 200)); res(); }); setTimeout(res, 4000); });
+        try { w.close(); } catch {}
+        return json({ ok: true, status: resp.status, webSocket: true, msgs });
+      } catch (e) { return json({ ok: false, error: String(e) }); }
+    }
+
     if (path === "/health") return json({ ok: true });
     return new Response("stewardmd-voice", { status: 200 });
   },
